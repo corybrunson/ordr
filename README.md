@@ -6,10 +6,10 @@ This package is designed to integrate into a [**tidyverse**](https://github.com/
 
 ## usage
 
-**tidybiplot** remains under development and will be incremented to v1.0.0 for the first CRAN release. In the meantime, it can be installed using [**devtools**](https://github.com/r-lib/devtools):
+**tidybiplot** remains under development and will be incremented to v1.0.0 for the first CRAN release. Once it has full R package infrastructure, it will be installable using [**devtools**](https://github.com/r-lib/devtools):
 
 ```r
-devtools::install_github("corybrunson/tidybiplot")
+devtools::install_bitbucket("corybrunson/tidybiplot")
 ```
 
 ## contribute

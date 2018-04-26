@@ -1,2 +1,14 @@
+# R project defaults
 ^.*\.Rproj$
 ^\.Rproj\.user$
+
+# auxiliary directories
+^data-raw$
+^sandbox$
+^man-roxygen$
+README.Rmd
+^_pkgdown\.yml$
+
+# hosting infrastructure
+cran-comments.md
+.github
