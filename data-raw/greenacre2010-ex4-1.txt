@@ -1,0 +1,13 @@
+Countries I E HR BR RU D TR MA PE NG F MX ZAItaly 0 2 5 5 8 7 3 5 6 8 4 5 7
+Spain 2 0 5 4 9 7 4 7 3 8 4 4 6
+Croatia 5 5 0 7 4 3 6 7 7 8 4 6 7
+Brazil 5 4 7 0 9 8 3 6 2 7 4 3 5
+Russia 8 9 4 9 0 4 7 7 8 8 7 7 7
+Germany 7 7 3 8 4 0 7 8 8 8 4 8 8
+Turkey 3 4 6 3 7 7 0 5 4 5 6 4 5
+Morocco 5 7 7 6 7 8 5 0 7 4 6 6 4
+Peru 6 3 7 2 8 8 4 7 0 6 7 2 4
+Nigeria 8 8 8 7 8 8 5 4 6 0 6 3 3
+France 4 4 4 4 7 4 6 6 7 6 0 8 7
+Mexico 5 4 6 3 7 8 4 6 2 3 8 0 4
+SouthAfrica 7 6 7 5 7 8 5 4 4 3 7 4 0
