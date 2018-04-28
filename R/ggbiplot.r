@@ -5,7 +5,7 @@ ggbiplot <- function(
   ...
 ) {
   gg <- ggplot(
-    data = fortify(biplot),
+    data = fortify(biplot, include = "all"),
     mapping = mapping,
     environment = parent.frame(),
     ...

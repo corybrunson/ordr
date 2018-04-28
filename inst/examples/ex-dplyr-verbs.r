@@ -1,3 +1,4 @@
+devtools::load_all()
 
 data(country_differences, country_attributes)
 # format both tibbles as matrices
@@ -42,5 +43,7 @@ inner_join(a, matrix = "u", country_attributes, by = c("name" = "Countries"))
 inner_join_u(a, country_attributes, by = c("name" = "Countries"))
 # inner join: failure (wrong matrix)
 inner_join(a, matrix = "v", country_attributes, by = c("name" = "Countries"))
-# inner join: both matrices
+# inner join: both matrices (NEED TO IMPROVE HANDLING)
 inner_join(a, rename(country_attributes, name = Countries))
+
+left_join(a, matrix = "u", country_attributes, by = c("name" = "Countries"))

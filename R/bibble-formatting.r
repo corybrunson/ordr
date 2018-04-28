@@ -61,7 +61,7 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   seps <- if (n_coords > 3) c("    ", " ...") else c("", "")
   fmt_seps <- mapply(
     function(x, y) {
-      sep_dots_rows <- c(2, (y - 2) / 2 + 2)
+      sep_dots_rows <- ceiling(c(2, (y - 2) / 2 + 2))
       c(paste(rep(" ", times = x), collapse = ""),
         paste0(ifelse(2:y %in% sep_dots_rows, seps[2], seps[1]), " | "))
     },

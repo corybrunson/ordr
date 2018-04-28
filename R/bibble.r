@@ -25,7 +25,6 @@ make_bibble <- function(
   ...
 ) {
   x <- c(list(u = u, v = v, coordinates = coordinates), list(...))
-  attr(x, "preclass") <- NA
   to_bibble(x)
 }
 
@@ -45,7 +44,7 @@ to_bibble.default <- function(x) {
     v = get_v(x),
     coordinates = get_coordinates(x)
   )
-  class(res) <- "bbl"
+  class(res) <- c("bbl", "list")
   attr(res, "preclass") <- setdiff(class(x), "bbl")
   res
 }
