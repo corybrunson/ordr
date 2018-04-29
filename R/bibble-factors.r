@@ -27,6 +27,12 @@ get_coordinates <- function(x) UseMethod("get_coordinates")
 #' @export
 clean_coordinates <- function(x) UseMethod("clean_coordinates")
 
+#' @rdname bibble-factors
+#' @export
+rank <- function(x) UseMethod("rank")
+rank.default <- base::rank
+rank.bbl <- function(x) length(get_coordinates(x))
+
 get_u.default <- function(x) as_tibble(as.data.frame(x$u))
 get_v.default <- function(x) as_tibble(as.data.frame(x$v))
 get_coordinates.default <- function(x) as_tibble(as.data.frame(x$coordinates))
