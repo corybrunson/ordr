@@ -9,7 +9,7 @@ pull_v <- function(x, var = -1) {
   pull(get_uv(x, matrix = "v"), !!enquo(var))
 }
 
-mutate.bbl <- function(x, matrix = NULL, ...) {
+mutate.bbl <- function(x, ..., matrix = NULL) {
   x <- to_bibble(x)
   # don't allow mutations of coordinates
   if (any(names(quos(...)) %in% get_coordinates(x))) {
@@ -30,11 +30,11 @@ mutate.bbl <- function(x, matrix = NULL, ...) {
     }
   } else if (matrix == "uv") {
     for (matrix in c("u", "v")) {
-      d <- get_uv(x, matrix = matrix)
+      d <- get_uv(x, matrix)
       x[[matrix]] <- mutate(d, ...)
     }
   } else {
-    d <- get_uv(x, matrix = matrix)
+    d <- get_uv(x, matrix)
     x[[matrix]] <- mutate(d, ...)
   }
   x
@@ -42,16 +42,16 @@ mutate.bbl <- function(x, matrix = NULL, ...) {
 
 mutate_u <- function(x, ...) {
   stopifnot(class(x)[1] == "bbl")
-  mutate.bbl(x, matrix = "u", ...)
+  mutate.bbl(x, ..., matrix = "u")
 }
 
 mutate_v <- function(x, ...) {
   stopifnot(class(x)[1] == "bbl")
-  mutate.bbl(x, matrix = "v", ...)
+  mutate.bbl(x, ..., matrix = "v")
 }
 
 inner_join.bbl <- function(
-  x, matrix = NULL, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
+  x, y, matrix = NULL, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
 ) {
   x <- to_bibble(x)
   # don't allow joins by or with coordinates
@@ -69,13 +69,13 @@ inner_join.bbl <- function(
   }
   if (matrix == "uv") {
     for (matrix in c("u", "v")) {
-      d <- get_uv(x, matrix = matrix)
+      d <- get_uv(x, matrix)
       x[[matrix]] <- inner_join(d, y, by = by, copy = copy, suffix = suffix)
       if (nrow(x[[matrix]]) == 0)
         stop("No matching values for `by` variables in matrix '", matrix, "'.")
     }
   } else {
-    d <- get_uv(x, matrix = matrix)
+    d <- get_uv(x, matrix)
     x[[matrix]] <- inner_join(d, y, by = by, copy = copy, suffix = suffix)
   }
   x
@@ -85,18 +85,18 @@ inner_join_u <- function(
   x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
 ) {
   stopifnot(class(x)[1] == "bbl")
-  inner_join.bbl(x, matrix = "u", y = y, by = by, copy = copy, suffix = suffix)
+  inner_join.bbl(x, y = y, matrix = "u", by = by, copy = copy, suffix = suffix)
 }
 
 inner_join_v <- function(
   x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
 ) {
   stopifnot(class(x)[1] == "bbl")
-  inner_join.bbl(x, matrix = "v", y = y, by = by, copy = copy, suffix = suffix)
+  inner_join.bbl(x, y = y, matrix = "v", by = by, copy = copy, suffix = suffix)
 }
 
 left_join.bbl <- function(
-  x, matrix = NULL, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
+  x, y, matrix = NULL, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
 ) {
   x <- to_bibble(x)
   # don't allow joins by or with coordinates
@@ -114,13 +114,13 @@ left_join.bbl <- function(
   }
   if (matrix == "uv") {
     for (matrix in c("u", "v")) {
-      d <- get_uv(x, matrix = matrix)
+      d <- get_uv(x, matrix)
       x[[matrix]] <- left_join(d, y, by = by, copy = copy, suffix = suffix)
       if (nrow(x[[matrix]]) == 0)
         stop("No matching values for `by` variables in matrix '", matrix, "'.")
     }
   } else {
-    d <- get_uv(x, matrix = matrix)
+    d <- get_uv(x, matrix)
     x[[matrix]] <- left_join(d, y, by = by, copy = copy, suffix = suffix)
   }
   x
@@ -130,12 +130,12 @@ left_join_u <- function(
   x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
 ) {
   stopifnot(class(x)[1] == "bbl")
-  left_join.bbl(x, matrix = "u", y = y, by = by, copy = copy, suffix = suffix)
+  left_join.bbl(x, y = y, matrix = "u", by = by, copy = copy, suffix = suffix)
 }
 
 left_join_v <- function(
   x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
 ) {
   stopifnot(class(x)[1] == "bbl")
-  left_join.bbl(x, matrix = "v", y = y, by = by, copy = copy, suffix = suffix)
+  left_join.bbl(x, y = y, matrix = "v", by = by, copy = copy, suffix = suffix)
 }

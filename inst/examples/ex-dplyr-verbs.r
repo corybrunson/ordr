@@ -30,7 +30,7 @@ pull_v(a, name)
 
 # mutate
 
-mutate(a, matrix = "u", abbr = pull(get_v(a), name))
+mutate(a, abbr = pull(get_v(a), name), matrix = "u")
 mutate_u(a, abbr = pull_v(a, name))
 
 mutate(a, abbr = pull(get_v(a), name))
@@ -39,11 +39,11 @@ mutate(a, abbr = abbreviate(name))
 # transmute
 
 # inner join: one matrix
-inner_join(a, matrix = "u", country_attributes, by = c("name" = "Countries"))
+inner_join(a, country_attributes, matrix = "u", by = c("name" = "Countries"))
 inner_join_u(a, country_attributes, by = c("name" = "Countries"))
 # inner join: failure (wrong matrix)
-inner_join(a, matrix = "v", country_attributes, by = c("name" = "Countries"))
+inner_join(a, country_attributes, matrix = "v", by = c("name" = "Countries"))
 # inner join: both matrices (NEED TO IMPROVE HANDLING)
 inner_join(a, rename(country_attributes, name = Countries))
 
-left_join(a, matrix = "u", country_attributes, by = c("name" = "Countries"))
+left_join(a, country_attributes, matrix = "u", by = c("name" = "Countries"))
