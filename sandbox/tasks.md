@@ -2,52 +2,95 @@
 
 ## object classes
 
+`as_bibble()` and `to_bibble()` methods for the following biplot classes:
+- `lm`, `mlm`, and `glm`
 - `svd`
-- `prcomp` and [other PCA classes](http://www.gastonsanchez.com/visually-enforced/how-to/2012/06/17/PCA-in-R/)
+- `prcomp`, `princomp`, and [other PCA classes](http://www.gastonsanchez.com/visually-enforced/how-to/2012/06/17/PCA-in-R/)
+- multidimensional scaling (MDS) with `cmdscale()`
 - `lda`
 - `ca` and [other CA classes](http://www.gastonsanchez.com/visually-enforced/how-to/2012/07/19/Correspondence-Analysis/)
 - `mca` and [other MCA classes](http://www.gastonsanchez.com/visually-enforced/how-to/2012/10/13/MCA-in-R/)
 - `NMF`
 - [other matrix decomposition methods](http://scikit-learn.org/stable/modules/decomposition.html)
 
-## methods
+the `bbl` class:
+- `as_bibble()` wraps a biplot object with the `bbl` class so that methods can extract basic information (matrix factors, coordinates) necessary for printing and visualization
+- `to_bibble()` flattens a biplot object into a list of basic matrix factorization information from which the original object is unrecoverable
 
-- `print.bbl`: Separate the matrices (by way of coordinates) from the annotation variables, maybe by a vertical line?
+## formatting methods
+
+`print.bbl`: Separate the matrices (by way of coordinates) from the annotation variables, maybe by a vertical line?
+
+`plot.bbl`: `fortify() %>% plot()`?
 
 ## verbs
 
+### bibble to vector
+
+`pull_*()`: Extract an annotation from either $U$ or $V$.
+
 ### bibble to bibble
 
-`project()`: Restrict to a subset of coordinates. Accept a single non-negative integer, coordinate indices, or coordinate names.
+`select_*()`/`rename_*()`: Restrict to and/or rename annotation while keeping all coordinates.
 
-`amass()`/`consolidate()`: Replace `u` or `v` with centroids from a partition.
+`mutate_*()`/`transmute_*()`: Introduce a new annotation as a function of others, and optionally discard all others.
 
-`transpose()`/`dualize()`: Interchange `u` and `v`.
+`project_*()`: Restrict to a subset of coordinates but keep annotation. Accept a single non-negative integer, coordinate indices, or coordinate names.
 
-`bind_u()` & `bind_v()`: Add new rows of `u` and/or `v` without changing the matrix transformations.
+`group_by_*()`: As in **dplyr**, but don't allow grouping by coordinate variables.
+
+`summarise_*()` or `amass_*()`: Replace $U$ or $V$ with centroids from a partition.
+
+`transpose()`/`dualize()`: Interchange $U$ and $V$.
+
+`rotate_*()`: Transform one factorization into another by a nonsingular rank-$r$ matrix.
+
+### bibble and tibble to bibble
+
+`regress_onto()`: ?
+
+`bind_u()` & `bind_v()`: Add new rows of $U$ and/or $V$ without changing the matrix transformations. _This functionality is of questionable utility and low-priority._
 
 ### two bibbles to one bibble
 
-`bind()`: Augment the coordinates, and therefore both the `u`s and the `v`s, of two bibbles, leaving values of each zero at the other's coordinates (i.e. block matrices). _This functionality is of questionable utility and low-priority._
+`bind()`: Augment the coordinates, and therefore both the $U$s and the $V$s, of two bibbles, leaving values of each zero at the other's coordinates (i.e. block matrices). _This functionality is of questionable utility and low-priority._
 
-`align_to()`: Flip the signs of the coordinates to minimize the angle between the coordinates of an index bibble and those of an alter bibble or a suitable matrix object.
+`align_with()`: Reorder the coordinates and/or flip their signs, when consistent with the meaning imbued in the factorization, to minimize the angle between the coordinates of an index bibble and those of an alter bibble or suitable matrix object.
 
 ### bibble to tibble
 
-`reconstruct()`: Multiply `u` and `t(v)` to recover or estimate the original data table.
+`get_*()`/`factor_*()`: Extract the annotated tibble form or the unannotated matrix form of $U$ or $V$.
 
-## plot layers
+`reconstruct()`: Multiply $U$ and $V'$ to recover or estimate the original data table or _target matrix_.
 
-Incorporate `inertia` argument to `fortify()` and/or to `stat_biplot()`.
+### extend methods from flattened bibbles to wrapped bibbles
 
-`*_isoline()`: Ensure that isolines respect non-linear transformations.
+## plotting
+
+Incorporate `inertia` argument to `fortify()` and/or to `stat_biplot()`. Carefully document and justify the choice of where along the "typical" workflow to calculate the inertia.
+
+### plot layers
+
+`*_isoline()`: Ensure that isolines respect non-linear transformations (e.g. `glm`).
+
+### groupable plot layers
+
+`*_centroid()`: Plot centroids as points, using the `group` aesthetic.
+
+`*_ellipse()`: As in **ggbiplot**, using the `group` aesthetic.
+
+### non-aesthetic plot layers
+
+`*_unit_circle()`: Plot a unit circle.
 
 Implement an option to calibrate, in the Greenacre sense.
 
-## resources
+## documentation
 
-- [Michael Greenacre, _Biplots in Practice_](http://www.multivariatestatistics.org/biplots.html)
-- [loading plots on StackExchange](https://stats.stackexchange.com/a/119758/68743)
-- [arrow positions on StackExchange](https://stats.stackexchange.com/a/141531/68743)
-- [biplots on StackExchange](https://stats.stackexchange.com/a/141755/68743)
-- [PCA before LDA on StackExchange](https://stats.stackexchange.com/a/109810/68743)
+## testing
+
+Include thorough **testthat** examples of all methods.
+
+## performance
+
+### C++ implementations
