@@ -62,7 +62,7 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   fmt_seps <- mapply(
     function(x, y) {
       sep_dots_rows <- ceiling(c(2, (y - 2) / 2 + 2))
-      c(paste(rep(" ", times = x), collapse = ""),
+      c(paste(rep(" ", times = max(0, x)), collapse = ""),
         paste0(ifelse(2:y %in% sep_dots_rows, seps[2], seps[1]), " | "))
     },
     x = 3 + nchar(seps) + uv_width - sapply(fmt_coord, function(z) nchar(z[1])),

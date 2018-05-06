@@ -3,7 +3,6 @@ pull_u <- function(x, var = -1) {
   stopifnot(class(x)[1] == "bbl")
   pull(get_uv(x, matrix = "u"), !!enquo(var))
 }
-
 pull_v <- function(x, var = -1) {
   stopifnot(class(x)[1] == "bbl")
   pull(get_uv(x, matrix = "v"), !!enquo(var))
@@ -39,15 +38,38 @@ mutate.bbl <- function(x, ..., matrix = NULL) {
   }
   x
 }
-
 mutate_u <- function(x, ...) {
   stopifnot(class(x)[1] == "bbl")
   mutate.bbl(x, ..., matrix = "u")
 }
-
 mutate_v <- function(x, ...) {
   stopifnot(class(x)[1] == "bbl")
   mutate.bbl(x, ..., matrix = "v")
+}
+
+bind_cols.bbl <- function(x, ..., matrix = NULL) {
+  x <- to_bibble(x)
+  if (is.null(matrix)) {
+    stop("`NULL` method not yet implemented.")
+  }
+  if (matrix == "uv") {
+    for (matrix in c("u", "v")) {
+      d <- get_uv(x, matrix)
+      x[[matrix]] <- bind_cols(d, ...)
+    }
+  } else {
+    d <- get_uv(x, matrix)
+    x[[matrix]] <- bind_cols(d, ...)
+  }
+  x
+}
+bind_cols_u <- function(x, ...) {
+  stopifnot(class(x)[1] == "bbl")
+  bind_cols.bbl(x, ..., matrix = "u")
+}
+bind_cols_v <- function(x, ...) {
+  stopifnot(class(x)[1] == "bbl")
+  bind_cols.bbl(x, ..., matrix = "v")
 }
 
 inner_join.bbl <- function(
@@ -80,14 +102,12 @@ inner_join.bbl <- function(
   }
   x
 }
-
 inner_join_u <- function(
   x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
 ) {
   stopifnot(class(x)[1] == "bbl")
   inner_join.bbl(x, y = y, matrix = "u", by = by, copy = copy, suffix = suffix)
 }
-
 inner_join_v <- function(
   x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
 ) {
@@ -125,14 +145,12 @@ left_join.bbl <- function(
   }
   x
 }
-
 left_join_u <- function(
   x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
 ) {
   stopifnot(class(x)[1] == "bbl")
   left_join.bbl(x, y = y, matrix = "u", by = by, copy = copy, suffix = suffix)
 }
-
 left_join_v <- function(
   x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
 ) {
