@@ -85,6 +85,10 @@ Incorporate `inertia` argument to `fortify()` and/or to `stat_biplot()`. Careful
 
 Implement an option to calibrate, in the Greenacre sense.
 
+### text layers
+
+Option to align text with vectors, as in **ggbiplot**.
+
 ## documentation
 
 ## testing
