@@ -1,5 +1,5 @@
 
-#' @rdname ggbiplot
+#' @rdname stat-layers
 #' @export
 geom_u_point <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -22,7 +22,7 @@ geom_u_point <- function(
   )
 }
 
-#' @rdname ggbiplot
+#' @rdname stat-layers
 #' @export
 geom_v_point <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -45,7 +45,7 @@ geom_v_point <- function(
   )
 }
 
-#' @rdname ggbiplot
+#' @rdname stat-layers
 #' @export
 geom_biplot_point <- function(
   mapping = NULL, data = NULL, position = "identity",

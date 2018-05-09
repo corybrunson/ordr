@@ -1,5 +1,5 @@
 
-#' @rdname ggbiplot
+#' @rdname stat-layers
 #' @export
 GeomVector <- ggproto(
   "GeomVector", GeomSegment,
@@ -30,7 +30,7 @@ GeomVector <- ggproto(
   }
 )
 
-#' @rdname ggbiplot
+#' @rdname stat-layers
 #' @export
 geom_u_vector <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -55,7 +55,7 @@ geom_u_vector <- function(
   )
 }
 
-#' @rdname ggbiplot
+#' @rdname stat-layers
 #' @export
 geom_v_vector <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -80,7 +80,7 @@ geom_v_vector <- function(
   )
 }
 
-#' @rdname ggbiplot
+#' @rdname stat-layers
 #' @export
 geom_biplot_vector <- function(
   mapping = NULL, data = NULL, position = "identity",

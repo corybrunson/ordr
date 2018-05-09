@@ -1,5 +1,5 @@
 
-#' @rdname ggbiplot
+#' @rdname stat-layers
 #' @export
 StatU <- ggproto(
   "StatU", StatIdentity,
@@ -9,7 +9,7 @@ StatU <- ggproto(
   }
 )
 
-#' @rdname ggbiplot
+#' @rdname stat-layers
 #' @export
 StatV <- ggproto(
   "StatV", StatIdentity,
@@ -19,7 +19,7 @@ StatV <- ggproto(
   }
 )
 
-#' @rdname ggbiplot
+#' @rdname stat-layers
 #' @export
 stat_u <- function(
   mapping = NULL, data = data,
@@ -42,7 +42,7 @@ stat_u <- function(
   )
 }
 
-#' @rdname ggbiplot
+#' @rdname stat-layers
 #' @export
 stat_v <- function(
   mapping = NULL, data = data,
