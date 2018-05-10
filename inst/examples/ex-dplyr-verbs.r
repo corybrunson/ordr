@@ -15,7 +15,7 @@ x2 <- country_attributes %>%
 (m <- cmdscale(x1, k = 2))
 (a <- as_bibble(m))
 (b <- bibble(m))
-(d <- fortify(b))
+(d <- tidy(b))
 
 # pull
 

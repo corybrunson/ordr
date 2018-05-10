@@ -15,7 +15,7 @@ x2 <- country_attributes %>%
 (m <- cmdscale(x1, k = 2))
 (a <- as_bibble(m))
 (b <- bibble(m))
-(d <- fortify(b))
+(d <- tidy(b))
 
 # basic multidimensional scaling biplot
 gg <- ggbiplot(b, aes(x = PCo1, y = PCo2)) +
@@ -25,7 +25,7 @@ gg
 fit <- lm(x2 ~ factor_u(b)) %>% as_bibble()
 gg +
   geom_v_vector(data = fit) +
-  geom_v_text(data = fortify(fit, include = "all"), aes(label = name))
+  geom_v_text(data = tidy(fit, include = "all"), aes(label = name))
 # hopeful alternative calls to produce the same annotation
 \dontrun{
 gg +
