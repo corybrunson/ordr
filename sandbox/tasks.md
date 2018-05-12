@@ -9,7 +9,7 @@
 - multidimensional scaling (MDS) with `cmdscale()`
 - `lda`
 - `ca` and [other CA classes](http://www.gastonsanchez.com/visually-enforced/how-to/2012/07/19/Correspondence-Analysis/)
-- functions (and classes?) from the **vegan** package: `cca()` and `rda()`; `metaMDS()`
+- functions (and classes?) from the **vegan** package: `cca()` and `rda()`; `metaMDS()`; `decorana()`
 - `mca` and [other MCA classes](http://www.gastonsanchez.com/visually-enforced/how-to/2012/10/13/MCA-in-R/)
 - `NMF`
 - [other matrix decomposition methods](http://scikit-learn.org/stable/modules/decomposition.html)
@@ -17,6 +17,8 @@
 the `bbl` class:
 - `as_bibble()` wraps a biplot object with the `bbl` class so that methods can extract basic information (matrix factors, coordinates) necessary for printing and visualization
 - `to_bibble()` flattens a biplot object into a list of basic matrix factorization information from which the original object is unrecoverable
+- Decide whether `bbl` objects should be stored (a) as separate $U$ and $V$ tibbles or (b) as a single tibble with a `.matrix` variable (so that `tidy()` simply removes the `bbl` class and certain attributes).
+- Determine how to retain inertia information, and for which classes.
 
 ## formatting methods
 
@@ -78,7 +80,7 @@ Incorporate `inertia` argument to `fortify()` and/or to `stat_biplot()`. Careful
 
 `*_centroid()`: Plot centroids as points, using the `group` aesthetic.
 
-`*_ellipse()`: As in **ggbiplot**, using the `group` aesthetic.
+`*_ellipse()`: As in **ggbiplot**, using the `group` aesthetic. Include confidence ellipses, standard error ellipses, and ellipsoid hulls.
 
 ### non-aesthetic plot layers
 
@@ -91,6 +93,11 @@ Implement an option to calibrate, in the Greenacre sense.
 Option to align text with vectors, as in **ggbiplot**.
 
 ## documentation
+
+### summary information
+
+Include keywords in the description: "biplot", "ordination", "geometric data analysis".
+Consider these when deciding on a final name.
 
 ## testing
 
