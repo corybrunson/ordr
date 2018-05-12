@@ -9,6 +9,7 @@
 - multidimensional scaling (MDS) with `cmdscale()`
 - `lda`
 - `ca` and [other CA classes](http://www.gastonsanchez.com/visually-enforced/how-to/2012/07/19/Correspondence-Analysis/)
+- functions (and classes?) from the **vegan** package: `cca()` and `rda()`; `metaMDS()`
 - `mca` and [other MCA classes](http://www.gastonsanchez.com/visually-enforced/how-to/2012/10/13/MCA-in-R/)
 - `NMF`
 - [other matrix decomposition methods](http://scikit-learn.org/stable/modules/decomposition.html)
