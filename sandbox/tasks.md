@@ -4,6 +4,7 @@
 
 `as_bibble()` and `to_bibble()` methods for the following biplot classes:
 - `lm`, `mlm`, and `glm`
+- `isoMDS()`
 - `svd`
 - `prcomp`, `princomp`, and [other PCA classes](http://www.gastonsanchez.com/visually-enforced/how-to/2012/06/17/PCA-in-R/)
 - multidimensional scaling (MDS) with `cmdscale()`
@@ -18,6 +19,7 @@ the `bbl` class:
 - `as_bibble()` wraps a biplot object with the `bbl` class so that methods can extract basic information (matrix factors, coordinates) necessary for printing and visualization
 - `to_bibble()` flattens a biplot object into a list of basic matrix factorization information from which the original object is unrecoverable
 - Decide whether `bbl` objects should be stored (a) as separate $U$ and $V$ tibbles or (b) as a single tibble with a `.matrix` variable (so that `tidy()` simply removes the `bbl` class and certain attributes).
+- As long as `ggplot()` uses `fortify()` internally to handle objects, this package should use `fortify.bbl()` to convert ordination objects into data frames for plotting.
 - Determine how to retain inertia information, and for which classes.
 
 ## formatting methods
@@ -48,6 +50,8 @@ the `bbl` class:
 
 `rotate_*()`: Transform one factorization into another by a nonsingular rank-$r$ matrix.
 
+Functions to calculate individual observations' or variables' contributions to error (SSE, stress, etc.), outlier/inlier status, or other atypicalities.
+
 ### bibble and tibble to bibble
 
 `regress_onto()`: ?
@@ -64,13 +68,15 @@ the `bbl` class:
 
 `get_*()`/`factor_*()`: Extract the annotated tibble form or the unannotated matrix form of $U$ or $V$.
 
-`reconstruct()`: Multiply $U$ and $V'$ to recover or estimate the original data table or _target matrix_.
+`reconstruct()`: Multiply $U$ and $V'$ to recover or estimate the original data table or _target matrix_. More generally, include in each bibble a set of instructions (a formula?) for how to recover the raw data from the bibble and its annotations.
 
 ### extend methods from flattened bibbles to wrapped bibbles
 
 ## plotting
 
 Incorporate `inertia` argument to `fortify()` and/or to `stat_biplot()`. Carefully document and justify the choice of where along the "typical" workflow to calculate the inertia.
+
+Develop a generalized scree plot (`ggord() + geom_scree()`?) with options (variance explained, stress, etc.) appropriate to classes.
 
 ### plot layers
 
@@ -96,8 +102,14 @@ Option to align text with vectors, as in **ggbiplot**.
 
 ### summary information
 
-Include keywords in the description: "biplot", "ordination", "geometric data analysis".
+Include keywords in the description: "biplot", "(linear) ordination" ([helpfully defined by János Podani](http://ramet.elte.hu/~podani/7-Ordination.pdf)), "geometric data analysis".
 Consider these when deciding on a final name.
+
+### theory
+
+Conceptualize each technique (and each of its variants) as a flow chart beginning with the raw data and progressing through each transformation, including the matrix factorization (with its objective function), ending with the two matrices from which the biplot is constructed.
+
+Identify the calculations (e.g. projections) and visual elements (e.g. ellipses) that are appropriate to the biplots obtained using each technique.
 
 ## testing
 

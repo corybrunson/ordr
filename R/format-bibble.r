@@ -2,12 +2,12 @@
 # format.bbl
 # to do:
 # * ensure that coordinates in U and in V are aligned
-
 format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
   # dimensional parameters
   uv_rows <- sapply(get_uv(x), nrow)
-  n_coords <- nrow(get_coordinates(x))
+  x_coords <- get_coordinates(x)$.name
+  n_coords <- length(x_coords)
   if (is.null(n)) {
     n <- ifelse(
       uv_rows > op.bibble$bibble.print_max,
@@ -24,12 +24,12 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   header <- bbl_sum(x)
   coord_sum <- paste0(
     "#   ", n_coords, " coordinate", ifelse(n_coords == 1, "", "s"), ": ",
-    print_reps(get_coordinates(x)$.name)
+    print_reps(x_coords)
   )
   
   fmt_coord <- lapply(c("u", "v"), function(matrix) {
     fmt <- format(select(
-      as_tibble(factor_uv(x, matrix)),
+      factor_uv(x, matrix),
       1:min(n_coords, 3)
     ), n = n[matrix], width = width)
     fmt[1] <- tbl_sum(x)[matrix]
@@ -40,7 +40,7 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
   uv_footer <- set_names(c("", ""), c("u", "v"))
   fmt_ann <- lapply(c("u", "v"), function(matrix) {
-    fmt <- select(get_uv(x, matrix), -one_of(get_coordinates(x)$.name))
+    fmt <- select(get_uv(x, matrix), -one_of(x_coords))
     if (ncol(fmt) == 0) return("")
     fmt <- format(fmt, n = n[matrix], width = width - uv_width[matrix] - 7)
     # blank header
@@ -84,8 +84,6 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   c(header, coord_sum, "# ", uv_fmt[[1]], "# ", uv_fmt[[2]])
 }
 
-# print.bbl
-
 print.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   fmt <- format(x, ..., n = n, width = width, n_extra = n_extra)
   cat(paste0(fmt, collapse = "\n"), sep = "")
@@ -94,6 +92,7 @@ print.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 
 # settings
 
+# this trick is borrowed from **tibble**
 op.bibble <- list(
   bibble.print_max = 10L,
   bibble.print_min = 5L,
@@ -121,7 +120,7 @@ bbl_sum.bbl <- function(x) {
 }
 tbl_sum.bbl <- function(x) {
   d <- sapply(get_uv(x), dim)
-  m <- sapply(factor_uv(x), dim)
+  m <- sapply(matrix_uv(x), dim)
   set_names(paste0(
     "# ", c("U", "V"), ": [", d[1, ], " x ", m[2, ], " | ", d[2, ] - m[2, ], "]"
   ), c("u", "v"))

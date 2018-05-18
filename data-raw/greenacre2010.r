@@ -1,10 +1,7 @@
 simple_example <- make_bibble(
-  u = cbind(c(2, 1, -1, 1, 2), c(2, 2, 1, -1, -2)),
-  v = cbind(c(3, 2, -1, -2), c(1, -1, 2, -1))
-)
-simple_example <- set_coordinates(
-  simple_example,
-  guess_coordinates(simple_example)
+  u = cbind(x = c(2, 1, -1, 1, 2), y = c(2, 2, 1, -1, -2)),
+  v = cbind(x = c(3, 2, -1, -2), y = c(1, -1, 2, -1)),
+  coordinates = tibble(.name = c("x", "y"))
 )
 devtools::use_data(simple_example)
 

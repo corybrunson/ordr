@@ -1,8 +1,14 @@
-#' Extract the factors of a biplot object
+#' Extract the factors of an ordination object
+#' 
 
 #' @name bibble-factors
 #' @param x A bibble, or an object convertible to one.
+#' @param .matrix A character string matching one of several indicators for one
+#'   or both matrices in a matrix decomposition used for ordination. The
+#'   standard values are \code{"u"} and \code{"v"}.
+#'   
 
+# REPLACE `get_*()` with `data_*()`?
 #' @rdname bibble-factors
 #' @export
 get_u <- function(x) UseMethod("get_u")
@@ -11,10 +17,9 @@ get_u <- function(x) UseMethod("get_u")
 get_v <- function(x) UseMethod("get_v")
 #' @rdname bibble-factors
 #' @export
-get_uv <- function(x, matrix = "uv") {
-  matrix <- match.arg(matrix, names(bibble_factors))
+get_uv <- function(x, .matrix = "uv") {
   switch(
-    as.list(bibble_factors)[[matrix]],
+    match_factor(.matrix),
     u = get_u(x),
     v = get_v(x),
     uv = list(u = get_u(x), v = get_v(x))
@@ -47,9 +52,54 @@ get_v.data.frame <- function(x) {
   x[x$.matrix == 2, -match(".matrix", names(x))]
 }
 
-factor_uv <- function(x, matrix = "uv") {
-  matrix <- match.arg(matrix, names(bibble_factors))
-  uv <- as.list(bibble_factors)[[matrix]]
+#' @rdname bibble-factors
+#' @export
+factor_uv <- function(x, .matrix = "uv") {
+  uv <- match_factor(.matrix)
+  get_fun <- get(paste0("get_", uv))
+  if (uv == "uv") {
+    return(lapply(
+      get_fun(x),
+      select,
+      pull(get_coordinates(x), .name)
+    ))
+  } else {
+    return(select(get_fun(x), pull(get_coordinates(x), .name)))
+  }
+}
+#' @rdname bibble-factors
+#' @export
+factor_u <- function(x) factor_uv(x, "u")
+#' @rdname bibble-factors
+#' @export
+factor_v <- function(x) factor_uv(x, "u")
+
+#' @rdname bibble-factors
+#' @export
+attr_uv <- function(x, .matrix = "uv") {
+  uv <- match_factor(.matrix)
+  get_fun <- get(paste0("get_", uv))
+  if (uv == "uv") {
+    return(lapply(
+      get_fun(x),
+      select,
+      -one_of(pull(get_coordinates(x), .name))
+    ))
+  } else {
+    return(select(get_fun(x), -one_of(pull(get_coordinates(x), .name))))
+  }
+}
+#' @rdname bibble-factors
+#' @export
+attr_u <- function(x) attr_uv(x, "u")
+#' @rdname bibble-factors
+#' @export
+attr_v <- function(x) attr_uv(x, "u")
+
+#' @rdname bibble-factors
+#' @export
+matrix_uv <- function(x, .matrix = "uv") {
+  uv <- match_factor(.matrix)
   get_fun <- get(paste0("get_", uv))
   if (uv == "uv") {
     return(lapply(lapply(
@@ -63,12 +113,10 @@ factor_uv <- function(x, matrix = "uv") {
 }
 #' @rdname bibble-factors
 #' @export
-factor_u <- function(x) factor_uv(x, "u")
+matrix_u <- function(x) matrix_uv(x, "u")
 #' @rdname bibble-factors
 #' @export
-factor_v <- function(x) factor_uv(x, "u")
-#' @rdname bibble-factors
-#' @export
+matrix_v <- function(x) matrix_uv(x, "u")
 
 bibble_factors <- c(
   u = "u", v = "v", uv = "uv",
@@ -76,39 +124,7 @@ bibble_factors <- c(
   left = "u", right = "v", both = "uv",
   observations = "u", variables = "v"
 )
-
-set_coordinates <- function(x, ...) {
-  x$coordinates <- data.frame(.name = unlist(list(...)))
-  x
+match_factor <- function(x) {
+  x <- match.arg(x, names(bibble_factors))
+  unname(bibble_factors[x])
 }
-
-guess_coordinates <- function(x) {
-  intersect(names(get_u(x)), names(get_v(x)))
-}
-
-u_names <- function(x) {
-  get_u(x)$.name
-}
-`u_names<-` <- function(x, value) {
-  x$u$.name <- value
-  x
-}
-v_names <- function(x) {
-  get_v(x)$.name
-}
-`v_names<-` <- function(x, value) {
-  x$v$.name <- value
-  x
-}
-coord_names <- function(x) {
-  get_coordinates(x)$.name
-}
-`coord_names<-` <- function(x, value) {
-  x$coordinates$.name <- value
-  u_names(x) <- value
-  v_names(x) <- value
-  x
-}
-
-get_data <- function(x) UseMethod("get_data")
-get_data.ggvis <- ggvis::get_data

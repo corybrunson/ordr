@@ -1,6 +1,5 @@
 
 #' @rdname ggbiplot
-#' @importFrom broom tidy
 #' @param inertia How to pass inertia to the row and column coordinates. Numeric
 #'   values must be between \code{0} and \code{1}. A numeric vector 
 #'   \eqn{p=(p_1,p_2)} of length two will scale the standard row coordinates by 
@@ -12,18 +11,20 @@
 #'   \code{c(0, 1)}); and \code{"principal"} and \code{"symmetric"} (equivalent
 #'   to \code{c(.5, .5)}).
 #' @export
-tidy.bbl <- function(
-  bp,
+fortify.bbl <- function(
+  ordination,
   inertia = c(1, 0),
-  matrix.names = c("u", "v"), include = "shared"
+  #matrix.names = c("u", "v"),
+  include = "shared"
 ) {
   
-  u <- cbind(get_u(bp), .matrix = matrix.names[1])
-  v <- cbind(get_v(bp), .matrix = matrix.names[2])
+  u <- mutate(get_u(ordination), .matrix = "u")
+  v <- mutate(get_v(ordination), .matrix = "v")
+  
   res <- switch(
     match.arg(include, c("coordinates", "shared", "all")),
     coordinates = {
-      coord <- get_coordinates(bp)$.name
+      coord <- get_coordinates(ordination)$.name
       as_tibble(as.data.frame(rbind(u[coord], v[coord])))
     },
     shared = {
@@ -32,6 +33,6 @@ tidy.bbl <- function(
     },
     all = as_tibble(as.data.frame(dplyr::bind_rows(u, v)))
   )
-  res$.matrix <- factor(res$.matrix, levels = matrix.names)
+  #res$.matrix <- factor(res$.matrix, levels = matrix.names)
   res
 }

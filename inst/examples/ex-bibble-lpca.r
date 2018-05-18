@@ -1,10 +1,11 @@
 
 data(finches)
 
-# EITHER SUBMIT ISSUE/PR TO *logisticPCA* OR OVERRIDE METHOD TO ADD NAMES
-finches_bibble <- finches %>%
+finches_lsvd <- finches %>%
   select(-Island) %>% as.matrix() %>%
-  logisticPCA::logisticSVD() %>%
+  logisticPCA::logisticSVD()
+# EITHER SUBMIT ISSUE/PR TO *logisticPCA* OR OVERRIDE METHOD TO ADD NAMES
+finches_bibble <- finches_lsvd %>%
   as_bibble() %>%
   bind_cols_u(island = finches$Island) %>%
   bind_cols_v(species = names(select(finches, -Island)))

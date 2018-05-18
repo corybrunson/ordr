@@ -17,7 +17,7 @@ newdata <- x2
 stopifnot(nrow(newdata) == nrow(get_u(bbl)))
 if (!is.null(rownames(newdata)))
   stopifnot(all(rownames(newdata) == get_u(bbl)$name))
-fit <- lm(newdata ~ factor_u(bbl))
+fit <- lm(newdata ~ matrix_u(bbl))
 make_bibble(
   u = get_u(bbl),
   v = bind_rows(

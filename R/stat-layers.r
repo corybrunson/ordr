@@ -5,7 +5,7 @@ StatU <- ggproto(
   "StatU", StatIdentity,
   
   setup_data = function(data, params) {
-    data[as.numeric(data$.matrix) == 1, -match(".matrix", names(data))]
+    data[data$.matrix == "u", -match(".matrix", names(data))]
   }
 )
 
@@ -15,7 +15,7 @@ StatV <- ggproto(
   "StatV", StatIdentity,
   
   setup_data = function(data, params) {
-    data[as.numeric(data$.matrix) == 2, -match(".matrix", names(data))]
+    data[data$.matrix == "v", -match(".matrix", names(data))]
   }
 )
 

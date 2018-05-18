@@ -1,4 +1,3 @@
-devtools::load_all()
 
 data(country_differences, country_attributes)
 # format both tibbles as matrices
@@ -15,12 +14,12 @@ x2 <- country_attributes %>%
 (m <- cmdscale(x1, k = 2))
 (a <- as_bibble(m))
 (b <- bibble(m))
-(d <- tidy(b))
+(d <- fortify(b))
 
 # pull
 
-#pull.bbl(a, matrix = "v", name)
-#pull(a, matrix = "v", name)
+#pull.bbl(a, .matrix = "v", name)
+#pull(a, .matrix = "v", name)
 pull_v(a, name)
 #pull.bbl(a, name)
 
@@ -30,20 +29,31 @@ pull_v(a, name)
 
 # mutate
 
-mutate(a, abbr = pull(get_v(a), name), matrix = "u")
+mutate(a, abbr = pull(get_v(a), name), .matrix = "u")
 mutate_u(a, abbr = pull_v(a, name))
 
+# use `name` attribute of V as `abbr` attribute of U
 mutate(a, abbr = pull(get_v(a), name))
+# abbreviate `name` to `abbr` separately in U and V
 mutate(a, abbr = abbreviate(name))
 
 # transmute
 
 # inner join: one matrix
-inner_join(a, country_attributes, matrix = "u", by = c("name" = "Countries"))
+inner_join(a, country_attributes, .matrix = "u", by = c("name" = "Countries"))
 inner_join_u(a, country_attributes, by = c("name" = "Countries"))
-# inner join: failure (wrong matrix)
-inner_join(a, country_attributes, matrix = "v", by = c("name" = "Countries"))
-# inner join: both matrices (NEED TO IMPROVE HANDLING)
-inner_join(a, rename(country_attributes, name = Countries))
+# inner join: failure (fields don't match up)
+inner_join(a, country_attributes, .matrix = "v", by = c("name" = "Countries"))
+# inner join: avoid conflict by renaming attribute of V
+inner_join(
+  rename(a, abbr = name, .matrix = "v"),
+  rename(country_attributes, name = Countries)
+)
+# inner join: both matrices
+inner_join(
+  mutate_v(rename_v(a, abbr = name), name = pull(get_u(a), name)),
+  country_attributes,
+  by = c("name" = "Countries")
+)
 
-left_join(a, country_attributes, matrix = "u", by = c("name" = "Countries"))
+left_join(a, country_attributes, .matrix = "u", by = c("name" = "Countries"))

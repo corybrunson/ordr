@@ -22,8 +22,8 @@ align_with <- function(x, matrix, y, by = NULL) {
     stop("Coordinates of class-'", prev_class, "' objects cannot be realigned.")
   }
   x <- to_bibble(x)
-  M_x <- factor_uv(x, matrix)
-  M_y <- factor_uv(y, matrix)
+  M_x <- matrix_uv(x, matrix)
+  M_y <- matrix_uv(y, matrix)
   # shared observations/variables
   x_df <- get_uv(x, matrix)
   y_df <- get_uv(y, matrix)

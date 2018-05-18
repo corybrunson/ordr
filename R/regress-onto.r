@@ -19,8 +19,8 @@ regress_onto <- function(bbl, newdata, factor = "v") {
   stopifnot(compatible_fun(bbl, newdata))
   get_fun <- switch(factor, u = get_u, v = get_v)
   get_fun2 <- switch(factor, u = get_v, v = get_u)
-  factor_fun <- switch(factor, u = factor_u, v = factor_v)
-  fit <- lm(newdata ~ factor_fun(bbl))
+  matrix_fun <- switch(factor, u = matrix_u, v = matrix_v)
+  fit <- lm(newdata ~ matrix_fun(bbl))
   assign(factor, bind_rows(
     mutate(get_fun(bbl), .source = ".original"),
     mutate(get_fun(fit), .source = ".regressed")

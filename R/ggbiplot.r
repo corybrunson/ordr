@@ -1,11 +1,11 @@
 #' @rdname ggbiplot
 #' @export
 ggbiplot <- function(
-  biplot = NULL, mapping = aes(),
+  ordination = NULL, mapping = aes(),
   ...
 ) {
   gg <- ggplot(
-    data = tidy(biplot, include = "all"),
+    data = fortify(ordination, include = "all"),
     mapping = mapping,
     environment = parent.frame(),
     ...

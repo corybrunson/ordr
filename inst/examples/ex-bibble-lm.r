@@ -12,7 +12,7 @@ bioenv <- bioenv %>%
 (m <- lm(data = bioenv, formula = d ~ x + y))
 (a <- as_bibble(m))
 (b <- bibble(m))
-(d <- tidy(b))
+(d <- fortify(b))
 
 # basic linear regression biplot
 gg <- ggbiplot(b, aes(x = x, y = y))
@@ -30,7 +30,7 @@ gg +
   geom_v_isolines(ids = 1, by = 5)
 
 # shade points by expected species prevalence and darken outliers
-(d <- tidy(b, include = "all"))
+(d <- fortify(b, include = "all"))
 ggbiplot(d, aes(x = x, y = y, color = .fitted, alpha = .resid^2)) +
   theme_bw() +
   scale_color_distiller(type = "div", palette = 1) +

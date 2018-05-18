@@ -11,11 +11,10 @@ as_bibble.cmds <- function(x) {
 
 get_uv_cmds <- function(x, matrix) {
   name_fun <- switch(matrix, u = rownames, v = colnames)
-  x$points %>%
-    as_tibble() %>%
-    {if (is.null(name_fun(x$x))) . else mutate(., name = name_fun(x$x))} %>%
-    rename_at(vars(matches("^V[1-9]+$")), funs(gsub("^V", "PCo", .))) %>%
-    select(starts_with("PCo"), everything())
+  res <- as_tibble(x$points)
+  res$name <- name_fun(x$x)
+  res <- rename_at(res, vars(matches("^V[1-9]+$")), funs(gsub("^V", "PCo", .)))
+  select(res, starts_with("PCo"), everything())
 }
 get_u.cmds <- function(x) get_uv_cmds(x, "u")
 get_v.cmds <- function(x) get_uv_cmds(x, "v")
