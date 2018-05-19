@@ -8,66 +8,25 @@ pull_v <- function(.data, var = -1) {
   pull(get_uv(.data, .matrix = "v"), !!enquo(var))
 }
 
-rename.bbl <- function(.data, ..., .matrix = NULL) {
+rename.bbl <- function(.data, ..., .matrix = "uv") {
   .data <- to_bibble(.data)
-  if (!is.null(.matrix)) {
-    .matrix <- match_factor(.matrix)
-    if (.matrix == "uv") {
-      for (.m in c("u", "v")) {
-        .data[[.m]] <- bind_cols(
-          factor_uv(.data, .m),
-          rename(attr_uv(.data, .m), ...)
-        )
-      }
-    } else {
-      .data[[.matrix]] <- bind_cols(
-        factor_uv(.data, .matrix),
-        rename(attr_uv(.data, .matrix), ...)
+  .matrix <- match_factor(.matrix)
+  # don't allow renamings of coordinates
+  if (any(names(quos(...)) %in% get_coordinates(.data)$.name)) {
+    stop("The coordinates of `.data` are protected.")
+  }
+  if (.matrix == "uv") {
+    for (.m in c("u", "v")) {
+      .data[[.m]] <- bind_cols(
+        factor_uv(.data, .m),
+        rename(attr_uv(.data, .m), ...)
       )
     }
   } else {
-    # if `.matrix` is `NULL`, try renaming each field in both factors
-    for (.m in c("u", "v")) {
-      dots <- quos(...)
-      d <- attr_uv(.data, .m)
-      for (i in seq_along(dots)) {
-        dot <- dots[i]
-        d_tmp <- try(rename(d, !!!dot))
-        if (class(d_tmp)[1] == "try-error") next
-        d <- d_tmp
-      }
-      .data[[.m]] <- d
-    }
-  }
-  .data
-}
-rename.bbl_alt <- function(.data, ..., .matrix = NULL) {
-  .data <- to_bibble(.data)
-  # don't allow renamings of coordinates
-  if (any(names(quos(...)) %in% get_coordinates(.data))) {
-    stop("The coordinate names of `.data` are protected.")
-  }
-  # if `.matrix` is `NULL`, try renaming fields in both factors
-  if (is.null(.matrix)) {
-    for (.matrix in c("u", "v")) {
-      dots <- quos(...)
-      d <- get_uv(.data, .matrix = .matrix)
-      for (i in seq_along(dots)) {
-        dot <- dots[i]
-        d_tmp <- try(rename(d, !!!dot))
-        if (class(d_tmp)[1] == "try-error") next
-        d <- d_tmp
-      }
-      .data[[.matrix]] <- d
-    }
-  } else if (.matrix == "uv") {
-    for (.matrix in c("u", "v")) {
-      d <- get_uv(.data, .matrix)
-      .data[[.matrix]] <- rename(d, ...)
-    }
-  } else {
-    d <- get_uv(.data, .matrix)
-    .data[[.matrix]] <- rename(d, ...)
+    .data[[.matrix]] <- bind_cols(
+      factor_uv(.data, .matrix),
+      rename(attr_uv(.data, .matrix), ...)
+    )
   }
   .data
 }
@@ -80,33 +39,56 @@ rename_v <- function(.data, ...) {
   rename.bbl(.data, ..., .matrix = "v")
 }
 
-mutate.bbl <- function(.data, ..., .matrix = NULL) {
+select.bbl <- function(.data, ..., .matrix = "uv") {
   .data <- to_bibble(.data)
-  # don't allow mutations of coordinates
-  if (any(names(quos(...)) %in% get_coordinates(.data))) {
-    stop("The coordinates of `.data` are immutable.")
+  .matrix <- match_factor(.matrix)
+  # don't allow selections of coordinates
+  if (any(names(quos(...)) %in% get_coordinates(.data)$.name)) {
+    stop("The coordinates of `.data` are protected.")
   }
-  # if `.matrix` is `NULL`, try each mutation in both factors
-  if (is.null(.matrix)) {
-    for (.matrix in c("u", "v")) {
-      dots <- quos(...)
-      d <- get_uv(.data, .matrix = .matrix)
-      for (i in seq_along(dots)) {
-        dot <- dots[i]
-        d_tmp <- try(mutate(d, !!!dot))
-        if (class(d_tmp)[1] == "try-error") next
-        d <- d_tmp
-      }
-      .data[[.matrix]] <- d
-    }
-  } else if (.matrix == "uv") {
-    for (.matrix in c("u", "v")) {
-      d <- get_uv(.data, .matrix)
-      .data[[.matrix]] <- mutate(d, ...)
+  if (.matrix == "uv") {
+    for (.m in c("u", "v")) {
+      .data[[.m]] <- bind_cols(
+        factor_uv(.data, .m),
+        select(attr_uv(.data, .m), ...)
+      )
     }
   } else {
-    d <- get_uv(.data, .matrix)
-    .data[[.matrix]] <- mutate(d, ...)
+    .data[[.matrix]] <- bind_cols(
+      factor_uv(.data, .matrix),
+      select(attr_uv(.data, .matrix), ...)
+    )
+  }
+  .data
+}
+select_u <- function(.data, ...) {
+  stopifnot(class(.data)[1] == "bbl")
+  select.bbl(.data, ..., .matrix = "u")
+}
+select_v <- function(.data, ...) {
+  stopifnot(class(.data)[1] == "bbl")
+  select.bbl(.data, ..., .matrix = "v")
+}
+
+mutate.bbl <- function(.data, ..., .matrix = "uv") {
+  .data <- to_bibble(.data)
+  .matrix <- match_factor(.matrix)
+  # don't allow mutations of coordinates
+  if (any(names(quos(...)) %in% get_coordinates(.data)$.name)) {
+    stop("The coordinates of `.data` are immutable.")
+  }
+  if (.matrix == "uv") {
+    for (.m in c("u", "v")) {
+      .data[[.m]] <- bind_cols(
+        factor_uv(.data, .m),
+        mutate(attr_uv(.data, .m), ...)
+      )
+    }
+  } else {
+    .data[[.matrix]] <- bind_cols(
+      factor_uv(.data, .matrix),
+      mutate(attr_uv(.data, .matrix), ...)
+    )
   }
   .data
 }
@@ -119,12 +101,40 @@ mutate_v <- function(.data, ...) {
   mutate.bbl(.data, ..., .matrix = "v")
 }
 
-bind_cols.bbl <- function(.data, ..., .matrix = NULL) {
+transmute.bbl <- function(.data, ..., .matrix = "uv") {
   .data <- to_bibble(.data)
-  if (is.null(.matrix)) {
-    warning("`NULL` method not yet implemented; using `.matrix = 'uv'`.")
-    .matrix <- "uv"
+  .matrix <- match_factor(.matrix)
+  # don't allow mutations of coordinates
+  if (any(names(quos(...)) %in% get_coordinates(.data)$.name)) {
+    stop("The coordinates of `.data` are immutable.")
   }
+  if (.matrix == "uv") {
+    for (.m in c("u", "v")) {
+      .data[[.m]] <- bind_cols(
+        factor_uv(.data, .m),
+        transmute(attr_uv(.data, .m), ...)
+      )
+    }
+  } else {
+    .data[[.matrix]] <- bind_cols(
+      factor_uv(.data, .matrix),
+      transmute(attr_uv(.data, .matrix), ...)
+    )
+  }
+  .data
+}
+transmute_u <- function(.data, ...) {
+  stopifnot(class(.data)[1] == "bbl")
+  transmute.bbl(.data, ..., .matrix = "u")
+}
+transmute_v <- function(.data, ...) {
+  stopifnot(class(.data)[1] == "bbl")
+  transmute.bbl(.data, ..., .matrix = "v")
+}
+
+bind_cols.bbl <- function(.data, ..., .matrix = "uv") {
+  .data <- to_bibble(.data)
+  .matrix <- match_factor(.matrix)
   if (.matrix == "uv") {
     for (.matrix in c("u", "v")) {
       d <- get_uv(.data, .matrix)
@@ -146,16 +156,13 @@ bind_cols_v <- function(.data, ...) {
 }
 
 inner_join.bbl <- function(
-  x, y, .matrix = NULL, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
+  x, y, .matrix = "uv", by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
 ) {
   x <- to_bibble(x)
+  .matrix <- match_factor(.matrix)
   # don't allow joins by or with coordinates
   if (any(names(y) %in% get_coordinates(x))) {
     stop("Object `y` shares column names with the coordinates of `x`.")
-  }
-  if (is.null(.matrix)) {
-    warning("`NULL` method not yet implemented; using `.matrix = 'uv'`.")
-    .matrix <- "uv"
   }
   if (.matrix == "uv") {
     for (.matrix in c("u", "v")) {
@@ -184,21 +191,13 @@ inner_join_v <- function(
 }
 
 left_join.bbl <- function(
-  x, y, .matrix = NULL, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
+  x, y, .matrix = "uv", by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
 ) {
   x <- to_bibble(x)
+  .matrix <- match_factor(.matrix)
   # don't allow joins by or with coordinates
   if (any(names(y) %in% get_coordinates(x))) {
     stop("Object `y` shares column names with the coordinates of `x`.")
-  }
-  if (is.null(.matrix)) {
-    .matrix <- ""
-    if (length(intersect(names(x$u), names(y))) > 0)
-      .matrix <- paste0(.matrix, "u")
-    if (length(intersect(names(x$v), names(y))) > 0)
-      .matrix <- paste0(.matrix, "v")
-    if (.matrix == "")
-      stop("`by` required, because the data sources have no common variables.")
   }
   if (.matrix == "uv") {
     for (.matrix in c("u", "v")) {

@@ -23,7 +23,7 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
   header <- bbl_sum(x)
   coord_sum <- paste0(
-    "#   ", n_coords, " coordinate", ifelse(n_coords == 1, "", "s"), ": ",
+    "# ", n_coords, " coordinate", ifelse(n_coords == 1, "", "s"), ": ",
     print_reps(x_coords)
   )
   
@@ -122,7 +122,8 @@ tbl_sum.bbl <- function(x) {
   d <- sapply(get_uv(x), dim)
   m <- sapply(matrix_uv(x), dim)
   set_names(paste0(
-    "# ", c("U", "V"), ": [", d[1, ], " x ", m[2, ], " | ", d[2, ] - m[2, ], "]"
+    "# ", c("U", "V"),
+    ": [ ", d[1, ], " x ", m[2, ], " | ", d[2, ] - m[2, ], " ]"
   ), c("u", "v"))
 }
 
