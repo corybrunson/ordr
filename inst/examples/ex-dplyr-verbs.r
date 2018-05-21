@@ -65,3 +65,12 @@ inner_join(
 # left join
 
 left_join(a, country_attributes, .matrix = "u", by = c("name" = "Countries"))
+
+# right join
+
+right_join_u(a, country_attributes[1:5, ], by = c("name" = "Countries"))
+
+# outer join
+
+# full join
+

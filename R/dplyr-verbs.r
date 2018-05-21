@@ -165,11 +165,13 @@ inner_join.bbl <- function(
     stop("Object `y` shares column names with the coordinates of `x`.")
   }
   if (.matrix == "uv") {
-    for (.matrix in c("u", "v")) {
-      d <- get_uv(x, .matrix)
-      x[[.matrix]] <- inner_join(d, y, by = by, copy = copy, suffix = suffix)
-      if (nrow(x[[.matrix]]) == 0)
-        stop("No matching values for `by` variables in matrix `", .matrix, "`.")
+    for (.m in c("u", "v")) {
+      x[[.m]] <- inner_join(
+        get_uv(x, .m),
+        y, by = by, copy = copy, suffix = suffix
+      )
+      if (nrow(x[[.m]]) == 0)
+        stop("No matching values for `by` variables in matrix `", .m, "`.")
     }
   } else {
     d <- get_uv(x, .matrix)
@@ -200,11 +202,13 @@ left_join.bbl <- function(
     stop("Object `y` shares column names with the coordinates of `x`.")
   }
   if (.matrix == "uv") {
-    for (.matrix in c("u", "v")) {
-      d <- get_uv(x, .matrix)
-      x[[.matrix]] <- left_join(d, y, by = by, copy = copy, suffix = suffix)
-      if (nrow(x[[.matrix]]) == 0)
-        stop("No matching values for `by` variables in matrix `", .matrix, "`.")
+    for (.m in c("u", "v")) {
+      x[[.m]] <- left_join(
+        get_uv(x, .m),
+        y, by = by, copy = copy, suffix = suffix
+      )
+      if (nrow(x[[.m]]) == 0)
+        stop("No matching values for `by` variables in matrix `", .m, "`.")
     }
   } else {
     d <- get_uv(x, .matrix)
@@ -223,4 +227,41 @@ left_join_v <- function(
 ) {
   stopifnot(class(x)[1] == "bbl")
   left_join.bbl(x, y = y, .matrix = "v", by = by, copy = copy, suffix = suffix)
+}
+
+right_join.bbl <- function(
+  x, y, .matrix = "uv", by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
+) {
+  x <- to_bibble(x)
+  .matrix <- match_factor(.matrix)
+  # don't allow joins by or with coordinates
+  if (any(names(y) %in% get_coordinates(x))) {
+    stop("Object `y` shares column names with the coordinates of `x`.")
+  }
+  if (.matrix == "uv") {
+    for (.m in c("u", "v")) {
+      x[[.m]] <- right_join(
+        get_uv(x, .m),
+        y, by = by, copy = copy, suffix = suffix
+      )
+      if (nrow(x[[.m]]) == 0)
+        stop("No matching values for `by` variables in matrix `", .m, "`.")
+    }
+  } else {
+    d <- get_uv(x, .matrix)
+    x[[.matrix]] <- right_join(d, y, by = by, copy = copy, suffix = suffix)
+  }
+  x
+}
+right_join_u <- function(
+  x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
+) {
+  stopifnot(class(x)[1] == "bbl")
+  right_join.bbl(x, y = y, .matrix = "u", by = by, copy = copy, suffix = suffix)
+}
+right_join_v <- function(
+  x, y, by = NULL, copy = FALSE, suffix = c(".x", ".y"), ...
+) {
+  stopifnot(class(x)[1] == "bbl")
+  right_join.bbl(x, y = y, .matrix = "v", by = by, copy = copy, suffix = suffix)
 }
