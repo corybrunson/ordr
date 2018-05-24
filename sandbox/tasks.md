@@ -1,5 +1,9 @@
 # tidybiplot tasks
 
+## augmentation
+
+functions to augment the output of an ordination function to the original dataset
+
 ## object classes
 
 `as_bibble()` and `to_bibble()` methods for the following biplot classes:
