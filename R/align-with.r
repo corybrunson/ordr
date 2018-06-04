@@ -14,6 +14,7 @@ unsigned_classes <- c(
 )
 
 # align a biplot's coordinates to those of another biplot
+# DON'T LOSE ORIGINAL OBJECT; EDIT COMPONENTS DIRECTLY USING A METHOD
 align_with <- function(x, matrix, y, by = NULL) {
   matrix <- as.list(bibble_factors)[[match.arg(matrix, names(bibble_factors))]]
   if (matrix == "uv") stop("No alignment method for both matrix factors.")

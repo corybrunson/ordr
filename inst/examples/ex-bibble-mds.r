@@ -13,8 +13,7 @@ x2 <- country_attributes %>%
 
 # multidimensional scaling setup
 (m <- cmdscale(x1, k = 2))
-(a <- as_bibble(m))
-(b <- bibble(m))
+(b <- as_bibble(m))
 (d <- fortify(b))
 
 # basic multidimensional scaling biplot

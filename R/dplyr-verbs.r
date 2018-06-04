@@ -1,4 +1,7 @@
 
+# DON'T LOSE ORIGINAL OBJECT VIA `to_bibble()`; EITHER CHANGE NAMES/COMPONENTS
+# OR ADD ATTRIBUTES THAT ARE FORCED TO MATCH DIMENSIONS OF `u` AND `v`
+
 pull_u <- function(.data, var = -1) {
   stopifnot(class(.data)[1] == "bbl")
   pull(get_uv(.data, .matrix = "u"), !!enquo(var))

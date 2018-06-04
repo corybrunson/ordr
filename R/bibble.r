@@ -20,24 +20,9 @@
 
 #' @rdname bibble
 #' @export
-bibble <- function(...) {
-  x <- try(to_bibble(...))
-  if (class(x)[1] == "try-error") {
-    return(make_bibble(...))
-  } else {
-    return(x)
-  }
-}
-
-#' @rdname bibble
-#' @export
 as_bibble <- function(x) UseMethod("as_bibble")
 
 as_bibble.bbl <- function(x) x
-
-#' @rdname bibble
-#' @export
-to_bibble <- function(x) UseMethod("to_bibble")
 
 #' @rdname bibble
 #' @export
@@ -45,15 +30,13 @@ make_bibble <- function(
   u = NULL, v = NULL, coordinates = NULL,
   ...
 ) {
-  x <- c(list(u = u, v = v, coordinates = coordinates), list(...))
-  to_bibble(x)
-}
-
-to_bibble.default <- function(x) {
+  if (!all(coordinates %in% intersect(names(u), names(v)))) {
+    stop("Coordinates must be fields shared by `u` and `v`.")
+  }
   res <- list(
-    u = get_u(x),
-    v = get_v(x),
-    coordinates = get_coordinates(x)
+    u = u,
+    v = v,
+    coordinates = coordinates
   )
   class(res) <- c("bbl", "list")
   attr(res, "preclass") <- setdiff(class(x), "bbl")
