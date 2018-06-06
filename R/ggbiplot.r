@@ -4,13 +4,14 @@ ggbiplot <- function(
   ordination = NULL, mapping = aes(),
   ...
 ) {
-  gg <- ggplot(
+  p <- ggplot(
     data = fortify(ordination, include = "all"),
     mapping = mapping,
     environment = parent.frame(),
     ...
-  ) + coord_fixed()
-  gg$mapping <- c(gg$mapping, aes(.matrix = .matrix))
-  class(gg) <- c("ggbiplot", class(gg))
-  gg
+  )
+  p$mapping <- c(p$mapping, aes(.matrix = .matrix))
+  p$coordinates <- coord_fixed()
+  class(p) <- c("ggbiplot", class(p))
+  p
 }
