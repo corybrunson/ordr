@@ -1,3 +1,4 @@
+
 cmdscale <- function(d, k = 2, add = FALSE) {
   res <- stats::cmdscale(d, k = k, eig = TRUE, add = add, x.ret = TRUE)
   class(res) <- "cmds"

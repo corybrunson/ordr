@@ -10,8 +10,7 @@ bioenv <- bioenv %>%
 
 # linear regression setup
 (m <- lm(data = bioenv, formula = d ~ x + y))
-(a <- as_bibble(m))
-(b <- bibble(m))
+(b <- as_bibble(m))
 (d <- fortify(b))
 
 # basic linear regression biplot

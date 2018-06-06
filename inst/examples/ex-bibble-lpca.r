@@ -4,7 +4,7 @@ data(finches)
 finches_lsvd <- finches %>%
   select(-Island) %>% as.matrix() %>%
   logisticPCA::logisticSVD()
-# EITHER SUBMIT ISSUE/PR TO *logisticPCA* OR OVERRIDE METHOD TO ADD NAMES
+# SUBMIT ISSUE/PR TO *logisticPCA*
 finches_bibble <- finches_lsvd %>%
   as_bibble() %>%
   bind_cols_u(island = finches$Island) %>%

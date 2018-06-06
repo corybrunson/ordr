@@ -1,7 +1,4 @@
 
-# format.bbl
-# to do:
-# * ensure that coordinates in U and in V are aligned
 format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
   # dimensional parameters
@@ -56,7 +53,7 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
       )
     ))
   )
-  coord_width <- unique(nchar(fmts_coord))
+  coord_width <- unique(nchar(fmts_coord)[-1])
   
   uv_footer <- set_names(c("", ""), c("u", "v"))
   fmt_ann <- lapply(c("u", "v"), function(matrix) {

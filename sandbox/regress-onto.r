@@ -1,32 +1,38 @@
 
-data(country_differences, country_attributes)
-x1 <- country_differences %>%
-  select(-Countries) %>%
-  as.matrix() %>%
-  {rownames(.) <- pull(country_differences, Countries); .}
-x2 <- country_attributes %>%
-  select(-Countries) %>%
-  as.matrix() %>%
-  {rownames(.) <- pull(country_differences, Countries); .}
-
-b1 <- as_bibble(cmdscale(x1, k = 2))
-
-bbl <- b1
-newdata <- x2
 # check that 'newdata' is compatible with u (or v if so specified)
-stopifnot(nrow(newdata) == nrow(get_u(bbl)))
-if (!is.null(rownames(newdata)))
-  stopifnot(all(rownames(newdata) == get_u(bbl)$name))
-fit <- lm(newdata ~ matrix_u(bbl))
-make_bibble(
-  u = get_u(bbl),
-  v = bind_rows(
-    mutate(get_v(bbl), .source = ".original"),
-    mutate(get_v(fit), .source = ".regressed")
-  ),
-  coordinates = inner_join(
-    get_coordinates(bbl),
-    get_coordinates(fit),
-    by = ".name", suffix = c(".original", ".regressed")
+compatible_v <- function(bbl, newdata) {
+  if (ncol(newdata) != nrow(get_v(bbl))) return(FALSE)
+  if (!is.null(colnames(newdata)) && any(colnames(newdata) != get_v(bbl)$name))
+    return(FALSE)
+  TRUE
+}
+compatible_u <- function(bbl, newdata) {
+  if (nrow(newdata) != nrow(get_u(bbl))) return(FALSE)
+  if (!is.null(rownames(newdata)) && any(rownames(newdata) != get_u(bbl)$name))
+    return(FALSE)
+  TRUE
+}
+
+# regress 'newdat' on the appropriate factor of 'bbl'
+regress_onto <- function(bbl, newdata, factor = "v") {
+  compatible_fun <- switch(factor, u = compatible_u, v = compatible_v)
+  stopifnot(compatible_fun(bbl, newdata))
+  get_fun <- switch(factor, u = get_u, v = get_v)
+  get_fun2 <- switch(factor, u = get_v, v = get_u)
+  matrix_fun <- switch(factor, u = matrix_u, v = matrix_v)
+  fit <- lm(newdata ~ matrix_fun(bbl))
+  assign(factor, bind_rows(
+    mutate(get_fun(bbl), .source = ".original"),
+    mutate(get_fun(fit), .source = ".regressed")
+  ))
+  assign(setdiff(c("u", "v"), factor), get_fun2(bbl))
+  make_bibble(
+    u = u,
+    v = v,
+    coordinates = inner_join(
+      get_coordinates(bbl),
+      get_coordinates(fit),
+      by = ".name", suffix = c(".original", ".regressed")
+    )
   )
-)
+}
