@@ -17,7 +17,7 @@ get_u <- function(x) UseMethod("get_u")
 get_v <- function(x) UseMethod("get_v")
 #' @rdname bibble-factors
 #' @export
-get_uv <- function(x, .matrix = "uv") {
+get_factor <- function(x, .matrix) {
   switch(
     match_factor(.matrix),
     u = get_u(x),
@@ -25,24 +25,17 @@ get_uv <- function(x, .matrix = "uv") {
     uv = list(u = get_u(x), v = get_v(x))
   )
 }
-#' @rdname bibble-factors
-#' @export
-get_coordinates <- function(x) UseMethod("get_coordinates")
-#' @rdname bibble-factors
-#' @export
-clean_coordinates <- function(x) UseMethod("clean_coordinates")
 
 #' @rdname bibble-factors
 #' @export
-rank <- function(x) UseMethod("rank")
-rank.default <- base::rank
-rank.bbl <- function(x) length(get_coordinates(x))
+get_coord <- function(x) UseMethod("get_coord")
 
-get_u.default <- function(x) as_tibble(as.data.frame(x$u))
-get_v.default <- function(x) as_tibble(as.data.frame(x$v))
-get_coordinates.default <- function(x) as_tibble(as.data.frame(x$coordinates))
+get_u.default <- function(x) x$u
+get_v.default <- function(x) x$v
+get_coord.default <- function(x) x$coord
 # need 'get_*' functions before and after coercion; 'get_*.bbl' are unnecessary
 
+# for fortified bibbles
 get_u.data.frame <- function(x) {
   x$.matrix <- as.numeric(x$.matrix)
   x[x$.matrix == 1, -match(".matrix", names(x))]
@@ -54,69 +47,23 @@ get_v.data.frame <- function(x) {
 
 #' @rdname bibble-factors
 #' @export
-factor_uv <- function(x, .matrix = "uv") {
-  uv <- match_factor(.matrix)
-  get_fun <- get(paste0("get_", uv))
-  if (uv == "uv") {
-    return(lapply(
-      get_fun(x),
-      select,
-      pull(get_coordinates(x), .name)
-    ))
-  } else {
-    return(select(get_fun(x), pull(get_coordinates(x), .name)))
-  }
+u_attr <- function(x) UseMethod("u_attr")
+#' @rdname bibble-factors
+#' @export
+v_attr <- function(x) UseMethod("v_attr")
+#' @rdname bibble-factors
+#' @export
+factor_attr <- function(x, .matrix) {
+  switch(
+    match_factor(.matrix),
+    u = u_attr(x),
+    v = v_attr(x),
+    uv = list(u = u_attr(x), v = v_attr(x))
+  )
 }
 #' @rdname bibble-factors
 #' @export
-factor_u <- function(x) factor_uv(x, "u")
-#' @rdname bibble-factors
-#' @export
-factor_v <- function(x) factor_uv(x, "u")
-
-#' @rdname bibble-factors
-#' @export
-attr_uv <- function(x, .matrix = "uv") {
-  uv <- match_factor(.matrix)
-  get_fun <- get(paste0("get_", uv))
-  if (uv == "uv") {
-    return(lapply(
-      get_fun(x),
-      select,
-      -one_of(pull(get_coordinates(x), .name))
-    ))
-  } else {
-    return(select(get_fun(x), -one_of(pull(get_coordinates(x), .name))))
-  }
-}
-#' @rdname bibble-factors
-#' @export
-attr_u <- function(x) attr_uv(x, "u")
-#' @rdname bibble-factors
-#' @export
-attr_v <- function(x) attr_uv(x, "u")
-
-#' @rdname bibble-factors
-#' @export
-matrix_uv <- function(x, .matrix = "uv") {
-  uv <- match_factor(.matrix)
-  get_fun <- get(paste0("get_", uv))
-  if (uv == "uv") {
-    return(lapply(lapply(
-      get_fun(x),
-      select,
-      pull(get_coordinates(x), .name)
-    ), as.matrix))
-  } else {
-    return(as.matrix(select(get_fun(x), pull(get_coordinates(x), .name))))
-  }
-}
-#' @rdname bibble-factors
-#' @export
-matrix_u <- function(x) matrix_uv(x, "u")
-#' @rdname bibble-factors
-#' @export
-matrix_v <- function(x) matrix_uv(x, "u")
+coord_attr <- function(x) UseMethod("coord_attr")
 
 bibble_factors <- c(
   u = "u", v = "v", uv = "uv",
@@ -128,3 +75,9 @@ match_factor <- function(x) {
   x <- match.arg(x, names(bibble_factors))
   unname(bibble_factors[x])
 }
+
+#' @rdname bibble-factors
+#' @export
+rank <- function(x) UseMethod("rank")
+rank.default <- base::rank
+rank.bbl <- function(x) length(get_coord(x))

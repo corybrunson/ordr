@@ -10,18 +10,35 @@ as_bibble.cmds <- function(x) {
   x
 }
 
-get_uv_cmds <- function(x, matrix) {
-  name_fun <- switch(matrix, u = rownames, v = colnames)
-  res <- as_tibble(x$points)
-  res$name <- name_fun(x$x)
-  res <- rename_at(res, vars(matches("^V[1-9]+$")), funs(gsub("^V", "PCo", .)))
-  select(res, starts_with("PCo"), everything())
+get_uv_cmds <- function(x, .matrix) {
+  .matrix <- match_factor(.matrix)
+  res <- x$points
+  dimnames(res) <- list(
+    dimnames(x$x)[[switch(.matrix, u = 1, v = 2)]],
+    get_coord(x)
+  )
+  res
 }
 get_u.cmds <- function(x) get_uv_cmds(x, "u")
 get_v.cmds <- function(x) get_uv_cmds(x, "v")
-get_coordinates.cmds <- function(x) {
+
+get_coord.cmds <- function(x) paste0("PCo", 1:ncol(x$points))
+
+u_attr.cmds <- function(x) {
   tibble(
-    .name = paste0("PCo", 1:ncol(x$points)),
-    eigenvalue = x$eig[1:ncol(x$points)]
+    .name = dimnames(x$x)[[1]]
+  )
+}
+
+v_attr.cmds <- function(x) {
+  tibble(
+    .name = dimnames(x$x)[[2]]
+  )
+}
+
+coord_attr.cmds <- function(x) {
+  tibble(
+    .name = get_coord(x),
+    .eig = x$eig[1:ncol(x$points)]
   )
 }

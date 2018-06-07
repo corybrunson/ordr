@@ -2,8 +2,8 @@
 format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
   # dimensional parameters
-  uv_rows <- sapply(get_uv(x), nrow)
-  x_coords <- get_coordinates(x)$.name
+  uv_rows <- sapply(get_factor(x, "uv"), nrow)
+  x_coords <- get_coord(x)
   n_coords <- length(x_coords)
   if (is.null(n)) {
     n <- ifelse(
@@ -18,6 +18,7 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     length.out = 2
   ), c("u", "v"))
   
+  # headers!
   header <- bbl_sum(x)
   coord_sum <- paste0(
     "# ", n_coords, " coordinate", ifelse(n_coords == 1, "", "s"), ": ",
@@ -27,13 +28,13 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   # format U and V together first, then split
   fmts_coord <- format(select(
     rbind(
-      factor_uv(x, "u")[1:n[1], , drop = FALSE],
-      factor_uv(x, "v")[1:n[2], , drop = FALSE]
+      as_tibble(get_u(x))[1:n[1], , drop = FALSE],
+      as_tibble(get_v(x))[1:n[2], , drop = FALSE]
     ),
     1:min(n_coords, 3)
   ), n = sum(n), width = width)
-  wh_rows <- which(str_detect(fmts_coord, "^ *[0-9]+ "))
-  id_width <- diff(as.vector(unique(str_locate(
+  wh_rows <- which(stringr::str_detect(fmts_coord, "^ *[0-9]+ "))
+  id_width <- diff(as.vector(unique(stringr::str_locate(
     fmts_coord,
     "^ *[0-9]+ "
   )[wh_rows, , drop = FALSE])))
@@ -41,11 +42,13 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     u = unname(c(
       tbl_sum(x)["u"],
       fmts_coord[2],
+      stringr::str_pad("", nchar(fmts_coord[2])),
       fmts_coord[wh_rows[1:n[1]]]
     )),
     v = unname(c(
       tbl_sum(x)["v"],
       fmts_coord[2],
+      stringr::str_pad("", nchar(fmts_coord[2])),
       str_replace(
         fmts_coord[wh_rows[n[1] + 1:n[2]]],
         "^ *[0-9]+ ",
@@ -56,15 +59,15 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   coord_width <- unique(nchar(fmts_coord)[-1])
   
   uv_footer <- set_names(c("", ""), c("u", "v"))
-  fmt_ann <- lapply(c("u", "v"), function(matrix) {
-    fmt <- select(get_uv(x, matrix), -one_of(x_coords))
+  fmt_ann <- lapply(c("u", "v"), function(.matrix) {
+    fmt <- factor_attr(x, .matrix)
     if (ncol(fmt) == 0) return("")
-    fmt <- format(fmt, n = n[matrix], width = width - coord_width - 7)
+    fmt <- format(fmt, n = n[.matrix], width = width - coord_width - 7)
     # blank header
     fmt[1] <- paste(rep(" ", times = nchar(fmt[2])), collapse = "")
     # remove footer
     if (grepl("^#", fmt[length(fmt)])) {
-      uv_footer[matrix] <<- fmt[length(fmt)]
+      uv_footer[.matrix] <<- fmt[length(fmt)]
       fmt <- fmt[-length(fmt)]
     }
     # remove row indices
@@ -74,6 +77,11 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     )
     fmt
   })
+  uv_footer <- stringr::str_replace_all(
+    uv_footer,
+    "#",
+    paste0("#", stringr::str_pad("", coord_width))
+  )
   
   seps <- if (n_coords > 3) c("    ", " ...") else c("", "")
   fmt_seps <- mapply(
@@ -121,27 +129,23 @@ op.bibble <- list(
 
 bbl_sum <- function(x) UseMethod("bbl_sum")
 bbl_sum.bbl <- function(x) {
-  prev_class <- setdiff(c(attr(x, "preclass"), class(x)), "bbl")[1]
-  wrapped <- is.null(attr(x, "preclass"))
-  biplot_descr <- if (wrapped) {
+  prev_class <- setdiff(class(x), "bbl")[1]
+  bbl_descr <- if (!is.null(prev_class) && prev_class != "list") {
     paste0("# A bibble-wrapped '", prev_class, "' object")
-  } else if (!is.null(prev_class) && prev_class != "list") {
-    paste0("# A bibble from a '", prev_class, "' object")
   } else {
     paste0("# A bibble")
   }
   n_u <- nrow(get_u(x))
   n_v <- nrow(get_v(x))
-  n_c <- nrow(get_coordinates(x))
-  paste0(biplot_descr,
-         ": (", n_u, " x ", n_c, ") x (", n_v, " x ", n_c, ")'")
+  n_c <- length(get_coord(x))
+  paste0(bbl_descr, ": (", n_u, " x ", n_c, ") x (", n_v, " x ", n_c, ")'")
 }
 tbl_sum.bbl <- function(x) {
-  d <- sapply(get_uv(x), dim)
-  m <- sapply(matrix_uv(x), dim)
+  m <- sapply(get_factor(x, "uv"), dim)
+  a <- sapply(factor_attr(x, "uv"), dim)
   set_names(paste0(
     "# ", c("U", "V"),
-    ": [ ", d[1, ], " x ", m[2, ], " | ", d[2, ] - m[2, ], " ]"
+    ": [ ", m[1, ], " x ", m[2, ], " | ", a[2, ], " ]"
   ), c("u", "v"))
 }
 

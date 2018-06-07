@@ -6,30 +6,21 @@ as_bibble.lm <- function(x) {
 
 get_u.lm <- function(x) {
   .intercept_col <- if (names(x$coefficients)[1] == "(Intercept)") {
-    tibble(`(Intercept)` = rep(1L, nrow(x$model)))
-  } else NULL
-  .model_rk <- x$rank
-  res <- rlang::set_names(bind_cols(
-    .intercept_col,
-    as_tibble(lapply(as.data.frame(x$model[, -1]), as.vector))
-  ), clean_coordinates(x))
-  res$name <- rownames(model.frame(x))
-  bind_cols(
-    res,
-    select(broom::augment(x), -(1:(.model_rk - length(.intercept_col) + 1)))
-  )
+    .ic <- matrix(1L, nrow = nrow(x$model), ncol = 1)
+    colnames(.ic) <- "(Intercept)"
+    .ic
+  } else matrix(NA_integer_, nrow = nrow(x$model), ncol = 0)
+  #cbind(.intercept_col, as.matrix(x$model[, -1]))
+  cbind(.intercept_col, model.frame(x)[, -1])
 }
+
 get_v.lm <- function(x) {
-  rlang::set_names(as_tibble(t(x$coefficients)), clean_coordinates(x))
+  res <- t(x$coefficients)
+  dimnames(res) <- list(names(x$model)[1], get_coord(x))
+  res
 }
-get_coordinates.lm <- function(x) {
-  as_tibble(data.frame(
-    .name = clean_coordinates(x),
-    broom::tidy(x),
-    stringsAsFactors = FALSE
-  ))
-}
-clean_coordinates.lm <- function(x) {
+
+get_coord.lm <- function(x) {
   if (is.matrix(x$model[, -1])) {
     coord <- colnames(x$model[, -1])
   } else {
@@ -46,36 +37,46 @@ clean_coordinates.lm <- function(x) {
   coord
 }
 
-get_u.glm <- get_u.lm
-get_v.glm <- get_v.lm
-get_coordinates.glm <- get_coordinates.lm
-clean_coordinates.glm <- clean_coordinates.lm
+u_attr.lm <- function(x) {
+  res <- tibble(.name = rownames(model.frame(x)))
+  .int <- as.integer(names(x$coefficients)[1] == "(Intercept)")
+  .rk <- x$rank
+  bind_cols(
+    res,
+    select(broom::augment(x), -(1:(.rk - .int + 1)))
+  )
+}
 
-get_u.mlm <- function(x) {
-  .intercept_col <- if (rownames(x$coefficients)[1] == "(Intercept)") {
-    tibble(`(Intercept)` = rep(1L, nrow(x$model)))
-  } else NULL
-  res <- rlang::set_names(bind_cols(
-    .intercept_col,
-    as_tibble(lapply(as.data.frame(model.frame(x)[, -1]), as.vector))
-  ), clean_coordinates(x))
-  res$name <- rownames(model.frame(x))
-  res
+v_attr.lm <- function(x) {
+  tibble(
+    .name = names(x$model)[1]
+  )
 }
-get_v.mlm <- function(x) {
-  res <- rlang::set_names(as_tibble(t(x$coefficients)), clean_coordinates(x))
-  res$name <- colnames(x$coefficients)
-  res
-}
-get_coordinates.mlm <- function(x) {
-  res <- as_tibble(data.frame(
-    .name = clean_coordinates(x),
+
+coord_attr.lm <- function(x) {
+  as_tibble(data.frame(
+    .name = get_coord(x),
     broom::tidy(x),
     stringsAsFactors = FALSE
   ))
-  tidyr::nest(res, -.name, -term, .key = "model")
 }
-clean_coordinates.mlm <- function(x) {
+
+get_u.mlm <- function(x) {
+  .intercept_col <- if (rownames(x$coefficients)[1] == "(Intercept)") {
+    .ic <- matrix(1L, nrow = nrow(x$model), ncol = 1)
+    colnames(.ic) <- "(Intercept)"
+    .ic
+  } else matrix(NA_integer_, nrow = nrow(x$model), ncol = 0)
+  cbind(.intercept_col, model.frame(x)[, -1])
+}
+
+get_v.mlm <- function(x) {
+  res <- t(x$coefficients)
+  colnames(res) <- get_coord(x)
+  res
+}
+
+get_coord.mlm <- function(x) {
   if (is.matrix(x$model[, -1])) {
     coord <- colnames(x$model[, -1])
   } else {
@@ -90,6 +91,27 @@ clean_coordinates.mlm <- function(x) {
     coord <- c("(Intercept)", coord)
   }
   coord
+}
+
+u_attr.mlm <- function(x) {
+  tibble(
+    .name = rownames(model.frame(x))
+  )
+}
+
+v_attr.mlm <- function(x) {
+  tibble(
+    .name = colnames(x$coefficients)
+  )
+}
+
+coord_attr.mlm <- function(x) {
+  res <- as_tibble(data.frame(
+    .name = get_coord(x),
+    broom::tidy(x),
+    stringsAsFactors = FALSE
+  ))
+  tidyr::nest(res, -.name, -term, .key = "model")
 }
 
 reconstruct.lm <- function(x) {

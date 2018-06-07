@@ -11,6 +11,7 @@ functions to augment the output of an ordination function to the original datase
 - `isoMDS()`
 - `svd`
 - `prcomp`, `princomp`, and [other PCA classes](http://www.gastonsanchez.com/visually-enforced/how-to/2012/06/17/PCA-in-R/)
+  - incorporate `inertia = c(1, 0)` parameter into `as_bibble()`
 - multidimensional scaling (MDS) with `cmdscale()`
 - `lda`
 - `ca` and [other CA classes](http://www.gastonsanchez.com/visually-enforced/how-to/2012/07/19/Correspondence-Analysis/)
@@ -26,20 +27,11 @@ the `bbl` class:
 - As long as `ggplot()` uses `fortify()` internally to handle objects, this package should use `fortify.bbl()` to convert ordination objects into data frames for plotting.
 - Determine how to retain inertia information, and for which classes.
 
-## extraction methods
-
-Get matrix factors, coordinates, subject and variable annotation, and formatted data from a `bibble`.
-- Incorporate `get_*()` into `fortify()` (options: `"u"`, `"v"`, `"both"`)
-- Change `factor_*()` to `get_factor()` + `get_u()` & `get_v()`
-- Change `attr_*()` to `factor_attr()` + `u_attr()` & `v_attr()`
-- Make `"coordinates"` a required attribute rather than an element
-
 ## coercion and attribution methods
 
 Coercion to class `bibble`:
 - Introduces two tibble attributes containing default variables, specific to each ordination class, associated with the matrix factors.
 - Introduces a `"coordinates"` attribute (a character vector).
-- 
 - Allows additional attributes to be added using adapted **dplyr** verbs.
 - Comes with additional methods, including `print()`, `get_factor()`, `factor_attr()`, `fortify()`, `regress_onto()`, `align_to()`, `reconstruct()`, and `ggbiplot()`.
 

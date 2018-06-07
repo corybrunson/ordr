@@ -1,21 +1,111 @@
 
+logisticPCA <- function(
+  x, k = 2, m = 4,
+  quiet = TRUE, partial_decomp = FALSE,
+  max_iters = 1000, conv_criteria = 1e-05,
+  random_start = FALSE,
+  ...,
+  main_effects = TRUE
+) {
+  lpca <- logisticPCA::logisticPCA(
+    x, k = k,
+    m = m, quiet = quiet, partial_decomp = partial_decomp,
+    max_iters = max_iters, conv_criteria = conv_criteria,
+    random_start = random_start,
+    ...,
+    main_effects = main_effects
+  )
+  rownames(lpca$U) <- colnames(x)
+  #rownames(lpca$PCs) <- rownames(x)
+  lpca
+}
+
+as_bibble.lpca <- function(x) {
+  class(x) <- c("bbl", class(x))
+  x
+}
+
+get_uv_lpca <- function(x, .matrix) {
+  .matrix <- match_factor(.matrix)
+  res <- x[[switch(.matrix, u = "PCs", v = "U")]]
+  colnames(res) <- get_coord(x)
+  res
+}
+get_u.lpca <- function(x) get_uv_lpca(x, "u")
+get_v.lpca <- function(x) get_uv_lpca(x, "v")
+
+get_coord.lpca <- function(x) paste0("LPC", 1:ncol(x$U))
+
+u_attr.lpca <- function(x) {
+  tibble(
+    .name = rownames(x$PCs)
+  )
+}
+
+v_attr.lpca <- function(x) {
+  tibble(
+    .name = rownames(x$U),
+    .mu = x$mu
+  )
+}
+
+coord_attr.lpca <- function(x) {
+  tibble(
+    .name = get_coord.lpca(x)
+  )
+}
+
+logisticSVD <- function(
+  x, k = 2,
+  quiet = TRUE, max_iters = 1000,
+  conv_criteria = 1e-05, random_start = FALSE,
+  ...,
+  partial_decomp = TRUE, main_effects = TRUE
+) {
+  lsvd <- logisticPCA::logisticSVD(
+    x = x, k = k,
+    quiet = quiet, max_iters = max_iters,
+    conv_criteria = conv_criteria, random_start = random_start,
+    ...,
+    partial_decomp = partial_decomp, main_effects = main_effects
+  )
+  rownames(lsvd$A) <- rownames(x)
+  rownames(lsvd$B) <- colnames(x)
+  lsvd
+}
+
 as_bibble.lsvd <- function(x) {
   class(x) <- c("bbl", class(x))
   x
 }
 
-get_uv_lsvd <- function(x, matrix) {
-  res <- x[[switch(matrix, u = "A", v = "B")]] %>%
-    as_tibble() %>%
-    setNames(paste0("SC", 1:ncol(.)))
-  if (matrix == "v") res <- mutate(res, .mu = x$mu)
+get_uv_lsvd <- function(x, .matrix) {
+  .matrix <- match_factor(.matrix)
+  res <- x[[switch(.matrix, u = "A", v = "B")]]
+  colnames(res) <- get_coord(x)
   res
 }
 get_u.lsvd <- function(x) get_uv_lsvd(x, "u")
 get_v.lsvd <- function(x) get_uv_lsvd(x, "v")
-get_coordinates.lsvd <- function(x) {
+
+get_coord.lsvd <- function(x) paste0("LSC", 1:ncol(x$A))
+
+u_attr.lsvd <- function(x) {
   tibble(
-    .name = paste0("SC", 1:ncol(x$A))
+    .name = rownames(x$A)
+  )
+}
+
+v_attr.lsvd <- function(x) {
+  tibble(
+    .name = rownames(x$B),
+    .mu = x$mu
+  )
+}
+
+coord_attr.lsvd <- function(x) {
+  tibble(
+    .name = get_coord.lsvd(x)
   )
 }
 
