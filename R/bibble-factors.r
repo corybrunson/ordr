@@ -8,7 +8,6 @@
 #'   standard values are \code{"u"} and \code{"v"}.
 #'   
 
-# REPLACE `get_*()` with `data_*()`?
 #' @rdname bibble-factors
 #' @export
 get_u <- function(x) UseMethod("get_u")
@@ -30,12 +29,14 @@ get_factor <- function(x, .matrix) {
 #' @export
 get_coord <- function(x) UseMethod("get_coord")
 
+# need 'get_*' functions before and after coercion; 'get_*.bbl' are unnecessary
 get_u.default <- function(x) x$u
 get_v.default <- function(x) x$v
-get_coord.default <- function(x) x$coord
-# need 'get_*' functions before and after coercion; 'get_*.bbl' are unnecessary
+get_coord.default <- function(x) {
+  intersect(colnames(get_u(x)), colnames(get_v(x)))
+}
 
-# for fortified bibbles
+# for fortified bibbles (also coordinates?)
 get_u.data.frame <- function(x) {
   x$.matrix <- as.numeric(x$.matrix)
   x[x$.matrix == 1, -match(".matrix", names(x))]

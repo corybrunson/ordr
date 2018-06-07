@@ -37,16 +37,24 @@ get_v.lpca <- function(x) get_uv_lpca(x, "v")
 get_coord.lpca <- function(x) paste0("LPC", 1:ncol(x$U))
 
 u_attr.lpca <- function(x) {
-  tibble(
-    .name = rownames(x$PCs)
-  )
+  .name <- rownames(x$PCs)
+  res <- if (is.null(.name)) {
+    tibble_pole(nrow(x$PCs))
+  } else {
+    tibble(.name = .name)
+  }
+  res
 }
 
 v_attr.lpca <- function(x) {
-  tibble(
-    .name = rownames(x$U),
-    .mu = x$mu
-  )
+  .name <- rownames(x$U)
+  res <- if (is.null(.name)) {
+    tibble_pole(nrow(x$U))
+  } else {
+    tibble(.name = .name)
+  }
+  res$.mu <- x$mu
+  res
 }
 
 coord_attr.lpca <- function(x) {

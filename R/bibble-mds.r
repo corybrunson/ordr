@@ -25,15 +25,23 @@ get_v.cmds <- function(x) get_uv_cmds(x, "v")
 get_coord.cmds <- function(x) paste0("PCo", 1:ncol(x$points))
 
 u_attr.cmds <- function(x) {
-  tibble(
-    .name = dimnames(x$x)[[1]]
-  )
+  .name <- rownames(x$x)
+  res <- if (is.null(.name)) {
+    tibble_pole(nrow(x$x))
+  } else {
+    tibble(.name = .name)
+  }
+  res
 }
 
 v_attr.cmds <- function(x) {
-  tibble(
-    .name = dimnames(x$x)[[2]]
-  )
+  .name <- colnames(x$x)
+  res <- if (is.null(.name)) {
+    tibble_pole(ncol(x$x))
+  } else {
+    tibble(.name = .name)
+  }
+  res
 }
 
 coord_attr.cmds <- function(x) {

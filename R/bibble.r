@@ -12,11 +12,11 @@
 
 #' @name bibble
 #' @param x An ordination object.
-#' @param u,v Matrices or data frames to be used as factors of a bibble.
-#' @param coordinates Matrix, data frame, or character vector taken to be the
-#'   shared coordinates of a bibble.
+#' @param u,v Matrices to be used as factors of a bibble.
+#' @param coord Character vector taken to be the shared coordinates of \code{u}
+#'   and \code{v}.
 #' @param ... Parameters passed to other methods.
-#' 
+#'   
 
 #' @rdname bibble
 #' @export
@@ -26,29 +26,28 @@ as_bibble.bbl <- function(x) x
 
 #' @rdname bibble
 #' @export
-make_bibble <- function(
-  u = NULL, v = NULL, coordinates = NULL,
-  ...
-) {
-  if (!all(coordinates %in% intersect(names(u), names(v)))) {
-    stop("Coordinates must be fields shared by `u` and `v`.")
+make_bibble <- function(u = NULL, v = NULL, ...) {
+  if (!is.matrix(u) || !is.matrix(v) || ncol(u) == ncol(v)) {
+    stop("`u` and `v` must be matrices having the same number of columns.")
   }
-  res <- list(
-    u = u,
-    v = v,
-    coordinates = coordinates
-  )
-  class(res) <- c("bbl", "list")
-  attr(res, "preclass") <- setdiff(class(x), "bbl")
+  if (!is.null(colnames(u)) & !is.null(colnames(v))) {
+    if (any(colnames(u) != colnames(v))) {
+      stop("`u` and `v` must have the same column names.")
+    }
+  }
+  res <- list(u = u, v = v)
+  class(res) <- c("bbl", class(res))
   res
 }
 
 #' @rdname bibble
 #' @export
 is.bibble <- function(x) {
-  res <- inherits(x, "bbl") &
-    all(get_coordinates(x)$.name %in% names(get_u(x))) &
-    all(get_coordinates(x)$.name %in% names(get_v(x))) &
-    (!is.null(attr(x, "preclass")) | !is.null(setdiff(class(x), "bbl")))
-  res
+  if (!inherits(x, "bbl")) return(FALSE)
+  if (is.null(get_coord(x)) ||
+      is.null(get_u(x)) ||
+      is.null(get_v(x))) return(FALSE)
+  if (!all(get_coord(x) %in% colnames(get_u(x)))) return(FALSE)
+  if (!all(get_coord(x) %in% colnames(get_v(x)))) return(FALSE)
+  TRUE
 }

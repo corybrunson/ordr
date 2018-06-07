@@ -10,25 +10,31 @@ get_u.lm <- function(x) {
     colnames(.ic) <- "(Intercept)"
     .ic
   } else matrix(NA_integer_, nrow = nrow(x$model), ncol = 0)
-  #cbind(.intercept_col, as.matrix(x$model[, -1]))
-  cbind(.intercept_col, model.frame(x)[, -1])
+  .predictors <- as.matrix(model.frame(x)[, -1])
+  res <- cbind(.intercept_col, .predictors)
+  colnames(res) <- get_coord(x)
+  res
 }
 
 get_v.lm <- function(x) {
   res <- t(x$coefficients)
-  dimnames(res) <- list(names(x$model)[1], get_coord(x))
+  dimnames(res) <- list(
+    if (is.matrix(x$model[, 1])) colnames(x$model[, 1]) else names(x$model)[1],
+    get_coord(x)
+  )
   res
 }
 
 get_coord.lm <- function(x) {
-  if (is.matrix(x$model[, -1])) {
-    coord <- colnames(x$model[, -1])
+  .predictors <- x$model[, -1]
+  if (is.matrix(.predictors)) {
+    coord <- colnames(.predictors)
   } else {
-    coord <- names(x$model[, -1])
-    mat_coord <- which(sapply(x$model[, -1], is.matrix))
+    coord <- names(.predictors)
+    mat_coord <- which(sapply(.predictors, is.matrix))
     coord[mat_coord] <- unname(unlist(lapply(
       mat_coord,
-      function(i) colnames(x$model[, -1][, i])
+      function(i) colnames(.predictors[, i])
     )))
   }
   if (names(x$coefficients)[1] == "(Intercept)") {
@@ -49,7 +55,11 @@ u_attr.lm <- function(x) {
 
 v_attr.lm <- function(x) {
   tibble(
-    .name = names(x$model)[1]
+    .name = if (is.matrix(x$model[, 1])) {
+      colnames(x$model[, 1])
+    } else {
+      names(x$model)[1]
+    }
   )
 }
 
@@ -67,7 +77,10 @@ get_u.mlm <- function(x) {
     colnames(.ic) <- "(Intercept)"
     .ic
   } else matrix(NA_integer_, nrow = nrow(x$model), ncol = 0)
-  cbind(.intercept_col, model.frame(x)[, -1])
+  .predictors <- as.matrix(model.frame(x)[, -1])
+  res <- cbind(.intercept_col, .predictors)
+  colnames(res) <- get_coord(x)
+  res
 }
 
 get_v.mlm <- function(x) {
@@ -77,14 +90,15 @@ get_v.mlm <- function(x) {
 }
 
 get_coord.mlm <- function(x) {
-  if (is.matrix(x$model[, -1])) {
-    coord <- colnames(x$model[, -1])
+  .predictors <- x$model[, -1]
+  if (is.matrix(.predictors)) {
+    coord <- colnames(.predictors)
   } else {
-    coord <- names(x$model[, -1])
-    mat_coord <- which(sapply(x$model[, -1], is.matrix))
+    coord <- names(.predictors)
+    mat_coord <- which(sapply(.predictors, is.matrix))
     coord[mat_coord] <- unname(unlist(lapply(
       mat_coord,
-      function(i) colnames(x$model[, -1][, i])
+      function(i) colnames(.predictors[, i])
     )))
   }
   if (rownames(x$coefficients)[1] == "(Intercept)") {

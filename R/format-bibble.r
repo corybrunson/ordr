@@ -80,7 +80,7 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   uv_footer <- stringr::str_replace_all(
     uv_footer,
     "#",
-    paste0("#", stringr::str_pad("", coord_width))
+    paste0("#", stringr::str_pad("", coord_width + ifelse(n_coords > 3, 4, 0)))
   )
   
   seps <- if (n_coords > 3) c("    ", " ...") else c("", "")
@@ -131,7 +131,7 @@ bbl_sum <- function(x) UseMethod("bbl_sum")
 bbl_sum.bbl <- function(x) {
   prev_class <- setdiff(class(x), "bbl")[1]
   bbl_descr <- if (!is.null(prev_class) && prev_class != "list") {
-    paste0("# A bibble-wrapped '", prev_class, "' object")
+    paste0("# A '", prev_class, "' bibble")
   } else {
     paste0("# A bibble")
   }
