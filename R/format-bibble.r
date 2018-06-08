@@ -2,36 +2,52 @@
 format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
   # dimensional parameters
-  uv_rows <- sapply(get_factor(x, "uv"), nrow)
-  x_coords <- get_coord(x)
-  n_coords <- length(x_coords)
+  uv <- get_factor(x, "uv")
+  uv_dims <- sapply(uv, dim)
+  x_coord <- get_coord(x)
+  rk <- length(x_coord)
+  uv_att <- factor_attr(x, "uv")
+  n_att <- sapply(uv_att, ncol)
   if (is.null(n)) {
     n <- ifelse(
-      uv_rows > op.bibble$bibble.print_max,
-      op.bibble$bibble.print_min,
-      uv_rows
+      uv_dims[1, ] > bibble_opt("print_max"),
+      bibble_opt("print_min"),
+      uv_dims[1, ]
     )
   }
-  width <- width %||% op.bibble$bibble.width %||% getOption("width")
+  width <- width %||% bibble_opt("width") %||% getOption("width")
   uv_extra <- set_names(rep(
-    n_extra %||% op.bibble$bibble.max_extra_cols,
+    n_extra %||% bibble_opt("max_extra_cols"),
     length.out = 2
   ), c("u", "v"))
   
   # headers!
-  header <- bbl_sum(x)
+  prev_class <- setdiff(class(x), "bbl")[1]
+  bbl_descr <- if (!is.null(prev_class) && prev_class != "list") {
+    paste0("# A '", prev_class, "' bibble")
+  } else {
+    paste0("# A bibble")
+  }
+  header <- paste0(
+    bbl_descr,
+    ": (", uv_dims[1, 1], " x ", rk, ") x (", uv_dims[1, 2], " x ", rk, ")'"
+  )
   coord_sum <- paste0(
-    "# ", n_coords, " coordinate", ifelse(n_coords == 1, "", "s"), ": ",
-    print_reps(x_coords)
+    "# ", rk, " coordinate", ifelse(rk == 1, "", "s"), ": ",
+    print_reps(x_coord)
   )
   
   # format U and V together first, then split
+  uv_sums <- set_names(paste0(
+    "# ", c("U", "V"),
+    ": [ ", uv_dims[1, ], " x ", uv_dims[2, ], " | ", n_att, " ]"
+  ), c("u", "v"))
   fmts_coord <- format(select(
     rbind(
-      as_tibble(get_u(x))[1:n[1], , drop = FALSE],
-      as_tibble(get_v(x))[1:n[2], , drop = FALSE]
+      as_tibble(uv$u)[1:n[1], , drop = FALSE],
+      as_tibble(uv$v)[1:n[2], , drop = FALSE]
     ),
-    1:min(n_coords, 3)
+    1:min(rk, 3)
   ), n = sum(n), width = width)
   wh_rows <- which(stringr::str_detect(fmts_coord, "^ *[0-9]+ "))
   id_width <- diff(as.vector(unique(stringr::str_locate(
@@ -40,13 +56,13 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   )[wh_rows, , drop = FALSE])))
   fmt_coord <- list(
     u = unname(c(
-      tbl_sum(x)["u"],
+      uv_sums["u"],
       fmts_coord[2],
       stringr::str_pad("", nchar(fmts_coord[2])),
       fmts_coord[wh_rows[1:n[1]]]
     )),
     v = unname(c(
-      tbl_sum(x)["v"],
+      uv_sums["v"],
       fmts_coord[2],
       stringr::str_pad("", nchar(fmts_coord[2])),
       str_replace(
@@ -60,7 +76,7 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
   uv_footer <- set_names(c("", ""), c("u", "v"))
   fmt_ann <- lapply(c("u", "v"), function(.matrix) {
-    fmt <- factor_attr(x, .matrix)
+    fmt <- uv_att[[.matrix]]
     if (ncol(fmt) == 0) return("")
     fmt <- format(fmt, n = n[.matrix], width = width - coord_width - 7)
     # blank header
@@ -80,10 +96,10 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   uv_footer <- stringr::str_replace_all(
     uv_footer,
     "#",
-    paste0("#", stringr::str_pad("", coord_width + ifelse(n_coords > 3, 4, 0)))
+    paste0("#", stringr::str_pad("", coord_width + ifelse(rk > 3, 4, 0)))
   )
   
-  seps <- if (n_coords > 3) c("    ", " ...") else c("", "")
+  seps <- if (rk > 3) c("    ", " ...") else c("", "")
   fmt_seps <- mapply(
     function(x, y) {
       sep_dots_rows <- ceiling(c(2, (y - 2) / 2 + 2))
@@ -118,35 +134,28 @@ print.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 
 # settings
 
-# this trick is borrowed from **tibble**
+# this trick is borrowed from *tibble*
 op.bibble <- list(
   bibble.print_max = 10L,
   bibble.print_min = 5L,
   bibble.width = NULL,
-  bibble.coord_prop = .6,
-  bibble.max_extra_cols = 60
+  bibble.max_extra_cols = 50L
 )
 
-bbl_sum <- function(x) UseMethod("bbl_sum")
-bbl_sum.bbl <- function(x) {
-  prev_class <- setdiff(class(x), "bbl")[1]
-  bbl_descr <- if (!is.null(prev_class) && prev_class != "list") {
-    paste0("# A '", prev_class, "' bibble")
-  } else {
-    paste0("# A bibble")
+bibble_opt <- function(x) {
+  x_bibble <- paste0("bibble.", x)
+  res <- getOption(x_bibble)
+  if (!is.null(res)) {
+    return(res)
   }
-  n_u <- nrow(get_u(x))
-  n_v <- nrow(get_v(x))
-  n_c <- length(get_coord(x))
-  paste0(bbl_descr, ": (", n_u, " x ", n_c, ") x (", n_v, " x ", n_c, ")'")
-}
-tbl_sum.bbl <- function(x) {
-  m <- sapply(get_factor(x, "uv"), dim)
-  a <- sapply(factor_attr(x, "uv"), dim)
-  set_names(paste0(
-    "# ", c("U", "V"),
-    ": [ ", m[1, ], " x ", m[2, ], " | ", a[2, ], " ]"
-  ), c("u", "v"))
+  
+  x_tibble <- paste0("tibble.", x)
+  res <- getOption(x_tibble)
+  if (!is.null(res)) {
+    return(as.integer(res / 2))
+  }
+  
+  op.bibble[[x_bibble]]
 }
 
 print_reps <- function(x) {
