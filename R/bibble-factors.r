@@ -48,23 +48,23 @@ get_v.data.frame <- function(x) {
 
 #' @rdname bibble-factors
 #' @export
-u_attr <- function(x) UseMethod("u_attr")
+u_annot <- function(x) UseMethod("u_annot")
 #' @rdname bibble-factors
 #' @export
-v_attr <- function(x) UseMethod("v_attr")
+v_annot <- function(x) UseMethod("v_annot")
 #' @rdname bibble-factors
 #' @export
-factor_attr <- function(x, .matrix) {
+factor_annot <- function(x, .matrix) {
   switch(
     match_factor(.matrix),
-    u = u_attr(x),
-    v = v_attr(x),
-    uv = list(u = u_attr(x), v = v_attr(x))
+    u = u_annot(x),
+    v = v_annot(x),
+    uv = list(u = u_annot(x), v = v_annot(x))
   )
 }
 #' @rdname bibble-factors
 #' @export
-coord_attr <- function(x) UseMethod("coord_attr")
+coord_annot <- function(x) UseMethod("coord_annot")
 
 bibble_factors <- c(
   u = "u", v = "v", uv = "uv",

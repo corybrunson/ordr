@@ -6,7 +6,7 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   uv_dims <- sapply(uv, dim)
   x_coord <- get_coord(x)
   rk <- length(x_coord)
-  uv_att <- factor_attr(x, "uv")
+  uv_att <- factor_annot(x, "uv")
   n_att <- sapply(uv_att, ncol)
   if (is.null(n)) {
     n <- ifelse(

@@ -43,7 +43,7 @@ get_coord.lm <- function(x) {
   coord
 }
 
-u_attr.lm <- function(x) {
+u_annot.lm <- function(x) {
   res <- tibble(.name = rownames(model.frame(x)))
   .int <- as.integer(names(x$coefficients)[1] == "(Intercept)")
   .rk <- x$rank
@@ -53,7 +53,7 @@ u_attr.lm <- function(x) {
   )
 }
 
-v_attr.lm <- function(x) {
+v_annot.lm <- function(x) {
   tibble(
     .name = if (is.matrix(x$model[, 1])) {
       colnames(x$model[, 1])
@@ -63,7 +63,7 @@ v_attr.lm <- function(x) {
   )
 }
 
-coord_attr.lm <- function(x) {
+coord_annot.lm <- function(x) {
   as_tibble(data.frame(
     .name = get_coord(x),
     broom::tidy(x),
@@ -107,19 +107,19 @@ get_coord.mlm <- function(x) {
   coord
 }
 
-u_attr.mlm <- function(x) {
+u_annot.mlm <- function(x) {
   tibble(
     .name = rownames(model.frame(x))
   )
 }
 
-v_attr.mlm <- function(x) {
+v_annot.mlm <- function(x) {
   tibble(
     .name = colnames(x$coefficients)
   )
 }
 
-coord_attr.mlm <- function(x) {
+coord_annot.mlm <- function(x) {
   res <- as_tibble(data.frame(
     .name = get_coord(x),
     broom::tidy(x),

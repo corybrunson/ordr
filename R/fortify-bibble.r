@@ -2,20 +2,20 @@
 fortify.bbl <- function(
   ordination,
   .matrix = "uv",
-  include = "shared"
+  include = "all"
 ) {
   .matrix <- match_factor(.matrix)
   if (grepl("u", .matrix)) {
     u <- bind_cols(
       as_tibble(get_u(ordination)),
-      u_attr(ordination)
+      u_annot(ordination)
     )
     u$.matrix <- "u"
   }
   if (grepl("v", .matrix)) {
     v <- bind_cols(
       as_tibble(get_v(ordination)),
-      v_attr(ordination)
+      v_annot(ordination)
     )
     v$.matrix <- "v"
   }

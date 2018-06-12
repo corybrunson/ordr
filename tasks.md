@@ -30,21 +30,16 @@ Coercion to class `"bbl"`:
 - Comes with the following methods:
   - `get_factor()` (`get_u()` & `get_v()`): Extract either or both matrix factors comprising the ordination object.
   - `get_coord()`: Extract the names of the model/latent coordinates shared by the matrix factors.
-  - `factor_attr()` (`u_attr()` & `v_attr()`): Extract either or both subject- and variable-level attributes, other than the coordinates, from the ordination object, as tibbles. For example: names (both), residuals from a linear regression model (subject-level) or the amount of variance explained by each principal component in a PCA (variable-level).
-  - `coord_attr()`: Extract a tibble containing any attributes of the shared coordinates, for example the eigenvalues associated with the dimensions of an MDS.
-  - `print()`: Print a concise summary of matrix factors and their attributes similar to the method for class `"tbl"`; uses `get_factor()`, `factor_attr()`, and `get_coord()`
+  - `factor_annot()` (`u_annot()` & `v_annot()`): Extract either or both subject- and variable-level attributes, other than the coordinates, from the ordination object, as tibbles. For example: names (both), residuals from a linear regression model (subject-level) or the amount of variance explained by each principal component in a PCA (variable-level).
+  - `coord_annot()`: Extract a tibble containing any attributes of the shared coordinates, for example the eigenvalues associated with the dimensions of an MDS.
+  - `print()`: Print a concise summary of matrix factors and their attributes similar to the method for class `"tbl"`; uses `get_factor()`, `factor_annot()`, and `get_coord()`
   - `fortify()`: Produce a tibble for either or both matrix factors, including their coordinates and optionally shared or all attributes, for use in rectangular data processing or plotting.
+  - `plot()` and `biplot()`: Produce a base R biplot of the subjects and variables on their shared coordinates, unless a method already exists for the original ordination class.
   - `ggbiplot()`: Produce a two-dimensional biplot of the ordination object, using the first two shared coordinates by default (`aes(x = 1, y = 2)`) but allowing specification to any shared coordinates.
   - `predict()`: Ordinate new subjects observed along the original variables.
   - `supplement()`: Ordinate new variables measured for the original subjects.
   - `reconstruct()`: Approximate the original data table by multiplying the matrix factors and invoking any transformations remembered by the ordination object; uses `get_factor()`.
 - Allows additional attributes to be augmented to the matrix factors and their shared coordinates as tibble attributes (`"attr_u"`, `"attr_v"`, `"attr_coord"`) using adapted **dplyr** verbs.
-
-## formatting methods
-
-`print.bbl`: Separate the matrices (by way of coordinates) from the annotation variables, maybe by a vertical line?
-
-`plot.bbl`: `fortify() %>% plot()`?
 
 ## verbs
 

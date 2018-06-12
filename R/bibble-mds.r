@@ -24,7 +24,7 @@ get_v.cmds <- function(x) get_uv_cmds(x, "v")
 
 get_coord.cmds <- function(x) paste0("PCo", 1:ncol(x$points))
 
-u_attr.cmds <- function(x) {
+u_annot.cmds <- function(x) {
   .name <- rownames(x$x)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$x))
@@ -34,7 +34,7 @@ u_attr.cmds <- function(x) {
   res
 }
 
-v_attr.cmds <- function(x) {
+v_annot.cmds <- function(x) {
   .name <- colnames(x$x)
   res <- if (is.null(.name)) {
     tibble_pole(ncol(x$x))
@@ -44,7 +44,7 @@ v_attr.cmds <- function(x) {
   res
 }
 
-coord_attr.cmds <- function(x) {
+coord_annot.cmds <- function(x) {
   tibble(
     .name = get_coord(x),
     .eig = x$eig[1:ncol(x$points)]

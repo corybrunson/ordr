@@ -36,7 +36,7 @@ get_v.lpca <- function(x) get_uv_lpca(x, "v")
 
 get_coord.lpca <- function(x) paste0("LPC", 1:ncol(x$U))
 
-u_attr.lpca <- function(x) {
+u_annot.lpca <- function(x) {
   .name <- rownames(x$PCs)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$PCs))
@@ -46,7 +46,7 @@ u_attr.lpca <- function(x) {
   res
 }
 
-v_attr.lpca <- function(x) {
+v_annot.lpca <- function(x) {
   .name <- rownames(x$U)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$U))
@@ -57,7 +57,7 @@ v_attr.lpca <- function(x) {
   res
 }
 
-coord_attr.lpca <- function(x) {
+coord_annot.lpca <- function(x) {
   tibble(
     .name = get_coord.lpca(x)
   )
@@ -98,20 +98,20 @@ get_v.lsvd <- function(x) get_uv_lsvd(x, "v")
 
 get_coord.lsvd <- function(x) paste0("LSC", 1:ncol(x$A))
 
-u_attr.lsvd <- function(x) {
+u_annot.lsvd <- function(x) {
   tibble(
     .name = rownames(x$A)
   )
 }
 
-v_attr.lsvd <- function(x) {
+v_annot.lsvd <- function(x) {
   tibble(
     .name = rownames(x$B),
     .mu = x$mu
   )
 }
 
-coord_attr.lsvd <- function(x) {
+coord_annot.lsvd <- function(x) {
   tibble(
     .name = get_coord.lsvd(x)
   )
