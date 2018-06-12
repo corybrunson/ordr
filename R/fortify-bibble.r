@@ -1,6 +1,4 @@
 
-#' @rdname ggbiplot
-#' @export
 fortify.bbl <- function(
   ordination,
   .matrix = "uv",

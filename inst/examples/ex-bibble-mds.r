@@ -20,6 +20,12 @@ x2 <- country_attributes %>%
 gg <- ggbiplot(b, aes(x = PCo1, y = PCo2)) +
   geom_v_text(aes(label = .name))
 gg
+# default aesthetic assignments
+ggbiplot(b) +
+  geom_v_text(aes(label = .name))
+# numeric aesthetic assignments
+ggbiplot(b, aes(x = 2, y = 1)) +
+  geom_v_text(aes(label = .name))
 # regress the attributes on the plotting dimensions and annotate the biplot
 fit <- lm(x2 ~ get_u(b)) %>% as_bibble()
 gg +

@@ -10,7 +10,7 @@ functions to augment the output of an ordination function to the original datase
 - `lm`, `mlm`, and `glm`
 - `isoMDS()`
 - `svd`
-- `prcomp`, `princomp`, and [other PCA classes](http://www.gastonsanchez.com/visually-enforced/how-to/2012/06/17/PCA-in-R/)
+- `prcomp`, `princomp`, `psych::principal()`, and [other PCA functions and classes](http://www.gastonsanchez.com/visually-enforced/how-to/2012/06/17/PCA-in-R/)
   - incorporate `inertia = c(1, 0)` parameter into `as_bibble()`
 - multidimensional scaling (MDS) with `cmdscale()`
 - `lda`
@@ -20,21 +20,25 @@ functions to augment the output of an ordination function to the original datase
 - `NMF`
 - [other matrix decomposition methods](http://scikit-learn.org/stable/modules/decomposition.html)
 
-the `bbl` class:
-- `as_bibble()` wraps a biplot object with the `bbl` class so that methods can extract basic information (matrix factors, coordinates) necessary for printing and visualization
-- `to_bibble()` flattens a biplot object into a list of basic matrix factorization information from which the original object is unrecoverable
-- Decide whether `bbl` objects should be stored (a) as separate $U$ and $V$ tibbles or (b) as a single tibble with a `.matrix` variable (so that `tidy()` simply removes the `bbl` class and certain attributes).
-- As long as `ggplot()` uses `fortify()` internally to handle objects, this package should use `fortify.bbl()` to convert ordination objects into data frames for plotting.
-- Determine how to retain inertia information, and for which classes.
-
 ## coercion and attribution methods
 
-Coercion to class `bibble`:
-- Introduces two tibble attributes containing default variables, specific to each ordination class, associated with the matrix factors.
-- Introduces a `"coordinates"` attribute (a character vector).
-- Allows additional attributes to be added using adapted **dplyr** verbs.
-- Comes with additional methods, including `print()`, `get_factor()`, `factor_attr()`, `fortify()`, `regress_onto()`, `align_to()`, `reconstruct()`, and `ggbiplot()`.
+the `"bbl"` class:
+- `as_bibble()` wraps a biplot object with the `"bbl"` class so that methods can extract basic information (matrix factors, coordinates) necessary for printing and visualization
+- As long as `ggplot()` uses `fortify()` internally to handle objects, this package should use `fortify.bbl()` to convert ordination objects into data frames for plotting.
 
+Coercion to class `"bbl"`:
+- Comes with the following methods:
+  - `get_factor()` (`get_u()` & `get_v()`): Extract either or both matrix factors comprising the ordination object.
+  - `get_coord()`: Extract the names of the model/latent coordinates shared by the matrix factors.
+  - `factor_attr()` (`u_attr()` & `v_attr()`): Extract either or both subject- and variable-level attributes, other than the coordinates, from the ordination object, as tibbles. For example: names (both), residuals from a linear regression model (subject-level) or the amount of variance explained by each principal component in a PCA (variable-level).
+  - `coord_attr()`: Extract a tibble containing any attributes of the shared coordinates, for example the eigenvalues associated with the dimensions of an MDS.
+  - `print()`: Print a concise summary of matrix factors and their attributes similar to the method for class `"tbl"`; uses `get_factor()`, `factor_attr()`, and `get_coord()`
+  - `fortify()`: Produce a tibble for either or both matrix factors, including their coordinates and optionally shared or all attributes, for use in rectangular data processing or plotting.
+  - `ggbiplot()`: Produce a two-dimensional biplot of the ordination object, using the first two shared coordinates by default (`aes(x = 1, y = 2)`) but allowing specification to any shared coordinates.
+  - `predict()`: Ordinate new subjects observed along the original variables.
+  - `supplement()`: Ordinate new variables measured for the original subjects.
+  - `reconstruct()`: Approximate the original data table by multiplying the matrix factors and invoking any transformations remembered by the ordination object; uses `get_factor()`.
+- Allows additional attributes to be augmented to the matrix factors and their shared coordinates as tibble attributes (`"attr_u"`, `"attr_v"`, `"attr_coord"`) using adapted **dplyr** verbs.
 
 ## formatting methods
 
