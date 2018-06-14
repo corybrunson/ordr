@@ -29,14 +29,11 @@ ggbiplot(b, aes(x = 2, y = 1)) +
 # regress the attributes on the plotting dimensions and annotate the biplot
 fit <- lm(x2 ~ get_u(b)) %>% as_bibble()
 gg +
-  geom_v_vector(data = fit) +
-  geom_v_text(data = fit, aes(label = .name))
+  geom_v_axis(data = fit, aes(label = .name))
 gg +
-  geom_v_vector(data = fit) +
-  geom_v_text(data = fortify(fit, include = "all"), aes(label = .name))
+  geom_v_axis(data = fortify(fit, include = "all"), aes(label = .name))
 gg +
-  geom_v_vector(data = fit) +
-  geom_text(data = fortify(fit, "v"), aes(label = .name))
+  geom_v_axis(data = fortify(fit, "v"), aes(label = .name))
 
 # must add aesthetic `.matrix = NULL` to use new data without `.matrix` column
 # (this should be remedied)
