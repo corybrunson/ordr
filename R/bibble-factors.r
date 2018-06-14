@@ -25,6 +25,8 @@ get_factor <- function(x, .matrix) {
   )
 }
 
+as.matrix.bbl <- get_factor
+
 #' @rdname bibble-factors
 #' @export
 get_coord <- function(x) UseMethod("get_coord")

@@ -38,16 +38,28 @@ Coercion to class `"bbl"`:
   - `ggbiplot()`: Produce a two-dimensional biplot of the ordination object, using the first two shared coordinates by default (`aes(x = 1, y = 2)`) but allowing specification to any shared coordinates.
   - `predict()`: Ordinate new subjects observed along the original variables.
   - `supplement()`: Ordinate new variables measured for the original subjects.
-  - `reconstruct()`: Approximate the original data table by multiplying the matrix factors and invoking any transformations remembered by the ordination object; uses `get_factor()`.
-- Allows additional attributes to be augmented to the matrix factors and their shared coordinates as tibble attributes (`"attr_u"`, `"attr_v"`, `"attr_coord"`) using adapted **dplyr** verbs.
+  - `reconstruct()`: Approximate the original data table by multiplying the matrix factors and invoking any transformations remembered by the ordination object; uses `get_factor()`. May encode the formula in the method or as a formula object in the bibble (e.g. in case some ordination methods have dropped parameters).
+- Allows additional attributes to be augmented to the matrix factors as tibble attributes (`"annot_u"` and `"annot_v"`) using adapted **dplyr** verbs.
 
 ## verbs
 
-### bibble to vector
+### structural verbs
+
+`transpose()`/`dualize()`: Interchange $U$ and $V$.
+
+`rotate_by()`: Transform one factorization into another by a nonsingular rank-$r$ matrix.
+
+Functions to calculate individual observations' or variables' contributions to error (SSE, stress, etc.), outlier/inlier status, or other atypicalities.
+
+`regress_onto()`: ?
+
+`align_with()`: Reorder the coordinates and/or flip their signs, when consistent with the meaning imbued in the factorization, to minimize the angle between the coordinates of an index bibble and those of an alter bibble or suitable matrix object.
+
+### **dplyr** verbs to update annotation
+
+_This functionality is of questionable utility and low-priority._
 
 `pull_*()`: Extract an annotation from either $U$ or $V$.
-
-### bibble to bibble
 
 `select_*()`/`rename_*()`: Restrict to and/or rename annotation while keeping all coordinates.
 
@@ -59,31 +71,9 @@ Coercion to class `"bbl"`:
 
 `summarise_*()` or `amass_*()`: Replace $U$ or $V$ with centroids from a partition.
 
-`transpose()`/`dualize()`: Interchange $U$ and $V$.
+`bind_u()` & `bind_v()`: Add new rows of $U$ and/or $V$ without changing the matrix transformations.
 
-`rotate_*()`: Transform one factorization into another by a nonsingular rank-$r$ matrix.
-
-Functions to calculate individual observations' or variables' contributions to error (SSE, stress, etc.), outlier/inlier status, or other atypicalities.
-
-### bibble and tibble to bibble
-
-`regress_onto()`: ?
-
-`bind_u()` & `bind_v()`: Add new rows of $U$ and/or $V$ without changing the matrix transformations. _This functionality is of questionable utility and low-priority._
-
-### two bibbles to one bibble
-
-`bind()`: Augment the coordinates, and therefore both the $U$s and the $V$s, of two bibbles, leaving values of each zero at the other's coordinates (i.e. block matrices). _This functionality is of questionable utility and low-priority._
-
-`align_with()`: Reorder the coordinates and/or flip their signs, when consistent with the meaning imbued in the factorization, to minimize the angle between the coordinates of an index bibble and those of an alter bibble or suitable matrix object.
-
-### bibble to tibble
-
-`get_*()`/`factor_*()`: Extract the annotated tibble form or the unannotated matrix form of $U$ or $V$.
-
-`reconstruct()`: Multiply $U$ and $V'$ to recover or estimate the original data table or _target matrix_. More generally, include in each bibble a set of instructions (a formula?) for how to recover the raw data from the bibble and its annotations.
-
-### extend methods from flattened bibbles to wrapped bibbles
+`bind()`: Augment the coordinates, and therefore both the $U$s and the $V$s, of two bibbles, leaving values of each zero at the other's coordinates (i.e. block matrices).
 
 ## plotting
 
@@ -91,32 +81,34 @@ Incorporate `inertia` argument to `fortify()` and/or to `stat_biplot()`. Careful
 
 Develop a generalized scree plot (`ggord() + geom_scree()`?) with options (variance explained, stress, etc.) appropriate to classes.
 
-### plot layers
+## plot layers
 
-`*_isoline()`: Ensure that isolines respect non-linear transformations (e.g. `glm`).
-
-### groupable plot layers
-
-`*_centroid()`: Plot centroids as points, using the `group` aesthetic.
-
-`*_ellipse()`: As in **ggbiplot**, using the `group` aesthetic. Include confidence ellipses, standard error ellipses, and ellipsoid hulls.
-
-### non-aesthetic plot layers
+### non-variable plot layers
 
 `*_unit_circle()`: Plot a unit circle.
 
+### variable layers
+
+`*_*_text()` and `*_*_label()`: Option to align text with vectors, as in **ggbiplot**.
+
+### single-row layers
+
+`*_*_isoline()`: Draw isolines for a specific variable. Ensure that isolines respect non-linear transformations (e.g. `glm`).
+
+### group layers
+
+`*_*_centroid()`: Plot centroids as points, using the `group` aesthetic.
+
+`*_*_ellipse()`: As in **ggbiplot**, using the `group` aesthetic. Include confidence ellipses, standard error ellipses, and ellipsoid hulls.
+
 Implement an option to calibrate, in the Greenacre sense.
-
-### text layers
-
-Option to align text with vectors, as in **ggbiplot**.
 
 ## documentation
 
 ### summary information
 
 Include keywords in the description: "biplot", "(linear) ordination" ([helpfully defined by János Podani](http://ramet.elte.hu/~podani/7-Ordination.pdf)), "geometric data analysis".
-Consider these when deciding on a final name.
+Consider these when deciding on a final name. Candidates: **tidybiplot**, **ordin8r**, **ordy**
 
 ### theory
 
@@ -129,5 +121,3 @@ Identify the calculations (e.g. projections) and visual elements (e.g. ellipses)
 Include thorough **testthat** examples of all methods.
 
 ## performance
-
-### C++ implementations

@@ -6,8 +6,8 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   uv_dims <- sapply(uv, dim)
   x_coord <- get_coord(x)
   rk <- length(x_coord)
-  uv_att <- factor_annot(x, "uv")
-  n_att <- sapply(uv_att, ncol)
+  uv_ann <- factor_annot(x, "uv")
+  n_ann <- sapply(uv_ann, ncol)
   if (is.null(n)) {
     n <- ifelse(
       uv_dims[1, ] > bibble_opt("print_max"),
@@ -40,7 +40,7 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   # format U and V together first, then split
   uv_sums <- set_names(paste0(
     "# ", c("U", "V"),
-    ": [ ", uv_dims[1, ], " x ", uv_dims[2, ], " | ", n_att, " ]"
+    ": [ ", uv_dims[1, ], " x ", uv_dims[2, ], " | ", n_ann, " ]"
   ), c("u", "v"))
   fmts_coord <- format(select(
     rbind(
@@ -76,7 +76,7 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
   uv_footer <- set_names(c("", ""), c("u", "v"))
   fmt_ann <- lapply(c("u", "v"), function(.matrix) {
-    fmt <- uv_att[[.matrix]]
+    fmt <- uv_ann[[.matrix]]
     if (ncol(fmt) == 0) return("")
     fmt <- format(fmt, n = n[.matrix], width = width - coord_width - 7)
     # blank header

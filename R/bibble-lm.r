@@ -1,8 +1,5 @@
 
-as_bibble.lm <- function(x) {
-  class(x) <- c("bbl", class(x))
-  x
-}
+as_bibble.lm <- as_bibble_recognized
 
 get_u.lm <- function(x) {
   .intercept_col <- if (names(x$coefficients)[1] == "(Intercept)") {
@@ -69,6 +66,19 @@ coord_annot.lm <- function(x) {
     broom::tidy(x),
     stringsAsFactors = FALSE
   ))
+}
+
+permute_to.lm <- function(x, y, .matrix) {
+  y <- as.matrix(y, .matrix = .matrix)
+  # get negations
+  p <- permutation_to(get_factor(as_bibble(x), .matrix), y)
+  # edit the 'cmds' object (doesn't depend on `.matrix`)
+  x$coefficients <- x$coefficients[p]
+  x$effects[1:x$rank] <- x$effects[p]
+  # tag 'cmds' object with negation
+  x <- attribute_alignment(x, diag(1, nrow = x$rank)[, p, drop = FALSE])
+  # return rotated 'cmds' object
+  x
 }
 
 get_u.mlm <- function(x) {

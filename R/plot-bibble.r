@@ -36,13 +36,3 @@ plot.bbl <- function(x, ...) {
 
 #' @importFrom utils getFromNamespace
 biplot.default <- getFromNamespace("biplot.default", "stats")
-
-method_classes <- function(generic.function) {
-  str_replace(
-    str_subset(
-      rownames(attr(methods(generic.function), "info")),
-      paste0("^", generic.function, "\\.")
-    ),
-    paste0("^", generic.function, "\\."), ""
-  )
-}

@@ -1,4 +1,20 @@
 
+ensure_tibble_annot <- function(x, .matrix) {
+  .matrix <- match_factor(.matrix)
+  which <- paste0(.matrix, "_annot")
+  if (is.null(attr(x, which, exact = TRUE))) {
+    attr(x, which) <- as_tibble(matrix(
+      NA,
+      nrow = nrow(get_factor(x, .matrix)),
+      ncol = 0
+    ))
+  } else if (!is_tibble(attr(x, which, exact = TRUE))) {
+    stop("Attribute '", which, "' of `", deparse(substitute(x)),
+         "` is not a tibble.")
+  }
+  x
+}
+
 # DON'T LOSE ORIGINAL OBJECT VIA `to_bibble()`; EITHER CHANGE NAMES/COMPONENTS
 # OR ADD ATTRIBUTES THAT ARE FORCED TO MATCH DIMENSIONS OF `u` AND `v`
 

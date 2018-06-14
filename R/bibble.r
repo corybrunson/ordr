@@ -44,6 +44,10 @@ make_bibble <- function(u = NULL, v = NULL, ...) {
 #' @export
 is.bibble <- function(x) {
   if (!inherits(x, "bbl")) return(FALSE)
+  if (!is.null(attr(x, "u_annot")) &&
+      !is_tibble(attr(b, "u_annot"))) return(FALSE)
+  if (!is.null(attr(x, "v_annot")) &&
+      !is_tibble(attr(b, "v_annot"))) return(FALSE)
   if (is.null(get_coord(x)) ||
       is.null(get_u(x)) ||
       is.null(get_v(x))) return(FALSE)

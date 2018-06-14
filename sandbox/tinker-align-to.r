@@ -10,6 +10,23 @@ x2 <- country_attributes %>%
   as.matrix() %>%
   {rownames(.) <- pull(country_differences, Countries); .}
 
+# MDS vs PCA
+
+m1 <- cmdscale(x1, k = 3)
+m2 <- prcomp(x1)
+# doesn't produce a rotation matrix
+X1 <- m1$points
+X2 <- m2$x
+d <- min(ncol(X1), ncol(X2))
+D1 <- diag(1 / apply(X1[, 1:d, drop = FALSE], 2, sd))
+D2 <- diag(1 / apply(X2[, 1:d, drop = FALSE], 2, sd))
+S <- solve(t(X1[, 1:d, drop = FALSE]) %*% X2[, 1:d, drop = FALSE])
+R <- solve(D2) %*% S %*% solve(D1)
+
+
+
+# PCA vs PCA
+
 base_pca <- prcomp(t(x1))
 pca <- prcomp(t(-x2))
 # number of shared dimensions

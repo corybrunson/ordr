@@ -29,7 +29,6 @@ gg +
   geom_v_isolines(ids = 1, by = 5)
 
 # shade points by expected species prevalence and darken outliers
-(d <- fortify(b, include = "all"))
 ggbiplot(d, aes(x = x, y = y, color = .fitted, alpha = .resid^2)) +
   theme_bw() +
   scale_color_distiller(type = "div", palette = 1) +

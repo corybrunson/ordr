@@ -20,10 +20,7 @@ logisticPCA <- function(
   lpca
 }
 
-as_bibble.lpca <- function(x) {
-  class(x) <- c("bbl", class(x))
-  x
-}
+as_bibble.lpca <- as_bibble_recognized
 
 get_uv_lpca <- function(x, .matrix) {
   .matrix <- match_factor(.matrix)
@@ -63,6 +60,19 @@ coord_annot.lpca <- function(x) {
   )
 }
 
+negate_to.lpca <- function(x, y, .matrix) {
+  y <- as.matrix(y, .matrix = .matrix)
+  # get negations
+  s <- negation_to(get_factor(as_bibble(x), .matrix), y)
+  # edit the 'cmds' object (doesn't depend on `.matrix`)
+  x$PCs <- sweep(x$PCs, 2, s, "*")
+  x$U <- sweep(x$U, 2, s, "*")
+  # tag 'cmds' object with negation
+  x <- attribute_alignment(x, diag(s, nrow = ncol(x$U)))
+  # return rotated 'cmds' object
+  x
+}
+
 logisticSVD <- function(
   x, k = 2,
   quiet = TRUE, max_iters = 1000,
@@ -82,10 +92,7 @@ logisticSVD <- function(
   lsvd
 }
 
-as_bibble.lsvd <- function(x) {
-  class(x) <- c("bbl", class(x))
-  x
-}
+as_bibble.lsvd <- as_bibble_recognized
 
 get_uv_lsvd <- function(x, .matrix) {
   .matrix <- match_factor(.matrix)
@@ -119,4 +126,17 @@ coord_annot.lsvd <- function(x) {
 
 reconstruct.lsvd <- function(x) {
   round(plogis(x$A %*% t(x$B)), 0)
+}
+
+negate_to.lpca <- function(x, y, .matrix) {
+  y <- as.matrix(y, .matrix = .matrix)
+  # get negations
+  s <- negation_to(get_factor(as_bibble(x), .matrix), y)
+  # edit the 'cmds' object (doesn't depend on `.matrix`)
+  x$A <- sweep(x$A, 2, s, "*")
+  x$B <- sweep(x$B, 2, s, "*")
+  # tag 'cmds' object with negation
+  x <- attribute_alignment(x, diag(s, nrow = ncol(x$B)))
+  # return rotated 'cmds' object
+  x
 }
