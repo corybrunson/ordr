@@ -4,6 +4,7 @@
 #' \code{geom_*_point} renders symbols at the positions of the subjects or
 #' vectors.
 #' @template ggbiplot-layers
+#' @template matrix-param
 
 #' @section Aesthetics:
 #' \code{geom_*_point} understands the following aesthetics (required aesthetics
@@ -20,8 +21,11 @@
 #' }
 #' 
 
+#' @name ggbiplot-point
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
+#' @template layer-params
+#' @example inst/examples/ex-bibble-lm.r
 
 #' @rdname ggbiplot-point
 #' @export

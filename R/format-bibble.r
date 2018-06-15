@@ -1,10 +1,21 @@
-# The formatting trick used here, of calling *tibble* formatters and tweaking 
-# them post hoc, is adapted from 
-# [*tidygraph*](https://github.com/thomasp85/tidygraph).
-# 
-# The `format` function is tedius but cannot be easily modularized without
-# invoking `get_*()` and `*_annot()` multiple times, thereby significantly
-# reducing performance.
+#' Formatting and printing methods for bibbles
+#' 
+#' The \code{format} and \code{print} methods for class \code{"bbl"} are adapted
+#' from those for class \code{"tbl_df"} in the \strong{\link[tibble]{tibble}} 
+#' package and for class \code{"tbl_graph"} in the 
+#' \strong{\link[tidygraph]{tidygraph}} package.
+#' 
+#' The \code{format} function is tedius but cannot be easily modularized without
+#' invoking \code{get_*()} and \code{*_annot()} multiple times, thereby
+#' significantly reducing performance.
+
+#' @name bibble-formatting
+#' @param x An ordination object.
+#' @inheritParams tibble::format.tbl_df
+#' @param ... Additional arguments.
+
+#' @rdname bibble-formatting
+#' @export
 format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
   # dimensional parameters
@@ -22,7 +33,7 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     )
   }
   width <- width %||% bibble_opt("width") %||% getOption("width")
-  uv_extra <- set_names(rep(
+  uv_extra <- rlang::set_names(rep(
     n_extra %||% bibble_opt("max_extra_cols"),
     length.out = 2
   ), c("u", "v"))
@@ -44,11 +55,11 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   )
   
   # format U and V together first, then split
-  uv_sums <- set_names(paste0(
+  uv_sums <- rlang::set_names(paste0(
     "# ", c("U", "V"),
     ": [ ", uv_dims[1, ], " x ", uv_dims[2, ], " | ", n_ann, " ]"
   ), c("u", "v"))
-  fmts_coord <- format(select(
+  fmts_coord <- format(dplyr::select(
     rbind(
       as_tibble(uv$u)[1:n[1], , drop = FALSE],
       as_tibble(uv$v)[1:n[2], , drop = FALSE]
@@ -71,7 +82,7 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
       uv_sums["v"],
       fmts_coord[2],
       stringr::str_pad("", nchar(fmts_coord[2])),
-      str_replace(
+      stringr::str_replace(
         fmts_coord[wh_rows[n[1] + 1:n[2]]],
         "^ *[0-9]+ ",
         paste0(format(1:n[2], width = id_width), " ")
@@ -80,7 +91,7 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   )
   coord_width <- unique(nchar(fmts_coord)[-1])
   
-  uv_footer <- set_names(c("", ""), c("u", "v"))
+  uv_footer <- rlang::set_names(c("", ""), c("u", "v"))
   fmt_ann <- lapply(c("u", "v"), function(.matrix) {
     fmt <- uv_ann[[.matrix]]
     if (ncol(fmt) == 0) return("")
@@ -132,11 +143,15 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   c(header, coord_sum, "# ", uv_fmt[[1]], "# ", uv_fmt[[2]])
 }
 
+#' @rdname bibble-formatting
+#' @export
 print.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   fmt <- format(x, ..., n = n, width = width, n_extra = n_extra)
   cat(paste0(fmt, collapse = "\n"), sep = "")
   invisible(x)
 }
+
+`%||%` <- rlang::`%||%`
 
 # this trick is borrowed from *tibble*
 op.bibble <- list(

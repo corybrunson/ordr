@@ -1,4 +1,8 @@
 
+# @name plot-bibble
+#' @importFrom graphics plot
+#' @importFrom stats biplot
+
 biplot.bbl <- function(x, choices = 1L:2L, ...) {
   # biplot method for original class
   prev_class <- setdiff(class(x), "bbl")

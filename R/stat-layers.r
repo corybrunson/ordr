@@ -3,6 +3,10 @@
 
 #' @template ggbiplot-layers
 
+#' @name ggbiplot-matrix
+#' @inheritParams ggplot2::layer
+#' @param ... Additional arguments passed to \code{\link[ggplot2]{layer}}.
+
 #' @rdname ggbiplot-matrix
 #' @usage NULL
 #' @export

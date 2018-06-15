@@ -3,13 +3,13 @@
 data(country_differences, country_attributes)
 # format both tibbles as matrices
 x1 <- country_differences %>%
-  select(-Countries) %>%
+  dplyr::select(-Countries) %>%
   as.matrix() %>%
-  {rownames(.) <- pull(country_differences, Countries); .}
+  {rownames(.) <- dplyr::pull(country_differences, Countries); .}
 x2 <- country_attributes %>%
-  select(-Countries) %>%
+  dplyr::select(-Countries) %>%
   as.matrix() %>%
-  {rownames(.) <- pull(country_differences, Countries); .}
+  {rownames(.) <- dplyr::pull(country_differences, Countries); .}
 
 # multidimensional scaling setup
 (m <- cmdscale(x1, k = 2))

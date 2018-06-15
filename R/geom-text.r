@@ -6,6 +6,7 @@
 #' \code{geom_*_label_repel} invoke functionality from
 #' \strong{\link[ggrepel]{ggrepel}}.
 #' @template ggbiplot-layers
+#' @template matrix-param
 
 #' @section Aesthetics:
 #' \code{geom_*_text}, \code{geom_*_label}, \code{geom_*_text_repel}, and
@@ -24,8 +25,12 @@
 #' }
 #' 
 
+#' @name ggbiplot-text
 #' @import ggplot2
+#' @importFrom ggrepel GeomTextRepel GeomLabelRepel
 #' @inheritParams ggplot2::layer
+#' @template layer-params
+#' @example inst/examples/ex-bibble-lpca.r
 
 #' @rdname ggbiplot-text
 #' @export
@@ -179,7 +184,7 @@ geom_u_text_repel <- function(
     data = data,
     mapping = mapping,
     stat = "u",
-    geom = ggrepel::GeomTextRepel,
+    geom = GeomTextRepel,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
@@ -202,7 +207,7 @@ geom_v_text_repel <- function(
     data = data,
     mapping = mapping,
     stat = "v",
-    geom = ggrepel::GeomTextRepel,
+    geom = GeomTextRepel,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
@@ -226,7 +231,7 @@ geom_biplot_text_repel <- function(
     data = data,
     mapping = mapping,
     stat = .matrix,
-    geom = ggrepel::GeomTextRepel,
+    geom = GeomTextRepel,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
@@ -249,7 +254,7 @@ geom_u_label_repel <- function(
     data = data,
     mapping = mapping,
     stat = "u",
-    geom = ggrepel::GeomLabelRepel,
+    geom = GeomLabelRepel,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
@@ -272,7 +277,7 @@ geom_v_label_repel <- function(
     data = data,
     mapping = mapping,
     stat = "v",
-    geom = ggrepel::GeomLabelRepel,
+    geom = GeomLabelRepel,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
@@ -296,7 +301,7 @@ geom_biplot_label_repel <- function(
     data = data,
     mapping = mapping,
     stat = .matrix,
-    geom = ggrepel::GeomLabelRepel,
+    geom = GeomLabelRepel,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,

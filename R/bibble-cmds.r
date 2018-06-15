@@ -1,10 +1,6 @@
 
-cmdscale <- function(d, k = 2, add = FALSE) {
-  res <- stats::cmdscale(d, k = k, eig = TRUE, add = add, x.ret = TRUE)
-  class(res) <- "cmds"
-  res
-}
-
+#' @rdname bibble
+#' @export
 as_bibble.cmds <- as_bibble_recognized
 
 get_uv_cmds <- function(x, .matrix) {
@@ -16,11 +12,21 @@ get_uv_cmds <- function(x, .matrix) {
   )
   res
 }
+
+#' @rdname bibble-factors
+#' @export
 get_u.cmds <- function(x) get_uv_cmds(x, "u")
+
+#' @rdname bibble-factors
+#' @export
 get_v.cmds <- function(x) get_uv_cmds(x, "v")
 
+#' @rdname bibble-factors
+#' @export
 get_coord.cmds <- function(x) paste0("PCo", 1:ncol(x$points))
 
+#' @rdname bibble-annotation
+#' @export
 u_annot.cmds <- function(x) {
   .name <- rownames(x$x)
   res <- if (is.null(.name)) {
@@ -31,6 +37,8 @@ u_annot.cmds <- function(x) {
   res
 }
 
+#' @rdname bibble-annotation
+#' @export
 v_annot.cmds <- function(x) {
   .name <- colnames(x$x)
   res <- if (is.null(.name)) {
@@ -41,6 +49,8 @@ v_annot.cmds <- function(x) {
   res
 }
 
+#' @rdname bibble-annotation
+#' @export
 coord_annot.cmds <- function(x) {
   tibble(
     .name = get_coord(x),
@@ -48,7 +58,9 @@ coord_annot.cmds <- function(x) {
   )
 }
 
-negate_to.cmds <- function(x, y, .matrix) {
+#' @rdname align-to
+#' @export
+negate_to.cmds <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)
   # get negations
   s <- negation_to(get_factor(as_bibble(x), .matrix), y)
@@ -60,19 +72,23 @@ negate_to.cmds <- function(x, y, .matrix) {
   x
 }
 
-permute_to.cmds <- function(x, y, .matrix) {
+#' @rdname align-to
+#' @export
+permute_to.cmds <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)
   # get permutation
   p <- permutation_to(get_factor(as_bibble(x), .matrix), y)
   # edit the 'cmds' object (doesn't depend on `.matrix`)
   x$points <- x$points[, p, drop = FALSE]
   # tag 'cmds' object with permutation
-  x <- attribute_alignment(x, diag(s, nrow = ncol(x$points)))
+  x <- attribute_alignment(x, diag(1, nrow = ncol(x$points))[, p, drop = FALSE])
   # return rotated 'cmds' object
   x
 }
 
-rotate_to.cmds <- function(x, y, .matrix) {
+#' @rdname align-to
+#' @export
+rotate_to.cmds <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)
   # get rotation matrix
   r <- rotation_to(get_factor(as_bibble(x), .matrix), y)

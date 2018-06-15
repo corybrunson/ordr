@@ -3,6 +3,11 @@
 
 #' \code{geom_*_isolines} renders isolines for a specified subject or variable.
 #' @template ggbiplot-layers
+#' @template matrix-param
+#' @param ids Row indices of the subjects or variables for which isolines will 
+#'   be rendered. Defaults to \code{1L}.
+#' @param by Interval length between tick marks on the isolines, in the units of
+#'   the ordination.
 
 #' @section Aesthetics:
 #' \code{geom_*_isolines} understands the following aesthetics (required 
@@ -19,8 +24,11 @@
 #' }
 #' 
 
+#' @name ggbiplot-isolines
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
+#' @template layer-params
+#' @example inst/examples/ex-bibble-lm.r
 
 #' @rdname ggbiplot-isolines
 #' @usage NULL
@@ -35,7 +43,7 @@ GeomIsolines <- ggproto(
   
   draw_panel = function(
     data, panel_params, coord,
-    ids = 1, by = 1
+    ids = 1L, by = 1
   ) {
     ranges <- coord$range(panel_params)
     
@@ -72,7 +80,7 @@ GeomIsolines <- ggproto(
 #' @export
 geom_u_isolines <- function(
   mapping = NULL, data = NULL, position = "identity",
-  ids = 1, by = 1,
+  ids = 1L, by = 1,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -98,7 +106,7 @@ geom_u_isolines <- function(
 #' @export
 geom_v_isolines <- function(
   mapping = NULL, data = NULL, position = "identity",
-  ids = 1, by = 1,
+  ids = 1L, by = 1,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -124,7 +132,7 @@ geom_v_isolines <- function(
 #' @export
 geom_biplot_isolines <- function(
   mapping = NULL, data = NULL, position = "identity",
-  .matrix = "v", ids = 1, by = 1,
+  .matrix = "v", ids = 1L, by = 1,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE

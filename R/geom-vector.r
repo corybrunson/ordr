@@ -23,8 +23,14 @@
 #' }
 #' 
 
+#' @name ggbiplot-vector
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
+#' @template layer-params
+#' @template matrix-param
+#' @param arrow Specification for arrows, as created by
+#'   \code{\link[grid]{arrow}}.
+#' @example inst/examples/ex-bibble-lm.r
 
 #' @rdname ggbiplot-vector
 #' @usage NULL

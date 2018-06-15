@@ -1,8 +1,9 @@
+library(tidybiplot)
 context("Classes 'lm', 'glm', and 'mlm'")
 
 data(bioenv)
 bioenv <- bioenv %>%
-  mutate(
+  dplyr::mutate(
     x = (Depth - mean(Depth)) / sd(Depth),
     y = (Pollution - mean(Pollution)) / sd(Pollution)
   )

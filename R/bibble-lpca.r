@@ -1,25 +1,9 @@
 
-logisticPCA <- function(
-  x, k = 2, m = 4,
-  quiet = TRUE, partial_decomp = FALSE,
-  max_iters = 1000, conv_criteria = 1e-05,
-  random_start = FALSE,
-  ...,
-  main_effects = TRUE
-) {
-  lpca <- logisticPCA::logisticPCA(
-    x, k = k,
-    m = m, quiet = quiet, partial_decomp = partial_decomp,
-    max_iters = max_iters, conv_criteria = conv_criteria,
-    random_start = random_start,
-    ...,
-    main_effects = main_effects
-  )
-  rownames(lpca$U) <- colnames(x)
-  #rownames(lpca$PCs) <- rownames(x)
-  lpca
-}
+#' @importFrom stats plogis
 
+#' @rdname bibble
+#' @example inst/examples/ex-bibble-lpca.r
+#' @export
 as_bibble.lpca <- as_bibble_recognized
 
 get_uv_lpca <- function(x, .matrix) {
@@ -28,11 +12,21 @@ get_uv_lpca <- function(x, .matrix) {
   colnames(res) <- get_coord(x)
   res
 }
+
+#' @rdname bibble-factors
+#' @export
 get_u.lpca <- function(x) get_uv_lpca(x, "u")
+
+#' @rdname bibble-factors
+#' @export
 get_v.lpca <- function(x) get_uv_lpca(x, "v")
 
+#' @rdname bibble-factors
+#' @export
 get_coord.lpca <- function(x) paste0("LPC", 1:ncol(x$U))
 
+#' @rdname bibble-annotation
+#' @export
 u_annot.lpca <- function(x) {
   .name <- rownames(x$PCs)
   res <- if (is.null(.name)) {
@@ -43,6 +37,8 @@ u_annot.lpca <- function(x) {
   res
 }
 
+#' @rdname bibble-annotation
+#' @export
 v_annot.lpca <- function(x) {
   .name <- rownames(x$U)
   res <- if (is.null(.name)) {
@@ -54,13 +50,17 @@ v_annot.lpca <- function(x) {
   res
 }
 
+#' @rdname bibble-annotation
+#' @export
 coord_annot.lpca <- function(x) {
   tibble(
     .name = get_coord.lpca(x)
   )
 }
 
-negate_to.lpca <- function(x, y, .matrix) {
+#' @rdname align-to
+#' @export
+negate_to.lpca <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)
   # get negations
   s <- negation_to(get_factor(as_bibble(x), .matrix), y)
@@ -73,25 +73,8 @@ negate_to.lpca <- function(x, y, .matrix) {
   x
 }
 
-logisticSVD <- function(
-  x, k = 2,
-  quiet = TRUE, max_iters = 1000,
-  conv_criteria = 1e-05, random_start = FALSE,
-  ...,
-  partial_decomp = TRUE, main_effects = TRUE
-) {
-  lsvd <- logisticPCA::logisticSVD(
-    x = x, k = k,
-    quiet = quiet, max_iters = max_iters,
-    conv_criteria = conv_criteria, random_start = random_start,
-    ...,
-    partial_decomp = partial_decomp, main_effects = main_effects
-  )
-  rownames(lsvd$A) <- rownames(x)
-  rownames(lsvd$B) <- colnames(x)
-  lsvd
-}
-
+#' @rdname bibble
+#' @export
 as_bibble.lsvd <- as_bibble_recognized
 
 get_uv_lsvd <- function(x, .matrix) {
@@ -100,17 +83,29 @@ get_uv_lsvd <- function(x, .matrix) {
   colnames(res) <- get_coord(x)
   res
 }
+
+#' @rdname bibble-factors
+#' @export
 get_u.lsvd <- function(x) get_uv_lsvd(x, "u")
+
+#' @rdname bibble-factors
+#' @export
 get_v.lsvd <- function(x) get_uv_lsvd(x, "v")
 
+#' @rdname bibble-factors
+#' @export
 get_coord.lsvd <- function(x) paste0("LSC", 1:ncol(x$A))
 
+#' @rdname bibble-annotation
+#' @export
 u_annot.lsvd <- function(x) {
   tibble(
     .name = rownames(x$A)
   )
 }
 
+#' @rdname bibble-annotation
+#' @export
 v_annot.lsvd <- function(x) {
   tibble(
     .name = rownames(x$B),
@@ -118,17 +113,23 @@ v_annot.lsvd <- function(x) {
   )
 }
 
+#' @rdname bibble-annotation
+#' @export
 coord_annot.lsvd <- function(x) {
   tibble(
     .name = get_coord.lsvd(x)
   )
 }
 
+#' @rdname reconstruct
+#' @export
 reconstruct.lsvd <- function(x) {
   round(plogis(x$A %*% t(x$B)), 0)
 }
 
-negate_to.lpca <- function(x, y, .matrix) {
+#' @rdname align-to
+#' @export
+negate_to.lpca <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)
   # get negations
   s <- negation_to(get_factor(as_bibble(x), .matrix), y)

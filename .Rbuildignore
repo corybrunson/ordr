@@ -2,9 +2,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 
-# auxiliary directories
+# files and directories in package structure
 ^data-raw$
-^sandbox$
 ^man-roxygen$
 README.Rmd
 ^_pkgdown\.yml$
@@ -12,3 +11,7 @@ README.Rmd
 # hosting infrastructure
 cran-comments.md
 .github
+
+# custom files and directories
+tasks.md
+^sandbox$

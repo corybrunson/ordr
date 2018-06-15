@@ -1,6 +1,15 @@
 
+#' @importFrom broom tidy augment
+#' @importFrom tidyr nest
+#' @importFrom stats model.frame
+
+#' @rdname bibble
+#' @example inst/examples/ex-bibble-lm.r
+#' @export
 as_bibble.lm <- as_bibble_recognized
 
+#' @rdname bibble-factors
+#' @export
 get_u.lm <- function(x) {
   .intercept_col <- if (names(x$coefficients)[1] == "(Intercept)") {
     .ic <- matrix(1L, nrow = nrow(x$model), ncol = 1)
@@ -13,6 +22,8 @@ get_u.lm <- function(x) {
   res
 }
 
+#' @rdname bibble-factors
+#' @export
 get_v.lm <- function(x) {
   res <- t(x$coefficients)
   dimnames(res) <- list(
@@ -22,6 +33,8 @@ get_v.lm <- function(x) {
   res
 }
 
+#' @rdname bibble-factors
+#' @export
 get_coord.lm <- function(x) {
   .predictors <- x$model[, -1]
   if (is.matrix(.predictors)) {
@@ -40,16 +53,20 @@ get_coord.lm <- function(x) {
   coord
 }
 
+#' @rdname bibble-annotation
+#' @export
 u_annot.lm <- function(x) {
   res <- tibble(.name = rownames(model.frame(x)))
   .int <- as.integer(names(x$coefficients)[1] == "(Intercept)")
   .rk <- x$rank
-  bind_cols(
+  dplyr::bind_cols(
     res,
-    select(broom::augment(x), -(1:(.rk - .int + 1)))
+    dplyr::select(augment(x), -(1:(.rk - .int + 1)))
   )
 }
 
+#' @rdname bibble-annotation
+#' @export
 v_annot.lm <- function(x) {
   tibble(
     .name = if (is.matrix(x$model[, 1])) {
@@ -60,15 +77,19 @@ v_annot.lm <- function(x) {
   )
 }
 
+#' @rdname bibble-annotation
+#' @export
 coord_annot.lm <- function(x) {
   as_tibble(data.frame(
     .name = get_coord(x),
-    broom::tidy(x),
+    tidy(x),
     stringsAsFactors = FALSE
   ))
 }
 
-permute_to.lm <- function(x, y, .matrix) {
+#' @rdname align-to
+#' @export
+permute_to.lm <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)
   # get negations
   p <- permutation_to(get_factor(as_bibble(x), .matrix), y)
@@ -81,6 +102,8 @@ permute_to.lm <- function(x, y, .matrix) {
   x
 }
 
+#' @rdname bibble-factors
+#' @export
 get_u.mlm <- function(x) {
   .intercept_col <- if (rownames(x$coefficients)[1] == "(Intercept)") {
     .ic <- matrix(1L, nrow = nrow(x$model), ncol = 1)
@@ -93,12 +116,16 @@ get_u.mlm <- function(x) {
   res
 }
 
+#' @rdname bibble-factors
+#' @export
 get_v.mlm <- function(x) {
   res <- t(x$coefficients)
   colnames(res) <- get_coord(x)
   res
 }
 
+#' @rdname bibble-factors
+#' @export
 get_coord.mlm <- function(x) {
   .predictors <- x$model[, -1]
   if (is.matrix(.predictors)) {
@@ -117,27 +144,35 @@ get_coord.mlm <- function(x) {
   coord
 }
 
+#' @rdname bibble-annotation
+#' @export
 u_annot.mlm <- function(x) {
   tibble(
     .name = rownames(model.frame(x))
   )
 }
 
+#' @rdname bibble-annotation
+#' @export
 v_annot.mlm <- function(x) {
   tibble(
     .name = colnames(x$coefficients)
   )
 }
 
+#' @rdname bibble-annotation
+#' @export
 coord_annot.mlm <- function(x) {
   res <- as_tibble(data.frame(
     .name = get_coord(x),
-    broom::tidy(x),
+    tidy(x),
     stringsAsFactors = FALSE
   ))
-  tidyr::nest(res, -.name, -term, .key = "model")
+  nest(res, -dplyr::one_of(".name", "term"), .key = "model")
 }
 
+#' @rdname reconstruct
+#' @export
 reconstruct.lm <- function(x) {
   pred_mat <- as.matrix(x$model[, -1, drop = FALSE])
   names_fun <- if (class(x)[1] == "lm") names else rownames

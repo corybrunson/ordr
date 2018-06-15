@@ -21,9 +21,18 @@
 
 #' @template ggbiplot-layers
 
+#' @name ggbiplot
 #' @import ggplot2
+#' @param ordination A \link{bibble}, i.e. an ordination object of class
+#'   \code{"bbl"}.
+#' @param mapping List of default aesthetic mappings to use for the biplot. The 
+#'   default assigns the first two coordinates to the aesthetics \code{x} and 
+#'   \code{y}. Other assignments must be supplied in each layer added to the 
+#'   plot.
+#' @param ... Additional arguments passed to \code{\link[ggplot2]{ggplot}}.
 
 #' @rdname ggbiplot
+#' @example inst/examples/ex-bibble-lm.r
 #' @export
 ggbiplot <- function(
   ordination = NULL, mapping = aes(x = 1, y = 2),
@@ -37,7 +46,9 @@ ggbiplot <- function(
     environment = parent.frame(),
     ...
   )
-  p$mapping <- c(p$mapping, aes(.matrix = .matrix))
+  .matrix_aes <- list(.matrix = rlang::quo(!!rlang::sym(".matrix")))
+  class(.matrix_aes) <- "uneval"
+  p$mapping <- c(p$mapping, .matrix_aes)
   p$coordinates <- coord_fixed()
   class(p) <- c("ggbiplot", class(p))
   

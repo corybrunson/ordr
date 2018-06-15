@@ -1,4 +1,35 @@
+#' Align one ordination to another of the same subjects or variables
+#' 
+#' Depending on the method of ordination, its interpretation may not depend on 
+#' the signs, the order, or the orientation of the coordinates. 
+#' \code{negate_to}, \code{permute_to}, and \code{rotate_to} take advantage of 
+#' these symmetries in order to manipulate the coordinates of one ordination so 
+#' that the positions of the subjects or variables align, as closely as 
+#' possible, to those of the same subjects or variables in another ordination. 
+#' In the case of negation and permutation, this is done by minimizing the 
+#' angles between vectors of scores or loadings in the respective coordinates. 
+#' In the case of rotation, this is done by invoking the singular value 
+#' decomposition method of point cloud registration (Bellekens &al, 2014).
+#' 
+#' @references
+#' 
+#' Bellekens B., Spruyt V., Berkvens R., & Weyn M. (2014). A survey of rigid 3D
+#' pointcloud registration algorithms. \emph{Fourth International Conference on
+#' Ambient Computing, Applications, Services and Technologies, Proceedings.} p.
+#' 8--13.
+#' 
 
+#' @name align-to
+#' @importFrom stats cor
+#' @param x,y Matrices or bibbles; \code{x} will be aligned to \code{y}.
+#' @template matrix-param
+#' @param abs.values Whether \code{permute_to} should reorder coordinates
+#'   according to dot product magnitudes (angles closest to straight, whether
+#'   \eqn{0} or \eqn{\pi}, versus angles closest to \eqn{0}).
+#' @param ... Additional parameters passed to methods.
+
+#' @rdname align-to
+#' @export
 align_to <- function(x, y, .matrix) {
   # check that alignment is possible
   prev_class <- setdiff(class(x), "bbl")
@@ -15,19 +46,35 @@ align_to <- function(x, y, .matrix) {
   }
 }
 
+#' @rdname align-to
+#' @export
 negate_to <- function(x, y, ...) UseMethod("negate_to")
+
+#' @rdname align-to
+#' @export
 permute_to <- function(x, y, ...) UseMethod("permute_to")
+
+#' @rdname align-to
+#' @export
 rotate_to <- function(x, y, ...) UseMethod("rotate_to")
 
-negate_to.matrix <- function(x, y) {
+#' @rdname align-to
+#' @export
+negate_to.matrix <- function(x, y, ...) {
   s <- negation_to(x, y)
   sweep(x, 2, s, "*")
 }
-permute_to.matrix <- function(x, y, abs.values = FALSE) {
+
+#' @rdname align-to
+#' @export
+permute_to.matrix <- function(x, y, ..., abs.values = FALSE) {
   p <- permutation_to(x, y, abs.values = abs.values)
   x[, p, drop = FALSE]
 }
-rotate_to.matrix <- function(x, y) {
+
+#' @rdname align-to
+#' @export
+rotate_to.matrix <- function(x, y, ...) {
   m <- rotation_to(x, y)
   x %*% m
 }
@@ -65,7 +112,6 @@ permutation_to <- function(x, y, abs.values = FALSE) {
 }
 
 rotation_to <- function(x, y) {
-  # https://biblio.ugent.be/publication/5713477
   stopifnot(nrow(x) == nrow(y))
   d <- min(ncol(x), ncol(y))
   # cross correlation matrix between `x` and `y` based on matched points

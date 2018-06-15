@@ -1,3 +1,4 @@
+library(tidybiplot)
 context("grammatical biplotting")
 
 data(country_differences)

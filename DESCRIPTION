@@ -10,6 +10,15 @@ Description: A unified framework for ordination objects and biplot methods using
 Depends:
     R (>= 3.3.0),
     ggplot2
+Imports:
+    tibble,
+    broom,
+    tidyr,
+    rlang,
+    stringr,
+    dplyr,
+    ggrepel,
+    logisticPCA
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

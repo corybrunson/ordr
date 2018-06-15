@@ -3,7 +3,7 @@
 
 #' The \code{bbl} ("bibble") class wraps around a range of ordination classes, 
 #' making available a suite of ordination tools that specialize to each original
-#' object class, including \code{print}, \code{fortify}, \code\link{{ggbiplot}},
+#' object class, including \code{print}, \code{fortify}, \code{\link{ggbiplot}},
 #' and several biplot stat and geom layers.
 #' 
 #' No default method is provided for \code{as_bibble}, despite most defined 
@@ -21,6 +21,7 @@
 #' 
 
 #' @name bibble
+#' @importFrom tibble tibble is_tibble as_tibble
 #' @param x An ordination object.
 #' @param u,v Matrices to be used as factors of a bibble.
 #' @param ... Additional elements of a custom bibble.
@@ -53,9 +54,9 @@ make_bibble <- function(u = NULL, v = NULL, ...) {
 is_bibble <- function(x) {
   if (!inherits(x, "bbl")) return(FALSE)
   if (!is.null(attr(x, "u_annot")) &&
-      !is_tibble(attr(b, "u_annot"))) return(FALSE)
+      !is_tibble(attr(x, "u_annot"))) return(FALSE)
   if (!is.null(attr(x, "v_annot")) &&
-      !is_tibble(attr(b, "v_annot"))) return(FALSE)
+      !is_tibble(attr(x, "v_annot"))) return(FALSE)
   if (is.null(get_coord(x)) ||
       is.null(get_u(x)) ||
       is.null(get_v(x))) return(FALSE)
