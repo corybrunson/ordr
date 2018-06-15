@@ -1,5 +1,29 @@
+#' Render isolines for a subject or variable
+#' 
 
-#' @rdname ggbiplot
+#' \code{geom_*_isolines} renders isolines for a specified subject or variable.
+#' @template ggbiplot-layers
+
+#' @section Aesthetics:
+#' \code{geom_*_isolines} understands the following aesthetics (required 
+#' aesthetics are in bold):
+#' \itemize{
+#'   \item \strong{\code{x}}
+#'   \item \strong{\code{y}}
+#'   \item \code{alpha}
+#'   \item \code{colour}
+#'   \item \code{fill}
+#'   \item \code{linetype}
+#'   \item \code{size}
+#'   \item \code{group}
+#' }
+#' 
+
+#' @import ggplot2
+#' @inheritParams ggplot2::layer
+
+#' @rdname ggbiplot-isolines
+#' @usage NULL
 #' @export
 GeomIsolines <- ggproto(
   "GeomIsolines", GeomAbline,
@@ -44,7 +68,7 @@ GeomIsolines <- ggproto(
   }
 )
 
-#' @rdname ggbiplot
+#' @rdname ggbiplot-isolines
 #' @export
 geom_u_isolines <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -70,7 +94,7 @@ geom_u_isolines <- function(
   )
 }
 
-#' @rdname ggbiplot
+#' @rdname ggbiplot-isolines
 #' @export
 geom_v_isolines <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -96,7 +120,7 @@ geom_v_isolines <- function(
   )
 }
 
-#' @rdname ggbiplot
+#' @rdname ggbiplot-isolines
 #' @export
 geom_biplot_isolines <- function(
   mapping = NULL, data = NULL, position = "identity",

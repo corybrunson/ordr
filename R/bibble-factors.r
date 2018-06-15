@@ -1,11 +1,26 @@
 #' Extract the factors of an ordination object
 #' 
 
+#' The \code{get_*} functions extract one or both of the matrix factors 
+#' \eqn{U,V} that constitute an ordination. These are interpreted as the subject
+#' scores (\eqn{U}) and the variable loadings (\eqn{V}). \code{get_coord} 
+#' retrieves the names of the coordinates shared by \eqn{U} and \eqn{V}.
+#' 
+#' The \code{*_annot} functions produce \link[tibble]{tibble}s of annotations 
+#' for the subjects/scores, variables/loadings, and coordinates. The first field
+#' of each tibble is \code{.name} and contains the subject, variable, and 
+#' coordinate names, respectively.
+#' 
+#' \code{rank} retrieves the number of coordinates on which the data have been 
+#' ordinated. The existing \code{\link[base]{rank}} function is made the default
+#' and a new method is introduced for bibbles.
+#' 
+
 #' @name bibble-factors
 #' @param x A bibble, or an object convertible to one.
 #' @param .matrix A character string matching one of several indicators for one
 #'   or both matrices in a matrix decomposition used for ordination. The
-#'   standard values are \code{"u"} and \code{"v"}.
+#'   standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.
 #'   
 
 #' @rdname bibble-factors
@@ -72,7 +87,7 @@ bibble_factors <- c(
   u = "u", v = "v", uv = "uv",
   U = "u", V = "v", UV = "uv",
   left = "u", right = "v", both = "uv",
-  observations = "u", variables = "v"
+  subjects = "u", variables = "v"
 )
 match_factor <- function(x) {
   x <- match.arg(x, names(bibble_factors))

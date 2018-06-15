@@ -1,7 +1,7 @@
+
 simple_example <- make_bibble(
   u = cbind(x = c(2, 1, -1, 1, 2), y = c(2, 2, 1, -1, -2)),
-  v = cbind(x = c(3, 2, -1, -2), y = c(1, -1, 2, -1)),
-  coordinates = tibble(.name = c("x", "y"))
+  v = cbind(x = c(3, 2, -1, -2), y = c(1, -1, 2, -1))
 )
 devtools::use_data(simple_example)
 

@@ -1,5 +1,10 @@
+#' Render plot elements for one matrix of an ordination
+#' 
 
-#' @rdname stat-layers
+#' @template ggbiplot-layers
+
+#' @rdname ggbiplot-matrix
+#' @usage NULL
 #' @export
 StatU <- ggproto(
   "StatU", StatIdentity,
@@ -9,7 +14,8 @@ StatU <- ggproto(
   }
 )
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-matrix
+#' @usage NULL
 #' @export
 StatV <- ggproto(
   "StatV", StatIdentity,
@@ -19,7 +25,7 @@ StatV <- ggproto(
   }
 )
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-matrix
 #' @export
 stat_u <- function(
   mapping = NULL, data = data,
@@ -42,7 +48,7 @@ stat_u <- function(
   )
 }
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-matrix
 #' @export
 stat_v <- function(
   mapping = NULL, data = data,

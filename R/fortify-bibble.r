@@ -1,4 +1,5 @@
 
+# This is a method of `ggplot2::fortify()` for bibbles.
 fortify.bbl <- function(
   ordination,
   .matrix = "uv",

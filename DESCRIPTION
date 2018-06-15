@@ -1,13 +1,17 @@
 Package: tidybiplot
-Title: A 'tidyverse' extension for biplots
+Title: A 'tidyverse' extension for ordinations and biplots
 Version: 0.0.0.9000
 Authors@R: c(
   person("Jason Cory", "Brunson", email = "cornelioid@gmail.com",
     role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3126-9494"))
   )
-Description: A unified framework for biplot methods using tidy data principles.
-Depends: R (>= 3.3.2)
+Description: A unified framework for ordination objects and biplot methods using
+    tidy principles.
+Depends:
+    R (>= 3.3.0),
+    ggplot2
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Suggests: testthat
+RoxygenNote: 6.0.1

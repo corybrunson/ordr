@@ -1,5 +1,33 @@
+#' Render text at ordinates
+#' 
 
-#' @rdname stat-layers
+#' \code{geom_*_text} renders text, and \code{geom_*_label} labels, at the 
+#' positions of the subjects or vectors. \code{geom_*_text_repel} and 
+#' \code{geom_*_label_repel} invoke functionality from
+#' \strong{\link[ggrepel]{ggrepel}}.
+#' @template ggbiplot-layers
+
+#' @section Aesthetics:
+#' \code{geom_*_text}, \code{geom_*_label}, \code{geom_*_text_repel}, and
+#' \code{geom_*_label_repel} understand the following aesthetics (required
+#' aesthetics are in bold):
+#' \itemize{
+#'   \item \strong{\code{x}}
+#'   \item \strong{\code{y}}
+#'   \item \strong{\code{label}}
+#'   \item \code{alpha}
+#'   \item \code{colour}
+#'   \item \code{fill}
+#'   \item \code{linetype}
+#'   \item \code{size}
+#'   \item \code{group}
+#' }
+#' 
+
+#' @import ggplot2
+#' @inheritParams ggplot2::layer
+
+#' @rdname ggbiplot-text
 #' @export
 geom_u_text <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -22,7 +50,7 @@ geom_u_text <- function(
   )
 }
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-text
 #' @export
 geom_v_text <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -45,7 +73,7 @@ geom_v_text <- function(
   )
 }
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-text
 #' @export
 geom_biplot_text <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -69,7 +97,7 @@ geom_biplot_text <- function(
   )
 }
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-text
 #' @export
 geom_u_label <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -92,7 +120,7 @@ geom_u_label <- function(
   )
 }
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-text
 #' @export
 geom_v_label <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -115,7 +143,7 @@ geom_v_label <- function(
   )
 }
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-text
 #' @export
 geom_biplot_label <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -139,7 +167,7 @@ geom_biplot_label <- function(
   )
 }
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-text
 #' @export
 geom_u_text_repel <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -162,7 +190,7 @@ geom_u_text_repel <- function(
   )
 }
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-text
 #' @export
 geom_v_text_repel <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -185,7 +213,7 @@ geom_v_text_repel <- function(
   )
 }
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-text
 #' @export
 geom_biplot_text_repel <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -209,7 +237,7 @@ geom_biplot_text_repel <- function(
   )
 }
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-text
 #' @export
 geom_u_label_repel <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -232,7 +260,7 @@ geom_u_label_repel <- function(
   )
 }
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-text
 #' @export
 geom_v_label_repel <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -255,7 +283,7 @@ geom_v_label_repel <- function(
   )
 }
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-text
 #' @export
 geom_biplot_label_repel <- function(
   mapping = NULL, data = NULL, position = "identity",

@@ -1,5 +1,29 @@
+#' Render points at ordinates
+#' 
 
-#' @rdname stat-layers
+#' \code{geom_*_point} renders symbols at the positions of the subjects or
+#' vectors.
+#' @template ggbiplot-layers
+
+#' @section Aesthetics:
+#' \code{geom_*_point} understands the following aesthetics (required aesthetics
+#' are in bold):
+#' \itemize{
+#'   \item \strong{\code{x}}
+#'   \item \strong{\code{y}}
+#'   \item \code{alpha}
+#'   \item \code{colour}
+#'   \item \code{fill}
+#'   \item \code{linetype}
+#'   \item \code{size}
+#'   \item \code{group}
+#' }
+#' 
+
+#' @import ggplot2
+#' @inheritParams ggplot2::layer
+
+#' @rdname ggbiplot-point
 #' @export
 geom_u_point <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -22,7 +46,7 @@ geom_u_point <- function(
   )
 }
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-point
 #' @export
 geom_v_point <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -45,7 +69,7 @@ geom_v_point <- function(
   )
 }
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-point
 #' @export
 geom_biplot_point <- function(
   mapping = NULL, data = NULL, position = "identity",

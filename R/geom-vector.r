@@ -1,5 +1,33 @@
+#' Render axes vectors, with or without angled labels
+#' 
 
-#' @rdname stat-layers
+#' \code{geom_*_vector} renders arrows from the origin to the position of each
+#' subject or vector. \code{geom_*_axis} is adapted from
+#' \strong{link[ggbiplot]{ggbiplot}}. In addition to the arrows, it renders
+#' labels that expand outward from the arrowheads at the same angles.
+#' @template ggbiplot-layers
+
+#' @section Aesthetics:
+#' \code{geom_*_vector} and \code{geom_*_axis} understand the following
+#' aesthetics (required aesthetics are in bold):
+#' \itemize{
+#'   \item \strong{\code{x}}
+#'   \item \strong{\code{y}}
+#'   \item \strong{\code{label}} (\code{geom_*_axis} only)
+#'   \item \code{alpha}
+#'   \item \code{colour}
+#'   \item \code{fill}
+#'   \item \code{linetype}
+#'   \item \code{size}
+#'   \item \code{group}
+#' }
+#' 
+
+#' @import ggplot2
+#' @inheritParams ggplot2::layer
+
+#' @rdname ggbiplot-vector
+#' @usage NULL
 #' @export
 GeomVector <- ggproto(
   "GeomVector", GeomSegment,
@@ -34,7 +62,7 @@ GeomVector <- ggproto(
   }
 )
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-vector
 #' @export
 geom_u_vector <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -59,7 +87,7 @@ geom_u_vector <- function(
   )
 }
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-vector
 #' @export
 geom_v_vector <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -84,7 +112,7 @@ geom_v_vector <- function(
   )
 }
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-vector
 #' @export
 geom_biplot_vector <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -111,7 +139,8 @@ geom_biplot_vector <- function(
 
 # https://github.com/vqv/ggbiplot/tree/experimental
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-vector
+#' @usage NULL
 #' @export
 GeomAxis <- ggproto(
   "GeomAxis", GeomSegment,
@@ -168,7 +197,7 @@ GeomAxis <- ggproto(
   }
 )
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-vector
 #' @export
 geom_u_axis <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -193,7 +222,7 @@ geom_u_axis <- function(
   )
 }
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-vector
 #' @export
 geom_v_axis <- function(
   mapping = NULL, data = NULL, position = "identity",
@@ -218,7 +247,7 @@ geom_v_axis <- function(
   )
 }
 
-#' @rdname stat-layers
+#' @rdname ggbiplot-vector
 #' @export
 geom_biplot_axis <- function(
   mapping = NULL, data = NULL, position = "identity",

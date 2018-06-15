@@ -1,4 +1,10 @@
-
+# The formatting trick used here, of calling *tibble* formatters and tweaking 
+# them post hoc, is adapted from 
+# [*tidygraph*](https://github.com/thomasp85/tidygraph).
+# 
+# The `format` function is tedius but cannot be easily modularized without
+# invoking `get_*()` and `*_annot()` multiple times, thereby significantly
+# reducing performance.
 format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
   # dimensional parameters
@@ -131,8 +137,6 @@ print.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   cat(paste0(fmt, collapse = "\n"), sep = "")
   invisible(x)
 }
-
-# settings
 
 # this trick is borrowed from *tibble*
 op.bibble <- list(

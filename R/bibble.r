@@ -1,21 +1,29 @@
 #' A unified ordination object class
 #' 
-#' The \code{bibble} class wraps around a range of ordination classes, making 
-#' available a suite of ordination tools that specialize to each original object
-#' class, including \code{print}, a variety of \strong{dplyr} verbs, and
-#' \code{fortify} (a precursor to \code{\link{ggbiplot}}).
+
+#' The \code{bbl} ("bibble") class wraps around a range of ordination classes, 
+#' making available a suite of ordination tools that specialize to each original
+#' object class, including \code{print}, \code{fortify}, \code\link{{ggbiplot}},
+#' and several biplot stat and geom layers.
 #' 
-#' Note that no default method is provided for \code{as_bibble}, despite most 
-#' defined methods being equivalent. This is to prevent objects for which other 
-#' methods are not defined from being re-classed as bibbles.
+#' No default method is provided for \code{as_bibble}, despite most defined 
+#' methods being equivalent (simply adding \code{"bbl"} to the vector of object 
+#' classes). This prevents objects for which other methods are not defined from 
+#' being re-classed as bibbles.
+#' 
+#' The function \code{make_bibble} creates a bibble structured as a list of two 
+#' matrices, \code{u} and \code{v}, which must have the same number of columns 
+#' and the same column names.
+#' 
+#' \code{is_bibble} checks an object \code{x} for the \code{"bbl"} class and for
+#' consistency between \code{get_coord(x)} and the columns of \code{get_u(x)} 
+#' and \code{get_v(x)}, using the functions at \code{\link{bibble-factors}}.
 #' 
 
 #' @name bibble
 #' @param x An ordination object.
 #' @param u,v Matrices to be used as factors of a bibble.
-#' @param coord Character vector taken to be the shared coordinates of \code{u}
-#'   and \code{v}.
-#' @param ... Parameters passed to other methods.
+#' @param ... Additional elements of a custom bibble.
 #'   
 
 #' @rdname bibble
@@ -35,14 +43,14 @@ make_bibble <- function(u = NULL, v = NULL, ...) {
       stop("`u` and `v` must have the same column names.")
     }
   }
-  res <- list(u = u, v = v)
+  res <- list(u = u, v = v, ...)
   class(res) <- c("bbl", class(res))
   res
 }
 
 #' @rdname bibble
 #' @export
-is.bibble <- function(x) {
+is_bibble <- function(x) {
   if (!inherits(x, "bbl")) return(FALSE)
   if (!is.null(attr(x, "u_annot")) &&
       !is_tibble(attr(b, "u_annot"))) return(FALSE)
@@ -55,3 +63,7 @@ is.bibble <- function(x) {
   if (!all(get_coord(x) %in% colnames(get_v(x)))) return(FALSE)
   TRUE
 }
+
+#' @rdname bibble
+#' @export
+is.bibble <- is_bibble

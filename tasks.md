@@ -108,7 +108,7 @@ Implement an option to calibrate, in the Greenacre sense.
 ### summary information
 
 Include keywords in the description: "biplot", "(linear) ordination" ([helpfully defined by János Podani](http://ramet.elte.hu/~podani/7-Ordination.pdf)), "geometric data analysis".
-Consider these when deciding on a final name. Candidates: **tidybiplot**, **ordin8r**, **ordy**
+Consider these when deciding on a final name. Candidates: **tidybiplot**, **ordin8r**, **ordy**, **orb**
 
 ### theory
 
