@@ -24,3 +24,25 @@ Encoding: UTF-8
 LazyData: true
 Suggests: testthat
 RoxygenNote: 6.0.1
+Collate: 
+    'align-to.r'
+    'bibble-utils.r'
+    'bibble-.r'
+    'bibble-annotation.r'
+    'bibble-factors.r'
+    'bibble-masks.r'
+    'data.r'
+    'format-bibble.r'
+    'fortify-bibble.r'
+    'geom-isolines.r'
+    'geom-point.r'
+    'geom-text.r'
+    'geom-vector.r'
+    'ggbiplot.r'
+    'methods-cmds.r'
+    'methods-lm.r'
+    'methods-lpca.r'
+    'methods-prcomp.r'
+    'plot-bibble.r'
+    'reconstruct.r'
+    'stat-layers.r'

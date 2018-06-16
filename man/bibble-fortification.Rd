@@ -3,29 +3,40 @@
 \name{bibble-fortification}
 \alias{bibble-fortification}
 \alias{fortify.bbl}
+\alias{fortify_u}
+\alias{fortify_v}
+\alias{tidy.bbl}
 \title{Fortify a bibble for plotting}
 \usage{
 \method{fortify}{bbl}(model, data, ..., .matrix = "uv", include = "all")
+
+fortify_u(model, include = "all")
+
+fortify_v(model, include = "all")
+
+\method{tidy}{bbl}(x, ..., .matrix = "uv", include = "all")
 }
 \arguments{
-\item{model}{A \link{bibble}, i.e. an ordination object of class 
+\item{model, x}{A \link{bibble}, i.e. an ordination object of class 
 \code{"bbl"}.}
 
 \item{data}{Ignored.}
 
-\item{...}{Additional arguments received from \code{fortify}; ignored.}
+\item{...}{Additional arguments received from \code{fortify} or \code{tidy};
+ignored.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 
 \item{include}{Character matched to \code{"coordinates"}, \code{"shared"}, or
-\code{"all"}; whether the fortified data frame should include only the
-ordination coordinates, also the annotations shared by subjects and
+\code{"all"}; whether the fortified data frame should include only the 
+ordination coordinates, also the annotations shared by subjects and 
 variables, or all annotations (with \code{NA}s where not defined).}
 }
 \description{
-Fortify a bibble for plotting
+These methods of \code{\link[ggplot2]{fortify}} and \code{\link[broom]{tidy}}
+convert a \code{\link{bibble}} to a \code{\link{tibble}}.
 }
 \examples{
 # reproduce Exhibit 2.3 in Greenacre (2010)

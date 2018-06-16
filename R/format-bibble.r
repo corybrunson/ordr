@@ -5,9 +5,10 @@
 #' package and for class \code{"tbl_graph"} in the 
 #' \strong{\link[tidygraph]{tidygraph}} package.
 #' 
-#' The \code{format} function is tedius but cannot be easily modularized without
-#' invoking \code{get_*()} and \code{*_annot()} multiple times, thereby
+#' Note: The \code{format} function is tedius but cannot be easily modularized
+#' without invoking \code{get_*()} and \code{*_annot()} multiple times, thereby
 #' significantly reducing performance.
+#' 
 
 #' @name bibble-formatting
 #' @param x An ordination object.

@@ -1,4 +1,9 @@
 
+as_bibble_recognized <- function(x) {
+  class(x) <- c("bbl", class(x))
+  x
+}
+
 bibble_factors <- c(
   u = "u", v = "v", uv = "uv",
   U = "u", V = "v", UV = "uv",

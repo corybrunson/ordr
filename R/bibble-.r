@@ -1,10 +1,15 @@
 #' A unified ordination object class
 #' 
+#' These functions wrap ordination objects in the \code{"bbl"} ("bibble") class,
+#' create bibbles directly from matrices, and test for the class and basic
+#' structure.
+#' 
 
-#' The \code{bbl} ("bibble") class wraps around a range of ordination classes, 
+#' The \code{"bbl"} ("bibble") class wraps around a range of ordination classes,
 #' making available a suite of ordination tools that specialize to each original
-#' object class, including \code{print}, \code{fortify}, \code{\link{ggbiplot}},
-#' and several biplot stat and geom layers.
+#' object class, including \code{\link{format}} and \code{\link{fortify}}, which
+#' facilitate the \code{\link{print}} method and the \code{\link{ggbiplot}}
+#' function.
 #' 
 #' No default method is provided for \code{as_bibble}, despite most defined 
 #' methods being equivalent (simply adding \code{"bbl"} to the vector of object 
@@ -21,6 +26,7 @@
 #' 
 
 #' @name bibble
+#' @include bibble-utils.r
 #' @importFrom tibble tibble is_tibble as_tibble
 #' @param x An ordination object.
 #' @param u,v Matrices to be used as factors of a bibble.
@@ -31,6 +37,8 @@
 #' @export
 as_bibble <- function(x) UseMethod("as_bibble")
 
+#' @rdname bibble
+#' @export
 as_bibble.bbl <- function(x) x
 
 #' @rdname bibble
