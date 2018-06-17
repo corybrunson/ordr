@@ -11,7 +11,6 @@ functions to augment the output of an ordination function to the original datase
 - `isoMDS()`
 - `svd`
 - `prcomp`, `princomp`, `psych::principal()`, and [other PCA functions and classes](http://www.gastonsanchez.com/visually-enforced/how-to/2012/06/17/PCA-in-R/)
-  - incorporate `inertia = c(1, 0)` parameter into `as_bibble()`
 - multidimensional scaling (MDS) with `cmdscale()`
 - `lda`
 - `ca` and [other CA classes](http://www.gastonsanchez.com/visually-enforced/how-to/2012/07/19/Correspondence-Analysis/)
@@ -40,6 +39,7 @@ Coercion to class `"bbl"`:
   - `supplement()`: Ordinate new variables measured for the original subjects.
   - `reconstruct()`: Approximate the original data table by multiplying the matrix factors and invoking any transformations remembered by the ordination object; uses `get_factor()`. May encode the formula in the method or as a formula object in the bibble (e.g. in case some ordination methods have dropped parameters).
 - Allows additional attributes to be augmented to the matrix factors as tibble attributes (`"annot_u"` and `"annot_v"`) using adapted **dplyr** verbs.
+- Has methods to estimate projections of scores on loadings or vice-versa.
 
 ## verbs
 
@@ -77,7 +77,7 @@ _This functionality is of questionable utility and low-priority._
 
 ## plotting
 
-Incorporate `inertia` argument to `fortify()` and/or to `stat_biplot()`. Carefully document and justify the choice of where along the "typical" workflow to calculate the inertia.
+Incorporate `inertia` argument to `as_bibble()`, `fortify()` and/or `stat_biplot()` (see also the `expand` parameter of `stats::biplot()`). Carefully document and justify the choice of where along the "typical" workflow to calculate the inertia.
 
 Develop a generalized scree plot (`ggord() + geom_scree()`?) with options (variance explained, stress, etc.) appropriate to classes.
 

@@ -1,6 +1,5 @@
 
-#' @importFrom broom tidy augment
-#' @importFrom tidyr nest
+#' @importFrom broom augment
 #' @importFrom stats model.frame
 
 #' @rdname bibble
@@ -82,7 +81,7 @@ v_annot.lm <- function(x) {
 coord_annot.lm <- function(x) {
   as_tibble(data.frame(
     .name = get_coord(x),
-    tidy(x),
+    tidy(un_bibble(x)),
     stringsAsFactors = FALSE
   ))
 }
@@ -165,10 +164,10 @@ v_annot.mlm <- function(x) {
 coord_annot.mlm <- function(x) {
   res <- as_tibble(data.frame(
     .name = get_coord(x),
-    tidy(x),
+    tidy(un_bibble(x)),
     stringsAsFactors = FALSE
   ))
-  nest(res, -dplyr::one_of(".name", "term"), .key = "model")
+  tidyr::nest(res, -dplyr::one_of(".name", "term"), .key = "model")
 }
 
 #' @rdname reconstruct

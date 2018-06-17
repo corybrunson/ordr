@@ -144,6 +144,7 @@ geom_biplot_vector <- function(
 }
 
 # https://github.com/vqv/ggbiplot/tree/experimental
+# Implement this as `stat_axis()`, to be paired with `geom_text()` and friends.
 
 #' @rdname ggbiplot-vector
 #' @usage NULL
@@ -173,7 +174,7 @@ GeomAxis <- ggproto(
     parse = FALSE,
     na.rm = FALSE
   ) {
-    if (is_empty(data)) return(zeroGrob())
+    if (rlang::is_empty(data)) return(zeroGrob())
     
     text <- transform(
       data, 

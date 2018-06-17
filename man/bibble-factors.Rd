@@ -102,11 +102,6 @@ The \code{get_*} functions extract one or both of the matrix factors
 scores (\eqn{U}) and the variable loadings (\eqn{V}). \code{get_coord} 
 retrieves the names of the coordinates shared by \eqn{U} and \eqn{V}.
 
-The \code{*_annot} functions produce \link[tibble]{tibble}s of annotations 
-for the subjects/scores, variables/loadings, and coordinates. The first field
-of each tibble is \code{.name} and contains the subject, variable, and 
-coordinate names, respectively.
-
 \code{dim.bbl} retrieves the number of coordinates on which the data have
 been ordinated.
 }

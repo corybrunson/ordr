@@ -82,8 +82,11 @@ fortify_v <- function(model, include = "all") {
   fortify(model = model, data = NULL, .matrix = "v", include = include)
 }
 
-#' @rdname bibble-fortification
 #' @importFrom broom tidy
+#' @export
+broom::tidy
+
+#' @rdname bibble-fortification
 #' @export
 tidy.bbl <- function(x, ..., .matrix = "uv", include = "all") {
   fortify.bbl(model = x, data = NULL, .matrix = .matrix, include = include)

@@ -63,7 +63,10 @@ bioenv <- dplyr::mutate(
 # linear regression setup
 (m <- lm(data = bioenv, formula = d ~ x + y))
 (b <- as_bibble(m))
-(d <- fortify(b))
+(d <- tidy(b))
+
+# contributions of predictors to explained variance
+print(coord_annot(b))
 
 # basic linear regression biplot
 gg <- ggbiplot(b, aes(x = x, y = y))

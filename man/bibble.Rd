@@ -8,6 +8,7 @@
 \alias{make_bibble}
 \alias{is_bibble}
 \alias{is.bibble}
+\alias{un_bibble}
 \alias{as_bibble.cmds}
 \alias{as_bibble.lm}
 \alias{as_bibble.lpca}
@@ -23,6 +24,8 @@ make_bibble(u = NULL, v = NULL, ...)
 is_bibble(x)
 
 is.bibble(x)
+
+un_bibble(x)
 
 \method{as_bibble}{cmds}(x)
 
@@ -78,7 +81,10 @@ bioenv <- dplyr::mutate(
 # linear regression setup
 (m <- lm(data = bioenv, formula = d ~ x + y))
 (b <- as_bibble(m))
-(d <- fortify(b))
+(d <- tidy(b))
+
+# contributions of predictors to explained variance
+print(coord_annot(b))
 
 # basic linear regression biplot
 gg <- ggbiplot(b, aes(x = x, y = y))
@@ -117,8 +123,8 @@ ggbiplot(finches_lsvd, aes(x = LSC1, y = LSC2)) +
   geom_v_label(aes(label = .name), size = 3, alpha = .5)
 
 finches_lpca <- as_bibble(logisticPCA(finches_mat))
+# DISTINGUISH SEGMENT SIZE FROM TEXT SIZE (EXTRA `cex` PARAMETER?)
 ggbiplot(finches_lpca, aes(x = LPC1, y = LPC2)) +
-  geom_u_vector(aes(x = LPC1 * .01, y = LPC2 * .01)) +
-  geom_u_text(aes(x = LPC1 * .01, y = LPC2 * .01, label = .name), size = 3) +
+  geom_u_axis(aes(x = LPC1 * .02, y = LPC2 * .02, label = .name), size = 3) +
   geom_v_label(aes(label = .name), size = 3, alpha = .5)
 }

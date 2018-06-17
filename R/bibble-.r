@@ -61,6 +61,9 @@ make_bibble <- function(u = NULL, v = NULL, ...) {
 #' @export
 is_bibble <- function(x) {
   if (!inherits(x, "bbl")) return(FALSE)
+  if (!is.null(attr(x, "coord_rotation")) &&
+      !is.matrix(attr(x, "coord_rotation")) &&
+      !all(dim(attr(x, "coord_rotation") == rep(dim(x), 2)))) return(FALSE)
   if (!is.null(attr(x, "u_annot")) &&
       !is_tibble(attr(x, "u_annot"))) return(FALSE)
   if (!is.null(attr(x, "v_annot")) &&
@@ -76,3 +79,14 @@ is_bibble <- function(x) {
 #' @rdname bibble
 #' @export
 is.bibble <- is_bibble
+
+#' @rdname bibble
+#' @export
+un_bibble <- function(x) {
+  if (!is_bibble(x)) return(x)
+  attr(x, "coord_rotation") <- NULL
+  attr(x, "u_annot") <- NULL
+  attr(x, "v_annot") <- NULL
+  class(x) <- setdiff(class(x), "bbl")
+  x
+}

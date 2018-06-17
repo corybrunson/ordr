@@ -74,6 +74,11 @@ These functions return annotation associated with the subjects, variables,
 and coordinates of an ordination.
 }
 \details{
+The \code{*_annot} functions produce \link[tibble]{tibble}s of annotations 
+for the subjects/scores, variables/loadings, and coordinates. The first field
+of each tibble is \code{.name} and contains the subject, variable, and 
+coordinate names, respectively.
+
 The \code{*_annot} functions return annotation from two sources:
 \enumerate{
   \item Information about the subjects, variables, or coordinates contained
