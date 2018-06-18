@@ -52,9 +52,8 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   )
   coord_sum <- paste0(
     "# ", rk,
-    ifelse(is.null(attr(x, "alignment")), "", " aligned"),
-    " coordinate", ifelse(rk == 1, "", "s"),
-    #ifelse(is.null(attr(x, "alignment")), "", "*"),
+    " coordinate", if(rk == 1) "" else "s",
+    if (is.null(attr(x, "alignment"))) "" else ", realigned from originals",
     ": ",
     print_reps(x_coord)
   )
