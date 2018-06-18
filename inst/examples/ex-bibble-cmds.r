@@ -2,14 +2,10 @@
 
 data(country_differences, country_attributes)
 # format both tibbles as matrices
-x1 <- country_differences %>%
-  dplyr::select(-Countries) %>%
-  as.matrix() %>%
-  {rownames(.) <- dplyr::pull(country_differences, Countries); .}
-x2 <- country_attributes %>%
-  dplyr::select(-Countries) %>%
-  as.matrix() %>%
-  {rownames(.) <- dplyr::pull(country_differences, Countries); .}
+x1 <- as.matrix(dplyr::select(country_differences, -Countries))
+rownames(x1) <- dplyr::pull(country_differences, Countries)
+x2 <- as.matrix(dplyr::select(country_attributes, -Countries))
+rownames(x2) <- dplyr::pull(country_differences, Countries)
 
 # multidimensional scaling setup
 (m <- cmdscale(x1, k = 2))
@@ -27,7 +23,7 @@ ggbiplot(b) +
 ggbiplot(b, aes(x = 2, y = 1)) +
   geom_v_text(aes(label = .name))
 # regress the attributes on the plotting dimensions and annotate the biplot
-fit <- lm(x2 ~ get_u(b)) %>% as_bibble()
+fit <- as_bibble(lm(x2 ~ get_u(b)))
 gg +
   geom_v_axis(data = fit, aes(label = .name))
 gg +

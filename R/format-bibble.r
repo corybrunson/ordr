@@ -20,9 +20,9 @@
 format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
   # dimensional parameters
-  uv <- get_factor(x, "uv")
+  uv <- align_factor(x, "uv")
   uv_dims <- sapply(uv, dim)
-  x_coord <- get_coord(x)
+  x_coord <- align_coord(x)
   rk <- length(x_coord)
   uv_ann <- factor_annot(x, "uv")
   n_ann <- sapply(uv_ann, ncol)
@@ -51,7 +51,11 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     ": (", uv_dims[1, 1], " x ", rk, ") x (", uv_dims[1, 2], " x ", rk, ")'"
   )
   coord_sum <- paste0(
-    "# ", rk, " coordinate", ifelse(rk == 1, "", "s"), ": ",
+    "# ", rk,
+    ifelse(is.null(attr(x, "alignment")), "", " aligned"),
+    " coordinate", ifelse(rk == 1, "", "s"),
+    #ifelse(is.null(attr(x, "alignment")), "", "*"),
+    ": ",
     print_reps(x_coord)
   )
   

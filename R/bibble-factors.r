@@ -17,7 +17,6 @@
 #' @param x A bibble, or an object convertible to one.
 #' @param ... Additional arguments from \code{as.matrix}; ignored.
 #' @template matrix-param
-#'   
 
 #' @rdname bibble-factors
 #' @export
@@ -27,7 +26,7 @@ get_u <- function(x) UseMethod("get_u")
 #' @export
 get_v <- function(x) UseMethod("get_v")
 
-# need 'get_*' functions before and after coercion; 'get_*.bbl' are unnecessary
+# need `get_*` functions before and after coercion; `get_*.bbl` are unnecessary
 
 #' @rdname bibble-factors
 #' @export

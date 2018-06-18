@@ -1,13 +1,21 @@
+#' Bibble functionality for linear model objects
+#' 
+#' These methods extract data from, and attribute new data to, objects of class
+#' \code{"lm"}, \code{"glm"}, and \code{"mlm"}.
+#' 
+#' @name bibble-lm
+#' @template methods-params
+#' @template matrix-param
+#' @example inst/examples/ex-bibble-lm.r
 
 #' @importFrom broom augment
 #' @importFrom stats model.frame
 
-#' @rdname bibble
-#' @example inst/examples/ex-bibble-lm.r
+#' @rdname bibble-lm
 #' @export
 as_bibble.lm <- as_bibble_recognized
 
-#' @rdname bibble-factors
+#' @rdname bibble-lm
 #' @export
 get_u.lm <- function(x) {
   .intercept_col <- if (names(x$coefficients)[1] == "(Intercept)") {
@@ -21,7 +29,7 @@ get_u.lm <- function(x) {
   res
 }
 
-#' @rdname bibble-factors
+#' @rdname bibble-lm
 #' @export
 get_v.lm <- function(x) {
   res <- t(x$coefficients)
@@ -32,7 +40,7 @@ get_v.lm <- function(x) {
   res
 }
 
-#' @rdname bibble-factors
+#' @rdname bibble-lm
 #' @export
 get_coord.lm <- function(x) {
   .predictors <- x$model[, -1]
@@ -52,7 +60,7 @@ get_coord.lm <- function(x) {
   coord
 }
 
-#' @rdname bibble-annotation
+#' @rdname bibble-lm
 #' @export
 u_annot.lm <- function(x) {
   res <- tibble(.name = rownames(model.frame(x)))
@@ -64,7 +72,7 @@ u_annot.lm <- function(x) {
   )
 }
 
-#' @rdname bibble-annotation
+#' @rdname bibble-lm
 #' @export
 v_annot.lm <- function(x) {
   tibble(
@@ -76,7 +84,7 @@ v_annot.lm <- function(x) {
   )
 }
 
-#' @rdname bibble-annotation
+#' @rdname bibble-lm
 #' @export
 coord_annot.lm <- function(x) {
   as_tibble(data.frame(
@@ -86,22 +94,19 @@ coord_annot.lm <- function(x) {
   ))
 }
 
-#' @rdname align-to
+#' @rdname bibble-lm
 #' @export
 permute_to.lm <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)
-  # get negations
+  # get permutations
   p <- permutation_to(get_factor(as_bibble(x), .matrix), y)
-  # edit the 'cmds' object (doesn't depend on `.matrix`)
-  x$coefficients <- x$coefficients[p]
-  x$effects[1:x$rank] <- x$effects[p]
-  # tag 'cmds' object with negation
+  # tag 'cmds' object with permutation
   x <- attribute_alignment(x, diag(1, nrow = x$rank)[, p, drop = FALSE])
-  # return rotated 'cmds' object
+  # return annotated object
   x
 }
 
-#' @rdname bibble-factors
+#' @rdname bibble-lm
 #' @export
 get_u.mlm <- function(x) {
   .intercept_col <- if (rownames(x$coefficients)[1] == "(Intercept)") {
@@ -115,7 +120,7 @@ get_u.mlm <- function(x) {
   res
 }
 
-#' @rdname bibble-factors
+#' @rdname bibble-lm
 #' @export
 get_v.mlm <- function(x) {
   res <- t(x$coefficients)
@@ -123,7 +128,7 @@ get_v.mlm <- function(x) {
   res
 }
 
-#' @rdname bibble-factors
+#' @rdname bibble-lm
 #' @export
 get_coord.mlm <- function(x) {
   .predictors <- x$model[, -1]
@@ -143,7 +148,7 @@ get_coord.mlm <- function(x) {
   coord
 }
 
-#' @rdname bibble-annotation
+#' @rdname bibble-lm
 #' @export
 u_annot.mlm <- function(x) {
   tibble(
@@ -151,7 +156,7 @@ u_annot.mlm <- function(x) {
   )
 }
 
-#' @rdname bibble-annotation
+#' @rdname bibble-lm
 #' @export
 v_annot.mlm <- function(x) {
   tibble(
@@ -159,7 +164,7 @@ v_annot.mlm <- function(x) {
   )
 }
 
-#' @rdname bibble-annotation
+#' @rdname bibble-lm
 #' @export
 coord_annot.mlm <- function(x) {
   res <- as_tibble(data.frame(
@@ -170,7 +175,7 @@ coord_annot.mlm <- function(x) {
   tidyr::nest(res, -dplyr::one_of(".name", "term"), .key = "model")
 }
 
-#' @rdname reconstruct
+#' @rdname bibble-lm
 #' @export
 reconstruct.lm <- function(x) {
   pred_mat <- as.matrix(x$model[, -1, drop = FALSE])

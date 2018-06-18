@@ -15,7 +15,6 @@
 #'   \code{"all"}; whether the fortified data frame should include only the 
 #'   ordination coordinates, also the annotations shared by subjects and 
 #'   variables, or all annotations (with \code{NA}s where not defined).
-#' @example inst/examples/ex-bibble-lm.r
 
 #' @rdname bibble-fortification
 #' @export
@@ -28,7 +27,7 @@ fortify.bbl <- function(
   include <- match.arg(include, c("coordinates", "shared", "all"))
   
   if (grepl("u", .matrix)) {
-    u <- as_tibble(get_u(model))
+    u <- as_tibble(align_u(model))
     if (include != "coordinates") {
       u <- dplyr::bind_cols(
         u,
@@ -38,7 +37,7 @@ fortify.bbl <- function(
     }
   }
   if (grepl("v", .matrix)) {
-    v <- as_tibble(get_v(model))
+    v <- as_tibble(align_v(model))
     if (include != "coordinates") {
       v <- dplyr::bind_cols(
         v,

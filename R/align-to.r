@@ -33,14 +33,14 @@
 align_to <- function(x, y, .matrix) {
   # check that alignment is possible
   prev_class <- setdiff(class(x), "bbl")
-  if (any(prev_class) %in% method_classes("rotate_to")) {
-    return(rotate_to(x, y, .matrix))
+  if (any(prev_class %in% method_classes("rotate_to"))) {
+    return(rotate_to(x, y, .matrix = .matrix))
   } else {
-    if (any(prev_class) %in% method_classes("permute_to")) {
-      x <- permute_to(x, y, .matrix)
+    if (any(prev_class %in% method_classes("permute_to"))) {
+      x <- permute_to(x, y, .matrix = .matrix)
     }
-    if (any(prev_class) %in% method_classes("negate_to")) {
-      x <- negate_to(x, y, .matrix)
+    if (any(prev_class %in% method_classes("negate_to"))) {
+      x <- negate_to(x, y, .matrix = .matrix)
     }
     return(x)
   }
@@ -60,25 +60,6 @@ rotate_to <- function(x, y, ...) UseMethod("rotate_to")
 
 #' @rdname align-to
 #' @export
-negate_to.matrix <- function(x, y, ...) {
-  s <- negation_to(x, y)
-  sweep(x, 2, s, "*")
-}
-
-#' @rdname align-to
-#' @export
-permute_to.matrix <- function(x, y, ..., abs.values = FALSE) {
-  p <- permutation_to(x, y, abs.values = abs.values)
-  x[, p, drop = FALSE]
-}
-
-#' @rdname align-to
-#' @export
-rotate_to.matrix <- function(x, y, ...) {
-  m <- rotation_to(x, y)
-  x %*% m
-}
-
 negation_to <- function(x, y) {
   stopifnot(nrow(x) == nrow(y))
   d <- min(ncol(x), ncol(y))
@@ -91,6 +72,8 @@ negation_to <- function(x, y) {
   c(signs, rep(1, ncol(x) - d))
 }
 
+#' @rdname align-to
+#' @export
 permutation_to <- function(x, y, abs.values = FALSE) {
   stopifnot(nrow(x) == nrow(y))
   d <- min(ncol(x), ncol(y))
@@ -111,6 +94,8 @@ permutation_to <- function(x, y, abs.values = FALSE) {
   inds
 }
 
+#' @rdname align-to
+#' @export
 rotation_to <- function(x, y) {
   stopifnot(nrow(x) == nrow(y))
   d <- min(ncol(x), ncol(y))
@@ -131,8 +116,53 @@ rotation_to <- function(x, y) {
 }
 
 attribute_alignment <- function(x, r) {
-  attr(x, "alignment") <- if (is.null(attr(x, "alignment"))) r else {
-    attr(x, "alignment") %*% r
+  #attr(x, "alignment") <- if (is.null(attr(x, "alignment"))) r else {
+  #  attr(x, "alignment") %*% r
+  #}
+  attr(x, "alignment") <- r
+  x
+}
+
+align_uv <- function(x, .matrix) {
+  m <- get_factor(x, .matrix)
+  r <- attr(x, "alignment")
+  if (is.null(r)) return(m) else {
+    return(m %*% r)
   }
+}
+
+#' @rdname align-to
+#' @export
+align_u <- function(x) align_uv(x, .matrix = "u")
+
+#' @rdname align-to
+#' @export
+align_v <- function(x) align_uv(x, .matrix = "v")
+
+#' @rdname align-to
+#' @export
+align_factor <- function(x, .matrix) {
+  switch(
+    match_factor(.matrix),
+    u = align_u(x),
+    v = align_v(x),
+    uv = list(u = align_u(x), v = align_v(x))
+  )
+}
+
+#' @rdname align-to
+#' @export
+align_coord <- function(x) {
+  if (is.null(attr(x, "alignment"))) {
+    get_coord(x)
+  } else {
+    colnames(as.data.frame(matrix(1:dim(x), nrow = 1)))
+  }
+}
+
+#' @rdname align-to
+#' @export
+un_align <- function(x) {
+  attr(x, "alignment") <- NULL
   x
 }
