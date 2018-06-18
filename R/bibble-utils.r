@@ -8,7 +8,9 @@ bibble_factors <- c(
   u = "u", v = "v", uv = "uv",
   U = "u", V = "v", UV = "uv",
   left = "u", right = "v", both = "uv",
-  subjects = "u", variables = "v"
+  cases = "u", variables = "v",
+  subjects = "u", measures = "v",
+  scores = "u", loadings = "v"
 )
 match_factor <- function(x) {
   x <- match.arg(x, names(bibble_factors))

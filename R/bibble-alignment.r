@@ -1,11 +1,11 @@
-#' Align one ordination to another of the same subjects or variables
+#' Align one ordination to another of the same cases or variables
 #' 
 #' Depending on the method of ordination, its interpretation may not depend on 
 #' the signs, the order, or the orientation of the coordinates. 
 #' \code{negate_to}, \code{permute_to}, and \code{rotate_to} take advantage of 
 #' these symmetries in order to manipulate the coordinates of one ordination so 
-#' that the positions of the subjects or variables align, as closely as 
-#' possible, to those of the same subjects or variables in another ordination. 
+#' that the positions of the cases or variables align, as closely as 
+#' possible, to those of the same cases or variables in another ordination. 
 #' In the case of negation and permutation, this is done by minimizing the 
 #' angles between vectors of scores or loadings in the respective coordinates. 
 #' In the case of rotation, this is done by invoking the singular value 
@@ -19,7 +19,8 @@
 #' 8--13.
 #' 
 
-#' @name align-to
+#' @name bibble-alignment
+#' @include bibble-augmentation.r
 #' @importFrom stats cor
 #' @param x,y Matrices or bibbles; \code{x} will be aligned to \code{y}.
 #' @template matrix-param
@@ -29,7 +30,7 @@
 #' @param ... Additional parameters passed to methods.
 #' @example inst/examples/ex-align-to.r
 
-#' @rdname align-to
+#' @rdname bibble-alignment
 #' @export
 align_to <- function(x, y, .matrix) {
   # check that alignment is possible
@@ -47,19 +48,19 @@ align_to <- function(x, y, .matrix) {
   }
 }
 
-#' @rdname align-to
+#' @rdname bibble-alignment
 #' @export
 negate_to <- function(x, y, ...) UseMethod("negate_to")
 
-#' @rdname align-to
+#' @rdname bibble-alignment
 #' @export
 permute_to <- function(x, y, ...) UseMethod("permute_to")
 
-#' @rdname align-to
+#' @rdname bibble-alignment
 #' @export
 rotate_to <- function(x, y, ...) UseMethod("rotate_to")
 
-#' @rdname align-to
+#' @rdname bibble-alignment
 #' @export
 negation_to <- function(x, y) {
   stopifnot(nrow(x) == nrow(y))
@@ -73,7 +74,7 @@ negation_to <- function(x, y) {
   c(signs, rep(1, ncol(x) - d))
 }
 
-#' @rdname align-to
+#' @rdname bibble-alignment
 #' @export
 permutation_to <- function(x, y, abs.values = FALSE) {
   stopifnot(nrow(x) == nrow(y))
@@ -95,7 +96,7 @@ permutation_to <- function(x, y, abs.values = FALSE) {
   inds
 }
 
-#' @rdname align-to
+#' @rdname bibble-alignment
 #' @export
 rotation_to <- function(x, y) {
   stopifnot(nrow(x) == nrow(y))
@@ -117,53 +118,16 @@ rotation_to <- function(x, y) {
 }
 
 attribute_alignment <- function(x, r) {
-  #attr(x, "alignment") <- if (is.null(attr(x, "alignment"))) r else {
-  #  attr(x, "alignment") %*% r
+  #attr(x, "align") <- if (is.null(attr(x, "align"))) r else {
+  #  attr(x, "align") %*% r
   #}
-  attr(x, "alignment") <- r
+  attr(x, "align") <- r
   x
 }
 
-align_uv <- function(x, .matrix) {
-  m <- get_factor(x, .matrix)
-  r <- attr(x, "alignment")
-  if (is.null(r)) return(m) else {
-    return(m %*% r)
-  }
-}
-
-#' @rdname align-to
-#' @export
-align_u <- function(x) align_uv(x, .matrix = "u")
-
-#' @rdname align-to
-#' @export
-align_v <- function(x) align_uv(x, .matrix = "v")
-
-#' @rdname align-to
-#' @export
-align_factor <- function(x, .matrix) {
-  switch(
-    match_factor(.matrix),
-    u = align_u(x),
-    v = align_v(x),
-    uv = list(u = align_u(x), v = align_v(x))
-  )
-}
-
-#' @rdname align-to
-#' @export
-align_coord <- function(x) {
-  if (is.null(attr(x, "alignment"))) {
-    get_coord(x)
-  } else {
-    colnames(as.data.frame(matrix(1:dim(x), nrow = 1)))
-  }
-}
-
-#' @rdname align-to
+#' @rdname bibble-alignment
 #' @export
 un_align <- function(x) {
-  attr(x, "alignment") <- NULL
+  attr(x, "align") <- NULL
   x
 }

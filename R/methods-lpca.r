@@ -18,28 +18,28 @@
 #' @export
 as_bibble.lpca <- as_bibble_recognized
 
-get_uv_lpca <- function(x, .matrix) {
+recover_uv_lpca <- function(x, .matrix) {
   .matrix <- match_factor(.matrix)
   res <- x[[switch(.matrix, u = "PCs", v = "U")]]
-  colnames(res) <- get_coord(x)
+  colnames(res) <- recover_coord(x)
   res
 }
 
 #' @rdname bibble-lpca
 #' @export
-get_u.lpca <- function(x) get_uv_lpca(x, "u")
+recover_u.lpca <- function(x) recover_uv_lpca(x, "u")
 
 #' @rdname bibble-lpca
 #' @export
-get_v.lpca <- function(x) get_uv_lpca(x, "v")
+recover_v.lpca <- function(x) recover_uv_lpca(x, "v")
 
 #' @rdname bibble-lpca
 #' @export
-get_coord.lpca <- function(x) paste0("LPC", 1:ncol(x$U))
+recover_coord.lpca <- function(x) paste0("LPC", 1:ncol(x$U))
 
 #' @rdname bibble-lpca
 #' @export
-u_annot.lpca <- function(x) {
+augment_u.lpca <- function(x) {
   .name <- rownames(x$PCs)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$PCs))
@@ -51,7 +51,7 @@ u_annot.lpca <- function(x) {
 
 #' @rdname bibble-lpca
 #' @export
-v_annot.lpca <- function(x) {
+augment_v.lpca <- function(x) {
   .name <- rownames(x$U)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$U))
@@ -64,9 +64,9 @@ v_annot.lpca <- function(x) {
 
 #' @rdname bibble-lpca
 #' @export
-coord_annot.lpca <- function(x) {
+augment_coord.lpca <- function(x) {
   tibble(
-    .name = get_coord.lpca(x)
+    .name = recover_coord.lpca(x)
   )
 }
 
@@ -75,7 +75,7 @@ coord_annot.lpca <- function(x) {
 negate_to.lpca <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)
   # get negations
-  s <- negation_to(get_factor(as_bibble(x), .matrix), y)
+  s <- negation_to(recover_factor(as_bibble(x), .matrix), y)
   # tag 'lpca' object with negation
   x <- attribute_alignment(x, diag(s, nrow = ncol(x$U)))
   # return annotated object
@@ -86,28 +86,28 @@ negate_to.lpca <- function(x, y, ..., .matrix) {
 #' @export
 as_bibble.lsvd <- as_bibble_recognized
 
-get_uv_lsvd <- function(x, .matrix) {
+recover_uv_lsvd <- function(x, .matrix) {
   .matrix <- match_factor(.matrix)
   res <- x[[switch(.matrix, u = "A", v = "B")]]
-  colnames(res) <- get_coord(x)
+  colnames(res) <- recover_coord(x)
   res
 }
 
 #' @rdname bibble-lpca
 #' @export
-get_u.lsvd <- function(x) get_uv_lsvd(x, "u")
+recover_u.lsvd <- function(x) recover_uv_lsvd(x, "u")
 
 #' @rdname bibble-lpca
 #' @export
-get_v.lsvd <- function(x) get_uv_lsvd(x, "v")
+recover_v.lsvd <- function(x) recover_uv_lsvd(x, "v")
 
 #' @rdname bibble-lpca
 #' @export
-get_coord.lsvd <- function(x) paste0("LSC", 1:ncol(x$A))
+recover_coord.lsvd <- function(x) paste0("LSC", 1:ncol(x$A))
 
 #' @rdname bibble-lpca
 #' @export
-u_annot.lsvd <- function(x) {
+augment_u.lsvd <- function(x) {
   tibble(
     .name = rownames(x$A)
   )
@@ -115,7 +115,7 @@ u_annot.lsvd <- function(x) {
 
 #' @rdname bibble-lpca
 #' @export
-v_annot.lsvd <- function(x) {
+augment_v.lsvd <- function(x) {
   tibble(
     .name = rownames(x$B),
     .mu = x$mu
@@ -124,9 +124,9 @@ v_annot.lsvd <- function(x) {
 
 #' @rdname bibble-lpca
 #' @export
-coord_annot.lsvd <- function(x) {
+augment_coord.lsvd <- function(x) {
   tibble(
-    .name = get_coord.lsvd(x)
+    .name = recover_coord.lsvd(x)
   )
 }
 

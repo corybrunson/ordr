@@ -2,47 +2,62 @@
 % Please edit documentation in R/bibble-factors.r
 \name{bibble-factors}
 \alias{bibble-factors}
+\alias{recover_u}
+\alias{recover_v}
+\alias{recover_factor}
+\alias{recover_u.default}
+\alias{recover_v.default}
+\alias{recover_u.data.frame}
+\alias{recover_v.data.frame}
 \alias{get_u}
 \alias{get_v}
-\alias{get_u.default}
-\alias{get_v.default}
-\alias{get_coord.default}
-\alias{get_u.data.frame}
-\alias{get_v.data.frame}
 \alias{get_factor}
 \alias{as.matrix.bbl}
+\alias{recover_coord}
+\alias{recover_coord.default}
 \alias{get_coord}
 \alias{dim.bbl}
 \title{Extract the factors of an ordination object}
 \usage{
-get_u(x)
+recover_u(x)
 
-get_v(x)
+recover_v(x)
 
-\method{get_u}{default}(x)
+recover_factor(x, .matrix)
 
-\method{get_v}{default}(x)
+\method{recover_u}{default}(x)
 
-\method{get_coord}{default}(x)
+\method{recover_v}{default}(x)
 
-\method{get_u}{data.frame}(x)
+\method{recover_u}{data.frame}(x)
 
-\method{get_v}{data.frame}(x)
+\method{recover_v}{data.frame}(x)
 
-get_factor(x, .matrix)
+get_u(x, align = TRUE)
 
-\method{as.matrix}{bbl}(x, ..., .matrix)
+get_v(x, align = TRUE)
 
-get_coord(x)
+get_factor(x, .matrix, align = TRUE)
+
+\method{as.matrix}{bbl}(x, ..., .matrix, align = TRUE)
+
+recover_coord(x)
+
+\method{recover_coord}{default}(x)
+
+get_coord(x, align = TRUE)
 
 \method{dim}{bbl}(x)
 }
 \arguments{
-\item{x}{A bibble, or an object convertible to one.}
+\item{x}{A bibble, or an ordination object coercible to one.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
+
+\item{align}{Logical; whether to align the matrix factors and coordinates
+according to an \code{"align"} matrix attribute.}
 
 \item{...}{Additional arguments from \code{as.matrix}; ignored.}
 }
@@ -51,11 +66,15 @@ These functions return information about the matrix factorization underlying
 an ordination.
 }
 \details{
-The \code{get_*} functions extract one or both of the matrix factors 
-\eqn{U,V} that constitute an ordination. These are interpreted as the subject
-scores (\eqn{U}) and the variable loadings (\eqn{V}). \code{get_coord} 
-retrieves the names of the coordinates shared by \eqn{U} and \eqn{V}.
+The \code{recover_*} functions extract one or both of the matrix factors 
+\eqn{U,V} that constitute the original ordination. These are interpreted as 
+the case scores (\eqn{U}) and the variable loadings (\eqn{V}). The 
+\code{get_*} functions optionally (and by default) apply any alignment stored
+as the \code{"align"} attribute (see \code{\link{bibble-alignment}}). Only
+the \code{recover_*} functions are generics that require methods for each
+ordination class.
 
-\code{dim.bbl} retrieves the number of coordinates on which the data have
-been ordinated.
+\code{get_coord} retrieves the names of the coordinates shared by \eqn{U} and
+\eqn{V}, on which the original data were ordinated, and \code{dim.bbl} 
+retrieves their number.
 }

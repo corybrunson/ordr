@@ -58,7 +58,7 @@ ggbiplot <- function(
 # interpret numerical x and y coordinates as coordinates;
 # assume first two coordinates if none are provided
 ordinate_aes <- function(ordination, mapping) {
-  coords <- align_coord(ordination)
+  coords <- get_coord(ordination, align = TRUE)
   coord_vars <- syms(coords)
   if (is.null(mapping$y)) {
     mapping <- c(aes(y = !!coord_vars[[2]]), mapping)

@@ -8,13 +8,13 @@
 #' @param model,x A \link{bibble}, i.e. an ordination object of class 
 #'   \code{"bbl"}.
 #' @param data Ignored.
-#' @param ... Additional arguments received from \code{fortify} or \code{tidy};
+#' @param ... Additional arguments received from \code{fortify} or \code{tidy}; 
 #'   ignored.
 #' @template matrix-param
 #' @param include Character matched to \code{"coordinates"}, \code{"shared"}, or
 #'   \code{"all"}; whether the fortified data frame should include only the 
-#'   ordination coordinates, also the annotations shared by subjects and 
-#'   variables, or all annotations (with \code{NA}s where not defined).
+#'   ordination coordinates or also augmented case and variable data, and, if
+#'   the latter, whether only shared fields or all from both.
 
 #' @rdname bibble-fortification
 #' @export
@@ -27,21 +27,21 @@ fortify.bbl <- function(
   include <- match.arg(include, c("coordinates", "shared", "all"))
   
   if (grepl("u", .matrix)) {
-    u <- as_tibble(align_u(model))
+    u <- as_tibble(get_u(model, align = TRUE))
     if (include != "coordinates") {
       u <- dplyr::bind_cols(
         u,
-        u_annot(model)
+        augment_u(model)
       )
       u$.matrix <- "u"
     }
   }
   if (grepl("v", .matrix)) {
-    v <- as_tibble(align_v(model))
+    v <- as_tibble(get_v(model, align = TRUE))
     if (include != "coordinates") {
       v <- dplyr::bind_cols(
         v,
-        v_annot(model)
+        augment_v(model)
       )
       v$.matrix <- "v"
     }
@@ -54,7 +54,7 @@ fortify.bbl <- function(
     uv = switch(
       include,
       #coordinates = {
-      #  coord <- get_coord(model)
+      #  coord <- recover_coord(model)
       #  as_tibble(as.data.frame(rbind(u[coord], v[coord])))
       #},
       coordinates = as_tibble(as.data.frame(rbind(u, v))),

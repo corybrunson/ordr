@@ -3,12 +3,12 @@
 \name{bibble-cmds}
 \alias{bibble-cmds}
 \alias{as_bibble.cmds}
-\alias{get_u.cmds}
-\alias{get_v.cmds}
-\alias{get_coord.cmds}
-\alias{u_annot.cmds}
-\alias{v_annot.cmds}
-\alias{coord_annot.cmds}
+\alias{recover_u.cmds}
+\alias{recover_v.cmds}
+\alias{recover_coord.cmds}
+\alias{augment_u.cmds}
+\alias{augment_v.cmds}
+\alias{augment_coord.cmds}
 \alias{negate_to.cmds}
 \alias{permute_to.cmds}
 \alias{rotate_to.cmds}
@@ -16,17 +16,17 @@
 \usage{
 \method{as_bibble}{cmds}(x)
 
-\method{get_u}{cmds}(x)
+\method{recover_u}{cmds}(x)
 
-\method{get_v}{cmds}(x)
+\method{recover_v}{cmds}(x)
 
-\method{get_coord}{cmds}(x)
+\method{recover_coord}{cmds}(x)
 
-\method{u_annot}{cmds}(x)
+\method{augment_u}{cmds}(x)
 
-\method{v_annot}{cmds}(x)
+\method{augment_v}{cmds}(x)
 
-\method{coord_annot}{cmds}(x)
+\method{augment_coord}{cmds}(x)
 
 \method{negate_to}{cmds}(x, y, ..., .matrix)
 

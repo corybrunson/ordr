@@ -17,7 +17,7 @@ as_bibble.lm <- as_bibble_recognized
 
 #' @rdname bibble-lm
 #' @export
-get_u.lm <- function(x) {
+recover_u.lm <- function(x) {
   .intercept_col <- if (names(x$coefficients)[1] == "(Intercept)") {
     .ic <- matrix(1L, nrow = nrow(x$model), ncol = 1)
     colnames(.ic) <- "(Intercept)"
@@ -25,24 +25,24 @@ get_u.lm <- function(x) {
   } else matrix(NA_integer_, nrow = nrow(x$model), ncol = 0)
   .predictors <- as.matrix(model.frame(x)[, -1])
   res <- cbind(.intercept_col, .predictors)
-  colnames(res) <- get_coord(x)
+  colnames(res) <- recover_coord(x)
   res
 }
 
 #' @rdname bibble-lm
 #' @export
-get_v.lm <- function(x) {
+recover_v.lm <- function(x) {
   res <- t(x$coefficients)
   dimnames(res) <- list(
     if (is.matrix(x$model[, 1])) colnames(x$model[, 1]) else names(x$model)[1],
-    get_coord(x)
+    recover_coord(x)
   )
   res
 }
 
 #' @rdname bibble-lm
 #' @export
-get_coord.lm <- function(x) {
+recover_coord.lm <- function(x) {
   .predictors <- x$model[, -1]
   if (is.matrix(.predictors)) {
     coord <- colnames(.predictors)
@@ -62,7 +62,7 @@ get_coord.lm <- function(x) {
 
 #' @rdname bibble-lm
 #' @export
-u_annot.lm <- function(x) {
+augment_u.lm <- function(x) {
   res <- tibble(.name = rownames(model.frame(x)))
   .int <- as.integer(names(x$coefficients)[1] == "(Intercept)")
   .rk <- x$rank
@@ -74,7 +74,7 @@ u_annot.lm <- function(x) {
 
 #' @rdname bibble-lm
 #' @export
-v_annot.lm <- function(x) {
+augment_v.lm <- function(x) {
   tibble(
     .name = if (is.matrix(x$model[, 1])) {
       colnames(x$model[, 1])
@@ -86,9 +86,9 @@ v_annot.lm <- function(x) {
 
 #' @rdname bibble-lm
 #' @export
-coord_annot.lm <- function(x) {
+augment_coord.lm <- function(x) {
   as_tibble(data.frame(
-    .name = get_coord(x),
+    .name = recover_coord(x),
     tidy(un_bibble(x)),
     stringsAsFactors = FALSE
   ))
@@ -108,7 +108,7 @@ permute_to.lm <- function(x, y, ..., .matrix) {
 
 #' @rdname bibble-lm
 #' @export
-get_u.mlm <- function(x) {
+recover_u.mlm <- function(x) {
   .intercept_col <- if (rownames(x$coefficients)[1] == "(Intercept)") {
     .ic <- matrix(1L, nrow = nrow(x$model), ncol = 1)
     colnames(.ic) <- "(Intercept)"
@@ -116,21 +116,21 @@ get_u.mlm <- function(x) {
   } else matrix(NA_integer_, nrow = nrow(x$model), ncol = 0)
   .predictors <- as.matrix(model.frame(x)[, -1])
   res <- cbind(.intercept_col, .predictors)
-  colnames(res) <- get_coord(x)
+  colnames(res) <- recover_coord(x)
   res
 }
 
 #' @rdname bibble-lm
 #' @export
-get_v.mlm <- function(x) {
+recover_v.mlm <- function(x) {
   res <- t(x$coefficients)
-  colnames(res) <- get_coord(x)
+  colnames(res) <- recover_coord(x)
   res
 }
 
 #' @rdname bibble-lm
 #' @export
-get_coord.mlm <- function(x) {
+recover_coord.mlm <- function(x) {
   .predictors <- x$model[, -1]
   if (is.matrix(.predictors)) {
     coord <- colnames(.predictors)
@@ -150,7 +150,7 @@ get_coord.mlm <- function(x) {
 
 #' @rdname bibble-lm
 #' @export
-u_annot.mlm <- function(x) {
+augment_u.mlm <- function(x) {
   tibble(
     .name = rownames(model.frame(x))
   )
@@ -158,7 +158,7 @@ u_annot.mlm <- function(x) {
 
 #' @rdname bibble-lm
 #' @export
-v_annot.mlm <- function(x) {
+augment_v.mlm <- function(x) {
   tibble(
     .name = colnames(x$coefficients)
   )
@@ -166,9 +166,9 @@ v_annot.mlm <- function(x) {
 
 #' @rdname bibble-lm
 #' @export
-coord_annot.mlm <- function(x) {
+augment_coord.mlm <- function(x) {
   res <- as_tibble(data.frame(
-    .name = get_coord(x),
+    .name = recover_coord(x),
     tidy(un_bibble(x)),
     stringsAsFactors = FALSE
   ))

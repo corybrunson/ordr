@@ -22,7 +22,7 @@ fortify_v(model, include = "all")
 
 \item{data}{Ignored.}
 
-\item{...}{Additional arguments received from \code{fortify} or \code{tidy};
+\item{...}{Additional arguments received from \code{fortify} or \code{tidy}; 
 ignored.}
 
 \item{.matrix}{A character string matching one of several indicators for one
@@ -31,8 +31,8 @@ standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 
 \item{include}{Character matched to \code{"coordinates"}, \code{"shared"}, or
 \code{"all"}; whether the fortified data frame should include only the 
-ordination coordinates, also the annotations shared by subjects and 
-variables, or all annotations (with \code{NA}s where not defined).}
+ordination coordinates or also augmented case and variable data, and, if
+the latter, whether only shared fields or all from both.}
 }
 \description{
 These methods of \code{\link[ggplot2]{fortify}} and \code{\link[broom]{tidy}}

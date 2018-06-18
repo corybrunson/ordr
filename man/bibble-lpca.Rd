@@ -3,20 +3,20 @@
 \name{bibble-lpca}
 \alias{bibble-lpca}
 \alias{as_bibble.lpca}
-\alias{get_u.lpca}
-\alias{get_v.lpca}
-\alias{get_coord.lpca}
-\alias{u_annot.lpca}
-\alias{v_annot.lpca}
-\alias{coord_annot.lpca}
+\alias{recover_u.lpca}
+\alias{recover_v.lpca}
+\alias{recover_coord.lpca}
+\alias{augment_u.lpca}
+\alias{augment_v.lpca}
+\alias{augment_coord.lpca}
 \alias{negate_to.lpca}
 \alias{as_bibble.lsvd}
-\alias{get_u.lsvd}
-\alias{get_v.lsvd}
-\alias{get_coord.lsvd}
-\alias{u_annot.lsvd}
-\alias{v_annot.lsvd}
-\alias{coord_annot.lsvd}
+\alias{recover_u.lsvd}
+\alias{recover_v.lsvd}
+\alias{recover_coord.lsvd}
+\alias{augment_u.lsvd}
+\alias{augment_v.lsvd}
+\alias{augment_coord.lsvd}
 \alias{reconstruct.lsvd}
 \alias{negate_to.lsvd}
 \title{Bibble functionality for logistic principal components analysis and singular 
@@ -24,33 +24,33 @@ value decomposition objects}
 \usage{
 \method{as_bibble}{lpca}(x)
 
-\method{get_u}{lpca}(x)
+\method{recover_u}{lpca}(x)
 
-\method{get_v}{lpca}(x)
+\method{recover_v}{lpca}(x)
 
-\method{get_coord}{lpca}(x)
+\method{recover_coord}{lpca}(x)
 
-\method{u_annot}{lpca}(x)
+\method{augment_u}{lpca}(x)
 
-\method{v_annot}{lpca}(x)
+\method{augment_v}{lpca}(x)
 
-\method{coord_annot}{lpca}(x)
+\method{augment_coord}{lpca}(x)
 
 \method{negate_to}{lpca}(x, y, ..., .matrix)
 
 \method{as_bibble}{lsvd}(x)
 
-\method{get_u}{lsvd}(x)
+\method{recover_u}{lsvd}(x)
 
-\method{get_v}{lsvd}(x)
+\method{recover_v}{lsvd}(x)
 
-\method{get_coord}{lsvd}(x)
+\method{recover_coord}{lsvd}(x)
 
-\method{u_annot}{lsvd}(x)
+\method{augment_u}{lsvd}(x)
 
-\method{v_annot}{lsvd}(x)
+\method{augment_v}{lsvd}(x)
 
-\method{coord_annot}{lsvd}(x)
+\method{augment_coord}{lsvd}(x)
 
 \method{reconstruct}{lsvd}(x)
 

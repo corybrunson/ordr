@@ -14,31 +14,31 @@
 #' @export
 as_bibble.cmds <- as_bibble_recognized
 
-get_uv_cmds <- function(x, .matrix) {
+recover_uv_cmds <- function(x, .matrix) {
   .matrix <- match_factor(.matrix)
   res <- x$points
   dimnames(res) <- list(
     dimnames(x$x)[[switch(.matrix, u = 1, v = 2)]],
-    get_coord(x)
+    recover_coord(x)
   )
   res
 }
 
 #' @rdname bibble-cmds
 #' @export
-get_u.cmds <- function(x) get_uv_cmds(x, "u")
+recover_u.cmds <- function(x) recover_uv_cmds(x, "u")
 
 #' @rdname bibble-cmds
 #' @export
-get_v.cmds <- function(x) get_uv_cmds(x, "v")
+recover_v.cmds <- function(x) recover_uv_cmds(x, "v")
 
 #' @rdname bibble-cmds
 #' @export
-get_coord.cmds <- function(x) paste0("PCo", 1:ncol(x$points))
+recover_coord.cmds <- function(x) paste0("PCo", 1:ncol(x$points))
 
 #' @rdname bibble-cmds
 #' @export
-u_annot.cmds <- function(x) {
+augment_u.cmds <- function(x) {
   .name <- rownames(x$x)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$x))
@@ -50,7 +50,7 @@ u_annot.cmds <- function(x) {
 
 #' @rdname bibble-cmds
 #' @export
-v_annot.cmds <- function(x) {
+augment_v.cmds <- function(x) {
   .name <- colnames(x$x)
   res <- if (is.null(.name)) {
     tibble_pole(ncol(x$x))
@@ -62,9 +62,9 @@ v_annot.cmds <- function(x) {
 
 #' @rdname bibble-cmds
 #' @export
-coord_annot.cmds <- function(x) {
+augment_coord.cmds <- function(x) {
   tibble(
-    .name = get_coord(x),
+    .name = recover_coord(x),
     .eig = x$eig[1:ncol(x$points)]
   )
 }

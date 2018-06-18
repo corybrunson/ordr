@@ -8,7 +8,7 @@
 #' The \code{"bbl"} ("bibble") class wraps around a range of ordination classes,
 #' making available a suite of ordination tools that specialize to each original
 #' object class, including \code{\link{format}} and \code{\link{fortify}}, which
-#' facilitate the \code{\link{print}} method and the \code{\link{ggbiplot}}
+#' facilitate the \code{\link{print}} method and the \code{\link{ggbiplot}} 
 #' function.
 #' 
 #' No default method is provided for \code{as_bibble}, despite most defined 
@@ -21,12 +21,13 @@
 #' and the same column names.
 #' 
 #' \code{is_bibble} checks an object \code{x} for the \code{"bbl"} class and for
-#' consistency between \code{get_coord(x)} and the columns of \code{get_u(x)} 
-#' and \code{get_v(x)}, using the functions at \code{\link{bibble-factors}}.
+#' consistency between \code{recover_coord(x)} and the columns of
+#' \code{recover_u(x)} and \code{recover_v(x)}, using the functions at
+#' \code{\link{bibble-factors}}.
 #' 
 
 #' @name bibble
-#' @include bibble-utils.r
+#' @include bibble-alignment.r
 #' @importFrom tibble tibble is_tibble as_tibble
 #' @param x An ordination object.
 #' @param u,v Matrices to be used as factors of a bibble.
@@ -61,18 +62,18 @@ make_bibble <- function(u = NULL, v = NULL, ...) {
 #' @export
 is_bibble <- function(x) {
   if (!inherits(x, "bbl")) return(FALSE)
-  if (!is.null(attr(x, "coord_rotation")) &&
-      !is.matrix(attr(x, "coord_rotation")) &&
-      !all(dim(attr(x, "coord_rotation") == rep(dim(x), 2)))) return(FALSE)
+  if (!is.null(attr(x, "alignment")) &&
+      !is.matrix(attr(x, "alignment")) &&
+      !all(dim(attr(x, "alignment") == rep(dim(x), 2)))) return(FALSE)
   if (!is.null(attr(x, "u_annot")) &&
       !is_tibble(attr(x, "u_annot"))) return(FALSE)
   if (!is.null(attr(x, "v_annot")) &&
       !is_tibble(attr(x, "v_annot"))) return(FALSE)
-  if (is.null(get_coord(x)) ||
-      is.null(get_u(x)) ||
-      is.null(get_v(x))) return(FALSE)
-  if (!all(get_coord(x) %in% colnames(get_u(x)))) return(FALSE)
-  if (!all(get_coord(x) %in% colnames(get_v(x)))) return(FALSE)
+  if (is.null(recover_coord(x)) ||
+      is.null(recover_u(x)) ||
+      is.null(recover_v(x))) return(FALSE)
+  if (!all(recover_coord(x) %in% colnames(recover_u(x)))) return(FALSE)
+  if (!all(recover_coord(x) %in% colnames(recover_v(x)))) return(FALSE)
   TRUE
 }
 
@@ -84,7 +85,7 @@ is.bibble <- is_bibble
 #' @export
 un_bibble <- function(x) {
   if (!is_bibble(x)) return(x)
-  attr(x, "coord_rotation") <- NULL
+  attr(x, "alignment") <- NULL
   attr(x, "u_annot") <- NULL
   attr(x, "v_annot") <- NULL
   class(x) <- setdiff(class(x), "bbl")

@@ -37,7 +37,7 @@ package and for class \code{"tbl_graph"} in the
 \strong{\link[tidygraph]{tidygraph}} package.
 }
 \details{
-Note: The \code{format} function is tedius but cannot be easily modularized
-without invoking \code{get_*()} and \code{*_annot()} multiple times, thereby
-significantly reducing performance.
+Note: The \code{format} function is tedius but cannot be easily modularized 
+without invoking \code{get_*()} and \code{augment_*()} multiple times,
+thereby significantly reducing performance.
 }

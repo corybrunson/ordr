@@ -3,49 +3,49 @@
 \name{bibble-lm}
 \alias{bibble-lm}
 \alias{as_bibble.lm}
-\alias{get_u.lm}
-\alias{get_v.lm}
-\alias{get_coord.lm}
-\alias{u_annot.lm}
-\alias{v_annot.lm}
-\alias{coord_annot.lm}
+\alias{recover_u.lm}
+\alias{recover_v.lm}
+\alias{recover_coord.lm}
+\alias{augment_u.lm}
+\alias{augment_v.lm}
+\alias{augment_coord.lm}
 \alias{permute_to.lm}
-\alias{get_u.mlm}
-\alias{get_v.mlm}
-\alias{get_coord.mlm}
-\alias{u_annot.mlm}
-\alias{v_annot.mlm}
-\alias{coord_annot.mlm}
+\alias{recover_u.mlm}
+\alias{recover_v.mlm}
+\alias{recover_coord.mlm}
+\alias{augment_u.mlm}
+\alias{augment_v.mlm}
+\alias{augment_coord.mlm}
 \alias{reconstruct.lm}
 \title{Bibble functionality for linear model objects}
 \usage{
 \method{as_bibble}{lm}(x)
 
-\method{get_u}{lm}(x)
+\method{recover_u}{lm}(x)
 
-\method{get_v}{lm}(x)
+\method{recover_v}{lm}(x)
 
-\method{get_coord}{lm}(x)
+\method{recover_coord}{lm}(x)
 
-\method{u_annot}{lm}(x)
+\method{augment_u}{lm}(x)
 
-\method{v_annot}{lm}(x)
+\method{augment_v}{lm}(x)
 
-\method{coord_annot}{lm}(x)
+\method{augment_coord}{lm}(x)
 
 \method{permute_to}{lm}(x, y, ..., .matrix)
 
-\method{get_u}{mlm}(x)
+\method{recover_u}{mlm}(x)
 
-\method{get_v}{mlm}(x)
+\method{recover_v}{mlm}(x)
 
-\method{get_coord}{mlm}(x)
+\method{recover_coord}{mlm}(x)
 
-\method{u_annot}{mlm}(x)
+\method{augment_u}{mlm}(x)
 
-\method{v_annot}{mlm}(x)
+\method{augment_v}{mlm}(x)
 
-\method{coord_annot}{mlm}(x)
+\method{augment_coord}{mlm}(x)
 
 \method{reconstruct}{lm}(x)
 }
@@ -81,7 +81,7 @@ bioenv <- dplyr::mutate(
 (d <- tidy(b))
 
 # contributions of predictors to explained variance
-print(coord_annot(b))
+print(augment_coord(b))
 
 # basic linear regression biplot
 gg <- ggbiplot(b, aes(x = x, y = y))

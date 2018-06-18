@@ -5,9 +5,9 @@
 #' package and for class \code{"tbl_graph"} in the 
 #' \strong{\link[tidygraph]{tidygraph}} package.
 #' 
-#' Note: The \code{format} function is tedius but cannot be easily modularized
-#' without invoking \code{get_*()} and \code{*_annot()} multiple times, thereby
-#' significantly reducing performance.
+#' Note: The \code{format} function is tedius but cannot be easily modularized 
+#' without invoking \code{get_*()} and \code{augment_*()} multiple times,
+#' thereby significantly reducing performance.
 #' 
 
 #' @name bibble-formatting
@@ -20,11 +20,11 @@
 format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
   # dimensional parameters
-  uv <- align_factor(x, "uv")
+  uv <- get_factor(x, .matrix = "uv", align = TRUE)
   uv_dims <- sapply(uv, dim)
-  x_coord <- align_coord(x)
+  x_coord <- get_coord(x, align = TRUE)
   rk <- length(x_coord)
-  uv_ann <- factor_annot(x, "uv")
+  uv_ann <- augment_factor(x, .matrix = "uv")
   n_ann <- sapply(uv_ann, ncol)
   if (is.null(n)) {
     n <- ifelse(
