@@ -3,7 +3,7 @@
 #' These methods extract data from, and attribute new data to, objects of class
 #' \code{"lm"}, \code{"glm"}, and \code{"mlm"}.
 #' 
-#' @name bibble-lm
+#' @name methods-lm
 #' @template methods-params
 #' @template matrix-param
 #' @example inst/examples/ex-bibble-lm.r
@@ -11,11 +11,11 @@
 #' @importFrom broom augment
 #' @importFrom stats model.frame
 
-#' @rdname bibble-lm
+#' @rdname methods-lm
 #' @export
 as_bibble.lm <- as_bibble_recognized
 
-#' @rdname bibble-lm
+#' @rdname methods-lm
 #' @export
 recover_u.lm <- function(x) {
   .intercept_col <- if (names(x$coefficients)[1] == "(Intercept)") {
@@ -29,7 +29,7 @@ recover_u.lm <- function(x) {
   res
 }
 
-#' @rdname bibble-lm
+#' @rdname methods-lm
 #' @export
 recover_v.lm <- function(x) {
   res <- t(x$coefficients)
@@ -40,7 +40,7 @@ recover_v.lm <- function(x) {
   res
 }
 
-#' @rdname bibble-lm
+#' @rdname methods-lm
 #' @export
 recover_coord.lm <- function(x) {
   .predictors <- x$model[, -1]
@@ -60,7 +60,7 @@ recover_coord.lm <- function(x) {
   coord
 }
 
-#' @rdname bibble-lm
+#' @rdname methods-lm
 #' @export
 augment_u.lm <- function(x) {
   res <- tibble(.name = rownames(model.frame(x)))
@@ -72,7 +72,7 @@ augment_u.lm <- function(x) {
   )
 }
 
-#' @rdname bibble-lm
+#' @rdname methods-lm
 #' @export
 augment_v.lm <- function(x) {
   tibble(
@@ -84,7 +84,7 @@ augment_v.lm <- function(x) {
   )
 }
 
-#' @rdname bibble-lm
+#' @rdname methods-lm
 #' @export
 augment_coord.lm <- function(x) {
   as_tibble(data.frame(
@@ -94,7 +94,7 @@ augment_coord.lm <- function(x) {
   ))
 }
 
-#' @rdname bibble-lm
+#' @rdname methods-lm
 #' @export
 permute_to.lm <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)
@@ -106,7 +106,7 @@ permute_to.lm <- function(x, y, ..., .matrix) {
   x
 }
 
-#' @rdname bibble-lm
+#' @rdname methods-lm
 #' @export
 recover_u.mlm <- function(x) {
   .intercept_col <- if (rownames(x$coefficients)[1] == "(Intercept)") {
@@ -120,7 +120,7 @@ recover_u.mlm <- function(x) {
   res
 }
 
-#' @rdname bibble-lm
+#' @rdname methods-lm
 #' @export
 recover_v.mlm <- function(x) {
   res <- t(x$coefficients)
@@ -128,7 +128,7 @@ recover_v.mlm <- function(x) {
   res
 }
 
-#' @rdname bibble-lm
+#' @rdname methods-lm
 #' @export
 recover_coord.mlm <- function(x) {
   .predictors <- x$model[, -1]
@@ -148,7 +148,7 @@ recover_coord.mlm <- function(x) {
   coord
 }
 
-#' @rdname bibble-lm
+#' @rdname methods-lm
 #' @export
 augment_u.mlm <- function(x) {
   tibble(
@@ -156,7 +156,7 @@ augment_u.mlm <- function(x) {
   )
 }
 
-#' @rdname bibble-lm
+#' @rdname methods-lm
 #' @export
 augment_v.mlm <- function(x) {
   tibble(
@@ -164,7 +164,7 @@ augment_v.mlm <- function(x) {
   )
 }
 
-#' @rdname bibble-lm
+#' @rdname methods-lm
 #' @export
 augment_coord.mlm <- function(x) {
   res <- as_tibble(data.frame(
@@ -175,7 +175,7 @@ augment_coord.mlm <- function(x) {
   tidyr::nest(res, -dplyr::one_of(".name", "term"), .key = "model")
 }
 
-#' @rdname bibble-lm
+#' @rdname methods-lm
 #' @export
 reconstruct.lm <- function(x) {
   pred_mat <- as.matrix(x$model[, -1, drop = FALSE])

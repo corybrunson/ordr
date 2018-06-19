@@ -7,14 +7,14 @@
 #' signature functions of \strong{\link[logisticPCA]{logisticPCA}} with wrappers
 #' that add row and column names from the input matrix to the output matrices.)
 #' 
-#' @name bibble-lpca
+#' @name methods-lpca
 #' @template methods-params
 #' @template matrix-param
 #' @example inst/examples/ex-bibble-lpca.r
 
 #' @importFrom stats plogis
 
-#' @rdname bibble-lpca
+#' @rdname methods-lpca
 #' @export
 as_bibble.lpca <- as_bibble_recognized
 
@@ -25,19 +25,19 @@ recover_uv_lpca <- function(x, .matrix) {
   res
 }
 
-#' @rdname bibble-lpca
+#' @rdname methods-lpca
 #' @export
 recover_u.lpca <- function(x) recover_uv_lpca(x, "u")
 
-#' @rdname bibble-lpca
+#' @rdname methods-lpca
 #' @export
 recover_v.lpca <- function(x) recover_uv_lpca(x, "v")
 
-#' @rdname bibble-lpca
+#' @rdname methods-lpca
 #' @export
 recover_coord.lpca <- function(x) paste0("LPC", 1:ncol(x$U))
 
-#' @rdname bibble-lpca
+#' @rdname methods-lpca
 #' @export
 augment_u.lpca <- function(x) {
   .name <- rownames(x$PCs)
@@ -49,7 +49,7 @@ augment_u.lpca <- function(x) {
   res
 }
 
-#' @rdname bibble-lpca
+#' @rdname methods-lpca
 #' @export
 augment_v.lpca <- function(x) {
   .name <- rownames(x$U)
@@ -62,7 +62,7 @@ augment_v.lpca <- function(x) {
   res
 }
 
-#' @rdname bibble-lpca
+#' @rdname methods-lpca
 #' @export
 augment_coord.lpca <- function(x) {
   tibble(
@@ -70,7 +70,7 @@ augment_coord.lpca <- function(x) {
   )
 }
 
-#' @rdname bibble-lpca
+#' @rdname methods-lpca
 #' @export
 negate_to.lpca <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)
@@ -82,7 +82,7 @@ negate_to.lpca <- function(x, y, ..., .matrix) {
   x
 }
 
-#' @rdname bibble-lpca
+#' @rdname methods-lpca
 #' @export
 as_bibble.lsvd <- as_bibble_recognized
 
@@ -93,19 +93,19 @@ recover_uv_lsvd <- function(x, .matrix) {
   res
 }
 
-#' @rdname bibble-lpca
+#' @rdname methods-lpca
 #' @export
 recover_u.lsvd <- function(x) recover_uv_lsvd(x, "u")
 
-#' @rdname bibble-lpca
+#' @rdname methods-lpca
 #' @export
 recover_v.lsvd <- function(x) recover_uv_lsvd(x, "v")
 
-#' @rdname bibble-lpca
+#' @rdname methods-lpca
 #' @export
 recover_coord.lsvd <- function(x) paste0("LSC", 1:ncol(x$A))
 
-#' @rdname bibble-lpca
+#' @rdname methods-lpca
 #' @export
 augment_u.lsvd <- function(x) {
   tibble(
@@ -113,7 +113,7 @@ augment_u.lsvd <- function(x) {
   )
 }
 
-#' @rdname bibble-lpca
+#' @rdname methods-lpca
 #' @export
 augment_v.lsvd <- function(x) {
   tibble(
@@ -122,7 +122,7 @@ augment_v.lsvd <- function(x) {
   )
 }
 
-#' @rdname bibble-lpca
+#' @rdname methods-lpca
 #' @export
 augment_coord.lsvd <- function(x) {
   tibble(
@@ -130,13 +130,13 @@ augment_coord.lsvd <- function(x) {
   )
 }
 
-#' @rdname bibble-lpca
+#' @rdname methods-lpca
 #' @export
 reconstruct.lsvd <- function(x) {
   round(plogis(x$A %*% t(x$B)), 0)
 }
 
-#' @rdname bibble-lpca
+#' @rdname methods-lpca
 #' @export
 negate_to.lsvd <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)

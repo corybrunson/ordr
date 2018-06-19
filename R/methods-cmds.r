@@ -5,12 +5,12 @@
 #' objects returned by \code{\link[stats]{cmdscale}}, which is masked by a
 #' wrapper that adds the class attribute.)
 #' 
-#' @name bibble-cmds
+#' @name methods-cmds
 #' @template methods-params
 #' @template matrix-param
 #' @example inst/examples/ex-bibble-cmds.r
 
-#' @rdname bibble-cmds
+#' @rdname methods-cmds
 #' @export
 as_bibble.cmds <- as_bibble_recognized
 
@@ -24,19 +24,19 @@ recover_uv_cmds <- function(x, .matrix) {
   res
 }
 
-#' @rdname bibble-cmds
+#' @rdname methods-cmds
 #' @export
 recover_u.cmds <- function(x) recover_uv_cmds(x, "u")
 
-#' @rdname bibble-cmds
+#' @rdname methods-cmds
 #' @export
 recover_v.cmds <- function(x) recover_uv_cmds(x, "v")
 
-#' @rdname bibble-cmds
+#' @rdname methods-cmds
 #' @export
 recover_coord.cmds <- function(x) paste0("PCo", 1:ncol(x$points))
 
-#' @rdname bibble-cmds
+#' @rdname methods-cmds
 #' @export
 augment_u.cmds <- function(x) {
   .name <- rownames(x$x)
@@ -48,7 +48,7 @@ augment_u.cmds <- function(x) {
   res
 }
 
-#' @rdname bibble-cmds
+#' @rdname methods-cmds
 #' @export
 augment_v.cmds <- function(x) {
   .name <- colnames(x$x)
@@ -60,7 +60,7 @@ augment_v.cmds <- function(x) {
   res
 }
 
-#' @rdname bibble-cmds
+#' @rdname methods-cmds
 #' @export
 augment_coord.cmds <- function(x) {
   tibble(
@@ -69,7 +69,7 @@ augment_coord.cmds <- function(x) {
   )
 }
 
-#' @rdname bibble-cmds
+#' @rdname methods-cmds
 #' @export
 negate_to.cmds <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)
@@ -81,7 +81,7 @@ negate_to.cmds <- function(x, y, ..., .matrix) {
   x
 }
 
-#' @rdname bibble-cmds
+#' @rdname methods-cmds
 #' @export
 permute_to.cmds <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)
@@ -93,7 +93,7 @@ permute_to.cmds <- function(x, y, ..., .matrix) {
   x
 }
 
-#' @rdname bibble-cmds
+#' @rdname methods-cmds
 #' @export
 rotate_to.cmds <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)
