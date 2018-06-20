@@ -1,12 +1,17 @@
 # tidybiplot plan
 
-## augmentation
+## ordination functions
 
-functions to augment the output of an ordination function to the original dataset
+- Generalized ordination functions
+    - Inspired by [the **parsnip** package](https://topepo.github.io/parsnip/articles/parsnip_Intro.html)
+    - Either one for each mode (supervised and unsupervised) or one for each model type (SVD, PCA, MDS, NMF, etc.)
+    - Specialize to implementations from various packages, e.g. `pca(data, engine = c("prcomp", "princomp", "psych", ...))`
+
+A major and potentially valuable expansion of the package would be to implement generalized ordination functions, possibly two (for supervised and unsupervised methods) or possibly one for each model type (SVD, PCA, MDS, NMF, etc.), that specialize to implementations from various packages
 
 ## object classes
 
-`as_bibble()` and `to_bibble()` methods for the following biplot classes:
+`as_bibble()` and `to_bibble()` methods for the following ordination classes:
 
 - `lm`, `mlm`, and `glm`
 - multidimensional scaling (MDS) with `cmdscale()`
@@ -22,7 +27,7 @@ functions to augment the output of an ordination function to the original datase
 
 ## coercion and attribution methods
 
-The `"bbl"` class:
+The `"bbl"` class (may be changed to `"tbl_ord"`):
 
 - `as_bibble()` wraps a biplot object with the `"bbl"` class so that methods can extract basic information (matrix factors, coordinates) necessary for printing and visualization
 - As long as `ggplot()` uses `fortify()` internally to handle objects, this package should use `fortify.bbl()` to convert ordination objects into data frames for plotting.

@@ -32,7 +32,6 @@
 #' @param ... Additional arguments passed to \code{\link[ggplot2]{ggplot}}.
 
 #' @rdname ggbiplot
-#' @example inst/examples/ex-bibble-lm.r
 #' @export
 ggbiplot <- function(
   ordination = NULL, mapping = aes(x = 1, y = 2),

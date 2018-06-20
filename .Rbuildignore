@@ -13,5 +13,6 @@ cran-comments.md
 .github
 
 # custom files and directories
-tasks.md
+^plan.md$
+^plan.html$
 ^sandbox$
