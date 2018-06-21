@@ -1,8 +1,16 @@
 <h1 id="tidybiplot-plan">tidybiplot plan</h1>
-<h2 id="augmentation">augmentation</h2>
-<p>functions to augment the output of an ordination function to the original dataset</p>
+<h2 id="ordination-functions">ordination functions</h2>
+<ul>
+<li>Generalized ordination functions
+<ul>
+<li>Inspired by <a href="https://topepo.github.io/parsnip/articles/parsnip_Intro.html">the <strong>parsnip</strong> package</a></li>
+<li>Either one for each mode (supervised and unsupervised) or one for each model type (SVD, PCA, MDS, NMF, etc.)</li>
+<li>Specialize to implementations from various packages, e.g. <code>pca(data, engine = c(&quot;prcomp&quot;, &quot;princomp&quot;, &quot;psych&quot;, ...))</code></li>
+</ul></li>
+</ul>
+<p>A major and potentially valuable expansion of the package would be to implement generalized ordination functions, possibly two (for supervised and unsupervised methods) or possibly one for each model type (SVD, PCA, MDS, NMF, etc.), that specialize to implementations from various packages</p>
 <h2 id="object-classes">object classes</h2>
-<p><code>as_bibble()</code> and <code>to_bibble()</code> methods for the following biplot classes:</p>
+<p><code>as_bibble()</code> and <code>to_bibble()</code> methods for the following ordination classes:</p>
 <ul>
 <li><code>lm</code>, <code>mlm</code>, and <code>glm</code></li>
 <li>multidimensional scaling (MDS) with <code>cmdscale()</code></li>
@@ -17,7 +25,7 @@
 <li><a href="http://scikit-learn.org/stable/modules/decomposition.html">other matrix decomposition methods</a></li>
 </ul>
 <h2 id="coercion-and-attribution-methods">coercion and attribution methods</h2>
-<p>The <code>&quot;bbl&quot;</code> class:</p>
+<p>The <code>&quot;bbl&quot;</code> class (may be changed to <code>&quot;tbl_ord&quot;</code>):</p>
 <ul>
 <li><code>as_bibble()</code> wraps a biplot object with the <code>&quot;bbl&quot;</code> class so that methods can extract basic information (matrix factors, coordinates) necessary for printing and visualization</li>
 <li>As long as <code>ggplot()</code> uses <code>fortify()</code> internally to handle objects, this package should use <code>fortify.bbl()</code> to convert ordination objects into data frames for plotting.</li>
@@ -63,6 +71,17 @@
 <p><em>Note: <strong>dplyr</strong>-style verbs like <code>filter()</code>, <code>summarise()</code>, and <code>bind_*()</code> would affect the coordinates as well as the annotation. This functionality is of questionable utility and low-priority.</em></p>
 <h2 id="plotting">plotting</h2>
 <p>Incorporate <code>inertia</code> argument to <code>as_bibble()</code>, <code>fortify()</code> and/or <code>stat_biplot()</code> (see also the <code>expand</code> parameter of <code>stats::biplot()</code>). Carefully document and justify the choice of where along the &quot;typical&quot; workflow to calculate the inertia.</p>
+<h2 id="other-plot-specifications">other plot specifications</h2>
+<h3 id="scales-and-coordinates">scales and coordinates</h3>
+<ul>
+<li>By default, breaks should be the same on the horizontal and vertical axes.</li>
+<li>An <code>inertia</code> parameter could control the scales of <span class="math inline"><em>U</em></span> and <span class="math inline"><em>V</em></span>. If used, it should render, by default, breaks based on one matrix factor with labels on the bottom and left axes, but also labels on the top and right axes that reflect the scale of the other factor.</li>
+</ul>
+<h3 id="faceting">faceting</h3>
+<ul>
+<li><code>facet_*_wrap()</code> and <code>facet_*_grid()</code> to facet as in <strong>ggplot2</strong> with respect to <span class="math inline"><em>U</em></span> attributes.</li>
+<li><code>facet_uv_grid()</code> and <code>facet_vu_grid()</code> to facet with respect to an attribute of <span class="math inline"><em>U</em></span> in one dimension and an attribute of <span class="math inline"><em>V</em></span> in the other dimension.</li>
+</ul>
 <h2 id="plot-layers">plot layers</h2>
 <ul>
 <li><code>stat_u()</code> &amp; <code>stat_v()</code>: Restrict to cases (<span class="math inline"><em>U</em></span>) or variables (<span class="math inline"><em>V</em></span>).</li>
@@ -87,6 +106,7 @@
 <li><code>stat_*_chull()</code> &amp; <code>geom_*_chull()</code>: Calculate and render group convex hulls.</li>
 <li><code>stat_*_ellipse()</code> &amp; <code>geom_*_ellipse()</code>: Calculate and render group ellipses, as in <strong>ggbiplot</strong>. Includes confidence ellipses, standard error ellipses, and ellipsoid hulls.</li>
 </ul>
+<h3 id="extra">extra</h3>
 <p>Implement an option to <em>calibrate</em>, in the Greenacre sense.</p>
 <h2 id="documentation">documentation</h2>
 <h3 id="summary-information">summary information</h3>

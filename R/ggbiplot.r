@@ -39,16 +39,20 @@ ggbiplot <- function(
 ) {
   mapping <- ordinate_aes(ordination, mapping)
   
+  # conventional ggplot call, fortifying ordination if necessary
   p <- ggplot(
     data = fortify(ordination, include = "all"),
     mapping = mapping,
     environment = parent.frame(),
     ...
   )
+  # .matrix aesthetic indicating whether to plot cases or variables
   .matrix_aes <- list(.matrix = rlang::quo(!!rlang::sym(".matrix")))
   class(.matrix_aes) <- "uneval"
   p$mapping <- c(p$mapping, .matrix_aes)
+  # synchronize the scales AND BREAKS of the axes
   p$coordinates <- coord_fixed()
+  # add class label for potential future use
   class(p) <- c("ggbiplot", class(p))
   
   p

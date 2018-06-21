@@ -82,6 +82,18 @@ _Note: **dplyr**-style verbs like `filter()`, `summarise()`, and `bind_*()` woul
 
 Incorporate `inertia` argument to `as_bibble()`, `fortify()` and/or `stat_biplot()` (see also the `expand` parameter of `stats::biplot()`). Carefully document and justify the choice of where along the "typical" workflow to calculate the inertia.
 
+## other plot specifications
+
+### scales and coordinates
+
+- By default, breaks should be the same on the horizontal and vertical axes. This might require scale layers not constructible via `continuous_scale()`; see `?ggplot2::Scale`.
+- An `inertia` parameter could control the scales of $U$ and $V$. If used, it should render, by default, breaks based on one matrix factor with labels on the bottom and left axes, but also labels on the top and right axes that reflect the scale of the other factor.
+
+### faceting
+
+- `facet_*_wrap()` and `facet_*_grid()` to facet as in **ggplot2** with respect to $U$ attributes.
+- `facet_uv_grid()` and `facet_vu_grid()` to facet with respect to an attribute of $U$ in one dimension and an attribute of $V$ in the other dimension.
+
 ## plot layers
 
 - `stat_u()` & `stat_v()`: Restrict to cases ($U$) or variables ($V$).
@@ -105,6 +117,8 @@ Incorporate `inertia` argument to `as_bibble()`, `fortify()` and/or `stat_biplot
 - `stat_*_centroid()`: Calculate group centroids.
 - `stat_*_chull()` & `geom_*_chull()`: Calculate and render group convex hulls.
 - `stat_*_ellipse()` & `geom_*_ellipse()`: Calculate and render group ellipses, as in **ggbiplot**. Includes confidence ellipses, standard error ellipses, and ellipsoid hulls.
+
+### extra
 
 Implement an option to _calibrate_, in the Greenacre sense.
 
