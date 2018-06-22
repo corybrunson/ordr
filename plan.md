@@ -105,7 +105,8 @@ Incorporate `inertia` argument to `as_bibble()`, `fortify()` and/or `stat_biplot
 ### case/variable layers
 
 - `geom_*_point()`: Render symbols at the positions of cases and variables on the biplot.
-- `geom_*_vector()`: Render vectors with tails at the origin and heads at the case/variable positions.
+- `geom_*_vector()` and `geom_*_line(): Render vectors with tails at the origin and heads at the case/variable positions.
+- `geom_*_projection()`: Render projections from specific cases to specific vectors.
 - `geom_*_text()` and `geom_*_label()`: Render text at case/variable positions. Include an option to angle them so that they eminate from the origin after arrowheads, as in **ggbiplot**.
 
 ### single-case/variable layers
