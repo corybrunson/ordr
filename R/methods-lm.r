@@ -68,7 +68,7 @@ augment_u.lm <- function(x) {
   .rk <- x$rank
   dplyr::bind_cols(
     res,
-    dplyr::select(augment(x), -(1:(.rk - .int + 1)))
+    dplyr::select(augment(un_bibble(x)), -(1:(.rk - .int + 1)))
   )
 }
 

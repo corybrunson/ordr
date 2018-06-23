@@ -24,7 +24,12 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   uv_dims <- sapply(uv, dim)
   x_coord <- get_coord(x, align = TRUE)
   rk <- length(x_coord)
-  uv_ann <- augment_factor(x, .matrix = "uv")
+  uv_ann <- rlang::set_names(mapply(
+    bind_cols,
+    augment_factor(x, .matrix = "uv"),
+    factor_annot(x, .matrix = "uv"),
+    SIMPLIFY = FALSE
+  ), c("u", "v"))
   n_ann <- sapply(uv_ann, ncol)
   if (is.null(n)) {
     n <- ifelse(

@@ -29,6 +29,8 @@
 #' @name bibble-augmentation
 #' @include bibble-factors.r
 #' @inheritParams bibble-factors
+#' @param annot A \code{\link[tibble]{tibble}} having the same number of rows as
+#'   \code{x}.
 
 #' @rdname bibble-augmentation
 #' @export
@@ -51,4 +53,69 @@ augment_factor <- function(x, .matrix) {
 
 #' @rdname bibble-augmentation
 #' @export
+augment.bbl <- function(x, .matrix) {
+  switch(
+    match_factor(.matrix),
+    u = augment_u(x),
+    v = augment_v(x),
+    uv = dplyr::bind_rows(
+      mutate(augment_u(x), .matrix = "u"),
+      mutate(augment_v(x), .matrix = "v")
+    )
+  )
+}
+
+#' @rdname bibble-augmentation
+#' @export
 augment_coord <- function(x) UseMethod("augment_coord")
+
+#' @rdname bibble-augmentation
+#' @export
+annotate_u <- function(x) bind_cols(augment_u(x), attr(x, "u_annot"))
+
+#' @rdname bibble-augmentation
+#' @export
+annotate_v <- function(x) bind_cols(augment_v(x), attr(x, "v_annot"))
+
+#' @rdname bibble-augmentation
+#' @export
+u_annot <- function(x) attr(x, "u_annot")
+
+#' @rdname bibble-augmentation
+#' @export
+v_annot <- function(x) attr(x, "v_annot")
+
+factor_annot <- function(x, .matrix) {
+  switch(
+    match_factor(.matrix),
+    u = u_annot(x),
+    v = v_annot(x),
+    uv = list(u = u_annot(x), v = v_annot(x))
+  )
+}
+
+#' @rdname bibble-augmentation
+#' @export
+set_u_annot <- function(x, annot) {
+  stopifnot(is.data.frame(annot))
+  protect_vars <- c(get_coord(x), names(augment_u(x)), ".matrix")
+  attr(x, "u_annot") <- annot[, !(names(annot) %in% protect_vars)]
+  x
+}
+
+#' @rdname bibble-augmentation
+#' @export
+set_v_annot <- function(x, annot) {
+  stopifnot(is.data.frame(annot))
+  protect_vars <- c(get_coord(x), names(augment_u(x)), ".matrix")
+  attr(x, "v_annot") <- annot[, !(names(annot) %in% protect_vars)]
+  x
+}
+
+set_factor_annot <- function(x, annot, .matrix) {
+  switch(
+    match_factor(.matrix),
+    u = set_u_annot(x, annot),
+    v = set_v_annot(x, annot)
+  )
+}

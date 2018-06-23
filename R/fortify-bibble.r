@@ -31,7 +31,7 @@ fortify.bbl <- function(
     if (include != "coordinates") {
       u <- dplyr::bind_cols(
         u,
-        augment_u(model)
+        annotate_u(model)
       )
       u$.matrix <- "u"
     }
@@ -41,7 +41,7 @@ fortify.bbl <- function(
     if (include != "coordinates") {
       v <- dplyr::bind_cols(
         v,
-        augment_v(model)
+        annotate_v(model)
       )
       v$.matrix <- "v"
     }

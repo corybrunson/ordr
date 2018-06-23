@@ -32,6 +32,7 @@ Collate:
     'bibble-class.r'
     'bibble-masks.r'
     'data.r'
+    'dplyr-verbs.r'
     'format-bibble.r'
     'fortify-bibble.r'
     'geom-isolines.r'

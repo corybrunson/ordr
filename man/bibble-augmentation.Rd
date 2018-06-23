@@ -5,7 +5,14 @@
 \alias{augment_u}
 \alias{augment_v}
 \alias{augment_factor}
+\alias{augment.bbl}
 \alias{augment_coord}
+\alias{annotate_u}
+\alias{annotate_v}
+\alias{u_annot}
+\alias{v_annot}
+\alias{set_u_annot}
+\alias{set_v_annot}
 \title{Augment information for the factors and coordinates of an ordination object}
 \usage{
 augment_u(x)
@@ -14,7 +21,21 @@ augment_v(x)
 
 augment_factor(x, .matrix)
 
+\method{augment}{bbl}(x, .matrix)
+
 augment_coord(x)
+
+annotate_u(x)
+
+annotate_v(x)
+
+u_annot(x)
+
+v_annot(x)
+
+set_u_annot(x, annot)
+
+set_v_annot(x, annot)
 }
 \arguments{
 \item{x}{A bibble, or an ordination object coercible to one.}
@@ -22,6 +43,9 @@ augment_coord(x)
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
+
+\item{annot}{A \code{\link[tibble]{tibble}} having the same number of rows as
+\code{x}.}
 }
 \description{
 These functions return data associated with the cases, variables, and
