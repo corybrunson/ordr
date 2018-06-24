@@ -1,10 +1,10 @@
 
-as_bibble_recognized <- function(x) {
-  class(x) <- c("bbl", class(x))
+as_tbl_ord_default <- function(x) {
+  class(x) <- c("tbl_ord", class(x))
   x
 }
 
-bibble_factors <- c(
+tbl_ord_factors <- c(
   u = "u", v = "v", uv = "uv",
   U = "u", V = "v", UV = "uv",
   left = "u", right = "v", both = "uv",
@@ -13,8 +13,8 @@ bibble_factors <- c(
   scores = "u", loadings = "v"
 )
 match_factor <- function(x) {
-  x <- match.arg(x, names(bibble_factors))
-  unname(bibble_factors[x])
+  x <- match.arg(x, names(tbl_ord_factors))
+  unname(tbl_ord_factors[x])
 }
 
 method_classes <- function(generic.function) {

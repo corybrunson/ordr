@@ -1,12 +1,11 @@
-#' Fortify a bibble for plotting
+#' Fortify a \code{tbl_ord} for plotting
 #' 
 #' These methods of \code{\link[ggplot2]{fortify}} and \code{\link[broom]{tidy}}
-#' convert a \code{\link{bibble}} to a \code{\link{tibble}}.
+#' convert a \code{\link{tbl_ord}} to a \code{\link{tibble}}.
 #' 
 
-#' @name bibble-fortification
-#' @param model,x A \link{bibble}, i.e. an ordination object of class 
-#'   \code{"bbl"}.
+#' @name fortification
+#' @param model,x A \code{\link{tbl_ord}}.
 #' @param data Ignored.
 #' @param ... Additional arguments received from \code{fortify} or \code{tidy}; 
 #'   ignored.
@@ -16,9 +15,9 @@
 #'   ordination coordinates or also augmented case and variable data, and, if
 #'   the latter, whether only shared fields or all from both.
 
-#' @rdname bibble-fortification
+#' @rdname fortification
 #' @export
-fortify.bbl <- function(
+fortify.tbl_ord <- function(
   model, data, ...,
   .matrix = "uv",
   include = "all"
@@ -67,14 +66,14 @@ fortify.bbl <- function(
   )
 }
 
-#' @rdname bibble-fortification
+#' @rdname fortification
 #' @export
 fortify_u <- function(model, include = "all") {
   include <- match.arg(include, c("coordinates", "all"))
   fortify(model = model, data = NULL, .matrix = "u", include = include)
 }
 
-#' @rdname bibble-fortification
+#' @rdname fortification
 #' @export
 fortify_v <- function(model, include = "all") {
   include <- match.arg(include, c("coordinates", "all"))
@@ -85,8 +84,8 @@ fortify_v <- function(model, include = "all") {
 #' @export
 broom::tidy
 
-#' @rdname bibble-fortification
+#' @rdname fortification
 #' @export
-tidy.bbl <- function(x, ..., .matrix = "uv", include = "all") {
-  fortify.bbl(model = x, data = NULL, .matrix = .matrix, include = include)
+tidy.tbl_ord <- function(x, ..., .matrix = "uv", include = "all") {
+  fortify.tbl_ord(model = x, data = NULL, .matrix = .matrix, include = include)
 }

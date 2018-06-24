@@ -2,13 +2,12 @@
 % Please edit documentation in R/ggbiplot.r
 \name{ggbiplot}
 \alias{ggbiplot}
-\title{Build a biplot object from ordination data wrapped as a bibble}
+\title{Build a biplot object from ordination data wrapped as a \code{tbl_ord}}
 \usage{
 ggbiplot(ordination = NULL, mapping = aes(x = 1, y = 2), ...)
 }
 \arguments{
-\item{ordination}{A \link{bibble}, i.e. an ordination object of class
-\code{"bbl"}.}
+\item{ordination}{A \code{\link{tbl_ord}}.}
 
 \item{mapping}{List of default aesthetic mappings to use for the biplot. The 
 default assigns the first two coordinates to the aesthetics \code{x} and 
@@ -19,9 +18,8 @@ plot.}
 }
 \description{
 \code{ggbiplot} produces a \strong{\link[ggplot2]{ggplot2}} object from a 
-\code{"bbl"}-class ordination object. The baseline object is the default 
-unadorned \code{\link[ggplot2]{ggplot}} object \code{p} with the following
-differences:
+\code{\link{tbl_ord}} object. The baseline object is the default unadorned
+\code{ggplot} object \code{p} with the following differences:
 \itemize{
   \item \code{p$mapping} is augmented with \code{.matrix = .matrix},
         which expects either \code{.matrix = "u"} or \code{.matrix = "v"}

@@ -1,7 +1,7 @@
 #' Reconstruct approximations to original data from ordination factors
 
 #' @name reconstruct
-#' @param x A bibble, or an object convertible to one.
+#' @param x A \code{\link{tbl_ord}}, or an object convertible to one.
 
 #' @rdname reconstruct
 #' @export

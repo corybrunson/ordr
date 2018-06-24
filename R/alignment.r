@@ -19,10 +19,10 @@
 #' 8--13.
 #' 
 
-#' @name bibble-alignment
-#' @include bibble-augmentation.r
+#' @name alignment
+#' @include augmentation.r
 #' @importFrom stats cor
-#' @param x,y Matrices or bibbles; \code{x} will be aligned to \code{y}.
+#' @param x,y Matrices or \code{tbl_ord}s; \code{x} will be aligned to \code{y}.
 #' @template matrix-param
 #' @param abs.values Whether \code{permute_to} should reorder coordinates
 #'   according to dot product magnitudes (angles closest to straight, whether
@@ -30,11 +30,11 @@
 #' @param ... Additional parameters passed to methods.
 #' @example inst/examples/ex-align-to.r
 
-#' @rdname bibble-alignment
+#' @rdname alignment
 #' @export
 align_to <- function(x, y, .matrix) {
   # check that alignment is possible
-  prev_class <- setdiff(class(x), "bbl")
+  prev_class <- setdiff(class(x), "tbl_ord")
   if (any(prev_class %in% method_classes("rotate_to"))) {
     return(rotate_to(x, y, .matrix = .matrix))
   } else {
@@ -48,19 +48,19 @@ align_to <- function(x, y, .matrix) {
   }
 }
 
-#' @rdname bibble-alignment
+#' @rdname alignment
 #' @export
 negate_to <- function(x, y, ...) UseMethod("negate_to")
 
-#' @rdname bibble-alignment
+#' @rdname alignment
 #' @export
 permute_to <- function(x, y, ...) UseMethod("permute_to")
 
-#' @rdname bibble-alignment
+#' @rdname alignment
 #' @export
 rotate_to <- function(x, y, ...) UseMethod("rotate_to")
 
-#' @rdname bibble-alignment
+#' @rdname alignment
 #' @export
 negation_to <- function(x, y) {
   stopifnot(nrow(x) == nrow(y))
@@ -74,7 +74,7 @@ negation_to <- function(x, y) {
   c(signs, rep(1, ncol(x) - d))
 }
 
-#' @rdname bibble-alignment
+#' @rdname alignment
 #' @export
 permutation_to <- function(x, y, abs.values = FALSE) {
   stopifnot(nrow(x) == nrow(y))
@@ -96,7 +96,7 @@ permutation_to <- function(x, y, abs.values = FALSE) {
   inds
 }
 
-#' @rdname bibble-alignment
+#' @rdname alignment
 #' @export
 rotation_to <- function(x, y) {
   stopifnot(nrow(x) == nrow(y))
@@ -125,7 +125,7 @@ attribute_alignment <- function(x, r) {
   x
 }
 
-#' @rdname bibble-alignment
+#' @rdname alignment
 #' @export
 un_align <- function(x) {
   attr(x, "align") <- NULL

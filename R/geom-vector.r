@@ -30,7 +30,7 @@
 #' @template matrix-param
 #' @param arrow Specification for arrows, as created by
 #'   \code{\link[grid]{arrow}}.
-#' @example inst/examples/ex-bibble-lm.r
+#' @example inst/examples/ex-lm.r
 
 #' @rdname ggbiplot-vector
 #' @usage NULL

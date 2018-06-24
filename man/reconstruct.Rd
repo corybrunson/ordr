@@ -10,7 +10,7 @@ reconstruct(x)
 \method{reconstruct}{list}(x)
 }
 \arguments{
-\item{x}{A bibble, or an object convertible to one.}
+\item{x}{A \code{\link{tbl_ord}}, or an object convertible to one.}
 }
 \description{
 Reconstruct approximations to original data from ordination factors

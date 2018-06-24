@@ -2,7 +2,7 @@
 % Please edit documentation in R/methods-cmds.r
 \name{methods-cmds}
 \alias{methods-cmds}
-\alias{as_bibble.cmds}
+\alias{as_tbl_ord.cmds}
 \alias{recover_u.cmds}
 \alias{recover_v.cmds}
 \alias{recover_coord.cmds}
@@ -12,9 +12,9 @@
 \alias{negate_to.cmds}
 \alias{permute_to.cmds}
 \alias{rotate_to.cmds}
-\title{Bibble functionality for classical multidimensional scaling objects}
+\title{Functionality for classical multidimensional scaling objects}
 \usage{
-\method{as_bibble}{cmds}(x)
+\method{as_tbl_ord}{cmds}(x)
 
 \method{recover_u}{cmds}(x)
 
@@ -39,7 +39,7 @@
 
 \item{y}{A matrix or an ordination object.}
 
-\item{...}{Additional elements of a custom bibble.}
+\item{...}{Additional elements of a custom \code{tbl_ord}.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
@@ -63,7 +63,7 @@ rownames(x2) <- dplyr::pull(country_differences, Countries)
 
 # multidimensional scaling setup
 (m <- cmdscale(x1, k = 2))
-(b <- as_bibble(m))
+(b <- as_tbl_ord(m))
 (d <- fortify(b))
 
 # basic multidimensional scaling biplot
@@ -77,7 +77,7 @@ ggbiplot(b) +
 ggbiplot(b, aes(x = 2, y = 1)) +
   geom_v_text(aes(label = .name))
 # regress the attributes on the plotting dimensions and annotate the biplot
-fit <- as_bibble(lm(x2 ~ get_u(b)))
+fit <- as_tbl_ord(lm(x2 ~ get_u(b)))
 gg +
   geom_v_axis(data = fit, aes(label = .name))
 gg +

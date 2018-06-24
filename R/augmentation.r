@@ -19,28 +19,27 @@
 #'         components is that more information contained in the original object
 #'         becomes accessible to the user.
 #'   \item Additional information about the components manually added to the
-#'         bibble using \strong{\link[dplyr]{dplyr}} verbs adapted to bibbles.
-#'         \emph{These are not yet implemented.}
+#'         \code{tbl_ord} using adapted \strong{\link[dplyr]{dplyr}} verbs.
 #' }
 #' Once the \strong{dplyr} verbs are implemented, each \code{augment_*} function
 #' will retrieve both sources and combines them using 
 #' \code{link[dplyr]{bind_cols}}.
 
-#' @name bibble-augmentation
-#' @include bibble-factors.r
-#' @inheritParams bibble-factors
+#' @name augmentation
+#' @include factors.r
+#' @inheritParams factors
 #' @param annot A \code{\link[tibble]{tibble}} having the same number of rows as
 #'   \code{x}.
 
-#' @rdname bibble-augmentation
+#' @rdname augmentation
 #' @export
 augment_u <- function(x) UseMethod("augment_u")
 
-#' @rdname bibble-augmentation
+#' @rdname augmentation
 #' @export
 augment_v <- function(x) UseMethod("augment_v")
 
-#' @rdname bibble-augmentation
+#' @rdname augmentation
 #' @export
 augment_factor <- function(x, .matrix) {
   switch(
@@ -51,9 +50,9 @@ augment_factor <- function(x, .matrix) {
   )
 }
 
-#' @rdname bibble-augmentation
+#' @rdname augmentation
 #' @export
-augment.bbl <- function(x, .matrix) {
+augment.tbl_ord <- function(x, .matrix) {
   switch(
     match_factor(.matrix),
     u = augment_u(x),
@@ -65,23 +64,23 @@ augment.bbl <- function(x, .matrix) {
   )
 }
 
-#' @rdname bibble-augmentation
+#' @rdname augmentation
 #' @export
 augment_coord <- function(x) UseMethod("augment_coord")
 
-#' @rdname bibble-augmentation
+#' @rdname augmentation
 #' @export
 annotate_u <- function(x) bind_cols(augment_u(x), attr(x, "u_annot"))
 
-#' @rdname bibble-augmentation
+#' @rdname augmentation
 #' @export
 annotate_v <- function(x) bind_cols(augment_v(x), attr(x, "v_annot"))
 
-#' @rdname bibble-augmentation
+#' @rdname augmentation
 #' @export
 u_annot <- function(x) attr(x, "u_annot")
 
-#' @rdname bibble-augmentation
+#' @rdname augmentation
 #' @export
 v_annot <- function(x) attr(x, "v_annot")
 
@@ -94,7 +93,7 @@ factor_annot <- function(x, .matrix) {
   )
 }
 
-#' @rdname bibble-augmentation
+#' @rdname augmentation
 #' @export
 set_u_annot <- function(x, annot) {
   stopifnot(is.data.frame(annot))
@@ -103,7 +102,7 @@ set_u_annot <- function(x, annot) {
   x
 }
 
-#' @rdname bibble-augmentation
+#' @rdname augmentation
 #' @export
 set_v_annot <- function(x, annot) {
   stopifnot(is.data.frame(annot))

@@ -5,7 +5,7 @@ x1 <- as.matrix(dplyr::select(country_differences, -Countries))
 rownames(x1) <- dplyr::pull(country_differences, Countries)
 
 (m <- cmdscale(x1, k = 2))
-(b1 <- as_bibble(m))
+(b1 <- as_tbl_ord(m))
 (p <- prcomp(x1))
 
 \dontrun{
@@ -22,7 +22,7 @@ plot(gridExtra::arrangeGrob(grobs = list(
 ), ncol = 2))
 
 # Run once methods are implemented for 'prcomp' objects
-(b2 <- as_bibble(p))
+(b2 <- as_tbl_ord(p))
 
 print(gridExtra::arrangeGrob(grobs = list(
   ggbiplot(b1) + geom_u_point(),

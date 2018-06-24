@@ -9,7 +9,7 @@
 #'   Algorithm from Computer Science Aids the Evaulation of Species
 #'   Distributions. \emph{American Scientist}, \strong{88}, pp. 332--339.
 #' @name finches
-#' @example inst/examples/ex-bibble-lpca.r
+#' @example inst/examples/ex-lpca.r
 NULL
 
 #' A simple illustrative biplot example from Greenacre (2010)
@@ -18,7 +18,7 @@ NULL
 #' decomposes into the product of a \eqn{5\times 2} matrix and a \eqn{2\times 4}
 #' matrix.
 #' 
-#' @format A \link{bibble}.
+#' @format A \code{\link{tbl_ord}}.
 #' @keywords datasets
 #' @source Greenacre M.J. (2010). \emph{Biplots in Practice}, pp. 16--20. 
 #'   Fundacion BBVA.
@@ -35,7 +35,7 @@ NULL
 #' @source Greenacre M.J. (2010). \emph{Biplots in Practice}, pp. 25--26. 
 #'   Fundacion BBVA.
 #' @name bioenv
-#' @example inst/examples/ex-bibble-lm.r
+#' @example inst/examples/ex-lm.r
 NULL
 
 #' Student ratings of similarities and attributes of 13 countries

@@ -44,8 +44,7 @@ bind_cols_u(.data, ...)
 bind_cols_v(.data, ...)
 }
 \arguments{
-\item{.data}{A \link{bibble}, i.e. an ordination object of class 
-\code{"bbl"}.}
+\item{.data}{A \code{\link{tbl_ord}}.}
 
 \item{var}{A variable specified as in \code{\link[dplyr]{pull}}.}
 
@@ -58,11 +57,11 @@ standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 }
 \description{
 These functions adapt \strong{\link[dplyr]{dplyr}} verbs to the factors of a 
-bibble. The raw verbs are not defined for bibbles; instead, each verb has two
-analogues, corresponding to the two matrix factors. They each rely on a 
-common workhorse function, which takes the composition of the \strong{dplyr} 
-verb with \code{\link{fortify}}, applied to the factor, removes any variables
-corresponding to coordinates or produced by \code{augment_*} (see
-\code{\link{bibble-augmentation}}), and only then assigns it as the new 
-\code{"*_annot"} attribute of \code{.data}.
+\code{tbl_ord}. The raw verbs are not defined for \code{tbl_ord}s; instead, 
+each verb has two analogues, corresponding to the two matrix factors. They 
+each rely on a common workhorse function, which takes the composition of the 
+\strong{dplyr} verb with \code{\link{fortify}}, applied to the factor, 
+removes any variables corresponding to coordinates or produced by 
+\code{augment_*} (see \code{\link{augmentation}}), and only then assigns it
+as the new \code{"*_annot"} attribute of \code{.data}.
 }

@@ -106,7 +106,7 @@ bioenv <- dplyr::mutate(
 
 # linear regression setup
 (m <- lm(data = bioenv, formula = d ~ x + y))
-(b <- as_bibble(m))
+(b <- as_tbl_ord(m))
 (d <- tidy(b))
 
 # contributions of predictors to explained variance

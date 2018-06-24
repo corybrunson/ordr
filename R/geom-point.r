@@ -25,7 +25,7 @@
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template layer-params
-#' @example inst/examples/ex-bibble-lm.r
+#' @example inst/examples/ex-lm.r
 
 #' @rdname ggbiplot-point
 #' @export

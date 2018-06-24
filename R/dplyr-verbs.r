@@ -1,19 +1,18 @@
 #' *dplyr* verbs
 #' 
 #' These functions adapt \strong{\link[dplyr]{dplyr}} verbs to the factors of a 
-#' bibble. The raw verbs are not defined for bibbles; instead, each verb has two
-#' analogues, corresponding to the two matrix factors. They each rely on a 
-#' common workhorse function, which takes the composition of the \strong{dplyr} 
-#' verb with \code{\link{fortify}}, applied to the factor, removes any variables
-#' corresponding to coordinates or produced by \code{augment_*} (see
-#' \code{\link{bibble-augmentation}}), and only then assigns it as the new 
-#' \code{"*_annot"} attribute of \code{.data}.
+#' \code{tbl_ord}. The raw verbs are not defined for \code{tbl_ord}s; instead, 
+#' each verb has two analogues, corresponding to the two matrix factors. They 
+#' each rely on a common workhorse function, which takes the composition of the 
+#' \strong{dplyr} verb with \code{\link{fortify}}, applied to the factor, 
+#' removes any variables corresponding to coordinates or produced by 
+#' \code{augment_*} (see \code{\link{augmentation}}), and only then assigns it
+#' as the new \code{"*_annot"} attribute of \code{.data}.
 #' 
 
 #' @name dplyr-verbs
 #' @importFrom dplyr pull rename select mutate transmute bind_cols
-#' @param .data A \link{bibble}, i.e. an ordination object of class 
-#'   \code{"bbl"}.
+#' @param .data A \code{\link{tbl_ord}}.
 #' @param var A variable specified as in \code{\link[dplyr]{pull}}.
 #' @param ... Comma-separated unquoted expressions as in, e.g.,
 #'   \code{\link[dplyr]{select}}.

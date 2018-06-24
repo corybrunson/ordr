@@ -3,7 +3,7 @@
 \name{simple_example}
 \alias{simple_example}
 \title{A simple illustrative biplot example from Greenacre (2010)}
-\format{A \link{bibble}.}
+\format{A \code{\link{tbl_ord}}.}
 \source{
 Greenacre M.J. (2010). \emph{Biplots in Practice}, pp. 16--20. 
   Fundacion BBVA.

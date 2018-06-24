@@ -1,4 +1,4 @@
-#' Bibble functionality for classical multidimensional scaling objects
+#' Functionality for classical multidimensional scaling objects
 #' 
 #' These methods extract data from, and attribute new data to, objects of class 
 #' \code{"cmds"}. (This is a class introduced in this package to identify 
@@ -8,11 +8,11 @@
 #' @name methods-cmds
 #' @template methods-params
 #' @template matrix-param
-#' @example inst/examples/ex-bibble-cmds.r
+#' @example inst/examples/ex-cmds.r
 
 #' @rdname methods-cmds
 #' @export
-as_bibble.cmds <- as_bibble_recognized
+as_tbl_ord.cmds <- as_tbl_ord_default
 
 recover_uv_cmds <- function(x, .matrix) {
   .matrix <- match_factor(.matrix)
@@ -74,7 +74,7 @@ augment_coord.cmds <- function(x) {
 negate_to.cmds <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)
   # get negations
-  s <- negation_to(get_factor(as_bibble(x), .matrix), y)
+  s <- negation_to(get_factor(as_tbl_ord(x), .matrix), y)
   # tag 'cmds' object with negation
   x <- attribute_alignment(x, diag(s, nrow = ncol(x$points)))
   # return annotated object
@@ -86,7 +86,7 @@ negate_to.cmds <- function(x, y, ..., .matrix) {
 permute_to.cmds <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)
   # get permutation
-  p <- permutation_to(get_factor(as_bibble(x), .matrix), y)
+  p <- permutation_to(get_factor(as_tbl_ord(x), .matrix), y)
   # tag 'cmds' object with permutation
   x <- attribute_alignment(x, diag(1, nrow = ncol(x$points))[, p, drop = FALSE])
   # return annotated object
@@ -98,7 +98,7 @@ permute_to.cmds <- function(x, y, ..., .matrix) {
 rotate_to.cmds <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)
   # get rotation matrix
-  r <- rotation_to(get_factor(as_bibble(x), .matrix), y)
+  r <- rotation_to(get_factor(as_tbl_ord(x), .matrix), y)
   # tag 'cmds' object with rotation
   x <- attribute_alignment(x, r)
   # return annotated object
