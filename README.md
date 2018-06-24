@@ -1,8 +1,8 @@
-# **tidybiplot**: A unified framework for handling, manipulating, and visualizing matrix-decomposed data
+# **tidybiplot**: A unified framework for handling, manipulating, and visualizing ordination data
 
 ## motivation
 
-This package is designed to integrate into a [**tidyverse**](https://github.com/tidyverse/tidyverse) workflow.
+This package is designed to integrate ordination analysis and biplot visualization into a [**tidyverse**](https://github.com/tidyverse/tidyverse) workflow.
 
 ## usage
 
@@ -20,4 +20,4 @@ Contributing guidelines will be posted soon. In the meantime, please respect the
 
 ## acknowledgments
 
-This package was originally inspired by **ggbiplot** by [vqv](https://github.com/vqv/ggbiplot), [richardjtelford](https://github.com/richardjtelford/ggbiplot), and [GegnzaV](https://github.com/GegznaV/ggbiplot), among others. So far as i know, it first brought biplots into the **tidyverse** framework. The motivation to unify a variety of biplot methods came from several books and articles [by Michael Greenacre](https://www.barcelonagse.eu/research/publications/all?author=Michael%20Greenacre), and [thomasp85's **tidygraph**](https://github.com/thomasp85/tidygraph) sequel to **ggraph** finally induced the shift from generating scatterplots to handling and manipulating biplot data.
+This package was originally inspired by **ggbiplot** by [vqv](https://github.com/vqv/ggbiplot), [richardjtelford](https://github.com/richardjtelford/ggbiplot), and [GegnzaV](https://github.com/GegznaV/ggbiplot), among others. So far as i know, it first brought biplots into the **tidyverse** framework. The motivation to unify a variety of ordination methods came from several books and articles [by Michael Greenacre](https://www.barcelonagse.eu/research/publications/all?author=Michael%20Greenacre), and [thomasp85's **tidygraph**](https://github.com/thomasp85/tidygraph) sequel to **ggraph** finally induced the shift from generating scatterplots to handling and manipulating ordination data.
