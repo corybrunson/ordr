@@ -8,62 +8,77 @@ ensure_tibble_annot <- function(x, .matrix) {
       nrow = nrow(get_factor(x, .matrix)),
       ncol = 0
     ))
-  } else if (!is_tibble(attr(x, which, exact = TRUE))) {
+  } else if (!is.list(attr(x, which, exact = TRUE))) {
     stop("Attribute '", which, "' of `", deparse(substitute(x)),
-         "` is not a tibble.")
+         "` is not a list.")
   }
   x
 }
 
-# DON'T LOSE ORIGINAL OBJECT VIA `to_bibble()`; EITHER CHANGE NAMES/COMPONENTS
-# OR ADD ATTRIBUTES THAT ARE FORCED TO MATCH DIMENSIONS OF `u` AND `v`
+non_transformable_dots <- function(x, .matrix, ...) {
+  vars <- select_vars(names(fortify(x)), !!!quos(...))
+  # don't transform coordinates
+  if (any(vars %in% get_coord(x))) {
+    var <- vars[which(vars %in% get_coord(x))][1]
+    stop("The coordinate '", var, "' of `", deparse(substitute(x)),
+         "` cannot be transformed.")
+  }
+  # don't transform augmentation
+  if (any(vars %in% names(augment(x, .matrix = .matrix)))) {
+    var <- vars[which(vars %in% names(augment(x, .matrix = .matrix)))][1]
+    stop("The augmented variable '", var, "' of `", deparse(substitute(x)),
+         "` cannot be transformed.")
+  }
+}
 
 pull_u <- function(.data, var = -1) {
-  stopifnot(class(.data)[1] == "bbl")
-  pull(get_uv(.data, .matrix = "u"), !!enquo(var))
+  stopifnot(inherits(.data, "bbl"))
+  pull(fortify_u(.data), !!enquo(var))
 }
 pull_v <- function(.data, var = -1) {
-  stopifnot(class(.data)[1] == "bbl")
-  pull(get_uv(.data, .matrix = "v"), !!enquo(var))
+  stopifnot(inherits(.data, "bbl"))
+  pull(fortify_v(.data), !!enquo(var))
 }
 
 rename.bbl <- function(.data, ..., .matrix = "uv") {
-  .data <- to_bibble(.data)
   .matrix <- match_factor(.matrix)
-  # don't allow renamings of coordinates
+  # don't transform coordinates
   if (any(names(quos(...)) %in% get_coordinates(.data)$.name)) {
     stop("The coordinates of `.data` are protected.")
   }
+  # don't transform augmentation
+  if (any(names(quos(...)) %in% names(augment(.data, .matrix = .matrix)))) {
+    stop("Cannot rename bibble augmentation.")
+  }
   if (.matrix == "uv") {
     for (.m in c("u", "v")) {
-      .data[[.m]] <- bind_cols(
-        factor_uv(.data, .m),
-        rename(attr_uv(.data, .m), ...)
-      )
+      attr(.data, paste0(.m, "_annot")) <-
+        rename(attr(.data, paste0(.m, "_annot")), ...)
     }
   } else {
-    .data[[.matrix]] <- bind_cols(
-      factor_uv(.data, .matrix),
-      rename(attr_uv(.data, .matrix), ...)
-    )
+    attr(.data, paste0(.matrix, "_annot")) <-
+      rename(attr(.data, paste0(.matrix, "_annot")), ...)
   }
   .data
 }
 rename_u <- function(.data, ...) {
-  stopifnot(class(.data)[1] == "bbl")
+  stopifnot(inherits(.data, "bbl"))
   rename.bbl(.data, ..., .matrix = "u")
 }
 rename_v <- function(.data, ...) {
-  stopifnot(class(.data)[1] == "bbl")
+  stopifnot(inherits(.data, "bbl"))
   rename.bbl(.data, ..., .matrix = "v")
 }
 
 select.bbl <- function(.data, ..., .matrix = "uv") {
-  .data <- to_bibble(.data)
   .matrix <- match_factor(.matrix)
-  # don't allow selections of coordinates
+  # don't transform coordinates
   if (any(names(quos(...)) %in% get_coordinates(.data)$.name)) {
     stop("The coordinates of `.data` are protected.")
+  }
+  # don't transform augmentation
+  if (any(names(quos(...)) %in% names(augment(.data, .matrix = .matrix)))) {
+    stop("Cannot rename bibble augmentation.")
   }
   if (.matrix == "uv") {
     for (.m in c("u", "v")) {

@@ -9,7 +9,7 @@ rownames(x2) <- dplyr::pull(country_differences, Countries)
 
 # multidimensional scaling setup
 (m <- cmdscale(x1, k = 2))
-(b <- as_bibble(m))
+(b <- as_tbl_ord(m))
 (d <- fortify(b))
 
 # basic multidimensional scaling biplot
@@ -23,7 +23,7 @@ ggbiplot(b) +
 ggbiplot(b, aes(x = 2, y = 1)) +
   geom_v_text(aes(label = .name))
 # regress the attributes on the plotting dimensions and annotate the biplot
-fit <- as_bibble(lm(x2 ~ get_u(b)))
+fit <- as_tbl_ord(lm(x2 ~ get_u(b)))
 gg +
   geom_v_axis(data = fit, aes(label = .name))
 gg +

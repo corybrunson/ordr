@@ -1,16 +1,16 @@
 
-# @name plot-bibble
+# @name plot
 #' @importFrom graphics plot
 #' @importFrom stats biplot
 
-biplot.bbl <- function(x, choices = 1L:2L, ...) {
+biplot.tbl_ord <- function(x, choices = 1L:2L, ...) {
   # biplot method for original class
-  prev_class <- setdiff(class(x), "bbl")
+  prev_class <- setdiff(class(x), "tbl_ord")
   if (any(prev_class %in% method_classes("biplot"))) {
     class(x) <- prev_class
     return(biplot(x, ...))
   }
-  # bibble biplot method based on stats:::biplot.prcomp
+  # tbl_ord biplot method based on stats:::biplot.prcomp
   scores <- get_u(x)
   loadings <- get_v(x)
   if (length(choices) != 2L)
@@ -28,9 +28,9 @@ biplot.bbl <- function(x, choices = 1L:2L, ...) {
   invisible()
 }
 
-plot.bbl <- function(x, ...) {
+plot.tbl_ord <- function(x, ...) {
   # use plot method for original class if available
-  prev_class <- setdiff(class(x), "bbl")
+  prev_class <- setdiff(class(x), "tbl_ord")
   if (any(prev_class %in% method_classes("plot"))) {
     class(x) <- prev_class
     return(plot(x, ...))

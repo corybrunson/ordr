@@ -7,6 +7,6 @@ m <- country_differences %>%
   as.matrix()
 fit_cmds <- cmdscale(m, k = 6)
 
-test_that("`as_bibble()` coerces 'cmds' objects", {
-  expect_true(is.bibble(as_bibble(fit_cmds)))
+test_that("`as_tbl_ord()` coerces 'cmds' objects", {
+  expect_true(is.tbl_ord(as_tbl_ord(fit_cmds)))
 })

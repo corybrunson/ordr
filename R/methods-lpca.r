@@ -1,4 +1,4 @@
-#' Bibble functionality for logistic principal components analysis and singular 
+#' Functionality for logistic principal components analysis and singular 
 #' value decomposition objects
 #' 
 #' These methods extract data from, and attribute new data to, objects of class 
@@ -10,13 +10,13 @@
 #' @name methods-lpca
 #' @template methods-params
 #' @template matrix-param
-#' @example inst/examples/ex-bibble-lpca.r
+#' @example inst/examples/ex-lpca.r
 
 #' @importFrom stats plogis
 
 #' @rdname methods-lpca
 #' @export
-as_bibble.lpca <- as_bibble_recognized
+as_tbl_ord.lpca <- as_tbl_ord_default
 
 recover_uv_lpca <- function(x, .matrix) {
   .matrix <- match_factor(.matrix)
@@ -75,7 +75,7 @@ augment_coord.lpca <- function(x) {
 negate_to.lpca <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)
   # get negations
-  s <- negation_to(recover_factor(as_bibble(x), .matrix), y)
+  s <- negation_to(recover_factor(as_tbl_ord(x), .matrix), y)
   # tag 'lpca' object with negation
   x <- attribute_alignment(x, diag(s, nrow = ncol(x$U)))
   # return annotated object
@@ -84,7 +84,7 @@ negate_to.lpca <- function(x, y, ..., .matrix) {
 
 #' @rdname methods-lpca
 #' @export
-as_bibble.lsvd <- as_bibble_recognized
+as_tbl_ord.lsvd <- as_tbl_ord_default
 
 recover_uv_lsvd <- function(x, .matrix) {
   .matrix <- match_factor(.matrix)
@@ -141,7 +141,7 @@ reconstruct.lsvd <- function(x) {
 negate_to.lsvd <- function(x, y, ..., .matrix) {
   y <- as.matrix(y, .matrix = .matrix)
   # get negations
-  s <- negation_to(get_factor(as_bibble(x), .matrix), y)
+  s <- negation_to(get_factor(as_tbl_ord(x), .matrix), y)
   # tag 'lsvd' object with negation
   x <- attribute_alignment(x, diag(s, nrow = ncol(x$B)))
   # return annotated object

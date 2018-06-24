@@ -2,7 +2,7 @@
 % Please edit documentation in R/methods-lm.r
 \name{methods-lm}
 \alias{methods-lm}
-\alias{as_bibble.lm}
+\alias{as_tbl_ord.lm}
 \alias{recover_u.lm}
 \alias{recover_v.lm}
 \alias{recover_coord.lm}
@@ -17,9 +17,9 @@
 \alias{augment_v.mlm}
 \alias{augment_coord.mlm}
 \alias{reconstruct.lm}
-\title{Bibble functionality for linear model objects}
+\title{Functionality for linear model objects}
 \usage{
-\method{as_bibble}{lm}(x)
+\method{as_tbl_ord}{lm}(x)
 
 \method{recover_u}{lm}(x)
 
@@ -54,7 +54,7 @@
 
 \item{y}{A matrix or an ordination object.}
 
-\item{...}{Additional elements of a custom bibble.}
+\item{...}{Additional elements of a custom \code{tbl_ord}.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
@@ -77,7 +77,7 @@ bioenv <- dplyr::mutate(
 
 # linear regression setup
 (m <- lm(data = bioenv, formula = d ~ x + y))
-(b <- as_bibble(m))
+(b <- as_tbl_ord(m))
 (d <- tidy(b))
 
 # contributions of predictors to explained variance

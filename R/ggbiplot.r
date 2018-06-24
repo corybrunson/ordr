@@ -1,10 +1,9 @@
-#' Build a biplot object from ordination data wrapped as a bibble
+#' Build a biplot object from ordination data wrapped as a \code{tbl_ord}
 #' 
 
 #' \code{ggbiplot} produces a \strong{\link[ggplot2]{ggplot2}} object from a 
-#' \code{"bbl"}-class ordination object. The baseline object is the default 
-#' unadorned \code{\link[ggplot2]{ggplot}} object \code{p} with the following
-#' differences:
+#' \code{\link{tbl_ord}} object. The baseline object is the default unadorned
+#' \code{ggplot} object \code{p} with the following differences:
 #' \itemize{
 #'   \item \code{p$mapping} is augmented with \code{.matrix = .matrix},
 #'         which expects either \code{.matrix = "u"} or \code{.matrix = "v"}
@@ -23,8 +22,7 @@
 
 #' @name ggbiplot
 #' @import ggplot2
-#' @param ordination A \link{bibble}, i.e. an ordination object of class
-#'   \code{"bbl"}.
+#' @param ordination A \code{\link{tbl_ord}}.
 #' @param mapping List of default aesthetic mappings to use for the biplot. The 
 #'   default assigns the first two coordinates to the aesthetics \code{x} and 
 #'   \code{y}. Other assignments must be supplied in each layer added to the 

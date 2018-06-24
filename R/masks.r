@@ -5,16 +5,16 @@
 #' not self-contained, for instance missing annotation from the original dataset
 #' (e.g. \code{\link[logisticPCA]{logisticPCA}}). The functions below wrap the 
 #' originals with the minimal overhead necessary for complete functionality with
-#' the \code{\link{bibble}} class.
+#' the \code{\link{tbl_ord}} class.
 
-#' @name bibble-masks
+#' @name masks
 #' @importFrom logisticPCA logisticPCA logisticSVD
 #' @inheritParams stats::cmdscale
 #' @inheritParams logisticPCA::logisticPCA
 #' @inheritParams logisticPCA::logisticSVD
 #' @param ... Additional parameters passed to original functions.
 
-#' @rdname bibble-masks
+#' @rdname masks
 #' @export
 cmdscale <- function(d, k = 2, add = FALSE) {
   res <- stats::cmdscale(d, k = k, eig = TRUE, add = add, x.ret = TRUE)
@@ -22,7 +22,7 @@ cmdscale <- function(d, k = 2, add = FALSE) {
   res
 }
 
-#' @rdname bibble-masks
+#' @rdname masks
 #' @export
 logisticPCA <- function(
   x, k = 2, m = 4,
@@ -45,7 +45,7 @@ logisticPCA <- function(
   lpca
 }
 
-#' @rdname bibble-masks
+#' @rdname masks
 #' @export
 logisticSVD <- function(
   x, k = 2,

@@ -8,32 +8,32 @@
 #' \eqn{U,V} that constitute the original ordination. These are interpreted as 
 #' the case scores (\eqn{U}) and the variable loadings (\eqn{V}). The 
 #' \code{get_*} functions optionally (and by default) apply any alignment stored
-#' as the \code{"align"} attribute (see \code{\link{bibble-alignment}}). Only
+#' as the \code{"align"} attribute (see \code{\link{alignment}}). Only
 #' the \code{recover_*} functions are generics that require methods for each
 #' ordination class.
 #' 
 #' \code{get_coord} retrieves the names of the coordinates shared by \eqn{U} and
-#' \eqn{V}, on which the original data were ordinated, and \code{dim.bbl} 
+#' \eqn{V}, on which the original data were ordinated, and \code{dim.tbl_ord} 
 #' retrieves their number.
 #' 
 
-#' @name bibble-factors
-#' @include bibble-utils.r
-#' @param x A bibble, or an ordination object coercible to one.
+#' @name factors
+#' @include utils.r
+#' @param x A \code{tbl_ord}, or an ordination object coercible to one.
 #' @param ... Additional arguments from \code{as.matrix}; ignored.
 #' @template matrix-param
 #' @param align Logical; whether to align the matrix factors and coordinates
 #'   according to an \code{"align"} matrix attribute.
 
-#' @rdname bibble-factors
+#' @rdname factors
 #' @export
 recover_u <- function(x) UseMethod("recover_u")
 
-#' @rdname bibble-factors
+#' @rdname factors
 #' @export
 recover_v <- function(x) UseMethod("recover_v")
 
-#' @rdname bibble-factors
+#' @rdname factors
 #' @export
 recover_factor <- function(x, .matrix) {
   switch(
@@ -45,33 +45,33 @@ recover_factor <- function(x, .matrix) {
 }
 
 # need `recover_*` functions before and after coercion;
-# `recover_*.bbl` are unnecessary
+# `recover_*.tbl_ord` are unnecessary
 
-#' @rdname bibble-factors
+#' @rdname factors
 #' @export
 recover_u.default <- function(x) x$u
 
-#' @rdname bibble-factors
+#' @rdname factors
 #' @export
 recover_v.default <- function(x) x$v
 
-# for fortified bibbles (also coordinates?)
+# for fortified tbl_ords (also coordinates?)
 
-#' @rdname bibble-factors
+#' @rdname factors
 #' @export
 recover_u.data.frame <- function(x) {
   x$.matrix <- as.numeric(x$.matrix)
   x[x$.matrix == 1, -match(".matrix", names(x))]
 }
 
-#' @rdname bibble-factors
+#' @rdname factors
 #' @export
 recover_v.data.frame <- function(x) {
   x$.matrix <- as.numeric(x$.matrix)
   x[x$.matrix == 2, -match(".matrix", names(x))]
 }
 
-#' @rdname bibble-factors
+#' @rdname factors
 #' @export
 get_u <- function(x, align = TRUE) {
   u <- recover_u(x)
@@ -83,7 +83,7 @@ get_u <- function(x, align = TRUE) {
   }
 }
 
-#' @rdname bibble-factors
+#' @rdname factors
 #' @export
 get_v <- function(x, align = TRUE) {
   v <- recover_v(x)
@@ -95,7 +95,7 @@ get_v <- function(x, align = TRUE) {
   }
 }
 
-#' @rdname bibble-factors
+#' @rdname factors
 #' @export
 get_factor <- function(x, .matrix, align = TRUE) {
   switch(
@@ -106,23 +106,23 @@ get_factor <- function(x, .matrix, align = TRUE) {
   )
 }
 
-#' @rdname bibble-factors
+#' @rdname factors
 #' @export
-as.matrix.bbl <- function(x, ..., .matrix, align = TRUE) {
+as.matrix.tbl_ord <- function(x, ..., .matrix, align = TRUE) {
   get_factor(x, .matrix = .matrix, align = align)
 }
 
-#' @rdname bibble-factors
+#' @rdname factors
 #' @export
 recover_coord <- function(x) UseMethod("recover_coord")
 
-#' @rdname bibble-factors
+#' @rdname factors
 #' @export
 recover_coord.default <- function(x) {
   intersect(colnames(recover_u(x)), colnames(recover_v(x)))
 }
 
-#' @rdname bibble-factors
+#' @rdname factors
 #' @export
 get_coord <- function(x, align = TRUE) {
   if (!align || is.null(attr(x, "align"))) {
@@ -132,6 +132,6 @@ get_coord <- function(x, align = TRUE) {
   }
 }
 
-#' @rdname bibble-factors
+#' @rdname factors
 #' @export
-dim.bbl <- function(x) length(recover_coord(x))
+dim.tbl_ord <- function(x) length(recover_coord(x))

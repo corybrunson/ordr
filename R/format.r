@@ -1,53 +1,58 @@
-#' Formatting and printing methods for bibbles
+#' Formatting and printing methods for \code{tbl_ord}s
 #' 
-#' The \code{format} and \code{print} methods for class \code{"bbl"} are adapted
-#' from those for class \code{"tbl_df"} in the \strong{\link[tibble]{tibble}} 
-#' package and for class \code{"tbl_graph"} in the 
-#' \strong{\link[tidygraph]{tidygraph}} package.
+#' The \code{format} and \code{print} methods for class \code{"tbl_ord"} are
+#' adapted from those for class \code{"tbl_df"} in the
+#' \strong{\link[tibble]{tibble}} package and for class \code{"tbl_graph"} in
+#' the \strong{\link[tidygraph]{tidygraph}} package.
 #' 
 #' Note: The \code{format} function is tedius but cannot be easily modularized 
-#' without invoking \code{get_*()} and \code{augment_*()} multiple times,
+#' without invoking \code{get_*()} and \code{augment_*()} multiple times, 
 #' thereby significantly reducing performance.
 #' 
 
-#' @name bibble-formatting
+#' @name formatting
 #' @param x An ordination object.
 #' @inheritParams tibble::format.tbl_df
 #' @param ... Additional arguments.
 
-#' @rdname bibble-formatting
+#' @rdname formatting
 #' @export
-format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
   # dimensional parameters
   uv <- get_factor(x, .matrix = "uv", align = TRUE)
   uv_dims <- sapply(uv, dim)
   x_coord <- get_coord(x, align = TRUE)
   rk <- length(x_coord)
-  uv_ann <- augment_factor(x, .matrix = "uv")
+  uv_ann <- rlang::set_names(mapply(
+    bind_cols,
+    augment_factor(x, .matrix = "uv"),
+    factor_annot(x, .matrix = "uv"),
+    SIMPLIFY = FALSE
+  ), c("u", "v"))
   n_ann <- sapply(uv_ann, ncol)
   if (is.null(n)) {
     n <- ifelse(
-      uv_dims[1, ] > bibble_opt("print_max"),
-      bibble_opt("print_min"),
+      uv_dims[1, ] > tbl_ord_opt("print_max"),
+      tbl_ord_opt("print_min"),
       uv_dims[1, ]
     )
   }
-  width <- width %||% bibble_opt("width") %||% getOption("width")
+  width <- width %||% tbl_ord_opt("width") %||% getOption("width")
   uv_extra <- rlang::set_names(rep(
-    n_extra %||% bibble_opt("max_extra_cols"),
+    n_extra %||% tbl_ord_opt("max_extra_cols"),
     length.out = 2
   ), c("u", "v"))
   
   # headers!
-  prev_class <- setdiff(class(x), "bbl")[1]
-  bbl_descr <- if (!is.null(prev_class) && prev_class != "list") {
-    paste0("# A '", prev_class, "' bibble")
+  prev_class <- setdiff(class(x), "tbl_ord")[1]
+  tbl_ord_descr <- if (!is.null(prev_class) && prev_class != "list") {
+    paste0("# A '", prev_class, "' tbl_ord")
   } else {
-    paste0("# A bibble")
+    paste0("# A tbl_ord")
   }
   header <- paste0(
-    bbl_descr,
+    tbl_ord_descr,
     ": (", uv_dims[1, 1], " x ", rk, ") x (", uv_dims[1, 2], " x ", rk, ")'"
   )
   coord_sum <- paste0(
@@ -147,9 +152,9 @@ format.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   c(header, coord_sum, "# ", uv_fmt[[1]], "# ", uv_fmt[[2]])
 }
 
-#' @rdname bibble-formatting
+#' @rdname formatting
 #' @export
-print.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+print.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   fmt <- format(x, ..., n = n, width = width, n_extra = n_extra)
   cat(paste0(fmt, collapse = "\n"), sep = "")
   invisible(x)
@@ -158,16 +163,16 @@ print.bbl <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 `%||%` <- rlang::`%||%`
 
 # this trick is borrowed from *tibble*
-op.bibble <- list(
-  bibble.print_max = 10L,
-  bibble.print_min = 5L,
-  bibble.width = NULL,
-  bibble.max_extra_cols = 50L
+op.tbl_ord <- list(
+  tbl_ord.print_max = 10L,
+  tbl_ord.print_min = 5L,
+  tbl_ord.width = NULL,
+  tbl_ord.max_extra_cols = 50L
 )
 
-bibble_opt <- function(x) {
-  x_bibble <- paste0("bibble.", x)
-  res <- getOption(x_bibble)
+tbl_ord_opt <- function(x) {
+  x_tbl_ord <- paste0("tbl_ord.", x)
+  res <- getOption(x_tbl_ord)
   if (!is.null(res)) {
     return(res)
   }
@@ -178,7 +183,7 @@ bibble_opt <- function(x) {
     return(as.integer(res / 2))
   }
   
-  op.bibble[[x_bibble]]
+  op.tbl_ord[[x_tbl_ord]]
 }
 
 print_reps <- function(x) {

@@ -6,7 +6,7 @@ m <- country_differences %>%
   select(-Countries) %>%
   as.matrix()
 f <- cmdscale(m, k = 3)
-b <- as_bibble(f)
+b <- as_tbl_ord(f)
 n <- nrow(get_u(b))
 
 test_that("`ggbiplot()` handles coordinate aesthetics", {

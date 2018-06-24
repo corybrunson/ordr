@@ -30,7 +30,7 @@
 #' @importFrom ggrepel GeomTextRepel GeomLabelRepel
 #' @inheritParams ggplot2::layer
 #' @template layer-params
-#' @example inst/examples/ex-bibble-lpca.r
+#' @example inst/examples/ex-lpca.r
 
 #' @rdname ggbiplot-text
 #' @export
