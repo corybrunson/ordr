@@ -1,19 +1,16 @@
-#' Render axes vectors, with or without angled labels
+#' Render vectors from origin to ordinates
 #' 
 
 #' \code{geom_*_vector} renders arrows from the origin to the position of each
-#' subject or vector. \code{geom_*_axis} is adapted from
-#' \strong{link[ggbiplot]{ggbiplot}}. In addition to the arrows, it renders
-#' labels that expand outward from the arrowheads at the same angles.
+#' subject or vector.
 #' @template ggbiplot-layers
 
 #' @section Aesthetics:
-#' \code{geom_*_vector} and \code{geom_*_axis} understand the following
-#' aesthetics (required aesthetics are in bold):
+#' \code{geom_*_vector} understands the following aesthetics (required
+#' aesthetics are in bold):
 #' \itemize{
 #'   \item \strong{\code{x}}
 #'   \item \strong{\code{y}}
-#'   \item \strong{\code{label}} (\code{geom_*_axis} only)
 #'   \item \code{alpha}
 #'   \item \code{colour}
 #'   \item \code{fill}
@@ -30,7 +27,6 @@
 #' @template matrix-param
 #' @param arrow Specification for arrows, as created by
 #'   \code{\link[grid]{arrow}}.
-#' @example inst/examples/ex-lm.r
 
 #' @rdname ggbiplot-vector
 #' @usage NULL
@@ -132,142 +128,6 @@ geom_biplot_vector <- function(
     mapping = mapping,
     stat = .matrix,
     geom = GeomVector,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = na.rm,
-      arrow = arrow,
-      ...
-    )
-  )
-}
-
-# https://github.com/vqv/ggbiplot/tree/experimental
-# Implement this as `stat_axis()`, to be paired with `geom_text()` and friends.
-
-#' @rdname ggbiplot-vector
-#' @usage NULL
-#' @export
-GeomAxis <- ggproto(
-  "GeomAxis", GeomSegment,
-  
-  required_aes = c("x", "y", "label"),
-  
-  default_aes = aes(
-    size = 0.5,
-    linetype = 1,
-    colour = "black",
-    alpha = NA,
-    textsize = 3,
-    family = "",
-    fontface = 1,
-    lineheight = 1.2
-  ),
-  
-  setup_data = GeomVector$setup_data,
-  
-  draw_panel = function(
-    data, panel_params, coord,
-    arrow = default_arrow,
-    lineend = "round", linejoin = "mitre",
-    parse = FALSE,
-    na.rm = FALSE
-  ) {
-    if (rlang::is_empty(data)) return(zeroGrob())
-    
-    text <- transform(
-      data, 
-      size = textsize,
-      angle = (180 / pi) * atan(y / x),
-      hjust = 0.5 * (1 - 1.25 * sign(x)),
-      vjust = 0.5
-    )
-    vec <- transform(
-      data, 
-      textsize = NULL, family = NULL, fontface = NULL, lineheight = NULL
-    )
-    
-    grid::gList(
-      GeomText$draw_panel(
-        text, panel_params, coord,
-        parse = parse,
-        na.rm = na.rm
-      ),
-      GeomVector$draw_panel(
-        vec, panel_params, coord,
-        arrow = default_arrow,
-        lineend = "round", linejoin = "mitre",
-        na.rm = na.rm
-      )
-    )
-  }
-)
-
-#' @rdname ggbiplot-vector
-#' @export
-geom_u_axis <- function(
-  mapping = NULL, data = NULL, position = "identity",
-  arrow = default_arrow, 
-  ...,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = "u",
-    geom = GeomAxis,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = na.rm,
-      arrow = arrow,
-      ...
-    )
-  )
-}
-
-#' @rdname ggbiplot-vector
-#' @export
-geom_v_axis <- function(
-  mapping = NULL, data = NULL, position = "identity",
-  arrow = default_arrow, 
-  ...,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = "v",
-    geom = GeomAxis,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = na.rm,
-      arrow = arrow,
-      ...
-    )
-  )
-}
-
-#' @rdname ggbiplot-vector
-#' @export
-geom_biplot_axis <- function(
-  mapping = NULL, data = NULL, position = "identity",
-  .matrix = "v", arrow = default_arrow, 
-  ...,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = .matrix,
-    geom = GeomAxis,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,

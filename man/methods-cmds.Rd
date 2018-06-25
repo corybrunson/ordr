@@ -79,17 +79,18 @@ ggbiplot(b, aes(x = 2, y = 1)) +
 # regress the attributes on the plotting dimensions and annotate the biplot
 fit <- as_tbl_ord(lm(x2 ~ get_u(b)))
 gg +
-  geom_v_axis(data = fit, aes(label = .name))
-gg +
-  geom_v_axis(data = fortify(fit, include = "all"), aes(label = .name))
-gg +
-  geom_v_axis(data = fortify(fit, "v"), aes(label = .name))
-
-# must add aesthetic `.matrix = NULL` to use new data without `.matrix` column
-# (this should be remedied)
-dat <- fortify(fit, "v")
-dat$.matrix <- NULL
+  geom_v_vector(data = fit) +
+  geom_v_text_radiate(data = fit, hjust = .3, aes(label = .name))
 gg +
   geom_v_vector(data = fit) +
-  geom_text(data = dat, aes(label = .name, .matrix = NULL))
+  geom_v_text_radiate(data = fortify(fit, include = "all"), hjust = .3,
+                   aes(label = .name))
+gg +
+  geom_v_vector(data = fit) +
+  geom_v_text_radiate(data = fortify(fit, "v"), hjust = .3, aes(label = .name))
+
+dat <- fortify_v(fit)
+gg +
+  geom_v_vector(data = fit) +
+  geom_text(data = dat, aes(label = .name))
 }

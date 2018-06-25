@@ -7,11 +7,7 @@
 \alias{geom_u_vector}
 \alias{geom_v_vector}
 \alias{geom_biplot_vector}
-\alias{GeomAxis}
-\alias{geom_u_axis}
-\alias{geom_v_axis}
-\alias{geom_biplot_axis}
-\title{Render axes vectors, with or without angled labels}
+\title{Render vectors from origin to ordinates}
 \format{An object of class \code{GeomVector} (inherits from \code{GeomSegment}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.}
 \usage{
 geom_u_vector(mapping = NULL, data = NULL, position = "identity",
@@ -23,18 +19,6 @@ geom_v_vector(mapping = NULL, data = NULL, position = "identity",
   inherit.aes = TRUE)
 
 geom_biplot_vector(mapping = NULL, data = NULL, position = "identity",
-  .matrix = "v", arrow = default_arrow, ..., na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE)
-
-geom_u_axis(mapping = NULL, data = NULL, position = "identity",
-  arrow = default_arrow, ..., na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
-
-geom_v_axis(mapping = NULL, data = NULL, position = "identity",
-  arrow = default_arrow, ..., na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
-
-geom_biplot_axis(mapping = NULL, data = NULL, position = "identity",
   .matrix = "v", arrow = default_arrow, ..., na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE)
 }
@@ -85,9 +69,7 @@ standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 }
 \description{
 \code{geom_*_vector} renders arrows from the origin to the position of each
-subject or vector. \code{geom_*_axis} is adapted from
-\strong{link[ggbiplot]{ggbiplot}}. In addition to the arrows, it renders
-labels that expand outward from the arrowheads at the same angles.
+subject or vector.
 }
 \section{Biplot layers}{
 
@@ -105,12 +87,11 @@ practice, e.g. \eqn{U} for points and \eqn{V} for arrows.
 
 \section{Aesthetics}{
 
-\code{geom_*_vector} and \code{geom_*_axis} understand the following
-aesthetics (required aesthetics are in bold):
+\code{geom_*_vector} understands the following aesthetics (required
+aesthetics are in bold):
 \itemize{
   \item \strong{\code{x}}
   \item \strong{\code{y}}
-  \item \strong{\code{label}} (\code{geom_*_axis} only)
   \item \code{alpha}
   \item \code{colour}
   \item \code{fill}
@@ -120,47 +101,4 @@ aesthetics (required aesthetics are in bold):
 }
 }
 
-\examples{
-# reproduce Exhibit 2.3 in Greenacre (2010)
-
-data(bioenv)
-# standardize two predictors
-bioenv <- dplyr::mutate(
-  bioenv,
-  x = (Depth - mean(Depth)) / sd(Depth),
-  y = (Pollution - mean(Pollution)) / sd(Pollution)
-)
-
-# linear regression setup
-(m <- lm(data = bioenv, formula = d ~ x + y))
-(b <- as_tbl_ord(m))
-(d <- tidy(b))
-
-# contributions of predictors to explained variance
-print(augment_coord(b))
-
-# basic linear regression biplot
-gg <- ggbiplot(b, aes(x = x, y = y))
-gg +
-  geom_u_point() +
-  geom_v_vector()
-# same biplot using default matrices for each layer
-gg +
-  geom_biplot_point() +
-  geom_biplot_vector()
-# same biplot with isolines for sole axis
-gg +
-  geom_u_point() +
-  geom_v_vector() +
-  geom_v_isolines(ids = 1, by = 5)
-
-# shade points by expected species prevalence and darken outliers
-ggbiplot(d, aes(x = x, y = y, color = .fitted, alpha = .resid^2)) +
-  theme_bw() +
-  scale_color_distiller(type = "div", palette = 1) +
-  scale_alpha_continuous(range = c(1/3, 1)) +
-  geom_u_point() +
-  geom_v_vector() +
-  geom_v_isolines(ids = 1, by = 5)
-}
 \keyword{datasets}
