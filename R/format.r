@@ -68,61 +68,48 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     "# ", c("U", "V"),
     ": [ ", uv_dims[1, ], " x ", uv_dims[2, ], " | ", n_ann, " ]"
   ), c("u", "v"))
-  fmts_coord <- format(dplyr::select(
-    rbind(
-      as_tibble(uv$u)[1:n[1], , drop = FALSE],
-      as_tibble(uv$v)[1:n[2], , drop = FALSE]
-    ),
-    1:min(rk, 3)
-  ), n = sum(n), width = width)
-  wh_rows <- which(stringr::str_detect(fmts_coord, "^ *[0-9]+ "))
-  id_width <- diff(as.vector(unique(stringr::str_locate(
-    fmts_coord,
-    "^ *[0-9]+ "
-  )[wh_rows, , drop = FALSE])))
+  
+  fmt_coord_u <- format(
+    as_tibble(uv$u)[1:n[1], 1:min(rk, 3), drop = FALSE],
+    n = n[1], width = width / 2
+  )
+  fmt_coord_v <- format(
+    as_tibble(uv$v)[1:n[2], 1:min(rk, 3), drop = FALSE],
+    n = n[2], width = width / 2
+  )
   fmt_coord <- list(
     u = unname(c(
       uv_sums["u"],
-      fmts_coord[2],
-      stringr::str_pad("", nchar(fmts_coord[2])),
-      fmts_coord[wh_rows[1:n[1]]]
+      fmt_coord_u[2],
+      stringr::str_pad("", nchar(fmt_coord_u[2])),
+      fmt_coord_u[4:length(fmt_coord_u)]
     )),
     v = unname(c(
       uv_sums["v"],
-      fmts_coord[2],
-      stringr::str_pad("", nchar(fmts_coord[2])),
-      stringr::str_replace(
-        fmts_coord[wh_rows[n[1] + 1:n[2]]],
-        "^ *[0-9]+ ",
-        paste0(format(1:n[2], width = id_width), " ")
-      )
+      fmt_coord_v[2],
+      stringr::str_pad("", nchar(fmt_coord_v[2])),
+      fmt_coord_v[4:length(fmt_coord_v)]
     ))
   )
-  coord_width <- unique(nchar(fmts_coord)[-1])
   
   uv_footer <- rlang::set_names(c("", ""), c("u", "v"))
   fmt_ann <- lapply(c("u", "v"), function(.matrix) {
     fmt <- uv_ann[[.matrix]]
     if (ncol(fmt) == 0) return("")
-    fmt <- format(fmt, n = n[.matrix], width = width - coord_width - 7)
+    fmt <- format(fmt, n = n[.matrix], width = width / 2 - 7)
     # blank header
     fmt[1] <- paste(rep(" ", times = nchar(fmt[2])), collapse = "")
     # remove footer
-    if (grepl("^#", fmt[length(fmt)])) {
+    if (grepl("more row", fmt[length(fmt)])) {
       uv_footer[.matrix] <<- fmt[length(fmt)]
       fmt <- fmt[-length(fmt)]
     }
-    # remove row indices
-    fmt <- substring(
-      fmt,
-      nchar(gsub("(^[0-9]+ ).*$", "\\1", fmt[length(fmt)])) + 1
-    )
     fmt
   })
   uv_footer <- stringr::str_replace_all(
     uv_footer,
     "#",
-    paste0("#", stringr::str_pad("", coord_width + ifelse(rk > 3, 4, 0)))
+    paste0("#", stringr::str_pad("", ifelse(rk > 3, 4, 0)))
   )
   
   seps <- if (rk > 3) c("    ", " ...") else c("", "")
@@ -132,7 +119,7 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
       c(paste(rep(" ", times = max(0, x)), collapse = ""),
         paste0(ifelse(2:y %in% sep_dots_rows, seps[2], seps[1]), " | "))
     },
-    x = 3 + nchar(seps) + coord_width -
+    x = 3 + nchar(seps) -
       sapply(fmt_coord, function(z) nchar(z[1])),
     y = sapply(fmt_coord, length),
     SIMPLIFY = FALSE
