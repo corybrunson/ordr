@@ -43,6 +43,7 @@ Collate:
     'methods-cmds.r'
     'methods-lm.r'
     'methods-lpca.r'
+    'methods-prcomp.r'
     'plot-bibble.r'
     'reconstruct.r'
     'stat-layers.r'
