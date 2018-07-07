@@ -41,6 +41,7 @@ Collate:
     'ggbiplot.r'
     'masks.r'
     'methods-cmds.r'
+    'methods-eigen.r'
     'methods-lm.r'
     'methods-lpca.r'
     'plot-bibble.r'
