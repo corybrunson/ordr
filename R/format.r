@@ -94,7 +94,7 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   uv_footers <- n_uv - n > 0
   fmt_ann <- rlang::set_names(lapply(1:2, function(i) {
     if (ncol(uv_ann[[i]]) == 0) return("")
-    c("", format(uv_ann[[i]], n = n[.matrix], width = (width - 7) / 2)[-1])
+    c("", format(uv_ann[[i]], n = n[i], width = (width - 7) / 2)[-1])
   }), c("u", "v"))
   
   # separate coordinates from annotations
@@ -131,7 +131,7 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 #' @export
 print.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   fmt <- format(x, ..., n = n, width = width, n_extra = n_extra)
-  cat(paste0(fmt, collapse = "\n"), sep = "")
+  cat(paste(fmt, collapse = "\n"), "\n", sep = "")
   invisible(x)
 }
 
