@@ -19,11 +19,11 @@
 #' @export
 format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
-  # dimensional parameters
+  # raw components and parameters
   uv <- get_factor(x, .matrix = "uv", align = TRUE)
-  uv_dims <- sapply(uv, dim)
-  x_coord <- get_coord(x, align = TRUE)
-  rk <- length(x_coord)
+  n_uv <- sapply(uv, nrow)
+  coord <- get_coord(x, align = TRUE)
+  rk <- length(coord)
   uv_ann <- rlang::set_names(mapply(
     bind_cols,
     augment_factor(x, .matrix = "uv"),
@@ -33,42 +33,40 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   n_ann <- sapply(uv_ann, ncol)
   if (is.null(n)) {
     n <- ifelse(
-      uv_dims[1, ] > tbl_ord_opt("print_max"),
+      n_uv > tbl_ord_opt("print_max"),
       tbl_ord_opt("print_min"),
-      uv_dims[1, ]
+      n_uv
     )
   }
   width <- width %||% tbl_ord_opt("width") %||% getOption("width")
-  uv_extra <- rlang::set_names(rep(
-    n_extra %||% tbl_ord_opt("max_extra_cols"),
-    length.out = 2
-  ), c("u", "v"))
+  #uv_extra <- rlang::set_names(rep(
+  #  n_extra %||% tbl_ord_opt("max_extra_cols"),
+  #  length.out = 2
+  #), c("u", "v"))
   
   # headers!
   prev_class <- setdiff(class(x), "tbl_ord")[1]
-  tbl_ord_descr <- if (!is.null(prev_class) && prev_class != "list") {
-    paste0("# A '", prev_class, "' tbl_ord")
-  } else {
-    paste0("# A tbl_ord")
-  }
-  header <- paste0(
-    tbl_ord_descr,
-    ": (", uv_dims[1, 1], " x ", rk, ") x (", uv_dims[1, 2], " x ", rk, ")'"
+  tbl_ord_header <- paste0(
+    "# A tbl_ord",
+    if (!is.null(prev_class) && prev_class != "list") {
+      paste0(" of class '", prev_class, "'")
+    },
+    ": (", n_uv[1], " x ", rk, ") x (", n_uv[2], " x ", rk, ")'"
   )
-  coord_sum <- paste0(
+  coord_header <- paste0(
     "# ", rk,
     " coordinate", if(rk == 1) "" else "s",
-    if (is.null(attr(x, "alignment"))) "" else ", realigned from originals",
+    if (is.null(attr(x, "alignment"))) "" else ", transformed",
     ": ",
-    print_reps(x_coord)
+    print_reps(coord)
   )
-  
-  # format U and V together first, then split
-  uv_sums <- rlang::set_names(paste0(
+  uv_headers <- rlang::set_names(paste0(
     "# ", c("U", "V"),
-    ": [ ", uv_dims[1, ], " x ", uv_dims[2, ], " | ", n_ann, " ]"
+    ": [ ", n_uv, " x ", rk, " | ", n_ann, " ]"
   ), c("u", "v"))
   
+  # format U and V separately
+  # (should format together, then split, in order to sync coordinates)
   fmt_coord_u <- format(
     as_tibble(uv$u)[1:n[1], 1:min(rk, 3), drop = FALSE],
     n = n[1], width = width / 2
@@ -79,39 +77,27 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   )
   fmt_coord <- list(
     u = unname(c(
-      uv_sums["u"],
+      uv_headers["u"],
       fmt_coord_u[2],
       stringr::str_pad("", nchar(fmt_coord_u[2])),
       fmt_coord_u[4:length(fmt_coord_u)]
     )),
     v = unname(c(
-      uv_sums["v"],
+      uv_headers["v"],
       fmt_coord_v[2],
       stringr::str_pad("", nchar(fmt_coord_v[2])),
       fmt_coord_v[4:length(fmt_coord_v)]
     ))
   )
   
-  uv_footer <- rlang::set_names(c("", ""), c("u", "v"))
-  fmt_ann <- lapply(c("u", "v"), function(.matrix) {
-    fmt <- uv_ann[[.matrix]]
-    if (ncol(fmt) == 0) return("")
-    fmt <- format(fmt, n = n[.matrix], width = width / 2 - 7)
-    # blank header
-    fmt[1] <- paste(rep(" ", times = nchar(fmt[2])), collapse = "")
-    # remove footer
-    if (grepl("more row", fmt[length(fmt)])) {
-      uv_footer[.matrix] <<- fmt[length(fmt)]
-      fmt <- fmt[-length(fmt)]
-    }
-    fmt
-  })
-  uv_footer <- stringr::str_replace_all(
-    uv_footer,
-    "#",
-    paste0("#", stringr::str_pad("", ifelse(rk > 3, 4, 0)))
-  )
+  # footers?
+  uv_footers <- n_uv - n > 0
+  fmt_ann <- rlang::set_names(lapply(1:2, function(i) {
+    if (ncol(uv_ann[[i]]) == 0) return("")
+    c("", format(uv_ann[[i]], n = n[.matrix], width = (width - 7) / 2)[-1])
+  }), c("u", "v"))
   
+  # separate coordinates from annotations
   seps <- if (rk > 3) c("    ", " ...") else c("", "")
   fmt_seps <- mapply(
     function(x, y) {
@@ -124,19 +110,21 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     y = sapply(fmt_coord, length),
     SIMPLIFY = FALSE
   )
-  uv_fmt <- mapply(
+  
+  # paste together, with attention to footers
+  for (i in 1:2) {
+    if (uv_footers[i]) {
+      fmt_coord[[i]] <- c(fmt_coord[[i]], "")
+      fmt_seps[[i]] <- c(fmt_seps[[i]], "")
+    }
+  }
+  fmt_uv <- mapply(
     paste0,
     fmt_coord, fmt_seps, fmt_ann,
     SIMPLIFY = FALSE
   )
-  uv_fmt <- mapply(
-    function(fmt, footer) if (footer == "") fmt else c(fmt, footer),
-    fmt = uv_fmt,
-    footer = uv_footer,
-    SIMPLIFY = FALSE
-  )
   
-  c(header, coord_sum, "# ", uv_fmt[[1]], "# ", uv_fmt[[2]])
+  c(tbl_ord_header, coord_header, "# ", fmt_uv[[1]], "# ", fmt_uv[[2]])
 }
 
 #' @rdname formatting
