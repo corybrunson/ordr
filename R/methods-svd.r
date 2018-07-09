@@ -18,3 +18,12 @@ get_diagonal_matrix <- function(x){
     diag(x$d)
   }
 }
+
+recompose_data_matrix <- function(x){
+  if (all(names(x) != t(c("d", "u", "v")))){
+    stop("recompose_data_matrix() can only be called on a singular value decomposition output")
+  }
+  else {
+    x$u %*% diag(x$d) %*% t(x$v)
+  }
+}
