@@ -23,10 +23,14 @@ pull_factor <- function(.data, var = -1, .matrix) {
 }
 #' @rdname dplyr-verbs
 #' @export
-pull_u <- function(.data, var = -1) pull_factor(.data, var, .matrix = "u")
+pull_u <- function(.data, var = -1) {
+  pull_factor(.data, !!enquo(var), .matrix = "u")
+}
 #' @rdname dplyr-verbs
 #' @export
-pull_v <- function(.data, var = -1) pull_factor(.data, var, .matrix = "v")
+pull_v <- function(.data, var = -1) {
+  pull_factor(.data, !!enquo(var), .matrix = "v")
+}
 
 rename_factor <- function(.data, ..., .matrix) {
   att <- rename(fortify(.data, .matrix = .matrix), ...)
