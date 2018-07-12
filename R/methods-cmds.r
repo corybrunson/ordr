@@ -38,6 +38,16 @@ recover_coord.cmds <- function(x) paste0("PCo", 1:ncol(x$points))
 
 #' @rdname methods-cmds
 #' @export
+recover_inertia.cmds <- function(x) {
+  u <- recover_u(x)
+  diag(
+    apply(u, 2, norm, type = "2") ^ 2,
+    nrow = ncol(u), ncol = ncol(u)
+  )
+}
+
+#' @rdname methods-cmds
+#' @export
 augment_u.cmds <- function(x) {
   .name <- rownames(x$x)
   res <- if (is.null(.name)) {

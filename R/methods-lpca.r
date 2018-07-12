@@ -39,6 +39,10 @@ recover_coord.lsvd <- function(x) paste0("LSC", 1:ncol(x$A))
 
 #' @rdname methods-lpca
 #' @export
+recover_inertia.lsvd <- recover_inertia_u
+
+#' @rdname methods-lpca
+#' @export
 augment_u.lsvd <- function(x) {
   tibble(
     .name = rownames(x$A)
@@ -105,6 +109,10 @@ recover_coord.lpca <- function(x) paste0("LPC", 1:ncol(x$U))
 
 #' @rdname methods-lpca
 #' @export
+recover_inertia.lpca <- recover_inertia_u
+
+#' @rdname methods-lpca
+#' @export
 augment_u.lpca <- function(x) {
   .name <- rownames(x$PCs)
   res <- if (is.null(.name)) {
@@ -163,6 +171,10 @@ recover_v.clpca <- function(x) recover_uv_lpca(x, "v")
 #' @rdname methods-lpca
 #' @export
 recover_coord.clpca <- function(x) paste0("LPC", 1:ncol(x$U))
+
+#' @rdname methods-lpca
+#' @export
+recover_inertia.clpca <- recover_inertia_u
 
 #' @rdname methods-lpca
 #' @export

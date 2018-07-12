@@ -135,3 +135,7 @@ get_coord <- function(x, align = TRUE) {
 #' @rdname factors
 #' @export
 dim.tbl_ord <- function(x) length(recover_coord(x))
+
+#' @rdname factors
+#' @export
+recover_inertia <- function(x) UseMethod("recover_inertia")

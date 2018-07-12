@@ -2,6 +2,10 @@
 
 #' Re-distribute inertia between cases and variables in an ordination
 #' 
+#' Note: In case \code{inertia} is a rectangular matrix, may only be able to 
+#' confer it entirely to the cases (\code{p = 1}) or entirely to the variables
+#' (\code{p = 0}).
+#' 
 
 #' @name inertia
 #' @include augmentation.r
@@ -36,4 +40,20 @@ confer_inertia <- function(x, p) {
 attribute_inertia <- function(x, p) {
   attr(x, "inertia") <- p
   x
+}
+
+recover_inertia_u <- function(x) {
+  u <- recover_u(x)
+  diag(
+    apply(u, 2, norm, type = "2"),
+    nrow = ncol(u), ncol = ncol(u)
+  )
+}
+
+recover_inertia_v <- function(x) {
+  v <- recover_v(x)
+  diag(
+    apply(v, 2, norm, type = "2"),
+    nrow = ncol(v), ncol = ncol(v)
+  )
 }
