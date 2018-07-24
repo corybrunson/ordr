@@ -25,7 +25,9 @@ hist(as.matrix(x) - recompose_data_matrix(s))
 
 # wrap `s` as a 'tbl_ord' object
 b <- as_tbl_ord(s)
-print(b)
+# inspecting the object directly should produce an error because
+# the `print` method depends on the `recover_*` and `augment_*` methods below
+b
 
 # get the raw left and right matrices (scores and loadings)
 u <- recover_u(b)
@@ -42,6 +44,9 @@ recover_coord(b)
 augment_u(b)
 augment_v(b)
 augment_coord(b)
+
+# the print method should now work
+b
 
 # reconstruct (approximately) the original data
 reconstruct(b)
