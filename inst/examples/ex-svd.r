@@ -59,5 +59,9 @@ fortify(b)
 gg <- ggbiplot(b) +
   geom_u_point() +
   geom_v_vector()
+
+# view biplot
+gg
+
 # add radiating text for loadings
 gg + geom_v_text_radiate()

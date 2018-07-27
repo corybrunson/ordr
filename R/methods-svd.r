@@ -27,11 +27,21 @@ recover_v.svd <- function(x){
 recover_coord.svd <- function(x) paste0("SV", 1:ncol(x$u))
 
 augment_u.svd <- function(x){
-  tibble_pole(nrow(recover_u.svd(x)))
+  .name <- rownames(attr(x, "x"))
+  if (is.null(.name)) {
+    tibble_pole(nrow(attr(x, "x")))
+  } else {
+    tibble(.name = .name)
+  }
 }
 
 augment_v.svd <- function(x){
-  tibble_pole(nrow(recover_v.svd(x)))
+  .name <- colnames(attr(x, "x"))
+  if (is.null(.name)) {
+    tibble_pole(ncol(attr(x, "x")))
+  } else {
+    tibble(.name = .name)
+  }
 }
 
 augment_coord.svd <- function(x){
