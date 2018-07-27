@@ -11,11 +11,17 @@ svd <- function(x, LINPACK = FALSE){
 as_tbl_ord.svd <- as_tbl_ord_default
 
 recover_u.svd <- function(x){
-  x$u
+  res <- x$u
+  colnames(res) <- recover_coord.svd(x)
+  rownames(res) <- rownames(attr(x, "x"))
+  res
 }
 
 recover_v.svd <- function(x){
-  x$v
+  res <- x$v
+  colnames(res) <- recover_coord.svd(x)
+  rownames(res) <- t(colnames(attr(x, "x")))
+  res
 }
 
 recover_coord.svd <- function(x) paste0("SV", 1:ncol(x$u))
@@ -33,6 +39,10 @@ augment_coord.svd <- function(x){
     .name = recover_coord(x),
     .values = x$d[1:ncol(x$u)]
   )
+}
+
+reconstruct.svd <- function(x){
+  x$u %*% diag(x$d) %*% t(x$v)
 }
 
 get_singular_values <- function(x){
@@ -53,6 +63,3 @@ get_diagonal_matrix <- function(x){
   }
 }
 
-reconstruct.svd <- function(x){
-  x$u %*% diag(x$d) %*% t(x$v)
-}
