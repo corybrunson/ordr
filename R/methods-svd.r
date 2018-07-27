@@ -47,7 +47,7 @@ augment_v.svd <- function(x){
 augment_coord.svd <- function(x){
   tibble(
     .name = recover_coord(x),
-    .values = x$d[1:ncol(x$u)]
+    .value = x$d[1:ncol(x$u)]
   )
 }
 

@@ -64,4 +64,4 @@ gg <- ggbiplot(b) +
 gg
 
 # add radiating text for loadings
-gg + geom_v_text_radiate()
+gg + geom_v_text_radiate(aes(label = .name))
