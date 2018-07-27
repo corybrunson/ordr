@@ -16,10 +16,10 @@ get_diagonal_matrix(s)
 get_singular_values(x)
 
 # recover the original data
-head(recompose_data_matrix(s))
+head(reconstruct.svd(s))
 head(x)
 # check that the differences between the original and recovered values are small
-hist(as.matrix(x) - recompose_data_matrix(s))
+hist(as.matrix(x) - reconstruct.svd(s))
 
 # methods implementation
 

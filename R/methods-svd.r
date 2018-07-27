@@ -11,24 +11,29 @@ svd <- function(x, LINPACK = FALSE){
 as_tbl_ord.svd <- as_tbl_ord_default
 
 recover_u.svd <- function(x){
-  if (class(x) != "svd"){
-    stop("recover_u() can only be called on a singular value decomposition output")
-  }
-  else {
-    x$u
-  }
+  x$u
 }
 
 recover_v.svd <- function(x){
-  if (class(x) != "svd"){
-    stop("recover_v() can only be called on a singular value decomposition output")
-  }
-  else {
-    x$v
-  }
+  x$v
 }
 
 recover_coord.svd <- function(x) paste0("SV", 1:ncol(x$u))
+
+augment_u.svd <- function(x){
+  tibble_pole(nrow(recover_u.svd(x)))
+}
+
+augment_v.svd <- function(x){
+  tibble_pole(nrow(recover_v.svd(x)))
+}
+
+augment_coord.svd <- function(x){
+  tibble(
+    .name = recover_coord(x),
+    .values = x$d[1:ncol(x$u)]
+  )
+}
 
 get_singular_values <- function(x){
   if (class(x) != "svd"){
@@ -48,11 +53,6 @@ get_diagonal_matrix <- function(x){
   }
 }
 
-recompose_data_matrix <- function(x){
-  if (class(x) != "svd"){
-    stop("recompose_data_matrix() can only be called on a singular value decomposition output")
-  }
-  else {
-    x$u %*% diag(x$d) %*% t(x$v)
-  }
+reconstruct.svd <- function(x){
+  x$u %*% diag(x$d) %*% t(x$v)
 }
