@@ -9,7 +9,7 @@ recover_u.princomp <- function(x){
 }
 
 recover_v.princomp <- function(x){
-  x[["loadings"]]
+  unclass(x[["loadings"]])
 }
 
 reconstruct.princomp <- function(x){

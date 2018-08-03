@@ -7,26 +7,26 @@ x <- USArrests
 p <- princomp(USArrests)
 
 # access the 'U' and 'V' matrices
-recover_u.princomp(p)
-recover_v.princomp(p)
+recover_u(p)
+recover_v(p)
 
 # reconstruct an approximation of the original data
-reconstruct.princomp(p)
+reconstruct(p)
 
 # check that the distances between the original and recovered values are small
-hist(as.matrix(x) - reconstruct.princomp(p))
+hist(as.matrix(x) - reconstruct(p))
 
 # access the names of the artificial coordinates
-recover_coord.princomp(p)
+recover_coord(p)
 
 # augment methods
-augment_u.princomp(p)
-augment_v.princomp(p)
-augment_coord.princomp(p)
+augment_u(p)
+augment_v(p)
+augment_coord(p)
 
 # wrap 'p' as a 'tbl_ord' object
 # this cannot be done correctly with the 'as_tbl_ord_default' method
-b <- as_tbl_ord.princomp(p)
+b <- as_tbl_ord(p)
 
 # print 'b'
 # this will throw an error
@@ -35,3 +35,12 @@ b
 # pass b to 'fortify'
 # this will throw an error
 fortify(b)
+
+# biplot of scores and loadings
+gg <- ggbiplot(b) +
+  geom_u_point() +
+  geom_v_vector() +
+  theme(aspect.ratio = 1)
+
+# view biplot
+gg
