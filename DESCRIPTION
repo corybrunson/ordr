@@ -44,6 +44,8 @@ Collate:
     'methods-eigen.r'
     'methods-lm.r'
     'methods-lpca.r'
+    'methods-prcomp.r'
+    'methods-princomp.r'
     'methods-svd.r'
     'plot-bibble.r'
     'reconstruct.r'
