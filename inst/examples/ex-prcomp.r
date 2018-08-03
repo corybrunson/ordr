@@ -9,43 +9,43 @@ p2 <- prcomp(x, center = TRUE, scale = FALSE)
 p3 <- prcomp(x, center = TRUE, scale = TRUE)
 
 # access the 'U' and 'V' matrices
-recover_u.prcomp(p)
-recover_v.prcomp(p)
-recover_u.prcomp(p2)
-recover_v.prcomp(p2)
-recover_u.prcomp(p3)
-recover_v.prcomp(p3)
+recover_u(p)
+recover_v(p)
+recover_u(p2)
+recover_v(p2)
+recover_u(p3)
+recover_v(p3)
 
 # reconstruct approximations of the original data
-reconstruct.prcomp(p)
-reconstruct.prcomp(p2)
-reconstruct.prcomp(p3)
+reconstruct(p)
+reconstruct(p2)
+reconstruct(p3)
 
 # check that the distances between the original and recovered values are small
-hist(as.matrix(x) - reconstruct.prcomp(p))
-hist(as.matrix(x) - reconstruct.prcomp(p2))
-hist(as.matrix(x) - reconstruct.prcomp(p3))
+hist(as.matrix(x) - reconstruct(p))
+hist(as.matrix(x) - reconstruct(p2))
+hist(as.matrix(x) - reconstruct(p3))
 
 # wrap 'p', 'p2', and 'p3' as 'tbl_ord' objects
-b <- as_tbl_ord.prcomp(p)
-b2 <- as_tbl_ord.prcomp(p2)
-b3 <- as_tbl_ord.prcomp(p3)
+b <- as_tbl_ord(p)
+b2 <- as_tbl_ord(p2)
+b3 <- as_tbl_ord(p3)
 
 # access the names of the artificial coordinates
-recover_coord.prcomp(b)
-recover_coord.prcomp(b2)
-recover_coord.prcomp(b3)
+recover_coord(b)
+recover_coord(b2)
+recover_coord(b3)
 
 # augment methods
-augment_u.prcomp(b)
-augment_v.prcomp(b)
-augment_coord.prcomp(b)
-augment_u.prcomp(b2)
-augment_v.prcomp(b2)
-augment_coord.prcomp(b2)
-augment_u.prcomp(b3)
-augment_v.prcomp(b3)
-augment_coord.prcomp(b3)
+augment_u(b)
+augment_v(b)
+augment_coord(b)
+augment_u(b2)
+augment_v(b2)
+augment_coord(b2)
+augment_u(b3)
+augment_v(b3)
+augment_coord(b3)
 
 # data frames
 fortify(b)
