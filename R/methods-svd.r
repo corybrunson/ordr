@@ -1,15 +1,20 @@
 #' Functionality for singular value decompositions
 #' 
+#' These methods extract data from, and attribute new data to, objects of class 
+#' \code{"svd"}. (This is a class introduced in this package to identify 
+#' objects returned by \code{\link{svd}}, which is masked by a wrapper that
+#' adds the class attribute.)
+#' 
+#' @name methods-svd
+#' @template methods-params
+#' @template matrix-param
 
-svd <- function(x, LINPACK = FALSE){
-  res <- base::svd(x = x, nu = min(nrow(x), ncol(x)), nv = min(nrow(x), ncol(x)), LINPACK = LINPACK)
-  class(res) <- "svd"
-  attr(res, "x") <- x
-  res
-}
-
+#' @rdname methods-svd
+#' @export
 as_tbl_ord.svd <- as_tbl_ord_default
 
+#' @rdname methods-svd
+#' @export
 recover_u.svd <- function(x){
   res <- x$u
   colnames(res) <- recover_coord.svd(x)
@@ -17,6 +22,8 @@ recover_u.svd <- function(x){
   res
 }
 
+#' @rdname methods-svd
+#' @export
 recover_v.svd <- function(x){
   res <- x$v
   colnames(res) <- recover_coord.svd(x)
@@ -24,8 +31,12 @@ recover_v.svd <- function(x){
   res
 }
 
+#' @rdname methods-svd
+#' @export
 recover_coord.svd <- function(x) paste0("SV", 1:ncol(x$u))
 
+#' @rdname methods-svd
+#' @export
 augment_u.svd <- function(x){
   .name <- rownames(attr(x, "x"))
   if (is.null(.name)) {
@@ -35,6 +46,8 @@ augment_u.svd <- function(x){
   }
 }
 
+#' @rdname methods-svd
+#' @export
 augment_v.svd <- function(x){
   .name <- colnames(attr(x, "x"))
   if (is.null(.name)) {
@@ -44,6 +57,8 @@ augment_v.svd <- function(x){
   }
 }
 
+#' @rdname methods-svd
+#' @export
 augment_coord.svd <- function(x){
   tibble(
     .name = recover_coord(x),
@@ -51,6 +66,8 @@ augment_coord.svd <- function(x){
   )
 }
 
+#' @rdname methods-svd
+#' @export
 reconstruct.svd <- function(x){
   x$u %*% diag(x$d) %*% t(x$v)
 }
@@ -72,4 +89,3 @@ get_diagonal_matrix <- function(x){
     diag(x$d)
   }
 }
-

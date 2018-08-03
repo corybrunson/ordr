@@ -3,7 +3,9 @@ Title: A 'tidyverse' extension for ordinations and biplots
 Version: 0.0.0.9000
 Authors@R: c(
   person("Jason Cory", "Brunson", email = "cornelioid@gmail.com",
-    role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3126-9494"))
+    role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3126-9494")),
+  person("Emily", "Paul", email = "erpb.71@gmail.com",
+    role = "ctb")  
   )
 Description: A unified framework for ordination objects and biplot methods using
     tidy principles.
@@ -44,6 +46,8 @@ Collate:
     'methods-eigen.r'
     'methods-lm.r'
     'methods-lpca.r'
+    'methods-prcomp.r'
+    'methods-princomp.r'
     'methods-svd.r'
     'plot-bibble.r'
     'reconstruct.r'
