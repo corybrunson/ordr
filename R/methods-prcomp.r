@@ -37,16 +37,15 @@ augment_u.prcomp <- function(x){
 augment_v.prcomp <- function(x){
   res <- tibble(.name = rownames(x[["rotation"]]))
   if (class(x[["center"]]) == "numeric"){
-    res <- dplyr::bind_cols(res, .centering = x[["center"]])
+    res <- dplyr::bind_cols(res, .center = x[["center"]])
   }
   if (class(x[["scale"]]) == "numeric"){
-    res <- dplyr::bind_cols(res, .scaling = x[["scale"]])
+    res <- dplyr::bind_cols(res, .scale = x[["scale"]])
   }
   res
 }
 
-augment_coord.prcomp <- function(x)
-{
+augment_coord.prcomp <- function(x){
   tibble(
     .name = recover_coord(x),
     .sdev = x[["sdev"]]
