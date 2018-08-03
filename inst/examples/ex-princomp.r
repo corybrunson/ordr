@@ -25,15 +25,12 @@ augment_v(p)
 augment_coord(p)
 
 # wrap 'p' as a 'tbl_ord' object
-# this cannot be done correctly with the 'as_tbl_ord_default' method
 b <- as_tbl_ord(p)
 
 # print 'b'
-# this will throw an error
 b
 
 # pass b to 'fortify'
-# this will throw an error
 fortify(b)
 
 # biplot of scores and loadings
