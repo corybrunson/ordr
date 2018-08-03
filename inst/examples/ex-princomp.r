@@ -1,7 +1,5 @@
 # principal components analysis ('princomp') examples
 
-devtools::load_all()
-
 # calculate a 'princomp'
 x <- USArrests
 p <- princomp(USArrests)
@@ -36,8 +34,7 @@ fortify(b)
 # biplot of scores and loadings
 gg <- ggbiplot(b) +
   geom_u_point() +
-  geom_v_vector() +
-  theme(aspect.ratio = 1)
+  geom_v_vector(aes(x = 100 * Comp.1, y = 100 * Comp.2))
 
 # view biplot
 gg

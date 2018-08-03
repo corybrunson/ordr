@@ -9,15 +9,6 @@
 #' @template methods-params
 #' @template matrix-param
 
-#' @rdname masks
-#' @export
-eigen <- function(x, EISPACK = FALSE) {
-  res <- base::eigen(x = x, only.values = FALSE, EISPACK = EISPACK)
-  class(res) <- "eigen"
-  attr(res, "x") <- x
-  res
-}
-
 #' @rdname methods-eigen
 #' @export
 as_tbl_ord.eigen <- as_tbl_ord_default
