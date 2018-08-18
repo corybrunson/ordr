@@ -29,7 +29,7 @@ eigen <- function(x, EISPACK = FALSE) {
 #' @rdname masks
 #' @export
 svd <- function(x, LINPACK = FALSE){
-  res <- base::svd(x = x, nu = min(nrow(x), ncol(x)), nv = min(nrow(x), ncol(x)), LINPACK = LINPACK)
+  res <- base::svd(x = x, nu = min(dim(x)), nv = min(dim(x)), LINPACK = LINPACK)
   class(res) <- "svd"
   attr(res, "x") <- x
   res
