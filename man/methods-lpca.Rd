@@ -2,14 +2,6 @@
 % Please edit documentation in R/methods-lpca.r
 \name{methods-lpca}
 \alias{methods-lpca}
-\alias{as_tbl_ord.lpca}
-\alias{recover_u.lpca}
-\alias{recover_v.lpca}
-\alias{recover_coord.lpca}
-\alias{augment_u.lpca}
-\alias{augment_v.lpca}
-\alias{augment_coord.lpca}
-\alias{negate_to.lpca}
 \alias{as_tbl_ord.lsvd}
 \alias{recover_u.lsvd}
 \alias{recover_v.lsvd}
@@ -19,25 +11,25 @@
 \alias{augment_coord.lsvd}
 \alias{reconstruct.lsvd}
 \alias{negate_to.lsvd}
+\alias{as_tbl_ord.lpca}
+\alias{recover_u.lpca}
+\alias{recover_v.lpca}
+\alias{recover_coord.lpca}
+\alias{augment_u.lpca}
+\alias{augment_v.lpca}
+\alias{augment_coord.lpca}
+\alias{negate_to.lpca}
+\alias{as_tbl_ord.clpca}
+\alias{recover_u.clpca}
+\alias{recover_v.clpca}
+\alias{recover_coord.clpca}
+\alias{augment_u.clpca}
+\alias{augment_v.clpca}
+\alias{augment_coord.clpca}
+\alias{negate_to.clpca}
 \title{Functionality for logistic principal components analysis and singular 
 value decomposition objects}
 \usage{
-\method{as_tbl_ord}{lpca}(x)
-
-\method{recover_u}{lpca}(x)
-
-\method{recover_v}{lpca}(x)
-
-\method{recover_coord}{lpca}(x)
-
-\method{augment_u}{lpca}(x)
-
-\method{augment_v}{lpca}(x)
-
-\method{augment_coord}{lpca}(x)
-
-\method{negate_to}{lpca}(x, y, ..., .matrix)
-
 \method{as_tbl_ord}{lsvd}(x)
 
 \method{recover_u}{lsvd}(x)
@@ -55,6 +47,38 @@ value decomposition objects}
 \method{reconstruct}{lsvd}(x)
 
 \method{negate_to}{lsvd}(x, y, ..., .matrix)
+
+\method{as_tbl_ord}{lpca}(x)
+
+\method{recover_u}{lpca}(x)
+
+\method{recover_v}{lpca}(x)
+
+\method{recover_coord}{lpca}(x)
+
+\method{augment_u}{lpca}(x)
+
+\method{augment_v}{lpca}(x)
+
+\method{augment_coord}{lpca}(x)
+
+\method{negate_to}{lpca}(x, y, ..., .matrix)
+
+\method{as_tbl_ord}{clpca}(x)
+
+\method{recover_u}{clpca}(x)
+
+\method{recover_v}{clpca}(x)
+
+\method{recover_coord}{clpca}(x)
+
+\method{augment_u}{clpca}(x)
+
+\method{augment_v}{clpca}(x)
+
+\method{augment_coord}{clpca}(x)
+
+\method{negate_to}{clpca}(x, y, ..., .matrix)
 }
 \arguments{
 \item{x}{An ordination object.}
@@ -82,7 +106,6 @@ finches_mat <- as.matrix(dplyr::select(finches, -Island))
 rownames(finches_mat) <- finches$Island
 
 finches_lsvd <- as_tbl_ord(logisticSVD(finches_mat))
-# ILLUSTRATE ROLE-REVERSAL BETWEEN U AND V
 ggbiplot(finches_lsvd, aes(x = LSC1, y = LSC2)) +
   geom_u_vector(aes(x = LSC1 * .01, y = LSC2 * .01)) +
   geom_u_text(aes(x = LSC1 * .01, y = LSC2 * .01, label = .name), size = 3) +
@@ -90,6 +113,13 @@ ggbiplot(finches_lsvd, aes(x = LSC1, y = LSC2)) +
 
 finches_lpca <- as_tbl_ord(logisticPCA(finches_mat))
 ggbiplot(finches_lpca, aes(x = LPC1, y = LPC2)) +
+  geom_u_vector(aes(x = LPC1 * .02, y = LPC2 * .02)) +
+  geom_u_text_radiate(aes(x = LPC1 * .02, y = LPC2 * .02, label = .name),
+                      size = 3) +
+  geom_v_label(aes(label = .name), size = 3, alpha = .5)
+
+finches_clpca <- as_tbl_ord(convexLogisticPCA(finches_mat[, -13, drop = FALSE]))
+ggbiplot(finches_clpca, aes(x = LPC1, y = LPC2)) +
   geom_u_vector(aes(x = LPC1 * .02, y = LPC2 * .02)) +
   geom_u_text_radiate(aes(x = LPC1 * .02, y = LPC2 * .02, label = .name),
                       size = 3) +

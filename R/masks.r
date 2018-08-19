@@ -9,11 +9,31 @@
 
 #' @name masks
 #' @importFrom logisticPCA logisticPCA logisticSVD
+#' @inheritParams base::eigen
+#' @inheritParams base::svd
 #' @inheritParams stats::cmdscale
 #' @inheritParams logisticPCA::logisticPCA
 #' @inheritParams logisticPCA::logisticSVD
 #' @inheritParams logisticPCA::convexLogisticPCA
 #' @param ... Additional parameters passed to original functions.
+
+#' @rdname masks
+#' @export
+eigen <- function(x, EISPACK = FALSE) {
+  res <- base::eigen(x = x, only.values = FALSE, EISPACK = EISPACK)
+  class(res) <- "eigen"
+  attr(res, "x") <- x
+  res
+}
+
+#' @rdname masks
+#' @export
+svd <- function(x, LINPACK = FALSE){
+  res <- base::svd(x = x, nu = min(dim(x)), nv = min(dim(x)), LINPACK = LINPACK)
+  class(res) <- "svd"
+  attr(res, "x") <- x
+  res
+}
 
 #' @rdname masks
 #' @export

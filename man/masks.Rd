@@ -2,22 +2,40 @@
 % Please edit documentation in R/masks.r
 \name{masks}
 \alias{masks}
+\alias{eigen}
+\alias{svd}
 \alias{cmdscale}
-\alias{logisticPCA}
 \alias{logisticSVD}
+\alias{logisticPCA}
+\alias{convexLogisticPCA}
 \title{Masks of external ordination objects}
 \usage{
+eigen(x, EISPACK = FALSE)
+
+svd(x, LINPACK = FALSE)
+
 cmdscale(d, k = 2, add = FALSE)
+
+logisticSVD(x, k = 2, quiet = TRUE, max_iters = 1000,
+  conv_criteria = 1e-05, random_start = FALSE, ..., partial_decomp = TRUE,
+  main_effects = TRUE)
 
 logisticPCA(x, k = 2, m = 4, quiet = TRUE, partial_decomp = FALSE,
   max_iters = 1000, conv_criteria = 1e-05, random_start = FALSE, ...,
   main_effects = TRUE)
 
-logisticSVD(x, k = 2, quiet = TRUE, max_iters = 1000,
-  conv_criteria = 1e-05, random_start = FALSE, ..., partial_decomp = TRUE,
-  main_effects = TRUE)
+convexLogisticPCA(x, k = 2, m = 4, quiet = TRUE, partial_decomp = FALSE,
+  max_iters = 1000, conv_criteria = 1e-06, random_start = FALSE, ...,
+  main_effects = TRUE, ss_factor = 4)
 }
 \arguments{
+\item{x}{a numeric or complex matrix whose spectral decomposition is to
+    be computed.  Logical matrices are coerced to numeric.}
+
+\item{EISPACK}{logical. Defunct and ignored.}
+
+\item{LINPACK}{logical.  Defunct and ignored.}
+
 \item{d}{a distance structure such as that returned by \code{dist}
     or a full symmetric matrix containing the dissimilarities.}
 
@@ -28,15 +46,7 @@ logisticSVD(x, k = 2, quiet = TRUE, max_iters = 1000,
     be computed, and added to the non-diagonal dissimilarities such that
     the modified dissimilarities are Euclidean.}
 
-\item{x}{matrix with all binary entries}
-
-\item{m}{value to approximate the saturated model. If \code{m = 0}, m is solved for}
-
 \item{quiet}{logical; whether the calculation should give feedback}
-
-\item{partial_decomp}{logical; if \code{TRUE}, the function uses the rARPACK package
-to more quickly calculate the eigen-decomposition. This is usually faster than standard
-eigen-decomponsition when \code{ncol(x) > 100} and \code{k} is small}
 
 \item{max_iters}{number of maximum iterations}
 
@@ -48,7 +58,18 @@ function will use an eigen-decomposition as starting value}
 
 \item{...}{Additional parameters passed to original functions.}
 
+\item{partial_decomp}{logical; if \code{TRUE}, the function uses the rARPACK package
+to more quickly calculate the eigen-decomposition. This is usually faster than standard
+eigen-decomponsition when \code{ncol(x) > 100} and \code{k} is small}
+
 \item{main_effects}{logical; whether to include main effects in the model}
+
+\item{m}{value to approximate the saturated model. If \code{m = 0}, m is solved for}
+
+\item{ss_factor}{step size multiplier. Amount by which to multiply the step size. Quadratic
+convergence rate can be proven for \code{ss_factor = 1}, but I have found higher values
+sometimes work better. The default is \code{ss_factor = 4}.
+If it is not converging, try \code{ss_factor = 1}.}
 }
 \description{
 Some popular ordination functions in R return objects without a specific 
