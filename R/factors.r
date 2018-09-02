@@ -44,6 +44,14 @@ recover_factor <- function(x, .matrix) {
   )
 }
 
+#' @rdname factors
+#' @export
+recover_sv <- function(x) UseMethod("recover_sv")
+
+#' @rdname factors
+#' @export
+recover_inertia <- function(x) UseMethod("recover_inertia")
+
 # need `recover_*` functions before and after coercion;
 # `recover_*.tbl_ord` are unnecessary
 
@@ -54,6 +62,14 @@ recover_u.default <- function(x) x$u
 #' @rdname factors
 #' @export
 recover_v.default <- function(x) x$v
+
+#' @rdname factors
+#' @export
+recover_sv.default <- function(x) x$sv
+
+#' @rdname factors
+#' @export
+recover_inertia.default <- function(x) NULL
 
 # for fortified tbl_ords (also coordinates?)
 
@@ -75,7 +91,15 @@ recover_v.data.frame <- function(x) {
 #' @export
 get_u <- function(x, align = TRUE) {
   u <- recover_u(x)
-  if (align && !is.null(attr(x, "align"))) {
+  if (! is.null(attr(x, "confer"))) {
+    p0 <- recover_inertia(x)
+    p <- attr(x, "confer")
+    s <- diag(recover_sv(x) ^ (p0[1] - p[1]))
+    # same coordinates (necessary for `ggbiplot()`)
+    dimnames(s) <- rep(list(recover_coord(x)), 2)
+    u <- u %*% s
+  }
+  if (align && ! is.null(attr(x, "align"))) {
     r <- attr(x, "align")
     return(u %*% r)
   } else {
@@ -87,7 +111,15 @@ get_u <- function(x, align = TRUE) {
 #' @export
 get_v <- function(x, align = TRUE) {
   v <- recover_v(x)
-  if (align && !is.null(attr(x, "align"))) {
+  if (! is.null(attr(x, "confer"))) {
+    p0 <- recover_inertia(x)
+    p <- attr(x, "confer")
+    s <- diag(recover_sv(x) ^ (p0[2] - p[2]))
+    # same coordinates (necessary for `ggbiplot()`)
+    dimnames(s) <- rep(list(recover_coord(x)), 2)
+    v <- v %*% s
+  }
+  if (align && ! is.null(attr(x, "align"))) {
     r <- attr(x, "align")
     return(v %*% r)
   } else {

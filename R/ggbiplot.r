@@ -62,21 +62,21 @@ ordinate_aes <- function(ordination, mapping) {
   coords <- get_coord(ordination, align = TRUE)
   coord_vars <- syms(coords)
   if (is.null(mapping$y)) {
-    mapping <- c(aes(y = !!coord_vars[[2]]), mapping)
+    mapping <- c(aes(y = !! coord_vars[[2]]), mapping)
   } else {
     if (is.numeric(mapping$y) && length(mapping$y) == 1) {
       mapping <- c(
-        aes(y = !!coord_vars[[mapping$y]]),
+        aes(y = !! coord_vars[[mapping$y]]),
         mapping[setdiff(names(mapping), "y")]
       )
     }
   }
   if (is.null(mapping$x)) {
-    mapping <- c(aes(x = !!coord_vars[[1]]), mapping)
+    mapping <- c(aes(x = !! coord_vars[[1]]), mapping)
   } else {
     if (is.numeric(mapping$x) && length(mapping$x) == 1) {
       mapping <- c(
-        aes(x = !!coord_vars[[mapping$x]]),
+        aes(x = !! coord_vars[[mapping$x]]),
         mapping[setdiff(names(mapping), "x")]
       )
     }

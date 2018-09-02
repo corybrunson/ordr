@@ -26,6 +26,12 @@ recover_v.prcomp <- function(x){
 
 #' @rdname methods-prcomp
 #' @export
+recover_sv.prcomp <- function(x){
+  x[["sdev"]]^2
+}
+
+#' @rdname methods-prcomp
+#' @export
 reconstruct.prcomp <- function(x){
   res <- recover_u.prcomp(x)%*%t(recover_v.prcomp(x))
   if (x[["center"]] == FALSE && x[["scale"]] == FALSE){

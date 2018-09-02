@@ -34,6 +34,10 @@ recover_v.cmds <- function(x) recover_uv_cmds(x, "v")
 
 #' @rdname methods-cmds
 #' @export
+recover_sv.cmds <- function(x) x$eig
+
+#' @rdname methods-cmds
+#' @export
 recover_coord.cmds <- function(x) paste0("PCo", 1:ncol(x$points))
 
 #' @rdname methods-cmds

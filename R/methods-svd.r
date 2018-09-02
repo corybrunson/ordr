@@ -27,9 +27,13 @@ recover_u.svd <- function(x){
 recover_v.svd <- function(x){
   res <- x$v
   colnames(res) <- recover_coord.svd(x)
-  rownames(res) <- t(colnames(attr(x, "x")))
+  rownames(res) <- colnames(attr(x, "x"))
   res
 }
+
+#' @rdname methods-svd
+#' @export
+recover_sv.svd <- function(x) s$d
 
 #' @rdname methods-svd
 #' @export

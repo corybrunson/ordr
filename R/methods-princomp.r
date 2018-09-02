@@ -26,6 +26,12 @@ recover_v.princomp <- function(x){
 
 #' @rdname methods-princomp
 #' @export
+recover_sv.princomp <- function(x){
+  pca[["sdev"]]^2
+}
+
+#' @rdname methods-princomp
+#' @export
 reconstruct.princomp <- function(x){
   res <- x[["scores"]]%*%t(x[["loadings"]])
   for (col in 1:ncol(res)) {for (row in 1:nrow(res)) {res[row, col] <- (res[row, col] * x[["scale"]][col]) + x[["center"]][col]}}

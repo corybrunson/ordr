@@ -36,6 +36,10 @@ recover_v.eigen <- function(x) recover_uv_eigen(x, "v")
 
 #' @rdname methods-eigen
 #' @export
+recover_sv.eigen <- function(x) x$values
+
+#' @rdname methods-eigen
+#' @export
 recover_coord.eigen <- function(x) {
   w <- 1:(min(which(c(x$values, -1) < 0)) - 1)
   paste0("E", w)
