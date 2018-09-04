@@ -12,8 +12,7 @@ tbl_ord_factors <- c(
   subjects = "u", measures = "v",
   scores = "u", loadings = "v",
   rows = "u", columns = "v", cols = "v",
-  rowprincipal = "u", colprincipal = "v",
-  rowstandard = "v", colstandard = "u",
+  rowprincipal = "v", colprincipal = "u", # consistency with `ca::plot.ca()`
   both = "uv", symmetric = "uv"
 )
 match_factor <- function(x) {

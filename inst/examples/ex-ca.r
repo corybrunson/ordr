@@ -9,7 +9,7 @@ plot(m, map = "rowprincipal", col = c("green", "brown"))
 
 # confer singular values to reproduce the row-principal biplot
 b %>%
-  confer_inertia("rows") %>%
+  confer_inertia("rowprincipal") %>%
   ggbiplot(aes(label = .name)) +
   theme_bw() +
   geom_u_point(color = "green") +
