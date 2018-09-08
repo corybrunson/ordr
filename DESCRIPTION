@@ -44,6 +44,7 @@ Collate:
     'masks.r'
     'methods-cmds.r'
     'methods-eigen.r'
+    'methods-kmeans.r'
     'methods-lm.r'
     'methods-lpca.r'
     'methods-prcomp.r'
