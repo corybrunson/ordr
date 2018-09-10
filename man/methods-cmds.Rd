@@ -52,14 +52,13 @@ objects returned by \code{\link[stats]{cmdscale}}, which is masked by a
 wrapper that adds the class attribute.)
 }
 \examples{
-# reproduce Exhibit 4.5 in Greenacre (2010)
 
-data(country_differences, country_attributes)
-# format both tibbles as matrices
+# reproduce Exhibit 4.2 in Greenacre (2010)
+
+# format `country_differences` as a matrix
+data(country_differences)
 x1 <- as.matrix(dplyr::select(country_differences, -Countries))
 rownames(x1) <- dplyr::pull(country_differences, Countries)
-x2 <- as.matrix(dplyr::select(country_attributes, -Countries))
-rownames(x2) <- dplyr::pull(country_differences, Countries)
 
 # multidimensional scaling setup
 (m <- cmdscale(x1, k = 2))
@@ -76,6 +75,14 @@ ggbiplot(b) +
 # numeric aesthetic assignments
 ggbiplot(b, aes(x = 2, y = 1)) +
   geom_v_text(aes(label = .name))
+
+# reproduce Exhibit 4.5 in Greenacre (2010)
+
+# format `country_attributes` as a matrix
+data(country_attributes)
+x2 <- as.matrix(dplyr::select(country_attributes, -Countries))
+rownames(x2) <- dplyr::pull(country_differences, Countries)
+
 # regress the attributes on the plotting dimensions and annotate the biplot
 fit <- as_tbl_ord(lm(x2 ~ get_u(b)))
 gg +
@@ -92,5 +99,42 @@ gg +
 dat <- fortify_v(fit)
 gg +
   geom_v_vector(data = fit) +
-  geom_text(data = dat, aes(label = .name))
+  ggrepel::geom_text_repel(data = dat, aes(label = .name))
+
+# reproduce Exhibit 4.6 in Greenacre (2010)
+
+data(bioenv)
+
+# chi-squared distances
+chidist <- function(mat, rowcol = 1) {
+  if (rowcol == 1) {
+    prof <- mat / apply(mat, 1, sum)
+    rootaveprof <- sqrt(apply(mat, 2, sum) / sum(mat))
+  }
+  if (rowcol == 2) {
+    prof <- t(mat) / apply(mat, 2, sum)
+    rootaveprof <- sqrt(apply(mat, 1, sum) / sum(mat))
+  }
+  dist(scale(prof, FALSE, rootaveprof))
+}
+
+# `tbl_ord` MDS object
+bioenv_chidist <- chidist(bioenv[, 2:6])
+bioenv_cmds <- as_tbl_ord(cmdscale(bioenv_chidist))
+bioenv_cmds <- mutate_u(bioenv_cmds, .name = bioenv$site)
+
+# sites plot
+ggbiplot(bioenv_cmds, aes(label = .name)) +
+  geom_u_text()
+
+# sites and species biplot
+bioenv_rf <- diag(1 / rowSums(bioenv[, 2:6])) \%*\%
+  as.matrix(bioenv[, 2:6]) \%*\%
+  diag(sqrt(sum(bioenv[, 2:6]) / colSums(bioenv[, 2:6])))
+colnames(bioenv_rf) <- names(bioenv)[2:6]
+bioenv_lm <- as_tbl_ord(lm(bioenv_rf ~ get_u(bioenv_cmds)))
+ggbiplot(bioenv_cmds, aes(label = .name)) +
+  geom_u_text() +
+  geom_v_vector(data = bioenv_lm) +
+  geom_v_text_radiate(data = bioenv_lm)
 }

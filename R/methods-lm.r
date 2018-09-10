@@ -93,13 +93,12 @@ augment_u.lm <- function(x) {
 #' @rdname methods-lm
 #' @export
 augment_v.lm <- function(x) {
-  tibble(
-    .name = if (is.matrix(x$model[, 1])) {
-      colnames(x$model[, 1])
-    } else {
-      names(x$model)[1]
-    }
-  )
+  .name <- if (is.matrix(x$model[, 1])) {
+    colnames(x$model[, 1])
+  } else {
+    names(x$model)[1]
+  }
+  tibble(.name = .name)
 }
 
 #' @rdname methods-lm
@@ -209,9 +208,11 @@ augment_u.mlm <- function(x) {
 #' @rdname methods-lm
 #' @export
 augment_v.mlm <- function(x) {
-  tibble(
-    .name = colnames(x$coefficients)
-  )
+  .name <- colnames(x$coefficients)
+  if (is.null(.name)) {
+    .name <- paste(names(x$model)[1], 1:ncol(x$model[, 1]), sep = ".")
+  }
+  tibble(.name = .name)
 }
 
 #' @rdname methods-lm
