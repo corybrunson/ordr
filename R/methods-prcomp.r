@@ -4,8 +4,7 @@
 #' \code{"prcomp"}.
 #' 
 #' @name methods-prcomp
-#' @template methods-params
-#' @template matrix-param
+#' @template param-methods
 #' @example inst/examples/ex-prcomp.r
 
 #' @rdname methods-prcomp

@@ -17,16 +17,16 @@ svd(x, LINPACK = FALSE)
 cmdscale(d, k = 2, add = FALSE)
 
 logisticSVD(x, k = 2, quiet = TRUE, max_iters = 1000,
-  conv_criteria = 1e-05, random_start = FALSE, ..., partial_decomp = TRUE,
-  main_effects = TRUE)
+  conv_criteria = 1e-05, random_start = FALSE, ...,
+  partial_decomp = TRUE, main_effects = TRUE)
 
 logisticPCA(x, k = 2, m = 4, quiet = TRUE, partial_decomp = FALSE,
   max_iters = 1000, conv_criteria = 1e-05, random_start = FALSE, ...,
   main_effects = TRUE)
 
-convexLogisticPCA(x, k = 2, m = 4, quiet = TRUE, partial_decomp = FALSE,
-  max_iters = 1000, conv_criteria = 1e-06, random_start = FALSE, ...,
-  main_effects = TRUE, ss_factor = 4)
+convexLogisticPCA(x, k = 2, m = 4, quiet = TRUE,
+  partial_decomp = FALSE, max_iters = 1000, conv_criteria = 1e-06,
+  random_start = FALSE, ..., main_effects = TRUE, ss_factor = 4)
 }
 \arguments{
 \item{x}{a numeric or complex matrix whose spectral decomposition is to
@@ -40,7 +40,7 @@ convexLogisticPCA(x, k = 2, m = 4, quiet = TRUE, partial_decomp = FALSE,
     or a full symmetric matrix containing the dissimilarities.}
 
 \item{k}{the maximum dimension of the space which the data are to be
-    represented in; must be in \eqn{\{1, 2, \ldots, n-1\}}{{1, 2, \dots, n-1}}.}
+    represented in; must be in \eqn{\{1, 2, \ldots, n-1\}}{{1, 2, \\dots, n-1}}.}
 
 \item{add}{logical indicating if an additive constant \eqn{c*} should
     be computed, and added to the non-diagonal dissimilarities such that

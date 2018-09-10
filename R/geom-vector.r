@@ -23,8 +23,8 @@
 #' @name ggbiplot-vector
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
-#' @template layer-params
-#' @template matrix-param
+#' @template param-layer
+#' @template param-matrix
 #' @param arrow Specification for arrows, as created by
 #'   \code{\link[grid]{arrow}}.
 
@@ -56,7 +56,8 @@ GeomVector <- ggproto(
     # reverse ends of `arrow`
     arrow$ends <- c(2L, 1L, 3L)[arrow$ends]
     
-    ggplot2::GeomSegment$draw_panel(
+    # removed `ggplot2::` since *ggplot2* is imported
+    GeomSegment$draw_panel(
       data = data, panel_params = panel_params, coord = coord,
       arrow = arrow, lineend = lineend, linejoin = linejoin,
       na.rm = na.rm

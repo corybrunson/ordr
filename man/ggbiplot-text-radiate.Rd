@@ -10,13 +10,13 @@
 \title{Render text at ordinates radiating out from the origin}
 \format{An object of class \code{GeomTextRadiate} (inherits from \code{GeomText}, \code{Geom}, \code{ggproto}, \code{gg}) of length 2.}
 \usage{
-geom_u_text_radiate(mapping = NULL, data = NULL, position = "identity",
-  ..., parse = FALSE, check_overlap = FALSE, na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE)
+geom_u_text_radiate(mapping = NULL, data = NULL,
+  position = "identity", ..., parse = FALSE, check_overlap = FALSE,
+  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
 
-geom_v_text_radiate(mapping = NULL, data = NULL, position = "identity",
-  ..., parse = FALSE, check_overlap = FALSE, na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE)
+geom_v_text_radiate(mapping = NULL, data = NULL,
+  position = "identity", ..., parse = FALSE, check_overlap = FALSE,
+  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
 
 geom_biplot_text_radiate(mapping = NULL, data = NULL,
   position = "identity", .matrix = "v", ..., parse = FALSE,

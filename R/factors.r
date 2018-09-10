@@ -21,7 +21,7 @@
 #' @include utils.r
 #' @param x A \code{tbl_ord}, or an ordination object coercible to one.
 #' @param ... Additional arguments from \code{as.matrix}; ignored.
-#' @template matrix-param
+#' @template param-matrix
 #' @param align Logical; whether to align the matrix factors and coordinates
 #'   according to an \code{"align"} matrix attribute.
 
@@ -60,15 +60,13 @@ recover_v.default <- function(x) x$v
 #' @rdname factors
 #' @export
 recover_u.data.frame <- function(x) {
-  x$.matrix <- as.numeric(x$.matrix)
-  x[x$.matrix == 1, -match(".matrix", names(x))]
+  x[x$.matrix == "u", -match(".matrix", names(x))]
 }
 
 #' @rdname factors
 #' @export
 recover_v.data.frame <- function(x) {
-  x$.matrix <- as.numeric(x$.matrix)
-  x[x$.matrix == 2, -match(".matrix", names(x))]
+  x[x$.matrix == "v", -match(".matrix", names(x))]
 }
 
 #' @rdname factors

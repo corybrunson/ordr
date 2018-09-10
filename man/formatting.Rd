@@ -6,9 +6,11 @@
 \alias{print.tbl_ord}
 \title{Formatting and printing methods for \code{tbl_ord}s}
 \usage{
-\method{format}{tbl_ord}(x, ..., n = NULL, width = NULL, n_extra = NULL)
+\method{format}{tbl_ord}(x, ..., n = NULL, width = NULL,
+  n_extra = NULL)
 
-\method{print}{tbl_ord}(x, ..., n = NULL, width = NULL, n_extra = NULL)
+\method{print}{tbl_ord}(x, ..., n = NULL, width = NULL,
+  n_extra = NULL)
 }
 \arguments{
 \item{x}{An ordination object.}

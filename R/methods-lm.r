@@ -4,12 +4,14 @@
 #' \code{"lm"}, \code{"glm"}, and \code{"mlm"}.
 #' 
 #' @name methods-lm
-#' @template methods-params
-#' @template matrix-param
+#' @template param-methods
+#' @template param-matrix
+#' @template param-align
 #' @example inst/examples/ex-lm.r
+#' @example inst/examples/ex-glm.r
 
 #' @importFrom broom augment
-#' @importFrom stats model.frame
+#' @importFrom stats model.frame influence cooks.distance predict
 
 #' @rdname methods-lm
 #' @export
@@ -48,7 +50,10 @@ recover_coord.lm <- function(x) {
     coord <- colnames(.predictors)
   } else {
     coord <- names(.predictors)
-    mat_coord <- which(sapply(.predictors, is.matrix))
+    mat_coord <- which(sapply(
+      .predictors,
+      function(y) is.matrix(y) && ! is.null(colnames(y))
+    ))
     coord[mat_coord] <- unname(unlist(lapply(
       mat_coord,
       function(i) colnames(.predictors[, i])
@@ -64,12 +69,19 @@ recover_coord.lm <- function(x) {
 #' @export
 augment_u.lm <- function(x) {
   res <- tibble(.name = rownames(model.frame(x)))
-  .int <- as.integer(names(x$coefficients)[1] == "(Intercept)")
-  .rk <- x$rank
-  dplyr::bind_cols(
-    res,
-    dplyr::select(augment(un_tbl_ord(x)), -(1:(.rk - .int + 1)))
-  )
+  infl <- influence(x, do.coef = FALSE)
+  # diagnostics
+  res$.hat <- infl$hat
+  res$.sigma <- infl$sigma
+  res$.cooksd <- cooks.distance(x, infl = infl)
+  # residuals
+  res$.wt.res <- infl$wt.res
+  # predictions
+  pred <- as.data.frame(predict(x, se.fit = TRUE)[1:2])
+  names(pred) <- paste0(".", names(pred))
+  res <- bind_cols(res, pred)
+  # augmentation!
+  res
 }
 
 #' @rdname methods-lm
@@ -108,6 +120,29 @@ permute_to.lm <- function(x, y, ..., .matrix) {
 
 #' @rdname methods-lm
 #' @export
+augment_u.glm <- function(x) {
+  res <- tibble(.name = rownames(model.frame(x)))
+  # diagnostics
+  infl <- influence(x, do.coef = FALSE)
+  zero_wt <- as.numeric(x$weights != 0)
+  res$.hat <- infl$hat * zero_wt
+  res$.sigma <- infl$sigma * zero_wt
+  res$.cooksd <- cooks.distance(x, infl = infl)
+  # residuals
+  res$.dev.res <- infl$dev.res
+  res$.pear.res <- infl$pear.res
+  # all predictions (because why not)
+  for (tp in c("link", "response", "terms")) {
+    pred <- as.data.frame(predict(x, type = tp, se.fit = TRUE)[1:2])
+    names(pred) <- paste0(".", tp, ".", names(pred))
+    res <- bind_cols(res, pred)
+  }
+  # augmentation!
+  res
+}
+
+#' @rdname methods-lm
+#' @export
 recover_u.mlm <- function(x) {
   .intercept_col <- if (rownames(x$coefficients)[1] == "(Intercept)") {
     .ic <- matrix(1L, nrow = nrow(x$model), ncol = 1)
@@ -136,7 +171,10 @@ recover_coord.mlm <- function(x) {
     coord <- colnames(.predictors)
   } else {
     coord <- names(.predictors)
-    mat_coord <- which(sapply(.predictors, is.matrix))
+    mat_coord <- which(sapply(
+      .predictors,
+      function(y) is.matrix(y) && ! is.null(colnames(y))
+    ))
     coord[mat_coord] <- unname(unlist(lapply(
       mat_coord,
       function(i) colnames(.predictors[, i])

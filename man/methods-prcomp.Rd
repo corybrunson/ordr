@@ -30,14 +30,6 @@
 }
 \arguments{
 \item{x}{An ordination object.}
-
-\item{...}{Additional elements of a custom \code{tbl_ord}.}
-
-\item{y}{A matrix or an ordination object.}
-
-\item{.matrix}{A character string matching one of several indicators for one
-or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 }
 \description{
 These methods extract data from, and attribute new data to, objects of class 

@@ -25,7 +25,7 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Suggests: testthat
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 Collate: 
     'utils.r'
     'factors.r'

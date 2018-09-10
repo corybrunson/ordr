@@ -17,46 +17,48 @@
 \title{Render text at ordinates}
 \usage{
 geom_u_text(mapping = NULL, data = NULL, position = "identity", ...,
-  parse = FALSE, check_overlap = FALSE, na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
+  parse = FALSE, check_overlap = FALSE, na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
 
 geom_v_text(mapping = NULL, data = NULL, position = "identity", ...,
-  parse = FALSE, check_overlap = FALSE, na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
+  parse = FALSE, check_overlap = FALSE, na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
 
 geom_biplot_text(mapping = NULL, data = NULL, position = "identity",
   .matrix = "u", ..., parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
 
 geom_u_label(mapping = NULL, data = NULL, position = "identity", ...,
-  parse = FALSE, check_overlap = FALSE, na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
+  parse = FALSE, check_overlap = FALSE, na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
 
 geom_v_label(mapping = NULL, data = NULL, position = "identity", ...,
-  parse = FALSE, check_overlap = FALSE, na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
+  parse = FALSE, check_overlap = FALSE, na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
 
 geom_biplot_label(mapping = NULL, data = NULL, position = "identity",
   .matrix = "u", ..., parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
 
-geom_u_text_repel(mapping = NULL, data = NULL, position = "identity", ...,
-  parse = FALSE, na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
-
-geom_v_text_repel(mapping = NULL, data = NULL, position = "identity", ...,
-  parse = FALSE, na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
-
-geom_biplot_text_repel(mapping = NULL, data = NULL, position = "identity",
-  .matrix = "u", ..., parse = FALSE, na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
-
-geom_u_label_repel(mapping = NULL, data = NULL, position = "identity",
+geom_u_text_repel(mapping = NULL, data = NULL, position = "identity",
   ..., parse = FALSE, na.rm = FALSE, show.legend = NA,
   inherit.aes = TRUE)
 
-geom_v_label_repel(mapping = NULL, data = NULL, position = "identity",
+geom_v_text_repel(mapping = NULL, data = NULL, position = "identity",
   ..., parse = FALSE, na.rm = FALSE, show.legend = NA,
   inherit.aes = TRUE)
+
+geom_biplot_text_repel(mapping = NULL, data = NULL,
+  position = "identity", .matrix = "u", ..., parse = FALSE,
+  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+
+geom_u_label_repel(mapping = NULL, data = NULL,
+  position = "identity", ..., parse = FALSE, na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
+
+geom_v_label_repel(mapping = NULL, data = NULL,
+  position = "identity", ..., parse = FALSE, na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
 
 geom_biplot_label_repel(mapping = NULL, data = NULL,
   position = "identity", .matrix = "u", ..., parse = FALSE,

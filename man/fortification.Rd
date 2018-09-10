@@ -8,7 +8,8 @@
 \alias{tidy.tbl_ord}
 \title{Fortify a \code{tbl_ord} for plotting}
 \usage{
-\method{fortify}{tbl_ord}(model, data, ..., .matrix = "uv", include = "all")
+\method{fortify}{tbl_ord}(model, data, ..., .matrix = "uv",
+  include = "all")
 
 fortify_u(model, include = "all")
 

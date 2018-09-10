@@ -4,8 +4,7 @@
 #' \code{"kmeans"}.
 #' 
 #' @name methods-kmeans
-#' @template methods-params
-#' @template matrix-param
+#' @template param-methods
 #' @example inst/examples/ex-kmeans.r
 
 #' @rdname methods-kmeans
@@ -66,7 +65,7 @@ augment_v.kmeans <- function(x) {
 
 #' @rdname methods-kmeans
 #' @export
-augment_coord.kmeans <- function(x){
+augment_coord.kmeans <- function(x) {
   tibble(
     .name = recover_coord(x),
     .size = x$size,

@@ -30,9 +30,9 @@
 #' @import ggplot2
 #' @importFrom ggrepel GeomTextRepel GeomLabelRepel
 #' @inheritParams ggplot2::layer
-#' @template layer-params
+#' @template param-layer
 #' @param parse,check_overlap See \code{\link[ggplot2]{geom_text}}.
-#' @template matrix-param
+#' @template param-matrix
 
 #' @rdname ggbiplot-text
 #' @export

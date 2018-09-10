@@ -4,8 +4,7 @@
 #' \code{"princomp"}.
 #' 
 #' @name methods-princomp
-#' @template methods-params
-#' @template matrix-param
+#' @template param-methods
 #' @example inst/examples/ex-princomp.r
 
 #' @rdname methods-princomp
