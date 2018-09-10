@@ -5,8 +5,6 @@
 \alias{countries}
 \alias{country_differences}
 \alias{country_attributes}
-\alias{countries}
-\alias{country_attributes}
 \title{Student ratings of similarities and attributes of 13 countries}
 \format{\link[tibble]{tibble}s.}
 \source{

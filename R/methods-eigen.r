@@ -6,8 +6,10 @@
 #' adds the class attribute.)
 #' 
 #' @name methods-eigen
-#' @template methods-params
-#' @template matrix-param
+#' @template param-methods
+#' @template param-matrix
+#' @template param-align
+# @example inst/examples/ex-eigen.r (uses *igraph*)
 
 #' @rdname methods-eigen
 #' @export

@@ -18,9 +18,9 @@ geom_v_vector(mapping = NULL, data = NULL, position = "identity",
   arrow = default_arrow, ..., na.rm = FALSE, show.legend = NA,
   inherit.aes = TRUE)
 
-geom_biplot_vector(mapping = NULL, data = NULL, position = "identity",
-  .matrix = "v", arrow = default_arrow, ..., na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE)
+geom_biplot_vector(mapping = NULL, data = NULL,
+  position = "identity", .matrix = "v", arrow = default_arrow, ...,
+  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or

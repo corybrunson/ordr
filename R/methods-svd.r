@@ -6,8 +6,7 @@
 #' adds the class attribute.)
 #' 
 #' @name methods-svd
-#' @template methods-params
-#' @template matrix-param
+#' @template param-methods
 
 #' @rdname methods-svd
 #' @export

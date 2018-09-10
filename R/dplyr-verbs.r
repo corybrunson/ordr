@@ -16,7 +16,7 @@
 #' @param var A variable specified as in \code{\link[dplyr]{pull}}.
 #' @param ... Comma-separated unquoted expressions as in, e.g.,
 #'   \code{\link[dplyr]{select}}.
-#' @template matrix-param
+#' @template param-matrix
 
 pull_factor <- function(.data, var = -1, .matrix) {
   pull(fortify(.data, .matrix = .matrix), !!enquo(var))

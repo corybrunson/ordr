@@ -8,8 +8,8 @@ devtools::use_data(simple_example)
 bioenv <- here::here("data-raw/greenacre2010-ex2-1.txt") %>%
   readr::read_delim(delim = " ", col_names = FALSE) %>%
   setNames(c(letters[1:5], "Pollution", "Depth", "Temperature", "Sediment")) %>%
-  mutate(site = paste0("s", 1:30)) %>%
-  select(site, 1:9)
+  dplyr::mutate(site = paste0("s", 1:30)) %>%
+  dplyr::select(site, 1:9)
 devtools::use_data(bioenv)
 
 country_differences <- here::here("data-raw/greenacre2010-ex4-1.txt") %>%

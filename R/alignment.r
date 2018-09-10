@@ -23,7 +23,7 @@
 #' @include augmentation.r
 #' @importFrom stats cor
 #' @param x,y Matrices or \code{tbl_ord}s; \code{x} will be aligned to \code{y}.
-#' @template matrix-param
+#' @template param-matrix
 #' @param abs.values Whether \code{permute_to} should reorder coordinates
 #'   according to dot product magnitudes (angles closest to straight, whether
 #'   \eqn{0} or \eqn{\pi}, versus angles closest to \eqn{0}).

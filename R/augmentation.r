@@ -58,8 +58,8 @@ augment.tbl_ord <- function(x, .matrix) {
     u = augment_u(x),
     v = augment_v(x),
     uv = dplyr::bind_rows(
-      mutate(augment_u(x), .matrix = "u"),
-      mutate(augment_v(x), .matrix = "v")
+      dplyr::mutate(augment_u(x), .matrix = "u"),
+      dplyr::mutate(augment_v(x), .matrix = "v")
     )
   )
 }

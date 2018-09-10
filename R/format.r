@@ -11,6 +11,7 @@
 #' 
 
 #' @name formatting
+#' @importFrom rlang "%||%"
 #' @param x An ordination object.
 #' @inheritParams tibble::format.tbl_df
 #' @param ... Additional arguments.
@@ -24,12 +25,13 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   n_uv <- sapply(uv, nrow)
   coord <- get_coord(x, align = TRUE)
   rk <- length(coord)
-  uv_ann <- rlang::set_names(mapply(
+  uv_ann <- mapply(
     bind_cols,
     augment_factor(x, .matrix = "uv"),
     factor_annot(x, .matrix = "uv"),
     SIMPLIFY = FALSE
-  ), c("u", "v"))
+  )
+  names(uv_ann) <- c("u", "v")
   n_ann <- sapply(uv_ann, ncol)
   if (is.null(n)) {
     n <- ifelse(
@@ -39,10 +41,11 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     )
   }
   width <- width %||% tbl_ord_opt("width") %||% getOption("width")
-  #uv_extra <- rlang::set_names(rep(
+  #uv_extra <- rep(
   #  n_extra %||% tbl_ord_opt("max_extra_cols"),
   #  length.out = 2
-  #), c("u", "v"))
+  #)
+  #names(uv_extra) <- c("u", "v")
   
   # headers!
   prev_class <- setdiff(class(x), "tbl_ord")[1]
@@ -60,10 +63,11 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     ": ",
     print_reps(coord)
   )
-  uv_headers <- rlang::set_names(paste0(
+  uv_headers <- paste0(
     "# ", c("U", "V"),
     ": [ ", n_uv, " x ", rk, " | ", n_ann, " ]"
-  ), c("u", "v"))
+  )
+  names(uv_headers) <- c("u", "v")
   
   # format U and V separately
   # (should format together, then split, in order to sync coordinates)
@@ -92,10 +96,21 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
   # footers?
   uv_footers <- n_uv - n > 0
-  fmt_ann <- rlang::set_names(lapply(1:2, function(i) {
+  fmt_ann <- lapply(1:2, function(i) {
     if (ncol(uv_ann[[i]]) == 0) return("")
-    c("", format(uv_ann[[i]], n = n[i], width = (width - 7) / 2)[-1])
-  }), c("u", "v"))
+    # dodge `format.pillar_shaft_decimal()` errors
+    wid_try <- (width - 7) / 2
+    fmt_try <- try(
+      c("", format(uv_ann[[i]], n = n[i], width = wid_try)[-1]),
+      silent = TRUE
+    )
+    while (class(fmt_try) == "try-error") {
+      wid_try <- wid_try - 1
+      fmt_try <- c("", format(uv_ann[[i]], n = n[i], width = wid_try)[-1])
+    }
+    fmt_try
+  })
+  names(fmt_ann) <- c("u", "v")
   
   # separate coordinates from annotations
   seps <- if (rk > 3) c("    ", " ...") else c("", "")
@@ -135,7 +150,7 @@ print.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   invisible(x)
 }
 
-`%||%` <- rlang::`%||%`
+#`%||%` <- rlang::`%||%`
 
 # this trick is borrowed from *tibble*
 op.tbl_ord <- list(

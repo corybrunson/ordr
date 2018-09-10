@@ -6,8 +6,9 @@
 #' wrapper that adds the class attribute.)
 #' 
 #' @name methods-cmds
-#' @template methods-params
-#' @template matrix-param
+#' @template param-methods
+#' @template param-matrix
+#' @template param-align
 #' @example inst/examples/ex-cmds.r
 
 #' @rdname methods-cmds

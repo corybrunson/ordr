@@ -9,7 +9,7 @@
 #' @param data Ignored.
 #' @param ... Additional arguments received from \code{fortify} or \code{tidy}; 
 #'   ignored.
-#' @template matrix-param
+#' @template param-matrix
 #' @param include Character matched to \code{"coordinates"}, \code{"shared"}, or
 #'   \code{"all"}; whether the fortified data frame should include only the 
 #'   ordination coordinates or also augmented case and variable data, and, if

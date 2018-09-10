@@ -8,8 +8,9 @@
 #' that add row and column names from the input matrix to the output matrices.)
 #' 
 #' @name methods-lpca
-#' @template methods-params
-#' @template matrix-param
+#' @template param-methods
+#' @template param-matrix
+#' @template param-align
 #' @example inst/examples/ex-lpca.r
 
 #' @importFrom stats plogis
