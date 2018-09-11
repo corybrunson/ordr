@@ -8,6 +8,7 @@
 \alias{recover_v.prcomp}
 \alias{recover_inertia.prcomp}
 \alias{recover_coord.prcomp}
+\alias{recover_conference.prcomp}
 \alias{augment_u.prcomp}
 \alias{augment_v.prcomp}
 \alias{augment_coord.prcomp}
@@ -24,6 +25,8 @@
 \method{recover_inertia}{prcomp}(x)
 
 \method{recover_coord}{prcomp}(x)
+
+\method{recover_conference}{prcomp}(x)
 
 \method{augment_u}{prcomp}(x)
 

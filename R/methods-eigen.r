@@ -45,7 +45,7 @@ recover_v.eigen <- function(x) recover_uv_eigen(x, "v")
 #' @rdname methods-eigen
 #' @export
 recover_inertia.eigen <- function(x) {
-  x$values[1:(min(which(c(x$values, -1) < 0)) - 1)]
+  x$values[1:(min(which(c(x$values, -1) < 0)) - 1)] ^ 2
 }
 
 #' @rdname methods-eigen

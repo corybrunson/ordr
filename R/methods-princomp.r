@@ -38,7 +38,7 @@ recover_v.princomp <- function(x) {
 #' @rdname methods-princomp
 #' @export
 recover_inertia.princomp <- function(x) {
-  x[["sdev"]] ^ 2
+  (x[["sdev"]] ^ 2) * x[["n.obs"]]
 }
 
 #' @rdname methods-princomp

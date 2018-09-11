@@ -38,7 +38,7 @@ recover_v.svd <- function(x) {
 
 #' @rdname methods-svd
 #' @export
-recover_inertia.svd <- function(x) x$d
+recover_inertia.svd <- function(x) x$d ^ 2
 
 #' @rdname methods-svd
 #' @export

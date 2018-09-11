@@ -28,7 +28,7 @@ recover_v.ca <- function(x) x$colcoord
 
 #' @rdname methods-ca
 #' @export
-recover_inertia.ca <- function(x) x$sv
+recover_inertia.ca <- function(x) x$sv ^ 2
 
 #' @rdname methods-ca
 #' @export

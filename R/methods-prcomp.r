@@ -41,7 +41,7 @@ recover_v.prcomp <- function(x) {
 #' @rdname methods-prcomp
 #' @export
 recover_inertia.prcomp <- function(x) {
-  x[["sdev"]] ^ 2
+  (x[["sdev"]] ^ 2) * (nrow(x$x) - 1)
 }
 
 #' @rdname methods-prcomp
@@ -53,7 +53,8 @@ recover_coord.prcomp <- function(x) {
 #' @rdname methods-prcomp
 #' @export
 recover_conference.prcomp <- function(x) {
-  
+  # `stats::prcomp()` returns the rotated data
+  c(1, 0)
 }
 
 #' @rdname methods-prcomp

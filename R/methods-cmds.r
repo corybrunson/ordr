@@ -41,7 +41,7 @@ recover_v.cmds <- function(x) recover_uv_cmds(x, "v")
 
 #' @rdname methods-cmds
 #' @export
-recover_inertia.cmds <- function(x) x$eig
+recover_inertia.cmds <- function(x) x$eig ^ 2
 
 #' @rdname methods-cmds
 #' @export
