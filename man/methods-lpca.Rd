@@ -3,13 +3,13 @@
 \name{methods-lpca}
 \alias{methods-lpca}
 \alias{as_tbl_ord.lsvd}
+\alias{reconstruct.lsvd}
 \alias{recover_u.lsvd}
 \alias{recover_v.lsvd}
 \alias{recover_coord.lsvd}
 \alias{augment_u.lsvd}
 \alias{augment_v.lsvd}
 \alias{augment_coord.lsvd}
-\alias{reconstruct.lsvd}
 \alias{negate_to.lsvd}
 \alias{as_tbl_ord.lpca}
 \alias{recover_u.lpca}
@@ -32,6 +32,8 @@ value decomposition objects}
 \usage{
 \method{as_tbl_ord}{lsvd}(x)
 
+\method{reconstruct}{lsvd}(x)
+
 \method{recover_u}{lsvd}(x)
 
 \method{recover_v}{lsvd}(x)
@@ -43,8 +45,6 @@ value decomposition objects}
 \method{augment_v}{lsvd}(x)
 
 \method{augment_coord}{lsvd}(x)
-
-\method{reconstruct}{lsvd}(x)
 
 \method{negate_to}{lsvd}(x, y, ..., .matrix)
 

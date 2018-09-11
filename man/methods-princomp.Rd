@@ -3,10 +3,10 @@
 \name{methods-princomp}
 \alias{methods-princomp}
 \alias{as_tbl_ord.princomp}
+\alias{reconstruct.princomp}
 \alias{recover_u.princomp}
 \alias{recover_v.princomp}
 \alias{recover_inertia.princomp}
-\alias{reconstruct.princomp}
 \alias{recover_coord.princomp}
 \alias{augment_u.princomp}
 \alias{augment_v.princomp}
@@ -15,13 +15,13 @@
 \usage{
 \method{as_tbl_ord}{princomp}(x)
 
+\method{reconstruct}{princomp}(x)
+
 \method{recover_u}{princomp}(x)
 
 \method{recover_v}{princomp}(x)
 
 \method{recover_inertia}{princomp}(x)
-
-\method{reconstruct}{princomp}(x)
 
 \method{recover_coord}{princomp}(x)
 

@@ -13,6 +13,13 @@ as_tbl_ord.ca <- as_tbl_ord_default
 
 #' @rdname methods-ca
 #' @export
+reconstruct.ca <- function(x) {
+  std_resid <- x$rowcoord %*% diag(x$sv) %*% t(x$colcoord)
+  stop("Not yet implemented.")
+}
+
+#' @rdname methods-ca
+#' @export
 recover_u.ca <- function(x) x$rowcoord
 
 #' @rdname methods-ca
@@ -28,13 +35,6 @@ recover_inertia.ca <- function(x) x$sv
 recover_conference.ca <- function(x) {
   # `ca::ca()` always returns row and column standard coordinates
   c(0, 0)
-}
-
-#' @rdname methods-ca
-#' @export
-reconstruct.ca <- function(x) {
-  std_resid <- x$rowcoord %*% diag(x$sv) %*% t(x$colcoord)
-  stop("Not yet implemented.")
 }
 
 #' @rdname methods-ca

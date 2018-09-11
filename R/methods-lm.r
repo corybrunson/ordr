@@ -19,6 +19,19 @@ as_tbl_ord.lm <- as_tbl_ord_default
 
 #' @rdname methods-lm
 #' @export
+reconstruct.lm <- function(x) {
+  pred_mat <- as.matrix(x$model[, -1, drop = FALSE])
+  names_fun <- if (class(x)[1] == "lm") names else rownames
+  if (names_fun(x$coefficients)[1] == "(Intercept)") {
+    pred_mat <- cbind(`(Intercept)` = 1, pred_mat)
+  }
+  coef_mat <- as.matrix(x$coefficients)
+  if (class(x)[1] != "mlm") colnames(coef_mat) <- names(x$model)[1]
+  as.data.frame(pred_mat %*% coef_mat)
+}
+
+#' @rdname methods-lm
+#' @export
 recover_u.lm <- function(x) {
   .intercept_col <- if (names(x$coefficients)[1] == "(Intercept)") {
     .ic <- matrix(1L, nrow = nrow(x$model), ncol = 1)
@@ -219,17 +232,4 @@ augment_coord.mlm <- function(x) {
   res <- as_tibble(data.frame(.name = recover_coord(x), summs))
   # nest to coordinates
   tidyr::nest(res, -dplyr::one_of(".name", ".term"), .key = ".summary")
-}
-
-#' @rdname methods-lm
-#' @export
-reconstruct.lm <- function(x) {
-  pred_mat <- as.matrix(x$model[, -1, drop = FALSE])
-  names_fun <- if (class(x)[1] == "lm") names else rownames
-  if (names_fun(x$coefficients)[1] == "(Intercept)") {
-    pred_mat <- cbind(`(Intercept)` = 1, pred_mat)
-  }
-  coef_mat <- as.matrix(x$coefficients)
-  if (class(x)[1] != "mlm") colnames(coef_mat) <- names(x$model)[1]
-  as.data.frame(pred_mat %*% coef_mat)
 }

@@ -13,6 +13,18 @@ as_tbl_ord.princomp <- as_tbl_ord_default
 
 #' @rdname methods-princomp
 #' @export
+reconstruct.princomp <- function(x) {
+  res <- x[["scores"]] %*% t(x[["loadings"]])
+  for (col in 1:ncol(res)) {
+    for (row in 1:nrow(res)) {
+      res[row, col] <- (res[row, col] * x[["scale"]][col]) + x[["center"]][col]
+    }
+  }
+  res
+}
+
+#' @rdname methods-princomp
+#' @export
 recover_u.princomp <- function(x) {
   x[["scores"]]
 }
@@ -27,14 +39,6 @@ recover_v.princomp <- function(x) {
 #' @export
 recover_inertia.princomp <- function(x) {
   x[["sdev"]] ^ 2
-}
-
-#' @rdname methods-princomp
-#' @export
-reconstruct.princomp <- function(x) {
-  res <- x[["scores"]]%*%t(x[["loadings"]])
-  for (col in 1:ncol(res)) {for (row in 1:nrow(res)) {res[row, col] <- (res[row, col] * x[["scale"]][col]) + x[["center"]][col]}}
-  res
 }
 
 #' @rdname methods-princomp

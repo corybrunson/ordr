@@ -15,6 +15,12 @@
 #' @export
 as_tbl_ord.cmds <- as_tbl_ord_default
 
+#' @rdname methods-cmds
+#' @export
+reconstruct.cmds <- function(x) {
+  -2 * x$points %*% t(x$points)
+}
+
 recover_uv_cmds <- function(x, .matrix) {
   .matrix <- match_factor(.matrix)
   res <- x$points
@@ -79,12 +85,6 @@ augment_coord.cmds <- function(x) {
     .name = recover_coord(x),
     .eig = x$eig[1:ncol(x$points)]
   )
-}
-
-#' @rdname methods-cmds
-#' @export
-reconstruct.cmds <- function(x) {
-  -2 * x$points %*% t(x$points)
 }
 
 #' @rdname methods-cmds

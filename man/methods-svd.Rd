@@ -3,6 +3,7 @@
 \name{methods-svd}
 \alias{methods-svd}
 \alias{as_tbl_ord.svd}
+\alias{reconstruct.svd}
 \alias{recover_u.svd}
 \alias{recover_v.svd}
 \alias{recover_inertia.svd}
@@ -11,10 +12,11 @@
 \alias{augment_u.svd}
 \alias{augment_v.svd}
 \alias{augment_coord.svd}
-\alias{reconstruct.svd}
 \title{Functionality for singular value decompositions}
 \usage{
 \method{as_tbl_ord}{svd}(x)
+
+\method{reconstruct}{svd}(x)
 
 \method{recover_u}{svd}(x)
 
@@ -31,8 +33,6 @@
 \method{augment_v}{svd}(x)
 
 \method{augment_coord}{svd}(x)
-
-\method{reconstruct}{svd}(x)
 }
 \arguments{
 \item{x}{An ordination object.}

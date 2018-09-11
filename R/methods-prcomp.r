@@ -13,27 +13,9 @@ as_tbl_ord.prcomp <- as_tbl_ord_default
 
 #' @rdname methods-prcomp
 #' @export
-recover_u.prcomp <- function(x){
-  x[["x"]]
-}
-
-#' @rdname methods-prcomp
-#' @export
-recover_v.prcomp <- function(x){
-  x[["rotation"]]
-}
-
-#' @rdname methods-prcomp
-#' @export
-recover_inertia.prcomp <- function(x){
-  x[["sdev"]] ^ 2
-}
-
-#' @rdname methods-prcomp
-#' @export
-reconstruct.prcomp <- function(x){
+reconstruct.prcomp <- function(x) {
   res <- recover_u.prcomp(x)%*%t(recover_v.prcomp(x))
-  if (x[["center"]] == FALSE && x[["scale"]] == FALSE){
+  if (x[["center"]] == FALSE && x[["scale"]] == FALSE) {
     res
   } else if (x[["center"]] != TRUE && x[["scale"]] == FALSE) {
     for (col in 1:ncol(res)) {for (row in 1:nrow(res)) {res[row, col] <- res[row, col] + x[["center"]][col]}}
@@ -46,13 +28,37 @@ reconstruct.prcomp <- function(x){
 
 #' @rdname methods-prcomp
 #' @export
-recover_coord.prcomp <- function(x){
+recover_u.prcomp <- function(x) {
+  x[["x"]]
+}
+
+#' @rdname methods-prcomp
+#' @export
+recover_v.prcomp <- function(x) {
+  x[["rotation"]]
+}
+
+#' @rdname methods-prcomp
+#' @export
+recover_inertia.prcomp <- function(x) {
+  x[["sdev"]] ^ 2
+}
+
+#' @rdname methods-prcomp
+#' @export
+recover_coord.prcomp <- function(x) {
   colnames(x[["rotation"]])
 }
 
 #' @rdname methods-prcomp
 #' @export
-augment_u.prcomp <- function(x){
+recover_conference.prcomp <- function(x) {
+  
+}
+
+#' @rdname methods-prcomp
+#' @export
+augment_u.prcomp <- function(x) {
   tibble(
     .name = rownames(x[["x"]])
   )
@@ -60,12 +66,12 @@ augment_u.prcomp <- function(x){
 
 #' @rdname methods-prcomp
 #' @export
-augment_v.prcomp <- function(x){
+augment_v.prcomp <- function(x) {
   res <- tibble(.name = rownames(x[["rotation"]]))
-  if (class(x[["center"]]) == "numeric"){
+  if (class(x[["center"]]) == "numeric") {
     res <- dplyr::bind_cols(res, .center = x[["center"]])
   }
-  if (class(x[["scale"]]) == "numeric"){
+  if (class(x[["scale"]]) == "numeric") {
     res <- dplyr::bind_cols(res, .scale = x[["scale"]])
   }
   res
@@ -73,7 +79,7 @@ augment_v.prcomp <- function(x){
 
 #' @rdname methods-prcomp
 #' @export
-augment_coord.prcomp <- function(x){
+augment_coord.prcomp <- function(x) {
   tibble(
     .name = recover_coord(x),
     .sdev = x[["sdev"]]

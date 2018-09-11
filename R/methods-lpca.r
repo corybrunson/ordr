@@ -19,6 +19,12 @@
 #' @export
 as_tbl_ord.lsvd <- as_tbl_ord_default
 
+#' @rdname methods-lpca
+#' @export
+reconstruct.lsvd <- function(x) {
+  round(plogis(x$A %*% t(x$B)), 0)
+}
+
 recover_uv_lsvd <- function(x, .matrix) {
   .matrix <- match_factor(.matrix)
   res <- x[[switch(.matrix, u = "A", v = "B")]]
@@ -61,12 +67,6 @@ augment_coord.lsvd <- function(x) {
   tibble(
     .name = recover_coord.lsvd(x)
   )
-}
-
-#' @rdname methods-lpca
-#' @export
-reconstruct.lsvd <- function(x) {
-  round(plogis(x$A %*% t(x$B)), 0)
 }
 
 #' @rdname methods-lpca

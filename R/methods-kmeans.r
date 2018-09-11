@@ -13,6 +13,12 @@ as_tbl_ord.kmeans <- as_tbl_ord_default
 
 #' @rdname methods-kmeans
 #' @export
+reconstruct.kmeans <- function(x) {
+  x$centers[x$cluster, , drop = FALSE]
+}
+
+#' @rdname methods-kmeans
+#' @export
 recover_u.kmeans <- function(x) {
   res <- outer(x$cluster, 1:length(x$size), "==")
   mode(res) <- "integer"
@@ -24,12 +30,6 @@ recover_u.kmeans <- function(x) {
 #' @export
 recover_v.kmeans <- function(x) {
   t(x$centers)
-}
-
-#' @rdname methods-kmeans
-#' @export
-reconstruct.kmeans <- function(x) {
-  x$centers[x$cluster, , drop = FALSE]
 }
 
 #' @rdname methods-kmeans

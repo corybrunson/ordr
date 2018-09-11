@@ -3,9 +3,9 @@
 \name{methods-kmeans}
 \alias{methods-kmeans}
 \alias{as_tbl_ord.kmeans}
+\alias{reconstruct.kmeans}
 \alias{recover_u.kmeans}
 \alias{recover_v.kmeans}
-\alias{reconstruct.kmeans}
 \alias{recover_coord.kmeans}
 \alias{augment_u.kmeans}
 \alias{augment_v.kmeans}
@@ -14,11 +14,11 @@
 \usage{
 \method{as_tbl_ord}{kmeans}(x)
 
+\method{reconstruct}{kmeans}(x)
+
 \method{recover_u}{kmeans}(x)
 
 \method{recover_v}{kmeans}(x)
-
-\method{reconstruct}{kmeans}(x)
 
 \method{recover_coord}{kmeans}(x)
 

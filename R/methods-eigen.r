@@ -15,6 +15,12 @@
 #' @export
 as_tbl_ord.eigen <- as_tbl_ord_default
 
+#' @rdname methods-eigen
+#' @export
+reconstruct.eigen <- function(x) {
+  x$vectors %*% diag(x$values) %*% t(x$vectors)
+}
+
 recover_uv_eigen <- function(x, .matrix) {
   .matrix <- match_factor(.matrix)
   w <- 1:(min(which(c(x$values, -1) < 0)) - 1)

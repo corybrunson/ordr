@@ -3,6 +3,7 @@
 \name{methods-lm}
 \alias{methods-lm}
 \alias{as_tbl_ord.lm}
+\alias{reconstruct.lm}
 \alias{recover_u.lm}
 \alias{recover_v.lm}
 \alias{recover_coord.lm}
@@ -17,10 +18,11 @@
 \alias{augment_u.mlm}
 \alias{augment_v.mlm}
 \alias{augment_coord.mlm}
-\alias{reconstruct.lm}
 \title{Functionality for linear model objects}
 \usage{
 \method{as_tbl_ord}{lm}(x)
+
+\method{reconstruct}{lm}(x)
 
 \method{recover_u}{lm}(x)
 
@@ -49,8 +51,6 @@
 \method{augment_v}{mlm}(x)
 
 \method{augment_coord}{mlm}(x)
-
-\method{reconstruct}{lm}(x)
 }
 \arguments{
 \item{x}{An ordination object.}

@@ -14,6 +14,12 @@ as_tbl_ord.svd <- as_tbl_ord_default
 
 #' @rdname methods-svd
 #' @export
+reconstruct.svd <- function(x) {
+  x$u %*% diag(x$d) %*% t(x$v)
+}
+
+#' @rdname methods-svd
+#' @export
 recover_u.svd <- function(x) {
   res <- x$u
   colnames(res) <- recover_coord.svd(x)
@@ -74,10 +80,4 @@ augment_coord.svd <- function(x) {
     .name = recover_coord(x),
     .value = x$d[1:ncol(x$u)]
   )
-}
-
-#' @rdname methods-svd
-#' @export
-reconstruct.svd <- function(x) {
-  x$u %*% diag(x$d) %*% t(x$v)
 }

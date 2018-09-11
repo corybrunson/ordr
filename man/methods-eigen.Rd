@@ -3,6 +3,7 @@
 \name{methods-eigen}
 \alias{methods-eigen}
 \alias{as_tbl_ord.eigen}
+\alias{reconstruct.eigen}
 \alias{recover_u.eigen}
 \alias{recover_v.eigen}
 \alias{recover_inertia.eigen}
@@ -15,6 +16,8 @@
 \title{Functionality for matrix spectral decompositions}
 \usage{
 \method{as_tbl_ord}{eigen}(x)
+
+\method{reconstruct}{eigen}(x)
 
 \method{recover_u}{eigen}(x)
 

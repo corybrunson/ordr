@@ -3,11 +3,11 @@
 \name{methods-ca}
 \alias{methods-ca}
 \alias{as_tbl_ord.ca}
+\alias{reconstruct.ca}
 \alias{recover_u.ca}
 \alias{recover_v.ca}
 \alias{recover_inertia.ca}
 \alias{recover_conference.ca}
-\alias{reconstruct.ca}
 \alias{recover_coord.ca}
 \alias{augment_u.ca}
 \alias{augment_v.ca}
@@ -16,6 +16,8 @@
 \usage{
 \method{as_tbl_ord}{ca}(x)
 
+\method{reconstruct}{ca}(x)
+
 \method{recover_u}{ca}(x)
 
 \method{recover_v}{ca}(x)
@@ -23,8 +25,6 @@
 \method{recover_inertia}{ca}(x)
 
 \method{recover_conference}{ca}(x)
-
-\method{reconstruct}{ca}(x)
 
 \method{recover_coord}{ca}(x)
 
