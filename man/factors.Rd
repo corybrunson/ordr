@@ -13,6 +13,8 @@
 \alias{get_v}
 \alias{get_factor}
 \alias{as.matrix.tbl_ord}
+\alias{recover_inertia}
+\alias{recover_inertia.default}
 \alias{recover_coord}
 \alias{recover_coord.default}
 \alias{get_coord}
@@ -40,6 +42,10 @@ get_v(x, align = TRUE)
 get_factor(x, .matrix, align = TRUE)
 
 \method{as.matrix}{tbl_ord}(x, ..., .matrix, align = TRUE)
+
+recover_inertia(x)
+
+\method{recover_inertia}{default}(x)
 
 recover_coord(x)
 

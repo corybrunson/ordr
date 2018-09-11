@@ -32,7 +32,11 @@ recover_v.svd <- function(x){
 
 #' @rdname methods-svd
 #' @export
-recover_coord.svd <- function(x) paste0("SV", 1:ncol(x$u))
+recover_coord.svd <- function(x) paste0("SV", 1:length(x$d))
+
+#' @rdname methods-svd
+#' @export
+recover_inertia.svd <- function(x) x$d
 
 #' @rdname methods-svd
 #' @export
@@ -69,22 +73,4 @@ augment_coord.svd <- function(x){
 #' @export
 reconstruct.svd <- function(x){
   x$u %*% diag(x$d) %*% t(x$v)
-}
-
-get_singular_values <- function(x){
-  if (class(x) != "svd"){
-    stop("get_singular_values() can only be called on a singular value decomposition output")
-  }
-  else {
-    x$d
-  }
-}
-
-get_diagonal_matrix <- function(x){
-  if (class(x) != "svd"){
-    stop("get_diagonal_matrix() can only be called on a singular value decomposition output")
-  }
-  else {
-    diag(x$d)
-  }
 }
