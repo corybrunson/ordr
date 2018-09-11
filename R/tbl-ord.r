@@ -23,7 +23,7 @@
 #' \code{is_tbl_ord} checks an object \code{x} for the \code{"tbl_ord"} class
 #' and for consistency between \code{recover_coord(x)} and the columns of 
 #' \code{recover_u(x)} and \code{recover_v(x)}, using the functions at 
-#' \code{\link{factors}}.
+#' \code{\link{accessors}}.
 #' 
 
 #' @name tbl_ord

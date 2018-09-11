@@ -14,7 +14,7 @@ as_tbl_ord.svd <- as_tbl_ord_default
 
 #' @rdname methods-svd
 #' @export
-recover_u.svd <- function(x){
+recover_u.svd <- function(x) {
   res <- x$u
   colnames(res) <- recover_coord.svd(x)
   rownames(res) <- rownames(attr(x, "x"))
@@ -23,7 +23,7 @@ recover_u.svd <- function(x){
 
 #' @rdname methods-svd
 #' @export
-recover_v.svd <- function(x){
+recover_v.svd <- function(x) {
   res <- x$v
   colnames(res) <- recover_coord.svd(x)
   rownames(res) <- colnames(attr(x, "x"))
@@ -32,7 +32,7 @@ recover_v.svd <- function(x){
 
 #' @rdname methods-svd
 #' @export
-recover_sv.svd <- function(x) s$d
+recover_inertia.svd <- function(x) s$d
 
 #' @rdname methods-svd
 #' @export
@@ -44,7 +44,7 @@ recover_inertia.svd <- function(x) x$d
 
 #' @rdname methods-svd
 #' @export
-augment_u.svd <- function(x){
+augment_u.svd <- function(x) {
   .name <- rownames(attr(x, "x"))
   if (is.null(.name)) {
     tibble_pole(nrow(attr(x, "x")))
@@ -55,7 +55,7 @@ augment_u.svd <- function(x){
 
 #' @rdname methods-svd
 #' @export
-augment_v.svd <- function(x){
+augment_v.svd <- function(x) {
   .name <- colnames(attr(x, "x"))
   if (is.null(.name)) {
     tibble_pole(ncol(attr(x, "x")))
@@ -66,7 +66,7 @@ augment_v.svd <- function(x){
 
 #' @rdname methods-svd
 #' @export
-augment_coord.svd <- function(x){
+augment_coord.svd <- function(x) {
   tibble(
     .name = recover_coord(x),
     .value = x$d[1:ncol(x$u)]
@@ -75,6 +75,6 @@ augment_coord.svd <- function(x){
 
 #' @rdname methods-svd
 #' @export
-reconstruct.svd <- function(x){
+reconstruct.svd <- function(x) {
   x$u %*% diag(x$d) %*% t(x$v)
 }

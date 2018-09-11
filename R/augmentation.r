@@ -26,8 +26,8 @@
 #' \code{link[dplyr]{bind_cols}}.
 
 #' @name augmentation
-#' @include factors.r
-#' @inheritParams factors
+#' @include accessors.r
+#' @inheritParams accessors
 #' @param annot A \code{\link[tibble]{tibble}} having the same number of rows as
 #'   \code{x}.
 

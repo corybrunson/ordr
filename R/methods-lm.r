@@ -44,12 +44,6 @@ recover_v.lm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-recover_sv.lm <- function(x) {
-  stop("Ordinations of class 'lm' are not singular value decompositions.")
-}
-
-#' @rdname methods-lm
-#' @export
 recover_coord.lm <- function(x) {
   .predictors <- x$model[, -1]
   if (is.matrix(.predictors)) {
@@ -167,12 +161,6 @@ recover_v.mlm <- function(x) {
   res <- t(x$coefficients)
   colnames(res) <- recover_coord(x)
   res
-}
-
-#' @rdname methods-lm
-#' @export
-recover_sv.lm <- function(x) {
-  stop("Ordinations of class 'mlm' are not singular value decompositions.")
 }
 
 #' @rdname methods-lm

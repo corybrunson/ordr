@@ -5,8 +5,8 @@
 \alias{as_tbl_ord.eigen}
 \alias{recover_u.eigen}
 \alias{recover_v.eigen}
-\alias{recover_coord.eigen}
 \alias{recover_inertia.eigen}
+\alias{recover_coord.eigen}
 \alias{augment_u.eigen}
 \alias{augment_v.eigen}
 \alias{augment_coord.eigen}
@@ -18,6 +18,8 @@
 \method{recover_u}{eigen}(x)
 
 \method{recover_v}{eigen}(x)
+
+\method{recover_inertia}{eigen}(x)
 
 \method{recover_coord}{eigen}(x)
 

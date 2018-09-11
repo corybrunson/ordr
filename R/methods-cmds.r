@@ -35,7 +35,7 @@ recover_v.cmds <- function(x) recover_uv_cmds(x, "v")
 
 #' @rdname methods-cmds
 #' @export
-recover_sv.cmds <- function(x) x$eig
+recover_inertia.cmds <- function(x) x$eig
 
 #' @rdname methods-cmds
 #' @export
@@ -43,7 +43,7 @@ recover_coord.cmds <- function(x) paste0("PCo", 1:ncol(x$points))
 
 #' @rdname methods-cmds
 #' @export
-recover_inertia.cmds <- function(x) {
+get_conference.cmds <- function(x) {
   u <- recover_u(x)
   diag(
     apply(u, 2, norm, type = "2") ^ 2,

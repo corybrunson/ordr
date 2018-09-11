@@ -4,8 +4,8 @@
 #' \code{"CURobj"} (see \code{\link[rCUR]{`CURobj-class`}}).
 #' 
 #' @name methods-rcur
-#' @template methods-params
-#' @template matrix-param
+#' @template param-methods
+#' @template param-matrix
 #' @example inst/examples/ex-rcur.r
 
 #' @rdname methods-rcur

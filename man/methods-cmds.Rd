@@ -5,7 +5,9 @@
 \alias{as_tbl_ord.cmds}
 \alias{recover_u.cmds}
 \alias{recover_v.cmds}
+\alias{recover_inertia.cmds}
 \alias{recover_coord.cmds}
+\alias{get_conference.cmds}
 \alias{augment_u.cmds}
 \alias{augment_v.cmds}
 \alias{augment_coord.cmds}
@@ -20,7 +22,11 @@
 
 \method{recover_v}{cmds}(x)
 
+\method{recover_inertia}{cmds}(x)
+
 \method{recover_coord}{cmds}(x)
+
+\method{get_conference}{cmds}(x)
 
 \method{augment_u}{cmds}(x)
 

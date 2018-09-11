@@ -4,8 +4,7 @@
 #' \code{"ca"} from the \strong{ca} package.
 #' 
 #' @name methods-ca
-#' @template methods-params
-#' @template matrix-param
+#' @template param-methods
 #' @example inst/examples/ex-ca.r
 
 #' @rdname methods-ca
@@ -22,11 +21,11 @@ recover_v.ca <- function(x) x$colcoord
 
 #' @rdname methods-ca
 #' @export
-recover_sv.ca <- function(x) x$sv
+recover_inertia.ca <- function(x) x$sv
 
 #' @rdname methods-ca
 #' @export
-recover_inertia.ca <- function(x) {
+get_conference.ca <- function(x) {
   # `ca::ca()` always returns row and column standard coordinates
   c(0, 0)
 }

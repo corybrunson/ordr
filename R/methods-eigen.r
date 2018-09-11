@@ -38,7 +38,7 @@ recover_v.eigen <- function(x) recover_uv_eigen(x, "v")
 
 #' @rdname methods-eigen
 #' @export
-recover_sv.eigen <- function(x) x$values
+recover_inertia.eigen <- function(x) x$values
 
 #' @rdname methods-eigen
 #' @export

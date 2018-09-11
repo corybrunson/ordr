@@ -19,7 +19,7 @@
 #' @export
 confer_inertia <- function(x, p) {
   # don't manipulate or use singular values, but ensure that method exists
-  sv <- recover_sv(x)
+  inertia <- recover_inertia(x)
   
   # interpret `p`
   if (! is.numeric(p)) {
@@ -49,25 +49,4 @@ confer_inertia <- function(x, p) {
 attribute_conference <- function(x, p) {
   attr(x, "confer") <- p
   x
-}
-
-recover_inertia_u <- function(x) {
-  #u <- recover_u(x)
-  #diag(
-  #  apply(u, 2, norm, type = "2"),
-  #  nrow = ncol(u), ncol = ncol(u)
-  #)
-  if (is.null(recover_inertia(x))) {
-    0
-  } else {
-    recover_inertia(x)[1]
-  }
-}
-
-recover_inertia_v <- function(x) {
-  if (is.null(recover_inertia(x))) {
-    0
-  } else {
-    recover_inertia(x)[2]
-  }
 }

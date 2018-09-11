@@ -5,6 +5,7 @@
 \alias{as_tbl_ord.prcomp}
 \alias{recover_u.prcomp}
 \alias{recover_v.prcomp}
+\alias{recover_inertia.prcomp}
 \alias{reconstruct.prcomp}
 \alias{recover_coord.prcomp}
 \alias{augment_u.prcomp}
@@ -17,6 +18,8 @@
 \method{recover_u}{prcomp}(x)
 
 \method{recover_v}{prcomp}(x)
+
+\method{recover_inertia}{prcomp}(x)
 
 \method{reconstruct}{prcomp}(x)
 

@@ -21,6 +21,7 @@ Imports:
     dplyr,
     purrr,
     ggrepel,
+    ca,
     logisticPCA
 License: GPL-3
 Encoding: UTF-8
@@ -29,7 +30,7 @@ Suggests: testthat
 RoxygenNote: 6.1.0
 Collate: 
     'utils.r'
-    'factors.r'
+    'accessors.r'
     'augmentation.r'
     'alignment.r'
     'conference.r'
@@ -53,7 +54,6 @@ Collate:
     'methods-lpca.r'
     'methods-prcomp.r'
     'methods-princomp.r'
-    'methods-rcur.r'
     'methods-svd.r'
     'plot-bibble.r'
     'reconstruct.r'

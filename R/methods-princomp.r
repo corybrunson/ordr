@@ -13,25 +13,25 @@ as_tbl_ord.princomp <- as_tbl_ord_default
 
 #' @rdname methods-princomp
 #' @export
-recover_u.princomp <- function(x){
+recover_u.princomp <- function(x) {
   x[["scores"]]
 }
 
 #' @rdname methods-princomp
 #' @export
-recover_v.princomp <- function(x){
+recover_v.princomp <- function(x) {
   unclass(x[["loadings"]])
 }
 
 #' @rdname methods-princomp
 #' @export
-recover_sv.princomp <- function(x){
-  pca[["sdev"]]^2
+recover_inertia.princomp <- function(x) {
+  x[["sdev"]] ^ 2
 }
 
 #' @rdname methods-princomp
 #' @export
-reconstruct.princomp <- function(x){
+reconstruct.princomp <- function(x) {
   res <- x[["scores"]]%*%t(x[["loadings"]])
   for (col in 1:ncol(res)) {for (row in 1:nrow(res)) {res[row, col] <- (res[row, col] * x[["scale"]][col]) + x[["center"]][col]}}
   res
@@ -39,15 +39,15 @@ reconstruct.princomp <- function(x){
 
 #' @rdname methods-princomp
 #' @export
-recover_coord.princomp <- function(x){
+recover_coord.princomp <- function(x) {
   colnames(x[["scores"]])
 }
 
 #' @rdname methods-princomp
 #' @export
-augment_u.princomp <- function(x){
+augment_u.princomp <- function(x) {
   .name <- rownames(x[["scores"]])
-  if (is.null(.name)){
+  if (is.null(.name)) {
     tibble_pole(nrow(x[["x"]]))
   } else {
     tibble(.name = .name)
@@ -56,7 +56,7 @@ augment_u.princomp <- function(x){
 
 #' @rdname methods-princomp
 #' @export
-augment_v.princomp <- function(x){
+augment_v.princomp <- function(x) {
   tibble(
     .name = colnames(x[["loadings"]]),
     .center = x[["center"]],
@@ -66,7 +66,7 @@ augment_v.princomp <- function(x){
 
 #' @rdname methods-princomp
 #' @export
-augment_coord.princomp <- function(x){
+augment_coord.princomp <- function(x) {
   tibble(
     .name = recover_coord.princomp(x),
     .sdev = x[["sdev"]]
