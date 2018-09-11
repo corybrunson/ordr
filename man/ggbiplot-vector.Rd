@@ -69,7 +69,7 @@ standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 }
 \description{
 \code{geom_*_vector} renders arrows from the origin to the position of each
-subject or vector.
+case or variable.
 }
 \section{Biplot layers}{
 

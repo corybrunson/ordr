@@ -98,10 +98,11 @@ augment_v.lm <- function(x) {
 #' @rdname methods-lm
 #' @export
 augment_coord.lm <- function(x) {
+  summ <- as.data.frame(stats::coef(summary(x)))
+  names(summ) <- c(".estimate", ".std.error", ".t.value", ".p.value")
   as_tibble(data.frame(
     .name = recover_coord(x),
-    tidy(un_tbl_ord(x)),
-    stringsAsFactors = FALSE
+    summ
   ))
 }
 
@@ -206,12 +207,18 @@ augment_v.mlm <- function(x) {
 #' @rdname methods-lm
 #' @export
 augment_coord.mlm <- function(x) {
-  res <- as_tibble(data.frame(
-    .name = recover_coord(x),
-    tidy(un_tbl_ord(x)),
-    stringsAsFactors = FALSE
-  ))
-  tidyr::nest(res, -dplyr::one_of(".name", "term"), .key = "model")
+  # model summaries
+  summs <- purrr::map_df(
+    stats::coef(summary(x)),
+    as_tibble,
+    rownames = ".term",
+    .id = ".response"
+  )
+  names(summs)[3:6] <- c(".estimate", ".std.error", ".t.value", ".p.value")
+  summs$.response <- gsub("^Response ", "", summs$.response)
+  res <- as_tibble(data.frame(.name = recover_coord(x), summs))
+  # nest to coordinates
+  tidyr::nest(res, -dplyr::one_of(".name", ".term"), .key = ".summary")
 }
 
 #' @rdname methods-lm

@@ -143,7 +143,7 @@ gg +
   geom_v_isolines(ids = 1, by = 5)
 
 # shade points by expected species prevalence and darken outliers
-ggbiplot(d, aes(x = x, y = y, color = .fit, alpha = .wt.res^2)) +
+ggbiplot(d, aes(x = x, y = y, color = .fit, alpha = .wt.res ^ 2)) +
   theme_bw() +
   scale_color_distiller(type = "div", palette = 1) +
   scale_alpha_continuous(range = c(1/3, 1)) +
