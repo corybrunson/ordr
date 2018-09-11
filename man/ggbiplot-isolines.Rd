@@ -3,13 +3,30 @@
 \docType{data}
 \name{ggbiplot-isolines}
 \alias{ggbiplot-isolines}
+\alias{GeomTicks}
+\alias{geom_u_ticks}
+\alias{geom_v_ticks}
+\alias{geom_biplot_ticks}
 \alias{GeomIsolines}
 \alias{geom_u_isolines}
 \alias{geom_v_isolines}
 \alias{geom_biplot_isolines}
 \title{Render isolines for a subject or variable}
-\format{An object of class \code{GeomIsolines} (inherits from \code{GeomAbline}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.}
+\format{An object of class \code{GeomTicks} (inherits from \code{GeomSegment}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.}
 \usage{
+geom_u_ticks(mapping = NULL, data = NULL, position = "identity",
+  family = NULL, ids = 1L, by = 1, ticks.length = 0.05, ...,
+  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+
+geom_v_ticks(mapping = NULL, data = NULL, position = "identity",
+  family = NULL, ids = 1L, by = 1, ticks.length = 0.05, ...,
+  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+
+geom_biplot_ticks(mapping = NULL, data = NULL, position = "identity",
+  .matrix = "v", family = NULL, ids = 1L, by = 1,
+  ticks.length = 0.05, ..., na.rm = FALSE, show.legend = NA,
+  inherit.aes = TRUE)
+
 geom_u_isolines(mapping = NULL, data = NULL, position = "identity",
   family = NULL, ids = 1L, by = 1, ..., na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE)
@@ -54,6 +71,9 @@ tick marks will be rendered.}
 
 \item{by}{Interval length between isolines or tick marks, in the units of the
 ordination.}
+
+\item{ticks.length}{Numeric; the length of the tick marks, as a proportion of
+the plot width.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2]{layer}}.}
 
@@ -136,6 +156,11 @@ gg +
 gg +
   geom_biplot_point() +
   geom_biplot_vector()
+# same biplot with tick marks for sole axis
+gg +
+  geom_u_point() +
+  geom_v_vector() +
+  geom_v_ticks(ids = 1, by = 5)
 # same biplot with isolines for sole axis
 gg +
   geom_u_point() +

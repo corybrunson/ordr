@@ -122,6 +122,11 @@ gg +
 gg +
   geom_biplot_point() +
   geom_biplot_vector()
+# same biplot with tick marks for sole axis
+gg +
+  geom_u_point() +
+  geom_v_vector() +
+  geom_v_ticks(ids = 1, by = 5)
 # same biplot with isolines for sole axis
 gg +
   geom_u_point() +
