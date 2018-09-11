@@ -19,6 +19,7 @@ Imports:
     rlang,
     stringr,
     dplyr,
+    purrr,
     ggrepel,
     logisticPCA
 License: GPL-3
@@ -36,6 +37,7 @@ Collate:
     'dplyr-verbs.r'
     'format.r'
     'fortify.r'
+    'geom-axis.r'
     'geom-isolines.r'
     'geom-point.r'
     'geom-text-radiate.r'

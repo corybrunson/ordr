@@ -43,8 +43,13 @@ recover_sv.eigen <- function(x) x$values
 #' @rdname methods-eigen
 #' @export
 recover_coord.eigen <- function(x) {
-  w <- 1:(min(which(c(x$values, -1) < 0)) - 1)
-  paste0("E", w)
+  paste0("E", seq_along(recover_inertia(x)))
+}
+
+#' @rdname methods-eigen
+#' @export
+recover_inertia.eigen <- function(x) {
+  x$values[1:(min(which(c(x$values, -1) < 0)) - 1)]
 }
 
 #' @rdname methods-eigen

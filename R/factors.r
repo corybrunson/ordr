@@ -144,6 +144,14 @@ as.matrix.tbl_ord <- function(x, ..., .matrix, align = TRUE) {
 
 #' @rdname factors
 #' @export
+recover_inertia <- function(x) UseMethod("recover_inertia")
+
+#' @rdname factors
+#' @export
+recover_inertia.default <- function(x) x$value
+
+#' @rdname factors
+#' @export
 recover_coord <- function(x) UseMethod("recover_coord")
 
 #' @rdname factors

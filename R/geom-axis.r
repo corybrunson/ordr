@@ -1,12 +1,12 @@
-#' Render vectors from origin to ordinates
+#' Render axes through origin
 #' 
 
-#' \code{geom_*_vector} renders arrows from the origin to the position of each
+#' \code{geom_*_axis} renders lines through the origin and the position of each
 #' case or variable.
 #' @template ggbiplot-layers
 
 #' @section Aesthetics:
-#' \code{geom_*_vector} understands the following aesthetics (required
+#' \code{geom_*_axis} understands the following aesthetics (required
 #' aesthetics are in bold):
 #' \itemize{
 #'   \item \strong{\code{x}}
@@ -20,55 +20,48 @@
 #' }
 #' 
 
-#' @name ggbiplot-vector
+#' @name ggbiplot-axis
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-layer
 #' @template param-matrix
-#' @param arrow Specification for arrows, as created by
-#'   \code{\link[grid]{arrow}}.
 
-#' @rdname ggbiplot-vector
+#' @rdname ggbiplot-axis
 #' @usage NULL
 #' @export
-GeomVector <- ggproto(
-  "GeomVector", GeomSegment,
+GeomAxis <- ggproto(
+  "GeomAxis", GeomAbline,
   
   required_aes = c("x", "y"),
   
-  setup_data = function(data, params) {
-    # all vectors have tails at the origin
-    transform(
-      data,
-      xend = 0, yend = 0
-    )
-  },
-  
   draw_panel = function(
     data, panel_params, coord,
-    arrow = default_arrow,
-    lineend = "round", linejoin = "mitre",
     na.rm = FALSE
   ) {
     if (! coord$is_linear()) {
-      warning("Vectors are not yet tailored to non-linear coordinates.")
+      warning("Axes are not yet tailored to non-linear coordinates.")
     }
-    # reverse ends of `arrow`
-    arrow$ends <- c(2L, 1L, 3L)[arrow$ends]
+    
+    ranges <- coord$range(panel_params)
+    
+    data$slope <- data$y / data$x
+    data$vline <- data$y == 0
+    data$x <- ifelse(data$vline, 0, ranges$x[1])
+    data$xend <- ifelse(data$vline, 0, ranges$x[2])
+    data$y <- ifelse(data$vline, ranges$y[1], ranges$x[1] * data$slope)
+    data$yend <- ifelse(data$vline, ranges$y[2], ranges$x[2] * data$slope)
     
     GeomSegment$draw_panel(
-      data = data, panel_params = panel_params, coord = coord,
-      arrow = arrow, lineend = lineend, linejoin = linejoin,
+      data = unique(data), panel_params = panel_params, coord = coord,
       na.rm = na.rm
     )
   }
 )
 
-#' @rdname ggbiplot-vector
+#' @rdname ggbiplot-axis
 #' @export
-geom_u_vector <- function(
+geom_u_axis <- function(
   mapping = NULL, data = NULL, position = "identity",
-  arrow = default_arrow,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -77,23 +70,21 @@ geom_u_vector <- function(
     data = data,
     mapping = mapping,
     stat = "u",
-    geom = GeomVector,
+    geom = GeomAxis,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      arrow = arrow,
       ...
     )
   )
 }
 
-#' @rdname ggbiplot-vector
+#' @rdname ggbiplot-axis
 #' @export
-geom_v_vector <- function(
+geom_v_axis <- function(
   mapping = NULL, data = NULL, position = "identity",
-  arrow = default_arrow,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -102,23 +93,22 @@ geom_v_vector <- function(
     data = data,
     mapping = mapping,
     stat = "v",
-    geom = GeomVector,
+    geom = GeomAxis,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      arrow = arrow,
       ...
     )
   )
 }
 
-#' @rdname ggbiplot-vector
+#' @rdname ggbiplot-axis
 #' @export
-geom_biplot_vector <- function(
+geom_biplot_axis <- function(
   mapping = NULL, data = NULL, position = "identity",
-  .matrix = "v", arrow = default_arrow,
+  .matrix = "v",
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -127,21 +117,13 @@ geom_biplot_vector <- function(
     data = data,
     mapping = mapping,
     stat = .matrix,
-    geom = GeomVector,
+    geom = GeomAxis,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      arrow = arrow,
       ...
     )
   )
 }
-
-default_arrow <- grid::arrow(
-  angle = 20,
-  length = unit(.03, "native"),
-  ends = "last",
-  type = "closed"
-)
