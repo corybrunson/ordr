@@ -25,7 +25,7 @@ recover_inertia.ca <- function(x) x$sv
 
 #' @rdname methods-ca
 #' @export
-get_conference.ca <- function(x) {
+recover_conference.ca <- function(x) {
   # `ca::ca()` always returns row and column standard coordinates
   c(0, 0)
 }

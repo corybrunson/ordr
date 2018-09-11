@@ -18,8 +18,14 @@
 #' @rdname conference
 #' @export
 confer_inertia <- function(x, p) {
+  if (is.null(get_conference(x))) {
+    stop(
+      "Conference of inertia of `", deparse(substitute(x)), "` is not known."
+    )
+  }
+  
   # don't manipulate or use singular values, but ensure that method exists
-  inertia <- recover_inertia(x)
+  recover_inertia(x)
   
   # interpret `p`
   if (! is.numeric(p)) {

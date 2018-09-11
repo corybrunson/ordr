@@ -136,6 +136,28 @@ recover_inertia.default <- function(x) x$value
 
 #' @rdname accessors
 #' @export
+recover_conference <- function(x) UseMethod("recover_conference")
+
+#' @rdname accessors
+#' @export
+recover_conference.default <- function(x) NULL
+
+#' @rdname accessors
+#' @export
+get_conference <- function(x) {
+  p0 <- recover_conference(x)
+  if (is.null(attr(x, "confer"))) {
+    return(p0)
+  } else {
+    return(attr(x, "confer") - p0)
+  }
+}
+
+# in case it becomes expedient to switch from accessors to attributes
+#recover_conference.tbl_ord <- function(x) attr(x, "confer")
+
+#' @rdname accessors
+#' @export
 recover_coord <- function(x) UseMethod("recover_coord")
 
 #' @rdname accessors
@@ -147,7 +169,7 @@ recover_coord.default <- function(x) {
 #' @rdname accessors
 #' @export
 get_coord <- function(x, align = TRUE) {
-  if (!align || is.null(attr(x, "align"))) {
+  if (! align || is.null(attr(x, "align"))) {
     recover_coord(x)
   } else {
     colnames(as.data.frame(matrix(1:dim(x), nrow = 1)))
@@ -157,14 +179,3 @@ get_coord <- function(x, align = TRUE) {
 #' @rdname accessors
 #' @export
 dim.tbl_ord <- function(x) length(recover_coord(x))
-
-#' @rdname accessors
-#' @export
-get_conference <- function(x) UseMethod("get_conference")
-
-#' @rdname accessors
-#' @export
-get_conference.default <- function(x) NULL
-
-# in case it becomes expedient to switch from accessors to attributes
-#get_conference.tbl_ord <- function(x) attr(x, "confer")

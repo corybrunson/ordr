@@ -6,7 +6,7 @@
 \alias{recover_u.ca}
 \alias{recover_v.ca}
 \alias{recover_inertia.ca}
-\alias{get_conference.ca}
+\alias{recover_conference.ca}
 \alias{reconstruct.ca}
 \alias{recover_coord.ca}
 \alias{augment_u.ca}
@@ -22,7 +22,7 @@
 
 \method{recover_inertia}{ca}(x)
 
-\method{get_conference}{ca}(x)
+\method{recover_conference}{ca}(x)
 
 \method{reconstruct}{ca}(x)
 

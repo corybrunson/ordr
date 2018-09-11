@@ -43,12 +43,9 @@ recover_coord.cmds <- function(x) paste0("PCo", 1:ncol(x$points))
 
 #' @rdname methods-cmds
 #' @export
-get_conference.cmds <- function(x) {
-  u <- recover_u(x)
-  diag(
-    apply(u, 2, norm, type = "2") ^ 2,
-    nrow = ncol(u), ncol = ncol(u)
-  )
+recover_conference.cmds <- function(x) {
+  # `stats::cmdscale()` returns the approximate square root
+  c(.5, .5)
 }
 
 #' @rdname methods-cmds
@@ -82,6 +79,12 @@ augment_coord.cmds <- function(x) {
     .name = recover_coord(x),
     .eig = x$eig[1:ncol(x$points)]
   )
+}
+
+#' @rdname methods-cmds
+#' @export
+reconstruct.cmds <- function(x) {
+  -2 * x$points %*% t(x$points)
 }
 
 #' @rdname methods-cmds

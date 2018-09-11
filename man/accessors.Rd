@@ -15,12 +15,13 @@
 \alias{as.matrix.tbl_ord}
 \alias{recover_inertia}
 \alias{recover_inertia.default}
+\alias{recover_conference}
+\alias{recover_conference.default}
+\alias{get_conference}
 \alias{recover_coord}
 \alias{recover_coord.default}
 \alias{get_coord}
 \alias{dim.tbl_ord}
-\alias{get_conference}
-\alias{get_conference.default}
 \title{Access factors, coordinates, inertia, and metadata from ordination objects}
 \usage{
 recover_u(x)
@@ -49,6 +50,12 @@ recover_inertia(x)
 
 \method{recover_inertia}{default}(x)
 
+recover_conference(x)
+
+\method{recover_conference}{default}(x)
+
+get_conference(x)
+
 recover_coord(x)
 
 \method{recover_coord}{default}(x)
@@ -56,10 +63,6 @@ recover_coord(x)
 get_coord(x, align = TRUE)
 
 \method{dim}{tbl_ord}(x)
-
-get_conference(x)
-
-\method{get_conference}{default}(x)
 }
 \arguments{
 \item{x}{A \code{tbl_ord}, or an ordination object coercible to one.}
@@ -89,10 +92,4 @@ ordination class.
 \code{get_coord} retrieves the names of the coordinates shared by \eqn{U} and
 \eqn{V}, on which the original data were ordinated, and \code{dim.tbl_ord}
 retrieves their number.
-
-\strong{Note:} Soon, \code{recover_*} and \code{get_*} will be renamed
-\code{get_*} and \code{augment_*}, respectively, and the current
-\code{augment_*} functions will be renamed \code{augmentation_*} and
-un-exported. This is for consistency with general expectations of \code{get}
-commands and with the conventions of \strong{\link[broom]{broom}}.
 }

@@ -7,6 +7,7 @@
 \alias{recover_v.eigen}
 \alias{recover_inertia.eigen}
 \alias{recover_coord.eigen}
+\alias{recover_conference.eigen}
 \alias{augment_u.eigen}
 \alias{augment_v.eigen}
 \alias{augment_coord.eigen}
@@ -23,7 +24,7 @@
 
 \method{recover_coord}{eigen}(x)
 
-\method{recover_inertia}{eigen}(x)
+\method{recover_conference}{eigen}(x)
 
 \method{augment_u}{eigen}(x)
 

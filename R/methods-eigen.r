@@ -38,7 +38,9 @@ recover_v.eigen <- function(x) recover_uv_eigen(x, "v")
 
 #' @rdname methods-eigen
 #' @export
-recover_inertia.eigen <- function(x) x$values
+recover_inertia.eigen <- function(x) {
+  x$values[1:(min(which(c(x$values, -1) < 0)) - 1)]
+}
 
 #' @rdname methods-eigen
 #' @export
@@ -48,8 +50,9 @@ recover_coord.eigen <- function(x) {
 
 #' @rdname methods-eigen
 #' @export
-recover_inertia.eigen <- function(x) {
-  x$values[1:(min(which(c(x$values, -1) < 0)) - 1)]
+recover_conference.eigen <- function(x) {
+  # `base::eigen()` returns the matrix of eigenvectors
+  c(0, 0)
 }
 
 #' @rdname methods-eigen

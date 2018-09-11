@@ -5,7 +5,6 @@
 \alias{as_tbl_ord.lm}
 \alias{recover_u.lm}
 \alias{recover_v.lm}
-\alias{recover_inertia.lm}
 \alias{recover_coord.lm}
 \alias{augment_u.lm}
 \alias{augment_v.lm}
@@ -26,8 +25,6 @@
 \method{recover_u}{lm}(x)
 
 \method{recover_v}{lm}(x)
-
-\method{recover_inertia}{lm}(x)
 
 \method{recover_coord}{lm}(x)
 

@@ -6,7 +6,6 @@
 \alias{recover_u.lsvd}
 \alias{recover_v.lsvd}
 \alias{recover_coord.lsvd}
-\alias{recover_inertia.lsvd}
 \alias{augment_u.lsvd}
 \alias{augment_v.lsvd}
 \alias{augment_coord.lsvd}
@@ -16,7 +15,6 @@
 \alias{recover_u.lpca}
 \alias{recover_v.lpca}
 \alias{recover_coord.lpca}
-\alias{recover_inertia.lpca}
 \alias{augment_u.lpca}
 \alias{augment_v.lpca}
 \alias{augment_coord.lpca}
@@ -25,7 +23,6 @@
 \alias{recover_u.clpca}
 \alias{recover_v.clpca}
 \alias{recover_coord.clpca}
-\alias{recover_inertia.clpca}
 \alias{augment_u.clpca}
 \alias{augment_v.clpca}
 \alias{augment_coord.clpca}
@@ -40,8 +37,6 @@ value decomposition objects}
 \method{recover_v}{lsvd}(x)
 
 \method{recover_coord}{lsvd}(x)
-
-\method{recover_inertia}{lsvd}(x)
 
 \method{augment_u}{lsvd}(x)
 
@@ -61,8 +56,6 @@ value decomposition objects}
 
 \method{recover_coord}{lpca}(x)
 
-\method{recover_inertia}{lpca}(x)
-
 \method{augment_u}{lpca}(x)
 
 \method{augment_v}{lpca}(x)
@@ -78,8 +71,6 @@ value decomposition objects}
 \method{recover_v}{clpca}(x)
 
 \method{recover_coord}{clpca}(x)
-
-\method{recover_inertia}{clpca}(x)
 
 \method{augment_u}{clpca}(x)
 

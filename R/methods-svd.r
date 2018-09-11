@@ -32,7 +32,7 @@ recover_v.svd <- function(x) {
 
 #' @rdname methods-svd
 #' @export
-recover_inertia.svd <- function(x) s$d
+recover_inertia.svd <- function(x) x$d
 
 #' @rdname methods-svd
 #' @export
@@ -40,7 +40,10 @@ recover_coord.svd <- function(x) paste0("SV", 1:length(x$d))
 
 #' @rdname methods-svd
 #' @export
-recover_inertia.svd <- function(x) x$d
+recover_conference.svd <- function(x) {
+  # `base::svd()` returns rotation matrices
+  c(0, 0)
+}
 
 #' @rdname methods-svd
 #' @export

@@ -7,6 +7,7 @@
 \alias{recover_v.svd}
 \alias{recover_inertia.svd}
 \alias{recover_coord.svd}
+\alias{recover_conference.svd}
 \alias{augment_u.svd}
 \alias{augment_v.svd}
 \alias{augment_coord.svd}
@@ -23,7 +24,7 @@
 
 \method{recover_coord}{svd}(x)
 
-\method{recover_inertia}{svd}(x)
+\method{recover_conference}{svd}(x)
 
 \method{augment_u}{svd}(x)
 
