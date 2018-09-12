@@ -75,7 +75,7 @@ get_u <- function(x, align = TRUE) {
   u <- recover_u(x)
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
-    s <- diag(recover_inertia(x) ^ p[1])
+    s <- diag(sqrt(recover_inertia(x)) ^ p[1])
     # same coordinates (necessary for `ggbiplot()`)
     dimnames(s) <- rep(list(recover_coord(x)), 2)
     u <- u %*% s
@@ -94,7 +94,7 @@ get_v <- function(x, align = TRUE) {
   v <- recover_v(x)
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
-    s <- diag(recover_inertia(x) ^ p[2])
+    s <- diag(sqrt(recover_inertia(x)) ^ p[2])
     # same coordinates (necessary for `ggbiplot()`)
     dimnames(s) <- rep(list(recover_coord(x)), 2)
     v <- v %*% s

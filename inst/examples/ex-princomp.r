@@ -35,21 +35,3 @@ gg <- ggbiplot(b) +
   geom_v_vector(aes(x = 100 * Comp.1, y = 100 * Comp.2))
 # view biplot
 gg
-
-# reproduce Exhibits 6.1 and 6.2 in Greenacre (2010)
-
-data(country_attributes)
-x <- as.matrix(country_attributes[, -1])
-rownames(x) <- country_attributes$Countries
-(m <- princomp(x))
-(b <- as_tbl_ord(m))
-
-ggbiplot(b, aes(label = .name)) +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_repel(color = "brown4")
-
-ggbiplot(confer_inertia(b, c(0, 1)), aes(label = .name)) +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_repel(color = "brown4")

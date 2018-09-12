@@ -79,3 +79,51 @@ ggbiplot(b3_symm, aes(label = .name)) +
   geom_u_text_repel() +
   geom_v_vector() +
   geom_v_text_radiate()
+
+# reproduce Exhibits 6.1 and 6.2 in Greenacre (2010)
+
+# load data and store (square rots of) weights
+data(country_attributes)
+x <- as.matrix(country_attributes[, -1])
+w_cas <- sqrt(1 / nrow(x))
+w_var <- sqrt(1 / ncol(x))
+
+# method 1: use `prcomp()` directly
+# weights are missing from `x`, hence from inertia of `b`
+rownames(x) <- country_attributes$Countries
+(m <- prcomp(x))
+(b <- as_tbl_ord(m))
+
+# form biplot: move variable weights to case scores matrix
+ggbiplot(b, aes(label = .name)) +
+  theme_bw() +
+  geom_u_text(aes(x = PC1 * w_var, y = PC2 * w_var)) +
+  geom_v_vector(aes(x = PC1 / w_var, y = PC2 / w_var)) +
+  geom_v_text_repel(aes(x = PC1 / w_var, y = PC2 / w_var))
+
+# covariance biplot: move case weights to variable loadings matrix
+b_cov <- confer_inertia(b, c(0, 1))
+ggbiplot(b_cov, aes(label = .name)) +
+  theme_bw() +
+  geom_u_text(aes(x = PC1 / w_cas, y = PC2 / w_cas)) +
+  geom_v_vector(aes(x = PC1 * w_cas, y = PC2 * w_cas)) +
+  geom_v_text_repel(aes(x = PC1 * w_cas, y = PC2 * w_cas))
+
+# method 2: scale `x` by case and variable weights before SVD
+x <- diag(w_cas, nrow(x)) %*% x %*% diag(w_var, ncol(x))
+dimnames(x) <- list(country_attributes$Countries, names(country_attributes)[-1])
+(m <- prcomp(x))
+(b <- as_tbl_ord(m))
+
+# form and covariance biplots: un-weight the left and right singular vectors
+ggbiplot(b, aes(label = .name)) +
+  theme_bw() +
+  geom_u_text(aes(x = PC1 / w_cas, y = PC2 / w_cas)) +
+  geom_v_vector(aes(x = PC1 / w_var, y = PC2 / w_var)) +
+  geom_v_text_repel(aes(x = PC1 / w_var, y = PC2 / w_var))
+b_cov <- confer_inertia(b, c(0, 1))
+ggbiplot(b_cov, aes(label = .name)) +
+  theme_bw() +
+  geom_u_text(aes(x = PC1 / w_cas, y = PC2 / w_cas)) +
+  geom_v_vector(aes(x = PC1 / w_var, y = PC2 / w_var)) +
+  geom_v_text_repel(aes(x = PC1 / w_var, y = PC2 / w_var))

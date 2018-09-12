@@ -5,7 +5,8 @@
 p <- ggplot(mtcars, aes(cyl, mpg)) +
   geom_point()
 p
-p + scale_y_continuous(sec.axis = sec_axis(~.+10))
+p + scale_y_continuous(sec.axis = dup_axis())
+p + scale_y_continuous(sec.axis = sec_axis(~ . + 10))
 
 # *ordr* procedure:
 # 1. detect conference of inertia `p = c(p[i], p[j])` (plotting dimensions i, j)
