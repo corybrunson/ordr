@@ -49,6 +49,13 @@ recover_coord.princomp <- function(x) {
 
 #' @rdname methods-princomp
 #' @export
+recover_conference.princomp <- function(x) {
+  # `stats::princomp()` returns the rotated data
+  c(1, 0)
+}
+
+#' @rdname methods-princomp
+#' @export
 augment_u.princomp <- function(x) {
   .name <- rownames(x[["scores"]])
   if (is.null(.name)) {

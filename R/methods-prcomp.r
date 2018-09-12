@@ -41,7 +41,7 @@ recover_v.prcomp <- function(x) {
 #' @rdname methods-prcomp
 #' @export
 recover_inertia.prcomp <- function(x) {
-  (x[["sdev"]] ^ 2) * (nrow(x$x) - 1)
+  (x[["sdev"]] ^ 2) * (nrow(x[["x"]]) - 1)
 }
 
 #' @rdname methods-prcomp

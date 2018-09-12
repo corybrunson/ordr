@@ -74,9 +74,8 @@ recover_v.data.frame <- function(x) {
 get_u <- function(x, align = TRUE) {
   u <- recover_u(x)
   if (! is.null(attr(x, "confer"))) {
-    p0 <- get_conference(x)
-    p <- attr(x, "confer")
-    s <- diag(recover_inertia(x) ^ (p0[1] - p[1]))
+    p <- get_conference(x) - recover_conference(x)
+    s <- diag(recover_inertia(x) ^ p[1])
     # same coordinates (necessary for `ggbiplot()`)
     dimnames(s) <- rep(list(recover_coord(x)), 2)
     u <- u %*% s
@@ -94,9 +93,8 @@ get_u <- function(x, align = TRUE) {
 get_v <- function(x, align = TRUE) {
   v <- recover_v(x)
   if (! is.null(attr(x, "confer"))) {
-    p0 <- get_conference(x)
-    p <- attr(x, "confer")
-    s <- diag(recover_inertia(x) ^ (p0[2] - p[2]))
+    p <- get_conference(x) - recover_conference(x)
+    s <- diag(recover_inertia(x) ^ p[2])
     # same coordinates (necessary for `ggbiplot()`)
     dimnames(s) <- rep(list(recover_coord(x)), 2)
     v <- v %*% s
@@ -145,11 +143,10 @@ recover_conference.default <- function(x) NULL
 #' @rdname accessors
 #' @export
 get_conference <- function(x) {
-  p0 <- recover_conference(x)
   if (is.null(attr(x, "confer"))) {
-    return(p0)
+    return(recover_conference(x))
   } else {
-    return(attr(x, "confer") - p0)
+    return(attr(x, "confer"))
   }
 }
 
