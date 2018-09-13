@@ -2,40 +2,31 @@
 % Please edit documentation in R/augmentation.r
 \name{augmentation}
 \alias{augmentation}
+\alias{augmentation_u}
+\alias{augmentation_v}
+\alias{augmentation_factor}
+\alias{augmentation.tbl_ord}
+\alias{augmentation_coord}
 \alias{augment_u}
 \alias{augment_v}
-\alias{augment_factor}
-\alias{augment.tbl_ord}
 \alias{augment_coord}
-\alias{annotate_u}
-\alias{annotate_v}
-\alias{u_annot}
-\alias{v_annot}
-\alias{set_u_annot}
-\alias{set_v_annot}
-\title{Augment information for the factors and coordinates of an ordination object}
+\title{Augment information for the factors and coordinates of ordination objects}
 \usage{
+augmentation_u(x)
+
+augmentation_v(x)
+
+augmentation_factor(x, .matrix)
+
+augmentation.tbl_ord(x, .matrix)
+
+augmentation_coord(x)
+
 augment_u(x)
 
 augment_v(x)
 
-augment_factor(x, .matrix)
-
-\method{augment}{tbl_ord}(x, .matrix)
-
 augment_coord(x)
-
-annotate_u(x)
-
-annotate_v(x)
-
-u_annot(x)
-
-v_annot(x)
-
-set_u_annot(x, annot)
-
-set_v_annot(x, annot)
 }
 \arguments{
 \item{x}{A \code{tbl_ord}, or an ordination object coercible to one.}
@@ -43,33 +34,24 @@ set_v_annot(x, annot)
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
-
-\item{annot}{A \code{\link[tibble]{tibble}} having the same number of rows as
-\code{x}.}
 }
 \description{
 These functions return data associated with the cases, variables, and
-coordinates of an ordination.
+coordinates of an ordination object.
 }
 \details{
-The \code{augment_*} functions produce \link[tibble]{tibble}s of data 
-augmented to the cases, variables, and coordinates. The first field of each
-tibble is \code{.name} and contains the case, variable, and coordinate names,
-respectively.
+The \code{augmentation_*} functions produce \link[tibble]{tibble}s of values
+associated with the cases, variables, and coordinates of a \code{tbl_ord}
+object. The first field of each tibble is \code{.name}, which contains the
+case, variable, or coordinate names. Additional fields contain information
+about the cases, variables, or coordinates extracted from the original
+ordination object.
 
-The \code{augment_*} functions return data augmented from two sources:
-\enumerate{
-  \item Information about the cases, variables, or coordinates contained
-        in the original ordination object. In this sense \code{augment_*}
-        works like \code{\link[broom]{augment}} to extract all such
-        information that can be included in a tidy summary of the components.
-        The advantage of implementing separate methods for the different
-        components is that more information contained in the original object
-        becomes accessible to the user.
-  \item Additional information about the components manually added to the
-        \code{tbl_ord} using adapted \strong{\link[dplyr]{dplyr}} verbs.
-}
-Once the \strong{dplyr} verbs are implemented, each \code{augment_*} function
-will retrieve both sources and combines them using 
-\code{link[dplyr]{bind_cols}}.
+The \code{augment_*} functions return the ordination coordinates data
+augmented with the result of \code{augmentation_*}. In this sense
+\code{augment_*} works like \code{\link[broom]{augment}} in extracting all
+information that can be included in a tidy summary of the components. The
+advantage of implementing separate methods for the different components is
+that more information contained in the original object becomes accessible to
+the user.
 }

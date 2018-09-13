@@ -7,17 +7,17 @@
 \alias{recover_u.lm}
 \alias{recover_v.lm}
 \alias{recover_coord.lm}
-\alias{augment_u.lm}
-\alias{augment_v.lm}
-\alias{augment_coord.lm}
+\alias{augmentation_u.lm}
+\alias{augmentation_v.lm}
+\alias{augmentation_coord.lm}
 \alias{permute_to.lm}
-\alias{augment_u.glm}
+\alias{augmentation_u.glm}
 \alias{recover_u.mlm}
 \alias{recover_v.mlm}
 \alias{recover_coord.mlm}
-\alias{augment_u.mlm}
-\alias{augment_v.mlm}
-\alias{augment_coord.mlm}
+\alias{augmentation_u.mlm}
+\alias{augmentation_v.mlm}
+\alias{augmentation_coord.mlm}
 \title{Functionality for linear model objects}
 \usage{
 \method{as_tbl_ord}{lm}(x)
@@ -30,15 +30,15 @@
 
 \method{recover_coord}{lm}(x)
 
-\method{augment_u}{lm}(x)
+\method{augmentation_u}{lm}(x)
 
-\method{augment_v}{lm}(x)
+\method{augmentation_v}{lm}(x)
 
-\method{augment_coord}{lm}(x)
+\method{augmentation_coord}{lm}(x)
 
 \method{permute_to}{lm}(x, y, ..., .matrix)
 
-\method{augment_u}{glm}(x)
+\method{augmentation_u}{glm}(x)
 
 \method{recover_u}{mlm}(x)
 
@@ -46,11 +46,11 @@
 
 \method{recover_coord}{mlm}(x)
 
-\method{augment_u}{mlm}(x)
+\method{augmentation_u}{mlm}(x)
 
-\method{augment_v}{mlm}(x)
+\method{augmentation_v}{mlm}(x)
 
-\method{augment_coord}{mlm}(x)
+\method{augmentation_coord}{mlm}(x)
 }
 \arguments{
 \item{x}{An ordination object.}

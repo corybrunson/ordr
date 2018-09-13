@@ -17,6 +17,27 @@
 
 #' @rdname conference
 #' @export
+recover_conference <- function(x) UseMethod("recover_conference")
+
+#' @rdname conference
+#' @export
+recover_conference.default <- function(x) NULL
+
+#' @rdname conference
+#' @export
+get_conference <- function(x) {
+  if (is.null(attr(x, "confer"))) {
+    return(recover_conference(x))
+  } else {
+    return(attr(x, "confer"))
+  }
+}
+
+# in case it becomes expedient to switch from accessors to attributes
+#recover_conference.tbl_ord <- function(x) attr(x, "confer")
+
+#' @rdname conference
+#' @export
 confer_inertia <- function(x, p) {
   if (is.null(get_conference(x))) {
     stop(

@@ -9,9 +9,9 @@
 \alias{recover_inertia.cmds}
 \alias{recover_coord.cmds}
 \alias{recover_conference.cmds}
-\alias{augment_u.cmds}
-\alias{augment_v.cmds}
-\alias{augment_coord.cmds}
+\alias{augmentation_u.cmds}
+\alias{augmentation_v.cmds}
+\alias{augmentation_coord.cmds}
 \alias{negate_to.cmds}
 \alias{permute_to.cmds}
 \alias{rotate_to.cmds}
@@ -31,11 +31,11 @@
 
 \method{recover_conference}{cmds}(x)
 
-\method{augment_u}{cmds}(x)
+\method{augmentation_u}{cmds}(x)
 
-\method{augment_v}{cmds}(x)
+\method{augmentation_v}{cmds}(x)
 
-\method{augment_coord}{cmds}(x)
+\method{augmentation_coord}{cmds}(x)
 
 \method{negate_to}{cmds}(x, y, ..., .matrix)
 

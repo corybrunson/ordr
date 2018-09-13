@@ -2,9 +2,18 @@
 % Please edit documentation in R/conference.r
 \name{conference}
 \alias{conference}
+\alias{recover_conference}
+\alias{recover_conference.default}
+\alias{get_conference}
 \alias{confer_inertia}
 \title{Re-distribute inertia between cases and variables in an ordination}
 \usage{
+recover_conference(x)
+
+\method{recover_conference}{default}(x)
+
+get_conference(x)
+
 confer_inertia(x, p)
 }
 \arguments{

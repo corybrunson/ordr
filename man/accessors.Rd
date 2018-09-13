@@ -15,9 +15,6 @@
 \alias{as.matrix.tbl_ord}
 \alias{recover_inertia}
 \alias{recover_inertia.default}
-\alias{recover_conference}
-\alias{recover_conference.default}
-\alias{get_conference}
 \alias{recover_coord}
 \alias{recover_coord.default}
 \alias{get_coord}
@@ -49,12 +46,6 @@ get_factor(x, .matrix, align = TRUE)
 recover_inertia(x)
 
 \method{recover_inertia}{default}(x)
-
-recover_conference(x)
-
-\method{recover_conference}{default}(x)
-
-get_conference(x)
 
 recover_coord(x)
 

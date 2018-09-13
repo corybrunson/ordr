@@ -34,12 +34,12 @@ extra columns.}
 }
 \description{
 The \code{format} and \code{print} methods for class \code{"tbl_ord"} are
-adapted from those for class \code{"tbl_df"} in the
-\strong{\link[tibble]{tibble}} package and for class \code{"tbl_graph"} in
-the \strong{\link[tidygraph]{tidygraph}} package.
+adapted from those for class \code{"tbl_df"} in
+\strong{\link[tibble]{tibble}} and for class \code{"tbl_graph"} in
+\strong{\link[tidygraph]{tidygraph}}.
 }
 \details{
-Note: The \code{format} function is tedius but cannot be easily modularized 
-without invoking \code{get_*()} and \code{augment_*()} multiple times, 
-thereby significantly reducing performance.
+Note: The \code{format} function is tedius but cannot be easily modularized
+without invoking \code{get_*}, \code{annotation_*}, and \code{augmentation_*}
+multiple times, thereby significantly reducing performance.
 }

@@ -53,7 +53,7 @@ recover_conference.svd <- function(x) {
 
 #' @rdname methods-svd
 #' @export
-augment_u.svd <- function(x) {
+augmentation_u.svd <- function(x) {
   .name <- rownames(attr(x, "x"))
   if (is.null(.name)) {
     tibble_pole(nrow(attr(x, "x")))
@@ -64,7 +64,7 @@ augment_u.svd <- function(x) {
 
 #' @rdname methods-svd
 #' @export
-augment_v.svd <- function(x) {
+augmentation_v.svd <- function(x) {
   .name <- colnames(attr(x, "x"))
   if (is.null(.name)) {
     tibble_pole(ncol(attr(x, "x")))
@@ -75,7 +75,7 @@ augment_v.svd <- function(x) {
 
 #' @rdname methods-svd
 #' @export
-augment_coord.svd <- function(x) {
+augmentation_coord.svd <- function(x) {
   tibble(
     .name = recover_coord(x),
     .value = x$d[1:ncol(x$u)]

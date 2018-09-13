@@ -46,7 +46,7 @@ recover_coord.lsvd <- function(x) paste0("LSC", 1:ncol(x$A))
 
 #' @rdname methods-lpca
 #' @export
-augment_u.lsvd <- function(x) {
+augmentation_u.lsvd <- function(x) {
   tibble(
     .name = rownames(x$A)
   )
@@ -54,7 +54,7 @@ augment_u.lsvd <- function(x) {
 
 #' @rdname methods-lpca
 #' @export
-augment_v.lsvd <- function(x) {
+augmentation_v.lsvd <- function(x) {
   tibble(
     .name = rownames(x$B),
     .mu = x$mu
@@ -63,7 +63,7 @@ augment_v.lsvd <- function(x) {
 
 #' @rdname methods-lpca
 #' @export
-augment_coord.lsvd <- function(x) {
+augmentation_coord.lsvd <- function(x) {
   tibble(
     .name = recover_coord.lsvd(x)
   )
@@ -106,7 +106,7 @@ recover_coord.lpca <- function(x) paste0("LPC", 1:ncol(x$U))
 
 #' @rdname methods-lpca
 #' @export
-augment_u.lpca <- function(x) {
+augmentation_u.lpca <- function(x) {
   .name <- rownames(x$PCs)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$PCs))
@@ -118,7 +118,7 @@ augment_u.lpca <- function(x) {
 
 #' @rdname methods-lpca
 #' @export
-augment_v.lpca <- function(x) {
+augmentation_v.lpca <- function(x) {
   .name <- rownames(x$U)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$U))
@@ -131,7 +131,7 @@ augment_v.lpca <- function(x) {
 
 #' @rdname methods-lpca
 #' @export
-augment_coord.lpca <- function(x) {
+augmentation_coord.lpca <- function(x) {
   tibble(
     .name = recover_coord.lpca(x)
   )
@@ -167,7 +167,7 @@ recover_coord.clpca <- function(x) paste0("LPC", 1:ncol(x$U))
 
 #' @rdname methods-lpca
 #' @export
-augment_u.clpca <- function(x) {
+augmentation_u.clpca <- function(x) {
   .name <- rownames(x$PCs)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$PCs))
@@ -179,7 +179,7 @@ augment_u.clpca <- function(x) {
 
 #' @rdname methods-lpca
 #' @export
-augment_v.clpca <- function(x) {
+augmentation_v.clpca <- function(x) {
   .name <- rownames(x$U)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$U))
@@ -192,7 +192,7 @@ augment_v.clpca <- function(x) {
 
 #' @rdname methods-lpca
 #' @export
-augment_coord.clpca <- function(x) {
+augmentation_coord.clpca <- function(x) {
   tibble(
     .name = recover_coord.clpca(x)
   )

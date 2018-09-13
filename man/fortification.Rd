@@ -36,5 +36,12 @@ the latter, whether only shared fields or all from both.}
 }
 \description{
 These methods of \code{\link[ggplot2]{fortify}} and \code{\link[broom]{tidy}}
-convert a \code{\link{tbl_ord}} to a \code{\link{tibble}}.
+convert a \code{\link{tbl_ord}} object to a
+\code{\link[tibble:tibble]{tbl_df}} object.
+}
+\details{
+The \code{fortify} and \code{tidy} methods for \code{tbl_ord} objects produce
+the same output, a \link[tibble]{tibble} obtained by binding columns obtained
+via \code{\link[=accessors]{get_*}}, \code{\link[=annotation]{annotation_*}},
+and \code{\link[=augmentation]{augmentation_*}}, respectively.
 }

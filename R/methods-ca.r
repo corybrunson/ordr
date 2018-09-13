@@ -45,7 +45,7 @@ recover_coord.ca <- function(x) {
 
 #' @rdname methods-ca
 #' @export
-augment_u.ca <- function(x) {
+augmentation_u.ca <- function(x) {
   tibble(
     .name = rownames(x$rowcoord),
     .mass = x$rowmass,
@@ -56,7 +56,7 @@ augment_u.ca <- function(x) {
 
 #' @rdname methods-ca
 #' @export
-augment_v.ca <- function(x){
+augmentation_v.ca <- function(x){
   tibble(
     .name = rownames(x$colcoord),
     .mass = x$colmass,
@@ -67,7 +67,7 @@ augment_v.ca <- function(x){
 
 #' @rdname methods-ca
 #' @export
-augment_coord.ca <- function(x){
+augmentation_coord.ca <- function(x){
   tibble(
     .name = recover_coord(x),
     .sv = x$sv

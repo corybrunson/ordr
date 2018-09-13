@@ -7,6 +7,7 @@
 \alias{make_tbl_ord}
 \alias{is_tbl_ord}
 \alias{is.tbl_ord}
+\alias{valid_tbl_ord}
 \alias{un_tbl_ord}
 \title{A unified ordination object class}
 \usage{
@@ -19,6 +20,8 @@ make_tbl_ord(u = NULL, v = NULL, ...)
 is_tbl_ord(x)
 
 is.tbl_ord(x)
+
+valid_tbl_ord(x)
 
 un_tbl_ord(x)
 }
@@ -37,21 +40,24 @@ structure.
 \details{
 The \code{"tbl_ord"} class wraps around a range of ordination classes, making
 available a suite of ordination tools that specialize to each original object
-class, including \code{\link{format}} and \code{\link{fortify}}, which 
-facilitate the \code{\link{print}} method and the \code{\link{ggbiplot}} 
+class, including \code{\link{format}} and \code{\link{fortify}}, which
+facilitate the \code{\link{print}} method and the \code{\link{ggbiplot}}
 function.
 
-No default method is provided for \code{as_tbl_ord}, despite most defined 
+No default method is provided for \code{as_tbl_ord}, despite most defined
 methods being equivalent (simply adding \code{"tbl_ord"} to the vector of
 object classes). This prevents objects for which other methods are not
 defined from being re-classed as \code{tbl_ord}s.
 
-The function \code{make_tbl_ord} creates a \code{tbl_ord} structured as a 
-list of two matrices, \code{u} and \code{v}, which must have the same number 
+The function \code{make_tbl_ord} creates a \code{tbl_ord} structured as a
+list of two matrices, \code{u} and \code{v}, which must have the same number
 of columns and the same column names.
 
-\code{is_tbl_ord} checks an object \code{x} for the \code{"tbl_ord"} class
-and for consistency between \code{recover_coord(x)} and the columns of 
-\code{recover_u(x)} and \code{recover_v(x)}, using the functions at 
-\code{\link{accessors}}.
+\code{is_tbl_ord} checks an object \code{x} for the \code{"tbl_ord"} class;
+\code{valid_tbl_ord} additionally checks for consistency between
+\code{recover_coord(x)} and the columns of \code{recover_u(x)} and
+\code{recover_v(x)}, using the functions at \code{\link{accessors}}.
+\code{un_tbl_ord} removes attributes associated with the \code{"tbl_ord"}
+class in order to restore an object that was originally passed to
+\code{as_tbl_ord}.
 }

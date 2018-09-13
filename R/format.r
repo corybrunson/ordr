@@ -1,13 +1,13 @@
 #' Formatting and printing methods for \code{tbl_ord}s
-#' 
+#'
 #' The \code{format} and \code{print} methods for class \code{"tbl_ord"} are
-#' adapted from those for class \code{"tbl_df"} in the
-#' \strong{\link[tibble]{tibble}} package and for class \code{"tbl_graph"} in
-#' the \strong{\link[tidygraph]{tidygraph}} package.
-#' 
-#' Note: The \code{format} function is tedius but cannot be easily modularized 
-#' without invoking \code{get_*()} and \code{augment_*()} multiple times, 
-#' thereby significantly reducing performance.
+#' adapted from those for class \code{"tbl_df"} in
+#' \strong{\link[tibble]{tibble}} and for class \code{"tbl_graph"} in
+#' \strong{\link[tidygraph]{tidygraph}}.
+#'
+#' Note: The \code{format} function is tedius but cannot be easily modularized
+#' without invoking \code{get_*}, \code{annotation_*}, and \code{augmentation_*}
+#' multiple times, thereby significantly reducing performance.
 #' 
 
 #' @name formatting
@@ -27,8 +27,8 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   rk <- length(coord)
   uv_ann <- mapply(
     bind_cols,
-    augment_factor(x, .matrix = "uv"),
-    factor_annot(x, .matrix = "uv"),
+    annotation_factor(x, .matrix = "uv"),
+    augmentation_factor(x, .matrix = "uv"),
     SIMPLIFY = FALSE
   )
   names(uv_ann) <- c("u", "v")
@@ -59,7 +59,7 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   coord_header <- paste0(
     "# ", rk,
     " coordinate", if(rk == 1) "" else "s",
-    if (is.null(attr(x, "alignment"))) "" else ", transformed",
+    if (is.null(attr(x, "align"))) "" else ", transformed",
     ": ",
     print_reps(coord)
   )

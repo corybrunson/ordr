@@ -9,9 +9,9 @@
 \alias{recover_inertia.prcomp}
 \alias{recover_coord.prcomp}
 \alias{recover_conference.prcomp}
-\alias{augment_u.prcomp}
-\alias{augment_v.prcomp}
-\alias{augment_coord.prcomp}
+\alias{augmentation_u.prcomp}
+\alias{augmentation_v.prcomp}
+\alias{augmentation_coord.prcomp}
 \title{Functionality for principal components analysis ('prcomp') objects}
 \usage{
 \method{as_tbl_ord}{prcomp}(x)
@@ -28,11 +28,11 @@
 
 \method{recover_conference}{prcomp}(x)
 
-\method{augment_u}{prcomp}(x)
+\method{augmentation_u}{prcomp}(x)
 
-\method{augment_v}{prcomp}(x)
+\method{augmentation_v}{prcomp}(x)
 
-\method{augment_coord}{prcomp}(x)
+\method{augmentation_coord}{prcomp}(x)
 }
 \arguments{
 \item{x}{An ordination object.}

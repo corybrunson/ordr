@@ -1,8 +1,14 @@
 #' Fortify a \code{tbl_ord} for plotting
-#' 
+#'
 #' These methods of \code{\link[ggplot2]{fortify}} and \code{\link[broom]{tidy}}
-#' convert a \code{\link{tbl_ord}} to a \code{\link{tibble}}.
+#' convert a \code{\link{tbl_ord}} object to a
+#' \code{\link[tibble:tibble]{tbl_df}} object.
 #' 
+
+#' The \code{fortify} and \code{tidy} methods for \code{tbl_ord} objects produce
+#' the same output, a \link[tibble]{tibble} obtained by binding columns obtained
+#' via \code{\link[=accessors]{get_*}}, \code{\link[=annotation]{annotation_*}},
+#' and \code{\link[=augmentation]{augmentation_*}}, respectively.
 
 #' @name fortification
 #' @param model,x A \code{\link{tbl_ord}}.
@@ -30,7 +36,8 @@ fortify.tbl_ord <- function(
     if (include != "coordinates") {
       u <- dplyr::bind_cols(
         u,
-        annotate_u(model)
+        annotation_u(model),
+        augmentation_u(model)
       )
       u$.matrix <- "u"
     }
@@ -40,7 +47,8 @@ fortify.tbl_ord <- function(
     if (include != "coordinates") {
       v <- dplyr::bind_cols(
         v,
-        annotate_v(model)
+        annotation_v(model),
+        augmentation_v(model)
       )
       v$.matrix <- "v"
     }

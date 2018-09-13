@@ -63,7 +63,7 @@ recover_conference.eigen <- function(x) {
 
 #' @rdname methods-eigen
 #' @export
-augment_u.eigen <- function(x) {
+augmentation_u.eigen <- function(x) {
   .name <- rownames(attr(x, "x"))
   res <- if (is.null(.name)) {
     tibble_pole(nrow(attr(x, "x")))
@@ -75,7 +75,7 @@ augment_u.eigen <- function(x) {
 
 #' @rdname methods-eigen
 #' @export
-augment_v.eigen <- function(x) {
+augmentation_v.eigen <- function(x) {
   .name <- colnames(attr(x, "x"))
   res <- if (is.null(.name)) {
     tibble_pole(ncol(attr(x, "x")))
@@ -87,7 +87,7 @@ augment_v.eigen <- function(x) {
 
 #' @rdname methods-eigen
 #' @export
-augment_coord.eigen <- function(x) {
+augmentation_coord.eigen <- function(x) {
   w <- 1:(min(which(c(x$values, -1) < 0)) - 1)
   tibble(
     .name = recover_coord(x),

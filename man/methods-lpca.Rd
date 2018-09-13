@@ -7,25 +7,25 @@
 \alias{recover_u.lsvd}
 \alias{recover_v.lsvd}
 \alias{recover_coord.lsvd}
-\alias{augment_u.lsvd}
-\alias{augment_v.lsvd}
-\alias{augment_coord.lsvd}
+\alias{augmentation_u.lsvd}
+\alias{augmentation_v.lsvd}
+\alias{augmentation_coord.lsvd}
 \alias{negate_to.lsvd}
 \alias{as_tbl_ord.lpca}
 \alias{recover_u.lpca}
 \alias{recover_v.lpca}
 \alias{recover_coord.lpca}
-\alias{augment_u.lpca}
-\alias{augment_v.lpca}
-\alias{augment_coord.lpca}
+\alias{augmentation_u.lpca}
+\alias{augmentation_v.lpca}
+\alias{augmentation_coord.lpca}
 \alias{negate_to.lpca}
 \alias{as_tbl_ord.clpca}
 \alias{recover_u.clpca}
 \alias{recover_v.clpca}
 \alias{recover_coord.clpca}
-\alias{augment_u.clpca}
-\alias{augment_v.clpca}
-\alias{augment_coord.clpca}
+\alias{augmentation_u.clpca}
+\alias{augmentation_v.clpca}
+\alias{augmentation_coord.clpca}
 \alias{negate_to.clpca}
 \title{Functionality for logistic principal components analysis and singular 
 value decomposition objects}
@@ -40,11 +40,11 @@ value decomposition objects}
 
 \method{recover_coord}{lsvd}(x)
 
-\method{augment_u}{lsvd}(x)
+\method{augmentation_u}{lsvd}(x)
 
-\method{augment_v}{lsvd}(x)
+\method{augmentation_v}{lsvd}(x)
 
-\method{augment_coord}{lsvd}(x)
+\method{augmentation_coord}{lsvd}(x)
 
 \method{negate_to}{lsvd}(x, y, ..., .matrix)
 
@@ -56,11 +56,11 @@ value decomposition objects}
 
 \method{recover_coord}{lpca}(x)
 
-\method{augment_u}{lpca}(x)
+\method{augmentation_u}{lpca}(x)
 
-\method{augment_v}{lpca}(x)
+\method{augmentation_v}{lpca}(x)
 
-\method{augment_coord}{lpca}(x)
+\method{augmentation_coord}{lpca}(x)
 
 \method{negate_to}{lpca}(x, y, ..., .matrix)
 
@@ -72,11 +72,11 @@ value decomposition objects}
 
 \method{recover_coord}{clpca}(x)
 
-\method{augment_u}{clpca}(x)
+\method{augmentation_u}{clpca}(x)
 
-\method{augment_v}{clpca}(x)
+\method{augmentation_v}{clpca}(x)
 
-\method{augment_coord}{clpca}(x)
+\method{augmentation_coord}{clpca}(x)
 
 \method{negate_to}{clpca}(x, y, ..., .matrix)
 }

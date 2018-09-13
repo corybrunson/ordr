@@ -9,9 +9,9 @@
 \alias{recover_inertia.eigen}
 \alias{recover_coord.eigen}
 \alias{recover_conference.eigen}
-\alias{augment_u.eigen}
-\alias{augment_v.eigen}
-\alias{augment_coord.eigen}
+\alias{augmentation_u.eigen}
+\alias{augmentation_v.eigen}
+\alias{augmentation_coord.eigen}
 \alias{negate_to.eigen}
 \title{Functionality for matrix spectral decompositions}
 \usage{
@@ -29,11 +29,11 @@
 
 \method{recover_conference}{eigen}(x)
 
-\method{augment_u}{eigen}(x)
+\method{augmentation_u}{eigen}(x)
 
-\method{augment_v}{eigen}(x)
+\method{augmentation_v}{eigen}(x)
 
-\method{augment_coord}{eigen}(x)
+\method{augmentation_coord}{eigen}(x)
 
 \method{negate_to}{eigen}(x, y, ..., .matrix)
 }

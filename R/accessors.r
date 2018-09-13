@@ -134,27 +134,6 @@ recover_inertia.default <- function(x) x$value ^ 2
 
 #' @rdname accessors
 #' @export
-recover_conference <- function(x) UseMethod("recover_conference")
-
-#' @rdname accessors
-#' @export
-recover_conference.default <- function(x) NULL
-
-#' @rdname accessors
-#' @export
-get_conference <- function(x) {
-  if (is.null(attr(x, "confer"))) {
-    return(recover_conference(x))
-  } else {
-    return(attr(x, "confer"))
-  }
-}
-
-# in case it becomes expedient to switch from accessors to attributes
-#recover_conference.tbl_ord <- function(x) attr(x, "confer")
-
-#' @rdname accessors
-#' @export
 recover_coord <- function(x) UseMethod("recover_coord")
 
 #' @rdname accessors

@@ -9,9 +9,9 @@
 \alias{recover_inertia.ca}
 \alias{recover_conference.ca}
 \alias{recover_coord.ca}
-\alias{augment_u.ca}
-\alias{augment_v.ca}
-\alias{augment_coord.ca}
+\alias{augmentation_u.ca}
+\alias{augmentation_v.ca}
+\alias{augmentation_coord.ca}
 \title{Functionality for correspondence analysis ('ca') objects}
 \usage{
 \method{as_tbl_ord}{ca}(x)
@@ -28,11 +28,11 @@
 
 \method{recover_coord}{ca}(x)
 
-\method{augment_u}{ca}(x)
+\method{augmentation_u}{ca}(x)
 
-\method{augment_v}{ca}(x)
+\method{augmentation_v}{ca}(x)
 
-\method{augment_coord}{ca}(x)
+\method{augmentation_coord}{ca}(x)
 }
 \arguments{
 \item{x}{An ordination object.}

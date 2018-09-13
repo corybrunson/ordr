@@ -15,7 +15,7 @@ biplot.tbl_ord <- function(x, choices = 1L:2L, ...) {
   loadings <- get_v(x)
   if (length(choices) != 2L)
     stop("Length of choices must be 2.")
-  if (!length(scores)) 
+  if (! length(scores)) 
     stop(gettextf("Ordination '%s' has no scores.", deparse(substitute(x))),
          domain = NA)
   if (is.complex(scores))

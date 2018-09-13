@@ -8,5 +8,5 @@ m <- country_differences %>%
 fit_cmds <- cmdscale(m, k = 6)
 
 test_that("`as_tbl_ord()` coerces 'cmds' objects", {
-  expect_true(is.tbl_ord(as_tbl_ord(fit_cmds)))
+  expect_true(valid_tbl_ord(as_tbl_ord(fit_cmds)))
 })

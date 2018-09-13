@@ -80,7 +80,7 @@ recover_coord.lm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-augment_u.lm <- function(x) {
+augmentation_u.lm <- function(x) {
   res <- tibble(.name = rownames(model.frame(x)))
   infl <- influence(x, do.coef = FALSE)
   # diagnostics
@@ -99,7 +99,7 @@ augment_u.lm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-augment_v.lm <- function(x) {
+augmentation_v.lm <- function(x) {
   .name <- if (is.matrix(x$model[, 1])) {
     colnames(x$model[, 1])
   } else {
@@ -110,7 +110,7 @@ augment_v.lm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-augment_coord.lm <- function(x) {
+augmentation_coord.lm <- function(x) {
   summ <- as.data.frame(stats::coef(summary(x)))
   names(summ) <- c(".estimate", ".std.error", ".t.value", ".p.value")
   as_tibble(data.frame(
@@ -133,7 +133,7 @@ permute_to.lm <- function(x, y, ..., .matrix) {
 
 #' @rdname methods-lm
 #' @export
-augment_u.glm <- function(x) {
+augmentation_u.glm <- function(x) {
   res <- tibble(.name = rownames(model.frame(x)))
   # diagnostics
   infl <- influence(x, do.coef = FALSE)
@@ -201,7 +201,7 @@ recover_coord.mlm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-augment_u.mlm <- function(x) {
+augmentation_u.mlm <- function(x) {
   tibble(
     .name = rownames(model.frame(x))
   )
@@ -209,7 +209,7 @@ augment_u.mlm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-augment_v.mlm <- function(x) {
+augmentation_v.mlm <- function(x) {
   .name <- colnames(x$coefficients)
   if (is.null(.name)) {
     .name <- paste(names(x$model)[1], 1:ncol(x$model[, 1]), sep = ".")
@@ -219,7 +219,7 @@ augment_v.mlm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-augment_coord.mlm <- function(x) {
+augmentation_coord.mlm <- function(x) {
   # model summaries
   summs <- purrr::map_df(
     stats::coef(summary(x)),

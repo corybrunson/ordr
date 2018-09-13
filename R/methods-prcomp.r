@@ -59,7 +59,7 @@ recover_conference.prcomp <- function(x) {
 
 #' @rdname methods-prcomp
 #' @export
-augment_u.prcomp <- function(x) {
+augmentation_u.prcomp <- function(x) {
   tibble(
     .name = rownames(x[["x"]])
   )
@@ -67,7 +67,7 @@ augment_u.prcomp <- function(x) {
 
 #' @rdname methods-prcomp
 #' @export
-augment_v.prcomp <- function(x) {
+augmentation_v.prcomp <- function(x) {
   res <- tibble(.name = rownames(x[["rotation"]]))
   if (class(x[["center"]]) == "numeric") {
     res <- dplyr::bind_cols(res, .center = x[["center"]])
@@ -80,7 +80,7 @@ augment_v.prcomp <- function(x) {
 
 #' @rdname methods-prcomp
 #' @export
-augment_coord.prcomp <- function(x) {
+augmentation_coord.prcomp <- function(x) {
   tibble(
     .name = recover_coord(x),
     .sdev = x[["sdev"]]

@@ -15,7 +15,7 @@
 \alias{transmute_v}
 \alias{bind_cols_u}
 \alias{bind_cols_v}
-\title{*dplyr* verbs}
+\title{\strong{dplyr} verbs for \code{tbl_ord} factors}
 \usage{
 pull_factor(.data, var = -1, .matrix)
 
@@ -56,12 +56,13 @@ standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 \code{\link[dplyr]{select}}.}
 }
 \description{
-These functions adapt \strong{\link[dplyr]{dplyr}} verbs to the factors of a 
-\code{tbl_ord}. The raw verbs are not defined for \code{tbl_ord}s; instead, 
-each verb has two analogues, corresponding to the two matrix factors. They 
-each rely on a common workhorse function, which takes the composition of the 
-\strong{dplyr} verb with \code{\link{fortify}}, applied to the factor, 
-removes any variables corresponding to coordinates or produced by 
+These functions adapt \strong{\link[dplyr]{dplyr}} verbs to the factors of a
+\code{tbl_ord}. The raw verbs are not defined for \code{tbl_ord}s; instead,
+each verb has two analogues, corresponding to the two matrix factors. They
+each rely on a common workhorse function, which takes the composition of the
+\strong{dplyr} verb with \code{\link{fortify}}, applied to the factor,
+removes any variables corresponding to coordinates or produced by
 \code{augment_*} (see \code{\link{augmentation}}), and only then assigns it
-as the new \code{"*_annot"} attribute of \code{.data}.
+as the new \code{"*_annotation"} attribute of \code{.data} (see
+\code{\link{annotation}}).
 }

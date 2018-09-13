@@ -7,9 +7,9 @@
 \alias{recover_u.kmeans}
 \alias{recover_v.kmeans}
 \alias{recover_coord.kmeans}
-\alias{augment_u.kmeans}
-\alias{augment_v.kmeans}
-\alias{augment_coord.kmeans}
+\alias{augmentation_u.kmeans}
+\alias{augmentation_v.kmeans}
+\alias{augmentation_coord.kmeans}
 \title{Functionality for k-means clustering ('kmeans') objects}
 \usage{
 \method{as_tbl_ord}{kmeans}(x)
@@ -22,11 +22,11 @@
 
 \method{recover_coord}{kmeans}(x)
 
-\method{augment_u}{kmeans}(x)
+\method{augmentation_u}{kmeans}(x)
 
-\method{augment_v}{kmeans}(x)
+\method{augmentation_v}{kmeans}(x)
 
-\method{augment_coord}{kmeans}(x)
+\method{augmentation_coord}{kmeans}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
