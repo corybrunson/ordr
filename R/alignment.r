@@ -1,5 +1,8 @@
-#' Align one ordination to another of the same cases or variables
+#' Alignment of ordinations
 #' 
+#' Align one ordination to another having the same cases or variables.
+#' 
+
 #' Depending on the method of ordination, its interpretation may not depend on 
 #' the signs, the order, or the orientation of the coordinates. 
 #' \code{negate_to}, \code{permute_to}, and \code{rotate_to} take advantage of 

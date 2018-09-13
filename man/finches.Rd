@@ -3,7 +3,7 @@
 \name{finches}
 \alias{finches}
 \title{Site-species occurrence data for finches on the Galapagos islands}
-\format{A \link[tibble]{tibble}.}
+\format{A \code{\link{data.frame}}.}
 \source{
 Sanderson J.G. (2000). Testing Ecological Patterns: A Well-Known
   Algorithm from Computer Science Aids the Evaulation of Species
@@ -17,8 +17,7 @@ format in the \strong{\link[cooccur]{cooccur}} package.
 
 data(finches)
 
-finches_mat <- as.matrix(dplyr::select(finches, -Island))
-rownames(finches_mat) <- finches$Island
+finches_mat <- t(finches)
 
 finches_lsvd <- as_tbl_ord(logisticSVD(finches_mat))
 ggbiplot(finches_lsvd, aes(x = LSC1, y = LSC2)) +

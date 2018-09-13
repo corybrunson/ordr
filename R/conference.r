@@ -1,8 +1,16 @@
-# https://stats.stackexchange.com/a/141755/68743
+#' Confer inertia to factors of an ordination
+#'
+#' Re-distribute inertia between cases and variables in an ordination.
+#'
 
-#' Re-distribute inertia between cases and variables in an ordination
-#' 
-#' Note: In case \code{inertia} is a rectangular matrix, may only be able to 
+#' The \emph{inertia} of a singular value decomposition (eigendecomposition)
+#' consists in the squares of the singular values (eigenvalues), and represents
+#' the variance, likened to the physical inertia, in the directions of the
+#' orthogonal singular vectors (eigenvectors). Read more about conferring
+#' inertia between cases and variables at
+#' \url{https://stats.stackexchange.com/a/141755/68743}.
+#'
+#' Note: In case \code{inertia} is a rectangular matrix, may only be able to
 #' confer it entirely to the cases (\code{p = 1}) or entirely to the variables
 #' (\code{p = 0}).
 #' 

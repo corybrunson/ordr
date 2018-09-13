@@ -60,3 +60,4 @@ Collate:
     'reconstruct.r'
     'stat-layers.r'
     'tbl-ord.r'
+    'tidybiplot.r'

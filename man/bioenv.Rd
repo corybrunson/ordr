@@ -3,7 +3,7 @@
 \name{bioenv}
 \alias{bioenv}
 \title{Multivariate marine biological and environmental data}
-\format{A \link{tibble}.}
+\format{A \code{\link[tibble]{tibble}}.}
 \source{
 Greenacre M.J. (2010). \emph{Biplots in Practice}, pp. 25--26. 
   Fundacion BBVA.

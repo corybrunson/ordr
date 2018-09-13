@@ -1,12 +1,9 @@
 
-data(country_differences, country_attributes)
+data(country_differences)
 
-x1 <- as.matrix(dplyr::select(country_differences, -Countries))
-rownames(x1) <- dplyr::pull(country_differences, Countries)
-
-(m <- cmdscale(x1, k = 2))
+(m <- cmdscale(country_differences, k = 2))
 (b1 <- as_tbl_ord(m))
-(p <- prcomp(x1))
+(p <- prcomp(country_differences))
 
 \dontrun{
 (b1_p <- align_to(b1, p$x, "u"))

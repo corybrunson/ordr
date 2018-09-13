@@ -6,7 +6,7 @@
 \alias{country_differences}
 \alias{country_attributes}
 \title{Student ratings of similarities and attributes of 13 countries}
-\format{\link[tibble]{tibble}s.}
+\format{\code{\link[=matrix]{Matrices}}.}
 \source{
 Greenacre M.J. (2010). \emph{Biplots in Practice}, pp. 43--44,46. 
   Fundacion BBVA.

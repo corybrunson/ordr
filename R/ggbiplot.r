@@ -1,18 +1,27 @@
-#' Build a biplot object from ordination data wrapped as a \code{tbl_ord}
+#' Biplots following the grammar of graphics
+#' 
+#' Build a biplot visualization from ordination data wrapped as a
+#' \code{tbl_ord}.
 #' 
 
 #' \code{ggbiplot} produces a \strong{\link[ggplot2]{ggplot2}} object from a 
 #' \code{\link{tbl_ord}} object. The baseline object is the default unadorned
 #' \code{ggplot} object \code{p} with the following differences:
+
 #' \itemize{
-#'   \item \code{p$mapping} is augmented with \code{.matrix = .matrix},
-#'         which expects either \code{.matrix = "u"} or \code{.matrix = "v"}
-#'         from the biplot layers.
-#'   \item \code{p$coordinates} is set to \code{\link[ggplot2]{coord_fixed}}
-#'         in order to faithfully render the geometry of an ordination.
+
+#'   \item \code{p$mapping} is augmented with \code{.matrix = .matrix}, which
+#'   expects either \code{.matrix = "u"} or \code{.matrix = "v"} from the biplot
+#'   layers.
+
+#'   \item \code{p$coordinates} is set to \code{\link[ggplot2]{coord_fixed}} in
+#'   order to faithfully render the geometry of an ordination.
+
 #'   \item \code{p} is assigned the class \code{"ggbiplot"}. This serves no
-#'         functional purpose currently.
+#'   functional purpose currently.
+
 #' }
+
 #' Furthermore, the user may feed single integer values to the \code{x} and 
 #' \code{y} aesthetics, which will be interpreted as the corresponding
 #' coordinates in the ordination.

@@ -55,7 +55,9 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[=borders]{borders()}}.}
 }
 \description{
-Render plot elements for one matrix of an ordination
+These stats merely tell \code{\link[ggplot2]{ggplot}} which factor of an
+ordination to pull data from for a plot layer. They are invoked internally by
+the various \code{geom_*_*} layers.
 }
 \section{Biplot layers}{
 

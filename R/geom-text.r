@@ -122,7 +122,6 @@ geom_u_label <- function(
   mapping = NULL, data = NULL, position = "identity",
   ...,
   parse = FALSE,
-  check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -136,7 +135,6 @@ geom_u_label <- function(
     inherit.aes = inherit.aes,
     params = list(
       parse = parse,
-      check_overlap = check_overlap,
       na.rm = na.rm,
       ...
     )
@@ -149,7 +147,6 @@ geom_v_label <- function(
   mapping = NULL, data = NULL, position = "identity",
   ...,
   parse = FALSE,
-  check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -163,7 +160,6 @@ geom_v_label <- function(
     inherit.aes = inherit.aes,
     params = list(
       parse = parse,
-      check_overlap = check_overlap,
       na.rm = na.rm,
       ...
     )
@@ -177,7 +173,6 @@ geom_biplot_label <- function(
   .matrix = "u",
   ...,
   parse = FALSE,
-  check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -191,7 +186,6 @@ geom_biplot_label <- function(
     inherit.aes = inherit.aes,
     params = list(
       parse = parse,
-      check_overlap = check_overlap,
       na.rm = na.rm,
       ...
     )

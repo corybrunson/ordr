@@ -6,7 +6,7 @@
 \alias{recover_conference.default}
 \alias{get_conference}
 \alias{confer_inertia}
-\title{Re-distribute inertia between cases and variables in an ordination}
+\title{Confer inertia to factors of an ordination}
 \usage{
 recover_conference(x)
 
@@ -25,7 +25,17 @@ the variables. If length 2, the proportions of the inertia assigned to the
 cases and to the variables, respectively.}
 }
 \description{
-Note: In case \code{inertia} is a rectangular matrix, may only be able to 
+Re-distribute inertia between cases and variables in an ordination.
+}
+\details{
+The \emph{inertia} of a singular value decomposition (eigendecomposition)
+consists in the squares of the singular values (eigenvalues), and represents
+the variance, likened to the physical inertia, in the directions of the
+orthogonal singular vectors (eigenvectors). Read more about conferring
+inertia between cases and variables at
+\url{https://stats.stackexchange.com/a/141755/68743}.
+
+Note: In case \code{inertia} is a rectangular matrix, may only be able to
 confer it entirely to the cases (\code{p = 1}) or entirely to the variables
 (\code{p = 0}).
 }

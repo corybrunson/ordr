@@ -64,13 +64,9 @@ wrapper that adds the class attribute.)
 
 # reproduce Exhibit 4.2 in Greenacre (2010)
 
-# format `country_differences` as a matrix
-data(country_differences)
-x1 <- as.matrix(dplyr::select(country_differences, -Countries))
-rownames(x1) <- dplyr::pull(country_differences, Countries)
-
 # multidimensional scaling setup
-(m <- cmdscale(x1, k = 2))
+data(country_differences)
+(m <- cmdscale(country_differences, k = 2))
 (b <- as_tbl_ord(m))
 (d <- fortify(b))
 
@@ -87,13 +83,10 @@ ggbiplot(b, aes(x = 2, y = 1)) +
 
 # reproduce Exhibit 4.5 in Greenacre (2010)
 
-# format `country_attributes` as a matrix
 data(country_attributes)
-x2 <- as.matrix(dplyr::select(country_attributes, -Countries))
-rownames(x2) <- dplyr::pull(country_differences, Countries)
 
 # regress the attributes on the plotting dimensions and annotate the biplot
-fit <- as_tbl_ord(lm(x2 ~ get_u(b)))
+fit <- as_tbl_ord(lm(country_attributes ~ get_u(b)))
 gg +
   geom_v_vector(data = fit) +
   geom_v_text_radiate(data = fit, hjust = .3, aes(label = .name))

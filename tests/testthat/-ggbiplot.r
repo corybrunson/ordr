@@ -2,10 +2,7 @@ library(tidybiplot)
 context("grammatical biplotting")
 
 data(country_differences)
-m <- country_differences %>%
-  select(-Countries) %>%
-  as.matrix()
-f <- cmdscale(m, k = 3)
+f <- cmdscale(country_differences, k = 3)
 b <- as_tbl_ord(f)
 n <- nrow(get_u(b))
 

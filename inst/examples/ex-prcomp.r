@@ -84,14 +84,12 @@ ggbiplot(b3_symm, aes(label = .name)) +
 
 # load data and store (square rots of) weights
 data(country_attributes)
-x <- as.matrix(country_attributes[, -1])
-w_cas <- sqrt(1 / nrow(x))
-w_var <- sqrt(1 / ncol(x))
+w_cas <- sqrt(1 / nrow(country_attributes))
+w_var <- sqrt(1 / ncol(country_attributes))
 
 # method 1: use `prcomp()` directly
-# weights are missing from `x`, hence from inertia of `b`
-rownames(x) <- country_attributes$Countries
-(m <- prcomp(x))
+# weights are missing from `country_attributes`, hence from inertia of `b`
+(m <- prcomp(country_attributes))
 (b <- as_tbl_ord(m))
 
 # form biplot: move variable weights to case scores matrix
@@ -110,8 +108,9 @@ ggbiplot(b_cov, aes(label = .name)) +
   geom_v_text_repel(aes(x = PC1 * w_cas, y = PC2 * w_cas))
 
 # method 2: scale `x` by case and variable weights before SVD
+x <- country_attributes
 x <- diag(w_cas, nrow(x)) %*% x %*% diag(w_var, ncol(x))
-dimnames(x) <- list(country_attributes$Countries, names(country_attributes)[-1])
+dimnames(x) <- dimnames(country_attributes)
 (m <- prcomp(x))
 (b <- as_tbl_ord(m))
 

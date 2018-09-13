@@ -1,4 +1,2 @@
-finches <- here::here("data-raw", "finch.txt") %>%
-  read.csv(row.names = 1) %>%
-  t() %>% as_tibble(rownames = "Island")
+finches <- read.csv(here::here("data-raw", "finch.txt"), row.names = 1)
 devtools::use_data(finches)

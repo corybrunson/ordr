@@ -10,7 +10,7 @@
 \alias{permutation_to}
 \alias{rotation_to}
 \alias{un_align}
-\title{Align one ordination to another of the same cases or variables}
+\title{Alignment of ordinations}
 \usage{
 align_to(x, y, .matrix)
 
@@ -42,6 +42,9 @@ according to dot product magnitudes (angles closest to straight, whether
 \eqn{0} or \eqn{\pi}, versus angles closest to \eqn{0}).}
 }
 \description{
+Align one ordination to another having the same cases or variables.
+}
+\details{
 Depending on the method of ordination, its interpretation may not depend on 
 the signs, the order, or the orientation of the coordinates. 
 \code{negate_to}, \code{permute_to}, and \code{rotate_to} take advantage of 
@@ -55,14 +58,11 @@ decomposition method of point cloud registration (Bellekens &al, 2014).
 }
 \examples{
 
-data(country_differences, country_attributes)
+data(country_differences)
 
-x1 <- as.matrix(dplyr::select(country_differences, -Countries))
-rownames(x1) <- dplyr::pull(country_differences, Countries)
-
-(m <- cmdscale(x1, k = 2))
+(m <- cmdscale(country_differences, k = 2))
 (b1 <- as_tbl_ord(m))
-(p <- prcomp(x1))
+(p <- prcomp(country_differences))
 
 \dontrun{
 (b1_p <- align_to(b1, p$x, "u"))
