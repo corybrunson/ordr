@@ -60,15 +60,23 @@ recover_conference.prcomp <- function(x) {
 #' @rdname methods-prcomp
 #' @export
 augmentation_u.prcomp <- function(x) {
-  tibble(
-    .name = rownames(x[["x"]])
-  )
+  .name <- rownames(x[["x"]])
+  if (is.null(.name)) {
+    tibble_pole(nrow(x[["x"]]))
+  } else {
+    tibble(.name = .name)
+  }
 }
 
 #' @rdname methods-prcomp
 #' @export
 augmentation_v.prcomp <- function(x) {
-  res <- tibble(.name = rownames(x[["rotation"]]))
+  .name <- rownames(x[["rotation"]])
+  res <- if (is.null(.name)) {
+    tibble_pole(nrow(x[["rotation"]]))
+  } else {
+    tibble(.name = .name)
+  }
   if (class(x[["center"]]) == "numeric") {
     res <- dplyr::bind_cols(res, .center = x[["center"]])
   }

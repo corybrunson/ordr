@@ -68,11 +68,16 @@ augmentation_u.princomp <- function(x) {
 #' @rdname methods-princomp
 #' @export
 augmentation_v.princomp <- function(x) {
-  tibble(
-    .name = colnames(x[["loadings"]]),
+  .name <- rownames(x[["loadings"]])
+  res <- if (is.null(.name)) {
+    tibble_pole(nrow(x[["x"]]))
+  } else {
+    tibble(.name = .name)
+  }
+  bind_cols(res, tibble(
     .center = x[["center"]],
     .scale = x[["scale"]]
-  )
+  ))
 }
 
 #' @rdname methods-princomp
