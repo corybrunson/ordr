@@ -1,4 +1,4 @@
-#' @title \strong{tidybiplot} package
+#' @title \strong{ordr} package
 #'
 #' @description Handling, manipulating, and visualizing ordination models in a
 #'   \strong{tidyverse} framework
@@ -38,5 +38,5 @@
 #' }
 
 #' @docType package
-#' @name tidybiplot
+#' @name ordr
 NULL

@@ -1,4 +1,4 @@
-Package: tidybiplot
+Package: ordr
 Title: A 'tidyverse' extension for ordinations and biplots
 Version: 0.0.0.9000
 Authors@R: c(
@@ -57,8 +57,8 @@ Collate:
     'methods-prcomp.r'
     'methods-princomp.r'
     'methods-svd.r'
+    'ordr.r'
     'plot.r'
     'reconstruct.r'
     'stat-layers.r'
     'tbl-ord.r'
-    'tidybiplot.r'

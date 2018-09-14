@@ -1,4 +1,4 @@
 library(testthat)
-library(tidybiplot)
+library(ordr)
 
-test_check("tidybiplot")
+test_check("ordr")

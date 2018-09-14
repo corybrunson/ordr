@@ -1,4 +1,4 @@
-library(tidybiplot)
+library(ordr)
 context("grammatical biplotting")
 
 data(country_differences)

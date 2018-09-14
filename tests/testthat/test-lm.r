@@ -1,4 +1,4 @@
-library(tidybiplot)
+library(ordr)
 context("Classes 'lm', 'glm', and 'mlm'")
 
 data(bioenv)

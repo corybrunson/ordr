@@ -1,9 +1,9 @@
 
 <!-- edit README.rmd -->
-tidybiplot
-==========
+ordr
+====
 
-**tidybiplot** is designed to integrate ordination analysis and biplot visualization into a [**tidyverse**](https://github.com/tidyverse/tidyverse) workflow.
+**ordr** is designed to integrate ordination analysis and biplot visualization into a [**tidyverse**](https://github.com/tidyverse/tidyverse) workflow.
 
 motivation
 ----------
@@ -14,22 +14,25 @@ The matrix decomposition usually results in at least two matrices, say *U* and *
 
 An extensive range of ordination techniques are already implemented in R, from classical multidimensional scaling (`stats::cmdscale()`) and principal components analysis (`stats::prcomp()` and `stats::princomp()`) in the **stats** package distributed with base R, across widely-used implementations of linear discriminant analysis (`MASS::lda()`) and correspondence analysis (`ca::ca()`) in general-use statistical packages, to highly specialized packages that implement cutting-edge techniques or tailor conventional techniques to difficult settings. These implementations come with their own conventions, tailored to the research communities that produced them, and it would be unweildy and probably even unhelpful to try to consolidate them.
 
-Rather, **tidybiplot** provides a streamlined process by which the outputs of these methods---in particular, the matrix factors into which the original data are approximately decomposed and the artificial coordinates they share---can be inspected, annotated, tidied, and visualized. On this last point the package may be especially helpful, since most biplot implementations provide limited customizability. The package is designed to follow the syntactic and grammatical conventions of the **tidyverse**, so that users familiar with a tidy workflow can more easily and quickly integrate ordination models into their practice.
+Rather, **ordr** provides a streamlined process by which the outputs of these methods---in particular, the matrix factors into which the original data are approximately decomposed and the artificial coordinates they share---can be inspected, annotated, tidied, and visualized. On this last point the package may be especially helpful, since most biplot implementations provide limited customizability. The package is designed to follow the syntactic and grammatical conventions of the **tidyverse**, so that users familiar with a tidy workflow can more easily and quickly integrate ordination models into their practice.
 
 usage
 -----
 
 ### installation
 
-**tidybiplot** remains under development and is not scheduled for a CRAN release. For now, it can be installed using [**devtools**](https://github.com/r-lib/devtools):
+**ordr** remains under development and is not scheduled for a CRAN release. For now, it can be installed using [**devtools**](https://github.com/r-lib/devtools):
 
 ``` r
-devtools::install_bitbucket("corybrunson/tidybiplot")
-#> Downloading bitbucket repo corybrunson/tidybiplot@master
-#> Installation failed: Unauthorized (HTTP 401).
+devtools::install_github("corybrunson/ordr")
+#> Downloading GitHub repo corybrunson/ordr@master
+#> from URL https://api.github.com/repos/corybrunson/ordr/zipball/master
+#> Installation failed: Not Found (404)
 ```
 
 ### example
+
+    #> Updating collate directive in  /Users/corybrunson/Documents/CQM0/repos/tidybiplot/DESCRIPTION
 
 Here is an example workflow that begins with a conventional PCA, proceeds through several methods provided for `tbl_ord` objects, and produces a biplot as a `ggplot` object:
 

@@ -1,4 +1,4 @@
-library(tidybiplot)
+library(ordr)
 context("classical multi-dimensional scaling")
 
 data(country_differences)
