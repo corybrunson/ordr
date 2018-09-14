@@ -19,7 +19,7 @@
 #' @export
 set_annotation_u <- function(x, annot) {
   stopifnot(is.data.frame(annot))
-  protect_vars <- c(get_coord(x), names(augment_u(x)), ".matrix")
+  protect_vars <- c(get_coord(x), ".matrix")
   attr(x, "u_annotation") <- annot[, ! (names(annot) %in% protect_vars)]
   x
 }
@@ -28,7 +28,7 @@ set_annotation_u <- function(x, annot) {
 #' @export
 set_annotation_v <- function(x, annot) {
   stopifnot(is.data.frame(annot))
-  protect_vars <- c(get_coord(x), names(augment_u(x)), ".matrix")
+  protect_vars <- c(get_coord(x), ".matrix")
   attr(x, "v_annotation") <- annot[, ! (names(annot) %in% protect_vars)]
   x
 }
@@ -43,11 +43,23 @@ set_annotation_factor <- function(x, annot, .matrix) {
 
 #' @rdname annotation
 #' @export
-annotation_u <- function(x) attr(x, "u_annotation")
+annotation_u <- function(x) {
+  if (is.null(attr(x, "u_annotation"))) {
+    tibble_pole(nrow(get_u(x)))
+  } else {
+    attr(x, "u_annotation")
+  }
+}
 
 #' @rdname annotation
 #' @export
-annotation_v <- function(x) attr(x, "v_annotation")
+annotation_v <- function(x) {
+  if (is.null(attr(x, "v_annotation"))) {
+    tibble_pole(nrow(get_v(x)))
+  } else {
+    attr(x, "v_annotation")
+  }
+}
 
 annotation_factor <- function(x, .matrix) {
   switch(

@@ -1,4 +1,3 @@
-# http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html
 
 x <- scale(mtcars)
 (m <- kmeans(x, 3))

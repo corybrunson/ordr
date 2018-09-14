@@ -10,7 +10,6 @@
 #' @example inst/examples/ex-lm.r
 #' @example inst/examples/ex-glm.r
 
-#' @importFrom broom augment
 #' @importFrom stats model.frame influence cooks.distance predict
 
 #' @rdname methods-lm

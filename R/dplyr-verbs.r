@@ -4,11 +4,10 @@
 #' \code{tbl_ord}. The raw verbs are not defined for \code{tbl_ord}s; instead,
 #' each verb has two analogues, corresponding to the two matrix factors. They
 #' each rely on a common workhorse function, which takes the composition of the
-#' \strong{dplyr} verb with \code{\link{fortify}}, applied to the factor,
-#' removes any variables corresponding to coordinates or produced by
-#' \code{augment_*} (see \code{\link{augmentation}}), and only then assigns it
-#' as the new \code{"*_annotation"} attribute of \code{.data} (see
-#' \code{\link{annotation}}).
+#' \strong{dplyr} verb with \code{annotation_*}, applied to the factor,
+#' removes any variables corresponding to coordinates or already annotated, and
+#' only then assigns it as the new \code{"*_annotation"} attribute of
+#' \code{.data} (see \code{\link{annotation}}).
 #' 
 
 #' @name dplyr-verbs
@@ -20,7 +19,7 @@
 #' @template param-matrix
 
 pull_factor <- function(.data, var = -1, .matrix) {
-  pull(fortify(.data, .matrix = .matrix), !! enquo(var))
+  pull(annotation_factor(.data, .matrix = .matrix), !! enquo(var))
 }
 #' @rdname dplyr-verbs
 #' @export
@@ -34,7 +33,7 @@ pull_v <- function(.data, var = -1) {
 }
 
 rename_factor <- function(.data, ..., .matrix) {
-  att <- rename(fortify(.data, .matrix = .matrix), ...)
+  att <- rename(annotation_factor(.data, .matrix = .matrix), ...)
   set_annotation_factor(.data, att, .matrix = .matrix)
 }
 #' @rdname dplyr-verbs
@@ -45,7 +44,7 @@ rename_u <- function(.data, ...) rename_factor(.data, ..., .matrix = "u")
 rename_v <- function(.data, ...) rename_factor(.data, ..., .matrix = "v")
 
 select_factor <- function(.data, ..., .matrix) {
-  att <- select(fortify(.data, .matrix = .matrix), ...)
+  att <- select(annotation_factor(.data, .matrix = .matrix), ...)
   set_annotation_factor(.data, att, .matrix = .matrix)
 }
 #' @rdname dplyr-verbs
@@ -56,7 +55,7 @@ select_u <- function(.data, ...) select_factor(.data, ..., .matrix = "u")
 select_v <- function(.data, ...) select_factor(.data, ..., .matrix = "v")
 
 mutate_factor <- function(.data, ..., .matrix) {
-  att <- mutate(fortify(.data, .matrix = .matrix), ...)
+  att <- mutate(annotation_factor(.data, .matrix = .matrix), ...)
   set_annotation_factor(.data, att, .matrix = .matrix)
 }
 #' @rdname dplyr-verbs
@@ -67,7 +66,7 @@ mutate_u <- function(.data, ...) mutate_factor(.data, ..., .matrix = "u")
 mutate_v <- function(.data, ...) mutate_factor(.data, ..., .matrix = "v")
 
 transmute_factor <- function(.data, ..., .matrix) {
-  att <- transmute(fortify(.data, .matrix = .matrix), ...)
+  att <- transmute(annotation_factor(.data, .matrix = .matrix), ...)
   set_annotation_factor(.data, att, .matrix = .matrix)
 }
 #' @rdname dplyr-verbs
@@ -78,7 +77,7 @@ transmute_u <- function(.data, ...) transmute_factor(.data, ..., .matrix = "u")
 transmute_v <- function(.data, ...) transmute_factor(.data, ..., .matrix = "v")
 
 bind_cols_factor <- function(.data, ..., .matrix) {
-  att <- bind_cols(fortify(.data, .matrix = .matrix), ...)
+  att <- bind_cols(annotation_factor(.data, .matrix = .matrix), ...)
   set_annotation_factor(.data, att, .matrix = .matrix)
 }
 #' @rdname dplyr-verbs

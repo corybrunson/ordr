@@ -10,6 +10,7 @@
 \alias{augment_u}
 \alias{augment_v}
 \alias{augment_coord}
+\alias{augment.tbl_ord}
 \title{Augment information for the factors and coordinates of ordination objects}
 \usage{
 augmentation_u(x)
@@ -27,6 +28,8 @@ augment_u(x)
 augment_v(x)
 
 augment_coord(x)
+
+\method{augment}{tbl_ord}(x, ...)
 }
 \arguments{
 \item{x}{A \code{tbl_ord}, or an ordination object coercible to one.}
@@ -34,6 +37,8 @@ augment_coord(x)
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
+
+\item{...}{Additional arguments from \code{as.matrix}; ignored.}
 }
 \description{
 These functions return data associated with the cases, variables, and

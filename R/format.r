@@ -28,7 +28,7 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   uv_ann <- mapply(
     bind_cols,
     annotation_factor(x, .matrix = "uv"),
-    augmentation_factor(x, .matrix = "uv"),
+    #augmentation_factor(x, .matrix = "uv"),
     SIMPLIFY = FALSE
   )
   names(uv_ann) <- c("u", "v")
