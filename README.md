@@ -182,7 +182,9 @@ This package was originally inspired by the **ggbiplot** extention developed by 
 
 ### resources
 
+-   Gabriel KR (1971) ["The biplot graphic display of matrices with application to principal component analysis"](https://academic.oup.com/biomet/article-abstract/58/3/453/233361). *Biometrika* 58(3);453–467.
 -   Greenacre MJ (2010) [*Biplots in Practice*](http://www.multivariatestatistics.org/biplots.html).
+-   Hubert L, Meulman J, and Heiser W (2006) ["Two Purposes for Matrix Factorization: A Historical Appraisal"](https://epubs.siam.org/doi/abs/10.1137/S0036144598340483). *SIAM Review* 42(1);68–82.
 -   Palmer M [*Ordination Methods for Ecologists*](http://ordination.okstate.edu/).
 -   Podani J (2000) [*Introduction to the Exploration of Multivariate Biological Data*](http://ramet.elte.hu/~podani/books.html).
 -   ttnphns (2015) [*Answer to* "PCA and Correspondence analysis in their relation to Biplot"](https://stats.stackexchange.com/a/141755/68743), CrossValidated.
