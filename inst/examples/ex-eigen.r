@@ -1,4 +1,3 @@
-devtools::load_all()
 library(igraph)
 
 data(karate, package = "igraphdata")
