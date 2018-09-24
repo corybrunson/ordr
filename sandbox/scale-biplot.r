@@ -2,10 +2,14 @@
 scale_u_continuous <- function(
   name = waiver(), breaks = waiver(),
   minor_breaks = waiver(), labels = waiver(),
-  limits = NULL, expand = waiver(), oob = censor,
+  limits = NULL, expand = waiver(), oob = scales::censor,
   na.value = NA_real_, trans = "identity",
   position = "bottomleft", sec.axis = waiver()
 ) {
+  print(ls())
+  save(list = ls(), file = "temp.RData")
+  load("temp.RData")
+  
   # extract positions
   position <- match.arg(position,
                         c("bottomleft", "topleft", "topright", "bottomright"))
@@ -41,8 +45,12 @@ scale_u_continuous <- function(
   #  sc$secondary.axis <- sec.axis
   #}
   
-  # CANNOT ADD "ggproto" objects
+  # CANNOT ADD "ggproto" OBJECTS
 }
+
+# the ranges of 'U' and 'V' need to be recovered downstream of `ggbiplot()`
+# the solution probably lies with "contexts"
+# follow `dplyr::n()` down the rabbit hole
 
 bi_axis <- function(
   name = derive(), breaks = waiver(), labels = waiver(),
@@ -64,13 +72,18 @@ bi_axis <- function(
 scale_x_biplot <- function(
   name = waiver(), breaks = waiver(),
   minor_breaks = waiver(), labels = waiver(),
-  limits = NULL, expand = waiver(), oob = censor,
+  limits = NULL, expand = waiver(), oob = scales::censor,
   na.value = NA_real_, trans = "identity",
   position = "bottom", sec.axis = bi_axis()
 ) {
+  print(ls())
+  save(list = setdiff(ls(), "sec.axis"), file = "temp.RData")
+  load("temp.RData")
+  
   sc <- continuous_scale(
     c(
-      "x", "xmin", "xmax", "xend", "xintercept", "xmin_final", "xmax_final",
+      "x", "xmin", "xmax", "xend",
+      "xintercept", "xmin_final", "xmax_final",
       "xlower", "xmiddle", "xupper"
     ),
     "position_c", identity, name = name, breaks = breaks,

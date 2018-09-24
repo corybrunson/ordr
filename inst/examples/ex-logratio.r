@@ -36,6 +36,8 @@ ggbiplot(b, aes(label = .name)) +
   geom_v_polygon(fill = NA, linetype = "dashed", color = "brown4") +
   geom_v_text(color = "brown4", fontface = "bold")
 
+# make this a secondary axis example
+
 b <- confer_inertia(b, 1)
 ggbiplot(b, aes(label = .name)) +
   theme_bw() +
@@ -44,5 +46,3 @@ ggbiplot(b, aes(label = .name)) +
     aes(x = SV1 / 20, y = SV2 / 20),
     color = "brown4", fontface = "bold"
   )
-
-# make this a secondary axis example
