@@ -43,6 +43,7 @@ Collate:
     'geom-axis.r'
     'geom-isolines.r'
     'geom-point.r'
+    'geom-polygon.r'
     'geom-text-radiate.r'
     'geom-text.r'
     'geom-vector.r'

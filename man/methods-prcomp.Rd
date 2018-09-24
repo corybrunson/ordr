@@ -131,8 +131,8 @@ data(country_attributes)
 w_cas <- sqrt(1 / nrow(country_attributes))
 w_var <- sqrt(1 / ncol(country_attributes))
 
-# method 1: use `prcomp()` directly
-# weights are missing from `country_attributes`, hence from inertia of `b`
+# method 1: perform PCA directly
+# weights are missing from `country_attributes`, hence from inertia
 (m <- prcomp(country_attributes))
 (b <- as_tbl_ord(m))
 
@@ -151,7 +151,7 @@ ggbiplot(b_cov, aes(label = .name)) +
   geom_v_vector(aes(x = PC1 * w_cas, y = PC2 * w_cas)) +
   geom_v_text_repel(aes(x = PC1 * w_cas, y = PC2 * w_cas))
 
-# method 2: scale `x` by case and variable weights before SVD
+# method 2: scale data by case and variable weights before PCA
 x <- country_attributes
 x <- diag(w_cas, nrow(x)) \%*\% x \%*\% diag(w_var, ncol(x))
 dimnames(x) <- dimnames(country_attributes)
