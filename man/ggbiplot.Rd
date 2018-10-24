@@ -4,7 +4,8 @@
 \alias{ggbiplot}
 \title{Biplots following the grammar of graphics}
 \usage{
-ggbiplot(ordination = NULL, mapping = aes(x = 1, y = 2), ...)
+ggbiplot(ordination = NULL, mapping = aes(x = 1, y = 2),
+  sec.axes = NULL, scale.factor = NULL, ...)
 }
 \arguments{
 \item{ordination}{A \code{\link{tbl_ord}}.}
@@ -13,6 +14,8 @@ ggbiplot(ordination = NULL, mapping = aes(x = 1, y = 2), ...)
 default assigns the first two coordinates to the aesthetics \code{x} and 
 \code{y}. Other assignments must be supplied in each layer added to the 
 plot.}
+
+\item{sec.axes}{Matrix factor character to specify a secondary set of axes.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2]{ggplot}}.}
 }

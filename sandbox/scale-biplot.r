@@ -1,4 +1,77 @@
 
+# `ggbiplot(sec.axis = "u")`
+# This attempt begins with the `ggbiplot` call, from which affected layers must
+# draw.
+
+#' @rdname ggbiplot
+#' @export
+ggbiplot <- function(
+  ordination = NULL, mapping = aes(x = 1, y = 2),
+  sec.axes = NULL,
+  ...
+) {
+  # fortify `ordination` if necessary
+  ordination <- fortify(ordination, include = "all")
+  
+  # augment `mapping`, if necessary, with default coordinates
+  mapping <- ordinate_aes(ordination, mapping)
+  
+  # if `sec.axes` is specified, then fortify `ordination` and scale the
+  # secondary axis coordinates to match the primary axis
+  if (! is.null(sec.axes)) {
+    
+    sec.axes <- match_factor(sec.axes)
+    if (! sec.axes %in% c("u", "v")) {
+      stop("Select one matrix factor, 'u' or 'v', to scale to secondary axes.")
+    }
+    pri.axes <- setdiff(c("u", "v"), sec.axes)
+    
+    .coords <- str_sub(as.character(mapping[c("x", "y")]), start = 2)
+    
+    p_lim <- apply(ordination[ordination$.matrix == pri.axes, .coords], 2, max)
+    s_lim <- apply(ordination[ordination$.matrix == sec.axes, .coords], 2, max)
+    scale_factor <- min(p_lim / s_lim)
+    
+    ordination <- mutate_at(
+      ordination,
+      vars(.coords),
+      funs(ifelse(.matrix == sec.axes, . * scale_factor, .))
+    )
+    
+  }
+  
+  # conventional `ggplot()` call
+  p <- ggplot(
+    data = ordination,
+    mapping = mapping,
+    environment = parent.frame(),
+    ...
+  )
+  # .matrix aesthetic indicating whether to plot cases or variables
+  .matrix_aes <- list(.matrix = rlang::quo(!! rlang::sym(".matrix")))
+  class(.matrix_aes) <- "uneval"
+  p$mapping <- c(p$mapping, .matrix_aes)
+  
+  # if `sec.axes` is specified, then add secondary axes
+  if (! is.null(sec.axes)) {
+    p <- p + scale_x_continuous(sec.axis = sec_axis(~ . / scale_factor))
+    p <- p + scale_y_continuous(sec.axis = sec_axis(~ . / scale_factor))
+  }
+  
+  # synchronize the scales AND BREAKS of the axes
+  p$coordinates <- coord_fixed()
+  
+  # add class label for potential future use
+  class(p) <- c("ggbiplot", class(p))
+  
+  p
+}
+
+
+# `scale_*_continuous()`
+# This is an alternate approach to the one below, introducing both `x` and `y`
+# scales for one of the matrix factors.
+
 scale_u_continuous <- function(
   name = waiver(), breaks = waiver(),
   minor_breaks = waiver(), labels = waiver(),
@@ -52,13 +125,18 @@ scale_u_continuous <- function(
 # the solution probably lies with "contexts"
 # follow `dplyr::n()` down the rabbit hole
 
-bi_axis <- function(
+
+# `biplot_sec_axis()`
+# The below approach, using a new secondary axis function, fails because
+# transforming the axis has no effect on the plot elements.
+
+biplot_sec_axis <- function(
   name = derive(), breaks = waiver(), labels = waiver(),
-  scale = ...
+  scale = 1
 ) {
-  if (!is.formula(trans)) {
-    stop("transformation for secondary axes must be a formula", call. = FALSE)
-  }
+  #if (! inherits(trans, "formula")) {
+  #  stop("transformation for secondary axes must be a formula", call. = FALSE)
+  #}
   trans <- as.formula(paste("~.*", scale))
   ggproto(
     NULL, AxisSecondary,
@@ -74,7 +152,7 @@ scale_x_biplot <- function(
   minor_breaks = waiver(), labels = waiver(),
   limits = NULL, expand = waiver(), oob = scales::censor,
   na.value = NA_real_, trans = "identity",
-  position = "bottom", sec.axis = bi_axis()
+  position = "bottom", sec.axis = biplot_sec_axis(scale = 5)
 ) {
   print(ls())
   save(list = setdiff(ls(), "sec.axis"), file = "temp.RData")
@@ -91,12 +169,7 @@ scale_x_biplot <- function(
     expand = expand, oob = oob, na.value = na.value, trans = trans,
     guide = "none", position = position, super = ScaleContinuousPosition
   )
-  if (! is.waive(sec.axis)) {
-    if (is.formula(sec.axis)) sec.axis <- sec_axis(sec.axis)
-    if (! is.sec_axis(sec.axis)) {
-      stop("Secondary axes must be specified using 'sec_axis()'")
-    }
-    sc$secondary.axis <- sec.axis
-  }
-  sc
+  
+  set_sec_axis(sec.axis, sc)
+  
 }

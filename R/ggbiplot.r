@@ -36,29 +36,74 @@
 #'   default assigns the first two coordinates to the aesthetics \code{x} and 
 #'   \code{y}. Other assignments must be supplied in each layer added to the 
 #'   plot.
+#' @param sec.axes Matrix factor character to specify a secondary set of axes.
 #' @param ... Additional arguments passed to \code{\link[ggplot2]{ggplot}}.
 
 #' @rdname ggbiplot
 #' @export
 ggbiplot <- function(
   ordination = NULL, mapping = aes(x = 1, y = 2),
+  sec.axes = NULL, scale.factor = NULL,
   ...
 ) {
+  # fortify `ordination` if necessary
+  ordination <- fortify(ordination, include = "all")
+  
+  # augment `mapping`, if necessary, with default coordinates
   mapping <- ordinate_aes(ordination, mapping)
   
-  # conventional ggplot call, fortifying ordination if necessary
+  # if `sec.axes` is specified, then fortify `ordination` and scale the
+  # secondary axis coordinates to match the primary axis
+  if (! is.null(sec.axes)) {
+    
+    sec.axes <- match_factor(sec.axes)
+    if (! sec.axes %in% c("u", "v")) {
+      stop("Select one matrix factor, 'u' or 'v', to scale to secondary axes.")
+    }
+    pri.axes <- setdiff(c("u", "v"), sec.axes)
+    
+    .coords <- str_sub(as.character(mapping[c("x", "y")]), start = 2)
+    
+    if (is.null(scale.factor)) {
+      ps_lim <- lapply(c(pri.axes, sec.axes), function(.m) {
+        apply(
+          ordination[ordination$.matrix == .m, .coords],
+          2, function(x) c(min(x), max(x))
+        )
+      })
+      scale.factor <- min(ps_lim[[1]] / ps_lim[[2]])
+    }
+    
+    ordination <- mutate_at(
+      ordination,
+      vars(.coords),
+      funs(ifelse(.matrix == sec.axes, . * scale.factor, .))
+    )
+    
+  }
+  
+  # conventional `ggplot()` call
   p <- ggplot(
-    data = fortify(ordination, include = "all"),
+    data = ordination,
     mapping = mapping,
     environment = parent.frame(),
     ...
   )
   # .matrix aesthetic indicating whether to plot cases or variables
-  .matrix_aes <- list(.matrix = rlang::quo(!!rlang::sym(".matrix")))
+  .matrix_aes <- list(.matrix = rlang::quo(!! rlang::sym(".matrix")))
   class(.matrix_aes) <- "uneval"
   p$mapping <- c(p$mapping, .matrix_aes)
+  
+  # if `sec.axes` is specified, then add secondary axes
+  if (! is.null(sec.axes)) {
+    # THIS APPROACH IS VULNERABLE TO DOWNSTREAM `x` AND `y` SCALES
+    p <- p + scale_x_continuous(sec.axis = sec_axis(~ . / scale.factor))
+    p <- p + scale_y_continuous(sec.axis = sec_axis(~ . / scale.factor))
+  }
+  
   # synchronize the scales AND BREAKS of the axes
   p$coordinates <- coord_fixed()
+  
   # add class label for potential future use
   class(p) <- c("ggbiplot", class(p))
   

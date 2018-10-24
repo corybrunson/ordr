@@ -36,13 +36,23 @@ ggbiplot(b, aes(label = .name)) +
   geom_v_polygon(fill = NA, linetype = "dashed", color = "brown4") +
   geom_v_text(color = "brown4", fontface = "bold")
 
-# make this a secondary axis example
-
+# using a secondary axis
 b <- confer_inertia(b, 1)
 ggbiplot(b, aes(label = .name)) +
-  theme_bw() +
   geom_u_text(color = "darkgreen") +
-  geom_v_text(
-    aes(x = SV1 / 20, y = SV2 / 20),
-    color = "brown4", fontface = "bold"
-  )
+  geom_v_polygon(fill = NA, linetype = "dashed", color = "brown4") +
+  geom_v_text(color = "brown4", fontface = "bold")
+ggbiplot(b, aes(label = .name), sec.axes = "v") +
+  geom_u_text(color = "darkgreen") +
+  geom_v_polygon(fill = NA, linetype = "dashed", color = "brown4") +
+  geom_v_text(color = "brown4", fontface = "bold")
+ggbiplot(b, aes(label = .name), sec.axes = "u") +
+  geom_u_text(color = "darkgreen") +
+  geom_v_polygon(fill = NA, linetype = "dashed", color = "brown4") +
+  geom_v_text(color = "brown4", fontface = "bold")
+ggbiplot(b, aes(label = .name), sec.axes = "u", scale.factor = 10) +
+  geom_u_text(color = "darkgreen") +
+  geom_v_polygon(fill = NA, linetype = "dashed", color = "brown4") +
+  geom_v_text(color = "brown4", fontface = "bold")
+# NOTE: SECONDARY AXES ARE ADDED INTERNALLY USING `scale_*_continuous()`;
+# THEY WILL BE REPLACED BY DOWNSTREAM `x` AND `y` SCALES.
