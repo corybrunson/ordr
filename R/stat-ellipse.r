@@ -6,21 +6,18 @@
 #' @template ggbiplot-layers
 
 #' @name ggbiplot-ellipse
-#' @inheritParams ggplot2::layer
+#' @inheritParams ggplot2::stat_ellipse
 #' @param ... Additional arguments passed to \code{\link[ggplot2]{layer}}.
+#' @example inst/examples/ex-iris.r
 
 #' @rdname ggbiplot-ellipse
 #' @usage NULL
 #' @export
 StatUEllipse <- ggproto(
-  "StatUEllipse", "StatEllipse",
+  "StatUEllipse", StatEllipse,
   
-  compute_group = function(data, scales, type = "t", level = 0.95,
-                           segments = 51, na.rm = FALSE) {
-    data <- data[data$.matrix == "u", , drop = FALSE]
-    
-    calculate_ellipse(data = data, vars = c("x", "y"), type = type,
-                      level = level, segments = segments)
+  setup_data = function(data, params) {
+    data[data$.matrix == "u", -match(".matrix", names(data)), drop = FALSE]
   }
 )
 
@@ -28,14 +25,10 @@ StatUEllipse <- ggproto(
 #' @usage NULL
 #' @export
 StatVEllipse <- ggproto(
-  "StatVEllipse", "StatEllipse",
+  "StatVEllipse", StatEllipse,
   
-  compute_group = function(data, scales, type = "t", level = 0.95,
-                           segments = 51, na.rm = FALSE) {
-    data <- data[data$.matrix == "v", , drop = FALSE]
-    
-    calculate_ellipse(data = data, vars = c("x", "y"), type = type,
-                      level = level, segments = segments)
+  setup_data = function(data, params) {
+    data[data$.matrix == "v", -match(".matrix", names(data)), drop = FALSE]
   }
 )
 
@@ -96,5 +89,3 @@ stat_v_ellipse <- function(
     )
   )
 }
-
-calculate_ellipse <- ggplot2:::calculate_ellipse

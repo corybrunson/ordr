@@ -63,5 +63,6 @@ Collate:
     'plot.r'
     'reconstruct.r'
     'stat-chull.r'
+    'stat-ellipse.r'
     'stat-matrix.r'
     'tbl-ord.r'
