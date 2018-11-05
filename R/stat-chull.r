@@ -27,9 +27,10 @@ StatChull <- ggproto(
 #' @rdname ggbiplot-chull
 #' @export
 stat_chull <- function(
-  mapping = NULL, data = NULL, geom = "polygon",
-  position = "identity", show.legend = NA, 
-  inherit.aes = TRUE, ...
+  mapping = NULL, data = NULL, geom = "polygon", position = "identity",
+  show.legend = NA, 
+  inherit.aes = TRUE,
+  ...
 ) {
   layer(
     data = data,
@@ -75,9 +76,10 @@ StatVChull <- ggproto(
 #' @rdname ggbiplot-chull
 #' @export
 stat_u_chull <- function(
-  mapping = NULL, data = NULL, geom = "polygon",
-  position = "identity", show.legend = NA, 
-  inherit.aes = TRUE, ...
+  mapping = NULL, data = NULL, geom = "polygon", position = "identity",
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
 ) {
   layer(
     data = data,
@@ -97,9 +99,10 @@ stat_u_chull <- function(
 #' @rdname ggbiplot-chull
 #' @export
 stat_v_chull <- function(
-  mapping = NULL, data = NULL, geom = "polygon",
-  position = "identity", show.legend = NA, 
-  inherit.aes = TRUE, ...
+  mapping = NULL, data = NULL, geom = "polygon", position = "identity",
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
 ) {
   layer(
     data = data,
