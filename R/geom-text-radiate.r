@@ -61,7 +61,7 @@ GeomTextRadiate <- ggproto(
 #' @rdname ggbiplot-text-radiate
 #' @export
 geom_u_text_radiate <- function(
-  mapping = NULL, data = NULL, position = "identity",
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   parse = FALSE,
   check_overlap = FALSE,
@@ -71,7 +71,7 @@ geom_u_text_radiate <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = "u",
+    stat = u_stat(stat),
     geom = GeomTextRadiate,
     position = position,
     show.legend = show.legend,
@@ -88,7 +88,7 @@ geom_u_text_radiate <- function(
 #' @rdname ggbiplot-text-radiate
 #' @export
 geom_v_text_radiate <- function(
-  mapping = NULL, data = NULL, position = "identity",
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   parse = FALSE,
   check_overlap = FALSE,
@@ -98,7 +98,7 @@ geom_v_text_radiate <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = "v",
+    stat = v_stat(stat),
     geom = GeomTextRadiate,
     position = position,
     show.legend = show.legend,
@@ -115,7 +115,7 @@ geom_v_text_radiate <- function(
 #' @rdname ggbiplot-text-radiate
 #' @export
 geom_biplot_text_radiate <- function(
-  mapping = NULL, data = NULL, position = "identity",
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "v",
   ...,
   parse = FALSE,
@@ -126,7 +126,7 @@ geom_biplot_text_radiate <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = .matrix,
+    stat = matrix_stat(.matrix, stat),
     geom = GeomTextRadiate,
     position = position,
     show.legend = show.legend,

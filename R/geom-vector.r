@@ -67,7 +67,7 @@ GeomVector <- ggproto(
 #' @rdname ggbiplot-vector
 #' @export
 geom_u_vector <- function(
-  mapping = NULL, data = NULL, position = "identity",
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
   arrow = default_arrow,
   ...,
   na.rm = FALSE,
@@ -76,7 +76,7 @@ geom_u_vector <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = "u",
+    stat = u_stat(stat),
     geom = GeomVector,
     position = position,
     show.legend = show.legend,
@@ -92,7 +92,7 @@ geom_u_vector <- function(
 #' @rdname ggbiplot-vector
 #' @export
 geom_v_vector <- function(
-  mapping = NULL, data = NULL, position = "identity",
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
   arrow = default_arrow,
   ...,
   na.rm = FALSE,
@@ -101,7 +101,7 @@ geom_v_vector <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = "v",
+    stat = v_stat(stat),
     geom = GeomVector,
     position = position,
     show.legend = show.legend,
@@ -117,7 +117,7 @@ geom_v_vector <- function(
 #' @rdname ggbiplot-vector
 #' @export
 geom_biplot_vector <- function(
-  mapping = NULL, data = NULL, position = "identity",
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "v", arrow = default_arrow,
   ...,
   na.rm = FALSE,
@@ -126,7 +126,7 @@ geom_biplot_vector <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = .matrix,
+    stat = matrix_stat(.matrix, stat),
     geom = GeomVector,
     position = position,
     show.legend = show.legend,

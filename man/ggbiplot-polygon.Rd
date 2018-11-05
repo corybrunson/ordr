@@ -7,13 +7,15 @@
 \alias{geom_biplot_polygon}
 \title{Render polygons around ordinates}
 \usage{
-geom_u_polygon(mapping = NULL, data = NULL, position = "identity",
-  ..., na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+geom_u_polygon(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", ..., na.rm = FALSE, show.legend = NA,
+  inherit.aes = TRUE)
 
-geom_v_polygon(mapping = NULL, data = NULL, position = "identity",
-  ..., na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+geom_v_polygon(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", ..., na.rm = FALSE, show.legend = NA,
+  inherit.aes = TRUE)
 
-geom_biplot_polygon(mapping = NULL, data = NULL,
+geom_biplot_polygon(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", .matrix = "u", ..., na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE)
 }
@@ -36,6 +38,9 @@ data. All objects will be fortified to produce a data frame. See
 A \code{function} will be called with a single argument,
 the plot data. The return value must be a \code{data.frame.}, and
 will be used as the layer data.}
+
+\item{stat}{The statistical transformation to use on the data for this
+layer, as a string.}
 
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}

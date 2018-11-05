@@ -14,28 +14,30 @@
 \title{Render isolines for a subject or variable}
 \format{An object of class \code{GeomTicks} (inherits from \code{GeomSegment}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.}
 \usage{
-geom_u_ticks(mapping = NULL, data = NULL, position = "identity",
-  family = NULL, ids = 1L, by = 1, ticks.length = 0.05, ...,
-  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
-
-geom_v_ticks(mapping = NULL, data = NULL, position = "identity",
-  family = NULL, ids = 1L, by = 1, ticks.length = 0.05, ...,
-  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
-
-geom_biplot_ticks(mapping = NULL, data = NULL, position = "identity",
-  .matrix = "v", family = NULL, ids = 1L, by = 1,
+geom_u_ticks(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", family = NULL, ids = 1L, by = 1,
   ticks.length = 0.05, ..., na.rm = FALSE, show.legend = NA,
   inherit.aes = TRUE)
 
-geom_u_isolines(mapping = NULL, data = NULL, position = "identity",
-  family = NULL, ids = 1L, by = 1, ..., na.rm = FALSE,
+geom_v_ticks(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", family = NULL, ids = 1L, by = 1,
+  ticks.length = 0.05, ..., na.rm = FALSE, show.legend = NA,
+  inherit.aes = TRUE)
+
+geom_biplot_ticks(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", .matrix = "v", family = NULL, ids = 1L,
+  by = 1, ticks.length = 0.05, ..., na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE)
 
-geom_v_isolines(mapping = NULL, data = NULL, position = "identity",
-  family = NULL, ids = 1L, by = 1, ..., na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE)
+geom_u_isolines(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", family = NULL, ids = 1L, by = 1, ...,
+  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
 
-geom_biplot_isolines(mapping = NULL, data = NULL,
+geom_v_isolines(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", family = NULL, ids = 1L, by = 1, ...,
+  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+
+geom_biplot_isolines(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", .matrix = "v", family = NULL, ids = 1L,
   by = 1, ..., na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
 }
@@ -58,6 +60,9 @@ data. All objects will be fortified to produce a data frame. See
 A \code{function} will be called with a single argument,
 the plot data. The return value must be a \code{data.frame.}, and
 will be used as the layer data.}
+
+\item{stat}{The statistical transformation to use on the data for this
+layer, as a string.}
 
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}

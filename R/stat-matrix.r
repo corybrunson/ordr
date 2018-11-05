@@ -78,3 +78,12 @@ stat_v <- function(
     )
   )
 }
+
+matrix_stat <- function(.matrix, stat) {
+  .matrix <- match_factor(.matrix)
+  if (stat == "identity") return(.matrix)
+  stringr::str_c(.matrix, stat, sep = "_")
+}
+
+u_stat <- function(stat) matrix_stat("u", stat)
+v_stat <- function(stat) matrix_stat("v", stat)

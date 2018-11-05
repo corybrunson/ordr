@@ -2,10 +2,11 @@
 data(smoke, package = "ca")
 
 (m <- ca::ca(smoke))
-(b <- as_tbl_ord(m))
-(d <- fortify(b))
 
 plot(m, map = "rowprincipal", col = c("green", "brown"))
+
+(b <- as_tbl_ord(m))
+(d <- fortify(b))
 
 # confer singular values to reproduce the row-principal biplot
 b <- confer_inertia(b, "rowprincipal")
@@ -28,14 +29,15 @@ ggbiplot(b, aes(label = .name)) +
 data(benthos)
 
 (m <- ca::ca(benthos))
-(b <- as_tbl_ord(m))
-(d <- fortify(b))
 
 plot(
   m, map = "colprincipal",
   col = c("brown", "darkgreen"),
   labels = c(0, 1), col.lab = c("brown", "darkgreen")
 )
+
+(b <- as_tbl_ord(m))
+(d <- fortify(b))
 
 # reproduce Exhibit 8.3
 b %>%
@@ -55,6 +57,6 @@ b %>%
   geom_u_vector(color = "brown", arrow = NULL) +
   geom_u_point(aes(size = mass), color = "brown", shape = 17) +
   scale_size_continuous(range = c(1, 4), guide = "none") +
-  #geom_u_text(stat = "chull", color = "brown", nudge_x = .075, nudge_y = .05) +
+  geom_u_text(stat = "chull", color = "brown", nudge_x = .075, nudge_y = .05) +
   geom_v_point(color = "darkgreen") +
   geom_v_text_repel(color = "darkgreen", min.segment.length = 2)

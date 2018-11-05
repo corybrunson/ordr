@@ -106,7 +106,7 @@ GeomTicks <- ggproto(
 #' @rdname ggbiplot-isolines
 #' @export
 geom_u_ticks <- function(
-  mapping = NULL, data = NULL, position = "identity",
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
   family = NULL, ids = 1L, by = 1,
   ticks.length = .05,
   ...,
@@ -116,7 +116,7 @@ geom_u_ticks <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = "u",
+    stat = u_stat(stat),
     geom = GeomTicks,
     position = position,
     show.legend = show.legend,
@@ -135,7 +135,7 @@ geom_u_ticks <- function(
 #' @rdname ggbiplot-isolines
 #' @export
 geom_v_ticks <- function(
-  mapping = NULL, data = NULL, position = "identity",
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
   family = NULL, ids = 1L, by = 1,
   ticks.length = .05,
   ...,
@@ -145,7 +145,7 @@ geom_v_ticks <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = "v",
+    stat = v_stat(stat),
     geom = GeomTicks,
     position = position,
     show.legend = show.legend,
@@ -164,7 +164,7 @@ geom_v_ticks <- function(
 #' @rdname ggbiplot-isolines
 #' @export
 geom_biplot_ticks <- function(
-  mapping = NULL, data = NULL, position = "identity",
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "v", family = NULL, ids = 1L, by = 1,
   ticks.length = .05,
   ...,
@@ -174,7 +174,7 @@ geom_biplot_ticks <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = .matrix,
+    stat = matrix_stat(.matrix, stat),
     geom = GeomTicks,
     position = position,
     show.legend = show.legend,
@@ -257,7 +257,7 @@ GeomIsolines <- ggproto(
 #' @rdname ggbiplot-isolines
 #' @export
 geom_u_isolines <- function(
-  mapping = NULL, data = NULL, position = "identity",
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
   family = NULL, ids = 1L, by = 1,
   ...,
   na.rm = FALSE,
@@ -266,7 +266,7 @@ geom_u_isolines <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = "u",
+    stat = u_stat(stat),
     geom = GeomIsolines,
     position = position,
     show.legend = show.legend,
@@ -284,7 +284,7 @@ geom_u_isolines <- function(
 #' @rdname ggbiplot-isolines
 #' @export
 geom_v_isolines <- function(
-  mapping = NULL, data = NULL, position = "identity",
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
   family = NULL, ids = 1L, by = 1,
   ...,
   na.rm = FALSE,
@@ -293,7 +293,7 @@ geom_v_isolines <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = "v",
+    stat = v_stat(stat),
     geom = GeomIsolines,
     position = position,
     show.legend = show.legend,
@@ -311,7 +311,7 @@ geom_v_isolines <- function(
 #' @rdname ggbiplot-isolines
 #' @export
 geom_biplot_isolines <- function(
-  mapping = NULL, data = NULL, position = "identity",
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "v", family = NULL, ids = 1L, by = 1,
   ...,
   na.rm = FALSE,
@@ -320,7 +320,7 @@ geom_biplot_isolines <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = .matrix,
+    stat = matrix_stat(.matrix, stat),
     geom = GeomIsolines,
     position = position,
     show.legend = show.legend,

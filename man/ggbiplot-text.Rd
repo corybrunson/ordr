@@ -16,54 +16,58 @@
 \alias{geom_biplot_label_repel}
 \title{Render text at ordinates}
 \usage{
-geom_u_text(mapping = NULL, data = NULL, position = "identity", ...,
-  parse = FALSE, nudge_x = 0, nudge_y = 0, check_overlap = FALSE,
-  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
-
-geom_v_text(mapping = NULL, data = NULL, position = "identity", ...,
-  parse = FALSE, nudge_x = 0, nudge_y = 0, check_overlap = FALSE,
-  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
-
-geom_biplot_text(mapping = NULL, data = NULL, position = "identity",
-  .matrix = "u", ..., parse = FALSE, nudge_x = 0, nudge_y = 0,
-  check_overlap = FALSE, na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
-
-geom_u_label(mapping = NULL, data = NULL, position = "identity", ...,
-  parse = FALSE, na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
-
-geom_v_label(mapping = NULL, data = NULL, position = "identity", ...,
-  parse = FALSE, na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
-
-geom_biplot_label(mapping = NULL, data = NULL, position = "identity",
-  .matrix = "u", ..., parse = FALSE, na.rm = FALSE,
+geom_u_text(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", ..., parse = FALSE, nudge_x = 0,
+  nudge_y = 0, check_overlap = FALSE, na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE)
 
-geom_u_text_repel(mapping = NULL, data = NULL, position = "identity",
-  ..., parse = FALSE, na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
+geom_v_text(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", ..., parse = FALSE, nudge_x = 0,
+  nudge_y = 0, check_overlap = FALSE, na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
 
-geom_v_text_repel(mapping = NULL, data = NULL, position = "identity",
-  ..., parse = FALSE, na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
-
-geom_biplot_text_repel(mapping = NULL, data = NULL,
+geom_biplot_text(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", .matrix = "u", ..., parse = FALSE,
-  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+  nudge_x = 0, nudge_y = 0, check_overlap = FALSE, na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
 
-geom_u_label_repel(mapping = NULL, data = NULL,
+geom_u_label(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", ..., parse = FALSE, na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE)
 
-geom_v_label_repel(mapping = NULL, data = NULL,
+geom_v_label(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", ..., parse = FALSE, na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
+
+geom_biplot_label(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", .matrix = "u", ..., parse = FALSE,
+  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+
+geom_u_text_repel(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", ..., parse = FALSE, na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
+
+geom_v_text_repel(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", ..., parse = FALSE, na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
+
+geom_biplot_text_repel(mapping = NULL, data = NULL,
+  stat = "identity", position = "identity", .matrix = "u", ...,
+  parse = FALSE, na.rm = FALSE, show.legend = NA,
+  inherit.aes = TRUE)
+
+geom_u_label_repel(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", ..., parse = FALSE, na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
+
+geom_v_label_repel(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", ..., parse = FALSE, na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE)
 
 geom_biplot_label_repel(mapping = NULL, data = NULL,
-  position = "identity", .matrix = "u", ..., parse = FALSE,
-  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+  stat = "identity", position = "identity", .matrix = "u", ...,
+  parse = FALSE, na.rm = FALSE, show.legend = NA,
+  inherit.aes = TRUE)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or
@@ -84,6 +88,9 @@ data. All objects will be fortified to produce a data frame. See
 A \code{function} will be called with a single argument,
 the plot data. The return value must be a \code{data.frame.}, and
 will be used as the layer data.}
+
+\item{stat}{The statistical transformation to use on the data for this
+layer, as a string.}
 
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
