@@ -17,16 +17,17 @@
 \title{Render text at ordinates}
 \usage{
 geom_u_text(mapping = NULL, data = NULL, position = "identity", ...,
-  parse = FALSE, check_overlap = FALSE, na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE)
+  parse = FALSE, nudge_x = 0, nudge_y = 0, check_overlap = FALSE,
+  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
 
 geom_v_text(mapping = NULL, data = NULL, position = "identity", ...,
-  parse = FALSE, check_overlap = FALSE, na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE)
+  parse = FALSE, nudge_x = 0, nudge_y = 0, check_overlap = FALSE,
+  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
 
 geom_biplot_text(mapping = NULL, data = NULL, position = "identity",
-  .matrix = "u", ..., parse = FALSE, check_overlap = FALSE,
-  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+  .matrix = "u", ..., parse = FALSE, nudge_x = 0, nudge_y = 0,
+  check_overlap = FALSE, na.rm = FALSE, show.legend = NA,
+  inherit.aes = TRUE)
 
 geom_u_label(mapping = NULL, data = NULL, position = "identity", ...,
   parse = FALSE, na.rm = FALSE, show.legend = NA,
@@ -89,7 +90,8 @@ a call to a position adjustment function.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2]{layer}}.}
 
-\item{parse, check_overlap}{See \code{\link[ggplot2]{geom_text}}.}
+\item{parse, check_overlap, nudge_x, nudge_y}{See
+\code{\link[ggplot2]{geom_text}}.}
 
 \item{na.rm}{Passed to \code{\link[ggplot2]{layer}}s.}
 

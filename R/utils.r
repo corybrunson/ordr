@@ -1,4 +1,8 @@
 
+#' @importFrom magrittr %>%
+#' @export
+magrittr::`%>%`
+
 as_tbl_ord_default <- function(x) {
   class(x) <- c("tbl_ord", class(x))
   x
@@ -12,7 +16,7 @@ tbl_ord_factors <- c(
   subjects = "u", measures = "v",
   scores = "u", loadings = "v",
   rows = "u", columns = "v", cols = "v",
-  rowprincipal = "v", colprincipal = "u", # consistency with `ca::plot.ca()`
+  rowprincipal = "u", colprincipal = "v",
   both = "uv", symmetric = "uv"
 )
 match_factor <- function(x) {

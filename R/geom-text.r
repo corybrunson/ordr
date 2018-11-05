@@ -31,7 +31,8 @@
 #' @importFrom ggrepel GeomTextRepel GeomLabelRepel
 #' @inheritParams ggplot2::layer
 #' @template param-layer
-#' @param parse,check_overlap See \code{\link[ggplot2]{geom_text}}.
+#' @param parse,check_overlap,nudge_x,nudge_y See
+#'   \code{\link[ggplot2]{geom_text}}.
 #' @template param-matrix
 
 #' @rdname ggbiplot-text
@@ -40,10 +41,18 @@ geom_u_text <- function(
   mapping = NULL, data = NULL, position = "identity",
   ...,
   parse = FALSE,
+  nudge_x = 0, nudge_y = 0,
   check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
+  if (! missing(nudge_x) || !missing(nudge_y)) {
+    if (! missing(position)) {
+      stop("Specify either `position` or `nudge_x`/`nudge_y`", call. = FALSE)
+    }
+    position <- position_nudge(nudge_x, nudge_y)
+  }
+  
   layer(
     data = data,
     mapping = mapping,
@@ -67,10 +76,18 @@ geom_v_text <- function(
   mapping = NULL, data = NULL, position = "identity",
   ...,
   parse = FALSE,
+  nudge_x = 0, nudge_y = 0,
   check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
+  if (! missing(nudge_x) || !missing(nudge_y)) {
+    if (! missing(position)) {
+      stop("Specify either `position` or `nudge_x`/`nudge_y`", call. = FALSE)
+    }
+    position <- position_nudge(nudge_x, nudge_y)
+  }
+  
   layer(
     data = data,
     mapping = mapping,
@@ -95,10 +112,18 @@ geom_biplot_text <- function(
   .matrix = "u",
   ...,
   parse = FALSE,
+  nudge_x = 0, nudge_y = 0,
   check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
+  if (! missing(nudge_x) || !missing(nudge_y)) {
+    if (! missing(position)) {
+      stop("Specify either `position` or `nudge_x`/`nudge_y`", call. = FALSE)
+    }
+    position <- position_nudge(nudge_x, nudge_y)
+  }
+  
   layer(
     data = data,
     mapping = mapping,

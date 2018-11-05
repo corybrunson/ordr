@@ -46,7 +46,7 @@ will be used as the layer data.}
 a call to a position adjustment function.}
 
 \item{arrow}{Specification for arrows, as created by
-\code{\link[grid]{arrow}}.}
+\code{\link[grid]{arrow}}, or else \code{NULL} for no arrows.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2]{layer}}.}
 

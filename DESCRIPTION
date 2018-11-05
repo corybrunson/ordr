@@ -14,6 +14,7 @@ Depends:
     ggplot2
 Imports:
     generics,
+    magrittr,
     tibble,
     broom,
     tidyr,
@@ -61,5 +62,5 @@ Collate:
     'ordr.r'
     'plot.r'
     'reconstruct.r'
-    'stat-layers.r'
+    'stat-matrix.r'
     'tbl-ord.r'

@@ -22,6 +22,7 @@
 #' @name augmentation
 #' @include accessors.r
 #' @inheritParams accessors
+#' @param data Passed to \code{\link[generics]{augment}}; currently ignored.
 
 #' @rdname augmentation
 #' @export
@@ -84,10 +85,15 @@ generics::augment
 
 #' @rdname augmentation
 #' @export
-augment.tbl_ord <- function(x, ...) {
-  aug_u <- bind_cols(annotation_u(x), augmentation_u(x))
-  x <- set_annotation_u(x, aug_u)
-  aug_v <- bind_cols(annotation_v(x), augmentation_v(x))
-  x <- set_annotation_v(x, aug_v)
+augment.tbl_ord <- function(x, data, .matrix = "uv", ...) {
+  .matrix <- match_factor(.matrix)
+  if (grepl("u", .matrix)) {
+    aug_u <- bind_cols(annotation_u(x), augmentation_u(x))
+    x <- set_annotation_u(x, aug_u)
+  }
+  if (grepl("v", .matrix)) {
+    aug_v <- bind_cols(annotation_v(x), augmentation_v(x))
+    x <- set_annotation_v(x, aug_v)
+  }
   x
 }

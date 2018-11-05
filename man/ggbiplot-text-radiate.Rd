@@ -48,9 +48,11 @@ a call to a position adjustment function.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2]{layer}}.}
 
-\item{parse}{See \code{\link[ggplot2]{geom_text}}.}
+\item{parse}{See
+\code{\link[ggplot2]{geom_text}}.}
 
-\item{check_overlap}{See \code{\link[ggplot2]{geom_text}}.}
+\item{check_overlap}{See
+\code{\link[ggplot2]{geom_text}}.}
 
 \item{na.rm}{Passed to \code{\link[ggplot2]{layer}}s.}
 

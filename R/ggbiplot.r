@@ -32,11 +32,17 @@
 #' @name ggbiplot
 #' @import ggplot2
 #' @param ordination A \code{\link{tbl_ord}}.
-#' @param mapping List of default aesthetic mappings to use for the biplot. The 
-#'   default assigns the first two coordinates to the aesthetics \code{x} and 
-#'   \code{y}. Other assignments must be supplied in each layer added to the 
+#' @param mapping List of default aesthetic mappings to use for the biplot. The
+#'   default assigns the first two coordinates to the aesthetics \code{x} and
+#'   \code{y}. Other assignments must be supplied in each layer added to the
 #'   plot.
 #' @param sec.axes Matrix factor character to specify a secondary set of axes.
+#' @param scale.factor Numeric value used to scale the secondary axes against
+#'   the primary axes; ignored if \code{sec.axes} is not specified.
+#' @param scale_u,scale_v Either the character name of a numeric variable in
+#'   \code{get_*(ordination)} or a numeric vector of length
+#'   \code{nrow(get_*(ordination))}, used to scale the coordinates of \eqn{U} or
+#'   \eqn{V}, respectively.
 #' @param ... Additional arguments passed to \code{\link[ggplot2]{ggplot}}.
 
 #' @rdname ggbiplot
@@ -44,6 +50,7 @@
 ggbiplot <- function(
   ordination = NULL, mapping = aes(x = 1, y = 2),
   sec.axes = NULL, scale.factor = NULL,
+  scale_u = NULL, scale_v = NULL,
   ...
 ) {
   # fortify `ordination` if necessary
@@ -51,6 +58,14 @@ ggbiplot <- function(
   
   # augment `mapping`, if necessary, with default coordinates
   mapping <- ordinate_aes(ordination, mapping)
+  
+  # scale 'U' or 'V' as indicated by `scale_u` and `scale_v`
+  if (! is.null(scale_u)) {
+    ordination <- scale_ord(ordination, "u", mapping, scale_u)
+  }
+  if (! is.null(scale_v)) {
+    ordination <- scale_ord(ordination, "v", mapping, scale_v)
+  }
   
   # if `sec.axes` is specified, then fortify `ordination` and scale the
   # secondary axis coordinates to match the primary axis
@@ -62,7 +77,7 @@ ggbiplot <- function(
     }
     pri.axes <- setdiff(c("u", "v"), sec.axes)
     
-    .coords <- str_sub(as.character(mapping[c("x", "y")]), start = 2)
+    .coords <- stringr::str_sub(as.character(mapping[c("x", "y")]), start = 2)
     
     if (is.null(scale.factor)) {
       ps_lim <- lapply(c(pri.axes, sec.axes), function(.m) {
@@ -74,10 +89,10 @@ ggbiplot <- function(
       scale.factor <- min(ps_lim[[1]] / ps_lim[[2]])
     }
     
-    ordination <- mutate_at(
+    ordination <- dplyr::mutate_at(
       ordination,
-      vars(.coords),
-      funs(ifelse(.matrix == sec.axes, . * scale.factor, .))
+      dplyr::vars(.coords),
+      dplyr::funs(ifelse(ordination$.matrix == sec.axes, . * scale.factor, .))
     )
     
   }
@@ -137,4 +152,14 @@ ordinate_aes <- function(ordination, mapping) {
   }
   class(mapping) <- "uneval"
   mapping
+}
+
+# use `.m` to avoid conflict with '.matrix' column in `ordination`
+scale_ord <- function(ordination, .m, mapping, scale) {
+  if (is.character(scale)) scale <- ordination[[scale]]
+  dplyr::mutate_at(
+    ordination,
+    dplyr::vars(stringr::str_remove(as.character(mapping[c("x", "y")]), "^~")),
+    dplyr::funs(ifelse(ordination$.matrix == .m, . * scale, .))
+  )
 }

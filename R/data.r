@@ -1,3 +1,4 @@
+
 #' Site-species occurrence data for finches on the Galapagos islands
 #' 
 #' These data are taken from Sanderson (2000). They are available in a different
@@ -48,3 +49,17 @@ NULL
 #' @rdname countries
 #' @usage data(country_attributes)
 #' @format NULL
+NULL
+
+#' Marine species from sea-bed (benthic) samples
+#'
+#' Counts of 92 benthic species at 13 sites in the North Sea following an oil
+#' exploration.
+#'
+#' @format A \code{\link[=matrix]{matrix}}.
+#' @keywords datasets
+#' @source Greenacre M.J. (2010). \emph{Biplots in Practice}. Fundacion BBVA.
+#'   \url{https://www.fbbva.es/microsite/multivariate-statistics/data.html}
+#' @name benthos
+#' @example inst/examples/ex-ca.r
+NULL

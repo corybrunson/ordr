@@ -26,7 +26,7 @@
 #' @template param-layer
 #' @template param-matrix
 #' @param arrow Specification for arrows, as created by
-#'   \code{\link[grid]{arrow}}.
+#'   \code{\link[grid]{arrow}}, or else \code{NULL} for no arrows.
 
 #' @rdname ggbiplot-vector
 #' @usage NULL
@@ -54,7 +54,7 @@ GeomVector <- ggproto(
       warning("Vectors are not yet tailored to non-linear coordinates.")
     }
     # reverse ends of `arrow`
-    arrow$ends <- c(2L, 1L, 3L)[arrow$ends]
+    if (! is.null(arrow)) arrow$ends <- c(2L, 1L, 3L)[arrow$ends]
     
     GeomSegment$draw_panel(
       data = data, panel_params = panel_params, coord = coord,

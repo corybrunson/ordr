@@ -22,3 +22,10 @@ country_attributes <- read.delim(
 rownames(country_attributes) <- country_attributes$Countries
 country_attributes <- as.matrix(country_attributes[, -1])
 devtools::use_data(country_attributes)
+
+# 'benthos' data set
+# https://www.fbbva.es/microsite/multivariate-statistics/data.html
+benthos <- as.data.frame(readxl::read_xls(here::here("data-raw/benthos.xls")))
+rownames(benthos) <- unlist(benthos[, 1])
+benthos <- as.matrix(benthos[, -1])
+devtools::use_data(benthos)
