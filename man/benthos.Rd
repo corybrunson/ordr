@@ -24,6 +24,7 @@ plot(m, map = "rowprincipal", col = c("green", "brown"))
 (d <- fortify(b))
 
 # confer singular values to reproduce the row-principal biplot
+set.seed(999291)
 b <- confer_inertia(b, "rowprincipal")
 ggbiplot(b, aes(label = .name)) +
   theme_bw() +
@@ -33,6 +34,7 @@ ggbiplot(b, aes(label = .name)) +
   geom_v_text_repel(color = "brown")
 
 # the column-principal biplot, for comparison
+set.seed(861282)
 b <- confer_inertia(b, "colprincipal")
 ggbiplot(b, aes(label = .name)) +
   theme_bw() +
@@ -63,6 +65,7 @@ b \%>\%
   geom_v_text(color = "darkgreen")
 
 # reproduce Exhibit 8.4
+set.seed(668286)
 b \%>\%
   augment(.matrix = "u") \%>\%
   transmute_u(mass = .mass, sqrt_mass = sqrt(.mass)) \%>\%

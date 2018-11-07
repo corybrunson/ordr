@@ -27,6 +27,7 @@ iris_pca %>%
   geom_v_vector(color = "#222222")
 
 # symmetric biplot
+set.seed(58319)
 iris_pca %>%
   ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
   theme_bw() +

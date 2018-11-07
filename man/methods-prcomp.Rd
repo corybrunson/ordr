@@ -105,6 +105,7 @@ ggbiplot(b3) +
   geom_v_vector(aes(x = PC1 / s, y = PC2 / s))
 
 # effect of conferring inertia (using centered and scaled data)
+set.seed(739806)
 get_conference(b3)
 ggbiplot(b3, aes(label = .name)) +
   geom_u_point() +
@@ -137,6 +138,7 @@ w_var <- sqrt(1 / ncol(country_attributes))
 (b <- as_tbl_ord(m))
 
 # form biplot: move variable weights to case scores matrix
+set.seed(004321)
 ggbiplot(b, aes(label = .name)) +
   theme_bw() +
   geom_u_text(aes(x = PC1 * w_var, y = PC2 * w_var)) +
@@ -144,6 +146,7 @@ ggbiplot(b, aes(label = .name)) +
   geom_v_text_repel(aes(x = PC1 / w_var, y = PC2 / w_var))
 
 # covariance biplot: move case weights to variable loadings matrix
+set.seed(418382)
 b_cov <- confer_inertia(b, c(0, 1))
 ggbiplot(b_cov, aes(label = .name)) +
   theme_bw() +
@@ -159,6 +162,7 @@ dimnames(x) <- dimnames(country_attributes)
 (b <- as_tbl_ord(m))
 
 # form and covariance biplots: un-weight the left and right singular vectors
+set.seed(309130)
 ggbiplot(b, aes(label = .name)) +
   theme_bw() +
   geom_u_text(aes(x = PC1 / w_cas, y = PC2 / w_cas)) +

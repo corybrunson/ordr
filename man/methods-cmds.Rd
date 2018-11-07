@@ -99,6 +99,7 @@ gg +
   geom_v_text_radiate(data = fortify(fit, "v"), hjust = .3, aes(label = .name))
 
 dat <- fortify_v(fit)
+set.seed(267481)
 gg +
   geom_v_vector(data = fit) +
   ggrepel::geom_text_repel(data = dat, aes(label = .name))

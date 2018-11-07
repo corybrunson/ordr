@@ -53,10 +53,8 @@ stat_chull <- function(
 StatUChull <- ggproto(
   "StatUChull", StatChull,
   
-  compute_group = function(data, scales) {
-    data <- data[data$.matrix == "u", , drop = FALSE]
-    data <- data[chull(data$x, data$y), , drop = FALSE]
-    data
+  setup_data = function(data, params) {
+    data[data$.matrix == "u", -match(".matrix", names(data)), drop = FALSE]
   }
 )
 
@@ -66,10 +64,8 @@ StatUChull <- ggproto(
 StatVChull <- ggproto(
   "StatVChull", StatChull,
   
-  compute_group = function(data, scales) {
-    data <- data[data$.matrix == "v", , drop = FALSE]
-    data <- data[chull(data$x, data$y), , drop = FALSE]
-    data
+  setup_data = function(data, params) {
+    data[data$.matrix == "v", -match(".matrix", names(data)), drop = FALSE]
   }
 )
 
