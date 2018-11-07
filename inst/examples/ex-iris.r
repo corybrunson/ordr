@@ -13,6 +13,7 @@ iris_pca %>%
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   geom_u_point() +
+  stat_u_center(size = 3, shape = "triangle") +
   stat_u_ellipse() +
   geom_v_vector(color = "#222222")
 
@@ -33,6 +34,7 @@ iris_pca %>%
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   geom_u_point() +
+  stat_u_center(size = 3, shape = "triangle") +
   stat_u_ellipse() +
   geom_v_vector(color = "#222222") +
   geom_v_text_repel(aes(label = measure), color = "#222222")
