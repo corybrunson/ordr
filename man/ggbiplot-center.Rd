@@ -9,20 +9,41 @@
 \alias{StatVCenter}
 \alias{stat_u_center}
 \alias{stat_v_center}
-\title{Compute geometric centers for ordination factors}
+\alias{StatStar}
+\alias{stat_star}
+\alias{StatUStar}
+\alias{StatVStar}
+\alias{stat_u_star}
+\alias{stat_v_star}
+\title{Compute geometric centers and spreads for ordination factors}
 \format{An object of class \code{StatCenter} (inherits from \code{Stat}, \code{ggproto}, \code{gg}) of length 3.}
 \usage{
 stat_center(mapping = NULL, data = NULL, geom = "point",
   position = "identity", show.legend = NA, inherit.aes = TRUE, ...,
-  fun = "mean")
+  fun.data = NULL, fun.center = NULL, fun.min = NULL,
+  fun.max = NULL, fun.args = list())
 
 stat_u_center(mapping = NULL, data = NULL, geom = "point",
   position = "identity", show.legend = NA, inherit.aes = TRUE, ...,
-  fun = "mean")
+  fun.data = NULL, fun.center = NULL, fun.min = NULL,
+  fun.max = NULL, fun.args = list())
 
 stat_v_center(mapping = NULL, data = NULL, geom = "point",
   position = "identity", show.legend = NA, inherit.aes = TRUE, ...,
-  fun = "mean")
+  fun.data = NULL, fun.center = NULL, fun.min = NULL,
+  fun.max = NULL, fun.args = list())
+
+stat_star(mapping = NULL, data = NULL, geom = "segment",
+  position = "identity", show.legend = NA, inherit.aes = TRUE, ...,
+  fun.data = NULL, fun.center = NULL, fun.args = list())
+
+stat_u_star(mapping = NULL, data = NULL, geom = "segment",
+  position = "identity", show.legend = NA, inherit.aes = TRUE, ...,
+  fun.data = NULL, fun.center = NULL, fun.args = list())
+
+stat_v_star(mapping = NULL, data = NULL, geom = "segment",
+  position = "identity", show.legend = NA, inherit.aes = TRUE, ...,
+  fun.data = NULL, fun.center = NULL, fun.args = list())
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or
@@ -62,11 +83,13 @@ the default plot specification, e.g. \code{\link[=borders]{borders()}}.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2]{layer}}.}
 
-\item{fun}{A function that summarizes a numeric vector, or else the character
-name of a pre-defined function (\code{"mean"} or \code{"median"}).}
+\item{fun.data, fun.center, fun.min, fun.max, fun.args}{Functions and arguments
+treated as in \code{\link[ggplot2]{stat_summary}}, with \code{fun.center},
+\code{fun.min}, and \code{fun.max} behaving as \code{fun.y},
+\code{fun.ymin}, and \code{fun.ymax}.}
 }
 \description{
-Compute geometric centers for ordination factors
+Compute geometric centers and spreads for ordination factors
 }
 \section{Biplot layers}{
 
@@ -100,7 +123,7 @@ iris_pca \%>\%
   geom_u_point() +
   stat_u_center(size = 3, shape = "triangle") +
   stat_u_ellipse() +
-  geom_v_vector(color = "#222222")
+  geom_v_vector(color = "#444444")
 
 # consistently color and fill
 # NOTE: 'color' and 'fill' don't match
@@ -110,7 +133,7 @@ iris_pca \%>\%
   scale_color_brewer(type = "qual", palette = 2) +
   geom_u_point() +
   geom_polygon(aes(fill = species), alpha = .25, stat = "u_ellipse") +
-  geom_v_vector(color = "#222222")
+  geom_v_vector(color = "#444444")
 
 # symmetric biplot
 set.seed(58319)
@@ -121,7 +144,26 @@ iris_pca \%>\%
   geom_u_point() +
   stat_u_center(size = 3, shape = "triangle") +
   stat_u_ellipse() +
-  geom_v_vector(color = "#222222") +
-  geom_v_text_repel(aes(label = measure), color = "#222222")
+  geom_v_vector(color = "#444444") +
+  geom_v_text_repel(aes(label = measure), color = "#444444")
+
+# species centers and ranges
+iris_pca \%>\%
+  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
+  theme_bw() +
+  scale_color_brewer(type = "qual", palette = 2) +
+  geom_u_lineranges(fun.data = mean_cl_boot) +
+  geom_u_point(alpha = .5) +
+  geom_v_vector(color = "#444444")
+
+# species stars
+iris_pca \%>\%
+  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
+  theme_bw() +
+  scale_color_brewer(type = "qual", palette = 2) +
+  stat_u_star(alpha = .5, fun.center = "mean") +
+  stat_u_center(size = 3, fun.center = "mean") +
+  geom_u_point(alpha = .5) +
+  geom_v_vector(color = "#444444")
 }
 \keyword{datasets}

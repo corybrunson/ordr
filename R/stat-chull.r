@@ -53,9 +53,7 @@ stat_chull <- function(
 StatUChull <- ggproto(
   "StatUChull", StatChull,
   
-  setup_data = function(data, params) {
-    data[data$.matrix == "u", -match(".matrix", names(data)), drop = FALSE]
-  }
+  setup_data = setup_u_data
 )
 
 #' @rdname ggbiplot-chull
@@ -64,9 +62,7 @@ StatUChull <- ggproto(
 StatVChull <- ggproto(
   "StatVChull", StatChull,
   
-  setup_data = function(data, params) {
-    data[data$.matrix == "v", -match(".matrix", names(data)), drop = FALSE]
-  }
+  setup_data = setup_v_data
 )
 
 #' @rdname ggbiplot-chull

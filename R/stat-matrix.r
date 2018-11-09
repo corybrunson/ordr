@@ -17,9 +17,7 @@
 StatU <- ggproto(
   "StatU", StatIdentity,
   
-  setup_data = function(data, params) {
-    data[data$.matrix == "u", -match(".matrix", names(data)), drop = FALSE]
-  }
+  setup_data = setup_u_data
 )
 
 #' @rdname ggbiplot-matrix
@@ -28,9 +26,7 @@ StatU <- ggproto(
 StatV <- ggproto(
   "StatV", StatIdentity,
   
-  setup_data = function(data, params) {
-    data[data$.matrix == "v", -match(".matrix", names(data)), drop = FALSE]
-  }
+  setup_data = setup_v_data
 )
 
 #' @rdname ggbiplot-matrix
@@ -78,12 +74,3 @@ stat_v <- function(
     )
   )
 }
-
-matrix_stat <- function(.matrix, stat) {
-  .matrix <- match_factor(.matrix)
-  if (stat == "identity") return(.matrix)
-  stringr::str_c(.matrix, stat, sep = "_")
-}
-
-u_stat <- function(stat) matrix_stat("u", stat)
-v_stat <- function(stat) matrix_stat("v", stat)

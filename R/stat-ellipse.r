@@ -16,9 +16,7 @@
 StatUEllipse <- ggproto(
   "StatUEllipse", StatEllipse,
   
-  setup_data = function(data, params) {
-    data[data$.matrix == "u", -match(".matrix", names(data)), drop = FALSE]
-  }
+  setup_data = setup_u_data
 )
 
 #' @rdname ggbiplot-ellipse
@@ -27,9 +25,7 @@ StatUEllipse <- ggproto(
 StatVEllipse <- ggproto(
   "StatVEllipse", StatEllipse,
   
-  setup_data = function(data, params) {
-    data[data$.matrix == "v", -match(".matrix", names(data)), drop = FALSE]
-  }
+  setup_data = setup_v_data
 )
 
 #' @rdname ggbiplot-ellipse

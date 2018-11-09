@@ -42,6 +42,8 @@ Collate:
     'format.r'
     'fortify.r'
     'geom-axis.r'
+    'legend-draw.r'
+    'geom-intervals.r'
     'geom-isolines.r'
     'geom-point.r'
     'geom-polygon.r'

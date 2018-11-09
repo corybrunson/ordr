@@ -41,3 +41,22 @@ method_classes <- function(generic.function) {
 tibble_pole <- function(nrow) {
   as_tibble(matrix(nrow = nrow, ncol = 0))
 }
+
+# `ggbiplot` utilities
+
+matrix_stat <- function(.matrix, stat) {
+  .matrix <- match_factor(.matrix)
+  if (stat == "identity") return(.matrix)
+  stringr::str_c(.matrix, stat, sep = "_")
+}
+
+u_stat <- function(stat) matrix_stat("u", stat)
+v_stat <- function(stat) matrix_stat("v", stat)
+
+setup_u_data <- function(data, params) {
+  data[data$.matrix == "u", -match(".matrix", names(data)), drop = FALSE]
+}
+
+setup_v_data <- function(data, params) {
+  data[data$.matrix == "v", -match(".matrix", names(data)), drop = FALSE]
+}
