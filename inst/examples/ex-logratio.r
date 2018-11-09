@@ -26,32 +26,32 @@ points(gamma / sc, pch = 17, col = "brown4")
 lines(rbind(gamma, gamma[1, ]) / sc, lty = 3, lwd = 2, col = "brown4")
 
 # weighted SVD as 'tbl_ord'
-b <- augment(as_tbl_ord(d))
+(b <- augment(as_tbl_ord(d)))
 get_conference(b)
 
 b <- confer_inertia(b, 0)
 ggbiplot(b, aes(label = .name)) +
   theme_bw() +
-  geom_u_text(color = "darkgreen") +
+  geom_u_text(color = "darkgreen", size = 3) +
   geom_v_polygon(fill = NA, linetype = "dashed", color = "brown4") +
   geom_v_text(color = "brown4", fontface = "bold")
 
 # using a secondary axis
 b <- confer_inertia(b, 1)
 ggbiplot(b, aes(label = .name)) +
-  geom_u_text(color = "darkgreen") +
+  geom_u_text(color = "darkgreen", size = 3) +
   geom_v_polygon(fill = NA, linetype = "dashed", color = "brown4") +
   geom_v_text(color = "brown4", fontface = "bold")
 ggbiplot(b, aes(label = .name), sec.axes = "v") +
-  geom_u_text(color = "darkgreen") +
+  geom_u_text(color = "darkgreen", size = 3) +
   geom_v_polygon(fill = NA, linetype = "dashed", color = "brown4") +
   geom_v_text(color = "brown4", fontface = "bold")
 ggbiplot(b, aes(label = .name), sec.axes = "u") +
-  geom_u_text(color = "darkgreen") +
+  geom_u_text(color = "darkgreen", size = 3) +
   geom_v_polygon(fill = NA, linetype = "dashed", color = "brown4") +
   geom_v_text(color = "brown4", fontface = "bold")
 ggbiplot(b, aes(label = .name), sec.axes = "u", scale.factor = 10) +
-  geom_u_text(color = "darkgreen") +
+  geom_u_text(color = "darkgreen", size = 3) +
   geom_v_polygon(fill = NA, linetype = "dashed", color = "brown4") +
   geom_v_text(color = "brown4", fontface = "bold")
 # NOTE: SECONDARY AXES ARE ADDED INTERNALLY USING `scale_*_continuous()`;

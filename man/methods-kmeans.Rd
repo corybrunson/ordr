@@ -52,10 +52,9 @@ coord_sdev <- dplyr::mutate(
   augment_coord(b),
   .sdev = sqrt(.withinss / .size)
 )$.sdev
-gg <- ggbiplot(b, aes(x = 1, y = 2, color = factor(.cluster))) +
+ggbiplot(b, aes(x = 1, y = 2, color = factor(.cluster))) +
   geom_u_point(size = 3, shape = "triangle") +
   #geom_u_point(position = position_jitter(coord_sdev[1], coord_sdev[2])) +
   geom_v_vector() +
   geom_v_text_radiate(aes(label = .name))
-gg
 }
