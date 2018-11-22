@@ -20,7 +20,7 @@ recover_coord(p)
 # augment methods
 augment_u(p)
 augment_v(p)
-augment_coord(p)
+augmentation_coord(p)
 
 # wrap `p` as a 'tbl_ord' object
 b <- as_tbl_ord(p)

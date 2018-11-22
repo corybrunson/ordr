@@ -6,8 +6,7 @@
 
 #' The \code{annotation_*} and \code{set_annotation_*} functions assign and
 #' retrieve values of the \code{"*_annotation"} attributes of \code{x}, which
-#' should have the same number of rows as \code{get_*(x)}. \code{annotate_*(x)}
-#' returns \code{get_*(x)}, annotated with \code{attr(x, "*_annotation")}.
+#' should have the same number of rows as \code{get_*(x)}.
 
 #' @name annotation
 #' @include augmentation.r
@@ -69,17 +68,3 @@ annotation_factor <- function(x, .matrix) {
     uv = list(u = annotation_u(x), v = annotation_v(x))
   )
 }
-
-#' @rdname annotation
-#' @export
-annotate_u <- function(x) bind_cols(
-  as_tibble(get_u(x, align = TRUE)),
-  attr(x, "u_annotation")
-)
-
-#' @rdname annotation
-#' @export
-annotate_v <- function(x) bind_cols(
-  as_tibble(get_v(x, align = TRUE)),
-  attr(x, "v_annotation")
-)

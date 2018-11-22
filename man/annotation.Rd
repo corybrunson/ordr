@@ -6,8 +6,6 @@
 \alias{set_annotation_v}
 \alias{annotation_u}
 \alias{annotation_v}
-\alias{annotate_u}
-\alias{annotate_v}
 \title{Annotate the factors of an ordination object}
 \usage{
 set_annotation_u(x, annot)
@@ -17,10 +15,6 @@ set_annotation_v(x, annot)
 annotation_u(x)
 
 annotation_v(x)
-
-annotate_u(x)
-
-annotate_v(x)
 }
 \arguments{
 \item{x}{A \code{tbl_ord}, or an ordination object coercible to one.}
@@ -35,6 +29,5 @@ objects with additional variables, and retrieve these annotations.
 \details{
 The \code{annotation_*} and \code{set_annotation_*} functions assign and
 retrieve values of the \code{"*_annotation"} attributes of \code{x}, which
-should have the same number of rows as \code{get_*(x)}. \code{annotate_*(x)}
-returns \code{get_*(x)}, annotated with \code{attr(x, "*_annotation")}.
+should have the same number of rows as \code{get_*(x)}.
 }

@@ -36,8 +36,7 @@ fortify.tbl_ord <- function(
     if (include != "coordinates") {
       u <- dplyr::bind_cols(
         u,
-        annotation_u(model),
-        augmentation_u(model)
+        augment_annotation(model, "u")
       )
       u$.matrix <- "u"
     }
@@ -47,8 +46,7 @@ fortify.tbl_ord <- function(
     if (include != "coordinates") {
       v <- dplyr::bind_cols(
         v,
-        annotation_v(model),
-        augmentation_v(model)
+        augment_annotation(model, "v")
       )
       v$.matrix <- "v"
     }

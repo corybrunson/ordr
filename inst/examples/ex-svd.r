@@ -24,7 +24,7 @@ recover_inertia(b)
 # should include '.names'
 augment_u(b)
 augment_v(b)
-augment_coord(b)
+augmentation_coord(b)
 
 # reconstruct (approximately) the original data
 reconstruct(b)

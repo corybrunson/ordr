@@ -11,7 +11,7 @@ points(m$centers, col = 1:3, pch = 8, cex = 2)
 # within-cluster (i.e. within-dimension) standard deviation
 # (not great but suggestive)
 coord_sdev <- dplyr::mutate(
-  augment_coord(b),
+  augmentation_coord(b),
   .sdev = sqrt(.withinss / .size)
 )$.sdev
 ggbiplot(b, aes(x = 1, y = 2, color = factor(.cluster))) +

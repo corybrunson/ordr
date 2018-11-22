@@ -30,7 +30,7 @@ bioenv <- dplyr::mutate(
 (d <- tidy(b))
 
 # contributions of predictors to explained variance
-print(augment_coord(b))
+print(augmentation_coord(b))
 
 # basic linear regression biplot
 gg <- ggbiplot(b, aes(x = x, y = y))

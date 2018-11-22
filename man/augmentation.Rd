@@ -7,10 +7,9 @@
 \alias{augmentation_factor}
 \alias{augmentation.tbl_ord}
 \alias{augmentation_coord}
+\alias{augment.tbl_ord}
 \alias{augment_u}
 \alias{augment_v}
-\alias{augment_coord}
-\alias{augment.tbl_ord}
 \title{Augment information for the factors and coordinates of ordination objects}
 \usage{
 augmentation_u(x)
@@ -23,13 +22,11 @@ augmentation.tbl_ord(x, .matrix)
 
 augmentation_coord(x)
 
+\method{augment}{tbl_ord}(x, data, .matrix = "uv", ...)
+
 augment_u(x)
 
 augment_v(x)
-
-augment_coord(x)
-
-\method{augment}{tbl_ord}(x, data, .matrix = "uv", ...)
 }
 \arguments{
 \item{x}{A \code{tbl_ord}, or an ordination object coercible to one.}
@@ -54,11 +51,13 @@ case, variable, or coordinate names. Additional fields contain information
 about the cases, variables, or coordinates extracted from the original
 ordination object.
 
-The \code{augment_*} functions return the ordination coordinates data
-augmented with the result of \code{augmentation_*}. In this sense
-\code{augment_*} works like \code{\link[broom]{augment}} in extracting all
-information that can be included in a tidy summary of the components. The
-advantage of implementing separate methods for the different components is
-that more information contained in the original object becomes accessible to
-the user.
+The \code{augment_*} functions return the ordination with each or both factor
+annotated with the result of \code{augmentation_*}. In this way
+\code{augment_*} works like \code{\link[broom]{augment}} by extracting
+information for a tidy summary of the components, but it differs in returning
+an annotated \code{tbl_ord} rather than a \code{tbl_df} object. The advantage
+of implementing separate methods for the different components is that more
+information contained in the original object becomes accessible to the user.
+To achieve a result similar to that of \code{augment}, use
+\code{\link{fortify}}.
 }

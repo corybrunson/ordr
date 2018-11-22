@@ -11,13 +11,15 @@
 #' about the cases, variables, or coordinates extracted from the original
 #' ordination object.
 #'
-#' The \code{augment_*} functions return the ordination coordinates data
-#' augmented with the result of \code{augmentation_*}. In this sense
-#' \code{augment_*} works like \code{\link[broom]{augment}} in extracting all
-#' information that can be included in a tidy summary of the components. The
-#' advantage of implementing separate methods for the different components is
-#' that more information contained in the original object becomes accessible to
-#' the user.
+#' The \code{augment_*} functions return the ordination with each or both factor
+#' annotated with the result of \code{augmentation_*}. In this way
+#' \code{augment_*} works like \code{\link[broom]{augment}} by extracting
+#' information for a tidy summary of the components, but it differs in returning
+#' an annotated \code{tbl_ord} rather than a \code{tbl_df} object. The advantage
+#' of implementing separate methods for the different components is that more
+#' information contained in the original object becomes accessible to the user.
+#' To achieve a result similar to that of \code{augment}, use
+#' \code{\link{fortify}}.
 
 #' @name augmentation
 #' @include accessors.r
@@ -61,24 +63,6 @@ augmentation.tbl_ord <- function(x, .matrix) {
 #' @export
 augmentation_coord <- function(x) UseMethod("augmentation_coord")
 
-#' @rdname augmentation
-#' @export
-augment_u <- function(x) bind_cols(
-  as_tibble(get_u(x, align = TRUE)),
-  augmentation_u(x)
-)
-
-#' @rdname augmentation
-#' @export
-augment_v <- function(x) bind_cols(
-  as_tibble(get_v(x, align = TRUE)),
-  augmentation_v(x)
-)
-
-#' @rdname augmentation
-#' @export
-augment_coord <- function(x) augmentation_coord(x)
-
 #' @importFrom generics augment
 #' @export
 generics::augment
@@ -88,12 +72,46 @@ generics::augment
 augment.tbl_ord <- function(x, data, .matrix = "uv", ...) {
   .matrix <- match_factor(.matrix)
   if (grepl("u", .matrix)) {
-    aug_u <- bind_cols(annotation_u(x), augmentation_u(x))
-    x <- set_annotation_u(x, aug_u)
+    x <- augment_factor(x, "u")
   }
   if (grepl("v", .matrix)) {
-    aug_v <- bind_cols(annotation_v(x), augmentation_v(x))
-    x <- set_annotation_v(x, aug_v)
+    x <- augment_factor(x, "v")
   }
   x
 }
+
+augment_annotation <- function(x, .matrix) {
+  ann <- annotation_factor(x, .matrix)
+  aug <- augmentation_factor(x, .matrix)
+  # remove any columns of `ann` that overlap wth those of `aug`
+  match_vals <- match(ann, aug)
+  match_names <- match(names(ann), names(aug))
+  #match_vars <- ifelse(match_vals == match_names, match_vals, NA)
+  # if any augmentation names are duplicated in the annotation...
+  if (any(! is.na(match_names))) {
+    # if any duplicated names in the annotation are different from augmentation
+    match_diff <- setdiff(match_names, match_vals)
+    if (length(match_diff) > 0) {
+      warning(
+        "Removing annotated field(s) '",
+        paste(names(ann)[match_diff], collapse = "', '"),
+        "' that are reserved for augmentation."
+      )
+    }
+    ann <- ann[, -which(! is.na(match_names)), drop = FALSE]
+  }
+  bind_cols(ann, aug)
+}
+
+augment_factor <- function(x, .matrix) {
+  ann <- augment_annotation(x, .matrix)
+  set_annotation_factor(x, ann, .matrix = .matrix)
+}
+
+#' @rdname augmentation
+#' @export
+augment_u <- function(x) augment_factor(x, .matrix = "u")
+
+#' @rdname augmentation
+#' @export
+augment_v <- function(x) augment_factor(x, .matrix = "v")

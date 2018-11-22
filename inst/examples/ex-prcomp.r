@@ -27,13 +27,13 @@ range(as.matrix(x) - reconstruct(p3))
 # augment methods
 augment_u(p)
 augment_v(p)
-augment_coord(p)
+augmentation_coord(p)
 augment_u(p2)
 augment_v(p2)
-augment_coord(p2)
+augmentation_coord(p2)
 augment_u(p3)
 augment_v(p3)
-augment_coord(p3)
+augmentation_coord(p3)
 
 # wrap `p`, `p2`, and `p3` as 'tbl_ord' objects
 b <- as_tbl_ord(p)
