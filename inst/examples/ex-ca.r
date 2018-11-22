@@ -63,3 +63,29 @@ b %>%
   geom_u_text(stat = "chull", color = "brown", nudge_x = .075, nudge_y = .05) +
   geom_v_point(color = "darkgreen") +
   geom_v_text_repel(color = "darkgreen", min.segment.length = 2)
+
+# reproduce Exhibits 9.2, 9.3, 9.4, 9.6 in Greenacre (2010)
+
+data(issp_women)
+
+(m <- ca::ca(issp_women))
+(b <- augment(as_tbl_ord(m)))
+
+# Exhibit 9.2
+b %>%
+  confer_inertia(c(1, 1)) %>%
+  ggbiplot(aes(label = .name)) +
+  theme_bw() +
+  geom_u_point(color = "darkgreen") +
+  geom_u_text_repel(color = "darkgreen") +
+  geom_v_point(color = "brown", shape = 17) +
+  geom_v_text_repel(color = "brown")
+
+# Exhibit 9.3
+b %>%
+  confer_inertia("rowprincipal") %>%
+  ggbiplot(aes(label = .name)) +
+  theme_bw() +
+  geom_u_point(color = "darkgreen") +
+  geom_v_point(color = "brown", shape = 17) +
+  geom_v_text_repel(color = "brown")

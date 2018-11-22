@@ -29,3 +29,12 @@ benthos <- as.data.frame(readxl::read_xls(here::here("data-raw/benthos.xls")))
 rownames(benthos) <- unlist(benthos[, 1])
 benthos <- as.matrix(benthos[, -1])
 devtools::use_data(benthos)
+
+# 'issp_women' data set
+# https://www.fbbva.es/microsite/multivariate-statistics/data.html
+issp_women <- readxl::read_xls(here::here("data-raw/women_Spain2002_concat.xls")) %>%
+  as.data.frame()
+rownames(issp_women) <- unlist(issp_women[, 1])
+issp_women <- as.matrix(issp_women[, -1])
+mode(issp_women) <- "integer"
+devtools::use_data(issp_women)

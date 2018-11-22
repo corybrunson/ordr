@@ -63,3 +63,15 @@ NULL
 #' @name benthos
 #' @example inst/examples/ex-ca.r
 NULL
+
+#' Original respondent-level data from Spanish ISSP sample
+#'
+#' Responses to several questions about working women and family
+#'
+#' @format A \code{\link[=matrix]{matrix}}.
+#' @keywords datasets
+#' @source Greenacre M.J. (2010). \emph{Biplots in Practice}. Fundacion BBVA.
+#'   \url{https://www.fbbva.es/microsite/multivariate-statistics/data.html}
+#' @name issp_women
+#' @example inst/examples/ex-ca.r
+NULL
