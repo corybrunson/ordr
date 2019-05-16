@@ -13,7 +13,7 @@
 #' @name formatting
 #' @importFrom rlang "%||%"
 #' @param x An ordination object.
-#' @inheritParams tibble::format.tbl_df
+#' @inheritParams tibble::format.tbl
 #' @param ... Additional arguments.
 
 #' @rdname formatting

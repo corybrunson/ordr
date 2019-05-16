@@ -17,20 +17,19 @@
 
 \item{...}{Additional arguments.}
 
-\item{n}{Number of rows to show. If \code{NULL}, the default, will print
-all rows if less than option \code{tibble.print_max}. Otherwise, will
-print \code{tibble.print_min} rows.}
+\item{n}{Number of rows to show. If \code{NULL}, the default, will print all rows
+if less than option \code{tibble.print_max}. Otherwise, will print
+\code{tibble.print_min} rows.}
 
-\item{width}{Width of text output to generate. This defaults to NULL, which
-means use \code{getOption("tibble.width")} or (if also NULL)
-\code{getOption("width")}; the latter displays only the columns that
-fit on one screen. You can also set \code{options(tibble.width = Inf)} to
-override this default and always print all columns.}
+\item{width}{Width of text output to generate. This defaults to \code{NULL}, which
+means use \code{getOption("tibble.width")} or (if also \code{NULL})
+\code{getOption("width")}; the latter displays only the columns that fit on one
+screen. You can also set \code{options(tibble.width = Inf)} to override this
+default and always print all columns.}
 
 \item{n_extra}{Number of extra columns to print abbreviated information for,
-if the width is too small for the entire tibble. If \code{NULL}, the
-default, will print information about at most \code{tibble.max_extra_cols}
-extra columns.}
+if the width is too small for the entire tibble. If \code{NULL}, the default,
+will print information about at most \code{tibble.max_extra_cols} extra columns.}
 }
 \description{
 The \code{format} and \code{print} methods for class \code{"tbl_ord"} are

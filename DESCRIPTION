@@ -29,7 +29,7 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Suggests: testthat
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Collate: 
     'utils.r'
     'accessors.r'
@@ -45,6 +45,7 @@ Collate:
     'legend-draw.r'
     'geom-intervals.r'
     'geom-isolines.r'
+    'geom-path.r'
     'geom-point.r'
     'geom-polygon.r'
     'geom-text-radiate.r'
