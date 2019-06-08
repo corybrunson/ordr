@@ -57,7 +57,7 @@ recover_conference.cmds <- function(x) {
 #' @rdname methods-cmds
 #' @export
 augmentation_u.cmds <- function(x) {
-  .name <- rownames(x$x)
+  .name <- rownames(x$points)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$x))
   } else {
@@ -69,7 +69,7 @@ augmentation_u.cmds <- function(x) {
 #' @rdname methods-cmds
 #' @export
 augmentation_v.cmds <- function(x) {
-  .name <- colnames(x$x)
+  .name <- rownames(x$points)
   res <- if (is.null(.name)) {
     tibble_pole(ncol(x$x))
   } else {

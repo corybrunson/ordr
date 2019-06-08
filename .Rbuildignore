@@ -3,9 +3,10 @@
 ^\.Rproj\.user$
 
 # files and directories in package structure
+README.Rmd
 ^data-raw$
 ^man-roxygen$
-README.Rmd
+^man/figures$
 ^_pkgdown\.yml$
 
 # hosting infrastructure

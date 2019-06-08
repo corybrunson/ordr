@@ -2,6 +2,8 @@
 % Please edit documentation in R/alignment.r
 \name{alignment}
 \alias{alignment}
+\alias{negate}
+\alias{permute}
 \alias{align_to}
 \alias{negate_to}
 \alias{permute_to}
@@ -12,6 +14,10 @@
 \alias{un_align}
 \title{Alignment of ordinations}
 \usage{
+negate(x, coordinates = NULL)
+
+permute(x, coordinates = NULL)
+
 align_to(x, y, .matrix)
 
 negate_to(x, y, ...)
@@ -30,6 +36,9 @@ un_align(x)
 }
 \arguments{
 \item{x, y}{Matrices or \code{tbl_ord}s; \code{x} will be aligned to \code{y}.}
+
+\item{coordinates}{Numeric or character vector of coordinates to negate or
+permute.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
