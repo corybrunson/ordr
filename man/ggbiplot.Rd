@@ -2,11 +2,14 @@
 % Please edit documentation in R/ggbiplot.r
 \name{ggbiplot}
 \alias{ggbiplot}
+\alias{ord_aes}
 \title{Biplots following the grammar of graphics}
 \usage{
 ggbiplot(ordination = NULL, mapping = aes(x = 1, y = 2),
   sec.axes = NULL, scale.factor = NULL, scale_u = NULL,
   scale_v = NULL, ...)
+
+ord_aes(ordination, ...)
 }
 \arguments{
 \item{ordination}{A \code{\link{tbl_ord}}.}
@@ -26,7 +29,8 @@ the primary axes; ignored if \code{sec.axes} is not specified.}
 \code{nrow(get_*(ordination))}, used to scale the coordinates of \eqn{U} or
 \eqn{V}, respectively.}
 
-\item{...}{Additional arguments passed to \code{\link[ggplot2]{ggplot}}.}
+\item{...}{Additional arguments passed to \code{\link[ggplot2]{ggplot}} or to
+\code{\link[ggplot2]{aes}}.}
 }
 \description{
 Build a biplot visualization from ordination data wrapped as a
@@ -45,9 +49,14 @@ Build a biplot visualization from ordination data wrapped as a
   \item \code{p} is assigned the class \code{"ggbiplot"}. This serves no
   functional purpose currently.
 }
-Furthermore, the user may feed single integer values to the \code{x} and 
+Furthermore, the user may feed single integer values to the \code{x} and
 \code{y} aesthetics, which will be interpreted as the corresponding
 coordinates in the ordination.
+
+\code{ord_aes} is a convenience function that generates a full-rank set of
+coordinate aesthetics \code{.coord1}, \code{.coord2}, etc. mapped to the
+shared coordinates of the ordination object, along with any additional
+aesthetics that are processed internally by \code{\link[ggplot2]{aes}}.
 }
 \section{Biplot layers}{
 

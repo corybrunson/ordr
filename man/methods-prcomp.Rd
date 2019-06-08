@@ -68,21 +68,21 @@ range(as.matrix(x) - reconstruct(p))
 range(as.matrix(x) - reconstruct(p2))
 range(as.matrix(x) - reconstruct(p3))
 
-# augment methods
-augment_u(p)
-augment_v(p)
-augmentation_coord(p)
-augment_u(p2)
-augment_v(p2)
-augmentation_coord(p2)
-augment_u(p3)
-augment_v(p3)
-augmentation_coord(p3)
-
 # wrap `p`, `p2`, and `p3` as 'tbl_ord' objects
 b <- as_tbl_ord(p)
 b2 <- as_tbl_ord(p2)
 b3 <- as_tbl_ord(p3)
+
+# augment methods
+augment_u(b)
+augment_v(b)
+augmentation_coord(b)
+augment_u(b2)
+augment_v(b2)
+augmentation_coord(b2)
+augment_u(b3)
+augment_v(b3)
+augmentation_coord(b3)
 
 # data frames
 fortify(b)

@@ -22,9 +22,14 @@
 
 #' }
 
-#' Furthermore, the user may feed single integer values to the \code{x} and 
+#' Furthermore, the user may feed single integer values to the \code{x} and
 #' \code{y} aesthetics, which will be interpreted as the corresponding
 #' coordinates in the ordination.
+#'
+#' \code{ord_aes} is a convenience function that generates a full-rank set of
+#' coordinate aesthetics \code{.coord1}, \code{.coord2}, etc. mapped to the
+#' shared coordinates of the ordination object, along with any additional
+#' aesthetics that are processed internally by \code{\link[ggplot2]{aes}}.
 #' 
 
 #' @template ggbiplot-layers
@@ -43,7 +48,8 @@
 #'   \code{get_*(ordination)} or a numeric vector of length
 #'   \code{nrow(get_*(ordination))}, used to scale the coordinates of \eqn{U} or
 #'   \eqn{V}, respectively.
-#' @param ... Additional arguments passed to \code{\link[ggplot2]{ggplot}}.
+#' @param ... Additional arguments passed to \code{\link[ggplot2]{ggplot}} or to
+#'   \code{\link[ggplot2]{aes}}.
 
 #' @rdname ggbiplot
 #' @export
@@ -57,7 +63,7 @@ ggbiplot <- function(
   ordination <- fortify(ordination, include = "all")
   
   # augment `mapping`, if necessary, with default coordinates
-  mapping <- ordinate_aes(ordination, mapping)
+  mapping <- ensure_xy_aes(ordination, mapping)
   
   # scale 'U' or 'V' as indicated by `scale_u` and `scale_v`
   if (! is.null(scale_u)) {
@@ -67,8 +73,8 @@ ggbiplot <- function(
     ordination <- scale_ord(ordination, "v", mapping, scale_v)
   }
   
-  # if `sec.axes` is specified, then fortify `ordination` and scale the
-  # secondary axis coordinates to match the primary axis
+  # if `sec.axes` is specified, then fortify `ordination` and
+  # scale the secondary axis coordinates to match the primary axis
   if (! is.null(sec.axes)) {
     
     sec.axes <- match_factor(sec.axes)
@@ -77,12 +83,11 @@ ggbiplot <- function(
     }
     pri.axes <- setdiff(c("u", "v"), sec.axes)
     
-    .coords <- stringr::str_sub(as.character(mapping[c("x", "y")]), start = 2)
-    
     if (is.null(scale.factor)) {
       ps_lim <- lapply(c(pri.axes, sec.axes), function(.m) {
         apply(
-          ordination[ordination$.matrix == .m, .coords],
+          # recover coordinates stored as attribute during `fortify()`
+          ordination[ordination$.matrix == .m, recover_coord(ordination)],
           2, function(x) c(min(x), max(x))
         )
       })
@@ -91,7 +96,7 @@ ggbiplot <- function(
     
     ordination <- dplyr::mutate_at(
       ordination,
-      dplyr::vars(.coords),
+      dplyr::vars(recover_coord(ordination)),
       dplyr::funs(ifelse(ordination$.matrix == sec.axes, . * scale.factor, .))
     )
     
@@ -111,12 +116,12 @@ ggbiplot <- function(
   
   # if `sec.axes` is specified, then add secondary axes
   if (! is.null(sec.axes)) {
-    # THIS APPROACH IS VULNERABLE TO DOWNSTREAM `x` AND `y` SCALES
+    # -+-THIS APPROACH IS VULNERABLE TO DOWNSTREAM `x` AND `y` SCALES-+-
     p <- p + scale_x_continuous(sec.axis = sec_axis(~ . / scale.factor))
     p <- p + scale_y_continuous(sec.axis = sec_axis(~ . / scale.factor))
   }
   
-  # synchronize the scales AND BREAKS of the axes
+  # synchronize the scales -+-AND BREAKS-+- of the axes
   p$coordinates <- coord_fixed()
   
   # add class label for potential future use
@@ -127,7 +132,7 @@ ggbiplot <- function(
 
 # interpret numerical x and y coordinates as coordinates;
 # assume first two coordinates if none are provided
-ordinate_aes <- function(ordination, mapping) {
+ensure_xy_aes <- function(ordination, mapping) {
   coords <- get_coord(ordination, align = TRUE)
   coord_vars <- syms(coords)
   if (is.null(mapping$y)) {
@@ -162,4 +167,21 @@ scale_ord <- function(ordination, .m, mapping, scale) {
     dplyr::vars(stringr::str_remove(as.character(mapping[c("x", "y")]), "^~")),
     dplyr::funs(ifelse(ordination$.matrix == .m, . * scale, .))
   )
+}
+
+#' @rdname ggbiplot
+#' @export
+ord_aes <- function(ordination, ...) {
+  # process all coordinate aesthetics
+  ord_aes <- lapply(
+    recover_coord(ordination),
+    function(nm) rlang::quo(!! rlang::sym(nm))
+  )
+  names(ord_aes) <- paste0(".coord", seq_along(ord_aes))
+  # process other aesthetics
+  other_aes <- aes(...)
+  # concatenate aesthetics
+  aes <- c(ord_aes, other_aes)
+  class(aes) <- "uneval"
+  aes
 }

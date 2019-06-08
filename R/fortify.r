@@ -9,6 +9,11 @@
 #' the same output, a \link[tibble]{tibble} obtained by binding columns obtained
 #' via \code{\link[=accessors]{get_*}}, \code{\link[=annotation]{annotation_*}},
 #' and \code{\link[=augmentation]{augmentation_*}}, respectively.
+#'
+#' If any augmented variables are included (i.e. unless \code{include =
+#' "coordinates"}), then the tibble is assigned a \code{"coordinates"} attribute
+#' whose value is \code{recover_coord(model)}. (Note that this attribute will
+#' not be printed with the tibble.)
 
 #' @name fortification
 #' @param model,x A \code{\link{tbl_ord}}.
@@ -52,7 +57,7 @@ fortify.tbl_ord <- function(
     }
   }
   
-  switch(
+  tbl <- switch(
     .matrix,
     u = u,
     v = v,
@@ -70,6 +75,11 @@ fortify.tbl_ord <- function(
       all = as_tibble(as.data.frame(dplyr::bind_rows(u, v)))
     )
   )
+  
+  if (include != "coordinates") {
+    attr(tbl, "coordinates") <- recover_coord(model)
+  }
+  tbl
 }
 
 #' @rdname fortification

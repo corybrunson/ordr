@@ -17,6 +17,7 @@
 \alias{recover_inertia.default}
 \alias{recover_coord}
 \alias{recover_coord.default}
+\alias{recover_coord.data.frame}
 \alias{get_coord}
 \alias{dim.tbl_ord}
 \title{Access factors, coordinates, inertia, and metadata from ordination objects}
@@ -50,6 +51,8 @@ recover_inertia(x)
 recover_coord(x)
 
 \method{recover_coord}{default}(x)
+
+\method{recover_coord}{data.frame}(x)
 
 get_coord(x, align = TRUE)
 

@@ -144,6 +144,16 @@ recover_coord.default <- function(x) {
 
 #' @rdname accessors
 #' @export
+recover_coord.data.frame <- function(x) {
+  if (! is.null(attr(x, "coordinates"))) {
+    attr(x, "coordinates")
+  } else {
+    recover_coord.default(x)
+  }
+}
+
+#' @rdname accessors
+#' @export
 get_coord <- function(x, align = TRUE) {
   if (! align || is.null(attr(x, "align"))) {
     recover_coord(x)

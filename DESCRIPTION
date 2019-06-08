@@ -24,7 +24,8 @@ Imports:
     purrr,
     ggrepel,
     ca,
-    logisticPCA
+    logisticPCA,
+    vegan
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -69,4 +70,5 @@ Collate:
     'stat-chull.r'
     'stat-ellipse.r'
     'stat-matrix.r'
+    'stat-spantree.r'
     'tbl-ord.r'
