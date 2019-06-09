@@ -27,11 +27,48 @@
 #' @importFrom stats cor
 #' @param x,y Matrices or \code{tbl_ord}s; \code{x} will be aligned to \code{y}.
 #' @template param-matrix
+#' @param coordinates Numeric or character vector of coordinates to negate or
+#'   permute.
 #' @param abs.values Whether \code{permute_to} should reorder coordinates
 #'   according to dot product magnitudes (angles closest to straight, whether
 #'   \eqn{0} or \eqn{\pi}, versus angles closest to \eqn{0}).
 #' @param ... Additional parameters passed to methods.
 #' @example inst/examples/ex-align-to.r
+NULL
+
+attribute_alignment <- function(x, r) {
+  attr(x, "align") <- r
+  x
+}
+
+compose_alignment <- function(x, r) {
+  attr(x, "align") <- if (is.null(attr(x, "align"))) r else {
+    attr(x, "align") %*% r
+  }
+  x
+}
+
+#' @rdname alignment
+#' @export
+negate <- function(x, coordinates = NULL) {
+  if (is.character(coordinates)) {
+    coordinates <- match(coordinates, recover_coord(x))
+  }
+  m <- diag(ifelse(1:dim(x) %in% coordinates, -1, 1))
+  compose_alignment(x, m)
+}
+
+#' @rdname alignment
+#' @export
+permute <- function(x, coordinates = NULL) {
+  if (is.character(coordinates)) {
+    coordinates <- match(coordinates, recover_coord(x))
+  }
+  coordinates <- c(coordinates, setdiff(1:dim(x), coordinates))
+  m <- matrix(0, nrow = dim(x), ncol = dim(x))
+  m[1:dim(x), coordinates]
+  compose_alignment(x, m)
+}
 
 #' @rdname alignment
 #' @export
@@ -118,14 +155,6 @@ rotation_to <- function(x, y) {
     )
   }
   r
-}
-
-attribute_alignment <- function(x, r) {
-  #attr(x, "align") <- if (is.null(attr(x, "align"))) r else {
-  #  attr(x, "align") %*% r
-  #}
-  attr(x, "align") <- r
-  x
 }
 
 #' @rdname alignment

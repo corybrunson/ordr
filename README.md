@@ -1,41 +1,95 @@
 
 <!-- edit README.rmd -->
-ordr
-====
 
-**ordr** is designed to integrate ordination analysis and biplot visualization into a [**tidyverse**](https://github.com/tidyverse/tidyverse) workflow.
+# ordr
 
-motivation
-----------
+**ordr** is designed to integrate ordination analysis and biplot
+visualization into a
+[**tidyverse**](https://github.com/tidyverse/tidyverse) workflow.
+
+## motivation
 
 ### ordination and biplots
 
-*Ordination* is a catch-all term for a variety of classical statistical (and machine learning) techniques that introduce an artificial coordinate scheme to a set of data [1]. In this way ordination and regression can be contrasted with clustering and classification, in that they assign continuous rather than discrete values to data elements.
+*Ordination* is a catch-all term for a variety of statistical techniques
+that introduce an artificial coordinate system for a data set in such a
+way that a few coordinates capture a large amount of the data structure
+\[1\]. The branch of mathematical statistics called [geometric data
+analysis](https://www.springer.com/us/book/9781402022357) (GDA) provides
+the theoretical basis for these techniques. Together with regression,
+ordination can be contrasted to clustering and classification, in that
+they assign continuous rather than discrete values to data elements.
 
-Most ordination techniques decompose a numeric rectangular data set into the product of two (or more) matrices. In some cases, such as principal components analysis, the decomposition is exact; in others, such as non-negative matrix factorization, it is approximate; and in others, such as correspondence analysis, the data is transformed before decomposition. Ordination techniques may be supervised, like linear discriminant analysis, or unsupervised, like multidimensional scaling. Analysis pipelines that use these techniques may use the artificial coordinates directly, in place of natural coordinates, to arrange and compare data elements or to predict responses. They also frequently use *biplots* to represent unlike data elements on a shared set of axes.
+Most ordination techniques decompose a numeric rectangular data set into
+the product of two (or more) matrices. In some cases, such as principal
+components analysis, the decomposition is exact; in others, such as
+non-negative matrix factorization, it is approximate. Some techniques,
+such as correspondence analysis, transform the data before
+decomposition. Ordination techniques may be supervised, like linear
+discriminant analysis, or unsupervised, like multidimensional scaling.
+Analysis pipelines that use these techniques may use the artificial
+coordinates directly, in place of natural coordinates, to arrange and
+compare data elements or to predict responses. They also frequently use
+*biplots* to represent the data elements that index the original table
+on a shared set of axes.
 
-The matrix decomposition underlying an ordination technique usually results in at least two matrices, say *U* and *V*, one corresponding to the rows and the other to the columns of the original data matrix *X*: If *X* has *r* rows and *c* columns, then *U* and *V* have *r* rows and *c* rows, respectively, and both have *d* columns, with *d* being the rank of the ordination [2]. These *d* columns provide a set of shared coordinates for the rows and columns of *X*. If *X* contains a measured value for each of several variables (columns) on each of several cases (rows), then the ordination provides a space in which both cases and variables can be situated. If *X* is a frequency table for two categorical variables, then the values of the two variables can be overlaid on the same *d* shared coordinates. Such a scatterplot visualization is called a biplot.
+The underlying matrix decomposition usually produces two matrices, say
+\(U\) and \(V\), corresponding to the rows and to the columns of the
+original data matrix \(X\): If \(X\) has \(n\) rows and \(m\) columns,
+then \(U\) and \(V\) have \(n\) rows and \(m\) rows, respectively, and
+both have \(r\) columns, with \(r\) being the rank of the ordination
+\[2\]. These \(r\) columns provide a set of shared coordinates for the
+rows and columns of \(X\). If \(X\) contains a measured value for each
+of several variables (columns) on each of several cases (rows), then the
+ordination provides a space in which both cases and variables can be
+situated. If \(X\) is a frequency table for two categorical variables,
+then the values of the two variables can be overlaid on the same \(r\)
+shared coordinates. Such a scatterplot is called a biplot.
 
 ### implementations in R
 
-An extensive range of ordination techniques are already implemented in R, from classical multidimensional scaling (`stats::cmdscale()`) and principal components analysis (`stats::prcomp()` and `stats::princomp()`) in the **stats** package distributed with base R, across widely-used implementations of linear discriminant analysis (`MASS::lda()`) and correspondence analysis (`ca::ca()`) in general-use statistical packages, to highly specialized packages that implement cutting-edge techniques or tailor conventional techniques to challenging settings. These implementations come with their own conventions, tailored to the research communities that produced them, and it would be impractical and probably even unhelpful to try to consolidate them.
+An extensive range of ordination techniques are already implemented in
+R, from classical multidimensional scaling (`stats::cmdscale()`) and
+principal components analysis (`stats::prcomp()` and
+`stats::princomp()`) in the **stats** package distributed with base R,
+across widely-used implementations of linear discriminant analysis
+(`MASS::lda()`) and correspondence analysis (`ca::ca()`) in general-use
+statistical packages, to highly specialized packages that implement
+cutting-edge techniques or adapt conventional techniques to challenging
+settings. These implementations come with their own conventions,
+tailored to the research communities that produced them, and it would be
+impractical (and probably unhelpful) to try to consolidate them.
 
-Instead, **ordr** provides a streamlined process by which the outputs of these methods—in particular, the matrix factors into which the original data are approximately decomposed and the artificial coordinates they share—can be inspected, annotated, tidied, and visualized. On this last point the package may be especially helpful, since most biplot implementations provide limited customizability. The package is designed to follow the syntactic and grammatical conventions of the **tidyverse**, so that users familiar with a tidy workflow can more easily and quickly integrate ordination models into their practice.
+Instead, **ordr** provides a streamlined process by which the outputs of
+these methods—in particular, the matrix factors into which the original
+data are approximately decomposed and the artificial coordinates they
+share—can be inspected, annotated, tidied, and visualized. On this last
+point, most biplot implementations in R provide limited customizability,
+and **ordr** adopts the grammar of graphics paradigm from **ggplot2** to
+modularize biplot elements. The package as a whole is designed to follow
+the broader syntactic and grammatical conventions of the **tidyverse**,
+so that users familiar with a this workflow can more easily and quickly
+integrate ordination models into practice.
 
-usage
------
+## usage
 
 ### installation
 
-**ordr** remains under development and is not scheduled for a CRAN release. For now, it can be installed using [**devtools**](https://github.com/r-lib/devtools):
+**ordr** remains under development and is not scheduled for a CRAN
+release. For now, it can be installed using
+[**remotes**](https://github.com/r-lib/remotes):
 
 ``` r
-devtools::install_github("corybrunson/ordr")
+remotes::install_github("corybrunson/ordr")
 ```
 
-### example
+### PCA example
 
-Here is an example workflow that begins with a conventional PCA, proceeds through several methods provided for `tbl_ord` objects, and produces a biplot as a `ggplot` object:
+Principal components analysis (PCA) is by far the most widely-used
+ordination technique. This example performs an uncentered PCA on a small
+data set of personal expenditures over twenty years and represents the
+data in a symmetric biplot. At each step the result is printed, so that
+the user can see the effect of each step on the `prcomp` object.
 
 ``` r
 USPersonalExpenditure
@@ -46,7 +100,7 @@ USPersonalExpenditure
 #> Personal Care        1.040  1.980  2.45  3.4  5.40
 #> Private Education    0.341  0.974  1.80  2.6  3.64
 # perform principal components analysis
-(pca <- prcomp(USPersonalExpenditure, center = FALSE))
+(spend_pca <- prcomp(USPersonalExpenditure, center = FALSE))
 #> Standard deviations:
 #> [1] 78.04471215  3.95649695  1.26733701  0.18412188  0.04367521
 #> 
@@ -58,7 +112,7 @@ USPersonalExpenditure
 #> 1955 -0.5323309  0.02659741  0.3024320  0.42107353 -0.66869157
 #> 1960 -0.6449761 -0.56073415 -0.4607988 -0.12906349  0.20146975
 # wrap the model as a `tbl_ord` object
-(pca_ord <- as_tbl_ord(pca))
+(spend_pca <- as_tbl_ord(spend_pca))
 #> # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'
 #> # 5 coordinates: PC1, PC2, ..., PC5
 #> # 
@@ -80,7 +134,7 @@ USPersonalExpenditure
 #> 4 -0.532  0.0266  0.302     | 
 #> 5 -0.645 -0.561  -0.461     |
 # augment the cases and variables with metadata
-(pca_ord <- augment(pca_ord))
+(spend_pca <- augment(spend_pca))
 #> # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'
 #> # 5 coordinates: PC1, PC2, ..., PC5
 #> # 
@@ -102,7 +156,7 @@ USPersonalExpenditure
 #> 4 -0.532  0.0266  0.302     | 4 1955 
 #> 5 -0.645 -0.561  -0.461     | 5 1960
 # annotate the cases or variables
-(pca_ord <- mutate_v(pca_ord, year = as.integer(.name)))
+(spend_pca <- mutate_v(spend_pca, year = as.integer(.name)))
 #> # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'
 #> # 5 coordinates: PC1, PC2, ..., PC5
 #> # 
@@ -124,7 +178,7 @@ USPersonalExpenditure
 #> 4 -0.532  0.0266  0.302     | 4 1955   1955
 #> 5 -0.645 -0.561  -0.461     | 5 1960   1960
 # confer inertia equally between cases and variables
-(pca_ord <- confer_inertia(pca_ord, c(.5, .5)))
+(spend_pca <- confer_inertia(spend_pca, c(.5, .5)))
 #> # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'
 #> # 5 coordinates: PC1, PC2, ..., PC5
 #> # 
@@ -146,7 +200,7 @@ USPersonalExpenditure
 #> 4 -6.65  0.0748  0.481     | 4 1955   1955
 #> 5 -8.06 -1.58   -0.734     | 5 1960   1960
 # render a biplot, by default on the first two shared coordinates
-ggbiplot(pca_ord, aes(label = .name)) +
+ggbiplot(spend_pca, aes(label = .name)) +
   theme_bw() +
   geom_v_vector(aes(color = year)) +
   geom_v_text_radiate() +
@@ -159,36 +213,118 @@ ggbiplot(pca_ord, aes(label = .name)) +
   )
 ```
 
-![](man/figures/README-example-1.png)
+![](man/figures/README-PCA%20example-1.png)<!-- -->
 
-### caveat
+### MDS example
 
-It should be borne in mind that ordination is an enormous branch of statistics, in particular [geometric data analysis](https://www.springer.com/us/book/9781402022357). These techniques are often laden with a great deal of theoretical justification and domain-specific interpretation. This package is only meant to streamline the use of matrix factorization techniques in data analysis. See the documentation of the original techniques, and sources cited therein, for guidance on when and how to employ them.
+Multidimensional scaling (MDS) is an ordination technique that starts
+not with rectangular data but with interpoint distances. A common
+illustration of its power is to calculate MDS on the set of
+distances—however measured—between geographic locations, and to
+recover the approximate geography via a biplot. This example is adapted
+from the documentation of `cmdscale()` in the **stats** package; note
+that **ordr** masks `stats::cmdscale()` with a wrapper that always
+returns the eigenvalues and the symmetric distance matrix produced
+during the calculation.
 
-acknowledgments
----------------
+``` r
+# `tbl_ord` object for a classical MDS on distances between European cities
+eurodist %>%
+  cmdscale(k = 2) %>%
+  as_tbl_ord() %>%
+  augment() %>%
+  print() -> city_mds
+#> # A tbl_ord of class 'cmds': (21 x 2) x (21 x 2)'
+#> # 2 coordinates: PCo1 and PCo2
+#> # 
+#> # U: [ 21 x 2 | 1 ]
+#>     PCo1  PCo2 |   .name    
+#>                |   <chr>    
+#> 1 2290.  1799. | 1 Athens   
+#> 2 -825.   547. | 2 Barcelona
+#> 3   59.2 -367. | 3 Brussels 
+#> 4  -82.8 -430. | 4 Calais   
+#> 5 -352.  -291. | 5 Cherbourg
+#> # … with 16 more rows
+#> # 
+#> # V: [ 21 x 2 | 1 ]
+#>     PCo1  PCo2 |   .name    
+#>                |   <chr>    
+#> 1 2290.  1799. | 1 Athens   
+#> 2 -825.   547. | 2 Barcelona
+#> 3   59.2 -367. | 3 Brussels 
+#> 4  -82.8 -430. | 4 Calais   
+#> 5 -352.  -291. | 5 Cherbourg
+#> # … with 16 more rows
+# 2D biplot aligned with geography
+city_mds %>%
+  negate(2) %>%
+  ggbiplot() +
+  geom_v_text(aes(label = .name), size = 3) +
+  ggtitle("MDS biplot of road distances between European cities")
+```
+
+![](man/figures/README-MDS%20example-1.png)<!-- -->
+
+## acknowledgments
 
 ### contribute
 
-Any feedback on the package is very welcome! If you encounter confusion or errors, please create an issue with an example.
-
-This early version only handles a few types of biplot data, a few means of transforming and annotating them, and a few plot layers. My hope is that prospective contributors can see how to expand (and improve!) on the implementations thus far.
-
-This package is open to all manner of input. Methods for additional ordination classes (see the `methods-*.r` scripts in the `R` folder) are especially welcome, as are new plot layers. If you think an overhaul of the package is in order, i encourage you to fork the repo and conduct it. Above all, be supportive!
+Any feedback on the package is very welcome\! If you encounter confusion
+or errors, please create an issue with a reproducible example. If you
+have requests, suggestions, or your own implementations for new
+features, feel free to create an issue or submit a pull request. Methods
+for additional ordination classes (see the `methods-*.r` scripts in the
+`R` folder) are especially welcome, as are new plot layers. Above all,
+be supportive\!
 
 ### inspiration
 
-This package was originally inspired by the **ggbiplot** extention developed by [vqv](https://github.com/vqv/ggbiplot), [richardjtelford](https://github.com/richardjtelford/ggbiplot), and [GegnzaV](https://github.com/GegznaV/ggbiplot), among others. So far as i know, it first brought biplots into the **tidyverse** framework. The motivation to unify a variety of ordination methods came from [several books and articles](https://www.barcelonagse.eu/research/publications/all?author=Michael%20Greenacre) by Michael Greenacre. Thomas Lin Pedersen's [**tidygraph**](https://github.com/thomasp85/tidygraph) sequel to **ggraph** finally induced the shift from simply generating scatterplots to upstream handling and manipulating ordination data.
+This package was originally inspired by the **ggbiplot** extention
+developed by [vqv](https://github.com/vqv/ggbiplot),
+[richardjtelford](https://github.com/richardjtelford/ggbiplot), and
+[GegnzaV](https://github.com/GegznaV/ggbiplot), among others. So far as
+i know, it first brought biplots into the **tidyverse** framework. The
+motivation to unify a variety of ordination methods came from [several
+books and
+articles](https://www.barcelonagse.eu/research/publications/all?author=Michael%20Greenacre)
+by Michael Greenacre. Thomas Lin Pedersen’s
+[**tidygraph**](https://github.com/thomasp85/tidygraph) sequel to
+**ggraph** finally induced the shift from simply generating scatterplots
+to upstream handling and manipulating ordination data.
 
 ### resources
 
--   Gabriel KR (1971) ["The biplot graphic display of matrices with application to principal component analysis"](https://academic.oup.com/biomet/article-abstract/58/3/453/233361). *Biometrika* 58(3);453–467.
--   Greenacre MJ (2010) [*Biplots in Practice*](http://www.multivariatestatistics.org/biplots.html).
--   Hubert L, Meulman J, and Heiser W (2006) ["Two Purposes for Matrix Factorization: A Historical Appraisal"](https://epubs.siam.org/doi/abs/10.1137/S0036144598340483). *SIAM Review* 42(1);68–82.
--   Palmer M [*Ordination Methods for Ecologists*](http://ordination.okstate.edu/).
--   Podani J (2000) [*Introduction to the Exploration of Multivariate Biological Data*](http://ramet.elte.hu/~podani/books.html).
--   ttnphns (2015) [*Answer to* "PCA and Correspondence analysis in their relation to Biplot"](https://stats.stackexchange.com/a/141755/68743), CrossValidated.
+  - Gabriel KR (1971) [“The biplot graphic display of matrices with
+    application to principal component
+    analysis”](https://academic.oup.com/biomet/article-abstract/58/3/453/233361).
+    *Biometrika* 58(3);453–467.
+  - Greenacre MJ (2010) [*Biplots in
+    Practice*](http://www.multivariatestatistics.org/biplots.html).
+  - Hubert L, Meulman J, and Heiser W (2006) [“Two Purposes for Matrix
+    Factorization: A Historical
+    Appraisal”](https://epubs.siam.org/doi/abs/10.1137/S0036144598340483).
+    *SIAM Review* 42(1);68–82.
+  - Palmer M [*Ordination Methods for
+    Ecologists*](http://ordination.okstate.edu/).
+  - Podani J (2000) [*Introduction to the Exploration of Multivariate
+    Biological Data*](http://ramet.elte.hu/~podani/books.html).
+  - ttnphns (2015) [*Answer to* “PCA and Correspondence analysis in
+    their relation to
+    Biplot”](https://stats.stackexchange.com/a/141755/68743),
+    CrossValidated.
 
-[1] The term *ordination* is most prevalent among ecologists; to my knowledge, no catch-all term is in common use outside ecology.
+<!-- end list -->
 
-[2] Regression and clustering models, like classical [linear regression](http://www.multivariatestatistics.org/chapter2.html) and [*k*-means](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html), can also be understood as matrix decomposition approximations and even visualized in biplots. Their shared coordinates, which are pre-defined rather than artificial, are the predictor coefficients and the cluster assignments, respectively. Methods for `stats::lm()` and `stats::kmeans()`, for example, are implemented for the sake of novelty and instruction, but are not widely used in practice.
+1.  The term *ordination* is most prevalent among ecologists; to my
+    knowledge, no catch-all term is in common use outside ecology.
+
+2.  Regression and clustering models, like classical [linear
+    regression](http://www.multivariatestatistics.org/chapter2.html) and
+    [*k*-means](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html),
+    can also be understood as matrix decomposition approximations and
+    even visualized in biplots. Their shared coordinates, which are
+    pre-defined rather than artificial, are the predictor coefficients
+    and the cluster assignments, respectively. Methods for `stats::lm()`
+    and `stats::kmeans()`, for example, are implemented for the sake of
+    novelty and instruction, but are not widely used in practice.
