@@ -34,17 +34,17 @@ compare data elements or to predict responses. They also frequently use
 on a shared set of axes.
 
 The underlying matrix decomposition usually produces two matrices, say
-\(U\) and \(V\), corresponding to the rows and to the columns of the
-original data matrix \(X\): If \(X\) has \(n\) rows and \(m\) columns,
-then \(U\) and \(V\) have \(n\) rows and \(m\) rows, respectively, and
-both have \(r\) columns, with \(r\) being the rank of the ordination
-\[2\]. These \(r\) columns provide a set of shared coordinates for the
-rows and columns of \(X\). If \(X\) contains a measured value for each
-of several variables (columns) on each of several cases (rows), then the
-ordination provides a space in which both cases and variables can be
-situated. If \(X\) is a frequency table for two categorical variables,
-then the values of the two variables can be overlaid on the same \(r\)
-shared coordinates. Such a scatterplot is called a biplot.
+*U* and *V*, corresponding to the rows and to the columns of the
+original data matrix *X*: If *X* has *n* rows and *m* columns, then *U*
+and *V* have *n* rows and *m* rows, respectively, and both have *r*
+columns, with *r* being the rank of the ordination \[2\]. These *r*
+columns provide a set of shared coordinates for the rows and columns of
+*X*. If *X* contains a measured value for each of several variables
+(columns) on each of several cases (rows), then the ordination provides
+a space in which both cases and variables can be situated. If *X* is a
+frequency table for two categorical variables, then the values of the
+two variables can be overlaid on the same *r* shared coordinates. Such a
+scatterplot is called a biplot.
 
 ### implementations in R
 
@@ -262,11 +262,12 @@ eurodist %>%
 # 2D biplot aligned with geography
 city_mds %>%
   ggbiplot() +
-  stat_v_spantree(ord_aes(city_mds), alpha = .5, linetype = "dotted") +
+  stat_v_spantree(
+    ord_aes(city_mds), check.aes = FALSE,
+    alpha = .5, linetype = "dotted"
+  ) +
   geom_v_text(aes(label = .name), size = 3) +
   ggtitle("MDS biplot of road distances between European cities")
-#> Warning: Ignoring unknown
-#> aesthetics: .coord1, .coord2, .coord3, .coord4, .coord5, .coord6, .coord7, .coord8, .coord9, .coord10, .coord11
 ```
 
 ![](man/figures/README-MDS%20example-1.png)<!-- -->
