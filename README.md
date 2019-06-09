@@ -225,43 +225,48 @@ recover the approximate geography via a biplot. This example is adapted
 from the documentation of `cmdscale()` in the **stats** package; note
 that **ordr** masks `stats::cmdscale()` with a wrapper that always
 returns the eigenvalues and the symmetric distance matrix produced
-during the calculation.
+during the calculation. The MDS uses 11 coordinates—the number of
+positive eigenvalues—so that `stat_*_spanningtree()` can call upon them
+to recover the intercity distances.
 
 ``` r
 # `tbl_ord` object for a classical MDS on distances between European cities
 eurodist %>%
-  cmdscale(k = 2) %>%
+  cmdscale(k = 11) %>%
   as_tbl_ord() %>%
   augment() %>%
+  negate(2) %>%
   print() -> city_mds
-#> # A tbl_ord of class 'cmds': (21 x 2) x (21 x 2)'
-#> # 2 coordinates: PCo1 and PCo2
+#> # A tbl_ord of class 'cmds': (21 x 11) x (21 x 11)'
+#> # 11 coordinates, transformed: V1, V2, ..., V11
 #> # 
-#> # U: [ 21 x 2 | 1 ]
-#>     PCo1  PCo2 |   .name    
-#>                |   <chr>    
-#> 1 2290.  1799. | 1 Athens   
-#> 2 -825.   547. | 2 Barcelona
-#> 3   59.2 -367. | 3 Brussels 
-#> 4  -82.8 -430. | 4 Calais   
-#> 5 -352.  -291. | 5 Cherbourg
+#> # U: [ 21 x 11 | 1 ]
+#>       V1     V2     V3 ... |   .name    
+#>                            |   <chr>    
+#> 1 2290.  -1799.   53.8     | 1 Athens   
+#> 2 -825.   -547. -114.  ... | 2 Barcelona
+#> 3   59.2   367.  178.      | 3 Brussels 
+#> 4  -82.8   430.  300.      | 4 Calais   
+#> 5 -352.    291.  457.      | 5 Cherbourg
 #> # … with 16 more rows
 #> # 
-#> # V: [ 21 x 2 | 1 ]
-#>     PCo1  PCo2 |   .name    
-#>                |   <chr>    
-#> 1 2290.  1799. | 1 Athens   
-#> 2 -825.   547. | 2 Barcelona
-#> 3   59.2 -367. | 3 Brussels 
-#> 4  -82.8 -430. | 4 Calais   
-#> 5 -352.  -291. | 5 Cherbourg
+#> # V: [ 21 x 11 | 1 ]
+#>       V1     V2     V3 ... |   .name    
+#>                            |   <chr>    
+#> 1 2290.  -1799.   53.8     | 1 Athens   
+#> 2 -825.   -547. -114.  ... | 2 Barcelona
+#> 3   59.2   367.  178.      | 3 Brussels 
+#> 4  -82.8   430.  300.      | 4 Calais   
+#> 5 -352.    291.  457.      | 5 Cherbourg
 #> # … with 16 more rows
 # 2D biplot aligned with geography
 city_mds %>%
-  negate(2) %>%
   ggbiplot() +
+  stat_v_spantree(ord_aes(city_mds), alpha = .5, linetype = "dotted") +
   geom_v_text(aes(label = .name), size = 3) +
   ggtitle("MDS biplot of road distances between European cities")
+#> Warning: Ignoring unknown
+#> aesthetics: .coord1, .coord2, .coord3, .coord4, .coord5, .coord6, .coord7, .coord8, .coord9, .coord10, .coord11
 ```
 
 ![](man/figures/README-MDS%20example-1.png)<!-- -->

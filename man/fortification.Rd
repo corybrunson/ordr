@@ -47,6 +47,6 @@ and \code{\link[=augmentation]{augmentation_*}}, respectively.
 
 If any augmented variables are included (i.e. unless \code{include =
 "coordinates"}), then the tibble is assigned a \code{"coordinates"} attribute
-whose value is \code{recover_coord(model)}. (Note that this attribute will
-not be printed with the tibble.)
+whose value is obtained via \code{\link{get_coord}}. (Note that this
+attribute will not be printed with the tibble.)
 }

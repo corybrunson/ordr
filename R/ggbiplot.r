@@ -87,7 +87,7 @@ ggbiplot <- function(
       ps_lim <- lapply(c(pri.axes, sec.axes), function(.m) {
         apply(
           # recover coordinates stored as attribute during `fortify()`
-          ordination[ordination$.matrix == .m, recover_coord(ordination)],
+          ordination[ordination$.matrix == .m, get_coord(ordination)],
           2, function(x) c(min(x), max(x))
         )
       })
@@ -96,7 +96,7 @@ ggbiplot <- function(
     
     ordination <- dplyr::mutate_at(
       ordination,
-      dplyr::vars(recover_coord(ordination)),
+      dplyr::vars(get_coord(ordination)),
       dplyr::funs(ifelse(ordination$.matrix == sec.axes, . * scale.factor, .))
     )
     
@@ -133,7 +133,7 @@ ggbiplot <- function(
 # interpret numerical x and y coordinates as coordinates;
 # assume first two coordinates if none are provided
 ensure_xy_aes <- function(ordination, mapping) {
-  coords <- get_coord(ordination, align = TRUE)
+  coords <- get_coord(ordination)
   coord_vars <- syms(coords)
   if (is.null(mapping$y)) {
     mapping <- c(aes(y = !! coord_vars[[2]]), mapping)
@@ -174,7 +174,7 @@ scale_ord <- function(ordination, .m, mapping, scale) {
 ord_aes <- function(ordination, ...) {
   # process all coordinate aesthetics
   ord_aes <- lapply(
-    recover_coord(ordination),
+    get_coord(ordination),
     function(nm) rlang::quo(!! rlang::sym(nm))
   )
   names(ord_aes) <- paste0(".coord", seq_along(ord_aes))

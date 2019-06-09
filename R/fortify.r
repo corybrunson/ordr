@@ -12,8 +12,8 @@
 #'
 #' If any augmented variables are included (i.e. unless \code{include =
 #' "coordinates"}), then the tibble is assigned a \code{"coordinates"} attribute
-#' whose value is \code{recover_coord(model)}. (Note that this attribute will
-#' not be printed with the tibble.)
+#' whose value is obtained via \code{\link{get_coord}}. (Note that this
+#' attribute will not be printed with the tibble.)
 
 #' @name fortification
 #' @param model,x A \code{\link{tbl_ord}}.
@@ -37,7 +37,7 @@ fortify.tbl_ord <- function(
   include <- match.arg(include, c("coordinates", "shared", "all"))
   
   if (grepl("u", .matrix)) {
-    u <- as_tibble(get_u(model, align = TRUE))
+    u <- as_tibble(get_u(model))
     if (include != "coordinates") {
       u <- dplyr::bind_cols(
         u,
@@ -47,7 +47,7 @@ fortify.tbl_ord <- function(
     }
   }
   if (grepl("v", .matrix)) {
-    v <- as_tibble(get_v(model, align = TRUE))
+    v <- as_tibble(get_v(model))
     if (include != "coordinates") {
       v <- dplyr::bind_cols(
         v,
@@ -63,10 +63,6 @@ fortify.tbl_ord <- function(
     v = v,
     uv = switch(
       include,
-      #coordinates = {
-      #  coord <- recover_coord(model)
-      #  as_tibble(as.data.frame(rbind(u[coord], v[coord])))
-      #},
       coordinates = as_tibble(as.data.frame(rbind(u, v))),
       shared = {
         int <- intersect(names(u), names(v))
@@ -77,7 +73,7 @@ fortify.tbl_ord <- function(
   )
   
   if (include != "coordinates") {
-    attr(tbl, "coordinates") <- recover_coord(model)
+    attr(tbl, "coordinates") <- get_coord(model)
   }
   tbl
 }

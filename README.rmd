@@ -91,18 +91,20 @@ ggbiplot(spend_pca, aes(label = .name)) +
 
 Multidimensional scaling (MDS) is an ordination technique that starts not with rectangular data but with interpoint distances.
 A common illustration of its power is to calculate MDS on the set of distances&mdash;however measured&mdash;between geographic locations, and to recover the approximate geography via a biplot. This example is adapted from the documentation of `cmdscale()` in the **stats** package; note that **ordr** masks `stats::cmdscale()` with a wrapper that always returns the eigenvalues and the symmetric distance matrix produced during the calculation.
+The MDS uses 11 coordinates&mdash;the number of positive eigenvalues&mdash;so that `stat_*_spanningtree()` can call upon them to recover the intercity distances.
 
 ```{r MDS example}
 # `tbl_ord` object for a classical MDS on distances between European cities
 eurodist %>%
-  cmdscale(k = 2) %>%
+  cmdscale(k = 11) %>%
   as_tbl_ord() %>%
   augment() %>%
+  negate(2) %>%
   print() -> city_mds
 # 2D biplot aligned with geography
 city_mds %>%
-  negate(2) %>%
   ggbiplot() +
+  stat_v_spantree(ord_aes(city_mds), alpha = .5, linetype = "dotted") +
   geom_v_text(aes(label = .name), size = 3) +
   ggtitle("MDS biplot of road distances between European cities")
 ```
