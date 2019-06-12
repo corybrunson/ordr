@@ -95,7 +95,7 @@ iris[, -5] \%>\%
   mutate_v(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
   print() -> iris_pca
 
-# default confidence ellipses
+# default confidence ellipses with centroids
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
@@ -106,14 +106,15 @@ iris_pca \%>\%
   geom_v_vector(color = "#444444")
 
 # consistently color and fill
-# NOTE: 'color' and 'fill' don't match
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
   geom_u_point() +
+  stat_u_center(fun.center = "mean", size = 3, shape = "triangle") +
   geom_polygon(aes(fill = species), alpha = .25, stat = "u_ellipse") +
-  geom_v_vector(color = "#444444")
+  geom_v_vector(color = "#444444") +
+  scale_color_brewer(type = "qual", palette = 2) +
+  scale_fill_brewer(type = "qual", palette = 2)
 
 # symmetric biplot
 set.seed(58319)
