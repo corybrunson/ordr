@@ -1,37 +1,35 @@
-#' Alignment of ordinations
-#' 
-#' Align one ordination to another having the same cases or variables.
-#' 
+#' @title Alignment of ordinations
+#'
+#' @description Align one ordination to another having the same cases or
+#'   variables.
+#'   
 
-#' Depending on the method of ordination, its interpretation may not depend on 
-#' the signs, the order, or the orientation of the coordinates. 
-#' \code{negate_to}, \code{permute_to}, and \code{rotate_to} take advantage of 
-#' these symmetries in order to manipulate the coordinates of one ordination so 
-#' that the positions of the cases or variables align, as closely as 
-#' possible, to those of the same cases or variables in another ordination. 
-#' In the case of negation and permutation, this is done by minimizing the 
-#' angles between vectors of scores or loadings in the respective coordinates. 
-#' In the case of rotation, this is done by invoking the singular value 
-#' decomposition method of point cloud registration (Bellekens &al, 2014).
+#' @details
+#'
+#' Depending on the method of ordination, its interpretation may not depend on
+#' the signs, the order, or the orientation of the coordinates. `negate_to()`,
+#' `permute_to()`, and `rotate_to()` take advantage of these symmetries in order
+#' to manipulate the coordinates of one ordination so that the positions of the
+#' cases or variables align, as closely as possible, to those of the same cases
+#' or variables in another ordination. In the case of negation and permutation,
+#' this is done by minimizing the angles between vectors of scores or loadings
+#' in the respective coordinates. In the case of rotation, this is done by
+#' invoking the singular value decomposition method of point cloud registration
+#' (Bellekens &al, 2014).
 #' 
-#' @references
-#' 
-#' Bellekens B., Spruyt V., Berkvens R., & Weyn M. (2014). A survey of rigid 3D
-#' pointcloud registration algorithms. \emph{Fourth International Conference on
-#' Ambient Computing, Applications, Services and Technologies, Proceedings.} p.
-#' 8--13.
+#' @template ref-bellekens2014
 #' 
 
 #' @name alignment
-#' @include augmentation.r
+#' @include ord-augmentation.r
 #' @importFrom stats cor
-#' @param x,y Matrices or \code{tbl_ord}s; \code{x} will be aligned to \code{y}.
+#' @param x,y Matrices or `tbl_ord`s; `x` will be aligned to `y`.
 #' @template param-matrix
 #' @param coordinates Numeric or character vector of coordinates to negate or
 #'   permute.
-#' @param abs.values Whether \code{permute_to} should reorder coordinates
-#'   according to dot product magnitudes (angles closest to straight, whether
-#'   \eqn{0} or \eqn{\pi}, versus angles closest to \eqn{0}).
+#' @param abs.values Whether `permute_to` should reorder coordinates according
+#'   to dot product magnitudes (angles closest to straight, whether \eqn{0} or
+#'   \eqn{\pi}, versus angles closest to \eqn{0}).
 #' @param ... Additional parameters passed to methods.
 #' @example inst/examples/ex-align-to.r
 NULL

@@ -95,12 +95,11 @@ layer, as a string.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{...}{Additional arguments passed to \code{\link[ggplot2]{layer}}.}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
-\item{parse, check_overlap, nudge_x, nudge_y}{See
-\code{\link[ggplot2]{geom_text}}.}
+\item{parse, check_overlap, nudge_x, nudge_y}{See \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}.}
 
-\item{na.rm}{Passed to \code{\link[ggplot2]{layer}}s.}
+\item{na.rm}{Passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -118,42 +117,43 @@ or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 }
 \description{
-\code{geom_*_text} renders text, and \code{geom_*_label} labels, at the 
-positions of the subjects or vectors. \code{geom_*_text_repel} and 
-\code{geom_*_label_repel} invoke functionality from
-\strong{\link[ggrepel]{ggrepel}}.
+\code{geom_*_text()} renders text, and \code{geom_*_label()} labels, at
+the positions of the subjects or vectors. \code{geom_*_text_repel()} and
+\code{geom_*_label_repel()} invoke functionality from the
+\strong{\link[ggrepel:ggrepel]{ggrepel}} package.
 }
 \section{Biplot layers}{
 
-\code{\link{ggbiplot}} uses \code{\link[ggplot2]{fortify}} internally to 
-produce a single data frame with a \code{.matrix} column distinguishing the 
-subjects (\code{"u"}) and variables (\code{"v"}). The stat layers 
-\code{stat_u} and \code{stat_v} simply filter the data frame to one of these 
-two.
+\code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
+frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
+variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
+the data frame to one of these two.
 
-The geom layers \code{geom_u_*} and \code{geom_v_*} call the corresponding
-stat in order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \code{geom_biplot_*} selects a default matrix based on common
-practice, e.g. \eqn{U} for points and \eqn{V} for arrows.
+The geom layers \code{geom_u_*()} and \code{geom_v_*()} call the corresponding stat in
+order to render plot elements for the corresponding matrix \eqn{U} or
+\eqn{V}. \code{geom_biplot_*()} selects a default matrix based on common practice,
+e.g. \eqn{U} for points and \eqn{V} for arrows.
 }
 
 \section{Aesthetics}{
 
-\code{geom_*_text}, \code{geom_*_label}, \code{geom_*_text_repel}, and
-\code{geom_*_label_repel} understand the following aesthetics (required
+\code{geom_*_text()}, \code{geom_*_label()}, \code{geom_*_text_repel()}, and
+\code{geom_*_label_repel()} understand the following aesthetics (required
 aesthetics are in bold):
 \itemize{
-  \item \strong{\code{x}}
-  \item \strong{\code{y}}
-  \item \strong{\code{label}}
-  \item \code{alpha}
-  \item \code{angle}
-  \item \code{colour}
-  \item \code{family}
-  \item \code{fontface}
-  \item \code{group}
-  \item \code{lineheight}
-  \item \code{size}
+\item \strong{\code{x}}
+\item \strong{\code{y}}
+\item \strong{\code{label}}
+\item \code{alpha}
+\item \code{angle}
+\item \code{colour}
+\item \code{family}
+\item \code{fontface}
+\item \code{hjust}
+\item \code{lineheight}
+\item \code{size}
+\item \code{vjust}
+\item \code{group}
 }
 }
 

@@ -2,16 +2,14 @@
 % Please edit documentation in R/data.r
 \name{finches}
 \alias{finches}
-\title{Site-species occurrence data for finches on the Galapagos islands}
-\format{A \code{\link{data.frame}}.}
+\title{Site-species occurrence data for Galapagos finches}
+\format{A \link[base:data.frame]{data.frame}.}
 \source{
-Sanderson J.G. (2000). Testing Ecological Patterns: A Well-Known
-  Algorithm from Computer Science Aids the Evaulation of Species
-  Distributions. \emph{American Scientist}, \strong{88}, pp. 332--339.
+These data are taken from Sanderson (2000). They are available in a
+different format in the \strong{\link[cooccur:cooccur]{cooccur}} package.
 }
 \description{
-These data are taken from Sanderson (2000). They are available in a different
-format in the \strong{\link[cooccur]{cooccur}} package.
+Site-species occurrence data for Galapagos finches
 }
 \examples{
 
@@ -38,5 +36,9 @@ ggbiplot(finches_clpca, aes(x = LPC1, y = LPC2)) +
   geom_u_text_radiate(aes(x = LPC1 * .02, y = LPC2 * .02, label = .name),
                       size = 3) +
   geom_v_label(aes(label = .name), size = 3, alpha = .5)
+}
+\references{
+Sanderson JG (2000) "Testing Ecological Patterns." \emph{American Scientist},
+\strong{88}(4), 332--339. \doi{10.1511/2000.4.332}
 }
 \keyword{datasets}

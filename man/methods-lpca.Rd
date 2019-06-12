@@ -27,8 +27,7 @@
 \alias{augmentation_v.clpca}
 \alias{augmentation_coord.clpca}
 \alias{negate_to.clpca}
-\title{Functionality for logistic principal components analysis and singular 
-value decomposition objects}
+\title{Functionality for logistic PCA and logistic SVD objects}
 \usage{
 \method{as_tbl_ord}{lsvd}(x)
 
@@ -92,11 +91,12 @@ or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 }
 \description{
-These methods extract data from, and attribute new data to, objects of class 
-\code{"lpca"} and \code{"lsvd"} (see
-\code{?logisticPCA::`logisticPCA-package`}). (This package masks the
-signature functions of \strong{\link[logisticPCA]{logisticPCA}} with wrappers
-that add row and column names from the input matrix to the output matrices.)
+These methods extract data from, and attribute new data to,
+objects of class \code{"lpca"} and \code{"lsvd"} from the
+\strong{\link[logisticPCA:logisticPCA-package]{logisticPCA}} package. The signature
+functions \code{\link[logisticPCA:logisticPCA]{logisticPCA::logisticPCA()}} and \code{\link[logisticPCA:logisticSVD]{logisticPCA::logisticSVD()}} are
+masked with wrappers that add row and column names from the input matrix to
+the output matrices.
 }
 \examples{
 

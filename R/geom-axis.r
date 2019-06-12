@@ -1,29 +1,28 @@
-#' Render axes through origin
+#' @title Render axes through origin
 #' 
 
-#' \code{geom_*_axis} renders lines through the origin and the position of each
-#' case or variable.
+#' @description `geom_*_axis()` renders lines through the origin and the
+#'   position of each case or variable.
 #' @template ggbiplot-layers
 
 #' @section Aesthetics:
-#' \code{geom_*_axis} understands the following aesthetics (required
-#' aesthetics are in bold):
-#' \itemize{
-#'   \item \strong{\code{x}}
-#'   \item \strong{\code{y}}
-#'   \item \code{alpha}
-#'   \item \code{colour}
-#'   \item \code{fill}
-#'   \item \code{linetype}
-#'   \item \code{size}
-#'   \item \code{group}
-#' }
+
+#' `geom_*_axis()` understands the following aesthetics (required aesthetics are
+#' in bold):
+
+#' - **`x`**
+#' - **`y`**
+#' - `alpha`
+#' - `colour`
+#' - `linetype`
+#' - `size`
+#' - `group`
 #' 
 
 #' @name ggbiplot-axis
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
-#' @template param-layer
+#' @template param-geom
 #' @template param-matrix
 
 #' @rdname ggbiplot-axis

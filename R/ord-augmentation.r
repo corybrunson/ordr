@@ -1,30 +1,30 @@
-#' Augment information for the factors and coordinates of ordination objects
-#' 
-#' These functions return data associated with the cases, variables, and
-#' coordinates of an ordination object.
-#' 
-
-#' The \code{augmentation_*} functions produce \link[tibble]{tibble}s of values
-#' associated with the cases, variables, and coordinates of a \code{tbl_ord}
-#' object. The first field of each tibble is \code{.name}, which contains the
-#' case, variable, or coordinate names. Additional fields contain information
-#' about the cases, variables, or coordinates extracted from the original
-#' ordination object.
+#' @title Augment metadata on the factors and coordinates of ordination objects
 #'
-#' The \code{augment_*} functions return the ordination with each or both factor
-#' annotated with the result of \code{augmentation_*}. In this way
-#' \code{augment_*} works like \code{\link[broom]{augment}} by extracting
-#' information for a tidy summary of the components, but it differs in returning
-#' an annotated \code{tbl_ord} rather than a \code{tbl_df} object. The advantage
-#' of implementing separate methods for the different components is that more
-#' information contained in the original object becomes accessible to the user.
-#' To achieve a result similar to that of \code{augment}, use
-#' \code{\link{fortify}}.
+#' @description These functions return data associated with the cases,
+#'   variables, and coordinates of an ordination object.
+#'   
+
+#' @details
+#'
+#' The `augmentation_*()` functions produce [tibble][tibble::tibble]s of values
+#' associated with the cases, variables, and coordinates of a `tbl_ord` object.
+#' The first field of each tibble is `.name`, which contains the case, variable,
+#' or coordinate names. Additional fields contain information about the cases,
+#' variables, or coordinates extracted from the original ordination object.
+#'
+#' The `augment_*()` functions return the ordination with each or both factor
+#' annotated with the result of `augmentation_*()`. In this way `augment_*()`
+#' works like [generics::augment()] by extracting information for a tidy summary
+#' of the components, but it differs in returning an annotated `tbl_ord` rather
+#' than a `tbl_df`. The advantage of implementing separate methods for the
+#' different components is that more information contained in the original
+#' object becomes accessible to the user. To achieve a result similar to that of
+#' [generics::augment()], use [fortify()].
 
 #' @name augmentation
-#' @include accessors.r
+#' @include ord-accessors.r
 #' @inheritParams accessors
-#' @param data Passed to \code{\link[generics]{augment}}; currently ignored.
+#' @param data Passed to [generics::augment()]; currently ignored.
 
 #' @rdname augmentation
 #' @export

@@ -55,10 +55,10 @@ or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 }
 \description{
-These methods extract data from, and attribute new data to, objects of class 
-\code{"cmds"}. (This is a class introduced in this package to identify 
-objects returned by \code{\link[stats]{cmdscale}}, which is masked by a
-wrapper that adds the class attribute.)
+These methods extract data from, and attribute new data to,
+objects of class \code{"cmds"}. This is a class introduced in this package to
+identify objects returned by \code{\link[stats:cmdscale]{stats::cmdscale()}}, which is masked by a
+wrapper that adds the class attribute.
 }
 \examples{
 

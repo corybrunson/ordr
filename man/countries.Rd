@@ -6,10 +6,9 @@
 \alias{country_differences}
 \alias{country_attributes}
 \title{Student ratings of similarities and attributes of 13 countries}
-\format{\code{\link[=matrix]{Matrices}}.}
+\format{\link[base:matrix]{Matrices}.}
 \source{
-Greenacre M.J. (2010). \emph{Biplots in Practice}, pp. 43--44,46. 
-  Fundacion BBVA.
+Greenacre (2010), pp. 43--44,46.
 }
 \usage{
 country_differences
@@ -19,7 +18,13 @@ data(country_differences)
 data(country_attributes)
 }
 \description{
-Greenacre (2010) used these ratings to illustrate multidimensional scaling. 
-The uses shown there are reproduced in an example.
+Greenacre (2010) used these ratings to illustrate
+multidimensional scaling. The uses shown there are reproduced in an
+example.
+}
+\references{
+Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
+978-84-923846.
+\url{https://www.fbbva.es/microsite/multivariate-statistics/biplots.html}
 }
 \keyword{datasets}

@@ -32,8 +32,8 @@
 \item{x}{An ordination object.}
 }
 \description{
-These methods extract data from, and attribute new data to, objects of class 
-\code{"kmeans"}.
+These methods extract data from, and attribute new data to,
+objects of class \code{"kmeans"} as returned by \code{\link[stats:kmeans]{stats::kmeans()}}.
 }
 \examples{
 

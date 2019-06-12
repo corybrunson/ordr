@@ -72,10 +72,10 @@ sometimes work better. The default is \code{ss_factor = 4}.
 If it is not converging, try \code{ss_factor = 1}.}
 }
 \description{
-Some popular ordination functions in R return objects without a specific 
-class (e.g. \code{\link[stats]{cmdscale}}). Some others return output that is
-not self-contained, for instance missing annotation from the original dataset
-(e.g. \code{\link[logisticPCA]{logisticPCA}}). The functions below wrap the 
-originals with the minimal overhead necessary for complete functionality with
-the \code{\link{tbl_ord}} class.
+Some popular ordination functions in R return objects without a specific
+class (e.g. \code{\link[stats:cmdscale]{stats::cmdscale()}}). Some others return output that is not
+self-contained, for instance missing annotation from the original dataset
+(e.g. \code{\link[logisticPCA:logisticPCA]{logisticPCA::logisticPCA()}}). The functions below wrap the originals
+with the minimal overhead necessary for complete functionality with the
+\link{tbl_ord} class.
 }

@@ -1,11 +1,12 @@
-#' Functionality for classical multidimensional scaling objects
-#' 
-#' These methods extract data from, and attribute new data to, objects of class 
-#' \code{"cmds"}. (This is a class introduced in this package to identify 
-#' objects returned by \code{\link[stats]{cmdscale}}, which is masked by a
-#' wrapper that adds the class attribute.)
-#' 
+#' @title Functionality for classical multidimensional scaling objects
+#'
+#' @description These methods extract data from, and attribute new data to,
+#'   objects of class `"cmds"`. This is a class introduced in this package to
+#'   identify objects returned by [stats::cmdscale()], which is masked by a
+#'   wrapper that adds the class attribute.
+#'
 #' @name methods-cmds
+#' @include ord-tbl.r
 #' @template param-methods
 #' @template param-matrix
 #' @template param-align

@@ -3,13 +3,12 @@
 \name{issp_women}
 \alias{issp_women}
 \title{Original respondent-level data from Spanish ISSP sample}
-\format{A \code{\link[=matrix]{matrix}}.}
+\format{A \link[base:matrix]{matrix}.}
 \source{
-Greenacre M.J. (2010). \emph{Biplots in Practice}. Fundacion BBVA.
-  \url{https://www.fbbva.es/microsite/multivariate-statistics/data.html}
+Greenacre (2010).
 }
 \description{
-Responses to several questions about working women and family
+Responses to several questions about working women and family.
 }
 \examples{
 

@@ -38,8 +38,8 @@
 \item{x}{An ordination object.}
 }
 \description{
-These methods extract data from, and attribute new data to, objects of class 
-\code{"prcomp"}.
+These methods extract data from, and attribute new data to,
+objects of class \code{"prcomp"} as returned by \code{\link[stats:prcomp]{stats::prcomp()}}.
 }
 \examples{
 # principal components analysis (`prcomp`) examples

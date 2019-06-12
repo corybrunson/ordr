@@ -3,14 +3,13 @@
 \name{bioenv}
 \alias{bioenv}
 \title{Multivariate marine biological and environmental data}
-\format{A \code{\link[tibble]{tibble}}.}
+\format{A \link[tibble:tibble]{tibble}.}
 \source{
-Greenacre M.J. (2010). \emph{Biplots in Practice}, pp. 25--26. 
-  Fundacion BBVA.
+Greenacre (2010), pp. 25--26.
 }
 \description{
-Species counts and environmental variables for several locations on a
-sea-bed.
+Species counts and environmental variables for several locations
+on a sea-bed.
 }
 \examples{
 data(bioenv)
@@ -60,5 +59,10 @@ ggbiplot(d, aes(x = x, y = y, color = .fit, alpha = .wt.res ^ 2)) +
   geom_u_point() +
   geom_v_vector() +
   geom_v_isolines(ids = 1, by = 5)
+}
+\references{
+Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
+978-84-923846.
+\url{https://www.fbbva.es/microsite/multivariate-statistics/biplots.html}
 }
 \keyword{datasets}

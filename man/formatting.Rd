@@ -32,13 +32,12 @@ if the width is too small for the entire tibble. If \code{NULL}, the default,
 will print information about at most \code{tibble.max_extra_cols} extra columns.}
 }
 \description{
-The \code{format} and \code{print} methods for class \code{"tbl_ord"} are
-adapted from those for class \code{"tbl_df"} in
-\strong{\link[tibble]{tibble}} and for class \code{"tbl_graph"} in
-\strong{\link[tidygraph]{tidygraph}}.
+Formatting and printing methods for \code{tbl_ord}s
 }
 \details{
-Note: The \code{format} function is tedius but cannot be easily modularized
-without invoking \code{get_*}, \code{annotation_*}, and \code{augmentation_*}
-multiple times, thereby significantly reducing performance.
+The \code{format} and \code{print} methods for class \link[tidygraph:tbl_graph]{"tbl_ord"``] are adapted from those for class ["tbl_df"][tibble::tbl_df] and for class ["tbl_graph"`}.
+
+Note: The \code{format()} function is tedius but cannot be easily modularized
+without invoking \link{accessors}, \link{annotation}, and \link{augmentation} multiple
+times, thereby significantly reducing performance.
 }

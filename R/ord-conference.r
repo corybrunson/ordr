@@ -1,26 +1,29 @@
-#' Confer inertia to factors of an ordination
+#' @title Confer inertia to factors of an ordination
 #'
-#' Re-distribute inertia between cases and variables in an ordination.
-#'
+#' @description Re-distribute inertia between cases and variables in an
+#'   ordination.
+#'   
 
-#' The \emph{inertia} of a singular value decomposition (eigendecomposition)
-#' consists in the squares of the singular values (eigenvalues), and represents
-#' the variance, likened to the physical inertia, in the directions of the
+#' @details
+#'
+#' The _inertia_ of a singular value decomposition (eigendecomposition) consists
+#' in the squares of the singular values (eigenvalues), and represents the
+#' variance, likened to the physical inertia, in the directions of the
 #' orthogonal singular vectors (eigenvectors). Read more about conferring
 #' inertia between cases and variables at
-#' \url{https://stats.stackexchange.com/a/141755/68743}.
+#' <https://stats.stackexchange.com/a/141755/68743>.
 #'
-#' Note: In case \code{inertia} is a rectangular matrix, may only be able to
-#' confer it entirely to the cases (\code{p = 1}) or entirely to the variables
-#' (\code{p = 0}).
+#' _Note: In case the `"inertia"` attribute is a rectangular matrix, one may
+#' only be able to confer it entirely to the cases (`p = 1`) or entirely to the
+#' variables (`p = 0`)._
 #' 
 
 #' @name conference
-#' @include augmentation.r
-#' @param x A \code{tbl_ord}.
-#' @param p Numeric vector of length 1 or 2. If length 1, the proportion of the 
-#'   inertia assigned to the cases, with the remainder \code{1 - p} assigned to 
-#'   the variables. If length 2, the proportions of the inertia assigned to the 
+#' @include ord-augmentation.r
+#' @param x A `tbl_ord` object.
+#' @param p Numeric vector of length 1 or 2. If length 1, the proportion of the
+#'   inertia assigned to the cases, with the remainder `1 - p` assigned to the
+#'   variables. If length 2, the proportions of the inertia assigned to the
 #'   cases and to the variables, respectively.
 
 #' @rdname conference

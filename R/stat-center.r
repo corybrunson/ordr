@@ -1,4 +1,4 @@
-#' Compute geometric centers and spreads for ordination factors
+#' @title Compute geometric centers and spreads for ordination factors
 #'
 
 #' @template ggbiplot-layers
@@ -6,10 +6,9 @@
 #' @name ggbiplot-center
 #' @inheritParams ggplot2::layer
 #' @param fun.data,fun.center,fun.min,fun.max,fun.args Functions and arguments
-#'   treated as in \code{\link[ggplot2]{stat_summary}}, with \code{fun.center},
-#'   \code{fun.min}, and \code{fun.max} behaving as \code{fun.y},
-#'   \code{fun.ymin}, and \code{fun.ymax}.
-#' @param ... Additional arguments passed to \code{\link[ggplot2]{layer}}.
+#'   treated as in [ggplot2::stat_summary()], with `fun.center`, `fun.min`, and
+#'   `fun.max` behaving as `fun.y`, `fun.ymin`, and `fun.ymax`.
+#' @template param-stat
 #' @example inst/examples/ex-iris.r
 
 #' @rdname ggbiplot-center

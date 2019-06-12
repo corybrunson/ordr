@@ -3,14 +3,13 @@
 \name{benthos}
 \alias{benthos}
 \title{Marine species from sea-bed (benthic) samples}
-\format{A \code{\link[=matrix]{matrix}}.}
+\format{A \link[base:matrix]{matrix}.}
 \source{
-Greenacre M.J. (2010). \emph{Biplots in Practice}. Fundacion BBVA.
-  \url{https://www.fbbva.es/microsite/multivariate-statistics/data.html}
+Greenacre (2010).
 }
 \description{
-Counts of 92 benthic species at 13 sites in the North Sea following an oil
-exploration.
+Counts of 92 benthic species at 13 sites in the North Sea
+following an oil exploration.
 }
 \examples{
 
@@ -104,5 +103,10 @@ b \%>\%
   geom_u_point(color = "darkgreen") +
   geom_v_point(color = "brown", shape = 17) +
   geom_v_text_repel(color = "brown")
+}
+\references{
+Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
+978-84-923846.
+\url{https://www.fbbva.es/microsite/multivariate-statistics/biplots.html}
 }
 \keyword{datasets}

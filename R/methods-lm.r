@@ -1,9 +1,11 @@
-#' Functionality for linear model objects
-#' 
-#' These methods extract data from, and attribute new data to, objects of class
-#' \code{"lm"}, \code{"glm"}, and \code{"mlm"}.
-#' 
+#' @title Functionality for linear model objects
+#'
+#' @description These methods extract data from, and attribute new data to,
+#'   objects of class `"lm"`, `"glm"`, and `"mlm"` as returned by [stats::lm()]
+#'   and [stats::glm()].
+#'
 #' @name methods-lm
+#' @include ord-tbl.r
 #' @template param-methods
 #' @template param-matrix
 #' @template param-align

@@ -1,29 +1,30 @@
-#' Access factors, coordinates, inertia, and metadata from ordination objects
-#' 
-#' These functions return information about the matrix factorization underlying
-#' an ordination.
-#' 
+#' @title Access factors, coordinates, and metadata from ordination objects
+#'
+#' @description These functions return information about the matrix
+#'   factorization underlying an ordination.
+#'   
 
-#' The \code{recover_*} functions extract one or both of the matrix factors
+#' @details
+#'
+#' The `recover_*()` functions extract one or both of the matrix factors
 #' \eqn{U,V} that constitute the original ordination. These are interpreted as
-#' the case scores (\eqn{U}) and the variable loadings (\eqn{V}). The
-#' \code{get_*} functions optionally (and by default) apply any alignment stored
-#' as the \code{"align"} attribute (see \code{\link{alignment}}). Only the
-#' \code{recover_*} functions are generics that require methods for each
-#' ordination class.
+#' the case scores (\eqn{U}) and the variable loadings (\eqn{V}). The `get_*()`
+#' functions optionally (and by default) apply any alignment stored as the
+#' `"align"` attribute (see [alignment]). Only the `recover_*()` functions are
+#' generics that require methods for each ordination class.
 #'
-#' \code{get_coord} retrieves the names of the coordinates shared by \eqn{U} and
-#' \eqn{V}, on which the original data were ordinated, and \code{dim.tbl_ord}
+#' `get_coord()` retrieves the names of the coordinates shared by \eqn{U} and
+#' \eqn{V}, on which the original data were ordinated, and `dim.tbl_ord()`
 #' retrieves their number.
-#'
+#' 
 
 #' @name accessors
 #' @include utils.r
-#' @param x A \code{tbl_ord}, or an ordination object coercible to one.
-#' @param ... Additional arguments from \code{as.matrix}; ignored.
+#' @param x A `tbl_ord`, or an ordination object coercible to one.
+#' @param ... Additional arguments from [base::as.matrix()]; ignored.
 #' @template param-matrix
 #' @param align Logical; whether to align the matrix factors and coordinates
-#'   according to an \code{"align"} matrix attribute.
+#'   according to an `"align"` matrix attribute.
 
 #' @rdname accessors
 #' @export

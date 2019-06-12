@@ -38,8 +38,8 @@
 \item{x}{An ordination object.}
 }
 \description{
-These methods extract data from, and attribute new data to, objects of class 
-\code{"ca"} from the \strong{ca} package.
+These methods extract data from, and attribute new data to,
+objects of class \code{"ca"} from the \strong{\link[ca:ca]{ca}} package.
 }
 \examples{
 

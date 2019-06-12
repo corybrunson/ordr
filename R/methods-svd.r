@@ -1,11 +1,12 @@
-#' Functionality for singular value decompositions
-#' 
-#' These methods extract data from, and attribute new data to, objects of class 
-#' \code{"svd"}. (This is a class introduced in this package to identify 
-#' objects returned by \code{\link{svd}}, which is masked by a wrapper that
-#' adds the class attribute.)
-#' 
+#' @title Functionality for singular value decompositions
+#'
+#' @description These methods extract data from, and attribute new data to,
+#'   objects of class `"svd"`. This is a class introduced in this package to
+#'   identify objects returned by [base::svd()], which is masked by a wrapper
+#'   that adds the class attribute.
+#'
 #' @name methods-svd
+#' @include ord-tbl.r
 #' @template param-methods
 
 #' @rdname methods-svd

@@ -1,32 +1,34 @@
-#' Fortify a \code{tbl_ord} for plotting
+#' @title Fortify a `tbl_ord` for plotting
 #'
-#' These methods of \code{\link[ggplot2]{fortify}} and \code{\link[broom]{tidy}}
-#' convert a \code{\link{tbl_ord}} object to a
-#' \code{\link[tibble:tibble]{tbl_df}} object.
+#' @description These methods of [ggplot2::fortify()] and [generics::tidy()]
+#'   convert a [tbl_ord] object to a [tbl_df][tibble::tbl_df] object.
+#'   
+
+#' @details
 #' 
-
-#' The \code{fortify} and \code{tidy} methods for \code{tbl_ord} objects produce
-#' the same output, a \link[tibble]{tibble} obtained by binding columns obtained
-#' via \code{\link[=accessors]{get_*}}, \code{\link[=annotation]{annotation_*}},
-#' and \code{\link[=augmentation]{augmentation_*}}, respectively.
+#' The `fortify()` and `tidy()` methods for `tbl_ord` objects produce the same
+#' output, a [tibble][tibble::tibble] obtained by binding columns obtained via
+#' [`get_*()`][accessors], [`annotation_*()`][annotation], and
+#' [`augmentation_*`][augmentation], respectively.
 #'
-#' If any augmented variables are included (i.e. unless \code{include =
-#' "coordinates"}), then the tibble is assigned a \code{"coordinates"} attribute
-#' whose value is obtained via \code{\link{get_coord}}. (Note that this
-#' attribute will not be printed with the tibble.)
+#' If any augmented variables are included
+#' (i.e. unless `include = "coordinates"`),
+#' then the tibble is assigned a `"coordinates"` attribute
+#' whose value is obtained via [get_coord()].
+#' (Note that this attribute will not be printed with the tibble.)
 
-#' @name fortification
-#' @param model,x A \code{\link{tbl_ord}}.
+#' @name fortify
+#' @param model,x A [tbl_ord] object.
 #' @param data Ignored.
-#' @param ... Additional arguments received from \code{fortify} or \code{tidy}; 
+#' @param ... Additional arguments received from `fortify()` or `tidy()`;
 #'   ignored.
 #' @template param-matrix
-#' @param include Character matched to \code{"coordinates"}, \code{"shared"}, or
-#'   \code{"all"}; whether the fortified data frame should include only the 
-#'   ordination coordinates or also augmented case and variable data, and, if
-#'   the latter, whether only shared fields or all from both.
+#' @param include Character matched to `"coordinates"`, `"shared"`, or `"all"`;
+#'   whether the fortified data frame should include only the ordination
+#'   coordinates or also augmented case and variable data, and, if the latter,
+#'   whether only shared fields or all from both.
 
-#' @rdname fortification
+#' @rdname fortify
 #' @export
 fortify.tbl_ord <- function(
   model, data, ...,
@@ -78,25 +80,25 @@ fortify.tbl_ord <- function(
   tbl
 }
 
-#' @rdname fortification
+#' @rdname fortify
 #' @export
 fortify_u <- function(model, include = "all") {
   include <- match.arg(include, c("coordinates", "all"))
   fortify(model = model, data = NULL, .matrix = "u", include = include)
 }
 
-#' @rdname fortification
+#' @rdname fortify
 #' @export
 fortify_v <- function(model, include = "all") {
   include <- match.arg(include, c("coordinates", "all"))
   fortify(model = model, data = NULL, .matrix = "v", include = include)
 }
 
-#' @importFrom broom tidy
+#' @importFrom generics tidy
 #' @export
-broom::tidy
+generics::tidy
 
-#' @rdname fortification
+#' @rdname fortify
 #' @export
 tidy.tbl_ord <- function(x, ..., .matrix = "uv", include = "all") {
   fortify.tbl_ord(model = x, data = NULL, .matrix = .matrix, include = include)

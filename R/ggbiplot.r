@@ -1,55 +1,52 @@
-#' Biplots following the grammar of graphics
+#' @title Biplots following the grammar of graphics
 #' 
-#' Build a biplot visualization from ordination data wrapped as a
-#' \code{tbl_ord}.
+#' @description Build a biplot visualization from ordination data wrapped as a
+#' `tbl_ord` object.
 #' 
 
-#' \code{ggbiplot} produces a \strong{\link[ggplot2]{ggplot2}} object from a 
-#' \code{\link{tbl_ord}} object. The baseline object is the default unadorned
-#' \code{ggplot} object \code{p} with the following differences:
-
-#' \itemize{
-
-#'   \item \code{p$mapping} is augmented with \code{.matrix = .matrix}, which
-#'   expects either \code{.matrix = "u"} or \code{.matrix = "v"} from the biplot
-#'   layers.
-
-#'   \item \code{p$coordinates} is set to \code{\link[ggplot2]{coord_fixed}} in
-#'   order to faithfully render the geometry of an ordination.
-
-#'   \item \code{p} is assigned the class \code{"ggbiplot"}. This serves no
-#'   functional purpose currently.
-
-#' }
-
-#' Furthermore, the user may feed single integer values to the \code{x} and
-#' \code{y} aesthetics, which will be interpreted as the corresponding
-#' coordinates in the ordination.
+#' @details
 #'
-#' \code{ord_aes} is a convenience function that generates a full-rank set of
-#' coordinate aesthetics \code{.coord1}, \code{.coord2}, etc. mapped to the
+#' `ggbiplot()` produces a [ggplot][ggplot2::ggplot] object from a `tbl_ord`
+#' object. The baseline object is the default unadorned `"ggplot"`-class object
+#' `p` with the following differences from what [ggplot2::ggplot()] returns:
+
+#' - `p$mapping` is augmented with `.matrix = .matrix`, which expects either
+#' `.matrix = "u"` or `.matrix = "v"` from the biplot.
+
+#' - `p$coordinates` is defaulted to [ggplot2::coord_fixed] in order to
+#' faithfully render the geometry of an ordination.
+
+#' - `p` is assigned the class `"ggbiplot"` in addition to `"ggplot"`. This
+#' serves no functional purpose currently.
+#' 
+
+#' Furthermore, the user may feed single integer values to the `x` and `y`
+#' aesthetics, which will be interpreted as the corresponding coordinates in the
+#' ordination.
+#'
+#' `ord_aes()` is a convenience function that generates a full-rank set of
+#' coordinate aesthetics `.coord1`, `.coord2`, etc. mapped to the
 #' shared coordinates of the ordination object, along with any additional
-#' aesthetics that are processed internally by \code{\link[ggplot2]{aes}}.
+#' aesthetics that are processed internally by [ggplot2::aes()].
 #' 
 
 #' @template ggbiplot-layers
 
 #' @name ggbiplot
 #' @import ggplot2
-#' @param ordination A \code{\link{tbl_ord}}.
+#' @param ordination A [tbl_ord].
 #' @param mapping List of default aesthetic mappings to use for the biplot. The
-#'   default assigns the first two coordinates to the aesthetics \code{x} and
-#'   \code{y}. Other assignments must be supplied in each layer added to the
-#'   plot.
+#'   default assigns the first two coordinates to the aesthetics `x` and `y`.
+#'   Other assignments must be supplied in each layer added to the plot.
 #' @param sec.axes Matrix factor character to specify a secondary set of axes.
 #' @param scale.factor Numeric value used to scale the secondary axes against
-#'   the primary axes; ignored if \code{sec.axes} is not specified.
+#'   the primary axes; ignored if `sec.axes` is not specified.
 #' @param scale_u,scale_v Either the character name of a numeric variable in
-#'   \code{get_*(ordination)} or a numeric vector of length
-#'   \code{nrow(get_*(ordination))}, used to scale the coordinates of \eqn{U} or
+#'   `get_*(ordination)` or a numeric vector of length
+#'   `nrow(get_*(ordination))`, used to scale the coordinates of \eqn{U} or
 #'   \eqn{V}, respectively.
-#' @param ... Additional arguments passed to \code{\link[ggplot2]{ggplot}} or to
-#'   \code{\link[ggplot2]{aes}}.
+#' @param ... Additional arguments passed to [ggplot2::ggplot()] or to
+#'   [ggplot2::aes()].
 
 #' @rdname ggbiplot
 #' @export

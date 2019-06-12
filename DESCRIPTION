@@ -31,13 +31,8 @@ Encoding: UTF-8
 LazyData: true
 Suggests: testthat
 RoxygenNote: 6.1.1
+Roxygen: list(markdown = TRUE)
 Collate: 
-    'utils.r'
-    'accessors.r'
-    'augmentation.r'
-    'alignment.r'
-    'annotation.r'
-    'conference.r'
     'data.r'
     'dplyr-verbs.r'
     'format.r'
@@ -54,6 +49,12 @@ Collate:
     'geom-vector.r'
     'ggbiplot.r'
     'masks.r'
+    'utils.r'
+    'ord-accessors.r'
+    'ord-augmentation.r'
+    'ord-conference.r'
+    'ord-alignment.r'
+    'ord-tbl.r'
     'methods-ca.r'
     'methods-cmds.r'
     'methods-eigen.r'
@@ -63,6 +64,7 @@ Collate:
     'methods-prcomp.r'
     'methods-princomp.r'
     'methods-svd.r'
+    'ord-annotation.r'
     'ordr.r'
     'plot.r'
     'reconstruct.r'
@@ -71,4 +73,3 @@ Collate:
     'stat-ellipse.r'
     'stat-matrix.r'
     'stat-spantree.r'
-    'tbl-ord.r'

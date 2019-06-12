@@ -1,13 +1,14 @@
-#' Compute normal confidence ellipses for ordination factors
-#' 
-#' These ordination stats are adapted from \code{\link[ggplot2]{stat_ellipse}}.
-#' 
+#' @title Compute normal confidence ellipses for ordination factors
+#'
+#' @description These ordination stats are adapted from
+#'   [ggplot2::stat_ellipse()].
+#'   
 
 #' @template ggbiplot-layers
 
 #' @name ggbiplot-ellipse
 #' @inheritParams ggplot2::stat_ellipse
-#' @param ... Additional arguments passed to \code{\link[ggplot2]{layer}}.
+#' @template param-stat
 #' @example inst/examples/ex-iris.r
 
 #' @rdname ggbiplot-ellipse

@@ -1,38 +1,39 @@
-#' Render text at ordinates
+#' @title Render text at ordinates
 #' 
 
-#' \code{geom_*_text} renders text, and \code{geom_*_label} labels, at the 
-#' positions of the subjects or vectors. \code{geom_*_text_repel} and 
-#' \code{geom_*_label_repel} invoke functionality from
-#' \strong{\link[ggrepel]{ggrepel}}.
+#' @description `geom_*_text()` renders text, and `geom_*_label()` labels, at
+#'   the positions of the subjects or vectors. `geom_*_text_repel()` and
+#'   `geom_*_label_repel()` invoke functionality from the
+#'   **[ggrepel][ggrepel::ggrepel]** package.
 #' @template ggbiplot-layers
 
 #' @section Aesthetics:
-#' \code{geom_*_text}, \code{geom_*_label}, \code{geom_*_text_repel}, and
-#' \code{geom_*_label_repel} understand the following aesthetics (required
+
+#' `geom_*_text()`, `geom_*_label()`, `geom_*_text_repel()`, and
+#' `geom_*_label_repel()` understand the following aesthetics (required
 #' aesthetics are in bold):
-#' \itemize{
-#'   \item \strong{\code{x}}
-#'   \item \strong{\code{y}}
-#'   \item \strong{\code{label}}
-#'   \item \code{alpha}
-#'   \item \code{angle}
-#'   \item \code{colour}
-#'   \item \code{family}
-#'   \item \code{fontface}
-#'   \item \code{group}
-#'   \item \code{lineheight}
-#'   \item \code{size}
-#' }
+
+#' - **`x`**
+#' - **`y`**
+#' - **`label`**
+#' - `alpha`
+#' - `angle`
+#' - `colour`
+#' - `family`
+#' - `fontface`
+#' - `hjust`
+#' - `lineheight`
+#' - `size`
+#' - `vjust`
+#' - `group`
 #' 
 
 #' @name ggbiplot-text
 #' @import ggplot2
 #' @importFrom ggrepel GeomTextRepel GeomLabelRepel
 #' @inheritParams ggplot2::layer
-#' @template param-layer
-#' @param parse,check_overlap,nudge_x,nudge_y See
-#'   \code{\link[ggplot2]{geom_text}}.
+#' @template param-geom
+#' @param parse,check_overlap,nudge_x,nudge_y See [ggplot2::geom_text()].
 #' @template param-matrix
 
 #' @rdname ggbiplot-text

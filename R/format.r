@@ -1,13 +1,14 @@
-#' Formatting and printing methods for \code{tbl_ord}s
+#' @title Formatting and printing methods for `tbl_ord`s
 #'
-#' The \code{format} and \code{print} methods for class \code{"tbl_ord"} are
-#' adapted from those for class \code{"tbl_df"} in
-#' \strong{\link[tibble]{tibble}} and for class \code{"tbl_graph"} in
-#' \strong{\link[tidygraph]{tidygraph}}.
+#' @details
 #'
-#' Note: The \code{format} function is tedius but cannot be easily modularized
-#' without invoking \code{get_*}, \code{annotation_*}, and \code{augmentation_*}
-#' multiple times, thereby significantly reducing performance.
+#' The `format` and `print` methods for class [`"tbl_ord"``] are adapted from
+#' those for class [`"tbl_df"`][tibble::tbl_df] and for class
+#' [`"tbl_graph"`][tidygraph::tbl_graph].
+#'
+#' Note: The `format()` function is tedius but cannot be easily modularized
+#' without invoking [accessors], [annotation], and [augmentation] multiple
+#' times, thereby significantly reducing performance.
 #' 
 
 #' @name formatting

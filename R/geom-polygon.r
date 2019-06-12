@@ -1,28 +1,29 @@
-#' Render polygons around ordinates
+#' @title Render polygons around ordinates
 #' 
 
-#' \code{geom_*_polygon} renders polygons around the convex hulls of the
-#' positions of the subjects or vectors.
+#' @description `geom_*_polygon()` renders polygons around the convex hulls of
+#'   the positions of the subjects or vectors.
 #' @template ggbiplot-layers
 
-#' @section Aesthetics: \code{geom_*_polygon} understands the following
-#'   aesthetics (required aesthetics are in bold):
-#' \itemize{
-#'   \item \strong{\code{x}}
-#'   \item \strong{\code{y}}
-#'   \item \code{alpha}
-#'   \item \code{colour}
-#'   \item \code{fill}
-#'   \item \code{linetype}
-#'   \item \code{size}
-#'   \item \code{group}
-#' }
+#' @section Aesthetics:
+
+#' `geom_*_polygon()` understands the following aesthetics (required aesthetics
+#' are in bold):
+
+#' - **`x`**
+#' - **`y`**
+#' - `alpha`
+#' - `colour`
+#' - `fill`
+#' - `linetype`
+#' - `size`
+#' - `group`
 #' 
 
 #' @name ggbiplot-polygon
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
-#' @template param-layer
+#' @template param-geom
 #' @template param-matrix
 #' @example inst/examples/ex-logratio.r
 

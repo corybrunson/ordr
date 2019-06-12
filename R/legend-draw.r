@@ -1,10 +1,19 @@
-#' Biplot key drawing functions
-#' 
+#' @title Biplot key drawing functions
+#'
+#' @description These key drawing functions supplement those built into
+#'   **[ggplot2][ggplot2::ggplot2]** for producing legends suitable to biplots.
+
+#' @details
+#'
+#' `draw_key_line()` is a horizontal counterpart to [ggplot2::draw_key_vline()].
+#' `draw_key_crosslines()` superimposes these two keys, and
+#' `draw_key_crosspoint()` additionally superimposes an oversized
+#' [ggplot2::draw_key_point()].
 
 #' @name ggbiplot-draw-key
 #' @inheritParams ggplot2::draw_key
 #' @return A grid grob.
-#' @seealso \code{\link[ggplot2]{draw_key}}
+#' @seealso [ggplot2::draw_key]
 NULL
 
 #' @rdname ggbiplot-draw-key

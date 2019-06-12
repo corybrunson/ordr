@@ -1,15 +1,15 @@
-#' Restrict ordination data to the convex hulls of both matrix factors
+#' @title Restrict ordination data to the convex hulls of both matrix factors
 #'
-#' As used in a \strong{\link{ggplot2}} vignette, this stat layer restricts a
-#' dataset with \code{x} and \code{y} variables to its convex hull. The biplot
-#' extension restricts each matrix factor to its own hull.
-#' 
+#' @description As used in a **[ggplot2][ggplot2::ggplot2]** vignette, this stat
+#'   layer restricts a dataset with `x` and `y` variables to its convex hull.
+#'   The biplot extension restricts each matrix factor to its own hull.
+#'   
 
 #' @template ggbiplot-layers
 
 #' @name ggbiplot-chull
 #' @inheritParams ggplot2::layer
-#' @param ... Additional arguments passed to \code{\link[ggplot2]{layer}}.
+#' @template param-stat
 
 #' @rdname ggbiplot-chull
 #' @usage NULL

@@ -1,14 +1,16 @@
-#' Functionality for matrix spectral decompositions
-#' 
-#' These methods extract data from, and attribute new data to, objects of class 
-#' \code{"eigen"}. (This is a class introduced in this package to identify 
-#' objects returned by \code{\link{eigen}}, which is masked by a wrapper that
-#' adds the class attribute.)
-#' 
+#' @title Functionality for matrix spectral decompositions
+#'
+#' @description These methods extract data from, and attribute new data to,
+#'   objects of class `"eigen"`. This is a class introduced in this package to
+#'   identify objects returned by [base::eigen()], which is masked by a wrapper
+#'   that adds the class attribute.
+#'
 #' @name methods-eigen
+#' @include ord-tbl.r
 #' @template param-methods
 #' @template param-matrix
 #' @template param-align
+
 # @example inst/examples/ex-eigen.r (uses *igraph*)
 
 #' @rdname methods-eigen

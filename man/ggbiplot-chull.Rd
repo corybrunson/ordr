@@ -57,25 +57,24 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[=borders]{borders()}}.}
 
-\item{...}{Additional arguments passed to \code{\link[ggplot2]{layer}}.}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 }
 \description{
-As used in a \strong{\link{ggplot2}} vignette, this stat layer restricts a
-dataset with \code{x} and \code{y} variables to its convex hull. The biplot
-extension restricts each matrix factor to its own hull.
+As used in a \strong{\link[ggplot2:ggplot2]{ggplot2}} vignette, this stat
+layer restricts a dataset with \code{x} and \code{y} variables to its convex hull.
+The biplot extension restricts each matrix factor to its own hull.
 }
 \section{Biplot layers}{
 
-\code{\link{ggbiplot}} uses \code{\link[ggplot2]{fortify}} internally to 
-produce a single data frame with a \code{.matrix} column distinguishing the 
-subjects (\code{"u"}) and variables (\code{"v"}). The stat layers 
-\code{stat_u} and \code{stat_v} simply filter the data frame to one of these 
-two.
+\code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
+frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
+variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
+the data frame to one of these two.
 
-The geom layers \code{geom_u_*} and \code{geom_v_*} call the corresponding
-stat in order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \code{geom_biplot_*} selects a default matrix based on common
-practice, e.g. \eqn{U} for points and \eqn{V} for arrows.
+The geom layers \code{geom_u_*()} and \code{geom_v_*()} call the corresponding stat in
+order to render plot elements for the corresponding matrix \eqn{U} or
+\eqn{V}. \code{geom_biplot_*()} selects a default matrix based on common practice,
+e.g. \eqn{U} for points and \eqn{V} for arrows.
 }
 
 \keyword{datasets}

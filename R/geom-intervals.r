@@ -1,36 +1,34 @@
-#' Render intervals depicting ranges, usually about center points
+#' @title Render intervals depicting ranges, usually about center points
 #' 
 
-#' \code{geom_*_lineranges} renders horizontal and vertical intervals for a
-#' specified subject or variable; \code{geom_*_pointranges} additionally renders
-#' a point at their crosshairs.
+#' @description `geom_*_lineranges()` renders horizontal and vertical intervals
+#'   for a specified subject or variable; `geom_*_pointranges()` additionally
+#'   renders a point at their crosshairs.
 #' @template ggbiplot-layers
 
 #' @section Aesthetics:
 
-#' \code{geom_*_lineranges} and \code{geom_*_pointranges} understand the
-#' following aesthetics (required aesthetics are in bold):
+#' `geom_*_lineranges()` and `geom_*_pointranges()` understand the following
+#' aesthetics (required aesthetics are in bold):
 
-#' \itemize{
-#'   \item \strong{\code{x}}
-#'   \item \strong{\code{xmin}}
-#'   \item \strong{\code{xmax}}
-#'   \item \strong{\code{y}}
-#'   \item \strong{\code{ymin}}
-#'   \item \strong{\code{ymax}}
-#'   \item \code{alpha}
-#'   \item \code{colour}
-#'   \item \code{linetype}
-#'   \item \code{size}
-#'   \item \code{group}
-#' }
+#' - **`x`**
+#' - **`xmin`**
+#' - **`xmax`**
+#' - **`y`**
+#' - **`ymin`**
+#' - **`ymax`**`
+#' - `alpha`
+#' - `colour`
+#' - `linetype`
+#' - `size`
+#' - `group`
 #' 
 
 #' @name ggbiplot-intervals
 #' @include legend-draw.r
 #' @import ggplot2
 #' @inheritParams ggplot2::geom_linerange
-#' @template param-layer
+#' @template param-geom
 #' @template param-matrix
 
 #' @rdname ggbiplot-intervals

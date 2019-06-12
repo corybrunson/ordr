@@ -1,26 +1,28 @@
-#' Calculate a minimum spanning tree among cases or variables
+#' @title Calculate a minimum spanning tree among cases or variables
 #'
-#' This stat layer identifies the \eqn{n-1} pairs among \eqn{n} points that form
-#' a minimum spanning tree, then calculates the segments between these poirs in
-#' the two dimensions \code{x} and \code{y}.
-#' 
+#' @description This stat layer identifies the \eqn{n-1} pairs among \eqn{n}
+#'   points that form a minimum spanning tree, then calculates the segments
+#'   between these poirs in the two dimensions `x` and `y`.
+#'   
 
+#' @details
+#' 
 #' A minimum spanning tree (MST) on the point cloud \eqn{X} is a minimal
 #' connected graph on \eqn{X} with the smallest possible sum of distances (or
-#' dissimilarities) between linked points. These layers call
-#' \code{\link[stats]{dist}} to calculate a distance/dissimilarity object and
-#' \code{\link[vegan]{spantree}} to calculate the MST. The result is formatted
-#' with position aesthetics readable by \code{\link[ggplot2]{geom_segment}}.
+#' dissimilarities) between linked points. These layers call [stats::dist()] to
+#' calculate a distance/dissimilarity object and [vegan::spantree()] to
+#' calculate the MST. The result is formatted with position aesthetics readable
+#' by [ggplot2::geom_segment()].
 #'
-#' If any aesthetics of the form \code{.coord[0-9]+} are detected, then the lot
-#' of them are used to calculate distances/dissimilarities. These should not be
-#' assigend manually but generated using the convenience function
-#' \code{\link{ord_aes}} (see the examples). Otherwise, \code{x} and \code{y}
-#' are used. Either way, \code{x} and \code{y} provide the position aesthetics.
+#' If any aesthetics of the form `.coord[0-9]+` are detected, then the lot of
+#' them are used to calculate distances/dissimilarities. These should not be
+#' assigend manually but generated using the convenience function [ord_aes()]
+#' (see the examples). Otherwise, `x` and `y` are used. Either way, `x` and `y`
+#' provide the position aesthetics.
 #'
-#' An MST calculated on \code{x} and \code{y} reflects the distances among the
-#' points in \eqn{X} in the reduced-dimension plane of the biplot. In contrast,
-#' one calculated on the full set of coordinates reflects distances in
+#' An MST calculated on `x` and `y` reflects the distances among the points in
+#' \eqn{X} in the reduced-dimension plane of the biplot. In contrast, one
+#' calculated on the full set of coordinates reflects distances in
 #' higher-dimensional space. Plotting this high-dimensional MST on the
 #' 2-dimensional biplot provides a visual cue as to how faithfully two
 #' dimensions can encapsulate the "true" distances between points (Jolliffe,
@@ -34,8 +36,8 @@
 
 #' @name ggbiplot-spantree
 #' @inheritParams ggplot2::layer
-#' @param method Passed to \code{\link[stats]{dist}}.
-#' @param ... Additional arguments passed to \code{\link[ggplot2]{layer}}.
+#' @param method Passed to [stats::dist()].
+#' @template param-stat
 #' @example inst/examples/ex-spantree.r
 
 #' @rdname ggbiplot-spantree
@@ -54,7 +56,7 @@ StatSpantree <- ggproto(
     if (length(dis_cols) == 0) dis_cols <- match(c("x", "y"), names(data))
     #if (is.null(data$coord)) dis_cols <- c("x", "y") else dis_cols <- "coord"
     
-    # distance/dissimilarity data -+-USING PRESCRIBED `dist()` METHOD-+-
+    # distance/dissimilarity data
     data_dis <- dist(data[, dis_cols, drop = FALSE], method = method)
     # minimum spanning tree
     data_mst <- vegan::spantree(data_dis)

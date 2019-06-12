@@ -45,9 +45,9 @@ layer, as a string.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{...}{Additional arguments passed to \code{\link[ggplot2]{layer}}.}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
-\item{na.rm}{Passed to \code{\link[ggplot2]{layer}}s.}
+\item{na.rm}{Passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -65,35 +65,34 @@ or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 }
 \description{
-\code{geom_*_path} renders line segments through consecutive pairs of case or
-variable positions.
+\code{geom_*_path()} renders line segments through consecutive pairs
+of case or variable positions.
 }
 \section{Biplot layers}{
 
-\code{\link{ggbiplot}} uses \code{\link[ggplot2]{fortify}} internally to 
-produce a single data frame with a \code{.matrix} column distinguishing the 
-subjects (\code{"u"}) and variables (\code{"v"}). The stat layers 
-\code{stat_u} and \code{stat_v} simply filter the data frame to one of these 
-two.
+\code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
+frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
+variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
+the data frame to one of these two.
 
-The geom layers \code{geom_u_*} and \code{geom_v_*} call the corresponding
-stat in order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \code{geom_biplot_*} selects a default matrix based on common
-practice, e.g. \eqn{U} for points and \eqn{V} for arrows.
+The geom layers \code{geom_u_*()} and \code{geom_v_*()} call the corresponding stat in
+order to render plot elements for the corresponding matrix \eqn{U} or
+\eqn{V}. \code{geom_biplot_*()} selects a default matrix based on common practice,
+e.g. \eqn{U} for points and \eqn{V} for arrows.
 }
 
 \section{Aesthetics}{
 
-\code{geom_*_path} understands the following aesthetics (required aesthetics
-are in bold):
+\code{geom_*_path()} understands the following aesthetics (required aesthetics are
+in bold):
 \itemize{
-  \item \strong{\code{x}}
-  \item \strong{\code{y}}
-  \item \code{alpha}
-  \item \code{colour}
-  \item \code{linetype}
-  \item \code{size}
-  \item \code{group}
+\item \strong{\code{x}}
+\item \strong{\code{y}}
+\item \code{alpha}
+\item \code{colour}
+\item \code{linetype}
+\item \code{size}
+\item \code{group}
 }
 }
 

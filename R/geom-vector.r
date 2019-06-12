@@ -1,32 +1,31 @@
-#' Render vectors from origin to ordinates
+#' @title Render vectors from origin to ordinates
 #' 
 
-#' \code{geom_*_vector} renders arrows from the origin to the position of each
-#' case or variable.
+#' @description `geom_*_vector()` renders arrows from the origin to the position
+#'   of each case or variable.
 #' @template ggbiplot-layers
 
 #' @section Aesthetics:
-#' \code{geom_*_vector} understands the following aesthetics (required
-#' aesthetics are in bold):
-#' \itemize{
-#'   \item \strong{\code{x}}
-#'   \item \strong{\code{y}}
-#'   \item \code{alpha}
-#'   \item \code{colour}
-#'   \item \code{fill}
-#'   \item \code{linetype}
-#'   \item \code{size}
-#'   \item \code{group}
-#' }
+
+#' `geom_*_vector()` understands the following aesthetics (required aesthetics
+#' are in bold):
+
+#' - **`x`**
+#' - **`y`**
+#' - `alpha`
+#' - `colour`
+#' - `linetype`
+#' - `size`
+#' - `group`
 #' 
 
 #' @name ggbiplot-vector
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
-#' @template param-layer
+#' @template param-geom
 #' @template param-matrix
-#' @param arrow Specification for arrows, as created by
-#'   \code{\link[grid]{arrow}}, or else \code{NULL} for no arrows.
+#' @param arrow Specification for arrows, as created by [grid::arrow()], or else
+#'   `NULL` for no arrows.
 
 #' @rdname ggbiplot-vector
 #' @usage NULL

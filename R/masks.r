@@ -1,11 +1,11 @@
 #' Masks of external ordination objects
-#' 
-#' Some popular ordination functions in R return objects without a specific 
-#' class (e.g. \code{\link[stats]{cmdscale}}). Some others return output that is
-#' not self-contained, for instance missing annotation from the original dataset
-#' (e.g. \code{\link[logisticPCA]{logisticPCA}}). The functions below wrap the 
-#' originals with the minimal overhead necessary for complete functionality with
-#' the \code{\link{tbl_ord}} class.
+#'
+#' Some popular ordination functions in R return objects without a specific
+#' class (e.g. [stats::cmdscale()]). Some others return output that is not
+#' self-contained, for instance missing annotation from the original dataset
+#' (e.g. [logisticPCA::logisticPCA()]). The functions below wrap the originals
+#' with the minimal overhead necessary for complete functionality with the
+#' [tbl_ord] class.
 
 #' @name masks
 #' @importFrom logisticPCA logisticPCA logisticSVD

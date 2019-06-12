@@ -1,9 +1,10 @@
-#' Functionality for k-means clustering ('kmeans') objects
-#' 
-#' These methods extract data from, and attribute new data to, objects of class 
-#' \code{"kmeans"}.
-#' 
+#' @title Functionality for k-means clustering ('kmeans') objects
+#'
+#' @description These methods extract data from, and attribute new data to,
+#'   objects of class `"kmeans"` as returned by [stats::kmeans()].
+#'
 #' @name methods-kmeans
+#' @include ord-tbl.r
 #' @template param-methods
 #' @example inst/examples/ex-kmeans.r
 

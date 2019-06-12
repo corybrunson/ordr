@@ -1,9 +1,10 @@
-#' Functionality for principal components analysis ('princomp') objects
-#' 
-#' These methods extract data from, and attribute new data to, objects of class 
-#' \code{"princomp"}.
-#' 
+#' @title Functionality for principal components analysis ('princomp') objects
+#'
+#' @description These methods extract data from, and attribute new data to,
+#'   objects of class `"princomp"` as returned by [stats::princomp()].
+#'
 #' @name methods-princomp
+#' @include ord-tbl.r
 #' @template param-methods
 #' @example inst/examples/ex-princomp.r
 

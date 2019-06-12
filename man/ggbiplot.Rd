@@ -12,12 +12,11 @@ ggbiplot(ordination = NULL, mapping = aes(x = 1, y = 2),
 ord_aes(ordination, ...)
 }
 \arguments{
-\item{ordination}{A \code{\link{tbl_ord}}.}
+\item{ordination}{A \link{tbl_ord}.}
 
 \item{mapping}{List of default aesthetic mappings to use for the biplot. The
-default assigns the first two coordinates to the aesthetics \code{x} and
-\code{y}. Other assignments must be supplied in each layer added to the
-plot.}
+default assigns the first two coordinates to the aesthetics \code{x} and \code{y}.
+Other assignments must be supplied in each layer added to the plot.}
 
 \item{sec.axes}{Matrix factor character to specify a secondary set of axes.}
 
@@ -29,46 +28,45 @@ the primary axes; ignored if \code{sec.axes} is not specified.}
 \code{nrow(get_*(ordination))}, used to scale the coordinates of \eqn{U} or
 \eqn{V}, respectively.}
 
-\item{...}{Additional arguments passed to \code{\link[ggplot2]{ggplot}} or to
-\code{\link[ggplot2]{aes}}.}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} or to
+\code{\link[ggplot2:aes]{ggplot2::aes()}}.}
 }
 \description{
 Build a biplot visualization from ordination data wrapped as a
-\code{tbl_ord}.
+\code{tbl_ord} object.
 }
 \details{
-\code{ggbiplot} produces a \strong{\link[ggplot2]{ggplot2}} object from a 
-\code{\link{tbl_ord}} object. The baseline object is the default unadorned
-\code{ggplot} object \code{p} with the following differences:
+\code{ggbiplot()} produces a \link[ggplot2:ggplot]{ggplot} object from a \code{tbl_ord}
+object. The baseline object is the default unadorned \code{"ggplot"}-class object
+\code{p} with the following differences from what \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} returns:
 \itemize{
-  \item \code{p$mapping} is augmented with \code{.matrix = .matrix}, which
-  expects either \code{.matrix = "u"} or \code{.matrix = "v"} from the biplot
-  layers.
-  \item \code{p$coordinates} is set to \code{\link[ggplot2]{coord_fixed}} in
-  order to faithfully render the geometry of an ordination.
-  \item \code{p} is assigned the class \code{"ggbiplot"}. This serves no
-  functional purpose currently.
+\item \code{p$mapping} is augmented with \code{.matrix = .matrix}, which expects either
+\code{.matrix = "u"} or \code{.matrix = "v"} from the biplot.
+\item \code{p$coordinates} is defaulted to \link[ggplot2:coord_fixed]{ggplot2::coord_fixed} in order to
+faithfully render the geometry of an ordination.
+\item \code{p} is assigned the class \code{"ggbiplot"} in addition to \code{"ggplot"}. This
+serves no functional purpose currently.
 }
-Furthermore, the user may feed single integer values to the \code{x} and
-\code{y} aesthetics, which will be interpreted as the corresponding
-coordinates in the ordination.
 
-\code{ord_aes} is a convenience function that generates a full-rank set of
+Furthermore, the user may feed single integer values to the \code{x} and \code{y}
+aesthetics, which will be interpreted as the corresponding coordinates in the
+ordination.
+
+\code{ord_aes()} is a convenience function that generates a full-rank set of
 coordinate aesthetics \code{.coord1}, \code{.coord2}, etc. mapped to the
 shared coordinates of the ordination object, along with any additional
-aesthetics that are processed internally by \code{\link[ggplot2]{aes}}.
+aesthetics that are processed internally by \code{\link[ggplot2:aes]{ggplot2::aes()}}.
 }
 \section{Biplot layers}{
 
-\code{\link{ggbiplot}} uses \code{\link[ggplot2]{fortify}} internally to 
-produce a single data frame with a \code{.matrix} column distinguishing the 
-subjects (\code{"u"}) and variables (\code{"v"}). The stat layers 
-\code{stat_u} and \code{stat_v} simply filter the data frame to one of these 
-two.
+\code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
+frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
+variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
+the data frame to one of these two.
 
-The geom layers \code{geom_u_*} and \code{geom_v_*} call the corresponding
-stat in order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \code{geom_biplot_*} selects a default matrix based on common
-practice, e.g. \eqn{U} for points and \eqn{V} for arrows.
+The geom layers \code{geom_u_*()} and \code{geom_v_*()} call the corresponding stat in
+order to render plot elements for the corresponding matrix \eqn{U} or
+\eqn{V}. \code{geom_biplot_*()} selects a default matrix based on common practice,
+e.g. \eqn{U} for points and \eqn{V} for arrows.
 }
 

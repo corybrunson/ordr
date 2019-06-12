@@ -1,21 +1,21 @@
-#' \strong{dplyr} verbs for \code{tbl_ord} factors
+#' @title **dplyr** verbs for `tbl_ord` factors
 #'
-#' These functions adapt \strong{\link[dplyr]{dplyr}} verbs to the factors of a
-#' \code{tbl_ord}. The raw verbs are not defined for \code{tbl_ord}s; instead,
-#' each verb has two analogues, corresponding to the two matrix factors. They
-#' each rely on a common workhorse function, which takes the composition of the
-#' \strong{dplyr} verb with \code{annotation_*}, applied to the factor,
-#' removes any variables corresponding to coordinates or already annotated, and
-#' only then assigns it as the new \code{"*_annotation"} attribute of
-#' \code{.data} (see \code{\link{annotation}}).
-#' 
+#' @description These functions adapt [dplyr][dplyr::dplyr] verbs to the factors
+#'   of a `tbl_ord`. The raw verbs are not defined for `tbl_ord`s; instead, each
+#'   verb has two analogues, corresponding to the two matrix factors. They each
+#'   rely on a common workhorse function, which takes the composition of the
+#'   **dplyr** verb with `annotation_*`, applied to the factor, removes any
+#'   variables corresponding to coordinates or already annotated, and only then
+#'   assigns it as the new `"*_annotation"` attribute of `.data` (see
+#'   [annotation]).
+#'   
 
 #' @name dplyr-verbs
 #' @importFrom dplyr pull rename select mutate transmute bind_cols
-#' @param .data A \code{\link{tbl_ord}}.
-#' @param var A variable specified as in \code{\link[dplyr]{pull}}.
+#' @param .data A [tbl_ord].
+#' @param var A variable specified as in [dplyr::pull()].
 #' @param ... Comma-separated unquoted expressions as in, e.g.,
-#'   \code{\link[dplyr]{select}}.
+#'   [dplyr::select()].
 #' @template param-matrix
 
 pull_factor <- function(.data, var = -1, .matrix) {

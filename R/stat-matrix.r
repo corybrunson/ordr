@@ -1,15 +1,15 @@
-#' Render plot elements for one matrix of an ordination
+#' @title Render plot elements for one matrix of an ordination
 #'
-#' These stats merely tell \code{\link[ggplot2]{ggplot}} which factor of an
-#' ordination to pull data from for a plot layer. They are invoked internally by
-#' the various \code{geom_*_*} layers.
-#' 
+#' @description These stats merely tell [ggplot2::ggplot()] which factor of an
+#'   ordination to pull data from for a plot layer. They are invoked internally
+#'   by the various `geom_*_*()` layers.
+#'   
 
 #' @template ggbiplot-layers
 
 #' @name ggbiplot-matrix
 #' @inheritParams ggplot2::layer
-#' @param ... Additional arguments passed to \code{\link[ggplot2]{layer}}.
+#' @template param-stat
 
 #' @rdname ggbiplot-matrix
 #' @usage NULL

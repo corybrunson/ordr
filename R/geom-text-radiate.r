@@ -1,29 +1,29 @@
-#' Render text at ordinates radiating out from the origin
+#' @title Render text at ordinates radiating out from the origin
 #' 
 
-#' \code{geom_*_text_radiate} is adapted from \strong{link[ggbiplot]{ggbiplot}}.
-#' It renders labels at specified positions and angles that radiate out from the
-#' origin.
+#' @description `geom_*_text_radiate()` is adapted from [ggbiplot::ggbiplot()].
+#'   It renders labels at specified positions and angles that radiate out from
+#'   the origin.
 #' @template ggbiplot-layers
 
 #' @section Aesthetics:
-#' \code{geom_*_text_radiate} understands the following aesthetics (required
+
+#' `geom_*_text_radiate()` understands the following aesthetics (required
 #' aesthetics are in bold):
-#' \itemize{
-#'   \item \strong{\code{x}}
-#'   \item \strong{\code{y}}
-#'   \item \strong{\code{label}}
-#'   \item \code{alpha}
-#'   \item \code{angle}
-#'   \item \code{colour}
-#'   \item \code{family}
-#'   \item \code{fontface}
-#'   \item \code{group}
-#'   \item \code{hjust}
-#'   \item \code{lineheight}
-#'   \item \code{size}
-#'   \item \code{vjust}
-#' }
+
+#' - **`x`**
+#' - **`y`**
+#' - **`label`**
+#' - `alpha`
+#' - `angle`
+#' - `colour`
+#' - `family`
+#' - `fontface`
+#' - `hjust`
+#' - `lineheight`
+#' - `size`
+#' - `vjust`
+#' - `group`
 #' 
 
 #' @name ggbiplot-text-radiate

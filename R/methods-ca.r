@@ -1,9 +1,10 @@
-#' Functionality for correspondence analysis ('ca') objects
-#' 
-#' These methods extract data from, and attribute new data to, objects of class 
-#' \code{"ca"} from the \strong{ca} package.
-#' 
+#' @title Functionality for correspondence analysis ('ca') objects
+#'
+#' @description These methods extract data from, and attribute new data to,
+#'   objects of class `"ca"` from the **[ca][ca::ca]** package.
+#'
 #' @name methods-ca
+#' @include ord-tbl.r
 #' @template param-methods
 #' @example inst/examples/ex-ca.r
 

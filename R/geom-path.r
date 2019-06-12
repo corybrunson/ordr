@@ -1,28 +1,28 @@
-#' Render piecewise-linear paths through ordinates
+#' @title Render piecewise-linear paths through ordinates
 #' 
 
-#' \code{geom_*_path} renders line segments through consecutive pairs of case or
-#' variable positions.
+#' @description `geom_*_path()` renders line segments through consecutive pairs
+#'   of case or variable positions.
 #' @template ggbiplot-layers
 
 #' @section Aesthetics:
-#' \code{geom_*_path} understands the following aesthetics (required aesthetics
-#' are in bold):
-#' \itemize{
-#'   \item \strong{\code{x}}
-#'   \item \strong{\code{y}}
-#'   \item \code{alpha}
-#'   \item \code{colour}
-#'   \item \code{linetype}
-#'   \item \code{size}
-#'   \item \code{group}
-#' }
+
+#' `geom_*_path()` understands the following aesthetics (required aesthetics are
+#' in bold):
+
+#' - **`x`**
+#' - **`y`**
+#' - `alpha`
+#' - `colour`
+#' - `linetype`
+#' - `size`
+#' - `group`
 #' 
 
 #' @name ggbiplot-path
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
-#' @template param-layer
+#' @template param-geom
 #' @template param-matrix
 #' @example inst/examples/ex-lm.r
 

@@ -1,29 +1,31 @@
-#' Render points at ordinates
+#' @title Render points at ordinates
 #' 
 
-#' \code{geom_*_point} renders symbols at the positions of the subjects or
-#' vectors.
+#' @description `geom_*_point()` renders symbols at the positions of the
+#'   subjects or vectors.
 #' @template ggbiplot-layers
 
 #' @section Aesthetics:
-#' \code{geom_*_point} understands the following aesthetics (required aesthetics
+
+#' `geom_*_point()` understands the following aesthetics (required aesthetics
 #' are in bold):
-#' \itemize{
-#'   \item \strong{\code{x}}
-#'   \item \strong{\code{y}}
-#'   \item \code{alpha}
-#'   \item \code{colour}
-#'   \item \code{fill}
-#'   \item \code{linetype}
-#'   \item \code{size}
-#'   \item \code{group}
-#' }
+
+#' - **`x`**
+#' - **`y`**
+#' - `alpha`
+#' - `colour`
+#' - `fill`
+#' - `linetype`
+#' - `shape`
+#' - `size`
+#' - `stroke`
+#' - `group`
 #' 
 
 #' @name ggbiplot-point
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
-#' @template param-layer
+#' @template param-geom
 #' @template param-matrix
 #' @example inst/examples/ex-lm.r
 

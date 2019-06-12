@@ -1,13 +1,14 @@
-#' Functionality for logistic principal components analysis and singular 
-#' value decomposition objects
-#' 
-#' These methods extract data from, and attribute new data to, objects of class 
-#' \code{"lpca"} and \code{"lsvd"} (see
-#' \code{?logisticPCA::`logisticPCA-package`}). (This package masks the
-#' signature functions of \strong{\link[logisticPCA]{logisticPCA}} with wrappers
-#' that add row and column names from the input matrix to the output matrices.)
-#' 
+#' @title Functionality for logistic PCA and logistic SVD objects
+#'
+#' @description These methods extract data from, and attribute new data to,
+#'   objects of class `"lpca"` and `"lsvd"` from the
+#'   **[logisticPCA][logisticPCA::logisticPCA-package]** package. The signature
+#'   functions [logisticPCA::logisticPCA()] and [logisticPCA::logisticSVD()] are
+#'   masked with wrappers that add row and column names from the input matrix to
+#'   the output matrices.
+#'
 #' @name methods-lpca
+#' @include ord-tbl.r
 #' @template param-methods
 #' @template param-matrix
 #' @template param-align

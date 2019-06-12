@@ -49,7 +49,7 @@ will be used as the layer data.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{method}{Passed to \code{\link[stats]{dist}}.}
+\item{method}{Passed to \code{\link[stats:dist]{stats::dist()}}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -66,30 +66,30 @@ the default plot specification, e.g. \code{\link[=borders]{borders()}}.}
 supplied parameters and aesthetics are understood by the \code{geom} or
 \code{stat}. Use \code{FALSE} to suppress the checks.}
 
-\item{...}{Additional arguments passed to \code{\link[ggplot2]{layer}}.}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 }
 \description{
-This stat layer identifies the \eqn{n-1} pairs among \eqn{n} points that form
-a minimum spanning tree, then calculates the segments between these poirs in
-the two dimensions \code{x} and \code{y}.
+This stat layer identifies the \eqn{n-1} pairs among \eqn{n}
+points that form a minimum spanning tree, then calculates the segments
+between these poirs in the two dimensions \code{x} and \code{y}.
 }
 \details{
 A minimum spanning tree (MST) on the point cloud \eqn{X} is a minimal
 connected graph on \eqn{X} with the smallest possible sum of distances (or
-dissimilarities) between linked points. These layers call
-\code{\link[stats]{dist}} to calculate a distance/dissimilarity object and
-\code{\link[vegan]{spantree}} to calculate the MST. The result is formatted
-with position aesthetics readable by \code{\link[ggplot2]{geom_segment}}.
+dissimilarities) between linked points. These layers call \code{\link[stats:dist]{stats::dist()}} to
+calculate a distance/dissimilarity object and \code{\link[vegan:spantree]{vegan::spantree()}} to
+calculate the MST. The result is formatted with position aesthetics readable
+by \code{\link[ggplot2:geom_segment]{ggplot2::geom_segment()}}.
 
-If any aesthetics of the form \code{.coord[0-9]+} are detected, then the lot
-of them are used to calculate distances/dissimilarities. These should not be
-assigend manually but generated using the convenience function
-\code{\link{ord_aes}} (see the examples). Otherwise, \code{x} and \code{y}
-are used. Either way, \code{x} and \code{y} provide the position aesthetics.
+If any aesthetics of the form \code{.coord[0-9]+} are detected, then the lot of
+them are used to calculate distances/dissimilarities. These should not be
+assigend manually but generated using the convenience function \code{\link[=ord_aes]{ord_aes()}}
+(see the examples). Otherwise, \code{x} and \code{y} are used. Either way, \code{x} and \code{y}
+provide the position aesthetics.
 
-An MST calculated on \code{x} and \code{y} reflects the distances among the
-points in \eqn{X} in the reduced-dimension plane of the biplot. In contrast,
-one calculated on the full set of coordinates reflects distances in
+An MST calculated on \code{x} and \code{y} reflects the distances among the points in
+\eqn{X} in the reduced-dimension plane of the biplot. In contrast, one
+calculated on the full set of coordinates reflects distances in
 higher-dimensional space. Plotting this high-dimensional MST on the
 2-dimensional biplot provides a visual cue as to how faithfully two
 dimensions can encapsulate the "true" distances between points (Jolliffe,
@@ -97,16 +97,15 @@ dimensions can encapsulate the "true" distances between points (Jolliffe,
 }
 \section{Biplot layers}{
 
-\code{\link{ggbiplot}} uses \code{\link[ggplot2]{fortify}} internally to 
-produce a single data frame with a \code{.matrix} column distinguishing the 
-subjects (\code{"u"}) and variables (\code{"v"}). The stat layers 
-\code{stat_u} and \code{stat_v} simply filter the data frame to one of these 
-two.
+\code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
+frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
+variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
+the data frame to one of these two.
 
-The geom layers \code{geom_u_*} and \code{geom_v_*} call the corresponding
-stat in order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \code{geom_biplot_*} selects a default matrix based on common
-practice, e.g. \eqn{U} for points and \eqn{V} for arrows.
+The geom layers \code{geom_u_*()} and \code{geom_v_*()} call the corresponding stat in
+order to render plot elements for the corresponding matrix \eqn{U} or
+\eqn{V}. \code{geom_biplot_*()} selects a default matrix based on common practice,
+e.g. \eqn{U} for points and \eqn{V} for arrows.
 }
 
 \examples{
@@ -158,8 +157,8 @@ ggbiplot(iris_pca) +
   geom_u_point(aes(color = species))
 }
 \references{
-I T Jolliffe (2002) \emph{Principal Component Analysis}, Second Edition.
-Springer Series in Statistics, ISSN 0172-7397.
+Jolliffe IT (2002) \emph{Principal Component Analysis}, Second Edition.
+Springer Series in Statistics, ISSN 0172-7397. \doi{10.1007/b98835}
 \url{https://www.springer.com/gp/book/9780387954424}
 }
 \keyword{datasets}

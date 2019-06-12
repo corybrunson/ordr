@@ -1,18 +1,19 @@
-#' Annotate the factors of an ordination object
+#' @title Annotate the factors of an ordination object
 #'
-#' These functions annotate the factors \eqn{U} and \eqn{V} of \code{tbl_ord}
-#' objects with additional variables, and retrieve these annotations.
-#' 
+#' @description These functions annotate the factors \eqn{U} and \eqn{V} of
+#'   `tbl_ord` objects with additional variables, and retrieve these
+#'   annotations.
+#'   
 
-#' The \code{annotation_*} and \code{set_annotation_*} functions assign and
-#' retrieve values of the \code{"*_annotation"} attributes of \code{x}, which
-#' should have the same number of rows as \code{get_*(x)}.
+#' The `annotation_*()` and `set_annotation_*()` functions assign and retrieve
+#' values of the `"*_annotation"` attributes of `x`, which should have the same
+#' number of rows as `get_*(x)`.
 
 #' @name annotation
-#' @include augmentation.r
+#' @include ord-augmentation.r
 #' @inheritParams accessors
-#' @param annot A \link{data.frame} having the same number of rows as
-#'   \code{get_*(x)}.
+#' @param annot A [data.frame][base::data.frame] having the same number of rows
+#'   as `get_*(x)`.
 
 #' @rdname annotation
 #' @export

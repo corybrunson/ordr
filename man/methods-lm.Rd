@@ -64,8 +64,9 @@ or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 }
 \description{
-These methods extract data from, and attribute new data to, objects of class
-\code{"lm"}, \code{"glm"}, and \code{"mlm"}.
+These methods extract data from, and attribute new data to,
+objects of class \code{"lm"}, \code{"glm"}, and \code{"mlm"} as returned by \code{\link[stats:lm]{stats::lm()}}
+and \code{\link[stats:glm]{stats::glm()}}.
 }
 \examples{
 data(bioenv)

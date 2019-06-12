@@ -1,30 +1,28 @@
-#' Render isolines for a subject or variable
+#' @title Render isolines for a subject or variable
 #' 
 
-#' \code{geom_*_isolines} renders isolines for a specified subject or variable.
+#' @description `geom_*_isolines()` renders isolines for a specified subject or
+#'   variable.
 #' @template ggbiplot-layers
 
 #' @section Aesthetics:
 
-#' \code{geom_*_isolines} and \code{geom_*_ticks} understand the following
-#' aesthetics (required aesthetics are in bold):
+#' `geom_*_isolines()` and `geom_*_ticks()` understand the following aesthetics
+#' (required aesthetics are in bold):
 
-#' \itemize{
-#'   \item \strong{\code{x}}
-#'   \item \strong{\code{y}}
-#'   \item \code{alpha}
-#'   \item \code{colour}
-#'   \item \code{fill}
-#'   \item \code{linetype}
-#'   \item \code{size}
-#'   \item \code{group}
-#' }
+#' - **`x`**
+#' - **`y`**
+#' - `alpha`
+#' - `colour`
+#' - `linetype`
+#' - `size`
+#' - `group`
 #' 
 
 #' @name ggbiplot-isolines
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
-#' @template param-layer
+#' @template param-geom
 #' @param family A family function or a character string naming one, to
 #'   transform the values along the axis at which to render isolines or tick
 #'   marks.

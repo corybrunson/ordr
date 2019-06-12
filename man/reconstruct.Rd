@@ -10,11 +10,11 @@ reconstruct(x)
 \method{reconstruct}{list}(x)
 }
 \arguments{
-\item{x}{A \code{\link{tbl_ord}}, or an object convertible to one.}
+\item{x}{A \code{tbl_ord} object, or an object coercible to one.}
 }
 \description{
-This convenience function reconstructs an approximation to the (possibly
-transformed) original data matrix from the ordination factors and metadata.
-The methods are most useful as points of reference for understanding how
-ordinations are obtained from data.
+This convenience function reconstructs an approximation to the
+(possibly transformed) original data matrix from the ordination factors and
+metadata. The methods are most useful as points of reference for
+understanding how ordinations are obtained from data.
 }
