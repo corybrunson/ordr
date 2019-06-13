@@ -6,7 +6,10 @@
 #' @name methods-ca
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/ex-ca.r
+#' @example inst/examples/finches-ca.r
+#' @example inst/examples/smoke-ca-confer.r
+#' @example inst/examples/benthos-ca-augment-confer.r
+#' @example inst/examples/women-ca-confer.r
 
 #' @rdname methods-ca
 #' @export

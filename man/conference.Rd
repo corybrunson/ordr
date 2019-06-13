@@ -40,3 +40,80 @@ inertia between cases and variables at
 only be able to confer it entirely to the cases (\code{p = 1}) or entirely to the
 variables (\code{p = 0}).}
 }
+\examples{
+# Confer PCA weights and inertia between cases and variables
+country_attributes \%>\%
+  prcomp() \%>\%
+  as_tbl_ord() \%>\%
+  print() -> attributes_pca
+# form biplot
+attributes_pca \%>\%
+  ggbiplot(
+    aes(label = .name),
+    sec.axes = "v", scale.factor = dim_v(attributes_pca)
+  ) +
+  theme_bw() + theme(panel.grid = element_blank()) +
+  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
+  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
+  geom_v_text_repel(aes(x = PC1, y = PC2), color = "darkred")
+# covariance biplot
+attributes_pca \%>\%
+  confer_inertia(0) \%>\%
+  ggbiplot(
+    aes(label = .name),
+    sec.axes = "u", scale.factor = dim_u(attributes_pca)
+  ) +
+  theme_bw() + theme(panel.grid = element_blank()) +
+  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
+  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
+  geom_v_text_repel(aes(x = PC1, y = PC2), color = "darkred")
+# Confer inertia between rows and columns of CA on Spanish ISSP sample
+issp_women \%>\%
+  ca::ca() \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  print() -> issp_ca
+# Reproduce Exhibit 9.2 in Greenacre (2010)...
+issp_ca \%>\%
+  confer_inertia(c(1, 1)) \%>\%
+  ggbiplot(aes(label = .name)) +
+  theme_bw() +
+  geom_u_point(color = "darkgreen") +
+  geom_u_text_repel(color = "darkgreen") +
+  geom_v_point(color = "brown", shape = 17) +
+  geom_v_text_repel(color = "brown")
+# Reproduce Exhibit 9.3 in Greenacre (2010)...
+issp_ca \%>\%
+  confer_inertia("rowprincipal") \%>\%
+  ggbiplot(aes(label = .name)) +
+  theme_bw() +
+  geom_u_point(color = "darkgreen") +
+  geom_v_point(color = "brown", shape = 17) +
+  geom_v_text_repel(color = "brown")
+# Reproduce Exhibits 9.4 and 9.6 in Greenacre (2010)...
+# Confer inertia in CA between rows and columns of benthic sample data
+benthos \%>\%
+  ca::ca() \%>\%
+  as_tbl_ord() \%>\%
+  print() -> benthos_ca
+# Reproduce Exhibit 8.3
+benthos_ca \%>\%
+  confer_inertia("colprincipal") \%>\%
+  ggbiplot(aes(label = .name)) +
+  theme_bw() +
+  geom_u_point(color = "brown", size = 1) +
+  geom_v_text(color = "darkgreen")
+# Reproduce Exhibit 8.4
+benthos_ca \%>\%
+  augment(.matrix = "u") \%>\%
+  transmute_u(mass = .mass, sqrt_mass = sqrt(.mass)) \%>\%
+  confer_inertia("colprincipal") \%>\%
+  ggbiplot(aes(label = .name), scale_u = "sqrt_mass") +
+  theme_bw() +
+  geom_u_vector(color = "brown", arrow = NULL) +
+  geom_u_point(aes(size = mass), color = "brown", shape = 17) +
+  scale_size_continuous(range = c(1, 4), guide = "none") +
+  geom_u_text(stat = "chull", color = "brown", nudge_x = .075, nudge_y = .05) +
+  geom_v_point(color = "darkgreen") +
+  geom_v_text_repel(color = "darkgreen", min.segment.length = 2)
+}

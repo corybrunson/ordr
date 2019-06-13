@@ -132,101 +132,6 @@ e.g. \eqn{U} for points and \eqn{V} for arrows.
 }
 
 \examples{
-data(bioenv)
-
-# reproduce Exhibit 2.3 in Greenacre (2010)
-
-# standardize two predictors
-bioenv <- dplyr::mutate(
-  bioenv,
-  x = (Depth - mean(Depth)) / sd(Depth),
-  y = (Pollution - mean(Pollution)) / sd(Pollution)
-)
-
-# linear regression setup
-(m <- lm(data = bioenv, formula = d ~ x + y))
-(b <- as_tbl_ord(m))
-(d <- tidy(b))
-
-# contributions of predictors to explained variance
-print(augmentation_coord(b))
-
-# basic linear regression biplot
-gg <- ggbiplot(b, aes(x = x, y = y))
-gg +
-  geom_u_point() +
-  geom_v_vector()
-# same biplot using default matrices for each layer
-gg +
-  geom_biplot_point() +
-  geom_biplot_vector()
-# same biplot with tick marks for sole axis
-gg +
-  geom_u_point() +
-  geom_v_vector() +
-  geom_v_ticks(ids = 1, by = 5)
-# same biplot with isolines for sole axis
-gg +
-  geom_u_point() +
-  geom_v_vector() +
-  geom_v_isolines(ids = 1, by = 5)
-
-# shade points by expected species prevalence and darken outliers
-ggbiplot(d, aes(x = x, y = y, color = .fit, alpha = .wt.res ^ 2)) +
-  theme_bw() +
-  scale_color_distiller(type = "div", palette = 1) +
-  scale_alpha_continuous(range = c(1/3, 1)) +
-  geom_u_point() +
-  geom_v_vector() +
-  geom_v_isolines(ids = 1, by = 5)
-
-data(bioenv)
-
-# reproduce Exhibit 2.5 in Greenacre (2010)
-
-# standardize all (numeric) variables
-bioenv_std <- dplyr::mutate_if(bioenv, is.numeric, scale)
-
-# multiple linear regression setup
-resp <- as.matrix(dplyr::select(bioenv_std, a:e))
-pred <- as.matrix(dplyr::select(bioenv_std, x = Depth, y = Pollution))
-(m <- lm(resp ~ pred + 0))
-(b <- as_tbl_ord(m))
-
-# multiple linear regression biplot
-ggbiplot(b, aes(label = .name)) +
-  theme_bw() +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_radiate(color = "brown4")
-
-# reproduce Exhibit 3.2 in Greenacre (2010)
-
-# standardize the predictors and fourth-root transform the response variables
-bioenv_4rt <- dplyr::mutate_at(bioenv, dplyr::vars(a:e), dplyr::funs(. ^ (1/4)))
-bioenv_4rt <- dplyr::mutate_at(bioenv_4rt, dplyr::vars(Pollution:Depth), scale)
-
-# multiple linear regression setup
-resp <- as.matrix(dplyr::select(bioenv_4rt, a:e))
-pred <- as.matrix(dplyr::select(bioenv_4rt, x = Depth, y = Pollution))
-(m <- lm(resp ~ pred))
-(b <- as_tbl_ord(m))
-
-# multiple linear regression biplot
-ggbiplot(b, aes(x = x, y = y, label = .name)) +
-  theme_bw() +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_radiate(color = "brown4")
-
-# multiple linear regression biplot
-ggbiplot(b, aes(x = x, y = y, label = .name)) +
-  theme_bw() +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_radiate(color = "brown4")
-
-# reproduce (3.2) in Greenacre (2010)
 
 # standardize the predictors
 bioenv_pois <- dplyr::mutate(bioenv, x = scale(Depth), y = scale(Pollution))
@@ -271,5 +176,47 @@ ggbiplot(b, aes(x = x, y = y, intercept = `(Intercept)`, label = .name)) +
   geom_v_text_radiate(color = "brown4") +
   geom_v_isolines(family = binomial(), by = .05) +
   ylim(c(-2.7, 2.7))
+# Regression analysis of Motor Trend design and performance data
+mtcars \%>\%
+  scale(scale = FALSE) \%>\%
+  as.data.frame() \%>\%
+  lm(formula = mpg ~ wt + cyl) \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  mutate_u(influence = .wt.res^2) \%>\%
+  print() -> mtcars_lm
+mtcars_lm \%>\%
+  ggbiplot(aes(x = wt, y = cyl)) +
+  geom_u_point(aes(color = influence)) +
+  geom_v_vector() +
+  # weight isolines
+  geom_v_isolines(ids = 1, by = 5) +
+  ggtitle(
+    "Weight isolines with data colored by importance",
+    "Regressing mpg onto weight and number of cylinders"
+  )
+# Adapt Exhibit 2.3 in Greenacre (2010)
+bioenv \%>\%
+  dplyr::mutate(
+    x = (Depth - mean(Depth)) / sd(Depth),
+    y = (Pollution - mean(Pollution)) / sd(Pollution)
+  ) \%>\%
+  lm(formula = d ~ x + y) \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  print() -> bioenv_lm
+bioenv_lm \%>\%
+  ggbiplot(aes(x = x, y = y, color = .fit, alpha = .wt.res ^ 2)) +
+  theme_bw() +
+  scale_color_distiller(type = "div", palette = 1) +
+  scale_alpha_continuous(range = c(1/3, 1)) +
+  geom_u_point() +
+  geom_v_vector() +
+  geom_v_isolines(ids = 1, by = 5) +
+  labs(x = "Standardized Depth", y = "Standardized Pollution") +
+  ggtitle(
+    "Gradient vector and contour lines for species 'd'",
+    "Regression plane: standardized depth-pollution space"
+  )
 }
 \keyword{datasets}

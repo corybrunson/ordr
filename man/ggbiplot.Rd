@@ -12,7 +12,7 @@ ggbiplot(ordination = NULL, mapping = aes(x = 1, y = 2),
 ord_aes(ordination, ...)
 }
 \arguments{
-\item{ordination}{A \code{\link{tbl_ord}}.}
+\item{ordination}{A \code{[tbl_ord]}.}
 
 \item{mapping}{List of default aesthetic mappings to use for the biplot. The
 default assigns the first two coordinates to the aesthetics \code{x} and \code{y}.
@@ -79,44 +79,7 @@ e.g. \eqn{U} for points and \eqn{V} for arrows.
 }
 
 \examples{
-# Anderson iris sepal and petal data
-head(iris)
-# PCA ordination
-iris[, -5] \%>\%
-  prcomp(scale = TRUE) \%>\%
-  as_tbl_ord() \%>\%
-  # row-principal conference of intertia
-  confer_inertia(1) \%>\%
-  mutate_u(species = iris$Species) \%>\%
-  mutate_v(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
-  print() -> iris_pca
-# PCA biplot
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_point(alpha = .5) +
-  # species centroids
-  stat_u_center(fun.center = "mean", size = 3, shape = "triangle") +
-  stat_u_ellipse() +
-  geom_v_vector(color = "#444444") +
-  ggtitle("Row-principal PCA biplot of Anderson iris data")
-# rescaled PCA biplot
-iris_pca \%>\%
-  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_point() +
-  geom_v_vector(color = "#444444") +
-  geom_v_text_radiate(aes(label = measure), color = "#444444") +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
-    "Variable loadings scaled to secondary axes"
-  )
-
-# Motor Trend automobile design and performance data
-head(mtcars)
-# linear regression ordination
+# Regression analysis of Motor Trend design and performance data
 mtcars \%>\%
   scale(scale = FALSE) \%>\%
   as.data.frame() \%>\%
@@ -125,7 +88,6 @@ mtcars \%>\%
   augment() \%>\%
   mutate_u(influence = .wt.res^2) \%>\%
   print() -> mtcars_lm
-# linear regression biplot
 mtcars_lm \%>\%
   ggbiplot(aes(x = wt, y = cyl)) +
   geom_u_point(aes(color = influence)) +
@@ -135,6 +97,81 @@ mtcars_lm \%>\%
   ggtitle(
     "Weight isolines with data colored by importance",
     "Regressing mpg onto weight and number of cylinders"
+  )
+# Unscaled PCA and two-scaled biplot of Anderson iris data
+iris[, -5] \%>\%
+  princomp() \%>\%
+  as_tbl_ord() \%>\%
+  confer_inertia(1) \%>\%
+  mutate_u(species = iris$Species) \%>\%
+  mutate_v(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
+  print() -> iris_pca
+iris_pca \%>\%
+  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
+  theme_bw() +
+  scale_color_brewer(type = "qual", palette = 2) +
+  geom_u_point() +
+  geom_v_vector(color = "#444444") +
+  geom_v_text_radiate(aes(label = measure), color = "#444444") +
+  ggtitle(
+    "Row-principal unscaled PCA biplot of Anderson iris data",
+    "Variable loadings scaled to secondary axes"
+  )
+# Logistic SVD of Sanderson finches data
+finches \%>\% t() \%>\%
+  logisticSVD() \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  print() -> finches_lsvd
+finches_lsvd \%>\%
+  ggbiplot(
+    aes(x = LSC1, y = LSC2, label = .name),
+    sec.axes = "v", scale.factor = 100
+  ) +
+  geom_u_vector(alpha = .5, color = "darkred") +
+  geom_u_text_radiate(size = 3, color = "darkred") +
+  geom_v_label(size = 3, alpha = .5, color = "royalblue3") +
+  ggtitle(
+    "Logistic SVD of the Galapagos island finches",
+    "Islands (finches) scaled to the primary (secondary) axes"
+  )
+# Logistic PCA of Sanderson finches data
+finches \%>\% t() \%>\%
+  logisticPCA() \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  print() -> finches_lpca
+finches_lpca \%>\%
+  ggbiplot(
+    aes(x = LPC1, y = LPC2, label = .name),
+    sec.axes = "v", scale.factor = 50
+  ) +
+  geom_u_vector(alpha = .5, color = "darkred") +
+  geom_u_text_radiate(size = 3, color = "darkred") +
+  geom_v_label(size = 3, alpha = .5, color = "royalblue3") +
+  ggtitle(
+    "Logistic PCA of the Galapagos island finches",
+    "Islands (finches) scaled to the primary (secondary) axes"
+  )
+# Convex logistic PCA of Sanderson finches data
+finches \%>\% t() \%>\%
+  # omit finches present on every island
+  {.[, ! apply(., 2, all), drop = FALSE]} \%>\%
+  convexLogisticPCA() \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  print() -> finches_clpca
+finches_clpca \%>\%
+  ggbiplot(
+    aes(x = LPC1, y = LPC2, label = .name),
+    sec.axes = "v", scale.factor = 50
+  ) +
+  geom_u_vector(alpha = .5, color = "darkred") +
+  geom_u_text_radiate(size = 3, color = "darkred") +
+  geom_v_label(size = 3, alpha = .5, color = "royalblue3") +
+  ggtitle(
+    "Convex logistic PCA of the Galapagos island finches",
+    "Islands (finches) scaled to the primary (secondary) axes"
   )
 }
 \seealso{

@@ -1,13 +1,14 @@
 
 #' @title Site-species occurrence data for Galapagos finches
 #'
-#' @format A [data.frame][base::data.frame].
+#' @format A [data frame][base::data.frame].
 #' @keywords datasets
 #' @source These data are taken from Sanderson (2000). They are available in a
 #'   different format in the **[cooccur][cooccur::cooccur]** package.
 #' @template ref-sanderson2000
 #' @name finches
-#' @example inst/examples/ex-lpca.r
+#' @example inst/examples/finches-ca.r
+#' @example inst/examples/finches-lpca-sec.r
 NULL
 
 #' @title Multivariate marine biological and environmental data
@@ -20,7 +21,9 @@ NULL
 #' @source Greenacre (2010), pp. 25--26.
 #' @template ref-greenacre2010
 #' @name bioenv
-#' @example inst/examples/ex-lm.r
+#' @example inst/examples/bioenv-lm-isolines.r
+#' @example inst/examples/bioenv-cmds-lm-repel.r
+#' @example inst/examples/bioenv-mlm.r
 NULL
 
 #' @title Student ratings of similarities and attributes of 13 countries
@@ -34,6 +37,9 @@ NULL
 #' @source Greenacre (2010), pp. 43--44,46.
 #' @template ref-greenacre2010
 #' @name countries
+#' @example inst/examples/country-cmds-lm.r
+#' @example inst/examples/country-prcomp-confer.r
+#' @example inst/examples/country-cmds-prcomp-align.r
 #' @rdname countries
 #' @aliases country_differences country_attributes
 #'   
@@ -59,7 +65,7 @@ NULL
 #' @source Greenacre (2010).
 #' @template ref-greenacre2010
 #' @name benthos
-#' @example inst/examples/ex-ca.r
+#' @example inst/examples/benthos-ca-augment-confer.r
 NULL
 
 #' @title Original respondent-level data from Spanish ISSP sample
@@ -70,5 +76,5 @@ NULL
 #' @keywords datasets
 #' @source Greenacre (2010).
 #' @name issp_women
-#' @example inst/examples/ex-ca.r
+#' @example inst/examples/women-ca-confer.r
 NULL

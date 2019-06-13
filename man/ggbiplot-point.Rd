@@ -100,51 +100,78 @@ are in bold):
 }
 
 \examples{
-data(bioenv)
-
-# reproduce Exhibit 2.3 in Greenacre (2010)
-
-# standardize two predictors
-bioenv <- dplyr::mutate(
-  bioenv,
-  x = (Depth - mean(Depth)) / sd(Depth),
-  y = (Pollution - mean(Pollution)) / sd(Pollution)
-)
-
-# linear regression setup
-(m <- lm(data = bioenv, formula = d ~ x + y))
-(b <- as_tbl_ord(m))
-(d <- tidy(b))
-
-# contributions of predictors to explained variance
-print(augmentation_coord(b))
-
-# basic linear regression biplot
-gg <- ggbiplot(b, aes(x = x, y = y))
-gg +
-  geom_u_point() +
-  geom_v_vector()
-# same biplot using default matrices for each layer
-gg +
-  geom_biplot_point() +
-  geom_biplot_vector()
-# same biplot with tick marks for sole axis
-gg +
-  geom_u_point() +
-  geom_v_vector() +
-  geom_v_ticks(ids = 1, by = 5)
-# same biplot with isolines for sole axis
-gg +
-  geom_u_point() +
-  geom_v_vector() +
-  geom_v_isolines(ids = 1, by = 5)
-
-# shade points by expected species prevalence and darken outliers
-ggbiplot(d, aes(x = x, y = y, color = .fit, alpha = .wt.res ^ 2)) +
+# Adapt Exhibit 2.3 in Greenacre (2010)
+bioenv \%>\%
+  dplyr::mutate(
+    x = (Depth - mean(Depth)) / sd(Depth),
+    y = (Pollution - mean(Pollution)) / sd(Pollution)
+  ) \%>\%
+  lm(formula = d ~ x + y) \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  print() -> bioenv_lm
+bioenv_lm \%>\%
+  ggbiplot(aes(x = x, y = y, color = .fit, alpha = .wt.res ^ 2)) +
   theme_bw() +
   scale_color_distiller(type = "div", palette = 1) +
   scale_alpha_continuous(range = c(1/3, 1)) +
   geom_u_point() +
   geom_v_vector() +
-  geom_v_isolines(ids = 1, by = 5)
+  geom_v_isolines(ids = 1, by = 5) +
+  labs(x = "Standardized Depth", y = "Standardized Pollution") +
+  ggtitle(
+    "Gradient vector and contour lines for species 'd'",
+    "Regression plane: standardized depth-pollution space"
+  )
+# Align an MDS ordination to a PCA ordination
+country_differences \%>\%
+  cmdscale(k = 2) \%>\%
+  as_tbl_ord() \%>\%
+  print() -> differences_cmds
+country_differences \%>\%
+  prcomp() \%>\%
+  as_tbl_ord() \%>\%
+  print() -> differences_pca
+# align PCA cases to MDS coordinates
+differences_cmds \%>\%
+  align_to(differences_pca$x, "u") \%>\%
+  print() -> differences_align_u
+plot(gridExtra::arrangeGrob(grobs = list(
+  ggbiplot(differences_cmds) + geom_u_point(),
+  ggbiplot(differences_pca) + geom_u_point(),
+  ggbiplot(differences_align_u) + geom_u_point()
+), ncol = 3))
+# align PCA variables to MDS coordinates
+differences_cmds \%>\%
+  align_to(differences_pca$rotation, "v") \%>\%
+  print() -> differences_align_v
+plot(gridExtra::arrangeGrob(grobs = list(
+  ggbiplot(differences_cmds) + geom_v_vector(),
+  ggbiplot(differences_pca) + geom_v_vector(),
+  ggbiplot(differences_align_v) + geom_v_vector()
+), ncol = 3))
+# Confer inertia between rows and columns of CA on Spanish ISSP sample
+issp_women \%>\%
+  ca::ca() \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  print() -> issp_ca
+# Reproduce Exhibit 9.2 in Greenacre (2010)...
+issp_ca \%>\%
+  confer_inertia(c(1, 1)) \%>\%
+  ggbiplot(aes(label = .name)) +
+  theme_bw() +
+  geom_u_point(color = "darkgreen") +
+  geom_u_text_repel(color = "darkgreen") +
+  geom_v_point(color = "brown", shape = 17) +
+  geom_v_text_repel(color = "brown")
+# Reproduce Exhibit 9.3 in Greenacre (2010)...
+issp_ca \%>\%
+  confer_inertia("rowprincipal") \%>\%
+  ggbiplot(aes(label = .name)) +
+  theme_bw() +
+  geom_u_point(color = "darkgreen") +
+  geom_v_point(color = "brown", shape = 17) +
+  geom_v_text_repel(color = "brown")
+# Reproduce Exhibits 9.4 and 9.6 in Greenacre (2010)...
 }

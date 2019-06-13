@@ -10,7 +10,9 @@
 #' @template param-methods
 #' @template param-matrix
 #' @template param-align
-#' @example inst/examples/ex-cmds.r
+#' @example inst/examples/country-cmds-lm.r
+#' @example inst/examples/country-cmds-prcomp-align.r
+NULL
 
 #' @rdname methods-cmds
 #' @export

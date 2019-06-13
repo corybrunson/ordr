@@ -104,65 +104,21 @@ e.g. \eqn{U} for points and \eqn{V} for arrows.
 }
 
 \examples{
-data(iris)
-
+# Scaled PCA of Anderson iris data with annotated biplot
 iris[, -5] \%>\%
   prcomp(scale = TRUE) \%>\%
   as_tbl_ord() \%>\%
+  confer_inertia(1) \%>\%
   mutate_u(species = iris$Species) \%>\%
-  mutate_v(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
   print() -> iris_pca
-
-# default confidence ellipses with centroids
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_point() +
+  geom_u_point(alpha = .5) +
   stat_u_center(fun.center = "mean", size = 3, shape = "triangle") +
   stat_u_ellipse() +
-  geom_v_vector(color = "#444444")
-
-# consistently color and fill
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  geom_u_point() +
-  stat_u_center(fun.center = "mean", size = 3, shape = "triangle") +
-  geom_polygon(aes(fill = species), alpha = .25, stat = "u_ellipse") +
   geom_v_vector(color = "#444444") +
-  scale_color_brewer(type = "qual", palette = 2) +
-  scale_fill_brewer(type = "qual", palette = 2)
-
-# rescaled biplot
-set.seed(58319)
-iris_pca \%>\%
-  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_point() +
-  stat_u_center(size = 3, shape = "triangle") +
-  stat_u_ellipse() +
-  geom_v_vector(color = "#444444") +
-  geom_v_text_repel(aes(label = measure), color = "#444444")
-
-# species centers and ranges
-iris_pca \%>\%
-  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_lineranges(fun.data = mean_cl_boot) +
-  geom_u_point(alpha = .5) +
-  geom_v_vector(color = "#444444")
-
-# species stars
-iris_pca \%>\%
-  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  stat_u_star(alpha = .5, fun.center = "mean") +
-  stat_u_center(size = 3, fun.center = "mean") +
-  geom_u_point(alpha = .5) +
-  geom_v_vector(color = "#444444")
+  ggtitle("Row-principal PCA biplot of Anderson iris data")
 }
 \keyword{datasets}

@@ -30,6 +30,7 @@
 #' @inheritParams ggplot2::geom_linerange
 #' @template param-geom
 #' @template param-matrix
+#' @example inst/examples/iris-prcomp-lineranges.r
 
 #' @rdname ggbiplot-intervals
 #' @usage NULL

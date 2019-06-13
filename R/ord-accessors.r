@@ -15,16 +15,18 @@
 #'
 #' `get_coord()` retrieves the names of the coordinates shared by \eqn{U} and
 #' \eqn{V}, on which the original data were ordinated, and `dim.tbl_ord()`
-#' retrieves their number.
+#' retrieves their number, the rank of the ordination. The outer dimensions of
+#' the matrix decomposition are returned by `dim_u()` and `dim_v()`.
 #' 
 
 #' @name accessors
 #' @include utils.r
-#' @param x A `tbl_ord`, or an ordination object coercible to one.
+#' @param x A `[tbl_ord]`, or an ordination object coercible to one.
 #' @param ... Additional arguments from [base::as.matrix()]; ignored.
 #' @template param-matrix
 #' @param align Logical; whether to align the matrix factors and coordinates
 #'   according to an `"align"` matrix attribute.
+NULL
 
 #' @rdname accessors
 #' @export
@@ -166,3 +168,22 @@ get_coord <- function(x, align = TRUE) {
 #' @rdname accessors
 #' @export
 dim.tbl_ord <- function(x) length(recover_coord(x))
+
+#' @rdname accessors
+#' @export
+dim_u <- function(x) nrow(recover_u(x))
+
+#' @rdname accessors
+#' @export
+dim_v <- function(x) nrow(recover_v(x))
+
+#' @rdname accessors
+#' @export
+dim_factor <- function(x, .matrix) {
+  switch(
+    match_factor(.matrix),
+    u = dim_u(x),
+    v = dim_v(x),
+    uv = c(u = dim_u(x), v = dim_v(x))
+  )
+}

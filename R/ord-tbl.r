@@ -35,7 +35,7 @@
 #' @param x An ordination object.
 #' @param u,v Matrices to be used as factors of a `tbl_ord`.
 #' @param ... Additional elements of a custom `tbl_ord`.
-#'   
+NULL
 
 #' @rdname tbl_ord
 #' @export

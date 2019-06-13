@@ -41,3 +41,76 @@ Note: The \code{format()} function is tedius but cannot be easily modularized
 without invoking \link{accessors}, \link{annotation}, and \link{augmentation} multiple
 times, thereby significantly reducing performance.
 }
+\examples{
+# Regression analysis of Motor Trend design and performance data
+mtcars \%>\%
+  scale(scale = FALSE) \%>\%
+  as.data.frame() \%>\%
+  lm(formula = mpg ~ wt + cyl) \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  mutate_u(influence = .wt.res^2) \%>\%
+  print() -> mtcars_lm
+mtcars_lm \%>\%
+  ggbiplot(aes(x = wt, y = cyl)) +
+  geom_u_point(aes(color = influence)) +
+  geom_v_vector() +
+  # weight isolines
+  geom_v_isolines(ids = 1, by = 5) +
+  ggtitle(
+    "Weight isolines with data colored by importance",
+    "Regressing mpg onto weight and number of cylinders"
+  )
+# Multidimensional scaling of country differences and regression of attributes
+# Reproduce Exhibit 4.2 in Greenacre (2010)
+country_differences \%>\%
+  cmdscale(k = 2) \%>\%
+  as_tbl_ord() \%>\%
+  print() -> differences_cmds
+differences_plot <- differences_cmds \%>\%
+  ggbiplot(aes(x = 1, y = 2, label = .name)) +
+  geom_v_text()
+differences_plot
+# Reproduce Exhibit 4.5 in Greenacre (2010)
+lm(country_attributes ~ get_u(differences_cmds)) \%>\%
+  as_tbl_ord() \%>\%
+  print() -> attributes_fit
+differences_plot +
+  geom_v_vector(data = attributes_fit) +
+  geom_v_text_radiate(data = attributes_fit, hjust = .3)
+# Correspondence analysis of Sanderson finches data
+finches \%>\%
+  ca::ca() \%>\%
+  as_tbl_ord() \%>\%
+  confer_inertia(.5) \%>\%
+  augment() \%>\%
+  print() -> finches_ca
+finches_ca \%>\%
+  ggbiplot(aes(label = .name)) +
+  geom_u_text(aes(alpha = .inertia), color = "royalblue3") +
+  geom_v_text(aes(alpha = .inertia), color = "darkred") +
+  scale_alpha_continuous(range = c(.3, 1), guide = "none") +
+  ggtitle(
+    "Symmetric CA biplot of the Galapagos island finches",
+    "Label opacity encodes row/column inertia"
+  )
+# Unscaled PCA and two-scaled biplot of Anderson iris data
+iris[, -5] \%>\%
+  princomp() \%>\%
+  as_tbl_ord() \%>\%
+  confer_inertia(1) \%>\%
+  mutate_u(species = iris$Species) \%>\%
+  mutate_v(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
+  print() -> iris_pca
+iris_pca \%>\%
+  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
+  theme_bw() +
+  scale_color_brewer(type = "qual", palette = 2) +
+  geom_u_point() +
+  geom_v_vector(color = "#444444") +
+  geom_v_text_radiate(aes(label = measure), color = "#444444") +
+  ggtitle(
+    "Row-principal unscaled PCA biplot of Anderson iris data",
+    "Variable loadings scaled to secondary axes"
+  )
+}

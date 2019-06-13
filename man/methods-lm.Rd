@@ -69,9 +69,6 @@ objects of class \code{"lm"}, \code{"glm"}, and \code{"mlm"} as returned by \cod
 and \code{\link[stats:glm]{stats::glm()}}.
 }
 \examples{
-data(bioenv)
-
-# reproduce Exhibit 2.3 in Greenacre (2010)
 
 # standardize two predictors
 bioenv <- dplyr::mutate(
@@ -84,86 +81,6 @@ bioenv <- dplyr::mutate(
 (m <- lm(data = bioenv, formula = d ~ x + y))
 (b <- as_tbl_ord(m))
 (d <- tidy(b))
-
-# contributions of predictors to explained variance
-print(augmentation_coord(b))
-
-# basic linear regression biplot
-gg <- ggbiplot(b, aes(x = x, y = y))
-gg +
-  geom_u_point() +
-  geom_v_vector()
-# same biplot using default matrices for each layer
-gg +
-  geom_biplot_point() +
-  geom_biplot_vector()
-# same biplot with tick marks for sole axis
-gg +
-  geom_u_point() +
-  geom_v_vector() +
-  geom_v_ticks(ids = 1, by = 5)
-# same biplot with isolines for sole axis
-gg +
-  geom_u_point() +
-  geom_v_vector() +
-  geom_v_isolines(ids = 1, by = 5)
-
-# shade points by expected species prevalence and darken outliers
-ggbiplot(d, aes(x = x, y = y, color = .fit, alpha = .wt.res ^ 2)) +
-  theme_bw() +
-  scale_color_distiller(type = "div", palette = 1) +
-  scale_alpha_continuous(range = c(1/3, 1)) +
-  geom_u_point() +
-  geom_v_vector() +
-  geom_v_isolines(ids = 1, by = 5)
-
-data(bioenv)
-
-# reproduce Exhibit 2.5 in Greenacre (2010)
-
-# standardize all (numeric) variables
-bioenv_std <- dplyr::mutate_if(bioenv, is.numeric, scale)
-
-# multiple linear regression setup
-resp <- as.matrix(dplyr::select(bioenv_std, a:e))
-pred <- as.matrix(dplyr::select(bioenv_std, x = Depth, y = Pollution))
-(m <- lm(resp ~ pred + 0))
-(b <- as_tbl_ord(m))
-
-# multiple linear regression biplot
-ggbiplot(b, aes(label = .name)) +
-  theme_bw() +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_radiate(color = "brown4")
-
-# reproduce Exhibit 3.2 in Greenacre (2010)
-
-# standardize the predictors and fourth-root transform the response variables
-bioenv_4rt <- dplyr::mutate_at(bioenv, dplyr::vars(a:e), dplyr::funs(. ^ (1/4)))
-bioenv_4rt <- dplyr::mutate_at(bioenv_4rt, dplyr::vars(Pollution:Depth), scale)
-
-# multiple linear regression setup
-resp <- as.matrix(dplyr::select(bioenv_4rt, a:e))
-pred <- as.matrix(dplyr::select(bioenv_4rt, x = Depth, y = Pollution))
-(m <- lm(resp ~ pred))
-(b <- as_tbl_ord(m))
-
-# multiple linear regression biplot
-ggbiplot(b, aes(x = x, y = y, label = .name)) +
-  theme_bw() +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_radiate(color = "brown4")
-
-# multiple linear regression biplot
-ggbiplot(b, aes(x = x, y = y, label = .name)) +
-  theme_bw() +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_radiate(color = "brown4")
-
-# reproduce (3.2) in Greenacre (2010)
 
 # standardize the predictors
 bioenv_pois <- dplyr::mutate(bioenv, x = scale(Depth), y = scale(Pollution))
@@ -208,4 +125,68 @@ ggbiplot(b, aes(x = x, y = y, intercept = `(Intercept)`, label = .name)) +
   geom_v_text_radiate(color = "brown4") +
   geom_v_isolines(family = binomial(), by = .05) +
   ylim(c(-2.7, 2.7))
+# Regression analysis of Motor Trend design and performance data
+mtcars \%>\%
+  scale(scale = FALSE) \%>\%
+  as.data.frame() \%>\%
+  lm(formula = mpg ~ wt + cyl) \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  mutate_u(influence = .wt.res^2) \%>\%
+  print() -> mtcars_lm
+mtcars_lm \%>\%
+  ggbiplot(aes(x = wt, y = cyl)) +
+  geom_u_point(aes(color = influence)) +
+  geom_v_vector() +
+  # weight isolines
+  geom_v_isolines(ids = 1, by = 5) +
+  ggtitle(
+    "Weight isolines with data colored by importance",
+    "Regressing mpg onto weight and number of cylinders"
+  )
+# Multidimensional scaling of country differences and regression of attributes
+# Reproduce Exhibit 4.2 in Greenacre (2010)
+country_differences \%>\%
+  cmdscale(k = 2) \%>\%
+  as_tbl_ord() \%>\%
+  print() -> differences_cmds
+differences_plot <- differences_cmds \%>\%
+  ggbiplot(aes(x = 1, y = 2, label = .name)) +
+  geom_v_text()
+differences_plot
+# Reproduce Exhibit 4.5 in Greenacre (2010)
+lm(country_attributes ~ get_u(differences_cmds)) \%>\%
+  as_tbl_ord() \%>\%
+  print() -> attributes_fit
+differences_plot +
+  geom_v_vector(data = attributes_fit) +
+  geom_v_text_radiate(data = attributes_fit, hjust = .3)
+# Generalized multiple linear regression on marine ecosystem data
+# Reproduce Exhibit 2.5 in Greenacre (2010)
+bioenv_std <- dplyr::mutate_if(bioenv, is.numeric, ~ as.vector(scale(.)))
+resp_std <- as.matrix(dplyr::select(bioenv_std, a:e))
+pred_std <- as.matrix(dplyr::select(bioenv_std, x = Depth, y = Pollution))
+lm(resp_std ~ pred_std + 0) \%>\%
+  as_tbl_ord() \%>\%
+  print() -> bioenv_std_mlm
+ggbiplot(bioenv_std_mlm, aes(label = .name)) +
+  theme_bw() +
+  geom_u_text(color = "darkgreen") +
+  geom_v_vector(color = "brown4") +
+  geom_v_text_radiate(color = "brown4")
+# Reproduce Exhibit 3.2 in Greenacre (2010)
+bioenv \%>\%
+  dplyr::mutate_at(dplyr::vars(a:e), ~ . ^ (1/4)) \%>\%
+  dplyr::mutate_at(dplyr::vars(Pollution:Depth), ~ as.vector(scale(.))) \%>\%
+  print() -> bioenv_4rt
+resp_4rt <- as.matrix(dplyr::select(bioenv_4rt, a:e))
+pred_4rt <- as.matrix(dplyr::select(bioenv_4rt, x = Depth, y = Pollution))
+lm(resp_4rt ~ pred_4rt + 0) \%>\%
+  as_tbl_ord() \%>\%
+  print() -> bioenv_4rt_mlm
+ggbiplot(bioenv_4rt_mlm, aes(x = x, y = y, label = .name)) +
+  theme_bw() +
+  geom_u_text(color = "darkgreen") +
+  geom_v_vector(color = "brown4") +
+  geom_v_text_radiate(color = "brown4")
 }

@@ -10,6 +10,7 @@
 #' @name ggbiplot-matrix
 #' @inheritParams ggplot2::layer
 #' @template param-stat
+NULL
 
 #' @rdname ggbiplot-matrix
 #' @usage NULL

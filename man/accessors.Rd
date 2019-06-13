@@ -20,6 +20,9 @@
 \alias{recover_coord.data.frame}
 \alias{get_coord}
 \alias{dim.tbl_ord}
+\alias{dim_u}
+\alias{dim_v}
+\alias{dim_factor}
 \title{Access factors, coordinates, and metadata from ordination objects}
 \usage{
 recover_u(x)
@@ -57,9 +60,15 @@ recover_coord(x)
 get_coord(x, align = TRUE)
 
 \method{dim}{tbl_ord}(x)
+
+dim_u(x)
+
+dim_v(x)
+
+dim_factor(x, .matrix)
 }
 \arguments{
-\item{x}{A \code{tbl_ord}, or an ordination object coercible to one.}
+\item{x}{A \code{[tbl_ord]}, or an ordination object coercible to one.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
@@ -84,5 +93,6 @@ generics that require methods for each ordination class.
 
 \code{get_coord()} retrieves the names of the coordinates shared by \eqn{U} and
 \eqn{V}, on which the original data were ordinated, and \code{dim.tbl_ord()}
-retrieves their number.
+retrieves their number, the rank of the ordination. The outer dimensions of
+the matrix decomposition are returned by \code{dim_u()} and \code{dim_v()}.
 }

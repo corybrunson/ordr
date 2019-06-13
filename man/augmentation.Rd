@@ -29,7 +29,7 @@ augment_u(x)
 augment_v(x)
 }
 \arguments{
-\item{x}{A \code{tbl_ord}, or an ordination object coercible to one.}
+\item{x}{A \code{[tbl_ord]}, or an ordination object coercible to one.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
@@ -58,4 +58,54 @@ than a \code{tbl_df}. The advantage of implementing separate methods for the
 different components is that more information contained in the original
 object becomes accessible to the user. To achieve a result similar to that of
 \code{\link[generics:augment]{generics::augment()}}, use \code{\link[=fortify]{fortify()}}.
+}
+\examples{
+# Adapt Exhibit 2.3 in Greenacre (2010)
+bioenv \%>\%
+  dplyr::mutate(
+    x = (Depth - mean(Depth)) / sd(Depth),
+    y = (Pollution - mean(Pollution)) / sd(Pollution)
+  ) \%>\%
+  lm(formula = d ~ x + y) \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  print() -> bioenv_lm
+bioenv_lm \%>\%
+  ggbiplot(aes(x = x, y = y, color = .fit, alpha = .wt.res ^ 2)) +
+  theme_bw() +
+  scale_color_distiller(type = "div", palette = 1) +
+  scale_alpha_continuous(range = c(1/3, 1)) +
+  geom_u_point() +
+  geom_v_vector() +
+  geom_v_isolines(ids = 1, by = 5) +
+  labs(x = "Standardized Depth", y = "Standardized Pollution") +
+  ggtitle(
+    "Gradient vector and contour lines for species 'd'",
+    "Regression plane: standardized depth-pollution space"
+  )
+# Confer inertia in CA between rows and columns of benthic sample data
+benthos \%>\%
+  ca::ca() \%>\%
+  as_tbl_ord() \%>\%
+  print() -> benthos_ca
+# Reproduce Exhibit 8.3
+benthos_ca \%>\%
+  confer_inertia("colprincipal") \%>\%
+  ggbiplot(aes(label = .name)) +
+  theme_bw() +
+  geom_u_point(color = "brown", size = 1) +
+  geom_v_text(color = "darkgreen")
+# Reproduce Exhibit 8.4
+benthos_ca \%>\%
+  augment(.matrix = "u") \%>\%
+  transmute_u(mass = .mass, sqrt_mass = sqrt(.mass)) \%>\%
+  confer_inertia("colprincipal") \%>\%
+  ggbiplot(aes(label = .name), scale_u = "sqrt_mass") +
+  theme_bw() +
+  geom_u_vector(color = "brown", arrow = NULL) +
+  geom_u_point(aes(size = mass), color = "brown", shape = 17) +
+  scale_size_continuous(range = c(1, 4), guide = "none") +
+  geom_u_text(stat = "chull", color = "brown", nudge_x = .075, nudge_y = .05) +
+  geom_v_point(color = "darkgreen") +
+  geom_v_text_repel(color = "darkgreen", min.segment.length = 2)
 }

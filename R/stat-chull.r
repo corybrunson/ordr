@@ -10,6 +10,8 @@
 #' @name ggbiplot-chull
 #' @inheritParams ggplot2::layer
 #' @template param-stat
+#' @example inst/examples/benthos-ca-augment-confer.r
+NULL
 
 #' @rdname ggbiplot-chull
 #' @usage NULL

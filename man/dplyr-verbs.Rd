@@ -65,3 +65,49 @@ variables corresponding to coordinates or already annotated, and only then
 assigns it as the new \code{"*_annotation"} attribute of \code{.data} (see
 \link{annotation}).
 }
+\examples{
+# Unscaled PCA and two-scaled biplot of Anderson iris data
+iris[, -5] \%>\%
+  princomp() \%>\%
+  as_tbl_ord() \%>\%
+  confer_inertia(1) \%>\%
+  mutate_u(species = iris$Species) \%>\%
+  mutate_v(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
+  print() -> iris_pca
+iris_pca \%>\%
+  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
+  theme_bw() +
+  scale_color_brewer(type = "qual", palette = 2) +
+  geom_u_point() +
+  geom_v_vector(color = "#444444") +
+  geom_v_text_radiate(aes(label = measure), color = "#444444") +
+  ggtitle(
+    "Row-principal unscaled PCA biplot of Anderson iris data",
+    "Variable loadings scaled to secondary axes"
+  )
+# Confer inertia in CA between rows and columns of benthic sample data
+benthos \%>\%
+  ca::ca() \%>\%
+  as_tbl_ord() \%>\%
+  print() -> benthos_ca
+# Reproduce Exhibit 8.3
+benthos_ca \%>\%
+  confer_inertia("colprincipal") \%>\%
+  ggbiplot(aes(label = .name)) +
+  theme_bw() +
+  geom_u_point(color = "brown", size = 1) +
+  geom_v_text(color = "darkgreen")
+# Reproduce Exhibit 8.4
+benthos_ca \%>\%
+  augment(.matrix = "u") \%>\%
+  transmute_u(mass = .mass, sqrt_mass = sqrt(.mass)) \%>\%
+  confer_inertia("colprincipal") \%>\%
+  ggbiplot(aes(label = .name), scale_u = "sqrt_mass") +
+  theme_bw() +
+  geom_u_vector(color = "brown", arrow = NULL) +
+  geom_u_point(aes(size = mass), color = "brown", shape = 17) +
+  scale_size_continuous(range = c(1, 4), guide = "none") +
+  geom_u_text(stat = "chull", color = "brown", nudge_x = .075, nudge_y = .05) +
+  geom_v_point(color = "darkgreen") +
+  geom_v_text_repel(color = "darkgreen", min.segment.length = 2)
+}

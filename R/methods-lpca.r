@@ -13,6 +13,7 @@
 #' @template param-matrix
 #' @template param-align
 #' @example inst/examples/ex-lpca.r
+#' @example inst/examples/finches-lpca-sec.r
 
 #' @importFrom stats plogis
 

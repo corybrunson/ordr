@@ -24,6 +24,7 @@
 #' @inheritParams ggplot2::layer
 #' @template param-geom
 #' @template param-matrix
+NULL
 
 #' @rdname ggbiplot-axis
 #' @usage NULL

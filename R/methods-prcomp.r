@@ -6,7 +6,9 @@
 #' @name methods-prcomp
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/ex-prcomp.r
+#' @example inst/examples/country-prcomp-confer.r
+#' @example inst/examples/iris-prcomp-lineranges.r
+NULL
 
 #' @rdname methods-prcomp
 #' @export

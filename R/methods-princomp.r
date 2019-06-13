@@ -7,6 +7,7 @@
 #' @include ord-tbl.r
 #' @template param-methods
 #' @example inst/examples/ex-princomp.r
+#' @example inst/examples/iris-princomp-sec.r
 
 #' @rdname methods-princomp
 #' @export
@@ -60,7 +61,7 @@ recover_conference.princomp <- function(x) {
 augmentation_u.princomp <- function(x) {
   .name <- rownames(x[["scores"]])
   if (is.null(.name)) {
-    tibble_pole(nrow(x[["x"]]))
+    tibble_pole(nrow(x[["scores"]]))
   } else {
     tibble(.name = .name)
   }
@@ -71,7 +72,7 @@ augmentation_u.princomp <- function(x) {
 augmentation_v.princomp <- function(x) {
   .name <- rownames(x[["loadings"]])
   res <- if (is.null(.name)) {
-    tibble_pole(nrow(x[["x"]]))
+    tibble_pole(nrow(x[["loadings"]]))
   } else {
     tibble(.name = .name)
   }

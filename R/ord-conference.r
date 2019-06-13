@@ -25,6 +25,10 @@
 #'   inertia assigned to the cases, with the remainder `1 - p` assigned to the
 #'   variables. If length 2, the proportions of the inertia assigned to the
 #'   cases and to the variables, respectively.
+#' @example inst/examples/country-prcomp-confer.r
+#' @example inst/examples/women-ca-confer.r
+#' @example inst/examples/benthos-ca-augment-confer.r
+NULL
 
 #' @rdname conference
 #' @export

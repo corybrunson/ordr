@@ -17,6 +17,8 @@
 #' @param ... Comma-separated unquoted expressions as in, e.g.,
 #'   [dplyr::select()].
 #' @template param-matrix
+#' @example inst/examples/iris-princomp-sec.r
+#' @example inst/examples/benthos-ca-augment-confer.r
 
 pull_factor <- function(.data, var = -1, .matrix) {
   pull(annotation_factor(.data, .matrix = .matrix), !! enquo(var))

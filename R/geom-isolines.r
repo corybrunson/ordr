@@ -33,8 +33,10 @@
 #' @param ticks.length Numeric; the length of the tick marks, as a proportion of
 #'   the plot width.
 #' @template param-matrix
-#' @example inst/examples/ex-lm.r
 #' @example inst/examples/ex-glm.r
+#' @example inst/examples/mtcars-lm-isolines.r
+#' @example inst/examples/bioenv-lm-isolines.r
+NULL
 
 #' @rdname ggbiplot-isolines
 #' @usage NULL

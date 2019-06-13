@@ -7,6 +7,7 @@
 
 #' @name reconstruct
 #' @param x A `tbl_ord` object, or an object coercible to one.
+NULL
 
 #' @rdname reconstruct
 #' @export

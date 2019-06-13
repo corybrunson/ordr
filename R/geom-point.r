@@ -27,7 +27,10 @@
 #' @inheritParams ggplot2::layer
 #' @template param-geom
 #' @template param-matrix
-#' @example inst/examples/ex-lm.r
+#' @example inst/examples/bioenv-lm-isolines.r
+#' @example inst/examples/country-cmds-prcomp-align.r
+#' @example inst/examples/women-ca-confer.r
+NULL
 
 #' @rdname ggbiplot-point
 #' @export

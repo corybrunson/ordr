@@ -39,6 +39,7 @@
 #' @param method Passed to [stats::dist()].
 #' @template param-stat
 #' @example inst/examples/ex-spantree.r
+NULL
 
 #' @rdname ggbiplot-spantree
 #' @usage NULL

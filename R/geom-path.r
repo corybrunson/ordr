@@ -24,7 +24,7 @@
 #' @inheritParams ggplot2::layer
 #' @template param-geom
 #' @template param-matrix
-#' @example inst/examples/ex-lm.r
+NULL
 
 #' @rdname ggbiplot-path
 #' @export

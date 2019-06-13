@@ -31,7 +31,7 @@
 #'   to dot product magnitudes (angles closest to straight, whether \eqn{0} or
 #'   \eqn{\pi}, versus angles closest to \eqn{0}).
 #' @param ... Additional parameters passed to methods.
-#' @example inst/examples/ex-align-to.r
+#' @example inst/examples/country-cmds-prcomp-align.r
 NULL
 
 attribute_alignment <- function(x, r) {

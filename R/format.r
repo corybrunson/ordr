@@ -16,6 +16,10 @@
 #' @param x An ordination object.
 #' @inheritParams tibble::format.tbl
 #' @param ... Additional arguments.
+#' @example inst/examples/mtcars-lm-isolines.r
+#' @example inst/examples/country-cmds-lm.r
+#' @example inst/examples/finches-ca.r
+#' @example inst/examples/iris-princomp-sec.r
 
 #' @rdname formatting
 #' @export

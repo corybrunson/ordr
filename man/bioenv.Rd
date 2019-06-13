@@ -12,53 +12,91 @@ Species counts and environmental variables for several locations
 on a sea-bed.
 }
 \examples{
-data(bioenv)
-
-# reproduce Exhibit 2.3 in Greenacre (2010)
-
-# standardize two predictors
-bioenv <- dplyr::mutate(
-  bioenv,
-  x = (Depth - mean(Depth)) / sd(Depth),
-  y = (Pollution - mean(Pollution)) / sd(Pollution)
-)
-
-# linear regression setup
-(m <- lm(data = bioenv, formula = d ~ x + y))
-(b <- as_tbl_ord(m))
-(d <- tidy(b))
-
-# contributions of predictors to explained variance
-print(augmentation_coord(b))
-
-# basic linear regression biplot
-gg <- ggbiplot(b, aes(x = x, y = y))
-gg +
-  geom_u_point() +
-  geom_v_vector()
-# same biplot using default matrices for each layer
-gg +
-  geom_biplot_point() +
-  geom_biplot_vector()
-# same biplot with tick marks for sole axis
-gg +
-  geom_u_point() +
-  geom_v_vector() +
-  geom_v_ticks(ids = 1, by = 5)
-# same biplot with isolines for sole axis
-gg +
-  geom_u_point() +
-  geom_v_vector() +
-  geom_v_isolines(ids = 1, by = 5)
-
-# shade points by expected species prevalence and darken outliers
-ggbiplot(d, aes(x = x, y = y, color = .fit, alpha = .wt.res ^ 2)) +
+# Adapt Exhibit 2.3 in Greenacre (2010)
+bioenv \%>\%
+  dplyr::mutate(
+    x = (Depth - mean(Depth)) / sd(Depth),
+    y = (Pollution - mean(Pollution)) / sd(Pollution)
+  ) \%>\%
+  lm(formula = d ~ x + y) \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  print() -> bioenv_lm
+bioenv_lm \%>\%
+  ggbiplot(aes(x = x, y = y, color = .fit, alpha = .wt.res ^ 2)) +
   theme_bw() +
   scale_color_distiller(type = "div", palette = 1) +
   scale_alpha_continuous(range = c(1/3, 1)) +
   geom_u_point() +
   geom_v_vector() +
-  geom_v_isolines(ids = 1, by = 5)
+  geom_v_isolines(ids = 1, by = 5) +
+  labs(x = "Standardized Depth", y = "Standardized Pollution") +
+  ggtitle(
+    "Gradient vector and contour lines for species 'd'",
+    "Regression plane: standardized depth-pollution space"
+  )
+# Adapt Exhibit 4.6 in Greenacre (2010)
+ycols <- 2:6
+# chi-squared distances
+chidist <- function(mat, rowcol = 1) {
+  if (rowcol == 1) {
+    prof <- mat / apply(mat, 1, sum)
+    rootaveprof <- sqrt(apply(mat, 2, sum) / sum(mat))
+  }
+  if (rowcol == 2) {
+    prof <- t(mat) / apply(mat, 2, sum)
+    rootaveprof <- sqrt(apply(mat, 1, sum) / sum(mat))
+  }
+  dist(scale(prof, FALSE, rootaveprof))
+}
+# multidimensional scaling of species counts by chi-squared distances
+bioenv[, ycols] \%>\%
+  chidist() \%>\%
+  cmdscale() \%>\%
+  as_tbl_ord() \%>\%
+  mutate_u(.name = bioenv$site) \%>\%
+  print() -> bioenv_cmds
+# regress species relative frequencies on principal coordinates
+bioenv[, ycols] \%>\%
+  sweep(1, 1 / rowSums(bioenv[, ycols]), "*") \%>\%
+  sweep(2, sqrt(sum(bioenv[, ycols]) / colSums(bioenv[, ycols])), "*") \%>\%
+  as.matrix() -> bioenv_relfreq
+lm(bioenv_relfreq ~ get_u(bioenv_cmds)) \%>\%
+  as_tbl_ord() \%>\%
+  print() -> bioenv_lm
+# biplot of species with regression vectors onto principal coordinates
+ggbiplot(bioenv_cmds, aes(label = .name)) +
+  geom_u_text(color = "seagreen") +
+  geom_v_vector(data = bioenv_lm, color = "darkred") +
+  geom_v_text_repel(data = bioenv_lm)
+# Generalized multiple linear regression on marine ecosystem data
+# Reproduce Exhibit 2.5 in Greenacre (2010)
+bioenv_std <- dplyr::mutate_if(bioenv, is.numeric, ~ as.vector(scale(.)))
+resp_std <- as.matrix(dplyr::select(bioenv_std, a:e))
+pred_std <- as.matrix(dplyr::select(bioenv_std, x = Depth, y = Pollution))
+lm(resp_std ~ pred_std + 0) \%>\%
+  as_tbl_ord() \%>\%
+  print() -> bioenv_std_mlm
+ggbiplot(bioenv_std_mlm, aes(label = .name)) +
+  theme_bw() +
+  geom_u_text(color = "darkgreen") +
+  geom_v_vector(color = "brown4") +
+  geom_v_text_radiate(color = "brown4")
+# Reproduce Exhibit 3.2 in Greenacre (2010)
+bioenv \%>\%
+  dplyr::mutate_at(dplyr::vars(a:e), ~ . ^ (1/4)) \%>\%
+  dplyr::mutate_at(dplyr::vars(Pollution:Depth), ~ as.vector(scale(.))) \%>\%
+  print() -> bioenv_4rt
+resp_4rt <- as.matrix(dplyr::select(bioenv_4rt, a:e))
+pred_4rt <- as.matrix(dplyr::select(bioenv_4rt, x = Depth, y = Pollution))
+lm(resp_4rt ~ pred_4rt + 0) \%>\%
+  as_tbl_ord() \%>\%
+  print() -> bioenv_4rt_mlm
+ggbiplot(bioenv_4rt_mlm, aes(x = x, y = y, label = .name)) +
+  theme_bw() +
+  geom_u_text(color = "darkgreen") +
+  geom_v_vector(color = "brown4") +
+  geom_v_text_radiate(color = "brown4")
 }
 \references{
 Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:

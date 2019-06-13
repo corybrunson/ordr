@@ -3,7 +3,7 @@
 \name{finches}
 \alias{finches}
 \title{Site-species occurrence data for Galapagos finches}
-\format{A \link[base:data.frame]{data.frame}.}
+\format{A \link[base:data.frame]{data frame}.}
 \source{
 These data are taken from Sanderson (2000). They are available in a
 different format in the \strong{\link[cooccur:cooccur]{cooccur}} package.
@@ -12,30 +12,78 @@ different format in the \strong{\link[cooccur:cooccur]{cooccur}} package.
 Site-species occurrence data for Galapagos finches
 }
 \examples{
-
-data(finches)
-
-finches_mat <- t(finches)
-
-finches_lsvd <- as_tbl_ord(logisticSVD(finches_mat))
-ggbiplot(finches_lsvd, aes(x = LSC1, y = LSC2)) +
-  geom_u_vector(aes(x = LSC1 * .01, y = LSC2 * .01)) +
-  geom_u_text(aes(x = LSC1 * .01, y = LSC2 * .01, label = .name), size = 3) +
-  geom_v_label(aes(label = .name), size = 3, alpha = .5)
-
-finches_lpca <- as_tbl_ord(logisticPCA(finches_mat))
-ggbiplot(finches_lpca, aes(x = LPC1, y = LPC2)) +
-  geom_u_vector(aes(x = LPC1 * .02, y = LPC2 * .02)) +
-  geom_u_text_radiate(aes(x = LPC1 * .02, y = LPC2 * .02, label = .name),
-                      size = 3) +
-  geom_v_label(aes(label = .name), size = 3, alpha = .5)
-
-finches_clpca <- as_tbl_ord(convexLogisticPCA(finches_mat[, -13, drop = FALSE]))
-ggbiplot(finches_clpca, aes(x = LPC1, y = LPC2)) +
-  geom_u_vector(aes(x = LPC1 * .02, y = LPC2 * .02)) +
-  geom_u_text_radiate(aes(x = LPC1 * .02, y = LPC2 * .02, label = .name),
-                      size = 3) +
-  geom_v_label(aes(label = .name), size = 3, alpha = .5)
+# Correspondence analysis of Sanderson finches data
+finches \%>\%
+  ca::ca() \%>\%
+  as_tbl_ord() \%>\%
+  confer_inertia(.5) \%>\%
+  augment() \%>\%
+  print() -> finches_ca
+finches_ca \%>\%
+  ggbiplot(aes(label = .name)) +
+  geom_u_text(aes(alpha = .inertia), color = "royalblue3") +
+  geom_v_text(aes(alpha = .inertia), color = "darkred") +
+  scale_alpha_continuous(range = c(.3, 1), guide = "none") +
+  ggtitle(
+    "Symmetric CA biplot of the Galapagos island finches",
+    "Label opacity encodes row/column inertia"
+  )
+# Logistic SVD of Sanderson finches data
+finches \%>\% t() \%>\%
+  logisticSVD() \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  print() -> finches_lsvd
+finches_lsvd \%>\%
+  ggbiplot(
+    aes(x = LSC1, y = LSC2, label = .name),
+    sec.axes = "v", scale.factor = 100
+  ) +
+  geom_u_vector(alpha = .5, color = "darkred") +
+  geom_u_text_radiate(size = 3, color = "darkred") +
+  geom_v_label(size = 3, alpha = .5, color = "royalblue3") +
+  ggtitle(
+    "Logistic SVD of the Galapagos island finches",
+    "Islands (finches) scaled to the primary (secondary) axes"
+  )
+# Logistic PCA of Sanderson finches data
+finches \%>\% t() \%>\%
+  logisticPCA() \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  print() -> finches_lpca
+finches_lpca \%>\%
+  ggbiplot(
+    aes(x = LPC1, y = LPC2, label = .name),
+    sec.axes = "v", scale.factor = 50
+  ) +
+  geom_u_vector(alpha = .5, color = "darkred") +
+  geom_u_text_radiate(size = 3, color = "darkred") +
+  geom_v_label(size = 3, alpha = .5, color = "royalblue3") +
+  ggtitle(
+    "Logistic PCA of the Galapagos island finches",
+    "Islands (finches) scaled to the primary (secondary) axes"
+  )
+# Convex logistic PCA of Sanderson finches data
+finches \%>\% t() \%>\%
+  # omit finches present on every island
+  {.[, ! apply(., 2, all), drop = FALSE]} \%>\%
+  convexLogisticPCA() \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  print() -> finches_clpca
+finches_clpca \%>\%
+  ggbiplot(
+    aes(x = LPC1, y = LPC2, label = .name),
+    sec.axes = "v", scale.factor = 50
+  ) +
+  geom_u_vector(alpha = .5, color = "darkred") +
+  geom_u_text_radiate(size = 3, color = "darkred") +
+  geom_v_label(size = 3, alpha = .5, color = "royalblue3") +
+  ggtitle(
+    "Convex logistic PCA of the Galapagos island finches",
+    "Islands (finches) scaled to the primary (secondary) axes"
+  )
 }
 \references{
 Sanderson JG (2000) "Testing Ecological Patterns." \emph{American Scientist},

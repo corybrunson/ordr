@@ -157,3 +157,72 @@ aesthetics are in bold):
 }
 }
 
+\examples{
+# Correspondence analysis of Sanderson finches data
+finches \%>\%
+  ca::ca() \%>\%
+  as_tbl_ord() \%>\%
+  confer_inertia(.5) \%>\%
+  augment() \%>\%
+  print() -> finches_ca
+finches_ca \%>\%
+  ggbiplot(aes(label = .name)) +
+  geom_u_text(aes(alpha = .inertia), color = "royalblue3") +
+  geom_v_text(aes(alpha = .inertia), color = "darkred") +
+  scale_alpha_continuous(range = c(.3, 1), guide = "none") +
+  ggtitle(
+    "Symmetric CA biplot of the Galapagos island finches",
+    "Label opacity encodes row/column inertia"
+  )
+# Confer PCA weights and inertia between cases and variables
+country_attributes \%>\%
+  prcomp() \%>\%
+  as_tbl_ord() \%>\%
+  print() -> attributes_pca
+# form biplot
+attributes_pca \%>\%
+  ggbiplot(
+    aes(label = .name),
+    sec.axes = "v", scale.factor = dim_v(attributes_pca)
+  ) +
+  theme_bw() + theme(panel.grid = element_blank()) +
+  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
+  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
+  geom_v_text_repel(aes(x = PC1, y = PC2), color = "darkred")
+# covariance biplot
+attributes_pca \%>\%
+  confer_inertia(0) \%>\%
+  ggbiplot(
+    aes(label = .name),
+    sec.axes = "u", scale.factor = dim_u(attributes_pca)
+  ) +
+  theme_bw() + theme(panel.grid = element_blank()) +
+  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
+  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
+  geom_v_text_repel(aes(x = PC1, y = PC2), color = "darkred")
+# Confer inertia in CA between rows and columns of benthic sample data
+benthos \%>\%
+  ca::ca() \%>\%
+  as_tbl_ord() \%>\%
+  print() -> benthos_ca
+# Reproduce Exhibit 8.3
+benthos_ca \%>\%
+  confer_inertia("colprincipal") \%>\%
+  ggbiplot(aes(label = .name)) +
+  theme_bw() +
+  geom_u_point(color = "brown", size = 1) +
+  geom_v_text(color = "darkgreen")
+# Reproduce Exhibit 8.4
+benthos_ca \%>\%
+  augment(.matrix = "u") \%>\%
+  transmute_u(mass = .mass, sqrt_mass = sqrt(.mass)) \%>\%
+  confer_inertia("colprincipal") \%>\%
+  ggbiplot(aes(label = .name), scale_u = "sqrt_mass") +
+  theme_bw() +
+  geom_u_vector(color = "brown", arrow = NULL) +
+  geom_u_point(aes(size = mass), color = "brown", shape = 17) +
+  scale_size_continuous(range = c(1, 4), guide = "none") +
+  geom_u_text(stat = "chull", color = "brown", nudge_x = .075, nudge_y = .05) +
+  geom_v_point(color = "darkgreen") +
+  geom_v_text_repel(color = "darkgreen", min.segment.length = 2)
+}

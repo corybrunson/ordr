@@ -42,60 +42,58 @@ These methods extract data from, and attribute new data to,
 objects of class \code{"ca"} from the \strong{\link[ca:ca]{ca}} package.
 }
 \examples{
-
+# Correspondence analysis of Sanderson finches data
+finches \%>\%
+  ca::ca() \%>\%
+  as_tbl_ord() \%>\%
+  confer_inertia(.5) \%>\%
+  augment() \%>\%
+  print() -> finches_ca
+finches_ca \%>\%
+  ggbiplot(aes(label = .name)) +
+  geom_u_text(aes(alpha = .inertia), color = "royalblue3") +
+  geom_v_text(aes(alpha = .inertia), color = "darkred") +
+  scale_alpha_continuous(range = c(.3, 1), guide = "none") +
+  ggtitle(
+    "Symmetric CA biplot of the Galapagos island finches",
+    "Label opacity encodes row/column inertia"
+  )
+# Row- and column-principal biplots for CA of artificial smoking frequency data
 data(smoke, package = "ca")
-
-(m <- ca::ca(smoke))
-
-plot(m, map = "rowprincipal", col = c("green", "brown"))
-
-(b <- as_tbl_ord(m))
-(d <- fortify(b))
-
-# confer singular values to reproduce the row-principal biplot
-set.seed(999291)
-b <- confer_inertia(b, "rowprincipal")
-ggbiplot(b, aes(label = .name)) +
+smoke \%>\%
+  ca::ca() \%>\%
+  as_tbl_ord() \%>\%
+  print() -> smoke_ca
+smoke_ca \%>\%
+  confer_inertia("rowprincipal") \%>\%
+  ggbiplot(aes(label = .name)) +
   theme_bw() +
   geom_u_point(color = "green") +
   geom_u_text_repel(color = "blue") +
   geom_v_point(color = "brown", shape = 17) +
   geom_v_text_repel(color = "brown")
-
-# the column-principal biplot, for comparison
-set.seed(861282)
-b <- confer_inertia(b, "colprincipal")
-ggbiplot(b, aes(label = .name)) +
+smoke_ca \%>\%
+  confer_inertia("colprincipal") \%>\%
+  ggbiplot(aes(label = .name)) +
   theme_bw() +
   geom_u_point(color = "green") +
   geom_u_text_repel(color = "blue") +
   geom_v_point(color = "brown", shape = 17) +
   geom_v_text_repel(color = "brown")
-
-data(benthos)
-
-(m <- ca::ca(benthos))
-
-plot(
-  m, map = "colprincipal",
-  col = c("brown", "darkgreen"),
-  labels = c(0, 1), col.lab = c("brown", "darkgreen")
-)
-
-(b <- as_tbl_ord(m))
-(d <- fortify(b))
-
-# reproduce Exhibit 8.3
-b \%>\%
+# Confer inertia in CA between rows and columns of benthic sample data
+benthos \%>\%
+  ca::ca() \%>\%
+  as_tbl_ord() \%>\%
+  print() -> benthos_ca
+# Reproduce Exhibit 8.3
+benthos_ca \%>\%
   confer_inertia("colprincipal") \%>\%
   ggbiplot(aes(label = .name)) +
   theme_bw() +
   geom_u_point(color = "brown", size = 1) +
   geom_v_text(color = "darkgreen")
-
-# reproduce Exhibit 8.4
-set.seed(668286)
-b \%>\%
+# Reproduce Exhibit 8.4
+benthos_ca \%>\%
   augment(.matrix = "u") \%>\%
   transmute_u(mass = .mass, sqrt_mass = sqrt(.mass)) \%>\%
   confer_inertia("colprincipal") \%>\%
@@ -107,16 +105,14 @@ b \%>\%
   geom_u_text(stat = "chull", color = "brown", nudge_x = .075, nudge_y = .05) +
   geom_v_point(color = "darkgreen") +
   geom_v_text_repel(color = "darkgreen", min.segment.length = 2)
-
-# reproduce Exhibits 9.2, 9.3, 9.4, 9.6 in Greenacre (2010)
-
-data(issp_women)
-
-(m <- ca::ca(issp_women))
-(b <- augment(as_tbl_ord(m)))
-
-# Exhibit 9.2
-b \%>\%
+# Confer inertia between rows and columns of CA on Spanish ISSP sample
+issp_women \%>\%
+  ca::ca() \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  print() -> issp_ca
+# Reproduce Exhibit 9.2 in Greenacre (2010)...
+issp_ca \%>\%
   confer_inertia(c(1, 1)) \%>\%
   ggbiplot(aes(label = .name)) +
   theme_bw() +
@@ -124,13 +120,13 @@ b \%>\%
   geom_u_text_repel(color = "darkgreen") +
   geom_v_point(color = "brown", shape = 17) +
   geom_v_text_repel(color = "brown")
-
-# Exhibit 9.3
-b \%>\%
+# Reproduce Exhibit 9.3 in Greenacre (2010)...
+issp_ca \%>\%
   confer_inertia("rowprincipal") \%>\%
   ggbiplot(aes(label = .name)) +
   theme_bw() +
   geom_u_point(color = "darkgreen") +
   geom_v_point(color = "brown", shape = 17) +
   geom_v_text_repel(color = "brown")
+# Reproduce Exhibits 9.4 and 9.6 in Greenacre (2010)...
 }

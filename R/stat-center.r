@@ -9,7 +9,8 @@
 #'   treated as in [ggplot2::stat_summary()], with `fun.center`, `fun.min`, and
 #'   `fun.max` behaving as `fun.y`, `fun.ymin`, and `fun.ymax`.
 #' @template param-stat
-#' @example inst/examples/ex-iris.r
+#' @example inst/examples/iris-prcomp-center-ellipse.r
+NULL
 
 #' @rdname ggbiplot-center
 #' @usage NULL

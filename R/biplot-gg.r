@@ -40,7 +40,7 @@
 
 #' @name ggbiplot
 #' @import ggplot2
-#' @param ordination A [`tbl_ord`].
+#' @param ordination A `[tbl_ord]`.
 #' @param mapping List of default aesthetic mappings to use for the biplot. The
 #'   default assigns the first two coordinates to the aesthetics `x` and `y`.
 #'   Other assignments must be supplied in each layer added to the plot.
@@ -55,7 +55,9 @@
 #'   \eqn{V}, respectively.
 #' @param ... Additional arguments passed to [ggplot2::ggplot()] or to
 #'   [ggplot2::aes()].
-#' @example inst/examples/ex-ggbiplot.r
+#' @example inst/examples/mtcars-lm-isolines.r
+#' @example inst/examples/iris-princomp-sec.r
+#' @example inst/examples/finches-lpca-sec.r
 #' @seealso [ggplot2::ggplot2()]
 
 #' @rdname ggbiplot

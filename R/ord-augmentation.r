@@ -25,6 +25,9 @@
 #' @include ord-accessors.r
 #' @inheritParams accessors
 #' @param data Passed to [generics::augment()]; currently ignored.
+#' @example inst/examples/bioenv-lm-isolines.r
+#' @example inst/examples/benthos-ca-augment-confer.r
+NULL
 
 #' @rdname augmentation
 #' @export
