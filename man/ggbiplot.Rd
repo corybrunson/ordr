@@ -12,7 +12,7 @@ ggbiplot(ordination = NULL, mapping = aes(x = 1, y = 2),
 ord_aes(ordination, ...)
 }
 \arguments{
-\item{ordination}{A \link{tbl_ord}.}
+\item{ordination}{A \code{\link{tbl_ord}}.}
 
 \item{mapping}{List of default aesthetic mappings to use for the biplot. The
 default assigns the first two coordinates to the aesthetics \code{x} and \code{y}.
@@ -37,13 +37,17 @@ Build a biplot visualization from ordination data wrapped as a
 }
 \details{
 \code{ggbiplot()} produces a \link[ggplot2:ggplot]{ggplot} object from a \code{tbl_ord}
-object. The baseline object is the default unadorned \code{"ggplot"}-class object
-\code{p} with the following differences from what \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} returns:
+object \code{ordination}. The baseline object is the default unadorned
+\code{"ggplot"}-class object \code{p} with the following differences from what
+\code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} returns:
 \itemize{
 \item \code{p$mapping} is augmented with \code{.matrix = .matrix}, which expects either
 \code{.matrix = "u"} or \code{.matrix = "v"} from the biplot.
 \item \code{p$coordinates} is defaulted to \link[ggplot2:coord_fixed]{ggplot2::coord_fixed} in order to
 faithfully render the geometry of an ordination.
+\item When \code{x} or \code{y} are mapped to coordinates of \code{ordination}, \code{p$labels$x} or
+\code{p$labels$y} are defaulted to the coordinate names concatenated with the
+percentages of the \link[=conference]{inertia} captured by the coordinates.
 \item \code{p} is assigned the class \code{"ggbiplot"} in addition to \code{"ggplot"}. This
 serves no functional purpose currently.
 }
