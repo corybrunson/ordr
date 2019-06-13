@@ -131,7 +131,7 @@ recover_inertia <- function(x) UseMethod("recover_inertia")
 
 #' @rdname accessors
 #' @export
-recover_inertia.default <- function(x) x$value ^ 2
+recover_inertia.default <- function(x) NA_real_
 
 #' @rdname accessors
 #' @export

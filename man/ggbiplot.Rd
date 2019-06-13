@@ -6,8 +6,8 @@
 \title{Biplots following the grammar of graphics}
 \usage{
 ggbiplot(ordination = NULL, mapping = aes(x = 1, y = 2),
-  sec.axes = NULL, scale.factor = NULL, scale_u = NULL,
-  scale_v = NULL, ...)
+  axis.percents = TRUE, sec.axes = NULL, scale.factor = NULL,
+  scale_u = NULL, scale_v = NULL, ...)
 
 ord_aes(ordination, ...)
 }
@@ -17,6 +17,9 @@ ord_aes(ordination, ...)
 \item{mapping}{List of default aesthetic mappings to use for the biplot. The
 default assigns the first two coordinates to the aesthetics \code{x} and \code{y}.
 Other assignments must be supplied in each layer added to the plot.}
+
+\item{axis.percents}{Whether to concatenate default axis labels with inertia
+percentages.}
 
 \item{sec.axes}{Matrix factor character to specify a secondary set of axes.}
 
@@ -45,9 +48,10 @@ object \code{ordination}. The baseline object is the default unadorned
 \code{.matrix = "u"} or \code{.matrix = "v"} from the biplot.
 \item \code{p$coordinates} is defaulted to \link[ggplot2:coord_fixed]{ggplot2::coord_fixed} in order to
 faithfully render the geometry of an ordination.
-\item When \code{x} or \code{y} are mapped to coordinates of \code{ordination}, \code{p$labels$x} or
-\code{p$labels$y} are defaulted to the coordinate names concatenated with the
-percentages of the \link[=conference]{inertia} captured by the coordinates.
+\item When \code{x} or \code{y} are mapped to coordinates of \code{ordination}, and if
+\code{axis.percents} is \code{TRUE}, \code{p$labels$x} or \code{p$labels$y} are defaulted to the
+coordinate names concatenated with the percentages of \link[=conference]{inertia}
+captured by the coordinates.
 \item \code{p} is assigned the class \code{"ggbiplot"} in addition to \code{"ggplot"}. This
 serves no functional purpose currently.
 }
@@ -74,3 +78,65 @@ order to render plot elements for the corresponding matrix \eqn{U} or
 e.g. \eqn{U} for points and \eqn{V} for arrows.
 }
 
+\examples{
+# Anderson iris sepal and petal data
+head(iris)
+# PCA ordination
+iris[, -5] \%>\%
+  prcomp(scale = TRUE) \%>\%
+  as_tbl_ord() \%>\%
+  # row-principal conference of intertia
+  confer_inertia(1) \%>\%
+  mutate_u(species = iris$Species) \%>\%
+  mutate_v(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
+  print() -> iris_pca
+# PCA biplot
+iris_pca \%>\%
+  ggbiplot(aes(color = species)) +
+  theme_bw() +
+  scale_color_brewer(type = "qual", palette = 2) +
+  geom_u_point(alpha = .5) +
+  # species centroids
+  stat_u_center(fun.center = "mean", size = 3, shape = "triangle") +
+  stat_u_ellipse() +
+  geom_v_vector(color = "#444444") +
+  ggtitle("Row-principal PCA biplot of Anderson iris data")
+# rescaled PCA biplot
+iris_pca \%>\%
+  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
+  theme_bw() +
+  scale_color_brewer(type = "qual", palette = 2) +
+  geom_u_point() +
+  geom_v_vector(color = "#444444") +
+  geom_v_text_radiate(aes(label = measure), color = "#444444") +
+  ggtitle(
+    "Row-principal PCA biplot of Anderson iris data",
+    "Variable loadings scaled to secondary axes"
+  )
+
+# Motor Trend automobile design and performance data
+head(mtcars)
+# linear regression ordination
+mtcars \%>\%
+  scale(scale = FALSE) \%>\%
+  as.data.frame() \%>\%
+  lm(formula = mpg ~ wt + cyl) \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  mutate_u(influence = .wt.res^2) \%>\%
+  print() -> mtcars_lm
+# linear regression biplot
+mtcars_lm \%>\%
+  ggbiplot(aes(x = wt, y = cyl)) +
+  geom_u_point(aes(color = influence)) +
+  geom_v_vector() +
+  # weight isolines
+  geom_v_isolines(ids = 1, by = 5) +
+  ggtitle(
+    "Weight isolines with data colored by importance",
+    "Regressing mpg onto weight and number of cylinders"
+  )
+}
+\seealso{
+\code{\link[ggplot2:ggplot2]{ggplot2::ggplot2()}}
+}

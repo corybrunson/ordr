@@ -17,9 +17,10 @@
 #' - `p$coordinates` is defaulted to [ggplot2::coord_fixed] in order to
 #' faithfully render the geometry of an ordination.
 
-#' - When `x` or `y` are mapped to coordinates of `ordination`, `p$labels$x` or
-#' `p$labels$y` are defaulted to the coordinate names concatenated with the
-#' percentages of the [inertia][conference] captured by the coordinates.
+#' - When `x` or `y` are mapped to coordinates of `ordination`, and if
+#' `axis.percents` is `TRUE`, `p$labels$x` or `p$labels$y` are defaulted to the
+#' coordinate names concatenated with the percentages of [inertia][conference]
+#' captured by the coordinates.
 
 #' - `p` is assigned the class `"ggbiplot"` in addition to `"ggplot"`. This
 #' serves no functional purpose currently.
@@ -43,6 +44,8 @@
 #' @param mapping List of default aesthetic mappings to use for the biplot. The
 #'   default assigns the first two coordinates to the aesthetics `x` and `y`.
 #'   Other assignments must be supplied in each layer added to the plot.
+#' @param axis.percents Whether to concatenate default axis labels with inertia
+#'   percentages.
 #' @param sec.axes Matrix factor character to specify a secondary set of axes.
 #' @param scale.factor Numeric value used to scale the secondary axes against
 #'   the primary axes; ignored if `sec.axes` is not specified.
@@ -52,17 +55,24 @@
 #'   \eqn{V}, respectively.
 #' @param ... Additional arguments passed to [ggplot2::ggplot()] or to
 #'   [ggplot2::aes()].
+#' @example inst/examples/ex-ggbiplot.r
+#' @seealso [ggplot2::ggplot2()]
 
 #' @rdname ggbiplot
 #' @export
 ggbiplot <- function(
   ordination = NULL, mapping = aes(x = 1, y = 2),
-  sec.axes = NULL, scale.factor = NULL,
+  axis.percents = TRUE, sec.axes = NULL, scale.factor = NULL,
   scale_u = NULL, scale_v = NULL,
   ...
 ) {
-  # inertia
-  inertia <- recover_inertia(ordination)
+  if (axis.percents) {
+    # store inertia
+    inertia <- recover_inertia(ordination)
+    if (all(is.na(inertia))) {
+      axis.percents <- FALSE
+    }
+  }
   
   # fortify `ordination` if necessary
   ordination <- fortify(ordination, include = "all")
@@ -126,18 +136,20 @@ ggbiplot <- function(
     p <- p + scale_y_continuous(sec.axis = sec_axis(~ . / scale.factor))
   }
   
-  # synchronize the scales -+-AND BREAKS-+- of the axes
+  # synchronize the scales of the axes
   p$coordinates <- coord_fixed()
   
   # assign default axis labels
-  xy <- match(sapply(mapping, all.vars), get_coord(ordination))
-  xy_aes <- get_coord(ordination)[xy]
-  inertia_pct <- scales::percent(inertia / sum(inertia))
-  if (! is.na(xy[1])) {
-    p$labels$x <- paste0(xy_aes[1], " ", xy[1], " (", inertia_pct[xy[1]], ")")
-  }
-  if (! is.na(xy[2])) {
-    p$labels$y <- paste0(xy_aes[2], " ", xy[2], " (", inertia_pct[xy[2]], ")")
+  if (axis.percents) {
+    xy <- match(sapply(mapping, all.vars), get_coord(ordination))
+    xy_aes <- get_coord(ordination)[xy]
+    inertia_pct <- scales::percent(inertia / sum(inertia))
+    if (! is.na(xy[1])) {
+      p$labels$x <- paste0(xy_aes[1], " (", inertia_pct[xy[1]], ")")
+    }
+    if (! is.na(xy[2])) {
+      p$labels$y <- paste0(xy_aes[2], " (", inertia_pct[xy[2]], ")")
+    }
   }
   
   # add class label for potential future use

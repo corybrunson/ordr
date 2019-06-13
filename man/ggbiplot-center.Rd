@@ -134,7 +134,7 @@ iris_pca \%>\%
   scale_color_brewer(type = "qual", palette = 2) +
   scale_fill_brewer(type = "qual", palette = 2)
 
-# symmetric biplot
+# rescaled biplot
 set.seed(58319)
 iris_pca \%>\%
   ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +

@@ -1,8 +1,9 @@
 
-# @name plot
 #' @importFrom graphics plot
 #' @importFrom stats biplot
 
+#' @method biplot tbl_ord
+#' @export
 biplot.tbl_ord <- function(x, choices = 1L:2L, ...) {
   # biplot method for original class
   prev_class <- setdiff(class(x), "tbl_ord")
@@ -28,6 +29,8 @@ biplot.tbl_ord <- function(x, choices = 1L:2L, ...) {
   invisible()
 }
 
+#' @method plot tbl_ord
+#' @export
 plot.tbl_ord <- function(x, ...) {
   # use plot method for original class if available
   prev_class <- setdiff(class(x), "tbl_ord")

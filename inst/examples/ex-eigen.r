@@ -19,7 +19,7 @@ karate_eigen_ord <- karate %>%
   )
 
 # verify that "first" eigencentralities agree (up to rounding error)
-tibble(
+tibble::tibble(
   igraph = karate_eigen_cent$vector,
   eigen = karate_eigen_ord$vectors[, 1]
 ) %>%
