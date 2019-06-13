@@ -10,13 +10,17 @@
 #' object `ordination`. The baseline object is the default unadorned
 #' `"ggplot"`-class object `p` with the following differences from what
 #' [ggplot2::ggplot()] returns:
+#' 
 #' - `p$mapping` is augmented with `.matrix = .matrix`, which expects either
 #' `.matrix = "u"` or `.matrix = "v"` from the biplot.
+
 #' - `p$coordinates` is defaulted to [ggplot2::coord_fixed] in order to
 #' faithfully render the geometry of an ordination.
+
 #' - When `x` or `y` are mapped to coordinates of `ordination`, `p$labels$x` or
 #' `p$labels$y` are defaulted to the coordinate names concatenated with the
 #' percentages of the [inertia][conference] captured by the coordinates.
+
 #' - `p` is assigned the class `"ggbiplot"` in addition to `"ggplot"`. This
 #' serves no functional purpose currently.
 #' 
