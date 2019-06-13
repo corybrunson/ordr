@@ -25,7 +25,7 @@
 #' 
 
 #' @name ggbiplot-intervals
-#' @include legend-draw.r
+#' @include biplot-legend.r
 #' @import ggplot2
 #' @inheritParams ggplot2::geom_linerange
 #' @template param-geom

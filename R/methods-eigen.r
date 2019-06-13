@@ -53,7 +53,7 @@ recover_inertia.eigen <- function(x) {
 #' @rdname methods-eigen
 #' @export
 recover_coord.eigen <- function(x) {
-  paste0("E", seq_along(recover_inertia(x)))
+  paste0("EV", seq_along(recover_inertia(x)))
 }
 
 #' @rdname methods-eigen

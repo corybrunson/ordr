@@ -102,3 +102,14 @@ un_tbl_ord <- function(x) {
   class(x) <- setdiff(class(x), "tbl_ord")
   x
 }
+
+axis_abbrs <- list(
+  ca = "CA Dim",
+  cmds = "PCo",
+  eigen = "EV",
+  lpca = "LPCA",
+  lsvd = "LSVD",
+  prcomp = "PC",
+  princomp = "PC",
+  svd = "SV"
+)

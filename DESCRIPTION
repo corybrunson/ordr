@@ -13,6 +13,7 @@ Depends:
     R (>= 3.3.0),
     ggplot2
 Imports:
+    scales,
     generics,
     magrittr,
     tibble,
@@ -33,12 +34,13 @@ Suggests: testthat
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 Collate: 
+    'biplot-gg.r'
+    'biplot-legend.r'
     'data.r'
     'dplyr-verbs.r'
     'format.r'
     'fortify.r'
     'geom-axis.r'
-    'legend-draw.r'
     'geom-intervals.r'
     'geom-isolines.r'
     'geom-path.r'
@@ -47,7 +49,6 @@ Collate:
     'geom-text-radiate.r'
     'geom-text.r'
     'geom-vector.r'
-    'ggbiplot.r'
     'masks.r'
     'utils.r'
     'ord-accessors.r'

@@ -56,6 +56,12 @@ ggbiplot <- function(
   scale_u = NULL, scale_v = NULL,
   ...
 ) {
+  # inertia
+  inertia <- recover_inertia(ordination)
+  # axis type
+  axis_class <- match(class(ordination)[-1], names(axis_abbrs))
+  axis_class <- axis_class[! is.na(axis_class)][1]
+  
   # fortify `ordination` if necessary
   ordination <- fortify(ordination, include = "all")
   
@@ -120,6 +126,19 @@ ggbiplot <- function(
   
   # synchronize the scales -+-AND BREAKS-+- of the axes
   p$coordinates <- coord_fixed()
+  
+  # assign default axis labels
+  if (! is.na(axis_class)) {
+    axis_abbr <- axis_abbrs[[axis_class]]
+    xy <- match(sapply(mapping, all.vars), get_coord(ordination))
+    inertia_pct <- scales::percent(inertia / sum(inertia))
+    if (! is.na(xy[1])) {
+      p$labels$x <- paste0(axis_abbr, " ", xy[1], " (", inertia_pct[xy[1]], ")")
+    }
+    if (! is.na(xy[2])) {
+      p$labels$y <- paste0(axis_abbr, " ", xy[2], " (", inertia_pct[xy[2]], ")")
+    }
+  }
   
   # add class label for potential future use
   class(p) <- c("ggbiplot", class(p))
