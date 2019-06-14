@@ -50,6 +50,7 @@ Collate:
     'geom-polygon.r'
     'geom-text-radiate.r'
     'geom-text.r'
+    'geom-unit-circle.r'
     'geom-vector.r'
     'masks.r'
     'utils.r'
