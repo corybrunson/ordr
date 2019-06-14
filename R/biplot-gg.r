@@ -14,7 +14,7 @@
 #' - `p$mapping` is augmented with `.matrix = .matrix`, which expects either
 #' `.matrix = "u"` or `.matrix = "v"` from the biplot.
 
-#' - `p$coordinates` is defaulted to [ggplot2::coord_fixed] in order to
+#' - `p$coordinates` is defaulted to [ggplot2::coord_equal()] in order to
 #' faithfully render the geometry of an ordination.
 
 #' - When `x` or `y` are mapped to coordinates of `ordination`, and if
@@ -139,7 +139,7 @@ ggbiplot <- function(
   }
   
   # synchronize the scales of the axes
-  p$coordinates <- coord_fixed()
+  p$coordinates <- coord_equal()
   
   # assign default axis labels
   if (axis.percents) {

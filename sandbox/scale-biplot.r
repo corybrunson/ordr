@@ -59,7 +59,7 @@ ggbiplot <- function(
   }
   
   # synchronize the scales AND BREAKS of the axes
-  p$coordinates <- coord_fixed()
+  p$coordinates <- coord_equal()
   
   # add class label for potential future use
   class(p) <- c("ggbiplot", class(p))

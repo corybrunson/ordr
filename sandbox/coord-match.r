@@ -1,7 +1,7 @@
 #' Cartesian coordinates with fixed aspect ratio and consistent annotation
 #' 
 
-#' \code{coord_match} is a shortcut for \code{ggplot2::coord_fixed(ratio = 1)}
+#' \code{coord_match} is a shortcut for \code{ggplot2::coord_equal(ratio = 1)}
 #' that also forces the major and minor breaks to follow the same regular
 #' positioning scheme.
 

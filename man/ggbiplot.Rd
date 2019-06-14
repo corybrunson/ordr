@@ -46,7 +46,7 @@ object \code{ordination}. The baseline object is the default unadorned
 \itemize{
 \item \code{p$mapping} is augmented with \code{.matrix = .matrix}, which expects either
 \code{.matrix = "u"} or \code{.matrix = "v"} from the biplot.
-\item \code{p$coordinates} is defaulted to \link[ggplot2:coord_fixed]{ggplot2::coord_fixed} in order to
+\item \code{p$coordinates} is defaulted to \code{\link[ggplot2:coord_equal]{ggplot2::coord_equal()}} in order to
 faithfully render the geometry of an ordination.
 \item When \code{x} or \code{y} are mapped to coordinates of \code{ordination}, and if
 \code{axis.percents} is \code{TRUE}, \code{p$labels$x} or \code{p$labels$y} are defaulted to the
