@@ -39,7 +39,5 @@
 }
 \description{
 These methods extract data from, and attribute new data to,
-objects of class \code{"svd"}. This is a class introduced in this package to
-identify objects returned by \code{\link[base:svd]{base::svd()}}, which is masked by a wrapper
-that adds the class attribute.
+objects of class \code{"svd"} returned by \code{\link[=svd_ord]{svd_ord()}}.
 }

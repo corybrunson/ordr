@@ -1,9 +1,7 @@
-#' @title Functionality for matrix spectral decompositions
+#' @title Functionality for eigendecompositions
 #'
 #' @description These methods extract data from, and attribute new data to,
-#'   objects of class `"eigen"`. This is a class introduced in this package to
-#'   identify objects returned by [base::eigen()], which is masked by a wrapper
-#'   that adds the class attribute.
+#'   objects of class `"eigen"` returned by [eigen_ord()].
 #'
 #' @name methods-eigen
 #' @include ord-tbl.r
@@ -22,15 +20,10 @@ reconstruct.eigen <- function(x) {
 }
 
 recover_uv_eigen <- function(x, .matrix) {
-  .matrix <- match_factor(.matrix)
   w <- 1:(min(which(c(x$values, -1) < 0)) - 1)
-  res <- x$vectors[, w, drop = FALSE] %*%
-    diag(sqrt(x$values[w]), nrow = length(w))
-  #res <- sweep(x$vectors, 2, sqrt(x$values), "*")
-  dimnames(res) <- list(
-    dimnames(attr(x, "x"))[[switch(.matrix, u = 1, v = 2)]],
-    recover_coord(x)
-  )
+  res <- x[["vectors"]][, w, drop = FALSE] %*%
+    diag(sqrt(x[["values"]][w]), nrow = length(w))
+  colnames(res) <- recover_coord(x)
   res
 }
 
@@ -50,9 +43,7 @@ recover_inertia.eigen <- function(x) {
 
 #' @rdname methods-eigen
 #' @export
-recover_coord.eigen <- function(x) {
-  paste0("EV", seq_along(recover_inertia(x)))
-}
+recover_coord.eigen <- function(x) colnames(x[["vectors"]])
 
 #' @rdname methods-eigen
 #' @export
@@ -64,9 +55,9 @@ recover_conference.eigen <- function(x) {
 #' @rdname methods-eigen
 #' @export
 augmentation_u.eigen <- function(x) {
-  .name <- rownames(attr(x, "x"))
+  .name <- rownames(x[["vectors"]])
   res <- if (is.null(.name)) {
-    tibble_pole(nrow(attr(x, "x")))
+    tibble_pole(nrow(x[["vectors"]]))
   } else {
     tibble(.name = .name)
   }
@@ -76,9 +67,9 @@ augmentation_u.eigen <- function(x) {
 #' @rdname methods-eigen
 #' @export
 augmentation_v.eigen <- function(x) {
-  .name <- colnames(attr(x, "x"))
+  .name <- rownames(x[["vectors"]])
   res <- if (is.null(.name)) {
-    tibble_pole(ncol(attr(x, "x")))
+    tibble_pole(nrow(x[["vectors"]]))
   } else {
     tibble(.name = .name)
   }

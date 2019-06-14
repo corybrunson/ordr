@@ -2,7 +2,7 @@
 
 # calculate a SVD
 x <- USArrests
-s <- svd(x)
+s <- svd_ord(x)
 
 # wrap `s` as a 'tbl_ord' object
 b <- as_tbl_ord(s)

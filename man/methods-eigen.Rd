@@ -12,7 +12,7 @@
 \alias{augmentation_u.eigen}
 \alias{augmentation_v.eigen}
 \alias{augmentation_coord.eigen}
-\title{Functionality for matrix spectral decompositions}
+\title{Functionality for eigendecompositions}
 \usage{
 \method{as_tbl_ord}{eigen}(x)
 
@@ -39,7 +39,5 @@
 }
 \description{
 These methods extract data from, and attribute new data to,
-objects of class \code{"eigen"}. This is a class introduced in this package to
-identify objects returned by \code{\link[base:eigen]{base::eigen()}}, which is masked by a wrapper
-that adds the class attribute.
+objects of class \code{"eigen"} returned by \code{\link[=eigen_ord]{eigen_ord()}}.
 }

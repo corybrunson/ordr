@@ -11,7 +11,7 @@ karate_eigen_cent <- eigen_centrality(karate)
 # eigendecomposition using base R
 karate_eigen_ord <- karate %>%
   as_adjacency_matrix(sparse = FALSE) %>%
-  eigen() %>% as_tbl_ord() %>%
+  eigen_ord() %>% as_tbl_ord() %>%
   mutate_u(
     faction = vertex_attr(karate, "Faction"),
     name = vertex_attr(karate, "name"),

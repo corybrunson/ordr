@@ -1,9 +1,7 @@
 #' @title Functionality for singular value decompositions
 #'
 #' @description These methods extract data from, and attribute new data to,
-#'   objects of class `"svd"`. This is a class introduced in this package to
-#'   identify objects returned by [base::svd()], which is masked by a wrapper
-#'   that adds the class attribute.
+#'   objects of class `"svd"` returned by [svd_ord()].
 #'
 #' @name methods-svd
 #' @include ord-tbl.r
@@ -22,21 +20,11 @@ reconstruct.svd <- function(x) {
 
 #' @rdname methods-svd
 #' @export
-recover_u.svd <- function(x) {
-  res <- x$u
-  colnames(res) <- recover_coord.svd(x)
-  rownames(res) <- rownames(attr(x, "x"))
-  res
-}
+recover_u.svd <- function(x) x[["u"]]
 
 #' @rdname methods-svd
 #' @export
-recover_v.svd <- function(x) {
-  res <- x$v
-  colnames(res) <- recover_coord.svd(x)
-  rownames(res) <- colnames(attr(x, "x"))
-  res
-}
+recover_v.svd <- function(x) x[["v"]]
 
 #' @rdname methods-svd
 #' @export
@@ -44,7 +32,7 @@ recover_inertia.svd <- function(x) x$d ^ 2
 
 #' @rdname methods-svd
 #' @export
-recover_coord.svd <- function(x) paste0("SV", 1:length(x$d))
+recover_coord.svd <- function(x) colnames(x[["u"]])
 
 #' @rdname methods-svd
 #' @export
@@ -56,9 +44,9 @@ recover_conference.svd <- function(x) {
 #' @rdname methods-svd
 #' @export
 augmentation_u.svd <- function(x) {
-  .name <- rownames(attr(x, "x"))
+  .name <- rownames(x[["u"]])
   if (is.null(.name)) {
-    tibble_pole(nrow(attr(x, "x")))
+    tibble_pole(nrow(x[["u"]]))
   } else {
     tibble(.name = .name)
   }
@@ -67,9 +55,9 @@ augmentation_u.svd <- function(x) {
 #' @rdname methods-svd
 #' @export
 augmentation_v.svd <- function(x) {
-  .name <- colnames(attr(x, "x"))
+  .name <- rownames(x[["v"]])
   if (is.null(.name)) {
-    tibble_pole(ncol(attr(x, "x")))
+    tibble_pole(nrow(x[["v"]]))
   } else {
     tibble(.name = .name)
   }

@@ -12,7 +12,7 @@ d_r <- diag(1 / nrow(x), nrow(x))
 d_c <- diag(1 / ncol(x), ncol(x))
 s <- sqrt(d_r) %*% y %*% sqrt(d_c)
 dimnames(s) <- dimnames(x)
-d <- svd(s)
+d <- svd_ord(s)
 
 # manually compute principal and standard coordinates
 f <- diag(1 / sqrt(diag(d_r))) %*% d$u %*% diag(d$d)

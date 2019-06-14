@@ -69,6 +69,7 @@ Collate:
     'methods-princomp.r'
     'methods-svd.r'
     'ord-annotation.r'
+    'ord-classes.r'
     'ordr.r'
     'plot.r'
     'reconstruct.r'

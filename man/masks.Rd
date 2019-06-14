@@ -2,18 +2,12 @@
 % Please edit documentation in R/masks.r
 \name{masks}
 \alias{masks}
-\alias{eigen}
-\alias{svd}
 \alias{cmdscale}
 \alias{logisticSVD}
 \alias{logisticPCA}
 \alias{convexLogisticPCA}
 \title{Masks of external ordination objects}
 \usage{
-eigen(x, EISPACK = FALSE)
-
-svd(x, LINPACK = FALSE)
-
 cmdscale(d, k = 2, add = FALSE)
 
 logisticSVD(x, k = 2, quiet = TRUE, max_iters = 1000,
@@ -29,13 +23,6 @@ convexLogisticPCA(x, k = 2, m = 4, quiet = TRUE,
   random_start = FALSE, ..., main_effects = TRUE, ss_factor = 4)
 }
 \arguments{
-\item{x}{a numeric or complex matrix whose spectral decomposition is to
-    be computed.  Logical matrices are coerced to numeric.}
-
-\item{EISPACK}{logical. Defunct and ignored.}
-
-\item{LINPACK}{logical.  Defunct and ignored.}
-
 \item{d}{a distance structure such as that returned by \code{dist}
     or a full symmetric matrix containing the dissimilarities.}
 
@@ -45,6 +32,8 @@ convexLogisticPCA(x, k = 2, m = 4, quiet = TRUE,
 \item{add}{logical indicating if an additive constant \eqn{c*} should
     be computed, and added to the non-diagonal dissimilarities such that
     the modified dissimilarities are Euclidean.}
+
+\item{x}{matrix with all binary entries}
 
 \item{quiet}{logical; whether the calculation should give feedback}
 
@@ -72,10 +61,10 @@ sometimes work better. The default is \code{ss_factor = 4}.
 If it is not converging, try \code{ss_factor = 1}.}
 }
 \description{
-Some popular ordination functions in R return objects without a specific
-class (e.g. \code{\link[stats:cmdscale]{stats::cmdscale()}}). Some others return output that is not
-self-contained, for instance missing annotation from the original dataset
-(e.g. \code{\link[logisticPCA:logisticPCA]{logisticPCA::logisticPCA()}}). The functions below wrap the originals
-with the minimal overhead necessary for complete functionality with the
-\code{"[tbl_ord]"} class.
+Some popular ordination functions in R return objects without a
+specific class (e.g. \code{\link[stats:cmdscale]{stats::cmdscale()}}). Some others return output that
+is not self-contained, for instance missing annotation from the original
+dataset (e.g. \code{\link[logisticPCA:logisticPCA]{logisticPCA::logisticPCA()}}). The functions below wrap the
+originals with the minimal overhead necessary for complete functionality
+with the \code{"[tbl_ord]"} class.
 }
