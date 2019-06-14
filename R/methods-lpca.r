@@ -10,7 +10,6 @@
 #' @name methods-lpca
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/ex-lpca.r
 #' @example inst/examples/finches-lpca-sec.r
 NULL
 

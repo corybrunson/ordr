@@ -1,6 +1,5 @@
 #' @title Render isolines for a subject or variable
-#' 
-
+#'
 #' @description `geom_*_isolines()` renders isolines for a specified subject or
 #'   variable.
 #' @template ggbiplot-layers
@@ -33,9 +32,9 @@
 #' @param ticks.length Numeric; the length of the tick marks, as a proportion of
 #'   the plot width.
 #' @template param-matrix
-#' @example inst/examples/ex-glm.r
 #' @example inst/examples/mtcars-lm-isolines.r
 #' @example inst/examples/bioenv-lm-isolines.r
+#' @example inst/examples/bioenv-glm-isolines.r
 NULL
 
 #' @rdname ggbiplot-isolines
@@ -221,7 +220,7 @@ GeomIsolines <- ggproto(
     # convert to intercepts and slopes
     data <- do.call(rbind, lapply(ids, function(i) {
       # intercept
-      if (! is.null(family)) intercept <- data$intercept[i]
+      #if (! is.null(family)) intercept <- data$intercept[i]
       # vector
       w_i <- unlist(data[i, c("x", "y")])
       # calibrated vector

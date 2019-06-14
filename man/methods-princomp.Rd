@@ -42,43 +42,25 @@ These methods extract data from, and attribute new data to,
 objects of class \code{"princomp"} as returned by \code{\link[stats:princomp]{stats::princomp()}}.
 }
 \examples{
-# principal components analysis (`princomp`) examples
-
-# calculate a `princomp`
-x <- USArrests
-p <- princomp(USArrests)
-
-# access the 'U' and 'V' matrices
-recover_u(p)
-recover_v(p)
-
-# reconstruct an approximation of the original data
-reconstruct(p)
-
-# check that the distances between the original and recovered values are small
-hist(as.matrix(x) - reconstruct(p))
-
-# access the names of the artificial coordinates
-recover_coord(p)
-
-# augment methods
-augment_u(p)
-augment_v(p)
-augmentation_coord(p)
-
-# wrap `p` as a 'tbl_ord' object
-b <- as_tbl_ord(p)
-# print `b`
-b
-# pass b to `fortify`
-fortify(b)
-
-# biplot of scores and loadings
-gg <- ggbiplot(b) +
-  geom_u_point() +
-  geom_v_vector(aes(x = 100 * Comp.1, y = 100 * Comp.2))
-# view biplot
-gg
+# Scaled PCA of Anderson Iris data with centroid stars
+iris[, -5] \%>\%
+  princomp(cor = TRUE) \%>\%
+  as_tbl_ord() \%>\%
+  mutate_u(species = iris$Species) \%>\%
+  mutate_v(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
+  print() -> iris_pca
+iris_pca \%>\%
+  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
+  theme_bw() +
+  scale_color_brewer(type = "qual", palette = 2) +
+  stat_u_star(alpha = .5, fun.center = "mean") +
+  stat_u_center(size = 3, fun.center = "mean") +
+  geom_u_point(alpha = .5) +
+  geom_v_vector(color = "#444444") +
+  ggtitle(
+    "Row-principal PCA biplot of Anderson iris data",
+    "Segments connect each observation to its within-species centroid"
+  )
 # Unscaled PCA and two-scaled biplot of Anderson iris data
 iris[, -5] \%>\%
   princomp() \%>\%

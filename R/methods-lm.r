@@ -8,12 +8,11 @@
 #' @include ord-tbl.r
 #' @importFrom stats model.frame influence cooks.distance predict
 #' @template param-methods
-#' @example inst/examples/ex-lm.r
-#' @example inst/examples/ex-glm.r
 #' @example inst/examples/mtcars-lm-isolines.r
 # @example inst/examples/bioenv-lm-isolines.r
 #' @example inst/examples/country-cmds-lm.r
 # @example inst/examples/bioenv-cmds-lm-repel.r
+#' @example inst/examples/bioenv-glm-isolines.r
 #' @example inst/examples/bioenv-mlm.r
 NULL
 

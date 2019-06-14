@@ -12,11 +12,12 @@ Species counts and environmental variables for several locations
 on a sea-bed.
 }
 \examples{
+# Linear regression on marine ecosystem data
 # Adapt Exhibit 2.3 in Greenacre (2010)
 bioenv \%>\%
-  dplyr::mutate(
-    x = (Depth - mean(Depth)) / sd(Depth),
-    y = (Pollution - mean(Pollution)) / sd(Pollution)
+  transform(
+    x = as.vector(scale(Depth)),
+    y = as.vector(scale(Pollution))
   ) \%>\%
   lm(formula = d ~ x + y) \%>\%
   as_tbl_ord() \%>\%
@@ -35,6 +36,7 @@ bioenv_lm \%>\%
     "Gradient vector and contour lines for species 'd'",
     "Regression plane: standardized depth-pollution space"
   )
+# Classical MDS on marine ecosystem data
 # Adapt Exhibit 4.6 in Greenacre (2010)
 ycols <- 2:6
 # chi-squared distances

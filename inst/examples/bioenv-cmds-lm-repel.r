@@ -1,3 +1,4 @@
+# Classical MDS on marine ecosystem data
 # Adapt Exhibit 4.6 in Greenacre (2010)
 ycols <- 2:6
 # chi-squared distances

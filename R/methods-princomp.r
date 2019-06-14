@@ -6,7 +6,7 @@
 #' @name methods-princomp
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/ex-princomp.r
+#' @example inst/examples/iris-princomp-center-star.r
 #' @example inst/examples/iris-princomp-sec.r
 NULL
 

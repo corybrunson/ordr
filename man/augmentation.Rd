@@ -60,11 +60,12 @@ object becomes accessible to the user. To achieve a result similar to that of
 \code{\link[generics:augment]{generics::augment()}}, use \code{\link[=fortify]{fortify()}}.
 }
 \examples{
+# Linear regression on marine ecosystem data
 # Adapt Exhibit 2.3 in Greenacre (2010)
 bioenv \%>\%
-  dplyr::mutate(
-    x = (Depth - mean(Depth)) / sd(Depth),
-    y = (Pollution - mean(Pollution)) / sd(Pollution)
+  transform(
+    x = as.vector(scale(Depth)),
+    y = as.vector(scale(Pollution))
   ) \%>\%
   lm(formula = d ~ x + y) \%>\%
   as_tbl_ord() \%>\%
