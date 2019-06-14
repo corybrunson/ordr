@@ -7,16 +7,6 @@ iris[, -5] %>%
   mutate_v(measure = gsub("\\.", " ", tolower(names(iris)[-5]))) %>%
   print() -> iris_pca
 
-# default confidence ellipses with centroids
-iris_pca %>%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_point() +
-  stat_u_center(fun.center = "mean", size = 3, shape = "triangle") +
-  stat_u_ellipse() +
-  geom_v_vector(color = "#444444")
-
 # consistently color and fill
 iris_pca %>%
   ggbiplot(aes(color = species)) +
@@ -27,34 +17,3 @@ iris_pca %>%
   geom_v_vector(color = "#444444") +
   scale_color_brewer(type = "qual", palette = 2) +
   scale_fill_brewer(type = "qual", palette = 2)
-
-# rescaled biplot
-set.seed(58319)
-iris_pca %>%
-  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_point() +
-  stat_u_center(size = 3, shape = "triangle") +
-  stat_u_ellipse() +
-  geom_v_vector(color = "#444444") +
-  geom_v_text_repel(aes(label = measure), color = "#444444")
-
-# species centers and ranges
-iris_pca %>%
-  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_lineranges(fun.data = mean_cl_boot) +
-  geom_u_point(alpha = .5) +
-  geom_v_vector(color = "#444444")
-
-# species stars
-iris_pca %>%
-  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  stat_u_star(alpha = .5, fun.center = "mean") +
-  stat_u_center(size = 3, fun.center = "mean") +
-  geom_u_point(alpha = .5) +
-  geom_v_vector(color = "#444444")

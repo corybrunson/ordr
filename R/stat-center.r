@@ -10,6 +10,7 @@
 #'   `fun.max` behaving as `fun.y`, `fun.ymin`, and `fun.ymax`.
 #' @template param-stat
 #' @example inst/examples/iris-prcomp-center-ellipse.r
+#' @example inst/examples/iris-prcomp-center-star.r
 NULL
 
 #' @rdname ggbiplot-center
