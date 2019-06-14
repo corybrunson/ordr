@@ -18,7 +18,7 @@ fortify_v(model, include = "all")
 \method{tidy}{tbl_ord}(x, ..., .matrix = "uv", include = "all")
 }
 \arguments{
-\item{model, x}{A \link{tbl_ord} object.}
+\item{model, x}{A \code{[tbl_ord]} object.}
 
 \item{data}{Ignored.}
 
@@ -36,7 +36,7 @@ whether only shared fields or all from both.}
 }
 \description{
 These methods of \code{\link[ggplot2:fortify]{ggplot2::fortify()}} and \code{\link[generics:tidy]{generics::tidy()}}
-convert a \link{tbl_ord} object to a \link[tibble:tbl_df]{tbl_df} object.
+convert a \code{[tbl_ord]} object to a \link[tibble:tbl_df]{tbl_df} object.
 }
 \details{
 The \code{fortify()} and \code{tidy()} methods for \code{tbl_ord} objects produce the same

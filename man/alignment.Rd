@@ -94,6 +94,22 @@ plot(gridExtra::arrangeGrob(grobs = list(
   ggbiplot(differences_pca) + geom_v_vector(),
   ggbiplot(differences_align_v) + geom_v_vector()
 ), ncol = 3))
+# Compare MDS to the spanning tree for road distances between European cities
+eurodist \%>\%
+  cmdscale(k = 11) \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  # align to conventional compass orientation
+  negate(2) \%>\%
+  print() -> city_mds
+city_mds \%>\%
+  ggbiplot() +
+  stat_v_spantree(
+    ord_aes(city_mds), check.aes = FALSE,
+    alpha = .5, linetype = "dotted"
+  ) +
+  geom_v_text(aes(label = .name), size = 3) +
+  ggtitle("MDS biplot of road distances between European cities")
 }
 \references{
 Bellekens B, Spruyt V, Berkvens R, & Weyn M (2014) "A survey of rigid 3D

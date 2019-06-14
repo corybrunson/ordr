@@ -12,7 +12,7 @@
 
 #' @name dplyr-verbs
 #' @importFrom dplyr pull rename select mutate transmute bind_cols
-#' @param .data A [tbl_ord].
+#' @param .data A `[tbl_ord]` object.
 #' @param var A variable specified as in [dplyr::pull()].
 #' @param ... Comma-separated unquoted expressions as in, e.g.,
 #'   [dplyr::select()].

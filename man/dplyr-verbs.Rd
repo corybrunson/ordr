@@ -44,7 +44,7 @@ bind_cols_u(.data, ...)
 bind_cols_v(.data, ...)
 }
 \arguments{
-\item{.data}{A \link{tbl_ord}.}
+\item{.data}{A \code{[tbl_ord]} object.}
 
 \item{var}{A variable specified as in \code{\link[dplyr:pull]{dplyr::pull()}}.}
 

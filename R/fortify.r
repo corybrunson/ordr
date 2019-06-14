@@ -1,7 +1,7 @@
 #' @title Fortify a `tbl_ord` for plotting
 #'
 #' @description These methods of [ggplot2::fortify()] and [generics::tidy()]
-#'   convert a [tbl_ord] object to a [tbl_df][tibble::tbl_df] object.
+#'   convert a `[tbl_ord]` object to a [tbl_df][tibble::tbl_df] object.
 #'   
 
 #' @details
@@ -18,7 +18,7 @@
 #' (Note that this attribute will not be printed with the tibble.)
 
 #' @name fortify
-#' @param model,x A [tbl_ord] object.
+#' @param model,x A `[tbl_ord]` object.
 #' @param data Ignored.
 #' @param ... Additional arguments received from `fortify()` or `tidy()`;
 #'   ignored.
