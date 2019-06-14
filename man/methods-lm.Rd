@@ -10,7 +10,6 @@
 \alias{augmentation_u.lm}
 \alias{augmentation_v.lm}
 \alias{augmentation_coord.lm}
-\alias{permute_to.lm}
 \alias{augmentation_u.glm}
 \alias{recover_u.mlm}
 \alias{recover_v.mlm}
@@ -36,8 +35,6 @@
 
 \method{augmentation_coord}{lm}(x)
 
-\method{permute_to}{lm}(x, y, ..., .matrix)
-
 \method{augmentation_u}{glm}(x)
 
 \method{recover_u}{mlm}(x)
@@ -54,14 +51,6 @@
 }
 \arguments{
 \item{x}{An ordination object.}
-
-\item{y}{A matrix or an ordination object.}
-
-\item{...}{Additional elements of a custom \code{tbl_ord}.}
-
-\item{.matrix}{A character string matching one of several indicators for one
-or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 }
 \description{
 These methods extract data from, and attribute new data to,

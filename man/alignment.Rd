@@ -2,71 +2,123 @@
 % Please edit documentation in R/ord-alignment.r
 \name{alignment}
 \alias{alignment}
+\alias{get_alignment}
+\alias{revert_alignment}
 \alias{negate}
 \alias{permute}
-\alias{align_to}
-\alias{negate_to}
-\alias{permute_to}
-\alias{rotate_to}
+\alias{rotate}
 \alias{negation_to}
+\alias{negate_to}
 \alias{permutation_to}
+\alias{permute_to}
 \alias{rotation_to}
-\alias{un_align}
+\alias{rotate_to}
+\alias{align_to}
 \title{Alignment of ordinations}
 \usage{
-negate(x, coordinates = NULL)
+get_alignment(x)
 
-permute(x, coordinates = NULL)
+revert_alignment(x)
 
-align_to(x, y, .matrix)
+negate(x, negation = NULL)
 
-negate_to(x, y, ...)
+permute(x, permutation = NULL)
 
-permute_to(x, y, ...)
-
-rotate_to(x, y, ...)
+rotate(x, rotation = NULL)
 
 negation_to(x, y)
 
+negate_to(x, y, .matrix)
+
 permutation_to(x, y, abs.values = FALSE)
+
+permute_to(x, y, .matrix)
 
 rotation_to(x, y)
 
-un_align(x)
+rotate_to(x, y, .matrix)
+
+align_to(x, y, .matrix, method = c("negate", "permute", "rotate"))
 }
 \arguments{
-\item{x, y}{Matrices or \code{tbl_ord}s; \code{x} will be aligned to \code{y}.}
+\item{x, y}{Matrices or \code{[tbl_ord]}s; \code{x} will be aligned to \code{y}.}
 
-\item{coordinates}{Numeric or character vector of coordinates to negate or
-permute.}
+\item{negation, permutation, rotation}{Numeric or character vector of
+coordinates to negate or permute, or a matrix that performs an operation by
+right-multiplication.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 
-\item{...}{Additional parameters passed to methods.}
-
-\item{abs.values}{Whether \code{permute_to} should reorder coordinates according
+\item{abs.values}{Whether \code{permute_to()} should reorder coordinates according
 to dot product magnitudes (angles closest to straight, whether \eqn{0} or
 \eqn{\pi}, versus angles closest to \eqn{0}).}
+
+\item{method}{Character, one of \code{"negate"}, \code{"permute"}, or \code{"rotate"},
+indicating the alignment method to use.}
+
+\item{...}{Additional parameters passed to methods.}
 }
 \description{
 Align one ordination to another having the same cases or
 variables.
 }
 \details{
-Depending on the method of ordination, its interpretation may not depend on
-the signs, the order, or the orientation of the coordinates. \code{negate_to()},
-\code{permute_to()}, and \code{rotate_to()} take advantage of these symmetries in order
-to manipulate the coordinates of one ordination so that the positions of the
-cases or variables align, as closely as possible, to those of the same cases
-or variables in another ordination. In the case of negation and permutation,
-this is done by minimizing the angles between vectors of scores or loadings
-in the respective coordinates. In the case of rotation, this is done by
-invoking the singular value decomposition method of point cloud registration
-(Bellekens &al, 2014).
+For purposes of comparison and visualization, it can be useful to transform
+the (already artificial) coordinates of an ordination, either by fixed
+criteria or to better align with another basis (matrix) of coordinates.
+\code{negate()}, \code{permute()}, and \code{rotate()} allow the user to manually transform
+the coordinates of an ordination by specifying the coordinates to be negated
+or permuted, or by providing the rotation matrix.
+
+\code{negate_to()}, \code{permute_to()}, and \code{rotate_to()} manipulate the coordinates
+of one ordination so that the positions of the cases or variables align, as
+closely as possible, to those of the same cases or variables in another
+ordination. In the case of negation and permutation, this is done by
+minimizing the angles between vectors of scores or loadings in the respective
+coordinates. In the case of rotation, this is done by invoking the singular
+value decomposition method of point cloud registration (Bellekens &al, 2014).
+
+The helper functions \code{negation_to()}, \code{permutation_to()}, and \code{rotation_to()}
+take only matrix inputs and return matrices that perform the specified
+transformations.
+
+\code{get_alignment()} accesses the alignment matrix of an ordination; after
+multiple transformations, this matrix will be their composition (product).
+\code{revert_alignment()} undoes all alignments. Currently alignments are stored
+as an \code{"align"} attribute.
 }
 \examples{
+# Align MDS for distances between American cities with compass orientation
+UScitiesD \%>\%
+  cmdscale(k = 2) \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  print() -> usa_mds
+usa_mds \%>\%
+  ggbiplot() +
+  geom_v_text(aes(label = .name), size = 3) +
+  ggtitle("MDS biplot of distances between American cities")
+get_alignment(usa_mds)
+# negation
+usa_mds \%>\%
+  negate(1:2) \%>\%
+  print() -> usa_mds_negate
+get_alignment(usa_mds_negate)
+usa_mds_negate \%>\%
+  ggbiplot() +
+  geom_v_text(aes(label = .name), size = 3) +
+  ggtitle("Negated MDS biplot of distances between American cities")
+# rotation
+usa_mds \%>\%
+  rotate(-diag(2)) \%>\%
+  print() -> usa_mds_rotate
+get_alignment(usa_mds_rotate)
+usa_mds_rotate \%>\%
+  ggbiplot() +
+  geom_v_text(aes(label = .name), size = 3) +
+  ggtitle("Rotated MDS biplot of distances between American cities")
 # Align an MDS ordination to a PCA ordination
 country_differences \%>\%
   cmdscale(k = 2) \%>\%
@@ -76,40 +128,24 @@ country_differences \%>\%
   prcomp() \%>\%
   as_tbl_ord() \%>\%
   print() -> differences_pca
-# align PCA cases to MDS coordinates
+# negate PCA cases to MDS coordinates
 differences_cmds \%>\%
-  align_to(differences_pca$x, "u") \%>\%
+  negate_to(differences_pca, "u") \%>\%
   print() -> differences_align_u
 plot(gridExtra::arrangeGrob(grobs = list(
   ggbiplot(differences_cmds) + geom_u_point(),
   ggbiplot(differences_pca) + geom_u_point(),
   ggbiplot(differences_align_u) + geom_u_point()
 ), ncol = 3))
-# align PCA variables to MDS coordinates
+# negate PCA variables to MDS coordinates
 differences_cmds \%>\%
-  align_to(differences_pca$rotation, "v") \%>\%
+  negate_to(differences_pca, "v") \%>\%
   print() -> differences_align_v
 plot(gridExtra::arrangeGrob(grobs = list(
   ggbiplot(differences_cmds) + geom_v_vector(),
   ggbiplot(differences_pca) + geom_v_vector(),
   ggbiplot(differences_align_v) + geom_v_vector()
 ), ncol = 3))
-# Compare MDS to the spanning tree for road distances between European cities
-eurodist \%>\%
-  cmdscale(k = 11) \%>\%
-  as_tbl_ord() \%>\%
-  augment() \%>\%
-  # align to conventional compass orientation
-  negate(2) \%>\%
-  print() -> city_mds
-city_mds \%>\%
-  ggbiplot() +
-  stat_v_spantree(
-    ord_aes(city_mds), check.aes = FALSE,
-    alpha = .5, linetype = "dotted"
-  ) +
-  geom_v_text(aes(label = .name), size = 3) +
-  ggtitle("MDS biplot of road distances between European cities")
 }
 \references{
 Bellekens B, Spruyt V, Berkvens R, & Weyn M (2014) "A survey of rigid 3D

@@ -8,6 +8,7 @@
 #' @name methods-svd
 #' @include ord-tbl.r
 #' @template param-methods
+NULL
 
 #' @rdname methods-svd
 #' @export

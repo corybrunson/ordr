@@ -160,6 +160,8 @@ recover_coord.data.frame <- function(x) {
 get_coord <- function(x, align = TRUE) {
   if (! align || is.null(attr(x, "align"))) {
     recover_coord(x)
+  } else if (! is.null(colnames(get_alignment(x)))) {
+    colnames(get_alignment(x))
   } else {
     colnames(as.data.frame(matrix(1:dim(x), nrow = 1)))
   }

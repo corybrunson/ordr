@@ -10,10 +10,9 @@
 #' @name methods-lpca
 #' @include ord-tbl.r
 #' @template param-methods
-#' @template param-matrix
-#' @template param-align
 #' @example inst/examples/ex-lpca.r
 #' @example inst/examples/finches-lpca-sec.r
+NULL
 
 #' @importFrom stats plogis
 
@@ -69,18 +68,6 @@ augmentation_coord.lsvd <- function(x) {
   tibble(
     .name = recover_coord.lsvd(x)
   )
-}
-
-#' @rdname methods-lpca
-#' @export
-negate_to.lsvd <- function(x, y, ..., .matrix) {
-  y <- as.matrix(y, .matrix = .matrix)
-  # get negations
-  s <- negation_to(get_factor(as_tbl_ord(x), .matrix), y)
-  # tag 'lsvd' object with negation
-  x <- attribute_alignment(x, diag(s, nrow = ncol(x$B)))
-  # return annotated object
-  x
 }
 
 #' @rdname methods-lpca
@@ -141,18 +128,6 @@ augmentation_coord.lpca <- function(x) {
 
 #' @rdname methods-lpca
 #' @export
-negate_to.lpca <- function(x, y, ..., .matrix) {
-  y <- as.matrix(y, .matrix = .matrix)
-  # get negations
-  s <- negation_to(recover_factor(as_tbl_ord(x), .matrix), y)
-  # tag 'lpca' object with negation
-  x <- attribute_alignment(x, diag(s, nrow = ncol(x$U)))
-  # return annotated object
-  x
-}
-
-#' @rdname methods-lpca
-#' @export
 as_tbl_ord.clpca <- as_tbl_ord_default
 
 #' @rdname methods-lpca
@@ -198,16 +173,4 @@ augmentation_coord.clpca <- function(x) {
   tibble(
     .name = recover_coord.clpca(x)
   )
-}
-
-#' @rdname methods-lpca
-#' @export
-negate_to.clpca <- function(x, y, ..., .matrix) {
-  y <- as.matrix(y, .matrix = .matrix)
-  # get negations
-  s <- negation_to(recover_factor(as_tbl_ord(x), .matrix), y)
-  # tag 'lpca' object with negation
-  x <- attribute_alignment(x, diag(s, nrow = ncol(x$U)))
-  # return annotated object
-  x
 }

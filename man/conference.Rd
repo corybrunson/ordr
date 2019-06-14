@@ -5,6 +5,7 @@
 \alias{recover_conference}
 \alias{recover_conference.default}
 \alias{get_conference}
+\alias{revert_conference}
 \alias{confer_inertia}
 \title{Confer inertia to factors of an ordination}
 \usage{
@@ -13,6 +14,8 @@ recover_conference(x)
 \method{recover_conference}{default}(x)
 
 get_conference(x)
+
+revert_conference(x)
 
 confer_inertia(x, p)
 }

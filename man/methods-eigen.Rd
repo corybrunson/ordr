@@ -12,7 +12,6 @@
 \alias{augmentation_u.eigen}
 \alias{augmentation_v.eigen}
 \alias{augmentation_coord.eigen}
-\alias{negate_to.eigen}
 \title{Functionality for matrix spectral decompositions}
 \usage{
 \method{as_tbl_ord}{eigen}(x)
@@ -34,19 +33,9 @@
 \method{augmentation_v}{eigen}(x)
 
 \method{augmentation_coord}{eigen}(x)
-
-\method{negate_to}{eigen}(x, y, ..., .matrix)
 }
 \arguments{
 \item{x}{An ordination object.}
-
-\item{y}{A matrix or an ordination object.}
-
-\item{...}{Additional elements of a custom \code{tbl_ord}.}
-
-\item{.matrix}{A character string matching one of several indicators for one
-or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 }
 \description{
 These methods extract data from, and attribute new data to,

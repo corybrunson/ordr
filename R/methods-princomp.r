@@ -8,6 +8,7 @@
 #' @template param-methods
 #' @example inst/examples/ex-princomp.r
 #' @example inst/examples/iris-princomp-sec.r
+NULL
 
 #' @rdname methods-princomp
 #' @export

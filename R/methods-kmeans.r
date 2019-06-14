@@ -7,6 +7,7 @@
 #' @include ord-tbl.r
 #' @template param-methods
 #' @example inst/examples/ex-kmeans.r
+NULL
 
 #' @rdname methods-kmeans
 #' @export

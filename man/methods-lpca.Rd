@@ -10,7 +10,6 @@
 \alias{augmentation_u.lsvd}
 \alias{augmentation_v.lsvd}
 \alias{augmentation_coord.lsvd}
-\alias{negate_to.lsvd}
 \alias{as_tbl_ord.lpca}
 \alias{recover_u.lpca}
 \alias{recover_v.lpca}
@@ -18,7 +17,6 @@
 \alias{augmentation_u.lpca}
 \alias{augmentation_v.lpca}
 \alias{augmentation_coord.lpca}
-\alias{negate_to.lpca}
 \alias{as_tbl_ord.clpca}
 \alias{recover_u.clpca}
 \alias{recover_v.clpca}
@@ -26,7 +24,6 @@
 \alias{augmentation_u.clpca}
 \alias{augmentation_v.clpca}
 \alias{augmentation_coord.clpca}
-\alias{negate_to.clpca}
 \title{Functionality for logistic PCA and logistic SVD objects}
 \usage{
 \method{as_tbl_ord}{lsvd}(x)
@@ -45,8 +42,6 @@
 
 \method{augmentation_coord}{lsvd}(x)
 
-\method{negate_to}{lsvd}(x, y, ..., .matrix)
-
 \method{as_tbl_ord}{lpca}(x)
 
 \method{recover_u}{lpca}(x)
@@ -61,8 +56,6 @@
 
 \method{augmentation_coord}{lpca}(x)
 
-\method{negate_to}{lpca}(x, y, ..., .matrix)
-
 \method{as_tbl_ord}{clpca}(x)
 
 \method{recover_u}{clpca}(x)
@@ -76,19 +69,9 @@
 \method{augmentation_v}{clpca}(x)
 
 \method{augmentation_coord}{clpca}(x)
-
-\method{negate_to}{clpca}(x, y, ..., .matrix)
 }
 \arguments{
 \item{x}{An ordination object.}
-
-\item{y}{A matrix or an ordination object.}
-
-\item{...}{Additional elements of a custom \code{tbl_ord}.}
-
-\item{.matrix}{A character string matching one of several indicators for one
-or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 }
 \description{
 These methods extract data from, and attribute new data to,

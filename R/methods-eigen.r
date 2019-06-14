@@ -8,10 +8,8 @@
 #' @name methods-eigen
 #' @include ord-tbl.r
 #' @template param-methods
-#' @template param-matrix
-#' @template param-align
-
 # @example inst/examples/ex-eigen.r (uses *igraph*)
+NULL
 
 #' @rdname methods-eigen
 #' @export
@@ -95,16 +93,4 @@ augmentation_coord.eigen <- function(x) {
     .name = recover_coord(x),
     .values = x$values[w]
   )
-}
-
-#' @rdname methods-eigen
-#' @export
-negate_to.eigen <- function(x, y, ..., .matrix) {
-  y <- as.matrix(y, .matrix = .matrix)
-  # get negations
-  s <- negation_to(get_factor(as_tbl_ord(x), .matrix), y)
-  # tag 'eigen' object with negation
-  x <- attribute_alignment(x, diag(s, nrow = min(which(c(x$values, -1) < 0)) - 1))
-  # return annotated object
-  x
 }

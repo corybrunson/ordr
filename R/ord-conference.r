@@ -30,6 +30,11 @@
 #' @example inst/examples/benthos-ca-augment-confer.r
 NULL
 
+attribute_conference <- function(x, p) {
+  attr(x, "confer") <- p
+  x
+}
+
 #' @rdname conference
 #' @export
 recover_conference <- function(x) UseMethod("recover_conference")
@@ -47,6 +52,10 @@ get_conference <- function(x) {
     return(attr(x, "confer"))
   }
 }
+
+#' @rdname conference
+#' @export
+revert_conference <- function(x) attribute_conference(x, NULL)
 
 # in case it becomes expedient to switch from accessors to attributes
 #recover_conference.tbl_ord <- function(x) attr(x, "confer")
@@ -85,10 +94,5 @@ confer_inertia <- function(x, p) {
   
   # add attribute
   x <- attribute_conference(x, p)
-  x
-}
-
-attribute_conference <- function(x, p) {
-  attr(x, "confer") <- p
   x
 }

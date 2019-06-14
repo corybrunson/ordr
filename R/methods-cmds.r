@@ -8,10 +8,8 @@
 #' @name methods-cmds
 #' @include ord-tbl.r
 #' @template param-methods
-#' @template param-matrix
-#' @template param-align
 #' @example inst/examples/country-cmds-lm.r
-#' @example inst/examples/country-cmds-prcomp-align.r
+#' @example inst/examples/country-cmds-prcomp-negate.r
 NULL
 
 #' @rdname methods-cmds
@@ -88,40 +86,4 @@ augmentation_coord.cmds <- function(x) {
     .name = recover_coord(x),
     .eig = x$eig[1:ncol(x$points)]
   )
-}
-
-#' @rdname methods-cmds
-#' @export
-negate_to.cmds <- function(x, y, ..., .matrix) {
-  y <- as.matrix(y, .matrix = .matrix)
-  # get negations
-  s <- negation_to(get_factor(as_tbl_ord(x), .matrix), y)
-  # tag 'cmds' object with negation
-  x <- attribute_alignment(x, diag(s, nrow = ncol(x$points)))
-  # return annotated object
-  x
-}
-
-#' @rdname methods-cmds
-#' @export
-permute_to.cmds <- function(x, y, ..., .matrix) {
-  y <- as.matrix(y, .matrix = .matrix)
-  # get permutation
-  p <- permutation_to(get_factor(as_tbl_ord(x), .matrix), y)
-  # tag 'cmds' object with permutation
-  x <- attribute_alignment(x, diag(1, nrow = ncol(x$points))[, p, drop = FALSE])
-  # return annotated object
-  x
-}
-
-#' @rdname methods-cmds
-#' @export
-rotate_to.cmds <- function(x, y, ..., .matrix) {
-  y <- as.matrix(y, .matrix = .matrix)
-  # get rotation matrix
-  r <- rotation_to(get_factor(as_tbl_ord(x), .matrix), y)
-  # tag 'cmds' object with rotation
-  x <- attribute_alignment(x, r)
-  # return annotated object
-  x
 }

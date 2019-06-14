@@ -8,8 +8,6 @@
 #' @include ord-tbl.r
 #' @importFrom stats model.frame influence cooks.distance predict
 #' @template param-methods
-#' @template param-matrix
-#' @template param-align
 #' @example inst/examples/ex-lm.r
 #' @example inst/examples/ex-glm.r
 #' @example inst/examples/mtcars-lm-isolines.r
@@ -123,18 +121,6 @@ augmentation_coord.lm <- function(x) {
     .name = recover_coord(x),
     summ
   ))
-}
-
-#' @rdname methods-lm
-#' @export
-permute_to.lm <- function(x, y, ..., .matrix) {
-  y <- as.matrix(y, .matrix = .matrix)
-  # get permutations
-  p <- permutation_to(get_factor(as_tbl_ord(x), .matrix), y)
-  # tag 'cmds' object with permutation
-  x <- attribute_alignment(x, diag(1, nrow = x$rank)[, p, drop = FALSE])
-  # return annotated object
-  x
 }
 
 #' @rdname methods-lm

@@ -28,7 +28,7 @@
 #' @template param-geom
 #' @template param-matrix
 #' @example inst/examples/bioenv-lm-isolines.r
-#' @example inst/examples/country-cmds-prcomp-align.r
+#' @example inst/examples/country-cmds-prcomp-negate.r
 #' @example inst/examples/women-ca-confer.r
 NULL
 

@@ -162,11 +162,11 @@ eurodist \%>\%
   augment() \%>\%
   # align to conventional compass orientation
   negate(2) \%>\%
-  print() -> city_mds
-city_mds \%>\%
+  print() -> euro_mds
+euro_mds \%>\%
   ggbiplot() +
   stat_v_spantree(
-    ord_aes(city_mds), check.aes = FALSE,
+    ord_aes(euro_mds), check.aes = FALSE,
     alpha = .5, linetype = "dotted"
   ) +
   geom_v_text(aes(label = .name), size = 3) +

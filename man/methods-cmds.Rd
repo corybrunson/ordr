@@ -12,9 +12,6 @@
 \alias{augmentation_u.cmds}
 \alias{augmentation_v.cmds}
 \alias{augmentation_coord.cmds}
-\alias{negate_to.cmds}
-\alias{permute_to.cmds}
-\alias{rotate_to.cmds}
 \title{Functionality for classical multidimensional scaling objects}
 \usage{
 \method{as_tbl_ord}{cmds}(x)
@@ -36,23 +33,9 @@
 \method{augmentation_v}{cmds}(x)
 
 \method{augmentation_coord}{cmds}(x)
-
-\method{negate_to}{cmds}(x, y, ..., .matrix)
-
-\method{permute_to}{cmds}(x, y, ..., .matrix)
-
-\method{rotate_to}{cmds}(x, y, ..., .matrix)
 }
 \arguments{
 \item{x}{An ordination object.}
-
-\item{y}{A matrix or an ordination object.}
-
-\item{...}{Additional elements of a custom \code{tbl_ord}.}
-
-\item{.matrix}{A character string matching one of several indicators for one
-or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 }
 \description{
 These methods extract data from, and attribute new data to,
@@ -87,18 +70,18 @@ country_differences \%>\%
   prcomp() \%>\%
   as_tbl_ord() \%>\%
   print() -> differences_pca
-# align PCA cases to MDS coordinates
+# negate PCA cases to MDS coordinates
 differences_cmds \%>\%
-  align_to(differences_pca$x, "u") \%>\%
+  negate_to(differences_pca, "u") \%>\%
   print() -> differences_align_u
 plot(gridExtra::arrangeGrob(grobs = list(
   ggbiplot(differences_cmds) + geom_u_point(),
   ggbiplot(differences_pca) + geom_u_point(),
   ggbiplot(differences_align_u) + geom_u_point()
 ), ncol = 3))
-# align PCA variables to MDS coordinates
+# negate PCA variables to MDS coordinates
 differences_cmds \%>\%
-  align_to(differences_pca$rotation, "v") \%>\%
+  negate_to(differences_pca, "v") \%>\%
   print() -> differences_align_v
 plot(gridExtra::arrangeGrob(grobs = list(
   ggbiplot(differences_cmds) + geom_v_vector(),

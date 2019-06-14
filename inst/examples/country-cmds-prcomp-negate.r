@@ -7,18 +7,18 @@ country_differences %>%
   prcomp() %>%
   as_tbl_ord() %>%
   print() -> differences_pca
-# align PCA cases to MDS coordinates
+# negate PCA cases to MDS coordinates
 differences_cmds %>%
-  align_to(differences_pca$x, "u") %>%
+  negate_to(differences_pca, "u") %>%
   print() -> differences_align_u
 plot(gridExtra::arrangeGrob(grobs = list(
   ggbiplot(differences_cmds) + geom_u_point(),
   ggbiplot(differences_pca) + geom_u_point(),
   ggbiplot(differences_align_u) + geom_u_point()
 ), ncol = 3))
-# align PCA variables to MDS coordinates
+# negate PCA variables to MDS coordinates
 differences_cmds %>%
-  align_to(differences_pca$rotation, "v") %>%
+  negate_to(differences_pca, "v") %>%
   print() -> differences_align_v
 plot(gridExtra::arrangeGrob(grobs = list(
   ggbiplot(differences_cmds) + geom_v_vector(),

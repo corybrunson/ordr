@@ -39,7 +39,7 @@ NULL
 #' @name countries
 #' @example inst/examples/country-cmds-lm.r
 #' @example inst/examples/country-prcomp-confer.r
-#' @example inst/examples/country-cmds-prcomp-align.r
+#' @example inst/examples/country-cmds-prcomp-negate.r
 #' @rdname countries
 #' @aliases country_differences country_attributes
 #'   
