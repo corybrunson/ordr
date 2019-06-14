@@ -49,6 +49,7 @@
 #' @param ... Additional parameters passed to methods.
 #' @example inst/examples/cities-cmds-align.r
 #' @example inst/examples/country-cmds-prcomp-negate.r
+#' @example inst/examples/haireye-ca-rotate.r
 NULL
 
 attribute_alignment <- function(x, r) {

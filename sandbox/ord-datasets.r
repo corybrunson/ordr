@@ -1,0 +1,5 @@
+
+?USJudgeRatings
+?attitude
+?rock
+?swiss

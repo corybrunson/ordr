@@ -10,6 +10,7 @@
 #' @example inst/examples/smoke-ca-confer.r
 #' @example inst/examples/benthos-ca-augment-confer.r
 #' @example inst/examples/women-ca-confer.r
+#' @example inst/examples/haireye-ca-rotate.r
 NULL
 
 #' @rdname methods-ca
