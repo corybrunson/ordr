@@ -3,7 +3,7 @@
 
 #' @description `geom_*_point()` renders symbols at the positions of the
 #'   subjects or vectors.
-#' @template ggbiplot-layers
+#' @template biplot-layers
 
 #' @section Aesthetics:
 
@@ -22,7 +22,7 @@
 #' - `group`
 #' 
 
-#' @name ggbiplot-point
+#' @name geom-biplot-point
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
@@ -32,7 +32,7 @@
 #' @example inst/examples/women-ca-confer.r
 NULL
 
-#' @rdname ggbiplot-point
+#' @rdname geom-biplot-point
 #' @export
 geom_u_point <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -55,7 +55,7 @@ geom_u_point <- function(
   )
 }
 
-#' @rdname ggbiplot-point
+#' @rdname geom-biplot-point
 #' @export
 geom_v_point <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -78,7 +78,7 @@ geom_v_point <- function(
   )
 }
 
-#' @rdname ggbiplot-point
+#' @rdname geom-biplot-point
 #' @export
 geom_biplot_point <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

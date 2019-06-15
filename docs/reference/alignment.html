@@ -235,7 +235,7 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>,
 #&gt; </span><span style='color: #555555;'> 9</span><span>  </span><span style='text-decoration: underline;'>1</span><span>342. -</span><span style='color: #BB0000;'>580.</span><span>  | </span><span style='color: #555555;'> 9</span><span> Seattle      
 #&gt; </span><span style='color: #555555;'>10</span><span>  -</span><span style='color: #BB0000;'>980.</span><span> -</span><span style='color: #BB0000;'>335.</span><span>  | </span><span style='color: #555555;'>10</span><span> Washington.DC</div><div class='input'><span class='no'>usa_mds</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>() +
-  <span class='fu'><a href='ggbiplot-text.html'>geom_v_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>) +
+  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>) +
   <span class='fu'>ggtitle</span>(<span class='st'>"MDS biplot of distances between American cities"</span>)</div><div class='img'><img src='alignment-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>get_alignment</span>(<span class='no'>usa_mds</span>)</div><div class='output co'>#&gt;      PCo1 PCo2
 #&gt; [1,]    1    0
 #&gt; [2,]    0    1</div><div class='input'><span class='co'># negation</span>
@@ -274,7 +274,7 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>,
 #&gt; [1,]   -1    0
 #&gt; [2,]    0   -1</div><div class='input'><span class='no'>usa_mds_negate</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>() +
-  <span class='fu'><a href='ggbiplot-text.html'>geom_v_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>) +
+  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>) +
   <span class='fu'>ggtitle</span>(<span class='st'>"Negated MDS biplot of distances between American cities"</span>)</div><div class='img'><img src='alignment-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># rotation</span>
 <span class='no'>usa_mds</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>rotate</span>(-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/diag'>diag</a></span>(<span class='fl'>2</span>)) <span class='kw'>%&gt;%</span>
@@ -311,7 +311,7 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>,
 #&gt; [1,]   -1    0
 #&gt; [2,]    0   -1</div><div class='input'><span class='no'>usa_mds_rotate</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>() +
-  <span class='fu'><a href='ggbiplot-text.html'>geom_v_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>) +
+  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>) +
   <span class='fu'>ggtitle</span>(<span class='st'>"Rotated MDS biplot of distances between American cities"</span>)</div><div class='img'><img src='alignment-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Align an MDS ordination to a PCA ordination</span>
 <span class='no'>country_differences</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='masks.html'>cmdscale</a></span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
@@ -386,9 +386,9 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>,
 #&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>     2.01  | 
 #&gt; </span><span style='color: #555555;'>5</span><span>  4.41    -</span><span style='color: #BB0000;'>2.91</span><span>  | 
 #&gt; </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'><a href='ggbiplot-point.html'>geom_u_point</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'><a href='ggbiplot-point.html'>geom_u_point</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_align_u</span>) + <span class='fu'><a href='ggbiplot-point.html'>geom_u_point</a></span>()
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(),
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(),
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_align_u</span>) + <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>()
 ), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>))</div><div class='img'><img src='alignment-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># negate PCA variables to MDS coordinates</span>
 <span class='no'>differences_cmds</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>negate_to</span>(<span class='no'>differences_pca</span>, <span class='st'>"v"</span>) <span class='kw'>%&gt;%</span>
@@ -414,9 +414,9 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>,
 #&gt; </span><span style='color: #555555;'>4</span><span>  2.56    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
 #&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>4.41</span><span>     2.91  | 
 #&gt; </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'><a href='ggbiplot-vector.html'>geom_v_vector</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'><a href='ggbiplot-vector.html'>geom_v_vector</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_align_v</span>) + <span class='fu'><a href='ggbiplot-vector.html'>geom_v_vector</a></span>()
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(),
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(),
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_align_v</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>()
 ), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>))</div><div class='img'><img src='alignment-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Compare relative frequences of hair and eye colors among men versus women</span>
 <span class='no'>HairEyeColor</span>[, , <span class='st'>"Male"</span>] <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>ca</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/ca/topics/ca'>ca</a></span>() <span class='kw'>%&gt;%</span>
@@ -460,10 +460,10 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>,
 #&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.538</span><span>  -</span><span style='color: #BB0000;'>1.54</span><span>   1.77  | 
 #&gt; </span><span style='color: #555555;'>4</span><span>  0.077</span><span style='text-decoration: underline;'>2</span><span> -</span><span style='color: #BB0000;'>1.99</span><span>  -</span><span style='color: #BB0000;'>2.27</span><span>  | </div><div class='input'><span class='no'>ca_biplot</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>ord</span>) {
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>ord</span>, <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-    <span class='fu'><a href='ggbiplot-point.html'>geom_u_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>.mass</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"saddlebrown"</span>) +
-    <span class='fu'><a href='ggbiplot-point.html'>geom_v_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>.mass</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"seagreen4"</span>) +
-    <span class='fu'><a href='ggbiplot-text.html'>geom_u_text_repel</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"saddlebrown"</span>) +
-    <span class='fu'><a href='ggbiplot-text.html'>geom_v_text_repel</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"seagreen4"</span>) +
+    <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>.mass</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"saddlebrown"</span>) +
+    <span class='fu'><a href='geom-biplot-point.html'>geom_v_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>.mass</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"seagreen4"</span>) +
+    <span class='fu'><a href='geom-biplot-text.html'>geom_u_text_repel</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"saddlebrown"</span>) +
+    <span class='fu'><a href='geom-biplot-text.html'>geom_v_text_repel</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"seagreen4"</span>) +
     <span class='fu'>guides</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='st'>"none"</span>)
 }
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(

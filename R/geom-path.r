@@ -3,7 +3,7 @@
 
 #' @description `geom_*_path()` renders line segments through consecutive pairs
 #'   of case or variable positions.
-#' @template ggbiplot-layers
+#' @template biplot-layers
 
 #' @section Aesthetics:
 
@@ -19,14 +19,14 @@
 #' - `group`
 #' 
 
-#' @name ggbiplot-path
+#' @name geom-biplot-path
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
 #' @template param-matrix
 NULL
 
-#' @rdname ggbiplot-path
+#' @rdname geom-biplot-path
 #' @export
 geom_u_path <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -49,7 +49,7 @@ geom_u_path <- function(
   )
 }
 
-#' @rdname ggbiplot-path
+#' @rdname geom-biplot-path
 #' @export
 geom_v_path <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -72,7 +72,7 @@ geom_v_path <- function(
   )
 }
 
-#' @rdname ggbiplot-path
+#' @rdname geom-biplot-path
 #' @export
 geom_biplot_path <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

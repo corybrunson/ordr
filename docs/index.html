@@ -207,10 +207,10 @@
 <a class="sourceLine" id="cb2-108" title="108"><span class="co"># render a biplot, by default on the first two shared coordinates</span></a>
 <a class="sourceLine" id="cb2-109" title="109"><span class="kw"><a href="reference/ggbiplot.html">ggbiplot</a></span>(spend_pca, <span class="kw">aes</span>(<span class="dt">label =</span> .name)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb2-110" title="110"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-111" title="111"><span class="st">  </span><span class="kw"><a href="reference/ggbiplot-vector.html">geom_v_vector</a></span>(<span class="kw">aes</span>(<span class="dt">color =</span> year)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-112" title="112"><span class="st">  </span><span class="kw"><a href="reference/ggbiplot-text-radiate.html">geom_v_text_radiate</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-113" title="113"><span class="st">  </span><span class="kw"><a href="reference/ggbiplot-point.html">geom_u_point</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-114" title="114"><span class="st">  </span><span class="kw"><a href="reference/ggbiplot-text.html">geom_u_text_repel</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-111" title="111"><span class="st">  </span><span class="kw"><a href="reference/geom-biplot-vector.html">geom_v_vector</a></span>(<span class="kw">aes</span>(<span class="dt">color =</span> year)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-112" title="112"><span class="st">  </span><span class="kw"><a href="reference/geom-biplot-text-radiate.html">geom_v_text_radiate</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-113" title="113"><span class="st">  </span><span class="kw"><a href="reference/geom-biplot-point.html">geom_u_point</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-114" title="114"><span class="st">  </span><span class="kw"><a href="reference/geom-biplot-text.html">geom_u_text_repel</a></span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb2-115" title="115"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">expand_scale</span>(<span class="dt">add =</span> <span class="fl">.5</span>)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb2-116" title="116"><span class="st">  </span><span class="kw">ggtitle</span>(</a>
 <a class="sourceLine" id="cb2-117" title="117">    <span class="st">"U.S. Personal Expenditure data, 1940-1960"</span>,</a>
@@ -254,11 +254,11 @@
 <a class="sourceLine" id="cb3-30" title="30"><span class="co"># 2D biplot aligned with geography</span></a>
 <a class="sourceLine" id="cb3-31" title="31">city_mds <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb3-32" title="32"><span class="st">  </span><span class="kw"><a href="reference/ggbiplot.html">ggbiplot</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb3-33" title="33"><span class="st">  </span><span class="kw"><a href="reference/ggbiplot-spantree.html">stat_v_spantree</a></span>(</a>
+<a class="sourceLine" id="cb3-33" title="33"><span class="st">  </span><span class="kw"><a href="reference/stat-biplot-spantree.html">stat_v_spantree</a></span>(</a>
 <a class="sourceLine" id="cb3-34" title="34">    <span class="kw"><a href="reference/ggbiplot.html">ord_aes</a></span>(city_mds), <span class="dt">check.aes =</span> <span class="ot">FALSE</span>,</a>
 <a class="sourceLine" id="cb3-35" title="35">    <span class="dt">alpha =</span> <span class="fl">.5</span>, <span class="dt">linetype =</span> <span class="st">"dotted"</span></a>
 <a class="sourceLine" id="cb3-36" title="36">  ) <span class="op">+</span></a>
-<a class="sourceLine" id="cb3-37" title="37"><span class="st">  </span><span class="kw"><a href="reference/ggbiplot-text.html">geom_v_text</a></span>(<span class="kw">aes</span>(<span class="dt">label =</span> .name), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-37" title="37"><span class="st">  </span><span class="kw"><a href="reference/geom-biplot-text.html">geom_v_text</a></span>(<span class="kw">aes</span>(<span class="dt">label =</span> .name), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb3-38" title="38"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">"MDS biplot of road distances between European cities"</span>)</a></code></pre></div>
 <p><img src="reference/figures/README-MDS%20example-1.png" width="700"></p>
 </div>

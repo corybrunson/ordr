@@ -180,7 +180,7 @@ wrapper that adds the class attribute.</p>
 #&gt; </span><span style='color: #555555;'>5</span><span>  4.41     2.91  | 
 #&gt; </div><div class='input'><span class='no'>differences_plot</span> <span class='kw'>&lt;-</span> <span class='no'>differences_cmds</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'><a href='ggbiplot-text.html'>geom_v_text</a></span>()
+  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>()
 <span class='no'>differences_plot</span></div><div class='img'><img src='methods-cmds-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Reproduce Exhibit 4.5 in Greenacre (2010)</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></span>(<span class='no'>country_attributes</span> ~ <span class='fu'><a href='accessors.html'>get_u</a></span>(<span class='no'>differences_cmds</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
@@ -206,8 +206,8 @@ wrapper that adds the class attribute.</p>
 #&gt; </span><span style='color: #555555;'>4</span><span>          4.    0.502 -</span><span style='color: #BB0000;'>0.444</span><span>  | 
 #&gt; </span><span style='color: #555555;'>5</span><span>          3.85  0.660  0.010</span><span style='text-decoration: underline;'>2</span><span> | 
 #&gt; </span><span style='color: #555555;'>6</span><span>          4.92  0.627 -</span><span style='color: #BB0000;'>0.591</span><span>  | </div><div class='input'><span class='no'>differences_plot</span> +
-  <span class='fu'><a href='ggbiplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>attributes_fit</span>) +
-  <span class='fu'><a href='ggbiplot-text-radiate.html'>geom_v_text_radiate</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>attributes_fit</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>.3</span>)</div><div class='img'><img src='methods-cmds-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Align an MDS ordination to a PCA ordination</span>
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>attributes_fit</span>) +
+  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_v_text_radiate</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>attributes_fit</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>.3</span>)</div><div class='img'><img src='methods-cmds-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Align an MDS ordination to a PCA ordination</span>
 <span class='no'>country_differences</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='masks.html'>cmdscale</a></span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
@@ -281,9 +281,9 @@ wrapper that adds the class attribute.</p>
 #&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>     2.01  | 
 #&gt; </span><span style='color: #555555;'>5</span><span>  4.41    -</span><span style='color: #BB0000;'>2.91</span><span>  | 
 #&gt; </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'><a href='ggbiplot-point.html'>geom_u_point</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'><a href='ggbiplot-point.html'>geom_u_point</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_align_u</span>) + <span class='fu'><a href='ggbiplot-point.html'>geom_u_point</a></span>()
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(),
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(),
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_align_u</span>) + <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>()
 ), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>))</div><div class='img'><img src='methods-cmds-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># negate PCA variables to MDS coordinates</span>
 <span class='no'>differences_cmds</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='alignment.html'>negate_to</a></span>(<span class='no'>differences_pca</span>, <span class='st'>"v"</span>) <span class='kw'>%&gt;%</span>
@@ -309,9 +309,9 @@ wrapper that adds the class attribute.</p>
 #&gt; </span><span style='color: #555555;'>4</span><span>  2.56    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
 #&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>4.41</span><span>     2.91  | 
 #&gt; </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'><a href='ggbiplot-vector.html'>geom_v_vector</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'><a href='ggbiplot-vector.html'>geom_v_vector</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_align_v</span>) + <span class='fu'><a href='ggbiplot-vector.html'>geom_v_vector</a></span>()
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(),
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(),
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_align_v</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>()
 ), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>))</div><div class='img'><img src='methods-cmds-4.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

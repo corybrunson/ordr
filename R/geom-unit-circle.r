@@ -3,7 +3,7 @@
 
 #' @description `geom_unit_circle()` renders the unit circle, centered at the
 #'   origin with radius 1.
-#' @template ggbiplot-layers
+#' @template biplot-layers
 
 #' @section Aesthetics:
 
@@ -15,14 +15,14 @@
 #' - `size`
 #' 
 
-#' @name ggbiplot-unit-circle
+#' @name geom-unit-circle
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
 #' @param segments The number of segments to be used in drawing the circle.
 NULL
 
-#' @rdname ggbiplot-unit-circle
+#' @rdname geom-unit-circle
 #' @usage NULL
 #' @export
 GeomUnitCircle <- ggproto(
@@ -56,7 +56,7 @@ GeomUnitCircle <- ggproto(
   draw_key = draw_key_blank
 )
 
-#' @rdname ggbiplot-unit-circle
+#' @rdname geom-unit-circle
 #' @export
 geom_unit_circle <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

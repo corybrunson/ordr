@@ -1,3 +1,4 @@
+
 # R project defaults
 ^.*\.Rproj$
 ^\.Rproj\.user$
@@ -8,12 +9,11 @@ README.Rmd
 ^man-roxygen$
 ^man/figures$
 ^_pkgdown\.yml$
+^docs$
 
 # hosting infrastructure
 cran-comments.md
 .github
 
 # custom files and directories
-^plan.md$
-^plan.html$
 ^sandbox$

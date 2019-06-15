@@ -4,7 +4,7 @@
 #' @description `geom_*_text_radiate()` is adapted from [ggbiplot::ggbiplot()].
 #'   It renders labels at specified positions and angles that radiate out from
 #'   the origin.
-#' @template ggbiplot-layers
+#' @template biplot-layers
 
 #' @section Aesthetics:
 
@@ -26,13 +26,13 @@
 #' - `group`
 #' 
 
-#' @name ggbiplot-text-radiate
+#' @name geom-biplot-text-radiate
 #' @import ggplot2
-#' @inheritParams ggbiplot-text
+#' @inheritParams geom-biplot-text
 #' @example inst/examples/bioenv-mlm.r
 NULL
 
-#' @rdname ggbiplot-text-radiate
+#' @rdname geom-biplot-text-radiate
 #' @usage NULL
 #' @export
 GeomTextRadiate <- ggproto(
@@ -60,7 +60,7 @@ GeomTextRadiate <- ggproto(
   }
 )
 
-#' @rdname ggbiplot-text-radiate
+#' @rdname geom-biplot-text-radiate
 #' @export
 geom_u_text_radiate <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -87,7 +87,7 @@ geom_u_text_radiate <- function(
   )
 }
 
-#' @rdname ggbiplot-text-radiate
+#' @rdname geom-biplot-text-radiate
 #' @export
 geom_v_text_radiate <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -114,7 +114,7 @@ geom_v_text_radiate <- function(
   )
 }
 
-#' @rdname ggbiplot-text-radiate
+#' @rdname geom-biplot-text-radiate
 #' @export
 geom_biplot_text_radiate <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

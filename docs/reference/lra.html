@@ -123,10 +123,10 @@
   <span class='fu'>lra</span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>arrests_lra</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lra': (50 x 3) x (3 x 3)'
-#&gt; # 3 coordinates: LSV1, LSV2, LSV3
+#&gt; # 3 coordinates: LRSV1, LRSV2, LRSV3
 #&gt; # 
 #&gt; # U: [ 50 x 3 | 0 ]
-#&gt;       LSV1    LSV2      LSV3 | 
+#&gt;      LRSV1   LRSV2     LRSV3 | 
 #&gt;                              | 
 #&gt; <span style='color: #555555;'>1</span><span>  0.010</span><span style='text-decoration: underline;'>6</span><span>  -</span><span style='color: #BB0000;'>0.154</span><span>   0.000</span><span style='text-decoration: underline;'>504</span><span> | 
 #&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.057</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>   0.140  -</span><span style='color: #BB0000;'>0.389</span><span>    | 
@@ -136,7 +136,7 @@
 #&gt; 
 #&gt; # 
 #&gt; # V: [ 3 x 3 | 0 ]
-#&gt;     LSV1    LSV2    LSV3 | 
+#&gt;    LRSV1   LRSV2   LRSV3 | 
 #&gt;                          | 
 #&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.621</span><span> -</span><span style='color: #BB0000;'>0.783</span><span>  -</span><span style='color: #BB0000;'>0.045</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span> | 
 #&gt; </span><span style='color: #555555;'>2</span><span>  0.125 -</span><span style='color: #BB0000;'>0.041</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.991</span><span>  | 
@@ -145,10 +145,10 @@
   <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
   <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='ggbiplot-text.html'>geom_u_text</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>) +
-  <span class='fu'><a href='ggbiplot-polygon.html'>geom_v_polygon</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='st'>"dashed"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>) +
-  <span class='fu'><a href='ggbiplot-point.html'>geom_v_point</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>) +
-  <span class='fu'><a href='ggbiplot-text.html'>geom_v_text_repel</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>, <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"bold"</span>) +
+  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>) +
+  <span class='fu'><a href='geom-biplot-polygon.html'>geom_v_polygon</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='st'>"dashed"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>) +
+  <span class='fu'><a href='geom-biplot-point.html'>geom_v_point</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>) +
+  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text_repel</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>, <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"bold"</span>) +
   <span class='fu'>ggtitle</span>(
     <span class='st'>"Log-ratio analysis of violent crime arrest rates"</span>,
     <span class='st'>"United States, 1973"</span>

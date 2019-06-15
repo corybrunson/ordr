@@ -5,14 +5,14 @@
 #'   by the various `geom_*_*()` layers.
 #'   
 
-#' @template ggbiplot-layers
+#' @template biplot-layers
 
-#' @name ggbiplot-matrix
+#' @name biplot-matrix
 #' @inheritParams ggplot2::layer
 #' @template param-stat
 NULL
 
-#' @rdname ggbiplot-matrix
+#' @rdname biplot-matrix
 #' @usage NULL
 #' @export
 StatU <- ggproto(
@@ -21,7 +21,7 @@ StatU <- ggproto(
   setup_data = setup_u_data
 )
 
-#' @rdname ggbiplot-matrix
+#' @rdname biplot-matrix
 #' @usage NULL
 #' @export
 StatV <- ggproto(
@@ -30,7 +30,7 @@ StatV <- ggproto(
   setup_data = setup_v_data
 )
 
-#' @rdname ggbiplot-matrix
+#' @rdname biplot-matrix
 #' @export
 stat_u <- function(
   mapping = NULL, data = data,
@@ -53,7 +53,7 @@ stat_u <- function(
   )
 }
 
-#' @rdname ggbiplot-matrix
+#' @rdname biplot-matrix
 #' @export
 stat_v <- function(
   mapping = NULL, data = data,

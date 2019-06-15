@@ -3,7 +3,7 @@
 
 #' @description `geom_*_polygon()` renders polygons around the convex hulls of
 #'   the positions of the subjects or vectors.
-#' @template ggbiplot-layers
+#' @template biplot-layers
 
 #' @section Aesthetics:
 
@@ -20,7 +20,7 @@
 #' - `group`
 #' 
 
-#' @name ggbiplot-polygon
+#' @name geom-biplot-polygon
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
@@ -28,7 +28,7 @@
 #' @example inst/examples/arrests-logratio-polygon.r
 NULL
 
-#' @rdname ggbiplot-polygon
+#' @rdname geom-biplot-polygon
 #' @export
 geom_u_polygon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -51,7 +51,7 @@ geom_u_polygon <- function(
   )
 }
 
-#' @rdname ggbiplot-polygon
+#' @rdname geom-biplot-polygon
 #' @export
 geom_v_polygon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -74,7 +74,7 @@ geom_v_polygon <- function(
   )
 }
 
-#' @rdname ggbiplot-polygon
+#' @rdname geom-biplot-polygon
 #' @export
 geom_biplot_polygon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

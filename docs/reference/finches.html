@@ -151,8 +151,8 @@ different format in the <strong><a href='https://www.rdocumentation.org/packages
 #&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.221</span><span>   0.117 -</span><span style='color: #BB0000;'>0.136</span><span>     | </span><span style='color: #555555;'>5</span><span> Santiago   0.082</span><span style='text-decoration: underline;'>0</span><span> 0.349  0.009</span><span style='text-decoration: underline;'>98</span><span>
 #&gt; </span><span style='color: #555555;'># … with 12 more rows</span><span></div><div class='input'><span class='no'>finches_ca</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'><a href='ggbiplot-text.html'>geom_u_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='no'>.inertia</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"royalblue3"</span>) +
-  <span class='fu'><a href='ggbiplot-text.html'>geom_v_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='no'>.inertia</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
+  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='no'>.inertia</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"royalblue3"</span>) +
+  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='no'>.inertia</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
   <span class='fu'>scale_alpha_continuous</span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>.3</span>, <span class='fl'>1</span>), <span class='kw'>guide</span> <span class='kw'>=</span> <span class='st'>"none"</span>) +
   <span class='fu'>ggtitle</span>(
     <span class='st'>"Symmetric CA biplot of the Galapagos island finches"</span>,
@@ -188,9 +188,9 @@ different format in the <strong><a href='https://www.rdocumentation.org/packages
     <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>LSC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>LSC2</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
     <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>100</span>
   ) +
-  <span class='fu'><a href='ggbiplot-vector.html'>geom_u_vector</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'><a href='ggbiplot-text-radiate.html'>geom_u_text_radiate</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'><a href='ggbiplot-text.html'>geom_v_label</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"royalblue3"</span>) +
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_u_vector</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
+  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_u_text_radiate</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
+  <span class='fu'><a href='geom-biplot-text.html'>geom_v_label</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"royalblue3"</span>) +
   <span class='fu'>ggtitle</span>(
     <span class='st'>"Logistic SVD of the Galapagos island finches"</span>,
     <span class='st'>"Islands (finches) scaled to the primary (secondary) axes"</span>
@@ -225,9 +225,9 @@ different format in the <strong><a href='https://www.rdocumentation.org/packages
     <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>LPC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>LPC2</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
     <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>50</span>
   ) +
-  <span class='fu'><a href='ggbiplot-vector.html'>geom_u_vector</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'><a href='ggbiplot-text-radiate.html'>geom_u_text_radiate</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'><a href='ggbiplot-text.html'>geom_v_label</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"royalblue3"</span>) +
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_u_vector</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
+  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_u_text_radiate</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
+  <span class='fu'><a href='geom-biplot-text.html'>geom_v_label</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"royalblue3"</span>) +
   <span class='fu'>ggtitle</span>(
     <span class='st'>"Logistic PCA of the Galapagos island finches"</span>,
     <span class='st'>"Islands (finches) scaled to the primary (secondary) axes"</span>
@@ -264,9 +264,9 @@ different format in the <strong><a href='https://www.rdocumentation.org/packages
     <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>LPC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>LPC2</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
     <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>50</span>
   ) +
-  <span class='fu'><a href='ggbiplot-vector.html'>geom_u_vector</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'><a href='ggbiplot-text-radiate.html'>geom_u_text_radiate</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'><a href='ggbiplot-text.html'>geom_v_label</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"royalblue3"</span>) +
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_u_vector</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
+  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_u_text_radiate</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
+  <span class='fu'><a href='geom-biplot-text.html'>geom_v_label</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"royalblue3"</span>) +
   <span class='fu'>ggtitle</span>(
     <span class='st'>"Convex logistic PCA of the Galapagos island finches"</span>,
     <span class='st'>"Islands (finches) scaled to the primary (secondary) axes"</span>

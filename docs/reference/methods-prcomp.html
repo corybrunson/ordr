@@ -180,9 +180,9 @@ objects of class <code>"prcomp"</code> as returned by <code><a href='https://www
     <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fu'><a href='accessors.html'>dim_v</a></span>(<span class='no'>attributes_pca</span>)
   ) +
   <span class='fu'>theme_bw</span>() + <span class='fu'>theme</span>(<span class='kw'>panel.grid</span> <span class='kw'>=</span> <span class='fu'>element_blank</span>()) +
-  <span class='fu'><a href='ggbiplot-text.html'>geom_u_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"seagreen"</span>) +
-  <span class='fu'><a href='ggbiplot-vector.html'>geom_v_vector</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'><a href='ggbiplot-text.html'>geom_v_text_repel</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>)</div><div class='img'><img src='methods-prcomp-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># covariance biplot</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"seagreen"</span>) +
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
+  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text_repel</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>)</div><div class='img'><img src='methods-prcomp-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># covariance biplot</span>
 <span class='no'>attributes_pca</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(
@@ -190,9 +190,9 @@ objects of class <code>"prcomp"</code> as returned by <code><a href='https://www
     <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"u"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fu'><a href='accessors.html'>dim_u</a></span>(<span class='no'>attributes_pca</span>)
   ) +
   <span class='fu'>theme_bw</span>() + <span class='fu'>theme</span>(<span class='kw'>panel.grid</span> <span class='kw'>=</span> <span class='fu'>element_blank</span>()) +
-  <span class='fu'><a href='ggbiplot-text.html'>geom_u_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"seagreen"</span>) +
-  <span class='fu'><a href='ggbiplot-vector.html'>geom_v_vector</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'><a href='ggbiplot-text.html'>geom_v_text_repel</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>)</div><div class='img'><img src='methods-prcomp-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Scaled PCA of Anderson iris data with annotated biplot</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"seagreen"</span>) +
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
+  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text_repel</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>)</div><div class='img'><img src='methods-prcomp-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Scaled PCA of Anderson iris data with annotated biplot</span>
 <span class='no'>iris</span>[, -<span class='fl'>5</span>] <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/prcomp'>prcomp</a></span>(<span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
@@ -221,23 +221,23 @@ objects of class <code>"prcomp"</code> as returned by <code><a href='https://www
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>)) +
   <span class='fu'>theme_bw</span>() +
   <span class='fu'>scale_color_brewer</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>2</span>) +
-  <span class='fu'><a href='ggbiplot-point.html'>geom_u_point</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>) +
-  <span class='fu'><a href='ggbiplot-center.html'>stat_u_center</a></span>(<span class='kw'>fun.center</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='st'>"triangle"</span>) +
-  <span class='fu'><a href='ggbiplot-ellipse.html'>stat_u_ellipse</a></span>(<span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>.99</span>) +
-  <span class='fu'><a href='ggbiplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#444444"</span>) +
+  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>) +
+  <span class='fu'><a href='stat-biplot-center.html'>stat_u_center</a></span>(<span class='kw'>fun.center</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='st'>"triangle"</span>) +
+  <span class='fu'><a href='stat-biplot-ellipse.html'>stat_u_ellipse</a></span>(<span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>.99</span>) +
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#444444"</span>) +
   <span class='fu'>ggtitle</span>(
     <span class='st'>"Row-principal PCA biplot of Anderson iris data"</span>,
     <span class='st'>"Overlaid with centroids and 99% confidence ellipses"</span>
   )</div><div class='img'><img src='methods-prcomp-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>iris_pca</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>)) +
   <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='ggbiplot-point.html'>geom_u_point</a></span>() +
-  <span class='fu'><a href='ggbiplot-center.html'>stat_u_center</a></span>(<span class='kw'>fun.center</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>) +
+  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>() +
+  <span class='fu'><a href='stat-biplot-center.html'>stat_u_center</a></span>(<span class='kw'>fun.center</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>) +
   <span class='fu'>geom_polygon</span>(
     <span class='fu'>aes</span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>species</span>),
     <span class='kw'>color</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.25</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"u_ellipse"</span>
   ) +
-  <span class='fu'><a href='ggbiplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#444444"</span>) +
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#444444"</span>) +
   <span class='fu'>scale_color_brewer</span>(
     <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>2</span>,
     <span class='kw'>aesthetics</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"color"</span>, <span class='st'>"fill"</span>)
@@ -274,9 +274,9 @@ objects of class <code>"prcomp"</code> as returned by <code><a href='https://www
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>)) +
   <span class='fu'>theme_bw</span>() +
   <span class='fu'>scale_color_brewer</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>2</span>) +
-  <span class='fu'><a href='ggbiplot-intervals.html'>geom_u_lineranges</a></span>(<span class='kw'>fun.data</span> <span class='kw'>=</span> <span class='no'>mean_sdl</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>.75</span>) +
-  <span class='fu'><a href='ggbiplot-point.html'>geom_u_point</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>) +
-  <span class='fu'><a href='ggbiplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#444444"</span>) +
+  <span class='fu'><a href='geom-biplot-intervals.html'>geom_u_lineranges</a></span>(<span class='kw'>fun.data</span> <span class='kw'>=</span> <span class='no'>mean_sdl</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>.75</span>) +
+  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>) +
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#444444"</span>) +
   <span class='fu'>ggtitle</span>(
     <span class='st'>"Row-principal PCA biplot of Anderson iris data"</span>,
     <span class='st'>"Ranges 2 sample standard deviations from centroids"</span>
@@ -284,12 +284,12 @@ objects of class <code>"prcomp"</code> as returned by <code><a href='https://www
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>)) +
   <span class='fu'>theme_bw</span>() +
   <span class='fu'>scale_color_brewer</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>2</span>) +
-  <span class='fu'><a href='ggbiplot-intervals.html'>geom_u_lineranges</a></span>(
+  <span class='fu'><a href='geom-biplot-intervals.html'>geom_u_lineranges</a></span>(
     <span class='kw'>fun.data</span> <span class='kw'>=</span> <span class='no'>mean_cl_boot</span>, <span class='kw'>fun.args</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>.99</span>),
     <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>.75</span>
   ) +
-  <span class='fu'><a href='ggbiplot-point.html'>geom_u_point</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>) +
-  <span class='fu'><a href='ggbiplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#444444"</span>) +
+  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>) +
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#444444"</span>) +
   <span class='fu'>ggtitle</span>(
     <span class='st'>"Row-principal PCA biplot of Anderson iris data"</span>,
     <span class='st'>"99% confidence intervals based on nonparametric bootstrap sampling"</span>

@@ -4,7 +4,7 @@
 #' @description `geom_*_lineranges()` renders horizontal and vertical intervals
 #'   for a specified subject or variable; `geom_*_pointranges()` additionally
 #'   renders a point at their crosshairs.
-#' @template ggbiplot-layers
+#' @template biplot-layers
 
 #' @section Aesthetics:
 
@@ -24,15 +24,15 @@
 #' - `group`
 #' 
 
-#' @name ggbiplot-intervals
-#' @include biplot-legend.r
+#' @name geom-biplot-intervals
+#' @include biplot-key.r
 #' @import ggplot2
 #' @inheritParams ggplot2::geom_linerange
 #' @template param-geom
 #' @template param-matrix
 #' @example inst/examples/iris-prcomp-lineranges.r
 
-#' @rdname ggbiplot-intervals
+#' @rdname geom-biplot-intervals
 #' @usage NULL
 #' @export
 GeomLineranges <- ggproto(
@@ -53,7 +53,7 @@ GeomLineranges <- ggproto(
   }
 )
 
-#' @rdname ggbiplot-intervals
+#' @rdname geom-biplot-intervals
 #' @export
 geom_u_lineranges <- function(
   mapping = NULL, data = NULL, stat = "center", position = "identity",
@@ -76,7 +76,7 @@ geom_u_lineranges <- function(
   )
 }
 
-#' @rdname ggbiplot-intervals
+#' @rdname geom-biplot-intervals
 #' @export
 geom_v_lineranges <- function(
   mapping = NULL, data = NULL, stat = "center", position = "identity",
@@ -99,7 +99,7 @@ geom_v_lineranges <- function(
   )
 }
 
-#' @rdname ggbiplot-intervals
+#' @rdname geom-biplot-intervals
 #' @export
 geom_biplot_lineranges <- function(
   mapping = NULL, data = NULL, stat = "center", position = "identity",
@@ -123,7 +123,7 @@ geom_biplot_lineranges <- function(
   )
 }
 
-#' @rdname ggbiplot-intervals
+#' @rdname geom-biplot-intervals
 #' @usage NULL
 #' @export
 GeomPointranges <- ggproto(
@@ -146,7 +146,7 @@ GeomPointranges <- ggproto(
   }
 )
 
-#' @rdname ggbiplot-intervals
+#' @rdname geom-biplot-intervals
 #' @export
 geom_u_pointranges <- function(
   mapping = NULL, data = NULL, stat = "center", position = "identity",
@@ -169,7 +169,7 @@ geom_u_pointranges <- function(
   )
 }
 
-#' @rdname ggbiplot-intervals
+#' @rdname geom-biplot-intervals
 #' @export
 geom_v_pointranges <- function(
   mapping = NULL, data = NULL, stat = "center", position = "identity",
@@ -192,7 +192,7 @@ geom_v_pointranges <- function(
   )
 }
 
-#' @rdname ggbiplot-intervals
+#' @rdname geom-biplot-intervals
 #' @export
 geom_biplot_pointranges <- function(
   mapping = NULL, data = NULL, stat = "center", position = "identity",

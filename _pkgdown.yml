@@ -1,0 +1,52 @@
+reference:
+- title: "**ordr** package"
+  desc: >
+    A unified framework for ordination objects and biplot methods using tidy
+    principles.
+  contents:
+  - '`ordr`'
+- title: "Tidy ordination"
+  desc: >
+    The `tbl_ord` class wrapper, with methods for accessing components and for
+    querying and manipulating metadata
+  contents:
+  - '`accessors`'
+  - '`augmentation`'
+  - '`annotation`'
+  - '`conference`'
+  - '`alignment`'
+  - '`tbl_ord`'
+  - '`reconstruct`'
+  - '`formatting`'
+  - '`dplyr-verbs`'
+- title: "Biplot grammar"
+  desc: >
+  contents:
+  - '`fortify`'
+  - '`ggbiplot`'
+  - '`biplot-matrix`'
+  - '`geom-unit-circle`'
+  - starts_with("geom-biplot-")
+  - starts_with("stat-biplot-")
+  - '`draw-key`'
+- title: "New functions, classes, and methods"
+  desc: >
+    Introducing and adapting ordination techniques for the **ordr** workflow
+  contents:
+  - '`classes`'
+  - '`masks`'
+  - '`lra`'
+- title: "Data sets"
+  desc: >
+    Additional data sets used to illustrate ordination techniques
+  contents:
+  - '`benthos`'
+  - '`bioenv`'
+  - '`countries`'
+  - '`finches`'
+  - '`issp_women`'
+- title: "Class methods"
+  desc: >
+    Accessor and augmentation methods for ordination classes from other packages
+  contents:
+  - starts_with("methods-")

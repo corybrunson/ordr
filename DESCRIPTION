@@ -39,7 +39,7 @@ RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 Collate: 
     'biplot-gg.r'
-    'biplot-legend.r'
+    'biplot-key.r'
     'data.r'
     'dplyr-verbs.r'
     'format.r'

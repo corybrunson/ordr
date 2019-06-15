@@ -105,8 +105,22 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section--ordr-package" class="hasAnchor"><a href="#section--ordr-package" class="anchor"></a>**ordr** package</h2>
+          <p class="section-desc"><p>A unified framework for ordination objects and biplot methods using tidy principles.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="ordr.html">ordr</a></code> </p>
+        </td>
+        <td><p><strong>ordr</strong> package</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-tidy-ordination" class="hasAnchor"><a href="#section-tidy-ordination" class="anchor"></a>Tidy ordination</h2>
+          <p class="section-desc"><p>The <code>tbl_ord</code> class wrapper, with methods for accessing components and for querying and manipulating metadata</p></p>
         </th>
       </tr>
       <tr>
@@ -118,9 +132,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="alignment.html">get_alignment()</a></code> <code><a href="alignment.html">revert_alignment()</a></code> <code><a href="alignment.html">negate()</a></code> <code><a href="alignment.html">permute()</a></code> <code><a href="alignment.html">rotate()</a></code> <code><a href="alignment.html">negation_to()</a></code> <code><a href="alignment.html">negate_to()</a></code> <code><a href="alignment.html">permutation_to()</a></code> <code><a href="alignment.html">permute_to()</a></code> <code><a href="alignment.html">rotation_to()</a></code> <code><a href="alignment.html">rotate_to()</a></code> <code><a href="alignment.html">align_to()</a></code> </p>
+          <p><code><a href="augmentation.html">augmentation_u()</a></code> <code><a href="augmentation.html">augmentation_v()</a></code> <code><a href="augmentation.html">augmentation_factor()</a></code> <code><a href="augmentation.html">augmentation.tbl_ord()</a></code> <code><a href="augmentation.html">augmentation_coord()</a></code> <code><a href="augmentation.html">augment(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="augmentation.html">augment_u()</a></code> <code><a href="augmentation.html">augment_v()</a></code> </p>
         </td>
-        <td><p>Alignment of ordinations</p></td>
+        <td><p>Augment metadata on the factors and coordinates of ordination objects</p></td>
       </tr><tr>
         
         <td>
@@ -130,10 +144,190 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="augmentation.html">augmentation_u()</a></code> <code><a href="augmentation.html">augmentation_v()</a></code> <code><a href="augmentation.html">augmentation_factor()</a></code> <code><a href="augmentation.html">augmentation.tbl_ord()</a></code> <code><a href="augmentation.html">augmentation_coord()</a></code> <code><a href="augmentation.html">augment(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="augmentation.html">augment_u()</a></code> <code><a href="augmentation.html">augment_v()</a></code> </p>
+          <p><code><a href="conference.html">recover_conference()</a></code> <code><a href="conference.html">get_conference()</a></code> <code><a href="conference.html">revert_conference()</a></code> <code><a href="conference.html">confer_inertia()</a></code> </p>
         </td>
-        <td><p>Augment metadata on the factors and coordinates of ordination objects</p></td>
+        <td><p>Confer inertia to factors of an ordination</p></td>
       </tr><tr>
+        
+        <td>
+          <p><code><a href="alignment.html">get_alignment()</a></code> <code><a href="alignment.html">revert_alignment()</a></code> <code><a href="alignment.html">negate()</a></code> <code><a href="alignment.html">permute()</a></code> <code><a href="alignment.html">rotate()</a></code> <code><a href="alignment.html">negation_to()</a></code> <code><a href="alignment.html">negate_to()</a></code> <code><a href="alignment.html">permutation_to()</a></code> <code><a href="alignment.html">permute_to()</a></code> <code><a href="alignment.html">rotation_to()</a></code> <code><a href="alignment.html">rotate_to()</a></code> <code><a href="alignment.html">align_to()</a></code> </p>
+        </td>
+        <td><p>Alignment of ordinations</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="tbl_ord.html">as_tbl_ord()</a></code> <code><a href="tbl_ord.html">make_tbl_ord()</a></code> <code><a href="tbl_ord.html">is_tbl_ord()</a></code> <code><a href="tbl_ord.html">is.tbl_ord()</a></code> <code><a href="tbl_ord.html">valid_tbl_ord()</a></code> <code><a href="tbl_ord.html">un_tbl_ord()</a></code> </p>
+        </td>
+        <td><p>A unified ordination object class</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="reconstruct.html">reconstruct()</a></code> </p>
+        </td>
+        <td><p>Reconstruct data from an ordination</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="formatting.html">format(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="formatting.html">print(<i>&lt;tbl_ord&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Formatting and printing methods for <code>tbl_ord</code>s</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dplyr-verbs.html">pull_factor()</a></code> <code><a href="dplyr-verbs.html">pull_u()</a></code> <code><a href="dplyr-verbs.html">pull_v()</a></code> <code><a href="dplyr-verbs.html">rename_u()</a></code> <code><a href="dplyr-verbs.html">rename_v()</a></code> <code><a href="dplyr-verbs.html">select_u()</a></code> <code><a href="dplyr-verbs.html">select_v()</a></code> <code><a href="dplyr-verbs.html">mutate_u()</a></code> <code><a href="dplyr-verbs.html">mutate_v()</a></code> <code><a href="dplyr-verbs.html">transmute_u()</a></code> <code><a href="dplyr-verbs.html">transmute_v()</a></code> <code><a href="dplyr-verbs.html">bind_cols_u()</a></code> <code><a href="dplyr-verbs.html">bind_cols_v()</a></code> </p>
+        </td>
+        <td><p><strong>dplyr</strong> verbs for <code>tbl_ord</code> factors</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-biplot-grammar" class="hasAnchor"><a href="#section-biplot-grammar" class="anchor"></a>Biplot grammar</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="fortify.html">fortify(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="fortify.html">fortify_u()</a></code> <code><a href="fortify.html">fortify_v()</a></code> <code><a href="fortify.html">tidy(<i>&lt;tbl_ord&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Fortify a <code>tbl_ord</code> for plotting</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ggbiplot.html">ggbiplot()</a></code> <code><a href="ggbiplot.html">ord_aes()</a></code> </p>
+        </td>
+        <td><p>Biplots following the grammar of graphics</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="biplot-matrix.html">stat_u()</a></code> <code><a href="biplot-matrix.html">stat_v()</a></code> </p>
+        </td>
+        <td><p>Render plot elements for one matrix of an ordination</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geom-unit-circle.html">geom_unit_circle()</a></code> </p>
+        </td>
+        <td><p>Render a unit circle</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geom-biplot-axis.html">geom_u_axis()</a></code> <code><a href="geom-biplot-axis.html">geom_v_axis()</a></code> <code><a href="geom-biplot-axis.html">geom_biplot_axis()</a></code> </p>
+        </td>
+        <td><p>Render axes through origin</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geom-biplot-intervals.html">geom_u_lineranges()</a></code> <code><a href="geom-biplot-intervals.html">geom_v_lineranges()</a></code> <code><a href="geom-biplot-intervals.html">geom_biplot_lineranges()</a></code> <code><a href="geom-biplot-intervals.html">geom_u_pointranges()</a></code> <code><a href="geom-biplot-intervals.html">geom_v_pointranges()</a></code> <code><a href="geom-biplot-intervals.html">geom_biplot_pointranges()</a></code> </p>
+        </td>
+        <td><p>Render intervals depicting ranges, usually about center points</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geom-biplot-isolines.html">geom_u_ticks()</a></code> <code><a href="geom-biplot-isolines.html">geom_v_ticks()</a></code> <code><a href="geom-biplot-isolines.html">geom_biplot_ticks()</a></code> <code><a href="geom-biplot-isolines.html">geom_u_isolines()</a></code> <code><a href="geom-biplot-isolines.html">geom_v_isolines()</a></code> <code><a href="geom-biplot-isolines.html">geom_biplot_isolines()</a></code> </p>
+        </td>
+        <td><p>Render isolines for a subject or variable</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geom-biplot-path.html">geom_u_path()</a></code> <code><a href="geom-biplot-path.html">geom_v_path()</a></code> <code><a href="geom-biplot-path.html">geom_biplot_path()</a></code> </p>
+        </td>
+        <td><p>Render piecewise-linear paths through ordinates</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geom-biplot-point.html">geom_u_point()</a></code> <code><a href="geom-biplot-point.html">geom_v_point()</a></code> <code><a href="geom-biplot-point.html">geom_biplot_point()</a></code> </p>
+        </td>
+        <td><p>Render points at ordinates</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geom-biplot-polygon.html">geom_u_polygon()</a></code> <code><a href="geom-biplot-polygon.html">geom_v_polygon()</a></code> <code><a href="geom-biplot-polygon.html">geom_biplot_polygon()</a></code> </p>
+        </td>
+        <td><p>Render polygons around ordinates</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geom-biplot-text-radiate.html">geom_u_text_radiate()</a></code> <code><a href="geom-biplot-text-radiate.html">geom_v_text_radiate()</a></code> <code><a href="geom-biplot-text-radiate.html">geom_biplot_text_radiate()</a></code> </p>
+        </td>
+        <td><p>Render text at ordinates radiating out from the origin</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geom-biplot-text.html">geom_u_text()</a></code> <code><a href="geom-biplot-text.html">geom_v_text()</a></code> <code><a href="geom-biplot-text.html">geom_biplot_text()</a></code> <code><a href="geom-biplot-text.html">geom_u_label()</a></code> <code><a href="geom-biplot-text.html">geom_v_label()</a></code> <code><a href="geom-biplot-text.html">geom_biplot_label()</a></code> <code><a href="geom-biplot-text.html">geom_u_text_repel()</a></code> <code><a href="geom-biplot-text.html">geom_v_text_repel()</a></code> <code><a href="geom-biplot-text.html">geom_biplot_text_repel()</a></code> <code><a href="geom-biplot-text.html">geom_u_label_repel()</a></code> <code><a href="geom-biplot-text.html">geom_v_label_repel()</a></code> <code><a href="geom-biplot-text.html">geom_biplot_label_repel()</a></code> </p>
+        </td>
+        <td><p>Render text at ordinates</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geom-biplot-vector.html">geom_u_vector()</a></code> <code><a href="geom-biplot-vector.html">geom_v_vector()</a></code> <code><a href="geom-biplot-vector.html">geom_biplot_vector()</a></code> </p>
+        </td>
+        <td><p>Render vectors from origin to ordinates</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="stat-biplot-center.html">stat_center()</a></code> <code><a href="stat-biplot-center.html">stat_u_center()</a></code> <code><a href="stat-biplot-center.html">stat_v_center()</a></code> <code><a href="stat-biplot-center.html">stat_star()</a></code> <code><a href="stat-biplot-center.html">stat_u_star()</a></code> <code><a href="stat-biplot-center.html">stat_v_star()</a></code> </p>
+        </td>
+        <td><p>Compute geometric centers and spreads for ordination factors</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="stat-biplot-chull.html">stat_chull()</a></code> <code><a href="stat-biplot-chull.html">stat_u_chull()</a></code> <code><a href="stat-biplot-chull.html">stat_v_chull()</a></code> </p>
+        </td>
+        <td><p>Restrict ordination data to the convex hulls of both matrix factors</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="stat-biplot-ellipse.html">stat_u_ellipse()</a></code> <code><a href="stat-biplot-ellipse.html">stat_v_ellipse()</a></code> </p>
+        </td>
+        <td><p>Compute normal confidence ellipses for ordination factors</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="stat-biplot-spantree.html">stat_spantree()</a></code> <code><a href="stat-biplot-spantree.html">stat_u_spantree()</a></code> <code><a href="stat-biplot-spantree.html">stat_v_spantree()</a></code> </p>
+        </td>
+        <td><p>Calculate a minimum spanning tree among cases or variables</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="draw-key.html">draw_key_line()</a></code> <code><a href="draw-key.html">draw_key_crosslines()</a></code> <code><a href="draw-key.html">draw_key_crosspoint()</a></code> </p>
+        </td>
+        <td><p>Biplot key drawing functions</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-new-functions-classes-and-methods" class="hasAnchor"><a href="#section-new-functions-classes-and-methods" class="anchor"></a>New functions, classes, and methods</h2>
+          <p class="section-desc"><p>Introducing and adapting ordination techniques for the <strong>ordr</strong> workflow</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="classes.html">eigen_ord()</a></code> <code><a href="classes.html">svd_ord()</a></code> </p>
+        </td>
+        <td><p>Classes for workhorse matrix decompositions</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="masks.html">cmdscale()</a></code> <code><a href="masks.html">logisticSVD()</a></code> <code><a href="masks.html">logisticPCA()</a></code> <code><a href="masks.html">convexLogisticPCA()</a></code> </p>
+        </td>
+        <td><p>Masks of external ordination objects</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="lra.html">lra()</a></code> </p>
+        </td>
+        <td><p>Log-ratio analysis</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-data-sets" class="hasAnchor"><a href="#section-data-sets" class="anchor"></a>Data sets</h2>
+          <p class="section-desc"><p>Additional data sets used to illustrate ordination techniques</p></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="benthos.html">benthos</a></code> </p>
@@ -148,27 +342,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="classes.html">eigen_ord()</a></code> <code><a href="classes.html">svd_ord()</a></code> </p>
-        </td>
-        <td><p>Classes for workhorse matrix decompositions</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="conference.html">recover_conference()</a></code> <code><a href="conference.html">get_conference()</a></code> <code><a href="conference.html">revert_conference()</a></code> <code><a href="conference.html">confer_inertia()</a></code> </p>
-        </td>
-        <td><p>Confer inertia to factors of an ordination</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="countries.html">country_differences</a></code> <code><a href="countries.html">country_differences</a></code> <code><a href="countries.html">country_attributes</a></code> </p>
         </td>
         <td><p>Student ratings of similarities and attributes of 13 countries</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dplyr-verbs.html">pull_factor()</a></code> <code><a href="dplyr-verbs.html">pull_u()</a></code> <code><a href="dplyr-verbs.html">pull_v()</a></code> <code><a href="dplyr-verbs.html">rename_u()</a></code> <code><a href="dplyr-verbs.html">rename_v()</a></code> <code><a href="dplyr-verbs.html">select_u()</a></code> <code><a href="dplyr-verbs.html">select_v()</a></code> <code><a href="dplyr-verbs.html">mutate_u()</a></code> <code><a href="dplyr-verbs.html">mutate_v()</a></code> <code><a href="dplyr-verbs.html">transmute_u()</a></code> <code><a href="dplyr-verbs.html">transmute_v()</a></code> <code><a href="dplyr-verbs.html">bind_cols_u()</a></code> <code><a href="dplyr-verbs.html">bind_cols_v()</a></code> </p>
-        </td>
-        <td><p><strong>dplyr</strong> verbs for <code>tbl_ord</code> factors</p></td>
       </tr><tr>
         
         <td>
@@ -178,136 +354,18 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="formatting.html">format(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="formatting.html">print(<i>&lt;tbl_ord&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Formatting and printing methods for <code>tbl_ord</code>s</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="fortify.html">fortify(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="fortify.html">fortify_u()</a></code> <code><a href="fortify.html">fortify_v()</a></code> <code><a href="fortify.html">tidy(<i>&lt;tbl_ord&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Fortify a <code>tbl_ord</code> for plotting</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggbiplot-axis.html">geom_u_axis()</a></code> <code><a href="ggbiplot-axis.html">geom_v_axis()</a></code> <code><a href="ggbiplot-axis.html">geom_biplot_axis()</a></code> </p>
-        </td>
-        <td><p>Render axes through origin</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggbiplot-center.html">stat_center()</a></code> <code><a href="ggbiplot-center.html">stat_u_center()</a></code> <code><a href="ggbiplot-center.html">stat_v_center()</a></code> <code><a href="ggbiplot-center.html">stat_star()</a></code> <code><a href="ggbiplot-center.html">stat_u_star()</a></code> <code><a href="ggbiplot-center.html">stat_v_star()</a></code> </p>
-        </td>
-        <td><p>Compute geometric centers and spreads for ordination factors</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggbiplot-chull.html">stat_chull()</a></code> <code><a href="ggbiplot-chull.html">stat_u_chull()</a></code> <code><a href="ggbiplot-chull.html">stat_v_chull()</a></code> </p>
-        </td>
-        <td><p>Restrict ordination data to the convex hulls of both matrix factors</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggbiplot-draw-key.html">draw_key_line()</a></code> <code><a href="ggbiplot-draw-key.html">draw_key_crosslines()</a></code> <code><a href="ggbiplot-draw-key.html">draw_key_crosspoint()</a></code> </p>
-        </td>
-        <td><p>Biplot key drawing functions</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggbiplot-ellipse.html">stat_u_ellipse()</a></code> <code><a href="ggbiplot-ellipse.html">stat_v_ellipse()</a></code> </p>
-        </td>
-        <td><p>Compute normal confidence ellipses for ordination factors</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggbiplot-intervals.html">geom_u_lineranges()</a></code> <code><a href="ggbiplot-intervals.html">geom_v_lineranges()</a></code> <code><a href="ggbiplot-intervals.html">geom_biplot_lineranges()</a></code> <code><a href="ggbiplot-intervals.html">geom_u_pointranges()</a></code> <code><a href="ggbiplot-intervals.html">geom_v_pointranges()</a></code> <code><a href="ggbiplot-intervals.html">geom_biplot_pointranges()</a></code> </p>
-        </td>
-        <td><p>Render intervals depicting ranges, usually about center points</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggbiplot-isolines.html">geom_u_ticks()</a></code> <code><a href="ggbiplot-isolines.html">geom_v_ticks()</a></code> <code><a href="ggbiplot-isolines.html">geom_biplot_ticks()</a></code> <code><a href="ggbiplot-isolines.html">geom_u_isolines()</a></code> <code><a href="ggbiplot-isolines.html">geom_v_isolines()</a></code> <code><a href="ggbiplot-isolines.html">geom_biplot_isolines()</a></code> </p>
-        </td>
-        <td><p>Render isolines for a subject or variable</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggbiplot-matrix.html">stat_u()</a></code> <code><a href="ggbiplot-matrix.html">stat_v()</a></code> </p>
-        </td>
-        <td><p>Render plot elements for one matrix of an ordination</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggbiplot-path.html">geom_u_path()</a></code> <code><a href="ggbiplot-path.html">geom_v_path()</a></code> <code><a href="ggbiplot-path.html">geom_biplot_path()</a></code> </p>
-        </td>
-        <td><p>Render piecewise-linear paths through ordinates</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggbiplot-point.html">geom_u_point()</a></code> <code><a href="ggbiplot-point.html">geom_v_point()</a></code> <code><a href="ggbiplot-point.html">geom_biplot_point()</a></code> </p>
-        </td>
-        <td><p>Render points at ordinates</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggbiplot-polygon.html">geom_u_polygon()</a></code> <code><a href="ggbiplot-polygon.html">geom_v_polygon()</a></code> <code><a href="ggbiplot-polygon.html">geom_biplot_polygon()</a></code> </p>
-        </td>
-        <td><p>Render polygons around ordinates</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggbiplot-spantree.html">stat_spantree()</a></code> <code><a href="ggbiplot-spantree.html">stat_u_spantree()</a></code> <code><a href="ggbiplot-spantree.html">stat_v_spantree()</a></code> </p>
-        </td>
-        <td><p>Calculate a minimum spanning tree among cases or variables</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggbiplot-text-radiate.html">geom_u_text_radiate()</a></code> <code><a href="ggbiplot-text-radiate.html">geom_v_text_radiate()</a></code> <code><a href="ggbiplot-text-radiate.html">geom_biplot_text_radiate()</a></code> </p>
-        </td>
-        <td><p>Render text at ordinates radiating out from the origin</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggbiplot-text.html">geom_u_text()</a></code> <code><a href="ggbiplot-text.html">geom_v_text()</a></code> <code><a href="ggbiplot-text.html">geom_biplot_text()</a></code> <code><a href="ggbiplot-text.html">geom_u_label()</a></code> <code><a href="ggbiplot-text.html">geom_v_label()</a></code> <code><a href="ggbiplot-text.html">geom_biplot_label()</a></code> <code><a href="ggbiplot-text.html">geom_u_text_repel()</a></code> <code><a href="ggbiplot-text.html">geom_v_text_repel()</a></code> <code><a href="ggbiplot-text.html">geom_biplot_text_repel()</a></code> <code><a href="ggbiplot-text.html">geom_u_label_repel()</a></code> <code><a href="ggbiplot-text.html">geom_v_label_repel()</a></code> <code><a href="ggbiplot-text.html">geom_biplot_label_repel()</a></code> </p>
-        </td>
-        <td><p>Render text at ordinates</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggbiplot-unit-circle.html">geom_unit_circle()</a></code> </p>
-        </td>
-        <td><p>Render a unit circle</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggbiplot-vector.html">geom_u_vector()</a></code> <code><a href="ggbiplot-vector.html">geom_v_vector()</a></code> <code><a href="ggbiplot-vector.html">geom_biplot_vector()</a></code> </p>
-        </td>
-        <td><p>Render vectors from origin to ordinates</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggbiplot.html">ggbiplot()</a></code> <code><a href="ggbiplot.html">ord_aes()</a></code> </p>
-        </td>
-        <td><p>Biplots following the grammar of graphics</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="issp_women.html">issp_women</a></code> </p>
         </td>
         <td><p>Original respondent-level data from Spanish ISSP sample</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="lra.html">lra()</a></code> </p>
-        </td>
-        <td><p>Log-ratio analysis</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="masks.html">cmdscale()</a></code> <code><a href="masks.html">logisticSVD()</a></code> <code><a href="masks.html">logisticPCA()</a></code> <code><a href="masks.html">convexLogisticPCA()</a></code> </p>
-        </td>
-        <td><p>Masks of external ordination objects</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-class-methods" class="hasAnchor"><a href="#section-class-methods" class="anchor"></a>Class methods</h2>
+          <p class="section-desc"><p>Accessor and augmentation methods for ordination classes from other packages</p></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="methods-ca.html">as_tbl_ord(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">reconstruct(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_u(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_v(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_inertia(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_conference(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_coord(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">augmentation_u(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">augmentation_v(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">augmentation_coord(<i>&lt;ca&gt;</i>)</a></code> </p>
@@ -367,24 +425,6 @@
           <p><code><a href="methods-svd.html">as_tbl_ord(<i>&lt;svd&gt;</i>)</a></code> <code><a href="methods-svd.html">reconstruct(<i>&lt;svd&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_u(<i>&lt;svd&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_v(<i>&lt;svd&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_inertia(<i>&lt;svd&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_coord(<i>&lt;svd&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_conference(<i>&lt;svd&gt;</i>)</a></code> <code><a href="methods-svd.html">augmentation_u(<i>&lt;svd&gt;</i>)</a></code> <code><a href="methods-svd.html">augmentation_v(<i>&lt;svd&gt;</i>)</a></code> <code><a href="methods-svd.html">augmentation_coord(<i>&lt;svd&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for singular value decompositions</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ordr.html">ordr</a></code> </p>
-        </td>
-        <td><p><strong>ordr</strong> package</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="reconstruct.html">reconstruct()</a></code> </p>
-        </td>
-        <td><p>Reconstruct data from an ordination</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tbl_ord.html">as_tbl_ord()</a></code> <code><a href="tbl_ord.html">make_tbl_ord()</a></code> <code><a href="tbl_ord.html">is_tbl_ord()</a></code> <code><a href="tbl_ord.html">is.tbl_ord()</a></code> <code><a href="tbl_ord.html">valid_tbl_ord()</a></code> <code><a href="tbl_ord.html">un_tbl_ord()</a></code> </p>
-        </td>
-        <td><p>A unified ordination object class</p></td>
       </tr>
     </tbody>
     </table>
@@ -393,7 +433,12 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section--ordr-package">**ordr** package</a></li>
+      <li><a href="#section-tidy-ordination">Tidy ordination</a></li>
+      <li><a href="#section-biplot-grammar">Biplot grammar</a></li>
+      <li><a href="#section-new-functions-classes-and-methods">New functions, classes, and methods</a></li>
+      <li><a href="#section-data-sets">Data sets</a></li>
+      <li><a href="#section-class-methods">Class methods</a></li>
     </ul>
   </div>
 </div>

@@ -32,16 +32,16 @@
 #' @template ref-jolliffe2002
 #'   
 
-#' @template ggbiplot-layers
+#' @template biplot-layers
 
-#' @name ggbiplot-spantree
+#' @name stat-biplot-spantree
 #' @inheritParams ggplot2::layer
 #' @param method Passed to [stats::dist()].
 #' @template param-stat
 #' @example inst/examples/euro-cmds-negate-spantree.r
 NULL
 
-#' @rdname ggbiplot-spantree
+#' @rdname stat-biplot-spantree
 #' @usage NULL
 #' @export
 StatSpantree <- ggproto(
@@ -81,7 +81,7 @@ StatSpantree <- ggproto(
   }
 )
 
-#' @rdname ggbiplot-spantree
+#' @rdname stat-biplot-spantree
 #' @export
 stat_spantree <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
@@ -106,7 +106,7 @@ stat_spantree <- function(
   )
 }
 
-#' @rdname ggbiplot-spantree
+#' @rdname stat-biplot-spantree
 #' @usage NULL
 #' @export
 StatUSpantree <- ggproto(
@@ -115,7 +115,7 @@ StatUSpantree <- ggproto(
   setup_data = setup_u_data
 )
 
-#' @rdname ggbiplot-spantree
+#' @rdname stat-biplot-spantree
 #' @usage NULL
 #' @export
 StatVSpantree <- ggproto(
@@ -124,7 +124,7 @@ StatVSpantree <- ggproto(
   setup_data = setup_v_data
 )
 
-#' @rdname ggbiplot-spantree
+#' @rdname stat-biplot-spantree
 #' @export
 stat_u_spantree <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
@@ -149,7 +149,7 @@ stat_u_spantree <- function(
   )
 }
 
-#' @rdname ggbiplot-spantree
+#' @rdname stat-biplot-spantree
 #' @export
 stat_v_spantree <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",

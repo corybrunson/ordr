@@ -4,15 +4,15 @@
 #'   [ggplot2::stat_ellipse()].
 #'   
 
-#' @template ggbiplot-layers
+#' @template biplot-layers
 
-#' @name ggbiplot-ellipse
+#' @name stat-biplot-ellipse
 #' @inheritParams ggplot2::stat_ellipse
 #' @template param-stat
 #' @example inst/examples/iris-prcomp-center-ellipse.r
 NULL
 
-#' @rdname ggbiplot-ellipse
+#' @rdname stat-biplot-ellipse
 #' @usage NULL
 #' @export
 StatUEllipse <- ggproto(
@@ -21,7 +21,7 @@ StatUEllipse <- ggproto(
   setup_data = setup_u_data
 )
 
-#' @rdname ggbiplot-ellipse
+#' @rdname stat-biplot-ellipse
 #' @usage NULL
 #' @export
 StatVEllipse <- ggproto(
@@ -30,7 +30,7 @@ StatVEllipse <- ggproto(
   setup_data = setup_v_data
 )
 
-#' @rdname ggbiplot-ellipse
+#' @rdname stat-biplot-ellipse
 #' @export
 stat_u_ellipse <- function(
   mapping = NULL, data = NULL, geom = "path", position = "identity",
@@ -59,7 +59,7 @@ stat_u_ellipse <- function(
   )
 }
 
-#' @rdname ggbiplot-ellipse
+#' @rdname stat-biplot-ellipse
 #' @export
 stat_v_ellipse <- function(
   mapping = NULL, data = NULL, geom = "path", position = "identity",
