@@ -133,8 +133,10 @@ iris_pca \%>\%
     color = NA, alpha = .25, stat = "u_ellipse"
   ) +
   geom_v_vector(color = "#444444") +
-  scale_color_brewer(type = "qual", palette = 2) +
-  scale_fill_brewer(type = "qual", palette = 2) +
+  scale_color_brewer(
+    type = "qual", palette = 2,
+    aesthetics = c("color", "fill")
+  ) +
   ggtitle(
     "Row-principal PCA biplot of Anderson iris data",
     "Overlaid with 99\% confidence disks"

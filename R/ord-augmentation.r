@@ -27,6 +27,7 @@
 #' @param data Passed to [generics::augment()]; currently ignored.
 #' @example inst/examples/bioenv-lm-isolines.r
 #' @example inst/examples/benthos-ca-augment-confer.r
+#' @example inst/examples/mtcars-kmeans-augment.r
 NULL
 
 #' @rdname augmentation

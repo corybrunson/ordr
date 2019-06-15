@@ -36,25 +36,26 @@ These methods extract data from, and attribute new data to,
 objects of class \code{"kmeans"} as returned by \code{\link[stats:kmeans]{stats::kmeans()}}.
 }
 \examples{
-
-x <- scale(mtcars)
-(m <- kmeans(x, 3))
-plot(x, col = m$cluster)
-points(m$centers, col = 1:3, pch = 8, cex = 2)
-
-(b <- as_tbl_ord(m))
-(d <- fortify(b))
-
-# biplot with noise extending (in each artificial dimension) to the
-# within-cluster (i.e. within-dimension) standard deviation
-# (not great but suggestive)
-coord_sdev <- dplyr::mutate(
-  augmentation_coord(b),
-  .sdev = sqrt(.withinss / .size)
-)$.sdev
-ggbiplot(b, aes(x = 1, y = 2, color = factor(.cluster))) +
-  geom_u_point(size = 3, shape = "triangle") +
-  #geom_u_point(position = position_jitter(coord_sdev[1], coord_sdev[2])) +
-  geom_v_vector() +
-  geom_v_text_radiate(aes(label = .name))
+# Interpreting (k-means) clusters as ordinations on the Motor Trends data
+mtcars \%>\%
+  scale() \%>\%
+  kmeans(centers = 3) \%>\%
+  as_tbl_ord() \%>\%
+  augment() \%>\%
+  print() -> mtcars_kmeans
+mtcars_kmeans \%>\%
+  augmentation_coord() \%>\%
+  transform(.sdev = sqrt(.withinss / .size)) \%>\%
+  print() -> mtcars_coord
+# discriminate between clusters 1 and 2
+mtcars_kmeans \%>\%
+  ggbiplot(color = factor(.cluster)) +
+  geom_jitter(stat = "u", aes(shape = .cluster), width = .2, height = .2) +
+  geom_v_vector(aes(color = `3`)) +
+  scale_color_distiller(type = "div", limits = c(-1, 1)) +
+  geom_v_text_radiate(aes(label = .name)) +
+  ggtitle(
+    "Performance and design variable loadings onto clusters 1 and 2",
+    "Color indicates loadings onto cluster 3"
+  )
 }
