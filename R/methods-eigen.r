@@ -6,7 +6,7 @@
 #' @name methods-eigen
 #' @include ord-tbl.r
 #' @template param-methods
-# @example inst/examples/ex-eigen.r (uses *igraph*)
+#' @example inst/examples/karate-igraph-eigen.r
 NULL
 
 #' @rdname methods-eigen
@@ -43,12 +43,14 @@ recover_inertia.eigen <- function(x) {
 
 #' @rdname methods-eigen
 #' @export
-recover_coord.eigen <- function(x) colnames(x[["vectors"]])
+recover_coord.eigen <- function(x) {
+  colnames(x[["vectors"]])[seq_along(recover_inertia(x))]
+}
 
 #' @rdname methods-eigen
 #' @export
 recover_conference.eigen <- function(x) {
-  # `base::eigen()` returns the matrix of eigenvectors
+  # `eigen()` returns the matrix of eigenvectors
   c(0, 0)
 }
 
