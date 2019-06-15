@@ -96,3 +96,48 @@ generics that require methods for each ordination class.
 retrieves their number, the rank of the ordination. The outer dimensions of
 the matrix decomposition are returned by \code{dim_u()} and \code{dim_v()}.
 }
+\examples{
+# Multidimensional scaling of country differences and regression of attributes
+# Reproduce Exhibit 4.2 in Greenacre (2010)
+country_differences \%>\%
+  cmdscale(k = 2) \%>\%
+  as_tbl_ord() \%>\%
+  print() -> differences_cmds
+differences_plot <- differences_cmds \%>\%
+  ggbiplot(aes(x = 1, y = 2, label = .name)) +
+  geom_v_text()
+differences_plot
+# Reproduce Exhibit 4.5 in Greenacre (2010)
+lm(country_attributes ~ get_u(differences_cmds)) \%>\%
+  as_tbl_ord() \%>\%
+  print() -> attributes_fit
+differences_plot +
+  geom_v_vector(data = attributes_fit) +
+  geom_v_text_radiate(data = attributes_fit, hjust = .3)
+# Confer PCA weights and inertia between cases and variables
+country_attributes \%>\%
+  prcomp() \%>\%
+  as_tbl_ord() \%>\%
+  print() -> attributes_pca
+# form biplot
+attributes_pca \%>\%
+  ggbiplot(
+    aes(label = .name),
+    sec.axes = "v", scale.factor = dim_v(attributes_pca)
+  ) +
+  theme_bw() + theme(panel.grid = element_blank()) +
+  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
+  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
+  geom_v_text_repel(aes(x = PC1, y = PC2), color = "darkred")
+# covariance biplot
+attributes_pca \%>\%
+  confer_inertia(0) \%>\%
+  ggbiplot(
+    aes(label = .name),
+    sec.axes = "u", scale.factor = dim_u(attributes_pca)
+  ) +
+  theme_bw() + theme(panel.grid = element_blank()) +
+  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
+  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
+  geom_v_text_repel(aes(x = PC1, y = PC2), color = "darkred")
+}
