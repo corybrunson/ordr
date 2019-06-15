@@ -25,7 +25,8 @@
 #' @inheritParams ggplot2::layer
 #' @template param-geom
 #' @template param-matrix
-#' @example inst/examples/ex-logratio.r
+#' @example inst/examples/arrests-logratio-polygon.r
+NULL
 
 #' @rdname ggbiplot-polygon
 #' @export
