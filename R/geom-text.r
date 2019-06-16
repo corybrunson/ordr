@@ -222,6 +222,12 @@ geom_biplot_label <- function(
   )
 }
 
+#' @importFrom ggrepel geom_text_repel geom_label_repel
+#' @export
+ggrepel::geom_text_repel
+#' @export
+ggrepel::geom_label_repel
+
 #' @rdname ggbiplot-text
 #' @export
 geom_u_text_repel <- function(
