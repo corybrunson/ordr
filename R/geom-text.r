@@ -5,7 +5,7 @@
 #'   the positions of the subjects or vectors. `geom_*_text_repel()` and
 #'   `geom_*_label_repel()` invoke functionality from the
 #'   **[ggrepel][ggrepel::ggrepel]** package.
-#' @template ggbiplot-layers
+#' @template biplot-layers
 
 #' @section Aesthetics:
 
@@ -28,7 +28,7 @@
 #' - `group`
 #' 
 
-#' @name ggbiplot-text
+#' @name geom-biplot-text
 #' @import ggplot2
 #' @importFrom ggrepel GeomTextRepel GeomLabelRepel
 #' @inheritParams ggplot2::layer
@@ -40,7 +40,7 @@
 #' @example inst/examples/benthos-ca-augment-confer.r
 NULL
 
-#' @rdname ggbiplot-text
+#' @rdname geom-biplot-text
 #' @export
 geom_u_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -75,7 +75,7 @@ geom_u_text <- function(
   )
 }
 
-#' @rdname ggbiplot-text
+#' @rdname geom-biplot-text
 #' @export
 geom_v_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -110,7 +110,7 @@ geom_v_text <- function(
   )
 }
 
-#' @rdname ggbiplot-text
+#' @rdname geom-biplot-text
 #' @export
 geom_biplot_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -146,7 +146,7 @@ geom_biplot_text <- function(
   )
 }
 
-#' @rdname ggbiplot-text
+#' @rdname geom-biplot-text
 #' @export
 geom_u_label <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -171,7 +171,7 @@ geom_u_label <- function(
   )
 }
 
-#' @rdname ggbiplot-text
+#' @rdname geom-biplot-text
 #' @export
 geom_v_label <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -196,7 +196,7 @@ geom_v_label <- function(
   )
 }
 
-#' @rdname ggbiplot-text
+#' @rdname geom-biplot-text
 #' @export
 geom_biplot_label <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -228,7 +228,7 @@ ggrepel::geom_text_repel
 #' @export
 ggrepel::geom_label_repel
 
-#' @rdname ggbiplot-text
+#' @rdname geom-biplot-text
 #' @export
 geom_u_text_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -253,7 +253,7 @@ geom_u_text_repel <- function(
   )
 }
 
-#' @rdname ggbiplot-text
+#' @rdname geom-biplot-text
 #' @export
 geom_v_text_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -278,7 +278,7 @@ geom_v_text_repel <- function(
   )
 }
 
-#' @rdname ggbiplot-text
+#' @rdname geom-biplot-text
 #' @export
 geom_biplot_text_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -304,7 +304,7 @@ geom_biplot_text_repel <- function(
   )
 }
 
-#' @rdname ggbiplot-text
+#' @rdname geom-biplot-text
 #' @export
 geom_u_label_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -329,7 +329,7 @@ geom_u_label_repel <- function(
   )
 }
 
-#' @rdname ggbiplot-text
+#' @rdname geom-biplot-text
 #' @export
 geom_v_label_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -354,7 +354,7 @@ geom_v_label_repel <- function(
   )
 }
 
-#' @rdname ggbiplot-text
+#' @rdname geom-biplot-text
 #' @export
 geom_biplot_label_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

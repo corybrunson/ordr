@@ -6,7 +6,7 @@
 #' @name methods-kmeans
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/ex-kmeans.r
+#' @example inst/examples/mtcars-kmeans-augment.r
 NULL
 
 #' @rdname methods-kmeans
@@ -49,7 +49,7 @@ augmentation_u.kmeans <- function(x) {
   } else {
     tibble(.name = .name)
   }
-  res$.cluster <- unname(x$cluster)
+  res$.cluster <- factor(unname(x$cluster))
   res
 }
 

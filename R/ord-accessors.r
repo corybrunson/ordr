@@ -26,6 +26,8 @@
 #' @template param-matrix
 #' @param align Logical; whether to align the matrix factors and coordinates
 #'   according to an `"align"` matrix attribute.
+#' @example inst/examples/country-cmds-lm.r
+#' @example inst/examples/country-prcomp-confer.r
 NULL
 
 #' @rdname accessors

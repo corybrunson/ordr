@@ -36,7 +36,7 @@
 #' aesthetics that are processed internally by [ggplot2::aes()].
 #' 
 
-#' @template ggbiplot-layers
+#' @template biplot-layers
 
 #' @name ggbiplot
 #' @import ggplot2

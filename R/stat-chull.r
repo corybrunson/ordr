@@ -5,15 +5,15 @@
 #'   The biplot extension restricts each matrix factor to its own hull.
 #'   
 
-#' @template ggbiplot-layers
+#' @template biplot-layers
 
-#' @name ggbiplot-chull
+#' @name stat-biplot-chull
 #' @inheritParams ggplot2::layer
 #' @template param-stat
 #' @example inst/examples/benthos-ca-augment-confer.r
 NULL
 
-#' @rdname ggbiplot-chull
+#' @rdname stat-biplot-chull
 #' @usage NULL
 #' @export
 StatChull <- ggproto(
@@ -26,7 +26,7 @@ StatChull <- ggproto(
   }
 )
 
-#' @rdname ggbiplot-chull
+#' @rdname stat-biplot-chull
 #' @export
 stat_chull <- function(
   mapping = NULL, data = NULL, geom = "polygon", position = "identity",
@@ -49,7 +49,7 @@ stat_chull <- function(
   )
 }
 
-#' @rdname ggbiplot-chull
+#' @rdname stat-biplot-chull
 #' @usage NULL
 #' @export
 StatUChull <- ggproto(
@@ -58,7 +58,7 @@ StatUChull <- ggproto(
   setup_data = setup_u_data
 )
 
-#' @rdname ggbiplot-chull
+#' @rdname stat-biplot-chull
 #' @usage NULL
 #' @export
 StatVChull <- ggproto(
@@ -67,7 +67,7 @@ StatVChull <- ggproto(
   setup_data = setup_v_data
 )
 
-#' @rdname ggbiplot-chull
+#' @rdname stat-biplot-chull
 #' @export
 stat_u_chull <- function(
   mapping = NULL, data = NULL, geom = "polygon", position = "identity",
@@ -90,7 +90,7 @@ stat_u_chull <- function(
   )
 }
 
-#' @rdname ggbiplot-chull
+#' @rdname stat-biplot-chull
 #' @export
 stat_v_chull <- function(
   mapping = NULL, data = NULL, geom = "polygon", position = "identity",

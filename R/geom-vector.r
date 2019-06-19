@@ -3,7 +3,7 @@
 
 #' @description `geom_*_vector()` renders arrows from the origin to the position
 #'   of each case or variable.
-#' @template ggbiplot-layers
+#' @template biplot-layers
 
 #' @section Aesthetics:
 
@@ -19,7 +19,7 @@
 #' - `group`
 #' 
 
-#' @name ggbiplot-vector
+#' @name geom-biplot-vector
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
@@ -30,7 +30,7 @@
 #' @example inst/examples/country-cmds-prcomp-negate.r
 NULL
 
-#' @rdname ggbiplot-vector
+#' @rdname geom-biplot-vector
 #' @usage NULL
 #' @export
 GeomVector <- ggproto(
@@ -66,7 +66,7 @@ GeomVector <- ggproto(
   }
 )
 
-#' @rdname ggbiplot-vector
+#' @rdname geom-biplot-vector
 #' @export
 geom_u_vector <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -91,7 +91,7 @@ geom_u_vector <- function(
   )
 }
 
-#' @rdname ggbiplot-vector
+#' @rdname geom-biplot-vector
 #' @export
 geom_v_vector <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -116,7 +116,7 @@ geom_v_vector <- function(
   )
 }
 
-#' @rdname ggbiplot-vector
+#' @rdname geom-biplot-vector
 #' @export
 geom_biplot_vector <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

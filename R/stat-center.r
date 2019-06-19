@@ -1,9 +1,9 @@
 #' @title Compute geometric centers and spreads for ordination factors
 #'
 
-#' @template ggbiplot-layers
+#' @template biplot-layers
 
-#' @name ggbiplot-center
+#' @name stat-biplot-center
 #' @inheritParams ggplot2::layer
 #' @param fun.data,fun.center,fun.min,fun.max,fun.args Functions and arguments
 #'   treated as in [ggplot2::stat_summary()], with `fun.center`, `fun.min`, and
@@ -13,7 +13,7 @@
 #' @example inst/examples/iris-princomp-center-star.r
 NULL
 
-#' @rdname ggbiplot-center
+#' @rdname stat-biplot-center
 #' @usage NULL
 #' @export
 StatCenter <- ggproto(
@@ -31,7 +31,7 @@ StatCenter <- ggproto(
   }
 )
 
-#' @rdname ggbiplot-center
+#' @rdname stat-biplot-center
 #' @export
 stat_center <- function(
   mapping = NULL, data = NULL, geom = "point", position = "identity",
@@ -64,7 +64,7 @@ stat_center <- function(
   )
 }
 
-#' @rdname ggbiplot-center
+#' @rdname stat-biplot-center
 #' @usage NULL
 #' @export
 StatUCenter <- ggproto(
@@ -73,7 +73,7 @@ StatUCenter <- ggproto(
   setup_data = setup_u_data
 )
 
-#' @rdname ggbiplot-center
+#' @rdname stat-biplot-center
 #' @usage NULL
 #' @export
 StatVCenter <- ggproto(
@@ -82,7 +82,7 @@ StatVCenter <- ggproto(
   setup_data = setup_v_data
 )
 
-#' @rdname ggbiplot-center
+#' @rdname stat-biplot-center
 #' @export
 stat_u_center <- function(
   mapping = NULL, data = NULL, geom = "point", position = "identity",
@@ -115,7 +115,7 @@ stat_u_center <- function(
   )
 }
 
-#' @rdname ggbiplot-center
+#' @rdname stat-biplot-center
 #' @export
 stat_v_center <- function(
   mapping = NULL, data = NULL, geom = "point", position = "identity",
@@ -148,7 +148,7 @@ stat_v_center <- function(
   )
 }
 
-#' @rdname ggbiplot-center
+#' @rdname stat-biplot-center
 #' @usage NULL
 #' @export
 StatStar <- ggproto(
@@ -170,7 +170,7 @@ StatStar <- ggproto(
   }
 )
 
-#' @rdname ggbiplot-center
+#' @rdname stat-biplot-center
 #' @export
 stat_star <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
@@ -199,7 +199,7 @@ stat_star <- function(
   )
 }
 
-#' @rdname ggbiplot-center
+#' @rdname stat-biplot-center
 #' @usage NULL
 #' @export
 StatUStar <- ggproto(
@@ -208,7 +208,7 @@ StatUStar <- ggproto(
   setup_data = setup_u_data
 )
 
-#' @rdname ggbiplot-center
+#' @rdname stat-biplot-center
 #' @usage NULL
 #' @export
 StatVStar <- ggproto(
@@ -217,7 +217,7 @@ StatVStar <- ggproto(
   setup_data = setup_v_data
 )
 
-#' @rdname ggbiplot-center
+#' @rdname stat-biplot-center
 #' @export
 stat_u_star <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
@@ -246,7 +246,7 @@ stat_u_star <- function(
   )
 }
 
-#' @rdname ggbiplot-center
+#' @rdname stat-biplot-center
 #' @export
 stat_v_star <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",

@@ -25,8 +25,8 @@ lra <- function(x) {
   d <- svd_ord(s)
   u <- d$u
   v <- d$v
-  colnames(u) <- paste0("LSV", 1:ncol(u))
-  colnames(v) <- paste0("LSV", 1:ncol(v))
+  colnames(u) <- paste0("LRSV", 1:ncol(u))
+  colnames(v) <- paste0("LRSV", 1:ncol(v))
   res <- list(
     sv = d$d,
     row.coords = u,

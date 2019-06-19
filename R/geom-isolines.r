@@ -2,7 +2,7 @@
 #'
 #' @description `geom_*_isolines()` renders isolines for a specified subject or
 #'   variable.
-#' @template ggbiplot-layers
+#' @template biplot-layers
 
 #' @section Aesthetics:
 
@@ -18,7 +18,7 @@
 #' - `group`
 #' 
 
-#' @name ggbiplot-isolines
+#' @name geom-biplot-isolines
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
@@ -37,7 +37,7 @@
 #' @example inst/examples/bioenv-glm-isolines.r
 NULL
 
-#' @rdname ggbiplot-isolines
+#' @rdname geom-biplot-isolines
 #' @usage NULL
 #' @export
 GeomTicks <- ggproto(
@@ -102,7 +102,7 @@ GeomTicks <- ggproto(
   }
 )
 
-#' @rdname ggbiplot-isolines
+#' @rdname geom-biplot-isolines
 #' @export
 geom_u_ticks <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -131,7 +131,7 @@ geom_u_ticks <- function(
   )
 }
 
-#' @rdname ggbiplot-isolines
+#' @rdname geom-biplot-isolines
 #' @export
 geom_v_ticks <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -160,7 +160,7 @@ geom_v_ticks <- function(
   )
 }
 
-#' @rdname ggbiplot-isolines
+#' @rdname geom-biplot-isolines
 #' @export
 geom_biplot_ticks <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -189,7 +189,7 @@ geom_biplot_ticks <- function(
   )
 }
 
-#' @rdname ggbiplot-isolines
+#' @rdname geom-biplot-isolines
 #' @usage NULL
 #' @export
 GeomIsolines <- ggproto(
@@ -253,7 +253,7 @@ GeomIsolines <- ggproto(
   }
 )
 
-#' @rdname ggbiplot-isolines
+#' @rdname geom-biplot-isolines
 #' @export
 geom_u_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -280,7 +280,7 @@ geom_u_isolines <- function(
   )
 }
 
-#' @rdname ggbiplot-isolines
+#' @rdname geom-biplot-isolines
 #' @export
 geom_v_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -307,7 +307,7 @@ geom_v_isolines <- function(
   )
 }
 
-#' @rdname ggbiplot-isolines
+#' @rdname geom-biplot-isolines
 #' @export
 geom_biplot_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

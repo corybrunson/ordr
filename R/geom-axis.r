@@ -3,7 +3,7 @@
 
 #' @description `geom_*_axis()` renders lines through the origin and the
 #'   position of each case or variable.
-#' @template ggbiplot-layers
+#' @template biplot-layers
 
 #' @section Aesthetics:
 
@@ -19,14 +19,14 @@
 #' - `group`
 #' 
 
-#' @name ggbiplot-axis
+#' @name geom-biplot-axis
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
 #' @template param-matrix
 NULL
 
-#' @rdname ggbiplot-axis
+#' @rdname geom-biplot-axis
 #' @usage NULL
 #' @export
 GeomAxis <- ggproto(
@@ -58,7 +58,7 @@ GeomAxis <- ggproto(
   }
 )
 
-#' @rdname ggbiplot-axis
+#' @rdname geom-biplot-axis
 #' @export
 geom_u_axis <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -81,7 +81,7 @@ geom_u_axis <- function(
   )
 }
 
-#' @rdname ggbiplot-axis
+#' @rdname geom-biplot-axis
 #' @export
 geom_v_axis <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -104,7 +104,7 @@ geom_v_axis <- function(
   )
 }
 
-#' @rdname ggbiplot-axis
+#' @rdname geom-biplot-axis
 #' @export
 geom_biplot_axis <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
