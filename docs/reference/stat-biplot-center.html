@@ -153,7 +153,8 @@ data. All objects will be fortified to produce a data frame. See
 <code><a href='fortify.html'>fortify()</a></code> for which variables will be created.</p>
 <p>A <code>function</code> will be called with a single argument,
 the plot data. The return value must be a <code>data.frame</code>, and
-will be used as the layer data.</p></td>
+will be used as the layer data. A <code>function</code> can be created
+from a <code>formula</code> (e.g. <code>~ head(.x, 10)</code>).</p></td>
     </tr>
     <tr>
       <th>geom</th>
@@ -181,12 +182,12 @@ the default plot specification, e.g. <code>borders()</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments passed to <code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/layer'>ggplot2::layer()</a></code>.</p></td>
+      <td><p>Additional arguments passed to <code><a href='https://ggplot2.tidyverse.org/reference/layer.html'>ggplot2::layer()</a></code>.</p></td>
     </tr>
     <tr>
       <th>fun.data, fun.center, fun.min, fun.max, fun.args</th>
       <td><p>Functions and arguments
-treated as in <code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/stat_summary'>ggplot2::stat_summary()</a></code>, with <code>fun.center</code>, <code>fun.min</code>, and
+treated as in <code><a href='https://ggplot2.tidyverse.org/reference/stat_summary.html'>ggplot2::stat_summary()</a></code>, with <code>fun.center</code>, <code>fun.min</code>, and
 <code>fun.max</code> behaving as <code>fun.y</code>, <code>fun.ymin</code>, and <code>fun.ymax</code>.</p></td>
     </tr>
     </table>
@@ -198,7 +199,7 @@ treated as in <code><a href='https://www.rdocumentation.org/packages/ggplot2/top
     <h2 class="hasAnchor" id="biplot-layers"><a class="anchor" href="#biplot-layers"></a>Biplot layers</h2>
 
     
-    <p><code><a href='ggbiplot.html'>ggbiplot()</a></code> uses <code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/fortify'>ggplot2::fortify()</a></code> internally to produce a single data
+    <p><code><a href='ggbiplot.html'>ggbiplot()</a></code> uses <code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>ggplot2::fortify()</a></code> internally to produce a single data
 frame with a <code>.matrix</code> column distinguishing the subjects (<code>"u"</code>) and
 variables (<code>"v"</code>). The stat layers <code><a href='biplot-matrix.html'>stat_u()</a></code> and <code><a href='biplot-matrix.html'>stat_v()</a></code> simply filter
 the data frame to one of these two.</p>
@@ -274,20 +275,20 @@ e.g. \(U\) for points and \(V\) for arrows.</p>
 #&gt; # U: [ 150 x 4 | 1 ]
 #&gt;   Comp.1 Comp.2  Comp.3 ... |   species
 #&gt;                             |   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  
-#&gt; </span><span style='color: #555555;'>1</span><span>  -</span><span style='color: #BB0000;'>2.26</span><span> -</span><span style='color: #BB0000;'>0.480</span><span>  0.128      | </span><span style='color: #555555;'>1</span><span> setosa 
-#&gt; </span><span style='color: #555555;'>2</span><span>  -</span><span style='color: #BB0000;'>2.08</span><span>  0.674  0.235  ... | </span><span style='color: #555555;'>2</span><span> setosa 
-#&gt; </span><span style='color: #555555;'>3</span><span>  -</span><span style='color: #BB0000;'>2.36</span><span>  0.342 -</span><span style='color: #BB0000;'>0.044</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>     | </span><span style='color: #555555;'>3</span><span> setosa 
-#&gt; </span><span style='color: #555555;'>4</span><span>  -</span><span style='color: #BB0000;'>2.30</span><span>  0.597 -</span><span style='color: #BB0000;'>0.091</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>     | </span><span style='color: #555555;'>4</span><span> setosa 
-#&gt; </span><span style='color: #555555;'>5</span><span>  -</span><span style='color: #BB0000;'>2.39</span><span> -</span><span style='color: #BB0000;'>0.647</span><span> -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>     | </span><span style='color: #555555;'>5</span><span> setosa 
+#&gt; </span><span style='color: #555555;'>1</span><span>  -</span><span style='color: #BB0000;'>2.26</span><span>  0.480  0.128      | </span><span style='color: #555555;'>1</span><span> setosa 
+#&gt; </span><span style='color: #555555;'>2</span><span>  -</span><span style='color: #BB0000;'>2.08</span><span> -</span><span style='color: #BB0000;'>0.674</span><span>  0.235  ... | </span><span style='color: #555555;'>2</span><span> setosa 
+#&gt; </span><span style='color: #555555;'>3</span><span>  -</span><span style='color: #BB0000;'>2.36</span><span> -</span><span style='color: #BB0000;'>0.342</span><span> -</span><span style='color: #BB0000;'>0.044</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>     | </span><span style='color: #555555;'>3</span><span> setosa 
+#&gt; </span><span style='color: #555555;'>4</span><span>  -</span><span style='color: #BB0000;'>2.30</span><span> -</span><span style='color: #BB0000;'>0.597</span><span> -</span><span style='color: #BB0000;'>0.091</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>     | </span><span style='color: #555555;'>4</span><span> setosa 
+#&gt; </span><span style='color: #555555;'>5</span><span>  -</span><span style='color: #BB0000;'>2.39</span><span>  0.647 -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>     | </span><span style='color: #555555;'>5</span><span> setosa 
 #&gt; </span><span style='color: #555555;'># … with 145 more rows</span><span>
 #&gt; # 
 #&gt; # V: [ 4 x 4 | 1 ]
-#&gt;   Comp.1  Comp.2 Comp.3 ... |   measure     
-#&gt;                             |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       
-#&gt; </span><span style='color: #555555;'>1</span><span>  0.521 -</span><span style='color: #BB0000;'>0.377</span><span>   0.720     | </span><span style='color: #555555;'>1</span><span> sepal length
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.269</span><span> -</span><span style='color: #BB0000;'>0.923</span><span>  -</span><span style='color: #BB0000;'>0.244</span><span> ... | </span><span style='color: #555555;'>2</span><span> sepal width 
-#&gt; </span><span style='color: #555555;'>3</span><span>  0.580 -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.142</span><span>     | </span><span style='color: #555555;'>3</span><span> petal length
-#&gt; </span><span style='color: #555555;'>4</span><span>  0.565 -</span><span style='color: #BB0000;'>0.066</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>0.634</span><span>     | </span><span style='color: #555555;'>4</span><span> petal width </div><div class='input'><span class='no'>iris_pca</span> <span class='kw'>%&gt;%</span>
+#&gt;   Comp.1 Comp.2 Comp.3 ... |   measure     
+#&gt;                            |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       
+#&gt; </span><span style='color: #555555;'>1</span><span>  0.521 0.377   0.720     | </span><span style='color: #555555;'>1</span><span> sepal length
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.269</span><span> 0.923  -</span><span style='color: #BB0000;'>0.244</span><span> ... | </span><span style='color: #555555;'>2</span><span> sepal width 
+#&gt; </span><span style='color: #555555;'>3</span><span>  0.580 0.024</span><span style='text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.142</span><span>     | </span><span style='color: #555555;'>3</span><span> petal length
+#&gt; </span><span style='color: #555555;'>4</span><span>  0.565 0.066</span><span style='text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>0.634</span><span>     | </span><span style='color: #555555;'>4</span><span> petal width </div><div class='input'><span class='no'>iris_pca</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>), <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>3</span>) +
   <span class='fu'>theme_bw</span>() +
   <span class='fu'>scale_color_brewer</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>2</span>) +

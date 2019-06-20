@@ -142,8 +142,8 @@ geom_biplot_vector <- function(
 }
 
 default_arrow <- grid::arrow(
-  angle = 20,
-  length = unit(.03, "native"),
+  angle = 30,
+  length = unit(.02, "native"),
   ends = "last",
-  type = "closed"
+  type = "open"
 )

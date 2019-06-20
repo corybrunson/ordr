@@ -103,7 +103,7 @@ by the various geom_*_*() layers." />
 
     <div class="ref-description">
     
-    <p>These stats merely tell <code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot2::ggplot()</a></code> which factor of an
+    <p>These stats merely tell <code><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot2::ggplot()</a></code> which factor of an
 ordination to pull data from for a plot layer. They are invoked internally
 by the various <code>geom_*_*()</code> layers.</p>
     
@@ -136,7 +136,8 @@ data. All objects will be fortified to produce a data frame. See
 <code><a href='fortify.html'>fortify()</a></code> for which variables will be created.</p>
 <p>A <code>function</code> will be called with a single argument,
 the plot data. The return value must be a <code>data.frame</code>, and
-will be used as the layer data.</p></td>
+will be used as the layer data. A <code>function</code> can be created
+from a <code>formula</code> (e.g. <code>~ head(.x, 10)</code>).</p></td>
     </tr>
     <tr>
       <th>geom</th>
@@ -149,7 +150,7 @@ a call to a position adjustment function.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments passed to <code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/layer'>ggplot2::layer()</a></code>.</p></td>
+      <td><p>Additional arguments passed to <code><a href='https://ggplot2.tidyverse.org/reference/layer.html'>ggplot2::layer()</a></code>.</p></td>
     </tr>
     <tr>
       <th>show.legend</th>
@@ -175,7 +176,7 @@ the default plot specification, e.g. <code>borders()</code>.</p></td>
     <h2 class="hasAnchor" id="biplot-layers"><a class="anchor" href="#biplot-layers"></a>Biplot layers</h2>
 
     
-    <p><code><a href='ggbiplot.html'>ggbiplot()</a></code> uses <code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/fortify'>ggplot2::fortify()</a></code> internally to produce a single data
+    <p><code><a href='ggbiplot.html'>ggbiplot()</a></code> uses <code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>ggplot2::fortify()</a></code> internally to produce a single data
 frame with a <code>.matrix</code> column distinguishing the subjects (<code>"u"</code>) and
 variables (<code>"v"</code>). The stat layers <code>stat_u()</code> and <code>stat_v()</code> simply filter
 the data frame to one of these two.</p>

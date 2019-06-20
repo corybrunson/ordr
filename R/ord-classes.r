@@ -6,13 +6,13 @@
 #' @include ord-tbl.r
 #' @inheritParams base::eigen
 #' @inheritParams base::svd
+#' @example inst/examples/karate-igraph-eigen.r
 NULL
-# -+-INSTEAD OF ADDING `x` AS AN ATTRIBUTE, ASSIGN ROW AND COLUMN NAMES-+-
 
 #' @rdname classes
 #' @export
-eigen_ord <- function(x, EISPACK = FALSE) {
-  res <- eigen(x = x, only.values = FALSE, EISPACK = EISPACK)
+eigen_ord <- function(x, symmetric = isSymmetric.matrix(x)) {
+  res <- eigen(x = x, only.values = FALSE, EISPACK = FALSE)
   rownames(res$vectors) <- rownames(x)
   colnames(res$vectors) <- paste0("EV", seq_along(res$values))
   class(res) <- "eigen"
@@ -21,8 +21,8 @@ eigen_ord <- function(x, EISPACK = FALSE) {
 
 #' @rdname classes
 #' @export
-svd_ord <- function(x, LINPACK = FALSE) {
-  res <- svd(x = x, nu = min(dim(x)), nv = min(dim(x)), LINPACK = LINPACK)
+svd_ord <- function(x, nu = min(dim(x)), nv = min(dim(x))) {
+  res <- svd(x = x, nu = nu, nv = nv, LINPACK = FALSE)
   rownames(res$u) <- rownames(x)
   colnames(res$u) <- paste0("SV", seq_along(res$d))
   rownames(res$v) <- colnames(x)

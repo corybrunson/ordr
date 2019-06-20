@@ -149,20 +149,20 @@ the primary axes; ignored if <code>sec.axes</code> is not specified.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments passed to <code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot2::ggplot()</a></code> or to
-<code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>ggplot2::aes()</a></code>.</p></td>
+      <td><p>Additional arguments passed to <code><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot2::ggplot()</a></code> or to
+<code><a href='https://ggplot2.tidyverse.org/reference/aes.html'>ggplot2::aes()</a></code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>ggbiplot()</code> produces a <a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a> object from a <code>tbl_ord</code>
+    <p><code>ggbiplot()</code> produces a <a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a> object from a <code>tbl_ord</code>
 object <code>ordination</code>. The baseline object is the default unadorned
 <code>"ggplot"</code>-class object <code>p</code> with the following differences from what
-<code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot2::ggplot()</a></code> returns:</p><ul>
+<code><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot2::ggplot()</a></code> returns:</p><ul>
 <li><p><code>p$mapping</code> is augmented with <code>.matrix = .matrix</code>, which expects either
 <code>.matrix = "u"</code> or <code>.matrix = "v"</code> from the biplot.</p></li>
-<li><p><code>p$coordinates</code> is defaulted to <code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/coord_fixed'>ggplot2::coord_equal()</a></code> in order to
+<li><p><code>p$coordinates</code> is defaulted to <code><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>ggplot2::coord_equal()</a></code> in order to
 faithfully render the geometry of an ordination.</p></li>
 <li><p>When <code>x</code> or <code>y</code> are mapped to coordinates of <code>ordination</code>, and if
 <code>axis.percents</code> is <code>TRUE</code>, <code>p$labels$x</code> or <code>p$labels$y</code> are defaulted to the
@@ -177,12 +177,12 @@ ordination.</p>
 <p><code>ord_aes()</code> is a convenience function that generates a full-rank set of
 coordinate aesthetics <code>.coord1</code>, <code>.coord2</code>, etc. mapped to the
 shared coordinates of the ordination object, along with any additional
-aesthetics that are processed internally by <code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>ggplot2::aes()</a></code>.</p>
+aesthetics that are processed internally by <code><a href='https://ggplot2.tidyverse.org/reference/aes.html'>ggplot2::aes()</a></code>.</p>
     
     <h2 class="hasAnchor" id="biplot-layers"><a class="anchor" href="#biplot-layers"></a>Biplot layers</h2>
 
     
-    <p><code>ggbiplot()</code> uses <code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/fortify'>ggplot2::fortify()</a></code> internally to produce a single data
+    <p><code>ggbiplot()</code> uses <code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>ggplot2::fortify()</a></code> internally to produce a single data
 frame with a <code>.matrix</code> column distinguishing the subjects (<code>"u"</code>) and
 variables (<code>"v"</code>). The stat layers <code><a href='biplot-matrix.html'>stat_u()</a></code> and <code><a href='biplot-matrix.html'>stat_v()</a></code> simply filter
 the data frame to one of these two.</p>
@@ -193,7 +193,7 @@ e.g. \(U\) for points and \(V\) for arrows.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot2-package'>ggplot2::ggplot2()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://ggplot2.tidyverse.org/reference/ggplot2-package.html'>ggplot2::ggplot2()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -246,20 +246,20 @@ e.g. \(U\) for points and \(V\) for arrows.</p>
 #&gt; # U: [ 150 x 4 | 1 ]
 #&gt;   Comp.1 Comp.2  Comp.3 ... |   species
 #&gt;                             |   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  
-#&gt; </span><span style='color: #555555;'>1</span><span>  -</span><span style='color: #BB0000;'>2.68</span><span> -</span><span style='color: #BB0000;'>0.319</span><span> -</span><span style='color: #BB0000;'>0.027</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>     | </span><span style='color: #555555;'>1</span><span> setosa 
-#&gt; </span><span style='color: #555555;'>2</span><span>  -</span><span style='color: #BB0000;'>2.71</span><span>  0.177 -</span><span style='color: #BB0000;'>0.210</span><span>  ... | </span><span style='color: #555555;'>2</span><span> setosa 
-#&gt; </span><span style='color: #555555;'>3</span><span>  -</span><span style='color: #BB0000;'>2.89</span><span>  0.145  0.017</span><span style='text-decoration: underline;'>9</span><span>     | </span><span style='color: #555555;'>3</span><span> setosa 
-#&gt; </span><span style='color: #555555;'>4</span><span>  -</span><span style='color: #BB0000;'>2.75</span><span>  0.318  0.031</span><span style='text-decoration: underline;'>6</span><span>     | </span><span style='color: #555555;'>4</span><span> setosa 
-#&gt; </span><span style='color: #555555;'>5</span><span>  -</span><span style='color: #BB0000;'>2.73</span><span> -</span><span style='color: #BB0000;'>0.327</span><span>  0.090</span><span style='text-decoration: underline;'>1</span><span>     | </span><span style='color: #555555;'>5</span><span> setosa 
+#&gt; </span><span style='color: #555555;'>1</span><span>  -</span><span style='color: #BB0000;'>2.68</span><span>  0.319  0.027</span><span style='text-decoration: underline;'>9</span><span>     | </span><span style='color: #555555;'>1</span><span> setosa 
+#&gt; </span><span style='color: #555555;'>2</span><span>  -</span><span style='color: #BB0000;'>2.71</span><span> -</span><span style='color: #BB0000;'>0.177</span><span>  0.210  ... | </span><span style='color: #555555;'>2</span><span> setosa 
+#&gt; </span><span style='color: #555555;'>3</span><span>  -</span><span style='color: #BB0000;'>2.89</span><span> -</span><span style='color: #BB0000;'>0.145</span><span> -</span><span style='color: #BB0000;'>0.017</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>     | </span><span style='color: #555555;'>3</span><span> setosa 
+#&gt; </span><span style='color: #555555;'>4</span><span>  -</span><span style='color: #BB0000;'>2.75</span><span> -</span><span style='color: #BB0000;'>0.318</span><span> -</span><span style='color: #BB0000;'>0.031</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>     | </span><span style='color: #555555;'>4</span><span> setosa 
+#&gt; </span><span style='color: #555555;'>5</span><span>  -</span><span style='color: #BB0000;'>2.73</span><span>  0.327 -</span><span style='color: #BB0000;'>0.090</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>     | </span><span style='color: #555555;'>5</span><span> setosa 
 #&gt; </span><span style='color: #555555;'># … with 145 more rows</span><span>
 #&gt; # 
 #&gt; # V: [ 4 x 4 | 1 ]
 #&gt;    Comp.1  Comp.2  Comp.3 ... |   measure     
 #&gt;                               |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       
-#&gt; </span><span style='color: #555555;'>1</span><span>  0.361  -</span><span style='color: #BB0000;'>0.657</span><span>  -</span><span style='color: #BB0000;'>0.582</span><span>      | </span><span style='color: #555555;'>1</span><span> sepal length
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.084</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.730</span><span>   0.598  ... | </span><span style='color: #555555;'>2</span><span> sepal width 
-#&gt; </span><span style='color: #555555;'>3</span><span>  0.857   0.173   0.076</span><span style='text-decoration: underline;'>2</span><span>     | </span><span style='color: #555555;'>3</span><span> petal length
-#&gt; </span><span style='color: #555555;'>4</span><span>  0.358   0.075</span><span style='text-decoration: underline;'>5</span><span>  0.546      | </span><span style='color: #555555;'>4</span><span> petal width </div><div class='input'><span class='no'>iris_pca</span> <span class='kw'>%&gt;%</span>
+#&gt; </span><span style='color: #555555;'>1</span><span>  0.361   0.657   0.582      | </span><span style='color: #555555;'>1</span><span> sepal length
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.084</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>  0.730  -</span><span style='color: #BB0000;'>0.598</span><span>  ... | </span><span style='color: #555555;'>2</span><span> sepal width 
+#&gt; </span><span style='color: #555555;'>3</span><span>  0.857  -</span><span style='color: #BB0000;'>0.173</span><span>  -</span><span style='color: #BB0000;'>0.076</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>     | </span><span style='color: #555555;'>3</span><span> petal length
+#&gt; </span><span style='color: #555555;'>4</span><span>  0.358  -</span><span style='color: #BB0000;'>0.075</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.546</span><span>      | </span><span style='color: #555555;'>4</span><span> petal width </div><div class='input'><span class='no'>iris_pca</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>ggbiplot</span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>), <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>3</span>) +
   <span class='fu'>theme_bw</span>() +
   <span class='fu'>scale_color_brewer</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>2</span>) +
@@ -274,27 +274,27 @@ e.g. \(U\) for points and \(V\) for arrows.</p>
   <span class='fu'><a href='masks.html'>logisticSVD</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_lsvd</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lsvd': (17 x 2) x (13 x 2)'
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_lsvd</span></div><div class='output co'>#&gt; <span class='message'>rARPACK must be installed to use partial_decomp</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lsvd': (17 x 2) x (13 x 2)'
 #&gt; # 2 coordinates: LSC1 and LSC2
 #&gt; # 
 #&gt; # U: [ 17 x 2 | 1 ]
 #&gt;    LSC1   LSC2 |   .name     
 #&gt;                |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     
-#&gt; </span><span style='color: #555555;'>1</span><span>  29.6 -</span><span style='color: #BB0000;'>27.3</span><span>  | </span><span style='color: #555555;'>1</span><span> Seymour   
-#&gt; </span><span style='color: #555555;'>2</span><span>  29.6 -</span><span style='color: #BB0000;'>27.3</span><span>  | </span><span style='color: #555555;'>2</span><span> Baltra    
-#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>39.4</span><span>  22.9  | </span><span style='color: #555555;'>3</span><span> Isabella  
-#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>39.9</span><span>  40.6  | </span><span style='color: #555555;'>4</span><span> Fernandina
-#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>20.2</span><span>   3.50 | </span><span style='color: #555555;'>5</span><span> Santiago  
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>29.6</span><span> -</span><span style='color: #BB0000;'>27.3</span><span>  | </span><span style='color: #555555;'>1</span><span> Seymour   
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>29.6</span><span> -</span><span style='color: #BB0000;'>27.3</span><span>  | </span><span style='color: #555555;'>2</span><span> Baltra    
+#&gt; </span><span style='color: #555555;'>3</span><span>  39.4  22.9  | </span><span style='color: #555555;'>3</span><span> Isabella  
+#&gt; </span><span style='color: #555555;'>4</span><span>  39.9  40.6  | </span><span style='color: #555555;'>4</span><span> Fernandina
+#&gt; </span><span style='color: #555555;'>5</span><span>  20.2   3.50 | </span><span style='color: #555555;'>5</span><span> Santiago  
 #&gt; </span><span style='color: #555555;'># … with 12 more rows</span><span>
 #&gt; # 
 #&gt; # V: [ 13 x 2 | 2 ]
-#&gt;      LSC1   LSC2 |   .name                       .mu
-#&gt;                  |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.233</span><span>   0.231 | </span><span style='color: #555555;'>1</span><span> Large ground finch         9.02
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.223</span><span>  -</span><span style='color: #BB0000;'>0.216</span><span> | </span><span style='color: #555555;'>2</span><span> Medium ground finch        5.97
-#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.164</span><span>  -</span><span style='color: #BB0000;'>0.318</span><span> | </span><span style='color: #555555;'>3</span><span> Small ground finch         9.86
-#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>0.078</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>  0.548 | </span><span style='color: #555555;'>4</span><span> Sharp-beaked ground finch  6.88
-#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.240</span><span>  -</span><span style='color: #BB0000;'>0.451</span><span> | </span><span style='color: #555555;'>5</span><span> Cactus ground finch        5.85
+#&gt;     LSC1   LSC2 |   .name                       .mu
+#&gt;                 |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> 0.233   0.231 | </span><span style='color: #555555;'>1</span><span> Large ground finch         9.02
+#&gt; </span><span style='color: #555555;'>2</span><span> 0.223  -</span><span style='color: #BB0000;'>0.216</span><span> | </span><span style='color: #555555;'>2</span><span> Medium ground finch        5.97
+#&gt; </span><span style='color: #555555;'>3</span><span> 0.164  -</span><span style='color: #BB0000;'>0.318</span><span> | </span><span style='color: #555555;'>3</span><span> Small ground finch         9.86
+#&gt; </span><span style='color: #555555;'>4</span><span> 0.078</span><span style='text-decoration: underline;'>7</span><span>  0.548 | </span><span style='color: #555555;'>4</span><span> Sharp-beaked ground finch  6.88
+#&gt; </span><span style='color: #555555;'>5</span><span> 0.240  -</span><span style='color: #BB0000;'>0.451</span><span> | </span><span style='color: #555555;'>5</span><span> Cactus ground finch        5.85
 #&gt; </span><span style='color: #555555;'># … with 8 more rows</span><span></div><div class='input'><span class='no'>finches_lsvd</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>ggbiplot</span>(
     <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>LSC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>LSC2</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
