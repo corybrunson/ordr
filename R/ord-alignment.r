@@ -164,6 +164,14 @@ negate_to <- function(x, y, .matrix) {
 
 #' @rdname alignment
 #' @export
+negate_to_nonneg_orthant <- function(x, .matrix) {
+  d <- dim(x)
+  y <- matrix(1, d, d)
+  negate_to(x, y, .matrix)
+}
+
+#' @rdname alignment
+#' @export
 permutation_to <- function(x, y, abs.values = FALSE) {
   stopifnot(nrow(x) == nrow(y))
   d <- min(ncol(x), ncol(y))

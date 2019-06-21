@@ -126,6 +126,9 @@ get_factor <- function(x, .matrix, align = TRUE) {
 #' @rdname accessors
 #' @export
 as.matrix.tbl_ord <- function(x, ..., .matrix, align = TRUE) {
+  .matrix <- match_factor(.matrix)
+  if (.matrix == "uv")
+    stop("Can only coerce one factor ('u' or 'v') to a matrix.")
   get_factor(x, .matrix = .matrix, align = align)
 }
 

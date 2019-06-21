@@ -9,6 +9,7 @@
 \alias{rotate}
 \alias{negation_to}
 \alias{negate_to}
+\alias{negate_to_nonneg_orthant}
 \alias{permutation_to}
 \alias{permute_to}
 \alias{rotation_to}
@@ -29,6 +30,8 @@ rotate(x, rotation = NULL)
 negation_to(x, y)
 
 negate_to(x, y, .matrix)
+
+negate_to_nonneg_orthant(x, .matrix)
 
 permutation_to(x, y, abs.values = FALSE)
 
