@@ -77,16 +77,16 @@ ggbiplot <- function(
   }
   
   # fortify `ordination` if necessary
-  ordination <- fortify(ordination, include = "all")
+  if (! is.null(ordination)) ordination <- fortify(ordination, include = "all")
   
   # augment `mapping`, if necessary, with default coordinates
   mapping <- ensure_xy_aes(ordination, mapping)
   
   # scale 'U' or 'V' as indicated by `scale_u` and `scale_v`
-  if (! is.null(scale_u)) {
+  if (! is.null(scale_u) && ! is.null(ordination)) {
     ordination <- scale_ord(ordination, "u", mapping, scale_u)
   }
-  if (! is.null(scale_v)) {
+  if (! is.null(scale_v) && ! is.null(ordination)) {
     ordination <- scale_ord(ordination, "v", mapping, scale_v)
   }
   
@@ -100,7 +100,7 @@ ggbiplot <- function(
     }
     pri.axes <- setdiff(c("u", "v"), sec.axes)
     
-    if (is.null(scale.factor)) {
+    if (is.null(scale.factor) && ! is.null(ordination)) {
       ps_lim <- lapply(c(pri.axes, sec.axes), function(.m) {
         apply(
           # recover coordinates stored as attribute during `fortify()`
@@ -111,7 +111,7 @@ ggbiplot <- function(
       scale.factor <- min(ps_lim[[1]] / ps_lim[[2]])
     }
     
-    ordination <- dplyr::mutate_at(
+    if (! is.null(ordination)) ordination <- dplyr::mutate_at(
       ordination,
       dplyr::vars(get_coord(ordination)),
       dplyr::funs(ifelse(ordination$.matrix == sec.axes, . * scale.factor, .))
@@ -126,10 +126,12 @@ ggbiplot <- function(
     environment = parent.frame(),
     ...
   )
-  # .matrix aesthetic indicating whether to plot cases or variables
-  .matrix_aes <- list(.matrix = rlang::quo(!! rlang::sym(".matrix")))
-  class(.matrix_aes) <- "uneval"
-  p$mapping <- c(p$mapping, .matrix_aes)
+  # `.matrix` aesthetic indicating whether to plot cases or variables
+  if (! is.null(ordination)) {
+    .matrix_aes <- list(.matrix = rlang::quo(!! rlang::sym(".matrix")))
+    class(.matrix_aes) <- "uneval"
+    p$mapping <- c(p$mapping, .matrix_aes)
+  }
   
   # if `sec.axes` is specified, then add secondary axes
   if (! is.null(sec.axes)) {
@@ -163,6 +165,7 @@ ggbiplot <- function(
 # interpret numerical x and y coordinates as coordinates;
 # assume first two coordinates if none are provided
 ensure_xy_aes <- function(ordination, mapping) {
+  if (is.null(ordination)) return(aes())
   coords <- get_coord(ordination)
   coord_vars <- syms(coords)
   if (is.null(mapping$y)) {
