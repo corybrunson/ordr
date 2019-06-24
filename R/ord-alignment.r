@@ -165,8 +165,8 @@ negate_to <- function(x, y, .matrix) {
 #' @rdname alignment
 #' @export
 negate_to_nonneg_orthant <- function(x, .matrix) {
-  d <- dim(x)
-  y <- matrix(1, d, d)
+  u <- get_factor(x, .matrix = .matrix)
+  y <- matrix(1, nrow(u), ncol(u))
   negate_to(x, y, .matrix)
 }
 
