@@ -112,7 +112,10 @@ arrests_lra \%>\%
   geom_u_text(color = "darkgreen", size = 3, alpha = .5) +
   geom_v_polygon(fill = NA, linetype = "dashed", color = "brown4") +
   geom_v_point(color = "brown4") +
-  geom_v_text_repel(color = "brown4", fontface = "bold") +
+  geom_v_text(
+    color = "brown4", fontface = "bold",
+    hjust = "outward", vjust = "outward"
+  ) +
   ggtitle(
     "Log-ratio analysis of violent crime arrest rates",
     "United States, 1973"

@@ -189,7 +189,10 @@ attributes_pca \%>\%
   theme_bw() + theme(panel.grid = element_blank()) +
   geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
   geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
-  geom_v_text_repel(aes(x = PC1, y = PC2), color = "darkred")
+  geom_v_text(
+    aes(x = PC1, y = PC2),
+    color = "darkred", hjust = "outward", vjust = "outward"
+  )
 # covariance biplot
 attributes_pca \%>\%
   confer_inertia(0) \%>\%
@@ -223,7 +226,10 @@ benthos_ca \%>\%
   geom_u_vector(color = "brown", arrow = NULL) +
   geom_u_point(aes(size = mass), color = "brown", shape = 17) +
   scale_size_continuous(range = c(1, 4), guide = "none") +
-  geom_u_text(stat = "chull", color = "brown", nudge_x = .075, nudge_y = .05) +
+  geom_u_text(
+    stat = "chull",
+    color = "brown", hjust = "outward", vjust = "outward"
+  ) +
   geom_v_point(color = "darkgreen") +
   geom_v_text_repel(color = "darkgreen", min.segment.length = 2)
 }

@@ -56,7 +56,10 @@ attributes_pca \%>\%
   theme_bw() + theme(panel.grid = element_blank()) +
   geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
   geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
-  geom_v_text_repel(aes(x = PC1, y = PC2), color = "darkred")
+  geom_v_text(
+    aes(x = PC1, y = PC2),
+    color = "darkred", hjust = "outward", vjust = "outward"
+  )
 # covariance biplot
 attributes_pca \%>\%
   confer_inertia(0) \%>\%

@@ -20,6 +20,9 @@ benthos_ca %>%
   geom_u_vector(color = "brown", arrow = NULL) +
   geom_u_point(aes(size = mass), color = "brown", shape = 17) +
   scale_size_continuous(range = c(1, 4), guide = "none") +
-  geom_u_text(stat = "chull", color = "brown", nudge_x = .075, nudge_y = .05) +
+  geom_u_text(
+    stat = "chull",
+    color = "brown", hjust = "outward", vjust = "outward"
+  ) +
   geom_v_point(color = "darkgreen") +
   geom_v_text_repel(color = "darkgreen", min.segment.length = 2)
