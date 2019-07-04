@@ -88,3 +88,14 @@ bind_cols_u <- function(.data, ...) bind_cols_factor(.data, ..., .matrix = "u")
 #' @rdname dplyr-verbs
 #' @export
 bind_cols_v <- function(.data, ...) bind_cols_factor(.data, ..., .matrix = "v")
+
+left_join_factor <- function(.data, ..., .matrix) {
+  att <- bind_cols(annotation_factor(.data, .matrix = .matrix), ...)
+  set_annotation_factor(.data, att, .matrix = .matrix)
+}
+#' @rdname dplyr-verbs
+#' @export
+left_join_u <- function(.data, ...) left_join_factor(.data, ..., .matrix = "u")
+#' @rdname dplyr-verbs
+#' @export
+left_join_v <- function(.data, ...) left_join_factor(.data, ..., .matrix = "v")

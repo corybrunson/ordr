@@ -15,6 +15,8 @@
 \alias{transmute_v}
 \alias{bind_cols_u}
 \alias{bind_cols_v}
+\alias{left_join_u}
+\alias{left_join_v}
 \title{\strong{dplyr} verbs for \code{tbl_ord} factors}
 \usage{
 pull_factor(.data, var = -1, .matrix)
@@ -42,6 +44,10 @@ transmute_v(.data, ...)
 bind_cols_u(.data, ...)
 
 bind_cols_v(.data, ...)
+
+left_join_u(.data, ...)
+
+left_join_v(.data, ...)
 }
 \arguments{
 \item{.data}{A \code{[tbl_ord]} object.}
