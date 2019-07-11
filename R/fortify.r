@@ -27,6 +27,7 @@
 #'   whether the fortified data frame should include only the ordination
 #'   coordinates or also augmented case and variable data, and, if the latter,
 #'   whether only shared fields or all from both.
+#' @example inst/examples/ex-fortify.r
 
 #' @rdname fortify
 #' @export
@@ -35,7 +36,14 @@ fortify.tbl_ord <- function(
   .matrix = "uv",
   include = "all"
 ) {
-  .matrix <- match_factor(.matrix)
+  # check first if coordinate / inertia diagonal is desired
+  .matrix <- match.arg(.matrix, c(names(tbl_ord_factors), "coordinates"))
+  if (.matrix == "coordinates") {
+    # (ignore `include`)
+    return(fortify_coord(model))
+  }
+  # otherwise resume fortification of matrix factors
+  .matrix <- unname(tbl_ord_factors[.matrix])
   include <- match.arg(include, c("coordinates", "shared", "all"))
   
   if (grepl("u", .matrix)) {
@@ -77,6 +85,17 @@ fortify.tbl_ord <- function(
   if (include != "coordinates") {
     attr(tbl, "coordinates") <- get_coord(model)
   }
+  tbl
+}
+
+#' @rdname fortify
+#' @export
+fortify_coord <- function(model) {
+  tbl <- bind_cols(
+    augmentation_coord(model),
+    .inertia = recover_inertia(model)
+  )
+  tbl$.prop_var <- tbl$.inertia / sum(tbl$.inertia)
   tbl
 }
 
