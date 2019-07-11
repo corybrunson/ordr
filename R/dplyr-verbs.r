@@ -11,7 +11,7 @@
 #'   
 
 #' @name dplyr-verbs
-#' @importFrom dplyr pull rename select mutate transmute bind_cols
+#' @importFrom dplyr pull rename select mutate transmute bind_cols left_join
 #' @param .data A `[tbl_ord]` object.
 #' @param var A variable specified as in [dplyr::pull()].
 #' @param ... Comma-separated unquoted expressions as in, e.g.,
@@ -19,6 +19,7 @@
 #' @template param-matrix
 #' @example inst/examples/iris-princomp-sec.r
 #' @example inst/examples/benthos-ca-augment-confer.r
+#' @example inst/examples/arrests-logratio-polygon.r
 
 pull_factor <- function(.data, var = -1, .matrix) {
   pull(annotation_factor(.data, .matrix = .matrix), !! enquo(var))
@@ -90,7 +91,7 @@ bind_cols_u <- function(.data, ...) bind_cols_factor(.data, ..., .matrix = "u")
 bind_cols_v <- function(.data, ...) bind_cols_factor(.data, ..., .matrix = "v")
 
 left_join_factor <- function(.data, ..., .matrix) {
-  att <- bind_cols(annotation_factor(.data, .matrix = .matrix), ...)
+  att <- left_join(annotation_factor(.data, .matrix = .matrix), ...)
   set_annotation_factor(.data, att, .matrix = .matrix)
 }
 #' @rdname dplyr-verbs

@@ -4,34 +4,66 @@
 \alias{lra}
 \title{Log-ratio analysis}
 \usage{
-lra(x)
+lra(x, weighted = TRUE)
 }
 \arguments{
 \item{x}{A numeric matrix or rectangular data set.}
+
+\item{weighted}{Logical; whether to weight rows and columns by their sums.}
 }
 \description{
-...
+Represent log-ratios between variables based on their values on
+a population of cases.
+}
+\details{
+Log-ratio analysis (LRA) is based on a double-centering of
+log-transformed data, usually weighted by row and column totals. The
+technique is suitable for positive-valued variables on a common scale (e.g.
+percentages). The distances between variables' coordinates (in the
+full-dimensional space) are their pairwise log-ratios. The distances
+between cases' coordinates are called their \emph{log-ratio distances}, and the
+total variance is the weighted sum of their squares.
+
+LRA is not implemented in standard R distributions but is a useful member
+of the ordination toolkit. This is a minimal implementation following
+Greenacre's (2010) exposition in Chapter 7.
 }
 \examples{
+# state abbreviations
+state <- data.frame(
+  .name = state.name,
+  .abb = state.abb
+)
 # Log-ratio analysis of 1973 violent crime arrests in the United States
-USArrests[, -3] \%>\%
-  lra() \%>\%
+(arrests_lra <- lra(USArrests[, -3]))
+arrests_lra \%>\%
   as_tbl_ord() \%>\%
+  augment() \%>\%
+  left_join_u(state, by = ".name") \%>\%
   print() -> arrests_lra
 # Adapt Exhibit 7.1 in Greenacre (2010)
 arrests_lra \%>\%
   confer_inertia(0) \%>\%
-  ggbiplot(aes(label = .name)) +
+  ggbiplot() +
+  #ggbiplot(sec.axes = "v") +
   theme_bw() +
-  geom_u_text(color = "darkgreen", size = 3, alpha = .5) +
+  geom_u_text(
+    aes(label = .abb),
+    size = 3, color = "darkgreen", alpha = .5
+  ) +
   geom_v_polygon(fill = NA, linetype = "dashed", color = "brown4") +
-  geom_v_point(color = "brown4") +
   geom_v_text(
-    color = "brown4", fontface = "bold",
-    hjust = "outward", vjust = "outward"
+    aes(label = .name),
+    color = "brown4", fontface = "bold"
   ) +
   ggtitle(
     "Log-ratio analysis of violent crime arrest rates",
     "United States, 1973"
-  )
+  ) +
+  guides(color = FALSE, size = FALSE)
+}
+\references{
+Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
+978-84-923846.
+\url{https://www.fbbva.es/microsite/multivariate-statistics/biplots.html}
 }
