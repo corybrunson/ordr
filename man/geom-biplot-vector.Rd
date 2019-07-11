@@ -4,12 +4,17 @@
 \name{geom-biplot-vector}
 \alias{geom-biplot-vector}
 \alias{GeomVector}
+\alias{geom_vector}
 \alias{geom_u_vector}
 \alias{geom_v_vector}
 \alias{geom_biplot_vector}
 \title{Render vectors from origin to ordinates}
 \format{An object of class \code{GeomVector} (inherits from \code{GeomSegment}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.}
 \usage{
+geom_vector(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", arrow = default_arrow, ..., na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
+
 geom_u_vector(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", arrow = default_arrow, ..., na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE)

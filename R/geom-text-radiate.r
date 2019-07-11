@@ -62,6 +62,33 @@ GeomTextRadiate <- ggproto(
 
 #' @rdname geom-biplot-text-radiate
 #' @export
+geom_text_radiate <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  ...,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomTextRadiate,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname geom-biplot-text-radiate
+#' @export
 geom_u_text_radiate <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,

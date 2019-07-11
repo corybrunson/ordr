@@ -68,6 +68,31 @@ GeomVector <- ggproto(
 
 #' @rdname geom-biplot-vector
 #' @export
+geom_vector <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  arrow = default_arrow,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomVector,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = na.rm,
+      arrow = arrow,
+      ...
+    )
+  )
+}
+
+#' @rdname geom-biplot-vector
+#' @export
 geom_u_vector <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   arrow = default_arrow,

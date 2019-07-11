@@ -4,12 +4,17 @@
 \name{geom-biplot-text-radiate}
 \alias{geom-biplot-text-radiate}
 \alias{GeomTextRadiate}
+\alias{geom_text_radiate}
 \alias{geom_u_text_radiate}
 \alias{geom_v_text_radiate}
 \alias{geom_biplot_text_radiate}
 \title{Render text at ordinates radiating out from the origin}
 \format{An object of class \code{GeomTextRadiate} (inherits from \code{GeomText}, \code{Geom}, \code{ggproto}, \code{gg}) of length 2.}
 \usage{
+geom_text_radiate(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", ..., parse = FALSE, check_overlap = FALSE,
+  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+
 geom_u_text_radiate(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", ..., parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
