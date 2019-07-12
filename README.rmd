@@ -43,16 +43,15 @@ Instead, **ordr** provides a streamlined process by which the outputs of these m
 
 ## usage
 
-```{r attach, eval = TRUE, echo = FALSE, message = FALSE}
-devtools::load_all()
-#library(ordr)
+```{r attach, eval=TRUE, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
+library(ordr)
 ```
 
 ### installation
 
 **ordr** remains under development and is not scheduled for a CRAN release. For now, it can be installed using [**remotes**](https://github.com/r-lib/remotes):
 
-```{r install, eval = FALSE}
+```{r install, eval=FALSE}
 remotes::install_github("corybrunson/ordr")
 ```
 

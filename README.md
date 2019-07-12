@@ -73,9 +73,6 @@ integrate ordination models into practice.
 
 ## usage
 
-    #> Warning in as.POSIXlt.POSIXct(Sys.time()): unknown timezone 'zone/tz/2019a.
-    #> 1.0/zoneinfo/America/New_York'
-
 ### installation
 
 **ordr** remains under development and is not scheduled for a CRAN
