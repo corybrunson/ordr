@@ -73,6 +73,9 @@ integrate ordination models into practice.
 
 ## usage
 
+    #> Warning in as.POSIXlt.POSIXct(Sys.time()): unknown timezone 'zone/tz/2019a.
+    #> 1.0/zoneinfo/America/New_York'
+
 ### installation
 
 **ordr** remains under development and is not scheduled for a CRAN
@@ -238,10 +241,10 @@ eurodist %>%
   negate(2) %>%
   print() -> city_mds
 #> # A tbl_ord of class 'cmds': (21 x 11) x (21 x 11)'
-#> # 11 coordinates, transformed: V1, V2, ..., V11
+#> # 11 coordinates, transformed: PCo1, PCo2, ..., PCo11
 #> # 
 #> # U: [ 21 x 11 | 1 ]
-#>       V1     V2     V3 ... |   .name    
+#>     PCo1   PCo2   PCo3 ... |   .name    
 #>                            |   <chr>    
 #> 1 2290.  -1799.   53.8     | 1 Athens   
 #> 2 -825.   -547. -114.  ... | 2 Barcelona
@@ -251,7 +254,7 @@ eurodist %>%
 #> # … with 16 more rows
 #> # 
 #> # V: [ 21 x 11 | 1 ]
-#>       V1     V2     V3 ... |   .name    
+#>     PCo1   PCo2   PCo3 ... |   .name    
 #>                            |   <chr>    
 #> 1 2290.  -1799.   53.8     | 1 Athens   
 #> 2 -825.   -547. -114.  ... | 2 Barcelona
@@ -298,29 +301,6 @@ by Michael Greenacre. Thomas Lin Pedersen’s
 [**tidygraph**](https://github.com/thomasp85/tidygraph) sequel to
 **ggraph** finally induced the shift from simply generating scatterplots
 to upstream handling and manipulating ordination data.
-
-### resources
-
-  - Gabriel KR (1971) [“The biplot graphic display of matrices with
-    application to principal component
-    analysis”](https://academic.oup.com/biomet/article-abstract/58/3/453/233361).
-    *Biometrika* 58(3);453–467.
-  - Greenacre MJ (2010) [*Biplots in
-    Practice*](http://www.multivariatestatistics.org/biplots.html).
-  - Hubert L, Meulman J, and Heiser W (2006) [“Two Purposes for Matrix
-    Factorization: A Historical
-    Appraisal”](https://epubs.siam.org/doi/abs/10.1137/S0036144598340483).
-    *SIAM Review* 42(1);68–82.
-  - Palmer M [*Ordination Methods for
-    Ecologists*](http://ordination.okstate.edu/).
-  - Podani J (2000) [*Introduction to the Exploration of Multivariate
-    Biological Data*](http://ramet.elte.hu/~podani/books.html).
-  - ttnphns (2015) [*Answer to* “PCA and Correspondence analysis in
-    their relation to
-    Biplot”](https://stats.stackexchange.com/a/141755/68743),
-    CrossValidated.
-
-<!-- end list -->
 
 1.  The term *ordination* is most prevalent among ecologists; to my
     knowledge, no catch-all term is in common use outside ecology.

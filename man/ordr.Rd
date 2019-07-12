@@ -30,3 +30,23 @@ manipulations
 several plot layers, integrated with the \code{"tbl_ord"} class
 }
 }
+\references{
+Podani J (2000) \emph{Introduction to the Exploration of Multivariate Biological
+Data}. Backhuys Publishers, ISBN 90-5782-067-6.
+\url{http://ramet.elte.hu/~podani/books.html}
+
+Palmer M \emph{Ordination Methods for Ecologists}. Website, accessed 2019-07-12.
+\url{http://ordination.okstate.edu/}
+
+Gabriel KR (1971) "The biplot graphic display of matrices with application to
+principal component analysis". \emph{Biometrika} 58(3), 453--467.
+\doi{10.1093/biomet/58.3.453}
+
+Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
+978-84-923846.
+\url{https://www.fbbva.es/microsite/multivariate-statistics/biplots.html}
+
+ttnphns (2015) \emph{Answer to} "PCA and Correspondence analysis in their relation
+to Biplot". CrossValidated, accessed 2019-07-12.
+\url{https://stats.stackexchange.com/a/141755/68743}
+}

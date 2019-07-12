@@ -125,12 +125,3 @@ Above all, be supportive!
 This package was originally inspired by the **ggbiplot** extention developed by [vqv](https://github.com/vqv/ggbiplot), [richardjtelford](https://github.com/richardjtelford/ggbiplot), and [GegnzaV](https://github.com/GegznaV/ggbiplot), among others. So far as i know, it first brought biplots into the **tidyverse** framework.
 The motivation to unify a variety of ordination methods came from [several books and articles](https://www.barcelonagse.eu/research/publications/all?author=Michael%20Greenacre) by Michael Greenacre.
 Thomas Lin Pedersen's [**tidygraph**](https://github.com/thomasp85/tidygraph) sequel to **ggraph** finally induced the shift from simply generating scatterplots to upstream handling and manipulating ordination data.
-
-### resources
-
-- Gabriel KR (1971) ["The biplot graphic display of matrices with application to principal component analysis"](https://academic.oup.com/biomet/article-abstract/58/3/453/233361). _Biometrika_ 58(3);453&ndash;467.
-- Greenacre MJ (2010) [_Biplots in Practice_](http://www.multivariatestatistics.org/biplots.html).
-- Hubert L, Meulman J, and Heiser W (2006) ["Two Purposes for Matrix Factorization: A Historical Appraisal"](https://epubs.siam.org/doi/abs/10.1137/S0036144598340483). _SIAM Review_ 42(1);68&ndash;82.
-- Palmer M [_Ordination Methods for Ecologists_](http://ordination.okstate.edu/).
-- Podani J (2000) [_Introduction to the Exploration of Multivariate Biological Data_](http://ramet.elte.hu/~podani/books.html).
-- ttnphns (2015) [_Answer to_ "PCA and Correspondence analysis in their relation to Biplot"](https://stats.stackexchange.com/a/141755/68743), CrossValidated.
