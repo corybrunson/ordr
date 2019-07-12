@@ -94,7 +94,7 @@ augment_annotation <- function(x, .matrix) {
   # if any augmentation names are duplicated in the annotation...
   if (any(! is.na(match_names))) {
     # if any duplicated names in the annotation are different from augmentation
-    match_diff <- setdiff(match_names, match_vals)
+    match_diff <- setdiff(match_names, c(match_vals, NA))
     if (length(match_diff) > 0) {
       warning(
         "Removing annotated field(s) '",
@@ -104,7 +104,8 @@ augment_annotation <- function(x, .matrix) {
     }
     ann <- ann[, -which(! is.na(match_names)), drop = FALSE]
   }
-  bind_cols(ann, aug)
+  # place augmentation variables first, for consistency
+  bind_cols(aug, ann)
 }
 
 augment_factor <- function(x, .matrix) {

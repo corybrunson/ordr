@@ -58,8 +58,12 @@ select_u <- function(.data, ...) select_factor(.data, ..., .matrix = "u")
 select_v <- function(.data, ...) select_factor(.data, ..., .matrix = "v")
 
 mutate_factor <- function(.data, ..., .matrix) {
-  att <- mutate(annotation_factor(.data, .matrix = .matrix), ...)
-  set_annotation_factor(.data, att, .matrix = .matrix)
+  crd <- as_tibble(get_factor(.data, .matrix = .matrix))
+  att <- annotation_factor(.data, .matrix = .matrix)
+  tbl <- bind_cols(crd, att)
+  tbl <- mutate(tbl, ...)
+  tbl <- select(tbl, -match(names(crd), names(tbl)))
+  set_annotation_factor(.data, tbl, .matrix = .matrix)
 }
 #' @rdname dplyr-verbs
 #' @export
@@ -69,8 +73,12 @@ mutate_u <- function(.data, ...) mutate_factor(.data, ..., .matrix = "u")
 mutate_v <- function(.data, ...) mutate_factor(.data, ..., .matrix = "v")
 
 transmute_factor <- function(.data, ..., .matrix) {
-  att <- transmute(annotation_factor(.data, .matrix = .matrix), ...)
-  set_annotation_factor(.data, att, .matrix = .matrix)
+  crd <- as_tibble(get_factor(.data, .matrix = .matrix))
+  att <- annotation_factor(.data, .matrix = .matrix)
+  tbl <- bind_cols(crd, att)
+  tbl <- transmute(tbl, ...)
+  tbl <- select(tbl, -match(names(crd), names(tbl)))
+  set_annotation_factor(.data, tbl, .matrix = .matrix)
 }
 #' @rdname dplyr-verbs
 #' @export
