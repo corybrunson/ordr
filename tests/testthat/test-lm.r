@@ -1,5 +1,5 @@
 library(ordr)
-context("Classes 'lm', 'glm', and 'mlm'")
+context("linear regression, classes 'lm', 'glm', and 'mlm'")
 
 data(bioenv)
 bioenv <- bioenv %>%
@@ -15,7 +15,7 @@ fit_lm2 <- lm(as.matrix(bioenv[, "d"]) ~
 fit_lm3 <- lm(as.matrix(bioenv[, "d"]) ~
                 as.matrix(bioenv[, "x"]) +
                 as.matrix(bioenv[, "y"]))
-test_that("'as_tbl_ord()' coerces 'lm' objects", {
+test_that("`as_tbl_ord()` coerces 'lm' objects", {
   expect_true(valid_tbl_ord(as_tbl_ord(fit_lm0)))
   expect_true(valid_tbl_ord(as_tbl_ord(fit_lm1)))
   expect_true(valid_tbl_ord(as_tbl_ord(fit_lm2)))
@@ -31,7 +31,7 @@ fit_mlm2 <- lm(as.matrix(bioenv[, c("a", "b", "c", "d", "e")]) ~
 fit_mlm3 <- lm(as.matrix(bioenv[, c("a", "b", "c", "d", "e")]) ~
                  as.matrix(bioenv[, "x"]) +
                  as.matrix(bioenv[, "y"]))
-test_that("'as_tbl_ord()' coerces 'mlm' objects", {
+test_that("`as_tbl_ord()` coerces 'mlm' objects", {
   expect_true(valid_tbl_ord(as_tbl_ord(fit_mlm0)))
   expect_true(valid_tbl_ord(as_tbl_ord(fit_mlm1)))
   expect_true(valid_tbl_ord(as_tbl_ord(fit_mlm2)))
@@ -47,7 +47,7 @@ fit_glm3 <- glm(as.matrix(bioenv[, "d"]) ~
                   as.matrix(bioenv[, "x"]) +
                   as.matrix(bioenv[, "y"]),
                 family = poisson)
-test_that("'as_tbl_ord()' coerces 'glm' objects", {
+test_that("`as_tbl_ord()` coerces 'glm' objects", {
   expect_true(valid_tbl_ord(as_tbl_ord(fit_glm0)))
   expect_true(valid_tbl_ord(as_tbl_ord(fit_glm1)))
   expect_true(valid_tbl_ord(as_tbl_ord(fit_glm2)))

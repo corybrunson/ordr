@@ -1,5 +1,5 @@
 library(ordr)
-context("classical multi-dimensional scaling")
+context("classical multi-dimensional scaling, class 'cmds")
 
 data(country_differences)
 fit_cmds <- cmdscale(country_differences, k = 6)
