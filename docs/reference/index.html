@@ -105,7 +105,7 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section--ordr-package" class="hasAnchor"><a href="#section--ordr-package" class="anchor"></a>**ordr** package</h2>
+          <h2 id="section--ordr-package" class="hasAnchor"><a href="#section--ordr-package" class="anchor"></a>'ordr' package</h2>
           <p class="section-desc"><p>A unified framework for ordination objects and biplot methods using tidy principles.</p></p>
         </th>
       </tr>
@@ -150,7 +150,7 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="alignment.html">get_alignment()</a></code> <code><a href="alignment.html">revert_alignment()</a></code> <code><a href="alignment.html">negate()</a></code> <code><a href="alignment.html">permute()</a></code> <code><a href="alignment.html">rotate()</a></code> <code><a href="alignment.html">negation_to()</a></code> <code><a href="alignment.html">negate_to()</a></code> <code><a href="alignment.html">permutation_to()</a></code> <code><a href="alignment.html">permute_to()</a></code> <code><a href="alignment.html">rotation_to()</a></code> <code><a href="alignment.html">rotate_to()</a></code> <code><a href="alignment.html">align_to()</a></code> </p>
+          <p><code><a href="alignment.html">get_alignment()</a></code> <code><a href="alignment.html">revert_alignment()</a></code> <code><a href="alignment.html">negate()</a></code> <code><a href="alignment.html">permute()</a></code> <code><a href="alignment.html">rotate()</a></code> <code><a href="alignment.html">negation_to()</a></code> <code><a href="alignment.html">negate_to()</a></code> <code><a href="alignment.html">negate_to_nonneg_orthant()</a></code> <code><a href="alignment.html">permutation_to()</a></code> <code><a href="alignment.html">permute_to()</a></code> <code><a href="alignment.html">rotation_to()</a></code> <code><a href="alignment.html">rotate_to()</a></code> <code><a href="alignment.html">align_to()</a></code> </p>
         </td>
         <td><p>Alignment of ordinations</p></td>
       </tr><tr>
@@ -174,21 +174,21 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="dplyr-verbs.html">pull_factor()</a></code> <code><a href="dplyr-verbs.html">pull_u()</a></code> <code><a href="dplyr-verbs.html">pull_v()</a></code> <code><a href="dplyr-verbs.html">rename_u()</a></code> <code><a href="dplyr-verbs.html">rename_v()</a></code> <code><a href="dplyr-verbs.html">select_u()</a></code> <code><a href="dplyr-verbs.html">select_v()</a></code> <code><a href="dplyr-verbs.html">mutate_u()</a></code> <code><a href="dplyr-verbs.html">mutate_v()</a></code> <code><a href="dplyr-verbs.html">transmute_u()</a></code> <code><a href="dplyr-verbs.html">transmute_v()</a></code> <code><a href="dplyr-verbs.html">bind_cols_u()</a></code> <code><a href="dplyr-verbs.html">bind_cols_v()</a></code> </p>
+          <p><code><a href="dplyr-verbs.html">pull_factor()</a></code> <code><a href="dplyr-verbs.html">pull_u()</a></code> <code><a href="dplyr-verbs.html">pull_v()</a></code> <code><a href="dplyr-verbs.html">rename_u()</a></code> <code><a href="dplyr-verbs.html">rename_v()</a></code> <code><a href="dplyr-verbs.html">select_u()</a></code> <code><a href="dplyr-verbs.html">select_v()</a></code> <code><a href="dplyr-verbs.html">mutate_u()</a></code> <code><a href="dplyr-verbs.html">mutate_v()</a></code> <code><a href="dplyr-verbs.html">transmute_u()</a></code> <code><a href="dplyr-verbs.html">transmute_v()</a></code> <code><a href="dplyr-verbs.html">bind_cols_u()</a></code> <code><a href="dplyr-verbs.html">bind_cols_v()</a></code> <code><a href="dplyr-verbs.html">left_join_u()</a></code> <code><a href="dplyr-verbs.html">left_join_v()</a></code> </p>
         </td>
         <td><p><strong>dplyr</strong> verbs for <code>tbl_ord</code> factors</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-biplot-grammar" class="hasAnchor"><a href="#section-biplot-grammar" class="anchor"></a>Biplot grammar</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-layered-grammar-for-biplots" class="hasAnchor"><a href="#section-layered-grammar-for-biplots" class="anchor"></a>Layered grammar for biplots</h2>
+          <p class="section-desc"><p>Functions to generate and annotate biplots from <code>tbl_ord</code> objects, following the layered grammar of graphics</p></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="fortify.html">fortify(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="fortify.html">fortify_u()</a></code> <code><a href="fortify.html">fortify_v()</a></code> <code><a href="fortify.html">tidy(<i>&lt;tbl_ord&gt;</i>)</a></code> </p>
+          <p><code><a href="fortify.html">fortify(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="fortify.html">fortify_coord()</a></code> <code><a href="fortify.html">fortify_u()</a></code> <code><a href="fortify.html">fortify_v()</a></code> <code><a href="fortify.html">tidy(<i>&lt;tbl_ord&gt;</i>)</a></code> </p>
         </td>
         <td><p>Fortify a <code>tbl_ord</code> for plotting</p></td>
       </tr><tr>
@@ -248,7 +248,7 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="geom-biplot-text-radiate.html">geom_u_text_radiate()</a></code> <code><a href="geom-biplot-text-radiate.html">geom_v_text_radiate()</a></code> <code><a href="geom-biplot-text-radiate.html">geom_biplot_text_radiate()</a></code> </p>
+          <p><code><a href="geom-biplot-text-radiate.html">geom_text_radiate()</a></code> <code><a href="geom-biplot-text-radiate.html">geom_u_text_radiate()</a></code> <code><a href="geom-biplot-text-radiate.html">geom_v_text_radiate()</a></code> <code><a href="geom-biplot-text-radiate.html">geom_biplot_text_radiate()</a></code> </p>
         </td>
         <td><p>Render text at ordinates radiating out from the origin</p></td>
       </tr><tr>
@@ -260,7 +260,7 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="geom-biplot-vector.html">geom_u_vector()</a></code> <code><a href="geom-biplot-vector.html">geom_v_vector()</a></code> <code><a href="geom-biplot-vector.html">geom_biplot_vector()</a></code> </p>
+          <p><code><a href="geom-biplot-vector.html">geom_vector()</a></code> <code><a href="geom-biplot-vector.html">geom_u_vector()</a></code> <code><a href="geom-biplot-vector.html">geom_v_vector()</a></code> <code><a href="geom-biplot-vector.html">geom_biplot_vector()</a></code> </p>
         </td>
         <td><p>Render vectors from origin to ordinates</p></td>
       </tr><tr>
@@ -433,9 +433,9 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section--ordr-package">**ordr** package</a></li>
+      <li><a href="#section--ordr-package">'ordr' package</a></li>
       <li><a href="#section-tidy-ordination">Tidy ordination</a></li>
-      <li><a href="#section-biplot-grammar">Biplot grammar</a></li>
+      <li><a href="#section-layered-grammar-for-biplots">Layered grammar for biplots</a></li>
       <li><a href="#section-new-functions-classes-and-methods">New functions, classes, and methods</a></li>
       <li><a href="#section-data-sets">Data sets</a></li>
       <li><a href="#section-class-methods">Class methods</a></li>

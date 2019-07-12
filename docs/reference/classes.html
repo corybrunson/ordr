@@ -121,8 +121,8 @@
       <th>symmetric</th>
       <td><p>if <code>TRUE</code>, the matrix is assumed to be symmetric
     (or Hermitian if complex) and only its lower triangle (diagonal
-    included) is used.  If <code>symmetric</code> is not specified,
-    <code><a href='https://www.rdocumentation.org/packages/base/topics/isSymmetric'>isSymmetric</a>(x)</code> is used.</p></td>
+    included) is used.  If <code>symmetric</code> is not specified, the matrix
+    is inspected for symmetry.</p></td>
     </tr>
     <tr>
       <th>nu</th>
@@ -161,22 +161,22 @@
 #&gt; # 
 #&gt; # U: [ 34 x 15 | 3 ]
 #&gt;     EV1   EV2    EV3 ... |   faction name    label
-#&gt;                          |     <span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> 0.922 0.863 -</span><span style='color: #BB0000;'>0.338</span><span>     | </span><span style='color: #555555;'>1</span><span>       1 Mr Hi   H    
-#&gt; </span><span style='color: #555555;'>2</span><span> 0.690 0.600  0.427 ... | </span><span style='color: #555555;'>2</span><span>       1 Actor 2 2    
-#&gt; </span><span style='color: #555555;'>3</span><span> 0.823 0.293  0.421     | </span><span style='color: #555555;'>3</span><span>       1 Actor 3 3    
-#&gt; </span><span style='color: #555555;'>4</span><span> 0.548 0.564  0.384     | </span><span style='color: #555555;'>4</span><span>       1 Actor 4 4    
-#&gt; </span><span style='color: #555555;'>5</span><span> 0.197 0.299 -</span><span style='color: #BB0000;'>0.555</span><span>     | </span><span style='color: #555555;'>5</span><span>       1 Actor 5 5    
-#&gt; </span><span style='color: #555555;'># … with 29 more rows</span><span>
+#&gt;                          |     <span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.922 0.863 -</span><span style='color: #BB0000;'>0.338</span><span>     | </span><span style='color: #BCBCBC;'>1</span><span>       1 Mr Hi   H    
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 0.690 0.600  0.427 ... | </span><span style='color: #BCBCBC;'>2</span><span>       1 Actor 2 2    
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.823 0.293  0.421     | </span><span style='color: #BCBCBC;'>3</span><span>       1 Actor 3 3    
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.548 0.564  0.384     | </span><span style='color: #BCBCBC;'>4</span><span>       1 Actor 4 4    
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.197 0.299 -</span><span style='color: #BB0000;'>0.555</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span>       1 Actor 5 5    
+#&gt; </span><span style='color: #949494;'># … with 29 more rows</span><span>
 #&gt; # 
 #&gt; # V: [ 34 x 15 | 0 ]
 #&gt;     EV1   EV2    EV3 ... | 
 #&gt;                          | 
-#&gt; </span><span style='color: #555555;'>1</span><span> 0.922 0.863 -</span><span style='color: #BB0000;'>0.338</span><span>     | 
-#&gt; </span><span style='color: #555555;'>2</span><span> 0.690 0.600  0.427 ... | 
-#&gt; </span><span style='color: #555555;'>3</span><span> 0.823 0.293  0.421     | 
-#&gt; </span><span style='color: #555555;'>4</span><span> 0.548 0.564  0.384     | 
-#&gt; </span><span style='color: #555555;'>5</span><span> 0.197 0.299 -</span><span style='color: #BB0000;'>0.555</span><span>     | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.922 0.863 -</span><span style='color: #BB0000;'>0.338</span><span>     | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 0.690 0.600  0.427 ... | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.823 0.293  0.421     | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.548 0.564  0.384     | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.197 0.299 -</span><span style='color: #BB0000;'>0.555</span><span>     | 
 #&gt; </div><div class='input'><span class='co'># corroborate eigencentralities</span>
 <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
   <span class='kw'>igraph</span> <span class='kw'>=</span> <span class='no'>karate_eigen_cent</span>$<span class='no'>vector</span>,

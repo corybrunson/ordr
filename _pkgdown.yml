@@ -1,5 +1,5 @@
 reference:
-- title: "**ordr** package"
+- title: "'ordr' package"
   desc: >
     A unified framework for ordination objects and biplot methods using tidy
     principles.
@@ -19,8 +19,10 @@ reference:
   - '`reconstruct`'
   - '`formatting`'
   - '`dplyr-verbs`'
-- title: "Biplot grammar"
+- title: "Layered grammar for biplots"
   desc: >
+    Functions to generate and annotate biplots from `tbl_ord` objects, following
+    the layered grammar of graphics
   contents:
   - '`fortify`'
   - '`ggbiplot`'

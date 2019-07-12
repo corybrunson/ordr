@@ -200,21 +200,21 @@ e.g. \(U\) for points and \(V\) for arrows.</p>
 #&gt; # U: [ 92 x 12 | 0 ]
 #&gt;      Dim1   Dim2   Dim3 ... | 
 #&gt;                             | 
-#&gt; <span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>1.17</span><span>    0.895 -</span><span style='color: #BB0000;'>0.140</span><span>     | 
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.552</span><span>  -</span><span style='color: #BB0000;'>2.23</span><span>  -</span><span style='color: #BB0000;'>0.359</span><span> ... | 
-#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.040</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span> -</span><span style='color: #BB0000;'>0.689</span><span>  0.687     | 
-#&gt; </span><span style='color: #555555;'>4</span><span>  1.22    0.287 -</span><span style='color: #BB0000;'>0.700</span><span>     | 
-#&gt; </span><span style='color: #555555;'>5</span><span>  0.312   0.142 -</span><span style='color: #BB0000;'>0.137</span><span>     | 
+#&gt; <span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.17</span><span>    0.895 -</span><span style='color: #BB0000;'>0.140</span><span>     | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.552</span><span>  -</span><span style='color: #BB0000;'>2.23</span><span>  -</span><span style='color: #BB0000;'>0.359</span><span> ... | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.040</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span> -</span><span style='color: #BB0000;'>0.689</span><span>  0.687     | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  1.22    0.287 -</span><span style='color: #BB0000;'>0.700</span><span>     | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.312   0.142 -</span><span style='color: #BB0000;'>0.137</span><span>     | 
 #&gt; 
 #&gt; # 
 #&gt; # V: [ 13 x 12 | 0 ]
 #&gt;     Dim1    Dim2   Dim3 ... | 
 #&gt;                             | 
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.173</span><span>  0.262  -</span><span style='color: #BB0000;'>0.376</span><span>     | 
-#&gt; </span><span style='color: #555555;'>2</span><span>  1.11   0.417   1.52  ... | 
-#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.226</span><span> -</span><span style='color: #BB0000;'>1.33</span><span>   -</span><span style='color: #BB0000;'>0.297</span><span>     | 
-#&gt; </span><span style='color: #555555;'>4</span><span>  1.27   0.411   1.37      | 
-#&gt; </span><span style='color: #555555;'>5</span><span>  0.186 -</span><span style='color: #BB0000;'>0.088</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>  0.568     | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.173</span><span>  0.262  -</span><span style='color: #BB0000;'>0.376</span><span>     | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  1.11   0.417   1.52  ... | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.226</span><span> -</span><span style='color: #BB0000;'>1.33</span><span>   -</span><span style='color: #BB0000;'>0.297</span><span>     | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  1.27   0.411   1.37      | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.186 -</span><span style='color: #BB0000;'>0.088</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>  0.568     | 
 #&gt; </div><div class='input'><span class='co'># Reproduce Exhibit 8.3</span>
 <span class='no'>benthos_ca</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='st'>"colprincipal"</span>) <span class='kw'>%&gt;%</span>
@@ -231,7 +231,10 @@ e.g. \(U\) for points and \(V\) for arrows.</p>
   <span class='fu'><a href='geom-biplot-vector.html'>geom_u_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>arrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>) +
   <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>mass</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>17</span>) +
   <span class='fu'>scale_size_continuous</span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>4</span>), <span class='kw'>guide</span> <span class='kw'>=</span> <span class='st'>"none"</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(<span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"chull"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>nudge_x</span> <span class='kw'>=</span> <span class='fl'>.075</span>, <span class='kw'>nudge_y</span> <span class='kw'>=</span> <span class='fl'>.05</span>) +
+  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(
+    <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"chull"</span>,
+    <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='st'>"outward"</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='st'>"outward"</span>
+  ) +
   <span class='fu'><a href='geom-biplot-point.html'>geom_v_point</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
   <span class='fu'><a href='geom-biplot-text.html'>geom_v_text_repel</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>, <span class='kw'>min.segment.length</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='img'><img src='stat-biplot-chull-2.png' alt='' width='700' height='433' /></div></span></pre>
   </div>

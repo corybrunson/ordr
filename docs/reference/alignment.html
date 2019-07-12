@@ -121,6 +121,8 @@ variables.</p>
 
 <span class='fu'>negate_to</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>.matrix</span>)
 
+<span class='fu'>negate_to_nonneg_orthant</span>(<span class='no'>x</span>, <span class='no'>.matrix</span>)
+
 <span class='fu'>permutation_to</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>abs.values</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='fu'>permute_to</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>.matrix</span>)
@@ -209,31 +211,31 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>,
 #&gt; # 
 #&gt; # U: [ 10 x 2 | 1 ]
 #&gt;      PCo1   PCo2 |    .name        
-#&gt;                  |    <span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        
-#&gt; </span><span style='color: #555555;'> 1</span><span>  -</span><span style='color: #BB0000;'>719.</span><span>  143.  | </span><span style='color: #555555;'> 1</span><span> Atlanta      
-#&gt; </span><span style='color: #555555;'> 2</span><span>  -</span><span style='color: #BB0000;'>382.</span><span> -</span><span style='color: #BB0000;'>341.</span><span>  | </span><span style='color: #555555;'> 2</span><span> Chicago      
-#&gt; </span><span style='color: #555555;'> 3</span><span>   482.  -</span><span style='color: #BB0000;'>25.3</span><span> | </span><span style='color: #555555;'> 3</span><span> Denver       
-#&gt; </span><span style='color: #555555;'> 4</span><span>  -</span><span style='color: #BB0000;'>161.</span><span>  573.  | </span><span style='color: #555555;'> 4</span><span> Houston      
-#&gt; </span><span style='color: #555555;'> 5</span><span>  </span><span style='text-decoration: underline;'>1</span><span>204.  390.  | </span><span style='color: #555555;'> 5</span><span> LosAngeles   
-#&gt; </span><span style='color: #555555;'> 6</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>134.</span><span>  582.  | </span><span style='color: #555555;'> 6</span><span> Miami        
-#&gt; </span><span style='color: #555555;'> 7</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>072.</span><span> -</span><span style='color: #BB0000;'>519.</span><span>  | </span><span style='color: #555555;'> 7</span><span> NewYork      
-#&gt; </span><span style='color: #555555;'> 8</span><span>  </span><span style='text-decoration: underline;'>1</span><span>421.  113.  | </span><span style='color: #555555;'> 8</span><span> SanFrancisco 
-#&gt; </span><span style='color: #555555;'> 9</span><span>  </span><span style='text-decoration: underline;'>1</span><span>342. -</span><span style='color: #BB0000;'>580.</span><span>  | </span><span style='color: #555555;'> 9</span><span> Seattle      
-#&gt; </span><span style='color: #555555;'>10</span><span>  -</span><span style='color: #BB0000;'>980.</span><span> -</span><span style='color: #BB0000;'>335.</span><span>  | </span><span style='color: #555555;'>10</span><span> Washington.DC
+#&gt;                  |    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>  -</span><span style='color: #BB0000;'>719.</span><span>  143.  | </span><span style='color: #BCBCBC;'> 1</span><span> Atlanta      
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>  -</span><span style='color: #BB0000;'>382.</span><span> -</span><span style='color: #BB0000;'>341.</span><span>  | </span><span style='color: #BCBCBC;'> 2</span><span> Chicago      
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>   482.  -</span><span style='color: #BB0000;'>25.3</span><span> | </span><span style='color: #BCBCBC;'> 3</span><span> Denver       
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>  -</span><span style='color: #BB0000;'>161.</span><span>  573.  | </span><span style='color: #BCBCBC;'> 4</span><span> Houston      
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>  </span><span style='text-decoration: underline;'>1</span><span>204.  390.  | </span><span style='color: #BCBCBC;'> 5</span><span> LosAngeles   
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>134.</span><span>  582.  | </span><span style='color: #BCBCBC;'> 6</span><span> Miami        
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>072.</span><span> -</span><span style='color: #BB0000;'>519.</span><span>  | </span><span style='color: #BCBCBC;'> 7</span><span> NewYork      
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>  </span><span style='text-decoration: underline;'>1</span><span>421.  113.  | </span><span style='color: #BCBCBC;'> 8</span><span> SanFrancisco 
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>  </span><span style='text-decoration: underline;'>1</span><span>342. -</span><span style='color: #BB0000;'>580.</span><span>  | </span><span style='color: #BCBCBC;'> 9</span><span> Seattle      
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>  -</span><span style='color: #BB0000;'>980.</span><span> -</span><span style='color: #BB0000;'>335.</span><span>  | </span><span style='color: #BCBCBC;'>10</span><span> Washington.DC
 #&gt; # 
 #&gt; # V: [ 10 x 2 | 1 ]
 #&gt;      PCo1   PCo2 |    .name        
-#&gt;                  |    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        
-#&gt; </span><span style='color: #555555;'> 1</span><span>  -</span><span style='color: #BB0000;'>719.</span><span>  143.  | </span><span style='color: #555555;'> 1</span><span> Atlanta      
-#&gt; </span><span style='color: #555555;'> 2</span><span>  -</span><span style='color: #BB0000;'>382.</span><span> -</span><span style='color: #BB0000;'>341.</span><span>  | </span><span style='color: #555555;'> 2</span><span> Chicago      
-#&gt; </span><span style='color: #555555;'> 3</span><span>   482.  -</span><span style='color: #BB0000;'>25.3</span><span> | </span><span style='color: #555555;'> 3</span><span> Denver       
-#&gt; </span><span style='color: #555555;'> 4</span><span>  -</span><span style='color: #BB0000;'>161.</span><span>  573.  | </span><span style='color: #555555;'> 4</span><span> Houston      
-#&gt; </span><span style='color: #555555;'> 5</span><span>  </span><span style='text-decoration: underline;'>1</span><span>204.  390.  | </span><span style='color: #555555;'> 5</span><span> LosAngeles   
-#&gt; </span><span style='color: #555555;'> 6</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>134.</span><span>  582.  | </span><span style='color: #555555;'> 6</span><span> Miami        
-#&gt; </span><span style='color: #555555;'> 7</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>072.</span><span> -</span><span style='color: #BB0000;'>519.</span><span>  | </span><span style='color: #555555;'> 7</span><span> NewYork      
-#&gt; </span><span style='color: #555555;'> 8</span><span>  </span><span style='text-decoration: underline;'>1</span><span>421.  113.  | </span><span style='color: #555555;'> 8</span><span> SanFrancisco 
-#&gt; </span><span style='color: #555555;'> 9</span><span>  </span><span style='text-decoration: underline;'>1</span><span>342. -</span><span style='color: #BB0000;'>580.</span><span>  | </span><span style='color: #555555;'> 9</span><span> Seattle      
-#&gt; </span><span style='color: #555555;'>10</span><span>  -</span><span style='color: #BB0000;'>980.</span><span> -</span><span style='color: #BB0000;'>335.</span><span>  | </span><span style='color: #555555;'>10</span><span> Washington.DC</div><div class='input'><span class='no'>usa_mds</span> <span class='kw'>%&gt;%</span>
+#&gt;                  |    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>  -</span><span style='color: #BB0000;'>719.</span><span>  143.  | </span><span style='color: #BCBCBC;'> 1</span><span> Atlanta      
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>  -</span><span style='color: #BB0000;'>382.</span><span> -</span><span style='color: #BB0000;'>341.</span><span>  | </span><span style='color: #BCBCBC;'> 2</span><span> Chicago      
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>   482.  -</span><span style='color: #BB0000;'>25.3</span><span> | </span><span style='color: #BCBCBC;'> 3</span><span> Denver       
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>  -</span><span style='color: #BB0000;'>161.</span><span>  573.  | </span><span style='color: #BCBCBC;'> 4</span><span> Houston      
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>  </span><span style='text-decoration: underline;'>1</span><span>204.  390.  | </span><span style='color: #BCBCBC;'> 5</span><span> LosAngeles   
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>134.</span><span>  582.  | </span><span style='color: #BCBCBC;'> 6</span><span> Miami        
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>072.</span><span> -</span><span style='color: #BB0000;'>519.</span><span>  | </span><span style='color: #BCBCBC;'> 7</span><span> NewYork      
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>  </span><span style='text-decoration: underline;'>1</span><span>421.  113.  | </span><span style='color: #BCBCBC;'> 8</span><span> SanFrancisco 
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>  </span><span style='text-decoration: underline;'>1</span><span>342. -</span><span style='color: #BB0000;'>580.</span><span>  | </span><span style='color: #BCBCBC;'> 9</span><span> Seattle      
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>  -</span><span style='color: #BB0000;'>980.</span><span> -</span><span style='color: #BB0000;'>335.</span><span>  | </span><span style='color: #BCBCBC;'>10</span><span> Washington.DC</div><div class='input'><span class='no'>usa_mds</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>() +
   <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>) +
   <span class='fu'>ggtitle</span>(<span class='st'>"MDS biplot of distances between American cities"</span>)</div><div class='img'><img src='alignment-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>get_alignment</span>(<span class='no'>usa_mds</span>)</div><div class='output co'>#&gt;      PCo1 PCo2
@@ -246,31 +248,31 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>,
 #&gt; # 
 #&gt; # U: [ 10 x 2 | 1 ]
 #&gt;      PCo1   PCo2 |    .name        
-#&gt;                  |    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        
-#&gt; </span><span style='color: #555555;'> 1</span><span>   719. -</span><span style='color: #BB0000;'>143.</span><span>  | </span><span style='color: #555555;'> 1</span><span> Atlanta      
-#&gt; </span><span style='color: #555555;'> 2</span><span>   382.  341.  | </span><span style='color: #555555;'> 2</span><span> Chicago      
-#&gt; </span><span style='color: #555555;'> 3</span><span>  -</span><span style='color: #BB0000;'>482.</span><span>   25.3 | </span><span style='color: #555555;'> 3</span><span> Denver       
-#&gt; </span><span style='color: #555555;'> 4</span><span>   161. -</span><span style='color: #BB0000;'>573.</span><span>  | </span><span style='color: #555555;'> 4</span><span> Houston      
-#&gt; </span><span style='color: #555555;'> 5</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>204.</span><span> -</span><span style='color: #BB0000;'>390.</span><span>  | </span><span style='color: #555555;'> 5</span><span> LosAngeles   
-#&gt; </span><span style='color: #555555;'> 6</span><span>  </span><span style='text-decoration: underline;'>1</span><span>134. -</span><span style='color: #BB0000;'>582.</span><span>  | </span><span style='color: #555555;'> 6</span><span> Miami        
-#&gt; </span><span style='color: #555555;'> 7</span><span>  </span><span style='text-decoration: underline;'>1</span><span>072.  519.  | </span><span style='color: #555555;'> 7</span><span> NewYork      
-#&gt; </span><span style='color: #555555;'> 8</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>421.</span><span> -</span><span style='color: #BB0000;'>113.</span><span>  | </span><span style='color: #555555;'> 8</span><span> SanFrancisco 
-#&gt; </span><span style='color: #555555;'> 9</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>342.</span><span>  580.  | </span><span style='color: #555555;'> 9</span><span> Seattle      
-#&gt; </span><span style='color: #555555;'>10</span><span>   980.  335.  | </span><span style='color: #555555;'>10</span><span> Washington.DC
+#&gt;                  |    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>   719. -</span><span style='color: #BB0000;'>143.</span><span>  | </span><span style='color: #BCBCBC;'> 1</span><span> Atlanta      
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>   382.  341.  | </span><span style='color: #BCBCBC;'> 2</span><span> Chicago      
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>  -</span><span style='color: #BB0000;'>482.</span><span>   25.3 | </span><span style='color: #BCBCBC;'> 3</span><span> Denver       
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>   161. -</span><span style='color: #BB0000;'>573.</span><span>  | </span><span style='color: #BCBCBC;'> 4</span><span> Houston      
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>204.</span><span> -</span><span style='color: #BB0000;'>390.</span><span>  | </span><span style='color: #BCBCBC;'> 5</span><span> LosAngeles   
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  </span><span style='text-decoration: underline;'>1</span><span>134. -</span><span style='color: #BB0000;'>582.</span><span>  | </span><span style='color: #BCBCBC;'> 6</span><span> Miami        
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>  </span><span style='text-decoration: underline;'>1</span><span>072.  519.  | </span><span style='color: #BCBCBC;'> 7</span><span> NewYork      
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>421.</span><span> -</span><span style='color: #BB0000;'>113.</span><span>  | </span><span style='color: #BCBCBC;'> 8</span><span> SanFrancisco 
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>342.</span><span>  580.  | </span><span style='color: #BCBCBC;'> 9</span><span> Seattle      
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>   980.  335.  | </span><span style='color: #BCBCBC;'>10</span><span> Washington.DC
 #&gt; # 
 #&gt; # V: [ 10 x 2 | 1 ]
 #&gt;      PCo1   PCo2 |    .name        
-#&gt;                  |    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        
-#&gt; </span><span style='color: #555555;'> 1</span><span>   719. -</span><span style='color: #BB0000;'>143.</span><span>  | </span><span style='color: #555555;'> 1</span><span> Atlanta      
-#&gt; </span><span style='color: #555555;'> 2</span><span>   382.  341.  | </span><span style='color: #555555;'> 2</span><span> Chicago      
-#&gt; </span><span style='color: #555555;'> 3</span><span>  -</span><span style='color: #BB0000;'>482.</span><span>   25.3 | </span><span style='color: #555555;'> 3</span><span> Denver       
-#&gt; </span><span style='color: #555555;'> 4</span><span>   161. -</span><span style='color: #BB0000;'>573.</span><span>  | </span><span style='color: #555555;'> 4</span><span> Houston      
-#&gt; </span><span style='color: #555555;'> 5</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>204.</span><span> -</span><span style='color: #BB0000;'>390.</span><span>  | </span><span style='color: #555555;'> 5</span><span> LosAngeles   
-#&gt; </span><span style='color: #555555;'> 6</span><span>  </span><span style='text-decoration: underline;'>1</span><span>134. -</span><span style='color: #BB0000;'>582.</span><span>  | </span><span style='color: #555555;'> 6</span><span> Miami        
-#&gt; </span><span style='color: #555555;'> 7</span><span>  </span><span style='text-decoration: underline;'>1</span><span>072.  519.  | </span><span style='color: #555555;'> 7</span><span> NewYork      
-#&gt; </span><span style='color: #555555;'> 8</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>421.</span><span> -</span><span style='color: #BB0000;'>113.</span><span>  | </span><span style='color: #555555;'> 8</span><span> SanFrancisco 
-#&gt; </span><span style='color: #555555;'> 9</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>342.</span><span>  580.  | </span><span style='color: #555555;'> 9</span><span> Seattle      
-#&gt; </span><span style='color: #555555;'>10</span><span>   980.  335.  | </span><span style='color: #555555;'>10</span><span> Washington.DC</div><div class='input'><span class='fu'>get_alignment</span>(<span class='no'>usa_mds_negate</span>)</div><div class='output co'>#&gt;      PCo1 PCo2
+#&gt;                  |    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>   719. -</span><span style='color: #BB0000;'>143.</span><span>  | </span><span style='color: #BCBCBC;'> 1</span><span> Atlanta      
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>   382.  341.  | </span><span style='color: #BCBCBC;'> 2</span><span> Chicago      
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>  -</span><span style='color: #BB0000;'>482.</span><span>   25.3 | </span><span style='color: #BCBCBC;'> 3</span><span> Denver       
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>   161. -</span><span style='color: #BB0000;'>573.</span><span>  | </span><span style='color: #BCBCBC;'> 4</span><span> Houston      
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>204.</span><span> -</span><span style='color: #BB0000;'>390.</span><span>  | </span><span style='color: #BCBCBC;'> 5</span><span> LosAngeles   
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  </span><span style='text-decoration: underline;'>1</span><span>134. -</span><span style='color: #BB0000;'>582.</span><span>  | </span><span style='color: #BCBCBC;'> 6</span><span> Miami        
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>  </span><span style='text-decoration: underline;'>1</span><span>072.  519.  | </span><span style='color: #BCBCBC;'> 7</span><span> NewYork      
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>421.</span><span> -</span><span style='color: #BB0000;'>113.</span><span>  | </span><span style='color: #BCBCBC;'> 8</span><span> SanFrancisco 
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>342.</span><span>  580.  | </span><span style='color: #BCBCBC;'> 9</span><span> Seattle      
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>   980.  335.  | </span><span style='color: #BCBCBC;'>10</span><span> Washington.DC</div><div class='input'><span class='fu'>get_alignment</span>(<span class='no'>usa_mds_negate</span>)</div><div class='output co'>#&gt;      PCo1 PCo2
 #&gt; [1,]   -1    0
 #&gt; [2,]    0   -1</div><div class='input'><span class='no'>usa_mds_negate</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>() +
@@ -283,31 +285,31 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>,
 #&gt; # 
 #&gt; # U: [ 10 x 2 | 1 ]
 #&gt;        V1     V2 |    .name        
-#&gt;                  |    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        
-#&gt; </span><span style='color: #555555;'> 1</span><span>   719. -</span><span style='color: #BB0000;'>143.</span><span>  | </span><span style='color: #555555;'> 1</span><span> Atlanta      
-#&gt; </span><span style='color: #555555;'> 2</span><span>   382.  341.  | </span><span style='color: #555555;'> 2</span><span> Chicago      
-#&gt; </span><span style='color: #555555;'> 3</span><span>  -</span><span style='color: #BB0000;'>482.</span><span>   25.3 | </span><span style='color: #555555;'> 3</span><span> Denver       
-#&gt; </span><span style='color: #555555;'> 4</span><span>   161. -</span><span style='color: #BB0000;'>573.</span><span>  | </span><span style='color: #555555;'> 4</span><span> Houston      
-#&gt; </span><span style='color: #555555;'> 5</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>204.</span><span> -</span><span style='color: #BB0000;'>390.</span><span>  | </span><span style='color: #555555;'> 5</span><span> LosAngeles   
-#&gt; </span><span style='color: #555555;'> 6</span><span>  </span><span style='text-decoration: underline;'>1</span><span>134. -</span><span style='color: #BB0000;'>582.</span><span>  | </span><span style='color: #555555;'> 6</span><span> Miami        
-#&gt; </span><span style='color: #555555;'> 7</span><span>  </span><span style='text-decoration: underline;'>1</span><span>072.  519.  | </span><span style='color: #555555;'> 7</span><span> NewYork      
-#&gt; </span><span style='color: #555555;'> 8</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>421.</span><span> -</span><span style='color: #BB0000;'>113.</span><span>  | </span><span style='color: #555555;'> 8</span><span> SanFrancisco 
-#&gt; </span><span style='color: #555555;'> 9</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>342.</span><span>  580.  | </span><span style='color: #555555;'> 9</span><span> Seattle      
-#&gt; </span><span style='color: #555555;'>10</span><span>   980.  335.  | </span><span style='color: #555555;'>10</span><span> Washington.DC
+#&gt;                  |    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>   719. -</span><span style='color: #BB0000;'>143.</span><span>  | </span><span style='color: #BCBCBC;'> 1</span><span> Atlanta      
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>   382.  341.  | </span><span style='color: #BCBCBC;'> 2</span><span> Chicago      
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>  -</span><span style='color: #BB0000;'>482.</span><span>   25.3 | </span><span style='color: #BCBCBC;'> 3</span><span> Denver       
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>   161. -</span><span style='color: #BB0000;'>573.</span><span>  | </span><span style='color: #BCBCBC;'> 4</span><span> Houston      
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>204.</span><span> -</span><span style='color: #BB0000;'>390.</span><span>  | </span><span style='color: #BCBCBC;'> 5</span><span> LosAngeles   
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  </span><span style='text-decoration: underline;'>1</span><span>134. -</span><span style='color: #BB0000;'>582.</span><span>  | </span><span style='color: #BCBCBC;'> 6</span><span> Miami        
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>  </span><span style='text-decoration: underline;'>1</span><span>072.  519.  | </span><span style='color: #BCBCBC;'> 7</span><span> NewYork      
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>421.</span><span> -</span><span style='color: #BB0000;'>113.</span><span>  | </span><span style='color: #BCBCBC;'> 8</span><span> SanFrancisco 
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>342.</span><span>  580.  | </span><span style='color: #BCBCBC;'> 9</span><span> Seattle      
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>   980.  335.  | </span><span style='color: #BCBCBC;'>10</span><span> Washington.DC
 #&gt; # 
 #&gt; # V: [ 10 x 2 | 1 ]
 #&gt;        V1     V2 |    .name        
-#&gt;                  |    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        
-#&gt; </span><span style='color: #555555;'> 1</span><span>   719. -</span><span style='color: #BB0000;'>143.</span><span>  | </span><span style='color: #555555;'> 1</span><span> Atlanta      
-#&gt; </span><span style='color: #555555;'> 2</span><span>   382.  341.  | </span><span style='color: #555555;'> 2</span><span> Chicago      
-#&gt; </span><span style='color: #555555;'> 3</span><span>  -</span><span style='color: #BB0000;'>482.</span><span>   25.3 | </span><span style='color: #555555;'> 3</span><span> Denver       
-#&gt; </span><span style='color: #555555;'> 4</span><span>   161. -</span><span style='color: #BB0000;'>573.</span><span>  | </span><span style='color: #555555;'> 4</span><span> Houston      
-#&gt; </span><span style='color: #555555;'> 5</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>204.</span><span> -</span><span style='color: #BB0000;'>390.</span><span>  | </span><span style='color: #555555;'> 5</span><span> LosAngeles   
-#&gt; </span><span style='color: #555555;'> 6</span><span>  </span><span style='text-decoration: underline;'>1</span><span>134. -</span><span style='color: #BB0000;'>582.</span><span>  | </span><span style='color: #555555;'> 6</span><span> Miami        
-#&gt; </span><span style='color: #555555;'> 7</span><span>  </span><span style='text-decoration: underline;'>1</span><span>072.  519.  | </span><span style='color: #555555;'> 7</span><span> NewYork      
-#&gt; </span><span style='color: #555555;'> 8</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>421.</span><span> -</span><span style='color: #BB0000;'>113.</span><span>  | </span><span style='color: #555555;'> 8</span><span> SanFrancisco 
-#&gt; </span><span style='color: #555555;'> 9</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>342.</span><span>  580.  | </span><span style='color: #555555;'> 9</span><span> Seattle      
-#&gt; </span><span style='color: #555555;'>10</span><span>   980.  335.  | </span><span style='color: #555555;'>10</span><span> Washington.DC</div><div class='input'><span class='fu'>get_alignment</span>(<span class='no'>usa_mds_rotate</span>)</div><div class='output co'>#&gt;      [,1] [,2]
+#&gt;                  |    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>   719. -</span><span style='color: #BB0000;'>143.</span><span>  | </span><span style='color: #BCBCBC;'> 1</span><span> Atlanta      
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>   382.  341.  | </span><span style='color: #BCBCBC;'> 2</span><span> Chicago      
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>  -</span><span style='color: #BB0000;'>482.</span><span>   25.3 | </span><span style='color: #BCBCBC;'> 3</span><span> Denver       
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>   161. -</span><span style='color: #BB0000;'>573.</span><span>  | </span><span style='color: #BCBCBC;'> 4</span><span> Houston      
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>204.</span><span> -</span><span style='color: #BB0000;'>390.</span><span>  | </span><span style='color: #BCBCBC;'> 5</span><span> LosAngeles   
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  </span><span style='text-decoration: underline;'>1</span><span>134. -</span><span style='color: #BB0000;'>582.</span><span>  | </span><span style='color: #BCBCBC;'> 6</span><span> Miami        
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>  </span><span style='text-decoration: underline;'>1</span><span>072.  519.  | </span><span style='color: #BCBCBC;'> 7</span><span> NewYork      
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>421.</span><span> -</span><span style='color: #BB0000;'>113.</span><span>  | </span><span style='color: #BCBCBC;'> 8</span><span> SanFrancisco 
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>342.</span><span>  580.  | </span><span style='color: #BCBCBC;'> 9</span><span> Seattle      
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>   980.  335.  | </span><span style='color: #BCBCBC;'>10</span><span> Washington.DC</div><div class='input'><span class='fu'>get_alignment</span>(<span class='no'>usa_mds_rotate</span>)</div><div class='output co'>#&gt;      [,1] [,2]
 #&gt; [1,]   -1    0
 #&gt; [2,]    0   -1</div><div class='input'><span class='no'>usa_mds_rotate</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>() +
@@ -322,21 +324,21 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>,
 #&gt; # U: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
-#&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
-#&gt; </span><span style='color: #555555;'>3</span><span>  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
-#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
-#&gt; </span><span style='color: #555555;'>5</span><span>  4.41     2.91  | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  4.41     2.91  | 
 #&gt; 
 #&gt; # 
 #&gt; # V: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
-#&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
-#&gt; </span><span style='color: #555555;'>3</span><span>  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
-#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
-#&gt; </span><span style='color: #555555;'>5</span><span>  4.41     2.91  | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  4.41     2.91  | 
 #&gt; </div><div class='input'><span class='no'>country_differences</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/prcomp'>prcomp</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
@@ -346,21 +348,21 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>,
 #&gt; # U: [ 13 x 13 | 0 ]
 #&gt;      PC1   PC2     PC3 ... | 
 #&gt;                            | 
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.576</span><span>  5.50  3.17       | 
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>2.74</span><span>   6.34 -</span><span style='color: #BB0000;'>0.059</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> ... | 
-#&gt; </span><span style='color: #555555;'>3</span><span>  7.37   2.28 -</span><span style='color: #BB0000;'>1.22</span><span>       | 
-#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>5.50</span><span>   2.88 -</span><span style='color: #BB0000;'>1.06</span><span>       | 
-#&gt; </span><span style='color: #555555;'>5</span><span>  9.60  -</span><span style='color: #BB0000;'>4.05</span><span> -</span><span style='color: #BB0000;'>3.03</span><span>       | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.576</span><span>  5.50  3.17       | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>2.74</span><span>   6.34 -</span><span style='color: #BB0000;'>0.059</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> ... | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  7.37   2.28 -</span><span style='color: #BB0000;'>1.22</span><span>       | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>5.50</span><span>   2.88 -</span><span style='color: #BB0000;'>1.06</span><span>       | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  9.60  -</span><span style='color: #BB0000;'>4.05</span><span> -</span><span style='color: #BB0000;'>3.03</span><span>       | 
 #&gt; 
 #&gt; # 
 #&gt; # V: [ 13 x 13 | 0 ]
 #&gt;      PC1    PC2      PC3 ... | 
 #&gt;                              | 
-#&gt; </span><span style='color: #555555;'>1</span><span>  0.104 -</span><span style='color: #BB0000;'>0.423</span><span> -</span><span style='color: #BB0000;'>0.340</span><span>       | 
-#&gt; </span><span style='color: #555555;'>2</span><span>  0.206 -</span><span style='color: #BB0000;'>0.475</span><span> -</span><span style='color: #BB0000;'>0.001</span><span style='color: #BB0000;text-decoration: underline;'>97</span><span> ... | 
-#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.289</span><span> -</span><span style='color: #BB0000;'>0.206</span><span>  0.121       | 
-#&gt; </span><span style='color: #555555;'>4</span><span>  0.343 -</span><span style='color: #BB0000;'>0.250</span><span>  0.102       | 
-#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.352</span><span>  0.161  0.302       | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.104 -</span><span style='color: #BB0000;'>0.423</span><span> -</span><span style='color: #BB0000;'>0.340</span><span>       | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.206 -</span><span style='color: #BB0000;'>0.475</span><span> -</span><span style='color: #BB0000;'>0.001</span><span style='color: #BB0000;text-decoration: underline;'>97</span><span> ... | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.289</span><span> -</span><span style='color: #BB0000;'>0.206</span><span>  0.121       | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.343 -</span><span style='color: #BB0000;'>0.250</span><span>  0.102       | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.352</span><span>  0.161  0.302       | 
 #&gt; </div><div class='input'><span class='co'># negate PCA cases to MDS coordinates</span>
 <span class='no'>differences_cmds</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>negate_to</span>(<span class='no'>differences_pca</span>, <span class='st'>"u"</span>) <span class='kw'>%&gt;%</span>
@@ -370,21 +372,21 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>,
 #&gt; # U: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
-#&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span>  2.94  | 
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>     3.68  | 
-#&gt; </span><span style='color: #555555;'>3</span><span>  3.70     0.883 | 
-#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>     2.01  | 
-#&gt; </span><span style='color: #555555;'>5</span><span>  4.41    -</span><span style='color: #BB0000;'>2.91</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span>  2.94  | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>     3.68  | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.70     0.883 | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>     2.01  | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  4.41    -</span><span style='color: #BB0000;'>2.91</span><span>  | 
 #&gt; 
 #&gt; # 
 #&gt; # V: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
-#&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span>  2.94  | 
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>     3.68  | 
-#&gt; </span><span style='color: #555555;'>3</span><span>  3.70     0.883 | 
-#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>     2.01  | 
-#&gt; </span><span style='color: #555555;'>5</span><span>  4.41    -</span><span style='color: #BB0000;'>2.91</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span>  2.94  | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>     3.68  | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.70     0.883 | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>     2.01  | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  4.41    -</span><span style='color: #BB0000;'>2.91</span><span>  | 
 #&gt; </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(),
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(),
@@ -398,21 +400,21 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>,
 #&gt; # U: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
-#&gt; </span><span style='color: #555555;'>2</span><span>  1.02    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
-#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>3.70</span><span>    -</span><span style='color: #BB0000;'>0.883</span><span> | 
-#&gt; </span><span style='color: #555555;'>4</span><span>  2.56    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
-#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>4.41</span><span>     2.91  | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  1.02    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>3.70</span><span>    -</span><span style='color: #BB0000;'>0.883</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  2.56    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>4.41</span><span>     2.91  | 
 #&gt; 
 #&gt; # 
 #&gt; # V: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
-#&gt; </span><span style='color: #555555;'>2</span><span>  1.02    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
-#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>3.70</span><span>    -</span><span style='color: #BB0000;'>0.883</span><span> | 
-#&gt; </span><span style='color: #555555;'>4</span><span>  2.56    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
-#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>4.41</span><span>     2.91  | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  1.02    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>3.70</span><span>    -</span><span style='color: #BB0000;'>0.883</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  2.56    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>4.41</span><span>     2.91  | 
 #&gt; </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(),
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(),
@@ -427,18 +429,18 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>,
 #&gt; # U: [ 4 x 3 | 0 ]
 #&gt;     Dim1   Dim2   Dim3 | 
 #&gt;                        | 
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>1.35</span><span>   0.578 -</span><span style='color: #BB0000;'>1.35</span><span>  | 
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.136</span><span>  0.173  0.950 | 
-#&gt; </span><span style='color: #555555;'>3</span><span>  0.169 -</span><span style='color: #BB0000;'>2.62</span><span>  -</span><span style='color: #BB0000;'>0.550</span><span> | 
-#&gt; </span><span style='color: #555555;'>4</span><span>  1.94   0.695 -</span><span style='color: #BB0000;'>0.901</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.35</span><span>   0.578 -</span><span style='color: #BB0000;'>1.35</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.136</span><span>  0.173  0.950 | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.169 -</span><span style='color: #BB0000;'>2.62</span><span>  -</span><span style='color: #BB0000;'>0.550</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  1.94   0.695 -</span><span style='color: #BB0000;'>0.901</span><span> | 
 #&gt; # 
 #&gt; # V: [ 4 x 3 | 0 ]
 #&gt;     Dim1   Dim2    Dim3 | 
 #&gt;                         | 
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>1.19</span><span>   0.314 -</span><span style='color: #BB0000;'>0.567</span><span>  | 
-#&gt; </span><span style='color: #555555;'>2</span><span>  1.03   0.831  0.045</span><span style='text-decoration: underline;'>7</span><span> | 
-#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.349</span><span> -</span><span style='color: #BB0000;'>0.880</span><span>  2.01   | 
-#&gt; </span><span style='color: #555555;'>4</span><span>  0.878 -</span><span style='color: #BB0000;'>2.22</span><span>  -</span><span style='color: #BB0000;'>1.32</span><span>   | </div><div class='input'><span class='no'>HairEyeColor</span>[, , <span class='st'>"Female"</span>] <span class='kw'>%&gt;%</span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.19</span><span>   0.314 -</span><span style='color: #BB0000;'>0.567</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  1.03   0.831  0.045</span><span style='text-decoration: underline;'>7</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.349</span><span> -</span><span style='color: #BB0000;'>0.880</span><span>  2.01   | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.878 -</span><span style='color: #BB0000;'>2.22</span><span>  -</span><span style='color: #BB0000;'>1.32</span><span>   | </div><div class='input'><span class='no'>HairEyeColor</span>[, , <span class='st'>"Female"</span>] <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>ca</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/ca/topics/ca'>ca</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>female_haireye_ca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (4 x 3) x (4 x 3)'
@@ -447,18 +449,18 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>,
 #&gt; # U: [ 4 x 3 | 0 ]
 #&gt;     Dim1   Dim2   Dim3 | 
 #&gt;                        | 
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.940</span><span>  1.92  -</span><span style='color: #BB0000;'>0.683</span><span> | 
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.473</span><span> -</span><span style='color: #BB0000;'>0.441</span><span>  0.878 | 
-#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.505</span><span> -</span><span style='color: #BB0000;'>1.55</span><span>  -</span><span style='color: #BB0000;'>2.19</span><span>  | 
-#&gt; </span><span style='color: #555555;'>4</span><span>  1.67   0.258 -</span><span style='color: #BB0000;'>0.111</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.940</span><span>  1.92  -</span><span style='color: #BB0000;'>0.683</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.473</span><span> -</span><span style='color: #BB0000;'>0.441</span><span>  0.878 | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.505</span><span> -</span><span style='color: #BB0000;'>1.55</span><span>  -</span><span style='color: #BB0000;'>2.19</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  1.67   0.258 -</span><span style='color: #BB0000;'>0.111</span><span> | 
 #&gt; # 
 #&gt; # V: [ 4 x 3 | 0 ]
 #&gt;      Dim1   Dim2   Dim3 | 
 #&gt;                         | 
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.990</span><span>   0.728 -</span><span style='color: #BB0000;'>0.232</span><span> | 
-#&gt; </span><span style='color: #555555;'>2</span><span>  1.26    0.382  0.149 | 
-#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.538</span><span>  -</span><span style='color: #BB0000;'>1.54</span><span>   1.77  | 
-#&gt; </span><span style='color: #555555;'>4</span><span>  0.077</span><span style='text-decoration: underline;'>2</span><span> -</span><span style='color: #BB0000;'>1.99</span><span>  -</span><span style='color: #BB0000;'>2.27</span><span>  | </div><div class='input'><span class='no'>ca_biplot</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>ord</span>) {
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.990</span><span>   0.728 -</span><span style='color: #BB0000;'>0.232</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  1.26    0.382  0.149 | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.538</span><span>  -</span><span style='color: #BB0000;'>1.54</span><span>   1.77  | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.077</span><span style='text-decoration: underline;'>2</span><span> -</span><span style='color: #BB0000;'>1.99</span><span>  -</span><span style='color: #BB0000;'>2.27</span><span>  | </div><div class='input'><span class='no'>ca_biplot</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>ord</span>) {
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>ord</span>, <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
     <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>.mass</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"saddlebrown"</span>) +
     <span class='fu'><a href='geom-biplot-point.html'>geom_v_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>.mass</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"seagreen4"</span>) +
