@@ -48,7 +48,7 @@ plot(x = NA, y = NA, asp = 1,
 points(0, 0, pch = 19)
 points(U, col = as.integer(C), pch = (0:2)[as.integer(C)])
 points(Mc %*% W[, 1:r], col = 1:c, pch = (15:17)[1:c], cex = 2)
-segments(x0 = 0, y0 = 0, x1 = V[, 1], y1 = V[, 2], pch = 15)
+segments(x0 = 0, y0 = 0, x1 = V[, 1], y1 = V[, 2], pch = 15, col = 4:7)
 
 # manually, following Greenacre (2010)
 
@@ -72,37 +72,34 @@ Y_bar <- X_bar - matrix(1, G, 1) %*% t(x_bar)
 # eigendecomposition of within-class covariance matrix
 Ceigen <- eigen(C)
 # inverse of symmetric square root of within-class covariance matrix
-Csqrt <- Ceigen$vectors %*% diag(1/sqrt(Ceigen$values)) %*% t(Ceigen$vectors)
+Csqrtinv <- Ceigen$vectors %*% diag(1/sqrt(Ceigen$values)) %*% t(Ceigen$vectors)
 # weighted Mahalanobis distance
-S <- diag(sqrt(1/G), G) %*% Y_bar %*% Csqrt * 1/sqrt(J)
+S <- diag(sqrt(1/G), G) %*% Y_bar %*% Csqrtinv * 1/sqrt(J)
 # singular value decomposition of weighted Mahalanobis distance
 Ssvd <- svd(S)
 # decomposition of variance (centroids)
 (Ssvd$d^2 / sum(Ssvd$d^2))
 # principal coordinates of group centroids
 F <- diag(1/sqrt(1/G), G) %*% Ssvd$u %*% diag(Ssvd$d)
-F <- Y_bar %*% Csqrt %*% Ssvd$v * sqrt(1/J)
+F <- Y_bar %*% Csqrtinv %*% Ssvd$v * sqrt(1/J)
 # coordinates of variables for contribution biplot
 Gamma <- Ssvd$v
 # centered case data
 Y <- X - t(x_bar)[rep(1, I), ]
 # principal coordinates of cases
-Fcase <- Y %*% Csqrt %*% Ssvd$v * sqrt(1/J)
+Fcase <- Y %*% Csqrtinv %*% Ssvd$v * sqrt(1/J)
 # contribution biplot
 plot(x = NA, y = NA, asp = 1,
      xlim = range(c(F[, 1], Gamma[, 1])), ylim = range(c(F[, 2], Gamma[, 2])))
 points(0, 0, pch = 19)
 points(Fcase, col = as.integer(gx), pch = (0:2)[as.integer(gx)])
 points(F, col = 1:G, pch = (15:17)[1:G], cex = 2)
-segments(x0 = 0, y0 = 0, x1 = Gamma[, 1], y1 = Gamma[, 2], pch = 15)
+segments(x0 = 0, y0 = 0, x1 = Gamma[, 1], y1 = Gamma[, 2], pch = 15, col = 4:7)
 
 # `MASS::lda()` and `ggbiplot::ggbiplot()`
 
-iris_lda <- MASS::lda(Species ~ ., iris)
-# `predict(iris_lda)$x` agrees with Greenacre up to scalar multiple
-
-ggbiplot::ggbiplot(iris_lda)
-# variable vectors based on cases rather than group centroids?
+ggbiplot::ggbiplot(MASS::lda(Species ~ ., iris))
+# are the variable vectors based on cases rather than group centroids?
 
 # simplified `MASS::lda()`
 
@@ -124,6 +121,7 @@ group.means <- tapply(c(x), list(rep(g, p), col(x)), mean)
 # WITHIN-GROUP PRECISIONS (STANDARD DEVIATION INVERSES)
 # "PRIOR" SYMMETRIC SQUARE ROOT OF COVARIANCE MATRIX
 scaling <- diag(1/sqrt(diag(var(x - group.means[g, ]))))
+scaling0 <- scaling
 # (other methods)
 # STANDARDIZED (CENTERED AND SCALED) AND SCALE-FACTORED DATA
 X <- sqrt(1/(n - ng)) * (x - group.means[g, ]) %*% scaling
@@ -136,6 +134,7 @@ if (rank < p)
   warning("variables are collinear")
 # 
 scaling <- scaling %*% X.s$v[, 1L:rank] %*% diag(1/X.s$d[1L:rank], , rank)
+scaling1 <- scaling
 # (resume)
 # DATA CENTROID
 xbar <- colSums(proportions %*% group.means)
@@ -160,13 +159,14 @@ if (is.null(dimnames(x))) {
 }
 cl <- match.call()
 cl[[1L]] <- as.name("lda")
-structure(list(
-  prior = proportions, counts = counts, means = group.means, 
-  scaling = scaling, lev = lev, svd = X.s$d[1L:rank], N = n, 
-  call = cl
-), class = "lda")
+list(
+  prior = proportions, counts = counts, means = group.means,
+  scaling = scaling, lev = lev, svd = X.s$d[1L:rank], N = n
+)
 
 # simplified `MASS:::predict.lda()`
+
+object <- MASS:::lda(x = x, grouping = grouping, tol = tol)
 
 # input
 prior <- object$prior
@@ -227,22 +227,41 @@ tol <- 1e-04
 object <- MASS::lda(x = x, grouping = grouping, tol = tol)
 
 # components
-means <- colSums(object$prior * object$means)
-means_centered <- scale(object$means, center = means, scale = FALSE)
-U <- means_centered %*% scaling
-x_centered <- scale(eval.parent(object$call$x), center = means, scale = FALSE)
-U_x <- x_centered %*% scaling
-#U_x <- predict(object)$x
-V <- X.s$v
 n <- object$N
 ng <- length(object$lev)
+means <- colSums(object$prior * object$means)
+means_centered <- scale(object$means, center = means, scale = FALSE)
+U <- means_centered %*% object$scaling
+x_centered <- scale(eval.parent(object$call$x), center = means, scale = FALSE)
+#U_x <- predict(object)$x
+U_x <- x_centered %*% object$scaling
+# recover V, adapting Greenacre (off by a scale factor or two)
+Cw <- var(eval.parent(object$call$x) -
+            object$means[eval.parent(object$call$grouping), ])
+Cweigen <- eigen(Cw)
+Cwsqrt <- Cweigen$vectors %*% diag(sqrt(Cweigen$values)) %*% t(Cweigen$vectors)
+V <- 1/sqrt(ncol(object$means)) * Cwsqrt %*% object$scaling
+V <- 1/sqrt(ncol(object$means)) * object$scaling
+V <- 1/sqrt(ncol(object$means)) * solve(scaling1) %*% object$scaling
+V <- 1/sqrt(length(object$lev)) *
+  solve(scaling1 %*% t(scaling1)) %*%
+  object$scaling * 5
+# standardize discriminant coordinates
+V <- 1/sqrt(ncol(object$means)) *
+  solve(scaling0) %*%
+  object$scaling
 
 # biplot
 
+# for comparison with Greenacre plot
+U[, 2] <- -U[, 2]
+U_x[, 2] <- -U_x[, 2]
+V[, 2] <- -V[, 2]
+# biplot
 plot(x = NA, y = NA, asp = 1,
      xlim = range(c(U[, 1], V[, 1])),
      ylim = range(c(U[, 2], V[, 2])))
 points(0, 0, pch = 19)
 points(U_x, col = as.integer(grouping), pch = (0:2)[as.integer(grouping)])
 points(U, col = 1:ng, pch = (15:17)[1:ng], cex = 2)
-segments(x0 = 0, y0 = 0, x1 = V[, 1], y1 = V[, 2], pch = 15)
+segments(x0 = 0, y0 = 0, x1 = V[, 1], y1 = V[, 2], pch = 15, col = 4:7)
