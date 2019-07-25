@@ -28,13 +28,14 @@
 #'   coordinates or also augmented case and variable data, and, if the latter,
 #'   whether only shared fields or all from both.
 #' @example inst/examples/ex-fortify.r
+#' @example inst/examples/diabetes-lda.r
 
 #' @rdname fortify
 #' @export
 fortify.tbl_ord <- function(
   model, data, ...,
   .matrix = "uv",
-  include = "all"
+  include = "all", supplement = TRUE
 ) {
   # check first if coordinate / inertia diagonal is desired
   .matrix <- match.arg(.matrix, c(names(tbl_ord_factors), "coordinates"))
@@ -55,6 +56,9 @@ fortify.tbl_ord <- function(
       )
       u$.matrix <- "u"
     }
+    if (supplement && ! is.null(attr(model, "u_supplement"))) {
+      u <- dplyr::bind_rows(u, attr(model, "u_supplement"))
+    }
   }
   if (grepl("v", .matrix)) {
     v <- as_tibble(get_v(model))
@@ -64,6 +68,9 @@ fortify.tbl_ord <- function(
         augment_annotation(model, "v")
       )
       v$.matrix <- "v"
+    }
+    if (supplement && ! is.null(attr(model, "v_supplement"))) {
+      v <- dplyr::bind_rows(v, attr(model, "v_supplement"))
     }
   }
   

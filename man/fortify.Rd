@@ -10,7 +10,7 @@
 \title{Fortify a \code{tbl_ord} for plotting}
 \usage{
 \method{fortify}{tbl_ord}(model, data, ..., .matrix = "uv",
-  include = "all")
+  include = "all", supplement = TRUE)
 
 fortify_coord(model)
 
@@ -73,4 +73,22 @@ ggplot(pca, .matrix = "coord", aes(x = .name, y = .prop_var)) +
   geom_bar(stat = "identity")
 # `fortify()` being called internally by `ggbiplot()`
 ggbiplot(pca) + geom_v_vector() + geom_u_point()
+# Linear discriminant analysis of Reaven & Miller diabetes data
+head(heplots::Diabetes)
+(diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes))
+lapply(supplementation_u(diabetes_lda), head)
+as_tbl_ord(diabetes_lda) \%>\%
+  augment() \%>\%
+  supplement_u() \%>\%
+  augment_supplement_u() \%>\%
+  print() -> diabetes_lda
+ggbiplot(diabetes_lda) +
+  theme_bw() +
+  geom_u_point(aes(color = .grouping, size = is.na(.supplement)), alpha = .5) +
+  geom_v_axis(color = "#888888") +
+  geom_v_text_radiate(aes(label = .name)) +
+  scale_color_brewer(type = "qual", palette = 2) +
+  ggtitle(
+    "Column-standardized LDA biplot of Reaven & Miller diabetes data"
+  )
 }

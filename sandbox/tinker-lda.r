@@ -1,5 +1,6 @@
 # resources
 # https://github.com/cran/MASS/blob/master/R/lda.R
+# https://tinyurl.com/yyhpyu2d
 # https://sebastianraschka.com/Articles/2014_python_lda.html
 # https://stats.stackexchange.com/a/110733/68743 [amoeba]
 # https://stats.stackexchange.com/a/83114/68743 [ttnphns]

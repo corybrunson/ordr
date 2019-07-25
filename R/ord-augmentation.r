@@ -1,18 +1,19 @@
 #' @title Augment metadata on the factors and coordinates of ordination objects
 #'
 #' @description These functions return data associated with the cases,
-#'   variables, and coordinates of an ordination object.
+#'   variables, and coordinates of an ordination object, and attach it to the
+#'   object.
 #'   
 
 #' @details
 #'
-#' The `augmentation_*()` functions produce [tibble][tibble::tibble]s of values
-#' associated with the cases, variables, and coordinates of a `tbl_ord` object.
-#' The first field of each tibble is `.name`, which contains the case, variable,
-#' or coordinate names. Additional fields contain information about the cases,
+#' The `augmentation_*()` methods produce [tibble][tibble::tibble]s of values
+#' associated with the rows, columns, and coordinates of a `tbl_ord` object. The
+#' first field of each tibble is `.name`, which contains the case, variable, or
+#' coordinate names. Additional fields contain information about the cases,
 #' variables, or coordinates extracted from the original ordination object.
 #'
-#' The `augment_*()` functions return the ordination with each or both factor
+#' The `augment_*()` functions return the ordination with either or both factors
 #' annotated with the result of `augmentation_*()`. In this way `augment_*()`
 #' works like [generics::augment()] by extracting information for a tidy summary
 #' of the components, but it differs in returning an annotated `tbl_ord` rather
@@ -119,3 +120,50 @@ augment_u <- function(x) augment_factor(x, .matrix = "u")
 #' @rdname augmentation
 #' @export
 augment_v <- function(x) augment_factor(x, .matrix = "v")
+
+#' @rdname augmentation
+#' @export
+augmentation_supplement_u <- function(x) UseMethod("augmentation_supplement_u")
+
+#' @rdname augmentation
+#' @export
+augmentation_supplement_v <- function(x) UseMethod("augmentation_supplement_v")
+
+#' @rdname augmentation
+#' @export
+augmentation_supplement_factor <- function(x, .matrix) {
+  switch(
+    match_factor(.matrix),
+    u = augmentation_supplement_u(x),
+    v = augmentation_supplement_v(x),
+    uv = list(
+      u = augmentation_supplement_u(x),
+      v = augmentation_supplement_v(x)
+    )
+  )
+}
+
+get_supplement_factor <- function(x, .matrix) {
+  switch(
+    match_factor(.matrix),
+    u = attr(x, "u_supplement"),
+    v = attr(x, "v_supplement")
+  )
+}
+
+augment_supplement_factor <- function(x, .matrix) {
+  augsup <- augmentation_supplement_factor(x, .matrix)
+  set_supplementation_factor(
+    x,
+    dplyr::bind_cols(get_supplement_factor(x, .matrix), augsup),
+    .matrix = .matrix
+  )
+}
+
+#' @rdname augmentation
+#' @export
+augment_supplement_u <- function(x) augment_supplement_factor(x, .matrix = "u")
+
+#' @rdname augmentation
+#' @export
+augment_supplement_v <- function(x) augment_supplement_factor(x, .matrix = "v")

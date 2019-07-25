@@ -76,8 +76,11 @@ recover_v.data.frame <- function(x) {
 
 #' @rdname accessors
 #' @export
-get_u <- function(x, align = TRUE) {
+get_u <- function(x, align = TRUE, supplement = FALSE) {
   u <- recover_u(x)
+  if (supplement && ! is.null(attr(x, "u_supplement"))) {
+    u <- rbind(u, as.matrix(attr(x, "u_supplement")[, get_coord(x)]))
+  }
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     s <- diag(sqrt(recover_inertia(x)) ^ p[1])
@@ -95,8 +98,11 @@ get_u <- function(x, align = TRUE) {
 
 #' @rdname accessors
 #' @export
-get_v <- function(x, align = TRUE) {
+get_v <- function(x, align = TRUE, supplement = FALSE) {
   v <- recover_v(x)
+  if (supplement && ! is.null(attr(x, "v_supplement"))) {
+    v <- rbind(v, as.matrix(attr(x, "v_supplement")[, get_coord(x)]))
+  }
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     s <- diag(sqrt(recover_inertia(x)) ^ p[2])
