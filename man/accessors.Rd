@@ -39,13 +39,14 @@ recover_factor(x, .matrix)
 
 \method{recover_v}{data.frame}(x)
 
-get_u(x, align = TRUE)
+get_u(x, .supplement = TRUE, align = TRUE)
 
-get_v(x, align = TRUE)
+get_v(x, .supplement = TRUE, align = TRUE)
 
-get_factor(x, .matrix, align = TRUE)
+get_factor(x, .matrix, .supplement = TRUE, align = TRUE)
 
-\method{as.matrix}{tbl_ord}(x, ..., .matrix, align = TRUE)
+\method{as.matrix}{tbl_ord}(x, ..., .matrix, .supplement = TRUE,
+  align = TRUE)
 
 recover_inertia(x)
 
@@ -73,6 +74,8 @@ dim_factor(x, .matrix)
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
+
+\item{.supplement}{Logical; whether to include}
 
 \item{align}{Logical; whether to align the matrix factors and coordinates
 according to an \code{"align"} matrix attribute.}

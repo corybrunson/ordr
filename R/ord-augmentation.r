@@ -1,18 +1,19 @@
 #' @title Augment metadata on the factors and coordinates of ordination objects
 #'
 #' @description These functions return data associated with the cases,
-#'   variables, and coordinates of an ordination object.
+#'   variables, and coordinates of an ordination object, and attach it to the
+#'   object.
 #'   
 
 #' @details
 #'
-#' The `augmentation_*()` functions produce [tibble][tibble::tibble]s of values
-#' associated with the cases, variables, and coordinates of a `tbl_ord` object.
-#' The first field of each tibble is `.name`, which contains the case, variable,
-#' or coordinate names. Additional fields contain information about the cases,
+#' The `augmentation_*()` methods produce [tibble][tibble::tibble]s of values
+#' associated with the rows, columns, and coordinates of a `tbl_ord` object. The
+#' first field of each tibble is `.name`, which contains the case, variable, or
+#' coordinate names. Additional fields contain information about the cases,
 #' variables, or coordinates extracted from the original ordination object.
 #'
-#' The `augment_*()` functions return the ordination with each or both factor
+#' The `augment_*()` functions return the ordination with either or both factors
 #' annotated with the result of `augmentation_*()`. In this way `augment_*()`
 #' works like [generics::augment()] by extracting information for a tidy summary
 #' of the components, but it differs in returning an annotated `tbl_ord` rather
@@ -20,6 +21,7 @@
 #' different components is that more information contained in the original
 #' object becomes accessible to the user. To achieve a result similar to that of
 #' [generics::augment()], use [fortify()].
+#' 
 
 #' @name augmentation
 #' @include ord-accessors.r

@@ -23,17 +23,20 @@
 #' @param ... Additional arguments received from `fortify()` or `tidy()`;
 #'   ignored.
 #' @template param-matrix
+#' @param .supplement Logical; whether to include
+#'   [supplementary][supplementation] points.
 #' @param include Character matched to `"coordinates"`, `"shared"`, or `"all"`;
 #'   whether the fortified data frame should include only the ordination
 #'   coordinates or also augmented case and variable data, and, if the latter,
 #'   whether only shared fields or all from both.
 #' @example inst/examples/ex-fortify.r
+#' @example inst/examples/diabetes-lda-supplement.r
 
 #' @rdname fortify
 #' @export
 fortify.tbl_ord <- function(
   model, data, ...,
-  .matrix = "uv",
+  .matrix = "uv", .supplement = TRUE,
   include = "all"
 ) {
   # check first if coordinate / inertia diagonal is desired
@@ -53,6 +56,12 @@ fortify.tbl_ord <- function(
         u,
         augment_annotation(model, "u")
       )
+    }
+    if (! .supplement && ".supplement" %in% names(u)) {
+      u <- subset(u, ! .supplement)
+      u$.supplement <- NULL
+    }
+    if (include != "coordinates") {
       u$.matrix <- "u"
     }
   }
@@ -63,6 +72,12 @@ fortify.tbl_ord <- function(
         v,
         augment_annotation(model, "v")
       )
+    }
+    if (! .supplement && ".supplement" %in% names(v)) {
+      v <- subset(v, ! .supplement)
+      v$.supplement <- NULL
+    }
+    if (include != "coordinates") {
       v$.matrix <- "v"
     }
   }
@@ -119,6 +134,14 @@ generics::tidy
 
 #' @rdname fortify
 #' @export
-tidy.tbl_ord <- function(x, ..., .matrix = "uv", include = "all") {
-  fortify.tbl_ord(model = x, data = NULL, .matrix = .matrix, include = include)
+tidy.tbl_ord <- function(
+  x, ...,
+  .matrix = "uv", .supplement = TRUE,
+  include = "all"
+) {
+  fortify.tbl_ord(
+    model = x, data = NULL,
+    .matrix = .matrix, .supplement = .supplement,
+    include = include
+  )
 }

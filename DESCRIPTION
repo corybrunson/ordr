@@ -25,6 +25,7 @@ Imports:
     purrr,
     ggrepel,
     ca,
+    MASS,
     logisticPCA,
     vegan
 License: GPL-3
@@ -34,7 +35,8 @@ Suggests:
     testthat,
     gridExtra,
     igraph,
-    igraphdata
+    igraphdata,
+    heplots
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 Collate: 
@@ -54,18 +56,20 @@ Collate:
     'geom-text.r'
     'geom-unit-circle.r'
     'geom-vector.r'
-    'lra.r'
-    'masks.r'
     'utils.r'
     'ord-accessors.r'
     'ord-augmentation.r'
     'ord-conference.r'
     'ord-alignment.r'
     'ord-tbl.r'
+    'lda.r'
+    'lra.r'
+    'masks.r'
     'methods-ca.r'
     'methods-cmds.r'
     'methods-eigen.r'
     'methods-kmeans.r'
+    'methods-lda.r'
     'methods-lm.r'
     'methods-lpca.r'
     'methods-lra.r'
@@ -74,6 +78,7 @@ Collate:
     'methods-svd.r'
     'ord-annotation.r'
     'ord-classes.r'
+    'ord-supplementation.r'
     'ordr.r'
     'plot.r'
     'reconstruct.r'

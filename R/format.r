@@ -6,7 +6,7 @@
 #' those for class [`"tbl_df"`][tibble::tbl_df] and for class
 #' [`"tbl_graph"`][tidygraph::tbl_graph].
 #'
-#' Note: The `format()` function is tedius but cannot be easily modularized
+#' **Note:** The `format()` function is tedius but cannot be easily modularized
 #' without invoking [accessors], [annotation], and [augmentation] multiple
 #' times, thereby significantly reducing performance.
 #' 
@@ -20,6 +20,7 @@
 #' @example inst/examples/country-cmds-lm.r
 #' @example inst/examples/finches-ca.r
 #' @example inst/examples/iris-princomp-sec.r
+#' @example inst/examples/diabetes-lda-supplement.r
 
 #' @rdname formatting
 #' @export
@@ -68,6 +69,22 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     ": ",
     print_reps(coord)
   )
+  supp_header <- if (! is.null(attr(x, "u_supplement")) |
+                     ! is.null(attr(x, "u_supplement"))) {
+    paste0(
+      "# ",
+      if (! is.null(attr(x, "u_supplement"))) {
+        paste0(nrow(attr(x, "u_supplement")), " supplementary rows")
+      },
+      if (! is.null(attr(x, "u_supplement")) &
+          ! is.null(attr(x, "v_supplement"))) {
+        " and "
+      },
+      if (! is.null(attr(x, "v_supplement"))) {
+        paste0(nrow(attr(x, "v_supplement")), " supplementary columns")
+      }
+    )
+  } else NULL
   uv_headers <- paste0(
     "# ", c("U", "V"),
     ": [ ", n_uv, " x ", rk, " | ", n_ann, " ]"
@@ -144,7 +161,12 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     SIMPLIFY = FALSE
   )
   
-  c(tbl_ord_header, coord_header, "# ", fmt_uv[[1]], "# ", fmt_uv[[2]])
+  c(
+    tbl_ord_header,
+    coord_header,
+    supp_header,
+    "# ", fmt_uv[[1]], "# ", fmt_uv[[2]]
+  )
 }
 
 #' @rdname formatting

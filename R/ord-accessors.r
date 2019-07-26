@@ -24,6 +24,7 @@
 #' @param x A `[tbl_ord]`, or an ordination object coercible to one.
 #' @param ... Additional arguments from [base::as.matrix()]; ignored.
 #' @template param-matrix
+#' @param .supplement Logical; whether to include
 #' @param align Logical; whether to align the matrix factors and coordinates
 #'   according to an `"align"` matrix attribute.
 #' @example inst/examples/country-cmds-lm.r
@@ -76,8 +77,9 @@ recover_v.data.frame <- function(x) {
 
 #' @rdname accessors
 #' @export
-get_u <- function(x, align = TRUE) {
+get_u <- function(x, .supplement = TRUE, align = TRUE) {
   u <- recover_u(x)
+  if (.supplement) u <- rbind(u, supplementation_u(x))
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     s <- diag(sqrt(recover_inertia(x)) ^ p[1])
@@ -95,8 +97,9 @@ get_u <- function(x, align = TRUE) {
 
 #' @rdname accessors
 #' @export
-get_v <- function(x, align = TRUE) {
+get_v <- function(x, .supplement = TRUE, align = TRUE) {
   v <- recover_v(x)
+  if (.supplement) v <- rbind(v, supplementation_v(x))
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     s <- diag(sqrt(recover_inertia(x)) ^ p[2])
@@ -114,22 +117,27 @@ get_v <- function(x, align = TRUE) {
 
 #' @rdname accessors
 #' @export
-get_factor <- function(x, .matrix, align = TRUE) {
+get_factor <- function(x, .matrix, .supplement = TRUE, align = TRUE) {
   switch(
     match_factor(.matrix),
-    u = get_u(x, align = align),
-    v = get_v(x, align = align),
-    uv = list(u = get_u(x, align = align), v = get_v(x, align = align))
+    u = get_u(x, .supplement = .supplement, align = align),
+    v = get_v(x, .supplement = .supplement, align = align),
+    uv = list(
+      u = get_u(x, .supplement = .supplement, align = align),
+      v = get_v(x, .supplement = .supplement, align = align)
+    )
   )
 }
 
 #' @rdname accessors
 #' @export
-as.matrix.tbl_ord <- function(x, ..., .matrix, align = TRUE) {
+as.matrix.tbl_ord <- function(
+  x, ..., .matrix, .supplement = TRUE, align = TRUE
+) {
   .matrix <- match_factor(.matrix)
   if (.matrix == "uv")
     stop("Can only coerce one factor ('u' or 'v') to a matrix.")
-  get_factor(x, .matrix = .matrix, align = align)
+  get_factor(x, .matrix = .matrix, .supplement = .supplement, align = align)
 }
 
 #' @rdname accessors
