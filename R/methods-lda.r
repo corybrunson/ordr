@@ -6,13 +6,14 @@
 #'
 #' @details
 #'
-#' Blah blah....
+#' See [lda-ord] for details.
 #' 
 
 #' @name methods-lda
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/diabetes-lda.r
+#' @example inst/examples/diabetes-lda-supplement.r
+#' @example inst/examples/iris-lda.r
 NULL
 
 #' @rdname methods-lda
@@ -104,18 +105,18 @@ augmentation_u.lda <- function(x) {
     return(res)
   }
   res$.supplement <- FALSE
-  groupings <- try(recover_groupings_lda(x))
+  grouping <- try(recover_grouping_lda(x))
   res_sup <- if (is.null(rownames(olddata))) {
-    if (inherits(groupings, "try-error")) {
+    if (inherits(grouping, "try-error")) {
       tibble_pole(nrow = x$N)
     } else {
-      tibble(.grouping = groupings)
+      tibble(.grouping = grouping)
     }
   } else {
-    if (inherits(groupings, "try-error")) {
+    if (inherits(grouping, "try-error")) {
       tibble(.name = rownames(olddata))
     } else {
-      tibble(.name = rownames(olddata), .grouping = groupings)
+      tibble(.name = rownames(olddata), .grouping = grouping)
     }
   }
   res_sup$.supplement <- TRUE
@@ -153,20 +154,20 @@ augmentation_u.lda_ord <- function(x) {
     return(res)
   }
   res$.supplement <- FALSE
-  groupings <- if (is.null(attr(x, "groupings"))) {
-    try(recover_groupings_lda(x))
-  } else attr(x, "groupings")
+  grouping <- if (is.null(attr(x, "grouping"))) {
+    try(recover_grouping_lda(x))
+  } else attr(x, "grouping")
   res_sup <- if (is.null(rownames(olddata))) {
-    if (inherits(groupings, "try-error")) {
+    if (inherits(grouping, "try-error")) {
       tibble_pole(nrow = x$N)
     } else {
-      tibble(.grouping = groupings)
+      tibble(.grouping = grouping)
     }
   } else {
-    if (inherits(groupings, "try-error")) {
+    if (inherits(grouping, "try-error")) {
       tibble(.name = rownames(olddata))
     } else {
-      tibble(.name = rownames(olddata), .grouping = groupings)
+      tibble(.name = rownames(olddata), .grouping = grouping)
     }
   }
   res_sup$.supplement <- TRUE
@@ -239,12 +240,12 @@ recover_olddata_lda <- function(object) {
   x
 }
 
-recover_groupings_lda <- function(object) {
+recover_grouping_lda <- function(object) {
   if(!is.null(Terms <- object$terms)) { # formula fit
     resp <- deparse(object$call$formula[[2]])
-    groupings <- eval.parent(object$call$data)[[resp]]
+    grouping <- eval.parent(object$call$data)[[resp]]
   } else { # matrix or data-frame fit
-    groupings <- eval.parent(object$call[[3]])
+    grouping <- eval.parent(object$call[[3]])
   }
-  groupings
+  grouping
 }

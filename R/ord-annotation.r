@@ -8,6 +8,7 @@
 #' The `annotation_*()` and `set_annotation_*()` functions assign and retrieve
 #' values of the `"*_annotation"` attributes of `x`, which should have the same
 #' number of rows as `get_*(x)`.
+#' 
 
 #' @name annotation
 #' @include ord-augmentation.r

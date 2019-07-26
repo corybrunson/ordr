@@ -3,9 +3,24 @@
 \name{lda-ord}
 \alias{lda-ord}
 \alias{lda_ord}
+\alias{lda_ord.formula}
+\alias{lda_ord.data.frame}
+\alias{lda_ord.matrix}
+\alias{lda_ord.default}
 \title{Augmented implementation of linear discriminant analysis}
 \usage{
 lda_ord(x, ...)
+
+\method{lda_ord}{formula}(formula, data, ..., subset, na.action)
+
+\method{lda_ord}{data.frame}(x, ...)
+
+\method{lda_ord}{matrix}(x, grouping, ..., subset, na.action)
+
+\method{lda_ord}{default}(x, grouping, prior = proportions,
+  tol = 1e-04, method = c("moment", "mle", "mve", "t"), CV = FALSE,
+  nu = 5, ..., ret.x = FALSE, ret.grouping = FALSE,
+  axes.scale = "unstandardized")
 }
 \arguments{
 \item{x}{
@@ -17,10 +32,169 @@ lda_ord(x, ...)
     arguments passed to or from other methods.
 }
 
+\item{formula}{
+    A formula of the form \code{groups ~ x1 + x2 + \dots}  That is, the
+    response is the grouping factor and the right hand side specifies
+    the (non-factor) discriminators.
+  }
+
+\item{data}{
+    Data frame from which variables specified in \code{formula} are
+    preferentially to be taken.
+  }
+
+\item{subset}{
+    An index vector specifying the cases to be used in the training
+    sample.  (NOTE: If given, this argument must be named.)
+  }
+
+\item{na.action}{
+    A function to specify the action to be taken if \code{NA}s are found.
+    The default action is for the procedure to fail.  An alternative is
+    \code{na.omit}, which leads to rejection of cases with missing values on
+    any required variable.  (NOTE: If given, this argument must be named.)
+  }
+
+\item{grouping}{
+    (required if no formula principal argument is given.)
+    a factor specifying the class for each observation.
+  }
+
+\item{prior}{
+    the prior probabilities of class membership.  If unspecified, the
+    class proportions for the training set are used.  If present, the
+    probabilities should be specified in the order of the factor
+    levels.
+  }
+
+\item{tol}{
+    A tolerance to decide if a matrix is singular; it will reject variables
+    and linear combinations of unit-variance variables whose variance is
+    less than \code{tol^2}.
+  }
+
+\item{method}{
+    \code{"moment"} for standard estimators of the mean and variance,
+    \code{"mle"} for MLEs, \code{"mve"} to use \code{\link{cov.mve}}, or
+    \code{"t"} for robust estimates based on a \eqn{t} distribution.
+  }
+
+\item{CV}{
+    If true, returns results (classes and posterior probabilities) for
+    leave-one-out cross-validation. Note that if the prior is estimated,
+    the proportions in the whole dataset are used.
+  }
+
+\item{nu}{
+    degrees of freedom for \code{method = "t"}.
+  }
+
+\item{ret.x, ret.grouping}{Logical; whether to retain as attributes the data
+matrix (\code{x}) and the class assignments (\code{grouping}) on which LDA is
+performed. Methods like \code{predict()} access these objects by name in the
+parent environment, and retaining them as attributes prevents errors that
+arise if these objects are reassigned.}
+
 \item{axes.scale}{Character string indicating how to left-transform the
-\code{scaling} value when rendering biplots using \code{\link[=ggbiplot]{ggbiplot()}}.}
+\code{scaling} value when rendering biplots using \code{\link[=ggbiplot]{ggbiplot()}}. Options include
+\code{"unstandardized"}, \code{"standardized"}, and \code{"desphered"}.}
 }
 \description{
 This function replicates \code{\link[MASS:lda]{MASS::lda()}} with options to retain
 elements useful to the \link{tbl_ord} class and biplot calculations.
+}
+\details{
+Linear discriminant analysis relies on an eigendecomposition of the product
+\eqn{W^{-1}B} of the inverse of the within-class covariance matrix \eqn{W} by
+the between-class covariance matrix \eqn{B}. This eigendecomposition can be
+motivated as the right (\eqn{V}) half of the singular value decomposition of
+the matrix of \emph{Mahalanobis distances} between the cases after "sphering"
+(linearly transforming them so that the within-class covariance is the
+identity matrix). LDA are not traditionally represented as biplots, with some
+exceptions (Gardner & le Roux, 2005; Greenacre, 2010, p. 109--117).
+
+LDA is implemented as \code{\link[MASS:lda]{MASS::lda()}} in the \strong{MASS} package, in which the
+variables are transformed by a sphering matrix \eqn{S} (Venables & Ripley,
+2003, p. 331--333). The returned element \code{scaling} contains the
+unstandardized discriminant coefficients, which define the discriminant axes
+as linear combinations of the original variables.
+
+The discriminant coefficients constitute one of several possible choices of
+axes for a biplot representation of the LDA. The slightly modified function
+\code{\link[=lda_ord]{lda_ord()}} provides additional options: standardized discriminant
+coefficients, obtained by (re)scaling the coefficients by the variable
+standard deviations; and de-sphered discriminant coefficients, obtained by
+transforming the coefficients by the inverse of the sphering matrix \eqn{S}.
+The standardized coefficients for different variables may then be directly
+compared (ttnphns, 2013), while the de-sphered coefficients recover the inner
+product relationship between the variable axes and the class centroids
+(Greenacre, 2010, p. 109--117).
+}
+\examples{
+# Linear discriminant analysis of Reaven & Miller diabetes data
+head(heplots::Diabetes)
+(diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes))
+as_tbl_ord(diabetes_lda) \%>\%
+  augment() \%>\%
+  mutate_u(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
+  print() -> diabetes_lda
+ggbiplot(diabetes_lda) +
+  theme_bw() +
+  geom_u_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
+  geom_v_axis(color = "#888888") +
+  geom_v_text_radiate(aes(label = .name)) +
+  scale_color_brewer(type = "qual", palette = 2) +
+  ggtitle("Column-standardized LDA biplot of Reaven & Miller diabetes data")
+diabetes_lda \%>\%
+  confer_inertia("symmetric") \%>\%
+  ggbiplot(.supplement = FALSE) +
+  theme_bw() +
+  #geom_u_point(aes(shape = .grouping)) +
+  geom_u_point(
+    aes(shape = .grouping), data = subset(tidy(diabetes_lda), ! .supplement)
+  ) +
+  geom_v_vector(color = "#888888") +
+  geom_v_text_radiate(aes(label = .name)) +
+  scale_color_brewer(type = "qual", palette = 2) +
+  ggtitle("Symmetric LDA biplot of Reaven & Miller diabetes data")
+# Unstandardized, standardized, and de-sphered LDAs of Anderson Iris data
+lda_biplot <- function(lda) {
+  lda \%>\%
+    as_tbl_ord() \%>\%
+    augment() \%>\%
+    mutate_u(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
+    ggbiplot() +
+    theme_bw() +
+    geom_u_point(aes(color = .grouping, size = discriminant), alpha = .5) +
+    geom_v_vector(color = "#888888") +
+    geom_v_text_radiate(aes(label = .name), size = 3) +
+    scale_color_brewer(type = "qual", palette = 2)
+}
+MASS::lda(iris[, 1:4], iris[, 5]) \%>\%
+  lda_biplot() +
+  ggtitle("Unstandardized coefficient biplot of iris LDA")
+lda_ord(iris[, 1:4], iris[, 5], axes.scale = "standardized") \%>\%
+  lda_biplot() +
+  ggtitle("Standardized coefficient biplot of iris LDA")
+lda_ord(iris[, 1:4], iris[, 5], axes.scale = "desphered") \%>\%
+  lda_biplot() +
+  ggtitle("De-sphered coefficient biplot of iris LDA")
+}
+\references{
+Gardner S & le Roux NJ (2005) "Extensions of Biplot Methodology to
+Discriminant Analysis". \emph{Journal of Classification} \strong{22}(1): 59--86.
+\doi{10.1007/s00357-005-0006-7}
+\url{https://link.springer.com/article/10.1007/s00357-005-0006-7}
+
+Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
+978-84-923846.
+\url{https://www.fbbva.es/microsite/multivariate-statistics/biplots.html}
+
+Venables WN & Ripley BD (2003) \emph{Modern Applied Statistics with S}, Fourth
+Edition. Springer Science & Business Media, ISBN: 0387954570, 9780387954578.
+\url{http://www.bagualu.net/wordpress/wp-content/uploads/2015/10/Modern_Applied_Statistics_With_S.pdf}
+
+ttnphns (2013) \emph{Answer to} "Algebra of LDA. Fisher discrimination power of a
+variable and Linear Discriminant Analysis". CrossValidated, accessed
+2019-07-26. \url{https://stats.stackexchange.com/a/83114/68743}
 }

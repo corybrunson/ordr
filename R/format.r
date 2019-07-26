@@ -6,7 +6,7 @@
 #' those for class [`"tbl_df"`][tibble::tbl_df] and for class
 #' [`"tbl_graph"`][tidygraph::tbl_graph].
 #'
-#' Note: The `format()` function is tedius but cannot be easily modularized
+#' **Note:** The `format()` function is tedius but cannot be easily modularized
 #' without invoking [accessors], [annotation], and [augmentation] multiple
 #' times, thereby significantly reducing performance.
 #' 
@@ -20,7 +20,7 @@
 #' @example inst/examples/country-cmds-lm.r
 #' @example inst/examples/finches-ca.r
 #' @example inst/examples/iris-princomp-sec.r
-#' @example inst/examples/diabetes-lda.r
+#' @example inst/examples/diabetes-lda-supplement.r
 
 #' @rdname formatting
 #' @export

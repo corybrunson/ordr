@@ -30,7 +30,7 @@
 #'   coordinates or also augmented case and variable data, and, if the latter,
 #'   whether only shared fields or all from both.
 #' @example inst/examples/ex-fortify.r
-#' @example inst/examples/diabetes-lda.r
+#' @example inst/examples/diabetes-lda-supplement.r
 
 #' @rdname fortify
 #' @export

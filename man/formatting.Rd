@@ -37,7 +37,7 @@ Formatting and printing methods for \code{tbl_ord}s
 \details{
 The \code{format} and \code{print} methods for class \link[tidygraph:tbl_graph]{"tbl_ord"``] are adapted from those for class ["tbl_df"][tibble::tbl_df] and for class ["tbl_graph"`}.
 
-Note: The \code{format()} function is tedius but cannot be easily modularized
+\strong{Note:} The \code{format()} function is tedius but cannot be easily modularized
 without invoking \link{accessors}, \link{annotation}, and \link{augmentation} multiple
 times, thereby significantly reducing performance.
 }
@@ -113,4 +113,30 @@ iris_pca \%>\%
     "Row-principal unscaled PCA biplot of Anderson iris data",
     "Variable loadings scaled to secondary axes"
   )
+# Linear discriminant analysis of Reaven & Miller diabetes data
+head(heplots::Diabetes)
+(diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes))
+as_tbl_ord(diabetes_lda) \%>\%
+  augment() \%>\%
+  mutate_u(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
+  print() -> diabetes_lda
+ggbiplot(diabetes_lda) +
+  theme_bw() +
+  geom_u_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
+  geom_v_axis(color = "#888888") +
+  geom_v_text_radiate(aes(label = .name)) +
+  scale_color_brewer(type = "qual", palette = 2) +
+  ggtitle("Column-standardized LDA biplot of Reaven & Miller diabetes data")
+diabetes_lda \%>\%
+  confer_inertia("symmetric") \%>\%
+  ggbiplot(.supplement = FALSE) +
+  theme_bw() +
+  #geom_u_point(aes(shape = .grouping)) +
+  geom_u_point(
+    aes(shape = .grouping), data = subset(tidy(diabetes_lda), ! .supplement)
+  ) +
+  geom_v_vector(color = "#888888") +
+  geom_v_text_radiate(aes(label = .name)) +
+  scale_color_brewer(type = "qual", palette = 2) +
+  ggtitle("Symmetric LDA biplot of Reaven & Miller diabetes data")
 }

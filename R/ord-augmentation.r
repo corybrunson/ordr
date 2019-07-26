@@ -21,6 +21,7 @@
 #' different components is that more information contained in the original
 #' object becomes accessible to the user. To achieve a result similar to that of
 #' [generics::augment()], use [fortify()].
+#' 
 
 #' @name augmentation
 #' @include ord-accessors.r

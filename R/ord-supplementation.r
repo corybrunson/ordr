@@ -17,11 +17,12 @@
 #' both factors attributed with the result of `supplementation_*()`. The
 #' supplementary values are augmented with a `.supplement` column whose value
 #' indicates their source and can be incorporated into a [tidied form][fortify].
+#' 
 
 #' @name supplementation
 #' @include ord-augmentation.r
 #' @inheritParams accessors
-#' @example inst/examples/diabetes-lda.r
+#' @example inst/examples/diabetes-lda-supplement.r
 NULL
 
 #' @rdname supplementation

@@ -2,20 +2,63 @@
 #'
 #' @description This function replicates [MASS::lda()] with options to retain
 #'   elements useful to the [tbl_ord] class and biplot calculations.
+#'
+#' @details
+#'
+#' Linear discriminant analysis relies on an eigendecomposition of the product
+#' \eqn{W^{-1}B} of the inverse of the within-class covariance matrix \eqn{W} by
+#' the between-class covariance matrix \eqn{B}. This eigendecomposition can be
+#' motivated as the right (\eqn{V}) half of the singular value decomposition of
+#' the matrix of _Mahalanobis distances_ between the cases after "sphering"
+#' (linearly transforming them so that the within-class covariance is the
+#' identity matrix). LDA are not traditionally represented as biplots, with some
+#' exceptions (Gardner & le Roux, 2005; Greenacre, 2010, p. 109--117).
+#'
+#' LDA is implemented as [MASS::lda()] in the **MASS** package, in which the
+#' variables are transformed by a sphering matrix \eqn{S} (Venables & Ripley,
+#' 2003, p. 331--333). The returned element `scaling` contains the
+#' unstandardized discriminant coefficients, which define the discriminant axes
+#' as linear combinations of the original variables.
+#'
+#' The discriminant coefficients constitute one of several possible choices of
+#' axes for a biplot representation of the LDA. The slightly modified function
+#' [lda_ord()] provides additional options: standardized discriminant
+#' coefficients, obtained by (re)scaling the coefficients by the variable
+#' standard deviations; and de-sphered discriminant coefficients, obtained by
+#' transforming the coefficients by the inverse of the sphering matrix \eqn{S}.
+#' The standardized coefficients for different variables may then be directly
+#' compared (ttnphns, 2013), while the de-sphered coefficients recover the inner
+#' product relationship between the variable axes and the class centroids
+#' (Greenacre, 2010, p. 109--117).
+#' 
+
+#' @template ref-gardner2005
+#' @template ref-greenacre2010
+#' @template ref-venables2003
+#' @template ref-ttnphns2013
 
 #' @name lda-ord
 #' @include ord-tbl.r
 #' @importFrom stats .getXlevels delete.response model.matrix model.response var
 #' @inheritParams MASS::lda
 #' @param axes.scale Character string indicating how to left-transform the
-#'   `scaling` value when rendering biplots using [ggbiplot()].
-#' @example inst/examples/diabetes-lda.r
+#'   `scaling` value when rendering biplots using [ggbiplot()]. Options include
+#'   `"unstandardized"`, `"standardized"`, and `"desphered"`.
+#' @param ret.x,ret.grouping Logical; whether to retain as attributes the data
+#'   matrix (`x`) and the class assignments (`grouping`) on which LDA is
+#'   performed. Methods like `predict()` access these objects by name in the
+#'   parent environment, and retaining them as attributes prevents errors that
+#'   arise if these objects are reassigned.
+#' @example inst/examples/diabetes-lda-supplement.r
+#' @example inst/examples/iris-lda.r
 NULL
 
 #' @rdname lda-ord
 #' @export
 lda_ord <- function(x, ...) UseMethod("lda_ord")
 
+#' @rdname lda-ord
+#' @export
 lda_ord.formula <- function(formula, data, ..., subset, na.action)
 {
   m <- match.call(expand.dots = FALSE)
@@ -39,6 +82,8 @@ lda_ord.formula <- function(formula, data, ..., subset, na.action)
   res
 }
 
+#' @rdname lda-ord
+#' @export
 lda_ord.data.frame <- function(x, ...)
 {
   res <- lda_ord(structure(data.matrix(x), class = "matrix"), ...)
@@ -48,7 +93,8 @@ lda_ord.data.frame <- function(x, ...)
   res
 }
 
-
+#' @rdname lda-ord
+#' @export
 lda_ord.matrix <- function(x, grouping, ..., subset, na.action)
 {
   if(!missing(subset)) {
@@ -69,10 +115,12 @@ lda_ord.matrix <- function(x, grouping, ..., subset, na.action)
   res
 }
 
+#' @rdname lda-ord
+#' @export
 lda_ord.default <- function(x, grouping, prior = proportions, tol = 1.0e-4,
                             method = c("moment", "mle", "mve", "t"),
                             CV = FALSE, nu = 5, ...,
-                            ret.x = FALSE, ret.groupings = FALSE,
+                            ret.x = FALSE, ret.grouping = FALSE,
                             axes.scale = "unstandardized")
 {
   if(is.null(dim(x))) stop("'x' is not a matrix")
@@ -213,13 +261,13 @@ lda_ord.default <- function(x, grouping, prior = proportions, tol = 1.0e-4,
     N = n, call = cl
   ), class = c("lda_ord", "lda"))
   if (ret.x) attr(res, "x") <- x
-  if (ret.groupings) attr(res, "groupings") <- groupings
+  if (ret.grouping) attr(res, "grouping") <- grouping
   attr(res, "axes.scale") <- switch(
     axes.scale,
     # unstandardized discriminant coefficients
     unstandardized = NULL,
     # standardized discriminant coefficients
-    stardardized = diag(f1),
+    standardized = diag(f1),
     # un-transformed discriminant coefficients (approximates inner products)
     desphered = covw.eig$vectors %*%
       diag(sqrt(covw.eig$values)) %*%

@@ -73,5 +73,55 @@ objects of class \code{"lda"} and \code{"lda_ord"} as returned by \code{\link[MA
 \code{\link[=lda_ord]{lda_ord()}}.
 }
 \details{
-Blah blah....
+See \link{lda-ord} for details.
+}
+\examples{
+# Linear discriminant analysis of Reaven & Miller diabetes data
+head(heplots::Diabetes)
+(diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes))
+as_tbl_ord(diabetes_lda) \%>\%
+  augment() \%>\%
+  mutate_u(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
+  print() -> diabetes_lda
+ggbiplot(diabetes_lda) +
+  theme_bw() +
+  geom_u_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
+  geom_v_axis(color = "#888888") +
+  geom_v_text_radiate(aes(label = .name)) +
+  scale_color_brewer(type = "qual", palette = 2) +
+  ggtitle("Column-standardized LDA biplot of Reaven & Miller diabetes data")
+diabetes_lda \%>\%
+  confer_inertia("symmetric") \%>\%
+  ggbiplot(.supplement = FALSE) +
+  theme_bw() +
+  #geom_u_point(aes(shape = .grouping)) +
+  geom_u_point(
+    aes(shape = .grouping), data = subset(tidy(diabetes_lda), ! .supplement)
+  ) +
+  geom_v_vector(color = "#888888") +
+  geom_v_text_radiate(aes(label = .name)) +
+  scale_color_brewer(type = "qual", palette = 2) +
+  ggtitle("Symmetric LDA biplot of Reaven & Miller diabetes data")
+# Unstandardized, standardized, and de-sphered LDAs of Anderson Iris data
+lda_biplot <- function(lda) {
+  lda \%>\%
+    as_tbl_ord() \%>\%
+    augment() \%>\%
+    mutate_u(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
+    ggbiplot() +
+    theme_bw() +
+    geom_u_point(aes(color = .grouping, size = discriminant), alpha = .5) +
+    geom_v_vector(color = "#888888") +
+    geom_v_text_radiate(aes(label = .name), size = 3) +
+    scale_color_brewer(type = "qual", palette = 2)
+}
+MASS::lda(iris[, 1:4], iris[, 5]) \%>\%
+  lda_biplot() +
+  ggtitle("Unstandardized coefficient biplot of iris LDA")
+lda_ord(iris[, 1:4], iris[, 5], axes.scale = "standardized") \%>\%
+  lda_biplot() +
+  ggtitle("Standardized coefficient biplot of iris LDA")
+lda_ord(iris[, 1:4], iris[, 5], axes.scale = "desphered") \%>\%
+  lda_biplot() +
+  ggtitle("De-sphered coefficient biplot of iris LDA")
 }
