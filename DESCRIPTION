@@ -25,6 +25,7 @@ Imports:
     purrr,
     ggrepel,
     ca,
+    MASS,
     logisticPCA,
     vegan
 License: GPL-3
@@ -34,7 +35,8 @@ Suggests:
     testthat,
     gridExtra,
     igraph,
-    igraphdata
+    igraphdata,
+    heplots
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 Collate: 

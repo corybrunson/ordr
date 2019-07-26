@@ -4,6 +4,11 @@
 #'   objects of class `"lda"` and `"lda_ord"` as returned by [MASS::lda()] and
 #'   [lda_ord()].
 #'
+#' @details
+#'
+#' Blah blah....
+#' 
+
 #' @name methods-lda
 #' @include ord-tbl.r
 #' @template param-methods
@@ -74,17 +79,16 @@ recover_conference.lda_ord <- recover_conference.lda
 #' @rdname methods-lda
 #' @export
 augmentation_u.lda <- function(x) {
-  .name <- rownames(x$means)
-  res <- if (is.null(.name)) {
+  res <- if (is.null(rownames(x$means))) {
     tibble_pole(nrow(x$means))
   } else {
-    tibble(.name = .name)
+    tibble(.name = rownames(x$means))
   }
   res <- transform(
     res,
+    .grouping = x$lev,
     .prior = x$prior,
-    .counts = x$counts,
-    .grouping = x$lev
+    .counts = x$counts
   )
   res <- dplyr::bind_cols(
     res,
@@ -93,12 +97,81 @@ augmentation_u.lda <- function(x) {
       paste0(".centroid.", colnames(x$means))
     )
   )
-  res
+  # discriminant scores as supplementary points
+  olddata <- try(recover_olddata_lda(x))
+  if (inherits(olddata, "try-error")) {
+    warning("Could not locate data used to fit '", deparse(substitute(x)), "'.")
+    return(res)
+  }
+  res$.supplement <- FALSE
+  groupings <- try(recover_groupings_lda(x))
+  res_sup <- if (is.null(rownames(olddata))) {
+    if (inherits(groupings, "try-error")) {
+      tibble_pole(nrow = x$N)
+    } else {
+      tibble(.grouping = groupings)
+    }
+  } else {
+    if (inherits(groupings, "try-error")) {
+      tibble(.name = rownames(olddata))
+    } else {
+      tibble(.name = rownames(olddata), .grouping = groupings)
+    }
+  }
+  res_sup$.supplement <- TRUE
+  as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
 #' @rdname methods-lda
 #' @export
-augmentation_u.lda_ord <- augmentation_u.lda
+augmentation_u.lda_ord <- function(x) {
+  res <- if (is.null(rownames(x$means))) {
+    tibble_pole(nrow(x$means))
+  } else {
+    tibble(.name = rownames(x$means))
+  }
+  res <- transform(
+    res,
+    .grouping = x$lev,
+    .prior = x$prior,
+    .counts = x$counts
+  )
+  res <- dplyr::bind_cols(
+    res,
+    rlang::set_names(
+      as.data.frame(x$means),
+      paste0(".centroid.", colnames(x$means))
+    )
+  )
+  # discriminant scores as supplementary points
+  olddata <- if (is.null(attr(x, "x"))) {
+    try(recover_olddata_lda(x))
+  } else attr(x, "x")
+  if (inherits(olddata, "try-error") |
+      (! is.matrix(olddata) & ! is.data.frame(olddata))) {
+    warning("Could not locate data used to fit '", deparse(substitute(x)), "'.")
+    return(res)
+  }
+  res$.supplement <- FALSE
+  groupings <- if (is.null(attr(x, "groupings"))) {
+    try(recover_groupings_lda(x))
+  } else attr(x, "groupings")
+  res_sup <- if (is.null(rownames(olddata))) {
+    if (inherits(groupings, "try-error")) {
+      tibble_pole(nrow = x$N)
+    } else {
+      tibble(.grouping = groupings)
+    }
+  } else {
+    if (inherits(groupings, "try-error")) {
+      tibble(.name = rownames(olddata))
+    } else {
+      tibble(.name = rownames(olddata), .grouping = groupings)
+    }
+  }
+  res_sup$.supplement <- TRUE
+  as_tibble(dplyr::bind_rows(res, res_sup))
+}
 
 #' @rdname methods-lda
 #' @export
@@ -131,18 +204,16 @@ augmentation_coord.lda_ord <- augmentation_coord.lda
 #' @rdname methods-lda
 #' @export
 supplementation_u.lda <- function(x) {
-  x_data <- if (is.null(attr(x, "x"))) {
+  olddata <- if (is.null(attr(x, "x"))) {
     try(recover_olddata_lda(x))
   } else attr(x, "x")
-  if (inherits(x_data, "try-error") |
-      (! is.matrix(x_data) & ! is.data.frame(x_data))) {
-    stop("Could not locate data used to fit '", deparse(substitute(x)), "'.")
+  if (inherits(olddata, "try-error") |
+      (! is.matrix(olddata) & ! is.data.frame(olddata))) {
+    warning("Could not locate data used to fit '", deparse(substitute(x)), "'.")
+    return(NULL)
   }
   centroid <- colSums(x$prior * x$means)
-  scores <- scale(x_data, center = centroid, scale = FALSE) %*% x$scaling
-  list(
-    .discriminant_scores = scores
-  )
+  scale(olddata, center = centroid, scale = FALSE) %*% x$scaling
 }
 
 #' @rdname methods-lda
@@ -168,32 +239,12 @@ recover_olddata_lda <- function(object) {
   x
 }
 
-recover_grouping_lda <- function(object) {
+recover_groupings_lda <- function(object) {
   if(!is.null(Terms <- object$terms)) { # formula fit
     resp <- deparse(object$call$formula[[2]])
-    grouping <- eval.parent(object$call$data)[[resp]]
+    groupings <- eval.parent(object$call$data)[[resp]]
   } else { # matrix or data-frame fit
-    grouping <- eval.parent(object$call[[3]])
+    groupings <- eval.parent(object$call[[3]])
   }
-  grouping
+  groupings
 }
-
-#' @rdname methods-lda
-#' @export
-augmentation_supplement_u.lda <- function(x) {
-  .name <- rownames(recover_olddata_lda(x))
-  res <- if (is.null(.name)) {
-    tibble_pole(nrow(x$means))
-  } else {
-    tibble(.name = .name)
-  }
-  res <- transform(
-    res,
-    .grouping = recover_grouping_lda(x)
-  )
-  res
-}
-
-#' @rdname methods-lda
-#' @export
-augmentation_supplement_u.lda_ord <- augmentation_supplement_u.lda

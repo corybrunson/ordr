@@ -5,6 +5,7 @@
 
 #' @name lda-ord
 #' @include ord-tbl.r
+#' @importFrom stats .getXlevels delete.response model.matrix model.response var
 #' @inheritParams MASS::lda
 #' @param axes.scale Character string indicating how to left-transform the
 #'   `scaling` value when rendering biplots using [ggbiplot()].

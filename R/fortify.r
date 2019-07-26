@@ -23,6 +23,8 @@
 #' @param ... Additional arguments received from `fortify()` or `tidy()`;
 #'   ignored.
 #' @template param-matrix
+#' @param .supplement Logical; whether to include
+#'   [supplementary][supplementation] points.
 #' @param include Character matched to `"coordinates"`, `"shared"`, or `"all"`;
 #'   whether the fortified data frame should include only the ordination
 #'   coordinates or also augmented case and variable data, and, if the latter,
@@ -34,8 +36,8 @@
 #' @export
 fortify.tbl_ord <- function(
   model, data, ...,
-  .matrix = "uv",
-  include = "all", supplement = TRUE
+  .matrix = "uv", .supplement = TRUE,
+  include = "all"
 ) {
   # check first if coordinate / inertia diagonal is desired
   .matrix <- match.arg(.matrix, c(names(tbl_ord_factors), "coordinates"))
@@ -54,10 +56,13 @@ fortify.tbl_ord <- function(
         u,
         augment_annotation(model, "u")
       )
-      u$.matrix <- "u"
     }
-    if (supplement && ! is.null(attr(model, "u_supplement"))) {
-      u <- dplyr::bind_rows(u, attr(model, "u_supplement"))
+    if (! .supplement && ".supplement" %in% names(u)) {
+      u <- subset(u, .supplement)
+      u$.supplement <- NULL
+    }
+    if (include != "coordinates") {
+      u$.matrix <- "u"
     }
   }
   if (grepl("v", .matrix)) {
@@ -67,10 +72,13 @@ fortify.tbl_ord <- function(
         v,
         augment_annotation(model, "v")
       )
-      v$.matrix <- "v"
     }
-    if (supplement && ! is.null(attr(model, "v_supplement"))) {
-      v <- dplyr::bind_rows(v, attr(model, "v_supplement"))
+    if (! .supplement && ".supplement" %in% names(v)) {
+      v <- subset(v, .supplement)
+      v$.supplement <- NULL
+    }
+    if (include != "coordinates") {
+      v$.matrix <- "v"
     }
   }
   

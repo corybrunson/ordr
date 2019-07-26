@@ -10,11 +10,6 @@
 \alias{augment.tbl_ord}
 \alias{augment_u}
 \alias{augment_v}
-\alias{augmentation_supplement_u}
-\alias{augmentation_supplement_v}
-\alias{augmentation_supplement_factor}
-\alias{augment_supplement_u}
-\alias{augment_supplement_v}
 \title{Augment metadata on the factors and coordinates of ordination objects}
 \usage{
 augmentation_u(x)
@@ -32,16 +27,6 @@ augmentation_coord(x)
 augment_u(x)
 
 augment_v(x)
-
-augmentation_supplement_u(x)
-
-augmentation_supplement_v(x)
-
-augmentation_supplement_factor(x, .matrix)
-
-augment_supplement_u(x)
-
-augment_supplement_v(x)
 }
 \arguments{
 \item{x}{A \code{[tbl_ord]}, or an ordination object coercible to one.}

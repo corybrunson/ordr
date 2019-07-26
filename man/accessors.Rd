@@ -39,9 +39,9 @@ recover_factor(x, .matrix)
 
 \method{recover_v}{data.frame}(x)
 
-get_u(x, align = TRUE, supplement = FALSE)
+get_u(x, align = TRUE)
 
-get_v(x, align = TRUE, supplement = FALSE)
+get_v(x, align = TRUE)
 
 get_factor(x, .matrix, align = TRUE)
 

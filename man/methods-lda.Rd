@@ -22,8 +22,6 @@
 \alias{augmentation_coord.lda_ord}
 \alias{supplementation_u.lda}
 \alias{supplementation_u.lda_ord}
-\alias{augmentation_supplement_u.lda}
-\alias{augmentation_supplement_u.lda_ord}
 \title{Functionality for linear discriminant analysis ('lda') objects}
 \usage{
 \method{as_tbl_ord}{lda}(x)
@@ -65,10 +63,6 @@
 \method{supplementation_u}{lda}(x)
 
 \method{supplementation_u}{lda_ord}(x)
-
-\method{augmentation_supplement_u}{lda}(x)
-
-\method{augmentation_supplement_u}{lda_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
@@ -78,19 +72,21 @@ These methods extract data from, and attribute new data to,
 objects of class \code{"lda"} and \code{"lda_ord"} as returned by \code{\link[MASS:lda]{MASS::lda()}} and
 \code{\link[=lda_ord]{lda_ord()}}.
 }
+\details{
+Blah blah....
+}
 \examples{
 # Linear discriminant analysis of Reaven & Miller diabetes data
 head(heplots::Diabetes)
 (diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes))
-lapply(supplementation_u(diabetes_lda), head)
+dim(supplementation_u(diabetes_lda))
 as_tbl_ord(diabetes_lda) \%>\%
   augment() \%>\%
-  supplement_u() \%>\%
-  augment_supplement_u() \%>\%
+  mutate_u(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
   print() -> diabetes_lda
 ggbiplot(diabetes_lda) +
   theme_bw() +
-  geom_u_point(aes(color = .grouping, size = is.na(.supplement)), alpha = .5) +
+  geom_u_point(aes(color = .grouping, size = discriminant), alpha = .5) +
   geom_v_axis(color = "#888888") +
   geom_v_text_radiate(aes(label = .name)) +
   scale_color_brewer(type = "qual", palette = 2) +

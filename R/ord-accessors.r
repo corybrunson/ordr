@@ -76,11 +76,8 @@ recover_v.data.frame <- function(x) {
 
 #' @rdname accessors
 #' @export
-get_u <- function(x, align = TRUE, supplement = FALSE) {
-  u <- recover_u(x)
-  if (supplement && ! is.null(attr(x, "u_supplement"))) {
-    u <- rbind(u, as.matrix(attr(x, "u_supplement")[, get_coord(x)]))
-  }
+get_u <- function(x, align = TRUE) {
+  u <- rbind(recover_u(x), supplementation_u(x))
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     s <- diag(sqrt(recover_inertia(x)) ^ p[1])
@@ -98,11 +95,8 @@ get_u <- function(x, align = TRUE, supplement = FALSE) {
 
 #' @rdname accessors
 #' @export
-get_v <- function(x, align = TRUE, supplement = FALSE) {
-  v <- recover_v(x)
-  if (supplement && ! is.null(attr(x, "v_supplement"))) {
-    v <- rbind(v, as.matrix(attr(x, "v_supplement")[, get_coord(x)]))
-  }
+get_v <- function(x, align = TRUE) {
+  v <- rbind(recover_v(x), supplementation_v(x))
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     s <- diag(sqrt(recover_inertia(x)) ^ p[2])
@@ -125,13 +119,18 @@ get_factor <- function(x, .matrix, align = TRUE) {
     match_factor(.matrix),
     u = get_u(x, align = align),
     v = get_v(x, align = align),
-    uv = list(u = get_u(x, align = align), v = get_v(x, align = align))
+    uv = list(
+      u = get_u(x, align = align),
+      v = get_v(x, align = align)
+    )
   )
 }
 
 #' @rdname accessors
 #' @export
-as.matrix.tbl_ord <- function(x, ..., .matrix, align = TRUE) {
+as.matrix.tbl_ord <- function(
+  x, ..., .matrix, align = TRUE
+) {
   .matrix <- match_factor(.matrix)
   if (.matrix == "uv")
     stop("Can only coerce one factor ('u' or 'v') to a matrix.")

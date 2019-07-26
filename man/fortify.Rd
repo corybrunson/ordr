@@ -10,7 +10,7 @@
 \title{Fortify a \code{tbl_ord} for plotting}
 \usage{
 \method{fortify}{tbl_ord}(model, data, ..., .matrix = "uv",
-  include = "all", supplement = TRUE)
+  .supplement = TRUE, include = "all")
 
 fortify_coord(model)
 
@@ -31,6 +31,9 @@ ignored.}
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
+
+\item{.supplement}{Logical; whether to include
+\link[=supplementation]{supplementary} points.}
 
 \item{include}{Character matched to \code{"coordinates"}, \code{"shared"}, or \code{"all"};
 whether the fortified data frame should include only the ordination
@@ -76,15 +79,14 @@ ggbiplot(pca) + geom_v_vector() + geom_u_point()
 # Linear discriminant analysis of Reaven & Miller diabetes data
 head(heplots::Diabetes)
 (diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes))
-lapply(supplementation_u(diabetes_lda), head)
+dim(supplementation_u(diabetes_lda))
 as_tbl_ord(diabetes_lda) \%>\%
   augment() \%>\%
-  supplement_u() \%>\%
-  augment_supplement_u() \%>\%
+  mutate_u(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
   print() -> diabetes_lda
 ggbiplot(diabetes_lda) +
   theme_bw() +
-  geom_u_point(aes(color = .grouping, size = is.na(.supplement)), alpha = .5) +
+  geom_u_point(aes(color = .grouping, size = discriminant), alpha = .5) +
   geom_v_axis(color = "#888888") +
   geom_v_text_radiate(aes(label = .name)) +
   scale_color_brewer(type = "qual", palette = 2) +
