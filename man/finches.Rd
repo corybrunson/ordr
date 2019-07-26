@@ -87,6 +87,6 @@ finches_clpca \%>\%
 }
 \references{
 Sanderson JG (2000) "Testing Ecological Patterns." \emph{American Scientist},
-\strong{88}(4), 332--339. \doi{10.1511/2000.4.332}
+\strong{88}(4): 332--339. \doi{10.1511/2000.4.332}
 }
 \keyword{datasets}

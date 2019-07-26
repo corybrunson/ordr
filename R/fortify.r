@@ -134,6 +134,14 @@ generics::tidy
 
 #' @rdname fortify
 #' @export
-tidy.tbl_ord <- function(x, ..., .matrix = "uv", include = "all") {
-  fortify.tbl_ord(model = x, data = NULL, .matrix = .matrix, include = include)
+tidy.tbl_ord <- function(
+  x, ...,
+  .matrix = "uv", .supplement = TRUE,
+  include = "all"
+) {
+  fortify.tbl_ord(
+    model = x, data = NULL,
+    .matrix = .matrix, .supplement = .supplement,
+    include = include
+  )
 }

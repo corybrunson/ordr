@@ -24,18 +24,20 @@
 #' axes for a biplot representation of the LDA. The slightly modified function
 #' [lda_ord()] provides additional options: standardized discriminant
 #' coefficients, obtained by (re)scaling the coefficients by the variable
-#' standard deviations; and de-sphered discriminant coefficients, obtained by
-#' transforming the coefficients by the inverse of the sphering matrix \eqn{S}.
-#' The standardized coefficients for different variables may then be directly
-#' compared (ttnphns, 2013), while the de-sphered coefficients recover the inner
-#' product relationship between the variable axes and the class centroids
-#' (Greenacre, 2010, p. 109--117).
+#' standard deviations; and variable contributions to the Mahalanobis variance,
+#' obtained by transforming the coefficients by the inverse of the sphering
+#' matrix \eqn{S}. The standardized coefficients indicate the contributions of
+#' the variables to the discriminant axes after controlling for their variances
+#' (ttnphns, 2013), while the contribution coefficients are the variables'
+#' contributions to the Mahalanobis variance along each discriminant axis
+#' (Greenacre, 2013).
 #' 
 
 #' @template ref-gardner2005
 #' @template ref-greenacre2010
 #' @template ref-venables2003
 #' @template ref-ttnphns2013
+#' @template ref-greenacre2013
 
 #' @name lda-ord
 #' @include ord-tbl.r
@@ -43,7 +45,7 @@
 #' @inheritParams MASS::lda
 #' @param axes.scale Character string indicating how to left-transform the
 #'   `scaling` value when rendering biplots using [ggbiplot()]. Options include
-#'   `"unstandardized"`, `"standardized"`, and `"desphered"`.
+#'   `"unstandardized"`, `"standardized"`, and `"contribution"`.
 #' @param ret.x,ret.grouping Logical; whether to retain as attributes the data
 #'   matrix (`x`) and the class assignments (`grouping`) on which LDA is
 #'   performed. Methods like `predict()` access these objects by name in the
@@ -159,7 +161,7 @@ lda_ord.default <- function(x, grouping, prior = proportions, tol = 1.0e-4,
   ## drop attributes to avoid e.g. matrix() methods
   group.means <- tapply(c(x), list(rep(g, p), col(x)), mean)
   covw <- var(x - group.means[g,  ])
-  if (axes.scale == "desphered") covw.eig <- eigen(covw)
+  if (axes.scale == "contribution") covw.eig <- eigen(covw)
   f1 <- sqrt(diag(covw))
   if(any(f1 < tol)) {
     const <- format((1L:p)[f1 < tol])
@@ -269,7 +271,7 @@ lda_ord.default <- function(x, grouping, prior = proportions, tol = 1.0e-4,
     # standardized discriminant coefficients
     standardized = diag(f1),
     # un-transformed discriminant coefficients (approximates inner products)
-    desphered = covw.eig$vectors %*%
+    contribution = covw.eig$vectors %*%
       diag(sqrt(covw.eig$values)) %*%
       t(covw.eig$vectors),
     # pooled within-group correlations

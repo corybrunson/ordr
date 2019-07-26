@@ -18,7 +18,8 @@ fortify_u(model, include = "all")
 
 fortify_v(model, include = "all")
 
-\method{tidy}{tbl_ord}(x, ..., .matrix = "uv", include = "all")
+\method{tidy}{tbl_ord}(x, ..., .matrix = "uv", .supplement = TRUE,
+  include = "all")
 }
 \arguments{
 \item{model, x}{A \code{[tbl_ord]} object.}
@@ -78,7 +79,8 @@ ggplot(pca, .matrix = "coord", aes(x = .name, y = .prop_var)) +
 ggbiplot(pca) + geom_v_vector() + geom_u_point()
 # Linear discriminant analysis of Reaven & Miller diabetes data
 head(heplots::Diabetes)
-(diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes))
+diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes)
+print(diabetes_lda)
 as_tbl_ord(diabetes_lda) \%>\%
   augment() \%>\%
   mutate_u(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
@@ -92,7 +94,8 @@ ggbiplot(diabetes_lda) +
   ggtitle("Column-standardized LDA biplot of Reaven & Miller diabetes data")
 diabetes_lda \%>\%
   confer_inertia("symmetric") \%>\%
-  ggbiplot(.supplement = FALSE) +
+  #ggbiplot(.supplement = FALSE) +
+  ggbiplot() +
   theme_bw() +
   #geom_u_point(aes(shape = .grouping)) +
   geom_u_point(
@@ -100,6 +103,5 @@ diabetes_lda \%>\%
   ) +
   geom_v_vector(color = "#888888") +
   geom_v_text_radiate(aes(label = .name)) +
-  scale_color_brewer(type = "qual", palette = 2) +
   ggtitle("Symmetric LDA biplot of Reaven & Miller diabetes data")
 }

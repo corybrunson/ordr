@@ -81,7 +81,7 @@ G <- nrow(X_bar)
 # within-class covariance matrix (w_ig = 1/I, w_g = 1/N_g)
 C <- (1/I) * t(X - X_bar[gx, ]) %*% (X - X_bar[gx, ])
 # centered class means (2 methods)
-Y_bar <- X_bar - matrix(ng/n, G, G, byrow = TRUE) %*% X_bar
+Y_bar <- X_bar - matrix(ng/I, G, G, byrow = TRUE) %*% X_bar
 x_bar <- apply(X, 2, mean)
 Y_bar <- X_bar - matrix(1, G, 1) %*% t(x_bar)
 # eigendecomposition of within-class covariance matrix

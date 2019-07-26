@@ -97,7 +97,7 @@ arise if these objects are reassigned.}
 
 \item{axes.scale}{Character string indicating how to left-transform the
 \code{scaling} value when rendering biplots using \code{\link[=ggbiplot]{ggbiplot()}}. Options include
-\code{"unstandardized"}, \code{"standardized"}, and \code{"desphered"}.}
+\code{"unstandardized"}, \code{"standardized"}, and \code{"contribution"}.}
 }
 \description{
 This function replicates \code{\link[MASS:lda]{MASS::lda()}} with options to retain
@@ -123,17 +123,19 @@ The discriminant coefficients constitute one of several possible choices of
 axes for a biplot representation of the LDA. The slightly modified function
 \code{\link[=lda_ord]{lda_ord()}} provides additional options: standardized discriminant
 coefficients, obtained by (re)scaling the coefficients by the variable
-standard deviations; and de-sphered discriminant coefficients, obtained by
-transforming the coefficients by the inverse of the sphering matrix \eqn{S}.
-The standardized coefficients for different variables may then be directly
-compared (ttnphns, 2013), while the de-sphered coefficients recover the inner
-product relationship between the variable axes and the class centroids
-(Greenacre, 2010, p. 109--117).
+standard deviations; and variable contributions to the Mahalanobis variance,
+obtained by transforming the coefficients by the inverse of the sphering
+matrix \eqn{S}. The standardized coefficients indicate the contributions of
+the variables to the discriminant axes after controlling for their variances
+(ttnphns, 2013), while the contribution coefficients are the variables'
+contributions to the Mahalanobis variance along each discriminant axis
+(Greenacre, 2013).
 }
 \examples{
 # Linear discriminant analysis of Reaven & Miller diabetes data
 head(heplots::Diabetes)
-(diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes))
+diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes)
+print(diabetes_lda)
 as_tbl_ord(diabetes_lda) \%>\%
   augment() \%>\%
   mutate_u(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
@@ -147,7 +149,8 @@ ggbiplot(diabetes_lda) +
   ggtitle("Column-standardized LDA biplot of Reaven & Miller diabetes data")
 diabetes_lda \%>\%
   confer_inertia("symmetric") \%>\%
-  ggbiplot(.supplement = FALSE) +
+  #ggbiplot(.supplement = FALSE) +
+  ggbiplot() +
   theme_bw() +
   #geom_u_point(aes(shape = .grouping)) +
   geom_u_point(
@@ -155,9 +158,11 @@ diabetes_lda \%>\%
   ) +
   geom_v_vector(color = "#888888") +
   geom_v_text_radiate(aes(label = .name)) +
-  scale_color_brewer(type = "qual", palette = 2) +
   ggtitle("Symmetric LDA biplot of Reaven & Miller diabetes data")
 # Unstandardized, standardized, and de-sphered LDAs of Anderson Iris data
+# data centroid
+iris_centroid <- t(apply(iris[, 1:4], 2, mean))
+# custom biplot
 lda_biplot <- function(lda) {
   lda \%>\%
     as_tbl_ord() \%>\%
@@ -170,15 +175,46 @@ lda_biplot <- function(lda) {
     geom_v_text_radiate(aes(label = .name), size = 3) +
     scale_color_brewer(type = "qual", palette = 2)
 }
-MASS::lda(iris[, 1:4], iris[, 5]) \%>\%
-  lda_biplot() +
+# Unstandardized discriminant coefficients define the discriminant axes as
+# linear combinations of the centered variables
+iris_lda <-
+  as_tbl_ord(lda_ord(iris[, 1:4], iris[, 5], axes.scale = "unstandardized"))
+# linear combinations of centered variables
+print(sweep(iris_lda$means, 2, iris_centroid, "-") \%*\% get_v(iris_lda))
+# discriminant centroids
+print(get_u(iris_lda, .supplement = FALSE))
+# unstandardized coefficient LDA biplot
+lda_biplot(iris_lda) +
   ggtitle("Unstandardized coefficient biplot of iris LDA")
-lda_ord(iris[, 1:4], iris[, 5], axes.scale = "standardized") \%>\%
-  lda_biplot() +
+# Standardized discriminant coefficients permit comparisons across the variables
+iris_lda <-
+  as_tbl_ord(lda_ord(iris[, 1:4], iris[, 5], axes.scale = "standardized"))
+# standardized variable contributions to discriminant axes
+tidy(iris_lda, .matrix = "v") \%>\%
+  dplyr::mutate(variable = .name) \%>\%
+  tidyr::gather(discriminant, coefficient, LD1, LD2) \%>\%
+  ggplot(aes(x = discriminant, y = coefficient, fill = variable)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  theme_bw() +
+  coord_flip()
+# standardized coefficient LDA biplot
+lda_biplot(iris_lda) +
   ggtitle("Standardized coefficient biplot of iris LDA")
-lda_ord(iris[, 1:4], iris[, 5], axes.scale = "desphered") \%>\%
-  lda_biplot() +
-  ggtitle("De-sphered coefficient biplot of iris LDA")
+# Variable contributions (de-sphered discriminant coefficients) recover the
+# inner product relationship with the centered class centroids
+iris_lda <- 
+  as_tbl_ord(lda_ord(iris[, 1:4], iris[, 5], axes.scale = "contribution"))
+# symmetric square root of within-class covariance
+C_W_eig <- eigen(cov(iris[, 1:4] - iris_lda$means[iris[, 5], ]))
+C_W_sqrtinv <-
+  C_W_eig$vectors \%*\% diag(1/sqrt(C_W_eig$values)) \%*\% t(C_W_eig$vectors)
+# product of matrix factors (scores and loadings)
+print(get_u(iris_lda, .supplement = FALSE) \%*\% t(get_v(iris_lda)))
+# "asymmetric" square roots of Mahalanobis distances between variables
+print(sweep(iris_lda$means, 2, iris_centroid, "-") \%*\% C_W_sqrtinv)
+# contribution LDA biplot
+lda_biplot(iris_lda) +
+  ggtitle("Contribution biplot of iris LDA")
 }
 \references{
 Gardner S & le Roux NJ (2005) "Extensions of Biplot Methodology to
@@ -197,4 +233,8 @@ Edition. Springer Science & Business Media, ISBN: 0387954570, 9780387954578.
 ttnphns (2013) \emph{Answer to} "Algebra of LDA. Fisher discrimination power of a
 variable and Linear Discriminant Analysis". CrossValidated, accessed
 2019-07-26. \url{https://stats.stackexchange.com/a/83114/68743}
+
+Greenacre M (2013) "Contribution Biplots." \emph{Journal of Computational and
+Graphical Statistics}, \strong{22}(1): 107--122.
+\url{https://amstat.tandfonline.com/doi/full/10.1080/10618600.2012.702494}
 }

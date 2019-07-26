@@ -188,6 +188,6 @@ plot(gridExtra::arrangeGrob(grobs = list(
 \references{
 Bellekens B, Spruyt V, Berkvens R, & Weyn M (2014) "A survey of rigid 3D
 pointcloud registration algorithms." \emph{Fourth International Conference on
-Ambient Computing, Applications, Services and Technologies, Proceedings},
+Ambient Computing, Applications, Services and Technologies, Proceedings}:
 8--13. \url{https://biblio.ugent.be/publication/5713477}
 }
