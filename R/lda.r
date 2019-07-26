@@ -73,7 +73,7 @@ lda_ord.default <- function(x, grouping, prior = proportions, tol = 1.0e-4,
                             method = c("moment", "mle", "mve", "t"),
                             CV = FALSE, nu = 5, ...,
                             ret.x = FALSE, ret.groupings = FALSE,
-                            axes.scale = "coef")
+                            axes.scale = "unstandardized")
 {
   if(is.null(dim(x))) stop("'x' is not a matrix")
   x <- as.matrix(x)
@@ -111,7 +111,7 @@ lda_ord.default <- function(x, grouping, prior = proportions, tol = 1.0e-4,
   ## drop attributes to avoid e.g. matrix() methods
   group.means <- tapply(c(x), list(rep(g, p), col(x)), mean)
   covw <- var(x - group.means[g,  ])
-  if (axes.scale == "sph.coef") covw.eig <- eigen(covw)
+  if (axes.scale == "desphered") covw.eig <- eigen(covw)
   f1 <- sqrt(diag(covw))
   if(any(f1 < tol)) {
     const <- format((1L:p)[f1 < tol])
@@ -217,11 +217,11 @@ lda_ord.default <- function(x, grouping, prior = proportions, tol = 1.0e-4,
   attr(res, "axes.scale") <- switch(
     axes.scale,
     # unstandardized discriminant coefficients
-    coef = NULL,
+    unstandardized = NULL,
     # standardized discriminant coefficients
-    std.coef = diag(f1),
+    stardardized = diag(f1),
     # un-transformed discriminant coefficients (approximates inner products)
-    sph.coef = covw.eig$vectors %*%
+    desphered = covw.eig$vectors %*%
       diag(sqrt(covw.eig$values)) %*%
       t(covw.eig$vectors),
     # pooled within-group correlations

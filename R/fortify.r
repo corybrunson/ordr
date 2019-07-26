@@ -58,7 +58,7 @@ fortify.tbl_ord <- function(
       )
     }
     if (! .supplement && ".supplement" %in% names(u)) {
-      u <- subset(u, .supplement)
+      u <- subset(u, ! .supplement)
       u$.supplement <- NULL
     }
     if (include != "coordinates") {
@@ -74,7 +74,7 @@ fortify.tbl_ord <- function(
       )
     }
     if (! .supplement && ".supplement" %in% names(v)) {
-      v <- subset(v, .supplement)
+      v <- subset(v, ! .supplement)
       v$.supplement <- NULL
     }
     if (include != "coordinates") {
