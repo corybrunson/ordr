@@ -31,8 +31,8 @@ the primary axes; ignored if \code{sec.axes} is not specified.}
 \code{nrow(get_*(ordination))}, used to scale the coordinates of \eqn{U} or
 \eqn{V}, respectively.}
 
-\item{...}{Additional arguments passed to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} or to
-\code{\link[ggplot2:aes]{ggplot2::aes()}}.}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:fortify]{ggplot2::fortify()}}; see
+\code{\link[=fortify.tbl_ord]{fortify.tbl_ord()}}.}
 }
 \description{
 Build a biplot visualization from ordination data wrapped as a

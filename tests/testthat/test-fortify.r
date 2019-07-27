@@ -17,8 +17,8 @@ test_that("`ggplot()` successfully passes `.matrix` to `fortify()`", {
   expect_equal(nrow(layer_data(ggplot(pca, .matrix = "v"))), ncol(dat))
 })
 
-sumdim <- sum(dim(dat))
-test_that("`ggbiplot()` does _not_ pass `.matrix` to `fortify()`", {
-  expect_equal(nrow(layer_data(ggbiplot(pca, .matrix = "u"))), sumdim)
-  expect_equal(nrow(layer_data(ggbiplot(pca, .matrix = "v"))), sumdim)
+dims <- dim(dat)
+test_that("`ggbiplot()` passes `.matrix` to `fortify()`", {
+  expect_equal(nrow(layer_data(ggbiplot(pca, .matrix = "u"))), dims[1])
+  expect_equal(nrow(layer_data(ggbiplot(pca, .matrix = "v"))), dims[2])
 })

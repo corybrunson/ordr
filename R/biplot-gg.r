@@ -53,8 +53,8 @@
 #'   `get_*(ordination)` or a numeric vector of length
 #'   `nrow(get_*(ordination))`, used to scale the coordinates of \eqn{U} or
 #'   \eqn{V}, respectively.
-#' @param ... Additional arguments passed to [ggplot2::ggplot()] or to
-#'   [ggplot2::aes()].
+#' @param ... Additional arguments passed to [ggplot2::fortify()]; see
+#'   [fortify.tbl_ord()].
 #' @example inst/examples/mtcars-lm-isolines.r
 #' @example inst/examples/iris-princomp-sec.r
 #' @example inst/examples/finches-lpca-sec.r
@@ -77,7 +77,7 @@ ggbiplot <- function(
   }
   
   # fortify `ordination` if necessary
-  if (! is.null(ordination)) ordination <- fortify(ordination, include = "all")
+  if (! is.null(ordination)) ordination <- fortify(ordination, ...)
   
   # augment `mapping`, if necessary, with default coordinates
   mapping <- ensure_xy_aes(ordination, mapping)
@@ -123,8 +123,7 @@ ggbiplot <- function(
   p <- ggplot(
     data = ordination,
     mapping = mapping,
-    environment = parent.frame(),
-    ...
+    environment = parent.frame()
   )
   # `.matrix` aesthetic indicating whether to plot cases or variables
   if (! is.null(ordination)) {
