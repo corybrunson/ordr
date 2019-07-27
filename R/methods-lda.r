@@ -91,13 +91,6 @@ augmentation_u.lda <- function(x) {
     .prior = x$prior,
     .counts = x$counts
   )
-  res <- dplyr::bind_cols(
-    res,
-    rlang::set_names(
-      as.data.frame(x$means),
-      paste0(".centroid.", colnames(x$means))
-    )
-  )
   # discriminant scores as supplementary points
   olddata <- try(recover_olddata_lda(x))
   if (inherits(olddata, "try-error")) {
@@ -136,13 +129,6 @@ augmentation_u.lda_ord <- function(x) {
     .grouping = x$lev,
     .prior = x$prior,
     .counts = x$counts
-  )
-  res <- dplyr::bind_cols(
-    res,
-    rlang::set_names(
-      as.data.frame(x$means),
-      paste0(".centroid.", colnames(x$means))
-    )
   )
   # discriminant scores as supplementary points
   olddata <- if (is.null(attr(x, "x"))) {

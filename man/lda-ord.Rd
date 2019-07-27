@@ -150,7 +150,6 @@ ggbiplot(diabetes_lda) +
   geom_u_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
   geom_v_axis(color = "#888888") +
   geom_v_text_radiate(aes(label = .name)) +
-  scale_color_brewer(type = "qual", palette = 2) +
   ggtitle("Column-standardized LDA biplot of Reaven & Miller diabetes data")
 diabetes_lda \%>\%
   confer_inertia("symmetric") \%>\%
@@ -172,10 +171,16 @@ lda_biplot <- function(lda) {
   lda \%>\%
     as_tbl_ord() \%>\%
     augment() \%>\%
-    mutate_u(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
+    mutate_u(
+      species = .grouping,
+      discriminant = ifelse(! .supplement, "centroid", "case")
+    ) \%>\%
     ggbiplot() +
     theme_bw() +
-    geom_u_point(aes(color = .grouping, size = discriminant), alpha = .5) +
+    geom_u_point(aes(
+      color = .grouping,
+      size = discriminant, alpha = discriminant
+    )) +
     geom_v_vector(color = "#888888") +
     geom_v_text_radiate(aes(label = .name), size = 3) +
     scale_color_brewer(type = "qual", palette = 2)
@@ -200,6 +205,7 @@ tidy(iris_lda, .matrix = "v") \%>\%
   tidyr::gather(discriminant, coefficient, LD1, LD2) \%>\%
   ggplot(aes(x = discriminant, y = coefficient, fill = variable)) +
   geom_bar(position = "dodge", stat = "identity") +
+  labs(y = "Standardized coefficient", x = "Linear discriminant") +
   theme_bw() +
   coord_flip()
 # standardized coefficient LDA biplot

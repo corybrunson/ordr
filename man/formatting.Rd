@@ -126,7 +126,6 @@ ggbiplot(diabetes_lda) +
   geom_u_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
   geom_v_axis(color = "#888888") +
   geom_v_text_radiate(aes(label = .name)) +
-  scale_color_brewer(type = "qual", palette = 2) +
   ggtitle("Column-standardized LDA biplot of Reaven & Miller diabetes data")
 diabetes_lda \%>\%
   confer_inertia("symmetric") \%>\%
