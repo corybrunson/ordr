@@ -101,7 +101,7 @@ diabetes_lda \%>\%
     aes(shape = .grouping), data = subset(tidy(diabetes_lda), ! .supplement)
   ) +
   geom_v_vector(color = "#888888") +
-  geom_v_text_radiate(aes(label = .name)) +
+  geom_v_text_radiate(aes(label = .name), size = 3) +
   ggtitle("Symmetric LDA biplot of Reaven & Miller diabetes data")
 # Unstandardized, standardized, and de-sphered LDAs of Anderson Iris data
 # data centroid

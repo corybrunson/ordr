@@ -116,20 +116,25 @@ exceptions (Gardner & le Roux, 2005; Greenacre, 2010, p. 109--117).
 LDA is implemented as \code{\link[MASS:lda]{MASS::lda()}} in the \strong{MASS} package, in which the
 variables are transformed by a sphering matrix \eqn{S} (Venables & Ripley,
 2003, p. 331--333). The returned element \code{scaling} contains the
-unstandardized discriminant coefficients, which define the discriminant axes
-as linear combinations of the original variables.
+unstandardized \emph{discriminant coefficients}, which define the discriminant
+scores of the cases and their centroids as linear combinations of the
+original variables.
 
 The discriminant coefficients constitute one of several possible choices of
 axes for a biplot representation of the LDA. The slightly modified function
-\code{\link[=lda_ord]{lda_ord()}} provides additional options: standardized discriminant
-coefficients, obtained by (re)scaling the coefficients by the variable
-standard deviations; and variable contributions to the Mahalanobis variance,
-obtained by transforming the coefficients by the inverse of the sphering
-matrix \eqn{S}. The standardized coefficients indicate the contributions of
-the variables to the discriminant axes after controlling for their variances
-(ttnphns, 2013), while the contribution coefficients are the variables'
-contributions to the Mahalanobis variance along each discriminant axis
-(Greenacre, 2013).
+\code{\link[=lda_ord]{lda_ord()}} provides additional options:
+\itemize{
+\item The \emph{standardized discriminant coefficients} are obtained by (re)scaling
+the coefficients by the variable standard deviations. These coefficients
+indicate the contributions of the variables to the discriminant scores after
+controlling for their variances (ttnphns, 2013).
+\item The variables' \emph{contributions} to the Mahalanobis variance along each
+discriminant axis are obtained by transforming the coefficients by the
+inverse of the sphering matrix \eqn{S}. Because the contribution biplot
+derives from the eigendecomposition of the Mahalanobis distance matrix, the
+projections of the centroids and cases onto the variable axes approximate
+their variable values after centering and sphering (Greenacre, 2013).
+}
 }
 \examples{
 # Linear discriminant analysis of Reaven & Miller diabetes data
@@ -157,7 +162,7 @@ diabetes_lda \%>\%
     aes(shape = .grouping), data = subset(tidy(diabetes_lda), ! .supplement)
   ) +
   geom_v_vector(color = "#888888") +
-  geom_v_text_radiate(aes(label = .name)) +
+  geom_v_text_radiate(aes(label = .name), size = 3) +
   ggtitle("Symmetric LDA biplot of Reaven & Miller diabetes data")
 # Unstandardized, standardized, and de-sphered LDAs of Anderson Iris data
 # data centroid

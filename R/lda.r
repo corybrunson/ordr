@@ -17,20 +17,25 @@
 #' LDA is implemented as [MASS::lda()] in the **MASS** package, in which the
 #' variables are transformed by a sphering matrix \eqn{S} (Venables & Ripley,
 #' 2003, p. 331--333). The returned element `scaling` contains the
-#' unstandardized discriminant coefficients, which define the discriminant axes
-#' as linear combinations of the original variables.
+#' unstandardized _discriminant coefficients_, which define the discriminant
+#' scores of the cases and their centroids as linear combinations of the
+#' original variables.
 #'
 #' The discriminant coefficients constitute one of several possible choices of
 #' axes for a biplot representation of the LDA. The slightly modified function
-#' [lda_ord()] provides additional options: standardized discriminant
-#' coefficients, obtained by (re)scaling the coefficients by the variable
-#' standard deviations; and variable contributions to the Mahalanobis variance,
-#' obtained by transforming the coefficients by the inverse of the sphering
-#' matrix \eqn{S}. The standardized coefficients indicate the contributions of
-#' the variables to the discriminant axes after controlling for their variances
-#' (ttnphns, 2013), while the contribution coefficients are the variables'
-#' contributions to the Mahalanobis variance along each discriminant axis
-#' (Greenacre, 2013).
+#' [lda_ord()] provides additional options:
+#'
+#' * The _standardized discriminant coefficients_ are obtained by (re)scaling
+#' the coefficients by the variable standard deviations. These coefficients
+#' indicate the contributions of the variables to the discriminant scores after
+#' controlling for their variances (ttnphns, 2013).
+
+#' * The variables' _contributions_ to the Mahalanobis variance along each
+#' discriminant axis are obtained by transforming the coefficients by the
+#' inverse of the sphering matrix \eqn{S}. Because the contribution biplot
+#' derives from the eigendecomposition of the Mahalanobis distance matrix, the
+#' projections of the centroids and cases onto the variable axes approximate
+#' their variable values after centering and sphering (Greenacre, 2013).
 #' 
 
 #' @template ref-gardner2005
