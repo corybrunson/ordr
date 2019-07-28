@@ -54,6 +54,7 @@ Collate:
     'geom-polygon.r'
     'geom-text-radiate.r'
     'geom-text.r'
+    'geom-ticks.r'
     'geom-unit-circle.r'
     'geom-vector.r'
     'utils.r'

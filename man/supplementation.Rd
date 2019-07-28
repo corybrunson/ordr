@@ -57,6 +57,6 @@ diabetes_lda \%>\%
   theme_bw() +
   geom_u_point(aes(shape = .grouping)) +
   geom_v_axis(color = "#888888") +
-  #geom_v_ticks() +
+  geom_v_ticks() +
   ggtitle("Symmetric LDA biplot of Reaven & Miller diabetes data")
 }

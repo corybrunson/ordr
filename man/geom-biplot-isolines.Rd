@@ -3,43 +3,25 @@
 \docType{data}
 \name{geom-biplot-isolines}
 \alias{geom-biplot-isolines}
-\alias{GeomTicks}
-\alias{geom_u_ticks}
-\alias{geom_v_ticks}
-\alias{geom_biplot_ticks}
 \alias{GeomIsolines}
 \alias{geom_u_isolines}
 \alias{geom_v_isolines}
 \alias{geom_biplot_isolines}
 \title{Render isolines for a subject or variable}
-\format{An object of class \code{GeomTicks} (inherits from \code{GeomSegment}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.}
+\format{An object of class \code{GeomIsolines} (inherits from \code{GeomAbline}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.}
 \usage{
-geom_u_ticks(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", family = NULL, ids = 1L, by = 1,
-  ticks.length = 0.05, ..., na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
-
-geom_v_ticks(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", family = NULL, ids = 1L, by = 1,
-  ticks.length = 0.05, ..., na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
-
-geom_biplot_ticks(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", .matrix = "v", family = NULL, ids = 1L,
-  by = 1, ticks.length = 0.05, ..., na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE)
-
 geom_u_isolines(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", family = NULL, ids = 1L, by = 1, ...,
-  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+  position = "identity", family = NULL, axes = NULL, by = NULL,
+  ..., na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
 
 geom_v_isolines(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", family = NULL, ids = 1L, by = 1, ...,
-  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+  position = "identity", family = NULL, axes = NULL, by = NULL,
+  ..., na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
 
 geom_biplot_isolines(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", .matrix = "v", family = NULL, ids = 1L,
-  by = 1, ..., na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+  position = "identity", .matrix = "v", family = NULL, axes = NULL,
+  by = NULL, ..., na.rm = FALSE, show.legend = NA,
+  inherit.aes = TRUE)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or
@@ -69,17 +51,11 @@ layer, as a string.}
 a call to a position adjustment function.}
 
 \item{family}{A family function or a character string naming one, to
-transform the values along the axis at which to render isolines or tick
-marks.}
+transform the values along the axis at which to render isolines.}
 
-\item{ids}{Row indices of the subjects or variables for which isolines or
-tick marks will be rendered.}
+\item{axes}{Indices for which isolines will be rendered.}
 
-\item{by}{Interval length between isolines or tick marks, in the units of the
-ordination.}
-
-\item{ticks.length}{Numeric; the length of the tick marks, as a proportion of
-the plot width.}
+\item{by}{Interval length between isolines, in the units of the ordination.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
@@ -119,7 +95,7 @@ e.g. \eqn{U} for points and \eqn{V} for arrows.
 
 \section{Aesthetics}{
 
-\code{geom_*_isolines()} and \code{geom_*_ticks()} understand the following aesthetics
+\code{geom_*_isolines()} understands the following aesthetics
 (required aesthetics are in bold):
 \itemize{
 \item \strong{\code{x}}

@@ -36,14 +36,15 @@ GeomAxis <- ggproto(
   
   setup_data = function(data, params) {
     
-    # `geom_abline()` versus `geom_vline()` discriminant
+    # diagonal versus vertical lines
     data$vline <- data$x == 0 & data$y != 0
-    # `geom_abline()` columns
+    # diagonal line columns
     data$intercept <- rep(0, nrow(data))
     data$slope <- data$y / data$x
-    # `geom_vline()` columns
+    # vertical line columns
     data$xintercept <- rep(0, nrow(data))
-    # remove position columns (avoid affecting position limits)
+    # remove position columns
+    # (prevent coordinates from affecting position limits)
     data$x <- NULL
     data$y <- NULL
     
