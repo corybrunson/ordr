@@ -179,7 +179,7 @@ augmentation_v.lda_ord <- augmentation_v.lda
 #' @export
 augmentation_coord.lda <- function(x) {
   tibble(
-    .name = recover_coord(x),
+    .name = factor_coord(recover_coord(x)),
     .svd = x$svd
   )
 }

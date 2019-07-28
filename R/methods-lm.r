@@ -117,7 +117,7 @@ augmentation_coord.lm <- function(x) {
   summ <- as.data.frame(stats::coef(summary(x)))
   names(summ) <- c(".estimate", ".std.error", ".t.value", ".p.value")
   as_tibble(data.frame(
-    .name = recover_coord(x),
+    .name = factor_coord(recover_coord(x)),
     summ
   ))
 }
@@ -220,7 +220,10 @@ augmentation_coord.mlm <- function(x) {
   )
   names(summs)[3:6] <- c(".estimate", ".std.error", ".t.value", ".p.value")
   summs$.response <- gsub("^Response ", "", summs$.response)
-  res <- as_tibble(data.frame(.name = recover_coord(x), summs))
+  res <- as_tibble(data.frame(
+    .name = factor_coord(recover_coord(x)),
+    summs
+  ))
   # nest to coordinates
   tidyr::nest(res, -dplyr::one_of(".name", ".term"), .key = ".summary")
 }

@@ -67,7 +67,7 @@ augmentation_v.svd <- function(x) {
 #' @export
 augmentation_coord.svd <- function(x) {
   tibble(
-    .name = recover_coord(x),
+    .name = factor_coord(recover_coord(x)),
     .value = x$d[1:ncol(x$u)]
   )
 }

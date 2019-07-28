@@ -69,7 +69,7 @@ augmentation_v.kmeans <- function(x) {
 #' @export
 augmentation_coord.kmeans <- function(x) {
   tibble(
-    .name = recover_coord(x),
+    .name = factor_coord(recover_coord(x)),
     .size = x$size,
     .withinss = x$withinss
   )

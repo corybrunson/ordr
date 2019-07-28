@@ -65,7 +65,7 @@ augmentation_v.lsvd <- function(x) {
 #' @export
 augmentation_coord.lsvd <- function(x) {
   tibble(
-    .name = recover_coord.lsvd(x)
+    .name = factor_coord(recover_coord.lsvd(x))
   )
 }
 
@@ -121,7 +121,7 @@ augmentation_v.lpca <- function(x) {
 #' @export
 augmentation_coord.lpca <- function(x) {
   tibble(
-    .name = recover_coord.lpca(x)
+    .name = factor_coord(recover_coord.lpca(x))
   )
 }
 
@@ -170,6 +170,6 @@ augmentation_v.clpca <- function(x) {
 #' @export
 augmentation_coord.clpca <- function(x) {
   tibble(
-    .name = recover_coord.clpca(x)
+    .name = factor_coord(recover_coord.clpca(x))
   )
 }

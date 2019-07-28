@@ -60,3 +60,8 @@ setup_u_data <- function(data, params) {
 setup_v_data <- function(data, params) {
   data[data$.matrix == "v", -match(".matrix", names(data)), drop = FALSE]
 }
+
+factor_coord <- function(x) {
+  if (any(duplicated(x))) stop("Duplicated coordinates detected.")
+  factor(x, levels = x)
+}

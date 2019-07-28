@@ -87,7 +87,7 @@ augmentation_v.princomp <- function(x) {
 #' @export
 augmentation_coord.princomp <- function(x) {
   tibble(
-    .name = recover_coord.princomp(x),
+    .name = factor_coord(recover_coord.princomp(x)),
     .sdev = x[["sdev"]]
   )
 }

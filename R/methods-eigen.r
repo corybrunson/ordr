@@ -83,7 +83,7 @@ augmentation_v.eigen <- function(x) {
 augmentation_coord.eigen <- function(x) {
   w <- 1:(min(which(c(x$values, -1) < 0)) - 1)
   tibble(
-    .name = recover_coord(x),
+    .name = factor_coord(recover_coord(x)),
     .values = x$values[w]
   )
 }

@@ -51,11 +51,16 @@ output, a \link[tibble:tibble]{tibble} obtained by binding columns obtained via
 \code{\link[=accessors]{get_*()}}, \code{\link[=annotation]{annotation_*()}}, and
 \code{\link[=augmentation]{augmentation_*}}, respectively.
 
-If any augmented variables are included
-(i.e. unless \code{include = "coordinates"}),
-then the tibble is assigned a \code{"coordinates"} attribute
-whose value is obtained via \code{\link[=get_coord]{get_coord()}}.
-(Note that this attribute will not be printed with the tibble.)
+In the special case \code{.matrix = "coordinates"}, the tibble consists instead of
+the artificial coordinates and associated metadata, often including the
+proportion of variance explained or captured by each. This can be used to
+produce scree plots, for example.
+
+If any augmented variables are included (i.e. unless \code{include = "coordinates"}), then the tibble is assigned a \code{"coordinates"} attribute
+whose value is obtained via \code{\link[=get_coord]{get_coord()}}. (That this attribute will not be
+printed with the tibble.) This facilitates some downstream functionality that
+relies on more than those coordinates used as position aesthetics in a
+biplot, in particular \code{\link[=stat_spantree]{stat_spantree()}}.
 }
 \examples{
 # a 'tbl_ord' object

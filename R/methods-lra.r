@@ -68,5 +68,5 @@ augmentation_v.lra <- function(x) {
 #' @rdname methods-lra
 #' @export
 augmentation_coord.lra <- function(x) {
-  tibble(.name = recover_coord(x))
+  tibble(.name = factor_coord(recover_coord(x)))
 }
