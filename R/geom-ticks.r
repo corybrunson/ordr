@@ -109,7 +109,7 @@ GeomTicks <- ggproto(
     # by default, use Wilkinson's breaks algorithm
     if (is.null(by)) {
       bys <- lapply(1:nrow(data), function(i) {
-        labeling::extended(data$unitmin[i], data$unitmax[i], 12)
+        labeling::extended(data$unitmin[i], data$unitmax[i], 6)
       })
     } else {
       if (length(by) == 1) by <- rep(by, nrow(data))
