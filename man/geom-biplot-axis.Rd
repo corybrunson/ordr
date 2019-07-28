@@ -8,7 +8,7 @@
 \alias{geom_v_axis}
 \alias{geom_biplot_axis}
 \title{Render axes through origin}
-\format{An object of class \code{GeomAxis} (inherits from \code{GeomAbline}, \code{Geom}, \code{ggproto}, \code{gg}) of length 3.}
+\format{An object of class \code{GeomAxis} (inherits from \code{GeomAbline}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.}
 \usage{
 geom_u_axis(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", ..., na.rm = FALSE, show.legend = NA,

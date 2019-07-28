@@ -34,6 +34,22 @@ GeomAxis <- ggproto(
   
   required_aes = c("x", "y"),
   
+  setup_data = function(data, params) {
+    
+    # `geom_abline()` versus `geom_vline()` discriminant
+    data$vline <- data$x == 0 & data$y != 0
+    # `geom_abline()` columns
+    data$intercept <- rep(0, nrow(data))
+    data$slope <- data$y / data$x
+    # `geom_vline()` columns
+    data$xintercept <- rep(0, nrow(data))
+    # remove position columns (avoid affecting position limits)
+    data$x <- NULL
+    data$y <- NULL
+    
+    data
+  },
+  
   draw_panel = function(
     data, panel_params, coord,
     na.rm = FALSE
@@ -42,19 +58,23 @@ GeomAxis <- ggproto(
       warning("Axes are not yet tailored to non-linear coordinates.")
     }
     
-    ranges <- coord$range(panel_params)
-    
-    data$slope <- data$y / data$x
-    data$vline <- data$y == 0
-    data$x <- ifelse(data$vline, 0, ranges$x[1])
-    data$xend <- ifelse(data$vline, 0, ranges$x[2])
-    data$y <- ifelse(data$vline, ranges$y[1], ranges$x[1] * data$slope)
-    data$yend <- ifelse(data$vline, ranges$y[2], ranges$x[2] * data$slope)
-    
-    GeomSegment$draw_panel(
-      data = unique(data), panel_params = panel_params, coord = coord,
-      na.rm = na.rm
-    )
+    # combine line grobs
+    grobs <- list()
+    if (any(! data$vline)) {
+      grobs <- c(grobs, list(GeomAbline$draw_panel(
+        data = unique(data[! data$vline, , drop = FALSE]),
+        panel_params = panel_params, coord = coord
+      )))
+    }
+    if (any(data$vline)) {
+      grobs <- c(grobs, list(GeomVline$draw_panel(
+        data = unique(data[data$vline, , drop = FALSE]),
+        panel_params = panel_params, coord = coord
+      )))
+    }
+    grob <- do.call(grid::grobTree, grobs)
+    grob$name <- grid::grobName(grob, "geom_axis")
+    grob
   }
 )
 
