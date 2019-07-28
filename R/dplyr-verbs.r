@@ -19,7 +19,7 @@
 #' @template param-matrix
 #' @example inst/examples/iris-princomp-sec.r
 #' @example inst/examples/benthos-ca-augment-confer.r
-#' @example inst/examples/arrests-logratio-polygon.r
+#' @example inst/examples/arrests-lra-polygon.r
 
 pull_factor <- function(.data, var = -1, .matrix) {
   pull(annotation_factor(.data, .matrix = .matrix), !! enquo(var))

@@ -8,7 +8,7 @@
 #' @name methods-lra
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/arrests-logratio-polygon.r
+#' @example inst/examples/arrests-lra-polygon.r
 NULL
 
 #' @rdname methods-lra

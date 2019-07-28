@@ -75,6 +75,20 @@ NULL
 #' @format A [matrix][base::matrix].
 #' @keywords datasets
 #' @source Greenacre (2010).
+#' @template ref-greenacre2010
 #' @name issp_women
 #' @example inst/examples/women-ca-confer.r
+NULL
+
+#' @title Ingredient ratios for several basic recipes
+#'
+#' @description Ratios of ingredients for several basic recipes presented in a
+#'   popular cooking book.
+#'
+#' @format A [tibble][tibble::tibble].
+#' @keywords datasets
+#' @source Ruhlman (2009).
+#' @template ref-ruhlman2009
+#' @name ratios
+#' @example inst/examples/ratios-ca-verbs.r
 NULL

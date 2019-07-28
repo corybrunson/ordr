@@ -36,4 +36,9 @@ issp_ca \%>\%
   geom_v_text_repel(color = "brown")
 # Reproduce Exhibits 9.4 and 9.6 in Greenacre (2010)...
 }
+\references{
+Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
+978-84-923846.
+\url{https://www.fbbva.es/microsite/multivariate-statistics/biplots.html}
+}
 \keyword{datasets}

@@ -11,6 +11,7 @@
 #' @example inst/examples/benthos-ca-augment-confer.r
 #' @example inst/examples/women-ca-confer.r
 #' @example inst/examples/haireye-ca-rotate.r
+#' @example inst/examples/ratios-ca-verbs.r
 NULL
 
 #' @rdname methods-ca
@@ -52,8 +53,14 @@ recover_coord.ca <- function(x) {
 #' @rdname methods-ca
 #' @export
 augmentation_u.ca <- function(x) {
-  tibble(
-    .name = rownames(x$rowcoord),
+  .name <- rownames(x$rowcoord)
+  res <- if (is.null(.name)) {
+    tibble_pole(nrow(x$rowcoord))
+  } else {
+    tibble(.name = .name)
+  }
+  dplyr::bind_cols(
+    res,
     .mass = x$rowmass,
     .dist = x$rowdist,
     .inertia = x$rowinertia
@@ -63,8 +70,14 @@ augmentation_u.ca <- function(x) {
 #' @rdname methods-ca
 #' @export
 augmentation_v.ca <- function(x){
-  tibble(
-    .name = rownames(x$colcoord),
+  .name <- rownames(x$colcoord)
+  res <- if (is.null(.name)) {
+    tibble_pole(nrow(x$colcoord))
+  } else {
+    tibble(.name = .name)
+  }
+  dplyr::bind_cols(
+    res,
     .mass = x$colmass,
     .dist = x$coldist,
     .inertia = x$colinertia

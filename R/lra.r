@@ -21,7 +21,7 @@
 #' @name lra
 #' @param x A numeric matrix or rectangular data set.
 #' @param weighted Logical; whether to weight rows and columns by their sums.
-#' @example inst/examples/arrests-logratio-polygon.r
+#' @example inst/examples/arrests-lra-polygon.r
 NULL
 
 #' @rdname lra
