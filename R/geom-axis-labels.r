@@ -85,7 +85,6 @@ GeomAxisText <- ggproto(
     
     # by default, render ticks for all axes
     if (! is.null(axes)) data <- data[axes, , drop = FALSE]
-    # process `family_fun` argument
     family_fun <- family_arg(family_fun)
     
     # window boundaries for axis ticks
@@ -109,7 +108,7 @@ GeomAxisText <- ggproto(
     ran_vars <- c("winxmin", "winxmax", "winymin", "winymax")
     data[, ran_vars] <- data[, ran_vars] + data$intercept
     if (! is.null(family_fun)) {
-      data[, ran_vars] <- family_fun$linkinv(data[, ran_vars])
+      data[, ran_vars] <- family_fun$linkinv(as.matrix(data[, ran_vars]))
     }
     
     # by default, use Wilkinson's breaks algorithm
@@ -140,7 +139,9 @@ GeomAxisText <- ggproto(
     
     # un-transform ranges based on family
     pos_vars <- c("xpos", "ypos")
-    if (! is.null(family_fun)) data[, pos_vars] <- family_fun$linkfun(data[, pos_vars])
+    if (! is.null(family_fun)) {
+      data[, pos_vars] <- family_fun$linkfun(as.matrix(data[, pos_vars]))
+    }
     data[, pos_vars] <- data[, pos_vars] - data$intercept
     
     # positions of labels

@@ -57,14 +57,22 @@ GeomIsolines <- ggproto(
     data$x <- NULL
     data$y <- NULL
     
+    # ensure intercept column (zero is appropriate for null family)
+    if (! "intercept" %in% names(data)) {
+      data$intercept <- 0
+      if (! is.null(params$family_fun)) {
+        warning("No `intercept` aesthetic provided; it has been set to zero.")
+      }
+    }
+    
     data
   },
   
   draw_panel = function(
     data, panel_params, coord,
-    family = NULL, axes = NULL, by = NULL
+    family_fun = NULL, axes = NULL, by = NULL
   ) {
-    if (! is.null(family)) {
+    if (! is.null(family_fun)) {
       if (! "intercept" %in% names(data)) {
         data$intercept <- 0
         warning("No 'intercept' aesthetic provided; it has been set to zero.")
@@ -74,38 +82,78 @@ GeomIsolines <- ggproto(
     ranges <- coord$range(panel_params)
     
     if (is.null(axes)) axes <- 1L
-    # process 'family' argument
-    family <- family_arg(family)
+    family_fun <- family_arg(family_fun)
     
-    # convert to intercepts and slopes
-    data <- do.call(rbind, lapply(axes, function(i) {
-      # intercept
-      #if (! is.null(family)) intercept <- data$intercept[i]
-      # vector
-      w_i <- unlist(data[i, c("x", "y")])
-      # calibrated vector
-      c_i <- w_i / sum(w_i ^ 2)
-      
-      # intercept (`NULL` with `family`)
-      intercept <- if (! is.null(family)) data$intercept[i]
-      
-      # plot range of isolines along calibrated vector
-      ran <- axis_range(c_i, ranges$x, ranges$y)
-      
-      # calculate positions of tick marks
-      k_i <- axis_positions(ran, family, by, intercept)
-      
-      # slope of isolines
-      m_i <- - w_i[1] / w_i[2]
-      # component of final data frame from this original axis
-      suppressWarnings(data.frame(
-        x = k_i * c_i[1],
-        y = k_i * c_i[2],
-        intercept = k_i * c_i[2] - m_i * k_i * c_i[1],
-        slope = m_i,
-        data[i, -match(c("x", "y"), names(data))]
-      ))
-    }))
+    # window boundaries for axis positions
+    data <- transform(
+      data,
+      # sum of squares of axis unit
+      unitss = xunit^2 + yunit^2,
+      winxmin = ifelse(xunit > 0, ranges$x[1], ranges$x[2]),
+      winxmax = ifelse(xunit > 0, ranges$x[2], ranges$x[1]),
+      winymin = ifelse(yunit > 0, ranges$y[1], ranges$y[2]),
+      winymax = ifelse(yunit > 0, ranges$y[2], ranges$y[1])
+    )
+    # extreme positions, in terms of axis unit
+    data <- transform(
+      data,
+      unitmin = (winxmin * xunit + winymin * yunit) / unitss,
+      unitmax = (winxmax * xunit + winymax * yunit) / unitss
+    )
+    
+    # transform ranges based on family
+    ran_vars <- c("winxmin", "winxmax", "winymin", "winymax")
+    data[, ran_vars] <- data[, ran_vars] + data$intercept
+    if (! is.null(family_fun)) {
+      data[, ran_vars] <- family_fun$linkinv(as.matrix(data[, ran_vars]))
+    }
+    
+    # by default, use Wilkinson's breaks algorithm
+    if (is.null(by)) {
+      bys <- lapply(1:nrow(data), function(i) {
+        labeling::extended(data$unitmin[i], data$unitmax[i], 6)
+      })
+    } else {
+      if (length(by) == 1) by <- rep(by, nrow(data))
+      bys <- lapply(1:nrow(data), function(i) {
+        floor(data$unitmin[i] / by[i]):ceiling(data$unitmax[i] / by[i]) * by[i]
+      })
+    }
+    data <- data[rep(1:nrow(data), sapply(bys, length)), , drop = FALSE]
+    data$units <- unlist(bys)
+    
+    # axis positions
+    data <- transform(
+      data,
+      xpos = units * xunit,
+      ypos = units * yunit
+    )
+    
+    # un-transform ranges based on family
+    pos_vars <- c("xpos", "ypos")
+    if (! is.null(family_fun)) {
+      data[, pos_vars] <- family_fun$linkfun(as.matrix(data[, pos_vars]))
+    }
+    data[, pos_vars] <- data[, pos_vars] - data$intercept
+    
+    # abline orientation aesthetics
+    data <- transform(data, slope = -1 / slope)
+    data <- transform(data, intercept = ypos - slope * xpos)
+    
+    # remove calculation steps
+    data$vline <- NULL
+    data$xunit <- NULL
+    data$yunit <- NULL
+    data$unitss <- NULL
+    data$winxmin <- NULL
+    data$winxmax <- NULL
+    data$winymin <- NULL
+    data$winymax <- NULL
+    data$unitmin <- NULL
+    data$unitmax <- NULL
+    data$units <- NULL
+    data$xpos <- NULL
+    data$ypos <- NULL
     
     GeomAbline$draw_panel(
       data = data, panel_params = panel_params, coord = coord
@@ -117,7 +165,7 @@ GeomIsolines <- ggproto(
 #' @export
 geom_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  family = NULL, axes = NULL, by = NULL,
+  family_fun = NULL, axes = NULL, by = NULL,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -132,7 +180,7 @@ geom_isolines <- function(
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      family = family,
+      family_fun = family_fun,
       axes = axes,
       by = by,
       ...
@@ -144,7 +192,7 @@ geom_isolines <- function(
 #' @export
 geom_u_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  family = NULL, axes = NULL, by = NULL,
+  family_fun = NULL, axes = NULL, by = NULL,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -159,7 +207,7 @@ geom_u_isolines <- function(
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      family = family,
+      family_fun = family_fun,
       axes = axes,
       by = by,
       ...
@@ -171,7 +219,7 @@ geom_u_isolines <- function(
 #' @export
 geom_v_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  family = NULL, axes = NULL, by = NULL,
+  family_fun = NULL, axes = NULL, by = NULL,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -186,7 +234,7 @@ geom_v_isolines <- function(
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      family = family,
+      family_fun = family_fun,
       axes = axes,
       by = by,
       ...
@@ -198,7 +246,7 @@ geom_v_isolines <- function(
 #' @export
 geom_biplot_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "v", family = NULL, axes = NULL, by = NULL,
+  .matrix = "v", family_fun = NULL, axes = NULL, by = NULL,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -213,65 +261,10 @@ geom_biplot_isolines <- function(
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      family = family,
+      family_fun = family_fun,
       axes = axes,
       by = by,
       ...
     )
   )
-}
-
-family_arg <- function(family) {
-  if (! is.null(family)) {
-    if (is.character(family)) {
-      family <- get(family, mode = "function", envir = parent.frame())
-    }
-    if (is.function(family)) {
-      family <- family()
-    }
-  }
-  family
-}
-
-# calculate range of isoline locations restricted to plot window
-axis_range <- function(u, xran, yran) {
-  m <- u[2] / u[1]
-  ran <- if (m > 0) {
-    c(project_onto(c(xran[1], yran[1]), u),
-      project_onto(c(xran[2], yran[2]), u))
-  } else if (m < 0) {
-    c(project_onto(c(xran[1], yran[2]), u),
-      project_onto(c(xran[2], yran[1]), u))
-  } else if (m == 0) {
-    c(project_onto(c(xran[1], 0), u),
-      project_onto(c(xran[2], 0), u))
-  } else if (is.infinite(m)) {
-    c(project_onto(c(0, yran[1]), u),
-      project_onto(c(0, yran[2]), u))
-  }
-  ran
-}
-
-axis_positions <- function(ran, family, by, intercept = NULL) {
-  if (! is.null(family)) {
-    # shift by intercept
-    ran <- ran + intercept
-    # un-linked range of isolines via inverse link function
-    ran <- family$linkinv(ran)
-  }
-  # range of `by`-multiples of calibrated vector within plot range
-  k_ran <- c(ceiling(min(ran) / by), floor(max(ran) / by))
-  # positions of isolines
-  k <- seq(k_ran[1] * by, k_ran[2] * by, by = by)
-  if (! is.null(family)) {
-    # re-link positions of isolines via link function
-    k <- family$linkfun(k)
-    # un-shift by intercept
-    k <- k - intercept
-  }
-  k
-}
-
-project_onto <- function(x, y) {
-  (sum(x * y) / sum(y ^ 2))
 }

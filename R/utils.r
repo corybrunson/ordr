@@ -64,3 +64,15 @@ setup_u_data <- function(data, params) {
 setup_v_data <- function(data, params) {
   data[data$.matrix == "v", -match(".matrix", names(data)), drop = FALSE]
 }
+
+family_arg <- function(family_fun) {
+  if (! is.null(family_fun)) {
+    if (is.character(family_fun)) {
+      family_fun <- get(family_fun, mode = "function", envir = parent.frame())
+    }
+    if (is.function(family_fun)) {
+      family_fun <- family()
+    }
+  }
+  family_fun
+}
