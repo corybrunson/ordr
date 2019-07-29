@@ -8,7 +8,7 @@
 \alias{geom_v_isolines}
 \alias{geom_biplot_isolines}
 \title{Render isolines for a subject or variable}
-\format{An object of class \code{GeomIsolines} (inherits from \code{GeomAbline}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.}
+\format{An object of class \code{GeomIsolines} (inherits from \code{GeomAbline}, \code{Geom}, \code{ggproto}, \code{gg}) of length 5.}
 \usage{
 geom_u_isolines(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", family = NULL, axes = NULL, by = NULL,

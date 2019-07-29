@@ -57,6 +57,14 @@ GeomTicks <- ggproto(
     data$x <- NULL
     data$y <- NULL
     
+    # ensure intercept column (zero is appropriate for null family)
+    if (! "intercept" %in% names(data)) {
+      data$intercept <- 0
+      if (! is.null(params$family)) {
+        warning("No `intercept` aesthetic provided; it has been set to zero.")
+      }
+    }
+    
     data
   },
   
@@ -65,12 +73,6 @@ GeomTicks <- ggproto(
     family = NULL, axes = NULL, by = NULL,
     ticks.length = .025
   ) {
-    if (! is.null(family)) {
-      if (! "intercept" %in% names(data)) {
-        data$intercept <- 0
-        warning("No 'intercept' aesthetic provided; it has been set to zero.")
-      }
-    }
     
     ranges <- coord$range(panel_params)
     
@@ -96,16 +98,11 @@ GeomTicks <- ggproto(
       unitmax = (winxmax * xunit + winymax * yunit) / unitss
     )
     
-    # tick mark radius
-    rtick <- min(diff(ranges$x), diff(ranges$y)) * ticks.length / 2
-    # tick mark vector
-    data <- transform(
-      data,
-      xtick = - yunit / sqrt(unitss) * rtick,
-      ytick = xunit / sqrt(unitss) * rtick
-    )
+    # transform ranges based on family
+    ran_vars <- c("winxmin", "winxmax", "winymin", "winymax")
+    data[, ran_vars] <- data[, ran_vars] + data$intercept
+    if (! is.null(family)) data[, ran_vars] <- family$linkinv(data[, ran_vars])
     
-    # positions of tick marks
     # by default, use Wilkinson's breaks algorithm
     if (is.null(by)) {
       bys <- lapply(1:nrow(data), function(i) {
@@ -119,14 +116,32 @@ GeomTicks <- ggproto(
     }
     data <- data[rep(1:nrow(data), sapply(bys, length)), , drop = FALSE]
     data$units <- unlist(bys)
-    # coordinates of tick marks
+    # positions of tick marks
     data <- transform(
       data,
-      x = units * xunit - xtick, xend = units * xunit + xtick,
-      y = units * yunit - ytick, yend = units * yunit + ytick
+      xpos = units * xunit,
+      ypos = units * yunit
     )
     
-    # -+- NEED TO ADD TICK LABELS -+-
+    # un-transform ranges based on family
+    pos_vars <- c("xpos", "ypos")
+    if (! is.null(family)) data[, pos_vars] <- family$linkfun(data[, pos_vars])
+    data[, pos_vars] <- data[, pos_vars] - data$intercept
+    
+    # tick mark radius
+    rtick <- min(diff(ranges$x), diff(ranges$y)) * ticks.length / 2
+    # tick mark vector
+    data <- transform(
+      data,
+      xtick = - yunit / sqrt(unitss) * rtick,
+      ytick = xunit / sqrt(unitss) * rtick
+    )
+    # endpoints of tick marks
+    data <- transform(
+      data,
+      x = xpos - xtick, xend = xpos + xtick,
+      y = ypos - ytick, yend = ypos + ytick
+    )
     
     # remove calculation steps
     data$vline <- NULL
@@ -143,6 +158,10 @@ GeomTicks <- ggproto(
     data$unitmin <- NULL
     data$unitmax <- NULL
     data$units <- NULL
+    data$xpos <- NULL
+    data$ypos <- NULL
+    
+    # -+- NEED TO ADD TICK LABELS -+-
     
     GeomSegment$draw_panel(
       data = data, panel_params = panel_params, coord = coord

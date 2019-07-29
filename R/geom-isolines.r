@@ -43,6 +43,23 @@ GeomIsolines <- ggproto(
     colour = "black", size = .5, linetype = "dashed", alpha = .5
   ),
   
+  setup_data = function(data, params) {
+    
+    # diagonal versus vertical lines
+    data$vline <- data$x == 0 & data$y != 0
+    # tick slopes
+    data$slope <- data$y / data$x
+    # axis scales
+    data$xunit <- data$x
+    data$yunit <- data$y
+    # remove position columns
+    # (prevent coordinates from affecting position limits)
+    data$x <- NULL
+    data$y <- NULL
+    
+    data
+  },
+  
   draw_panel = function(
     data, panel_params, coord,
     family = NULL, axes = NULL, by = NULL
