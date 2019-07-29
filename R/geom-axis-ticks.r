@@ -20,12 +20,10 @@
 
 #' @name geom-biplot-axis-ticks
 #' @import ggplot2
+#' @include geom-isolines.r
 #' @inheritParams ggplot2::layer
 #' @template param-geom
-#' @param family_fun A family function or a character string naming one, to
-#'   transform the values along the axis at which to render marks.
-#' @param axes Indices of axes for which to render marks.
-#' @param by Interval length between marks, in the units of the ordination.
+#' @inheritParams GeomIsolines
 #' @param tick_length Numeric; the length of the tick marks, as a proportion of
 #'   the minimum of the plot width and height.
 #' @template param-matrix

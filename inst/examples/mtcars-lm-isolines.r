@@ -8,10 +8,9 @@ mtcars %>%
   mutate_u(influence = .wt.res^2) %>%
   print() -> mtcars_lm
 mtcars_lm %>%
-  ggbiplot(aes(x = wt, y = cyl)) +
+  ggbiplot(aes(x = wt, y = cyl, intercept = `(Intercept)`)) +
   geom_u_point(aes(color = influence)) +
   geom_v_vector() +
-  # weight isolines
   geom_v_isolines(axes = 1, by = 5) +
   ggtitle(
     "Weight isolines with data colored by importance",

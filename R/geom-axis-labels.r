@@ -25,10 +25,11 @@
 
 #' @name geom-biplot-ticks
 #' @import ggplot2
+#' @include geom-isolines.r
 #' @inheritParams ggplot2::layer
 #' @template param-geom
 #' @inheritParams ggplot2::GeomText
-#' @inheritParams GeomAxisTicks
+#' @inheritParams GeomIsolines
 #' @param label_dodge Numeric; the orthogonal distance of the text from
 #'   the axis, as a proportion of the minimum of the plot width and height.
 #' @template param-matrix

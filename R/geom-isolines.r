@@ -22,10 +22,12 @@
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
-#' @param family A family function or a character string naming one, to
-#'   transform the values along the axis at which to render isolines.
-#' @param axes Indices for which isolines will be rendered.
-#' @param by Interval length between isolines, in the units of the ordination.
+#' @param axes Indices of axes for which to render elements.
+#' @param calibrate Logical; whether to calibrate axis scales for inner product
+#'   interpretability.
+#' @param family_fun A family function, or a character string naming one, to
+#'   transform the values along the axis at which to render elements.
+#' @param by Interval length between elements, in the units of the ordination.
 #' @template param-matrix
 #' @example inst/examples/mtcars-lm-isolines.r
 #' @example inst/examples/bioenv-lm-isolines.r
@@ -45,23 +47,41 @@ GeomIsolines <- ggproto(
   
   setup_data = function(data, params) {
     
-    # diagonal versus vertical lines
-    data$vline <- data$x == 0 & data$y != 0
-    # tick slopes
+    # by default, render ticks for all axes
+    if (! is.null(params$axes)) data <- data[params$axes, , drop = FALSE]
+    
+    # slopes
     data$slope <- data$y / data$x
+    
     # axis scales
-    data$xunit <- data$x
-    data$yunit <- data$y
+    if (params$calibrate) {
+      data <- transform(data, ss = x^2 + y^2)
+      data <- transform(data, xunit = x / ss, yunit = y / ss)
+      data$ss <- NULL
+    } else {
+      data <- transform(data, xunit = x, yunit = y)
+    }
+    data <- transform(data, ssunit = xunit^2 + yunit^2)
     # remove position columns
     # (prevent coordinates from affecting position limits)
     data$x <- NULL
     data$y <- NULL
+    data$ss <- NULL
     
     # ensure intercept column (zero is appropriate for null family)
-    if (! "intercept" %in% names(data)) {
-      data$intercept <- 0
+    if (params$calibrate) {
+      if (! "intercept" %in% names(data)) {
+        data$intercept <- 0
+        if (! is.null(params$family_fun)) {
+          warning("No `intercept` aesthetic provided; it has been set to zero.")
+        }
+      }
+    } else {
+      if ("intercept" %in% names(data)) {
+        warning("Axis is not calibrated, so `intercept` will be ignored.")
+      }
       if (! is.null(params$family_fun)) {
-        warning("No `intercept` aesthetic provided; it has been set to zero.")
+        warning("Axis is not calibrated, so `family_fun` will be ignored.")
       }
     }
     
@@ -70,45 +90,43 @@ GeomIsolines <- ggproto(
   
   draw_panel = function(
     data, panel_params, coord,
-    family_fun = NULL, axes = NULL, by = NULL
+    axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL
   ) {
-    if (! is.null(family_fun)) {
-      if (! "intercept" %in% names(data)) {
-        data$intercept <- 0
-        warning("No 'intercept' aesthetic provided; it has been set to zero.")
-      }
-    }
     
     ranges <- coord$range(panel_params)
-    
-    if (is.null(axes)) axes <- 1L
-    family_fun <- family_arg(family_fun)
+    if (calibrate) family_fun <- family_arg(family_fun)
     
     # window boundaries for axis positions
     data <- transform(
       data,
-      # sum of squares of axis unit
-      unitss = xunit^2 + yunit^2,
       winxmin = ifelse(xunit > 0, ranges$x[1], ranges$x[2]),
       winxmax = ifelse(xunit > 0, ranges$x[2], ranges$x[1]),
       winymin = ifelse(yunit > 0, ranges$y[1], ranges$y[2]),
       winymax = ifelse(yunit > 0, ranges$y[2], ranges$y[1])
     )
-    # extreme positions, in terms of axis unit
+    
+    # extreme positions, in axis units
     data <- transform(
       data,
-      unitmin = (winxmin * xunit + winymin * yunit) / unitss,
-      unitmax = (winxmax * xunit + winymax * yunit) / unitss
+      unitmin = (winxmin * xunit + winymin * yunit) / ssunit,
+      unitmax = (winxmax * xunit + winymax * yunit) / ssunit
     )
+    data$ssunit <- NULL
+    data$winxmin <- NULL
+    data$winxmax <- NULL
+    data$winymin <- NULL
+    data$winymax <- NULL
     
-    # transform ranges based on family
-    ran_vars <- c("winxmin", "winxmax", "winymin", "winymax")
-    data[, ran_vars] <- data[, ran_vars] + data$intercept
-    if (! is.null(family_fun)) {
-      data[, ran_vars] <- family_fun$linkinv(as.matrix(data[, ran_vars]))
+    # calibrate axis range according to intercept and family
+    if (calibrate) {
+      ran_vars <- c("unitmin", "unitmax")
+      data[, ran_vars] <- data[, ran_vars] + data$intercept
+      if (! is.null(family_fun)) {
+        data[, ran_vars] <- family_fun$linkinv(as.matrix(data[, ran_vars]))
+      }
     }
     
-    # by default, use Wilkinson's breaks algorithm
+    # element units; by default, use Wilkinson's breaks algorithm
     if (is.null(by)) {
       bys <- lapply(1:nrow(data), function(i) {
         labeling::extended(data$unitmin[i], data$unitmax[i], 6)
@@ -121,6 +139,15 @@ GeomIsolines <- ggproto(
     }
     data <- data[rep(1:nrow(data), sapply(bys, length)), , drop = FALSE]
     data$units <- unlist(bys)
+    data$unitmin <- NULL
+    data$unitmax <- NULL
+    
+    # un-calibrate axis units according to intercept and family
+    unit_vars <- c("units")
+    if (! is.null(family_fun)) {
+      data[, unit_vars] <- family_fun$linkfun(as.matrix(data[, unit_vars]))
+    }
+    data[, unit_vars] <- data[, unit_vars] - data$intercept
     
     # axis positions
     data <- transform(
@@ -128,33 +155,17 @@ GeomIsolines <- ggproto(
       xpos = units * xunit,
       ypos = units * yunit
     )
-    
-    # un-transform ranges based on family
-    pos_vars <- c("xpos", "ypos")
-    if (! is.null(family_fun)) {
-      data[, pos_vars] <- family_fun$linkfun(as.matrix(data[, pos_vars]))
-    }
-    data[, pos_vars] <- data[, pos_vars] - data$intercept
-    
-    # abline orientation aesthetics
-    data <- transform(data, slope = -1 / slope)
-    data <- transform(data, intercept = ypos - slope * xpos)
-    
-    # remove calculation steps
-    data$vline <- NULL
     data$xunit <- NULL
     data$yunit <- NULL
-    data$unitss <- NULL
-    data$winxmin <- NULL
-    data$winxmax <- NULL
-    data$winymin <- NULL
-    data$winymax <- NULL
-    data$unitmin <- NULL
-    data$unitmax <- NULL
     data$units <- NULL
+    
+    # line orientation aesthetics
+    data <- transform(data, slope = - 1 / slope)
+    data <- transform(data, intercept = ypos - slope * xpos)
     data$xpos <- NULL
     data$ypos <- NULL
     
+    # -+- ensure that vertical lines are rendered correctly -+-
     GeomAbline$draw_panel(
       data = data, panel_params = panel_params, coord = coord
     )
@@ -165,7 +176,7 @@ GeomIsolines <- ggproto(
 #' @export
 geom_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  family_fun = NULL, axes = NULL, by = NULL,
+  axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -180,8 +191,9 @@ geom_isolines <- function(
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      family_fun = family_fun,
       axes = axes,
+      calibrate = calibrate,
+      family_fun = family_fun,
       by = by,
       ...
     )
@@ -192,7 +204,7 @@ geom_isolines <- function(
 #' @export
 geom_u_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  family_fun = NULL, axes = NULL, by = NULL,
+  axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -207,8 +219,9 @@ geom_u_isolines <- function(
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      family_fun = family_fun,
       axes = axes,
+      calibrate = calibrate,
+      family_fun = family_fun,
       by = by,
       ...
     )
@@ -219,7 +232,7 @@ geom_u_isolines <- function(
 #' @export
 geom_v_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  family_fun = NULL, axes = NULL, by = NULL,
+  axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -234,8 +247,9 @@ geom_v_isolines <- function(
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      family_fun = family_fun,
       axes = axes,
+      calibrate = calibrate,
+      family_fun = family_fun,
       by = by,
       ...
     )
@@ -246,7 +260,7 @@ geom_v_isolines <- function(
 #' @export
 geom_biplot_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "v", family_fun = NULL, axes = NULL, by = NULL,
+  .matrix = "v", axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -261,8 +275,9 @@ geom_biplot_isolines <- function(
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      family_fun = family_fun,
       axes = axes,
+      calibrate = calibrate,
+      family_fun = family_fun,
       by = by,
       ...
     )
