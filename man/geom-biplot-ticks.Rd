@@ -12,25 +12,28 @@
 \format{An object of class \code{GeomAxisText} (inherits from \code{GeomText}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.}
 \usage{
 geom_axis_text(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", family_fun = NULL, axes = NULL, by = NULL,
-  label_dodge = 0.05, ..., parse = FALSE, check_overlap = FALSE,
-  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+  position = "identity", axes = NULL, calibrate = FALSE,
+  family_fun = NULL, by = NULL, label_dodge = 0.025, ...,
+  parse = FALSE, check_overlap = FALSE, na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
 
 geom_u_axis_text(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", family_fun = NULL, axes = NULL, by = NULL,
-  label_dodge = 0.05, ..., parse = FALSE, check_overlap = FALSE,
-  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+  position = "identity", axes = NULL, calibrate = FALSE,
+  family_fun = NULL, by = NULL, label_dodge = 0.025, ...,
+  parse = FALSE, check_overlap = FALSE, na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
 
 geom_v_axis_text(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", family_fun = NULL, axes = NULL, by = NULL,
-  label_dodge = 0.05, ..., parse = FALSE, check_overlap = FALSE,
-  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+  position = "identity", axes = NULL, calibrate = FALSE,
+  family_fun = NULL, by = NULL, label_dodge = 0.025, ...,
+  parse = FALSE, check_overlap = FALSE, na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
 
 geom_biplot_axis_text(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", .matrix = "v", family_fun = NULL,
-  axes = NULL, by = NULL, label_dodge = 0.05, ..., parse = FALSE,
-  check_overlap = FALSE, na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
+  position = "identity", .matrix = "v", axes = NULL,
+  calibrate = FALSE, family_fun = NULL, by = NULL,
+  label_dodge = 0.025, ..., parse = FALSE, check_overlap = FALSE,
+  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or
@@ -59,17 +62,26 @@ layer, as a string.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{family_fun}{A family function or a character string naming one, to
-transform the values along the axis at which to render marks.}
+\item{axes}{Indices of axes for which to render elements.}
 
-\item{axes}{Indices of axes for which to render marks.}
+\item{calibrate}{Logical; whether to calibrate axis scales for inner product
+interpretability.}
 
-\item{by}{Interval length between marks, in the units of the ordination.}
+\item{family_fun}{A family function, or a character string naming one, to
+transform the values along the axis at which to render elements.}
+
+\item{by}{Interval length between elements, in the units of the ordination.}
 
 \item{label_dodge}{Numeric; the orthogonal distance of the text from
 the axis, as a proportion of the minimum of the plot width and height.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
+
+\item{parse}{If \code{TRUE}, the labels will be parsed into expressions and
+displayed as described in \code{?plotmath}.}
+
+\item{check_overlap}{If \code{TRUE}, text that overlaps previous text in the
+same layer will not be plotted.}
 
 \item{na.rm}{Passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 

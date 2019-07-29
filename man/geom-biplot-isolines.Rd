@@ -12,21 +12,24 @@
 \format{An object of class \code{GeomIsolines} (inherits from \code{GeomAbline}, \code{Geom}, \code{ggproto}, \code{gg}) of length 5.}
 \usage{
 geom_isolines(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", family = NULL, axes = NULL, by = NULL,
-  ..., na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+  position = "identity", axes = NULL, calibrate = TRUE,
+  family_fun = NULL, by = NULL, ..., na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
 
 geom_u_isolines(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", family = NULL, axes = NULL, by = NULL,
-  ..., na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+  position = "identity", axes = NULL, calibrate = TRUE,
+  family_fun = NULL, by = NULL, ..., na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
 
 geom_v_isolines(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", family = NULL, axes = NULL, by = NULL,
-  ..., na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+  position = "identity", axes = NULL, calibrate = TRUE,
+  family_fun = NULL, by = NULL, ..., na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
 
 geom_biplot_isolines(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", .matrix = "v", family = NULL, axes = NULL,
-  by = NULL, ..., na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
+  position = "identity", .matrix = "v", axes = NULL,
+  calibrate = TRUE, family_fun = NULL, by = NULL, ...,
+  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or
@@ -55,12 +58,15 @@ layer, as a string.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{family}{A family function or a character string naming one, to
-transform the values along the axis at which to render isolines.}
+\item{axes}{Indices of axes for which to render elements.}
 
-\item{axes}{Indices for which isolines will be rendered.}
+\item{calibrate}{Logical; whether to calibrate axis scales for inner product
+interpretability.}
 
-\item{by}{Interval length between isolines, in the units of the ordination.}
+\item{family_fun}{A family function, or a character string naming one, to
+transform the values along the axis at which to render elements.}
+
+\item{by}{Interval length between elements, in the units of the ordination.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
@@ -124,11 +130,10 @@ mtcars \%>\%
   mutate_u(influence = .wt.res^2) \%>\%
   print() -> mtcars_lm
 mtcars_lm \%>\%
-  ggbiplot(aes(x = wt, y = cyl)) +
+  ggbiplot(aes(x = wt, y = cyl, intercept = `(Intercept)`)) +
   geom_u_point(aes(color = influence)) +
   geom_v_vector() +
-  # weight isolines
-  geom_v_isolines(ids = 1, by = 5) +
+  geom_v_isolines(axes = 1, by = 5) +
   ggtitle(
     "Weight isolines with data colored by importance",
     "Regressing mpg onto weight and number of cylinders"
@@ -151,7 +156,7 @@ bioenv_lm \%>\%
   scale_alpha_continuous(range = c(1/3, 1)) +
   geom_u_point() +
   geom_v_vector() +
-  geom_v_isolines(ids = 1, by = 5) +
+  geom_v_isolines(aes(intercept = `(Intercept)`), axes = 1, by = 5) +
   labs(x = "Standardized Depth", y = "Standardized Pollution") +
   ggtitle(
     "Gradient vector and contour lines for species 'd'",

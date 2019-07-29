@@ -47,7 +47,7 @@ GeomIsolines <- ggproto(
   
   setup_data = function(data, params) {
     
-    # by default, render ticks for all axes
+    # by default, render elements for all axes
     if (! is.null(params$axes)) data <- data[params$axes, , drop = FALSE]
     
     # slopes
@@ -143,11 +143,13 @@ GeomIsolines <- ggproto(
     data$unitmax <- NULL
     
     # un-calibrate axis units according to intercept and family
-    unit_vars <- c("units")
-    if (! is.null(family_fun)) {
-      data[, unit_vars] <- family_fun$linkfun(as.matrix(data[, unit_vars]))
+    if (calibrate) {
+      unit_vars <- c("units")
+      if (! is.null(family_fun)) {
+        data[, unit_vars] <- family_fun$linkfun(as.matrix(data[, unit_vars]))
+      }
+      data[, unit_vars] <- data[, unit_vars] - data$intercept
     }
-    data[, unit_vars] <- data[, unit_vars] - data$intercept
     
     # axis positions
     data <- transform(

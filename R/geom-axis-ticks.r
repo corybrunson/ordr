@@ -23,7 +23,7 @@
 #' @include geom-isolines.r
 #' @inheritParams ggplot2::layer
 #' @template param-geom
-#' @inheritParams GeomIsolines
+#' @inheritParams geom_isolines
 #' @param tick_length Numeric; the length of the tick marks, as a proportion of
 #'   the minimum of the plot width and height.
 #' @template param-matrix
@@ -43,23 +43,41 @@ GeomAxisTicks <- ggproto(
   
   setup_data = function(data, params) {
     
-    # diagonal versus vertical lines
-    data$vline <- data$x == 0 & data$y != 0
-    # tick slopes
+    # by default, render elements for all axes
+    if (! is.null(params$axes)) data <- data[params$axes, , drop = FALSE]
+    
+    # slopes
     data$slope <- data$y / data$x
+    
     # axis scales
-    data$xunit <- data$x
-    data$yunit <- data$y
+    if (params$calibrate) {
+      data <- transform(data, ss = x^2 + y^2)
+      data <- transform(data, xunit = x / ss, yunit = y / ss)
+      data$ss <- NULL
+    } else {
+      data <- transform(data, xunit = x, yunit = y)
+    }
+    data <- transform(data, ssunit = xunit^2 + yunit^2)
     # remove position columns
     # (prevent coordinates from affecting position limits)
     data$x <- NULL
     data$y <- NULL
+    data$ss <- NULL
     
     # ensure intercept column (zero is appropriate for null family)
-    if (! "intercept" %in% names(data)) {
-      data$intercept <- 0
+    if (params$calibrate) {
+      if (! "intercept" %in% names(data)) {
+        data$intercept <- 0
+        if (! is.null(params$family_fun)) {
+          warning("No `intercept` aesthetic provided; it has been set to zero.")
+        }
+      }
+    } else {
+      if ("intercept" %in% names(data)) {
+        warning("Axis is not calibrated, so `intercept` will be ignored.")
+      }
       if (! is.null(params$family_fun)) {
-        warning("No `intercept` aesthetic provided; it has been set to zero.")
+        warning("Axis is not calibrated, so `family_fun` will be ignored.")
       }
     }
     
@@ -68,41 +86,43 @@ GeomAxisTicks <- ggproto(
   
   draw_panel = function(
     data, panel_params, coord,
-    family_fun = NULL, axes = NULL, by = NULL,
+    axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
     tick_length = .025
   ) {
     
     ranges <- coord$range(panel_params)
+    if (calibrate) family_fun <- family_arg(family_fun)
     
-    # by default, render ticks for all axes
-    if (! is.null(axes)) data <- data[axes, , drop = FALSE]
-    family_fun <- family_arg(family_fun)
-    
-    # window boundaries for axis ticks
+    # window boundaries for axis positions
     data <- transform(
       data,
-      # sum of squares of axis unit
-      unitss = xunit^2 + yunit^2,
       winxmin = ifelse(xunit > 0, ranges$x[1], ranges$x[2]),
       winxmax = ifelse(xunit > 0, ranges$x[2], ranges$x[1]),
       winymin = ifelse(yunit > 0, ranges$y[1], ranges$y[2]),
       winymax = ifelse(yunit > 0, ranges$y[2], ranges$y[1])
     )
-    # extreme positions of ticks, in terms of axis unit
+    
+    # extreme positions, in axis units
     data <- transform(
       data,
-      unitmin = (winxmin * xunit + winymin * yunit) / unitss,
-      unitmax = (winxmax * xunit + winymax * yunit) / unitss
+      unitmin = (winxmin * xunit + winymin * yunit) / ssunit,
+      unitmax = (winxmax * xunit + winymax * yunit) / ssunit
     )
+    data$winxmin <- NULL
+    data$winxmax <- NULL
+    data$winymin <- NULL
+    data$winymax <- NULL
     
-    # transform ranges based on family
-    ran_vars <- c("winxmin", "winxmax", "winymin", "winymax")
-    data[, ran_vars] <- data[, ran_vars] + data$intercept
-    if (! is.null(family_fun)) {
-      data[, ran_vars] <- family_fun$linkinv(as.matrix(data[, ran_vars]))
+    # calibrate axis range according to intercept and family
+    if (calibrate) {
+      ran_vars <- c("unitmin", "unitmax")
+      data[, ran_vars] <- data[, ran_vars] + data$intercept
+      if (! is.null(family_fun)) {
+        data[, ran_vars] <- family_fun$linkinv(as.matrix(data[, ran_vars]))
+      }
     }
     
-    # by default, use Wilkinson's breaks algorithm
+    # element units; by default, use Wilkinson's breaks algorithm
     if (is.null(by)) {
       bys <- lapply(1:nrow(data), function(i) {
         labeling::extended(data$unitmin[i], data$unitmax[i], 6)
@@ -115,30 +135,37 @@ GeomAxisTicks <- ggproto(
     }
     data <- data[rep(1:nrow(data), sapply(bys, length)), , drop = FALSE]
     data$units <- unlist(bys)
+    data$unitmin <- NULL
+    data$unitmax <- NULL
     # exclude ticks at origin
     data <- subset(data, units != 0)
+    # text strings
+    data <- transform(data, label = format(units, digits = 3))
     
-    # positions of tick marks
+    # un-calibrate axis units according to intercept and family
+    if (calibrate) {
+      unit_vars <- c("units")
+      if (! is.null(family_fun)) {
+        data[, unit_vars] <- family_fun$linkfun(as.matrix(data[, unit_vars]))
+      }
+      data[, unit_vars] <- data[, unit_vars] - data$intercept
+    }
+    
+    # axis positions
     data <- transform(
       data,
       xpos = units * xunit,
       ypos = units * yunit
     )
-    
-    # un-transform ranges based on family
-    pos_vars <- c("xpos", "ypos")
-    if (! is.null(family_fun)) {
-      data[, pos_vars] <- family_fun$linkfun(as.matrix(data[, pos_vars]))
-    }
-    data[, pos_vars] <- data[, pos_vars] - data$intercept
+    data$units <- NULL
     
     # tick mark radius
     rtick <- min(diff(ranges$x), diff(ranges$y)) * tick_length / 2
     # tick mark vector
     data <- transform(
       data,
-      xtick = - yunit / sqrt(unitss) * rtick,
-      ytick = xunit / sqrt(unitss) * rtick
+      xtick = - yunit / sqrt(ssunit) * rtick,
+      ytick = xunit / sqrt(ssunit) * rtick
     )
     # endpoints of tick marks
     data <- transform(
@@ -146,24 +173,11 @@ GeomAxisTicks <- ggproto(
       x = xpos - xtick, xend = xpos + xtick,
       y = ypos - ytick, yend = ypos + ytick
     )
-    
-    # remove calculation steps
-    data$vline <- NULL
-    data$slope <- NULL
     data$xunit <- NULL
     data$yunit <- NULL
+    data$ssunit <- NULL
     data$xtick <- NULL
     data$ytick <- NULL
-    data$unitss <- NULL
-    data$winxmin <- NULL
-    data$winxmax <- NULL
-    data$winymin <- NULL
-    data$winymax <- NULL
-    data$unitmin <- NULL
-    data$unitmax <- NULL
-    data$units <- NULL
-    data$xpos <- NULL
-    data$ypos <- NULL
     
     GeomSegment$draw_panel(
       data = data, panel_params = panel_params, coord = coord
@@ -175,7 +189,7 @@ GeomAxisTicks <- ggproto(
 #' @export
 geom_axis_ticks <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  family_fun = NULL, axes = NULL, by = NULL,
+  axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
   tick_length = .025,
   ...,
   na.rm = FALSE,
@@ -190,6 +204,7 @@ geom_axis_ticks <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
+      calibrate = calibrate,
       family_fun = family_fun,
       axes = axes,
       by = by,
@@ -204,7 +219,7 @@ geom_axis_ticks <- function(
 #' @export
 geom_u_axis_ticks <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  family_fun = NULL, axes = NULL, by = NULL,
+  axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
   tick_length = .025,
   ...,
   na.rm = FALSE,
@@ -219,6 +234,7 @@ geom_u_axis_ticks <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
+      calibrate = calibrate,
       family_fun = family_fun,
       axes = axes,
       by = by,
@@ -233,7 +249,7 @@ geom_u_axis_ticks <- function(
 #' @export
 geom_v_axis_ticks <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  family_fun = NULL, axes = NULL, by = NULL,
+  axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
   tick_length = .025,
   ...,
   na.rm = FALSE,
@@ -248,6 +264,7 @@ geom_v_axis_ticks <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
+      calibrate = calibrate,
       family_fun = family_fun,
       axes = axes,
       by = by,
@@ -262,7 +279,7 @@ geom_v_axis_ticks <- function(
 #' @export
 geom_biplot_axis_ticks <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "v", family_fun = NULL, axes = NULL, by = NULL,
+  .matrix = "v", axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
   tick_length = .025,
   ...,
   na.rm = FALSE,
@@ -277,6 +294,7 @@ geom_biplot_axis_ticks <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
+      calibrate = calibrate,
       family_fun = family_fun,
       axes = axes,
       by = by,

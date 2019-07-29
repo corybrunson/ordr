@@ -12,24 +12,25 @@
 \format{An object of class \code{GeomAxisTicks} (inherits from \code{GeomSegment}, \code{Geom}, \code{ggproto}, \code{gg}) of length 5.}
 \usage{
 geom_axis_ticks(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", family_fun = NULL, axes = NULL, by = NULL,
-  tick_length = 0.025, ..., na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
+  position = "identity", axes = NULL, calibrate = FALSE,
+  family_fun = NULL, by = NULL, tick_length = 0.025, ...,
+  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
 
 geom_u_axis_ticks(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", family_fun = NULL, axes = NULL, by = NULL,
-  tick_length = 0.025, ..., na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
+  position = "identity", axes = NULL, calibrate = FALSE,
+  family_fun = NULL, by = NULL, tick_length = 0.025, ...,
+  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
 
 geom_v_axis_ticks(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", family_fun = NULL, axes = NULL, by = NULL,
-  tick_length = 0.025, ..., na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
+  position = "identity", axes = NULL, calibrate = FALSE,
+  family_fun = NULL, by = NULL, tick_length = 0.025, ...,
+  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
 
 geom_biplot_axis_ticks(mapping = NULL, data = NULL,
   stat = "identity", position = "identity", .matrix = "v",
-  family_fun = NULL, axes = NULL, by = NULL, tick_length = 0.025,
-  ..., na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+  axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
+  tick_length = 0.025, ..., na.rm = FALSE, show.legend = NA,
+  inherit.aes = TRUE)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or
@@ -58,12 +59,15 @@ layer, as a string.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{family_fun}{A family function or a character string naming one, to
-transform the values along the axis at which to render marks.}
+\item{axes}{Indices of axes for which to render elements.}
 
-\item{axes}{Indices of axes for which to render marks.}
+\item{calibrate}{Logical; whether to calibrate axis scales for inner product
+interpretability.}
 
-\item{by}{Interval length between marks, in the units of the ordination.}
+\item{family_fun}{A family function, or a character string naming one, to
+transform the values along the axis at which to render elements.}
+
+\item{by}{Interval length between elements, in the units of the ordination.}
 
 \item{tick_length}{Numeric; the length of the tick marks, as a proportion of
 the minimum of the plot width and height.}
