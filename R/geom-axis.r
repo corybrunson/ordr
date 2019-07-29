@@ -81,6 +81,29 @@ GeomAxis <- ggproto(
 
 #' @rdname geom-biplot-axis
 #' @export
+geom_axis <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  ...,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomAxis,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname geom-biplot-axis
+#' @export
 geom_u_axis <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,

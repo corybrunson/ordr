@@ -4,12 +4,17 @@
 \name{geom-biplot-isolines}
 \alias{geom-biplot-isolines}
 \alias{GeomIsolines}
+\alias{geom_isolines}
 \alias{geom_u_isolines}
 \alias{geom_v_isolines}
 \alias{geom_biplot_isolines}
 \title{Render isolines for a subject or variable}
 \format{An object of class \code{GeomIsolines} (inherits from \code{GeomAbline}, \code{Geom}, \code{ggproto}, \code{gg}) of length 5.}
 \usage{
+geom_isolines(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", family = NULL, axes = NULL, by = NULL,
+  ..., na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+
 geom_u_isolines(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", family = NULL, axes = NULL, by = NULL,
   ..., na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)

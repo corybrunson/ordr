@@ -1,20 +1,25 @@
-#' @title Render tick marks for axes
+#' @title Render tick mark labels for axes
 #'
-#' @description `geom_*_ticks()` renders tick marks for specified axes among the
-#'   row or column factors.
+#' @description `geom_*_axis_text()` renders tick mark labels for specified
+#'   axes among the row or column factors.
 #' @template biplot-layers
 
 #' @section Aesthetics:
 
-#' `geom_*_ticks()` understands the following aesthetics
+#' `geom_*_axis_text()` understands the following aesthetics
 #' (required aesthetics are in bold):
 
 #' - **`x`**
 #' - **`y`**
 #' - `alpha`
+#' - `angle`
 #' - `colour`
-#' - `linetype`
+#' - `family`
+#' - `fontface`
+#' - `hjust`
+#' - `lineheight`
 #' - `size`
+#' - `vjust`
 #' - `group`
 #' 
 
@@ -22,12 +27,10 @@
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
-#' @param family A family function or a character string naming one, to
-#'   transform the values along the axis at which to render tick marks.
-#' @param axes Indices for which tick marks will be rendered.
-#' @param by Interval length between tick marks, in the units of the ordination.
-#' @param ticks.length Numeric; the length of the tick marks, as a proportion of
-#'   the minimum of the plot width and height.
+#' @inheritParams ggplot2::GeomText
+#' @inheritParams GeomAxisTicks
+#' @param label_dodge Numeric; the orthogonal distance of the text from
+#'   the axis, as a proportion of the minimum of the plot width and height.
 #' @template param-matrix
 #' @example inst/examples/diabetes-lda-supplement.r
 NULL
@@ -35,15 +38,16 @@ NULL
 #' @rdname geom-biplot-ticks
 #' @usage NULL
 #' @export
-GeomTicks <- ggproto(
-  "GeomTicks", GeomSegment,
+GeomAxisText <- ggproto(
+  "GeomAxisText", GeomText,
   
   required_aes = c("x", "y"),
-  default_aes = aes(
-    colour = "black", size = .5, linetype = "solid", alpha = 1
-  ),
   
   setup_data = function(data, params) {
+    
+    # ensure angles
+    if (is.null(data$angle)) data$angle <- 0
+    data$angle <- as.numeric(data$angle) + (180 / pi) * atan(data$y / data$x)
     
     # diagonal versus vertical lines
     data$vline <- data$x == 0 & data$y != 0
@@ -60,7 +64,7 @@ GeomTicks <- ggproto(
     # ensure intercept column (zero is appropriate for null family)
     if (! "intercept" %in% names(data)) {
       data$intercept <- 0
-      if (! is.null(params$family)) {
+      if (! is.null(params$family_fun)) {
         warning("No `intercept` aesthetic provided; it has been set to zero.")
       }
     }
@@ -70,16 +74,19 @@ GeomTicks <- ggproto(
   
   draw_panel = function(
     data, panel_params, coord,
-    family = NULL, axes = NULL, by = NULL,
-    ticks.length = .025
+    family_fun = NULL, axes = NULL, by = NULL,
+    label_dodge = .025,
+    parse = FALSE,
+    na.rm = FALSE,
+    check_overlap = FALSE
   ) {
     
     ranges <- coord$range(panel_params)
     
     # by default, render ticks for all axes
     if (! is.null(axes)) data <- data[axes, , drop = FALSE]
-    # process 'family' argument
-    family <- family_arg(family)
+    # process `family_fun` argument
+    family_fun <- family_arg(family_fun)
     
     # window boundaries for axis ticks
     data <- transform(
@@ -101,7 +108,9 @@ GeomTicks <- ggproto(
     # transform ranges based on family
     ran_vars <- c("winxmin", "winxmax", "winymin", "winymax")
     data[, ran_vars] <- data[, ran_vars] + data$intercept
-    if (! is.null(family)) data[, ran_vars] <- family$linkinv(data[, ran_vars])
+    if (! is.null(family_fun)) {
+      data[, ran_vars] <- family_fun$linkinv(data[, ran_vars])
+    }
     
     # by default, use Wilkinson's breaks algorithm
     if (is.null(by)) {
@@ -116,6 +125,12 @@ GeomTicks <- ggproto(
     }
     data <- data[rep(1:nrow(data), sapply(bys, length)), , drop = FALSE]
     data$units <- unlist(bys)
+    # exclude ticks at origin
+    data <- subset(data, units != 0)
+    
+    # text strings
+    data <- transform(data, label = format(units, digits = 3))
+    
     # positions of tick marks
     data <- transform(
       data,
@@ -125,22 +140,14 @@ GeomTicks <- ggproto(
     
     # un-transform ranges based on family
     pos_vars <- c("xpos", "ypos")
-    if (! is.null(family)) data[, pos_vars] <- family$linkfun(data[, pos_vars])
+    if (! is.null(family_fun)) data[, pos_vars] <- family_fun$linkfun(data[, pos_vars])
     data[, pos_vars] <- data[, pos_vars] - data$intercept
     
-    # tick mark radius
-    rtick <- min(diff(ranges$x), diff(ranges$y)) * ticks.length / 2
-    # tick mark vector
+    # positions of labels
     data <- transform(
       data,
-      xtick = - yunit / sqrt(unitss) * rtick,
-      ytick = xunit / sqrt(unitss) * rtick
-    )
-    # endpoints of tick marks
-    data <- transform(
-      data,
-      x = xpos - xtick, xend = xpos + xtick,
-      y = ypos - ytick, yend = ypos + ytick
+      x = xpos - yunit / sqrt(unitss) * label_dodge,
+      y = ypos + xunit / sqrt(unitss) * label_dodge
     )
     
     # remove calculation steps
@@ -148,8 +155,6 @@ GeomTicks <- ggproto(
     data$slope <- NULL
     data$xunit <- NULL
     data$yunit <- NULL
-    data$xtick <- NULL
-    data$ytick <- NULL
     data$unitss <- NULL
     data$winxmin <- NULL
     data$winxmax <- NULL
@@ -161,21 +166,57 @@ GeomTicks <- ggproto(
     data$xpos <- NULL
     data$ypos <- NULL
     
-    # -+- NEED TO ADD TICK LABELS -+-
-    
-    GeomSegment$draw_panel(
-      data = data, panel_params = panel_params, coord = coord
+    GeomText$draw_panel(
+      data = data, panel_params = panel_params, coord = coord,
+      parse = parse,
+      na.rm = na.rm,
+      check_overlap = check_overlap
     )
   }
 )
 
 #' @rdname geom-biplot-ticks
 #' @export
-geom_u_ticks <- function(
+geom_axis_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  family = NULL, axes = NULL, by = NULL,
-  ticks.length = .025,
+  family_fun = NULL, axes = NULL, by = NULL,
+  label_dodge = .025,
   ...,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomAxisText,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      family_fun = family_fun,
+      axes = axes,
+      by = by,
+      label_dodge = label_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname geom-biplot-ticks
+#' @export
+geom_u_axis_text <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  family_fun = NULL, axes = NULL, by = NULL,
+  label_dodge = .025,
+  ...,
+  parse = FALSE,
+  check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -183,16 +224,18 @@ geom_u_ticks <- function(
     data = data,
     mapping = mapping,
     stat = u_stat(stat),
-    geom = GeomTicks,
+    geom = GeomAxisText,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      na.rm = na.rm,
-      family = family,
+      family_fun = family_fun,
       axes = axes,
       by = by,
-      ticks.length = ticks.length,
+      label_dodge = label_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
       ...
     )
   )
@@ -200,11 +243,13 @@ geom_u_ticks <- function(
 
 #' @rdname geom-biplot-ticks
 #' @export
-geom_v_ticks <- function(
+geom_v_axis_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  family = NULL, axes = NULL, by = NULL,
-  ticks.length = .025,
+  family_fun = NULL, axes = NULL, by = NULL,
+  label_dodge = .025,
   ...,
+  parse = FALSE,
+  check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -212,16 +257,18 @@ geom_v_ticks <- function(
     data = data,
     mapping = mapping,
     stat = v_stat(stat),
-    geom = GeomTicks,
+    geom = GeomAxisText,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      na.rm = na.rm,
-      family = family,
+      family_fun = family_fun,
       axes = axes,
       by = by,
-      ticks.length = ticks.length,
+      label_dodge = label_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
       ...
     )
   )
@@ -229,11 +276,13 @@ geom_v_ticks <- function(
 
 #' @rdname geom-biplot-ticks
 #' @export
-geom_biplot_ticks <- function(
+geom_biplot_axis_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "v", family = NULL, axes = NULL, by = NULL,
-  ticks.length = .025,
+  .matrix = "v", family_fun = NULL, axes = NULL, by = NULL,
+  label_dodge = .025,
   ...,
+  parse = FALSE,
+  check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -241,16 +290,18 @@ geom_biplot_ticks <- function(
     data = data,
     mapping = mapping,
     stat = matrix_stat(.matrix, stat),
-    geom = GeomTicks,
+    geom = GeomAxisText,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      na.rm = na.rm,
-      family = family,
+      family_fun = family_fun,
       axes = axes,
       by = by,
-      ticks.length = ticks.length,
+      label_dodge = label_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
       ...
     )
   )

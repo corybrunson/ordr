@@ -115,6 +115,33 @@ GeomIsolines <- ggproto(
 
 #' @rdname geom-biplot-isolines
 #' @export
+geom_isolines <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  family = NULL, axes = NULL, by = NULL,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomIsolines,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = na.rm,
+      family = family,
+      axes = axes,
+      by = by,
+      ...
+    )
+  )
+}
+
+#' @rdname geom-biplot-isolines
+#' @export
 geom_u_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   family = NULL, axes = NULL, by = NULL,
