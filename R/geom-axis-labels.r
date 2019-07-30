@@ -33,7 +33,7 @@
 #' @param label_dodge Numeric; the orthogonal distance of the text from
 #'   the axis, as a proportion of the minimum of the plot width and height.
 #' @template param-matrix
-#' @example inst/examples/diabetes-lda-supplement.r
+#' @example inst/examples/diabetes-lda-axes.r
 NULL
 
 #' @rdname geom-biplot-ticks
@@ -95,8 +95,7 @@ GeomAxisText <- ggproto(
     data, panel_params, coord,
     axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
     label_dodge = .025,
-    parse = FALSE,
-    check_overlap = FALSE,
+    parse = FALSE, check_overlap = FALSE,
     na.rm = FALSE
   ) {
     
@@ -197,8 +196,7 @@ geom_axis_text <- function(
   axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
   label_dodge = .025,
   ...,
-  parse = FALSE,
-  check_overlap = FALSE,
+  parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -231,8 +229,7 @@ geom_u_axis_text <- function(
   axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
   label_dodge = .025,
   ...,
-  parse = FALSE,
-  check_overlap = FALSE,
+  parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -265,8 +262,7 @@ geom_v_axis_text <- function(
   axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
   label_dodge = .025,
   ...,
-  parse = FALSE,
-  check_overlap = FALSE,
+  parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -299,8 +295,7 @@ geom_biplot_axis_text <- function(
   .matrix = "v", axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
   label_dodge = .025,
   ...,
-  parse = FALSE,
-  check_overlap = FALSE,
+  parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {

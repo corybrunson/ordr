@@ -27,7 +27,7 @@
 #' @param tick_length Numeric; the length of the tick marks, as a proportion of
 #'   the minimum of the plot width and height.
 #' @template param-matrix
-#' @example inst/examples/diabetes-lda-supplement.r
+#' @example inst/examples/diabetes-lda-axes.r
 NULL
 
 #' @rdname geom-biplot-axis-ticks

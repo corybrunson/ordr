@@ -280,7 +280,7 @@ lda_ord.default <- function(x, grouping, prior = proportions, tol = 1.0e-4,
       diag(sqrt(covw.eig$values)) %*%
       t(covw.eig$vectors),
     # pooled within-group correlations
-    within.corr = {
+    correlation = {
       warning(
         "Cannot recover pooled within-group correlations from returned values;",
         " variable axes will not be scaled."
@@ -289,4 +289,18 @@ lda_ord.default <- function(x, grouping, prior = proportions, tol = 1.0e-4,
     }
   )
   res
+}
+
+model.frame.lda_ord <- function(formula, ...)
+{
+  oc <- formula$call
+  oc$prior <- oc$tol <- oc$method <- oc$CV <- oc$nu <- NULL
+  oc$axes.scale <- oc$ret.x <- oc$ret.grouping <- NULL
+  oc[[1L]] <- quote(stats::model.frame)
+  if(length(dots <- list(...))) {
+    nargs <- dots[match(c("data", "na.action", "subset"), names(dots), 0L)]
+    oc[names(nargs)] <- nargs
+  }
+  if (is.null(env <- environment(formula$terms))) env <- parent.frame()
+  eval(oc, env)
 }
