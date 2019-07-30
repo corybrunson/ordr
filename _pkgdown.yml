@@ -36,6 +36,7 @@ reference:
     Introducing and adapting ordination techniques for the **ordr** workflow
   contents:
   - '`classes`'
+  - '`lda-ord`'
   - '`masks`'
   - '`lra`'
 - title: "Data sets"

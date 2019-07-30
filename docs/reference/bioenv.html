@@ -159,12 +159,12 @@ on a sea-bed.</p>
   <span class='fu'>scale_alpha_continuous</span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>/<span class='fl'>3</span>, <span class='fl'>1</span>)) +
   <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>() +
   <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>() +
-  <span class='fu'><a href='geom-biplot-isolines.html'>geom_v_isolines</a></span>(<span class='kw'>ids</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>5</span>) +
+  <span class='fu'><a href='geom-biplot-isolines.html'>geom_v_isolines</a></span>(<span class='fu'>aes</span>(<span class='kw'>intercept</span> <span class='kw'>=</span> <span class='no'>`(Intercept)`</span>), <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>5</span>) +
   <span class='fu'>labs</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"Standardized Depth"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"Standardized Pollution"</span>) +
   <span class='fu'>ggtitle</span>(
     <span class='st'>"Gradient vector and contour lines for species 'd'"</span>,
     <span class='st'>"Regression plane: standardized depth-pollution space"</span>
-  )</div><div class='img'><img src='bioenv-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Classical MDS on marine ecosystem data</span>
+  )</div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring unknown aesthetics: intercept</span></div><div class='img'><img src='bioenv-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Classical MDS on marine ecosystem data</span>
 <span class='co'># Adapt Exhibit 4.6 in Greenacre (2010)</span>
 <span class='no'>ycols</span> <span class='kw'>&lt;-</span> <span class='fl'>2</span>:<span class='fl'>6</span>
 <span class='co'># chi-squared distances</span>

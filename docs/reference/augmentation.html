@@ -33,7 +33,8 @@
 <meta property="og:title" content="Augment metadata on the factors and coordinates of ordination objects — augmentation" />
 
 <meta property="og:description" content="These functions return data associated with the cases,
-variables, and coordinates of an ordination object." />
+variables, and coordinates of an ordination object, and attach it to the
+object." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -103,7 +104,8 @@ variables, and coordinates of an ordination object." />
     <div class="ref-description">
     
     <p>These functions return data associated with the cases,
-variables, and coordinates of an ordination object.</p>
+variables, and coordinates of an ordination object, and attach it to the
+object.</p>
     
     </div>
 
@@ -149,12 +151,12 @@ standard values are <code>"u"</code>, <code>"v"</code>, and <code>"uv"</code>.</
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The <code>augmentation_*()</code> functions produce <a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a>s of values
-associated with the cases, variables, and coordinates of a <code>tbl_ord</code> object.
-The first field of each tibble is <code>.name</code>, which contains the case, variable,
-or coordinate names. Additional fields contain information about the cases,
+    <p>The <code>augmentation_*()</code> methods produce <a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a>s of values
+associated with the rows, columns, and coordinates of a <code>tbl_ord</code> object. The
+first field of each tibble is <code>.name</code>, which contains the case, variable, or
+coordinate names. Additional fields contain information about the cases,
 variables, or coordinates extracted from the original ordination object.</p>
-<p>The <code>augment_*()</code> functions return the ordination with each or both factor
+<p>The <code>augment_*()</code> functions return the ordination with either or both factors
 annotated with the result of <code>augmentation_*()</code>. In this way <code>augment_*()</code>
 works like <code><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>generics::augment()</a></code> by extracting information for a tidy summary
 of the components, but it differs in returning an annotated <code>tbl_ord</code> rather
@@ -200,12 +202,12 @@ object becomes accessible to the user. To achieve a result similar to that of
   <span class='fu'>scale_alpha_continuous</span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>/<span class='fl'>3</span>, <span class='fl'>1</span>)) +
   <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>() +
   <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>() +
-  <span class='fu'><a href='geom-biplot-isolines.html'>geom_v_isolines</a></span>(<span class='kw'>ids</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>5</span>) +
+  <span class='fu'><a href='geom-biplot-isolines.html'>geom_v_isolines</a></span>(<span class='fu'>aes</span>(<span class='kw'>intercept</span> <span class='kw'>=</span> <span class='no'>`(Intercept)`</span>), <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>5</span>) +
   <span class='fu'>labs</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"Standardized Depth"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"Standardized Pollution"</span>) +
   <span class='fu'>ggtitle</span>(
     <span class='st'>"Gradient vector and contour lines for species 'd'"</span>,
     <span class='st'>"Regression plane: standardized depth-pollution space"</span>
-  )</div><div class='img'><img src='augmentation-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Confer inertia in CA between rows and columns of benthic sample data</span>
+  )</div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring unknown aesthetics: intercept</span></div><div class='img'><img src='augmentation-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Confer inertia in CA between rows and columns of benthic sample data</span>
 <span class='no'>benthos</span> <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>ca</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/ca/topics/ca'>ca</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>

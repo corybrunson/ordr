@@ -125,14 +125,15 @@ factorization underlying an ordination.</p>
 <span class='co'># S3 method for data.frame</span>
 <span class='fu'>recover_v</span>(<span class='no'>x</span>)
 
-<span class='fu'>get_u</span>(<span class='no'>x</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>get_u</span>(<span class='no'>x</span>, <span class='kw'>.supplement</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>get_v</span>(<span class='no'>x</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>get_v</span>(<span class='no'>x</span>, <span class='kw'>.supplement</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>get_factor</span>(<span class='no'>x</span>, <span class='no'>.matrix</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>get_factor</span>(<span class='no'>x</span>, <span class='no'>.matrix</span>, <span class='kw'>.supplement</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for tbl_ord</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>as.matrix</a></span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='no'>.matrix</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>as.matrix</a></span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='no'>.matrix</span>, <span class='kw'>.supplement</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>align</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='fu'>recover_inertia</span>(<span class='no'>x</span>)
 
@@ -170,6 +171,10 @@ factorization underlying an ordination.</p>
       <td><p>A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
 standard values are <code>"u"</code>, <code>"v"</code>, and <code>"uv"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>.supplement</th>
+      <td><p>Logical; whether to include</p></td>
     </tr>
     <tr>
       <th>align</th>
