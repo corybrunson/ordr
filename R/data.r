@@ -8,7 +8,7 @@
 #' @template ref-sanderson2000
 #' @name finches
 #' @example inst/examples/finches-ca.r
-#' @example inst/examples/finches-lpca-sec.r
+#' @example inst/examples/finches-lpca-secondary.r
 NULL
 
 #' @title Multivariate marine biological and environmental data
@@ -77,4 +77,15 @@ NULL
 #' @source Greenacre (2010).
 #' @name issp_women
 #' @example inst/examples/women-ca-confer.r
+NULL
+
+#' @title Glass composition data from archaeological sites in Israel
+#'
+#' @description Sites, artifacts, and amounts of several components of the sand.
+#'
+#' @format A [tibble][tibble::tibble].
+#' @keywords datasets
+#' @source Baxter & Freestone (2006).
+#' @name glass
+#' @example inst/examples/glass-pca-lda-secondary.r
 NULL
