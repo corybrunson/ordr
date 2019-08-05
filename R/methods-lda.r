@@ -44,10 +44,11 @@ recover_v.lda <- function(x) {
 #' @rdname methods-lda
 #' @export
 recover_v.lda_ord <- function(x) {
-  axes.scale <- if (is.null(attr(x, "axes.scale"))) {
-    diag(1, nrow(x$scaling))
-  } else attr(x, "axes.scale")
-  axes.scale %*% x$scaling
+  if (is.null(attr(x, "axes.scale"))) {
+    x$scaling
+  } else {
+    attr(x, "axes.scale") %*% x$scaling
+  }
 }
 
 #' @rdname methods-lda

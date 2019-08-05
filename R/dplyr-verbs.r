@@ -17,7 +17,7 @@
 #' @param ... Comma-separated unquoted expressions as in, e.g.,
 #'   [dplyr::select()].
 #' @template param-matrix
-#' @example inst/examples/iris-princomp-sec.r
+#' @example inst/examples/iris-princomp-secondary.r
 #' @example inst/examples/benthos-ca-augment-confer.r
 #' @example inst/examples/arrests-logratio-polygon.r
 

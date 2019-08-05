@@ -56,8 +56,8 @@
 #' @param ... Additional arguments passed to [ggplot2::fortify()]; see
 #'   [fortify.tbl_ord()].
 #' @example inst/examples/mtcars-lm-isolines.r
-#' @example inst/examples/iris-princomp-sec.r
-#' @example inst/examples/finches-lpca-sec.r
+#' @example inst/examples/iris-princomp-secondary.r
+#' @example inst/examples/finches-lpca-secondary.r
 #' @seealso [ggplot2::ggplot2()]
 
 #' @rdname ggbiplot

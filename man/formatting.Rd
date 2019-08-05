@@ -52,11 +52,10 @@ mtcars \%>\%
   mutate_u(influence = .wt.res^2) \%>\%
   print() -> mtcars_lm
 mtcars_lm \%>\%
-  ggbiplot(aes(x = wt, y = cyl)) +
+  ggbiplot(aes(x = wt, y = cyl, intercept = `(Intercept)`)) +
   geom_u_point(aes(color = influence)) +
   geom_v_vector() +
-  # weight isolines
-  geom_v_isolines(ids = 1, by = 5) +
+  geom_v_isolines(axes = 1, by = 5) +
   ggtitle(
     "Weight isolines with data colored by importance",
     "Regressing mpg onto weight and number of cylinders"
@@ -125,14 +124,5 @@ ggbiplot(diabetes_lda) +
   theme_bw() +
   geom_u_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
   geom_v_axis(color = "#888888") +
-  geom_v_text_radiate(aes(label = .name)) +
   ggtitle("Column-standardized LDA biplot of Reaven & Miller diabetes data")
-diabetes_lda \%>\%
-  confer_inertia("symmetric") \%>\%
-  ggbiplot(.supplement = FALSE) +
-  theme_bw() +
-  geom_u_point(aes(shape = .grouping)) +
-  geom_v_vector(color = "#888888") +
-  geom_v_text_radiate(aes(label = .name), size = 3) +
-  ggtitle("Symmetric LDA biplot of Reaven & Miller diabetes data")
 }

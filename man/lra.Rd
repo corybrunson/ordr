@@ -4,10 +4,13 @@
 \alias{lra}
 \title{Log-ratio analysis}
 \usage{
-lra(x, weighted = TRUE)
+lra(x, compositional = FALSE, weighted = TRUE)
 }
 \arguments{
 \item{x}{A numeric matrix or rectangular data set.}
+
+\item{compositional}{Logical; whether to normalize rows of \code{x} to sum to
+100\%.}
 
 \item{weighted}{Logical; whether to weight rows and columns by their sums.}
 }
@@ -16,16 +19,16 @@ Represent log-ratios between variables based on their values on
 a population of cases.
 }
 \details{
-Log-ratio analysis (LRA) is based on a double-centering of
-log-transformed data, usually weighted by row and column totals. The
-technique is suitable for positive-valued variables on a common scale (e.g.
-percentages). The distances between variables' coordinates (in the
-full-dimensional space) are their pairwise log-ratios. The distances
-between cases' coordinates are called their \emph{log-ratio distances}, and the
-total variance is the weighted sum of their squares.
+Log-ratio analysis (LRA) is based on a double-centering of log-transformed
+data, usually weighted by row and column totals. The technique is suitable
+for positive-valued variables on a common scale (e.g. percentages). The
+distances between variables' coordinates (in the full-dimensional space) are
+their pairwise log-ratios. The distances between cases' coordinates are
+called their \emph{log-ratio distances}, and the total variance is the weighted
+sum of their squares.
 
-LRA is not implemented in standard R distributions but is a useful member
-of the ordination toolkit. This is a minimal implementation following
+LRA is not implemented in standard R distributions but is a useful member of
+the ordination toolkit. This is a minimal implementation following
 Greenacre's (2010) exposition in Chapter 7.
 }
 \examples{
@@ -61,6 +64,49 @@ arrests_lra \%>\%
     "United States, 1973"
   ) +
   guides(color = FALSE, size = FALSE)
+# Compare PCA to LRA on the Freestone primary class composition data
+# following Baxter & Freestone (2006)
+# (do not exclude compositional outliers)
+levantine_glass <- glass \%>\%
+  dplyr::filter(Site != "Banias") \%>\%
+  dplyr::mutate(Type = dplyr::case_when(
+    Site == "Dor" ~ "Levantine I",
+    Site == "Apollonia" ~ "Levantine I",
+    Site == "Bet Eli'ezer" ~ "Levantine II"
+  ))
+# scaled principal components analysis
+levantine_glass \%>\%
+  dplyr::select(SiO2, Al2O3, CaO, FeO, MgO) \%>\%
+  princomp(cor = TRUE) \%>\%
+  as_tbl_ord() \%>\%
+  bind_cols_u(dplyr::select(levantine_glass, Site, Type)) \%>\%
+  print() -> pca_glass
+ggbiplot(pca_glass) +
+  geom_u_point(aes(shape = Site, color = Type))
+# completely compositional log-ratio analysis
+levantine_glass \%>\%
+  dplyr::select(SiO2, Al2O3, CaO, FeO, MgO) \%>\%
+  lra(compositional = TRUE) \%>\%
+  as_tbl_ord() \%>\%
+  confer_inertia("rows") \%>\%
+  bind_cols_u(dplyr::select(levantine_glass, Site, Type)) \%>\%
+  print() -> lda_glass
+ggbiplot(lda_glass, sec.axes = "v", scale.factor = .05) +
+  geom_u_point(aes(shape = Site, color = Type)) +
+  geom_v_vector() +
+  geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward")
+# completely compositional log-ratio analysis with FeO and MgO excluded
+levantine_glass \%>\%
+  dplyr::select(SiO2, Al2O3, CaO) \%>\%
+  lra(compositional = TRUE) \%>\%
+  as_tbl_ord() \%>\%
+  confer_inertia("rows") \%>\%
+  bind_cols_u(dplyr::select(levantine_glass, Site, Type)) \%>\%
+  print() -> lda_glass
+ggbiplot(lda_glass, sec.axes = "v", scale.factor = .05) +
+  geom_u_point(aes(shape = Site, color = Type)) +
+  geom_v_vector() +
+  geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward")
 }
 \references{
 Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:

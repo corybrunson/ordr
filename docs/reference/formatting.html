@@ -149,7 +149,7 @@ will print information about at most <code>tibble.max_extra_cols</code> extra co
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The <code>format</code> and <code>print</code> methods for class <a href='https://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>"tbl_ord"``] are adapted from those for class ["tbl_df"][tibble::tbl_df] and for class ["tbl_graph"`</a>.</p>
-<p>Note: The <code><a href='https://www.rdocumentation.org/packages/base/topics/format'>format()</a></code> function is tedius but cannot be easily modularized
+<p><strong>Note:</strong> The <code><a href='https://www.rdocumentation.org/packages/base/topics/format'>format()</a></code> function is tedius but cannot be easily modularized
 without invoking <a href='accessors.html'>accessors</a>, <a href='annotation.html'>annotation</a>, and <a href='augmentation.html'>augmentation</a> multiple
 times, thereby significantly reducing performance.</p>
     
@@ -183,11 +183,10 @@ times, thereby significantly reducing performance.</p>
 #&gt;   `(Intercept)`    wt   cyl |   .name
 #&gt;                             |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>      6.72</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-16</span><span> -</span><span style='color: #BB0000;'>3.19</span><span> -</span><span style='color: #BB0000;'>1.51</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> mpg  </div><div class='input'><span class='no'>mtcars_lm</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>wt</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>cyl</span>)) +
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>wt</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>cyl</span>, <span class='kw'>intercept</span> <span class='kw'>=</span> <span class='no'>`(Intercept)`</span>)) +
   <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>influence</span>)) +
   <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>() +
-  <span class='co'># weight isolines</span>
-  <span class='fu'><a href='geom-biplot-isolines.html'>geom_v_isolines</a></span>(<span class='kw'>ids</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>5</span>) +
+  <span class='fu'><a href='geom-biplot-isolines.html'>geom_v_isolines</a></span>(<span class='kw'>axes</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>5</span>) +
   <span class='fu'>ggtitle</span>(
     <span class='st'>"Weight isolines with data colored by importance"</span>,
     <span class='st'>"Regressing mpg onto weight and number of cylinders"</span>
@@ -294,20 +293,20 @@ times, thereby significantly reducing performance.</p>
 #&gt; # U: [ 150 x 4 | 1 ]
 #&gt;   Comp.1 Comp.2  Comp.3 ... |   species
 #&gt;                             |   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>  
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  -</span><span style='color: #BB0000;'>2.68</span><span> -</span><span style='color: #BB0000;'>0.319</span><span> -</span><span style='color: #BB0000;'>0.027</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>     | </span><span style='color: #BCBCBC;'>1</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  -</span><span style='color: #BB0000;'>2.71</span><span>  0.177 -</span><span style='color: #BB0000;'>0.210</span><span>  ... | </span><span style='color: #BCBCBC;'>2</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  -</span><span style='color: #BB0000;'>2.89</span><span>  0.145  0.017</span><span style='text-decoration: underline;'>9</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  -</span><span style='color: #BB0000;'>2.75</span><span>  0.318  0.031</span><span style='text-decoration: underline;'>6</span><span>     | </span><span style='color: #BCBCBC;'>4</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  -</span><span style='color: #BB0000;'>2.73</span><span> -</span><span style='color: #BB0000;'>0.327</span><span>  0.090</span><span style='text-decoration: underline;'>1</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> setosa 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  -</span><span style='color: #BB0000;'>2.68</span><span>  0.319  0.027</span><span style='text-decoration: underline;'>9</span><span>     | </span><span style='color: #BCBCBC;'>1</span><span> setosa 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  -</span><span style='color: #BB0000;'>2.71</span><span> -</span><span style='color: #BB0000;'>0.177</span><span>  0.210  ... | </span><span style='color: #BCBCBC;'>2</span><span> setosa 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  -</span><span style='color: #BB0000;'>2.89</span><span> -</span><span style='color: #BB0000;'>0.145</span><span> -</span><span style='color: #BB0000;'>0.017</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> setosa 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  -</span><span style='color: #BB0000;'>2.75</span><span> -</span><span style='color: #BB0000;'>0.318</span><span> -</span><span style='color: #BB0000;'>0.031</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>     | </span><span style='color: #BCBCBC;'>4</span><span> setosa 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  -</span><span style='color: #BB0000;'>2.73</span><span>  0.327 -</span><span style='color: #BB0000;'>0.090</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> setosa 
 #&gt; </span><span style='color: #949494;'># … with 145 more rows</span><span>
 #&gt; # 
 #&gt; # V: [ 4 x 4 | 1 ]
 #&gt;    Comp.1  Comp.2  Comp.3 ... |   measure     
 #&gt;                               |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.361  -</span><span style='color: #BB0000;'>0.657</span><span>  -</span><span style='color: #BB0000;'>0.582</span><span>      | </span><span style='color: #BCBCBC;'>1</span><span> sepal length
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.084</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.730</span><span>   0.598  ... | </span><span style='color: #BCBCBC;'>2</span><span> sepal width 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.857   0.173   0.076</span><span style='text-decoration: underline;'>2</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> petal length
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.358   0.075</span><span style='text-decoration: underline;'>5</span><span>  0.546      | </span><span style='color: #BCBCBC;'>4</span><span> petal width </div><div class='input'><span class='no'>iris_pca</span> <span class='kw'>%&gt;%</span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.361   0.657   0.582      | </span><span style='color: #BCBCBC;'>1</span><span> sepal length
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.084</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>  0.730  -</span><span style='color: #BB0000;'>0.598</span><span>  ... | </span><span style='color: #BCBCBC;'>2</span><span> sepal width 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.857  -</span><span style='color: #BB0000;'>0.173</span><span>  -</span><span style='color: #BB0000;'>0.076</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> petal length
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.358  -</span><span style='color: #BB0000;'>0.075</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.546</span><span>      | </span><span style='color: #BCBCBC;'>4</span><span> petal width </div><div class='input'><span class='no'>iris_pca</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>), <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>3</span>) +
   <span class='fu'>theme_bw</span>() +
   <span class='fu'>scale_color_brewer</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>2</span>) +
@@ -317,7 +316,67 @@ times, thereby significantly reducing performance.</p>
   <span class='fu'>ggtitle</span>(
     <span class='st'>"Row-principal unscaled PCA biplot of Anderson iris data"</span>,
     <span class='st'>"Variable loadings scaled to secondary axes"</span>
-  )</div><div class='img'><img src='formatting-5.png' alt='' width='700' height='433' /></div></span></pre>
+  )</div><div class='img'><img src='formatting-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Linear discriminant analysis of Reaven &amp; Miller diabetes data</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='kw pkg'>heplots</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/heplots/topics/Diabetes'>Diabetes</a></span>)</div><div class='output co'>#&gt;   relwt glufast glutest instest sspg  group
+#&gt; 1  0.81      80     356     124   55 Normal
+#&gt; 2  0.95      97     289     117   76 Normal
+#&gt; 3  0.94     105     319     143  105 Normal
+#&gt; 4  1.04      90     356     199  108 Normal
+#&gt; 5  1.00      90     323     240  143 Normal
+#&gt; 6  0.76      86     381     157  165 Normal</div><div class='input'><span class='no'>diabetes_lda</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>MASS</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/MASS/topics/lda'>lda</a></span>(<span class='no'>group</span> ~ <span class='no'>.</span>, <span class='kw pkg'>heplots</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/heplots/topics/Diabetes'>Diabetes</a></span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>diabetes_lda</span>)</div><div class='output co'>#&gt; Call:
+#&gt; lda(group ~ ., data = heplots::Diabetes)
+#&gt; 
+#&gt; Prior probabilities of groups:
+#&gt;            Normal Chemical_Diabetic    Overt_Diabetic 
+#&gt;         0.5241379         0.2482759         0.2275862 
+#&gt; 
+#&gt; Group means:
+#&gt;                       relwt   glufast   glutest  instest     sspg
+#&gt; Normal            0.9372368  91.18421  349.9737 172.6447 114.0000
+#&gt; Chemical_Diabetic 1.0558333  99.30556  493.9444 288.0000 208.9722
+#&gt; Overt_Diabetic    0.9839394 217.66667 1043.7576 106.0000 318.8788
+#&gt; 
+#&gt; Coefficients of linear discriminants:
+#&gt;                   LD1          LD2
+#&gt; relwt    1.3624356881 -3.784142444
+#&gt; glufast -0.0336487883  0.036633317
+#&gt; glutest  0.0125763942 -0.007092017
+#&gt; instest -0.0001022245 -0.006173424
+#&gt; sspg     0.0042431866  0.001134070
+#&gt; 
+#&gt; Proportion of trace:
+#&gt;    LD1    LD2 
+#&gt; 0.8812 0.1188 </div><div class='input'><span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>(<span class='no'>diabetes_lda</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='dplyr-verbs.html'>mutate_u</a></span>(<span class='kw'>discriminant</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ifelse'>ifelse</a></span>(! <span class='no'>.supplement</span>, <span class='st'>"centroid"</span>, <span class='st'>"case"</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>diabetes_lda</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lda': (148 x 2) x (5 x 2)'
+#&gt; # 2 coordinates: LD1 and LD2
+#&gt; # 
+#&gt; # U: [ 148 x 2 | 6 ]
+#&gt;      LD1    LD2 |   .name .grouping .prior .counts
+#&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.75</span><span>   0.400 | </span><span style='color: #BCBCBC;'>1</span><span> Norm… Normal     0.524      76
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.340 -</span><span style='color: #BB0000;'>1.38</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Chem… Chemical…  0.248      36
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.66   0.580 | </span><span style='color: #BCBCBC;'>3</span><span> Over… Overt_Di…  0.228      33
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>1.72</span><span>   0.663 | </span><span style='color: #BCBCBC;'>4</span><span> 1     Normal    </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.85</span><span>   1.30  | </span><span style='color: #BCBCBC;'>5</span><span> 2     Normal    </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #949494;'># … with 143 more rows, and 2 more
+#&gt; #   variables: .supplement </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #949494;'>,
+#&gt; #   discriminant </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; # 
+#&gt; # V: [ 5 x 2 | 1 ]
+#&gt;         LD1      LD2 |   .name  
+#&gt;                      |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  1.36     -</span><span style='color: #BB0000;'>3.78</span><span>    | </span><span style='color: #BCBCBC;'>1</span><span> relwt  
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.033</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>    0.036</span><span style='text-decoration: underline;'>6</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> glufast
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.012</span><span style='text-decoration: underline;'>6</span><span>   -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>09</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> glutest
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.000</span><span style='color: #BB0000;text-decoration: underline;'>102</span><span> -</span><span style='color: #BB0000;'>0.006</span><span style='color: #BB0000;text-decoration: underline;'>17</span><span> | </span><span style='color: #BCBCBC;'>4</span><span> instest
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.004</span><span style='text-decoration: underline;'>24</span><span>   0.001</span><span style='text-decoration: underline;'>13</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> sspg   </div><div class='input'><span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>diabetes_lda</span>) +
+  <span class='fu'>theme_bw</span>() +
+  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>.grouping</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>discriminant</span>), <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>) +
+  <span class='fu'><a href='geom-biplot-axis.html'>geom_v_axis</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#888888"</span>) +
+  <span class='fu'>ggtitle</span>(<span class='st'>"Column-standardized LDA biplot of Reaven &amp; Miller diabetes data"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Using size for a discrete variable is not advised.</span></div><div class='img'><img src='formatting-6.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

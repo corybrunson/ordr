@@ -4,12 +4,17 @@
 \name{geom-biplot-axis}
 \alias{geom-biplot-axis}
 \alias{GeomAxis}
+\alias{geom_axis}
 \alias{geom_u_axis}
 \alias{geom_v_axis}
 \alias{geom_biplot_axis}
 \title{Render axes through origin}
-\format{An object of class \code{GeomAxis} (inherits from \code{GeomAbline}, \code{Geom}, \code{ggproto}, \code{gg}) of length 3.}
+\format{An object of class \code{GeomAxis} (inherits from \code{GeomAbline}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.}
 \usage{
+geom_axis(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", ..., na.rm = FALSE, show.legend = NA,
+  inherit.aes = TRUE)
+
 geom_u_axis(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", ..., na.rm = FALSE, show.legend = NA,
   inherit.aes = TRUE)
@@ -100,4 +105,25 @@ in bold):
 }
 }
 
+\examples{
+# LDA biplot scales for Reaven & Miller diabetes data
+diabetes_custom_biplot <- function(axes.scale) {
+  lda_ord(group ~ ., heplots::Diabetes, axes.scale = axes.scale) \%>\%
+    as_tbl_ord() \%>\%
+    augment() \%>\%
+    print() \%T>\%
+    mutate_u(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
+    confer_inertia("symmetric") \%>\%
+    ggbiplot(.supplement = FALSE) +
+    theme_bw() +
+    geom_u_point(aes(shape = .grouping)) +
+    geom_v_axis(color = "#888888") +
+    geom_v_axis_ticks() +
+    geom_v_axis_text(size = 2.5, label_dodge = .025) +
+    ggtitle("Symmetric LDA biplot of Reaven & Miller diabetes data")
+}
+diabetes_custom_biplot("unstandardized")
+diabetes_custom_biplot("standardized")
+diabetes_custom_biplot("contribution")
+}
 \keyword{datasets}
