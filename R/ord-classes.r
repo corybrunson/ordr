@@ -15,7 +15,7 @@ eigen_ord <- function(x, symmetric = isSymmetric.matrix(x)) {
   res <- eigen(x = x, only.values = FALSE, EISPACK = FALSE)
   rownames(res$vectors) <- rownames(x)
   colnames(res$vectors) <- paste0("EV", seq_along(res$values))
-  class(res) <- "eigen"
+  class(res) <- "eigen_ord"
   res
 }
 
@@ -27,6 +27,6 @@ svd_ord <- function(x, nu = min(dim(x)), nv = min(dim(x))) {
   colnames(res$u) <- paste0("SV", seq_along(res$d))
   rownames(res$v) <- colnames(x)
   colnames(res$v) <- paste0("SV", seq_along(res$d))
-  class(res) <- "svd"
+  class(res) <- "svd_ord"
   res
 }

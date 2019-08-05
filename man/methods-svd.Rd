@@ -2,42 +2,42 @@
 % Please edit documentation in R/methods-svd.r
 \name{methods-svd}
 \alias{methods-svd}
-\alias{as_tbl_ord.svd}
-\alias{reconstruct.svd}
-\alias{recover_u.svd}
-\alias{recover_v.svd}
-\alias{recover_inertia.svd}
-\alias{recover_coord.svd}
-\alias{recover_conference.svd}
-\alias{augmentation_u.svd}
-\alias{augmentation_v.svd}
-\alias{augmentation_coord.svd}
+\alias{as_tbl_ord.svd_ord}
+\alias{reconstruct.svd_ord}
+\alias{recover_u.svd_ord}
+\alias{recover_v.svd_ord}
+\alias{recover_inertia.svd_ord}
+\alias{recover_coord.svd_ord}
+\alias{recover_conference.svd_ord}
+\alias{augmentation_u.svd_ord}
+\alias{augmentation_v.svd_ord}
+\alias{augmentation_coord.svd_ord}
 \title{Functionality for singular value decompositions}
 \usage{
-\method{as_tbl_ord}{svd}(x)
+\method{as_tbl_ord}{svd_ord}(x)
 
-\method{reconstruct}{svd}(x)
+\method{reconstruct}{svd_ord}(x)
 
-\method{recover_u}{svd}(x)
+\method{recover_u}{svd_ord}(x)
 
-\method{recover_v}{svd}(x)
+\method{recover_v}{svd_ord}(x)
 
-\method{recover_inertia}{svd}(x)
+\method{recover_inertia}{svd_ord}(x)
 
-\method{recover_coord}{svd}(x)
+\method{recover_coord}{svd_ord}(x)
 
-\method{recover_conference}{svd}(x)
+\method{recover_conference}{svd_ord}(x)
 
-\method{augmentation_u}{svd}(x)
+\method{augmentation_u}{svd_ord}(x)
 
-\method{augmentation_v}{svd}(x)
+\method{augmentation_v}{svd_ord}(x)
 
-\method{augmentation_coord}{svd}(x)
+\method{augmentation_coord}{svd_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
 }
 \description{
 These methods extract data from, and attribute new data to,
-objects of class \code{"svd"} returned by \code{\link[=svd_ord]{svd_ord()}}.
+objects of class \code{"svd_ord"} returned by \code{\link[=svd_ord]{svd_ord()}}.
 }

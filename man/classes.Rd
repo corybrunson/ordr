@@ -59,6 +59,7 @@ tibble::tibble(
   geom_point()
 # first and second eigenvectors for centrality and connectivity / partitioning
 karate_eigen \%>\%
+  confer_inertia(1) \%>\%
   ggbiplot(aes(x = 2, y = 1)) +
   geom_u_vector(aes(color = as.factor(faction))) +
   geom_u_text_radiate(aes(label = ifelse(grepl("H|A", label), label, NA))) +
@@ -70,6 +71,7 @@ karate_eigen \%>\%
   )
 # second and third eigenvectors
 karate_eigen \%>\%
+  confer_inertia(1) \%>\%
   ggbiplot(aes(x = 2, y = 3)) +
   scale_x_continuous(expand = expand_scale(mult = .3)) +
   scale_y_continuous(expand = expand_scale(mult = .2)) +

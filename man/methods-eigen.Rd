@@ -2,44 +2,44 @@
 % Please edit documentation in R/methods-eigen.r
 \name{methods-eigen}
 \alias{methods-eigen}
-\alias{as_tbl_ord.eigen}
-\alias{reconstruct.eigen}
-\alias{recover_u.eigen}
-\alias{recover_v.eigen}
-\alias{recover_inertia.eigen}
-\alias{recover_coord.eigen}
-\alias{recover_conference.eigen}
-\alias{augmentation_u.eigen}
-\alias{augmentation_v.eigen}
-\alias{augmentation_coord.eigen}
+\alias{as_tbl_ord.eigen_ord}
+\alias{reconstruct.eigen_ord}
+\alias{recover_u.eigen_ord}
+\alias{recover_v.eigen_ord}
+\alias{recover_inertia.eigen_ord}
+\alias{recover_coord.eigen_ord}
+\alias{recover_conference.eigen_ord}
+\alias{augmentation_u.eigen_ord}
+\alias{augmentation_v.eigen_ord}
+\alias{augmentation_coord.eigen_ord}
 \title{Functionality for eigendecompositions}
 \usage{
-\method{as_tbl_ord}{eigen}(x)
+\method{as_tbl_ord}{eigen_ord}(x)
 
-\method{reconstruct}{eigen}(x)
+\method{reconstruct}{eigen_ord}(x)
 
-\method{recover_u}{eigen}(x)
+\method{recover_u}{eigen_ord}(x)
 
-\method{recover_v}{eigen}(x)
+\method{recover_v}{eigen_ord}(x)
 
-\method{recover_inertia}{eigen}(x)
+\method{recover_inertia}{eigen_ord}(x)
 
-\method{recover_coord}{eigen}(x)
+\method{recover_coord}{eigen_ord}(x)
 
-\method{recover_conference}{eigen}(x)
+\method{recover_conference}{eigen_ord}(x)
 
-\method{augmentation_u}{eigen}(x)
+\method{augmentation_u}{eigen_ord}(x)
 
-\method{augmentation_v}{eigen}(x)
+\method{augmentation_v}{eigen_ord}(x)
 
-\method{augmentation_coord}{eigen}(x)
+\method{augmentation_coord}{eigen_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
 }
 \description{
 These methods extract data from, and attribute new data to,
-objects of class \code{"eigen"} returned by \code{\link[=eigen_ord]{eigen_ord()}}.
+objects of class \code{"eigen_ord"} returned by \code{\link[=eigen_ord]{eigen_ord()}}.
 }
 \examples{
 # Graph Laplacian eigenvectors for spectral partitioning
@@ -72,6 +72,7 @@ tibble::tibble(
   geom_point()
 # first and second eigenvectors for centrality and connectivity / partitioning
 karate_eigen \%>\%
+  confer_inertia(1) \%>\%
   ggbiplot(aes(x = 2, y = 1)) +
   geom_u_vector(aes(color = as.factor(faction))) +
   geom_u_text_radiate(aes(label = ifelse(grepl("H|A", label), label, NA))) +
@@ -83,6 +84,7 @@ karate_eigen \%>\%
   )
 # second and third eigenvectors
 karate_eigen \%>\%
+  confer_inertia(1) \%>\%
   ggbiplot(aes(x = 2, y = 3)) +
   scale_x_continuous(expand = expand_scale(mult = .3)) +
   scale_y_continuous(expand = expand_scale(mult = .2)) +
