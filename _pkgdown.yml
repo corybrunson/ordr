@@ -35,10 +35,8 @@ reference:
   desc: >
     Introducing and adapting ordination techniques for the **ordr** workflow
   contents:
-  - '`classes`'
-  - '`lda-ord`'
   - '`masks`'
-  - '`lra`'
+  - starts_with("fun-")
 - title: "Data sets"
   desc: >
     Additional data sets used to illustrate ordination techniques

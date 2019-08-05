@@ -2,14 +2,14 @@
 #' 
 #' @description ...
 
-#' @name classes
+#' @name eigen-svd
 #' @include ord-tbl.r
 #' @inheritParams base::eigen
 #' @inheritParams base::svd
 #' @example inst/examples/karate-igraph-eigen.r
 NULL
 
-#' @rdname classes
+#' @rdname eigen-svd
 #' @export
 eigen_ord <- function(x, symmetric = isSymmetric.matrix(x)) {
   res <- eigen(x = x, only.values = FALSE, EISPACK = FALSE)
@@ -19,7 +19,7 @@ eigen_ord <- function(x, symmetric = isSymmetric.matrix(x)) {
   res
 }
 
-#' @rdname classes
+#' @rdname eigen-svd
 #' @export
 svd_ord <- function(x, nu = min(dim(x)), nv = min(dim(x))) {
   res <- svd(x = x, nu = nu, nv = nv, LINPACK = FALSE)
