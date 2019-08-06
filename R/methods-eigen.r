@@ -35,9 +35,7 @@ recover_inertia.eigen_ord <- function(x) x[["values"]]
 
 #' @rdname methods-eigen
 #' @export
-recover_coord.eigen_ord <- function(x) {
-  colnames(x[["vectors"]])[seq_along(recover_inertia(x))]
-}
+recover_coord.eigen_ord <- function(x) colnames(x[["vectors"]])
 
 #' @rdname methods-eigen
 #' @export
