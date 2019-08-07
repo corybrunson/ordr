@@ -28,34 +28,33 @@ un_tbl_ord(x)
 \arguments{
 \item{x}{An ordination object.}
 
-\item{u, v}{Matrices to be used as factors of a \code{tbl_ord}.}
+\item{u, v}{Matrices to be used as factors of a tbl_ord.}
 
-\item{...}{Additional elements of a custom \code{tbl_ord}.}
+\item{...}{Additional elements of a custom tbl_ord.}
 }
 \description{
-These functions wrap ordination objects in the \code{"tbl_ord"}
-class, create \code{tbl_ord}s directly from matrices, and test for the class and
-basic structure.
+These functions wrap ordination objects in the class \link{tbl_ord},
+create tbl_ords directly from matrices, and test for the class and basic
+structure.
 }
 \details{
-The \code{"tbl_ord"} class wraps around a range of ordination classes, making
+The tbl_ord class wraps around a range of ordination classes, making
 available a suite of ordination tools that specialize to each original object
 class. These tools include \code{\link[=format]{format()}} and \code{\link[=fortify]{fortify()}} methods, which
 facilitate the \code{\link[=print]{print()}} method and the \code{\link[=ggbiplot]{ggbiplot()}} function.
 
 No default method is provided for \code{as_tbl_ord()}, despite most defined
-methods being equivalent (simply appending \code{"tbl_ord"} to the vector of
-object classes). This prevents objects for which other methods are not
-defined from being re-classed as \code{tbl_ord}s.
+methods being equivalent (simply appending tbl_ord to the vector of object
+classes). This prevents objects for which other methods are not defined from
+being re-classed as tbl_ords.
 
-The function \code{make_tbl_ord()} creates a \code{tbl_ord} structured as a list of two
+The function \code{make_tbl_ord()} creates a tbl_ord structured as a list of two
 matrices, \code{u} and \code{v}, which must have the same number of columns and the
 same column names.
 
-\code{is_tbl_ord()} checks an object \code{x} for the \code{"tbl_ord"} class;
-\code{valid_tbl_ord()} additionally checks for consistency between
-\code{recover_coord(x)} and the columns of \code{recover_u(x)} and \code{recover_v(x)},
-using the \link{accessors}. \code{un_tbl_ord()} removes attributes associated with the
-\code{"tbl_ord"} class in order to restore an object that was originally passed to
-\code{as_tbl_ord}.
+\code{is_tbl_ord()} checks an object \code{x} for the tbl_ord class; \code{valid_tbl_ord()}
+additionally checks for consistency between \code{recover_coord(x)} and the
+columns of \code{recover_u(x)} and \code{recover_v(x)}, using the \link{accessors}.
+\code{un_tbl_ord()} removes attributes associated with the tbl_ord class in order
+to restore an object that was originally passed to \code{as_tbl_ord}.
 }

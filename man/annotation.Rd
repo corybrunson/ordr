@@ -6,7 +6,7 @@
 \alias{set_annotation_v}
 \alias{annotation_u}
 \alias{annotation_v}
-\title{Annotate the factors of an ordination object}
+\title{Annotate the factors of a tbl_ord}
 \usage{
 set_annotation_u(x, annot)
 
@@ -17,14 +17,14 @@ annotation_u(x)
 annotation_v(x)
 }
 \arguments{
-\item{x}{A \code{[tbl_ord]}, or an ordination object coercible to one.}
+\item{x}{A \link{tbl_ord}, or an ordination object coercible to one.}
 
 \item{annot}{A \link[base:data.frame]{data.frame} having the same number of rows
 as \code{get_*(x)}.}
 }
 \description{
 These functions annotate the factors \eqn{U} and \eqn{V} of
-\code{tbl_ord} objects with additional variables, and retrieve these
+\link{tbl_ord} objects with additional variables, and retrieve these
 annotations.
 
 The \code{annotation_*()} and \code{set_annotation_*()} functions assign and retrieve

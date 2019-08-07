@@ -1,40 +1,39 @@
 #' @title A unified ordination object class
 #'
-#' @description These functions wrap ordination objects in the `"tbl_ord"`
-#'   class, create `tbl_ord`s directly from matrices, and test for the class and
-#'   basic structure.
+#' @description These functions wrap ordination objects in the class [tbl_ord],
+#'   create tbl_ords directly from matrices, and test for the class and basic
+#'   structure.
 #'   
 
 #' @details
 #'
-#' The `"tbl_ord"` class wraps around a range of ordination classes, making
+#' The tbl_ord class wraps around a range of ordination classes, making
 #' available a suite of ordination tools that specialize to each original object
 #' class. These tools include [format()] and [fortify()] methods, which
 #' facilitate the [print()] method and the [ggbiplot()] function.
 #'
 #' No default method is provided for `as_tbl_ord()`, despite most defined
-#' methods being equivalent (simply appending `"tbl_ord"` to the vector of
-#' object classes). This prevents objects for which other methods are not
-#' defined from being re-classed as `tbl_ord`s.
+#' methods being equivalent (simply appending tbl_ord to the vector of object
+#' classes). This prevents objects for which other methods are not defined from
+#' being re-classed as tbl_ords.
 #'
-#' The function `make_tbl_ord()` creates a `tbl_ord` structured as a list of two
+#' The function `make_tbl_ord()` creates a tbl_ord structured as a list of two
 #' matrices, `u` and `v`, which must have the same number of columns and the
 #' same column names.
 #'
-#' `is_tbl_ord()` checks an object `x` for the `"tbl_ord"` class;
-#' `valid_tbl_ord()` additionally checks for consistency between
-#' `recover_coord(x)` and the columns of `recover_u(x)` and `recover_v(x)`,
-#' using the [accessors]. `un_tbl_ord()` removes attributes associated with the
-#' `"tbl_ord"` class in order to restore an object that was originally passed to
-#' `as_tbl_ord`.
+#' `is_tbl_ord()` checks an object `x` for the tbl_ord class; `valid_tbl_ord()`
+#' additionally checks for consistency between `recover_coord(x)` and the
+#' columns of `recover_u(x)` and `recover_v(x)`, using the [accessors].
+#' `un_tbl_ord()` removes attributes associated with the tbl_ord class in order
+#' to restore an object that was originally passed to `as_tbl_ord`.
 #' 
 
 #' @name tbl_ord
 #' @include ord-alignment.r ord-conference.r
 #' @importFrom tibble tibble is_tibble as_tibble
 #' @param x An ordination object.
-#' @param u,v Matrices to be used as factors of a `tbl_ord`.
-#' @param ... Additional elements of a custom `tbl_ord`.
+#' @param u,v Matrices to be used as factors of a tbl_ord.
+#' @param ... Additional elements of a custom tbl_ord.
 NULL
 
 #' @rdname tbl_ord

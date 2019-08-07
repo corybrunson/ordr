@@ -10,7 +10,7 @@
 \alias{augment.tbl_ord}
 \alias{augment_u}
 \alias{augment_v}
-\title{Augment metadata on the factors and coordinates of ordination objects}
+\title{Augment metadata on the factors and coordinates of tbl_ords}
 \usage{
 augmentation_u(x)
 
@@ -29,7 +29,7 @@ augment_u(x)
 augment_v(x)
 }
 \arguments{
-\item{x}{A \code{[tbl_ord]}, or an ordination object coercible to one.}
+\item{x}{A \link{tbl_ord}, or an ordination object coercible to one.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
@@ -46,7 +46,7 @@ object.
 }
 \details{
 The \code{augmentation_*()} methods produce \link[tibble:tibble]{tibble}s of values
-associated with the rows, columns, and coordinates of a \code{tbl_ord} object. The
+associated with the rows, columns, and coordinates of a \link{tbl_ord} object. The
 first field of each tibble is \code{.name}, which contains the case, variable, or
 coordinate names. Additional fields contain information about the cases,
 variables, or coordinates extracted from the original ordination object.
@@ -54,11 +54,11 @@ variables, or coordinates extracted from the original ordination object.
 The \code{augment_*()} functions return the ordination with either or both factors
 annotated with the result of \code{augmentation_*()}. In this way \code{augment_*()}
 works like \code{\link[generics:augment]{generics::augment()}} by extracting information for a tidy summary
-of the components, but it differs in returning an annotated \code{tbl_ord} rather
-than a \code{tbl_df}. The advantage of implementing separate methods for the
-different components is that more information contained in the original
-object becomes accessible to the user. To achieve a result similar to that of
-\code{\link[generics:augment]{generics::augment()}}, use \code{\link[=fortify]{fortify()}}.
+of the components, but it differs in returning an annotated tbl_ord rather
+than a \link[tibble:tbl_df]{tbl_df}. The advantage of implementing separate
+methods for the different components is that more information contained in
+the original object becomes accessible to the user. To achieve a result
+similar to that of \code{\link[generics:augment]{generics::augment()}}, use \code{\link[=fortify]{fortify()}}.
 }
 \examples{
 # Linear regression on marine ecosystem data

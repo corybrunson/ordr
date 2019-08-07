@@ -1,7 +1,7 @@
-#' @title Annotate the factors of an ordination object
+#' @title Annotate the factors of a tbl_ord
 #'
 #' @description These functions annotate the factors \eqn{U} and \eqn{V} of
-#'   `tbl_ord` objects with additional variables, and retrieve these
+#'   [tbl_ord] objects with additional variables, and retrieve these
 #'   annotations.
 #'   
 

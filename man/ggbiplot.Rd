@@ -12,7 +12,7 @@ ggbiplot(ordination = NULL, mapping = aes(x = 1, y = 2),
 ord_aes(ordination, ...)
 }
 \arguments{
-\item{ordination}{A \code{[tbl_ord]}.}
+\item{ordination}{A \link{tbl_ord}.}
 
 \item{mapping}{List of default aesthetic mappings to use for the biplot. The
 default assigns the first two coordinates to the aesthetics \code{x} and \code{y}.
@@ -36,10 +36,10 @@ the primary axes; ignored if \code{sec.axes} is not specified.}
 }
 \description{
 Build a biplot visualization from ordination data wrapped as a
-\code{tbl_ord} object.
+\link{tbl_ord} object.
 }
 \details{
-\code{ggbiplot()} produces a \link[ggplot2:ggplot]{ggplot} object from a \code{tbl_ord}
+\code{ggbiplot()} produces a \link[ggplot2:ggplot]{ggplot} object from a \link{tbl_ord}
 object \code{ordination}. The baseline object is the default unadorned
 \code{"ggplot"}-class object \code{p} with the following differences from what
 \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} returns:

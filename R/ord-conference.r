@@ -6,11 +6,10 @@
 
 #' @details
 #'
-#' The _inertia_ of a singular value decomposition (eigendecomposition) consists
-#' in the squares of the singular values (eigenvalues), and represents the
-#' variance, likened to the physical inertia, in the directions of the
-#' orthogonal singular vectors (eigenvectors). Read more about conferring
-#' inertia between cases and variables at
+#' The _inertia_ of a singular value decomposition consists in the squares of
+#' the singular values, and represents the variance, likened to the physical
+#' inertia, in the directions of the orthogonal singular vectors. Read more
+#' about conferring inertia between cases and variables at
 #' <https://stats.stackexchange.com/a/141755/68743>.
 #'
 #' _Note: In case the `"inertia"` attribute is a rectangular matrix, one may
@@ -20,7 +19,7 @@
 
 #' @name conference
 #' @include ord-augmentation.r
-#' @param x A `tbl_ord` object.
+#' @param x A [tbl_ord] object.
 #' @param p Numeric vector of length 1 or 2. If length 1, the proportion of the
 #'   inertia assigned to the cases, with the remainder `1 - p` assigned to the
 #'   variables. If length 2, the proportions of the inertia assigned to the

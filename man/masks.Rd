@@ -66,5 +66,5 @@ specific class (e.g. \code{\link[stats:cmdscale]{stats::cmdscale()}}). Some othe
 is not self-contained, for instance missing annotation from the original
 dataset (e.g. \code{\link[logisticPCA:logisticPCA]{logisticPCA::logisticPCA()}}). The functions below wrap the
 originals with the minimal overhead necessary for complete functionality
-with the \code{"[tbl_ord]"} class.
+with the \link{tbl_ord} class.
 }

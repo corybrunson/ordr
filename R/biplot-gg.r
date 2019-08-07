@@ -1,12 +1,12 @@
 #' @title Biplots following the grammar of graphics
 #' 
 #' @description Build a biplot visualization from ordination data wrapped as a
-#' `tbl_ord` object.
+#' [tbl_ord] object.
 #' 
 
 #' @details
 #'
-#' `ggbiplot()` produces a [ggplot][ggplot2::ggplot] object from a `tbl_ord`
+#' `ggbiplot()` produces a [ggplot][ggplot2::ggplot] object from a [tbl_ord]
 #' object `ordination`. The baseline object is the default unadorned
 #' `"ggplot"`-class object `p` with the following differences from what
 #' [ggplot2::ggplot()] returns:
@@ -40,7 +40,7 @@
 
 #' @name ggbiplot
 #' @import ggplot2
-#' @param ordination A `[tbl_ord]`.
+#' @param ordination A [tbl_ord].
 #' @param mapping List of default aesthetic mappings to use for the biplot. The
 #'   default assigns the first two coordinates to the aesthetics `x` and `y`.
 #'   Other assignments must be supplied in each layer added to the plot.

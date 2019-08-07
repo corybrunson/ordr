@@ -44,7 +44,7 @@ rotate_to(x, y, .matrix)
 align_to(x, y, .matrix, method = c("negate", "permute", "rotate"))
 }
 \arguments{
-\item{x, y}{Matrices or \code{[tbl_ord]}s; \code{x} will be aligned to \code{y}.}
+\item{x, y}{Matrices or \link{tbl_ord}s; \code{x} will be aligned to \code{y}.}
 
 \item{negation, permutation, rotation}{Numeric or character vector of
 coordinates to negate or permute, or a matrix that performs an operation by

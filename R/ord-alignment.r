@@ -36,7 +36,7 @@
 #' @name alignment
 #' @include ord-augmentation.r
 #' @importFrom stats cor
-#' @param x,y Matrices or `[tbl_ord]`s; `x` will be aligned to `y`.
+#' @param x,y Matrices or [tbl_ord]s; `x` will be aligned to `y`.
 #' @template param-matrix
 #' @param negation,permutation,rotation Numeric or character vector of
 #'   coordinates to negate or permute, or a matrix that performs an operation by

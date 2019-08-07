@@ -20,7 +20,7 @@ revert_conference(x)
 confer_inertia(x, p)
 }
 \arguments{
-\item{x}{A \code{tbl_ord} object.}
+\item{x}{A \link{tbl_ord} object.}
 
 \item{p}{Numeric vector of length 1 or 2. If length 1, the proportion of the
 inertia assigned to the cases, with the remainder \code{1 - p} assigned to the
@@ -32,11 +32,10 @@ Re-distribute inertia between cases and variables in an
 ordination.
 }
 \details{
-The \emph{inertia} of a singular value decomposition (eigendecomposition) consists
-in the squares of the singular values (eigenvalues), and represents the
-variance, likened to the physical inertia, in the directions of the
-orthogonal singular vectors (eigenvectors). Read more about conferring
-inertia between cases and variables at
+The \emph{inertia} of a singular value decomposition consists in the squares of
+the singular values, and represents the variance, likened to the physical
+inertia, in the directions of the orthogonal singular vectors. Read more
+about conferring inertia between cases and variables at
 \url{https://stats.stackexchange.com/a/141755/68743}.
 
 \emph{Note: In case the \code{"inertia"} attribute is a rectangular matrix, one may

@@ -7,7 +7,7 @@
 \alias{fortify_u}
 \alias{fortify_v}
 \alias{tidy.tbl_ord}
-\title{Fortify a \code{tbl_ord} for plotting}
+\title{Fortify a tbl_ord for plotting}
 \usage{
 \method{fortify}{tbl_ord}(model, data, ..., .matrix = "uv",
   .supplement = TRUE, include = "all")
@@ -22,7 +22,7 @@ fortify_v(model, include = "all")
   include = "all")
 }
 \arguments{
-\item{model, x}{A \code{[tbl_ord]} object.}
+\item{model, x}{A \link{tbl_ord} object.}
 
 \item{data}{Ignored.}
 
@@ -43,10 +43,10 @@ whether only shared fields or all from both.}
 }
 \description{
 These methods of \code{\link[ggplot2:fortify]{ggplot2::fortify()}} and \code{\link[generics:tidy]{generics::tidy()}}
-convert a \code{[tbl_ord]} object to a \link[tibble:tbl_df]{tbl_df} object.
+convert a \link{tbl_ord} object to a \link[tibble:tbl_df]{tbl_df} object.
 }
 \details{
-The \code{fortify()} and \code{tidy()} methods for \code{tbl_ord} objects produce the same
+The \code{fortify()} and \code{tidy()} methods for tbl_ord objects produce the same
 output, a \link[tibble:tibble]{tibble} obtained by binding columns obtained via
 \code{\link[=accessors]{get_*()}}, \code{\link[=annotation]{annotation_*()}}, and
 \code{\link[=augmentation]{augmentation_*}}, respectively.
