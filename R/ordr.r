@@ -24,7 +24,7 @@
 #' - [ggbiplot], a **ggplot2** extension for rendering biplots, including
 #' several plot layers, integrated with the tbl_ord class
 
-#' @section Ordinations and biplots
+#' @section Ordinations and biplots:
 
 #' _Ordination_ encompasses a variety of techniques for data compression,
 #' dimension reduction, feature extraction, and visualization. Well-known
@@ -43,7 +43,7 @@
 #'
 #' 
 
-#' @section Singular value decomposition
+#' @section Singular value decomposition:
 
 #' The most popular ordination techniques use singular value decomposition (SVD)
 #' to factor a data matrix \eqn{X} into a product \eqn{X=UDV'} of two orthogonal

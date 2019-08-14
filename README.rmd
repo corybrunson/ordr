@@ -38,7 +38,6 @@ An extensive range of ordination techniques are already implemented in R, from c
 Instead, **ordr** provides a streamlined process by which the outputs of these methods&mdash;in particular, the matrix factors into which the original data are approximately decomposed and the artificial coordinates they share&mdash;can be inspected, annotated, tidied, and visualized. On this last point, most biplot implementations in R provide limited customizability, and **ordr** adopts the grammar of graphics paradigm from **ggplot2** to modularize biplot elements. The package as a whole is designed to follow the broader syntactic and grammatical conventions of the **tidyverse**, so that users familiar with a this workflow can more easily and quickly integrate ordination models into practice.
 
 [^ordination]: The term _ordination_ is most prevalent among ecologists; to my knowledge, no catch-all term is in common use outside ecology.
-[^svd]: Methods for `eigen()` and `svd()` decompositions are included in **ordr** for illustration. In practice, the interpretation of their output depends on the theoretical framework in which they are used.
 [^lm-kmeans]: Regression and clustering models, like classical [linear regression](http://www.multivariatestatistics.org/chapter2.html) and [_k_-means](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html), can also be understood as matrix decomposition approximations and even visualized in biplots. Their shared coordinates, which are pre-defined rather than artificial, are the predictor coefficients and the cluster assignments, respectively. Methods for `stats::lm()` and `stats::kmeans()`, for example, are implemented for the sake of novelty and instruction, but are not widely used in practice.
 
 ## usage
@@ -98,7 +97,7 @@ eurodist %>%
   cmdscale(k = 11) %>%
   as_tbl_ord() %>%
   augment() %>%
-  negate(2) %>%
+  negate_ord(2) %>%
   print() -> city_mds
 # 2D biplot aligned with geography
 city_mds %>%

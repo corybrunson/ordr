@@ -101,10 +101,10 @@ USPersonalExpenditure
 #> Private Education    0.341  0.974  1.80  2.6  3.64
 # perform principal components analysis
 (spend_pca <- prcomp(USPersonalExpenditure, center = FALSE))
-#> Standard deviations:
+#> Standard deviations (1, .., p=5):
 #> [1] 78.04471215  3.95649695  1.26733701  0.18412188  0.04367521
 #> 
-#> Rotation:
+#> Rotation (n x k) = (5 x 5):
 #>             PC1         PC2        PC3         PC4         PC5
 #> 1940 -0.1589586  0.11313761  0.1824780 -0.89728506 -0.35144462
 #> 1945 -0.3016855  0.79223017 -0.5274149  0.02654943  0.04985844
@@ -235,7 +235,7 @@ eurodist %>%
   cmdscale(k = 11) %>%
   as_tbl_ord() %>%
   augment() %>%
-  negate(2) %>%
+  negate_ord(2) %>%
   print() -> city_mds
 #> # A tbl_ord of class 'cmds': (21 x 11) x (21 x 11)'
 #> # 11 coordinates, transformed: PCo1, PCo2, ..., PCo11

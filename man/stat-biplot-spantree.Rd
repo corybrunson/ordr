@@ -116,7 +116,7 @@ eurodist \%>\%
   as_tbl_ord() \%>\%
   augment() \%>\%
   # align to conventional compass orientation
-  negate(2) \%>\%
+  negate_ord(2) \%>\%
   print() -> euro_mds
 euro_mds \%>\%
   ggbiplot() +
