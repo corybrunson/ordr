@@ -7,6 +7,7 @@
 \alias{lda_ord.data.frame}
 \alias{lda_ord.matrix}
 \alias{lda_ord.default}
+\alias{predict.lda_ord}
 \title{Augmented implementation of linear discriminant analysis}
 \usage{
 lda_ord(x, ...)
@@ -21,6 +22,9 @@ lda_ord(x, ...)
   tol = 1e-04, method = c("moment", "mle", "mve", "t"), CV = FALSE,
   nu = 5, ..., ret.x = FALSE, ret.grouping = FALSE,
   axes.scale = "unstandardized")
+
+\method{predict}{lda_ord}(object, newdata, prior = object$prior, dimen,
+  method = c("plug-in", "predictive", "debiased"), ...)
 }
 \arguments{
 \item{x}{
