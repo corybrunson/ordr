@@ -13,13 +13,16 @@
 \format{An object of class \code{StatChull} (inherits from \code{Stat}, \code{ggproto}, \code{gg}) of length 3.}
 \usage{
 stat_chull(mapping = NULL, data = NULL, geom = "polygon",
-  position = "identity", show.legend = NA, inherit.aes = TRUE, ...)
+  position = "identity", conical = FALSE, show.legend = NA,
+  inherit.aes = TRUE, ...)
 
 stat_u_chull(mapping = NULL, data = NULL, geom = "polygon",
-  position = "identity", show.legend = NA, inherit.aes = TRUE, ...)
+  position = "identity", conical = FALSE, show.legend = NA,
+  inherit.aes = TRUE, ...)
 
 stat_v_chull(mapping = NULL, data = NULL, geom = "polygon",
-  position = "identity", show.legend = NA, inherit.aes = TRUE, ...)
+  position = "identity", conical = FALSE, show.legend = NA,
+  inherit.aes = TRUE, ...)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or
@@ -47,6 +50,9 @@ from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
+\item{conical}{Logical; whether to include the origin when calculating the
+hull. Defaults to \code{FALSE}.}
+
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
 \code{FALSE} never includes, and \code{TRUE} always includes.
@@ -63,7 +69,9 @@ the default plot specification, e.g. \code{\link[=borders]{borders()}}.}
 \description{
 As used in a \strong{\link[ggplot2:ggplot2]{ggplot2}} vignette, this stat
 layer restricts a dataset with \code{x} and \code{y} variables to its convex hull.
-The biplot extension restricts each matrix factor to its own hull.
+The biplot extension restricts each matrix factor to its own hull. The
+\code{conical} parameter controls whether the origin is included in the
+calculation, though note that the result is not the (unbounded) \href{https://en.wikipedia.org/wiki/Conical_combination#Conical_hull}{conical hull}.
 }
 \section{Biplot layers}{
 
