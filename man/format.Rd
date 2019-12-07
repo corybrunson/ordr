@@ -6,11 +6,9 @@
 \alias{print.tbl_ord}
 \title{Format a tbl_ord for printing}
 \usage{
-\method{format}{tbl_ord}(x, ..., n = NULL, width = NULL,
-  n_extra = NULL)
+\method{format}{tbl_ord}(x, ..., n = NULL, width = NULL, n_extra = NULL)
 
-\method{print}{tbl_ord}(x, ..., n = NULL, width = NULL,
-  n_extra = NULL)
+\method{print}{tbl_ord}(x, ..., n = NULL, width = NULL, n_extra = NULL)
 }
 \arguments{
 \item{x}{A \link{tbl_ord} object.}

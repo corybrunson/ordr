@@ -37,7 +37,7 @@ Suggests:
     igraph,
     igraphdata,
     heplots
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Roxygen: list(markdown = TRUE)
 Collate: 
     'biplot-gg.r'

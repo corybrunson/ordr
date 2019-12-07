@@ -27,7 +27,7 @@ These functions annotate the factors \eqn{U} and \eqn{V} of
 \link{tbl_ord} objects with additional variables, and retrieve these
 annotations.
 
-The \code{annotation_*()} and \code{set_annotation_*()} functions assign and retrieve
+The \verb{annotation_*()} and \verb{set_annotation_*()} functions assign and retrieve
 values of the \code{"*_annotation"} attributes of \code{x}, which should have the same
 number of rows as \code{get_*(x)}.
 }

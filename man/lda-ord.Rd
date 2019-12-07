@@ -18,13 +18,28 @@ lda_ord(x, ...)
 
 \method{lda_ord}{matrix}(x, grouping, ..., subset, na.action)
 
-\method{lda_ord}{default}(x, grouping, prior = proportions,
-  tol = 1e-04, method = c("moment", "mle", "mve", "t"), CV = FALSE,
-  nu = 5, ..., ret.x = FALSE, ret.grouping = FALSE,
-  axes.scale = "unstandardized")
+\method{lda_ord}{default}(
+  x,
+  grouping,
+  prior = proportions,
+  tol = 1e-04,
+  method = c("moment", "mle", "mve", "t"),
+  CV = FALSE,
+  nu = 5,
+  ...,
+  ret.x = FALSE,
+  ret.grouping = FALSE,
+  axes.scale = "unstandardized"
+)
 
-\method{predict}{lda_ord}(object, newdata, prior = object$prior, dimen,
-  method = c("plug-in", "predictive", "debiased"), ...)
+\method{predict}{lda_ord}(
+  object,
+  newdata,
+  prior = object$prior,
+  dimen,
+  method = c("plug-in", "predictive", "debiased"),
+  ...
+)
 }
 \arguments{
 \item{x}{
@@ -79,7 +94,7 @@ lda_ord(x, ...)
 
 \item{method}{
     \code{"moment"} for standard estimators of the mean and variance,
-    \code{"mle"} for MLEs, \code{"mve"} to use \code{\link{cov.mve}}, or
+    \code{"mle"} for MLEs, \code{"mve"} to use \code{\link[MASS]{cov.mve}}, or
     \code{"t"} for robust estimates based on a \eqn{t} distribution.
   }
 
@@ -102,6 +117,24 @@ arise if these objects are reassigned.}
 \item{axes.scale}{Character string indicating how to left-transform the
 \code{scaling} value when rendering biplots using \code{\link[=ggbiplot]{ggbiplot()}}. Options include
 \code{"unstandardized"}, \code{"standardized"}, and \code{"contribution"}.}
+
+\item{object}{
+object  of class \code{"lda"}
+}
+
+\item{newdata}{
+  data frame of cases to be classified or, if \code{object}
+  has a formula, a data frame with columns of the same names as the
+  variables used.  A vector will be interpreted
+  as a row vector.  If newdata is missing, an attempt will be
+  made to retrieve the data used to fit the \code{lda} object.
+}
+
+\item{dimen}{
+the dimension of the space to be used. If this is less than \code{min(p, ng-1)},
+only the first \code{dimen} discriminant components are used (except for
+\code{method="predictive"}), and only those dimensions are returned in \code{x}.
+}
 }
 \description{
 This function replicates \code{\link[MASS:lda]{MASS::lda()}} with options to retain

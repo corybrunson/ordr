@@ -17,7 +17,7 @@ svd_ord(x, nu = min(dim(x)), nv = min(dim(x)))
 \item{symmetric}{if \code{TRUE}, the matrix is assumed to be symmetric
     (or Hermitian if complex) and only its lower triangle (diagonal
     included) is used.  If \code{symmetric} is not specified,
-    \code{\link{isSymmetric}(x)} is used.}
+    \code{\link[base]{isSymmetric}(x)} is used.}
 
 \item{nu}{the number of left  singular vectors to be computed.
     This must between \code{0} and \code{n = nrow(x)}.}

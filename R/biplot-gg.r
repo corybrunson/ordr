@@ -15,7 +15,9 @@
 #' `.matrix = "u"` or `.matrix = "v"` from the biplot.
 
 #' - `p$coordinates` is defaulted to [ggplot2::coord_equal()] in order to
-#' faithfully render the geometry of an ordination.
+#' faithfully render the geometry of an ordination. The optional parameters
+#' `xlim`, `ylim`, `expand`, and `clip` are passed to `coord_equal()` and
+#' default to its **ggplot2** defaults.
 
 #' - When `x` or `y` are mapped to coordinates of `ordination`, and if
 #' `axis.percents` is `TRUE`, `p$labels$x` or `p$labels$y` are defaulted to the
@@ -44,6 +46,7 @@
 #' @param mapping List of default aesthetic mappings to use for the biplot. The
 #'   default assigns the first two coordinates to the aesthetics `x` and `y`.
 #'   Other assignments must be supplied in each layer added to the plot.
+#' @inheritParams ggplot2::coord_equal
 #' @param axis.percents Whether to concatenate default axis labels with inertia
 #'   percentages.
 #' @param sec.axes Matrix factor character to specify a secondary set of axes.
@@ -64,6 +67,7 @@
 #' @export
 ggbiplot <- function(
   ordination = NULL, mapping = aes(x = 1, y = 2),
+  xlim = NULL, ylim = NULL, expand = TRUE, clip = "on",
   axis.percents = TRUE, sec.axes = NULL, scale.factor = NULL,
   scale_u = NULL, scale_v = NULL,
   ...
@@ -140,7 +144,9 @@ ggbiplot <- function(
   }
   
   # synchronize the scales of the axes
-  p$coordinates <- coord_equal()
+  p$coordinates <- coord_equal(
+    xlim = xlim, ylim = ylim, expand = expand, clip = clip
+  )
   
   # assign default axis labels
   if (axis.percents) {

@@ -10,17 +10,35 @@
 \title{Compute normal confidence ellipses for ordination factors}
 \format{An object of class \code{StatUEllipse} (inherits from \code{StatEllipse}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.}
 \usage{
-stat_u_ellipse(mapping = NULL, data = NULL, geom = "path",
-  position = "identity", show.legend = NA, inherit.aes = TRUE, ...,
-  type = "t", level = 0.95, segments = 51)
+stat_u_ellipse(
+  mapping = NULL,
+  data = NULL,
+  geom = "path",
+  position = "identity",
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...,
+  type = "t",
+  level = 0.95,
+  segments = 51
+)
 
-stat_v_ellipse(mapping = NULL, data = NULL, geom = "path",
-  position = "identity", show.legend = NA, inherit.aes = TRUE, ...,
-  type = "t", level = 0.95, segments = 51)
+stat_v_ellipse(
+  mapping = NULL,
+  data = NULL,
+  geom = "path",
+  position = "identity",
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...,
+  type = "t",
+  level = 0.95,
+  segments = 51
+)
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or
-\code{\link[=aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
+\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or
+\code{\link[ggplot2:aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
 default), it is combined with the default mapping at the top level of the
 plot. You must supply \code{mapping} if there is no plot mapping.}
 
@@ -28,11 +46,11 @@ plot. You must supply \code{mapping} if there is no plot mapping.}
 options:
 
 If \code{NULL}, the default, the data is inherited from the plot
-data as specified in the call to \code{\link[=ggplot]{ggplot()}}.
+data as specified in the call to \code{\link[ggplot2:ggplot]{ggplot()}}.
 
 A \code{data.frame}, or other object, will override the plot
 data. All objects will be fortified to produce a data frame. See
-\code{\link[=fortify]{fortify()}} for which variables will be created.
+\code{\link[ggplot2:fortify]{fortify()}} for which variables will be created.
 
 A \code{function} will be called with a single argument,
 the plot data. The return value must be a \code{data.frame}, and
@@ -53,7 +71,7 @@ display.}
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. \code{\link[=borders]{borders()}}.}
+the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
@@ -80,9 +98,9 @@ frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
 variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
 the data frame to one of these two.
 
-The geom layers \code{geom_u_*()} and \code{geom_v_*()} call the corresponding stat in
+The geom layers \verb{geom_u_*()} and \verb{geom_v_*()} call the corresponding stat in
 order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \code{geom_biplot_*()} selects a default matrix based on common practice,
+\eqn{V}. \verb{geom_biplot_*()} selects a default matrix based on common practice,
 e.g. \eqn{U} for points and \eqn{V} for arrows.
 }
 

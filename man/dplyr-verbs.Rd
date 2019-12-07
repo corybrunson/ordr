@@ -66,7 +66,7 @@ These functions adapt \link[dplyr:dplyr]{dplyr} verbs to the factors
 of a \link{tbl_ord}. The raw verbs are not defined for tbl_ords; instead, each
 verb has two analogues, corresponding to the two matrix factors. They each
 rely on a common workhorse function, which takes the composition of the
-\strong{dplyr} verb with \code{annotation_*}, applied to the factor, removes any
+\strong{dplyr} verb with \verb{annotation_*}, applied to the factor, removes any
 variables corresponding to coordinates or already annotated, and only then
 assigns it as the new \code{"*_annotation"} attribute of \code{.data} (see
 \link{annotation}).

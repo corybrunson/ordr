@@ -12,21 +12,45 @@
 \title{Calculate a minimum spanning tree among cases or variables}
 \format{An object of class \code{StatSpantree} (inherits from \code{Stat}, \code{ggproto}, \code{gg}) of length 3.}
 \usage{
-stat_spantree(mapping = NULL, data = NULL, geom = "segment",
-  position = "identity", method = "euclidean", show.legend = NA,
-  inherit.aes = TRUE, check.aes = TRUE, ...)
+stat_spantree(
+  mapping = NULL,
+  data = NULL,
+  geom = "segment",
+  position = "identity",
+  method = "euclidean",
+  show.legend = NA,
+  inherit.aes = TRUE,
+  check.aes = TRUE,
+  ...
+)
 
-stat_u_spantree(mapping = NULL, data = NULL, geom = "segment",
-  position = "identity", method = "euclidean", show.legend = NA,
-  inherit.aes = TRUE, check.aes = TRUE, ...)
+stat_u_spantree(
+  mapping = NULL,
+  data = NULL,
+  geom = "segment",
+  position = "identity",
+  method = "euclidean",
+  show.legend = NA,
+  inherit.aes = TRUE,
+  check.aes = TRUE,
+  ...
+)
 
-stat_v_spantree(mapping = NULL, data = NULL, geom = "segment",
-  position = "identity", method = "euclidean", show.legend = NA,
-  inherit.aes = TRUE, check.aes = TRUE, ...)
+stat_v_spantree(
+  mapping = NULL,
+  data = NULL,
+  geom = "segment",
+  position = "identity",
+  method = "euclidean",
+  show.legend = NA,
+  inherit.aes = TRUE,
+  check.aes = TRUE,
+  ...
+)
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or
-\code{\link[=aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
+\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or
+\code{\link[ggplot2:aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
 default), it is combined with the default mapping at the top level of the
 plot. You must supply \code{mapping} if there is no plot mapping.}
 
@@ -34,11 +58,11 @@ plot. You must supply \code{mapping} if there is no plot mapping.}
 options:
 
 If \code{NULL}, the default, the data is inherited from the plot
-data as specified in the call to \code{\link[=ggplot]{ggplot()}}.
+data as specified in the call to \code{\link[ggplot2:ggplot]{ggplot()}}.
 
 A \code{data.frame}, or other object, will override the plot
 data. All objects will be fortified to produce a data frame. See
-\code{\link[=fortify]{fortify()}} for which variables will be created.
+\code{\link[ggplot2:fortify]{fortify()}} for which variables will be created.
 
 A \code{function} will be called with a single argument,
 the plot data. The return value must be a \code{data.frame}, and
@@ -61,7 +85,7 @@ display.}
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. \code{\link[=borders]{borders()}}.}
+the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{check.aes}{If \code{TRUE}, the default, will check that
 supplied parameters and aesthetics are understood by the \code{geom} or
@@ -82,7 +106,7 @@ calculate a distance/dissimilarity object and \code{\link[vegan:spantree]{vegan:
 calculate the MST. The result is formatted with position aesthetics readable
 by \code{\link[ggplot2:geom_segment]{ggplot2::geom_segment()}}.
 
-If any aesthetics of the form \code{.coord[0-9]+} are detected, then the lot of
+If any aesthetics of the form \verb{.coord[0-9]+} are detected, then the lot of
 them are used to calculate distances/dissimilarities. These should not be
 assigend manually but generated using the convenience function \code{\link[=ord_aes]{ord_aes()}}
 (see the examples). Otherwise, \code{x} and \code{y} are used. Either way, \code{x} and \code{y}
@@ -103,9 +127,9 @@ frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
 variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
 the data frame to one of these two.
 
-The geom layers \code{geom_u_*()} and \code{geom_v_*()} call the corresponding stat in
+The geom layers \verb{geom_u_*()} and \verb{geom_v_*()} call the corresponding stat in
 order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \code{geom_biplot_*()} selects a default matrix based on common practice,
+\eqn{V}. \verb{geom_biplot_*()} selects a default matrix based on common practice,
 e.g. \eqn{U} for points and \eqn{V} for arrows.
 }
 

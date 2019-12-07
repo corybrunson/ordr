@@ -9,8 +9,7 @@
 \alias{tidy.tbl_ord}
 \title{Fortify a tbl_ord for plotting}
 \usage{
-\method{fortify}{tbl_ord}(model, data, ..., .matrix = "uv",
-  .supplement = TRUE, include = "all")
+\method{fortify}{tbl_ord}(model, data, ..., .matrix = "uv", .supplement = TRUE, include = "all")
 
 fortify_coord(model)
 
@@ -18,8 +17,7 @@ fortify_u(model, include = "all")
 
 fortify_v(model, include = "all")
 
-\method{tidy}{tbl_ord}(x, ..., .matrix = "uv", .supplement = TRUE,
-  include = "all")
+\method{tidy}{tbl_ord}(x, ..., .matrix = "uv", .supplement = TRUE, include = "all")
 }
 \arguments{
 \item{model, x}{A \link{tbl_ord} object.}

@@ -9,8 +9,7 @@ lra(x, compositional = FALSE, weighted = TRUE)
 \arguments{
 \item{x}{A numeric matrix or rectangular data set.}
 
-\item{compositional}{Logical; whether to normalize rows of \code{x} to sum to
-100\%.}
+\item{compositional}{Logical; whether to normalize rows of \code{x} to sum to 1.}
 
 \item{weighted}{Logical; whether to weight rows and columns by their sums.}
 }
