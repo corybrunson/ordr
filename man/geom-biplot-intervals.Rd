@@ -12,7 +12,11 @@
 \alias{geom_v_pointranges}
 \alias{geom_biplot_pointranges}
 \title{Render intervals depicting ranges, usually about center points}
-\format{An object of class \code{GeomLineranges} (inherits from \code{GeomLinerange}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.}
+\format{
+An object of class \code{GeomLineranges} (inherits from \code{GeomLinerange}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.
+
+An object of class \code{GeomPointranges} (inherits from \code{GeomPointrange}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.
+}
 \usage{
 geom_u_lineranges(
   mapping = NULL,

@@ -9,7 +9,9 @@
 \alias{geom_v_text_radiate}
 \alias{geom_biplot_text_radiate}
 \title{Render text at ordinates radiating out from the origin}
-\format{An object of class \code{GeomTextRadiate} (inherits from \code{GeomText}, \code{Geom}, \code{ggproto}, \code{gg}) of length 2.}
+\format{
+An object of class \code{GeomTextRadiate} (inherits from \code{GeomText}, \code{Geom}, \code{ggproto}, \code{gg}) of length 2.
+}
 \usage{
 geom_text_radiate(
   mapping = NULL,

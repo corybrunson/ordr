@@ -8,7 +8,11 @@
 \alias{stat_u}
 \alias{stat_v}
 \title{Render plot elements for one matrix of an ordination}
-\format{An object of class \code{StatU} (inherits from \code{StatIdentity}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.}
+\format{
+An object of class \code{StatU} (inherits from \code{StatIdentity}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+
+An object of class \code{StatV} (inherits from \code{StatIdentity}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+}
 \usage{
 stat_u(
   mapping = NULL,

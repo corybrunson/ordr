@@ -60,8 +60,6 @@ to dot product magnitudes (angles closest to straight, whether \eqn{0} or
 
 \item{method}{Character, one of \code{"negate"}, \code{"permute"}, or \code{"rotate"},
 indicating the alignment method to use.}
-
-\item{...}{Additional parameters passed to methods.}
 }
 \description{
 Align one ordination to another having the same cases or

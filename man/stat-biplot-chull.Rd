@@ -10,7 +10,13 @@
 \alias{stat_u_chull}
 \alias{stat_v_chull}
 \title{Restrict ordination data to the convex hulls of both matrix factors}
-\format{An object of class \code{StatChull} (inherits from \code{Stat}, \code{ggproto}, \code{gg}) of length 3.}
+\format{
+An object of class \code{StatChull} (inherits from \code{Stat}, \code{ggproto}, \code{gg}) of length 3.
+
+An object of class \code{StatUChull} (inherits from \code{StatChull}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+
+An object of class \code{StatVChull} (inherits from \code{StatChull}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+}
 \usage{
 stat_chull(
   mapping = NULL,

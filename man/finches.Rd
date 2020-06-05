@@ -3,7 +3,9 @@
 \name{finches}
 \alias{finches}
 \title{Site-species occurrence data for Galapagos finches}
-\format{A \link[base:data.frame]{data frame}.}
+\format{
+A \link[base:data.frame]{data frame}.
+}
 \source{
 These data are taken from Sanderson (2000). They are available in a
 different format in the \strong{\link[cooccur:cooccur]{cooccur}} package.

@@ -3,7 +3,9 @@
 \name{bioenv}
 \alias{bioenv}
 \title{Multivariate marine biological and environmental data}
-\format{A \link[tibble:tibble]{tibble}.}
+\format{
+A \link[tibble:tibble]{tibble}.
+}
 \source{
 Greenacre (2010), pp. 25--26.
 }

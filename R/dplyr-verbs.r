@@ -11,6 +11,7 @@
 #'   
 
 #' @name dplyr-verbs
+#' @importFrom tidyselect one_of
 #' @importFrom dplyr pull rename select mutate transmute bind_cols left_join
 #' @param .data A [tbl_ord] object.
 #' @param var A variable specified as in [dplyr::pull()].
@@ -62,7 +63,7 @@ mutate_factor <- function(.data, ..., .matrix) {
   att <- annotation_factor(.data, .matrix = .matrix)
   tbl <- bind_cols(crd, att)
   tbl <- mutate(tbl, ...)
-  tbl <- select(tbl, -match(names(crd), names(tbl)))
+  tbl <- select(tbl, -one_of(intersect(names(crd), names(tbl))))
   set_annotation_factor(.data, tbl, .matrix = .matrix)
 }
 #' @rdname dplyr-verbs
@@ -77,7 +78,7 @@ transmute_factor <- function(.data, ..., .matrix) {
   att <- annotation_factor(.data, .matrix = .matrix)
   tbl <- bind_cols(crd, att)
   tbl <- transmute(tbl, ...)
-  tbl <- select(tbl, -match(names(crd), names(tbl)))
+  tbl <- select(tbl, -one_of(intersect(names(crd), names(tbl))))
   set_annotation_factor(.data, tbl, .matrix = .matrix)
 }
 #' @rdname dplyr-verbs

@@ -3,7 +3,9 @@
 \name{glass}
 \alias{glass}
 \title{Glass composition data from archaeological sites in Israel}
-\format{A \link[tibble:tibble]{tibble}.}
+\format{
+A \link[tibble:tibble]{tibble}.
+}
 \source{
 Baxter & Freestone (2006).
 }

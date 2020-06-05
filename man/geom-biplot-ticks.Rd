@@ -9,7 +9,9 @@
 \alias{geom_v_axis_text}
 \alias{geom_biplot_axis_text}
 \title{Render tick mark labels for axes}
-\format{An object of class \code{GeomAxisText} (inherits from \code{GeomText}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.}
+\format{
+An object of class \code{GeomAxisText} (inherits from \code{GeomText}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.
+}
 \usage{
 geom_axis_text(
   mapping = NULL,

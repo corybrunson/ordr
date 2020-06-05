@@ -16,7 +16,19 @@
 \alias{stat_u_star}
 \alias{stat_v_star}
 \title{Compute geometric centers and spreads for ordination factors}
-\format{An object of class \code{StatCenter} (inherits from \code{Stat}, \code{ggproto}, \code{gg}) of length 3.}
+\format{
+An object of class \code{StatCenter} (inherits from \code{Stat}, \code{ggproto}, \code{gg}) of length 3.
+
+An object of class \code{StatUCenter} (inherits from \code{StatCenter}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+
+An object of class \code{StatVCenter} (inherits from \code{StatCenter}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+
+An object of class \code{StatStar} (inherits from \code{StatCenter}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+
+An object of class \code{StatUStar} (inherits from \code{StatStar}, \code{StatCenter}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+
+An object of class \code{StatVStar} (inherits from \code{StatStar}, \code{StatCenter}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+}
 \usage{
 stat_center(
   mapping = NULL,

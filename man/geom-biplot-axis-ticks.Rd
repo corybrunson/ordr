@@ -9,7 +9,9 @@
 \alias{geom_v_axis_ticks}
 \alias{geom_biplot_axis_ticks}
 \title{Render tick marks for axes}
-\format{An object of class \code{GeomAxisTicks} (inherits from \code{GeomSegment}, \code{Geom}, \code{ggproto}, \code{gg}) of length 5.}
+\format{
+An object of class \code{GeomAxisTicks} (inherits from \code{GeomSegment}, \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
+}
 \usage{
 geom_axis_ticks(
   mapping = NULL,

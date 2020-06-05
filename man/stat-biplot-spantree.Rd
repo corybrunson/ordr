@@ -10,7 +10,13 @@
 \alias{stat_u_spantree}
 \alias{stat_v_spantree}
 \title{Calculate a minimum spanning tree among cases or variables}
-\format{An object of class \code{StatSpantree} (inherits from \code{Stat}, \code{ggproto}, \code{gg}) of length 3.}
+\format{
+An object of class \code{StatSpantree} (inherits from \code{Stat}, \code{ggproto}, \code{gg}) of length 3.
+
+An object of class \code{StatUSpantree} (inherits from \code{StatSpantree}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+
+An object of class \code{StatVSpantree} (inherits from \code{StatSpantree}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+}
 \usage{
 stat_spantree(
   mapping = NULL,

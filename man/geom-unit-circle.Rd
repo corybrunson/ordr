@@ -6,7 +6,9 @@
 \alias{GeomUnitCircle}
 \alias{geom_unit_circle}
 \title{Render a unit circle}
-\format{An object of class \code{GeomUnitCircle} (inherits from \code{GeomPath}, \code{Geom}, \code{ggproto}, \code{gg}) of length 5.}
+\format{
+An object of class \code{GeomUnitCircle} (inherits from \code{GeomPath}, \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
+}
 \usage{
 geom_unit_circle(
   mapping = NULL,

@@ -8,7 +8,11 @@
 \alias{stat_u_ellipse}
 \alias{stat_v_ellipse}
 \title{Compute normal confidence ellipses for ordination factors}
-\format{An object of class \code{StatUEllipse} (inherits from \code{StatEllipse}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.}
+\format{
+An object of class \code{StatUEllipse} (inherits from \code{StatEllipse}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+
+An object of class \code{StatVEllipse} (inherits from \code{StatEllipse}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+}
 \usage{
 stat_u_ellipse(
   mapping = NULL,
@@ -82,7 +86,7 @@ The default \code{"t"} assumes a multivariate t-distribution, and
 representing the euclidean distance from the center.
 This ellipse probably won't appear circular unless \code{coord_fixed()} is applied.}
 
-\item{level}{The confidence level at which to draw an ellipse (default is 0.95),
+\item{level}{The level at which to draw an ellipse,
 or, if \code{type="euclid"}, the radius of the circle to be drawn.}
 
 \item{segments}{The number of segments to be used in drawing the ellipse.}
