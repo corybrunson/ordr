@@ -8,6 +8,7 @@
 #' @template param-methods
 #' @example inst/examples/iris-princomp-center-star.r
 #' @example inst/examples/iris-princomp-secondary.r
+#' @author Emily Paul
 NULL
 
 #' @rdname methods-princomp

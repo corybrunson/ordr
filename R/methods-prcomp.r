@@ -9,6 +9,7 @@
 #' @example inst/examples/country-prcomp-confer.r
 #' @example inst/examples/iris-prcomp-center-ellipse.r
 #' @example inst/examples/iris-prcomp-lineranges.r
+#' @author Emily Paul
 NULL
 
 #' @rdname methods-prcomp
