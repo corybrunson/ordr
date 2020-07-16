@@ -107,7 +107,13 @@ augment_annotation <- function(x, .matrix) {
     ann <- ann[, -which(! is.na(match_names)), drop = FALSE]
   }
   # place augmentation variables first, for consistency
-  bind_cols(aug, ann)
+  if (ncol(ann) == 0L) {
+    aug
+  } else if (ncol(aug) == 0L) {
+    ann
+  } else {
+    bind_cols(aug, ann)
+  }
 }
 
 augment_factor <- function(x, .matrix) {

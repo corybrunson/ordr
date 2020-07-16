@@ -17,7 +17,9 @@ test_that("`bind_cols_*()` appends a column only of the correct length", {
     ncol(tidy(bind_cols_u(pca, species = iris[[5]]), .matrix = "u")),
     4 + 1 + 1
   )
-  expect_error(bind_cols_u(pca, letter = letters), "length")
+  expect_error(bind_cols_u(pca, letter = letters),
+               regexp = "length|recycle",
+               class = "vctrs_error_incompatible_size")
 })
 
 pca <- bind_cols_u(pca, iris[, 5, drop = FALSE])
