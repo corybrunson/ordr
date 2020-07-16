@@ -62,7 +62,7 @@ standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 \code{\link[dplyr:select]{dplyr::select()}}.}
 }
 \description{
-These functions adapt \link[dplyr:dplyr]{dplyr} verbs to the factors
+These functions adapt \link[dplyr:dplyr-package]{dplyr} verbs to the factors
 of a \link{tbl_ord}. The raw verbs are not defined for tbl_ords; instead, each
 verb has two analogues, corresponding to the two matrix factors. They each
 rely on a common workhorse function, which takes the composition of the

@@ -37,7 +37,7 @@ standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 
 \item{data}{Passed to \code{\link[generics:augment]{generics::augment()}}; currently ignored.}
 
-\item{...}{Additional arguments from \code{\link[base:as.matrix]{base::as.matrix()}}; ignored.}
+\item{...}{Additional arguments from \code{\link[base:matrix]{base::as.matrix()}}; ignored.}
 }
 \description{
 These functions return data associated with the cases,
@@ -55,7 +55,7 @@ The \verb{augment_*()} functions return the ordination with either or both facto
 annotated with the result of \verb{augmentation_*()}. In this way \verb{augment_*()}
 works like \code{\link[generics:augment]{generics::augment()}} by extracting information for a tidy summary
 of the components, but it differs in returning an annotated tbl_ord rather
-than a \link[tibble:tbl_df]{tbl_df}. The advantage of implementing separate
+than a \link[tibble:tbl_df-class]{tbl_df}. The advantage of implementing separate
 methods for the different components is that more information contained in
 the original object becomes accessible to the user. To achieve a result
 similar to that of \code{\link[generics:augment]{generics::augment()}}, use \code{\link[=fortify]{fortify()}}.

@@ -74,7 +74,7 @@ object \code{ordination}. The baseline object is the default unadorned
 \itemize{
 \item \code{p$mapping} is augmented with \code{.matrix = .matrix}, which expects either
 \code{.matrix = "u"} or \code{.matrix = "v"} from the biplot.
-\item \code{p$coordinates} is defaulted to \code{\link[ggplot2:coord_equal]{ggplot2::coord_equal()}} in order to
+\item \code{p$coordinates} is defaulted to \code{\link[ggplot2:coord_fixed]{ggplot2::coord_equal()}} in order to
 faithfully render the geometry of an ordination. The optional parameters
 \code{xlim}, \code{ylim}, \code{expand}, and \code{clip} are passed to \code{coord_equal()} and
 default to its \strong{ggplot2} defaults.
@@ -204,5 +204,5 @@ finches_clpca \%>\%
   )
 }
 \seealso{
-\code{\link[ggplot2:ggplot2]{ggplot2::ggplot2()}}
+\code{\link[ggplot2:ggplot2-package]{ggplot2::ggplot2()}}
 }

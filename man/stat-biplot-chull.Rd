@@ -94,7 +94,7 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 }
 \description{
-As used in a \strong{\link[ggplot2:ggplot2]{ggplot2}} vignette, this stat
+As used in a \strong{\link[ggplot2:ggplot2-package]{ggplot2}} vignette, this stat
 layer restricts a dataset with \code{x} and \code{y} variables to its convex hull.
 The biplot extension restricts each matrix factor to its own hull. The
 \code{conical} parameter controls whether the origin is included in the

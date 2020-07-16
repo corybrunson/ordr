@@ -36,7 +36,7 @@ all original ordination classes.
 }
 \details{
 The \code{format} and \code{print} methods for class \link{tbl_ord} are adapted from
-those for class \link[tibble:tbl_df]{tbl_df} and for class
+those for class \link[tibble:tbl_df-class]{tbl_df} and for class
 \link[tidygraph:tbl_graph]{tbl_graph}.
 
 \strong{Note:} The \code{format()} function is tedius but cannot be easily modularized

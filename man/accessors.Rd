@@ -79,7 +79,7 @@ standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 \item{align}{Logical; whether to align the matrix factors and coordinates
 according to an \code{"align"} matrix attribute.}
 
-\item{...}{Additional arguments from \code{\link[base:as.matrix]{base::as.matrix()}}; ignored.}
+\item{...}{Additional arguments from \code{\link[base:matrix]{base::as.matrix()}}; ignored.}
 }
 \description{
 These functions return information about the matrix

@@ -41,7 +41,7 @@ whether only shared fields or all from both.}
 }
 \description{
 These methods of \code{\link[ggplot2:fortify]{ggplot2::fortify()}} and \code{\link[generics:tidy]{generics::tidy()}}
-convert a \link{tbl_ord} object to a \link[tibble:tbl_df]{tbl_df} object.
+convert a \link{tbl_ord} object to a \link[tibble:tbl_df-class]{tbl_df} object.
 }
 \details{
 The \code{fortify()} and \code{tidy()} methods for tbl_ord objects produce the same

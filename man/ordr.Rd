@@ -5,7 +5,7 @@
 \alias{ordr}
 \title{\strong{ordr} package}
 \description{
-This is a \strong{\link[tidyverse:tidyverse]{tidyverse}} extension for
+This is a \strong{\link[tidyverse:tidyverse-package]{tidyverse}} extension for
 handling, manipulating, and visualizing ordination models with consistent
 conventions and in a tidy workflow.
 }

@@ -26,13 +26,13 @@ A grid grob.
 }
 \description{
 These key drawing functions supplement those built into
-\strong{\link[ggplot2:ggplot2]{ggplot2}} for producing legends suitable to biplots.
+\strong{\link[ggplot2:ggplot2-package]{ggplot2}} for producing legends suitable to biplots.
 }
 \details{
-\code{draw_key_line()} is a horizontal counterpart to \code{\link[ggplot2:draw_key_vline]{ggplot2::draw_key_vline()}}.
+\code{draw_key_line()} is a horizontal counterpart to \code{\link[ggplot2:draw_key]{ggplot2::draw_key_vline()}}.
 \code{draw_key_crosslines()} superimposes these two keys, and
 \code{draw_key_crosspoint()} additionally superimposes an oversized
-\code{\link[ggplot2:draw_key_point]{ggplot2::draw_key_point()}}.
+\code{\link[ggplot2:draw_key]{ggplot2::draw_key_point()}}.
 }
 \examples{
 # Scaled PCA of Anderson iris data with ranges and confidence intervals
