@@ -11,7 +11,7 @@ usa_mds %>%
 get_alignment(usa_mds)
 # negation
 usa_mds %>%
-  negate(1:2) %>%
+  negate_ord(1:2) %>%
   print() -> usa_mds_negate
 get_alignment(usa_mds_negate)
 usa_mds_negate %>%
@@ -20,7 +20,7 @@ usa_mds_negate %>%
   ggtitle("Negated MDS biplot of distances between American cities")
 # rotation
 usa_mds %>%
-  rotate(-diag(2)) %>%
+  rotate_ord(-diag(2)) %>%
   print() -> usa_mds_rotate
 get_alignment(usa_mds_rotate)
 usa_mds_rotate %>%

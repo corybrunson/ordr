@@ -45,8 +45,7 @@ get_v(x, .supplement = TRUE, align = TRUE)
 
 get_factor(x, .matrix, .supplement = TRUE, align = TRUE)
 
-\method{as.matrix}{tbl_ord}(x, ..., .matrix, .supplement = TRUE,
-  align = TRUE)
+\method{as.matrix}{tbl_ord}(x, ..., .matrix, .supplement = TRUE, align = TRUE)
 
 recover_inertia(x)
 
@@ -69,7 +68,7 @@ dim_v(x)
 dim_factor(x, .matrix)
 }
 \arguments{
-\item{x}{A \code{[tbl_ord]}, or an ordination object coercible to one.}
+\item{x}{A \link{tbl_ord}, or an ordination object coercible to one.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
@@ -80,18 +79,18 @@ standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 \item{align}{Logical; whether to align the matrix factors and coordinates
 according to an \code{"align"} matrix attribute.}
 
-\item{...}{Additional arguments from \code{\link[base:as.matrix]{base::as.matrix()}}; ignored.}
+\item{...}{Additional arguments from \code{\link[base:matrix]{base::as.matrix()}}; ignored.}
 }
 \description{
 These functions return information about the matrix
 factorization underlying an ordination.
 }
 \details{
-The \code{recover_*()} functions extract one or both of the matrix factors
+The \verb{recover_*()} functions extract one or both of the matrix factors
 \eqn{U,V} that constitute the original ordination. These are interpreted as
-the case scores (\eqn{U}) and the variable loadings (\eqn{V}). The \code{get_*()}
+the case scores (\eqn{U}) and the variable loadings (\eqn{V}). The \verb{get_*()}
 functions optionally (and by default) apply any alignment stored as the
-\code{"align"} attribute (see \link{alignment}). Only the \code{recover_*()} functions are
+\code{"align"} attribute (see \link{alignment}). Only the \verb{recover_*()} functions are
 generics that require methods for each ordination class.
 
 \code{get_coord()} retrieves the names of the coordinates shared by \eqn{U} and

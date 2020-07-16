@@ -14,7 +14,7 @@ supplementation_v(x)
 supplementation_factor(x, .matrix)
 }
 \arguments{
-\item{x}{A \code{[tbl_ord]}, or an ordination object coercible to one.}
+\item{x}{A \link{tbl_ord}, or an ordination object coercible to one.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
@@ -25,15 +25,15 @@ These functions attach supplementary rows or columns to an
 ordination object.
 }
 \details{
-The \code{supplementation_*()} methods produce matrices of supplemental rows or
-columns (i.e. rows of \eqn{U} or of \eqn{V}) of a \code{tbl_ord} object from the
+The \verb{supplementation_*()} methods produce matrices of supplemental rows or
+columns (i.e. rows of \eqn{U} or of \eqn{V}) of a \link{tbl_ord} object from the
 object itself. The motivating example is linear discriminant analysis, which
 produces a natural biplot of class discriminant centroids and variable axes
 but is usually supplemented with case discriminant scores. If no
 supplementary rows of a factor are produced, the function returns \code{NULL}.
 
-The \code{supplement_*()} functions return the ordination object with either or
-both factors attributed with the result of \code{supplementation_*()}. The
+The \verb{supplement_*()} functions return the ordination object with either or
+both factors attributed with the result of \verb{supplementation_*()}. The
 supplementary values are augmented with a \code{.supplement} column whose value
 indicates their source and can be incorporated into a \link[=fortify]{tidied form}.
 }

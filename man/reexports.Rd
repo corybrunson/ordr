@@ -16,10 +16,10 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{generics}{\code{\link[generics]{tidy}}, \code{\link[generics]{augment}}}
+  \item{generics}{\code{\link[generics]{augment}}, \code{\link[generics]{tidy}}}
 
-  \item{ggrepel}{\code{\link[ggrepel]{geom_text_repel}}, \code{\link[ggrepel]{geom_label_repel}}}
+  \item{ggrepel}{\code{\link[ggrepel:geom_text_repel]{geom_label_repel}}, \code{\link[ggrepel]{geom_text_repel}}}
 
-  \item{magrittr}{\code{\link[magrittr]{\%>\%}}}
+  \item{magrittr}{\code{\link[magrittr:pipe]{\%>\%}}}
 }}
 

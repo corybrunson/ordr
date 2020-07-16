@@ -4,9 +4,9 @@
 \alias{alignment}
 \alias{get_alignment}
 \alias{revert_alignment}
-\alias{negate}
-\alias{permute}
-\alias{rotate}
+\alias{negate_ord}
+\alias{permute_ord}
+\alias{rotate_ord}
 \alias{negation_to}
 \alias{negate_to}
 \alias{negate_to_nonneg_orthant}
@@ -21,11 +21,11 @@ get_alignment(x)
 
 revert_alignment(x)
 
-negate(x, negation = NULL)
+negate_ord(x, negation = NULL)
 
-permute(x, permutation = NULL)
+permute_ord(x, permutation = NULL)
 
-rotate(x, rotation = NULL)
+rotate_ord(x, rotation = NULL)
 
 negation_to(x, y)
 
@@ -44,7 +44,7 @@ rotate_to(x, y, .matrix)
 align_to(x, y, .matrix, method = c("negate", "permute", "rotate"))
 }
 \arguments{
-\item{x, y}{Matrices or \code{[tbl_ord]}s; \code{x} will be aligned to \code{y}.}
+\item{x, y}{Matrices or \link{tbl_ord}s; \code{x} will be aligned to \code{y}.}
 
 \item{negation, permutation, rotation}{Numeric or character vector of
 coordinates to negate or permute, or a matrix that performs an operation by
@@ -60,8 +60,6 @@ to dot product magnitudes (angles closest to straight, whether \eqn{0} or
 
 \item{method}{Character, one of \code{"negate"}, \code{"permute"}, or \code{"rotate"},
 indicating the alignment method to use.}
-
-\item{...}{Additional parameters passed to methods.}
 }
 \description{
 Align one ordination to another having the same cases or
@@ -71,9 +69,9 @@ variables.
 For purposes of comparison and visualization, it can be useful to transform
 the (already artificial) coordinates of an ordination, either by fixed
 criteria or to better align with another basis (matrix) of coordinates.
-\code{negate()}, \code{permute()}, and \code{rotate()} allow the user to manually transform
-the coordinates of an ordination by specifying the coordinates to be negated
-or permuted, or by providing the rotation matrix.
+\code{negate_ord()}, \code{permute_ord()}, and \code{rotate_ord()} allow the user to
+manually transform the coordinates of an ordination by specifying the
+coordinates to be negated or permuted, or by providing the rotation matrix.
 
 \code{negate_to()}, \code{permute_to()}, and \code{rotate_to()} manipulate the coordinates
 of one ordination so that the positions of the cases or variables align, as
@@ -106,7 +104,7 @@ usa_mds \%>\%
 get_alignment(usa_mds)
 # negation
 usa_mds \%>\%
-  negate(1:2) \%>\%
+  negate_ord(1:2) \%>\%
   print() -> usa_mds_negate
 get_alignment(usa_mds_negate)
 usa_mds_negate \%>\%
@@ -115,7 +113,7 @@ usa_mds_negate \%>\%
   ggtitle("Negated MDS biplot of distances between American cities")
 # rotation
 usa_mds \%>\%
-  rotate(-diag(2)) \%>\%
+  rotate_ord(-diag(2)) \%>\%
   print() -> usa_mds_rotate
 get_alignment(usa_mds_rotate)
 usa_mds_rotate \%>\%

@@ -7,7 +7,7 @@
 #' @details
 #'
 #' The `supplementation_*()` methods produce matrices of supplemental rows or
-#' columns (i.e. rows of \eqn{U} or of \eqn{V}) of a `tbl_ord` object from the
+#' columns (i.e. rows of \eqn{U} or of \eqn{V}) of a [tbl_ord] object from the
 #' object itself. The motivating example is linear discriminant analysis, which
 #' produces a natural biplot of class discriminant centroids and variable axes
 #' but is usually supplemented with case discriminant scores. If no

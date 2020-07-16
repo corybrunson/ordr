@@ -1,12 +1,12 @@
-#' @title Fortify a `tbl_ord` for plotting
+#' @title Fortify a tbl_ord for plotting
 #'
 #' @description These methods of [ggplot2::fortify()] and [generics::tidy()]
-#'   convert a `[tbl_ord]` object to a [tbl_df][tibble::tbl_df] object.
+#'   convert a [tbl_ord] object to a [tbl_df][tibble::tbl_df] object.
 #'   
 
 #' @details
 #'
-#' The `fortify()` and `tidy()` methods for `tbl_ord` objects produce the same
+#' The `fortify()` and `tidy()` methods for tbl_ord objects produce the same
 #' output, a [tibble][tibble::tibble] obtained by binding columns obtained via
 #' [`get_*()`][accessors], [`annotation_*()`][annotation], and
 #' [`augmentation_*`][augmentation], respectively.
@@ -24,7 +24,7 @@
 #' biplot, in particular [stat_spantree()].
 
 #' @name fortify
-#' @param model,x A `[tbl_ord]` object.
+#' @param model,x A [tbl_ord] object.
 #' @param data Ignored.
 #' @param ... Additional arguments received from `fortify()` or `tidy()`;
 #'   ignored.

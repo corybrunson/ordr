@@ -21,6 +21,7 @@ Imports:
     tidyr,
     rlang,
     stringr,
+    tidyselect,
     dplyr,
     purrr,
     ggrepel,
@@ -37,7 +38,7 @@ Suggests:
     igraph,
     igraphdata,
     heplots
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Collate: 
     'biplot-gg.r'

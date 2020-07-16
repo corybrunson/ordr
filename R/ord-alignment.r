@@ -9,9 +9,9 @@
 #' For purposes of comparison and visualization, it can be useful to transform
 #' the (already artificial) coordinates of an ordination, either by fixed
 #' criteria or to better align with another basis (matrix) of coordinates.
-#' `negate()`, `permute()`, and `rotate()` allow the user to manually transform
-#' the coordinates of an ordination by specifying the coordinates to be negated
-#' or permuted, or by providing the rotation matrix.
+#' `negate_ord()`, `permute_ord()`, and `rotate_ord()` allow the user to
+#' manually transform the coordinates of an ordination by specifying the
+#' coordinates to be negated or permuted, or by providing the rotation matrix.
 #'
 #' `negate_to()`, `permute_to()`, and `rotate_to()` manipulate the coordinates
 #' of one ordination so that the positions of the cases or variables align, as
@@ -36,7 +36,7 @@
 #' @name alignment
 #' @include ord-augmentation.r
 #' @importFrom stats cor
-#' @param x,y Matrices or `[tbl_ord]`s; `x` will be aligned to `y`.
+#' @param x,y Matrices or [tbl_ord]s; `x` will be aligned to `y`.
 #' @template param-matrix
 #' @param negation,permutation,rotation Numeric or character vector of
 #'   coordinates to negate or permute, or a matrix that performs an operation by
@@ -46,7 +46,6 @@
 #' @param abs.values Whether `permute_to()` should reorder coordinates according
 #'   to dot product magnitudes (angles closest to straight, whether \eqn{0} or
 #'   \eqn{\pi}, versus angles closest to \eqn{0}).
-#' @param ... Additional parameters passed to methods.
 #' @example inst/examples/cities-cmds-align.r
 #' @example inst/examples/country-cmds-prcomp-negate.r
 #' @example inst/examples/haireye-ca-rotate.r
@@ -82,7 +81,7 @@ revert_alignment <- function(x) attribute_alignment(x, NULL)
 
 #' @rdname alignment
 #' @export
-negate <- function(x, negation = NULL) {
+negate_ord <- function(x, negation = NULL) {
   stopifnot(is_tbl_ord(x))
   if (is.null(negation)) return(x)
   if (is.character(negation)) {
@@ -97,7 +96,7 @@ negate <- function(x, negation = NULL) {
 
 #' @rdname alignment
 #' @export
-permute <- function(x, permutation = NULL) {
+permute_ord <- function(x, permutation = NULL) {
   stopifnot(is_tbl_ord(x))
   if (is.null(permutation)) return(x)
   # ensure permutation matrix
@@ -117,7 +116,7 @@ permute <- function(x, permutation = NULL) {
 
 #' @rdname alignment
 #' @export
-rotate <- function(x, rotation = NULL) {
+rotate_ord <- function(x, rotation = NULL) {
   stopifnot(is_tbl_ord(x))
   if (is.null(rotation)) return(x)
   # ensure rotation matrix

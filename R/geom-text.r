@@ -1,4 +1,4 @@
-#' @title Render text at ordinates
+#' @title Render text and labels at ordinates
 #' 
 
 #' @description `geom_*_text()` renders text, and `geom_*_label()` labels, at
@@ -51,7 +51,7 @@ geom_u_text <- function(
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
-  if (! missing(nudge_x) || !missing(nudge_y)) {
+  if (! missing(nudge_x) || ! missing(nudge_y)) {
     if (! missing(position)) {
       stop("Specify either `position` or `nudge_x`/`nudge_y`", call. = FALSE)
     }
@@ -86,7 +86,7 @@ geom_v_text <- function(
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
-  if (! missing(nudge_x) || !missing(nudge_y)) {
+  if (! missing(nudge_x) || ! missing(nudge_y)) {
     if (! missing(position)) {
       stop("Specify either `position` or `nudge_x`/`nudge_y`", call. = FALSE)
     }
@@ -122,7 +122,7 @@ geom_biplot_text <- function(
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
-  if (! missing(nudge_x) || !missing(nudge_y)) {
+  if (! missing(nudge_x) || ! missing(nudge_y)) {
     if (! missing(position)) {
       stop("Specify either `position` or `nudge_x`/`nudge_y`", call. = FALSE)
     }

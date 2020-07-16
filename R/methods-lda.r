@@ -88,7 +88,6 @@ augmentation_u.lda <- function(x) {
   }
   res <- transform(
     res,
-    .grouping = x$lev,
     .prior = x$prior,
     .counts = x$counts
   )
@@ -127,7 +126,6 @@ augmentation_u.lda_ord <- function(x) {
   }
   res <- transform(
     res,
-    .grouping = x$lev,
     .prior = x$prior,
     .counts = x$counts
   )
