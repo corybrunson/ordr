@@ -76,12 +76,16 @@ integrate ordination models into practice.
 ### installation
 
 **ordr** remains under development and is not scheduled for a CRAN
-release. For now, it can be installed using
-[**remotes**](https://github.com/r-lib/remotes):
+release. For now, it can be installed from the (default) `main` branch
+using [**remotes**](https://github.com/r-lib/remotes):
 
 ``` r
-remotes::install_github("corybrunson/ordr")
+remotes::install_github("corybrunson/ordr@main")
 ```
+
+The `master` branch exists only as the required source from which to
+build [the website](https://corybrunson.github.io/ordr/), and will be
+discontinued once GitHub Pages enables building from the default branch.
 
 ### PCA example
 
@@ -211,6 +215,7 @@ ggbiplot(spend_pca, aes(label = .name)) +
     "U.S. Personal Expenditure data, 1940-1960",
     "Symmetric biplot of un-centered PCA"
   )
+#> Warning: `expand_scale()` is deprecated; use `expansion()` instead.
 ```
 
 ![](man/figures/README-PCA%20example-1.png)<!-- -->
@@ -227,7 +232,8 @@ that **ordr** masks `stats::cmdscale()` with a wrapper that always
 returns the eigenvalues and the symmetric distance matrix produced
 during the calculation. The MDS uses 11 coordinates—the number of
 positive eigenvalues—so that `stat_*_spanningtree()` can call upon them
-to recover the intercity distances.
+to recover the intercity
+distances.
 
 ``` r
 # `tbl_ord` object for a classical MDS on distances between European cities

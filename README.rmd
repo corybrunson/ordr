@@ -48,11 +48,13 @@ library(ordr)
 
 ### installation
 
-**ordr** remains under development and is not scheduled for a CRAN release. For now, it can be installed using [**remotes**](https://github.com/r-lib/remotes):
+**ordr** remains under development and is not scheduled for a CRAN release. For now, it can be installed from the (default) `main` branch using [**remotes**](https://github.com/r-lib/remotes):
 
 ```{r install, eval=FALSE}
-remotes::install_github("corybrunson/ordr")
+remotes::install_github("corybrunson/ordr@main")
 ```
+
+The `master` branch exists only as the required source from which to build [the website](https://corybrunson.github.io/ordr/), and will be discontinued once GitHub Pages enables building from the default branch.
 
 ### PCA example
 
