@@ -118,7 +118,7 @@ ggbiplot <- function(
     if (! is.null(ordination)) ordination <- dplyr::mutate_at(
       ordination,
       dplyr::vars(get_coord(ordination)),
-      dplyr::funs(ifelse(ordination$.matrix == sec.axes, . * scale.factor, .))
+      list(~ ifelse(ordination$.matrix == sec.axes, . * scale.factor, .))
     )
     
   }
@@ -203,7 +203,7 @@ scale_ord <- function(ordination, .m, mapping, scale) {
   dplyr::mutate_at(
     ordination,
     dplyr::vars(stringr::str_remove(as.character(mapping[c("x", "y")]), "^~")),
-    dplyr::funs(ifelse(ordination$.matrix == .m, . * scale, .))
+    list(~ ifelse(ordination$.matrix == .m, . * scale, .))
   )
 }
 
