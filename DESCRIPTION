@@ -28,7 +28,8 @@ Imports:
     ca,
     MASS,
     logisticPCA,
-    vegan
+    vegan,
+    ade4
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -77,6 +78,7 @@ Collate:
     'methods-lm.r'
     'methods-lpca.r'
     'methods-lra.r'
+    'methods-nipals.r'
     'methods-prcomp.r'
     'methods-princomp.r'
     'methods-svd.r'

@@ -42,102 +42,41 @@ These methods extract data from, and attribute new data to,
 objects of class \code{"nipals"} as returned by \code{\link[ade4:nipals]{ade4::nipals()}}.
 }
 \examples{
-# Confer PCA weights and inertia between cases and variables
-country_attributes \%>\%
-  prcomp() \%>\%
+# example taken from `help(ade4::nipals)`
+data(doubs, package = "ade4")
+# NIPALS on sites and environmental variables
+nip1 <- ade4::nipals(doubs$env)
+as_tbl_ord(nip1)
+# augment with row and column names
+nip1 \%>\%
   as_tbl_ord() \%>\%
-  print() -> attributes_pca
-# form biplot
-attributes_pca \%>\%
-  ggbiplot(
-    aes(label = .name),
-    sec.axes = "v", scale.factor = dim_v(attributes_pca)
-  ) +
+  augment() \%>\%
+  print() -> nip1ord
+
+# geographic arrangement of sites
+site_plot <- cbind(site = rownames(doubs$env), doubs$xy) \%>\%
+  tibble::as_tibble() \%>\%
+  ggplot(aes(x = x, y = y)) +
+  coord_equal() +
   theme_bw() + theme(panel.grid = element_blank()) +
-  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
-  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
-  geom_v_text(
-    aes(x = PC1, y = PC2),
-    color = "darkred", hjust = "outward", vjust = "outward"
-  )
-# covariance biplot
-attributes_pca \%>\%
-  confer_inertia(0) \%>\%
-  ggbiplot(
-    aes(label = .name),
-    sec.axes = "u", scale.factor = dim_u(attributes_pca)
-  ) +
+  geom_path() +
+  #geom_text(aes(label = site)) +
+  geom_label(aes(label = ifelse(as.integer(site) \%\% 4L == 1L,
+                                site, NA_character_)))
+# biplot of sites and environmental variables
+site_env_biplot <- nip1ord \%>\%
+  ggbiplot(aes(x = 2, y = 1),
+           sec.axes = "v", scale.factor = 10) +
   theme_bw() + theme(panel.grid = element_blank()) +
-  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
-  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
-  geom_v_text_repel(aes(x = PC1, y = PC2), color = "darkred")
-# Scaled PCA of Anderson iris data with annotated biplot
-iris[, -5] \%>\%
-  prcomp(scale = TRUE) \%>\%
-  as_tbl_ord() \%>\%
-  confer_inertia(1) \%>\%
-  mutate_u(species = iris$Species) \%>\%
-  print() -> iris_pca
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_point(alpha = .5) +
-  stat_u_center(fun.center = "mean", size = 3, shape = "triangle") +
-  stat_u_ellipse(level = .99) +
-  geom_v_vector(color = "#444444") +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
-    "Overlaid with centroids and 99\% confidence ellipses"
-  )
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  geom_u_point() +
-  stat_u_center(fun.center = "mean", size = 3, shape = 1) +
-  geom_polygon(
-    aes(fill = species),
-    color = NA, alpha = .25, stat = "u_ellipse"
-  ) +
-  geom_v_vector(color = "#444444") +
-  scale_color_brewer(
-    type = "qual", palette = 2,
-    aesthetics = c("color", "fill")
-  ) +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
-    "Overlaid with 99\% confidence disks"
-  )
-# Scaled PCA of Anderson iris data with ranges and confidence intervals
-iris[, -5] \%>\%
-  prcomp(scale = TRUE) \%>\%
-  as_tbl_ord() \%>\%
-  confer_inertia(1) \%>\%
-  mutate_u(species = iris$Species) \%>\%
-  print() -> iris_pca
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_lineranges(fun.data = mean_sdl, size = .75) +
-  geom_u_point(alpha = .5) +
-  geom_v_vector(color = "#444444") +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
-    "Ranges 2 sample standard deviations from centroids"
-  )
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_lineranges(
-    fun.data = mean_cl_boot, fun.args = list(conf.int = .99),
-    size = .75
-  ) +
-  geom_u_point(alpha = .5) +
-  geom_v_vector(color = "#444444") +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
-    "99\% confidence intervals based on nonparametric bootstrap sampling"
-  )
+  geom_u_path(alpha = .6) +
+  #geom_u_text(aes(label = .name), alpha = .8) +
+  geom_label(aes(label = ifelse(as.integer(.name) \%\% 4L == 1L,
+                                .name, NA_character_),
+                 alpha = .6)) +
+  geom_v_vector(color = "darkred") +
+  geom_v_text_radiate(aes(label = .name), color = "darkred", alpha = 2/3) +
+  scale_size_area(guide = "none") +
+  guides(alpha = "none")
+# juxtapose plots
+plot(gridExtra::arrangeGrob(grobs = list(site_plot, site_env_biplot), ncol = 2))
 }

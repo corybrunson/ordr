@@ -11,7 +11,7 @@
 #'   means and standard deviations used to scale the matrix before running the
 #'   nipals algorithm.
 NULL
-
+ 
 #' @rdname lda-ord
 #' @export
 nipals_ord <- function(df, nf = 2, rec = FALSE, niter = 100, tol = 1e-9,

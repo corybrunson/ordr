@@ -6,9 +6,7 @@
 #' @name methods-nipals
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/country-prcomp-confer.r
-#' @example inst/examples/iris-prcomp-center-ellipse.r
-#' @example inst/examples/iris-prcomp-lineranges.r
+#' @example inst/examples/doubs-nipals-path.r
 NULL
 
 #' @rdname methods-nipals
@@ -22,11 +20,10 @@ reconstruct.nipals <- function(x) {
   if (! is.null(attr(x, "cmeans")) & ! is.null(attr(x, "csd"))) {
     res <- sweep(sweep(res, 2, attr(x, "cmeans"), "*"),
                  2, attr(x, "cmeans"), "+")
-    return(res)
   } else {
     warning("Scaling factors `cmeans` and `csd` were not recovered.")
-    return(res)
   }
+  return(res)
 }
 
 #' @rdname methods-nipals
