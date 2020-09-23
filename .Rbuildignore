@@ -17,3 +17,4 @@ cran-comments.md
 
 # custom files and directories
 ^sandbox$
+^ignore$
