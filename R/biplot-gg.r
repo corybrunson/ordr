@@ -1,12 +1,12 @@
 #' @title Biplots following the grammar of graphics
 #' 
 #' @description Build a biplot visualization from ordination data wrapped as a
-#' `tbl_ord` object.
+#' [tbl_ord] object.
 #' 
 
 #' @details
 #'
-#' `ggbiplot()` produces a [ggplot][ggplot2::ggplot] object from a `tbl_ord`
+#' `ggbiplot()` produces a [ggplot][ggplot2::ggplot] object from a [tbl_ord]
 #' object `ordination`. The baseline object is the default unadorned
 #' `"ggplot"`-class object `p` with the following differences from what
 #' [ggplot2::ggplot()] returns:
@@ -15,7 +15,9 @@
 #' `.matrix = "u"` or `.matrix = "v"` from the biplot.
 
 #' - `p$coordinates` is defaulted to [ggplot2::coord_equal()] in order to
-#' faithfully render the geometry of an ordination.
+#' faithfully render the geometry of an ordination. The optional parameters
+#' `xlim`, `ylim`, `expand`, and `clip` are passed to `coord_equal()` and
+#' default to its **ggplot2** defaults.
 
 #' - When `x` or `y` are mapped to coordinates of `ordination`, and if
 #' `axis.percents` is `TRUE`, `p$labels$x` or `p$labels$y` are defaulted to the
@@ -40,10 +42,11 @@
 
 #' @name ggbiplot
 #' @import ggplot2
-#' @param ordination A `[tbl_ord]`.
+#' @param ordination A [tbl_ord].
 #' @param mapping List of default aesthetic mappings to use for the biplot. The
 #'   default assigns the first two coordinates to the aesthetics `x` and `y`.
 #'   Other assignments must be supplied in each layer added to the plot.
+#' @inheritParams ggplot2::coord_equal
 #' @param axis.percents Whether to concatenate default axis labels with inertia
 #'   percentages.
 #' @param sec.axes Matrix factor character to specify a secondary set of axes.
@@ -56,14 +59,15 @@
 #' @param ... Additional arguments passed to [ggplot2::fortify()]; see
 #'   [fortify.tbl_ord()].
 #' @example inst/examples/mtcars-lm-isolines.r
-#' @example inst/examples/iris-princomp-sec.r
-#' @example inst/examples/finches-lpca-sec.r
+#' @example inst/examples/iris-princomp-secondary.r
+#' @example inst/examples/finches-lpca-secondary.r
 #' @seealso [ggplot2::ggplot2()]
 
 #' @rdname ggbiplot
 #' @export
 ggbiplot <- function(
   ordination = NULL, mapping = aes(x = 1, y = 2),
+  xlim = NULL, ylim = NULL, expand = TRUE, clip = "on",
   axis.percents = TRUE, sec.axes = NULL, scale.factor = NULL,
   scale_u = NULL, scale_v = NULL,
   ...
@@ -114,7 +118,7 @@ ggbiplot <- function(
     if (! is.null(ordination)) ordination <- dplyr::mutate_at(
       ordination,
       dplyr::vars(get_coord(ordination)),
-      dplyr::funs(ifelse(ordination$.matrix == sec.axes, . * scale.factor, .))
+      list(~ ifelse(ordination$.matrix == sec.axes, . * scale.factor, .))
     )
     
   }
@@ -140,7 +144,9 @@ ggbiplot <- function(
   }
   
   # synchronize the scales of the axes
-  p$coordinates <- coord_equal()
+  p$coordinates <- coord_equal(
+    xlim = xlim, ylim = ylim, expand = expand, clip = clip
+  )
   
   # assign default axis labels
   if (axis.percents) {
@@ -197,7 +203,7 @@ scale_ord <- function(ordination, .m, mapping, scale) {
   dplyr::mutate_at(
     ordination,
     dplyr::vars(stringr::str_remove(as.character(mapping[c("x", "y")]), "^~")),
-    dplyr::funs(ifelse(ordination$.matrix == .m, . * scale, .))
+    list(~ ifelse(ordination$.matrix == .m, . * scale, .))
   )
 }
 

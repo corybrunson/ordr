@@ -141,3 +141,6 @@ iris_pca \%>\%
     "99\% confidence intervals based on nonparametric bootstrap sampling"
   )
 }
+\author{
+Emily Paul
+}

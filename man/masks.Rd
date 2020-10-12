@@ -10,17 +10,44 @@
 \usage{
 cmdscale(d, k = 2, add = FALSE)
 
-logisticSVD(x, k = 2, quiet = TRUE, max_iters = 1000,
-  conv_criteria = 1e-05, random_start = FALSE, ...,
-  partial_decomp = TRUE, main_effects = TRUE)
+logisticSVD(
+  x,
+  k = 2,
+  quiet = TRUE,
+  max_iters = 1000,
+  conv_criteria = 1e-05,
+  random_start = FALSE,
+  ...,
+  partial_decomp = TRUE,
+  main_effects = TRUE
+)
 
-logisticPCA(x, k = 2, m = 4, quiet = TRUE, partial_decomp = FALSE,
-  max_iters = 1000, conv_criteria = 1e-05, random_start = FALSE, ...,
-  main_effects = TRUE)
+logisticPCA(
+  x,
+  k = 2,
+  m = 4,
+  quiet = TRUE,
+  partial_decomp = FALSE,
+  max_iters = 1000,
+  conv_criteria = 1e-05,
+  random_start = FALSE,
+  ...,
+  main_effects = TRUE
+)
 
-convexLogisticPCA(x, k = 2, m = 4, quiet = TRUE,
-  partial_decomp = FALSE, max_iters = 1000, conv_criteria = 1e-06,
-  random_start = FALSE, ..., main_effects = TRUE, ss_factor = 4)
+convexLogisticPCA(
+  x,
+  k = 2,
+  m = 4,
+  quiet = TRUE,
+  partial_decomp = FALSE,
+  max_iters = 1000,
+  conv_criteria = 1e-06,
+  random_start = FALSE,
+  ...,
+  main_effects = TRUE,
+  ss_factor = 4
+)
 }
 \arguments{
 \item{d}{a distance structure such as that returned by \code{dist}
@@ -66,5 +93,5 @@ specific class (e.g. \code{\link[stats:cmdscale]{stats::cmdscale()}}). Some othe
 is not self-contained, for instance missing annotation from the original
 dataset (e.g. \code{\link[logisticPCA:logisticPCA]{logisticPCA::logisticPCA()}}). The functions below wrap the
 originals with the minimal overhead necessary for complete functionality
-with the \code{"[tbl_ord]"} class.
+with the \link{tbl_ord} class.
 }

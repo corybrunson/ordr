@@ -7,21 +7,43 @@
 \alias{geom_biplot_point}
 \title{Render points at ordinates}
 \usage{
-geom_u_point(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", ..., na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
+geom_u_point(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
 
-geom_v_point(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", ..., na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
+geom_v_point(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
 
-geom_biplot_point(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", .matrix = "u", ..., na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE)
+geom_biplot_point(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  .matrix = "u",
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or
-\code{\link[=aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
+\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or
+\code{\link[ggplot2:aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
 default), it is combined with the default mapping at the top level of the
 plot. You must supply \code{mapping} if there is no plot mapping.}
 
@@ -29,11 +51,11 @@ plot. You must supply \code{mapping} if there is no plot mapping.}
 options:
 
 If \code{NULL}, the default, the data is inherited from the plot
-data as specified in the call to \code{\link[=ggplot]{ggplot()}}.
+data as specified in the call to \code{\link[ggplot2:ggplot]{ggplot()}}.
 
 A \code{data.frame}, or other object, will override the plot
 data. All objects will be fortified to produce a data frame. See
-\code{\link[=fortify]{fortify()}} for which variables will be created.
+\code{\link[ggplot2:fortify]{fortify()}} for which variables will be created.
 
 A \code{function} will be called with a single argument,
 the plot data. The return value must be a \code{data.frame}, and
@@ -59,14 +81,14 @@ display.}
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. \code{\link[=borders]{borders()}}.}
+the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 }
 \description{
-\code{geom_*_point()} renders symbols at the positions of the
+\verb{geom_*_point()} renders symbols at the positions of the
 subjects or vectors.
 }
 \section{Biplot layers}{
@@ -76,15 +98,15 @@ frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
 variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
 the data frame to one of these two.
 
-The geom layers \code{geom_u_*()} and \code{geom_v_*()} call the corresponding stat in
+The geom layers \verb{geom_u_*()} and \verb{geom_v_*()} call the corresponding stat in
 order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \code{geom_biplot_*()} selects a default matrix based on common practice,
+\eqn{V}. \verb{geom_biplot_*()} selects a default matrix based on common practice,
 e.g. \eqn{U} for points and \eqn{V} for arrows.
 }
 
 \section{Aesthetics}{
 
-\code{geom_*_point()} understands the following aesthetics (required aesthetics
+\verb{geom_*_point()} understands the following aesthetics (required aesthetics
 are in bold):
 \itemize{
 \item \strong{\code{x}}
@@ -119,7 +141,7 @@ bioenv_lm \%>\%
   scale_alpha_continuous(range = c(1/3, 1)) +
   geom_u_point() +
   geom_v_vector() +
-  geom_v_isolines(ids = 1, by = 5) +
+  geom_v_isolines(aes(intercept = `(Intercept)`), axes = 1, by = 5) +
   labs(x = "Standardized Depth", y = "Standardized Pollution") +
   ggtitle(
     "Gradient vector and contour lines for species 'd'",

@@ -9,6 +9,7 @@
 #' @example inst/examples/country-prcomp-confer.r
 #' @example inst/examples/iris-prcomp-center-ellipse.r
 #' @example inst/examples/iris-prcomp-lineranges.r
+#' @author Emily Paul
 NULL
 
 #' @rdname methods-prcomp
@@ -94,7 +95,7 @@ augmentation_v.prcomp <- function(x) {
 #' @export
 augmentation_coord.prcomp <- function(x) {
   tibble(
-    .name = recover_coord(x),
+    .name = factor_coord(recover_coord(x)),
     .sdev = x[["sdev"]]
   )
 }

@@ -12,19 +12,19 @@
 #' the extensions **ggbiplot** and **tidygraph**.
 #' 
 #' The package consists in several modules:
-#' - the `"tbl_ord"` class, a wrapper for various ordination object classes
+#' - the [tbl_ord] class, a wrapper for various ordination object classes
 #' - extracting [augmentation] for the factors of an ordination
 #' - using [dplyr-verbs] to add [annotation] to the factors of an ordination
 #' - manipulating the coordinates of an ordination via [alignment] with other
 #' objects and [conference] of inertia
 #' - methods of the above generics for several widely-used ordination object
 #' classes
-#' - convenient [formatting] of ordination objects that respects the above
+#' - convenient [formatting][format] of ordination objects that respects the above
 #' manipulations
 #' - [ggbiplot], a **ggplot2** extension for rendering biplots, including
-#' several plot layers, integrated with the `"tbl_ord"` class
+#' several plot layers, integrated with the tbl_ord class
 
-#' @section Ordinations and biplots
+#' @section Ordinations and biplots:
 
 #' _Ordination_ encompasses a variety of techniques for data compression,
 #' dimension reduction, feature extraction, and visualization. Well-known
@@ -43,7 +43,7 @@
 #'
 #' 
 
-#' @section Singular value decomposition
+#' @section Singular value decomposition:
 
 #' The most popular ordination techniques use singular value decomposition (SVD)
 #' to factor a data matrix \eqn{X} into a product \eqn{X=UDV'} of two orthogonal

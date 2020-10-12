@@ -6,7 +6,9 @@
 \alias{country_differences}
 \alias{country_attributes}
 \title{Student ratings of similarities and attributes of 13 countries}
-\format{\link[base:matrix]{Matrices}.}
+\format{
+\link[base:matrix]{Matrices}.
+}
 \source{
 Greenacre (2010), pp. 43--44,46.
 }

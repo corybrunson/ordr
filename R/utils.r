@@ -42,6 +42,11 @@ tibble_pole <- function(nrow) {
   as_tibble(matrix(nrow = nrow, ncol = 0))
 }
 
+factor_coord <- function(x) {
+  if (any(duplicated(x))) stop("Duplicated coordinates detected.")
+  factor(x, levels = x)
+}
+
 # `ggbiplot` utilities
 
 matrix_stat <- function(.matrix, stat) {
@@ -49,7 +54,6 @@ matrix_stat <- function(.matrix, stat) {
   if (stat == "identity") return(.matrix)
   stringr::str_c(.matrix, stat, sep = "_")
 }
-
 u_stat <- function(stat) matrix_stat("u", stat)
 v_stat <- function(stat) matrix_stat("v", stat)
 
@@ -59,4 +63,16 @@ setup_u_data <- function(data, params) {
 
 setup_v_data <- function(data, params) {
   data[data$.matrix == "v", -match(".matrix", names(data)), drop = FALSE]
+}
+
+family_arg <- function(family_fun) {
+  if (! is.null(family_fun)) {
+    if (is.character(family_fun)) {
+      family_fun <- get(family_fun, mode = "function", envir = parent.frame())
+    }
+    if (is.function(family_fun)) {
+      family_fun <- family_fun()
+    }
+  }
+  family_fun
 }

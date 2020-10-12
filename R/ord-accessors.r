@@ -21,7 +21,7 @@
 
 #' @name accessors
 #' @include utils.r
-#' @param x A `[tbl_ord]`, or an ordination object coercible to one.
+#' @param x A [tbl_ord], or an ordination object coercible to one.
 #' @param ... Additional arguments from [base::as.matrix()]; ignored.
 #' @template param-matrix
 #' @param .supplement Logical; whether to include

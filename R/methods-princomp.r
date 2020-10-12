@@ -7,7 +7,8 @@
 #' @include ord-tbl.r
 #' @template param-methods
 #' @example inst/examples/iris-princomp-center-star.r
-#' @example inst/examples/iris-princomp-sec.r
+#' @example inst/examples/iris-princomp-secondary.r
+#' @author Emily Paul
 NULL
 
 #' @rdname methods-princomp
@@ -87,7 +88,7 @@ augmentation_v.princomp <- function(x) {
 #' @export
 augmentation_coord.princomp <- function(x) {
   tibble(
-    .name = recover_coord.princomp(x),
+    .name = factor_coord(recover_coord.princomp(x)),
     .sdev = x[["sdev"]]
   )
 }

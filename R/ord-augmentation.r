@@ -1,4 +1,4 @@
-#' @title Augment metadata on the factors and coordinates of ordination objects
+#' @title Augment metadata on the factors and coordinates of tbl_ords
 #'
 #' @description These functions return data associated with the cases,
 #'   variables, and coordinates of an ordination object, and attach it to the
@@ -8,7 +8,7 @@
 #' @details
 #'
 #' The `augmentation_*()` methods produce [tibble][tibble::tibble]s of values
-#' associated with the rows, columns, and coordinates of a `tbl_ord` object. The
+#' associated with the rows, columns, and coordinates of a [tbl_ord] object. The
 #' first field of each tibble is `.name`, which contains the case, variable, or
 #' coordinate names. Additional fields contain information about the cases,
 #' variables, or coordinates extracted from the original ordination object.
@@ -16,11 +16,11 @@
 #' The `augment_*()` functions return the ordination with either or both factors
 #' annotated with the result of `augmentation_*()`. In this way `augment_*()`
 #' works like [generics::augment()] by extracting information for a tidy summary
-#' of the components, but it differs in returning an annotated `tbl_ord` rather
-#' than a `tbl_df`. The advantage of implementing separate methods for the
-#' different components is that more information contained in the original
-#' object becomes accessible to the user. To achieve a result similar to that of
-#' [generics::augment()], use [fortify()].
+#' of the components, but it differs in returning an annotated tbl_ord rather
+#' than a [tbl_df][tibble::tbl_df]. The advantage of implementing separate
+#' methods for the different components is that more information contained in
+#' the original object becomes accessible to the user. To achieve a result
+#' similar to that of [generics::augment()], use [fortify()].
 #' 
 
 #' @name augmentation
@@ -107,7 +107,13 @@ augment_annotation <- function(x, .matrix) {
     ann <- ann[, -which(! is.na(match_names)), drop = FALSE]
   }
   # place augmentation variables first, for consistency
-  bind_cols(aug, ann)
+  if (ncol(ann) == 0L) {
+    aug
+  } else if (ncol(aug) == 0L) {
+    ann
+  } else {
+    bind_cols(aug, ann)
+  }
 }
 
 augment_factor <- function(x, .matrix) {

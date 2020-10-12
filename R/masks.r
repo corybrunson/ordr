@@ -5,7 +5,7 @@
 #'   is not self-contained, for instance missing annotation from the original
 #'   dataset (e.g. [logisticPCA::logisticPCA()]). The functions below wrap the
 #'   originals with the minimal overhead necessary for complete functionality
-#'   with the `"[tbl_ord]"` class.
+#'   with the [tbl_ord] class.
 
 #' @name masks
 #' @importFrom logisticPCA logisticPCA logisticSVD

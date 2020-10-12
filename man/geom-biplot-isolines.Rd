@@ -3,47 +3,80 @@
 \docType{data}
 \name{geom-biplot-isolines}
 \alias{geom-biplot-isolines}
-\alias{GeomTicks}
-\alias{geom_u_ticks}
-\alias{geom_v_ticks}
-\alias{geom_biplot_ticks}
 \alias{GeomIsolines}
+\alias{geom_isolines}
 \alias{geom_u_isolines}
 \alias{geom_v_isolines}
 \alias{geom_biplot_isolines}
 \title{Render isolines for a subject or variable}
-\format{An object of class \code{GeomTicks} (inherits from \code{GeomSegment}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.}
+\format{
+An object of class \code{GeomIsolines} (inherits from \code{GeomAbline}, \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
+}
 \usage{
-geom_u_ticks(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", family = NULL, ids = 1L, by = 1,
-  ticks.length = 0.05, ..., na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
+geom_isolines(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  axes = NULL,
+  calibrate = TRUE,
+  family_fun = NULL,
+  by = NULL,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
 
-geom_v_ticks(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", family = NULL, ids = 1L, by = 1,
-  ticks.length = 0.05, ..., na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
+geom_u_isolines(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  axes = NULL,
+  calibrate = TRUE,
+  family_fun = NULL,
+  by = NULL,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
 
-geom_biplot_ticks(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", .matrix = "v", family = NULL, ids = 1L,
-  by = 1, ticks.length = 0.05, ..., na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE)
+geom_v_isolines(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  axes = NULL,
+  calibrate = TRUE,
+  family_fun = NULL,
+  by = NULL,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
 
-geom_u_isolines(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", family = NULL, ids = 1L, by = 1, ...,
-  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
-
-geom_v_isolines(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", family = NULL, ids = 1L, by = 1, ...,
-  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
-
-geom_biplot_isolines(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", .matrix = "v", family = NULL, ids = 1L,
-  by = 1, ..., na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+geom_biplot_isolines(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  .matrix = "v",
+  axes = NULL,
+  calibrate = TRUE,
+  family_fun = NULL,
+  by = NULL,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or
-\code{\link[=aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
+\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or
+\code{\link[ggplot2:aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
 default), it is combined with the default mapping at the top level of the
 plot. You must supply \code{mapping} if there is no plot mapping.}
 
@@ -51,11 +84,11 @@ plot. You must supply \code{mapping} if there is no plot mapping.}
 options:
 
 If \code{NULL}, the default, the data is inherited from the plot
-data as specified in the call to \code{\link[=ggplot]{ggplot()}}.
+data as specified in the call to \code{\link[ggplot2:ggplot]{ggplot()}}.
 
 A \code{data.frame}, or other object, will override the plot
 data. All objects will be fortified to produce a data frame. See
-\code{\link[=fortify]{fortify()}} for which variables will be created.
+\code{\link[ggplot2:fortify]{fortify()}} for which variables will be created.
 
 A \code{function} will be called with a single argument,
 the plot data. The return value must be a \code{data.frame}, and
@@ -68,18 +101,15 @@ layer, as a string.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{family}{A family function or a character string naming one, to
-transform the values along the axis at which to render isolines or tick
-marks.}
+\item{axes}{Indices of axes for which to render elements.}
 
-\item{ids}{Row indices of the subjects or variables for which isolines or
-tick marks will be rendered.}
+\item{calibrate}{Logical; whether to calibrate axis scales for inner product
+interpretability.}
 
-\item{by}{Interval length between isolines or tick marks, in the units of the
-ordination.}
+\item{family_fun}{A family function, or a character string naming one, to
+transform the values along the axis at which to render elements.}
 
-\item{ticks.length}{Numeric; the length of the tick marks, as a proportion of
-the plot width.}
+\item{by}{Interval length between elements, in the units of the ordination.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
@@ -94,14 +124,14 @@ display.}
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. \code{\link[=borders]{borders()}}.}
+the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 }
 \description{
-\code{geom_*_isolines()} renders isolines for a specified subject or
+\verb{geom_*_isolines()} renders isolines for a specified subject or
 variable.
 }
 \section{Biplot layers}{
@@ -111,15 +141,15 @@ frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
 variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
 the data frame to one of these two.
 
-The geom layers \code{geom_u_*()} and \code{geom_v_*()} call the corresponding stat in
+The geom layers \verb{geom_u_*()} and \verb{geom_v_*()} call the corresponding stat in
 order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \code{geom_biplot_*()} selects a default matrix based on common practice,
+\eqn{V}. \verb{geom_biplot_*()} selects a default matrix based on common practice,
 e.g. \eqn{U} for points and \eqn{V} for arrows.
 }
 
 \section{Aesthetics}{
 
-\code{geom_*_isolines()} and \code{geom_*_ticks()} understand the following aesthetics
+\verb{geom_*_isolines()} understands the following aesthetics
 (required aesthetics are in bold):
 \itemize{
 \item \strong{\code{x}}
@@ -143,11 +173,10 @@ mtcars \%>\%
   mutate_u(influence = .wt.res^2) \%>\%
   print() -> mtcars_lm
 mtcars_lm \%>\%
-  ggbiplot(aes(x = wt, y = cyl)) +
+  ggbiplot(aes(x = wt, y = cyl, intercept = `(Intercept)`)) +
   geom_u_point(aes(color = influence)) +
   geom_v_vector() +
-  # weight isolines
-  geom_v_isolines(ids = 1, by = 5) +
+  geom_v_isolines(axes = 1, by = 5) +
   ggtitle(
     "Weight isolines with data colored by importance",
     "Regressing mpg onto weight and number of cylinders"
@@ -170,7 +199,7 @@ bioenv_lm \%>\%
   scale_alpha_continuous(range = c(1/3, 1)) +
   geom_u_point() +
   geom_v_vector() +
-  geom_v_isolines(ids = 1, by = 5) +
+  geom_v_isolines(aes(intercept = `(Intercept)`), axes = 1, by = 5) +
   labs(x = "Standardized Depth", y = "Standardized Pollution") +
   ggtitle(
     "Gradient vector and contour lines for species 'd'",

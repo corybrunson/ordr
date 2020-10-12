@@ -81,3 +81,6 @@ iris_pca \%>\%
     "Variable loadings scaled to secondary axes"
   )
 }
+\author{
+Emily Paul
+}

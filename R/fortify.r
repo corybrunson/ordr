@@ -1,24 +1,30 @@
-#' @title Fortify a `tbl_ord` for plotting
+#' @title Fortify a tbl_ord for plotting
 #'
 #' @description These methods of [ggplot2::fortify()] and [generics::tidy()]
-#'   convert a `[tbl_ord]` object to a [tbl_df][tibble::tbl_df] object.
+#'   convert a [tbl_ord] object to a [tbl_df][tibble::tbl_df] object.
 #'   
 
 #' @details
-#' 
-#' The `fortify()` and `tidy()` methods for `tbl_ord` objects produce the same
+#'
+#' The `fortify()` and `tidy()` methods for tbl_ord objects produce the same
 #' output, a [tibble][tibble::tibble] obtained by binding columns obtained via
 #' [`get_*()`][accessors], [`annotation_*()`][annotation], and
 #' [`augmentation_*`][augmentation], respectively.
 #'
-#' If any augmented variables are included
-#' (i.e. unless `include = "coordinates"`),
-#' then the tibble is assigned a `"coordinates"` attribute
-#' whose value is obtained via [get_coord()].
-#' (Note that this attribute will not be printed with the tibble.)
+#' In the special case `.matrix = "coordinates"`, the tibble consists instead of
+#' the artificial coordinates and associated metadata, often including the
+#' proportion of variance explained or captured by each. This can be used to
+#' produce scree plots, for example.
+#'
+#' If any augmented variables are included (i.e. unless `include =
+#' "coordinates"`), then the tibble is assigned a `"coordinates"` attribute
+#' whose value is obtained via [get_coord()]. (That this attribute will not be
+#' printed with the tibble.) This facilitates some downstream functionality that
+#' relies on more than those coordinates used as position aesthetics in a
+#' biplot, in particular [stat_spantree()].
 
 #' @name fortify
-#' @param model,x A `[tbl_ord]` object.
+#' @param model,x A [tbl_ord] object.
 #' @param data Ignored.
 #' @param ... Additional arguments received from `fortify()` or `tidy()`;
 #'   ignored.
@@ -29,7 +35,7 @@
 #'   whether the fortified data frame should include only the ordination
 #'   coordinates or also augmented case and variable data, and, if the latter,
 #'   whether only shared fields or all from both.
-#' @example inst/examples/ex-fortify.r
+#' @example inst/examples/arrests-pca-fortify.r
 #' @example inst/examples/diabetes-lda-supplement.r
 
 #' @rdname fortify

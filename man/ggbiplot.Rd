@@ -5,18 +5,46 @@
 \alias{ord_aes}
 \title{Biplots following the grammar of graphics}
 \usage{
-ggbiplot(ordination = NULL, mapping = aes(x = 1, y = 2),
-  axis.percents = TRUE, sec.axes = NULL, scale.factor = NULL,
-  scale_u = NULL, scale_v = NULL, ...)
+ggbiplot(
+  ordination = NULL,
+  mapping = aes(x = 1, y = 2),
+  xlim = NULL,
+  ylim = NULL,
+  expand = TRUE,
+  clip = "on",
+  axis.percents = TRUE,
+  sec.axes = NULL,
+  scale.factor = NULL,
+  scale_u = NULL,
+  scale_v = NULL,
+  ...
+)
 
 ord_aes(ordination, ...)
 }
 \arguments{
-\item{ordination}{A \code{[tbl_ord]}.}
+\item{ordination}{A \link{tbl_ord}.}
 
 \item{mapping}{List of default aesthetic mappings to use for the biplot. The
 default assigns the first two coordinates to the aesthetics \code{x} and \code{y}.
 Other assignments must be supplied in each layer added to the plot.}
+
+\item{xlim}{Limits for the x and y axes.}
+
+\item{ylim}{Limits for the x and y axes.}
+
+\item{expand}{If \code{TRUE}, the default, adds a small expansion factor to
+the limits to ensure that data and axes don't overlap. If \code{FALSE},
+limits are taken exactly from the data or \code{xlim}/\code{ylim}.}
+
+\item{clip}{Should drawing be clipped to the extent of the plot panel? A
+setting of \code{"on"} (the default) means yes, and a setting of \code{"off"}
+means no. In most cases, the default of \code{"on"} should not be changed,
+as setting \code{clip = "off"} can cause unexpected results. It allows
+drawing of data points anywhere on the plot, including in the plot margins. If
+limits are set via \code{xlim} and \code{ylim} and some data points fall outside those
+limits, then those data points may show up in places such as the axes, the
+legend, the plot title, or the plot margins.}
 
 \item{axis.percents}{Whether to concatenate default axis labels with inertia
 percentages.}
@@ -36,18 +64,20 @@ the primary axes; ignored if \code{sec.axes} is not specified.}
 }
 \description{
 Build a biplot visualization from ordination data wrapped as a
-\code{tbl_ord} object.
+\link{tbl_ord} object.
 }
 \details{
-\code{ggbiplot()} produces a \link[ggplot2:ggplot]{ggplot} object from a \code{tbl_ord}
+\code{ggbiplot()} produces a \link[ggplot2:ggplot]{ggplot} object from a \link{tbl_ord}
 object \code{ordination}. The baseline object is the default unadorned
 \code{"ggplot"}-class object \code{p} with the following differences from what
 \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} returns:
 \itemize{
 \item \code{p$mapping} is augmented with \code{.matrix = .matrix}, which expects either
 \code{.matrix = "u"} or \code{.matrix = "v"} from the biplot.
-\item \code{p$coordinates} is defaulted to \code{\link[ggplot2:coord_equal]{ggplot2::coord_equal()}} in order to
-faithfully render the geometry of an ordination.
+\item \code{p$coordinates} is defaulted to \code{\link[ggplot2:coord_fixed]{ggplot2::coord_equal()}} in order to
+faithfully render the geometry of an ordination. The optional parameters
+\code{xlim}, \code{ylim}, \code{expand}, and \code{clip} are passed to \code{coord_equal()} and
+default to its \strong{ggplot2} defaults.
 \item When \code{x} or \code{y} are mapped to coordinates of \code{ordination}, and if
 \code{axis.percents} is \code{TRUE}, \code{p$labels$x} or \code{p$labels$y} are defaulted to the
 coordinate names concatenated with the percentages of \link[=conference]{inertia}
@@ -72,9 +102,9 @@ frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
 variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
 the data frame to one of these two.
 
-The geom layers \code{geom_u_*()} and \code{geom_v_*()} call the corresponding stat in
+The geom layers \verb{geom_u_*()} and \verb{geom_v_*()} call the corresponding stat in
 order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \code{geom_biplot_*()} selects a default matrix based on common practice,
+\eqn{V}. \verb{geom_biplot_*()} selects a default matrix based on common practice,
 e.g. \eqn{U} for points and \eqn{V} for arrows.
 }
 
@@ -89,11 +119,10 @@ mtcars \%>\%
   mutate_u(influence = .wt.res^2) \%>\%
   print() -> mtcars_lm
 mtcars_lm \%>\%
-  ggbiplot(aes(x = wt, y = cyl)) +
+  ggbiplot(aes(x = wt, y = cyl, intercept = `(Intercept)`)) +
   geom_u_point(aes(color = influence)) +
   geom_v_vector() +
-  # weight isolines
-  geom_v_isolines(ids = 1, by = 5) +
+  geom_v_isolines(axes = 1, by = 5) +
   ggtitle(
     "Weight isolines with data colored by importance",
     "Regressing mpg onto weight and number of cylinders"
@@ -175,5 +204,5 @@ finches_clpca \%>\%
   )
 }
 \seealso{
-\code{\link[ggplot2:ggplot2]{ggplot2::ggplot2()}}
+\code{\link[ggplot2:ggplot2-package]{ggplot2::ggplot2()}}
 }

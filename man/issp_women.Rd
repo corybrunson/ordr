@@ -3,7 +3,9 @@
 \name{issp_women}
 \alias{issp_women}
 \title{Original respondent-level data from Spanish ISSP sample}
-\format{A \link[base:matrix]{matrix}.}
+\format{
+A \link[base:matrix]{matrix}.
+}
 \source{
 Greenacre (2010).
 }

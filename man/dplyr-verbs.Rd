@@ -17,7 +17,7 @@
 \alias{bind_cols_v}
 \alias{left_join_u}
 \alias{left_join_v}
-\title{\strong{dplyr} verbs for \code{tbl_ord} factors}
+\title{\strong{dplyr} verbs for tbl_ord factors}
 \usage{
 pull_factor(.data, var = -1, .matrix)
 
@@ -50,7 +50,7 @@ left_join_u(.data, ...)
 left_join_v(.data, ...)
 }
 \arguments{
-\item{.data}{A \code{[tbl_ord]} object.}
+\item{.data}{A \link{tbl_ord} object.}
 
 \item{var}{A variable specified as in \code{\link[dplyr:pull]{dplyr::pull()}}.}
 
@@ -62,11 +62,11 @@ standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 \code{\link[dplyr:select]{dplyr::select()}}.}
 }
 \description{
-These functions adapt \link[dplyr:dplyr]{dplyr} verbs to the factors
-of a \code{tbl_ord}. The raw verbs are not defined for \code{tbl_ord}s; instead, each
+These functions adapt \link[dplyr:dplyr-package]{dplyr} verbs to the factors
+of a \link{tbl_ord}. The raw verbs are not defined for tbl_ords; instead, each
 verb has two analogues, corresponding to the two matrix factors. They each
 rely on a common workhorse function, which takes the composition of the
-\strong{dplyr} verb with \code{annotation_*}, applied to the factor, removes any
+\strong{dplyr} verb with \verb{annotation_*}, applied to the factor, removes any
 variables corresponding to coordinates or already annotated, and only then
 assigns it as the new \code{"*_annotation"} attribute of \code{.data} (see
 \link{annotation}).

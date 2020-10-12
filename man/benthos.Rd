@@ -3,7 +3,9 @@
 \name{benthos}
 \alias{benthos}
 \title{Marine species from sea-bed (benthic) samples}
-\format{A \link[base:matrix]{matrix}.}
+\format{
+A \link[base:matrix]{matrix}.
+}
 \source{
 Greenacre (2010).
 }

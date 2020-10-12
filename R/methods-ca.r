@@ -88,7 +88,7 @@ augmentation_v.ca <- function(x){
 #' @export
 augmentation_coord.ca <- function(x){
   tibble(
-    .name = recover_coord(x),
+    .name = factor_coord(recover_coord(x)),
     .sv = x$sv
   )
 }

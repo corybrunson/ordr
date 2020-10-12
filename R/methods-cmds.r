@@ -83,7 +83,7 @@ augmentation_v.cmds <- function(x) {
 #' @export
 augmentation_coord.cmds <- function(x) {
   tibble(
-    .name = recover_coord(x),
+    .name = factor_coord(recover_coord(x)),
     .eig = x$eig[1:ncol(x$points)]
   )
 }

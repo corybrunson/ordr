@@ -6,7 +6,7 @@ bioenv <- bioenv %>%
     x = (Depth - mean(Depth)) / sd(Depth),
     y = (Pollution - mean(Pollution)) / sd(Pollution)
   ) %>%
-  mutate_at(vars(a:e), funs(p = ifelse(. > 0, 1L, 0L)))
+  mutate_at(vars(a:e), list(~ p = ifelse(. > 0, 1L, 0L)))
 
 m <- glm(
   formula = d ~ x + y, family = gaussian(power(.25)), data = bioenv,

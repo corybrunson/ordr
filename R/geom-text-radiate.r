@@ -2,8 +2,8 @@
 #' 
 
 #' @description `geom_*_text_radiate()` is adapted from [ggbiplot::ggbiplot()].
-#'   It renders labels at specified positions and angles that radiate out from
-#'   the origin.
+#'   It renders text at specified positions and angles that radiate out from the
+#'   origin.
 #' @template biplot-layers
 
 #' @section Aesthetics:
@@ -51,11 +51,32 @@ GeomTextRadiate <- ggproto(
     data$hjust <- 0.5 + (data$hjust - 0.625 - 0.5) * sign(data$x)
     data$angle <- as.numeric(data$angle) + (180 / pi) * atan(data$y / data$x)
     
-    ggplot2::GeomText$draw_panel(
-      data = data, panel_params = panel_params, coord = coord,
-      parse = parse,
-      na.rm = na.rm,
-      check_overlap = check_overlap
+    lab <- data$label
+    if (parse) {
+      lab <- parse_safe(as.character(lab))
+    }
+    
+    data <- coord$transform(data, panel_params)
+    if (is.character(data$vjust)) {
+      data$vjust <- compute_just(data$vjust, data$y)
+    }
+    if (is.character(data$hjust)) {
+      data$hjust <- compute_just(data$hjust, data$x)
+    }
+    
+    grid::textGrob(
+      lab,
+      data$x, data$y, default.units = "native",
+      hjust = data$hjust, vjust = data$vjust,
+      rot = data$angle,
+      gp = grid::gpar(
+        col = alpha(data$colour, data$alpha),
+        fontsize = data$size * .pt,
+        fontfamily = data$family,
+        fontface = data$fontface,
+        lineheight = data$lineheight
+      ),
+      check.overlap = check_overlap
     )
   }
 )

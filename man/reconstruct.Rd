@@ -3,14 +3,14 @@
 \name{reconstruct}
 \alias{reconstruct}
 \alias{reconstruct.list}
-\title{Reconstruct data from an ordination}
+\title{Reconstruct data from a tbl_ord}
 \usage{
 reconstruct(x)
 
 \method{reconstruct}{list}(x)
 }
 \arguments{
-\item{x}{A \code{tbl_ord} object, or an object coercible to one.}
+\item{x}{A \link{tbl_ord} object, or an object coercible to one.}
 }
 \description{
 This convenience function reconstructs an approximation to the

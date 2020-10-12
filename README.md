@@ -76,12 +76,16 @@ integrate ordination models into practice.
 ### installation
 
 **ordr** remains under development and is not scheduled for a CRAN
-release. For now, it can be installed using
-[**remotes**](https://github.com/r-lib/remotes):
+release. For now, it can be installed from the (default) `main` branch
+using [**remotes**](https://github.com/r-lib/remotes):
 
 ``` r
-remotes::install_github("corybrunson/ordr")
+remotes::install_github("corybrunson/ordr@main")
 ```
+
+The `master` branch exists only as the required source from which to
+build [the website](https://corybrunson.github.io/ordr/), and will be
+discontinued once GitHub Pages enables building from the default branch.
 
 ### PCA example
 
@@ -101,10 +105,10 @@ USPersonalExpenditure
 #> Private Education    0.341  0.974  1.80  2.6  3.64
 # perform principal components analysis
 (spend_pca <- prcomp(USPersonalExpenditure, center = FALSE))
-#> Standard deviations:
+#> Standard deviations (1, .., p=5):
 #> [1] 78.04471215  3.95649695  1.26733701  0.18412188  0.04367521
 #> 
-#> Rotation:
+#> Rotation (n x k) = (5 x 5):
 #>             PC1         PC2        PC3         PC4         PC5
 #> 1940 -0.1589586  0.11313761  0.1824780 -0.89728506 -0.35144462
 #> 1945 -0.3016855  0.79223017 -0.5274149  0.02654943  0.04985844
@@ -211,6 +215,7 @@ ggbiplot(spend_pca, aes(label = .name)) +
     "U.S. Personal Expenditure data, 1940-1960",
     "Symmetric biplot of un-centered PCA"
   )
+#> Warning: `expand_scale()` is deprecated; use `expansion()` instead.
 ```
 
 ![](man/figures/README-PCA%20example-1.png)<!-- -->
@@ -227,7 +232,8 @@ that **ordr** masks `stats::cmdscale()` with a wrapper that always
 returns the eigenvalues and the symmetric distance matrix produced
 during the calculation. The MDS uses 11 coordinates—the number of
 positive eigenvalues—so that `stat_*_spanningtree()` can call upon them
-to recover the intercity distances.
+to recover the intercity
+distances.
 
 ``` r
 # `tbl_ord` object for a classical MDS on distances between European cities
@@ -235,7 +241,7 @@ eurodist %>%
   cmdscale(k = 11) %>%
   as_tbl_ord() %>%
   augment() %>%
-  negate(2) %>%
+  negate_ord(2) %>%
   print() -> city_mds
 #> # A tbl_ord of class 'cmds': (21 x 11) x (21 x 11)'
 #> # 11 coordinates, transformed: PCo1, PCo2, ..., PCo11

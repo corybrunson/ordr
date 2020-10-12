@@ -1,4 +1,4 @@
-#' @title Reconstruct data from an ordination
+#' @title Reconstruct data from a tbl_ord
 #'
 #' @description This convenience function reconstructs an approximation to the
 #'   (possibly transformed) original data matrix from the ordination factors and
@@ -6,7 +6,7 @@
 #'   understanding how ordinations are obtained from data.
 
 #' @name reconstruct
-#' @param x A `tbl_ord` object, or an object coercible to one.
+#' @param x A [tbl_ord] object, or an object coercible to one.
 NULL
 
 #' @rdname reconstruct

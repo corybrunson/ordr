@@ -6,7 +6,7 @@
 
 #' @section Aesthetics:
 
-#' `geom_*_isolines()` and `geom_*_ticks()` understand the following aesthetics
+#' `geom_*_isolines()` understands the following aesthetics
 #' (required aesthetics are in bold):
 
 #' - **`x`**
@@ -22,172 +22,17 @@
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
-#' @param family A family function or a character string naming one, to
-#'   transform the values along the axis at which to render isolines or tick
-#'   marks.
-#' @param ids Row indices of the subjects or variables for which isolines or
-#'   tick marks will be rendered.
-#' @param by Interval length between isolines or tick marks, in the units of the
-#'   ordination.
-#' @param ticks.length Numeric; the length of the tick marks, as a proportion of
-#'   the plot width.
+#' @param axes Indices of axes for which to render elements.
+#' @param calibrate Logical; whether to calibrate axis scales for inner product
+#'   interpretability.
+#' @param family_fun A family function, or a character string naming one, to
+#'   transform the values along the axis at which to render elements.
+#' @param by Interval length between elements, in the units of the ordination.
 #' @template param-matrix
 #' @example inst/examples/mtcars-lm-isolines.r
 #' @example inst/examples/bioenv-lm-isolines.r
 #' @example inst/examples/bioenv-glm-isolines.r
 NULL
-
-#' @rdname geom-biplot-isolines
-#' @usage NULL
-#' @export
-GeomTicks <- ggproto(
-  "GeomTicks", GeomSegment,
-  
-  required_aes = c("x", "y"),
-  default_aes = aes(
-    colour = "black", size = .5, linetype = "solid", alpha = 1
-  ),
-  
-  draw_panel = function(
-    data, panel_params, coord,
-    family = NULL, ids = 1L, by = 1,
-    ticks.length = .05
-  ) {
-    if (! is.null(family)) {
-      if (! "intercept" %in% names(data)) {
-        data$intercept <- 0
-        warning("No 'intercept' aesthetic provided; it has been set to zero.")
-      }
-    }
-    
-    ranges <- coord$range(panel_params)
-    
-    if (is.null(ids)) ids <- 1L
-    # process 'family' argument
-    family <- family_arg(family)
-    
-    # convert to intercepts and slopes
-    data <- do.call(rbind, lapply(ids, function(i) {
-      # vector
-      w_i <- unname(unlist(data[i, c("x", "y")]))
-      # calibrated vector
-      c_i <- w_i / sum(w_i ^ 2)
-      
-      # intercept (`NULL` with `family`)
-      intercept <- if (! is.null(family)) data$intercept[i]
-      
-      # plot range of isolines along calibrated vector
-      ran <- axis_range(c_i, ranges$x, ranges$y)
-      
-      # calculate positions of tick marks
-      k_i <- axis_positions(ran, family, by, intercept)
-      
-      # slope of tick marks
-      m_i <- - w_i[1] / w_i[2]
-      # unit vector in tick mark direction
-      u_i <- c(-w_i[2], w_i[1]) / sum(w_i ^ 2)
-      # component of final data frame from this original axis
-      suppressWarnings(data.frame(
-        x =    k_i * c_i[1] + u_i[1] * ticks.length * diff(ranges$y),
-        xend = k_i * c_i[1] - u_i[1] * ticks.length * diff(ranges$y),
-        y =    k_i * c_i[2] + u_i[2] * ticks.length * diff(ranges$y),
-        yend = k_i * c_i[2] - u_i[2] * ticks.length * diff(ranges$y),
-        data[i, -match(c("x", "y"), names(data))]
-      ))
-    }))
-    
-    GeomSegment$draw_panel(
-      data = data, panel_params = panel_params, coord = coord
-    )
-  }
-)
-
-#' @rdname geom-biplot-isolines
-#' @export
-geom_u_ticks <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  family = NULL, ids = 1L, by = 1,
-  ticks.length = .05,
-  ...,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = u_stat(stat),
-    geom = GeomTicks,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = na.rm,
-      family = family,
-      ids = ids,
-      by = by,
-      ticks.length = ticks.length,
-      ...
-    )
-  )
-}
-
-#' @rdname geom-biplot-isolines
-#' @export
-geom_v_ticks <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  family = NULL, ids = 1L, by = 1,
-  ticks.length = .05,
-  ...,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = v_stat(stat),
-    geom = GeomTicks,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = na.rm,
-      family = family,
-      ids = ids,
-      by = by,
-      ticks.length = ticks.length,
-      ...
-    )
-  )
-}
-
-#' @rdname geom-biplot-isolines
-#' @export
-geom_biplot_ticks <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "v", family = NULL, ids = 1L, by = 1,
-  ticks.length = .05,
-  ...,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = matrix_stat(.matrix, stat),
-    geom = GeomTicks,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = na.rm,
-      family = family,
-      ids = ids,
-      by = by,
-      ticks.length = ticks.length,
-      ...
-    )
-  )
-}
 
 #' @rdname geom-biplot-isolines
 #' @usage NULL
@@ -200,53 +45,129 @@ GeomIsolines <- ggproto(
     colour = "black", size = .5, linetype = "dashed", alpha = .5
   ),
   
-  draw_panel = function(
-    data, panel_params, coord,
-    family = NULL, ids = 1L, by = 1
-  ) {
-    if (! is.null(family)) {
+  setup_data = function(data, params) {
+    
+    # by default, render elements for all axes
+    if (! is.null(params$axes)) data <- data[params$axes, , drop = FALSE]
+    
+    # slopes
+    data$slope <- data$y / data$x
+    
+    # axis scales
+    if (params$calibrate) {
+      data <- transform(data, ss = x^2 + y^2)
+      data <- transform(data, xunit = x / ss, yunit = y / ss)
+      data$ss <- NULL
+    } else {
+      data <- transform(data, xunit = x, yunit = y)
+    }
+    data <- transform(data, ssunit = xunit^2 + yunit^2)
+    # remove position columns
+    # (prevent coordinates from affecting position limits)
+    data$x <- NULL
+    data$y <- NULL
+    data$ss <- NULL
+    
+    # ensure intercept column (zero is appropriate for null family)
+    if (params$calibrate) {
       if (! "intercept" %in% names(data)) {
         data$intercept <- 0
-        warning("No 'intercept' aesthetic provided; it has been set to zero.")
+        if (! is.null(params$family_fun)) {
+          warning("No `intercept` aesthetic provided; it has been set to zero.")
+        }
+      }
+    } else {
+      if ("intercept" %in% names(data)) {
+        warning("Axis is not calibrated, so `intercept` will be ignored.")
+      }
+      if (! is.null(params$family_fun)) {
+        warning("Axis is not calibrated, so `family_fun` will be ignored.")
       }
     }
     
+    data
+  },
+  
+  draw_panel = function(
+    data, panel_params, coord,
+    axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL
+  ) {
+    
     ranges <- coord$range(panel_params)
+    if (calibrate) family_fun <- family_arg(family_fun)
     
-    if (is.null(ids)) ids <- 1L
-    # process 'family' argument
-    family <- family_arg(family)
+    # window boundaries for axis positions
+    data <- transform(
+      data,
+      winxmin = ifelse(xunit > 0, ranges$x[1], ranges$x[2]),
+      winxmax = ifelse(xunit > 0, ranges$x[2], ranges$x[1]),
+      winymin = ifelse(yunit > 0, ranges$y[1], ranges$y[2]),
+      winymax = ifelse(yunit > 0, ranges$y[2], ranges$y[1])
+    )
     
-    # convert to intercepts and slopes
-    data <- do.call(rbind, lapply(ids, function(i) {
-      # intercept
-      #if (! is.null(family)) intercept <- data$intercept[i]
-      # vector
-      w_i <- unlist(data[i, c("x", "y")])
-      # calibrated vector
-      c_i <- w_i / sum(w_i ^ 2)
-      
-      # intercept (`NULL` with `family`)
-      intercept <- if (! is.null(family)) data$intercept[i]
-      
-      # plot range of isolines along calibrated vector
-      ran <- axis_range(c_i, ranges$x, ranges$y)
-      
-      # calculate positions of tick marks
-      k_i <- axis_positions(ran, family, by, intercept)
-      
-      # slope of isolines
-      m_i <- - w_i[1] / w_i[2]
-      # component of final data frame from this original axis
-      suppressWarnings(data.frame(
-        x = k_i * c_i[1],
-        y = k_i * c_i[2],
-        intercept = k_i * c_i[2] - m_i * k_i * c_i[1],
-        slope = m_i,
-        data[i, -match(c("x", "y"), names(data))]
-      ))
-    }))
+    # extreme positions, in axis units
+    data <- transform(
+      data,
+      unitmin = (winxmin * xunit + winymin * yunit) / ssunit,
+      unitmax = (winxmax * xunit + winymax * yunit) / ssunit
+    )
+    data$ssunit <- NULL
+    data$winxmin <- NULL
+    data$winxmax <- NULL
+    data$winymin <- NULL
+    data$winymax <- NULL
     
+    # calibrate axis range according to intercept and family
+    if (calibrate) {
+      ran_vars <- c("unitmin", "unitmax")
+      data[, ran_vars] <- data[, ran_vars] + data$intercept
+      if (! is.null(family_fun)) {
+        data[, ran_vars] <- family_fun$linkinv(as.matrix(data[, ran_vars]))
+      }
+    }
+    
+    # element units; by default, use Wilkinson's breaks algorithm
+    if (is.null(by)) {
+      bys <- lapply(1:nrow(data), function(i) {
+        labeling::extended(data$unitmin[i], data$unitmax[i], 6)
+      })
+    } else {
+      if (length(by) == 1) by <- rep(by, nrow(data))
+      bys <- lapply(1:nrow(data), function(i) {
+        floor(data$unitmin[i] / by[i]):ceiling(data$unitmax[i] / by[i]) * by[i]
+      })
+    }
+    data <- data[rep(1:nrow(data), sapply(bys, length)), , drop = FALSE]
+    data$units <- unlist(bys)
+    data$unitmin <- NULL
+    data$unitmax <- NULL
+    
+    # un-calibrate axis units according to intercept and family
+    if (calibrate) {
+      unit_vars <- c("units")
+      if (! is.null(family_fun)) {
+        data[, unit_vars] <- family_fun$linkfun(as.matrix(data[, unit_vars]))
+      }
+      data[, unit_vars] <- data[, unit_vars] - data$intercept
+    }
+    
+    # axis positions
+    data <- transform(
+      data,
+      xpos = units * xunit,
+      ypos = units * yunit
+    )
+    data$xunit <- NULL
+    data$yunit <- NULL
+    data$units <- NULL
+    
+    # line orientation aesthetics
+    data <- transform(data, slope = - 1 / slope)
+    data <- transform(data, intercept = ypos - slope * xpos)
+    data$xpos <- NULL
+    data$ypos <- NULL
+    
+    # -+- ensure that vertical lines are rendered correctly -+-
     GeomAbline$draw_panel(
       data = data, panel_params = panel_params, coord = coord
     )
@@ -255,9 +176,37 @@ GeomIsolines <- ggproto(
 
 #' @rdname geom-biplot-isolines
 #' @export
+geom_isolines <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomIsolines,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = na.rm,
+      axes = axes,
+      calibrate = calibrate,
+      family_fun = family_fun,
+      by = by,
+      ...
+    )
+  )
+}
+
+#' @rdname geom-biplot-isolines
+#' @export
 geom_u_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  family = NULL, ids = 1L, by = 1,
+  axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -272,8 +221,9 @@ geom_u_isolines <- function(
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      family = family,
-      ids = ids,
+      axes = axes,
+      calibrate = calibrate,
+      family_fun = family_fun,
       by = by,
       ...
     )
@@ -284,7 +234,7 @@ geom_u_isolines <- function(
 #' @export
 geom_v_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  family = NULL, ids = 1L, by = 1,
+  axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -299,8 +249,9 @@ geom_v_isolines <- function(
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      family = family,
-      ids = ids,
+      axes = axes,
+      calibrate = calibrate,
+      family_fun = family_fun,
       by = by,
       ...
     )
@@ -311,7 +262,7 @@ geom_v_isolines <- function(
 #' @export
 geom_biplot_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "v", family = NULL, ids = 1L, by = 1,
+  .matrix = "v", axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -326,65 +277,11 @@ geom_biplot_isolines <- function(
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      family = family,
-      ids = ids,
+      axes = axes,
+      calibrate = calibrate,
+      family_fun = family_fun,
       by = by,
       ...
     )
   )
-}
-
-family_arg <- function(family) {
-  if (! is.null(family)) {
-    if (is.character(family)) {
-      family <- get(family, mode = "function", envir = parent.frame())
-    }
-    if (is.function(family)) {
-      family <- family()
-    }
-  }
-  family
-}
-
-# calculate range of isoline locations restricted to plot window
-axis_range <- function(u, xran, yran) {
-  m <- u[2] / u[1]
-  ran <- if (m > 0) {
-    c(project_onto(c(xran[1], yran[1]), u),
-      project_onto(c(xran[2], yran[2]), u))
-  } else if (m < 0) {
-    c(project_onto(c(xran[1], yran[2]), u),
-      project_onto(c(xran[2], yran[1]), u))
-  } else if (m == 0) {
-    c(project_onto(c(xran[1], 0), u),
-      project_onto(c(xran[2], 0), u))
-  } else if (is.infinite(m)) {
-    c(project_onto(c(0, yran[1]), u),
-      project_onto(c(0, yran[2]), u))
-  }
-  ran
-}
-
-axis_positions <- function(ran, family, by, intercept = NULL) {
-  if (! is.null(family)) {
-    # shift by intercept
-    ran <- ran + intercept
-    # un-linked range of isolines via inverse link function
-    ran <- family$linkinv(ran)
-  }
-  # range of `by`-multiples of calibrated vector within plot range
-  k_ran <- c(ceiling(min(ran) / by), floor(max(ran) / by))
-  # positions of isolines
-  k <- seq(k_ran[1] * by, k_ran[2] * by, by = by)
-  if (! is.null(family)) {
-    # re-link positions of isolines via link function
-    k <- family$linkfun(k)
-    # un-shift by intercept
-    k <- k - intercept
-  }
-  k
-}
-
-project_onto <- function(x, y) {
-  (sum(x * y) / sum(y ^ 2))
 }

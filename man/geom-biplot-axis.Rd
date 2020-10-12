@@ -4,27 +4,63 @@
 \name{geom-biplot-axis}
 \alias{geom-biplot-axis}
 \alias{GeomAxis}
+\alias{geom_axis}
 \alias{geom_u_axis}
 \alias{geom_v_axis}
 \alias{geom_biplot_axis}
 \title{Render axes through origin}
-\format{An object of class \code{GeomAxis} (inherits from \code{GeomAbline}, \code{Geom}, \code{ggproto}, \code{gg}) of length 3.}
+\format{
+An object of class \code{GeomAxis} (inherits from \code{GeomAbline}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.
+}
 \usage{
-geom_u_axis(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", ..., na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
+geom_axis(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
 
-geom_v_axis(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", ..., na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE)
+geom_u_axis(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
 
-geom_biplot_axis(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", .matrix = "v", ..., na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE)
+geom_v_axis(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_biplot_axis(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  .matrix = "v",
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or
-\code{\link[=aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
+\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or
+\code{\link[ggplot2:aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
 default), it is combined with the default mapping at the top level of the
 plot. You must supply \code{mapping} if there is no plot mapping.}
 
@@ -32,11 +68,11 @@ plot. You must supply \code{mapping} if there is no plot mapping.}
 options:
 
 If \code{NULL}, the default, the data is inherited from the plot
-data as specified in the call to \code{\link[=ggplot]{ggplot()}}.
+data as specified in the call to \code{\link[ggplot2:ggplot]{ggplot()}}.
 
 A \code{data.frame}, or other object, will override the plot
 data. All objects will be fortified to produce a data frame. See
-\code{\link[=fortify]{fortify()}} for which variables will be created.
+\code{\link[ggplot2:fortify]{fortify()}} for which variables will be created.
 
 A \code{function} will be called with a single argument,
 the plot data. The return value must be a \code{data.frame}, and
@@ -62,14 +98,14 @@ display.}
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. \code{\link[=borders]{borders()}}.}
+the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 }
 \description{
-\code{geom_*_axis()} renders lines through the origin and the
+\verb{geom_*_axis()} renders lines through the origin and the
 position of each case or variable.
 }
 \section{Biplot layers}{
@@ -79,15 +115,15 @@ frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
 variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
 the data frame to one of these two.
 
-The geom layers \code{geom_u_*()} and \code{geom_v_*()} call the corresponding stat in
+The geom layers \verb{geom_u_*()} and \verb{geom_v_*()} call the corresponding stat in
 order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \code{geom_biplot_*()} selects a default matrix based on common practice,
+\eqn{V}. \verb{geom_biplot_*()} selects a default matrix based on common practice,
 e.g. \eqn{U} for points and \eqn{V} for arrows.
 }
 
 \section{Aesthetics}{
 
-\code{geom_*_axis()} understands the following aesthetics (required aesthetics are
+\verb{geom_*_axis()} understands the following aesthetics (required aesthetics are
 in bold):
 \itemize{
 \item \strong{\code{x}}
@@ -100,4 +136,25 @@ in bold):
 }
 }
 
+\examples{
+# LDA biplot scales for Reaven & Miller diabetes data
+diabetes_custom_biplot <- function(axes.scale) {
+  lda_ord(group ~ ., heplots::Diabetes, axes.scale = axes.scale) \%>\%
+    as_tbl_ord() \%>\%
+    augment() \%>\%
+    print() \%T>\%
+    mutate_u(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
+    confer_inertia("symmetric") \%>\%
+    ggbiplot(.supplement = FALSE) +
+    theme_bw() +
+    geom_u_point(aes(shape = .grouping)) +
+    geom_v_axis(color = "#888888") +
+    geom_v_axis_ticks() +
+    geom_v_axis_text(size = 2.5, label_dodge = .025) +
+    ggtitle("Symmetric LDA biplot of Reaven & Miller diabetes data")
+}
+diabetes_custom_biplot("unstandardized")
+diabetes_custom_biplot("standardized")
+diabetes_custom_biplot("contribution")
+}
 \keyword{datasets}

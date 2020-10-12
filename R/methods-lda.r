@@ -44,10 +44,11 @@ recover_v.lda <- function(x) {
 #' @rdname methods-lda
 #' @export
 recover_v.lda_ord <- function(x) {
-  axes.scale <- if (is.null(attr(x, "axes.scale"))) {
-    diag(1, nrow(x$scaling))
-  } else attr(x, "axes.scale")
-  axes.scale %*% x$scaling
+  if (is.null(attr(x, "axes.scale"))) {
+    x$scaling
+  } else {
+    attr(x, "axes.scale") %*% x$scaling
+  }
 }
 
 #' @rdname methods-lda
@@ -87,7 +88,6 @@ augmentation_u.lda <- function(x) {
   }
   res <- transform(
     res,
-    .grouping = x$lev,
     .prior = x$prior,
     .counts = x$counts
   )
@@ -126,7 +126,6 @@ augmentation_u.lda_ord <- function(x) {
   }
   res <- transform(
     res,
-    .grouping = x$lev,
     .prior = x$prior,
     .counts = x$counts
   )
@@ -179,7 +178,7 @@ augmentation_v.lda_ord <- augmentation_v.lda
 #' @export
 augmentation_coord.lda <- function(x) {
   tibble(
-    .name = recover_coord(x),
+    .name = factor_coord(recover_coord(x)),
     .svd = x$svd
   )
 }

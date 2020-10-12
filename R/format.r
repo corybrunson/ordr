@@ -1,28 +1,32 @@
-#' @title Formatting and printing methods for `tbl_ord`s
+#' @title Format a tbl_ord for printing
+#'
+#' @description These methods of [base::format()] and [base::print()] render a
+#'   (usually more) tidy readout of a [tbl_ord] object that is consistent across
+#'   all original ordination classes.
 #'
 #' @details
 #'
-#' The `format` and `print` methods for class [`"tbl_ord"``] are adapted from
-#' those for class [`"tbl_df"`][tibble::tbl_df] and for class
-#' [`"tbl_graph"`][tidygraph::tbl_graph].
+#' The `format` and `print` methods for class [tbl_ord] are adapted from
+#' those for class [tbl_df][tibble::tbl_df] and for class
+#' [tbl_graph][tidygraph::tbl_graph].
 #'
 #' **Note:** The `format()` function is tedius but cannot be easily modularized
 #' without invoking [accessors], [annotation], and [augmentation] multiple
 #' times, thereby significantly reducing performance.
 #' 
 
-#' @name formatting
+#' @name format
 #' @importFrom rlang "%||%"
-#' @param x An ordination object.
+#' @param x A [tbl_ord] object.
 #' @inheritParams tibble::format.tbl
 #' @param ... Additional arguments.
 #' @example inst/examples/mtcars-lm-isolines.r
 #' @example inst/examples/country-cmds-lm.r
 #' @example inst/examples/finches-ca.r
-#' @example inst/examples/iris-princomp-sec.r
+#' @example inst/examples/iris-princomp-secondary.r
 #' @example inst/examples/diabetes-lda-supplement.r
 
-#' @rdname formatting
+#' @rdname format
 #' @export
 format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
@@ -169,7 +173,7 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   )
 }
 
-#' @rdname formatting
+#' @rdname format
 #' @export
 print.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   fmt <- format(x, ..., n = n, width = width, n_extra = n_extra)

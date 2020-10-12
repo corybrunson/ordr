@@ -7,10 +7,9 @@
 \alias{fortify_u}
 \alias{fortify_v}
 \alias{tidy.tbl_ord}
-\title{Fortify a \code{tbl_ord} for plotting}
+\title{Fortify a tbl_ord for plotting}
 \usage{
-\method{fortify}{tbl_ord}(model, data, ..., .matrix = "uv",
-  .supplement = TRUE, include = "all")
+\method{fortify}{tbl_ord}(model, data, ..., .matrix = "uv", .supplement = TRUE, include = "all")
 
 fortify_coord(model)
 
@@ -18,11 +17,10 @@ fortify_u(model, include = "all")
 
 fortify_v(model, include = "all")
 
-\method{tidy}{tbl_ord}(x, ..., .matrix = "uv", .supplement = TRUE,
-  include = "all")
+\method{tidy}{tbl_ord}(x, ..., .matrix = "uv", .supplement = TRUE, include = "all")
 }
 \arguments{
-\item{model, x}{A \code{[tbl_ord]} object.}
+\item{model, x}{A \link{tbl_ord} object.}
 
 \item{data}{Ignored.}
 
@@ -43,19 +41,24 @@ whether only shared fields or all from both.}
 }
 \description{
 These methods of \code{\link[ggplot2:fortify]{ggplot2::fortify()}} and \code{\link[generics:tidy]{generics::tidy()}}
-convert a \code{[tbl_ord]} object to a \link[tibble:tbl_df]{tbl_df} object.
+convert a \link{tbl_ord} object to a \link[tibble:tbl_df-class]{tbl_df} object.
 }
 \details{
-The \code{fortify()} and \code{tidy()} methods for \code{tbl_ord} objects produce the same
+The \code{fortify()} and \code{tidy()} methods for tbl_ord objects produce the same
 output, a \link[tibble:tibble]{tibble} obtained by binding columns obtained via
 \code{\link[=accessors]{get_*()}}, \code{\link[=annotation]{annotation_*()}}, and
 \code{\link[=augmentation]{augmentation_*}}, respectively.
 
-If any augmented variables are included
-(i.e. unless \code{include = "coordinates"}),
-then the tibble is assigned a \code{"coordinates"} attribute
-whose value is obtained via \code{\link[=get_coord]{get_coord()}}.
-(Note that this attribute will not be printed with the tibble.)
+In the special case \code{.matrix = "coordinates"}, the tibble consists instead of
+the artificial coordinates and associated metadata, often including the
+proportion of variance explained or captured by each. This can be used to
+produce scree plots, for example.
+
+If any augmented variables are included (i.e. unless \code{include = "coordinates"}), then the tibble is assigned a \code{"coordinates"} attribute
+whose value is obtained via \code{\link[=get_coord]{get_coord()}}. (That this attribute will not be
+printed with the tibble.) This facilitates some downstream functionality that
+relies on more than those coordinates used as position aesthetics in a
+biplot, in particular \code{\link[=stat_spantree]{stat_spantree()}}.
 }
 \examples{
 # a 'tbl_ord' object
@@ -89,14 +92,5 @@ ggbiplot(diabetes_lda) +
   theme_bw() +
   geom_u_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
   geom_v_axis(color = "#888888") +
-  geom_v_text_radiate(aes(label = .name)) +
   ggtitle("Column-standardized LDA biplot of Reaven & Miller diabetes data")
-diabetes_lda \%>\%
-  confer_inertia("symmetric") \%>\%
-  ggbiplot(.supplement = FALSE) +
-  theme_bw() +
-  geom_u_point(aes(shape = .grouping)) +
-  geom_v_vector(color = "#888888") +
-  geom_v_text_radiate(aes(label = .name), size = 3) +
-  ggtitle("Symmetric LDA biplot of Reaven & Miller diabetes data")
 }
