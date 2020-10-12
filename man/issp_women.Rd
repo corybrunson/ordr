@@ -14,6 +14,7 @@ Responses to several questions about working women and family.
 }
 \examples{
 # Confer inertia between rows and columns of CA on Spanish ISSP sample
+data(issp_women)
 issp_women \%>\%
   ca::ca() \%>\%
   as_tbl_ord() \%>\%

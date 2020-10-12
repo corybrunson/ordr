@@ -63,6 +63,7 @@ similar to that of \code{\link[generics:augment]{generics::augment()}}, use \cod
 \examples{
 # Linear regression on marine ecosystem data
 # Adapt Exhibit 2.3 in Greenacre (2010)
+data(bioenv)
 bioenv \%>\%
   transform(
     x = as.vector(scale(Depth)),
@@ -86,6 +87,7 @@ bioenv_lm \%>\%
     "Regression plane: standardized depth-pollution space"
   )
 # Confer inertia in CA between rows and columns of benthic sample data
+data(benthos)
 benthos \%>\%
   ca::ca() \%>\%
   as_tbl_ord() \%>\%

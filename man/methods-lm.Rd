@@ -78,6 +78,7 @@ mtcars_lm \%>\%
   )
 # Multidimensional scaling of country differences and regression of attributes
 # Reproduce Exhibit 4.2 in Greenacre (2010)
+data(country_differences)
 country_differences \%>\%
   cmdscale(k = 2) \%>\%
   as_tbl_ord() \%>\%
@@ -87,6 +88,7 @@ differences_plot <- differences_cmds \%>\%
   geom_v_text()
 differences_plot
 # Reproduce Exhibit 4.5 in Greenacre (2010)
+data(country_attributes)
 lm(country_attributes ~ get_u(differences_cmds)) \%>\%
   as_tbl_ord() \%>\%
   print() -> attributes_fit
@@ -94,6 +96,7 @@ differences_plot +
   geom_v_vector(data = attributes_fit) +
   geom_v_text_radiate(data = attributes_fit, hjust = .3)
 # Generalized linear regression on marine ecosystem data
+data(bioenv)
 bioenv \%>\%
   transform(
     x = as.vector(scale(Depth)),
@@ -128,6 +131,7 @@ bioenv_bin \%>\%
   geom_v_isolines(family = binomial(), by = .05)
 # Generalized multiple linear regression on marine ecosystem data
 # Reproduce Exhibit 2.5 in Greenacre (2010)
+data(bioenv)
 bioenv_std <- dplyr::mutate_if(bioenv, is.numeric, ~ as.vector(scale(.)))
 resp_std <- as.matrix(dplyr::select(bioenv_std, a:e))
 pred_std <- as.matrix(dplyr::select(bioenv_std, x = Depth, y = Pollution))

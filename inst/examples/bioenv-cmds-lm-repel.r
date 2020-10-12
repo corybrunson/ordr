@@ -14,6 +14,7 @@ chidist <- function(mat, rowcol = 1) {
   dist(scale(prof, FALSE, rootaveprof))
 }
 # multidimensional scaling of species counts by chi-squared distances
+data(bioenv)
 bioenv[, ycols] %>%
   chidist() %>%
   cmdscale() %>%

@@ -15,6 +15,7 @@ Site-species occurrence data for Galapagos finches
 }
 \examples{
 # Correspondence analysis of Sanderson finches data
+data(finches)
 finches \%>\%
   ca::ca() \%>\%
   as_tbl_ord() \%>\%

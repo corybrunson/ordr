@@ -183,6 +183,7 @@ mtcars_lm \%>\%
   )
 # Linear regression on marine ecosystem data
 # Adapt Exhibit 2.3 in Greenacre (2010)
+data(bioenv)
 bioenv \%>\%
   transform(
     x = as.vector(scale(Depth)),
@@ -206,6 +207,7 @@ bioenv_lm \%>\%
     "Regression plane: standardized depth-pollution space"
   )
 # Generalized linear regression on marine ecosystem data
+data(bioenv)
 bioenv \%>\%
   transform(
     x = as.vector(scale(Depth)),

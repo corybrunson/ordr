@@ -125,6 +125,7 @@ are in bold):
 \examples{
 # Linear regression on marine ecosystem data
 # Adapt Exhibit 2.3 in Greenacre (2010)
+data(bioenv)
 bioenv \%>\%
   transform(
     x = as.vector(scale(Depth)),
@@ -148,6 +149,7 @@ bioenv_lm \%>\%
     "Regression plane: standardized depth-pollution space"
   )
 # Align an MDS ordination to a PCA ordination
+data(country_differences)
 country_differences \%>\%
   cmdscale(k = 2) \%>\%
   as_tbl_ord() \%>\%
@@ -175,6 +177,7 @@ plot(gridExtra::arrangeGrob(grobs = list(
   ggbiplot(differences_align_v) + geom_v_vector()
 ), ncol = 3))
 # Confer inertia between rows and columns of CA on Spanish ISSP sample
+data(issp_women)
 issp_women \%>\%
   ca::ca() \%>\%
   as_tbl_ord() \%>\%

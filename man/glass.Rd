@@ -16,6 +16,7 @@ Sites, artifacts, and amounts of several components of the sand.
 # Compare PCA to LRA on the Freestone primary class composition data
 # following Baxter & Freestone (2006)
 # (do not exclude compositional outliers)
+data(glass)
 levantine_glass <- glass \%>\%
   dplyr::filter(Site != "Banias") \%>\%
   dplyr::mutate(Type = dplyr::case_when(

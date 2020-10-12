@@ -1,4 +1,5 @@
 # Correspondence analysis of Sanderson finches data
+data(finches)
 finches %>%
   ca::ca() %>%
   as_tbl_ord() %>%

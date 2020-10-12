@@ -121,6 +121,7 @@ usa_mds_rotate \%>\%
   geom_v_text(aes(label = .name), size = 3) +
   ggtitle("Rotated MDS biplot of distances between American cities")
 # Align an MDS ordination to a PCA ordination
+data(country_differences)
 country_differences \%>\%
   cmdscale(k = 2) \%>\%
   as_tbl_ord() \%>\%

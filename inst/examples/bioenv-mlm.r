@@ -1,5 +1,6 @@
 # Generalized multiple linear regression on marine ecosystem data
 # Reproduce Exhibit 2.5 in Greenacre (2010)
+data(bioenv)
 bioenv_std <- dplyr::mutate_if(bioenv, is.numeric, ~ as.vector(scale(.)))
 resp_std <- as.matrix(dplyr::select(bioenv_std, a:e))
 pred_std <- as.matrix(dplyr::select(bioenv_std, x = Depth, y = Pollution))

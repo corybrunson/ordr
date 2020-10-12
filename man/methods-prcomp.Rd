@@ -43,6 +43,7 @@ objects of class \code{"prcomp"} as returned by \code{\link[stats:prcomp]{stats:
 }
 \examples{
 # Confer PCA weights and inertia between cases and variables
+data(country_attributes)
 country_attributes \%>\%
   prcomp() \%>\%
   as_tbl_ord() \%>\%

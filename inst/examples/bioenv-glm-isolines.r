@@ -1,4 +1,5 @@
 # Generalized linear regression on marine ecosystem data
+data(bioenv)
 bioenv %>%
   transform(
     x = as.vector(scale(Depth)),

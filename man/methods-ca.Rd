@@ -43,6 +43,7 @@ objects of class \code{"ca"} from the \strong{\link[ca:ca]{ca}} package.
 }
 \examples{
 # Correspondence analysis of Sanderson finches data
+data(finches)
 finches \%>\%
   ca::ca() \%>\%
   as_tbl_ord() \%>\%
@@ -81,6 +82,7 @@ smoke_ca \%>\%
   geom_v_point(color = "brown", shape = 17) +
   geom_v_text_repel(color = "brown")
 # Confer inertia in CA between rows and columns of benthic sample data
+data(benthos)
 benthos \%>\%
   ca::ca() \%>\%
   as_tbl_ord() \%>\%
@@ -109,6 +111,7 @@ benthos_ca \%>\%
   geom_v_point(color = "darkgreen") +
   geom_v_text_repel(color = "darkgreen", min.segment.length = 2)
 # Confer inertia between rows and columns of CA on Spanish ISSP sample
+data(issp_women)
 issp_women \%>\%
   ca::ca() \%>\%
   as_tbl_ord() \%>\%

@@ -16,6 +16,7 @@ on a sea-bed.
 \examples{
 # Linear regression on marine ecosystem data
 # Adapt Exhibit 2.3 in Greenacre (2010)
+data(bioenv)
 bioenv \%>\%
   transform(
     x = as.vector(scale(Depth)),
@@ -54,6 +55,7 @@ chidist <- function(mat, rowcol = 1) {
   dist(scale(prof, FALSE, rootaveprof))
 }
 # multidimensional scaling of species counts by chi-squared distances
+data(bioenv)
 bioenv[, ycols] \%>\%
   chidist() \%>\%
   cmdscale() \%>\%
@@ -75,6 +77,7 @@ ggbiplot(bioenv_cmds, aes(label = .name)) +
   geom_v_text_repel(data = bioenv_lm)
 # Generalized multiple linear regression on marine ecosystem data
 # Reproduce Exhibit 2.5 in Greenacre (2010)
+data(bioenv)
 bioenv_std <- dplyr::mutate_if(bioenv, is.numeric, ~ as.vector(scale(.)))
 resp_std <- as.matrix(dplyr::select(bioenv_std, a:e))
 pred_std <- as.matrix(dplyr::select(bioenv_std, x = Depth, y = Pollution))

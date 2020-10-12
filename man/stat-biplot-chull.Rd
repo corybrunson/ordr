@@ -115,6 +115,7 @@ e.g. \eqn{U} for points and \eqn{V} for arrows.
 
 \examples{
 # Confer inertia in CA between rows and columns of benthic sample data
+data(benthos)
 benthos \%>\%
   ca::ca() \%>\%
   as_tbl_ord() \%>\%

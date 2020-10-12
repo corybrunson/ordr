@@ -264,6 +264,7 @@ aesthetics are in bold):
 
 \examples{
 # Correspondence analysis of Sanderson finches data
+data(finches)
 finches \%>\%
   ca::ca() \%>\%
   as_tbl_ord() \%>\%
@@ -280,6 +281,7 @@ finches_ca \%>\%
     "Label opacity encodes row/column inertia"
   )
 # Confer PCA weights and inertia between cases and variables
+data(country_attributes)
 country_attributes \%>\%
   prcomp() \%>\%
   as_tbl_ord() \%>\%
@@ -309,6 +311,7 @@ attributes_pca \%>\%
   geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
   geom_v_text_repel(aes(x = PC1, y = PC2), color = "darkred")
 # Confer inertia in CA between rows and columns of benthic sample data
+data(benthos)
 benthos \%>\%
   ca::ca() \%>\%
   as_tbl_ord() \%>\%

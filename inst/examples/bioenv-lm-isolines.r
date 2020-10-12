@@ -1,5 +1,6 @@
 # Linear regression on marine ecosystem data
 # Adapt Exhibit 2.3 in Greenacre (2010)
+data(bioenv)
 bioenv %>%
   transform(
     x = as.vector(scale(Depth)),
