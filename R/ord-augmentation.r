@@ -128,3 +128,12 @@ augment_u <- function(x) augment_factor(x, .matrix = "u")
 #' @rdname augmentation
 #' @export
 augment_v <- function(x) augment_factor(x, .matrix = "v")
+
+#' @rdname augmentation
+#' @export
+augment_coord <- function(x) {
+  bind_cols(
+    inertia = recover_inertia(x),
+    augmentation_coord(x)
+  )
+}

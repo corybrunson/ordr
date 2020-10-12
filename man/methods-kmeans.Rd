@@ -44,7 +44,7 @@ mtcars \%>\%
   augment() \%>\%
   print() -> mtcars_kmeans
 mtcars_kmeans \%>\%
-  augmentation_coord() \%>\%
+  augment_coord() \%>\%
   transform(.sdev = sqrt(.withinss / .size)) \%>\%
   print() -> mtcars_coord
 # discriminate between clusters 1 and 2

@@ -10,6 +10,7 @@
 \alias{augment.tbl_ord}
 \alias{augment_u}
 \alias{augment_v}
+\alias{augment_coord}
 \title{Augment metadata on the factors and coordinates of tbl_ords}
 \usage{
 augmentation_u(x)
@@ -27,6 +28,8 @@ augmentation_coord(x)
 augment_u(x)
 
 augment_v(x)
+
+augment_coord(x)
 }
 \arguments{
 \item{x}{A \link{tbl_ord}, or an ordination object coercible to one.}
@@ -123,7 +126,7 @@ mtcars \%>\%
   augment() \%>\%
   print() -> mtcars_kmeans
 mtcars_kmeans \%>\%
-  augmentation_coord() \%>\%
+  augment_coord() \%>\%
   transform(.sdev = sqrt(.withinss / .size)) \%>\%
   print() -> mtcars_coord
 # discriminate between clusters 1 and 2
