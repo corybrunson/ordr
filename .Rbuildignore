@@ -10,6 +10,7 @@ README.Rmd
 ^man/figures$
 ^_pkgdown\.yml$
 ^docs$
+^ignore$
 
 # hosting infrastructure
 cran-comments.md
