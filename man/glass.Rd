@@ -9,6 +9,9 @@ A \link[tibble:tibble]{tibble}.
 \source{
 Baxter & Freestone (2006).
 }
+\usage{
+data(glass)
+}
 \description{
 Sites, artifacts, and amounts of several components of the sand.
 }

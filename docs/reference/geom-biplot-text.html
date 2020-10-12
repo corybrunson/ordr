@@ -6,23 +6,31 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Render text at ordinates — geom-biplot-text • ordr</title>
+<title>Render text and labels at ordinates — geom-biplot-text • ordr</title>
+
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,13 +38,13 @@
 
 
 
-<meta property="og:title" content="Render text at ordinates — geom-biplot-text" />
 
+<meta property="og:title" content="Render text and labels at ordinates — geom-biplot-text" />
 <meta property="og:description" content="geom_*_text() renders text, and geom_*_label() labels, at
 the positions of the subjects or vectors. geom_*_text_repel() and
 geom_*_label_repel() invoke functionality from the
 ggrepel package." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -50,9 +58,10 @@ ggrepel package." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -74,7 +83,7 @@ ggrepel package." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -82,7 +91,6 @@ ggrepel package." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -92,85 +100,188 @@ ggrepel package." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Render text at ordinates</h1>
+    <h1>Render text and labels at ordinates</h1>
     
     <div class="hidden name"><code>geom-biplot-text.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p><code>geom_*_text()</code> renders text, and <code>geom_*_label()</code> labels, at
 the positions of the subjects or vectors. <code>geom_*_text_repel()</code> and
 <code>geom_*_label_repel()</code> invoke functionality from the
-<strong><a href='https://www.rdocumentation.org/packages/ggrepel/topics/ggrepel'>ggrepel</a></strong> package.</p>
-    
+<strong><a href='https://rdrr.io/pkg/ggrepel/man/ggrepel.html'>ggrepel</a></strong> package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>geom_u_text</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='no'>...</span>, <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>nudge_x</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>nudge_y</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>check_overlap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>geom_u_text</span>(
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>nudge_x</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>nudge_y</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>check_overlap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>geom_v_text</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='no'>...</span>, <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>nudge_x</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>nudge_y</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>check_overlap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>geom_v_text</span>(
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>nudge_x</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>nudge_y</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>check_overlap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>geom_biplot_text</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>, <span class='no'>...</span>, <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>nudge_x</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>nudge_y</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>check_overlap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>geom_biplot_text</span>(
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>nudge_x</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>nudge_y</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>check_overlap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>geom_u_label</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='no'>...</span>, <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>geom_u_label</span>(
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>geom_v_label</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='no'>...</span>, <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>geom_v_label</span>(
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>geom_biplot_label</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>, <span class='no'>...</span>, <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>geom_biplot_label</span>(
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>geom_u_text_repel</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='no'>...</span>, <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>geom_u_text_repel</span>(
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>geom_v_text_repel</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='no'>...</span>, <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>geom_v_text_repel</span>(
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>geom_biplot_text_repel</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>, <span class='no'>...</span>,
-  <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>geom_biplot_text_repel</span>(
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>geom_u_label_repel</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='no'>...</span>, <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>geom_u_label_repel</span>(
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>geom_v_label_repel</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='no'>...</span>, <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>geom_v_label_repel</span>(
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>geom_biplot_label_repel</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>, <span class='no'>...</span>,
-  <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
+<span class='fu'>geom_biplot_label_repel</span>(
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>mapping</th>
-      <td><p>Set of aesthetic mappings created by <code>aes()</code> or
-<code>aes_()</code>. If specified and <code>inherit.aes = TRUE</code> (the
+      <td><p>Set of aesthetic mappings created by <code><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes()</a></code> or
+<code><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_()</a></code>. If specified and <code>inherit.aes = TRUE</code> (the
 default), it is combined with the default mapping at the top level of the
 plot. You must supply <code>mapping</code> if there is no plot mapping.</p></td>
     </tr>
@@ -179,10 +290,10 @@ plot. You must supply <code>mapping</code> if there is no plot mapping.</p></td>
       <td><p>The data to be displayed in this layer. There are three
 options:</p>
 <p>If <code>NULL</code>, the default, the data is inherited from the plot
-data as specified in the call to <code>ggplot()</code>.</p>
+data as specified in the call to <code><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot()</a></code>.</p>
 <p>A <code>data.frame</code>, or other object, will override the plot
 data. All objects will be fortified to produce a data frame. See
-<code><a href='fortify.html'>fortify()</a></code> for which variables will be created.</p>
+<code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>fortify()</a></code> for which variables will be created.</p>
 <p>A <code>function</code> will be called with a single argument,
 the plot data. The return value must be a <code>data.frame</code>, and
 will be used as the layer data. A <code>function</code> can be created
@@ -223,7 +334,7 @@ display.</p></td>
       <td><p>If <code>FALSE</code>, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. <code>borders()</code>.</p></td>
+the default plot specification, e.g. <code><a href='https://ggplot2.tidyverse.org/reference/borders.html'>borders()</a></code>.</p></td>
     </tr>
     <tr>
       <th>.matrix</th>
@@ -232,11 +343,12 @@ or both matrices in a matrix decomposition used for ordination. The
 standard values are <code>"u"</code>, <code>"v"</code>, and <code>"uv"</code>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="biplot-layers"><a class="anchor" href="#biplot-layers"></a>Biplot layers</h2>
 
     
-    <p><code><a href='ggbiplot.html'>ggbiplot()</a></code> uses <code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>ggplot2::fortify()</a></code> internally to produce a single data
+
+<p><code><a href='ggbiplot.html'>ggbiplot()</a></code> uses <code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>ggplot2::fortify()</a></code> internally to produce a single data
 frame with a <code>.matrix</code> column distinguishing the subjects (<code>"u"</code>) and
 variables (<code>"v"</code>). The stat layers <code><a href='biplot-matrix.html'>stat_u()</a></code> and <code><a href='biplot-matrix.html'>stat_v()</a></code> simply filter
 the data frame to one of these two.</p>
@@ -244,11 +356,11 @@ the data frame to one of these two.</p>
 order to render plot elements for the corresponding matrix \(U\) or
 \(V\). <code>geom_biplot_*()</code> selects a default matrix based on common practice,
 e.g. \(U\) for points and \(V\) for arrows.</p>
-    
     <h2 class="hasAnchor" id="aesthetics"><a class="anchor" href="#aesthetics"></a>Aesthetics</h2>
 
     
-    <p><code>geom_*_text()</code>, <code>geom_*_label()</code>, <code>geom_*_text_repel()</code>, and
+
+<p><code>geom_*_text()</code>, <code>geom_*_label()</code>, <code>geom_*_text_repel()</code>, and
 <code>geom_*_label_repel()</code> understand the following aesthetics (required
 aesthetics are in bold):</p><ul>
 <li><p><strong><code>x</code></strong></p></li>
@@ -265,70 +377,72 @@ aesthetics are in bold):</p><ul>
 <li><p><code>vjust</code></p></li>
 <li><p><code>group</code></p></li>
 </ul>
-    
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Correspondence analysis of Sanderson finches data</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>finches</span>)
 <span class='no'>finches</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>ca</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/ca/topics/ca'>ca</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>ca</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/ca.html'>ca</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='fl'>.5</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_ca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (13 x 12) x (17 x 12)'
+  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_ca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (13 x 12) x (17 x 12)'
 #&gt; # 12 coordinates: Dim1, Dim2, ..., Dim12
 #&gt; # 
 #&gt; # U: [ 13 x 12 | 4 ]
 #&gt;      Dim1   Dim2    Dim3 ... |   .name         .mass .dist .inertia
-#&gt;                              |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.165   0.685  0.320      | </span><span style='color: #BCBCBC;'>1</span><span> Large groun… 0.115  0.573   0.037</span><span style='text-decoration: underline;'>7</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.368</span><span>  -</span><span style='color: #BB0000;'>0.522</span><span>  0.016</span><span style='text-decoration: underline;'>7</span><span> ... | </span><span style='color: #BCBCBC;'>2</span><span> Medium grou… 0.107  0.489   0.025</span><span style='text-decoration: underline;'>5</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.068</span><span style='text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.743</span><span> -</span><span style='color: #BB0000;'>0.126</span><span>      | </span><span style='color: #BCBCBC;'>3</span><span> Small groun… 0.115  0.526   0.031</span><span style='text-decoration: underline;'>7</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.420   1.37   0.417      | </span><span style='color: #BCBCBC;'>4</span><span> Sharp-beake… 0.082</span><span style='text-decoration: underline;'>0</span><span> 0.994   0.081</span><span style='text-decoration: underline;'>0</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.365</span><span>  -</span><span style='color: #BB0000;'>0.691</span><span>  0.244      | </span><span style='color: #BCBCBC;'>5</span><span> Cactus grou… 0.098</span><span style='text-decoration: underline;'>4</span><span> 0.608   0.036</span><span style='text-decoration: underline;'>4</span><span>
-#&gt; </span><span style='color: #949494;'># … with 8 more rows</span><span>
+#&gt;                              |   <span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>  0.165   0.685  0.320      | </span><span style='color: #555555;'>1</span><span> Large groun… 0.115  0.573   0.037</span><span style='text-decoration: underline;'>7</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.368</span><span>  -</span><span style='color: #BB0000;'>0.522</span><span>  0.016</span><span style='text-decoration: underline;'>7</span><span> ... | </span><span style='color: #555555;'>2</span><span> Medium grou… 0.107  0.489   0.025</span><span style='text-decoration: underline;'>5</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span>  0.068</span><span style='text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.743</span><span> -</span><span style='color: #BB0000;'>0.126</span><span>      | </span><span style='color: #555555;'>3</span><span> Small groun… 0.115  0.526   0.031</span><span style='text-decoration: underline;'>7</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span>  0.420   1.37   0.417      | </span><span style='color: #555555;'>4</span><span> Sharp-beake… 0.082</span><span style='text-decoration: underline;'>0</span><span> 0.994   0.081</span><span style='text-decoration: underline;'>0</span><span>
+#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.365</span><span>  -</span><span style='color: #BB0000;'>0.691</span><span>  0.244      | </span><span style='color: #555555;'>5</span><span> Cactus grou… 0.098</span><span style='text-decoration: underline;'>4</span><span> 0.608   0.036</span><span style='text-decoration: underline;'>4</span><span>
+#&gt; </span><span style='color: #555555;'># … with 8 more rows</span><span>
 #&gt; # 
 #&gt; # V: [ 17 x 12 | 4 ]
 #&gt;      Dim1   Dim2   Dim3 ... |   .name       .mass .dist .inertia
-#&gt;                             |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.090</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>1.23</span><span>   0.274     | </span><span style='color: #BCBCBC;'>1</span><span> Seymour    0.032</span><span style='text-decoration: underline;'>8</span><span> 1.10   0.039</span><span style='text-decoration: underline;'>8</span><span> 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.090</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>1.23</span><span>   0.274 ... | </span><span style='color: #BCBCBC;'>2</span><span> Baltra     0.032</span><span style='text-decoration: underline;'>8</span><span> 1.10   0.039</span><span style='text-decoration: underline;'>8</span><span> 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.269</span><span>   0.389 -</span><span style='color: #BB0000;'>0.783</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> Isabella   0.090</span><span style='text-decoration: underline;'>2</span><span> 0.657  0.038</span><span style='text-decoration: underline;'>9</span><span> 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.233</span><span>   0.601 -</span><span style='color: #BB0000;'>0.933</span><span>     | </span><span style='color: #BCBCBC;'>4</span><span> Fernandina 0.082</span><span style='text-decoration: underline;'>0</span><span> 0.794  0.051</span><span style='text-decoration: underline;'>7</span><span> 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.221</span><span>   0.117 -</span><span style='color: #BB0000;'>0.136</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> Santiago   0.082</span><span style='text-decoration: underline;'>0</span><span> 0.349  0.009</span><span style='text-decoration: underline;'>98</span><span>
-#&gt; </span><span style='color: #949494;'># … with 12 more rows</span><span></div><div class='input'><span class='no'>finches_ca</span> <span class='kw'>%&gt;%</span>
+#&gt;                             |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.090</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>1.23</span><span>   0.274     | </span><span style='color: #555555;'>1</span><span> Seymour    0.032</span><span style='text-decoration: underline;'>8</span><span> 1.10   0.039</span><span style='text-decoration: underline;'>8</span><span> 
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.090</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>1.23</span><span>   0.274 ... | </span><span style='color: #555555;'>2</span><span> Baltra     0.032</span><span style='text-decoration: underline;'>8</span><span> 1.10   0.039</span><span style='text-decoration: underline;'>8</span><span> 
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.269</span><span>   0.389 -</span><span style='color: #BB0000;'>0.783</span><span>     | </span><span style='color: #555555;'>3</span><span> Isabella   0.090</span><span style='text-decoration: underline;'>2</span><span> 0.657  0.038</span><span style='text-decoration: underline;'>9</span><span> 
+#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>0.233</span><span>   0.601 -</span><span style='color: #BB0000;'>0.933</span><span>     | </span><span style='color: #555555;'>4</span><span> Fernandina 0.082</span><span style='text-decoration: underline;'>0</span><span> 0.794  0.051</span><span style='text-decoration: underline;'>7</span><span> 
+#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.221</span><span>   0.117 -</span><span style='color: #BB0000;'>0.136</span><span>     | </span><span style='color: #555555;'>5</span><span> Santiago   0.082</span><span style='text-decoration: underline;'>0</span><span> 0.349  0.009</span><span style='text-decoration: underline;'>98</span><span>
+#&gt; </span><span style='color: #555555;'># … with 12 more rows</span><span></div><div class='input'><span class='no'>finches_ca</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
   <span class='fu'>geom_u_text</span>(<span class='fu'>aes</span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='no'>.inertia</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"royalblue3"</span>) +
   <span class='fu'>geom_v_text</span>(<span class='fu'>aes</span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='no'>.inertia</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'>scale_alpha_continuous</span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>.3</span>, <span class='fl'>1</span>), <span class='kw'>guide</span> <span class='kw'>=</span> <span class='st'>"none"</span>) +
+  <span class='fu'>scale_alpha_continuous</span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>.3</span>, <span class='fl'>1</span>), <span class='kw'>guide</span> <span class='kw'>=</span> <span class='st'>"none"</span>) +
   <span class='fu'>ggtitle</span>(
     <span class='st'>"Symmetric CA biplot of the Galapagos island finches"</span>,
     <span class='st'>"Label opacity encodes row/column inertia"</span>
   )</div><div class='img'><img src='geom-biplot-text-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Confer PCA weights and inertia between cases and variables</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>country_attributes</span>)
 <span class='no'>country_attributes</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/prcomp'>prcomp</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/prcomp.html'>prcomp</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>attributes_pca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (13 x 6) x (6 x 6)'
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>attributes_pca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (13 x 6) x (6 x 6)'
 #&gt; # 6 coordinates: PC1, PC2, ..., PC6
 #&gt; # 
 #&gt; # U: [ 13 x 6 | 0 ]
 #&gt;       PC1    PC2     PC3 ... | 
 #&gt;                              | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.079</span><span style='text-decoration: underline;'>6</span><span>  4.77   0.092</span><span style='text-decoration: underline;'>2</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.451   5.80   1.30   ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>1.79</span><span>    0.842  0.014</span><span style='text-decoration: underline;'>5</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  3.45    0.906  0.250      | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>4.54</span><span>   -</span><span style='color: #BB0000;'>4.36</span><span>  -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>     | 
+#&gt; </span><span style='color: #555555;'>1</span><span>  0.079</span><span style='text-decoration: underline;'>6</span><span>  4.77   0.092</span><span style='text-decoration: underline;'>2</span><span>     | 
+#&gt; </span><span style='color: #555555;'>2</span><span>  0.451   5.80   1.30   ... | 
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>1.79</span><span>    0.842  0.014</span><span style='text-decoration: underline;'>5</span><span>     | 
+#&gt; </span><span style='color: #555555;'>4</span><span>  3.45    0.906  0.250      | 
+#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>4.54</span><span>   -</span><span style='color: #BB0000;'>4.36</span><span>  -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>     | 
 #&gt; 
 #&gt; # 
 #&gt; # V: [ 6 x 6 | 0 ]
 #&gt;      PC1    PC2      PC3 ... | 
 #&gt;                              | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.331</span><span>  0.375  0.009</span><span style='text-decoration: underline;'>81</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.320  0.517  0.187       | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.301  0.593 -</span><span style='color: #BB0000;'>0.616</span><span>   ... | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.387</span><span>  0.286  0.145       | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.548</span><span> -</span><span style='color: #BB0000;'>0.138</span><span> -</span><span style='color: #BB0000;'>0.661</span><span>       | 
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span> -</span><span style='color: #BB0000;'>0.497</span><span>  0.373  0.357       | </div><div class='input'><span class='co'># form biplot</span>
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.331</span><span>  0.375  0.009</span><span style='text-decoration: underline;'>81</span><span>     | 
+#&gt; </span><span style='color: #555555;'>2</span><span>  0.320  0.517  0.187       | 
+#&gt; </span><span style='color: #555555;'>3</span><span>  0.301  0.593 -</span><span style='color: #BB0000;'>0.616</span><span>   ... | 
+#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>0.387</span><span>  0.286  0.145       | 
+#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.548</span><span> -</span><span style='color: #BB0000;'>0.138</span><span> -</span><span style='color: #BB0000;'>0.661</span><span>       | 
+#&gt; </span><span style='color: #555555;'>6</span><span> -</span><span style='color: #BB0000;'>0.497</span><span>  0.373  0.357       | </div><div class='input'><span class='co'># form biplot</span>
 <span class='no'>attributes_pca</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(
     <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
@@ -351,30 +465,31 @@ aesthetics are in bold):</p><ul>
   <span class='fu'>geom_u_text</span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"seagreen"</span>) +
   <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
   <span class='fu'>geom_v_text_repel</span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>)</div><div class='img'><img src='geom-biplot-text-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Confer inertia in CA between rows and columns of benthic sample data</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>benthos</span>)
 <span class='no'>benthos</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>ca</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/ca/topics/ca'>ca</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>ca</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/ca.html'>ca</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>benthos_ca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (92 x 12) x (13 x 12)'
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>benthos_ca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (92 x 12) x (13 x 12)'
 #&gt; # 12 coordinates: Dim1, Dim2, ..., Dim12
 #&gt; # 
 #&gt; # U: [ 92 x 12 | 0 ]
 #&gt;      Dim1   Dim2   Dim3 ... | 
 #&gt;                             | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.17</span><span>    0.895 -</span><span style='color: #BB0000;'>0.140</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.552</span><span>  -</span><span style='color: #BB0000;'>2.23</span><span>  -</span><span style='color: #BB0000;'>0.359</span><span> ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.040</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span> -</span><span style='color: #BB0000;'>0.689</span><span>  0.687     | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  1.22    0.287 -</span><span style='color: #BB0000;'>0.700</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.312   0.142 -</span><span style='color: #BB0000;'>0.137</span><span>     | 
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>1.17</span><span>    0.895 -</span><span style='color: #BB0000;'>0.140</span><span>     | 
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.552</span><span>  -</span><span style='color: #BB0000;'>2.23</span><span>  -</span><span style='color: #BB0000;'>0.359</span><span> ... | 
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.040</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span> -</span><span style='color: #BB0000;'>0.689</span><span>  0.687     | 
+#&gt; </span><span style='color: #555555;'>4</span><span>  1.22    0.287 -</span><span style='color: #BB0000;'>0.700</span><span>     | 
+#&gt; </span><span style='color: #555555;'>5</span><span>  0.312   0.142 -</span><span style='color: #BB0000;'>0.137</span><span>     | 
 #&gt; 
 #&gt; # 
 #&gt; # V: [ 13 x 12 | 0 ]
 #&gt;     Dim1    Dim2   Dim3 ... | 
 #&gt;                             | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.173</span><span>  0.262  -</span><span style='color: #BB0000;'>0.376</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  1.11   0.417   1.52  ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.226</span><span> -</span><span style='color: #BB0000;'>1.33</span><span>   -</span><span style='color: #BB0000;'>0.297</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  1.27   0.411   1.37      | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.186 -</span><span style='color: #BB0000;'>0.088</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>  0.568     | 
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.173</span><span>  0.262  -</span><span style='color: #BB0000;'>0.376</span><span>     | 
+#&gt; </span><span style='color: #555555;'>2</span><span>  1.11   0.417   1.52  ... | 
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.226</span><span> -</span><span style='color: #BB0000;'>1.33</span><span>   -</span><span style='color: #BB0000;'>0.297</span><span>     | 
+#&gt; </span><span style='color: #555555;'>4</span><span>  1.27   0.411   1.37      | 
+#&gt; </span><span style='color: #555555;'>5</span><span>  0.186 -</span><span style='color: #BB0000;'>0.088</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>  0.568     | 
 #&gt; </div><div class='input'><span class='co'># Reproduce Exhibit 8.3</span>
 <span class='no'>benthos_ca</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='st'>"colprincipal"</span>) <span class='kw'>%&gt;%</span>
@@ -383,14 +498,14 @@ aesthetics are in bold):</p><ul>
   <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>) +
   <span class='fu'>geom_v_text</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>)</div><div class='img'><img src='geom-biplot-text-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Reproduce Exhibit 8.4</span>
 <span class='no'>benthos_ca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>(<span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='dplyr-verbs.html'>transmute_u</a></span>(<span class='kw'>mass</span> <span class='kw'>=</span> <span class='no'>.mass</span>, <span class='kw'>sqrt_mass</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>(<span class='no'>.mass</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='dplyr-verbs.html'>transmute_u</a></span>(<span class='kw'>mass</span> <span class='kw'>=</span> <span class='no'>.mass</span>, <span class='kw'>sqrt_mass</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='no'>.mass</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='st'>"colprincipal"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>), <span class='kw'>scale_u</span> <span class='kw'>=</span> <span class='st'>"sqrt_mass"</span>) +
   <span class='fu'>theme_bw</span>() +
   <span class='fu'><a href='geom-biplot-vector.html'>geom_u_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>arrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>) +
   <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>mass</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>17</span>) +
-  <span class='fu'>scale_size_continuous</span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>4</span>), <span class='kw'>guide</span> <span class='kw'>=</span> <span class='st'>"none"</span>) +
+  <span class='fu'>scale_size_continuous</span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>4</span>), <span class='kw'>guide</span> <span class='kw'>=</span> <span class='st'>"none"</span>) +
   <span class='fu'>geom_u_text</span>(
     <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"chull"</span>,
     <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='st'>"outward"</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='st'>"outward"</span>
@@ -398,20 +513,13 @@ aesthetics are in bold):</p><ul>
   <span class='fu'><a href='geom-biplot-point.html'>geom_v_point</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
   <span class='fu'>geom_v_text_repel</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>, <span class='kw'>min.segment.length</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='img'><img src='geom-biplot-text-5.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#biplot-layers">Biplot layers</a></li>
-
-      <li><a href="#aesthetics">Aesthetics</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -419,13 +527,16 @@ aesthetics are in bold):</p><ul>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

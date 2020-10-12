@@ -9,6 +9,9 @@ A \link[tibble:tibble]{tibble}.
 \source{
 Greenacre (2010), pp. 25--26.
 }
+\usage{
+data(bioenv)
+}
 \description{
 Species counts and environmental variables for several locations
 on a sea-bed.

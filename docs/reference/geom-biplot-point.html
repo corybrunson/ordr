@@ -8,21 +8,29 @@
 
 <title>Render points at ordinates — geom-biplot-point • ordr</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,11 +38,11 @@
 
 
 
-<meta property="og:title" content="Render points at ordinates — geom-biplot-point" />
 
+<meta property="og:title" content="Render points at ordinates — geom-biplot-point" />
 <meta property="og:description" content="geom_*_point() renders symbols at the positions of the
 subjects or vectors." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -48,9 +56,10 @@ subjects or vectors." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -72,7 +81,7 @@ subjects or vectors." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -80,7 +89,6 @@ subjects or vectors." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -90,6 +98,7 @@ subjects or vectors." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -101,31 +110,51 @@ subjects or vectors." />
     </div>
 
     <div class="ref-description">
-    
     <p><code>geom_*_point()</code> renders symbols at the positions of the
 subjects or vectors.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>geom_u_point</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='no'>...</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>geom_u_point</span>(
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>geom_v_point</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='no'>...</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>geom_v_point</span>(
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>geom_biplot_point</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>, <span class='no'>...</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
+<span class='fu'>geom_biplot_point</span>(
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
+  <span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>mapping</th>
-      <td><p>Set of aesthetic mappings created by <code>aes()</code> or
-<code>aes_()</code>. If specified and <code>inherit.aes = TRUE</code> (the
+      <td><p>Set of aesthetic mappings created by <code><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes()</a></code> or
+<code><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_()</a></code>. If specified and <code>inherit.aes = TRUE</code> (the
 default), it is combined with the default mapping at the top level of the
 plot. You must supply <code>mapping</code> if there is no plot mapping.</p></td>
     </tr>
@@ -134,10 +163,10 @@ plot. You must supply <code>mapping</code> if there is no plot mapping.</p></td>
       <td><p>The data to be displayed in this layer. There are three
 options:</p>
 <p>If <code>NULL</code>, the default, the data is inherited from the plot
-data as specified in the call to <code>ggplot()</code>.</p>
+data as specified in the call to <code><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot()</a></code>.</p>
 <p>A <code>data.frame</code>, or other object, will override the plot
 data. All objects will be fortified to produce a data frame. See
-<code><a href='fortify.html'>fortify()</a></code> for which variables will be created.</p>
+<code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>fortify()</a></code> for which variables will be created.</p>
 <p>A <code>function</code> will be called with a single argument,
 the plot data. The return value must be a <code>data.frame</code>, and
 will be used as the layer data. A <code>function</code> can be created
@@ -174,7 +203,7 @@ display.</p></td>
       <td><p>If <code>FALSE</code>, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. <code>borders()</code>.</p></td>
+the default plot specification, e.g. <code><a href='https://ggplot2.tidyverse.org/reference/borders.html'>borders()</a></code>.</p></td>
     </tr>
     <tr>
       <th>.matrix</th>
@@ -183,11 +212,12 @@ or both matrices in a matrix decomposition used for ordination. The
 standard values are <code>"u"</code>, <code>"v"</code>, and <code>"uv"</code>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="biplot-layers"><a class="anchor" href="#biplot-layers"></a>Biplot layers</h2>
 
     
-    <p><code><a href='ggbiplot.html'>ggbiplot()</a></code> uses <code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>ggplot2::fortify()</a></code> internally to produce a single data
+
+<p><code><a href='ggbiplot.html'>ggbiplot()</a></code> uses <code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>ggplot2::fortify()</a></code> internally to produce a single data
 frame with a <code>.matrix</code> column distinguishing the subjects (<code>"u"</code>) and
 variables (<code>"v"</code>). The stat layers <code><a href='biplot-matrix.html'>stat_u()</a></code> and <code><a href='biplot-matrix.html'>stat_v()</a></code> simply filter
 the data frame to one of these two.</p>
@@ -195,11 +225,11 @@ the data frame to one of these two.</p>
 order to render plot elements for the corresponding matrix \(U\) or
 \(V\). <code>geom_biplot_*()</code> selects a default matrix based on common practice,
 e.g. \(U\) for points and \(V\) for arrows.</p>
-    
     <h2 class="hasAnchor" id="aesthetics"><a class="anchor" href="#aesthetics"></a>Aesthetics</h2>
 
     
-    <p><code>geom_*_point()</code> understands the following aesthetics (required aesthetics
+
+<p><code>geom_*_point()</code> understands the following aesthetics (required aesthetics
 are in bold):</p><ul>
 <li><p><strong><code>x</code></strong></p></li>
 <li><p><strong><code>y</code></strong></p></li>
@@ -212,42 +242,43 @@ are in bold):</p><ul>
 <li><p><code>stroke</code></p></li>
 <li><p><code>group</code></p></li>
 </ul>
-    
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Linear regression on marine ecosystem data</span>
 <span class='co'># Adapt Exhibit 2.3 in Greenacre (2010)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>bioenv</span>)
 <span class='no'>bioenv</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/transform'>transform</a></span>(
-    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/vector'>as.vector</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/scale'>scale</a></span>(<span class='no'>Depth</span>)),
-    <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/vector'>as.vector</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/scale'>scale</a></span>(<span class='no'>Pollution</span>))
+  <span class='fu'><a href='https://rdrr.io/r/base/transform.html'>transform</a></span>(
+    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='no'>Depth</span>)),
+    <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='no'>Pollution</span>))
   ) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>d</span> ~ <span class='no'>x</span> + <span class='no'>y</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>d</span> ~ <span class='no'>x</span> + <span class='no'>y</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>bioenv_lm</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lm': (30 x 3) x (1 x 3)'
+  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>bioenv_lm</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lm': (30 x 3) x (1 x 3)'
 #&gt; # 3 coordinates: (Intercept), x, y
 #&gt; # 
 #&gt; # U: [ 30 x 3 | 7 ]
 #&gt;   `(Intercept)`       x      y |   .name   .hat .sigma .cooksd
-#&gt;                                |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>             1 -</span><span style='color: #BB0000;'>0.156</span><span>   0.132 | </span><span style='color: #BCBCBC;'>1</span><span> 1     0.034</span><span style='text-decoration: underline;'>4</span><span>   5.20 6.85</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>             1  0.036</span><span style='text-decoration: underline;'>3</span><span> -</span><span style='color: #BB0000;'>0.802</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> 2     0.058</span><span style='text-decoration: underline;'>7</span><span>   5.24 4.64</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>             1 -</span><span style='color: #BB0000;'>0.988</span><span>   0.413 | </span><span style='color: #BCBCBC;'>3</span><span> 3     0.067</span><span style='text-decoration: underline;'>0</span><span>   5.26 3.62</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-4</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>             1 -</span><span style='color: #BB0000;'>0.668</span><span>   1.72  | </span><span style='color: #BCBCBC;'>4</span><span> 4     0.135    5.25 3.50</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>             1 -</span><span style='color: #BB0000;'>0.860</span><span>  -</span><span style='color: #BB0000;'>0.288</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> 5     0.075</span><span style='text-decoration: underline;'>0</span><span>   5.26 6.07</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-5</span><span>
-#&gt; </span><span style='color: #949494;'># … with 25 more rows, and 3 more
-#&gt; #   variables: .wt.res </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
-#&gt; #   .fit </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, .se.fit </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt;                                |   <span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>             1 -</span><span style='color: #BB0000;'>0.156</span><span>   0.132 | </span><span style='color: #555555;'>1</span><span> 1     0.034</span><span style='text-decoration: underline;'>4</span><span>   5.20 6.85</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span>             1  0.036</span><span style='text-decoration: underline;'>3</span><span> -</span><span style='color: #BB0000;'>0.802</span><span> | </span><span style='color: #555555;'>2</span><span> 2     0.058</span><span style='text-decoration: underline;'>7</span><span>   5.24 4.64</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span>             1 -</span><span style='color: #BB0000;'>0.988</span><span>   0.413 | </span><span style='color: #555555;'>3</span><span> 3     0.067</span><span style='text-decoration: underline;'>0</span><span>   5.26 3.62</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-4</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span>             1 -</span><span style='color: #BB0000;'>0.668</span><span>   1.72  | </span><span style='color: #555555;'>4</span><span> 4     0.135    5.25 3.50</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>
+#&gt; </span><span style='color: #555555;'>5</span><span>             1 -</span><span style='color: #BB0000;'>0.860</span><span>  -</span><span style='color: #BB0000;'>0.288</span><span> | </span><span style='color: #555555;'>5</span><span> 5     0.075</span><span style='text-decoration: underline;'>0</span><span>   5.26 6.07</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-5</span><span>
+#&gt; </span><span style='color: #555555;'># … with 25 more rows, and 3 more</span><span>
+#&gt; # U: [ 30 x 3 | 7 ]</span><span style='color: #555555;'>#   variables: .wt.res </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt;   `(Intercept)`       x      y | </span><span style='color: #555555;'>#   .fit </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, .se.fit </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; # 
 #&gt; # V: [ 1 x 3 | 1 ]
 #&gt;   `(Intercept)`     x     y |   .name
-#&gt;                             |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>          10.9  2.31 -</span><span style='color: #BB0000;'>2.97</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> d    </div><div class='input'><span class='no'>bioenv_lm</span> <span class='kw'>%&gt;%</span>
+#&gt;                             |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>          10.9  2.31 -</span><span style='color: #BB0000;'>2.97</span><span> | </span><span style='color: #555555;'>1</span><span> d    </div><div class='input'><span class='no'>bioenv_lm</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>.fit</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='no'>.wt.res</span> ^ <span class='fl'>2</span>)) +
   <span class='fu'>theme_bw</span>() +
   <span class='fu'>scale_color_distiller</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"div"</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>1</span>) +
-  <span class='fu'>scale_alpha_continuous</span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>/<span class='fl'>3</span>, <span class='fl'>1</span>)) +
+  <span class='fu'>scale_alpha_continuous</span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>/<span class='fl'>3</span>, <span class='fl'>1</span>)) +
   <span class='fu'>geom_u_point</span>() +
   <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>() +
   <span class='fu'><a href='geom-biplot-isolines.html'>geom_v_isolines</a></span>(<span class='fu'>aes</span>(<span class='kw'>intercept</span> <span class='kw'>=</span> <span class='no'>`(Intercept)`</span>), <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>5</span>) +
@@ -256,139 +287,141 @@ are in bold):</p><ul>
     <span class='st'>"Gradient vector and contour lines for species 'd'"</span>,
     <span class='st'>"Regression plane: standardized depth-pollution space"</span>
   )</div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring unknown aesthetics: intercept</span></div><div class='img'><img src='geom-biplot-point-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Align an MDS ordination to a PCA ordination</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>country_differences</span>)
 <span class='no'>country_differences</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='masks.html'>cmdscale</a></span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_cmds</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_cmds</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
 #&gt; # 2 coordinates: PCo1 and PCo2
 #&gt; # 
 #&gt; # U: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  4.41     2.91  | 
+#&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
+#&gt; </span><span style='color: #555555;'>3</span><span>  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
+#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
+#&gt; </span><span style='color: #555555;'>5</span><span>  4.41     2.91  | 
 #&gt; 
 #&gt; # 
 #&gt; # V: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  4.41     2.91  | 
+#&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
+#&gt; </span><span style='color: #555555;'>3</span><span>  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
+#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
+#&gt; </span><span style='color: #555555;'>5</span><span>  4.41     2.91  | 
 #&gt; </div><div class='input'><span class='no'>country_differences</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/prcomp'>prcomp</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/prcomp.html'>prcomp</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_pca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (13 x 13) x (13 x 13)'
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_pca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (13 x 13) x (13 x 13)'
 #&gt; # 13 coordinates: PC1, PC2, ..., PC13
 #&gt; # 
 #&gt; # U: [ 13 x 13 | 0 ]
 #&gt;      PC1   PC2     PC3 ... | 
 #&gt;                            | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.576</span><span>  5.50  3.17       | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>2.74</span><span>   6.34 -</span><span style='color: #BB0000;'>0.059</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  7.37   2.28 -</span><span style='color: #BB0000;'>1.22</span><span>       | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>5.50</span><span>   2.88 -</span><span style='color: #BB0000;'>1.06</span><span>       | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  9.60  -</span><span style='color: #BB0000;'>4.05</span><span> -</span><span style='color: #BB0000;'>3.03</span><span>       | 
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.576</span><span>  5.50  3.17       | 
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>2.74</span><span>   6.34 -</span><span style='color: #BB0000;'>0.059</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> ... | 
+#&gt; </span><span style='color: #555555;'>3</span><span>  7.37   2.28 -</span><span style='color: #BB0000;'>1.22</span><span>       | 
+#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>5.50</span><span>   2.88 -</span><span style='color: #BB0000;'>1.06</span><span>       | 
+#&gt; </span><span style='color: #555555;'>5</span><span>  9.60  -</span><span style='color: #BB0000;'>4.05</span><span> -</span><span style='color: #BB0000;'>3.03</span><span>       | 
 #&gt; 
 #&gt; # 
 #&gt; # V: [ 13 x 13 | 0 ]
 #&gt;      PC1    PC2      PC3 ... | 
 #&gt;                              | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.104 -</span><span style='color: #BB0000;'>0.423</span><span> -</span><span style='color: #BB0000;'>0.340</span><span>       | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.206 -</span><span style='color: #BB0000;'>0.475</span><span> -</span><span style='color: #BB0000;'>0.001</span><span style='color: #BB0000;text-decoration: underline;'>97</span><span> ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.289</span><span> -</span><span style='color: #BB0000;'>0.206</span><span>  0.121       | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.343 -</span><span style='color: #BB0000;'>0.250</span><span>  0.102       | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.352</span><span>  0.161  0.302       | 
+#&gt; </span><span style='color: #555555;'>1</span><span>  0.104 -</span><span style='color: #BB0000;'>0.423</span><span> -</span><span style='color: #BB0000;'>0.340</span><span>       | 
+#&gt; </span><span style='color: #555555;'>2</span><span>  0.206 -</span><span style='color: #BB0000;'>0.475</span><span> -</span><span style='color: #BB0000;'>0.001</span><span style='color: #BB0000;text-decoration: underline;'>97</span><span> ... | 
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.289</span><span> -</span><span style='color: #BB0000;'>0.206</span><span>  0.121       | 
+#&gt; </span><span style='color: #555555;'>4</span><span>  0.343 -</span><span style='color: #BB0000;'>0.250</span><span>  0.102       | 
+#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.352</span><span>  0.161  0.302       | 
 #&gt; </div><div class='input'><span class='co'># negate PCA cases to MDS coordinates</span>
 <span class='no'>differences_cmds</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='alignment.html'>negate_to</a></span>(<span class='no'>differences_pca</span>, <span class='st'>"u"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_align_u</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_align_u</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
 #&gt; # 2 coordinates, transformed: PCo1 and PCo2
 #&gt; # 
 #&gt; # U: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span>  2.94  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>     3.68  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.70     0.883 | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>     2.01  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  4.41    -</span><span style='color: #BB0000;'>2.91</span><span>  | 
+#&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span>  2.94  | 
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>     3.68  | 
+#&gt; </span><span style='color: #555555;'>3</span><span>  3.70     0.883 | 
+#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>     2.01  | 
+#&gt; </span><span style='color: #555555;'>5</span><span>  4.41    -</span><span style='color: #BB0000;'>2.91</span><span>  | 
 #&gt; 
 #&gt; # 
 #&gt; # V: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span>  2.94  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>     3.68  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.70     0.883 | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>     2.01  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  4.41    -</span><span style='color: #BB0000;'>2.91</span><span>  | 
-#&gt; </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(
+#&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span>  2.94  | 
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>     3.68  | 
+#&gt; </span><span style='color: #555555;'>3</span><span>  3.70     0.883 | 
+#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>     2.01  | 
+#&gt; </span><span style='color: #555555;'>5</span><span>  4.41    -</span><span style='color: #BB0000;'>2.91</span><span>  | 
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'>geom_u_point</span>(),
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'>geom_u_point</span>(),
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_align_u</span>) + <span class='fu'>geom_u_point</span>()
 ), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>))</div><div class='img'><img src='geom-biplot-point-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># negate PCA variables to MDS coordinates</span>
 <span class='no'>differences_cmds</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='alignment.html'>negate_to</a></span>(<span class='no'>differences_pca</span>, <span class='st'>"v"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_align_v</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_align_v</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
 #&gt; # 2 coordinates, transformed: PCo1 and PCo2
 #&gt; # 
 #&gt; # U: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  1.02    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>3.70</span><span>    -</span><span style='color: #BB0000;'>0.883</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  2.56    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>4.41</span><span>     2.91  | 
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
+#&gt; </span><span style='color: #555555;'>2</span><span>  1.02    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>3.70</span><span>    -</span><span style='color: #BB0000;'>0.883</span><span> | 
+#&gt; </span><span style='color: #555555;'>4</span><span>  2.56    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
+#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>4.41</span><span>     2.91  | 
 #&gt; 
 #&gt; # 
 #&gt; # V: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  1.02    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>3.70</span><span>    -</span><span style='color: #BB0000;'>0.883</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  2.56    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>4.41</span><span>     2.91  | 
-#&gt; </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
+#&gt; </span><span style='color: #555555;'>2</span><span>  1.02    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>3.70</span><span>    -</span><span style='color: #BB0000;'>0.883</span><span> | 
+#&gt; </span><span style='color: #555555;'>4</span><span>  2.56    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
+#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>4.41</span><span>     2.91  | 
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(),
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(),
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_align_v</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>()
 ), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>))</div><div class='img'><img src='geom-biplot-point-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Confer inertia between rows and columns of CA on Spanish ISSP sample</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>issp_women</span>)
 <span class='no'>issp_women</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>ca</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/ca/topics/ca'>ca</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>ca</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/ca.html'>ca</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>issp_ca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (23 x 22) x (39 x 22)'
+  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>issp_ca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (23 x 22) x (39 x 22)'
 #&gt; # 22 coordinates: Dim1, Dim2, ..., Dim22
 #&gt; # 
 #&gt; # U: [ 23 x 22 | 4 ]
 #&gt;     Dim1   Dim2    Dim3 ... |   .name   .mass  .dist .inertia
-#&gt;                             |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.280  0.111  0.830      | </span><span style='color: #BCBCBC;'>1</span><span> m1    0.185   0.080</span><span style='text-decoration: underline;'>7</span><span> 0.001</span><span style='text-decoration: underline;'>20</span><span> 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  1.64  -</span><span style='color: #BB0000;'>1.05</span><span>  -</span><span style='color: #BB0000;'>1.86</span><span>   ... | </span><span style='color: #BCBCBC;'>2</span><span> m2    0.027</span><span style='text-decoration: underline;'>2</span><span>  0.413  0.004</span><span style='text-decoration: underline;'>64</span><span> 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.508</span><span> -</span><span style='color: #BB0000;'>2.84</span><span>   1.14       | </span><span style='color: #BCBCBC;'>3</span><span> m3    0.007</span><span style='text-decoration: underline;'>12</span><span> 0.321  0.000</span><span style='text-decoration: underline;'>733</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.459</span><span> -</span><span style='color: #BB0000;'>1.23</span><span>   0.011</span><span style='text-decoration: underline;'>1</span><span>     | </span><span style='color: #BCBCBC;'>4</span><span> m4    0.010</span><span style='text-decoration: underline;'>9</span><span>  0.226  0.000</span><span style='text-decoration: underline;'>558</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.850</span><span>  0.403 -</span><span style='color: #BB0000;'>1.08</span><span>       | </span><span style='color: #BCBCBC;'>5</span><span> m5    0.103   0.214  0.004</span><span style='text-decoration: underline;'>71</span><span> 
-#&gt; </span><span style='color: #949494;'># … with 18 more rows</span><span>
+#&gt;                             |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>  0.280  0.111  0.830      | </span><span style='color: #555555;'>1</span><span> m1    0.185   0.080</span><span style='text-decoration: underline;'>7</span><span> 0.001</span><span style='text-decoration: underline;'>20</span><span> 
+#&gt; </span><span style='color: #555555;'>2</span><span>  1.64  -</span><span style='color: #BB0000;'>1.05</span><span>  -</span><span style='color: #BB0000;'>1.86</span><span>   ... | </span><span style='color: #555555;'>2</span><span> m2    0.027</span><span style='text-decoration: underline;'>2</span><span>  0.413  0.004</span><span style='text-decoration: underline;'>64</span><span> 
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.508</span><span> -</span><span style='color: #BB0000;'>2.84</span><span>   1.14       | </span><span style='color: #555555;'>3</span><span> m3    0.007</span><span style='text-decoration: underline;'>12</span><span> 0.321  0.000</span><span style='text-decoration: underline;'>733</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>0.459</span><span> -</span><span style='color: #BB0000;'>1.23</span><span>   0.011</span><span style='text-decoration: underline;'>1</span><span>     | </span><span style='color: #555555;'>4</span><span> m4    0.010</span><span style='text-decoration: underline;'>9</span><span>  0.226  0.000</span><span style='text-decoration: underline;'>558</span><span>
+#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.850</span><span>  0.403 -</span><span style='color: #BB0000;'>1.08</span><span>       | </span><span style='color: #555555;'>5</span><span> m5    0.103   0.214  0.004</span><span style='text-decoration: underline;'>71</span><span> 
+#&gt; </span><span style='color: #555555;'># … with 18 more rows</span><span>
 #&gt; # 
 #&gt; # V: [ 39 x 22 | 4 ]
 #&gt;     Dim1   Dim2   Dim3 ... |   .name   .mass .dist .inertia
-#&gt;                            |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.14</span><span>  -</span><span style='color: #BB0000;'>0.854</span><span> -</span><span style='color: #BB0000;'>0.892</span><span>     | </span><span style='color: #BCBCBC;'>1</span><span> A1    0.023</span><span style='text-decoration: underline;'>6</span><span>  0.289 0.001</span><span style='text-decoration: underline;'>97</span><span> 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.311</span><span>  1.09  -</span><span style='color: #BB0000;'>0.817</span><span> ... | </span><span style='color: #BCBCBC;'>2</span><span> A2    0.055</span><span style='text-decoration: underline;'>3</span><span>  0.109 0.000</span><span style='text-decoration: underline;'>651</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.629  0.814  0.283     | </span><span style='color: #BCBCBC;'>3</span><span> A3    0.005</span><span style='text-decoration: underline;'>40</span><span> 0.333 0.000</span><span style='text-decoration: underline;'>598</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.963 -</span><span style='color: #BB0000;'>0.883</span><span>  1.79      | </span><span style='color: #BCBCBC;'>4</span><span> A4    0.035</span><span style='text-decoration: underline;'>5</span><span>  0.255 0.002</span><span style='text-decoration: underline;'>30</span><span> 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  1.25  -</span><span style='color: #BB0000;'>2.50</span><span>   0.188     | </span><span style='color: #BCBCBC;'>5</span><span> A5    0.005</span><span style='text-decoration: underline;'>28</span><span> 0.409 0.000</span><span style='text-decoration: underline;'>884</span><span>
-#&gt; </span><span style='color: #949494;'># … with 34 more rows</span><span></div><div class='input'><span class='co'># Reproduce Exhibit 9.2 in Greenacre (2010)...</span>
+#&gt;                            |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>1.14</span><span>  -</span><span style='color: #BB0000;'>0.854</span><span> -</span><span style='color: #BB0000;'>0.892</span><span>     | </span><span style='color: #555555;'>1</span><span> A1    0.023</span><span style='text-decoration: underline;'>6</span><span>  0.289 0.001</span><span style='text-decoration: underline;'>97</span><span> 
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.311</span><span>  1.09  -</span><span style='color: #BB0000;'>0.817</span><span> ... | </span><span style='color: #555555;'>2</span><span> A2    0.055</span><span style='text-decoration: underline;'>3</span><span>  0.109 0.000</span><span style='text-decoration: underline;'>651</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span>  0.629  0.814  0.283     | </span><span style='color: #555555;'>3</span><span> A3    0.005</span><span style='text-decoration: underline;'>40</span><span> 0.333 0.000</span><span style='text-decoration: underline;'>598</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span>  0.963 -</span><span style='color: #BB0000;'>0.883</span><span>  1.79      | </span><span style='color: #555555;'>4</span><span> A4    0.035</span><span style='text-decoration: underline;'>5</span><span>  0.255 0.002</span><span style='text-decoration: underline;'>30</span><span> 
+#&gt; </span><span style='color: #555555;'>5</span><span>  1.25  -</span><span style='color: #BB0000;'>2.50</span><span>   0.188     | </span><span style='color: #555555;'>5</span><span> A5    0.005</span><span style='text-decoration: underline;'>28</span><span> 0.409 0.000</span><span style='text-decoration: underline;'>884</span><span>
+#&gt; </span><span style='color: #555555;'># … with 34 more rows</span><span></div><div class='input'><span class='co'># Reproduce Exhibit 9.2 in Greenacre (2010)...</span>
 <span class='no'>issp_ca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
   <span class='fu'>theme_bw</span>() +
   <span class='fu'>geom_u_point</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
@@ -404,20 +437,13 @@ are in bold):</p><ul>
   <span class='fu'><a href='geom-biplot-text.html'>geom_v_text_repel</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>)</div><div class='img'><img src='geom-biplot-point-5.png' alt='' width='700' height='433' /></div><div class='input'># Reproduce Exhibits 9.4 and 9.6 in Greenacre (2010)...
 </div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#biplot-layers">Biplot layers</a></li>
-
-      <li><a href="#aesthetics">Aesthetics</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -425,13 +451,16 @@ are in bold):</p><ul>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

@@ -9,6 +9,9 @@ A \link[base:matrix]{matrix}.
 \source{
 Greenacre (2010).
 }
+\usage{
+data(issp_women)
+}
 \description{
 Responses to several questions about working women and family.
 }

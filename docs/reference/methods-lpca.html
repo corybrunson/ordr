@@ -8,21 +8,29 @@
 
 <title>Functionality for logistic PCA and logistic SVD objects — methods-lpca • ordr</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,15 +38,15 @@
 
 
 
-<meta property="og:title" content="Functionality for logistic PCA and logistic SVD objects — methods-lpca" />
 
+<meta property="og:title" content="Functionality for logistic PCA and logistic SVD objects — methods-lpca" />
 <meta property="og:description" content="These methods extract data from, and attribute new data to,
 objects of class &quot;lpca&quot; and &quot;lsvd&quot; from the
 logisticPCA package. The signature
 functions logisticPCA::logisticPCA() and logisticPCA::logisticSVD() are
 masked with wrappers that add row and column names from the input matrix to
 the output matrices." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -52,9 +60,10 @@ the output matrices." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -76,7 +85,7 @@ the output matrices." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -84,7 +93,6 @@ the output matrices." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -94,6 +102,7 @@ the output matrices." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -105,14 +114,12 @@ the output matrices." />
     </div>
 
     <div class="ref-description">
-    
     <p>These methods extract data from, and attribute new data to,
 objects of class <code>"lpca"</code> and <code>"lsvd"</code> from the
-<strong><a href='https://www.rdocumentation.org/packages/logisticPCA/topics/logisticPCA-package'>logisticPCA</a></strong> package. The signature
-functions <code><a href='https://www.rdocumentation.org/packages/logisticPCA/topics/logisticPCA'>logisticPCA::logisticPCA()</a></code> and <code><a href='https://www.rdocumentation.org/packages/logisticPCA/topics/logisticSVD'>logisticPCA::logisticSVD()</a></code> are
+<strong><a href='https://rdrr.io/pkg/logisticPCA/man/logisticPCA-package.html'>logisticPCA</a></strong> package. The signature
+functions <code><a href='https://rdrr.io/pkg/logisticPCA/man/logisticPCA.html'>logisticPCA::logisticPCA()</a></code> and <code><a href='https://rdrr.io/pkg/logisticPCA/man/logisticSVD.html'>logisticPCA::logisticSVD()</a></code> are
 masked with wrappers that add row and column names from the input matrix to
 the output matrices.</p>
-    
     </div>
 
     <pre class="usage"><span class='co'># S3 method for lsvd</span>
@@ -180,7 +187,7 @@ the output matrices.</p>
 
 <span class='co'># S3 method for clpca</span>
 <span class='fu'><a href='augmentation.html'>augmentation_coord</a></span>(<span class='no'>x</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -189,36 +196,36 @@ the output matrices.</p>
       <td><p>An ordination object.</p></td>
     </tr>
     </table>
-    
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Logistic SVD of Sanderson finches data</span>
-<span class='no'>finches</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/t'>t</a></span>() <span class='kw'>%&gt;%</span>
+<span class='no'>finches</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='masks.html'>logisticSVD</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_lsvd</span></div><div class='output co'>#&gt; <span class='message'>rARPACK must be installed to use partial_decomp</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lsvd': (17 x 2) x (13 x 2)'
+  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_lsvd</span></div><div class='output co'>#&gt; <span class='message'>rARPACK must be installed to use partial_decomp</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lsvd': (17 x 2) x (13 x 2)'
 #&gt; # 2 coordinates: LSC1 and LSC2
 #&gt; # 
 #&gt; # U: [ 17 x 2 | 1 ]
 #&gt;    LSC1   LSC2 |   .name     
-#&gt;                |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>29.6</span><span> -</span><span style='color: #BB0000;'>27.3</span><span>  | </span><span style='color: #BCBCBC;'>1</span><span> Seymour   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>29.6</span><span> -</span><span style='color: #BB0000;'>27.3</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Baltra    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  39.4  22.9  | </span><span style='color: #BCBCBC;'>3</span><span> Isabella  
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  39.9  40.6  | </span><span style='color: #BCBCBC;'>4</span><span> Fernandina
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  20.2   3.50 | </span><span style='color: #BCBCBC;'>5</span><span> Santiago  
-#&gt; </span><span style='color: #949494;'># … with 12 more rows</span><span>
+#&gt;                |   <span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>29.6</span><span> -</span><span style='color: #BB0000;'>27.3</span><span>  | </span><span style='color: #555555;'>1</span><span> Seymour   
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>29.6</span><span> -</span><span style='color: #BB0000;'>27.3</span><span>  | </span><span style='color: #555555;'>2</span><span> Baltra    
+#&gt; </span><span style='color: #555555;'>3</span><span>  39.4  22.9  | </span><span style='color: #555555;'>3</span><span> Isabella  
+#&gt; </span><span style='color: #555555;'>4</span><span>  39.9  40.6  | </span><span style='color: #555555;'>4</span><span> Fernandina
+#&gt; </span><span style='color: #555555;'>5</span><span>  20.2   3.50 | </span><span style='color: #555555;'>5</span><span> Santiago  
+#&gt; </span><span style='color: #555555;'># … with 12 more rows</span><span>
 #&gt; # 
 #&gt; # V: [ 13 x 2 | 2 ]
 #&gt;     LSC1   LSC2 |   .name                       .mu
-#&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.233   0.231 | </span><span style='color: #BCBCBC;'>1</span><span> Large ground finch         9.02
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 0.223  -</span><span style='color: #BB0000;'>0.216</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Medium ground finch        5.97
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.164  -</span><span style='color: #BB0000;'>0.318</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Small ground finch         9.86
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.078</span><span style='text-decoration: underline;'>7</span><span>  0.548 | </span><span style='color: #BCBCBC;'>4</span><span> Sharp-beaked ground finch  6.88
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.240  -</span><span style='color: #BB0000;'>0.451</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> Cactus ground finch        5.85
-#&gt; </span><span style='color: #949494;'># … with 8 more rows</span><span></div><div class='input'><span class='no'>finches_lsvd</span> <span class='kw'>%&gt;%</span>
+#&gt;                 |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> 0.233   0.231 | </span><span style='color: #555555;'>1</span><span> Large ground finch         9.02
+#&gt; </span><span style='color: #555555;'>2</span><span> 0.223  -</span><span style='color: #BB0000;'>0.216</span><span> | </span><span style='color: #555555;'>2</span><span> Medium ground finch        5.97
+#&gt; </span><span style='color: #555555;'>3</span><span> 0.164  -</span><span style='color: #BB0000;'>0.318</span><span> | </span><span style='color: #555555;'>3</span><span> Small ground finch         9.86
+#&gt; </span><span style='color: #555555;'>4</span><span> 0.078</span><span style='text-decoration: underline;'>7</span><span>  0.548 | </span><span style='color: #555555;'>4</span><span> Sharp-beaked ground finch  6.88
+#&gt; </span><span style='color: #555555;'>5</span><span> 0.240  -</span><span style='color: #BB0000;'>0.451</span><span> | </span><span style='color: #555555;'>5</span><span> Cactus ground finch        5.85
+#&gt; </span><span style='color: #555555;'># … with 8 more rows</span><span></div><div class='input'><span class='no'>finches_lsvd</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(
     <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>LSC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>LSC2</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
     <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>100</span>
@@ -230,32 +237,32 @@ the output matrices.</p>
     <span class='st'>"Logistic SVD of the Galapagos island finches"</span>,
     <span class='st'>"Islands (finches) scaled to the primary (secondary) axes"</span>
   )</div><div class='img'><img src='methods-lpca-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Logistic PCA of Sanderson finches data</span>
-<span class='no'>finches</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/t'>t</a></span>() <span class='kw'>%&gt;%</span>
+<span class='no'>finches</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='masks.html'>logisticPCA</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_lpca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lpca': (17 x 2) x (13 x 2)'
+  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_lpca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lpca': (17 x 2) x (13 x 2)'
 #&gt; # 2 coordinates: LPC1 and LPC2
 #&gt; # 
 #&gt; # U: [ 17 x 2 | 1 ]
 #&gt;     LPC1   LPC2 |   .name     
-#&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>   2.02 -</span><span style='color: #BB0000;'>10.4</span><span>  | </span><span style='color: #BCBCBC;'>1</span><span> Seymour   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>   2.02 -</span><span style='color: #BB0000;'>10.4</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Baltra    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>11.5</span><span>    4.62 | </span><span style='color: #BCBCBC;'>3</span><span> Isabella  
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  -</span><span style='color: #BB0000;'>8.64</span><span>   7.51 | </span><span style='color: #BCBCBC;'>4</span><span> Fernandina
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>10.6</span><span>    1.65 | </span><span style='color: #BCBCBC;'>5</span><span> Santiago  
-#&gt; </span><span style='color: #949494;'># … with 12 more rows</span><span>
+#&gt;                 |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     
+#&gt; </span><span style='color: #555555;'>1</span><span>   2.02 -</span><span style='color: #BB0000;'>10.4</span><span>  | </span><span style='color: #555555;'>1</span><span> Seymour   
+#&gt; </span><span style='color: #555555;'>2</span><span>   2.02 -</span><span style='color: #BB0000;'>10.4</span><span>  | </span><span style='color: #555555;'>2</span><span> Baltra    
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>11.5</span><span>    4.62 | </span><span style='color: #555555;'>3</span><span> Isabella  
+#&gt; </span><span style='color: #555555;'>4</span><span>  -</span><span style='color: #BB0000;'>8.64</span><span>   7.51 | </span><span style='color: #555555;'>4</span><span> Fernandina
+#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>10.6</span><span>    1.65 | </span><span style='color: #555555;'>5</span><span> Santiago  
+#&gt; </span><span style='color: #555555;'># … with 12 more rows</span><span>
 #&gt; # 
 #&gt; # V: [ 13 x 2 | 2 ]
 #&gt;      LPC1   LPC2 |   .name                        .mu
-#&gt;                  |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.190</span><span>   0.372 | </span><span style='color: #BCBCBC;'>1</span><span> Large ground finch         3.00 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.365</span><span>  -</span><span style='color: #BB0000;'>0.162</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Medium ground finch        1.10 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.279</span><span>  -</span><span style='color: #BB0000;'>0.281</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Small ground finch         1.91 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.038</span><span style='text-decoration: underline;'>9</span><span>  0.568 | </span><span style='color: #BCBCBC;'>4</span><span> Sharp-beaked ground finch  1.79 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.353</span><span>  -</span><span style='color: #BB0000;'>0.361</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> Cactus ground finch       -</span><span style='color: #BB0000;'>0.451</span><span>
-#&gt; </span><span style='color: #949494;'># … with 8 more rows</span><span></div><div class='input'><span class='no'>finches_lpca</span> <span class='kw'>%&gt;%</span>
+#&gt;                  |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.190</span><span>   0.372 | </span><span style='color: #555555;'>1</span><span> Large ground finch         3.00 
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.365</span><span>  -</span><span style='color: #BB0000;'>0.162</span><span> | </span><span style='color: #555555;'>2</span><span> Medium ground finch        1.10 
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.279</span><span>  -</span><span style='color: #BB0000;'>0.281</span><span> | </span><span style='color: #555555;'>3</span><span> Small ground finch         1.91 
+#&gt; </span><span style='color: #555555;'>4</span><span>  0.038</span><span style='text-decoration: underline;'>9</span><span>  0.568 | </span><span style='color: #555555;'>4</span><span> Sharp-beaked ground finch  1.79 
+#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.353</span><span>  -</span><span style='color: #BB0000;'>0.361</span><span> | </span><span style='color: #555555;'>5</span><span> Cactus ground finch       -</span><span style='color: #BB0000;'>0.451</span><span>
+#&gt; </span><span style='color: #555555;'># … with 8 more rows</span><span></div><div class='input'><span class='no'>finches_lpca</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(
     <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>LPC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>LPC2</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
     <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>50</span>
@@ -267,34 +274,34 @@ the output matrices.</p>
     <span class='st'>"Logistic PCA of the Galapagos island finches"</span>,
     <span class='st'>"Islands (finches) scaled to the primary (secondary) axes"</span>
   )</div><div class='img'><img src='methods-lpca-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Convex logistic PCA of Sanderson finches data</span>
-<span class='no'>finches</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/t'>t</a></span>() <span class='kw'>%&gt;%</span>
+<span class='no'>finches</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>() <span class='kw'>%&gt;%</span>
   <span class='co'># omit finches present on every island</span>
-  {<span class='no'>.</span>[, ! <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/apply'>apply</a></span>(<span class='no'>.</span>, <span class='fl'>2</span>, <span class='no'>all</span>), <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>]} <span class='kw'>%&gt;%</span>
+  {<span class='no'>.</span>[, ! <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>.</span>, <span class='fl'>2</span>, <span class='no'>all</span>), <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>]} <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='masks.html'>convexLogisticPCA</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_clpca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'clpca': (17 x 2) x (12 x 2)'
+  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_clpca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'clpca': (17 x 2) x (12 x 2)'
 #&gt; # 2 coordinates: LPC1 and LPC2
 #&gt; # 
 #&gt; # U: [ 17 x 2 | 1 ]
 #&gt;    LPC1   LPC2 |   .name     
-#&gt;                |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>5.81</span><span> -</span><span style='color: #BB0000;'>9.59</span><span>  | </span><span style='color: #BCBCBC;'>1</span><span> Seymour   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>5.81</span><span> -</span><span style='color: #BB0000;'>9.59</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Baltra    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 10.0   3.39  | </span><span style='color: #BCBCBC;'>3</span><span> Isabella  
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  7.81  6.94  | </span><span style='color: #BCBCBC;'>4</span><span> Fernandina
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  9.14  0.958 | </span><span style='color: #BCBCBC;'>5</span><span> Santiago  
-#&gt; </span><span style='color: #949494;'># … with 12 more rows</span><span>
+#&gt;                |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>5.81</span><span> -</span><span style='color: #BB0000;'>9.59</span><span>  | </span><span style='color: #555555;'>1</span><span> Seymour   
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>5.81</span><span> -</span><span style='color: #BB0000;'>9.59</span><span>  | </span><span style='color: #555555;'>2</span><span> Baltra    
+#&gt; </span><span style='color: #555555;'>3</span><span> 10.0   3.39  | </span><span style='color: #555555;'>3</span><span> Isabella  
+#&gt; </span><span style='color: #555555;'>4</span><span>  7.81  6.94  | </span><span style='color: #555555;'>4</span><span> Fernandina
+#&gt; </span><span style='color: #555555;'>5</span><span>  9.14  0.958 | </span><span style='color: #555555;'>5</span><span> Santiago  
+#&gt; </span><span style='color: #555555;'># … with 12 more rows</span><span>
 #&gt; # 
 #&gt; # V: [ 12 x 2 | 2 ]
 #&gt;    LPC1   LPC2 |   .name                       .mu
-#&gt;                |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.232  0.275 | </span><span style='color: #BCBCBC;'>1</span><span> Large ground finch        1.54 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 0.355 -</span><span style='color: #BB0000;'>0.293</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Medium ground finch       1.18 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.210 -</span><span style='color: #BB0000;'>0.315</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Small ground finch        1.54 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.110  0.568 | </span><span style='color: #BCBCBC;'>4</span><span> Sharp-beaked ground finch 0.357
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.275 -</span><span style='color: #BB0000;'>0.444</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> Cactus ground finch       0.875
-#&gt; </span><span style='color: #949494;'># … with 7 more rows</span><span></div><div class='input'><span class='no'>finches_clpca</span> <span class='kw'>%&gt;%</span>
+#&gt;                |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> 0.232  0.275 | </span><span style='color: #555555;'>1</span><span> Large ground finch        1.54 
+#&gt; </span><span style='color: #555555;'>2</span><span> 0.355 -</span><span style='color: #BB0000;'>0.293</span><span> | </span><span style='color: #555555;'>2</span><span> Medium ground finch       1.18 
+#&gt; </span><span style='color: #555555;'>3</span><span> 0.210 -</span><span style='color: #BB0000;'>0.315</span><span> | </span><span style='color: #555555;'>3</span><span> Small ground finch        1.54 
+#&gt; </span><span style='color: #555555;'>4</span><span> 0.110  0.568 | </span><span style='color: #555555;'>4</span><span> Sharp-beaked ground finch 0.357
+#&gt; </span><span style='color: #555555;'>5</span><span> 0.275 -</span><span style='color: #BB0000;'>0.444</span><span> | </span><span style='color: #555555;'>5</span><span> Cactus ground finch       0.875
+#&gt; </span><span style='color: #555555;'># … with 7 more rows</span><span></div><div class='input'><span class='no'>finches_clpca</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(
     <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>LPC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>LPC2</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
     <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>50</span>
@@ -307,16 +314,13 @@ the output matrices.</p>
     <span class='st'>"Islands (finches) scaled to the primary (secondary) axes"</span>
   )</div><div class='img'><img src='methods-lpca-3.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -324,13 +328,16 @@ the output matrices.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

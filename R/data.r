@@ -7,6 +7,7 @@
 #'   different format in the **[cooccur][cooccur::cooccur]** package.
 #' @template ref-sanderson2000
 #' @name finches
+#' @usage data(finches)
 #' @example inst/examples/finches-ca.r
 #' @example inst/examples/finches-lpca-secondary.r
 NULL
@@ -21,6 +22,7 @@ NULL
 #' @source Greenacre (2010), pp. 25--26.
 #' @template ref-greenacre2010
 #' @name bioenv
+#' @usage data(bioenv)
 #' @example inst/examples/bioenv-lm-isolines.r
 #' @example inst/examples/bioenv-cmds-lm-repel.r
 #' @example inst/examples/bioenv-mlm.r
@@ -37,22 +39,12 @@ NULL
 #' @source Greenacre (2010), pp. 43--44,46.
 #' @template ref-greenacre2010
 #' @name countries
+#' @aliases country_differences country_attributes
+#' @usage data(country_differences)
+#' @usage data(country_attributes)
 #' @example inst/examples/country-cmds-lm.r
 #' @example inst/examples/country-prcomp-confer.r
 #' @example inst/examples/country-cmds-prcomp-negate.r
-#' @rdname countries
-#' @aliases country_differences country_attributes
-#'   
-"country_differences"
-#' @name countries
-#' @rdname countries
-#' @usage data(country_differences)
-#' @format NULL
-"country_attributes"
-#' @name countries
-#' @rdname countries
-#' @usage data(country_attributes)
-#' @format NULL
 NULL
 
 #' @title Marine species from sea-bed (benthic) samples
@@ -65,6 +57,7 @@ NULL
 #' @source Greenacre (2010).
 #' @template ref-greenacre2010
 #' @name benthos
+#' @usage data(benthos)
 #' @example inst/examples/benthos-ca-augment-confer.r
 NULL
 
@@ -77,6 +70,7 @@ NULL
 #' @source Greenacre (2010).
 #' @template ref-greenacre2010
 #' @name issp_women
+#' @usage data(issp_women)
 #' @example inst/examples/women-ca-confer.r
 NULL
 
@@ -88,6 +82,7 @@ NULL
 #' @keywords datasets
 #' @source Baxter & Freestone (2006).
 #' @name glass
+#' @usage data(glass)
 #' @example inst/examples/glass-pca-lda-secondary.r
 NULL
 
@@ -101,5 +96,6 @@ NULL
 #' @source Ruhlman (2009).
 #' @template ref-ruhlman2009
 #' @name ratios
+#' @usage data(ratios)
 #' @example inst/examples/ratios-ca-verbs.r
 NULL

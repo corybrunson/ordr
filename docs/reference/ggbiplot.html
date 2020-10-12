@@ -8,21 +8,29 @@
 
 <title>Biplots following the grammar of graphics — ggbiplot • ordr</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,11 +38,11 @@
 
 
 
-<meta property="og:title" content="Biplots following the grammar of graphics — ggbiplot" />
 
+<meta property="og:title" content="Biplots following the grammar of graphics — ggbiplot" />
 <meta property="og:description" content="Build a biplot visualization from ordination data wrapped as a
 tbl_ord object." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -48,9 +56,10 @@ tbl_ord object." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -72,7 +81,7 @@ tbl_ord object." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -80,7 +89,6 @@ tbl_ord object." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -90,6 +98,7 @@ tbl_ord object." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -101,30 +110,64 @@ tbl_ord object." />
     </div>
 
     <div class="ref-description">
-    
     <p>Build a biplot visualization from ordination data wrapped as a
-<code>tbl_ord</code> object.</p>
-    
+<a href='tbl_ord.html'>tbl_ord</a> object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggbiplot</span>(<span class='kw'>ordination</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>),
-  <span class='kw'>axis.percents</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>scale_u</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>scale_v</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>ggbiplot</span>(
+  <span class='kw'>ordination</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>),
+  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>expand</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>clip</span> <span class='kw'>=</span> <span class='st'>"on"</span>,
+  <span class='kw'>axis.percents</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>scale_u</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>scale_v</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)
 
 <span class='fu'>ord_aes</span>(<span class='no'>ordination</span>, <span class='no'>...</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>ordination</th>
-      <td><p>A <code>[tbl_ord]</code>.</p></td>
+      <td><p>A <a href='tbl_ord.html'>tbl_ord</a>.</p></td>
     </tr>
     <tr>
       <th>mapping</th>
       <td><p>List of default aesthetic mappings to use for the biplot. The
 default assigns the first two coordinates to the aesthetics <code>x</code> and <code>y</code>.
 Other assignments must be supplied in each layer added to the plot.</p></td>
+    </tr>
+    <tr>
+      <th>xlim</th>
+      <td><p>Limits for the x and y axes.</p></td>
+    </tr>
+    <tr>
+      <th>ylim</th>
+      <td><p>Limits for the x and y axes.</p></td>
+    </tr>
+    <tr>
+      <th>expand</th>
+      <td><p>If <code>TRUE</code>, the default, adds a small expansion factor to
+the limits to ensure that data and axes don't overlap. If <code>FALSE</code>,
+limits are taken exactly from the data or <code>xlim</code>/<code>ylim</code>.</p></td>
+    </tr>
+    <tr>
+      <th>clip</th>
+      <td><p>Should drawing be clipped to the extent of the plot panel? A
+setting of <code>"on"</code> (the default) means yes, and a setting of <code>"off"</code>
+means no. In most cases, the default of <code>"on"</code> should not be changed,
+as setting <code>clip = "off"</code> can cause unexpected results. It allows
+drawing of data points anywhere on the plot, including in the plot margins. If
+limits are set via <code>xlim</code> and <code>ylim</code> and some data points fall outside those
+limits, then those data points may show up in places such as the axes, the
+legend, the plot title, or the plot margins.</p></td>
     </tr>
     <tr>
       <th>axis.percents</th>
@@ -144,7 +187,7 @@ the primary axes; ignored if <code>sec.axes</code> is not specified.</p></td>
       <th>scale_u, scale_v</th>
       <td><p>Either the character name of a numeric variable in
 <code>get_*(ordination)</code> or a numeric vector of length
-<code><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>nrow(get_*(ordination))</a></code>, used to scale the coordinates of \(U\) or
+<code><a href='https://rdrr.io/r/base/nrow.html'>nrow(get_*(ordination))</a></code>, used to scale the coordinates of \(U\) or
 \(V\), respectively.</p></td>
     </tr>
     <tr>
@@ -153,17 +196,19 @@ the primary axes; ignored if <code>sec.axes</code> is not specified.</p></td>
 <code><a href='fortify.html'>fortify.tbl_ord()</a></code>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>ggbiplot()</code> produces a <a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a> object from a <code>tbl_ord</code>
+    <p><code>ggbiplot()</code> produces a <a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a> object from a <a href='tbl_ord.html'>tbl_ord</a>
 object <code>ordination</code>. The baseline object is the default unadorned
 <code>"ggplot"</code>-class object <code>p</code> with the following differences from what
 <code><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot2::ggplot()</a></code> returns:</p><ul>
 <li><p><code>p$mapping</code> is augmented with <code>.matrix = .matrix</code>, which expects either
 <code>.matrix = "u"</code> or <code>.matrix = "v"</code> from the biplot.</p></li>
 <li><p><code>p$coordinates</code> is defaulted to <code><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>ggplot2::coord_equal()</a></code> in order to
-faithfully render the geometry of an ordination.</p></li>
+faithfully render the geometry of an ordination. The optional parameters
+<code>xlim</code>, <code>ylim</code>, <code>expand</code>, and <code>clip</code> are passed to <code>coord_equal()</code> and
+default to its <strong>ggplot2</strong> defaults.</p></li>
 <li><p>When <code>x</code> or <code>y</code> are mapped to coordinates of <code>ordination</code>, and if
 <code>axis.percents</code> is <code>TRUE</code>, <code>p$labels$x</code> or <code>p$labels$y</code> are defaulted to the
 coordinate names concatenated with the percentages of <a href='conference.html'>inertia</a>
@@ -171,18 +216,19 @@ captured by the coordinates.</p></li>
 <li><p><code>p</code> is assigned the class <code>"ggbiplot"</code> in addition to <code>"ggplot"</code>. This
 serves no functional purpose currently.</p></li>
 </ul>
-    <p>Furthermore, the user may feed single integer values to the <code>x</code> and <code>y</code>
+
+<p>Furthermore, the user may feed single integer values to the <code>x</code> and <code>y</code>
 aesthetics, which will be interpreted as the corresponding coordinates in the
 ordination.</p>
 <p><code>ord_aes()</code> is a convenience function that generates a full-rank set of
 coordinate aesthetics <code>.coord1</code>, <code>.coord2</code>, etc. mapped to the
 shared coordinates of the ordination object, along with any additional
 aesthetics that are processed internally by <code><a href='https://ggplot2.tidyverse.org/reference/aes.html'>ggplot2::aes()</a></code>.</p>
-    
     <h2 class="hasAnchor" id="biplot-layers"><a class="anchor" href="#biplot-layers"></a>Biplot layers</h2>
 
     
-    <p><code>ggbiplot()</code> uses <code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>ggplot2::fortify()</a></code> internally to produce a single data
+
+<p><code>ggbiplot()</code> uses <code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>ggplot2::fortify()</a></code> internally to produce a single data
 frame with a <code>.matrix</code> column distinguishing the subjects (<code>"u"</code>) and
 variables (<code>"v"</code>). The stat layers <code><a href='biplot-matrix.html'>stat_u()</a></code> and <code><a href='biplot-matrix.html'>stat_v()</a></code> simply filter
 the data frame to one of these two.</p>
@@ -190,41 +236,39 @@ the data frame to one of these two.</p>
 order to render plot elements for the corresponding matrix \(U\) or
 \(V\). <code>geom_biplot_*()</code> selects a default matrix based on common practice,
 e.g. \(U\) for points and \(V\) for arrows.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://ggplot2.tidyverse.org/reference/ggplot2-package.html'>ggplot2::ggplot2()</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Regression analysis of Motor Trend design and performance data</span>
 <span class='no'>mtcars</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/scale'>scale</a></span>(<span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/as.data.frame'>as.data.frame</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>cyl</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>cyl</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='dplyr-verbs.html'>mutate_u</a></span>(<span class='kw'>influence</span> <span class='kw'>=</span> <span class='no'>.wt.res</span>^<span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>mtcars_lm</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lm': (32 x 3) x (1 x 3)'
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>mtcars_lm</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lm': (32 x 3) x (1 x 3)'
 #&gt; # 3 coordinates: (Intercept), wt, cyl
 #&gt; # 
 #&gt; # U: [ 32 x 3 | 8 ]
 #&gt;   `(Intercept)`       wt    cyl |   .name   .hat .sigma .cooksd
-#&gt;                                 |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>             1 -</span><span style='color: #BB0000;'>0.597</span><span>   -</span><span style='color: #BB0000;'>0.188</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> Mazd… 0.054</span><span style='text-decoration: underline;'>8</span><span>   2.60 5.08</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>             1 -</span><span style='color: #BB0000;'>0.342</span><span>   -</span><span style='color: #BB0000;'>0.188</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Mazd… 0.037</span><span style='text-decoration: underline;'>6</span><span>   2.61 4.44</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-4</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>             1 -</span><span style='color: #BB0000;'>0.897</span><span>   -</span><span style='color: #BB0000;'>2.19</span><span>  | </span><span style='color: #BCBCBC;'>3</span><span> Dats… 0.079</span><span style='text-decoration: underline;'>8</span><span>   2.52 5.68</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-2</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>             1 -</span><span style='color: #BB0000;'>0.002</span><span style='color: #BB0000;text-decoration: underline;'>25</span><span> -</span><span style='color: #BB0000;'>0.188</span><span> | </span><span style='color: #BCBCBC;'>4</span><span> Horn… 0.032</span><span style='text-decoration: underline;'>1</span><span>   2.61 1.80</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>             1  0.223    1.81  | </span><span style='color: #BCBCBC;'>5</span><span> Horn… 0.091</span><span style='text-decoration: underline;'>2</span><span>   2.58 2.35</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-2</span><span>
-#&gt; </span><span style='color: #949494;'># … with 27 more rows, and 4 more
-#&gt; #   variables: .wt.res </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
-#&gt; #   .fit </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, .se.fit </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
-#&gt; #   influence </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt;                                 |   <span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>             1 -</span><span style='color: #BB0000;'>0.597</span><span>   -</span><span style='color: #BB0000;'>0.188</span><span> | </span><span style='color: #555555;'>1</span><span> Mazd… 0.054</span><span style='text-decoration: underline;'>8</span><span>   2.60 5.08</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span>             1 -</span><span style='color: #BB0000;'>0.342</span><span>   -</span><span style='color: #BB0000;'>0.188</span><span> | </span><span style='color: #555555;'>2</span><span> Mazd… 0.037</span><span style='text-decoration: underline;'>6</span><span>   2.61 4.44</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-4</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span>             1 -</span><span style='color: #BB0000;'>0.897</span><span>   -</span><span style='color: #BB0000;'>2.19</span><span>  | </span><span style='color: #555555;'>3</span><span> Dats… 0.079</span><span style='text-decoration: underline;'>8</span><span>   2.52 5.68</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-2</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span>             1 -</span><span style='color: #BB0000;'>0.002</span><span style='color: #BB0000;text-decoration: underline;'>25</span><span> -</span><span style='color: #BB0000;'>0.188</span><span> | </span><span style='color: #555555;'>4</span><span> Horn… 0.032</span><span style='text-decoration: underline;'>1</span><span>   2.61 1.80</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>
+#&gt; </span><span style='color: #555555;'>5</span><span>             1  0.223    1.81  | </span><span style='color: #555555;'>5</span><span> Horn… 0.091</span><span style='text-decoration: underline;'>2</span><span>   2.58 2.35</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-2</span><span>
+#&gt; </span><span style='color: #555555;'># … with 27 more rows, and 4 more</span><span>
+#&gt; # U: [ 32 x 3 | 8 ]</span><span style='color: #555555;'>#   variables: .wt.res </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt;   `(Intercept)`       wt    cyl | </span><span style='color: #555555;'>#   .fit </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, .se.fit </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt;                                 | </span><span style='color: #555555;'>#   influence </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; # 
 #&gt; # V: [ 1 x 3 | 1 ]
 #&gt;   `(Intercept)`    wt   cyl |   .name
-#&gt;                             |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>      6.72</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-16</span><span> -</span><span style='color: #BB0000;'>3.19</span><span> -</span><span style='color: #BB0000;'>1.51</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> mpg  </div><div class='input'><span class='no'>mtcars_lm</span> <span class='kw'>%&gt;%</span>
+#&gt;                             |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>      6.72</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-16</span><span> -</span><span style='color: #BB0000;'>3.19</span><span> -</span><span style='color: #BB0000;'>1.51</span><span> | </span><span style='color: #555555;'>1</span><span> mpg  </div><div class='input'><span class='no'>mtcars_lm</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>ggbiplot</span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>wt</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>cyl</span>, <span class='kw'>intercept</span> <span class='kw'>=</span> <span class='no'>`(Intercept)`</span>)) +
   <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>influence</span>)) +
   <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>() +
@@ -234,31 +278,31 @@ e.g. \(U\) for points and \(V\) for arrows.</p>
     <span class='st'>"Regressing mpg onto weight and number of cylinders"</span>
   )</div><div class='img'><img src='ggbiplot-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Unscaled PCA and two-scaled biplot of Anderson iris data</span>
 <span class='no'>iris</span>[, -<span class='fl'>5</span>] <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/princomp'>princomp</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/princomp.html'>princomp</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='dplyr-verbs.html'>mutate_u</a></span>(<span class='kw'>species</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Species</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='dplyr-verbs.html'>mutate_v</a></span>(<span class='kw'>measure</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/grep'>gsub</a></span>(<span class='st'>"\\."</span>, <span class='st'>" "</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/chartr'>tolower</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>iris</span>)[-<span class='fl'>5</span>]))) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>iris_pca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'princomp': (150 x 4) x (4 x 4)'
+  <span class='fu'><a href='dplyr-verbs.html'>mutate_v</a></span>(<span class='kw'>measure</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span>(<span class='st'>"\\."</span>, <span class='st'>" "</span>, <span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>tolower</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>iris</span>)[-<span class='fl'>5</span>]))) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>iris_pca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'princomp': (150 x 4) x (4 x 4)'
 #&gt; # 4 coordinates: Comp.1, Comp.2, ..., Comp.4
 #&gt; # 
 #&gt; # U: [ 150 x 4 | 1 ]
 #&gt;   Comp.1 Comp.2  Comp.3 ... |   species
-#&gt;                             |   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>  
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  -</span><span style='color: #BB0000;'>2.68</span><span>  0.319  0.027</span><span style='text-decoration: underline;'>9</span><span>     | </span><span style='color: #BCBCBC;'>1</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  -</span><span style='color: #BB0000;'>2.71</span><span> -</span><span style='color: #BB0000;'>0.177</span><span>  0.210  ... | </span><span style='color: #BCBCBC;'>2</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  -</span><span style='color: #BB0000;'>2.89</span><span> -</span><span style='color: #BB0000;'>0.145</span><span> -</span><span style='color: #BB0000;'>0.017</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  -</span><span style='color: #BB0000;'>2.75</span><span> -</span><span style='color: #BB0000;'>0.318</span><span> -</span><span style='color: #BB0000;'>0.031</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>     | </span><span style='color: #BCBCBC;'>4</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  -</span><span style='color: #BB0000;'>2.73</span><span>  0.327 -</span><span style='color: #BB0000;'>0.090</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> setosa 
-#&gt; </span><span style='color: #949494;'># … with 145 more rows</span><span>
+#&gt;                             |   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>  
+#&gt; </span><span style='color: #555555;'>1</span><span>  -</span><span style='color: #BB0000;'>2.68</span><span>  0.319  0.027</span><span style='text-decoration: underline;'>9</span><span>     | </span><span style='color: #555555;'>1</span><span> setosa 
+#&gt; </span><span style='color: #555555;'>2</span><span>  -</span><span style='color: #BB0000;'>2.71</span><span> -</span><span style='color: #BB0000;'>0.177</span><span>  0.210  ... | </span><span style='color: #555555;'>2</span><span> setosa 
+#&gt; </span><span style='color: #555555;'>3</span><span>  -</span><span style='color: #BB0000;'>2.89</span><span> -</span><span style='color: #BB0000;'>0.145</span><span> -</span><span style='color: #BB0000;'>0.017</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>     | </span><span style='color: #555555;'>3</span><span> setosa 
+#&gt; </span><span style='color: #555555;'>4</span><span>  -</span><span style='color: #BB0000;'>2.75</span><span> -</span><span style='color: #BB0000;'>0.318</span><span> -</span><span style='color: #BB0000;'>0.031</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>     | </span><span style='color: #555555;'>4</span><span> setosa 
+#&gt; </span><span style='color: #555555;'>5</span><span>  -</span><span style='color: #BB0000;'>2.73</span><span>  0.327 -</span><span style='color: #BB0000;'>0.090</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>     | </span><span style='color: #555555;'>5</span><span> setosa 
+#&gt; </span><span style='color: #555555;'># … with 145 more rows</span><span>
 #&gt; # 
 #&gt; # V: [ 4 x 4 | 1 ]
 #&gt;    Comp.1  Comp.2  Comp.3 ... |   measure     
-#&gt;                               |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.361   0.657   0.582      | </span><span style='color: #BCBCBC;'>1</span><span> sepal length
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.084</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>  0.730  -</span><span style='color: #BB0000;'>0.598</span><span>  ... | </span><span style='color: #BCBCBC;'>2</span><span> sepal width 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.857  -</span><span style='color: #BB0000;'>0.173</span><span>  -</span><span style='color: #BB0000;'>0.076</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> petal length
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.358  -</span><span style='color: #BB0000;'>0.075</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.546</span><span>      | </span><span style='color: #BCBCBC;'>4</span><span> petal width </div><div class='input'><span class='no'>iris_pca</span> <span class='kw'>%&gt;%</span>
+#&gt;                               |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       
+#&gt; </span><span style='color: #555555;'>1</span><span>  0.361   0.657   0.582      | </span><span style='color: #555555;'>1</span><span> sepal length
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.084</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>  0.730  -</span><span style='color: #BB0000;'>0.598</span><span>  ... | </span><span style='color: #555555;'>2</span><span> sepal width 
+#&gt; </span><span style='color: #555555;'>3</span><span>  0.857  -</span><span style='color: #BB0000;'>0.173</span><span>  -</span><span style='color: #BB0000;'>0.076</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>     | </span><span style='color: #555555;'>3</span><span> petal length
+#&gt; </span><span style='color: #555555;'>4</span><span>  0.358  -</span><span style='color: #BB0000;'>0.075</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.546</span><span>      | </span><span style='color: #555555;'>4</span><span> petal width </div><div class='input'><span class='no'>iris_pca</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>ggbiplot</span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>), <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>3</span>) +
   <span class='fu'>theme_bw</span>() +
   <span class='fu'>scale_color_brewer</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>2</span>) +
@@ -269,32 +313,32 @@ e.g. \(U\) for points and \(V\) for arrows.</p>
     <span class='st'>"Row-principal unscaled PCA biplot of Anderson iris data"</span>,
     <span class='st'>"Variable loadings scaled to secondary axes"</span>
   )</div><div class='img'><img src='ggbiplot-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Logistic SVD of Sanderson finches data</span>
-<span class='no'>finches</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/t'>t</a></span>() <span class='kw'>%&gt;%</span>
+<span class='no'>finches</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='masks.html'>logisticSVD</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_lsvd</span></div><div class='output co'>#&gt; <span class='message'>rARPACK must be installed to use partial_decomp</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lsvd': (17 x 2) x (13 x 2)'
+  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_lsvd</span></div><div class='output co'>#&gt; <span class='message'>rARPACK must be installed to use partial_decomp</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lsvd': (17 x 2) x (13 x 2)'
 #&gt; # 2 coordinates: LSC1 and LSC2
 #&gt; # 
 #&gt; # U: [ 17 x 2 | 1 ]
 #&gt;    LSC1   LSC2 |   .name     
-#&gt;                |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>29.6</span><span> -</span><span style='color: #BB0000;'>27.3</span><span>  | </span><span style='color: #BCBCBC;'>1</span><span> Seymour   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>29.6</span><span> -</span><span style='color: #BB0000;'>27.3</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Baltra    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  39.4  22.9  | </span><span style='color: #BCBCBC;'>3</span><span> Isabella  
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  39.9  40.6  | </span><span style='color: #BCBCBC;'>4</span><span> Fernandina
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  20.2   3.50 | </span><span style='color: #BCBCBC;'>5</span><span> Santiago  
-#&gt; </span><span style='color: #949494;'># … with 12 more rows</span><span>
+#&gt;                |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>29.6</span><span> -</span><span style='color: #BB0000;'>27.3</span><span>  | </span><span style='color: #555555;'>1</span><span> Seymour   
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>29.6</span><span> -</span><span style='color: #BB0000;'>27.3</span><span>  | </span><span style='color: #555555;'>2</span><span> Baltra    
+#&gt; </span><span style='color: #555555;'>3</span><span>  39.4  22.9  | </span><span style='color: #555555;'>3</span><span> Isabella  
+#&gt; </span><span style='color: #555555;'>4</span><span>  39.9  40.6  | </span><span style='color: #555555;'>4</span><span> Fernandina
+#&gt; </span><span style='color: #555555;'>5</span><span>  20.2   3.50 | </span><span style='color: #555555;'>5</span><span> Santiago  
+#&gt; </span><span style='color: #555555;'># … with 12 more rows</span><span>
 #&gt; # 
 #&gt; # V: [ 13 x 2 | 2 ]
 #&gt;     LSC1   LSC2 |   .name                       .mu
-#&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.233   0.231 | </span><span style='color: #BCBCBC;'>1</span><span> Large ground finch         9.02
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 0.223  -</span><span style='color: #BB0000;'>0.216</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Medium ground finch        5.97
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.164  -</span><span style='color: #BB0000;'>0.318</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Small ground finch         9.86
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.078</span><span style='text-decoration: underline;'>7</span><span>  0.548 | </span><span style='color: #BCBCBC;'>4</span><span> Sharp-beaked ground finch  6.88
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.240  -</span><span style='color: #BB0000;'>0.451</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> Cactus ground finch        5.85
-#&gt; </span><span style='color: #949494;'># … with 8 more rows</span><span></div><div class='input'><span class='no'>finches_lsvd</span> <span class='kw'>%&gt;%</span>
+#&gt;                 |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> 0.233   0.231 | </span><span style='color: #555555;'>1</span><span> Large ground finch         9.02
+#&gt; </span><span style='color: #555555;'>2</span><span> 0.223  -</span><span style='color: #BB0000;'>0.216</span><span> | </span><span style='color: #555555;'>2</span><span> Medium ground finch        5.97
+#&gt; </span><span style='color: #555555;'>3</span><span> 0.164  -</span><span style='color: #BB0000;'>0.318</span><span> | </span><span style='color: #555555;'>3</span><span> Small ground finch         9.86
+#&gt; </span><span style='color: #555555;'>4</span><span> 0.078</span><span style='text-decoration: underline;'>7</span><span>  0.548 | </span><span style='color: #555555;'>4</span><span> Sharp-beaked ground finch  6.88
+#&gt; </span><span style='color: #555555;'>5</span><span> 0.240  -</span><span style='color: #BB0000;'>0.451</span><span> | </span><span style='color: #555555;'>5</span><span> Cactus ground finch        5.85
+#&gt; </span><span style='color: #555555;'># … with 8 more rows</span><span></div><div class='input'><span class='no'>finches_lsvd</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>ggbiplot</span>(
     <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>LSC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>LSC2</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
     <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>100</span>
@@ -306,32 +350,32 @@ e.g. \(U\) for points and \(V\) for arrows.</p>
     <span class='st'>"Logistic SVD of the Galapagos island finches"</span>,
     <span class='st'>"Islands (finches) scaled to the primary (secondary) axes"</span>
   )</div><div class='img'><img src='ggbiplot-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Logistic PCA of Sanderson finches data</span>
-<span class='no'>finches</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/t'>t</a></span>() <span class='kw'>%&gt;%</span>
+<span class='no'>finches</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='masks.html'>logisticPCA</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_lpca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lpca': (17 x 2) x (13 x 2)'
+  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_lpca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lpca': (17 x 2) x (13 x 2)'
 #&gt; # 2 coordinates: LPC1 and LPC2
 #&gt; # 
 #&gt; # U: [ 17 x 2 | 1 ]
 #&gt;     LPC1   LPC2 |   .name     
-#&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>   2.02 -</span><span style='color: #BB0000;'>10.4</span><span>  | </span><span style='color: #BCBCBC;'>1</span><span> Seymour   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>   2.02 -</span><span style='color: #BB0000;'>10.4</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Baltra    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>11.5</span><span>    4.62 | </span><span style='color: #BCBCBC;'>3</span><span> Isabella  
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  -</span><span style='color: #BB0000;'>8.64</span><span>   7.51 | </span><span style='color: #BCBCBC;'>4</span><span> Fernandina
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>10.6</span><span>    1.65 | </span><span style='color: #BCBCBC;'>5</span><span> Santiago  
-#&gt; </span><span style='color: #949494;'># … with 12 more rows</span><span>
+#&gt;                 |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     
+#&gt; </span><span style='color: #555555;'>1</span><span>   2.02 -</span><span style='color: #BB0000;'>10.4</span><span>  | </span><span style='color: #555555;'>1</span><span> Seymour   
+#&gt; </span><span style='color: #555555;'>2</span><span>   2.02 -</span><span style='color: #BB0000;'>10.4</span><span>  | </span><span style='color: #555555;'>2</span><span> Baltra    
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>11.5</span><span>    4.62 | </span><span style='color: #555555;'>3</span><span> Isabella  
+#&gt; </span><span style='color: #555555;'>4</span><span>  -</span><span style='color: #BB0000;'>8.64</span><span>   7.51 | </span><span style='color: #555555;'>4</span><span> Fernandina
+#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>10.6</span><span>    1.65 | </span><span style='color: #555555;'>5</span><span> Santiago  
+#&gt; </span><span style='color: #555555;'># … with 12 more rows</span><span>
 #&gt; # 
 #&gt; # V: [ 13 x 2 | 2 ]
 #&gt;      LPC1   LPC2 |   .name                        .mu
-#&gt;                  |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.190</span><span>   0.372 | </span><span style='color: #BCBCBC;'>1</span><span> Large ground finch         3.00 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.365</span><span>  -</span><span style='color: #BB0000;'>0.162</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Medium ground finch        1.10 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.279</span><span>  -</span><span style='color: #BB0000;'>0.281</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Small ground finch         1.91 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.038</span><span style='text-decoration: underline;'>9</span><span>  0.568 | </span><span style='color: #BCBCBC;'>4</span><span> Sharp-beaked ground finch  1.79 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.353</span><span>  -</span><span style='color: #BB0000;'>0.361</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> Cactus ground finch       -</span><span style='color: #BB0000;'>0.451</span><span>
-#&gt; </span><span style='color: #949494;'># … with 8 more rows</span><span></div><div class='input'><span class='no'>finches_lpca</span> <span class='kw'>%&gt;%</span>
+#&gt;                  |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.190</span><span>   0.372 | </span><span style='color: #555555;'>1</span><span> Large ground finch         3.00 
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.365</span><span>  -</span><span style='color: #BB0000;'>0.162</span><span> | </span><span style='color: #555555;'>2</span><span> Medium ground finch        1.10 
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.279</span><span>  -</span><span style='color: #BB0000;'>0.281</span><span> | </span><span style='color: #555555;'>3</span><span> Small ground finch         1.91 
+#&gt; </span><span style='color: #555555;'>4</span><span>  0.038</span><span style='text-decoration: underline;'>9</span><span>  0.568 | </span><span style='color: #555555;'>4</span><span> Sharp-beaked ground finch  1.79 
+#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.353</span><span>  -</span><span style='color: #BB0000;'>0.361</span><span> | </span><span style='color: #555555;'>5</span><span> Cactus ground finch       -</span><span style='color: #BB0000;'>0.451</span><span>
+#&gt; </span><span style='color: #555555;'># … with 8 more rows</span><span></div><div class='input'><span class='no'>finches_lpca</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>ggbiplot</span>(
     <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>LPC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>LPC2</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
     <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>50</span>
@@ -343,34 +387,34 @@ e.g. \(U\) for points and \(V\) for arrows.</p>
     <span class='st'>"Logistic PCA of the Galapagos island finches"</span>,
     <span class='st'>"Islands (finches) scaled to the primary (secondary) axes"</span>
   )</div><div class='img'><img src='ggbiplot-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Convex logistic PCA of Sanderson finches data</span>
-<span class='no'>finches</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/t'>t</a></span>() <span class='kw'>%&gt;%</span>
+<span class='no'>finches</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>() <span class='kw'>%&gt;%</span>
   <span class='co'># omit finches present on every island</span>
-  {<span class='no'>.</span>[, ! <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/apply'>apply</a></span>(<span class='no'>.</span>, <span class='fl'>2</span>, <span class='no'>all</span>), <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>]} <span class='kw'>%&gt;%</span>
+  {<span class='no'>.</span>[, ! <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>.</span>, <span class='fl'>2</span>, <span class='no'>all</span>), <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>]} <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='masks.html'>convexLogisticPCA</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_clpca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'clpca': (17 x 2) x (12 x 2)'
+  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_clpca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'clpca': (17 x 2) x (12 x 2)'
 #&gt; # 2 coordinates: LPC1 and LPC2
 #&gt; # 
 #&gt; # U: [ 17 x 2 | 1 ]
 #&gt;    LPC1   LPC2 |   .name     
-#&gt;                |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>5.81</span><span> -</span><span style='color: #BB0000;'>9.59</span><span>  | </span><span style='color: #BCBCBC;'>1</span><span> Seymour   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>5.81</span><span> -</span><span style='color: #BB0000;'>9.59</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Baltra    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 10.0   3.39  | </span><span style='color: #BCBCBC;'>3</span><span> Isabella  
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  7.81  6.94  | </span><span style='color: #BCBCBC;'>4</span><span> Fernandina
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  9.14  0.958 | </span><span style='color: #BCBCBC;'>5</span><span> Santiago  
-#&gt; </span><span style='color: #949494;'># … with 12 more rows</span><span>
+#&gt;                |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>5.81</span><span> -</span><span style='color: #BB0000;'>9.59</span><span>  | </span><span style='color: #555555;'>1</span><span> Seymour   
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>5.81</span><span> -</span><span style='color: #BB0000;'>9.59</span><span>  | </span><span style='color: #555555;'>2</span><span> Baltra    
+#&gt; </span><span style='color: #555555;'>3</span><span> 10.0   3.39  | </span><span style='color: #555555;'>3</span><span> Isabella  
+#&gt; </span><span style='color: #555555;'>4</span><span>  7.81  6.94  | </span><span style='color: #555555;'>4</span><span> Fernandina
+#&gt; </span><span style='color: #555555;'>5</span><span>  9.14  0.958 | </span><span style='color: #555555;'>5</span><span> Santiago  
+#&gt; </span><span style='color: #555555;'># … with 12 more rows</span><span>
 #&gt; # 
 #&gt; # V: [ 12 x 2 | 2 ]
 #&gt;    LPC1   LPC2 |   .name                       .mu
-#&gt;                |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.232  0.275 | </span><span style='color: #BCBCBC;'>1</span><span> Large ground finch        1.54 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 0.355 -</span><span style='color: #BB0000;'>0.293</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Medium ground finch       1.18 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.210 -</span><span style='color: #BB0000;'>0.315</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Small ground finch        1.54 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.110  0.568 | </span><span style='color: #BCBCBC;'>4</span><span> Sharp-beaked ground finch 0.357
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.275 -</span><span style='color: #BB0000;'>0.444</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> Cactus ground finch       0.875
-#&gt; </span><span style='color: #949494;'># … with 7 more rows</span><span></div><div class='input'><span class='no'>finches_clpca</span> <span class='kw'>%&gt;%</span>
+#&gt;                |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> 0.232  0.275 | </span><span style='color: #555555;'>1</span><span> Large ground finch        1.54 
+#&gt; </span><span style='color: #555555;'>2</span><span> 0.355 -</span><span style='color: #BB0000;'>0.293</span><span> | </span><span style='color: #555555;'>2</span><span> Medium ground finch       1.18 
+#&gt; </span><span style='color: #555555;'>3</span><span> 0.210 -</span><span style='color: #BB0000;'>0.315</span><span> | </span><span style='color: #555555;'>3</span><span> Small ground finch        1.54 
+#&gt; </span><span style='color: #555555;'>4</span><span> 0.110  0.568 | </span><span style='color: #555555;'>4</span><span> Sharp-beaked ground finch 0.357
+#&gt; </span><span style='color: #555555;'>5</span><span> 0.275 -</span><span style='color: #BB0000;'>0.444</span><span> | </span><span style='color: #555555;'>5</span><span> Cactus ground finch       0.875
+#&gt; </span><span style='color: #555555;'># … with 7 more rows</span><span></div><div class='input'><span class='no'>finches_clpca</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>ggbiplot</span>(
     <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>LPC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>LPC2</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
     <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>50</span>
@@ -383,22 +427,13 @@ e.g. \(U\) for points and \(V\) for arrows.</p>
     <span class='st'>"Islands (finches) scaled to the primary (secondary) axes"</span>
   )</div><div class='img'><img src='ggbiplot-5.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#biplot-layers">Biplot layers</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -406,13 +441,16 @@ e.g. \(U\) for points and \(V\) for arrows.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

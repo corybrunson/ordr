@@ -9,6 +9,9 @@ A \link[tibble:tibble]{tibble}.
 \source{
 Ruhlman (2009).
 }
+\usage{
+data(ratios)
+}
 \description{
 Ratios of ingredients for several basic recipes presented in a
 popular cooking book.

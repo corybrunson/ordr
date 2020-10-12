@@ -8,21 +8,29 @@
 
 <title>Log-ratio analysis — lra • ordr</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,11 +38,11 @@
 
 
 
-<meta property="og:title" content="Log-ratio analysis — lra" />
 
+<meta property="og:title" content="Log-ratio analysis — lra" />
 <meta property="og:description" content="Represent log-ratios between variables based on their values on
 a population of cases." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -48,9 +56,10 @@ a population of cases." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -72,7 +81,7 @@ a population of cases." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -80,7 +89,6 @@ a population of cases." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -90,6 +98,7 @@ a population of cases." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -101,14 +110,12 @@ a population of cases." />
     </div>
 
     <div class="ref-description">
-    
     <p>Represent log-ratios between variables based on their values on
 a population of cases.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>lra</span>(<span class='no'>x</span>, <span class='kw'>weighted</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>lra</span>(<span class='no'>x</span>, <span class='kw'>compositional</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>weighted</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -117,34 +124,36 @@ a population of cases.</p>
       <td><p>A numeric matrix or rectangular data set.</p></td>
     </tr>
     <tr>
+      <th>compositional</th>
+      <td><p>Logical; whether to normalize rows of <code>x</code> to sum to 1.</p></td>
+    </tr>
+    <tr>
       <th>weighted</th>
       <td><p>Logical; whether to weight rows and columns by their sums.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Log-ratio analysis (LRA) is based on a double-centering of
-log-transformed data, usually weighted by row and column totals. The
-technique is suitable for positive-valued variables on a common scale (e.g.
-percentages). The distances between variables' coordinates (in the
-full-dimensional space) are their pairwise log-ratios. The distances
-between cases' coordinates are called their <em>log-ratio distances</em>, and the
-total variance is the weighted sum of their squares.</p>
-<p>LRA is not implemented in standard R distributions but is a useful member
-of the ordination toolkit. This is a minimal implementation following
+    <p>Log-ratio analysis (LRA) is based on a double-centering of log-transformed
+data, usually weighted by row and column totals. The technique is suitable
+for positive-valued variables on a common scale (e.g. percentages). The
+distances between variables' coordinates (in the full-dimensional space) are
+their pairwise log-ratios. The distances between cases' coordinates are
+called their <em>log-ratio distances</em>, and the total variance is the weighted
+sum of their squares.</p>
+<p>LRA is not implemented in standard R distributions but is a useful member of
+the ordination toolkit. This is a minimal implementation following
 Greenacre's (2010) exposition in Chapter 7.</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Greenacre MJ (2010) <em>Biplots in Practice</em>. Fundacion BBVA, ISBN:
 978-84-923846.
 <a href='https://www.fbbva.es/microsite/multivariate-statistics/biplots.html'>https://www.fbbva.es/microsite/multivariate-statistics/biplots.html</a></p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># state abbreviations</span>
-<span class='no'>state</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(
+<span class='no'>state</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
   <span class='kw'>.name</span> <span class='kw'>=</span> <span class='no'>state.name</span>,
   <span class='kw'>.abb</span> <span class='kw'>=</span> <span class='no'>state.abb</span>
 )
@@ -214,27 +223,27 @@ Greenacre's (2010) exposition in Chapter 7.</p>
 #&gt; attr(,"class")
 #&gt; [1] "lra"</div><div class='input'><span class='no'>arrests_lra</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='dplyr-verbs.html'>left_join_u</a></span>(<span class='no'>state</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='st'>".name"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>arrests_lra</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Column `.name` joining character vector and factor, coercing into character vector</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lra': (50 x 3) x (3 x 3)'
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>arrests_lra</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lra': (50 x 3) x (3 x 3)'
 #&gt; # 3 coordinates: LRSV1, LRSV2, LRSV3
 #&gt; # 
 #&gt; # U: [ 50 x 3 | 2 ]
 #&gt;      LRSV1   LRSV2     LRSV3 |   .name      .abb 
-#&gt;                              |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.010</span><span style='text-decoration: underline;'>6</span><span>  -</span><span style='color: #BB0000;'>0.154</span><span>   0.000</span><span style='text-decoration: underline;'>504</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> Alabama    AL   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.057</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>   0.140  -</span><span style='color: #BB0000;'>0.389</span><span>    | </span><span style='color: #BCBCBC;'>2</span><span> Alaska     AK   
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.123    0.118  -</span><span style='color: #BB0000;'>0.129</span><span>    | </span><span style='color: #BCBCBC;'>3</span><span> Arizona    AZ   
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.019</span><span style='text-decoration: underline;'>0</span><span>  -</span><span style='color: #BB0000;'>0.057</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>  0.046</span><span style='text-decoration: underline;'>7</span><span>   | </span><span style='color: #BCBCBC;'>4</span><span> Arkansas   AR   
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.008</span><span style='text-decoration: underline;'>05</span><span>  0.153  -</span><span style='color: #BB0000;'>0.195</span><span>    | </span><span style='color: #BCBCBC;'>5</span><span> California CA   
-#&gt; </span><span style='color: #949494;'># … with 45 more rows</span><span>
+#&gt;                              |   <span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>  0.010</span><span style='text-decoration: underline;'>6</span><span>  -</span><span style='color: #BB0000;'>0.154</span><span>   0.000</span><span style='text-decoration: underline;'>504</span><span> | </span><span style='color: #555555;'>1</span><span> Alabama    AL   
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.057</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>   0.140  -</span><span style='color: #BB0000;'>0.389</span><span>    | </span><span style='color: #555555;'>2</span><span> Alaska     AK   
+#&gt; </span><span style='color: #555555;'>3</span><span>  0.123    0.118  -</span><span style='color: #BB0000;'>0.129</span><span>    | </span><span style='color: #555555;'>3</span><span> Arizona    AZ   
+#&gt; </span><span style='color: #555555;'>4</span><span>  0.019</span><span style='text-decoration: underline;'>0</span><span>  -</span><span style='color: #BB0000;'>0.057</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>  0.046</span><span style='text-decoration: underline;'>7</span><span>   | </span><span style='color: #555555;'>4</span><span> Arkansas   AR   
+#&gt; </span><span style='color: #555555;'>5</span><span>  0.008</span><span style='text-decoration: underline;'>05</span><span>  0.153  -</span><span style='color: #BB0000;'>0.195</span><span>    | </span><span style='color: #555555;'>5</span><span> California CA   
+#&gt; </span><span style='color: #555555;'># … with 45 more rows</span><span>
 #&gt; # 
 #&gt; # V: [ 3 x 3 | 1 ]
 #&gt;    LRSV1   LRSV2   LRSV3 |   .name  
-#&gt;                          |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.621</span><span> -</span><span style='color: #BB0000;'>0.783</span><span>  -</span><span style='color: #BB0000;'>0.045</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> Murder 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.125 -</span><span style='color: #BB0000;'>0.041</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.991</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Assault
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.774</span><span>  0.621  -</span><span style='color: #BB0000;'>0.123</span><span>  | </span><span style='color: #BCBCBC;'>3</span><span> Rape   </div><div class='input'><span class='co'># Adapt Exhibit 7.1 in Greenacre (2010)</span>
+#&gt;                          |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.621</span><span> -</span><span style='color: #BB0000;'>0.783</span><span>  -</span><span style='color: #BB0000;'>0.045</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span> | </span><span style='color: #555555;'>1</span><span> Murder 
+#&gt; </span><span style='color: #555555;'>2</span><span>  0.125 -</span><span style='color: #BB0000;'>0.041</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.991</span><span>  | </span><span style='color: #555555;'>2</span><span> Assault
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.774</span><span>  0.621  -</span><span style='color: #BB0000;'>0.123</span><span>  | </span><span style='color: #555555;'>3</span><span> Rape   </div><div class='input'><span class='co'># Adapt Exhibit 7.1 in Greenacre (2010)</span>
 <span class='no'>arrests_lra</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>() +
@@ -253,22 +262,111 @@ Greenacre's (2010) exposition in Chapter 7.</p>
     <span class='st'>"Log-ratio analysis of violent crime arrest rates"</span>,
     <span class='st'>"United States, 1973"</span>
   ) +
-  <span class='fu'>guides</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='lra-1.png' alt='' width='700' height='433' /></div></span></pre>
+  <span class='fu'>guides</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='lra-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Compare PCA to LRA on the Freestone primary class composition data</span>
+<span class='co'># following Baxter &amp; Freestone (2006)</span>
+<span class='co'># (do not exclude compositional outliers)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>glass</span>)
+<span class='no'>levantine_glass</span> <span class='kw'>&lt;-</span> <span class='no'>glass</span> <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>Site</span> <span class='kw'>!=</span> <span class='st'>"Banias"</span>) <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>Type</span> <span class='kw'>=</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span>(
+    <span class='no'>Site</span> <span class='kw'>==</span> <span class='st'>"Dor"</span> ~ <span class='st'>"Levantine I"</span>,
+    <span class='no'>Site</span> <span class='kw'>==</span> <span class='st'>"Apollonia"</span> ~ <span class='st'>"Levantine I"</span>,
+    <span class='no'>Site</span> <span class='kw'>==</span> <span class='st'>"Bet Eli'ezer"</span> ~ <span class='st'>"Levantine II"</span>
+  ))
+<span class='co'># scaled principal components analysis</span>
+<span class='no'>levantine_glass</span> <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>SiO2</span>, <span class='no'>Al2O3</span>, <span class='no'>CaO</span>, <span class='no'>FeO</span>, <span class='no'>MgO</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/princomp.html'>princomp</a></span>(<span class='kw'>cor</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='dplyr-verbs.html'>bind_cols_u</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>levantine_glass</span>, <span class='no'>Site</span>, <span class='no'>Type</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>pca_glass</span></div><div class='output co'>#&gt; # A tbl_ord of class 'princomp': (50 x 5) x (5 x 5)'
+#&gt; # 5 coordinates: Comp.1, Comp.2, ..., Comp.5
+#&gt; # 
+#&gt; # U: [ 50 x 5 | 2 ]
+#&gt;   Comp.1 Comp.2 Comp.3 ... |   Site         Type        
+#&gt;                            |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       
+#&gt; </span><span style='color: #555555;'>1</span><span>  1.43  -</span><span style='color: #BB0000;'>0.167</span><span>  1.29      | </span><span style='color: #555555;'>1</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #555555;'>2</span><span>  2.67  -</span><span style='color: #BB0000;'>0.250</span><span> -</span><span style='color: #BB0000;'>1.44</span><span>  ... | </span><span style='color: #555555;'>2</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #555555;'>3</span><span>  1.16  -</span><span style='color: #BB0000;'>0.473</span><span>  0.387     | </span><span style='color: #555555;'>3</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #555555;'>4</span><span>  0.199  0.370  1.14      | </span><span style='color: #555555;'>4</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #555555;'>5</span><span>  0.305  0.703  0.930     | </span><span style='color: #555555;'>5</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #555555;'># … with 45 more rows</span><span>
+#&gt; # 
+#&gt; # V: [ 5 x 5 | 0 ]
+#&gt;    Comp.1 Comp.2 Comp.3 ... | 
+#&gt;                             | 
+#&gt; </span><span style='color: #555555;'>1</span><span>  0.510   0.272  0.405     | 
+#&gt; </span><span style='color: #555555;'>2</span><span>  0.489  -</span><span style='color: #BB0000;'>0.337</span><span> -</span><span style='color: #BB0000;'>0.381</span><span> ... | 
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.510</span><span>  -</span><span style='color: #BB0000;'>0.181</span><span> -</span><span style='color: #BB0000;'>0.463</span><span>     | 
+#&gt; </span><span style='color: #555555;'>4</span><span>  0.490  -</span><span style='color: #BB0000;'>0.176</span><span> -</span><span style='color: #BB0000;'>0.501</span><span>     | 
+#&gt; </span><span style='color: #555555;'>5</span><span>  0.023</span><span style='text-decoration: underline;'>4</span><span>  0.865 -</span><span style='color: #BB0000;'>0.474</span><span>     | </div><div class='input'><span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>pca_glass</span>) +
+  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>Site</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>Type</span>))</div><div class='img'><img src='lra-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># completely compositional log-ratio analysis</span>
+<span class='no'>levantine_glass</span> <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>SiO2</span>, <span class='no'>Al2O3</span>, <span class='no'>CaO</span>, <span class='no'>FeO</span>, <span class='no'>MgO</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>lra</span>(<span class='kw'>compositional</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='st'>"rows"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='dplyr-verbs.html'>bind_cols_u</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>levantine_glass</span>, <span class='no'>Site</span>, <span class='no'>Type</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>lra_glass</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lra': (50 x 5) x (5 x 5)'
+#&gt; # 5 coordinates: LRSV1, LRSV2, ..., LRSV5
+#&gt; # 
+#&gt; # U: [ 50 x 5 | 2 ]
+#&gt;      LRSV1    LRSV2     LRSV3 ... |   Site         Type        
+#&gt;                                   |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.009</span><span style='color: #BB0000;text-decoration: underline;'>37</span><span> -</span><span style='color: #BB0000;'>0.018</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>  -</span><span style='color: #BB0000;'>0.001</span><span style='color: #BB0000;text-decoration: underline;'>63</span><span>      | </span><span style='color: #555555;'>1</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.043</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>   0.009</span><span style='text-decoration: underline;'>14</span><span>  0.000</span><span style='text-decoration: underline;'>724</span><span> ... | </span><span style='color: #555555;'>2</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.012</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>  -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>67</span><span>  0.004</span><span style='text-decoration: underline;'>86</span><span>      | </span><span style='color: #555555;'>3</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #555555;'>4</span><span>  0.013</span><span style='text-decoration: underline;'>0</span><span>  -</span><span style='color: #BB0000;'>0.012</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>  -</span><span style='color: #BB0000;'>0.002</span><span style='color: #BB0000;text-decoration: underline;'>57</span><span>      | </span><span style='color: #555555;'>4</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #555555;'>5</span><span>  0.015</span><span style='text-decoration: underline;'>5</span><span>  -</span><span style='color: #BB0000;'>0.012</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>  -</span><span style='color: #BB0000;'>0.006</span><span style='color: #BB0000;text-decoration: underline;'>61</span><span>      | </span><span style='color: #555555;'>5</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #555555;'># … with 45 more rows</span><span>
+#&gt; # 
+#&gt; # V: [ 5 x 5 | 0 ]
+#&gt;      LRSV1   LRSV2   LRSV3 ... | 
+#&gt;                                | 
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.036</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>  -</span><span style='color: #BB0000;'>0.096</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span> -</span><span style='color: #BB0000;'>0.053</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>     | 
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.154</span><span>    0.056</span><span style='text-decoration: underline;'>0</span><span>  0.298  ... | 
+#&gt; </span><span style='color: #555555;'>3</span><span>  0.436    0.779   0.421      | 
+#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>0.886</span><span>    0.375   0.161      | 
+#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>18</span><span>  0.489  -</span><span style='color: #BB0000;'>0.840</span><span>      | </div><div class='input'><span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>lra_glass</span>, <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>.05</span>) +
+  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>Site</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>Type</span>)) +
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>() +
+  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>), <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='st'>"outward"</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='st'>"outward"</span>)</div><div class='img'><img src='lra-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># completely compositional log-ratio analysis with FeO and MgO excluded</span>
+<span class='no'>levantine_glass</span> <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>SiO2</span>, <span class='no'>Al2O3</span>, <span class='no'>CaO</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>lra</span>(<span class='kw'>compositional</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='st'>"rows"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='dplyr-verbs.html'>bind_cols_u</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>levantine_glass</span>, <span class='no'>Site</span>, <span class='no'>Type</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>lra_glass</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lra': (50 x 3) x (3 x 3)'
+#&gt; # 3 coordinates: LRSV1, LRSV2, LRSV3
+#&gt; # 
+#&gt; # U: [ 50 x 3 | 2 ]
+#&gt;      LRSV1    LRSV2     LRSV3 |   Site         Type        
+#&gt;                               |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>  -</span><span style='color: #BB0000;'>0.001</span><span style='color: #BB0000;text-decoration: underline;'>09</span><span>  3.63</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-18</span><span> | </span><span style='color: #555555;'>1</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.016</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>   0.010</span><span style='text-decoration: underline;'>6</span><span>   1.01</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-18</span><span> | </span><span style='color: #555555;'>2</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.009</span><span style='color: #BB0000;text-decoration: underline;'>44</span><span>  0.001</span><span style='text-decoration: underline;'>74</span><span> -</span><span style='color: #BB0000;'>2.85</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-20</span><span> | </span><span style='color: #555555;'>3</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>0.005</span><span style='color: #BB0000;text-decoration: underline;'>60</span><span> -</span><span style='color: #BB0000;'>0.006</span><span style='color: #BB0000;text-decoration: underline;'>58</span><span> -</span><span style='color: #BB0000;'>4.09</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-20</span><span> | </span><span style='color: #555555;'>4</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>18</span><span> -</span><span style='color: #BB0000;'>0.004</span><span style='color: #BB0000;text-decoration: underline;'>75</span><span> -</span><span style='color: #BB0000;'>2.17</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-19</span><span> | </span><span style='color: #555555;'>5</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #555555;'># … with 45 more rows</span><span>
+#&gt; # 
+#&gt; # V: [ 3 x 3 | 0 ]
+#&gt;    LRSV1   LRSV2   LRSV3 | 
+#&gt;                          | 
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.105</span><span> -</span><span style='color: #BB0000;'>0.055</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span> -</span><span style='color: #BB0000;'>0.993</span><span>  | 
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.114</span><span>  0.993  -</span><span style='color: #BB0000;'>0.043</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span> | 
+#&gt; </span><span style='color: #555555;'>3</span><span>  0.988  0.109  -</span><span style='color: #BB0000;'>0.111</span><span>  | </div><div class='input'><span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>lra_glass</span>, <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>.05</span>) +
+  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>Site</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>Type</span>)) +
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>() +
+  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>), <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='st'>"outward"</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='st'>"outward"</span>)</div><div class='img'><img src='lra-4.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#references">References</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -276,13 +374,16 @@ Greenacre's (2010) exposition in Chapter 7.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

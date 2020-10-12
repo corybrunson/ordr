@@ -9,6 +9,9 @@ A \link[base:matrix]{matrix}.
 \source{
 Greenacre (2010).
 }
+\usage{
+data(benthos)
+}
 \description{
 Counts of 92 benthic species at 13 sites in the North Sea
 following an oil exploration.

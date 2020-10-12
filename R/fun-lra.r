@@ -20,7 +20,7 @@
 
 #' @template ref-greenacre2010
 
-#' @name lra
+#' @name lra-ord
 #' @param x A numeric matrix or rectangular data set.
 #' @param compositional Logical; whether to normalize rows of `x` to sum to 1.
 #' @param weighted Logical; whether to weight rows and columns by their sums.
@@ -28,7 +28,7 @@
 #' @example inst/examples/glass-pca-lda-secondary.r
 NULL
 
-#' @rdname lra
+#' @rdname lra-ord
 #' @export
 lra <- function(x, compositional = FALSE, weighted = TRUE) {
   x <- as.matrix(x)

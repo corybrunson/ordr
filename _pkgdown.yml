@@ -5,6 +5,22 @@ reference:
     principles.
   contents:
   - '`ordr`'
+- title: "New functions, classes, and methods"
+  desc: >
+    Introducing and adapting ordination techniques for the **ordr** workflow
+  contents:
+  - '`masks`'
+  - ends_with("-ord")
+- title: "Data sets"
+  desc: >
+    Additional data sets used to illustrate ordination techniques
+  contents:
+  - '`benthos`'
+  - '`bioenv`'
+  - '`countries`'
+  - '`finches`'
+  - '`issp_women`'
+  - '`ratios`'
 - title: "Tidy ordination"
   desc: >
     The `tbl_ord` class wrapper, with methods for accessing components and for
@@ -31,21 +47,6 @@ reference:
   - starts_with("geom-biplot-")
   - starts_with("stat-biplot-")
   - '`draw-key`'
-- title: "New functions, classes, and methods"
-  desc: >
-    Introducing and adapting ordination techniques for the **ordr** workflow
-  contents:
-  - '`masks`'
-  - starts_with("fun-")
-- title: "Data sets"
-  desc: >
-    Additional data sets used to illustrate ordination techniques
-  contents:
-  - '`benthos`'
-  - '`bioenv`'
-  - '`countries`'
-  - '`finches`'
-  - '`issp_women`'
 - title: "Class methods"
   desc: >
     Accessor and augmentation methods for ordination classes from other packages
