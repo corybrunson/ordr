@@ -90,8 +90,8 @@ levantine_glass \%>\%
   as_tbl_ord() \%>\%
   confer_inertia("rows") \%>\%
   bind_cols_u(dplyr::select(levantine_glass, Site, Type)) \%>\%
-  print() -> lda_glass
-ggbiplot(lda_glass, sec.axes = "v", scale.factor = .05) +
+  print() -> lra_glass
+ggbiplot(lra_glass, sec.axes = "v", scale.factor = .05) +
   geom_u_point(aes(shape = Site, color = Type)) +
   geom_v_vector() +
   geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward")
@@ -102,8 +102,8 @@ levantine_glass \%>\%
   as_tbl_ord() \%>\%
   confer_inertia("rows") \%>\%
   bind_cols_u(dplyr::select(levantine_glass, Site, Type)) \%>\%
-  print() -> lda_glass
-ggbiplot(lda_glass, sec.axes = "v", scale.factor = .05) +
+  print() -> lra_glass
+ggbiplot(lra_glass, sec.axes = "v", scale.factor = .05) +
   geom_u_point(aes(shape = Site, color = Type)) +
   geom_v_vector() +
   geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward")

@@ -1,4 +1,5 @@
 # Compare relative frequences of hair and eye colors among men versus women
+data(HairEyeColor)
 HairEyeColor[, , "Male"] %>%
   ca::ca() %>%
   as_tbl_ord() %>%

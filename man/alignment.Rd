@@ -149,6 +149,7 @@ plot(gridExtra::arrangeGrob(grobs = list(
   ggbiplot(differences_align_v) + geom_v_vector()
 ), ncol = 3))
 # Compare relative frequences of hair and eye colors among men versus women
+data(HairEyeColor)
 HairEyeColor[, , "Male"] \%>\%
   ca::ca() \%>\%
   as_tbl_ord() \%>\%
