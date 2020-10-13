@@ -10,7 +10,7 @@ ratios %>%
   print() -> sub_ratios
 sub_ratios %>%
   dplyr::select(-chapter, -recipes) %>%
-  lra() %>%
+  lra(compositional = TRUE) %>%
   as_tbl_ord() %>%
   augment() %>%
   bind_cols_u(dplyr::select(sub_ratios, chapter, recipes)) %>%
@@ -20,4 +20,6 @@ lra_ratios %>%
   ggbiplot(sec.axes = "v", scale.factor = .05) +
   geom_u_text(aes(label = recipes, color = chapter)) +
   geom_v_vector() +
-  geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward")
+  geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward") +
+  expand_limits(x = c(-.2, .2)) +
+  ggtitle("Log-ratio biplot of flour-butter-egg ratios in baking recipes")

@@ -97,5 +97,6 @@ NULL
 #' @template ref-ruhlman2009
 #' @name ratios
 #' @usage data(ratios)
+#' @example inst/examples/ratios-lra.r
 #' @example inst/examples/ratios-ca-verbs.r
 NULL
