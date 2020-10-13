@@ -33,7 +33,8 @@ finches_ca \%>\%
   ggtitle(
     "Symmetric CA biplot of the Galapagos island finches",
     "Label opacity encodes row/column inertia"
-  )
+  ) +
+  expand_limits(x = c(-1, 6))
 # Logistic SVD of Sanderson finches data
 finches \%>\% t() \%>\%
   logisticSVD() \%>\%
@@ -51,7 +52,8 @@ finches_lsvd \%>\%
   ggtitle(
     "Logistic SVD of the Galapagos island finches",
     "Islands (finches) scaled to the primary (secondary) axes"
-  )
+  ) +
+  expand_limits(x = c(-80, 60))
 # Logistic PCA of Sanderson finches data
 finches \%>\% t() \%>\%
   logisticPCA() \%>\%
@@ -69,7 +71,8 @@ finches_lpca \%>\%
   ggtitle(
     "Logistic PCA of the Galapagos island finches",
     "Islands (finches) scaled to the primary (secondary) axes"
-  )
+  ) +
+  expand_limits(x = c(-30, 25))
 # Convex logistic PCA of Sanderson finches data
 finches \%>\% t() \%>\%
   # omit finches present on every island
@@ -89,7 +92,8 @@ finches_clpca \%>\%
   ggtitle(
     "Convex logistic PCA of the Galapagos island finches",
     "Islands (finches) scaled to the primary (secondary) axes"
-  )
+  ) +
+  expand_limits(x = c(-25, 35))
 }
 \references{
 Sanderson JG (2000) "Testing Ecological Patterns". \emph{American Scientist},

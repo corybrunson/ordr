@@ -90,7 +90,8 @@ iris_pca \%>\%
   ggtitle(
     "Row-principal unscaled PCA biplot of Anderson iris data",
     "Variable loadings scaled to secondary axes"
-  )
+  ) +
+  expand_limits(y = c(-1, 3.5))
 # Confer inertia in CA between rows and columns of benthic sample data
 data(benthos)
 benthos \%>\%

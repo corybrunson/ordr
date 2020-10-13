@@ -121,7 +121,8 @@ print(sweep(iris_lda$means, 2, iris_centroid, "-") \%*\% get_v(iris_lda))
 print(get_u(iris_lda, .supplement = FALSE))
 # unstandardized coefficient LDA biplot
 lda_biplot(iris_lda) +
-  ggtitle("Unstandardized coefficient biplot of iris LDA")
+  ggtitle("Unstandardized coefficient biplot of iris LDA") +
+  expand_limits(y = c(-3, 5))
 # Standardized discriminant coefficients permit comparisons across the variables
 iris_lda <-
   as_tbl_ord(lda_ord(iris[, 1:4], iris[, 5], axes.scale = "standardized"))
@@ -136,7 +137,8 @@ tidy(iris_lda, .matrix = "v") \%>\%
   coord_flip()
 # standardized coefficient LDA biplot
 lda_biplot(iris_lda) +
-  ggtitle("Standardized coefficient biplot of iris LDA")
+  ggtitle("Standardized coefficient biplot of iris LDA") +
+  expand_limits(y = c(-2, 4))
 # Variable contributions (de-sphered discriminant coefficients) recover the
 # inner product relationship with the centered class centroids
 iris_lda <- 
@@ -151,5 +153,6 @@ print(get_u(iris_lda, .supplement = FALSE) \%*\% t(get_v(iris_lda)))
 print(sweep(iris_lda$means, 2, iris_centroid, "-") \%*\% C_W_sqrtinv)
 # contribution LDA biplot
 lda_biplot(iris_lda) +
-  ggtitle("Contribution biplot of iris LDA")
+  ggtitle("Contribution biplot of iris LDA") +
+  expand_limits(y = c(-2, 4))
 }

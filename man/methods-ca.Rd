@@ -58,7 +58,8 @@ finches_ca \%>\%
   ggtitle(
     "Symmetric CA biplot of the Galapagos island finches",
     "Label opacity encodes row/column inertia"
-  )
+  ) +
+  expand_limits(x = c(-1, 6))
 # Row- and column-principal biplots for CA of artificial smoking frequency data
 data(smoke, package = "ca")
 smoke \%>\%

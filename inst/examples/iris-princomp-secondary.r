@@ -16,4 +16,5 @@ iris_pca %>%
   ggtitle(
     "Row-principal unscaled PCA biplot of Anderson iris data",
     "Variable loadings scaled to secondary axes"
-  )
+  ) +
+  expand_limits(y = c(-1, 3.5))

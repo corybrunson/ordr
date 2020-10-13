@@ -97,7 +97,8 @@ finches_ca \%>\%
   ggtitle(
     "Symmetric CA biplot of the Galapagos island finches",
     "Label opacity encodes row/column inertia"
-  )
+  ) +
+  expand_limits(x = c(-1, 6))
 # Unscaled PCA and two-scaled biplot of Anderson iris data
 iris[, -5] \%>\%
   princomp() \%>\%
@@ -116,7 +117,8 @@ iris_pca \%>\%
   ggtitle(
     "Row-principal unscaled PCA biplot of Anderson iris data",
     "Variable loadings scaled to secondary axes"
-  )
+  ) +
+  expand_limits(y = c(-1, 3.5))
 # Linear discriminant analysis of Reaven & Miller diabetes data
 head(heplots::Diabetes)
 diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes)

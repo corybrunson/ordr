@@ -164,7 +164,8 @@ different format in the <strong><a href='https://rdrr.io/pkg/cooccur/man/cooccur
   <span class='fu'>ggtitle</span>(
     <span class='st'>"Symmetric CA biplot of the Galapagos island finches"</span>,
     <span class='st'>"Label opacity encodes row/column inertia"</span>
-  )</div><div class='img'><img src='finches-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Logistic SVD of Sanderson finches data</span>
+  ) +
+  <span class='fu'>expand_limits</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>1</span>, <span class='fl'>6</span>))</div><div class='img'><img src='finches-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Logistic SVD of Sanderson finches data</span>
 <span class='no'>finches</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='masks.html'>logisticSVD</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
@@ -201,7 +202,8 @@ different format in the <strong><a href='https://rdrr.io/pkg/cooccur/man/cooccur
   <span class='fu'>ggtitle</span>(
     <span class='st'>"Logistic SVD of the Galapagos island finches"</span>,
     <span class='st'>"Islands (finches) scaled to the primary (secondary) axes"</span>
-  )</div><div class='img'><img src='finches-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Logistic PCA of Sanderson finches data</span>
+  ) +
+  <span class='fu'>expand_limits</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>80</span>, <span class='fl'>60</span>))</div><div class='img'><img src='finches-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Logistic PCA of Sanderson finches data</span>
 <span class='no'>finches</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='masks.html'>logisticPCA</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
@@ -238,7 +240,8 @@ different format in the <strong><a href='https://rdrr.io/pkg/cooccur/man/cooccur
   <span class='fu'>ggtitle</span>(
     <span class='st'>"Logistic PCA of the Galapagos island finches"</span>,
     <span class='st'>"Islands (finches) scaled to the primary (secondary) axes"</span>
-  )</div><div class='img'><img src='finches-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Convex logistic PCA of Sanderson finches data</span>
+  ) +
+  <span class='fu'>expand_limits</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>30</span>, <span class='fl'>25</span>))</div><div class='img'><img src='finches-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Convex logistic PCA of Sanderson finches data</span>
 <span class='no'>finches</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>() <span class='kw'>%&gt;%</span>
   <span class='co'># omit finches present on every island</span>
   {<span class='no'>.</span>[, ! <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>.</span>, <span class='fl'>2</span>, <span class='no'>all</span>), <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>]} <span class='kw'>%&gt;%</span>
@@ -277,7 +280,8 @@ different format in the <strong><a href='https://rdrr.io/pkg/cooccur/man/cooccur
   <span class='fu'>ggtitle</span>(
     <span class='st'>"Convex logistic PCA of the Galapagos island finches"</span>,
     <span class='st'>"Islands (finches) scaled to the primary (secondary) axes"</span>
-  )</div><div class='img'><img src='finches-4.png' alt='' width='700' height='433' /></div></span></pre>
+  ) +
+  <span class='fu'>expand_limits</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>25</span>, <span class='fl'>35</span>))</div><div class='img'><img src='finches-4.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

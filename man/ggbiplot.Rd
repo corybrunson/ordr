@@ -145,7 +145,8 @@ iris_pca \%>\%
   ggtitle(
     "Row-principal unscaled PCA biplot of Anderson iris data",
     "Variable loadings scaled to secondary axes"
-  )
+  ) +
+  expand_limits(y = c(-1, 3.5))
 # Logistic SVD of Sanderson finches data
 finches \%>\% t() \%>\%
   logisticSVD() \%>\%
@@ -163,7 +164,8 @@ finches_lsvd \%>\%
   ggtitle(
     "Logistic SVD of the Galapagos island finches",
     "Islands (finches) scaled to the primary (secondary) axes"
-  )
+  ) +
+  expand_limits(x = c(-80, 60))
 # Logistic PCA of Sanderson finches data
 finches \%>\% t() \%>\%
   logisticPCA() \%>\%
@@ -181,7 +183,8 @@ finches_lpca \%>\%
   ggtitle(
     "Logistic PCA of the Galapagos island finches",
     "Islands (finches) scaled to the primary (secondary) axes"
-  )
+  ) +
+  expand_limits(x = c(-30, 25))
 # Convex logistic PCA of Sanderson finches data
 finches \%>\% t() \%>\%
   # omit finches present on every island
@@ -201,7 +204,8 @@ finches_clpca \%>\%
   ggtitle(
     "Convex logistic PCA of the Galapagos island finches",
     "Islands (finches) scaled to the primary (secondary) axes"
-  )
+  ) +
+  expand_limits(x = c(-25, 35))
 }
 \seealso{
 \code{\link[ggplot2:ggplot2-package]{ggplot2::ggplot2()}}

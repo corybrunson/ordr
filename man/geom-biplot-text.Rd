@@ -279,7 +279,8 @@ finches_ca \%>\%
   ggtitle(
     "Symmetric CA biplot of the Galapagos island finches",
     "Label opacity encodes row/column inertia"
-  )
+  ) +
+  expand_limits(x = c(-1, 6))
 # Confer PCA weights and inertia between cases and variables
 data(country_attributes)
 country_attributes \%>\%
