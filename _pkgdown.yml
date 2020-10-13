@@ -19,6 +19,7 @@ reference:
   - '`bioenv`'
   - '`countries`'
   - '`finches`'
+  - '`glass`'
   - '`issp_women`'
   - '`ratios`'
 - title: "Tidy ordination"
@@ -30,10 +31,11 @@ reference:
   - '`augmentation`'
   - '`annotation`'
   - '`conference`'
+  - '`supplementation`'
   - '`alignment`'
   - '`tbl_ord`'
   - '`reconstruct`'
-  - '`formatting`'
+  - '`format`'
   - '`dplyr-verbs`'
 - title: "Layered grammar for biplots"
   desc: >
