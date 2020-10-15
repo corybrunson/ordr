@@ -47,13 +47,15 @@ lra <- function(x, compositional = FALSE, weighted = TRUE) {
   y <- (diag(nrow(x)) - matrix(1, nrow(x)) %*% t(r)) %*%
     l %*%
     t(diag(ncol(x)) - matrix(1, ncol(x)) %*% t(c))
-  d_r <- diag(1 / nrow(x), nrow(x))
-  d_c <- diag(1 / ncol(x), ncol(x))
+  d_r <- diag(as.vector(r))
+  d_c <- diag(as.vector(c))
   s <- sqrt(d_r) %*% y %*% sqrt(d_c)
   dimnames(s) <- dimnames(x)
   d <- svd_ord(s)
-  u <- d$u
-  v <- d$v
+  u <- diag(1/sqrt(diag(d_r))) %*% d$u
+  v <- diag(1/sqrt(diag(d_c))) %*% d$v
+  rownames(u) <- rownames(d$u)
+  rownames(v) <- rownames(d$v)
   colnames(u) <- paste0("LRSV", 1:ncol(u))
   colnames(v) <- paste0("LRSV", 1:ncol(v))
   res <- list(

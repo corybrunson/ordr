@@ -127,7 +127,10 @@ state <- data.frame(
   .abb = state.abb
 )
 # Log-ratio analysis of 1973 violent crime arrests in the United States
-(arrests_lra <- lra(USArrests[, -3]))
+USArrests \%>\%
+  subset(select = -UrbanPop) \%>\%
+  lra() \%>\%
+  print() -> arrests_lra
 arrests_lra \%>\%
   as_tbl_ord() \%>\%
   augment() \%>\%
@@ -135,9 +138,8 @@ arrests_lra \%>\%
   print() -> arrests_lra
 # Adapt Exhibit 7.1 in Greenacre (2010)
 arrests_lra \%>\%
-  confer_inertia(0) \%>\%
-  ggbiplot() +
-  #ggbiplot(sec.axes = "v") +
+  confer_inertia(1) \%>\%
+  ggbiplot(sec.axes = "v", scale.factor = 1/20) +
   theme_bw() +
   geom_u_text(
     aes(label = .abb),
