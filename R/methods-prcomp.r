@@ -18,21 +18,6 @@ as_tbl_ord.prcomp <- as_tbl_ord_default
 
 #' @rdname methods-prcomp
 #' @export
-reconstruct.prcomp <- function(x) {
-  res <- recover_u.prcomp(x)%*%t(recover_v.prcomp(x))
-  if (x[["center"]] == FALSE && x[["scale"]] == FALSE) {
-    res
-  } else if (x[["center"]] != TRUE && x[["scale"]] == FALSE) {
-    for (col in 1:ncol(res)) {for (row in 1:nrow(res)) {res[row, col] <- res[row, col] + x[["center"]][col]}}
-    res
-  } else {
-    for (col in 1:ncol(res)) {for (row in 1:nrow(res)) {res[row, col] <- (res[row, col] * x[["scale"]][col]) + x[["center"]][col]}}
-    res
-  }
-}
-
-#' @rdname methods-prcomp
-#' @export
 recover_u.prcomp <- function(x) {
   x[["x"]]
 }

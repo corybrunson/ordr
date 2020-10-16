@@ -3,7 +3,6 @@
 \name{methods-cmds}
 \alias{methods-cmds}
 \alias{as_tbl_ord.cmds}
-\alias{reconstruct.cmds}
 \alias{recover_u.cmds}
 \alias{recover_v.cmds}
 \alias{recover_inertia.cmds}
@@ -15,8 +14,6 @@
 \title{Functionality for classical multidimensional scaling objects}
 \usage{
 \method{as_tbl_ord}{cmds}(x)
-
-\method{reconstruct}{cmds}(x)
 
 \method{recover_u}{cmds}(x)
 

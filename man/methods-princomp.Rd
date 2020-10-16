@@ -3,7 +3,6 @@
 \name{methods-princomp}
 \alias{methods-princomp}
 \alias{as_tbl_ord.princomp}
-\alias{reconstruct.princomp}
 \alias{recover_u.princomp}
 \alias{recover_v.princomp}
 \alias{recover_inertia.princomp}
@@ -15,8 +14,6 @@
 \title{Functionality for principal components analysis ('princomp') objects}
 \usage{
 \method{as_tbl_ord}{princomp}(x)
-
-\method{reconstruct}{princomp}(x)
 
 \method{recover_u}{princomp}(x)
 

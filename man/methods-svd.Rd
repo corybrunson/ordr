@@ -3,7 +3,6 @@
 \name{methods-svd}
 \alias{methods-svd}
 \alias{as_tbl_ord.svd_ord}
-\alias{reconstruct.svd_ord}
 \alias{recover_u.svd_ord}
 \alias{recover_v.svd_ord}
 \alias{recover_inertia.svd_ord}
@@ -15,8 +14,6 @@
 \title{Functionality for singular value decompositions}
 \usage{
 \method{as_tbl_ord}{svd_ord}(x)
-
-\method{reconstruct}{svd_ord}(x)
 
 \method{recover_u}{svd_ord}(x)
 

@@ -3,7 +3,6 @@
 \name{methods-ca}
 \alias{methods-ca}
 \alias{as_tbl_ord.ca}
-\alias{reconstruct.ca}
 \alias{recover_u.ca}
 \alias{recover_v.ca}
 \alias{recover_inertia.ca}
@@ -15,8 +14,6 @@
 \title{Functionality for correspondence analysis ('ca') objects}
 \usage{
 \method{as_tbl_ord}{ca}(x)
-
-\method{reconstruct}{ca}(x)
 
 \method{recover_u}{ca}(x)
 

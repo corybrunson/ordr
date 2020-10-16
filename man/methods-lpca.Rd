@@ -3,7 +3,6 @@
 \name{methods-lpca}
 \alias{methods-lpca}
 \alias{as_tbl_ord.lsvd}
-\alias{reconstruct.lsvd}
 \alias{recover_u.lsvd}
 \alias{recover_v.lsvd}
 \alias{recover_coord.lsvd}
@@ -27,8 +26,6 @@
 \title{Functionality for logistic PCA and logistic SVD objects}
 \usage{
 \method{as_tbl_ord}{lsvd}(x)
-
-\method{reconstruct}{lsvd}(x)
 
 \method{recover_u}{lsvd}(x)
 

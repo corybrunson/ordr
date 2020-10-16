@@ -84,7 +84,6 @@ Collate:
     'ord-supplementation.r'
     'ordr.r'
     'plot.r'
-    'reconstruct.r'
     'stat-center.r'
     'stat-chull.r'
     'stat-ellipse.r'

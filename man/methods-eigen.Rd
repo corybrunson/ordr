@@ -3,7 +3,6 @@
 \name{methods-eigen}
 \alias{methods-eigen}
 \alias{as_tbl_ord.eigen_ord}
-\alias{reconstruct.eigen_ord}
 \alias{recover_u.eigen_ord}
 \alias{recover_v.eigen_ord}
 \alias{recover_inertia.eigen_ord}
@@ -15,8 +14,6 @@
 \title{Functionality for eigendecompositions}
 \usage{
 \method{as_tbl_ord}{eigen_ord}(x)
-
-\method{reconstruct}{eigen_ord}(x)
 
 \method{recover_u}{eigen_ord}(x)
 

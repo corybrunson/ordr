@@ -19,12 +19,6 @@ NULL
 #' @export
 as_tbl_ord.lsvd <- as_tbl_ord_default
 
-#' @rdname methods-lpca
-#' @export
-reconstruct.lsvd <- function(x) {
-  round(plogis(x$A %*% t(x$B)), 0)
-}
-
 recover_uv_lsvd <- function(x, .matrix) {
   .matrix <- match_factor(.matrix)
   res <- x[[switch(.matrix, u = "A", v = "B")]]

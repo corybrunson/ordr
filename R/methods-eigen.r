@@ -13,12 +13,6 @@ NULL
 #' @export
 as_tbl_ord.eigen_ord <- as_tbl_ord_default
 
-#' @rdname methods-eigen
-#' @export
-reconstruct.eigen_ord <- function(x) {
-  x[["vectors"]] %*% diag(x[["values"]]) %*% t(x[["vectors"]])
-}
-
 recover_uv_eigen <- function(x, .matrix) x[["vectors"]]
 
 #' @rdname methods-eigen

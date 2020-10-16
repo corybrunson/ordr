@@ -3,7 +3,6 @@
 \name{methods-kmeans}
 \alias{methods-kmeans}
 \alias{as_tbl_ord.kmeans}
-\alias{reconstruct.kmeans}
 \alias{recover_u.kmeans}
 \alias{recover_v.kmeans}
 \alias{recover_coord.kmeans}
@@ -13,8 +12,6 @@
 \title{Functionality for k-means clustering ('kmeans') objects}
 \usage{
 \method{as_tbl_ord}{kmeans}(x)
-
-\method{reconstruct}{kmeans}(x)
 
 \method{recover_u}{kmeans}(x)
 

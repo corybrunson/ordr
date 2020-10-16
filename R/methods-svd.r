@@ -14,12 +14,6 @@ as_tbl_ord.svd_ord <- as_tbl_ord_default
 
 #' @rdname methods-svd
 #' @export
-reconstruct.svd_ord <- function(x) {
-  x[["u"]] %*% diag(x[["d"]]) %*% t(x[["v"]])
-}
-
-#' @rdname methods-svd
-#' @export
 recover_u.svd_ord <- function(x) x[["u"]]
 
 #' @rdname methods-svd

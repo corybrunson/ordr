@@ -34,7 +34,6 @@ reference:
   - '`supplementation`'
   - '`alignment`'
   - '`tbl_ord`'
-  - '`reconstruct`'
   - '`format`'
   - '`dplyr-verbs`'
 - title: "Layered grammar for biplots"
