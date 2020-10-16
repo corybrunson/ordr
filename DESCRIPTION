@@ -37,7 +37,9 @@ Suggests:
     gridExtra,
     igraph,
     igraphdata,
-    heplots
+    heplots,
+    knitr,
+    rmarkdown
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Collate: 
@@ -90,3 +92,4 @@ Collate:
     'stat-ellipse.r'
     'stat-matrix.r'
     'stat-spantree.r'
+VignetteBuilder: knitr
