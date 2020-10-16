@@ -14,6 +14,17 @@ lra(x, compositional = FALSE, weighted = TRUE)
 
 \item{weighted}{Logical; whether to weight rows and columns by their sums.}
 }
+\value{
+Given an \eqn{n * p} data matrix and setting \eqn{r=min(n,p)},
+\code{lra()} returns a list of class \code{"lra"} containing three elements:
+\itemize{
+\item{sv}{The \eqn{r-1} singular values}
+\item{row.coords}{The \eqn{n * (r-1)} matrix
+of row standard coordinates.}
+\item{column.coords}{The \eqn{p * (r-1)} matrix
+of column standard coordinates.}
+}
+}
 \description{
 Represent log-ratios between variables based on their values on
 a population of cases.
@@ -56,7 +67,8 @@ lra_ratios \%>\%
   geom_v_vector() +
   geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward") +
   expand_limits(x = c(-.2, .2)) +
-  ggtitle("Log-ratio biplot of flour-butter-egg ratios in baking recipes")
+  ggtitle("Log-ratio biplot of flour-butter-egg ratios in baking recipes") +
+  expand_limits(x = c(-.35, .35))
 # state abbreviations
 state <- data.frame(
   .name = state.name,

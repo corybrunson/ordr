@@ -41,7 +41,8 @@ lra_ratios \%>\%
   geom_v_vector() +
   geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward") +
   expand_limits(x = c(-.2, .2)) +
-  ggtitle("Log-ratio biplot of flour-butter-egg ratios in baking recipes")
+  ggtitle("Log-ratio biplot of flour-butter-egg ratios in baking recipes") +
+  expand_limits(x = c(-.35, .35))
 # Correspondence analysis of Ruhlman's recipe ratios
 data(ratios)
 ratios \%>\%

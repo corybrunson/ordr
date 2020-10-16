@@ -18,6 +18,17 @@
 #' Greenacre's (2010) exposition in Chapter 7.
 #' 
 
+#' @return Given an \eqn{n * p} data matrix and setting \eqn{r=min(n,p)},
+#'   `lra()` returns a list of class `"lra"` containing three elements:
+#' \itemize{
+#'   \item{sv}{The \eqn{r-1} singular values}
+#'   \item{row.coords}{The \eqn{n * (r-1)} matrix
+#'                     of row standard coordinates.}
+#'   \item{column.coords}{The \eqn{p * (r-1)} matrix
+#'                        of column standard coordinates.}
+#' }
+#' 
+
 #' @template ref-greenacre2010
 
 #' @name lra-ord
@@ -34,32 +45,32 @@ NULL
 lra <- function(x, compositional = FALSE, weighted = TRUE) {
   x <- as.matrix(x)
   if (compositional) {
-    x <- sweep(x, 1, apply(x, 1, sum), "/")
+    x <- sweep(x, 1, rowSums(x), "/")
   }
+  n <- sum(x)
   if (weighted) {
-    r <- (1 / sum(x)) * x %*% matrix(1, ncol(x))
-    c <- (1 / sum(x)) * t(x) %*% matrix(1, nrow(x))
+    r <- x %*% matrix(1, ncol(x)) / n
+    c <- t(x) %*% matrix(1, nrow(x)) / n
   } else {
-    r <- (1 / nrow(x)) * matrix(1, nrow(x))
-    c <- (1 / ncol(x)) * matrix(1, ncol(x))
+    r <- matrix(1, nrow(x)) / nrow(x)
+    c <- matrix(1, ncol(x)) / ncol(x)
   }
-  l <- log(x)
-  y <- (diag(nrow(x)) - matrix(1, nrow(x)) %*% t(r)) %*%
-    l %*%
-    t(diag(ncol(x)) - matrix(1, ncol(x)) %*% t(c))
+  y <- log(x)
+  m_c <- t(y) %*% r
+  y <- y - matrix(1, nrow(x)) %*% t(m_c)
+  m_r <- y %*% c
+  y <- y - m_r %*% t(matrix(1, ncol(x)))
   d_r <- diag(as.vector(r))
   d_c <- diag(as.vector(c))
   s <- sqrt(d_r) %*% y %*% sqrt(d_c)
   dimnames(s) <- dimnames(x)
-  d <- svd_ord(s)
-  u <- diag(1/sqrt(diag(d_r))) %*% d$u
-  v <- diag(1/sqrt(diag(d_c))) %*% d$v
-  rownames(u) <- rownames(d$u)
-  rownames(v) <- rownames(d$v)
-  colnames(u) <- paste0("LRSV", 1:ncol(u))
-  colnames(v) <- paste0("LRSV", 1:ncol(v))
+  z <- svd(s)
+  u <- diag(1/sqrt(as.vector(r))) %*% z$u[, -ncol(z$u), drop = FALSE]
+  v <- diag(1/sqrt(as.vector(c))) %*% z$v[, -ncol(z$v), drop = FALSE]
+  dimnames(u) <- list(rownames(x), paste0("LRSV", seq(ncol(u))))
+  dimnames(v) <- list(colnames(x), paste0("LRSV", seq(ncol(v))))
   res <- list(
-    sv = d$d,
+    sv = z$d[seq(length(z$d) - 1L)],
     row.coords = u,
     column.coords = v
   )
