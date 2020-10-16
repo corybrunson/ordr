@@ -134,7 +134,8 @@ levantine_glass \%>\%
 ggbiplot(lra_glass, sec.axes = "v", scale.factor = .05) +
   geom_u_point(aes(shape = Site, color = Type)) +
   geom_v_vector() +
-  geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward")
+  geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward") +
+  expand_limits(x = c(-.2, .2))
 # completely compositional log-ratio analysis with FeO and MgO excluded
 levantine_glass \%>\%
   dplyr::select(SiO2, Al2O3, CaO) \%>\%
@@ -146,7 +147,8 @@ levantine_glass \%>\%
 ggbiplot(lra_glass, sec.axes = "v", scale.factor = .05) +
   geom_u_point(aes(shape = Site, color = Type)) +
   geom_v_vector() +
-  geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward")
+  geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward") +
+  expand_limits(x = c(NA, .2))
 }
 \references{
 Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
