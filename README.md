@@ -1,6 +1,8 @@
 
 <!-- edit README.rmd -->
 
+[![Travis](https://travis-ci.org/corybrunson/ordr.svg?branch=main)](https://travis-ci.org/corybrunson/ordr)
+
 # ordr
 
 **ordr** is designed to integrate ordination analysis and biplot
@@ -80,12 +82,8 @@ release. For now, it can be installed from the (default) `main` branch
 using [**remotes**](https://github.com/r-lib/remotes):
 
 ``` r
-remotes::install_github("corybrunson/ordr@main")
+remotes::install_github("corybrunson/ordr")
 ```
-
-The `master` branch exists only as the required source from which to
-build [the website](https://corybrunson.github.io/ordr/), and will be
-discontinued once GitHub Pages enables building from the default branch.
 
 ### PCA example
 
@@ -232,8 +230,7 @@ that **ordr** masks `stats::cmdscale()` with a wrapper that always
 returns the eigenvalues and the symmetric distance matrix produced
 during the calculation. The MDS uses 11 coordinates—the number of
 positive eigenvalues—so that `stat_*_spanningtree()` can call upon them
-to recover the intercity
-distances.
+to recover the intercity distances.
 
 ``` r
 # `tbl_ord` object for a classical MDS on distances between European cities
