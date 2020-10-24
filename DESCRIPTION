@@ -77,6 +77,7 @@ Collate:
     'methods-lm.r'
     'methods-lpca.r'
     'methods-lra.r'
+    'methods-mjca.r'
     'methods-prcomp.r'
     'methods-princomp.r'
     'methods-svd.r'
