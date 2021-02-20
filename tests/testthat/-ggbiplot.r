@@ -2,7 +2,7 @@ library(ordr)
 context("grammatical biplotting")
 
 data(country_differences)
-f <- cmdscale(country_differences, k = 3)
+f <- cmdscale_ord(country_differences, k = 3)
 b <- as_tbl_ord(f)
 n <- nrow(get_u(b))
 

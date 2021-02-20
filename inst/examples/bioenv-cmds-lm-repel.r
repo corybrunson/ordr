@@ -17,7 +17,7 @@ chidist <- function(mat, rowcol = 1) {
 data(bioenv)
 bioenv[, ycols] %>%
   chidist() %>%
-  cmdscale() %>%
+  cmdscale_ord() %>%
   as_tbl_ord() %>%
   mutate_u(.name = bioenv$site) %>%
   print() -> bioenv_cmds

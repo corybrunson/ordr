@@ -2,50 +2,50 @@
 % Please edit documentation in R/methods-cmds.r
 \name{methods-cmds}
 \alias{methods-cmds}
-\alias{as_tbl_ord.cmds}
-\alias{recover_u.cmds}
-\alias{recover_v.cmds}
-\alias{recover_inertia.cmds}
-\alias{recover_coord.cmds}
-\alias{recover_conference.cmds}
-\alias{augmentation_u.cmds}
-\alias{augmentation_v.cmds}
-\alias{augmentation_coord.cmds}
+\alias{as_tbl_ord.cmds_ord}
+\alias{recover_u.cmds_ord}
+\alias{recover_v.cmds_ord}
+\alias{recover_inertia.cmds_ord}
+\alias{recover_coord.cmds_ord}
+\alias{recover_conference.cmds_ord}
+\alias{augmentation_u.cmds_ord}
+\alias{augmentation_v.cmds_ord}
+\alias{augmentation_coord.cmds_ord}
 \title{Functionality for classical multidimensional scaling objects}
 \usage{
-\method{as_tbl_ord}{cmds}(x)
+\method{as_tbl_ord}{cmds_ord}(x)
 
-\method{recover_u}{cmds}(x)
+\method{recover_u}{cmds_ord}(x)
 
-\method{recover_v}{cmds}(x)
+\method{recover_v}{cmds_ord}(x)
 
-\method{recover_inertia}{cmds}(x)
+\method{recover_inertia}{cmds_ord}(x)
 
-\method{recover_coord}{cmds}(x)
+\method{recover_coord}{cmds_ord}(x)
 
-\method{recover_conference}{cmds}(x)
+\method{recover_conference}{cmds_ord}(x)
 
-\method{augmentation_u}{cmds}(x)
+\method{augmentation_u}{cmds_ord}(x)
 
-\method{augmentation_v}{cmds}(x)
+\method{augmentation_v}{cmds_ord}(x)
 
-\method{augmentation_coord}{cmds}(x)
+\method{augmentation_coord}{cmds_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
 }
 \description{
 These methods extract data from, and attribute new data to,
-objects of class \code{"cmds"}. This is a class introduced in this package to
-identify objects returned by \code{\link[stats:cmdscale]{stats::cmdscale()}}, which is masked by a
-wrapper that adds the class attribute.
+objects of class \code{"cmds_ord"}. This is a class introduced in this package
+to identify objects returned by \code{\link[=cmdscale_ord]{cmdscale_ord()}}, which wraps
+\code{\link[stats:cmdscale]{stats::cmdscale()}}.
 }
 \examples{
 # Multidimensional scaling of country differences and regression of attributes
 # Reproduce Exhibit 4.2 in Greenacre (2010)
 data(country_differences)
 country_differences \%>\%
-  cmdscale(k = 2) \%>\%
+  cmdscale_ord(k = 2) \%>\%
   as_tbl_ord() \%>\%
   print() -> differences_cmds
 differences_plot <- differences_cmds \%>\%
@@ -63,7 +63,7 @@ differences_plot +
 # Align an MDS ordination to a PCA ordination
 data(country_differences)
 country_differences \%>\%
-  cmdscale(k = 2) \%>\%
+  cmdscale_ord(k = 2) \%>\%
   as_tbl_ord() \%>\%
   print() -> differences_cmds
 country_differences \%>\%

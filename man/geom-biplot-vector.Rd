@@ -179,7 +179,7 @@ iris_pca \%>\%
 # Align an MDS ordination to a PCA ordination
 data(country_differences)
 country_differences \%>\%
-  cmdscale(k = 2) \%>\%
+  cmdscale_ord(k = 2) \%>\%
   as_tbl_ord() \%>\%
   print() -> differences_cmds
 country_differences \%>\%

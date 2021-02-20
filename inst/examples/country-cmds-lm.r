@@ -2,7 +2,7 @@
 # Reproduce Exhibit 4.2 in Greenacre (2010)
 data(country_differences)
 country_differences %>%
-  cmdscale(k = 2) %>%
+  cmdscale_ord(k = 2) %>%
   as_tbl_ord() %>%
   print() -> differences_cmds
 differences_plot <- differences_cmds %>%

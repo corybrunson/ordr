@@ -3,9 +3,9 @@
 #' @description These methods extract data from, and attribute new data to,
 #'   objects of class `"lpca"` and `"lsvd"` from the
 #'   **[logisticPCA][logisticPCA::logisticPCA-package]** package. The signature
-#'   functions [logisticPCA::logisticPCA()] and [logisticPCA::logisticSVD()] are
-#'   masked with wrappers that add row and column names from the input matrix to
-#'   the output matrices.
+#'   functions [logisticPCA::logisticPCA()], [logisticPCA::logisticSVD()], and
+#'   [logisticPCA::convexLogisticPCA()] have `*_ord()` wrappers that add row and
+#'   column names from the input matrix to the output matrices.
 #'
 #' @name methods-lpca
 #' @include ord-tbl.r

@@ -74,14 +74,14 @@
 These methods extract data from, and attribute new data to,
 objects of class \code{"lpca"} and \code{"lsvd"} from the
 \strong{\link[logisticPCA:logisticPCA-package]{logisticPCA}} package. The signature
-functions \code{\link[logisticPCA:logisticPCA]{logisticPCA::logisticPCA()}} and \code{\link[logisticPCA:logisticSVD]{logisticPCA::logisticSVD()}} are
-masked with wrappers that add row and column names from the input matrix to
-the output matrices.
+functions \code{\link[logisticPCA:logisticPCA]{logisticPCA::logisticPCA()}}, \code{\link[logisticPCA:logisticSVD]{logisticPCA::logisticSVD()}}, and
+\code{\link[logisticPCA:convexLogisticPCA]{logisticPCA::convexLogisticPCA()}} have \verb{*_ord()} wrappers that add row and
+column names from the input matrix to the output matrices.
 }
 \examples{
 # Logistic SVD of Sanderson finches data
 finches \%>\% t() \%>\%
-  logisticSVD() \%>\%
+  logisticSVD_ord() \%>\%
   as_tbl_ord() \%>\%
   augment() \%>\%
   print() -> finches_lsvd
@@ -100,7 +100,7 @@ finches_lsvd \%>\%
   expand_limits(x = c(-80, 60))
 # Logistic PCA of Sanderson finches data
 finches \%>\% t() \%>\%
-  logisticPCA() \%>\%
+  logisticPCA_ord() \%>\%
   as_tbl_ord() \%>\%
   augment() \%>\%
   print() -> finches_lpca
@@ -121,7 +121,7 @@ finches_lpca \%>\%
 finches \%>\% t() \%>\%
   # omit finches present on every island
   {.[, ! apply(., 2, all), drop = FALSE]} \%>\%
-  convexLogisticPCA() \%>\%
+  convexLogisticPCA_ord() \%>\%
   as_tbl_ord() \%>\%
   augment() \%>\%
   print() -> finches_clpca

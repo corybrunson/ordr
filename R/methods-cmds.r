@@ -1,9 +1,9 @@
 #' @title Functionality for classical multidimensional scaling objects
 #'
 #' @description These methods extract data from, and attribute new data to,
-#'   objects of class `"cmds"`. This is a class introduced in this package to
-#'   identify objects returned by [stats::cmdscale()], which is masked by a
-#'   wrapper that adds the class attribute.
+#'   objects of class `"cmds_ord"`. This is a class introduced in this package
+#'   to identify objects returned by [cmdscale_ord()], which wraps
+#'   [stats::cmdscale()].
 #'
 #' @name methods-cmds
 #' @include ord-tbl.r
@@ -14,7 +14,7 @@ NULL
 
 #' @rdname methods-cmds
 #' @export
-as_tbl_ord.cmds <- as_tbl_ord_default
+as_tbl_ord.cmds_ord <- as_tbl_ord_default
 
 recover_uv_cmds <- function(x, .matrix) {
   .matrix <- match_factor(.matrix)
@@ -28,30 +28,30 @@ recover_uv_cmds <- function(x, .matrix) {
 
 #' @rdname methods-cmds
 #' @export
-recover_u.cmds <- function(x) recover_uv_cmds(x, "u")
+recover_u.cmds_ord <- function(x) recover_uv_cmds(x, "u")
 
 #' @rdname methods-cmds
 #' @export
-recover_v.cmds <- function(x) recover_uv_cmds(x, "v")
+recover_v.cmds_ord <- function(x) recover_uv_cmds(x, "v")
 
 #' @rdname methods-cmds
 #' @export
-recover_inertia.cmds <- function(x) x$eig ^ 2
+recover_inertia.cmds_ord <- function(x) x$eig ^ 2
 
 #' @rdname methods-cmds
 #' @export
-recover_coord.cmds <- function(x) paste0("PCo", 1:ncol(x$points))
+recover_coord.cmds_ord <- function(x) paste0("PCo", 1:ncol(x$points))
 
 #' @rdname methods-cmds
 #' @export
-recover_conference.cmds <- function(x) {
+recover_conference.cmds_ord <- function(x) {
   # `stats::cmdscale()` returns the approximate square root
   c(.5, .5)
 }
 
 #' @rdname methods-cmds
 #' @export
-augmentation_u.cmds <- function(x) {
+augmentation_u.cmds_ord <- function(x) {
   .name <- rownames(x$points)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$x))
@@ -63,7 +63,7 @@ augmentation_u.cmds <- function(x) {
 
 #' @rdname methods-cmds
 #' @export
-augmentation_v.cmds <- function(x) {
+augmentation_v.cmds_ord <- function(x) {
   .name <- rownames(x$points)
   res <- if (is.null(.name)) {
     tibble_pole(ncol(x$x))
@@ -75,7 +75,7 @@ augmentation_v.cmds <- function(x) {
 
 #' @rdname methods-cmds
 #' @export
-augmentation_coord.cmds <- function(x) {
+augmentation_coord.cmds_ord <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),
     .eig = x$eig[1:ncol(x$points)]

@@ -1,6 +1,6 @@
 # Align MDS for distances between American cities with compass orientation
 UScitiesD %>%
-  cmdscale(k = 2) %>%
+  cmdscale_ord(k = 2) %>%
   as_tbl_ord() %>%
   augment() %>%
   print() -> usa_mds

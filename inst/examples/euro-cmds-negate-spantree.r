@@ -1,6 +1,6 @@
 # Compare MDS to the spanning tree for road distances between European cities
 eurodist %>%
-  cmdscale(k = 11) %>%
+  cmdscale_ord(k = 11) %>%
   as_tbl_ord() %>%
   augment() %>%
   # align to conventional compass orientation

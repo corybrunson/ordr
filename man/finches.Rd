@@ -37,7 +37,7 @@ finches_ca \%>\%
   expand_limits(x = c(-1, 6))
 # Logistic SVD of Sanderson finches data
 finches \%>\% t() \%>\%
-  logisticSVD() \%>\%
+  logisticSVD_ord() \%>\%
   as_tbl_ord() \%>\%
   augment() \%>\%
   print() -> finches_lsvd
@@ -56,7 +56,7 @@ finches_lsvd \%>\%
   expand_limits(x = c(-80, 60))
 # Logistic PCA of Sanderson finches data
 finches \%>\% t() \%>\%
-  logisticPCA() \%>\%
+  logisticPCA_ord() \%>\%
   as_tbl_ord() \%>\%
   augment() \%>\%
   print() -> finches_lpca
@@ -77,7 +77,7 @@ finches_lpca \%>\%
 finches \%>\% t() \%>\%
   # omit finches present on every island
   {.[, ! apply(., 2, all), drop = FALSE]} \%>\%
-  convexLogisticPCA() \%>\%
+  convexLogisticPCA_ord() \%>\%
   as_tbl_ord() \%>\%
   augment() \%>\%
   print() -> finches_clpca
