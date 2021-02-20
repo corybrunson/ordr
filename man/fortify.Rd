@@ -6,7 +6,6 @@
 \alias{fortify_coord}
 \alias{fortify_u}
 \alias{fortify_v}
-\alias{tidy.tbl_ord}
 \title{Fortify a tbl_ord for plotting}
 \usage{
 \method{fortify}{tbl_ord}(model, data, ..., .matrix = "uv", .supplement = TRUE, include = "all")
@@ -16,16 +15,13 @@ fortify_coord(model)
 fortify_u(model, include = "all")
 
 fortify_v(model, include = "all")
-
-\method{tidy}{tbl_ord}(x, ..., .matrix = "uv", .supplement = TRUE, include = "all")
 }
 \arguments{
-\item{model, x}{A \link{tbl_ord} object.}
+\item{model}{A '\link{tbl_ord}' object.}
 
 \item{data}{Ignored.}
 
-\item{...}{Additional arguments received from \code{fortify()} or \code{tidy()};
-ignored.}
+\item{...}{Additional arguments received from \code{fortify()}; ignored.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
@@ -40,11 +36,11 @@ coordinates or also augmented case and variable data, and, if the latter,
 whether only shared fields or all from both.}
 }
 \description{
-These methods of \code{\link[ggplot2:fortify]{ggplot2::fortify()}} and \code{\link[generics:tidy]{generics::tidy()}}
-convert a \link{tbl_ord} object to a \link[tibble:tbl_df-class]{tbl_df} object.
+This \code{\link[ggplot2:fortify]{ggplot2::fortify()}} method converts a 'tbl_ord' object to
+a \link[tibble:tbl_df-class]{'tbl_df'} object.
 }
 \details{
-The \code{fortify()} and \code{tidy()} methods for tbl_ord objects produce the same
+The \code{fortify()} method for 'tbl_ord' objects produces the same
 output, a \link[tibble:tibble]{tibble} obtained by binding columns obtained via
 \code{\link[=accessors]{get_*()}}, \code{\link[=annotation]{annotation_*()}}, and
 \code{\link[=augmentation]{augmentation_*}}, respectively.
@@ -64,9 +60,8 @@ biplot, in particular \code{\link[=stat_spantree]{stat_spantree()}}.
 # a 'tbl_ord' object
 pca <- as_tbl_ord(prcomp(USArrests))
 pca <- confer_inertia(pca, "symmetric")
-# fortify/tidy a 'tbl_ord' object
+# fortify a 'tbl_ord' object
 fortify(pca)
-tidy(pca)
 # scores or loadings plots using `ggplot()`
 ggplot(pca, aes(x = PC1, y = PC2), .matrix = "u") + geom_point()
 ggplot(pca, aes(x = PC1, y = PC2), .matrix = "v") + geom_point()

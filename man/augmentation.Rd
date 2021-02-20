@@ -10,7 +10,7 @@
 \alias{augment.tbl_ord}
 \alias{augment_u}
 \alias{augment_v}
-\alias{augment_coord}
+\alias{tidy.tbl_ord}
 \title{Augment metadata on the factors and coordinates of tbl_ords}
 \usage{
 augmentation_u(x)
@@ -29,7 +29,7 @@ augment_u(x)
 
 augment_v(x)
 
-augment_coord(x)
+\method{tidy}{tbl_ord}(x, ...)
 }
 \arguments{
 \item{x}{A \link{tbl_ord}, or an ordination object coercible to one.}
@@ -40,7 +40,7 @@ standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
 
 \item{data}{Passed to \code{\link[generics:augment]{generics::augment()}}; currently ignored.}
 
-\item{...}{Additional arguments from \code{\link[base:matrix]{base::as.matrix()}}; ignored.}
+\item{...}{Additional arguments allowed by generics; ignored.}
 }
 \description{
 These functions return data associated with the cases,
@@ -49,19 +49,30 @@ object.
 }
 \details{
 The \verb{augmentation_*()} methods produce \link[tibble:tibble]{tibble}s of values
-associated with the rows, columns, and coordinates of a \link{tbl_ord} object. The
-first field of each tibble is \code{.name}, which contains the case, variable, or
-coordinate names. Additional fields contain information about the cases,
+associated with the rows, columns, and coordinates of a '\link{tbl_ord}' object.
+The first field of each tibble is \code{.name}, which contains the case, variable,
+or coordinate names. Additional fields contain information about the cases,
 variables, or coordinates extracted from the original ordination object.
 
 The \verb{augment_*()} functions return the ordination with either or both factors
 annotated with the result of \verb{augmentation_*()}. In this way \verb{augment_*()}
 works like \code{\link[generics:augment]{generics::augment()}} by extracting information for a tidy summary
 of the components, but it differs in returning an annotated tbl_ord rather
-than a \link[tibble:tbl_df-class]{tbl_df}. The advantage of implementing separate
+than a \link[tibble:tbl_df-class]{'tbl_df'}. The advantage of implementing separate
 methods for the different components is that more information contained in
-the original object becomes accessible to the user. To achieve a result
-similar to that of \code{\link[generics:augment]{generics::augment()}}, use \code{\link[=fortify]{fortify()}}.
+the original object becomes accessible to the user.
+
+Three generics popularized by the \strong{ggplot2} and \strong{broom} packages make use
+of these functions:
+\itemize{
+\item The \code{\link[generics:augment]{generics::augment()}} method adds information about
+the rows and columns while maintaining 'tbl_ord' class structure.
+\item The \code{\link[generics:tidy]{generics::tidy()}} method summarizes information about
+model components, which here are the artificial coordinates
+created by ordinations.
+\item The \code{\link[ggplot2:fortify]{ggplot2::fortify()}} method (\code{\link[=fortify.tbl_ord]{fortify.tbl_ord()}}) augments and
+collapses row and/or column data into a single tibble.
+}
 }
 \examples{
 # Linear regression on marine ecosystem data
@@ -126,7 +137,7 @@ mtcars \%>\%
   augment() \%>\%
   print() -> mtcars_kmeans
 mtcars_kmeans \%>\%
-  augment_coord() \%>\%
+  tidy() \%>\%
   transform(.sdev = sqrt(.withinss / .size)) \%>\%
   print() -> mtcars_coord
 # discriminate between clusters 1 and 2

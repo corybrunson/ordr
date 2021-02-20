@@ -225,7 +225,7 @@ lda_biplot(iris_lda) +
 iris_lda <-
   as_tbl_ord(lda_ord(iris[, 1:4], iris[, 5], axes.scale = "standardized"))
 # standardized variable contributions to discriminant axes
-tidy(iris_lda, .matrix = "v") \%>\%
+fortify(iris_lda, .matrix = "v") \%>\%
   dplyr::mutate(variable = .name) \%>\%
   tidyr::gather(discriminant, coefficient, LD1, LD2) \%>\%
   ggplot(aes(x = discriminant, y = coefficient, fill = variable)) +

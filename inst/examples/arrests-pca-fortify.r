@@ -1,9 +1,8 @@
 # a 'tbl_ord' object
 pca <- as_tbl_ord(prcomp(USArrests))
 pca <- confer_inertia(pca, "symmetric")
-# fortify/tidy a 'tbl_ord' object
+# fortify a 'tbl_ord' object
 fortify(pca)
-tidy(pca)
 # scores or loadings plots using `ggplot()`
 ggplot(pca, aes(x = PC1, y = PC2), .matrix = "u") + geom_point()
 ggplot(pca, aes(x = PC1, y = PC2), .matrix = "v") + geom_point()

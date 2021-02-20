@@ -8,25 +8,37 @@
 #' @details
 #'
 #' The `augmentation_*()` methods produce [tibble][tibble::tibble]s of values
-#' associated with the rows, columns, and coordinates of a [tbl_ord] object. The
-#' first field of each tibble is `.name`, which contains the case, variable, or
-#' coordinate names. Additional fields contain information about the cases,
+#' associated with the rows, columns, and coordinates of a '[tbl_ord]' object.
+#' The first field of each tibble is `.name`, which contains the case, variable,
+#' or coordinate names. Additional fields contain information about the cases,
 #' variables, or coordinates extracted from the original ordination object.
 #'
 #' The `augment_*()` functions return the ordination with either or both factors
 #' annotated with the result of `augmentation_*()`. In this way `augment_*()`
 #' works like [generics::augment()] by extracting information for a tidy summary
 #' of the components, but it differs in returning an annotated tbl_ord rather
-#' than a [tbl_df][tibble::tbl_df]. The advantage of implementing separate
+#' than a ['tbl_df'][tibble::tbl_df]. The advantage of implementing separate
 #' methods for the different components is that more information contained in
-#' the original object becomes accessible to the user. To achieve a result
-#' similar to that of [generics::augment()], use [fortify()].
+#' the original object becomes accessible to the user.
+#'
+#' Three generics popularized by the **ggplot2** and **broom** packages make use
+#' of these functions:
+#' 
+
+#' * The [generics::augment()] method adds information about
+#'   the rows and columns while maintaining 'tbl_ord' class structure.
+#' * The [generics::tidy()] method summarizes information about
+#'   model components, which here are the artificial coordinates
+#'   created by ordinations.
+#' * The [ggplot2::fortify()] method ([fortify.tbl_ord()]) augments and
+#'   collapses row and/or column data into a single tibble.
 #' 
 
 #' @name augmentation
 #' @include ord-accessors.r
 #' @inheritParams accessors
 #' @param data Passed to [generics::augment()]; currently ignored.
+#' @param ... Additional arguments allowed by generics; ignored.
 #' @example inst/examples/bioenv-lm-isolines.r
 #' @example inst/examples/benthos-ca-augment-confer.r
 #' @example inst/examples/mtcars-kmeans-augment.r
@@ -129,9 +141,13 @@ augment_u <- function(x) augment_factor(x, .matrix = "u")
 #' @export
 augment_v <- function(x) augment_factor(x, .matrix = "v")
 
+#' @importFrom generics tidy
+#' @export
+generics::tidy
+
 #' @rdname augmentation
 #' @export
-augment_coord <- function(x) {
+tidy.tbl_ord <- function(x, ...) {
   bind_cols(
     inertia = recover_inertia(x),
     augmentation_coord(x)

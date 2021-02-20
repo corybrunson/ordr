@@ -1,12 +1,12 @@
 #' @title Fortify a tbl_ord for plotting
 #'
-#' @description These methods of [ggplot2::fortify()] and [generics::tidy()]
-#'   convert a [tbl_ord] object to a [tbl_df][tibble::tbl_df] object.
+#' @description This [ggplot2::fortify()] method converts a 'tbl_ord' object to
+#'   a ['tbl_df'][tibble::tbl_df] object.
 #'   
 
 #' @details
 #'
-#' The `fortify()` and `tidy()` methods for tbl_ord objects produce the same
+#' The `fortify()` method for 'tbl_ord' objects produces the same
 #' output, a [tibble][tibble::tibble] obtained by binding columns obtained via
 #' [`get_*()`][accessors], [`annotation_*()`][annotation], and
 #' [`augmentation_*`][augmentation], respectively.
@@ -24,10 +24,9 @@
 #' biplot, in particular [stat_spantree()].
 
 #' @name fortify
-#' @param model,x A [tbl_ord] object.
+#' @param model A '[tbl_ord]' object.
 #' @param data Ignored.
-#' @param ... Additional arguments received from `fortify()` or `tidy()`;
-#'   ignored.
+#' @param ... Additional arguments received from `fortify()`; ignored.
 #' @template param-matrix
 #' @param .supplement Logical; whether to include
 #'   [supplementary][supplementation] points.
@@ -132,22 +131,4 @@ fortify_u <- function(model, include = "all") {
 fortify_v <- function(model, include = "all") {
   include <- match.arg(include, c("coordinates", "all"))
   fortify(model = model, data = NULL, .matrix = "v", include = include)
-}
-
-#' @importFrom generics tidy
-#' @export
-generics::tidy
-
-#' @rdname fortify
-#' @export
-tidy.tbl_ord <- function(
-  x, ...,
-  .matrix = "uv", .supplement = TRUE,
-  include = "all"
-) {
-  fortify.tbl_ord(
-    model = x, data = NULL,
-    .matrix = .matrix, .supplement = .supplement,
-    include = include
-  )
 }
