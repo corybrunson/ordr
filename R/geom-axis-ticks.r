@@ -217,7 +217,7 @@ geom_axis_ticks <- function(
 
 #' @rdname geom-biplot-axis-ticks
 #' @export
-geom_u_axis_ticks <- function(
+geom_rows_axis_ticks <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
   tick_length = .025,
@@ -228,7 +228,7 @@ geom_u_axis_ticks <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = u_stat(stat),
+    stat = rows_stat(stat),
     geom = GeomAxisTicks,
     position = position,
     show.legend = show.legend,
@@ -247,7 +247,7 @@ geom_u_axis_ticks <- function(
 
 #' @rdname geom-biplot-axis-ticks
 #' @export
-geom_v_axis_ticks <- function(
+geom_cols_axis_ticks <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
   tick_length = .025,
@@ -258,7 +258,7 @@ geom_v_axis_ticks <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = v_stat(stat),
+    stat = cols_stat(stat),
     geom = GeomAxisTicks,
     position = position,
     show.legend = show.legend,

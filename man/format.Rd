@@ -51,13 +51,13 @@ mtcars \%>\%
   lm(formula = mpg ~ wt + cyl) \%>\%
   as_tbl_ord() \%>\%
   augment() \%>\%
-  mutate_u(influence = .wt.res^2) \%>\%
+  mutate_rows(influence = .wt.res^2) \%>\%
   print() -> mtcars_lm
 mtcars_lm \%>\%
   ggbiplot(aes(x = wt, y = cyl, intercept = `(Intercept)`)) +
-  geom_u_point(aes(color = influence)) +
-  geom_v_vector() +
-  geom_v_isolines(axes = 1, by = 5) +
+  geom_rows_point(aes(color = influence)) +
+  geom_cols_vector() +
+  geom_cols_isolines(axes = 1, by = 5) +
   ggtitle(
     "Weight isolines with data colored by importance",
     "Regressing mpg onto weight and number of cylinders"
@@ -71,16 +71,16 @@ country_differences \%>\%
   print() -> differences_cmds
 differences_plot <- differences_cmds \%>\%
   ggbiplot(aes(x = 1, y = 2, label = .name)) +
-  geom_v_text()
+  geom_cols_text()
 differences_plot
 # Reproduce Exhibit 4.5 in Greenacre (2010)
 data(country_attributes)
-lm(country_attributes ~ get_u(differences_cmds)) \%>\%
+lm(country_attributes ~ get_rows(differences_cmds)) \%>\%
   as_tbl_ord() \%>\%
   print() -> attributes_fit
 differences_plot +
-  geom_v_vector(data = attributes_fit) +
-  geom_v_text_radiate(data = attributes_fit, hjust = .3)
+  geom_cols_vector(data = attributes_fit) +
+  geom_cols_text_radiate(data = attributes_fit, hjust = .3)
 # Correspondence analysis of Sanderson finches data
 data(finches)
 finches \%>\%
@@ -91,8 +91,8 @@ finches \%>\%
   print() -> finches_ca
 finches_ca \%>\%
   ggbiplot(aes(label = .name)) +
-  geom_u_text(aes(alpha = .inertia), color = "royalblue3") +
-  geom_v_text(aes(alpha = .inertia), color = "darkred") +
+  geom_rows_text(aes(alpha = .inertia), color = "royalblue3") +
+  geom_cols_text(aes(alpha = .inertia), color = "darkred") +
   scale_alpha_continuous(range = c(.3, 1), guide = "none") +
   ggtitle(
     "Symmetric CA biplot of the Galapagos island finches",
@@ -104,16 +104,16 @@ iris[, -5] \%>\%
   princomp() \%>\%
   as_tbl_ord() \%>\%
   confer_inertia(1) \%>\%
-  mutate_u(species = iris$Species) \%>\%
-  mutate_v(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
+  mutate_rows(species = iris$Species) \%>\%
+  mutate_cols(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
   print() -> iris_pca
 iris_pca \%>\%
   ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_point() +
-  geom_v_vector(color = "#444444") +
-  geom_v_text_radiate(aes(label = measure), color = "#444444") +
+  geom_rows_point() +
+  geom_cols_vector(color = "#444444") +
+  geom_cols_text_radiate(aes(label = measure), color = "#444444") +
   ggtitle(
     "Row-principal unscaled PCA biplot of Anderson iris data",
     "Variable loadings scaled to secondary axes"
@@ -125,11 +125,11 @@ diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes)
 print(diabetes_lda)
 as_tbl_ord(diabetes_lda) \%>\%
   augment() \%>\%
-  mutate_u(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
+  mutate_rows(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
   print() -> diabetes_lda
 ggbiplot(diabetes_lda) +
   theme_bw() +
-  geom_u_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
-  geom_v_axis(color = "#888888") +
+  geom_rows_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
+  geom_cols_axis(color = "#888888") +
   ggtitle("Column-standardized LDA biplot of Reaven & Miller diabetes data")
 }

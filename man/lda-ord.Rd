@@ -180,12 +180,12 @@ diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes)
 print(diabetes_lda)
 as_tbl_ord(diabetes_lda) \%>\%
   augment() \%>\%
-  mutate_u(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
+  mutate_rows(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
   print() -> diabetes_lda
 ggbiplot(diabetes_lda) +
   theme_bw() +
-  geom_u_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
-  geom_v_axis(color = "#888888") +
+  geom_rows_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
+  geom_cols_axis(color = "#888888") +
   ggtitle("Column-standardized LDA biplot of Reaven & Miller diabetes data")
 # Unstandardized, standardized, and de-sphered LDAs of Anderson Iris data
 # data centroid
@@ -195,18 +195,18 @@ lda_biplot <- function(lda) {
   lda \%>\%
     as_tbl_ord() \%>\%
     augment() \%>\%
-    mutate_u(
+    mutate_rows(
       species = .grouping,
       discriminant = ifelse(! .supplement, "centroid", "case")
     ) \%>\%
     ggbiplot() +
     theme_bw() +
-    geom_u_point(aes(
+    geom_rows_point(aes(
       color = .grouping,
       size = discriminant, alpha = discriminant
     )) +
-    geom_v_vector(color = "#888888") +
-    geom_v_text_radiate(aes(label = .name), size = 3) +
+    geom_cols_vector(color = "#888888") +
+    geom_cols_text_radiate(aes(label = .name), size = 3) +
     scale_color_brewer(type = "qual", palette = 2)
 }
 # Unstandardized discriminant coefficients define the discriminant axes as
@@ -214,9 +214,9 @@ lda_biplot <- function(lda) {
 iris_lda <-
   as_tbl_ord(lda_ord(iris[, 1:4], iris[, 5], axes.scale = "unstandardized"))
 # linear combinations of centered variables
-print(sweep(iris_lda$means, 2, iris_centroid, "-") \%*\% get_v(iris_lda))
+print(sweep(iris_lda$means, 2, iris_centroid, "-") \%*\% get_cols(iris_lda))
 # discriminant centroids
-print(get_u(iris_lda, .supplement = FALSE))
+print(get_rows(iris_lda, .supplement = FALSE))
 # unstandardized coefficient LDA biplot
 lda_biplot(iris_lda) +
   ggtitle("Unstandardized coefficient biplot of iris LDA") +
@@ -246,7 +246,7 @@ C_W_eig <- eigen(cov(iris[, 1:4] - iris_lda$means[iris[, 5], ]))
 C_W_sqrtinv <-
   C_W_eig$vectors \%*\% diag(1/sqrt(C_W_eig$values)) \%*\% t(C_W_eig$vectors)
 # product of matrix factors (scores and loadings)
-print(get_u(iris_lda, .supplement = FALSE) \%*\% t(get_v(iris_lda)))
+print(get_rows(iris_lda, .supplement = FALSE) \%*\% t(get_cols(iris_lda)))
 # "asymmetric" square roots of Mahalanobis distances between variables
 print(sweep(iris_lda$means, 2, iris_centroid, "-") \%*\% C_W_sqrtinv)
 # contribution LDA biplot

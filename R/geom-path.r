@@ -28,7 +28,7 @@ NULL
 
 #' @rdname geom-biplot-path
 #' @export
-geom_u_path <- function(
+geom_rows_path <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   na.rm = FALSE,
@@ -37,7 +37,7 @@ geom_u_path <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = u_stat(stat),
+    stat = rows_stat(stat),
     geom = GeomPath,
     position = position,
     show.legend = show.legend,
@@ -51,7 +51,7 @@ geom_u_path <- function(
 
 #' @rdname geom-biplot-path
 #' @export
-geom_v_path <- function(
+geom_cols_path <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   na.rm = FALSE,
@@ -60,7 +60,7 @@ geom_v_path <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = v_stat(stat),
+    stat = cols_stat(stat),
     geom = GeomPath,
     position = position,
     show.legend = show.legend,
@@ -76,7 +76,7 @@ geom_v_path <- function(
 #' @export
 geom_biplot_path <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "u",
+  .matrix = "rows",
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE

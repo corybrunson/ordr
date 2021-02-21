@@ -15,8 +15,8 @@ ggbiplot(
   axis.percents = TRUE,
   sec.axes = NULL,
   scale.factor = NULL,
-  scale_u = NULL,
-  scale_v = NULL,
+  scale_rows = NULL,
+  scale_cols = NULL,
   ...
 )
 
@@ -54,10 +54,10 @@ percentages.}
 \item{scale.factor}{Numeric value used to scale the secondary axes against
 the primary axes; ignored if \code{sec.axes} is not specified.}
 
-\item{scale_u, scale_v}{Either the character name of a numeric variable in
-\code{get_*(ordination)} or a numeric vector of length
-\code{nrow(get_*(ordination))}, used to scale the coordinates of \eqn{U} or
-\eqn{V}, respectively.}
+\item{scale_rows, scale_cols}{Either the character name of a numeric variable
+in \code{get_*(ordination)} or a numeric vector of length
+\code{nrow(get_*(ordination))}, used to scale the coordinates of the matrix
+factors.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:fortify]{ggplot2::fortify()}}; see
 \code{\link[=fortify.tbl_ord]{fortify.tbl_ord()}}.}
@@ -73,7 +73,7 @@ object \code{ordination}. The baseline object is the default unadorned
 \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} returns:
 \itemize{
 \item \code{p$mapping} is augmented with \code{.matrix = .matrix}, which expects either
-\code{.matrix = "u"} or \code{.matrix = "v"} from the biplot.
+\code{.matrix = "rows"} or \code{.matrix = "cols"} from the biplot.
 \item \code{p$coordinates} is defaulted to \code{\link[ggplot2:coord_fixed]{ggplot2::coord_equal()}} in order to
 faithfully render the geometry of an ordination. The optional parameters
 \code{xlim}, \code{ylim}, \code{expand}, and \code{clip} are passed to \code{coord_equal()} and
@@ -98,14 +98,14 @@ aesthetics that are processed internally by \code{\link[ggplot2:aes]{ggplot2::ae
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
-frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
-variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
-the data frame to one of these two.
+frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
+variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
+filter the data frame to one of these two.
 
-The geom layers \verb{geom_u_*()} and \verb{geom_v_*()} call the corresponding stat in
-order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \verb{geom_biplot_*()} selects a default matrix based on common practice,
-e.g. \eqn{U} for points and \eqn{V} for arrows.
+The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.
 }
 
 \examples{
@@ -116,13 +116,13 @@ mtcars \%>\%
   lm(formula = mpg ~ wt + cyl) \%>\%
   as_tbl_ord() \%>\%
   augment() \%>\%
-  mutate_u(influence = .wt.res^2) \%>\%
+  mutate_rows(influence = .wt.res^2) \%>\%
   print() -> mtcars_lm
 mtcars_lm \%>\%
   ggbiplot(aes(x = wt, y = cyl, intercept = `(Intercept)`)) +
-  geom_u_point(aes(color = influence)) +
-  geom_v_vector() +
-  geom_v_isolines(axes = 1, by = 5) +
+  geom_rows_point(aes(color = influence)) +
+  geom_cols_vector() +
+  geom_cols_isolines(axes = 1, by = 5) +
   ggtitle(
     "Weight isolines with data colored by importance",
     "Regressing mpg onto weight and number of cylinders"
@@ -132,16 +132,16 @@ iris[, -5] \%>\%
   princomp() \%>\%
   as_tbl_ord() \%>\%
   confer_inertia(1) \%>\%
-  mutate_u(species = iris$Species) \%>\%
-  mutate_v(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
+  mutate_rows(species = iris$Species) \%>\%
+  mutate_cols(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
   print() -> iris_pca
 iris_pca \%>\%
   ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_point() +
-  geom_v_vector(color = "#444444") +
-  geom_v_text_radiate(aes(label = measure), color = "#444444") +
+  geom_rows_point() +
+  geom_cols_vector(color = "#444444") +
+  geom_cols_text_radiate(aes(label = measure), color = "#444444") +
   ggtitle(
     "Row-principal unscaled PCA biplot of Anderson iris data",
     "Variable loadings scaled to secondary axes"
@@ -158,9 +158,9 @@ finches_lsvd \%>\%
     aes(x = LSC1, y = LSC2, label = .name),
     sec.axes = "v", scale.factor = 100
   ) +
-  geom_u_vector(alpha = .5, color = "darkred") +
-  geom_u_text_radiate(size = 3, color = "darkred") +
-  geom_v_label(size = 3, alpha = .5, color = "royalblue3") +
+  geom_rows_vector(alpha = .5, color = "darkred") +
+  geom_rows_text_radiate(size = 3, color = "darkred") +
+  geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
   ggtitle(
     "Logistic SVD of the Galapagos island finches",
     "Islands (finches) scaled to the primary (secondary) axes"
@@ -177,9 +177,9 @@ finches_lpca \%>\%
     aes(x = LPC1, y = LPC2, label = .name),
     sec.axes = "v", scale.factor = 50
   ) +
-  geom_u_vector(alpha = .5, color = "darkred") +
-  geom_u_text_radiate(size = 3, color = "darkred") +
-  geom_v_label(size = 3, alpha = .5, color = "royalblue3") +
+  geom_rows_vector(alpha = .5, color = "darkred") +
+  geom_rows_text_radiate(size = 3, color = "darkred") +
+  geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
   ggtitle(
     "Logistic PCA of the Galapagos island finches",
     "Islands (finches) scaled to the primary (secondary) axes"
@@ -198,9 +198,9 @@ finches_clpca \%>\%
     aes(x = LPC1, y = LPC2, label = .name),
     sec.axes = "v", scale.factor = 50
   ) +
-  geom_u_vector(alpha = .5, color = "darkred") +
-  geom_u_text_radiate(size = 3, color = "darkred") +
-  geom_v_label(size = 3, alpha = .5, color = "royalblue3") +
+  geom_rows_vector(alpha = .5, color = "darkred") +
+  geom_rows_text_radiate(size = 3, color = "darkred") +
+  geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
   ggtitle(
     "Convex logistic PCA of the Galapagos island finches",
     "Islands (finches) scaled to the primary (secondary) axes"

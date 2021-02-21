@@ -8,15 +8,15 @@ smoke_ca %>%
   confer_inertia("rowprincipal") %>%
   ggbiplot(aes(label = .name)) +
   theme_bw() +
-  geom_u_point(color = "green") +
-  geom_u_text_repel(color = "blue") +
-  geom_v_point(color = "brown", shape = 17) +
-  geom_v_text_repel(color = "brown")
+  geom_rows_point(color = "green") +
+  geom_rows_text_repel(color = "blue") +
+  geom_cols_point(color = "brown", shape = 17) +
+  geom_cols_text_repel(color = "brown")
 smoke_ca %>%
   confer_inertia("colprincipal") %>%
   ggbiplot(aes(label = .name)) +
   theme_bw() +
-  geom_u_point(color = "green") +
-  geom_u_text_repel(color = "blue") +
-  geom_v_point(color = "brown", shape = 17) +
-  geom_v_text_repel(color = "brown")
+  geom_rows_point(color = "green") +
+  geom_rows_text_repel(color = "blue") +
+  geom_cols_point(color = "brown", shape = 17) +
+  geom_cols_text_repel(color = "brown")

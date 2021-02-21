@@ -34,9 +34,9 @@ bioenv_lm \%>\%
   theme_bw() +
   scale_color_distiller(type = "div", palette = 1) +
   scale_alpha_continuous(range = c(1/3, 1)) +
-  geom_u_point() +
-  geom_v_vector() +
-  geom_v_isolines(aes(intercept = `(Intercept)`), axes = 1, by = 5) +
+  geom_rows_point() +
+  geom_cols_vector() +
+  geom_cols_isolines(aes(intercept = `(Intercept)`), axes = 1, by = 5) +
   labs(x = "Standardized Depth", y = "Standardized Pollution") +
   ggtitle(
     "Gradient vector and contour lines for species 'd'",
@@ -63,21 +63,21 @@ bioenv[, ycols] \%>\%
   chidist() \%>\%
   cmdscale_ord() \%>\%
   as_tbl_ord() \%>\%
-  mutate_u(.name = bioenv$site) \%>\%
+  mutate_rows(.name = bioenv$site) \%>\%
   print() -> bioenv_cmds
 # regress species relative frequencies on principal coordinates
 bioenv[, ycols] \%>\%
   sweep(1, 1 / rowSums(bioenv[, ycols]), "*") \%>\%
   sweep(2, sqrt(sum(bioenv[, ycols]) / colSums(bioenv[, ycols])), "*") \%>\%
   as.matrix() -> bioenv_relfreq
-lm(bioenv_relfreq ~ get_u(bioenv_cmds)) \%>\%
+lm(bioenv_relfreq ~ get_rows(bioenv_cmds)) \%>\%
   as_tbl_ord() \%>\%
   print() -> bioenv_lm
 # biplot of species with regression vectors onto principal coordinates
 ggbiplot(bioenv_cmds, aes(label = .name)) +
-  geom_u_text(color = "seagreen") +
-  geom_v_vector(data = bioenv_lm, color = "darkred") +
-  geom_v_text_repel(data = bioenv_lm)
+  geom_rows_text(color = "seagreen") +
+  geom_cols_vector(data = bioenv_lm, color = "darkred") +
+  geom_cols_text_repel(data = bioenv_lm)
 # Generalized multiple linear regression on marine ecosystem data
 # Reproduce Exhibit 2.5 in Greenacre (2010)
 data(bioenv)
@@ -89,9 +89,9 @@ lm(resp_std ~ pred_std + 0) \%>\%
   print() -> bioenv_std_mlm
 ggbiplot(bioenv_std_mlm, aes(label = .name)) +
   theme_bw() +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_radiate(color = "brown4")
+  geom_rows_text(color = "darkgreen") +
+  geom_cols_vector(color = "brown4") +
+  geom_cols_text_radiate(color = "brown4")
 # Reproduce Exhibit 3.2 in Greenacre (2010)
 bioenv \%>\%
   dplyr::mutate_at(dplyr::vars(a:e), ~ . ^ (1/4)) \%>\%
@@ -104,9 +104,9 @@ lm(resp_4rt ~ pred_4rt + 0) \%>\%
   print() -> bioenv_4rt_mlm
 ggbiplot(bioenv_4rt_mlm, aes(x = x, y = y, label = .name)) +
   theme_bw() +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_radiate(color = "brown4")
+  geom_rows_text(color = "darkgreen") +
+  geom_cols_vector(color = "brown4") +
+  geom_cols_text_radiate(color = "brown4")
 }
 \references{
 Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:

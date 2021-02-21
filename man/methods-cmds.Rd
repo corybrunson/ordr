@@ -3,21 +3,21 @@
 \name{methods-cmds}
 \alias{methods-cmds}
 \alias{as_tbl_ord.cmds_ord}
-\alias{recover_u.cmds_ord}
-\alias{recover_v.cmds_ord}
+\alias{recover_rows.cmds_ord}
+\alias{recover_cols.cmds_ord}
 \alias{recover_inertia.cmds_ord}
 \alias{recover_coord.cmds_ord}
 \alias{recover_conference.cmds_ord}
-\alias{augmentation_u.cmds_ord}
-\alias{augmentation_v.cmds_ord}
+\alias{augmentation_rows.cmds_ord}
+\alias{augmentation_cols.cmds_ord}
 \alias{augmentation_coord.cmds_ord}
 \title{Functionality for classical multidimensional scaling objects}
 \usage{
 \method{as_tbl_ord}{cmds_ord}(x)
 
-\method{recover_u}{cmds_ord}(x)
+\method{recover_rows}{cmds_ord}(x)
 
-\method{recover_v}{cmds_ord}(x)
+\method{recover_cols}{cmds_ord}(x)
 
 \method{recover_inertia}{cmds_ord}(x)
 
@@ -25,9 +25,9 @@
 
 \method{recover_conference}{cmds_ord}(x)
 
-\method{augmentation_u}{cmds_ord}(x)
+\method{augmentation_rows}{cmds_ord}(x)
 
-\method{augmentation_v}{cmds_ord}(x)
+\method{augmentation_cols}{cmds_ord}(x)
 
 \method{augmentation_coord}{cmds_ord}(x)
 }
@@ -50,16 +50,16 @@ country_differences \%>\%
   print() -> differences_cmds
 differences_plot <- differences_cmds \%>\%
   ggbiplot(aes(x = 1, y = 2, label = .name)) +
-  geom_v_text()
+  geom_cols_text()
 differences_plot
 # Reproduce Exhibit 4.5 in Greenacre (2010)
 data(country_attributes)
-lm(country_attributes ~ get_u(differences_cmds)) \%>\%
+lm(country_attributes ~ get_rows(differences_cmds)) \%>\%
   as_tbl_ord() \%>\%
   print() -> attributes_fit
 differences_plot +
-  geom_v_vector(data = attributes_fit) +
-  geom_v_text_radiate(data = attributes_fit, hjust = .3)
+  geom_cols_vector(data = attributes_fit) +
+  geom_cols_text_radiate(data = attributes_fit, hjust = .3)
 # Align an MDS ordination to a PCA ordination
 data(country_differences)
 country_differences \%>\%
@@ -72,20 +72,20 @@ country_differences \%>\%
   print() -> differences_pca
 # negate PCA cases to MDS coordinates
 differences_cmds \%>\%
-  negate_to(differences_pca, "u") \%>\%
-  print() -> differences_align_u
+  negate_to(differences_pca, "rows") \%>\%
+  print() -> differences_align_rows
 plot(gridExtra::arrangeGrob(grobs = list(
-  ggbiplot(differences_cmds) + geom_u_point(),
-  ggbiplot(differences_pca) + geom_u_point(),
-  ggbiplot(differences_align_u) + geom_u_point()
+  ggbiplot(differences_cmds) + geom_rows_point(),
+  ggbiplot(differences_pca) + geom_rows_point(),
+  ggbiplot(differences_align_rows) + geom_rows_point()
 ), ncol = 3))
 # negate PCA variables to MDS coordinates
 differences_cmds \%>\%
-  negate_to(differences_pca, "v") \%>\%
-  print() -> differences_align_v
+  negate_to(differences_pca, "cols") \%>\%
+  print() -> differences_align_cols
 plot(gridExtra::arrangeGrob(grobs = list(
-  ggbiplot(differences_cmds) + geom_v_vector(),
-  ggbiplot(differences_pca) + geom_v_vector(),
-  ggbiplot(differences_align_v) + geom_v_vector()
+  ggbiplot(differences_cmds) + geom_cols_vector(),
+  ggbiplot(differences_pca) + geom_cols_vector(),
+  ggbiplot(differences_align_cols) + geom_cols_vector()
 ), ncol = 3))
 }

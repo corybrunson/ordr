@@ -9,9 +9,9 @@ lm(resp_std ~ pred_std + 0) %>%
   print() -> bioenv_std_mlm
 ggbiplot(bioenv_std_mlm, aes(label = .name)) +
   theme_bw() +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_radiate(color = "brown4")
+  geom_rows_text(color = "darkgreen") +
+  geom_cols_vector(color = "brown4") +
+  geom_cols_text_radiate(color = "brown4")
 # Reproduce Exhibit 3.2 in Greenacre (2010)
 bioenv %>%
   dplyr::mutate_at(dplyr::vars(a:e), ~ . ^ (1/4)) %>%
@@ -24,6 +24,6 @@ lm(resp_4rt ~ pred_4rt + 0) %>%
   print() -> bioenv_4rt_mlm
 ggbiplot(bioenv_4rt_mlm, aes(x = x, y = y, label = .name)) +
   theme_bw() +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_radiate(color = "brown4")
+  geom_rows_text(color = "darkgreen") +
+  geom_cols_vector(color = "brown4") +
+  geom_cols_text_radiate(color = "brown4")

@@ -4,37 +4,37 @@
 \alias{methods-lda}
 \alias{as_tbl_ord.lda}
 \alias{as_tbl_ord.lda_ord}
-\alias{recover_u.lda}
-\alias{recover_u.lda_ord}
-\alias{recover_v.lda}
-\alias{recover_v.lda_ord}
+\alias{recover_rows.lda}
+\alias{recover_rows.lda_ord}
+\alias{recover_cols.lda}
+\alias{recover_cols.lda_ord}
 \alias{recover_inertia.lda}
 \alias{recover_inertia.lda_ord}
 \alias{recover_coord.lda}
 \alias{recover_coord.lda_ord}
 \alias{recover_conference.lda}
 \alias{recover_conference.lda_ord}
-\alias{augmentation_u.lda}
-\alias{augmentation_u.lda_ord}
-\alias{augmentation_v.lda}
-\alias{augmentation_v.lda_ord}
+\alias{augmentation_rows.lda}
+\alias{augmentation_rows.lda_ord}
+\alias{augmentation_cols.lda}
+\alias{augmentation_cols.lda_ord}
 \alias{augmentation_coord.lda}
 \alias{augmentation_coord.lda_ord}
-\alias{supplementation_u.lda}
-\alias{supplementation_u.lda_ord}
+\alias{supplementation_rows.lda}
+\alias{supplementation_rows.lda_ord}
 \title{Functionality for linear discriminant analysis ('lda') objects}
 \usage{
 \method{as_tbl_ord}{lda}(x)
 
 \method{as_tbl_ord}{lda_ord}(x)
 
-\method{recover_u}{lda}(x)
+\method{recover_rows}{lda}(x)
 
-\method{recover_u}{lda_ord}(x)
+\method{recover_rows}{lda_ord}(x)
 
-\method{recover_v}{lda}(x)
+\method{recover_cols}{lda}(x)
 
-\method{recover_v}{lda_ord}(x)
+\method{recover_cols}{lda_ord}(x)
 
 \method{recover_inertia}{lda}(x)
 
@@ -48,21 +48,21 @@
 
 \method{recover_conference}{lda_ord}(x)
 
-\method{augmentation_u}{lda}(x)
+\method{augmentation_rows}{lda}(x)
 
-\method{augmentation_u}{lda_ord}(x)
+\method{augmentation_rows}{lda_ord}(x)
 
-\method{augmentation_v}{lda}(x)
+\method{augmentation_cols}{lda}(x)
 
-\method{augmentation_v}{lda_ord}(x)
+\method{augmentation_cols}{lda_ord}(x)
 
 \method{augmentation_coord}{lda}(x)
 
 \method{augmentation_coord}{lda_ord}(x)
 
-\method{supplementation_u}{lda}(x)
+\method{supplementation_rows}{lda}(x)
 
-\method{supplementation_u}{lda_ord}(x)
+\method{supplementation_rows}{lda_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
@@ -82,12 +82,12 @@ diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes)
 print(diabetes_lda)
 as_tbl_ord(diabetes_lda) \%>\%
   augment() \%>\%
-  mutate_u(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
+  mutate_rows(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
   print() -> diabetes_lda
 ggbiplot(diabetes_lda) +
   theme_bw() +
-  geom_u_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
-  geom_v_axis(color = "#888888") +
+  geom_rows_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
+  geom_cols_axis(color = "#888888") +
   ggtitle("Column-standardized LDA biplot of Reaven & Miller diabetes data")
 # Unstandardized, standardized, and de-sphered LDAs of Anderson Iris data
 # data centroid
@@ -97,18 +97,18 @@ lda_biplot <- function(lda) {
   lda \%>\%
     as_tbl_ord() \%>\%
     augment() \%>\%
-    mutate_u(
+    mutate_rows(
       species = .grouping,
       discriminant = ifelse(! .supplement, "centroid", "case")
     ) \%>\%
     ggbiplot() +
     theme_bw() +
-    geom_u_point(aes(
+    geom_rows_point(aes(
       color = .grouping,
       size = discriminant, alpha = discriminant
     )) +
-    geom_v_vector(color = "#888888") +
-    geom_v_text_radiate(aes(label = .name), size = 3) +
+    geom_cols_vector(color = "#888888") +
+    geom_cols_text_radiate(aes(label = .name), size = 3) +
     scale_color_brewer(type = "qual", palette = 2)
 }
 # Unstandardized discriminant coefficients define the discriminant axes as
@@ -116,9 +116,9 @@ lda_biplot <- function(lda) {
 iris_lda <-
   as_tbl_ord(lda_ord(iris[, 1:4], iris[, 5], axes.scale = "unstandardized"))
 # linear combinations of centered variables
-print(sweep(iris_lda$means, 2, iris_centroid, "-") \%*\% get_v(iris_lda))
+print(sweep(iris_lda$means, 2, iris_centroid, "-") \%*\% get_cols(iris_lda))
 # discriminant centroids
-print(get_u(iris_lda, .supplement = FALSE))
+print(get_rows(iris_lda, .supplement = FALSE))
 # unstandardized coefficient LDA biplot
 lda_biplot(iris_lda) +
   ggtitle("Unstandardized coefficient biplot of iris LDA") +
@@ -148,7 +148,7 @@ C_W_eig <- eigen(cov(iris[, 1:4] - iris_lda$means[iris[, 5], ]))
 C_W_sqrtinv <-
   C_W_eig$vectors \%*\% diag(1/sqrt(C_W_eig$values)) \%*\% t(C_W_eig$vectors)
 # product of matrix factors (scores and loadings)
-print(get_u(iris_lda, .supplement = FALSE) \%*\% t(get_v(iris_lda)))
+print(get_rows(iris_lda, .supplement = FALSE) \%*\% t(get_cols(iris_lda)))
 # "asymmetric" square roots of Mahalanobis distances between variables
 print(sweep(iris_lda$means, 2, iris_centroid, "-") \%*\% C_W_sqrtinv)
 # contribution LDA biplot

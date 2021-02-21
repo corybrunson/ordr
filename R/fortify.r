@@ -41,7 +41,7 @@
 #' @export
 fortify.tbl_ord <- function(
   model, data, ...,
-  .matrix = "uv", .supplement = TRUE,
+  .matrix = "dims", .supplement = TRUE,
   include = "all"
 ) {
   # check first if coordinate / inertia diagonal is desired
@@ -54,12 +54,12 @@ fortify.tbl_ord <- function(
   .matrix <- unname(tbl_ord_factors[.matrix])
   include <- match.arg(include, c("coordinates", "shared", "all"))
   
-  if (grepl("u", .matrix)) {
-    u <- as_tibble(get_u(model))
+  if (.matrix == "dims" || .matrix == "rows") {
+    u <- as_tibble(get_rows(model))
     if (include != "coordinates") {
       u <- dplyr::bind_cols(
         u,
-        augment_annotation(model, "u")
+        augment_annotation(model, "rows")
       )
     }
     if (! .supplement && ".supplement" %in% names(u)) {
@@ -67,15 +67,15 @@ fortify.tbl_ord <- function(
       u$.supplement <- NULL
     }
     if (include != "coordinates") {
-      u$.matrix <- "u"
+      u$.matrix <- "rows"
     }
   }
-  if (grepl("v", .matrix)) {
-    v <- as_tibble(get_v(model))
+  if (.matrix == "dims" || .matrix == "cols") {
+    v <- as_tibble(get_cols(model))
     if (include != "coordinates") {
       v <- dplyr::bind_cols(
         v,
-        augment_annotation(model, "v")
+        augment_annotation(model, "cols")
       )
     }
     if (! .supplement && ".supplement" %in% names(v)) {
@@ -83,15 +83,15 @@ fortify.tbl_ord <- function(
       v$.supplement <- NULL
     }
     if (include != "coordinates") {
-      v$.matrix <- "v"
+      v$.matrix <- "cols"
     }
   }
   
   tbl <- switch(
     .matrix,
-    u = u,
-    v = v,
-    uv = switch(
+    rows = u,
+    cols = v,
+    dims = switch(
       include,
       coordinates = as_tibble(as.data.frame(rbind(u, v))),
       shared = {
@@ -121,14 +121,14 @@ fortify_coord <- function(model) {
 
 #' @rdname fortify
 #' @export
-fortify_u <- function(model, include = "all") {
+fortify_rows <- function(model, include = "all") {
   include <- match.arg(include, c("coordinates", "all"))
-  fortify(model = model, data = NULL, .matrix = "u", include = include)
+  fortify(model = model, data = NULL, .matrix = "rows", include = include)
 }
 
 #' @rdname fortify
 #' @export
-fortify_v <- function(model, include = "all") {
+fortify_cols <- function(model, include = "all") {
   include <- match.arg(include, c("coordinates", "all"))
-  fortify(model = model, data = NULL, .matrix = "v", include = include)
+  fortify(model = model, data = NULL, .matrix = "cols", include = include)
 }

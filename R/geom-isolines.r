@@ -204,7 +204,7 @@ geom_isolines <- function(
 
 #' @rdname geom-biplot-isolines
 #' @export
-geom_u_isolines <- function(
+geom_rows_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
   ...,
@@ -214,7 +214,7 @@ geom_u_isolines <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = u_stat(stat),
+    stat = rows_stat(stat),
     geom = GeomIsolines,
     position = position,
     show.legend = show.legend,
@@ -232,7 +232,7 @@ geom_u_isolines <- function(
 
 #' @rdname geom-biplot-isolines
 #' @export
-geom_v_isolines <- function(
+geom_cols_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
   ...,
@@ -242,7 +242,7 @@ geom_v_isolines <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = v_stat(stat),
+    stat = cols_stat(stat),
     geom = GeomIsolines,
     position = position,
     show.legend = show.legend,

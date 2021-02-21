@@ -67,16 +67,16 @@ USPersonalExpenditure
 # augment the cases and variables with metadata
 (spend_pca <- augment(spend_pca))
 # annotate the cases or variables
-(spend_pca <- mutate_v(spend_pca, year = as.integer(.name)))
+(spend_pca <- mutate_cols(spend_pca, year = as.integer(.name)))
 # confer inertia equally between cases and variables
 (spend_pca <- confer_inertia(spend_pca, c(.5, .5)))
 # render a biplot, by default on the first two shared coordinates
 ggbiplot(spend_pca, aes(label = .name)) +
   theme_bw() +
-  geom_v_vector(aes(color = year)) +
-  geom_v_text_radiate() +
-  geom_u_point() +
-  geom_u_text_repel() +
+  geom_cols_vector(aes(color = year)) +
+  geom_cols_text_radiate() +
+  geom_rows_point() +
+  geom_rows_text_repel() +
   scale_y_continuous(expand = expand_scale(add = .5)) +
   ggtitle(
     "U.S. Personal Expenditure data, 1940-1960",
@@ -101,11 +101,11 @@ eurodist %>%
 # 2D biplot aligned with geography
 city_mds %>%
   ggbiplot() +
-  stat_v_spantree(
+  stat_cols_spantree(
     ord_aes(city_mds), check.aes = FALSE,
     alpha = .5, linetype = "dotted"
   ) +
-  geom_v_text(aes(label = .name), size = 3) +
+  geom_cols_text(aes(label = .name), size = 3) +
   ggtitle("MDS biplot of road distances between European cities")
 ```
 

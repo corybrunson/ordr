@@ -23,7 +23,7 @@
 #'
 #' `is_tbl_ord()` checks an object `x` for the tbl_ord class; `valid_tbl_ord()`
 #' additionally checks for consistency between `recover_coord(x)` and the
-#' columns of `recover_u(x)` and `recover_v(x)`, using the [accessors].
+#' columns of `recover_rows(x)` and `recover_cols(x)`, using the [accessors].
 #' `un_tbl_ord()` removes attributes associated with the tbl_ord class in order
 #' to restore an object that was originally passed to `as_tbl_ord`.
 #' 
@@ -32,7 +32,7 @@
 #' @include ord-alignment.r ord-conference.r
 #' @importFrom tibble tibble is_tibble as_tibble
 #' @param x An ordination object.
-#' @param u,v Matrices to be used as factors of a tbl_ord.
+#' @param rows,cols Matrices to be used as factors of a tbl_ord.
 #' @param ... Additional elements of a custom tbl_ord.
 NULL
 
@@ -46,16 +46,16 @@ as_tbl_ord.tbl_ord <- function(x) x
 
 #' @rdname tbl_ord
 #' @export
-make_tbl_ord <- function(u = NULL, v = NULL, ...) {
-  if (!is.matrix(u) || !is.matrix(v) || ncol(u) == ncol(v)) {
-    stop("`u` and `v` must be matrices having the same number of columns.")
+make_tbl_ord <- function(rows = NULL, cols = NULL, ...) {
+  if (!is.matrix(rows) || !is.matrix(cols) || ncol(rows) == ncol(cols)) {
+    stop("`rows` and `cols` must be matrices having the same number of columns.")
   }
-  if (!is.null(colnames(u)) & !is.null(colnames(v))) {
-    if (any(colnames(u) != colnames(v))) {
-      stop("`u` and `v` must have the same column names.")
+  if (!is.null(colnames(rows)) & !is.null(colnames(cols))) {
+    if (any(colnames(rows) != colnames(cols))) {
+      stop("`rows` and `cols` must have the same column names.")
     }
   }
-  res <- list(u = u, v = v, ...)
+  res <- list(rows = rows, cols = cols, ...)
   class(res) <- c("tbl_ord", class(res))
   res
 }
@@ -75,19 +75,19 @@ valid_tbl_ord <- function(x) {
   if (! is.null(attr(x, "align")) &&
       ! is.matrix(attr(x, "align")) &&
       ! all(dim(attr(x, "align") == rep(dim(x), 2)))) return(FALSE)
-  if (! is.null(attr(x, "u_annotation")) &&
-      ! is_tibble(attr(x, "u_annotation"))) return(FALSE)
-  if (! is.null(attr(x, "v_annotation")) &&
-      ! is_tibble(attr(x, "v_annotation"))) return(FALSE)
+  if (! is.null(attr(x, "rows_annotation")) &&
+      ! is_tibble(attr(x, "rows_annotation"))) return(FALSE)
+  if (! is.null(attr(x, "cols_annotation")) &&
+      ! is_tibble(attr(x, "cols_annotation"))) return(FALSE)
   # -+- update this check for eigendecomposition-based and 3-factor ordinations
   if (! is.null(attr(x, "confer")) &&
       (! is.numeric(attr(x, "confer")) ||
        length(attr(x, "confer")) != 2)) return(FALSE)
   if (is.null(recover_coord(x)) ||
-      is.null(recover_u(x)) ||
-      is.null(recover_v(x))) return(FALSE)
-  if (! all(recover_coord(x) %in% colnames(recover_u(x)))) return(FALSE)
-  if (! all(recover_coord(x) %in% colnames(recover_v(x)))) return(FALSE)
+      is.null(recover_rows(x)) ||
+      is.null(recover_cols(x))) return(FALSE)
+  if (! all(recover_coord(x) %in% colnames(recover_rows(x)))) return(FALSE)
+  if (! all(recover_coord(x) %in% colnames(recover_cols(x)))) return(FALSE)
   TRUE
 }
 
@@ -96,8 +96,8 @@ valid_tbl_ord <- function(x) {
 un_tbl_ord <- function(x) {
   if (! is_tbl_ord(x)) return(x)
   attr(x, "align") <- NULL
-  attr(x, "u_annotation") <- NULL
-  attr(x, "v_annotation") <- NULL
+  attr(x, "rows_annotation") <- NULL
+  attr(x, "cols_annotation") <- NULL
   attr(x, "confer") <- NULL
   class(x) <- setdiff(class(x), "tbl_ord")
   x

@@ -17,13 +17,13 @@ as_tbl_ord.princomp <- as_tbl_ord_default
 
 #' @rdname methods-princomp
 #' @export
-recover_u.princomp <- function(x) {
+recover_rows.princomp <- function(x) {
   x[["scores"]]
 }
 
 #' @rdname methods-princomp
 #' @export
-recover_v.princomp <- function(x) {
+recover_cols.princomp <- function(x) {
   unclass(x[["loadings"]])
 }
 
@@ -48,7 +48,7 @@ recover_conference.princomp <- function(x) {
 
 #' @rdname methods-princomp
 #' @export
-augmentation_u.princomp <- function(x) {
+augmentation_rows.princomp <- function(x) {
   .name <- rownames(x[["scores"]])
   if (is.null(.name)) {
     tibble_pole(nrow(x[["scores"]]))
@@ -59,7 +59,7 @@ augmentation_u.princomp <- function(x) {
 
 #' @rdname methods-princomp
 #' @export
-augmentation_v.princomp <- function(x) {
+augmentation_cols.princomp <- function(x) {
   .name <- rownames(x[["loadings"]])
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x[["loadings"]]))

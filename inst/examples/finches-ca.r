@@ -8,8 +8,8 @@ finches %>%
   print() -> finches_ca
 finches_ca %>%
   ggbiplot(aes(label = .name)) +
-  geom_u_text(aes(alpha = .inertia), color = "royalblue3") +
-  geom_v_text(aes(alpha = .inertia), color = "darkred") +
+  geom_rows_text(aes(alpha = .inertia), color = "royalblue3") +
+  geom_cols_text(aes(alpha = .inertia), color = "darkred") +
   scale_alpha_continuous(range = c(.3, 1), guide = "none") +
   ggtitle(
     "Symmetric CA biplot of the Galapagos island finches",

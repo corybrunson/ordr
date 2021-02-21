@@ -31,16 +31,16 @@ country_differences \%>\%
   print() -> differences_cmds
 differences_plot <- differences_cmds \%>\%
   ggbiplot(aes(x = 1, y = 2, label = .name)) +
-  geom_v_text()
+  geom_cols_text()
 differences_plot
 # Reproduce Exhibit 4.5 in Greenacre (2010)
 data(country_attributes)
-lm(country_attributes ~ get_u(differences_cmds)) \%>\%
+lm(country_attributes ~ get_rows(differences_cmds)) \%>\%
   as_tbl_ord() \%>\%
   print() -> attributes_fit
 differences_plot +
-  geom_v_vector(data = attributes_fit) +
-  geom_v_text_radiate(data = attributes_fit, hjust = .3)
+  geom_cols_vector(data = attributes_fit) +
+  geom_cols_text_radiate(data = attributes_fit, hjust = .3)
 # Confer PCA weights and inertia between cases and variables
 data(country_attributes)
 country_attributes \%>\%
@@ -51,12 +51,12 @@ country_attributes \%>\%
 attributes_pca \%>\%
   ggbiplot(
     aes(label = .name),
-    sec.axes = "v", scale.factor = dim_v(attributes_pca)
+    sec.axes = "cols", scale.factor = dim_cols(attributes_pca)
   ) +
   theme_bw() + theme(panel.grid = element_blank()) +
-  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
-  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
-  geom_v_text(
+  geom_rows_text(aes(x = PC1, y = PC2), color = "seagreen") +
+  geom_cols_vector(aes(x = PC1, y = PC2), color = "darkred") +
+  geom_cols_text(
     aes(x = PC1, y = PC2),
     color = "darkred", hjust = "outward", vjust = "outward"
   )
@@ -65,12 +65,12 @@ attributes_pca \%>\%
   confer_inertia(0) \%>\%
   ggbiplot(
     aes(label = .name),
-    sec.axes = "u", scale.factor = dim_u(attributes_pca)
+    sec.axes = "rows", scale.factor = dim_rows(attributes_pca)
   ) +
   theme_bw() + theme(panel.grid = element_blank()) +
-  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
-  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
-  geom_v_text_repel(aes(x = PC1, y = PC2), color = "darkred")
+  geom_rows_text(aes(x = PC1, y = PC2), color = "seagreen") +
+  geom_cols_vector(aes(x = PC1, y = PC2), color = "darkred") +
+  geom_cols_text_repel(aes(x = PC1, y = PC2), color = "darkred")
 # Align an MDS ordination to a PCA ordination
 data(country_differences)
 country_differences \%>\%
@@ -83,21 +83,21 @@ country_differences \%>\%
   print() -> differences_pca
 # negate PCA cases to MDS coordinates
 differences_cmds \%>\%
-  negate_to(differences_pca, "u") \%>\%
-  print() -> differences_align_u
+  negate_to(differences_pca, "rows") \%>\%
+  print() -> differences_align_rows
 plot(gridExtra::arrangeGrob(grobs = list(
-  ggbiplot(differences_cmds) + geom_u_point(),
-  ggbiplot(differences_pca) + geom_u_point(),
-  ggbiplot(differences_align_u) + geom_u_point()
+  ggbiplot(differences_cmds) + geom_rows_point(),
+  ggbiplot(differences_pca) + geom_rows_point(),
+  ggbiplot(differences_align_rows) + geom_rows_point()
 ), ncol = 3))
 # negate PCA variables to MDS coordinates
 differences_cmds \%>\%
-  negate_to(differences_pca, "v") \%>\%
-  print() -> differences_align_v
+  negate_to(differences_pca, "cols") \%>\%
+  print() -> differences_align_cols
 plot(gridExtra::arrangeGrob(grobs = list(
-  ggbiplot(differences_cmds) + geom_v_vector(),
-  ggbiplot(differences_pca) + geom_v_vector(),
-  ggbiplot(differences_align_v) + geom_v_vector()
+  ggbiplot(differences_cmds) + geom_cols_vector(),
+  ggbiplot(differences_pca) + geom_cols_vector(),
+  ggbiplot(differences_align_cols) + geom_cols_vector()
 ), ncol = 3))
 }
 \references{

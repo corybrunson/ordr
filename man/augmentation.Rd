@@ -2,20 +2,20 @@
 % Please edit documentation in R/ord-augmentation.r
 \name{augmentation}
 \alias{augmentation}
-\alias{augmentation_u}
-\alias{augmentation_v}
+\alias{augmentation_rows}
+\alias{augmentation_cols}
 \alias{augmentation_factor}
 \alias{augmentation.tbl_ord}
 \alias{augmentation_coord}
 \alias{augment.tbl_ord}
-\alias{augment_u}
-\alias{augment_v}
+\alias{augment_rows}
+\alias{augment_cols}
 \alias{tidy.tbl_ord}
 \title{Augment metadata on the factors and coordinates of tbl_ords}
 \usage{
-augmentation_u(x)
+augmentation_rows(x)
 
-augmentation_v(x)
+augmentation_cols(x)
 
 augmentation_factor(x, .matrix)
 
@@ -23,11 +23,11 @@ augmentation.tbl_ord(x, .matrix)
 
 augmentation_coord(x)
 
-\method{augment}{tbl_ord}(x, data, .matrix = "uv", ...)
+\method{augment}{tbl_ord}(x, data, .matrix = "dims", ...)
 
-augment_u(x)
+augment_rows(x)
 
-augment_v(x)
+augment_cols(x)
 
 \method{tidy}{tbl_ord}(x, ...)
 }
@@ -36,7 +36,7 @@ augment_v(x)
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
+standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 
 \item{data}{Passed to \code{\link[generics:augment]{generics::augment()}}; currently ignored.}
 
@@ -92,9 +92,9 @@ bioenv_lm \%>\%
   theme_bw() +
   scale_color_distiller(type = "div", palette = 1) +
   scale_alpha_continuous(range = c(1/3, 1)) +
-  geom_u_point() +
-  geom_v_vector() +
-  geom_v_isolines(aes(intercept = `(Intercept)`), axes = 1, by = 5) +
+  geom_rows_point() +
+  geom_cols_vector() +
+  geom_cols_isolines(aes(intercept = `(Intercept)`), axes = 1, by = 5) +
   labs(x = "Standardized Depth", y = "Standardized Pollution") +
   ggtitle(
     "Gradient vector and contour lines for species 'd'",
@@ -111,24 +111,24 @@ benthos_ca \%>\%
   confer_inertia("colprincipal") \%>\%
   ggbiplot(aes(label = .name)) +
   theme_bw() +
-  geom_u_point(color = "brown", size = 1) +
-  geom_v_text(color = "darkgreen")
+  geom_rows_point(color = "brown", size = 1) +
+  geom_cols_text(color = "darkgreen")
 # Reproduce Exhibit 8.4
 benthos_ca \%>\%
-  augment(.matrix = "u") \%>\%
-  transmute_u(mass = .mass, sqrt_mass = sqrt(.mass)) \%>\%
+  augment(.matrix = "rows") \%>\%
+  transmute_rows(mass = .mass, sqrt_mass = sqrt(.mass)) \%>\%
   confer_inertia("colprincipal") \%>\%
-  ggbiplot(aes(label = .name), scale_u = "sqrt_mass") +
+  ggbiplot(aes(label = .name), scale_rows = "sqrt_mass") +
   theme_bw() +
-  geom_u_vector(color = "brown", arrow = NULL) +
-  geom_u_point(aes(size = mass), color = "brown", shape = 17) +
+  geom_rows_vector(color = "brown", arrow = NULL) +
+  geom_rows_point(aes(size = mass), color = "brown", shape = 17) +
   scale_size_continuous(range = c(1, 4), guide = "none") +
-  geom_u_text(
+  geom_rows_text(
     stat = "chull",
     color = "brown", hjust = "outward", vjust = "outward"
   ) +
-  geom_v_point(color = "darkgreen") +
-  geom_v_text_repel(color = "darkgreen", min.segment.length = 2)
+  geom_cols_point(color = "darkgreen") +
+  geom_cols_text_repel(color = "darkgreen", min.segment.length = 2)
 # Interpreting (k-means) clusters as ordinations on the Motor Trends data
 mtcars \%>\%
   scale() \%>\%
@@ -143,10 +143,10 @@ mtcars_kmeans \%>\%
 # discriminate between clusters 1 and 2
 mtcars_kmeans \%>\%
   ggbiplot(color = factor(.cluster)) +
-  geom_jitter(stat = "u", aes(shape = .cluster), width = .2, height = .2) +
-  geom_v_vector(aes(color = `3`)) +
+  geom_jitter(stat = "rows", aes(shape = .cluster), width = .2, height = .2) +
+  geom_cols_vector(aes(color = `3`)) +
   scale_color_distiller(type = "div", limits = c(-1, 1)) +
-  geom_v_text_radiate(aes(label = .name)) +
+  geom_cols_text_radiate(aes(label = .name)) +
   ggtitle(
     "Performance and design variable loadings onto clusters 1 and 2",
     "Color indicates loadings onto cluster 3"

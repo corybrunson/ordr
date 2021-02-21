@@ -67,24 +67,24 @@ stat_center <- function(
 #' @rdname stat-biplot-center
 #' @usage NULL
 #' @export
-StatUCenter <- ggproto(
-  "StatUCenter", StatCenter,
+StatRowsCenter <- ggproto(
+  "StatRowsCenter", StatCenter,
   
-  setup_data = setup_u_data
+  setup_data = setup_rows_data
 )
 
 #' @rdname stat-biplot-center
 #' @usage NULL
 #' @export
-StatVCenter <- ggproto(
-  "StatVCenter", StatCenter,
+StatColsCenter <- ggproto(
+  "StatColsCenter", StatCenter,
   
-  setup_data = setup_v_data
+  setup_data = setup_cols_data
 )
 
 #' @rdname stat-biplot-center
 #' @export
-stat_u_center <- function(
+stat_rows_center <- function(
   mapping = NULL, data = NULL, geom = "point", position = "identity",
   show.legend = NA,
   inherit.aes = TRUE,
@@ -98,7 +98,7 @@ stat_u_center <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = StatUCenter,
+    stat = StatRowsCenter,
     geom = geom,
     position = position,
     show.legend = show.legend,
@@ -117,7 +117,7 @@ stat_u_center <- function(
 
 #' @rdname stat-biplot-center
 #' @export
-stat_v_center <- function(
+stat_cols_center <- function(
   mapping = NULL, data = NULL, geom = "point", position = "identity",
   show.legend = NA,
   inherit.aes = TRUE,
@@ -131,7 +131,7 @@ stat_v_center <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = StatVCenter,
+    stat = StatColsCenter,
     geom = geom,
     position = position,
     show.legend = show.legend,
@@ -202,24 +202,24 @@ stat_star <- function(
 #' @rdname stat-biplot-center
 #' @usage NULL
 #' @export
-StatUStar <- ggproto(
-  "StatUStar", StatStar,
+StatRowsStar <- ggproto(
+  "StatRowsStar", StatStar,
   
-  setup_data = setup_u_data
+  setup_data = setup_rows_data
 )
 
 #' @rdname stat-biplot-center
 #' @usage NULL
 #' @export
-StatVStar <- ggproto(
-  "StatVStar", StatStar,
+StatColsStar <- ggproto(
+  "StatColsStar", StatStar,
   
-  setup_data = setup_v_data
+  setup_data = setup_cols_data
 )
 
 #' @rdname stat-biplot-center
 #' @export
-stat_u_star <- function(
+stat_rows_star <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
   show.legend = NA,
   inherit.aes = TRUE,
@@ -231,7 +231,7 @@ stat_u_star <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = StatUStar,
+    stat = StatRowsStar,
     geom = geom,
     position = position,
     show.legend = show.legend,
@@ -248,7 +248,7 @@ stat_u_star <- function(
 
 #' @rdname stat-biplot-center
 #' @export
-stat_v_star <- function(
+stat_cols_star <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
   show.legend = NA,
   inherit.aes = TRUE,
@@ -260,7 +260,7 @@ stat_v_star <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = StatVStar,
+    stat = StatColsStar,
     geom = geom,
     position = position,
     show.legend = show.legend,

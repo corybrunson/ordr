@@ -3,21 +3,21 @@
 \name{methods-svd}
 \alias{methods-svd}
 \alias{as_tbl_ord.svd_ord}
-\alias{recover_u.svd_ord}
-\alias{recover_v.svd_ord}
+\alias{recover_rows.svd_ord}
+\alias{recover_cols.svd_ord}
 \alias{recover_inertia.svd_ord}
 \alias{recover_coord.svd_ord}
 \alias{recover_conference.svd_ord}
-\alias{augmentation_u.svd_ord}
-\alias{augmentation_v.svd_ord}
+\alias{augmentation_rows.svd_ord}
+\alias{augmentation_cols.svd_ord}
 \alias{augmentation_coord.svd_ord}
 \title{Functionality for singular value decompositions}
 \usage{
 \method{as_tbl_ord}{svd_ord}(x)
 
-\method{recover_u}{svd_ord}(x)
+\method{recover_rows}{svd_ord}(x)
 
-\method{recover_v}{svd_ord}(x)
+\method{recover_cols}{svd_ord}(x)
 
 \method{recover_inertia}{svd_ord}(x)
 
@@ -25,9 +25,9 @@
 
 \method{recover_conference}{svd_ord}(x)
 
-\method{augmentation_u}{svd_ord}(x)
+\method{augmentation_rows}{svd_ord}(x)
 
-\method{augmentation_v}{svd_ord}(x)
+\method{augmentation_cols}{svd_ord}(x)
 
 \method{augmentation_coord}{svd_ord}(x)
 }

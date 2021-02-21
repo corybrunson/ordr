@@ -3,21 +3,21 @@
 \name{methods-prcomp}
 \alias{methods-prcomp}
 \alias{as_tbl_ord.prcomp}
-\alias{recover_u.prcomp}
-\alias{recover_v.prcomp}
+\alias{recover_rows.prcomp}
+\alias{recover_cols.prcomp}
 \alias{recover_inertia.prcomp}
 \alias{recover_coord.prcomp}
 \alias{recover_conference.prcomp}
-\alias{augmentation_u.prcomp}
-\alias{augmentation_v.prcomp}
+\alias{augmentation_rows.prcomp}
+\alias{augmentation_cols.prcomp}
 \alias{augmentation_coord.prcomp}
 \title{Functionality for principal components analysis ('prcomp') objects}
 \usage{
 \method{as_tbl_ord}{prcomp}(x)
 
-\method{recover_u}{prcomp}(x)
+\method{recover_rows}{prcomp}(x)
 
-\method{recover_v}{prcomp}(x)
+\method{recover_cols}{prcomp}(x)
 
 \method{recover_inertia}{prcomp}(x)
 
@@ -25,9 +25,9 @@
 
 \method{recover_conference}{prcomp}(x)
 
-\method{augmentation_u}{prcomp}(x)
+\method{augmentation_rows}{prcomp}(x)
 
-\method{augmentation_v}{prcomp}(x)
+\method{augmentation_cols}{prcomp}(x)
 
 \method{augmentation_coord}{prcomp}(x)
 }
@@ -49,12 +49,12 @@ country_attributes \%>\%
 attributes_pca \%>\%
   ggbiplot(
     aes(label = .name),
-    sec.axes = "v", scale.factor = dim_v(attributes_pca)
+    sec.axes = "cols", scale.factor = dim_cols(attributes_pca)
   ) +
   theme_bw() + theme(panel.grid = element_blank()) +
-  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
-  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
-  geom_v_text(
+  geom_rows_text(aes(x = PC1, y = PC2), color = "seagreen") +
+  geom_cols_vector(aes(x = PC1, y = PC2), color = "darkred") +
+  geom_cols_text(
     aes(x = PC1, y = PC2),
     color = "darkred", hjust = "outward", vjust = "outward"
   )
@@ -63,27 +63,27 @@ attributes_pca \%>\%
   confer_inertia(0) \%>\%
   ggbiplot(
     aes(label = .name),
-    sec.axes = "u", scale.factor = dim_u(attributes_pca)
+    sec.axes = "rows", scale.factor = dim_rows(attributes_pca)
   ) +
   theme_bw() + theme(panel.grid = element_blank()) +
-  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
-  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
-  geom_v_text_repel(aes(x = PC1, y = PC2), color = "darkred")
+  geom_rows_text(aes(x = PC1, y = PC2), color = "seagreen") +
+  geom_cols_vector(aes(x = PC1, y = PC2), color = "darkred") +
+  geom_cols_text_repel(aes(x = PC1, y = PC2), color = "darkred")
 # Scaled PCA of Anderson iris data with annotated biplot
 iris[, -5] \%>\%
   prcomp(scale = TRUE) \%>\%
   as_tbl_ord() \%>\%
   confer_inertia(1) \%>\%
-  mutate_u(species = iris$Species) \%>\%
+  mutate_rows(species = iris$Species) \%>\%
   print() -> iris_pca
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_point(alpha = .5) +
-  stat_u_center(fun.center = "mean", size = 3, shape = "triangle") +
-  stat_u_ellipse(level = .99) +
-  geom_v_vector(color = "#444444") +
+  geom_rows_point(alpha = .5) +
+  stat_rows_center(fun.center = "mean", size = 3, shape = "triangle") +
+  stat_rows_ellipse(level = .99) +
+  geom_cols_vector(color = "#444444") +
   ggtitle(
     "Row-principal PCA biplot of Anderson iris data",
     "Overlaid with centroids and 99\% confidence ellipses"
@@ -91,13 +91,13 @@ iris_pca \%>\%
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
-  geom_u_point() +
-  stat_u_center(fun.center = "mean", size = 3, shape = 1) +
+  geom_rows_point() +
+  stat_rows_center(fun.center = "mean", size = 3, shape = 1) +
   geom_polygon(
     aes(fill = species),
-    color = NA, alpha = .25, stat = "u_ellipse"
+    color = NA, alpha = .25, stat = "rows_ellipse"
   ) +
-  geom_v_vector(color = "#444444") +
+  geom_cols_vector(color = "#444444") +
   scale_color_brewer(
     type = "qual", palette = 2,
     aesthetics = c("color", "fill")
@@ -111,15 +111,15 @@ iris[, -5] \%>\%
   prcomp(scale = TRUE) \%>\%
   as_tbl_ord() \%>\%
   confer_inertia(1) \%>\%
-  mutate_u(species = iris$Species) \%>\%
+  mutate_rows(species = iris$Species) \%>\%
   print() -> iris_pca
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_lineranges(fun.data = mean_sdl, size = .75) +
-  geom_u_point(alpha = .5) +
-  geom_v_vector(color = "#444444") +
+  geom_rows_lineranges(fun.data = mean_sdl, size = .75) +
+  geom_rows_point(alpha = .5) +
+  geom_cols_vector(color = "#444444") +
   ggtitle(
     "Row-principal PCA biplot of Anderson iris data",
     "Ranges 2 sample standard deviations from centroids"
@@ -128,12 +128,12 @@ iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_lineranges(
+  geom_rows_lineranges(
     fun.data = mean_cl_boot, fun.args = list(conf.int = .99),
     size = .75
   ) +
-  geom_u_point(alpha = .5) +
-  geom_v_vector(color = "#444444") +
+  geom_rows_point(alpha = .5) +
+  geom_cols_vector(color = "#444444") +
   ggtitle(
     "Row-principal PCA biplot of Anderson iris data",
     "99\% confidence intervals based on nonparametric bootstrap sampling"

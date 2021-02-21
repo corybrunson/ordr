@@ -32,14 +32,14 @@ sub_ratios \%>\%
   lra(compositional = TRUE) \%>\%
   as_tbl_ord() \%>\%
   augment() \%>\%
-  bind_cols_u(dplyr::select(sub_ratios, chapter, recipes)) \%>\%
+  bind_cols_rows(dplyr::select(sub_ratios, chapter, recipes)) \%>\%
   print() -> lra_ratios
 lra_ratios \%>\%
   confer_inertia("rows") \%>\%
   ggbiplot(sec.axes = "v", scale.factor = .05) +
-  geom_u_text(aes(label = recipes, color = chapter)) +
-  geom_v_vector() +
-  geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward") +
+  geom_rows_text(aes(label = recipes, color = chapter)) +
+  geom_cols_vector() +
+  geom_cols_text(aes(label = .name), hjust = "outward", vjust = "outward") +
   expand_limits(x = c(-.2, .2)) +
   ggtitle("Log-ratio biplot of flour-butter-egg ratios in baking recipes") +
   expand_limits(x = c(-.35, .35))
@@ -52,16 +52,16 @@ ratios \%>\%
   ca::ca() \%>\%
   as_tbl_ord() \%>\%
   augment() \%>\%
-  mutate_u(recipe = .name, chapter = ratios$chapter) \%>\%
-  mutate_v(ingredient = .name) \%>\%
+  mutate_rows(recipe = .name, chapter = ratios$chapter) \%>\%
+  mutate_cols(ingredient = .name) \%>\%
   print() -> ratios_ca
 ratios_ca \%>\%
   confer_inertia("rowprincipal") \%>\%
   ggbiplot() +
   theme_bw() +
-  geom_v_vector(alpha = .5) +
-  stat_v_chull(geom = "text_radiate", aes(label = ingredient), alpha = .5) +
-  geom_u_text(aes(label = recipe, color = chapter), size = 4) +
+  geom_cols_vector(alpha = .5) +
+  stat_cols_chull(geom = "text_radiate", aes(label = ingredient), alpha = .5) +
+  geom_rows_text(aes(label = recipe, color = chapter), size = 4) +
   ggtitle("Row-principal CA biplot of Ruhlman recipe ratios")
 }
 \references{

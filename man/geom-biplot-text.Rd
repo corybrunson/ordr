@@ -2,21 +2,21 @@
 % Please edit documentation in R/geom-text.r
 \name{geom-biplot-text}
 \alias{geom-biplot-text}
-\alias{geom_u_text}
-\alias{geom_v_text}
+\alias{geom_rows_text}
+\alias{geom_cols_text}
 \alias{geom_biplot_text}
-\alias{geom_u_label}
-\alias{geom_v_label}
+\alias{geom_rows_label}
+\alias{geom_cols_label}
 \alias{geom_biplot_label}
-\alias{geom_u_text_repel}
-\alias{geom_v_text_repel}
+\alias{geom_rows_text_repel}
+\alias{geom_cols_text_repel}
 \alias{geom_biplot_text_repel}
-\alias{geom_u_label_repel}
-\alias{geom_v_label_repel}
+\alias{geom_rows_label_repel}
+\alias{geom_cols_label_repel}
 \alias{geom_biplot_label_repel}
 \title{Render text and labels at ordinates}
 \usage{
-geom_u_text(
+geom_rows_text(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -31,7 +31,7 @@ geom_u_text(
   inherit.aes = TRUE
 )
 
-geom_v_text(
+geom_cols_text(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -51,7 +51,7 @@ geom_biplot_text(
   data = NULL,
   stat = "identity",
   position = "identity",
-  .matrix = "u",
+  .matrix = "rows",
   ...,
   parse = FALSE,
   nudge_x = 0,
@@ -62,7 +62,7 @@ geom_biplot_text(
   inherit.aes = TRUE
 )
 
-geom_u_label(
+geom_rows_label(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -74,7 +74,7 @@ geom_u_label(
   inherit.aes = TRUE
 )
 
-geom_v_label(
+geom_cols_label(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -91,7 +91,7 @@ geom_biplot_label(
   data = NULL,
   stat = "identity",
   position = "identity",
-  .matrix = "u",
+  .matrix = "rows",
   ...,
   parse = FALSE,
   na.rm = FALSE,
@@ -99,7 +99,7 @@ geom_biplot_label(
   inherit.aes = TRUE
 )
 
-geom_u_text_repel(
+geom_rows_text_repel(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -111,7 +111,7 @@ geom_u_text_repel(
   inherit.aes = TRUE
 )
 
-geom_v_text_repel(
+geom_cols_text_repel(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -128,7 +128,7 @@ geom_biplot_text_repel(
   data = NULL,
   stat = "identity",
   position = "identity",
-  .matrix = "u",
+  .matrix = "rows",
   ...,
   parse = FALSE,
   na.rm = FALSE,
@@ -136,7 +136,7 @@ geom_biplot_text_repel(
   inherit.aes = TRUE
 )
 
-geom_u_label_repel(
+geom_rows_label_repel(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -148,7 +148,7 @@ geom_u_label_repel(
   inherit.aes = TRUE
 )
 
-geom_v_label_repel(
+geom_cols_label_repel(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -165,7 +165,7 @@ geom_biplot_label_repel(
   data = NULL,
   stat = "identity",
   position = "identity",
-  .matrix = "u",
+  .matrix = "rows",
   ...,
   parse = FALSE,
   na.rm = FALSE,
@@ -219,7 +219,7 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
+standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 }
 \description{
 \verb{geom_*_text()} renders text, and \verb{geom_*_label()} labels, at
@@ -230,14 +230,14 @@ the positions of the subjects or vectors. \verb{geom_*_text_repel()} and
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
-frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
-variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
-the data frame to one of these two.
+frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
+variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
+filter the data frame to one of these two.
 
-The geom layers \verb{geom_u_*()} and \verb{geom_v_*()} call the corresponding stat in
-order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \verb{geom_biplot_*()} selects a default matrix based on common practice,
-e.g. \eqn{U} for points and \eqn{V} for arrows.
+The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.
 }
 
 \section{Aesthetics}{
@@ -273,8 +273,8 @@ finches \%>\%
   print() -> finches_ca
 finches_ca \%>\%
   ggbiplot(aes(label = .name)) +
-  geom_u_text(aes(alpha = .inertia), color = "royalblue3") +
-  geom_v_text(aes(alpha = .inertia), color = "darkred") +
+  geom_rows_text(aes(alpha = .inertia), color = "royalblue3") +
+  geom_cols_text(aes(alpha = .inertia), color = "darkred") +
   scale_alpha_continuous(range = c(.3, 1), guide = "none") +
   ggtitle(
     "Symmetric CA biplot of the Galapagos island finches",
@@ -291,12 +291,12 @@ country_attributes \%>\%
 attributes_pca \%>\%
   ggbiplot(
     aes(label = .name),
-    sec.axes = "v", scale.factor = dim_v(attributes_pca)
+    sec.axes = "cols", scale.factor = dim_cols(attributes_pca)
   ) +
   theme_bw() + theme(panel.grid = element_blank()) +
-  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
-  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
-  geom_v_text(
+  geom_rows_text(aes(x = PC1, y = PC2), color = "seagreen") +
+  geom_cols_vector(aes(x = PC1, y = PC2), color = "darkred") +
+  geom_cols_text(
     aes(x = PC1, y = PC2),
     color = "darkred", hjust = "outward", vjust = "outward"
   )
@@ -305,12 +305,12 @@ attributes_pca \%>\%
   confer_inertia(0) \%>\%
   ggbiplot(
     aes(label = .name),
-    sec.axes = "u", scale.factor = dim_u(attributes_pca)
+    sec.axes = "rows", scale.factor = dim_rows(attributes_pca)
   ) +
   theme_bw() + theme(panel.grid = element_blank()) +
-  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
-  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
-  geom_v_text_repel(aes(x = PC1, y = PC2), color = "darkred")
+  geom_rows_text(aes(x = PC1, y = PC2), color = "seagreen") +
+  geom_cols_vector(aes(x = PC1, y = PC2), color = "darkred") +
+  geom_cols_text_repel(aes(x = PC1, y = PC2), color = "darkred")
 # Confer inertia in CA between rows and columns of benthic sample data
 data(benthos)
 benthos \%>\%
@@ -322,22 +322,22 @@ benthos_ca \%>\%
   confer_inertia("colprincipal") \%>\%
   ggbiplot(aes(label = .name)) +
   theme_bw() +
-  geom_u_point(color = "brown", size = 1) +
-  geom_v_text(color = "darkgreen")
+  geom_rows_point(color = "brown", size = 1) +
+  geom_cols_text(color = "darkgreen")
 # Reproduce Exhibit 8.4
 benthos_ca \%>\%
-  augment(.matrix = "u") \%>\%
-  transmute_u(mass = .mass, sqrt_mass = sqrt(.mass)) \%>\%
+  augment(.matrix = "rows") \%>\%
+  transmute_rows(mass = .mass, sqrt_mass = sqrt(.mass)) \%>\%
   confer_inertia("colprincipal") \%>\%
-  ggbiplot(aes(label = .name), scale_u = "sqrt_mass") +
+  ggbiplot(aes(label = .name), scale_rows = "sqrt_mass") +
   theme_bw() +
-  geom_u_vector(color = "brown", arrow = NULL) +
-  geom_u_point(aes(size = mass), color = "brown", shape = 17) +
+  geom_rows_vector(color = "brown", arrow = NULL) +
+  geom_rows_point(aes(size = mass), color = "brown", shape = 17) +
   scale_size_continuous(range = c(1, 4), guide = "none") +
-  geom_u_text(
+  geom_rows_text(
     stat = "chull",
     color = "brown", hjust = "outward", vjust = "outward"
   ) +
-  geom_v_point(color = "darkgreen") +
-  geom_v_text_repel(color = "darkgreen", min.segment.length = 2)
+  geom_cols_point(color = "darkgreen") +
+  geom_cols_text_repel(color = "darkgreen", min.segment.length = 2)
 }

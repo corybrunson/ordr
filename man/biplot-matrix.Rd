@@ -3,18 +3,18 @@
 \docType{data}
 \name{biplot-matrix}
 \alias{biplot-matrix}
-\alias{StatU}
-\alias{StatV}
-\alias{stat_u}
-\alias{stat_v}
+\alias{StatRows}
+\alias{StatCols}
+\alias{stat_rows}
+\alias{stat_cols}
 \title{Render plot elements for one matrix of an ordination}
 \format{
-An object of class \code{StatU} (inherits from \code{StatIdentity}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+An object of class \code{StatRows} (inherits from \code{StatIdentity}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
 
-An object of class \code{StatV} (inherits from \code{StatIdentity}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+An object of class \code{StatCols} (inherits from \code{StatIdentity}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
 }
 \usage{
-stat_u(
+stat_rows(
   mapping = NULL,
   data = data,
   geom = "point",
@@ -24,7 +24,7 @@ stat_u(
   inherit.aes = TRUE
 )
 
-stat_v(
+stat_cols(
   mapping = NULL,
   data = data,
   geom = "axis",
@@ -81,14 +81,14 @@ by the various \verb{geom_*_*()} layers.
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
-frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
-variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
-the data frame to one of these two.
+frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
+variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
+filter the data frame to one of these two.
 
-The geom layers \verb{geom_u_*()} and \verb{geom_v_*()} call the corresponding stat in
-order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \verb{geom_biplot_*()} selects a default matrix based on common practice,
-e.g. \eqn{U} for points and \eqn{V} for arrows.
+The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.
 }
 
 \keyword{datasets}

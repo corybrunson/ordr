@@ -7,14 +7,14 @@ ratios %>%
   ca::ca() %>%
   as_tbl_ord() %>%
   augment() %>%
-  mutate_u(recipe = .name, chapter = ratios$chapter) %>%
-  mutate_v(ingredient = .name) %>%
+  mutate_rows(recipe = .name, chapter = ratios$chapter) %>%
+  mutate_cols(ingredient = .name) %>%
   print() -> ratios_ca
 ratios_ca %>%
   confer_inertia("rowprincipal") %>%
   ggbiplot() +
   theme_bw() +
-  geom_v_vector(alpha = .5) +
-  stat_v_chull(geom = "text_radiate", aes(label = ingredient), alpha = .5) +
-  geom_u_text(aes(label = recipe, color = chapter), size = 4) +
+  geom_cols_vector(alpha = .5) +
+  stat_cols_chull(geom = "text_radiate", aes(label = ingredient), alpha = .5) +
+  geom_rows_text(aes(label = recipe, color = chapter), size = 4) +
   ggtitle("Row-principal CA biplot of Ruhlman recipe ratios")

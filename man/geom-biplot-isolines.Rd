@@ -5,8 +5,8 @@
 \alias{geom-biplot-isolines}
 \alias{GeomIsolines}
 \alias{geom_isolines}
-\alias{geom_u_isolines}
-\alias{geom_v_isolines}
+\alias{geom_rows_isolines}
+\alias{geom_cols_isolines}
 \alias{geom_biplot_isolines}
 \title{Render isolines for a subject or variable}
 \format{
@@ -28,7 +28,7 @@ geom_isolines(
   inherit.aes = TRUE
 )
 
-geom_u_isolines(
+geom_rows_isolines(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -43,7 +43,7 @@ geom_u_isolines(
   inherit.aes = TRUE
 )
 
-geom_v_isolines(
+geom_cols_isolines(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -128,7 +128,7 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
+standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 }
 \description{
 \verb{geom_*_isolines()} renders isolines for a specified subject or
@@ -137,14 +137,14 @@ variable.
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
-frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
-variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
-the data frame to one of these two.
+frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
+variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
+filter the data frame to one of these two.
 
-The geom layers \verb{geom_u_*()} and \verb{geom_v_*()} call the corresponding stat in
-order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \verb{geom_biplot_*()} selects a default matrix based on common practice,
-e.g. \eqn{U} for points and \eqn{V} for arrows.
+The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.
 }
 
 \section{Aesthetics}{
@@ -170,13 +170,13 @@ mtcars \%>\%
   lm(formula = mpg ~ wt + cyl) \%>\%
   as_tbl_ord() \%>\%
   augment() \%>\%
-  mutate_u(influence = .wt.res^2) \%>\%
+  mutate_rows(influence = .wt.res^2) \%>\%
   print() -> mtcars_lm
 mtcars_lm \%>\%
   ggbiplot(aes(x = wt, y = cyl, intercept = `(Intercept)`)) +
-  geom_u_point(aes(color = influence)) +
-  geom_v_vector() +
-  geom_v_isolines(axes = 1, by = 5) +
+  geom_rows_point(aes(color = influence)) +
+  geom_cols_vector() +
+  geom_cols_isolines(axes = 1, by = 5) +
   ggtitle(
     "Weight isolines with data colored by importance",
     "Regressing mpg onto weight and number of cylinders"
@@ -198,9 +198,9 @@ bioenv_lm \%>\%
   theme_bw() +
   scale_color_distiller(type = "div", palette = 1) +
   scale_alpha_continuous(range = c(1/3, 1)) +
-  geom_u_point() +
-  geom_v_vector() +
-  geom_v_isolines(aes(intercept = `(Intercept)`), axes = 1, by = 5) +
+  geom_rows_point() +
+  geom_cols_vector() +
+  geom_cols_isolines(aes(intercept = `(Intercept)`), axes = 1, by = 5) +
   labs(x = "Standardized Depth", y = "Standardized Pollution") +
   ggtitle(
     "Gradient vector and contour lines for species 'd'",
@@ -219,10 +219,10 @@ bioenv \%>\%
 bioenv_pois \%>\%
   ggbiplot(aes(x = x, y = y, intercept = `(Intercept)`, label = .name)) +
   theme_bw() +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_radiate(color = "brown4") +
-  geom_v_isolines(family = poisson(), by = 2)
+  geom_rows_text(color = "darkgreen") +
+  geom_cols_vector(color = "brown4") +
+  geom_cols_text_radiate(color = "brown4") +
+  geom_cols_isolines(family = poisson(), by = 2)
 # Adapt (3.4) and Exhibit 3.6 in Greenacre (2010)
 bioenv \%>\%
   dplyr::mutate_at(dplyr::vars(a:e), as.logical) \%>\%
@@ -236,9 +236,9 @@ bioenv \%>\%
 bioenv_bin \%>\%
   ggbiplot(aes(x = x, y = y, intercept = `(Intercept)`, label = .name)) +
   theme_bw() +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_radiate(color = "brown4") +
-  geom_v_isolines(family = binomial(), by = .05)
+  geom_rows_text(color = "darkgreen") +
+  geom_cols_vector(color = "brown4") +
+  geom_cols_text_radiate(color = "brown4") +
+  geom_cols_isolines(family = binomial(), by = .05)
 }
 \keyword{datasets}

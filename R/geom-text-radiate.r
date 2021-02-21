@@ -110,7 +110,7 @@ geom_text_radiate <- function(
 
 #' @rdname geom-biplot-text-radiate
 #' @export
-geom_u_text_radiate <- function(
+geom_rows_text_radiate <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   parse = FALSE,
@@ -121,7 +121,7 @@ geom_u_text_radiate <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = u_stat(stat),
+    stat = rows_stat(stat),
     geom = GeomTextRadiate,
     position = position,
     show.legend = show.legend,
@@ -137,7 +137,7 @@ geom_u_text_radiate <- function(
 
 #' @rdname geom-biplot-text-radiate
 #' @export
-geom_v_text_radiate <- function(
+geom_cols_text_radiate <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   parse = FALSE,
@@ -148,7 +148,7 @@ geom_v_text_radiate <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = v_stat(stat),
+    stat = cols_stat(stat),
     geom = GeomTextRadiate,
     position = position,
     show.legend = show.legend,
@@ -166,7 +166,7 @@ geom_v_text_radiate <- function(
 #' @export
 geom_biplot_text_radiate <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "v",
+  .matrix = "cols",
   ...,
   parse = FALSE,
   check_overlap = FALSE,

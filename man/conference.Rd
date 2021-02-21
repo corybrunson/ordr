@@ -53,12 +53,12 @@ country_attributes \%>\%
 attributes_pca \%>\%
   ggbiplot(
     aes(label = .name),
-    sec.axes = "v", scale.factor = dim_v(attributes_pca)
+    sec.axes = "cols", scale.factor = dim_cols(attributes_pca)
   ) +
   theme_bw() + theme(panel.grid = element_blank()) +
-  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
-  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
-  geom_v_text(
+  geom_rows_text(aes(x = PC1, y = PC2), color = "seagreen") +
+  geom_cols_vector(aes(x = PC1, y = PC2), color = "darkred") +
+  geom_cols_text(
     aes(x = PC1, y = PC2),
     color = "darkred", hjust = "outward", vjust = "outward"
   )
@@ -67,12 +67,12 @@ attributes_pca \%>\%
   confer_inertia(0) \%>\%
   ggbiplot(
     aes(label = .name),
-    sec.axes = "u", scale.factor = dim_u(attributes_pca)
+    sec.axes = "rows", scale.factor = dim_rows(attributes_pca)
   ) +
   theme_bw() + theme(panel.grid = element_blank()) +
-  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
-  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
-  geom_v_text_repel(aes(x = PC1, y = PC2), color = "darkred")
+  geom_rows_text(aes(x = PC1, y = PC2), color = "seagreen") +
+  geom_cols_vector(aes(x = PC1, y = PC2), color = "darkred") +
+  geom_cols_text_repel(aes(x = PC1, y = PC2), color = "darkred")
 # Confer inertia between rows and columns of CA on Spanish ISSP sample
 data(issp_women)
 issp_women \%>\%
@@ -85,18 +85,18 @@ issp_ca \%>\%
   confer_inertia(c(1, 1)) \%>\%
   ggbiplot(aes(label = .name)) +
   theme_bw() +
-  geom_u_point(color = "darkgreen") +
-  geom_u_text_repel(color = "darkgreen") +
-  geom_v_point(color = "brown", shape = 17) +
-  geom_v_text_repel(color = "brown")
+  geom_rows_point(color = "darkgreen") +
+  geom_rows_text_repel(color = "darkgreen") +
+  geom_cols_point(color = "brown", shape = 17) +
+  geom_cols_text_repel(color = "brown")
 # Reproduce Exhibit 9.3 in Greenacre (2010)...
 issp_ca \%>\%
   confer_inertia("rowprincipal") \%>\%
   ggbiplot(aes(label = .name)) +
   theme_bw() +
-  geom_u_point(color = "darkgreen") +
-  geom_v_point(color = "brown", shape = 17) +
-  geom_v_text_repel(color = "brown")
+  geom_rows_point(color = "darkgreen") +
+  geom_cols_point(color = "brown", shape = 17) +
+  geom_cols_text_repel(color = "brown")
 # Reproduce Exhibits 9.4 and 9.6 in Greenacre (2010)...
 # Confer inertia in CA between rows and columns of benthic sample data
 data(benthos)
@@ -109,22 +109,22 @@ benthos_ca \%>\%
   confer_inertia("colprincipal") \%>\%
   ggbiplot(aes(label = .name)) +
   theme_bw() +
-  geom_u_point(color = "brown", size = 1) +
-  geom_v_text(color = "darkgreen")
+  geom_rows_point(color = "brown", size = 1) +
+  geom_cols_text(color = "darkgreen")
 # Reproduce Exhibit 8.4
 benthos_ca \%>\%
-  augment(.matrix = "u") \%>\%
-  transmute_u(mass = .mass, sqrt_mass = sqrt(.mass)) \%>\%
+  augment(.matrix = "rows") \%>\%
+  transmute_rows(mass = .mass, sqrt_mass = sqrt(.mass)) \%>\%
   confer_inertia("colprincipal") \%>\%
-  ggbiplot(aes(label = .name), scale_u = "sqrt_mass") +
+  ggbiplot(aes(label = .name), scale_rows = "sqrt_mass") +
   theme_bw() +
-  geom_u_vector(color = "brown", arrow = NULL) +
-  geom_u_point(aes(size = mass), color = "brown", shape = 17) +
+  geom_rows_vector(color = "brown", arrow = NULL) +
+  geom_rows_point(aes(size = mass), color = "brown", shape = 17) +
   scale_size_continuous(range = c(1, 4), guide = "none") +
-  geom_u_text(
+  geom_rows_text(
     stat = "chull",
     color = "brown", hjust = "outward", vjust = "outward"
   ) +
-  geom_v_point(color = "darkgreen") +
-  geom_v_text_repel(color = "darkgreen", min.segment.length = 2)
+  geom_cols_point(color = "darkgreen") +
+  geom_cols_text_repel(color = "darkgreen", min.segment.length = 2)
 }

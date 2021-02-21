@@ -2,12 +2,12 @@
 % Please edit documentation in R/geom-point.r
 \name{geom-biplot-point}
 \alias{geom-biplot-point}
-\alias{geom_u_point}
-\alias{geom_v_point}
+\alias{geom_rows_point}
+\alias{geom_cols_point}
 \alias{geom_biplot_point}
 \title{Render points at ordinates}
 \usage{
-geom_u_point(
+geom_rows_point(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -18,7 +18,7 @@ geom_u_point(
   inherit.aes = TRUE
 )
 
-geom_v_point(
+geom_cols_point(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -34,7 +34,7 @@ geom_biplot_point(
   data = NULL,
   stat = "identity",
   position = "identity",
-  .matrix = "u",
+  .matrix = "rows",
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -85,7 +85,7 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
+standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 }
 \description{
 \verb{geom_*_point()} renders symbols at the positions of the
@@ -94,14 +94,14 @@ subjects or vectors.
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
-frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
-variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
-the data frame to one of these two.
+frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
+variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
+filter the data frame to one of these two.
 
-The geom layers \verb{geom_u_*()} and \verb{geom_v_*()} call the corresponding stat in
-order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \verb{geom_biplot_*()} selects a default matrix based on common practice,
-e.g. \eqn{U} for points and \eqn{V} for arrows.
+The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.
 }
 
 \section{Aesthetics}{
@@ -140,9 +140,9 @@ bioenv_lm \%>\%
   theme_bw() +
   scale_color_distiller(type = "div", palette = 1) +
   scale_alpha_continuous(range = c(1/3, 1)) +
-  geom_u_point() +
-  geom_v_vector() +
-  geom_v_isolines(aes(intercept = `(Intercept)`), axes = 1, by = 5) +
+  geom_rows_point() +
+  geom_cols_vector() +
+  geom_cols_isolines(aes(intercept = `(Intercept)`), axes = 1, by = 5) +
   labs(x = "Standardized Depth", y = "Standardized Pollution") +
   ggtitle(
     "Gradient vector and contour lines for species 'd'",
@@ -160,21 +160,21 @@ country_differences \%>\%
   print() -> differences_pca
 # negate PCA cases to MDS coordinates
 differences_cmds \%>\%
-  negate_to(differences_pca, "u") \%>\%
-  print() -> differences_align_u
+  negate_to(differences_pca, "rows") \%>\%
+  print() -> differences_align_rows
 plot(gridExtra::arrangeGrob(grobs = list(
-  ggbiplot(differences_cmds) + geom_u_point(),
-  ggbiplot(differences_pca) + geom_u_point(),
-  ggbiplot(differences_align_u) + geom_u_point()
+  ggbiplot(differences_cmds) + geom_rows_point(),
+  ggbiplot(differences_pca) + geom_rows_point(),
+  ggbiplot(differences_align_rows) + geom_rows_point()
 ), ncol = 3))
 # negate PCA variables to MDS coordinates
 differences_cmds \%>\%
-  negate_to(differences_pca, "v") \%>\%
-  print() -> differences_align_v
+  negate_to(differences_pca, "cols") \%>\%
+  print() -> differences_align_cols
 plot(gridExtra::arrangeGrob(grobs = list(
-  ggbiplot(differences_cmds) + geom_v_vector(),
-  ggbiplot(differences_pca) + geom_v_vector(),
-  ggbiplot(differences_align_v) + geom_v_vector()
+  ggbiplot(differences_cmds) + geom_cols_vector(),
+  ggbiplot(differences_pca) + geom_cols_vector(),
+  ggbiplot(differences_align_cols) + geom_cols_vector()
 ), ncol = 3))
 # Confer inertia between rows and columns of CA on Spanish ISSP sample
 data(issp_women)
@@ -188,17 +188,17 @@ issp_ca \%>\%
   confer_inertia(c(1, 1)) \%>\%
   ggbiplot(aes(label = .name)) +
   theme_bw() +
-  geom_u_point(color = "darkgreen") +
-  geom_u_text_repel(color = "darkgreen") +
-  geom_v_point(color = "brown", shape = 17) +
-  geom_v_text_repel(color = "brown")
+  geom_rows_point(color = "darkgreen") +
+  geom_rows_text_repel(color = "darkgreen") +
+  geom_cols_point(color = "brown", shape = 17) +
+  geom_cols_text_repel(color = "brown")
 # Reproduce Exhibit 9.3 in Greenacre (2010)...
 issp_ca \%>\%
   confer_inertia("rowprincipal") \%>\%
   ggbiplot(aes(label = .name)) +
   theme_bw() +
-  geom_u_point(color = "darkgreen") +
-  geom_v_point(color = "brown", shape = 17) +
-  geom_v_text_repel(color = "brown")
+  geom_rows_point(color = "darkgreen") +
+  geom_cols_point(color = "brown", shape = 17) +
+  geom_cols_text_repel(color = "brown")
 # Reproduce Exhibits 9.4 and 9.6 in Greenacre (2010)...
 }

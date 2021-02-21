@@ -55,7 +55,7 @@ GeomLineranges <- ggproto(
 
 #' @rdname geom-biplot-intervals
 #' @export
-geom_u_lineranges <- function(
+geom_rows_lineranges <- function(
   mapping = NULL, data = NULL, stat = "center", position = "identity",
   ...,
   na.rm = FALSE,
@@ -64,7 +64,7 @@ geom_u_lineranges <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = u_stat(stat),
+    stat = rows_stat(stat),
     geom = GeomLineranges,
     position = position,
     show.legend = show.legend,
@@ -78,7 +78,7 @@ geom_u_lineranges <- function(
 
 #' @rdname geom-biplot-intervals
 #' @export
-geom_v_lineranges <- function(
+geom_cols_lineranges <- function(
   mapping = NULL, data = NULL, stat = "center", position = "identity",
   ...,
   na.rm = FALSE,
@@ -87,7 +87,7 @@ geom_v_lineranges <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = v_stat(stat),
+    stat = cols_stat(stat),
     geom = GeomLineranges,
     position = position,
     show.legend = show.legend,
@@ -103,7 +103,7 @@ geom_v_lineranges <- function(
 #' @export
 geom_biplot_lineranges <- function(
   mapping = NULL, data = NULL, stat = "center", position = "identity",
-  .matrix = "u",
+  .matrix = "rows",
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -148,7 +148,7 @@ GeomPointranges <- ggproto(
 
 #' @rdname geom-biplot-intervals
 #' @export
-geom_u_pointranges <- function(
+geom_rows_pointranges <- function(
   mapping = NULL, data = NULL, stat = "center", position = "identity",
   ...,
   na.rm = FALSE,
@@ -157,7 +157,7 @@ geom_u_pointranges <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = u_stat(stat),
+    stat = rows_stat(stat),
     geom = GeomPointranges,
     position = position,
     show.legend = show.legend,
@@ -171,7 +171,7 @@ geom_u_pointranges <- function(
 
 #' @rdname geom-biplot-intervals
 #' @export
-geom_v_pointranges <- function(
+geom_cols_pointranges <- function(
   mapping = NULL, data = NULL, stat = "center", position = "identity",
   ...,
   na.rm = FALSE,
@@ -180,7 +180,7 @@ geom_v_pointranges <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = v_stat(stat),
+    stat = cols_stat(stat),
     geom = GeomPointranges,
     position = position,
     show.legend = show.legend,
@@ -196,7 +196,7 @@ geom_v_pointranges <- function(
 #' @export
 geom_biplot_pointranges <- function(
   mapping = NULL, data = NULL, stat = "center", position = "identity",
-  .matrix = "u",
+  .matrix = "rows",
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE

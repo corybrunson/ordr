@@ -34,7 +34,7 @@ NULL
 
 #' @rdname geom-biplot-point
 #' @export
-geom_u_point <- function(
+geom_rows_point <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   na.rm = FALSE,
@@ -43,7 +43,7 @@ geom_u_point <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = u_stat(stat),
+    stat = rows_stat(stat),
     geom = GeomPoint,
     position = position,
     show.legend = show.legend,
@@ -57,7 +57,7 @@ geom_u_point <- function(
 
 #' @rdname geom-biplot-point
 #' @export
-geom_v_point <- function(
+geom_cols_point <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   na.rm = FALSE,
@@ -66,7 +66,7 @@ geom_v_point <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = v_stat(stat),
+    stat = cols_stat(stat),
     geom = GeomPoint,
     position = position,
     show.legend = show.legend,
@@ -82,7 +82,7 @@ geom_v_point <- function(
 #' @export
 geom_biplot_point <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "u",
+  .matrix = "rows",
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE

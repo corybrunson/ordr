@@ -58,14 +58,14 @@ sub_ratios \%>\%
   lra(compositional = TRUE) \%>\%
   as_tbl_ord() \%>\%
   augment() \%>\%
-  bind_cols_u(dplyr::select(sub_ratios, chapter, recipes)) \%>\%
+  bind_cols_rows(dplyr::select(sub_ratios, chapter, recipes)) \%>\%
   print() -> lra_ratios
 lra_ratios \%>\%
   confer_inertia("rows") \%>\%
   ggbiplot(sec.axes = "v", scale.factor = .05) +
-  geom_u_text(aes(label = recipes, color = chapter)) +
-  geom_v_vector() +
-  geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward") +
+  geom_rows_text(aes(label = recipes, color = chapter)) +
+  geom_cols_vector() +
+  geom_cols_text(aes(label = .name), hjust = "outward", vjust = "outward") +
   expand_limits(x = c(-.2, .2)) +
   ggtitle("Log-ratio biplot of flour-butter-egg ratios in baking recipes") +
   expand_limits(x = c(-.35, .35))
@@ -82,19 +82,19 @@ USArrests \%>\%
 arrests_lra \%>\%
   as_tbl_ord() \%>\%
   augment() \%>\%
-  left_join_u(state, by = ".name") \%>\%
+  left_join_rows(state, by = ".name") \%>\%
   print() -> arrests_lra
 # Adapt Exhibit 7.1 in Greenacre (2010)
 arrests_lra \%>\%
   confer_inertia(1) \%>\%
   ggbiplot(sec.axes = "v", scale.factor = 1/20) +
   theme_bw() +
-  geom_u_text(
+  geom_rows_text(
     aes(label = .abb),
     size = 3, color = "darkgreen", alpha = .5
   ) +
-  geom_v_polygon(fill = NA, linetype = "dashed", color = "brown4") +
-  geom_v_text(
+  geom_cols_polygon(fill = NA, linetype = "dashed", color = "brown4") +
+  geom_cols_text(
     aes(label = .name),
     color = "brown4", fontface = "bold"
   ) +
@@ -119,22 +119,22 @@ levantine_glass \%>\%
   dplyr::select(SiO2, Al2O3, CaO, FeO, MgO) \%>\%
   princomp(cor = TRUE) \%>\%
   as_tbl_ord() \%>\%
-  bind_cols_u(dplyr::select(levantine_glass, Site, Type)) \%>\%
+  bind_cols_rows(dplyr::select(levantine_glass, Site, Type)) \%>\%
   print() -> pca_glass
 ggbiplot(pca_glass) +
-  geom_u_point(aes(shape = Site, color = Type))
+  geom_rows_point(aes(shape = Site, color = Type))
 # completely compositional log-ratio analysis
 levantine_glass \%>\%
   dplyr::select(SiO2, Al2O3, CaO, FeO, MgO) \%>\%
   lra(compositional = TRUE) \%>\%
   as_tbl_ord() \%>\%
   confer_inertia("rows") \%>\%
-  bind_cols_u(dplyr::select(levantine_glass, Site, Type)) \%>\%
+  bind_cols_rows(dplyr::select(levantine_glass, Site, Type)) \%>\%
   print() -> lra_glass
 ggbiplot(lra_glass, sec.axes = "v", scale.factor = .05) +
-  geom_u_point(aes(shape = Site, color = Type)) +
-  geom_v_vector() +
-  geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward") +
+  geom_rows_point(aes(shape = Site, color = Type)) +
+  geom_cols_vector() +
+  geom_cols_text(aes(label = .name), hjust = "outward", vjust = "outward") +
   expand_limits(x = c(-.2, .2))
 # completely compositional log-ratio analysis with FeO and MgO excluded
 levantine_glass \%>\%
@@ -142,12 +142,12 @@ levantine_glass \%>\%
   lra(compositional = TRUE) \%>\%
   as_tbl_ord() \%>\%
   confer_inertia("rows") \%>\%
-  bind_cols_u(dplyr::select(levantine_glass, Site, Type)) \%>\%
+  bind_cols_rows(dplyr::select(levantine_glass, Site, Type)) \%>\%
   print() -> lra_glass
 ggbiplot(lra_glass, sec.axes = "v", scale.factor = .05) +
-  geom_u_point(aes(shape = Site, color = Type)) +
-  geom_v_vector() +
-  geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward") +
+  geom_rows_point(aes(shape = Site, color = Type)) +
+  geom_cols_vector() +
+  geom_cols_text(aes(label = .name), hjust = "outward", vjust = "outward") +
   expand_limits(x = c(NA, .2))
 }
 \references{

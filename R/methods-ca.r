@@ -20,11 +20,11 @@ as_tbl_ord.ca <- as_tbl_ord_default
 
 #' @rdname methods-ca
 #' @export
-recover_u.ca <- function(x) x$rowcoord
+recover_rows.ca <- function(x) x$rowcoord
 
 #' @rdname methods-ca
 #' @export
-recover_v.ca <- function(x) x$colcoord
+recover_cols.ca <- function(x) x$colcoord
 
 #' @rdname methods-ca
 #' @export
@@ -45,7 +45,7 @@ recover_coord.ca <- function(x) {
 
 #' @rdname methods-ca
 #' @export
-augmentation_u.ca <- function(x) {
+augmentation_rows.ca <- function(x) {
   .name <- rownames(x$rowcoord)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$rowcoord))
@@ -62,7 +62,7 @@ augmentation_u.ca <- function(x) {
 
 #' @rdname methods-ca
 #' @export
-augmentation_v.ca <- function(x){
+augmentation_cols.ca <- function(x){
   .name <- rownames(x$colcoord)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$colcoord))

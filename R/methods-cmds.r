@@ -16,11 +16,11 @@ NULL
 #' @export
 as_tbl_ord.cmds_ord <- as_tbl_ord_default
 
-recover_uv_cmds <- function(x, .matrix) {
+recover_dims_cmds <- function(x, .matrix) {
   .matrix <- match_factor(.matrix)
   res <- x$points
   dimnames(res) <- list(
-    dimnames(x$x)[[switch(.matrix, u = 1, v = 2)]],
+    dimnames(x$x)[[switch(.matrix, rows = 1L, cols = 2L)]],
     recover_coord(x)
   )
   res
@@ -28,11 +28,11 @@ recover_uv_cmds <- function(x, .matrix) {
 
 #' @rdname methods-cmds
 #' @export
-recover_u.cmds_ord <- function(x) recover_uv_cmds(x, "u")
+recover_rows.cmds_ord <- function(x) recover_dims_cmds(x, "rows")
 
 #' @rdname methods-cmds
 #' @export
-recover_v.cmds_ord <- function(x) recover_uv_cmds(x, "v")
+recover_cols.cmds_ord <- function(x) recover_dims_cmds(x, "cols")
 
 #' @rdname methods-cmds
 #' @export
@@ -51,7 +51,7 @@ recover_conference.cmds_ord <- function(x) {
 
 #' @rdname methods-cmds
 #' @export
-augmentation_u.cmds_ord <- function(x) {
+augmentation_rows.cmds_ord <- function(x) {
   .name <- rownames(x$points)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$x))
@@ -63,7 +63,7 @@ augmentation_u.cmds_ord <- function(x) {
 
 #' @rdname methods-cmds
 #' @export
-augmentation_v.cmds_ord <- function(x) {
+augmentation_cols.cmds_ord <- function(x) {
   .name <- rownames(x$points)
   res <- if (is.null(.name)) {
     tibble_pole(ncol(x$x))

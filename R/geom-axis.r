@@ -105,7 +105,7 @@ geom_axis <- function(
 
 #' @rdname geom-biplot-axis
 #' @export
-geom_u_axis <- function(
+geom_rows_axis <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   na.rm = FALSE,
@@ -114,7 +114,7 @@ geom_u_axis <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = u_stat(stat),
+    stat = rows_stat(stat),
     geom = GeomAxis,
     position = position,
     show.legend = show.legend,
@@ -128,7 +128,7 @@ geom_u_axis <- function(
 
 #' @rdname geom-biplot-axis
 #' @export
-geom_v_axis <- function(
+geom_cols_axis <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   na.rm = FALSE,
@@ -137,7 +137,7 @@ geom_v_axis <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = v_stat(stat),
+    stat = cols_stat(stat),
     geom = GeomAxis,
     position = position,
     show.legend = show.legend,

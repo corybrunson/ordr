@@ -224,7 +224,7 @@ geom_axis_text <- function(
 
 #' @rdname geom-biplot-ticks
 #' @export
-geom_u_axis_text <- function(
+geom_rows_axis_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
   label_dodge = .025,
@@ -236,7 +236,7 @@ geom_u_axis_text <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = u_stat(stat),
+    stat = rows_stat(stat),
     geom = GeomAxisText,
     position = position,
     show.legend = show.legend,
@@ -257,7 +257,7 @@ geom_u_axis_text <- function(
 
 #' @rdname geom-biplot-ticks
 #' @export
-geom_v_axis_text <- function(
+geom_cols_axis_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
   label_dodge = .025,
@@ -269,7 +269,7 @@ geom_v_axis_text <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = v_stat(stat),
+    stat = cols_stat(stat),
     geom = GeomAxisText,
     position = position,
     show.legend = show.legend,

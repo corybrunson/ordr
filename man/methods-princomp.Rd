@@ -3,21 +3,21 @@
 \name{methods-princomp}
 \alias{methods-princomp}
 \alias{as_tbl_ord.princomp}
-\alias{recover_u.princomp}
-\alias{recover_v.princomp}
+\alias{recover_rows.princomp}
+\alias{recover_cols.princomp}
 \alias{recover_inertia.princomp}
 \alias{recover_coord.princomp}
 \alias{recover_conference.princomp}
-\alias{augmentation_u.princomp}
-\alias{augmentation_v.princomp}
+\alias{augmentation_rows.princomp}
+\alias{augmentation_cols.princomp}
 \alias{augmentation_coord.princomp}
 \title{Functionality for principal components analysis ('princomp') objects}
 \usage{
 \method{as_tbl_ord}{princomp}(x)
 
-\method{recover_u}{princomp}(x)
+\method{recover_rows}{princomp}(x)
 
-\method{recover_v}{princomp}(x)
+\method{recover_cols}{princomp}(x)
 
 \method{recover_inertia}{princomp}(x)
 
@@ -25,9 +25,9 @@
 
 \method{recover_conference}{princomp}(x)
 
-\method{augmentation_u}{princomp}(x)
+\method{augmentation_rows}{princomp}(x)
 
-\method{augmentation_v}{princomp}(x)
+\method{augmentation_cols}{princomp}(x)
 
 \method{augmentation_coord}{princomp}(x)
 }
@@ -43,17 +43,17 @@ objects of class \code{"princomp"} as returned by \code{\link[stats:princomp]{st
 iris[, -5] \%>\%
   princomp(cor = TRUE) \%>\%
   as_tbl_ord() \%>\%
-  mutate_u(species = iris$Species) \%>\%
-  mutate_v(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
+  mutate_rows(species = iris$Species) \%>\%
+  mutate_cols(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
   print() -> iris_pca
 iris_pca \%>\%
   ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  stat_u_star(alpha = .5, fun.center = "mean") +
-  stat_u_center(size = 3, fun.center = "mean") +
-  geom_u_point(alpha = .5) +
-  geom_v_vector(color = "#444444") +
+  stat_rows_star(alpha = .5, fun.center = "mean") +
+  stat_rows_center(size = 3, fun.center = "mean") +
+  geom_rows_point(alpha = .5) +
+  geom_cols_vector(color = "#444444") +
   ggtitle(
     "Row-principal PCA biplot of Anderson iris data",
     "Segments connect each observation to its within-species centroid"
@@ -63,16 +63,16 @@ iris[, -5] \%>\%
   princomp() \%>\%
   as_tbl_ord() \%>\%
   confer_inertia(1) \%>\%
-  mutate_u(species = iris$Species) \%>\%
-  mutate_v(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
+  mutate_rows(species = iris$Species) \%>\%
+  mutate_cols(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
   print() -> iris_pca
 iris_pca \%>\%
   ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_point() +
-  geom_v_vector(color = "#444444") +
-  geom_v_text_radiate(aes(label = measure), color = "#444444") +
+  geom_rows_point() +
+  geom_cols_vector(color = "#444444") +
+  geom_cols_text_radiate(aes(label = measure), color = "#444444") +
   ggtitle(
     "Row-principal unscaled PCA biplot of Anderson iris data",
     "Variable loadings scaled to secondary axes"

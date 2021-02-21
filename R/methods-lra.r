@@ -17,13 +17,13 @@ as_tbl_ord.lra <- as_tbl_ord_default
 
 #' @rdname methods-lra
 #' @export
-recover_u.lra <- function(x) {
+recover_rows.lra <- function(x) {
   x[["row.coords"]]
 }
 
 #' @rdname methods-lra
 #' @export
-recover_v.lra <- function(x) {
+recover_cols.lra <- function(x) {
   x[["column.coords"]]
 }
 
@@ -45,7 +45,7 @@ recover_conference.lra <- function(x) {
 
 #' @rdname methods-lra
 #' @export
-augmentation_u.lra <- function(x) {
+augmentation_rows.lra <- function(x) {
   .name <- rownames(x[["row.coords"]])
   if (is.null(.name)) {
     tibble_pole(nrow(x[["row.coords"]]))
@@ -56,7 +56,7 @@ augmentation_u.lra <- function(x) {
 
 #' @rdname methods-lra
 #' @export
-augmentation_v.lra <- function(x) {
+augmentation_cols.lra <- function(x) {
   .name <- rownames(x[["column.coords"]])
   if (is.null(.name)) {
     tibble_pole(nrow(x[["column.coords"]]))

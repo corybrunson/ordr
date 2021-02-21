@@ -22,7 +22,7 @@ as_tbl_ord.lm <- as_tbl_ord_default
 
 #' @rdname methods-lm
 #' @export
-recover_u.lm <- function(x) {
+recover_rows.lm <- function(x) {
   .intercept_col <- if (names(x$coefficients)[1] == "(Intercept)") {
     .ic <- matrix(1L, nrow = nrow(x$model), ncol = 1)
     colnames(.ic) <- "(Intercept)"
@@ -36,7 +36,7 @@ recover_u.lm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-recover_v.lm <- function(x) {
+recover_cols.lm <- function(x) {
   res <- t(x$coefficients)
   dimnames(res) <- list(
     if (is.matrix(x$model[, 1])) colnames(x$model[, 1]) else names(x$model)[1],
@@ -70,7 +70,7 @@ recover_coord.lm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-augmentation_u.lm <- function(x) {
+augmentation_rows.lm <- function(x) {
   res <- tibble(.name = rownames(model.frame(x)))
   infl <- influence(x, do.coef = FALSE)
   # diagnostics
@@ -89,7 +89,7 @@ augmentation_u.lm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-augmentation_v.lm <- function(x) {
+augmentation_cols.lm <- function(x) {
   .name <- if (is.matrix(x$model[, 1])) {
     colnames(x$model[, 1])
   } else {
@@ -111,7 +111,7 @@ augmentation_coord.lm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-augmentation_u.glm <- function(x) {
+augmentation_rows.glm <- function(x) {
   res <- tibble(.name = rownames(model.frame(x)))
   # diagnostics
   infl <- influence(x, do.coef = FALSE)
@@ -134,7 +134,7 @@ augmentation_u.glm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-recover_u.mlm <- function(x) {
+recover_rows.mlm <- function(x) {
   .intercept_col <- if (rownames(x$coefficients)[1] == "(Intercept)") {
     .ic <- matrix(1L, nrow = nrow(x$model), ncol = 1)
     colnames(.ic) <- "(Intercept)"
@@ -148,7 +148,7 @@ recover_u.mlm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-recover_v.mlm <- function(x) {
+recover_cols.mlm <- function(x) {
   res <- t(x$coefficients)
   colnames(res) <- recover_coord(x)
   res
@@ -179,7 +179,7 @@ recover_coord.mlm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-augmentation_u.mlm <- function(x) {
+augmentation_rows.mlm <- function(x) {
   tibble(
     .name = rownames(model.frame(x))
   )
@@ -187,7 +187,7 @@ augmentation_u.mlm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-augmentation_v.mlm <- function(x) {
+augmentation_cols.mlm <- function(x) {
   .name <- colnames(x$coefficients)
   if (is.null(.name)) {
     .name <- paste(names(x$model)[1], 1:ncol(x$model[, 1]), sep = ".")

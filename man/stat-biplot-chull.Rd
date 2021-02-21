@@ -5,17 +5,17 @@
 \alias{stat-biplot-chull}
 \alias{StatChull}
 \alias{stat_chull}
-\alias{StatUChull}
-\alias{StatVChull}
-\alias{stat_u_chull}
-\alias{stat_v_chull}
+\alias{StatRowsChull}
+\alias{StatColsChull}
+\alias{stat_rows_chull}
+\alias{stat_cols_chull}
 \title{Restrict ordination data to the convex hulls of both matrix factors}
 \format{
 An object of class \code{StatChull} (inherits from \code{Stat}, \code{ggproto}, \code{gg}) of length 3.
 
-An object of class \code{StatUChull} (inherits from \code{StatChull}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+An object of class \code{StatRowsChull} (inherits from \code{StatChull}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
 
-An object of class \code{StatVChull} (inherits from \code{StatChull}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+An object of class \code{StatColsChull} (inherits from \code{StatChull}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
 }
 \usage{
 stat_chull(
@@ -29,7 +29,7 @@ stat_chull(
   ...
 )
 
-stat_u_chull(
+stat_rows_chull(
   mapping = NULL,
   data = NULL,
   geom = "polygon",
@@ -40,7 +40,7 @@ stat_u_chull(
   ...
 )
 
-stat_v_chull(
+stat_cols_chull(
   mapping = NULL,
   data = NULL,
   geom = "polygon",
@@ -103,14 +103,14 @@ calculation, though note that the result is not the (unbounded) \href{https://en
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
-frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
-variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
-the data frame to one of these two.
+frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
+variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
+filter the data frame to one of these two.
 
-The geom layers \verb{geom_u_*()} and \verb{geom_v_*()} call the corresponding stat in
-order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \verb{geom_biplot_*()} selects a default matrix based on common practice,
-e.g. \eqn{U} for points and \eqn{V} for arrows.
+The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.
 }
 
 \examples{
@@ -125,23 +125,23 @@ benthos_ca \%>\%
   confer_inertia("colprincipal") \%>\%
   ggbiplot(aes(label = .name)) +
   theme_bw() +
-  geom_u_point(color = "brown", size = 1) +
-  geom_v_text(color = "darkgreen")
+  geom_rows_point(color = "brown", size = 1) +
+  geom_cols_text(color = "darkgreen")
 # Reproduce Exhibit 8.4
 benthos_ca \%>\%
-  augment(.matrix = "u") \%>\%
-  transmute_u(mass = .mass, sqrt_mass = sqrt(.mass)) \%>\%
+  augment(.matrix = "rows") \%>\%
+  transmute_rows(mass = .mass, sqrt_mass = sqrt(.mass)) \%>\%
   confer_inertia("colprincipal") \%>\%
-  ggbiplot(aes(label = .name), scale_u = "sqrt_mass") +
+  ggbiplot(aes(label = .name), scale_rows = "sqrt_mass") +
   theme_bw() +
-  geom_u_vector(color = "brown", arrow = NULL) +
-  geom_u_point(aes(size = mass), color = "brown", shape = 17) +
+  geom_rows_vector(color = "brown", arrow = NULL) +
+  geom_rows_point(aes(size = mass), color = "brown", shape = 17) +
   scale_size_continuous(range = c(1, 4), guide = "none") +
-  geom_u_text(
+  geom_rows_text(
     stat = "chull",
     color = "brown", hjust = "outward", vjust = "outward"
   ) +
-  geom_v_point(color = "darkgreen") +
-  geom_v_text_repel(color = "darkgreen", min.segment.length = 2)
+  geom_cols_point(color = "darkgreen") +
+  geom_cols_text_repel(color = "darkgreen", min.segment.length = 2)
 }
 \keyword{datasets}

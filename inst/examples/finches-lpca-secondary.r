@@ -9,9 +9,9 @@ finches_lsvd %>%
     aes(x = LSC1, y = LSC2, label = .name),
     sec.axes = "v", scale.factor = 100
   ) +
-  geom_u_vector(alpha = .5, color = "darkred") +
-  geom_u_text_radiate(size = 3, color = "darkred") +
-  geom_v_label(size = 3, alpha = .5, color = "royalblue3") +
+  geom_rows_vector(alpha = .5, color = "darkred") +
+  geom_rows_text_radiate(size = 3, color = "darkred") +
+  geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
   ggtitle(
     "Logistic SVD of the Galapagos island finches",
     "Islands (finches) scaled to the primary (secondary) axes"
@@ -28,9 +28,9 @@ finches_lpca %>%
     aes(x = LPC1, y = LPC2, label = .name),
     sec.axes = "v", scale.factor = 50
   ) +
-  geom_u_vector(alpha = .5, color = "darkred") +
-  geom_u_text_radiate(size = 3, color = "darkred") +
-  geom_v_label(size = 3, alpha = .5, color = "royalblue3") +
+  geom_rows_vector(alpha = .5, color = "darkred") +
+  geom_rows_text_radiate(size = 3, color = "darkred") +
+  geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
   ggtitle(
     "Logistic PCA of the Galapagos island finches",
     "Islands (finches) scaled to the primary (secondary) axes"
@@ -49,9 +49,9 @@ finches_clpca %>%
     aes(x = LPC1, y = LPC2, label = .name),
     sec.axes = "v", scale.factor = 50
   ) +
-  geom_u_vector(alpha = .5, color = "darkred") +
-  geom_u_text_radiate(size = 3, color = "darkred") +
-  geom_v_label(size = 3, alpha = .5, color = "royalblue3") +
+  geom_rows_vector(alpha = .5, color = "darkred") +
+  geom_rows_text_radiate(size = 3, color = "darkred") +
+  geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
   ggtitle(
     "Convex logistic PCA of the Galapagos island finches",
     "Islands (finches) scaled to the primary (secondary) axes"

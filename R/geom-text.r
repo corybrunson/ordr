@@ -42,7 +42,7 @@ NULL
 
 #' @rdname geom-biplot-text
 #' @export
-geom_u_text <- function(
+geom_rows_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   parse = FALSE,
@@ -61,7 +61,7 @@ geom_u_text <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = u_stat(stat),
+    stat = rows_stat(stat),
     geom = GeomText,
     position = position,
     show.legend = show.legend,
@@ -77,7 +77,7 @@ geom_u_text <- function(
 
 #' @rdname geom-biplot-text
 #' @export
-geom_v_text <- function(
+geom_cols_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   parse = FALSE,
@@ -96,7 +96,7 @@ geom_v_text <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = v_stat(stat),
+    stat = cols_stat(stat),
     geom = GeomText,
     position = position,
     show.legend = show.legend,
@@ -114,7 +114,7 @@ geom_v_text <- function(
 #' @export
 geom_biplot_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "u",
+  .matrix = "rows",
   ...,
   parse = FALSE,
   nudge_x = 0, nudge_y = 0,
@@ -148,7 +148,7 @@ geom_biplot_text <- function(
 
 #' @rdname geom-biplot-text
 #' @export
-geom_u_label <- function(
+geom_rows_label <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   parse = FALSE,
@@ -158,7 +158,7 @@ geom_u_label <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = u_stat(stat),
+    stat = rows_stat(stat),
     geom = GeomLabel,
     position = position,
     show.legend = show.legend,
@@ -173,7 +173,7 @@ geom_u_label <- function(
 
 #' @rdname geom-biplot-text
 #' @export
-geom_v_label <- function(
+geom_cols_label <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   parse = FALSE,
@@ -183,7 +183,7 @@ geom_v_label <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = v_stat(stat),
+    stat = cols_stat(stat),
     geom = GeomLabel,
     position = position,
     show.legend = show.legend,
@@ -200,7 +200,7 @@ geom_v_label <- function(
 #' @export
 geom_biplot_label <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "u",
+  .matrix = "rows",
   ...,
   parse = FALSE,
   na.rm = FALSE,
@@ -230,7 +230,7 @@ ggrepel::geom_label_repel
 
 #' @rdname geom-biplot-text
 #' @export
-geom_u_text_repel <- function(
+geom_rows_text_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   parse = FALSE,
@@ -240,7 +240,7 @@ geom_u_text_repel <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = u_stat(stat),
+    stat = rows_stat(stat),
     geom = GeomTextRepel,
     position = position,
     show.legend = show.legend,
@@ -255,7 +255,7 @@ geom_u_text_repel <- function(
 
 #' @rdname geom-biplot-text
 #' @export
-geom_v_text_repel <- function(
+geom_cols_text_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   parse = FALSE,
@@ -265,7 +265,7 @@ geom_v_text_repel <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = v_stat(stat),
+    stat = cols_stat(stat),
     geom = GeomTextRepel,
     position = position,
     show.legend = show.legend,
@@ -282,7 +282,7 @@ geom_v_text_repel <- function(
 #' @export
 geom_biplot_text_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "u",
+  .matrix = "rows",
   ...,
   parse = FALSE,
   na.rm = FALSE,
@@ -306,7 +306,7 @@ geom_biplot_text_repel <- function(
 
 #' @rdname geom-biplot-text
 #' @export
-geom_u_label_repel <- function(
+geom_rows_label_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   parse = FALSE,
@@ -316,7 +316,7 @@ geom_u_label_repel <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = u_stat(stat),
+    stat = rows_stat(stat),
     geom = GeomLabelRepel,
     position = position,
     show.legend = show.legend,
@@ -331,7 +331,7 @@ geom_u_label_repel <- function(
 
 #' @rdname geom-biplot-text
 #' @export
-geom_v_label_repel <- function(
+geom_cols_label_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   parse = FALSE,
@@ -341,7 +341,7 @@ geom_v_label_repel <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = v_stat(stat),
+    stat = cols_stat(stat),
     geom = GeomLabelRepel,
     position = position,
     show.legend = show.legend,
@@ -358,7 +358,7 @@ geom_v_label_repel <- function(
 #' @export
 geom_biplot_label_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "u",
+  .matrix = "rows",
   ...,
   parse = FALSE,
   na.rm = FALSE,

@@ -27,13 +27,13 @@ pull_factor <- function(.data, var = -1, .matrix) {
 }
 #' @rdname dplyr-verbs
 #' @export
-pull_u <- function(.data, var = -1) {
-  pull_factor(.data, !! enquo(var), .matrix = "u")
+pull_rows <- function(.data, var = -1) {
+  pull_factor(.data, !! enquo(var), .matrix = "rows")
 }
 #' @rdname dplyr-verbs
 #' @export
-pull_v <- function(.data, var = -1) {
-  pull_factor(.data, !! enquo(var), .matrix = "v")
+pull_cols <- function(.data, var = -1) {
+  pull_factor(.data, !! enquo(var), .matrix = "cols")
 }
 
 rename_factor <- function(.data, ..., .matrix) {
@@ -42,10 +42,10 @@ rename_factor <- function(.data, ..., .matrix) {
 }
 #' @rdname dplyr-verbs
 #' @export
-rename_u <- function(.data, ...) rename_factor(.data, ..., .matrix = "u")
+rename_rows <- function(.data, ...) rename_factor(.data, ..., .matrix = "rows")
 #' @rdname dplyr-verbs
 #' @export
-rename_v <- function(.data, ...) rename_factor(.data, ..., .matrix = "v")
+rename_cols <- function(.data, ...) rename_factor(.data, ..., .matrix = "cols")
 
 select_factor <- function(.data, ..., .matrix) {
   att <- select(annotation_factor(.data, .matrix = .matrix), ...)
@@ -53,10 +53,10 @@ select_factor <- function(.data, ..., .matrix) {
 }
 #' @rdname dplyr-verbs
 #' @export
-select_u <- function(.data, ...) select_factor(.data, ..., .matrix = "u")
+select_rows <- function(.data, ...) select_factor(.data, ..., .matrix = "rows")
 #' @rdname dplyr-verbs
 #' @export
-select_v <- function(.data, ...) select_factor(.data, ..., .matrix = "v")
+select_cols <- function(.data, ...) select_factor(.data, ..., .matrix = "cols")
 
 mutate_factor <- function(.data, ..., .matrix) {
   crd <- as_tibble(get_factor(.data, .matrix = .matrix))
@@ -68,10 +68,10 @@ mutate_factor <- function(.data, ..., .matrix) {
 }
 #' @rdname dplyr-verbs
 #' @export
-mutate_u <- function(.data, ...) mutate_factor(.data, ..., .matrix = "u")
+mutate_rows <- function(.data, ...) mutate_factor(.data, ..., .matrix = "rows")
 #' @rdname dplyr-verbs
 #' @export
-mutate_v <- function(.data, ...) mutate_factor(.data, ..., .matrix = "v")
+mutate_cols <- function(.data, ...) mutate_factor(.data, ..., .matrix = "cols")
 
 transmute_factor <- function(.data, ..., .matrix) {
   crd <- as_tibble(get_factor(.data, .matrix = .matrix))
@@ -83,10 +83,10 @@ transmute_factor <- function(.data, ..., .matrix) {
 }
 #' @rdname dplyr-verbs
 #' @export
-transmute_u <- function(.data, ...) transmute_factor(.data, ..., .matrix = "u")
+transmute_rows <- function(.data, ...) transmute_factor(.data, ..., .matrix = "rows")
 #' @rdname dplyr-verbs
 #' @export
-transmute_v <- function(.data, ...) transmute_factor(.data, ..., .matrix = "v")
+transmute_cols <- function(.data, ...) transmute_factor(.data, ..., .matrix = "cols")
 
 bind_cols_factor <- function(.data, ..., .matrix) {
   att <- bind_cols(annotation_factor(.data, .matrix = .matrix), ...)
@@ -94,10 +94,10 @@ bind_cols_factor <- function(.data, ..., .matrix) {
 }
 #' @rdname dplyr-verbs
 #' @export
-bind_cols_u <- function(.data, ...) bind_cols_factor(.data, ..., .matrix = "u")
+bind_cols_rows <- function(.data, ...) bind_cols_factor(.data, ..., .matrix = "rows")
 #' @rdname dplyr-verbs
 #' @export
-bind_cols_v <- function(.data, ...) bind_cols_factor(.data, ..., .matrix = "v")
+bind_cols_cols <- function(.data, ...) bind_cols_factor(.data, ..., .matrix = "cols")
 
 left_join_factor <- function(.data, ..., .matrix) {
   att <- left_join(annotation_factor(.data, .matrix = .matrix), ...)
@@ -105,7 +105,7 @@ left_join_factor <- function(.data, ..., .matrix) {
 }
 #' @rdname dplyr-verbs
 #' @export
-left_join_u <- function(.data, ...) left_join_factor(.data, ..., .matrix = "u")
+left_join_rows <- function(.data, ...) left_join_factor(.data, ..., .matrix = "rows")
 #' @rdname dplyr-verbs
 #' @export
-left_join_v <- function(.data, ...) left_join_factor(.data, ..., .matrix = "v")
+left_join_cols <- function(.data, ...) left_join_factor(.data, ..., .matrix = "cols")

@@ -46,20 +46,20 @@ NULL
 
 #' @rdname augmentation
 #' @export
-augmentation_u <- function(x) UseMethod("augmentation_u")
+augmentation_rows <- function(x) UseMethod("augmentation_rows")
 
 #' @rdname augmentation
 #' @export
-augmentation_v <- function(x) UseMethod("augmentation_v")
+augmentation_cols <- function(x) UseMethod("augmentation_cols")
 
 #' @rdname augmentation
 #' @export
 augmentation_factor <- function(x, .matrix) {
   switch(
     match_factor(.matrix),
-    u = augmentation_u(x),
-    v = augmentation_v(x),
-    uv = list(u = augmentation_u(x), v = augmentation_v(x))
+    rows = augmentation_rows(x),
+    cols = augmentation_cols(x),
+    dims = list(rows = augmentation_rows(x), cols = augmentation_cols(x))
   )
 }
 
@@ -68,11 +68,11 @@ augmentation_factor <- function(x, .matrix) {
 augmentation.tbl_ord <- function(x, .matrix) {
   switch(
     match_factor(.matrix),
-    u = augmentation_u(x),
-    v = augmentation_v(x),
-    uv = dplyr::bind_rows(
-      dplyr::mutate(augmentation_u(x), .matrix = "u"),
-      dplyr::mutate(augmentation_v(x), .matrix = "v")
+    rows = augmentation_rows(x),
+    cols = augmentation_cols(x),
+    dims = dplyr::bind_rows(
+      dplyr::mutate(augmentation_rows(x), .matrix = "rows"),
+      dplyr::mutate(augmentation_cols(x), .matrix = "cols")
     )
   )
 }
@@ -87,13 +87,13 @@ generics::augment
 
 #' @rdname augmentation
 #' @export
-augment.tbl_ord <- function(x, data, .matrix = "uv", ...) {
+augment.tbl_ord <- function(x, data, .matrix = "dims", ...) {
   .matrix <- match_factor(.matrix)
-  if (grepl("u", .matrix)) {
-    x <- augment_factor(x, "u")
+  if (.matrix == "dims" || .matrix == "rows") {
+    x <- augment_factor(x, "rows")
   }
-  if (grepl("v", .matrix)) {
-    x <- augment_factor(x, "v")
+  if (.matrix == "dims" || .matrix == "cols") {
+    x <- augment_factor(x, "cols")
   }
   x
 }
@@ -135,11 +135,11 @@ augment_factor <- function(x, .matrix) {
 
 #' @rdname augmentation
 #' @export
-augment_u <- function(x) augment_factor(x, .matrix = "u")
+augment_rows <- function(x) augment_factor(x, .matrix = "rows")
 
 #' @rdname augmentation
 #' @export
-augment_v <- function(x) augment_factor(x, .matrix = "v")
+augment_cols <- function(x) augment_factor(x, .matrix = "cols")
 
 #' @importFrom generics tidy
 #' @export

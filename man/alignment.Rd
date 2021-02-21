@@ -52,7 +52,7 @@ right-multiplication.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
+standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 
 \item{abs.values}{Whether \code{permute_to()} should reorder coordinates according
 to dot product magnitudes (angles closest to straight, whether \eqn{0} or
@@ -99,7 +99,7 @@ UScitiesD \%>\%
   print() -> usa_mds
 usa_mds \%>\%
   ggbiplot() +
-  geom_v_text(aes(label = .name), size = 3) +
+  geom_cols_text(aes(label = .name), size = 3) +
   ggtitle("MDS biplot of distances between American cities")
 get_alignment(usa_mds)
 # negation
@@ -109,7 +109,7 @@ usa_mds \%>\%
 get_alignment(usa_mds_negate)
 usa_mds_negate \%>\%
   ggbiplot() +
-  geom_v_text(aes(label = .name), size = 3) +
+  geom_cols_text(aes(label = .name), size = 3) +
   ggtitle("Negated MDS biplot of distances between American cities")
 # rotation
 usa_mds \%>\%
@@ -118,7 +118,7 @@ usa_mds \%>\%
 get_alignment(usa_mds_rotate)
 usa_mds_rotate \%>\%
   ggbiplot() +
-  geom_v_text(aes(label = .name), size = 3) +
+  geom_cols_text(aes(label = .name), size = 3) +
   ggtitle("Rotated MDS biplot of distances between American cities")
 # Align an MDS ordination to a PCA ordination
 data(country_differences)
@@ -132,21 +132,21 @@ country_differences \%>\%
   print() -> differences_pca
 # negate PCA cases to MDS coordinates
 differences_cmds \%>\%
-  negate_to(differences_pca, "u") \%>\%
-  print() -> differences_align_u
+  negate_to(differences_pca, "rows") \%>\%
+  print() -> differences_align_rows
 plot(gridExtra::arrangeGrob(grobs = list(
-  ggbiplot(differences_cmds) + geom_u_point(),
-  ggbiplot(differences_pca) + geom_u_point(),
-  ggbiplot(differences_align_u) + geom_u_point()
+  ggbiplot(differences_cmds) + geom_rows_point(),
+  ggbiplot(differences_pca) + geom_rows_point(),
+  ggbiplot(differences_align_rows) + geom_rows_point()
 ), ncol = 3))
 # negate PCA variables to MDS coordinates
 differences_cmds \%>\%
-  negate_to(differences_pca, "v") \%>\%
-  print() -> differences_align_v
+  negate_to(differences_pca, "cols") \%>\%
+  print() -> differences_align_cols
 plot(gridExtra::arrangeGrob(grobs = list(
-  ggbiplot(differences_cmds) + geom_v_vector(),
-  ggbiplot(differences_pca) + geom_v_vector(),
-  ggbiplot(differences_align_v) + geom_v_vector()
+  ggbiplot(differences_cmds) + geom_cols_vector(),
+  ggbiplot(differences_pca) + geom_cols_vector(),
+  ggbiplot(differences_align_cols) + geom_cols_vector()
 ), ncol = 3))
 # Compare relative frequences of hair and eye colors among men versus women
 data(HairEyeColor)
@@ -160,10 +160,10 @@ HairEyeColor[, , "Female"] \%>\%
   print() -> female_haireye_ca
 ca_biplot <- function(ord) {
   ggbiplot(ord, aes(label = .name)) +
-    geom_u_point(aes(size = .mass), color = "saddlebrown") +
-    geom_v_point(aes(size = .mass), color = "seagreen4") +
-    geom_u_text_repel(color = "saddlebrown") +
-    geom_v_text_repel(color = "seagreen4") +
+    geom_rows_point(aes(size = .mass), color = "saddlebrown") +
+    geom_cols_point(aes(size = .mass), color = "seagreen4") +
+    geom_rows_text_repel(color = "saddlebrown") +
+    geom_cols_text_repel(color = "seagreen4") +
     guides(size = "none")
 }
 plot(gridExtra::arrangeGrob(grobs = list(
@@ -172,16 +172,16 @@ plot(gridExtra::arrangeGrob(grobs = list(
 ), ncol = 2))
 # negation, permutation, and rotation
 male_haireye_ca \%>\%
-  negate_to(female_haireye_ca, "u") \%>\%
+  negate_to(female_haireye_ca, "rows") \%>\%
   get_alignment()
 male_haireye_ca \%>\%
-  permute_to(female_haireye_ca, "u") \%>\%
+  permute_to(female_haireye_ca, "rows") \%>\%
   get_alignment()
 male_haireye_ca \%>\%
-  rotate_to(female_haireye_ca, "u") \%>\%
+  rotate_to(female_haireye_ca, "rows") \%>\%
   get_alignment()
 plot(gridExtra::arrangeGrob(grobs = list(
-  ca_biplot(rotate_to(male_haireye_ca, female_haireye_ca, "u")),
+  ca_biplot(rotate_to(male_haireye_ca, female_haireye_ca, "rows")),
   ca_biplot(female_haireye_ca)
 ), ncol = 2))
 }

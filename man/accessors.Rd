@@ -2,15 +2,15 @@
 % Please edit documentation in R/ord-accessors.r
 \name{accessors}
 \alias{accessors}
-\alias{recover_u}
-\alias{recover_v}
+\alias{recover_rows}
+\alias{recover_cols}
 \alias{recover_factor}
-\alias{recover_u.default}
-\alias{recover_v.default}
-\alias{recover_u.data.frame}
-\alias{recover_v.data.frame}
-\alias{get_u}
-\alias{get_v}
+\alias{recover_rows.default}
+\alias{recover_cols.default}
+\alias{recover_rows.data.frame}
+\alias{recover_cols.data.frame}
+\alias{get_rows}
+\alias{get_cols}
 \alias{get_factor}
 \alias{as.matrix.tbl_ord}
 \alias{recover_inertia}
@@ -20,28 +20,28 @@
 \alias{recover_coord.data.frame}
 \alias{get_coord}
 \alias{dim.tbl_ord}
-\alias{dim_u}
-\alias{dim_v}
+\alias{dim_rows}
+\alias{dim_cols}
 \alias{dim_factor}
 \title{Access factors, coordinates, and metadata from ordination objects}
 \usage{
-recover_u(x)
+recover_rows(x)
 
-recover_v(x)
+recover_cols(x)
 
 recover_factor(x, .matrix)
 
-\method{recover_u}{default}(x)
+\method{recover_rows}{default}(x)
 
-\method{recover_v}{default}(x)
+\method{recover_cols}{default}(x)
 
-\method{recover_u}{data.frame}(x)
+\method{recover_rows}{data.frame}(x)
 
-\method{recover_v}{data.frame}(x)
+\method{recover_cols}{data.frame}(x)
 
-get_u(x, .supplement = TRUE, align = TRUE)
+get_rows(x, .supplement = TRUE, align = TRUE)
 
-get_v(x, .supplement = TRUE, align = TRUE)
+get_cols(x, .supplement = TRUE, align = TRUE)
 
 get_factor(x, .matrix, .supplement = TRUE, align = TRUE)
 
@@ -61,9 +61,9 @@ get_coord(x, align = TRUE)
 
 \method{dim}{tbl_ord}(x)
 
-dim_u(x)
+dim_rows(x)
 
-dim_v(x)
+dim_cols(x)
 
 dim_factor(x, .matrix)
 }
@@ -72,7 +72,7 @@ dim_factor(x, .matrix)
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
+standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 
 \item{.supplement}{Logical; whether to include}
 
@@ -86,17 +86,17 @@ These functions return information about the matrix
 factorization underlying an ordination.
 }
 \details{
-The \verb{recover_*()} functions extract one or both of the matrix factors
-\eqn{U,V} that constitute the original ordination. These are interpreted as
-the case scores (\eqn{U}) and the variable loadings (\eqn{V}). The \verb{get_*()}
+The \verb{recover_*()} functions extract one or both of the row and column matrix
+factors that constitute the original ordination. These are interpreted as the
+case scores (rows) and the variable loadings (columns). The \verb{get_*()}
 functions optionally (and by default) apply any alignment stored as the
 \code{"align"} attribute (see \link{alignment}). Only the \verb{recover_*()} functions are
 generics that require methods for each ordination class.
 
-\code{get_coord()} retrieves the names of the coordinates shared by \eqn{U} and
-\eqn{V}, on which the original data were ordinated, and \code{dim.tbl_ord()}
+\code{get_coord()} retrieves the names of the coordinates shared by the matrix
+factors on which the original data were ordinated, and \code{dim.tbl_ord()}
 retrieves their number, the rank of the ordination. The outer dimensions of
-the matrix decomposition are returned by \code{dim_u()} and \code{dim_v()}.
+the matrix decomposition are returned by \code{dim_rows()} and \code{dim_cols()}.
 }
 \examples{
 # Multidimensional scaling of country differences and regression of attributes
@@ -108,16 +108,16 @@ country_differences \%>\%
   print() -> differences_cmds
 differences_plot <- differences_cmds \%>\%
   ggbiplot(aes(x = 1, y = 2, label = .name)) +
-  geom_v_text()
+  geom_cols_text()
 differences_plot
 # Reproduce Exhibit 4.5 in Greenacre (2010)
 data(country_attributes)
-lm(country_attributes ~ get_u(differences_cmds)) \%>\%
+lm(country_attributes ~ get_rows(differences_cmds)) \%>\%
   as_tbl_ord() \%>\%
   print() -> attributes_fit
 differences_plot +
-  geom_v_vector(data = attributes_fit) +
-  geom_v_text_radiate(data = attributes_fit, hjust = .3)
+  geom_cols_vector(data = attributes_fit) +
+  geom_cols_text_radiate(data = attributes_fit, hjust = .3)
 # Confer PCA weights and inertia between cases and variables
 data(country_attributes)
 country_attributes \%>\%
@@ -128,12 +128,12 @@ country_attributes \%>\%
 attributes_pca \%>\%
   ggbiplot(
     aes(label = .name),
-    sec.axes = "v", scale.factor = dim_v(attributes_pca)
+    sec.axes = "cols", scale.factor = dim_cols(attributes_pca)
   ) +
   theme_bw() + theme(panel.grid = element_blank()) +
-  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
-  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
-  geom_v_text(
+  geom_rows_text(aes(x = PC1, y = PC2), color = "seagreen") +
+  geom_cols_vector(aes(x = PC1, y = PC2), color = "darkred") +
+  geom_cols_text(
     aes(x = PC1, y = PC2),
     color = "darkred", hjust = "outward", vjust = "outward"
   )
@@ -142,10 +142,10 @@ attributes_pca \%>\%
   confer_inertia(0) \%>\%
   ggbiplot(
     aes(label = .name),
-    sec.axes = "u", scale.factor = dim_u(attributes_pca)
+    sec.axes = "rows", scale.factor = dim_rows(attributes_pca)
   ) +
   theme_bw() + theme(panel.grid = element_blank()) +
-  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
-  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
-  geom_v_text_repel(aes(x = PC1, y = PC2), color = "darkred")
+  geom_rows_text(aes(x = PC1, y = PC2), color = "seagreen") +
+  geom_cols_vector(aes(x = PC1, y = PC2), color = "darkred") +
+  geom_cols_text_repel(aes(x = PC1, y = PC2), color = "darkred")
 }

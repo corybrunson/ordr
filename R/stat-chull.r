@@ -73,24 +73,24 @@ stat_chull <- function(
 #' @rdname stat-biplot-chull
 #' @usage NULL
 #' @export
-StatUChull <- ggproto(
-  "StatUChull", StatChull,
+StatRowsChull <- ggproto(
+  "StatRowsChull", StatChull,
   
-  setup_data = setup_u_data
+  setup_data = setup_rows_data
 )
 
 #' @rdname stat-biplot-chull
 #' @usage NULL
 #' @export
-StatVChull <- ggproto(
-  "StatVChull", StatChull,
+StatColsChull <- ggproto(
+  "StatColsChull", StatChull,
   
-  setup_data = setup_v_data
+  setup_data = setup_cols_data
 )
 
 #' @rdname stat-biplot-chull
 #' @export
-stat_u_chull <- function(
+stat_rows_chull <- function(
   mapping = NULL, data = NULL, geom = "polygon", position = "identity",
   conical = FALSE,
   show.legend = NA,
@@ -100,7 +100,7 @@ stat_u_chull <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = StatUChull,
+    stat = StatRowsChull,
     geom = geom, 
     position = position,
     show.legend = show.legend,
@@ -115,7 +115,7 @@ stat_u_chull <- function(
 
 #' @rdname stat-biplot-chull
 #' @export
-stat_v_chull <- function(
+stat_cols_chull <- function(
   mapping = NULL, data = NULL, geom = "polygon", position = "identity",
   conical = FALSE,
   show.legend = NA,
@@ -125,7 +125,7 @@ stat_v_chull <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = StatVChull,
+    stat = StatColsChull,
     geom = geom, 
     position = position,
     show.legend = show.legend,

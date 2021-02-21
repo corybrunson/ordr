@@ -8,9 +8,9 @@ eurodist %>%
   print() -> euro_mds
 euro_mds %>%
   ggbiplot() +
-  stat_v_spantree(
+  stat_cols_spantree(
     ord_aes(euro_mds), check.aes = FALSE,
     alpha = .5, linetype = "dotted"
   ) +
-  geom_v_text(aes(label = .name), size = 3) +
+  geom_cols_text(aes(label = .name), size = 3) +
   ggtitle("MDS biplot of road distances between European cities")

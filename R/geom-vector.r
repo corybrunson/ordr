@@ -93,7 +93,7 @@ geom_vector <- function(
 
 #' @rdname geom-biplot-vector
 #' @export
-geom_u_vector <- function(
+geom_rows_vector <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   arrow = default_arrow,
   ...,
@@ -103,7 +103,7 @@ geom_u_vector <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = u_stat(stat),
+    stat = rows_stat(stat),
     geom = GeomVector,
     position = position,
     show.legend = show.legend,
@@ -118,7 +118,7 @@ geom_u_vector <- function(
 
 #' @rdname geom-biplot-vector
 #' @export
-geom_v_vector <- function(
+geom_cols_vector <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   arrow = default_arrow,
   ...,
@@ -128,7 +128,7 @@ geom_v_vector <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = v_stat(stat),
+    stat = cols_stat(stat),
     geom = GeomVector,
     position = position,
     show.legend = show.legend,
@@ -145,7 +145,7 @@ geom_v_vector <- function(
 #' @export
 geom_biplot_vector <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "v", arrow = default_arrow,
+  .matrix = "cols", arrow = default_arrow,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE

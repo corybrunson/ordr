@@ -10,19 +10,19 @@ country_differences %>%
   print() -> differences_pca
 # negate PCA cases to MDS coordinates
 differences_cmds %>%
-  negate_to(differences_pca, "u") %>%
-  print() -> differences_align_u
+  negate_to(differences_pca, "rows") %>%
+  print() -> differences_align_rows
 plot(gridExtra::arrangeGrob(grobs = list(
-  ggbiplot(differences_cmds) + geom_u_point(),
-  ggbiplot(differences_pca) + geom_u_point(),
-  ggbiplot(differences_align_u) + geom_u_point()
+  ggbiplot(differences_cmds) + geom_rows_point(),
+  ggbiplot(differences_pca) + geom_rows_point(),
+  ggbiplot(differences_align_rows) + geom_rows_point()
 ), ncol = 3))
 # negate PCA variables to MDS coordinates
 differences_cmds %>%
-  negate_to(differences_pca, "v") %>%
-  print() -> differences_align_v
+  negate_to(differences_pca, "cols") %>%
+  print() -> differences_align_cols
 plot(gridExtra::arrangeGrob(grobs = list(
-  ggbiplot(differences_cmds) + geom_v_vector(),
-  ggbiplot(differences_pca) + geom_v_vector(),
-  ggbiplot(differences_align_v) + geom_v_vector()
+  ggbiplot(differences_cmds) + geom_cols_vector(),
+  ggbiplot(differences_pca) + geom_cols_vector(),
+  ggbiplot(differences_align_cols) + geom_cols_vector()
 ), ncol = 3))

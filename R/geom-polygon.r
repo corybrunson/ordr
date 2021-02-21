@@ -30,7 +30,7 @@ NULL
 
 #' @rdname geom-biplot-polygon
 #' @export
-geom_u_polygon <- function(
+geom_rows_polygon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   na.rm = FALSE,
@@ -39,7 +39,7 @@ geom_u_polygon <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = u_stat(stat),
+    stat = rows_stat(stat),
     geom = GeomPolygon,
     position = position,
     show.legend = show.legend,
@@ -53,7 +53,7 @@ geom_u_polygon <- function(
 
 #' @rdname geom-biplot-polygon
 #' @export
-geom_v_polygon <- function(
+geom_cols_polygon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   na.rm = FALSE,
@@ -62,7 +62,7 @@ geom_v_polygon <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = v_stat(stat),
+    stat = cols_stat(stat),
     geom = GeomPolygon,
     position = position,
     show.legend = show.legend,
@@ -78,7 +78,7 @@ geom_v_polygon <- function(
 #' @export
 geom_biplot_polygon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "u",
+  .matrix = "rows",
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE

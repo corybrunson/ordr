@@ -4,17 +4,24 @@
 \alias{fortify}
 \alias{fortify.tbl_ord}
 \alias{fortify_coord}
-\alias{fortify_u}
-\alias{fortify_v}
+\alias{fortify_rows}
+\alias{fortify_cols}
 \title{Fortify a tbl_ord for plotting}
 \usage{
-\method{fortify}{tbl_ord}(model, data, ..., .matrix = "uv", .supplement = TRUE, include = "all")
+\method{fortify}{tbl_ord}(
+  model,
+  data,
+  ...,
+  .matrix = "dims",
+  .supplement = TRUE,
+  include = "all"
+)
 
 fortify_coord(model)
 
-fortify_u(model, include = "all")
+fortify_rows(model, include = "all")
 
-fortify_v(model, include = "all")
+fortify_cols(model, include = "all")
 }
 \arguments{
 \item{model}{A '\link{tbl_ord}' object.}
@@ -25,7 +32,7 @@ fortify_v(model, include = "all")
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
+standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 
 \item{.supplement}{Logical; whether to include
 \link[=supplementation]{supplementary} points.}
@@ -63,8 +70,8 @@ pca <- confer_inertia(pca, "symmetric")
 # fortify a 'tbl_ord' object
 fortify(pca)
 # scores or loadings plots using `ggplot()`
-ggplot(pca, aes(x = PC1, y = PC2), .matrix = "u") + geom_point()
-ggplot(pca, aes(x = PC1, y = PC2), .matrix = "v") + geom_point()
+ggplot(pca, aes(x = PC1, y = PC2), .matrix = "rows") + geom_point()
+ggplot(pca, aes(x = PC1, y = PC2), .matrix = "cols") + geom_point()
 # biplot using `ggplot()`
 ggplot(pca, aes(x = PC1, y = PC2)) + geom_point(aes(color = .matrix))
 # fortify to coordinates & scree plot using `ggplot()`
@@ -74,18 +81,18 @@ ggplot(pca, .matrix = "coord", aes(x = .name, y = .sdev^2)) +
 ggplot(pca, .matrix = "coord", aes(x = .name, y = .prop_var)) +
   geom_bar(stat = "identity")
 # `fortify()` being called internally by `ggbiplot()`
-ggbiplot(pca) + geom_v_vector() + geom_u_point()
+ggbiplot(pca) + geom_cols_vector() + geom_rows_point()
 # Linear discriminant analysis of Reaven & Miller diabetes data
 head(heplots::Diabetes)
 diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes)
 print(diabetes_lda)
 as_tbl_ord(diabetes_lda) \%>\%
   augment() \%>\%
-  mutate_u(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
+  mutate_rows(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
   print() -> diabetes_lda
 ggbiplot(diabetes_lda) +
   theme_bw() +
-  geom_u_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
-  geom_v_axis(color = "#888888") +
+  geom_rows_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
+  geom_cols_axis(color = "#888888") +
   ggtitle("Column-standardized LDA biplot of Reaven & Miller diabetes data")
 }

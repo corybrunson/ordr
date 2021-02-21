@@ -19,18 +19,18 @@ bioenv[, ycols] %>%
   chidist() %>%
   cmdscale_ord() %>%
   as_tbl_ord() %>%
-  mutate_u(.name = bioenv$site) %>%
+  mutate_rows(.name = bioenv$site) %>%
   print() -> bioenv_cmds
 # regress species relative frequencies on principal coordinates
 bioenv[, ycols] %>%
   sweep(1, 1 / rowSums(bioenv[, ycols]), "*") %>%
   sweep(2, sqrt(sum(bioenv[, ycols]) / colSums(bioenv[, ycols])), "*") %>%
   as.matrix() -> bioenv_relfreq
-lm(bioenv_relfreq ~ get_u(bioenv_cmds)) %>%
+lm(bioenv_relfreq ~ get_rows(bioenv_cmds)) %>%
   as_tbl_ord() %>%
   print() -> bioenv_lm
 # biplot of species with regression vectors onto principal coordinates
 ggbiplot(bioenv_cmds, aes(label = .name)) +
-  geom_u_text(color = "seagreen") +
-  geom_v_vector(data = bioenv_lm, color = "darkred") +
-  geom_v_text_repel(data = bioenv_lm)
+  geom_rows_text(color = "seagreen") +
+  geom_cols_vector(data = bioenv_lm, color = "darkred") +
+  geom_cols_text_repel(data = bioenv_lm)

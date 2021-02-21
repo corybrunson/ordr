@@ -3,25 +3,25 @@
 \name{methods-kmeans}
 \alias{methods-kmeans}
 \alias{as_tbl_ord.kmeans}
-\alias{recover_u.kmeans}
-\alias{recover_v.kmeans}
+\alias{recover_rows.kmeans}
+\alias{recover_cols.kmeans}
 \alias{recover_coord.kmeans}
-\alias{augmentation_u.kmeans}
-\alias{augmentation_v.kmeans}
+\alias{augmentation_rows.kmeans}
+\alias{augmentation_cols.kmeans}
 \alias{augmentation_coord.kmeans}
 \title{Functionality for k-means clustering ('kmeans') objects}
 \usage{
 \method{as_tbl_ord}{kmeans}(x)
 
-\method{recover_u}{kmeans}(x)
+\method{recover_rows}{kmeans}(x)
 
-\method{recover_v}{kmeans}(x)
+\method{recover_cols}{kmeans}(x)
 
 \method{recover_coord}{kmeans}(x)
 
-\method{augmentation_u}{kmeans}(x)
+\method{augmentation_rows}{kmeans}(x)
 
-\method{augmentation_v}{kmeans}(x)
+\method{augmentation_cols}{kmeans}(x)
 
 \method{augmentation_coord}{kmeans}(x)
 }
@@ -47,10 +47,10 @@ mtcars_kmeans \%>\%
 # discriminate between clusters 1 and 2
 mtcars_kmeans \%>\%
   ggbiplot(color = factor(.cluster)) +
-  geom_jitter(stat = "u", aes(shape = .cluster), width = .2, height = .2) +
-  geom_v_vector(aes(color = `3`)) +
+  geom_jitter(stat = "rows", aes(shape = .cluster), width = .2, height = .2) +
+  geom_cols_vector(aes(color = `3`)) +
   scale_color_distiller(type = "div", limits = c(-1, 1)) +
-  geom_v_text_radiate(aes(label = .name)) +
+  geom_cols_text_radiate(aes(label = .name)) +
   ggtitle(
     "Performance and design variable loadings onto clusters 1 and 2",
     "Color indicates loadings onto cluster 3"

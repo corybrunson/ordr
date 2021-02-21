@@ -15,24 +15,24 @@ NULL
 #' @rdname biplot-matrix
 #' @usage NULL
 #' @export
-StatU <- ggproto(
-  "StatU", StatIdentity,
+StatRows <- ggproto(
+  "StatRows", StatIdentity,
   
-  setup_data = setup_u_data
+  setup_data = setup_rows_data
 )
 
 #' @rdname biplot-matrix
 #' @usage NULL
 #' @export
-StatV <- ggproto(
-  "StatV", StatIdentity,
+StatCols <- ggproto(
+  "StatCols", StatIdentity,
   
-  setup_data = setup_v_data
+  setup_data = setup_cols_data
 )
 
 #' @rdname biplot-matrix
 #' @export
-stat_u <- function(
+stat_rows <- function(
   mapping = NULL, data = data,
   geom = "point", position = "identity",
   ...,
@@ -41,7 +41,7 @@ stat_u <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = "u",
+    stat = "rows",
     geom = geom,
     position = position,
     show.legend = show.legend,
@@ -55,7 +55,7 @@ stat_u <- function(
 
 #' @rdname biplot-matrix
 #' @export
-stat_v <- function(
+stat_cols <- function(
   mapping = NULL, data = data,
   geom = "axis", position = "identity",
   ...,
@@ -64,7 +64,7 @@ stat_v <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = "v",
+    stat = "cols",
     geom = geom,
     position = position,
     show.legend = show.legend,

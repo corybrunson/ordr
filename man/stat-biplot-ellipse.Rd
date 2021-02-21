@@ -3,18 +3,18 @@
 \docType{data}
 \name{stat-biplot-ellipse}
 \alias{stat-biplot-ellipse}
-\alias{StatUEllipse}
-\alias{StatVEllipse}
-\alias{stat_u_ellipse}
-\alias{stat_v_ellipse}
+\alias{StatRowsEllipse}
+\alias{StatColsEllipse}
+\alias{stat_rows_ellipse}
+\alias{stat_cols_ellipse}
 \title{Compute normal confidence ellipses for ordination factors}
 \format{
-An object of class \code{StatUEllipse} (inherits from \code{StatEllipse}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+An object of class \code{StatRowsEllipse} (inherits from \code{StatEllipse}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
 
-An object of class \code{StatVEllipse} (inherits from \code{StatEllipse}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
+An object of class \code{StatColsEllipse} (inherits from \code{StatEllipse}, \code{Stat}, \code{ggproto}, \code{gg}) of length 2.
 }
 \usage{
-stat_u_ellipse(
+stat_rows_ellipse(
   mapping = NULL,
   data = NULL,
   geom = "path",
@@ -27,7 +27,7 @@ stat_u_ellipse(
   segments = 51
 )
 
-stat_v_ellipse(
+stat_cols_ellipse(
   mapping = NULL,
   data = NULL,
   geom = "path",
@@ -98,14 +98,14 @@ These ordination stats are adapted from
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
-frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
-variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
-the data frame to one of these two.
+frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
+variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
+filter the data frame to one of these two.
 
-The geom layers \verb{geom_u_*()} and \verb{geom_v_*()} call the corresponding stat in
-order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \verb{geom_biplot_*()} selects a default matrix based on common practice,
-e.g. \eqn{U} for points and \eqn{V} for arrows.
+The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.
 }
 
 \examples{
@@ -114,16 +114,16 @@ iris[, -5] \%>\%
   prcomp(scale = TRUE) \%>\%
   as_tbl_ord() \%>\%
   confer_inertia(1) \%>\%
-  mutate_u(species = iris$Species) \%>\%
+  mutate_rows(species = iris$Species) \%>\%
   print() -> iris_pca
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_point(alpha = .5) +
-  stat_u_center(fun.center = "mean", size = 3, shape = "triangle") +
-  stat_u_ellipse(level = .99) +
-  geom_v_vector(color = "#444444") +
+  geom_rows_point(alpha = .5) +
+  stat_rows_center(fun.center = "mean", size = 3, shape = "triangle") +
+  stat_rows_ellipse(level = .99) +
+  geom_cols_vector(color = "#444444") +
   ggtitle(
     "Row-principal PCA biplot of Anderson iris data",
     "Overlaid with centroids and 99\% confidence ellipses"
@@ -131,13 +131,13 @@ iris_pca \%>\%
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
-  geom_u_point() +
-  stat_u_center(fun.center = "mean", size = 3, shape = 1) +
+  geom_rows_point() +
+  stat_rows_center(fun.center = "mean", size = 3, shape = 1) +
   geom_polygon(
     aes(fill = species),
-    color = NA, alpha = .25, stat = "u_ellipse"
+    color = NA, alpha = .25, stat = "rows_ellipse"
   ) +
-  geom_v_vector(color = "#444444") +
+  geom_cols_vector(color = "#444444") +
   scale_color_brewer(
     type = "qual", palette = 2,
     aesthetics = c("color", "fill")

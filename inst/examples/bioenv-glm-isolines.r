@@ -11,10 +11,10 @@ bioenv %>%
 bioenv_pois %>%
   ggbiplot(aes(x = x, y = y, intercept = `(Intercept)`, label = .name)) +
   theme_bw() +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_radiate(color = "brown4") +
-  geom_v_isolines(family = poisson(), by = 2)
+  geom_rows_text(color = "darkgreen") +
+  geom_cols_vector(color = "brown4") +
+  geom_cols_text_radiate(color = "brown4") +
+  geom_cols_isolines(family = poisson(), by = 2)
 # Adapt (3.4) and Exhibit 3.6 in Greenacre (2010)
 bioenv %>%
   dplyr::mutate_at(dplyr::vars(a:e), as.logical) %>%
@@ -28,7 +28,7 @@ bioenv %>%
 bioenv_bin %>%
   ggbiplot(aes(x = x, y = y, intercept = `(Intercept)`, label = .name)) +
   theme_bw() +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_radiate(color = "brown4") +
-  geom_v_isolines(family = binomial(), by = .05)
+  geom_rows_text(color = "darkgreen") +
+  geom_cols_vector(color = "brown4") +
+  geom_cols_text_radiate(color = "brown4") +
+  geom_cols_isolines(family = binomial(), by = .05)

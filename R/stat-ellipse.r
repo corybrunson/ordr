@@ -15,24 +15,24 @@ NULL
 #' @rdname stat-biplot-ellipse
 #' @usage NULL
 #' @export
-StatUEllipse <- ggproto(
-  "StatUEllipse", StatEllipse,
+StatRowsEllipse <- ggproto(
+  "StatRowsEllipse", StatEllipse,
   
-  setup_data = setup_u_data
+  setup_data = setup_rows_data
 )
 
 #' @rdname stat-biplot-ellipse
 #' @usage NULL
 #' @export
-StatVEllipse <- ggproto(
-  "StatVEllipse", StatEllipse,
+StatColsEllipse <- ggproto(
+  "StatColsEllipse", StatEllipse,
   
-  setup_data = setup_v_data
+  setup_data = setup_cols_data
 )
 
 #' @rdname stat-biplot-ellipse
 #' @export
-stat_u_ellipse <- function(
+stat_rows_ellipse <- function(
   mapping = NULL, data = NULL, geom = "path", position = "identity",
   show.legend = NA,
   inherit.aes = TRUE,
@@ -44,7 +44,7 @@ stat_u_ellipse <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = StatUEllipse,
+    stat = StatRowsEllipse,
     geom = geom, 
     position = position,
     show.legend = show.legend,
@@ -61,7 +61,7 @@ stat_u_ellipse <- function(
 
 #' @rdname stat-biplot-ellipse
 #' @export
-stat_v_ellipse <- function(
+stat_cols_ellipse <- function(
   mapping = NULL, data = NULL, geom = "path", position = "identity",
   show.legend = NA,
   inherit.aes = TRUE,
@@ -73,7 +73,7 @@ stat_v_ellipse <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = StatVEllipse,
+    stat = StatColsEllipse,
     geom = geom, 
     position = position,
     show.legend = show.legend,

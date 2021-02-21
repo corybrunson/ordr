@@ -2,12 +2,12 @@
 % Please edit documentation in R/geom-path.r
 \name{geom-biplot-path}
 \alias{geom-biplot-path}
-\alias{geom_u_path}
-\alias{geom_v_path}
+\alias{geom_rows_path}
+\alias{geom_cols_path}
 \alias{geom_biplot_path}
 \title{Render piecewise-linear paths through ordinates}
 \usage{
-geom_u_path(
+geom_rows_path(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -18,7 +18,7 @@ geom_u_path(
   inherit.aes = TRUE
 )
 
-geom_v_path(
+geom_cols_path(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -34,7 +34,7 @@ geom_biplot_path(
   data = NULL,
   stat = "identity",
   position = "identity",
-  .matrix = "u",
+  .matrix = "rows",
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -85,7 +85,7 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
+standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 }
 \description{
 \verb{geom_*_path()} renders line segments through consecutive pairs
@@ -94,14 +94,14 @@ of case or variable positions.
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
-frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
-variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
-the data frame to one of these two.
+frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
+variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
+filter the data frame to one of these two.
 
-The geom layers \verb{geom_u_*()} and \verb{geom_v_*()} call the corresponding stat in
-order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \verb{geom_biplot_*()} selects a default matrix based on common practice,
-e.g. \eqn{U} for points and \eqn{V} for arrows.
+The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.
 }
 
 \section{Aesthetics}{

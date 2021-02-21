@@ -12,10 +12,10 @@ mtcars_kmeans %>%
 # discriminate between clusters 1 and 2
 mtcars_kmeans %>%
   ggbiplot(color = factor(.cluster)) +
-  geom_jitter(stat = "u", aes(shape = .cluster), width = .2, height = .2) +
-  geom_v_vector(aes(color = `3`)) +
+  geom_jitter(stat = "rows", aes(shape = .cluster), width = .2, height = .2) +
+  geom_cols_vector(aes(color = `3`)) +
   scale_color_distiller(type = "div", limits = c(-1, 1)) +
-  geom_v_text_radiate(aes(label = .name)) +
+  geom_cols_text_radiate(aes(label = .name)) +
   ggtitle(
     "Performance and design variable loadings onto clusters 1 and 2",
     "Color indicates loadings onto cluster 3"

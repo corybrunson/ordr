@@ -5,8 +5,8 @@
 \alias{geom-biplot-vector}
 \alias{GeomVector}
 \alias{geom_vector}
-\alias{geom_u_vector}
-\alias{geom_v_vector}
+\alias{geom_rows_vector}
+\alias{geom_cols_vector}
 \alias{geom_biplot_vector}
 \title{Render vectors from origin to ordinates}
 \format{
@@ -25,7 +25,7 @@ geom_vector(
   inherit.aes = TRUE
 )
 
-geom_u_vector(
+geom_rows_vector(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -37,7 +37,7 @@ geom_u_vector(
   inherit.aes = TRUE
 )
 
-geom_v_vector(
+geom_cols_vector(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -54,7 +54,7 @@ geom_biplot_vector(
   data = NULL,
   stat = "identity",
   position = "identity",
-  .matrix = "v",
+  .matrix = "cols",
   arrow = default_arrow,
   ...,
   na.rm = FALSE,
@@ -109,7 +109,7 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
+standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 }
 \description{
 \verb{geom_*_vector()} renders arrows from the origin to the position
@@ -118,14 +118,14 @@ of each case or variable.
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
-frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
-variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
-the data frame to one of these two.
+frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
+variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
+filter the data frame to one of these two.
 
-The geom layers \verb{geom_u_*()} and \verb{geom_v_*()} call the corresponding stat in
-order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \verb{geom_biplot_*()} selects a default matrix based on common practice,
-e.g. \eqn{U} for points and \eqn{V} for arrows.
+The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.
 }
 
 \section{Aesthetics}{
@@ -149,15 +149,15 @@ iris[, -5] \%>\%
   prcomp(scale = TRUE) \%>\%
   as_tbl_ord() \%>\%
   confer_inertia(1) \%>\%
-  mutate_u(species = iris$Species) \%>\%
+  mutate_rows(species = iris$Species) \%>\%
   print() -> iris_pca
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_lineranges(fun.data = mean_sdl, size = .75) +
-  geom_u_point(alpha = .5) +
-  geom_v_vector(color = "#444444") +
+  geom_rows_lineranges(fun.data = mean_sdl, size = .75) +
+  geom_rows_point(alpha = .5) +
+  geom_cols_vector(color = "#444444") +
   ggtitle(
     "Row-principal PCA biplot of Anderson iris data",
     "Ranges 2 sample standard deviations from centroids"
@@ -166,12 +166,12 @@ iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_lineranges(
+  geom_rows_lineranges(
     fun.data = mean_cl_boot, fun.args = list(conf.int = .99),
     size = .75
   ) +
-  geom_u_point(alpha = .5) +
-  geom_v_vector(color = "#444444") +
+  geom_rows_point(alpha = .5) +
+  geom_cols_vector(color = "#444444") +
   ggtitle(
     "Row-principal PCA biplot of Anderson iris data",
     "99\% confidence intervals based on nonparametric bootstrap sampling"
@@ -188,21 +188,21 @@ country_differences \%>\%
   print() -> differences_pca
 # negate PCA cases to MDS coordinates
 differences_cmds \%>\%
-  negate_to(differences_pca, "u") \%>\%
-  print() -> differences_align_u
+  negate_to(differences_pca, "rows") \%>\%
+  print() -> differences_align_rows
 plot(gridExtra::arrangeGrob(grobs = list(
-  ggbiplot(differences_cmds) + geom_u_point(),
-  ggbiplot(differences_pca) + geom_u_point(),
-  ggbiplot(differences_align_u) + geom_u_point()
+  ggbiplot(differences_cmds) + geom_rows_point(),
+  ggbiplot(differences_pca) + geom_rows_point(),
+  ggbiplot(differences_align_rows) + geom_rows_point()
 ), ncol = 3))
 # negate PCA variables to MDS coordinates
 differences_cmds \%>\%
-  negate_to(differences_pca, "v") \%>\%
-  print() -> differences_align_v
+  negate_to(differences_pca, "cols") \%>\%
+  print() -> differences_align_cols
 plot(gridExtra::arrangeGrob(grobs = list(
-  ggbiplot(differences_cmds) + geom_v_vector(),
-  ggbiplot(differences_pca) + geom_v_vector(),
-  ggbiplot(differences_align_v) + geom_v_vector()
+  ggbiplot(differences_cmds) + geom_cols_vector(),
+  ggbiplot(differences_pca) + geom_cols_vector(),
+  ggbiplot(differences_align_cols) + geom_cols_vector()
 ), ncol = 3))
 }
 \keyword{datasets}

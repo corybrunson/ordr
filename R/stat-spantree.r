@@ -109,24 +109,24 @@ stat_spantree <- function(
 #' @rdname stat-biplot-spantree
 #' @usage NULL
 #' @export
-StatUSpantree <- ggproto(
-  "StatUSpantree", StatSpantree,
+StatRowsSpantree <- ggproto(
+  "StatRowsSpantree", StatSpantree,
   
-  setup_data = setup_u_data
+  setup_data = setup_rows_data
 )
 
 #' @rdname stat-biplot-spantree
 #' @usage NULL
 #' @export
-StatVSpantree <- ggproto(
-  "StatVSpantree", StatSpantree,
+StatColsSpantree <- ggproto(
+  "StatColsSpantree", StatSpantree,
   
-  setup_data = setup_v_data
+  setup_data = setup_cols_data
 )
 
 #' @rdname stat-biplot-spantree
 #' @export
-stat_u_spantree <- function(
+stat_rows_spantree <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
   method = "euclidean",
   show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
@@ -135,7 +135,7 @@ stat_u_spantree <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = StatUSpantree,
+    stat = StatRowsSpantree,
     geom = geom, 
     position = position,
     show.legend = show.legend,
@@ -151,7 +151,7 @@ stat_u_spantree <- function(
 
 #' @rdname stat-biplot-spantree
 #' @export
-stat_v_spantree <- function(
+stat_cols_spantree <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
   method = "euclidean",
   show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
@@ -160,7 +160,7 @@ stat_v_spantree <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = StatVSpantree,
+    stat = StatColsSpantree,
     geom = geom, 
     position = position,
     show.legend = show.legend,

@@ -31,31 +31,31 @@
 format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
   # raw components and parameters
-  uv <- get_factor(x, .matrix = "uv", align = TRUE)
-  n_uv <- sapply(uv, nrow)
+  dims <- get_factor(x, .matrix = "dims", align = TRUE)
+  n_dims <- sapply(dims, nrow)
   coord <- get_coord(x, align = TRUE)
   rk <- length(coord)
-  uv_ann <- mapply(
+  dims_ann <- mapply(
     bind_cols,
-    annotation_factor(x, .matrix = "uv"),
-    #augmentation_factor(x, .matrix = "uv"),
+    annotation_factor(x, .matrix = "dims"),
+    #augmentation_factor(x, .matrix = "dims"),
     SIMPLIFY = FALSE
   )
-  names(uv_ann) <- c("u", "v")
-  n_ann <- sapply(uv_ann, ncol)
+  names(dims_ann) <- c("rows", "cols")
+  n_ann <- sapply(dims_ann, ncol)
   if (is.null(n)) {
     n <- ifelse(
-      n_uv > tbl_ord_opt("print_max"),
+      n_dims > tbl_ord_opt("print_max"),
       tbl_ord_opt("print_min"),
-      n_uv
+      n_dims
     )
   }
   width <- width %||% tbl_ord_opt("width") %||% getOption("width")
-  #uv_extra <- rep(
+  #dims_extra <- rep(
   #  n_extra %||% tbl_ord_opt("max_extra_cols"),
   #  length.out = 2
   #)
-  #names(uv_extra) <- c("u", "v")
+  #names(dims_extra) <- c("rows", "cols")
   
   # headers!
   prev_class <- setdiff(class(x), "tbl_ord")[1]
@@ -64,7 +64,7 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     if (!is.null(prev_class) && prev_class != "list") {
       paste0(" of class '", prev_class, "'")
     },
-    ": (", n_uv[1], " x ", rk, ") x (", n_uv[2], " x ", rk, ")'"
+    ": (", n_dims[1], " x ", rk, ") x (", n_dims[2], " x ", rk, ")'"
   )
   coord_header <- paste0(
     "# ", rk,
@@ -73,70 +73,70 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     ": ",
     print_reps(coord)
   )
-  supp_header <- if (! is.null(attr(x, "u_supplement")) |
-                     ! is.null(attr(x, "u_supplement"))) {
+  supp_header <- if (! is.null(attr(x, "rows_supplement")) |
+                     ! is.null(attr(x, "rows_supplement"))) {
     paste0(
       "# ",
-      if (! is.null(attr(x, "u_supplement"))) {
-        paste0(nrow(attr(x, "u_supplement")), " supplementary rows")
+      if (! is.null(attr(x, "rows_supplement"))) {
+        paste0(nrow(attr(x, "rows_supplement")), " supplementary rows")
       },
-      if (! is.null(attr(x, "u_supplement")) &
-          ! is.null(attr(x, "v_supplement"))) {
+      if (! is.null(attr(x, "rows_supplement")) &
+          ! is.null(attr(x, "cols_supplement"))) {
         " and "
       },
-      if (! is.null(attr(x, "v_supplement"))) {
-        paste0(nrow(attr(x, "v_supplement")), " supplementary columns")
+      if (! is.null(attr(x, "cols_supplement"))) {
+        paste0(nrow(attr(x, "cols_supplement")), " supplementary columns")
       }
     )
   } else NULL
-  uv_headers <- paste0(
-    "# ", c("U", "V"),
-    ": [ ", n_uv, " x ", rk, " | ", n_ann, " ]"
+  dims_headers <- paste0(
+    "# ", c("Rows", "Columns"),
+    ": [ ", n_dims, " x ", rk, " | ", n_ann, " ]"
   )
-  names(uv_headers) <- c("u", "v")
+  names(dims_headers) <- c("rows", "cols")
   
-  # format U and V separately
+  # format rows and columns separately
   # (should format together, then split, in order to sync coordinates)
-  fmt_coord_u <- format(
-    as_tibble(uv$u)[1:n[1], 1:min(rk, 3), drop = FALSE],
+  fmt_coord_rows <- format(
+    as_tibble(dims$rows)[1:n[1], 1:min(rk, 3), drop = FALSE],
     n = n[1], width = width / 2
   )
-  fmt_coord_v <- format(
-    as_tibble(uv$v)[1:n[2], 1:min(rk, 3), drop = FALSE],
+  fmt_coord_cols <- format(
+    as_tibble(dims$cols)[1:n[2], 1:min(rk, 3), drop = FALSE],
     n = n[2], width = width / 2
   )
   fmt_coord <- list(
-    u = unname(c(
-      uv_headers["u"],
-      fmt_coord_u[2],
-      stringr::str_pad("", nchar(fmt_coord_u[2])),
-      fmt_coord_u[4:length(fmt_coord_u)]
+    rows = unname(c(
+      dims_headers["rows"],
+      fmt_coord_rows[2],
+      stringr::str_pad("", nchar(fmt_coord_rows[2])),
+      fmt_coord_rows[4:length(fmt_coord_rows)]
     )),
-    v = unname(c(
-      uv_headers["v"],
-      fmt_coord_v[2],
-      stringr::str_pad("", nchar(fmt_coord_v[2])),
-      fmt_coord_v[4:length(fmt_coord_v)]
+    cols = unname(c(
+      dims_headers["cols"],
+      fmt_coord_cols[2],
+      stringr::str_pad("", nchar(fmt_coord_cols[2])),
+      fmt_coord_cols[4:length(fmt_coord_cols)]
     ))
   )
   
   # footers?
-  uv_footers <- n_uv - n > 0
+  dims_footers <- n_dims - n > 0
   fmt_ann <- lapply(1:2, function(i) {
-    if (ncol(uv_ann[[i]]) == 0) return("")
+    if (ncol(dims_ann[[i]]) == 0) return("")
     # dodge `format.pillar_shaft_decimal()` errors
     wid_try <- (width - 7) / 2
     fmt_try <- try(
-      c("", format(uv_ann[[i]], n = n[i], width = wid_try)[-1]),
+      c("", format(dims_ann[[i]], n = n[i], width = wid_try)[-1]),
       silent = TRUE
     )
     while (class(fmt_try) == "try-error") {
       wid_try <- wid_try - 1
-      fmt_try <- c("", format(uv_ann[[i]], n = n[i], width = wid_try)[-1])
+      fmt_try <- c("", format(dims_ann[[i]], n = n[i], width = wid_try)[-1])
     }
     fmt_try
   })
-  names(fmt_ann) <- c("u", "v")
+  names(fmt_ann) <- c("rows", "cols")
   
   # separate coordinates from annotations
   seps <- if (rk > 3) c("    ", " ...") else c("", "")
@@ -154,12 +154,12 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
   # paste together, with attention to footers
   for (i in 1:2) {
-    if (uv_footers[i]) {
+    if (dims_footers[i]) {
       fmt_coord[[i]] <- c(fmt_coord[[i]], "")
       fmt_seps[[i]] <- c(fmt_seps[[i]], "")
     }
   }
-  fmt_uv <- mapply(
+  fmt_dims <- mapply(
     paste0,
     fmt_coord, fmt_seps, fmt_ann,
     SIMPLIFY = FALSE
@@ -169,7 +169,7 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     tbl_ord_header,
     coord_header,
     supp_header,
-    "# ", fmt_uv[[1]], "# ", fmt_uv[[2]]
+    "# ", fmt_dims[[1]], "# ", fmt_dims[[2]]
   )
 }
 

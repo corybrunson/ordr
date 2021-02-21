@@ -5,8 +5,8 @@
 \alias{geom-biplot-axis}
 \alias{GeomAxis}
 \alias{geom_axis}
-\alias{geom_u_axis}
-\alias{geom_v_axis}
+\alias{geom_rows_axis}
+\alias{geom_cols_axis}
 \alias{geom_biplot_axis}
 \title{Render axes through origin}
 \format{
@@ -24,7 +24,7 @@ geom_axis(
   inherit.aes = TRUE
 )
 
-geom_u_axis(
+geom_rows_axis(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -35,7 +35,7 @@ geom_u_axis(
   inherit.aes = TRUE
 )
 
-geom_v_axis(
+geom_cols_axis(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -102,7 +102,7 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
+standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 }
 \description{
 \verb{geom_*_axis()} renders lines through the origin and the
@@ -111,14 +111,14 @@ position of each case or variable.
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
-frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
-variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
-the data frame to one of these two.
+frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
+variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
+filter the data frame to one of these two.
 
-The geom layers \verb{geom_u_*()} and \verb{geom_v_*()} call the corresponding stat in
-order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \verb{geom_biplot_*()} selects a default matrix based on common practice,
-e.g. \eqn{U} for points and \eqn{V} for arrows.
+The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.
 }
 
 \section{Aesthetics}{
@@ -143,14 +143,14 @@ diabetes_custom_biplot <- function(axes.scale) {
     as_tbl_ord() \%>\%
     augment() \%>\%
     print() \%T>\%
-    mutate_u(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
+    mutate_rows(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
     confer_inertia("symmetric") \%>\%
     ggbiplot(.supplement = FALSE) +
     theme_bw() +
-    geom_u_point(aes(shape = .grouping)) +
-    geom_v_axis(color = "#888888") +
-    geom_v_axis_ticks() +
-    geom_v_axis_text(size = 2.5, label_dodge = .025) +
+    geom_rows_point(aes(shape = .grouping)) +
+    geom_cols_axis(color = "#888888") +
+    geom_cols_axis_ticks() +
+    geom_cols_axis_text(size = 2.5, label_dodge = .025) +
     ggtitle("Symmetric LDA biplot of Reaven & Miller diabetes data")
 }
 diabetes_custom_biplot("unstandardized")

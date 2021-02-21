@@ -2,12 +2,12 @@
 % Please edit documentation in R/geom-polygon.r
 \name{geom-biplot-polygon}
 \alias{geom-biplot-polygon}
-\alias{geom_u_polygon}
-\alias{geom_v_polygon}
+\alias{geom_rows_polygon}
+\alias{geom_cols_polygon}
 \alias{geom_biplot_polygon}
 \title{Render polygons around ordinates}
 \usage{
-geom_u_polygon(
+geom_rows_polygon(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -18,7 +18,7 @@ geom_u_polygon(
   inherit.aes = TRUE
 )
 
-geom_v_polygon(
+geom_cols_polygon(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -34,7 +34,7 @@ geom_biplot_polygon(
   data = NULL,
   stat = "identity",
   position = "identity",
-  .matrix = "u",
+  .matrix = "rows",
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -85,7 +85,7 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
+standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 }
 \description{
 \verb{geom_*_polygon()} renders polygons around the convex hulls of
@@ -94,14 +94,14 @@ the positions of the subjects or vectors.
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
-frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
-variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
-the data frame to one of these two.
+frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
+variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
+filter the data frame to one of these two.
 
-The geom layers \verb{geom_u_*()} and \verb{geom_v_*()} call the corresponding stat in
-order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \verb{geom_biplot_*()} selects a default matrix based on common practice,
-e.g. \eqn{U} for points and \eqn{V} for arrows.
+The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.
 }
 
 \section{Aesthetics}{
@@ -134,19 +134,19 @@ USArrests \%>\%
 arrests_lra \%>\%
   as_tbl_ord() \%>\%
   augment() \%>\%
-  left_join_u(state, by = ".name") \%>\%
+  left_join_rows(state, by = ".name") \%>\%
   print() -> arrests_lra
 # Adapt Exhibit 7.1 in Greenacre (2010)
 arrests_lra \%>\%
   confer_inertia(1) \%>\%
   ggbiplot(sec.axes = "v", scale.factor = 1/20) +
   theme_bw() +
-  geom_u_text(
+  geom_rows_text(
     aes(label = .abb),
     size = 3, color = "darkgreen", alpha = .5
   ) +
-  geom_v_polygon(fill = NA, linetype = "dashed", color = "brown4") +
-  geom_v_text(
+  geom_cols_polygon(fill = NA, linetype = "dashed", color = "brown4") +
+  geom_cols_text(
     aes(label = .name),
     color = "brown4", fontface = "bold"
   ) +

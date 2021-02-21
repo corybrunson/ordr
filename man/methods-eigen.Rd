@@ -3,21 +3,21 @@
 \name{methods-eigen}
 \alias{methods-eigen}
 \alias{as_tbl_ord.eigen_ord}
-\alias{recover_u.eigen_ord}
-\alias{recover_v.eigen_ord}
+\alias{recover_rows.eigen_ord}
+\alias{recover_cols.eigen_ord}
 \alias{recover_inertia.eigen_ord}
 \alias{recover_coord.eigen_ord}
 \alias{recover_conference.eigen_ord}
-\alias{augmentation_u.eigen_ord}
-\alias{augmentation_v.eigen_ord}
+\alias{augmentation_rows.eigen_ord}
+\alias{augmentation_cols.eigen_ord}
 \alias{augmentation_coord.eigen_ord}
 \title{Functionality for eigendecompositions}
 \usage{
 \method{as_tbl_ord}{eigen_ord}(x)
 
-\method{recover_u}{eigen_ord}(x)
+\method{recover_rows}{eigen_ord}(x)
 
-\method{recover_v}{eigen_ord}(x)
+\method{recover_cols}{eigen_ord}(x)
 
 \method{recover_inertia}{eigen_ord}(x)
 
@@ -25,9 +25,9 @@
 
 \method{recover_conference}{eigen_ord}(x)
 
-\method{augmentation_u}{eigen_ord}(x)
+\method{augmentation_rows}{eigen_ord}(x)
 
-\method{augmentation_v}{eigen_ord}(x)
+\method{augmentation_cols}{eigen_ord}(x)
 
 \method{augmentation_coord}{eigen_ord}(x)
 }
@@ -53,7 +53,7 @@ karate_eigen_cent <- igraph::eigen_centrality(karate)
 karate \%>\%
   igraph::as_adjacency_matrix(sparse = FALSE) \%>\%
   eigen_ord() \%>\% as_tbl_ord() \%>\%
-  mutate_u(
+  mutate_rows(
     faction = igraph::vertex_attr(karate, "Faction"),
     name = igraph::vertex_attr(karate, "name"),
     label = igraph::vertex_attr(karate, "label")
@@ -71,8 +71,8 @@ tibble::tibble(
 karate_eigen \%>\%
   confer_inertia(1) \%>\%
   ggbiplot(aes(x = 2, y = 1)) +
-  geom_u_vector(aes(color = as.factor(faction))) +
-  geom_u_text_radiate(aes(label = ifelse(grepl("H|A", label), label, NA))) +
+  geom_rows_vector(aes(color = as.factor(faction))) +
+  geom_rows_text_radiate(aes(label = ifelse(grepl("H|A", label), label, NA))) +
   guides(color = FALSE) +
   labs(x = "algebraic connectivity", y = "eigencentrality") +
   ggtitle(
@@ -85,8 +85,8 @@ karate_eigen \%>\%
   ggbiplot(aes(x = 2, y = 3)) +
   scale_x_continuous(expand = expand_scale(mult = .3)) +
   scale_y_continuous(expand = expand_scale(mult = .2)) +
-  geom_u_vector(aes(color = EV1)) +
-  geom_u_text_radiate(stat = "chull", aes(label = label)) +
+  geom_rows_vector(aes(color = EV1)) +
+  geom_rows_text_radiate(stat = "chull", aes(label = label)) +
   labs(x = "algebraic connectivity", y = "loading onto third eigenvector") +
   ggtitle(
     "Second (horizontal) and third (vertical) eigencentralities",
