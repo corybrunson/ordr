@@ -39,13 +39,13 @@ recover_factor(x, .matrix)
 
 \method{recover_cols}{data.frame}(x)
 
-get_rows(x, .supplement = TRUE, align = TRUE)
+get_rows(x, .supplement = TRUE)
 
-get_cols(x, .supplement = TRUE, align = TRUE)
+get_cols(x, .supplement = TRUE)
 
-get_factor(x, .matrix, .supplement = TRUE, align = TRUE)
+get_factor(x, .matrix, .supplement = TRUE)
 
-\method{as.matrix}{tbl_ord}(x, ..., .matrix, .supplement = TRUE, align = TRUE)
+\method{as.matrix}{tbl_ord}(x, ..., .matrix, .supplement = TRUE)
 
 recover_inertia(x)
 
@@ -57,7 +57,7 @@ recover_coord(x)
 
 \method{recover_coord}{data.frame}(x)
 
-get_coord(x, align = TRUE)
+get_coord(x)
 
 \method{dim}{tbl_ord}(x)
 
@@ -76,9 +76,6 @@ standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 
 \item{.supplement}{Logical; whether to include}
 
-\item{align}{Logical; whether to align the matrix factors and coordinates
-according to an \code{"align"} matrix attribute.}
-
 \item{...}{Additional arguments from \code{\link[base:matrix]{base::as.matrix()}}; ignored.}
 }
 \description{
@@ -89,14 +86,14 @@ factorization underlying an ordination.
 The \verb{recover_*()} functions extract one or both of the row and column matrix
 factors that constitute the original ordination. These are interpreted as the
 case scores (rows) and the variable loadings (columns). The \verb{get_*()}
-functions optionally (and by default) apply any alignment stored as the
-\code{"align"} attribute (see \link{alignment}). Only the \verb{recover_*()} functions are
-generics that require methods for each ordination class.
+functions optionally (and by default) include any supplemental observations
+(see \link{supplementation}). Only the \verb{recover_*()} functions are generics that
+require methods for each ordination class.
 
 \code{get_coord()} retrieves the names of the coordinates shared by the matrix
-factors on which the original data were ordinated, and \code{dim.tbl_ord()}
-retrieves their number, the rank of the ordination. The outer dimensions of
-the matrix decomposition are returned by \code{dim_rows()} and \code{dim_cols()}.
+factors on which the original data were ordinated, and \code{dim()} retrieves
+their number, the rank of the ordination. The outer dimensions of the matrix
+decomposition are returned by \code{dim_rows()} and \code{dim_cols()}.
 }
 \examples{
 # Multidimensional scaling of country differences and regression of attributes

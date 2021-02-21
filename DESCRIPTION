@@ -51,7 +51,6 @@ Collate:
     'ord-accessors.r'
     'ord-augmentation.r'
     'ord-conference.r'
-    'ord-alignment.r'
     'ord-tbl.r'
     'fun-lda.r'
     'fun-lra.r'

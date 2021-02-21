@@ -173,13 +173,13 @@ Greenacre's (2010) exposition in Chapter 7.</p>
                    recipes <span class='op'>=</span> <span class='fu'>stringr</span><span class='fu'>::</span><span class='fu'><a href='https://stringr.tidyverse.org/reference/str_c.html'>str_c</a></span><span class='op'>(</span><span class='va'>recipe</span>, collapse <span class='op'>=</span> <span class='st'>" or "</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>sub_ratios</span>
-</div><div class='output co'>#&gt; <span class='message'>`summarise()` has grouped output by 'flour', 'egg'. You can override using the `.groups` argument.</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 5</span><span>
+</div><div class='output co'>#&gt; <span class='message'>`summarise()` has grouped output by 'flour', 'egg'. You can override using the `.groups` argument.</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 5</span><span>
 #&gt;   flour   egg butter chapter recipes              
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     1    1   batters pound or sponge      
-#&gt; </span><span style='color: #555555;'>2</span><span>     1     2    1   doughs  choux                
-#&gt; </span><span style='color: #555555;'>3</span><span>     2     1    0.5 batters pancake              
-#&gt; </span><span style='color: #555555;'>4</span><span>     2     1    1   batters quick bread or muffin</div><div class='input'><span class='va'>sub_ratios</span> <span class='op'>%&gt;%</span>
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     1    1   batters pound or sponge      
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     1     2    1   doughs  choux                
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     2     1    0.5 batters pancake              
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     2     1    1   batters quick bread or muffin</div><div class='input'><span class='va'>sub_ratios</span> <span class='op'>%&gt;%</span>
   <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>chapter</span>, <span class='op'>-</span><span class='va'>recipes</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>lra</span><span class='op'>(</span>compositional <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -191,18 +191,18 @@ Greenacre's (2010) exposition in Chapter 7.</p>
 #&gt; # 
 #&gt; # Rows: [ 4 x 2 | 2 ]
 #&gt;    LRSV1  LRSV2 |   chapter recipes              
-#&gt;                 |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.562</span><span>  1.04  | </span><span style='color: #555555;'>1</span><span> batters pound or sponge      
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>1.33</span><span>  -</span><span style='color: #BB0000;'>0.910</span><span> | </span><span style='color: #555555;'>2</span><span> doughs  choux                
-#&gt; </span><span style='color: #555555;'>3</span><span>  1.19  -</span><span style='color: #BB0000;'>1.08</span><span>  | </span><span style='color: #555555;'>3</span><span> batters pancake              
-#&gt; </span><span style='color: #555555;'>4</span><span>  0.700  0.954 | </span><span style='color: #555555;'>4</span><span> batters quick bread or muffin
+#&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.562</span><span>  1.04  | </span><span style='color: #BCBCBC;'>1</span><span> batters pound or sponge      
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.33</span><span>  -</span><span style='color: #BB0000;'>0.910</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> doughs  choux                
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  1.19  -</span><span style='color: #BB0000;'>1.08</span><span>  | </span><span style='color: #BCBCBC;'>3</span><span> batters pancake              
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.700  0.954 | </span><span style='color: #BCBCBC;'>4</span><span> batters quick bread or muffin
 #&gt; # 
 #&gt; # Columns: [ 3 x 2 | 1 ]
 #&gt;    LRSV1   LRSV2 |   .name 
-#&gt;                  |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> 
-#&gt; </span><span style='color: #555555;'>1</span><span>  1.19  -</span><span style='color: #BB0000;'>0.039</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span> | </span><span style='color: #555555;'>1</span><span> flour 
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.876</span><span> -</span><span style='color: #BB0000;'>1.07</span><span>   | </span><span style='color: #555555;'>2</span><span> egg   
-#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.788</span><span>  1.57   | </span><span style='color: #555555;'>3</span><span> butter</div><div class='input'><span class='va'>lra_ratios</span> <span class='op'>%&gt;%</span>
+#&gt;                  |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  1.19  -</span><span style='color: #BB0000;'>0.039</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> flour 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.876</span><span> -</span><span style='color: #BB0000;'>1.07</span><span>   | </span><span style='color: #BCBCBC;'>2</span><span> egg   
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.788</span><span>  1.57   | </span><span style='color: #BCBCBC;'>3</span><span> butter</div><div class='input'><span class='va'>lra_ratios</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='st'>"rows"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span>sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>.05</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='geom-biplot-text.html'>geom_rows_text</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>recipes</span>, color <span class='op'>=</span> <span class='va'>chapter</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
@@ -294,20 +294,20 @@ Greenacre's (2010) exposition in Chapter 7.</p>
 #&gt; # 
 #&gt; # Rows: [ 50 x 2 | 2 ]
 #&gt;    LRSV1  LRSV2 |   .name      .abb 
-#&gt;                 |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.680</span><span>  0.930 | </span><span style='color: #555555;'>1</span><span> Alabama    AL   
-#&gt; </span><span style='color: #555555;'>2</span><span>  0.930 -</span><span style='color: #BB0000;'>0.625</span><span> | </span><span style='color: #555555;'>2</span><span> Alaska     AK   
-#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.330</span><span> -</span><span style='color: #BB0000;'>1.31</span><span>  | </span><span style='color: #555555;'>3</span><span> Arizona    AZ   
-#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>0.351</span><span>  0.277 | </span><span style='color: #555555;'>4</span><span> Arkansas   AR   
-#&gt; </span><span style='color: #555555;'>5</span><span>  0.552 -</span><span style='color: #BB0000;'>1.00</span><span>  | </span><span style='color: #555555;'>5</span><span> California CA   
-#&gt; </span><span style='color: #555555;'># … with 45 more rows</span><span>
+#&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.680</span><span>  0.930 | </span><span style='color: #BCBCBC;'>1</span><span> Alabama    AL   
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.930 -</span><span style='color: #BB0000;'>0.625</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Alaska     AK   
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.330</span><span> -</span><span style='color: #BB0000;'>1.31</span><span>  | </span><span style='color: #BCBCBC;'>3</span><span> Arizona    AZ   
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.351</span><span>  0.277 | </span><span style='color: #BCBCBC;'>4</span><span> Arkansas   AR   
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.552 -</span><span style='color: #BB0000;'>1.00</span><span>  | </span><span style='color: #BCBCBC;'>5</span><span> California CA   
+#&gt; </span><span style='color: #949494;'># … with 45 more rows</span><span>
 #&gt; # 
 #&gt; # Columns: [ 3 x 2 | 1 ]
 #&gt;    LRSV1  LRSV2 |   .name  
-#&gt;                 |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
-#&gt; </span><span style='color: #555555;'>1</span><span>  0.283  4.96  | </span><span style='color: #555555;'>1</span><span> Murder 
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.371</span><span> -</span><span style='color: #BB0000;'>0.181</span><span> | </span><span style='color: #555555;'>2</span><span> Assault
-#&gt; </span><span style='color: #555555;'>3</span><span>  2.88  -</span><span style='color: #BB0000;'>0.366</span><span> | </span><span style='color: #555555;'>3</span><span> Rape   </div><div class='input'><span class='co'># Adapt Exhibit 7.1 in Greenacre (2010)</span>
+#&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.283  4.96  | </span><span style='color: #BCBCBC;'>1</span><span> Murder 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.371</span><span> -</span><span style='color: #BB0000;'>0.181</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Assault
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  2.88  -</span><span style='color: #BB0000;'>0.366</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Rape   </div><div class='input'><span class='co'># Adapt Exhibit 7.1 in Greenacre (2010)</span>
 <span class='va'>arrests_lra</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span>sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>20</span><span class='op'>)</span> <span class='op'>+</span>
@@ -349,22 +349,22 @@ Greenacre's (2010) exposition in Chapter 7.</p>
 #&gt; # 
 #&gt; # Rows: [ 50 x 5 | 2 ]
 #&gt;   Comp.1 Comp.2 Comp.3 ... |   Site         Type        
-#&gt;                            |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       
-#&gt; </span><span style='color: #555555;'>1</span><span>  1.43  -</span><span style='color: #BB0000;'>0.167</span><span>  1.29      | </span><span style='color: #555555;'>1</span><span> Bet Eli'ezer Levantine II
-#&gt; </span><span style='color: #555555;'>2</span><span>  2.67  -</span><span style='color: #BB0000;'>0.250</span><span> -</span><span style='color: #BB0000;'>1.44</span><span>  ... | </span><span style='color: #555555;'>2</span><span> Bet Eli'ezer Levantine II
-#&gt; </span><span style='color: #555555;'>3</span><span>  1.16  -</span><span style='color: #BB0000;'>0.473</span><span>  0.387     | </span><span style='color: #555555;'>3</span><span> Bet Eli'ezer Levantine II
-#&gt; </span><span style='color: #555555;'>4</span><span>  0.199  0.370  1.14      | </span><span style='color: #555555;'>4</span><span> Bet Eli'ezer Levantine II
-#&gt; </span><span style='color: #555555;'>5</span><span>  0.305  0.703  0.930     | </span><span style='color: #555555;'>5</span><span> Bet Eli'ezer Levantine II
-#&gt; </span><span style='color: #555555;'># … with 45 more rows</span><span>
+#&gt;                            |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  1.43  -</span><span style='color: #BB0000;'>0.167</span><span>  1.29      | </span><span style='color: #BCBCBC;'>1</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  2.67  -</span><span style='color: #BB0000;'>0.250</span><span> -</span><span style='color: #BB0000;'>1.44</span><span>  ... | </span><span style='color: #BCBCBC;'>2</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  1.16  -</span><span style='color: #BB0000;'>0.473</span><span>  0.387     | </span><span style='color: #BCBCBC;'>3</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.199  0.370  1.14      | </span><span style='color: #BCBCBC;'>4</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.305  0.703  0.930     | </span><span style='color: #BCBCBC;'>5</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #949494;'># … with 45 more rows</span><span>
 #&gt; # 
 #&gt; # Columns: [ 5 x 5 | 0 ]
 #&gt;    Comp.1 Comp.2 Comp.3 ... | 
 #&gt;                             | 
-#&gt; </span><span style='color: #555555;'>1</span><span>  0.510   0.272  0.405     | 
-#&gt; </span><span style='color: #555555;'>2</span><span>  0.489  -</span><span style='color: #BB0000;'>0.337</span><span> -</span><span style='color: #BB0000;'>0.381</span><span> ... | 
-#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.510</span><span>  -</span><span style='color: #BB0000;'>0.181</span><span> -</span><span style='color: #BB0000;'>0.463</span><span>     | 
-#&gt; </span><span style='color: #555555;'>4</span><span>  0.490  -</span><span style='color: #BB0000;'>0.176</span><span> -</span><span style='color: #BB0000;'>0.501</span><span>     | 
-#&gt; </span><span style='color: #555555;'>5</span><span>  0.023</span><span style='text-decoration: underline;'>4</span><span>  0.865 -</span><span style='color: #BB0000;'>0.474</span><span>     | </div><div class='input'><span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>pca_glass</span><span class='op'>)</span> <span class='op'>+</span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.510   0.272  0.405     | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.489  -</span><span style='color: #BB0000;'>0.337</span><span> -</span><span style='color: #BB0000;'>0.381</span><span> ... | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.510</span><span>  -</span><span style='color: #BB0000;'>0.181</span><span> -</span><span style='color: #BB0000;'>0.463</span><span>     | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.490  -</span><span style='color: #BB0000;'>0.176</span><span> -</span><span style='color: #BB0000;'>0.501</span><span>     | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.023</span><span style='text-decoration: underline;'>4</span><span>  0.865 -</span><span style='color: #BB0000;'>0.474</span><span>     | </div><div class='input'><span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>pca_glass</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>shape <span class='op'>=</span> <span class='va'>Site</span>, color <span class='op'>=</span> <span class='va'>Type</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='img'><img src='lra-ord-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># completely compositional log-ratio analysis</span>
 <span class='va'>levantine_glass</span> <span class='op'>%&gt;%</span>
@@ -379,22 +379,22 @@ Greenacre's (2010) exposition in Chapter 7.</p>
 #&gt; # 
 #&gt; # Rows: [ 50 x 4 | 2 ]
 #&gt;     LRSV1    LRSV2    LRSV3 ... |   Site         Type        
-#&gt;                                 |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.097</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span> -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>   0.010</span><span style='text-decoration: underline;'>6</span><span>      | </span><span style='color: #555555;'>1</span><span> Bet Eli'ezer Levantine II
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.066</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>  0.045</span><span style='text-decoration: underline;'>0</span><span>  -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>06</span><span> ... | </span><span style='color: #555555;'>2</span><span> Bet Eli'ezer Levantine II
-#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.038</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>  0.006</span><span style='text-decoration: underline;'>75</span><span>  0.006</span><span style='text-decoration: underline;'>69</span><span>     | </span><span style='color: #555555;'>3</span><span> Bet Eli'ezer Levantine II
-#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>0.021</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span> -</span><span style='color: #BB0000;'>0.028</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>   0.004</span><span style='text-decoration: underline;'>63</span><span>     | </span><span style='color: #555555;'>4</span><span> Bet Eli'ezer Levantine II
-#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.025</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span> -</span><span style='color: #BB0000;'>0.029</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>   0.003</span><span style='text-decoration: underline;'>73</span><span>     | </span><span style='color: #555555;'>5</span><span> Bet Eli'ezer Levantine II
-#&gt; </span><span style='color: #555555;'># … with 45 more rows</span><span>
+#&gt;                                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.097</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span> -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>   0.010</span><span style='text-decoration: underline;'>6</span><span>      | </span><span style='color: #BCBCBC;'>1</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.066</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>  0.045</span><span style='text-decoration: underline;'>0</span><span>  -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>06</span><span> ... | </span><span style='color: #BCBCBC;'>2</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.038</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>  0.006</span><span style='text-decoration: underline;'>75</span><span>  0.006</span><span style='text-decoration: underline;'>69</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.021</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span> -</span><span style='color: #BB0000;'>0.028</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>   0.004</span><span style='text-decoration: underline;'>63</span><span>     | </span><span style='color: #BCBCBC;'>4</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.025</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span> -</span><span style='color: #BB0000;'>0.029</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>   0.003</span><span style='text-decoration: underline;'>73</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #949494;'># … with 45 more rows</span><span>
 #&gt; # 
 #&gt; # Columns: [ 5 x 4 | 0 ]
 #&gt;    LRSV1  LRSV2    LRSV3 ... | 
 #&gt;                              | 
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.311</span><span> -</span><span style='color: #BB0000;'>0.244</span><span>  0.006</span><span style='text-decoration: underline;'>44</span><span>     | 
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.328</span><span>  2.99   2.46    ... | 
-#&gt; </span><span style='color: #555555;'>3</span><span>  3.03   0.396 -</span><span style='color: #BB0000;'>0.028</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>      | 
-#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>2.52</span><span>  10.5   -</span><span style='color: #BB0000;'>4.53</span><span>        | 
-#&gt; </span><span style='color: #555555;'>5</span><span>  0.306  0.227 -</span><span style='color: #BB0000;'>9.41</span><span>        | </div><div class='input'><span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>lra_glass</span>, sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>.05</span><span class='op'>)</span> <span class='op'>+</span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.311</span><span> -</span><span style='color: #BB0000;'>0.244</span><span>  0.006</span><span style='text-decoration: underline;'>44</span><span>     | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.328</span><span>  2.99   2.46    ... | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.03   0.396 -</span><span style='color: #BB0000;'>0.028</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>      | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.52</span><span>  10.5   -</span><span style='color: #BB0000;'>4.53</span><span>        | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.306  0.227 -</span><span style='color: #BB0000;'>9.41</span><span>        | </div><div class='input'><span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>lra_glass</span>, sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>.05</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>shape <span class='op'>=</span> <span class='va'>Site</span>, color <span class='op'>=</span> <span class='va'>Type</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='geom-biplot-text.html'>geom_cols_text</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>, hjust <span class='op'>=</span> <span class='st'>"outward"</span>, vjust <span class='op'>=</span> <span class='st'>"outward"</span><span class='op'>)</span> <span class='op'>+</span>
@@ -412,20 +412,20 @@ Greenacre's (2010) exposition in Chapter 7.</p>
 #&gt; # 
 #&gt; # Rows: [ 50 x 2 | 2 ]
 #&gt;     LRSV1    LRSV2 |   Site         Type        
-#&gt;                    |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.099</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span> -</span><span style='color: #BB0000;'>0.001</span><span style='color: #BB0000;text-decoration: underline;'>61</span><span> | </span><span style='color: #555555;'>1</span><span> Bet Eli'ezer Levantine II
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.059</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>  0.026</span><span style='text-decoration: underline;'>5</span><span>  | </span><span style='color: #555555;'>2</span><span> Bet Eli'ezer Levantine II
-#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.036</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>  0.004</span><span style='text-decoration: underline;'>66</span><span> | </span><span style='color: #555555;'>3</span><span> Bet Eli'ezer Levantine II
-#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>0.025</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span> -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>  | </span><span style='color: #555555;'>4</span><span> Bet Eli'ezer Levantine II
-#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.030</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span> -</span><span style='color: #BB0000;'>0.011</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>  | </span><span style='color: #555555;'>5</span><span> Bet Eli'ezer Levantine II
-#&gt; </span><span style='color: #555555;'># … with 45 more rows</span><span>
+#&gt;                    |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.099</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span> -</span><span style='color: #BB0000;'>0.001</span><span style='color: #BB0000;text-decoration: underline;'>61</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.059</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>  0.026</span><span style='text-decoration: underline;'>5</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.036</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>  0.004</span><span style='text-decoration: underline;'>66</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.025</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span> -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>  | </span><span style='color: #BCBCBC;'>4</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.030</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span> -</span><span style='color: #BB0000;'>0.011</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>  | </span><span style='color: #BCBCBC;'>5</span><span> Bet Eli'ezer Levantine II
+#&gt; </span><span style='color: #949494;'># … with 45 more rows</span><span>
 #&gt; # 
 #&gt; # Columns: [ 3 x 2 | 0 ]
 #&gt;    LRSV1   LRSV2 | 
 #&gt;                  | 
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.329</span><span> -</span><span style='color: #BB0000;'>0.219</span><span>  | 
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.299</span><span>  5.02   | 
-#&gt; </span><span style='color: #555555;'>3</span><span>  3.06  -</span><span style='color: #BB0000;'>0.017</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span> | </div><div class='input'><span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>lra_glass</span>, sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>.05</span><span class='op'>)</span> <span class='op'>+</span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.329</span><span> -</span><span style='color: #BB0000;'>0.219</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.299</span><span>  5.02   | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.06  -</span><span style='color: #BB0000;'>0.017</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span> | </div><div class='input'><span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>lra_glass</span>, sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>.05</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>shape <span class='op'>=</span> <span class='va'>Site</span>, color <span class='op'>=</span> <span class='va'>Type</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='geom-biplot-text.html'>geom_cols_text</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>, hjust <span class='op'>=</span> <span class='st'>"outward"</span>, vjust <span class='op'>=</span> <span class='st'>"outward"</span><span class='op'>)</span> <span class='op'>+</span>

@@ -238,33 +238,33 @@ eurodist %>%
   cmdscale_ord(k = 11) %>%
   as_tbl_ord() %>%
   augment() %>%
-  negate_ord(2) %>%
   print() -> city_mds
 #> # A tbl_ord of class 'cmds_ord': (21 x 11) x (21 x 11)'
-#> # 11 coordinates, transformed: PCo1, PCo2, ..., PCo11
+#> # 11 coordinates: PCo1, PCo2, ..., PCo11
 #> # 
 #> # Rows: [ 21 x 11 | 1 ]
-#>     PCo1   PCo2   PCo3 ... |   .name    
-#>                            |   <chr>    
-#> 1 2290.  -1799.   53.8     | 1 Athens   
-#> 2 -825.   -547. -114.  ... | 2 Barcelona
-#> 3   59.2   367.  178.      | 3 Brussels 
-#> 4  -82.8   430.  300.      | 4 Calais   
-#> 5 -352.    291.  457.      | 5 Cherbourg
+#>     PCo1  PCo2   PCo3 ... |   .name    
+#>                           |   <chr>    
+#> 1 2290.  1799.   53.8     | 1 Athens   
+#> 2 -825.   547. -114.  ... | 2 Barcelona
+#> 3   59.2 -367.  178.      | 3 Brussels 
+#> 4  -82.8 -430.  300.      | 4 Calais   
+#> 5 -352.  -291.  457.      | 5 Cherbourg
 #> # … with 16 more rows
 #> # 
 #> # Columns: [ 21 x 11 | 1 ]
-#>     PCo1   PCo2   PCo3 ... |   .name    
-#>                            |   <chr>    
-#> 1 2290.  -1799.   53.8     | 1 Athens   
-#> 2 -825.   -547. -114.  ... | 2 Barcelona
-#> 3   59.2   367.  178.      | 3 Brussels 
-#> 4  -82.8   430.  300.      | 4 Calais   
-#> 5 -352.    291.  457.      | 5 Cherbourg
+#>     PCo1  PCo2   PCo3 ... |   .name    
+#>                           |   <chr>    
+#> 1 2290.  1799.   53.8     | 1 Athens   
+#> 2 -825.   547. -114.  ... | 2 Barcelona
+#> 3   59.2 -367.  178.      | 3 Brussels 
+#> 4  -82.8 -430.  300.      | 4 Calais   
+#> 5 -352.  -291.  457.      | 5 Cherbourg
 #> # … with 16 more rows
 # 2D biplot aligned with geography
 city_mds %>%
   ggbiplot() +
+  scale_y_reverse() +
   stat_cols_spantree(
     ord_aes(city_mds), check.aes = FALSE,
     alpha = .5, linetype = "dotted"

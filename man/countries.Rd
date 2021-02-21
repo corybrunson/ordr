@@ -71,7 +71,7 @@ attributes_pca \%>\%
   geom_rows_text(aes(x = PC1, y = PC2), color = "seagreen") +
   geom_cols_vector(aes(x = PC1, y = PC2), color = "darkred") +
   geom_cols_text_repel(aes(x = PC1, y = PC2), color = "darkred")
-# Align an MDS ordination to a PCA ordination
+# Compare an MDS to a PCA
 data(country_differences)
 country_differences \%>\%
   cmdscale_ord(k = 2) \%>\%
@@ -81,24 +81,11 @@ country_differences \%>\%
   prcomp() \%>\%
   as_tbl_ord() \%>\%
   print() -> differences_pca
-# negate PCA cases to MDS coordinates
-differences_cmds \%>\%
-  negate_to(differences_pca, "rows") \%>\%
-  print() -> differences_align_rows
+# negate PCA axis to match MDS axis
 plot(gridExtra::arrangeGrob(grobs = list(
   ggbiplot(differences_cmds) + geom_rows_point(),
-  ggbiplot(differences_pca) + geom_rows_point(),
-  ggbiplot(differences_align_rows) + geom_rows_point()
-), ncol = 3))
-# negate PCA variables to MDS coordinates
-differences_cmds \%>\%
-  negate_to(differences_pca, "cols") \%>\%
-  print() -> differences_align_cols
-plot(gridExtra::arrangeGrob(grobs = list(
-  ggbiplot(differences_cmds) + geom_cols_vector(),
-  ggbiplot(differences_pca) + geom_cols_vector(),
-  ggbiplot(differences_align_cols) + geom_cols_vector()
-), ncol = 3))
+  ggbiplot(differences_pca) + scale_y_reverse() + geom_rows_point()
+), ncol = 2))
 }
 \references{
 Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:

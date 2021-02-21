@@ -239,20 +239,20 @@ matrix output by <code><a href='lra-ord.html'>lra()</a></code>.</p>
 #&gt; # 
 #&gt; # Rows: [ 50 x 2 | 2 ]
 #&gt;    LRSV1  LRSV2 |   .name      .abb 
-#&gt;                 |   <span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.680</span><span>  0.930 | </span><span style='color: #555555;'>1</span><span> Alabama    AL   
-#&gt; </span><span style='color: #555555;'>2</span><span>  0.930 -</span><span style='color: #BB0000;'>0.625</span><span> | </span><span style='color: #555555;'>2</span><span> Alaska     AK   
-#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.330</span><span> -</span><span style='color: #BB0000;'>1.31</span><span>  | </span><span style='color: #555555;'>3</span><span> Arizona    AZ   
-#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>0.351</span><span>  0.277 | </span><span style='color: #555555;'>4</span><span> Arkansas   AR   
-#&gt; </span><span style='color: #555555;'>5</span><span>  0.552 -</span><span style='color: #BB0000;'>1.00</span><span>  | </span><span style='color: #555555;'>5</span><span> California CA   
-#&gt; </span><span style='color: #555555;'># … with 45 more rows</span><span>
+#&gt;                 |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.680</span><span>  0.930 | </span><span style='color: #BCBCBC;'>1</span><span> Alabama    AL   
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.930 -</span><span style='color: #BB0000;'>0.625</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Alaska     AK   
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.330</span><span> -</span><span style='color: #BB0000;'>1.31</span><span>  | </span><span style='color: #BCBCBC;'>3</span><span> Arizona    AZ   
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.351</span><span>  0.277 | </span><span style='color: #BCBCBC;'>4</span><span> Arkansas   AR   
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.552 -</span><span style='color: #BB0000;'>1.00</span><span>  | </span><span style='color: #BCBCBC;'>5</span><span> California CA   
+#&gt; </span><span style='color: #949494;'># … with 45 more rows</span><span>
 #&gt; # 
 #&gt; # Columns: [ 3 x 2 | 1 ]
 #&gt;    LRSV1  LRSV2 |   .name  
-#&gt;                 |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
-#&gt; </span><span style='color: #555555;'>1</span><span>  0.283  4.96  | </span><span style='color: #555555;'>1</span><span> Murder 
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.371</span><span> -</span><span style='color: #BB0000;'>0.181</span><span> | </span><span style='color: #555555;'>2</span><span> Assault
-#&gt; </span><span style='color: #555555;'>3</span><span>  2.88  -</span><span style='color: #BB0000;'>0.366</span><span> | </span><span style='color: #555555;'>3</span><span> Rape   </div><div class='input'><span class='co'># Adapt Exhibit 7.1 in Greenacre (2010)</span>
+#&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.283  4.96  | </span><span style='color: #BCBCBC;'>1</span><span> Murder 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.371</span><span> -</span><span style='color: #BB0000;'>0.181</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Assault
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  2.88  -</span><span style='color: #BB0000;'>0.366</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Rape   </div><div class='input'><span class='co'># Adapt Exhibit 7.1 in Greenacre (2010)</span>
 <span class='va'>arrests_lra</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span>sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>20</span><span class='op'>)</span> <span class='op'>+</span>

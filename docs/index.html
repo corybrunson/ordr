@@ -230,33 +230,33 @@
   <span class="fu"><a href="reference/wrap-ord.html">cmdscale_ord</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">11</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/alignment.html">negate_ord</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">city_mds</span>
 <span class="co">#&gt; # A tbl_ord of class 'cmds_ord': (21 x 11) x (21 x 11)'</span>
-<span class="co">#&gt; # 11 coordinates, transformed: PCo1, PCo2, ..., PCo11</span>
+<span class="co">#&gt; # 11 coordinates: PCo1, PCo2, ..., PCo11</span>
 <span class="co">#&gt; # </span>
 <span class="co">#&gt; # Rows: [ 21 x 11 | 1 ]</span>
-<span class="co">#&gt;     PCo1   PCo2   PCo3 ... |   .name    </span>
-<span class="co">#&gt;                            |   &lt;chr&gt;    </span>
-<span class="co">#&gt; 1 2290.  -1799.   53.8     | 1 Athens   </span>
-<span class="co">#&gt; 2 -825.   -547. -114.  ... | 2 Barcelona</span>
-<span class="co">#&gt; 3   59.2   367.  178.      | 3 Brussels </span>
-<span class="co">#&gt; 4  -82.8   430.  300.      | 4 Calais   </span>
-<span class="co">#&gt; 5 -352.    291.  457.      | 5 Cherbourg</span>
+<span class="co">#&gt;     PCo1  PCo2   PCo3 ... |   .name    </span>
+<span class="co">#&gt;                           |   &lt;chr&gt;    </span>
+<span class="co">#&gt; 1 2290.  1799.   53.8     | 1 Athens   </span>
+<span class="co">#&gt; 2 -825.   547. -114.  ... | 2 Barcelona</span>
+<span class="co">#&gt; 3   59.2 -367.  178.      | 3 Brussels </span>
+<span class="co">#&gt; 4  -82.8 -430.  300.      | 4 Calais   </span>
+<span class="co">#&gt; 5 -352.  -291.  457.      | 5 Cherbourg</span>
 <span class="co">#&gt; # … with 16 more rows</span>
 <span class="co">#&gt; # </span>
 <span class="co">#&gt; # Columns: [ 21 x 11 | 1 ]</span>
-<span class="co">#&gt;     PCo1   PCo2   PCo3 ... |   .name    </span>
-<span class="co">#&gt;                            |   &lt;chr&gt;    </span>
-<span class="co">#&gt; 1 2290.  -1799.   53.8     | 1 Athens   </span>
-<span class="co">#&gt; 2 -825.   -547. -114.  ... | 2 Barcelona</span>
-<span class="co">#&gt; 3   59.2   367.  178.      | 3 Brussels </span>
-<span class="co">#&gt; 4  -82.8   430.  300.      | 4 Calais   </span>
-<span class="co">#&gt; 5 -352.    291.  457.      | 5 Cherbourg</span>
+<span class="co">#&gt;     PCo1  PCo2   PCo3 ... |   .name    </span>
+<span class="co">#&gt;                           |   &lt;chr&gt;    </span>
+<span class="co">#&gt; 1 2290.  1799.   53.8     | 1 Athens   </span>
+<span class="co">#&gt; 2 -825.   547. -114.  ... | 2 Barcelona</span>
+<span class="co">#&gt; 3   59.2 -367.  178.      | 3 Brussels </span>
+<span class="co">#&gt; 4  -82.8 -430.  300.      | 4 Calais   </span>
+<span class="co">#&gt; 5 -352.  -291.  457.      | 5 Cherbourg</span>
 <span class="co">#&gt; # … with 16 more rows</span>
 <span class="co"># 2D biplot aligned with geography</span>
 <span class="va">city_mds</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">scale_y_reverse</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="reference/stat-biplot-spantree.html">stat_cols_spantree</a></span><span class="op">(</span>
     <span class="fu"><a href="reference/ggbiplot.html">ord_aes</a></span><span class="op">(</span><span class="va">city_mds</span><span class="op">)</span>, check.aes <span class="op">=</span> <span class="cn">FALSE</span>,
     alpha <span class="op">=</span> <span class="fl">.5</span>, linetype <span class="op">=</span> <span class="st">"dotted"</span>

@@ -29,7 +29,7 @@
 #' 
 
 #' @name tbl_ord
-#' @include ord-alignment.r ord-conference.r
+#' @include ord-conference.r
 #' @importFrom tibble tibble is_tibble as_tibble
 #' @param x An ordination object.
 #' @param rows,cols Matrices to be used as factors of a tbl_ord.
@@ -72,9 +72,6 @@ is.tbl_ord <- is_tbl_ord
 #' @export
 valid_tbl_ord <- function(x) {
   if (! is_tbl_ord(x)) return(FALSE)
-  if (! is.null(attr(x, "align")) &&
-      ! is.matrix(attr(x, "align")) &&
-      ! all(dim(attr(x, "align") == rep(dim(x), 2)))) return(FALSE)
   if (! is.null(attr(x, "rows_annotation")) &&
       ! is_tibble(attr(x, "rows_annotation"))) return(FALSE)
   if (! is.null(attr(x, "cols_annotation")) &&
@@ -95,7 +92,6 @@ valid_tbl_ord <- function(x) {
 #' @export
 un_tbl_ord <- function(x) {
   if (! is_tbl_ord(x)) return(x)
-  attr(x, "align") <- NULL
   attr(x, "rows_annotation") <- NULL
   attr(x, "cols_annotation") <- NULL
   attr(x, "confer") <- NULL

@@ -31,9 +31,9 @@
 format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   
   # raw components and parameters
-  dims <- get_factor(x, .matrix = "dims", align = TRUE)
+  dims <- get_factor(x, .matrix = "dims")
   n_dims <- sapply(dims, nrow)
-  coord <- get_coord(x, align = TRUE)
+  coord <- get_coord(x)
   rk <- length(coord)
   dims_ann <- mapply(
     bind_cols,
@@ -69,7 +69,6 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
   coord_header <- paste0(
     "# ", rk,
     " coordinate", if(rk == 1) "" else "s",
-    if (is.null(attr(x, "align"))) "" else ", transformed",
     ": ",
     print_reps(coord)
   )

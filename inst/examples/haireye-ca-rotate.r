@@ -8,29 +8,30 @@ HairEyeColor[, , "Female"] %>%
   ca::ca() %>%
   as_tbl_ord() %>%
   print() -> female_haireye_ca
+# side-by-side biplots
 ca_biplot <- function(ord) {
-  ggbiplot(ord, aes(label = .name)) +
-    geom_rows_point(aes(size = .mass), color = "saddlebrown") +
-    geom_cols_point(aes(size = .mass), color = "seagreen4") +
-    geom_rows_text_repel(color = "saddlebrown") +
-    geom_cols_text_repel(color = "seagreen4") +
-    guides(size = "none")
+  ggbiplot(ord, aes(label = .name, color = .matrix)) +
+    scale_color_manual(values = c("seagreen4", "saddlebrown")) +
+    geom_rows_point(aes(size = .mass)) +
+    geom_cols_point(aes(size = .mass)) +
+    geom_rows_text_repel() +
+    geom_cols_text_repel() +
+    guides(color = "none", size = "none")
 }
 plot(gridExtra::arrangeGrob(grobs = list(
-  ca_biplot(male_haireye_ca),
-  ca_biplot(female_haireye_ca)
+  ca_biplot(female_haireye_ca),
+  ca_biplot(male_haireye_ca)
 ), ncol = 2))
-# negation, permutation, and rotation
-male_haireye_ca %>%
-  negate_to(female_haireye_ca, "rows") %>%
-  get_alignment()
-male_haireye_ca %>%
-  permute_to(female_haireye_ca, "rows") %>%
-  get_alignment()
-male_haireye_ca %>%
-  rotate_to(female_haireye_ca, "rows") %>%
-  get_alignment()
-plot(gridExtra::arrangeGrob(grobs = list(
-  ca_biplot(rotate_to(male_haireye_ca, female_haireye_ca, "rows")),
-  ca_biplot(female_haireye_ca)
-), ncol = 2))
+# faceted biplots
+dplyr::bind_rows(
+  dplyr::mutate(fortify(male_haireye_ca), sex = "male"),
+  dplyr::mutate(fortify(female_haireye_ca), sex = "female")
+) %>%
+  dplyr::mutate(feature = ifelse(.matrix == "rows", "Hair", "Eye")) %>%
+  ggplot(aes(x = Dim1, y = Dim2, label = .name, color = feature)) +
+  facet_wrap(~ sex) +
+  scale_color_manual(values = c("seagreen4", "saddlebrown")) +
+  coord_equal() +
+  geom_point(aes(size = .mass)) +
+  geom_text_repel() +
+  guides(size = "none")

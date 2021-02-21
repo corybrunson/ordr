@@ -96,11 +96,11 @@ eurodist %>%
   cmdscale_ord(k = 11) %>%
   as_tbl_ord() %>%
   augment() %>%
-  negate_ord(2) %>%
   print() -> city_mds
 # 2D biplot aligned with geography
 city_mds %>%
   ggbiplot() +
+  scale_y_reverse() +
   stat_cols_spantree(
     ord_aes(city_mds), check.aes = FALSE,
     alpha = .5, linetype = "dotted"
