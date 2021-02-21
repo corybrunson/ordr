@@ -17,7 +17,7 @@ annotation_rows(x)
 annotation_cols(x)
 }
 \arguments{
-\item{x}{A \link{tbl_ord}, or an ordination object coercible to one.}
+\item{x}{A '\link{tbl_ord}' object, or an ordination object coercible to one.}
 
 \item{annot}{A \link[base:data.frame]{data.frame} having the same number of rows
 as \code{get_*(x)}.}
