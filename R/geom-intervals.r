@@ -101,7 +101,7 @@ geom_cols_lineranges <- function(
 
 #' @rdname geom-biplot-intervals
 #' @export
-geom_biplot_lineranges <- function(
+geom_dims_lineranges <- function(
   mapping = NULL, data = NULL, stat = "center", position = "identity",
   .matrix = "rows",
   ...,
@@ -194,7 +194,7 @@ geom_cols_pointranges <- function(
 
 #' @rdname geom-biplot-intervals
 #' @export
-geom_biplot_pointranges <- function(
+geom_dims_pointranges <- function(
   mapping = NULL, data = NULL, stat = "center", position = "identity",
   .matrix = "rows",
   ...,

@@ -6,11 +6,11 @@
 \alias{GeomLineranges}
 \alias{geom_rows_lineranges}
 \alias{geom_cols_lineranges}
-\alias{geom_biplot_lineranges}
+\alias{geom_dims_lineranges}
 \alias{GeomPointranges}
 \alias{geom_rows_pointranges}
 \alias{geom_cols_pointranges}
-\alias{geom_biplot_pointranges}
+\alias{geom_dims_pointranges}
 \title{Render intervals depicting ranges, usually about center points}
 \format{
 An object of class \code{GeomLineranges} (inherits from \code{GeomLinerange}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.
@@ -40,7 +40,7 @@ geom_cols_lineranges(
   inherit.aes = TRUE
 )
 
-geom_biplot_lineranges(
+geom_dims_lineranges(
   mapping = NULL,
   data = NULL,
   stat = "center",
@@ -74,7 +74,7 @@ geom_cols_pointranges(
   inherit.aes = TRUE
 )
 
-geom_biplot_pointranges(
+geom_dims_pointranges(
   mapping = NULL,
   data = NULL,
   stat = "center",
@@ -146,7 +146,7 @@ filter the data frame to one of these two.
 
 The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.
 }
 

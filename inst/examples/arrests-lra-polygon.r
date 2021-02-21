@@ -16,7 +16,7 @@ arrests_lra %>%
 # Adapt Exhibit 7.1 in Greenacre (2010)
 arrests_lra %>%
   confer_inertia(1) %>%
-  ggbiplot(sec.axes = "v", scale.factor = 1/20) +
+  ggbiplot(sec.axes = "cols", scale.factor = 1/20) +
   theme_bw() +
   geom_rows_text(
     aes(label = .abb),

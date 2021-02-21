@@ -277,9 +277,9 @@ geom_cols_axis_ticks <- function(
 
 #' @rdname geom-biplot-axis-ticks
 #' @export
-geom_biplot_axis_ticks <- function(
+geom_dims_axis_ticks <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "v", axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
+  .matrix = "cols", axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
   tick_length = .025,
   ...,
   na.rm = FALSE,

@@ -16,7 +16,7 @@ visualization into a
 *Ordination* is a catch-all term for a variety of statistical techniques
 that introduce an artificial coordinate system for a data set in such a
 way that a few coordinates capture a large amount of the data structure
-\[1\]. The branch of mathematical statistics called [geometric data
+[1]. The branch of mathematical statistics called [geometric data
 analysis](https://www.springer.com/us/book/9781402022357) (GDA) provides
 the theoretical basis for these techniques. Together with regression,
 ordination can be contrasted to clustering and classification, in that
@@ -39,7 +39,7 @@ The underlying matrix decomposition usually produces two matrices, say
 *U* and *V*, corresponding to the rows and to the columns of the
 original data matrix *X*: If *X* has *n* rows and *m* columns, then *U*
 and *V* have *n* rows and *m* rows, respectively, and both have *r*
-columns, with *r* being the rank of the ordination \[2\]. These *r*
+columns, with *r* being the rank of the ordination [2]. These *r*
 columns provide a set of shared coordinates for the rows and columns of
 *X*. If *X* contains a measured value for each of several variables
 (columns) on each of several cases (rows), then the ordination provides
@@ -118,7 +118,7 @@ USPersonalExpenditure
 #> # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'
 #> # 5 coordinates: PC1, PC2, ..., PC5
 #> # 
-#> # U: [ 5 x 5 | 0 ]
+#> # Rows: [ 5 x 5 | 0 ]
 #>       PC1    PC2    PC3 ... | 
 #>                             | 
 #> 1 -137.    3.61  -0.310     | 
@@ -127,7 +127,7 @@ USPersonalExpenditure
 #> 4   -7.11 -0.735 -0.795     | 
 #> 5   -4.85 -0.782 -0.226     | 
 #> # 
-#> # V: [ 5 x 5 | 0 ]
+#> # Columns: [ 5 x 5 | 0 ]
 #>      PC1     PC2    PC3 ... | 
 #>                             | 
 #> 1 -0.159  0.113   0.182     | 
@@ -140,7 +140,7 @@ USPersonalExpenditure
 #> # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'
 #> # 5 coordinates: PC1, PC2, ..., PC5
 #> # 
-#> # U: [ 5 x 5 | 1 ]
+#> # Rows: [ 5 x 5 | 1 ]
 #>       PC1    PC2    PC3 ... |   .name              
 #>                             |   <chr>              
 #> 1 -137.    3.61  -0.310     | 1 Food and Tobacco   
@@ -149,7 +149,7 @@ USPersonalExpenditure
 #> 4   -7.11 -0.735 -0.795     | 4 Personal Care      
 #> 5   -4.85 -0.782 -0.226     | 5 Private Education  
 #> # 
-#> # V: [ 5 x 5 | 1 ]
+#> # Columns: [ 5 x 5 | 1 ]
 #>      PC1     PC2    PC3 ... |   .name
 #>                             |   <chr>
 #> 1 -0.159  0.113   0.182     | 1 1940 
@@ -158,11 +158,11 @@ USPersonalExpenditure
 #> 4 -0.532  0.0266  0.302     | 4 1955 
 #> 5 -0.645 -0.561  -0.461     | 5 1960
 # annotate the cases or variables
-(spend_pca <- mutate_v(spend_pca, year = as.integer(.name)))
+(spend_pca <- mutate_cols(spend_pca, year = as.integer(.name)))
 #> # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'
 #> # 5 coordinates: PC1, PC2, ..., PC5
 #> # 
-#> # U: [ 5 x 5 | 1 ]
+#> # Rows: [ 5 x 5 | 1 ]
 #>       PC1    PC2    PC3 ... |   .name              
 #>                             |   <chr>              
 #> 1 -137.    3.61  -0.310     | 1 Food and Tobacco   
@@ -171,7 +171,7 @@ USPersonalExpenditure
 #> 4   -7.11 -0.735 -0.795     | 4 Personal Care      
 #> 5   -4.85 -0.782 -0.226     | 5 Private Education  
 #> # 
-#> # V: [ 5 x 5 | 2 ]
+#> # Columns: [ 5 x 5 | 2 ]
 #>      PC1     PC2    PC3 ... |   .name  year
 #>                             |   <chr> <int>
 #> 1 -0.159  0.113   0.182     | 1 1940   1940
@@ -184,7 +184,7 @@ USPersonalExpenditure
 #> # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'
 #> # 5 coordinates: PC1, PC2, ..., PC5
 #> # 
-#> # U: [ 5 x 5 | 1 ]
+#> # Rows: [ 5 x 5 | 1 ]
 #>       PC1    PC2    PC3 ... |   .name              
 #>                             |   <chr>              
 #> 1 -11.0    1.28  -0.195     | 1 Food and Tobacco   
@@ -193,7 +193,7 @@ USPersonalExpenditure
 #> 4  -0.569 -0.261 -0.499     | 4 Personal Care      
 #> 5  -0.388 -0.278 -0.142     | 5 Private Education  
 #> # 
-#> # V: [ 5 x 5 | 2 ]
+#> # Columns: [ 5 x 5 | 2 ]
 #>     PC1     PC2    PC3 ... |   .name  year
 #>                            |   <chr> <int>
 #> 1 -1.99  0.318   0.291     | 1 1940   1940
@@ -204,10 +204,10 @@ USPersonalExpenditure
 # render a biplot, by default on the first two shared coordinates
 ggbiplot(spend_pca, aes(label = .name)) +
   theme_bw() +
-  geom_v_vector(aes(color = year)) +
-  geom_v_text_radiate() +
-  geom_u_point() +
-  geom_u_text_repel() +
+  geom_cols_vector(aes(color = year)) +
+  geom_cols_text_radiate() +
+  geom_rows_point() +
+  geom_rows_text_repel() +
   scale_y_continuous(expand = expand_scale(add = .5)) +
   ggtitle(
     "U.S. Personal Expenditure data, 1940-1960",
@@ -223,27 +223,27 @@ ggbiplot(spend_pca, aes(label = .name)) +
 Multidimensional scaling (MDS) is an ordination technique that starts
 not with rectangular data but with interpoint distances. A common
 illustration of its power is to calculate MDS on the set of
-distances—however measured—between geographic locations, and to
-recover the approximate geography via a biplot. This example is adapted
-from the documentation of `cmdscale()` in the **stats** package; note
-that **ordr** masks `stats::cmdscale()` with a wrapper that always
-returns the eigenvalues and the symmetric distance matrix produced
-during the calculation. The MDS uses 11 coordinates—the number of
-positive eigenvalues—so that `stat_*_spanningtree()` can call upon them
-to recover the intercity distances.
+distances—however measured—between geographic locations, and to recover
+the approximate geography via a biplot. This example is adapted from the
+documentation of `cmdscale()` in the **stats** package; note that
+**ordr** provides the wrapper `cmdscale_ord()` that always returns the
+eigenvalues and the symmetric distance matrix produced during the
+calculation. The MDS uses 11 coordinates—the number of positive
+eigenvalues—so that `stat_*_spanningtree()` can call upon them to
+recover the intercity distances.
 
 ``` r
 # `tbl_ord` object for a classical MDS on distances between European cities
 eurodist %>%
-  cmdscale(k = 11) %>%
+  cmdscale_ord(k = 11) %>%
   as_tbl_ord() %>%
   augment() %>%
   negate_ord(2) %>%
   print() -> city_mds
-#> # A tbl_ord of class 'cmds': (21 x 11) x (21 x 11)'
+#> # A tbl_ord of class 'cmds_ord': (21 x 11) x (21 x 11)'
 #> # 11 coordinates, transformed: PCo1, PCo2, ..., PCo11
 #> # 
-#> # U: [ 21 x 11 | 1 ]
+#> # Rows: [ 21 x 11 | 1 ]
 #>     PCo1   PCo2   PCo3 ... |   .name    
 #>                            |   <chr>    
 #> 1 2290.  -1799.   53.8     | 1 Athens   
@@ -253,7 +253,7 @@ eurodist %>%
 #> 5 -352.    291.  457.      | 5 Cherbourg
 #> # … with 16 more rows
 #> # 
-#> # V: [ 21 x 11 | 1 ]
+#> # Columns: [ 21 x 11 | 1 ]
 #>     PCo1   PCo2   PCo3 ... |   .name    
 #>                            |   <chr>    
 #> 1 2290.  -1799.   53.8     | 1 Athens   
@@ -265,11 +265,11 @@ eurodist %>%
 # 2D biplot aligned with geography
 city_mds %>%
   ggbiplot() +
-  stat_v_spantree(
+  stat_cols_spantree(
     ord_aes(city_mds), check.aes = FALSE,
     alpha = .5, linetype = "dotted"
   ) +
-  geom_v_text(aes(label = .name), size = 3) +
+  geom_cols_text(aes(label = .name), size = 3) +
   ggtitle("MDS biplot of road distances between European cities")
 ```
 
@@ -279,13 +279,13 @@ city_mds %>%
 
 ### contribute
 
-Any feedback on the package is very welcome\! If you encounter confusion
+Any feedback on the package is very welcome! If you encounter confusion
 or errors, please create an issue with a reproducible example. If you
 have requests, suggestions, or your own implementations for new
 features, feel free to create an issue or submit a pull request. Methods
 for additional ordination classes (see the `methods-*.r` scripts in the
 `R` folder) are especially welcome, as are new plot layers. Above all,
-be supportive\!
+be supportive!
 
 ### inspiration
 
@@ -302,15 +302,15 @@ by Michael Greenacre. Thomas Lin Pedersen’s
 **ggraph** finally induced the shift from simply generating scatterplots
 to upstream handling and manipulating ordination data.
 
-1.  The term *ordination* is most prevalent among ecologists; to my
-    knowledge, no catch-all term is in common use outside ecology.
+[1] The term *ordination* is most prevalent among ecologists; to my
+knowledge, no catch-all term is in common use outside ecology.
 
-2.  Regression and clustering models, like classical [linear
-    regression](http://www.multivariatestatistics.org/chapter2.html) and
-    [*k*-means](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html),
-    can also be understood as matrix decomposition approximations and
-    even visualized in biplots. Their shared coordinates, which are
-    pre-defined rather than artificial, are the predictor coefficients
-    and the cluster assignments, respectively. Methods for `stats::lm()`
-    and `stats::kmeans()`, for example, are implemented for the sake of
-    novelty and instruction, but are not widely used in practice.
+[2] Regression and clustering models, like classical [linear
+regression](http://www.multivariatestatistics.org/chapter2.html) and
+[*k*-means](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html),
+can also be understood as matrix decomposition approximations and even
+visualized in biplots. Their shared coordinates, which are pre-defined
+rather than artificial, are the predictor coefficients and the cluster
+assignments, respectively. Methods for `stats::lm()` and
+`stats::kmeans()`, for example, are implemented for the sake of novelty
+and instruction, but are not widely used in practice.

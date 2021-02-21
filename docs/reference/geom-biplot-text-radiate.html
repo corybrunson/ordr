@@ -116,58 +116,58 @@ It renders text at specified positions and angles that radiate out from the
 origin.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>geom_text_radiate</span>(
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>check_overlap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)
+    <pre class="usage"><span class='fu'>geom_text_radiate</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  <span class='va'>...</span>,
+  parse <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  check_overlap <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>geom_u_text_radiate</span>(
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>check_overlap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)
+<span class='fu'>geom_rows_text_radiate</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  <span class='va'>...</span>,
+  parse <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  check_overlap <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>geom_v_text_radiate</span>(
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>check_overlap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)
+<span class='fu'>geom_cols_text_radiate</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  <span class='va'>...</span>,
+  parse <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  check_overlap <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>geom_biplot_text_radiate</span>(
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"v"</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>check_overlap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+<span class='fu'>geom_dims_text_radiate</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  .matrix <span class='op'>=</span> <span class='st'>"cols"</span>,
+  <span class='va'>...</span>,
+  parse <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  check_overlap <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -238,7 +238,7 @@ the default plot specification, e.g. <code><a href='https://ggplot2.tidyverse.or
       <th>.matrix</th>
       <td><p>A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are <code>"u"</code>, <code>"v"</code>, and <code>"uv"</code>.</p></td>
+standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</code> (for both).</p></td>
     </tr>
     </table>
 
@@ -250,13 +250,13 @@ standard values are <code>"u"</code>, <code>"v"</code>, and <code>"uv"</code>.</
     
 
 <p><code><a href='ggbiplot.html'>ggbiplot()</a></code> uses <code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>ggplot2::fortify()</a></code> internally to produce a single data
-frame with a <code>.matrix</code> column distinguishing the subjects (<code>"u"</code>) and
-variables (<code>"v"</code>). The stat layers <code><a href='biplot-matrix.html'>stat_u()</a></code> and <code><a href='biplot-matrix.html'>stat_v()</a></code> simply filter
-the data frame to one of these two.</p>
-<p>The geom layers <code>geom_u_*()</code> and <code>geom_v_*()</code> call the corresponding stat in
-order to render plot elements for the corresponding matrix \(U\) or
-\(V\). <code>geom_biplot_*()</code> selects a default matrix based on common practice,
-e.g. \(U\) for points and \(V\) for arrows.</p>
+frame with a <code>.matrix</code> column distinguishing the subjects (<code>"rows"</code>) and
+variables (<code>"cols"</code>). The stat layers <code><a href='biplot-matrix.html'>stat_rows()</a></code> and <code><a href='biplot-matrix.html'>stat_cols()</a></code> simply
+filter the data frame to one of these two.</p>
+<p>The geom layers <code>geom_rows_*()</code> and <code>geom_cols_*()</code> call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+<code>geom_dims_*()</code> selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.</p>
     <h2 class="hasAnchor" id="aesthetics"><a class="anchor" href="#aesthetics"></a>Aesthetics</h2>
 
     
@@ -282,16 +282,17 @@ aesthetics are in bold):</p><ul>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Generalized multiple linear regression on marine ecosystem data</span>
 <span class='co'># Reproduce Exhibit 2.5 in Greenacre (2010)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>bioenv</span>)
-<span class='no'>bioenv_std</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_if</a></span>(<span class='no'>bioenv</span>, <span class='no'>is.numeric</span>, ~ <span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='no'>.</span>)))
-<span class='no'>resp_std</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>bioenv_std</span>, <span class='no'>a</span>:<span class='no'>e</span>))
-<span class='no'>pred_std</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>bioenv_std</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Depth</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Pollution</span>))
-<span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>resp_std</span> ~ <span class='no'>pred_std</span> + <span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>bioenv_std_mlm</span></div><div class='output co'>#&gt; # A tbl_ord of class 'mlm': (30 x 2) x (5 x 2)'
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>bioenv</span><span class='op'>)</span>
+<span class='va'>bioenv_std</span> <span class='op'>&lt;-</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_if</a></span><span class='op'>(</span><span class='va'>bioenv</span>, <span class='va'>is.numeric</span>, <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='va'>.</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>resp_std</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>bioenv_std</span>, <span class='va'>a</span><span class='op'>:</span><span class='va'>e</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>pred_std</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>bioenv_std</span>, x <span class='op'>=</span> <span class='va'>Depth</span>, y <span class='op'>=</span> <span class='va'>Pollution</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>resp_std</span> <span class='op'>~</span> <span class='va'>pred_std</span> <span class='op'>+</span> <span class='fl'>0</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>bioenv_std_mlm</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'mlm': (30 x 2) x (5 x 2)'
 #&gt; # 2 coordinates: x and y
 #&gt; # 
-#&gt; # U: [ 30 x 2 | 0 ]
+#&gt; # Rows: [ 30 x 2 | 0 ]
 #&gt;         x      y | 
 #&gt;                  | 
 #&gt; <span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.156</span><span>   0.132 | 
@@ -301,22 +302,24 @@ aesthetics are in bold):</p><ul>
 #&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.860</span><span>  -</span><span style='color: #BB0000;'>0.288</span><span> | 
 #&gt; 
 #&gt; # 
-#&gt; # V: [ 5 x 2 | 0 ]
+#&gt; # Columns: [ 5 x 2 | 0 ]
 #&gt;         x      y | 
 #&gt;                  | 
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.024</span><span style='text-decoration: underline;'>7</span><span> -</span><span style='color: #BB0000;'>0.717</span><span> | 
 #&gt; </span><span style='color: #555555;'>2</span><span>  0.229  -</span><span style='color: #BB0000;'>0.499</span><span> | 
 #&gt; </span><span style='color: #555555;'>3</span><span>  0.074</span><span style='text-decoration: underline;'>2</span><span>  0.491 | 
 #&gt; </span><span style='color: #555555;'>4</span><span>  0.347  -</span><span style='color: #BB0000;'>0.446</span><span> | 
-#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.400</span><span>  -</span><span style='color: #BB0000;'>0.475</span><span> | </div><div class='input'><span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>bioenv_std_mlm</span>, <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>) +
-  <span class='fu'>geom_v_text_radiate</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>)</div><div class='img'><img src='geom-biplot-text-radiate-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Reproduce Exhibit 3.2 in Greenacre (2010)</span>
-<span class='no'>bioenv</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span>(<span class='no'>a</span>:<span class='no'>e</span>), ~ <span class='no'>.</span> ^ (<span class='fl'>1</span>/<span class='fl'>4</span>)) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span>(<span class='no'>Pollution</span>:<span class='no'>Depth</span>), ~ <span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='no'>.</span>))) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>bioenv_4rt</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 30 x 10</span><span>
+#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.400</span><span>  -</span><span style='color: #BB0000;'>0.475</span><span> | </div><div class='input'><span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>bioenv_std_mlm</span>, <span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_rows_text</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"darkgreen"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"brown4"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_cols_text_radiate</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"brown4"</span><span class='op'>)</span>
+</div><div class='img'><img src='geom-biplot-text-radiate-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Reproduce Exhibit 3.2 in Greenacre (2010)</span>
+<span class='va'>bioenv</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span><span class='op'>(</span><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='va'>a</span><span class='op'>:</span><span class='va'>e</span><span class='op'>)</span>, <span class='op'>~</span> <span class='va'>.</span> <span class='op'>^</span> <span class='op'>(</span><span class='fl'>1</span><span class='op'>/</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span><span class='op'>(</span><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='va'>Pollution</span><span class='op'>:</span><span class='va'>Depth</span><span class='op'>)</span>, <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='va'>.</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>bioenv_4rt</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 30 x 10</span><span>
 #&gt;    site      a     b     c     d     e Pollution   Depth Temperature Sediment
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   
 #&gt; </span><span style='color: #555555;'> 1</span><span> s1     0     1.19  1.73  1.93  1.19    0.132  -</span><span style='color: #BB0000;'>0.156</span><span>          3.5 S       
@@ -329,14 +332,15 @@ aesthetics are in bold):</p><ul>
 #&gt; </span><span style='color: #555555;'> 8</span><span> s8     1.19  0     0     0     1       0.272  -</span><span style='color: #BB0000;'>0.860</span><span>          3.3 C       
 #&gt; </span><span style='color: #555555;'> 9</span><span> s9     2.03  1.63  1.78  1.93  1.57   -</span><span style='color: #BB0000;'>0.288</span><span>  -</span><span style='color: #BB0000;'>0.412</span><span>          3.4 C       
 #&gt; </span><span style='color: #555555;'>10</span><span> s10    0     1.50  2.26  1.73  0       2.56   -</span><span style='color: #BB0000;'>0.348</span><span>          3   S       
-#&gt; </span><span style='color: #555555;'># … with 20 more rows</span><span></div><div class='input'><span class='no'>resp_4rt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>bioenv_4rt</span>, <span class='no'>a</span>:<span class='no'>e</span>))
-<span class='no'>pred_4rt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>bioenv_4rt</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Depth</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Pollution</span>))
-<span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>resp_4rt</span> ~ <span class='no'>pred_4rt</span> + <span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>bioenv_4rt_mlm</span></div><div class='output co'>#&gt; # A tbl_ord of class 'mlm': (30 x 2) x (5 x 2)'
+#&gt; </span><span style='color: #555555;'># … with 20 more rows</span><span></div><div class='input'><span class='va'>resp_4rt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>bioenv_4rt</span>, <span class='va'>a</span><span class='op'>:</span><span class='va'>e</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>pred_4rt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>bioenv_4rt</span>, x <span class='op'>=</span> <span class='va'>Depth</span>, y <span class='op'>=</span> <span class='va'>Pollution</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>resp_4rt</span> <span class='op'>~</span> <span class='va'>pred_4rt</span> <span class='op'>+</span> <span class='fl'>0</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>bioenv_4rt_mlm</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'mlm': (30 x 2) x (5 x 2)'
 #&gt; # 2 coordinates: x and y
 #&gt; # 
-#&gt; # U: [ 30 x 2 | 0 ]
+#&gt; # Rows: [ 30 x 2 | 0 ]
 #&gt;         x      y | 
 #&gt;                  | 
 #&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.156</span><span>   0.132 | 
@@ -346,18 +350,19 @@ aesthetics are in bold):</p><ul>
 #&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.860</span><span>  -</span><span style='color: #BB0000;'>0.288</span><span> | 
 #&gt; 
 #&gt; # 
-#&gt; # V: [ 5 x 2 | 0 ]
+#&gt; # Columns: [ 5 x 2 | 0 ]
 #&gt;          x      y | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.073</span><span style='text-decoration: underline;'>2</span><span>  -</span><span style='color: #BB0000;'>0.672</span><span> | 
 #&gt; </span><span style='color: #555555;'>2</span><span>  0.005</span><span style='text-decoration: underline;'>98</span><span> -</span><span style='color: #BB0000;'>0.506</span><span> | 
 #&gt; </span><span style='color: #555555;'>3</span><span>  0.085</span><span style='text-decoration: underline;'>5</span><span>   0.387 | 
 #&gt; </span><span style='color: #555555;'>4</span><span>  0.059</span><span style='text-decoration: underline;'>6</span><span>  -</span><span style='color: #BB0000;'>0.288</span><span> | 
-#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.255</span><span>   -</span><span style='color: #BB0000;'>0.375</span><span> | </div><div class='input'><span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>bioenv_4rt_mlm</span>, <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>) +
-  <span class='fu'>geom_v_text_radiate</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>)</div><div class='img'><img src='geom-biplot-text-radiate-2.png' alt='' width='700' height='433' /></div></span></pre>
+#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.255</span><span>   -</span><span style='color: #BB0000;'>0.375</span><span> | </div><div class='input'><span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>bioenv_4rt_mlm</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, y <span class='op'>=</span> <span class='va'>y</span>, label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_rows_text</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"darkgreen"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"brown4"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_cols_text_radiate</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"brown4"</span><span class='op'>)</span>
+</div><div class='img'><img src='geom-biplot-text-radiate-2.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -373,7 +378,7 @@ aesthetics are in bold):</p><ul>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -7,7 +7,7 @@
 \alias{geom_axis_text}
 \alias{geom_rows_axis_text}
 \alias{geom_cols_axis_text}
-\alias{geom_biplot_axis_text}
+\alias{geom_dims_axis_text}
 \title{Render tick mark labels for axes}
 \format{
 An object of class \code{GeomAxisText} (inherits from \code{GeomText}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.
@@ -67,12 +67,12 @@ geom_cols_axis_text(
   inherit.aes = TRUE
 )
 
-geom_biplot_axis_text(
+geom_dims_axis_text(
   mapping = NULL,
   data = NULL,
   stat = "identity",
   position = "identity",
-  .matrix = "v",
+  .matrix = "cols",
   axes = NULL,
   calibrate = FALSE,
   family_fun = NULL,
@@ -166,7 +166,7 @@ filter the data frame to one of these two.
 
 The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.
 }
 

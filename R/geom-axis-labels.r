@@ -290,9 +290,9 @@ geom_cols_axis_text <- function(
 
 #' @rdname geom-biplot-ticks
 #' @export
-geom_biplot_axis_text <- function(
+geom_dims_axis_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "v", axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
+  .matrix = "cols", axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
   label_dodge = .025,
   ...,
   parse = FALSE, check_overlap = FALSE,

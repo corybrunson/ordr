@@ -7,7 +7,7 @@
 \alias{geom_isolines}
 \alias{geom_rows_isolines}
 \alias{geom_cols_isolines}
-\alias{geom_biplot_isolines}
+\alias{geom_dims_isolines}
 \title{Render isolines for a subject or variable}
 \format{
 An object of class \code{GeomIsolines} (inherits from \code{GeomAbline}, \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
@@ -58,12 +58,12 @@ geom_cols_isolines(
   inherit.aes = TRUE
 )
 
-geom_biplot_isolines(
+geom_dims_isolines(
   mapping = NULL,
   data = NULL,
   stat = "identity",
   position = "identity",
-  .matrix = "v",
+  .matrix = "cols",
   axes = NULL,
   calibrate = TRUE,
   family_fun = NULL,
@@ -143,7 +143,7 @@ filter the data frame to one of these two.
 
 The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.
 }
 

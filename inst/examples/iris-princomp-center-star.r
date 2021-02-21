@@ -6,7 +6,7 @@ iris[, -5] %>%
   mutate_cols(measure = gsub("\\.", " ", tolower(names(iris)[-5]))) %>%
   print() -> iris_pca
 iris_pca %>%
-  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
+  ggbiplot(aes(color = species), sec.axes = "cols", scale.factor = 3) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   stat_rows_star(alpha = .5, fun.center = "mean") +

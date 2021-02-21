@@ -143,7 +143,7 @@ geom_cols_vector <- function(
 
 #' @rdname geom-biplot-vector
 #' @export
-geom_biplot_vector <- function(
+geom_dims_vector <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "cols", arrow = default_arrow,
   ...,

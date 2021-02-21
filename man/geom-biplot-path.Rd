@@ -4,7 +4,7 @@
 \alias{geom-biplot-path}
 \alias{geom_rows_path}
 \alias{geom_cols_path}
-\alias{geom_biplot_path}
+\alias{geom_dims_path}
 \title{Render piecewise-linear paths through ordinates}
 \usage{
 geom_rows_path(
@@ -29,7 +29,7 @@ geom_cols_path(
   inherit.aes = TRUE
 )
 
-geom_biplot_path(
+geom_dims_path(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -100,7 +100,7 @@ filter the data frame to one of these two.
 
 The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.
 }
 

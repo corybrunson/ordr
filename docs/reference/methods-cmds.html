@@ -41,9 +41,9 @@
 
 <meta property="og:title" content="Functionality for classical multidimensional scaling objects — methods-cmds" />
 <meta property="og:description" content="These methods extract data from, and attribute new data to,
-objects of class &quot;cmds&quot;. This is a class introduced in this package to
-identify objects returned by stats::cmdscale(), which is masked by a
-wrapper that adds the class attribute." />
+objects of class &quot;cmds_ord&quot;. This is a class introduced in this package
+to identify objects returned by cmdscale_ord(), which wraps
+stats::cmdscale()." />
 
 
 
@@ -113,40 +113,37 @@ wrapper that adds the class attribute." />
 
     <div class="ref-description">
     <p>These methods extract data from, and attribute new data to,
-objects of class <code>"cmds"</code>. This is a class introduced in this package to
-identify objects returned by <code><a href='https://rdrr.io/r/stats/cmdscale.html'>stats::cmdscale()</a></code>, which is masked by a
-wrapper that adds the class attribute.</p>
+objects of class <code>"cmds_ord"</code>. This is a class introduced in this package
+to identify objects returned by <code><a href='wrap-ord.html'>cmdscale_ord()</a></code>, which wraps
+<code><a href='https://rdrr.io/r/stats/cmdscale.html'>stats::cmdscale()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for cmds</span>
-<span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='co'># S3 method for cmds_ord</span>
+<span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='co'># S3 method for cmds</span>
-<span class='fu'><a href='reconstruct.html'>reconstruct</a></span>(<span class='no'>x</span>)
+<span class='co'># S3 method for cmds_ord</span>
+<span class='fu'><a href='accessors.html'>recover_rows</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='co'># S3 method for cmds</span>
-<span class='fu'><a href='accessors.html'>recover_u</a></span>(<span class='no'>x</span>)
+<span class='co'># S3 method for cmds_ord</span>
+<span class='fu'><a href='accessors.html'>recover_cols</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='co'># S3 method for cmds</span>
-<span class='fu'><a href='accessors.html'>recover_v</a></span>(<span class='no'>x</span>)
+<span class='co'># S3 method for cmds_ord</span>
+<span class='fu'><a href='accessors.html'>recover_inertia</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='co'># S3 method for cmds</span>
-<span class='fu'><a href='accessors.html'>recover_inertia</a></span>(<span class='no'>x</span>)
+<span class='co'># S3 method for cmds_ord</span>
+<span class='fu'><a href='accessors.html'>recover_coord</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='co'># S3 method for cmds</span>
-<span class='fu'><a href='accessors.html'>recover_coord</a></span>(<span class='no'>x</span>)
+<span class='co'># S3 method for cmds_ord</span>
+<span class='fu'><a href='conference.html'>recover_conference</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='co'># S3 method for cmds</span>
-<span class='fu'><a href='conference.html'>recover_conference</a></span>(<span class='no'>x</span>)
+<span class='co'># S3 method for cmds_ord</span>
+<span class='fu'><a href='augmentation.html'>augmentation_rows</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='co'># S3 method for cmds</span>
-<span class='fu'><a href='augmentation.html'>augmentation_u</a></span>(<span class='no'>x</span>)
+<span class='co'># S3 method for cmds_ord</span>
+<span class='fu'><a href='augmentation.html'>augmentation_cols</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='co'># S3 method for cmds</span>
-<span class='fu'><a href='augmentation.html'>augmentation_v</a></span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for cmds</span>
-<span class='fu'><a href='augmentation.html'>augmentation_coord</a></span>(<span class='no'>x</span>)</pre>
+<span class='co'># S3 method for cmds_ord</span>
+<span class='fu'><a href='augmentation.html'>augmentation_coord</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -161,14 +158,15 @@ wrapper that adds the class attribute.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Multidimensional scaling of country differences and regression of attributes</span>
 <span class='co'># Reproduce Exhibit 4.2 in Greenacre (2010)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>country_differences</span>)
-<span class='no'>country_differences</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='masks.html'>cmdscale</a></span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_cmds</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>country_differences</span><span class='op'>)</span>
+<span class='va'>country_differences</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='wrap-ord.html'>cmdscale_ord</a></span><span class='op'>(</span>k <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>differences_cmds</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'cmds_ord': (13 x 2) x (13 x 2)'
 #&gt; # 2 coordinates: PCo1 and PCo2
 #&gt; # 
-#&gt; # U: [ 13 x 2 | 0 ]
+#&gt; # Rows: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; <span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
@@ -178,7 +176,7 @@ wrapper that adds the class attribute.</p>
 #&gt; </span><span style='color: #555555;'>5</span><span>  4.41     2.91  | 
 #&gt; 
 #&gt; # 
-#&gt; # V: [ 13 x 2 | 0 ]
+#&gt; # Columns: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
@@ -186,17 +184,19 @@ wrapper that adds the class attribute.</p>
 #&gt; </span><span style='color: #555555;'>3</span><span>  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
 #&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
 #&gt; </span><span style='color: #555555;'>5</span><span>  4.41     2.91  | 
-#&gt; </div><div class='input'><span class='no'>differences_plot</span> <span class='kw'>&lt;-</span> <span class='no'>differences_cmds</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>()
-<span class='no'>differences_plot</span></div><div class='img'><img src='methods-cmds-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Reproduce Exhibit 4.5 in Greenacre (2010)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>country_attributes</span>)
-<span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>country_attributes</span> ~ <span class='fu'><a href='accessors.html'>get_u</a></span>(<span class='no'>differences_cmds</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>attributes_fit</span></div><div class='output co'>#&gt; # A tbl_ord of class 'mlm': (13 x 3) x (6 x 3)'
+#&gt; </div><div class='input'><span class='va'>differences_plot</span> <span class='op'>&lt;-</span> <span class='va'>differences_cmds</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span>, y <span class='op'>=</span> <span class='fl'>2</span>, label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_cols_text</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>differences_plot</span>
+</div><div class='img'><img src='methods-cmds-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Reproduce Exhibit 4.5 in Greenacre (2010)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>country_attributes</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>country_attributes</span> <span class='op'>~</span> <span class='fu'><a href='accessors.html'>get_rows</a></span><span class='op'>(</span><span class='va'>differences_cmds</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>attributes_fit</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'mlm': (13 x 3) x (6 x 3)'
 #&gt; # 3 coordinates: (Intercept), PCo1, PCo2
 #&gt; # 
-#&gt; # U: [ 13 x 3 | 0 ]
+#&gt; # Rows: [ 13 x 3 | 0 ]
 #&gt;   `(Intercept)`     PCo1   PCo2 | 
 #&gt;                                 | 
 #&gt; </span><span style='color: #555555;'>1</span><span>             1  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
@@ -206,7 +206,7 @@ wrapper that adds the class attribute.</p>
 #&gt; </span><span style='color: #555555;'>5</span><span>             1  4.41     2.91  | 
 #&gt; 
 #&gt; # 
-#&gt; # V: [ 6 x 3 | 0 ]
+#&gt; # Columns: [ 6 x 3 | 0 ]
 #&gt;   `(Intercept)`   PCo1    PCo2 | 
 #&gt;                                | 
 #&gt; </span><span style='color: #555555;'>1</span><span>          5.23  0.423 -</span><span style='color: #BB0000;'>0.513</span><span>  | 
@@ -214,17 +214,19 @@ wrapper that adds the class attribute.</p>
 #&gt; </span><span style='color: #555555;'>3</span><span>          6.08 -</span><span style='color: #BB0000;'>0.399</span><span> -</span><span style='color: #BB0000;'>0.645</span><span>  | 
 #&gt; </span><span style='color: #555555;'>4</span><span>          4.    0.502 -</span><span style='color: #BB0000;'>0.444</span><span>  | 
 #&gt; </span><span style='color: #555555;'>5</span><span>          3.85  0.660  0.010</span><span style='text-decoration: underline;'>2</span><span> | 
-#&gt; </span><span style='color: #555555;'>6</span><span>          4.92  0.627 -</span><span style='color: #BB0000;'>0.591</span><span>  | </div><div class='input'><span class='no'>differences_plot</span> +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>attributes_fit</span>) +
-  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_v_text_radiate</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>attributes_fit</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>.3</span>)</div><div class='img'><img src='methods-cmds-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Align an MDS ordination to a PCA ordination</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>country_differences</span>)
-<span class='no'>country_differences</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='masks.html'>cmdscale</a></span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_cmds</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
+#&gt; </span><span style='color: #555555;'>6</span><span>          4.92  0.627 -</span><span style='color: #BB0000;'>0.591</span><span>  | </div><div class='input'><span class='va'>differences_plot</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>attributes_fit</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_cols_text_radiate</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>attributes_fit</span>, hjust <span class='op'>=</span> <span class='fl'>.3</span><span class='op'>)</span>
+</div><div class='img'><img src='methods-cmds-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Align an MDS ordination to a PCA ordination</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>country_differences</span><span class='op'>)</span>
+<span class='va'>country_differences</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='wrap-ord.html'>cmdscale_ord</a></span><span class='op'>(</span>k <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>differences_cmds</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'cmds_ord': (13 x 2) x (13 x 2)'
 #&gt; # 2 coordinates: PCo1 and PCo2
 #&gt; # 
-#&gt; # U: [ 13 x 2 | 0 ]
+#&gt; # Rows: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
@@ -234,7 +236,7 @@ wrapper that adds the class attribute.</p>
 #&gt; </span><span style='color: #555555;'>5</span><span>  4.41     2.91  | 
 #&gt; 
 #&gt; # 
-#&gt; # V: [ 13 x 2 | 0 ]
+#&gt; # Columns: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
@@ -242,13 +244,14 @@ wrapper that adds the class attribute.</p>
 #&gt; </span><span style='color: #555555;'>3</span><span>  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
 #&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
 #&gt; </span><span style='color: #555555;'>5</span><span>  4.41     2.91  | 
-#&gt; </div><div class='input'><span class='no'>country_differences</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/prcomp.html'>prcomp</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_pca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (13 x 13) x (13 x 13)'
+#&gt; </div><div class='input'><span class='va'>country_differences</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/prcomp.html'>prcomp</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>differences_pca</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (13 x 13) x (13 x 13)'
 #&gt; # 13 coordinates: PC1, PC2, ..., PC13
 #&gt; # 
-#&gt; # U: [ 13 x 13 | 0 ]
+#&gt; # Rows: [ 13 x 13 | 0 ]
 #&gt;      PC1   PC2     PC3 ... | 
 #&gt;                            | 
 #&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.576</span><span>  5.50  3.17       | 
@@ -258,7 +261,7 @@ wrapper that adds the class attribute.</p>
 #&gt; </span><span style='color: #555555;'>5</span><span>  9.60  -</span><span style='color: #BB0000;'>4.05</span><span> -</span><span style='color: #BB0000;'>3.03</span><span>       | 
 #&gt; 
 #&gt; # 
-#&gt; # V: [ 13 x 13 | 0 ]
+#&gt; # Columns: [ 13 x 13 | 0 ]
 #&gt;      PC1    PC2      PC3 ... | 
 #&gt;                              | 
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.104 -</span><span style='color: #BB0000;'>0.423</span><span> -</span><span style='color: #BB0000;'>0.340</span><span>       | 
@@ -267,12 +270,13 @@ wrapper that adds the class attribute.</p>
 #&gt; </span><span style='color: #555555;'>4</span><span>  0.343 -</span><span style='color: #BB0000;'>0.250</span><span>  0.102       | 
 #&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.352</span><span>  0.161  0.302       | 
 #&gt; </div><div class='input'><span class='co'># negate PCA cases to MDS coordinates</span>
-<span class='no'>differences_cmds</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='alignment.html'>negate_to</a></span>(<span class='no'>differences_pca</span>, <span class='st'>"u"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_align_u</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
+<span class='va'>differences_cmds</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='alignment.html'>negate_to</a></span><span class='op'>(</span><span class='va'>differences_pca</span>, <span class='st'>"rows"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>differences_align_rows</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'cmds_ord': (13 x 2) x (13 x 2)'
 #&gt; # 2 coordinates, transformed: PCo1 and PCo2
 #&gt; # 
-#&gt; # U: [ 13 x 2 | 0 ]
+#&gt; # Rows: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span>  2.94  | 
@@ -282,7 +286,7 @@ wrapper that adds the class attribute.</p>
 #&gt; </span><span style='color: #555555;'>5</span><span>  4.41    -</span><span style='color: #BB0000;'>2.91</span><span>  | 
 #&gt; 
 #&gt; # 
-#&gt; # V: [ 13 x 2 | 0 ]
+#&gt; # Columns: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span>  2.94  | 
@@ -290,17 +294,19 @@ wrapper that adds the class attribute.</p>
 #&gt; </span><span style='color: #555555;'>3</span><span>  3.70     0.883 | 
 #&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>     2.01  | 
 #&gt; </span><span style='color: #555555;'>5</span><span>  4.41    -</span><span style='color: #BB0000;'>2.91</span><span>  | 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_align_u</span>) + <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>()
-), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>))</div><div class='img'><img src='methods-cmds-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># negate PCA variables to MDS coordinates</span>
-<span class='no'>differences_cmds</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='alignment.html'>negate_to</a></span>(<span class='no'>differences_pca</span>, <span class='st'>"v"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_align_v</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fu'>gridExtra</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>arrangeGrob</a></span><span class='op'>(</span>grobs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>differences_cmds</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span><span class='op'>)</span>,
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>differences_pca</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span><span class='op'>)</span>,
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>differences_align_rows</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span>, ncol <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='methods-cmds-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># negate PCA variables to MDS coordinates</span>
+<span class='va'>differences_cmds</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='alignment.html'>negate_to</a></span><span class='op'>(</span><span class='va'>differences_pca</span>, <span class='st'>"cols"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>differences_align_cols</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'cmds_ord': (13 x 2) x (13 x 2)'
 #&gt; # 2 coordinates, transformed: PCo1 and PCo2
 #&gt; # 
-#&gt; # U: [ 13 x 2 | 0 ]
+#&gt; # Rows: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
@@ -310,7 +316,7 @@ wrapper that adds the class attribute.</p>
 #&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>4.41</span><span>     2.91  | 
 #&gt; 
 #&gt; # 
-#&gt; # V: [ 13 x 2 | 0 ]
+#&gt; # Columns: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
@@ -318,11 +324,12 @@ wrapper that adds the class attribute.</p>
 #&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>3.70</span><span>    -</span><span style='color: #BB0000;'>0.883</span><span> | 
 #&gt; </span><span style='color: #555555;'>4</span><span>  2.56    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
 #&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>4.41</span><span>     2.91  | 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_align_v</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>()
-), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>))</div><div class='img'><img src='methods-cmds-4.png' alt='' width='700' height='433' /></div></span></pre>
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fu'>gridExtra</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>arrangeGrob</a></span><span class='op'>(</span>grobs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>differences_cmds</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span><span class='op'>)</span>,
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>differences_pca</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span><span class='op'>)</span>,
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>differences_align_cols</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span>, ncol <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='methods-cmds-4.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -338,7 +345,7 @@ wrapper that adds the class attribute.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

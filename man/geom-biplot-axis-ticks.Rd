@@ -7,7 +7,7 @@
 \alias{geom_axis_ticks}
 \alias{geom_rows_axis_ticks}
 \alias{geom_cols_axis_ticks}
-\alias{geom_biplot_axis_ticks}
+\alias{geom_dims_axis_ticks}
 \title{Render tick marks for axes}
 \format{
 An object of class \code{GeomAxisTicks} (inherits from \code{GeomSegment}, \code{Geom}, \code{ggproto}, \code{gg}) of length 5.
@@ -61,12 +61,12 @@ geom_cols_axis_ticks(
   inherit.aes = TRUE
 )
 
-geom_biplot_axis_ticks(
+geom_dims_axis_ticks(
   mapping = NULL,
   data = NULL,
   stat = "identity",
   position = "identity",
-  .matrix = "v",
+  .matrix = "cols",
   axes = NULL,
   calibrate = FALSE,
   family_fun = NULL,
@@ -150,7 +150,7 @@ filter the data frame to one of these two.
 
 The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.
 }
 

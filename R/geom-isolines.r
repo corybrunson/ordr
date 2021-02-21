@@ -260,9 +260,9 @@ geom_cols_isolines <- function(
 
 #' @rdname geom-biplot-isolines
 #' @export
-geom_biplot_isolines <- function(
+geom_dims_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "v", axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
+  .matrix = "cols", axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE

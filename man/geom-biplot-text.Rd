@@ -4,16 +4,16 @@
 \alias{geom-biplot-text}
 \alias{geom_rows_text}
 \alias{geom_cols_text}
-\alias{geom_biplot_text}
+\alias{geom_dims_text}
 \alias{geom_rows_label}
 \alias{geom_cols_label}
-\alias{geom_biplot_label}
+\alias{geom_dims_label}
 \alias{geom_rows_text_repel}
 \alias{geom_cols_text_repel}
-\alias{geom_biplot_text_repel}
+\alias{geom_dims_text_repel}
 \alias{geom_rows_label_repel}
 \alias{geom_cols_label_repel}
-\alias{geom_biplot_label_repel}
+\alias{geom_dims_label_repel}
 \title{Render text and labels at ordinates}
 \usage{
 geom_rows_text(
@@ -46,7 +46,7 @@ geom_cols_text(
   inherit.aes = TRUE
 )
 
-geom_biplot_text(
+geom_dims_text(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -86,7 +86,7 @@ geom_cols_label(
   inherit.aes = TRUE
 )
 
-geom_biplot_label(
+geom_dims_label(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -123,7 +123,7 @@ geom_cols_text_repel(
   inherit.aes = TRUE
 )
 
-geom_biplot_text_repel(
+geom_dims_text_repel(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -160,7 +160,7 @@ geom_cols_label_repel(
   inherit.aes = TRUE
 )
 
-geom_biplot_label_repel(
+geom_dims_label_repel(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -236,7 +236,7 @@ filter the data frame to one of these two.
 
 The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.
 }
 

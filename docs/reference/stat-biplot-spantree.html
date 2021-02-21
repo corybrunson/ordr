@@ -116,41 +116,41 @@ points that form a minimum spanning tree, then calculates the segments
 between these poirs in the two dimensions <code>x</code> and <code>y</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>stat_spantree</span>(
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>geom</span> <span class='kw'>=</span> <span class='st'>"segment"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"euclidean"</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>check.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
-)
+    <pre class="usage"><span class='fu'>stat_spantree</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  geom <span class='op'>=</span> <span class='st'>"segment"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  method <span class='op'>=</span> <span class='st'>"euclidean"</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  check.aes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>stat_u_spantree</span>(
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>geom</span> <span class='kw'>=</span> <span class='st'>"segment"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"euclidean"</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>check.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
-)
+<span class='fu'>stat_rows_spantree</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  geom <span class='op'>=</span> <span class='st'>"segment"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  method <span class='op'>=</span> <span class='st'>"euclidean"</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  check.aes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>stat_v_spantree</span>(
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>geom</span> <span class='kw'>=</span> <span class='st'>"segment"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"euclidean"</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>check.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
-)</pre>
+<span class='fu'>stat_cols_spantree</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  geom <span class='op'>=</span> <span class='st'>"segment"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  method <span class='op'>=</span> <span class='st'>"euclidean"</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  check.aes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -219,8 +219,8 @@ supplied parameters and aesthetics are understood by the <code>geom</code> or
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>An object of class <code>StatSpantree</code> (inherits from <code>Stat</code>, <code>ggproto</code>, <code>gg</code>) of length 3.</p>
-<p>An object of class <code>StatUSpantree</code> (inherits from <code>StatSpantree</code>, <code>Stat</code>, <code>ggproto</code>, <code>gg</code>) of length 2.</p>
-<p>An object of class <code>StatVSpantree</code> (inherits from <code>StatSpantree</code>, <code>Stat</code>, <code>ggproto</code>, <code>gg</code>) of length 2.</p>
+<p>An object of class <code>StatRowsSpantree</code> (inherits from <code>StatSpantree</code>, <code>Stat</code>, <code>ggproto</code>, <code>gg</code>) of length 2.</p>
+<p>An object of class <code>StatColsSpantree</code> (inherits from <code>StatSpantree</code>, <code>Stat</code>, <code>ggproto</code>, <code>gg</code>) of length 2.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>A minimum spanning tree (MST) on the point cloud \(X\) is a minimal
@@ -246,13 +246,13 @@ dimensions can encapsulate the "true" distances between points (Jolliffe,
     
 
 <p><code><a href='ggbiplot.html'>ggbiplot()</a></code> uses <code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>ggplot2::fortify()</a></code> internally to produce a single data
-frame with a <code>.matrix</code> column distinguishing the subjects (<code>"u"</code>) and
-variables (<code>"v"</code>). The stat layers <code><a href='biplot-matrix.html'>stat_u()</a></code> and <code><a href='biplot-matrix.html'>stat_v()</a></code> simply filter
-the data frame to one of these two.</p>
-<p>The geom layers <code>geom_u_*()</code> and <code>geom_v_*()</code> call the corresponding stat in
-order to render plot elements for the corresponding matrix \(U\) or
-\(V\). <code>geom_biplot_*()</code> selects a default matrix based on common practice,
-e.g. \(U\) for points and \(V\) for arrows.</p>
+frame with a <code>.matrix</code> column distinguishing the subjects (<code>"rows"</code>) and
+variables (<code>"cols"</code>). The stat layers <code><a href='biplot-matrix.html'>stat_rows()</a></code> and <code><a href='biplot-matrix.html'>stat_cols()</a></code> simply
+filter the data frame to one of these two.</p>
+<p>The geom layers <code>geom_rows_*()</code> and <code>geom_cols_*()</code> call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+<code>geom_dims_*()</code> selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Jolliffe IT (2002) <em>Principal Component Analysis</em>, Second Edition.
@@ -262,16 +262,17 @@ Springer Series in Statistics, ISSN 0172-7397. doi: <a href='https://doi.org/10.
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Compare MDS to the spanning tree for road distances between European cities</span>
-<span class='no'>eurodist</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='masks.html'>cmdscale</a></span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>11</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
+<span class='va'>eurodist</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='wrap-ord.html'>cmdscale_ord</a></span><span class='op'>(</span>k <span class='op'>=</span> <span class='fl'>11</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='co'># align to conventional compass orientation</span>
-  <span class='fu'><a href='alignment.html'>negate_ord</a></span>(<span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>euro_mds</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (21 x 11) x (21 x 11)'
+  <span class='fu'><a href='alignment.html'>negate_ord</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>euro_mds</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'cmds_ord': (21 x 11) x (21 x 11)'
 #&gt; # 11 coordinates, transformed: PCo1, PCo2, ..., PCo11
 #&gt; # 
-#&gt; # U: [ 21 x 11 | 1 ]
+#&gt; # Rows: [ 21 x 11 | 1 ]
 #&gt;     PCo1   PCo2   PCo3 ... |   .name    
 #&gt;                            |   <span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
 #&gt; </span><span style='color: #555555;'>1</span><span> </span><span style='text-decoration: underline;'>2</span><span>290.  -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>799.</span><span>   53.8     | </span><span style='color: #555555;'>1</span><span> Athens   
@@ -281,7 +282,7 @@ Springer Series in Statistics, ISSN 0172-7397. doi: <a href='https://doi.org/10.
 #&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>352.</span><span>    291.  457.      | </span><span style='color: #555555;'>5</span><span> Cherbourg
 #&gt; </span><span style='color: #555555;'># … with 16 more rows</span><span>
 #&gt; # 
-#&gt; # V: [ 21 x 11 | 1 ]
+#&gt; # Columns: [ 21 x 11 | 1 ]
 #&gt;     PCo1   PCo2   PCo3 ... |   .name    
 #&gt;                            |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    
 #&gt; </span><span style='color: #555555;'>1</span><span> </span><span style='text-decoration: underline;'>2</span><span>290.  -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>799.</span><span>   53.8     | </span><span style='color: #555555;'>1</span><span> Athens   
@@ -289,14 +290,15 @@ Springer Series in Statistics, ISSN 0172-7397. doi: <a href='https://doi.org/10.
 #&gt; </span><span style='color: #555555;'>3</span><span>   59.2   367.  178.      | </span><span style='color: #555555;'>3</span><span> Brussels 
 #&gt; </span><span style='color: #555555;'>4</span><span>  -</span><span style='color: #BB0000;'>82.8</span><span>   430.  300.      | </span><span style='color: #555555;'>4</span><span> Calais   
 #&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>352.</span><span>    291.  457.      | </span><span style='color: #555555;'>5</span><span> Cherbourg
-#&gt; </span><span style='color: #555555;'># … with 16 more rows</span><span></div><div class='input'><span class='no'>euro_mds</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>() +
-  <span class='fu'>stat_v_spantree</span>(
-    <span class='fu'><a href='ggbiplot.html'>ord_aes</a></span>(<span class='no'>euro_mds</span>), <span class='kw'>check.aes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-    <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='st'>"dotted"</span>
-  ) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>) +
-  <span class='fu'>ggtitle</span>(<span class='st'>"MDS biplot of road distances between European cities"</span>)</div><div class='img'><img src='stat-biplot-spantree-1.png' alt='' width='700' height='433' /></div></span></pre>
+#&gt; </span><span style='color: #555555;'># … with 16 more rows</span><span></div><div class='input'><span class='va'>euro_mds</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>stat_cols_spantree</span><span class='op'>(</span>
+    <span class='fu'><a href='ggbiplot.html'>ord_aes</a></span><span class='op'>(</span><span class='va'>euro_mds</span><span class='op'>)</span>, check.aes <span class='op'>=</span> <span class='cn'>FALSE</span>,
+    alpha <span class='op'>=</span> <span class='fl'>.5</span>, linetype <span class='op'>=</span> <span class='st'>"dotted"</span>
+  <span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_cols_text</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>, size <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span><span class='st'>"MDS biplot of road distances between European cities"</span><span class='op'>)</span>
+</div><div class='img'><img src='stat-biplot-spantree-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -312,7 +314,7 @@ Springer Series in Statistics, ISSN 0172-7397. doi: <a href='https://doi.org/10.
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

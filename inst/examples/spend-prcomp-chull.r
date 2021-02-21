@@ -3,7 +3,7 @@ USPersonalExpenditure %>%
   prcomp(center = FALSE) %>%
   as_tbl_ord() %>%
   confer_inertia(c(.5, .5)) %>%
-  negate_to_nonneg_orthant("v") %>%
+  negate_to_nonneg_orthant("cols") %>%
   # allow radiating text to exceed plotting window
   ggbiplot(aes(label = .name), clip = "off") +
   geom_rows_label(size = 3) +

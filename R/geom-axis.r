@@ -151,9 +151,9 @@ geom_cols_axis <- function(
 
 #' @rdname geom-biplot-axis
 #' @export
-geom_biplot_axis <- function(
+geom_dims_axis <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "v",
+  .matrix = "cols",
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE

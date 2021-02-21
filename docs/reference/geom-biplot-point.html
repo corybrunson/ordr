@@ -114,39 +114,39 @@ subjects or vectors." />
 subjects or vectors.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>geom_u_point</span>(
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)
+    <pre class="usage"><span class='fu'>geom_rows_point</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  <span class='va'>...</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>geom_v_point</span>(
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)
+<span class='fu'>geom_cols_point</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  <span class='va'>...</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>geom_biplot_point</span>(
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+<span class='fu'>geom_dims_point</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  .matrix <span class='op'>=</span> <span class='st'>"rows"</span>,
+  <span class='va'>...</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -209,7 +209,7 @@ the default plot specification, e.g. <code><a href='https://ggplot2.tidyverse.or
       <th>.matrix</th>
       <td><p>A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are <code>"u"</code>, <code>"v"</code>, and <code>"uv"</code>.</p></td>
+standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</code> (for both).</p></td>
     </tr>
     </table>
 
@@ -218,13 +218,13 @@ standard values are <code>"u"</code>, <code>"v"</code>, and <code>"uv"</code>.</
     
 
 <p><code><a href='ggbiplot.html'>ggbiplot()</a></code> uses <code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>ggplot2::fortify()</a></code> internally to produce a single data
-frame with a <code>.matrix</code> column distinguishing the subjects (<code>"u"</code>) and
-variables (<code>"v"</code>). The stat layers <code><a href='biplot-matrix.html'>stat_u()</a></code> and <code><a href='biplot-matrix.html'>stat_v()</a></code> simply filter
-the data frame to one of these two.</p>
-<p>The geom layers <code>geom_u_*()</code> and <code>geom_v_*()</code> call the corresponding stat in
-order to render plot elements for the corresponding matrix \(U\) or
-\(V\). <code>geom_biplot_*()</code> selects a default matrix based on common practice,
-e.g. \(U\) for points and \(V\) for arrows.</p>
+frame with a <code>.matrix</code> column distinguishing the subjects (<code>"rows"</code>) and
+variables (<code>"cols"</code>). The stat layers <code><a href='biplot-matrix.html'>stat_rows()</a></code> and <code><a href='biplot-matrix.html'>stat_cols()</a></code> simply
+filter the data frame to one of these two.</p>
+<p>The geom layers <code>geom_rows_*()</code> and <code>geom_cols_*()</code> call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+<code>geom_dims_*()</code> selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.</p>
     <h2 class="hasAnchor" id="aesthetics"><a class="anchor" href="#aesthetics"></a>Aesthetics</h2>
 
     
@@ -247,19 +247,20 @@ are in bold):</p><ul>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Linear regression on marine ecosystem data</span>
 <span class='co'># Adapt Exhibit 2.3 in Greenacre (2010)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>bioenv</span>)
-<span class='no'>bioenv</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/transform.html'>transform</a></span>(
-    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='no'>Depth</span>)),
-    <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='no'>Pollution</span>))
-  ) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>d</span> ~ <span class='no'>x</span> + <span class='no'>y</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>bioenv_lm</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lm': (30 x 3) x (1 x 3)'
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>bioenv</span><span class='op'>)</span>
+<span class='va'>bioenv</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/transform.html'>transform</a></span><span class='op'>(</span>
+    x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='va'>Depth</span><span class='op'>)</span><span class='op'>)</span>,
+    y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='va'>Pollution</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span>formula <span class='op'>=</span> <span class='va'>d</span> <span class='op'>~</span> <span class='va'>x</span> <span class='op'>+</span> <span class='va'>y</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>bioenv_lm</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'lm': (30 x 3) x (1 x 3)'
 #&gt; # 3 coordinates: (Intercept), x, y
 #&gt; # 
-#&gt; # U: [ 30 x 3 | 7 ]
+#&gt; # Rows: [ 30 x 3 | 7 ]
 #&gt;   `(Intercept)`       x      y |   .name   .hat .sigma .cooksd
 #&gt;                                |   <span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>             1 -</span><span style='color: #BB0000;'>0.156</span><span>   0.132 | </span><span style='color: #555555;'>1</span><span> 1     0.034</span><span style='text-decoration: underline;'>4</span><span>   5.20 6.85</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>
@@ -268,33 +269,35 @@ are in bold):</p><ul>
 #&gt; </span><span style='color: #555555;'>4</span><span>             1 -</span><span style='color: #BB0000;'>0.668</span><span>   1.72  | </span><span style='color: #555555;'>4</span><span> 4     0.135    5.25 3.50</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>
 #&gt; </span><span style='color: #555555;'>5</span><span>             1 -</span><span style='color: #BB0000;'>0.860</span><span>  -</span><span style='color: #BB0000;'>0.288</span><span> | </span><span style='color: #555555;'>5</span><span> 5     0.075</span><span style='text-decoration: underline;'>0</span><span>   5.26 6.07</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-5</span><span>
 #&gt; </span><span style='color: #555555;'># … with 25 more rows, and 3 more</span><span>
-#&gt; # U: [ 30 x 3 | 7 ]</span><span style='color: #555555;'>#   variables: .wt.res </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; # Rows: [ 30 x 3 | 7 ]</span><span style='color: #555555;'>#   variables: .wt.res </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt;   `(Intercept)`       x      y | </span><span style='color: #555555;'>#   .fit </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, .se.fit </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; # 
-#&gt; # V: [ 1 x 3 | 1 ]
+#&gt; # Columns: [ 1 x 3 | 1 ]
 #&gt;   `(Intercept)`     x     y |   .name
 #&gt;                             |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>          10.9  2.31 -</span><span style='color: #BB0000;'>2.97</span><span> | </span><span style='color: #555555;'>1</span><span> d    </div><div class='input'><span class='no'>bioenv_lm</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>.fit</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='no'>.wt.res</span> ^ <span class='fl'>2</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'>scale_color_distiller</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"div"</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>1</span>) +
-  <span class='fu'>scale_alpha_continuous</span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>/<span class='fl'>3</span>, <span class='fl'>1</span>)) +
-  <span class='fu'>geom_u_point</span>() +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>() +
-  <span class='fu'><a href='geom-biplot-isolines.html'>geom_v_isolines</a></span>(<span class='fu'>aes</span>(<span class='kw'>intercept</span> <span class='kw'>=</span> <span class='no'>`(Intercept)`</span>), <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>5</span>) +
-  <span class='fu'>labs</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"Standardized Depth"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"Standardized Pollution"</span>) +
-  <span class='fu'>ggtitle</span>(
+#&gt; </span><span style='color: #555555;'>1</span><span>          10.9  2.31 -</span><span style='color: #BB0000;'>2.97</span><span> | </span><span style='color: #555555;'>1</span><span> d    </div><div class='input'><span class='va'>bioenv_lm</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, y <span class='op'>=</span> <span class='va'>y</span>, color <span class='op'>=</span> <span class='va'>.fit</span>, alpha <span class='op'>=</span> <span class='va'>.wt.res</span> <span class='op'>^</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_color_distiller</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"div"</span>, palette <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_alpha_continuous</span><span class='op'>(</span>range <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>/</span><span class='fl'>3</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_rows_point</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-isolines.html'>geom_cols_isolines</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>intercept <span class='op'>=</span> <span class='va'>`(Intercept)`</span><span class='op'>)</span>, axes <span class='op'>=</span> <span class='fl'>1</span>, by <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Standardized Depth"</span>, y <span class='op'>=</span> <span class='st'>"Standardized Pollution"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span>
     <span class='st'>"Gradient vector and contour lines for species 'd'"</span>,
     <span class='st'>"Regression plane: standardized depth-pollution space"</span>
-  )</div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring unknown aesthetics: intercept</span></div><div class='img'><img src='geom-biplot-point-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Align an MDS ordination to a PCA ordination</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>country_differences</span>)
-<span class='no'>country_differences</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='masks.html'>cmdscale</a></span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_cmds</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
+  <span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring unknown aesthetics: intercept</span></div><div class='img'><img src='geom-biplot-point-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Align an MDS ordination to a PCA ordination</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>country_differences</span><span class='op'>)</span>
+<span class='va'>country_differences</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='wrap-ord.html'>cmdscale_ord</a></span><span class='op'>(</span>k <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>differences_cmds</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'cmds_ord': (13 x 2) x (13 x 2)'
 #&gt; # 2 coordinates: PCo1 and PCo2
 #&gt; # 
-#&gt; # U: [ 13 x 2 | 0 ]
+#&gt; # Rows: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
@@ -304,7 +307,7 @@ are in bold):</p><ul>
 #&gt; </span><span style='color: #555555;'>5</span><span>  4.41     2.91  | 
 #&gt; 
 #&gt; # 
-#&gt; # V: [ 13 x 2 | 0 ]
+#&gt; # Columns: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
@@ -312,13 +315,14 @@ are in bold):</p><ul>
 #&gt; </span><span style='color: #555555;'>3</span><span>  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
 #&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
 #&gt; </span><span style='color: #555555;'>5</span><span>  4.41     2.91  | 
-#&gt; </div><div class='input'><span class='no'>country_differences</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/prcomp.html'>prcomp</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_pca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (13 x 13) x (13 x 13)'
+#&gt; </div><div class='input'><span class='va'>country_differences</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/prcomp.html'>prcomp</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>differences_pca</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (13 x 13) x (13 x 13)'
 #&gt; # 13 coordinates: PC1, PC2, ..., PC13
 #&gt; # 
-#&gt; # U: [ 13 x 13 | 0 ]
+#&gt; # Rows: [ 13 x 13 | 0 ]
 #&gt;      PC1   PC2     PC3 ... | 
 #&gt;                            | 
 #&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.576</span><span>  5.50  3.17       | 
@@ -328,7 +332,7 @@ are in bold):</p><ul>
 #&gt; </span><span style='color: #555555;'>5</span><span>  9.60  -</span><span style='color: #BB0000;'>4.05</span><span> -</span><span style='color: #BB0000;'>3.03</span><span>       | 
 #&gt; 
 #&gt; # 
-#&gt; # V: [ 13 x 13 | 0 ]
+#&gt; # Columns: [ 13 x 13 | 0 ]
 #&gt;      PC1    PC2      PC3 ... | 
 #&gt;                              | 
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.104 -</span><span style='color: #BB0000;'>0.423</span><span> -</span><span style='color: #BB0000;'>0.340</span><span>       | 
@@ -337,12 +341,13 @@ are in bold):</p><ul>
 #&gt; </span><span style='color: #555555;'>4</span><span>  0.343 -</span><span style='color: #BB0000;'>0.250</span><span>  0.102       | 
 #&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.352</span><span>  0.161  0.302       | 
 #&gt; </div><div class='input'><span class='co'># negate PCA cases to MDS coordinates</span>
-<span class='no'>differences_cmds</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='alignment.html'>negate_to</a></span>(<span class='no'>differences_pca</span>, <span class='st'>"u"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_align_u</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
+<span class='va'>differences_cmds</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='alignment.html'>negate_to</a></span><span class='op'>(</span><span class='va'>differences_pca</span>, <span class='st'>"rows"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>differences_align_rows</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'cmds_ord': (13 x 2) x (13 x 2)'
 #&gt; # 2 coordinates, transformed: PCo1 and PCo2
 #&gt; # 
-#&gt; # U: [ 13 x 2 | 0 ]
+#&gt; # Rows: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span>  2.94  | 
@@ -352,7 +357,7 @@ are in bold):</p><ul>
 #&gt; </span><span style='color: #555555;'>5</span><span>  4.41    -</span><span style='color: #BB0000;'>2.91</span><span>  | 
 #&gt; 
 #&gt; # 
-#&gt; # V: [ 13 x 2 | 0 ]
+#&gt; # Columns: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span>  2.94  | 
@@ -360,17 +365,19 @@ are in bold):</p><ul>
 #&gt; </span><span style='color: #555555;'>3</span><span>  3.70     0.883 | 
 #&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>     2.01  | 
 #&gt; </span><span style='color: #555555;'>5</span><span>  4.41    -</span><span style='color: #BB0000;'>2.91</span><span>  | 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'>geom_u_point</span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'>geom_u_point</span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_align_u</span>) + <span class='fu'>geom_u_point</span>()
-), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>))</div><div class='img'><img src='geom-biplot-point-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># negate PCA variables to MDS coordinates</span>
-<span class='no'>differences_cmds</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='alignment.html'>negate_to</a></span>(<span class='no'>differences_pca</span>, <span class='st'>"v"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_align_v</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fu'>gridExtra</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>arrangeGrob</a></span><span class='op'>(</span>grobs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>differences_cmds</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>geom_rows_point</span><span class='op'>(</span><span class='op'>)</span>,
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>differences_pca</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>geom_rows_point</span><span class='op'>(</span><span class='op'>)</span>,
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>differences_align_rows</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>geom_rows_point</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span>, ncol <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='geom-biplot-point-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># negate PCA variables to MDS coordinates</span>
+<span class='va'>differences_cmds</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='alignment.html'>negate_to</a></span><span class='op'>(</span><span class='va'>differences_pca</span>, <span class='st'>"cols"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>differences_align_cols</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'cmds_ord': (13 x 2) x (13 x 2)'
 #&gt; # 2 coordinates, transformed: PCo1 and PCo2
 #&gt; # 
-#&gt; # U: [ 13 x 2 | 0 ]
+#&gt; # Rows: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
@@ -380,7 +387,7 @@ are in bold):</p><ul>
 #&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>4.41</span><span>     2.91  | 
 #&gt; 
 #&gt; # 
-#&gt; # V: [ 13 x 2 | 0 ]
+#&gt; # Columns: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
@@ -388,20 +395,22 @@ are in bold):</p><ul>
 #&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>3.70</span><span>    -</span><span style='color: #BB0000;'>0.883</span><span> | 
 #&gt; </span><span style='color: #555555;'>4</span><span>  2.56    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
 #&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>4.41</span><span>     2.91  | 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_align_v</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>()
-), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>))</div><div class='img'><img src='geom-biplot-point-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Confer inertia between rows and columns of CA on Spanish ISSP sample</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>issp_women</span>)
-<span class='no'>issp_women</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>ca</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/ca.html'>ca</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>issp_ca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (23 x 22) x (39 x 22)'
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fu'>gridExtra</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>arrangeGrob</a></span><span class='op'>(</span>grobs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>differences_cmds</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span><span class='op'>)</span>,
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>differences_pca</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span><span class='op'>)</span>,
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>differences_align_cols</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span>, ncol <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='geom-biplot-point-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Confer inertia between rows and columns of CA on Spanish ISSP sample</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>issp_women</span><span class='op'>)</span>
+<span class='va'>issp_women</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ca</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/ca.html'>ca</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>issp_ca</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (23 x 22) x (39 x 22)'
 #&gt; # 22 coordinates: Dim1, Dim2, ..., Dim22
 #&gt; # 
-#&gt; # U: [ 23 x 22 | 4 ]
+#&gt; # Rows: [ 23 x 22 | 4 ]
 #&gt;     Dim1   Dim2    Dim3 ... |   .name   .mass  .dist .inertia
 #&gt;                             |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.280  0.111  0.830      | </span><span style='color: #555555;'>1</span><span> m1    0.185   0.080</span><span style='text-decoration: underline;'>7</span><span> 0.001</span><span style='text-decoration: underline;'>20</span><span> 
@@ -411,7 +420,7 @@ are in bold):</p><ul>
 #&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.850</span><span>  0.403 -</span><span style='color: #BB0000;'>1.08</span><span>       | </span><span style='color: #555555;'>5</span><span> m5    0.103   0.214  0.004</span><span style='text-decoration: underline;'>71</span><span> 
 #&gt; </span><span style='color: #555555;'># … with 18 more rows</span><span>
 #&gt; # 
-#&gt; # V: [ 39 x 22 | 4 ]
+#&gt; # Columns: [ 39 x 22 | 4 ]
 #&gt;     Dim1   Dim2   Dim3 ... |   .name   .mass .dist .inertia
 #&gt;                            |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>1.14</span><span>  -</span><span style='color: #BB0000;'>0.854</span><span> -</span><span style='color: #BB0000;'>0.892</span><span>     | </span><span style='color: #555555;'>1</span><span> A1    0.023</span><span style='text-decoration: underline;'>6</span><span>  0.289 0.001</span><span style='text-decoration: underline;'>97</span><span> 
@@ -420,21 +429,23 @@ are in bold):</p><ul>
 #&gt; </span><span style='color: #555555;'>4</span><span>  0.963 -</span><span style='color: #BB0000;'>0.883</span><span>  1.79      | </span><span style='color: #555555;'>4</span><span> A4    0.035</span><span style='text-decoration: underline;'>5</span><span>  0.255 0.002</span><span style='text-decoration: underline;'>30</span><span> 
 #&gt; </span><span style='color: #555555;'>5</span><span>  1.25  -</span><span style='color: #BB0000;'>2.50</span><span>   0.188     | </span><span style='color: #555555;'>5</span><span> A5    0.005</span><span style='text-decoration: underline;'>28</span><span> 0.409 0.000</span><span style='text-decoration: underline;'>884</span><span>
 #&gt; </span><span style='color: #555555;'># … with 34 more rows</span><span></div><div class='input'><span class='co'># Reproduce Exhibit 9.2 in Greenacre (2010)...</span>
-<span class='no'>issp_ca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'>geom_u_point</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text_repel</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
-  <span class='fu'>geom_v_point</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>17</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text_repel</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Inertias are not balanced.</span></div><div class='img'><img src='geom-biplot-point-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Reproduce Exhibit 9.3 in Greenacre (2010)...</span>
-<span class='no'>issp_ca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='st'>"rowprincipal"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'>geom_u_point</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
-  <span class='fu'>geom_v_point</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>17</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text_repel</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>)</div><div class='img'><img src='geom-biplot-point-5.png' alt='' width='700' height='433' /></div><div class='input'># Reproduce Exhibits 9.4 and 9.6 in Greenacre (2010)...
+<span class='va'>issp_ca</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_rows_point</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"darkgreen"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_rows_text_repel</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"darkgreen"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_cols_point</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"brown"</span>, shape <span class='op'>=</span> <span class='fl'>17</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_cols_text_repel</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"brown"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Inertias are not balanced.</span></div><div class='img'><img src='geom-biplot-point-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Reproduce Exhibit 9.3 in Greenacre (2010)...</span>
+<span class='va'>issp_ca</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='st'>"rowprincipal"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_rows_point</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"darkgreen"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_cols_point</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"brown"</span>, shape <span class='op'>=</span> <span class='fl'>17</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_cols_text_repel</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"brown"</span><span class='op'>)</span>
+</div><div class='img'><img src='geom-biplot-point-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Reproduce Exhibits 9.4 and 9.6 in Greenacre (2010)...</span>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -451,7 +462,7 @@ are in bold):</p><ul>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -81,7 +81,7 @@ iris[, -5] \%>\%
   mutate_cols(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
   print() -> iris_pca
 iris_pca \%>\%
-  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
+  ggbiplot(aes(color = species), sec.axes = "cols", scale.factor = 3) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   geom_rows_point() +
@@ -139,7 +139,7 @@ arrests_lra \%>\%
 # Adapt Exhibit 7.1 in Greenacre (2010)
 arrests_lra \%>\%
   confer_inertia(1) \%>\%
-  ggbiplot(sec.axes = "v", scale.factor = 1/20) +
+  ggbiplot(sec.axes = "cols", scale.factor = 1/20) +
   theme_bw() +
   geom_rows_text(
     aes(label = .abb),

@@ -7,6 +7,6 @@
 #'
 #' The geom layers `geom_rows_*()` and `geom_cols_*()` call the corresponding
 #' stat in order to render plot elements for the corresponding factor matrix.
-#' `geom_biplot_*()` selects a default matrix based on common practice, e.g.
+#' `geom_dims_*()` selects a default matrix based on common practice, e.g.
 #' points for rows and arrows for columns.
 #' 

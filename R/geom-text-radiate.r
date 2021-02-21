@@ -164,7 +164,7 @@ geom_cols_text_radiate <- function(
 
 #' @rdname geom-biplot-text-radiate
 #' @export
-geom_biplot_text_radiate <- function(
+geom_dims_text_radiate <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "cols",
   ...,

@@ -62,7 +62,7 @@ sub_ratios \%>\%
   print() -> lra_ratios
 lra_ratios \%>\%
   confer_inertia("rows") \%>\%
-  ggbiplot(sec.axes = "v", scale.factor = .05) +
+  ggbiplot(sec.axes = "cols", scale.factor = .05) +
   geom_rows_text(aes(label = recipes, color = chapter)) +
   geom_cols_vector() +
   geom_cols_text(aes(label = .name), hjust = "outward", vjust = "outward") +
@@ -87,7 +87,7 @@ arrests_lra \%>\%
 # Adapt Exhibit 7.1 in Greenacre (2010)
 arrests_lra \%>\%
   confer_inertia(1) \%>\%
-  ggbiplot(sec.axes = "v", scale.factor = 1/20) +
+  ggbiplot(sec.axes = "cols", scale.factor = 1/20) +
   theme_bw() +
   geom_rows_text(
     aes(label = .abb),
@@ -131,7 +131,7 @@ levantine_glass \%>\%
   confer_inertia("rows") \%>\%
   bind_cols_rows(dplyr::select(levantine_glass, Site, Type)) \%>\%
   print() -> lra_glass
-ggbiplot(lra_glass, sec.axes = "v", scale.factor = .05) +
+ggbiplot(lra_glass, sec.axes = "cols", scale.factor = .05) +
   geom_rows_point(aes(shape = Site, color = Type)) +
   geom_cols_vector() +
   geom_cols_text(aes(label = .name), hjust = "outward", vjust = "outward") +
@@ -144,7 +144,7 @@ levantine_glass \%>\%
   confer_inertia("rows") \%>\%
   bind_cols_rows(dplyr::select(levantine_glass, Site, Type)) \%>\%
   print() -> lra_glass
-ggbiplot(lra_glass, sec.axes = "v", scale.factor = .05) +
+ggbiplot(lra_glass, sec.axes = "cols", scale.factor = .05) +
   geom_rows_point(aes(shape = Site, color = Type)) +
   geom_cols_vector() +
   geom_cols_text(aes(label = .name), hjust = "outward", vjust = "outward") +

@@ -74,7 +74,7 @@ geom_cols_path <- function(
 
 #' @rdname geom-biplot-path
 #' @export
-geom_biplot_path <- function(
+geom_dims_path <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "rows",
   ...,

@@ -44,7 +44,7 @@ finches \%>\% t() \%>\%
 finches_lsvd \%>\%
   ggbiplot(
     aes(x = LSC1, y = LSC2, label = .name),
-    sec.axes = "v", scale.factor = 100
+    sec.axes = "cols", scale.factor = 100
   ) +
   geom_rows_vector(alpha = .5, color = "darkred") +
   geom_rows_text_radiate(size = 3, color = "darkred") +
@@ -63,7 +63,7 @@ finches \%>\% t() \%>\%
 finches_lpca \%>\%
   ggbiplot(
     aes(x = LPC1, y = LPC2, label = .name),
-    sec.axes = "v", scale.factor = 50
+    sec.axes = "cols", scale.factor = 50
   ) +
   geom_rows_vector(alpha = .5, color = "darkred") +
   geom_rows_text_radiate(size = 3, color = "darkred") +
@@ -84,7 +84,7 @@ finches \%>\% t() \%>\%
 finches_clpca \%>\%
   ggbiplot(
     aes(x = LPC1, y = LPC2, label = .name),
-    sec.axes = "v", scale.factor = 50
+    sec.axes = "cols", scale.factor = 50
   ) +
   geom_rows_vector(alpha = .5, color = "darkred") +
   geom_rows_text_radiate(size = 3, color = "darkred") +

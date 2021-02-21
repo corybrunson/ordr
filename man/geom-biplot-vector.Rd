@@ -7,7 +7,7 @@
 \alias{geom_vector}
 \alias{geom_rows_vector}
 \alias{geom_cols_vector}
-\alias{geom_biplot_vector}
+\alias{geom_dims_vector}
 \title{Render vectors from origin to ordinates}
 \format{
 An object of class \code{GeomVector} (inherits from \code{GeomSegment}, \code{Geom}, \code{ggproto}, \code{gg}) of length 4.
@@ -49,7 +49,7 @@ geom_cols_vector(
   inherit.aes = TRUE
 )
 
-geom_biplot_vector(
+geom_dims_vector(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -124,7 +124,7 @@ filter the data frame to one of these two.
 
 The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.
 }
 

@@ -104,7 +104,7 @@ filter the data frame to one of these two.
 
 The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.
 }
 
@@ -136,7 +136,7 @@ iris[, -5] \%>\%
   mutate_cols(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
   print() -> iris_pca
 iris_pca \%>\%
-  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
+  ggbiplot(aes(color = species), sec.axes = "cols", scale.factor = 3) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   geom_rows_point() +
@@ -156,7 +156,7 @@ finches \%>\% t() \%>\%
 finches_lsvd \%>\%
   ggbiplot(
     aes(x = LSC1, y = LSC2, label = .name),
-    sec.axes = "v", scale.factor = 100
+    sec.axes = "cols", scale.factor = 100
   ) +
   geom_rows_vector(alpha = .5, color = "darkred") +
   geom_rows_text_radiate(size = 3, color = "darkred") +
@@ -175,7 +175,7 @@ finches \%>\% t() \%>\%
 finches_lpca \%>\%
   ggbiplot(
     aes(x = LPC1, y = LPC2, label = .name),
-    sec.axes = "v", scale.factor = 50
+    sec.axes = "cols", scale.factor = 50
   ) +
   geom_rows_vector(alpha = .5, color = "darkred") +
   geom_rows_text_radiate(size = 3, color = "darkred") +
@@ -196,7 +196,7 @@ finches \%>\% t() \%>\%
 finches_clpca \%>\%
   ggbiplot(
     aes(x = LPC1, y = LPC2, label = .name),
-    sec.axes = "v", scale.factor = 50
+    sec.axes = "cols", scale.factor = 50
   ) +
   geom_rows_vector(alpha = .5, color = "darkred") +
   geom_rows_text_radiate(size = 3, color = "darkred") +

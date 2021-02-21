@@ -80,7 +80,7 @@ geom_cols_point <- function(
 
 #' @rdname geom-biplot-point
 #' @export
-geom_biplot_point <- function(
+geom_dims_point <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "rows",
   ...,

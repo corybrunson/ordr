@@ -112,7 +112,7 @@ geom_cols_text <- function(
 
 #' @rdname geom-biplot-text
 #' @export
-geom_biplot_text <- function(
+geom_dims_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "rows",
   ...,
@@ -198,7 +198,7 @@ geom_cols_label <- function(
 
 #' @rdname geom-biplot-text
 #' @export
-geom_biplot_label <- function(
+geom_dims_label <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "rows",
   ...,
@@ -280,7 +280,7 @@ geom_cols_text_repel <- function(
 
 #' @rdname geom-biplot-text
 #' @export
-geom_biplot_text_repel <- function(
+geom_dims_text_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "rows",
   ...,
@@ -356,7 +356,7 @@ geom_cols_label_repel <- function(
 
 #' @rdname geom-biplot-text
 #' @export
-geom_biplot_label_repel <- function(
+geom_dims_label_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "rows",
   ...,

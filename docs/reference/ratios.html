@@ -114,7 +114,7 @@ popular cooking book." />
 popular cooking book.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>ratios</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>ratios</span><span class='op'>)</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
@@ -130,91 +130,97 @@ Cooking</em>. Scribner, ISBN-13: 978-1416571728.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Log-ratio analysis of shared ingredients in Ruhlman's recipe ratios</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>ratios</span>)
-<span class='no'>ratios</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>chapter</span>, <span class='no'>recipe</span>, <span class='no'>flour</span>, <span class='no'>egg</span>, <span class='no'>butter</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>flour</span> <span class='kw'>&gt;</span> <span class='fl'>0</span> <span class='kw'>&amp;</span> <span class='no'>egg</span> <span class='kw'>&gt;</span> <span class='fl'>0</span> <span class='kw'>&amp;</span> <span class='no'>butter</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>flour</span>, <span class='no'>egg</span>, <span class='no'>butter</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span>(<span class='kw'>chapter</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span>(<span class='no'>chapter</span>),
-                   <span class='kw'>recipes</span> <span class='kw'>=</span> <span class='kw pkg'>stringr</span><span class='kw ns'>::</span><span class='fu'><a href='https://stringr.tidyverse.org/reference/str_c.html'>str_c</a></span>(<span class='no'>recipe</span>, <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='st'>" or "</span>)) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>sub_ratios</span></div><div class='output co'>#&gt; <span class='message'>`summarise()` regrouping output by 'flour', 'egg' (override with `.groups` argument)</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 5</span><span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>ratios</span><span class='op'>)</span>
+<span class='va'>ratios</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>chapter</span>, <span class='va'>recipe</span>, <span class='va'>flour</span>, <span class='va'>egg</span>, <span class='va'>butter</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>flour</span> <span class='op'>&gt;</span> <span class='fl'>0</span> <span class='op'>&amp;</span> <span class='va'>egg</span> <span class='op'>&gt;</span> <span class='fl'>0</span> <span class='op'>&amp;</span> <span class='va'>butter</span> <span class='op'>&gt;</span> <span class='fl'>0</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>flour</span>, <span class='va'>egg</span>, <span class='va'>butter</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>chapter <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>chapter</span><span class='op'>)</span>,
+                   recipes <span class='op'>=</span> <span class='fu'>stringr</span><span class='fu'>::</span><span class='fu'><a href='https://stringr.tidyverse.org/reference/str_c.html'>str_c</a></span><span class='op'>(</span><span class='va'>recipe</span>, collapse <span class='op'>=</span> <span class='st'>" or "</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>sub_ratios</span>
+</div><div class='output co'>#&gt; <span class='message'>`summarise()` has grouped output by 'flour', 'egg'. You can override using the `.groups` argument.</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 4 x 5</span><span>
 #&gt;   flour   egg butter chapter recipes              
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     1    1   batters pound or sponge      
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     1     2    1   doughs  choux                
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     2     1    0.5 batters pancake              
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     2     1    1   batters quick bread or muffin</div><div class='input'><span class='no'>sub_ratios</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(-<span class='no'>chapter</span>, -<span class='no'>recipes</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='lra-ord.html'>lra</a></span>(<span class='kw'>compositional</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='dplyr-verbs.html'>bind_cols_u</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>sub_ratios</span>, <span class='no'>chapter</span>, <span class='no'>recipes</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>lra_ratios</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lra': (4 x 3) x (3 x 3)'
-#&gt; # 3 coordinates: LRSV1, LRSV2, LRSV3
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                
+#&gt; </span><span style='color: #555555;'>1</span><span>     1     1    1   batters pound or sponge      
+#&gt; </span><span style='color: #555555;'>2</span><span>     1     2    1   doughs  choux                
+#&gt; </span><span style='color: #555555;'>3</span><span>     2     1    0.5 batters pancake              
+#&gt; </span><span style='color: #555555;'>4</span><span>     2     1    1   batters quick bread or muffin</div><div class='input'><span class='va'>sub_ratios</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>chapter</span>, <span class='op'>-</span><span class='va'>recipes</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='lra-ord.html'>lra</a></span><span class='op'>(</span>compositional <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='dplyr-verbs.html'>bind_cols_rows</a></span><span class='op'>(</span><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>sub_ratios</span>, <span class='va'>chapter</span>, <span class='va'>recipes</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>lra_ratios</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'lra': (4 x 2) x (3 x 2)'
+#&gt; # 2 coordinates: LRSV1 and LRSV2
 #&gt; # 
-#&gt; # U: [ 4 x 3 | 2 ]
-#&gt;    LRSV1  LRSV2   LRSV3 |   chapter recipes              
-#&gt;                         |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.324</span><span>  0.495 -</span><span style='color: #BB0000;'>0.793</span><span>  | </span><span style='color: #BCBCBC;'>1</span><span> batters pound or sponge      
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.625</span><span> -</span><span style='color: #BB0000;'>0.510</span><span> -</span><span style='color: #BB0000;'>0.168</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> doughs  choux                
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.640 -</span><span style='color: #BB0000;'>0.490</span><span> -</span><span style='color: #BB0000;'>0.584</span><span>  | </span><span style='color: #BCBCBC;'>3</span><span> batters pancake              
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.308  0.505  0.040</span><span style='text-decoration: underline;'>7</span><span> | </span><span style='color: #BCBCBC;'>4</span><span> batters quick bread or muffin
+#&gt; # Rows: [ 4 x 2 | 2 ]
+#&gt;    LRSV1  LRSV2 |   chapter recipes              
+#&gt;                 |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.562</span><span>  1.04  | </span><span style='color: #555555;'>1</span><span> batters pound or sponge      
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>1.33</span><span>  -</span><span style='color: #BB0000;'>0.910</span><span> | </span><span style='color: #555555;'>2</span><span> doughs  choux                
+#&gt; </span><span style='color: #555555;'>3</span><span>  1.19  -</span><span style='color: #BB0000;'>1.08</span><span>  | </span><span style='color: #555555;'>3</span><span> batters pancake              
+#&gt; </span><span style='color: #555555;'>4</span><span>  0.700  0.954 | </span><span style='color: #555555;'>4</span><span> batters quick bread or muffin
 #&gt; # 
-#&gt; # V: [ 3 x 3 | 1 ]
-#&gt;    LRSV1   LRSV2 LRSV3 |   .name 
-#&gt;                        |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.707  0.089</span><span style='text-decoration: underline;'>1</span><span> 0.701 | </span><span style='color: #BCBCBC;'>1</span><span> flour 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.494</span><span> -</span><span style='color: #BB0000;'>0.647</span><span>  0.580 | </span><span style='color: #BCBCBC;'>2</span><span> egg   
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.506</span><span>  0.757  0.414 | </span><span style='color: #BCBCBC;'>3</span><span> butter</div><div class='input'><span class='no'>lra_ratios</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='st'>"rows"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>.05</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>recipes</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>chapter</span>)) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>() +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>), <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='st'>"outward"</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='st'>"outward"</span>) +
-  <span class='fu'>expand_limits</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>.2</span>, <span class='fl'>.2</span>)) +
-  <span class='fu'>ggtitle</span>(<span class='st'>"Log-ratio biplot of flour-butter-egg ratios in baking recipes"</span>)</div><div class='img'><img src='ratios-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Correspondence analysis of Ruhlman's recipe ratios</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>ratios</span>)
-<span class='no'>ratios</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(-<span class='no'>chapter</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>column_to_rownames</a></span>(<span class='st'>"recipe"</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(-<span class='no'>chocolate</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>ca</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/ca.html'>ca</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='dplyr-verbs.html'>mutate_u</a></span>(<span class='kw'>recipe</span> <span class='kw'>=</span> <span class='no'>.name</span>, <span class='kw'>chapter</span> <span class='kw'>=</span> <span class='no'>ratios</span>$<span class='no'>chapter</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='dplyr-verbs.html'>mutate_v</a></span>(<span class='kw'>ingredient</span> <span class='kw'>=</span> <span class='no'>.name</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>ratios_ca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (31 x 16) x (17 x 16)'
+#&gt; # Columns: [ 3 x 2 | 1 ]
+#&gt;    LRSV1   LRSV2 |   .name 
+#&gt;                  |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> 
+#&gt; </span><span style='color: #555555;'>1</span><span>  1.19  -</span><span style='color: #BB0000;'>0.039</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span> | </span><span style='color: #555555;'>1</span><span> flour 
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.876</span><span> -</span><span style='color: #BB0000;'>1.07</span><span>   | </span><span style='color: #555555;'>2</span><span> egg   
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.788</span><span>  1.57   | </span><span style='color: #555555;'>3</span><span> butter</div><div class='input'><span class='va'>lra_ratios</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='st'>"rows"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span>sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>.05</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_rows_text</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>recipes</span>, color <span class='op'>=</span> <span class='va'>chapter</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_cols_text</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>, hjust <span class='op'>=</span> <span class='st'>"outward"</span>, vjust <span class='op'>=</span> <span class='st'>"outward"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>expand_limits</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>.2</span>, <span class='fl'>.2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span><span class='st'>"Log-ratio biplot of flour-butter-egg ratios in baking recipes"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>expand_limits</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>.35</span>, <span class='fl'>.35</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='ratios-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Correspondence analysis of Ruhlman's recipe ratios</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>ratios</span><span class='op'>)</span>
+<span class='va'>ratios</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>chapter</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/rownames.html'>column_to_rownames</a></span><span class='op'>(</span><span class='st'>"recipe"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>chocolate</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ca</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/ca.html'>ca</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='dplyr-verbs.html'>mutate_rows</a></span><span class='op'>(</span>recipe <span class='op'>=</span> <span class='va'>.name</span>, chapter <span class='op'>=</span> <span class='va'>ratios</span><span class='op'>$</span><span class='va'>chapter</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='dplyr-verbs.html'>mutate_cols</a></span><span class='op'>(</span>ingredient <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>ratios_ca</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (31 x 16) x (17 x 16)'
 #&gt; # 16 coordinates: Dim1, Dim2, ..., Dim16
 #&gt; # 
-#&gt; # U: [ 31 x 16 | 6 ]
+#&gt; # Rows: [ 31 x 16 | 6 ]
 #&gt;      Dim1   Dim2  Dim3 ... |   .name  .mass .dist .inertia recipe
-#&gt;                            |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.247</span><span>   0.175 0.796     | </span><span style='color: #BCBCBC;'>1</span><span> bread 0.026</span><span style='text-decoration: underline;'>5</span><span>  1.75   0.081</span><span style='text-decoration: underline;'>1</span><span> bread 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.106</span><span>  -</span><span style='color: #BB0000;'>0.633</span><span> 1.45  ... | </span><span style='color: #BCBCBC;'>2</span><span> pasta 0.016</span><span style='text-decoration: underline;'>6</span><span>  2.37   0.092</span><span style='text-decoration: underline;'>8</span><span> pasta 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.257</span><span>  -</span><span style='color: #BB0000;'>0.390</span><span> 0.236     | </span><span style='color: #BCBCBC;'>3</span><span> pie   0.019</span><span style='text-decoration: underline;'>9</span><span>  1.48   0.043</span><span style='text-decoration: underline;'>7</span><span> pie   
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.050</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span> -</span><span style='color: #BB0000;'>0.711</span><span> 1.05      | </span><span style='color: #BCBCBC;'>4</span><span> bisc… 0.019</span><span style='text-decoration: underline;'>9</span><span>  1.84   0.067</span><span style='text-decoration: underline;'>2</span><span> biscu…
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.227</span><span>  -</span><span style='color: #BB0000;'>0.765</span><span> 0.377     | </span><span style='color: #BCBCBC;'>5</span><span> cook… 0.019</span><span style='text-decoration: underline;'>9</span><span>  1.81   0.065</span><span style='text-decoration: underline;'>0</span><span> cookie
-#&gt; </span><span style='color: #949494;'># … with 26 more rows, and 1 more</span><span>
-#&gt; # U: [ 31 x 16 | 6 ]</span><span style='color: #949494;'>#   variable: chapter </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt;                            |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> 
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.247</span><span>   0.175 0.796     | </span><span style='color: #555555;'>1</span><span> bread 0.026</span><span style='text-decoration: underline;'>5</span><span>  1.75   0.081</span><span style='text-decoration: underline;'>1</span><span> bread 
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.106</span><span>  -</span><span style='color: #BB0000;'>0.633</span><span> 1.45  ... | </span><span style='color: #555555;'>2</span><span> pasta 0.016</span><span style='text-decoration: underline;'>6</span><span>  2.37   0.092</span><span style='text-decoration: underline;'>8</span><span> pasta 
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.257</span><span>  -</span><span style='color: #BB0000;'>0.390</span><span> 0.236     | </span><span style='color: #555555;'>3</span><span> pie   0.019</span><span style='text-decoration: underline;'>9</span><span>  1.48   0.043</span><span style='text-decoration: underline;'>7</span><span> pie   
+#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>0.050</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span> -</span><span style='color: #BB0000;'>0.711</span><span> 1.05      | </span><span style='color: #555555;'>4</span><span> bisc… 0.019</span><span style='text-decoration: underline;'>9</span><span>  1.84   0.067</span><span style='text-decoration: underline;'>2</span><span> biscu…
+#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.227</span><span>  -</span><span style='color: #BB0000;'>0.765</span><span> 0.377     | </span><span style='color: #555555;'>5</span><span> cook… 0.019</span><span style='text-decoration: underline;'>9</span><span>  1.81   0.065</span><span style='text-decoration: underline;'>0</span><span> cookie
+#&gt; </span><span style='color: #555555;'># … with 26 more rows, and 1 more</span><span>
+#&gt; # Rows: [ 31 x 16 | 6 ]</span><span style='color: #555555;'>#   variable: chapter </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; # 
-#&gt; # V: [ 17 x 16 | 5 ]
+#&gt; # Columns: [ 17 x 16 | 5 ]
 #&gt;      Dim1   Dim2    Dim3 ... |   .name  .mass .dist .inertia
-#&gt;                              |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.130</span><span>  -</span><span style='color: #BB0000;'>0.555</span><span>  1.17       | </span><span style='color: #BCBCBC;'>1</span><span> flour 0.114   1.74    0.345
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.430</span><span>   1.36  -</span><span style='color: #BB0000;'>0.038</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span> ... | </span><span style='color: #BCBCBC;'>2</span><span> water 0.219   1.41    0.437
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.064</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span> -</span><span style='color: #BB0000;'>0.646</span><span>  1.50       | </span><span style='color: #BCBCBC;'>3</span><span> egg   0.046</span><span style='text-decoration: underline;'>4</span><span>  2.21    0.227
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.346</span><span>  -</span><span style='color: #BB0000;'>0.941</span><span> -</span><span style='color: #BB0000;'>1.10</span><span>       | </span><span style='color: #BCBCBC;'>4</span><span> fat   0.126   1.62    0.330
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.219  -</span><span style='color: #BB0000;'>0.690</span><span>  1.64       | </span><span style='color: #BCBCBC;'>5</span><span> liqu… 0.056</span><span style='text-decoration: underline;'>3</span><span>  2.40    0.323
-#&gt; </span><span style='color: #949494;'># … with 12 more rows, and 1 more</span><span>
-#&gt; # V: [ 17 x 16 | 5 ]</span><span style='color: #949494;'>#   variable: ingredient </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'><span class='no'>ratios_ca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='st'>"rowprincipal"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>() +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>) +
-  <span class='fu'><a href='stat-biplot-chull.html'>stat_v_chull</a></span>(<span class='kw'>geom</span> <span class='kw'>=</span> <span class='st'>"text_radiate"</span>, <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>ingredient</span>), <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>recipe</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>chapter</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>4</span>) +
-  <span class='fu'>ggtitle</span>(<span class='st'>"Row-principal CA biplot of Ruhlman recipe ratios"</span>)</div><div class='img'><img src='ratios-2.png' alt='' width='700' height='433' /></div></span></pre>
+#&gt;                              |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.130</span><span>  -</span><span style='color: #BB0000;'>0.555</span><span>  1.17       | </span><span style='color: #555555;'>1</span><span> flour 0.114   1.74    0.345
+#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.430</span><span>   1.36  -</span><span style='color: #BB0000;'>0.038</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span> ... | </span><span style='color: #555555;'>2</span><span> water 0.219   1.41    0.437
+#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.064</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span> -</span><span style='color: #BB0000;'>0.646</span><span>  1.50       | </span><span style='color: #555555;'>3</span><span> egg   0.046</span><span style='text-decoration: underline;'>4</span><span>  2.21    0.227
+#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>0.346</span><span>  -</span><span style='color: #BB0000;'>0.941</span><span> -</span><span style='color: #BB0000;'>1.10</span><span>       | </span><span style='color: #555555;'>4</span><span> fat   0.126   1.62    0.330
+#&gt; </span><span style='color: #555555;'>5</span><span>  0.219  -</span><span style='color: #BB0000;'>0.690</span><span>  1.64       | </span><span style='color: #555555;'>5</span><span> liqu… 0.056</span><span style='text-decoration: underline;'>3</span><span>  2.40    0.323
+#&gt; </span><span style='color: #555555;'># … with 12 more rows, and 1 more</span><span>
+#&gt; # Columns: [ 17 x 16 | 5 ]</span><span style='color: #555555;'>#   variable: ingredient </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'><span class='va'>ratios_ca</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='st'>"rowprincipal"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>.5</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='stat-biplot-chull.html'>stat_cols_chull</a></span><span class='op'>(</span>geom <span class='op'>=</span> <span class='st'>"text_radiate"</span>, <span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>ingredient</span><span class='op'>)</span>, alpha <span class='op'>=</span> <span class='fl'>.5</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_rows_text</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>recipe</span>, color <span class='op'>=</span> <span class='va'>chapter</span><span class='op'>)</span>, size <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span><span class='st'>"Row-principal CA biplot of Ruhlman recipe ratios"</span><span class='op'>)</span>
+</div><div class='img'><img src='ratios-2.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -230,7 +236,7 @@ Cooking</em>. Scribner, ISBN-13: 978-1416571728.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

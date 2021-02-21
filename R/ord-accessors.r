@@ -72,7 +72,7 @@ recover_rows.data.frame <- function(x) {
 #' @rdname accessors
 #' @export
 recover_cols.data.frame <- function(x) {
-  x[x$.matrix == "v", -match(".matrix", names(x))]
+  x[x$.matrix == "cols", -match(".matrix", names(x))]
 }
 
 #' @rdname accessors

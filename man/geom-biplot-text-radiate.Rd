@@ -7,7 +7,7 @@
 \alias{geom_text_radiate}
 \alias{geom_rows_text_radiate}
 \alias{geom_cols_text_radiate}
-\alias{geom_biplot_text_radiate}
+\alias{geom_dims_text_radiate}
 \title{Render text at ordinates radiating out from the origin}
 \format{
 An object of class \code{GeomTextRadiate} (inherits from \code{GeomText}, \code{Geom}, \code{ggproto}, \code{gg}) of length 2.
@@ -52,7 +52,7 @@ geom_cols_text_radiate(
   inherit.aes = TRUE
 )
 
-geom_biplot_text_radiate(
+geom_dims_text_radiate(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -130,7 +130,7 @@ filter the data frame to one of these two.
 
 The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.
 }
 

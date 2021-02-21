@@ -36,7 +36,7 @@ sub_ratios \%>\%
   print() -> lra_ratios
 lra_ratios \%>\%
   confer_inertia("rows") \%>\%
-  ggbiplot(sec.axes = "v", scale.factor = .05) +
+  ggbiplot(sec.axes = "cols", scale.factor = .05) +
   geom_rows_text(aes(label = recipes, color = chapter)) +
   geom_cols_vector() +
   geom_cols_text(aes(label = .name), hjust = "outward", vjust = "outward") +

@@ -4,7 +4,7 @@
 \alias{geom-biplot-polygon}
 \alias{geom_rows_polygon}
 \alias{geom_cols_polygon}
-\alias{geom_biplot_polygon}
+\alias{geom_dims_polygon}
 \title{Render polygons around ordinates}
 \usage{
 geom_rows_polygon(
@@ -29,7 +29,7 @@ geom_cols_polygon(
   inherit.aes = TRUE
 )
 
-geom_biplot_polygon(
+geom_dims_polygon(
   mapping = NULL,
   data = NULL,
   stat = "identity",
@@ -100,7 +100,7 @@ filter the data frame to one of these two.
 
 The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-\verb{geom_biplot_*()} selects a default matrix based on common practice, e.g.
+\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.
 }
 
@@ -139,7 +139,7 @@ arrests_lra \%>\%
 # Adapt Exhibit 7.1 in Greenacre (2010)
 arrests_lra \%>\%
   confer_inertia(1) \%>\%
-  ggbiplot(sec.axes = "v", scale.factor = 1/20) +
+  ggbiplot(sec.axes = "cols", scale.factor = 1/20) +
   theme_bw() +
   geom_rows_text(
     aes(label = .abb),

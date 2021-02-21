@@ -76,7 +76,7 @@ geom_cols_polygon <- function(
 
 #' @rdname geom-biplot-polygon
 #' @export
-geom_biplot_polygon <- function(
+geom_dims_polygon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "rows",
   ...,
