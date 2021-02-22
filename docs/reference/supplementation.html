@@ -125,7 +125,7 @@ ordination object.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <a href='tbl_ord.html'>tbl_ord</a>, or an ordination object coercible to one.</p></td>
+      <td><p>A '<a href='tbl_ord.html'>tbl_ord</a>' object, or an ordination object coercible to one.</p></td>
     </tr>
     <tr>
       <th>.matrix</th>
@@ -190,15 +190,15 @@ indicates their source and can be incorporated into a <a href='fortify.html'>tid
 #&gt; # 2 coordinates: LD1 and LD2
 #&gt; # 
 #&gt; # Rows: [ 148 x 2 | 6 ]
-#&gt;      LD1    LD2 |   .name .prior .counts .supplement
-#&gt;                 |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.75</span><span>   0.400 | </span><span style='color: #BCBCBC;'>1</span><span> Norm…  0.524      76 FALSE      
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.340 -</span><span style='color: #BB0000;'>1.38</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Chem…  0.248      36 FALSE      
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.66   0.580 | </span><span style='color: #BCBCBC;'>3</span><span> Over…  0.228      33 FALSE      
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>1.72</span><span>   0.663 | </span><span style='color: #BCBCBC;'>4</span><span> 1     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> TRUE       
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.85</span><span>   1.30  | </span><span style='color: #BCBCBC;'>5</span><span> 2     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> TRUE       
+#&gt;      LD1    LD2 |   .name .prior .counts .grouping
+#&gt;                 |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.75</span><span>   0.400 | </span><span style='color: #BCBCBC;'>1</span><span> Norm…  0.524      76 Normal   
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.340 -</span><span style='color: #BB0000;'>1.38</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Chem…  0.248      36 Chemical…
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.66   0.580 | </span><span style='color: #BCBCBC;'>3</span><span> Over…  0.228      33 Overt_Di…
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>1.72</span><span>   0.663 | </span><span style='color: #BCBCBC;'>4</span><span> 1     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> Normal   
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.85</span><span>   1.30  | </span><span style='color: #BCBCBC;'>5</span><span> 2     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> Normal   
 #&gt; </span><span style='color: #949494;'># … with 143 more rows, and 2 more</span><span>
-#&gt; # Rows: [ 148 x 2 | 6 ]</span><span style='color: #949494;'>#   variables: .grouping </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span style='color: #949494;'>,</span><span>
+#&gt; # Rows: [ 148 x 2 | 6 ]</span><span style='color: #949494;'>#   variables: .supplement </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #949494;'>,</span><span>
 #&gt;      LD1    LD2 | </span><span style='color: #949494;'>#   discriminant </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; # 
 #&gt; # Columns: [ 5 x 2 | 1 ]
@@ -213,7 +213,7 @@ indicates their source and can be incorporated into a <a href='fortify.html'>tid
   <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>shape <span class='op'>=</span> <span class='va'>.grouping</span>, size <span class='op'>=</span> <span class='va'>discriminant</span><span class='op'>)</span>, alpha <span class='op'>=</span> <span class='fl'>.5</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='geom-biplot-axis.html'>geom_cols_axis</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#888888"</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>ggtitle</span><span class='op'>(</span><span class='st'>"Column-standardized LDA biplot of Reaven &amp; Miller diabetes data"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Using size for a discrete variable is not advised.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 3 rows containing missing values (geom_point).</span></div><div class='img'><img src='supplementation-1.png' alt='' width='700' height='433' /></div></span></pre>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Using size for a discrete variable is not advised.</span></div><div class='img'><img src='supplementation-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

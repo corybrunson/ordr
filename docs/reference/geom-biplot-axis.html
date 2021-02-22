@@ -277,15 +277,15 @@ in bold):</p><ul>
 #&gt; # 2 coordinates: LD1 and LD2
 #&gt; # 
 #&gt; # Rows: [ 148 x 2 | 5 ]
-#&gt;      LD1    LD2 |   .name .prior .counts .supplement
-#&gt;                 |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.75</span><span>   0.400 | </span><span style='color: #BCBCBC;'>1</span><span> Norm…  0.524      76 FALSE      
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.340 -</span><span style='color: #BB0000;'>1.38</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Chem…  0.248      36 FALSE      
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.66   0.580 | </span><span style='color: #BCBCBC;'>3</span><span> Over…  0.228      33 FALSE      
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>1.72</span><span>   0.663 | </span><span style='color: #BCBCBC;'>4</span><span> 1     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> TRUE       
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.85</span><span>   1.30  | </span><span style='color: #BCBCBC;'>5</span><span> 2     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> TRUE       
+#&gt;      LD1    LD2 |   .name .prior .counts .grouping
+#&gt;                 |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.75</span><span>   0.400 | </span><span style='color: #BCBCBC;'>1</span><span> Norm…  0.524      76 Normal   
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.340 -</span><span style='color: #BB0000;'>1.38</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Chem…  0.248      36 Chemical…
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.66   0.580 | </span><span style='color: #BCBCBC;'>3</span><span> Over…  0.228      33 Overt_Di…
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>1.72</span><span>   0.663 | </span><span style='color: #BCBCBC;'>4</span><span> 1     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> Normal   
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.85</span><span>   1.30  | </span><span style='color: #BCBCBC;'>5</span><span> 2     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> Normal   
 #&gt; </span><span style='color: #949494;'># … with 143 more rows, and 1 more</span><span>
-#&gt; # Rows: [ 148 x 2 | 5 ]</span><span style='color: #949494;'>#   variable: .grouping </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>
+#&gt; # Rows: [ 148 x 2 | 5 ]</span><span style='color: #949494;'>#   variable: .supplement </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>
 #&gt; # 
 #&gt; # Columns: [ 5 x 2 | 1 ]
 #&gt;         LD1      LD2 |   .name  
@@ -294,20 +294,20 @@ in bold):</p><ul>
 #&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.033</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>    0.036</span><span style='text-decoration: underline;'>6</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> glufast
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.012</span><span style='text-decoration: underline;'>6</span><span>   -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>09</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> glutest
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.000</span><span style='color: #BB0000;text-decoration: underline;'>102</span><span> -</span><span style='color: #BB0000;'>0.006</span><span style='color: #BB0000;text-decoration: underline;'>17</span><span> | </span><span style='color: #BCBCBC;'>4</span><span> instest
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.004</span><span style='text-decoration: underline;'>24</span><span>   0.001</span><span style='text-decoration: underline;'>13</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> sspg   </div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 3 rows containing missing values (geom_point).</span></div><div class='img'><img src='geom-biplot-axis-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>diabetes_custom_biplot</span><span class='op'>(</span><span class='st'>"standardized"</span><span class='op'>)</span>
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.004</span><span style='text-decoration: underline;'>24</span><span>   0.001</span><span style='text-decoration: underline;'>13</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> sspg   </div><div class='img'><img src='geom-biplot-axis-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>diabetes_custom_biplot</span><span class='op'>(</span><span class='st'>"standardized"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; # A tbl_ord of class 'lda_ord': (148 x 2) x (5 x 2)'
 #&gt; # 2 coordinates: LD1 and LD2
 #&gt; # 
 #&gt; # Rows: [ 148 x 2 | 5 ]
-#&gt;      LD1    LD2 |   .name .prior .counts .supplement
-#&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.75</span><span>   0.400 | </span><span style='color: #BCBCBC;'>1</span><span> Norm…  0.524      76 FALSE      
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.340 -</span><span style='color: #BB0000;'>1.38</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Chem…  0.248      36 FALSE      
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.66   0.580 | </span><span style='color: #BCBCBC;'>3</span><span> Over…  0.228      33 FALSE      
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>1.72</span><span>   0.663 | </span><span style='color: #BCBCBC;'>4</span><span> 1     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> TRUE       
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.85</span><span>   1.30  | </span><span style='color: #BCBCBC;'>5</span><span> 2     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> TRUE       
+#&gt;      LD1    LD2 |   .name .prior .counts .grouping
+#&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.75</span><span>   0.400 | </span><span style='color: #BCBCBC;'>1</span><span> Norm…  0.524      76 Normal   
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.340 -</span><span style='color: #BB0000;'>1.38</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Chem…  0.248      36 Chemical…
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.66   0.580 | </span><span style='color: #BCBCBC;'>3</span><span> Over…  0.228      33 Overt_Di…
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>1.72</span><span>   0.663 | </span><span style='color: #BCBCBC;'>4</span><span> 1     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> Normal   
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.85</span><span>   1.30  | </span><span style='color: #BCBCBC;'>5</span><span> 2     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> Normal   
 #&gt; </span><span style='color: #949494;'># … with 143 more rows, and 1 more</span><span>
-#&gt; # Rows: [ 148 x 2 | 5 ]</span><span style='color: #949494;'>#   variable: .grouping </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>
+#&gt; # Rows: [ 148 x 2 | 5 ]</span><span style='color: #949494;'>#   variable: .supplement </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>
 #&gt; # 
 #&gt; # Columns: [ 5 x 2 | 1 ]
 #&gt;       LD1     LD2 |   .name  
@@ -316,20 +316,20 @@ in bold):</p><ul>
 #&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.24</span><span>    1.35   | </span><span style='color: #BCBCBC;'>2</span><span> glufast
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span>  1.90   -</span><span style='color: #BB0000;'>1.07</span><span>   | </span><span style='color: #BCBCBC;'>3</span><span> glutest
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.010</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.631</span><span>  | </span><span style='color: #BCBCBC;'>4</span><span> instest
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.279   0.074</span><span style='text-decoration: underline;'>6</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> sspg   </div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 3 rows containing missing values (geom_point).</span></div><div class='img'><img src='geom-biplot-axis-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>diabetes_custom_biplot</span><span class='op'>(</span><span class='st'>"contribution"</span><span class='op'>)</span>
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.279   0.074</span><span style='text-decoration: underline;'>6</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> sspg   </div><div class='img'><img src='geom-biplot-axis-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>diabetes_custom_biplot</span><span class='op'>(</span><span class='st'>"contribution"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; # A tbl_ord of class 'lda_ord': (148 x 2) x (5 x 2)'
 #&gt; # 2 coordinates: LD1 and LD2
 #&gt; # 
 #&gt; # Rows: [ 148 x 2 | 5 ]
-#&gt;      LD1    LD2 |   .name .prior .counts .supplement
-#&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.75</span><span>   0.400 | </span><span style='color: #BCBCBC;'>1</span><span> Norm…  0.524      76 FALSE      
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.340 -</span><span style='color: #BB0000;'>1.38</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Chem…  0.248      36 FALSE      
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.66   0.580 | </span><span style='color: #BCBCBC;'>3</span><span> Over…  0.228      33 FALSE      
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>1.72</span><span>   0.663 | </span><span style='color: #BCBCBC;'>4</span><span> 1     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> TRUE       
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.85</span><span>   1.30  | </span><span style='color: #BCBCBC;'>5</span><span> 2     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> TRUE       
+#&gt;      LD1    LD2 |   .name .prior .counts .grouping
+#&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.75</span><span>   0.400 | </span><span style='color: #BCBCBC;'>1</span><span> Norm…  0.524      76 Normal   
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.340 -</span><span style='color: #BB0000;'>1.38</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Chem…  0.248      36 Chemical…
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.66   0.580 | </span><span style='color: #BCBCBC;'>3</span><span> Over…  0.228      33 Overt_Di…
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>1.72</span><span>   0.663 | </span><span style='color: #BCBCBC;'>4</span><span> 1     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> Normal   
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.85</span><span>   1.30  | </span><span style='color: #BCBCBC;'>5</span><span> 2     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> Normal   
 #&gt; </span><span style='color: #949494;'># … with 143 more rows, and 1 more</span><span>
-#&gt; # Rows: [ 148 x 2 | 5 ]</span><span style='color: #949494;'>#   variable: .grouping </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>
+#&gt; # Rows: [ 148 x 2 | 5 ]</span><span style='color: #949494;'>#   variable: .supplement </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>
 #&gt; # 
 #&gt; # Columns: [ 5 x 2 | 1 ]
 #&gt;       LD1    LD2 |   .name  
@@ -338,7 +338,7 @@ in bold):</p><ul>
 #&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.274</span><span>   0.539 | </span><span style='color: #BCBCBC;'>2</span><span> glufast
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.861   0.288 | </span><span style='color: #BCBCBC;'>3</span><span> glutest
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.013</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span> -</span><span style='color: #BB0000;'>0.666</span><span> | </span><span style='color: #BCBCBC;'>4</span><span> instest
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.388  -</span><span style='color: #BB0000;'>0.145</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> sspg   </div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 3 rows containing missing values (geom_point).</span></div><div class='img'><img src='geom-biplot-axis-3.png' alt='' width='700' height='433' /></div></span></pre>
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.388  -</span><span style='color: #BB0000;'>0.145</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> sspg   </div><div class='img'><img src='geom-biplot-axis-3.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

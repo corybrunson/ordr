@@ -97,7 +97,6 @@ augmentation_rows.lda <- function(x) {
     warning("Could not locate data used to fit '", deparse(substitute(x)), "'.")
     return(res)
   }
-  res$.supplement <- FALSE
   grouping <- try(recover_grouping_lda(x))
   res_sup <- if (is.null(rownames(olddata))) {
     if (inherits(grouping, "try-error")) {
@@ -112,6 +111,8 @@ augmentation_rows.lda <- function(x) {
       tibble(.name = rownames(olddata), .grouping = grouping)
     }
   }
+  if (".grouping" %in% names(res_sup)) res$.grouping <- res$.name
+  res$.supplement <- FALSE
   res_sup$.supplement <- TRUE
   as_tibble(dplyr::bind_rows(res, res_sup))
 }
@@ -138,7 +139,6 @@ augmentation_rows.lda_ord <- function(x) {
     warning("Could not locate data used to fit '", deparse(substitute(x)), "'.")
     return(res)
   }
-  res$.supplement <- FALSE
   grouping <- if (is.null(attr(x, "grouping"))) {
     try(recover_grouping_lda(x))
   } else attr(x, "grouping")
@@ -155,6 +155,8 @@ augmentation_rows.lda_ord <- function(x) {
       tibble(.name = rownames(olddata), .grouping = grouping)
     }
   }
+  if (".grouping" %in% names(res_sup)) res$.grouping <- res$.name
+  res$.supplement <- FALSE
   res_sup$.supplement <- TRUE
   as_tibble(dplyr::bind_rows(res, res_sup))
 }
