@@ -140,14 +140,13 @@ points for rows and arrows for columns.
 }
 
 \examples{
-# Overlay the spanning tree and MDS for road distances between European cities
-# classical multidimensional scaling
+# classical multidimensional scaling of road distances between European cities
 eurodist \%>\%
   cmdscale_ord(k = 11) \%>\%
   as_tbl_ord() \%>\%
   augment() \%>\%
   print() -> euro_mds
-# biplot oriented to conventional compass
+# biplot with minimal spanning tree based on full-dimensional distances
 euro_mds \%>\%
   ggbiplot() +
   scale_y_reverse() +
@@ -156,7 +155,10 @@ euro_mds \%>\%
     alpha = .5, linetype = "dotted"
   ) +
   geom_cols_text(aes(label = .name), size = 3) +
-  ggtitle("MDS biplot of road distances between European cities")
+  ggtitle(
+    "MDS biplot of road distances between European cities",
+    "Dotted segments constitute the minimal spanning tree"
+  )
 }
 \references{
 Jolliffe IT (2002) \emph{Principal Component Analysis}, Second Edition.

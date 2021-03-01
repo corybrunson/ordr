@@ -6,7 +6,7 @@
 #' @name methods-kmeans
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/mtcars-kmeans-augment.r
+#' @example inst/examples/ex-methods-kmeans-iris.r
 NULL
 
 #' @rdname methods-kmeans

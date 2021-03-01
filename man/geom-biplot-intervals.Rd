@@ -170,36 +170,39 @@ aesthetics (required aesthetics are in bold):
 }
 
 \examples{
-# Scaled PCA of Anderson iris data with ranges and confidence intervals
-iris[, -5] \%>\%
-  prcomp(scale = TRUE) \%>\%
+# compute log-ratio analysis of Freestone primary class composition measurements
+glass \%>\%
+  dplyr::select(SiO2, Al2O3, CaO, FeO, MgO) \%>\%
+  lra(compositional = TRUE) \%>\%
   as_tbl_ord() \%>\%
-  confer_inertia(1) \%>\%
-  mutate_rows(species = iris$Species) \%>\%
-  print() -> iris_pca
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
+  confer_inertia("rows") \%>\%
+  bind_cols_rows(dplyr::select(glass, Site)) \%>\%
+  print() -> glass_lra
+# row-principal biplot with ordinate-wise standard deviations
+glass_lra \%>\%
+  ggbiplot(aes(color = Site), sec.axes = "cols", scale.factor = .05) +
   theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
+  scale_color_brewer(type = "qual", palette = 6) +
+  geom_cols_text(stat = "chull", aes(label = .name), color = "#444444") +
   geom_rows_lineranges(fun.data = mean_sdl, size = .75) +
   geom_rows_point(alpha = .5) +
-  geom_cols_vector(color = "#444444") +
   ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
+    "Row-principal LRA biplot of Freestone glass measurements",
     "Ranges 2 sample standard deviations from centroids"
   )
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
+# row-principal biplot with coordinate-wise confidence intervals
+glass_lra \%>\%
+  ggbiplot(aes(color = Site), sec.axes = "cols", scale.factor = .05) +
   theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
+  scale_color_brewer(type = "qual", palette = 6) +
+  geom_cols_text(stat = "chull", aes(label = .name), color = "#444444") +
   geom_rows_lineranges(
     fun.data = mean_cl_boot, fun.args = list(conf.int = .99),
     size = .75
   ) +
   geom_rows_point(alpha = .5) +
-  geom_cols_vector(color = "#444444") +
   ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
+    "Row-principal LRA biplot of Freestone glass measurements",
     "99\% confidence intervals based on nonparametric bootstrap sampling"
   )
 }

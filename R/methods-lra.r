@@ -8,7 +8,7 @@
 #' @name methods-lra
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/arrests-lra-polygon.r
+#' @example inst/examples/ex-methods-lra-arrests.r
 NULL
 
 #' @rdname methods-lra

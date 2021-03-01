@@ -29,9 +29,6 @@
 #'   transform the values along the axis at which to render elements.
 #' @param by Interval length between elements, in the units of the ordination.
 #' @template param-matrix
-#' @example inst/examples/mtcars-lm-isolines.r
-#' @example inst/examples/bioenv-lm-isolines.r
-#' @example inst/examples/bioenv-glm-isolines.r
 NULL
 
 #' @rdname geom-biplot-isolines

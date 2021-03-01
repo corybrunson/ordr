@@ -1,5 +1,5 @@
 
-# `ggbiplot(sec.axis = "u")`
+# `ggbiplot(sec.axis = "rows")`
 # This attempt begins with the `ggbiplot` call, from which affected layers must
 # draw.
 
@@ -21,10 +21,11 @@ ggbiplot <- function(
   if (! is.null(sec.axes)) {
     
     sec.axes <- match_factor(sec.axes)
-    if (! sec.axes %in% c("u", "v")) {
-      stop("Select one matrix factor, 'u' or 'v', to scale to secondary axes.")
+    if (! sec.axes %in% c("rows", "cols")) {
+      stop("Select one matrix factor, 'rows' or 'cols', ",
+           "to scale to secondary axes.")
     }
-    pri.axes <- setdiff(c("u", "v"), sec.axes)
+    pri.axes <- setdiff(c("rows", "cols"), sec.axes)
     
     .coords <- str_sub(as.character(mapping[c("x", "y")]), start = 2)
     

@@ -20,6 +20,7 @@
 #' @inheritParams ggplot2::layer
 #' @template param-geom
 #' @param segments The number of segments to be used in drawing the circle.
+#' @example inst/examples/ex-geom-unit-circle.r
 NULL
 
 #' @rdname geom-unit-circle

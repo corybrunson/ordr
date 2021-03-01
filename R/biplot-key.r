@@ -13,7 +13,7 @@
 #' @name draw-key
 #' @inheritParams ggplot2::draw_key
 #' @return A grid grob.
-#' @example inst/examples/iris-prcomp-lineranges.r
+#' @example inst/examples/ex-biplot-key-iris.r
 #' @seealso [ggplot2::draw_key]
 NULL
 

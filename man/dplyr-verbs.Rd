@@ -17,7 +17,7 @@
 \alias{bind_cols_cols}
 \alias{left_join_rows}
 \alias{left_join_cols}
-\title{\strong{dplyr} verbs for tbl_ord factors}
+\title{\strong{dplyr} verbs for 'tbl_ord' factors}
 \usage{
 pull_factor(.data, var = -1, .matrix)
 
@@ -50,7 +50,7 @@ left_join_rows(.data, ...)
 left_join_cols(.data, ...)
 }
 \arguments{
-\item{.data}{A \link{tbl_ord} object.}
+\item{.data}{A '\link{tbl_ord}' object.}
 
 \item{var}{A variable specified as in \code{\link[dplyr:pull]{dplyr::pull()}}.}
 
@@ -63,96 +63,11 @@ standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 }
 \description{
 These functions adapt \link[dplyr:dplyr-package]{dplyr} verbs to the factors
-of a \link{tbl_ord}. The raw verbs are not defined for tbl_ords; instead, each
+of a '\link{tbl_ord}'. The raw verbs are not defined for tbl_ords; instead, each
 verb has two analogues, corresponding to the two matrix factors. They each
 rely on a common workhorse function, which takes the composition of the
 \strong{dplyr} verb with \verb{annotation_*}, applied to the factor, removes any
 variables corresponding to coordinates or already annotated, and only then
 assigns it as the new \code{"*_annotation"} attribute of \code{.data} (see
 \link{annotation}).
-}
-\examples{
-# Unscaled PCA and two-scaled biplot of Anderson iris data
-iris[, -5] \%>\%
-  princomp() \%>\%
-  as_tbl_ord() \%>\%
-  confer_inertia(1) \%>\%
-  mutate_rows(species = iris$Species) \%>\%
-  mutate_cols(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
-  print() -> iris_pca
-iris_pca \%>\%
-  ggbiplot(aes(color = species), sec.axes = "cols", scale.factor = 3) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_rows_point() +
-  geom_cols_vector(color = "#444444") +
-  geom_cols_text_radiate(aes(label = measure), color = "#444444") +
-  ggtitle(
-    "Row-principal unscaled PCA biplot of Anderson iris data",
-    "Variable loadings scaled to secondary axes"
-  ) +
-  expand_limits(y = c(-1, 3.5))
-# Confer inertia in CA between rows and columns of benthic sample data
-data(benthos)
-benthos \%>\%
-  ca::ca() \%>\%
-  as_tbl_ord() \%>\%
-  print() -> benthos_ca
-# Reproduce Exhibit 8.3
-benthos_ca \%>\%
-  confer_inertia("colprincipal") \%>\%
-  ggbiplot(aes(label = .name)) +
-  theme_bw() +
-  geom_rows_point(color = "brown", size = 1) +
-  geom_cols_text(color = "darkgreen")
-# Reproduce Exhibit 8.4
-benthos_ca \%>\%
-  augment(.matrix = "rows") \%>\%
-  transmute_rows(mass = .mass, sqrt_mass = sqrt(.mass)) \%>\%
-  confer_inertia("colprincipal") \%>\%
-  ggbiplot(aes(label = .name), scale_rows = "sqrt_mass") +
-  theme_bw() +
-  geom_rows_vector(color = "brown", arrow = NULL) +
-  geom_rows_point(aes(size = mass), color = "brown", shape = 17) +
-  scale_size_continuous(range = c(1, 4), guide = "none") +
-  geom_rows_text(
-    stat = "chull",
-    color = "brown", hjust = "outward", vjust = "outward"
-  ) +
-  geom_cols_point(color = "darkgreen") +
-  geom_cols_text_repel(color = "darkgreen", min.segment.length = 2)
-# state abbreviations
-state <- data.frame(
-  .name = state.name,
-  .abb = state.abb
-)
-# Log-ratio analysis of 1973 violent crime arrests in the United States
-USArrests \%>\%
-  subset(select = -UrbanPop) \%>\%
-  lra() \%>\%
-  print() -> arrests_lra
-arrests_lra \%>\%
-  as_tbl_ord() \%>\%
-  augment() \%>\%
-  left_join_rows(state, by = ".name") \%>\%
-  print() -> arrests_lra
-# Adapt Exhibit 7.1 in Greenacre (2010)
-arrests_lra \%>\%
-  confer_inertia(1) \%>\%
-  ggbiplot(sec.axes = "cols", scale.factor = 1/20) +
-  theme_bw() +
-  geom_rows_text(
-    aes(label = .abb),
-    size = 3, color = "darkgreen", alpha = .5
-  ) +
-  geom_cols_polygon(fill = NA, linetype = "dashed", color = "brown4") +
-  geom_cols_text(
-    aes(label = .name),
-    color = "brown4", fontface = "bold"
-  ) +
-  ggtitle(
-    "Log-ratio analysis of violent crime arrest rates",
-    "United States, 1973"
-  ) +
-  guides(color = FALSE, size = FALSE)
 }

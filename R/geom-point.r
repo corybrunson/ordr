@@ -27,9 +27,6 @@
 #' @inheritParams ggplot2::layer
 #' @template param-geom
 #' @template param-matrix
-#' @example inst/examples/bioenv-lm-isolines.r
-#' @example inst/examples/country-cmds-prcomp-negate.r
-#' @example inst/examples/women-ca-confer.r
 NULL
 
 #' @rdname geom-biplot-point

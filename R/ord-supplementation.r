@@ -22,7 +22,6 @@
 #' @name supplementation
 #' @include ord-augmentation.r
 #' @inheritParams accessors
-#' @example inst/examples/diabetes-lda-supplement.r
 NULL
 
 #' @rdname supplementation

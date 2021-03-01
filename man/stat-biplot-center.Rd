@@ -174,60 +174,32 @@ points for rows and arrows for columns.
 }
 
 \examples{
-# Scaled PCA of Anderson iris data with annotated biplot
+# scaled PCA of Anderson iris measurements
 iris[, -5] \%>\%
-  prcomp(scale = TRUE) \%>\%
+  princomp(cor = TRUE) \%>\%
   as_tbl_ord() \%>\%
-  confer_inertia(1) \%>\%
   mutate_rows(species = iris$Species) \%>\%
   print() -> iris_pca
+# row-principal biplot with centroids
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   geom_rows_point(alpha = .5) +
   stat_rows_center(fun.center = "mean", size = 3, shape = "triangle") +
-  stat_rows_ellipse(level = .99) +
-  geom_cols_vector(color = "#444444") +
   ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
+    "Row-principal PCA biplot of Anderson iris measurements",
     "Overlaid with centroids and 99\% confidence ellipses"
   )
+# row-principal biplot with centroid-based stars
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
-  geom_rows_point() +
-  stat_rows_center(fun.center = "mean", size = 3, shape = 1) +
-  geom_polygon(
-    aes(fill = species),
-    color = NA, alpha = .25, stat = "rows_ellipse"
-  ) +
-  geom_cols_vector(color = "#444444") +
-  scale_color_brewer(
-    type = "qual", palette = 2,
-    aesthetics = c("color", "fill")
-  ) +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
-    "Overlaid with 99\% confidence disks"
-  )
-# Scaled PCA of Anderson Iris data with centroid stars
-iris[, -5] \%>\%
-  princomp(cor = TRUE) \%>\%
-  as_tbl_ord() \%>\%
-  mutate_rows(species = iris$Species) \%>\%
-  mutate_cols(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
-  print() -> iris_pca
-iris_pca \%>\%
-  ggbiplot(aes(color = species), sec.axes = "cols", scale.factor = 3) +
-  theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   stat_rows_star(alpha = .5, fun.center = "mean") +
-  stat_rows_center(size = 3, fun.center = "mean") +
   geom_rows_point(alpha = .5) +
-  geom_cols_vector(color = "#444444") +
   ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
+    "Row-principal PCA biplot of Anderson iris measurements",
     "Segments connect each observation to its within-species centroid"
   )
 }

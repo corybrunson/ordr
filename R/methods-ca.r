@@ -6,12 +6,7 @@
 #' @name methods-ca
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/finches-ca.r
-#' @example inst/examples/smoke-ca-confer.r
-#' @example inst/examples/benthos-ca-augment-confer.r
-#' @example inst/examples/women-ca-confer.r
-#' @example inst/examples/haireye-ca-rotate.r
-#' @example inst/examples/ratios-ca-verbs.r
+#' @example inst/examples/ex-methods-ca-smoke.r
 NULL
 
 #' @rdname methods-ca

@@ -29,7 +29,6 @@
 #' @name geom-biplot-text-radiate
 #' @import ggplot2
 #' @inheritParams geom-biplot-text
-#' @example inst/examples/bioenv-mlm.r
 NULL
 
 #' @rdname geom-biplot-text-radiate

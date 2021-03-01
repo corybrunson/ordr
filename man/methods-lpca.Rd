@@ -79,17 +79,25 @@ functions \code{\link[logisticPCA:logisticPCA]{logisticPCA::logisticPCA()}}, \co
 column names from the input matrix to the output matrices.
 }
 \examples{
-# Logistic SVD of Sanderson finches data
+# site-species data frame of Sanderson Galapagos finches data
+data(finches, package = "cooccur")
+class(finches)
+finches[seq(6L), seq(6L)]
+# logistic singular value decomposition
 finches \%>\% t() \%>\%
   logisticSVD_ord() \%>\%
   as_tbl_ord() \%>\%
-  augment() \%>\%
   print() -> finches_lsvd
+# recover row and column singular vectors
+get_rows(finches_lsvd)
+get_cols(finches_lsvd)
+# augment ordination with point names and main effect estimates
+augment(finches_lsvd)
+# summarize artifical coordinates (inertia is undefined)
+tidy(finches_lsvd)
+# biplot (inertia is not defined and cannot be conferred)
 finches_lsvd \%>\%
-  ggbiplot(
-    aes(x = LSC1, y = LSC2, label = .name),
-    sec.axes = "cols", scale.factor = 100
-  ) +
+  ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 100) +
   geom_rows_vector(alpha = .5, color = "darkred") +
   geom_rows_text_radiate(size = 3, color = "darkred") +
   geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
@@ -98,17 +106,21 @@ finches_lsvd \%>\%
     "Islands (finches) scaled to the primary (secondary) axes"
   ) +
   expand_limits(x = c(-80, 60))
-# Logistic PCA of Sanderson finches data
+# logistic principal components analysis
 finches \%>\% t() \%>\%
   logisticPCA_ord() \%>\%
   as_tbl_ord() \%>\%
-  augment() \%>\%
   print() -> finches_lpca
+# recover row and column singular vectors
+get_rows(finches_lpca)
+get_cols(finches_lpca)
+# augment ordination with point names and main effect estimates
+augment(finches_lpca)
+# summarize artifical coordinates (inertia is undefined)
+tidy(finches_lpca)
+# biplot (inertia is not defined and cannot be conferred)
 finches_lpca \%>\%
-  ggbiplot(
-    aes(x = LPC1, y = LPC2, label = .name),
-    sec.axes = "cols", scale.factor = 50
-  ) +
+  ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 50) +
   geom_rows_vector(alpha = .5, color = "darkred") +
   geom_rows_text_radiate(size = 3, color = "darkred") +
   geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
@@ -117,19 +129,23 @@ finches_lpca \%>\%
     "Islands (finches) scaled to the primary (secondary) axes"
   ) +
   expand_limits(x = c(-30, 25))
-# Convex logistic PCA of Sanderson finches data
-finches \%>\% t() \%>\%
-  # omit finches present on every island
-  {.[, ! apply(., 2, all), drop = FALSE]} \%>\%
+# convex logistic PCA, omitting ubiquitous finches
+finches \%>\%
+  dplyr::filter(dplyr::if_any(where(is.integer), ~ . == 0)) \%>\%
+  t() \%>\%
   convexLogisticPCA_ord() \%>\%
   as_tbl_ord() \%>\%
-  augment() \%>\%
   print() -> finches_clpca
+# recover row and column singular vectors
+get_rows(finches_clpca)
+get_cols(finches_clpca)
+# augment ordination with point names and main effect estimates
+augment(finches_clpca)
+# summarize artifical coordinates (inertia is undefined)
+tidy(finches_clpca)
+# biplot (inertia is not defined and cannot be conferred)
 finches_clpca \%>\%
-  ggbiplot(
-    aes(x = LPC1, y = LPC2, label = .name),
-    sec.axes = "cols", scale.factor = 50
-  ) +
+  ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 50) +
   geom_rows_vector(alpha = .5, color = "darkred") +
   geom_rows_text_radiate(size = 3, color = "darkred") +
   geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +

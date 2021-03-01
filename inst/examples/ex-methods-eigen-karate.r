@@ -1,14 +1,14 @@
-# Graph Laplacian eigenvectors for spectral partitioning
+# two-group karate club data
 data(karate, package = "igraphdata")
+# force-directed layout of graph
 igraph::plot.igraph(
   karate,
   vertex.label.family = "sans",
   vertex.label.color = "black",
   vertex.label.cex = .75
 )
-# first eigenvector (centrality)
-karate_eigen_cent <- igraph::eigen_centrality(karate)
-# eigendecomposition
+# graph Laplacian eigenvectors for spectral partitioning:
+# complete eigendecomposition, augmenting vertex data
 karate %>%
   igraph::as_adjacency_matrix(sparse = FALSE) %>%
   eigen_ord() %>% as_tbl_ord() %>%
@@ -18,13 +18,19 @@ karate %>%
     label = igraph::vertex_attr(karate, "label")
   ) %>%
   print() -> karate_eigen
-# corroborate eigencentralities
+# recover matrices of row and column coordinates
+get_rows(karate_eigen)[seq(8L), seq(5L)]
+get_cols(karate_eigen)[seq(8L), seq(5L)]
+# summarize eigenvectors
+tidy(karate_eigen)
+# validate eigencentrality calculations against igraph implementation
 tibble::tibble(
-  igraph = karate_eigen_cent$vector,
-  eigen = karate_eigen$vectors[, 1] / max(karate_eigen$vectors[, 1])
+  eigen = karate_eigen$vectors[, 1L] / max(karate_eigen$vectors[, 1L]),
+  igraph = igraph::eigen_centrality(karate)$vector
 ) %>%
   ggplot(aes(x = eigen, y = igraph)) +
   coord_equal() +
+  geom_abline(slope = 1, color = "#777777") +
   geom_point()
 # first and second eigenvectors for centrality and connectivity / partitioning
 karate_eigen %>%
@@ -42,12 +48,7 @@ karate_eigen %>%
 karate_eigen %>%
   confer_inertia(1) %>%
   ggbiplot(aes(x = 2, y = 3)) +
-  scale_x_continuous(expand = expand_scale(mult = .3)) +
-  scale_y_continuous(expand = expand_scale(mult = .2)) +
   geom_rows_vector(aes(color = EV1)) +
   geom_rows_text_radiate(stat = "chull", aes(label = label)) +
   labs(x = "algebraic connectivity", y = "loading onto third eigenvector") +
-  ggtitle(
-    "Second (horizontal) and third (vertical) eigencentralities",
-    "Color increases in value with eigencentrality, labels along convex hull"
-  )
+  ggtitle("Second (connectivity) and third eigencentralities")

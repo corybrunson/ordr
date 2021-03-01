@@ -10,7 +10,7 @@
 #' @name methods-lpca
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/finches-lpca-secondary.r
+#' @example inst/examples/ex-methods-lpca-finches.r
 NULL
 
 #' @importFrom stats plogis

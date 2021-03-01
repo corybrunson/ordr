@@ -25,8 +25,6 @@
 #' @param ... Additional arguments from [base::as.matrix()]; ignored.
 #' @template param-matrix
 #' @param .supplement Logical; whether to include
-#' @example inst/examples/country-cmds-lm.r
-#' @example inst/examples/country-prcomp-confer.r
 NULL
 
 #' @rdname accessors
@@ -124,7 +122,7 @@ as.matrix.tbl_ord <- function(
 ) {
   .matrix <- match_factor(.matrix)
   if (.matrix == "dims")
-    stop("Can only coerce one factor ('u' or 'v') to a matrix.")
+    stop("Can only coerce one factor ('rows' or 'cols') to a matrix.")
   get_factor(x, .matrix = .matrix, .supplement = .supplement)
 }
 

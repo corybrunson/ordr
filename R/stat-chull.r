@@ -15,7 +15,6 @@
 #' @template param-stat
 #' @param conical Logical; whether to include the origin when calculating the
 #'   hull. Defaults to `FALSE`.
-#' @example inst/examples/benthos-ca-augment-confer.r
 NULL
 
 #' @rdname stat-biplot-chull

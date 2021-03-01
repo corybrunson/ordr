@@ -34,8 +34,6 @@
 #'   whether the fortified data frame should include only the ordination
 #'   coordinates or also augmented case and variable data, and, if the latter,
 #'   whether only shared fields or all from both.
-#' @example inst/examples/arrests-pca-fortify.r
-#' @example inst/examples/diabetes-lda-supplement.r
 
 #' @rdname fortify
 #' @export
@@ -111,10 +109,7 @@ fortify.tbl_ord <- function(
 #' @rdname fortify
 #' @export
 fortify_coord <- function(model) {
-  tbl <- bind_cols(
-    augmentation_coord(model),
-    .inertia = recover_inertia(model)
-  )
+  tbl <- tidy(model)
   tbl$.prop_var <- tbl$.inertia / sum(tbl$.inertia)
   tbl
 }

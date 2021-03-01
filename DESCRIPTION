@@ -37,7 +37,9 @@ Suggests:
     gridExtra,
     igraph,
     igraphdata,
-    heplots
+    heplots,
+    cooccur,
+    proxy
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Collate: 

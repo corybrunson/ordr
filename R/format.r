@@ -20,11 +20,6 @@
 #' @param x A [tbl_ord] object.
 #' @inheritParams tibble::format.tbl
 #' @param ... Additional arguments.
-#' @example inst/examples/mtcars-lm-isolines.r
-#' @example inst/examples/country-cmds-lm.r
-#' @example inst/examples/finches-ca.r
-#' @example inst/examples/iris-princomp-secondary.r
-#' @example inst/examples/diabetes-lda-supplement.r
 
 #' @rdname format
 #' @export

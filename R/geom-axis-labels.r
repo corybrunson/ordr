@@ -33,7 +33,7 @@
 #' @param label_dodge Numeric; the orthogonal distance of the text from
 #'   the axis, as a proportion of the minimum of the plot width and height.
 #' @template param-matrix
-#' @example inst/examples/diabetes-lda-axes.r
+#' @example inst/examples/ex-geom-axis-diabetes.r
 NULL
 
 #' @rdname geom-biplot-ticks

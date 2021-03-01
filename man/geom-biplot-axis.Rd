@@ -137,24 +137,48 @@ in bold):
 }
 
 \examples{
-# LDA biplot scales for Reaven & Miller diabetes data
-diabetes_custom_biplot <- function(axes.scale) {
-  lda_ord(group ~ ., heplots::Diabetes, axes.scale = axes.scale) \%>\%
-    as_tbl_ord() \%>\%
-    augment() \%>\%
-    print() \%T>\%
-    mutate_rows(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
-    confer_inertia("symmetric") \%>\%
-    ggbiplot(.supplement = FALSE) +
-    theme_bw() +
-    geom_rows_point(aes(shape = .grouping)) +
-    geom_cols_axis(color = "#888888") +
-    geom_cols_axis_ticks() +
-    geom_cols_axis_text(size = 2.5, label_dodge = .025) +
-    ggtitle("Symmetric LDA biplot of Reaven & Miller diabetes data")
-}
-diabetes_custom_biplot("unstandardized")
-diabetes_custom_biplot("standardized")
-diabetes_custom_biplot("contribution")
+# Reaven & Miller overt & chemical diabetes test data and group classification
+head(heplots::Diabetes)
+# default (standardized) linear discriminant analysis of groups on tests
+diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes)
+# bestow 'tbl_ord' class & augment observation, centroid, and variable fields
+as_tbl_ord(diabetes_lda) \%>\%
+  augment() \%>\%
+  mutate_rows(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
+  print() -> diabetes_lda
+# row-standard biplot
+diabetes_lda \%>\%
+  confer_inertia(1) \%>\%
+  ggbiplot() +
+  theme_bw() +
+  geom_rows_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
+  geom_cols_axis(color = "#888888") +
+  geom_cols_axis_ticks() +
+  geom_cols_axis_text(size = 2.5, label_dodge = .2) +
+  ggtitle(
+    "LDA of Reaven & Miller diabetes groups",
+    "Row-standard biplot of standardized LDA"
+  )
+# contribution LDA of groups on tests
+diabetes_lda <-
+  lda_ord(group ~ ., heplots::Diabetes, axes.scale = "contribution")
+# bestow 'tbl_ord' class & augment observation, centroid, and variable fields
+as_tbl_ord(diabetes_lda) \%>\%
+  augment() \%>\%
+  mutate_rows(discriminant = ifelse(! .supplement, "centroid", "case")) \%>\%
+  print() -> diabetes_lda
+# symmetric biplot
+diabetes_lda \%>\%
+  confer_inertia(.5) \%>\%
+  ggbiplot() +
+  theme_bw() +
+  geom_rows_point(aes(shape = .grouping, alpha = discriminant)) +
+  geom_cols_axis(color = "#888888") +
+  geom_cols_axis_ticks() +
+  geom_cols_axis_text(size = 2.5, label_dodge = .1) +
+  ggtitle(
+    "LDA of Reaven & Miller diabetes groups",
+    "Symmetric biplot of contribution LDA"
+  )
 }
 \keyword{datasets}

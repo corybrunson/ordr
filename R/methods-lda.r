@@ -12,8 +12,7 @@
 #' @name methods-lda
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/diabetes-lda-supplement.r
-#' @example inst/examples/iris-lda.r
+#' @example inst/examples/ex-methods-lda-iris.r
 NULL
 
 #' @rdname methods-lda

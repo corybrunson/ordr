@@ -6,7 +6,7 @@
 #' @name methods-eigen
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/karate-igraph-eigen.r
+#' @example inst/examples/ex-methods-eigen-karate.r
 NULL
 
 #' @rdname methods-eigen

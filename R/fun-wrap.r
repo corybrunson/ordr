@@ -31,7 +31,6 @@
 #' @inheritParams logisticPCA::logisticSVD
 #' @inheritParams logisticPCA::convexLogisticPCA
 #' @param ... Additional parameters passed to original functions.
-#' @example inst/examples/karate-igraph-eigen.r
 NULL
 
 #' @rdname wrap-ord

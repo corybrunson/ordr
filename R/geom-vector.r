@@ -26,8 +26,6 @@
 #' @template param-matrix
 #' @param arrow Specification for arrows, as created by [grid::arrow()], or else
 #'   `NULL` for no arrows.
-#' @example inst/examples/iris-prcomp-lineranges.r
-#' @example inst/examples/country-cmds-prcomp-negate.r
 NULL
 
 #' @rdname geom-biplot-vector

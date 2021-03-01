@@ -35,9 +35,6 @@
 #' @template param-geom
 #' @param parse,check_overlap,nudge_x,nudge_y See [ggplot2::geom_text()].
 #' @template param-matrix
-#' @example inst/examples/finches-ca.r
-#' @example inst/examples/country-prcomp-confer.r
-#' @example inst/examples/benthos-ca-augment-confer.r
 NULL
 
 #' @rdname geom-biplot-text

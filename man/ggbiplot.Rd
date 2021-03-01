@@ -109,103 +109,76 @@ points for rows and arrows for columns.
 }
 
 \examples{
-# Regression analysis of Motor Trend design and performance data
-mtcars \%>\%
-  scale(scale = FALSE) \%>\%
-  as.data.frame() \%>\%
-  lm(formula = mpg ~ wt + cyl) \%>\%
-  as_tbl_ord() \%>\%
-  augment() \%>\%
-  mutate_rows(influence = .wt.res^2) \%>\%
-  print() -> mtcars_lm
-mtcars_lm \%>\%
-  ggbiplot(aes(x = wt, y = cyl, intercept = `(Intercept)`)) +
-  geom_rows_point(aes(color = influence)) +
-  geom_cols_vector() +
-  geom_cols_isolines(axes = 1, by = 5) +
-  ggtitle(
-    "Weight isolines with data colored by importance",
-    "Regressing mpg onto weight and number of cylinders"
-  )
-# Unscaled PCA and two-scaled biplot of Anderson iris data
+# compute PCA of Anderson iris measurements
 iris[, -5] \%>\%
-  princomp() \%>\%
+  princomp(cor = TRUE) \%>\%
   as_tbl_ord() \%>\%
   confer_inertia(1) \%>\%
   mutate_rows(species = iris$Species) \%>\%
   mutate_cols(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
   print() -> iris_pca
+# row-principal biplot with rescaled secondary axis
 iris_pca \%>\%
-  ggbiplot(aes(color = species), sec.axes = "cols", scale.factor = 3) +
+  ggbiplot(aes(color = species), sec.axes = "cols", scale.factor = 2) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   geom_rows_point() +
   geom_cols_vector(color = "#444444") +
   geom_cols_text_radiate(aes(label = measure), color = "#444444") +
   ggtitle(
-    "Row-principal unscaled PCA biplot of Anderson iris data",
+    "Row-principal PCA biplot of Anderson iris measurements",
     "Variable loadings scaled to secondary axes"
   ) +
   expand_limits(y = c(-1, 3.5))
-# Logistic SVD of Sanderson finches data
-finches \%>\% t() \%>\%
-  logisticSVD_ord() \%>\%
+# Performance measures can be regressed on the artificial coordinates of
+# ordinated vehicle specs. Because the ordination of specs ignores performance,
+# these coordinates will probably not be highly predictive. The gradient of each
+# performance measure along the artificial axes is visualized by projecting the
+# regression coefficients onto the ordination biplot.
+
+# data frame of vehicle performance measures
+mtcars \%>\%
+  subset(select = c(mpg, qsec)) \%>\%
+  as.matrix() \%>\%
+  print() -> mtcars_perf
+# scaled principal components analysis of vehicle specs
+mtcars \%>\%
+  subset(select = c(cyl, disp, hp, drat, wt, vs, carb)) \%>\%
+  princomp(cor = TRUE) \%>\%
   as_tbl_ord() \%>\%
-  augment() \%>\%
-  print() -> finches_lsvd
-finches_lsvd \%>\%
-  ggbiplot(
-    aes(x = LSC1, y = LSC2, label = .name),
-    sec.axes = "cols", scale.factor = 100
-  ) +
-  geom_rows_vector(alpha = .5, color = "darkred") +
-  geom_rows_text_radiate(size = 3, color = "darkred") +
-  geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
-  ggtitle(
-    "Logistic SVD of the Galapagos island finches",
-    "Islands (finches) scaled to the primary (secondary) axes"
-  ) +
-  expand_limits(x = c(-80, 60))
-# Logistic PCA of Sanderson finches data
-finches \%>\% t() \%>\%
-  logisticPCA_ord() \%>\%
+  print() -> mtcars_specs_pca
+# regress performance measures on principal components
+lm(mtcars_perf ~ get_rows(mtcars_specs_pca)) \%>\%
   as_tbl_ord() \%>\%
-  augment() \%>\%
-  print() -> finches_lpca
-finches_lpca \%>\%
-  ggbiplot(
-    aes(x = LPC1, y = LPC2, label = .name),
-    sec.axes = "cols", scale.factor = 50
-  ) +
-  geom_rows_vector(alpha = .5, color = "darkred") +
-  geom_rows_text_radiate(size = 3, color = "darkred") +
-  geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
-  ggtitle(
-    "Logistic PCA of the Galapagos island finches",
-    "Islands (finches) scaled to the primary (secondary) axes"
-  ) +
-  expand_limits(x = c(-30, 25))
-# Convex logistic PCA of Sanderson finches data
-finches \%>\% t() \%>\%
-  # omit finches present on every island
-  {.[, ! apply(., 2, all), drop = FALSE]} \%>\%
-  convexLogisticPCA_ord() \%>\%
+  print() -> mtcars_pca_lm
+# regression biplot
+ggbiplot(mtcars_specs_pca, aes(label = .name),
+         sec.axes = "rows", scale.factor = .5) +
+  theme_minimal() +
+  geom_rows_text(size = 3) +
+  geom_cols_vector(data = mtcars_pca_lm) +
+  geom_cols_text_radiate(data = mtcars_pca_lm) +
+  expand_limits(x = c(-2.5, 2))
+# multidimensional scaling based on a scaled cosine distance of vehicle specs
+mtcars \%>\%
+  subset(select = c(cyl, disp, hp, drat, wt, vs, carb)) \%>\%
+  scale() \%>\%
+  proxy::dist(method = "cosine") \%>\%
+  cmdscale_ord() \%>\%
   as_tbl_ord() \%>\%
-  augment() \%>\%
-  print() -> finches_clpca
-finches_clpca \%>\%
-  ggbiplot(
-    aes(x = LPC1, y = LPC2, label = .name),
-    sec.axes = "cols", scale.factor = 50
-  ) +
-  geom_rows_vector(alpha = .5, color = "darkred") +
-  geom_rows_text_radiate(size = 3, color = "darkred") +
-  geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
-  ggtitle(
-    "Convex logistic PCA of the Galapagos island finches",
-    "Islands (finches) scaled to the primary (secondary) axes"
-  ) +
-  expand_limits(x = c(-25, 35))
+  print() -> mtcars_specs_cmds
+# regress performance measures on principal coordinates
+lm(mtcars_perf ~ get_rows(mtcars_specs_cmds)) \%>\%
+  as_tbl_ord() \%>\%
+  print() -> mtcars_cmds_lm
+# regression biplot
+ggbiplot(mtcars_specs_cmds, aes(label = .name),
+         sec.axes = "rows", scale.factor = 3) +
+  theme_minimal() +
+  geom_rows_text(size = 3) +
+  geom_cols_vector(data = mtcars_cmds_lm) +
+  geom_cols_text_radiate(data = mtcars_cmds_lm) +
+  expand_limits(x = c(-2.25, 1.25), y = c(-2, 1.5))
 }
 \seealso{
 \code{\link[ggplot2:ggplot2-package]{ggplot2::ggplot2()}}

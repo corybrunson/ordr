@@ -39,105 +39,47 @@ These methods extract data from, and attribute new data to,
 objects of class \code{"prcomp"} as returned by \code{\link[stats:prcomp]{stats::prcomp()}}.
 }
 \examples{
-# Confer PCA weights and inertia between cases and variables
-data(country_attributes)
-country_attributes \%>\%
-  prcomp() \%>\%
-  as_tbl_ord() \%>\%
-  print() -> attributes_pca
-# form biplot
-attributes_pca \%>\%
-  ggbiplot(
-    aes(label = .name),
-    sec.axes = "cols", scale.factor = dim_cols(attributes_pca)
-  ) +
-  theme_bw() + theme(panel.grid = element_blank()) +
-  geom_rows_text(aes(x = PC1, y = PC2), color = "seagreen") +
-  geom_cols_vector(aes(x = PC1, y = PC2), color = "darkred") +
-  geom_cols_text(
-    aes(x = PC1, y = PC2),
-    color = "darkred", hjust = "outward", vjust = "outward"
-  )
-# covariance biplot
-attributes_pca \%>\%
-  confer_inertia(0) \%>\%
-  ggbiplot(
-    aes(label = .name),
-    sec.axes = "rows", scale.factor = dim_rows(attributes_pca)
-  ) +
-  theme_bw() + theme(panel.grid = element_blank()) +
-  geom_rows_text(aes(x = PC1, y = PC2), color = "seagreen") +
-  geom_cols_vector(aes(x = PC1, y = PC2), color = "darkred") +
-  geom_cols_text_repel(aes(x = PC1, y = PC2), color = "darkred")
-# Scaled PCA of Anderson iris data with annotated biplot
+# data frame of Anderson iris species measurements
+class(iris)
+head(iris)
+# compute scaled row-principal components of scaled measurements
 iris[, -5] \%>\%
   prcomp(scale = TRUE) \%>\%
   as_tbl_ord() \%>\%
-  confer_inertia(1) \%>\%
-  mutate_rows(species = iris$Species) \%>\%
   print() -> iris_pca
+# bind species classification to observation coordinates
+(iris_pca <- mutate_rows(iris_pca, species = iris$Species))
+# recover observation principal coordinates and measurement standard coordinates
+head(get_rows(iris_pca))
+get_cols(iris_pca)
+# augment measurements with names and scaling parameters
+augment(iris_pca)
+# summarize principal components
+tidy(iris_pca)
+# fortification of artificial coordinates yields proportion of variance measure
+fortify(iris_pca, .matrix = "coord")
+# scree plot of inertia
+ggplot(iris_pca, .matrix = "coord", aes(x = .name, y = .inertia)) +
+  theme_bw() +
+  geom_bar(stat = "identity") +
+  labs(x = "", y = "Inertia")
+# scree plot of proportion of variance (inertia)
+ggplot(iris_pca, .matrix = "coord", aes(x = .name, y = .prop_var)) +
+  theme_bw() +
+  scale_y_continuous(labels = scales::percent) +
+  geom_bar(stat = "identity") +
+  labs(x = "", y = "Proportion of inertia")
+# fortification adds all above columns
+fortify(iris_pca)
+# row-principal biplot
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   geom_rows_point(alpha = .5) +
-  stat_rows_center(fun.center = "mean", size = 3, shape = "triangle") +
-  stat_rows_ellipse(level = .99) +
   geom_cols_vector(color = "#444444") +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
-    "Overlaid with centroids and 99\% confidence ellipses"
-  )
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  geom_rows_point() +
-  stat_rows_center(fun.center = "mean", size = 3, shape = 1) +
-  geom_polygon(
-    aes(fill = species),
-    color = NA, alpha = .25, stat = "rows_ellipse"
-  ) +
-  geom_cols_vector(color = "#444444") +
-  scale_color_brewer(
-    type = "qual", palette = 2,
-    aesthetics = c("color", "fill")
-  ) +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
-    "Overlaid with 99\% confidence disks"
-  )
-# Scaled PCA of Anderson iris data with ranges and confidence intervals
-iris[, -5] \%>\%
-  prcomp(scale = TRUE) \%>\%
-  as_tbl_ord() \%>\%
-  confer_inertia(1) \%>\%
-  mutate_rows(species = iris$Species) \%>\%
-  print() -> iris_pca
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_rows_lineranges(fun.data = mean_sdl, size = .75) +
-  geom_rows_point(alpha = .5) +
-  geom_cols_vector(color = "#444444") +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
-    "Ranges 2 sample standard deviations from centroids"
-  )
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_rows_lineranges(
-    fun.data = mean_cl_boot, fun.args = list(conf.int = .99),
-    size = .75
-  ) +
-  geom_rows_point(alpha = .5) +
-  geom_cols_vector(color = "#444444") +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
-    "99\% confidence intervals based on nonparametric bootstrap sampling"
-  )
+  geom_cols_text_radiate(aes(label = .name), color = "#444444") +
+  ggtitle("Row-principal PCA biplot of Anderson iris measurements")
 }
 \author{
 Emily Paul

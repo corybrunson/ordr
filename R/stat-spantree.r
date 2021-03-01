@@ -38,7 +38,7 @@
 #' @inheritParams ggplot2::layer
 #' @param method Passed to [stats::dist()].
 #' @template param-stat
-#' @example inst/examples/euro-cmds-negate-spantree.r
+#' @example inst/examples/ex-stat-spantree-eurodist.r
 NULL
 
 #' @rdname stat-biplot-spantree

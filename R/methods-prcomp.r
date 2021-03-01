@@ -6,9 +6,7 @@
 #' @name methods-prcomp
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/country-prcomp-confer.r
-#' @example inst/examples/iris-prcomp-center-ellipse.r
-#' @example inst/examples/iris-prcomp-lineranges.r
+#' @example inst/examples/ex-methods-prcomp-iris.r
 #' @author Emily Paul
 NULL
 

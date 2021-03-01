@@ -8,12 +8,8 @@
 #' @include ord-tbl.r
 #' @importFrom stats model.frame influence cooks.distance predict
 #' @template param-methods
-#' @example inst/examples/mtcars-lm-isolines.r
-# @example inst/examples/bioenv-lm-isolines.r
-#' @example inst/examples/country-cmds-lm.r
-# @example inst/examples/bioenv-cmds-lm-repel.r
-#' @example inst/examples/bioenv-glm-isolines.r
-#' @example inst/examples/bioenv-mlm.r
+#' @example inst/examples/ex-methods-lm-mtcars.r
+#' @example inst/examples/ex-methods-glm-warpbreaks.r
 NULL
 
 #' @rdname methods-lm
@@ -23,14 +19,10 @@ as_tbl_ord.lm <- as_tbl_ord_default
 #' @rdname methods-lm
 #' @export
 recover_rows.lm <- function(x) {
-  .intercept_col <- if (names(x$coefficients)[1] == "(Intercept)") {
-    .ic <- matrix(1L, nrow = nrow(x$model), ncol = 1)
-    colnames(.ic) <- "(Intercept)"
-    .ic
-  } else matrix(NA_integer_, nrow = nrow(x$model), ncol = 0)
-  .predictors <- as.matrix(model.frame(x)[, -1])
-  res <- cbind(.intercept_col, .predictors)
-  colnames(res) <- recover_coord(x)
+  res <- model.matrix(x)
+  if (is.null(rownames(res)))
+    rownames(res) <- rownames(x$model[, -1, drop = FALSE])
+  if (is.null(colnames(res))) colnames(res) <- recover_coord(x)
   res
 }
 
@@ -38,34 +30,17 @@ recover_rows.lm <- function(x) {
 #' @export
 recover_cols.lm <- function(x) {
   res <- t(x$coefficients)
-  dimnames(res) <- list(
-    if (is.matrix(x$model[, 1])) colnames(x$model[, 1]) else names(x$model)[1],
-    recover_coord(x)
-  )
+  if (is.null(rownames(res))) rownames(res) <-
+      if (is.matrix(x$model[, 1])) colnames(x$model[, 1]) else names(x$model)[1]
+  if (is.null(colnames(res))) colnames(res) <- recover_coord(x)
   res
 }
 
 #' @rdname methods-lm
 #' @export
 recover_coord.lm <- function(x) {
-  .predictors <- x$model[, -1]
-  if (is.matrix(.predictors)) {
-    coord <- colnames(.predictors)
-  } else {
-    coord <- names(.predictors)
-    mat_coord <- which(sapply(
-      .predictors,
-      function(y) is.matrix(y) && ! is.null(colnames(y))
-    ))
-    coord[mat_coord] <- unname(unlist(lapply(
-      mat_coord,
-      function(i) colnames(.predictors[, i])
-    )))
-  }
-  if (names(x$coefficients)[1] == "(Intercept)") {
-    coord <- c("(Intercept)", coord)
-  }
-  coord
+  if (is.matrix(x$coefficients))
+    colnames(x$coefficients) else names(x$coefficients)
 }
 
 #' @rdname methods-lm

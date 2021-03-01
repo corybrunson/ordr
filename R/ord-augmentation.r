@@ -39,9 +39,6 @@
 #' @inheritParams accessors
 #' @param data Passed to [generics::augment()]; currently ignored.
 #' @param ... Additional arguments allowed by generics; ignored.
-#' @example inst/examples/bioenv-lm-isolines.r
-#' @example inst/examples/benthos-ca-augment-confer.r
-#' @example inst/examples/mtcars-kmeans-augment.r
 NULL
 
 #' @rdname augmentation
@@ -149,7 +146,7 @@ generics::tidy
 #' @export
 tidy.tbl_ord <- function(x, ...) {
   bind_cols(
-    inertia = recover_inertia(x),
-    augmentation_coord(x)
+    augmentation_coord(x),
+    .inertia = recover_inertia(x)
   )
 }

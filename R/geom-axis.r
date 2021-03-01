@@ -24,7 +24,7 @@
 #' @inheritParams ggplot2::layer
 #' @template param-geom
 #' @template param-matrix
-#' @example inst/examples/diabetes-lda-axes.r
+#' @example inst/examples/ex-geom-axis-diabetes.r
 NULL
 
 #' @rdname geom-biplot-axis

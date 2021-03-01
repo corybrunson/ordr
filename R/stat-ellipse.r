@@ -9,7 +9,7 @@
 #' @name stat-biplot-ellipse
 #' @inheritParams ggplot2::stat_ellipse
 #' @template param-stat
-#' @example inst/examples/iris-prcomp-center-ellipse.r
+#' @example inst/examples/ex-stat-ellipse-iris.r
 NULL
 
 #' @rdname stat-biplot-ellipse

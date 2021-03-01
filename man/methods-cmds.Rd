@@ -41,38 +41,35 @@ to identify objects returned by \code{\link[=cmdscale_ord]{cmdscale_ord()}}, whi
 \code{\link[stats:cmdscale]{stats::cmdscale()}}.
 }
 \examples{
-# Multidimensional scaling of country differences and regression of attributes
-# Reproduce Exhibit 4.2 in Greenacre (2010)
-data(country_differences)
-country_differences \%>\%
+# 'dist' object (matrix of road distances) of large American cities
+class(UScitiesD)
+print(UScitiesD)
+# use multidimensional scaling to infer artificial planar coordinates
+UScitiesD \%>\%
   cmdscale_ord(k = 2) \%>\%
   as_tbl_ord() \%>\%
-  print() -> differences_cmds
-differences_plot <- differences_cmds \%>\%
-  ggbiplot(aes(x = 1, y = 2, label = .name)) +
-  geom_cols_text()
-differences_plot
-# Reproduce Exhibit 4.5 in Greenacre (2010)
-data(country_attributes)
-lm(country_attributes ~ get_rows(differences_cmds)) \%>\%
-  as_tbl_ord() \%>\%
-  print() -> attributes_fit
-differences_plot +
-  geom_cols_vector(data = attributes_fit) +
-  geom_cols_text_radiate(data = attributes_fit, hjust = .3)
-# Compare an MDS to a PCA
-data(country_differences)
-country_differences \%>\%
-  cmdscale_ord(k = 2) \%>\%
-  as_tbl_ord() \%>\%
-  print() -> differences_cmds
-country_differences \%>\%
-  prcomp() \%>\%
-  as_tbl_ord() \%>\%
-  print() -> differences_pca
-# negate PCA axis to match MDS axis
-plot(gridExtra::arrangeGrob(grobs = list(
-  ggbiplot(differences_cmds) + geom_rows_point(),
-  ggbiplot(differences_pca) + scale_y_reverse() + geom_rows_point()
-), ncol = 2))
+  print() -> usa_mds
+# recover (equivalent) matrices of row and column artificial coordinates
+get_rows(usa_mds)
+get_cols(usa_mds)
+# augment ordination with point names
+augment(usa_mds)
+# summarize artifical coordinates
+tidy(usa_mds)
+# fortification of artificial coordinates yields proportion of variance
+fortify(usa_mds, .matrix = "coord")
+# scree plot of inertia
+ggplot(usa_mds, .matrix = "coord", aes(x = .name, y = .inertia)) +
+  theme_bw() +
+  geom_bar(stat = "identity") +
+  labs(x = "", y = "Inertia")
+# fortification automatically augments artificial coordinates
+fortify(usa_mds)
+# reorient biplot to conventional compass
+usa_mds \%>\%
+  ggbiplot() +
+  scale_x_reverse() +
+  scale_y_reverse() +
+  geom_cols_text(aes(label = .name), size = 3) +
+  ggtitle("MDS biplot of distances between U.S. cities")
 }

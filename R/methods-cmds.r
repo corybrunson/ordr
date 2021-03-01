@@ -8,8 +8,7 @@
 #' @name methods-cmds
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/country-cmds-lm.r
-#' @example inst/examples/country-cmds-prcomp-negate.r
+#' @example inst/examples/ex-methods-cmds-cities.r
 NULL
 
 #' @rdname methods-cmds
@@ -36,7 +35,7 @@ recover_cols.cmds_ord <- function(x) recover_dims_cmds(x, "cols")
 
 #' @rdname methods-cmds
 #' @export
-recover_inertia.cmds_ord <- function(x) x$eig ^ 2
+recover_inertia.cmds_ord <- function(x) x$eig[seq(ncol(x$points))] ^ 2
 
 #' @rdname methods-cmds
 #' @export

@@ -6,8 +6,7 @@
 #' @name methods-princomp
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/iris-princomp-center-star.r
-#' @example inst/examples/iris-princomp-secondary.r
+#' @example inst/examples/ex-methods-princomp-iris.r
 #' @author Emily Paul
 NULL
 

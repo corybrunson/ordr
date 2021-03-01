@@ -109,13 +109,13 @@ points for rows and arrows for columns.
 }
 
 \examples{
-# Scaled PCA of Anderson iris data with annotated biplot
+# compute row-principal components of scaled iris measurements
 iris[, -5] \%>\%
   prcomp(scale = TRUE) \%>\%
   as_tbl_ord() \%>\%
-  confer_inertia(1) \%>\%
   mutate_rows(species = iris$Species) \%>\%
   print() -> iris_pca
+# row-principal biplot with centroids and confidence ellipses
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
@@ -123,16 +123,15 @@ iris_pca \%>\%
   geom_rows_point(alpha = .5) +
   stat_rows_center(fun.center = "mean", size = 3, shape = "triangle") +
   stat_rows_ellipse(level = .99) +
-  geom_cols_vector(color = "#444444") +
   ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
+    "Row-principal PCA biplot of Anderson iris measurements",
     "Overlaid with centroids and 99\% confidence ellipses"
   )
+# row-principal biplot with centroids and confidence elliptical disks
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
   geom_rows_point() +
-  stat_rows_center(fun.center = "mean", size = 3, shape = 1) +
   geom_polygon(
     aes(fill = species),
     color = NA, alpha = .25, stat = "rows_ellipse"
@@ -143,8 +142,8 @@ iris_pca \%>\%
     aesthetics = c("color", "fill")
   ) +
   ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
-    "Overlaid with 99\% confidence disks"
+    "Row-principal PCA biplot of Anderson iris measurements",
+    "Overlaid with 95\% confidence disks"
   )
 }
 \keyword{datasets}
