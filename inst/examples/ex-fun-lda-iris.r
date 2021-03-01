@@ -10,7 +10,7 @@ print(get_rows(iris_lda, .supplement = FALSE))
 # unstandardized coefficient LDA biplot
 iris_lda %>%
   as_tbl_ord() %>%
-  augment() %>%
+  augment_ord() %>%
   mutate_rows(
     species = .grouping,
     discriminant = ifelse(! .supplement, "centroid", "case")
@@ -43,7 +43,7 @@ iris_lda %>%
 # standardized coefficient LDA biplot
 iris_lda %>%
   as_tbl_ord() %>%
-  augment() %>%
+  augment_ord() %>%
   mutate_rows(
     species = .grouping,
     discriminant = ifelse(! .supplement, "centroid", "case")
@@ -73,7 +73,7 @@ print(sweep(iris_lda$means, 2, iris_centroid, "-") %*% C_W_sqrtinv)
 # contribution LDA biplot
 iris_lda %>%
   as_tbl_ord() %>%
-  augment() %>%
+  augment_ord() %>%
   mutate_rows(
     species = .grouping,
     discriminant = ifelse(! .supplement, "centroid", "case")

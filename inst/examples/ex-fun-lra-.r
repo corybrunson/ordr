@@ -15,7 +15,7 @@ arrest_logratios <- log(arrest_ratios)
 arrest_logratios[state_examples, ]
 # non-compositional log-ratio analysis
 (arrests_lra <- lra(USArrests[, c(1, 2, 4)]))
-(arrests_lra_ord <- augment(as_tbl_ord(arrests_lra)))
+(arrests_lra_ord <- augment_ord(as_tbl_ord(arrests_lra)))
 # row-principal biplot
 arrests_lra_ord %>%
   confer_inertia("rows") %>%
@@ -36,7 +36,7 @@ arrests_lra_ord %>%
   guides(color = FALSE)
 # compositional log-ratio analysis
 (arrests_lra <- lra(USArrests[, c(1, 2, 4)], compositional = TRUE))
-(arrests_lra_ord <- augment(as_tbl_ord(arrests_lra)))
+(arrests_lra_ord <- augment_ord(as_tbl_ord(arrests_lra)))
 # row-principal biplot
 arrests_lra_ord %>%
   confer_inertia("rows") %>%

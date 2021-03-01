@@ -20,7 +20,7 @@ iris %>%
 # wrap as a 'tbl_ord' object
 (iris_km_ord <- as_tbl_ord(iris_km))
 # augment everything with names, observations with cluster assignment
-augment(iris_km_ord)
+augment_ord(iris_km_ord)
 # summarize clusters with standard deviation
 iris_km_ord %>%
   tidy() %>%

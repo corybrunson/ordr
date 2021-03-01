@@ -51,7 +51,7 @@ ca::smoke \%>\%
 get_rows(smoke_ca)
 get_cols(smoke_ca)
 # augment profiles with names, masses, distances, and inertias
-augment(smoke_ca)
+augment_ord(smoke_ca)
 # summarize artificial coordinates
 tidy(smoke_ca)
 # fortification of artificial coordinates yields proportion of variance measure

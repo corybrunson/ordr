@@ -1,4 +1,4 @@
-#' @title Annotate the factors of a tbl_ord
+#' @title Annotate factors of 'tbl_ord's
 #'
 #' @description These functions annotate the matrix factors of '[tbl_ord]'
 #'   objects with additional variables, and retrieve these annotations.
@@ -14,6 +14,7 @@
 #' @inheritParams accessors
 #' @param annot A [data.frame][base::data.frame] having the same number of rows
 #'   as `get_*(x)`.
+#' @seealso [augmentation]
 NULL
 
 #' @rdname annotation

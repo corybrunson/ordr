@@ -144,7 +144,7 @@ points for rows and arrows for columns.
 eurodist \%>\%
   cmdscale_ord(k = 11) \%>\%
   as_tbl_ord() \%>\%
-  augment() \%>\%
+  augment_ord() \%>\%
   print() -> euro_mds
 # biplot with minimal spanning tree based on full-dimensional distances
 euro_mds \%>\%

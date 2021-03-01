@@ -14,7 +14,7 @@ USArrests %>%
   print() -> arrests_lra
 # augment log-ratio profiles with names and join state abbreviations
 arrests_lra %>%
-  augment() %>%
+  augment_ord() %>%
   left_join_rows(state, by = ".name") %>%
   print() -> arrests_lra
 # recover state and arrest profiles

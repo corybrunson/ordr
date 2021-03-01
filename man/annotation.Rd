@@ -6,7 +6,7 @@
 \alias{set_annotation_cols}
 \alias{annotation_rows}
 \alias{annotation_cols}
-\title{Annotate the factors of a tbl_ord}
+\title{Annotate factors of 'tbl_ord's}
 \usage{
 set_annotation_rows(x, annot)
 
@@ -29,4 +29,7 @@ objects with additional variables, and retrieve these annotations.
 The \verb{annotation_*()} and \verb{set_annotation_*()} functions assign and retrieve
 values of the \code{"*_annotation"} attributes of \code{x}, which should have the same
 number of rows as \code{get_*(x)}.
+}
+\seealso{
+\link{augmentation}
 }

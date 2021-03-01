@@ -9,7 +9,7 @@ lda_ord(iris[, 1:4], iris[, 5]) %>%
 get_rows(iris_lda, .supplement = FALSE)
 get_cols(iris_lda)
 # augment ordination with centroid and measurement names
-augment(iris_lda)
+augment_ord(iris_lda)
 # summarize linear discriminant axes
 tidy(iris_lda)
 # fortification of artificial coordinates yields proportion of variance
@@ -25,7 +25,7 @@ fortify(iris_lda, .supplement = FALSE)
 # unstandardized coefficient LDA biplot (centroids only)
 iris_lda %>%
   as_tbl_ord() %>%
-  augment() %>%
+  augment_ord() %>%
   mutate_rows(species = .grouping) %>%
   ggbiplot(.supplement = FALSE) +
   theme_bw() +
@@ -41,7 +41,7 @@ iris_lda %>%
 # biplot with supplementary points for observations
 iris_lda %>%
   as_tbl_ord() %>%
-  augment() %>%
+  augment_ord() %>%
   mutate_rows(
     species = .grouping,
     discriminant = ifelse(! .supplement, "centroid", "case")

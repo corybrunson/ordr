@@ -53,7 +53,7 @@ iris[, -5] \%>\%
 head(get_rows(iris_pca))
 get_cols(iris_pca)
 # augment measurement coordinates with names and scaling parameters
-augment(iris_pca)
+augment_ord(iris_pca)
 # summarize principal components
 tidy(iris_pca)
 # fortification of artificial coordinates yields proportion of variance measure

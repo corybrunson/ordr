@@ -92,7 +92,7 @@ finches \%>\% t() \%>\%
 get_rows(finches_lsvd)
 get_cols(finches_lsvd)
 # augment ordination with point names and main effect estimates
-augment(finches_lsvd)
+augment_ord(finches_lsvd)
 # summarize artifical coordinates (inertia is undefined)
 tidy(finches_lsvd)
 # biplot (inertia is not defined and cannot be conferred)
@@ -115,7 +115,7 @@ finches \%>\% t() \%>\%
 get_rows(finches_lpca)
 get_cols(finches_lpca)
 # augment ordination with point names and main effect estimates
-augment(finches_lpca)
+augment_ord(finches_lpca)
 # summarize artifical coordinates (inertia is undefined)
 tidy(finches_lpca)
 # biplot (inertia is not defined and cannot be conferred)
@@ -140,7 +140,7 @@ finches \%>\%
 get_rows(finches_clpca)
 get_cols(finches_clpca)
 # augment ordination with point names and main effect estimates
-augment(finches_clpca)
+augment_ord(finches_clpca)
 # summarize artifical coordinates (inertia is undefined)
 tidy(finches_clpca)
 # biplot (inertia is not defined and cannot be conferred)

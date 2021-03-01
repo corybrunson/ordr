@@ -2,7 +2,7 @@ library(ordr)
 context("dplyr verbs for ordination factors")
 
 # arbitrary ordination object
-pca <- augment(as_tbl_ord(prcomp(iris[, -5])))
+pca <- augment_ord(as_tbl_ord(prcomp(iris[, -5])))
 
 test_that("`pull_*()` returns a vector", {
   expect_equal(pull_cols(pca, .name), names(iris)[-5])

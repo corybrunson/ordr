@@ -10,7 +10,7 @@ USPersonalExpenditure %>%
 get_rows(spend_svd)
 get_cols(spend_svd)
 # augment with row and column names
-augment(spend_svd)
+augment_ord(spend_svd)
 # summarize artifical coordinates
 tidy(spend_svd)
 # fortification of coordinates yields proportion of variance

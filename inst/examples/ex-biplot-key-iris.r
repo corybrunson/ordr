@@ -3,7 +3,7 @@ iris[, -5] %>%
   prcomp(scale = TRUE) %>%
   as_tbl_ord() %>%
   confer_inertia(1) %>%
-  augment() %>%
+  augment_ord() %>%
   mutate_rows(species = iris$Species) %>%
   ggbiplot(aes(color = species)) +
   theme_bw() +

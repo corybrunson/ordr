@@ -53,7 +53,7 @@ UScitiesD \%>\%
 get_rows(usa_mds)
 get_cols(usa_mds)
 # augment ordination with point names
-augment(usa_mds)
+augment_ord(usa_mds)
 # summarize artifical coordinates
 tidy(usa_mds)
 # fortification of artificial coordinates yields proportion of variance

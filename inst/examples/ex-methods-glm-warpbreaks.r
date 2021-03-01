@@ -2,7 +2,7 @@
 warpbreaks %>%
   glm(formula = breaks ~ wool + tension, family = "poisson") %>%
   as_tbl_ord() %>%
-  augment() %>%
+  augment_ord() %>%
   print() -> warpbreaks_pois
 # regression biplot with nonlinear isolines
 warpbreaks_pois %>%
