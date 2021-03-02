@@ -1,43 +1,5 @@
-#' @title Render text and labels at ordinates
-#' 
 
-#' @description `geom_*_text()` renders text, and `geom_*_label()` labels, at
-#'   the positions of the subjects or vectors. `geom_*_text_repel()` and
-#'   `geom_*_label_repel()` invoke functionality from the
-#'   **[ggrepel][ggrepel::ggrepel]** package.
-#' @template biplot-layers
-
-#' @section Aesthetics:
-
-#' `geom_*_text()`, `geom_*_label()`, `geom_*_text_repel()`, and
-#' `geom_*_label_repel()` understand the following aesthetics (required
-#' aesthetics are in bold):
-
-#' - **`x`**
-#' - **`y`**
-#' - **`label`**
-#' - `alpha`
-#' - `angle`
-#' - `colour`
-#' - `family`
-#' - `fontface`
-#' - `hjust`
-#' - `lineheight`
-#' - `size`
-#' - `vjust`
-#' - `group`
-#' 
-
-#' @name geom-biplot-text
-#' @import ggplot2
-#' @importFrom ggrepel GeomTextRepel GeomLabelRepel
-#' @inheritParams ggplot2::layer
-#' @template param-geom
-#' @param parse,check_overlap,nudge_x,nudge_y See [ggplot2::geom_text()].
-#' @template param-matrix
-NULL
-
-#' @rdname geom-biplot-text
+#' @rdname biplot-geoms
 #' @export
 geom_rows_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -72,7 +34,7 @@ geom_rows_text <- function(
   )
 }
 
-#' @rdname geom-biplot-text
+#' @rdname biplot-geoms
 #' @export
 geom_cols_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -107,7 +69,7 @@ geom_cols_text <- function(
   )
 }
 
-#' @rdname geom-biplot-text
+#' @rdname biplot-geoms
 #' @export
 geom_dims_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -143,7 +105,7 @@ geom_dims_text <- function(
   )
 }
 
-#' @rdname geom-biplot-text
+#' @rdname biplot-geoms
 #' @export
 geom_rows_label <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -168,7 +130,7 @@ geom_rows_label <- function(
   )
 }
 
-#' @rdname geom-biplot-text
+#' @rdname biplot-geoms
 #' @export
 geom_cols_label <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -193,7 +155,7 @@ geom_cols_label <- function(
   )
 }
 
-#' @rdname geom-biplot-text
+#' @rdname biplot-geoms
 #' @export
 geom_dims_label <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -225,7 +187,7 @@ ggrepel::geom_text_repel
 #' @export
 ggrepel::geom_label_repel
 
-#' @rdname geom-biplot-text
+#' @rdname biplot-geoms
 #' @export
 geom_rows_text_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -250,7 +212,7 @@ geom_rows_text_repel <- function(
   )
 }
 
-#' @rdname geom-biplot-text
+#' @rdname biplot-geoms
 #' @export
 geom_cols_text_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -275,7 +237,7 @@ geom_cols_text_repel <- function(
   )
 }
 
-#' @rdname geom-biplot-text
+#' @rdname biplot-geoms
 #' @export
 geom_dims_text_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -301,7 +263,7 @@ geom_dims_text_repel <- function(
   )
 }
 
-#' @rdname geom-biplot-text
+#' @rdname biplot-geoms
 #' @export
 geom_rows_label_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -326,7 +288,7 @@ geom_rows_label_repel <- function(
   )
 }
 
-#' @rdname geom-biplot-text
+#' @rdname biplot-geoms
 #' @export
 geom_cols_label_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -351,7 +313,7 @@ geom_cols_label_repel <- function(
   )
 }
 
-#' @rdname geom-biplot-text
+#' @rdname biplot-geoms
 #' @export
 geom_dims_label_repel <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

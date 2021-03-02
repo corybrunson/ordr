@@ -26,9 +26,8 @@
 #' @name augmentation
 #' @include ord-accessors.r
 #' @inheritParams accessors
-#' @param x An object of class '[tbl_ord]'.
 #' @template param-matrix
-#' @seealso [tidiers], [annotation]
+#' @seealso [tidiers] and [annotation] methods that interface with augmentation.
 NULL
 
 #' @rdname augmentation

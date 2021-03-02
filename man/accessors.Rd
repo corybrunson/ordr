@@ -68,7 +68,7 @@ dim_cols(x)
 dim_factor(x, .matrix)
 }
 \arguments{
-\item{x}{An object of or coercible to class '\link{tbl_ord}'.}
+\item{x}{An object of class '\link{tbl_ord}'.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The

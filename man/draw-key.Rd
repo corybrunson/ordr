@@ -55,5 +55,5 @@ iris[, -5] \%>\%
   )
 }
 \seealso{
-\link[ggplot2:draw_key]{ggplot2::draw_key}
+\link[ggplot2:draw_key]{ggplot2::draw_key} for key glyphs installed with \strong{ggplot2}.
 }

@@ -44,7 +44,6 @@
 
 #' @name tidiers
 #' @include ord-accessors.r
-#' @inheritParams accessors
 #' @param x,model An object of class '[tbl_ord]'.
 #' @param data Passed to generic methods; currently ignored.
 #' @param ... Additional arguments allowed by generics; currently ignored.
@@ -52,7 +51,7 @@
 #' @param .supplement Logical; whether to include
 #'   [supplementary][supplementation] points.
 #' @param coord.only Logical; whether to exclude augmentation and annotation.
-#' @seealso [augmentation]
+#' @seealso [augmentation] methods that must interface with tidiers.
 NULL
 
 #' @importFrom generics tidy

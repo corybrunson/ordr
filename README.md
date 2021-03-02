@@ -228,8 +228,8 @@ documentation of `cmdscale()` in the **stats** package; note that
 **ordr** provides the wrapper `cmdscale_ord()` that always returns the
 eigenvalues and the symmetric distance matrix produced during the
 calculation. The MDS uses 11 coordinates—the number of positive
-eigenvalues—so that `stat_*_spanningtree()` can call upon them to
-recover the intercity distances.
+eigenvalues—so that `stat_*_spantree()` can call upon them to recover
+the intercity distances.
 
 ``` r
 # `tbl_ord` object for a classical MDS on distances between European cities

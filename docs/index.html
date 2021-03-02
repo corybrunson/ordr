@@ -208,10 +208,10 @@
 <span class="co"># render a biplot, by default on the first two shared coordinates</span>
 <span class="fu"><a href="reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="va">spend_pca</span>, <span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="reference/geom-biplot-vector.html">geom_cols_vector</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="reference/geom-biplot-text-radiate.html">geom_cols_text_radiate</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="reference/geom-biplot-point.html">geom_rows_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="reference/geom-biplot-text.html">geom_rows_text_repel</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="reference/biplot-geoms.html">geom_cols_vector</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="reference/biplot-geoms.html">geom_cols_text_radiate</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="reference/biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="reference/biplot-geoms.html">geom_rows_text_repel</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">expand_limits</span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">2.75</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">ggtitle</span><span class="op">(</span>
     <span class="st">"U.S. Personal Expenditure data, 1940-1960"</span>,
@@ -222,7 +222,7 @@
 <div id="mds-example" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mds-example" class="anchor"></a>MDS example</h3>
-<p>Multidimensional scaling (MDS) is an ordination technique that starts not with rectangular data but with interpoint distances. A common illustration of its power is to calculate MDS on the set of distances—however measured—between geographic locations, and to recover the approximate geography via a biplot. This example is adapted from the documentation of <code><a href="https://rdrr.io/r/stats/cmdscale.html">cmdscale()</a></code> in the <strong>stats</strong> package; note that <strong>ordr</strong> provides the wrapper <code><a href="reference/wrap-ord.html">cmdscale_ord()</a></code> that always returns the eigenvalues and the symmetric distance matrix produced during the calculation. The MDS uses 11 coordinates—the number of positive eigenvalues—so that <code>stat_*_spanningtree()</code> can call upon them to recover the intercity distances.</p>
+<p>Multidimensional scaling (MDS) is an ordination technique that starts not with rectangular data but with interpoint distances. A common illustration of its power is to calculate MDS on the set of distances—however measured—between geographic locations, and to recover the approximate geography via a biplot. This example is adapted from the documentation of <code><a href="https://rdrr.io/r/stats/cmdscale.html">cmdscale()</a></code> in the <strong>stats</strong> package; note that <strong>ordr</strong> provides the wrapper <code><a href="reference/wrap-ord.html">cmdscale_ord()</a></code> that always returns the eigenvalues and the symmetric distance matrix produced during the calculation. The MDS uses 11 coordinates—the number of positive eigenvalues—so that <code>stat_*_spantree()</code> can call upon them to recover the intercity distances.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># `tbl_ord` object for a classical MDS on distances between European cities</span>
 <span class="va">eurodist</span> <span class="op">%&gt;%</span>
@@ -256,11 +256,11 @@
 <span class="va">city_mds</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">scale_y_reverse</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="reference/stat-biplot-spantree.html">stat_cols_spantree</a></span><span class="op">(</span>
+  <span class="fu"><a href="reference/biplot-stats.html">stat_cols_spantree</a></span><span class="op">(</span>
     <span class="fu"><a href="reference/ggbiplot.html">ord_aes</a></span><span class="op">(</span><span class="va">city_mds</span><span class="op">)</span>, check.aes <span class="op">=</span> <span class="cn">FALSE</span>,
     alpha <span class="op">=</span> <span class="fl">.5</span>, linetype <span class="op">=</span> <span class="st">"dotted"</span>
   <span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="reference/geom-biplot-text.html">geom_cols_text</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.name</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="reference/biplot-geoms.html">geom_cols_text</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.name</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"MDS biplot of road distances between European cities"</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-MDS%20example-1.png"><!-- --></p>
 </div>

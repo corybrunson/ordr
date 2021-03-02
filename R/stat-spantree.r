@@ -34,14 +34,87 @@
 
 #' @template biplot-layers
 
-#' @name stat-biplot-spantree
 #' @inheritParams ggplot2::layer
 #' @param method Passed to [stats::dist()].
 #' @template param-stat
+#' @family biplot stat layers
 #' @example inst/examples/ex-stat-spantree-eurodist.r
-NULL
+#' @export
+stat_spantree <- function(
+  mapping = NULL, data = NULL, geom = "segment", position = "identity",
+  method = "euclidean",
+  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
+  ...
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = StatSpantree,
+    geom = geom, 
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    check.aes = check.aes,
+    params = list(
+      method = method,
+      na.rm = FALSE,
+      ...
+    )
+  )
+}
 
-#' @rdname stat-biplot-spantree
+#' @rdname biplot-stats
+#' @export
+stat_rows_spantree <- function(
+  mapping = NULL, data = NULL, geom = "segment", position = "identity",
+  method = "euclidean",
+  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
+  ...
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = StatRowsSpantree,
+    geom = geom, 
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    check.aes = check.aes,
+    params = list(
+      method = method,
+      na.rm = FALSE,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_spantree <- function(
+  mapping = NULL, data = NULL, geom = "segment", position = "identity",
+  method = "euclidean",
+  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
+  ...
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = StatColsSpantree,
+    geom = geom, 
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    check.aes = check.aes,
+    params = list(
+      method = method,
+      na.rm = FALSE,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
 #' @usage NULL
 #' @export
 StatSpantree <- ggproto(
@@ -81,32 +154,8 @@ StatSpantree <- ggproto(
   }
 )
 
-#' @rdname stat-biplot-spantree
-#' @export
-stat_spantree <- function(
-  mapping = NULL, data = NULL, geom = "segment", position = "identity",
-  method = "euclidean",
-  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
-  ...
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatSpantree,
-    geom = geom, 
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    check.aes = check.aes,
-    params = list(
-      method = method,
-      na.rm = FALSE,
-      ...
-    )
-  )
-}
-
-#' @rdname stat-biplot-spantree
+#' @rdname ordr-ggproto
+#' @format NULL
 #' @usage NULL
 #' @export
 StatRowsSpantree <- ggproto(
@@ -115,7 +164,8 @@ StatRowsSpantree <- ggproto(
   setup_data = setup_rows_data
 )
 
-#' @rdname stat-biplot-spantree
+#' @rdname ordr-ggproto
+#' @format NULL
 #' @usage NULL
 #' @export
 StatColsSpantree <- ggproto(
@@ -123,53 +173,3 @@ StatColsSpantree <- ggproto(
   
   setup_data = setup_cols_data
 )
-
-#' @rdname stat-biplot-spantree
-#' @export
-stat_rows_spantree <- function(
-  mapping = NULL, data = NULL, geom = "segment", position = "identity",
-  method = "euclidean",
-  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
-  ...
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatRowsSpantree,
-    geom = geom, 
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    check.aes = check.aes,
-    params = list(
-      method = method,
-      na.rm = FALSE,
-      ...
-    )
-  )
-}
-
-#' @rdname stat-biplot-spantree
-#' @export
-stat_cols_spantree <- function(
-  mapping = NULL, data = NULL, geom = "segment", position = "identity",
-  method = "euclidean",
-  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
-  ...
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatColsSpantree,
-    geom = geom, 
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    check.aes = check.aes,
-    params = list(
-      method = method,
-      na.rm = FALSE,
-      ...
-    )
-  )
-}

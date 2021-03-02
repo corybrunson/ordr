@@ -60,7 +60,7 @@
 #'   [fortify.tbl_ord()].
 #' @example inst/examples/ex-biplot-secaxis-iris.r
 #' @example inst/examples/ex-biplot-lm-mtcars.r
-#' @seealso [ggplot2::ggplot2()]
+#' @seealso [ggplot2::ggplot2()], on which `ggbiplot()` is built.
 
 #' @rdname ggbiplot
 #' @export

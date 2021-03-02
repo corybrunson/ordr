@@ -14,7 +14,7 @@
 #' @inheritParams accessors
 #' @param annot A [data.frame][base::data.frame] having the same number of rows
 #'   as `get_*(x)`.
-#' @seealso [augmentation]
+#' @seealso [augmentation] methods that must interface with annotation.
 NULL
 
 #' @rdname annotation

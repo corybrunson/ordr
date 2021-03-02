@@ -1,35 +1,5 @@
-#' @title Render points at ordinates
-#' 
 
-#' @description `geom_*_point()` renders symbols at the positions of the
-#'   subjects or vectors.
-#' @template biplot-layers
-
-#' @section Aesthetics:
-
-#' `geom_*_point()` understands the following aesthetics (required aesthetics
-#' are in bold):
-
-#' - **`x`**
-#' - **`y`**
-#' - `alpha`
-#' - `colour`
-#' - `fill`
-#' - `linetype`
-#' - `shape`
-#' - `size`
-#' - `stroke`
-#' - `group`
-#' 
-
-#' @name geom-biplot-point
-#' @import ggplot2
-#' @inheritParams ggplot2::layer
-#' @template param-geom
-#' @template param-matrix
-NULL
-
-#' @rdname geom-biplot-point
+#' @rdname biplot-geoms
 #' @export
 geom_rows_point <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -52,7 +22,7 @@ geom_rows_point <- function(
   )
 }
 
-#' @rdname geom-biplot-point
+#' @rdname biplot-geoms
 #' @export
 geom_cols_point <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -75,7 +45,7 @@ geom_cols_point <- function(
   )
 }
 
-#' @rdname geom-biplot-point
+#' @rdname biplot-geoms
 #' @export
 geom_dims_point <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

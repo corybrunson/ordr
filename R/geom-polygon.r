@@ -1,33 +1,5 @@
-#' @title Render polygons around ordinates
-#' 
 
-#' @description `geom_*_polygon()` renders polygons around the convex hulls of
-#'   the positions of the subjects or vectors.
-#' @template biplot-layers
-
-#' @section Aesthetics:
-
-#' `geom_*_polygon()` understands the following aesthetics (required aesthetics
-#' are in bold):
-
-#' - **`x`**
-#' - **`y`**
-#' - `alpha`
-#' - `colour`
-#' - `fill`
-#' - `linetype`
-#' - `size`
-#' - `group`
-#' 
-
-#' @name geom-biplot-polygon
-#' @import ggplot2
-#' @inheritParams ggplot2::layer
-#' @template param-geom
-#' @template param-matrix
-NULL
-
-#' @rdname geom-biplot-polygon
+#' @rdname biplot-geoms
 #' @export
 geom_rows_polygon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -50,7 +22,7 @@ geom_rows_polygon <- function(
   )
 }
 
-#' @rdname geom-biplot-polygon
+#' @rdname biplot-geoms
 #' @export
 geom_cols_polygon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -73,7 +45,7 @@ geom_cols_polygon <- function(
   )
 }
 
-#' @rdname geom-biplot-polygon
+#' @rdname biplot-geoms
 #' @export
 geom_dims_polygon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

@@ -23,6 +23,7 @@ The package consists in several modules:
 \item methods of the above generics for several widely-used object classes
 \item convenient \link[=format]{formatting} of ordination objects
 \item \code{\link[=ggbiplot]{ggbiplot()}}, a \strong{ggplot2} extension for rendering biplots
+\item additional \link[=biplot-stats]{stats} and \link[=biplot-geoms]{geoms} for biplots
 }
 }
 \section{Ordinations and biplots}{

@@ -72,5 +72,5 @@ coordinates used as position aesthetics in a biplot, in particular
 \code{\link[=stat_spantree]{stat_spantree()}}.
 }
 \seealso{
-\link{augmentation}
+\link{augmentation} methods that must interface with tidiers.
 }

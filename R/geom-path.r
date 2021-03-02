@@ -1,32 +1,5 @@
-#' @title Render piecewise-linear paths through ordinates
-#' 
 
-#' @description `geom_*_path()` renders line segments through consecutive pairs
-#'   of case or variable positions.
-#' @template biplot-layers
-
-#' @section Aesthetics:
-
-#' `geom_*_path()` understands the following aesthetics (required aesthetics are
-#' in bold):
-
-#' - **`x`**
-#' - **`y`**
-#' - `alpha`
-#' - `colour`
-#' - `linetype`
-#' - `size`
-#' - `group`
-#' 
-
-#' @name geom-biplot-path
-#' @import ggplot2
-#' @inheritParams ggplot2::layer
-#' @template param-geom
-#' @template param-matrix
-NULL
-
-#' @rdname geom-biplot-path
+#' @rdname biplot-geoms
 #' @export
 geom_rows_path <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -49,7 +22,7 @@ geom_rows_path <- function(
   )
 }
 
-#' @rdname geom-biplot-path
+#' @rdname biplot-geoms
 #' @export
 geom_cols_path <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -72,7 +45,7 @@ geom_cols_path <- function(
   )
 }
 
-#' @rdname geom-biplot-path
+#' @rdname biplot-geoms
 #' @export
 geom_dims_path <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

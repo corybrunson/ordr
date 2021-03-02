@@ -17,7 +17,7 @@ annotation_rows(x)
 annotation_cols(x)
 }
 \arguments{
-\item{x}{An object of or coercible to class '\link{tbl_ord}'.}
+\item{x}{An object of class '\link{tbl_ord}'.}
 
 \item{annot}{A \link[base:data.frame]{data.frame} having the same number of rows
 as \code{get_*(x)}.}
@@ -31,5 +31,5 @@ values of the \code{"*_annotation"} attributes of \code{x}, which should have th
 number of rows as \code{get_*(x)}.
 }
 \seealso{
-\link{augmentation}
+\link{augmentation} methods that must interface with annotation.
 }

@@ -21,7 +21,7 @@
 
 #' @name accessors
 #' @include utils.r
-#' @param x An object of or coercible to class '[tbl_ord]'.
+#' @param x An object of class '[tbl_ord]'.
 #' @param ... Additional arguments from [base::as.matrix()]; ignored.
 #' @template param-matrix
 #' @param .supplement Logical; whether to include

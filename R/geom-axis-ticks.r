@@ -1,13 +1,13 @@
 #' @title Render tick marks for axes
 #'
-#' @description `geom_*_axis_ticks()` renders tick marks for specified axes
-#'   among the row or column factors.
+#' @description `geom_axis_ticks()` renders tick marks for specified axes among
+#'   the row or column factors.
 #' @template biplot-layers
 
 #' @section Aesthetics:
 
-#' `geom_*_axis_ticks()` understands the following aesthetics
-#' (required aesthetics are in bold):
+#' `geom_axis_ticks()` understands the following aesthetics (required aesthetics
+#' are in bold):
 
 #' - **`x`**
 #' - **`y`**
@@ -18,7 +18,6 @@
 #' - `group`
 #' 
 
-#' @name geom-biplot-axis-ticks
 #' @import ggplot2
 #' @include geom-isolines.r
 #' @inheritParams ggplot2::layer
@@ -26,11 +25,129 @@
 #' @inheritParams geom_isolines
 #' @param tick_length Numeric; the length of the tick marks, as a proportion of
 #'   the minimum of the plot width and height.
-#' @template param-matrix
+#' @family biplot geom layers
 #' @example inst/examples/ex-geom-axis-diabetes.r
-NULL
+#' @export
+geom_axis_ticks <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
+  tick_length = .025,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomAxisTicks,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      calibrate = calibrate,
+      family_fun = family_fun,
+      axes = axes,
+      by = by,
+      tick_length = tick_length,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
 
-#' @rdname geom-biplot-axis-ticks
+#' @rdname biplot-geoms
+#' @export
+geom_rows_axis_ticks <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
+  tick_length = .025,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = rows_stat(stat),
+    geom = GeomAxisTicks,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      calibrate = calibrate,
+      family_fun = family_fun,
+      axes = axes,
+      by = by,
+      tick_length = tick_length,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_cols_axis_ticks <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
+  tick_length = .025,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = cols_stat(stat),
+    geom = GeomAxisTicks,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      calibrate = calibrate,
+      family_fun = family_fun,
+      axes = axes,
+      by = by,
+      tick_length = tick_length,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_dims_axis_ticks <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  .matrix = "cols", axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
+  tick_length = .025,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = matrix_stat(.matrix, stat),
+    geom = GeomAxisTicks,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      calibrate = calibrate,
+      family_fun = family_fun,
+      axes = axes,
+      by = by,
+      tick_length = tick_length,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
 #' @usage NULL
 #' @export
 GeomAxisTicks <- ggproto(
@@ -184,123 +301,3 @@ GeomAxisTicks <- ggproto(
     )
   }
 )
-
-#' @rdname geom-biplot-axis-ticks
-#' @export
-geom_axis_ticks <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
-  tick_length = .025,
-  ...,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = stat,
-    geom = GeomAxisTicks,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      calibrate = calibrate,
-      family_fun = family_fun,
-      axes = axes,
-      by = by,
-      tick_length = tick_length,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
-#' @rdname geom-biplot-axis-ticks
-#' @export
-geom_rows_axis_ticks <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
-  tick_length = .025,
-  ...,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = rows_stat(stat),
-    geom = GeomAxisTicks,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      calibrate = calibrate,
-      family_fun = family_fun,
-      axes = axes,
-      by = by,
-      tick_length = tick_length,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
-#' @rdname geom-biplot-axis-ticks
-#' @export
-geom_cols_axis_ticks <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
-  tick_length = .025,
-  ...,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = cols_stat(stat),
-    geom = GeomAxisTicks,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      calibrate = calibrate,
-      family_fun = family_fun,
-      axes = axes,
-      by = by,
-      tick_length = tick_length,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
-#' @rdname geom-biplot-axis-ticks
-#' @export
-geom_dims_axis_ticks <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "cols", axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
-  tick_length = .025,
-  ...,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = matrix_stat(.matrix, stat),
-    geom = GeomAxisTicks,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      calibrate = calibrate,
-      family_fun = family_fun,
-      axes = axes,
-      by = by,
-      tick_length = tick_length,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}

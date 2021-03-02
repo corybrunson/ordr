@@ -181,5 +181,5 @@ ggbiplot(mtcars_specs_cmds, aes(label = .name),
   expand_limits(x = c(-2.25, 1.25), y = c(-2, 1.5))
 }
 \seealso{
-\code{\link[ggplot2:ggplot2-package]{ggplot2::ggplot2()}}
+\code{\link[ggplot2:ggplot2-package]{ggplot2::ggplot2()}}, on which \code{ggbiplot()} is built.
 }

@@ -3,34 +3,13 @@
 
 #' @template biplot-layers
 
-#' @name stat-biplot-center
 #' @inheritParams ggplot2::layer
 #' @param fun.data,fun.center,fun.min,fun.max,fun.args Functions and arguments
 #'   treated as in [ggplot2::stat_summary()], with `fun.center`, `fun.min`, and
 #'   `fun.max` behaving as `fun.y`, `fun.ymin`, and `fun.ymax`.
 #' @template param-stat
+#' @family biplot stat layers
 #' @example inst/examples/ex-stat-center-iris.r
-NULL
-
-#' @rdname stat-biplot-center
-#' @usage NULL
-#' @export
-StatCenter <- ggproto(
-  "StatCenter", Stat,
-  
-  required_aes = c("x", "y"),
-  
-  compute_group = function(data, scales,
-                           fun.data = NULL,
-                           fun.center = NULL, fun.min = NULL, fun.max = NULL,
-                           fun.args = list(),
-                           na.rm = FALSE) {
-    cfun <- make_center_fun(fun.data, fun.center, fun.min, fun.max, fun.args)
-    cfun(data)
-  }
-)
-
-#' @rdname stat-biplot-center
 #' @export
 stat_center <- function(
   mapping = NULL, data = NULL, geom = "point", position = "identity",
@@ -63,25 +42,7 @@ stat_center <- function(
   )
 }
 
-#' @rdname stat-biplot-center
-#' @usage NULL
-#' @export
-StatRowsCenter <- ggproto(
-  "StatRowsCenter", StatCenter,
-  
-  setup_data = setup_rows_data
-)
-
-#' @rdname stat-biplot-center
-#' @usage NULL
-#' @export
-StatColsCenter <- ggproto(
-  "StatColsCenter", StatCenter,
-  
-  setup_data = setup_cols_data
-)
-
-#' @rdname stat-biplot-center
+#' @rdname biplot-stats
 #' @export
 stat_rows_center <- function(
   mapping = NULL, data = NULL, geom = "point", position = "identity",
@@ -114,7 +75,7 @@ stat_rows_center <- function(
   )
 }
 
-#' @rdname stat-biplot-center
+#' @rdname biplot-stats
 #' @export
 stat_cols_center <- function(
   mapping = NULL, data = NULL, geom = "point", position = "identity",
@@ -147,29 +108,46 @@ stat_cols_center <- function(
   )
 }
 
-#' @rdname stat-biplot-center
+#' @rdname ordr-ggproto
+#' @format NULL
 #' @usage NULL
 #' @export
-StatStar <- ggproto(
-  "StatStar", StatCenter,
+StatCenter <- ggproto(
+  "StatCenter", Stat,
+  
+  required_aes = c("x", "y"),
   
   compute_group = function(data, scales,
                            fun.data = NULL,
-                           fun.center = NULL, fun.args = list(),
+                           fun.center = NULL, fun.min = NULL, fun.max = NULL,
+                           fun.args = list(),
                            na.rm = FALSE) {
-    cfun <- make_center_fun(fun.data, fun.center, NULL, NULL, fun.args)
-    cdata <- cfun(data)
-    
-    data$xend <- data$x
-    data$yend <- data$y
-    data$x <- cdata$x
-    data$y <- cdata$y
-    
-    data
+    cfun <- make_center_fun(fun.data, fun.center, fun.min, fun.max, fun.args)
+    cfun(data)
   }
 )
 
-#' @rdname stat-biplot-center
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsCenter <- ggproto(
+  "StatRowsCenter", StatCenter,
+  
+  setup_data = setup_rows_data
+)
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsCenter <- ggproto(
+  "StatColsCenter", StatCenter,
+  
+  setup_data = setup_cols_data
+)
+
+#' @rdname stat_center
 #' @export
 stat_star <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
@@ -198,25 +176,7 @@ stat_star <- function(
   )
 }
 
-#' @rdname stat-biplot-center
-#' @usage NULL
-#' @export
-StatRowsStar <- ggproto(
-  "StatRowsStar", StatStar,
-  
-  setup_data = setup_rows_data
-)
-
-#' @rdname stat-biplot-center
-#' @usage NULL
-#' @export
-StatColsStar <- ggproto(
-  "StatColsStar", StatStar,
-  
-  setup_data = setup_cols_data
-)
-
-#' @rdname stat-biplot-center
+#' @rdname biplot-stats
 #' @export
 stat_rows_star <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
@@ -245,7 +205,7 @@ stat_rows_star <- function(
   )
 }
 
-#' @rdname stat-biplot-center
+#' @rdname biplot-stats
 #' @export
 stat_cols_star <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
@@ -273,6 +233,49 @@ stat_cols_star <- function(
     )
   )
 }
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatStar <- ggproto(
+  "StatStar", StatCenter,
+  
+  compute_group = function(data, scales,
+                           fun.data = NULL,
+                           fun.center = NULL, fun.args = list(),
+                           na.rm = FALSE) {
+    cfun <- make_center_fun(fun.data, fun.center, NULL, NULL, fun.args)
+    cdata <- cfun(data)
+    
+    data$xend <- data$x
+    data$yend <- data$y
+    data$x <- cdata$x
+    data$y <- cdata$y
+    
+    data
+  }
+)
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsStar <- ggproto(
+  "StatRowsStar", StatStar,
+  
+  setup_data = setup_rows_data
+)
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsStar <- ggproto(
+  "StatColsStar", StatStar,
+  
+  setup_data = setup_cols_data
+)
 
 make_center_fun <- function(fun.data, fun.center, fun.min, fun.max, fun.args) {
   force(fun.data)

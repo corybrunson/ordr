@@ -48,5 +48,5 @@ for the rows, columns, and artificial coordinates is that more information
 contained in the original object becomes accessible to the user.
 }
 \seealso{
-\link{tidiers}, \link{annotation}
+\link{tidiers} and \link{annotation} methods that interface with augmentation.
 }

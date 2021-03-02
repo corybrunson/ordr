@@ -14,7 +14,7 @@
 #' @inheritParams ggplot2::draw_key
 #' @return A grid grob.
 #' @example inst/examples/ex-biplot-key-iris.r
-#' @seealso [ggplot2::draw_key]
+#' @seealso [ggplot2::draw_key] for key glyphs installed with **ggplot2**.
 NULL
 
 #' @rdname draw-key

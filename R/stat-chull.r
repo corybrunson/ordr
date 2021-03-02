@@ -10,14 +10,87 @@
 
 #' @template biplot-layers
 
-#' @name stat-biplot-chull
 #' @inheritParams ggplot2::layer
 #' @template param-stat
 #' @param conical Logical; whether to include the origin when calculating the
 #'   hull. Defaults to `FALSE`.
-NULL
+#' @family biplot stat layers
+#' @export
+stat_chull <- function(
+  mapping = NULL, data = NULL, geom = "polygon", position = "identity",
+  conical = FALSE,
+  show.legend = NA, 
+  inherit.aes = TRUE,
+  ...
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = StatChull,
+    geom = geom, 
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = FALSE,
+      conical = conical,
+      ...
+    )
+  )
+}
 
-#' @rdname stat-biplot-chull
+#' @rdname biplot-stats
+#' @export
+stat_rows_chull <- function(
+  mapping = NULL, data = NULL, geom = "polygon", position = "identity",
+  conical = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = StatRowsChull,
+    geom = geom, 
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = FALSE,
+      conical = conical,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_chull <- function(
+  mapping = NULL, data = NULL, geom = "polygon", position = "identity",
+  conical = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = StatColsChull,
+    geom = geom, 
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = FALSE,
+      conical = conical,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
 #' @usage NULL
 #' @export
 StatChull <- ggproto(
@@ -44,32 +117,8 @@ StatChull <- ggproto(
   }
 )
 
-#' @rdname stat-biplot-chull
-#' @export
-stat_chull <- function(
-  mapping = NULL, data = NULL, geom = "polygon", position = "identity",
-  conical = FALSE,
-  show.legend = NA, 
-  inherit.aes = TRUE,
-  ...
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatChull,
-    geom = geom, 
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = FALSE,
-      conical = conical,
-      ...
-    )
-  )
-}
-
-#' @rdname stat-biplot-chull
+#' @rdname ordr-ggproto
+#' @format NULL
 #' @usage NULL
 #' @export
 StatRowsChull <- ggproto(
@@ -78,7 +127,8 @@ StatRowsChull <- ggproto(
   setup_data = setup_rows_data
 )
 
-#' @rdname stat-biplot-chull
+#' @rdname ordr-ggproto
+#' @format NULL
 #' @usage NULL
 #' @export
 StatColsChull <- ggproto(
@@ -86,53 +136,3 @@ StatColsChull <- ggproto(
   
   setup_data = setup_cols_data
 )
-
-#' @rdname stat-biplot-chull
-#' @export
-stat_rows_chull <- function(
-  mapping = NULL, data = NULL, geom = "polygon", position = "identity",
-  conical = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ...
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatRowsChull,
-    geom = geom, 
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = FALSE,
-      conical = conical,
-      ...
-    )
-  )
-}
-
-#' @rdname stat-biplot-chull
-#' @export
-stat_cols_chull <- function(
-  mapping = NULL, data = NULL, geom = "polygon", position = "identity",
-  conical = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ...
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatColsChull,
-    geom = geom, 
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = FALSE,
-      conical = conical,
-      ...
-    )
-  )
-}

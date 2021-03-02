@@ -6,31 +6,12 @@
 
 #' @template biplot-layers
 
-#' @name stat-biplot-ellipse
 #' @inheritParams ggplot2::stat_ellipse
 #' @template param-stat
+#' @family biplot stat layers
 #' @example inst/examples/ex-stat-ellipse-iris.r
-NULL
 
-#' @rdname stat-biplot-ellipse
-#' @usage NULL
-#' @export
-StatRowsEllipse <- ggproto(
-  "StatRowsEllipse", StatEllipse,
-  
-  setup_data = setup_rows_data
-)
-
-#' @rdname stat-biplot-ellipse
-#' @usage NULL
-#' @export
-StatColsEllipse <- ggproto(
-  "StatColsEllipse", StatEllipse,
-  
-  setup_data = setup_cols_data
-)
-
-#' @rdname stat-biplot-ellipse
+#' @rdname biplot-stats
 #' @export
 stat_rows_ellipse <- function(
   mapping = NULL, data = NULL, geom = "path", position = "identity",
@@ -59,7 +40,7 @@ stat_rows_ellipse <- function(
   )
 }
 
-#' @rdname stat-biplot-ellipse
+#' @rdname biplot-stats
 #' @export
 stat_cols_ellipse <- function(
   mapping = NULL, data = NULL, geom = "path", position = "identity",
@@ -87,3 +68,23 @@ stat_cols_ellipse <- function(
     )
   )
 }
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsEllipse <- ggproto(
+  "StatRowsEllipse", StatEllipse,
+  
+  setup_data = setup_rows_data
+)
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsEllipse <- ggproto(
+  "StatColsEllipse", StatEllipse,
+  
+  setup_data = setup_cols_data
+)

@@ -19,6 +19,7 @@
 #' - methods of the above generics for several widely-used object classes
 #' - convenient [formatting][format] of ordination objects
 #' - [ggbiplot()], a **ggplot2** extension for rendering biplots
+#' - additional [stats][biplot-stats] and [geoms][biplot-geoms] for biplots
 
 #' @section Ordinations and biplots:
 

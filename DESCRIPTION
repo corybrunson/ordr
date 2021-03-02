@@ -43,8 +43,11 @@ Suggests:
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Collate: 
+    'aaa-.r'
+    'biplot-geoms.r'
     'biplot-gg.r'
     'biplot-key.r'
+    'biplot-stats.r'
     'data.r'
     'dplyr-verbs.r'
     'format.r'
