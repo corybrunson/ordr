@@ -34,10 +34,10 @@
 \alias{StatColsSpantree}
 \title{ggproto classes created and adapted for ordr}
 \description{
-In addition to graphical element layers (geoms) based on
+In addition to geometric element layers (geoms) based on
 base-\strong{ggplot2} layers like \code{geom_point()} but specified to matrix factors
 as \code{geom_row_point()}, \strong{ordr} introduces \link[ggplot2:ggproto]{ggproto}
-classes for some additional graphical elements commonly used in biplots.
+classes for some additional geometric elements commonly used in biplots.
 The factor-specific geoms invoke the statistical transformation layers
 (stats) \code{stat_rows()} and \code{stat_cols()}, which specify the matrix factor.
 Because each ggplot layer consists of only one stat and one geom, this

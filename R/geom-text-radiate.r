@@ -28,7 +28,7 @@
 
 #' @import ggplot2
 #' @inheritParams ggplot2::geom_text
-#' @family biplot geom layers
+#' @family geom layers
 #' @export
 geom_text_radiate <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

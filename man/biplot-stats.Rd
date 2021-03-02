@@ -284,16 +284,8 @@ iris_pca \%>\%
   )
 }
 \seealso{
-Other biplot stat layers: 
-\code{\link{stat_center}()},
-\code{\link{stat_chull}()},
-\code{\link{stat_rows}()},
-\code{\link{stat_spantree}()}
-
-Other biplot stat layers: 
-\code{\link{stat_center}()},
-\code{\link{stat_chull}()},
-\code{\link{stat_rows}()},
-\code{\link{stat_spantree}()}
+Other biplot layers: 
+\code{\link{biplot-geoms}},
+\code{\link{stat_rows}()}
 }
-\concept{biplot stat layers}
+\concept{biplot layers}

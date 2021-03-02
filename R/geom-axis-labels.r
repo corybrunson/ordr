@@ -31,7 +31,7 @@
 #' @inheritParams geom_isolines
 #' @param label_dodge Numeric; the orthogonal distance of the text from
 #'   the axis, as a proportion of the minimum of the plot width and height.
-#' @family biplot geom layers
+#' @family geom layers
 #' @example inst/examples/ex-geom-axis-diabetes.r
 #' @export
 geom_axis_text <- function(

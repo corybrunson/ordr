@@ -14,7 +14,7 @@
 #' @template param-stat
 #' @param conical Logical; whether to include the origin when calculating the
 #'   hull. Defaults to `FALSE`.
-#' @family biplot stat layers
+#' @family stat layers
 #' @export
 stat_chull <- function(
   mapping = NULL, data = NULL, geom = "polygon", position = "identity",

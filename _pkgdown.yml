@@ -2,10 +2,10 @@ reference:
 - title: "'ordr' package"
   desc: >
     A unified framework for ordination objects and biplot methods using tidy
-    principles.
+    principles
   contents:
   - '`ordr`'
-- title: "New functions, classes, and methods"
+- title: "Functions, classes, and methods"
   desc: >
     Introducing and adapting ordination techniques for the **ordr** workflow
   contents:
@@ -36,13 +36,12 @@ reference:
   contents:
   - '`ggbiplot`'
   - 'stat_rows'
-  - '`biplot-stats`'
-  - starts_with("stat_")
+  - has_concept("stat layers")
   - '`geom_unit_circle`'
-  - '`biplot-geoms`'
-  - starts_with("geom_")
+  - has_concept("geom layers")
   - '`draw-key`'
   - 'ordr-ggproto'
+  - has_concept("biplot layers")
 - title: "Class methods"
   desc: >
     Accessor and augmentation methods for ordination classes from other packages

@@ -722,20 +722,14 @@ Cannot be jointly specified with \code{position}.}
 \code{NULL} for no arrows.}
 }
 \description{
-These graphical element layers (geoms) pair conventional
+These geometric element layers (geoms) pair conventional
 \strong{ggplot2} geoms with \code{\link[=stat_rows]{stat_rows()}} or \code{\link[=stat_cols]{stat_cols()}} in order to render
 elements for one or the other matrix factor of a tbl_ord. They understand
 the same aesthetics as their corresponding conventional geoms.
 }
 \seealso{
-Other biplot geom layers: 
-\code{\link{geom_axis_text}()},
-\code{\link{geom_axis_ticks}()},
-\code{\link{geom_axis}()},
-\code{\link{geom_isolines}()},
-\code{\link{geom_lineranges}()},
-\code{\link{geom_text_radiate}()},
-\code{\link{geom_unit_circle}()},
-\code{\link{geom_vector}()}
+Other biplot layers: 
+\code{\link{biplot-stats}},
+\code{\link{stat_rows}()}
 }
-\concept{biplot geom layers}
+\concept{biplot layers}

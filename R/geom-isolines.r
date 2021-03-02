@@ -27,7 +27,7 @@
 #' @param family_fun A family function, or a character string naming one, to
 #'   transform the values along the axis at which to render elements.
 #' @param by Interval length between elements, in the units of the ordination.
-#' @family biplot geom layers
+#' @family geom layers
 #' @export
 geom_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

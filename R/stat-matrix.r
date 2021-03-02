@@ -10,7 +10,7 @@
 #' @name stat_rows
 #' @inheritParams ggplot2::layer
 #' @template param-stat
-#' @family biplot stat layers
+#' @family biplot layers
 
 #' @rdname stat_rows
 #' @export

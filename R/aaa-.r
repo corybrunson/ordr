@@ -1,9 +1,9 @@
 #' @title ggproto classes created and adapted for ordr
 #'
-#' @description In addition to graphical element layers (geoms) based on
+#' @description In addition to geometric element layers (geoms) based on
 #'   base-**ggplot2** layers like `geom_point()` but specified to matrix factors
 #'   as `geom_row_point()`, **ordr** introduces [ggproto][ggplot2::ggproto]
-#'   classes for some additional graphical elements commonly used in biplots.
+#'   classes for some additional geometric elements commonly used in biplots.
 #'   The factor-specific geoms invoke the statistical transformation layers
 #'   (stats) `stat_rows()` and `stat_cols()`, which specify the matrix factor.
 #'   Because each ggplot layer consists of only one stat and one geom, this

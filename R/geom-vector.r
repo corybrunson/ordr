@@ -23,7 +23,7 @@
 #' @template param-geom
 #' @param arrow Specification for arrows, as created by [grid::arrow()], or else
 #'   `NULL` for no arrows.
-#' @family biplot geom layers
+#' @family geom layers
 #' @export
 geom_vector <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

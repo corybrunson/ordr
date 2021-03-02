@@ -135,8 +135,7 @@ diabetes_lda \%>\%
   )
 }
 \seealso{
-Other biplot geom layers: 
-\code{\link{biplot-geoms}},
+Other geom layers: 
 \code{\link{geom_axis_text}()},
 \code{\link{geom_axis_ticks}()},
 \code{\link{geom_isolines}()},
@@ -145,4 +144,4 @@ Other biplot geom layers:
 \code{\link{geom_unit_circle}()},
 \code{\link{geom_vector}()}
 }
-\concept{biplot geom layers}
+\concept{geom layers}

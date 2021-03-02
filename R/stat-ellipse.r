@@ -8,7 +8,6 @@
 
 #' @inheritParams ggplot2::stat_ellipse
 #' @template param-stat
-#' @family biplot stat layers
 #' @example inst/examples/ex-stat-ellipse-iris.r
 
 #' @rdname biplot-stats

@@ -28,7 +28,7 @@
 #' @import ggplot2
 #' @inheritParams ggplot2::geom_linerange
 #' @template param-geom
-#' @family biplot geom layers
+#' @family geom layers
 #' @example inst/examples/ex-geom-intervals-glass.r
 #' @export
 geom_lineranges <- function(

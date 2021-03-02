@@ -22,7 +22,7 @@
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
-#' @family biplot geom layers
+#' @family geom layers
 #' @example inst/examples/ex-geom-axis-diabetes.r
 #' @export
 geom_axis <- function(

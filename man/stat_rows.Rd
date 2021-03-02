@@ -83,10 +83,8 @@ points for rows and arrows for columns.
 }
 
 \seealso{
-Other biplot stat layers: 
-\code{\link{biplot-stats}},
-\code{\link{stat_center}()},
-\code{\link{stat_chull}()},
-\code{\link{stat_spantree}()}
+Other biplot layers: 
+\code{\link{biplot-geoms}},
+\code{\link{biplot-stats}}
 }
-\concept{biplot stat layers}
+\concept{biplot layers}

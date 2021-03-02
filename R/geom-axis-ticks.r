@@ -25,7 +25,7 @@
 #' @inheritParams geom_isolines
 #' @param tick_length Numeric; the length of the tick marks, as a proportion of
 #'   the minimum of the plot width and height.
-#' @family biplot geom layers
+#' @family geom layers
 #' @example inst/examples/ex-geom-axis-diabetes.r
 #' @export
 geom_axis_ticks <- function(

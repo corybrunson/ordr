@@ -13,5 +13,5 @@
 #' @inheritParams ggplot2::stat_ellipse
 #' @inheritParams stat_spantree
 #' @template param-stat
-#' @family biplot stat layers
+#' @family biplot layers
 NULL

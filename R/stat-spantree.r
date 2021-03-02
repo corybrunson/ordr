@@ -37,7 +37,7 @@
 #' @inheritParams ggplot2::layer
 #' @param method Passed to [stats::dist()].
 #' @template param-stat
-#' @family biplot stat layers
+#' @family stat layers
 #' @example inst/examples/ex-stat-spantree-eurodist.r
 #' @export
 stat_spantree <- function(

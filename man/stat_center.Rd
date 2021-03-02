@@ -123,10 +123,8 @@ iris_pca \%>\%
   )
 }
 \seealso{
-Other biplot stat layers: 
-\code{\link{biplot-stats}},
+Other stat layers: 
 \code{\link{stat_chull}()},
-\code{\link{stat_rows}()},
 \code{\link{stat_spantree}()}
 }
-\concept{biplot stat layers}
+\concept{stat layers}
