@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Augment factors and coordinates of 'tbl_ord's — augmentation • ordr</title>
+<title>Augment factors and coordinates of tbl_ords — augmentation • ordr</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Augment factors and coordinates of 'tbl_ord's — augmentation" />
+<meta property="og:title" content="Augment factors and coordinates of tbl_ords — augmentation" />
 <meta property="og:description" content="These functions return data associated with the cases,
 variables, and coordinates of an ordination object, and attach it to the
 object." />
@@ -105,7 +105,7 @@ object." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Augment factors and coordinates of 'tbl_ord's</h1>
+    <h1>Augment factors and coordinates of tbl_ords</h1>
     
     <div class="hidden name"><code>augmentation.Rd</code></div>
     </div>
@@ -131,7 +131,7 @@ object.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A '<a href='tbl_ord.html'>tbl_ord</a>' object.</p></td>
+      <td><p>An object of class '<a href='tbl_ord.html'>tbl_ord</a>'.</p></td>
     </tr>
     <tr>
       <th>.matrix</th>
@@ -144,15 +144,15 @@ standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The <code>augmentation_*()</code> methods produce <a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a>s of values
-associated with the rows, columns, and artificial coordinates of a
-'<a href='tbl_ord.html'>tbl_ord</a>' object. The first field of each tibble is <code>.name</code>, which contains
+associated with the rows, columns, and artificial coordinates of an object of
+class '<a href='tbl_ord.html'>tbl_ord</a>'. The first field of each tibble is <code>.name</code>, which contains
 the row, column, or coordinate names. Additional fields contain information
 about the rows, columns, or coordinates extracted from the ordination object.</p>
 <p>The function <code>augment_ord()</code> returns the ordination with either or both
 matrix factors annotated with the result of <code>augmentation_*()</code>. In this way
 <code>augment_ord()</code> works like <code><a href='https://generics.r-lib.org/reference/augment.html'>generics::augment()</a></code>, as popularized by the
 <strong>broom</strong> package, by extracting information about the rows and columns, but
-it differs in returning an annotated 'tbl_ord' rather than a
+it differs in returning an annotated tbl_ord rather than a
 <a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>'tbl_df'</a>. The advantage of implementing separate methods
 for the rows, columns, and artificial coordinates is that more information
 contained in the original object becomes accessible to the user.</p>

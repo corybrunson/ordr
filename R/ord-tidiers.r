@@ -1,8 +1,9 @@
-#' @title Tidiers for 'tbl_ord's
+#' @title Tidiers for tbl_ords
 #'
 #' @description These functions return [tibbles][tibble::tibble] that summarize
-#'   a '[tbl_ord]' object. `tidy()` output contains one row per artificial
-#'   coordinate and `glance()` output contains one row for the whole ordination.
+#'   an object of class '[tbl_ord]'. `tidy()` output contains one row per
+#'   artificial coordinate and `glance()` output contains one row for the whole
+#'   ordination.
 #'   
 
 #' @details
@@ -44,7 +45,7 @@
 #' @name tidiers
 #' @include ord-accessors.r
 #' @inheritParams accessors
-#' @param x,model A '[tbl_ord]' object.
+#' @param x,model An object of class '[tbl_ord]'.
 #' @param data Passed to generic methods; currently ignored.
 #' @param ... Additional arguments allowed by generics; currently ignored.
 #' @template param-matrix

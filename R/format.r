@@ -1,14 +1,14 @@
 #' @title Format a tbl_ord for printing
 #'
 #' @description These methods of [base::format()] and [base::print()] render a
-#'   (usually more) tidy readout of a [tbl_ord] object that is consistent across
-#'   all original ordination classes.
+#'   (usually more) tidy readout of a [tbl_ord] that is consistent across all
+#'   original ordination classes.
 #'
 #' @details
 #'
-#' The `format` and `print` methods for class [tbl_ord] are adapted from
-#' those for class [tbl_df][tibble::tbl_df] and for class
-#' [tbl_graph][tidygraph::tbl_graph].
+#' The `format` and `print` methods for class 'tbl_ord' are adapted from those
+#' for class '[tbl_df][tibble::tbl_df]' and for class
+#' '[tbl_graph][tidygraph::tbl_graph]'.
 #'
 #' **Note:** The `format()` function is tedius but cannot be easily modularized
 #' without invoking [accessors], [annotation], and [augmentation] multiple

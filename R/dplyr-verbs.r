@@ -1,7 +1,7 @@
-#' @title **dplyr** verbs for 'tbl_ord' factors
+#' @title **dplyr** verbs for tbl_ord factors
 #'
 #' @description These functions adapt [dplyr][dplyr::dplyr] verbs to the factors
-#'   of a '[tbl_ord]'. The raw verbs are not defined for tbl_ords; instead, each
+#'   of a [tbl_ord]. The raw verbs are not defined for tbl_ords; instead, each
 #'   verb has two analogues, corresponding to the two matrix factors. They each
 #'   rely on a common workhorse function, which takes the composition of the
 #'   **dplyr** verb with `annotation_*`, applied to the factor, removes any
@@ -13,7 +13,7 @@
 #' @name dplyr-verbs
 #' @importFrom tidyselect one_of
 #' @importFrom dplyr pull rename select mutate transmute bind_cols left_join
-#' @param .data A '[tbl_ord]' object.
+#' @param .data An object of class '[tbl_ord]'.
 #' @param var A variable specified as in [dplyr::pull()].
 #' @param ... Comma-separated unquoted expressions as in, e.g.,
 #'   [dplyr::select()].

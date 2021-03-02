@@ -5,7 +5,7 @@
 \alias{tidy.tbl_ord}
 \alias{glance.tbl_ord}
 \alias{fortify.tbl_ord}
-\title{Tidiers for 'tbl_ord's}
+\title{Tidiers for tbl_ords}
 \usage{
 \method{tidy}{tbl_ord}(x, ...)
 
@@ -21,7 +21,7 @@
 )
 }
 \arguments{
-\item{x, model}{A '\link{tbl_ord}' object.}
+\item{x, model}{An object of class '\link{tbl_ord}'.}
 
 \item{...}{Additional arguments allowed by generics; currently ignored.}
 
@@ -38,8 +38,9 @@ standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 }
 \description{
 These functions return \link[tibble:tibble]{tibbles} that summarize
-a '\link{tbl_ord}' object. \code{tidy()} output contains one row per artificial
-coordinate and \code{glance()} output contains one row for the whole ordination.
+an object of class '\link{tbl_ord}'. \code{tidy()} output contains one row per
+artificial coordinate and \code{glance()} output contains one row for the whole
+ordination.
 }
 \details{
 Three generics popularized by the \strong{ggplot2} and \strong{broom} packages make use

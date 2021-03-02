@@ -1,7 +1,7 @@
-#' @title Annotate factors of 'tbl_ord's
+#' @title Annotate factors of tbl_ords
 #'
-#' @description These functions annotate the matrix factors of '[tbl_ord]'
-#'   objects with additional variables, and retrieve these annotations.
+#' @description These functions annotate the matrix factors of [tbl_ord]s with
+#'   additional variables, and retrieve these annotations.
 #'   
 
 #' The `annotation_*()` and `set_annotation_*()` functions assign and retrieve

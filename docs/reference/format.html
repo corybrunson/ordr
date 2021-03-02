@@ -41,8 +41,8 @@
 
 <meta property="og:title" content="Format a tbl_ord for printing — format" />
 <meta property="og:description" content="These methods of base::format() and base::print() render a
-(usually more) tidy readout of a tbl_ord object that is consistent across
-all original ordination classes." />
+(usually more) tidy readout of a tbl_ord that is consistent across all
+original ordination classes." />
 
 
 
@@ -112,8 +112,8 @@ all original ordination classes." />
 
     <div class="ref-description">
     <p>These methods of <code><a href='https://rdrr.io/r/base/format.html'>base::format()</a></code> and <code><a href='https://rdrr.io/r/base/print.html'>base::print()</a></code> render a
-(usually more) tidy readout of a <a href='tbl_ord.html'>tbl_ord</a> object that is consistent across
-all original ordination classes.</p>
+(usually more) tidy readout of a <a href='tbl_ord.html'>tbl_ord</a> that is consistent across all
+original ordination classes.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for tbl_ord</span>
@@ -145,7 +145,7 @@ if less than option <code>tibble.print_max</code>. Otherwise, will print
 means use <code><a href='https://rdrr.io/r/base/options.html'>getOption("tibble.width")</a></code> or (if also <code>NULL</code>)
 <code><a href='https://rdrr.io/r/base/options.html'>getOption("width")</a></code>; the latter displays only the columns that fit on one
 screen. You can also set <code><a href='https://rdrr.io/r/base/options.html'>options(tibble.width = Inf)</a></code> to override this
-default and always print all columns.</p></td>
+default and always print all columns, this may be slow for very wide tibbles.</p></td>
     </tr>
     <tr>
       <th>n_extra</th>
@@ -157,9 +157,9 @@ will print information about at most <code>tibble.max_extra_cols</code> extra co
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The <code>format</code> and <code>print</code> methods for class <a href='tbl_ord.html'>tbl_ord</a> are adapted from
-those for class <a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>tbl_df</a> and for class
-<a href='https://tidygraph.data-imaginist.com/reference/tbl_graph.html'>tbl_graph</a>.</p>
+    <p>The <code>format</code> and <code>print</code> methods for class 'tbl_ord' are adapted from those
+for class '<a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>tbl_df</a>' and for class
+'<a href='https://tidygraph.data-imaginist.com/reference/tbl_graph.html'>tbl_graph</a>'.</p>
 <p><strong>Note:</strong> The <code>format()</code> function is tedius but cannot be easily modularized
 without invoking <a href='accessors.html'>accessors</a>, <a href='annotation.html'>annotation</a>, and <a href='augmentation.html'>augmentation</a> multiple
 times, thereby significantly reducing performance.</p>

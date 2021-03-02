@@ -7,7 +7,7 @@
 \alias{augmentation_factor}
 \alias{augmentation_coord}
 \alias{augment_ord}
-\title{Augment factors and coordinates of 'tbl_ord's}
+\title{Augment factors and coordinates of tbl_ords}
 \usage{
 augmentation_rows(x)
 
@@ -20,7 +20,7 @@ augmentation_coord(x)
 augment_ord(x, .matrix = "dims")
 }
 \arguments{
-\item{x}{A '\link{tbl_ord}' object.}
+\item{x}{An object of class '\link{tbl_ord}'.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
@@ -33,8 +33,8 @@ object.
 }
 \details{
 The \verb{augmentation_*()} methods produce \link[tibble:tibble]{tibble}s of values
-associated with the rows, columns, and artificial coordinates of a
-'\link{tbl_ord}' object. The first field of each tibble is \code{.name}, which contains
+associated with the rows, columns, and artificial coordinates of an object of
+class '\link{tbl_ord}'. The first field of each tibble is \code{.name}, which contains
 the row, column, or coordinate names. Additional fields contain information
 about the rows, columns, or coordinates extracted from the ordination object.
 
@@ -42,7 +42,7 @@ The function \code{augment_ord()} returns the ordination with either or both
 matrix factors annotated with the result of \verb{augmentation_*()}. In this way
 \code{augment_ord()} works like \code{\link[generics:augment]{generics::augment()}}, as popularized by the
 \strong{broom} package, by extracting information about the rows and columns, but
-it differs in returning an annotated 'tbl_ord' rather than a
+it differs in returning an annotated tbl_ord rather than a
 \link[tibble:tbl_df-class]{'tbl_df'}. The advantage of implementing separate methods
 for the rows, columns, and artificial coordinates is that more information
 contained in the original object becomes accessible to the user.

@@ -156,6 +156,7 @@ objects of class <code>"kmeans"</code> as returned by <code><a href='https://rdr
 #&gt; 4          4.6         3.1          1.5         0.2  setosa
 #&gt; 5          5.0         3.6          1.4         0.2  setosa
 #&gt; 6          5.4         3.9          1.7         0.4  setosa</div><div class='input'><span class='co'># compute 3-means clustering on scaled iris measurements</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>5601L</span><span class='op'>)</span>
 <span class='va'>iris</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span>select <span class='op'>=</span> <span class='op'>-</span><span class='va'>Species</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>

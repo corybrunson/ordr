@@ -1,10 +1,10 @@
 #' @title Wrappers for lossy ordination methods
 #'
 #' @description These `*_ord` functions wrap functions imported from other
-#'   packages with modifications for use with 'tbl_ord' methods. Some parameters
-#'   are hidden from the user and set to settings required for these methods,
-#'   some matrix outputs are given row or column names to be used by them, and
-#'   new '*_ord' S3 class attributes are added to enable them.
+#'   packages with modifications for use with '[tbl_ord]' methods. Some
+#'   parameters are hidden from the user and set to settings required for these
+#'   methods, some matrix outputs are given row or column names to be used by
+#'   them, and new '*_ord' S3 class attributes are added to enable them.
 #'   
 
 #' @details

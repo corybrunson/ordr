@@ -23,7 +23,7 @@ if less than option \code{tibble.print_max}. Otherwise, will print
 means use \code{getOption("tibble.width")} or (if also \code{NULL})
 \code{getOption("width")}; the latter displays only the columns that fit on one
 screen. You can also set \code{options(tibble.width = Inf)} to override this
-default and always print all columns.}
+default and always print all columns, this may be slow for very wide tibbles.}
 
 \item{n_extra}{Number of extra columns to print abbreviated information for,
 if the width is too small for the entire tibble. If \code{NULL}, the default,
@@ -31,13 +31,13 @@ will print information about at most \code{tibble.max_extra_cols} extra columns.
 }
 \description{
 These methods of \code{\link[base:format]{base::format()}} and \code{\link[base:print]{base::print()}} render a
-(usually more) tidy readout of a \link{tbl_ord} object that is consistent across
-all original ordination classes.
+(usually more) tidy readout of a \link{tbl_ord} that is consistent across all
+original ordination classes.
 }
 \details{
-The \code{format} and \code{print} methods for class \link{tbl_ord} are adapted from
-those for class \link[tibble:tbl_df-class]{tbl_df} and for class
-\link[tidygraph:tbl_graph]{tbl_graph}.
+The \code{format} and \code{print} methods for class 'tbl_ord' are adapted from those
+for class '\link[tibble:tbl_df-class]{tbl_df}' and for class
+'\link[tidygraph:tbl_graph]{tbl_graph}'.
 
 \strong{Note:} The \code{format()} function is tedius but cannot be easily modularized
 without invoking \link{accessors}, \link{annotation}, and \link{augmentation} multiple

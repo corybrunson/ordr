@@ -1,4 +1,4 @@
-#' @title Augment factors and coordinates of 'tbl_ord's
+#' @title Augment factors and coordinates of tbl_ords
 #'
 #' @description These functions return data associated with the cases,
 #'   variables, and coordinates of an ordination object, and attach it to the
@@ -8,8 +8,8 @@
 #' @details
 #'
 #' The `augmentation_*()` methods produce [tibble][tibble::tibble]s of values
-#' associated with the rows, columns, and artificial coordinates of a
-#' '[tbl_ord]' object. The first field of each tibble is `.name`, which contains
+#' associated with the rows, columns, and artificial coordinates of an object of
+#' class '[tbl_ord]'. The first field of each tibble is `.name`, which contains
 #' the row, column, or coordinate names. Additional fields contain information
 #' about the rows, columns, or coordinates extracted from the ordination object.
 #'
@@ -17,7 +17,7 @@
 #' matrix factors annotated with the result of `augmentation_*()`. In this way
 #' `augment_ord()` works like [generics::augment()], as popularized by the
 #' **broom** package, by extracting information about the rows and columns, but
-#' it differs in returning an annotated 'tbl_ord' rather than a
+#' it differs in returning an annotated tbl_ord rather than a
 #' ['tbl_df'][tibble::tbl_df]. The advantage of implementing separate methods
 #' for the rows, columns, and artificial coordinates is that more information
 #' contained in the original object becomes accessible to the user.
@@ -26,7 +26,7 @@
 #' @name augmentation
 #' @include ord-accessors.r
 #' @inheritParams accessors
-#' @param x A '[tbl_ord]' object.
+#' @param x An object of class '[tbl_ord]'.
 #' @template param-matrix
 #' @seealso [tidiers], [annotation]
 NULL

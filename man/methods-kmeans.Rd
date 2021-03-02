@@ -37,6 +37,7 @@ objects of class \code{"kmeans"} as returned by \code{\link[stats:kmeans]{stats:
 class(iris)
 head(iris)
 # compute 3-means clustering on scaled iris measurements
+set.seed(5601L)
 iris \%>\%
   subset(select = -Species) \%>\%
   scale() \%>\%
