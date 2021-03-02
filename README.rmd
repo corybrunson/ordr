@@ -65,7 +65,7 @@ USPersonalExpenditure
 # wrap the model as a `tbl_ord` object
 (spend_pca <- as_tbl_ord(spend_pca))
 # augment the cases and variables with metadata
-(spend_pca <- augment(spend_pca))
+(spend_pca <- augment_ord(spend_pca))
 # annotate the cases or variables
 (spend_pca <- mutate_cols(spend_pca, year = as.integer(.name)))
 # confer inertia equally between cases and variables
@@ -77,7 +77,7 @@ ggbiplot(spend_pca, aes(label = .name)) +
   geom_cols_text_radiate() +
   geom_rows_point() +
   geom_rows_text_repel() +
-  scale_y_continuous(expand = expand_scale(add = .5)) +
+  expand_limits(y = c(-2, 2.75)) +
   ggtitle(
     "U.S. Personal Expenditure data, 1940-1960",
     "Symmetric biplot of un-centered PCA"
@@ -95,7 +95,7 @@ The MDS uses 11 coordinates&mdash;the number of positive eigenvalues&mdash;so th
 eurodist %>%
   cmdscale_ord(k = 11) %>%
   as_tbl_ord() %>%
-  augment() %>%
+  augment_ord() %>%
   print() -> city_mds
 # 2D biplot aligned with geography
 city_mds %>%

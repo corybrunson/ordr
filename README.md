@@ -136,7 +136,7 @@ USPersonalExpenditure
 #> 4 -0.532  0.0266  0.302     | 
 #> 5 -0.645 -0.561  -0.461     |
 # augment the cases and variables with metadata
-(spend_pca <- augment(spend_pca))
+(spend_pca <- augment_ord(spend_pca))
 #> # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'
 #> # 5 coordinates: PC1, PC2, ..., PC5
 #> # 
@@ -208,12 +208,11 @@ ggbiplot(spend_pca, aes(label = .name)) +
   geom_cols_text_radiate() +
   geom_rows_point() +
   geom_rows_text_repel() +
-  scale_y_continuous(expand = expand_scale(add = .5)) +
+  expand_limits(y = c(-2, 2.75)) +
   ggtitle(
     "U.S. Personal Expenditure data, 1940-1960",
     "Symmetric biplot of un-centered PCA"
   )
-#> Warning: `expand_scale()` is deprecated; use `expansion()` instead.
 ```
 
 ![](man/figures/README-PCA%20example-1.png)<!-- -->
@@ -237,7 +236,7 @@ recover the intercity distances.
 eurodist %>%
   cmdscale_ord(k = 11) %>%
   as_tbl_ord() %>%
-  augment() %>%
+  augment_ord() %>%
   print() -> city_mds
 #> # A tbl_ord of class 'cmds_ord': (21 x 11) x (21 x 11)'
 #> # 11 coordinates: PCo1, PCo2, ..., PCo11

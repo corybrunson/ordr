@@ -156,82 +156,47 @@ matrix output by <code><a href='lra-ord.html'>lra()</a></code>.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># state abbreviations</span>
+    <pre class="examples"><div class='input'><span class='co'># data frame of violent crime arrests in the United States</span>
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>USArrests</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "data.frame"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>USArrests</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;            Murder Assault UrbanPop Rape
+#&gt; Alabama      13.2     236       58 21.2
+#&gt; Alaska       10.0     263       48 44.5
+#&gt; Arizona       8.1     294       80 31.0
+#&gt; Arkansas      8.8     190       50 19.5
+#&gt; California    9.0     276       91 40.6
+#&gt; Colorado      7.9     204       78 38.7</div><div class='input'><span class='co'># get state abbreviation data</span>
 <span class='va'>state</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
   .name <span class='op'>=</span> <span class='va'>state.name</span>,
   .abb <span class='op'>=</span> <span class='va'>state.abb</span>
 <span class='op'>)</span>
-<span class='co'># Log-ratio analysis of 1973 violent crime arrests in the United States</span>
+<span class='co'># compute (non-compositional, unweighted) log-ratio analysis</span>
 <span class='va'>USArrests</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span>select <span class='op'>=</span> <span class='op'>-</span><span class='va'>UrbanPop</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='lra-ord.html'>lra</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>arrests_lra</span>
-</div><div class='output co'>#&gt; $sv
-#&gt; [1] 0.11758785 0.06383505
-#&gt; 
-#&gt; $row.coords
-#&gt;                      LRSV1        LRSV2
-#&gt; Alabama        -0.68001198  0.929601139
-#&gt; Alaska          0.92998988 -0.624577164
-#&gt; Arizona        -0.32984955 -1.311581695
-#&gt; Arkansas       -0.35134428  0.277323143
-#&gt; California      0.55165901 -1.004280086
-#&gt; Colorado        1.22910659 -0.638846890
-#&gt; Connecticut    -0.43610804 -1.027017532
-#&gt; Delaware       -1.54269183 -1.349322890
-#&gt; Florida        -0.54682514  0.300298438
-#&gt; Georgia         0.15812112  1.916932033
-#&gt; Hawaii          3.51365819  2.150284964
-#&gt; Idaho          -0.05250833 -2.109188891
-#&gt; Illinois       -0.52429773  0.002652531
-#&gt; Indiana         1.22231804  0.881075829
-#&gt; Iowa            1.39095549 -0.632985189
-#&gt; Kansas          0.75715595  0.380674137
-#&gt; Kentucky        0.68864901  2.024832534
-#&gt; Louisiana      -0.69015525  1.238509473
-#&gt; Maine          -0.63716612 -1.499305459
-#&gt; Maryland       -0.63629812 -0.286175559
-#&gt; Massachusetts  -0.22762978 -1.124006923
-#&gt; Michigan        0.41414730  0.171745261
-#&gt; Minnesota       1.45222388 -0.789191960
-#&gt; Mississippi    -1.47068651  1.436924829
-#&gt; Missouri        0.78566710  0.278289912
-#&gt; Montana         0.65946921  0.566956397
-#&gt; Nebraska        0.82281297 -0.284750183
-#&gt; Nevada          1.14994121  0.060475841
-#&gt; New Hampshire   0.88778358 -0.710870888
-#&gt; New Jersey      0.01717089  0.205735676
-#&gt; New Mexico     -0.12336523 -0.223126918
-#&gt; New York       -0.35365080  0.100656157
-#&gt; North Carolina -2.35659680  0.189728037
-#&gt; North Dakota    0.74912231 -2.900272794
-#&gt; Ohio            1.11076020  0.766013515
-#&gt; Oklahoma        0.30637650 -0.053491161
-#&gt; Oregon          1.13217636 -1.312593507
-#&gt; Pennsylvania    0.48983869  0.840580871
-#&gt; Rhode Island   -2.42442178 -1.868251942
-#&gt; South Carolina -0.96800438  0.752042083
-#&gt; South Dakota    0.61067278 -0.091684230
-#&gt; Tennessee       0.55166149  1.334277800
-#&gt; Texas           0.22895595  1.088292623
-#&gt; Utah            1.20949943 -1.771844197
-#&gt; Vermont         1.78310111 -0.254863377
-#&gt; Virginia        0.33180838  0.612645656
-#&gt; Washington      1.07067103 -1.635935144
-#&gt; West Virginia  -0.02043499  1.475198849
-#&gt; Wisconsin       1.43728882  0.033416687
-#&gt; Wyoming        -0.50955934  0.033243165
-#&gt; 
-#&gt; $column.coords
-#&gt;             LRSV1      LRSV2
-#&gt; Murder   0.283086  4.9570302
-#&gt; Assault -0.370595 -0.1805698
-#&gt; Rape     2.876702 -0.3660163
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "lra"</div><div class='input'><span class='va'>arrests_lra</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>arrests_lra</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'lra': (50 x 2) x (3 x 2)'
+#&gt; # 2 coordinates: LRSV1 and LRSV2
+#&gt; # 
+#&gt; # Rows: [ 50 x 2 | 0 ]
+#&gt;    LRSV1  LRSV2 | 
+#&gt;                 | 
+#&gt; <span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.680</span><span>  0.930 | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.930 -</span><span style='color: #BB0000;'>0.625</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.330</span><span> -</span><span style='color: #BB0000;'>1.31</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.351</span><span>  0.277 | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.552 -</span><span style='color: #BB0000;'>1.00</span><span>  | 
+#&gt; 
+#&gt; # 
+#&gt; # Columns: [ 3 x 2 | 0 ]
+#&gt;    LRSV1  LRSV2 | 
+#&gt;                 | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.283  4.96  | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.371</span><span> -</span><span style='color: #BB0000;'>0.181</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  2.88  -</span><span style='color: #BB0000;'>0.366</span><span> | </div><div class='input'><span class='co'># augment log-ratio profiles with names and join state abbreviations</span>
+<span class='va'>arrests_lra</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='dplyr-verbs.html'>left_join_rows</a></span><span class='op'>(</span><span class='va'>state</span>, by <span class='op'>=</span> <span class='st'>".name"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>arrests_lra</span>
 </div><div class='output co'>#&gt; # A tbl_ord of class 'lra': (50 x 2) x (3 x 2)'
@@ -239,7 +204,7 @@ matrix output by <code><a href='lra-ord.html'>lra()</a></code>.</p>
 #&gt; # 
 #&gt; # Rows: [ 50 x 2 | 2 ]
 #&gt;    LRSV1  LRSV2 |   .name      .abb 
-#&gt;                 |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.680</span><span>  0.930 | </span><span style='color: #BCBCBC;'>1</span><span> Alabama    AL   
 #&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.930 -</span><span style='color: #BB0000;'>0.625</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Alaska     AK   
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.330</span><span> -</span><span style='color: #BB0000;'>1.31</span><span>  | </span><span style='color: #BCBCBC;'>3</span><span> Arizona    AZ   
@@ -252,26 +217,73 @@ matrix output by <code><a href='lra-ord.html'>lra()</a></code>.</p>
 #&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.283  4.96  | </span><span style='color: #BCBCBC;'>1</span><span> Murder 
 #&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.371</span><span> -</span><span style='color: #BB0000;'>0.181</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Assault
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  2.88  -</span><span style='color: #BB0000;'>0.366</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Rape   </div><div class='input'><span class='co'># Adapt Exhibit 7.1 in Greenacre (2010)</span>
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  2.88  -</span><span style='color: #BB0000;'>0.366</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Rape   </div><div class='input'><span class='co'># recover state and arrest profiles</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'><a href='accessors.html'>get_rows</a></span><span class='op'>(</span><span class='va'>arrests_lra</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                 LRSV1      LRSV2
+#&gt; Alabama    -0.6800120  0.9296011
+#&gt; Alaska      0.9299899 -0.6245772
+#&gt; Arizona    -0.3298496 -1.3115817
+#&gt; Arkansas   -0.3513443  0.2773231
+#&gt; California  0.5516590 -1.0042801
+#&gt; Colorado    1.2291066 -0.6388469</div><div class='input'><span class='fu'><a href='accessors.html'>get_cols</a></span><span class='op'>(</span><span class='va'>arrests_lra</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;             LRSV1      LRSV2
+#&gt; Murder   0.283086  4.9570302
+#&gt; Assault -0.370595 -0.1805698
+#&gt; Rape     2.876702 -0.3660163</div><div class='input'><span class='co'># summarize principal components</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>arrests_lra</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 3</span><span>
+#&gt;   .name .inertia .prop_var
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> LRSV1  0.013</span><span style='text-decoration: underline;'>8</span><span>      0.772
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> LRSV2  0.004</span><span style='text-decoration: underline;'>07</span><span>     0.228</div><div class='input'><span class='co'># fortification of artificial coordinates yields proportion of variance measure</span>
+<span class='fu'>fortify</span><span class='op'>(</span><span class='va'>arrests_lra</span>, .matrix <span class='op'>=</span> <span class='st'>"coord"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 3</span><span>
+#&gt;   .name .inertia .prop_var
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> LRSV1  0.013</span><span style='text-decoration: underline;'>8</span><span>      0.772
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> LRSV2  0.004</span><span style='text-decoration: underline;'>07</span><span>     0.228</div><div class='input'><span class='co'># scree plot of inertia</span>
+<span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>arrests_lra</span>, .matrix <span class='op'>=</span> <span class='st'>"coord"</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>.name</span>, y <span class='op'>=</span> <span class='va'>.inertia</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_bar</span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"identity"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>""</span>, y <span class='op'>=</span> <span class='st'>"Inertia"</span><span class='op'>)</span>
+</div><div class='img'><img src='methods-lra-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># scree plot of proportion of variance (inertia)</span>
+<span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>arrests_lra</span>, .matrix <span class='op'>=</span> <span class='st'>"coord"</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>.name</span>, y <span class='op'>=</span> <span class='va'>.prop_var</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_y_continuous</span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_bar</span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"identity"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>""</span>, y <span class='op'>=</span> <span class='st'>"Proportion of inertia"</span><span class='op'>)</span>
+</div><div class='img'><img src='methods-lra-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># fortification adds all above columns</span>
+<span class='fu'>fortify</span><span class='op'>(</span><span class='va'>arrests_lra</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 53 x 5</span><span>
+#&gt;     LRSV1  LRSV2 .name       .abb  .matrix
+#&gt;     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> -</span><span style='color: #BB0000;'>0.680</span><span>  0.930 Alabama     AL    rows   
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>  0.930 -</span><span style='color: #BB0000;'>0.625</span><span> Alaska      AK    rows   
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> -</span><span style='color: #BB0000;'>0.330</span><span> -</span><span style='color: #BB0000;'>1.31</span><span>  Arizona     AZ    rows   
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> -</span><span style='color: #BB0000;'>0.351</span><span>  0.277 Arkansas    AR    rows   
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>  0.552 -</span><span style='color: #BB0000;'>1.00</span><span>  California  CA    rows   
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  1.23  -</span><span style='color: #BB0000;'>0.639</span><span> Colorado    CO    rows   
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> -</span><span style='color: #BB0000;'>0.436</span><span> -</span><span style='color: #BB0000;'>1.03</span><span>  Connecticut CT    rows   
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> -</span><span style='color: #BB0000;'>1.54</span><span>  -</span><span style='color: #BB0000;'>1.35</span><span>  Delaware    DE    rows   
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> -</span><span style='color: #BB0000;'>0.547</span><span>  0.300 Florida     FL    rows   
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>  0.158  1.92  Georgia     GA    rows   
+#&gt; </span><span style='color: #949494;'># … with 43 more rows</span><span></div><div class='input'><span class='co'># initially, inertia is conferred on neither factor</span>
+<span class='fu'><a href='conference.html'>get_conference</a></span><span class='op'>(</span><span class='va'>arrests_lra</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0 0</div><div class='input'><span class='co'># row-principal biplot with coordinate-wise standard deviations</span>
 <span class='va'>arrests_lra</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span>sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>20</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>color <span class='op'>=</span> <span class='va'>.matrix</span><span class='op'>)</span>, sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>20</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_color_manual</span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"brown4"</span>, <span class='st'>"darkgreen"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='geom-biplot-text.html'>geom_rows_text</a></span><span class='op'>(</span>
-    <span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.abb</span><span class='op'>)</span>,
-    size <span class='op'>=</span> <span class='fl'>3</span>, color <span class='op'>=</span> <span class='st'>"darkgreen"</span>, alpha <span class='op'>=</span> <span class='fl'>.5</span>
-  <span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='geom-biplot-polygon.html'>geom_cols_polygon</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='cn'>NA</span>, linetype <span class='op'>=</span> <span class='st'>"dashed"</span>, color <span class='op'>=</span> <span class='st'>"brown4"</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='geom-biplot-text.html'>geom_cols_text</a></span><span class='op'>(</span>
-    <span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>,
-    color <span class='op'>=</span> <span class='st'>"brown4"</span>, fontface <span class='op'>=</span> <span class='st'>"bold"</span>
-  <span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_rows_text</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.abb</span><span class='op'>)</span>, size <span class='op'>=</span> <span class='fl'>3</span>, alpha <span class='op'>=</span> <span class='fl'>2</span><span class='op'>/</span><span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-polygon.html'>geom_cols_polygon</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='cn'>NA</span>, linetype <span class='op'>=</span> <span class='st'>"dashed"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_cols_text</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>, fontface <span class='op'>=</span> <span class='st'>"bold"</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>ggtitle</span><span class='op'>(</span>
     <span class='st'>"Log-ratio analysis of violent crime arrest rates"</span>,
     <span class='st'>"United States, 1973"</span>
   <span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>guides</span><span class='op'>(</span>color <span class='op'>=</span> <span class='cn'>FALSE</span>, size <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='img'><img src='methods-lra-1.png' alt='' width='700' height='433' /></div></span></pre>
+</div><div class='img'><img src='methods-lra-3.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

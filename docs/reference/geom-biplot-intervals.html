@@ -286,55 +286,59 @@ aesthetics (required aesthetics are in bold):</p><ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Scaled PCA of Anderson iris data with ranges and confidence intervals</span>
-<span class='va'>iris</span><span class='op'>[</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>]</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/prcomp.html'>prcomp</a></span><span class='op'>(</span>scale <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <pre class="examples"><div class='input'><span class='co'># compute log-ratio analysis of Freestone primary class composition measurements</span>
+<span class='va'>glass</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>SiO2</span>, <span class='va'>Al2O3</span>, <span class='va'>CaO</span>, <span class='va'>FeO</span>, <span class='va'>MgO</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='lra-ord.html'>lra</a></span><span class='op'>(</span>compositional <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='dplyr-verbs.html'>mutate_rows</a></span><span class='op'>(</span>species <span class='op'>=</span> <span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>iris_pca</span>
-</div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
-#&gt; # 4 coordinates: PC1, PC2, ..., PC4
+  <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='st'>"rows"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='dplyr-verbs.html'>bind_cols_rows</a></span><span class='op'>(</span><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>glass</span>, <span class='va'>Site</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>glass_lra</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'lra': (68 x 4) x (5 x 4)'
+#&gt; # 4 coordinates: LRSV1, LRSV2, ..., LRSV4
 #&gt; # 
-#&gt; # Rows: [ 150 x 4 | 1 ]
-#&gt;     PC1    PC2     PC3 ... |   species
-#&gt;                            |   <span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>  
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>2.26</span><span> -</span><span style='color: #BB0000;'>0.478</span><span>  0.127      | </span><span style='color: #BCBCBC;'>1</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>2.07</span><span>  0.672  0.234  ... | </span><span style='color: #BCBCBC;'>2</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>2.36</span><span>  0.341 -</span><span style='color: #BB0000;'>0.044</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.29</span><span>  0.595 -</span><span style='color: #BB0000;'>0.091</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span>     | </span><span style='color: #BCBCBC;'>4</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.38</span><span> -</span><span style='color: #BB0000;'>0.645</span><span> -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> setosa 
-#&gt; </span><span style='color: #949494;'># … with 145 more rows</span><span>
+#&gt; # Rows: [ 68 x 4 | 1 ]
+#&gt;    LRSV1  LRSV2     LRSV3 ... |   Site        
+#&gt;                               |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.092</span><span style='text-decoration: underline;'>5</span><span> 0.092</span><span style='text-decoration: underline;'>9</span><span>  0.015</span><span style='text-decoration: underline;'>6</span><span>       | </span><span style='color: #BCBCBC;'>1</span><span> Bet Eli'ezer
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 0.090</span><span style='text-decoration: underline;'>5</span><span> 0.059</span><span style='text-decoration: underline;'>1</span><span> -</span><span style='color: #BB0000;'>0.043</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>   ... | </span><span style='color: #BCBCBC;'>2</span><span> Bet Eli'ezer
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.084</span><span style='text-decoration: underline;'>4</span><span> 0.033</span><span style='text-decoration: underline;'>3</span><span> -</span><span style='color: #BB0000;'>0.000</span><span style='color: #BB0000;text-decoration: underline;'>492</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> Bet Eli'ezer
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.064</span><span style='text-decoration: underline;'>7</span><span> 0.021</span><span style='text-decoration: underline;'>1</span><span>  0.026</span><span style='text-decoration: underline;'>7</span><span>       | </span><span style='color: #BCBCBC;'>4</span><span> Bet Eli'ezer
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.063</span><span style='text-decoration: underline;'>5</span><span> 0.025</span><span style='text-decoration: underline;'>7</span><span>  0.023</span><span style='text-decoration: underline;'>9</span><span>       | </span><span style='color: #BCBCBC;'>5</span><span> Bet Eli'ezer
+#&gt; </span><span style='color: #949494;'># … with 63 more rows</span><span>
 #&gt; # 
-#&gt; # Columns: [ 4 x 4 | 0 ]
-#&gt;      PC1     PC2    PC3 ... | 
-#&gt;                             | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.521 -</span><span style='color: #BB0000;'>0.377</span><span>   0.720     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.269</span><span> -</span><span style='color: #BB0000;'>0.923</span><span>  -</span><span style='color: #BB0000;'>0.244</span><span> ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.580 -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.142</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.565 -</span><span style='color: #BB0000;'>0.066</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>0.634</span><span>     | </div><div class='input'><span class='va'>iris_pca</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>color <span class='op'>=</span> <span class='va'>species</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+#&gt; # Columns: [ 5 x 4 | 0 ]
+#&gt;      LRSV1  LRSV2  LRSV3 ... | 
+#&gt;                              | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.005</span><span style='color: #BB0000;text-decoration: underline;'>48</span><span>  0.338  0.237     | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  4.15    -</span><span style='color: #BB0000;'>0.714</span><span> -</span><span style='color: #BB0000;'>2.50</span><span>  ... | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.517</span><span>   -</span><span style='color: #BB0000;'>2.95</span><span>  -</span><span style='color: #BB0000;'>0.126</span><span>     | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.553    2.23  -</span><span style='color: #BB0000;'>9.57</span><span>      | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>5.61</span><span>     0.790 -</span><span style='color: #BB0000;'>4.47</span><span>      | </div><div class='input'><span class='co'># row-principal biplot with ordinate-wise standard deviations</span>
+<span class='va'>glass_lra</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>color <span class='op'>=</span> <span class='va'>Site</span><span class='op'>)</span>, sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>.05</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>scale_color_brewer</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"qual"</span>, palette <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_color_brewer</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"qual"</span>, palette <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_cols_text</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"chull"</span>, <span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>, color <span class='op'>=</span> <span class='st'>"#444444"</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_rows_lineranges</span><span class='op'>(</span>fun.data <span class='op'>=</span> <span class='va'>mean_sdl</span>, size <span class='op'>=</span> <span class='fl'>.75</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>.5</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#444444"</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>ggtitle</span><span class='op'>(</span>
-    <span class='st'>"Row-principal PCA biplot of Anderson iris data"</span>,
+    <span class='st'>"Row-principal LRA biplot of Freestone glass measurements"</span>,
     <span class='st'>"Ranges 2 sample standard deviations from centroids"</span>
   <span class='op'>)</span>
-</div><div class='img'><img src='geom-biplot-intervals-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='va'>iris_pca</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>color <span class='op'>=</span> <span class='va'>species</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+</div><div class='img'><img src='geom-biplot-intervals-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># row-principal biplot with coordinate-wise confidence intervals</span>
+<span class='va'>glass_lra</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>color <span class='op'>=</span> <span class='va'>Site</span><span class='op'>)</span>, sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>.05</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>scale_color_brewer</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"qual"</span>, palette <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_color_brewer</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"qual"</span>, palette <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_cols_text</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"chull"</span>, <span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>, color <span class='op'>=</span> <span class='st'>"#444444"</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_rows_lineranges</span><span class='op'>(</span>
     fun.data <span class='op'>=</span> <span class='va'>mean_cl_boot</span>, fun.args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>conf.int <span class='op'>=</span> <span class='fl'>.99</span><span class='op'>)</span>,
     size <span class='op'>=</span> <span class='fl'>.75</span>
   <span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>.5</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#444444"</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>ggtitle</span><span class='op'>(</span>
-    <span class='st'>"Row-principal PCA biplot of Anderson iris data"</span>,
+    <span class='st'>"Row-principal LRA biplot of Freestone glass measurements"</span>,
     <span class='st'>"99% confidence intervals based on nonparametric bootstrap sampling"</span>
   <span class='op'>)</span>
 </div><div class='img'><img src='geom-biplot-intervals-2.png' alt='' width='700' height='433' /></div></span></pre>

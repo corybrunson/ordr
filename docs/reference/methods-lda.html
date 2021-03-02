@@ -190,149 +190,138 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
     <p>See <a href='lda-ord.html'>lda-ord</a> for details.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Linear discriminant analysis of Reaven &amp; Miller diabetes data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>heplots</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/heplots/man/Diabetes.html'>Diabetes</a></span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   relwt glufast glutest instest sspg  group
-#&gt; 1  0.81      80     356     124   55 Normal
-#&gt; 2  0.95      97     289     117   76 Normal
-#&gt; 3  0.94     105     319     143  105 Normal
-#&gt; 4  1.04      90     356     199  108 Normal
-#&gt; 5  1.00      90     323     240  143 Normal
-#&gt; 6  0.76      86     381     157  165 Normal</div><div class='input'><span class='va'>diabetes_lda</span> <span class='op'>&lt;-</span> <span class='fu'>MASS</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/MASS/man/lda.html'>lda</a></span><span class='op'>(</span><span class='va'>group</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='fu'>heplots</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/heplots/man/Diabetes.html'>Diabetes</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>diabetes_lda</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Call:
-#&gt; lda(group ~ ., data = heplots::Diabetes)
-#&gt; 
-#&gt; Prior probabilities of groups:
-#&gt;            Normal Chemical_Diabetic    Overt_Diabetic 
-#&gt;         0.5241379         0.2482759         0.2275862 
-#&gt; 
-#&gt; Group means:
-#&gt;                       relwt   glufast   glutest  instest     sspg
-#&gt; Normal            0.9372368  91.18421  349.9737 172.6447 114.0000
-#&gt; Chemical_Diabetic 1.0558333  99.30556  493.9444 288.0000 208.9722
-#&gt; Overt_Diabetic    0.9839394 217.66667 1043.7576 106.0000 318.8788
-#&gt; 
-#&gt; Coefficients of linear discriminants:
-#&gt;                   LD1          LD2
-#&gt; relwt    1.3624356881 -3.784142444
-#&gt; glufast -0.0336487883  0.036633317
-#&gt; glutest  0.0125763942 -0.007092017
-#&gt; instest -0.0001022245 -0.006173424
-#&gt; sspg     0.0042431866  0.001134070
-#&gt; 
-#&gt; Proportion of trace:
-#&gt;    LD1    LD2 
-#&gt; 0.8812 0.1188 </div><div class='input'><span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='va'>diabetes_lda</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='dplyr-verbs.html'>mutate_rows</a></span><span class='op'>(</span>discriminant <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='op'>!</span> <span class='va'>.supplement</span>, <span class='st'>"centroid"</span>, <span class='st'>"case"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>diabetes_lda</span>
-</div><div class='output co'>#&gt; # A tbl_ord of class 'lda': (148 x 2) x (5 x 2)'
+    <pre class="examples"><div class='input'><span class='co'># data frame of Anderson iris species measurements</span>
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "data.frame"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#&gt; 1          5.1         3.5          1.4         0.2  setosa
+#&gt; 2          4.9         3.0          1.4         0.2  setosa
+#&gt; 3          4.7         3.2          1.3         0.2  setosa
+#&gt; 4          4.6         3.1          1.5         0.2  setosa
+#&gt; 5          5.0         3.6          1.4         0.2  setosa
+#&gt; 6          5.4         3.9          1.7         0.4  setosa</div><div class='input'><span class='co'># default (unstandardized discriminant) coefficients</span>
+<span class='fu'><a href='lda-ord.html'>lda_ord</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span>, <span class='va'>iris</span><span class='op'>[</span>, <span class='fl'>5</span><span class='op'>]</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>iris_lda</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'lda_ord': (153 x 2) x (4 x 2)'
 #&gt; # 2 coordinates: LD1 and LD2
 #&gt; # 
-#&gt; # Rows: [ 148 x 2 | 6 ]
-#&gt;      LD1    LD2 |   .name .prior .counts .grouping
-#&gt;                 |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.75</span><span>   0.400 | </span><span style='color: #BCBCBC;'>1</span><span> Norm…  0.524      76 Normal   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.340 -</span><span style='color: #BB0000;'>1.38</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Chem…  0.248      36 Chemical…
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.66   0.580 | </span><span style='color: #BCBCBC;'>3</span><span> Over…  0.228      33 Overt_Di…
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>1.72</span><span>   0.663 | </span><span style='color: #BCBCBC;'>4</span><span> 1     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> Normal   
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.85</span><span>   1.30  | </span><span style='color: #BCBCBC;'>5</span><span> 2     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> Normal   
-#&gt; </span><span style='color: #949494;'># … with 143 more rows, and 2 more</span><span>
-#&gt; # Rows: [ 148 x 2 | 6 ]</span><span style='color: #949494;'>#   variables: .supplement </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #949494;'>,</span><span>
-#&gt;      LD1    LD2 | </span><span style='color: #949494;'>#   discriminant </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; # Rows: [ 153 x 2 | 0 ]
+#&gt;     LD1    LD2 | 
+#&gt;                | 
+#&gt; <span style='color: #BCBCBC;'>1</span><span>  7.61  0.215 | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.83</span><span> -</span><span style='color: #BB0000;'>0.728</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>5.78</span><span>  0.513 | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  8.06  0.300 | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  7.13 -</span><span style='color: #BB0000;'>0.787</span><span> | 
+#&gt; 
 #&gt; # 
-#&gt; # Columns: [ 5 x 2 | 1 ]
-#&gt;         LD1      LD2 |   .name  
-#&gt;                      |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  1.36     -</span><span style='color: #BB0000;'>3.78</span><span>    | </span><span style='color: #BCBCBC;'>1</span><span> relwt  
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.033</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>    0.036</span><span style='text-decoration: underline;'>6</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> glufast
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.012</span><span style='text-decoration: underline;'>6</span><span>   -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>09</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> glutest
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.000</span><span style='color: #BB0000;text-decoration: underline;'>102</span><span> -</span><span style='color: #BB0000;'>0.006</span><span style='color: #BB0000;text-decoration: underline;'>17</span><span> | </span><span style='color: #BCBCBC;'>4</span><span> instest
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.004</span><span style='text-decoration: underline;'>24</span><span>   0.001</span><span style='text-decoration: underline;'>13</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> sspg   </div><div class='input'><span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>diabetes_lda</span><span class='op'>)</span> <span class='op'>+</span>
+#&gt; # Columns: [ 4 x 2 | 0 ]
+#&gt;      LD1     LD2 | 
+#&gt;                  | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.829  0.024</span><span style='text-decoration: underline;'>1</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  1.53   2.16   | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>2.20</span><span>  -</span><span style='color: #BB0000;'>0.932</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.81</span><span>   2.84   | </div><div class='input'><span class='co'># recover centroid coordinates and measurement discriminant coefficients</span>
+<span class='fu'><a href='accessors.html'>get_rows</a></span><span class='op'>(</span><span class='va'>iris_lda</span>, .supplement <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                  LD1        LD2
+#&gt; setosa      7.607600  0.2151330
+#&gt; versicolor -1.825049 -0.7278996
+#&gt; virginica  -5.782550  0.5127666</div><div class='input'><span class='fu'><a href='accessors.html'>get_cols</a></span><span class='op'>(</span><span class='va'>iris_lda</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                     LD1         LD2
+#&gt; Sepal.Length  0.8293776  0.02410215
+#&gt; Sepal.Width   1.5344731  2.16452123
+#&gt; Petal.Length -2.2012117 -0.93192121
+#&gt; Petal.Width  -2.8104603  2.83918785</div><div class='input'><span class='co'># augment ordination with centroid and measurement names</span>
+<span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='va'>iris_lda</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'lda_ord': (153 x 2) x (4 x 2)'
+#&gt; # 2 coordinates: LD1 and LD2
+#&gt; # 
+#&gt; # Rows: [ 153 x 2 | 5 ]
+#&gt;     LD1    LD2 |   .name     .prior .counts .grouping
+#&gt;                |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  7.61  0.215 | </span><span style='color: #BCBCBC;'>1</span><span> setosa     0.333      50 setosa   
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.83</span><span> -</span><span style='color: #BB0000;'>0.728</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> versicol…  0.333      50 versicol…
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>5.78</span><span>  0.513 | </span><span style='color: #BCBCBC;'>3</span><span> virginica  0.333      50 virginica
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  8.06  0.300 | </span><span style='color: #BCBCBC;'>4</span><span> </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> setosa   
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  7.13 -</span><span style='color: #BB0000;'>0.787</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> setosa   
+#&gt; </span><span style='color: #949494;'># … with 148 more rows, and 1 more</span><span>
+#&gt; # Rows: [ 153 x 2 | 5 ]</span><span style='color: #949494;'>#   variable: .supplement &lt;lgl&gt;</span><span>
+#&gt; # 
+#&gt; # Columns: [ 4 x 2 | 1 ]
+#&gt;      LD1     LD2 |   .name       
+#&gt;                  |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.829  0.024</span><span style='text-decoration: underline;'>1</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> Sepal.Length
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  1.53   2.16   | </span><span style='color: #BCBCBC;'>2</span><span> Sepal.Width 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>2.20</span><span>  -</span><span style='color: #BB0000;'>0.932</span><span>  | </span><span style='color: #BCBCBC;'>3</span><span> Petal.Length
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.81</span><span>   2.84   | </span><span style='color: #BCBCBC;'>4</span><span> Petal.Width </div><div class='input'><span class='co'># summarize linear discriminant axes</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>iris_lda</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 4</span><span>
+#&gt;   .name  .svd .inertia .prop_var
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> LD1   48.6    </span><span style='text-decoration: underline;'>2</span><span>366.    0.991  
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> LD2    4.58     21.0   0.008</span><span style='text-decoration: underline;'>79</span><span></div><div class='input'><span class='co'># fortification of artificial coordinates yields proportion of variance</span>
+<span class='fu'>fortify</span><span class='op'>(</span><span class='va'>iris_lda</span>, .matrix <span class='op'>=</span> <span class='st'>"coord"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 4</span><span>
+#&gt;   .name  .svd .inertia .prop_var
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> LD1   48.6    </span><span style='text-decoration: underline;'>2</span><span>366.    0.991  
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> LD2    4.58     21.0   0.008</span><span style='text-decoration: underline;'>79</span><span></div><div class='input'><span class='co'># scree plot of inertia</span>
+<span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>iris_lda</span>, .matrix <span class='op'>=</span> <span class='st'>"coord"</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>.name</span>, y <span class='op'>=</span> <span class='va'>.prop_var</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>shape <span class='op'>=</span> <span class='va'>.grouping</span>, size <span class='op'>=</span> <span class='va'>discriminant</span><span class='op'>)</span>, alpha <span class='op'>=</span> <span class='fl'>.5</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='geom-biplot-axis.html'>geom_cols_axis</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#888888"</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>ggtitle</span><span class='op'>(</span><span class='st'>"Column-standardized LDA biplot of Reaven &amp; Miller diabetes data"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Using size for a discrete variable is not advised.</span></div><div class='img'><img src='methods-lda-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Unstandardized, standardized, and de-sphered LDAs of Anderson Iris data</span>
-<span class='co'># data centroid</span>
-<span class='va'>iris_centroid</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span>, <span class='fl'>2</span>, <span class='va'>mean</span><span class='op'>)</span><span class='op'>)</span>
-<span class='co'># custom biplot</span>
-<span class='va'>lda_biplot</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>lda</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>lda</span> <span class='op'>%&gt;%</span>
-    <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-    <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-    <span class='fu'><a href='dplyr-verbs.html'>mutate_rows</a></span><span class='op'>(</span>
-      species <span class='op'>=</span> <span class='va'>.grouping</span>,
-      discriminant <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='op'>!</span> <span class='va'>.supplement</span>, <span class='st'>"centroid"</span>, <span class='st'>"case"</span><span class='op'>)</span>
-    <span class='op'>)</span> <span class='op'>%&gt;%</span>
-    <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>
-      color <span class='op'>=</span> <span class='va'>.grouping</span>,
-      size <span class='op'>=</span> <span class='va'>discriminant</span>, alpha <span class='op'>=</span> <span class='va'>discriminant</span>
-    <span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#888888"</span><span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_cols_text_radiate</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>, size <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'>scale_color_brewer</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"qual"</span>, palette <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-<span class='op'>}</span>
-<span class='co'># Unstandardized discriminant coefficients define the discriminant axes as</span>
-<span class='co'># linear combinations of the centered variables</span>
-<span class='va'>iris_lda</span> <span class='op'>&lt;-</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='fu'><a href='lda-ord.html'>lda_ord</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span>, <span class='va'>iris</span><span class='op'>[</span>, <span class='fl'>5</span><span class='op'>]</span>, axes.scale <span class='op'>=</span> <span class='st'>"unstandardized"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='co'># linear combinations of centered variables</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sweep.html'>sweep</a></span><span class='op'>(</span><span class='va'>iris_lda</span><span class='op'>$</span><span class='va'>means</span>, <span class='fl'>2</span>, <span class='va'>iris_centroid</span>, <span class='st'>"-"</span><span class='op'>)</span> <span class='op'>%*%</span> <span class='fu'><a href='accessors.html'>get_cols</a></span><span class='op'>(</span><span class='va'>iris_lda</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                  LD1        LD2
-#&gt; setosa      7.607600  0.2151330
-#&gt; versicolor -1.825049 -0.7278996
-#&gt; virginica  -5.782550  0.5127666</div><div class='input'><span class='co'># discriminant centroids</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='accessors.html'>get_rows</a></span><span class='op'>(</span><span class='va'>iris_lda</span>, .supplement <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                  LD1        LD2
-#&gt; setosa      7.607600  0.2151330
-#&gt; versicolor -1.825049 -0.7278996
-#&gt; virginica  -5.782550  0.5127666</div><div class='input'><span class='co'># unstandardized coefficient LDA biplot</span>
-<span class='fu'>lda_biplot</span><span class='op'>(</span><span class='va'>iris_lda</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>ggtitle</span><span class='op'>(</span><span class='st'>"Unstandardized coefficient biplot of iris LDA"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_y_continuous</span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_bar</span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"identity"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>""</span>, y <span class='op'>=</span> <span class='st'>"Proportion of inertia"</span><span class='op'>)</span>
+</div><div class='img'><img src='methods-lda-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># fortification (without supplement)</span>
+<span class='fu'>fortify</span><span class='op'>(</span><span class='va'>iris_lda</span>, .supplement <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 7 x 7</span><span>
+#&gt;      LD1     LD2 .name        .prior .counts .grouping  .matrix
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  7.61   0.215  setosa        0.333      50 setosa     rows   
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.83</span><span>  -</span><span style='color: #BB0000;'>0.728</span><span>  versicolor    0.333      50 versicolor rows   
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>5.78</span><span>   0.513  virginica     0.333      50 virginica  rows   
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.829  0.024</span><span style='text-decoration: underline;'>1</span><span> Sepal.Length </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>         cols   
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  1.53   2.16   Sepal.Width  </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>         cols   
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> -</span><span style='color: #BB0000;'>2.20</span><span>  -</span><span style='color: #BB0000;'>0.932</span><span>  Petal.Length </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>         cols   
+#&gt; </span><span style='color: #BCBCBC;'>7</span><span> -</span><span style='color: #BB0000;'>2.81</span><span>   2.84   Petal.Width  </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>         cols   </div><div class='input'><span class='co'># unstandardized coefficient LDA biplot (centroids only)</span>
+<span class='va'>iris_lda</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='dplyr-verbs.html'>mutate_rows</a></span><span class='op'>(</span>species <span class='op'>=</span> <span class='va'>.grouping</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span>.supplement <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>color <span class='op'>=</span> <span class='va'>.grouping</span><span class='op'>)</span>, size <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#888888"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_cols_text_radiate</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>, size <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_color_brewer</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"qual"</span>, palette <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span>
+    <span class='st'>"Row-standardized biplot of iris LDA"</span>,
+    <span class='st'>"Unstandardized measurement coefficients and species centroids"</span>
+  <span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>expand_limits</span><span class='op'>(</span>y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='fl'>4.25</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='methods-lda-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># biplot with supplementary points for observations</span>
+<span class='va'>iris_lda</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='dplyr-verbs.html'>mutate_rows</a></span><span class='op'>(</span>
+    species <span class='op'>=</span> <span class='va'>.grouping</span>,
+    discriminant <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='op'>!</span> <span class='va'>.supplement</span>, <span class='st'>"centroid"</span>, <span class='st'>"case"</span><span class='op'>)</span>
+  <span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>
+    color <span class='op'>=</span> <span class='va'>.grouping</span>,
+    size <span class='op'>=</span> <span class='va'>discriminant</span>, alpha <span class='op'>=</span> <span class='va'>discriminant</span>
+  <span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#888888"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_cols_text_radiate</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>, size <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_color_brewer</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"qual"</span>, palette <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span>
+    <span class='st'>"Row-standardized biplot of iris LDA"</span>,
+    <span class='st'>"Unstandardized measurement coefficients, observations, &amp; species centroids"</span>
+  <span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>expand_limits</span><span class='op'>(</span>y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Using size for a discrete variable is not advised.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Using alpha for a discrete variable is not advised.</span></div><div class='img'><img src='methods-lda-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Standardized discriminant coefficients permit comparisons across the variables</span>
-<span class='va'>iris_lda</span> <span class='op'>&lt;-</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='fu'><a href='lda-ord.html'>lda_ord</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span>, <span class='va'>iris</span><span class='op'>[</span>, <span class='fl'>5</span><span class='op'>]</span>, axes.scale <span class='op'>=</span> <span class='st'>"standardized"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='co'># standardized variable contributions to discriminant axes</span>
-<span class='fu'><a href='fortify.html'>fortify</a></span><span class='op'>(</span><span class='va'>iris_lda</span>, .matrix <span class='op'>=</span> <span class='st'>"cols"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>variable <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>tidyr</span><span class='fu'>::</span><span class='fu'><a href='https://tidyr.tidyverse.org/reference/gather.html'>gather</a></span><span class='op'>(</span><span class='va'>discriminant</span>, <span class='va'>coefficient</span>, <span class='va'>LD1</span>, <span class='va'>LD2</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>discriminant</span>, y <span class='op'>=</span> <span class='va'>coefficient</span>, fill <span class='op'>=</span> <span class='va'>variable</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>geom_bar</span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"dodge"</span>, stat <span class='op'>=</span> <span class='st'>"identity"</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>labs</span><span class='op'>(</span>y <span class='op'>=</span> <span class='st'>"Standardized coefficient"</span>, x <span class='op'>=</span> <span class='st'>"Linear discriminant"</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>coord_flip</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='img'><img src='methods-lda-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># standardized coefficient LDA biplot</span>
-<span class='fu'>lda_biplot</span><span class='op'>(</span><span class='va'>iris_lda</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>ggtitle</span><span class='op'>(</span><span class='st'>"Standardized coefficient biplot of iris LDA"</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>expand_limits</span><span class='op'>(</span>y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Using size for a discrete variable is not advised.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Using alpha for a discrete variable is not advised.</span></div><div class='img'><img src='methods-lda-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Variable contributions (de-sphered discriminant coefficients) recover the</span>
-<span class='co'># inner product relationship with the centered class centroids</span>
-<span class='va'>iris_lda</span> <span class='op'>&lt;-</span> 
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='fu'><a href='lda-ord.html'>lda_ord</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span>, <span class='va'>iris</span><span class='op'>[</span>, <span class='fl'>5</span><span class='op'>]</span>, axes.scale <span class='op'>=</span> <span class='st'>"contribution"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='co'># symmetric square root of within-class covariance</span>
-<span class='va'>C_W_eig</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/eigen.html'>eigen</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cov</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span> <span class='op'>-</span> <span class='va'>iris_lda</span><span class='op'>$</span><span class='va'>means</span><span class='op'>[</span><span class='va'>iris</span><span class='op'>[</span>, <span class='fl'>5</span><span class='op'>]</span>, <span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>C_W_sqrtinv</span> <span class='op'>&lt;-</span>
-  <span class='va'>C_W_eig</span><span class='op'>$</span><span class='va'>vectors</span> <span class='op'>%*%</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='va'>C_W_eig</span><span class='op'>$</span><span class='va'>values</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%*%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>C_W_eig</span><span class='op'>$</span><span class='va'>vectors</span><span class='op'>)</span>
-<span class='co'># product of matrix factors (scores and loadings)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='accessors.html'>get_rows</a></span><span class='op'>(</span><span class='va'>iris_lda</span>, .supplement <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>%*%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='fu'><a href='accessors.html'>get_cols</a></span><span class='op'>(</span><span class='va'>iris_lda</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                  [,1]      [,2]      [,3]       [,4]
-#&gt; setosa      0.3061785  2.593874 -5.861269 -3.9959956
-#&gt; versicolor -0.1774657 -1.154286  1.457859  0.5653316
-#&gt; virginica  -0.1287128 -1.439587  4.403411  3.4306640</div><div class='input'><span class='co'># "asymmetric" square roots of Mahalanobis distances between variables</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sweep.html'>sweep</a></span><span class='op'>(</span><span class='va'>iris_lda</span><span class='op'>$</span><span class='va'>means</span>, <span class='fl'>2</span>, <span class='va'>iris_centroid</span>, <span class='st'>"-"</span><span class='op'>)</span> <span class='op'>%*%</span> <span class='va'>C_W_sqrtinv</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                  [,1]      [,2]      [,3]       [,4]
-#&gt; setosa      0.3103442  2.629165 -5.941014 -4.0503629
-#&gt; versicolor -0.1798802 -1.169991  1.477693  0.5730232
-#&gt; virginica  -0.1304640 -1.459174  4.463321  3.4773397</div><div class='input'><span class='co'># contribution LDA biplot</span>
-<span class='fu'>lda_biplot</span><span class='op'>(</span><span class='va'>iris_lda</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>ggtitle</span><span class='op'>(</span><span class='st'>"Contribution biplot of iris LDA"</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>expand_limits</span><span class='op'>(</span>y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Using size for a discrete variable is not advised.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Using alpha for a discrete variable is not advised.</span></div><div class='img'><img src='methods-lda-5.png' alt='' width='700' height='433' /></div></span></pre>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Using size for a discrete variable is not advised.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Using alpha for a discrete variable is not advised.</span></div><div class='img'><img src='methods-lda-3.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
