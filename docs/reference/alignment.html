@@ -114,31 +114,31 @@ variables." />
 variables.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_alignment</span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='fu'>get_alignment</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>revert_alignment</span>(<span class='no'>x</span>)
+<span class='fu'>revert_alignment</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>negate_ord</span>(<span class='no'>x</span>, <span class='kw'>negation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>negate_ord</span><span class='op'>(</span><span class='va'>x</span>, negation <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>permute_ord</span>(<span class='no'>x</span>, <span class='kw'>permutation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>permute_ord</span><span class='op'>(</span><span class='va'>x</span>, permutation <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>rotate_ord</span>(<span class='no'>x</span>, <span class='kw'>rotation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>rotate_ord</span><span class='op'>(</span><span class='va'>x</span>, rotation <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>negation_to</span>(<span class='no'>x</span>, <span class='no'>y</span>)
+<span class='fu'>negation_to</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span>
 
-<span class='fu'>negate_to</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>.matrix</span>)
+<span class='fu'>negate_to</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>.matrix</span><span class='op'>)</span>
 
-<span class='fu'>negate_to_nonneg_orthant</span>(<span class='no'>x</span>, <span class='no'>.matrix</span>)
+<span class='fu'>negate_to_nonneg_orthant</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>.matrix</span><span class='op'>)</span>
 
-<span class='fu'>permutation_to</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>abs.values</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>permutation_to</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, abs.values <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>permute_to</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>.matrix</span>)
+<span class='fu'>permute_to</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>.matrix</span><span class='op'>)</span>
 
-<span class='fu'>rotation_to</span>(<span class='no'>x</span>, <span class='no'>y</span>)
+<span class='fu'>rotation_to</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span>
 
-<span class='fu'>rotate_to</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>.matrix</span>)
+<span class='fu'>rotate_to</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>.matrix</span><span class='op'>)</span>
 
-<span class='fu'>align_to</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>.matrix</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"negate"</span>, <span class='st'>"permute"</span>, <span class='st'>"rotate"</span>))</pre>
+<span class='fu'>align_to</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>.matrix</span>, method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"negate"</span>, <span class='st'>"permute"</span>, <span class='st'>"rotate"</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -157,7 +157,7 @@ right-multiplication.</p></td>
       <th>.matrix</th>
       <td><p>A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are <code>"u"</code>, <code>"v"</code>, and <code>"uv"</code>.</p></td>
+standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</code> (for both).</p></td>
     </tr>
     <tr>
       <th>abs.values</th>
@@ -203,14 +203,15 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>:
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Align MDS for distances between American cities with compass orientation</span>
-<span class='no'>UScitiesD</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='masks.html'>cmdscale</a></span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>usa_mds</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (10 x 2) x (10 x 2)'
+<span class='va'>UScitiesD</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='wrap-ord.html'>cmdscale_ord</a></span><span class='op'>(</span>k <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>usa_mds</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'cmds_ord': (10 x 2) x (10 x 2)'
 #&gt; # 2 coordinates: PCo1 and PCo2
 #&gt; # 
-#&gt; # U: [ 10 x 2 | 1 ]
+#&gt; # Rows: [ 10 x 2 | 1 ]
 #&gt;      PCo1   PCo2 |    .name        
 #&gt;                  |    <span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        
 #&gt; </span><span style='color: #555555;'> 1</span><span>  -</span><span style='color: #BB0000;'>719.</span><span>  143.  | </span><span style='color: #555555;'> 1</span><span> Atlanta      
@@ -224,7 +225,7 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>:
 #&gt; </span><span style='color: #555555;'> 9</span><span>  </span><span style='text-decoration: underline;'>1</span><span>342. -</span><span style='color: #BB0000;'>580.</span><span>  | </span><span style='color: #555555;'> 9</span><span> Seattle      
 #&gt; </span><span style='color: #555555;'>10</span><span>  -</span><span style='color: #BB0000;'>980.</span><span> -</span><span style='color: #BB0000;'>335.</span><span>  | </span><span style='color: #555555;'>10</span><span> Washington.DC
 #&gt; # 
-#&gt; # V: [ 10 x 2 | 1 ]
+#&gt; # Columns: [ 10 x 2 | 1 ]
 #&gt;      PCo1   PCo2 |    .name        
 #&gt;                  |    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        
 #&gt; </span><span style='color: #555555;'> 1</span><span>  -</span><span style='color: #BB0000;'>719.</span><span>  143.  | </span><span style='color: #555555;'> 1</span><span> Atlanta      
@@ -236,18 +237,21 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>:
 #&gt; </span><span style='color: #555555;'> 7</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>072.</span><span> -</span><span style='color: #BB0000;'>519.</span><span>  | </span><span style='color: #555555;'> 7</span><span> NewYork      
 #&gt; </span><span style='color: #555555;'> 8</span><span>  </span><span style='text-decoration: underline;'>1</span><span>421.  113.  | </span><span style='color: #555555;'> 8</span><span> SanFrancisco 
 #&gt; </span><span style='color: #555555;'> 9</span><span>  </span><span style='text-decoration: underline;'>1</span><span>342. -</span><span style='color: #BB0000;'>580.</span><span>  | </span><span style='color: #555555;'> 9</span><span> Seattle      
-#&gt; </span><span style='color: #555555;'>10</span><span>  -</span><span style='color: #BB0000;'>980.</span><span> -</span><span style='color: #BB0000;'>335.</span><span>  | </span><span style='color: #555555;'>10</span><span> Washington.DC</div><div class='input'><span class='no'>usa_mds</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>() +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>) +
-  <span class='fu'>ggtitle</span>(<span class='st'>"MDS biplot of distances between American cities"</span>)</div><div class='img'><img src='alignment-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>get_alignment</span>(<span class='no'>usa_mds</span>)</div><div class='output co'>#&gt;      PCo1 PCo2
+#&gt; </span><span style='color: #555555;'>10</span><span>  -</span><span style='color: #BB0000;'>980.</span><span> -</span><span style='color: #BB0000;'>335.</span><span>  | </span><span style='color: #555555;'>10</span><span> Washington.DC</div><div class='input'><span class='va'>usa_mds</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_cols_text</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>, size <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span><span class='st'>"MDS biplot of distances between American cities"</span><span class='op'>)</span>
+</div><div class='img'><img src='alignment-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>get_alignment</span><span class='op'>(</span><span class='va'>usa_mds</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;      PCo1 PCo2
 #&gt; [1,]    1    0
 #&gt; [2,]    0    1</div><div class='input'><span class='co'># negation</span>
-<span class='no'>usa_mds</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>negate_ord</span>(<span class='fl'>1</span>:<span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>usa_mds_negate</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (10 x 2) x (10 x 2)'
+<span class='va'>usa_mds</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>negate_ord</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>usa_mds_negate</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'cmds_ord': (10 x 2) x (10 x 2)'
 #&gt; # 2 coordinates, transformed: PCo1 and PCo2
 #&gt; # 
-#&gt; # U: [ 10 x 2 | 1 ]
+#&gt; # Rows: [ 10 x 2 | 1 ]
 #&gt;      PCo1   PCo2 |    .name        
 #&gt;                  |    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        
 #&gt; </span><span style='color: #555555;'> 1</span><span>   719. -</span><span style='color: #BB0000;'>143.</span><span>  | </span><span style='color: #555555;'> 1</span><span> Atlanta      
@@ -261,7 +265,7 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>:
 #&gt; </span><span style='color: #555555;'> 9</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>342.</span><span>  580.  | </span><span style='color: #555555;'> 9</span><span> Seattle      
 #&gt; </span><span style='color: #555555;'>10</span><span>   980.  335.  | </span><span style='color: #555555;'>10</span><span> Washington.DC
 #&gt; # 
-#&gt; # V: [ 10 x 2 | 1 ]
+#&gt; # Columns: [ 10 x 2 | 1 ]
 #&gt;      PCo1   PCo2 |    .name        
 #&gt;                  |    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        
 #&gt; </span><span style='color: #555555;'> 1</span><span>   719. -</span><span style='color: #BB0000;'>143.</span><span>  | </span><span style='color: #555555;'> 1</span><span> Atlanta      
@@ -273,21 +277,24 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>:
 #&gt; </span><span style='color: #555555;'> 7</span><span>  </span><span style='text-decoration: underline;'>1</span><span>072.  519.  | </span><span style='color: #555555;'> 7</span><span> NewYork      
 #&gt; </span><span style='color: #555555;'> 8</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>421.</span><span> -</span><span style='color: #BB0000;'>113.</span><span>  | </span><span style='color: #555555;'> 8</span><span> SanFrancisco 
 #&gt; </span><span style='color: #555555;'> 9</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>342.</span><span>  580.  | </span><span style='color: #555555;'> 9</span><span> Seattle      
-#&gt; </span><span style='color: #555555;'>10</span><span>   980.  335.  | </span><span style='color: #555555;'>10</span><span> Washington.DC</div><div class='input'><span class='fu'>get_alignment</span>(<span class='no'>usa_mds_negate</span>)</div><div class='output co'>#&gt;      PCo1 PCo2
+#&gt; </span><span style='color: #555555;'>10</span><span>   980.  335.  | </span><span style='color: #555555;'>10</span><span> Washington.DC</div><div class='input'><span class='fu'>get_alignment</span><span class='op'>(</span><span class='va'>usa_mds_negate</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;      PCo1 PCo2
 #&gt; [1,]   -1    0
-#&gt; [2,]    0   -1</div><div class='input'><span class='no'>usa_mds_negate</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>() +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>) +
-  <span class='fu'>ggtitle</span>(<span class='st'>"Negated MDS biplot of distances between American cities"</span>)</div><div class='img'><img src='alignment-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># rotation</span>
-<span class='no'>usa_mds</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>rotate_ord</span>(-<span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span>(<span class='fl'>2</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>usa_mds_rotate</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.</span>
+#&gt; [2,]    0   -1</div><div class='input'><span class='va'>usa_mds_negate</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_cols_text</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>, size <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span><span class='st'>"Negated MDS biplot of distances between American cities"</span><span class='op'>)</span>
+</div><div class='img'><img src='alignment-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># rotation</span>
+<span class='va'>usa_mds</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>rotate_ord</span><span class='op'>(</span><span class='op'>-</span><span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>usa_mds_rotate</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.</span>
 #&gt; <span class='warning'>Using compatibility `.name_repair`.</span>
 #&gt; <span class='warning'></span><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (10 x 2) x (10 x 2)'
+#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds_ord': (10 x 2) x (10 x 2)'
 #&gt; # 2 coordinates, transformed: V1 and V2
 #&gt; # 
-#&gt; # U: [ 10 x 2 | 1 ]
+#&gt; # Rows: [ 10 x 2 | 1 ]
 #&gt;        V1     V2 |    .name        
 #&gt;                  |    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        
 #&gt; </span><span style='color: #555555;'> 1</span><span>   719. -</span><span style='color: #BB0000;'>143.</span><span>  | </span><span style='color: #555555;'> 1</span><span> Atlanta      
@@ -301,7 +308,7 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>:
 #&gt; </span><span style='color: #555555;'> 9</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>342.</span><span>  580.  | </span><span style='color: #555555;'> 9</span><span> Seattle      
 #&gt; </span><span style='color: #555555;'>10</span><span>   980.  335.  | </span><span style='color: #555555;'>10</span><span> Washington.DC
 #&gt; # 
-#&gt; # V: [ 10 x 2 | 1 ]
+#&gt; # Columns: [ 10 x 2 | 1 ]
 #&gt;        V1     V2 |    .name        
 #&gt;                  |    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        
 #&gt; </span><span style='color: #555555;'> 1</span><span>   719. -</span><span style='color: #BB0000;'>143.</span><span>  | </span><span style='color: #555555;'> 1</span><span> Atlanta      
@@ -313,20 +320,23 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>:
 #&gt; </span><span style='color: #555555;'> 7</span><span>  </span><span style='text-decoration: underline;'>1</span><span>072.  519.  | </span><span style='color: #555555;'> 7</span><span> NewYork      
 #&gt; </span><span style='color: #555555;'> 8</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>421.</span><span> -</span><span style='color: #BB0000;'>113.</span><span>  | </span><span style='color: #555555;'> 8</span><span> SanFrancisco 
 #&gt; </span><span style='color: #555555;'> 9</span><span> -</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span style='color: #BB0000;'>342.</span><span>  580.  | </span><span style='color: #555555;'> 9</span><span> Seattle      
-#&gt; </span><span style='color: #555555;'>10</span><span>   980.  335.  | </span><span style='color: #555555;'>10</span><span> Washington.DC</div><div class='input'><span class='fu'>get_alignment</span>(<span class='no'>usa_mds_rotate</span>)</div><div class='output co'>#&gt;      [,1] [,2]
+#&gt; </span><span style='color: #555555;'>10</span><span>   980.  335.  | </span><span style='color: #555555;'>10</span><span> Washington.DC</div><div class='input'><span class='fu'>get_alignment</span><span class='op'>(</span><span class='va'>usa_mds_rotate</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;      [,1] [,2]
 #&gt; [1,]   -1    0
-#&gt; [2,]    0   -1</div><div class='input'><span class='no'>usa_mds_rotate</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>() +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>) +
-  <span class='fu'>ggtitle</span>(<span class='st'>"Rotated MDS biplot of distances between American cities"</span>)</div><div class='img'><img src='alignment-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Align an MDS ordination to a PCA ordination</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>country_differences</span>)
-<span class='no'>country_differences</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='masks.html'>cmdscale</a></span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_cmds</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
+#&gt; [2,]    0   -1</div><div class='input'><span class='va'>usa_mds_rotate</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_cols_text</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>, size <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span><span class='st'>"Rotated MDS biplot of distances between American cities"</span><span class='op'>)</span>
+</div><div class='img'><img src='alignment-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Align an MDS ordination to a PCA ordination</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>country_differences</span><span class='op'>)</span>
+<span class='va'>country_differences</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='wrap-ord.html'>cmdscale_ord</a></span><span class='op'>(</span>k <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>differences_cmds</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'cmds_ord': (13 x 2) x (13 x 2)'
 #&gt; # 2 coordinates: PCo1 and PCo2
 #&gt; # 
-#&gt; # U: [ 13 x 2 | 0 ]
+#&gt; # Rows: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
@@ -336,7 +346,7 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>:
 #&gt; </span><span style='color: #555555;'>5</span><span>  4.41     2.91  | 
 #&gt; 
 #&gt; # 
-#&gt; # V: [ 13 x 2 | 0 ]
+#&gt; # Columns: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
@@ -344,13 +354,14 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>:
 #&gt; </span><span style='color: #555555;'>3</span><span>  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
 #&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
 #&gt; </span><span style='color: #555555;'>5</span><span>  4.41     2.91  | 
-#&gt; </div><div class='input'><span class='no'>country_differences</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/prcomp.html'>prcomp</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_pca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (13 x 13) x (13 x 13)'
+#&gt; </div><div class='input'><span class='va'>country_differences</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/prcomp.html'>prcomp</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>differences_pca</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (13 x 13) x (13 x 13)'
 #&gt; # 13 coordinates: PC1, PC2, ..., PC13
 #&gt; # 
-#&gt; # U: [ 13 x 13 | 0 ]
+#&gt; # Rows: [ 13 x 13 | 0 ]
 #&gt;      PC1   PC2     PC3 ... | 
 #&gt;                            | 
 #&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.576</span><span>  5.50  3.17       | 
@@ -360,7 +371,7 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>:
 #&gt; </span><span style='color: #555555;'>5</span><span>  9.60  -</span><span style='color: #BB0000;'>4.05</span><span> -</span><span style='color: #BB0000;'>3.03</span><span>       | 
 #&gt; 
 #&gt; # 
-#&gt; # V: [ 13 x 13 | 0 ]
+#&gt; # Columns: [ 13 x 13 | 0 ]
 #&gt;      PC1    PC2      PC3 ... | 
 #&gt;                              | 
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.104 -</span><span style='color: #BB0000;'>0.423</span><span> -</span><span style='color: #BB0000;'>0.340</span><span>       | 
@@ -369,12 +380,13 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>:
 #&gt; </span><span style='color: #555555;'>4</span><span>  0.343 -</span><span style='color: #BB0000;'>0.250</span><span>  0.102       | 
 #&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>0.352</span><span>  0.161  0.302       | 
 #&gt; </div><div class='input'><span class='co'># negate PCA cases to MDS coordinates</span>
-<span class='no'>differences_cmds</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>negate_to</span>(<span class='no'>differences_pca</span>, <span class='st'>"u"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_align_u</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
+<span class='va'>differences_cmds</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>negate_to</span><span class='op'>(</span><span class='va'>differences_pca</span>, <span class='st'>"rows"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>differences_align_rows</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'cmds_ord': (13 x 2) x (13 x 2)'
 #&gt; # 2 coordinates, transformed: PCo1 and PCo2
 #&gt; # 
-#&gt; # U: [ 13 x 2 | 0 ]
+#&gt; # Rows: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span>  2.94  | 
@@ -384,7 +396,7 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>:
 #&gt; </span><span style='color: #555555;'>5</span><span>  4.41    -</span><span style='color: #BB0000;'>2.91</span><span>  | 
 #&gt; 
 #&gt; # 
-#&gt; # V: [ 13 x 2 | 0 ]
+#&gt; # Columns: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span>  2.94  | 
@@ -392,17 +404,19 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>:
 #&gt; </span><span style='color: #555555;'>3</span><span>  3.70     0.883 | 
 #&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>     2.01  | 
 #&gt; </span><span style='color: #555555;'>5</span><span>  4.41    -</span><span style='color: #BB0000;'>2.91</span><span>  | 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_align_u</span>) + <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>()
-), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>))</div><div class='img'><img src='alignment-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># negate PCA variables to MDS coordinates</span>
-<span class='no'>differences_cmds</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>negate_to</span>(<span class='no'>differences_pca</span>, <span class='st'>"v"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_align_v</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fu'>gridExtra</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>arrangeGrob</a></span><span class='op'>(</span>grobs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>differences_cmds</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span><span class='op'>)</span>,
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>differences_pca</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span><span class='op'>)</span>,
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>differences_align_rows</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span>, ncol <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='alignment-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># negate PCA variables to MDS coordinates</span>
+<span class='va'>differences_cmds</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>negate_to</span><span class='op'>(</span><span class='va'>differences_pca</span>, <span class='st'>"cols"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>differences_align_cols</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'cmds_ord': (13 x 2) x (13 x 2)'
 #&gt; # 2 coordinates, transformed: PCo1 and PCo2
 #&gt; # 
-#&gt; # U: [ 13 x 2 | 0 ]
+#&gt; # Rows: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
@@ -412,7 +426,7 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>:
 #&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>4.41</span><span>     2.91  | 
 #&gt; 
 #&gt; # 
-#&gt; # V: [ 13 x 2 | 0 ]
+#&gt; # Columns: [ 13 x 2 | 0 ]
 #&gt;       PCo1   PCo2 | 
 #&gt;                   | 
 #&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
@@ -420,19 +434,21 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>:
 #&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>3.70</span><span>    -</span><span style='color: #BB0000;'>0.883</span><span> | 
 #&gt; </span><span style='color: #555555;'>4</span><span>  2.56    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
 #&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>4.41</span><span>     2.91  | 
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_align_v</span>) + <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>()
-), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>))</div><div class='img'><img src='alignment-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Compare relative frequences of hair and eye colors among men versus women</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>HairEyeColor</span>)
-<span class='no'>HairEyeColor</span>[, , <span class='st'>"Male"</span>] <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>ca</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/ca.html'>ca</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>male_haireye_ca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (4 x 3) x (4 x 3)'
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fu'>gridExtra</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>arrangeGrob</a></span><span class='op'>(</span>grobs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>differences_cmds</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span><span class='op'>)</span>,
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>differences_pca</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span><span class='op'>)</span>,
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>differences_align_cols</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='geom-biplot-vector.html'>geom_cols_vector</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span>, ncol <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='alignment-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Compare relative frequences of hair and eye colors among men versus women</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>HairEyeColor</span><span class='op'>)</span>
+<span class='va'>HairEyeColor</span><span class='op'>[</span>, , <span class='st'>"Male"</span><span class='op'>]</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ca</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/ca.html'>ca</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>male_haireye_ca</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (4 x 3) x (4 x 3)'
 #&gt; # 3 coordinates: Dim1, Dim2, Dim3
 #&gt; # 
-#&gt; # U: [ 4 x 3 | 0 ]
+#&gt; # Rows: [ 4 x 3 | 0 ]
 #&gt;     Dim1   Dim2   Dim3 | 
 #&gt;                        | 
 #&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>1.35</span><span>   0.578 -</span><span style='color: #BB0000;'>1.35</span><span>  | 
@@ -440,19 +456,20 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>:
 #&gt; </span><span style='color: #555555;'>3</span><span>  0.169 -</span><span style='color: #BB0000;'>2.62</span><span>  -</span><span style='color: #BB0000;'>0.550</span><span> | 
 #&gt; </span><span style='color: #555555;'>4</span><span>  1.94   0.695 -</span><span style='color: #BB0000;'>0.901</span><span> | 
 #&gt; # 
-#&gt; # V: [ 4 x 3 | 0 ]
+#&gt; # Columns: [ 4 x 3 | 0 ]
 #&gt;     Dim1   Dim2    Dim3 | 
 #&gt;                         | 
 #&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>1.19</span><span>   0.314 -</span><span style='color: #BB0000;'>0.567</span><span>  | 
 #&gt; </span><span style='color: #555555;'>2</span><span>  1.03   0.831  0.045</span><span style='text-decoration: underline;'>7</span><span> | 
 #&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.349</span><span> -</span><span style='color: #BB0000;'>0.880</span><span>  2.01   | 
-#&gt; </span><span style='color: #555555;'>4</span><span>  0.878 -</span><span style='color: #BB0000;'>2.22</span><span>  -</span><span style='color: #BB0000;'>1.32</span><span>   | </div><div class='input'><span class='no'>HairEyeColor</span>[, , <span class='st'>"Female"</span>] <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>ca</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/ca.html'>ca</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>female_haireye_ca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (4 x 3) x (4 x 3)'
+#&gt; </span><span style='color: #555555;'>4</span><span>  0.878 -</span><span style='color: #BB0000;'>2.22</span><span>  -</span><span style='color: #BB0000;'>1.32</span><span>   | </div><div class='input'><span class='va'>HairEyeColor</span><span class='op'>[</span>, , <span class='st'>"Female"</span><span class='op'>]</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ca</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/ca.html'>ca</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>female_haireye_ca</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (4 x 3) x (4 x 3)'
 #&gt; # 3 coordinates: Dim1, Dim2, Dim3
 #&gt; # 
-#&gt; # U: [ 4 x 3 | 0 ]
+#&gt; # Rows: [ 4 x 3 | 0 ]
 #&gt;     Dim1   Dim2   Dim3 | 
 #&gt;                        | 
 #&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.940</span><span>  1.92  -</span><span style='color: #BB0000;'>0.683</span><span> | 
@@ -460,43 +477,48 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>:
 #&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.505</span><span> -</span><span style='color: #BB0000;'>1.55</span><span>  -</span><span style='color: #BB0000;'>2.19</span><span>  | 
 #&gt; </span><span style='color: #555555;'>4</span><span>  1.67   0.258 -</span><span style='color: #BB0000;'>0.111</span><span> | 
 #&gt; # 
-#&gt; # V: [ 4 x 3 | 0 ]
+#&gt; # Columns: [ 4 x 3 | 0 ]
 #&gt;      Dim1   Dim2   Dim3 | 
 #&gt;                         | 
 #&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.990</span><span>   0.728 -</span><span style='color: #BB0000;'>0.232</span><span> | 
 #&gt; </span><span style='color: #555555;'>2</span><span>  1.26    0.382  0.149 | 
 #&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.538</span><span>  -</span><span style='color: #BB0000;'>1.54</span><span>   1.77  | 
-#&gt; </span><span style='color: #555555;'>4</span><span>  0.077</span><span style='text-decoration: underline;'>2</span><span> -</span><span style='color: #BB0000;'>1.99</span><span>  -</span><span style='color: #BB0000;'>2.27</span><span>  | </div><div class='input'><span class='no'>ca_biplot</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>ord</span>) {
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>ord</span>, <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-    <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>.mass</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"saddlebrown"</span>) +
-    <span class='fu'><a href='geom-biplot-point.html'>geom_v_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>.mass</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"seagreen4"</span>) +
-    <span class='fu'><a href='geom-biplot-text.html'>geom_u_text_repel</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"saddlebrown"</span>) +
-    <span class='fu'><a href='geom-biplot-text.html'>geom_v_text_repel</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"seagreen4"</span>) +
-    <span class='fu'>guides</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='st'>"none"</span>)
-}
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-  <span class='fu'>ca_biplot</span>(<span class='no'>male_haireye_ca</span>),
-  <span class='fu'>ca_biplot</span>(<span class='no'>female_haireye_ca</span>)
-), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>2</span>))</div><div class='img'><img src='alignment-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># negation, permutation, and rotation</span>
-<span class='no'>male_haireye_ca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>negate_to</span>(<span class='no'>female_haireye_ca</span>, <span class='st'>"u"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>get_alignment</span>()</div><div class='output co'>#&gt;      Dim1 Dim2 Dim3
+#&gt; </span><span style='color: #555555;'>4</span><span>  0.077</span><span style='text-decoration: underline;'>2</span><span> -</span><span style='color: #BB0000;'>1.99</span><span>  -</span><span style='color: #BB0000;'>2.27</span><span>  | </div><div class='input'><span class='va'>ca_biplot</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>ord</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='va'>ord</span>, <span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+    <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>size <span class='op'>=</span> <span class='va'>.mass</span><span class='op'>)</span>, color <span class='op'>=</span> <span class='st'>"saddlebrown"</span><span class='op'>)</span> <span class='op'>+</span>
+    <span class='fu'><a href='geom-biplot-point.html'>geom_cols_point</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>size <span class='op'>=</span> <span class='va'>.mass</span><span class='op'>)</span>, color <span class='op'>=</span> <span class='st'>"seagreen4"</span><span class='op'>)</span> <span class='op'>+</span>
+    <span class='fu'><a href='geom-biplot-text.html'>geom_rows_text_repel</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"saddlebrown"</span><span class='op'>)</span> <span class='op'>+</span>
+    <span class='fu'><a href='geom-biplot-text.html'>geom_cols_text_repel</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"seagreen4"</span><span class='op'>)</span> <span class='op'>+</span>
+    <span class='fu'>guides</span><span class='op'>(</span>size <span class='op'>=</span> <span class='st'>"none"</span><span class='op'>)</span>
+<span class='op'>}</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fu'>gridExtra</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>arrangeGrob</a></span><span class='op'>(</span>grobs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+  <span class='fu'>ca_biplot</span><span class='op'>(</span><span class='va'>male_haireye_ca</span><span class='op'>)</span>,
+  <span class='fu'>ca_biplot</span><span class='op'>(</span><span class='va'>female_haireye_ca</span><span class='op'>)</span>
+<span class='op'>)</span>, ncol <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='alignment-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># negation, permutation, and rotation</span>
+<span class='va'>male_haireye_ca</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>negate_to</span><span class='op'>(</span><span class='va'>female_haireye_ca</span>, <span class='st'>"rows"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>get_alignment</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;      Dim1 Dim2 Dim3
 #&gt; [1,]    1    0    0
 #&gt; [2,]    0    1    0
-#&gt; [3,]    0    0    1</div><div class='input'><span class='no'>male_haireye_ca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>permute_to</span>(<span class='no'>female_haireye_ca</span>, <span class='st'>"u"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>get_alignment</span>()</div><div class='output co'>#&gt;      Dim1 Dim2 Dim3
+#&gt; [3,]    0    0    1</div><div class='input'><span class='va'>male_haireye_ca</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>permute_to</span><span class='op'>(</span><span class='va'>female_haireye_ca</span>, <span class='st'>"rows"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>get_alignment</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;      Dim1 Dim2 Dim3
 #&gt; [1,]    1    0    0
 #&gt; [2,]    0    1    0
-#&gt; [3,]    0    0    1</div><div class='input'><span class='no'>male_haireye_ca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>rotate_to</span>(<span class='no'>female_haireye_ca</span>, <span class='st'>"u"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>get_alignment</span>()</div><div class='output co'>#&gt;            [,1]       [,2]       [,3]
+#&gt; [3,]    0    0    1</div><div class='input'><span class='va'>male_haireye_ca</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>rotate_to</span><span class='op'>(</span><span class='va'>female_haireye_ca</span>, <span class='st'>"rows"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>get_alignment</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;            [,1]       [,2]       [,3]
 #&gt; [1,]  0.9311875 -0.3635598 0.02672095
 #&gt; [2,]  0.2438220  0.6756385 0.69574671
-#&gt; [3,] -0.2709993 -0.6413555 0.71779002</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-  <span class='fu'>ca_biplot</span>(<span class='fu'>rotate_to</span>(<span class='no'>male_haireye_ca</span>, <span class='no'>female_haireye_ca</span>, <span class='st'>"u"</span>)),
-  <span class='fu'>ca_biplot</span>(<span class='no'>female_haireye_ca</span>)
-), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>2</span>))</div><div class='img'><img src='alignment-7.png' alt='' width='700' height='433' /></div></span></pre>
+#&gt; [3,] -0.2709993 -0.6413555 0.71779002</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fu'>gridExtra</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html'>arrangeGrob</a></span><span class='op'>(</span>grobs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+  <span class='fu'>ca_biplot</span><span class='op'>(</span><span class='fu'>rotate_to</span><span class='op'>(</span><span class='va'>male_haireye_ca</span>, <span class='va'>female_haireye_ca</span>, <span class='st'>"rows"</span><span class='op'>)</span><span class='op'>)</span>,
+  <span class='fu'>ca_biplot</span><span class='op'>(</span><span class='va'>female_haireye_ca</span><span class='op'>)</span>
+<span class='op'>)</span>, ncol <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='alignment-7.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -512,7 +534,7 @@ Ambient Computing, Applications, Services and Technologies, Proceedings</em>:
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

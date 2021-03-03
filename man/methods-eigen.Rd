@@ -3,24 +3,21 @@
 \name{methods-eigen}
 \alias{methods-eigen}
 \alias{as_tbl_ord.eigen_ord}
-\alias{reconstruct.eigen_ord}
-\alias{recover_u.eigen_ord}
-\alias{recover_v.eigen_ord}
+\alias{recover_rows.eigen_ord}
+\alias{recover_cols.eigen_ord}
 \alias{recover_inertia.eigen_ord}
 \alias{recover_coord.eigen_ord}
 \alias{recover_conference.eigen_ord}
-\alias{augmentation_u.eigen_ord}
-\alias{augmentation_v.eigen_ord}
+\alias{augmentation_rows.eigen_ord}
+\alias{augmentation_cols.eigen_ord}
 \alias{augmentation_coord.eigen_ord}
 \title{Functionality for eigendecompositions}
 \usage{
 \method{as_tbl_ord}{eigen_ord}(x)
 
-\method{reconstruct}{eigen_ord}(x)
+\method{recover_rows}{eigen_ord}(x)
 
-\method{recover_u}{eigen_ord}(x)
-
-\method{recover_v}{eigen_ord}(x)
+\method{recover_cols}{eigen_ord}(x)
 
 \method{recover_inertia}{eigen_ord}(x)
 
@@ -28,9 +25,9 @@
 
 \method{recover_conference}{eigen_ord}(x)
 
-\method{augmentation_u}{eigen_ord}(x)
+\method{augmentation_rows}{eigen_ord}(x)
 
-\method{augmentation_v}{eigen_ord}(x)
+\method{augmentation_cols}{eigen_ord}(x)
 
 \method{augmentation_coord}{eigen_ord}(x)
 }
@@ -42,40 +39,46 @@ These methods extract data from, and attribute new data to,
 objects of class \code{"eigen_ord"} returned by \code{\link[=eigen_ord]{eigen_ord()}}.
 }
 \examples{
-# Graph Laplacian eigenvectors for spectral partitioning
+# two-group karate club data
 data(karate, package = "igraphdata")
+# force-directed layout of graph
 igraph::plot.igraph(
   karate,
   vertex.label.family = "sans",
   vertex.label.color = "black",
   vertex.label.cex = .75
 )
-# first eigenvector (centrality)
-karate_eigen_cent <- igraph::eigen_centrality(karate)
-# eigendecomposition
+# graph Laplacian eigenvectors for spectral partitioning:
+# complete eigendecomposition, augmenting vertex data
 karate \%>\%
   igraph::as_adjacency_matrix(sparse = FALSE) \%>\%
   eigen_ord() \%>\% as_tbl_ord() \%>\%
-  mutate_u(
+  mutate_rows(
     faction = igraph::vertex_attr(karate, "Faction"),
     name = igraph::vertex_attr(karate, "name"),
     label = igraph::vertex_attr(karate, "label")
   ) \%>\%
   print() -> karate_eigen
-# corroborate eigencentralities
+# recover matrices of row and column coordinates
+get_rows(karate_eigen)[seq(8L), seq(5L)]
+get_cols(karate_eigen)[seq(8L), seq(5L)]
+# summarize eigenvectors
+tidy(karate_eigen)
+# validate eigencentrality calculations against igraph implementation
 tibble::tibble(
-  igraph = karate_eigen_cent$vector,
-  eigen = karate_eigen$vectors[, 1] / max(karate_eigen$vectors[, 1])
+  eigen = karate_eigen$vectors[, 1L] / max(karate_eigen$vectors[, 1L]),
+  igraph = igraph::eigen_centrality(karate)$vector
 ) \%>\%
   ggplot(aes(x = eigen, y = igraph)) +
   coord_equal() +
+  geom_abline(slope = 1, color = "#777777") +
   geom_point()
 # first and second eigenvectors for centrality and connectivity / partitioning
 karate_eigen \%>\%
   confer_inertia(1) \%>\%
   ggbiplot(aes(x = 2, y = 1)) +
-  geom_u_vector(aes(color = as.factor(faction))) +
-  geom_u_text_radiate(aes(label = ifelse(grepl("H|A", label), label, NA))) +
+  geom_rows_vector(aes(color = as.factor(faction))) +
+  geom_rows_text_radiate(aes(label = ifelse(grepl("H|A", label), label, NA))) +
   guides(color = FALSE) +
   labs(x = "algebraic connectivity", y = "eigencentrality") +
   ggtitle(
@@ -86,13 +89,8 @@ karate_eigen \%>\%
 karate_eigen \%>\%
   confer_inertia(1) \%>\%
   ggbiplot(aes(x = 2, y = 3)) +
-  scale_x_continuous(expand = expand_scale(mult = .3)) +
-  scale_y_continuous(expand = expand_scale(mult = .2)) +
-  geom_u_vector(aes(color = EV1)) +
-  geom_u_text_radiate(stat = "chull", aes(label = label)) +
+  geom_rows_vector(aes(color = EV1)) +
+  geom_rows_text_radiate(stat = "chull", aes(label = label)) +
   labs(x = "algebraic connectivity", y = "loading onto third eigenvector") +
-  ggtitle(
-    "Second (horizontal) and third (vertical) eigencentralities",
-    "Color increases in value with eigencentrality, labels along convex hull"
-  )
+  ggtitle("Second (connectivity) and third eigencentralities")
 }

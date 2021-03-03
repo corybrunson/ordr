@@ -1,13 +1,13 @@
 #' @title Render tick mark labels for axes
 #'
-#' @description `geom_*_axis_text()` renders tick mark labels for specified
-#'   axes among the row or column factors.
+#' @description `geom_axis_text()` renders tick mark labels for specified axes
+#'   among the row or column factors.
 #' @template biplot-layers
 
 #' @section Aesthetics:
 
-#' `geom_*_axis_text()` understands the following aesthetics
-#' (required aesthetics are in bold):
+#' `geom_axis_text()` understands the following aesthetics (required aesthetics
+#' are in bold):
 
 #' - **`x`**
 #' - **`y`**
@@ -23,7 +23,6 @@
 #' - `group`
 #' 
 
-#' @name geom-biplot-ticks
 #' @import ggplot2
 #' @include geom-isolines.r
 #' @inheritParams ggplot2::layer
@@ -32,11 +31,141 @@
 #' @inheritParams geom_isolines
 #' @param label_dodge Numeric; the orthogonal distance of the text from
 #'   the axis, as a proportion of the minimum of the plot width and height.
-#' @template param-matrix
-#' @example inst/examples/diabetes-lda-axes.r
-NULL
+#' @family geom layers
+#' @example inst/examples/ex-geom-axis-diabetes.r
+#' @export
+geom_axis_text <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
+  label_dodge = .025,
+  ...,
+  parse = FALSE, check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomAxisText,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      calibrate = calibrate,
+      family_fun = family_fun,
+      axes = axes,
+      by = by,
+      label_dodge = label_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
 
-#' @rdname geom-biplot-ticks
+#' @rdname biplot-geoms
+#' @export
+geom_rows_axis_text <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
+  label_dodge = .025,
+  ...,
+  parse = FALSE, check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = rows_stat(stat),
+    geom = GeomAxisText,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      calibrate = calibrate,
+      family_fun = family_fun,
+      axes = axes,
+      by = by,
+      label_dodge = label_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_cols_axis_text <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
+  label_dodge = .025,
+  ...,
+  parse = FALSE, check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = cols_stat(stat),
+    geom = GeomAxisText,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      calibrate = calibrate,
+      family_fun = family_fun,
+      axes = axes,
+      by = by,
+      label_dodge = label_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_dims_axis_text <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  .matrix = "cols", axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
+  label_dodge = .025,
+  ...,
+  parse = FALSE, check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = matrix_stat(.matrix, stat),
+    geom = GeomAxisText,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      calibrate = calibrate,
+      family_fun = family_fun,
+      axes = axes,
+      by = by,
+      label_dodge = label_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
 #' @usage NULL
 #' @export
 GeomAxisText <- ggproto(
@@ -188,135 +317,3 @@ GeomAxisText <- ggproto(
     )
   }
 )
-
-#' @rdname geom-biplot-ticks
-#' @export
-geom_axis_text <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
-  label_dodge = .025,
-  ...,
-  parse = FALSE, check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = stat,
-    geom = GeomAxisText,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      calibrate = calibrate,
-      family_fun = family_fun,
-      axes = axes,
-      by = by,
-      label_dodge = label_dodge,
-      parse = parse,
-      check_overlap = check_overlap,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
-#' @rdname geom-biplot-ticks
-#' @export
-geom_u_axis_text <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
-  label_dodge = .025,
-  ...,
-  parse = FALSE, check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = u_stat(stat),
-    geom = GeomAxisText,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      calibrate = calibrate,
-      family_fun = family_fun,
-      axes = axes,
-      by = by,
-      label_dodge = label_dodge,
-      parse = parse,
-      check_overlap = check_overlap,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
-#' @rdname geom-biplot-ticks
-#' @export
-geom_v_axis_text <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
-  label_dodge = .025,
-  ...,
-  parse = FALSE, check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = v_stat(stat),
-    geom = GeomAxisText,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      calibrate = calibrate,
-      family_fun = family_fun,
-      axes = axes,
-      by = by,
-      label_dodge = label_dodge,
-      parse = parse,
-      check_overlap = check_overlap,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
-#' @rdname geom-biplot-ticks
-#' @export
-geom_biplot_axis_text <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "v", axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
-  label_dodge = .025,
-  ...,
-  parse = FALSE, check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = matrix_stat(.matrix, stat),
-    geom = GeomAxisText,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      calibrate = calibrate,
-      family_fun = family_fun,
-      axes = axes,
-      by = by,
-      label_dodge = label_dodge,
-      parse = parse,
-      check_overlap = check_overlap,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}

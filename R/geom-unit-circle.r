@@ -15,14 +15,38 @@
 #' - `size`
 #' 
 
-#' @name geom-unit-circle
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
 #' @param segments The number of segments to be used in drawing the circle.
-NULL
+#' @family geom layers
+#' @example inst/examples/ex-geom-unit-circle.r
+#' @export
+geom_unit_circle <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  segments = 60,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomUnitCircle,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = na.rm,
+      segments = segments,
+      ...
+    )
+  )
+}
 
-#' @rdname geom-unit-circle
+#' @rdname ordr-ggproto
+#' @format NULL
 #' @usage NULL
 #' @export
 GeomUnitCircle <- ggproto(
@@ -55,28 +79,3 @@ GeomUnitCircle <- ggproto(
   
   draw_key = draw_key_blank
 )
-
-#' @rdname geom-unit-circle
-#' @export
-geom_unit_circle <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  segments = 60,
-  ...,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = stat,
-    geom = GeomUnitCircle,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = na.rm,
-      segments = segments,
-      ...
-    )
-  )
-}

@@ -1,8 +1,7 @@
-#' @title Annotate the factors of a tbl_ord
+#' @title Annotate factors of tbl_ords
 #'
-#' @description These functions annotate the factors \eqn{U} and \eqn{V} of
-#'   [tbl_ord] objects with additional variables, and retrieve these
-#'   annotations.
+#' @description These functions annotate the matrix factors of [tbl_ord]s with
+#'   additional variables, and retrieve these annotations.
 #'   
 
 #' The `annotation_*()` and `set_annotation_*()` functions assign and retrieve
@@ -15,59 +14,60 @@
 #' @inheritParams accessors
 #' @param annot A [data.frame][base::data.frame] having the same number of rows
 #'   as `get_*(x)`.
+#' @seealso [augmentation] methods that must interface with annotation.
 NULL
 
 #' @rdname annotation
 #' @export
-set_annotation_u <- function(x, annot) {
+set_annotation_rows <- function(x, annot) {
   stopifnot(is.data.frame(annot))
   protect_vars <- c(get_coord(x), ".matrix")
-  attr(x, "u_annotation") <- annot[, ! (names(annot) %in% protect_vars)]
+  attr(x, "rows_annotation") <- annot[, ! (names(annot) %in% protect_vars)]
   x
 }
 
 #' @rdname annotation
 #' @export
-set_annotation_v <- function(x, annot) {
+set_annotation_cols <- function(x, annot) {
   stopifnot(is.data.frame(annot))
   protect_vars <- c(get_coord(x), ".matrix")
-  attr(x, "v_annotation") <- annot[, ! (names(annot) %in% protect_vars)]
+  attr(x, "cols_annotation") <- annot[, ! (names(annot) %in% protect_vars)]
   x
 }
 
 set_annotation_factor <- function(x, annot, .matrix) {
   switch(
     match_factor(.matrix),
-    u = set_annotation_u(x, annot),
-    v = set_annotation_v(x, annot)
+    rows = set_annotation_rows(x, annot),
+    cols = set_annotation_cols(x, annot)
   )
 }
 
 #' @rdname annotation
 #' @export
-annotation_u <- function(x) {
-  if (is.null(attr(x, "u_annotation"))) {
-    tibble_pole(nrow(get_u(x)))
+annotation_rows <- function(x) {
+  if (is.null(attr(x, "rows_annotation"))) {
+    tibble_pole(nrow(get_rows(x)))
   } else {
-    attr(x, "u_annotation")
+    attr(x, "rows_annotation")
   }
 }
 
 #' @rdname annotation
 #' @export
-annotation_v <- function(x) {
-  if (is.null(attr(x, "v_annotation"))) {
-    tibble_pole(nrow(get_v(x)))
+annotation_cols <- function(x) {
+  if (is.null(attr(x, "cols_annotation"))) {
+    tibble_pole(nrow(get_cols(x)))
   } else {
-    attr(x, "v_annotation")
+    attr(x, "cols_annotation")
   }
 }
 
 annotation_factor <- function(x, .matrix) {
   switch(
     match_factor(.matrix),
-    u = annotation_u(x),
-    v = annotation_v(x),
-    uv = list(u = annotation_u(x), v = annotation_v(x))
+    rows = annotation_rows(x),
+    cols = annotation_cols(x),
+    dims = list(rows = annotation_rows(x), cols = annotation_cols(x))
   )
 }

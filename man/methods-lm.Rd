@@ -3,49 +3,46 @@
 \name{methods-lm}
 \alias{methods-lm}
 \alias{as_tbl_ord.lm}
-\alias{reconstruct.lm}
-\alias{recover_u.lm}
-\alias{recover_v.lm}
+\alias{recover_rows.lm}
+\alias{recover_cols.lm}
 \alias{recover_coord.lm}
-\alias{augmentation_u.lm}
-\alias{augmentation_v.lm}
+\alias{augmentation_rows.lm}
+\alias{augmentation_cols.lm}
 \alias{augmentation_coord.lm}
-\alias{augmentation_u.glm}
-\alias{recover_u.mlm}
-\alias{recover_v.mlm}
+\alias{augmentation_rows.glm}
+\alias{recover_rows.mlm}
+\alias{recover_cols.mlm}
 \alias{recover_coord.mlm}
-\alias{augmentation_u.mlm}
-\alias{augmentation_v.mlm}
+\alias{augmentation_rows.mlm}
+\alias{augmentation_cols.mlm}
 \alias{augmentation_coord.mlm}
 \title{Functionality for linear model objects}
 \usage{
 \method{as_tbl_ord}{lm}(x)
 
-\method{reconstruct}{lm}(x)
+\method{recover_rows}{lm}(x)
 
-\method{recover_u}{lm}(x)
-
-\method{recover_v}{lm}(x)
+\method{recover_cols}{lm}(x)
 
 \method{recover_coord}{lm}(x)
 
-\method{augmentation_u}{lm}(x)
+\method{augmentation_rows}{lm}(x)
 
-\method{augmentation_v}{lm}(x)
+\method{augmentation_cols}{lm}(x)
 
 \method{augmentation_coord}{lm}(x)
 
-\method{augmentation_u}{glm}(x)
+\method{augmentation_rows}{glm}(x)
 
-\method{recover_u}{mlm}(x)
+\method{recover_rows}{mlm}(x)
 
-\method{recover_v}{mlm}(x)
+\method{recover_cols}{mlm}(x)
 
 \method{recover_coord}{mlm}(x)
 
-\method{augmentation_u}{mlm}(x)
+\method{augmentation_rows}{mlm}(x)
 
-\method{augmentation_v}{mlm}(x)
+\method{augmentation_cols}{mlm}(x)
 
 \method{augmentation_coord}{mlm}(x)
 }
@@ -58,104 +55,46 @@ objects of class \code{"lm"}, \code{"glm"}, and \code{"mlm"} as returned by \cod
 and \code{\link[stats:glm]{stats::glm()}}.
 }
 \examples{
-# Regression analysis of Motor Trend design and performance data
+# Motor Trend design and performance data
+head(mtcars)
+# regression analysis of performance measures on design specifications
 mtcars \%>\%
   scale(scale = FALSE) \%>\%
   as.data.frame() \%>\%
   lm(formula = mpg ~ wt + cyl) \%>\%
-  as_tbl_ord() \%>\%
-  augment() \%>\%
-  mutate_u(influence = .wt.res^2) \%>\%
   print() -> mtcars_lm
-mtcars_lm \%>\%
+# wrap as a 'tbl_ord' object
+(mtcars_lm_ord <- as_tbl_ord(mtcars_lm))
+# augment everything with names, predictors with observation stats
+augment_ord(mtcars_lm_ord)
+# calculate influences as the squares of weighted residuals
+mutate_rows(augment_ord(mtcars_lm_ord), influence = .wt.res^2)
+# regression biplot with performance isolines
+mtcars_lm_ord \%>\%
+  augment_ord() \%>\%
+  mutate_rows(influence = .wt.res^2) \%>\%
   ggbiplot(aes(x = wt, y = cyl, intercept = `(Intercept)`)) +
-  geom_u_point(aes(color = influence)) +
-  geom_v_vector() +
-  geom_v_isolines(axes = 1, by = 5) +
+  geom_rows_point(aes(color = influence)) +
+  geom_cols_vector() +
+  geom_cols_isolines(axes = 1, by = 5) +
   ggtitle(
     "Weight isolines with data colored by importance",
-    "Regressing mpg onto weight and number of cylinders"
+    "Regressing gas mileage onto weight and number of cylinders"
   )
-# Multidimensional scaling of country differences and regression of attributes
-# Reproduce Exhibit 4.2 in Greenacre (2010)
-data(country_differences)
-country_differences \%>\%
-  cmdscale(k = 2) \%>\%
+# Poisson regression of yarn weaving data
+warpbreaks \%>\%
+  glm(formula = breaks ~ wool + tension, family = "poisson") \%>\%
   as_tbl_ord() \%>\%
-  print() -> differences_cmds
-differences_plot <- differences_cmds \%>\%
-  ggbiplot(aes(x = 1, y = 2, label = .name)) +
-  geom_v_text()
-differences_plot
-# Reproduce Exhibit 4.5 in Greenacre (2010)
-data(country_attributes)
-lm(country_attributes ~ get_u(differences_cmds)) \%>\%
-  as_tbl_ord() \%>\%
-  print() -> attributes_fit
-differences_plot +
-  geom_v_vector(data = attributes_fit) +
-  geom_v_text_radiate(data = attributes_fit, hjust = .3)
-# Generalized linear regression on marine ecosystem data
-data(bioenv)
-bioenv \%>\%
-  transform(
-    x = as.vector(scale(Depth)),
-    y = as.vector(scale(Pollution))
-  ) \%>\%
-  glm(formula = d ~ x + y, family = "poisson") \%>\%
-  as_tbl_ord() \%>\%
-  print() -> bioenv_pois
-bioenv_pois \%>\%
-  ggbiplot(aes(x = x, y = y, intercept = `(Intercept)`, label = .name)) +
+  augment_ord() \%>\%
+  print() -> warpbreaks_pois
+# regression biplot with nonlinear isolines
+warpbreaks_pois \%>\%
+  ggbiplot(aes(
+    x = tensionM, y = tensionH, intercept = `(Intercept)`, label = .name
+  )) +
   theme_bw() +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_radiate(color = "brown4") +
-  geom_v_isolines(family = poisson(), by = 2)
-# Adapt (3.4) and Exhibit 3.6 in Greenacre (2010)
-bioenv \%>\%
-  dplyr::mutate_at(dplyr::vars(a:e), as.logical) \%>\%
-  transform(
-    x = as.vector(scale(Depth)),
-    y = as.vector(scale(Pollution))
-  ) \%>\%
-  glm(formula = d ~ x + y, family = "binomial") \%>\%
-  as_tbl_ord() \%>\%
-  print() -> bioenv_bin
-bioenv_bin \%>\%
-  ggbiplot(aes(x = x, y = y, intercept = `(Intercept)`, label = .name)) +
-  theme_bw() +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_radiate(color = "brown4") +
-  geom_v_isolines(family = binomial(), by = .05)
-# Generalized multiple linear regression on marine ecosystem data
-# Reproduce Exhibit 2.5 in Greenacre (2010)
-data(bioenv)
-bioenv_std <- dplyr::mutate_if(bioenv, is.numeric, ~ as.vector(scale(.)))
-resp_std <- as.matrix(dplyr::select(bioenv_std, a:e))
-pred_std <- as.matrix(dplyr::select(bioenv_std, x = Depth, y = Pollution))
-lm(resp_std ~ pred_std + 0) \%>\%
-  as_tbl_ord() \%>\%
-  print() -> bioenv_std_mlm
-ggbiplot(bioenv_std_mlm, aes(label = .name)) +
-  theme_bw() +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_radiate(color = "brown4")
-# Reproduce Exhibit 3.2 in Greenacre (2010)
-bioenv \%>\%
-  dplyr::mutate_at(dplyr::vars(a:e), ~ . ^ (1/4)) \%>\%
-  dplyr::mutate_at(dplyr::vars(Pollution:Depth), ~ as.vector(scale(.))) \%>\%
-  print() -> bioenv_4rt
-resp_4rt <- as.matrix(dplyr::select(bioenv_4rt, a:e))
-pred_4rt <- as.matrix(dplyr::select(bioenv_4rt, x = Depth, y = Pollution))
-lm(resp_4rt ~ pred_4rt + 0) \%>\%
-  as_tbl_ord() \%>\%
-  print() -> bioenv_4rt_mlm
-ggbiplot(bioenv_4rt_mlm, aes(x = x, y = y, label = .name)) +
-  theme_bw() +
-  geom_u_text(color = "darkgreen") +
-  geom_v_vector(color = "brown4") +
-  geom_v_text_radiate(color = "brown4")
+  geom_jitter(stat = "rows", width = .1, height = .1) +
+  geom_cols_vector() +
+  geom_cols_text_radiate() +
+  geom_cols_isolines(family = poisson(), by = 5)
 }

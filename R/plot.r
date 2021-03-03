@@ -12,8 +12,8 @@ biplot.tbl_ord <- function(x, choices = 1L:2L, ...) {
     return(biplot(x, ...))
   }
   # tbl_ord biplot method based on stats:::biplot.prcomp
-  scores <- get_u(x)
-  loadings <- get_v(x)
+  scores <- get_rows(x)
+  loadings <- get_cols(x)
   if (length(choices) != 2L)
     stop("Length of choices must be 2.")
   if (! length(scores)) 

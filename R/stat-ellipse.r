@@ -6,33 +6,13 @@
 
 #' @template biplot-layers
 
-#' @name stat-biplot-ellipse
 #' @inheritParams ggplot2::stat_ellipse
 #' @template param-stat
-#' @example inst/examples/iris-prcomp-center-ellipse.r
-NULL
+#' @example inst/examples/ex-stat-ellipse-iris.r
 
-#' @rdname stat-biplot-ellipse
-#' @usage NULL
+#' @rdname biplot-stats
 #' @export
-StatUEllipse <- ggproto(
-  "StatUEllipse", StatEllipse,
-  
-  setup_data = setup_u_data
-)
-
-#' @rdname stat-biplot-ellipse
-#' @usage NULL
-#' @export
-StatVEllipse <- ggproto(
-  "StatVEllipse", StatEllipse,
-  
-  setup_data = setup_v_data
-)
-
-#' @rdname stat-biplot-ellipse
-#' @export
-stat_u_ellipse <- function(
+stat_rows_ellipse <- function(
   mapping = NULL, data = NULL, geom = "path", position = "identity",
   show.legend = NA,
   inherit.aes = TRUE,
@@ -44,7 +24,7 @@ stat_u_ellipse <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = StatUEllipse,
+    stat = StatRowsEllipse,
     geom = geom, 
     position = position,
     show.legend = show.legend,
@@ -59,9 +39,9 @@ stat_u_ellipse <- function(
   )
 }
 
-#' @rdname stat-biplot-ellipse
+#' @rdname biplot-stats
 #' @export
-stat_v_ellipse <- function(
+stat_cols_ellipse <- function(
   mapping = NULL, data = NULL, geom = "path", position = "identity",
   show.legend = NA,
   inherit.aes = TRUE,
@@ -73,7 +53,7 @@ stat_v_ellipse <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = StatVEllipse,
+    stat = StatColsEllipse,
     geom = geom, 
     position = position,
     show.legend = show.legend,
@@ -87,3 +67,23 @@ stat_v_ellipse <- function(
     )
   )
 }
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsEllipse <- ggproto(
+  "StatRowsEllipse", StatEllipse,
+  
+  setup_data = setup_rows_data
+)
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsEllipse <- ggproto(
+  "StatColsEllipse", StatEllipse,
+  
+  setup_data = setup_cols_data
+)

@@ -38,26 +38,29 @@ Suggests:
     igraph,
     igraphdata,
     heplots,
+    cooccur,
+    proxy,
     knitr,
     rmarkdown
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Collate: 
+    'aaa-.r'
+    'biplot-geoms.r'
     'biplot-gg.r'
     'biplot-key.r'
+    'biplot-stats.r'
     'data.r'
     'dplyr-verbs.r'
     'format.r'
-    'fortify.r'
     'utils.r'
     'ord-accessors.r'
     'ord-augmentation.r'
     'ord-conference.r'
-    'ord-alignment.r'
     'ord-tbl.r'
-    'fun-eigen-svd.r'
     'fun-lda.r'
     'fun-lra.r'
+    'fun-wrap.r'
     'geom-isolines.r'
     'geom-axis-labels.r'
     'geom-axis-ticks.r'
@@ -70,7 +73,6 @@ Collate:
     'geom-text.r'
     'geom-unit-circle.r'
     'geom-vector.r'
-    'masks.r'
     'methods-ca.r'
     'methods-cmds.r'
     'methods-eigen.r'
@@ -84,9 +86,9 @@ Collate:
     'methods-svd.r'
     'ord-annotation.r'
     'ord-supplementation.r'
+    'ord-tidiers.r'
     'ordr.r'
     'plot.r'
-    'reconstruct.r'
     'stat-center.r'
     'stat-chull.r'
     'stat-ellipse.r'

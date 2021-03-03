@@ -2,45 +2,29 @@
 % Please edit documentation in R/ord-augmentation.r
 \name{augmentation}
 \alias{augmentation}
-\alias{augmentation_u}
-\alias{augmentation_v}
+\alias{augmentation_rows}
+\alias{augmentation_cols}
 \alias{augmentation_factor}
-\alias{augmentation.tbl_ord}
 \alias{augmentation_coord}
-\alias{augment.tbl_ord}
-\alias{augment_u}
-\alias{augment_v}
-\alias{augment_coord}
-\title{Augment metadata on the factors and coordinates of tbl_ords}
+\alias{augment_ord}
+\title{Augment factors and coordinates of tbl_ords}
 \usage{
-augmentation_u(x)
+augmentation_rows(x)
 
-augmentation_v(x)
+augmentation_cols(x)
 
 augmentation_factor(x, .matrix)
 
-augmentation.tbl_ord(x, .matrix)
-
 augmentation_coord(x)
 
-\method{augment}{tbl_ord}(x, data, .matrix = "uv", ...)
-
-augment_u(x)
-
-augment_v(x)
-
-augment_coord(x)
+augment_ord(x, .matrix = "dims")
 }
 \arguments{
-\item{x}{A \link{tbl_ord}, or an ordination object coercible to one.}
+\item{x}{An object of class '\link{tbl_ord}'.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
-
-\item{data}{Passed to \code{\link[generics:augment]{generics::augment()}}; currently ignored.}
-
-\item{...}{Additional arguments from \code{\link[base:matrix]{base::as.matrix()}}; ignored.}
+standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 }
 \description{
 These functions return data associated with the cases,
@@ -49,95 +33,20 @@ object.
 }
 \details{
 The \verb{augmentation_*()} methods produce \link[tibble:tibble]{tibble}s of values
-associated with the rows, columns, and coordinates of a \link{tbl_ord} object. The
-first field of each tibble is \code{.name}, which contains the case, variable, or
-coordinate names. Additional fields contain information about the cases,
-variables, or coordinates extracted from the original ordination object.
+associated with the rows, columns, and artificial coordinates of an object of
+class '\link{tbl_ord}'. The first field of each tibble is \code{.name}, which contains
+the row, column, or coordinate names. Additional fields contain information
+about the rows, columns, or coordinates extracted from the ordination object.
 
-The \verb{augment_*()} functions return the ordination with either or both factors
-annotated with the result of \verb{augmentation_*()}. In this way \verb{augment_*()}
-works like \code{\link[generics:augment]{generics::augment()}} by extracting information for a tidy summary
-of the components, but it differs in returning an annotated tbl_ord rather
-than a \link[tibble:tbl_df-class]{tbl_df}. The advantage of implementing separate
-methods for the different components is that more information contained in
-the original object becomes accessible to the user. To achieve a result
-similar to that of \code{\link[generics:augment]{generics::augment()}}, use \code{\link[=fortify]{fortify()}}.
+The function \code{augment_ord()} returns the ordination with either or both
+matrix factors annotated with the result of \verb{augmentation_*()}. In this way
+\code{augment_ord()} works like \code{\link[generics:augment]{generics::augment()}}, as popularized by the
+\strong{broom} package, by extracting information about the rows and columns, but
+it differs in returning an annotated tbl_ord rather than a
+\link[tibble:tbl_df-class]{'tbl_df'}. The advantage of implementing separate methods
+for the rows, columns, and artificial coordinates is that more information
+contained in the original object becomes accessible to the user.
 }
-\examples{
-# Linear regression on marine ecosystem data
-# Adapt Exhibit 2.3 in Greenacre (2010)
-data(bioenv)
-bioenv \%>\%
-  transform(
-    x = as.vector(scale(Depth)),
-    y = as.vector(scale(Pollution))
-  ) \%>\%
-  lm(formula = d ~ x + y) \%>\%
-  as_tbl_ord() \%>\%
-  augment() \%>\%
-  print() -> bioenv_lm
-bioenv_lm \%>\%
-  ggbiplot(aes(x = x, y = y, color = .fit, alpha = .wt.res ^ 2)) +
-  theme_bw() +
-  scale_color_distiller(type = "div", palette = 1) +
-  scale_alpha_continuous(range = c(1/3, 1)) +
-  geom_u_point() +
-  geom_v_vector() +
-  geom_v_isolines(aes(intercept = `(Intercept)`), axes = 1, by = 5) +
-  labs(x = "Standardized Depth", y = "Standardized Pollution") +
-  ggtitle(
-    "Gradient vector and contour lines for species 'd'",
-    "Regression plane: standardized depth-pollution space"
-  )
-# Confer inertia in CA between rows and columns of benthic sample data
-data(benthos)
-benthos \%>\%
-  ca::ca() \%>\%
-  as_tbl_ord() \%>\%
-  print() -> benthos_ca
-# Reproduce Exhibit 8.3
-benthos_ca \%>\%
-  confer_inertia("colprincipal") \%>\%
-  ggbiplot(aes(label = .name)) +
-  theme_bw() +
-  geom_u_point(color = "brown", size = 1) +
-  geom_v_text(color = "darkgreen")
-# Reproduce Exhibit 8.4
-benthos_ca \%>\%
-  augment(.matrix = "u") \%>\%
-  transmute_u(mass = .mass, sqrt_mass = sqrt(.mass)) \%>\%
-  confer_inertia("colprincipal") \%>\%
-  ggbiplot(aes(label = .name), scale_u = "sqrt_mass") +
-  theme_bw() +
-  geom_u_vector(color = "brown", arrow = NULL) +
-  geom_u_point(aes(size = mass), color = "brown", shape = 17) +
-  scale_size_continuous(range = c(1, 4), guide = "none") +
-  geom_u_text(
-    stat = "chull",
-    color = "brown", hjust = "outward", vjust = "outward"
-  ) +
-  geom_v_point(color = "darkgreen") +
-  geom_v_text_repel(color = "darkgreen", min.segment.length = 2)
-# Interpreting (k-means) clusters as ordinations on the Motor Trends data
-mtcars \%>\%
-  scale() \%>\%
-  kmeans(centers = 3) \%>\%
-  as_tbl_ord() \%>\%
-  augment() \%>\%
-  print() -> mtcars_kmeans
-mtcars_kmeans \%>\%
-  augment_coord() \%>\%
-  transform(.sdev = sqrt(.withinss / .size)) \%>\%
-  print() -> mtcars_coord
-# discriminate between clusters 1 and 2
-mtcars_kmeans \%>\%
-  ggbiplot(color = factor(.cluster)) +
-  geom_jitter(stat = "u", aes(shape = .cluster), width = .2, height = .2) +
-  geom_v_vector(aes(color = `3`)) +
-  scale_color_distiller(type = "div", limits = c(-1, 1)) +
-  geom_v_text_radiate(aes(label = .name)) +
-  ggtitle(
-    "Performance and design variable loadings onto clusters 1 and 2",
-    "Color indicates loadings onto cluster 3"
-  )
+\seealso{
+\link{tidiers} and \link{annotation} methods that interface with augmentation.
 }

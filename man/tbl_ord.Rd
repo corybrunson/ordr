@@ -15,7 +15,7 @@ as_tbl_ord(x)
 
 \method{as_tbl_ord}{tbl_ord}(x)
 
-make_tbl_ord(u = NULL, v = NULL, ...)
+make_tbl_ord(rows = NULL, cols = NULL, ...)
 
 is_tbl_ord(x)
 
@@ -28,7 +28,7 @@ un_tbl_ord(x)
 \arguments{
 \item{x}{An ordination object.}
 
-\item{u, v}{Matrices to be used as factors of a tbl_ord.}
+\item{rows, cols}{Matrices to be used as factors of a tbl_ord.}
 
 \item{...}{Additional elements of a custom tbl_ord.}
 }
@@ -54,7 +54,7 @@ same column names.
 
 \code{is_tbl_ord()} checks an object \code{x} for the tbl_ord class; \code{valid_tbl_ord()}
 additionally checks for consistency between \code{recover_coord(x)} and the
-columns of \code{recover_u(x)} and \code{recover_v(x)}, using the \link{accessors}.
+columns of \code{recover_rows(x)} and \code{recover_cols(x)}, using the \link{accessors}.
 \code{un_tbl_ord()} removes attributes associated with the tbl_ord class in order
 to restore an object that was originally passed to \code{as_tbl_ord}.
 }

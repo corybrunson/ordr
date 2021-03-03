@@ -3,60 +3,60 @@
 \name{dplyr-verbs}
 \alias{dplyr-verbs}
 \alias{pull_factor}
-\alias{pull_u}
-\alias{pull_v}
-\alias{rename_u}
-\alias{rename_v}
-\alias{select_u}
-\alias{select_v}
-\alias{mutate_u}
-\alias{mutate_v}
-\alias{transmute_u}
-\alias{transmute_v}
-\alias{bind_cols_u}
-\alias{bind_cols_v}
-\alias{left_join_u}
-\alias{left_join_v}
+\alias{pull_rows}
+\alias{pull_cols}
+\alias{rename_rows}
+\alias{rename_cols}
+\alias{select_rows}
+\alias{select_cols}
+\alias{mutate_rows}
+\alias{mutate_cols}
+\alias{transmute_rows}
+\alias{transmute_cols}
+\alias{bind_cols_rows}
+\alias{bind_cols_cols}
+\alias{left_join_rows}
+\alias{left_join_cols}
 \title{\strong{dplyr} verbs for tbl_ord factors}
 \usage{
 pull_factor(.data, var = -1, .matrix)
 
-pull_u(.data, var = -1)
+pull_rows(.data, var = -1)
 
-pull_v(.data, var = -1)
+pull_cols(.data, var = -1)
 
-rename_u(.data, ...)
+rename_rows(.data, ...)
 
-rename_v(.data, ...)
+rename_cols(.data, ...)
 
-select_u(.data, ...)
+select_rows(.data, ...)
 
-select_v(.data, ...)
+select_cols(.data, ...)
 
-mutate_u(.data, ...)
+mutate_rows(.data, ...)
 
-mutate_v(.data, ...)
+mutate_cols(.data, ...)
 
-transmute_u(.data, ...)
+transmute_rows(.data, ...)
 
-transmute_v(.data, ...)
+transmute_cols(.data, ...)
 
-bind_cols_u(.data, ...)
+bind_cols_rows(.data, ...)
 
-bind_cols_v(.data, ...)
+bind_cols_cols(.data, ...)
 
-left_join_u(.data, ...)
+left_join_rows(.data, ...)
 
-left_join_v(.data, ...)
+left_join_cols(.data, ...)
 }
 \arguments{
-\item{.data}{A \link{tbl_ord} object.}
+\item{.data}{An object of class '\link{tbl_ord}'.}
 
 \item{var}{A variable specified as in \code{\link[dplyr:pull]{dplyr::pull()}}.}
 
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"u"}, \code{"v"}, and \code{"uv"}.}
+standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 
 \item{...}{Comma-separated unquoted expressions as in, e.g.,
 \code{\link[dplyr:select]{dplyr::select()}}.}
@@ -70,89 +70,4 @@ rely on a common workhorse function, which takes the composition of the
 variables corresponding to coordinates or already annotated, and only then
 assigns it as the new \code{"*_annotation"} attribute of \code{.data} (see
 \link{annotation}).
-}
-\examples{
-# Unscaled PCA and two-scaled biplot of Anderson iris data
-iris[, -5] \%>\%
-  princomp() \%>\%
-  as_tbl_ord() \%>\%
-  confer_inertia(1) \%>\%
-  mutate_u(species = iris$Species) \%>\%
-  mutate_v(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
-  print() -> iris_pca
-iris_pca \%>\%
-  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_point() +
-  geom_v_vector(color = "#444444") +
-  geom_v_text_radiate(aes(label = measure), color = "#444444") +
-  ggtitle(
-    "Row-principal unscaled PCA biplot of Anderson iris data",
-    "Variable loadings scaled to secondary axes"
-  ) +
-  expand_limits(y = c(-1, 3.5))
-# Confer inertia in CA between rows and columns of benthic sample data
-data(benthos)
-benthos \%>\%
-  ca::ca() \%>\%
-  as_tbl_ord() \%>\%
-  print() -> benthos_ca
-# Reproduce Exhibit 8.3
-benthos_ca \%>\%
-  confer_inertia("colprincipal") \%>\%
-  ggbiplot(aes(label = .name)) +
-  theme_bw() +
-  geom_u_point(color = "brown", size = 1) +
-  geom_v_text(color = "darkgreen")
-# Reproduce Exhibit 8.4
-benthos_ca \%>\%
-  augment(.matrix = "u") \%>\%
-  transmute_u(mass = .mass, sqrt_mass = sqrt(.mass)) \%>\%
-  confer_inertia("colprincipal") \%>\%
-  ggbiplot(aes(label = .name), scale_u = "sqrt_mass") +
-  theme_bw() +
-  geom_u_vector(color = "brown", arrow = NULL) +
-  geom_u_point(aes(size = mass), color = "brown", shape = 17) +
-  scale_size_continuous(range = c(1, 4), guide = "none") +
-  geom_u_text(
-    stat = "chull",
-    color = "brown", hjust = "outward", vjust = "outward"
-  ) +
-  geom_v_point(color = "darkgreen") +
-  geom_v_text_repel(color = "darkgreen", min.segment.length = 2)
-# state abbreviations
-state <- data.frame(
-  .name = state.name,
-  .abb = state.abb
-)
-# Log-ratio analysis of 1973 violent crime arrests in the United States
-USArrests \%>\%
-  subset(select = -UrbanPop) \%>\%
-  lra() \%>\%
-  print() -> arrests_lra
-arrests_lra \%>\%
-  as_tbl_ord() \%>\%
-  augment() \%>\%
-  left_join_u(state, by = ".name") \%>\%
-  print() -> arrests_lra
-# Adapt Exhibit 7.1 in Greenacre (2010)
-arrests_lra \%>\%
-  confer_inertia(1) \%>\%
-  ggbiplot(sec.axes = "v", scale.factor = 1/20) +
-  theme_bw() +
-  geom_u_text(
-    aes(label = .abb),
-    size = 3, color = "darkgreen", alpha = .5
-  ) +
-  geom_v_polygon(fill = NA, linetype = "dashed", color = "brown4") +
-  geom_v_text(
-    aes(label = .name),
-    color = "brown4", fontface = "bold"
-  ) +
-  ggtitle(
-    "Log-ratio analysis of violent crime arrest rates",
-    "United States, 1973"
-  ) +
-  guides(color = FALSE, size = FALSE)
 }

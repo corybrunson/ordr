@@ -3,24 +3,21 @@
 \name{methods-prcomp}
 \alias{methods-prcomp}
 \alias{as_tbl_ord.prcomp}
-\alias{reconstruct.prcomp}
-\alias{recover_u.prcomp}
-\alias{recover_v.prcomp}
+\alias{recover_rows.prcomp}
+\alias{recover_cols.prcomp}
 \alias{recover_inertia.prcomp}
 \alias{recover_coord.prcomp}
 \alias{recover_conference.prcomp}
-\alias{augmentation_u.prcomp}
-\alias{augmentation_v.prcomp}
+\alias{augmentation_rows.prcomp}
+\alias{augmentation_cols.prcomp}
 \alias{augmentation_coord.prcomp}
 \title{Functionality for principal components analysis ('prcomp') objects}
 \usage{
 \method{as_tbl_ord}{prcomp}(x)
 
-\method{reconstruct}{prcomp}(x)
+\method{recover_rows}{prcomp}(x)
 
-\method{recover_u}{prcomp}(x)
-
-\method{recover_v}{prcomp}(x)
+\method{recover_cols}{prcomp}(x)
 
 \method{recover_inertia}{prcomp}(x)
 
@@ -28,9 +25,9 @@
 
 \method{recover_conference}{prcomp}(x)
 
-\method{augmentation_u}{prcomp}(x)
+\method{augmentation_rows}{prcomp}(x)
 
-\method{augmentation_v}{prcomp}(x)
+\method{augmentation_cols}{prcomp}(x)
 
 \method{augmentation_coord}{prcomp}(x)
 }
@@ -42,105 +39,47 @@ These methods extract data from, and attribute new data to,
 objects of class \code{"prcomp"} as returned by \code{\link[stats:prcomp]{stats::prcomp()}}.
 }
 \examples{
-# Confer PCA weights and inertia between cases and variables
-data(country_attributes)
-country_attributes \%>\%
-  prcomp() \%>\%
-  as_tbl_ord() \%>\%
-  print() -> attributes_pca
-# form biplot
-attributes_pca \%>\%
-  ggbiplot(
-    aes(label = .name),
-    sec.axes = "v", scale.factor = dim_v(attributes_pca)
-  ) +
-  theme_bw() + theme(panel.grid = element_blank()) +
-  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
-  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
-  geom_v_text(
-    aes(x = PC1, y = PC2),
-    color = "darkred", hjust = "outward", vjust = "outward"
-  )
-# covariance biplot
-attributes_pca \%>\%
-  confer_inertia(0) \%>\%
-  ggbiplot(
-    aes(label = .name),
-    sec.axes = "u", scale.factor = dim_u(attributes_pca)
-  ) +
-  theme_bw() + theme(panel.grid = element_blank()) +
-  geom_u_text(aes(x = PC1, y = PC2), color = "seagreen") +
-  geom_v_vector(aes(x = PC1, y = PC2), color = "darkred") +
-  geom_v_text_repel(aes(x = PC1, y = PC2), color = "darkred")
-# Scaled PCA of Anderson iris data with annotated biplot
+# data frame of Anderson iris species measurements
+class(iris)
+head(iris)
+# compute scaled row-principal components of scaled measurements
 iris[, -5] \%>\%
   prcomp(scale = TRUE) \%>\%
   as_tbl_ord() \%>\%
-  confer_inertia(1) \%>\%
-  mutate_u(species = iris$Species) \%>\%
   print() -> iris_pca
+# bind species classification to observation coordinates
+(iris_pca <- mutate_rows(iris_pca, species = iris$Species))
+# recover observation principal coordinates and measurement standard coordinates
+head(get_rows(iris_pca))
+get_cols(iris_pca)
+# augment measurements with names and scaling parameters
+augment_ord(iris_pca)
+# summarize principal components
+tidy(iris_pca)
+# fortification of artificial coordinates yields proportion of variance measure
+fortify(iris_pca, .matrix = "coord")
+# scree plot of inertia
+ggplot(iris_pca, .matrix = "coord", aes(x = .name, y = .inertia)) +
+  theme_bw() +
+  geom_bar(stat = "identity") +
+  labs(x = "", y = "Inertia")
+# scree plot of proportion of variance (inertia)
+ggplot(iris_pca, .matrix = "coord", aes(x = .name, y = .prop_var)) +
+  theme_bw() +
+  scale_y_continuous(labels = scales::percent) +
+  geom_bar(stat = "identity") +
+  labs(x = "", y = "Proportion of inertia")
+# fortification adds all above columns
+fortify(iris_pca)
+# row-principal biplot
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_point(alpha = .5) +
-  stat_u_center(fun.center = "mean", size = 3, shape = "triangle") +
-  stat_u_ellipse(level = .99) +
-  geom_v_vector(color = "#444444") +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
-    "Overlaid with centroids and 99\% confidence ellipses"
-  )
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  geom_u_point() +
-  stat_u_center(fun.center = "mean", size = 3, shape = 1) +
-  geom_polygon(
-    aes(fill = species),
-    color = NA, alpha = .25, stat = "u_ellipse"
-  ) +
-  geom_v_vector(color = "#444444") +
-  scale_color_brewer(
-    type = "qual", palette = 2,
-    aesthetics = c("color", "fill")
-  ) +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
-    "Overlaid with 99\% confidence disks"
-  )
-# Scaled PCA of Anderson iris data with ranges and confidence intervals
-iris[, -5] \%>\%
-  prcomp(scale = TRUE) \%>\%
-  as_tbl_ord() \%>\%
-  confer_inertia(1) \%>\%
-  mutate_u(species = iris$Species) \%>\%
-  print() -> iris_pca
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_lineranges(fun.data = mean_sdl, size = .75) +
-  geom_u_point(alpha = .5) +
-  geom_v_vector(color = "#444444") +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
-    "Ranges 2 sample standard deviations from centroids"
-  )
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_lineranges(
-    fun.data = mean_cl_boot, fun.args = list(conf.int = .99),
-    size = .75
-  ) +
-  geom_u_point(alpha = .5) +
-  geom_v_vector(color = "#444444") +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
-    "99\% confidence intervals based on nonparametric bootstrap sampling"
-  )
+  geom_rows_point(alpha = .5) +
+  geom_cols_vector(color = "#444444") +
+  geom_cols_text_radiate(aes(label = .name), color = "#444444") +
+  ggtitle("Row-principal PCA biplot of Anderson iris measurements")
 }
 \author{
 Emily Paul

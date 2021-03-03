@@ -2,93 +2,74 @@
 % Please edit documentation in R/methods-cmds.r
 \name{methods-cmds}
 \alias{methods-cmds}
-\alias{as_tbl_ord.cmds}
-\alias{reconstruct.cmds}
-\alias{recover_u.cmds}
-\alias{recover_v.cmds}
-\alias{recover_inertia.cmds}
-\alias{recover_coord.cmds}
-\alias{recover_conference.cmds}
-\alias{augmentation_u.cmds}
-\alias{augmentation_v.cmds}
-\alias{augmentation_coord.cmds}
+\alias{as_tbl_ord.cmds_ord}
+\alias{recover_rows.cmds_ord}
+\alias{recover_cols.cmds_ord}
+\alias{recover_inertia.cmds_ord}
+\alias{recover_coord.cmds_ord}
+\alias{recover_conference.cmds_ord}
+\alias{augmentation_rows.cmds_ord}
+\alias{augmentation_cols.cmds_ord}
+\alias{augmentation_coord.cmds_ord}
 \title{Functionality for classical multidimensional scaling objects}
 \usage{
-\method{as_tbl_ord}{cmds}(x)
+\method{as_tbl_ord}{cmds_ord}(x)
 
-\method{reconstruct}{cmds}(x)
+\method{recover_rows}{cmds_ord}(x)
 
-\method{recover_u}{cmds}(x)
+\method{recover_cols}{cmds_ord}(x)
 
-\method{recover_v}{cmds}(x)
+\method{recover_inertia}{cmds_ord}(x)
 
-\method{recover_inertia}{cmds}(x)
+\method{recover_coord}{cmds_ord}(x)
 
-\method{recover_coord}{cmds}(x)
+\method{recover_conference}{cmds_ord}(x)
 
-\method{recover_conference}{cmds}(x)
+\method{augmentation_rows}{cmds_ord}(x)
 
-\method{augmentation_u}{cmds}(x)
+\method{augmentation_cols}{cmds_ord}(x)
 
-\method{augmentation_v}{cmds}(x)
-
-\method{augmentation_coord}{cmds}(x)
+\method{augmentation_coord}{cmds_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
 }
 \description{
 These methods extract data from, and attribute new data to,
-objects of class \code{"cmds"}. This is a class introduced in this package to
-identify objects returned by \code{\link[stats:cmdscale]{stats::cmdscale()}}, which is masked by a
-wrapper that adds the class attribute.
+objects of class \code{"cmds_ord"}. This is a class introduced in this package
+to identify objects returned by \code{\link[=cmdscale_ord]{cmdscale_ord()}}, which wraps
+\code{\link[stats:cmdscale]{stats::cmdscale()}}.
 }
 \examples{
-# Multidimensional scaling of country differences and regression of attributes
-# Reproduce Exhibit 4.2 in Greenacre (2010)
-data(country_differences)
-country_differences \%>\%
-  cmdscale(k = 2) \%>\%
+# 'dist' object (matrix of road distances) of large American cities
+class(UScitiesD)
+print(UScitiesD)
+# use multidimensional scaling to infer artificial planar coordinates
+UScitiesD \%>\%
+  cmdscale_ord(k = 2) \%>\%
   as_tbl_ord() \%>\%
-  print() -> differences_cmds
-differences_plot <- differences_cmds \%>\%
-  ggbiplot(aes(x = 1, y = 2, label = .name)) +
-  geom_v_text()
-differences_plot
-# Reproduce Exhibit 4.5 in Greenacre (2010)
-data(country_attributes)
-lm(country_attributes ~ get_u(differences_cmds)) \%>\%
-  as_tbl_ord() \%>\%
-  print() -> attributes_fit
-differences_plot +
-  geom_v_vector(data = attributes_fit) +
-  geom_v_text_radiate(data = attributes_fit, hjust = .3)
-# Align an MDS ordination to a PCA ordination
-data(country_differences)
-country_differences \%>\%
-  cmdscale(k = 2) \%>\%
-  as_tbl_ord() \%>\%
-  print() -> differences_cmds
-country_differences \%>\%
-  prcomp() \%>\%
-  as_tbl_ord() \%>\%
-  print() -> differences_pca
-# negate PCA cases to MDS coordinates
-differences_cmds \%>\%
-  negate_to(differences_pca, "u") \%>\%
-  print() -> differences_align_u
-plot(gridExtra::arrangeGrob(grobs = list(
-  ggbiplot(differences_cmds) + geom_u_point(),
-  ggbiplot(differences_pca) + geom_u_point(),
-  ggbiplot(differences_align_u) + geom_u_point()
-), ncol = 3))
-# negate PCA variables to MDS coordinates
-differences_cmds \%>\%
-  negate_to(differences_pca, "v") \%>\%
-  print() -> differences_align_v
-plot(gridExtra::arrangeGrob(grobs = list(
-  ggbiplot(differences_cmds) + geom_v_vector(),
-  ggbiplot(differences_pca) + geom_v_vector(),
-  ggbiplot(differences_align_v) + geom_v_vector()
-), ncol = 3))
+  print() -> usa_mds
+# recover (equivalent) matrices of row and column artificial coordinates
+get_rows(usa_mds)
+get_cols(usa_mds)
+# augment ordination with point names
+augment_ord(usa_mds)
+# summarize artifical coordinates
+tidy(usa_mds)
+# fortification of artificial coordinates yields proportion of variance
+fortify(usa_mds, .matrix = "coord")
+# scree plot of inertia
+ggplot(usa_mds, .matrix = "coord", aes(x = .name, y = .inertia)) +
+  theme_bw() +
+  geom_bar(stat = "identity") +
+  labs(x = "", y = "Inertia")
+# fortification automatically augments artificial coordinates
+fortify(usa_mds)
+# reorient biplot to conventional compass
+usa_mds \%>\%
+  ggbiplot() +
+  scale_x_reverse() +
+  scale_y_reverse() +
+  geom_cols_text(aes(label = .name), size = 3) +
+  ggtitle("MDS biplot of distances between U.S. cities")
 }

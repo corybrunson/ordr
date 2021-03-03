@@ -12,7 +12,7 @@
 #' [ggplot2::ggplot()] returns:
 #' 
 #' - `p$mapping` is augmented with `.matrix = .matrix`, which expects either
-#' `.matrix = "u"` or `.matrix = "v"` from the biplot.
+#' `.matrix = "rows"` or `.matrix = "cols"` from the biplot.
 
 #' - `p$coordinates` is defaulted to [ggplot2::coord_equal()] in order to
 #' faithfully render the geometry of an ordination. The optional parameters
@@ -52,16 +52,15 @@
 #' @param sec.axes Matrix factor character to specify a secondary set of axes.
 #' @param scale.factor Numeric value used to scale the secondary axes against
 #'   the primary axes; ignored if `sec.axes` is not specified.
-#' @param scale_u,scale_v Either the character name of a numeric variable in
-#'   `get_*(ordination)` or a numeric vector of length
-#'   `nrow(get_*(ordination))`, used to scale the coordinates of \eqn{U} or
-#'   \eqn{V}, respectively.
+#' @param scale_rows,scale_cols Either the character name of a numeric variable
+#'   in `get_*(ordination)` or a numeric vector of length
+#'   `nrow(get_*(ordination))`, used to scale the coordinates of the matrix
+#'   factors.
 #' @param ... Additional arguments passed to [ggplot2::fortify()]; see
 #'   [fortify.tbl_ord()].
-#' @example inst/examples/mtcars-lm-isolines.r
-#' @example inst/examples/iris-princomp-secondary.r
-#' @example inst/examples/finches-lpca-secondary.r
-#' @seealso [ggplot2::ggplot2()]
+#' @example inst/examples/ex-biplot-secaxis-iris.r
+#' @example inst/examples/ex-biplot-lm-mtcars.r
+#' @seealso [ggplot2::ggplot2()], on which `ggbiplot()` is built.
 
 #' @rdname ggbiplot
 #' @export
@@ -69,7 +68,7 @@ ggbiplot <- function(
   ordination = NULL, mapping = aes(x = 1, y = 2),
   xlim = NULL, ylim = NULL, expand = TRUE, clip = "on",
   axis.percents = TRUE, sec.axes = NULL, scale.factor = NULL,
-  scale_u = NULL, scale_v = NULL,
+  scale_rows = NULL, scale_cols = NULL,
   ...
 ) {
   if (axis.percents) {
@@ -86,12 +85,12 @@ ggbiplot <- function(
   # augment `mapping`, if necessary, with default coordinates
   mapping <- ensure_xy_aes(ordination, mapping)
   
-  # scale 'U' or 'V' as indicated by `scale_u` and `scale_v`
-  if (! is.null(scale_u) && ! is.null(ordination)) {
-    ordination <- scale_ord(ordination, "u", mapping, scale_u)
+  # scale 'rows' or 'cols' as indicated by `scale_rows` and `scale_cols`
+  if (! is.null(scale_rows) && ! is.null(ordination)) {
+    ordination <- scale_ord(ordination, "rows", mapping, scale_rows)
   }
-  if (! is.null(scale_v) && ! is.null(ordination)) {
-    ordination <- scale_ord(ordination, "v", mapping, scale_v)
+  if (! is.null(scale_cols) && ! is.null(ordination)) {
+    ordination <- scale_ord(ordination, "cols", mapping, scale_cols)
   }
   
   # if `sec.axes` is specified, then fortify `ordination` and
@@ -99,10 +98,10 @@ ggbiplot <- function(
   if (! is.null(sec.axes)) {
     
     sec.axes <- match_factor(sec.axes)
-    if (! sec.axes %in% c("u", "v")) {
-      stop("Select one matrix factor, 'u' or 'v', to scale to secondary axes.")
+    if (! sec.axes %in% c("rows", "cols")) {
+      stop("Select one matrix factor, 'rows' or 'cols', to scale to secondary axes.")
     }
-    pri.axes <- setdiff(c("u", "v"), sec.axes)
+    pri.axes <- setdiff(c("rows", "cols"), sec.axes)
     
     if (is.null(scale.factor) && ! is.null(ordination)) {
       ps_lim <- lapply(c(pri.axes, sec.axes), function(.m) {

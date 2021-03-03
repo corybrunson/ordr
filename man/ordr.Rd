@@ -16,17 +16,14 @@ the extensions \strong{ggbiplot} and \strong{tidygraph}.
 
 The package consists in several modules:
 \itemize{
-\item the \link{tbl_ord} class, a wrapper for various ordination object classes
+\item the '\link{tbl_ord}' class, a wrapper for various ordination object classes
 \item extracting \link{augmentation} for the factors of an ordination
-\item using \link{dplyr-verbs} to add \link{annotation} to the factors of an ordination
-\item manipulating the coordinates of an ordination via \link{alignment} with other
-objects and \link{conference} of inertia
-\item methods of the above generics for several widely-used ordination object
-classes
-\item convenient \link[=format]{formatting} of ordination objects that respects the above
-manipulations
-\item \link{ggbiplot}, a \strong{ggplot2} extension for rendering biplots, including
-several plot layers, integrated with the tbl_ord class
+\item using \link{dplyr-verbs} to add \link{annotation} to the factors
+\item adjusting the \link{conference} of inertia between the factors
+\item methods of the above generics for several widely-used object classes
+\item convenient \link[=format]{formatting} of ordination objects
+\item \code{\link[=ggbiplot]{ggbiplot()}}, a \strong{ggplot2} extension for rendering biplots
+\item additional \link[=biplot-stats]{stats} and \link[=biplot-geoms]{geoms} for biplots
 }
 }
 \section{Ordinations and biplots}{

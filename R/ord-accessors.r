@@ -6,47 +6,43 @@
 
 #' @details
 #'
-#' The `recover_*()` functions extract one or both of the matrix factors
-#' \eqn{U,V} that constitute the original ordination. These are interpreted as
-#' the case scores (\eqn{U}) and the variable loadings (\eqn{V}). The `get_*()`
-#' functions optionally (and by default) apply any alignment stored as the
-#' `"align"` attribute (see [alignment]). Only the `recover_*()` functions are
-#' generics that require methods for each ordination class.
+#' The `recover_*()` functions extract one or both of the row and column matrix
+#' factors that constitute the original ordination. These are interpreted as the
+#' case scores (rows) and the variable loadings (columns). The `get_*()`
+#' functions optionally (and by default) include any supplemental observations
+#' (see [supplementation]). Only the `recover_*()` functions are generics that
+#' require methods for each ordination class.
 #'
-#' `get_coord()` retrieves the names of the coordinates shared by \eqn{U} and
-#' \eqn{V}, on which the original data were ordinated, and `dim.tbl_ord()`
-#' retrieves their number, the rank of the ordination. The outer dimensions of
-#' the matrix decomposition are returned by `dim_u()` and `dim_v()`.
+#' `get_coord()` retrieves the names of the coordinates shared by the matrix
+#' factors on which the original data were ordinated, and `dim()` retrieves
+#' their number, the rank of the ordination. The outer dimensions of the matrix
+#' decomposition are returned by `dim_rows()` and `dim_cols()`.
 #' 
 
 #' @name accessors
 #' @include utils.r
-#' @param x A [tbl_ord], or an ordination object coercible to one.
+#' @param x An object of class '[tbl_ord]'.
 #' @param ... Additional arguments from [base::as.matrix()]; ignored.
 #' @template param-matrix
 #' @param .supplement Logical; whether to include
-#' @param align Logical; whether to align the matrix factors and coordinates
-#'   according to an `"align"` matrix attribute.
-#' @example inst/examples/country-cmds-lm.r
-#' @example inst/examples/country-prcomp-confer.r
 NULL
 
 #' @rdname accessors
 #' @export
-recover_u <- function(x) UseMethod("recover_u")
+recover_rows <- function(x) UseMethod("recover_rows")
 
 #' @rdname accessors
 #' @export
-recover_v <- function(x) UseMethod("recover_v")
+recover_cols <- function(x) UseMethod("recover_cols")
 
 #' @rdname accessors
 #' @export
 recover_factor <- function(x, .matrix) {
   switch(
     match_factor(.matrix),
-    u = recover_u(x),
-    v = recover_v(x),
-    uv = list(u = recover_u(x), v = recover_v(x))
+    rows = recover_rows(x),
+    cols = recover_cols(x),
+    dims = list(rows = recover_rows(x), cols = recover_cols(x))
   )
 }
 
@@ -55,31 +51,31 @@ recover_factor <- function(x, .matrix) {
 
 #' @rdname accessors
 #' @export
-recover_u.default <- function(x) x$u
+recover_rows.default <- function(x) x$u
 
 #' @rdname accessors
 #' @export
-recover_v.default <- function(x) x$v
+recover_cols.default <- function(x) x$v
 
 # for fortified tbl_ords (also coordinates?)
 
 #' @rdname accessors
 #' @export
-recover_u.data.frame <- function(x) {
-  x[x$.matrix == "u", -match(".matrix", names(x))]
+recover_rows.data.frame <- function(x) {
+  x[x$.matrix == "rows", -match(".matrix", names(x))]
 }
 
 #' @rdname accessors
 #' @export
-recover_v.data.frame <- function(x) {
-  x[x$.matrix == "v", -match(".matrix", names(x))]
+recover_cols.data.frame <- function(x) {
+  x[x$.matrix == "cols", -match(".matrix", names(x))]
 }
 
 #' @rdname accessors
 #' @export
-get_u <- function(x, .supplement = TRUE, align = TRUE) {
-  u <- recover_u(x)
-  if (.supplement) u <- rbind(u, supplementation_u(x))
+get_rows <- function(x, .supplement = TRUE) {
+  u <- recover_rows(x)
+  if (.supplement) u <- rbind(u, supplementation_rows(x))
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     s <- diag(sqrt(recover_inertia(x)) ^ p[1])
@@ -87,19 +83,14 @@ get_u <- function(x, .supplement = TRUE, align = TRUE) {
     dimnames(s) <- rep(list(recover_coord(x)), 2)
     u <- u %*% s
   }
-  if (align && ! is.null(attr(x, "align"))) {
-    r <- attr(x, "align")
-    return(u %*% r)
-  } else {
-    return(u)
-  }
+  return(u)
 }
 
 #' @rdname accessors
 #' @export
-get_v <- function(x, .supplement = TRUE, align = TRUE) {
-  v <- recover_v(x)
-  if (.supplement) v <- rbind(v, supplementation_v(x))
+get_cols <- function(x, .supplement = TRUE) {
+  v <- recover_cols(x)
+  if (.supplement) v <- rbind(v, supplementation_cols(x))
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     s <- diag(sqrt(recover_inertia(x)) ^ p[2])
@@ -107,24 +98,19 @@ get_v <- function(x, .supplement = TRUE, align = TRUE) {
     dimnames(s) <- rep(list(recover_coord(x)), 2)
     v <- v %*% s
   }
-  if (align && ! is.null(attr(x, "align"))) {
-    r <- attr(x, "align")
-    return(v %*% r)
-  } else {
-    return(v)
-  }
+  return(v)
 }
 
 #' @rdname accessors
 #' @export
-get_factor <- function(x, .matrix, .supplement = TRUE, align = TRUE) {
+get_factor <- function(x, .matrix, .supplement = TRUE) {
   switch(
     match_factor(.matrix),
-    u = get_u(x, .supplement = .supplement, align = align),
-    v = get_v(x, .supplement = .supplement, align = align),
-    uv = list(
-      u = get_u(x, .supplement = .supplement, align = align),
-      v = get_v(x, .supplement = .supplement, align = align)
+    rows = get_rows(x, .supplement = .supplement),
+    cols = get_cols(x, .supplement = .supplement),
+    dims = list(
+      rows = get_rows(x, .supplement = .supplement),
+      cols = get_cols(x, .supplement = .supplement)
     )
   )
 }
@@ -132,12 +118,12 @@ get_factor <- function(x, .matrix, .supplement = TRUE, align = TRUE) {
 #' @rdname accessors
 #' @export
 as.matrix.tbl_ord <- function(
-  x, ..., .matrix, .supplement = TRUE, align = TRUE
+  x, ..., .matrix, .supplement = TRUE
 ) {
   .matrix <- match_factor(.matrix)
-  if (.matrix == "uv")
-    stop("Can only coerce one factor ('u' or 'v') to a matrix.")
-  get_factor(x, .matrix = .matrix, .supplement = .supplement, align = align)
+  if (.matrix == "dims")
+    stop("Can only coerce one factor ('rows' or 'cols') to a matrix.")
+  get_factor(x, .matrix = .matrix, .supplement = .supplement)
 }
 
 #' @rdname accessors
@@ -155,7 +141,7 @@ recover_coord <- function(x) UseMethod("recover_coord")
 #' @rdname accessors
 #' @export
 recover_coord.default <- function(x) {
-  intersect(colnames(recover_u(x)), colnames(recover_v(x)))
+  intersect(colnames(recover_rows(x)), colnames(recover_cols(x)))
 }
 
 #' @rdname accessors
@@ -170,14 +156,8 @@ recover_coord.data.frame <- function(x) {
 
 #' @rdname accessors
 #' @export
-get_coord <- function(x, align = TRUE) {
-  if (! align || is.null(attr(x, "align"))) {
-    recover_coord(x)
-  } else if (! is.null(colnames(get_alignment(x)))) {
-    colnames(get_alignment(x))
-  } else {
-    colnames(as.data.frame(matrix(1:dim(x), nrow = 1)))
-  }
+get_coord <- function(x) {
+  recover_coord(x)
 }
 
 #' @rdname accessors
@@ -186,19 +166,19 @@ dim.tbl_ord <- function(x) length(recover_coord(x))
 
 #' @rdname accessors
 #' @export
-dim_u <- function(x) nrow(recover_u(x))
+dim_rows <- function(x) nrow(recover_rows(x))
 
 #' @rdname accessors
 #' @export
-dim_v <- function(x) nrow(recover_v(x))
+dim_cols <- function(x) nrow(recover_cols(x))
 
 #' @rdname accessors
 #' @export
 dim_factor <- function(x, .matrix) {
   switch(
     match_factor(.matrix),
-    u = dim_u(x),
-    v = dim_v(x),
-    uv = c(u = dim_u(x), v = dim_v(x))
+    rows = dim_rows(x),
+    cols = dim_cols(x),
+    dims = c(rows = dim_rows(x), cols = dim_cols(x))
   )
 }

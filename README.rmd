@@ -4,13 +4,16 @@ output: github_document
 
 <!-- edit README.rmd -->
 
-```{r knitr options, echo = FALSE}
+```{r knitr options, include=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-"
 )
+devtools::load_all()
 ```
+
+[![Travis](https://travis-ci.org/corybrunson/ordr.svg?branch=main)](https://travis-ci.org/corybrunson/ordr)
 
 # ordr
 
@@ -42,19 +45,13 @@ Instead, **ordr** provides a streamlined process by which the outputs of these m
 
 ## usage
 
-```{r attach, eval=TRUE, echo=FALSE, message=FALSE, warning=FALSE, results=FALSE}
-library(ordr)
-```
-
 ### installation
 
 **ordr** remains under development and is not scheduled for a CRAN release. For now, it can be installed from the (default) `main` branch using [**remotes**](https://github.com/r-lib/remotes):
 
 ```{r install, eval=FALSE}
-remotes::install_github("corybrunson/ordr@main")
+remotes::install_github("corybrunson/ordr")
 ```
-
-The `master` branch exists only as the required source from which to build [the website](https://corybrunson.github.io/ordr/), and will be discontinued once GitHub Pages enables building from the default branch.
 
 ### PCA example
 
@@ -68,19 +65,19 @@ USPersonalExpenditure
 # wrap the model as a `tbl_ord` object
 (spend_pca <- as_tbl_ord(spend_pca))
 # augment the cases and variables with metadata
-(spend_pca <- augment(spend_pca))
+(spend_pca <- augment_ord(spend_pca))
 # annotate the cases or variables
-(spend_pca <- mutate_v(spend_pca, year = as.integer(.name)))
+(spend_pca <- mutate_cols(spend_pca, year = as.integer(.name)))
 # confer inertia equally between cases and variables
 (spend_pca <- confer_inertia(spend_pca, c(.5, .5)))
 # render a biplot, by default on the first two shared coordinates
 ggbiplot(spend_pca, aes(label = .name)) +
   theme_bw() +
-  geom_v_vector(aes(color = year)) +
-  geom_v_text_radiate() +
-  geom_u_point() +
-  geom_u_text_repel() +
-  scale_y_continuous(expand = expand_scale(add = .5)) +
+  geom_cols_vector(aes(color = year)) +
+  geom_cols_text_radiate() +
+  geom_rows_point() +
+  geom_rows_text_repel() +
+  expand_limits(y = c(-2, 2.75)) +
   ggtitle(
     "U.S. Personal Expenditure data, 1940-1960",
     "Symmetric biplot of un-centered PCA"
@@ -90,25 +87,25 @@ ggbiplot(spend_pca, aes(label = .name)) +
 ### MDS example
 
 Multidimensional scaling (MDS) is an ordination technique that starts not with rectangular data but with interpoint distances.
-A common illustration of its power is to calculate MDS on the set of distances&mdash;however measured&mdash;between geographic locations, and to recover the approximate geography via a biplot. This example is adapted from the documentation of `cmdscale()` in the **stats** package; note that **ordr** masks `stats::cmdscale()` with a wrapper that always returns the eigenvalues and the symmetric distance matrix produced during the calculation.
-The MDS uses 11 coordinates&mdash;the number of positive eigenvalues&mdash;so that `stat_*_spanningtree()` can call upon them to recover the intercity distances.
+A common illustration of its power is to calculate MDS on the set of distances&mdash;however measured&mdash;between geographic locations, and to recover the approximate geography via a biplot. This example is adapted from the documentation of `cmdscale()` in the **stats** package; note that **ordr** provides the wrapper `cmdscale_ord()` that always returns the eigenvalues and the symmetric distance matrix produced during the calculation.
+The MDS uses 11 coordinates&mdash;the number of positive eigenvalues&mdash;so that `stat_*_spantree()` can call upon them to recover the intercity distances.
 
 ```{r MDS example}
 # `tbl_ord` object for a classical MDS on distances between European cities
 eurodist %>%
-  cmdscale(k = 11) %>%
+  cmdscale_ord(k = 11) %>%
   as_tbl_ord() %>%
-  augment() %>%
-  negate_ord(2) %>%
+  augment_ord() %>%
   print() -> city_mds
 # 2D biplot aligned with geography
 city_mds %>%
   ggbiplot() +
-  stat_v_spantree(
+  scale_y_reverse() +
+  stat_cols_spantree(
     ord_aes(city_mds), check.aes = FALSE,
     alpha = .5, linetype = "dotted"
   ) +
-  geom_v_text(aes(label = .name), size = 3) +
+  geom_cols_text(aes(label = .name), size = 3) +
   ggtitle("MDS biplot of road distances between European cities")
 ```
 

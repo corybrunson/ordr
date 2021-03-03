@@ -1,32 +1,25 @@
 #' @title Functionality for classical multidimensional scaling objects
 #'
 #' @description These methods extract data from, and attribute new data to,
-#'   objects of class `"cmds"`. This is a class introduced in this package to
-#'   identify objects returned by [stats::cmdscale()], which is masked by a
-#'   wrapper that adds the class attribute.
+#'   objects of class `"cmds_ord"`. This is a class introduced in this package
+#'   to identify objects returned by [cmdscale_ord()], which wraps
+#'   [stats::cmdscale()].
 #'
 #' @name methods-cmds
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/country-cmds-lm.r
-#' @example inst/examples/country-cmds-prcomp-negate.r
+#' @example inst/examples/ex-methods-cmds-cities.r
 NULL
 
 #' @rdname methods-cmds
 #' @export
-as_tbl_ord.cmds <- as_tbl_ord_default
+as_tbl_ord.cmds_ord <- as_tbl_ord_default
 
-#' @rdname methods-cmds
-#' @export
-reconstruct.cmds <- function(x) {
-  -2 * x$points %*% t(x$points)
-}
-
-recover_uv_cmds <- function(x, .matrix) {
+recover_dims_cmds <- function(x, .matrix) {
   .matrix <- match_factor(.matrix)
   res <- x$points
   dimnames(res) <- list(
-    dimnames(x$x)[[switch(.matrix, u = 1, v = 2)]],
+    dimnames(x$x)[[switch(.matrix, rows = 1L, cols = 2L)]],
     recover_coord(x)
   )
   res
@@ -34,30 +27,30 @@ recover_uv_cmds <- function(x, .matrix) {
 
 #' @rdname methods-cmds
 #' @export
-recover_u.cmds <- function(x) recover_uv_cmds(x, "u")
+recover_rows.cmds_ord <- function(x) recover_dims_cmds(x, "rows")
 
 #' @rdname methods-cmds
 #' @export
-recover_v.cmds <- function(x) recover_uv_cmds(x, "v")
+recover_cols.cmds_ord <- function(x) recover_dims_cmds(x, "cols")
 
 #' @rdname methods-cmds
 #' @export
-recover_inertia.cmds <- function(x) x$eig ^ 2
+recover_inertia.cmds_ord <- function(x) x$eig[seq(ncol(x$points))] ^ 2
 
 #' @rdname methods-cmds
 #' @export
-recover_coord.cmds <- function(x) paste0("PCo", 1:ncol(x$points))
+recover_coord.cmds_ord <- function(x) paste0("PCo", 1:ncol(x$points))
 
 #' @rdname methods-cmds
 #' @export
-recover_conference.cmds <- function(x) {
+recover_conference.cmds_ord <- function(x) {
   # `stats::cmdscale()` returns the approximate square root
   c(.5, .5)
 }
 
 #' @rdname methods-cmds
 #' @export
-augmentation_u.cmds <- function(x) {
+augmentation_rows.cmds_ord <- function(x) {
   .name <- rownames(x$points)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$x))
@@ -69,7 +62,7 @@ augmentation_u.cmds <- function(x) {
 
 #' @rdname methods-cmds
 #' @export
-augmentation_v.cmds <- function(x) {
+augmentation_cols.cmds_ord <- function(x) {
   .name <- rownames(x$points)
   res <- if (is.null(.name)) {
     tibble_pole(ncol(x$x))
@@ -81,7 +74,7 @@ augmentation_v.cmds <- function(x) {
 
 #' @rdname methods-cmds
 #' @export
-augmentation_coord.cmds <- function(x) {
+augmentation_coord.cmds_ord <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),
     .eig = x$eig[1:ncol(x$points)]

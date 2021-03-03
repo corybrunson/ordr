@@ -2,26 +2,19 @@ reference:
 - title: "'ordr' package"
   desc: >
     A unified framework for ordination objects and biplot methods using tidy
-    principles.
+    principles
   contents:
   - '`ordr`'
-- title: "New functions, classes, and methods"
+- title: "Functions, classes, and methods"
   desc: >
     Introducing and adapting ordination techniques for the **ordr** workflow
   contents:
-  - '`masks`'
   - ends_with("-ord")
 - title: "Data sets"
   desc: >
     Additional data sets used to illustrate ordination techniques
   contents:
-  - '`benthos`'
-  - '`bioenv`'
-  - '`countries`'
-  - '`finches`'
   - '`glass`'
-  - '`issp_women`'
-  - '`ratios`'
 - title: "Tidy ordination"
   desc: >
     The `tbl_ord` class wrapper, with methods for accessing components and for
@@ -29,12 +22,11 @@ reference:
   contents:
   - '`accessors`'
   - '`augmentation`'
+  - '`tidiers`'
   - '`annotation`'
   - '`conference`'
   - '`supplementation`'
-  - '`alignment`'
   - '`tbl_ord`'
-  - '`reconstruct`'
   - '`format`'
   - '`dplyr-verbs`'
 - title: "Layered grammar for biplots"
@@ -42,13 +34,14 @@ reference:
     Functions to generate and annotate biplots from `tbl_ord` objects, following
     the layered grammar of graphics
   contents:
-  - '`fortify`'
   - '`ggbiplot`'
-  - '`biplot-matrix`'
-  - '`geom-unit-circle`'
-  - starts_with("geom-biplot-")
-  - starts_with("stat-biplot-")
+  - 'stat_rows'
+  - has_concept("stat layers")
+  - '`geom_unit_circle`'
+  - has_concept("geom layers")
   - '`draw-key`'
+  - 'ordr-ggproto'
+  - has_concept("biplot layers")
 - title: "Class methods"
   desc: >
     Accessor and augmentation methods for ordination classes from other packages

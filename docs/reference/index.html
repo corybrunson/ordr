@@ -117,7 +117,7 @@
       <tr>
         <th colspan="2">
           <h2 id="section--ordr-package" class="hasAnchor"><a href="#section--ordr-package" class="anchor"></a>'ordr' package</h2>
-          <p class="section-desc"><p>A unified framework for ordination objects and biplot methods using tidy principles.</p></p>
+          <p class="section-desc"><p>A unified framework for ordination objects and biplot methods using tidy principles</p></p>
         </th>
       </tr>
       
@@ -135,7 +135,7 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-new-functions-classes-and-methods" class="hasAnchor"><a href="#section-new-functions-classes-and-methods" class="anchor"></a>New functions, classes, and methods</h2>
+          <h2 id="section-functions-classes-and-methods" class="hasAnchor"><a href="#section-functions-classes-and-methods" class="anchor"></a>Functions, classes, and methods</h2>
           <p class="section-desc"><p>Introducing and adapting ordination techniques for the <strong>ordr</strong> workflow</p></p>
         </th>
       </tr>
@@ -147,18 +147,6 @@
       <tr>
         
         <td>
-          <p><code><a href="masks.html">cmdscale()</a></code> <code><a href="masks.html">logisticSVD()</a></code> <code><a href="masks.html">logisticPCA()</a></code> <code><a href="masks.html">convexLogisticPCA()</a></code> </p>
-        </td>
-        <td><p>Masks of external ordination objects</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="eigen-svd-ord.html">eigen_ord()</a></code> <code><a href="eigen-svd-ord.html">svd_ord()</a></code> </p>
-        </td>
-        <td><p>Classes for workhorse matrix decompositions</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="lda-ord.html">lda_ord()</a></code> <code><a href="lda-ord.html">predict(<i>&lt;lda_ord&gt;</i>)</a></code> </p>
         </td>
         <td><p>Augmented implementation of linear discriminant analysis</p></td>
@@ -168,6 +156,12 @@
           <p><code><a href="lra-ord.html">lra()</a></code> </p>
         </td>
         <td><p>Log-ratio analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="wrap-ord.html">eigen_ord()</a></code> <code><a href="wrap-ord.html">svd_ord()</a></code> <code><a href="wrap-ord.html">cmdscale_ord()</a></code> <code><a href="wrap-ord.html">logisticSVD_ord()</a></code> <code><a href="wrap-ord.html">logisticPCA_ord()</a></code> <code><a href="wrap-ord.html">convexLogisticPCA_ord()</a></code> </p>
+        </td>
+        <td><p>Wrappers for lossy ordination methods</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -184,45 +178,9 @@
       <tr>
         
         <td>
-          <p><code><a href="benthos.html">benthos</a></code> </p>
-        </td>
-        <td><p>Marine species from sea-bed (benthic) samples</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bioenv.html">bioenv</a></code> </p>
-        </td>
-        <td><p>Multivariate marine biological and environmental data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="countries.html">country_differences</a></code> <code><a href="countries.html">country_attributes</a></code> </p>
-        </td>
-        <td><p>Student ratings of similarities and attributes of 13 countries</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="finches.html">finches</a></code> </p>
-        </td>
-        <td><p>Site-species occurrence data for Galapagos finches</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="glass.html">glass</a></code> </p>
         </td>
         <td><p>Glass composition data from archaeological sites in Israel</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="issp_women.html">issp_women</a></code> </p>
-        </td>
-        <td><p>Original respondent-level data from Spanish ISSP sample</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ratios.html">ratios</a></code> </p>
-        </td>
-        <td><p>Ingredient ratios for several basic recipes</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -239,21 +197,27 @@
       <tr>
         
         <td>
-          <p><code><a href="accessors.html">recover_u()</a></code> <code><a href="accessors.html">recover_v()</a></code> <code><a href="accessors.html">recover_factor()</a></code> <code><a href="accessors.html">get_u()</a></code> <code><a href="accessors.html">get_v()</a></code> <code><a href="accessors.html">get_factor()</a></code> <code><a href="accessors.html">as.matrix(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="accessors.html">recover_inertia()</a></code> <code><a href="accessors.html">recover_coord()</a></code> <code><a href="accessors.html">get_coord()</a></code> <code><a href="accessors.html">dim(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="accessors.html">dim_u()</a></code> <code><a href="accessors.html">dim_v()</a></code> <code><a href="accessors.html">dim_factor()</a></code> </p>
+          <p><code><a href="accessors.html">recover_rows()</a></code> <code><a href="accessors.html">recover_cols()</a></code> <code><a href="accessors.html">recover_factor()</a></code> <code><a href="accessors.html">get_rows()</a></code> <code><a href="accessors.html">get_cols()</a></code> <code><a href="accessors.html">get_factor()</a></code> <code><a href="accessors.html">as.matrix(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="accessors.html">recover_inertia()</a></code> <code><a href="accessors.html">recover_coord()</a></code> <code><a href="accessors.html">get_coord()</a></code> <code><a href="accessors.html">dim(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="accessors.html">dim_rows()</a></code> <code><a href="accessors.html">dim_cols()</a></code> <code><a href="accessors.html">dim_factor()</a></code> </p>
         </td>
         <td><p>Access factors, coordinates, and metadata from ordination objects</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="augmentation.html">augmentation_u()</a></code> <code><a href="augmentation.html">augmentation_v()</a></code> <code><a href="augmentation.html">augmentation_factor()</a></code> <code><a href="augmentation.html">augmentation.tbl_ord()</a></code> <code><a href="augmentation.html">augmentation_coord()</a></code> <code><a href="augmentation.html">augment(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="augmentation.html">augment_u()</a></code> <code><a href="augmentation.html">augment_v()</a></code> <code><a href="augmentation.html">augment_coord()</a></code> </p>
+          <p><code><a href="augmentation.html">augmentation_rows()</a></code> <code><a href="augmentation.html">augmentation_cols()</a></code> <code><a href="augmentation.html">augmentation_factor()</a></code> <code><a href="augmentation.html">augmentation_coord()</a></code> <code><a href="augmentation.html">augment_ord()</a></code> </p>
         </td>
-        <td><p>Augment metadata on the factors and coordinates of tbl_ords</p></td>
+        <td><p>Augment factors and coordinates of tbl_ords</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="annotation.html">set_annotation_u()</a></code> <code><a href="annotation.html">set_annotation_v()</a></code> <code><a href="annotation.html">annotation_u()</a></code> <code><a href="annotation.html">annotation_v()</a></code> </p>
+          <p><code><a href="tidiers.html">tidy(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="tidiers.html">glance(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="tidiers.html">fortify(<i>&lt;tbl_ord&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Annotate the factors of a tbl_ord</p></td>
+        <td><p>Tidiers for tbl_ords</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="annotation.html">set_annotation_rows()</a></code> <code><a href="annotation.html">set_annotation_cols()</a></code> <code><a href="annotation.html">annotation_rows()</a></code> <code><a href="annotation.html">annotation_cols()</a></code> </p>
+        </td>
+        <td><p>Annotate factors of tbl_ords</p></td>
       </tr><tr>
         
         <td>
@@ -263,15 +227,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="supplementation.html">supplementation_u()</a></code> <code><a href="supplementation.html">supplementation_v()</a></code> <code><a href="supplementation.html">supplementation_factor()</a></code> </p>
+          <p><code><a href="supplementation.html">supplementation_rows()</a></code> <code><a href="supplementation.html">supplementation_cols()</a></code> <code><a href="supplementation.html">supplementation_factor()</a></code> </p>
         </td>
         <td><p>Supplement ordination objects with new data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="alignment.html">get_alignment()</a></code> <code><a href="alignment.html">revert_alignment()</a></code> <code><a href="alignment.html">negate_ord()</a></code> <code><a href="alignment.html">permute_ord()</a></code> <code><a href="alignment.html">rotate_ord()</a></code> <code><a href="alignment.html">negation_to()</a></code> <code><a href="alignment.html">negate_to()</a></code> <code><a href="alignment.html">negate_to_nonneg_orthant()</a></code> <code><a href="alignment.html">permutation_to()</a></code> <code><a href="alignment.html">permute_to()</a></code> <code><a href="alignment.html">rotation_to()</a></code> <code><a href="alignment.html">rotate_to()</a></code> <code><a href="alignment.html">align_to()</a></code> </p>
-        </td>
-        <td><p>Alignment of ordinations</p></td>
       </tr><tr>
         
         <td>
@@ -281,19 +239,13 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="reconstruct.html">reconstruct()</a></code> </p>
-        </td>
-        <td><p>Reconstruct data from a tbl_ord</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="format.html">format(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="format.html">print(<i>&lt;tbl_ord&gt;</i>)</a></code> </p>
         </td>
         <td><p>Format a tbl_ord for printing</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="dplyr-verbs.html">pull_factor()</a></code> <code><a href="dplyr-verbs.html">pull_u()</a></code> <code><a href="dplyr-verbs.html">pull_v()</a></code> <code><a href="dplyr-verbs.html">rename_u()</a></code> <code><a href="dplyr-verbs.html">rename_v()</a></code> <code><a href="dplyr-verbs.html">select_u()</a></code> <code><a href="dplyr-verbs.html">select_v()</a></code> <code><a href="dplyr-verbs.html">mutate_u()</a></code> <code><a href="dplyr-verbs.html">mutate_v()</a></code> <code><a href="dplyr-verbs.html">transmute_u()</a></code> <code><a href="dplyr-verbs.html">transmute_v()</a></code> <code><a href="dplyr-verbs.html">bind_cols_u()</a></code> <code><a href="dplyr-verbs.html">bind_cols_v()</a></code> <code><a href="dplyr-verbs.html">left_join_u()</a></code> <code><a href="dplyr-verbs.html">left_join_v()</a></code> </p>
+          <p><code><a href="dplyr-verbs.html">pull_factor()</a></code> <code><a href="dplyr-verbs.html">pull_rows()</a></code> <code><a href="dplyr-verbs.html">pull_cols()</a></code> <code><a href="dplyr-verbs.html">rename_rows()</a></code> <code><a href="dplyr-verbs.html">rename_cols()</a></code> <code><a href="dplyr-verbs.html">select_rows()</a></code> <code><a href="dplyr-verbs.html">select_cols()</a></code> <code><a href="dplyr-verbs.html">mutate_rows()</a></code> <code><a href="dplyr-verbs.html">mutate_cols()</a></code> <code><a href="dplyr-verbs.html">transmute_rows()</a></code> <code><a href="dplyr-verbs.html">transmute_cols()</a></code> <code><a href="dplyr-verbs.html">bind_cols_rows()</a></code> <code><a href="dplyr-verbs.html">bind_cols_cols()</a></code> <code><a href="dplyr-verbs.html">left_join_rows()</a></code> <code><a href="dplyr-verbs.html">left_join_cols()</a></code> </p>
         </td>
         <td><p><strong>dplyr</strong> verbs for tbl_ord factors</p></td>
       </tr>
@@ -312,123 +264,105 @@
       <tr>
         
         <td>
-          <p><code><a href="fortify.html">fortify(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="fortify.html">fortify_coord()</a></code> <code><a href="fortify.html">fortify_u()</a></code> <code><a href="fortify.html">fortify_v()</a></code> <code><a href="fortify.html">tidy(<i>&lt;tbl_ord&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Fortify a tbl_ord for plotting</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="ggbiplot.html">ggbiplot()</a></code> <code><a href="ggbiplot.html">ord_aes()</a></code> </p>
         </td>
         <td><p>Biplots following the grammar of graphics</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="biplot-matrix.html">stat_u()</a></code> <code><a href="biplot-matrix.html">stat_v()</a></code> </p>
+          <p><code><a href="stat_rows.html">stat_rows()</a></code> <code><a href="stat_rows.html">stat_cols()</a></code> </p>
         </td>
         <td><p>Render plot elements for one matrix of an ordination</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="geom-unit-circle.html">geom_unit_circle()</a></code> </p>
-        </td>
-        <td><p>Render a unit circle</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geom-biplot-axis-ticks.html">geom_axis_ticks()</a></code> <code><a href="geom-biplot-axis-ticks.html">geom_u_axis_ticks()</a></code> <code><a href="geom-biplot-axis-ticks.html">geom_v_axis_ticks()</a></code> <code><a href="geom-biplot-axis-ticks.html">geom_biplot_axis_ticks()</a></code> </p>
-        </td>
-        <td><p>Render tick marks for axes</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geom-biplot-axis.html">geom_axis()</a></code> <code><a href="geom-biplot-axis.html">geom_u_axis()</a></code> <code><a href="geom-biplot-axis.html">geom_v_axis()</a></code> <code><a href="geom-biplot-axis.html">geom_biplot_axis()</a></code> </p>
-        </td>
-        <td><p>Render axes through origin</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geom-biplot-intervals.html">geom_u_lineranges()</a></code> <code><a href="geom-biplot-intervals.html">geom_v_lineranges()</a></code> <code><a href="geom-biplot-intervals.html">geom_biplot_lineranges()</a></code> <code><a href="geom-biplot-intervals.html">geom_u_pointranges()</a></code> <code><a href="geom-biplot-intervals.html">geom_v_pointranges()</a></code> <code><a href="geom-biplot-intervals.html">geom_biplot_pointranges()</a></code> </p>
-        </td>
-        <td><p>Render intervals depicting ranges, usually about center points</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geom-biplot-isolines.html">geom_isolines()</a></code> <code><a href="geom-biplot-isolines.html">geom_u_isolines()</a></code> <code><a href="geom-biplot-isolines.html">geom_v_isolines()</a></code> <code><a href="geom-biplot-isolines.html">geom_biplot_isolines()</a></code> </p>
-        </td>
-        <td><p>Render isolines for a subject or variable</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geom-biplot-path.html">geom_u_path()</a></code> <code><a href="geom-biplot-path.html">geom_v_path()</a></code> <code><a href="geom-biplot-path.html">geom_biplot_path()</a></code> </p>
-        </td>
-        <td><p>Render piecewise-linear paths through ordinates</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geom-biplot-point.html">geom_u_point()</a></code> <code><a href="geom-biplot-point.html">geom_v_point()</a></code> <code><a href="geom-biplot-point.html">geom_biplot_point()</a></code> </p>
-        </td>
-        <td><p>Render points at ordinates</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geom-biplot-polygon.html">geom_u_polygon()</a></code> <code><a href="geom-biplot-polygon.html">geom_v_polygon()</a></code> <code><a href="geom-biplot-polygon.html">geom_biplot_polygon()</a></code> </p>
-        </td>
-        <td><p>Render polygons around ordinates</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geom-biplot-text-radiate.html">geom_text_radiate()</a></code> <code><a href="geom-biplot-text-radiate.html">geom_u_text_radiate()</a></code> <code><a href="geom-biplot-text-radiate.html">geom_v_text_radiate()</a></code> <code><a href="geom-biplot-text-radiate.html">geom_biplot_text_radiate()</a></code> </p>
-        </td>
-        <td><p>Render text at ordinates radiating out from the origin</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geom-biplot-text.html">geom_u_text()</a></code> <code><a href="geom-biplot-text.html">geom_v_text()</a></code> <code><a href="geom-biplot-text.html">geom_biplot_text()</a></code> <code><a href="geom-biplot-text.html">geom_u_label()</a></code> <code><a href="geom-biplot-text.html">geom_v_label()</a></code> <code><a href="geom-biplot-text.html">geom_biplot_label()</a></code> <code><a href="geom-biplot-text.html">geom_u_text_repel()</a></code> <code><a href="geom-biplot-text.html">geom_v_text_repel()</a></code> <code><a href="geom-biplot-text.html">geom_biplot_text_repel()</a></code> <code><a href="geom-biplot-text.html">geom_u_label_repel()</a></code> <code><a href="geom-biplot-text.html">geom_v_label_repel()</a></code> <code><a href="geom-biplot-text.html">geom_biplot_label_repel()</a></code> </p>
-        </td>
-        <td><p>Render text and labels at ordinates</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geom-biplot-ticks.html">geom_axis_text()</a></code> <code><a href="geom-biplot-ticks.html">geom_u_axis_text()</a></code> <code><a href="geom-biplot-ticks.html">geom_v_axis_text()</a></code> <code><a href="geom-biplot-ticks.html">geom_biplot_axis_text()</a></code> </p>
-        </td>
-        <td><p>Render tick mark labels for axes</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geom-biplot-vector.html">geom_vector()</a></code> <code><a href="geom-biplot-vector.html">geom_u_vector()</a></code> <code><a href="geom-biplot-vector.html">geom_v_vector()</a></code> <code><a href="geom-biplot-vector.html">geom_biplot_vector()</a></code> </p>
-        </td>
-        <td><p>Render vectors from origin to ordinates</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="stat-biplot-center.html">stat_center()</a></code> <code><a href="stat-biplot-center.html">stat_u_center()</a></code> <code><a href="stat-biplot-center.html">stat_v_center()</a></code> <code><a href="stat-biplot-center.html">stat_star()</a></code> <code><a href="stat-biplot-center.html">stat_u_star()</a></code> <code><a href="stat-biplot-center.html">stat_v_star()</a></code> </p>
+          <p><code><a href="stat_center.html">stat_center()</a></code> <code><a href="stat_center.html">stat_star()</a></code> </p>
         </td>
         <td><p>Compute geometric centers and spreads for ordination factors</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="stat-biplot-chull.html">stat_chull()</a></code> <code><a href="stat-biplot-chull.html">stat_u_chull()</a></code> <code><a href="stat-biplot-chull.html">stat_v_chull()</a></code> </p>
+          <p><code><a href="stat_chull.html">stat_chull()</a></code> </p>
         </td>
         <td><p>Restrict ordination data to the convex hulls of both matrix factors</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="stat-biplot-ellipse.html">stat_u_ellipse()</a></code> <code><a href="stat-biplot-ellipse.html">stat_v_ellipse()</a></code> </p>
+          <p><code><a href="stat_spantree.html">stat_spantree()</a></code> </p>
         </td>
-        <td><p>Compute normal confidence ellipses for ordination factors</p></td>
+        <td><p>Calculate a minimum spanning tree among cases or variables</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="stat-biplot-spantree.html">stat_spantree()</a></code> <code><a href="stat-biplot-spantree.html">stat_u_spantree()</a></code> <code><a href="stat-biplot-spantree.html">stat_v_spantree()</a></code> </p>
+          <p><code><a href="geom_unit_circle.html">geom_unit_circle()</a></code> </p>
         </td>
-        <td><p>Calculate a minimum spanning tree among cases or variables</p></td>
+        <td><p>Render a unit circle</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geom_axis.html">geom_axis()</a></code> </p>
+        </td>
+        <td><p>Render axes through origin</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geom_axis_text.html">geom_axis_text()</a></code> </p>
+        </td>
+        <td><p>Render tick mark labels for axes</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geom_axis_ticks.html">geom_axis_ticks()</a></code> </p>
+        </td>
+        <td><p>Render tick marks for axes</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geom_isolines.html">geom_isolines()</a></code> </p>
+        </td>
+        <td><p>Render isolines for a subject or variable</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geom_lineranges.html">geom_lineranges()</a></code> <code><a href="geom_lineranges.html">geom_pointranges()</a></code> </p>
+        </td>
+        <td><p>Render intervals depicting ranges, usually about center points</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geom_text_radiate.html">geom_text_radiate()</a></code> </p>
+        </td>
+        <td><p>Render text that radiates outward from the origin</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geom_vector.html">geom_vector()</a></code> </p>
+        </td>
+        <td><p>Render vectors from the origin</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="draw-key.html">draw_key_line()</a></code> <code><a href="draw-key.html">draw_key_crosslines()</a></code> <code><a href="draw-key.html">draw_key_crosspoint()</a></code> </p>
         </td>
         <td><p>Biplot key drawing functions</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ordr-ggproto.html">ordr-ggproto</a></code> </p>
+        </td>
+        <td><p>ggproto classes created and adapted for ordr</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="biplot-geoms.html">geom_rows_isolines()</a></code> <code><a href="biplot-geoms.html">geom_cols_isolines()</a></code> <code><a href="biplot-geoms.html">geom_dims_isolines()</a></code> <code><a href="biplot-geoms.html">geom_rows_axis_text()</a></code> <code><a href="biplot-geoms.html">geom_cols_axis_text()</a></code> <code><a href="biplot-geoms.html">geom_dims_axis_text()</a></code> <code><a href="biplot-geoms.html">geom_rows_axis_ticks()</a></code> <code><a href="biplot-geoms.html">geom_cols_axis_ticks()</a></code> <code><a href="biplot-geoms.html">geom_dims_axis_ticks()</a></code> <code><a href="biplot-geoms.html">geom_rows_axis()</a></code> <code><a href="biplot-geoms.html">geom_cols_axis()</a></code> <code><a href="biplot-geoms.html">geom_dims_axis()</a></code> <code><a href="biplot-geoms.html">geom_rows_lineranges()</a></code> <code><a href="biplot-geoms.html">geom_cols_lineranges()</a></code> <code><a href="biplot-geoms.html">geom_dims_lineranges()</a></code> <code><a href="biplot-geoms.html">geom_rows_pointranges()</a></code> <code><a href="biplot-geoms.html">geom_cols_pointranges()</a></code> <code><a href="biplot-geoms.html">geom_dims_pointranges()</a></code> <code><a href="biplot-geoms.html">geom_rows_path()</a></code> <code><a href="biplot-geoms.html">geom_cols_path()</a></code> <code><a href="biplot-geoms.html">geom_dims_path()</a></code> <code><a href="biplot-geoms.html">geom_rows_point()</a></code> <code><a href="biplot-geoms.html">geom_cols_point()</a></code> <code><a href="biplot-geoms.html">geom_dims_point()</a></code> <code><a href="biplot-geoms.html">geom_rows_polygon()</a></code> <code><a href="biplot-geoms.html">geom_cols_polygon()</a></code> <code><a href="biplot-geoms.html">geom_dims_polygon()</a></code> <code><a href="biplot-geoms.html">geom_rows_text_radiate()</a></code> <code><a href="biplot-geoms.html">geom_cols_text_radiate()</a></code> <code><a href="biplot-geoms.html">geom_dims_text_radiate()</a></code> <code><a href="biplot-geoms.html">geom_rows_text()</a></code> <code><a href="biplot-geoms.html">geom_cols_text()</a></code> <code><a href="biplot-geoms.html">geom_dims_text()</a></code> <code><a href="biplot-geoms.html">geom_rows_label()</a></code> <code><a href="biplot-geoms.html">geom_cols_label()</a></code> <code><a href="biplot-geoms.html">geom_dims_label()</a></code> <code><a href="biplot-geoms.html">geom_rows_text_repel()</a></code> <code><a href="biplot-geoms.html">geom_cols_text_repel()</a></code> <code><a href="biplot-geoms.html">geom_dims_text_repel()</a></code> <code><a href="biplot-geoms.html">geom_rows_label_repel()</a></code> <code><a href="biplot-geoms.html">geom_cols_label_repel()</a></code> <code><a href="biplot-geoms.html">geom_dims_label_repel()</a></code> <code><a href="biplot-geoms.html">geom_rows_vector()</a></code> <code><a href="biplot-geoms.html">geom_cols_vector()</a></code> <code><a href="biplot-geoms.html">geom_dims_vector()</a></code> </p>
+        </td>
+        <td><p>Convenience geoms for row and column matrix factors</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="biplot-stats.html">stat_rows_center()</a></code> <code><a href="biplot-stats.html">stat_cols_center()</a></code> <code><a href="biplot-stats.html">stat_rows_star()</a></code> <code><a href="biplot-stats.html">stat_cols_star()</a></code> <code><a href="biplot-stats.html">stat_rows_chull()</a></code> <code><a href="biplot-stats.html">stat_cols_chull()</a></code> <code><a href="biplot-stats.html">stat_rows_ellipse()</a></code> <code><a href="biplot-stats.html">stat_cols_ellipse()</a></code> <code><a href="biplot-stats.html">stat_rows_spantree()</a></code> <code><a href="biplot-stats.html">stat_cols_spantree()</a></code> </p>
+        </td>
+        <td><p>Convenience stats for row and column matrix factors</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -445,67 +379,67 @@
       <tr>
         
         <td>
-          <p><code><a href="methods-ca.html">as_tbl_ord(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">reconstruct(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_u(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_v(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_inertia(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_conference(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_coord(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">augmentation_u(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">augmentation_v(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">augmentation_coord(<i>&lt;ca&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-ca.html">as_tbl_ord(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_rows(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_cols(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_inertia(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_conference(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_coord(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">augmentation_rows(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">augmentation_cols(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">augmentation_coord(<i>&lt;ca&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for correspondence analysis ('ca') objects</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="methods-cmds.html">as_tbl_ord(<i>&lt;cmds&gt;</i>)</a></code> <code><a href="methods-cmds.html">reconstruct(<i>&lt;cmds&gt;</i>)</a></code> <code><a href="methods-cmds.html">recover_u(<i>&lt;cmds&gt;</i>)</a></code> <code><a href="methods-cmds.html">recover_v(<i>&lt;cmds&gt;</i>)</a></code> <code><a href="methods-cmds.html">recover_inertia(<i>&lt;cmds&gt;</i>)</a></code> <code><a href="methods-cmds.html">recover_coord(<i>&lt;cmds&gt;</i>)</a></code> <code><a href="methods-cmds.html">recover_conference(<i>&lt;cmds&gt;</i>)</a></code> <code><a href="methods-cmds.html">augmentation_u(<i>&lt;cmds&gt;</i>)</a></code> <code><a href="methods-cmds.html">augmentation_v(<i>&lt;cmds&gt;</i>)</a></code> <code><a href="methods-cmds.html">augmentation_coord(<i>&lt;cmds&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-cmds.html">as_tbl_ord(<i>&lt;cmds_ord&gt;</i>)</a></code> <code><a href="methods-cmds.html">recover_rows(<i>&lt;cmds_ord&gt;</i>)</a></code> <code><a href="methods-cmds.html">recover_cols(<i>&lt;cmds_ord&gt;</i>)</a></code> <code><a href="methods-cmds.html">recover_inertia(<i>&lt;cmds_ord&gt;</i>)</a></code> <code><a href="methods-cmds.html">recover_coord(<i>&lt;cmds_ord&gt;</i>)</a></code> <code><a href="methods-cmds.html">recover_conference(<i>&lt;cmds_ord&gt;</i>)</a></code> <code><a href="methods-cmds.html">augmentation_rows(<i>&lt;cmds_ord&gt;</i>)</a></code> <code><a href="methods-cmds.html">augmentation_cols(<i>&lt;cmds_ord&gt;</i>)</a></code> <code><a href="methods-cmds.html">augmentation_coord(<i>&lt;cmds_ord&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for classical multidimensional scaling objects</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="methods-eigen.html">as_tbl_ord(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">reconstruct(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_u(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_v(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_inertia(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_coord(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_conference(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">augmentation_u(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">augmentation_v(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">augmentation_coord(<i>&lt;eigen_ord&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-eigen.html">as_tbl_ord(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_rows(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_cols(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_inertia(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_coord(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_conference(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">augmentation_rows(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">augmentation_cols(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">augmentation_coord(<i>&lt;eigen_ord&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for eigendecompositions</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="methods-kmeans.html">as_tbl_ord(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">reconstruct(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">recover_u(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">recover_v(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">recover_coord(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">augmentation_u(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">augmentation_v(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">augmentation_coord(<i>&lt;kmeans&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-kmeans.html">as_tbl_ord(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">recover_rows(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">recover_cols(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">recover_coord(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">augmentation_rows(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">augmentation_cols(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">augmentation_coord(<i>&lt;kmeans&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for k-means clustering ('kmeans') objects</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="methods-lda.html">as_tbl_ord(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">as_tbl_ord(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_u(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_u(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_v(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_v(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_inertia(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_inertia(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_coord(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_coord(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_conference(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_conference(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">augmentation_u(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">augmentation_u(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">augmentation_v(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">augmentation_v(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">augmentation_coord(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">augmentation_coord(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">supplementation_u(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">supplementation_u(<i>&lt;lda_ord&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-lda.html">as_tbl_ord(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">as_tbl_ord(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_rows(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_rows(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_cols(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_cols(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_inertia(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_inertia(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_coord(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_coord(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_conference(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_conference(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">augmentation_rows(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">augmentation_rows(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">augmentation_cols(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">augmentation_cols(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">augmentation_coord(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">augmentation_coord(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">supplementation_rows(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">supplementation_rows(<i>&lt;lda_ord&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for linear discriminant analysis ('lda') objects</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="methods-lm.html">as_tbl_ord(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">reconstruct(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">recover_u(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">recover_v(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">recover_coord(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_u(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_v(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_coord(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_u(<i>&lt;glm&gt;</i>)</a></code> <code><a href="methods-lm.html">recover_u(<i>&lt;mlm&gt;</i>)</a></code> <code><a href="methods-lm.html">recover_v(<i>&lt;mlm&gt;</i>)</a></code> <code><a href="methods-lm.html">recover_coord(<i>&lt;mlm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_u(<i>&lt;mlm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_v(<i>&lt;mlm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_coord(<i>&lt;mlm&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-lm.html">as_tbl_ord(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">recover_rows(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">recover_cols(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">recover_coord(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_rows(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_cols(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_coord(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_rows(<i>&lt;glm&gt;</i>)</a></code> <code><a href="methods-lm.html">recover_rows(<i>&lt;mlm&gt;</i>)</a></code> <code><a href="methods-lm.html">recover_cols(<i>&lt;mlm&gt;</i>)</a></code> <code><a href="methods-lm.html">recover_coord(<i>&lt;mlm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_rows(<i>&lt;mlm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_cols(<i>&lt;mlm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_coord(<i>&lt;mlm&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for linear model objects</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="methods-lpca.html">as_tbl_ord(<i>&lt;lsvd&gt;</i>)</a></code> <code><a href="methods-lpca.html">reconstruct(<i>&lt;lsvd&gt;</i>)</a></code> <code><a href="methods-lpca.html">recover_u(<i>&lt;lsvd&gt;</i>)</a></code> <code><a href="methods-lpca.html">recover_v(<i>&lt;lsvd&gt;</i>)</a></code> <code><a href="methods-lpca.html">recover_coord(<i>&lt;lsvd&gt;</i>)</a></code> <code><a href="methods-lpca.html">augmentation_u(<i>&lt;lsvd&gt;</i>)</a></code> <code><a href="methods-lpca.html">augmentation_v(<i>&lt;lsvd&gt;</i>)</a></code> <code><a href="methods-lpca.html">augmentation_coord(<i>&lt;lsvd&gt;</i>)</a></code> <code><a href="methods-lpca.html">as_tbl_ord(<i>&lt;lpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">recover_u(<i>&lt;lpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">recover_v(<i>&lt;lpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">recover_coord(<i>&lt;lpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">augmentation_u(<i>&lt;lpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">augmentation_v(<i>&lt;lpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">augmentation_coord(<i>&lt;lpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">as_tbl_ord(<i>&lt;clpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">recover_u(<i>&lt;clpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">recover_v(<i>&lt;clpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">recover_coord(<i>&lt;clpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">augmentation_u(<i>&lt;clpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">augmentation_v(<i>&lt;clpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">augmentation_coord(<i>&lt;clpca&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-lpca.html">as_tbl_ord(<i>&lt;lsvd&gt;</i>)</a></code> <code><a href="methods-lpca.html">recover_rows(<i>&lt;lsvd&gt;</i>)</a></code> <code><a href="methods-lpca.html">recover_cols(<i>&lt;lsvd&gt;</i>)</a></code> <code><a href="methods-lpca.html">recover_coord(<i>&lt;lsvd&gt;</i>)</a></code> <code><a href="methods-lpca.html">augmentation_rows(<i>&lt;lsvd&gt;</i>)</a></code> <code><a href="methods-lpca.html">augmentation_cols(<i>&lt;lsvd&gt;</i>)</a></code> <code><a href="methods-lpca.html">augmentation_coord(<i>&lt;lsvd&gt;</i>)</a></code> <code><a href="methods-lpca.html">as_tbl_ord(<i>&lt;lpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">recover_rows(<i>&lt;lpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">recover_cols(<i>&lt;lpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">recover_coord(<i>&lt;lpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">augmentation_rows(<i>&lt;lpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">augmentation_cols(<i>&lt;lpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">augmentation_coord(<i>&lt;lpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">as_tbl_ord(<i>&lt;clpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">recover_rows(<i>&lt;clpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">recover_cols(<i>&lt;clpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">recover_coord(<i>&lt;clpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">augmentation_rows(<i>&lt;clpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">augmentation_cols(<i>&lt;clpca&gt;</i>)</a></code> <code><a href="methods-lpca.html">augmentation_coord(<i>&lt;clpca&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for logistic PCA and logistic SVD objects</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="methods-lra.html">as_tbl_ord(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_u(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_v(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_inertia(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_coord(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_conference(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">augmentation_u(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">augmentation_v(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">augmentation_coord(<i>&lt;lra&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-lra.html">as_tbl_ord(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_rows(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_cols(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_inertia(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_coord(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_conference(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">augmentation_rows(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">augmentation_cols(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">augmentation_coord(<i>&lt;lra&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for log-ratio analysis ('lra') objects</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="methods-prcomp.html">as_tbl_ord(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">reconstruct(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">recover_u(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">recover_v(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">recover_inertia(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">recover_coord(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">recover_conference(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">augmentation_u(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">augmentation_v(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">augmentation_coord(<i>&lt;prcomp&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-prcomp.html">as_tbl_ord(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">recover_rows(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">recover_cols(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">recover_inertia(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">recover_coord(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">recover_conference(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">augmentation_rows(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">augmentation_cols(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">augmentation_coord(<i>&lt;prcomp&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for principal components analysis ('prcomp') objects</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="methods-princomp.html">as_tbl_ord(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">reconstruct(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">recover_u(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">recover_v(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">recover_inertia(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">recover_coord(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">recover_conference(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">augmentation_u(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">augmentation_v(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">augmentation_coord(<i>&lt;princomp&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-princomp.html">as_tbl_ord(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">recover_rows(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">recover_cols(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">recover_inertia(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">recover_coord(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">recover_conference(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">augmentation_rows(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">augmentation_cols(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">augmentation_coord(<i>&lt;princomp&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for principal components analysis ('princomp') objects</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="methods-svd.html">as_tbl_ord(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">reconstruct(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_u(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_v(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_inertia(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_coord(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_conference(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">augmentation_u(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">augmentation_v(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">augmentation_coord(<i>&lt;svd_ord&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-svd.html">as_tbl_ord(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_rows(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_cols(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_inertia(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_coord(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_conference(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">augmentation_rows(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">augmentation_cols(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">augmentation_coord(<i>&lt;svd_ord&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for singular value decompositions</p></td>
       </tr>
@@ -527,7 +461,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

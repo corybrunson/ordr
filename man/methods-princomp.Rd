@@ -3,24 +3,21 @@
 \name{methods-princomp}
 \alias{methods-princomp}
 \alias{as_tbl_ord.princomp}
-\alias{reconstruct.princomp}
-\alias{recover_u.princomp}
-\alias{recover_v.princomp}
+\alias{recover_rows.princomp}
+\alias{recover_cols.princomp}
 \alias{recover_inertia.princomp}
 \alias{recover_coord.princomp}
 \alias{recover_conference.princomp}
-\alias{augmentation_u.princomp}
-\alias{augmentation_v.princomp}
+\alias{augmentation_rows.princomp}
+\alias{augmentation_cols.princomp}
 \alias{augmentation_coord.princomp}
 \title{Functionality for principal components analysis ('princomp') objects}
 \usage{
 \method{as_tbl_ord}{princomp}(x)
 
-\method{reconstruct}{princomp}(x)
+\method{recover_rows}{princomp}(x)
 
-\method{recover_u}{princomp}(x)
-
-\method{recover_v}{princomp}(x)
+\method{recover_cols}{princomp}(x)
 
 \method{recover_inertia}{princomp}(x)
 
@@ -28,9 +25,9 @@
 
 \method{recover_conference}{princomp}(x)
 
-\method{augmentation_u}{princomp}(x)
+\method{augmentation_rows}{princomp}(x)
 
-\method{augmentation_v}{princomp}(x)
+\method{augmentation_cols}{princomp}(x)
 
 \method{augmentation_coord}{princomp}(x)
 }
@@ -42,45 +39,48 @@ These methods extract data from, and attribute new data to,
 objects of class \code{"princomp"} as returned by \code{\link[stats:princomp]{stats::princomp()}}.
 }
 \examples{
-# Scaled PCA of Anderson Iris data with centroid stars
-iris[, -5] \%>\%
-  princomp(cor = TRUE) \%>\%
-  as_tbl_ord() \%>\%
-  mutate_u(species = iris$Species) \%>\%
-  mutate_v(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
-  print() -> iris_pca
-iris_pca \%>\%
-  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  stat_u_star(alpha = .5, fun.center = "mean") +
-  stat_u_center(size = 3, fun.center = "mean") +
-  geom_u_point(alpha = .5) +
-  geom_v_vector(color = "#444444") +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris data",
-    "Segments connect each observation to its within-species centroid"
-  )
-# Unscaled PCA and two-scaled biplot of Anderson iris data
+# data frame of Anderson iris species measurements
+class(iris)
+head(iris)
+# compute unscaled row-principal components of scaled measurements
 iris[, -5] \%>\%
   princomp() \%>\%
   as_tbl_ord() \%>\%
-  confer_inertia(1) \%>\%
-  mutate_u(species = iris$Species) \%>\%
-  mutate_v(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
   print() -> iris_pca
+# bind species classification to observation coordinates
+(iris_pca <- mutate_rows(iris_pca, species = iris$Species))
+# recover observation principal coordinates and measurement standard coordinates
+head(get_rows(iris_pca))
+get_cols(iris_pca)
+# augment measurement coordinates with names and scaling parameters
+augment_ord(iris_pca)
+# summarize principal components
+tidy(iris_pca)
+# fortification of artificial coordinates yields proportion of variance measure
+fortify(iris_pca, .matrix = "coord")
+# scree plot of inertia
+ggplot(iris_pca, .matrix = "coord", aes(x = .name, y = .inertia)) +
+  theme_bw() +
+  geom_bar(stat = "identity") +
+  labs(x = "", y = "Inertia")
+# scree plot of proportion of variance (inertia)
+ggplot(iris_pca, .matrix = "coord", aes(x = .name, y = .prop_var)) +
+  theme_bw() +
+  scale_y_continuous(labels = scales::percent) +
+  geom_bar(stat = "identity") +
+  labs(x = "", y = "Proportion of inertia")
+# fortification adds all above columns
+fortify(iris_pca)
+# row-principal biplot with coordinate-wise standard deviations
 iris_pca \%>\%
-  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
+  ggbiplot(aes(color = species)) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_point() +
-  geom_v_vector(color = "#444444") +
-  geom_v_text_radiate(aes(label = measure), color = "#444444") +
-  ggtitle(
-    "Row-principal unscaled PCA biplot of Anderson iris data",
-    "Variable loadings scaled to secondary axes"
-  ) +
-  expand_limits(y = c(-1, 3.5))
+  geom_rows_point(alpha = .5) +
+  geom_cols_vector(color = "#444444") +
+  geom_cols_text_radiate(aes(label = .name), color = "#444444") +
+  ggtitle("Row-principal unscaled PCA biplot of Anderson iris measurements") +
+  expand_limits(y = c(NA, 2))
 }
 \author{
 Emily Paul

@@ -1,13 +1,13 @@
 #' @title Render isolines for a subject or variable
 #'
-#' @description `geom_*_isolines()` renders isolines for a specified subject or
+#' @description `geom_isolines()` renders isolines for a specified subject or
 #'   variable.
 #' @template biplot-layers
 
 #' @section Aesthetics:
 
-#' `geom_*_isolines()` understands the following aesthetics
-#' (required aesthetics are in bold):
+#' `geom_isolines()` understands the following aesthetics (required aesthetics
+#' are in bold):
 
 #' - **`x`**
 #' - **`y`**
@@ -18,7 +18,6 @@
 #' - `group`
 #' 
 
-#' @name geom-biplot-isolines
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
@@ -28,13 +27,120 @@
 #' @param family_fun A family function, or a character string naming one, to
 #'   transform the values along the axis at which to render elements.
 #' @param by Interval length between elements, in the units of the ordination.
-#' @template param-matrix
-#' @example inst/examples/mtcars-lm-isolines.r
-#' @example inst/examples/bioenv-lm-isolines.r
-#' @example inst/examples/bioenv-glm-isolines.r
-NULL
+#' @family geom layers
+#' @export
+geom_isolines <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomIsolines,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = na.rm,
+      axes = axes,
+      calibrate = calibrate,
+      family_fun = family_fun,
+      by = by,
+      ...
+    )
+  )
+}
 
-#' @rdname geom-biplot-isolines
+#' @rdname biplot-geoms
+#' @export
+geom_rows_isolines <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = rows_stat(stat),
+    geom = GeomIsolines,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = na.rm,
+      axes = axes,
+      calibrate = calibrate,
+      family_fun = family_fun,
+      by = by,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_cols_isolines <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = cols_stat(stat),
+    geom = GeomIsolines,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = na.rm,
+      axes = axes,
+      calibrate = calibrate,
+      family_fun = family_fun,
+      by = by,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_dims_isolines <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  .matrix = "cols", axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = matrix_stat(.matrix, stat),
+    geom = GeomIsolines,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = na.rm,
+      axes = axes,
+      calibrate = calibrate,
+      family_fun = family_fun,
+      by = by,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
 #' @usage NULL
 #' @export
 GeomIsolines <- ggproto(
@@ -173,115 +279,3 @@ GeomIsolines <- ggproto(
     )
   }
 )
-
-#' @rdname geom-biplot-isolines
-#' @export
-geom_isolines <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
-  ...,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = stat,
-    geom = GeomIsolines,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = na.rm,
-      axes = axes,
-      calibrate = calibrate,
-      family_fun = family_fun,
-      by = by,
-      ...
-    )
-  )
-}
-
-#' @rdname geom-biplot-isolines
-#' @export
-geom_u_isolines <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
-  ...,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = u_stat(stat),
-    geom = GeomIsolines,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = na.rm,
-      axes = axes,
-      calibrate = calibrate,
-      family_fun = family_fun,
-      by = by,
-      ...
-    )
-  )
-}
-
-#' @rdname geom-biplot-isolines
-#' @export
-geom_v_isolines <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
-  ...,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = v_stat(stat),
-    geom = GeomIsolines,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = na.rm,
-      axes = axes,
-      calibrate = calibrate,
-      family_fun = family_fun,
-      by = by,
-      ...
-    )
-  )
-}
-
-#' @rdname geom-biplot-isolines
-#' @export
-geom_biplot_isolines <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "v", axes = NULL, calibrate = TRUE, family_fun = NULL, by = NULL,
-  ...,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = matrix_stat(.matrix, stat),
-    geom = GeomIsolines,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = na.rm,
-      axes = axes,
-      calibrate = calibrate,
-      family_fun = family_fun,
-      by = by,
-      ...
-    )
-  )
-}
