@@ -77,6 +77,66 @@ stat in order to render plot elements for the corresponding factor matrix.
 points for rows and arrows for columns.
 }
 
+\examples{
+# correspondence analysis of combined female and male hair and eye color data
+HairEyeColor \%>\%
+  rowSums(dims = 2L) \%>\%
+  ca::ca() \%>\%
+  as_tbl_ord() \%>\%
+  augment_ord() \%>\%
+  print() -> hec_ca
+# inertia across artificial coordinates (all singular values < 1)
+recover_inertia(hec_ca)
+# in row-principal biplot, row coordinates are weighted averages of columns
+hec_ca \%>\%
+  confer_inertia("rows") \%>\%
+  ggbiplot(aes(color = .matrix, fill = .matrix, shape = .matrix)) +
+  theme_bw() +
+  stat_cols_chull(alpha = .1) +
+  geom_cols_point() +
+  geom_rows_point() +
+  ggtitle("Row-principal CA of hair & eye color")
+# in column-principal biplot, column coordinates are weighted averages of rows
+hec_ca \%>\%
+  confer_inertia("cols") \%>\%
+  ggbiplot(aes(color = .matrix, fill = .matrix, shape = .matrix)) +
+  theme_bw() +
+  stat_rows_chull(alpha = .1) +
+  geom_rows_point() +
+  geom_cols_point() +
+  ggtitle("Column-principal CA of hair & eye color")
+# centered principal components analysis of U.S. personal expenditure data
+USPersonalExpenditure \%>\%
+  prcomp() \%>\%
+  as_tbl_ord() \%>\%
+  # allow radiating text to exceed plotting window
+  ggbiplot(aes(label = .name), clip = "off",
+           sec.axes = "cols", scale.factor = 50) +
+  geom_rows_label(size = 3) +
+  geom_cols_vector() +
+  # omit labels in the hull with the origin
+  geom_cols_text_radiate(stat = "chull") +
+  ggtitle(
+    "U.S. Personal Expenditure data, 1940-1960",
+    "Row-principal biplot of centered PCA"
+  )
+# uncentered principal components analysis of U.S. personal expenditure data
+USPersonalExpenditure \%>\%
+  prcomp(center = FALSE) \%>\%
+  as_tbl_ord() \%>\%
+  confer_inertia(c(.5, .5)) \%>\%
+  # allow radiating text to exceed plotting window
+  ggbiplot(aes(label = .name), clip = "off") +
+  geom_rows_label(size = 3) +
+  geom_cols_vector() +
+  # omit labels in the hull with the origin
+  geom_cols_text_radiate(stat = "chull", conical = TRUE) +
+  scale_x_continuous(expand = expansion(add = 1), trans = "reverse") +
+  ggtitle(
+    "U.S. Personal Expenditure data, 1940-1960",
+    "Symmetric biplot of un-centered PCA"
+  )
+}
 \seealso{
 Other stat layers: 
 \code{\link{stat_center}()},

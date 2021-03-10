@@ -15,6 +15,8 @@
 #' @param conical Logical; whether to include the origin when calculating the
 #'   hull. Defaults to `FALSE`.
 #' @family stat layers
+#' @example inst/examples/ex-stat-chull-haireye.r
+#' @example inst/examples/ex-stat-chull-spend.r
 #' @export
 stat_chull <- function(
   mapping = NULL, data = NULL, geom = "polygon", position = "identity",
