@@ -1,45 +1,80 @@
-
+#' @title Plot and biplot methods for 'tbl_ord' objects
+#'
+#' @description Mimic **stats** `plot()` and `biplot()` methods for 'prcomp' and
+#'   'princomp' objects for 'tbl_ord' objects.
+#'
+#' @details
+#'
+#' These methods defer to any `plot()` and `biplot()` methods for the original,
+#' underlying model classes of 'tbl_ord' objects. If none are found: Following
+#' the examples of [stats::plot.prcomp()] and [stats::plot.princomp()],
+#' `plot.tbl_ord()` calls on [recover_inertia()] and [stats::screeplot()] to
+#' produce a scree plot of the decomposition of variance in the singular value
+#' decomposition. Similarly following [stats::biplot.prcomp()] and
+#' [stats::biplot.princomp()], `biplot.tbl_ord()` produces a biplot of both rows
+#' and columns, using text labels when available and markers otherwise, with
+#' rows and columns distinguished by color and no additional annotation (e.g.
+#' vectors). The biplot confers inertia according to [get_conference()] unless
+#' the proportions do not sum to 1, in which case it produces a symmetric biplot
+#' (inertia conferred equally to rows and columns).
+#' 
 #' @importFrom graphics plot
-#' @importFrom stats biplot
-
-#' @method biplot tbl_ord
-#' @export
-biplot.tbl_ord <- function(x, choices = 1L:2L, ...) {
-  # biplot method for original class
-  prev_class <- setdiff(class(x), "tbl_ord")
-  if (any(prev_class %in% method_classes("biplot"))) {
-    class(x) <- prev_class
-    return(biplot(x, ...))
-  }
-  # tbl_ord biplot method based on stats:::biplot.prcomp
-  scores <- get_rows(x)
-  loadings <- get_cols(x)
-  if (length(choices) != 2L)
-    stop("Length of choices must be 2.")
-  if (! length(scores)) 
-    stop(gettextf("Ordination '%s' has no scores.", deparse(substitute(x))),
-         domain = NA)
-  if (is.complex(scores))
-    stop("Biplots are not defined for complex ordinations.")
-  biplot.default(
-    scores[, choices, drop = FALSE],
-    loadings[, choices, drop = FALSE],
-    ...
-  )
-  invisible()
-}
+#' @importFrom stats screeplot biplot
+#' @param x A 'tbl_ord' object.
+#' @param main A main title for the plot, passed to other methods (included to
+#'   enable parsing of object name).
+#' @param ... Additional arguments passed to other methods.
+#' @example inst/examples/ex-plot.r
 
 #' @method plot tbl_ord
 #' @export
-plot.tbl_ord <- function(x, ...) {
-  # use plot method for original class if available
+plot.tbl_ord <- function(x, main = deparse1(substitute(x)), ...) {
+  main
+  # use `plot()` method for original class if available
   prev_class <- setdiff(class(x), "tbl_ord")
   if (any(prev_class %in% method_classes("plot"))) {
     class(x) <- prev_class
     return(plot(x, ...))
   }
-  biplot(x, ...)
+  screeplot(x, main = main, ...)
+}
+
+#' @method screeplot tbl_ord
+#' @export
+screeplot.tbl_ord <- function(x, main = deparse1(substitute(x)), ...) {
+  main
+  # use `screeplot()` method for original class if available
+  prev_class <- setdiff(class(x), "tbl_ord")
+  if (any(prev_class %in% method_classes("screeplot"))) {
+    class(x) <- prev_class
+    return(screeplot(x, ...))
+  }
+  # label axis columns
+  sdev <- sqrt(recover_inertia(x))
+  names(sdev) <- recover_coord(x)
+  screeplot.default(x = list(sdev = sdev), main = main, ...)
+}
+
+#' @method biplot tbl_ord
+#' @export
+biplot.tbl_ord <- function(x, main = deparse1(substitute(x)), ...) {
+  main
+  # use `biplot()` method for original class if available
+  prev_class <- setdiff(class(x), "tbl_ord")
+  if (any(prev_class %in% method_classes("biplot"))) {
+    class(x) <- prev_class
+    return(biplot(x, main = main, ...))
+  }
+  # if default conference does not support a biplot interpretation, then confer
+  # inertia symmetrically
+  if (sum(recover_conference(x)) != 1 && is.null(attr(x, "confer")))
+    x <- confer_inertia(x, p = .5)
+  biplot.default(
+    x = get_rows(x), y = get_cols(x),
+    main = main, ...
+  )
 }
 
 #' @importFrom utils getFromNamespace
+screeplot.default <- getFromNamespace("screeplot.default", "stats")
 biplot.default <- getFromNamespace("biplot.default", "stats")
