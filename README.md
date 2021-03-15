@@ -18,35 +18,31 @@ that introduce an artificial coordinate system for a data set in such a
 way that a few coordinates capture a large amount of the data structure
 [1]. The branch of mathematical statistics called [geometric data
 analysis](https://www.springer.com/us/book/9781402022357) (GDA) provides
-the theoretical basis for these techniques. Together with regression,
-ordination can be contrasted to clustering and classification, in that
-they assign continuous rather than discrete values to data elements.
+the theoretical basis for (most of) these techniques. Together with
+regression, ordination can be contrasted to clustering and
+classification, in that they assign continuous rather than discrete
+values to data elements.
 
 Most ordination techniques decompose a numeric rectangular data set into
-the product of two (or more) matrices. In some cases, such as principal
-components analysis, the decomposition is exact; in others, such as
-non-negative matrix factorization, it is approximate. Some techniques,
-such as correspondence analysis, transform the data before
+the product of two matrices, often using singular value decomposition.
+The coordinates of the shared dimensions of these matrices (over which
+they are multiplied) are the artificial coordinates. In some cases, such
+as principal components analysis, the decomposition is exact; in others,
+such as non-negative matrix factorization, it is approximate. Some
+techniques, such as correspondence analysis, transform the data before
 decomposition. Ordination techniques may be supervised, like linear
 discriminant analysis, or unsupervised, like multidimensional scaling.
+
 Analysis pipelines that use these techniques may use the artificial
 coordinates directly, in place of natural coordinates, to arrange and
-compare data elements or to predict responses. They also frequently use
-*biplots* to represent the data elements that index the original table
-on a shared set of axes.
-
-The underlying matrix decomposition usually produces two matrices, say
-*U* and *V*, corresponding to the rows and to the columns of the
-original data matrix *X*: If *X* has *n* rows and *m* columns, then *U*
-and *V* have *n* rows and *m* rows, respectively, and both have *r*
-columns, with *r* being the rank of the ordination [2]. These *r*
-columns provide a set of shared coordinates for the rows and columns of
-*X*. If *X* contains a measured value for each of several variables
-(columns) on each of several cases (rows), then the ordination provides
-a space in which both cases and variables can be situated. If *X* is a
-frequency table for two categorical variables, then the values of the
-two variables can be overlaid on the same *r* shared coordinates. Such a
-scatterplot is called a biplot.
+compare data elements or to predict responses. This is possible because
+both the rows and the columns of the original table can be located, or
+positioned, along these shared coordinates. The number of artificial
+coordinates used in an application, such as regression or visualization,
+is called the *rank* of the ordination [2]. A common application is the
+*biplot*, which positions the rows and columns of the original table in
+a scatterplot of 1, 2, or 3 artificial coordinates, usually those that
+explain the most variation in the data.
 
 ### implementations in R
 
@@ -283,12 +279,14 @@ or errors, please create an issue with a reproducible example. If you
 have requests, suggestions, or your own implementations for new
 features, feel free to create an issue or submit a pull request. Methods
 for additional ordination classes (see the `methods-*.r` scripts in the
-`R` folder) are especially welcome, as are new plot layers. Above all,
-be supportive!
+`R` folder) are especially welcome, as are new plot layers. See the
+[CONTRIBUTING](https://github.com/corybrunson/ordr/blob/main/CONTRIBUTING.md)
+file for guidance, and please respect the [Code of
+Conduct](https://github.com/corybrunson/ordr/blob/main/CODE_OF_CONDUCT.md).
 
 ### inspiration
 
-This package was originally inspired by the **ggbiplot** extention
+This package was originally inspired by the **ggbiplot** extension
 developed by [vqv](https://github.com/vqv/ggbiplot),
 [richardjtelford](https://github.com/richardjtelford/ggbiplot), and
 [GegnzaV](https://github.com/GegznaV/ggbiplot), among others. So far as
@@ -298,8 +296,9 @@ books and
 articles](https://www.barcelonagse.eu/research/publications/all?author=Michael%20Greenacre)
 by Michael Greenacre. Thomas Lin Pedersen’s
 [**tidygraph**](https://github.com/thomasp85/tidygraph) sequel to
-**ggraph** finally induced the shift from simply generating scatterplots
-to upstream handling and manipulating ordination data.
+**ggraph** finally induced the shift from the downstream generation
+scatterplots to the upstream handling and manipulating ordination
+models.
 
 [1] The term *ordination* is most prevalent among ecologists; to my
 knowledge, no catch-all term is in common use outside ecology.
