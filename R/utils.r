@@ -65,6 +65,8 @@ setup_cols_data <- function(data, params) {
   data[data$.matrix == "cols", -match(".matrix", names(data)), drop = FALSE]
 }
 
+is_const <- function(x) length(unique(x)) == 1L
+
 family_arg <- function(family_fun) {
   if (! is.null(family_fun)) {
     if (is.character(family_fun)) {

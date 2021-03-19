@@ -77,6 +77,7 @@ tibble::tibble(
 karate_eigen \%>\%
   confer_inertia(1) \%>\%
   ggbiplot(aes(x = 2, y = 1)) +
+  theme_biplot() +
   geom_rows_vector(aes(color = as.factor(faction))) +
   geom_rows_text_radiate(aes(label = ifelse(grepl("H|A", label), label, NA))) +
   guides(color = FALSE) +
@@ -89,6 +90,7 @@ karate_eigen \%>\%
 karate_eigen \%>\%
   confer_inertia(1) \%>\%
   ggbiplot(aes(x = 2, y = 3)) +
+  theme_biplot() +
   geom_rows_vector(aes(color = EV1)) +
   geom_rows_text_radiate(stat = "chull", aes(label = label)) +
   labs(x = "algebraic connectivity", y = "loading onto third eigenvector") +

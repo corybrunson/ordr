@@ -15,8 +15,8 @@ enable parsing of object name).}
 \item{...}{Additional arguments passed to other methods.}
 }
 \description{
-Mimic \strong{stats} \code{plot()} and \code{biplot()} methods for 'prcomp' and
-'princomp' objects for 'tbl_ord' objects.
+Mimic \strong{stats} \code{plot()}, \code{screeplot()}, and \code{biplot()} methods
+for 'prcomp' and 'princomp' objects for 'tbl_ord' objects.
 }
 \details{
 These methods defer to any \code{plot()} and \code{biplot()} methods for the original,

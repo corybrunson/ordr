@@ -11,7 +11,7 @@ as_tbl_ord(diabetes_lda) %>%
 diabetes_lda %>%
   confer_inertia(1) %>%
   ggbiplot() +
-  theme_bw() +
+  theme_bw() + theme_biplot() +
   geom_rows_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
   geom_cols_axis(color = "#888888") +
   geom_cols_axis_ticks() +
@@ -32,7 +32,7 @@ as_tbl_ord(diabetes_lda) %>%
 diabetes_lda %>%
   confer_inertia(.5) %>%
   ggbiplot() +
-  theme_bw() +
+  theme_bw() + theme_biplot() +
   geom_rows_point(aes(shape = .grouping, alpha = discriminant)) +
   geom_cols_axis(color = "#888888") +
   geom_cols_axis_ticks() +

@@ -17,6 +17,7 @@ tidy(finches_lsvd)
 # biplot (inertia is not defined and cannot be conferred)
 finches_lsvd %>%
   ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 100) +
+  theme_biplot() +
   geom_rows_vector(alpha = .5, color = "darkred") +
   geom_rows_text_radiate(size = 3, color = "darkred") +
   geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
@@ -40,6 +41,7 @@ tidy(finches_lpca)
 # biplot (inertia is not defined and cannot be conferred)
 finches_lpca %>%
   ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 50) +
+  theme_biplot() +
   geom_rows_vector(alpha = .5, color = "darkred") +
   geom_rows_text_radiate(size = 3, color = "darkred") +
   geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
@@ -65,6 +67,7 @@ tidy(finches_clpca)
 # biplot (inertia is not defined and cannot be conferred)
 finches_clpca %>%
   ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 50) +
+  theme_biplot() +
   geom_rows_vector(alpha = .5, color = "darkred") +
   geom_rows_text_radiate(size = 3, color = "darkred") +
   geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +

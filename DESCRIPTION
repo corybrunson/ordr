@@ -63,6 +63,7 @@ Collate:
     'geom-axis-labels.r'
     'geom-axis-ticks.r'
     'geom-axis.r'
+    'geom-crosshairs.r'
     'geom-intervals.r'
     'geom-path.r'
     'geom-point.r'
@@ -92,3 +93,4 @@ Collate:
     'stat-ellipse.r'
     'stat-matrix.r'
     'stat-spantree.r'
+    'themes.r'

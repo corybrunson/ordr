@@ -34,9 +34,12 @@ reference:
     Functions to generate and annotate biplots from `tbl_ord` objects, following
     the layered grammar of graphics
   contents:
+  - 'plot.tbl_ord'
   - '`ggbiplot`'
   - 'stat_rows'
+  - starts_with("theme_")
   - has_concept("stat layers")
+  - '`geom_crosshairs`'
   - '`geom_unit_circle`'
   - has_concept("geom layers")
   - '`draw-key`'

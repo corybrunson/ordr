@@ -34,7 +34,8 @@ smoke_ca %>%
   ggbiplot(aes(label = .name, color = .matrix, shape = .matrix)) +
   scale_color_manual(values = c("navyblue", "brown")) +
   scale_shape_manual(values = c(17L, 16L)) +
-  theme_bw() +
+  theme_bw() + theme_biplot() +
+  geom_crosshairs() +
   geom_rows_point() +
   geom_rows_text_repel(show.legend = FALSE) +
   geom_cols_point() +
@@ -46,7 +47,8 @@ smoke_ca %>%
   ggbiplot(aes(label = .name, color = .matrix, shape = .matrix)) +
   scale_color_manual(values = c("navyblue", "brown")) +
   scale_shape_manual(values = c(17L, 16L)) +
-  theme_bw() +
+  theme_bw() + theme_biplot() +
+  geom_crosshairs() +
   geom_rows_point() +
   geom_rows_text_repel(show.legend = FALSE) +
   geom_cols_point() +
