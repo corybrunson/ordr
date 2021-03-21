@@ -59,6 +59,8 @@ karate \%>\%
     label = igraph::vertex_attr(karate, "label")
   ) \%>\%
   print() -> karate_eigen
+# summarize ordination
+glance(karate_eigen)
 # recover matrices of row and column coordinates
 get_rows(karate_eigen)[seq(8L), seq(5L)]
 get_cols(karate_eigen)[seq(8L), seq(5L)]

@@ -83,6 +83,8 @@ head(iris)
 lda_ord(iris[, 1:4], iris[, 5]) \%>\%
   as_tbl_ord() \%>\%
   print() -> iris_lda
+# summarize ordination
+glance(iris_lda)
 # recover centroid coordinates and measurement discriminant coefficients
 get_rows(iris_lda, .supplement = FALSE)
 get_cols(iris_lda)
@@ -102,7 +104,6 @@ ggplot(iris_lda, .matrix = "coord", aes(x = .name, y = .prop_var)) +
 fortify(iris_lda, .supplement = FALSE)
 # unstandardized coefficient LDA biplot (centroids only)
 iris_lda \%>\%
-  as_tbl_ord() \%>\%
   augment_ord() \%>\%
   mutate_rows(species = .grouping) \%>\%
   ggbiplot(.supplement = FALSE) +
@@ -118,7 +119,6 @@ iris_lda \%>\%
   expand_limits(y = c(-2, 4.25))
 # biplot with supplementary points for observations
 iris_lda \%>\%
-  as_tbl_ord() \%>\%
   augment_ord() \%>\%
   mutate_rows(
     species = .grouping,

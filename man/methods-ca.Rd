@@ -47,6 +47,8 @@ ca::smoke \%>\%
   ca::ca() \%>\%
   as_tbl_ord() \%>\%
   print() -> smoke_ca
+# summarize ordination
+glance(smoke_ca)
 # recover row and column profiles
 get_rows(smoke_ca)
 get_cols(smoke_ca)

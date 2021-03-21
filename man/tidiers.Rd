@@ -5,7 +5,7 @@
 \alias{tidy.tbl_ord}
 \alias{glance.tbl_ord}
 \alias{fortify.tbl_ord}
-\title{Tidiers for tbl_ords}
+\title{Tidiers for 'tbl_ord' objects}
 \usage{
 \method{tidy}{tbl_ord}(x, ...)
 
