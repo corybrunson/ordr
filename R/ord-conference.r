@@ -1,4 +1,4 @@
-#' @title Confer inertia to factors of an ordination
+#' @title Confer inertia to factors of a 'tbl_ord' object
 #'
 #' @description Re-distribute inertia between cases and variables in an
 #'   ordination.

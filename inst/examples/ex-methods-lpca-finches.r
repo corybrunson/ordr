@@ -7,6 +7,8 @@ finches %>% t() %>%
   logisticSVD_ord() %>%
   as_tbl_ord() %>%
   print() -> finches_lsvd
+# summarize ordination
+glance(finches_lsvd)
 # recover row and column singular vectors
 get_rows(finches_lsvd)
 get_cols(finches_lsvd)
@@ -31,6 +33,8 @@ finches %>% t() %>%
   logisticPCA_ord() %>%
   as_tbl_ord() %>%
   print() -> finches_lpca
+# summarize ordination
+glance(finches_lpca)
 # recover row and column singular vectors
 get_rows(finches_lpca)
 get_cols(finches_lpca)
@@ -57,6 +61,8 @@ finches %>%
   convexLogisticPCA_ord() %>%
   as_tbl_ord() %>%
   print() -> finches_clpca
+# summarize ordination
+glance(finches_clpca)
 # recover row and column singular vectors
 get_rows(finches_clpca)
 get_cols(finches_clpca)

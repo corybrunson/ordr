@@ -12,6 +12,8 @@ USArrests %>%
   lra() %>%
   as_tbl_ord() %>%
   print() -> arrests_lra
+# summarize ordination
+glance(arrests_lra)
 # augment log-ratio profiles with names and join state abbreviations
 arrests_lra %>%
   augment_ord() %>%

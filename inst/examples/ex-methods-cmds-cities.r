@@ -6,6 +6,8 @@ UScitiesD %>%
   cmdscale_ord(k = 2) %>%
   as_tbl_ord() %>%
   print() -> usa_mds
+# summarize ordination
+glance(usa_mds)
 # recover (equivalent) matrices of row and column artificial coordinates
 get_rows(usa_mds)
 get_cols(usa_mds)

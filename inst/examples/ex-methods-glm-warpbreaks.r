@@ -4,6 +4,8 @@ warpbreaks %>%
   as_tbl_ord() %>%
   augment_ord() %>%
   print() -> warpbreaks_pois
+# summarize ordination
+glance(warpbreaks_pois)
 # regression biplot with nonlinear isolines
 warpbreaks_pois %>%
   ggbiplot(aes(

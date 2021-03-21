@@ -1,4 +1,4 @@
-#' @title Supplement ordination objects with new data
+#' @title Supplement 'tbl_ord' objects with new data
 #'
 #' @description These functions attach supplementary rows or columns to an
 #'   ordination object.

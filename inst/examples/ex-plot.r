@@ -14,7 +14,7 @@ ca::smoke %>%
   print() -> smoke_ca
 plot(smoke_ca)
 screeplot(smoke_ca)
-biplot(smoke_ca)
+biplot(smoke_ca, var.axes = FALSE)
 # class 'lra'
 USArrests %>%
   subset(select = -UrbanPop) %>%
@@ -23,4 +23,4 @@ USArrests %>%
   print() -> arrests_lra
 plot(arrests_lra)
 screeplot(arrests_lra)
-biplot(arrests_lra)
+biplot(arrests_lra, var.axes = FALSE)

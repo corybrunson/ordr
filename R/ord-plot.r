@@ -1,7 +1,7 @@
 #' @title Plot and biplot methods for 'tbl_ord' objects
 #'
-#' @description Mimic **stats** `plot()`, `screeplot()`, and `biplot()` methods
-#'   for 'prcomp' and 'princomp' objects for 'tbl_ord' objects.
+#' @description Adapt **stats** 'prcomp' and 'princomp' methods for `plot()`,
+#'   `screeplot()`, and `biplot()` generics to 'tbl_ord' objects.
 #'
 #' @details
 #'
@@ -18,6 +18,7 @@
 #' the proportions do not sum to 1, in which case it produces a symmetric biplot
 #' (inertia conferred equally to rows and columns).
 #'
+#' @include ord-tbl.r
 #' @importFrom graphics plot
 #' @importFrom stats screeplot biplot
 #' @param x A 'tbl_ord' object.
