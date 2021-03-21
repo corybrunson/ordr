@@ -4,7 +4,7 @@
 \alias{plot.tbl_ord}
 \title{Plot and biplot methods for 'tbl_ord' objects}
 \usage{
-\method{plot}{tbl_ord}(x, main = deparse1(substitute(x)), ...)
+\method{plot}{tbl_ord}(x, main = deparse(substitute(x)), ...)
 }
 \arguments{
 \item{x}{A 'tbl_ord' object.}
@@ -35,28 +35,30 @@ the proportions do not sum to 1, in which case it produces a symmetric biplot
 \examples{
 # note: behavior depends on installed packages with class-specific methods
 # class 'prcomp'
-iris[, -5] \%>\%
-  prcomp(scale = TRUE) \%>\%
-  as_tbl_ord() \%>\%
-  print() -> iris_pca
+iris_pca <- prcomp(iris[, -5L], scale = TRUE)
+iris_pca_ord <- as_tbl_ord(iris_pca)
 plot(iris_pca)
+plot(iris_pca_ord)
 screeplot(iris_pca)
+screeplot(iris_pca_ord)
 biplot(iris_pca)
+biplot(iris_pca_ord)
 # class 'ca'
-ca::smoke \%>\%
-  ca::ca() \%>\%
-  as_tbl_ord() \%>\%
-  print() -> smoke_ca
+smoke_ca <- ca::ca(ca::smoke)
+smoke_ca_ord <- as_tbl_ord(smoke_ca)
 plot(smoke_ca)
-screeplot(smoke_ca)
-biplot(smoke_ca)
+plot(smoke_ca_ord)
+#screeplot(smoke_ca)
+screeplot(smoke_ca_ord)
+#biplot(smoke_ca)
+biplot(smoke_ca_ord, var.axes = FALSE)
 # class 'lra'
-USArrests \%>\%
-  subset(select = -UrbanPop) \%>\%
-  lra() \%>\%
-  as_tbl_ord() \%>\%
-  print() -> arrests_lra
-plot(arrests_lra)
-screeplot(arrests_lra)
-biplot(arrests_lra)
+arrests_lra <- lra(subset(USArrests, select = -UrbanPop))
+arrests_lra_ord <- as_tbl_ord(arrests_lra)
+#plot(arrests_lra)
+plot(arrests_lra_ord)
+#screeplot(arrests_lra)
+screeplot(arrests_lra_ord)
+#biplot(arrests_lra)
+biplot(arrests_lra_ord, var.axes = FALSE)
 }

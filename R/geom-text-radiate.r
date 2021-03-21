@@ -1,9 +1,10 @@
 #' @title Render text that radiates outward from the origin
 #' 
 
-#' @description `geom_text_radiate()` is adapted from [ggbiplot::ggbiplot()]. It
-#'   renders text at specified positions and angles that radiate out from the
-#'   origin.
+#' @description `geom_text_radiate()` is adapted from `ggbiplot()` in the
+#'   off-CRAN extensions of the same name (Vu, 2014; Telford, 2017; Gegzna,
+#'   2018). It renders text at specified positions and angles that radiate out
+#'   from the origin.
 #' @template biplot-layers
 
 #' @section Aesthetics:
@@ -25,6 +26,8 @@
 #' - `vjust`
 #' - `group`
 #' 
+
+#' @template ref-ggbiplot
 
 #' @import ggplot2
 #' @inheritParams ggplot2::geom_text

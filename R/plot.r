@@ -28,26 +28,26 @@
 
 #' @method plot tbl_ord
 #' @export
-plot.tbl_ord <- function(x, main = deparse1(substitute(x)), ...) {
-  main
+plot.tbl_ord <- function(x, main = deparse(substitute(x)), ...) {
+  force(main)
   # use `plot()` method for original class if available
   prev_class <- setdiff(class(x), "tbl_ord")
   if (any(prev_class %in% method_classes("plot"))) {
     class(x) <- prev_class
-    return(plot(x, ...))
+    return(plot(x, main = main, ...))
   }
   screeplot(x, main = main, ...)
 }
 
 #' @method screeplot tbl_ord
 #' @export
-screeplot.tbl_ord <- function(x, main = deparse1(substitute(x)), ...) {
-  main
+screeplot.tbl_ord <- function(x, main = deparse(substitute(x)), ...) {
+  force(main)
   # use `screeplot()` method for original class if available
   prev_class <- setdiff(class(x), "tbl_ord")
   if (any(prev_class %in% method_classes("screeplot"))) {
     class(x) <- prev_class
-    return(screeplot(x, ...))
+    return(screeplot(x, main = main, ...))
   }
   # label axis columns
   sdev <- sqrt(recover_inertia(x))
@@ -57,8 +57,8 @@ screeplot.tbl_ord <- function(x, main = deparse1(substitute(x)), ...) {
 
 #' @method biplot tbl_ord
 #' @export
-biplot.tbl_ord <- function(x, main = deparse1(substitute(x)), ...) {
-  main
+biplot.tbl_ord <- function(x, main = deparse(substitute(x)), ...) {
+  force(main)
   # use `biplot()` method for original class if available
   prev_class <- setdiff(class(x), "tbl_ord")
   if (any(prev_class %in% method_classes("biplot"))) {
