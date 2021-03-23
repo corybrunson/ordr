@@ -29,6 +29,7 @@
 #' @template param-geom
 #' @inheritParams ggplot2::geom_text
 #' @inheritParams geom_isolines
+#' @param num Integer; the number of labels on each axis.
 #' @param label_dodge Numeric; the orthogonal distance of the text from
 #'   the axis, as a proportion of the minimum of the plot width and height.
 #' @family geom layers
@@ -37,7 +38,7 @@
 geom_axis_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
-  label_dodge = .025,
+  num = 6L, label_dodge = .025,
   ...,
   parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
@@ -56,6 +57,7 @@ geom_axis_text <- function(
       family_fun = family_fun,
       axes = axes,
       by = by,
+      num = num,
       label_dodge = label_dodge,
       parse = parse,
       check_overlap = check_overlap,
@@ -70,7 +72,7 @@ geom_axis_text <- function(
 geom_rows_axis_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
-  label_dodge = .025,
+  num = 6L, label_dodge = .025,
   ...,
   parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
@@ -89,6 +91,7 @@ geom_rows_axis_text <- function(
       family_fun = family_fun,
       axes = axes,
       by = by,
+      num = num,
       label_dodge = label_dodge,
       parse = parse,
       check_overlap = check_overlap,
@@ -103,7 +106,7 @@ geom_rows_axis_text <- function(
 geom_cols_axis_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
-  label_dodge = .025,
+  num = 6L, label_dodge = .025,
   ...,
   parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
@@ -122,6 +125,7 @@ geom_cols_axis_text <- function(
       family_fun = family_fun,
       axes = axes,
       by = by,
+      num = num,
       label_dodge = label_dodge,
       parse = parse,
       check_overlap = check_overlap,
@@ -136,7 +140,7 @@ geom_cols_axis_text <- function(
 geom_dims_axis_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "cols", axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
-  label_dodge = .025,
+  num = 6L, label_dodge = .025,
   ...,
   parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
@@ -155,6 +159,7 @@ geom_dims_axis_text <- function(
       family_fun = family_fun,
       axes = axes,
       by = by,
+      num = num,
       label_dodge = label_dodge,
       parse = parse,
       check_overlap = check_overlap,
@@ -223,7 +228,7 @@ GeomAxisText <- ggproto(
   draw_panel = function(
     data, panel_params, coord,
     axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
-    label_dodge = .025,
+    num = 6L, label_dodge = .025,
     parse = FALSE, check_overlap = FALSE,
     na.rm = FALSE
   ) {
@@ -263,7 +268,7 @@ GeomAxisText <- ggproto(
     # element units; by default, use Wilkinson's breaks algorithm
     if (is.null(by)) {
       bys <- lapply(1:nrow(data), function(i) {
-        labeling::extended(data$unitmin[i], data$unitmax[i], 6)
+        labeling::extended(data$unitmin[i], data$unitmax[i], num)
       })
     } else {
       if (length(by) == 1) by <- rep(by, nrow(data))
