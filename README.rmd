@@ -25,7 +25,7 @@ devtools::load_all()
 
 _Ordination_ is a catch-all term for a variety of statistical techniques that introduce an artificial coordinate system for a data set in such a way that a few coordinates capture a large amount of the data structure [^ordination].
 The branch of mathematical statistics called [geometric data analysis](https://www.springer.com/us/book/9781402022357) (GDA) provides the theoretical basis for (most of) these techniques.
-Together with regression, ordination can be contrasted to clustering and classification, in that they assign continuous rather than discrete values to data elements.
+Ordination overlaps with regression and with dimension reduction, which can be [contrasted to clustering and classification](https://towardsdatascience.com/supervised-vs-unsupervised-learning-14f68e32ea8d) in that they assign continuous rather than discrete values to data elements.
 
 Most ordination techniques decompose a numeric rectangular data set into the product of two matrices, often using singular value decomposition. The coordinates of the shared dimensions of these matrices (over which they are multiplied) are the artificial coordinates.
 In some cases, such as principal components analysis, the decomposition is exact; in others, such as non-negative matrix factorization, it is approximate. Some techniques, such as correspondence analysis, transform the data before decomposition.

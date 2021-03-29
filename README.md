@@ -16,12 +16,14 @@ visualization into a
 *Ordination* is a catch-all term for a variety of statistical techniques
 that introduce an artificial coordinate system for a data set in such a
 way that a few coordinates capture a large amount of the data structure
-[1]. The branch of mathematical statistics called [geometric data
+\[1\]. The branch of mathematical statistics called [geometric data
 analysis](https://www.springer.com/us/book/9781402022357) (GDA) provides
-the theoretical basis for (most of) these techniques. Together with
-regression, ordination can be contrasted to clustering and
-classification, in that they assign continuous rather than discrete
-values to data elements.
+the theoretical basis for (most of) these techniques. Ordination
+overlaps with regression and with dimension reduction, which can be
+[contrasted to clustering and
+classification](https://towardsdatascience.com/supervised-vs-unsupervised-learning-14f68e32ea8d)
+in that they assign continuous rather than discrete values to data
+elements.
 
 Most ordination techniques decompose a numeric rectangular data set into
 the product of two matrices, often using singular value decomposition.
@@ -39,10 +41,10 @@ compare data elements or to predict responses. This is possible because
 both the rows and the columns of the original table can be located, or
 positioned, along these shared coordinates. The number of artificial
 coordinates used in an application, such as regression or visualization,
-is called the *rank* of the ordination [2]. A common application is the
-*biplot*, which positions the rows and columns of the original table in
-a scatterplot of 1, 2, or 3 artificial coordinates, usually those that
-explain the most variation in the data.
+is called the *rank* of the ordination \[2\]. A common application is
+the *biplot*, which positions the rows and columns of the original table
+in a scatterplot of 1, 2, or 3 artificial coordinates, usually those
+that explain the most variation in the data.
 
 ### implementations in R
 
@@ -218,14 +220,15 @@ ggbiplot(spend_pca, aes(label = .name)) +
 Multidimensional scaling (MDS) is an ordination technique that starts
 not with rectangular data but with interpoint distances. A common
 illustration of its power is to calculate MDS on the set of
-distances—however measured—between geographic locations, and to recover
-the approximate geography via a biplot. This example is adapted from the
-documentation of `cmdscale()` in the **stats** package; note that
-**ordr** provides the wrapper `cmdscale_ord()` that always returns the
-eigenvalues and the symmetric distance matrix produced during the
+distances—however measured—between geographic locations, and to
+recover the approximate geography via a biplot. This example is adapted
+from the documentation of `cmdscale()` in the **stats** package; note
+that **ordr** provides the wrapper `cmdscale_ord()` that always returns
+the eigenvalues and the symmetric distance matrix produced during the
 calculation. The MDS uses 11 coordinates—the number of positive
 eigenvalues—so that `stat_*_spantree()` can call upon them to recover
-the intercity distances.
+the intercity
+distances.
 
 ``` r
 # `tbl_ord` object for a classical MDS on distances between European cities
@@ -274,7 +277,7 @@ city_mds %>%
 
 ### contribute
 
-Any feedback on the package is very welcome! If you encounter confusion
+Any feedback on the package is very welcome\! If you encounter confusion
 or errors, please create an issue with a reproducible example. If you
 have requests, suggestions, or your own implementations for new
 features, feel free to create an issue or submit a pull request. Methods
@@ -300,15 +303,15 @@ by Michael Greenacre. Thomas Lin Pedersen’s
 scatterplots to the upstream handling and manipulating ordination
 models.
 
-[1] The term *ordination* is most prevalent among ecologists; to my
-knowledge, no catch-all term is in common use outside ecology.
+1.  The term *ordination* is most prevalent among ecologists; to my
+    knowledge, no catch-all term is in common use outside ecology.
 
-[2] Regression and clustering models, like classical [linear
-regression](http://www.multivariatestatistics.org/chapter2.html) and
-[*k*-means](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html),
-can also be understood as matrix decomposition approximations and even
-visualized in biplots. Their shared coordinates, which are pre-defined
-rather than artificial, are the predictor coefficients and the cluster
-assignments, respectively. Methods for `stats::lm()` and
-`stats::kmeans()`, for example, are implemented for the sake of novelty
-and instruction, but are not widely used in practice.
+2.  Regression and clustering models, like classical [linear
+    regression](http://www.multivariatestatistics.org/chapter2.html) and
+    [*k*-means](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html),
+    can also be understood as matrix decomposition approximations and
+    even visualized in biplots. Their shared coordinates, which are
+    pre-defined rather than artificial, are the predictor coefficients
+    and the cluster assignments, respectively. Methods for `stats::lm()`
+    and `stats::kmeans()`, for example, are implemented for the sake of
+    novelty and instruction, but are not widely used in practice.
