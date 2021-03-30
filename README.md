@@ -314,7 +314,7 @@ Biplots*](https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550)
 by John C. Gower, David J. Hand, Sugnet Gardner Lubbe, and Niel J. Le
 Roux.
 
-### notes
+## notes
 
 1.  The term *ordination* is most prevalent among ecologists; to my
     knowledge, no catch-all term is in common use outside ecology.
