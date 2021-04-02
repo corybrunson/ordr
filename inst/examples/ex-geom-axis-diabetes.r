@@ -14,6 +14,7 @@ diabetes_lda %>%
   theme_bw() + theme_biplot() +
   geom_rows_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
   geom_cols_axis(color = "#888888") +
+  geom_cols_axis_label(aes(label = .name)) +
   geom_cols_axis_ticks(num = 8L) +
   geom_cols_axis_text(size = 2.5, num = 8L, label_dodge = .2) +
   ggtitle(
