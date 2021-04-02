@@ -1,6 +1,6 @@
-#' @title Render tick mark labels for axes
+#' @title Render tick mark text for axes
 #'
-#' @description `geom_axis_text()` renders tick mark labels for specified axes
+#' @description `geom_axis_text()` renders tick mark text for specified axes
 #'   among the row or column factors.
 #' @template biplot-layers
 
@@ -29,7 +29,7 @@
 #' @template param-geom
 #' @inheritParams ggplot2::geom_text
 #' @inheritParams geom_isolines
-#' @param num Integer; the number of labels on each axis.
+#' @param num Integer; the number of text labels on each axis.
 #' @param label_dodge Numeric; the orthogonal distance of the text from
 #'   the axis, as a proportion of the minimum of the plot width and height.
 #' @family geom layers
