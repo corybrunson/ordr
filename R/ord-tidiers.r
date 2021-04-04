@@ -1,4 +1,4 @@
-#' @title Tidiers for tbl_ords
+#' @title Tidiers for 'tbl_ord' objects
 #'
 #' @description These functions return [tibbles][tibble::tibble] that summarize
 #'   an object of class '[tbl_ord]'. `tidy()` output contains one row per

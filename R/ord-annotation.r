@@ -1,4 +1,4 @@
-#' @title Annotate factors of tbl_ords
+#' @title Annotate factors of 'tbl_ord' objects
 #'
 #' @description These functions annotate the matrix factors of [tbl_ord]s with
 #'   additional variables, and retrieve these annotations.

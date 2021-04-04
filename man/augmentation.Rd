@@ -7,7 +7,7 @@
 \alias{augmentation_factor}
 \alias{augmentation_coord}
 \alias{augment_ord}
-\title{Augment factors and coordinates of tbl_ords}
+\title{Augment factors and coordinates of 'tbl_ord' objects}
 \usage{
 augmentation_rows(x)
 
@@ -42,10 +42,10 @@ The function \code{augment_ord()} returns the ordination with either or both
 matrix factors annotated with the result of \verb{augmentation_*()}. In this way
 \code{augment_ord()} works like \code{\link[generics:augment]{generics::augment()}}, as popularized by the
 \strong{broom} package, by extracting information about the rows and columns, but
-it differs in returning an annotated tbl_ord rather than a
-\link[tibble:tbl_df-class]{'tbl_df'}. The advantage of implementing separate methods
-for the rows, columns, and artificial coordinates is that more information
-contained in the original object becomes accessible to the user.
+it differs in returning an annotated 'tbl_ord' rather than a
+\link[tibble:tbl_df-class]{'tbl_df'} object. The advantage of implementing separate
+methods for the rows, columns, and artificial coordinates is that more
+information contained in the original object becomes accessible to the user.
 }
 \seealso{
 \link{tidiers} and \link{annotation} methods that interface with augmentation.

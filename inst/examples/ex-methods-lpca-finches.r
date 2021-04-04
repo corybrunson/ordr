@@ -7,6 +7,8 @@ finches %>% t() %>%
   logisticSVD_ord() %>%
   as_tbl_ord() %>%
   print() -> finches_lsvd
+# summarize ordination
+glance(finches_lsvd)
 # recover row and column singular vectors
 get_rows(finches_lsvd)
 get_cols(finches_lsvd)
@@ -17,6 +19,7 @@ tidy(finches_lsvd)
 # biplot (inertia is not defined and cannot be conferred)
 finches_lsvd %>%
   ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 100) +
+  theme_biplot() +
   geom_rows_vector(alpha = .5, color = "darkred") +
   geom_rows_text_radiate(size = 3, color = "darkred") +
   geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
@@ -30,6 +33,8 @@ finches %>% t() %>%
   logisticPCA_ord() %>%
   as_tbl_ord() %>%
   print() -> finches_lpca
+# summarize ordination
+glance(finches_lpca)
 # recover row and column singular vectors
 get_rows(finches_lpca)
 get_cols(finches_lpca)
@@ -40,6 +45,7 @@ tidy(finches_lpca)
 # biplot (inertia is not defined and cannot be conferred)
 finches_lpca %>%
   ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 50) +
+  theme_biplot() +
   geom_rows_vector(alpha = .5, color = "darkred") +
   geom_rows_text_radiate(size = 3, color = "darkred") +
   geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
@@ -55,6 +61,8 @@ finches %>%
   convexLogisticPCA_ord() %>%
   as_tbl_ord() %>%
   print() -> finches_clpca
+# summarize ordination
+glance(finches_clpca)
 # recover row and column singular vectors
 get_rows(finches_clpca)
 get_cols(finches_clpca)
@@ -65,6 +73,7 @@ tidy(finches_clpca)
 # biplot (inertia is not defined and cannot be conferred)
 finches_clpca %>%
   ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 50) +
+  theme_biplot() +
   geom_rows_vector(alpha = .5, color = "darkred") +
   geom_rows_text_radiate(size = 3, color = "darkred") +
   geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +

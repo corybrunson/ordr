@@ -36,7 +36,7 @@ NULL
 #' @rdname wrap-ord
 #' @export
 eigen_ord <- function(x, symmetric = isSymmetric.matrix(x)) {
-  res <- eigen(x = x, only.values = FALSE, EISPACK = FALSE)
+  res <- eigen(x = x, only.values = FALSE)
   rownames(res$vectors) <- rownames(x)
   colnames(res$vectors) <- paste0("EV", seq_along(res$values))
   class(res) <- "eigen_ord"
@@ -46,7 +46,7 @@ eigen_ord <- function(x, symmetric = isSymmetric.matrix(x)) {
 #' @rdname wrap-ord
 #' @export
 svd_ord <- function(x, nu = min(dim(x)), nv = min(dim(x))) {
-  res <- svd(x = x, nu = nu, nv = nv, LINPACK = FALSE)
+  res <- svd(x = x, nu = nu, nv = nv)
   rownames(res$u) <- rownames(x)
   colnames(res$u) <- paste0("SV", seq_along(res$d))
   rownames(res$v) <- colnames(x)

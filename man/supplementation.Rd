@@ -5,7 +5,7 @@
 \alias{supplementation_rows}
 \alias{supplementation_cols}
 \alias{supplementation_factor}
-\title{Supplement ordination objects with new data}
+\title{Supplement 'tbl_ord' objects with new data}
 \usage{
 supplementation_rows(x)
 

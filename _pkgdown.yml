@@ -17,7 +17,7 @@ reference:
   - '`glass`'
 - title: "Tidy ordination"
   desc: >
-    The `tbl_ord` class wrapper, with methods for accessing components and for
+    The 'tbl_ord' class wrapper, with methods for accessing components and for
     querying and manipulating metadata
   contents:
   - '`accessors`'
@@ -28,15 +28,18 @@ reference:
   - '`supplementation`'
   - '`tbl_ord`'
   - '`format`'
+  - 'plot.tbl_ord'
   - '`dplyr-verbs`'
 - title: "Layered grammar for biplots"
   desc: >
-    Functions to generate and annotate biplots from `tbl_ord` objects, following
+    Functions to generate and annotate biplots from 'tbl_ord' objects, following
     the layered grammar of graphics
   contents:
   - '`ggbiplot`'
   - 'stat_rows'
+  - starts_with("theme_")
   - has_concept("stat layers")
+  - '`geom_crosshairs`'
   - '`geom_unit_circle`'
   - has_concept("geom layers")
   - '`draw-key`'

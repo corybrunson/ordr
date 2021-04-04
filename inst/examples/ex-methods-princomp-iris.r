@@ -6,6 +6,8 @@ iris[, -5] %>%
   princomp() %>%
   as_tbl_ord() %>%
   print() -> iris_pca
+# summarize ordination
+glance(iris_pca)
 # bind species classification to observation coordinates
 (iris_pca <- mutate_rows(iris_pca, species = iris$Species))
 # recover observation principal coordinates and measurement standard coordinates

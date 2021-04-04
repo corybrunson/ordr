@@ -65,6 +65,8 @@ mtcars \%>\%
   print() -> mtcars_lm
 # wrap as a 'tbl_ord' object
 (mtcars_lm_ord <- as_tbl_ord(mtcars_lm))
+# summarize ordination
+glance(mtcars_lm_ord)
 # augment everything with names, predictors with observation stats
 augment_ord(mtcars_lm_ord)
 # calculate influences as the squares of weighted residuals
@@ -74,6 +76,7 @@ mtcars_lm_ord \%>\%
   augment_ord() \%>\%
   mutate_rows(influence = .wt.res^2) \%>\%
   ggbiplot(aes(x = wt, y = cyl, intercept = `(Intercept)`)) +
+  theme_biplot() +
   geom_rows_point(aes(color = influence)) +
   geom_cols_vector() +
   geom_cols_isolines(axes = 1, by = 5) +
@@ -87,12 +90,14 @@ warpbreaks \%>\%
   as_tbl_ord() \%>\%
   augment_ord() \%>\%
   print() -> warpbreaks_pois
+# summarize ordination
+glance(warpbreaks_pois)
 # regression biplot with nonlinear isolines
 warpbreaks_pois \%>\%
   ggbiplot(aes(
     x = tensionM, y = tensionH, intercept = `(Intercept)`, label = .name
   )) +
-  theme_bw() +
+  theme_bw() + theme_biplot() +
   geom_jitter(stat = "rows", width = .1, height = .1) +
   geom_cols_vector() +
   geom_cols_text_radiate() +
