@@ -13,6 +13,7 @@ geom_axis_ticks(
   calibrate = FALSE,
   family_fun = NULL,
   by = NULL,
+  num = 6L,
   tick_length = 0.025,
   ...,
   na.rm = FALSE,
@@ -56,6 +57,8 @@ interpretability.}
 transform the values along the axis at which to render elements.}
 
 \item{by}{Interval length between elements, in the units of the ordination.}
+
+\item{num}{Integer; the number of tick marks on each axis.}
 
 \item{tick_length}{Numeric; the length of the tick marks, as a proportion of
 the minimum of the plot width and height.}
@@ -124,8 +127,8 @@ diabetes_lda \%>\%
   theme_bw() + theme_biplot() +
   geom_rows_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
   geom_cols_axis(color = "#888888") +
-  geom_cols_axis_ticks() +
-  geom_cols_axis_text(size = 2.5, label_dodge = .2) +
+  geom_cols_axis_ticks(num = 8L) +
+  geom_cols_axis_text(size = 2.5, num = 8L, label_dodge = .2) +
   ggtitle(
     "LDA of Reaven & Miller diabetes groups",
     "Row-standard biplot of standardized LDA"
@@ -145,8 +148,8 @@ diabetes_lda \%>\%
   theme_bw() + theme_biplot() +
   geom_rows_point(aes(shape = .grouping, alpha = discriminant)) +
   geom_cols_axis(color = "#888888") +
-  geom_cols_axis_ticks() +
-  geom_cols_axis_text(size = 2.5, label_dodge = .1) +
+  geom_cols_axis_ticks(num = 8L) +
+  geom_cols_axis_text(size = 2.5, num = 8L, label_dodge = .1) +
   ggtitle(
     "LDA of Reaven & Miller diabetes groups",
     "Symmetric biplot of contribution LDA"
@@ -156,9 +159,9 @@ diabetes_lda \%>\%
 Other geom layers: 
 \code{\link{geom_axis_text}()},
 \code{\link{geom_axis}()},
-\code{\link{geom_crosshairs}()},
 \code{\link{geom_isolines}()},
 \code{\link{geom_lineranges}()},
+\code{\link{geom_origin}()},
 \code{\link{geom_text_radiate}()},
 \code{\link{geom_unit_circle}()},
 \code{\link{geom_vector}()}

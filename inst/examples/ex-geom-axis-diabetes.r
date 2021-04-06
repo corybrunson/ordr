@@ -14,8 +14,8 @@ diabetes_lda %>%
   theme_bw() + theme_biplot() +
   geom_rows_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
   geom_cols_axis(color = "#888888") +
-  geom_cols_axis_ticks() +
-  geom_cols_axis_text(size = 2.5, label_dodge = .2) +
+  geom_cols_axis_ticks(num = 8L) +
+  geom_cols_axis_text(size = 2.5, num = 8L, label_dodge = .2) +
   ggtitle(
     "LDA of Reaven & Miller diabetes groups",
     "Row-standard biplot of standardized LDA"
@@ -35,8 +35,8 @@ diabetes_lda %>%
   theme_bw() + theme_biplot() +
   geom_rows_point(aes(shape = .grouping, alpha = discriminant)) +
   geom_cols_axis(color = "#888888") +
-  geom_cols_axis_ticks() +
-  geom_cols_axis_text(size = 2.5, label_dodge = .1) +
+  geom_cols_axis_ticks(num = 8L) +
+  geom_cols_axis_text(size = 2.5, num = 8L, label_dodge = .1) +
   ggtitle(
     "LDA of Reaven & Miller diabetes groups",
     "Symmetric biplot of contribution LDA"

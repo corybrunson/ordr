@@ -20,6 +20,7 @@ mtcars_lm_ord %>%
   mutate_rows(influence = .wt.res^2) %>%
   ggbiplot(aes(x = wt, y = cyl, intercept = `(Intercept)`)) +
   theme_biplot() +
+  geom_origin(marker = "circle", radius = unit(0.02, "snpc")) +
   geom_rows_point(aes(color = influence)) +
   geom_cols_vector() +
   geom_cols_isolines(axes = 1, by = 5) +

@@ -107,6 +107,7 @@ geom_rows_axis_text(
   calibrate = FALSE,
   family_fun = NULL,
   by = NULL,
+  num = 6L,
   label_dodge = 0.025,
   ...,
   parse = FALSE,
@@ -125,6 +126,7 @@ geom_cols_axis_text(
   calibrate = FALSE,
   family_fun = NULL,
   by = NULL,
+  num = 6L,
   label_dodge = 0.025,
   ...,
   parse = FALSE,
@@ -144,6 +146,7 @@ geom_dims_axis_text(
   calibrate = FALSE,
   family_fun = NULL,
   by = NULL,
+  num = 6L,
   label_dodge = 0.025,
   ...,
   parse = FALSE,
@@ -162,6 +165,7 @@ geom_rows_axis_ticks(
   calibrate = FALSE,
   family_fun = NULL,
   by = NULL,
+  num = 6L,
   tick_length = 0.025,
   ...,
   na.rm = FALSE,
@@ -178,6 +182,7 @@ geom_cols_axis_ticks(
   calibrate = FALSE,
   family_fun = NULL,
   by = NULL,
+  num = 6L,
   tick_length = 0.025,
   ...,
   na.rm = FALSE,
@@ -195,6 +200,7 @@ geom_dims_axis_ticks(
   calibrate = FALSE,
   family_fun = NULL,
   by = NULL,
+  num = 6L,
   tick_length = 0.025,
   ...,
   na.rm = FALSE,
@@ -695,6 +701,8 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
+
+\item{num}{Integer; the number of labels on each axis.}
 
 \item{label_dodge}{Numeric; the orthogonal distance of the text from
 the axis, as a proportion of the minimum of the plot width and height.}
