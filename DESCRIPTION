@@ -60,7 +60,7 @@ Collate:
     'fun-lra.r'
     'fun-wrap.r'
     'geom-isolines.r'
-    'geom-axis-labels.r'
+    'geom-axis-text.r'
     'geom-axis-ticks.r'
     'geom-axis.r'
     'geom-intervals.r'
