@@ -78,9 +78,10 @@ get_rows <- function(x, .supplement = TRUE) {
   if (.supplement) u <- rbind(u, supplementation_rows(x))
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
-    s <- diag(sqrt(recover_inertia(x)) ^ p[1])
+    i <- recover_inertia(x)
+    s <- diag(sqrt(i) ^ p[[1L]], nrow = length(i), ncol = length(i))
     # same coordinates (necessary for `ggbiplot()`)
-    dimnames(s) <- rep(list(recover_coord(x)), 2)
+    dimnames(s) <- rep(list(recover_coord(x)), 2L)
     u <- u %*% s
   }
   return(u)
@@ -93,9 +94,10 @@ get_cols <- function(x, .supplement = TRUE) {
   if (.supplement) v <- rbind(v, supplementation_cols(x))
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
-    s <- diag(sqrt(recover_inertia(x)) ^ p[2])
+    i <- recover_inertia(x)
+    s <- diag(sqrt(i) ^ p[[2L]], nrow = length(i), ncol = length(i))
     # same coordinates (necessary for `ggbiplot()`)
-    dimnames(s) <- rep(list(recover_coord(x)), 2)
+    dimnames(s) <- rep(list(recover_coord(x)), 2L)
     v <- v %*% s
   }
   return(v)
