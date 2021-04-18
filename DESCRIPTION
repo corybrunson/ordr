@@ -41,7 +41,8 @@ Suggests:
     cooccur,
     proxy,
     knitr,
-    rmarkdown
+    rmarkdown,
+    corrplot
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Collate:
