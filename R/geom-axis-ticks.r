@@ -23,6 +23,7 @@
 #' @inheritParams ggplot2::layer
 #' @template param-geom
 #' @inheritParams geom_isolines
+#' @param num Integer; the number of tick marks on each axis.
 #' @param tick_length Numeric; the length of the tick marks, as a proportion of
 #'   the minimum of the plot width and height.
 #' @family geom layers
@@ -31,7 +32,7 @@
 geom_axis_ticks <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
-  tick_length = .025,
+  num = 6L, tick_length = .025,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -49,6 +50,7 @@ geom_axis_ticks <- function(
       family_fun = family_fun,
       axes = axes,
       by = by,
+      num = num,
       tick_length = tick_length,
       na.rm = na.rm,
       ...
@@ -61,7 +63,7 @@ geom_axis_ticks <- function(
 geom_rows_axis_ticks <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
-  tick_length = .025,
+  num = 6L, tick_length = .025,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -79,6 +81,7 @@ geom_rows_axis_ticks <- function(
       family_fun = family_fun,
       axes = axes,
       by = by,
+      num = num,
       tick_length = tick_length,
       na.rm = na.rm,
       ...
@@ -91,7 +94,7 @@ geom_rows_axis_ticks <- function(
 geom_cols_axis_ticks <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
-  tick_length = .025,
+  num = 6L, tick_length = .025,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -109,6 +112,7 @@ geom_cols_axis_ticks <- function(
       family_fun = family_fun,
       axes = axes,
       by = by,
+      num = num,
       tick_length = tick_length,
       na.rm = na.rm,
       ...
@@ -121,7 +125,7 @@ geom_cols_axis_ticks <- function(
 geom_dims_axis_ticks <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "cols", axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
-  tick_length = .025,
+  num = 6L, tick_length = .025,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -139,6 +143,7 @@ geom_dims_axis_ticks <- function(
       family_fun = family_fun,
       axes = axes,
       by = by,
+      num = num,
       tick_length = tick_length,
       na.rm = na.rm,
       ...
@@ -204,7 +209,7 @@ GeomAxisTicks <- ggproto(
   draw_panel = function(
     data, panel_params, coord,
     axes = NULL, calibrate = FALSE, family_fun = NULL, by = NULL,
-    tick_length = .025
+    num = 6L, tick_length = .025
   ) {
     
     ranges <- coord$range(panel_params)
@@ -242,7 +247,7 @@ GeomAxisTicks <- ggproto(
     # element units; by default, use Wilkinson's breaks algorithm
     if (is.null(by)) {
       bys <- lapply(1:nrow(data), function(i) {
-        labeling::extended(data$unitmin[i], data$unitmax[i], 6)
+        labeling::extended(data$unitmin[i], data$unitmax[i], num)
       })
     } else {
       if (length(by) == 1) by <- rep(by, nrow(data))

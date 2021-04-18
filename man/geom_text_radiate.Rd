@@ -129,9 +129,9 @@ Other geom layers:
 \code{\link{geom_axis_text}()},
 \code{\link{geom_axis_ticks}()},
 \code{\link{geom_axis}()},
-\code{\link{geom_crosshairs}()},
 \code{\link{geom_isolines}()},
 \code{\link{geom_lineranges}()},
+\code{\link{geom_origin}()},
 \code{\link{geom_unit_circle}()},
 \code{\link{geom_vector}()}
 }
