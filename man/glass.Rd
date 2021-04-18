@@ -2,7 +2,7 @@
 % Please edit documentation in R/data.r
 \name{glass}
 \alias{glass}
-\title{Glass composition data from archaeological sites in Israel}
+\title{Glass composition data}
 \format{
 A \link[tibble:tibble]{tibble}.
 }
@@ -13,6 +13,7 @@ Baxter & Freestone (2006).
 data(glass)
 }
 \description{
-Sites, artifacts, and amounts of several components of the sand.
+Sites, artifacts, and amounts of several components of the sand
+from archaeological sites in Israel.
 }
 \keyword{datasets}
