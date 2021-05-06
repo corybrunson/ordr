@@ -140,6 +140,7 @@ USPersonalExpenditure \%>\%
 \seealso{
 Other stat layers: 
 \code{\link{stat_center}()},
+\code{\link{stat_scale}()},
 \code{\link{stat_spantree}()}
 }
 \concept{stat layers}

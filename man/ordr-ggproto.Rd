@@ -3,7 +3,7 @@
 %   R/geom-axis-ticks.r, R/geom-axis.r, R/geom-intervals.r, R/geom-origin.r,
 %   R/geom-text-radiate.r, R/geom-unit-circle.r, R/geom-vector.r,
 %   R/stat-center.r, R/stat-chull.r, R/stat-ellipse.r, R/stat-matrix.r,
-%   R/stat-spantree.r
+%   R/stat-scale.r, R/stat-spantree.r
 \docType{data}
 \name{ordr-ggproto}
 \alias{ordr-ggproto}
@@ -30,6 +30,9 @@
 \alias{StatColsEllipse}
 \alias{StatRows}
 \alias{StatCols}
+\alias{StatScale}
+\alias{StatRowsScale}
+\alias{StatColsScale}
 \alias{StatSpantree}
 \alias{StatRowsSpantree}
 \alias{StatColsSpantree}

@@ -92,5 +92,6 @@ Collate:
     'stat-chull.r'
     'stat-ellipse.r'
     'stat-matrix.r'
+    'stat-scale.r'
     'stat-spantree.r'
     'themes.r'
