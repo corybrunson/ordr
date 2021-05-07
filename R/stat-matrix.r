@@ -2,37 +2,19 @@
 #'
 #' @description These stats merely tell [ggplot2::ggplot()] which factor of an
 #'   ordination to pull data from for a plot layer. They are invoked internally
-#'   by the various `geom_*_*()` layers.
+#'   by the various [`geom_*_*()`][biplot-geoms] layers.
 #'   
 
 #' @template biplot-layers
 
-#' @name biplot-matrix
+#' @name stat_rows
 #' @inheritParams ggplot2::layer
 #' @template param-stat
-NULL
+#' @family biplot layers
 
-#' @rdname biplot-matrix
-#' @usage NULL
+#' @rdname stat_rows
 #' @export
-StatU <- ggproto(
-  "StatU", StatIdentity,
-  
-  setup_data = setup_u_data
-)
-
-#' @rdname biplot-matrix
-#' @usage NULL
-#' @export
-StatV <- ggproto(
-  "StatV", StatIdentity,
-  
-  setup_data = setup_v_data
-)
-
-#' @rdname biplot-matrix
-#' @export
-stat_u <- function(
+stat_rows <- function(
   mapping = NULL, data = data,
   geom = "point", position = "identity",
   ...,
@@ -41,7 +23,7 @@ stat_u <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = "u",
+    stat = "rows",
     geom = geom,
     position = position,
     show.legend = show.legend,
@@ -53,9 +35,9 @@ stat_u <- function(
   )
 }
 
-#' @rdname biplot-matrix
+#' @rdname stat_rows
 #' @export
-stat_v <- function(
+stat_cols <- function(
   mapping = NULL, data = data,
   geom = "axis", position = "identity",
   ...,
@@ -64,7 +46,7 @@ stat_v <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = "v",
+    stat = "cols",
     geom = geom,
     position = position,
     show.legend = show.legend,
@@ -75,3 +57,23 @@ stat_v <- function(
     )
   )
 }
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRows <- ggproto(
+  "StatRows", StatIdentity,
+  
+  setup_data = setup_rows_data
+)
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatCols <- ggproto(
+  "StatCols", StatIdentity,
+  
+  setup_data = setup_cols_data
+)

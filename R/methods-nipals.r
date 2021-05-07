@@ -16,7 +16,7 @@ as_tbl_ord.nipals <- as_tbl_ord_default
 #' @rdname methods-nipals
 #' @export
 reconstruct.nipals <- function(x) {
-  res <- recover_u.nipals(x) %*% t(recover_v.nipals(x))
+  res <- recover_rows.nipals(x) %*% t(recover_cols.nipals(x))
   if (! is.null(attr(x, "cmeans")) & ! is.null(attr(x, "csd"))) {
     res <- sweep(sweep(res, 2, attr(x, "cmeans"), "*"),
                  2, attr(x, "cmeans"), "+")
@@ -28,7 +28,7 @@ reconstruct.nipals <- function(x) {
 
 #' @rdname methods-nipals
 #' @export
-recover_u.nipals <- function(x) {
+recover_rows.nipals <- function(x) {
   res <- x[["li"]]
   colnames(res) <- recover_coord(x)
   res
@@ -36,7 +36,7 @@ recover_u.nipals <- function(x) {
 
 #' @rdname methods-nipals
 #' @export
-recover_v.nipals <- function(x) {
+recover_cols.nipals <- function(x) {
   res <- x[["c1"]]
   colnames(res) <- recover_coord(x)
   res
@@ -63,7 +63,7 @@ recover_conference.nipals <- function(x) {
 
 #' @rdname methods-nipals
 #' @export
-augmentation_u.nipals <- function(x) {
+augmentation_rows.nipals <- function(x) {
   .name <- rownames(x[["li"]])
   if (is.null(.name)) {
     tibble_pole(nrow(x[["li"]]))
@@ -74,7 +74,7 @@ augmentation_u.nipals <- function(x) {
 
 #' @rdname methods-nipals
 #' @export
-augmentation_v.nipals <- function(x) {
+augmentation_cols.nipals <- function(x) {
   .name <- rownames(x[["c1"]])
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x[["c1"]]))

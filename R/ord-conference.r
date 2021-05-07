@@ -1,4 +1,4 @@
-#' @title Confer inertia to factors of an ordination
+#' @title Confer inertia to factors of a 'tbl_ord' object
 #'
 #' @description Re-distribute inertia between cases and variables in an
 #'   ordination.
@@ -24,9 +24,6 @@
 #'   inertia assigned to the cases, with the remainder `1 - p` assigned to the
 #'   variables. If length 2, the proportions of the inertia assigned to the
 #'   cases and to the variables, respectively.
-#' @example inst/examples/country-prcomp-confer.r
-#' @example inst/examples/women-ca-confer.r
-#' @example inst/examples/benthos-ca-augment-confer.r
 NULL
 
 attribute_conference <- function(x, p) {

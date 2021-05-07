@@ -15,48 +15,12 @@
 #' - `size`
 #' 
 
-#' @name geom-unit-circle
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
 #' @param segments The number of segments to be used in drawing the circle.
-NULL
-
-#' @rdname geom-unit-circle
-#' @usage NULL
-#' @export
-GeomUnitCircle <- ggproto(
-  "GeomUnitCircle", GeomPath,
-  
-  required_aes = c(),
-  default_aes = aes(colour = "black", size = 0.5, linetype = 1, alpha = NA),
-  
-  draw_panel = function(
-    data, panel_params, coord,
-    segments = 60
-  ) {
-    # first row (for aesthetics)
-    first_row <- data[1, setdiff(names(data), c("x", "y")), drop = FALSE]
-    rownames(first_row) <- NULL
-    
-    # unit circle as a path
-    angles <- (0:segments) * 2 * pi/segments
-    unit_circle <- data.frame(x = cos(angles), y = sin(angles), group = 1)
-    
-    # data frame of segments with aesthetics
-    data <- cbind(unit_circle, first_row)
-    
-    # return unit circle grob
-    GeomPath$draw_panel(
-      data = data, panel_params = panel_params, coord = coord,
-      na.rm = FALSE
-    )
-  },
-  
-  draw_key = draw_key_blank
-)
-
-#' @rdname geom-unit-circle
+#' @family geom layers
+#' @example inst/examples/ex-geom-unit-circle.r
 #' @export
 geom_unit_circle <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -80,3 +44,61 @@ geom_unit_circle <- function(
     )
   )
 }
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+GeomUnitCircle <- ggproto(
+  "GeomUnitCircle", Geom,
+  
+  required_aes = c(),
+  default_aes = aes(colour = "black", size = 0.5, linetype = 1, alpha = NA),
+  
+  setup_data = function(data, params) {
+    # keep only columns that are constant throughout the data
+    data <- dplyr::select_if(data, is_const)[1L, , drop = FALSE]
+    rownames(data) <- NULL
+    data
+  },
+  
+  draw_panel = function(
+    data, panel_params, coord,
+    segments = 60
+  ) {
+    # check that data has been set up
+    if (nrow(data) != 1L) stop("Constant-valued data has more than one row.")
+    # remove any coordinates
+    data$x <- NULL
+    data$y <- NULL
+    
+    # unit circle as a path
+    angles <- (0:segments) * 2 * pi/segments
+    unit_circle <- data.frame(x = cos(angles), y = sin(angles), group = 1)
+    
+    # data frame of segments with aesthetics
+    data <- cbind(unit_circle, data, row.names = NULL)
+    # transform the coordinates into the viewport (iff using `polylineGrob()`)
+    # data <- coord$transform(data, panel_params)
+    
+    # return unit circle grob
+    GeomPath$draw_panel(
+      data = data, panel_params = panel_params, coord = coord,
+      na.rm = FALSE
+    )
+    # grob <- grid::polylineGrob(
+    #   data$x, data$y,# id = NULL,
+    #   default.units = "native",
+    #   gp = grid::gpar(
+    #     col = alpha(data$colour, data$alpha),
+    #     fill = alpha(data$colour, data$alpha),
+    #     lwd = data$size * .pt,
+    #     lty = data$linetype
+    #   )
+    # )
+    # grob$name <- grid::grobName(grob, "geom_unit_circle")
+    # grob
+  },
+  
+  draw_key = draw_key_blank
+)

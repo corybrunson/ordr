@@ -8,21 +8,29 @@
 
 <title>Functionality for eigendecompositions — methods-eigen • ordr</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,11 +38,11 @@
 
 
 
-<meta property="og:title" content="Functionality for eigendecompositions — methods-eigen" />
 
+<meta property="og:title" content="Functionality for eigendecompositions — methods-eigen" />
 <meta property="og:description" content="These methods extract data from, and attribute new data to,
-objects of class &quot;eigen&quot; returned by eigen_ord()." />
-<meta name="twitter:card" content="summary" />
+objects of class &quot;eigen_ord&quot; returned by eigen_ord()." />
+
 
 
 
@@ -48,9 +56,10 @@ objects of class &quot;eigen&quot; returned by eigen_ord()." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -72,7 +81,7 @@ objects of class &quot;eigen&quot; returned by eigen_ord()." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -80,7 +89,6 @@ objects of class &quot;eigen&quot; returned by eigen_ord()." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -90,6 +98,7 @@ objects of class &quot;eigen&quot; returned by eigen_ord()." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -101,42 +110,37 @@ objects of class &quot;eigen&quot; returned by eigen_ord()." />
     </div>
 
     <div class="ref-description">
-    
     <p>These methods extract data from, and attribute new data to,
-objects of class <code>"eigen"</code> returned by <code><a href='classes.html'>eigen_ord()</a></code>.</p>
-    
+objects of class <code>"eigen_ord"</code> returned by <code><a href='wrap-ord.html'>eigen_ord()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for eigen</span>
-<span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='co'># S3 method for eigen_ord</span>
+<span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='co'># S3 method for eigen</span>
-<span class='fu'><a href='reconstruct.html'>reconstruct</a></span>(<span class='no'>x</span>)
+<span class='co'># S3 method for eigen_ord</span>
+<span class='fu'><a href='accessors.html'>recover_rows</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='co'># S3 method for eigen</span>
-<span class='fu'><a href='accessors.html'>recover_u</a></span>(<span class='no'>x</span>)
+<span class='co'># S3 method for eigen_ord</span>
+<span class='fu'><a href='accessors.html'>recover_cols</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='co'># S3 method for eigen</span>
-<span class='fu'><a href='accessors.html'>recover_v</a></span>(<span class='no'>x</span>)
+<span class='co'># S3 method for eigen_ord</span>
+<span class='fu'><a href='accessors.html'>recover_inertia</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='co'># S3 method for eigen</span>
-<span class='fu'><a href='accessors.html'>recover_inertia</a></span>(<span class='no'>x</span>)
+<span class='co'># S3 method for eigen_ord</span>
+<span class='fu'><a href='accessors.html'>recover_coord</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='co'># S3 method for eigen</span>
-<span class='fu'><a href='accessors.html'>recover_coord</a></span>(<span class='no'>x</span>)
+<span class='co'># S3 method for eigen_ord</span>
+<span class='fu'><a href='conference.html'>recover_conference</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='co'># S3 method for eigen</span>
-<span class='fu'><a href='conference.html'>recover_conference</a></span>(<span class='no'>x</span>)
+<span class='co'># S3 method for eigen_ord</span>
+<span class='fu'><a href='augmentation.html'>augmentation_rows</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='co'># S3 method for eigen</span>
-<span class='fu'><a href='augmentation.html'>augmentation_u</a></span>(<span class='no'>x</span>)
+<span class='co'># S3 method for eigen_ord</span>
+<span class='fu'><a href='augmentation.html'>augmentation_cols</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='co'># S3 method for eigen</span>
-<span class='fu'><a href='augmentation.html'>augmentation_v</a></span>(<span class='no'>x</span>)
+<span class='co'># S3 method for eigen_ord</span>
+<span class='fu'><a href='augmentation.html'>augmentation_coord</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
-<span class='co'># S3 method for eigen</span>
-<span class='fu'><a href='augmentation.html'>augmentation_coord</a></span>(<span class='no'>x</span>)</pre>
-    
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -145,88 +149,124 @@ objects of class <code>"eigen"</code> returned by <code><a href='classes.html'>e
       <td><p>An ordination object.</p></td>
     </tr>
     </table>
-    
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Graph Laplacian eigenvectors for spectral partitioning</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>karate</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"igraphdata"</span>)
-<span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/igraph/topics/plot.igraph'>plot.igraph</a></span>(
-  <span class='no'>karate</span>,
-  <span class='kw'>vertex.label.family</span> <span class='kw'>=</span> <span class='st'>"sans"</span>,
-  <span class='kw'>vertex.label.color</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
-  <span class='kw'>vertex.label.cex</span> <span class='kw'>=</span> <span class='fl'>.75</span>
-)</div><div class='img'><img src='methods-eigen-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># first eigenvector (centrality)</span>
-<span class='no'>karate_eigen_cent</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/igraph/topics/eigen_centrality'>eigen_centrality</a></span>(<span class='no'>karate</span>)
-<span class='co'># eigendecomposition</span>
-<span class='no'>karate</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/igraph/topics/as_adjacency_matrix'>as_adjacency_matrix</a></span>(<span class='kw'>sparse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='classes.html'>eigen_ord</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='dplyr-verbs.html'>mutate_u</a></span>(
-    <span class='kw'>faction</span> <span class='kw'>=</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/igraph/topics/vertex_attr'>vertex_attr</a></span>(<span class='no'>karate</span>, <span class='st'>"Faction"</span>),
-    <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/igraph/topics/vertex_attr'>vertex_attr</a></span>(<span class='no'>karate</span>, <span class='st'>"name"</span>),
-    <span class='kw'>label</span> <span class='kw'>=</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/igraph/topics/vertex_attr'>vertex_attr</a></span>(<span class='no'>karate</span>, <span class='st'>"label"</span>)
-  ) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>karate_eigen</span></div><div class='output co'>#&gt; # A tbl_ord of class 'eigen': (34 x 15) x (34 x 15)'
-#&gt; # 15 coordinates: EV1, EV2, ..., EV15
+    <pre class="examples"><div class='input'><span class='co'># two-group karate club data</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>karate</span>, package <span class='op'>=</span> <span class='st'>"igraphdata"</span><span class='op'>)</span>
+<span class='co'># force-directed layout of graph</span>
+<span class='fu'>igraph</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/plot.igraph.html'>plot.igraph</a></span><span class='op'>(</span>
+  <span class='va'>karate</span>,
+  vertex.label.family <span class='op'>=</span> <span class='st'>"sans"</span>,
+  vertex.label.color <span class='op'>=</span> <span class='st'>"black"</span>,
+  vertex.label.cex <span class='op'>=</span> <span class='fl'>.75</span>
+<span class='op'>)</span>
+</div><div class='img'><img src='methods-eigen-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># graph Laplacian eigenvectors for spectral partitioning:</span>
+<span class='co'># complete eigendecomposition, augmenting vertex data</span>
+<span class='va'>karate</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>igraph</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/as_adjacency_matrix.html'>as_adjacency_matrix</a></span><span class='op'>(</span>sparse <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='wrap-ord.html'>eigen_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='dplyr-verbs.html'>mutate_rows</a></span><span class='op'>(</span>
+    faction <span class='op'>=</span> <span class='fu'>igraph</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/vertex_attr.html'>vertex_attr</a></span><span class='op'>(</span><span class='va'>karate</span>, <span class='st'>"Faction"</span><span class='op'>)</span>,
+    name <span class='op'>=</span> <span class='fu'>igraph</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/vertex_attr.html'>vertex_attr</a></span><span class='op'>(</span><span class='va'>karate</span>, <span class='st'>"name"</span><span class='op'>)</span>,
+    label <span class='op'>=</span> <span class='fu'>igraph</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/vertex_attr.html'>vertex_attr</a></span><span class='op'>(</span><span class='va'>karate</span>, <span class='st'>"label"</span><span class='op'>)</span>
+  <span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>karate_eigen</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'eigen_ord': (34 x 34) x (34 x 34)'
+#&gt; # 34 coordinates: EV1, EV2, ..., EV34
 #&gt; # 
-#&gt; # U: [ 34 x 15 | 3 ]
-#&gt;     EV1   EV2    EV3 ... |   faction name    label
-#&gt;                          |     <span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.922 0.863 -</span><span style='color: #BB0000;'>0.338</span><span>     | </span><span style='color: #BCBCBC;'>1</span><span>       1 Mr Hi   H    
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 0.690 0.600  0.427 ... | </span><span style='color: #BCBCBC;'>2</span><span>       1 Actor 2 2    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.823 0.293  0.421     | </span><span style='color: #BCBCBC;'>3</span><span>       1 Actor 3 3    
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.548 0.564  0.384     | </span><span style='color: #BCBCBC;'>4</span><span>       1 Actor 4 4    
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.197 0.299 -</span><span style='color: #BB0000;'>0.555</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span>       1 Actor 5 5    
+#&gt; # Rows: [ 34 x 34 | 3 ]
+#&gt;      EV1   EV2    EV3 ... |   faction name    label
+#&gt;                           |     <span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.355  0.387 -</span><span style='color: #BB0000;'>0.198</span><span>     | </span><span style='color: #BCBCBC;'>1</span><span>       1 Mr Hi   H    
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 0.266  0.269  0.250 ... | </span><span style='color: #BCBCBC;'>2</span><span>       1 Actor 2 2    
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.317  0.131  0.247     | </span><span style='color: #BCBCBC;'>3</span><span>       1 Actor 3 3    
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.211  0.253  0.225     | </span><span style='color: #BCBCBC;'>4</span><span>       1 Actor 4 4    
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.076</span><span style='text-decoration: underline;'>0</span><span> 0.134 -</span><span style='color: #BB0000;'>0.325</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span>       1 Actor 5 5    
 #&gt; </span><span style='color: #949494;'># … with 29 more rows</span><span>
 #&gt; # 
-#&gt; # V: [ 34 x 15 | 0 ]
-#&gt;     EV1   EV2    EV3 ... | 
-#&gt;                          | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.922 0.863 -</span><span style='color: #BB0000;'>0.338</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 0.690 0.600  0.427 ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.823 0.293  0.421     | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.548 0.564  0.384     | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.197 0.299 -</span><span style='color: #BB0000;'>0.555</span><span>     | 
-#&gt; </div><div class='input'><span class='co'># corroborate eigencentralities</span>
-<span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
-  <span class='kw'>igraph</span> <span class='kw'>=</span> <span class='no'>karate_eigen_cent</span>$<span class='no'>vector</span>,
-  <span class='kw'>eigen</span> <span class='kw'>=</span> <span class='no'>karate_eigen</span>$<span class='no'>vectors</span>[, <span class='fl'>1</span>] / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Extremes'>max</a></span>(<span class='no'>karate_eigen</span>$<span class='no'>vectors</span>[, <span class='fl'>1</span>])
-) <span class='kw'>%&gt;%</span>
-  <span class='fu'>ggplot</span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>eigen</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>igraph</span>)) +
-  <span class='fu'>coord_equal</span>() +
-  <span class='fu'>geom_point</span>()</div><div class='img'><img src='methods-eigen-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># first and second eigenvectors for centrality and connectivity / partitioning</span>
-<span class='no'>karate_eigen</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>1</span>)) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_u_vector</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/factor'>as.factor</a></span>(<span class='no'>faction</span>))) +
-  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_u_text_radiate</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ifelse'>ifelse</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/grep'>grepl</a></span>(<span class='st'>"H|A"</span>, <span class='no'>label</span>), <span class='no'>label</span>, <span class='fl'>NA</span>))) +
-  <span class='fu'>guides</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) +
-  <span class='fu'>labs</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"algebraic connectivity"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"eigencentrality"</span>) +
-  <span class='fu'>ggtitle</span>(
+#&gt; # Columns: [ 34 x 34 | 0 ]
+#&gt;      EV1   EV2    EV3 ... | 
+#&gt;                           | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.355  0.387 -</span><span style='color: #BB0000;'>0.198</span><span>     | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 0.266  0.269  0.250 ... | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.317  0.131  0.247     | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.211  0.253  0.225     | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.076</span><span style='text-decoration: underline;'>0</span><span> 0.134 -</span><span style='color: #BB0000;'>0.325</span><span>     | 
+#&gt; </div><div class='input'><span class='co'># recover matrices of row and column coordinates</span>
+<span class='fu'><a href='accessors.html'>get_rows</a></span><span class='op'>(</span><span class='va'>karate_eigen</span><span class='op'>)</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>8L</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>5L</span><span class='op'>)</span><span class='op'>]</span>
+</div><div class='output co'>#&gt;                EV1       EV2        EV3         EV4         EV5
+#&gt; Mr Hi   0.35549144 0.3868611 -0.1978576  0.01422809  0.14300973
+#&gt; Actor 2 0.26595992 0.2689395  0.2502973 -0.04906027  0.28969138
+#&gt; Actor 3 0.31719250 0.1311596  0.2466749  0.07650617 -0.45963300
+#&gt; Actor 4 0.21117972 0.2529458  0.2249299  0.04515472 -0.10742254
+#&gt; Actor 5 0.07596882 0.1338970 -0.3248366 -0.04886473 -0.01416170
+#&gt; Actor 6 0.07948305 0.1456571 -0.4246940 -0.07819630 -0.14989457
+#&gt; Actor 7 0.07948305 0.1456571 -0.4246940 -0.07819630 -0.14989457
+#&gt; Actor 8 0.17095975 0.2089392  0.1796823  0.03760303 -0.09040377</div><div class='input'><span class='fu'><a href='accessors.html'>get_cols</a></span><span class='op'>(</span><span class='va'>karate_eigen</span><span class='op'>)</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>8L</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>5L</span><span class='op'>)</span><span class='op'>]</span>
+</div><div class='output co'>#&gt;                EV1       EV2        EV3         EV4         EV5
+#&gt; Mr Hi   0.35549144 0.3868611 -0.1978576  0.01422809  0.14300973
+#&gt; Actor 2 0.26595992 0.2689395  0.2502973 -0.04906027  0.28969138
+#&gt; Actor 3 0.31719250 0.1311596  0.2466749  0.07650617 -0.45963300
+#&gt; Actor 4 0.21117972 0.2529458  0.2249299  0.04515472 -0.10742254
+#&gt; Actor 5 0.07596882 0.1338970 -0.3248366 -0.04886473 -0.01416170
+#&gt; Actor 6 0.07948305 0.1456571 -0.4246940 -0.07819630 -0.14989457
+#&gt; Actor 7 0.07948305 0.1456571 -0.4246940 -0.07819630 -0.14989457
+#&gt; Actor 8 0.17095975 0.2089392  0.1796823  0.03760303 -0.09040377</div><div class='input'><span class='co'># summarize eigenvectors</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>karate_eigen</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 34 x 4</span><span>
+#&gt;    .name .values .inertia .prop_var
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> EV1     6.73     6.73   -</span><span style='color: #BB0000;'>1.03</span><span style='color: #949494;'>e</span><span>15
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> EV2     4.98     4.98   -</span><span style='color: #BB0000;'>7.59</span><span style='color: #949494;'>e</span><span>14
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> EV3     2.92     2.92   -</span><span style='color: #BB0000;'>4.45</span><span style='color: #949494;'>e</span><span>14
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> EV4     2.31     2.31   -</span><span style='color: #BB0000;'>3.52</span><span style='color: #949494;'>e</span><span>14
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> EV5     1.49     1.49   -</span><span style='color: #BB0000;'>2.27</span><span style='color: #949494;'>e</span><span>14
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> EV6     1.45     1.45   -</span><span style='color: #BB0000;'>2.21</span><span style='color: #949494;'>e</span><span>14
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> EV7     1.08     1.08   -</span><span style='color: #BB0000;'>1.65</span><span style='color: #949494;'>e</span><span>14
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> EV8     1.03     1.03   -</span><span style='color: #BB0000;'>1.57</span><span style='color: #949494;'>e</span><span>14
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> EV9     0.834    0.834  -</span><span style='color: #BB0000;'>1.27</span><span style='color: #949494;'>e</span><span>14
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> EV10    0.616    0.616  -</span><span style='color: #BB0000;'>9.39</span><span style='color: #949494;'>e</span><span>13
+#&gt; </span><span style='color: #949494;'># … with 24 more rows</span><span></div><div class='input'><span class='co'># validate eigencentrality calculations against igraph implementation</span>
+<span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>
+  eigen <span class='op'>=</span> <span class='va'>karate_eigen</span><span class='op'>$</span><span class='va'>vectors</span><span class='op'>[</span>, <span class='fl'>1L</span><span class='op'>]</span> <span class='op'>/</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>karate_eigen</span><span class='op'>$</span><span class='va'>vectors</span><span class='op'>[</span>, <span class='fl'>1L</span><span class='op'>]</span><span class='op'>)</span>,
+  igraph <span class='op'>=</span> <span class='fu'>igraph</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/eigen_centrality.html'>eigen_centrality</a></span><span class='op'>(</span><span class='va'>karate</span><span class='op'>)</span><span class='op'>$</span><span class='va'>vector</span>
+<span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>eigen</span>, y <span class='op'>=</span> <span class='va'>igraph</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>coord_equal</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_abline</span><span class='op'>(</span>slope <span class='op'>=</span> <span class='fl'>1</span>, color <span class='op'>=</span> <span class='st'>"#777777"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='img'><img src='methods-eigen-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># first and second eigenvectors for centrality and connectivity / partitioning</span>
+<span class='va'>karate_eigen</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>2</span>, y <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='theme_biplot.html'>theme_biplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_rows_vector</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>faction</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_rows_text_radiate</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/grep.html'>grepl</a></span><span class='op'>(</span><span class='st'>"H|A"</span>, <span class='va'>label</span><span class='op'>)</span>, <span class='va'>label</span>, <span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>guides</span><span class='op'>(</span>color <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"algebraic connectivity"</span>, y <span class='op'>=</span> <span class='st'>"eigencentrality"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span>
     <span class='st'>"First (centrality) and second (connectivity) eigenvectors"</span>,
     <span class='st'>"Colors distinguish factions around John A. and Mr. Hi"</span>
-  )</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 32 rows containing missing values (geom_text_radiate).</span></div><div class='img'><img src='methods-eigen-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># second and third eigenvectors</span>
-<span class='no'>karate_eigen</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>3</span>)) +
-  <span class='fu'>scale_x_continuous</span>(<span class='kw'>expand</span> <span class='kw'>=</span> <span class='fu'>expand_scale</span>(<span class='kw'>mult</span> <span class='kw'>=</span> <span class='fl'>.3</span>)) +
-  <span class='fu'>scale_y_continuous</span>(<span class='kw'>expand</span> <span class='kw'>=</span> <span class='fu'>expand_scale</span>(<span class='kw'>mult</span> <span class='kw'>=</span> <span class='fl'>.2</span>)) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_u_vector</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>EV1</span>)) +
-  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_u_text_radiate</a></span>(<span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"chull"</span>, <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>label</span>)) +
-  <span class='fu'>labs</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"algebraic connectivity"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"loading onto third eigenvector"</span>) +
-  <span class='fu'>ggtitle</span>(
-    <span class='st'>"Second (horizontal) and third (vertical) eigencentralities"</span>,
-    <span class='st'>"Color increases in value with eigencentrality, labels along convex hull"</span>
-  )</div><div class='img'><img src='methods-eigen-4.png' alt='' width='700' height='433' /></div></span></pre>
+  <span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 32 rows containing missing values (geom_text_radiate).</span></div><div class='img'><img src='methods-eigen-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># second and third eigenvectors</span>
+<span class='va'>karate_eigen</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>2</span>, y <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='theme_biplot.html'>theme_biplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_rows_vector</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>color <span class='op'>=</span> <span class='va'>EV1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_rows_text_radiate</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"chull"</span>, <span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>label</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"algebraic connectivity"</span>, y <span class='op'>=</span> <span class='st'>"loading onto third eigenvector"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span><span class='st'>"Second (connectivity) and third eigencentralities"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NaNs produced</span></div><div class='img'><img src='methods-eigen-4.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -234,13 +274,16 @@ objects of class <code>"eigen"</code> returned by <code><a href='classes.html'>e
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

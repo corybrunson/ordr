@@ -8,21 +8,29 @@
 
 <title>Functionality for linear model objects — methods-lm • ordr</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,12 +38,12 @@
 
 
 
-<meta property="og:title" content="Functionality for linear model objects — methods-lm" />
 
+<meta property="og:title" content="Functionality for linear model objects — methods-lm" />
 <meta property="og:description" content="These methods extract data from, and attribute new data to,
 objects of class &quot;lm&quot;, &quot;glm&quot;, and &quot;mlm&quot; as returned by stats::lm()
 and stats::glm()." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -49,9 +57,10 @@ and stats::glm()." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -73,7 +82,7 @@ and stats::glm()." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -81,7 +90,6 @@ and stats::glm()." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -91,6 +99,7 @@ and stats::glm()." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -102,58 +111,53 @@ and stats::glm()." />
     </div>
 
     <div class="ref-description">
-    
     <p>These methods extract data from, and attribute new data to,
-objects of class <code>"lm"</code>, <code>"glm"</code>, and <code>"mlm"</code> as returned by <code><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>stats::lm()</a></code>
-and <code><a href='https://www.rdocumentation.org/packages/stats/topics/glm'>stats::glm()</a></code>.</p>
-    
+objects of class <code>"lm"</code>, <code>"glm"</code>, and <code>"mlm"</code> as returned by <code><a href='https://rdrr.io/r/stats/lm.html'>stats::lm()</a></code>
+and <code><a href='https://rdrr.io/r/stats/glm.html'>stats::glm()</a></code>.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for lm</span>
-<span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for lm</span>
-<span class='fu'><a href='reconstruct.html'>reconstruct</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='accessors.html'>recover_rows</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for lm</span>
-<span class='fu'><a href='accessors.html'>recover_u</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='accessors.html'>recover_cols</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for lm</span>
-<span class='fu'><a href='accessors.html'>recover_v</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='accessors.html'>recover_coord</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for lm</span>
-<span class='fu'><a href='accessors.html'>recover_coord</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='augmentation.html'>augmentation_rows</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for lm</span>
-<span class='fu'><a href='augmentation.html'>augmentation_u</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='augmentation.html'>augmentation_cols</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for lm</span>
-<span class='fu'><a href='augmentation.html'>augmentation_v</a></span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for lm</span>
-<span class='fu'><a href='augmentation.html'>augmentation_coord</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='augmentation.html'>augmentation_coord</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for glm</span>
-<span class='fu'><a href='augmentation.html'>augmentation_u</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='augmentation.html'>augmentation_rows</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for mlm</span>
-<span class='fu'><a href='accessors.html'>recover_u</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='accessors.html'>recover_rows</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for mlm</span>
-<span class='fu'><a href='accessors.html'>recover_v</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='accessors.html'>recover_cols</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for mlm</span>
-<span class='fu'><a href='accessors.html'>recover_coord</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='accessors.html'>recover_coord</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for mlm</span>
-<span class='fu'><a href='augmentation.html'>augmentation_u</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='augmentation.html'>augmentation_rows</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for mlm</span>
-<span class='fu'><a href='augmentation.html'>augmentation_v</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='augmentation.html'>augmentation_cols</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for mlm</span>
-<span class='fu'><a href='augmentation.html'>augmentation_coord</a></span>(<span class='no'>x</span>)</pre>
-    
+<span class='fu'><a href='augmentation.html'>augmentation_coord</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -162,248 +166,153 @@ and <code><a href='https://www.rdocumentation.org/packages/stats/topics/glm'>sta
       <td><p>An ordination object.</p></td>
     </tr>
     </table>
-    
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Regression analysis of Motor Trend design and performance data</span>
-<span class='no'>mtcars</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/scale'>scale</a></span>(<span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/as.data.frame'>as.data.frame</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>mpg</span> ~ <span class='no'>wt</span> + <span class='no'>cyl</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='dplyr-verbs.html'>mutate_u</a></span>(<span class='kw'>influence</span> <span class='kw'>=</span> <span class='no'>.wt.res</span>^<span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>mtcars_lm</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lm': (32 x 3) x (1 x 3)'
+    <pre class="examples"><div class='input'><span class='co'># Motor Trend design and performance data</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+#&gt; Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+#&gt; Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+#&gt; Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+#&gt; Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+#&gt; Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+#&gt; Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</div><div class='input'><span class='co'># regression analysis of performance measures on design specifications</span>
+<span class='va'>mtcars</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span>scale <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span>formula <span class='op'>=</span> <span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>wt</span> <span class='op'>+</span> <span class='va'>cyl</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>mtcars_lm</span>
+</div><div class='output co'>#&gt; 
+#&gt; Call:
+#&gt; lm(formula = mpg ~ wt + cyl, data = .)
+#&gt; 
+#&gt; Coefficients:
+#&gt; (Intercept)           wt          cyl  
+#&gt;   6.721e-16   -3.191e+00   -1.508e+00  
+#&gt; </div><div class='input'><span class='co'># wrap as a 'tbl_ord' object</span>
+<span class='op'>(</span><span class='va'>mtcars_lm_ord</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='va'>mtcars_lm</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'lm': (32 x 3) x (1 x 3)'
 #&gt; # 3 coordinates: (Intercept), wt, cyl
 #&gt; # 
-#&gt; # U: [ 32 x 3 | 8 ]
-#&gt;   `(Intercept)`       wt    cyl |   .name   .hat .sigma .cooksd
-#&gt;                                 |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>             1 -</span><span style='color: #BB0000;'>0.597</span><span>   -</span><span style='color: #BB0000;'>0.188</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> Mazd… 0.054</span><span style='text-decoration: underline;'>8</span><span>   2.60 5.08</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>             1 -</span><span style='color: #BB0000;'>0.342</span><span>   -</span><span style='color: #BB0000;'>0.188</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Mazd… 0.037</span><span style='text-decoration: underline;'>6</span><span>   2.61 4.44</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-4</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>             1 -</span><span style='color: #BB0000;'>0.897</span><span>   -</span><span style='color: #BB0000;'>2.19</span><span>  | </span><span style='color: #BCBCBC;'>3</span><span> Dats… 0.079</span><span style='text-decoration: underline;'>8</span><span>   2.52 5.68</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-2</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>             1 -</span><span style='color: #BB0000;'>0.002</span><span style='color: #BB0000;text-decoration: underline;'>25</span><span> -</span><span style='color: #BB0000;'>0.188</span><span> | </span><span style='color: #BCBCBC;'>4</span><span> Horn… 0.032</span><span style='text-decoration: underline;'>1</span><span>   2.61 1.80</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>             1  0.223    1.81  | </span><span style='color: #BCBCBC;'>5</span><span> Horn… 0.091</span><span style='text-decoration: underline;'>2</span><span>   2.58 2.35</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-2</span><span>
-#&gt; </span><span style='color: #949494;'># … with 27 more rows, and 4 more
-#&gt; #   variables: .wt.res </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
-#&gt; #   .fit </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, .se.fit </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
-#&gt; #   influence </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; # Rows: [ 32 x 3 | 0 ]
+#&gt;   `(Intercept)`       wt    cyl | 
+#&gt;                                 | 
+#&gt; <span style='color: #BCBCBC;'>1</span><span>             1 -</span><span style='color: #BB0000;'>0.597</span><span>   -</span><span style='color: #BB0000;'>0.188</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>             1 -</span><span style='color: #BB0000;'>0.342</span><span>   -</span><span style='color: #BB0000;'>0.188</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>             1 -</span><span style='color: #BB0000;'>0.897</span><span>   -</span><span style='color: #BB0000;'>2.19</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>             1 -</span><span style='color: #BB0000;'>0.002</span><span style='color: #BB0000;text-decoration: underline;'>25</span><span> -</span><span style='color: #BB0000;'>0.188</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>             1  0.223    1.81  | 
+#&gt; 
 #&gt; # 
-#&gt; # V: [ 1 x 3 | 1 ]
+#&gt; # Columns: [ 1 x 3 | 0 ]
+#&gt;   `(Intercept)`    wt   cyl | 
+#&gt;                             | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>      6.72</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-16</span><span> -</span><span style='color: #BB0000;'>3.19</span><span> -</span><span style='color: #BB0000;'>1.51</span><span> | </div><div class='input'><span class='co'># augment everything with names, predictors with observation stats</span>
+<span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='va'>mtcars_lm_ord</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'lm': (32 x 3) x (1 x 3)'
+#&gt; # 3 coordinates: (Intercept), wt, cyl
+#&gt; # 
+#&gt; # Rows: [ 32 x 3 | 7 ]
+#&gt;   `(Intercept)`       wt    cyl |   .name          .hat .sigma .cooksd
+#&gt;                                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>             1 -</span><span style='color: #BB0000;'>0.597</span><span>   -</span><span style='color: #BB0000;'>0.188</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> Mazda RX4    0.054</span><span style='text-decoration: underline;'>8</span><span>   2.60 5.08</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>             1 -</span><span style='color: #BB0000;'>0.342</span><span>   -</span><span style='color: #BB0000;'>0.188</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Mazda RX4 W… 0.037</span><span style='text-decoration: underline;'>6</span><span>   2.61 4.44</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-4</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>             1 -</span><span style='color: #BB0000;'>0.897</span><span>   -</span><span style='color: #BB0000;'>2.19</span><span>  | </span><span style='color: #BCBCBC;'>3</span><span> Datsun 710   0.079</span><span style='text-decoration: underline;'>8</span><span>   2.52 5.68</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-2</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>             1 -</span><span style='color: #BB0000;'>0.002</span><span style='color: #BB0000;text-decoration: underline;'>25</span><span> -</span><span style='color: #BB0000;'>0.188</span><span> | </span><span style='color: #BCBCBC;'>4</span><span> Hornet 4 Dr… 0.032</span><span style='text-decoration: underline;'>1</span><span>   2.61 1.80</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>             1  0.223    1.81  | </span><span style='color: #BCBCBC;'>5</span><span> Hornet Spor… 0.091</span><span style='text-decoration: underline;'>2</span><span>   2.58 2.35</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-2</span><span>
+#&gt; </span><span style='color: #949494;'># … with 27 more rows, and 3 more</span><span>
+#&gt; # Rows: [ 32 x 3 | 7 ]</span><span style='color: #949494;'>#   variables: .wt.res &lt;dbl&gt;,</span><span>
+#&gt;   `(Intercept)`       wt    cyl | </span><span style='color: #949494;'>#   .fit &lt;dbl&gt;, .se.fit &lt;dbl&gt;</span><span>
+#&gt; # 
+#&gt; # Columns: [ 1 x 3 | 1 ]
 #&gt;   `(Intercept)`    wt   cyl |   .name
 #&gt;                             |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>      6.72</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-16</span><span> -</span><span style='color: #BB0000;'>3.19</span><span> -</span><span style='color: #BB0000;'>1.51</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> mpg  </div><div class='input'><span class='no'>mtcars_lm</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>wt</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>cyl</span>, <span class='kw'>intercept</span> <span class='kw'>=</span> <span class='no'>`(Intercept)`</span>)) +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>influence</span>)) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>() +
-  <span class='fu'><a href='geom-biplot-isolines.html'>geom_v_isolines</a></span>(<span class='kw'>axes</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>5</span>) +
-  <span class='fu'>ggtitle</span>(
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>      6.72</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-16</span><span> -</span><span style='color: #BB0000;'>3.19</span><span> -</span><span style='color: #BB0000;'>1.51</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> mpg  </div><div class='input'><span class='co'># calculate influences as the squares of weighted residuals</span>
+<span class='fu'><a href='dplyr-verbs.html'>mutate_rows</a></span><span class='op'>(</span><span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='va'>mtcars_lm_ord</span><span class='op'>)</span>, influence <span class='op'>=</span> <span class='va'>.wt.res</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'lm': (32 x 3) x (1 x 3)'
+#&gt; # 3 coordinates: (Intercept), wt, cyl
+#&gt; # 
+#&gt; # Rows: [ 32 x 3 | 8 ]
+#&gt;   `(Intercept)`       wt    cyl |   .name          .hat .sigma .cooksd
+#&gt;                                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>             1 -</span><span style='color: #BB0000;'>0.597</span><span>   -</span><span style='color: #BB0000;'>0.188</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> Mazda RX4    0.054</span><span style='text-decoration: underline;'>8</span><span>   2.60 5.08</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>             1 -</span><span style='color: #BB0000;'>0.342</span><span>   -</span><span style='color: #BB0000;'>0.188</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Mazda RX4 W… 0.037</span><span style='text-decoration: underline;'>6</span><span>   2.61 4.44</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-4</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>             1 -</span><span style='color: #BB0000;'>0.897</span><span>   -</span><span style='color: #BB0000;'>2.19</span><span>  | </span><span style='color: #BCBCBC;'>3</span><span> Datsun 710   0.079</span><span style='text-decoration: underline;'>8</span><span>   2.52 5.68</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-2</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>             1 -</span><span style='color: #BB0000;'>0.002</span><span style='color: #BB0000;text-decoration: underline;'>25</span><span> -</span><span style='color: #BB0000;'>0.188</span><span> | </span><span style='color: #BCBCBC;'>4</span><span> Hornet 4 Dr… 0.032</span><span style='text-decoration: underline;'>1</span><span>   2.61 1.80</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>             1  0.223    1.81  | </span><span style='color: #BCBCBC;'>5</span><span> Hornet Spor… 0.091</span><span style='text-decoration: underline;'>2</span><span>   2.58 2.35</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-2</span><span>
+#&gt; </span><span style='color: #949494;'># … with 27 more rows, and 4 more</span><span>
+#&gt; # Rows: [ 32 x 3 | 8 ]</span><span style='color: #949494;'>#   variables: .wt.res &lt;dbl&gt;,</span><span>
+#&gt;   `(Intercept)`       wt    cyl | </span><span style='color: #949494;'>#   .fit &lt;dbl&gt;, .se.fit &lt;dbl&gt;,</span><span>
+#&gt;                                 | </span><span style='color: #949494;'>#   influence &lt;dbl&gt;</span><span>
+#&gt; # 
+#&gt; # Columns: [ 1 x 3 | 1 ]
+#&gt;   `(Intercept)`    wt   cyl |   .name
+#&gt;                             |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>      6.72</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-16</span><span> -</span><span style='color: #BB0000;'>3.19</span><span> -</span><span style='color: #BB0000;'>1.51</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> mpg  </div><div class='input'><span class='co'># regression biplot with performance isolines</span>
+<span class='va'>mtcars_lm_ord</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='dplyr-verbs.html'>mutate_rows</a></span><span class='op'>(</span>influence <span class='op'>=</span> <span class='va'>.wt.res</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>wt</span>, y <span class='op'>=</span> <span class='va'>cyl</span>, intercept <span class='op'>=</span> <span class='va'>`(Intercept)`</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='theme_biplot.html'>theme_biplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_rows_point</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>color <span class='op'>=</span> <span class='va'>influence</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_cols_vector</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_cols_isolines</a></span><span class='op'>(</span>axes <span class='op'>=</span> <span class='fl'>1</span>, by <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span>
     <span class='st'>"Weight isolines with data colored by importance"</span>,
-    <span class='st'>"Regressing mpg onto weight and number of cylinders"</span>
-  )</div><div class='img'><img src='methods-lm-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Multidimensional scaling of country differences and regression of attributes</span>
-<span class='co'># Reproduce Exhibit 4.2 in Greenacre (2010)</span>
-<span class='no'>country_differences</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='masks.html'>cmdscale</a></span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_cmds</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
-#&gt; # 2 coordinates: PCo1 and PCo2
+    <span class='st'>"Regressing gas mileage onto weight and number of cylinders"</span>
+  <span class='op'>)</span>
+</div><div class='img'><img src='methods-lm-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Poisson regression of yarn weaving data</span>
+<span class='va'>warpbreaks</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span>formula <span class='op'>=</span> <span class='va'>breaks</span> <span class='op'>~</span> <span class='va'>wool</span> <span class='op'>+</span> <span class='va'>tension</span>, family <span class='op'>=</span> <span class='st'>"poisson"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>warpbreaks_pois</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'glm': (54 x 4) x (1 x 4)'
+#&gt; # 4 coordinates: (Intercept), woolB, ..., tensionH
 #&gt; # 
-#&gt; # U: [ 13 x 2 | 0 ]
-#&gt;       PCo1   PCo2 | 
-#&gt;                   | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  4.41     2.91  | 
-#&gt; 
+#&gt; # Rows: [ 54 x 4 | 14 ]
+#&gt;   `(Intercept)` woolB tensionM ... |   .name   .hat .sigma .cooksd
+#&gt;                                    |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>             1     0        0     | </span><span style='color: #BCBCBC;'>1</span><span> 1     0.082</span><span style='text-decoration: underline;'>7</span><span>   2.04  0.122 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>             1     0        0 ... | </span><span style='color: #BCBCBC;'>2</span><span> 2     0.082</span><span style='text-decoration: underline;'>7</span><span>   2.06  0.062</span><span style='text-decoration: underline;'>8</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>             1     0        0     | </span><span style='color: #BCBCBC;'>3</span><span> 3     0.082</span><span style='text-decoration: underline;'>7</span><span>   2.05  0.118 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>             1     0        0     | </span><span style='color: #BCBCBC;'>4</span><span> 4     0.082</span><span style='text-decoration: underline;'>7</span><span>   2.04  0.140 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>             1     0        0     | </span><span style='color: #BCBCBC;'>5</span><span> 5     0.082</span><span style='text-decoration: underline;'>7</span><span>   1.97  0.547 
+#&gt; </span><span style='color: #949494;'># … with 49 more rows, and 10 more</span><span>
+#&gt; # Rows: [ 54 x 4 | 14 ]</span><span style='color: #949494;'>#   variables: .dev.res &lt;dbl&gt;,</span><span>
+#&gt;   `(Intercept)` woolB tensionM ... | </span><span style='color: #949494;'>#   .pear.res &lt;dbl&gt;,</span><span>
+#&gt;                                    | </span><span style='color: #949494;'>#   .link.fit &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>             1     0        0     | </span><span style='color: #949494;'>#   .link.se.fit &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>             1     0        0 ... | </span><span style='color: #949494;'>#   .response.fit &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>             1     0        0     | </span><span style='color: #949494;'>#   .response.se.fit &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>             1     0        0     | </span><span style='color: #949494;'>#   .terms.fit.wool &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>             1     0        0     | </span><span style='color: #949494;'>#   .terms.fit.tension &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   .terms.se.fit.wool &lt;dbl&gt;,</span><span>
+#&gt; # Rows: [ 54 x 4 | 14 ]</span><span style='color: #949494;'>#   .terms.se.fit.tension &lt;dbl&gt;</span><span>
 #&gt; # 
-#&gt; # V: [ 13 x 2 | 0 ]
-#&gt;       PCo1   PCo2 | 
-#&gt;                   | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  4.41     2.91  | 
-#&gt; </div><div class='input'><span class='no'>differences_plot</span> <span class='kw'>&lt;-</span> <span class='no'>differences_cmds</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>()
-<span class='no'>differences_plot</span></div><div class='img'><img src='methods-lm-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Reproduce Exhibit 4.5 in Greenacre (2010)</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></span>(<span class='no'>country_attributes</span> ~ <span class='fu'><a href='accessors.html'>get_u</a></span>(<span class='no'>differences_cmds</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>attributes_fit</span></div><div class='output co'>#&gt; # A tbl_ord of class 'mlm': (13 x 3) x (6 x 3)'
-#&gt; # 3 coordinates: (Intercept), PCo1, PCo2
-#&gt; # 
-#&gt; # U: [ 13 x 3 | 0 ]
-#&gt;   `(Intercept)`     PCo1   PCo2 | 
-#&gt;                                 | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>             1  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>             1 -</span><span style='color: #BB0000;'>1.02</span><span>    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>             1  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>             1 -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>             1  4.41     2.91  | 
-#&gt; 
-#&gt; # 
-#&gt; # V: [ 6 x 3 | 0 ]
-#&gt;   `(Intercept)`   PCo1    PCo2 | 
-#&gt;                                | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>          5.23  0.423 -</span><span style='color: #BB0000;'>0.513</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>          5.69 -</span><span style='color: #BB0000;'>0.395</span><span> -</span><span style='color: #BB0000;'>0.618</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>          6.08 -</span><span style='color: #BB0000;'>0.399</span><span> -</span><span style='color: #BB0000;'>0.645</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>          4.    0.502 -</span><span style='color: #BB0000;'>0.444</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>          3.85  0.660  0.010</span><span style='text-decoration: underline;'>2</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>          4.92  0.627 -</span><span style='color: #BB0000;'>0.591</span><span>  | </div><div class='input'><span class='no'>differences_plot</span> +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>attributes_fit</span>) +
-  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_v_text_radiate</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>attributes_fit</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>.3</span>)</div><div class='img'><img src='methods-lm-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Generalized linear regression on marine ecosystem data</span>
-<span class='no'>bioenv</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/transform'>transform</a></span>(
-    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/vector'>as.vector</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/scale'>scale</a></span>(<span class='no'>Depth</span>)),
-    <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/vector'>as.vector</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/scale'>scale</a></span>(<span class='no'>Pollution</span>))
-  ) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/glm'>glm</a></span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>d</span> ~ <span class='no'>x</span> + <span class='no'>y</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"poisson"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>bioenv_pois</span></div><div class='output co'>#&gt; # A tbl_ord of class 'glm': (30 x 3) x (1 x 3)'
-#&gt; # 3 coordinates: (Intercept), x, y
-#&gt; # 
-#&gt; # U: [ 30 x 3 | 0 ]
-#&gt;   `(Intercept)`       x      y | 
-#&gt;                                | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>             1 -</span><span style='color: #BB0000;'>0.156</span><span>   0.132 | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>             1  0.036</span><span style='text-decoration: underline;'>3</span><span> -</span><span style='color: #BB0000;'>0.802</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>             1 -</span><span style='color: #BB0000;'>0.988</span><span>   0.413 | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>             1 -</span><span style='color: #BB0000;'>0.668</span><span>   1.72  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>             1 -</span><span style='color: #BB0000;'>0.860</span><span>  -</span><span style='color: #BB0000;'>0.288</span><span> | 
-#&gt; 
-#&gt; # 
-#&gt; # V: [ 1 x 3 | 0 ]
-#&gt;   `(Intercept)`     x      y | 
-#&gt;                              | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>          2.30 0.200 -</span><span style='color: #BB0000;'>0.337</span><span> | </div><div class='input'><span class='no'>bioenv_pois</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>intercept</span> <span class='kw'>=</span> <span class='no'>`(Intercept)`</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>) +
-  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_v_text_radiate</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>) +
-  <span class='fu'><a href='geom-biplot-isolines.html'>geom_v_isolines</a></span>(<span class='kw'>family</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/family'>poisson</a></span>(), <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='img'><img src='methods-lm-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Adapt (3.4) and Exhibit 3.6 in Greenacre (2010)</span>
-<span class='no'>bioenv</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span>(<span class='no'>a</span>:<span class='no'>e</span>), <span class='no'>as.logical</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/transform'>transform</a></span>(
-    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/vector'>as.vector</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/scale'>scale</a></span>(<span class='no'>Depth</span>)),
-    <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/vector'>as.vector</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/scale'>scale</a></span>(<span class='no'>Pollution</span>))
-  ) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/glm'>glm</a></span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>d</span> ~ <span class='no'>x</span> + <span class='no'>y</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>bioenv_bin</span></div><div class='output co'>#&gt; # A tbl_ord of class 'glm': (30 x 3) x (1 x 3)'
-#&gt; # 3 coordinates: (Intercept), x, y
-#&gt; # 
-#&gt; # U: [ 30 x 3 | 0 ]
-#&gt;   `(Intercept)`       x      y | 
-#&gt;                                | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>             1 -</span><span style='color: #BB0000;'>0.156</span><span>   0.132 | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>             1  0.036</span><span style='text-decoration: underline;'>3</span><span> -</span><span style='color: #BB0000;'>0.802</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>             1 -</span><span style='color: #BB0000;'>0.988</span><span>   0.413 | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>             1 -</span><span style='color: #BB0000;'>0.668</span><span>   1.72  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>             1 -</span><span style='color: #BB0000;'>0.860</span><span>  -</span><span style='color: #BB0000;'>0.288</span><span> | 
-#&gt; 
-#&gt; # 
-#&gt; # V: [ 1 x 3 | 0 ]
-#&gt;   `(Intercept)`      x     y | 
-#&gt;                              | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>          2.71 -</span><span style='color: #BB0000;'>0.137</span><span> -</span><span style='color: #BB0000;'>1.18</span><span> | </div><div class='input'><span class='no'>bioenv_bin</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>intercept</span> <span class='kw'>=</span> <span class='no'>`(Intercept)`</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>) +
-  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_v_text_radiate</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>) +
-  <span class='fu'><a href='geom-biplot-isolines.html'>geom_v_isolines</a></span>(<span class='kw'>family</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/family'>binomial</a></span>(), <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>.05</span>)</div><div class='img'><img src='methods-lm-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Generalized multiple linear regression on marine ecosystem data</span>
-<span class='co'># Reproduce Exhibit 2.5 in Greenacre (2010)</span>
-<span class='no'>bioenv_std</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_if</a></span>(<span class='no'>bioenv</span>, <span class='no'>is.numeric</span>, ~ <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/vector'>as.vector</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/scale'>scale</a></span>(<span class='no'>.</span>)))
-<span class='no'>resp_std</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>as.matrix</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>bioenv_std</span>, <span class='no'>a</span>:<span class='no'>e</span>))
-<span class='no'>pred_std</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>as.matrix</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>bioenv_std</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Depth</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Pollution</span>))
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></span>(<span class='no'>resp_std</span> ~ <span class='no'>pred_std</span> + <span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>bioenv_std_mlm</span></div><div class='output co'>#&gt; # A tbl_ord of class 'mlm': (30 x 2) x (5 x 2)'
-#&gt; # 2 coordinates: x and y
-#&gt; # 
-#&gt; # U: [ 30 x 2 | 0 ]
-#&gt;         x      y | 
-#&gt;                  | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.156</span><span>   0.132 | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.036</span><span style='text-decoration: underline;'>3</span><span> -</span><span style='color: #BB0000;'>0.802</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.988</span><span>   0.413 | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.668</span><span>   1.72  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.860</span><span>  -</span><span style='color: #BB0000;'>0.288</span><span> | 
-#&gt; 
-#&gt; # 
-#&gt; # V: [ 5 x 2 | 0 ]
-#&gt;         x      y | 
-#&gt;                  | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.024</span><span style='text-decoration: underline;'>7</span><span> -</span><span style='color: #BB0000;'>0.717</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.229  -</span><span style='color: #BB0000;'>0.499</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.074</span><span style='text-decoration: underline;'>2</span><span>  0.491 | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.347  -</span><span style='color: #BB0000;'>0.446</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.400</span><span>  -</span><span style='color: #BB0000;'>0.475</span><span> | </div><div class='input'><span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>bioenv_std_mlm</span>, <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>) +
-  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_v_text_radiate</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>)</div><div class='img'><img src='methods-lm-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Reproduce Exhibit 3.2 in Greenacre (2010)</span>
-<span class='no'>bioenv</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span>(<span class='no'>a</span>:<span class='no'>e</span>), ~ <span class='no'>.</span> ^ (<span class='fl'>1</span>/<span class='fl'>4</span>)) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span>(<span class='no'>Pollution</span>:<span class='no'>Depth</span>), ~ <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/vector'>as.vector</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/scale'>scale</a></span>(<span class='no'>.</span>))) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>bioenv_4rt</span></div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 30 x 10</span><span>
-#&gt;    site      a     b     c     d     e Pollution   Depth Temperature Sediment
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> s1     0     1.19  1.73  1.93  1.19    0.132  -</span><span style='color: #BB0000;'>0.156</span><span>          3.5 S       
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> s2     2.26  1.41  1.90  1.82  0      -</span><span style='color: #BB0000;'>0.802</span><span>   0.036</span><span style='text-decoration: underline;'>3</span><span>         2.5 C       
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> s3     0     1.78  1.73  1.68  0       0.413  -</span><span style='color: #BB0000;'>0.988</span><span>          2.7 C       
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> s4     0     0     1.97  1.32  0       1.72   -</span><span style='color: #BB0000;'>0.668</span><span>          2.9 S       
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> s5     1.90  1.50  1.32  1.78  1.63   -</span><span style='color: #BB0000;'>0.288</span><span>  -</span><span style='color: #BB0000;'>0.860</span><span>          3.1 C       
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> s6     2.36  2.14  1.90  2     1.50   -</span><span style='color: #BB0000;'>0.895</span><span>   1.25           3.5 G       
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> s7     1.73  1.57  0     1.82  1.19    0.038</span><span style='text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>1.37</span><span>           2.9 S       
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> s8     1.19  0     0     0     1       0.272  -</span><span style='color: #BB0000;'>0.860</span><span>          3.3 C       
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> s9     2.03  1.63  1.78  1.93  1.57   -</span><span style='color: #BB0000;'>0.288</span><span>  -</span><span style='color: #BB0000;'>0.412</span><span>          3.4 C       
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> s10    0     1.50  2.26  1.73  0       2.56   -</span><span style='color: #BB0000;'>0.348</span><span>          3   S       
-#&gt; </span><span style='color: #949494;'># … with 20 more rows</span><span></div><div class='input'><span class='no'>resp_4rt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>as.matrix</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>bioenv_4rt</span>, <span class='no'>a</span>:<span class='no'>e</span>))
-<span class='no'>pred_4rt</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>as.matrix</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>bioenv_4rt</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Depth</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Pollution</span>))
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></span>(<span class='no'>resp_4rt</span> ~ <span class='no'>pred_4rt</span> + <span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>bioenv_4rt_mlm</span></div><div class='output co'>#&gt; # A tbl_ord of class 'mlm': (30 x 2) x (5 x 2)'
-#&gt; # 2 coordinates: x and y
-#&gt; # 
-#&gt; # U: [ 30 x 2 | 0 ]
-#&gt;         x      y | 
-#&gt;                  | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.156</span><span>   0.132 | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.036</span><span style='text-decoration: underline;'>3</span><span> -</span><span style='color: #BB0000;'>0.802</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.988</span><span>   0.413 | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.668</span><span>   1.72  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.860</span><span>  -</span><span style='color: #BB0000;'>0.288</span><span> | 
-#&gt; 
-#&gt; # 
-#&gt; # V: [ 5 x 2 | 0 ]
-#&gt;          x      y | 
-#&gt;                   | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.073</span><span style='text-decoration: underline;'>2</span><span>  -</span><span style='color: #BB0000;'>0.672</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.005</span><span style='text-decoration: underline;'>98</span><span> -</span><span style='color: #BB0000;'>0.506</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.085</span><span style='text-decoration: underline;'>5</span><span>   0.387 | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.059</span><span style='text-decoration: underline;'>6</span><span>  -</span><span style='color: #BB0000;'>0.288</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.255</span><span>   -</span><span style='color: #BB0000;'>0.375</span><span> | </div><div class='input'><span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>bioenv_4rt_mlm</span>, <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>) +
-  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_v_text_radiate</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>)</div><div class='img'><img src='methods-lm-7.png' alt='' width='700' height='433' /></div></span></pre>
+#&gt; # Columns: [ 1 x 4 | 1 ]
+#&gt;   `(Intercept)`  woolB tensionM ... |   .name 
+#&gt;                                 ... |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>          3.69 -</span><span style='color: #BB0000;'>0.206</span><span>   -</span><span style='color: #BB0000;'>0.321</span><span>     | </span><span style='color: #BCBCBC;'>1</span><span> breaks</div><div class='input'><span class='co'># regression biplot with nonlinear isolines</span>
+<span class='va'>warpbreaks_pois</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>
+    x <span class='op'>=</span> <span class='va'>tensionM</span>, y <span class='op'>=</span> <span class='va'>tensionH</span>, intercept <span class='op'>=</span> <span class='va'>`(Intercept)`</span>, label <span class='op'>=</span> <span class='va'>.name</span>
+  <span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='theme_biplot.html'>theme_biplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_jitter</span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"rows"</span>, width <span class='op'>=</span> <span class='fl'>.1</span>, height <span class='op'>=</span> <span class='fl'>.1</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_cols_vector</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_cols_text_radiate</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_cols_isolines</a></span><span class='op'>(</span>family <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/family.html'>poisson</a></span><span class='op'>(</span><span class='op'>)</span>, by <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
+</div><div class='img'><img src='methods-lm-2.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -411,13 +320,16 @@ and <code><a href='https://www.rdocumentation.org/packages/stats/topics/glm'>sta
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

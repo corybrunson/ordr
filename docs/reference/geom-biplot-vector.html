@@ -8,21 +8,29 @@
 
 <title>Render vectors from origin to ordinates — geom-biplot-vector • ordr</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,11 +38,11 @@
 
 
 
-<meta property="og:title" content="Render vectors from origin to ordinates — geom-biplot-vector" />
 
+<meta property="og:title" content="Render vectors from origin to ordinates — geom-biplot-vector" />
 <meta property="og:description" content="geom_*_vector() renders arrows from the origin to the position
 of each case or variable." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -48,9 +56,10 @@ of each case or variable." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -72,7 +81,7 @@ of each case or variable." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -80,7 +89,6 @@ of each case or variable." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -90,6 +98,7 @@ of each case or variable." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -101,35 +110,66 @@ of each case or variable." />
     </div>
 
     <div class="ref-description">
-    
     <p><code>geom_*_vector()</code> renders arrows from the origin to the position
 of each case or variable.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>geom_vector</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='kw'>arrow</span> <span class='kw'>=</span> <span class='no'>default_arrow</span>, <span class='no'>...</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>geom_vector</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  arrow <span class='op'>=</span> <span class='va'>default_arrow</span>,
+  <span class='va'>...</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>geom_u_vector</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='kw'>arrow</span> <span class='kw'>=</span> <span class='no'>default_arrow</span>, <span class='no'>...</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>geom_rows_vector</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  arrow <span class='op'>=</span> <span class='va'>default_arrow</span>,
+  <span class='va'>...</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>geom_v_vector</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='kw'>arrow</span> <span class='kw'>=</span> <span class='no'>default_arrow</span>, <span class='no'>...</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>geom_cols_vector</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  arrow <span class='op'>=</span> <span class='va'>default_arrow</span>,
+  <span class='va'>...</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>geom_biplot_vector</span>(<span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>, <span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>arrow</span> <span class='kw'>=</span> <span class='no'>default_arrow</span>, <span class='no'>...</span>,
-  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
+<span class='fu'>geom_dims_vector</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  .matrix <span class='op'>=</span> <span class='st'>"cols"</span>,
+  arrow <span class='op'>=</span> <span class='va'>default_arrow</span>,
+  <span class='va'>...</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>mapping</th>
-      <td><p>Set of aesthetic mappings created by <code>aes()</code> or
-<code>aes_()</code>. If specified and <code>inherit.aes = TRUE</code> (the
+      <td><p>Set of aesthetic mappings created by <code><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes()</a></code> or
+<code><a href='https://ggplot2.tidyverse.org/reference/aes_.html'>aes_()</a></code>. If specified and <code>inherit.aes = TRUE</code> (the
 default), it is combined with the default mapping at the top level of the
 plot. You must supply <code>mapping</code> if there is no plot mapping.</p></td>
     </tr>
@@ -138,10 +178,10 @@ plot. You must supply <code>mapping</code> if there is no plot mapping.</p></td>
       <td><p>The data to be displayed in this layer. There are three
 options:</p>
 <p>If <code>NULL</code>, the default, the data is inherited from the plot
-data as specified in the call to <code>ggplot()</code>.</p>
+data as specified in the call to <code><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot()</a></code>.</p>
 <p>A <code>data.frame</code>, or other object, will override the plot
 data. All objects will be fortified to produce a data frame. See
-<code><a href='fortify.html'>fortify()</a></code> for which variables will be created.</p>
+<code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>fortify()</a></code> for which variables will be created.</p>
 <p>A <code>function</code> will be called with a single argument,
 the plot data. The return value must be a <code>data.frame</code>, and
 will be used as the layer data. A <code>function</code> can be created
@@ -159,7 +199,7 @@ a call to a position adjustment function.</p></td>
     </tr>
     <tr>
       <th>arrow</th>
-      <td><p>Specification for arrows, as created by <code><a href='https://www.rdocumentation.org/packages/grid/topics/arrow'>grid::arrow()</a></code>, or else
+      <td><p>Specification for arrows, as created by <code><a href='https://rdrr.io/r/grid/arrow.html'>grid::arrow()</a></code>, or else
 <code>NULL</code> for no arrows.</p></td>
     </tr>
     <tr>
@@ -183,36 +223,36 @@ display.</p></td>
       <td><p>If <code>FALSE</code>, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. <code>borders()</code>.</p></td>
+the default plot specification, e.g. <code><a href='https://ggplot2.tidyverse.org/reference/borders.html'>borders()</a></code>.</p></td>
     </tr>
     <tr>
       <th>.matrix</th>
       <td><p>A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are <code>"u"</code>, <code>"v"</code>, and <code>"uv"</code>.</p></td>
+standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</code> (for both).</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>An object of class <code>GeomVector</code> (inherits from <code>GeomSegment</code>, <code>Geom</code>, <code>ggproto</code>, <code>gg</code>) of length 4.</p>
-    
     <h2 class="hasAnchor" id="biplot-layers"><a class="anchor" href="#biplot-layers"></a>Biplot layers</h2>
 
     
-    <p><code><a href='ggbiplot.html'>ggbiplot()</a></code> uses <code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>ggplot2::fortify()</a></code> internally to produce a single data
-frame with a <code>.matrix</code> column distinguishing the subjects (<code>"u"</code>) and
-variables (<code>"v"</code>). The stat layers <code><a href='biplot-matrix.html'>stat_u()</a></code> and <code><a href='biplot-matrix.html'>stat_v()</a></code> simply filter
-the data frame to one of these two.</p>
-<p>The geom layers <code>geom_u_*()</code> and <code>geom_v_*()</code> call the corresponding stat in
-order to render plot elements for the corresponding matrix \(U\) or
-\(V\). <code>geom_biplot_*()</code> selects a default matrix based on common practice,
-e.g. \(U\) for points and \(V\) for arrows.</p>
-    
+
+<p><code><a href='ggbiplot.html'>ggbiplot()</a></code> uses <code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>ggplot2::fortify()</a></code> internally to produce a single data
+frame with a <code>.matrix</code> column distinguishing the subjects (<code>"rows"</code>) and
+variables (<code>"cols"</code>). The stat layers <code><a href='biplot-matrix.html'>stat_rows()</a></code> and <code><a href='biplot-matrix.html'>stat_cols()</a></code> simply
+filter the data frame to one of these two.</p>
+<p>The geom layers <code>geom_rows_*()</code> and <code>geom_cols_*()</code> call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+<code>geom_dims_*()</code> selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.</p>
     <h2 class="hasAnchor" id="aesthetics"><a class="anchor" href="#aesthetics"></a>Aesthetics</h2>
 
     
-    <p><code>geom_*_vector()</code> understands the following aesthetics (required aesthetics
+
+<p><code>geom_*_vector()</code> understands the following aesthetics (required aesthetics
 are in bold):</p><ul>
 <li><p><strong><code>x</code></strong></p></li>
 <li><p><strong><code>y</code></strong></p></li>
@@ -222,180 +262,16 @@ are in bold):</p><ul>
 <li><p><code>size</code></p></li>
 <li><p><code>group</code></p></li>
 </ul>
-    
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Scaled PCA of Anderson iris data with ranges and confidence intervals</span>
-<span class='no'>iris</span>[, -<span class='fl'>5</span>] <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/prcomp'>prcomp</a></span>(<span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='dplyr-verbs.html'>mutate_u</a></span>(<span class='kw'>species</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Species</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>iris_pca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
-#&gt; # 4 coordinates: PC1, PC2, ..., PC4
-#&gt; # 
-#&gt; # U: [ 150 x 4 | 1 ]
-#&gt;     PC1    PC2     PC3 ... |   species
-#&gt;                            |   <span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>  
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>2.26</span><span> -</span><span style='color: #BB0000;'>0.478</span><span>  0.127      | </span><span style='color: #BCBCBC;'>1</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>2.07</span><span>  0.672  0.234  ... | </span><span style='color: #BCBCBC;'>2</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>2.36</span><span>  0.341 -</span><span style='color: #BB0000;'>0.044</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.29</span><span>  0.595 -</span><span style='color: #BB0000;'>0.091</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span>     | </span><span style='color: #BCBCBC;'>4</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.38</span><span> -</span><span style='color: #BB0000;'>0.645</span><span> -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> setosa 
-#&gt; </span><span style='color: #949494;'># … with 145 more rows</span><span>
-#&gt; # 
-#&gt; # V: [ 4 x 4 | 0 ]
-#&gt;      PC1     PC2    PC3 ... | 
-#&gt;                             | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.521 -</span><span style='color: #BB0000;'>0.377</span><span>   0.720     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.269</span><span> -</span><span style='color: #BB0000;'>0.923</span><span>  -</span><span style='color: #BB0000;'>0.244</span><span> ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.580 -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.142</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.565 -</span><span style='color: #BB0000;'>0.066</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>0.634</span><span>     | </div><div class='input'><span class='no'>iris_pca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'>scale_color_brewer</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>2</span>) +
-  <span class='fu'><a href='geom-biplot-intervals.html'>geom_u_lineranges</a></span>(<span class='kw'>fun.data</span> <span class='kw'>=</span> <span class='no'>mean_sdl</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>.75</span>) +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>) +
-  <span class='fu'>geom_v_vector</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#444444"</span>) +
-  <span class='fu'>ggtitle</span>(
-    <span class='st'>"Row-principal PCA biplot of Anderson iris data"</span>,
-    <span class='st'>"Ranges 2 sample standard deviations from centroids"</span>
-  )</div><div class='img'><img src='geom-biplot-vector-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>iris_pca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'>scale_color_brewer</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>2</span>) +
-  <span class='fu'><a href='geom-biplot-intervals.html'>geom_u_lineranges</a></span>(
-    <span class='kw'>fun.data</span> <span class='kw'>=</span> <span class='no'>mean_cl_boot</span>, <span class='kw'>fun.args</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>.99</span>),
-    <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>.75</span>
-  ) +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>) +
-  <span class='fu'>geom_v_vector</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#444444"</span>) +
-  <span class='fu'>ggtitle</span>(
-    <span class='st'>"Row-principal PCA biplot of Anderson iris data"</span>,
-    <span class='st'>"99% confidence intervals based on nonparametric bootstrap sampling"</span>
-  )</div><div class='img'><img src='geom-biplot-vector-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Align an MDS ordination to a PCA ordination</span>
-<span class='no'>country_differences</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='masks.html'>cmdscale</a></span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_cmds</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
-#&gt; # 2 coordinates: PCo1 and PCo2
-#&gt; # 
-#&gt; # U: [ 13 x 2 | 0 ]
-#&gt;       PCo1   PCo2 | 
-#&gt;                   | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  4.41     2.91  | 
-#&gt; 
-#&gt; # 
-#&gt; # V: [ 13 x 2 | 0 ]
-#&gt;       PCo1   PCo2 | 
-#&gt;                   | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  4.41     2.91  | 
-#&gt; </div><div class='input'><span class='no'>country_differences</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/prcomp'>prcomp</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_pca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (13 x 13) x (13 x 13)'
-#&gt; # 13 coordinates: PC1, PC2, ..., PC13
-#&gt; # 
-#&gt; # U: [ 13 x 13 | 0 ]
-#&gt;      PC1   PC2     PC3 ... | 
-#&gt;                            | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.576</span><span>  5.50  3.17       | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>2.74</span><span>   6.34 -</span><span style='color: #BB0000;'>0.059</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  7.37   2.28 -</span><span style='color: #BB0000;'>1.22</span><span>       | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>5.50</span><span>   2.88 -</span><span style='color: #BB0000;'>1.06</span><span>       | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  9.60  -</span><span style='color: #BB0000;'>4.05</span><span> -</span><span style='color: #BB0000;'>3.03</span><span>       | 
-#&gt; 
-#&gt; # 
-#&gt; # V: [ 13 x 13 | 0 ]
-#&gt;      PC1    PC2      PC3 ... | 
-#&gt;                              | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.104 -</span><span style='color: #BB0000;'>0.423</span><span> -</span><span style='color: #BB0000;'>0.340</span><span>       | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.206 -</span><span style='color: #BB0000;'>0.475</span><span> -</span><span style='color: #BB0000;'>0.001</span><span style='color: #BB0000;text-decoration: underline;'>97</span><span> ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.289</span><span> -</span><span style='color: #BB0000;'>0.206</span><span>  0.121       | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.343 -</span><span style='color: #BB0000;'>0.250</span><span>  0.102       | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.352</span><span>  0.161  0.302       | 
-#&gt; </div><div class='input'><span class='co'># negate PCA cases to MDS coordinates</span>
-<span class='no'>differences_cmds</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='alignment.html'>negate_to</a></span>(<span class='no'>differences_pca</span>, <span class='st'>"u"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_align_u</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
-#&gt; # 2 coordinates, transformed: PCo1 and PCo2
-#&gt; # 
-#&gt; # U: [ 13 x 2 | 0 ]
-#&gt;       PCo1   PCo2 | 
-#&gt;                   | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span>  2.94  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>     3.68  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.70     0.883 | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>     2.01  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  4.41    -</span><span style='color: #BB0000;'>2.91</span><span>  | 
-#&gt; 
-#&gt; # 
-#&gt; # V: [ 13 x 2 | 0 ]
-#&gt;       PCo1   PCo2 | 
-#&gt;                   | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span>  2.94  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>     3.68  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.70     0.883 | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>     2.01  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  4.41    -</span><span style='color: #BB0000;'>2.91</span><span>  | 
-#&gt; </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_align_u</span>) + <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>()
-), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>))</div><div class='img'><img src='geom-biplot-vector-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># negate PCA variables to MDS coordinates</span>
-<span class='no'>differences_cmds</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='alignment.html'>negate_to</a></span>(<span class='no'>differences_pca</span>, <span class='st'>"v"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_align_v</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
-#&gt; # 2 coordinates, transformed: PCo1 and PCo2
-#&gt; # 
-#&gt; # U: [ 13 x 2 | 0 ]
-#&gt;       PCo1   PCo2 | 
-#&gt;                   | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  1.02    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>3.70</span><span>    -</span><span style='color: #BB0000;'>0.883</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  2.56    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>4.41</span><span>     2.91  | 
-#&gt; 
-#&gt; # 
-#&gt; # V: [ 13 x 2 | 0 ]
-#&gt;       PCo1   PCo2 | 
-#&gt;                   | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  1.02    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>3.70</span><span>    -</span><span style='color: #BB0000;'>0.883</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  2.56    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>4.41</span><span>     2.91  | 
-#&gt; </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='kw pkg'>gridExtra</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/gridExtra/topics/arrangeGrob'>arrangeGrob</a></span>(<span class='kw'>grobs</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_cmds</span>) + <span class='fu'>geom_v_vector</span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_pca</span>) + <span class='fu'>geom_v_vector</span>(),
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>differences_align_v</span>) + <span class='fu'>geom_v_vector</span>()
-), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>3</span>))</div><div class='img'><img src='geom-biplot-vector-4.png' alt='' width='700' height='433' /></div></span></pre>
+
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#format">Format</a></li>
-
-      <li><a href="#biplot-layers">Biplot layers</a></li>
-
-      <li><a href="#aesthetics">Aesthetics</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -403,13 +279,16 @@ are in bold):</p><ul>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

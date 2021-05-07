@@ -8,21 +8,29 @@
 
 <title>Functionality for k-means clustering ('kmeans') objects — methods-kmeans • ordr</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,11 +38,11 @@
 
 
 
-<meta property="og:title" content="Functionality for k-means clustering ('kmeans') objects — methods-kmeans" />
 
+<meta property="og:title" content="Functionality for k-means clustering ('kmeans') objects — methods-kmeans" />
 <meta property="og:description" content="These methods extract data from, and attribute new data to,
 objects of class &quot;kmeans&quot; as returned by stats::kmeans()." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -48,9 +56,10 @@ objects of class &quot;kmeans&quot; as returned by stats::kmeans()." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -72,7 +81,7 @@ objects of class &quot;kmeans&quot; as returned by stats::kmeans()." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -80,7 +89,6 @@ objects of class &quot;kmeans&quot; as returned by stats::kmeans()." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -90,6 +98,7 @@ objects of class &quot;kmeans&quot; as returned by stats::kmeans()." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -101,36 +110,31 @@ objects of class &quot;kmeans&quot; as returned by stats::kmeans()." />
     </div>
 
     <div class="ref-description">
-    
     <p>These methods extract data from, and attribute new data to,
-objects of class <code>"kmeans"</code> as returned by <code><a href='https://www.rdocumentation.org/packages/stats/topics/kmeans'>stats::kmeans()</a></code>.</p>
-    
+objects of class <code>"kmeans"</code> as returned by <code><a href='https://rdrr.io/r/stats/kmeans.html'>stats::kmeans()</a></code>.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for kmeans</span>
-<span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for kmeans</span>
-<span class='fu'><a href='reconstruct.html'>reconstruct</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='accessors.html'>recover_rows</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for kmeans</span>
-<span class='fu'><a href='accessors.html'>recover_u</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='accessors.html'>recover_cols</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for kmeans</span>
-<span class='fu'><a href='accessors.html'>recover_v</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='accessors.html'>recover_coord</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for kmeans</span>
-<span class='fu'><a href='accessors.html'>recover_coord</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='augmentation.html'>augmentation_rows</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for kmeans</span>
-<span class='fu'><a href='augmentation.html'>augmentation_u</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='augmentation.html'>augmentation_cols</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for kmeans</span>
-<span class='fu'><a href='augmentation.html'>augmentation_v</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='augmentation.html'>augmentation_coord</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
-<span class='co'># S3 method for kmeans</span>
-<span class='fu'><a href='augmentation.html'>augmentation_coord</a></span>(<span class='no'>x</span>)</pre>
-    
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -139,64 +143,142 @@ objects of class <code>"kmeans"</code> as returned by <code><a href='https://www
       <td><p>An ordination object.</p></td>
     </tr>
     </table>
-    
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Interpreting (k-means) clusters as ordinations on the Motor Trends data</span>
-<span class='no'>mtcars</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/scale'>scale</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/kmeans'>kmeans</a></span>(<span class='kw'>centers</span> <span class='kw'>=</span> <span class='fl'>3</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>mtcars_kmeans</span></div><div class='output co'>#&gt; # A tbl_ord of class 'kmeans': (32 x 3) x (11 x 3)'
+    <pre class="examples"><div class='input'><span class='co'># data frame of Anderson iris species measurements</span>
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "data.frame"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#&gt; 1          5.1         3.5          1.4         0.2  setosa
+#&gt; 2          4.9         3.0          1.4         0.2  setosa
+#&gt; 3          4.7         3.2          1.3         0.2  setosa
+#&gt; 4          4.6         3.1          1.5         0.2  setosa
+#&gt; 5          5.0         3.6          1.4         0.2  setosa
+#&gt; 6          5.4         3.9          1.7         0.4  setosa</div><div class='input'><span class='co'># compute 3-means clustering on scaled iris measurements</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>5601L</span><span class='op'>)</span>
+<span class='va'>iris</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span>select <span class='op'>=</span> <span class='op'>-</span><span class='va'>Species</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/kmeans.html'>kmeans</a></span><span class='op'>(</span>centers <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>iris_km</span>
+</div><div class='output co'>#&gt; K-means clustering with 3 clusters of sizes 50, 53, 47
+#&gt; 
+#&gt; Cluster means:
+#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width
+#&gt; 1  -1.01119138  0.85041372   -1.3006301  -1.2507035
+#&gt; 2  -0.05005221 -0.88042696    0.3465767   0.2805873
+#&gt; 3   1.13217737  0.08812645    0.9928284   1.0141287
+#&gt; 
+#&gt; Clustering vector:
+#&gt;   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20 
+#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+#&gt;  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40 
+#&gt;   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+#&gt;  41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60 
+#&gt;   1   1   1   1   1   1   1   1   1   1   3   3   3   2   2   2   3   2   2   2 
+#&gt;  61  62  63  64  65  66  67  68  69  70  71  72  73  74  75  76  77  78  79  80 
+#&gt;   2   2   2   2   2   3   2   2   2   2   3   2   2   2   2   3   3   3   2   2 
+#&gt;  81  82  83  84  85  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100 
+#&gt;   2   2   2   2   2   3   3   2   2   2   2   2   2   2   2   2   2   2   2   2 
+#&gt; 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 
+#&gt;   3   2   3   3   3   3   2   3   3   3   3   3   3   2   2   3   3   3   3   2 
+#&gt; 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 
+#&gt;   3   2   3   2   3   3   2   3   3   3   3   3   3   2   2   3   3   3   2   3 
+#&gt; 141 142 143 144 145 146 147 148 149 150 
+#&gt;   3   3   2   3   3   3   2   3   3   2 
+#&gt; 
+#&gt; Within cluster sum of squares by cluster:
+#&gt; [1] 47.35062 44.08754 47.45019
+#&gt;  (between_SS / total_SS =  76.7 %)
+#&gt; 
+#&gt; Available components:
+#&gt; 
+#&gt; [1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
+#&gt; [6] "betweenss"    "size"         "iter"         "ifault"      </div><div class='input'><span class='co'># visualize clusters using PCA</span>
+<span class='va'>iris</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span>select <span class='op'>=</span> <span class='op'>-</span><span class='va'>Species</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/prcomp.html'>prcomp</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='dplyr-verbs.html'>mutate_rows</a></span><span class='op'>(</span>cluster <span class='op'>=</span> <span class='va'>iris_km</span><span class='op'>$</span><span class='va'>cluster</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_rows_point</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='va'>cluster</span><span class='op'>)</span><span class='op'>)</span>,
+                                     levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>3L</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_color_brewer</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"qual"</span>, name <span class='op'>=</span> <span class='st'>"cluster"</span><span class='op'>)</span>
+</div><div class='img'><img src='methods-kmeans-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># wrap as a 'tbl_ord' object</span>
+<span class='op'>(</span><span class='va'>iris_km_ord</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='va'>iris_km</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'kmeans': (150 x 3) x (4 x 3)'
 #&gt; # 3 coordinates: 1, 2, 3
 #&gt; # 
-#&gt; # U: [ 32 x 3 | 2 ]
-#&gt;     `1`   `2`   `3` |   .name             .cluster
-#&gt;                     |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>   
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     0     0 | </span><span style='color: #BCBCBC;'>1</span><span> Mazda RX4         1       
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     1     0     0 | </span><span style='color: #BCBCBC;'>2</span><span> Mazda RX4 Wag     1       
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     0     1     0 | </span><span style='color: #BCBCBC;'>3</span><span> Datsun 710        2       
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     0     1     0 | </span><span style='color: #BCBCBC;'>4</span><span> Hornet 4 Drive    2       
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     0     0     1 | </span><span style='color: #BCBCBC;'>5</span><span> Hornet Sportabout 3       
-#&gt; </span><span style='color: #949494;'># … with 27 more rows</span><span>
+#&gt; # Rows: [ 150 x 3 | 0 ]
+#&gt;     `1`   `2`   `3` | 
+#&gt;                     | 
+#&gt; <span style='color: #BCBCBC;'>1</span><span>     1     0     0 | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     1     0     0 | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     1     0     0 | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     1     0     0 | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     1     0     0 | 
+#&gt; 
 #&gt; # 
-#&gt; # V: [ 11 x 3 | 1 ]
-#&gt;       `1`    `2`    `3` |   .name
-#&gt;                         |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.264</span><span>   0.757 -</span><span style='color: #BB0000;'>0.836</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> mpg  
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.343  -</span><span style='color: #BB0000;'>0.926</span><span>  1.01  | </span><span style='color: #BCBCBC;'>2</span><span> cyl  
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.059</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span> -</span><span style='color: #BB0000;'>0.799</span><span>  1.02  | </span><span style='color: #BCBCBC;'>3</span><span> disp 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.760  -</span><span style='color: #BB0000;'>0.807</span><span>  0.692 | </span><span style='color: #BCBCBC;'>4</span><span> hp   
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.448   0.563 -</span><span style='color: #BB0000;'>0.890</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> drat 
-#&gt; </span><span style='color: #949494;'># … with 6 more rows</span><span></div><div class='input'><span class='no'>mtcars_kmeans</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='augmentation.html'>augmentation_coord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/transform'>transform</a></span>(<span class='kw'>.sdev</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>(<span class='no'>.withinss</span> / <span class='no'>.size</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>mtcars_coord</span></div><div class='output co'>#&gt;   .name .size .withinss    .sdev
-#&gt; 1     1     5  23.40276 2.163458
-#&gt; 2     2    15  81.08611 2.325025
-#&gt; 3     3    12  23.08349 1.386948</div><div class='input'><span class='co'># discriminate between clusters 1 and 2</span>
-<span class='no'>mtcars_kmeans</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/factor'>factor</a></span>(<span class='no'>.cluster</span>)) +
-  <span class='fu'>geom_jitter</span>(<span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"u"</span>, <span class='fu'>aes</span>(<span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>.cluster</span>), <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>.2</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>.2</span>) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>`3`</span>)) +
-  <span class='fu'>scale_color_distiller</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"div"</span>, <span class='kw'>limits</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>1</span>, <span class='fl'>1</span>)) +
-  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_v_text_radiate</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'>ggtitle</span>(
-    <span class='st'>"Performance and design variable loadings onto clusters 1 and 2"</span>,
-    <span class='st'>"Color indicates loadings onto cluster 3"</span>
-  )</div><div class='img'><img src='methods-kmeans-1.png' alt='' width='700' height='433' /></div></span></pre>
+#&gt; # Columns: [ 4 x 3 | 0 ]
+#&gt;      `1`     `2`    `3` | 
+#&gt;                         | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.01</span><span>  -</span><span style='color: #BB0000;'>0.050</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span> 1.13   | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.850 -</span><span style='color: #BB0000;'>0.880</span><span>  0.088</span><span style='text-decoration: underline;'>1</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>1.30</span><span>   0.347  0.993  | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>1.25</span><span>   0.281  1.01   | </div><div class='input'><span class='co'># augment everything with names, observations with cluster assignment</span>
+<span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='va'>iris_km_ord</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'kmeans': (150 x 3) x (4 x 3)'
+#&gt; # 3 coordinates: 1, 2, 3
+#&gt; # 
+#&gt; # Rows: [ 150 x 3 | 2 ]
+#&gt;     `1`   `2`   `3` |   .name .cluster
+#&gt;                     |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>   
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     0     0 | </span><span style='color: #BCBCBC;'>1</span><span> 1     1       
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     1     0     0 | </span><span style='color: #BCBCBC;'>2</span><span> 2     1       
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     1     0     0 | </span><span style='color: #BCBCBC;'>3</span><span> 3     1       
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     1     0     0 | </span><span style='color: #BCBCBC;'>4</span><span> 4     1       
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     1     0     0 | </span><span style='color: #BCBCBC;'>5</span><span> 5     1       
+#&gt; </span><span style='color: #949494;'># … with 145 more rows</span><span>
+#&gt; # 
+#&gt; # Columns: [ 4 x 3 | 1 ]
+#&gt;      `1`     `2`    `3` |   .name       
+#&gt;                         |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.01</span><span>  -</span><span style='color: #BB0000;'>0.050</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span> 1.13   | </span><span style='color: #BCBCBC;'>1</span><span> Sepal.Length
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.850 -</span><span style='color: #BB0000;'>0.880</span><span>  0.088</span><span style='text-decoration: underline;'>1</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Sepal.Width 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>1.30</span><span>   0.347  0.993  | </span><span style='color: #BCBCBC;'>3</span><span> Petal.Length
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>1.25</span><span>   0.281  1.01   | </span><span style='color: #BCBCBC;'>4</span><span> Petal.Width </div><div class='input'><span class='co'># summarize clusters with standard deviation</span>
+<span class='va'>iris_km_ord</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/transform.html'>transform</a></span><span class='op'>(</span>.sdev <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='va'>.withinss</span> <span class='op'>/</span> <span class='va'>.size</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   .name .size .withinss .inertia .prop_var     .sdev
+#&gt; 1     1    50  47.35062       NA        NA 0.9731456
+#&gt; 2     2    53  44.08754       NA        NA 0.9120529
+#&gt; 3     3    47  47.45019       NA        NA 1.0047779</div><div class='input'><span class='co'># discriminate between clusters 2 and 3</span>
+<span class='va'>iris_km_ord</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>`2`</span>, y <span class='op'>=</span> <span class='va'>`3`</span><span class='op'>)</span>, color <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>.cluster</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_jitter</span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"rows"</span>, <span class='fu'>aes</span><span class='op'>(</span>shape <span class='op'>=</span> <span class='va'>.cluster</span><span class='op'>)</span>, width <span class='op'>=</span> <span class='fl'>.2</span>, height <span class='op'>=</span> <span class='fl'>.2</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='co'>#geom_cols_vector(aes(color = `1`)) +</span>
+  <span class='co'>#geom_cols_text_radiate(aes(label = .name), size = 3) +</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_cols_axis</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>color <span class='op'>=</span> <span class='va'>`1`</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_cols_axis_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>2</span>, label_dodge <span class='op'>=</span> <span class='fl'>.1</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_cols_axis_ticks</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_cols_text</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>, size <span class='op'>=</span> <span class='fl'>3</span>, alpha <span class='op'>=</span> <span class='fl'>.5</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_x_continuous</span><span class='op'>(</span>expand <span class='op'>=</span> <span class='fu'>expansion</span><span class='op'>(</span>mult <span class='op'>=</span> <span class='fl'>.8</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_y_continuous</span><span class='op'>(</span>expand <span class='op'>=</span> <span class='fu'>expansion</span><span class='op'>(</span>mult <span class='op'>=</span> <span class='fl'>.5</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span>
+    <span class='st'>"Measurement loadings onto clusters 2 and 3"</span>,
+    <span class='st'>"Color indicates loadings onto cluster 1"</span>
+  <span class='op'>)</span>
+</div><div class='img'><img src='methods-kmeans-2.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -204,13 +286,16 @@ objects of class <code>"kmeans"</code> as returned by <code><a href='https://www
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

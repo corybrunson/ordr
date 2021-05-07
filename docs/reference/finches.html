@@ -8,21 +8,29 @@
 
 <title>Site-species occurrence data for Galapagos finches — finches • ordr</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,10 +38,10 @@
 
 
 
-<meta property="og:title" content="Site-species occurrence data for Galapagos finches — finches" />
 
+<meta property="og:title" content="Site-species occurrence data for Galapagos finches — finches" />
 <meta property="og:description" content="Site-species occurrence data for Galapagos finches" />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -47,9 +55,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -71,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -79,7 +88,6 @@
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -89,6 +97,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -100,38 +109,37 @@
     </div>
 
     <div class="ref-description">
-    
     <p>Site-species occurrence data for Galapagos finches</p>
-    
     </div>
 
-        
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>finches</span><span class='op'>)</span></pre>
+
+
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A <a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data frame</a>.</p>
-    
+    <p>A <a href='https://rdrr.io/r/base/data.frame.html'>data frame</a>.</p>
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
     <p>These data are taken from Sanderson (2000). They are available in a
-different format in the <strong><a href='https://www.rdocumentation.org/packages/cooccur/topics/cooccur'>cooccur</a></strong> package.</p>
-    
+different format in the <strong><a href='https://rdrr.io/pkg/cooccur/man/cooccur.html'>cooccur</a></strong> package.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Sanderson JG (2000) "Testing Ecological Patterns". <em>American Scientist</em>,
-<strong>88</strong>(4): 332--339. doi: <a href='http://doi.org/10.1511/2000.4.332'>10.1511/2000.4.332</a></p>
-    
+<strong>88</strong>(4): 332--339. doi: <a href='https://doi.org/10.1511/2000.4.332'>10.1511/2000.4.332</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Correspondence analysis of Sanderson finches data</span>
-<span class='no'>finches</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>ca</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/ca/topics/ca'>ca</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='fl'>.5</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_ca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (13 x 12) x (17 x 12)'
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>finches</span><span class='op'>)</span>
+<span class='va'>finches</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ca</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/ca.html'>ca</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='fl'>.5</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>finches_ca</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (13 x 12) x (17 x 12)'
 #&gt; # 12 coordinates: Dim1, Dim2, ..., Dim12
 #&gt; # 
-#&gt; # U: [ 13 x 12 | 4 ]
+#&gt; # Rows: [ 13 x 12 | 4 ]
 #&gt;      Dim1   Dim2    Dim3 ... |   .name         .mass .dist .inertia
 #&gt;                              |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.165   0.685  0.320      | </span><span style='color: #BCBCBC;'>1</span><span> Large groun… 0.115  0.573   0.037</span><span style='text-decoration: underline;'>7</span><span>
@@ -141,7 +149,7 @@ different format in the <strong><a href='https://www.rdocumentation.org/packages
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.365</span><span>  -</span><span style='color: #BB0000;'>0.691</span><span>  0.244      | </span><span style='color: #BCBCBC;'>5</span><span> Cactus grou… 0.098</span><span style='text-decoration: underline;'>4</span><span> 0.608   0.036</span><span style='text-decoration: underline;'>4</span><span>
 #&gt; </span><span style='color: #949494;'># … with 8 more rows</span><span>
 #&gt; # 
-#&gt; # V: [ 17 x 12 | 4 ]
+#&gt; # Columns: [ 17 x 12 | 4 ]
 #&gt;      Dim1   Dim2   Dim3 ... |   .name       .mass .dist .inertia
 #&gt;                             |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.090</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>1.23</span><span>   0.274     | </span><span style='color: #BCBCBC;'>1</span><span> Seymour    0.032</span><span style='text-decoration: underline;'>8</span><span> 1.10   0.039</span><span style='text-decoration: underline;'>8</span><span> 
@@ -149,23 +157,26 @@ different format in the <strong><a href='https://www.rdocumentation.org/packages
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.269</span><span>   0.389 -</span><span style='color: #BB0000;'>0.783</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> Isabella   0.090</span><span style='text-decoration: underline;'>2</span><span> 0.657  0.038</span><span style='text-decoration: underline;'>9</span><span> 
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.233</span><span>   0.601 -</span><span style='color: #BB0000;'>0.933</span><span>     | </span><span style='color: #BCBCBC;'>4</span><span> Fernandina 0.082</span><span style='text-decoration: underline;'>0</span><span> 0.794  0.051</span><span style='text-decoration: underline;'>7</span><span> 
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.221</span><span>   0.117 -</span><span style='color: #BB0000;'>0.136</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> Santiago   0.082</span><span style='text-decoration: underline;'>0</span><span> 0.349  0.009</span><span style='text-decoration: underline;'>98</span><span>
-#&gt; </span><span style='color: #949494;'># … with 12 more rows</span><span></div><div class='input'><span class='no'>finches_ca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='no'>.inertia</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"royalblue3"</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='no'>.inertia</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'>scale_alpha_continuous</span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>.3</span>, <span class='fl'>1</span>), <span class='kw'>guide</span> <span class='kw'>=</span> <span class='st'>"none"</span>) +
-  <span class='fu'>ggtitle</span>(
+#&gt; </span><span style='color: #949494;'># … with 12 more rows</span><span></div><div class='input'><span class='va'>finches_ca</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_rows_text</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='va'>.inertia</span><span class='op'>)</span>, color <span class='op'>=</span> <span class='st'>"royalblue3"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_cols_text</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='va'>.inertia</span><span class='op'>)</span>, color <span class='op'>=</span> <span class='st'>"darkred"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_alpha_continuous</span><span class='op'>(</span>range <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>.3</span>, <span class='fl'>1</span><span class='op'>)</span>, guide <span class='op'>=</span> <span class='st'>"none"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span>
     <span class='st'>"Symmetric CA biplot of the Galapagos island finches"</span>,
     <span class='st'>"Label opacity encodes row/column inertia"</span>
-  )</div><div class='img'><img src='finches-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Logistic SVD of Sanderson finches data</span>
-<span class='no'>finches</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/t'>t</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='masks.html'>logisticSVD</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_lsvd</span></div><div class='output co'>#&gt; <span class='message'>rARPACK must be installed to use partial_decomp</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lsvd': (17 x 2) x (13 x 2)'
+  <span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>expand_limits</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='finches-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Logistic SVD of Sanderson finches data</span>
+<span class='va'>finches</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='wrap-ord.html'>logisticSVD_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>finches_lsvd</span>
+</div><div class='output co'>#&gt; <span class='message'>rARPACK must be installed to use partial_decomp</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lsvd': (17 x 2) x (13 x 2)'
 #&gt; # 2 coordinates: LSC1 and LSC2
 #&gt; # 
-#&gt; # U: [ 17 x 2 | 1 ]
+#&gt; # Rows: [ 17 x 2 | 1 ]
 #&gt;    LSC1   LSC2 |   .name     
 #&gt;                |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>29.6</span><span> -</span><span style='color: #BB0000;'>27.3</span><span>  | </span><span style='color: #BCBCBC;'>1</span><span> Seymour   
@@ -175,7 +186,7 @@ different format in the <strong><a href='https://www.rdocumentation.org/packages
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span>  20.2   3.50 | </span><span style='color: #BCBCBC;'>5</span><span> Santiago  
 #&gt; </span><span style='color: #949494;'># … with 12 more rows</span><span>
 #&gt; # 
-#&gt; # V: [ 13 x 2 | 2 ]
+#&gt; # Columns: [ 13 x 2 | 2 ]
 #&gt;     LSC1   LSC2 |   .name                       .mu
 #&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.233   0.231 | </span><span style='color: #BCBCBC;'>1</span><span> Large ground finch         9.02
@@ -183,26 +194,29 @@ different format in the <strong><a href='https://www.rdocumentation.org/packages
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.164  -</span><span style='color: #BB0000;'>0.318</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Small ground finch         9.86
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.078</span><span style='text-decoration: underline;'>7</span><span>  0.548 | </span><span style='color: #BCBCBC;'>4</span><span> Sharp-beaked ground finch  6.88
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.240  -</span><span style='color: #BB0000;'>0.451</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> Cactus ground finch        5.85
-#&gt; </span><span style='color: #949494;'># … with 8 more rows</span><span></div><div class='input'><span class='no'>finches_lsvd</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(
-    <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>LSC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>LSC2</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
-    <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>100</span>
-  ) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_u_vector</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_u_text_radiate</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_label</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"royalblue3"</span>) +
-  <span class='fu'>ggtitle</span>(
+#&gt; </span><span style='color: #949494;'># … with 8 more rows</span><span></div><div class='input'><span class='va'>finches_lsvd</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span>
+    <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>LSC1</span>, y <span class='op'>=</span> <span class='va'>LSC2</span>, label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>,
+    sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>100</span>
+  <span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_rows_vector</a></span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>.5</span>, color <span class='op'>=</span> <span class='st'>"darkred"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_rows_text_radiate</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>3</span>, color <span class='op'>=</span> <span class='st'>"darkred"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_cols_label</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>3</span>, alpha <span class='op'>=</span> <span class='fl'>.5</span>, color <span class='op'>=</span> <span class='st'>"royalblue3"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span>
     <span class='st'>"Logistic SVD of the Galapagos island finches"</span>,
     <span class='st'>"Islands (finches) scaled to the primary (secondary) axes"</span>
-  )</div><div class='img'><img src='finches-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Logistic PCA of Sanderson finches data</span>
-<span class='no'>finches</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/t'>t</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='masks.html'>logisticPCA</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_lpca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lpca': (17 x 2) x (13 x 2)'
+  <span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>expand_limits</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>80</span>, <span class='fl'>60</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='finches-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Logistic PCA of Sanderson finches data</span>
+<span class='va'>finches</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='wrap-ord.html'>logisticPCA_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>finches_lpca</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'lpca': (17 x 2) x (13 x 2)'
 #&gt; # 2 coordinates: LPC1 and LPC2
 #&gt; # 
-#&gt; # U: [ 17 x 2 | 1 ]
+#&gt; # Rows: [ 17 x 2 | 1 ]
 #&gt;     LPC1   LPC2 |   .name     
 #&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>   2.02 -</span><span style='color: #BB0000;'>10.4</span><span>  | </span><span style='color: #BCBCBC;'>1</span><span> Seymour   
@@ -212,7 +226,7 @@ different format in the <strong><a href='https://www.rdocumentation.org/packages
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>10.6</span><span>    1.65 | </span><span style='color: #BCBCBC;'>5</span><span> Santiago  
 #&gt; </span><span style='color: #949494;'># … with 12 more rows</span><span>
 #&gt; # 
-#&gt; # V: [ 13 x 2 | 2 ]
+#&gt; # Columns: [ 13 x 2 | 2 ]
 #&gt;      LPC1   LPC2 |   .name                        .mu
 #&gt;                  |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.190</span><span>   0.372 | </span><span style='color: #BCBCBC;'>1</span><span> Large ground finch         3.00 
@@ -220,28 +234,31 @@ different format in the <strong><a href='https://www.rdocumentation.org/packages
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.279</span><span>  -</span><span style='color: #BB0000;'>0.281</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Small ground finch         1.91 
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.038</span><span style='text-decoration: underline;'>9</span><span>  0.568 | </span><span style='color: #BCBCBC;'>4</span><span> Sharp-beaked ground finch  1.79 
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.353</span><span>  -</span><span style='color: #BB0000;'>0.361</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> Cactus ground finch       -</span><span style='color: #BB0000;'>0.451</span><span>
-#&gt; </span><span style='color: #949494;'># … with 8 more rows</span><span></div><div class='input'><span class='no'>finches_lpca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(
-    <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>LPC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>LPC2</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
-    <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>50</span>
-  ) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_u_vector</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_u_text_radiate</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_label</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"royalblue3"</span>) +
-  <span class='fu'>ggtitle</span>(
+#&gt; </span><span style='color: #949494;'># … with 8 more rows</span><span></div><div class='input'><span class='va'>finches_lpca</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span>
+    <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>LPC1</span>, y <span class='op'>=</span> <span class='va'>LPC2</span>, label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>,
+    sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>50</span>
+  <span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_rows_vector</a></span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>.5</span>, color <span class='op'>=</span> <span class='st'>"darkred"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_rows_text_radiate</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>3</span>, color <span class='op'>=</span> <span class='st'>"darkred"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_cols_label</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>3</span>, alpha <span class='op'>=</span> <span class='fl'>.5</span>, color <span class='op'>=</span> <span class='st'>"royalblue3"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span>
     <span class='st'>"Logistic PCA of the Galapagos island finches"</span>,
     <span class='st'>"Islands (finches) scaled to the primary (secondary) axes"</span>
-  )</div><div class='img'><img src='finches-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Convex logistic PCA of Sanderson finches data</span>
-<span class='no'>finches</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/t'>t</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>expand_limits</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>30</span>, <span class='fl'>25</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='finches-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Convex logistic PCA of Sanderson finches data</span>
+<span class='va'>finches</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='co'># omit finches present on every island</span>
-  {<span class='no'>.</span>[, ! <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/apply'>apply</a></span>(<span class='no'>.</span>, <span class='fl'>2</span>, <span class='no'>all</span>), <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>]} <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='masks.html'>convexLogisticPCA</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/generics/topics/augment'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>finches_clpca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'clpca': (17 x 2) x (12 x 2)'
+  <span class='op'>{</span><span class='va'>.</span><span class='op'>[</span>, <span class='op'>!</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>.</span>, <span class='fl'>2</span>, <span class='va'>all</span><span class='op'>)</span>, drop <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>]</span><span class='op'>}</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='wrap-ord.html'>convexLogisticPCA_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>finches_clpca</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'clpca': (17 x 2) x (12 x 2)'
 #&gt; # 2 coordinates: LPC1 and LPC2
 #&gt; # 
-#&gt; # U: [ 17 x 2 | 1 ]
+#&gt; # Rows: [ 17 x 2 | 1 ]
 #&gt;    LPC1   LPC2 |   .name     
 #&gt;                |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>5.81</span><span> -</span><span style='color: #BB0000;'>9.59</span><span>  | </span><span style='color: #BCBCBC;'>1</span><span> Seymour   
@@ -251,7 +268,7 @@ different format in the <strong><a href='https://www.rdocumentation.org/packages
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span>  9.14  0.958 | </span><span style='color: #BCBCBC;'>5</span><span> Santiago  
 #&gt; </span><span style='color: #949494;'># … with 12 more rows</span><span>
 #&gt; # 
-#&gt; # V: [ 12 x 2 | 2 ]
+#&gt; # Columns: [ 12 x 2 | 2 ]
 #&gt;    LPC1   LPC2 |   .name                       .mu
 #&gt;                |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.232  0.275 | </span><span style='color: #BCBCBC;'>1</span><span> Large ground finch        1.54 
@@ -259,34 +276,28 @@ different format in the <strong><a href='https://www.rdocumentation.org/packages
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.210 -</span><span style='color: #BB0000;'>0.315</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Small ground finch        1.54 
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.110  0.568 | </span><span style='color: #BCBCBC;'>4</span><span> Sharp-beaked ground finch 0.357
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.275 -</span><span style='color: #BB0000;'>0.444</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> Cactus ground finch       0.875
-#&gt; </span><span style='color: #949494;'># … with 7 more rows</span><span></div><div class='input'><span class='no'>finches_clpca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(
-    <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>LPC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>LPC2</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
-    <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>50</span>
-  ) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_u_vector</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_u_text_radiate</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_label</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"royalblue3"</span>) +
-  <span class='fu'>ggtitle</span>(
+#&gt; </span><span style='color: #949494;'># … with 7 more rows</span><span></div><div class='input'><span class='va'>finches_clpca</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span>
+    <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>LPC1</span>, y <span class='op'>=</span> <span class='va'>LPC2</span>, label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>,
+    sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>50</span>
+  <span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-vector.html'>geom_rows_vector</a></span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>.5</span>, color <span class='op'>=</span> <span class='st'>"darkred"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_rows_text_radiate</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>3</span>, color <span class='op'>=</span> <span class='st'>"darkred"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_cols_label</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>3</span>, alpha <span class='op'>=</span> <span class='fl'>.5</span>, color <span class='op'>=</span> <span class='st'>"royalblue3"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span>
     <span class='st'>"Convex logistic PCA of the Galapagos island finches"</span>,
     <span class='st'>"Islands (finches) scaled to the primary (secondary) axes"</span>
-  )</div><div class='img'><img src='finches-4.png' alt='' width='700' height='433' /></div></span></pre>
+  <span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>expand_limits</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>25</span>, <span class='fl'>35</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='finches-4.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#format">Format</a></li>
-
-      <li><a href="#source">Source</a></li>
-
-      <li><a href="#references">References</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -294,13 +305,16 @@ different format in the <strong><a href='https://www.rdocumentation.org/packages
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

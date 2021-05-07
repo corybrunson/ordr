@@ -3,24 +3,21 @@
 \name{methods-ca}
 \alias{methods-ca}
 \alias{as_tbl_ord.ca}
-\alias{reconstruct.ca}
-\alias{recover_u.ca}
-\alias{recover_v.ca}
+\alias{recover_rows.ca}
+\alias{recover_cols.ca}
 \alias{recover_inertia.ca}
 \alias{recover_conference.ca}
 \alias{recover_coord.ca}
-\alias{augmentation_u.ca}
-\alias{augmentation_v.ca}
+\alias{augmentation_rows.ca}
+\alias{augmentation_cols.ca}
 \alias{augmentation_coord.ca}
 \title{Functionality for correspondence analysis ('ca') objects}
 \usage{
 \method{as_tbl_ord}{ca}(x)
 
-\method{reconstruct}{ca}(x)
+\method{recover_rows}{ca}(x)
 
-\method{recover_u}{ca}(x)
-
-\method{recover_v}{ca}(x)
+\method{recover_cols}{ca}(x)
 
 \method{recover_inertia}{ca}(x)
 
@@ -28,9 +25,9 @@
 
 \method{recover_coord}{ca}(x)
 
-\method{augmentation_u}{ca}(x)
+\method{augmentation_rows}{ca}(x)
 
-\method{augmentation_v}{ca}(x)
+\method{augmentation_cols}{ca}(x)
 
 \method{augmentation_coord}{ca}(x)
 }
@@ -42,129 +39,62 @@ These methods extract data from, and attribute new data to,
 objects of class \code{"ca"} from the \strong{\link[ca:ca]{ca}} package.
 }
 \examples{
-# Correspondence analysis of Sanderson finches data
-finches \%>\%
-  ca::ca() \%>\%
-  as_tbl_ord() \%>\%
-  confer_inertia(.5) \%>\%
-  augment() \%>\%
-  print() -> finches_ca
-finches_ca \%>\%
-  ggbiplot(aes(label = .name)) +
-  geom_u_text(aes(alpha = .inertia), color = "royalblue3") +
-  geom_v_text(aes(alpha = .inertia), color = "darkred") +
-  scale_alpha_continuous(range = c(.3, 1), guide = "none") +
-  ggtitle(
-    "Symmetric CA biplot of the Galapagos island finches",
-    "Label opacity encodes row/column inertia"
-  )
-# Row- and column-principal biplots for CA of artificial smoking frequency data
-data(smoke, package = "ca")
-smoke \%>\%
+# data frame of artificial employee smoking habits
+class(ca::smoke)
+print(ca::smoke)
+# use correspondence analysis to construct row and column profiles
+ca::smoke \%>\%
   ca::ca() \%>\%
   as_tbl_ord() \%>\%
   print() -> smoke_ca
+# summarize ordination
+glance(smoke_ca)
+# recover row and column profiles
+get_rows(smoke_ca)
+get_cols(smoke_ca)
+# augment profiles with names, masses, distances, and inertias
+augment_ord(smoke_ca)
+# summarize artificial coordinates
+tidy(smoke_ca)
+# fortification of artificial coordinates yields proportion of variance measure
+fortify(smoke_ca, .matrix = "coord")
+# scree plot of inertia
+ggplot(smoke_ca, .matrix = "coord", aes(x = .name, y = .inertia)) +
+  theme_bw() +
+  geom_bar(stat = "identity") +
+  labs(x = "", y = "Inertia")
+# scree plot of proportion of variance (inertia)
+ggplot(smoke_ca, .matrix = "coord", aes(x = .name, y = .prop_var)) +
+  theme_bw() +
+  scale_y_continuous(labels = scales::percent) +
+  geom_bar(stat = "identity") +
+  labs(x = "", y = "Proportion of inertia")
+# fortification adds all above columns
+fortify(smoke_ca)
+# row-principal biplot
 smoke_ca \%>\%
   confer_inertia("rowprincipal") \%>\%
-  ggbiplot(aes(label = .name)) +
-  theme_bw() +
-  geom_u_point(color = "green") +
-  geom_u_text_repel(color = "blue") +
-  geom_v_point(color = "brown", shape = 17) +
-  geom_v_text_repel(color = "brown")
+  ggbiplot(aes(label = .name, color = .matrix, shape = .matrix)) +
+  scale_color_manual(values = c("navyblue", "brown")) +
+  scale_shape_manual(values = c(17L, 16L)) +
+  theme_bw() + theme_biplot() +
+  geom_origin() +
+  geom_rows_point() +
+  geom_rows_text_repel(show.legend = FALSE) +
+  geom_cols_point() +
+  geom_cols_text_repel(show.legend = FALSE) +
+  labs(color = "Dimension", shape = "Dimension")
+# row-principal biplot
 smoke_ca \%>\%
   confer_inertia("colprincipal") \%>\%
-  ggbiplot(aes(label = .name)) +
-  theme_bw() +
-  geom_u_point(color = "green") +
-  geom_u_text_repel(color = "blue") +
-  geom_v_point(color = "brown", shape = 17) +
-  geom_v_text_repel(color = "brown")
-# Confer inertia in CA between rows and columns of benthic sample data
-benthos \%>\%
-  ca::ca() \%>\%
-  as_tbl_ord() \%>\%
-  print() -> benthos_ca
-# Reproduce Exhibit 8.3
-benthos_ca \%>\%
-  confer_inertia("colprincipal") \%>\%
-  ggbiplot(aes(label = .name)) +
-  theme_bw() +
-  geom_u_point(color = "brown", size = 1) +
-  geom_v_text(color = "darkgreen")
-# Reproduce Exhibit 8.4
-benthos_ca \%>\%
-  augment(.matrix = "u") \%>\%
-  transmute_u(mass = .mass, sqrt_mass = sqrt(.mass)) \%>\%
-  confer_inertia("colprincipal") \%>\%
-  ggbiplot(aes(label = .name), scale_u = "sqrt_mass") +
-  theme_bw() +
-  geom_u_vector(color = "brown", arrow = NULL) +
-  geom_u_point(aes(size = mass), color = "brown", shape = 17) +
-  scale_size_continuous(range = c(1, 4), guide = "none") +
-  geom_u_text(
-    stat = "chull",
-    color = "brown", hjust = "outward", vjust = "outward"
-  ) +
-  geom_v_point(color = "darkgreen") +
-  geom_v_text_repel(color = "darkgreen", min.segment.length = 2)
-# Confer inertia between rows and columns of CA on Spanish ISSP sample
-issp_women \%>\%
-  ca::ca() \%>\%
-  as_tbl_ord() \%>\%
-  augment() \%>\%
-  print() -> issp_ca
-# Reproduce Exhibit 9.2 in Greenacre (2010)...
-issp_ca \%>\%
-  confer_inertia(c(1, 1)) \%>\%
-  ggbiplot(aes(label = .name)) +
-  theme_bw() +
-  geom_u_point(color = "darkgreen") +
-  geom_u_text_repel(color = "darkgreen") +
-  geom_v_point(color = "brown", shape = 17) +
-  geom_v_text_repel(color = "brown")
-# Reproduce Exhibit 9.3 in Greenacre (2010)...
-issp_ca \%>\%
-  confer_inertia("rowprincipal") \%>\%
-  ggbiplot(aes(label = .name)) +
-  theme_bw() +
-  geom_u_point(color = "darkgreen") +
-  geom_v_point(color = "brown", shape = 17) +
-  geom_v_text_repel(color = "brown")
-# Reproduce Exhibits 9.4 and 9.6 in Greenacre (2010)...
-# Compare relative frequences of hair and eye colors among men versus women
-HairEyeColor[, , "Male"] \%>\%
-  ca::ca() \%>\%
-  as_tbl_ord() \%>\%
-  print() -> male_haireye_ca
-HairEyeColor[, , "Female"] \%>\%
-  ca::ca() \%>\%
-  as_tbl_ord() \%>\%
-  print() -> female_haireye_ca
-ca_biplot <- function(ord) {
-  ggbiplot(ord, aes(label = .name)) +
-    geom_u_point(aes(size = .mass), color = "saddlebrown") +
-    geom_v_point(aes(size = .mass), color = "seagreen4") +
-    geom_u_text_repel(color = "saddlebrown") +
-    geom_v_text_repel(color = "seagreen4") +
-    guides(size = "none")
-}
-plot(gridExtra::arrangeGrob(grobs = list(
-  ca_biplot(male_haireye_ca),
-  ca_biplot(female_haireye_ca)
-), ncol = 2))
-# negation, permutation, and rotation
-male_haireye_ca \%>\%
-  negate_to(female_haireye_ca, "u") \%>\%
-  get_alignment()
-male_haireye_ca \%>\%
-  permute_to(female_haireye_ca, "u") \%>\%
-  get_alignment()
-male_haireye_ca \%>\%
-  rotate_to(female_haireye_ca, "u") \%>\%
-  get_alignment()
-plot(gridExtra::arrangeGrob(grobs = list(
-  ca_biplot(rotate_to(male_haireye_ca, female_haireye_ca, "u")),
-  ca_biplot(female_haireye_ca)
-), ncol = 2))
+  ggbiplot(aes(label = .name, color = .matrix, shape = .matrix)) +
+  scale_color_manual(values = c("navyblue", "brown")) +
+  scale_shape_manual(values = c(17L, 16L)) +
+  theme_bw() + theme_biplot() +
+  geom_origin() +
+  geom_rows_point() +
+  geom_rows_text_repel(show.legend = FALSE) +
+  geom_cols_point() +
+  geom_cols_text_repel(show.legend = FALSE) +
+  labs(color = "Dimension", shape = "Dimension")
 }

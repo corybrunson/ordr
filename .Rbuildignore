@@ -1,7 +1,10 @@
 
-# R project defaults
+# R project files
 ^.*\.Rproj$
 ^\.Rproj\.user$
+LICENSE
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
 
 # files and directories in package structure
 README.Rmd
@@ -10,10 +13,12 @@ README.Rmd
 ^man/figures$
 ^_pkgdown\.yml$
 ^docs$
+^ignore$
 
 # hosting infrastructure
-cran-comments.md
-.github
+^cran-comments\.md$
+^\.github$
+^\.travis\.yml$
 
 # custom files and directories
 ^sandbox$

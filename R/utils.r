@@ -9,15 +9,15 @@ as_tbl_ord_default <- function(x) {
 }
 
 tbl_ord_factors <- c(
-  u = "u", v = "v", uv = "uv",
-  U = "u", V = "v", UV = "uv",
-  left = "u", right = "v",
-  cases = "u", variables = "v",
-  subjects = "u", measures = "v",
-  scores = "u", loadings = "v",
-  rows = "u", columns = "v", cols = "v",
-  rowprincipal = "u", colprincipal = "v",
-  both = "uv", symmetric = "uv"
+  rows = "rows", columns = "cols", cols = "cols", dims = "dims",
+  u = "rows", v = "cols", uv = "dims",
+  U = "rows", V = "cols", UV = "dims",
+  left = "rows", right = "cols",
+  cases = "rows", variables = "cols",
+  subjects = "rows", measures = "cols",
+  scores = "rows", loadings = "cols",
+  rowprincipal = "rows", colprincipal = "cols",
+  both = "dims", symmetric = "dims"
 )
 match_factor <- function(x) {
   x <- match.arg(x, names(tbl_ord_factors))
@@ -25,7 +25,7 @@ match_factor <- function(x) {
 }
 switch_inertia <- function(x) {
   x <- match.arg(x, names(tbl_ord_factors))
-  switch(tbl_ord_factors[x], u = c(1, 0), v = c(0, 1), uv = c(.5, .5))
+  switch(tbl_ord_factors[x], rows = c(1, 0), cols = c(0, 1), dims = c(.5, .5))
 }
 
 method_classes <- function(generic.function) {
@@ -54,16 +54,18 @@ matrix_stat <- function(.matrix, stat) {
   if (stat == "identity") return(.matrix)
   stringr::str_c(.matrix, stat, sep = "_")
 }
-u_stat <- function(stat) matrix_stat("u", stat)
-v_stat <- function(stat) matrix_stat("v", stat)
+rows_stat <- function(stat) matrix_stat("rows", stat)
+cols_stat <- function(stat) matrix_stat("cols", stat)
 
-setup_u_data <- function(data, params) {
-  data[data$.matrix == "u", -match(".matrix", names(data)), drop = FALSE]
+setup_rows_data <- function(data, params) {
+  data[data$.matrix == "rows", -match(".matrix", names(data)), drop = FALSE]
 }
 
-setup_v_data <- function(data, params) {
-  data[data$.matrix == "v", -match(".matrix", names(data)), drop = FALSE]
+setup_cols_data <- function(data, params) {
+  data[data$.matrix == "cols", -match(".matrix", names(data)), drop = FALSE]
 }
+
+is_const <- function(x) length(unique(x)) == 1L
 
 family_arg <- function(family_fun) {
   if (! is.null(family_fun)) {

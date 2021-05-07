@@ -15,8 +15,8 @@ ggbiplot(
   axis.percents = TRUE,
   sec.axes = NULL,
   scale.factor = NULL,
-  scale_u = NULL,
-  scale_v = NULL,
+  scale_rows = NULL,
+  scale_cols = NULL,
   ...
 )
 
@@ -54,10 +54,10 @@ percentages.}
 \item{scale.factor}{Numeric value used to scale the secondary axes against
 the primary axes; ignored if \code{sec.axes} is not specified.}
 
-\item{scale_u, scale_v}{Either the character name of a numeric variable in
-\code{get_*(ordination)} or a numeric vector of length
-\code{nrow(get_*(ordination))}, used to scale the coordinates of \eqn{U} or
-\eqn{V}, respectively.}
+\item{scale_rows, scale_cols}{Either the character name of a numeric variable
+in \code{get_*(ordination)} or a numeric vector of length
+\code{nrow(get_*(ordination))}, used to scale the coordinates of the matrix
+factors.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:fortify]{ggplot2::fortify()}}; see
 \code{\link[=fortify.tbl_ord]{fortify.tbl_ord()}}.}
@@ -73,7 +73,7 @@ object \code{ordination}. The baseline object is the default unadorned
 \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} returns:
 \itemize{
 \item \code{p$mapping} is augmented with \code{.matrix = .matrix}, which expects either
-\code{.matrix = "u"} or \code{.matrix = "v"} from the biplot.
+\code{.matrix = "rows"} or \code{.matrix = "cols"} from the biplot.
 \item \code{p$coordinates} is defaulted to \code{\link[ggplot2:coord_fixed]{ggplot2::coord_equal()}} in order to
 faithfully render the geometry of an ordination. The optional parameters
 \code{xlim}, \code{ylim}, \code{expand}, and \code{clip} are passed to \code{coord_equal()} and
@@ -98,111 +98,88 @@ aesthetics that are processed internally by \code{\link[ggplot2:aes]{ggplot2::ae
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
-frame with a \code{.matrix} column distinguishing the subjects (\code{"u"}) and
-variables (\code{"v"}). The stat layers \code{stat_u()} and \code{stat_v()} simply filter
-the data frame to one of these two.
+frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
+variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
+filter the data frame to one of these two.
 
-The geom layers \verb{geom_u_*()} and \verb{geom_v_*()} call the corresponding stat in
-order to render plot elements for the corresponding matrix \eqn{U} or
-\eqn{V}. \verb{geom_biplot_*()} selects a default matrix based on common practice,
-e.g. \eqn{U} for points and \eqn{V} for arrows.
+The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.
 }
 
 \examples{
-# Regression analysis of Motor Trend design and performance data
-mtcars \%>\%
-  scale(scale = FALSE) \%>\%
-  as.data.frame() \%>\%
-  lm(formula = mpg ~ wt + cyl) \%>\%
-  as_tbl_ord() \%>\%
-  augment() \%>\%
-  mutate_u(influence = .wt.res^2) \%>\%
-  print() -> mtcars_lm
-mtcars_lm \%>\%
-  ggbiplot(aes(x = wt, y = cyl, intercept = `(Intercept)`)) +
-  geom_u_point(aes(color = influence)) +
-  geom_v_vector() +
-  geom_v_isolines(axes = 1, by = 5) +
-  ggtitle(
-    "Weight isolines with data colored by importance",
-    "Regressing mpg onto weight and number of cylinders"
-  )
-# Unscaled PCA and two-scaled biplot of Anderson iris data
+# compute PCA of Anderson iris measurements
 iris[, -5] \%>\%
-  princomp() \%>\%
+  princomp(cor = TRUE) \%>\%
   as_tbl_ord() \%>\%
   confer_inertia(1) \%>\%
-  mutate_u(species = iris$Species) \%>\%
-  mutate_v(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
+  mutate_rows(species = iris$Species) \%>\%
+  mutate_cols(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
   print() -> iris_pca
+# row-principal biplot with rescaled secondary axis
 iris_pca \%>\%
-  ggbiplot(aes(color = species), sec.axes = "v", scale.factor = 3) +
+  ggbiplot(aes(color = species), sec.axes = "cols", scale.factor = 2) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  geom_u_point() +
-  geom_v_vector(color = "#444444") +
-  geom_v_text_radiate(aes(label = measure), color = "#444444") +
+  geom_rows_point() +
+  geom_cols_vector(color = "#444444") +
+  geom_cols_text_radiate(aes(label = measure), color = "#444444") +
   ggtitle(
-    "Row-principal unscaled PCA biplot of Anderson iris data",
+    "Row-principal PCA biplot of Anderson iris measurements",
     "Variable loadings scaled to secondary axes"
-  )
-# Logistic SVD of Sanderson finches data
-finches \%>\% t() \%>\%
-  logisticSVD() \%>\%
-  as_tbl_ord() \%>\%
-  augment() \%>\%
-  print() -> finches_lsvd
-finches_lsvd \%>\%
-  ggbiplot(
-    aes(x = LSC1, y = LSC2, label = .name),
-    sec.axes = "v", scale.factor = 100
   ) +
-  geom_u_vector(alpha = .5, color = "darkred") +
-  geom_u_text_radiate(size = 3, color = "darkred") +
-  geom_v_label(size = 3, alpha = .5, color = "royalblue3") +
-  ggtitle(
-    "Logistic SVD of the Galapagos island finches",
-    "Islands (finches) scaled to the primary (secondary) axes"
-  )
-# Logistic PCA of Sanderson finches data
-finches \%>\% t() \%>\%
-  logisticPCA() \%>\%
+  expand_limits(y = c(-1, 3.5))
+# Performance measures can be regressed on the artificial coordinates of
+# ordinated vehicle specs. Because the ordination of specs ignores performance,
+# these coordinates will probably not be highly predictive. The gradient of each
+# performance measure along the artificial axes is visualized by projecting the
+# regression coefficients onto the ordination biplot.
+
+# data frame of vehicle performance measures
+mtcars \%>\%
+  subset(select = c(mpg, qsec)) \%>\%
+  as.matrix() \%>\%
+  print() -> mtcars_perf
+# scaled principal components analysis of vehicle specs
+mtcars \%>\%
+  subset(select = c(cyl, disp, hp, drat, wt, vs, carb)) \%>\%
+  princomp(cor = TRUE) \%>\%
   as_tbl_ord() \%>\%
-  augment() \%>\%
-  print() -> finches_lpca
-finches_lpca \%>\%
-  ggbiplot(
-    aes(x = LPC1, y = LPC2, label = .name),
-    sec.axes = "v", scale.factor = 50
-  ) +
-  geom_u_vector(alpha = .5, color = "darkred") +
-  geom_u_text_radiate(size = 3, color = "darkred") +
-  geom_v_label(size = 3, alpha = .5, color = "royalblue3") +
-  ggtitle(
-    "Logistic PCA of the Galapagos island finches",
-    "Islands (finches) scaled to the primary (secondary) axes"
-  )
-# Convex logistic PCA of Sanderson finches data
-finches \%>\% t() \%>\%
-  # omit finches present on every island
-  {.[, ! apply(., 2, all), drop = FALSE]} \%>\%
-  convexLogisticPCA() \%>\%
+  print() -> mtcars_specs_pca
+# regress performance measures on principal components
+lm(mtcars_perf ~ get_rows(mtcars_specs_pca)) \%>\%
   as_tbl_ord() \%>\%
-  augment() \%>\%
-  print() -> finches_clpca
-finches_clpca \%>\%
-  ggbiplot(
-    aes(x = LPC1, y = LPC2, label = .name),
-    sec.axes = "v", scale.factor = 50
-  ) +
-  geom_u_vector(alpha = .5, color = "darkred") +
-  geom_u_text_radiate(size = 3, color = "darkred") +
-  geom_v_label(size = 3, alpha = .5, color = "royalblue3") +
-  ggtitle(
-    "Convex logistic PCA of the Galapagos island finches",
-    "Islands (finches) scaled to the primary (secondary) axes"
-  )
+  print() -> mtcars_pca_lm
+# regression biplot
+ggbiplot(mtcars_specs_pca, aes(label = .name),
+         sec.axes = "rows", scale.factor = .5) +
+  theme_minimal() +
+  geom_rows_text(size = 3) +
+  geom_cols_vector(data = mtcars_pca_lm) +
+  geom_cols_text_radiate(data = mtcars_pca_lm) +
+  expand_limits(x = c(-2.5, 2))
+# multidimensional scaling based on a scaled cosine distance of vehicle specs
+mtcars \%>\%
+  subset(select = c(cyl, disp, hp, drat, wt, vs, carb)) \%>\%
+  scale() \%>\%
+  proxy::dist(method = "cosine") \%>\%
+  cmdscale_ord() \%>\%
+  as_tbl_ord() \%>\%
+  print() -> mtcars_specs_cmds
+# regress performance measures on principal coordinates
+lm(mtcars_perf ~ get_rows(mtcars_specs_cmds)) \%>\%
+  as_tbl_ord() \%>\%
+  print() -> mtcars_cmds_lm
+# regression biplot
+ggbiplot(mtcars_specs_cmds, aes(label = .name),
+         sec.axes = "rows", scale.factor = 3) +
+  theme_minimal() +
+  geom_rows_text(size = 3) +
+  geom_cols_vector(data = mtcars_cmds_lm) +
+  geom_cols_text_radiate(data = mtcars_cmds_lm) +
+  expand_limits(x = c(-2.25, 1.25), y = c(-2, 1.5))
 }
 \seealso{
-\code{\link[ggplot2:ggplot2-package]{ggplot2::ggplot2()}}
+\code{\link[ggplot2:ggplot2-package]{ggplot2::ggplot2()}}, on which \code{ggbiplot()} is built.
 }

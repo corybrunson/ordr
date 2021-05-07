@@ -101,7 +101,7 @@ GeomBiplot <- ggproto(
     u_coords <- coord$transform(u_data, panel_params)
     v_coords <- coord$transform(v_data, panel_params)
     
-    # construct 'u' grob
+    # construct 'rows' grob
     uGrob <- grid::pointsGrob(
       u_coords$x, u_coords$y,
       pch = u_coords$shape,
@@ -112,7 +112,7 @@ GeomBiplot <- ggproto(
         lwd = u_coords$stroke * .stroke / 2
       )
     )
-    # construct 'v' grob (requires processing in stat layer)
+    # construct 'cols' grob (requires processing in stat layer)
     vGrob <- grid::segmentsGrob(
       #v_coords$x, v_coords$y, v_coords$xend, v_coords$yend,
       0, 0, v_coords$x, v_coords$y,

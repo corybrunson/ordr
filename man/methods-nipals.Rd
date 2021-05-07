@@ -4,23 +4,23 @@
 \alias{methods-nipals}
 \alias{as_tbl_ord.nipals}
 \alias{reconstruct.nipals}
-\alias{recover_u.nipals}
-\alias{recover_v.nipals}
+\alias{recover_rows.nipals}
+\alias{recover_cols.nipals}
 \alias{recover_inertia.nipals}
 \alias{recover_coord.nipals}
 \alias{recover_conference.nipals}
-\alias{augmentation_u.nipals}
-\alias{augmentation_v.nipals}
+\alias{augmentation_rows.nipals}
+\alias{augmentation_cols.nipals}
 \alias{augmentation_coord.nipals}
 \title{Functionality for non-linear iterative PLS ('nipals') objects}
 \usage{
 \method{as_tbl_ord}{nipals}(x)
 
-\method{reconstruct}{nipals}(x)
+reconstruct.nipals(x)
 
-\method{recover_u}{nipals}(x)
+\method{recover_rows}{nipals}(x)
 
-\method{recover_v}{nipals}(x)
+\method{recover_cols}{nipals}(x)
 
 \method{recover_inertia}{nipals}(x)
 
@@ -28,9 +28,9 @@
 
 \method{recover_conference}{nipals}(x)
 
-\method{augmentation_u}{nipals}(x)
+\method{augmentation_rows}{nipals}(x)
 
-\method{augmentation_v}{nipals}(x)
+\method{augmentation_cols}{nipals}(x)
 
 \method{augmentation_coord}{nipals}(x)
 }
@@ -50,11 +50,11 @@ as_tbl_ord(nip1)
 # augment with row and column names
 nip1 \%>\%
   as_tbl_ord() \%>\%
-  augment() \%>\%
+  augment_ord() \%>\%
   print() -> nip1ord
 
 # geographic arrangement of sites
-site_plot <- cbind(site = rownames(doubs$env), doubs$xy) \%>\%
+cbind(site = rownames(doubs$env), doubs$xy) \%>\%
   tibble::as_tibble() \%>\%
   ggplot(aes(x = x, y = y)) +
   coord_equal() +
@@ -64,19 +64,17 @@ site_plot <- cbind(site = rownames(doubs$env), doubs$xy) \%>\%
   geom_label(aes(label = ifelse(as.integer(site) \%\% 4L == 1L,
                                 site, NA_character_)))
 # biplot of sites and environmental variables
-site_env_biplot <- nip1ord \%>\%
+nip1ord \%>\%
   ggbiplot(aes(x = 2, y = 1),
            sec.axes = "v", scale.factor = 10) +
   theme_bw() + theme(panel.grid = element_blank()) +
-  geom_u_path(alpha = .6) +
-  #geom_u_text(aes(label = .name), alpha = .8) +
+  geom_rows_path(alpha = .6) +
+  #geom_rows_text(aes(label = .name), alpha = .8) +
   geom_label(aes(label = ifelse(as.integer(.name) \%\% 4L == 1L,
                                 .name, NA_character_),
                  alpha = .6)) +
-  geom_v_vector(color = "darkred") +
-  geom_v_text_radiate(aes(label = .name), color = "darkred", alpha = 2/3) +
+  geom_cols_vector(color = "darkred") +
+  geom_cols_text_radiate(aes(label = .name), color = "darkred", alpha = 2/3) +
   scale_size_area(guide = "none") +
   guides(alpha = "none")
-# juxtapose plots
-plot(gridExtra::arrangeGrob(grobs = list(site_plot, site_env_biplot), ncol = 2))
 }

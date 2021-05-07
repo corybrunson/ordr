@@ -8,21 +8,29 @@
 
 <title>Functionality for principal components analysis ('prcomp') objects — methods-prcomp • ordr</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,11 +38,11 @@
 
 
 
-<meta property="og:title" content="Functionality for principal components analysis ('prcomp') objects — methods-prcomp" />
 
+<meta property="og:title" content="Functionality for principal components analysis ('prcomp') objects — methods-prcomp" />
 <meta property="og:description" content="These methods extract data from, and attribute new data to,
 objects of class &quot;prcomp&quot; as returned by stats::prcomp()." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -48,9 +56,10 @@ objects of class &quot;prcomp&quot; as returned by stats::prcomp()." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -72,7 +81,7 @@ objects of class &quot;prcomp&quot; as returned by stats::prcomp()." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -80,7 +89,6 @@ objects of class &quot;prcomp&quot; as returned by stats::prcomp()." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -90,6 +98,7 @@ objects of class &quot;prcomp&quot; as returned by stats::prcomp()." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -101,42 +110,37 @@ objects of class &quot;prcomp&quot; as returned by stats::prcomp()." />
     </div>
 
     <div class="ref-description">
-    
     <p>These methods extract data from, and attribute new data to,
-objects of class <code>"prcomp"</code> as returned by <code><a href='https://www.rdocumentation.org/packages/stats/topics/prcomp'>stats::prcomp()</a></code>.</p>
-    
+objects of class <code>"prcomp"</code> as returned by <code><a href='https://rdrr.io/r/stats/prcomp.html'>stats::prcomp()</a></code>.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for prcomp</span>
-<span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for prcomp</span>
-<span class='fu'><a href='reconstruct.html'>reconstruct</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='accessors.html'>recover_rows</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for prcomp</span>
-<span class='fu'><a href='accessors.html'>recover_u</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='accessors.html'>recover_cols</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for prcomp</span>
-<span class='fu'><a href='accessors.html'>recover_v</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='accessors.html'>recover_inertia</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for prcomp</span>
-<span class='fu'><a href='accessors.html'>recover_inertia</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='accessors.html'>recover_coord</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for prcomp</span>
-<span class='fu'><a href='accessors.html'>recover_coord</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='conference.html'>recover_conference</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for prcomp</span>
-<span class='fu'><a href='conference.html'>recover_conference</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='augmentation.html'>augmentation_rows</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for prcomp</span>
-<span class='fu'><a href='augmentation.html'>augmentation_u</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='augmentation.html'>augmentation_cols</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for prcomp</span>
-<span class='fu'><a href='augmentation.html'>augmentation_v</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='augmentation.html'>augmentation_coord</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
-<span class='co'># S3 method for prcomp</span>
-<span class='fu'><a href='augmentation.html'>augmentation_coord</a></span>(<span class='no'>x</span>)</pre>
-    
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -145,66 +149,51 @@ objects of class <code>"prcomp"</code> as returned by <code><a href='https://www
       <td><p>An ordination object.</p></td>
     </tr>
     </table>
-    
+
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Emily Paul</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Confer PCA weights and inertia between cases and variables</span>
-<span class='no'>country_attributes</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/prcomp'>prcomp</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>attributes_pca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (13 x 6) x (6 x 6)'
-#&gt; # 6 coordinates: PC1, PC2, ..., PC6
+    <pre class="examples"><div class='input'><span class='co'># data frame of Anderson iris species measurements</span>
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "data.frame"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#&gt; 1          5.1         3.5          1.4         0.2  setosa
+#&gt; 2          4.9         3.0          1.4         0.2  setosa
+#&gt; 3          4.7         3.2          1.3         0.2  setosa
+#&gt; 4          4.6         3.1          1.5         0.2  setosa
+#&gt; 5          5.0         3.6          1.4         0.2  setosa
+#&gt; 6          5.4         3.9          1.7         0.4  setosa</div><div class='input'><span class='co'># compute scaled row-principal components of scaled measurements</span>
+<span class='va'>iris</span><span class='op'>[</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>]</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/prcomp.html'>prcomp</a></span><span class='op'>(</span>scale <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>iris_pca</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
+#&gt; # 4 coordinates: PC1, PC2, ..., PC4
 #&gt; # 
-#&gt; # U: [ 13 x 6 | 0 ]
-#&gt;       PC1    PC2     PC3 ... | 
-#&gt;                              | 
-#&gt; <span style='color: #BCBCBC;'>1</span><span>  0.079</span><span style='text-decoration: underline;'>6</span><span>  4.77   0.092</span><span style='text-decoration: underline;'>2</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.451   5.80   1.30   ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>1.79</span><span>    0.842  0.014</span><span style='text-decoration: underline;'>5</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  3.45    0.906  0.250      | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>4.54</span><span>   -</span><span style='color: #BB0000;'>4.36</span><span>  -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>     | 
+#&gt; # Rows: [ 150 x 4 | 0 ]
+#&gt;     PC1    PC2     PC3 ... | 
+#&gt;                            | 
+#&gt; <span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>2.26</span><span> -</span><span style='color: #BB0000;'>0.478</span><span>  0.127      | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>2.07</span><span>  0.672  0.234  ... | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>2.36</span><span>  0.341 -</span><span style='color: #BB0000;'>0.044</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>     | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.29</span><span>  0.595 -</span><span style='color: #BB0000;'>0.091</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span>     | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.38</span><span> -</span><span style='color: #BB0000;'>0.645</span><span> -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>     | 
 #&gt; 
 #&gt; # 
-#&gt; # V: [ 6 x 6 | 0 ]
-#&gt;      PC1    PC2      PC3 ... | 
-#&gt;                              | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.331</span><span>  0.375  0.009</span><span style='text-decoration: underline;'>81</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.320  0.517  0.187       | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.301  0.593 -</span><span style='color: #BB0000;'>0.616</span><span>   ... | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.387</span><span>  0.286  0.145       | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.548</span><span> -</span><span style='color: #BB0000;'>0.138</span><span> -</span><span style='color: #BB0000;'>0.661</span><span>       | 
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span> -</span><span style='color: #BB0000;'>0.497</span><span>  0.373  0.357       | </div><div class='input'><span class='co'># form biplot</span>
-<span class='no'>attributes_pca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(
-    <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
-    <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fu'><a href='accessors.html'>dim_v</a></span>(<span class='no'>attributes_pca</span>)
-  ) +
-  <span class='fu'>theme_bw</span>() + <span class='fu'>theme</span>(<span class='kw'>panel.grid</span> <span class='kw'>=</span> <span class='fu'>element_blank</span>()) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"seagreen"</span>) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(
-    <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>),
-    <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='st'>"outward"</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='st'>"outward"</span>
-  )</div><div class='img'><img src='methods-prcomp-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># covariance biplot</span>
-<span class='no'>attributes_pca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(
-    <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
-    <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"u"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fu'><a href='accessors.html'>dim_u</a></span>(<span class='no'>attributes_pca</span>)
-  ) +
-  <span class='fu'>theme_bw</span>() + <span class='fu'>theme</span>(<span class='kw'>panel.grid</span> <span class='kw'>=</span> <span class='fu'>element_blank</span>()) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"seagreen"</span>) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text_repel</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>)</div><div class='img'><img src='methods-prcomp-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Scaled PCA of Anderson iris data with annotated biplot</span>
-<span class='no'>iris</span>[, -<span class='fl'>5</span>] <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/prcomp'>prcomp</a></span>(<span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='dplyr-verbs.html'>mutate_u</a></span>(<span class='kw'>species</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Species</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>iris_pca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
+#&gt; # Columns: [ 4 x 4 | 0 ]
+#&gt;      PC1     PC2    PC3 ... | 
+#&gt;                             | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.521 -</span><span style='color: #BB0000;'>0.377</span><span>   0.720     | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.269</span><span> -</span><span style='color: #BB0000;'>0.923</span><span>  -</span><span style='color: #BB0000;'>0.244</span><span> ... | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.580 -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.142</span><span>     | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.565 -</span><span style='color: #BB0000;'>0.066</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>0.634</span><span>     | </div><div class='input'><span class='co'># bind species classification to observation coordinates</span>
+<span class='op'>(</span><span class='va'>iris_pca</span> <span class='op'>&lt;-</span> <span class='fu'><a href='dplyr-verbs.html'>mutate_rows</a></span><span class='op'>(</span><span class='va'>iris_pca</span>, species <span class='op'>=</span> <span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
 #&gt; # 4 coordinates: PC1, PC2, ..., PC4
 #&gt; # 
-#&gt; # U: [ 150 x 4 | 1 ]
+#&gt; # Rows: [ 150 x 4 | 1 ]
 #&gt;     PC1    PC2     PC3 ... |   species
 #&gt;                            |   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>  
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>2.26</span><span> -</span><span style='color: #BB0000;'>0.478</span><span>  0.127      | </span><span style='color: #BCBCBC;'>1</span><span> setosa 
@@ -214,50 +203,31 @@ objects of class <code>"prcomp"</code> as returned by <code><a href='https://www
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.38</span><span> -</span><span style='color: #BB0000;'>0.645</span><span> -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> setosa 
 #&gt; </span><span style='color: #949494;'># … with 145 more rows</span><span>
 #&gt; # 
-#&gt; # V: [ 4 x 4 | 0 ]
+#&gt; # Columns: [ 4 x 4 | 0 ]
 #&gt;      PC1     PC2    PC3 ... | 
 #&gt;                             | 
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.521 -</span><span style='color: #BB0000;'>0.377</span><span>   0.720     | 
 #&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.269</span><span> -</span><span style='color: #BB0000;'>0.923</span><span>  -</span><span style='color: #BB0000;'>0.244</span><span> ... | 
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.580 -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.142</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.565 -</span><span style='color: #BB0000;'>0.066</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>0.634</span><span>     | </div><div class='input'><span class='no'>iris_pca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'>scale_color_brewer</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>2</span>) +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>) +
-  <span class='fu'><a href='stat-biplot-center.html'>stat_u_center</a></span>(<span class='kw'>fun.center</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='st'>"triangle"</span>) +
-  <span class='fu'><a href='stat-biplot-ellipse.html'>stat_u_ellipse</a></span>(<span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>.99</span>) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#444444"</span>) +
-  <span class='fu'>ggtitle</span>(
-    <span class='st'>"Row-principal PCA biplot of Anderson iris data"</span>,
-    <span class='st'>"Overlaid with centroids and 99% confidence ellipses"</span>
-  )</div><div class='img'><img src='methods-prcomp-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>iris_pca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>() +
-  <span class='fu'><a href='stat-biplot-center.html'>stat_u_center</a></span>(<span class='kw'>fun.center</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>1</span>) +
-  <span class='fu'>geom_polygon</span>(
-    <span class='fu'>aes</span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>species</span>),
-    <span class='kw'>color</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.25</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"u_ellipse"</span>
-  ) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#444444"</span>) +
-  <span class='fu'>scale_color_brewer</span>(
-    <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-    <span class='kw'>aesthetics</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"color"</span>, <span class='st'>"fill"</span>)
-  ) +
-  <span class='fu'>ggtitle</span>(
-    <span class='st'>"Row-principal PCA biplot of Anderson iris data"</span>,
-    <span class='st'>"Overlaid with 99% confidence disks"</span>
-  )</div><div class='img'><img src='methods-prcomp-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Scaled PCA of Anderson iris data with ranges and confidence intervals</span>
-<span class='no'>iris</span>[, -<span class='fl'>5</span>] <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/prcomp'>prcomp</a></span>(<span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='dplyr-verbs.html'>mutate_u</a></span>(<span class='kw'>species</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Species</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>iris_pca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.565 -</span><span style='color: #BB0000;'>0.066</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>0.634</span><span>     | </div><div class='input'><span class='co'># recover observation principal coordinates and measurement standard coordinates</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'><a href='accessors.html'>get_rows</a></span><span class='op'>(</span><span class='va'>iris_pca</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;            PC1        PC2         PC3          PC4
+#&gt; [1,] -2.257141 -0.4784238  0.12727962  0.024087508
+#&gt; [2,] -2.074013  0.6718827  0.23382552  0.102662845
+#&gt; [3,] -2.356335  0.3407664 -0.04405390  0.028282305
+#&gt; [4,] -2.291707  0.5953999 -0.09098530 -0.065735340
+#&gt; [5,] -2.381863 -0.6446757 -0.01568565 -0.035802870
+#&gt; [6,] -2.068701 -1.4842053 -0.02687825  0.006586116</div><div class='input'><span class='fu'><a href='accessors.html'>get_cols</a></span><span class='op'>(</span><span class='va'>iris_pca</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                     PC1         PC2        PC3        PC4
+#&gt; Sepal.Length  0.5210659 -0.37741762  0.7195664  0.2612863
+#&gt; Sepal.Width  -0.2693474 -0.92329566 -0.2443818 -0.1235096
+#&gt; Petal.Length  0.5804131 -0.02449161 -0.1421264 -0.8014492
+#&gt; Petal.Width   0.5648565 -0.06694199 -0.6342727  0.5235971</div><div class='input'><span class='co'># augment measurements with names and scaling parameters</span>
+<span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='va'>iris_pca</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
 #&gt; # 4 coordinates: PC1, PC2, ..., PC4
 #&gt; # 
-#&gt; # U: [ 150 x 4 | 1 ]
+#&gt; # Rows: [ 150 x 4 | 1 ]
 #&gt;     PC1    PC2     PC3 ... |   species
 #&gt;                            |   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>  
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>2.26</span><span> -</span><span style='color: #BB0000;'>0.478</span><span>  0.127      | </span><span style='color: #BCBCBC;'>1</span><span> setosa 
@@ -267,47 +237,72 @@ objects of class <code>"prcomp"</code> as returned by <code><a href='https://www
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.38</span><span> -</span><span style='color: #BB0000;'>0.645</span><span> -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> setosa 
 #&gt; </span><span style='color: #949494;'># … with 145 more rows</span><span>
 #&gt; # 
-#&gt; # V: [ 4 x 4 | 0 ]
-#&gt;      PC1     PC2    PC3 ... | 
-#&gt;                             | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.521 -</span><span style='color: #BB0000;'>0.377</span><span>   0.720     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.269</span><span> -</span><span style='color: #BB0000;'>0.923</span><span>  -</span><span style='color: #BB0000;'>0.244</span><span> ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.580 -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.142</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.565 -</span><span style='color: #BB0000;'>0.066</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>0.634</span><span>     | </div><div class='input'><span class='no'>iris_pca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'>scale_color_brewer</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>2</span>) +
-  <span class='fu'><a href='geom-biplot-intervals.html'>geom_u_lineranges</a></span>(<span class='kw'>fun.data</span> <span class='kw'>=</span> <span class='no'>mean_sdl</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>.75</span>) +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#444444"</span>) +
-  <span class='fu'>ggtitle</span>(
-    <span class='st'>"Row-principal PCA biplot of Anderson iris data"</span>,
-    <span class='st'>"Ranges 2 sample standard deviations from centroids"</span>
-  )</div><div class='img'><img src='methods-prcomp-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>iris_pca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'>scale_color_brewer</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>2</span>) +
-  <span class='fu'><a href='geom-biplot-intervals.html'>geom_u_lineranges</a></span>(
-    <span class='kw'>fun.data</span> <span class='kw'>=</span> <span class='no'>mean_cl_boot</span>, <span class='kw'>fun.args</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>conf.int</span> <span class='kw'>=</span> <span class='fl'>.99</span>),
-    <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>.75</span>
-  ) +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#444444"</span>) +
-  <span class='fu'>ggtitle</span>(
-    <span class='st'>"Row-principal PCA biplot of Anderson iris data"</span>,
-    <span class='st'>"99% confidence intervals based on nonparametric bootstrap sampling"</span>
-  )</div><div class='img'><img src='methods-prcomp-6.png' alt='' width='700' height='433' /></div></span></pre>
+#&gt; # Columns: [ 4 x 4 | 3 ]
+#&gt;      PC1     PC2    PC3 ... |   .name        .center .scale
+#&gt;                             |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.521 -</span><span style='color: #BB0000;'>0.377</span><span>   0.720     | </span><span style='color: #BCBCBC;'>1</span><span> Sepal.Length    5.84  0.828
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.269</span><span> -</span><span style='color: #BB0000;'>0.923</span><span>  -</span><span style='color: #BB0000;'>0.244</span><span> ... | </span><span style='color: #BCBCBC;'>2</span><span> Sepal.Width     3.06  0.436
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.580 -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.142</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> Petal.Length    3.76  1.77 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.565 -</span><span style='color: #BB0000;'>0.066</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>0.634</span><span>     | </span><span style='color: #BCBCBC;'>4</span><span> Petal.Width     1.20  0.762</div><div class='input'><span class='co'># summarize principal components</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>iris_pca</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 4 x 4</span><span>
+#&gt;   .name .sdev .inertia .prop_var
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> PC1   1.71    435.     0.730  
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> PC2   0.956   136.     0.229  
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> PC3   0.383    21.9    0.036</span><span style='text-decoration: underline;'>7</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> PC4   0.144     3.09   0.005</span><span style='text-decoration: underline;'>18</span><span></div><div class='input'><span class='co'># fortification of artificial coordinates yields proportion of variance measure</span>
+<span class='fu'>fortify</span><span class='op'>(</span><span class='va'>iris_pca</span>, .matrix <span class='op'>=</span> <span class='st'>"coord"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 4 x 4</span><span>
+#&gt;   .name .sdev .inertia .prop_var
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> PC1   1.71    435.     0.730  
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> PC2   0.956   136.     0.229  
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> PC3   0.383    21.9    0.036</span><span style='text-decoration: underline;'>7</span><span> 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> PC4   0.144     3.09   0.005</span><span style='text-decoration: underline;'>18</span><span></div><div class='input'><span class='co'># scree plot of inertia</span>
+<span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>iris_pca</span>, .matrix <span class='op'>=</span> <span class='st'>"coord"</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>.name</span>, y <span class='op'>=</span> <span class='va'>.inertia</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_bar</span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"identity"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>""</span>, y <span class='op'>=</span> <span class='st'>"Inertia"</span><span class='op'>)</span>
+</div><div class='img'><img src='methods-prcomp-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># scree plot of proportion of variance (inertia)</span>
+<span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>iris_pca</span>, .matrix <span class='op'>=</span> <span class='st'>"coord"</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>.name</span>, y <span class='op'>=</span> <span class='va'>.prop_var</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_y_continuous</span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_bar</span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"identity"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>""</span>, y <span class='op'>=</span> <span class='st'>"Proportion of inertia"</span><span class='op'>)</span>
+</div><div class='img'><img src='methods-prcomp-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># fortification adds all above columns</span>
+<span class='fu'>fortify</span><span class='op'>(</span><span class='va'>iris_pca</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 154 x 9</span><span>
+#&gt;      PC1     PC2     PC3      PC4 species .matrix .name .center .scale
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> -</span><span style='color: #BB0000;'>2.26</span><span> -</span><span style='color: #BB0000;'>0.478</span><span>   0.127   0.024</span><span style='text-decoration: underline;'>1</span><span>  setosa  rows    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> -</span><span style='color: #BB0000;'>2.07</span><span>  0.672   0.234   0.103   setosa  rows    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> -</span><span style='color: #BB0000;'>2.36</span><span>  0.341  -</span><span style='color: #BB0000;'>0.044</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>  0.028</span><span style='text-decoration: underline;'>3</span><span>  setosa  rows    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> -</span><span style='color: #BB0000;'>2.29</span><span>  0.595  -</span><span style='color: #BB0000;'>0.091</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span> -</span><span style='color: #BB0000;'>0.065</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>  setosa  rows    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> -</span><span style='color: #BB0000;'>2.38</span><span> -</span><span style='color: #BB0000;'>0.645</span><span>  -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span> -</span><span style='color: #BB0000;'>0.035</span><span style='color: #BB0000;text-decoration: underline;'>8</span><span>  setosa  rows    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> -</span><span style='color: #BB0000;'>2.07</span><span> -</span><span style='color: #BB0000;'>1.48</span><span>   -</span><span style='color: #BB0000;'>0.026</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>  0.006</span><span style='text-decoration: underline;'>59</span><span> setosa  rows    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> -</span><span style='color: #BB0000;'>2.44</span><span> -</span><span style='color: #BB0000;'>0.047</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.334</span><span>  -</span><span style='color: #BB0000;'>0.036</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>  setosa  rows    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> -</span><span style='color: #BB0000;'>2.23</span><span> -</span><span style='color: #BB0000;'>0.222</span><span>   0.088</span><span style='text-decoration: underline;'>4</span><span> -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>  setosa  rows    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> -</span><span style='color: #BB0000;'>2.33</span><span>  1.11   -</span><span style='color: #BB0000;'>0.145</span><span>  -</span><span style='color: #BB0000;'>0.026</span><span style='color: #BB0000;text-decoration: underline;'>8</span><span>  setosa  rows    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> -</span><span style='color: #BB0000;'>2.18</span><span>  0.467   0.253  -</span><span style='color: #BB0000;'>0.039</span><span style='color: #BB0000;text-decoration: underline;'>8</span><span>  setosa  rows    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
+#&gt; </span><span style='color: #949494;'># … with 144 more rows</span><span></div><div class='input'><span class='co'># row-principal biplot</span>
+<span class='va'>iris_pca</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>color <span class='op'>=</span> <span class='va'>species</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_color_brewer</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"qual"</span>, palette <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_rows_point</a></span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>.5</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_cols_vector</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#444444"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_cols_text_radiate</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>, color <span class='op'>=</span> <span class='st'>"#444444"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span><span class='st'>"Row-principal PCA biplot of Anderson iris measurements"</span><span class='op'>)</span>
+</div><div class='img'><img src='methods-prcomp-3.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -315,13 +310,16 @@ objects of class <code>"prcomp"</code> as returned by <code><a href='https://www
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

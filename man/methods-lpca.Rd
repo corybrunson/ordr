@@ -3,70 +3,67 @@
 \name{methods-lpca}
 \alias{methods-lpca}
 \alias{as_tbl_ord.lsvd}
-\alias{reconstruct.lsvd}
-\alias{recover_u.lsvd}
-\alias{recover_v.lsvd}
+\alias{recover_rows.lsvd}
+\alias{recover_cols.lsvd}
 \alias{recover_coord.lsvd}
-\alias{augmentation_u.lsvd}
-\alias{augmentation_v.lsvd}
+\alias{augmentation_rows.lsvd}
+\alias{augmentation_cols.lsvd}
 \alias{augmentation_coord.lsvd}
 \alias{as_tbl_ord.lpca}
-\alias{recover_u.lpca}
-\alias{recover_v.lpca}
+\alias{recover_rows.lpca}
+\alias{recover_cols.lpca}
 \alias{recover_coord.lpca}
-\alias{augmentation_u.lpca}
-\alias{augmentation_v.lpca}
+\alias{augmentation_rows.lpca}
+\alias{augmentation_cols.lpca}
 \alias{augmentation_coord.lpca}
 \alias{as_tbl_ord.clpca}
-\alias{recover_u.clpca}
-\alias{recover_v.clpca}
+\alias{recover_rows.clpca}
+\alias{recover_cols.clpca}
 \alias{recover_coord.clpca}
-\alias{augmentation_u.clpca}
-\alias{augmentation_v.clpca}
+\alias{augmentation_rows.clpca}
+\alias{augmentation_cols.clpca}
 \alias{augmentation_coord.clpca}
 \title{Functionality for logistic PCA and logistic SVD objects}
 \usage{
 \method{as_tbl_ord}{lsvd}(x)
 
-\method{reconstruct}{lsvd}(x)
+\method{recover_rows}{lsvd}(x)
 
-\method{recover_u}{lsvd}(x)
-
-\method{recover_v}{lsvd}(x)
+\method{recover_cols}{lsvd}(x)
 
 \method{recover_coord}{lsvd}(x)
 
-\method{augmentation_u}{lsvd}(x)
+\method{augmentation_rows}{lsvd}(x)
 
-\method{augmentation_v}{lsvd}(x)
+\method{augmentation_cols}{lsvd}(x)
 
 \method{augmentation_coord}{lsvd}(x)
 
 \method{as_tbl_ord}{lpca}(x)
 
-\method{recover_u}{lpca}(x)
+\method{recover_rows}{lpca}(x)
 
-\method{recover_v}{lpca}(x)
+\method{recover_cols}{lpca}(x)
 
 \method{recover_coord}{lpca}(x)
 
-\method{augmentation_u}{lpca}(x)
+\method{augmentation_rows}{lpca}(x)
 
-\method{augmentation_v}{lpca}(x)
+\method{augmentation_cols}{lpca}(x)
 
 \method{augmentation_coord}{lpca}(x)
 
 \method{as_tbl_ord}{clpca}(x)
 
-\method{recover_u}{clpca}(x)
+\method{recover_rows}{clpca}(x)
 
-\method{recover_v}{clpca}(x)
+\method{recover_cols}{clpca}(x)
 
 \method{recover_coord}{clpca}(x)
 
-\method{augmentation_u}{clpca}(x)
+\method{augmentation_rows}{clpca}(x)
 
-\method{augmentation_v}{clpca}(x)
+\method{augmentation_cols}{clpca}(x)
 
 \method{augmentation_coord}{clpca}(x)
 }
@@ -77,65 +74,93 @@
 These methods extract data from, and attribute new data to,
 objects of class \code{"lpca"} and \code{"lsvd"} from the
 \strong{\link[logisticPCA:logisticPCA-package]{logisticPCA}} package. The signature
-functions \code{\link[logisticPCA:logisticPCA]{logisticPCA::logisticPCA()}} and \code{\link[logisticPCA:logisticSVD]{logisticPCA::logisticSVD()}} are
-masked with wrappers that add row and column names from the input matrix to
-the output matrices.
+functions \code{\link[logisticPCA:logisticPCA]{logisticPCA::logisticPCA()}}, \code{\link[logisticPCA:logisticSVD]{logisticPCA::logisticSVD()}}, and
+\code{\link[logisticPCA:convexLogisticPCA]{logisticPCA::convexLogisticPCA()}} have \verb{*_ord()} wrappers that add row and
+column names from the input matrix to the output matrices.
 }
 \examples{
-# Logistic SVD of Sanderson finches data
+# site-species data frame of Sanderson Galapagos finches data
+data(finches, package = "cooccur")
+class(finches)
+finches[seq(6L), seq(6L)]
+# logistic singular value decomposition
 finches \%>\% t() \%>\%
-  logisticSVD() \%>\%
+  logisticSVD_ord() \%>\%
   as_tbl_ord() \%>\%
-  augment() \%>\%
   print() -> finches_lsvd
+# summarize ordination
+glance(finches_lsvd)
+# recover row and column singular vectors
+get_rows(finches_lsvd)
+get_cols(finches_lsvd)
+# augment ordination with point names and main effect estimates
+augment_ord(finches_lsvd)
+# summarize artifical coordinates (inertia is undefined)
+tidy(finches_lsvd)
+# biplot (inertia is not defined and cannot be conferred)
 finches_lsvd \%>\%
-  ggbiplot(
-    aes(x = LSC1, y = LSC2, label = .name),
-    sec.axes = "v", scale.factor = 100
-  ) +
-  geom_u_vector(alpha = .5, color = "darkred") +
-  geom_u_text_radiate(size = 3, color = "darkred") +
-  geom_v_label(size = 3, alpha = .5, color = "royalblue3") +
+  ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 100) +
+  theme_biplot() +
+  geom_rows_vector(alpha = .5, color = "darkred") +
+  geom_rows_text_radiate(size = 3, color = "darkred") +
+  geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
   ggtitle(
     "Logistic SVD of the Galapagos island finches",
     "Islands (finches) scaled to the primary (secondary) axes"
-  )
-# Logistic PCA of Sanderson finches data
-finches \%>\% t() \%>\%
-  logisticPCA() \%>\%
-  as_tbl_ord() \%>\%
-  augment() \%>\%
-  print() -> finches_lpca
-finches_lpca \%>\%
-  ggbiplot(
-    aes(x = LPC1, y = LPC2, label = .name),
-    sec.axes = "v", scale.factor = 50
   ) +
-  geom_u_vector(alpha = .5, color = "darkred") +
-  geom_u_text_radiate(size = 3, color = "darkred") +
-  geom_v_label(size = 3, alpha = .5, color = "royalblue3") +
+  expand_limits(x = c(-80, 60))
+# logistic principal components analysis
+finches \%>\% t() \%>\%
+  logisticPCA_ord() \%>\%
+  as_tbl_ord() \%>\%
+  print() -> finches_lpca
+# summarize ordination
+glance(finches_lpca)
+# recover row and column singular vectors
+get_rows(finches_lpca)
+get_cols(finches_lpca)
+# augment ordination with point names and main effect estimates
+augment_ord(finches_lpca)
+# summarize artifical coordinates (inertia is undefined)
+tidy(finches_lpca)
+# biplot (inertia is not defined and cannot be conferred)
+finches_lpca \%>\%
+  ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 50) +
+  theme_biplot() +
+  geom_rows_vector(alpha = .5, color = "darkred") +
+  geom_rows_text_radiate(size = 3, color = "darkred") +
+  geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
   ggtitle(
     "Logistic PCA of the Galapagos island finches",
     "Islands (finches) scaled to the primary (secondary) axes"
-  )
-# Convex logistic PCA of Sanderson finches data
-finches \%>\% t() \%>\%
-  # omit finches present on every island
-  {.[, ! apply(., 2, all), drop = FALSE]} \%>\%
-  convexLogisticPCA() \%>\%
-  as_tbl_ord() \%>\%
-  augment() \%>\%
-  print() -> finches_clpca
-finches_clpca \%>\%
-  ggbiplot(
-    aes(x = LPC1, y = LPC2, label = .name),
-    sec.axes = "v", scale.factor = 50
   ) +
-  geom_u_vector(alpha = .5, color = "darkred") +
-  geom_u_text_radiate(size = 3, color = "darkred") +
-  geom_v_label(size = 3, alpha = .5, color = "royalblue3") +
+  expand_limits(x = c(-30, 25))
+# convex logistic PCA, omitting ubiquitous finches
+finches \%>\%
+  dplyr::filter(dplyr::if_any(where(is.integer), ~ . == 0)) \%>\%
+  t() \%>\%
+  convexLogisticPCA_ord() \%>\%
+  as_tbl_ord() \%>\%
+  print() -> finches_clpca
+# summarize ordination
+glance(finches_clpca)
+# recover row and column singular vectors
+get_rows(finches_clpca)
+get_cols(finches_clpca)
+# augment ordination with point names and main effect estimates
+augment_ord(finches_clpca)
+# summarize artifical coordinates (inertia is undefined)
+tidy(finches_clpca)
+# biplot (inertia is not defined and cannot be conferred)
+finches_clpca \%>\%
+  ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 50) +
+  theme_biplot() +
+  geom_rows_vector(alpha = .5, color = "darkred") +
+  geom_rows_text_radiate(size = 3, color = "darkred") +
+  geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
   ggtitle(
     "Convex logistic PCA of the Galapagos island finches",
     "Islands (finches) scaled to the primary (secondary) axes"
-  )
+  ) +
+  expand_limits(x = c(-25, 35))
 }

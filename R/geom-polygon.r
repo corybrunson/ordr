@@ -1,36 +1,7 @@
-#' @title Render polygons around ordinates
-#' 
 
-#' @description `geom_*_polygon()` renders polygons around the convex hulls of
-#'   the positions of the subjects or vectors.
-#' @template biplot-layers
-
-#' @section Aesthetics:
-
-#' `geom_*_polygon()` understands the following aesthetics (required aesthetics
-#' are in bold):
-
-#' - **`x`**
-#' - **`y`**
-#' - `alpha`
-#' - `colour`
-#' - `fill`
-#' - `linetype`
-#' - `size`
-#' - `group`
-#' 
-
-#' @name geom-biplot-polygon
-#' @import ggplot2
-#' @inheritParams ggplot2::layer
-#' @template param-geom
-#' @template param-matrix
-#' @example inst/examples/arrests-logratio-polygon.r
-NULL
-
-#' @rdname geom-biplot-polygon
+#' @rdname biplot-geoms
 #' @export
-geom_u_polygon <- function(
+geom_rows_polygon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   na.rm = FALSE,
@@ -39,7 +10,7 @@ geom_u_polygon <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = u_stat(stat),
+    stat = rows_stat(stat),
     geom = GeomPolygon,
     position = position,
     show.legend = show.legend,
@@ -51,9 +22,9 @@ geom_u_polygon <- function(
   )
 }
 
-#' @rdname geom-biplot-polygon
+#' @rdname biplot-geoms
 #' @export
-geom_v_polygon <- function(
+geom_cols_polygon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   na.rm = FALSE,
@@ -62,7 +33,7 @@ geom_v_polygon <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = v_stat(stat),
+    stat = cols_stat(stat),
     geom = GeomPolygon,
     position = position,
     show.legend = show.legend,
@@ -74,11 +45,11 @@ geom_v_polygon <- function(
   )
 }
 
-#' @rdname geom-biplot-polygon
+#' @rdname biplot-geoms
 #' @export
-geom_biplot_polygon <- function(
+geom_dims_polygon <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "u",
+  .matrix = "rows",
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE

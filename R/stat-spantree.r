@@ -34,14 +34,87 @@
 
 #' @template biplot-layers
 
-#' @name stat-biplot-spantree
 #' @inheritParams ggplot2::layer
 #' @param method Passed to [stats::dist()].
 #' @template param-stat
-#' @example inst/examples/euro-cmds-negate-spantree.r
-NULL
+#' @family stat layers
+#' @example inst/examples/ex-stat-spantree-eurodist.r
+#' @export
+stat_spantree <- function(
+  mapping = NULL, data = NULL, geom = "segment", position = "identity",
+  method = "euclidean",
+  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
+  ...
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = StatSpantree,
+    geom = geom, 
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    check.aes = check.aes,
+    params = list(
+      method = method,
+      na.rm = FALSE,
+      ...
+    )
+  )
+}
 
-#' @rdname stat-biplot-spantree
+#' @rdname biplot-stats
+#' @export
+stat_rows_spantree <- function(
+  mapping = NULL, data = NULL, geom = "segment", position = "identity",
+  method = "euclidean",
+  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
+  ...
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = StatRowsSpantree,
+    geom = geom, 
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    check.aes = check.aes,
+    params = list(
+      method = method,
+      na.rm = FALSE,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_spantree <- function(
+  mapping = NULL, data = NULL, geom = "segment", position = "identity",
+  method = "euclidean",
+  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
+  ...
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = StatColsSpantree,
+    geom = geom, 
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    check.aes = check.aes,
+    params = list(
+      method = method,
+      na.rm = FALSE,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
 #' @usage NULL
 #' @export
 StatSpantree <- ggproto(
@@ -81,95 +154,22 @@ StatSpantree <- ggproto(
   }
 )
 
-#' @rdname stat-biplot-spantree
-#' @export
-stat_spantree <- function(
-  mapping = NULL, data = NULL, geom = "segment", position = "identity",
-  method = "euclidean",
-  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
-  ...
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatSpantree,
-    geom = geom, 
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    check.aes = check.aes,
-    params = list(
-      method = method,
-      na.rm = FALSE,
-      ...
-    )
-  )
-}
-
-#' @rdname stat-biplot-spantree
+#' @rdname ordr-ggproto
+#' @format NULL
 #' @usage NULL
 #' @export
-StatUSpantree <- ggproto(
-  "StatUSpantree", StatSpantree,
+StatRowsSpantree <- ggproto(
+  "StatRowsSpantree", StatSpantree,
   
-  setup_data = setup_u_data
+  setup_data = setup_rows_data
 )
 
-#' @rdname stat-biplot-spantree
+#' @rdname ordr-ggproto
+#' @format NULL
 #' @usage NULL
 #' @export
-StatVSpantree <- ggproto(
-  "StatVSpantree", StatSpantree,
+StatColsSpantree <- ggproto(
+  "StatColsSpantree", StatSpantree,
   
-  setup_data = setup_v_data
+  setup_data = setup_cols_data
 )
-
-#' @rdname stat-biplot-spantree
-#' @export
-stat_u_spantree <- function(
-  mapping = NULL, data = NULL, geom = "segment", position = "identity",
-  method = "euclidean",
-  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
-  ...
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatUSpantree,
-    geom = geom, 
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    check.aes = check.aes,
-    params = list(
-      method = method,
-      na.rm = FALSE,
-      ...
-    )
-  )
-}
-
-#' @rdname stat-biplot-spantree
-#' @export
-stat_v_spantree <- function(
-  mapping = NULL, data = NULL, geom = "segment", position = "identity",
-  method = "euclidean",
-  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
-  ...
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatVSpantree,
-    geom = geom, 
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    check.aes = check.aes,
-    params = list(
-      method = method,
-      na.rm = FALSE,
-      ...
-    )
-  )
-}

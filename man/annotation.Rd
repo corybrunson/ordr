@@ -2,32 +2,34 @@
 % Please edit documentation in R/ord-annotation.r
 \name{annotation}
 \alias{annotation}
-\alias{set_annotation_u}
-\alias{set_annotation_v}
-\alias{annotation_u}
-\alias{annotation_v}
-\title{Annotate the factors of a tbl_ord}
+\alias{set_annotation_rows}
+\alias{set_annotation_cols}
+\alias{annotation_rows}
+\alias{annotation_cols}
+\title{Annotate factors of 'tbl_ord' objects}
 \usage{
-set_annotation_u(x, annot)
+set_annotation_rows(x, annot)
 
-set_annotation_v(x, annot)
+set_annotation_cols(x, annot)
 
-annotation_u(x)
+annotation_rows(x)
 
-annotation_v(x)
+annotation_cols(x)
 }
 \arguments{
-\item{x}{A \link{tbl_ord}, or an ordination object coercible to one.}
+\item{x}{An object of class '\link{tbl_ord}'.}
 
 \item{annot}{A \link[base:data.frame]{data.frame} having the same number of rows
 as \code{get_*(x)}.}
 }
 \description{
-These functions annotate the factors \eqn{U} and \eqn{V} of
-\link{tbl_ord} objects with additional variables, and retrieve these
-annotations.
+These functions annotate the matrix factors of \link{tbl_ord}s with
+additional variables, and retrieve these annotations.
 
 The \verb{annotation_*()} and \verb{set_annotation_*()} functions assign and retrieve
 values of the \code{"*_annotation"} attributes of \code{x}, which should have the same
 number of rows as \code{get_*(x)}.
+}
+\seealso{
+\link{augmentation} methods that must interface with annotation.
 }

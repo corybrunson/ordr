@@ -58,8 +58,6 @@
 #'   performed. Methods like `predict()` access these objects by name in the
 #'   parent environment, and retaining them as attributes prevents errors that
 #'   arise if these objects are reassigned.
-#' @example inst/examples/diabetes-lda-supplement.r
-#' @example inst/examples/iris-lda.r
 NULL
 
 #' @rdname lda-ord

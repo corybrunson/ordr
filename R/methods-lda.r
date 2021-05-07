@@ -12,8 +12,7 @@
 #' @name methods-lda
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/diabetes-lda-supplement.r
-#' @example inst/examples/iris-lda.r
+#' @example inst/examples/ex-methods-lda-iris.r
 NULL
 
 #' @rdname methods-lda
@@ -26,24 +25,24 @@ as_tbl_ord.lda_ord <- as_tbl_ord.lda
 
 #' @rdname methods-lda
 #' @export
-recover_u.lda <- function(x) {
+recover_rows.lda <- function(x) {
   centroid <- colSums(x$prior * x$means)
   scale(x$means, center = centroid, scale = FALSE) %*% x$scaling
 }
 
 #' @rdname methods-lda
 #' @export
-recover_u.lda_ord <- recover_u.lda
+recover_rows.lda_ord <- recover_rows.lda
 
 #' @rdname methods-lda
 #' @export
-recover_v.lda <- function(x) {
+recover_cols.lda <- function(x) {
   x$scaling
 }
 
 #' @rdname methods-lda
 #' @export
-recover_v.lda_ord <- function(x) {
+recover_cols.lda_ord <- function(x) {
   if (is.null(attr(x, "axes.scale"))) {
     x$scaling
   } else {
@@ -80,7 +79,7 @@ recover_conference.lda_ord <- recover_conference.lda
 
 #' @rdname methods-lda
 #' @export
-augmentation_u.lda <- function(x) {
+augmentation_rows.lda <- function(x) {
   res <- if (is.null(rownames(x$means))) {
     tibble_pole(nrow(x$means))
   } else {
@@ -97,7 +96,6 @@ augmentation_u.lda <- function(x) {
     warning("Could not locate data used to fit '", deparse(substitute(x)), "'.")
     return(res)
   }
-  res$.supplement <- FALSE
   grouping <- try(recover_grouping_lda(x))
   res_sup <- if (is.null(rownames(olddata))) {
     if (inherits(grouping, "try-error")) {
@@ -112,13 +110,15 @@ augmentation_u.lda <- function(x) {
       tibble(.name = rownames(olddata), .grouping = grouping)
     }
   }
+  if (".grouping" %in% names(res_sup)) res$.grouping <- res$.name
+  res$.supplement <- FALSE
   res_sup$.supplement <- TRUE
   as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
 #' @rdname methods-lda
 #' @export
-augmentation_u.lda_ord <- function(x) {
+augmentation_rows.lda_ord <- function(x) {
   res <- if (is.null(rownames(x$means))) {
     tibble_pole(nrow(x$means))
   } else {
@@ -138,7 +138,6 @@ augmentation_u.lda_ord <- function(x) {
     warning("Could not locate data used to fit '", deparse(substitute(x)), "'.")
     return(res)
   }
-  res$.supplement <- FALSE
   grouping <- if (is.null(attr(x, "grouping"))) {
     try(recover_grouping_lda(x))
   } else attr(x, "grouping")
@@ -155,13 +154,15 @@ augmentation_u.lda_ord <- function(x) {
       tibble(.name = rownames(olddata), .grouping = grouping)
     }
   }
+  if (".grouping" %in% names(res_sup)) res$.grouping <- res$.name
+  res$.supplement <- FALSE
   res_sup$.supplement <- TRUE
   as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
 #' @rdname methods-lda
 #' @export
-augmentation_v.lda <- function(x) {
+augmentation_cols.lda <- function(x) {
   .name <- rownames(x$scaling)
   if (is.null(.name)) {
     tibble_pole(nrow(x$scaling))
@@ -172,7 +173,7 @@ augmentation_v.lda <- function(x) {
 
 #' @rdname methods-lda
 #' @export
-augmentation_v.lda_ord <- augmentation_v.lda
+augmentation_cols.lda_ord <- augmentation_cols.lda
 
 #' @rdname methods-lda
 #' @export
@@ -189,7 +190,7 @@ augmentation_coord.lda_ord <- augmentation_coord.lda
 
 #' @rdname methods-lda
 #' @export
-supplementation_u.lda <- function(x) {
+supplementation_rows.lda <- function(x) {
   olddata <- if (is.null(attr(x, "x"))) {
     try(recover_olddata_lda(x))
   } else attr(x, "x")
@@ -204,7 +205,7 @@ supplementation_u.lda <- function(x) {
 
 #' @rdname methods-lda
 #' @export
-supplementation_u.lda_ord <- supplementation_u.lda
+supplementation_rows.lda_ord <- supplementation_rows.lda
 
 recover_olddata_lda <- function(object) {
   # simplified from `MASS:::predict.lda()`
