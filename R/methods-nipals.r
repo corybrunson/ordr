@@ -1,7 +1,9 @@
 #' @title Functionality for non-linear iterative PLS ('nipals') objects
 #'
 #' @description These methods extract data from, and attribute new data to,
-#'   objects of class `"nipals"` as returned by [ade4::nipals()].
+#'   objects of class `"nipals_ord"`. This is a class introduced in this package
+#'   to identify objects returned by [nipals_ord()], which wraps
+#'   [nipals::nipals()].
 #'
 #' @name methods-nipals
 #' @include ord-tbl.r
@@ -11,62 +13,37 @@ NULL
 
 #' @rdname methods-nipals
 #' @export
-as_tbl_ord.nipals <- as_tbl_ord_default
+as_tbl_ord.nipals_ord <- as_tbl_ord_default
 
 #' @rdname methods-nipals
 #' @export
-reconstruct.nipals <- function(x) {
-  res <- recover_rows.nipals(x) %*% t(recover_cols.nipals(x))
-  if (! is.null(attr(x, "cmeans")) & ! is.null(attr(x, "csd"))) {
-    res <- sweep(sweep(res, 2, attr(x, "cmeans"), "*"),
-                 2, attr(x, "cmeans"), "+")
-  } else {
-    warning("Scaling factors `cmeans` and `csd` were not recovered.")
-  }
-  return(res)
+recover_rows.nipals_ord <- function(x) x[["scores"]]
+
+#' @rdname methods-nipals
+#' @export
+recover_cols.nipals_ord <- function(x) x[["loadings"]]
+
+#' @rdname methods-nipals
+#' @export
+recover_inertia.nipals_ord <- function(x) x[["eig"]]
+
+#' @rdname methods-nipals
+#' @export
+recover_coord.nipals_ord <- function(x) colnames(x$scores)
+
+#' @rdname methods-nipals
+#' @export
+recover_conference.nipals_ord <- function(x) {
+  # `nipals::nipals()` normalizes both row and column coordinates
+  c(0, 0)
 }
 
 #' @rdname methods-nipals
 #' @export
-recover_rows.nipals <- function(x) {
-  res <- x[["li"]]
-  colnames(res) <- recover_coord(x)
-  res
-}
-
-#' @rdname methods-nipals
-#' @export
-recover_cols.nipals <- function(x) {
-  res <- x[["c1"]]
-  colnames(res) <- recover_coord(x)
-  res
-}
-
-#' @rdname methods-nipals
-#' @export
-recover_inertia.nipals <- function(x) {
-  x[["eig"]]
-}
-
-#' @rdname methods-nipals
-#' @export
-recover_coord.nipals <- function(x) {
-  paste0("Fac", seq(x$nf))
-}
-
-#' @rdname methods-nipals
-#' @export
-recover_conference.nipals <- function(x) {
-  # `ade4::nipals()` normalizes the column coordinates
-  c(1, 0)
-}
-
-#' @rdname methods-nipals
-#' @export
-augmentation_rows.nipals <- function(x) {
-  .name <- rownames(x[["li"]])
+augmentation_rows.nipals_ord <- function(x) {
+  .name <- rownames(x[["scores"]])
   if (is.null(.name)) {
-    tibble_pole(nrow(x[["li"]]))
+    tibble_pole(nrow(x[["scores"]]))
   } else {
     tibble(.name = .name)
   }
@@ -74,28 +51,29 @@ augmentation_rows.nipals <- function(x) {
 
 #' @rdname methods-nipals
 #' @export
-augmentation_cols.nipals <- function(x) {
-  .name <- rownames(x[["c1"]])
+augmentation_cols.nipals_ord <- function(x) {
+  .name <- rownames(x[["loadings"]])
   res <- if (is.null(.name)) {
-    tibble_pole(nrow(x[["c1"]]))
+    tibble_pole(nrow(x[["loadings"]]))
   } else {
     tibble(.name = .name)
   }
-  if (! is.null(attr(x, "cmeans"))) {
-    res <- dplyr::bind_cols(res, .cmeans = attr(x, "cmeans"))
+  if (! identical(x[["center"]], NA)) {
+    res <- dplyr::bind_cols(res, .cmeans = attr(x, "center"))
   }
-  if (! is.null(attr(x, "csd"))) {
-    res <- dplyr::bind_cols(res, .csd = attr(x, "csd"))
+  if (! identical(x[["scale"]], NA)) {
+    res <- dplyr::bind_cols(res, .csd = attr(x, "scale"))
   }
   res
 }
 
 #' @rdname methods-nipals
 #' @export
-augmentation_coord.nipals <- function(x) {
+augmentation_coord.nipals_ord <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),
     .eig = x[["eig"]],
-    .nb = x[["nb"]]
+    .R2 = x[["R2"]],
+    .iter = x[["iter"]]
   )
 }

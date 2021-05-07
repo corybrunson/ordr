@@ -29,7 +29,8 @@ Imports:
     MASS,
     logisticPCA,
     vegan,
-    ade4
+    ade4,
+    nipals
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -73,6 +74,7 @@ Collate:
     'geom-text.r'
     'geom-unit-circle.r'
     'geom-vector.r'
+    'methods-ade4.r'
     'methods-ca.r'
     'methods-cmds.r'
     'methods-eigen.r'

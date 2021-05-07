@@ -19,6 +19,7 @@
 #' | [logisticPCA::logisticSVD()]       | No          | Yes       | No        |
 #' | [logisticPCA::logisticPCA()]       | No          | Yes       | No        |
 #' | [logisticPCA::convexLogisticPCA()] | No          | Yes       | No        |
+#' | [nipals::nipals()]                 | No          | No        | Yes       |
 
 #' @name wrap-ord
 #' @include ord-tbl.r
@@ -30,6 +31,7 @@
 #' @inheritParams logisticPCA::logisticPCA
 #' @inheritParams logisticPCA::logisticSVD
 #' @inheritParams logisticPCA::convexLogisticPCA
+#' @inheritParams nipals::nipals
 #' @param ... Additional parameters passed to original functions.
 NULL
 
@@ -128,4 +130,20 @@ convexLogisticPCA_ord <- function(
   rownames(lpca$U) <- colnames(x)
   #rownames(lpca$PCs) <- rownames(x)
   lpca
+}
+
+#' @rdname wrap-ord
+#' @export
+nipals_ord <- function(
+  x, ncomp = min(nrow(x), ncol(x)), center = TRUE, scale = TRUE, 
+  maxiter = 500, tol = 1e-06, startcol = 0, fitted = FALSE, 
+  force.na = FALSE, gramschmidt = TRUE, verbose = FALSE
+) {
+  res <- nipals::nipals(
+    x, ncomp = ncomp, center = center, scale = scale,
+    maxiter = maxiter, tol = tol, startcol = startcol, fitted = fitted,
+    force.na = force.na, gramschmidt = gramschmidt, verbose = verbose
+  )
+  class(res) <- "nipals_ord"
+  res
 }
