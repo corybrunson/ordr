@@ -39,7 +39,7 @@ reference:
   - 'stat_rows'
   - starts_with("theme_")
   - has_concept("stat layers")
-  - '`geom_crosshairs`'
+  - '`geom_origin`'
   - '`geom_unit_circle`'
   - has_concept("geom layers")
   - '`draw-key`'
