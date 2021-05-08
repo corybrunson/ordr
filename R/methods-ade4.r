@@ -6,7 +6,7 @@
 #' @name methods-ade4
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/doubs-nipals-path.r
+#' @example inst/examples/ex-methods-ade4-airquality.r
 NULL
 
 #' @rdname methods-ade4

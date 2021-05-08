@@ -85,7 +85,7 @@ ggplot2::stat_ellipse()." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -226,6 +226,28 @@ corresponding conventional stats.</p>
   segments <span class='op'>=</span> <span class='fl'>51</span>
 <span class='op'>)</span>
 
+<span class='fu'>stat_rows_scale</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  geom <span class='op'>=</span> <span class='st'>"point"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>,
+  mult <span class='op'>=</span> <span class='fl'>1</span>
+<span class='op'>)</span>
+
+<span class='fu'>stat_cols_scale</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  geom <span class='op'>=</span> <span class='st'>"point"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>,
+  mult <span class='op'>=</span> <span class='fl'>1</span>
+<span class='op'>)</span>
+
 <span class='fu'>stat_rows_spantree</span><span class='op'>(</span>
   mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
   data <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -354,6 +376,10 @@ or, if <code>type="euclid"</code>, the radius of the circle to be drawn.</p></td
     <tr>
       <th>segments</th>
       <td><p>The number of segments to be used in drawing the ellipse.</p></td>
+    </tr>
+    <tr>
+      <th>mult</th>
+      <td><p>Numeric value used to scale the coordinates.</p></td>
     </tr>
     <tr>
       <th>method</th>

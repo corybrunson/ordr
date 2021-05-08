@@ -8,7 +8,7 @@
 #' @name methods-nipals
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/doubs-nipals-path.r
+#' @example inst/examples/ex-methods-nipals-airquality.r
 NULL
 
 #' @rdname methods-nipals
