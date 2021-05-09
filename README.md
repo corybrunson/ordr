@@ -15,14 +15,14 @@
 *Ordination* is a catch-all term for a variety of statistical techniques
 that introduce an artificial coordinate system for a data set in such a
 way that a few coordinates capture a large amount of the data structure
-\[1\]. The branch of mathematical statistics called [geometric data
+[1]. The branch of mathematical statistics called [geometric data
 analysis](https://www.springer.com/us/book/9781402022357) (GDA) provides
 the theoretical basis for (most of) these techniques. Ordination
 overlaps with regression and with dimension reduction, which can be
 [contrasted to clustering and
 classification](https://towardsdatascience.com/supervised-vs-unsupervised-learning-14f68e32ea8d)
 in that they assign continuous rather than discrete values to data
-elements \[2\].
+elements [2].
 
 Most ordination techniques decompose a numeric rectangular data set into
 the product of two matrices, often using singular value decomposition.
@@ -40,10 +40,10 @@ compare data elements or to predict responses. This is possible because
 both the rows and the columns of the original table can be located, or
 positioned, along these shared coordinates. The number of artificial
 coordinates used in an application, such as regression or visualization,
-is called the *rank* of the ordination \[3\]. A common application is
-the *biplot*, which positions the rows and columns of the original table
-in a scatterplot in 1, 2, or 3 artificial coordinates, usually those
-that explain the most variation in the data.
+is called the *rank* of the ordination [3]. A common application is the
+*biplot*, which positions the rows and columns of the original table in
+a scatterplot in 1, 2, or 3 artificial coordinates, usually those that
+explain the most variation in the data.
 
 ### implementations in R
 
@@ -66,7 +66,7 @@ coordinates they share—can be inspected, annotated, tabulated,
 summarized, and visualized. On this last point, most biplot
 implementations in R provide limited customizability. **ordr** adopts
 the grammar of graphics paradigm from **ggplot2** to modularize and
-standardize biplot elements \[4\]. Overall, the package is designed to
+standardize biplot elements [4]. Overall, the package is designed to
 follow the broader syntactic conventions of the **tidyverse**, so that
 users familiar with a this workflow can more easily and quickly
 integrate ordination models into practice.
@@ -220,15 +220,14 @@ ggbiplot(spend_pca, aes(label = .name)) +
 Multidimensional scaling (MDS) is an ordination technique that starts
 not with rectangular data but with interpoint distances. A common
 illustration of its power is to calculate MDS on the set of
-distances—however measured—between geographic locations, and to
-recover the approximate geography via a biplot. This example is adapted
-from the documentation of `cmdscale()` in the **stats** package; note
-that **ordr** provides the wrapper `cmdscale_ord()` that always returns
-the eigenvalues and the symmetric distance matrix produced during the
+distances—however measured—between geographic locations, and to recover
+the approximate geography via a biplot. This example is adapted from the
+documentation of `cmdscale()` in the **stats** package; note that
+**ordr** provides the wrapper `cmdscale_ord()` that always returns the
+eigenvalues and the symmetric distance matrix produced during the
 calculation. The MDS uses 11 coordinates—the number of positive
 eigenvalues—so that `stat_*_spantree()` can call upon them to recover
-the intercity
-distances.
+the intercity distances.
 
 ``` r
 # `tbl_ord` object for a classical MDS on distances between European cities
@@ -278,7 +277,7 @@ city_mds %>%
 
 ### contribute
 
-Any feedback on the package is very welcome\! If you encounter confusion
+Any feedback on the package is very welcome! If you encounter confusion
 or errors, do create an issue, with a [minimal reproducible
 example](https://stackoverflow.com/help/minimal-reproducible-example) if
 feasible. If you have requests, suggestions, or your own implementations
@@ -316,28 +315,28 @@ Roux.
 
 ### notes
 
-1.  The term *ordination* is most prevalent among ecologists; to my
-    knowledge, no catch-all term is in common use outside ecology.
+[1] The term *ordination* is most prevalent among ecologists; to my
+knowledge, no catch-all term is in common use outside ecology.
 
-2.  This is not a hard rule: PCA is often used to compress data before
-    clustering, and LDA uses dimension reduction to perform
-    classification tasks.
+[2] This is not a hard rule: PCA is often used to compress data before
+clustering, and LDA uses dimension reduction to perform classification
+tasks.
 
-3.  Regression and clustering models, like classical [linear
-    regression](http://www.multivariatestatistics.org/chapter2.html) and
-    [*k*-means](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html),
-    can also be understood as matrix decomposition approximations and
-    even visualized in biplots. Their shared coordinates, which are
-    pre-defined rather than artificial, are the predictor coefficients
-    and the cluster assignments, respectively. Methods for `stats::lm()`
-    and `stats::kmeans()`, for example, are implemented for the sake of
-    novelty and instruction, but are not widely used in practice.
+[3] Regression and clustering models, like classical [linear
+regression](http://www.multivariatestatistics.org/chapter2.html) and
+[*k*-means](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html),
+can also be understood as matrix decomposition approximations and even
+visualized in biplots. Their shared coordinates, which are pre-defined
+rather than artificial, are the predictor coefficients and the cluster
+assignments, respectively. Methods for `stats::lm()` and
+`stats::kmeans()`, for example, are implemented for the sake of novelty
+and instruction, but are not widely used in practice.
 
-4.  Biplot elments must be chosen with care, and it is useful and
-    appropriate that many model-specific biplot methods have limited
-    flexibility. This package adopts the trade-off articulated in
-    [Wilkinson’s *The Grammar of
-    Graphics*](https://www.google.com/books/edition/_/iI1kcgAACAAJ)
-    (p. 15): “This system is capable of producing some hideous
-    graphics. There is nothing in its design to prevent its misuse. …
-    This system cannot produce a meaningless graphic, however.”
+[4] Biplot elments must be chosen with care, and it is useful and
+appropriate that many model-specific biplot methods have limited
+flexibility. This package adopts the trade-off articulated in
+[Wilkinson’s *The Grammar of
+Graphics*](https://www.google.com/books/edition/_/iI1kcgAACAAJ) (p. 15):
+“This system is capable of producing some hideous graphics. There is
+nothing in its design to prevent its misuse. … This system cannot
+produce a meaningless graphic, however.”
