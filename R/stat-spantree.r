@@ -124,14 +124,10 @@ StatSpantree <- ggproto(
   
   compute_group = function(data, scales,
                            method = "euclidean") {
-    
-    # columns to use in distance/dissimilarity calculation
-    dis_cols <- grep("^\\.coord[0-9]+$", names(data))
-    if (length(dis_cols) == 0) dis_cols <- match(c("x", "y"), names(data))
-    #if (is.null(data$coord)) dis_cols <- c("x", "y") else dis_cols <- "coord"
+    ord_cols <- get_ord_aes(data)
     
     # distance/dissimilarity data
-    data_dis <- dist(data[, dis_cols, drop = FALSE], method = method)
+    data_dis <- dist(data[, ord_cols, drop = FALSE], method = method)
     # minimum spanning tree
     data_mst <- vegan::spantree(data_dis)
     # pairs of linked points

@@ -99,16 +99,17 @@ StatCone <- ggproto(
     data, scales,
     origin = FALSE
   ) {
+    ord_cols <- get_ord_aes(data)
     
     # if the data set contains the origin, then the convex hull suffices
-    if (any(vapply(data$x == 0 & data$y == 0, isTRUE, TRUE))) {
+    if (any(apply(as.matrix(data[, ord_cols, drop = FALSE]) == 0, 1L, all))) {
       return(data[chull(data$x, data$y), , drop = FALSE])
     }
     
     # append the origin to the data set for the convex hull calculation
-    chull_data <- data.frame(x = c(data$x, 0), y = c(data$y, 0))
-    hull <- chull(chull_data)
-    # if the origin is not in the convex hull, then the convex hull suffices
+    hull_data <- rbind(data[, ord_cols, drop = FALSE], rep(0, length(ord_cols)))
+    hull <- chull(hull_data)
+    # if the new origin is not in the convex hull, then the convex hull suffices
     orig <- match(nrow(data) + 1L, hull)
     if (is.na(orig)) return(data[hull, , drop = FALSE])
     
@@ -118,9 +119,10 @@ StatCone <- ggproto(
     if (! origin) return(data[hull[-1L], , drop = FALSE])
     
     # reduce additional columns: unique or bust
-    data_only <- as.data.frame(lapply(subset(data, select = -c(x, y)), only))
+    data_only <- as.data.frame(lapply(subset(data, select = -ord_cols), only))
     # bind additional columns to origin
-    data_orig <- merge(data.frame(x = 0, y = 0), data_only)
+    data_orig <- hull_data[nrow(hull_data), , drop = FALSE]
+    if (ncol(data_only) > 0) data_orig <- merge(data_orig, data_only)
     # append the origin data to the input data
     data <- rbind(data, data_orig)
     # return the convex hull

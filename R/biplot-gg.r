@@ -99,7 +99,7 @@ ggbiplot <- function(
     
     sec.axes <- match_factor(sec.axes)
     if (! sec.axes %in% c("rows", "cols")) {
-      stop("Select one matrix factor, 'rows' or 'cols', to scale to secondary axes.")
+      stop("Select one matrix factor, 'rows' or 'cols', for secondary axes.")
     }
     pri.axes <- setdiff(c("rows", "cols"), sec.axes)
     
@@ -214,7 +214,7 @@ ord_aes <- function(ordination, ...) {
     get_coord(ordination),
     function(nm) rlang::quo(!! rlang::sym(nm))
   )
-  names(ord_aes) <- paste0(".coord", seq_along(ord_aes))
+  names(ord_aes) <- paste0("..coord", seq_along(ord_aes))
   # process other aesthetics
   other_aes <- aes(...)
   # concatenate aesthetics

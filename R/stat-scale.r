@@ -92,13 +92,10 @@ StatScale <- ggproto(
   
   compute_group = function(data, scales,
                            mult = 1) {
-    
-    # columns to scale (see also `StatSpantree`)
-    scale_cols <- grep("^\\.coord[0-9]+$", names(data))
-    if (length(scale_cols) == 0) scale_cols <- match(c("x", "y"), names(data))
+    ord_cols <- get_ord_aes(data)
     
     # scale designated columns
-    data[, scale_cols] <- data[, scale_cols] * mult
+    data[, ord_cols] <- data[, ord_cols] * mult
     
     data
   }

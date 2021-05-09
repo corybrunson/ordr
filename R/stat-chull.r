@@ -92,7 +92,9 @@ StatChull <- ggproto(
   compute_group = function(
     data, scales
   ) {
-    data[chull(data$x, data$y), , drop = FALSE]
+    ord_cols <- get_ord_aes(data)
+    
+    data[chull(data[, ord_cols, drop = FALSE]), , drop = FALSE]
   }
 )
 
