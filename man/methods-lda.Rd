@@ -98,7 +98,7 @@ fortify(iris_lda, .matrix = "coord")
 ggplot(iris_lda, .matrix = "coord", aes(x = .name, y = .prop_var)) +
   theme_bw() +
   scale_y_continuous(labels = scales::percent) +
-  geom_bar(stat = "identity") +
+  geom_col() +
   labs(x = "", y = "Proportion of inertia")
 # fortification (without supplement)
 fortify(iris_lda, .supplement = FALSE)

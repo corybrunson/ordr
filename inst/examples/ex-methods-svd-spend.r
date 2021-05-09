@@ -20,7 +20,7 @@ fortify(spend_svd, .matrix = "coord")
 # scree plot of inertia
 ggplot(spend_svd, .matrix = "coord", aes(x = .name, y = .inertia)) +
   theme_bw() +
-  geom_bar(stat = "identity") +
+  geom_col() +
   labs(x = "", y = "Inertia")
 # fortification automatically augments coordinates
 fortify(spend_svd)

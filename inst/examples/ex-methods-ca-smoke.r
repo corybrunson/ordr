@@ -20,13 +20,13 @@ fortify(smoke_ca, .matrix = "coord")
 # scree plot of inertia
 ggplot(smoke_ca, .matrix = "coord", aes(x = .name, y = .inertia)) +
   theme_bw() +
-  geom_bar(stat = "identity") +
+  geom_col() +
   labs(x = "", y = "Inertia")
 # scree plot of proportion of variance (inertia)
 ggplot(smoke_ca, .matrix = "coord", aes(x = .name, y = .prop_var)) +
   theme_bw() +
   scale_y_continuous(labels = scales::percent) +
-  geom_bar(stat = "identity") +
+  geom_col() +
   labs(x = "", y = "Proportion of inertia")
 # fortification adds all above columns
 fortify(smoke_ca)
