@@ -27,19 +27,12 @@ get_cols(air_nipals)
 augment_ord(air_nipals)
 # summarize principal components
 tidy(air_nipals)
-# fortification of artificial coordinates yields proportion of variance measure
-fortify(air_nipals, .matrix = "coord")
 # scree plot of inertia
-ggplot(air_nipals, .matrix = "coord", aes(x = .name, y = .inertia)) +
+tidy(air_nipals) %>%
+  ggplot(aes(x = .name, y = .inertia)) +
   theme_bw() +
   geom_col() +
   labs(x = "", y = "Inertia")
-# scree plot of proportion of variance (inertia)
-ggplot(air_nipals, .matrix = "coord", aes(x = .name, y = .prop_var)) +
-  theme_bw() +
-  scale_y_continuous(labels = scales::percent) +
-  geom_col() +
-  labs(x = "", y = "Proportion of inertia")
 # fortification adds all above columns
 fortify(air_nipals)
 # row-principal biplot with monthly ellipses

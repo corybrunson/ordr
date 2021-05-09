@@ -172,7 +172,8 @@ standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</
 of the <a href='augmentation.html'>augmentation</a> methods:</p><ul>
 <li><p>The <code><a href='https://generics.r-lib.org/reference/tidy.html'>generics::tidy()</a></code> method
 summarizes information about model components, which here are the
-artificial coordinates created by ordinations.</p></li>
+artificial coordinates created by ordinations. The output can be passed to
+<code><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot2::ggplot()</a></code> to generate scree plots.</p></li>
 <li><p>The <code><a href='https://generics.r-lib.org/reference/glance.html'>generics::glance()</a></code> method
 reports information about the entire model, here always treated as one of a
 broader class of ordination models.</p></li>
@@ -180,14 +181,12 @@ broader class of ordination models.</p></li>
 augments and collapses row and/or column data, depending on <code>.matrix</code>, into
 a single tibble, in preparation for <code><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot2::ggplot()</a></code>. Its output
 resembles that of <code><a href='https://generics.r-lib.org/reference/augment.html'>generics::augment()</a></code>, though rows in the output may
-correspond to rows, columns, or both of the original data.</p></li>
+correspond to rows, columns, or both of the original data. If <code>.matrix</code> is
+passed <code>"rows"</code>, <code>"cols"</code>, or <code>"dims"</code> (for both), then <code>fortify()</code> returns
+a tibble whose fields are obtained, in order, via <code>get_*()</code>,
+<code>augmentation_*()</code>, and <code>annotation_*()</code>.</p></li>
 </ul>
 
-<p>If <code>.matrix</code> is passed <code>"rows"</code>, <code>"cols"</code>, or <code>"dims"</code> (for both), then
-<code>fortify()</code> returns a tibble whose fields are obtained, in order, via
-<code>get_*()</code>, <code>augmentation_*()</code>, and <code>annotation_*()</code>. In the special case
-<code>.matrix = "coordinates"</code>, the augmented artificial coordinates are returned.
-This can be used to produce scree plots, for example.</p>
 <p>If augmentation or any annotation is included, then the tibble is assigned a
 <code>"coordinates"</code> attribute whose value is obtained via <code><a href='accessors.html'>get_coord()</a></code>. This
 facilitates some downstream functionality that relies on more than those

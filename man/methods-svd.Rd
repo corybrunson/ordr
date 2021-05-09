@@ -56,10 +56,9 @@ get_cols(spend_svd)
 augment_ord(spend_svd)
 # summarize artifical coordinates
 tidy(spend_svd)
-# fortification of coordinates yields proportion of variance
-fortify(spend_svd, .matrix = "coord")
 # scree plot of inertia
-ggplot(spend_svd, .matrix = "coord", aes(x = .name, y = .inertia)) +
+tidy(spend_svd) \%>\%
+  ggplot(aes(x = .name, y = .inertia)) +
   theme_bw() +
   geom_col() +
   labs(x = "", y = "Inertia")

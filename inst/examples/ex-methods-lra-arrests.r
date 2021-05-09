@@ -24,15 +24,15 @@ head(get_rows(arrests_lra))
 get_cols(arrests_lra)
 # summarize principal components
 tidy(arrests_lra)
-# fortification of artificial coordinates yields proportion of variance measure
-fortify(arrests_lra, .matrix = "coord")
 # scree plot of inertia
-ggplot(arrests_lra, .matrix = "coord", aes(x = .name, y = .inertia)) +
+tidy(arrests_lra) %>%
+  ggplot(aes(x = .name, y = .inertia)) +
   theme_bw() +
   geom_col() +
   labs(x = "", y = "Inertia")
 # scree plot of proportion of variance (inertia)
-ggplot(arrests_lra, .matrix = "coord", aes(x = .name, y = .prop_var)) +
+tidy(arrests_lra) %>%
+  ggplot(aes(x = .name, y = .prop_var)) +
   theme_bw() +
   scale_y_continuous(labels = scales::percent) +
   geom_col() +

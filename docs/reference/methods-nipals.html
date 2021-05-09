@@ -248,26 +248,14 @@ to identify objects returned by <code><a href='wrap-ord.html'>nipals_ord()</a></
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> PC1   18.6  0.565     17    18.6      0.411
 #&gt; </span><span style='color: #BCBCBC;'>2</span><span> PC2   12.4  0.251     13    12.4      0.273
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span> PC3    8.44 0.126     15     8.44     0.187
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> PC4    5.84 0.057</span><span style='text-decoration: underline;'>5</span><span>     3     5.84     0.129</div><div class='input'><span class='co'># fortification of artificial coordinates yields proportion of variance measure</span>
-<span class='fu'>fortify</span><span class='op'>(</span><span class='va'>air_nipals</span>, .matrix <span class='op'>=</span> <span class='st'>"coord"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 4 x 6</span><span>
-#&gt;   .name  .eig    .R2 .iter .inertia .prop_var
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> PC1   18.6  0.565     17    18.6      0.411
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> PC2   12.4  0.251     13    12.4      0.273
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> PC3    8.44 0.126     15     8.44     0.187
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> PC4    5.84 0.057</span><span style='text-decoration: underline;'>5</span><span>     3     5.84     0.129</div><div class='input'><span class='co'># scree plot of inertia</span>
-<span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>air_nipals</span>, .matrix <span class='op'>=</span> <span class='st'>"coord"</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>.name</span>, y <span class='op'>=</span> <span class='va'>.inertia</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>geom_col</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>""</span>, y <span class='op'>=</span> <span class='st'>"Inertia"</span><span class='op'>)</span>
-</div><div class='img'><img src='methods-nipals-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># scree plot of proportion of variance (inertia)</span>
-<span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>air_nipals</span>, .matrix <span class='op'>=</span> <span class='st'>"coord"</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>.name</span>, y <span class='op'>=</span> <span class='va'>.prop_var</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> PC4    5.84 0.057</span><span style='text-decoration: underline;'>5</span><span>     3     5.84     0.129</div><div class='input'><span class='co'># scree plot of proportion of variance (inertia)</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>air_nipals</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>.name</span>, y <span class='op'>=</span> <span class='va'>.prop_var</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>scale_y_continuous</span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org/reference/label_percent.html'>percent</a></span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_col</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>""</span>, y <span class='op'>=</span> <span class='st'>"Proportion of inertia"</span><span class='op'>)</span>
-</div><div class='img'><img src='methods-nipals-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># fortification adds all above columns</span>
+</div><div class='img'><img src='methods-nipals-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># fortification adds all above columns</span>
 <span class='fu'>fortify</span><span class='op'>(</span><span class='va'>air_nipals</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 157 x 8</span><span>
 #&gt;        PC1      PC2      PC3     PC4 .name Date       missingness .matrix
@@ -295,7 +283,7 @@ to identify objects returned by <code><a href='wrap-ord.html'>nipals_ord()</a></
   <span class='fu'>scale_shape_manual</span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>`TRUE` <span class='op'>=</span> <span class='fl'>1L</span>, `FALSE` <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>ggtitle</span><span class='op'>(</span><span class='st'>"Row-principal PCA biplot of 1973 air quality measurements"</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>labs</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"Month"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 111 rows containing missing values (geom_point).</span></div><div class='img'><img src='methods-nipals-3.png' alt='' width='700' height='433' /></div></span></pre>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 111 rows containing missing values (geom_point).</span></div><div class='img'><img src='methods-nipals-2.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

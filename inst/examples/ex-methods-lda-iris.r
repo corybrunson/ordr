@@ -14,10 +14,8 @@ get_cols(iris_lda)
 augment_ord(iris_lda)
 # summarize linear discriminant axes
 tidy(iris_lda)
-# fortification of artificial coordinates yields proportion of variance
-fortify(iris_lda, .matrix = "coord")
 # scree plot of inertia
-ggplot(iris_lda, .matrix = "coord", aes(x = .name, y = .prop_var)) +
+ggplot(tidy(iris_lda), aes(x = .name, y = .prop_var)) +
   theme_bw() +
   scale_y_continuous(labels = scales::percent) +
   geom_col() +
