@@ -72,15 +72,15 @@
 <div id="ordination-and-biplots" class="section level3">
 <h3 class="hasAnchor">
 <a href="#ordination-and-biplots" class="anchor"></a>ordination and biplots</h3>
-<p><em>Ordination</em> is a catch-all term for a variety of statistical techniques that introduce an artificial coordinate system for a data set in such a way that a few coordinates capture a large amount of the data structure <span class="math display">1</span>. The branch of mathematical statistics called <a href="https://www.springer.com/us/book/9781402022357">geometric data analysis</a> (GDA) provides the theoretical basis for (most of) these techniques. Ordination overlaps with regression and with dimension reduction, which can be <a href="https://towardsdatascience.com/supervised-vs-unsupervised-learning-14f68e32ea8d">contrasted to clustering and classification</a> in that they assign continuous rather than discrete values to data elements <span class="math display">2</span>.</p>
+<p><em>Ordination</em> is a catch-all term for a variety of statistical techniques that introduce an artificial coordinate system for a data set in such a way that a few coordinates capture a large amount of the data structure [1]. The branch of mathematical statistics called <a href="https://www.springer.com/us/book/9781402022357">geometric data analysis</a> (GDA) provides the theoretical basis for (most of) these techniques. Ordination overlaps with regression and with dimension reduction, which can be <a href="https://towardsdatascience.com/supervised-vs-unsupervised-learning-14f68e32ea8d">contrasted to clustering and classification</a> in that they assign continuous rather than discrete values to data elements [2].</p>
 <p>Most ordination techniques decompose a numeric rectangular data set into the product of two matrices, often using singular value decomposition. The coordinates of the shared dimensions of these matrices (over which they are multiplied) are the artificial coordinates. In some cases, such as principal components analysis, the decomposition is exact; in others, such as non-negative matrix factorization, it is approximate. Some techniques, such as correspondence analysis, transform the data before decomposition. Ordination techniques may be supervised, like linear discriminant analysis, or unsupervised, like multidimensional scaling.</p>
-<p>Analysis pipelines that use these techniques may use the artificial coordinates directly, in place of natural coordinates, to arrange and compare data elements or to predict responses. This is possible because both the rows and the columns of the original table can be located, or positioned, along these shared coordinates. The number of artificial coordinates used in an application, such as regression or visualization, is called the <em>rank</em> of the ordination <span class="math display">3</span>. A common application is the <em>biplot</em>, which positions the rows and columns of the original table in a scatterplot in 1, 2, or 3 artificial coordinates, usually those that explain the most variation in the data.</p>
+<p>Analysis pipelines that use these techniques may use the artificial coordinates directly, in place of natural coordinates, to arrange and compare data elements or to predict responses. This is possible because both the rows and the columns of the original table can be located, or positioned, along these shared coordinates. The number of artificial coordinates used in an application, such as regression or visualization, is called the <em>rank</em> of the ordination [3]. A common application is the <em>biplot</em>, which positions the rows and columns of the original table in a scatterplot in 1, 2, or 3 artificial coordinates, usually those that explain the most variation in the data.</p>
 </div>
 <div id="implementations-in-r" class="section level3">
 <h3 class="hasAnchor">
 <a href="#implementations-in-r" class="anchor"></a>implementations in R</h3>
 <p>An extensive range of ordination techniques are implemented in R, from classical multidimensional scaling (<code><a href="https://rdrr.io/r/stats/cmdscale.html">stats::cmdscale()</a></code>) and principal components analysis (<code><a href="https://rdrr.io/r/stats/prcomp.html">stats::prcomp()</a></code> and <code><a href="https://rdrr.io/r/stats/princomp.html">stats::princomp()</a></code>) in the <strong>stats</strong> package distributed with base R, across widely-used implementations of linear discriminant analysis (<code><a href="https://rdrr.io/pkg/MASS/man/lda.html">MASS::lda()</a></code>) and correspondence analysis (<code><a href="https://rdrr.io/pkg/ca/man/ca.html">ca::ca()</a></code>) in general-use statistical packages, to highly specialized packages that implement cutting-edge techniques or adapt conventional techniques to challenging settings. These implementations come with their own conventions, tailored to the research communities that produced them, and it would be impractical (and probably unhelpful) to try to consolidate them.</p>
-<p>Instead, <strong>ordr</strong> provides a streamlined process by which the models output by these methods—in particular, the matrix factors into which the original data are approximately decomposed and the artificial coordinates they share—can be inspected, annotated, tabulated, summarized, and visualized. On this last point, most biplot implementations in R provide limited customizability. <strong>ordr</strong> adopts the grammar of graphics paradigm from <strong>ggplot2</strong> to modularize and standardize biplot elements <span class="math display">4</span>. Overall, the package is designed to follow the broader syntactic conventions of the <strong>tidyverse</strong>, so that users familiar with a this workflow can more easily and quickly integrate ordination models into practice.</p>
+<p>Instead, <strong>ordr</strong> provides a streamlined process by which the models output by these methods—in particular, the matrix factors into which the original data are approximately decomposed and the artificial coordinates they share—can be inspected, annotated, tabulated, summarized, and visualized. On this last point, most biplot implementations in R provide limited customizability. <strong>ordr</strong> adopts the grammar of graphics paradigm from <strong>ggplot2</strong> to modularize and standardize biplot elements [4]. Overall, the package is designed to follow the broader syntactic conventions of the <strong>tidyverse</strong>, so that users familiar with a this workflow can more easily and quickly integrate ordination models into practice.</p>
 </div>
 </div>
 <div id="usage" class="section level2">
@@ -122,7 +122,7 @@
 <span class="co">#&gt; # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'</span>
 <span class="co">#&gt; # 5 coordinates: PC1, PC2, ..., PC5</span>
 <span class="co">#&gt; # </span>
-<span class="co">#&gt; # Rows: [ 5 x 5 | 0 ]</span>
+<span class="co">#&gt; # Rows (principal): [ 5 x 5 | 0 ]</span>
 <span class="co">#&gt;       PC1    PC2    PC3 ... | </span>
 <span class="co">#&gt;                             | </span>
 <span class="co">#&gt; 1 -137.    3.61  -0.310     | </span>
@@ -131,7 +131,7 @@
 <span class="co">#&gt; 4   -7.11 -0.735 -0.795     | </span>
 <span class="co">#&gt; 5   -4.85 -0.782 -0.226     | </span>
 <span class="co">#&gt; # </span>
-<span class="co">#&gt; # Columns: [ 5 x 5 | 0 ]</span>
+<span class="co">#&gt; # Columns (standard): [ 5 x 5 | 0 ]</span>
 <span class="co">#&gt;      PC1     PC2    PC3 ... | </span>
 <span class="co">#&gt;                             | </span>
 <span class="co">#&gt; 1 -0.159  0.113   0.182     | </span>
@@ -144,7 +144,7 @@
 <span class="co">#&gt; # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'</span>
 <span class="co">#&gt; # 5 coordinates: PC1, PC2, ..., PC5</span>
 <span class="co">#&gt; # </span>
-<span class="co">#&gt; # Rows: [ 5 x 5 | 1 ]</span>
+<span class="co">#&gt; # Rows (principal): [ 5 x 5 | 1 ]</span>
 <span class="co">#&gt;       PC1    PC2    PC3 ... |   .name              </span>
 <span class="co">#&gt;                             |   &lt;chr&gt;              </span>
 <span class="co">#&gt; 1 -137.    3.61  -0.310     | 1 Food and Tobacco   </span>
@@ -153,7 +153,7 @@
 <span class="co">#&gt; 4   -7.11 -0.735 -0.795     | 4 Personal Care      </span>
 <span class="co">#&gt; 5   -4.85 -0.782 -0.226     | 5 Private Education  </span>
 <span class="co">#&gt; # </span>
-<span class="co">#&gt; # Columns: [ 5 x 5 | 1 ]</span>
+<span class="co">#&gt; # Columns (standard): [ 5 x 5 | 1 ]</span>
 <span class="co">#&gt;      PC1     PC2    PC3 ... |   .name</span>
 <span class="co">#&gt;                             |   &lt;chr&gt;</span>
 <span class="co">#&gt; 1 -0.159  0.113   0.182     | 1 1940 </span>
@@ -166,7 +166,7 @@
 <span class="co">#&gt; # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'</span>
 <span class="co">#&gt; # 5 coordinates: PC1, PC2, ..., PC5</span>
 <span class="co">#&gt; # </span>
-<span class="co">#&gt; # Rows: [ 5 x 5 | 1 ]</span>
+<span class="co">#&gt; # Rows (principal): [ 5 x 5 | 1 ]</span>
 <span class="co">#&gt;       PC1    PC2    PC3 ... |   .name              </span>
 <span class="co">#&gt;                             |   &lt;chr&gt;              </span>
 <span class="co">#&gt; 1 -137.    3.61  -0.310     | 1 Food and Tobacco   </span>
@@ -175,7 +175,7 @@
 <span class="co">#&gt; 4   -7.11 -0.735 -0.795     | 4 Personal Care      </span>
 <span class="co">#&gt; 5   -4.85 -0.782 -0.226     | 5 Private Education  </span>
 <span class="co">#&gt; # </span>
-<span class="co">#&gt; # Columns: [ 5 x 5 | 2 ]</span>
+<span class="co">#&gt; # Columns (standard): [ 5 x 5 | 2 ]</span>
 <span class="co">#&gt;      PC1     PC2    PC3 ... |   .name  year</span>
 <span class="co">#&gt;                             |   &lt;chr&gt; &lt;int&gt;</span>
 <span class="co">#&gt; 1 -0.159  0.113   0.182     | 1 1940   1940</span>
@@ -188,7 +188,7 @@
 <span class="co">#&gt; # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'</span>
 <span class="co">#&gt; # 5 coordinates: PC1, PC2, ..., PC5</span>
 <span class="co">#&gt; # </span>
-<span class="co">#&gt; # Rows: [ 5 x 5 | 1 ]</span>
+<span class="co">#&gt; # Rows (symmetric): [ 5 x 5 | 1 ]</span>
 <span class="co">#&gt;       PC1    PC2    PC3 ... |   .name              </span>
 <span class="co">#&gt;                             |   &lt;chr&gt;              </span>
 <span class="co">#&gt; 1 -11.0    1.28  -0.195     | 1 Food and Tobacco   </span>
@@ -197,7 +197,7 @@
 <span class="co">#&gt; 4  -0.569 -0.261 -0.499     | 4 Personal Care      </span>
 <span class="co">#&gt; 5  -0.388 -0.278 -0.142     | 5 Private Education  </span>
 <span class="co">#&gt; # </span>
-<span class="co">#&gt; # Columns: [ 5 x 5 | 2 ]</span>
+<span class="co">#&gt; # Columns (symmetric): [ 5 x 5 | 2 ]</span>
 <span class="co">#&gt;     PC1     PC2    PC3 ... |   .name  year</span>
 <span class="co">#&gt;                            |   &lt;chr&gt; &lt;int&gt;</span>
 <span class="co">#&gt; 1 -1.99  0.318   0.291     | 1 1940   1940</span>
@@ -233,7 +233,7 @@
 <span class="co">#&gt; # A tbl_ord of class 'cmds_ord': (21 x 11) x (21 x 11)'</span>
 <span class="co">#&gt; # 11 coordinates: PCo1, PCo2, ..., PCo11</span>
 <span class="co">#&gt; # </span>
-<span class="co">#&gt; # Rows: [ 21 x 11 | 1 ]</span>
+<span class="co">#&gt; # Rows (symmetric): [ 21 x 11 | 1 ]</span>
 <span class="co">#&gt;     PCo1  PCo2   PCo3 ... |   .name    </span>
 <span class="co">#&gt;                           |   &lt;chr&gt;    </span>
 <span class="co">#&gt; 1 2290.  1799.   53.8     | 1 Athens   </span>
@@ -243,7 +243,7 @@
 <span class="co">#&gt; 5 -352.  -291.  457.      | 5 Cherbourg</span>
 <span class="co">#&gt; # … with 16 more rows</span>
 <span class="co">#&gt; # </span>
-<span class="co">#&gt; # Columns: [ 21 x 11 | 1 ]</span>
+<span class="co">#&gt; # Columns (symmetric): [ 21 x 11 | 1 ]</span>
 <span class="co">#&gt;     PCo1  PCo2   PCo3 ... |   .name    </span>
 <span class="co">#&gt;                           |   &lt;chr&gt;    </span>
 <span class="co">#&gt; 1 2290.  1799.   53.8     | 1 Athens   </span>
@@ -279,16 +279,14 @@
 <a href="#inspiration" class="anchor"></a>inspiration</h3>
 <p>This package was originally inspired by the <strong>ggbiplot</strong> extension developed by <a href="https://github.com/vqv/ggbiplot">Vincent Q. Vu</a>, <a href="https://github.com/richardjtelford/ggbiplot">Richard J Telford</a>, and <a href="https://github.com/GegznaV/ggbiplot">Vilmantas Gegzna</a>, among others. So far as i know, it first brought biplots into the <strong>tidyverse</strong> framework. The motivation to unify a variety of ordination methods came from <a href="https://www.barcelonagse.eu/research/publications/all?author=Michael%20Greenacre">several books and articles</a> by Michael Greenacre, in particular <a href="https://www.fbbva.es/microsite/multivariate-statistics/resources.html#biplots"><em>Biplots in Practice</em></a>. Thomas Lin Pedersen’s <a href="https://github.com/thomasp85/tidygraph"><strong>tidygraph</strong></a> prequel to <strong>ggraph</strong> finally induced the shift from the downstream generation of scatterplots to the upstream handling and manipulating of ordination models. Additional design elements and features have been informed by the monograph <a href="https://www.routledge.com/Biplots/Gower-Hand/p/book/9780412716300"><em>Biplots</em></a> and the textbook <a href="https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550"><em>Understanding Biplots</em></a> by John C. Gower, David J. Hand, Sugnet Gardner Lubbe, and Niel J. Le Roux.</p>
 </div>
+<div id="notes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#notes" class="anchor"></a>notes</h3>
+<p>[1] The term <em>ordination</em> is most prevalent among ecologists; to my knowledge, no catch-all term is in common use outside ecology.</p>
+<p>[2] This is not a hard rule: PCA is often used to compress data before clustering, and LDA uses dimension reduction to perform classification tasks.</p>
+<p>[3] Regression and clustering models, like classical <a href="http://www.multivariatestatistics.org/chapter2.html">linear regression</a> and <a href="http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html"><em>k</em>-means</a>, can also be understood as matrix decomposition approximations and even visualized in biplots. Their shared coordinates, which are pre-defined rather than artificial, are the predictor coefficients and the cluster assignments, respectively. Methods for <code><a href="https://rdrr.io/r/stats/lm.html">stats::lm()</a></code> and <code><a href="https://rdrr.io/r/stats/kmeans.html">stats::kmeans()</a></code>, for example, are implemented for the sake of novelty and instruction, but are not widely used in practice.</p>
+<p>[4] Biplot elments must be chosen with care, and it is useful and appropriate that many model-specific biplot methods have limited flexibility. This package adopts the trade-off articulated in <a href="https://www.google.com/books/edition/_/iI1kcgAACAAJ">Wilkinson’s <em>The Grammar of Graphics</em></a> (p. 15): “This system is capable of producing some hideous graphics. There is nothing in its design to prevent its misuse. … This system cannot produce a meaningless graphic, however.”</p>
 </div>
-<div id="notes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#notes" class="anchor"></a>notes</h2>
-<ol>
-<li><p>The term <em>ordination</em> is most prevalent among ecologists; to my knowledge, no catch-all term is in common use outside ecology.</p></li>
-<li><p>This is not a hard rule: PCA is often used to compress data before clustering, and LDA uses dimension reduction to perform classification tasks.</p></li>
-<li><p>Regression and clustering models, like classical <a href="http://www.multivariatestatistics.org/chapter2.html">linear regression</a> and <a href="http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html"><em>k</em>-means</a>, can also be understood as matrix decomposition approximations and even visualized in biplots. Their shared coordinates, which are pre-defined rather than artificial, are the predictor coefficients and the cluster assignments, respectively. Methods for <code><a href="https://rdrr.io/r/stats/lm.html">stats::lm()</a></code> and <code><a href="https://rdrr.io/r/stats/kmeans.html">stats::kmeans()</a></code>, for example, are implemented for the sake of novelty and instruction, but are not widely used in practice.</p></li>
-<li><p>Biplot elments must be chosen with care, and it is useful and appropriate that many model-specific biplot methods have limited flexibility. This package adopts the trade-off articulated in <a href="https://www.google.com/books/edition/_/iI1kcgAACAAJ">Wilkinson’s <em>The Grammar of Graphics</em></a> (p. 15): “This system is capable of producing some hideous graphics. There is nothing in its design to prevent its misuse. … This system cannot produce a meaningless graphic, however.”</p></li>
-</ol>
 </div>
 </div>
 

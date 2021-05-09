@@ -183,7 +183,6 @@ corresponding conventional stats.</p>
   data <span class='op'>=</span> <span class='cn'>NULL</span>,
   geom <span class='op'>=</span> <span class='st'>"polygon"</span>,
   position <span class='op'>=</span> <span class='st'>"identity"</span>,
-  conical <span class='op'>=</span> <span class='cn'>FALSE</span>,
   show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
   inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>,
   <span class='va'>...</span>
@@ -194,7 +193,28 @@ corresponding conventional stats.</p>
   data <span class='op'>=</span> <span class='cn'>NULL</span>,
   geom <span class='op'>=</span> <span class='st'>"polygon"</span>,
   position <span class='op'>=</span> <span class='st'>"identity"</span>,
-  conical <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='fu'>stat_rows_cone</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  geom <span class='op'>=</span> <span class='st'>"path"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  origin <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='fu'>stat_cols_cone</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  geom <span class='op'>=</span> <span class='st'>"path"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  origin <span class='op'>=</span> <span class='cn'>FALSE</span>,
   show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
   inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>,
   <span class='va'>...</span>
@@ -355,9 +375,9 @@ treated as in <code><a href='https://ggplot2.tidyverse.org/reference/stat_summar
 <code>fun.max</code> behaving as <code>fun.y</code>, <code>fun.ymin</code>, and <code>fun.ymax</code>.</p></td>
     </tr>
     <tr>
-      <th>conical</th>
-      <td><p>Logical; whether to include the origin when calculating the
-hull. Defaults to <code>FALSE</code>.</p></td>
+      <th>origin</th>
+      <td><p>Logical; whether to include the origin with the transformed
+data. Defaults to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>type</th>
@@ -421,7 +441,7 @@ points for rows and arrows for columns.</p>
 </div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
 #&gt; # 4 coordinates: PC1, PC2, ..., PC4
 #&gt; # 
-#&gt; # Rows: [ 150 x 4 | 1 ]
+#&gt; # Rows (principal): [ 150 x 4 | 1 ]
 #&gt;     PC1    PC2     PC3 ... |   species
 #&gt;                            |   <span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>  
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>2.26</span><span> -</span><span style='color: #BB0000;'>0.478</span><span>  0.127      | </span><span style='color: #BCBCBC;'>1</span><span> setosa 
@@ -431,7 +451,7 @@ points for rows and arrows for columns.</p>
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.38</span><span> -</span><span style='color: #BB0000;'>0.645</span><span> -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> setosa 
 #&gt; </span><span style='color: #949494;'># … with 145 more rows</span><span>
 #&gt; # 
-#&gt; # Columns: [ 4 x 4 | 0 ]
+#&gt; # Columns (standard): [ 4 x 4 | 0 ]
 #&gt;      PC1     PC2    PC3 ... | 
 #&gt;                             | 
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.521 -</span><span style='color: #BB0000;'>0.377</span><span>   0.720     | 

@@ -151,6 +151,131 @@ objects of class <code>"svd_ord"</code> returned by <code><a href='wrap-ord.html
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># matrix of U.S. personal expenditure data</span>
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>USPersonalExpenditure</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "matrix" "array" </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>USPersonalExpenditure</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                       1940   1945  1950 1955  1960
+#&gt; Food and Tobacco    22.200 44.500 59.60 73.2 86.80
+#&gt; Household Operation 10.500 15.500 29.00 36.5 46.20
+#&gt; Medical and Health   3.530  5.760  9.71 14.0 21.10
+#&gt; Personal Care        1.040  1.980  2.45  3.4  5.40
+#&gt; Private Education    0.341  0.974  1.80  2.6  3.64</div><div class='input'><span class='co'># singular value decomposition into row and column coordinates</span>
+<span class='va'>USPersonalExpenditure</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='wrap-ord.html'>svd_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>spend_svd</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'svd_ord': (5 x 5) x (5 x 5)'
+#&gt; # 5 coordinates: SV1, SV2, ..., SV5
+#&gt; # 
+#&gt; # Rows (standard): [ 5 x 5 | 0 ]
+#&gt;       SV1     SV2     SV3 ... | 
+#&gt;                               | 
+#&gt; <span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.881</span><span>   0.456  -</span><span style='color: #BB0000;'>0.122</span><span>      | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.436</span><span>  -</span><span style='color: #BB0000;'>0.677</span><span>   0.583  ... | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.176</span><span>  -</span><span style='color: #BB0000;'>0.562</span><span>  -</span><span style='color: #BB0000;'>0.734</span><span>      | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.045</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.092</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>0.314</span><span>      | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.031</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span> -</span><span style='color: #BB0000;'>0.098</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>0.089</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>     | 
+#&gt; # 
+#&gt; # Columns (standard): [ 5 x 5 | 0 ]
+#&gt;      SV1     SV2    SV3 ... | 
+#&gt;                             | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.159</span><span>  0.113   0.182     | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.302</span><span>  0.792  -</span><span style='color: #BB0000;'>0.527</span><span> ... | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.429</span><span>  0.211   0.620     | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.532</span><span>  0.026</span><span style='text-decoration: underline;'>6</span><span>  0.302     | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.645</span><span> -</span><span style='color: #BB0000;'>0.561</span><span>  -</span><span style='color: #BB0000;'>0.461</span><span>     | </div><div class='input'><span class='co'># summarize ordination</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>spend_svd</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
+#&gt;    rank n.row n.col inertia class  
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     5     5     5  </span><span style='text-decoration: underline;'>24</span><span>433. svd_ord</div><div class='input'><span class='co'># recover matrices of row and column coordinates</span>
+<span class='fu'><a href='accessors.html'>get_rows</a></span><span class='op'>(</span><span class='va'>spend_svd</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                             SV1         SV2         SV3         SV4         SV5
+#&gt; Food and Tobacco    -0.88086766  0.45563080 -0.12237718  0.02450591 -0.02993361
+#&gt; Household Operation -0.43580483 -0.67662102  0.58341818 -0.07630369  0.07784028
+#&gt; Medical and Health  -0.17637018 -0.56230756 -0.73372346  0.04111351 -0.33565360
+#&gt; Personal Care       -0.04553400 -0.09285599 -0.31360568 -0.49361448  0.80454996
+#&gt; Private Education   -0.03108899 -0.09885616 -0.08915387  0.86500383  0.48278452</div><div class='input'><span class='fu'><a href='accessors.html'>get_cols</a></span><span class='op'>(</span><span class='va'>spend_svd</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;             SV1         SV2        SV3         SV4         SV5
+#&gt; 1940 -0.1589586  0.11313761  0.1824780 -0.89728506 -0.35144462
+#&gt; 1945 -0.3016855  0.79223017 -0.5274149  0.02654943  0.04985844
+#&gt; 1950 -0.4293572  0.21081041  0.6202698 -0.01464040  0.62150007
+#&gt; 1955 -0.5323309  0.02659741  0.3024320  0.42107353 -0.66869157
+#&gt; 1960 -0.6449761 -0.56073415 -0.4607988 -0.12906349  0.20146975</div><div class='input'><span class='co'># augment with row and column names</span>
+<span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='va'>spend_svd</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'svd_ord': (5 x 5) x (5 x 5)'
+#&gt; # 5 coordinates: SV1, SV2, ..., SV5
+#&gt; # 
+#&gt; # Rows (standard): [ 5 x 5 | 1 ]
+#&gt;       SV1     SV2     SV3 ... |   .name              
+#&gt;                               |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>              
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.881</span><span>   0.456  -</span><span style='color: #BB0000;'>0.122</span><span>      | </span><span style='color: #BCBCBC;'>1</span><span> Food and Tobacco   
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.436</span><span>  -</span><span style='color: #BB0000;'>0.677</span><span>   0.583  ... | </span><span style='color: #BCBCBC;'>2</span><span> Household Operation
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.176</span><span>  -</span><span style='color: #BB0000;'>0.562</span><span>  -</span><span style='color: #BB0000;'>0.734</span><span>      | </span><span style='color: #BCBCBC;'>3</span><span> Medical and Health 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.045</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.092</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>0.314</span><span>      | </span><span style='color: #BCBCBC;'>4</span><span> Personal Care      
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.031</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span> -</span><span style='color: #BB0000;'>0.098</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>0.089</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> Private Education  
+#&gt; # 
+#&gt; # Columns (standard): [ 5 x 5 | 1 ]
+#&gt;      SV1     SV2    SV3 ... |   .name
+#&gt;                             |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.159</span><span>  0.113   0.182     | </span><span style='color: #BCBCBC;'>1</span><span> 1940 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.302</span><span>  0.792  -</span><span style='color: #BB0000;'>0.527</span><span> ... | </span><span style='color: #BCBCBC;'>2</span><span> 1945 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.429</span><span>  0.211   0.620     | </span><span style='color: #BCBCBC;'>3</span><span> 1950 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.532</span><span>  0.026</span><span style='text-decoration: underline;'>6</span><span>  0.302     | </span><span style='color: #BCBCBC;'>4</span><span> 1955 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.645</span><span> -</span><span style='color: #BB0000;'>0.561</span><span>  -</span><span style='color: #BB0000;'>0.461</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> 1960 </div><div class='input'><span class='co'># summarize artifical coordinates</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>spend_svd</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 5 x 4</span><span>
+#&gt;   .name   .value    .inertia   .prop_var
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> SV1   156.     </span><span style='text-decoration: underline;'>24</span><span>364.      0.997      
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> SV2     7.91      62.6     0.002</span><span style='text-decoration: underline;'>56</span><span>    
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> SV3     2.53       6.42    0.000</span><span style='text-decoration: underline;'>263</span><span>   
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> SV4     0.368      0.136   0.000</span><span style='text-decoration: underline;'>005</span><span>55 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> SV5     0.087</span><span style='text-decoration: underline;'>4</span><span>     0.007</span><span style='text-decoration: underline;'>63</span><span> 0.000</span><span style='text-decoration: underline;'>000</span><span>312</div><div class='input'><span class='co'># fortification of coordinates yields proportion of variance</span>
+<span class='fu'>fortify</span><span class='op'>(</span><span class='va'>spend_svd</span>, .matrix <span class='op'>=</span> <span class='st'>"coord"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 5 x 4</span><span>
+#&gt;   .name   .value    .inertia   .prop_var
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> SV1   156.     </span><span style='text-decoration: underline;'>24</span><span>364.      0.997      
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> SV2     7.91      62.6     0.002</span><span style='text-decoration: underline;'>56</span><span>    
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> SV3     2.53       6.42    0.000</span><span style='text-decoration: underline;'>263</span><span>   
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> SV4     0.368      0.136   0.000</span><span style='text-decoration: underline;'>005</span><span>55 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> SV5     0.087</span><span style='text-decoration: underline;'>4</span><span>     0.007</span><span style='text-decoration: underline;'>63</span><span> 0.000</span><span style='text-decoration: underline;'>000</span><span>312</div><div class='input'><span class='co'># scree plot of inertia</span>
+<span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>spend_svd</span>, .matrix <span class='op'>=</span> <span class='st'>"coord"</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>.name</span>, y <span class='op'>=</span> <span class='va'>.inertia</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_col</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>""</span>, y <span class='op'>=</span> <span class='st'>"Inertia"</span><span class='op'>)</span>
+</div><div class='img'><img src='methods-svd-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># fortification automatically augments coordinates</span>
+<span class='fu'>fortify</span><span class='op'>(</span><span class='va'>spend_svd</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 10 x 7</span><span>
+#&gt;        SV1     SV2     SV3     SV4     SV5 .name               .matrix
+#&gt;      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> -</span><span style='color: #BB0000;'>0.881</span><span>   0.456  -</span><span style='color: #BB0000;'>0.122</span><span>   0.024</span><span style='text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.029</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> Food and Tobacco    rows   
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> -</span><span style='color: #BB0000;'>0.436</span><span>  -</span><span style='color: #BB0000;'>0.677</span><span>   0.583  -</span><span style='color: #BB0000;'>0.076</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>  0.077</span><span style='text-decoration: underline;'>8</span><span> Household Operation rows   
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> -</span><span style='color: #BB0000;'>0.176</span><span>  -</span><span style='color: #BB0000;'>0.562</span><span>  -</span><span style='color: #BB0000;'>0.734</span><span>   0.041</span><span style='text-decoration: underline;'>1</span><span> -</span><span style='color: #BB0000;'>0.336</span><span>  Medical and Health  rows   
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> -</span><span style='color: #BB0000;'>0.045</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.092</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>0.314</span><span>  -</span><span style='color: #BB0000;'>0.494</span><span>   0.805  Personal Care       rows   
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> -</span><span style='color: #BB0000;'>0.031</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span> -</span><span style='color: #BB0000;'>0.098</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>0.089</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>  0.865   0.483  Private Education   rows   
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> -</span><span style='color: #BB0000;'>0.159</span><span>   0.113   0.182  -</span><span style='color: #BB0000;'>0.897</span><span>  -</span><span style='color: #BB0000;'>0.351</span><span>  1940                cols   
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> -</span><span style='color: #BB0000;'>0.302</span><span>   0.792  -</span><span style='color: #BB0000;'>0.527</span><span>   0.026</span><span style='text-decoration: underline;'>5</span><span>  0.049</span><span style='text-decoration: underline;'>9</span><span> 1945                cols   
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> -</span><span style='color: #BB0000;'>0.429</span><span>   0.211   0.620  -</span><span style='color: #BB0000;'>0.014</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>  0.622  1950                cols   
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> -</span><span style='color: #BB0000;'>0.532</span><span>   0.026</span><span style='text-decoration: underline;'>6</span><span>  0.302   0.421  -</span><span style='color: #BB0000;'>0.669</span><span>  1955                cols   
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> -</span><span style='color: #BB0000;'>0.645</span><span>  -</span><span style='color: #BB0000;'>0.561</span><span>  -</span><span style='color: #BB0000;'>0.461</span><span>  -</span><span style='color: #BB0000;'>0.129</span><span>   0.201  1960                cols   </div><div class='input'><span class='co'># initial matrix decomposition confers no inertia to coordinates</span>
+<span class='fu'><a href='conference.html'>get_conference</a></span><span class='op'>(</span><span class='va'>spend_svd</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0 0</div><div class='input'><span class='co'># row-principal biplot, allowing radiating text to exceed plotting window</span>
+<span class='va'>spend_svd</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>, clip <span class='op'>=</span> <span class='st'>"off"</span>,
+           sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>50</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_rows_label</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_cols_vector</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='co'># omit labels in the hull with the origin</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_cols_text_radiate</a></span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"cone"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggtitle</span><span class='op'>(</span>
+    <span class='st'>"U.S. Personal Expenditure data, 1940-1960"</span>,
+    <span class='st'>"Row-principal biplot of SVD"</span>
+  <span class='op'>)</span>
+</div><div class='img'><img src='methods-svd-2.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
