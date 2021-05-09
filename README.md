@@ -116,7 +116,7 @@ USPersonalExpenditure
 #> # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'
 #> # 5 coordinates: PC1, PC2, ..., PC5
 #> # 
-#> # Rows: [ 5 x 5 | 0 ]
+#> # Rows (principal): [ 5 x 5 | 0 ]
 #>       PC1    PC2    PC3 ... | 
 #>                             | 
 #> 1 -137.    3.61  -0.310     | 
@@ -125,7 +125,7 @@ USPersonalExpenditure
 #> 4   -7.11 -0.735 -0.795     | 
 #> 5   -4.85 -0.782 -0.226     | 
 #> # 
-#> # Columns: [ 5 x 5 | 0 ]
+#> # Columns (standard): [ 5 x 5 | 0 ]
 #>      PC1     PC2    PC3 ... | 
 #>                             | 
 #> 1 -0.159  0.113   0.182     | 
@@ -138,7 +138,7 @@ USPersonalExpenditure
 #> # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'
 #> # 5 coordinates: PC1, PC2, ..., PC5
 #> # 
-#> # Rows: [ 5 x 5 | 1 ]
+#> # Rows (principal): [ 5 x 5 | 1 ]
 #>       PC1    PC2    PC3 ... |   .name              
 #>                             |   <chr>              
 #> 1 -137.    3.61  -0.310     | 1 Food and Tobacco   
@@ -147,7 +147,7 @@ USPersonalExpenditure
 #> 4   -7.11 -0.735 -0.795     | 4 Personal Care      
 #> 5   -4.85 -0.782 -0.226     | 5 Private Education  
 #> # 
-#> # Columns: [ 5 x 5 | 1 ]
+#> # Columns (standard): [ 5 x 5 | 1 ]
 #>      PC1     PC2    PC3 ... |   .name
 #>                             |   <chr>
 #> 1 -0.159  0.113   0.182     | 1 1940 
@@ -160,7 +160,7 @@ USPersonalExpenditure
 #> # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'
 #> # 5 coordinates: PC1, PC2, ..., PC5
 #> # 
-#> # Rows: [ 5 x 5 | 1 ]
+#> # Rows (principal): [ 5 x 5 | 1 ]
 #>       PC1    PC2    PC3 ... |   .name              
 #>                             |   <chr>              
 #> 1 -137.    3.61  -0.310     | 1 Food and Tobacco   
@@ -169,7 +169,7 @@ USPersonalExpenditure
 #> 4   -7.11 -0.735 -0.795     | 4 Personal Care      
 #> 5   -4.85 -0.782 -0.226     | 5 Private Education  
 #> # 
-#> # Columns: [ 5 x 5 | 2 ]
+#> # Columns (standard): [ 5 x 5 | 2 ]
 #>      PC1     PC2    PC3 ... |   .name  year
 #>                             |   <chr> <int>
 #> 1 -0.159  0.113   0.182     | 1 1940   1940
@@ -182,7 +182,7 @@ USPersonalExpenditure
 #> # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'
 #> # 5 coordinates: PC1, PC2, ..., PC5
 #> # 
-#> # Rows: [ 5 x 5 | 1 ]
+#> # Rows (symmetric): [ 5 x 5 | 1 ]
 #>       PC1    PC2    PC3 ... |   .name              
 #>                             |   <chr>              
 #> 1 -11.0    1.28  -0.195     | 1 Food and Tobacco   
@@ -191,7 +191,7 @@ USPersonalExpenditure
 #> 4  -0.569 -0.261 -0.499     | 4 Personal Care      
 #> 5  -0.388 -0.278 -0.142     | 5 Private Education  
 #> # 
-#> # Columns: [ 5 x 5 | 2 ]
+#> # Columns (symmetric): [ 5 x 5 | 2 ]
 #>     PC1     PC2    PC3 ... |   .name  year
 #>                            |   <chr> <int>
 #> 1 -1.99  0.318   0.291     | 1 1940   1940
@@ -240,7 +240,7 @@ eurodist %>%
 #> # A tbl_ord of class 'cmds_ord': (21 x 11) x (21 x 11)'
 #> # 11 coordinates: PCo1, PCo2, ..., PCo11
 #> # 
-#> # Rows: [ 21 x 11 | 1 ]
+#> # Rows (symmetric): [ 21 x 11 | 1 ]
 #>     PCo1  PCo2   PCo3 ... |   .name    
 #>                           |   <chr>    
 #> 1 2290.  1799.   53.8     | 1 Athens   
@@ -250,7 +250,7 @@ eurodist %>%
 #> 5 -352.  -291.  457.      | 5 Cherbourg
 #> # … with 16 more rows
 #> # 
-#> # Columns: [ 21 x 11 | 1 ]
+#> # Columns (symmetric): [ 21 x 11 | 1 ]
 #>     PCo1  PCo2   PCo3 ... |   .name    
 #>                           |   <chr>    
 #> 1 2290.  1799.   53.8     | 1 Athens   
@@ -314,7 +314,7 @@ Biplots*](https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550)
 by John C. Gower, David J. Hand, Sugnet Gardner Lubbe, and Niel J. Le
 Roux.
 
-## notes
+### notes
 
 1.  The term *ordination* is most prevalent among ecologists; to my
     knowledge, no catch-all term is in common use outside ecology.

@@ -27,7 +27,7 @@ reference:
   - '`conference`'
   - '`supplementation`'
   - '`tbl_ord`'
-  - '`format`'
+  - 'format.tbl_ord'
   - 'plot.tbl_ord'
   - '`dplyr-verbs`'
 - title: "Layered grammar for biplots"
