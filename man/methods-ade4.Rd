@@ -54,8 +54,11 @@ air_quality[, seq(4L)] \%>\%
   print() -> air_nipals
 # summarize ordination
 glance(air_nipals)
-# bind dates to observation coordinates
-(air_nipals <- bind_cols_rows(air_nipals, air_quality[, 5L, drop = FALSE]))
+# bind dates and missingness flags to observation coordinates
+air_nipals \%>\%
+  bind_cols_rows(air_quality[, 5L, drop = FALSE]) \%>\%
+  mutate_rows(missingness = apply(is.na(air_quality[, 1:4]), 1L, any)) ->
+  air_nipals
 # by default, inertia is conferred to rows
 get_conference(air_nipals)
 # recover observation principal coordinates and measurement standard coordinates
@@ -87,7 +90,9 @@ air_nipals \%>\%
   geom_cols_vector(color = "#444444") +
   geom_cols_text_radiate(aes(label = .name), color = "#444444") +
   stat_rows_ellipse(aes(color = format(Date, "\%b"))) +
-  geom_rows_point(aes(color = format(Date, "\%b")), size = 2, alpha = .5) +
+  geom_rows_point(aes(color = format(Date, "\%b")), size = 1, alpha = .5) +
+  geom_rows_point(aes(shape = missingness), size = 3) +
+  scale_shape_manual(values = c(`TRUE` = 1L, `FALSE` = NA)) +
   ggtitle("Row-principal PCA biplot of 1973 air quality measurements") +
   labs(color = "Month")
 }
