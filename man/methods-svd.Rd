@@ -75,7 +75,7 @@ spend_svd \%>\%
   geom_rows_label(size = 3) +
   geom_cols_vector() +
   # omit labels in the hull with the origin
-  geom_cols_text_radiate(stat = "chull") +
+  geom_cols_text_radiate(stat = "cone") +
   ggtitle(
     "U.S. Personal Expenditure data, 1940-1960",
     "Row-principal biplot of SVD"

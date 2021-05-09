@@ -7,8 +7,9 @@ USPersonalExpenditure %>%
            sec.axes = "cols", scale.factor = 50) +
   geom_rows_label(size = 3) +
   geom_cols_vector() +
-  # omit labels in the hull with the origin
-  geom_cols_text_radiate(stat = "chull") +
+  # omit labels in the conical hull without the origin
+  stat_cols_cone(linetype = "dotted") +
+  geom_cols_text_radiate(stat = "cone") +
   ggtitle(
     "U.S. Personal Expenditure data, 1940-1960",
     "Row-principal biplot of centered PCA"
@@ -22,8 +23,9 @@ USPersonalExpenditure %>%
   ggbiplot(aes(label = .name), clip = "off") +
   geom_rows_label(size = 3) +
   geom_cols_vector() +
-  # omit labels in the hull with the origin
-  geom_cols_text_radiate(stat = "chull", conical = TRUE) +
+  # omit labels in the conical hull with the origin
+  stat_cols_cone(linetype = "dotted") +
+  geom_cols_text_radiate(stat = "cone") +
   scale_x_continuous(expand = expansion(add = 1), trans = "reverse") +
   ggtitle(
     "U.S. Personal Expenditure data, 1940-1960",

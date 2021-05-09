@@ -94,6 +94,7 @@ Collate:
     'ordr.r'
     'stat-center.r'
     'stat-chull.r'
+    'stat-cone.r'
     'stat-ellipse.r'
     'stat-matrix.r'
     'stat-scale.r'
