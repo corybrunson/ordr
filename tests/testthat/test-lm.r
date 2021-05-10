@@ -1,4 +1,3 @@
-library(ordr)
 context("linear regression, classes 'lm', 'glm', and 'mlm'")
 
 fit_lm0 <- lm(data = mtcars, formula = mpg ~ wt + hp + as.factor(cyl) + 0)

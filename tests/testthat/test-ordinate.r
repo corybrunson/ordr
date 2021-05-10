@@ -1,4 +1,3 @@
-library(ordr)
 context("ordinate function")
 
 set.seed(1)

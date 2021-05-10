@@ -1,4 +1,3 @@
-library(ordr)
 context("principal components analysis, class 'princomp'")
 
 fit_princomp <- princomp(iris[, -5], cor = FALSE)

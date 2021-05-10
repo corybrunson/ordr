@@ -1,4 +1,3 @@
-library(ordr)
 context("fortification")
 
 # arbitrary ordination object
