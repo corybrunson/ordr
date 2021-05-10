@@ -8,7 +8,7 @@
 
 #' @name ordinate
 #' @importFrom rlang expr enexpr enexprs enquo set_names
-#' @importFrom rlang  is_formula is_function as_function
+#' @importFrom rlang  is_formula is_function as_function is_empty
 #' @importFrom tidyselect eval_select
 #' @param data A data frame.
 #' @param cols <[`tidy-select`][tidyr::tidyr_tidy_select]> Columns of `data` to
@@ -44,7 +44,7 @@ ordinate <- function(
   # augment ordination with model specs
   ord <- augment_ord(ord)
   # bind augmentation columns to row data
-  ord <- bind_cols_rows(ord, data_aug)
+  if (! is_empty(data_aug)) ord <- bind_cols_rows(ord, data_aug)
   
   ord
 }
