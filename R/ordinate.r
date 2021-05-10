@@ -3,13 +3,16 @@
 #' @description 
 
 #' @name ordinate
-#' @importFrom rlang expr enexpr enexprs enquo set_names is_formula is_function
+#' @importFrom rlang expr enexpr enexprs enquo set_names
+#' @importFrom rlang  is_formula is_function as_function
 #' @importFrom tidyselect eval_select
 #' @param data A data frame.
 #' @param cols <[`tidy-select`][tidyr::tidyr_tidy_select]> Columns of `data` to
 #'   pass to `model`.
 #' @param model An ordination function whose output is coercible to class
-#'   '[tbl_ord]'.
+#'   '[tbl_ord]'. Alternatively, a formula `~ fun(., ...)` where `fun` is such a
+#'   function and other arguments are explicit, which will be evaluated with
+#'   `data` in place of `.`.
 #' @param augment <[`tidy-select`][tidyr_tidy_select]> Columns of `data` to
 #'   augment to the row data of the ordination.
 #' @param ... Additional arguments passed to `model`.
@@ -28,13 +31,9 @@ ordinate <- function(
   data_aug <- set_names(data[aug_pos], names(aug_pos))
   
   # fit the ordination model
-  if (is_formula(model)) {
-    stop("Not yet implemented.")
-  } else if (is_function(model)) {
-    ord <- model(data_ord, ...)
-  } else {
-    stop("Unrecognized model type; pass a formula or a function.")
-  }
+  # adapted from `purrr::as_mapper()`
+  if (is_formula(model)) model <- as_function(model)
+  ord <- model(data_ord, ...)
   
   # coerce to class 'tbl_ord'
   ord <- as_tbl_ord(ord)

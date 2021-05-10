@@ -13,7 +13,9 @@ ordinate(data, cols, model, augment = NULL, ...)
 pass to \code{model}.}
 
 \item{model}{An ordination function whose output is coercible to class
-'\link{tbl_ord}'.}
+'\link{tbl_ord}'. Alternatively, a formula \code{~ fun(., ...)} where \code{fun} is such a
+function and other arguments are explicit, which will be evaluated with
+\code{data} in place of \code{.}.}
 
 \item{augment}{<\code{\link[=tidyr_tidy_select]{tidy-select}}> Columns of \code{data} to
 augment to the row data of the ordination.}
@@ -25,8 +27,8 @@ Specify columns of a data frame to ordinate and augment
 }
 \examples{
 # PCA of iris data
-ordinate(iris, 1:4, prcomp)
 ordinate(iris, -Species, princomp, augment = c(Sepal.Width, Species))
+ordinate(iris, 1:4, ~ prcomp(., center = TRUE, scale. = TRUE))
 # LRA of arrest data
 ordinate(USArrests, cols = c(Murder, Rape, Assault), lra)
 # CA of hair & eye color data
