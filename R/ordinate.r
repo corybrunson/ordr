@@ -1,6 +1,10 @@
-#' @title Specify columns of a data frame to ordinate and augment
-#' 
-#' @description 
+#' @title Fit an ordination model to columns of a data frame
+#'
+#' @description This is a convenience function to fit an ordination model to a
+#'   specified subset of columns of a data frame and augment the tbl_ord object
+#'   with both its intrinsic diagnostics (via `[augment_ord()]`) and any
+#'   additional columns of the data frame (via `[bind_cols_rows()]`).
+#'   
 
 #' @name ordinate
 #' @importFrom rlang expr enexpr enexprs enquo set_names

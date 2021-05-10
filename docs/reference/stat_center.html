@@ -212,6 +212,23 @@ filter the data frame to one of these two.</p>
 stat in order to render plot elements for the corresponding factor matrix.
 <code>geom_dims_*()</code> selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.</p>
+    <h2 class="hasAnchor" id="ordination-aesthetics"><a class="anchor" href="#ordination-aesthetics"></a>Ordination aesthetics</h2>
+
+    
+
+<p>The convenience function <code>[ord_aes()]</code> can be used to incorporate all
+coordinates of the ordination model into a statistical transformation. It
+maps the coordinates to the custom aesthetics <code>..coord1</code>, <code>..coord2</code>, etc.</p>
+<p>Some transformations, e.g. <code>[stat_center()]</code>, are commutative with projection
+to the 'x' and 'y' coordinates. If they detect aesthetics of the form
+<code>..coord[0-9]+</code>, then <code>..coord1</code> and <code>..coord2</code> are converted to <code>x</code> and <code>y</code>
+while any remaining are ignored.</p>
+<p>Other transformations, e.g. <code>stat_spantree()]</code>, yield different results in a
+planar biplot when they are computer before or after projection. If such a
+stat layer detects these aesthetics, then the lot of them are used in the
+transformation.</p>
+<p>In either case, the stat layer returns a data frame with position aesthetics
+<code>x</code> and <code>y</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other stat layers: 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ordinate.r
 \name{ordinate}
 \alias{ordinate}
-\title{Specify columns of a data frame to ordinate and augment}
+\title{Fit an ordination model to columns of a data frame}
 \usage{
 ordinate(data, cols, model, augment = NULL, ...)
 }
@@ -23,7 +23,10 @@ augment to the row data of the ordination.}
 \item{...}{Additional arguments passed to \code{model}.}
 }
 \description{
-Specify columns of a data frame to ordinate and augment
+This is a convenience function to fit an ordination model to a
+specified subset of columns of a data frame and augment the tbl_ord object
+with both its intrinsic diagnostics (via \verb{[augment_ord()]}) and any
+additional columns of the data frame (via \verb{[bind_cols_rows()]}).
 }
 \examples{
 # PCA of iris data

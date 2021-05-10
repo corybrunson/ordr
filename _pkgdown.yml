@@ -30,6 +30,7 @@ reference:
   - 'format.tbl_ord'
   - 'plot.tbl_ord'
   - '`dplyr-verbs`'
+  - 'ordinate'
 - title: "Layered grammar for biplots"
   desc: >
     Functions to generate and annotate biplots from 'tbl_ord' objects, following
