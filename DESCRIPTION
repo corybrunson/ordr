@@ -91,6 +91,7 @@ Collate:
     'ord-plot.r'
     'ord-supplementation.r'
     'ord-tidiers.r'
+    'ordinate.r'
     'ordr.r'
     'stat-center.r'
     'stat-chull.r'
