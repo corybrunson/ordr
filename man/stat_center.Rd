@@ -92,6 +92,26 @@ stat in order to render plot elements for the corresponding factor matrix.
 points for rows and arrows for columns.
 }
 
+\section{Ordination aesthetics}{
+
+The convenience function \verb{[ord_aes()]} can be used to incorporate all
+coordinates of the ordination model into a statistical transformation. It
+maps the coordinates to the custom aesthetics \code{..coord1}, \code{..coord2}, etc.
+
+Some transformations, e.g. \verb{[stat_center()]}, are commutative with projection
+to the 'x' and 'y' coordinates. If they detect aesthetics of the form
+\verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and \code{y}
+while any remaining are ignored.
+
+Other transformations, e.g. \verb{stat_spantree()]}, yield different results in a
+planar biplot when they are computer before or after projection. If such a
+stat layer detects these aesthetics, then the lot of them are used in the
+transformation.
+
+In either case, the stat layer returns a data frame with position aesthetics
+\code{x} and \code{y}.
+}
+
 \examples{
 # scaled PCA of Anderson iris measurements
 iris[, -5] \%>\%

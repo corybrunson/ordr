@@ -2,6 +2,7 @@
 #'
 
 #' @template biplot-layers
+#' @template biplot-ord-aes
 
 #' @inheritParams ggplot2::layer
 #' @param mult Numeric value used to scale the coordinates.
@@ -92,11 +93,7 @@ StatScale <- ggproto(
   
   compute_group = function(data, scales,
                            mult = 1) {
-    ord_cols <- get_ord_aes(data)
-    
-    # scale designated columns
-    data[, ord_cols] <- data[, ord_cols] * mult
-    
+    data[, c("x", "y")] <- data[, c("x", "y")] * mult
     data
   }
 )
@@ -108,7 +105,7 @@ StatScale <- ggproto(
 StatRowsScale <- ggproto(
   "StatRowsScale", StatScale,
   
-  setup_data = setup_rows_data
+  setup_data = setup_rows_xy_data
 )
 
 #' @rdname ordr-ggproto
@@ -118,5 +115,5 @@ StatRowsScale <- ggproto(
 StatColsScale <- ggproto(
   "StatColsScale", StatScale,
   
-  setup_data = setup_cols_data
+  setup_data = setup_cols_xy_data
 )

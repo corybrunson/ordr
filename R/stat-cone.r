@@ -5,6 +5,7 @@
 #'   
 
 #' @template biplot-layers
+#' @template biplot-ord-aes
 
 #' @inheritParams ggplot2::layer
 #' @template param-stat

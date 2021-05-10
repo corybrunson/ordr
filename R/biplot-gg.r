@@ -33,7 +33,7 @@
 #' ordination.
 #'
 #' `ord_aes()` is a convenience function that generates a full-rank set of
-#' coordinate aesthetics `.coord1`, `.coord2`, etc. mapped to the
+#' coordinate aesthetics `..coord1`, `..coord2`, etc. mapped to the
 #' shared coordinates of the ordination object, along with any additional
 #' aesthetics that are processed internally by [ggplot2::aes()].
 #' 

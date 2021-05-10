@@ -99,5 +99,4 @@ Collate:
     'stat-matrix.r'
     'stat-scale.r'
     'stat-spantree.r'
-    'stat-utils.r'
     'themes.r'

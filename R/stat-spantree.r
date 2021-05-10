@@ -14,12 +14,6 @@
 #' calculate the MST. The result is formatted with position aesthetics readable
 #' by [ggplot2::geom_segment()].
 #'
-#' If any aesthetics of the form `.coord[0-9]+` are detected, then the lot of
-#' them are used to calculate distances/dissimilarities. These should not be
-#' assigend manually but generated using the convenience function [ord_aes()]
-#' (see the examples). Otherwise, `x` and `y` are used. Either way, `x` and `y`
-#' provide the position aesthetics.
-#'
 #' An MST calculated on `x` and `y` reflects the distances among the points in
 #' \eqn{X} in the reduced-dimension plane of the biplot. In contrast, one
 #' calculated on the full set of coordinates reflects distances in
@@ -33,6 +27,7 @@
 #'   
 
 #' @template biplot-layers
+#' @template biplot-ord-aes
 
 #' @inheritParams ggplot2::layer
 #' @param method Passed to [stats::dist()].
