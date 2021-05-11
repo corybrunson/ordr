@@ -93,177 +93,191 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"corybrunson/ordr"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="pca-example" class="section level3">
+<div id="example" class="section level3">
 <h3 class="hasAnchor">
-<a href="#pca-example" class="anchor"></a>PCA example</h3>
-<p>Principal components analysis (PCA) is by far the most widely-used ordination technique. This example performs an uncentered PCA on a small data set of personal expenditures over twenty years and represents the data in a symmetric biplot. At each step the result is printed, so that the user can see the effect of each step on the <code>prcomp</code> object.</p>
+<a href="#example" class="anchor"></a>example</h3>
+<p>A very common illustration of ordination in R uses Anderson’s iris measurements, consisting of lengths and widths of the petals and surrounding sepals from 50 each of three species of iris:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">USPersonalExpenditure</span>
-<span class="co">#&gt;                       1940   1945  1950 1955  1960</span>
-<span class="co">#&gt; Food and Tobacco    22.200 44.500 59.60 73.2 86.80</span>
-<span class="co">#&gt; Household Operation 10.500 15.500 29.00 36.5 46.20</span>
-<span class="co">#&gt; Medical and Health   3.530  5.760  9.71 14.0 21.10</span>
-<span class="co">#&gt; Personal Care        1.040  1.980  2.45  3.4  5.40</span>
-<span class="co">#&gt; Private Education    0.341  0.974  1.80  2.6  3.64</span>
-<span class="co"># perform principal components analysis</span>
-<span class="op">(</span><span class="va">spend_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">USPersonalExpenditure</span>, center <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Standard deviations (1, .., p=5):</span>
-<span class="co">#&gt; [1] 78.04471215  3.95649695  1.26733701  0.18412188  0.04367521</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>
+<span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span>
+<span class="co">#&gt; 1          5.1         3.5          1.4         0.2  setosa</span>
+<span class="co">#&gt; 2          4.9         3.0          1.4         0.2  setosa</span>
+<span class="co">#&gt; 3          4.7         3.2          1.3         0.2  setosa</span>
+<span class="co">#&gt; 4          4.6         3.1          1.5         0.2  setosa</span>
+<span class="co">#&gt; 5          5.0         3.6          1.4         0.2  setosa</span>
+<span class="co">#&gt; 6          5.4         3.9          1.7         0.4  setosa</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>
+<span class="co">#&gt;   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   </span>
+<span class="co">#&gt;  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  </span>
+<span class="co">#&gt;  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  </span>
+<span class="co">#&gt;  Median :5.800   Median :3.000   Median :4.350   Median :1.300  </span>
+<span class="co">#&gt;  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  </span>
+<span class="co">#&gt;  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  </span>
+<span class="co">#&gt;  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  </span>
+<span class="co">#&gt;        Species  </span>
+<span class="co">#&gt;  setosa    :50  </span>
+<span class="co">#&gt;  versicolor:50  </span>
+<span class="co">#&gt;  virginica :50  </span>
+<span class="co">#&gt;                 </span>
+<span class="co">#&gt;                 </span>
+<span class="co">#&gt; </span></code></pre></div>
+<p>An unsupervised ordination approach to these data is principal components analysis (PCA). Because a flower’s sepals tend to be larger than its petals (and their lengths greater than their widths), the measurements should be scaled as well as centered before the PCA:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="op">(</span><span class="va">iris_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, scale. <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Standard deviations (1, .., p=4):</span>
+<span class="co">#&gt; [1] 1.7083611 0.9560494 0.3830886 0.1439265</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Rotation (n x k) = (5 x 5):</span>
-<span class="co">#&gt;             PC1         PC2        PC3         PC4         PC5</span>
-<span class="co">#&gt; 1940 -0.1589586  0.11313761  0.1824780 -0.89728506 -0.35144462</span>
-<span class="co">#&gt; 1945 -0.3016855  0.79223017 -0.5274149  0.02654943  0.04985844</span>
-<span class="co">#&gt; 1950 -0.4293572  0.21081041  0.6202698 -0.01464040  0.62150007</span>
-<span class="co">#&gt; 1955 -0.5323309  0.02659741  0.3024320  0.42107353 -0.66869157</span>
-<span class="co">#&gt; 1960 -0.6449761 -0.56073415 -0.4607988 -0.12906349  0.20146975</span>
-<span class="co"># wrap the model as a `tbl_ord` object</span>
-<span class="op">(</span><span class="va">spend_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">spend_pca</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'</span>
-<span class="co">#&gt; # 5 coordinates: PC1, PC2, ..., PC5</span>
+<span class="co">#&gt; Rotation (n x k) = (4 x 4):</span>
+<span class="co">#&gt;                     PC1         PC2        PC3        PC4</span>
+<span class="co">#&gt; Sepal.Length  0.5210659 -0.37741762  0.7195664  0.2612863</span>
+<span class="co">#&gt; Sepal.Width  -0.2693474 -0.92329566 -0.2443818 -0.1235096</span>
+<span class="co">#&gt; Petal.Length  0.5804131 -0.02449161 -0.1421264 -0.8014492</span>
+<span class="co">#&gt; Petal.Width   0.5648565 -0.06694199 -0.6342727  0.5235971</span></code></pre></div>
+<p><strong>ordr</strong> provides a new class, ‘tbl_ord’, that wraps ordination objects like those of ‘prcomp’ without directly modifying them. The original model can be recovered with <code><a href="reference/tbl_ord.html">un_tbl_ord()</a></code>.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="op">(</span><span class="va">iris_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'</span>
+<span class="co">#&gt; # 4 coordinates: PC1, PC2, ..., PC4</span>
 <span class="co">#&gt; # </span>
-<span class="co">#&gt; # Rows (principal): [ 5 x 5 | 0 ]</span>
-<span class="co">#&gt;       PC1    PC2    PC3 ... | </span>
-<span class="co">#&gt;                             | </span>
-<span class="co">#&gt; 1 -137.    3.61  -0.310     | </span>
-<span class="co">#&gt; 2  -68.0  -5.35   1.48  ... | </span>
-<span class="co">#&gt; 3  -27.5  -4.45  -1.86      | </span>
-<span class="co">#&gt; 4   -7.11 -0.735 -0.795     | </span>
-<span class="co">#&gt; 5   -4.85 -0.782 -0.226     | </span>
+<span class="co">#&gt; # Rows (principal): [ 150 x 4 | 0 ]</span>
+<span class="co">#&gt;     PC1    PC2     PC3 ... | </span>
+<span class="co">#&gt;                            | </span>
+<span class="co">#&gt; 1 -2.26 -0.478  0.127      | </span>
+<span class="co">#&gt; 2 -2.07  0.672  0.234  ... | </span>
+<span class="co">#&gt; 3 -2.36  0.341 -0.0441     | </span>
+<span class="co">#&gt; 4 -2.29  0.595 -0.0910     | </span>
+<span class="co">#&gt; 5 -2.38 -0.645 -0.0157     | </span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt; # </span>
-<span class="co">#&gt; # Columns (standard): [ 5 x 5 | 0 ]</span>
+<span class="co">#&gt; # Columns (standard): [ 4 x 4 | 0 ]</span>
 <span class="co">#&gt;      PC1     PC2    PC3 ... | </span>
 <span class="co">#&gt;                             | </span>
-<span class="co">#&gt; 1 -0.159  0.113   0.182     | </span>
-<span class="co">#&gt; 2 -0.302  0.792  -0.527 ... | </span>
-<span class="co">#&gt; 3 -0.429  0.211   0.620     | </span>
-<span class="co">#&gt; 4 -0.532  0.0266  0.302     | </span>
-<span class="co">#&gt; 5 -0.645 -0.561  -0.461     |</span>
-<span class="co"># augment the cases and variables with metadata</span>
-<span class="op">(</span><span class="va">spend_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/augmentation.html">augment_ord</a></span><span class="op">(</span><span class="va">spend_pca</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'</span>
-<span class="co">#&gt; # 5 coordinates: PC1, PC2, ..., PC5</span>
+<span class="co">#&gt; 1  0.521 -0.377   0.720     | </span>
+<span class="co">#&gt; 2 -0.269 -0.923  -0.244 ... | </span>
+<span class="co">#&gt; 3  0.580 -0.0245 -0.142     | </span>
+<span class="co">#&gt; 4  0.565 -0.0669 -0.634     |</span></code></pre></div>
+<p>The <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> method for ‘tbl_ord’ is based on that of tibbles. Like that for <strong>tidygraph</strong>’s ‘tbl_graph’, it prints two tibbles, one for each matrix factor (in PCA, the case scores and the variable loadings of the original data matrix). The header reminds us of the dimensions of the matrix factors and how the inertia is distributed (in PCA, with the scores in principal coordinates and the loadings in standard coordinates).</p>
+<p>Analogous to <code><a href="https://generics.r-lib.org/reference/augment.html">broom::augment()</a></code>, this tbl_ord-specific function preserves the class but augments the row and column tibbles with any metadata or diagnostics contained in the model object. Vertical bars separate the coordinate matrices from other columns.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="op">(</span><span class="va">iris_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/augmentation.html">augment_ord</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'</span>
+<span class="co">#&gt; # 4 coordinates: PC1, PC2, ..., PC4</span>
 <span class="co">#&gt; # </span>
-<span class="co">#&gt; # Rows (principal): [ 5 x 5 | 1 ]</span>
-<span class="co">#&gt;       PC1    PC2    PC3 ... |   .name              </span>
-<span class="co">#&gt;                             |   &lt;chr&gt;              </span>
-<span class="co">#&gt; 1 -137.    3.61  -0.310     | 1 Food and Tobacco   </span>
-<span class="co">#&gt; 2  -68.0  -5.35   1.48  ... | 2 Household Operation</span>
-<span class="co">#&gt; 3  -27.5  -4.45  -1.86      | 3 Medical and Health </span>
-<span class="co">#&gt; 4   -7.11 -0.735 -0.795     | 4 Personal Care      </span>
-<span class="co">#&gt; 5   -4.85 -0.782 -0.226     | 5 Private Education  </span>
+<span class="co">#&gt; # Rows (principal): [ 150 x 4 | 0 ]</span>
+<span class="co">#&gt;     PC1    PC2     PC3 ... | </span>
+<span class="co">#&gt;                            | </span>
+<span class="co">#&gt; 1 -2.26 -0.478  0.127      | </span>
+<span class="co">#&gt; 2 -2.07  0.672  0.234  ... | </span>
+<span class="co">#&gt; 3 -2.36  0.341 -0.0441     | </span>
+<span class="co">#&gt; 4 -2.29  0.595 -0.0910     | </span>
+<span class="co">#&gt; 5 -2.38 -0.645 -0.0157     | </span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt; # </span>
-<span class="co">#&gt; # Columns (standard): [ 5 x 5 | 1 ]</span>
-<span class="co">#&gt;      PC1     PC2    PC3 ... |   .name</span>
-<span class="co">#&gt;                             |   &lt;chr&gt;</span>
-<span class="co">#&gt; 1 -0.159  0.113   0.182     | 1 1940 </span>
-<span class="co">#&gt; 2 -0.302  0.792  -0.527 ... | 2 1945 </span>
-<span class="co">#&gt; 3 -0.429  0.211   0.620     | 3 1950 </span>
-<span class="co">#&gt; 4 -0.532  0.0266  0.302     | 4 1955 </span>
-<span class="co">#&gt; 5 -0.645 -0.561  -0.461     | 5 1960</span>
-<span class="co"># annotate the cases or variables</span>
-<span class="op">(</span><span class="va">spend_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/dplyr-verbs.html">mutate_cols</a></span><span class="op">(</span><span class="va">spend_pca</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">.name</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'</span>
-<span class="co">#&gt; # 5 coordinates: PC1, PC2, ..., PC5</span>
+<span class="co">#&gt; # Columns (standard): [ 4 x 4 | 3 ]</span>
+<span class="co">#&gt;      PC1     PC2    PC3 ... |   .name        .center .scale</span>
+<span class="co">#&gt;                             |   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;</span>
+<span class="co">#&gt; 1  0.521 -0.377   0.720     | 1 Sepal.Length    5.84  0.828</span>
+<span class="co">#&gt; 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width     3.06  0.436</span>
+<span class="co">#&gt; 3  0.580 -0.0245 -0.142     | 3 Petal.Length    3.76  1.77 </span>
+<span class="co">#&gt; 4  0.565 -0.0669 -0.634     | 4 Petal.Width     1.20  0.762</span></code></pre></div>
+<p>Additional row- and column-level variables can be augmented and manipulated using a handful of <strong>dplyr</strong>-like verbs, each specific to the matrix factor being affected (<code>rows</code> or <code>cols</code>):</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="op">(</span><span class="va">iris_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/dplyr-verbs.html">mutate_rows</a></span><span class="op">(</span><span class="va">iris_pca</span>, Species <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'</span>
+<span class="co">#&gt; # 4 coordinates: PC1, PC2, ..., PC4</span>
 <span class="co">#&gt; # </span>
-<span class="co">#&gt; # Rows (principal): [ 5 x 5 | 1 ]</span>
-<span class="co">#&gt;       PC1    PC2    PC3 ... |   .name              </span>
-<span class="co">#&gt;                             |   &lt;chr&gt;              </span>
-<span class="co">#&gt; 1 -137.    3.61  -0.310     | 1 Food and Tobacco   </span>
-<span class="co">#&gt; 2  -68.0  -5.35   1.48  ... | 2 Household Operation</span>
-<span class="co">#&gt; 3  -27.5  -4.45  -1.86      | 3 Medical and Health </span>
-<span class="co">#&gt; 4   -7.11 -0.735 -0.795     | 4 Personal Care      </span>
-<span class="co">#&gt; 5   -4.85 -0.782 -0.226     | 5 Private Education  </span>
+<span class="co">#&gt; # Rows (principal): [ 150 x 4 | 1 ]</span>
+<span class="co">#&gt;     PC1    PC2     PC3 ... |   Species</span>
+<span class="co">#&gt;                            |   &lt;fct&gt;  </span>
+<span class="co">#&gt; 1 -2.26 -0.478  0.127      | 1 setosa </span>
+<span class="co">#&gt; 2 -2.07  0.672  0.234  ... | 2 setosa </span>
+<span class="co">#&gt; 3 -2.36  0.341 -0.0441     | 3 setosa </span>
+<span class="co">#&gt; 4 -2.29  0.595 -0.0910     | 4 setosa </span>
+<span class="co">#&gt; 5 -2.38 -0.645 -0.0157     | 5 setosa </span>
+<span class="co">#&gt; # … with 145 more rows</span>
 <span class="co">#&gt; # </span>
-<span class="co">#&gt; # Columns (standard): [ 5 x 5 | 2 ]</span>
-<span class="co">#&gt;      PC1     PC2    PC3 ... |   .name  year</span>
-<span class="co">#&gt;                             |   &lt;chr&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1 -0.159  0.113   0.182     | 1 1940   1940</span>
-<span class="co">#&gt; 2 -0.302  0.792  -0.527 ... | 2 1945   1945</span>
-<span class="co">#&gt; 3 -0.429  0.211   0.620     | 3 1950   1950</span>
-<span class="co">#&gt; 4 -0.532  0.0266  0.302     | 4 1955   1955</span>
-<span class="co">#&gt; 5 -0.645 -0.561  -0.461     | 5 1960   1960</span>
-<span class="co"># confer inertia equally between cases and variables</span>
-<span class="op">(</span><span class="va">spend_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/conference.html">confer_inertia</a></span><span class="op">(</span><span class="va">spend_pca</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'</span>
-<span class="co">#&gt; # 5 coordinates: PC1, PC2, ..., PC5</span>
+<span class="co">#&gt; # Columns (standard): [ 4 x 4 | 3 ]</span>
+<span class="co">#&gt;      PC1     PC2    PC3 ... |   .name        .center .scale</span>
+<span class="co">#&gt;                             |   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;</span>
+<span class="co">#&gt; 1  0.521 -0.377   0.720     | 1 Sepal.Length    5.84  0.828</span>
+<span class="co">#&gt; 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width     3.06  0.436</span>
+<span class="co">#&gt; 3  0.580 -0.0245 -0.142     | 3 Petal.Length    3.76  1.77 </span>
+<span class="co">#&gt; 4  0.565 -0.0669 -0.634     | 4 Petal.Width     1.20  0.762</span></code></pre></div>
+<p>Because the above steps are so common when fitting ordination models to data frames, a convenience function is available to expedite them:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/ordinate.html">ordinate</a></span><span class="op">(</span><span class="va">iris</span>, cols <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, model <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">.</span>, scale. <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'</span>
+<span class="co">#&gt; # 4 coordinates: PC1, PC2, ..., PC4</span>
 <span class="co">#&gt; # </span>
-<span class="co">#&gt; # Rows (symmetric): [ 5 x 5 | 1 ]</span>
-<span class="co">#&gt;       PC1    PC2    PC3 ... |   .name              </span>
-<span class="co">#&gt;                             |   &lt;chr&gt;              </span>
-<span class="co">#&gt; 1 -11.0    1.28  -0.195     | 1 Food and Tobacco   </span>
-<span class="co">#&gt; 2  -5.44  -1.90   0.929 ... | 2 Household Operation</span>
-<span class="co">#&gt; 3  -2.20  -1.58  -1.17      | 3 Medical and Health </span>
-<span class="co">#&gt; 4  -0.569 -0.261 -0.499     | 4 Personal Care      </span>
-<span class="co">#&gt; 5  -0.388 -0.278 -0.142     | 5 Private Education  </span>
+<span class="co">#&gt; # Rows (principal): [ 150 x 4 | 1 ]</span>
+<span class="co">#&gt;     PC1    PC2     PC3 ... |   Species</span>
+<span class="co">#&gt;                            |   &lt;fct&gt;  </span>
+<span class="co">#&gt; 1 -2.26 -0.478  0.127      | 1 setosa </span>
+<span class="co">#&gt; 2 -2.07  0.672  0.234  ... | 2 setosa </span>
+<span class="co">#&gt; 3 -2.36  0.341 -0.0441     | 3 setosa </span>
+<span class="co">#&gt; 4 -2.29  0.595 -0.0910     | 4 setosa </span>
+<span class="co">#&gt; 5 -2.38 -0.645 -0.0157     | 5 setosa </span>
+<span class="co">#&gt; # … with 145 more rows</span>
 <span class="co">#&gt; # </span>
-<span class="co">#&gt; # Columns (symmetric): [ 5 x 5 | 2 ]</span>
-<span class="co">#&gt;     PC1     PC2    PC3 ... |   .name  year</span>
-<span class="co">#&gt;                            |   &lt;chr&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1 -1.99  0.318   0.291     | 1 1940   1940</span>
-<span class="co">#&gt; 2 -3.77  2.23   -0.840 ... | 2 1945   1945</span>
-<span class="co">#&gt; 3 -5.36  0.593   0.988     | 3 1950   1950</span>
-<span class="co">#&gt; 4 -6.65  0.0748  0.481     | 4 1955   1955</span>
-<span class="co">#&gt; 5 -8.06 -1.58   -0.734     | 5 1960   1960</span>
-<span class="co"># render a biplot, by default on the first two shared coordinates</span>
-<span class="fu"><a href="reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="va">spend_pca</span>, <span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="reference/biplot-geoms.html">geom_cols_vector</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="reference/biplot-geoms.html">geom_cols_text_radiate</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="reference/biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="reference/biplot-geoms.html">geom_rows_text_repel</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">expand_limits</span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">2.75</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">ggtitle</span><span class="op">(</span>
-    <span class="st">"U.S. Personal Expenditure data, 1940-1960"</span>,
-    <span class="st">"Symmetric biplot of un-centered PCA"</span>
-  <span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-PCA%20example-1.png"><!-- --></p>
-</div>
-<div id="mds-example" class="section level3">
-<h3 class="hasAnchor">
-<a href="#mds-example" class="anchor"></a>MDS example</h3>
-<p>Multidimensional scaling (MDS) is an ordination technique that starts not with rectangular data but with interpoint distances. A common illustration of its power is to calculate MDS on the set of distances—however measured—between geographic locations, and to recover the approximate geography via a biplot. This example is adapted from the documentation of <code><a href="https://rdrr.io/r/stats/cmdscale.html">cmdscale()</a></code> in the <strong>stats</strong> package; note that <strong>ordr</strong> provides the wrapper <code><a href="reference/wrap-ord.html">cmdscale_ord()</a></code> that always returns the eigenvalues and the symmetric distance matrix produced during the calculation. The MDS uses 11 coordinates—the number of positive eigenvalues—so that <code>stat_*_spantree()</code> can call upon them to recover the intercity distances.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># `tbl_ord` object for a classical MDS on distances between European cities</span>
-<span class="va">eurodist</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/wrap-ord.html">cmdscale_ord</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">11</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">city_mds</span>
-<span class="co">#&gt; # A tbl_ord of class 'cmds_ord': (21 x 11) x (21 x 11)'</span>
-<span class="co">#&gt; # 11 coordinates: PCo1, PCo2, ..., PCo11</span>
-<span class="co">#&gt; # </span>
-<span class="co">#&gt; # Rows (symmetric): [ 21 x 11 | 1 ]</span>
-<span class="co">#&gt;     PCo1  PCo2   PCo3 ... |   .name    </span>
-<span class="co">#&gt;                           |   &lt;chr&gt;    </span>
-<span class="co">#&gt; 1 2290.  1799.   53.8     | 1 Athens   </span>
-<span class="co">#&gt; 2 -825.   547. -114.  ... | 2 Barcelona</span>
-<span class="co">#&gt; 3   59.2 -367.  178.      | 3 Brussels </span>
-<span class="co">#&gt; 4  -82.8 -430.  300.      | 4 Calais   </span>
-<span class="co">#&gt; 5 -352.  -291.  457.      | 5 Cherbourg</span>
-<span class="co">#&gt; # … with 16 more rows</span>
-<span class="co">#&gt; # </span>
-<span class="co">#&gt; # Columns (symmetric): [ 21 x 11 | 1 ]</span>
-<span class="co">#&gt;     PCo1  PCo2   PCo3 ... |   .name    </span>
-<span class="co">#&gt;                           |   &lt;chr&gt;    </span>
-<span class="co">#&gt; 1 2290.  1799.   53.8     | 1 Athens   </span>
-<span class="co">#&gt; 2 -825.   547. -114.  ... | 2 Barcelona</span>
-<span class="co">#&gt; 3   59.2 -367.  178.      | 3 Brussels </span>
-<span class="co">#&gt; 4  -82.8 -430.  300.      | 4 Calais   </span>
-<span class="co">#&gt; 5 -352.  -291.  457.      | 5 Cherbourg</span>
-<span class="co">#&gt; # … with 16 more rows</span>
-<span class="co"># 2D biplot aligned with geography</span>
-<span class="va">city_mds</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="reference/theme_biplot.html">theme_biplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">scale_y_reverse</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="reference/biplot-stats.html">stat_cols_spantree</a></span><span class="op">(</span>
-    <span class="fu"><a href="reference/ggbiplot.html">ord_aes</a></span><span class="op">(</span><span class="va">city_mds</span><span class="op">)</span>, check.aes <span class="op">=</span> <span class="cn">FALSE</span>,
-    alpha <span class="op">=</span> <span class="fl">.5</span>, linetype <span class="op">=</span> <span class="st">"dotted"</span>
-  <span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="reference/biplot-geoms.html">geom_cols_text</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.name</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"MDS biplot of road distances between European cities"</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-MDS%20example-1.png"><!-- --></p>
+<span class="co">#&gt; # Columns (standard): [ 4 x 4 | 3 ]</span>
+<span class="co">#&gt;      PC1     PC2    PC3 ... |   .name        .center .scale</span>
+<span class="co">#&gt;                             |   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;</span>
+<span class="co">#&gt; 1  0.521 -0.377   0.720     | 1 Sepal.Length    5.84  0.828</span>
+<span class="co">#&gt; 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width     3.06  0.436</span>
+<span class="co">#&gt; 3  0.580 -0.0245 -0.142     | 3 Petal.Length    3.76  1.77 </span>
+<span class="co">#&gt; 4  0.565 -0.0669 -0.634     | 4 Petal.Width     1.20  0.762</span></code></pre></div>
+<p>Following <code><a href="https://generics.r-lib.org/reference/tidy.html">broom::tidy()</a></code>, this tidier for tbl_ords returns a tibble with one row per artificial coordinate (in this case, principal coordinate):[5]</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 4 x 4</span>
+<span class="co">#&gt;   .name .sdev .inertia .prop_var</span>
+<span class="co">#&gt;   &lt;fct&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 PC1   1.71    435.     0.730  </span>
+<span class="co">#&gt; 2 PC2   0.956   136.     0.229  </span>
+<span class="co">#&gt; 3 PC3   0.383    21.9    0.0367 </span>
+<span class="co">#&gt; 4 PC4   0.144     3.09   0.00518</span></code></pre></div>
+<p>The <code>.inertia</code> and <code>.prop_var</code> fields are calculated from the singular values or eigenvalues contained in the ordination object. This means that <code><a href="https://generics.r-lib.org/reference/tidy.html">tidy()</a></code> prepares any ordination object derived from such a decomposition for a scree plot using <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot2::ggplot()</a></code>:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">.name</span>, y <span class="op">=</span> <span class="va">.prop_var</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">"Proportion of inertia"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"PCA of Anderson's iris measurements"</span>,
+          <span class="st">"Distribution of inertia"</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-scree%20plot-1.png"><!-- --></p>
+<p>Following <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html">ggplot2::fortify()</a></code>, this fortifier combines the matrix factor tibbles into a single tibble with an additional <code>.matrix</code> column:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu">fortify</span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 6 x 9</span>
+<span class="co">#&gt;     PC1    PC2     PC3      PC4 Species .matrix .name .center .scale</span>
+<span class="co">#&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;fct&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 -2.26 -0.478  0.127   0.0241  setosa  rows    &lt;NA&gt;       NA     NA</span>
+<span class="co">#&gt; 2 -2.07  0.672  0.234   0.103   setosa  rows    &lt;NA&gt;       NA     NA</span>
+<span class="co">#&gt; 3 -2.36  0.341 -0.0441  0.0283  setosa  rows    &lt;NA&gt;       NA     NA</span>
+<span class="co">#&gt; 4 -2.29  0.595 -0.0910 -0.0657  setosa  rows    &lt;NA&gt;       NA     NA</span>
+<span class="co">#&gt; 5 -2.38 -0.645 -0.0157 -0.0358  setosa  rows    &lt;NA&gt;       NA     NA</span>
+<span class="co">#&gt; 6 -2.07 -1.48  -0.0269  0.00659 setosa  rows    &lt;NA&gt;       NA     NA</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu">fortify</span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 6 x 9</span>
+<span class="co">#&gt;      PC1     PC2    PC3     PC4 Species   .matrix .name        .center .scale</span>
+<span class="co">#&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;fct&gt;     &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;</span>
+<span class="co">#&gt; 1  1.37  -1.01   -0.930  0.0260 virginica rows    &lt;NA&gt;           NA    NA    </span>
+<span class="co">#&gt; 2  0.957  0.0243 -0.526 -0.163  virginica rows    &lt;NA&gt;           NA    NA    </span>
+<span class="co">#&gt; 3  0.521 -0.377   0.720  0.261  &lt;NA&gt;      cols    Sepal.Length    5.84  0.828</span>
+<span class="co">#&gt; 4 -0.269 -0.923  -0.244 -0.124  &lt;NA&gt;      cols    Sepal.Width     3.06  0.436</span>
+<span class="co">#&gt; 5  0.580 -0.0245 -0.142 -0.801  &lt;NA&gt;      cols    Petal.Length    3.76  1.77 </span>
+<span class="co">#&gt; 6  0.565 -0.0669 -0.634  0.524  &lt;NA&gt;      cols    Petal.Width     1.20  0.762</span></code></pre></div>
+<p>The <code>.matrix</code> column is used by the row- and column-specific parts of a <em>dual</em> layered grammar of graphics that yields a biplot:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="va">iris_pca</span>, sec.axes <span class="op">=</span> <span class="st">"cols"</span>, scale.factor <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="reference/biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">Species</span>, shape <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="reference/biplot-stats.html">stat_rows_ellipse</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">.5</span>, level <span class="op">=</span> <span class="fl">.99</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="reference/biplot-geoms.html">geom_cols_vector</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="reference/biplot-geoms.html">geom_cols_text_radiate</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">expand_limits</span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3.5</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"PCA of Anderson's iris measurements"</span>,
+          <span class="st">"99% confidence ellipses; variables on top &amp; right axes"</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-biplot-1.png"><!-- --></p>
+<p>Note several conveniences: The position aesthetics are assumed to be the first and second artifical coordinates, unless otherwise specified; by default, the aspect ratio is set to 1; and an optional secondary secondary can be specified for either matrix factor and marked along the top and right borders of the plotting window.[6]</p>
 </div>
 </div>
 <div id="acknowledgments" class="section level2">
@@ -286,6 +300,8 @@
 <p>[2] This is not a hard rule: PCA is often used to compress data before clustering, and LDA uses dimension reduction to perform classification tasks.</p>
 <p>[3] Regression and clustering models, like classical <a href="http://www.multivariatestatistics.org/chapter2.html">linear regression</a> and <a href="http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html"><em>k</em>-means</a>, can also be understood as matrix decomposition approximations and even visualized in biplots. Their shared coordinates, which are pre-defined rather than artificial, are the predictor coefficients and the cluster assignments, respectively. Methods for <code><a href="https://rdrr.io/r/stats/lm.html">stats::lm()</a></code> and <code><a href="https://rdrr.io/r/stats/kmeans.html">stats::kmeans()</a></code>, for example, are implemented for the sake of novelty and instruction, but are not widely used in practice.</p>
 <p>[4] Biplot elments must be chosen with care, and it is useful and appropriate that many model-specific biplot methods have limited flexibility. This package adopts the trade-off articulated in <a href="https://www.google.com/books/edition/_/iI1kcgAACAAJ">Wilkinson’s <em>The Grammar of Graphics</em></a> (p. 15): “This system is capable of producing some hideous graphics. There is nothing in its design to prevent its misuse. … This system cannot produce a meaningless graphic, however.”</p>
+<p>[5] Note that <code><a href="https://generics.r-lib.org/reference/tidy.html">ordr::tidy()</a></code> takes precedence for ‘tbl_ord’ objects because the ‘tbl_ord’ class precedes the underlying model class.</p>
+<p>[6] The radiating text geom, like other parts of the package, are adapted from the <strong>ggbiplot</strong> package.</p>
 </div>
 </div>
 </div>

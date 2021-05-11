@@ -83,195 +83,253 @@ using [**remotes**](https://github.com/r-lib/remotes):
 remotes::install_github("corybrunson/ordr")
 ```
 
-### PCA example
+### example
 
-Principal components analysis (PCA) is by far the most widely-used
-ordination technique. This example performs an uncentered PCA on a small
-data set of personal expenditures over twenty years and represents the
-data in a symmetric biplot. At each step the result is printed, so that
-the user can see the effect of each step on the `prcomp` object.
+A very common illustration of ordination in R uses Anderson’s iris
+measurements, consisting of lengths and widths of the petals and
+surrounding sepals from 50 each of three species of iris:
 
 ``` r
-USPersonalExpenditure
-#>                       1940   1945  1950 1955  1960
-#> Food and Tobacco    22.200 44.500 59.60 73.2 86.80
-#> Household Operation 10.500 15.500 29.00 36.5 46.20
-#> Medical and Health   3.530  5.760  9.71 14.0 21.10
-#> Personal Care        1.040  1.980  2.45  3.4  5.40
-#> Private Education    0.341  0.974  1.80  2.6  3.64
-# perform principal components analysis
-(spend_pca <- prcomp(USPersonalExpenditure, center = FALSE))
-#> Standard deviations (1, .., p=5):
-#> [1] 78.04471215  3.95649695  1.26733701  0.18412188  0.04367521
+head(iris)
+#>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#> 1          5.1         3.5          1.4         0.2  setosa
+#> 2          4.9         3.0          1.4         0.2  setosa
+#> 3          4.7         3.2          1.3         0.2  setosa
+#> 4          4.6         3.1          1.5         0.2  setosa
+#> 5          5.0         3.6          1.4         0.2  setosa
+#> 6          5.4         3.9          1.7         0.4  setosa
+summary(iris)
+#>   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
+#>  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+#>  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+#>  Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+#>  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+#>  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+#>  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
+#>        Species  
+#>  setosa    :50  
+#>  versicolor:50  
+#>  virginica :50  
+#>                 
+#>                 
 #> 
-#> Rotation (n x k) = (5 x 5):
-#>             PC1         PC2        PC3         PC4         PC5
-#> 1940 -0.1589586  0.11313761  0.1824780 -0.89728506 -0.35144462
-#> 1945 -0.3016855  0.79223017 -0.5274149  0.02654943  0.04985844
-#> 1950 -0.4293572  0.21081041  0.6202698 -0.01464040  0.62150007
-#> 1955 -0.5323309  0.02659741  0.3024320  0.42107353 -0.66869157
-#> 1960 -0.6449761 -0.56073415 -0.4607988 -0.12906349  0.20146975
-# wrap the model as a `tbl_ord` object
-(spend_pca <- as_tbl_ord(spend_pca))
-#> # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'
-#> # 5 coordinates: PC1, PC2, ..., PC5
+```
+
+An unsupervised ordination approach to these data is principal
+components analysis (PCA). Because a flower’s sepals tend to be larger
+than its petals (and their lengths greater than their widths), the
+measurements should be scaled as well as centered before the PCA:
+
+``` r
+(iris_pca <- prcomp(iris[, 1:4], scale. = TRUE))
+#> Standard deviations (1, .., p=4):
+#> [1] 1.7083611 0.9560494 0.3830886 0.1439265
+#> 
+#> Rotation (n x k) = (4 x 4):
+#>                     PC1         PC2        PC3        PC4
+#> Sepal.Length  0.5210659 -0.37741762  0.7195664  0.2612863
+#> Sepal.Width  -0.2693474 -0.92329566 -0.2443818 -0.1235096
+#> Petal.Length  0.5804131 -0.02449161 -0.1421264 -0.8014492
+#> Petal.Width   0.5648565 -0.06694199 -0.6342727  0.5235971
+```
+
+**ordr** provides a new class, ‘tbl\_ord’, that wraps ordination objects
+like those of ‘prcomp’ without directly modifying them. The original
+model can be recovered with `un_tbl_ord()`.
+
+``` r
+(iris_pca <- as_tbl_ord(iris_pca))
+#> # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
+#> # 4 coordinates: PC1, PC2, ..., PC4
 #> # 
-#> # Rows (principal): [ 5 x 5 | 0 ]
-#>       PC1    PC2    PC3 ... | 
-#>                             | 
-#> 1 -137.    3.61  -0.310     | 
-#> 2  -68.0  -5.35   1.48  ... | 
-#> 3  -27.5  -4.45  -1.86      | 
-#> 4   -7.11 -0.735 -0.795     | 
-#> 5   -4.85 -0.782 -0.226     | 
+#> # Rows (principal): [ 150 x 4 | 0 ]
+#>     PC1    PC2     PC3 ... | 
+#>                            | 
+#> 1 -2.26 -0.478  0.127      | 
+#> 2 -2.07  0.672  0.234  ... | 
+#> 3 -2.36  0.341 -0.0441     | 
+#> 4 -2.29  0.595 -0.0910     | 
+#> 5 -2.38 -0.645 -0.0157     | 
+#> 
 #> # 
-#> # Columns (standard): [ 5 x 5 | 0 ]
+#> # Columns (standard): [ 4 x 4 | 0 ]
 #>      PC1     PC2    PC3 ... | 
 #>                             | 
-#> 1 -0.159  0.113   0.182     | 
-#> 2 -0.302  0.792  -0.527 ... | 
-#> 3 -0.429  0.211   0.620     | 
-#> 4 -0.532  0.0266  0.302     | 
-#> 5 -0.645 -0.561  -0.461     |
-# augment the cases and variables with metadata
-(spend_pca <- augment_ord(spend_pca))
-#> # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'
-#> # 5 coordinates: PC1, PC2, ..., PC5
-#> # 
-#> # Rows (principal): [ 5 x 5 | 1 ]
-#>       PC1    PC2    PC3 ... |   .name              
-#>                             |   <chr>              
-#> 1 -137.    3.61  -0.310     | 1 Food and Tobacco   
-#> 2  -68.0  -5.35   1.48  ... | 2 Household Operation
-#> 3  -27.5  -4.45  -1.86      | 3 Medical and Health 
-#> 4   -7.11 -0.735 -0.795     | 4 Personal Care      
-#> 5   -4.85 -0.782 -0.226     | 5 Private Education  
-#> # 
-#> # Columns (standard): [ 5 x 5 | 1 ]
-#>      PC1     PC2    PC3 ... |   .name
-#>                             |   <chr>
-#> 1 -0.159  0.113   0.182     | 1 1940 
-#> 2 -0.302  0.792  -0.527 ... | 2 1945 
-#> 3 -0.429  0.211   0.620     | 3 1950 
-#> 4 -0.532  0.0266  0.302     | 4 1955 
-#> 5 -0.645 -0.561  -0.461     | 5 1960
-# annotate the cases or variables
-(spend_pca <- mutate_cols(spend_pca, year = as.integer(.name)))
-#> # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'
-#> # 5 coordinates: PC1, PC2, ..., PC5
-#> # 
-#> # Rows (principal): [ 5 x 5 | 1 ]
-#>       PC1    PC2    PC3 ... |   .name              
-#>                             |   <chr>              
-#> 1 -137.    3.61  -0.310     | 1 Food and Tobacco   
-#> 2  -68.0  -5.35   1.48  ... | 2 Household Operation
-#> 3  -27.5  -4.45  -1.86      | 3 Medical and Health 
-#> 4   -7.11 -0.735 -0.795     | 4 Personal Care      
-#> 5   -4.85 -0.782 -0.226     | 5 Private Education  
-#> # 
-#> # Columns (standard): [ 5 x 5 | 2 ]
-#>      PC1     PC2    PC3 ... |   .name  year
-#>                             |   <chr> <int>
-#> 1 -0.159  0.113   0.182     | 1 1940   1940
-#> 2 -0.302  0.792  -0.527 ... | 2 1945   1945
-#> 3 -0.429  0.211   0.620     | 3 1950   1950
-#> 4 -0.532  0.0266  0.302     | 4 1955   1955
-#> 5 -0.645 -0.561  -0.461     | 5 1960   1960
-# confer inertia equally between cases and variables
-(spend_pca <- confer_inertia(spend_pca, c(.5, .5)))
-#> # A tbl_ord of class 'prcomp': (5 x 5) x (5 x 5)'
-#> # 5 coordinates: PC1, PC2, ..., PC5
-#> # 
-#> # Rows (symmetric): [ 5 x 5 | 1 ]
-#>       PC1    PC2    PC3 ... |   .name              
-#>                             |   <chr>              
-#> 1 -11.0    1.28  -0.195     | 1 Food and Tobacco   
-#> 2  -5.44  -1.90   0.929 ... | 2 Household Operation
-#> 3  -2.20  -1.58  -1.17      | 3 Medical and Health 
-#> 4  -0.569 -0.261 -0.499     | 4 Personal Care      
-#> 5  -0.388 -0.278 -0.142     | 5 Private Education  
-#> # 
-#> # Columns (symmetric): [ 5 x 5 | 2 ]
-#>     PC1     PC2    PC3 ... |   .name  year
-#>                            |   <chr> <int>
-#> 1 -1.99  0.318   0.291     | 1 1940   1940
-#> 2 -3.77  2.23   -0.840 ... | 2 1945   1945
-#> 3 -5.36  0.593   0.988     | 3 1950   1950
-#> 4 -6.65  0.0748  0.481     | 4 1955   1955
-#> 5 -8.06 -1.58   -0.734     | 5 1960   1960
-# render a biplot, by default on the first two shared coordinates
-ggbiplot(spend_pca, aes(label = .name)) +
-  theme_bw() +
-  geom_cols_vector(aes(color = year)) +
-  geom_cols_text_radiate() +
-  geom_rows_point() +
-  geom_rows_text_repel() +
-  expand_limits(y = c(-2, 2.75)) +
-  ggtitle(
-    "U.S. Personal Expenditure data, 1940-1960",
-    "Symmetric biplot of un-centered PCA"
-  )
+#> 1  0.521 -0.377   0.720     | 
+#> 2 -0.269 -0.923  -0.244 ... | 
+#> 3  0.580 -0.0245 -0.142     | 
+#> 4  0.565 -0.0669 -0.634     |
 ```
 
-![](man/figures/README-PCA%20example-1.png)<!-- -->
+The `print()` method for ‘tbl\_ord’ is based on that of tibbles. Like
+that for **tidygraph**’s ‘tbl\_graph’, it prints two tibbles, one for
+each matrix factor (in PCA, the case scores and the variable loadings of
+the original data matrix). The header reminds us of the dimensions of
+the matrix factors and how the inertia is distributed (in PCA, with the
+scores in principal coordinates and the loadings in standard
+coordinates).
 
-### MDS example
-
-Multidimensional scaling (MDS) is an ordination technique that starts
-not with rectangular data but with interpoint distances. A common
-illustration of its power is to calculate MDS on the set of
-distances—however measured—between geographic locations, and to recover
-the approximate geography via a biplot. This example is adapted from the
-documentation of `cmdscale()` in the **stats** package; note that
-**ordr** provides the wrapper `cmdscale_ord()` that always returns the
-eigenvalues and the symmetric distance matrix produced during the
-calculation. The MDS uses 11 coordinates—the number of positive
-eigenvalues—so that `stat_*_spantree()` can call upon them to recover
-the intercity distances.
+Analogous to `broom::augment()`, this tbl\_ord-specific function
+preserves the class but augments the row and column tibbles with any
+metadata or diagnostics contained in the model object. Vertical bars
+separate the coordinate matrices from other columns.
 
 ``` r
-# `tbl_ord` object for a classical MDS on distances between European cities
-eurodist %>%
-  cmdscale_ord(k = 11) %>%
-  as_tbl_ord() %>%
-  augment_ord() %>%
-  print() -> city_mds
-#> # A tbl_ord of class 'cmds_ord': (21 x 11) x (21 x 11)'
-#> # 11 coordinates: PCo1, PCo2, ..., PCo11
+(iris_pca <- augment_ord(iris_pca))
+#> # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
+#> # 4 coordinates: PC1, PC2, ..., PC4
 #> # 
-#> # Rows (symmetric): [ 21 x 11 | 1 ]
-#>     PCo1  PCo2   PCo3 ... |   .name    
-#>                           |   <chr>    
-#> 1 2290.  1799.   53.8     | 1 Athens   
-#> 2 -825.   547. -114.  ... | 2 Barcelona
-#> 3   59.2 -367.  178.      | 3 Brussels 
-#> 4  -82.8 -430.  300.      | 4 Calais   
-#> 5 -352.  -291.  457.      | 5 Cherbourg
-#> # … with 16 more rows
+#> # Rows (principal): [ 150 x 4 | 0 ]
+#>     PC1    PC2     PC3 ... | 
+#>                            | 
+#> 1 -2.26 -0.478  0.127      | 
+#> 2 -2.07  0.672  0.234  ... | 
+#> 3 -2.36  0.341 -0.0441     | 
+#> 4 -2.29  0.595 -0.0910     | 
+#> 5 -2.38 -0.645 -0.0157     | 
+#> 
 #> # 
-#> # Columns (symmetric): [ 21 x 11 | 1 ]
-#>     PCo1  PCo2   PCo3 ... |   .name    
-#>                           |   <chr>    
-#> 1 2290.  1799.   53.8     | 1 Athens   
-#> 2 -825.   547. -114.  ... | 2 Barcelona
-#> 3   59.2 -367.  178.      | 3 Brussels 
-#> 4  -82.8 -430.  300.      | 4 Calais   
-#> 5 -352.  -291.  457.      | 5 Cherbourg
-#> # … with 16 more rows
-# 2D biplot aligned with geography
-city_mds %>%
-  ggbiplot() +
-  theme_biplot() +
-  scale_y_reverse() +
-  stat_cols_spantree(
-    ord_aes(city_mds), check.aes = FALSE,
-    alpha = .5, linetype = "dotted"
-  ) +
-  geom_cols_text(aes(label = .name), size = 3) +
-  ggtitle("MDS biplot of road distances between European cities")
+#> # Columns (standard): [ 4 x 4 | 3 ]
+#>      PC1     PC2    PC3 ... |   .name        .center .scale
+#>                             |   <chr>          <dbl>  <dbl>
+#> 1  0.521 -0.377   0.720     | 1 Sepal.Length    5.84  0.828
+#> 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width     3.06  0.436
+#> 3  0.580 -0.0245 -0.142     | 3 Petal.Length    3.76  1.77 
+#> 4  0.565 -0.0669 -0.634     | 4 Petal.Width     1.20  0.762
 ```
 
-![](man/figures/README-MDS%20example-1.png)<!-- -->
+Additional row- and column-level variables can be augmented and
+manipulated using a handful of **dplyr**-like verbs, each specific to
+the matrix factor being affected (`rows` or `cols`):
+
+``` r
+(iris_pca <- mutate_rows(iris_pca, Species = iris$Species))
+#> # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
+#> # 4 coordinates: PC1, PC2, ..., PC4
+#> # 
+#> # Rows (principal): [ 150 x 4 | 1 ]
+#>     PC1    PC2     PC3 ... |   Species
+#>                            |   <fct>  
+#> 1 -2.26 -0.478  0.127      | 1 setosa 
+#> 2 -2.07  0.672  0.234  ... | 2 setosa 
+#> 3 -2.36  0.341 -0.0441     | 3 setosa 
+#> 4 -2.29  0.595 -0.0910     | 4 setosa 
+#> 5 -2.38 -0.645 -0.0157     | 5 setosa 
+#> # … with 145 more rows
+#> # 
+#> # Columns (standard): [ 4 x 4 | 3 ]
+#>      PC1     PC2    PC3 ... |   .name        .center .scale
+#>                             |   <chr>          <dbl>  <dbl>
+#> 1  0.521 -0.377   0.720     | 1 Sepal.Length    5.84  0.828
+#> 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width     3.06  0.436
+#> 3  0.580 -0.0245 -0.142     | 3 Petal.Length    3.76  1.77 
+#> 4  0.565 -0.0669 -0.634     | 4 Petal.Width     1.20  0.762
+```
+
+Because the above steps are so common when fitting ordination models to
+data frames, a convenience function is available to expedite them:
+
+``` r
+ordinate(iris, cols = 1:4, model = ~ prcomp(., scale. = TRUE))
+#> # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
+#> # 4 coordinates: PC1, PC2, ..., PC4
+#> # 
+#> # Rows (principal): [ 150 x 4 | 1 ]
+#>     PC1    PC2     PC3 ... |   Species
+#>                            |   <fct>  
+#> 1 -2.26 -0.478  0.127      | 1 setosa 
+#> 2 -2.07  0.672  0.234  ... | 2 setosa 
+#> 3 -2.36  0.341 -0.0441     | 3 setosa 
+#> 4 -2.29  0.595 -0.0910     | 4 setosa 
+#> 5 -2.38 -0.645 -0.0157     | 5 setosa 
+#> # … with 145 more rows
+#> # 
+#> # Columns (standard): [ 4 x 4 | 3 ]
+#>      PC1     PC2    PC3 ... |   .name        .center .scale
+#>                             |   <chr>          <dbl>  <dbl>
+#> 1  0.521 -0.377   0.720     | 1 Sepal.Length    5.84  0.828
+#> 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width     3.06  0.436
+#> 3  0.580 -0.0245 -0.142     | 3 Petal.Length    3.76  1.77 
+#> 4  0.565 -0.0669 -0.634     | 4 Petal.Width     1.20  0.762
+```
+
+Following `broom::tidy()`, this tidier for tbl\_ords returns a tibble
+with one row per artificial coordinate (in this case, principal
+coordinate):[5]
+
+``` r
+tidy(iris_pca)
+#> # A tibble: 4 x 4
+#>   .name .sdev .inertia .prop_var
+#>   <fct> <dbl>    <dbl>     <dbl>
+#> 1 PC1   1.71    435.     0.730  
+#> 2 PC2   0.956   136.     0.229  
+#> 3 PC3   0.383    21.9    0.0367 
+#> 4 PC4   0.144     3.09   0.00518
+```
+
+The `.inertia` and `.prop_var` fields are calculated from the singular
+values or eigenvalues contained in the ordination object. This means
+that `tidy()` prepares any ordination object derived from such a
+decomposition for a scree plot using `ggplot2::ggplot()`:
+
+``` r
+ggplot(tidy(iris_pca), aes(x = .name, y = .prop_var)) +
+  geom_col() +
+  labs(x = "", y = "Proportion of inertia") +
+  ggtitle("PCA of Anderson's iris measurements",
+          "Distribution of inertia")
+```
+
+![](man/figures/README-scree%20plot-1.png)<!-- -->
+
+Following `ggplot2::fortify()`, this fortifier combines the matrix
+factor tibbles into a single tibble with an additional `.matrix` column:
+
+``` r
+head(fortify(iris_pca))
+#> # A tibble: 6 x 9
+#>     PC1    PC2     PC3      PC4 Species .matrix .name .center .scale
+#>   <dbl>  <dbl>   <dbl>    <dbl> <fct>   <chr>   <chr>   <dbl>  <dbl>
+#> 1 -2.26 -0.478  0.127   0.0241  setosa  rows    <NA>       NA     NA
+#> 2 -2.07  0.672  0.234   0.103   setosa  rows    <NA>       NA     NA
+#> 3 -2.36  0.341 -0.0441  0.0283  setosa  rows    <NA>       NA     NA
+#> 4 -2.29  0.595 -0.0910 -0.0657  setosa  rows    <NA>       NA     NA
+#> 5 -2.38 -0.645 -0.0157 -0.0358  setosa  rows    <NA>       NA     NA
+#> 6 -2.07 -1.48  -0.0269  0.00659 setosa  rows    <NA>       NA     NA
+tail(fortify(iris_pca))
+#> # A tibble: 6 x 9
+#>      PC1     PC2    PC3     PC4 Species   .matrix .name        .center .scale
+#>    <dbl>   <dbl>  <dbl>   <dbl> <fct>     <chr>   <chr>          <dbl>  <dbl>
+#> 1  1.37  -1.01   -0.930  0.0260 virginica rows    <NA>           NA    NA    
+#> 2  0.957  0.0243 -0.526 -0.163  virginica rows    <NA>           NA    NA    
+#> 3  0.521 -0.377   0.720  0.261  <NA>      cols    Sepal.Length    5.84  0.828
+#> 4 -0.269 -0.923  -0.244 -0.124  <NA>      cols    Sepal.Width     3.06  0.436
+#> 5  0.580 -0.0245 -0.142 -0.801  <NA>      cols    Petal.Length    3.76  1.77 
+#> 6  0.565 -0.0669 -0.634  0.524  <NA>      cols    Petal.Width     1.20  0.762
+```
+
+The `.matrix` column is used by the row- and column-specific parts of a
+*dual* layered grammar of graphics that yields a biplot:
+
+``` r
+ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
+  geom_rows_point(aes(color = Species, shape = Species)) +
+  stat_rows_ellipse(aes(color = Species), alpha = .5, level = .99) +
+  geom_cols_vector() +
+  geom_cols_text_radiate(aes(label = .name)) +
+  expand_limits(y = c(-3.5, NA)) +
+  ggtitle("PCA of Anderson's iris measurements",
+          "99% confidence ellipses; variables on top & right axes")
+```
+
+![](man/figures/README-biplot-1.png)<!-- -->
+
+Note several conveniences: The position aesthetics are assumed to be the
+first and second artifical coordinates, unless otherwise specified; by
+default, the aspect ratio is set to 1; and an optional secondary
+secondary can be specified for either matrix factor and marked along the
+top and right borders of the plotting window.[6]
 
 ## acknowledgments
 
@@ -340,3 +398,9 @@ Graphics*](https://www.google.com/books/edition/_/iI1kcgAACAAJ) (p. 15):
 “This system is capable of producing some hideous graphics. There is
 nothing in its design to prevent its misuse. … This system cannot
 produce a meaningless graphic, however.”
+
+[5] Note that `ordr::tidy()` takes precedence for ‘tbl\_ord’ objects
+because the ‘tbl\_ord’ class precedes the underlying model class.
+
+[6] The radiating text geom, like other parts of the package, are
+adapted from the **ggbiplot** package.
