@@ -44,7 +44,7 @@ A common application is the _biplot_, which positions the rows and columns of th
 
 An extensive range of ordination techniques are implemented in R, from classical multidimensional scaling (`stats::cmdscale()`) and principal components analysis (`stats::prcomp()` and `stats::princomp()`) in the **stats** package distributed with base R, across widely-used implementations of linear discriminant analysis (`MASS::lda()`) and correspondence analysis (`ca::ca()`) in general-use statistical packages, to highly specialized packages that implement cutting-edge techniques or adapt conventional techniques to challenging settings. These implementations come with their own conventions, tailored to the research communities that produced them, and it would be impractical (and probably unhelpful) to try to consolidate them.
 
-Instead, **ordr** provides a streamlined process by which the models output by these methods&mdash;in particular, the matrix factors into which the original data are approximately decomposed and the artificial coordinates they share&mdash;can be inspected, annotated, tabulated, summarized, and visualized. On this last point, most biplot implementations in R provide limited customizability. **ordr** adopts the grammar of graphics paradigm from **ggplot2** to modularize and standardize biplot elements [^virtue]. Overall, the package is designed to follow the broader syntactic conventions of the **tidyverse**, so that users familiar with a this workflow can more easily and quickly integrate ordination models into practice.
+Instead, **ordr** provides a streamlined process by which the models output by these methods&mdash;in particular, the matrix factors into which the original data are approximately decomposed and the artificial coordinates they share&mdash;can be inspected, annotated, tabulated, summarized, and visualized. On this last point, most biplot implementations in R provide limited customizability. **ordr** adopts the grammar of graphics paradigm from [**ggplot2**](https://github.com/tidyverse/ggplot2) to modularize and standardize biplot elements [^virtue]. Overall, the package is designed to follow the broader syntactic conventions of the **tidyverse**, so that users familiar with a this workflow can more easily and quickly integrate ordination models into practice.
 
 [^virtue]: Biplot elments must be chosen with care, and it is useful and appropriate that many model-specific biplot methods have limited flexibility. This package adopts the trade-off articulated in [Wilkinson's _The Grammar of Graphics_](https://www.google.com/books/edition/_/iI1kcgAACAAJ) (p. 15): "This system is capable of producing some hideous graphics. There is nothing in its design to prevent its misuse. ... This system cannot produce a meaningless graphic, however."
 
@@ -60,72 +60,33 @@ remotes::install_github("corybrunson/ordr")
 
 ### example
 
-A very common illustration of ordination in R uses Anderson's iris measurements, consisting of lengths and widths of the petals and surrounding sepals from 50 each of three species of iris:
+A very common illustration of ordination in R applies principal components analysis (PCA) to Anderson's iris measurements. These data consist of lengths and widths of the petals and surrounding sepals from 50 each of three species of iris:
 
 ```{r iris}
 head(iris)
 summary(iris)
 ```
 
-An unsupervised ordination approach to these data is principal components analysis (PCA). Because a flower's sepals tend to be larger than its petals (and their lengths greater than their widths), the measurements should be scaled as well as centered before the PCA:
+**ordr** provides a convenience function to send a subset of columns to an ordination function, wrap the resulting model in the [**tibble**](https://github.com/tidyverse/tibble)-derived 'tbl_ord' class, and append both model diagnostics and other original data columns as annotations to the appropriate matrix factors:[^ordinate]
+
+[^ordinate]: The data must be in the form of a data frame that can be understood by the modeling function. Step-by-step methods also exist to build and annotate a 'tbl_ord' from a fitted ordination model.
 
 ```{r pca}
-(iris_pca <- prcomp(iris[, 1:4], scale. = TRUE))
+(iris_pca <- ordinate(iris, cols = 1:4, model = ~ prcomp(., scale. = TRUE)))
 ```
 
-**ordr** provides a new class, 'tbl_ord', that wraps ordination objects like those of 'prcomp' without directly modifying them. The original model can be recovered with `un_tbl_ord()`.
+Following the [**broom**](https://github.com/tidymodels/broom) package, the `tidy()` method produces a tibble describing the model components, in this case the principal coordinates, which is suitable for scree plotting:
 
-```{r tbl_ord}
-(iris_pca <- as_tbl_ord(iris_pca))
-```
-
-The `print()` method for 'tbl_ord' is based on that of tibbles. Like that for **tidygraph**'s 'tbl_graph', it prints two tibbles, one for each matrix factor (in PCA, the case scores and the variable loadings of the original data matrix).
-The header reminds us of the dimensions of the matrix factors and how the inertia is distributed (in PCA, with the scores in principal coordinates and the loadings in standard coordinates).
-
-Analogous to `broom::augment()`, this tbl_ord-specific function preserves the class but augments the row and column tibbles with any metadata or diagnostics contained in the model object. Vertical bars separate the coordinate matrices from other columns.
-
-```{r augment}
-(iris_pca <- augment_ord(iris_pca))
-```
-
-Additional row- and column-level variables can be augmented and manipulated using a handful of **dplyr**-like verbs, each specific to the matrix factor being affected (`rows` or `cols`):
-
-```{r mutate}
-(iris_pca <- mutate_rows(iris_pca, Species = iris$Species))
-```
-
-Because the above steps are so common when fitting ordination models to data frames, a convenience function is available to expedite them:
-
-```{r shortcut}
-ordinate(iris, cols = 1:4, model = ~ prcomp(., scale. = TRUE))
-```
-
-Following `broom::tidy()`, this tidier for tbl_ords returns a tibble with one row per artificial coordinate (in this case, principal coordinate):[^tidy-conflict]
-
-[^tidy-conflict]: Note that `ordr::tidy()` takes precedence for 'tbl_ord' objects because the 'tbl_ord' class precedes the underlying model class.
-
-```{r model objects}
-tidy(iris_pca)
-```
-
-The `.inertia` and `.prop_var` fields are calculated from the singular values or eigenvalues contained in the ordination object. This means that `tidy()` prepares any ordination object derived from such a decomposition for a scree plot using `ggplot2::ggplot()`:
-
-```{r scree plot}
-ggplot(tidy(iris_pca), aes(x = .name, y = .prop_var)) +
+```{r model components and scree plot}
+tidy(iris_pca) %T>% print() %>%
+  ggplot(aes(x = .name, y = .prop_var)) +
   geom_col() +
   labs(x = "", y = "Proportion of inertia") +
   ggtitle("PCA of Anderson's iris measurements",
           "Distribution of inertia")
 ```
 
-Following `ggplot2::fortify()`, this fortifier combines the matrix factor tibbles into a single tibble with an additional `.matrix` column:
-
-```{r fortification}
-head(fortify(iris_pca))
-tail(fortify(iris_pca))
-```
-
-The `.matrix` column is used by the row- and column-specific parts of a _dual_ layered grammar of graphics that yields a biplot:
+Following **ggplot2**, the `fortify()` method row-binds the factor tibbles with an additional `.matrix` column. This is used by `ggbiplot()` to redirect row- and column-specific plot layers to the appropriate subsets:[^text-radiate]
 
 ```{r biplot}
 ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
@@ -135,12 +96,10 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
   geom_cols_text_radiate(aes(label = .name)) +
   expand_limits(y = c(-3.5, NA)) +
   ggtitle("PCA of Anderson's iris measurements",
-          "99% confidence ellipses; variables on top & right axes")
+          "99% confidence ellipses; variables use top & right axes")
 ```
 
-Note several conveniences: The position aesthetics are assumed to be the first and second artifical coordinates, unless otherwise specified; by default, the aspect ratio is set to 1; and an optional secondary secondary can be specified for either matrix factor and marked along the top and right borders of the plotting window.[^text-radiate]
-
-[^text-radiate]: The radiating text geom, like other parts of the package, are adapted from the **ggbiplot** package.
+[^text-radiate]: The radiating text geom, like several other features, is adapted from the **ggbiplot** package.
 
 ## acknowledgments
 
