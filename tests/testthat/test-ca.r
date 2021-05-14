@@ -1,4 +1,3 @@
-library(ordr)
 context("correspondence analysis, class 'ca'")
 
 fit_ca <- ca::ca(HairEyeColor[, , "Male"])

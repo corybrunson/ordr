@@ -56,18 +56,18 @@ get_cols(smoke_ca)
 augment_ord(smoke_ca)
 # summarize artificial coordinates
 tidy(smoke_ca)
-# fortification of artificial coordinates yields proportion of variance measure
-fortify(smoke_ca, .matrix = "coord")
 # scree plot of inertia
-ggplot(smoke_ca, .matrix = "coord", aes(x = .name, y = .inertia)) +
+tidy(smoke_ca) \%>\%
+  ggplot(aes(x = .name, y = .inertia)) +
   theme_bw() +
-  geom_bar(stat = "identity") +
+  geom_col() +
   labs(x = "", y = "Inertia")
 # scree plot of proportion of variance (inertia)
-ggplot(smoke_ca, .matrix = "coord", aes(x = .name, y = .prop_var)) +
+tidy(smoke_ca) \%>\%
+  ggplot(aes(x = .name, y = .prop_var)) +
   theme_bw() +
   scale_y_continuous(labels = scales::percent) +
-  geom_bar(stat = "identity") +
+  geom_col() +
   labs(x = "", y = "Proportion of inertia")
 # fortification adds all above columns
 fortify(smoke_ca)

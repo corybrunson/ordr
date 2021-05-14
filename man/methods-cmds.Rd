@@ -58,12 +58,10 @@ get_cols(usa_mds)
 augment_ord(usa_mds)
 # summarize artifical coordinates
 tidy(usa_mds)
-# fortification of artificial coordinates yields proportion of variance
-fortify(usa_mds, .matrix = "coord")
 # scree plot of inertia
-ggplot(usa_mds, .matrix = "coord", aes(x = .name, y = .inertia)) +
+ggplot(tidy(usa_mds), aes(x = .name, y = .inertia)) +
   theme_bw() +
-  geom_bar(stat = "identity") +
+  geom_col() +
   labs(x = "", y = "Inertia")
 # fortification automatically augments artificial coordinates
 fortify(usa_mds)

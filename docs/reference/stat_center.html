@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -212,10 +212,29 @@ filter the data frame to one of these two.</p>
 stat in order to render plot elements for the corresponding factor matrix.
 <code>geom_dims_*()</code> selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.</p>
+    <h2 class="hasAnchor" id="ordination-aesthetics"><a class="anchor" href="#ordination-aesthetics"></a>Ordination aesthetics</h2>
+
+    
+
+<p>The convenience function <code>[ord_aes()]</code> can be used to incorporate all
+coordinates of the ordination model into a statistical transformation. It
+maps the coordinates to the custom aesthetics <code>..coord1</code>, <code>..coord2</code>, etc.</p>
+<p>Some transformations, e.g. <code>[stat_center()]</code>, are commutative with projection
+to the 'x' and 'y' coordinates. If they detect aesthetics of the form
+<code>..coord[0-9]+</code>, then <code>..coord1</code> and <code>..coord2</code> are converted to <code>x</code> and <code>y</code>
+while any remaining are ignored.</p>
+<p>Other transformations, e.g. <code>stat_spantree()]</code>, yield different results in a
+planar biplot when they are computer before or after projection. If such a
+stat layer detects these aesthetics, then the lot of them are used in the
+transformation.</p>
+<p>In either case, the stat layer returns a data frame with position aesthetics
+<code>x</code> and <code>y</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other stat layers: 
 <code><a href='stat_chull.html'>stat_chull</a>()</code>,
+<code><a href='stat_cone.html'>stat_cone</a>()</code>,
+<code><a href='stat_scale.html'>stat_scale</a>()</code>,
 <code><a href='stat_spantree.html'>stat_spantree</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -228,7 +247,7 @@ points for rows and arrows for columns.</p>
 </div><div class='output co'>#&gt; # A tbl_ord of class 'princomp': (150 x 4) x (4 x 4)'
 #&gt; # 4 coordinates: Comp.1, Comp.2, ..., Comp.4
 #&gt; # 
-#&gt; # Rows: [ 150 x 4 | 1 ]
+#&gt; # Rows (principal): [ 150 x 4 | 1 ]
 #&gt;   Comp.1 Comp.2  Comp.3 ... |   species
 #&gt;                             |   <span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>  
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>  -</span><span style='color: #BB0000;'>2.26</span><span>  0.480  0.128      | </span><span style='color: #BCBCBC;'>1</span><span> setosa 
@@ -238,7 +257,7 @@ points for rows and arrows for columns.</p>
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span>  -</span><span style='color: #BB0000;'>2.39</span><span>  0.647 -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> setosa 
 #&gt; </span><span style='color: #949494;'># … with 145 more rows</span><span>
 #&gt; # 
-#&gt; # Columns: [ 4 x 4 | 0 ]
+#&gt; # Columns (standard): [ 4 x 4 | 0 ]
 #&gt;   Comp.1 Comp.2 Comp.3 ... | 
 #&gt;                            | 
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.521 0.377   0.720     | 

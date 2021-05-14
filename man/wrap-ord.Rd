@@ -8,6 +8,7 @@
 \alias{logisticSVD_ord}
 \alias{logisticPCA_ord}
 \alias{convexLogisticPCA_ord}
+\alias{nipals_ord}
 \title{Wrappers for lossy ordination methods}
 \usage{
 eigen_ord(x, symmetric = isSymmetric.matrix(x))
@@ -53,6 +54,20 @@ convexLogisticPCA_ord(
   ...,
   main_effects = TRUE,
   ss_factor = 4
+)
+
+nipals_ord(
+  x,
+  ncomp = min(nrow(x), ncol(x)),
+  center = TRUE,
+  scale = TRUE,
+  maxiter = 500,
+  tol = 1e-06,
+  startcol = 0,
+  fitted = FALSE,
+  force.na = FALSE,
+  gramschmidt = TRUE,
+  verbose = FALSE
 )
 }
 \arguments{
@@ -104,6 +119,35 @@ eigen-decomponsition when \code{ncol(x) > 100} and \code{k} is small}
 convergence rate can be proven for \code{ss_factor = 1}, but I have found higher values
 sometimes work better. The default is \code{ss_factor = 4}.
 If it is not converging, try \code{ss_factor = 1}.}
+
+\item{ncomp}{Maximum number of principal components to extract from x.}
+
+\item{center}{If TRUE, subtract the mean from each column of x before PCA.}
+
+\item{scale}{if TRUE, divide the standard deviation from each column of x before PCA.}
+
+\item{maxiter}{Maximum number of NIPALS iterations for each
+principal component.}
+
+\item{tol}{Default 1e-9 tolerance for testing convergence of the NIPALS
+iterations for each principal component.}
+
+\item{startcol}{Determine the starting column of x for the iterations
+of each principal component.
+If 0, use the column of x that has maximum absolute sum.
+If a number, use that column of x.
+If a function, apply the function to each column of x and choose the column
+with the maximum value of the function.}
+
+\item{fitted}{Default FALSE. If TRUE, return the fitted (reconstructed) value of x.}
+
+\item{force.na}{Default FALSE. If TRUE, force the function to use the
+method for missing values, even if there are no missing values in x.}
+
+\item{gramschmidt}{Default TRUE. If TRUE, perform Gram-Schmidt 
+orthogonalization at each iteration.}
+
+\item{verbose}{Default FALSE. Use TRUE or 1 to show some diagnostics.}
 }
 \description{
 These \verb{*_ord} functions wrap functions imported from other
@@ -121,5 +165,6 @@ The following table summarizes the wrapped functions:\tabular{llll}{
    \code{\link[logisticPCA:logisticSVD]{logisticPCA::logisticSVD()}} \tab No \tab Yes \tab No \cr
    \code{\link[logisticPCA:logisticPCA]{logisticPCA::logisticPCA()}} \tab No \tab Yes \tab No \cr
    \code{\link[logisticPCA:convexLogisticPCA]{logisticPCA::convexLogisticPCA()}} \tab No \tab Yes \tab No \cr
+   \code{\link[nipals:nipals]{nipals::nipals()}} \tab No \tab No \tab Yes \cr
 }
 }

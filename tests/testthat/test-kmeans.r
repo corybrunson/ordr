@@ -1,4 +1,3 @@
-library(ordr)
 context("k-means clustering, class 'kmeans'")
 
 fit_kmeans <- kmeans(scale(mtcars), centers = 3)

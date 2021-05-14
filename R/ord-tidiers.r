@@ -15,7 +15,8 @@
 #' * The [generics::tidy()] method
 
 #'   summarizes information about model components, which here are the
-#'   artificial coordinates created by ordinations.
+#'   artificial coordinates created by ordinations. The output can be passed to
+#'   [ggplot2::ggplot()] to generate scree plots.
 
 #' * The [generics::glance()] method
 
@@ -27,14 +28,11 @@
 #'   augments and collapses row and/or column data, depending on `.matrix`, into
 #'   a single tibble, in preparation for [ggplot2::ggplot()]. Its output
 #'   resembles that of [generics::augment()], though rows in the output may
-#'   correspond to rows, columns, or both of the original data.
+#'   correspond to rows, columns, or both of the original data. If `.matrix` is
+#'   passed `"rows"`, `"cols"`, or `"dims"` (for both), then `fortify()` returns
+#'   a tibble whose fields are obtained, in order, via `get_*()`,
+#'   `augmentation_*()`, and `annotation_*()`.
 
-#' 
-#' If `.matrix` is passed `"rows"`, `"cols"`, or `"dims"` (for both), then
-#' `fortify()` returns a tibble whose fields are obtained, in order, via
-#' `get_*()`, `augmentation_*()`, and `annotation_*()`. In the special case
-#' `.matrix = "coordinates"`, the augmented artificial coordinates are returned.
-#' This can be used to produce scree plots, for example.
 #'
 #' If augmentation or any annotation is included, then the tibble is assigned a
 #' `"coordinates"` attribute whose value is obtained via [get_coord()]. This
@@ -94,14 +92,7 @@ fortify.tbl_ord <- function(
   .matrix = "dims", .supplement = TRUE,
   coord.only = FALSE
 ) {
-  # check first if coordinate / inertia diagonal is desired
-  .matrix <- match.arg(.matrix, c(names(tbl_ord_factors), "coordinates"))
-  if (.matrix == "coordinates") {
-    # (ignore `coord.only`)
-    return(tidy(model))
-  }
-  # otherwise resume fortification of matrix factors
-  .matrix <- unname(tbl_ord_factors[.matrix])
+  .matrix <- match_factor(.matrix)
   
   if (.matrix == "dims" || .matrix == "rows") {
     u <- as_tibble(get_rows(model))

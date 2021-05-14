@@ -74,12 +74,6 @@ calculate a distance/dissimilarity object and \code{\link[vegan:spantree]{vegan:
 calculate the MST. The result is formatted with position aesthetics readable
 by \code{\link[ggplot2:geom_segment]{ggplot2::geom_segment()}}.
 
-If any aesthetics of the form \verb{.coord[0-9]+} are detected, then the lot of
-them are used to calculate distances/dissimilarities. These should not be
-assigend manually but generated using the convenience function \code{\link[=ord_aes]{ord_aes()}}
-(see the examples). Otherwise, \code{x} and \code{y} are used. Either way, \code{x} and \code{y}
-provide the position aesthetics.
-
 An MST calculated on \code{x} and \code{y} reflects the distances among the points in
 \eqn{X} in the reduced-dimension plane of the biplot. In contrast, one
 calculated on the full set of coordinates reflects distances in
@@ -99,6 +93,26 @@ The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the correspon
 stat in order to render plot elements for the corresponding factor matrix.
 \verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.
+}
+
+\section{Ordination aesthetics}{
+
+The convenience function \verb{[ord_aes()]} can be used to incorporate all
+coordinates of the ordination model into a statistical transformation. It
+maps the coordinates to the custom aesthetics \code{..coord1}, \code{..coord2}, etc.
+
+Some transformations, e.g. \verb{[stat_center()]}, are commutative with projection
+to the 'x' and 'y' coordinates. If they detect aesthetics of the form
+\verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and \code{y}
+while any remaining are ignored.
+
+Other transformations, e.g. \verb{stat_spantree()]}, yield different results in a
+planar biplot when they are computer before or after projection. If such a
+stat layer detects these aesthetics, then the lot of them are used in the
+transformation.
+
+In either case, the stat layer returns a data frame with position aesthetics
+\code{x} and \code{y}.
 }
 
 \examples{
@@ -130,6 +144,8 @@ Springer Series in Statistics, ISSN 0172-7397. \doi{10.1007/b98835}
 \seealso{
 Other stat layers: 
 \code{\link{stat_center}()},
-\code{\link{stat_chull}()}
+\code{\link{stat_chull}()},
+\code{\link{stat_cone}()},
+\code{\link{stat_scale}()}
 }
 \concept{stat layers}

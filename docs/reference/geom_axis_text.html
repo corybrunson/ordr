@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Render tick mark labels for axes — geom_axis_text • ordr</title>
+<title>Render tick mark text for axes — geom_axis_text • ordr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Render tick mark labels for axes — geom_axis_text" />
-<meta property="og:description" content="geom_axis_text() renders tick mark labels for specified axes
+<meta property="og:title" content="Render tick mark text for axes — geom_axis_text" />
+<meta property="og:description" content="geom_axis_text() renders tick mark text for specified axes
 among the row or column factors." />
 
 
@@ -81,7 +81,7 @@ among the row or column factors." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -104,13 +104,13 @@ among the row or column factors." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Render tick mark labels for axes</h1>
+    <h1>Render tick mark text for axes</h1>
     
     <div class="hidden name"><code>geom_axis_text.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>geom_axis_text()</code> renders tick mark labels for specified axes
+    <p><code>geom_axis_text()</code> renders tick mark text for specified axes
 among the row or column factors.</p>
     </div>
 
@@ -123,6 +123,7 @@ among the row or column factors.</p>
   calibrate <span class='op'>=</span> <span class='cn'>FALSE</span>,
   family_fun <span class='op'>=</span> <span class='cn'>NULL</span>,
   by <span class='op'>=</span> <span class='cn'>NULL</span>,
+  num <span class='op'>=</span> <span class='fl'>6L</span>,
   label_dodge <span class='op'>=</span> <span class='fl'>0.025</span>,
   <span class='va'>...</span>,
   parse <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -183,6 +184,10 @@ transform the values along the axis at which to render elements.</p></td>
     <tr>
       <th>by</th>
       <td><p>Interval length between elements, in the units of the ordination.</p></td>
+    </tr>
+    <tr>
+      <th>num</th>
+      <td><p>Integer; the number of text labels on each axis.</p></td>
     </tr>
     <tr>
       <th>label_dodge</th>
@@ -263,9 +268,9 @@ are in bold):</p><ul>
     <div class='dont-index'><p>Other geom layers: 
 <code><a href='geom_axis_ticks.html'>geom_axis_ticks</a>()</code>,
 <code><a href='geom_axis.html'>geom_axis</a>()</code>,
-<code><a href='geom_crosshairs.html'>geom_crosshairs</a>()</code>,
 <code><a href='geom_isolines.html'>geom_isolines</a>()</code>,
 <code><a href='geom_lineranges.html'>geom_lineranges</a>()</code>,
+<code><a href='geom_origin.html'>geom_origin</a>()</code>,
 <code><a href='geom_text_radiate.html'>geom_text_radiate</a>()</code>,
 <code><a href='geom_unit_circle.html'>geom_unit_circle</a>()</code>,
 <code><a href='geom_vector.html'>geom_vector</a>()</code></p></div>
@@ -289,7 +294,7 @@ are in bold):</p><ul>
 </div><div class='output co'>#&gt; # A tbl_ord of class 'lda': (148 x 2) x (5 x 2)'
 #&gt; # 2 coordinates: LD1 and LD2
 #&gt; # 
-#&gt; # Rows: [ 148 x 2 | 6 ]
+#&gt; # Rows (principal): [ 148 x 2 | 6 ]
 #&gt;      LD1    LD2 |   .name    .prior .counts .grouping 
 #&gt;                 |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.75</span><span>   0.400 | </span><span style='color: #BCBCBC;'>1</span><span> Normal    0.524      76 Normal    
@@ -298,10 +303,10 @@ are in bold):</p><ul>
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>1.72</span><span>   0.663 | </span><span style='color: #BCBCBC;'>4</span><span> 1        </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> Normal    
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.85</span><span>   1.30  | </span><span style='color: #BCBCBC;'>5</span><span> 2        </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> Normal    
 #&gt; </span><span style='color: #949494;'># … with 143 more rows, and 2 more</span><span>
-#&gt; # Rows: [ 148 x 2 | 6 ]</span><span style='color: #949494;'>#   variables: .supplement &lt;lgl&gt;,</span><span>
-#&gt;      LD1    LD2 | </span><span style='color: #949494;'>#   discriminant &lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #949494;'>#   variables: .supplement &lt;lgl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   discriminant &lt;chr&gt;</span><span>
 #&gt; # 
-#&gt; # Columns: [ 5 x 2 | 1 ]
+#&gt; # Columns (standard): [ 5 x 2 | 1 ]
 #&gt;         LD1      LD2 |   .name  
 #&gt;                      |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>  1.36     -</span><span style='color: #BB0000;'>3.78</span><span>    | </span><span style='color: #BCBCBC;'>1</span><span> relwt  
@@ -315,8 +320,8 @@ are in bold):</p><ul>
   <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='theme_biplot.html'>theme_biplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='biplot-geoms.html'>geom_rows_point</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>shape <span class='op'>=</span> <span class='va'>.grouping</span>, size <span class='op'>=</span> <span class='va'>discriminant</span><span class='op'>)</span>, alpha <span class='op'>=</span> <span class='fl'>.5</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='biplot-geoms.html'>geom_cols_axis</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#888888"</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='biplot-geoms.html'>geom_cols_axis_ticks</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='biplot-geoms.html'>geom_cols_axis_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>2.5</span>, label_dodge <span class='op'>=</span> <span class='fl'>.2</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_cols_axis_ticks</a></span><span class='op'>(</span>num <span class='op'>=</span> <span class='fl'>8L</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_cols_axis_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>2.5</span>, num <span class='op'>=</span> <span class='fl'>8L</span>, label_dodge <span class='op'>=</span> <span class='fl'>.2</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>ggtitle</span><span class='op'>(</span>
     <span class='st'>"LDA of Reaven &amp; Miller diabetes groups"</span>,
     <span class='st'>"Row-standard biplot of standardized LDA"</span>
@@ -332,7 +337,7 @@ are in bold):</p><ul>
 </div><div class='output co'>#&gt; # A tbl_ord of class 'lda_ord': (148 x 2) x (5 x 2)'
 #&gt; # 2 coordinates: LD1 and LD2
 #&gt; # 
-#&gt; # Rows: [ 148 x 2 | 6 ]
+#&gt; # Rows (principal): [ 148 x 2 | 6 ]
 #&gt;      LD1    LD2 |   .name    .prior .counts .grouping 
 #&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.75</span><span>   0.400 | </span><span style='color: #BCBCBC;'>1</span><span> Normal    0.524      76 Normal    
@@ -341,10 +346,10 @@ are in bold):</p><ul>
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>1.72</span><span>   0.663 | </span><span style='color: #BCBCBC;'>4</span><span> 1        </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> Normal    
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.85</span><span>   1.30  | </span><span style='color: #BCBCBC;'>5</span><span> 2        </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> Normal    
 #&gt; </span><span style='color: #949494;'># … with 143 more rows, and 2 more</span><span>
-#&gt; # Rows: [ 148 x 2 | 6 ]</span><span style='color: #949494;'>#   variables: .supplement &lt;lgl&gt;,</span><span>
-#&gt;      LD1    LD2 | </span><span style='color: #949494;'>#   discriminant &lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #949494;'>#   variables: .supplement &lt;lgl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   discriminant &lt;chr&gt;</span><span>
 #&gt; # 
-#&gt; # Columns: [ 5 x 2 | 1 ]
+#&gt; # Columns (standard): [ 5 x 2 | 1 ]
 #&gt;       LD1    LD2 |   .name  
 #&gt;                  |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.138  -</span><span style='color: #BB0000;'>0.384</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> relwt  
@@ -358,8 +363,8 @@ are in bold):</p><ul>
   <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='theme_biplot.html'>theme_biplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='biplot-geoms.html'>geom_rows_point</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>shape <span class='op'>=</span> <span class='va'>.grouping</span>, alpha <span class='op'>=</span> <span class='va'>discriminant</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='biplot-geoms.html'>geom_cols_axis</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#888888"</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='biplot-geoms.html'>geom_cols_axis_ticks</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='biplot-geoms.html'>geom_cols_axis_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>2.5</span>, label_dodge <span class='op'>=</span> <span class='fl'>.1</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_cols_axis_ticks</a></span><span class='op'>(</span>num <span class='op'>=</span> <span class='fl'>8L</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_cols_axis_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>2.5</span>, num <span class='op'>=</span> <span class='fl'>8L</span>, label_dodge <span class='op'>=</span> <span class='fl'>.1</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>ggtitle</span><span class='op'>(</span>
     <span class='st'>"LDA of Reaven &amp; Miller diabetes groups"</span>,
     <span class='st'>"Symmetric biplot of contribution LDA"</span>

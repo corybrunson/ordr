@@ -1,4 +1,3 @@
-library(ordr)
 context("dplyr verbs for ordination factors")
 
 # arbitrary ordination object

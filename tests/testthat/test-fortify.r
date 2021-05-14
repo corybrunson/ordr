@@ -1,4 +1,3 @@
-library(ordr)
 context("fortification")
 
 # arbitrary ordination object
@@ -9,7 +8,6 @@ pca <- confer_inertia(pca, "symmetric")
 test_that("`fortify()` returns tibbles of correct size", {
   expect_equal(nrow(fortify(pca, .matrix = "rows")), nrow(dat))
   expect_equal(nrow(fortify(pca, .matrix = "cols")), ncol(dat))
-  expect_equal(nrow(fortify(pca, .matrix = "coord")), dim(pca))
 })
 
 test_that("`ggplot()` successfully passes `.matrix` to `fortify()`", {

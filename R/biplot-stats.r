@@ -8,8 +8,10 @@
 #' @name biplot-stats
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
+#' @inheritParams stat_scale
 #' @inheritParams stat_center
 #' @inheritParams stat_chull
+#' @inheritParams stat_cone
 #' @inheritParams ggplot2::stat_ellipse
 #' @inheritParams stat_spantree
 #' @template param-stat

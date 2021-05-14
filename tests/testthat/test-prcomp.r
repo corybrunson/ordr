@@ -1,4 +1,3 @@
-library(ordr)
 context("principal components analysis, class 'prcomp'")
 
 fit_prcomp <- prcomp(iris[, -5], scale = TRUE)

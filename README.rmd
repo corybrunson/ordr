@@ -44,7 +44,7 @@ A common application is the _biplot_, which positions the rows and columns of th
 
 An extensive range of ordination techniques are implemented in R, from classical multidimensional scaling (`stats::cmdscale()`) and principal components analysis (`stats::prcomp()` and `stats::princomp()`) in the **stats** package distributed with base R, across widely-used implementations of linear discriminant analysis (`MASS::lda()`) and correspondence analysis (`ca::ca()`) in general-use statistical packages, to highly specialized packages that implement cutting-edge techniques or adapt conventional techniques to challenging settings. These implementations come with their own conventions, tailored to the research communities that produced them, and it would be impractical (and probably unhelpful) to try to consolidate them.
 
-Instead, **ordr** provides a streamlined process by which the models output by these methods&mdash;in particular, the matrix factors into which the original data are approximately decomposed and the artificial coordinates they share&mdash;can be inspected, annotated, tabulated, summarized, and visualized. On this last point, most biplot implementations in R provide limited customizability. **ordr** adopts the grammar of graphics paradigm from **ggplot2** to modularize and standardize biplot elements [^virtue]. Overall, the package is designed to follow the broader syntactic conventions of the **tidyverse**, so that users familiar with a this workflow can more easily and quickly integrate ordination models into practice.
+Instead, **ordr** provides a streamlined process by which the models output by these methods&mdash;in particular, the matrix factors into which the original data are approximately decomposed and the artificial coordinates they share&mdash;can be inspected, annotated, tabulated, summarized, and visualized. On this last point, most biplot implementations in R provide limited customizability. **ordr** adopts the grammar of graphics paradigm from [**ggplot2**](https://github.com/tidyverse/ggplot2) to modularize and standardize biplot elements [^virtue]. Overall, the package is designed to follow the broader syntactic conventions of the **tidyverse**, so that users familiar with a this workflow can more easily and quickly integrate ordination models into practice.
 
 [^virtue]: Biplot elments must be chosen with care, and it is useful and appropriate that many model-specific biplot methods have limited flexibility. This package adopts the trade-off articulated in [Wilkinson's _The Grammar of Graphics_](https://www.google.com/books/edition/_/iI1kcgAACAAJ) (p. 15): "This system is capable of producing some hideous graphics. There is nothing in its design to prevent its misuse. ... This system cannot produce a meaningless graphic, however."
 
@@ -58,62 +58,48 @@ Instead, **ordr** provides a streamlined process by which the models output by t
 remotes::install_github("corybrunson/ordr")
 ```
 
-### PCA example
+### example
 
-Principal components analysis (PCA) is by far the most widely-used ordination technique.
-This example performs an uncentered PCA on a small data set of personal expenditures over twenty years and represents the data in a symmetric biplot. At each step the result is printed, so that the user can see the effect of each step on the `prcomp` object.
+A very common illustration of ordination in R applies principal components analysis (PCA) to Anderson's iris measurements. These data consist of lengths and widths of the petals and surrounding sepals from 50 each of three species of iris:
 
-```{r PCA example}
-USPersonalExpenditure
-# perform principal components analysis
-(spend_pca <- prcomp(USPersonalExpenditure, center = FALSE))
-# wrap the model as a `tbl_ord` object
-(spend_pca <- as_tbl_ord(spend_pca))
-# augment the cases and variables with metadata
-(spend_pca <- augment_ord(spend_pca))
-# annotate the cases or variables
-(spend_pca <- mutate_cols(spend_pca, year = as.integer(.name)))
-# confer inertia equally between cases and variables
-(spend_pca <- confer_inertia(spend_pca, c(.5, .5)))
-# render a biplot, by default on the first two shared coordinates
-ggbiplot(spend_pca, aes(label = .name)) +
-  theme_bw() +
-  geom_cols_vector(aes(color = year)) +
-  geom_cols_text_radiate() +
-  geom_rows_point() +
-  geom_rows_text_repel() +
-  expand_limits(y = c(-2, 2.75)) +
-  ggtitle(
-    "U.S. Personal Expenditure data, 1940-1960",
-    "Symmetric biplot of un-centered PCA"
-  )
+```{r iris}
+head(iris)
+summary(iris)
 ```
 
-### MDS example
+**ordr** provides a convenience function to send a subset of columns to an ordination function, wrap the resulting model in the [**tibble**](https://github.com/tidyverse/tibble)-derived 'tbl_ord' class, and append both model diagnostics and other original data columns as annotations to the appropriate matrix factors:[^ordinate]
 
-Multidimensional scaling (MDS) is an ordination technique that starts not with rectangular data but with interpoint distances.
-A common illustration of its power is to calculate MDS on the set of distances&mdash;however measured&mdash;between geographic locations, and to recover the approximate geography via a biplot. This example is adapted from the documentation of `cmdscale()` in the **stats** package; note that **ordr** provides the wrapper `cmdscale_ord()` that always returns the eigenvalues and the symmetric distance matrix produced during the calculation.
-The MDS uses 11 coordinates&mdash;the number of positive eigenvalues&mdash;so that `stat_*_spantree()` can call upon them to recover the intercity distances.
+[^ordinate]: The data must be in the form of a data frame that can be understood by the modeling function. Step-by-step methods also exist to build and annotate a 'tbl_ord' from a fitted ordination model.
 
-```{r MDS example}
-# `tbl_ord` object for a classical MDS on distances between European cities
-eurodist %>%
-  cmdscale_ord(k = 11) %>%
-  as_tbl_ord() %>%
-  augment_ord() %>%
-  print() -> city_mds
-# 2D biplot aligned with geography
-city_mds %>%
-  ggbiplot() +
-  theme_biplot() +
-  scale_y_reverse() +
-  stat_cols_spantree(
-    ord_aes(city_mds), check.aes = FALSE,
-    alpha = .5, linetype = "dotted"
-  ) +
-  geom_cols_text(aes(label = .name), size = 3) +
-  ggtitle("MDS biplot of road distances between European cities")
+```{r pca}
+(iris_pca <- ordinate(iris, cols = 1:4, model = ~ prcomp(., scale. = TRUE)))
 ```
+
+Following the [**broom**](https://github.com/tidymodels/broom) package, the `tidy()` method produces a tibble describing the model components, in this case the principal coordinates, which is suitable for scree plotting:
+
+```{r model components and scree plot}
+tidy(iris_pca) %T>% print() %>%
+  ggplot(aes(x = .name, y = .prop_var)) +
+  geom_col() +
+  labs(x = "", y = "Proportion of inertia") +
+  ggtitle("PCA of Anderson's iris measurements",
+          "Distribution of inertia")
+```
+
+Following **ggplot2**, the `fortify()` method row-binds the factor tibbles with an additional `.matrix` column. This is used by `ggbiplot()` to redirect row- and column-specific plot layers to the appropriate subsets:[^text-radiate]
+
+```{r biplot}
+ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
+  geom_rows_point(aes(color = Species, shape = Species)) +
+  stat_rows_ellipse(aes(color = Species), alpha = .5, level = .99) +
+  geom_cols_vector() +
+  geom_cols_text_radiate(aes(label = .name)) +
+  expand_limits(y = c(-3.5, NA)) +
+  ggtitle("PCA of Anderson's iris measurements",
+          "99% confidence ellipses; variables use top & right axes")
+```
+
+[^text-radiate]: The radiating text geom, like several other features, is adapted from the **ggbiplot** package.
 
 ## acknowledgments
 

@@ -2,6 +2,7 @@
 #'
 
 #' @template biplot-layers
+#' @template biplot-ord-aes
 
 #' @inheritParams ggplot2::layer
 #' @param fun.data,fun.center,fun.min,fun.max,fun.args Functions and arguments
@@ -134,7 +135,7 @@ StatCenter <- ggproto(
 StatRowsCenter <- ggproto(
   "StatRowsCenter", StatCenter,
   
-  setup_data = setup_rows_data
+  setup_data = setup_rows_xy_data
 )
 
 #' @rdname ordr-ggproto
@@ -144,7 +145,7 @@ StatRowsCenter <- ggproto(
 StatColsCenter <- ggproto(
   "StatColsCenter", StatCenter,
   
-  setup_data = setup_cols_data
+  setup_data = setup_cols_xy_data
 )
 
 #' @rdname stat_center
@@ -264,7 +265,7 @@ StatStar <- ggproto(
 StatRowsStar <- ggproto(
   "StatRowsStar", StatStar,
   
-  setup_data = setup_rows_data
+  setup_data = setup_rows_xy_data
 )
 
 #' @rdname ordr-ggproto
@@ -274,7 +275,7 @@ StatRowsStar <- ggproto(
 StatColsStar <- ggproto(
   "StatColsStar", StatStar,
   
-  setup_data = setup_cols_data
+  setup_data = setup_cols_xy_data
 )
 
 make_center_fun <- function(fun.data, fun.center, fun.min, fun.max, fun.args) {

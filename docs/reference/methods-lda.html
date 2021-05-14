@@ -82,7 +82,7 @@ lda_ord()." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -206,7 +206,7 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
 </div><div class='output co'>#&gt; # A tbl_ord of class 'lda_ord': (153 x 2) x (4 x 2)'
 #&gt; # 2 coordinates: LD1 and LD2
 #&gt; # 
-#&gt; # Rows: [ 153 x 2 | 0 ]
+#&gt; # Rows (principal): [ 153 x 2 | 0 ]
 #&gt;     LD1    LD2 | 
 #&gt;                | 
 #&gt; <span style='color: #BCBCBC;'>1</span><span>  7.61  0.215 | 
@@ -216,13 +216,18 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span>  7.13 -</span><span style='color: #BB0000;'>0.787</span><span> | 
 #&gt; 
 #&gt; # 
-#&gt; # Columns: [ 4 x 2 | 0 ]
+#&gt; # Columns (standard): [ 4 x 2 | 0 ]
 #&gt;      LD1     LD2 | 
 #&gt;                  | 
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.829  0.024</span><span style='text-decoration: underline;'>1</span><span> | 
 #&gt; </span><span style='color: #BCBCBC;'>2</span><span>  1.53   2.16   | 
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>2.20</span><span>  -</span><span style='color: #BB0000;'>0.932</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.81</span><span>   2.84   | </div><div class='input'><span class='co'># recover centroid coordinates and measurement discriminant coefficients</span>
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.81</span><span>   2.84   | </div><div class='input'><span class='co'># summarize ordination</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>iris_lda</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
+#&gt;    rank n.row n.col inertia class  
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     2   153     2   </span><span style='text-decoration: underline;'>2</span><span>387. lda_ord</div><div class='input'><span class='co'># recover centroid coordinates and measurement discriminant coefficients</span>
 <span class='fu'><a href='accessors.html'>get_rows</a></span><span class='op'>(</span><span class='va'>iris_lda</span>, .supplement <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;                  LD1        LD2
 #&gt; setosa      7.607600  0.2151330
@@ -237,7 +242,7 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
 </div><div class='output co'>#&gt; # A tbl_ord of class 'lda_ord': (153 x 2) x (4 x 2)'
 #&gt; # 2 coordinates: LD1 and LD2
 #&gt; # 
-#&gt; # Rows: [ 153 x 2 | 5 ]
+#&gt; # Rows (principal): [ 153 x 2 | 5 ]
 #&gt;     LD1    LD2 |   .name     .prior .counts .grouping
 #&gt;                |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>  7.61  0.215 | </span><span style='color: #BCBCBC;'>1</span><span> setosa     0.333      50 setosa   
@@ -246,9 +251,9 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span>  8.06  0.300 | </span><span style='color: #BCBCBC;'>4</span><span> </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> setosa   
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span>  7.13 -</span><span style='color: #BB0000;'>0.787</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> setosa   
 #&gt; </span><span style='color: #949494;'># … with 148 more rows, and 1 more</span><span>
-#&gt; # Rows: [ 153 x 2 | 5 ]</span><span style='color: #949494;'>#   variable: .supplement &lt;lgl&gt;</span><span>
+#&gt; </span><span style='color: #949494;'>#   variable: .supplement &lt;lgl&gt;</span><span>
 #&gt; # 
-#&gt; # Columns: [ 4 x 2 | 1 ]
+#&gt; # Columns (standard): [ 4 x 2 | 1 ]
 #&gt;      LD1     LD2 |   .name       
 #&gt;                  |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.829  0.024</span><span style='text-decoration: underline;'>1</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> Sepal.Length
@@ -260,17 +265,11 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
 #&gt;   .name  .svd .inertia .prop_var
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> LD1   48.6    </span><span style='text-decoration: underline;'>2</span><span>366.    0.991  
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> LD2    4.58     21.0   0.008</span><span style='text-decoration: underline;'>79</span><span></div><div class='input'><span class='co'># fortification of artificial coordinates yields proportion of variance</span>
-<span class='fu'>fortify</span><span class='op'>(</span><span class='va'>iris_lda</span>, .matrix <span class='op'>=</span> <span class='st'>"coord"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 4</span><span>
-#&gt;   .name  .svd .inertia .prop_var
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> LD1   48.6    </span><span style='text-decoration: underline;'>2</span><span>366.    0.991  
 #&gt; </span><span style='color: #BCBCBC;'>2</span><span> LD2    4.58     21.0   0.008</span><span style='text-decoration: underline;'>79</span><span></div><div class='input'><span class='co'># scree plot of inertia</span>
-<span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>iris_lda</span>, .matrix <span class='op'>=</span> <span class='st'>"coord"</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>.name</span>, y <span class='op'>=</span> <span class='va'>.prop_var</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+<span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>iris_lda</span><span class='op'>)</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>.name</span>, y <span class='op'>=</span> <span class='va'>.prop_var</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>scale_y_continuous</span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>geom_bar</span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"identity"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_y_continuous</span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org/reference/label_percent.html'>percent</a></span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_col</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>""</span>, y <span class='op'>=</span> <span class='st'>"Proportion of inertia"</span><span class='op'>)</span>
 </div><div class='img'><img src='methods-lda-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># fortification (without supplement)</span>
 <span class='fu'>fortify</span><span class='op'>(</span><span class='va'>iris_lda</span>, .supplement <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
@@ -285,7 +284,6 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
 #&gt; </span><span style='color: #BCBCBC;'>6</span><span> -</span><span style='color: #BB0000;'>2.20</span><span>  -</span><span style='color: #BB0000;'>0.932</span><span>  Petal.Length </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>         cols   
 #&gt; </span><span style='color: #BCBCBC;'>7</span><span> -</span><span style='color: #BB0000;'>2.81</span><span>   2.84   Petal.Width  </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>         cols   </div><div class='input'><span class='co'># unstandardized coefficient LDA biplot (centroids only)</span>
 <span class='va'>iris_lda</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='dplyr-verbs.html'>mutate_rows</a></span><span class='op'>(</span>species <span class='op'>=</span> <span class='va'>.grouping</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span>.supplement <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
@@ -301,7 +299,6 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
   <span class='fu'>expand_limits</span><span class='op'>(</span>y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='fl'>4.25</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='img'><img src='methods-lda-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># biplot with supplementary points for observations</span>
 <span class='va'>iris_lda</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='dplyr-verbs.html'>mutate_rows</a></span><span class='op'>(</span>
     species <span class='op'>=</span> <span class='va'>.grouping</span>,

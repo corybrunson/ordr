@@ -81,7 +81,7 @@ objects of class &quot;ca&quot; from the ca package." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -168,7 +168,7 @@ objects of class <code>"ca"</code> from the <strong><a href='https://rdrr.io/pkg
 </div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (5 x 3) x (4 x 3)'
 #&gt; # 3 coordinates: Dim1, Dim2, Dim3
 #&gt; # 
-#&gt; # Rows: [ 5 x 3 | 0 ]
+#&gt; # Rows (standard): [ 5 x 3 | 0 ]
 #&gt;     Dim1   Dim2   Dim3 | 
 #&gt;                        | 
 #&gt; <span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.241</span><span> -</span><span style='color: #BB0000;'>1.94</span><span>   3.49  | 
@@ -177,13 +177,18 @@ objects of class <code>"ca"</code> from the <strong><a href='https://rdrr.io/pkg
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.852  0.577  0.163 | 
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.735</span><span>  0.788 -</span><span style='color: #BB0000;'>0.397</span><span> | 
 #&gt; # 
-#&gt; # Columns: [ 4 x 3 | 0 ]
+#&gt; # Columns (standard): [ 4 x 3 | 0 ]
 #&gt;     Dim1    Dim2    Dim3 | 
 #&gt;                          | 
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.44</span><span>  -</span><span style='color: #BB0000;'>0.305</span><span>  -</span><span style='color: #BB0000;'>0.043</span><span style='color: #BB0000;text-decoration: underline;'>8</span><span> | 
 #&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.364  1.41    1.08   | 
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.718  0.073</span><span style='text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>1.26</span><span>   | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  1.07  -</span><span style='color: #BB0000;'>1.98</span><span>    1.29   | </div><div class='input'><span class='co'># recover row and column profiles</span>
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  1.07  -</span><span style='color: #BB0000;'>1.98</span><span>    1.29   | </div><div class='input'><span class='co'># summarize ordination</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>smoke_ca</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
+#&gt;    rank n.row n.col inertia class
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     3     5     3  0.085</span><span style='text-decoration: underline;'>2</span><span> ca   </div><div class='input'><span class='co'># recover row and column profiles</span>
 <span class='fu'><a href='accessors.html'>get_rows</a></span><span class='op'>(</span><span class='va'>smoke_ca</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;          Dim1       Dim2       Dim3
 #&gt; SM -0.2405388 -1.9357079  3.4903231
@@ -200,7 +205,7 @@ objects of class <code>"ca"</code> from the <strong><a href='https://rdrr.io/pkg
 </div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (5 x 3) x (4 x 3)'
 #&gt; # 3 coordinates: Dim1, Dim2, Dim3
 #&gt; # 
-#&gt; # Rows: [ 5 x 3 | 4 ]
+#&gt; # Rows (standard): [ 5 x 3 | 4 ]
 #&gt;     Dim1   Dim2   Dim3 |   .name  .mass .dist .inertia
 #&gt;                        |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.241</span><span> -</span><span style='color: #BB0000;'>1.94</span><span>   3.49  | </span><span style='color: #BCBCBC;'>1</span><span> SM    0.057</span><span style='text-decoration: underline;'>0</span><span> 0.217  0.002</span><span style='text-decoration: underline;'>67</span><span>
@@ -209,7 +214,7 @@ objects of class <code>"ca"</code> from the <strong><a href='https://rdrr.io/pkg
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.852  0.577  0.163 | </span><span style='color: #BCBCBC;'>4</span><span> JE    0.456  0.240  0.026</span><span style='text-decoration: underline;'>3</span><span> 
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.735</span><span>  0.788 -</span><span style='color: #BB0000;'>0.397</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> SC    0.130  0.216  0.006</span><span style='text-decoration: underline;'>05</span><span>
 #&gt; # 
-#&gt; # Columns: [ 4 x 3 | 4 ]
+#&gt; # Columns (standard): [ 4 x 3 | 4 ]
 #&gt;     Dim1    Dim2    Dim3 |   .name  .mass .dist .inertia
 #&gt;                          |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.44</span><span>  -</span><span style='color: #BB0000;'>0.305</span><span>  -</span><span style='color: #BB0000;'>0.043</span><span style='color: #BB0000;text-decoration: underline;'>8</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> none   0.316 0.394  0.049</span><span style='text-decoration: underline;'>2</span><span> 
@@ -222,23 +227,18 @@ objects of class <code>"ca"</code> from the <strong><a href='https://rdrr.io/pkg
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> Dim1  0.273  0.074</span><span style='text-decoration: underline;'>8</span><span>     0.878  
 #&gt; </span><span style='color: #BCBCBC;'>2</span><span> Dim2  0.100  0.010</span><span style='text-decoration: underline;'>0</span><span>     0.118  
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> Dim3  0.020</span><span style='text-decoration: underline;'>3</span><span> 0.000</span><span style='text-decoration: underline;'>414</span><span>   0.004</span><span style='text-decoration: underline;'>85</span><span></div><div class='input'><span class='co'># fortification of artificial coordinates yields proportion of variance measure</span>
-<span class='fu'>fortify</span><span class='op'>(</span><span class='va'>smoke_ca</span>, .matrix <span class='op'>=</span> <span class='st'>"coord"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 3 x 4</span><span>
-#&gt;   .name    .sv .inertia .prop_var
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> Dim1  0.273  0.074</span><span style='text-decoration: underline;'>8</span><span>     0.878  
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> Dim2  0.100  0.010</span><span style='text-decoration: underline;'>0</span><span>     0.118  
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span> Dim3  0.020</span><span style='text-decoration: underline;'>3</span><span> 0.000</span><span style='text-decoration: underline;'>414</span><span>   0.004</span><span style='text-decoration: underline;'>85</span><span></div><div class='input'><span class='co'># scree plot of inertia</span>
-<span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>smoke_ca</span>, .matrix <span class='op'>=</span> <span class='st'>"coord"</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>.name</span>, y <span class='op'>=</span> <span class='va'>.inertia</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>smoke_ca</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>.name</span>, y <span class='op'>=</span> <span class='va'>.inertia</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>geom_bar</span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"identity"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_col</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>""</span>, y <span class='op'>=</span> <span class='st'>"Inertia"</span><span class='op'>)</span>
 </div><div class='img'><img src='methods-ca-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># scree plot of proportion of variance (inertia)</span>
-<span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>smoke_ca</span>, .matrix <span class='op'>=</span> <span class='st'>"coord"</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>.name</span>, y <span class='op'>=</span> <span class='va'>.prop_var</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>smoke_ca</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>.name</span>, y <span class='op'>=</span> <span class='va'>.prop_var</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>scale_y_continuous</span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>geom_bar</span><span class='op'>(</span>stat <span class='op'>=</span> <span class='st'>"identity"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_y_continuous</span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org/reference/label_percent.html'>percent</a></span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_col</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>""</span>, y <span class='op'>=</span> <span class='st'>"Proportion of inertia"</span><span class='op'>)</span>
 </div><div class='img'><img src='methods-ca-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># fortification adds all above columns</span>
 <span class='fu'>fortify</span><span class='op'>(</span><span class='va'>smoke_ca</span><span class='op'>)</span>
@@ -260,7 +260,7 @@ objects of class <code>"ca"</code> from the <strong><a href='https://rdrr.io/pkg
   <span class='fu'>scale_color_manual</span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"navyblue"</span>, <span class='st'>"brown"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>scale_shape_manual</span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>17L</span>, <span class='fl'>16L</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='theme_biplot.html'>theme_biplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='geom_crosshairs.html'>geom_crosshairs</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom_origin.html'>geom_origin</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='biplot-geoms.html'>geom_rows_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='biplot-geoms.html'>geom_rows_text_repel</a></span><span class='op'>(</span>show.legend <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='biplot-geoms.html'>geom_cols_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
@@ -273,7 +273,7 @@ objects of class <code>"ca"</code> from the <strong><a href='https://rdrr.io/pkg
   <span class='fu'>scale_color_manual</span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"navyblue"</span>, <span class='st'>"brown"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>scale_shape_manual</span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>17L</span>, <span class='fl'>16L</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='theme_biplot.html'>theme_biplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='geom_crosshairs.html'>geom_crosshairs</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom_origin.html'>geom_origin</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='biplot-geoms.html'>geom_rows_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='biplot-geoms.html'>geom_rows_text_repel</a></span><span class='op'>(</span>show.legend <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='biplot-geoms.html'>geom_cols_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>

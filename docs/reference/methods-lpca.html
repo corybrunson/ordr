@@ -85,7 +85,7 @@ column names from the input matrix to the output matrices." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -211,61 +211,66 @@ column names from the input matrix to the output matrices.</p>
   <span class='fu'><a href='wrap-ord.html'>logisticSVD_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>finches_lsvd</span>
-</div><div class='output co'>#&gt; <span class='message'>rARPACK must be installed to use partial_decomp</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lsvd': (17 x 2) x (13 x 2)'
+</div><div class='output co'>#&gt; # A tbl_ord of class 'lsvd': (17 x 2) x (13 x 2)'
 #&gt; # 2 coordinates: LSC1 and LSC2
 #&gt; # 
 #&gt; # Rows: [ 17 x 2 | 0 ]
 #&gt;    LSC1   LSC2 | 
 #&gt;                | 
-#&gt; <span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>29.6</span><span> -</span><span style='color: #BB0000;'>27.3</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>29.6</span><span> -</span><span style='color: #BB0000;'>27.3</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  39.4  22.9  | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  39.9  40.6  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  20.2   3.50 | 
+#&gt; <span style='color: #BCBCBC;'>1</span><span>  29.6 -</span><span style='color: #BB0000;'>27.3</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  29.6 -</span><span style='color: #BB0000;'>27.3</span><span>  | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>39.4</span><span>  22.9  | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>39.9</span><span>  40.6  | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>20.2</span><span>   3.50 | 
 #&gt; 
 #&gt; # 
 #&gt; # Columns: [ 13 x 2 | 0 ]
-#&gt;     LSC1   LSC2 | 
-#&gt;                 | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.233   0.231 | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 0.223  -</span><span style='color: #BB0000;'>0.216</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.164  -</span><span style='color: #BB0000;'>0.318</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.078</span><span style='text-decoration: underline;'>7</span><span>  0.548 | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.240  -</span><span style='color: #BB0000;'>0.451</span><span> | 
-#&gt; </div><div class='input'><span class='co'># recover row and column singular vectors</span>
+#&gt;      LSC1   LSC2 | 
+#&gt;                  | 
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.233</span><span>   0.231 | 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.223</span><span>  -</span><span style='color: #BB0000;'>0.216</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.164</span><span>  -</span><span style='color: #BB0000;'>0.318</span><span> | 
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.078</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>  0.548 | 
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.240</span><span>  -</span><span style='color: #BB0000;'>0.451</span><span> | 
+#&gt; </div><div class='input'><span class='co'># summarize ordination</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>finches_lsvd</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
+#&gt;    rank n.row n.col inertia class
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     2    17     2      </span><span style='color: #BB0000;'>NA</span><span> lsvd </div><div class='input'><span class='co'># recover row and column singular vectors</span>
 <span class='fu'><a href='accessors.html'>get_rows</a></span><span class='op'>(</span><span class='va'>finches_lsvd</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;                      LSC1       LSC2
-#&gt; Seymour       -29.6262671 -27.292836
-#&gt; Baltra        -29.6262671 -27.292836
-#&gt; Isabella       39.4314874  22.927636
-#&gt; Fernandina     39.8768982  40.613511
-#&gt; Santiago       20.1536654   3.503292
-#&gt; Rabida         15.4603101 -22.650661
-#&gt; Pinzon         40.5096442 -24.660902
-#&gt; Santa.Cruz     20.1536654   3.503292
-#&gt; Santa.Fe       15.4603101 -22.650661
-#&gt; San.Cristobal   8.7235247  12.421222
-#&gt; Espanola      -61.7590052 -11.873004
-#&gt; Floreana       13.6420482  -9.833823
-#&gt; Genovesa      -51.8042665  33.189084
-#&gt; Marchena       -0.9206994 -23.984187
-#&gt; Pinta          10.1096479  -7.046090
-#&gt; Darwin        -24.8923482  30.563483
-#&gt; Wolf          -24.8923482  30.563483</div><div class='input'><span class='fu'><a href='accessors.html'>get_cols</a></span><span class='op'>(</span><span class='va'>finches_lsvd</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                                 LSC1        LSC2
-#&gt; Geospiza magnirostris     0.23272839  0.23084971
-#&gt; Geospiza fortis           0.22266425 -0.21621915
-#&gt; Geospiza fuliginosa       0.16417675 -0.31757704
-#&gt; Geospiza difficilis       0.07874014  0.54780935
-#&gt; Geospiza scandens         0.24004813 -0.45074613
-#&gt; Geospiza conirostris     -0.27006945  0.03652519
-#&gt; Camarhynchus psittacula   0.44241704 -0.28775708
-#&gt; Camarhynchus pauper       0.02115053 -0.02454548
-#&gt; Camarhynchus parvulus     0.43989011  0.13896548
-#&gt; Platyspiza crassirostris  0.33265957 -0.05424971
-#&gt; Cactospiza pallida        0.44093325  0.36126149
-#&gt; Cactospiza heliobates     0.19435918  0.24151680
-#&gt; Certhidea olivacea        0.00000000  0.00000000</div><div class='input'><span class='co'># augment ordination with point names and main effect estimates</span>
+#&gt; Seymour        29.6262671 -27.292836
+#&gt; Baltra         29.6262671 -27.292836
+#&gt; Isabella      -39.4314874  22.927636
+#&gt; Fernandina    -39.8768982  40.613511
+#&gt; Santiago      -20.1536654   3.503292
+#&gt; Rabida        -15.4603101 -22.650661
+#&gt; Pinzon        -40.5096442 -24.660902
+#&gt; Santa.Cruz    -20.1536654   3.503292
+#&gt; Santa.Fe      -15.4603101 -22.650661
+#&gt; San.Cristobal  -8.7235247  12.421222
+#&gt; Espanola       61.7590052 -11.873004
+#&gt; Floreana      -13.6420482  -9.833823
+#&gt; Genovesa       51.8042665  33.189084
+#&gt; Marchena        0.9206994 -23.984187
+#&gt; Pinta         -10.1096479  -7.046090
+#&gt; Darwin         24.8923482  30.563483
+#&gt; Wolf           24.8923482  30.563483</div><div class='input'><span class='fu'><a href='accessors.html'>get_cols</a></span><span class='op'>(</span><span class='va'>finches_lsvd</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                                   LSC1          LSC2
+#&gt; Geospiza magnirostris    -2.327284e-01  2.308497e-01
+#&gt; Geospiza fortis          -2.226643e-01 -2.162192e-01
+#&gt; Geospiza fuliginosa      -1.641768e-01 -3.175770e-01
+#&gt; Geospiza difficilis      -7.874014e-02  5.478093e-01
+#&gt; Geospiza scandens        -2.400481e-01 -4.507461e-01
+#&gt; Geospiza conirostris      2.700695e-01  3.652519e-02
+#&gt; Camarhynchus psittacula  -4.424170e-01 -2.877571e-01
+#&gt; Camarhynchus pauper      -2.115053e-02 -2.454548e-02
+#&gt; Camarhynchus parvulus    -4.398901e-01  1.389655e-01
+#&gt; Platyspiza crassirostris -3.326596e-01 -5.424971e-02
+#&gt; Cactospiza pallida       -4.409332e-01  3.612615e-01
+#&gt; Cactospiza heliobates    -1.943592e-01  2.415168e-01
+#&gt; Certhidea olivacea        4.935358e-17 -1.464166e-16</div><div class='input'><span class='co'># augment ordination with point names and main effect estimates</span>
 <span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='va'>finches_lsvd</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; # A tbl_ord of class 'lsvd': (17 x 2) x (13 x 2)'
 #&gt; # 2 coordinates: LSC1 and LSC2
@@ -273,21 +278,21 @@ column names from the input matrix to the output matrices.</p>
 #&gt; # Rows: [ 17 x 2 | 1 ]
 #&gt;    LSC1   LSC2 |   .name     
 #&gt;                |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>29.6</span><span> -</span><span style='color: #BB0000;'>27.3</span><span>  | </span><span style='color: #BCBCBC;'>1</span><span> Seymour   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>29.6</span><span> -</span><span style='color: #BB0000;'>27.3</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Baltra    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  39.4  22.9  | </span><span style='color: #BCBCBC;'>3</span><span> Isabella  
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  39.9  40.6  | </span><span style='color: #BCBCBC;'>4</span><span> Fernandina
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  20.2   3.50 | </span><span style='color: #BCBCBC;'>5</span><span> Santiago  
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  29.6 -</span><span style='color: #BB0000;'>27.3</span><span>  | </span><span style='color: #BCBCBC;'>1</span><span> Seymour   
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  29.6 -</span><span style='color: #BB0000;'>27.3</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Baltra    
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>39.4</span><span>  22.9  | </span><span style='color: #BCBCBC;'>3</span><span> Isabella  
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>39.9</span><span>  40.6  | </span><span style='color: #BCBCBC;'>4</span><span> Fernandina
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>20.2</span><span>   3.50 | </span><span style='color: #BCBCBC;'>5</span><span> Santiago  
 #&gt; </span><span style='color: #949494;'># … with 12 more rows</span><span>
 #&gt; # 
 #&gt; # Columns: [ 13 x 2 | 2 ]
-#&gt;     LSC1   LSC2 |   .name                   .mu
-#&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.233   0.231 | </span><span style='color: #BCBCBC;'>1</span><span> Geospiza magnirostris  9.02
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 0.223  -</span><span style='color: #BB0000;'>0.216</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Geospiza fortis        5.97
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.164  -</span><span style='color: #BB0000;'>0.318</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Geospiza fuliginosa    9.86
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.078</span><span style='text-decoration: underline;'>7</span><span>  0.548 | </span><span style='color: #BCBCBC;'>4</span><span> Geospiza difficilis    6.88
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.240  -</span><span style='color: #BB0000;'>0.451</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> Geospiza scandens      5.85
+#&gt;      LSC1   LSC2 |   .name                   .mu
+#&gt;                  |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.233</span><span>   0.231 | </span><span style='color: #BCBCBC;'>1</span><span> Geospiza magnirostris  9.02
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.223</span><span>  -</span><span style='color: #BB0000;'>0.216</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Geospiza fortis        5.97
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.164</span><span>  -</span><span style='color: #BB0000;'>0.318</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Geospiza fuliginosa    9.86
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.078</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>  0.548 | </span><span style='color: #BCBCBC;'>4</span><span> Geospiza difficilis    6.88
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.240</span><span>  -</span><span style='color: #BB0000;'>0.451</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> Geospiza scandens      5.85
 #&gt; </span><span style='color: #949494;'># … with 8 more rows</span><span></div><div class='input'><span class='co'># summarize artifical coordinates (inertia is undefined)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>finches_lsvd</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 3</span><span>
@@ -332,7 +337,12 @@ column names from the input matrix to the output matrices.</p>
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.279</span><span>  -</span><span style='color: #BB0000;'>0.281</span><span> | 
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.038</span><span style='text-decoration: underline;'>9</span><span>  0.568 | 
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.353</span><span>  -</span><span style='color: #BB0000;'>0.361</span><span> | 
-#&gt; </div><div class='input'><span class='co'># recover row and column singular vectors</span>
+#&gt; </div><div class='input'><span class='co'># summarize ordination</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>finches_lpca</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
+#&gt;    rank n.row n.col inertia class
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     2    17     2      </span><span style='color: #BB0000;'>NA</span><span> lpca </div><div class='input'><span class='co'># recover row and column singular vectors</span>
 <span class='fu'><a href='accessors.html'>get_rows</a></span><span class='op'>(</span><span class='va'>finches_lpca</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;                     LPC1       LPC2
 #&gt; Seymour         2.023724 -10.397181
@@ -434,7 +444,12 @@ column names from the input matrix to the output matrices.</p>
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.210 -</span><span style='color: #BB0000;'>0.315</span><span> | 
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.110  0.568 | 
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.275 -</span><span style='color: #BB0000;'>0.444</span><span> | 
-#&gt; </div><div class='input'><span class='co'># recover row and column singular vectors</span>
+#&gt; </div><div class='input'><span class='co'># summarize ordination</span>
+<span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>finches_clpca</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
+#&gt;    rank n.row n.col inertia class
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     2    17     2      </span><span style='color: #BB0000;'>NA</span><span> clpca</div><div class='input'><span class='co'># recover row and column singular vectors</span>
 <span class='fu'><a href='accessors.html'>get_rows</a></span><span class='op'>(</span><span class='va'>finches_clpca</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;                     LPC1       LPC2
 #&gt; Seymour        -5.808312 -9.5867231

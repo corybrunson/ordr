@@ -6,6 +6,7 @@
 #' @name methods-svd
 #' @include ord-tbl.r
 #' @template param-methods
+#' @example inst/examples/ex-methods-svd-spend.r
 NULL
 
 #' @rdname methods-svd

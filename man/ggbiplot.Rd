@@ -91,7 +91,7 @@ aesthetics, which will be interpreted as the corresponding coordinates in the
 ordination.
 
 \code{ord_aes()} is a convenience function that generates a full-rank set of
-coordinate aesthetics \code{.coord1}, \code{.coord2}, etc. mapped to the
+coordinate aesthetics \code{..coord1}, \code{..coord2}, etc. mapped to the
 shared coordinates of the ordination object, along with any additional
 aesthetics that are processed internally by \code{\link[ggplot2:aes]{ggplot2::aes()}}.
 }

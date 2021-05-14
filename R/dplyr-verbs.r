@@ -102,7 +102,8 @@ transmute_cols <- function(.data, ...) {
 }
 
 bind_cols_factor <- function(.data, ..., .matrix) {
-  att <- bind_cols(annotation_factor(.data, .matrix = .matrix), ...)
+  ann_fac <- annotation_factor(.data, .matrix = .matrix)
+  att <- if (nrow(ann_fac) == 0L) tibble(...) else bind_cols(ann_fac, ...)
   set_annotation_factor(.data, att, .matrix = .matrix)
 }
 #' @rdname dplyr-verbs

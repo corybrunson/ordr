@@ -40,8 +40,8 @@
 
 
 <meta property="og:title" content="Plot and biplot methods for 'tbl_ord' objects — plot.tbl_ord" />
-<meta property="og:description" content="Mimic stats plot(), screeplot(), and biplot() methods
-for 'prcomp' and 'princomp' objects for 'tbl_ord' objects." />
+<meta property="og:description" content="Adapt stats 'prcomp' and 'princomp' methods for plot(),
+screeplot(), and biplot() generics to 'tbl_ord' objects." />
 
 
 
@@ -81,7 +81,7 @@ for 'prcomp' and 'princomp' objects for 'tbl_ord' objects." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -110,12 +110,12 @@ for 'prcomp' and 'princomp' objects for 'tbl_ord' objects." />
     </div>
 
     <div class="ref-description">
-    <p>Mimic <strong>stats</strong> <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code>, <code><a href='https://rdrr.io/r/stats/screeplot.html'>screeplot()</a></code>, and <code><a href='https://rdrr.io/r/stats/biplot.html'>biplot()</a></code> methods
-for 'prcomp' and 'princomp' objects for 'tbl_ord' objects.</p>
+    <p>Adapt <strong>stats</strong> 'prcomp' and 'princomp' methods for <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code>,
+<code><a href='https://rdrr.io/r/stats/screeplot.html'>screeplot()</a></code>, and <code><a href='https://rdrr.io/r/stats/biplot.html'>biplot()</a></code> generics to 'tbl_ord' objects.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for tbl_ord</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span>, main <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/deparse.html'>deparse1</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span>, main <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/deparse.html'>deparse</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,86 +153,33 @@ the proportions do not sum to 1, in which case it produces a symmetric biplot
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># note: behavior depends on installed packages with class-specific methods</span>
 <span class='co'># class 'prcomp'</span>
-<span class='va'>iris</span><span class='op'>[</span>, <span class='op'>-</span><span class='fl'>5</span><span class='op'>]</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/prcomp.html'>prcomp</a></span><span class='op'>(</span>scale <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>iris_pca</span>
-</div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
-#&gt; # 4 coordinates: PC1, PC2, ..., PC4
-#&gt; # 
-#&gt; # Rows: [ 150 x 4 | 0 ]
-#&gt;     PC1    PC2     PC3 ... | 
-#&gt;                            | 
-#&gt; <span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>2.26</span><span> -</span><span style='color: #BB0000;'>0.478</span><span>  0.127      | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>2.07</span><span>  0.672  0.234  ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>2.36</span><span>  0.341 -</span><span style='color: #BB0000;'>0.044</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.29</span><span>  0.595 -</span><span style='color: #BB0000;'>0.091</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.38</span><span> -</span><span style='color: #BB0000;'>0.645</span><span> -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>     | 
-#&gt; 
-#&gt; # 
-#&gt; # Columns: [ 4 x 4 | 0 ]
-#&gt;      PC1     PC2    PC3 ... | 
-#&gt;                             | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.521 -</span><span style='color: #BB0000;'>0.377</span><span>   0.720     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.269</span><span> -</span><span style='color: #BB0000;'>0.923</span><span>  -</span><span style='color: #BB0000;'>0.244</span><span> ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.580 -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.142</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.565 -</span><span style='color: #BB0000;'>0.066</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>0.634</span><span>     | </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>iris_pca</span><span class='op'>)</span>
-</div><div class='img'><img src='plot.tbl_ord-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/screeplot.html'>screeplot</a></span><span class='op'>(</span><span class='va'>iris_pca</span><span class='op'>)</span>
-</div><div class='img'><img src='plot.tbl_ord-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/biplot.html'>biplot</a></span><span class='op'>(</span><span class='va'>iris_pca</span><span class='op'>)</span>
-</div><div class='img'><img src='plot.tbl_ord-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># class 'ca'</span>
-<span class='fu'>ca</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/ca/man/smoke.html'>smoke</a></span> <span class='op'>%&gt;%</span>
-  <span class='fu'>ca</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/ca.html'>ca</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>smoke_ca</span>
-</div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (5 x 3) x (4 x 3)'
-#&gt; # 3 coordinates: Dim1, Dim2, Dim3
-#&gt; # 
-#&gt; # Rows: [ 5 x 3 | 0 ]
-#&gt;     Dim1   Dim2   Dim3 | 
-#&gt;                        | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.241</span><span> -</span><span style='color: #BB0000;'>1.94</span><span>   3.49  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.947 -</span><span style='color: #BB0000;'>2.43</span><span>  -</span><span style='color: #BB0000;'>1.66</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>1.39</span><span>  -</span><span style='color: #BB0000;'>0.107</span><span> -</span><span style='color: #BB0000;'>0.254</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.852  0.577  0.163 | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.735</span><span>  0.788 -</span><span style='color: #BB0000;'>0.397</span><span> | 
-#&gt; # 
-#&gt; # Columns: [ 4 x 3 | 0 ]
-#&gt;     Dim1    Dim2    Dim3 | 
-#&gt;                          | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.44</span><span>  -</span><span style='color: #BB0000;'>0.305</span><span>  -</span><span style='color: #BB0000;'>0.043</span><span style='color: #BB0000;text-decoration: underline;'>8</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.364  1.41    1.08   | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.718  0.073</span><span style='text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>1.26</span><span>   | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  1.07  -</span><span style='color: #BB0000;'>1.98</span><span>    1.29   | </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>smoke_ca</span><span class='op'>)</span>
-</div><div class='img'><img src='plot.tbl_ord-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/screeplot.html'>screeplot</a></span><span class='op'>(</span><span class='va'>smoke_ca</span><span class='op'>)</span>
-</div><div class='img'><img src='plot.tbl_ord-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/biplot.html'>biplot</a></span><span class='op'>(</span><span class='va'>smoke_ca</span><span class='op'>)</span>
-</div><div class='img'><img src='plot.tbl_ord-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># class 'lra'</span>
-<span class='va'>USArrests</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span>select <span class='op'>=</span> <span class='op'>-</span><span class='va'>UrbanPop</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='lra-ord.html'>lra</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>arrests_lra</span>
-</div><div class='output co'>#&gt; # A tbl_ord of class 'lra': (50 x 2) x (3 x 2)'
-#&gt; # 2 coordinates: LRSV1 and LRSV2
-#&gt; # 
-#&gt; # Rows: [ 50 x 2 | 0 ]
-#&gt;    LRSV1  LRSV2 | 
-#&gt;                 | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.680</span><span>  0.930 | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.930 -</span><span style='color: #BB0000;'>0.625</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.330</span><span> -</span><span style='color: #BB0000;'>1.31</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.351</span><span>  0.277 | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.552 -</span><span style='color: #BB0000;'>1.00</span><span>  | 
-#&gt; 
-#&gt; # 
-#&gt; # Columns: [ 3 x 2 | 0 ]
-#&gt;    LRSV1  LRSV2 | 
-#&gt;                 | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.283  4.96  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.371</span><span> -</span><span style='color: #BB0000;'>0.181</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  2.88  -</span><span style='color: #BB0000;'>0.366</span><span> | </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>arrests_lra</span><span class='op'>)</span>
-</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/screeplot.html'>screeplot</a></span><span class='op'>(</span><span class='va'>arrests_lra</span><span class='op'>)</span>
-</div><div class='img'><img src='plot.tbl_ord-7.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/biplot.html'>biplot</a></span><span class='op'>(</span><span class='va'>arrests_lra</span><span class='op'>)</span>
-</div><div class='img'><img src='plot.tbl_ord-8.png' alt='' width='700' height='433' /></div></span></pre>
+<span class='va'>iris_pca</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/prcomp.html'>prcomp</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>, <span class='op'>-</span><span class='fl'>5L</span><span class='op'>]</span>, scale <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>iris_pca_ord</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='va'>iris_pca</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>iris_pca</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.tbl_ord-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>iris_pca_ord</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.tbl_ord-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/screeplot.html'>screeplot</a></span><span class='op'>(</span><span class='va'>iris_pca</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.tbl_ord-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/screeplot.html'>screeplot</a></span><span class='op'>(</span><span class='va'>iris_pca_ord</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.tbl_ord-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/biplot.html'>biplot</a></span><span class='op'>(</span><span class='va'>iris_pca</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.tbl_ord-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/biplot.html'>biplot</a></span><span class='op'>(</span><span class='va'>iris_pca_ord</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.tbl_ord-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># class 'ca'</span>
+<span class='va'>smoke_ca</span> <span class='op'>&lt;-</span> <span class='fu'>ca</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/ca.html'>ca</a></span><span class='op'>(</span><span class='fu'>ca</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/ca/man/smoke.html'>smoke</a></span><span class='op'>)</span>
+<span class='va'>smoke_ca_ord</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='va'>smoke_ca</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>smoke_ca</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.tbl_ord-7.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>smoke_ca_ord</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.tbl_ord-8.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>#screeplot(smoke_ca)</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/screeplot.html'>screeplot</a></span><span class='op'>(</span><span class='va'>smoke_ca_ord</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.tbl_ord-9.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>#biplot(smoke_ca)</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/biplot.html'>biplot</a></span><span class='op'>(</span><span class='va'>smoke_ca_ord</span>, var.axes <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.tbl_ord-10.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># class 'lra'</span>
+<span class='va'>arrests_lra</span> <span class='op'>&lt;-</span> <span class='fu'><a href='lra-ord.html'>lra</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>USArrests</span>, select <span class='op'>=</span> <span class='op'>-</span><span class='va'>UrbanPop</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>arrests_lra_ord</span> <span class='op'>&lt;-</span> <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='va'>arrests_lra</span><span class='op'>)</span>
+<span class='co'>#plot(arrests_lra)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>arrests_lra_ord</span><span class='op'>)</span>
+</div><div class='input'><span class='co'>#screeplot(arrests_lra)</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/screeplot.html'>screeplot</a></span><span class='op'>(</span><span class='va'>arrests_lra_ord</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.tbl_ord-11.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>#biplot(arrests_lra)</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/biplot.html'>biplot</a></span><span class='op'>(</span><span class='va'>arrests_lra_ord</span>, var.axes <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.tbl_ord-12.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

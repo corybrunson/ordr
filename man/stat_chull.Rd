@@ -2,14 +2,13 @@
 % Please edit documentation in R/stat-chull.r
 \name{stat_chull}
 \alias{stat_chull}
-\title{Restrict ordination data to the convex hulls of both matrix factors}
+\title{Restrict geometric data to boundary points for its convex hull}
 \usage{
 stat_chull(
   mapping = NULL,
   data = NULL,
   geom = "polygon",
   position = "identity",
-  conical = FALSE,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -41,9 +40,6 @@ from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{conical}{Logical; whether to include the origin when calculating the
-hull. Defaults to \code{FALSE}.}
-
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
 \code{FALSE} never includes, and \code{TRUE} always includes.
@@ -59,10 +55,9 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 }
 \description{
 As used in a \strong{\link[ggplot2:ggplot2-package]{ggplot2}} vignette, this stat
-layer restricts a dataset with \code{x} and \code{y} variables to its convex hull.
-The biplot extension restricts each matrix factor to its own hull. The
-\code{conical} parameter controls whether the origin is included in the
-calculation, though note that the result is not the (unbounded) \href{https://en.wikipedia.org/wiki/Conical_combination#Conical_hull}{conical hull}.
+layer restricts a dataset with \code{x} and \code{y} variables to the points that lie
+on its convex hull. The biplot extension restricts each matrix factor to
+its own hull.
 }
 \section{Biplot layers}{
 
@@ -75,6 +70,26 @@ The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the correspon
 stat in order to render plot elements for the corresponding factor matrix.
 \verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.
+}
+
+\section{Ordination aesthetics}{
+
+The convenience function \verb{[ord_aes()]} can be used to incorporate all
+coordinates of the ordination model into a statistical transformation. It
+maps the coordinates to the custom aesthetics \code{..coord1}, \code{..coord2}, etc.
+
+Some transformations, e.g. \verb{[stat_center()]}, are commutative with projection
+to the 'x' and 'y' coordinates. If they detect aesthetics of the form
+\verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and \code{y}
+while any remaining are ignored.
+
+Other transformations, e.g. \verb{stat_spantree()]}, yield different results in a
+planar biplot when they are computer before or after projection. If such a
+stat layer detects these aesthetics, then the lot of them are used in the
+transformation.
+
+In either case, the stat layer returns a data frame with position aesthetics
+\code{x} and \code{y}.
 }
 
 \examples{
@@ -105,41 +120,12 @@ hec_ca \%>\%
   geom_rows_point() +
   geom_cols_point() +
   ggtitle("Column-principal CA of hair & eye color")
-# centered principal components analysis of U.S. personal expenditure data
-USPersonalExpenditure \%>\%
-  prcomp() \%>\%
-  as_tbl_ord() \%>\%
-  # allow radiating text to exceed plotting window
-  ggbiplot(aes(label = .name), clip = "off",
-           sec.axes = "cols", scale.factor = 50) +
-  geom_rows_label(size = 3) +
-  geom_cols_vector() +
-  # omit labels in the hull with the origin
-  geom_cols_text_radiate(stat = "chull") +
-  ggtitle(
-    "U.S. Personal Expenditure data, 1940-1960",
-    "Row-principal biplot of centered PCA"
-  )
-# uncentered principal components analysis of U.S. personal expenditure data
-USPersonalExpenditure \%>\%
-  prcomp(center = FALSE) \%>\%
-  as_tbl_ord() \%>\%
-  confer_inertia(c(.5, .5)) \%>\%
-  # allow radiating text to exceed plotting window
-  ggbiplot(aes(label = .name), clip = "off") +
-  geom_rows_label(size = 3) +
-  geom_cols_vector() +
-  # omit labels in the hull with the origin
-  geom_cols_text_radiate(stat = "chull", conical = TRUE) +
-  scale_x_continuous(expand = expansion(add = 1), trans = "reverse") +
-  ggtitle(
-    "U.S. Personal Expenditure data, 1940-1960",
-    "Symmetric biplot of un-centered PCA"
-  )
 }
 \seealso{
 Other stat layers: 
 \code{\link{stat_center}()},
+\code{\link{stat_cone}()},
+\code{\link{stat_scale}()},
 \code{\link{stat_spantree}()}
 }
 \concept{stat layers}

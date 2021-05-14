@@ -57,12 +57,46 @@ matrix_stat <- function(.matrix, stat) {
 rows_stat <- function(stat) matrix_stat("rows", stat)
 cols_stat <- function(stat) matrix_stat("cols", stat)
 
+# get ordination coordinate mapping from a data frame in a stat layer:
+# `ord_aes()` if specified, otherwise 'x' and 'y'
+get_ord_aes <- function(data) {
+  ord_cols <- grep("^\\.\\.coord[0-9]+$", names(data))
+  if (length(ord_cols) == 0) ord_cols <- match(c("x", "y"), names(data))
+  ord_cols
+}
+
+# restrict to a matrix factor
 setup_rows_data <- function(data, params) {
   data[data$.matrix == "rows", -match(".matrix", names(data)), drop = FALSE]
 }
-
 setup_cols_data <- function(data, params) {
   data[data$.matrix == "cols", -match(".matrix", names(data)), drop = FALSE]
+}
+# restrict to a matrix factor and to the first two coordinates
+# (for stat layers that only accept 'x' and 'y')
+setup_rows_xy_data <- function(data, params) {
+  data <- setup_rows_data(data, params)
+  
+  ord_cols <- get_ord_aes(data)
+  # if necessary, restore 'x' and 'y' from first and second coordinates
+  if (any(is.na(match(c("x", "y"), names(data)[ord_cols])))) {
+    xy_cols <- match(c("..coord1", "..coord2"), names(data)[ord_cols])
+    names(data)[xy_cols] <- c("x", "y")
+  }
+  
+  data
+}
+setup_cols_xy_data <- function(data, params) {
+  data <- setup_cols_data(data, params)
+  
+  ord_cols <- get_ord_aes(data)
+  # if necessary, restore 'x' and 'y' from first and second coordinates
+  if (any(is.na(match(c("x", "y"), names(data)[ord_cols])))) {
+    xy_cols <- match(c("..coord1", "..coord2"), names(data)[ord_cols])
+    names(data)[xy_cols] <- c("x", "y")
+  }
+  
+  data
 }
 
 is_const <- function(x) length(unique(x)) == 1L

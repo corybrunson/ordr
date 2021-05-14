@@ -48,7 +48,8 @@ of the \link{augmentation} methods:
 \itemize{
 \item The \code{\link[generics:tidy]{generics::tidy()}} method
 summarizes information about model components, which here are the
-artificial coordinates created by ordinations.
+artificial coordinates created by ordinations. The output can be passed to
+\code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} to generate scree plots.
 \item The \code{\link[generics:glance]{generics::glance()}} method
 reports information about the entire model, here always treated as one of a
 broader class of ordination models.
@@ -56,14 +57,11 @@ broader class of ordination models.
 augments and collapses row and/or column data, depending on \code{.matrix}, into
 a single tibble, in preparation for \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}. Its output
 resembles that of \code{\link[generics:augment]{generics::augment()}}, though rows in the output may
-correspond to rows, columns, or both of the original data.
+correspond to rows, columns, or both of the original data. If \code{.matrix} is
+passed \code{"rows"}, \code{"cols"}, or \code{"dims"} (for both), then \code{fortify()} returns
+a tibble whose fields are obtained, in order, via \verb{get_*()},
+\verb{augmentation_*()}, and \verb{annotation_*()}.
 }
-
-If \code{.matrix} is passed \code{"rows"}, \code{"cols"}, or \code{"dims"} (for both), then
-\code{fortify()} returns a tibble whose fields are obtained, in order, via
-\verb{get_*()}, \verb{augmentation_*()}, and \verb{annotation_*()}. In the special case
-\code{.matrix = "coordinates"}, the augmented artificial coordinates are returned.
-This can be used to produce scree plots, for example.
 
 If augmentation or any annotation is included, then the tibble is assigned a
 \code{"coordinates"} attribute whose value is obtained via \code{\link[=get_coord]{get_coord()}}. This
