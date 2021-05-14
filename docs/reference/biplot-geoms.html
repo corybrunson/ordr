@@ -83,7 +83,7 @@ the same aesthetics as their corresponding conventional geoms." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -173,6 +173,7 @@ the same aesthetics as their corresponding conventional geoms.</p>
   calibrate <span class='op'>=</span> <span class='cn'>FALSE</span>,
   family_fun <span class='op'>=</span> <span class='cn'>NULL</span>,
   by <span class='op'>=</span> <span class='cn'>NULL</span>,
+  num <span class='op'>=</span> <span class='fl'>6L</span>,
   label_dodge <span class='op'>=</span> <span class='fl'>0.025</span>,
   <span class='va'>...</span>,
   parse <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -191,6 +192,7 @@ the same aesthetics as their corresponding conventional geoms.</p>
   calibrate <span class='op'>=</span> <span class='cn'>FALSE</span>,
   family_fun <span class='op'>=</span> <span class='cn'>NULL</span>,
   by <span class='op'>=</span> <span class='cn'>NULL</span>,
+  num <span class='op'>=</span> <span class='fl'>6L</span>,
   label_dodge <span class='op'>=</span> <span class='fl'>0.025</span>,
   <span class='va'>...</span>,
   parse <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -210,6 +212,7 @@ the same aesthetics as their corresponding conventional geoms.</p>
   calibrate <span class='op'>=</span> <span class='cn'>FALSE</span>,
   family_fun <span class='op'>=</span> <span class='cn'>NULL</span>,
   by <span class='op'>=</span> <span class='cn'>NULL</span>,
+  num <span class='op'>=</span> <span class='fl'>6L</span>,
   label_dodge <span class='op'>=</span> <span class='fl'>0.025</span>,
   <span class='va'>...</span>,
   parse <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -228,6 +231,7 @@ the same aesthetics as their corresponding conventional geoms.</p>
   calibrate <span class='op'>=</span> <span class='cn'>FALSE</span>,
   family_fun <span class='op'>=</span> <span class='cn'>NULL</span>,
   by <span class='op'>=</span> <span class='cn'>NULL</span>,
+  num <span class='op'>=</span> <span class='fl'>6L</span>,
   tick_length <span class='op'>=</span> <span class='fl'>0.025</span>,
   <span class='va'>...</span>,
   na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -244,6 +248,7 @@ the same aesthetics as their corresponding conventional geoms.</p>
   calibrate <span class='op'>=</span> <span class='cn'>FALSE</span>,
   family_fun <span class='op'>=</span> <span class='cn'>NULL</span>,
   by <span class='op'>=</span> <span class='cn'>NULL</span>,
+  num <span class='op'>=</span> <span class='fl'>6L</span>,
   tick_length <span class='op'>=</span> <span class='fl'>0.025</span>,
   <span class='va'>...</span>,
   na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -261,6 +266,7 @@ the same aesthetics as their corresponding conventional geoms.</p>
   calibrate <span class='op'>=</span> <span class='cn'>FALSE</span>,
   family_fun <span class='op'>=</span> <span class='cn'>NULL</span>,
   by <span class='op'>=</span> <span class='cn'>NULL</span>,
+  num <span class='op'>=</span> <span class='fl'>6L</span>,
   tick_length <span class='op'>=</span> <span class='fl'>0.025</span>,
   <span class='va'>...</span>,
   na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -786,6 +792,10 @@ the default plot specification, e.g. <code><a href='https://ggplot2.tidyverse.or
       <td><p>A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
 standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</code> (for both).</p></td>
+    </tr>
+    <tr>
+      <th>num</th>
+      <td><p>Integer; the number of text labels on each axis.</p></td>
     </tr>
     <tr>
       <th>label_dodge</th>

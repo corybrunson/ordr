@@ -2,14 +2,13 @@
 % Please edit documentation in R/stat-chull.r
 \name{stat_chull}
 \alias{stat_chull}
-\title{Restrict ordination data to the convex hulls of both matrix factors}
+\title{Restrict geometric data to boundary points for its convex hull}
 \usage{
 stat_chull(
   mapping = NULL,
   data = NULL,
   geom = "polygon",
   position = "identity",
-  conical = FALSE,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -41,9 +40,6 @@ from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{conical}{Logical; whether to include the origin when calculating the
-hull. Defaults to \code{FALSE}.}
-
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
 \code{FALSE} never includes, and \code{TRUE} always includes.
@@ -59,10 +55,9 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 }
 \description{
 As used in a \strong{\link[ggplot2:ggplot2-package]{ggplot2}} vignette, this stat
-layer restricts a dataset with \code{x} and \code{y} variables to its convex hull.
-The biplot extension restricts each matrix factor to its own hull. The
-\code{conical} parameter controls whether the origin is included in the
-calculation, though note that the result is not the (unbounded) \href{https://en.wikipedia.org/wiki/Conical_combination#Conical_hull}{conical hull}.
+layer restricts a dataset with \code{x} and \code{y} variables to the points that lie
+on its convex hull. The biplot extension restricts each matrix factor to
+its own hull.
 }
 \section{Biplot layers}{
 
@@ -77,9 +72,60 @@ stat in order to render plot elements for the corresponding factor matrix.
 points for rows and arrows for columns.
 }
 
+\section{Ordination aesthetics}{
+
+The convenience function \verb{[ord_aes()]} can be used to incorporate all
+coordinates of the ordination model into a statistical transformation. It
+maps the coordinates to the custom aesthetics \code{..coord1}, \code{..coord2}, etc.
+
+Some transformations, e.g. \verb{[stat_center()]}, are commutative with projection
+to the 'x' and 'y' coordinates. If they detect aesthetics of the form
+\verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and \code{y}
+while any remaining are ignored.
+
+Other transformations, e.g. \verb{stat_spantree()]}, yield different results in a
+planar biplot when they are computer before or after projection. If such a
+stat layer detects these aesthetics, then the lot of them are used in the
+transformation.
+
+In either case, the stat layer returns a data frame with position aesthetics
+\code{x} and \code{y}.
+}
+
+\examples{
+# correspondence analysis of combined female and male hair and eye color data
+HairEyeColor \%>\%
+  rowSums(dims = 2L) \%>\%
+  ca::ca() \%>\%
+  as_tbl_ord() \%>\%
+  augment_ord() \%>\%
+  print() -> hec_ca
+# inertia across artificial coordinates (all singular values < 1)
+recover_inertia(hec_ca)
+# in row-principal biplot, row coordinates are weighted averages of columns
+hec_ca \%>\%
+  confer_inertia("rows") \%>\%
+  ggbiplot(aes(color = .matrix, fill = .matrix, shape = .matrix)) +
+  theme_bw() +
+  stat_cols_chull(alpha = .1) +
+  geom_cols_point() +
+  geom_rows_point() +
+  ggtitle("Row-principal CA of hair & eye color")
+# in column-principal biplot, column coordinates are weighted averages of rows
+hec_ca \%>\%
+  confer_inertia("cols") \%>\%
+  ggbiplot(aes(color = .matrix, fill = .matrix, shape = .matrix)) +
+  theme_bw() +
+  stat_rows_chull(alpha = .1) +
+  geom_rows_point() +
+  geom_cols_point() +
+  ggtitle("Column-principal CA of hair & eye color")
+}
 \seealso{
 Other stat layers: 
 \code{\link{stat_center}()},
+\code{\link{stat_cone}()},
+\code{\link{stat_scale}()},
 \code{\link{stat_spantree}()}
 }
 \concept{stat layers}

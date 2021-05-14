@@ -41,18 +41,26 @@ recover_coord.lsvd <- function(x) paste0("LSC", 1:ncol(x$A))
 #' @rdname methods-lpca
 #' @export
 augmentation_rows.lsvd <- function(x) {
-  tibble(
-    .name = rownames(x$A)
-  )
+  .name <- rownames(x$A)
+  res <- if (is.null(.name)) {
+    tibble_pole(nrow(x$A))
+  } else {
+    tibble(.name = .name)
+  }
+  res
 }
 
 #' @rdname methods-lpca
 #' @export
 augmentation_cols.lsvd <- function(x) {
-  tibble(
-    .name = rownames(x$B),
-    .mu = x$mu
-  )
+  .name <- rownames(x$B)
+  res <- if (is.null(.name)) {
+    tibble_pole(nrow(x$B))
+  } else {
+    tibble(.name = .name)
+  }
+  res$.mu <- x$mu
+  res
 }
 
 #' @rdname methods-lpca

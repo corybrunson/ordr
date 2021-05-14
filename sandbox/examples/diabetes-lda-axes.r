@@ -2,7 +2,7 @@
 diabetes_custom_biplot <- function(axes.scale) {
   lda_ord(group ~ ., heplots::Diabetes, axes.scale = axes.scale) %>%
     as_tbl_ord() %>%
-    augment() %>%
+    augment_ord() %>%
     print() %T>%
     mutate_rows(discriminant = ifelse(! .supplement, "centroid", "case")) %>%
     confer_inertia("symmetric") %>%

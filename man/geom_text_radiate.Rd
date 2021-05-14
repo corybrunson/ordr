@@ -73,9 +73,10 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 }
 \description{
-\code{geom_text_radiate()} is adapted from \code{\link[ggbiplot:ggbiplot]{ggbiplot::ggbiplot()}}. It
-renders text at specified positions and angles that radiate out from the
-origin.
+\code{geom_text_radiate()} is adapted from \code{ggbiplot()} in the
+off-CRAN extensions of the same name (Vu, 2014; Telford, 2017; Gegzna,
+2018). It renders text at specified positions and angles that radiate out
+from the origin.
 }
 \section{Biplot layers}{
 
@@ -111,6 +112,18 @@ aesthetics are in bold):
 }
 }
 
+\references{
+Vincent Q. Vu (2014). ggbiplot: A 'ggplot2' based biplot. R package version
+0.55. \url{https://github.com/vqv/ggbiplot}, \code{experimental} branch
+
+Richard J Telford (2017). ggbiplot: A 'ggplot2' based biplot. R package
+version 0.6. \url{https://github.com/richardjtelford/ggbiplot} (fork),
+\code{experimental} branch
+
+Vilmantas Gegzna (2018). ggbiplot: A 'ggplot2' based biplot. R package
+version 0.55. \url{https://github.com/GegznaV/ggbiplot} (fork), \code{experimental}
+branch
+}
 \seealso{
 Other geom layers: 
 \code{\link{geom_axis_text}()},
@@ -118,6 +131,7 @@ Other geom layers:
 \code{\link{geom_axis}()},
 \code{\link{geom_isolines}()},
 \code{\link{geom_lineranges}()},
+\code{\link{geom_origin}()},
 \code{\link{geom_unit_circle}()},
 \code{\link{geom_vector}()}
 }

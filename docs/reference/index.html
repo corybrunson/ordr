@@ -79,7 +79,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -159,7 +159,7 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="wrap-ord.html">eigen_ord()</a></code> <code><a href="wrap-ord.html">svd_ord()</a></code> <code><a href="wrap-ord.html">cmdscale_ord()</a></code> <code><a href="wrap-ord.html">logisticSVD_ord()</a></code> <code><a href="wrap-ord.html">logisticPCA_ord()</a></code> <code><a href="wrap-ord.html">convexLogisticPCA_ord()</a></code> </p>
+          <p><code><a href="wrap-ord.html">eigen_ord()</a></code> <code><a href="wrap-ord.html">svd_ord()</a></code> <code><a href="wrap-ord.html">cmdscale_ord()</a></code> <code><a href="wrap-ord.html">logisticSVD_ord()</a></code> <code><a href="wrap-ord.html">logisticPCA_ord()</a></code> <code><a href="wrap-ord.html">convexLogisticPCA_ord()</a></code> <code><a href="wrap-ord.html">nipals_ord()</a></code> </p>
         </td>
         <td><p>Wrappers for lossy ordination methods</p></td>
       </tr>
@@ -180,13 +180,13 @@
         <td>
           <p><code><a href="glass.html">glass</a></code> </p>
         </td>
-        <td><p>Glass composition data from archaeological sites in Israel</p></td>
+        <td><p>Glass composition data</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
           <h2 id="section-tidy-ordination" class="hasAnchor"><a href="#section-tidy-ordination" class="anchor"></a>Tidy ordination</h2>
-          <p class="section-desc"><p>The <code>tbl_ord</code> class wrapper, with methods for accessing components and for querying and manipulating metadata</p></p>
+          <p class="section-desc"><p>The ‘tbl_ord’ class wrapper, with methods for accessing components and for querying and manipulating metadata</p></p>
         </th>
       </tr>
       
@@ -205,31 +205,31 @@
         <td>
           <p><code><a href="augmentation.html">augmentation_rows()</a></code> <code><a href="augmentation.html">augmentation_cols()</a></code> <code><a href="augmentation.html">augmentation_factor()</a></code> <code><a href="augmentation.html">augmentation_coord()</a></code> <code><a href="augmentation.html">augment_ord()</a></code> </p>
         </td>
-        <td><p>Augment factors and coordinates of tbl_ords</p></td>
+        <td><p>Augment factors and coordinates of 'tbl_ord' objects</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="tidiers.html">tidy(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="tidiers.html">glance(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="tidiers.html">fortify(<i>&lt;tbl_ord&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Tidiers for tbl_ords</p></td>
+        <td><p>Tidiers for 'tbl_ord' objects</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="annotation.html">set_annotation_rows()</a></code> <code><a href="annotation.html">set_annotation_cols()</a></code> <code><a href="annotation.html">annotation_rows()</a></code> <code><a href="annotation.html">annotation_cols()</a></code> </p>
         </td>
-        <td><p>Annotate factors of tbl_ords</p></td>
+        <td><p>Annotate factors of 'tbl_ord' objects</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="conference.html">recover_conference()</a></code> <code><a href="conference.html">get_conference()</a></code> <code><a href="conference.html">revert_conference()</a></code> <code><a href="conference.html">confer_inertia()</a></code> </p>
         </td>
-        <td><p>Confer inertia to factors of an ordination</p></td>
+        <td><p>Confer inertia to factors of a 'tbl_ord' object</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="supplementation.html">supplementation_rows()</a></code> <code><a href="supplementation.html">supplementation_cols()</a></code> <code><a href="supplementation.html">supplementation_factor()</a></code> </p>
         </td>
-        <td><p>Supplement ordination objects with new data</p></td>
+        <td><p>Supplement 'tbl_ord' objects with new data</p></td>
       </tr><tr>
         
         <td>
@@ -245,15 +245,27 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="plot.tbl_ord.html">plot(<i>&lt;tbl_ord&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Plot and biplot methods for 'tbl_ord' objects</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="dplyr-verbs.html">pull_factor()</a></code> <code><a href="dplyr-verbs.html">pull_rows()</a></code> <code><a href="dplyr-verbs.html">pull_cols()</a></code> <code><a href="dplyr-verbs.html">rename_rows()</a></code> <code><a href="dplyr-verbs.html">rename_cols()</a></code> <code><a href="dplyr-verbs.html">select_rows()</a></code> <code><a href="dplyr-verbs.html">select_cols()</a></code> <code><a href="dplyr-verbs.html">mutate_rows()</a></code> <code><a href="dplyr-verbs.html">mutate_cols()</a></code> <code><a href="dplyr-verbs.html">transmute_rows()</a></code> <code><a href="dplyr-verbs.html">transmute_cols()</a></code> <code><a href="dplyr-verbs.html">bind_cols_rows()</a></code> <code><a href="dplyr-verbs.html">bind_cols_cols()</a></code> <code><a href="dplyr-verbs.html">left_join_rows()</a></code> <code><a href="dplyr-verbs.html">left_join_cols()</a></code> </p>
         </td>
         <td><p><strong>dplyr</strong> verbs for tbl_ord factors</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ordinate.html">ordinate()</a></code> </p>
+        </td>
+        <td><p>Fit an ordination model to columns of a data frame</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
           <h2 id="section-layered-grammar-for-biplots" class="hasAnchor"><a href="#section-layered-grammar-for-biplots" class="anchor"></a>Layered grammar for biplots</h2>
-          <p class="section-desc"><p>Functions to generate and annotate biplots from <code>tbl_ord</code> objects, following the layered grammar of graphics</p></p>
+          <p class="section-desc"><p>Functions to generate and annotate biplots from ‘tbl_ord’ objects, following the layered grammar of graphics</p></p>
         </th>
       </tr>
       
@@ -276,6 +288,12 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="theme_biplot.html">theme_biplot()</a></code> </p>
+        </td>
+        <td><p>Biplot theme</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="stat_center.html">stat_center()</a></code> <code><a href="stat_center.html">stat_star()</a></code> </p>
         </td>
         <td><p>Compute geometric centers and spreads for ordination factors</p></td>
@@ -284,13 +302,31 @@
         <td>
           <p><code><a href="stat_chull.html">stat_chull()</a></code> </p>
         </td>
-        <td><p>Restrict ordination data to the convex hulls of both matrix factors</p></td>
+        <td><p>Restrict geometric data to boundary points for its convex hull</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="stat_cone.html">stat_cone()</a></code> </p>
+        </td>
+        <td><p>Restrict geometric data to boundary points for its conical hull</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="stat_scale.html">stat_scale()</a></code> </p>
+        </td>
+        <td><p>Multiply artificial coordinates by a scale factor</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="stat_spantree.html">stat_spantree()</a></code> </p>
         </td>
         <td><p>Calculate a minimum spanning tree among cases or variables</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="geom_origin.html">geom_origin()</a></code> </p>
+        </td>
+        <td><p>Render a crosshairs or circle at the origin</p></td>
       </tr><tr>
         
         <td>
@@ -308,7 +344,7 @@
         <td>
           <p><code><a href="geom_axis_text.html">geom_axis_text()</a></code> </p>
         </td>
-        <td><p>Render tick mark labels for axes</p></td>
+        <td><p>Render tick mark text for axes</p></td>
       </tr><tr>
         
         <td>
@@ -360,7 +396,7 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="biplot-stats.html">stat_rows_center()</a></code> <code><a href="biplot-stats.html">stat_cols_center()</a></code> <code><a href="biplot-stats.html">stat_rows_star()</a></code> <code><a href="biplot-stats.html">stat_cols_star()</a></code> <code><a href="biplot-stats.html">stat_rows_chull()</a></code> <code><a href="biplot-stats.html">stat_cols_chull()</a></code> <code><a href="biplot-stats.html">stat_rows_ellipse()</a></code> <code><a href="biplot-stats.html">stat_cols_ellipse()</a></code> <code><a href="biplot-stats.html">stat_rows_spantree()</a></code> <code><a href="biplot-stats.html">stat_cols_spantree()</a></code> </p>
+          <p><code><a href="biplot-stats.html">stat_rows_center()</a></code> <code><a href="biplot-stats.html">stat_cols_center()</a></code> <code><a href="biplot-stats.html">stat_rows_star()</a></code> <code><a href="biplot-stats.html">stat_cols_star()</a></code> <code><a href="biplot-stats.html">stat_rows_chull()</a></code> <code><a href="biplot-stats.html">stat_cols_chull()</a></code> <code><a href="biplot-stats.html">stat_rows_cone()</a></code> <code><a href="biplot-stats.html">stat_cols_cone()</a></code> <code><a href="biplot-stats.html">stat_rows_ellipse()</a></code> <code><a href="biplot-stats.html">stat_cols_ellipse()</a></code> <code><a href="biplot-stats.html">stat_rows_scale()</a></code> <code><a href="biplot-stats.html">stat_cols_scale()</a></code> <code><a href="biplot-stats.html">stat_rows_spantree()</a></code> <code><a href="biplot-stats.html">stat_cols_spantree()</a></code> </p>
         </td>
         <td><p>Convenience stats for row and column matrix factors</p></td>
       </tr>
@@ -377,6 +413,12 @@
       
       
       <tr>
+        
+        <td>
+          <p><code><a href="methods-ade4.html">as_tbl_ord(<i>&lt;nipals&gt;</i>)</a></code> <code><a href="methods-ade4.html">recover_rows(<i>&lt;nipals&gt;</i>)</a></code> <code><a href="methods-ade4.html">recover_cols(<i>&lt;nipals&gt;</i>)</a></code> <code><a href="methods-ade4.html">recover_inertia(<i>&lt;nipals&gt;</i>)</a></code> <code><a href="methods-ade4.html">recover_coord(<i>&lt;nipals&gt;</i>)</a></code> <code><a href="methods-ade4.html">recover_conference(<i>&lt;nipals&gt;</i>)</a></code> <code><a href="methods-ade4.html">augmentation_rows(<i>&lt;nipals&gt;</i>)</a></code> <code><a href="methods-ade4.html">augmentation_cols(<i>&lt;nipals&gt;</i>)</a></code> <code><a href="methods-ade4.html">augmentation_coord(<i>&lt;nipals&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Functionality for non-linear iterative PLS ('nipals') objects</p></td>
+      </tr><tr>
         
         <td>
           <p><code><a href="methods-ca.html">as_tbl_ord(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_rows(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_cols(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_inertia(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_conference(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_coord(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">augmentation_rows(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">augmentation_cols(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">augmentation_coord(<i>&lt;ca&gt;</i>)</a></code> </p>
@@ -424,6 +466,12 @@
           <p><code><a href="methods-lra.html">as_tbl_ord(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_rows(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_cols(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_inertia(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_coord(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_conference(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">augmentation_rows(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">augmentation_cols(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">augmentation_coord(<i>&lt;lra&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for log-ratio analysis ('lra') objects</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="methods-nipals.html">as_tbl_ord(<i>&lt;nipals_ord&gt;</i>)</a></code> <code><a href="methods-nipals.html">recover_rows(<i>&lt;nipals_ord&gt;</i>)</a></code> <code><a href="methods-nipals.html">recover_cols(<i>&lt;nipals_ord&gt;</i>)</a></code> <code><a href="methods-nipals.html">recover_inertia(<i>&lt;nipals_ord&gt;</i>)</a></code> <code><a href="methods-nipals.html">recover_coord(<i>&lt;nipals_ord&gt;</i>)</a></code> <code><a href="methods-nipals.html">recover_conference(<i>&lt;nipals_ord&gt;</i>)</a></code> <code><a href="methods-nipals.html">augmentation_rows(<i>&lt;nipals_ord&gt;</i>)</a></code> <code><a href="methods-nipals.html">augmentation_cols(<i>&lt;nipals_ord&gt;</i>)</a></code> <code><a href="methods-nipals.html">augmentation_coord(<i>&lt;nipals_ord&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Functionality for non-linear iterative PLS ('nipals') objects</p></td>
       </tr><tr>
         
         <td>

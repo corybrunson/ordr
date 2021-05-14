@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Augment factors and coordinates of tbl_ords — augmentation • ordr</title>
+<title>Augment factors and coordinates of 'tbl_ord' objects — augmentation • ordr</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Augment factors and coordinates of tbl_ords — augmentation" />
+<meta property="og:title" content="Augment factors and coordinates of 'tbl_ord' objects — augmentation" />
 <meta property="og:description" content="These functions return data associated with the cases,
 variables, and coordinates of an ordination object, and attach it to the
 object." />
@@ -82,7 +82,7 @@ object." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -105,7 +105,7 @@ object." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Augment factors and coordinates of tbl_ords</h1>
+    <h1>Augment factors and coordinates of 'tbl_ord' objects</h1>
     
     <div class="hidden name"><code>augmentation.Rd</code></div>
     </div>
@@ -152,10 +152,10 @@ about the rows, columns, or coordinates extracted from the ordination object.</p
 matrix factors annotated with the result of <code>augmentation_*()</code>. In this way
 <code>augment_ord()</code> works like <code><a href='https://generics.r-lib.org/reference/augment.html'>generics::augment()</a></code>, as popularized by the
 <strong>broom</strong> package, by extracting information about the rows and columns, but
-it differs in returning an annotated tbl_ord rather than a
-<a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>'tbl_df'</a>. The advantage of implementing separate methods
-for the rows, columns, and artificial coordinates is that more information
-contained in the original object becomes accessible to the user.</p>
+it differs in returning an annotated 'tbl_ord' rather than a
+<a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>'tbl_df'</a> object. The advantage of implementing separate
+methods for the rows, columns, and artificial coordinates is that more
+information contained in the original object becomes accessible to the user.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='tidiers.html'>tidiers</a> and <a href='annotation.html'>annotation</a> methods that interface with augmentation.</p></div>

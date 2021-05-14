@@ -82,7 +82,7 @@ between these poirs in the two dimensions x and y." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -200,11 +200,6 @@ dissimilarities) between linked points. These layers call <code><a href='https:/
 calculate a distance/dissimilarity object and <code><a href='https://rdrr.io/pkg/vegan/man/spantree.html'>vegan::spantree()</a></code> to
 calculate the MST. The result is formatted with position aesthetics readable
 by <code><a href='https://ggplot2.tidyverse.org/reference/geom_segment.html'>ggplot2::geom_segment()</a></code>.</p>
-<p>If any aesthetics of the form <code>.coord[0-9]+</code> are detected, then the lot of
-them are used to calculate distances/dissimilarities. These should not be
-assigend manually but generated using the convenience function <code><a href='ggbiplot.html'>ord_aes()</a></code>
-(see the examples). Otherwise, <code>x</code> and <code>y</code> are used. Either way, <code>x</code> and <code>y</code>
-provide the position aesthetics.</p>
 <p>An MST calculated on <code>x</code> and <code>y</code> reflects the distances among the points in
 \(X\) in the reduced-dimension plane of the biplot. In contrast, one
 calculated on the full set of coordinates reflects distances in
@@ -224,6 +219,23 @@ filter the data frame to one of these two.</p>
 stat in order to render plot elements for the corresponding factor matrix.
 <code>geom_dims_*()</code> selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.</p>
+    <h2 class="hasAnchor" id="ordination-aesthetics"><a class="anchor" href="#ordination-aesthetics"></a>Ordination aesthetics</h2>
+
+    
+
+<p>The convenience function <code>[ord_aes()]</code> can be used to incorporate all
+coordinates of the ordination model into a statistical transformation. It
+maps the coordinates to the custom aesthetics <code>..coord1</code>, <code>..coord2</code>, etc.</p>
+<p>Some transformations, e.g. <code>[stat_center()]</code>, are commutative with projection
+to the 'x' and 'y' coordinates. If they detect aesthetics of the form
+<code>..coord[0-9]+</code>, then <code>..coord1</code> and <code>..coord2</code> are converted to <code>x</code> and <code>y</code>
+while any remaining are ignored.</p>
+<p>Other transformations, e.g. <code>stat_spantree()]</code>, yield different results in a
+planar biplot when they are computer before or after projection. If such a
+stat layer detects these aesthetics, then the lot of them are used in the
+transformation.</p>
+<p>In either case, the stat layer returns a data frame with position aesthetics
+<code>x</code> and <code>y</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Jolliffe IT (2002) <em>Principal Component Analysis</em>, Second Edition.
@@ -234,7 +246,9 @@ Springer Series in Statistics, ISSN 0172-7397. doi: <a href='https://doi.org/10.
 
     <div class='dont-index'><p>Other stat layers: 
 <code><a href='stat_center.html'>stat_center</a>()</code>,
-<code><a href='stat_chull.html'>stat_chull</a>()</code></p></div>
+<code><a href='stat_chull.html'>stat_chull</a>()</code>,
+<code><a href='stat_cone.html'>stat_cone</a>()</code>,
+<code><a href='stat_scale.html'>stat_scale</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># classical multidimensional scaling of road distances between European cities</span>
@@ -246,7 +260,7 @@ Springer Series in Statistics, ISSN 0172-7397. doi: <a href='https://doi.org/10.
 </div><div class='output co'>#&gt; # A tbl_ord of class 'cmds_ord': (21 x 11) x (21 x 11)'
 #&gt; # 11 coordinates: PCo1, PCo2, ..., PCo11
 #&gt; # 
-#&gt; # Rows: [ 21 x 11 | 1 ]
+#&gt; # Rows (symmetric): [ 21 x 11 | 1 ]
 #&gt;     PCo1  PCo2   PCo3 ... |   .name    
 #&gt;                           |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='text-decoration: underline;'>2</span><span>290.  </span><span style='text-decoration: underline;'>1</span><span>799.   53.8     | </span><span style='color: #BCBCBC;'>1</span><span> Athens   
@@ -256,7 +270,7 @@ Springer Series in Statistics, ISSN 0172-7397. doi: <a href='https://doi.org/10.
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>352.</span><span>  -</span><span style='color: #BB0000;'>291.</span><span>  457.      | </span><span style='color: #BCBCBC;'>5</span><span> Cherbourg
 #&gt; </span><span style='color: #949494;'># … with 16 more rows</span><span>
 #&gt; # 
-#&gt; # Columns: [ 21 x 11 | 1 ]
+#&gt; # Columns (symmetric): [ 21 x 11 | 1 ]
 #&gt;     PCo1  PCo2   PCo3 ... |   .name    
 #&gt;                           |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> </span><span style='text-decoration: underline;'>2</span><span>290.  </span><span style='text-decoration: underline;'>1</span><span>799.   53.8     | </span><span style='color: #BCBCBC;'>1</span><span> Athens   

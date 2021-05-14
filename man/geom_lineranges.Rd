@@ -118,7 +118,7 @@ glass \%>\%
 # row-principal biplot with ordinate-wise standard deviations
 glass_lra \%>\%
   ggbiplot(aes(color = Site), sec.axes = "cols", scale.factor = .05) +
-  theme_bw() +
+  theme_biplot() +
   scale_color_brewer(type = "qual", palette = 6) +
   geom_cols_text(stat = "chull", aes(label = .name), color = "#444444") +
   geom_rows_lineranges(fun.data = mean_sdl, size = .75) +
@@ -130,7 +130,7 @@ glass_lra \%>\%
 # row-principal biplot with coordinate-wise confidence intervals
 glass_lra \%>\%
   ggbiplot(aes(color = Site), sec.axes = "cols", scale.factor = .05) +
-  theme_bw() +
+  theme_biplot() +
   scale_color_brewer(type = "qual", palette = 6) +
   geom_cols_text(stat = "chull", aes(label = .name), color = "#444444") +
   geom_rows_lineranges(
@@ -149,6 +149,7 @@ Other geom layers:
 \code{\link{geom_axis_ticks}()},
 \code{\link{geom_axis}()},
 \code{\link{geom_isolines}()},
+\code{\link{geom_origin}()},
 \code{\link{geom_text_radiate}()},
 \code{\link{geom_unit_circle}()},
 \code{\link{geom_vector}()}

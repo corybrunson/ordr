@@ -84,7 +84,7 @@ them, and new '*_ord' S3 class attributes are added to enable them." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -163,6 +163,20 @@ them, and new '*_ord' S3 class attributes are added to enable them.</p>
   <span class='va'>...</span>,
   main_effects <span class='op'>=</span> <span class='cn'>TRUE</span>,
   ss_factor <span class='op'>=</span> <span class='fl'>4</span>
+<span class='op'>)</span>
+
+<span class='fu'>nipals_ord</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  ncomp <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>,
+  center <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  scale <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  maxiter <span class='op'>=</span> <span class='fl'>500</span>,
+  tol <span class='op'>=</span> <span class='fl'>1e-06</span>,
+  startcol <span class='op'>=</span> <span class='fl'>0</span>,
+  fitted <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  force.na <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  gramschmidt <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -249,6 +263,55 @@ convergence rate can be proven for <code>ss_factor = 1</code>, but I have found 
 sometimes work better. The default is <code>ss_factor = 4</code>.
 If it is not converging, try <code>ss_factor = 1</code>.</p></td>
     </tr>
+    <tr>
+      <th>ncomp</th>
+      <td><p>Maximum number of principal components to extract from x.</p></td>
+    </tr>
+    <tr>
+      <th>center</th>
+      <td><p>If TRUE, subtract the mean from each column of x before PCA.</p></td>
+    </tr>
+    <tr>
+      <th>scale</th>
+      <td><p>if TRUE, divide the standard deviation from each column of x before PCA.</p></td>
+    </tr>
+    <tr>
+      <th>maxiter</th>
+      <td><p>Maximum number of NIPALS iterations for each
+principal component.</p></td>
+    </tr>
+    <tr>
+      <th>tol</th>
+      <td><p>Default 1e-9 tolerance for testing convergence of the NIPALS
+iterations for each principal component.</p></td>
+    </tr>
+    <tr>
+      <th>startcol</th>
+      <td><p>Determine the starting column of x for the iterations
+of each principal component.
+If 0, use the column of x that has maximum absolute sum.
+If a number, use that column of x.
+If a function, apply the function to each column of x and choose the column
+with the maximum value of the function.</p></td>
+    </tr>
+    <tr>
+      <th>fitted</th>
+      <td><p>Default FALSE. If TRUE, return the fitted (reconstructed) value of x.</p></td>
+    </tr>
+    <tr>
+      <th>force.na</th>
+      <td><p>Default FALSE. If TRUE, force the function to use the
+method for missing values, even if there are no missing values in x.</p></td>
+    </tr>
+    <tr>
+      <th>gramschmidt</th>
+      <td><p>Default TRUE. If TRUE, perform Gram-Schmidt 
+orthogonalization at each iteration.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Default FALSE. Use TRUE or 1 to show some diagnostics.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -261,6 +324,7 @@ If it is not converging, try <code>ss_factor = 1</code>.</p></td>
 <tr><td><code><a href='https://rdrr.io/pkg/logisticPCA/man/logisticSVD.html'>logisticPCA::logisticSVD()</a></code></td><td>No</td><td>Yes</td><td>No</td></tr>
 <tr><td><code><a href='https://rdrr.io/pkg/logisticPCA/man/logisticPCA.html'>logisticPCA::logisticPCA()</a></code></td><td>No</td><td>Yes</td><td>No</td></tr>
 <tr><td><code><a href='https://rdrr.io/pkg/logisticPCA/man/convexLogisticPCA.html'>logisticPCA::convexLogisticPCA()</a></code></td><td>No</td><td>Yes</td><td>No</td></tr>
+<tr><td><code><a href='http://kwstat.github.io/nipals/reference/nipals.html'>nipals::nipals()</a></code></td><td>No</td><td>No</td><td>Yes</td></tr>
 </table>
 
 

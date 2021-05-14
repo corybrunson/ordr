@@ -5,6 +5,8 @@ head(iris)
 lda_ord(iris[, 1:4], iris[, 5]) %>%
   as_tbl_ord() %>%
   print() -> iris_lda
+# summarize ordination
+glance(iris_lda)
 # recover centroid coordinates and measurement discriminant coefficients
 get_rows(iris_lda, .supplement = FALSE)
 get_cols(iris_lda)
@@ -12,19 +14,16 @@ get_cols(iris_lda)
 augment_ord(iris_lda)
 # summarize linear discriminant axes
 tidy(iris_lda)
-# fortification of artificial coordinates yields proportion of variance
-fortify(iris_lda, .matrix = "coord")
 # scree plot of inertia
-ggplot(iris_lda, .matrix = "coord", aes(x = .name, y = .prop_var)) +
+ggplot(tidy(iris_lda), aes(x = .name, y = .prop_var)) +
   theme_bw() +
   scale_y_continuous(labels = scales::percent) +
-  geom_bar(stat = "identity") +
+  geom_col() +
   labs(x = "", y = "Proportion of inertia")
 # fortification (without supplement)
 fortify(iris_lda, .supplement = FALSE)
 # unstandardized coefficient LDA biplot (centroids only)
 iris_lda %>%
-  as_tbl_ord() %>%
   augment_ord() %>%
   mutate_rows(species = .grouping) %>%
   ggbiplot(.supplement = FALSE) +
@@ -40,7 +39,6 @@ iris_lda %>%
   expand_limits(y = c(-2, 4.25))
 # biplot with supplementary points for observations
 iris_lda %>%
-  as_tbl_ord() %>%
   augment_ord() %>%
   mutate_rows(
     species = .grouping,

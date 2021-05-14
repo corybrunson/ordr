@@ -7,7 +7,7 @@
 \alias{get_conference}
 \alias{revert_conference}
 \alias{confer_inertia}
-\title{Confer inertia to factors of an ordination}
+\title{Confer inertia to factors of a 'tbl_ord' object}
 \usage{
 recover_conference(x)
 

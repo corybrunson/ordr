@@ -5,6 +5,7 @@
 #'   
 
 #' @template biplot-layers
+#' @template biplot-ord-aes
 
 #' @inheritParams ggplot2::stat_ellipse
 #' @template param-stat
@@ -75,7 +76,7 @@ stat_cols_ellipse <- function(
 StatRowsEllipse <- ggproto(
   "StatRowsEllipse", StatEllipse,
   
-  setup_data = setup_rows_data
+  setup_data = setup_rows_xy_data
 )
 
 #' @rdname ordr-ggproto
@@ -85,5 +86,5 @@ StatRowsEllipse <- ggproto(
 StatColsEllipse <- ggproto(
   "StatColsEllipse", StatEllipse,
   
-  setup_data = setup_cols_data
+  setup_data = setup_cols_xy_data
 )

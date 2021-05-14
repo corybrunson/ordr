@@ -6,7 +6,7 @@
 \alias{set_annotation_cols}
 \alias{annotation_rows}
 \alias{annotation_cols}
-\title{Annotate factors of tbl_ords}
+\title{Annotate factors of 'tbl_ord' objects}
 \usage{
 set_annotation_rows(x, annot)
 

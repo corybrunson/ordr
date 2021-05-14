@@ -6,6 +6,6 @@
 .Rhistory
 .RData
 
-ignore
-
 inst/doc
+
+ignore

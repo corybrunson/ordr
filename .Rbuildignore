@@ -1,7 +1,10 @@
 
-# R project defaults
+# R project files
 ^.*\.Rproj$
 ^\.Rproj\.user$
+LICENSE
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
 
 # files and directories in package structure
 README.Rmd
@@ -19,3 +22,4 @@ README.Rmd
 
 # custom files and directories
 ^sandbox$
+^ignore$

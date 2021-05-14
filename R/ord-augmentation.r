@@ -1,4 +1,4 @@
-#' @title Augment factors and coordinates of tbl_ords
+#' @title Augment factors and coordinates of 'tbl_ord' objects
 #'
 #' @description These functions return data associated with the cases,
 #'   variables, and coordinates of an ordination object, and attach it to the
@@ -17,10 +17,10 @@
 #' matrix factors annotated with the result of `augmentation_*()`. In this way
 #' `augment_ord()` works like [generics::augment()], as popularized by the
 #' **broom** package, by extracting information about the rows and columns, but
-#' it differs in returning an annotated tbl_ord rather than a
-#' ['tbl_df'][tibble::tbl_df]. The advantage of implementing separate methods
-#' for the rows, columns, and artificial coordinates is that more information
-#' contained in the original object becomes accessible to the user.
+#' it differs in returning an annotated 'tbl_ord' rather than a
+#' ['tbl_df'][tibble::tbl_df] object. The advantage of implementing separate
+#' methods for the rows, columns, and artificial coordinates is that more
+#' information contained in the original object becomes accessible to the user.
 #' 
 
 #' @name augmentation
