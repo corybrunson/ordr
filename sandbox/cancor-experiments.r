@@ -65,6 +65,7 @@ x <- pop
 y <- oec
 xcenter = TRUE
 ycenter = TRUE
+prefix = c("Xcan", "Ycan")
 
 X <- as.matrix(x)
 Y <- as.matrix(y)
@@ -84,7 +85,7 @@ res <- candisc:::gensvd(Cxy, Cxx, Cyy, nu = ndim, nv = ndim)
 names(res) <- c("cor", "xcoef", "ycoef")
 colnames(res$xcoef) <- paste(prefix[1], 1:ndim, sep = "")
 colnames(res$ycoef) <- paste(prefix[2], 1:ndim, sep = "")
-scores <- can.scores(X, Y, res$xcoef, res$ycoef)
+scores <- candisc:::can.scores(X, Y, res$xcoef, res$ycoef)
 colnames(scores$xscores) <- paste(prefix[1], 1:ndim, sep = "")
 colnames(scores$yscores) <- paste(prefix[2], 1:ndim, sep = "")
 structure <- can.structure(X, Y, scores, use = use)
