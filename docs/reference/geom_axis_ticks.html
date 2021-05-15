@@ -119,11 +119,9 @@ the row or column factors.</p>
   data <span class='op'>=</span> <span class='cn'>NULL</span>,
   stat <span class='op'>=</span> <span class='st'>"identity"</span>,
   position <span class='op'>=</span> <span class='st'>"identity"</span>,
-  axes <span class='op'>=</span> <span class='cn'>NULL</span>,
-  calibrate <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  family_fun <span class='op'>=</span> <span class='cn'>NULL</span>,
+  subset <span class='op'>=</span> <span class='cn'>NULL</span>,
   by <span class='op'>=</span> <span class='cn'>NULL</span>,
-  num <span class='op'>=</span> <span class='fl'>6L</span>,
+  num <span class='op'>=</span> <span class='cn'>NULL</span>,
   tick_length <span class='op'>=</span> <span class='fl'>0.025</span>,
   <span class='va'>...</span>,
   na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -166,26 +164,19 @@ layer, as a string.</p></td>
 a call to a position adjustment function.</p></td>
     </tr>
     <tr>
-      <th>axes</th>
-      <td><p>Indices of axes for which to render elements.</p></td>
-    </tr>
-    <tr>
-      <th>calibrate</th>
-      <td><p>Logical; whether to calibrate axis scales for inner product
-interpretability.</p></td>
-    </tr>
-    <tr>
-      <th>family_fun</th>
-      <td><p>A family function, or a character string naming one, to
-transform the values along the axis at which to render elements.</p></td>
+      <th>subset</th>
+      <td><p>Indices or logical vector of rows or columns for which to
+render elements.</p></td>
     </tr>
     <tr>
       <th>by</th>
-      <td><p>Interval length between elements, in the units of the ordination.</p></td>
+      <td><p>Intervals between elements or number of elements; specify only
+one.</p></td>
     </tr>
     <tr>
       <th>num</th>
-      <td><p>Integer; the number of tick marks on each axis.</p></td>
+      <td><p>Intervals between elements or number of elements; specify only
+one.</p></td>
     </tr>
     <tr>
       <th>tick_length</th>
@@ -242,13 +233,17 @@ are in bold):</p><ul>
 <li><p><code>linetype</code></p></li>
 <li><p><code>size</code></p></li>
 <li><p><code>group</code></p></li>
+<li><p><code>center</code> (for un-scaling)</p></li>
+<li><p><code>scale</code> (for un-scaling)</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other geom layers: 
+<code><a href='geom_axis_label.html'>geom_axis_label</a>()</code>,
 <code><a href='geom_axis_text.html'>geom_axis_text</a>()</code>,
 <code><a href='geom_axis.html'>geom_axis</a>()</code>,
+<code><a href='geom_isolines_text.html'>geom_isolines_text</a>()</code>,
 <code><a href='geom_isolines.html'>geom_isolines</a>()</code>,
 <code><a href='geom_lineranges.html'>geom_lineranges</a>()</code>,
 <code><a href='geom_origin.html'>geom_origin</a>()</code>,
@@ -258,7 +253,7 @@ are in bold):</p><ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Reaven &amp; Miller overt &amp; chemical diabetes test data and group classification</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>heplots</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/heplots/man/Diabetes.html'>Diabetes</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>heplots</span><span class='fu'>::</span><span class='va'><a href='http://friendly.github.io/heplots/reference/Diabetes.html'>Diabetes</a></span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   relwt glufast glutest instest sspg  group
 #&gt; 1  0.81      80     356     124   55 Normal
 #&gt; 2  0.95      97     289     117   76 Normal
@@ -266,7 +261,7 @@ are in bold):</p><ul>
 #&gt; 4  1.04      90     356     199  108 Normal
 #&gt; 5  1.00      90     323     240  143 Normal
 #&gt; 6  0.76      86     381     157  165 Normal</div><div class='input'><span class='co'># default (standardized) linear discriminant analysis of groups on tests</span>
-<span class='va'>diabetes_lda</span> <span class='op'>&lt;-</span> <span class='fu'>MASS</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/MASS/man/lda.html'>lda</a></span><span class='op'>(</span><span class='va'>group</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='fu'>heplots</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/heplots/man/Diabetes.html'>Diabetes</a></span><span class='op'>)</span>
+<span class='va'>diabetes_lda</span> <span class='op'>&lt;-</span> <span class='fu'>MASS</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/MASS/man/lda.html'>lda</a></span><span class='op'>(</span><span class='va'>group</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='fu'>heplots</span><span class='fu'>::</span><span class='va'><a href='http://friendly.github.io/heplots/reference/Diabetes.html'>Diabetes</a></span><span class='op'>)</span>
 <span class='co'># bestow 'tbl_ord' class &amp; augment observation, centroid, and variable fields</span>
 <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='va'>diabetes_lda</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -303,13 +298,14 @@ are in bold):</p><ul>
   <span class='fu'><a href='biplot-geoms.html'>geom_cols_axis</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#888888"</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='biplot-geoms.html'>geom_cols_axis_ticks</a></span><span class='op'>(</span>num <span class='op'>=</span> <span class='fl'>8L</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='biplot-geoms.html'>geom_cols_axis_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>2.5</span>, num <span class='op'>=</span> <span class='fl'>8L</span>, label_dodge <span class='op'>=</span> <span class='fl'>.2</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='biplot-geoms.html'>geom_cols_axis_label</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>ggtitle</span><span class='op'>(</span>
     <span class='st'>"LDA of Reaven &amp; Miller diabetes groups"</span>,
     <span class='st'>"Row-standard biplot of standardized LDA"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Using size for a discrete variable is not advised.</span></div><div class='img'><img src='geom_axis_ticks-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># contribution LDA of groups on tests</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring unknown aesthetics: label</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Using size for a discrete variable is not advised.</span></div><div class='img'><img src='geom_axis_ticks-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># contribution LDA of groups on tests</span>
 <span class='va'>diabetes_lda</span> <span class='op'>&lt;-</span>
-  <span class='fu'><a href='lda-ord.html'>lda_ord</a></span><span class='op'>(</span><span class='va'>group</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='fu'>heplots</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/heplots/man/Diabetes.html'>Diabetes</a></span>, axes.scale <span class='op'>=</span> <span class='st'>"contribution"</span><span class='op'>)</span>
+  <span class='fu'><a href='lda-ord.html'>lda_ord</a></span><span class='op'>(</span><span class='va'>group</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='fu'>heplots</span><span class='fu'>::</span><span class='va'><a href='http://friendly.github.io/heplots/reference/Diabetes.html'>Diabetes</a></span>, axes.scale <span class='op'>=</span> <span class='st'>"contribution"</span><span class='op'>)</span>
 <span class='co'># bestow 'tbl_ord' class &amp; augment observation, centroid, and variable fields</span>
 <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='va'>diabetes_lda</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Render axes through origin — geom_axis • ordr</title>
+<title>Render labels at the ends of axes — geom_axis_label • ordr</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Render axes through origin — geom_axis" />
-<meta property="og:description" content="geom_axis() renders lines through the origin and the position
-of each case or variable." />
+<meta property="og:title" content="Render labels at the ends of axes — geom_axis_label" />
+<meta property="og:description" content="geom_axis_label() renders a text label outside the plotting
+window where it intersects each axis." />
 
 
 
@@ -104,17 +104,17 @@ of each case or variable." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Render axes through origin</h1>
+    <h1>Render labels at the ends of axes</h1>
     
-    <div class="hidden name"><code>geom_axis.Rd</code></div>
+    <div class="hidden name"><code>geom_axis_label.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>geom_axis()</code> renders lines through the origin and the position
-of each case or variable.</p>
+    <p><code>geom_axis_label()</code> renders a text label outside the plotting
+window where it intersects each axis.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>geom_axis</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>geom_axis_label</span><span class='op'>(</span>
   mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
   data <span class='op'>=</span> <span class='cn'>NULL</span>,
   stat <span class='op'>=</span> <span class='st'>"identity"</span>,
@@ -200,23 +200,29 @@ points for rows and arrows for columns.</p>
 
     
 
-<p><code>geom_axis()</code> understands the following aesthetics (required aesthetics are
-in bold):</p><ul>
+<p><code>geom_axis_label()</code> understands the following aesthetics (required aesthetics
+are in bold):</p><ul>
 <li><p><strong><code>x</code></strong></p></li>
 <li><p><strong><code>y</code></strong></p></li>
+<li><p><strong><code>label</code></strong></p></li>
 <li><p><code>alpha</code></p></li>
+<li><p><code>angle</code></p></li>
 <li><p><code>colour</code></p></li>
-<li><p><code>linetype</code></p></li>
+<li><p><code>family</code></p></li>
+<li><p><code>fontface</code></p></li>
+<li><p><code>hjust</code></p></li>
+<li><p><code>lineheight</code></p></li>
 <li><p><code>size</code></p></li>
+<li><p><code>vjust</code></p></li>
 <li><p><code>group</code></p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other geom layers: 
-<code><a href='geom_axis_label.html'>geom_axis_label</a>()</code>,
 <code><a href='geom_axis_text.html'>geom_axis_text</a>()</code>,
 <code><a href='geom_axis_ticks.html'>geom_axis_ticks</a>()</code>,
+<code><a href='geom_axis.html'>geom_axis</a>()</code>,
 <code><a href='geom_isolines_text.html'>geom_isolines_text</a>()</code>,
 <code><a href='geom_isolines.html'>geom_isolines</a>()</code>,
 <code><a href='geom_lineranges.html'>geom_lineranges</a>()</code>,
@@ -277,7 +283,7 @@ in bold):</p><ul>
     <span class='st'>"LDA of Reaven &amp; Miller diabetes groups"</span>,
     <span class='st'>"Row-standard biplot of standardized LDA"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring unknown aesthetics: label</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Using size for a discrete variable is not advised.</span></div><div class='img'><img src='geom_axis-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># contribution LDA of groups on tests</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring unknown aesthetics: label</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Using size for a discrete variable is not advised.</span></div><div class='img'><img src='geom_axis_label-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># contribution LDA of groups on tests</span>
 <span class='va'>diabetes_lda</span> <span class='op'>&lt;-</span>
   <span class='fu'><a href='lda-ord.html'>lda_ord</a></span><span class='op'>(</span><span class='va'>group</span> <span class='op'>~</span> <span class='va'>.</span>, <span class='fu'>heplots</span><span class='fu'>::</span><span class='va'><a href='http://friendly.github.io/heplots/reference/Diabetes.html'>Diabetes</a></span>, axes.scale <span class='op'>=</span> <span class='st'>"contribution"</span><span class='op'>)</span>
 <span class='co'># bestow 'tbl_ord' class &amp; augment observation, centroid, and variable fields</span>
@@ -320,7 +326,7 @@ in bold):</p><ul>
     <span class='st'>"LDA of Reaven &amp; Miller diabetes groups"</span>,
     <span class='st'>"Symmetric biplot of contribution LDA"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Using alpha for a discrete variable is not advised.</span></div><div class='img'><img src='geom_axis-2.png' alt='' width='700' height='433' /></div></span></pre>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Using alpha for a discrete variable is not advised.</span></div><div class='img'><img src='geom_axis_label-2.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
