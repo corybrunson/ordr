@@ -71,6 +71,7 @@ iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
+  geom_unit_circle() +
   geom_rows_point(alpha = .5) +
   geom_cols_vector(color = "#444444") +
   geom_cols_text_radiate(aes(label = .name), color = "#444444") +

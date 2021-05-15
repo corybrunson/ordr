@@ -124,6 +124,9 @@ GeomAxis <- ggproto(
   "GeomAxis", GeomAbline,
   
   required_aes = c("x", "y"),
+  default_aes = aes(
+    colour = "black", alpha = NA, size = .25, linetype = "solid"
+  ),
   
   setup_data = function(data, params) {
     

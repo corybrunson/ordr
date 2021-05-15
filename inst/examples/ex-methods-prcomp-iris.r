@@ -28,10 +28,12 @@ tidy(iris_pca) %>%
 fortify(iris_pca)
 # row-principal biplot
 iris_pca %>%
-  ggbiplot(aes(color = species)) +
+  ggbiplot() +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  geom_rows_point(alpha = .5) +
-  geom_cols_vector(color = "#444444") +
-  geom_cols_text_radiate(aes(label = .name), color = "#444444") +
+  geom_cols_axis() +
+  geom_cols_axis_ticks(aes(center = .center, scale = .scale)) +
+  geom_cols_axis_text(aes(center = .center, scale = .scale)) +
+  geom_cols_axis_label(aes(label = .name)) +
+  geom_rows_point(aes(color = species), alpha = .5) +
   ggtitle("Row-principal PCA biplot of Anderson iris measurements")

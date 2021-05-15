@@ -2,17 +2,16 @@
 % Please edit documentation in R/geom-isolines.r
 \name{geom_isolines}
 \alias{geom_isolines}
-\title{Render isolines for a subject or variable}
+\title{Render isolines (contour lines) along axes}
 \usage{
 geom_isolines(
   mapping = NULL,
   data = NULL,
   stat = "identity",
   position = "identity",
-  axes = NULL,
-  calibrate = TRUE,
-  family_fun = NULL,
+  subset = NULL,
   by = NULL,
+  num = NULL,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -46,15 +45,11 @@ layer, as a string.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{axes}{Indices of axes for which to render elements.}
+\item{subset}{Indices or logical vector of rows or columns for which to
+render elements.}
 
-\item{calibrate}{Logical; whether to calibrate axis scales for inner product
-interpretability.}
-
-\item{family_fun}{A family function, or a character string naming one, to
-transform the values along the axis at which to render elements.}
-
-\item{by}{Interval length between elements, in the units of the ordination.}
+\item{by, num}{Intervals between elements or number of elements; specify only
+one.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
@@ -72,8 +67,7 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 }
 \description{
-\code{geom_isolines()} renders isolines for a specified subject or
-variable.
+\code{geom_isolines()} renders isolines along row or column axes.
 }
 \section{Biplot layers}{
 
@@ -100,14 +94,18 @@ are in bold):
 \item \code{linetype}
 \item \code{size}
 \item \code{group}
+\item \code{center} (for un-scaling)
+\item \code{scale} (for un-scaling)
 }
 }
 
 \seealso{
 Other geom layers: 
+\code{\link{geom_axis_label}()},
 \code{\link{geom_axis_text}()},
 \code{\link{geom_axis_ticks}()},
 \code{\link{geom_axis}()},
+\code{\link{geom_isolines_text}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},
 \code{\link{geom_text_radiate}()},

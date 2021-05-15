@@ -1,39 +1,45 @@
-#' @title Render tick marks for axes
+#' @title Render isoline text labels within the plotting window
 #'
-#' @description `geom_axis_ticks()` renders tick marks for specified axes among
-#'   the row or column factors.
+#' @description `geom_isolines_text()` renders numerical text labels at
+#'   isolines along row or column axes.
 #' @template biplot-layers
 
 #' @section Aesthetics:
 
-#' `geom_axis_ticks()` understands the following aesthetics (required aesthetics
-#' are in bold):
+#' `geom_isolines_text()` understands the following aesthetics (required
+#' aesthetics are in bold):
 
 #' - **`x`**
 #' - **`y`**
 #' - `alpha`
+#' - `angle`
 #' - `colour`
-#' - `linetype`
+#' - `family`
+#' - `fontface`
+#' - `hjust`
+#' - `lineheight`
 #' - `size`
+#' - `vjust`
 #' - `group`
 #' - `center` (for un-scaling)
 #' - `scale` (for un-scaling)
 #' 
 
 #' @import ggplot2
-#' @include geom-isolines.r
 #' @inheritParams ggplot2::layer
 #' @template param-geom
+#' @inheritParams ggplot2::geom_text
 #' @inheritParams geom_isolines
-#' @param tick_length Numeric; the length of the tick marks, as a proportion of
-#'   the minimum of the plot width and height.
+#' @param label_dodge Numeric; the orthogonal distance of the text from the
+#'   isoline, in the direction of the row or column axis, as a proportion of the
+#'   minimum of the plot width and height.
 #' @family geom layers
-#' @example inst/examples/ex-geom-axis-diabetes.r
 #' @export
-geom_axis_ticks <- function(
+geom_isolines_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  subset = NULL, by = NULL, num = NULL, tick_length = .025,
+  subset = NULL, by = NULL, num = NULL, label_dodge = .1,
   ...,
+  parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -41,14 +47,16 @@ geom_axis_ticks <- function(
     data = data,
     mapping = mapping,
     stat = stat,
-    geom = GeomAxisTicks,
+    geom = GeomIsolinesText,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
       subset = subset,
       by = by, num = num,
-      tick_length = tick_length,
+      label_dodge = label_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
       na.rm = na.rm,
       ...
     )
@@ -57,10 +65,11 @@ geom_axis_ticks <- function(
 
 #' @rdname biplot-geoms
 #' @export
-geom_rows_axis_ticks <- function(
+geom_rows_isolines_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  subset = NULL, by = NULL, num = NULL, tick_length = .025,
+  subset = NULL, by = NULL, num = NULL, label_dodge = .1,
   ...,
+  parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -68,14 +77,16 @@ geom_rows_axis_ticks <- function(
     data = data,
     mapping = mapping,
     stat = rows_stat(stat),
-    geom = GeomAxisTicks,
+    geom = GeomIsolinesText,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
       subset = subset,
       by = by, num = num,
-      tick_length = tick_length,
+      label_dodge = label_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
       na.rm = na.rm,
       ...
     )
@@ -84,10 +95,11 @@ geom_rows_axis_ticks <- function(
 
 #' @rdname biplot-geoms
 #' @export
-geom_cols_axis_ticks <- function(
+geom_cols_isolines_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  subset = NULL, by = NULL, num = NULL, tick_length = .025,
+  subset = NULL, by = NULL, num = NULL, label_dodge = .1,
   ...,
+  parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -95,14 +107,16 @@ geom_cols_axis_ticks <- function(
     data = data,
     mapping = mapping,
     stat = cols_stat(stat),
-    geom = GeomAxisTicks,
+    geom = GeomIsolinesText,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
       subset = subset,
       by = by, num = num,
-      tick_length = tick_length,
+      label_dodge = label_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
       na.rm = na.rm,
       ...
     )
@@ -111,11 +125,12 @@ geom_cols_axis_ticks <- function(
 
 #' @rdname biplot-geoms
 #' @export
-geom_dims_axis_ticks <- function(
+geom_dims_isolines_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "cols",
-  subset = NULL, by = NULL, num = NULL, tick_length = .025,
+  subset = NULL, by = NULL, num = NULL, label_dodge = .1,
   ...,
+  parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -123,14 +138,16 @@ geom_dims_axis_ticks <- function(
     data = data,
     mapping = mapping,
     stat = matrix_stat(.matrix, stat),
-    geom = GeomAxisTicks,
+    geom = GeomIsolinesText,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
       subset = subset,
       by = by, num = num,
-      tick_length = tick_length,
+      label_dodge = label_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
       na.rm = na.rm,
       ...
     )
@@ -141,12 +158,13 @@ geom_dims_axis_ticks <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
-GeomAxisTicks <- ggproto(
-  "GeomAxisTicks", GeomSegment,
+GeomIsolinesText <- ggproto(
+  "GeomIsolinesText", GeomText,
   
   required_aes = c("x", "y"),
   default_aes = aes(
-    colour = "black", alpha = NA, size = .25, linetype = "solid"
+    colour = "black", alpha = .8, size = 3, angle = 0,
+    hjust = 0.5, vjust = 0.5, family = "", fontface = 1, lineheight = 1.2
   ),
   
   setup_data = function(data, params) {
@@ -176,7 +194,9 @@ GeomAxisTicks <- ggproto(
   
   draw_panel = function(
     data, panel_params, coord,
-    subset = NULL, by = NULL, num = NULL, tick_length = .025
+    subset = NULL, by = NULL, num = NULL, label_dodge = .1,
+    parse = FALSE, check_overlap = FALSE,
+    na.rm = FALSE
   ) {
     if (is.null(by) && is.null(num)) num <- 6L
     
@@ -184,28 +204,29 @@ GeomAxisTicks <- ggproto(
     
     data <- calibrate_axes(data, ranges, by, num)
     
-    # tick mark radius
-    rtick <- min(diff(ranges$x), diff(ranges$y)) * tick_length / 2
-    # tick mark vector
+    # text positions and orientations
+    # -+- within plotting window -+-
     data <- transform(
       data,
-      xtick = - axis_y / sqrt(axis_ss) * rtick,
-      ytick = axis_x / sqrt(axis_ss) * rtick
+      x = x_val + axis_x / sqrt(axis_ss) * label_dodge,
+      y = y_val + axis_y / sqrt(axis_ss) * label_dodge
     )
-    # endpoints of tick marks
-    data <- transform(
-      data,
-      x = x_val - xtick, xend = x_val + xtick,
-      y = y_val - ytick, yend = y_val + ytick
-    )
+    # ensure angles
+    if (is.null(data$angle)) data$angle <- 0
+    data$angle <- as.numeric(data$angle) + atan(- data$x / data$y) / pi * 180
     # discard unneeded columns
-    data$xtick <- NULL
-    data$ytick <- NULL
+    data$axis_ss <- NULL
+    data$axis_x <- NULL
+    data$axis_y <- NULL
+    data$axis_val <- NULL
     
-    grob <- GeomSegment$draw_panel(
-      data = data, panel_params = panel_params, coord = coord
+    grob <- GeomText$draw_panel(
+      data = data, panel_params = panel_params, coord = coord,
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm
     )
-    grob$name <- grid::grobName(grob, "geom_axis_ticks")
+    grob$name <- grid::grobName(grob, "geom_isolines_text")
     grob
   }
 )

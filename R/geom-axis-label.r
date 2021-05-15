@@ -130,10 +130,13 @@ GeomAxisLabel <- ggproto(
   "GeomAxisLabel", GeomText,
   
   required_aes = c("x", "y"),
+  default_aes = aes(
+    colour = "black", alpha = NA, size = 3.88, angle = 0,
+    hjust = "inward", vjust = "inward",
+    family = "", fontface = 1, lineheight = 1.2
+  ),
   
   setup_data = function(data, params) {
-    save(data, params, file = "geom-axis-setup-data.rda")
-    load("geom-axis-setup-data.rda")
     
     # diagonal versus vertical lines
     data$vline <- data$x == 0 & data$y != 0
@@ -150,8 +153,6 @@ GeomAxisLabel <- ggproto(
     data, panel_params, coord,
     na.rm = FALSE
   ) {
-    save(data, panel_params, coord, na.rm, file = "geom-axis-draw-panel.rda")
-    load("geom-axis-draw-panel.rda")
     if (! coord$is_linear()) {
       warning("Axes are not yet tailored to non-linear coordinates.")
     }
@@ -162,15 +163,10 @@ GeomAxisLabel <- ggproto(
       panel_params$x.range, panel_params$y.range
     ))
     
-    # label grob
-    # grob <- grid::textGrob(
-    #   data$label,
-    #   data$x, data$y, default.units = "native",
-    #   gp = grid::gpar(
-    #     col = alpha(data$colour, data$alpha),
-    #     fontsize = data$size * .pt
-    #   )
-    # )
+    # ensure angles
+    if (is.null(data$angle)) data$angle <- 0
+    data$angle <- as.numeric(data$angle) + (180 / pi) * atan(data$y / data$x)
+    
     grob <- GeomText$draw_panel(
       data = data,
       panel_params = panel_params, coord = coord
@@ -185,40 +181,25 @@ boundary_points <- function(slope, x.range, y.range) {
   res <- data.frame(slope = slope)
   # compute label positions
   res$increasing <- sign(res$slope) == 1L
+  
   # (eventual) intersections with window borders
-  res$a0 <- ifelse(
-    res$increasing,
-    y.range[[1L]],
-    y.range[[2L]]
-  ) / res$slope
-  res$a1 <- ifelse(
-    res$increasing,
-    y.range[[2L]],
-    y.range[[1L]]
-  ) / res$slope
-  res$b0 <- ifelse(
-    res$increasing,
-    x.range[[1L]],
-    x.range[[2L]]
-  ) * res$slope
-  res$b1 <- ifelse(
-    res$increasing,
-    x.range[[2L]],
-    x.range[[1L]]
-  ) * res$slope
+  res$a1 <- y.range[[1L]] / res$slope
+  res$a2 <- y.range[[2L]] / res$slope
+  res$b1 <- x.range[[1L]] * res$slope
+  res$b2 <- x.range[[2L]] * res$slope
   # (bounded) intersections with window
-  res$x0 <- pmax(x.range[[1L]], res$a0)
-  res$x1 <- pmin(x.range[[2L]], res$a1)
-  res$y0 <- pmax(x.range[[1L]], res$b0)
-  res$y1 <- pmin(x.range[[2L]], res$b1)
+  res$x1 <- pmax(x.range[[1L]], pmin(res$a1, res$a2))
+  res$x2 <- pmin(x.range[[2L]], pmax(res$a1, res$a2))
+  res$z1 <- pmax(y.range[[1L]], pmin(res$b1, res$b2))
+  res$z2 <- pmin(y.range[[2L]], pmax(res$b1, res$b2))
+  # account for negative slopes
+  res$y1 <- ifelse(res$increasing, res$z1, res$z2)
+  res$y2 <- ifelse(res$increasing, res$z2, res$z1)
+  # distances from origin
+  res$rsq1 <- res$x1 ^ 2 + res$y1 ^ 2
+  res$rsq2 <- res$x2 ^ 2 + res$y2 ^ 2
   # farther intersection from origin
-  res$x <- ifelse(
-    abs(res$x0) < abs(res$x1),
-    res$x1, res$x0
-  )
-  res$y <- ifelse(
-    abs(res$y0) < abs(res$y1),
-    res$y1, res$y0
-  )
+  res$x <- ifelse(res$rsq1 < res$rsq2, res$x2, res$x1)
+  res$y <- ifelse(res$rsq1 < res$rsq2, res$y2, res$y1)
   res[, c("x", "y")]
 }
