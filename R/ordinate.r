@@ -18,19 +18,33 @@
 #'   function and other arguments are explicit, which will be evaluated with
 #'   `data` in place of `.`.
 #' @param augment <[`tidy-select`][tidyr_tidy_select]> Columns of `data` to
-#'   augment to the row data of the ordination.
+#'   augment to the row data of the ordination. If missing, all columns not
+#'   included in `cols` will be augmented.
 #' @param ... Additional arguments passed to `model`.
 #' @example inst/examples/ex-ordinate.r
 #' @export
 ordinate <- function(
-  data, cols, model, augment = NULL, ...
+  data, cols, model, augment, ...
 ) {
+  # preserve any column-level attributes
+  attrs <- attributes(data)
+  is_col_attr <- function(x) {
+    length(x) == ncol(data) &&
+      ! is.null(names(x)) && all(names(x) == names(data)) &&
+      # not just the names; can get these using `augment_ord()`
+      ! all(x == names(data))
+  }
+  data_attr <- as.data.frame(attrs[vapply(attrs, is_col_attr, FALSE)])
+  # convert matrix to data frame
+  if (is.matrix(data)) data <- as.data.frame(data)
+  
   # select ordination columns
   cols_pos <- eval_select(enquo(cols), data = data)
   data_ord <- set_names(data[cols_pos], names(cols_pos))
   # select augmentation columns
-  if (is.null(enexpr(augment)))
+  if (missing(augment)) {
     augment <- setdiff(seq_along(data), unname(cols_pos))
+  }
   aug_pos <- eval_select(enquo(augment), data = data)
   data_aug <- set_names(data[aug_pos], names(aug_pos))
   
@@ -41,6 +55,11 @@ ordinate <- function(
   
   # coerce to class 'tbl_ord'
   ord <- as_tbl_ord(ord)
+  # augment column attributes
+  if (! is_empty(data_attr)) {
+    data_attr <- data_attr[cols_pos, , drop = FALSE]
+    ord <- bind_cols_cols(ord, data_attr)
+  }
   # augment ordination with model specs
   ord <- augment_ord(ord)
   # bind augmentation columns to row data

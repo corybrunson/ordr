@@ -118,7 +118,7 @@ with both its intrinsic diagnostics (via <code>[augment_ord()]</code>) and any
 additional columns of the data frame (via <code>[bind_cols_rows()]</code>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ordinate</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>cols</span>, <span class='va'>model</span>, augment <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>ordinate</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>cols</span>, <span class='va'>model</span>, <span class='va'>augment</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,7 +142,8 @@ function and other arguments are explicit, which will be evaluated with
     <tr>
       <th>augment</th>
       <td><p>&lt;<code>tidy-select</code>&gt; Columns of <code>data</code> to
-augment to the row data of the ordination.</p></td>
+augment to the row data of the ordination. If missing, all columns not
+included in <code>cols</code> will be augmented.</p></td>
     </tr>
     <tr>
       <th>...</th>

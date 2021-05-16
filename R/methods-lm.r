@@ -9,7 +9,6 @@
 #' @importFrom stats model.frame influence cooks.distance predict
 #' @template param-methods
 #' @example inst/examples/ex-methods-lm-mtcars.r
-#' @example inst/examples/ex-methods-glm-warpbreaks.r
 NULL
 
 #' @rdname methods-lm

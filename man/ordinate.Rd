@@ -4,7 +4,7 @@
 \alias{ordinate}
 \title{Fit an ordination model to columns of a data frame}
 \usage{
-ordinate(data, cols, model, augment = NULL, ...)
+ordinate(data, cols, model, augment, ...)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -18,7 +18,8 @@ function and other arguments are explicit, which will be evaluated with
 \code{data} in place of \code{.}.}
 
 \item{augment}{<\code{\link[=tidyr_tidy_select]{tidy-select}}> Columns of \code{data} to
-augment to the row data of the ordination.}
+augment to the row data of the ordination. If missing, all columns not
+included in \code{cols} will be augmented.}
 
 \item{...}{Additional arguments passed to \code{model}.}
 }
