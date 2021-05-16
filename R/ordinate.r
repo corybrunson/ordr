@@ -31,8 +31,8 @@ ordinate <- function(
   is_col_attr <- function(x) {
     length(x) == ncol(data) &&
       ! is.null(names(x)) && all(names(x) == names(data)) &&
-      # not just the names; can get these using `augment_ord()`
-      ! all(x == names(data))
+      # not just the column names; can get these using `augment_ord()`
+      ! all(x == colnames(data))
   }
   data_attr <- as.data.frame(attrs[vapply(attrs, is_col_attr, FALSE)])
   # convert matrix to data frame
