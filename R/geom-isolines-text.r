@@ -167,30 +167,8 @@ GeomIsolinesText <- ggproto(
     hjust = 0.5, vjust = 0.5, family = "", fontface = 1, lineheight = 1.2
   ),
   
-  setup_data = function(data, params) {
-    
-    # by default, render elements for all rows
-    if (! is.null(params$subset)) data <- data[params$subset, , drop = FALSE]
-    # allow only `by` or `num`, not both
-    if (! is.null(params$by) && ! is.null(params$num)) {
-      warning("Both `by` and `num` provided; ignoring `num`.")
-      params$num <- NULL
-    }
-    
-    # centers and scales
-    # (center is position on axis at origin)
-    if (! "center" %in% names(data)) data$center <- 0
-    if (! "scale" %in% names(data)) data$scale <- 1
-    
-    # axis scales
-    data <- transform(data, axis_x = x, axis_y = y)
-    # remove position columns
-    # (prevent coordinates from affecting position limits)
-    data$x <- NULL
-    data$y <- NULL
-    
-    data
-  },
+  setup_params = GeomIsolines$setup_params,
+  setup_data = GeomIsolines$setup_data,
   
   draw_panel = function(
     data, panel_params, coord,

@@ -143,15 +143,21 @@ GeomIsolines <- ggproto(
     colour = "black", alpha = .8, size = .5, linetype = "dashed"
   ),
   
-  setup_data = function(data, params) {
+  setup_params = function(data, params) {
     
-    # by default, render elements for all rows
-    if (! is.null(params$subset)) data <- data[params$subset, , drop = FALSE]
     # allow only `by` or `num`, not both
     if (! is.null(params$by) && ! is.null(params$num)) {
       warning("Both `by` and `num` provided; ignoring `num`.")
       params$num <- NULL
     }
+    
+    params
+  },
+  
+  setup_data = function(data, params) {
+    
+    # by default, render elements for all rows
+    if (! is.null(params$subset)) data <- data[params$subset, , drop = FALSE]
     
     # centers and scales
     # (center is position on axis at origin)
