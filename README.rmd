@@ -21,6 +21,10 @@ devtools::load_all()
 
 ## motivation
 
+> Wherever there is an SVD, there is a biplot.[^quote]
+
+[^quote]: Greenacre MJ (2010) _Biplots in Practice_. Fundacion BBVA, ISBN: 978-84-923846. <https://www.fbbva.es/microsite/multivariate-statistics/biplots.html>
+
 ### ordination and biplots
 
 _Ordination_ is a catch-all term for a variety of statistical techniques that introduce an artificial coordinate system for a data set in such a way that a few coordinates capture a large amount of the data structure [^ordination].
@@ -30,7 +34,7 @@ Ordination overlaps with regression and with dimension reduction, which can be [
 [^ordination]: The term _ordination_ is most prevalent among ecologists; to my knowledge, no catch-all term is in common use outside ecology.
 [^discrete]: This is not a hard rule: PCA is often used to compress data before clustering, and LDA uses dimension reduction to perform classification tasks.
 
-Most ordination techniques decompose a numeric rectangular data set into the product of two matrices, often using singular value decomposition. The coordinates of the shared dimensions of these matrices (over which they are multiplied) are the artificial coordinates.
+Most ordination techniques decompose a numeric rectangular data set into the product of two matrices, often using singular value decomposition (SVD). The coordinates of the shared dimensions of these matrices (over which they are multiplied) are the artificial coordinates.
 In some cases, such as principal components analysis, the decomposition is exact; in others, such as non-negative matrix factorization, it is approximate. Some techniques, such as correspondence analysis, transform the data before decomposition.
 Ordination techniques may be supervised, like linear discriminant analysis, or unsupervised, like multidimensional scaling.
 

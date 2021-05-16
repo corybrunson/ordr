@@ -10,29 +10,32 @@
 
 ## motivation
 
+> Wherever there is an SVD, there is a biplot.[1]
+
 ### ordination and biplots
 
 *Ordination* is a catch-all term for a variety of statistical techniques
 that introduce an artificial coordinate system for a data set in such a
 way that a few coordinates capture a large amount of the data structure
-[1]. The branch of mathematical statistics called [geometric data
+[2]. The branch of mathematical statistics called [geometric data
 analysis](https://www.springer.com/us/book/9781402022357) (GDA) provides
 the theoretical basis for (most of) these techniques. Ordination
 overlaps with regression and with dimension reduction, which can be
 [contrasted to clustering and
 classification](https://towardsdatascience.com/supervised-vs-unsupervised-learning-14f68e32ea8d)
 in that they assign continuous rather than discrete values to data
-elements [2].
+elements [3].
 
 Most ordination techniques decompose a numeric rectangular data set into
-the product of two matrices, often using singular value decomposition.
-The coordinates of the shared dimensions of these matrices (over which
-they are multiplied) are the artificial coordinates. In some cases, such
-as principal components analysis, the decomposition is exact; in others,
-such as non-negative matrix factorization, it is approximate. Some
-techniques, such as correspondence analysis, transform the data before
-decomposition. Ordination techniques may be supervised, like linear
-discriminant analysis, or unsupervised, like multidimensional scaling.
+the product of two matrices, often using singular value decomposition
+(SVD). The coordinates of the shared dimensions of these matrices (over
+which they are multiplied) are the artificial coordinates. In some
+cases, such as principal components analysis, the decomposition is
+exact; in others, such as non-negative matrix factorization, it is
+approximate. Some techniques, such as correspondence analysis, transform
+the data before decomposition. Ordination techniques may be supervised,
+like linear discriminant analysis, or unsupervised, like
+multidimensional scaling.
 
 Analysis pipelines that use these techniques may use the artificial
 coordinates directly, in place of natural coordinates, to arrange and
@@ -40,7 +43,7 @@ compare data elements or to predict responses. This is possible because
 both the rows and the columns of the original table can be located, or
 positioned, along these shared coordinates. The number of artificial
 coordinates used in an application, such as regression or visualization,
-is called the *rank* of the ordination [3]. A common application is the
+is called the *rank* of the ordination [4]. A common application is the
 *biplot*, which positions the rows and columns of the original table in
 a scatterplot in 1, 2, or 3 artificial coordinates, usually those that
 explain the most variation in the data.
@@ -67,7 +70,7 @@ summarized, and visualized. On this last point, most biplot
 implementations in R provide limited customizability. **ordr** adopts
 the grammar of graphics paradigm from
 [**ggplot2**](https://github.com/tidyverse/ggplot2) to modularize and
-standardize biplot elements [4]. Overall, the package is designed to
+standardize biplot elements [5]. Overall, the package is designed to
 follow the broader syntactic conventions of the **tidyverse**, so that
 users familiar with a this workflow can more easily and quickly
 integrate ordination models into practice.
@@ -121,7 +124,7 @@ summary(iris)
 an ordination function, wrap the resulting model in the
 [**tibble**](https://github.com/tidyverse/tibble)-derived ‘tbl\_ord’
 class, and append both model diagnostics and other original data columns
-as annotations to the appropriate matrix factors:[5]
+as annotations to the appropriate matrix factors:[6]
 
 ``` r
 (iris_pca <- ordinate(iris, cols = 1:4, model = ~ prcomp(., scale. = TRUE)))
@@ -173,7 +176,7 @@ tidy(iris_pca) %T>% print() %>%
 Following **ggplot2**, the `fortify()` method row-binds the factor
 tibbles with an additional `.matrix` column. This is used by
 `ggbiplot()` to redirect row- and column-specific plot layers to the
-appropriate subsets:[6]
+appropriate subsets:[7]
 
 ``` r
 ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
@@ -230,14 +233,18 @@ Roux.
 
 ### notes
 
-[1] The term *ordination* is most prevalent among ecologists; to my
+[1] Greenacre MJ (2010) *Biplots in Practice*. Fundacion BBVA, ISBN:
+978-84-923846.
+<https://www.fbbva.es/microsite/multivariate-statistics/biplots.html>
+
+[2] The term *ordination* is most prevalent among ecologists; to my
 knowledge, no catch-all term is in common use outside ecology.
 
-[2] This is not a hard rule: PCA is often used to compress data before
+[3] This is not a hard rule: PCA is often used to compress data before
 clustering, and LDA uses dimension reduction to perform classification
 tasks.
 
-[3] Regression and clustering models, like classical [linear
+[4] Regression and clustering models, like classical [linear
 regression](http://www.multivariatestatistics.org/chapter2.html) and
 [*k*-means](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html),
 can also be understood as matrix decomposition approximations and even
@@ -247,7 +254,7 @@ assignments, respectively. Methods for `stats::lm()` and
 `stats::kmeans()`, for example, are implemented for the sake of novelty
 and instruction, but are not widely used in practice.
 
-[4] Biplot elments must be chosen with care, and it is useful and
+[5] Biplot elments must be chosen with care, and it is useful and
 appropriate that many model-specific biplot methods have limited
 flexibility. This package adopts the trade-off articulated in
 [Wilkinson’s *The Grammar of
@@ -256,9 +263,9 @@ Graphics*](https://www.google.com/books/edition/_/iI1kcgAACAAJ) (p. 15):
 nothing in its design to prevent its misuse. … This system cannot
 produce a meaningless graphic, however.”
 
-[5] The data must be in the form of a data frame that can be understood
+[6] The data must be in the form of a data frame that can be understood
 by the modeling function. Step-by-step methods also exist to build and
 annotate a ‘tbl\_ord’ from a fitted ordination model.
 
-[6] The radiating text geom, like several other features, is adapted
+[7] The radiating text geom, like several other features, is adapted
 from the **ggbiplot** package.
