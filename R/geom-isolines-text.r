@@ -182,16 +182,19 @@ GeomIsolinesText <- ggproto(
     
     data <- calibrate_axes(data, ranges, by, num)
     
-    # text positions and orientations
+    # omit labels at origin
+    data <- data[data$x != 0 | data$y != 0, , drop = FALSE]
+    # calculate angles
+    if (is.null(data$angle)) data$angle <- 0
+    data$angle <-
+      as.numeric(data$angle) + atan(- data$axis_x / data$axis_y) / pi * 180
+    # dodge axis
     # -+- within plotting window -+-
     data <- transform(
       data,
       x = x_val + axis_x / sqrt(axis_ss) * label_dodge,
       y = y_val + axis_y / sqrt(axis_ss) * label_dodge
     )
-    # ensure angles
-    if (is.null(data$angle)) data$angle <- 0
-    data$angle <- as.numeric(data$angle) + atan(- data$x / data$y) / pi * 180
     # discard unneeded columns
     data$axis_ss <- NULL
     data$axis_x <- NULL
