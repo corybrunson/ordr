@@ -16,18 +16,18 @@ arrest_logratios[state_examples, ]
 # non-compositional log-ratio analysis
 (arrests_lra <- lra(USArrests[, c(1, 2, 4)]))
 (arrests_lra_ord <- augment_ord(as_tbl_ord(arrests_lra)))
+# state abbreviations
+state_abbr <- data.frame(state = state.name, abbr = state.abb)
 # row-principal biplot
 arrests_lra_ord %>%
+  left_join_rows(state_abbr, by = c(".name" = "state")) %>%
   confer_inertia("rows") %>%
-  ggbiplot(
-    aes(label = .name, color = .matrix),
-    sec.axes = "cols", scale.factor = 1/20
-  ) +
+  ggbiplot(aes(color = .matrix), sec.axes = "cols", scale.factor = 1/20) +
   scale_color_manual(values = c("tomato4", "turquoise4")) +
   theme_bw() +
-  geom_rows_text(size = 3, alpha = .5) +
+  geom_rows_text(aes(label = abbr), size = 3, alpha = .75) +
   geom_cols_polygon(fill = NA, linetype = "dashed") +
-  geom_cols_text(fontface = "bold") +
+  geom_cols_text(aes(label = .name), fontface = "bold") +
   ggtitle(
     "Non-compositional LRA of violent crime arrest rates",
     "United States, 1973"
@@ -39,16 +39,14 @@ arrests_lra_ord %>%
 (arrests_lra_ord <- augment_ord(as_tbl_ord(arrests_lra)))
 # row-principal biplot
 arrests_lra_ord %>%
+  left_join_rows(state_abbr, by = c(".name" = "state")) %>%
   confer_inertia("rows") %>%
-  ggbiplot(
-    aes(label = .name, color = .matrix),
-    sec.axes = "cols", scale.factor = 1/20
-  ) +
+  ggbiplot(aes(color = .matrix), sec.axes = "cols", scale.factor = 1/20) +
   scale_color_manual(values = c("tomato4", "turquoise4")) +
   theme_bw() +
-  geom_rows_text(size = 3, alpha = .5) +
+  geom_rows_text(aes(label = abbr), size = 3, alpha = .75) +
   geom_cols_polygon(fill = NA, linetype = "dashed") +
-  geom_cols_text(fontface = "bold") +
+  geom_cols_text(aes(label = .name), fontface = "bold") +
   ggtitle(
     "Compositional LRA of violent crime arrest rates",
     "United States, 1973"
