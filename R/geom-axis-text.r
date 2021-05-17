@@ -183,9 +183,6 @@ GeomAxisText <- ggproto(
     
     data <- calibrate_axes(data, ranges, by, num)
     
-    # text strings
-    data <- transform(data, label = format(label, digits = 3))
-    
     # omit labels at origin
     data <- data[data$x != 0 | data$y != 0, , drop = FALSE]
     # calculate angles
