@@ -191,13 +191,13 @@ GeomAxisText <- ggproto(
     # calculate angles
     if (is.null(data$angle)) data$angle <- 0
     data$angle <-
-      as.numeric(data$angle) + atan(- data$axis_x / data$axis_y) / pi * 180
+      as.numeric(data$angle) + atan(data$axis_y / data$axis_x) / pi * 180
     # dodge axis
     # -+- within plotting window -+-
     data <- transform(
       data,
-      x = x_val + axis_x / sqrt(axis_ss) * label_dodge,
-      y = y_val + axis_y / sqrt(axis_ss) * label_dodge
+      x = x_val - axis_y / sqrt(axis_ss) * label_dodge,
+      y = y_val + axis_x / sqrt(axis_ss) * label_dodge
     )
     # discard unneeded columns
     data$x_val <- NULL
