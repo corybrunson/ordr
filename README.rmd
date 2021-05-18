@@ -21,9 +21,9 @@ devtools::load_all()
 
 ## motivation
 
-> Wherever there is an SVD, there is a biplot.[^quote]
+> Wherever there is an SVD, there is a biplot.[^svd-quote]
 
-[^quote]: Greenacre MJ (2010) _Biplots in Practice_. Fundacion BBVA, ISBN: 978-84-923846. <https://www.fbbva.es/microsite/multivariate-statistics/biplots.html>
+[^svd-quote]: Greenacre MJ (2010) _Biplots in Practice_. Fundacion BBVA, ISBN: 978-84-923846. <https://www.fbbva.es/microsite/multivariate-statistics/biplots.html>
 
 ### ordination and biplots
 
@@ -64,6 +64,10 @@ remotes::install_github("corybrunson/ordr")
 
 ### example
 
+> Morphologically, _Iris versicolor_ is much closer to _Iris virginica_ than to _Iris setosa_, though in every character by which it differs from _Iris virginica_ it departs in the direction of _Iris setosa_.[^iris-quote]
+
+[^iris-quote]: Anderson E (1936) "The Species Problem in Iris". _Annals of the Missouri Botanical Garden_ **23**(3), 457-469+471-483+485-501+503-509. <https://doi.org/10.2307/2394164>
+
 A very common illustration of ordination in R applies principal components analysis (PCA) to Anderson's iris measurements. These data consist of lengths and widths of the petals and surrounding sepals from 50 each of three species of iris:
 
 ```{r iris}
@@ -79,6 +83,18 @@ summary(iris)
 (iris_pca <- ordinate(iris, cols = 1:4, model = ~ prcomp(., scale. = TRUE)))
 ```
 
+Additional annotations can be added using several row- and column-specific **dplyr**-style verbs:
+
+```{r bind}
+iris_meta <- data.frame(
+  Species = c("setosa", "versicolor", "virginica"),
+  Colony = c(1L, 1L, 2L),
+  Cytotype = c("diploid", "hexaploid", "tetraploid"),
+  Ploidy = c(2L, 6L, 4L)
+)
+(iris_pca <- left_join_rows(iris_pca, iris_meta, by = "Species"))
+```
+
 Following the [**broom**](https://github.com/tidymodels/broom) package, the `tidy()` method produces a tibble describing the model components, in this case the principal coordinates, which is suitable for scree plotting:
 
 ```{r model components and scree plot}
@@ -92,7 +108,7 @@ tidy(iris_pca) %T>% print() %>%
 
 Following **ggplot2**, the `fortify()` method row-binds the factor tibbles with an additional `.matrix` column. This is used by `ggbiplot()` to redirect row- and column-specific plot layers to the appropriate subsets:[^text-radiate]
 
-```{r biplot}
+```{r interpolation biplot}
 ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_ellipse(aes(color = Species), alpha = .5, level = .99) +
@@ -104,6 +120,25 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
 ```
 
 [^text-radiate]: The radiating text geom, like several other features, is adapted from the **ggbiplot** package.
+
+When variables are represented in standard coordinates, as typically in PCA, their rules can be rescaled to yield a prediction biplot:
+
+```{r prediction biplot}
+ggbiplot(iris_pca, prediction = TRUE, axis.percents = FALSE) +
+  theme_biplot() +
+  geom_rows_point(aes(color = Species, shape = Species)) +
+  stat_rows_center(
+    aes(color = Species, shape = Species),
+    size = 5, alpha = .5
+  ) +
+  geom_cols_axis() +
+  geom_cols_axis_ticks(aes(center = .center, scale = .scale)) +
+  geom_cols_axis_text(aes(center = .center, scale = .scale)) +
+  geom_cols_axis_label(aes(label = .name)) +
+  ggtitle("Prediction biplot of Anderson's iris measurements",
+          "Project a marker onto an axis to approximate its measurement")
+aggregate(iris[, 1:4], by = iris[, "Species", drop = FALSE], FUN = mean)
+```
 
 ## acknowledgments
 
