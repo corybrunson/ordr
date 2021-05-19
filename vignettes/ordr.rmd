@@ -64,7 +64,7 @@ As an exercise, we can recover the row and column standard coordinates returned 
 
 1. The _correspondence matrix_ (the matrix of relative frequencies) $P = \frac{1}{n} X$
 2. The row and column weights $r = \frac{1}{n} X 1$ and $c = \frac{1}{n} 1^\top X$
-3. The diagonals of inverse weights $D_r = \diag(r)$ and $D_c = \diag(c)$
+3. The diagonals of inverse weights $D_r = \operatorname{diag}(r)$ and $D_c = \operatorname{diag}(c)$
 4. The matrix of _standardized residuals_ $S = D_r (P - rc) D_c$
 5. The singular value decomposition $S = U \Sigma V^\top$
 6. The row and column standard coordinates $F = D_r U$ and $G = D_c V$
