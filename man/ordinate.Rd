@@ -27,7 +27,7 @@ included in \code{cols} will be augmented.}
 This is a convenience function to fit an ordination model to a
 specified subset of columns of a data frame and augment the tbl_ord object
 with both its intrinsic diagnostics (via \verb{[augment_ord()]}) and any
-additional columns of the data frame (via \verb{[bind_cols_rows()]}).
+additional columns of the data frame (via \verb{[cbind_rows()]}).
 }
 \examples{
 # PCA of iris data

@@ -58,7 +58,7 @@ air_quality[, seq(4L)] \%>\%
 glance(air_nipals)
 # bind dates to observation coordinates
 air_nipals \%>\%
-  bind_cols_rows(air_quality[, 5L, drop = FALSE]) \%>\%
+  cbind_rows(air_quality[, 5L, drop = FALSE]) \%>\%
   mutate_rows(missingness = apply(is.na(air_quality[, 1:4]), 1L, any)) ->
   air_nipals
 # by default, no inertia is conferred

@@ -3,7 +3,7 @@
 #' @description This is a convenience function to fit an ordination model to a
 #'   specified subset of columns of a data frame and augment the tbl_ord object
 #'   with both its intrinsic diagnostics (via `[augment_ord()]`) and any
-#'   additional columns of the data frame (via `[bind_cols_rows()]`).
+#'   additional columns of the data frame (via `[cbind_rows()]`).
 #'   
 
 #' @name ordinate
@@ -58,12 +58,12 @@ ordinate <- function(
   # augment column attributes
   if (! is_empty(data_attr)) {
     data_attr <- data_attr[cols_pos, , drop = FALSE]
-    ord <- bind_cols_cols(ord, data_attr)
+    ord <- cbind_cols(ord, data_attr)
   }
   # augment ordination with model specs
   ord <- augment_ord(ord)
   # bind augmentation columns to row data
-  if (! is_empty(data_aug)) ord <- bind_cols_rows(ord, data_aug)
+  if (! is_empty(data_aug)) ord <- cbind_rows(ord, data_aug)
   
   ord
 }

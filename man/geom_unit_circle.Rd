@@ -92,7 +92,7 @@ points for rows and arrows for columns.
 # principal components analysis of overt & chemical diabetes test values
 heplots::Diabetes[, seq(5L)] \%>\%
   princomp(cor = TRUE) \%>\%
-  bind_cols_rows(group = heplots::Diabetes$group) \%>\%
+  cbind_rows(group = heplots::Diabetes$group) \%>\%
   as_tbl_ord() \%>\%
   print() -> diabetes_pca
 # note that column standard coordinates are unit vectors

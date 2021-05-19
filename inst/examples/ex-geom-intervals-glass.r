@@ -4,7 +4,7 @@ glass %>%
   lra(compositional = TRUE) %>%
   as_tbl_ord() %>%
   confer_inertia("rows") %>%
-  bind_cols_rows(dplyr::select(glass, Site)) %>%
+  cbind_rows(dplyr::select(glass, Site)) %>%
   print() -> glass_lra
 # row-principal biplot with ordinate-wise standard deviations
 glass_lra %>%

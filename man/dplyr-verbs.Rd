@@ -13,8 +13,8 @@
 \alias{mutate_cols}
 \alias{transmute_rows}
 \alias{transmute_cols}
-\alias{bind_cols_rows}
-\alias{bind_cols_cols}
+\alias{cbind_rows}
+\alias{cbind_cols}
 \alias{left_join_rows}
 \alias{left_join_cols}
 \title{\strong{dplyr} verbs for tbl_ord factors}
@@ -41,9 +41,9 @@ transmute_rows(.data, ...)
 
 transmute_cols(.data, ...)
 
-bind_cols_rows(.data, ...)
+cbind_rows(.data, ...)
 
-bind_cols_cols(.data, ...)
+cbind_cols(.data, ...)
 
 left_join_rows(.data, ...)
 

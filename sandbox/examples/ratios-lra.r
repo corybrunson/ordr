@@ -13,7 +13,7 @@ sub_ratios %>%
   lra(compositional = TRUE) %>%
   as_tbl_ord() %>%
   augment() %>%
-  bind_cols_rows(dplyr::select(sub_ratios, chapter, recipes)) %>%
+  cbind_rows(dplyr::select(sub_ratios, chapter, recipes)) %>%
   print() -> lra_ratios
 lra_ratios %>%
   confer_inertia("rows") %>%
