@@ -92,6 +92,21 @@ column names from the input matrix to the output matrices." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/cmds-variables.html">multidimensional scaling of variables</a>
+    </li>
+    <li>
+      <a href="../articles/ordination-in-the-tidyverse.html">Ordination in the tidyverse</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -234,10 +249,10 @@ column names from the input matrix to the output matrices.</p>
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.240</span><span>  -</span><span style='color: #BB0000;'>0.451</span><span> | 
 #&gt; </div><div class='input'><span class='co'># summarize ordination</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>finches_lsvd</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
-#&gt;    rank n.row n.col inertia class
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     2    17     2      </span><span style='color: #BB0000;'>NA</span><span> lsvd </div><div class='input'><span class='co'># recover row and column singular vectors</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 7</span><span>
+#&gt;    rank n.row n.col inertia prop.var.1 prop.var.2 class
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     2    17     2      </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>         lsvd </div><div class='input'><span class='co'># recover row and column singular vectors</span>
 <span class='fu'><a href='accessors.html'>get_rows</a></span><span class='op'>(</span><span class='va'>finches_lsvd</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;                      LSC1       LSC2
 #&gt; Seymour        29.6262671 -27.292836
@@ -339,10 +354,10 @@ column names from the input matrix to the output matrices.</p>
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.353</span><span>  -</span><span style='color: #BB0000;'>0.361</span><span> | 
 #&gt; </div><div class='input'><span class='co'># summarize ordination</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>finches_lpca</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
-#&gt;    rank n.row n.col inertia class
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     2    17     2      </span><span style='color: #BB0000;'>NA</span><span> lpca </div><div class='input'><span class='co'># recover row and column singular vectors</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 7</span><span>
+#&gt;    rank n.row n.col inertia prop.var.1 prop.var.2 class
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     2    17     2      </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>         lpca </div><div class='input'><span class='co'># recover row and column singular vectors</span>
 <span class='fu'><a href='accessors.html'>get_rows</a></span><span class='op'>(</span><span class='va'>finches_lpca</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;                     LPC1       LPC2
 #&gt; Seymour         2.023724 -10.397181
@@ -446,10 +461,10 @@ column names from the input matrix to the output matrices.</p>
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.275 -</span><span style='color: #BB0000;'>0.444</span><span> | 
 #&gt; </div><div class='input'><span class='co'># summarize ordination</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>finches_clpca</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
-#&gt;    rank n.row n.col inertia class
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     2    17     2      </span><span style='color: #BB0000;'>NA</span><span> clpca</div><div class='input'><span class='co'># recover row and column singular vectors</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 7</span><span>
+#&gt;    rank n.row n.col inertia prop.var.1 prop.var.2 class
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     2    17     2      </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>         clpca</div><div class='input'><span class='co'># recover row and column singular vectors</span>
 <span class='fu'><a href='accessors.html'>get_rows</a></span><span class='op'>(</span><span class='va'>finches_clpca</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;                     LPC1       LPC2
 #&gt; Seymour        -5.808312 -9.5867231

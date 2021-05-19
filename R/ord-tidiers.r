@@ -72,6 +72,9 @@ generics::glance
 #' @rdname tidiers
 #' @export
 glance.tbl_ord <- function(x, ...) {
+  all.var <- recover_inertia(as_tbl_ord(x))
+  tot.var <- sum(all.var)
+  var.na <- identical(all.var, NA_real_)
   tibble::tibble(
     # number of artificial coordinates
     rank = dim(x),
@@ -79,8 +82,11 @@ glance.tbl_ord <- function(x, ...) {
     n.row = nrow(get_rows(x)),
     n.col = ncol(get_rows(x)),
     # -+- clarify whether this is original inertia or decomposed inertia -+-
-    inertia = sum(recover_inertia(as_tbl_ord(x))),
-    # original ordination object class
+    inertia = tot.var,
+    # proportions of variance/inertia in first and second artificial dimensions
+    prop.var.1 = if (var.na) NA else all.var[[1L]] / tot.var,
+    prop.var.2 = if (var.na) NA else all.var[[2L]] / tot.var,
+    # original ordination object (first) class
     class = setdiff(class(x), "tbl_ord")[[1L]]
   )
 }

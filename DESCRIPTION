@@ -5,7 +5,7 @@ Authors@R: c(
   person("Jason Cory", "Brunson", email = "cornelioid@gmail.com",
     role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3126-9494")),
   person("Emily", "Paul", email = "erpb.71@gmail.com",
-    role = "ctb")  
+    role = "ctb")
   )
 Description: A unified framework for ordination objects and biplot methods using
     tidy principles.
@@ -31,7 +31,8 @@ Imports:
     logisticPCA,
     vegan,
     ade4,
-    nipals
+    nipals,
+    sessioninfo
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -42,10 +43,13 @@ Suggests:
     igraphdata,
     heplots,
     cooccur,
-    proxy
+    proxy,
+    knitr,
+    rmarkdown,
+    corrplot
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
-Collate: 
+Collate:
     'aaa-.r'
     'biplot-geoms.r'
     'biplot-gg.r'
@@ -104,3 +108,4 @@ Collate:
     'stat-scale.r'
     'stat-spantree.r'
     'themes.r'
+VignetteBuilder: knitr

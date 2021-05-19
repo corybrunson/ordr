@@ -90,6 +90,21 @@ nipals::nipals()." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/cmds-variables.html">multidimensional scaling of variables</a>
+    </li>
+    <li>
+      <a href="../articles/ordination-in-the-tidyverse.html">Ordination in the tidyverse</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -196,10 +211,10 @@ to identify objects returned by <code><a href='wrap-ord.html'>nipals_ord()</a></
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.491</span><span>  0.511    0.636      | 
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.569  0.003</span><span style='text-decoration: underline;'>67</span><span>  0.666      | </div><div class='input'><span class='co'># summarize ordination</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>air_nipals</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
-#&gt;    rank n.row n.col inertia class     
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     4   153     4    45.2 nipals_ord</div><div class='input'><span class='co'># bind dates to observation coordinates</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 7</span><span>
+#&gt;    rank n.row n.col inertia prop.var.1 prop.var.2 class     
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     4   153     4    45.2      0.411      0.273 nipals_ord</div><div class='input'><span class='co'># bind dates to observation coordinates</span>
 <span class='va'>air_nipals</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='dplyr-verbs.html'>bind_cols_rows</a></span><span class='op'>(</span><span class='va'>air_quality</span><span class='op'>[</span>, <span class='fl'>5L</span>, drop <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>]</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='dplyr-verbs.html'>mutate_rows</a></span><span class='op'>(</span>missingness <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>air_quality</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>, <span class='fl'>1L</span>, <span class='va'>any</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>-&gt;</span>

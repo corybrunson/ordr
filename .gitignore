@@ -7,3 +7,5 @@
 .RData
 
 ignore
+
+inst/doc

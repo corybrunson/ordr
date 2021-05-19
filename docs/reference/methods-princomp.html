@@ -88,6 +88,21 @@ objects of class &quot;princomp&quot; as returned by stats::princomp()." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/cmds-variables.html">multidimensional scaling of variables</a>
+    </li>
+    <li>
+      <a href="../articles/ordination-in-the-tidyverse.html">Ordination in the tidyverse</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -190,10 +205,10 @@ objects of class <code>"princomp"</code> as returned by <code><a href='https://r
 #&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.857  -</span><span style='color: #BB0000;'>0.173</span><span>  -</span><span style='color: #BB0000;'>0.076</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>     | 
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.358  -</span><span style='color: #BB0000;'>0.075</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.546</span><span>      | </div><div class='input'><span class='co'># summarize ordination</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>iris_pca</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
-#&gt;    rank n.row n.col inertia class   
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     4   150     4    681. princomp</div><div class='input'><span class='co'># bind species classification to observation coordinates</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 7</span><span>
+#&gt;    rank n.row n.col inertia prop.var.1 prop.var.2 class   
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     4   150     4    681.      0.925     0.053</span><span style='text-decoration: underline;'>1</span><span> princomp</div><div class='input'><span class='co'># bind species classification to observation coordinates</span>
 <span class='op'>(</span><span class='va'>iris_pca</span> <span class='op'>&lt;-</span> <span class='fu'><a href='dplyr-verbs.html'>mutate_rows</a></span><span class='op'>(</span><span class='va'>iris_pca</span>, species <span class='op'>=</span> <span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; # A tbl_ord of class 'princomp': (150 x 4) x (4 x 4)'
 #&gt; # 4 coordinates: Comp.1, Comp.2, ..., Comp.4
