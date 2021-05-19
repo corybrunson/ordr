@@ -48,6 +48,8 @@ The resulting count table is suitable for correspondence analysis, and we fit th
 
 [^snee]: <https://www.jstor.org/stable/2683520>
 
+## correspondence analysis using **ca**
+
 ```{r}
 haireye <- apply(HairEyeColor, c(1L, 2L), sum)
 haireye_ca <- ca(haireye)
@@ -102,6 +104,8 @@ plot(
 
 This _symmetric biplot_, distinct from the default symmetric map, evenly distributes the inertia between the rows and columns. Distances between points in the same matrix factor do not approximate their $\chi^2$ distances, but inner products between row and column points do approximate their standardized residuals.
 The row and column profile markers are resized to represent the masses of the groups.
+
+## **ordr** methods for CA models
 
 **ordr** provides a new class, 'tbl_ord', that wraps ordination objects like those of class 'prcomp' without directly modifying them. (The original model can be recovered with `un_tbl_ord()`.)
 
