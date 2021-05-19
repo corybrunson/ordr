@@ -3,6 +3,6 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   cmds-variables: cmds-variables.html
-  ordination-in-the-tidyverse: ordination-in-the-tidyverse.html
-last_built: 2021-05-19T15:59Z
+  ordr: ordr.html
+last_built: 2021-05-19T16:12Z
 
