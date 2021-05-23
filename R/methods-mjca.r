@@ -15,11 +15,11 @@ as_tbl_ord.mjca <- as_tbl_ord_default
 
 #' @rdname methods-mjca
 #' @export
-recover_u.mjca <- function(x) x$rowcoord
+recover_rows.mjca <- function(x) x$rowcoord
 
 #' @rdname methods-mjca
 #' @export
-recover_v.mjca <- function(x) x$colcoord
+recover_cols.mjca <- function(x) x$colcoord
 
 #' @rdname methods-mjca
 #' @export
@@ -40,7 +40,7 @@ recover_coord.mjca <- function(x) {
 
 #' @rdname methods-mjca
 #' @export
-augmentation_u.mjca <- function(x) {
+augmentation_rows.mjca <- function(x) {
   .name <- rownames(x$rowcoord)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$rowcoord))
@@ -57,7 +57,7 @@ augmentation_u.mjca <- function(x) {
 
 #' @rdname methods-mjca
 #' @export
-augmentation_v.mjca <- function(x){
+augmentation_cols.mjca <- function(x){
   .name <- rownames(x$colcoord)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$colcoord))

@@ -1,14 +1,15 @@
-#' @title Render text at ordinates radiating out from the origin
+#' @title Render text that radiates outward from the origin
 #' 
 
-#' @description `geom_*_text_radiate()` is adapted from [ggbiplot::ggbiplot()].
-#'   It renders text at specified positions and angles that radiate out from the
-#'   origin.
+#' @description `geom_text_radiate()` is adapted from `ggbiplot()` in the
+#'   off-CRAN extensions of the same name (Vu, 2014; Telford, 2017; Gegzna,
+#'   2018). It renders text at specified positions and angles that radiate out
+#'   from the origin.
 #' @template biplot-layers
 
 #' @section Aesthetics:
 
-#' `geom_*_text_radiate()` understands the following aesthetics (required
+#' `geom_text_radiate()` understands the following aesthetics (required
 #' aesthetics are in bold):
 
 #' - **`x`**
@@ -26,13 +27,121 @@
 #' - `group`
 #' 
 
-#' @name geom-biplot-text-radiate
-#' @import ggplot2
-#' @inheritParams geom-biplot-text
-#' @example inst/examples/bioenv-mlm.r
-NULL
+#' @template ref-ggbiplot
 
-#' @rdname geom-biplot-text-radiate
+#' @import ggplot2
+#' @inheritParams ggplot2::geom_text
+#' @family geom layers
+#' @export
+geom_text_radiate <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  ...,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomTextRadiate,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_rows_text_radiate <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  ...,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = rows_stat(stat),
+    geom = GeomTextRadiate,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_cols_text_radiate <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  ...,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = cols_stat(stat),
+    geom = GeomTextRadiate,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_dims_text_radiate <- function(
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
+  .matrix = "cols",
+  ...,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = matrix_stat(.matrix, stat),
+    geom = GeomTextRadiate,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
 #' @usage NULL
 #' @export
 GeomTextRadiate <- ggproto(
@@ -80,115 +189,6 @@ GeomTextRadiate <- ggproto(
     )
   }
 )
-
-#' @rdname geom-biplot-text-radiate
-#' @export
-geom_text_radiate <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  ...,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = stat,
-    geom = GeomTextRadiate,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      parse = parse,
-      check_overlap = check_overlap,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
-#' @rdname geom-biplot-text-radiate
-#' @export
-geom_u_text_radiate <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  ...,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = u_stat(stat),
-    geom = GeomTextRadiate,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      parse = parse,
-      check_overlap = check_overlap,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
-#' @rdname geom-biplot-text-radiate
-#' @export
-geom_v_text_radiate <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  ...,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = v_stat(stat),
-    geom = GeomTextRadiate,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      parse = parse,
-      check_overlap = check_overlap,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
-#' @rdname geom-biplot-text-radiate
-#' @export
-geom_biplot_text_radiate <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "v",
-  ...,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = matrix_stat(.matrix, stat),
-    geom = GeomTextRadiate,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      parse = parse,
-      check_overlap = check_overlap,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
 
 # not exported from *ggplot2*
 #' @importFrom utils getFromNamespace

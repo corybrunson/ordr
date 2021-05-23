@@ -1,4 +1,4 @@
-#' @title Augment metadata on the factors and coordinates of tbl_ords
+#' @title Augment factors and coordinates of 'tbl_ord' objects
 #'
 #' @description These functions return data associated with the cases,
 #'   variables, and coordinates of an ordination object, and attach it to the
@@ -8,60 +8,44 @@
 #' @details
 #'
 #' The `augmentation_*()` methods produce [tibble][tibble::tibble]s of values
-#' associated with the rows, columns, and coordinates of a [tbl_ord] object. The
-#' first field of each tibble is `.name`, which contains the case, variable, or
-#' coordinate names. Additional fields contain information about the cases,
-#' variables, or coordinates extracted from the original ordination object.
+#' associated with the rows, columns, and artificial coordinates of an object of
+#' class '[tbl_ord]'. The first field of each tibble is `.name`, which contains
+#' the row, column, or coordinate names. Additional fields contain information
+#' about the rows, columns, or coordinates extracted from the ordination object.
 #'
-#' The `augment_*()` functions return the ordination with either or both factors
-#' annotated with the result of `augmentation_*()`. In this way `augment_*()`
-#' works like [generics::augment()] by extracting information for a tidy summary
-#' of the components, but it differs in returning an annotated tbl_ord rather
-#' than a [tbl_df][tibble::tbl_df]. The advantage of implementing separate
-#' methods for the different components is that more information contained in
-#' the original object becomes accessible to the user. To achieve a result
-#' similar to that of [generics::augment()], use [fortify()].
+#' The function `augment_ord()` returns the ordination with either or both
+#' matrix factors annotated with the result of `augmentation_*()`. In this way
+#' `augment_ord()` works like [generics::augment()], as popularized by the
+#' **broom** package, by extracting information about the rows and columns, but
+#' it differs in returning an annotated 'tbl_ord' rather than a
+#' ['tbl_df'][tibble::tbl_df] object. The advantage of implementing separate
+#' methods for the rows, columns, and artificial coordinates is that more
+#' information contained in the original object becomes accessible to the user.
 #' 
 
 #' @name augmentation
 #' @include ord-accessors.r
 #' @inheritParams accessors
-#' @param data Passed to [generics::augment()]; currently ignored.
-#' @example inst/examples/bioenv-lm-isolines.r
-#' @example inst/examples/benthos-ca-augment-confer.r
-#' @example inst/examples/mtcars-kmeans-augment.r
+#' @template param-matrix
+#' @seealso [tidiers] and [annotation] methods that interface with augmentation.
 NULL
 
 #' @rdname augmentation
 #' @export
-augmentation_u <- function(x) UseMethod("augmentation_u")
+augmentation_rows <- function(x) UseMethod("augmentation_rows")
 
 #' @rdname augmentation
 #' @export
-augmentation_v <- function(x) UseMethod("augmentation_v")
+augmentation_cols <- function(x) UseMethod("augmentation_cols")
 
 #' @rdname augmentation
 #' @export
 augmentation_factor <- function(x, .matrix) {
   switch(
     match_factor(.matrix),
-    u = augmentation_u(x),
-    v = augmentation_v(x),
-    uv = list(u = augmentation_u(x), v = augmentation_v(x))
-  )
-}
-
-#' @rdname augmentation
-#' @export
-augmentation.tbl_ord <- function(x, .matrix) {
-  switch(
-    match_factor(.matrix),
-    u = augmentation_u(x),
-    v = augmentation_v(x),
-    uv = dplyr::bind_rows(
-      dplyr::mutate(augmentation_u(x), .matrix = "u"),
-      dplyr::mutate(augmentation_v(x), .matrix = "v")
-    )
+    rows = augmentation_rows(x),
+    cols = augmentation_cols(x),
+    dims = list(rows = augmentation_rows(x), cols = augmentation_cols(x))
   )
 }
 
@@ -69,19 +53,15 @@ augmentation.tbl_ord <- function(x, .matrix) {
 #' @export
 augmentation_coord <- function(x) UseMethod("augmentation_coord")
 
-#' @importFrom generics augment
-#' @export
-generics::augment
-
 #' @rdname augmentation
 #' @export
-augment.tbl_ord <- function(x, data, .matrix = "uv", ...) {
+augment_ord <- function(x, .matrix = "dims") {
   .matrix <- match_factor(.matrix)
-  if (grepl("u", .matrix)) {
-    x <- augment_factor(x, "u")
+  if (.matrix == "dims" || .matrix == "rows") {
+    x <- augment_factor(x, "rows")
   }
-  if (grepl("v", .matrix)) {
-    x <- augment_factor(x, "v")
+  if (.matrix == "dims" || .matrix == "cols") {
+    x <- augment_factor(x, "cols")
   }
   x
 }
@@ -119,21 +99,4 @@ augment_annotation <- function(x, .matrix) {
 augment_factor <- function(x, .matrix) {
   ann <- augment_annotation(x, .matrix)
   set_annotation_factor(x, ann, .matrix = .matrix)
-}
-
-#' @rdname augmentation
-#' @export
-augment_u <- function(x) augment_factor(x, .matrix = "u")
-
-#' @rdname augmentation
-#' @export
-augment_v <- function(x) augment_factor(x, .matrix = "v")
-
-#' @rdname augmentation
-#' @export
-augment_coord <- function(x) {
-  bind_cols(
-    inertia = recover_inertia(x),
-    augmentation_coord(x)
-  )
 }

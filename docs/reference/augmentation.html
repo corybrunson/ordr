@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Augment metadata on the factors and coordinates of tbl_ords — augmentation • ordr</title>
+<title>Augment factors and coordinates of 'tbl_ord' objects — augmentation • ordr</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Augment metadata on the factors and coordinates of tbl_ords — augmentation" />
+<meta property="og:title" content="Augment factors and coordinates of 'tbl_ord' objects — augmentation" />
 <meta property="og:description" content="These functions return data associated with the cases,
 variables, and coordinates of an ordination object, and attach it to the
 object." />
@@ -82,12 +82,27 @@ object." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
+  <a href="../articles/ordr.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/cmds-variables.html">multidimensional scaling of variables</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -105,7 +120,7 @@ object." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Augment metadata on the factors and coordinates of tbl_ords</h1>
+    <h1>Augment factors and coordinates of 'tbl_ord' objects</h1>
     
     <div class="hidden name"><code>augmentation.Rd</code></div>
     </div>
@@ -116,197 +131,50 @@ variables, and coordinates of an ordination object, and attach it to the
 object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>augmentation_u</span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='fu'>augmentation_rows</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>augmentation_v</span>(<span class='no'>x</span>)
+<span class='fu'>augmentation_cols</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>augmentation_factor</span>(<span class='no'>x</span>, <span class='no'>.matrix</span>)
+<span class='fu'>augmentation_factor</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>.matrix</span><span class='op'>)</span>
 
-<span class='fu'>augmentation.tbl_ord</span>(<span class='no'>x</span>, <span class='no'>.matrix</span>)
+<span class='fu'>augmentation_coord</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>augmentation_coord</span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for tbl_ord</span>
-<span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='no'>x</span>, <span class='no'>data</span>, <span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"uv"</span>, <span class='no'>...</span>)
-
-<span class='fu'>augment_u</span>(<span class='no'>x</span>)
-
-<span class='fu'>augment_v</span>(<span class='no'>x</span>)
-
-<span class='fu'>augment_coord</span>(<span class='no'>x</span>)</pre>
+<span class='fu'>augment_ord</span><span class='op'>(</span><span class='va'>x</span>, .matrix <span class='op'>=</span> <span class='st'>"dims"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <a href='tbl_ord.html'>tbl_ord</a>, or an ordination object coercible to one.</p></td>
+      <td><p>An object of class '<a href='tbl_ord.html'>tbl_ord</a>'.</p></td>
     </tr>
     <tr>
       <th>.matrix</th>
       <td><p>A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are <code>"u"</code>, <code>"v"</code>, and <code>"uv"</code>.</p></td>
-    </tr>
-    <tr>
-      <th>data</th>
-      <td><p>Passed to <code><a href='https://rdrr.io/pkg/generics/man/augment.html'>generics::augment()</a></code>; currently ignored.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Additional arguments from <code><a href='https://rdrr.io/r/base/matrix.html'>base::as.matrix()</a></code>; ignored.</p></td>
+standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</code> (for both).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The <code>augmentation_*()</code> methods produce <a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a>s of values
-associated with the rows, columns, and coordinates of a <a href='tbl_ord.html'>tbl_ord</a> object. The
-first field of each tibble is <code>.name</code>, which contains the case, variable, or
-coordinate names. Additional fields contain information about the cases,
-variables, or coordinates extracted from the original ordination object.</p>
-<p>The <code>augment_*()</code> functions return the ordination with either or both factors
-annotated with the result of <code>augmentation_*()</code>. In this way <code>augment_*()</code>
-works like <code><a href='https://rdrr.io/pkg/generics/man/augment.html'>generics::augment()</a></code> by extracting information for a tidy summary
-of the components, but it differs in returning an annotated tbl_ord rather
-than a <a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>tbl_df</a>. The advantage of implementing separate
-methods for the different components is that more information contained in
-the original object becomes accessible to the user. To achieve a result
-similar to that of <code><a href='https://rdrr.io/pkg/generics/man/augment.html'>generics::augment()</a></code>, use <code><a href='fortify.html'>fortify()</a></code>.</p>
+associated with the rows, columns, and artificial coordinates of an object of
+class '<a href='tbl_ord.html'>tbl_ord</a>'. The first field of each tibble is <code>.name</code>, which contains
+the row, column, or coordinate names. Additional fields contain information
+about the rows, columns, or coordinates extracted from the ordination object.</p>
+<p>The function <code>augment_ord()</code> returns the ordination with either or both
+matrix factors annotated with the result of <code>augmentation_*()</code>. In this way
+<code>augment_ord()</code> works like <code><a href='https://generics.r-lib.org/reference/augment.html'>generics::augment()</a></code>, as popularized by the
+<strong>broom</strong> package, by extracting information about the rows and columns, but
+it differs in returning an annotated 'tbl_ord' rather than a
+<a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>'tbl_df'</a> object. The advantage of implementing separate
+methods for the rows, columns, and artificial coordinates is that more
+information contained in the original object becomes accessible to the user.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Linear regression on marine ecosystem data</span>
-<span class='co'># Adapt Exhibit 2.3 in Greenacre (2010)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>bioenv</span>)
-<span class='no'>bioenv</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/transform.html'>transform</a></span>(
-    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='no'>Depth</span>)),
-    <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>(<span class='no'>Pollution</span>))
-  ) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>d</span> ~ <span class='no'>x</span> + <span class='no'>y</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>bioenv_lm</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lm': (30 x 3) x (1 x 3)'
-#&gt; # 3 coordinates: (Intercept), x, y
-#&gt; # 
-#&gt; # U: [ 30 x 3 | 7 ]
-#&gt;   `(Intercept)`       x      y |   .name   .hat .sigma .cooksd
-#&gt;                                |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>             1 -</span><span style='color: #BB0000;'>0.156</span><span>   0.132 | </span><span style='color: #BCBCBC;'>1</span><span> 1     0.034</span><span style='text-decoration: underline;'>4</span><span>   5.20 6.85</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>             1  0.036</span><span style='text-decoration: underline;'>3</span><span> -</span><span style='color: #BB0000;'>0.802</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> 2     0.058</span><span style='text-decoration: underline;'>7</span><span>   5.24 4.64</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>             1 -</span><span style='color: #BB0000;'>0.988</span><span>   0.413 | </span><span style='color: #BCBCBC;'>3</span><span> 3     0.067</span><span style='text-decoration: underline;'>0</span><span>   5.26 3.62</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-4</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>             1 -</span><span style='color: #BB0000;'>0.668</span><span>   1.72  | </span><span style='color: #BCBCBC;'>4</span><span> 4     0.135    5.25 3.50</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-3</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>             1 -</span><span style='color: #BB0000;'>0.860</span><span>  -</span><span style='color: #BB0000;'>0.288</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> 5     0.075</span><span style='text-decoration: underline;'>0</span><span>   5.26 6.07</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-5</span><span>
-#&gt; </span><span style='color: #949494;'># … with 25 more rows, and 3 more</span><span>
-#&gt; # U: [ 30 x 3 | 7 ]</span><span style='color: #949494;'>#   variables: .wt.res </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,</span><span>
-#&gt;   `(Intercept)`       x      y | </span><span style='color: #949494;'>#   .fit </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, .se.fit </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; # 
-#&gt; # V: [ 1 x 3 | 1 ]
-#&gt;   `(Intercept)`     x     y |   .name
-#&gt;                             |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>          10.9  2.31 -</span><span style='color: #BB0000;'>2.97</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> d    </div><div class='input'><span class='no'>bioenv_lm</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>.fit</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='no'>.wt.res</span> ^ <span class='fl'>2</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'>scale_color_distiller</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"div"</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>1</span>) +
-  <span class='fu'>scale_alpha_continuous</span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>/<span class='fl'>3</span>, <span class='fl'>1</span>)) +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>() +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>() +
-  <span class='fu'><a href='geom-biplot-isolines.html'>geom_v_isolines</a></span>(<span class='fu'>aes</span>(<span class='kw'>intercept</span> <span class='kw'>=</span> <span class='no'>`(Intercept)`</span>), <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>5</span>) +
-  <span class='fu'>labs</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"Standardized Depth"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"Standardized Pollution"</span>) +
-  <span class='fu'>ggtitle</span>(
-    <span class='st'>"Gradient vector and contour lines for species 'd'"</span>,
-    <span class='st'>"Regression plane: standardized depth-pollution space"</span>
-  )</div><div class='output co'>#&gt; <span class='warning'>Warning: Ignoring unknown aesthetics: intercept</span></div><div class='img'><img src='augmentation-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Confer inertia in CA between rows and columns of benthic sample data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>benthos</span>)
-<span class='no'>benthos</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>ca</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/ca.html'>ca</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>benthos_ca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (92 x 12) x (13 x 12)'
-#&gt; # 12 coordinates: Dim1, Dim2, ..., Dim12
-#&gt; # 
-#&gt; # U: [ 92 x 12 | 0 ]
-#&gt;      Dim1   Dim2   Dim3 ... | 
-#&gt;                             | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.17</span><span>    0.895 -</span><span style='color: #BB0000;'>0.140</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.552</span><span>  -</span><span style='color: #BB0000;'>2.23</span><span>  -</span><span style='color: #BB0000;'>0.359</span><span> ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.040</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span> -</span><span style='color: #BB0000;'>0.689</span><span>  0.687     | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  1.22    0.287 -</span><span style='color: #BB0000;'>0.700</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.312   0.142 -</span><span style='color: #BB0000;'>0.137</span><span>     | 
-#&gt; 
-#&gt; # 
-#&gt; # V: [ 13 x 12 | 0 ]
-#&gt;     Dim1    Dim2   Dim3 ... | 
-#&gt;                             | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.173</span><span>  0.262  -</span><span style='color: #BB0000;'>0.376</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  1.11   0.417   1.52  ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.226</span><span> -</span><span style='color: #BB0000;'>1.33</span><span>   -</span><span style='color: #BB0000;'>0.297</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  1.27   0.411   1.37      | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.186 -</span><span style='color: #BB0000;'>0.088</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>  0.568     | 
-#&gt; </div><div class='input'><span class='co'># Reproduce Exhibit 8.3</span>
-<span class='no'>benthos_ca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='st'>"colprincipal"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>)</div><div class='img'><img src='augmentation-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Reproduce Exhibit 8.4</span>
-<span class='no'>benthos_ca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='dplyr-verbs.html'>transmute_u</a></span>(<span class='kw'>mass</span> <span class='kw'>=</span> <span class='no'>.mass</span>, <span class='kw'>sqrt_mass</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='no'>.mass</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='st'>"colprincipal"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>), <span class='kw'>scale_u</span> <span class='kw'>=</span> <span class='st'>"sqrt_mass"</span>) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_u_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>arrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>) +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>mass</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>17</span>) +
-  <span class='fu'>scale_size_continuous</span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>4</span>), <span class='kw'>guide</span> <span class='kw'>=</span> <span class='st'>"none"</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(
-    <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"chull"</span>,
-    <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='st'>"outward"</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='st'>"outward"</span>
-  ) +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_v_point</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text_repel</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>, <span class='kw'>min.segment.length</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='img'><img src='augmentation-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Interpreting (k-means) clusters as ordinations on the Motor Trends data</span>
-<span class='no'>mtcars</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/scale.html'>scale</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/kmeans.html'>kmeans</a></span>(<span class='kw'>centers</span> <span class='kw'>=</span> <span class='fl'>3</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>mtcars_kmeans</span></div><div class='output co'>#&gt; # A tbl_ord of class 'kmeans': (32 x 3) x (11 x 3)'
-#&gt; # 3 coordinates: 1, 2, 3
-#&gt; # 
-#&gt; # U: [ 32 x 3 | 2 ]
-#&gt;     `1`   `2`   `3` |   .name             .cluster
-#&gt;                     |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>   
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     0     0     1 | </span><span style='color: #BCBCBC;'>1</span><span> Mazda RX4         3       
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     0     0     1 | </span><span style='color: #BCBCBC;'>2</span><span> Mazda RX4 Wag     3       
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     0     1     0 | </span><span style='color: #BCBCBC;'>3</span><span> Datsun 710        2       
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     1     0     0 | </span><span style='color: #BCBCBC;'>4</span><span> Hornet 4 Drive    1       
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     1     0     0 | </span><span style='color: #BCBCBC;'>5</span><span> Hornet Sportabout 1       
-#&gt; </span><span style='color: #949494;'># … with 27 more rows</span><span>
-#&gt; # 
-#&gt; # V: [ 11 x 3 | 1 ]
-#&gt;      `1`    `2`    `3` |   .name
-#&gt;                        |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.725</span><span>  1.09  -</span><span style='color: #BB0000;'>0.264</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> mpg  
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.855 -</span><span style='color: #BB0000;'>1.22</span><span>   0.215 | </span><span style='color: #BCBCBC;'>2</span><span> cyl  
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.890 -</span><span style='color: #BB0000;'>1.01</span><span>  -</span><span style='color: #BB0000;'>0.188</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> disp 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.512 -</span><span style='color: #BB0000;'>0.934</span><span>  0.444 | </span><span style='color: #BCBCBC;'>4</span><span> hp   
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.943</span><span>  0.887  0.493 | </span><span style='color: #BCBCBC;'>5</span><span> drat 
-#&gt; </span><span style='color: #949494;'># … with 6 more rows</span><span></div><div class='input'><span class='no'>mtcars_kmeans</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>augment_coord</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/transform.html'>transform</a></span>(<span class='kw'>.sdev</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='no'>.withinss</span> / <span class='no'>.size</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>mtcars_coord</span></div><div class='output co'>#&gt;   inertia .name .size .withinss    .sdev
-#&gt; 1      NA     1    14  45.78543 1.808421
-#&gt; 2      NA     2    11  42.65755 1.969253
-#&gt; 3      NA     3     7  43.20915 2.484499</div><div class='input'><span class='co'># discriminate between clusters 1 and 2</span>
-<span class='no'>mtcars_kmeans</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='no'>.cluster</span>)) +
-  <span class='fu'>geom_jitter</span>(<span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"u"</span>, <span class='fu'>aes</span>(<span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>.cluster</span>), <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>.2</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>.2</span>) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>`3`</span>)) +
-  <span class='fu'>scale_color_distiller</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"div"</span>, <span class='kw'>limits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>1</span>, <span class='fl'>1</span>)) +
-  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_v_text_radiate</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'>ggtitle</span>(
-    <span class='st'>"Performance and design variable loadings onto clusters 1 and 2"</span>,
-    <span class='st'>"Color indicates loadings onto cluster 3"</span>
-  )</div><div class='img'><img src='augmentation-4.png' alt='' width='700' height='433' /></div></span></pre>
+    <div class='dont-index'><p><a href='tidiers.html'>tidiers</a> and <a href='annotation.html'>annotation</a> methods that interface with augmentation.</p></div>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -322,7 +190,7 @@ similar to that of <code><a href='https://rdrr.io/pkg/generics/man/augment.html'
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

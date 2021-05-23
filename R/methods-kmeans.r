@@ -6,7 +6,7 @@
 #' @name methods-kmeans
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/mtcars-kmeans-augment.r
+#' @example inst/examples/ex-methods-kmeans-iris.r
 NULL
 
 #' @rdname methods-kmeans
@@ -15,7 +15,7 @@ as_tbl_ord.kmeans <- as_tbl_ord_default
 
 #' @rdname methods-kmeans
 #' @export
-recover_u.kmeans <- function(x) {
+recover_rows.kmeans <- function(x) {
   res <- outer(x$cluster, 1:length(x$size), "==")
   mode(res) <- "integer"
   colnames(res) <- rownames(x$centers)
@@ -24,7 +24,7 @@ recover_u.kmeans <- function(x) {
 
 #' @rdname methods-kmeans
 #' @export
-recover_v.kmeans <- function(x) {
+recover_cols.kmeans <- function(x) {
   t(x$centers)
 }
 
@@ -36,7 +36,7 @@ recover_coord.kmeans <- function(x) {
 
 #' @rdname methods-kmeans
 #' @export
-augmentation_u.kmeans <- function(x) {
+augmentation_rows.kmeans <- function(x) {
   .name <- names(x$cluster)
   res <- if (is.null(.name)) {
     tibble_pole(length(x$cluster))
@@ -49,7 +49,7 @@ augmentation_u.kmeans <- function(x) {
 
 #' @rdname methods-kmeans
 #' @export
-augmentation_v.kmeans <- function(x) {
+augmentation_cols.kmeans <- function(x) {
   .name <- colnames(x$centers)
   res <- if (is.null(.name)) {
     tibble_pole(ncol(x$centers))

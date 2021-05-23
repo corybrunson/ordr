@@ -114,39 +114,39 @@ the positions of the subjects or vectors." />
 the positions of the subjects or vectors.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>geom_u_polygon</span>(
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)
+    <pre class="usage"><span class='fu'>geom_rows_polygon</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  <span class='va'>...</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>geom_v_polygon</span>(
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)
+<span class='fu'>geom_cols_polygon</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  <span class='va'>...</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>geom_biplot_polygon</span>(
-  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"identity"</span>,
-  <span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show.legend</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>inherit.aes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+<span class='fu'>geom_dims_polygon</span><span class='op'>(</span>
+  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data <span class='op'>=</span> <span class='cn'>NULL</span>,
+  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
+  position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  .matrix <span class='op'>=</span> <span class='st'>"rows"</span>,
+  <span class='va'>...</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
+  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -209,7 +209,7 @@ the default plot specification, e.g. <code><a href='https://ggplot2.tidyverse.or
       <th>.matrix</th>
       <td><p>A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are <code>"u"</code>, <code>"v"</code>, and <code>"uv"</code>.</p></td>
+standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</code> (for both).</p></td>
     </tr>
     </table>
 
@@ -218,13 +218,13 @@ standard values are <code>"u"</code>, <code>"v"</code>, and <code>"uv"</code>.</
     
 
 <p><code><a href='ggbiplot.html'>ggbiplot()</a></code> uses <code><a href='https://ggplot2.tidyverse.org/reference/fortify.html'>ggplot2::fortify()</a></code> internally to produce a single data
-frame with a <code>.matrix</code> column distinguishing the subjects (<code>"u"</code>) and
-variables (<code>"v"</code>). The stat layers <code><a href='biplot-matrix.html'>stat_u()</a></code> and <code><a href='biplot-matrix.html'>stat_v()</a></code> simply filter
-the data frame to one of these two.</p>
-<p>The geom layers <code>geom_u_*()</code> and <code>geom_v_*()</code> call the corresponding stat in
-order to render plot elements for the corresponding matrix \(U\) or
-\(V\). <code>geom_biplot_*()</code> selects a default matrix based on common practice,
-e.g. \(U\) for points and \(V\) for arrows.</p>
+frame with a <code>.matrix</code> column distinguishing the subjects (<code>"rows"</code>) and
+variables (<code>"cols"</code>). The stat layers <code><a href='biplot-matrix.html'>stat_rows()</a></code> and <code><a href='biplot-matrix.html'>stat_cols()</a></code> simply
+filter the data frame to one of these two.</p>
+<p>The geom layers <code>geom_rows_*()</code> and <code>geom_cols_*()</code> call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+<code>geom_dims_*()</code> selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.</p>
     <h2 class="hasAnchor" id="aesthetics"><a class="anchor" href="#aesthetics"></a>Aesthetics</h2>
 
     
@@ -242,118 +242,6 @@ are in bold):</p><ul>
 </ul>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># state abbreviations</span>
-<span class='no'>state</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-  <span class='kw'>.name</span> <span class='kw'>=</span> <span class='no'>state.name</span>,
-  <span class='kw'>.abb</span> <span class='kw'>=</span> <span class='no'>state.abb</span>
-)
-<span class='co'># Log-ratio analysis of 1973 violent crime arrests in the United States</span>
-(<span class='no'>arrests_lra</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='lra.html'>lra</a></span>(<span class='no'>USArrests</span>[, -<span class='fl'>3</span>]))</div><div class='output co'>#&gt; $sv
-#&gt; [1] 2.204112e-01 1.955308e-01 3.611972e-17
-#&gt; 
-#&gt; $row.coords
-#&gt;                       LRSV1        LRSV2        LRSV3
-#&gt; Alabama         0.010615205 -0.154354831  0.000504474
-#&gt; Alaska         -0.057591949  0.140420691 -0.388950513
-#&gt; Arizona         0.122533520  0.117731230 -0.128931162
-#&gt; Arkansas        0.019003125 -0.057570010  0.046656229
-#&gt; California      0.008048189  0.152555368 -0.194647240
-#&gt; Colorado       -0.088544329  0.165191709 -0.176839484
-#&gt; Connecticut     0.114914374  0.078388742  0.152246942
-#&gt; Delaware        0.254404723  0.027738214  0.065378168
-#&gt; Florida         0.038322260 -0.075250154 -0.104178028
-#&gt; Georgia        -0.144534606 -0.197209278 -0.001773386
-#&gt; Hawaii         -0.517966256  0.037682024  0.131828250
-#&gt; Idaho           0.146074842  0.226414450  0.093736056
-#&gt; Illinois        0.055743135 -0.040975696 -0.011590488
-#&gt; Indiana        -0.189048944 -0.001430056  0.042220610
-#&gt; Iowa           -0.106196974  0.177110727  0.147313308
-#&gt; Kansas         -0.106109005  0.017156253  0.061587110
-#&gt; Kentucky       -0.208305191 -0.167831194  0.177365031
-#&gt; Louisiana      -0.008876611 -0.188899013  0.036076396
-#&gt; Maine           0.167813476  0.114397455  0.242547594
-#&gt; Maryland        0.086925006 -0.018104279 -0.043070900
-#&gt; Massachusetts   0.099138407  0.105165647  0.066897581
-#&gt; Michigan       -0.055609969  0.013370015 -0.112975853
-#&gt; Minnesota      -0.102328093  0.198935243  0.120259543
-#&gt; Mississippi     0.061157476 -0.271151272  0.143459550
-#&gt; Missouri       -0.102330996  0.030557137 -0.034811620
-#&gt; Montana        -0.108096691 -0.010780957  0.137773063
-#&gt; Nebraska       -0.068793707  0.094967891  0.067965116
-#&gt; Nevada         -0.126676545  0.082627444 -0.194315390
-#&gt; New Hampshire  -0.047343104  0.146575509  0.217339215
-#&gt; New Jersey     -0.015533629 -0.021150027  0.060993578
-#&gt; New Mexico      0.028018230  0.014809770 -0.088437504
-#&gt; New York        0.031015361 -0.038443084 -0.030852173
-#&gt; North Carolina  0.238710415 -0.203606592  0.060854905
-#&gt; North Dakota    0.113262797  0.375070000  0.310268430
-#&gt; Ohio           -0.169487280  0.002486830  0.046883531
-#&gt; Oklahoma       -0.029114491  0.029620445  0.033183707
-#&gt; Oregon         -0.033333759  0.231295924 -0.127555445
-#&gt; Pennsylvania   -0.108228198 -0.053845680  0.140606127
-#&gt; Rhode Island    0.383008304  0.016023240  0.245758125
-#&gt; South Carolina  0.053157130 -0.157299823  0.023269461
-#&gt; South Dakota   -0.059025984  0.057407710  0.137557910
-#&gt; Tennessee      -0.147702807 -0.102998683 -0.020221878
-#&gt; Texas          -0.096901237 -0.101159928 -0.012331317
-#&gt; Utah           -0.010994131  0.287482498 -0.061746384
-#&gt; Vermont        -0.173205241  0.166220864  0.178183930
-#&gt; Virginia       -0.076192471 -0.041200499  0.031532613
-#&gt; Washington     -0.005238875  0.261857381 -0.078588729
-#&gt; West Virginia  -0.096070469 -0.162793377  0.237276612
-#&gt; Wisconsin      -0.155521884  0.107882784  0.266067747
-#&gt; Wyoming         0.052133816 -0.043174888  0.106248663
-#&gt; 
-#&gt; $column.coords
-#&gt;              LRSV1       LRSV2       LRSV3
-#&gt; Murder  -0.6207877 -0.78267386 -0.04521307
-#&gt; Assault  0.1245533 -0.04152361 -0.99134367
-#&gt; Rape    -0.7740214  0.62104542 -0.12326194
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "lra"</div><div class='input'><span class='no'>arrests_lra</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='dplyr-verbs.html'>left_join_u</a></span>(<span class='no'>state</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='st'>".name"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>arrests_lra</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lra': (50 x 3) x (3 x 3)'
-#&gt; # 3 coordinates: LRSV1, LRSV2, LRSV3
-#&gt; # 
-#&gt; # U: [ 50 x 3 | 2 ]
-#&gt;      LRSV1   LRSV2     LRSV3 |   .name      .abb 
-#&gt;                              |   <span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>  0.010</span><span style='text-decoration: underline;'>6</span><span>  -</span><span style='color: #BB0000;'>0.154</span><span>   0.000</span><span style='text-decoration: underline;'>504</span><span> | </span><span style='color: #555555;'>1</span><span> Alabama    AL   
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.057</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>   0.140  -</span><span style='color: #BB0000;'>0.389</span><span>    | </span><span style='color: #555555;'>2</span><span> Alaska     AK   
-#&gt; </span><span style='color: #555555;'>3</span><span>  0.123    0.118  -</span><span style='color: #BB0000;'>0.129</span><span>    | </span><span style='color: #555555;'>3</span><span> Arizona    AZ   
-#&gt; </span><span style='color: #555555;'>4</span><span>  0.019</span><span style='text-decoration: underline;'>0</span><span>  -</span><span style='color: #BB0000;'>0.057</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>  0.046</span><span style='text-decoration: underline;'>7</span><span>   | </span><span style='color: #555555;'>4</span><span> Arkansas   AR   
-#&gt; </span><span style='color: #555555;'>5</span><span>  0.008</span><span style='text-decoration: underline;'>05</span><span>  0.153  -</span><span style='color: #BB0000;'>0.195</span><span>    | </span><span style='color: #555555;'>5</span><span> California CA   
-#&gt; </span><span style='color: #555555;'># … with 45 more rows</span><span>
-#&gt; # 
-#&gt; # V: [ 3 x 3 | 1 ]
-#&gt;    LRSV1   LRSV2   LRSV3 |   .name  
-#&gt;                          |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>0.621</span><span> -</span><span style='color: #BB0000;'>0.783</span><span>  -</span><span style='color: #BB0000;'>0.045</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span> | </span><span style='color: #555555;'>1</span><span> Murder 
-#&gt; </span><span style='color: #555555;'>2</span><span>  0.125 -</span><span style='color: #BB0000;'>0.041</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.991</span><span>  | </span><span style='color: #555555;'>2</span><span> Assault
-#&gt; </span><span style='color: #555555;'>3</span><span> -</span><span style='color: #BB0000;'>0.774</span><span>  0.621  -</span><span style='color: #BB0000;'>0.123</span><span>  | </span><span style='color: #555555;'>3</span><span> Rape   </div><div class='input'><span class='co'># Adapt Exhibit 7.1 in Greenacre (2010)</span>
-<span class='no'>arrests_lra</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>() +
-  <span class='co'>#ggbiplot(sec.axes = "v") +</span>
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(
-    <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.abb</span>),
-    <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>
-  ) +
-  <span class='fu'>geom_v_polygon</span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='st'>"dashed"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(
-    <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
-    <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>, <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"bold"</span>
-  ) +
-  <span class='fu'>ggtitle</span>(
-    <span class='st'>"Log-ratio analysis of violent crime arrest rates"</span>,
-    <span class='st'>"United States, 1973"</span>
-  ) +
-  <span class='fu'>guides</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='geom-biplot-polygon-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -369,7 +257,7 @@ are in bold):</p><ul>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

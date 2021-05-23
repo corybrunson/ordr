@@ -6,9 +6,7 @@
 #' @name methods-prcomp
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/country-prcomp-confer.r
-#' @example inst/examples/iris-prcomp-center-ellipse.r
-#' @example inst/examples/iris-prcomp-lineranges.r
+#' @example inst/examples/ex-methods-prcomp-iris.r
 #' @author Emily Paul
 NULL
 
@@ -18,13 +16,13 @@ as_tbl_ord.prcomp <- as_tbl_ord_default
 
 #' @rdname methods-prcomp
 #' @export
-recover_u.prcomp <- function(x) {
+recover_rows.prcomp <- function(x) {
   x[["x"]]
 }
 
 #' @rdname methods-prcomp
 #' @export
-recover_v.prcomp <- function(x) {
+recover_cols.prcomp <- function(x) {
   x[["rotation"]]
 }
 
@@ -49,7 +47,7 @@ recover_conference.prcomp <- function(x) {
 
 #' @rdname methods-prcomp
 #' @export
-augmentation_u.prcomp <- function(x) {
+augmentation_rows.prcomp <- function(x) {
   .name <- rownames(x[["x"]])
   if (is.null(.name)) {
     tibble_pole(nrow(x[["x"]]))
@@ -60,7 +58,7 @@ augmentation_u.prcomp <- function(x) {
 
 #' @rdname methods-prcomp
 #' @export
-augmentation_v.prcomp <- function(x) {
+augmentation_cols.prcomp <- function(x) {
   .name <- rownames(x[["rotation"]])
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x[["rotation"]]))

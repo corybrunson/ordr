@@ -3,22 +3,22 @@
 \name{methods-mjca}
 \alias{methods-mjca}
 \alias{as_tbl_ord.mjca}
-\alias{recover_u.mjca}
-\alias{recover_v.mjca}
+\alias{recover_rows.mjca}
+\alias{recover_cols.mjca}
 \alias{recover_inertia.mjca}
 \alias{recover_conference.mjca}
 \alias{recover_coord.mjca}
-\alias{augmentation_u.mjca}
-\alias{augmentation_v.mjca}
+\alias{augmentation_rows.mjca}
+\alias{augmentation_cols.mjca}
 \alias{augmentation_coord.mjca}
 \title{Functionality for multiple and joint correspondence analysis ('mjca')
 objects}
 \usage{
 \method{as_tbl_ord}{mjca}(x)
 
-\method{recover_u}{mjca}(x)
+\method{recover_rows}{mjca}(x)
 
-\method{recover_v}{mjca}(x)
+\method{recover_cols}{mjca}(x)
 
 \method{recover_inertia}{mjca}(x)
 
@@ -26,9 +26,9 @@ objects}
 
 \method{recover_coord}{mjca}(x)
 
-\method{augmentation_u}{mjca}(x)
+\method{augmentation_rows}{mjca}(x)
 
-\method{augmentation_v}{mjca}(x)
+\method{augmentation_cols}{mjca}(x)
 
 \method{augmentation_coord}{mjca}(x)
 }

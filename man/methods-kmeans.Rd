@@ -3,25 +3,25 @@
 \name{methods-kmeans}
 \alias{methods-kmeans}
 \alias{as_tbl_ord.kmeans}
-\alias{recover_u.kmeans}
-\alias{recover_v.kmeans}
+\alias{recover_rows.kmeans}
+\alias{recover_cols.kmeans}
 \alias{recover_coord.kmeans}
-\alias{augmentation_u.kmeans}
-\alias{augmentation_v.kmeans}
+\alias{augmentation_rows.kmeans}
+\alias{augmentation_cols.kmeans}
 \alias{augmentation_coord.kmeans}
 \title{Functionality for k-means clustering ('kmeans') objects}
 \usage{
 \method{as_tbl_ord}{kmeans}(x)
 
-\method{recover_u}{kmeans}(x)
+\method{recover_rows}{kmeans}(x)
 
-\method{recover_v}{kmeans}(x)
+\method{recover_cols}{kmeans}(x)
 
 \method{recover_coord}{kmeans}(x)
 
-\method{augmentation_u}{kmeans}(x)
+\method{augmentation_rows}{kmeans}(x)
 
-\method{augmentation_v}{kmeans}(x)
+\method{augmentation_cols}{kmeans}(x)
 
 \method{augmentation_coord}{kmeans}(x)
 }
@@ -33,26 +33,50 @@ These methods extract data from, and attribute new data to,
 objects of class \code{"kmeans"} as returned by \code{\link[stats:kmeans]{stats::kmeans()}}.
 }
 \examples{
-# Interpreting (k-means) clusters as ordinations on the Motor Trends data
-mtcars \%>\%
+# data frame of Anderson iris species measurements
+class(iris)
+head(iris)
+# compute 3-means clustering on scaled iris measurements
+set.seed(5601L)
+iris \%>\%
+  subset(select = -Species) \%>\%
   scale() \%>\%
   kmeans(centers = 3) \%>\%
+  print() -> iris_km
+# visualize clusters using PCA
+iris \%>\%
+  subset(select = -Species) \%>\%
+  prcomp() \%>\%
   as_tbl_ord() \%>\%
-  augment() \%>\%
-  print() -> mtcars_kmeans
-mtcars_kmeans \%>\%
-  augment_coord() \%>\%
-  transform(.sdev = sqrt(.withinss / .size)) \%>\%
-  print() -> mtcars_coord
-# discriminate between clusters 1 and 2
-mtcars_kmeans \%>\%
-  ggbiplot(color = factor(.cluster)) +
-  geom_jitter(stat = "u", aes(shape = .cluster), width = .2, height = .2) +
-  geom_v_vector(aes(color = `3`)) +
-  scale_color_distiller(type = "div", limits = c(-1, 1)) +
-  geom_v_text_radiate(aes(label = .name)) +
+  mutate_rows(cluster = iris_km$cluster) \%>\%
+  ggbiplot() +
+  geom_rows_point(aes(color = factor(as.character(as.integer(cluster)),
+                                     levels = as.character(seq(3L))))) +
+  scale_color_brewer(type = "qual", name = "cluster")
+# wrap as a 'tbl_ord' object
+(iris_km_ord <- as_tbl_ord(iris_km))
+# summarize ordination
+glance(iris_km_ord)
+# augment everything with names, observations with cluster assignment
+augment_ord(iris_km_ord)
+# summarize clusters with standard deviation
+iris_km_ord \%>\%
+  tidy() \%>\%
+  transform(.sdev = sqrt(.withinss / .size))
+# discriminate between clusters 2 and 3
+iris_km_ord \%>\%
+  ggbiplot(aes(x = `2`, y = `3`), color = factor(.cluster)) +
+  geom_jitter(stat = "rows", aes(shape = .cluster), width = .2, height = .2) +
+  #geom_cols_vector(aes(color = `1`)) +
+  #geom_cols_text_radiate(aes(label = .name), size = 3) +
+  geom_cols_axis(aes(color = `1`)) +
+  geom_cols_axis_text(size = 2, label_dodge = .1) +
+  geom_cols_axis_ticks() +
+  geom_cols_text(aes(label = .name), size = 3, alpha = .5) +
+  scale_x_continuous(expand = expansion(mult = .8)) +
+  scale_y_continuous(expand = expansion(mult = .5)) +
   ggtitle(
-    "Performance and design variable loadings onto clusters 1 and 2",
-    "Color indicates loadings onto cluster 3"
+    "Measurement loadings onto clusters 2 and 3",
+    "Color indicates loadings onto cluster 1"
   )
 }

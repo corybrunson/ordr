@@ -43,112 +43,61 @@ the ordination toolkit. This is a minimal implementation following
 Greenacre's (2010) exposition in Chapter 7.
 }
 \examples{
-# Log-ratio analysis of shared ingredients in Ruhlman's recipe ratios
-data(ratios)
-ratios \%>\%
-  dplyr::select(chapter, recipe, flour, egg, butter) \%>\%
-  dplyr::filter(flour > 0 & egg > 0 & butter > 0) \%>\%
-  dplyr::group_by(flour, egg, butter) \%>\%
-  dplyr::summarize(chapter = unique(chapter),
-                   recipes = stringr::str_c(recipe, collapse = " or ")) \%>\%
-  dplyr::ungroup() \%>\%
-  print() -> sub_ratios
-sub_ratios \%>\%
-  dplyr::select(-chapter, -recipes) \%>\%
-  lra(compositional = TRUE) \%>\%
-  as_tbl_ord() \%>\%
-  augment() \%>\%
-  bind_cols_u(dplyr::select(sub_ratios, chapter, recipes)) \%>\%
-  print() -> lra_ratios
-lra_ratios \%>\%
-  confer_inertia("rows") \%>\%
-  ggbiplot(sec.axes = "v", scale.factor = .05) +
-  geom_u_text(aes(label = recipes, color = chapter)) +
-  geom_v_vector() +
-  geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward") +
-  expand_limits(x = c(-.2, .2)) +
-  ggtitle("Log-ratio biplot of flour-butter-egg ratios in baking recipes") +
-  expand_limits(x = c(-.35, .35))
-# state abbreviations
-state <- data.frame(
-  .name = state.name,
-  .abb = state.abb
+# U.S. 1973 violent crime arrests
+head(USArrests)
+# row and column subsets
+state_examples <- c("Hawaii", "Mississippi", "North Dakota")
+arrests <- c(1L, 2L, 4L)
+# pairwise log-ratios of violent crime arrests for two states
+arrest_pairs <- combn(arrests, 2L)
+arrest_ratios <-
+  USArrests[, arrest_pairs[1L, ]] / USArrests[, arrest_pairs[2L, ]]
+colnames(arrest_ratios) <- paste(
+  colnames(USArrests)[arrest_pairs[1L, ]], "/",
+  colnames(USArrests)[arrest_pairs[2L, ]], sep = ""
 )
-# Log-ratio analysis of 1973 violent crime arrests in the United States
-USArrests \%>\%
-  subset(select = -UrbanPop) \%>\%
-  lra() \%>\%
-  print() -> arrests_lra
-arrests_lra \%>\%
-  as_tbl_ord() \%>\%
-  augment() \%>\%
-  left_join_u(state, by = ".name") \%>\%
-  print() -> arrests_lra
-# Adapt Exhibit 7.1 in Greenacre (2010)
-arrests_lra \%>\%
-  confer_inertia(1) \%>\%
-  ggbiplot(sec.axes = "v", scale.factor = 1/20) +
+arrest_logratios <- log(arrest_ratios)
+arrest_logratios[state_examples, ]
+# non-compositional log-ratio analysis
+(arrests_lra <- lra(USArrests[, c(1, 2, 4)]))
+(arrests_lra_ord <- augment_ord(as_tbl_ord(arrests_lra)))
+# state abbreviations
+state_abbr <- data.frame(state = state.name, abbr = state.abb)
+# row-principal biplot
+arrests_lra_ord \%>\%
+  left_join_rows(state_abbr, by = c(".name" = "state")) \%>\%
+  confer_inertia("rows") \%>\%
+  ggbiplot(aes(color = .matrix), sec.axes = "cols", scale.factor = 1/20) +
+  scale_color_manual(values = c("tomato4", "turquoise4")) +
   theme_bw() +
-  geom_u_text(
-    aes(label = .abb),
-    size = 3, color = "darkgreen", alpha = .5
-  ) +
-  geom_v_polygon(fill = NA, linetype = "dashed", color = "brown4") +
-  geom_v_text(
-    aes(label = .name),
-    color = "brown4", fontface = "bold"
-  ) +
+  geom_rows_text(aes(label = abbr), size = 3, alpha = .75) +
+  geom_cols_polygon(fill = NA, linetype = "dashed") +
+  geom_cols_text(aes(label = .name), fontface = "bold") +
   ggtitle(
-    "Log-ratio analysis of violent crime arrest rates",
+    "Non-compositional LRA of violent crime arrest rates",
     "United States, 1973"
   ) +
-  guides(color = FALSE, size = FALSE)
-# Compare PCA to LRA on the Freestone primary class composition data
-# following Baxter & Freestone (2006)
-# (do not exclude compositional outliers)
-data(glass)
-levantine_glass <- glass \%>\%
-  dplyr::filter(Site != "Banias") \%>\%
-  dplyr::mutate(Type = dplyr::case_when(
-    Site == "Dor" ~ "Levantine I",
-    Site == "Apollonia" ~ "Levantine I",
-    Site == "Bet Eli'ezer" ~ "Levantine II"
-  ))
-# scaled principal components analysis
-levantine_glass \%>\%
-  dplyr::select(SiO2, Al2O3, CaO, FeO, MgO) \%>\%
-  princomp(cor = TRUE) \%>\%
-  as_tbl_ord() \%>\%
-  bind_cols_u(dplyr::select(levantine_glass, Site, Type)) \%>\%
-  print() -> pca_glass
-ggbiplot(pca_glass) +
-  geom_u_point(aes(shape = Site, color = Type))
-# completely compositional log-ratio analysis
-levantine_glass \%>\%
-  dplyr::select(SiO2, Al2O3, CaO, FeO, MgO) \%>\%
-  lra(compositional = TRUE) \%>\%
-  as_tbl_ord() \%>\%
+  expand_limits(x = c(-.35)) +
+  guides(color = FALSE)
+# compositional log-ratio analysis
+(arrests_lra <- lra(USArrests[, c(1, 2, 4)], compositional = TRUE))
+(arrests_lra_ord <- augment_ord(as_tbl_ord(arrests_lra)))
+# row-principal biplot
+arrests_lra_ord \%>\%
+  left_join_rows(state_abbr, by = c(".name" = "state")) \%>\%
   confer_inertia("rows") \%>\%
-  bind_cols_u(dplyr::select(levantine_glass, Site, Type)) \%>\%
-  print() -> lra_glass
-ggbiplot(lra_glass, sec.axes = "v", scale.factor = .05) +
-  geom_u_point(aes(shape = Site, color = Type)) +
-  geom_v_vector() +
-  geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward") +
-  expand_limits(x = c(-.2, .2))
-# completely compositional log-ratio analysis with FeO and MgO excluded
-levantine_glass \%>\%
-  dplyr::select(SiO2, Al2O3, CaO) \%>\%
-  lra(compositional = TRUE) \%>\%
-  as_tbl_ord() \%>\%
-  confer_inertia("rows") \%>\%
-  bind_cols_u(dplyr::select(levantine_glass, Site, Type)) \%>\%
-  print() -> lra_glass
-ggbiplot(lra_glass, sec.axes = "v", scale.factor = .05) +
-  geom_u_point(aes(shape = Site, color = Type)) +
-  geom_v_vector() +
-  geom_v_text(aes(label = .name), hjust = "outward", vjust = "outward") +
-  expand_limits(x = c(NA, .2))
+  ggbiplot(aes(color = .matrix), sec.axes = "cols", scale.factor = 1/20) +
+  scale_color_manual(values = c("tomato4", "turquoise4")) +
+  theme_bw() +
+  geom_rows_text(aes(label = abbr), size = 3, alpha = .75) +
+  geom_cols_polygon(fill = NA, linetype = "dashed") +
+  geom_cols_text(aes(label = .name), fontface = "bold") +
+  ggtitle(
+    "Compositional LRA of violent crime arrest rates",
+    "United States, 1973"
+  ) +
+  expand_limits(x = c(-.4)) +
+  guides(color = FALSE)
 }
 \references{
 Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:

@@ -6,6 +6,7 @@
 #' @name methods-svd
 #' @include ord-tbl.r
 #' @template param-methods
+#' @example inst/examples/ex-methods-svd-spend.r
 NULL
 
 #' @rdname methods-svd
@@ -14,11 +15,11 @@ as_tbl_ord.svd_ord <- as_tbl_ord_default
 
 #' @rdname methods-svd
 #' @export
-recover_u.svd_ord <- function(x) x[["u"]]
+recover_rows.svd_ord <- function(x) x[["u"]]
 
 #' @rdname methods-svd
 #' @export
-recover_v.svd_ord <- function(x) x[["v"]]
+recover_cols.svd_ord <- function(x) x[["v"]]
 
 #' @rdname methods-svd
 #' @export
@@ -37,7 +38,7 @@ recover_conference.svd_ord <- function(x) {
 
 #' @rdname methods-svd
 #' @export
-augmentation_u.svd_ord <- function(x) {
+augmentation_rows.svd_ord <- function(x) {
   .name <- rownames(x[["u"]])
   if (is.null(.name)) {
     tibble_pole(nrow(x[["u"]]))
@@ -48,7 +49,7 @@ augmentation_u.svd_ord <- function(x) {
 
 #' @rdname methods-svd
 #' @export
-augmentation_v.svd_ord <- function(x) {
+augmentation_cols.svd_ord <- function(x) {
   .name <- rownames(x[["v"]])
   if (is.null(.name)) {
     tibble_pole(nrow(x[["v"]]))

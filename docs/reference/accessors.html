@@ -81,12 +81,27 @@ factorization underlying an ordination." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
+  <a href="../articles/ordr.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/cmds-variables.html">multidimensional scaling of variables</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -114,78 +129,73 @@ factorization underlying an ordination." />
 factorization underlying an ordination.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>recover_u</span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='fu'>recover_rows</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>recover_v</span>(<span class='no'>x</span>)
+<span class='fu'>recover_cols</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>recover_factor</span>(<span class='no'>x</span>, <span class='no'>.matrix</span>)
-
-<span class='co'># S3 method for default</span>
-<span class='fu'>recover_u</span>(<span class='no'>x</span>)
+<span class='fu'>recover_factor</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>.matrix</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>recover_v</span>(<span class='no'>x</span>)
+<span class='fu'>recover_rows</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>recover_cols</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for data.frame</span>
-<span class='fu'>recover_u</span>(<span class='no'>x</span>)
+<span class='fu'>recover_rows</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for data.frame</span>
-<span class='fu'>recover_v</span>(<span class='no'>x</span>)
+<span class='fu'>recover_cols</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>get_u</span>(<span class='no'>x</span>, <span class='kw'>.supplement</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>get_rows</span><span class='op'>(</span><span class='va'>x</span>, .supplement <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
-<span class='fu'>get_v</span>(<span class='no'>x</span>, <span class='kw'>.supplement</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>get_cols</span><span class='op'>(</span><span class='va'>x</span>, .supplement <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
-<span class='fu'>get_factor</span>(<span class='no'>x</span>, <span class='no'>.matrix</span>, <span class='kw'>.supplement</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>get_factor</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>.matrix</span>, .supplement <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># S3 method for tbl_ord</span>
-<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='no'>.matrix</span>, <span class='kw'>.supplement</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, <span class='va'>.matrix</span>, .supplement <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
-<span class='fu'>recover_inertia</span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for default</span>
-<span class='fu'>recover_inertia</span>(<span class='no'>x</span>)
-
-<span class='fu'>recover_coord</span>(<span class='no'>x</span>)
+<span class='fu'>recover_inertia</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>recover_coord</span>(<span class='no'>x</span>)
+<span class='fu'>recover_inertia</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+
+<span class='fu'>recover_coord</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>recover_coord</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for data.frame</span>
-<span class='fu'>recover_coord</span>(<span class='no'>x</span>)
+<span class='fu'>recover_coord</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>get_coord</span>(<span class='no'>x</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>get_coord</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for tbl_ord</span>
-<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>dim_u</span>(<span class='no'>x</span>)
+<span class='fu'>dim_rows</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>dim_v</span>(<span class='no'>x</span>)
+<span class='fu'>dim_cols</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>dim_factor</span>(<span class='no'>x</span>, <span class='no'>.matrix</span>)</pre>
+<span class='fu'>dim_factor</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>.matrix</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <a href='tbl_ord.html'>tbl_ord</a>, or an ordination object coercible to one.</p></td>
+      <td><p>An object of class '<a href='tbl_ord.html'>tbl_ord</a>'.</p></td>
     </tr>
     <tr>
       <th>.matrix</th>
       <td><p>A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are <code>"u"</code>, <code>"v"</code>, and <code>"uv"</code>.</p></td>
+standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</code> (for both).</p></td>
     </tr>
     <tr>
       <th>.supplement</th>
       <td><p>Logical; whether to include</p></td>
-    </tr>
-    <tr>
-      <th>align</th>
-      <td><p>Logical; whether to align the matrix factors and coordinates
-according to an <code>"align"</code> matrix attribute.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -195,124 +205,17 @@ according to an <code>"align"</code> matrix attribute.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The <code>recover_*()</code> functions extract one or both of the matrix factors
-\(U,V\) that constitute the original ordination. These are interpreted as
-the case scores (\(U\)) and the variable loadings (\(V\)). The <code>get_*()</code>
-functions optionally (and by default) apply any alignment stored as the
-<code>"align"</code> attribute (see <a href='alignment.html'>alignment</a>). Only the <code>recover_*()</code> functions are
-generics that require methods for each ordination class.</p>
-<p><code>get_coord()</code> retrieves the names of the coordinates shared by \(U\) and
-\(V\), on which the original data were ordinated, and <code>dim.tbl_ord()</code>
-retrieves their number, the rank of the ordination. The outer dimensions of
-the matrix decomposition are returned by <code>dim_u()</code> and <code>dim_v()</code>.</p>
+    <p>The <code>recover_*()</code> functions extract one or both of the row and column matrix
+factors that constitute the original ordination. These are interpreted as the
+case scores (rows) and the variable loadings (columns). The <code>get_*()</code>
+functions optionally (and by default) include any supplemental observations
+(see <a href='supplementation.html'>supplementation</a>). Only the <code>recover_*()</code> functions are generics that
+require methods for each ordination class.</p>
+<p><code>get_coord()</code> retrieves the names of the coordinates shared by the matrix
+factors on which the original data were ordinated, and <code><a href='https://rdrr.io/r/base/dim.html'>dim()</a></code> retrieves
+their number, the rank of the ordination. The outer dimensions of the matrix
+decomposition are returned by <code>dim_rows()</code> and <code>dim_cols()</code>.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Multidimensional scaling of country differences and regression of attributes</span>
-<span class='co'># Reproduce Exhibit 4.2 in Greenacre (2010)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>country_differences</span>)
-<span class='no'>country_differences</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='masks.html'>cmdscale</a></span>(<span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>differences_cmds</span></div><div class='output co'>#&gt; # A tbl_ord of class 'cmds': (13 x 2) x (13 x 2)'
-#&gt; # 2 coordinates: PCo1 and PCo2
-#&gt; # 
-#&gt; # U: [ 13 x 2 | 0 ]
-#&gt;       PCo1   PCo2 | 
-#&gt;                   | 
-#&gt; <span style='color: #BCBCBC;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  4.41     2.91  | 
-#&gt; 
-#&gt; # 
-#&gt; # V: [ 13 x 2 | 0 ]
-#&gt;       PCo1   PCo2 | 
-#&gt;                   | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  4.41     2.91  | 
-#&gt; </div><div class='input'><span class='no'>differences_plot</span> <span class='kw'>&lt;-</span> <span class='no'>differences_cmds</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>()
-<span class='no'>differences_plot</span></div><div class='img'><img src='accessors-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Reproduce Exhibit 4.5 in Greenacre (2010)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>country_attributes</span>)
-<span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>country_attributes</span> ~ <span class='fu'>get_u</span>(<span class='no'>differences_cmds</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>attributes_fit</span></div><div class='output co'>#&gt; # A tbl_ord of class 'mlm': (13 x 3) x (6 x 3)'
-#&gt; # 3 coordinates: (Intercept), PCo1, PCo2
-#&gt; # 
-#&gt; # U: [ 13 x 3 | 0 ]
-#&gt;   `(Intercept)`     PCo1   PCo2 | 
-#&gt;                                 | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>             1  0.007</span><span style='text-decoration: underline;'>81</span><span> -</span><span style='color: #BB0000;'>2.94</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>             1 -</span><span style='color: #BB0000;'>1.02</span><span>    -</span><span style='color: #BB0000;'>3.68</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>             1  3.70    -</span><span style='color: #BB0000;'>0.883</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>             1 -</span><span style='color: #BB0000;'>2.56</span><span>    -</span><span style='color: #BB0000;'>2.01</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>             1  4.41     2.91  | 
-#&gt; 
-#&gt; # 
-#&gt; # V: [ 6 x 3 | 0 ]
-#&gt;   `(Intercept)`   PCo1    PCo2 | 
-#&gt;                                | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>          5.23  0.423 -</span><span style='color: #BB0000;'>0.513</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>          5.69 -</span><span style='color: #BB0000;'>0.395</span><span> -</span><span style='color: #BB0000;'>0.618</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>          6.08 -</span><span style='color: #BB0000;'>0.399</span><span> -</span><span style='color: #BB0000;'>0.645</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>          4.    0.502 -</span><span style='color: #BB0000;'>0.444</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>          3.85  0.660  0.010</span><span style='text-decoration: underline;'>2</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>          4.92  0.627 -</span><span style='color: #BB0000;'>0.591</span><span>  | </div><div class='input'><span class='no'>differences_plot</span> +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>attributes_fit</span>) +
-  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_v_text_radiate</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>attributes_fit</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>.3</span>)</div><div class='img'><img src='accessors-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Confer PCA weights and inertia between cases and variables</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>country_attributes</span>)
-<span class='no'>country_attributes</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/prcomp.html'>prcomp</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>attributes_pca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (13 x 6) x (6 x 6)'
-#&gt; # 6 coordinates: PC1, PC2, ..., PC6
-#&gt; # 
-#&gt; # U: [ 13 x 6 | 0 ]
-#&gt;       PC1    PC2     PC3 ... | 
-#&gt;                              | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.079</span><span style='text-decoration: underline;'>6</span><span>  4.77   0.092</span><span style='text-decoration: underline;'>2</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.451   5.80   1.30   ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>1.79</span><span>    0.842  0.014</span><span style='text-decoration: underline;'>5</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  3.45    0.906  0.250      | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>4.54</span><span>   -</span><span style='color: #BB0000;'>4.36</span><span>  -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>     | 
-#&gt; 
-#&gt; # 
-#&gt; # V: [ 6 x 6 | 0 ]
-#&gt;      PC1    PC2      PC3 ... | 
-#&gt;                              | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.331</span><span>  0.375  0.009</span><span style='text-decoration: underline;'>81</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.320  0.517  0.187       | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.301  0.593 -</span><span style='color: #BB0000;'>0.616</span><span>   ... | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.387</span><span>  0.286  0.145       | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.548</span><span> -</span><span style='color: #BB0000;'>0.138</span><span> -</span><span style='color: #BB0000;'>0.661</span><span>       | 
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span> -</span><span style='color: #BB0000;'>0.497</span><span>  0.373  0.357       | </div><div class='input'><span class='co'># form biplot</span>
-<span class='no'>attributes_pca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(
-    <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
-    <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fu'>dim_v</span>(<span class='no'>attributes_pca</span>)
-  ) +
-  <span class='fu'>theme_bw</span>() + <span class='fu'>theme</span>(<span class='kw'>panel.grid</span> <span class='kw'>=</span> <span class='fu'>element_blank</span>()) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"seagreen"</span>) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(
-    <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>),
-    <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='st'>"outward"</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='st'>"outward"</span>
-  )</div><div class='img'><img src='accessors-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># covariance biplot</span>
-<span class='no'>attributes_pca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(
-    <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
-    <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"u"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fu'>dim_u</span>(<span class='no'>attributes_pca</span>)
-  ) +
-  <span class='fu'>theme_bw</span>() + <span class='fu'>theme</span>(<span class='kw'>panel.grid</span> <span class='kw'>=</span> <span class='fu'>element_blank</span>()) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"seagreen"</span>) +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text_repel</a></span>(<span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>PC1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>PC2</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>)</div><div class='img'><img src='accessors-4.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -328,7 +231,7 @@ the matrix decomposition are returned by <code>dim_u()</code> and <code>dim_v()<
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

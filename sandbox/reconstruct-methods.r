@@ -75,3 +75,16 @@ reconstruct.ca <- function(x) {
   std_resid <- x$rowcoord %*% diag(x$sv) %*% t(x$colcoord)
   stop("Not yet implemented.")
 }
+
+#' @rdname methods-ade4
+#' @export
+reconstruct.nipals <- function(x) {
+  res <- recover_rows.nipals(x) %*% t(recover_cols.nipals(x))
+  if (! is.null(attr(x, "cmeans")) & ! is.null(attr(x, "csd"))) {
+    res <- sweep(sweep(res, 2, attr(x, "cmeans"), "*"),
+                 2, attr(x, "cmeans"), "+")
+  } else {
+    warning("Scaling factors `cmeans` and `csd` were not recovered.")
+  }
+  return(res)
+}

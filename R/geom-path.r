@@ -1,34 +1,7 @@
-#' @title Render piecewise-linear paths through ordinates
-#' 
 
-#' @description `geom_*_path()` renders line segments through consecutive pairs
-#'   of case or variable positions.
-#' @template biplot-layers
-
-#' @section Aesthetics:
-
-#' `geom_*_path()` understands the following aesthetics (required aesthetics are
-#' in bold):
-
-#' - **`x`**
-#' - **`y`**
-#' - `alpha`
-#' - `colour`
-#' - `linetype`
-#' - `size`
-#' - `group`
-#' 
-
-#' @name geom-biplot-path
-#' @import ggplot2
-#' @inheritParams ggplot2::layer
-#' @template param-geom
-#' @template param-matrix
-NULL
-
-#' @rdname geom-biplot-path
+#' @rdname biplot-geoms
 #' @export
-geom_u_path <- function(
+geom_rows_path <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   na.rm = FALSE,
@@ -37,7 +10,7 @@ geom_u_path <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = u_stat(stat),
+    stat = rows_stat(stat),
     geom = GeomPath,
     position = position,
     show.legend = show.legend,
@@ -49,9 +22,9 @@ geom_u_path <- function(
   )
 }
 
-#' @rdname geom-biplot-path
+#' @rdname biplot-geoms
 #' @export
-geom_v_path <- function(
+geom_cols_path <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   ...,
   na.rm = FALSE,
@@ -60,7 +33,7 @@ geom_v_path <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = v_stat(stat),
+    stat = cols_stat(stat),
     geom = GeomPath,
     position = position,
     show.legend = show.legend,
@@ -72,11 +45,11 @@ geom_v_path <- function(
   )
 }
 
-#' @rdname geom-biplot-path
+#' @rdname biplot-geoms
 #' @export
-geom_biplot_path <- function(
+geom_dims_path <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "u",
+  .matrix = "rows",
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><strong>dplyr</strong> verbs for tbl_ord factors — dplyr-verbs • ordr</title>
+<title>dplyr verbs for tbl_ord factors — dplyr-verbs • ordr</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="<strong>dplyr</strong> verbs for tbl_ord factors — dplyr-verbs" />
+<meta property="og:title" content="dplyr verbs for tbl_ord factors — dplyr-verbs" />
 <meta property="og:description" content="These functions adapt dplyr verbs to the factors
 of a tbl_ord. The raw verbs are not defined for tbl_ords; instead, each
 verb has two analogues, corresponding to the two matrix factors. They each
@@ -87,12 +87,27 @@ annotation)." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
+  <a href="../articles/ordr.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/cmds-variables.html">multidimensional scaling of variables</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -126,42 +141,42 @@ assigns it as the new <code>"*_annotation"</code> attribute of <code>.data</code
 <a href='annotation.html'>annotation</a>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pull_factor</span>(<span class='no'>.data</span>, <span class='kw'>var</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='no'>.matrix</span>)
+    <pre class="usage"><span class='fu'>pull_factor</span><span class='op'>(</span><span class='va'>.data</span>, var <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span>, <span class='va'>.matrix</span><span class='op'>)</span>
 
-<span class='fu'>pull_u</span>(<span class='no'>.data</span>, <span class='kw'>var</span> <span class='kw'>=</span> -<span class='fl'>1</span>)
+<span class='fu'>pull_rows</span><span class='op'>(</span><span class='va'>.data</span>, var <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
 
-<span class='fu'>pull_v</span>(<span class='no'>.data</span>, <span class='kw'>var</span> <span class='kw'>=</span> -<span class='fl'>1</span>)
+<span class='fu'>pull_cols</span><span class='op'>(</span><span class='va'>.data</span>, var <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
 
-<span class='fu'>rename_u</span>(<span class='no'>.data</span>, <span class='no'>...</span>)
+<span class='fu'>rename_rows</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>rename_v</span>(<span class='no'>.data</span>, <span class='no'>...</span>)
+<span class='fu'>rename_cols</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>select_u</span>(<span class='no'>.data</span>, <span class='no'>...</span>)
+<span class='fu'>select_rows</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>select_v</span>(<span class='no'>.data</span>, <span class='no'>...</span>)
+<span class='fu'>select_cols</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>mutate_u</span>(<span class='no'>.data</span>, <span class='no'>...</span>)
+<span class='fu'>mutate_rows</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>mutate_v</span>(<span class='no'>.data</span>, <span class='no'>...</span>)
+<span class='fu'>mutate_cols</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>transmute_u</span>(<span class='no'>.data</span>, <span class='no'>...</span>)
+<span class='fu'>transmute_rows</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>transmute_v</span>(<span class='no'>.data</span>, <span class='no'>...</span>)
+<span class='fu'>transmute_cols</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>bind_cols_u</span>(<span class='no'>.data</span>, <span class='no'>...</span>)
+<span class='fu'>cbind_rows</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>bind_cols_v</span>(<span class='no'>.data</span>, <span class='no'>...</span>)
+<span class='fu'>cbind_cols</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>left_join_u</span>(<span class='no'>.data</span>, <span class='no'>...</span>)
+<span class='fu'>left_join_rows</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>left_join_v</span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>left_join_cols</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.data</th>
-      <td><p>A <a href='tbl_ord.html'>tbl_ord</a> object.</p></td>
+      <td><p>An object of class '<a href='tbl_ord.html'>tbl_ord</a>'.</p></td>
     </tr>
     <tr>
       <th>var</th>
@@ -171,7 +186,7 @@ assigns it as the new <code>"*_annotation"</code> attribute of <code>.data</code
       <th>.matrix</th>
       <td><p>A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are <code>"u"</code>, <code>"v"</code>, and <code>"uv"</code>.</p></td>
+standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</code> (for both).</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -181,202 +196,6 @@ standard values are <code>"u"</code>, <code>"v"</code>, and <code>"uv"</code>.</
     </table>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Unscaled PCA and two-scaled biplot of Anderson iris data</span>
-<span class='no'>iris</span>[, -<span class='fl'>5</span>] <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/princomp.html'>princomp</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>mutate_u</span>(<span class='kw'>species</span> <span class='kw'>=</span> <span class='no'>iris</span>$<span class='no'>Species</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>mutate_v</span>(<span class='kw'>measure</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span>(<span class='st'>"\\."</span>, <span class='st'>" "</span>, <span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>tolower</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>iris</span>)[-<span class='fl'>5</span>]))) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>iris_pca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'princomp': (150 x 4) x (4 x 4)'
-#&gt; # 4 coordinates: Comp.1, Comp.2, ..., Comp.4
-#&gt; # 
-#&gt; # U: [ 150 x 4 | 1 ]
-#&gt;   Comp.1 Comp.2  Comp.3 ... |   species
-#&gt;                             |   <span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>  
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  -</span><span style='color: #BB0000;'>2.68</span><span>  0.319  0.027</span><span style='text-decoration: underline;'>9</span><span>     | </span><span style='color: #BCBCBC;'>1</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  -</span><span style='color: #BB0000;'>2.71</span><span> -</span><span style='color: #BB0000;'>0.177</span><span>  0.210  ... | </span><span style='color: #BCBCBC;'>2</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  -</span><span style='color: #BB0000;'>2.89</span><span> -</span><span style='color: #BB0000;'>0.145</span><span> -</span><span style='color: #BB0000;'>0.017</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  -</span><span style='color: #BB0000;'>2.75</span><span> -</span><span style='color: #BB0000;'>0.318</span><span> -</span><span style='color: #BB0000;'>0.031</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>     | </span><span style='color: #BCBCBC;'>4</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  -</span><span style='color: #BB0000;'>2.73</span><span>  0.327 -</span><span style='color: #BB0000;'>0.090</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> setosa 
-#&gt; </span><span style='color: #949494;'># … with 145 more rows</span><span>
-#&gt; # 
-#&gt; # V: [ 4 x 4 | 1 ]
-#&gt;    Comp.1  Comp.2  Comp.3 ... |   measure     
-#&gt;                               |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.361   0.657   0.582      | </span><span style='color: #BCBCBC;'>1</span><span> sepal length
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.084</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span>  0.730  -</span><span style='color: #BB0000;'>0.598</span><span>  ... | </span><span style='color: #BCBCBC;'>2</span><span> sepal width 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.857  -</span><span style='color: #BB0000;'>0.173</span><span>  -</span><span style='color: #BB0000;'>0.076</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> petal length
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.358  -</span><span style='color: #BB0000;'>0.075</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.546</span><span>      | </span><span style='color: #BCBCBC;'>4</span><span> petal width </div><div class='input'><span class='no'>iris_pca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>species</span>), <span class='kw'>sec.axes</span> <span class='kw'>=</span> <span class='st'>"v"</span>, <span class='kw'>scale.factor</span> <span class='kw'>=</span> <span class='fl'>3</span>) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'>scale_color_brewer</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"qual"</span>, <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>2</span>) +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>() +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_v_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#444444"</span>) +
-  <span class='fu'><a href='geom-biplot-text-radiate.html'>geom_v_text_radiate</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>measure</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#444444"</span>) +
-  <span class='fu'>ggtitle</span>(
-    <span class='st'>"Row-principal unscaled PCA biplot of Anderson iris data"</span>,
-    <span class='st'>"Variable loadings scaled to secondary axes"</span>
-  ) +
-  <span class='fu'>expand_limits</span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>1</span>, <span class='fl'>3.5</span>))</div><div class='img'><img src='dplyr-verbs-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Confer inertia in CA between rows and columns of benthic sample data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>benthos</span>)
-<span class='no'>benthos</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>ca</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/ca.html'>ca</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>benthos_ca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (92 x 12) x (13 x 12)'
-#&gt; # 12 coordinates: Dim1, Dim2, ..., Dim12
-#&gt; # 
-#&gt; # U: [ 92 x 12 | 0 ]
-#&gt;      Dim1   Dim2   Dim3 ... | 
-#&gt;                             | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.17</span><span>    0.895 -</span><span style='color: #BB0000;'>0.140</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.552</span><span>  -</span><span style='color: #BB0000;'>2.23</span><span>  -</span><span style='color: #BB0000;'>0.359</span><span> ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.040</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span> -</span><span style='color: #BB0000;'>0.689</span><span>  0.687     | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  1.22    0.287 -</span><span style='color: #BB0000;'>0.700</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.312   0.142 -</span><span style='color: #BB0000;'>0.137</span><span>     | 
-#&gt; 
-#&gt; # 
-#&gt; # V: [ 13 x 12 | 0 ]
-#&gt;     Dim1    Dim2   Dim3 ... | 
-#&gt;                             | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.173</span><span>  0.262  -</span><span style='color: #BB0000;'>0.376</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  1.11   0.417   1.52  ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.226</span><span> -</span><span style='color: #BB0000;'>1.33</span><span>   -</span><span style='color: #BB0000;'>0.297</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  1.27   0.411   1.37      | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.186 -</span><span style='color: #BB0000;'>0.088</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>  0.568     | 
-#&gt; </div><div class='input'><span class='co'># Reproduce Exhibit 8.3</span>
-<span class='no'>benthos_ca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='st'>"colprincipal"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>)</div><div class='img'><img src='dplyr-verbs-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Reproduce Exhibit 8.4</span>
-<span class='no'>benthos_ca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>(<span class='kw'>.matrix</span> <span class='kw'>=</span> <span class='st'>"u"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>transmute_u</span>(<span class='kw'>mass</span> <span class='kw'>=</span> <span class='no'>.mass</span>, <span class='kw'>sqrt_mass</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='no'>.mass</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='st'>"colprincipal"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>), <span class='kw'>scale_u</span> <span class='kw'>=</span> <span class='st'>"sqrt_mass"</span>) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='geom-biplot-vector.html'>geom_u_vector</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>arrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>) +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>mass</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>17</span>) +
-  <span class='fu'>scale_size_continuous</span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>4</span>), <span class='kw'>guide</span> <span class='kw'>=</span> <span class='st'>"none"</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(
-    <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"chull"</span>,
-    <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='st'>"outward"</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='st'>"outward"</span>
-  ) +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_v_point</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text_repel</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>, <span class='kw'>min.segment.length</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='img'><img src='dplyr-verbs-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># state abbreviations</span>
-<span class='no'>state</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-  <span class='kw'>.name</span> <span class='kw'>=</span> <span class='no'>state.name</span>,
-  <span class='kw'>.abb</span> <span class='kw'>=</span> <span class='no'>state.abb</span>
-)
-<span class='co'># Log-ratio analysis of 1973 violent crime arrests in the United States</span>
-(<span class='no'>arrests_lra</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='lra-ord.html'>lra</a></span>(<span class='no'>USArrests</span>[, -<span class='fl'>3</span>]))</div><div class='output co'>#&gt; $sv
-#&gt; [1] 2.204112e-01 1.955308e-01 3.611972e-17
-#&gt; 
-#&gt; $row.coords
-#&gt;                       LRSV1        LRSV2        LRSV3
-#&gt; Alabama         0.010615205 -0.154354831  0.000504474
-#&gt; Alaska         -0.057591949  0.140420691 -0.388950513
-#&gt; Arizona         0.122533520  0.117731230 -0.128931162
-#&gt; Arkansas        0.019003125 -0.057570010  0.046656229
-#&gt; California      0.008048189  0.152555368 -0.194647240
-#&gt; Colorado       -0.088544329  0.165191709 -0.176839484
-#&gt; Connecticut     0.114914374  0.078388742  0.152246942
-#&gt; Delaware        0.254404723  0.027738214  0.065378168
-#&gt; Florida         0.038322260 -0.075250154 -0.104178028
-#&gt; Georgia        -0.144534606 -0.197209278 -0.001773386
-#&gt; Hawaii         -0.517966256  0.037682024  0.131828250
-#&gt; Idaho           0.146074842  0.226414450  0.093736056
-#&gt; Illinois        0.055743135 -0.040975696 -0.011590488
-#&gt; Indiana        -0.189048944 -0.001430056  0.042220610
-#&gt; Iowa           -0.106196974  0.177110727  0.147313308
-#&gt; Kansas         -0.106109005  0.017156253  0.061587110
-#&gt; Kentucky       -0.208305191 -0.167831194  0.177365031
-#&gt; Louisiana      -0.008876611 -0.188899013  0.036076396
-#&gt; Maine           0.167813476  0.114397455  0.242547594
-#&gt; Maryland        0.086925006 -0.018104279 -0.043070900
-#&gt; Massachusetts   0.099138407  0.105165647  0.066897581
-#&gt; Michigan       -0.055609969  0.013370015 -0.112975853
-#&gt; Minnesota      -0.102328093  0.198935243  0.120259543
-#&gt; Mississippi     0.061157476 -0.271151272  0.143459550
-#&gt; Missouri       -0.102330996  0.030557137 -0.034811620
-#&gt; Montana        -0.108096691 -0.010780957  0.137773063
-#&gt; Nebraska       -0.068793707  0.094967891  0.067965116
-#&gt; Nevada         -0.126676545  0.082627444 -0.194315390
-#&gt; New Hampshire  -0.047343104  0.146575509  0.217339215
-#&gt; New Jersey     -0.015533629 -0.021150027  0.060993578
-#&gt; New Mexico      0.028018230  0.014809770 -0.088437504
-#&gt; New York        0.031015361 -0.038443084 -0.030852173
-#&gt; North Carolina  0.238710415 -0.203606592  0.060854905
-#&gt; North Dakota    0.113262797  0.375070000  0.310268430
-#&gt; Ohio           -0.169487280  0.002486830  0.046883531
-#&gt; Oklahoma       -0.029114491  0.029620445  0.033183707
-#&gt; Oregon         -0.033333759  0.231295924 -0.127555445
-#&gt; Pennsylvania   -0.108228198 -0.053845680  0.140606127
-#&gt; Rhode Island    0.383008304  0.016023240  0.245758125
-#&gt; South Carolina  0.053157130 -0.157299823  0.023269461
-#&gt; South Dakota   -0.059025984  0.057407710  0.137557910
-#&gt; Tennessee      -0.147702807 -0.102998683 -0.020221878
-#&gt; Texas          -0.096901237 -0.101159928 -0.012331317
-#&gt; Utah           -0.010994131  0.287482498 -0.061746384
-#&gt; Vermont        -0.173205241  0.166220864  0.178183930
-#&gt; Virginia       -0.076192471 -0.041200499  0.031532613
-#&gt; Washington     -0.005238875  0.261857381 -0.078588729
-#&gt; West Virginia  -0.096070469 -0.162793377  0.237276612
-#&gt; Wisconsin      -0.155521884  0.107882784  0.266067747
-#&gt; Wyoming         0.052133816 -0.043174888  0.106248663
-#&gt; 
-#&gt; $column.coords
-#&gt;              LRSV1       LRSV2       LRSV3
-#&gt; Murder  -0.6207877 -0.78267386 -0.04521307
-#&gt; Assault  0.1245533 -0.04152361 -0.99134367
-#&gt; Rape    -0.7740214  0.62104542 -0.12326194
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "lra"</div><div class='input'><span class='no'>arrests_lra</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>left_join_u</span>(<span class='no'>state</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='st'>".name"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>arrests_lra</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lra': (50 x 3) x (3 x 3)'
-#&gt; # 3 coordinates: LRSV1, LRSV2, LRSV3
-#&gt; # 
-#&gt; # U: [ 50 x 3 | 2 ]
-#&gt;      LRSV1   LRSV2     LRSV3 |   .name      .abb 
-#&gt;                              |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.010</span><span style='text-decoration: underline;'>6</span><span>  -</span><span style='color: #BB0000;'>0.154</span><span>   0.000</span><span style='text-decoration: underline;'>504</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> Alabama    AL   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.057</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>   0.140  -</span><span style='color: #BB0000;'>0.389</span><span>    | </span><span style='color: #BCBCBC;'>2</span><span> Alaska     AK   
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.123    0.118  -</span><span style='color: #BB0000;'>0.129</span><span>    | </span><span style='color: #BCBCBC;'>3</span><span> Arizona    AZ   
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.019</span><span style='text-decoration: underline;'>0</span><span>  -</span><span style='color: #BB0000;'>0.057</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>  0.046</span><span style='text-decoration: underline;'>7</span><span>   | </span><span style='color: #BCBCBC;'>4</span><span> Arkansas   AR   
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.008</span><span style='text-decoration: underline;'>05</span><span>  0.153  -</span><span style='color: #BB0000;'>0.195</span><span>    | </span><span style='color: #BCBCBC;'>5</span><span> California CA   
-#&gt; </span><span style='color: #949494;'># … with 45 more rows</span><span>
-#&gt; # 
-#&gt; # V: [ 3 x 3 | 1 ]
-#&gt;    LRSV1   LRSV2   LRSV3 |   .name  
-#&gt;                          |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.621</span><span> -</span><span style='color: #BB0000;'>0.783</span><span>  -</span><span style='color: #BB0000;'>0.045</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span> | </span><span style='color: #BCBCBC;'>1</span><span> Murder 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.125 -</span><span style='color: #BB0000;'>0.041</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.991</span><span>  | </span><span style='color: #BCBCBC;'>2</span><span> Assault
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.774</span><span>  0.621  -</span><span style='color: #BB0000;'>0.123</span><span>  | </span><span style='color: #BCBCBC;'>3</span><span> Rape   </div><div class='input'><span class='co'># Adapt Exhibit 7.1 in Greenacre (2010)</span>
-<span class='no'>arrests_lra</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>() +
-  <span class='co'>#ggbiplot(sec.axes = "v") +</span>
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text</a></span>(
-    <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.abb</span>),
-    <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>
-  ) +
-  <span class='fu'><a href='geom-biplot-polygon.html'>geom_v_polygon</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='st'>"dashed"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text</a></span>(
-    <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>),
-    <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown4"</span>, <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"bold"</span>
-  ) +
-  <span class='fu'>ggtitle</span>(
-    <span class='st'>"Log-ratio analysis of violent crime arrest rates"</span>,
-    <span class='st'>"United States, 1973"</span>
-  ) +
-  <span class='fu'>guides</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='dplyr-verbs-4.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -392,7 +211,7 @@ standard values are <code>"u"</code>, <code>"v"</code>, and <code>"uv"</code>.</
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -3,21 +3,21 @@
 \name{methods-svd}
 \alias{methods-svd}
 \alias{as_tbl_ord.svd_ord}
-\alias{recover_u.svd_ord}
-\alias{recover_v.svd_ord}
+\alias{recover_rows.svd_ord}
+\alias{recover_cols.svd_ord}
 \alias{recover_inertia.svd_ord}
 \alias{recover_coord.svd_ord}
 \alias{recover_conference.svd_ord}
-\alias{augmentation_u.svd_ord}
-\alias{augmentation_v.svd_ord}
+\alias{augmentation_rows.svd_ord}
+\alias{augmentation_cols.svd_ord}
 \alias{augmentation_coord.svd_ord}
 \title{Functionality for singular value decompositions}
 \usage{
 \method{as_tbl_ord}{svd_ord}(x)
 
-\method{recover_u}{svd_ord}(x)
+\method{recover_rows}{svd_ord}(x)
 
-\method{recover_v}{svd_ord}(x)
+\method{recover_cols}{svd_ord}(x)
 
 \method{recover_inertia}{svd_ord}(x)
 
@@ -25,9 +25,9 @@
 
 \method{recover_conference}{svd_ord}(x)
 
-\method{augmentation_u}{svd_ord}(x)
+\method{augmentation_rows}{svd_ord}(x)
 
-\method{augmentation_v}{svd_ord}(x)
+\method{augmentation_cols}{svd_ord}(x)
 
 \method{augmentation_coord}{svd_ord}(x)
 }
@@ -37,4 +37,46 @@
 \description{
 These methods extract data from, and attribute new data to,
 objects of class \code{"svd_ord"} returned by \code{\link[=svd_ord]{svd_ord()}}.
+}
+\examples{
+# matrix of U.S. personal expenditure data
+class(USPersonalExpenditure)
+print(USPersonalExpenditure)
+# singular value decomposition into row and column coordinates
+USPersonalExpenditure \%>\%
+  svd_ord() \%>\%
+  as_tbl_ord() \%>\%
+  print() -> spend_svd
+# summarize ordination
+glance(spend_svd)
+# recover matrices of row and column coordinates
+get_rows(spend_svd)
+get_cols(spend_svd)
+# augment with row and column names
+augment_ord(spend_svd)
+# summarize artifical coordinates
+tidy(spend_svd)
+# scree plot of inertia
+tidy(spend_svd) \%>\%
+  ggplot(aes(x = .name, y = .inertia)) +
+  theme_bw() +
+  geom_col() +
+  labs(x = "", y = "Inertia")
+# fortification automatically augments coordinates
+fortify(spend_svd)
+# initial matrix decomposition confers no inertia to coordinates
+get_conference(spend_svd)
+# row-principal biplot, allowing radiating text to exceed plotting window
+spend_svd \%>\%
+  confer_inertia(1) \%>\%
+  ggbiplot(aes(label = .name), clip = "off",
+           sec.axes = "cols", scale.factor = 50) +
+  geom_rows_label(size = 3) +
+  geom_cols_vector() +
+  # omit labels in the hull with the origin
+  geom_cols_text_radiate(stat = "cone") +
+  ggtitle(
+    "U.S. Personal Expenditure data, 1940-1960",
+    "Row-principal biplot of SVD"
+  )
 }

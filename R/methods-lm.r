@@ -8,12 +8,7 @@
 #' @include ord-tbl.r
 #' @importFrom stats model.frame influence cooks.distance predict
 #' @template param-methods
-#' @example inst/examples/mtcars-lm-isolines.r
-# @example inst/examples/bioenv-lm-isolines.r
-#' @example inst/examples/country-cmds-lm.r
-# @example inst/examples/bioenv-cmds-lm-repel.r
-#' @example inst/examples/bioenv-glm-isolines.r
-#' @example inst/examples/bioenv-mlm.r
+#' @example inst/examples/ex-methods-lm-mtcars.r
 NULL
 
 #' @rdname methods-lm
@@ -22,55 +17,34 @@ as_tbl_ord.lm <- as_tbl_ord_default
 
 #' @rdname methods-lm
 #' @export
-recover_u.lm <- function(x) {
-  .intercept_col <- if (names(x$coefficients)[1] == "(Intercept)") {
-    .ic <- matrix(1L, nrow = nrow(x$model), ncol = 1)
-    colnames(.ic) <- "(Intercept)"
-    .ic
-  } else matrix(NA_integer_, nrow = nrow(x$model), ncol = 0)
-  .predictors <- as.matrix(model.frame(x)[, -1])
-  res <- cbind(.intercept_col, .predictors)
-  colnames(res) <- recover_coord(x)
+recover_rows.lm <- function(x) {
+  res <- model.matrix(x)
+  if (is.null(rownames(res)))
+    rownames(res) <- rownames(x$model[, -1, drop = FALSE])
+  if (is.null(colnames(res))) colnames(res) <- recover_coord(x)
   res
 }
 
 #' @rdname methods-lm
 #' @export
-recover_v.lm <- function(x) {
+recover_cols.lm <- function(x) {
   res <- t(x$coefficients)
-  dimnames(res) <- list(
-    if (is.matrix(x$model[, 1])) colnames(x$model[, 1]) else names(x$model)[1],
-    recover_coord(x)
-  )
+  if (is.null(rownames(res))) rownames(res) <-
+      if (is.matrix(x$model[, 1])) colnames(x$model[, 1]) else names(x$model)[1]
+  if (is.null(colnames(res))) colnames(res) <- recover_coord(x)
   res
 }
 
 #' @rdname methods-lm
 #' @export
 recover_coord.lm <- function(x) {
-  .predictors <- x$model[, -1]
-  if (is.matrix(.predictors)) {
-    coord <- colnames(.predictors)
-  } else {
-    coord <- names(.predictors)
-    mat_coord <- which(sapply(
-      .predictors,
-      function(y) is.matrix(y) && ! is.null(colnames(y))
-    ))
-    coord[mat_coord] <- unname(unlist(lapply(
-      mat_coord,
-      function(i) colnames(.predictors[, i])
-    )))
-  }
-  if (names(x$coefficients)[1] == "(Intercept)") {
-    coord <- c("(Intercept)", coord)
-  }
-  coord
+  if (is.matrix(x$coefficients))
+    colnames(x$coefficients) else names(x$coefficients)
 }
 
 #' @rdname methods-lm
 #' @export
-augmentation_u.lm <- function(x) {
+augmentation_rows.lm <- function(x) {
   res <- tibble(.name = rownames(model.frame(x)))
   infl <- influence(x, do.coef = FALSE)
   # diagnostics
@@ -89,7 +63,7 @@ augmentation_u.lm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-augmentation_v.lm <- function(x) {
+augmentation_cols.lm <- function(x) {
   .name <- if (is.matrix(x$model[, 1])) {
     colnames(x$model[, 1])
   } else {
@@ -111,7 +85,7 @@ augmentation_coord.lm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-augmentation_u.glm <- function(x) {
+augmentation_rows.glm <- function(x) {
   res <- tibble(.name = rownames(model.frame(x)))
   # diagnostics
   infl <- influence(x, do.coef = FALSE)
@@ -134,7 +108,7 @@ augmentation_u.glm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-recover_u.mlm <- function(x) {
+recover_rows.mlm <- function(x) {
   .intercept_col <- if (rownames(x$coefficients)[1] == "(Intercept)") {
     .ic <- matrix(1L, nrow = nrow(x$model), ncol = 1)
     colnames(.ic) <- "(Intercept)"
@@ -148,7 +122,7 @@ recover_u.mlm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-recover_v.mlm <- function(x) {
+recover_cols.mlm <- function(x) {
   res <- t(x$coefficients)
   colnames(res) <- recover_coord(x)
   res
@@ -179,7 +153,7 @@ recover_coord.mlm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-augmentation_u.mlm <- function(x) {
+augmentation_rows.mlm <- function(x) {
   tibble(
     .name = rownames(model.frame(x))
   )
@@ -187,7 +161,7 @@ augmentation_u.mlm <- function(x) {
 
 #' @rdname methods-lm
 #' @export
-augmentation_v.mlm <- function(x) {
+augmentation_cols.mlm <- function(x) {
   .name <- colnames(x$coefficients)
   if (is.null(.name)) {
     .name <- paste(names(x$model)[1], 1:ncol(x$model[, 1]), sep = ".")

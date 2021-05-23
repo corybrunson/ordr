@@ -6,22 +6,22 @@
 #' @name methods-eigen
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/karate-igraph-eigen.r
+#' @example inst/examples/ex-methods-eigen-karate.r
 NULL
 
 #' @rdname methods-eigen
 #' @export
 as_tbl_ord.eigen_ord <- as_tbl_ord_default
 
-recover_uv_eigen <- function(x, .matrix) x[["vectors"]]
+recover_dims_eigen <- function(x, .matrix) x[["vectors"]]
 
 #' @rdname methods-eigen
 #' @export
-recover_u.eigen_ord <- function(x) recover_uv_eigen(x, "u")
+recover_rows.eigen_ord <- function(x) recover_dims_eigen(x, "rows")
 
 #' @rdname methods-eigen
 #' @export
-recover_v.eigen_ord <- function(x) recover_uv_eigen(x, "v")
+recover_cols.eigen_ord <- function(x) recover_dims_eigen(x, "cols")
 
 #' @rdname methods-eigen
 #' @export
@@ -40,7 +40,7 @@ recover_conference.eigen_ord <- function(x) {
 
 #' @rdname methods-eigen
 #' @export
-augmentation_u.eigen_ord <- function(x) {
+augmentation_rows.eigen_ord <- function(x) {
   .name <- rownames(x[["vectors"]])
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x[["vectors"]]))
@@ -52,7 +52,7 @@ augmentation_u.eigen_ord <- function(x) {
 
 #' @rdname methods-eigen
 #' @export
-augmentation_v.eigen_ord <- function(x) {
+augmentation_cols.eigen_ord <- function(x) {
   .name <- rownames(x[["vectors"]])
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x[["vectors"]]))

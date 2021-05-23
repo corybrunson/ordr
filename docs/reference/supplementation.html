@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Supplement ordination objects with new data — supplementation • ordr</title>
+<title>Supplement 'tbl_ord' objects with new data — supplementation • ordr</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Supplement ordination objects with new data — supplementation" />
+<meta property="og:title" content="Supplement 'tbl_ord' objects with new data — supplementation" />
 <meta property="og:description" content="These functions attach supplementary rows or columns to an
 ordination object." />
 
@@ -81,12 +81,27 @@ ordination object." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
+  <a href="../articles/ordr.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/cmds-variables.html">multidimensional scaling of variables</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -104,7 +119,7 @@ ordination object." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Supplement ordination objects with new data</h1>
+    <h1>Supplement 'tbl_ord' objects with new data</h1>
     
     <div class="hidden name"><code>supplementation.Rd</code></div>
     </div>
@@ -114,102 +129,40 @@ ordination object." />
 ordination object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>supplementation_u</span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='fu'>supplementation_rows</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>supplementation_v</span>(<span class='no'>x</span>)
+<span class='fu'>supplementation_cols</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>supplementation_factor</span>(<span class='no'>x</span>, <span class='no'>.matrix</span>)</pre>
+<span class='fu'>supplementation_factor</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>.matrix</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <a href='tbl_ord.html'>tbl_ord</a>, or an ordination object coercible to one.</p></td>
+      <td><p>An object of class '<a href='tbl_ord.html'>tbl_ord</a>'.</p></td>
     </tr>
     <tr>
       <th>.matrix</th>
       <td><p>A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
-standard values are <code>"u"</code>, <code>"v"</code>, and <code>"uv"</code>.</p></td>
+standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</code> (for both).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The <code>supplementation_*()</code> methods produce matrices of supplemental rows or
-columns (i.e. rows of \(U\) or of \(V\)) of a <a href='tbl_ord.html'>tbl_ord</a> object from the
-object itself. The motivating example is linear discriminant analysis, which
-produces a natural biplot of class discriminant centroids and variable axes
-but is usually supplemented with case discriminant scores. If no
-supplementary rows of a factor are produced, the function returns <code>NULL</code>.</p>
+columns of a <a href='tbl_ord.html'>tbl_ord</a> object from the object itself. The motivating example
+is linear discriminant analysis, which produces a natural biplot of class
+discriminant centroids and variable axes but is usually supplemented with
+case discriminant scores. If no supplementary rows of a factor are produced,
+the function returns <code>NULL</code>.</p>
 <p>The <code>supplement_*()</code> functions return the ordination object with either or
 both factors attributed with the result of <code>supplementation_*()</code>. The
 supplementary values are augmented with a <code>.supplement</code> column whose value
-indicates their source and can be incorporated into a <a href='fortify.html'>tidied form</a>.</p>
+indicates their source and can be incorporated into a tidied form.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Linear discriminant analysis of Reaven &amp; Miller diabetes data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw pkg'>heplots</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/heplots/man/Diabetes.html'>Diabetes</a></span>)</div><div class='output co'>#&gt;   relwt glufast glutest instest sspg  group
-#&gt; 1  0.81      80     356     124   55 Normal
-#&gt; 2  0.95      97     289     117   76 Normal
-#&gt; 3  0.94     105     319     143  105 Normal
-#&gt; 4  1.04      90     356     199  108 Normal
-#&gt; 5  1.00      90     323     240  143 Normal
-#&gt; 6  0.76      86     381     157  165 Normal</div><div class='input'><span class='no'>diabetes_lda</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>MASS</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/MASS/man/lda.html'>lda</a></span>(<span class='no'>group</span> ~ <span class='no'>.</span>, <span class='kw pkg'>heplots</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/heplots/man/Diabetes.html'>Diabetes</a></span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>diabetes_lda</span>)</div><div class='output co'>#&gt; Call:
-#&gt; lda(group ~ ., data = heplots::Diabetes)
-#&gt; 
-#&gt; Prior probabilities of groups:
-#&gt;            Normal Chemical_Diabetic    Overt_Diabetic 
-#&gt;         0.5241379         0.2482759         0.2275862 
-#&gt; 
-#&gt; Group means:
-#&gt;                       relwt   glufast   glutest  instest     sspg
-#&gt; Normal            0.9372368  91.18421  349.9737 172.6447 114.0000
-#&gt; Chemical_Diabetic 1.0558333  99.30556  493.9444 288.0000 208.9722
-#&gt; Overt_Diabetic    0.9839394 217.66667 1043.7576 106.0000 318.8788
-#&gt; 
-#&gt; Coefficients of linear discriminants:
-#&gt;                   LD1          LD2
-#&gt; relwt    1.3624356881 -3.784142444
-#&gt; glufast -0.0336487883  0.036633317
-#&gt; glutest  0.0125763942 -0.007092017
-#&gt; instest -0.0001022245 -0.006173424
-#&gt; sspg     0.0042431866  0.001134070
-#&gt; 
-#&gt; Proportion of trace:
-#&gt;    LD1    LD2 
-#&gt; 0.8812 0.1188 </div><div class='input'><span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>(<span class='no'>diabetes_lda</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='dplyr-verbs.html'>mutate_u</a></span>(<span class='kw'>discriminant</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span>(! <span class='no'>.supplement</span>, <span class='st'>"centroid"</span>, <span class='st'>"case"</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>diabetes_lda</span></div><div class='output co'>#&gt; # A tbl_ord of class 'lda': (148 x 2) x (5 x 2)'
-#&gt; # 2 coordinates: LD1 and LD2
-#&gt; # 
-#&gt; # U: [ 148 x 2 | 6 ]
-#&gt;      LD1    LD2 |   .name .prior .counts .supplement
-#&gt;                 |   <span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span>      
-#&gt; </span><span style='color: #555555;'>1</span><span> -</span><span style='color: #BB0000;'>1.75</span><span>   0.400 | </span><span style='color: #555555;'>1</span><span> Norm…  0.524      76 FALSE      
-#&gt; </span><span style='color: #555555;'>2</span><span>  0.340 -</span><span style='color: #BB0000;'>1.38</span><span>  | </span><span style='color: #555555;'>2</span><span> Chem…  0.248      36 FALSE      
-#&gt; </span><span style='color: #555555;'>3</span><span>  3.66   0.580 | </span><span style='color: #555555;'>3</span><span> Over…  0.228      33 FALSE      
-#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>1.72</span><span>   0.663 | </span><span style='color: #555555;'>4</span><span> 1     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> TRUE       
-#&gt; </span><span style='color: #555555;'>5</span><span> -</span><span style='color: #BB0000;'>2.85</span><span>   1.30  | </span><span style='color: #555555;'>5</span><span> 2     </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> TRUE       
-#&gt; </span><span style='color: #555555;'># … with 143 more rows, and 2 more</span><span>
-#&gt; # U: [ 148 x 2 | 6 ]</span><span style='color: #555555;'>#   variables: .grouping </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt;      LD1    LD2 | </span><span style='color: #555555;'>#   discriminant </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; # 
-#&gt; # V: [ 5 x 2 | 1 ]
-#&gt;         LD1      LD2 |   .name  
-#&gt;                      |   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
-#&gt; </span><span style='color: #555555;'>1</span><span>  1.36     -</span><span style='color: #BB0000;'>3.78</span><span>    | </span><span style='color: #555555;'>1</span><span> relwt  
-#&gt; </span><span style='color: #555555;'>2</span><span> -</span><span style='color: #BB0000;'>0.033</span><span style='color: #BB0000;text-decoration: underline;'>6</span><span>    0.036</span><span style='text-decoration: underline;'>6</span><span>  | </span><span style='color: #555555;'>2</span><span> glufast
-#&gt; </span><span style='color: #555555;'>3</span><span>  0.012</span><span style='text-decoration: underline;'>6</span><span>   -</span><span style='color: #BB0000;'>0.007</span><span style='color: #BB0000;text-decoration: underline;'>09</span><span> | </span><span style='color: #555555;'>3</span><span> glutest
-#&gt; </span><span style='color: #555555;'>4</span><span> -</span><span style='color: #BB0000;'>0.000</span><span style='color: #BB0000;text-decoration: underline;'>102</span><span> -</span><span style='color: #BB0000;'>0.006</span><span style='color: #BB0000;text-decoration: underline;'>17</span><span> | </span><span style='color: #555555;'>4</span><span> instest
-#&gt; </span><span style='color: #555555;'>5</span><span>  0.004</span><span style='text-decoration: underline;'>24</span><span>   0.001</span><span style='text-decoration: underline;'>13</span><span> | </span><span style='color: #555555;'>5</span><span> sspg   </div><div class='input'><span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='no'>diabetes_lda</span>) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='fu'>aes</span>(<span class='kw'>shape</span> <span class='kw'>=</span> <span class='no'>.grouping</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>discriminant</span>), <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>.5</span>) +
-  <span class='fu'><a href='geom-biplot-axis.html'>geom_v_axis</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"#888888"</span>) +
-  <span class='fu'>ggtitle</span>(<span class='st'>"Column-standardized LDA biplot of Reaven &amp; Miller diabetes data"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Using size for a discrete variable is not advised.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 3 rows containing missing values (geom_point).</span></div><div class='img'><img src='supplementation-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -225,7 +178,7 @@ indicates their source and can be incorporated into a <a href='fortify.html'>tid
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

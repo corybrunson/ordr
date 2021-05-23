@@ -112,7 +112,7 @@
     <p>Responses to several questions about working women and family.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>issp_women</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>issp_women</span><span class='op'>)</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
@@ -129,15 +129,16 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Confer inertia between rows and columns of CA on Spanish ISSP sample</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>issp_women</span>)
-<span class='no'>issp_women</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>ca</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/ca.html'>ca</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/generics/man/augment.html'>augment</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>() <span class='kw'>-&gt;</span> <span class='no'>issp_ca</span></div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (23 x 22) x (39 x 22)'
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>issp_women</span><span class='op'>)</span>
+<span class='va'>issp_women</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ca</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/ca.html'>ca</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://generics.r-lib.org/reference/augment.html'>augment</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>issp_ca</span>
+</div><div class='output co'>#&gt; # A tbl_ord of class 'ca': (23 x 22) x (39 x 22)'
 #&gt; # 22 coordinates: Dim1, Dim2, ..., Dim22
 #&gt; # 
-#&gt; # U: [ 23 x 22 | 4 ]
+#&gt; # Rows: [ 23 x 22 | 4 ]
 #&gt;     Dim1   Dim2    Dim3 ... |   .name   .mass  .dist .inertia
 #&gt;                             |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.280  0.111  0.830      | </span><span style='color: #BCBCBC;'>1</span><span> m1    0.185   0.080</span><span style='text-decoration: underline;'>7</span><span> 0.001</span><span style='text-decoration: underline;'>20</span><span> 
@@ -147,7 +148,7 @@
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.850</span><span>  0.403 -</span><span style='color: #BB0000;'>1.08</span><span>       | </span><span style='color: #BCBCBC;'>5</span><span> m5    0.103   0.214  0.004</span><span style='text-decoration: underline;'>71</span><span> 
 #&gt; </span><span style='color: #949494;'># … with 18 more rows</span><span>
 #&gt; # 
-#&gt; # V: [ 39 x 22 | 4 ]
+#&gt; # Columns: [ 39 x 22 | 4 ]
 #&gt;     Dim1   Dim2   Dim3 ... |   .name   .mass .dist .inertia
 #&gt;                            |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.14</span><span>  -</span><span style='color: #BB0000;'>0.854</span><span> -</span><span style='color: #BB0000;'>0.892</span><span>     | </span><span style='color: #BCBCBC;'>1</span><span> A1    0.023</span><span style='text-decoration: underline;'>6</span><span>  0.289 0.001</span><span style='text-decoration: underline;'>97</span><span> 
@@ -156,21 +157,23 @@
 #&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.963 -</span><span style='color: #BB0000;'>0.883</span><span>  1.79      | </span><span style='color: #BCBCBC;'>4</span><span> A4    0.035</span><span style='text-decoration: underline;'>5</span><span>  0.255 0.002</span><span style='text-decoration: underline;'>30</span><span> 
 #&gt; </span><span style='color: #BCBCBC;'>5</span><span>  1.25  -</span><span style='color: #BB0000;'>2.50</span><span>   0.188     | </span><span style='color: #BCBCBC;'>5</span><span> A5    0.005</span><span style='text-decoration: underline;'>28</span><span> 0.409 0.000</span><span style='text-decoration: underline;'>884</span><span>
 #&gt; </span><span style='color: #949494;'># … with 34 more rows</span><span></div><div class='input'><span class='co'># Reproduce Exhibit 9.2 in Greenacre (2010)...</span>
-<span class='no'>issp_ca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>1</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_u_text_repel</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_v_point</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>17</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text_repel</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Inertias are not balanced.</span></div><div class='img'><img src='issp_women-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Reproduce Exhibit 9.3 in Greenacre (2010)...</span>
-<span class='no'>issp_ca</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='conference.html'>confer_inertia</a></span>(<span class='st'>"rowprincipal"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>.name</span>)) +
-  <span class='fu'>theme_bw</span>() +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_u_point</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"darkgreen"</span>) +
-  <span class='fu'><a href='geom-biplot-point.html'>geom_v_point</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>17</span>) +
-  <span class='fu'><a href='geom-biplot-text.html'>geom_v_text_repel</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"brown"</span>)</div><div class='img'><img src='issp_women-2.png' alt='' width='700' height='433' /></div><div class='input'># Reproduce Exhibits 9.4 and 9.6 in Greenacre (2010)...
+<span class='va'>issp_ca</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"darkgreen"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_rows_text_repel</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"darkgreen"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-point.html'>geom_cols_point</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"brown"</span>, shape <span class='op'>=</span> <span class='fl'>17</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_cols_text_repel</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"brown"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Inertias are not balanced.</span></div><div class='img'><img src='issp_women-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Reproduce Exhibit 9.3 in Greenacre (2010)...</span>
+<span class='va'>issp_ca</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='st'>"rowprincipal"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-point.html'>geom_rows_point</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"darkgreen"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-point.html'>geom_cols_point</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"brown"</span>, shape <span class='op'>=</span> <span class='fl'>17</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='geom-biplot-text.html'>geom_cols_text_repel</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"brown"</span><span class='op'>)</span>
+</div><div class='img'><img src='issp_women-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Reproduce Exhibits 9.4 and 9.6 in Greenacre (2010)...</span>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -187,7 +190,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

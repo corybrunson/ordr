@@ -14,12 +14,6 @@
 #' calculate the MST. The result is formatted with position aesthetics readable
 #' by [ggplot2::geom_segment()].
 #'
-#' If any aesthetics of the form `.coord[0-9]+` are detected, then the lot of
-#' them are used to calculate distances/dissimilarities. These should not be
-#' assigend manually but generated using the convenience function [ord_aes()]
-#' (see the examples). Otherwise, `x` and `y` are used. Either way, `x` and `y`
-#' provide the position aesthetics.
-#'
 #' An MST calculated on `x` and `y` reflects the distances among the points in
 #' \eqn{X} in the reduced-dimension plane of the biplot. In contrast, one
 #' calculated on the full set of coordinates reflects distances in
@@ -33,55 +27,13 @@
 #'   
 
 #' @template biplot-layers
+#' @template biplot-ord-aes
 
-#' @name stat-biplot-spantree
 #' @inheritParams ggplot2::layer
 #' @param method Passed to [stats::dist()].
 #' @template param-stat
-#' @example inst/examples/euro-cmds-negate-spantree.r
-NULL
-
-#' @rdname stat-biplot-spantree
-#' @usage NULL
-#' @export
-StatSpantree <- ggproto(
-  "StatSpantree", Stat,
-  
-  required_aes = c("x", "y"),
-  
-  compute_group = function(data, scales,
-                           method = "euclidean") {
-    
-    # columns to use in distance/dissimilarity calculation
-    dis_cols <- grep("^\\.coord[0-9]+$", names(data))
-    if (length(dis_cols) == 0) dis_cols <- match(c("x", "y"), names(data))
-    #if (is.null(data$coord)) dis_cols <- c("x", "y") else dis_cols <- "coord"
-    
-    # distance/dissimilarity data
-    data_dis <- dist(data[, dis_cols, drop = FALSE], method = method)
-    # minimum spanning tree
-    data_mst <- vegan::spantree(data_dis)
-    # pairs of linked points
-    links <- cbind(2:attr(data_dis, "Size"), data_mst$kid)
-    links <- links[! is.na(links[, 1]) & ! is.na(links[, 2]), , drop = FALSE]
-    
-    # data frame of segment coordinates
-    segments <- data.frame(
-      x = data[links[, 1], "x"], xend = data[links[, 2], "x"],
-      y = data[links[, 1], "y"], yend = data[links[, 2], "y"]
-    )
-    
-    # bind other columns back in (by parents)
-    data <- merge(
-      segments, data, by = c("x", "y"),
-      all.x = TRUE, all.y = FALSE
-    )
-    
-    data
-  }
-)
-
-#' @rdname stat-biplot-spantree
+#' @family stat layers
+#' @example inst/examples/ex-stat-spantree-eurodist.r
 #' @export
 stat_spantree <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
@@ -106,27 +58,9 @@ stat_spantree <- function(
   )
 }
 
-#' @rdname stat-biplot-spantree
-#' @usage NULL
+#' @rdname biplot-stats
 #' @export
-StatUSpantree <- ggproto(
-  "StatUSpantree", StatSpantree,
-  
-  setup_data = setup_u_data
-)
-
-#' @rdname stat-biplot-spantree
-#' @usage NULL
-#' @export
-StatVSpantree <- ggproto(
-  "StatVSpantree", StatSpantree,
-  
-  setup_data = setup_v_data
-)
-
-#' @rdname stat-biplot-spantree
-#' @export
-stat_u_spantree <- function(
+stat_rows_spantree <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
   method = "euclidean",
   show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
@@ -135,7 +69,7 @@ stat_u_spantree <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = StatUSpantree,
+    stat = StatRowsSpantree,
     geom = geom, 
     position = position,
     show.legend = show.legend,
@@ -149,9 +83,9 @@ stat_u_spantree <- function(
   )
 }
 
-#' @rdname stat-biplot-spantree
+#' @rdname biplot-stats
 #' @export
-stat_v_spantree <- function(
+stat_cols_spantree <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
   method = "euclidean",
   show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
@@ -160,7 +94,7 @@ stat_v_spantree <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = StatVSpantree,
+    stat = StatColsSpantree,
     geom = geom, 
     position = position,
     show.legend = show.legend,
@@ -173,3 +107,60 @@ stat_v_spantree <- function(
     )
   )
 }
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatSpantree <- ggproto(
+  "StatSpantree", Stat,
+  
+  required_aes = c("x", "y"),
+  
+  compute_group = function(data, scales,
+                           method = "euclidean") {
+    ord_cols <- get_ord_aes(data)
+    
+    # distance/dissimilarity data
+    data_dis <- dist(data[, ord_cols, drop = FALSE], method = method)
+    # minimum spanning tree
+    data_mst <- vegan::spantree(data_dis)
+    # pairs of linked points
+    links <- cbind(2:attr(data_dis, "Size"), data_mst$kid)
+    links <- links[! is.na(links[, 1]) & ! is.na(links[, 2]), , drop = FALSE]
+    
+    # data frame of segment coordinates
+    segments <- data.frame(
+      x = data[links[, 1], "x"], xend = data[links[, 2], "x"],
+      y = data[links[, 1], "y"], yend = data[links[, 2], "y"]
+    )
+    
+    # bind other columns back in (by parents)
+    data <- merge(
+      segments, data, by = c("x", "y"),
+      all.x = TRUE, all.y = FALSE
+    )
+    
+    data
+  }
+)
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsSpantree <- ggproto(
+  "StatRowsSpantree", StatSpantree,
+  
+  setup_data = setup_rows_data
+)
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsSpantree <- ggproto(
+  "StatColsSpantree", StatSpantree,
+  
+  setup_data = setup_cols_data
+)
