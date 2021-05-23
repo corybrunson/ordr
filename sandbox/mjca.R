@@ -1,3 +1,6 @@
+data(UCBAdmissions)
+ca::mjca(UCBAdmissions)
+
 # http://www.carme-n.org/?sec=code2
 plot(ca::mjca(ca::wg93[,1:4], lambda = "indicator"))
 plot(ca::mjca(ca::wg93[,1:4], lambda = "Burt"))

@@ -7,9 +7,9 @@
 \alias{fortify.tbl_ord}
 \title{Tidiers for 'tbl_ord' objects}
 \usage{
-tidy.tbl_ord(x, ...)
+\method{tidy}{tbl_ord}(x, ...)
 
-glance.tbl_ord(x, ...)
+\method{glance}{tbl_ord}(x, ...)
 
 \method{fortify}{tbl_ord}(
   model,
