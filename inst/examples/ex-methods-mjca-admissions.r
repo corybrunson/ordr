@@ -36,10 +36,11 @@ admissions_mca %>%
   theme_bw() + theme_biplot() +
   geom_origin() +
   #geom_rows_point(stat = "unique") +
-  geom_cols_point(aes(color = .factor, shape = .factor)) +
+  geom_cols_point(aes(color = .factor, shape = .factor, size = .mass)) +
   geom_cols_text_repel(aes(label = .level, color = .factor),
                        show.legend = FALSE) +
   scale_color_brewer(palette = "Dark2") +
+  scale_size_area(guide = FALSE) +
   labs(color = "Factor level", shape = "Factor level")
 # column-principal biplot of factor levels
 admissions_mca %>%
@@ -48,8 +49,9 @@ admissions_mca %>%
   theme_bw() + theme_biplot() +
   geom_origin() +
   #geom_rows_point(stat = "unique") +
-  geom_cols_point(aes(color = .factor, shape = .factor)) +
+  geom_cols_point(aes(color = .factor, shape = .factor, size = .mass)) +
   geom_cols_text_repel(aes(label = .level, color = .factor),
                        show.legend = FALSE) +
   scale_color_brewer(palette = "Dark2") +
+  scale_size_area(guide = FALSE) +
   labs(color = "Factor level", shape = "Factor level")

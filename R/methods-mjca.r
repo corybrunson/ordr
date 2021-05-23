@@ -7,6 +7,7 @@
 #' @name methods-mjca
 #' @include ord-tbl.r
 #' @template param-methods
+#' @example inst/examples/ex-methods-mjca-admissions.r
 NULL
 
 #' @rdname methods-mjca
