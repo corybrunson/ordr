@@ -57,12 +57,6 @@ get_cols(admissions_mca)
 augment_ord(admissions_mca)
 # summarize artificial coordinates
 tidy(admissions_mca)
-# scree plot of inertia
-tidy(admissions_mca) \%>\%
-  ggplot(aes(x = .name, y = .inertia)) +
-  theme_bw() +
-  geom_col() +
-  labs(x = "", y = "Inertia")
 # scree plot of proportion of variance (inertia)
 tidy(admissions_mca) \%>\%
   ggplot(aes(x = .name, y = .prop_var)) +

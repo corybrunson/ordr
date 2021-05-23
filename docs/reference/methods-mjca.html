@@ -268,20 +268,14 @@ objects of class <code>"mjca"</code> from the <strong><a href='https://rdrr.io/p
 #&gt;   .name    .sv .inertia .prop_var
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span> Dim1  0.339   0.115      0.953 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> Dim2  0.075</span><span style='text-decoration: underline;'>5</span><span>  0.005</span><span style='text-decoration: underline;'>69</span><span>    0.047</span><span style='text-decoration: underline;'>2</span><span></div><div class='input'><span class='co'># scree plot of inertia</span>
-<span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>admissions_mca</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>.name</span>, y <span class='op'>=</span> <span class='va'>.inertia</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>geom_col</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>""</span>, y <span class='op'>=</span> <span class='st'>"Inertia"</span><span class='op'>)</span>
-</div><div class='img'><img src='methods-mjca-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># scree plot of proportion of variance (inertia)</span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> Dim2  0.075</span><span style='text-decoration: underline;'>5</span><span>  0.005</span><span style='text-decoration: underline;'>69</span><span>    0.047</span><span style='text-decoration: underline;'>2</span><span></div><div class='input'><span class='co'># scree plot of proportion of variance (inertia)</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>admissions_mca</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>.name</span>, y <span class='op'>=</span> <span class='va'>.prop_var</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>scale_y_continuous</span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'>scales</span><span class='fu'>::</span><span class='va'><a href='https://scales.r-lib.org/reference/label_percent.html'>percent</a></span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_col</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>""</span>, y <span class='op'>=</span> <span class='st'>"Proportion of inertia"</span><span class='op'>)</span>
-</div><div class='img'><img src='methods-mjca-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># fortification adds all above columns</span>
+</div><div class='img'><img src='methods-mjca-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># fortification adds all above columns</span>
 <span class='fu'>fortify</span><span class='op'>(</span><span class='va'>admissions_mca</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 4,536 x 9</span><span>
 #&gt;     Dim1  Dim2 .name    .mass   .dist      .inertia .matrix .factor .level
@@ -308,7 +302,7 @@ objects of class <code>"mjca"</code> from the <strong><a href='https://rdrr.io/p
   <span class='fu'>scale_color_brewer</span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Dark2"</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>scale_size_area</span><span class='op'>(</span>guide <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>labs</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"Factor level"</span>, shape <span class='op'>=</span> <span class='st'>"Factor level"</span><span class='op'>)</span>
-</div><div class='img'><img src='methods-mjca-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># column-principal biplot of factor levels</span>
+</div><div class='img'><img src='methods-mjca-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># column-principal biplot of factor levels</span>
 <span class='va'>admissions_mca</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='st'>"colprincipal"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
@@ -321,7 +315,7 @@ objects of class <code>"mjca"</code> from the <strong><a href='https://rdrr.io/p
   <span class='fu'>scale_color_brewer</span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Dark2"</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>scale_size_area</span><span class='op'>(</span>guide <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>labs</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"Factor level"</span>, shape <span class='op'>=</span> <span class='st'>"Factor level"</span><span class='op'>)</span>
-</div><div class='img'><img src='methods-mjca-4.png' alt='' width='700' height='433' /></div></span></pre>
+</div><div class='img'><img src='methods-mjca-3.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

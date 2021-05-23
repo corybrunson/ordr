@@ -6,7 +6,7 @@
 #' @name methods-ca
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/ex-methods-ca-smoke.r
+#' @example inst/examples/ex-methods-ca-haireye.r
 NULL
 
 #' @rdname methods-ca
