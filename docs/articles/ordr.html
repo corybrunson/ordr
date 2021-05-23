@@ -404,11 +404,12 @@
   <span class="fu"><a href="../reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">feature</span>, shape <span class="op">=</span> <span class="va">feature</span>, label <span class="op">=</span> <span class="va">.name</span><span class="op">)</span>, clip <span class="op">=</span> <span class="st">"off"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/theme_biplot.html">theme_biplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/geom_origin.html">geom_origin</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/biplot-geoms.html">geom_cols_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>size <span class="op">=</span> <span class="va">.mass</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/biplot-geoms.html">geom_cols_point</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>size <span class="op">=</span> <span class="va">.mass</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/biplot-geoms.html">geom_rows_text</a></span><span class="op">(</span>vjust <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, hjust <span class="op">=</span> <span class="fl">0</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/biplot-geoms.html">geom_cols_text</a></span><span class="op">(</span>vjust <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, hjust <span class="op">=</span> <span class="fl">0</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">scale_color_brewer</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"qual"</span>, palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">scale_size_area</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Correspondence analysis of subjects' hair &amp; eye colors"</span>,
           <span class="st">"Symmetric biplot"</span><span class="op">)</span></code></pre></div>
 <p><img src="ordr_files/figure-html/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;"></p>
@@ -419,6 +420,10 @@
 <li>The partial theme <code><a href="../reference/theme_biplot.html">theme_biplot()</a></code> removes several plot elements that are usually not important to biplots, most notably gridlines, while retaining other properties of the current theme.</li>
 <li>The layer <code><a href="../reference/geom_origin.html">geom_origin()</a></code> is one of two shortcuts for plotting elements commonly used in biplots, the other being <code><a href="../reference/geom_unit_circle.html">geom_unit_circle()</a></code>.</li>
 </ul>
+</div>
+<div id="session-info" class="section level2">
+<h2 class="hasAnchor">
+<a href="#session-info" class="anchor"></a>session info</h2>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; ─ Session info ───────────────────────────────────────────────────────────────</span>
@@ -497,7 +502,7 @@
 <span class="co">#&gt;  xfun           0.22       2021-03-11 [2] CRAN (R 4.0.2)                </span>
 <span class="co">#&gt;  yaml           2.2.1      2020-02-01 [2] CRAN (R 4.0.0)                </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; [1] /private/var/folders/pg/fjg8r4fj5v33zqmwptf9mfg80000gn/T/RtmpxQm37u/temp_libpath16592513cff1</span>
+<span class="co">#&gt; [1] /private/var/folders/pg/fjg8r4fj5v33zqmwptf9mfg80000gn/T/RtmpgwazL7/temp_libpath177fe620d3824</span>
 <span class="co">#&gt; [2] /Library/Frameworks/R.framework/Versions/4.0/Resources/library</span></code></pre></div>
 </div>
 <div class="footnotes">

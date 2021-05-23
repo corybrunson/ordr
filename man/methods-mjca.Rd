@@ -40,7 +40,7 @@ These methods extract data from, and attribute new data to,
 objects of class \code{"mjca"} from the \strong{\link[ca:mjca]{ca}} package.
 }
 \examples{
-# data on admissions and rejections from UC Berkeley
+# table of admissions and rejections from UC Berkeley
 class(UCBAdmissions)
 head(as.data.frame(UCBAdmissions))
 # perform multiple correspondence analysis

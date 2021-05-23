@@ -174,11 +174,12 @@ fortify(haireye_ca_ord) %>%
   ggbiplot(aes(color = feature, shape = feature, label = .name), clip = "off") +
   theme_biplot() +
   geom_origin() +
-  geom_rows_point(size = 2) +
-  geom_cols_point(size = 2) +
+  geom_rows_point(aes(size = .mass)) +
+  geom_cols_point(aes(size = .mass)) +
   geom_rows_text(vjust = -1, hjust = 0, size = 3) +
   geom_cols_text(vjust = -1, hjust = 0, size = 3) +
   scale_color_brewer(type = "qual", palette = "Dark2") +
+  scale_size_area() +
   ggtitle("Correspondence analysis of subjects' hair & eye colors",
           "Symmetric biplot")
 ```
@@ -189,6 +190,8 @@ Note a few conveniences:
 * By default, the aspect ratio is set to 1. This is essential for biplots, which rely on distances between markers and angles between vectors to convey information.
 * The partial theme `theme_biplot()` removes several plot elements that are usually not important to biplots, most notably gridlines, while retaining other properties of the current theme.
 * The layer `geom_origin()` is one of two shortcuts for plotting elements commonly used in biplots, the other being `geom_unit_circle()`.
+
+## session info
 
 ```{r}
 sessioninfo::session_info()

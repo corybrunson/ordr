@@ -1,4 +1,4 @@
-# data on admissions and rejections from UC Berkeley
+# table of admissions and rejections from UC Berkeley
 class(UCBAdmissions)
 head(as.data.frame(UCBAdmissions))
 # perform multiple correspondence analysis

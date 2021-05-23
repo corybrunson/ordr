@@ -34,12 +34,12 @@ recover_cols.mjca <- function(x) {
 
 #' @rdname methods-mjca
 #' @export
-recover_inertia.mjca <- function(x) x$sv[seq(x$nd)] ^ 2
+recover_inertia.mjca <- function(x) x$sv[seq(ncol(x$rowcoord))] ^ 2
 
 #' @rdname methods-mjca
 #' @export
 recover_conference.mjca <- function(x) {
-  # `ca::mjca()` always returns row and column standard coordinates
+  # `ca::mjca()` methods draw from row and column standard coordinates
   c(0, 0)
 }
 
@@ -87,6 +87,6 @@ augmentation_cols.mjca <- function(x){
 augmentation_coord.mjca <- function(x){
   tibble(
     .name = factor_coord(recover_coord(x)),
-    .sv = x$sv[seq(x$nd)]
+    .sv = x$sv[seq(ncol(x$rowcoord))]
   )
 }
