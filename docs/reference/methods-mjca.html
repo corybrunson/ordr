@@ -183,33 +183,37 @@ objects of class <code>"mjca"</code> from the <strong><a href='https://rdrr.io/p
 <span class='va'>UCBAdmissions</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ca</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ca/man/mjca.html'>mjca</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='co'># augment profiles with names, masses, distances, and inertias</span>
+  <span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>admissions_mca</span>
 </div><div class='output co'>#&gt; # A tbl_ord of class 'mjca': (4526 x 2) x (10 x 2)'
 #&gt; # 2 coordinates: Dim1 and Dim2
 #&gt; # 
-#&gt; # Rows (standard): [ 4526 x 2 | 0 ]
-#&gt;    Dim1  Dim2 | 
-#&gt;               | 
-#&gt; <span style='color: #BCBCBC;'>1</span><span>  3.33  2.68 | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  3.33  2.68 | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.33  2.68 | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  3.33  2.68 | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  3.33  2.68 | 
-#&gt; 
+#&gt; # Rows (standard): [ 4526 x 2 | 4 ]
+#&gt;    Dim1  Dim2 |   .name    .mass   .dist    .inertia
+#&gt;               |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  3.33  2.68 | </span><span style='color: #BCBCBC;'>1</span><span> 1     0.000</span><span style='text-decoration: underline;'>221</span><span> 0.006</span><span style='text-decoration: underline;'>72</span><span>     9.97</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-9</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  3.33  2.68 | </span><span style='color: #BCBCBC;'>2</span><span> 2     0.000</span><span style='text-decoration: underline;'>221</span><span> 0.006</span><span style='text-decoration: underline;'>72</span><span>     9.97</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-9</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.33  2.68 | </span><span style='color: #BCBCBC;'>3</span><span> 3     0.000</span><span style='text-decoration: underline;'>221</span><span> 0.006</span><span style='text-decoration: underline;'>72</span><span>     9.97</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-9</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  3.33  2.68 | </span><span style='color: #BCBCBC;'>4</span><span> 4     0.000</span><span style='text-decoration: underline;'>221</span><span> 0.006</span><span style='text-decoration: underline;'>72</span><span>     9.97</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-9</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  3.33  2.68 | </span><span style='color: #BCBCBC;'>5</span><span> 5     0.000</span><span style='text-decoration: underline;'>221</span><span> 0.006</span><span style='text-decoration: underline;'>72</span><span>     9.97</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-9</span><span>
+#&gt; </span><span style='color: #949494;'># … with 4,521 more rows</span><span>
 #&gt; # 
-#&gt; # Columns (standard): [ 10 x 2 | 0 ]
-#&gt;      Dim1    Dim2 | 
-#&gt;                   | 
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>  1.08   0.975  | 
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> -</span><span style='color: #BB0000;'>0.681</span><span> -</span><span style='color: #BB0000;'>0.617</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> -</span><span style='color: #BB0000;'>1.18</span><span>   0.786  | 
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>  0.802 -</span><span style='color: #BB0000;'>0.536</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>  1.51   0.167  | 
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  1.69  -</span><span style='color: #BB0000;'>0.596</span><span>  | 
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> -</span><span style='color: #BB0000;'>0.797</span><span>  1.72   | 
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> -</span><span style='color: #BB0000;'>0.323</span><span>  0.088</span><span style='text-decoration: underline;'>6</span><span> | 
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> -</span><span style='color: #BB0000;'>1.13</span><span>   0.908  | 
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> -</span><span style='color: #BB0000;'>1.05</span><span>  -</span><span style='color: #BB0000;'>2.78</span><span>   | </div><div class='input'><span class='co'># summarize ordination</span>
+#&gt; # Columns (standard): [ 10 x 2 | 6 ]
+#&gt;      Dim1    Dim2 |    .name .factor .level  .mass .dist
+#&gt;                   |    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>  1.08   0.975  | </span><span style='color: #BCBCBC;'> 1</span><span> Admi… Admit   Admit… 0.129  0.792
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> -</span><span style='color: #BB0000;'>0.681</span><span> -</span><span style='color: #BB0000;'>0.617</span><span>  | </span><span style='color: #BCBCBC;'> 2</span><span> Admi… Admit   Rejec… 0.204  0.502
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> -</span><span style='color: #BB0000;'>1.18</span><span>   0.786  | </span><span style='color: #BCBCBC;'> 3</span><span> Gend… Gender  Female 0.135  0.784
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>  0.802 -</span><span style='color: #BB0000;'>0.536</span><span>  | </span><span style='color: #BCBCBC;'> 4</span><span> Gend… Gender  Male   0.198  0.534
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>  1.51   0.167  | </span><span style='color: #BCBCBC;'> 5</span><span> Dept… Dept    A      0.068</span><span style='text-decoration: underline;'>7</span><span> 1.22 
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  1.69  -</span><span style='color: #BB0000;'>0.596</span><span>  | </span><span style='color: #BCBCBC;'> 6</span><span> Dept… Dept    B      0.043</span><span style='text-decoration: underline;'>1</span><span> 1.58 
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> -</span><span style='color: #BB0000;'>0.797</span><span>  1.72   | </span><span style='color: #BCBCBC;'> 7</span><span> Dept… Dept    C      0.067</span><span style='text-decoration: underline;'>6</span><span> 1.18 
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> -</span><span style='color: #BB0000;'>0.323</span><span>  0.088</span><span style='text-decoration: underline;'>6</span><span> | </span><span style='color: #BCBCBC;'> 8</span><span> Dept… Dept    D      0.058</span><span style='text-decoration: underline;'>3</span><span> 1.26 
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> -</span><span style='color: #BB0000;'>1.13</span><span>   0.908  | </span><span style='color: #BCBCBC;'> 9</span><span> Dept… Dept    E      0.043</span><span style='text-decoration: underline;'>0</span><span> 1.54 
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> -</span><span style='color: #BB0000;'>1.05</span><span>  -</span><span style='color: #BB0000;'>2.78</span><span>   | </span><span style='color: #BCBCBC;'>10</span><span> Dept… Dept    F      0.052</span><span style='text-decoration: underline;'>6</span><span> 1.39 
+#&gt; </span><span style='color: #949494;'># … with 1 more variable:</span><span>
+#&gt; </span><span style='color: #949494;'>#   .inertia &lt;dbl&gt;</span><span></div><div class='input'><span class='co'># summarize ordination</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/glance.html'>glance</a></span><span class='op'>(</span><span class='va'>admissions_mca</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 7</span><span>
 #&gt;    rank n.row n.col inertia prop.var.1 prop.var.2 class
@@ -233,36 +237,7 @@ objects of class <code>"mjca"</code> from the <strong><a href='https://rdrr.io/p
 #&gt; Dept:C         -0.7971633  1.71719606
 #&gt; Dept:D         -0.3230636  0.08856383
 #&gt; Dept:E         -1.1324440  0.90837076
-#&gt; Dept:F         -1.0481066 -2.77962052</div><div class='input'><span class='co'># augment profiles with names, masses, distances, and inertias</span>
-<span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='va'>admissions_mca</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; # A tbl_ord of class 'mjca': (4526 x 2) x (10 x 2)'
-#&gt; # 2 coordinates: Dim1 and Dim2
-#&gt; # 
-#&gt; # Rows (standard): [ 4526 x 2 | 4 ]
-#&gt;    Dim1  Dim2 |   .name    .mass   .dist    .inertia
-#&gt;               |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  3.33  2.68 | </span><span style='color: #BCBCBC;'>1</span><span> 1     0.000</span><span style='text-decoration: underline;'>221</span><span> 0.006</span><span style='text-decoration: underline;'>72</span><span>     9.97</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-9</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  3.33  2.68 | </span><span style='color: #BCBCBC;'>2</span><span> 2     0.000</span><span style='text-decoration: underline;'>221</span><span> 0.006</span><span style='text-decoration: underline;'>72</span><span>     9.97</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-9</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  3.33  2.68 | </span><span style='color: #BCBCBC;'>3</span><span> 3     0.000</span><span style='text-decoration: underline;'>221</span><span> 0.006</span><span style='text-decoration: underline;'>72</span><span>     9.97</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-9</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  3.33  2.68 | </span><span style='color: #BCBCBC;'>4</span><span> 4     0.000</span><span style='text-decoration: underline;'>221</span><span> 0.006</span><span style='text-decoration: underline;'>72</span><span>     9.97</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-9</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  3.33  2.68 | </span><span style='color: #BCBCBC;'>5</span><span> 5     0.000</span><span style='text-decoration: underline;'>221</span><span> 0.006</span><span style='text-decoration: underline;'>72</span><span>     9.97</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-9</span><span>
-#&gt; </span><span style='color: #949494;'># … with 4,521 more rows</span><span>
-#&gt; # 
-#&gt; # Columns (standard): [ 10 x 2 | 6 ]
-#&gt;      Dim1    Dim2 |    .name .factor .level  .mass .dist
-#&gt;                   |    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>  1.08   0.975  | </span><span style='color: #BCBCBC;'> 1</span><span> Admi… Admit   Admit… 0.129  0.792
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> -</span><span style='color: #BB0000;'>0.681</span><span> -</span><span style='color: #BB0000;'>0.617</span><span>  | </span><span style='color: #BCBCBC;'> 2</span><span> Admi… Admit   Rejec… 0.204  0.502
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> -</span><span style='color: #BB0000;'>1.18</span><span>   0.786  | </span><span style='color: #BCBCBC;'> 3</span><span> Gend… Gender  Female 0.135  0.784
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>  0.802 -</span><span style='color: #BB0000;'>0.536</span><span>  | </span><span style='color: #BCBCBC;'> 4</span><span> Gend… Gender  Male   0.198  0.534
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>  1.51   0.167  | </span><span style='color: #BCBCBC;'> 5</span><span> Dept… Dept    A      0.068</span><span style='text-decoration: underline;'>7</span><span> 1.22 
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  1.69  -</span><span style='color: #BB0000;'>0.596</span><span>  | </span><span style='color: #BCBCBC;'> 6</span><span> Dept… Dept    B      0.043</span><span style='text-decoration: underline;'>1</span><span> 1.58 
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> -</span><span style='color: #BB0000;'>0.797</span><span>  1.72   | </span><span style='color: #BCBCBC;'> 7</span><span> Dept… Dept    C      0.067</span><span style='text-decoration: underline;'>6</span><span> 1.18 
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> -</span><span style='color: #BB0000;'>0.323</span><span>  0.088</span><span style='text-decoration: underline;'>6</span><span> | </span><span style='color: #BCBCBC;'> 8</span><span> Dept… Dept    D      0.058</span><span style='text-decoration: underline;'>3</span><span> 1.26 
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> -</span><span style='color: #BB0000;'>1.13</span><span>   0.908  | </span><span style='color: #BCBCBC;'> 9</span><span> Dept… Dept    E      0.043</span><span style='text-decoration: underline;'>0</span><span> 1.54 
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> -</span><span style='color: #BB0000;'>1.05</span><span>  -</span><span style='color: #BB0000;'>2.78</span><span>   | </span><span style='color: #BCBCBC;'>10</span><span> Dept… Dept    F      0.052</span><span style='text-decoration: underline;'>6</span><span> 1.39 
-#&gt; </span><span style='color: #949494;'># … with 1 more variable:</span><span>
-#&gt; </span><span style='color: #949494;'>#   .inertia &lt;dbl&gt;</span><span></div><div class='input'><span class='co'># summarize artificial coordinates</span>
+#&gt; Dept:F         -1.0481066 -2.77962052</div><div class='input'><span class='co'># summarize artificial coordinates</span>
 <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>admissions_mca</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 4</span><span>
 #&gt;   .name    .sv .inertia .prop_var

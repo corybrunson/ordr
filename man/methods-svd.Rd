@@ -62,12 +62,11 @@ tidy(spend_svd) \%>\%
   theme_bw() +
   geom_col() +
   labs(x = "", y = "Inertia")
-# fortification automatically augments coordinates
-fortify(spend_svd)
 # initial matrix decomposition confers no inertia to coordinates
 get_conference(spend_svd)
 # row-principal biplot, allowing radiating text to exceed plotting window
 spend_svd \%>\%
+  augment_ord() \%>\%
   confer_inertia(1) \%>\%
   ggbiplot(aes(label = .name), clip = "off",
            sec.axes = "cols", scale.factor = 50) +

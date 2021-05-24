@@ -14,7 +14,7 @@ glance(iris_pca)
 head(get_rows(iris_pca))
 get_cols(iris_pca)
 # augment measurement coordinates with names and scaling parameters
-augment_ord(iris_pca)
+(iris_pca <- augment_ord(iris_pca))
 # summarize principal components
 tidy(iris_pca)
 # scree plot of inertia

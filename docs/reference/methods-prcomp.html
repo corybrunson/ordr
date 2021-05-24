@@ -243,7 +243,7 @@ objects of class <code>"prcomp"</code> as returned by <code><a href='https://rdr
 #&gt; Sepal.Width  -0.2693474 -0.92329566 -0.2443818 -0.1235096
 #&gt; Petal.Length  0.5804131 -0.02449161 -0.1421264 -0.8014492
 #&gt; Petal.Width   0.5648565 -0.06694199 -0.6342727  0.5235971</div><div class='input'><span class='co'># augment measurements with names and scaling parameters</span>
-<span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='va'>iris_pca</span><span class='op'>)</span>
+<span class='op'>(</span><span class='va'>iris_pca</span> <span class='op'>&lt;-</span> <span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='va'>iris_pca</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
 #&gt; # 4 coordinates: PC1, PC2, ..., PC4
 #&gt; # 
@@ -295,6 +295,7 @@ objects of class <code>"prcomp"</code> as returned by <code><a href='https://rdr
 #&gt; </span><span style='color: #BCBCBC;'>10</span><span> -</span><span style='color: #BB0000;'>2.18</span><span>  0.467   0.253  -</span><span style='color: #BB0000;'>0.039</span><span style='color: #BB0000;text-decoration: underline;'>8</span><span>  setosa  rows    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
 #&gt; </span><span style='color: #949494;'># … with 144 more rows</span><span></div><div class='input'><span class='co'># row-principal prediction biplot</span>
 <span class='va'>iris_pca</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span>prediction <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>scale_color_brewer</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"qual"</span>, palette <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span>

@@ -11,7 +11,7 @@ ggbiplot <- function(
   ...
 ) {
   # fortify `ordination` if necessary
-  ordination <- fortify(ordination, coord.only = FALSE)
+  ordination <- fortify(ordination)
   
   # augment `mapping`, if necessary, with default coordinates
   mapping <- ordinate_aes(ordination, mapping)

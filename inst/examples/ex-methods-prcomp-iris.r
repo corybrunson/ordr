@@ -14,7 +14,7 @@ glance(iris_pca)
 head(get_rows(iris_pca))
 get_cols(iris_pca)
 # augment measurements with names and scaling parameters
-augment_ord(iris_pca)
+(iris_pca <- augment_ord(iris_pca))
 # summarize principal components
 tidy(iris_pca)
 # scree plot of proportion of variance (inertia)
@@ -28,6 +28,7 @@ tidy(iris_pca) %>%
 fortify(iris_pca)
 # row-principal prediction biplot
 iris_pca %>%
+  augment_ord() %>%
   ggbiplot(prediction = TRUE) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +

@@ -78,6 +78,7 @@ tidy(air_nipals) \%>\%
 fortify(air_nipals)
 # row-principal biplot with monthly ellipses
 air_nipals \%>\%
+  augment_ord() \%>\%
   ggbiplot() +
   theme_bw() +
   geom_cols_vector(color = "#444444") +

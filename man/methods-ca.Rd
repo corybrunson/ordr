@@ -54,7 +54,7 @@ glance(haireye_ca)
 get_rows(haireye_ca)
 get_cols(haireye_ca)
 # augment profiles with names, masses, distances, and inertias
-augment_ord(haireye_ca)
+(haireye_ca <- augment_ord(haireye_ca))
 # summarize artificial coordinates
 tidy(haireye_ca)
 # scree plot of inertia

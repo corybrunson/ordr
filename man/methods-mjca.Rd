@@ -47,14 +47,14 @@ head(as.data.frame(UCBAdmissions))
 UCBAdmissions \%>\%
   ca::mjca() \%>\%
   as_tbl_ord() \%>\%
+  # augment profiles with names, masses, distances, and inertias
+  augment_ord() \%>\%
   print() -> admissions_mca
 # summarize ordination
 glance(admissions_mca)
 # recover row and column profiles
 head(get_rows(admissions_mca))
 get_cols(admissions_mca)
-# augment profiles with names, masses, distances, and inertias
-augment_ord(admissions_mca)
 # summarize artificial coordinates
 tidy(admissions_mca)
 # scree plot of proportion of variance (inertia)

@@ -99,6 +99,7 @@ In either case, the stat layer returns a data frame with position aesthetics
 USPersonalExpenditure \%>\%
   prcomp() \%>\%
   as_tbl_ord() \%>\%
+  augment_ord() \%>\%
   # allow radiating text to exceed plotting window
   ggbiplot(aes(label = .name), clip = "off",
            sec.axes = "cols", scale.factor = 50) +
@@ -115,6 +116,7 @@ USPersonalExpenditure \%>\%
 USPersonalExpenditure \%>\%
   prcomp(center = FALSE) \%>\%
   as_tbl_ord() \%>\%
+  augment_ord() \%>\%
   confer_inertia(c(.5, .5)) \%>\%
   # allow radiating text to exceed plotting window
   ggbiplot(aes(label = .name), clip = "off") +

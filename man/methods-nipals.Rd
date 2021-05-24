@@ -81,6 +81,7 @@ tidy(air_nipals) \%>\%
 fortify(air_nipals)
 # row-principal biplot with monthly ellipses
 air_nipals \%>\%
+  augment_ord() \%>\%
   confer_inertia("rows") \%>\%
   ggbiplot() +
   theme_bw() +

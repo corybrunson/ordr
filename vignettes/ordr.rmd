@@ -157,19 +157,22 @@ ggplot(tidy(haireye_ca_ord), aes(x = .name, y = .inertia)) +
           "Decomposition of inertia")
 ```
 
-While `ggplot2::fortify()` is rarely called by users, is plays a special role in **ordr** by converting a 'tbl_ord' object to a 'tbl_df' object. To do this, the fortifier row-binds the two matrix factor tibbles and adds an additional `.matrix` column to remember which was which:
+While `ggplot2::fortify()` may rarely be called directly, is plays a special role in **ordr** by converting a 'tbl_ord' object to a 'tbl_df' object. To do this, the fortifier row-binds the two matrix factor tibbles and adds an additional `.matrix` column to remember which was which:
 
 ```{r fortify}
 fortify(haireye_ca_ord)
 ```
 
-In this case, the row and column annotations have the same names; `NA`s are introduced when an annotation is present for one matrix factor but not the other.
+This fortifier will also preserve any row and column annotations, so it can be composed with `augment_ord()` or with the row- and column-specific verbs.
+`NA`s are introduced when an annotation is present for one matrix factor but not the other.
 
 The `.matrix` column also plays a key role in `ggbiplot()`: The row- and column-specific ploy layers, which take the form `geom_rows_*()` or `stat_cols_*()`, for example, use this column to subset the data internally.
 This enables the layered grammar of graphics of **ggplot2** to apply separately to the two matrix factors and their annotation. Though note that it can also be applied to the entire fortified data frame using conventional plot layers, as below when the `.matrix` column is used to distinguish the colors and shapes of the row and column profile markers:
 
 ```{r}
-fortify(haireye_ca_ord) %>%
+haireye_ca_ord %>%
+  augment_ord() %>%
+  fortify() %>%
   transform(feature = ifelse(.matrix == "rows", "Hair", "Eye")) %>%
   ggbiplot(aes(color = feature, shape = feature, label = .name), clip = "off") +
   theme_biplot() +

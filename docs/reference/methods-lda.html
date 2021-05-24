@@ -288,16 +288,20 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
   <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>""</span>, y <span class='op'>=</span> <span class='st'>"Proportion of inertia"</span><span class='op'>)</span>
 </div><div class='img'><img src='methods-lda-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># fortification (without supplement)</span>
 <span class='fu'>fortify</span><span class='op'>(</span><span class='va'>iris_lda</span>, .supplement <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 7 x 7</span><span>
-#&gt;      LD1     LD2 .name        .prior .counts .grouping  .matrix
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  7.61   0.215  setosa        0.333      50 setosa     rows   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.83</span><span>  -</span><span style='color: #BB0000;'>0.728</span><span>  versicolor    0.333      50 versicolor rows   
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>5.78</span><span>   0.513  virginica     0.333      50 virginica  rows   
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.829  0.024</span><span style='text-decoration: underline;'>1</span><span> Sepal.Length </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>         cols   
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  1.53   2.16   Sepal.Width  </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>         cols   
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span> -</span><span style='color: #BB0000;'>2.20</span><span>  -</span><span style='color: #BB0000;'>0.932</span><span>  Petal.Length </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>         cols   
-#&gt; </span><span style='color: #BCBCBC;'>7</span><span> -</span><span style='color: #BB0000;'>2.81</span><span>   2.84   Petal.Width  </span><span style='color: #BB0000;'>NA</span><span>          </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>         cols   </div><div class='input'><span class='co'># unstandardized coefficient LDA biplot (centroids only)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 157 x 3</span><span>
+#&gt;      LD1    LD2 .matrix
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>  7.61  0.215 rows   
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> -</span><span style='color: #BB0000;'>1.83</span><span> -</span><span style='color: #BB0000;'>0.728</span><span> rows   
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> -</span><span style='color: #BB0000;'>5.78</span><span>  0.513 rows   
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>  8.06  0.300 rows   
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>  7.13 -</span><span style='color: #BB0000;'>0.787</span><span> rows   
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>  7.49 -</span><span style='color: #BB0000;'>0.265</span><span> rows   
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>  6.81 -</span><span style='color: #BB0000;'>0.671</span><span> rows   
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>  8.13  0.514 rows   
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>  7.70  1.46  rows   
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>  7.21  0.356 rows   
+#&gt; </span><span style='color: #949494;'># … with 147 more rows</span><span></div><div class='input'><span class='co'># unstandardized coefficient LDA biplot (centroids only)</span>
 <span class='va'>iris_lda</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='dplyr-verbs.html'>mutate_rows</a></span><span class='op'>(</span>species <span class='op'>=</span> <span class='va'>.grouping</span><span class='op'>)</span> <span class='op'>%&gt;%</span>

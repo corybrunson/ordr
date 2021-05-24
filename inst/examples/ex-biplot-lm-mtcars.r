@@ -4,20 +4,20 @@
 # performance measure along the artificial axes is visualized by projecting the
 # regression coefficients onto the ordination biplot.
 
+# scaled principal components analysis of vehicle specs
+mtcars_specs_pca <- ordinate(
+  mtcars, cols = c(cyl, disp, hp, drat, wt, vs, carb),
+  model = ~ princomp(., cor = TRUE)
+)
 # data frame of vehicle performance measures
 mtcars %>%
   subset(select = c(mpg, qsec)) %>%
   as.matrix() %>%
   print() -> mtcars_perf
-# scaled principal components analysis of vehicle specs
-mtcars %>%
-  subset(select = c(cyl, disp, hp, drat, wt, vs, carb)) %>%
-  princomp(cor = TRUE) %>%
-  as_tbl_ord() %>%
-  print() -> mtcars_specs_pca
 # regress performance measures on principal components
 lm(mtcars_perf ~ get_rows(mtcars_specs_pca)) %>%
   as_tbl_ord() %>%
+  augment_ord() %>%
   print() -> mtcars_pca_lm
 # regression biplot
 ggbiplot(mtcars_specs_pca, aes(label = .name),
@@ -34,10 +34,12 @@ mtcars %>%
   proxy::dist(method = "cosine") %>%
   cmdscale_ord() %>%
   as_tbl_ord() %>%
+  augment_ord() %>%
   print() -> mtcars_specs_cmds
 # regress performance measures on principal coordinates
 lm(mtcars_perf ~ get_rows(mtcars_specs_cmds)) %>%
   as_tbl_ord() %>%
+  augment_ord() %>%
   print() -> mtcars_cmds_lm
 # regression biplot
 ggbiplot(mtcars_specs_cmds, aes(label = .name),

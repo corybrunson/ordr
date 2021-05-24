@@ -247,7 +247,7 @@ objects of class <code>"kmeans"</code> as returned by <code><a href='https://rdr
 #&gt;    rank n.row n.col inertia prop.var.1 prop.var.2 class 
 #&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;lgl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> 
 #&gt; </span><span style='color: #BCBCBC;'>1</span><span>     3   150     3      </span><span style='color: #BB0000;'>NA</span><span> </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>         kmeans</div><div class='input'><span class='co'># augment everything with names, observations with cluster assignment</span>
-<span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='va'>iris_km_ord</span><span class='op'>)</span>
+<span class='op'>(</span><span class='va'>iris_km_ord</span> <span class='op'>&lt;-</span> <span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='va'>iris_km_ord</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; # A tbl_ord of class 'kmeans': (150 x 3) x (4 x 3)'
 #&gt; # 3 coordinates: 1, 2, 3
 #&gt; # 

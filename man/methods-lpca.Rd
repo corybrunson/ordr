@@ -99,6 +99,7 @@ augment_ord(finches_lsvd)
 tidy(finches_lsvd)
 # biplot (inertia is not defined and cannot be conferred)
 finches_lsvd \%>\%
+  augment_ord() \%>\%
   ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 100) +
   theme_biplot() +
   geom_rows_vector(alpha = .5, color = "darkred") +
@@ -125,6 +126,7 @@ augment_ord(finches_lpca)
 tidy(finches_lpca)
 # biplot (inertia is not defined and cannot be conferred)
 finches_lpca \%>\%
+  augment_ord() \%>\%
   ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 50) +
   theme_biplot() +
   geom_rows_vector(alpha = .5, color = "darkred") +
@@ -153,6 +155,7 @@ augment_ord(finches_clpca)
 tidy(finches_clpca)
 # biplot (inertia is not defined and cannot be conferred)
 finches_clpca \%>\%
+  augment_ord() \%>\%
   ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 50) +
   theme_biplot() +
   geom_rows_vector(alpha = .5, color = "darkred") +

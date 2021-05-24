@@ -260,33 +260,34 @@ aesthetics (required aesthetics are in bold):</p><ul>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># compute log-ratio analysis of Freestone primary class composition measurements</span>
 <span class='va'>glass</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>SiO2</span>, <span class='va'>Al2O3</span>, <span class='va'>CaO</span>, <span class='va'>FeO</span>, <span class='va'>MgO</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='lra-ord.html'>lra</a></span><span class='op'>(</span>compositional <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='ordinate.html'>ordinate</a></span><span class='op'>(</span>cols <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>SiO2</span>, <span class='va'>Al2O3</span>, <span class='va'>CaO</span>, <span class='va'>FeO</span>, <span class='va'>MgO</span><span class='op'>)</span>,
+           model <span class='op'>=</span> <span class='va'>lra</span>, compositional <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='st'>"rows"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='dplyr-verbs.html'>cbind_rows</a></span><span class='op'>(</span><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>glass</span>, <span class='va'>Site</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-&gt;</span> <span class='va'>glass_lra</span>
 </div><div class='output co'>#&gt; # A tbl_ord of class 'lra': (68 x 4) x (5 x 4)'
 #&gt; # 4 coordinates: LRSV1, LRSV2, ..., LRSV4
 #&gt; # 
-#&gt; # Rows (principal): [ 68 x 4 | 1 ]
-#&gt;    LRSV1  LRSV2     LRSV3 ... |   Site        
-#&gt;                               |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.092</span><span style='text-decoration: underline;'>5</span><span> 0.092</span><span style='text-decoration: underline;'>9</span><span>  0.015</span><span style='text-decoration: underline;'>6</span><span>       | </span><span style='color: #BCBCBC;'>1</span><span> Bet Eli'ezer
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 0.090</span><span style='text-decoration: underline;'>5</span><span> 0.059</span><span style='text-decoration: underline;'>1</span><span> -</span><span style='color: #BB0000;'>0.043</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>   ... | </span><span style='color: #BCBCBC;'>2</span><span> Bet Eli'ezer
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.084</span><span style='text-decoration: underline;'>4</span><span> 0.033</span><span style='text-decoration: underline;'>3</span><span> -</span><span style='color: #BB0000;'>0.000</span><span style='color: #BB0000;text-decoration: underline;'>492</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> Bet Eli'ezer
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.064</span><span style='text-decoration: underline;'>7</span><span> 0.021</span><span style='text-decoration: underline;'>1</span><span>  0.026</span><span style='text-decoration: underline;'>7</span><span>       | </span><span style='color: #BCBCBC;'>4</span><span> Bet Eli'ezer
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.063</span><span style='text-decoration: underline;'>5</span><span> 0.025</span><span style='text-decoration: underline;'>7</span><span>  0.023</span><span style='text-decoration: underline;'>9</span><span>       | </span><span style='color: #BCBCBC;'>5</span><span> Bet Eli'ezer
-#&gt; </span><span style='color: #949494;'># … with 63 more rows</span><span>
+#&gt; # Rows (principal): [ 68 x 4 | 11 ]
+#&gt;    LRSV1  LRSV2     LRSV3 ... |   Site     Anal  Context Form   TiO2
+#&gt;                               |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 0.092</span><span style='text-decoration: underline;'>5</span><span> 0.092</span><span style='text-decoration: underline;'>9</span><span>  0.015</span><span style='text-decoration: underline;'>6</span><span>       | </span><span style='color: #BCBCBC;'>1</span><span> Bet Eli… 1     L14.B1… Chunk </span><span style='color: #BB0000;'>NA</span><span>   
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 0.090</span><span style='text-decoration: underline;'>5</span><span> 0.059</span><span style='text-decoration: underline;'>1</span><span> -</span><span style='color: #BB0000;'>0.043</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span>   ... | </span><span style='color: #BCBCBC;'>2</span><span> Bet Eli… 2     L14.B1… Chunk  0.16
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 0.084</span><span style='text-decoration: underline;'>4</span><span> 0.033</span><span style='text-decoration: underline;'>3</span><span> -</span><span style='color: #BB0000;'>0.000</span><span style='color: #BB0000;text-decoration: underline;'>492</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> Bet Eli… 3     L14.B1… Chunk  0.13
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> 0.064</span><span style='text-decoration: underline;'>7</span><span> 0.021</span><span style='text-decoration: underline;'>1</span><span>  0.026</span><span style='text-decoration: underline;'>7</span><span>       | </span><span style='color: #BCBCBC;'>4</span><span> Bet Eli… 4     L14.B1… Chunk </span><span style='color: #BB0000;'>NA</span><span>   
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> 0.063</span><span style='text-decoration: underline;'>5</span><span> 0.025</span><span style='text-decoration: underline;'>7</span><span>  0.023</span><span style='text-decoration: underline;'>9</span><span>       | </span><span style='color: #BCBCBC;'>5</span><span> Bet Eli… 5     L14.B1… Chunk </span><span style='color: #BB0000;'>NA</span><span>   
+#&gt; </span><span style='color: #949494;'># … with 63 more rows, and 6 more</span><span>
+#&gt; </span><span style='color: #949494;'>#   variables: MnO &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   Na2O &lt;dbl&gt;, K2O &lt;dbl&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   P2O5 &lt;dbl&gt;, Cl &lt;dbl&gt;, SO3 &lt;dbl&gt;</span><span>
 #&gt; # 
-#&gt; # Columns (standard): [ 5 x 4 | 0 ]
-#&gt;      LRSV1  LRSV2  LRSV3 ... | 
-#&gt;                              | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.005</span><span style='color: #BB0000;text-decoration: underline;'>48</span><span>  0.338  0.237     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  4.15    -</span><span style='color: #BB0000;'>0.714</span><span> -</span><span style='color: #BB0000;'>2.50</span><span>  ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.517</span><span>   -</span><span style='color: #BB0000;'>2.95</span><span>  -</span><span style='color: #BB0000;'>0.126</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.553    2.23  -</span><span style='color: #BB0000;'>9.57</span><span>      | 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>5.61</span><span>     0.790 -</span><span style='color: #BB0000;'>4.47</span><span>      | </div><div class='input'><span class='co'># row-principal biplot with ordinate-wise standard deviations</span>
+#&gt; # Columns (standard): [ 5 x 4 | 1 ]
+#&gt;      LRSV1  LRSV2  LRSV3 ... |   .name
+#&gt;                              |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.005</span><span style='color: #BB0000;text-decoration: underline;'>48</span><span>  0.338  0.237     | </span><span style='color: #BCBCBC;'>1</span><span> SiO2 
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  4.15    -</span><span style='color: #BB0000;'>0.714</span><span> -</span><span style='color: #BB0000;'>2.50</span><span>  ... | </span><span style='color: #BCBCBC;'>2</span><span> Al2O3
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.517</span><span>   -</span><span style='color: #BB0000;'>2.95</span><span>  -</span><span style='color: #BB0000;'>0.126</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> CaO  
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.553    2.23  -</span><span style='color: #BB0000;'>9.57</span><span>      | </span><span style='color: #BCBCBC;'>4</span><span> FeO  
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>5.61</span><span>     0.790 -</span><span style='color: #BB0000;'>4.47</span><span>      | </span><span style='color: #BCBCBC;'>5</span><span> MgO  </div><div class='input'><span class='co'># row-principal biplot with ordinate-wise standard deviations</span>
 <span class='va'>glass_lra</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>color <span class='op'>=</span> <span class='va'>Site</span><span class='op'>)</span>, sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>.05</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='theme_biplot.html'>theme_biplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>

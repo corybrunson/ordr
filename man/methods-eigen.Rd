@@ -53,6 +53,7 @@ igraph::plot.igraph(
 karate \%>\%
   igraph::as_adjacency_matrix(sparse = FALSE) \%>\%
   eigen_ord() \%>\% as_tbl_ord() \%>\%
+  augment_ord() \%>\%
   mutate_rows(
     faction = igraph::vertex_attr(karate, "Faction"),
     name = igraph::vertex_attr(karate, "name"),
