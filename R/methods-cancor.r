@@ -18,57 +18,65 @@ as_tbl_ord.cancor_ord <- as_tbl_ord_default
 #' @rdname methods-cancor
 #' @export
 recover_rows.cancor_ord <- function(x) {
-  
-}
-
-#' @rdname methods-cancor
-#' @export
-recover_cols.cmds_ord <- function(x) recover_dims_cmds(x, "cols")
-
-#' @rdname methods-cancor
-#' @export
-recover_inertia.cmds_ord <- function(x) x$eig[seq(ncol(x$points))] ^ 2
-
-#' @rdname methods-cancor
-#' @export
-recover_coord.cmds_ord <- function(x) paste0("PCo", 1:ncol(x$points))
-
-#' @rdname methods-cancor
-#' @export
-recover_conference.cmds_ord <- function(x) {
-  # `stats::cmdscale()` returns the approximate square root
-  c(.5, .5)
-}
-
-#' @rdname methods-cancor
-#' @export
-augmentation_rows.cmds_ord <- function(x) {
-  .name <- rownames(x$points)
-  res <- if (is.null(.name)) {
-    tibble_pole(nrow(x$x))
-  } else {
-    tibble(.name = .name)
-  }
+  res <- x$xcoef[, seq_along(x$cor)]
+  colnames(res) <- recover_coord(x)
   res
 }
 
 #' @rdname methods-cancor
 #' @export
-augmentation_cols.cmds_ord <- function(x) {
-  .name <- rownames(x$points)
-  res <- if (is.null(.name)) {
-    tibble_pole(ncol(x$x))
-  } else {
-    tibble(.name = .name)
-  }
+recover_cols.cancor_ord <- function(x) {
+  res <- x$ycoef[, seq_along(x$cor)]
+  colnames(res) <- recover_coord(x)
   res
 }
 
 #' @rdname methods-cancor
 #' @export
-augmentation_coord.cmds_ord <- function(x) {
+recover_inertia.cancor_ord <- function(x) x$cor^2
+
+#' @rdname methods-cancor
+#' @export
+recover_coord.cancor_ord <- function(x) paste0("CanCor", seq_along(x$cor))
+
+#' @rdname methods-cancor
+#' @export
+recover_conference.cancor_ord <- function(x) {
+  # `stats::cancor()` returns canonical weights, i.e. standard coefficients
+  c(0, 0)
+}
+
+#' @rdname methods-cancor
+#' @export
+augmentation_rows.cancor_ord <- function(x) {
+  .name <- rownames(x$xcoef)
+  res <- if (is.null(.name)) {
+    tibble_pole(nrow(x$xcoef))
+  } else {
+    tibble(.name = .name)
+  }
+  res$.center <- unname(x$xcenter)
+  res
+}
+
+#' @rdname methods-cancor
+#' @export
+augmentation_cols.cancor_ord <- function(x) {
+  .name <- rownames(x$ycoef)
+  res <- if (is.null(.name)) {
+    tibble_pole(nrow(x$ycoef))
+  } else {
+    tibble(.name = .name)
+  }
+  res$.center <- unname(x$ycenter)
+  res
+}
+
+#' @rdname methods-cancor
+#' @export
+augmentation_coord.cancor_ord <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),
-    .eig = x$eig[1:ncol(x$points)]
+    .cor = x$cor
   )
 }

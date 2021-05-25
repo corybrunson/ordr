@@ -11,74 +11,98 @@
 #' @example inst/examples/ex-methods-candisc-.r
 NULL
 
-#' @rdname methods-ca
+#' @rdname methods-candisc
 #' @export
 as_tbl_ord.cancor <- as_tbl_ord_default
 
-#' @rdname methods-ca
+#' @rdname methods-candisc
 #' @export
-recover_rows.ca <- function(x) x$rowcoord
+recover_rows.cancor <- function(x) {
+  res <- cov(x$X) %*% x$coef$X
+  colnames(res) <- recover_coord(x)
+  res
+}
 
-#' @rdname methods-ca
+#' @rdname methods-candisc
 #' @export
-recover_cols.ca <- function(x) x$colcoord
+recover_cols.cancor <- function(x) {
+  res <- cov(x$Y) %*% x$coef$Y
+  colnames(res) <- recover_coord(x)
+  res
+}
 
-#' @rdname methods-ca
+#' @rdname methods-candisc
 #' @export
-recover_inertia.ca <- function(x) x$sv ^ 2
+recover_inertia.cancor <- function(x) x$cancor^2
 
-#' @rdname methods-ca
+#' @rdname methods-candisc
 #' @export
-recover_conference.ca <- function(x) {
-  # `ca::ca()` always returns row and column standard coordinates
+recover_coord.cancor <- function(x) paste0("can", seq_along(x$cancor))
+
+#' @rdname methods-candisc
+#' @export
+recover_conference.cancor <- function(x) {
+  # `candisc::cancor()` returns canonical weights, i.e. standard coefficients
   c(0, 0)
 }
 
-#' @rdname methods-ca
+#' @rdname methods-candisc
 #' @export
-recover_coord.ca <- function(x) {
-  colnames(x$rowcoord)
-}
-
-#' @rdname methods-ca
-#' @export
-augmentation_rows.ca <- function(x) {
-  .name <- rownames(x$rowcoord)
+augmentation_rows.cancor <- function(x) {
+  .name <- x$names$X
   res <- if (is.null(.name)) {
-    tibble_pole(nrow(x$rowcoord))
+    tibble_pole(nrow(x$coef$X))
   } else {
     tibble(.name = .name)
   }
-  dplyr::bind_cols(
-    res,
-    .mass = x$rowmass,
-    .dist = x$rowdist,
-    .inertia = x$rowinertia
-  )
+  # case scores as supplementary points
+  res_sup <- if (is.null(x$names$row.names)) {
+    tibble_pole(nrow(x$scores$X))
+  } else {
+    tibble(.name = x$names$row.names)
+  }
+  res_sup$.weight <- x$weights
+  # supplement flag
+  res$.supplement <- FALSE
+  res_sup$.supplement <- TRUE
+  as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
-#' @rdname methods-ca
+#' @rdname methods-candisc
 #' @export
-augmentation_cols.ca <- function(x){
-  .name <- rownames(x$colcoord)
+augmentation_cols.cancor <- function(x) {
+  .name <- x$names$Y
   res <- if (is.null(.name)) {
-    tibble_pole(nrow(x$colcoord))
+    tibble_pole(nrow(x$coef$Y))
   } else {
     tibble(.name = .name)
   }
-  dplyr::bind_cols(
-    res,
-    .mass = x$colmass,
-    .dist = x$coldist,
-    .inertia = x$colinertia
-  )
+  # case scores as supplementary points
+  res_sup <- if (is.null(x$names$row.names)) {
+    tibble_pole(nrow(x$scores$Y))
+  } else {
+    tibble(.name = x$names$row.names)
+  }
+  res_sup$.weight <- x$weights
+  # supplement flag
+  res$.supplement <- FALSE
+  res_sup$.supplement <- TRUE
+  as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
-#' @rdname methods-ca
+#' @rdname methods-candisc
 #' @export
-augmentation_coord.ca <- function(x){
+augmentation_coord.cancor <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),
-    .sv = x$sv
+    .cancor = x$cancor
   )
 }
+
+#' @rdname methods-candisc
+#' @export
+supplementation_rows.cancor <- function(x) x$scores$X
+
+#' @rdname methods-candisc
+#' @export
+supplementation_cols.cancor <- function(x) x$scores$Y

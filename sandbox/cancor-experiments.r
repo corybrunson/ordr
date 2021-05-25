@@ -66,6 +66,7 @@ y <- oec
 xcenter = TRUE
 ycenter = TRUE
 prefix = c("Xcan", "Ycan")
+use <- "complete.obs"
 
 X <- as.matrix(x)
 Y <- as.matrix(y)
@@ -88,7 +89,7 @@ colnames(res$ycoef) <- paste(prefix[2], 1:ndim, sep = "")
 scores <- candisc:::can.scores(X, Y, res$xcoef, res$ycoef)
 colnames(scores$xscores) <- paste(prefix[1], 1:ndim, sep = "")
 colnames(scores$yscores) <- paste(prefix[2], 1:ndim, sep = "")
-structure <- can.structure(X, Y, scores, use = use)
+structure <- candisc:::can.structure(X, Y, scores, use = use)
 result <- list(
   cancor = res$cor,
   names = list(
@@ -114,3 +115,34 @@ result <- list(
 )
 class(result) <- "cancor"
 return(result)
+
+# Greenacre (1984)
+# A = xcoef, B = ycoef
+# (4.4.8)
+solve(Cxx) %*% Cxy %*% ycoef[, seq(2L)]
+xcoef %*% diag(res$cor)
+# (4.4.9)
+solve(Cyy) %*% t(Cxy) %*% xcoef
+ycoef[, seq(2L)] %*% diag(res$cor)
+
+# ter Braak (1990)
+
+# recover the correlation matrix
+Cxy
+cov(X) %*% res$xcoef %*% diag(res$cor) %*% t(res$ycoef) %*% t(cov(Y))
+
+symm_sqrt <- function(x) {
+  e <- eigen(x)
+  e$vectors %*% diag(sqrt(e$values)) %*% t(e$vectors)
+}
+B_ <- symm_sqrt(Cxx) %*% xcoef %*% diag(res$cor)
+C_ <- symm_sqrt(Cyy) %*% ycoef
+B_ %*% t(C_[, -3L]) / Cxy
+
+svd(solve(symm_sqrt(Cxx)) %*% Cxy %*% solve(symm_sqrt(Cyy)))
+xcoef %*% diag(res$cor) %*% t(ycoef[, -3L])
+
+# unexplained factor five
+B__ <- Cxx %*% xcoef %*% diag(res$cor)
+C__ <- Cyy %*% ycoef
+B__ %*% t(C__[, -3L]) / Cxy
