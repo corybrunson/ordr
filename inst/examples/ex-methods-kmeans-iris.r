@@ -23,7 +23,7 @@ iris %>%
 # summarize ordination
 glance(iris_km_ord)
 # augment everything with names, observations with cluster assignment
-augment_ord(iris_km_ord)
+(iris_km_ord <- augment_ord(iris_km_ord))
 # summarize clusters with standard deviation
 iris_km_ord %>%
   tidy() %>%

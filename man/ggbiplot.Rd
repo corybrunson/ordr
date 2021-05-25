@@ -8,6 +8,7 @@
 ggbiplot(
   ordination = NULL,
   mapping = aes(x = 1, y = 2),
+  prediction = FALSE,
   xlim = NULL,
   ylim = NULL,
   expand = TRUE,
@@ -28,6 +29,11 @@ ord_aes(ordination, ...)
 \item{mapping}{List of default aesthetic mappings to use for the biplot. The
 default assigns the first two coordinates to the aesthetics \code{x} and \code{y}.
 Other assignments must be supplied in each layer added to the plot.}
+
+\item{prediction}{Logical; whether to build a prediction biplot rather than
+an interpolation biplot (the default). \code{TRUE} requires that \code{x} and \code{y} are
+mapped to shared coordinates, that no other shared coordinates are mapped
+to, and inertia is conferred entirely onto one matrix factor.}
 
 \item{xlim}{Limits for the x and y axes.}
 
@@ -136,20 +142,20 @@ iris_pca \%>\%
 # performance measure along the artificial axes is visualized by projecting the
 # regression coefficients onto the ordination biplot.
 
+# scaled principal components analysis of vehicle specs
+mtcars_specs_pca <- ordinate(
+  mtcars, cols = c(cyl, disp, hp, drat, wt, vs, carb),
+  model = ~ princomp(., cor = TRUE)
+)
 # data frame of vehicle performance measures
 mtcars \%>\%
   subset(select = c(mpg, qsec)) \%>\%
   as.matrix() \%>\%
   print() -> mtcars_perf
-# scaled principal components analysis of vehicle specs
-mtcars \%>\%
-  subset(select = c(cyl, disp, hp, drat, wt, vs, carb)) \%>\%
-  princomp(cor = TRUE) \%>\%
-  as_tbl_ord() \%>\%
-  print() -> mtcars_specs_pca
 # regress performance measures on principal components
 lm(mtcars_perf ~ get_rows(mtcars_specs_pca)) \%>\%
   as_tbl_ord() \%>\%
+  augment_ord() \%>\%
   print() -> mtcars_pca_lm
 # regression biplot
 ggbiplot(mtcars_specs_pca, aes(label = .name),
@@ -166,10 +172,12 @@ mtcars \%>\%
   proxy::dist(method = "cosine") \%>\%
   cmdscale_ord() \%>\%
   as_tbl_ord() \%>\%
+  augment_ord() \%>\%
   print() -> mtcars_specs_cmds
 # regress performance measures on principal coordinates
 lm(mtcars_perf ~ get_rows(mtcars_specs_cmds)) \%>\%
   as_tbl_ord() \%>\%
+  augment_ord() \%>\%
   print() -> mtcars_cmds_lm
 # regression biplot
 ggbiplot(mtcars_specs_cmds, aes(label = .name),

@@ -92,8 +92,9 @@ points for rows and arrows for columns.
 # principal components analysis of overt & chemical diabetes test values
 heplots::Diabetes[, seq(5L)] \%>\%
   princomp(cor = TRUE) \%>\%
-  bind_cols_rows(group = heplots::Diabetes$group) \%>\%
   as_tbl_ord() \%>\%
+  cbind_rows(group = heplots::Diabetes$group) \%>\%
+  augment_ord() \%>\%
   print() -> diabetes_pca
 # note that column standard coordinates are unit vectors
 rowSums(get_cols(diabetes_pca)^2)
@@ -107,9 +108,11 @@ diabetes_pca \%>\%
 }
 \seealso{
 Other geom layers: 
+\code{\link{geom_axis_label}()},
 \code{\link{geom_axis_text}()},
 \code{\link{geom_axis_ticks}()},
 \code{\link{geom_axis}()},
+\code{\link{geom_isolines_text}()},
 \code{\link{geom_isolines}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},

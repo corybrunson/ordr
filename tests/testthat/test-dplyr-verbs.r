@@ -7,21 +7,21 @@ test_that("`pull_*()` returns a vector", {
   expect_equal(pull_cols(pca, .name), names(iris)[-5])
 })
 
-test_that("`bind_cols_*()` appends a column only of the correct length", {
+test_that("`cbind_*()` appends a column only of the correct length", {
   expect_equal(
-    ncol(fortify(bind_cols_rows(pca, iris[, 5, drop = FALSE]), .matrix = "rows")),
+    ncol(fortify(cbind_rows(pca, iris[, 5, drop = FALSE]), .matrix = "rows")),
     4 + 1 + 1
   )
   expect_equal(
-    ncol(fortify(bind_cols_rows(pca, species = iris[[5]]), .matrix = "rows")),
+    ncol(fortify(cbind_rows(pca, species = iris[[5]]), .matrix = "rows")),
     4 + 1 + 1
   )
-  expect_error(bind_cols_rows(pca, letter = letters),
+  expect_error(cbind_rows(pca, letter = letters),
                regexp = "length|recycle",
                class = "vctrs_error_incompatible_size")
 })
 
-pca <- bind_cols_rows(pca, iris[, 5, drop = FALSE])
+pca <- cbind_rows(pca, iris[, 5, drop = FALSE])
 
 test_that("`rename_*()` applies to both augmented and annotated variables", {
   expect_named(annotation_rows(rename_rows(pca, species = Species)), "species")

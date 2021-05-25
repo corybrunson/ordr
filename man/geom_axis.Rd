@@ -108,6 +108,7 @@ diabetes_lda \%>\%
   geom_cols_axis(color = "#888888") +
   geom_cols_axis_ticks(num = 8L) +
   geom_cols_axis_text(size = 2.5, num = 8L, label_dodge = .2) +
+  geom_cols_axis_label(aes(label = .name)) +
   ggtitle(
     "LDA of Reaven & Miller diabetes groups",
     "Row-standard biplot of standardized LDA"
@@ -136,8 +137,10 @@ diabetes_lda \%>\%
 }
 \seealso{
 Other geom layers: 
+\code{\link{geom_axis_label}()},
 \code{\link{geom_axis_text}()},
 \code{\link{geom_axis_ticks}()},
+\code{\link{geom_isolines_text}()},
 \code{\link{geom_isolines}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},

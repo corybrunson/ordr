@@ -101,20 +101,20 @@ transmute_cols <- function(.data, ...) {
   transmute_factor(.data, ..., .matrix = "cols")
 }
 
-bind_cols_factor <- function(.data, ..., .matrix) {
+cbind_factor <- function(.data, ..., .matrix) {
   ann_fac <- annotation_factor(.data, .matrix = .matrix)
   att <- if (nrow(ann_fac) == 0L) tibble(...) else bind_cols(ann_fac, ...)
   set_annotation_factor(.data, att, .matrix = .matrix)
 }
 #' @rdname dplyr-verbs
 #' @export
-bind_cols_rows <- function(.data, ...) {
-  bind_cols_factor(.data, ..., .matrix = "rows")
+cbind_rows <- function(.data, ...) {
+  cbind_factor(.data, ..., .matrix = "rows")
 }
 #' @rdname dplyr-verbs
 #' @export
-bind_cols_cols <- function(.data, ...) {
-  bind_cols_factor(.data, ..., .matrix = "cols")
+cbind_cols <- function(.data, ...) {
+  cbind_factor(.data, ..., .matrix = "cols")
 }
 
 left_join_factor <- function(.data, ..., .matrix) {

@@ -16,6 +16,7 @@ diabetes_lda %>%
   geom_cols_axis(color = "#888888") +
   geom_cols_axis_ticks(num = 8L) +
   geom_cols_axis_text(size = 2.5, num = 8L, label_dodge = .2) +
+  geom_cols_axis_label(aes(label = .name)) +
   ggtitle(
     "LDA of Reaven & Miller diabetes groups",
     "Row-standard biplot of standardized LDA"

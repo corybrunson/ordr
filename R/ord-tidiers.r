@@ -34,11 +34,10 @@
 #'   `augmentation_*()`, and `annotation_*()`.
 
 #'
-#' If augmentation or any annotation is included, then the tibble is assigned a
-#' `"coordinates"` attribute whose value is obtained via [get_coord()]. This
-#' facilitates some downstream functionality that relies on more than those
-#' coordinates used as position aesthetics in a biplot, in particular
-#' [stat_spantree()].
+#' The tibble is assigned a `"coordinates"` attribute whose value is obtained
+#' via [get_coord()]. This facilitates some downstream functionality that relies
+#' on more than those coordinates used as position aesthetics in a biplot, in
+#' particular [stat_spantree()].
 
 #' @name tidiers
 #' @include ord-accessors.r
@@ -48,7 +47,6 @@
 #' @template param-matrix
 #' @param .supplement Logical; whether to include
 #'   [supplementary][supplementation] points.
-#' @param coord.only Logical; whether to exclude augmentation and annotation.
 #' @seealso [augmentation] methods that must interface with tidiers.
 NULL
 
@@ -72,6 +70,9 @@ generics::glance
 #' @rdname tidiers
 #' @export
 glance.tbl_ord <- function(x, ...) {
+  all.var <- recover_inertia(as_tbl_ord(x))
+  tot.var <- sum(all.var)
+  var.na <- identical(all.var, NA_real_)
   tibble::tibble(
     # number of artificial coordinates
     rank = dim(x),
@@ -79,8 +80,11 @@ glance.tbl_ord <- function(x, ...) {
     n.row = nrow(get_rows(x)),
     n.col = ncol(get_rows(x)),
     # -+- clarify whether this is original inertia or decomposed inertia -+-
-    inertia = sum(recover_inertia(as_tbl_ord(x))),
-    # original ordination object class
+    inertia = tot.var,
+    # proportions of variance/inertia in first and second artificial dimensions
+    prop.var.1 = if (var.na) NA else all.var[[1L]] / tot.var,
+    prop.var.2 = if (var.na) NA else all.var[[2L]] / tot.var,
+    # original ordination object (first) class
     class = setdiff(class(x), "tbl_ord")[[1L]]
   )
 }
@@ -89,57 +93,36 @@ glance.tbl_ord <- function(x, ...) {
 #' @export
 fortify.tbl_ord <- function(
   model, data, ...,
-  .matrix = "dims", .supplement = TRUE,
-  coord.only = FALSE
+  .matrix = "dims", .supplement = TRUE
 ) {
   .matrix <- match_factor(.matrix)
   
   if (.matrix == "dims" || .matrix == "rows") {
     u <- as_tibble(get_rows(model))
-    if (! coord.only) {
-      u <- dplyr::bind_cols(
-        u,
-        augment_annotation(model, "rows")
-      )
-    }
+    u <- dplyr::bind_cols(u, annotation_factor(model, "rows"))
     if (! .supplement && ".supplement" %in% names(u)) {
       u <- subset(u, ! .supplement)
       u$.supplement <- NULL
     }
-    if (! coord.only) {
-      u$.matrix <- "rows"
-    }
+    u$.matrix <- "rows"
   }
   if (.matrix == "dims" || .matrix == "cols") {
     v <- as_tibble(get_cols(model))
-    if (! coord.only) {
-      v <- dplyr::bind_cols(
-        v,
-        augment_annotation(model, "cols")
-      )
-    }
+    v <- dplyr::bind_cols(v, annotation_factor(model, "cols"))
     if (! .supplement && ".supplement" %in% names(v)) {
       v <- subset(v, ! .supplement)
       v$.supplement <- NULL
     }
-    if (! coord.only) {
-      v$.matrix <- "cols"
-    }
+    v$.matrix <- "cols"
   }
   
   tbl <- switch(
     .matrix,
     rows = u,
     cols = v,
-    dims = if (coord.only) {
-      as_tibble(as.data.frame(rbind(u, v)))
-    } else {
-      as_tibble(as.data.frame(dplyr::bind_rows(u, v)))
-    }
+    dims = as_tibble(as.data.frame(dplyr::bind_rows(u, v)))
   )
   
-  if (! coord.only) {
-    attr(tbl, "coordinates") <- get_coord(model)
-  }
+  attr(tbl, "coordinates") <- get_coord(model)
   tbl
 }

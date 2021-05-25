@@ -1,10 +1,8 @@
 # compute log-ratio analysis of Freestone primary class composition measurements
 glass %>%
-  dplyr::select(SiO2, Al2O3, CaO, FeO, MgO) %>%
-  lra(compositional = TRUE) %>%
-  as_tbl_ord() %>%
+  ordinate(cols = c(SiO2, Al2O3, CaO, FeO, MgO),
+           model = lra, compositional = TRUE) %>%
   confer_inertia("rows") %>%
-  bind_cols_rows(dplyr::select(glass, Site)) %>%
   print() -> glass_lra
 # row-principal biplot with ordinate-wise standard deviations
 glass_lra %>%

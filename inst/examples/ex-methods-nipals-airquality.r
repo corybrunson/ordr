@@ -15,7 +15,7 @@ air_quality[, seq(4L)] %>%
 glance(air_nipals)
 # bind dates to observation coordinates
 air_nipals %>%
-  bind_cols_rows(air_quality[, 5L, drop = FALSE]) %>%
+  cbind_rows(air_quality[, 5L, drop = FALSE]) %>%
   mutate_rows(missingness = apply(is.na(air_quality[, 1:4]), 1L, any)) ->
   air_nipals
 # by default, no inertia is conferred
@@ -38,6 +38,7 @@ tidy(air_nipals) %>%
 fortify(air_nipals)
 # row-principal biplot with monthly ellipses
 air_nipals %>%
+  augment_ord() %>%
   confer_inertia("rows") %>%
   ggbiplot() +
   theme_bw() +

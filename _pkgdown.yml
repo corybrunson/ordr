@@ -15,6 +15,7 @@ reference:
     Additional data sets used to illustrate ordination techniques
   contents:
   - '`glass`'
+  - '`qswur_usa`'
 - title: "Tidy ordination"
   desc: >
     The 'tbl_ord' class wrapper, with methods for accessing components and for

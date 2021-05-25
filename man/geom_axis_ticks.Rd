@@ -9,11 +9,9 @@ geom_axis_ticks(
   data = NULL,
   stat = "identity",
   position = "identity",
-  axes = NULL,
-  calibrate = FALSE,
-  family_fun = NULL,
+  subset = NULL,
   by = NULL,
-  num = 6L,
+  num = NULL,
   tick_length = 0.025,
   ...,
   na.rm = FALSE,
@@ -48,17 +46,14 @@ layer, as a string.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{axes}{Indices of axes for which to render elements.}
+\item{subset}{Indices or logical vector of rows or columns for which to
+render elements.}
 
-\item{calibrate}{Logical; whether to calibrate axis scales for inner product
-interpretability.}
+\item{by}{Intervals between elements or number of elements; specify only
+one.}
 
-\item{family_fun}{A family function, or a character string naming one, to
-transform the values along the axis at which to render elements.}
-
-\item{by}{Interval length between elements, in the units of the ordination.}
-
-\item{num}{Integer; the number of tick marks on each axis.}
+\item{num}{Intervals between elements or number of elements; specify only
+one.}
 
 \item{tick_length}{Numeric; the length of the tick marks, as a proportion of
 the minimum of the plot width and height.}
@@ -107,6 +102,8 @@ are in bold):
 \item \code{linetype}
 \item \code{size}
 \item \code{group}
+\item \code{center} (for un-scaling)
+\item \code{scale} (for un-scaling)
 }
 }
 
@@ -129,6 +126,7 @@ diabetes_lda \%>\%
   geom_cols_axis(color = "#888888") +
   geom_cols_axis_ticks(num = 8L) +
   geom_cols_axis_text(size = 2.5, num = 8L, label_dodge = .2) +
+  geom_cols_axis_label(aes(label = .name)) +
   ggtitle(
     "LDA of Reaven & Miller diabetes groups",
     "Row-standard biplot of standardized LDA"
@@ -157,8 +155,10 @@ diabetes_lda \%>\%
 }
 \seealso{
 Other geom layers: 
+\code{\link{geom_axis_label}()},
 \code{\link{geom_axis_text}()},
 \code{\link{geom_axis}()},
+\code{\link{geom_isolines_text}()},
 \code{\link{geom_isolines}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},

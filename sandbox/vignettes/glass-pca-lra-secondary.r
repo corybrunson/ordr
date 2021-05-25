@@ -16,7 +16,7 @@ levantine_glass %>%
   princomp(cor = TRUE) %>%
   as_tbl_ord() %>%
   augment() %>%
-  bind_cols_rows(dplyr::select(levantine_glass, Site, Type)) %>%
+  cbind_rows(dplyr::select(levantine_glass, Site, Type)) %>%
   print() -> glass_pca
 ggbiplot(glass_pca) +
   geom_rows_point(aes(shape = Site, color = Type))
@@ -26,7 +26,7 @@ levantine_glass %>%
   lra(compositional = TRUE) %>%
   as_tbl_ord() %>%
   confer_inertia("rows") %>%
-  bind_cols_rows(dplyr::select(levantine_glass, Site, Type)) %>%
+  cbind_rows(dplyr::select(levantine_glass, Site, Type)) %>%
   print() -> glass_lra
 ggbiplot(glass_lra, sec.axes = "cols", scale.factor = .05) +
   geom_rows_point(aes(shape = Site, color = Type)) +
@@ -39,7 +39,7 @@ levantine_glass %>%
   lra(compositional = TRUE) %>%
   as_tbl_ord() %>%
   confer_inertia("rows") %>%
-  bind_cols_rows(dplyr::select(levantine_glass, Site, Type)) %>%
+  cbind_rows(dplyr::select(levantine_glass, Site, Type)) %>%
   print() -> glass_lra
 ggbiplot(glass_lra, sec.axes = "cols", scale.factor = .05) +
   geom_rows_point(aes(shape = Site, color = Type)) +

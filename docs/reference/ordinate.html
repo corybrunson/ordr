@@ -43,7 +43,7 @@
 <meta property="og:description" content="This is a convenience function to fit an ordination model to a
 specified subset of columns of a data frame and augment the tbl_ord object
 with both its intrinsic diagnostics (via [augment_ord()]) and any
-additional columns of the data frame (via [bind_cols_rows()])." />
+additional columns of the data frame (via [cbind_rows()])." />
 
 
 
@@ -88,7 +88,22 @@ additional columns of the data frame (via [bind_cols_rows()])." />
   </a>
 </li>
 <li>
+  <a href="../articles/ordr.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/cmds-variables.html">multidimensional scaling of variables</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -115,10 +130,10 @@ additional columns of the data frame (via [bind_cols_rows()])." />
     <p>This is a convenience function to fit an ordination model to a
 specified subset of columns of a data frame and augment the tbl_ord object
 with both its intrinsic diagnostics (via <code>[augment_ord()]</code>) and any
-additional columns of the data frame (via <code>[bind_cols_rows()]</code>).</p>
+additional columns of the data frame (via <code>[cbind_rows()]</code>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ordinate</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>cols</span>, <span class='va'>model</span>, augment <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>ordinate</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>cols</span>, <span class='va'>model</span>, <span class='va'>augment</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,7 +157,8 @@ function and other arguments are explicit, which will be evaluated with
     <tr>
       <th>augment</th>
       <td><p>&lt;<code>tidy-select</code>&gt; Columns of <code>data</code> to
-augment to the row data of the ordination.</p></td>
+augment to the row data of the ordination. If missing, all columns not
+included in <code>cols</code> will be augmented.</p></td>
     </tr>
     <tr>
       <th>...</th>

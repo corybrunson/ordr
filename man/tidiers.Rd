@@ -11,14 +11,7 @@
 
 \method{glance}{tbl_ord}(x, ...)
 
-\method{fortify}{tbl_ord}(
-  model,
-  data,
-  ...,
-  .matrix = "dims",
-  .supplement = TRUE,
-  coord.only = FALSE
-)
+\method{fortify}{tbl_ord}(model, data, ..., .matrix = "dims", .supplement = TRUE)
 }
 \arguments{
 \item{x, model}{An object of class '\link{tbl_ord}'.}
@@ -33,8 +26,6 @@ standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 
 \item{.supplement}{Logical; whether to include
 \link[=supplementation]{supplementary} points.}
-
-\item{coord.only}{Logical; whether to exclude augmentation and annotation.}
 }
 \description{
 These functions return \link[tibble:tibble]{tibbles} that summarize
@@ -63,11 +54,10 @@ a tibble whose fields are obtained, in order, via \verb{get_*()},
 \verb{augmentation_*()}, and \verb{annotation_*()}.
 }
 
-If augmentation or any annotation is included, then the tibble is assigned a
-\code{"coordinates"} attribute whose value is obtained via \code{\link[=get_coord]{get_coord()}}. This
-facilitates some downstream functionality that relies on more than those
-coordinates used as position aesthetics in a biplot, in particular
-\code{\link[=stat_spantree]{stat_spantree()}}.
+The tibble is assigned a \code{"coordinates"} attribute whose value is obtained
+via \code{\link[=get_coord]{get_coord()}}. This facilitates some downstream functionality that relies
+on more than those coordinates used as position aesthetics in a biplot, in
+particular \code{\link[=stat_spantree]{stat_spantree()}}.
 }
 \seealso{
 \link{augmentation} methods that must interface with tidiers.
