@@ -78,7 +78,7 @@ glance.tbl_ord <- function(x, ...) {
     rank = dim(x),
     # numbers of rows and of columns of original data
     n.row = nrow(get_rows(x)),
-    n.col = ncol(get_rows(x)),
+    n.col = nrow(get_cols(x)),
     # -+- clarify whether this is original inertia or decomposed inertia -+-
     inertia = tot.var,
     # proportions of variance/inertia in first and second artificial dimensions
