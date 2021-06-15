@@ -10,13 +10,15 @@ as_tbl_ord_default <- function(x) {
 
 tbl_ord_factors <- c(
   rows = "rows", columns = "cols", cols = "cols", dims = "dims",
+  f = "rows", g = "cols", fg = "dims",
+  `F` = "rows", G = "cols", FG = "dims",
   u = "rows", v = "cols", uv = "dims",
   U = "rows", V = "cols", UV = "dims",
   left = "rows", right = "cols",
   cases = "rows", variables = "cols",
   subjects = "rows", measures = "cols",
   scores = "rows", loadings = "cols",
-  rowprincipal = "rows", colprincipal = "cols",
+  rowprincipal = "rows", colprincipal = "cols", columnprincipal = "cols",
   both = "dims", symmetric = "dims"
 )
 match_factor <- function(x) {
