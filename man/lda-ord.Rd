@@ -58,8 +58,8 @@ lda_ord(x, ...)
   }
 
 \item{data}{
-    An optional data frame, list or environment from which variables
-    specified in \code{formula} are preferentially to be taken.
+    Data frame from which variables specified in \code{formula} are
+    preferentially to be taken.
   }
 
 \item{subset}{
