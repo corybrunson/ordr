@@ -13,7 +13,6 @@
 #' 
 #' | Original function                  | Hide params | Add names | New class |
 #' | :--------------------------------- | :---------- | :-------- | :-------- |
-#' | [base::eigen()]                    | Yes         | Yes       | Yes       |
 #' | [base::svd()]                      | Yes         | Yes       | Yes       |
 #' | [stats::cmdscale()]                | Yes         | No        | Yes       |
 #' | [logisticPCA::logisticSVD()]       | No          | Yes       | No        |
@@ -25,7 +24,6 @@
 #' @include ord-tbl.r
 #' @importFrom stats cmdscale
 #' @importFrom logisticPCA logisticPCA logisticSVD convexLogisticPCA
-#' @inheritParams base::eigen
 #' @inheritParams base::svd
 #' @inheritParams stats::cmdscale
 #' @inheritParams logisticPCA::logisticPCA
@@ -34,16 +32,6 @@
 #' @inheritParams nipals::nipals
 #' @param ... Additional parameters passed to original functions.
 NULL
-
-#' @rdname wrap-ord
-#' @export
-eigen_ord <- function(x, symmetric = isSymmetric.matrix(x)) {
-  res <- eigen(x = x, only.values = FALSE)
-  rownames(res$vectors) <- rownames(x)
-  colnames(res$vectors) <- paste0("EV", seq_along(res$values))
-  class(res) <- "eigen_ord"
-  res
-}
 
 #' @rdname wrap-ord
 #' @export

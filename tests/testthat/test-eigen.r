@@ -1,8 +1,8 @@
-context("eigendecomposition, class 'eigen_ord'")
+context("tidier for eigendecomposition, class 'eigen'")
 
-fit_eigen <- eigen_ord(cbind(c(1,-1), c(-1,1)))
+fit_eigen <- eigen(cbind(c(1,-1), c(-1,1)))
 
-test_that("`as_tbl_ord()` coerces 'eigen_ord' objects", {
-  expect_equal(class(fit_eigen), "eigen_ord")
-  expect_true(valid_tbl_ord(as_tbl_ord(fit_eigen)))
+test_that("`tidy()` method formats 'eigen' objects", {
+  expect_equal(tidy(fit_eigen, matrix = "lambda")$inertia, fit_eigen$values)
+  expect_equal(tidy(fit_eigen)$value, as.vector(fit_eigen$vectors))
 })

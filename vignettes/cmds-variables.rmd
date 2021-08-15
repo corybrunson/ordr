@@ -256,20 +256,24 @@ text(corr.coord, labels = rownames(corr))
 ```
 
 ```{r, fig.width=7}
-eigen_ord(corr) %>%
-  as_tbl_ord() %>%
-  augment_ord() %>%
-  mutate_rows(metric = stringr::str_remove(.name, "rk_")) %>%
-  confer_inertia(1) ->
+eigen(corr) %>%
+  tidy() %>%
+  tidyr::pivot_wider(
+    id_cols = row, names_from = EV, values_from = value,
+    names_prefix = "EV"
+  ) %>%
+  mutate(name = rownames(corr)) %>%
+  mutate(metric = stringr::str_remove(name, "rk_")) ->
   c_eigen
 c_eigen %>%
-  ggbiplot() +
+  ggplot(aes(x = EV1, y = EV2)) +
+  coord_equal() +
   theme_minimal() +
   geom_unit_circle() +
-  geom_rows_vector() +
-  geom_rows_text_radiate(aes(label = metric)) +
-  scale_x_reverse(expand = expansion(add = .4)) +
-  scale_y_continuous(expand = expansion(add = .3)) +
+  geom_vector() +
+  geom_text_radiate(aes(label = metric)) +
+  scale_x_reverse(expand = expansion(add = .6)) +
+  scale_y_continuous(expand = expansion(add = .4)) +
   ggtitle("Kendall correlations between university rankings",
           "CMDS correlation vector plot")
 ```
@@ -284,19 +288,19 @@ This last point means that observations made from a correlation vector plot can 
 
 ```{r}
 c_eigen %>%
-  fortify(.matrix = "rows") %>%
-  select(-.name, -.matrix)
+  select(-row, -name, -metric)
 ```
 
 Based on the third principal coordinates, the reputational rankings are aligned, as we knew already from the correlation matrix and heatmap. What's a bit more interesting is that this component seems to separate these two rankings from those having to do with faculty citation rates and the international compositions of the faculty and student body. Based on the decomposition of inertia, this third principal coordinate is nearly as important as the second! It therefore makes sense to plot the two together, in effect examining the residuals after regressing out the first principal coordinate:
 
 ```{r, fig.width=7}
 c_eigen %>%
-  ggbiplot(aes(x = 2, y = 3)) +
+  ggplot(aes(x = EV2, y = EV3)) +
+  coord_equal() +
   theme_minimal() +
   geom_unit_circle() +
-  geom_rows_vector() +
-  geom_rows_text_radiate(aes(label = metric)) +
+  geom_vector() +
+  geom_text_radiate(aes(label = metric)) +
   scale_x_continuous(expand = expansion(add = .5)) +
   scale_y_continuous(expand = expansion(add = .5)) +
   ggtitle("Kendall correlations between university rankings",

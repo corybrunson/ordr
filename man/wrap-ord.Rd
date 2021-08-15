@@ -2,7 +2,6 @@
 % Please edit documentation in R/fun-wrap.r
 \name{wrap-ord}
 \alias{wrap-ord}
-\alias{eigen_ord}
 \alias{svd_ord}
 \alias{cmdscale_ord}
 \alias{logisticSVD_ord}
@@ -11,8 +10,6 @@
 \alias{nipals_ord}
 \title{Wrappers for lossy ordination methods}
 \usage{
-eigen_ord(x, symmetric = isSymmetric.matrix(x))
-
 svd_ord(x, nu = min(dim(x)), nv = min(dim(x)))
 
 cmdscale_ord(d, k = 2, add = FALSE)
@@ -71,13 +68,8 @@ nipals_ord(
 )
 }
 \arguments{
-\item{x}{a numeric or complex matrix whose spectral decomposition is to
-    be computed.  Logical matrices are coerced to numeric.}
-
-\item{symmetric}{if \code{TRUE}, the matrix is assumed to be symmetric
-    (or Hermitian if complex) and only its lower triangle (diagonal
-    included) is used.  If \code{symmetric} is not specified,
-    \code{\link[base]{isSymmetric}(x)} is used.}
+\item{x}{a numeric or complex matrix whose SVD decomposition
+    is to be computed.  Logical matrices are coerced to numeric.}
 
 \item{nu}{the number of left  singular vectors to be computed.
     This must between \code{0} and \code{n = nrow(x)}.}
@@ -159,7 +151,6 @@ them, and new '*_ord' S3 class attributes are added to enable them.
 \details{
 The following table summarizes the wrapped functions:\tabular{llll}{
    Original function \tab Hide params \tab Add names \tab New class \cr
-   \code{\link[base:eigen]{base::eigen()}} \tab Yes \tab Yes \tab Yes \cr
    \code{\link[base:svd]{base::svd()}} \tab Yes \tab Yes \tab Yes \cr
    \code{\link[stats:cmdscale]{stats::cmdscale()}} \tab Yes \tab No \tab Yes \cr
    \code{\link[logisticPCA:logisticSVD]{logisticPCA::logisticSVD()}} \tab No \tab Yes \tab No \cr
