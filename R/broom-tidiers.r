@@ -14,7 +14,11 @@
 #'   
 #'   - `"lambda"`, `"values"`: returns information about the eigenvalues
 #'   
+#' @param ... Additional parameters passed to other methods; currently ignored.
 #' @example inst/examples/ex-broom-tidy-eigen.r
+#' NULL
+
+#' @export
 tidy.eigen <- function(x, matrix = "vectors", ...) {
   if (length(matrix) > 1) {
     stop("Must specify a single matrix to tidy.")
@@ -40,5 +44,12 @@ tidy.eigen <- function(x, matrix = "vectors", ...) {
     res <- tibble::tibble(EV = seq_along(x$values), inertia = x$values)
     res <- dplyr::mutate(res, prop_var = inertia / sum(inertia))
   }
+  tibble::as_tibble(res)
+}
+
+#' @export
+tidy.cmds_ord <- function(x, ...) {
+  res <- tibble::rownames_to_column(as.data.frame(x$points))
+  res <- rlang::set_names(res, c("row", paste0("PCo", seq(ncol(x$points)))))
   tibble::as_tibble(res)
 }

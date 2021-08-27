@@ -53,3 +53,22 @@ karate_eigen_tidy %>%
   geom_text_radiate(stat = "chull", aes(label = label)) +
   labs(x = "algebraic connectivity", y = "loading onto third eigenvector") +
   ggtitle("Second (connectivity) and third eigencentralities")
+
+# 'dist' object (matrix of road distances) of large American cities
+class(UScitiesD)
+print(UScitiesD)
+# use multidimensional scaling to infer artificial planar coordinates
+UScitiesD %>%
+  cmdscale_ord(k = 2) %>%
+  print() -> usa_mds
+# summarize artifical coordinates
+tidy(usa_mds)
+# reorient biplot to conventional compass
+usa_mds %>%
+  tidy() %>%
+  ggplot(aes(x = PCo1, y = PCo2)) +
+  theme_void() +
+  scale_x_reverse() +
+  scale_y_reverse() +
+  geom_text(aes(label = row), size = 3) +
+  ggtitle("MDS biplot of distances between U.S. cities")
