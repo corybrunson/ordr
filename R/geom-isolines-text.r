@@ -37,7 +37,7 @@
 #' @export
 geom_isolines_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  subset = NULL, by = NULL, num = NULL, label_dodge = .1,
+  by = NULL, num = NULL, label_dodge = .1,
   ...,
   parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
@@ -52,7 +52,6 @@ geom_isolines_text <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset,
       by = by, num = num,
       label_dodge = label_dodge,
       parse = parse,
@@ -67,7 +66,7 @@ geom_isolines_text <- function(
 #' @export
 geom_rows_isolines_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  subset = NULL, by = NULL, num = NULL, label_dodge = .1,
+  by = NULL, num = NULL, label_dodge = .1,
   ...,
   parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
@@ -82,7 +81,6 @@ geom_rows_isolines_text <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset,
       by = by, num = num,
       label_dodge = label_dodge,
       parse = parse,
@@ -97,7 +95,7 @@ geom_rows_isolines_text <- function(
 #' @export
 geom_cols_isolines_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  subset = NULL, by = NULL, num = NULL, label_dodge = .1,
+  by = NULL, num = NULL, label_dodge = .1,
   ...,
   parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
@@ -112,7 +110,6 @@ geom_cols_isolines_text <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset,
       by = by, num = num,
       label_dodge = label_dodge,
       parse = parse,
@@ -128,7 +125,7 @@ geom_cols_isolines_text <- function(
 geom_dims_isolines_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "cols",
-  subset = NULL, by = NULL, num = NULL, label_dodge = .1,
+  by = NULL, num = NULL, label_dodge = .1,
   ...,
   parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
@@ -143,7 +140,6 @@ geom_dims_isolines_text <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset,
       by = by, num = num,
       label_dodge = label_dodge,
       parse = parse,
@@ -172,7 +168,7 @@ GeomIsolinesText <- ggproto(
   
   draw_panel = function(
     data, panel_params, coord,
-    subset = NULL, by = NULL, num = NULL, label_dodge = .1,
+    by = NULL, num = NULL, label_dodge = .1,
     parse = FALSE, check_overlap = FALSE,
     na.rm = FALSE
   ) {

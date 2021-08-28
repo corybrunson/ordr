@@ -97,7 +97,6 @@ geom_rows_isolines(
   data = NULL,
   stat = "identity",
   position = "identity",
-  subset = NULL,
   by = NULL,
   num = NULL,
   ...,
@@ -111,7 +110,6 @@ geom_cols_isolines(
   data = NULL,
   stat = "identity",
   position = "identity",
-  subset = NULL,
   by = NULL,
   num = NULL,
   ...,
@@ -126,7 +124,6 @@ geom_dims_isolines(
   stat = "identity",
   position = "identity",
   .matrix = "cols",
-  subset = NULL,
   by = NULL,
   num = NULL,
   ...,
@@ -140,7 +137,6 @@ geom_rows_axis_text(
   data = NULL,
   stat = "identity",
   position = "identity",
-  subset = NULL,
   by = NULL,
   num = NULL,
   label_dodge = 0.15,
@@ -157,7 +153,6 @@ geom_cols_axis_text(
   data = NULL,
   stat = "identity",
   position = "identity",
-  subset = NULL,
   by = NULL,
   num = NULL,
   label_dodge = 0.15,
@@ -175,7 +170,6 @@ geom_dims_axis_text(
   stat = "identity",
   position = "identity",
   .matrix = "cols",
-  subset = NULL,
   by = NULL,
   num = NULL,
   label_dodge = 0.15,
@@ -192,7 +186,6 @@ geom_rows_axis_ticks(
   data = NULL,
   stat = "identity",
   position = "identity",
-  subset = NULL,
   by = NULL,
   num = NULL,
   tick_length = 0.025,
@@ -207,7 +200,6 @@ geom_cols_axis_ticks(
   data = NULL,
   stat = "identity",
   position = "identity",
-  subset = NULL,
   by = NULL,
   num = NULL,
   tick_length = 0.025,
@@ -223,7 +215,6 @@ geom_dims_axis_ticks(
   stat = "identity",
   position = "identity",
   .matrix = "cols",
-  subset = NULL,
   by = NULL,
   num = NULL,
   tick_length = 0.025,
@@ -340,7 +331,6 @@ geom_rows_isolines_text(
   data = NULL,
   stat = "identity",
   position = "identity",
-  subset = NULL,
   by = NULL,
   num = NULL,
   label_dodge = 0.1,
@@ -357,7 +347,6 @@ geom_cols_isolines_text(
   data = NULL,
   stat = "identity",
   position = "identity",
-  subset = NULL,
   by = NULL,
   num = NULL,
   label_dodge = 0.1,
@@ -375,7 +364,6 @@ geom_dims_isolines_text(
   stat = "identity",
   position = "identity",
   .matrix = "cols",
-  subset = NULL,
   by = NULL,
   num = NULL,
   label_dodge = 0.1,
@@ -769,9 +757,6 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 
-\item{subset}{Indices or logical vector of rows or columns for which to
-render elements.}
-
 \item{by}{Intervals between elements or number of elements; specify only
 one.}
 
@@ -787,7 +772,8 @@ displayed as described in \code{?plotmath}.}
 \item{check_overlap}{If \code{TRUE}, text that overlaps previous text in the
 same layer will not be plotted. \code{check_overlap} happens at draw time and in
 the order of the data. Therefore data should be arranged by the label
-column before calling \code{geom_label()} or \code{geom_text()}.}
+column before calling \code{geom_text()}. Note that this argument is not
+supported by \code{geom_label()}.}
 
 \item{tick_length}{Numeric; the length of the tick marks, as a proportion of
 the minimum of the plot width and height.}

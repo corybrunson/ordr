@@ -22,15 +22,13 @@
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
-#' @param subset Indices or logical vector of rows or columns for which to
-#'   render elements.
 #' @param by,num Intervals between elements or number of elements; specify only
 #'   one.
 #' @family geom layers
 #' @export
 geom_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  subset = NULL, by = NULL, num = NULL,
+  by = NULL, num = NULL,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -45,7 +43,6 @@ geom_isolines <- function(
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      subset = subset,
       by = by, num = num,
       ...
     )
@@ -56,7 +53,7 @@ geom_isolines <- function(
 #' @export
 geom_rows_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  subset = NULL, by = NULL, num = NULL,
+  by = NULL, num = NULL,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -71,7 +68,6 @@ geom_rows_isolines <- function(
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      subset = subset,
       by = by, num = num,
       ...
     )
@@ -82,7 +78,7 @@ geom_rows_isolines <- function(
 #' @export
 geom_cols_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  subset = NULL, by = NULL, num = NULL,
+  by = NULL, num = NULL,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -97,7 +93,6 @@ geom_cols_isolines <- function(
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      subset = subset,
       by = by, num = num,
       ...
     )
@@ -109,7 +104,7 @@ geom_cols_isolines <- function(
 geom_dims_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "cols",
-  subset = NULL, by = NULL, num = NULL,
+  by = NULL, num = NULL,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -124,7 +119,6 @@ geom_dims_isolines <- function(
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      subset = subset,
       by = by, num = num,
       ...
     )
@@ -156,9 +150,6 @@ GeomIsolines <- ggproto(
   
   setup_data = function(data, params) {
     
-    # by default, render elements for all rows
-    if (! is.null(params$subset)) data <- data[params$subset, , drop = FALSE]
-    
     # centers and scales
     # (center is position on axis at origin)
     if (! "center" %in% names(data)) data$center <- 0
@@ -176,7 +167,7 @@ GeomIsolines <- ggproto(
   
   draw_panel = function(
     data, panel_params, coord,
-    subset = NULL, by = NULL, num = NULL
+    by = NULL, num = NULL
   ) {
     if (is.null(by) && is.null(num)) num <- 6L
     

@@ -38,7 +38,7 @@
 #' @export
 geom_axis_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  subset = NULL, by = NULL, num = NULL, label_dodge = .15,
+  by = NULL, num = NULL, label_dodge = .15,
   ...,
   parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
@@ -53,7 +53,6 @@ geom_axis_text <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset,
       by = by, num = num,
       label_dodge = label_dodge,
       parse = parse,
@@ -68,7 +67,7 @@ geom_axis_text <- function(
 #' @export
 geom_rows_axis_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  subset = NULL, by = NULL, num = NULL, label_dodge = .15,
+  by = NULL, num = NULL, label_dodge = .15,
   ...,
   parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
@@ -83,7 +82,6 @@ geom_rows_axis_text <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset,
       by = by, num = num,
       label_dodge = label_dodge,
       parse = parse,
@@ -98,7 +96,7 @@ geom_rows_axis_text <- function(
 #' @export
 geom_cols_axis_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  subset = NULL, by = NULL, num = NULL, label_dodge = .15,
+  by = NULL, num = NULL, label_dodge = .15,
   ...,
   parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
@@ -113,7 +111,6 @@ geom_cols_axis_text <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset,
       by = by, num = num,
       label_dodge = label_dodge,
       parse = parse,
@@ -129,7 +126,7 @@ geom_cols_axis_text <- function(
 geom_dims_axis_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "cols",
-  subset = NULL, by = NULL, num = NULL, label_dodge = .15,
+  by = NULL, num = NULL, label_dodge = .15,
   ...,
   parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
@@ -144,7 +141,6 @@ geom_dims_axis_text <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset,
       by = by, num = num,
       label_dodge = label_dodge,
       parse = parse,
@@ -173,7 +169,7 @@ GeomAxisText <- ggproto(
   
   draw_panel = function(
     data, panel_params, coord,
-    subset = NULL, by = NULL, num = NULL, label_dodge = .15,
+    by = NULL, num = NULL, label_dodge = .15,
     parse = FALSE, check_overlap = FALSE,
     na.rm = FALSE
   ) {

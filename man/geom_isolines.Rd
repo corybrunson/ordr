@@ -9,7 +9,6 @@ geom_isolines(
   data = NULL,
   stat = "identity",
   position = "identity",
-  subset = NULL,
   by = NULL,
   num = NULL,
   ...,
@@ -44,9 +43,6 @@ layer, as a string.}
 
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
-
-\item{subset}{Indices or logical vector of rows or columns for which to
-render elements.}
 
 \item{by, num}{Intervals between elements or number of elements; specify only
 one.}

@@ -32,7 +32,7 @@
 #' @export
 geom_axis_ticks <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  subset = NULL, by = NULL, num = NULL, tick_length = .025,
+  by = NULL, num = NULL, tick_length = .025,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -46,7 +46,6 @@ geom_axis_ticks <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset,
       by = by, num = num,
       tick_length = tick_length,
       na.rm = na.rm,
@@ -59,7 +58,7 @@ geom_axis_ticks <- function(
 #' @export
 geom_rows_axis_ticks <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  subset = NULL, by = NULL, num = NULL, tick_length = .025,
+  by = NULL, num = NULL, tick_length = .025,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -73,7 +72,6 @@ geom_rows_axis_ticks <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset,
       by = by, num = num,
       tick_length = tick_length,
       na.rm = na.rm,
@@ -86,7 +84,7 @@ geom_rows_axis_ticks <- function(
 #' @export
 geom_cols_axis_ticks <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  subset = NULL, by = NULL, num = NULL, tick_length = .025,
+  by = NULL, num = NULL, tick_length = .025,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -100,7 +98,6 @@ geom_cols_axis_ticks <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset,
       by = by, num = num,
       tick_length = tick_length,
       na.rm = na.rm,
@@ -114,7 +111,7 @@ geom_cols_axis_ticks <- function(
 geom_dims_axis_ticks <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "cols",
-  subset = NULL, by = NULL, num = NULL, tick_length = .025,
+  by = NULL, num = NULL, tick_length = .025,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -128,7 +125,6 @@ geom_dims_axis_ticks <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset,
       by = by, num = num,
       tick_length = tick_length,
       na.rm = na.rm,
@@ -154,7 +150,7 @@ GeomAxisTicks <- ggproto(
   
   draw_panel = function(
     data, panel_params, coord,
-    subset = NULL, by = NULL, num = NULL, tick_length = .025
+    by = NULL, num = NULL, tick_length = .025
   ) {
     if (is.null(by) && is.null(num)) num <- 6L
     
