@@ -78,9 +78,10 @@ setup_rows_data <- function(data, params) {
     if (is.numeric(params$subset)) {
       data <- data[params$subset, , drop = FALSE]
     } else if (is.character(params$subset)) {
-      if (".name" %in% names(data) && ! all(is.na(data[[".name"]]))) {
+      if (".name_select" %in% names(data) &&
+          ! all(is.na(data[[".name_select"]]))) {
         # -+- `match()` may produce `NA`s if exact matches are not found -+-
-        data <- data[match(params$subset, data$.name), , drop = FALSE]
+        data <- data[match(params$subset, data$.name_select), , drop = FALSE]
       } else {
         warning(
           "Rows have no defined `.name`, so `subset` will be ignored.",
@@ -104,9 +105,10 @@ setup_cols_data <- function(data, params) {
     if (is.numeric(params$subset)) {
       data <- data[params$subset, , drop = FALSE]
     } else if (is.character(params$subset)) {
-      if (".name" %in% names(data) && ! all(is.na(data[[".name"]]))) {
+      if (".name_select" %in% names(data) &&
+          ! all(is.na(data[[".name_select"]]))) {
         # -+- `match()` may produce `NA`s if exact matches are not found -+-
-        data <- data[match(params$subset, data$.name), , drop = FALSE]
+        data <- data[match(params$subset, data$.name_select), , drop = FALSE]
       } else {
         warning(
           "Columns have no defined `.name`, so `subset` will be ignored.",
