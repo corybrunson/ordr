@@ -67,10 +67,10 @@ tidy(iris_pca) \%>\%
   labs(x = "", y = "Proportion of inertia")
 # fortification adds all above columns
 fortify(iris_pca)
-# row-principal prediction biplot
+# row-principal biplot
 iris_pca \%>\%
   augment_ord() \%>\%
-  ggbiplot(prediction = TRUE) +
+  ggbiplot() +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   geom_cols_axis() +

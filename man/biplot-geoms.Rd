@@ -787,7 +787,8 @@ displayed as described in \code{?plotmath}.}
 \item{check_overlap}{If \code{TRUE}, text that overlaps previous text in the
 same layer will not be plotted. \code{check_overlap} happens at draw time and in
 the order of the data. Therefore data should be arranged by the label
-column before calling \code{geom_label()} or \code{geom_text()}.}
+column before calling \code{geom_text()}. Note that this argument is not
+supported by \code{geom_label()}.}
 
 \item{tick_length}{Numeric; the length of the tick marks, as a proportion of
 the minimum of the plot width and height.}
