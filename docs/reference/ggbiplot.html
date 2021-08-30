@@ -132,7 +132,6 @@ tbl_ord object." />
     <pre class="usage"><span class='fu'>ggbiplot</span><span class='op'>(</span>
   ordination <span class='op'>=</span> <span class='cn'>NULL</span>,
   mapping <span class='op'>=</span> <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span>, y <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>,
-  prediction <span class='op'>=</span> <span class='cn'>FALSE</span>,
   xlim <span class='op'>=</span> <span class='cn'>NULL</span>,
   ylim <span class='op'>=</span> <span class='cn'>NULL</span>,
   expand <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -159,13 +158,6 @@ tbl_ord object." />
       <td><p>List of default aesthetic mappings to use for the biplot. The
 default assigns the first two coordinates to the aesthetics <code>x</code> and <code>y</code>.
 Other assignments must be supplied in each layer added to the plot.</p></td>
-    </tr>
-    <tr>
-      <th>prediction</th>
-      <td><p>Logical; whether to build a prediction biplot rather than
-an interpolation biplot (the default). <code>TRUE</code> requires that <code>x</code> and <code>y</code> are
-mapped to shared coordinates, that no other shared coordinates are mapped
-to, and inertia is conferred entirely onto one matrix factor.</p></td>
     </tr>
     <tr>
       <th>xlim</th>
@@ -277,21 +269,21 @@ points for rows and arrows for columns.</p>
 #&gt; # 
 #&gt; # Rows (principal): [ 150 x 4 | 1 ]
 #&gt;   Comp.1 Comp.2  Comp.3 ... |   species
-#&gt;                             |   <span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>  
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  -</span><span style='color: #BB0000;'>2.26</span><span>  0.480  0.128      | </span><span style='color: #BCBCBC;'>1</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  -</span><span style='color: #BB0000;'>2.08</span><span> -</span><span style='color: #BB0000;'>0.674</span><span>  0.235  ... | </span><span style='color: #BCBCBC;'>2</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  -</span><span style='color: #BB0000;'>2.36</span><span> -</span><span style='color: #BB0000;'>0.342</span><span> -</span><span style='color: #BB0000;'>0.044</span><span style='color: #BB0000;text-decoration: underline;'>2</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  -</span><span style='color: #BB0000;'>2.30</span><span> -</span><span style='color: #BB0000;'>0.597</span><span> -</span><span style='color: #BB0000;'>0.091</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>     | </span><span style='color: #BCBCBC;'>4</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  -</span><span style='color: #BB0000;'>2.39</span><span>  0.647 -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> setosa 
-#&gt; </span><span style='color: #949494;'># … with 145 more rows</span><span>
+#&gt;                             |   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  
+#&gt; <span style='color: #BCBCBC;'>1</span>  -<span style='color: #BB0000;'>2.26</span>  0.480  0.128      | <span style='color: #BCBCBC;'>1</span> setosa 
+#&gt; <span style='color: #BCBCBC;'>2</span>  -<span style='color: #BB0000;'>2.08</span> -<span style='color: #BB0000;'>0.674</span>  0.235  ... | <span style='color: #BCBCBC;'>2</span> setosa 
+#&gt; <span style='color: #BCBCBC;'>3</span>  -<span style='color: #BB0000;'>2.36</span> -<span style='color: #BB0000;'>0.342</span> -<span style='color: #BB0000;'>0.044</span><span style='color: #BB0000; text-decoration: underline;'>2</span>     | <span style='color: #BCBCBC;'>3</span> setosa 
+#&gt; <span style='color: #BCBCBC;'>4</span>  -<span style='color: #BB0000;'>2.30</span> -<span style='color: #BB0000;'>0.597</span> -<span style='color: #BB0000;'>0.091</span><span style='color: #BB0000; text-decoration: underline;'>3</span>     | <span style='color: #BCBCBC;'>4</span> setosa 
+#&gt; <span style='color: #BCBCBC;'>5</span>  -<span style='color: #BB0000;'>2.39</span>  0.647 -<span style='color: #BB0000;'>0.015</span><span style='color: #BB0000; text-decoration: underline;'>7</span>     | <span style='color: #BCBCBC;'>5</span> setosa 
+#&gt; <span style='color: #949494;'># … with 145 more rows</span>
 #&gt; # 
 #&gt; # Columns (standard): [ 4 x 4 | 1 ]
 #&gt;   Comp.1 Comp.2 Comp.3 ... |   measure     
-#&gt;                            |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.521 0.377   0.720     | </span><span style='color: #BCBCBC;'>1</span><span> sepal length
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.269</span><span> 0.923  -</span><span style='color: #BB0000;'>0.244</span><span> ... | </span><span style='color: #BCBCBC;'>2</span><span> sepal width 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.580 0.024</span><span style='text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.142</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> petal length
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.565 0.066</span><span style='text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>0.634</span><span>     | </span><span style='color: #BCBCBC;'>4</span><span> petal width </div><div class='input'><span class='co'># row-principal biplot with rescaled secondary axis</span>
+#&gt;                            |   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       
+#&gt; <span style='color: #BCBCBC;'>1</span>  0.521 0.377   0.720     | <span style='color: #BCBCBC;'>1</span> sepal length
+#&gt; <span style='color: #BCBCBC;'>2</span> -<span style='color: #BB0000;'>0.269</span> 0.923  -<span style='color: #BB0000;'>0.244</span> ... | <span style='color: #BCBCBC;'>2</span> sepal width 
+#&gt; <span style='color: #BCBCBC;'>3</span>  0.580 0.024<span style='text-decoration: underline;'>5</span> -<span style='color: #BB0000;'>0.142</span>     | <span style='color: #BCBCBC;'>3</span> petal length
+#&gt; <span style='color: #BCBCBC;'>4</span>  0.565 0.066<span style='text-decoration: underline;'>9</span> -<span style='color: #BB0000;'>0.634</span>     | <span style='color: #BCBCBC;'>4</span> petal width </div><div class='input'><span class='co'># row-principal biplot with rescaled secondary axis</span>
 <span class='va'>iris_pca</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ggbiplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>color <span class='op'>=</span> <span class='va'>species</span><span class='op'>)</span>, sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
@@ -362,19 +354,19 @@ points for rows and arrows for columns.</p>
 #&gt; # 
 #&gt; # Rows: [ 32 x 8 | 1 ]
 #&gt;   `(Intercept)` Comp.1 Comp.2 ... |   .name            
-#&gt;                                   |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>             1 -</span><span style='color: #BB0000;'>0.398</span><span> -</span><span style='color: #BB0000;'>1.12</span><span>      | </span><span style='color: #BCBCBC;'>1</span><span> Mazda RX4        
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>             1 -</span><span style='color: #BB0000;'>0.294</span><span> -</span><span style='color: #BB0000;'>1.06</span><span>  ... | </span><span style='color: #BCBCBC;'>2</span><span> Mazda RX4 Wag    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>             1 -</span><span style='color: #BB0000;'>2.54</span><span>   0.465     | </span><span style='color: #BCBCBC;'>3</span><span> Datsun 710       
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>             1 -</span><span style='color: #BB0000;'>0.601</span><span>  1.75      | </span><span style='color: #BCBCBC;'>4</span><span> Hornet 4 Drive   
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>             1  1.61   0.837     | </span><span style='color: #BCBCBC;'>5</span><span> Hornet Sportabout
-#&gt; </span><span style='color: #949494;'># … with 27 more rows</span><span>
+#&gt;                                   |   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            
+#&gt; <span style='color: #BCBCBC;'>1</span>             1 -<span style='color: #BB0000;'>0.398</span> -<span style='color: #BB0000;'>1.12</span>      | <span style='color: #BCBCBC;'>1</span> Mazda RX4        
+#&gt; <span style='color: #BCBCBC;'>2</span>             1 -<span style='color: #BB0000;'>0.294</span> -<span style='color: #BB0000;'>1.06</span>  ... | <span style='color: #BCBCBC;'>2</span> Mazda RX4 Wag    
+#&gt; <span style='color: #BCBCBC;'>3</span>             1 -<span style='color: #BB0000;'>2.54</span>   0.465     | <span style='color: #BCBCBC;'>3</span> Datsun 710       
+#&gt; <span style='color: #BCBCBC;'>4</span>             1 -<span style='color: #BB0000;'>0.601</span>  1.75      | <span style='color: #BCBCBC;'>4</span> Hornet 4 Drive   
+#&gt; <span style='color: #BCBCBC;'>5</span>             1  1.61   0.837     | <span style='color: #BCBCBC;'>5</span> Hornet Sportabout
+#&gt; <span style='color: #949494;'># … with 27 more rows</span>
 #&gt; # 
 #&gt; # Columns: [ 2 x 8 | 1 ]
 #&gt;   `(Intercept)` Comp.1 Comp.2 ... |   .name
-#&gt;                                   |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>          20.1 -</span><span style='color: #BB0000;'>2.41</span><span>  -</span><span style='color: #BB0000;'>0.415</span><span> ... | </span><span style='color: #BCBCBC;'>1</span><span> mpg  
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>          17.8 -</span><span style='color: #BB0000;'>0.459</span><span>  0.929     | </span><span style='color: #BCBCBC;'>2</span><span> qsec </div><div class='input'><span class='co'># regression biplot</span>
+#&gt;                                   |   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>          20.1 -<span style='color: #BB0000;'>2.41</span>  -<span style='color: #BB0000;'>0.415</span> ... | <span style='color: #BCBCBC;'>1</span> mpg  
+#&gt; <span style='color: #BCBCBC;'>2</span>          17.8 -<span style='color: #BB0000;'>0.459</span>  0.929     | <span style='color: #BCBCBC;'>2</span> qsec </div><div class='input'><span class='co'># regression biplot</span>
 <span class='fu'>ggbiplot</span><span class='op'>(</span><span class='va'>mtcars_specs_pca</span>, <span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>,
          sec.axes <span class='op'>=</span> <span class='st'>"rows"</span>, scale.factor <span class='op'>=</span> <span class='fl'>.5</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme_minimal</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
@@ -395,24 +387,24 @@ points for rows and arrows for columns.</p>
 #&gt; # 2 coordinates: PCo1 and PCo2
 #&gt; # 
 #&gt; # Rows (symmetric): [ 32 x 2 | 1 ]
-#&gt;      PCo1   PCo2 |   .name            
-#&gt;                  |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.496</span><span>   0.489 | </span><span style='color: #BCBCBC;'>1</span><span> Mazda RX4        
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.534</span><span>   0.500 | </span><span style='color: #BCBCBC;'>2</span><span> Mazda RX4 Wag    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.072</span><span style='text-decoration: underline;'>0</span><span> -</span><span style='color: #BB0000;'>0.240</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Datsun 710       
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.650</span><span>  -</span><span style='color: #BB0000;'>0.154</span><span> | </span><span style='color: #BCBCBC;'>4</span><span> Hornet 4 Drive   
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.189   0.192 | </span><span style='color: #BCBCBC;'>5</span><span> Hornet Sportabout
-#&gt; </span><span style='color: #949494;'># … with 27 more rows</span><span>
+#&gt;     PCo1   PCo2 |   .name            
+#&gt;                 |   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            
+#&gt; <span style='color: #BCBCBC;'>1</span> -<span style='color: #BB0000;'>0.238</span> -<span style='color: #BB0000;'>0.666</span> | <span style='color: #BCBCBC;'>1</span> Mazda RX4        
+#&gt; <span style='color: #BCBCBC;'>2</span> -<span style='color: #BB0000;'>0.190</span> -<span style='color: #BB0000;'>0.685</span> | <span style='color: #BCBCBC;'>2</span> Mazda RX4 Wag    
+#&gt; <span style='color: #BCBCBC;'>3</span> -<span style='color: #BB0000;'>0.934</span>  0.224 | <span style='color: #BCBCBC;'>3</span> Datsun 710       
+#&gt; <span style='color: #BCBCBC;'>4</span> -<span style='color: #BB0000;'>0.247</span>  0.984 | <span style='color: #BCBCBC;'>4</span> Hornet 4 Drive   
+#&gt; <span style='color: #BCBCBC;'>5</span>  0.834  0.316 | <span style='color: #BCBCBC;'>5</span> Hornet Sportabout
+#&gt; <span style='color: #949494;'># … with 27 more rows</span>
 #&gt; # 
 #&gt; # Columns (symmetric): [ 32 x 2 | 1 ]
-#&gt;      PCo1   PCo2 |   .name            
-#&gt;                  |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.496</span><span>   0.489 | </span><span style='color: #BCBCBC;'>1</span><span> Mazda RX4        
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.534</span><span>   0.500 | </span><span style='color: #BCBCBC;'>2</span><span> Mazda RX4 Wag    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.072</span><span style='text-decoration: underline;'>0</span><span> -</span><span style='color: #BB0000;'>0.240</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Datsun 710       
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.650</span><span>  -</span><span style='color: #BB0000;'>0.154</span><span> | </span><span style='color: #BCBCBC;'>4</span><span> Hornet 4 Drive   
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.189   0.192 | </span><span style='color: #BCBCBC;'>5</span><span> Hornet Sportabout
-#&gt; </span><span style='color: #949494;'># … with 27 more rows</span><span></div><div class='input'><span class='co'># regress performance measures on principal coordinates</span>
+#&gt;     PCo1   PCo2 |   .name            
+#&gt;                 |   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            
+#&gt; <span style='color: #BCBCBC;'>1</span> -<span style='color: #BB0000;'>0.238</span> -<span style='color: #BB0000;'>0.666</span> | <span style='color: #BCBCBC;'>1</span> Mazda RX4        
+#&gt; <span style='color: #BCBCBC;'>2</span> -<span style='color: #BB0000;'>0.190</span> -<span style='color: #BB0000;'>0.685</span> | <span style='color: #BCBCBC;'>2</span> Mazda RX4 Wag    
+#&gt; <span style='color: #BCBCBC;'>3</span> -<span style='color: #BB0000;'>0.934</span>  0.224 | <span style='color: #BCBCBC;'>3</span> Datsun 710       
+#&gt; <span style='color: #BCBCBC;'>4</span> -<span style='color: #BB0000;'>0.247</span>  0.984 | <span style='color: #BCBCBC;'>4</span> Hornet 4 Drive   
+#&gt; <span style='color: #BCBCBC;'>5</span>  0.834  0.316 | <span style='color: #BCBCBC;'>5</span> Hornet Sportabout
+#&gt; <span style='color: #949494;'># … with 27 more rows</span></div><div class='input'><span class='co'># regress performance measures on principal coordinates</span>
 <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mtcars_perf</span> <span class='op'>~</span> <span class='fu'><a href='accessors.html'>get_rows</a></span><span class='op'>(</span><span class='va'>mtcars_specs_cmds</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='augmentation.html'>augment_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -421,20 +413,20 @@ points for rows and arrows for columns.</p>
 #&gt; # 3 coordinates: (Intercept), PCo1, PCo2
 #&gt; # 
 #&gt; # Rows: [ 32 x 3 | 1 ]
-#&gt;   `(Intercept)`    PCo1   PCo2 |   .name            
-#&gt;                                |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>             1 -</span><span style='color: #BB0000;'>0.496</span><span>   0.489 | </span><span style='color: #BCBCBC;'>1</span><span> Mazda RX4        
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>             1 -</span><span style='color: #BB0000;'>0.534</span><span>   0.500 | </span><span style='color: #BCBCBC;'>2</span><span> Mazda RX4 Wag    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>             1  0.072</span><span style='text-decoration: underline;'>0</span><span> -</span><span style='color: #BB0000;'>0.240</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Datsun 710       
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>             1 -</span><span style='color: #BB0000;'>0.650</span><span>  -</span><span style='color: #BB0000;'>0.154</span><span> | </span><span style='color: #BCBCBC;'>4</span><span> Hornet 4 Drive   
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>             1  0.189   0.192 | </span><span style='color: #BCBCBC;'>5</span><span> Hornet Sportabout
-#&gt; </span><span style='color: #949494;'># … with 27 more rows</span><span>
+#&gt;   `(Intercept)`   PCo1   PCo2 |   .name            
+#&gt;                               |   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            
+#&gt; <span style='color: #BCBCBC;'>1</span>             1 -<span style='color: #BB0000;'>0.238</span> -<span style='color: #BB0000;'>0.666</span> | <span style='color: #BCBCBC;'>1</span> Mazda RX4        
+#&gt; <span style='color: #BCBCBC;'>2</span>             1 -<span style='color: #BB0000;'>0.190</span> -<span style='color: #BB0000;'>0.685</span> | <span style='color: #BCBCBC;'>2</span> Mazda RX4 Wag    
+#&gt; <span style='color: #BCBCBC;'>3</span>             1 -<span style='color: #BB0000;'>0.934</span>  0.224 | <span style='color: #BCBCBC;'>3</span> Datsun 710       
+#&gt; <span style='color: #BCBCBC;'>4</span>             1 -<span style='color: #BB0000;'>0.247</span>  0.984 | <span style='color: #BCBCBC;'>4</span> Hornet 4 Drive   
+#&gt; <span style='color: #BCBCBC;'>5</span>             1  0.834  0.316 | <span style='color: #BCBCBC;'>5</span> Hornet Sportabout
+#&gt; <span style='color: #949494;'># … with 27 more rows</span>
 #&gt; # 
 #&gt; # Columns: [ 2 x 3 | 1 ]
-#&gt;   `(Intercept)`   PCo1   PCo2 |   .name
-#&gt;                               |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>          20.1 -</span><span style='color: #BB0000;'>0.196</span><span> -</span><span style='color: #BB0000;'>1.79</span><span>  | </span><span style='color: #BCBCBC;'>1</span><span> mpg  
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>          17.8  1.07  -</span><span style='color: #BB0000;'>0.521</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> qsec </div><div class='input'><span class='co'># regression biplot</span>
+#&gt;   `(Intercept)`  PCo1  PCo2 |   .name
+#&gt;                             |   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>          20.1 -<span style='color: #BB0000;'>6.19</span> 0.160 | <span style='color: #BCBCBC;'>1</span> mpg  
+#&gt; <span style='color: #BCBCBC;'>2</span>          17.8 -<span style='color: #BB0000;'>1.31</span> 2.38  | <span style='color: #BCBCBC;'>2</span> qsec </div><div class='input'><span class='co'># regression biplot</span>
 <span class='fu'>ggbiplot</span><span class='op'>(</span><span class='va'>mtcars_specs_cmds</span>, <span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>.name</span><span class='op'>)</span>,
          sec.axes <span class='op'>=</span> <span class='st'>"rows"</span>, scale.factor <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme_minimal</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
@@ -442,7 +434,7 @@ points for rows and arrows for columns.</p>
   <span class='fu'><a href='biplot-geoms.html'>geom_cols_vector</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>mtcars_cmds_lm</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='biplot-geoms.html'>geom_cols_text_radiate</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>mtcars_cmds_lm</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>expand_limits</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2.25</span>, <span class='fl'>1.25</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='fl'>1.5</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='img'><img src='ggbiplot-3.png' alt='' width='700' height='433' /></div></span></pre>
+</div><div class='img'><img src='ggbiplot-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
