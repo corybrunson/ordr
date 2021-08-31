@@ -25,6 +25,7 @@
 #' - `scale` (for un-scaling)
 #' 
 
+#' @include geom-isolines.r
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
@@ -34,6 +35,7 @@
 #'   isoline, in the direction of the row or column axis, as a proportion of the
 #'   minimum of the plot width and height.
 #' @family geom layers
+#' @rdname geom_isolines
 #' @export
 geom_isolines_text <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

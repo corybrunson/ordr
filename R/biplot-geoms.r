@@ -12,8 +12,7 @@
 #' @template param-matrix
 #' @template param-geom
 #' @inheritParams ggplot2::geom_text
-#' @inheritParams geom_axis_text
-#' @inheritParams geom_axis_ticks
+#' @inheritParams geom_axis
 #' @inheritParams geom_isolines
 #' @inheritParams geom_vector
 #' @family biplot layers

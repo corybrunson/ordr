@@ -9,7 +9,17 @@ geom_axis(
   data = NULL,
   stat = "identity",
   position = "identity",
+  axis_labels = TRUE,
+  axis_ticks = TRUE,
+  axis_text = TRUE,
+  by = NULL,
+  num = NULL,
+  tick_length = 0.025,
+  text_dodge = 0.15,
+  label_dodge = 0.2,
   ...,
+  parse = FALSE,
+  check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -42,7 +52,34 @@ layer, as a string.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
+\item{axis_labels, axis_ticks, axis_text}{Logical; whether to include labels,
+tick marks, and text value marks along the axes.}
+
+\item{by}{Intervals between elements or number of elements; specify only
+one.}
+
+\item{num}{Intervals between elements or number of elements; specify only
+one.}
+
+\item{tick_length}{Numeric; the length of the tick marks, as a proportion of
+the minimum of the plot width and height.}
+
+\item{text_dodge}{Numeric; the orthogonal distance of the text from the axis,
+as a proportion of the minimum of the plot width and height.}
+
+\item{label_dodge}{Numeric; the orthogonal distance of each label from its
+axis, as a proportion of the minimum of the plot width and height.}
+
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
+
+\item{parse}{If \code{TRUE}, the labels will be parsed into expressions and
+displayed as described in \code{?plotmath}.}
+
+\item{check_overlap}{If \code{TRUE}, text that overlaps previous text in the
+same layer will not be plotted. \code{check_overlap} happens at draw time and in
+the order of the data. Therefore data should be arranged by the label
+column before calling \code{geom_text()}. Note that this argument is not
+supported by \code{geom_label()}.}
 
 \item{na.rm}{Passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
@@ -81,12 +118,22 @@ in bold):
 \itemize{
 \item \strong{\code{x}}
 \item \strong{\code{y}}
-\item \code{alpha}
 \item \code{colour}
-\item \code{linetype}
+\item \code{alpha}
 \item \code{size}
+\item \code{linetype}
+\item \code{label}
+\item \code{center}, \code{scale}
+\item \code{label_colour}, \code{label_alpha}, \code{label_size}, \code{label_angle},
+\code{label_hjust}, \code{label_just}, \code{label_family}, \code{label_fontface}
+\item \code{tick_colour}, \code{tick_alpha}, \code{tick_size}, \code{tick_linetype}
+\item \code{text_colour}, \code{text_alpha}, \code{text_size}, \code{text_angle},
+\code{text_hjust}, \code{text_just}, \code{text_family}, \code{text_fontface}
 \item \code{group}
 }
+
+The prefixed aesthetics \verb{label_*}, \verb{tick_*}, and \verb{text_*} are passed to their
+respective graphical elements.
 }
 
 \examples{
@@ -105,10 +152,8 @@ diabetes_lda \%>\%
   ggbiplot() +
   theme_bw() + theme_biplot() +
   geom_rows_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
-  geom_cols_axis(color = "#888888") +
-  geom_cols_axis_ticks(num = 8L) +
-  geom_cols_axis_text(size = 2.5, num = 8L, label_dodge = .2) +
-  geom_cols_axis_label(aes(label = .name)) +
+  geom_cols_axis(aes(label = .name), color = "#888888", num = 8L,
+                 text_size = 2.5, label_dodge = .2) +
   ggtitle(
     "LDA of Reaven & Miller diabetes groups",
     "Row-standard biplot of standardized LDA"
@@ -127,9 +172,8 @@ diabetes_lda \%>\%
   ggbiplot() +
   theme_bw() + theme_biplot() +
   geom_rows_point(aes(shape = .grouping, alpha = discriminant)) +
-  geom_cols_axis(color = "#888888") +
-  geom_cols_axis_ticks(num = 8L) +
-  geom_cols_axis_text(size = 2.5, num = 8L, label_dodge = .1) +
+  geom_cols_axis(color = "#888888", num = 8L,
+                 text_size = 2.5, text_dodge = .1) +
   ggtitle(
     "LDA of Reaven & Miller diabetes groups",
     "Symmetric biplot of contribution LDA"
@@ -137,10 +181,6 @@ diabetes_lda \%>\%
 }
 \seealso{
 Other geom layers: 
-\code{\link{geom_axis_label}()},
-\code{\link{geom_axis_text}()},
-\code{\link{geom_axis_ticks}()},
-\code{\link{geom_isolines_text}()},
 \code{\link{geom_isolines}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},
