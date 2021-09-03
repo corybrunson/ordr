@@ -67,8 +67,8 @@ the minimum of the plot width and height.}
 \item{text_dodge}{Numeric; the orthogonal distance of the text from the axis,
 as a proportion of the minimum of the plot width and height.}
 
-\item{label_dodge}{Numeric; the orthogonal distance of each label from its
-axis, as a proportion of the minimum of the plot width and height.}
+\item{label_dodge}{Numeric; the orthogonal distance of the text from the axis
+or isoline, as a proportion of the minimum of the plot width and height.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
@@ -125,15 +125,16 @@ in bold):
 \item \code{label}
 \item \code{center}, \code{scale}
 \item \code{label_colour}, \code{label_alpha}, \code{label_size}, \code{label_angle},
-\code{label_hjust}, \code{label_just}, \code{label_family}, \code{label_fontface}
+\code{label_hjust}, \code{label_vjust}, \code{label_family}, \code{label_fontface}
 \item \code{tick_colour}, \code{tick_alpha}, \code{tick_size}, \code{tick_linetype}
 \item \code{text_colour}, \code{text_alpha}, \code{text_size}, \code{text_angle},
-\code{text_hjust}, \code{text_just}, \code{text_family}, \code{text_fontface}
+\code{text_hjust}, \code{text_vjust}, \code{text_family}, \code{text_fontface}
 \item \code{group}
 }
 
-The prefixed aesthetics \verb{label_*}, \verb{tick_*}, and \verb{text_*} are passed to their
-respective graphical elements.
+The prefixed aesthetics \verb{label_*}, \verb{tick_*}, and \verb{text_*} are used by the
+text elements and will inherit any values passed to their un-prefixed
+counterparts, if recognized.
 }
 
 \examples{

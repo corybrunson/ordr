@@ -10,28 +10,43 @@
 
 #' - **`x`**
 #' - **`y`**
-#' - `alpha`
 #' - `colour`
-#' - `linetype`
+#' - `alpha`
 #' - `size`
+#' - `linetype`
+#' - `center`, `scale`
+#' - `angle`
+#' - `hjust`
+#' - `vjust`
+#' - `family`
+#' - `fontface`
+#' - `text_colour`, `text_alpha`, `text_size`,
 #' - `group`
-#' - `center` (for un-scaling)
-#' - `scale` (for un-scaling)
+#' 
+
+#' The prefixed aesthetics `text_*` are used by the text elements and will
+#' inherit any values passed to their un-prefixed counterparts.
 #' 
 
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
-#' @param subset Indices or logical vector of rows or columns for which to
-#'   render elements.
+#' @param isoline_text Logical; whether to include text value marks along the
+#'   isolines.
+#' @inheritParams ggplot2::geom_text
 #' @param by,num Intervals between elements or number of elements; specify only
 #'   one.
+#' @param label_dodge Numeric; the orthogonal distance of the text from the axis
+#'   or isoline, as a proportion of the minimum of the plot width and height.
 #' @family geom layers
 #' @export
 geom_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  subset = NULL, by = NULL, num = NULL,
+  isoline_text = TRUE,
+  by = NULL, num = NULL,
+  label_dodge = .1,
   ...,
+  parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -44,9 +59,12 @@ geom_isolines <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      na.rm = na.rm,
-      subset = subset,
+      isoline_text = isoline_text,
       by = by, num = num,
+      label_dodge = label_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
       ...
     )
   )
@@ -56,8 +74,11 @@ geom_isolines <- function(
 #' @export
 geom_rows_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  subset = NULL, by = NULL, num = NULL,
+  isoline_text = TRUE,
+  by = NULL, num = NULL,
+  label_dodge = .1,
   ...,
+  parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -70,9 +91,12 @@ geom_rows_isolines <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      na.rm = na.rm,
-      subset = subset,
+      isoline_text = isoline_text,
       by = by, num = num,
+      label_dodge = label_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
       ...
     )
   )
@@ -82,8 +106,11 @@ geom_rows_isolines <- function(
 #' @export
 geom_cols_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  subset = NULL, by = NULL, num = NULL,
+  isoline_text = TRUE,
+  by = NULL, num = NULL,
+  label_dodge = .1,
   ...,
+  parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -96,9 +123,12 @@ geom_cols_isolines <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      na.rm = na.rm,
-      subset = subset,
+      isoline_text = isoline_text,
       by = by, num = num,
+      label_dodge = label_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
       ...
     )
   )
@@ -109,8 +139,11 @@ geom_cols_isolines <- function(
 geom_dims_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "cols",
-  subset = NULL, by = NULL, num = NULL,
+  isoline_text = TRUE,
+  by = NULL, num = NULL,
+  label_dodge = .1,
   ...,
+  parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -123,9 +156,12 @@ geom_dims_isolines <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      na.rm = na.rm,
-      subset = subset,
+      isoline_text = isoline_text,
       by = by, num = num,
+      label_dodge = label_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
       ...
     )
   )
@@ -136,11 +172,21 @@ geom_dims_isolines <- function(
 #' @usage NULL
 #' @export
 GeomIsolines <- ggproto(
-  "GeomIsolines", GeomAbline,
+  "GeomIsolines", Geom,
   
   required_aes = c("x", "y"),
+  
   default_aes = aes(
-    colour = "black", alpha = .8, size = .5, linetype = "dashed"
+    # isoline
+    colour = "black", alpha = .8,
+    size = .5, linetype = "dashed",
+    # mark needs
+    center = 0, scale = 1,
+    # isoline mark text
+    text_colour = "black", text_alpha = .8, text_size = 3,
+    angle = 0,
+    hjust = 0.5, vjust = 0.5,
+    family = "", fontface = 1
   ),
   
   setup_params = function(data, params) {
@@ -156,13 +202,10 @@ GeomIsolines <- ggproto(
   
   setup_data = function(data, params) {
     
-    # by default, render elements for all rows
-    if (! is.null(params$subset)) data <- data[params$subset, , drop = FALSE]
-    
     # centers and scales
     # (center is position on axis at origin)
-    if (! "center" %in% names(data)) data$center <- 0
-    if (! "scale" %in% names(data)) data$scale <- 1
+    #if (! "center" %in% names(data)) data$center <- 0
+    #if (! "scale" %in% names(data)) data$scale <- 1
     
     # axis scales
     data <- transform(data, axis_x = x, axis_y = y)
@@ -176,30 +219,78 @@ GeomIsolines <- ggproto(
   
   draw_panel = function(
     data, panel_params, coord,
-    subset = NULL, by = NULL, num = NULL
+    isoline_text = TRUE,
+    by = NULL, num = NULL,
+    label_dodge = .1,
+    parse = FALSE, check_overlap = FALSE,
+    na.rm = TRUE
   ) {
-    if (is.null(by) && is.null(num)) num <- 6L
     
+    # prepare for marks
     ranges <- coord$range(panel_params)
-    
     data <- calibrate_axes(data, ranges, by, num)
+    
+    # initialize grob list
+    grobs <- list()
     
     # line orientation aesthetics
     data$slope <- - data$axis_x / data$axis_y
     data$intercept <- data$y_val - data$slope * data$x_val
-    # discard unneeded columns
     
     # -+- ensure that vertical lines are rendered correctly -+-
-    grob <- GeomAbline$draw_panel(
+    grobs <- c(grobs, list(GeomAbline$draw_panel(
       data = data, panel_params = panel_params, coord = coord
-    )
+    )))
+    
+    if (isoline_text) {
+      text_data <- data
+      data$slope <- NULL
+      data$intercept <- NULL
+      
+      # specify aesthetics
+      text_data$colour <- text_data$text_colour
+      text_data$alpha <- text_data$text_alpha
+      text_data$size <- text_data$text_size
+      
+      # omit labels at origin
+      text_data <-
+        text_data[text_data$x != 0 | text_data$y != 0, , drop = FALSE]
+      # calculate angles
+      if (is.null(text_data$angle)) text_data$angle <- 0
+      text_data$angle <-
+        as.numeric(text_data$angle) +
+        atan(- text_data$axis_x / text_data$axis_y) / pi * 180
+      # dodge axis
+      # -+- within plotting window -+-
+      text_data <- transform(
+        text_data,
+        x = x_val + axis_x / sqrt(axis_ss) * label_dodge,
+        y = y_val + axis_y / sqrt(axis_ss) * label_dodge
+      )
+      
+      # isoline text grobs
+      grobs <- c(grobs, list(GeomText$draw_panel(
+        data = text_data, panel_params = panel_params, coord = coord,
+        parse = parse,
+        check_overlap = check_overlap,
+        na.rm = na.rm
+      )))
+      
+    }
+    
+    grob <- do.call(grid::grobTree, grobs)
     grob$name <- grid::grobName(grob, "geom_isolines")
     grob
-  }
+  },
+  
+  # update this to include segment and letter in key squares
+  draw_key = draw_key_abline
 )
 
 # `data` must have fields 'axis_x' and 'axis_y'
 calibrate_axes <- function(data, ranges, by, num) {
+  
+  if (is.null(by) && is.null(num)) num <- 6L
   
   # window boundaries for axis positions
   data$win_xmin <- ifelse(data$axis_x > 0, ranges$x[[1L]], ranges$x[[2L]])

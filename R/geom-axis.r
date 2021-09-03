@@ -1,6 +1,5 @@
 #' @title Render axes through origin
 #' 
-
 #' @description `geom_axis()` renders lines through the origin and the position
 #'   of each case or variable.
 #' @template biplot-layers
@@ -19,15 +18,16 @@
 #' - `label`
 #' - `center`, `scale`
 #' - `label_colour`, `label_alpha`, `label_size`, `label_angle`,
-#'   `label_hjust`, `label_just`, `label_family`, `label_fontface`
+#'   `label_hjust`, `label_vjust`, `label_family`, `label_fontface`
 #' - `tick_colour`, `tick_alpha`, `tick_size`, `tick_linetype`
 #' - `text_colour`, `text_alpha`, `text_size`, `text_angle`,
-#'   `text_hjust`, `text_just`, `text_family`, `text_fontface`
+#'   `text_hjust`, `text_vjust`, `text_family`, `text_fontface`
 #' - `group`
 #' 
 
-#' The prefixed aesthetics `label_*`, `tick_*`, and `text_*` are passed to their
-#' respective graphical elements.
+#' The prefixed aesthetics `label_*`, `tick_*`, and `text_*` are used by the
+#' text elements and will inherit any values passed to their un-prefixed
+#' counterparts, if recognized.
 #' 
 
 #' @import ggplot2
@@ -41,8 +41,6 @@
 #'   the minimum of the plot width and height.
 #' @param text_dodge Numeric; the orthogonal distance of the text from the axis,
 #'   as a proportion of the minimum of the plot width and height.
-#' @param label_dodge Numeric; the orthogonal distance of each label from its
-#'   axis, as a proportion of the minimum of the plot width and height.
 #' @family geom layers
 #' @example inst/examples/ex-geom-axis-diabetes.r
 #' @export
@@ -199,7 +197,7 @@ GeomAxis <- ggproto(
     label_colour = "black", label_alpha = NA,
     label_size = 3.88, label_angle = 0,
     label_hjust = "inward", label_vjust = "inward",
-    label_family = "", label_fontface = 1,# label_lineheight = 1.2,
+    label_family = "", label_fontface = 1,
     # mark needs
     center = 0, scale = 1,
     # tick marks
@@ -209,7 +207,7 @@ GeomAxis <- ggproto(
     text_colour = "black", text_alpha = NA,
     text_size = 2.6, text_angle = 0,
     text_hjust = 0.5, text_vjust = 0.5,
-    text_family = "", text_fontface = 1# text_lineheight = 1.2
+    text_family = "", text_fontface = 1
   ),
   
   setup_params = function(data, params) {
@@ -264,7 +262,6 @@ GeomAxis <- ggproto(
     
     if (axis_ticks || axis_text) {
       # prepare for marks
-      if (is.null(by) && is.null(num)) num <- 6L
       ranges <- coord$range(panel_params)
       mark_data <- calibrate_axes(data, ranges, by, num)
     }
@@ -329,7 +326,6 @@ GeomAxis <- ggproto(
       text_data$vjust <- text_data$text_vjust
       text_data$family <- text_data$text_family
       text_data$fontface <- text_data$text_fontface
-      #text_data$lineheight <- text_data$text_lineheight
       
       # omit labels at origin
       text_data <-
@@ -369,7 +365,6 @@ GeomAxis <- ggproto(
       label_data$vjust <- label_data$label_vjust
       label_data$family <- label_data$label_family
       label_data$fontface <- label_data$label_fontface
-      #label_data$lineheight <- label_data$label_lineheight
       
       # compute label positions
       label_data <- cbind(label_data, boundary_points(

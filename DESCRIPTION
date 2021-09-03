@@ -68,7 +68,6 @@ Collate:
     'geom-axis.r'
     'geom-intervals.r'
     'geom-isolines.r'
-    'geom-isolines-text.r'
     'geom-origin.r'
     'geom-path.r'
     'geom-point.r'
