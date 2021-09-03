@@ -6,12 +6,29 @@
 \alias{print.tbl_ord}
 \title{Format a tbl_ord for printing}
 \usage{
-\method{format}{tbl_ord}(x, ..., n = NULL, width = NULL, n_extra = NULL)
+\method{format}{tbl_ord}(
+  x,
+  width = NULL,
+  ...,
+  n = NULL,
+  max_extra_cols = NULL,
+  max_footer_lines = NULL
+)
 
-\method{print}{tbl_ord}(x, ..., n = NULL, width = NULL, n_extra = NULL)
+\method{print}{tbl_ord}(
+  x,
+  width = NULL,
+  ...,
+  n = NULL,
+  max_extra_cols = NULL,
+  max_footer_lines = NULL
+)
 }
 \arguments{
 \item{x}{A \link{tbl_ord} object.}
+
+\item{width}{Width of text output to generate. This defaults to \code{NULL}, which
+means use the \code{width} \link[pillar:pillar_options]{option}.}
 
 \item{...}{Additional arguments.}
 
@@ -20,8 +37,13 @@ if less than the \code{print_max} \link[pillar:pillar_options]{option}.
 Otherwise, will print as many rows as specified by the
 \code{print_min} \link[pillar:pillar_options]{option}.}
 
-\item{width}{Width of text output to generate. This defaults to \code{NULL}, which
-means use the \code{width} \link[pillar:pillar_options]{option}.}
+\item{max_extra_cols}{Number of extra columns to print abbreviated information for,
+if the width is too small for the entire tibble. If \code{NULL},
+the \code{max_extra_cols} \link[pillar:pillar_options]{option} is used.
+The previously defined \code{n_extra} argument is soft-deprecated.}
+
+\item{max_footer_lines}{Maximum number of footer lines. If \code{NULL},
+the \code{max_footer_lines} \link[pillar:pillar_options]{option} is used.}
 }
 \description{
 These methods of \code{\link[base:format]{base::format()}} and \code{\link[base:print]{base::print()}} render a

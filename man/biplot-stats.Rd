@@ -266,6 +266,9 @@ or, if \code{type="euclid"}, the radius of the circle to be drawn.}
 
 \item{segments}{The number of segments to be used in drawing the ellipse.}
 
+\item{subset}{An integer, logical, or character vector indicating a subset of
+rows or columns for which to render graphical elements.}
+
 \item{mult}{Numeric value used to scale the coordinates.}
 
 \item{method}{Passed to \code{\link[stats:dist]{stats::dist()}}.}

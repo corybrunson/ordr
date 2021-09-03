@@ -173,7 +173,7 @@ ggbiplot <- function(
 ensure_dimname_aes <- function(ordination, mapping) {
   if (is.null(ordination)) return(aes())
   if (".name" %in% names(ordination)) {
-    mapping <- c(mapping, aes(.name_subset = .name))
+    mapping <- c(mapping, aes(.name_subset = !! ".name"))
   }
   class(mapping) <- "uneval"
   mapping
