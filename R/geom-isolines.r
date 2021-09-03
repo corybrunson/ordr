@@ -39,6 +39,7 @@
 #' @param label_dodge Numeric; the orthogonal distance of the text from the axis
 #'   or isoline, as a proportion of the minimum of the plot width and height.
 #' @family geom layers
+#' @example inst/examples/ex-geom-isolines-diabetes.r
 #' @export
 geom_isolines <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
