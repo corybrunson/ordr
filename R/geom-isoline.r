@@ -1,11 +1,11 @@
 #' @title Render isolines (contour lines) along axes
 #'
-#' @description `geom_isolines()` renders isolines along row or column axes.
+#' @description `geom_isoline()` renders isolines along row or column axes.
 #' @template biplot-layers
 
 #' @section Aesthetics:
 
-#' `geom_isolines()` understands the following aesthetics (required aesthetics
+#' `geom_isoline()` understands the following aesthetics (required aesthetics
 #' are in bold):
 
 #' - **`x`**
@@ -39,9 +39,9 @@
 #' @param label_dodge Numeric; the orthogonal distance of the text from the axis
 #'   or isoline, as a proportion of the minimum of the plot width and height.
 #' @family geom layers
-#' @example inst/examples/ex-geom-isolines-diabetes.r
+#' @example inst/examples/ex-geom-isoline-diabetes.r
 #' @export
-geom_isolines <- function(
+geom_isoline <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   isoline_text = TRUE,
   by = NULL, num = NULL,
@@ -55,7 +55,7 @@ geom_isolines <- function(
     data = data,
     mapping = mapping,
     stat = stat,
-    geom = GeomIsolines,
+    geom = GeomIsoline,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
@@ -73,7 +73,7 @@ geom_isolines <- function(
 
 #' @rdname biplot-geoms
 #' @export
-geom_rows_isolines <- function(
+geom_rows_isoline <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   isoline_text = TRUE,
   by = NULL, num = NULL,
@@ -87,7 +87,7 @@ geom_rows_isolines <- function(
     data = data,
     mapping = mapping,
     stat = rows_stat(stat),
-    geom = GeomIsolines,
+    geom = GeomIsoline,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
@@ -105,7 +105,7 @@ geom_rows_isolines <- function(
 
 #' @rdname biplot-geoms
 #' @export
-geom_cols_isolines <- function(
+geom_cols_isoline <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   isoline_text = TRUE,
   by = NULL, num = NULL,
@@ -119,7 +119,7 @@ geom_cols_isolines <- function(
     data = data,
     mapping = mapping,
     stat = cols_stat(stat),
-    geom = GeomIsolines,
+    geom = GeomIsoline,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
@@ -137,7 +137,7 @@ geom_cols_isolines <- function(
 
 #' @rdname biplot-geoms
 #' @export
-geom_dims_isolines <- function(
+geom_dims_isoline <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   .matrix = "cols",
   isoline_text = TRUE,
@@ -152,7 +152,7 @@ geom_dims_isolines <- function(
     data = data,
     mapping = mapping,
     stat = matrix_stat(.matrix, stat),
-    geom = GeomIsolines,
+    geom = GeomIsoline,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
@@ -172,8 +172,8 @@ geom_dims_isolines <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
-GeomIsolines <- ggproto(
-  "GeomIsolines", Geom,
+GeomIsoline <- ggproto(
+  "GeomIsoline", Geom,
   
   required_aes = c("x", "y"),
   
@@ -280,7 +280,7 @@ GeomIsolines <- ggproto(
     }
     
     grob <- do.call(grid::grobTree, grobs)
-    grob$name <- grid::grobName(grob, "geom_isolines")
+    grob$name <- grid::grobName(grob, "geom_isoline")
     grob
   },
   

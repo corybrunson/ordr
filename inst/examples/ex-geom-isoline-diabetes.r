@@ -14,8 +14,8 @@ diabetes_lda %>%
   geom_rows_text() +
   geom_cols_vector(subset = c(1, 3, 4)) +
   geom_cols_text_radiate(subset = c(1, 3, 4), size = 3) +
-  geom_cols_isolines(subset = c(1, 3, 4), alpha = .25, num = 4L,
-                     text_alpha = .5, text_size = 3, label_dodge = .2) +
+  geom_cols_isoline(subset = c(1, 3, 4), alpha = .25, num = 4L,
+                    text_alpha = .5, text_size = 3, label_dodge = .2) +
   ggtitle(
     "LDA of Reaven & Miller diabetes groups",
     "Row-standard biplot of standardized LDA"

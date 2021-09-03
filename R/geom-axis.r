@@ -33,7 +33,7 @@
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_text
-#' @inheritParams geom_isolines
+#' @inheritParams geom_isoline
 #' @template param-geom
 #' @param axis_labels,axis_ticks,axis_text Logical; whether to include labels,
 #'   tick marks, and text value marks along the axes.
