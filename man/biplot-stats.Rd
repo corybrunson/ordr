@@ -151,6 +151,7 @@ stat_rows_scale(
   position = "identity",
   show.legend = NA,
   inherit.aes = TRUE,
+  subset = NULL,
   ...,
   mult = 1
 )
@@ -162,6 +163,7 @@ stat_cols_scale(
   position = "identity",
   show.legend = NA,
   inherit.aes = TRUE,
+  subset = NULL,
   ...,
   mult = 1
 )
