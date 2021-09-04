@@ -169,16 +169,6 @@ ggbiplot <- function(
   p
 }
 
-# pass `.name` field to special `.name_subset` aesthetic, for use with `subset`
-ensure_dimname_aes <- function(ordination, mapping) {
-  if (is.null(ordination)) return(aes())
-  if (".name" %in% names(ordination)) {
-    mapping <- c(mapping, aes(.name_subset = !! ".name"))
-  }
-  class(mapping) <- "uneval"
-  mapping
-}
-
 # interpret numerical x and y coordinates as coordinates;
 # assume first two coordinates if none are provided
 ensure_xy_aes <- function(ordination, mapping) {
@@ -204,6 +194,16 @@ ensure_xy_aes <- function(ordination, mapping) {
         mapping[setdiff(names(mapping), "x")]
       )
     }
+  }
+  class(mapping) <- "uneval"
+  mapping
+}
+
+# pass `.name` field to special `.name_subset` aesthetic, for use with `subset`
+ensure_dimname_aes <- function(ordination, mapping) {
+  if (is.null(ordination)) return(aes())
+  if (".name" %in% names(ordination)) {
+    mapping <- c(mapping, aes(.name_subset = !! sym(".name")))
   }
   class(mapping) <- "uneval"
   mapping
