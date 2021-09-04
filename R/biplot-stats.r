@@ -8,6 +8,7 @@
 #' @name biplot-stats
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
+#' @inheritParams stat_rows
 #' @inheritParams stat_scale
 #' @inheritParams stat_center
 #' @inheritParams stat_chull

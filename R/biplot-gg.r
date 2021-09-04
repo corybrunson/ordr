@@ -89,6 +89,8 @@ ggbiplot <- function(
   
   # augment `mapping`, if necessary, with default coordinates
   mapping <- ensure_xy_aes(ordination, mapping)
+  # augment `mapping` with `.name_subset = .name`, if available
+  mapping <- ensure_dimname_aes(ordination, mapping)
   
   # rescale standard coordinates for prediction biplot
   if (prediction) {
@@ -197,6 +199,16 @@ ggbiplot <- function(
   class(p) <- c("ggbiplot", class(p))
   
   p
+}
+
+# pass `.name` field to special `.name_subset` aesthetic, for use with `subset`
+ensure_dimname_aes <- function(ordination, mapping) {
+  if (is.null(ordination)) return(aes())
+  if (".name" %in% names(ordination)) {
+    mapping <- c(mapping, aes(.name_subset = !! ".name"))
+  }
+  class(mapping) <- "uneval"
+  mapping
 }
 
 # interpret numerical x and y coordinates as coordinates;

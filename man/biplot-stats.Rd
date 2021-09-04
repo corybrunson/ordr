@@ -151,6 +151,7 @@ stat_rows_scale(
   position = "identity",
   show.legend = NA,
   inherit.aes = TRUE,
+  subset = NULL,
   ...,
   mult = 1
 )
@@ -162,6 +163,7 @@ stat_cols_scale(
   position = "identity",
   show.legend = NA,
   inherit.aes = TRUE,
+  subset = NULL,
   ...,
   mult = 1
 )
@@ -263,6 +265,9 @@ This ellipse probably won't appear circular unless \code{coord_fixed()} is appli
 or, if \code{type="euclid"}, the radius of the circle to be drawn.}
 
 \item{segments}{The number of segments to be used in drawing the ellipse.}
+
+\item{subset}{An integer, logical, or character vector indicating a subset of
+rows or columns for which to render graphical elements.}
 
 \item{mult}{Numeric value used to scale the coordinates.}
 
