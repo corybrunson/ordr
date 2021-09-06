@@ -15,5 +15,6 @@
 #' @inheritParams geom_axis
 #' @inheritParams geom_isoline
 #' @inheritParams geom_vector
+#' @inheritParams geom_addition
 #' @family biplot layers
 NULL

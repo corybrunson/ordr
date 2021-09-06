@@ -19,7 +19,7 @@ annotation_cols(x)
 \arguments{
 \item{x}{An object of class '\link{tbl_ord}'.}
 
-\item{annot}{A \link[base:data.frame]{data.frame} having the same number of rows
+\item{annot}{A \link[base:data.frame]{data frame} having the same number of rows
 as \code{get_*(x)}.}
 }
 \description{

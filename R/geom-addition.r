@@ -16,10 +16,16 @@
 #' - `colour`
 #' - `linetype`
 #' - `size`
+#' - `fill`
+#' - `shape`
+#' - `stroke`
+#' - `point_size`
+#' - `point_fill`
 #' - `center`, `scale`
 #' - `group`
 #' 
 
+#' @include geom-vector.r
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @inheritParams geom_vector
@@ -152,7 +158,8 @@ GeomAddition <- ggproto(
   required_aes = c(),
   
   default_aes = aes(
-    colour = "black", alpha = NA, size = .5, linetype = 1L,
+    colour = "black", alpha = NA, size = .5, linetype = 1L, fill = NA,
+    shape = 19L, stroke = .5, point_size = 1.5, point_fill = NA,
     center = 0, scale = 1
   ),
   
@@ -160,13 +167,6 @@ GeomAddition <- ggproto(
     
     if (! is.data.frame(params$new_data))
       params$new_data <- as.data.frame(params$new_data)
-    
-    params$type <- match.arg(params$type, c("centroid", "sequence"))
-    
-    params
-  },
-  
-  setup_data = function(data, params) {
     
     # available dual dimensions
     dual_names <- intersect(names(params$new_data), data$.name_subset)
@@ -178,44 +178,18 @@ GeomAddition <- ggproto(
       unlist(params$new_data[, dual_names, drop = TRUE])
     )
     
-    # data frame of individual arrow elements
-    if (params$type == "sequence") {
-      do.call(rbind, lapply(seq(nrow(params$new_data)), function(i) {
-        row_coef <- unlist(params$new_data[i, dual_names, drop = TRUE])
-        row_coef <- (row_coef - data$center) / data$scale
-        row_data <- cbind(data, row = i)
-        row_data[, c("x", "y")] <- row_data[, c("x", "y")] * row_coef
-        row_data$x <- cumsum(row_data$x)
-        row_data$y <- cumsum(row_data$y)
-        row_data$xend <- dplyr::lag(row_data$x, default = 0)
-        row_data$yend <- dplyr::lag(row_data$y, default = 0)
-        row_data
-      }))
-    } else if (params$type == "centroid") {
-      do.call(rbind, lapply(seq(nrow(params$new_data)), function(i) {
-        n_coef <- length(dual_names)
-        row_coef <- unlist(params$new_data[i, dual_names, drop = TRUE])
-        row_coef <- (row_coef - data$center) / data$scale
-        row_data <- cbind(data, row = i)
-        row_data[, c("x", "y")] <- row_data[, c("x", "y")] * row_coef / n_coef
-        row_data$xend <- 0
-        row_data$yend <- 0
-        cent_coef <- apply(row_data[, c("x", "y"), drop = FALSE], 2L, sum)
-        row_data <- as.data.frame(lapply(row_data, only))
-        row_data$xend <- cent_coef[["x"]]
-        row_data$yend <- cent_coef[["y"]]
-        row_data$x <- row_data$xend * n_coef
-        row_data$y <- row_data$yend * n_coef
-        row_data
-      }))
-    }
+    params$type <- match.arg(params$type, c("centroid", "sequence"))
+    
+    params
   },
+  
+  setup_data = function(data, params) data,
   
   draw_panel = function(
     data, panel_params, coord,
     new_data = NULL, type = c("centroid", "sequence"),
-    arrow = default_arrow,
-    lineend = "round", linejoin = "mitre",
+    arrow = default_arrow, lineend = "round", linejoin = "mitre",
+    rule = "evenodd",
     na.rm = FALSE
   ) {
     if (! coord$is_linear()) {
@@ -225,11 +199,85 @@ GeomAddition <- ggproto(
     # reverse ends of `arrow`
     if (! is.null(arrow)) arrow$ends <- c(2L, 1L, 3L)[arrow$ends]
     
-    GeomSegment$draw_panel(
-      data = data, panel_params = panel_params, coord = coord,
+    # available dual dimensions
+    dual_names <- intersect(names(new_data), data$.name_subset)
+    n_coef <- length(dual_names)
+    
+    # data frames of individual arrow elements and convex hulls
+    if (type == "sequence") {
+      hull_data <- NULL
+      cent_data <- NULL
+      vec_data <- do.call(rbind, lapply(seq(nrow(new_data)), function(i) {
+        row_coef <- unlist(new_data[i, dual_names, drop = TRUE])
+        row_coef <- (row_coef - data$center) / data$scale
+        row_data <- cbind(data, row = i)
+        row_data[, c("x", "y")] <- row_data[, c("x", "y")] * row_coef
+        row_data$x <- cumsum(row_data$x)
+        row_data$y <- cumsum(row_data$y)
+        row_data$xend <- dplyr::lag(row_data$x, default = 0)
+        row_data$yend <- dplyr::lag(row_data$y, default = 0)
+        row_data
+      }))
+    } else if (type == "centroid") {
+      # keep only columns that are constant throughout the data
+      only_data <- dplyr::select_if(data, is_const)[1L, , drop = FALSE]
+      only_data$x <- NULL
+      only_data$y <- NULL
+      hull_data <- do.call(rbind, lapply(seq(nrow(new_data)), function(i) {
+        row_coef <- unlist(new_data[i, dual_names, drop = TRUE])
+        row_coef <- (row_coef - data$center) / data$scale
+        row_data <- cbind(data[, c("x", "y"), drop = FALSE], row = i)
+        row_data[, c("x", "y")] <- row_data[, c("x", "y")] * row_coef
+        chull_ids <- chull(row_data)
+        row_data[chull_ids[c(seq_along(chull_ids), 1L)], , drop = FALSE]
+      }))
+      hull_data <- cbind(hull_data, only_data, row.names = NULL)
+      hull_data$group <- hull_data$row
+      cent_data <- do.call(rbind, lapply(seq(nrow(new_data)), function(i) {
+        row_coef <- unlist(new_data[i, dual_names, drop = TRUE])
+        row_coef <- (row_coef - data$center) / data$scale
+        cent_coef <- apply(
+          as.matrix(data[, c("x", "y"), drop = FALSE]) * row_coef / n_coef,
+          2L, sum
+        )
+        data.frame(x = cent_coef[["x"]], y = cent_coef[["y"]])
+      }))
+      cent_data <- cbind(cent_data, only_data, row.names = NULL)
+      vec_data <- transform(
+        cent_data,
+        xend = 0, yend = 0, x = x * n_coef, y = y * n_coef
+      )
+      cent_data$size <- cent_data$point_size
+      cent_data$fill <- cent_data$point_fill
+      cent_data$linetype <- NULL
+    }
+    
+    # list of grobs
+    grobs <- list()
+    # convex hull of summand vectors
+    if (! is.null(hull_data)) {
+      grobs <- c(grobs, list(GeomPolygon$draw_panel(
+        data = hull_data, panel_params = panel_params, coord = coord,
+        rule = rule
+      )))
+    }
+    # centroids of summand vectors
+    if (! is.null(cent_data)) {
+      grobs <- c(grobs, list(GeomPoint$draw_panel(
+        data = cent_data, panel_params = panel_params, coord = coord,
+        na.rm = na.rm
+      )))
+    }
+    # vectors
+    grobs <- c(grobs, list(GeomSegment$draw_panel(
+      data = vec_data, panel_params = panel_params, coord = coord,
       arrow = arrow, lineend = lineend, linejoin = linejoin,
       na.rm = na.rm
-    )
+    )))
+    
+    grob <- do.call(grid::grobTree, grobs)
+    grob$name <- grid::grobName(grob, "geom_addition")
+    grob
   }
 )
 

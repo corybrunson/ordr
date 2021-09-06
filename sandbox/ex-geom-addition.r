@@ -14,7 +14,7 @@ iris_pca %>%
   scale_color_brewer(type = "qual", palette = 2) +
   geom_origin(marker = "circle", alpha = .5) +
   geom_cols_addition(aes(center = .center, scale = .scale, linetype = measure),
-                     new_data = new_data, type = "sequence", alpha = .25) +
+                     new_data = new_data, type = "sequence", alpha = .5) +
   geom_rows_text(aes(label = obs, color = species), alpha = .5, size = 3)
 iris_pca %>%
   augment_ord() %>%
@@ -23,7 +23,7 @@ iris_pca %>%
   ggbiplot() +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  geom_origin(marker = "circle", alpha = .5) +
+  geom_origin(marker = "cross", alpha = .5) +
   geom_cols_addition(aes(center = .center, scale = .scale),
-                     new_data = new_data, type = "centroid", alpha = .25) +
+                     new_data = new_data, type = "centroid", alpha = .5) +
   geom_rows_text(aes(label = obs, color = species), alpha = .5, size = 3)
