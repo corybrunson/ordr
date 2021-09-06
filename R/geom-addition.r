@@ -16,6 +16,7 @@
 #' - `colour`
 #' - `linetype`
 #' - `size`
+#' - `center`, `scale`
 #' - `group`
 #' 
 
@@ -150,6 +151,11 @@ GeomAddition <- ggproto(
   
   required_aes = c(),
   
+  default_aes = aes(
+    colour = "black", alpha = NA, size = .5, linetype = 1L,
+    center = 0, scale = 1
+  ),
+  
   setup_params = function(data, params) {
     
     if (! is.data.frame(params$new_data))
@@ -162,18 +168,47 @@ GeomAddition <- ggproto(
   
   setup_data = function(data, params) {
     
-    # non-positional aesthetics of data
-    xy_aes <- as.vector(outer(
-      c("x", "y"),
-      c("", "end", "max", "min", "intercept"),
-      paste0
-    ))
-    aes_data <- data[, setdiff(names(data), xy_aes), drop = FALSE]
+    # available dual dimensions
+    dual_names <- intersect(names(params$new_data), data$.name_subset)
+    
+    # impute missing values
+    params$new_data[, dual_names] <- ifelse(
+      is.na(unlist(params$new_data[, dual_names, drop = TRUE])),
+      0,
+      unlist(params$new_data[, dual_names, drop = TRUE])
+    )
     
     # data frame of individual arrow elements
-    add_data <- rows_to_additions(data, params$new_data, params$type)
-    
-    merge(add_data, aes_data, by = ".name_subset")
+    if (params$type == "sequence") {
+      do.call(rbind, lapply(seq(nrow(params$new_data)), function(i) {
+        row_coef <- unlist(params$new_data[i, dual_names, drop = TRUE])
+        row_coef <- (row_coef - data$center) / data$scale
+        row_data <- cbind(data, row = i)
+        row_data[, c("x", "y")] <- row_data[, c("x", "y")] * row_coef
+        row_data$x <- cumsum(row_data$x)
+        row_data$y <- cumsum(row_data$y)
+        row_data$xend <- dplyr::lag(row_data$x, default = 0)
+        row_data$yend <- dplyr::lag(row_data$y, default = 0)
+        row_data
+      }))
+    } else if (params$type == "centroid") {
+      do.call(rbind, lapply(seq(nrow(params$new_data)), function(i) {
+        n_coef <- length(dual_names)
+        row_coef <- unlist(params$new_data[i, dual_names, drop = TRUE])
+        row_coef <- (row_coef - data$center) / data$scale
+        row_data <- cbind(data, row = i)
+        row_data[, c("x", "y")] <- row_data[, c("x", "y")] * row_coef / n_coef
+        row_data$xend <- 0
+        row_data$yend <- 0
+        cent_coef <- apply(row_data[, c("x", "y"), drop = FALSE], 2L, sum)
+        row_data <- as.data.frame(lapply(row_data, only))
+        row_data$xend <- cent_coef[["x"]]
+        row_data$yend <- cent_coef[["y"]]
+        row_data$x <- row_data$xend * n_coef
+        row_data$y <- row_data$yend * n_coef
+        row_data
+      }))
+    }
   },
   
   draw_panel = function(
@@ -198,9 +233,19 @@ GeomAddition <- ggproto(
   }
 )
 
-rows_to_additions <- function(data, new_data, type) {
-  for (i in seq(nrow(new_data))) {
-    new_row <- new_data[i, data$.name_subset, drop = FALSE]
-    
+
+# single unique value, or else NA
+only <- function(x) {
+  uniq <- unique(x)
+  if (length(uniq) == 1L) {
+    uniq
+  } else {
+    switch(
+      class(x),
+      integer = NA_integer_,
+      numeric = NA_real_,
+      character = NA_character_,
+      factor = factor(NA_character_, levels = levels(x))
+    )
   }
 }
