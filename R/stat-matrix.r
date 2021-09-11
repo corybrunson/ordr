@@ -9,6 +9,8 @@
 
 #' @name stat_rows
 #' @inheritParams ggplot2::layer
+#' @param subset An integer, logical, or character vector indicating a subset of
+#'   rows or columns for which to render graphical elements.
 #' @template param-stat
 #' @family biplot layers
 
@@ -17,6 +19,7 @@
 stat_rows <- function(
   mapping = NULL, data = data,
   geom = "point", position = "identity",
+  subset = NULL,
   ...,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -29,6 +32,7 @@ stat_rows <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
+      subset = subset,
       na.rm = FALSE,
       ...
     )
@@ -40,6 +44,7 @@ stat_rows <- function(
 stat_cols <- function(
   mapping = NULL, data = data,
   geom = "axis", position = "identity",
+  subset = NULL,
   ...,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -52,6 +57,7 @@ stat_cols <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
+      subset = subset,
       na.rm = FALSE,
       ...
     )
@@ -65,7 +71,12 @@ stat_cols <- function(
 StatRows <- ggproto(
   "StatRows", StatIdentity,
   
-  setup_data = setup_rows_data
+  setup_data = setup_rows_data,
+  
+  compute_group = function(data, scales,
+                           subset = NULL) {
+    data
+  }
 )
 
 #' @rdname ordr-ggproto
@@ -75,5 +86,10 @@ StatRows <- ggproto(
 StatCols <- ggproto(
   "StatCols", StatIdentity,
   
-  setup_data = setup_cols_data
+  setup_data = setup_cols_data,
+  
+  compute_group = function(data, scales,
+                           subset = NULL) {
+    data
+  }
 )

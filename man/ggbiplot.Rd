@@ -8,7 +8,6 @@
 ggbiplot(
   ordination = NULL,
   mapping = aes(x = 1, y = 2),
-  prediction = FALSE,
   xlim = NULL,
   ylim = NULL,
   expand = TRUE,
@@ -29,11 +28,6 @@ ord_aes(ordination, ...)
 \item{mapping}{List of default aesthetic mappings to use for the biplot. The
 default assigns the first two coordinates to the aesthetics \code{x} and \code{y}.
 Other assignments must be supplied in each layer added to the plot.}
-
-\item{prediction}{Logical; whether to build a prediction biplot rather than
-an interpolation biplot (the default). \code{TRUE} requires that \code{x} and \code{y} are
-mapped to shared coordinates, that no other shared coordinates are mapped
-to, and inertia is conferred entirely onto one matrix factor.}
 
 \item{xlim}{Limits for the x and y axes.}
 

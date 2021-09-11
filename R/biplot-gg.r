@@ -46,10 +46,6 @@
 #' @param mapping List of default aesthetic mappings to use for the biplot. The
 #'   default assigns the first two coordinates to the aesthetics `x` and `y`.
 #'   Other assignments must be supplied in each layer added to the plot.
-#' @param prediction Logical; whether to build a prediction biplot rather than
-#'   an interpolation biplot (the default). `TRUE` requires that `x` and `y` are
-#'   mapped to shared coordinates, that no other shared coordinates are mapped
-#'   to, and inertia is conferred entirely onto one matrix factor.
 #' @inheritParams ggplot2::coord_equal
 #' @param axis.percents Whether to concatenate default axis labels with inertia
 #'   percentages.
@@ -69,7 +65,7 @@
 #' @rdname ggbiplot
 #' @export
 ggbiplot <- function(
-  ordination = NULL, mapping = aes(x = 1, y = 2), prediction = FALSE,
+  ordination = NULL, mapping = aes(x = 1, y = 2),
   xlim = NULL, ylim = NULL, expand = TRUE, clip = "on",
   axis.percents = TRUE, sec.axes = NULL, scale.factor = NULL,
   scale_rows = NULL, scale_cols = NULL,
@@ -89,34 +85,8 @@ ggbiplot <- function(
   
   # augment `mapping`, if necessary, with default coordinates
   mapping <- ensure_xy_aes(ordination, mapping)
-  
-  # rescale standard coordinates for prediction biplot
-  if (prediction) {
-    xy_map <- stringr::str_remove(as.character(mapping[c("x", "y")]), "^~")
-    if (! all(c("x", "y") %in% names(mapping)) &&
-        any(stringr::str_detect(names(mapping), "..coord"))) {
-      warning("For prediction biplots, ",
-              "map only `x` and `y` to shared coordinates.")
-    } else if (! all(xy_map %in% attr(ordination, "coordinates"))) {
-      warning("For prediction biplots, ",
-              "map both `x` and `y` to shared coordinates.")
-    } else if (! all(c(0, 1) %in% conference)) {
-      warning("For prediction biplots, ",
-              "inertia must be balanced and conferred on one factor.")
-    } else {
-      # remove coordinates other than those used in the biplot
-      ordination[setdiff(get_coord(ordination), xy_map)] <- NULL
-      # rescale standard coordinates
-      std_fac <- c("rows", "cols")[! as.logical(conference)]
-      std_ss <- apply(
-        ordination[ordination$.matrix == std_fac, xy_map],
-        1L,
-        function(x) sum(x^2)
-      )
-      ordination[ordination$.matrix == std_fac, xy_map] <-
-        ordination[ordination$.matrix == std_fac, xy_map] / std_ss
-    }
-  }
+  # augment `mapping` with `.name_subset = .name`, if available
+  mapping <- ensure_dimname_aes(ordination, mapping)
   
   # scale 'rows' or 'cols' as indicated by `scale_rows` and `scale_cols`
   if (! is.null(scale_rows) && ! is.null(ordination)) {
@@ -224,6 +194,16 @@ ensure_xy_aes <- function(ordination, mapping) {
         mapping[setdiff(names(mapping), "x")]
       )
     }
+  }
+  class(mapping) <- "uneval"
+  mapping
+}
+
+# pass `.name` field to special `.name_subset` aesthetic, for use with `subset`
+ensure_dimname_aes <- function(ordination, mapping) {
+  if (is.null(ordination)) return(aes())
+  if (".name" %in% names(ordination)) {
+    mapping <- c(mapping, aes(.name_subset = !! sym(".name")))
   }
   class(mapping) <- "uneval"
   mapping
