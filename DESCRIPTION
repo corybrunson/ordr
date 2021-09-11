@@ -28,6 +28,7 @@ Imports:
     ggrepel,
     ca,
     MASS,
+    candisc,
     logisticPCA,
     vegan,
     ade4,
@@ -85,6 +86,7 @@ Collate:
     'methods-base-svd.r'
     'methods-ca-ca.r'
     'methods-ca-mjca.r'
+    'methods-candisc.r'
     'methods-logisticpca-lpca.r'
     'methods-mass-lda.r'
     'methods-nipals-nipals.r'

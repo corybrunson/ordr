@@ -16,18 +16,12 @@
 \item{...}{Additional arguments.}
 
 \item{n}{Number of rows to show. If \code{NULL}, the default, will print all rows
-if less than option \code{tibble.print_max}. Otherwise, will print
-\code{tibble.print_min} rows.}
+if less than the \code{print_max} \link[pillar:pillar_options]{option}.
+Otherwise, will print as many rows as specified by the
+\code{print_min} \link[pillar:pillar_options]{option}.}
 
 \item{width}{Width of text output to generate. This defaults to \code{NULL}, which
-means use \code{getOption("tibble.width")} or (if also \code{NULL})
-\code{getOption("width")}; the latter displays only the columns that fit on one
-screen. You can also set \code{options(tibble.width = Inf)} to override this
-default and always print all columns, this may be slow for very wide tibbles.}
-
-\item{n_extra}{Number of extra columns to print abbreviated information for,
-if the width is too small for the entire tibble. If \code{NULL}, the default,
-will print information about at most \code{tibble.max_extra_cols} extra columns.}
+means use the \code{width} \link[pillar:pillar_options]{option}.}
 }
 \description{
 These methods of \code{\link[base:format]{base::format()}} and \code{\link[base:print]{base::print()}} render a

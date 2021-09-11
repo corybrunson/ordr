@@ -8,7 +8,7 @@
 #' @name methods-candisc
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/ex-methods-candisc-.r
+#' @example inst/examples/ex-methods-candisc-savings.r
 NULL
 
 #' @rdname methods-candisc
@@ -18,7 +18,7 @@ as_tbl_ord.cancor <- as_tbl_ord_default
 #' @rdname methods-candisc
 #' @export
 recover_rows.cancor <- function(x) {
-  res <- cov(x$X) %*% x$coef$X
+  res <- x$structure$X.xscores
   colnames(res) <- recover_coord(x)
   res
 }
@@ -26,7 +26,7 @@ recover_rows.cancor <- function(x) {
 #' @rdname methods-candisc
 #' @export
 recover_cols.cancor <- function(x) {
-  res <- cov(x$Y) %*% x$coef$Y
+  res <- x$structure$Y.yscores
   colnames(res) <- recover_coord(x)
   res
 }
@@ -42,7 +42,7 @@ recover_coord.cancor <- function(x) paste0("can", seq_along(x$cancor))
 #' @rdname methods-candisc
 #' @export
 recover_conference.cancor <- function(x) {
-  # `candisc::cancor()` returns canonical weights, i.e. standard coefficients
+  # `x$structure$*` are structure correlations; rows grab intraset ones
   c(0, 0)
 }
 
