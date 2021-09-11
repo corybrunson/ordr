@@ -26,12 +26,7 @@ Imports:
     purrr,
     labeling,
     ggrepel,
-    ca,
-    MASS,
-    candisc,
     logisticPCA,
-    vegan,
-    ade4,
     nipals,
     sessioninfo
 License: GPL-3
@@ -40,6 +35,11 @@ LazyData: true
 Suggests:
     testthat,
     gridExtra,
+    ca,
+    MASS,
+    candisc,
+    vegan,
+    ade4,
     igraph,
     igraphdata,
     heplots,
