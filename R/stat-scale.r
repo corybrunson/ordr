@@ -5,6 +5,7 @@
 #' @template biplot-ord-aes
 
 #' @inheritParams ggplot2::layer
+#' @inheritParams stat_rows
 #' @param mult Numeric value used to scale the coordinates.
 #' @template param-stat
 #' @family stat layers
@@ -38,6 +39,7 @@ stat_rows_scale <- function(
   mapping = NULL, data = NULL, geom = "point", position = "identity",
   show.legend = NA,
   inherit.aes = TRUE,
+  subset = NULL,
   ...,
   mult = 1
 ) {
@@ -50,6 +52,7 @@ stat_rows_scale <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
+      subset = subset,
       mult = mult,
       na.rm = FALSE,
       ...
@@ -63,6 +66,7 @@ stat_cols_scale <- function(
   mapping = NULL, data = NULL, geom = "point", position = "identity",
   show.legend = NA,
   inherit.aes = TRUE,
+  subset = NULL,
   ...,
   mult = 1
 ) {
@@ -75,6 +79,7 @@ stat_cols_scale <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
+      subset = subset,
       mult = mult,
       na.rm = FALSE,
       ...
@@ -105,7 +110,12 @@ StatScale <- ggproto(
 StatRowsScale <- ggproto(
   "StatRowsScale", StatScale,
   
-  setup_data = setup_rows_xy_data
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = function(data, scales,
+                           subset = NULL, mult = 1) {
+    StatScale$compute_group(data, scales, mult = mult)
+  }
 )
 
 #' @rdname ordr-ggproto
@@ -115,5 +125,10 @@ StatRowsScale <- ggproto(
 StatColsScale <- ggproto(
   "StatColsScale", StatScale,
   
-  setup_data = setup_cols_xy_data
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = function(data, scales,
+                           subset = NULL, mult = 1) {
+    StatScale$compute_group(data, scales, mult = mult)
+  }
 )

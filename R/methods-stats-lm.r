@@ -64,7 +64,7 @@ augmentation_rows.lm <- function(x) {
 #' @rdname methods-lm
 #' @export
 augmentation_cols.lm <- function(x) {
-  .name <- if (is.matrix(x$model[, 1])) {
+  .name <- if (is.matrix(x$model[, 1]) && ! is.null(colnames(x$model[, 1]))) {
     colnames(x$model[, 1])
   } else {
     names(x$model)[1]

@@ -14,5 +14,5 @@ Because the artificial axes often go uninterpreted, biplots may omit the
 visual aids (tick marks and labels, grid lines) used to recover the
 artificial coordinates of the row and column markers The biplot (partial)
 theme removes these elements from the current theme. This can be especially
-helpful when plotting \link[=geom_axis]{axes} or \link[=geom_isolines]{isolines}.
+helpful when plotting \link[=geom_axis]{axes} or \link[=geom_isoline]{isolines}.
 }

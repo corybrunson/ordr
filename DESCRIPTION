@@ -26,11 +26,7 @@ Imports:
     purrr,
     labeling,
     ggrepel,
-    ca,
-    MASS,
     logisticPCA,
-    vegan,
-    ade4,
     nipals,
     sessioninfo
 License: GPL-3
@@ -39,6 +35,11 @@ LazyData: true
 Suggests:
     testthat,
     gridExtra,
+    ca,
+    MASS,
+    candisc,
+    vegan,
+    ade4,
     igraph,
     igraphdata,
     heplots,
@@ -66,13 +67,9 @@ Collate:
     'fun-lda.r'
     'fun-lra.r'
     'fun-wrap.r'
-    'geom-axis-label.r'
-    'geom-isolines.r'
-    'geom-axis-text.r'
-    'geom-axis-ticks.r'
     'geom-axis.r'
     'geom-intervals.r'
-    'geom-isolines-text.r'
+    'geom-isoline.r'
     'geom-origin.r'
     'geom-path.r'
     'geom-point.r'
@@ -85,6 +82,7 @@ Collate:
     'methods-base-svd.r'
     'methods-ca-ca.r'
     'methods-ca-mjca.r'
+    'methods-candisc-cancor.r'
     'methods-logisticpca-lpca.r'
     'methods-mass-lda.r'
     'methods-nipals-nipals.r'

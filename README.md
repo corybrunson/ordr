@@ -199,7 +199,7 @@ tidy(iris_pca) %T>% print() %>%
   labs(x = "", y = "Proportion of inertia") +
   ggtitle("PCA of Anderson's iris measurements",
           "Distribution of inertia")
-#> # A tibble: 4 x 4
+#> # A tibble: 4 × 4
 #>   .name .sdev .inertia .prop_var
 #>   <fct> <dbl>    <dbl>     <dbl>
 #> 1 PC1   1.71    435.     0.730  
@@ -227,42 +227,6 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
 ```
 
 ![](man/figures/README-interpolation%20biplot-1.png)<!-- -->
-
-When variables are represented in standard coordinates, as typically in
-PCA, their rules can be rescaled to yield a prediction biplot:
-
-``` r
-ggbiplot(iris_pca, prediction = TRUE, axis.percents = FALSE) +
-  theme_biplot() +
-  geom_rows_point(aes(color = Species, shape = Species)) +
-  stat_rows_center(
-    aes(color = Species, shape = Species),
-    size = 5, alpha = .5
-  ) +
-  geom_cols_axis() +
-  geom_cols_axis_ticks(aes(center = .center, scale = .scale)) +
-  geom_cols_axis_text(aes(center = .center, scale = .scale)) +
-  geom_cols_axis_label(aes(label = .name)) +
-  ggtitle("Prediction biplot of Anderson's iris measurements",
-          "Project a marker onto an axis to approximate its measurement")
-#> Warning: Ignoring unknown aesthetics: center, scale
-
-#> Warning: Ignoring unknown aesthetics: center, scale
-#> Warning: Ignoring unknown aesthetics: label
-#> No center (limit) function(s) supplied; defaulting to `mean_se()`
-#> No center (limit) function(s) supplied; defaulting to `mean_se()`
-#> No center (limit) function(s) supplied; defaulting to `mean_se()`
-```
-
-![](man/figures/README-prediction%20biplot-1.png)<!-- -->
-
-``` r
-aggregate(iris[, 1:4], by = iris[, "Species", drop = FALSE], FUN = mean)
-#>      Species Sepal.Length Sepal.Width Petal.Length Petal.Width
-#> 1     setosa        5.006       3.428        1.462       0.246
-#> 2 versicolor        5.936       2.770        4.260       1.326
-#> 3  virginica        6.588       2.974        5.552       2.026
-```
 
 ## acknowledgments
 

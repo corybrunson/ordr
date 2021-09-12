@@ -230,12 +230,8 @@ points for rows and arrows for columns.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other geom layers: 
-<code><a href='geom_axis_label.html'>geom_axis_label</a>()</code>,
-<code><a href='geom_axis_text.html'>geom_axis_text</a>()</code>,
-<code><a href='geom_axis_ticks.html'>geom_axis_ticks</a>()</code>,
 <code><a href='geom_axis.html'>geom_axis</a>()</code>,
-<code><a href='geom_isolines_text.html'>geom_isolines_text</a>()</code>,
-<code><a href='geom_isolines.html'>geom_isolines</a>()</code>,
+<code><a href='geom_isoline.html'>geom_isoline</a>()</code>,
 <code><a href='geom_lineranges.html'>geom_lineranges</a>()</code>,
 <code><a href='geom_origin.html'>geom_origin</a>()</code>,
 <code><a href='geom_text_radiate.html'>geom_text_radiate</a>()</code>,
@@ -254,22 +250,22 @@ points for rows and arrows for columns.</p>
 #&gt; # 
 #&gt; # Rows (principal): [ 145 x 5 | 1 ]
 #&gt;   Comp.1 Comp.2   Comp.3 ... |   group 
-#&gt;                              |   <span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>1.35</span><span>  -</span><span style='color: #BB0000;'>1.54</span><span>  -</span><span style='color: #BB0000;'>0.142</span><span>       | </span><span style='color: #BCBCBC;'>1</span><span> Normal
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>1.11</span><span>  -</span><span style='color: #BB0000;'>0.760</span><span>  0.582   ... | </span><span style='color: #BCBCBC;'>2</span><span> Normal
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.897</span><span> -</span><span style='color: #BB0000;'>0.609</span><span>  0.311       | </span><span style='color: #BCBCBC;'>3</span><span> Normal
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.989</span><span>  0.246  0.481       | </span><span style='color: #BCBCBC;'>4</span><span> Normal
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>0.986</span><span>  0.357  0.006</span><span style='text-decoration: underline;'>24</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> Normal
-#&gt; </span><span style='color: #949494;'># … with 140 more rows</span><span>
+#&gt;                              |   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span> 
+#&gt; <span style='color: #BCBCBC;'>1</span> -<span style='color: #BB0000;'>1.35</span>  -<span style='color: #BB0000;'>1.54</span>  -<span style='color: #BB0000;'>0.142</span>       | <span style='color: #BCBCBC;'>1</span> Normal
+#&gt; <span style='color: #BCBCBC;'>2</span> -<span style='color: #BB0000;'>1.11</span>  -<span style='color: #BB0000;'>0.760</span>  0.582   ... | <span style='color: #BCBCBC;'>2</span> Normal
+#&gt; <span style='color: #BCBCBC;'>3</span> -<span style='color: #BB0000;'>0.897</span> -<span style='color: #BB0000;'>0.609</span>  0.311       | <span style='color: #BCBCBC;'>3</span> Normal
+#&gt; <span style='color: #BCBCBC;'>4</span> -<span style='color: #BB0000;'>0.989</span>  0.246  0.481       | <span style='color: #BCBCBC;'>4</span> Normal
+#&gt; <span style='color: #BCBCBC;'>5</span> -<span style='color: #BB0000;'>0.986</span>  0.357  0.006<span style='text-decoration: underline;'>24</span>     | <span style='color: #BCBCBC;'>5</span> Normal
+#&gt; <span style='color: #949494;'># … with 140 more rows</span>
 #&gt; # 
 #&gt; # Columns (standard): [ 5 x 5 | 3 ]
 #&gt;    Comp.1  Comp.2 Comp.3 ... |   .name   .center  .scale
-#&gt;                              |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.087</span><span style='text-decoration: underline;'>5</span><span>  0.704   0.648     | </span><span style='color: #BCBCBC;'>1</span><span> relwt     0.977   0.129
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.580  -</span><span style='color: #BB0000;'>0.122</span><span>  -</span><span style='color: #BB0000;'>0.111</span><span> ... | </span><span style='color: #BCBCBC;'>2</span><span> glufast 122.     63.7  
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.586  -</span><span style='color: #BB0000;'>0.064</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span> -</span><span style='color: #BB0000;'>0.157</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> glutest 544.    316.   
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.229</span><span>   0.597  -</span><span style='color: #BB0000;'>0.725</span><span>     | </span><span style='color: #BCBCBC;'>4</span><span> instest 186.    121.   
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.510   0.360  -</span><span style='color: #BB0000;'>0.131</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> sspg    184.    106.   </div><div class='input'><span class='co'># note that column standard coordinates are unit vectors</span>
+#&gt;                              |   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>  0.087<span style='text-decoration: underline;'>5</span>  0.704   0.648     | <span style='color: #BCBCBC;'>1</span> relwt     0.977   0.129
+#&gt; <span style='color: #BCBCBC;'>2</span>  0.580  -<span style='color: #BB0000;'>0.122</span>  -<span style='color: #BB0000;'>0.111</span> ... | <span style='color: #BCBCBC;'>2</span> glufast 122.     63.7  
+#&gt; <span style='color: #BCBCBC;'>3</span>  0.586  -<span style='color: #BB0000;'>0.064</span><span style='color: #BB0000; text-decoration: underline;'>1</span> -<span style='color: #BB0000;'>0.157</span>     | <span style='color: #BCBCBC;'>3</span> glutest 544.    316.   
+#&gt; <span style='color: #BCBCBC;'>4</span> -<span style='color: #BB0000;'>0.229</span>   0.597  -<span style='color: #BB0000;'>0.725</span>     | <span style='color: #BCBCBC;'>4</span> instest 186.    121.   
+#&gt; <span style='color: #BCBCBC;'>5</span>  0.510   0.360  -<span style='color: #BB0000;'>0.131</span>     | <span style='color: #BCBCBC;'>5</span> sspg    184.    106.   </div><div class='input'><span class='co'># note that column standard coordinates are unit vectors</span>
 <span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>rowSums</a></span><span class='op'>(</span><span class='fu'><a href='accessors.html'>get_cols</a></span><span class='op'>(</span><span class='va'>diabetes_pca</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   relwt glufast glutest instest    sspg 
 #&gt;       1       1       1       1       1 </div><div class='input'><span class='co'># plot column standard coordinates with a unit circle underlaid</span>
@@ -279,7 +275,7 @@ points for rows and arrows for columns.</p>
   <span class='fu'>geom_unit_circle</span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>.5</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='biplot-geoms.html'>geom_cols_vector</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='biplot-geoms.html'>geom_cols_text_radiate</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='img'><img src='geom_unit_circle-1.png' alt='' width='700' height='433' /></div></span></pre>
+</div><div class='img'><img src='geom_unit_circle-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

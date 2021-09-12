@@ -268,6 +268,7 @@ corresponding conventional stats.</p>
   position <span class='op'>=</span> <span class='st'>"identity"</span>,
   show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
   inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  subset <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>...</span>,
   mult <span class='op'>=</span> <span class='fl'>1</span>
 <span class='op'>)</span>
@@ -279,6 +280,7 @@ corresponding conventional stats.</p>
   position <span class='op'>=</span> <span class='st'>"identity"</span>,
   show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
   inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  subset <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>...</span>,
   mult <span class='op'>=</span> <span class='fl'>1</span>
 <span class='op'>)</span>
@@ -413,6 +415,11 @@ or, if <code>type="euclid"</code>, the radius of the circle to be drawn.</p></td
       <td><p>The number of segments to be used in drawing the ellipse.</p></td>
     </tr>
     <tr>
+      <th>subset</th>
+      <td><p>An integer, logical, or character vector indicating a subset of
+rows or columns for which to render graphical elements.</p></td>
+    </tr>
+    <tr>
       <th>mult</th>
       <td><p>Numeric value used to scale the coordinates.</p></td>
     </tr>
@@ -475,21 +482,21 @@ transformation.</p>
 #&gt; # 
 #&gt; # Rows (principal): [ 150 x 4 | 1 ]
 #&gt;     PC1    PC2     PC3 ... |   species
-#&gt;                            |   <span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>  
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>2.26</span><span> -</span><span style='color: #BB0000;'>0.478</span><span>  0.127      | </span><span style='color: #BCBCBC;'>1</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>2.07</span><span>  0.672  0.234  ... | </span><span style='color: #BCBCBC;'>2</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>2.36</span><span>  0.341 -</span><span style='color: #BB0000;'>0.044</span><span style='color: #BB0000;text-decoration: underline;'>1</span><span>     | </span><span style='color: #BCBCBC;'>3</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>2.29</span><span>  0.595 -</span><span style='color: #BB0000;'>0.091</span><span style='color: #BB0000;text-decoration: underline;'>0</span><span>     | </span><span style='color: #BCBCBC;'>4</span><span> setosa 
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> -</span><span style='color: #BB0000;'>2.38</span><span> -</span><span style='color: #BB0000;'>0.645</span><span> -</span><span style='color: #BB0000;'>0.015</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>     | </span><span style='color: #BCBCBC;'>5</span><span> setosa 
-#&gt; </span><span style='color: #949494;'># … with 145 more rows</span><span>
+#&gt;                            |   <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>  
+#&gt; <span style='color: #BCBCBC;'>1</span> -<span style='color: #BB0000;'>2.26</span> -<span style='color: #BB0000;'>0.478</span>  0.127      | <span style='color: #BCBCBC;'>1</span> setosa 
+#&gt; <span style='color: #BCBCBC;'>2</span> -<span style='color: #BB0000;'>2.07</span>  0.672  0.234  ... | <span style='color: #BCBCBC;'>2</span> setosa 
+#&gt; <span style='color: #BCBCBC;'>3</span> -<span style='color: #BB0000;'>2.36</span>  0.341 -<span style='color: #BB0000;'>0.044</span><span style='color: #BB0000; text-decoration: underline;'>1</span>     | <span style='color: #BCBCBC;'>3</span> setosa 
+#&gt; <span style='color: #BCBCBC;'>4</span> -<span style='color: #BB0000;'>2.29</span>  0.595 -<span style='color: #BB0000;'>0.091</span><span style='color: #BB0000; text-decoration: underline;'>0</span>     | <span style='color: #BCBCBC;'>4</span> setosa 
+#&gt; <span style='color: #BCBCBC;'>5</span> -<span style='color: #BB0000;'>2.38</span> -<span style='color: #BB0000;'>0.645</span> -<span style='color: #BB0000;'>0.015</span><span style='color: #BB0000; text-decoration: underline;'>7</span>     | <span style='color: #BCBCBC;'>5</span> setosa 
+#&gt; <span style='color: #949494;'># … with 145 more rows</span>
 #&gt; # 
 #&gt; # Columns (standard): [ 4 x 4 | 0 ]
 #&gt;      PC1     PC2    PC3 ... | 
 #&gt;                             | 
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.521 -</span><span style='color: #BB0000;'>0.377</span><span>   0.720     | 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.269</span><span> -</span><span style='color: #BB0000;'>0.923</span><span>  -</span><span style='color: #BB0000;'>0.244</span><span> ... | 
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  0.580 -</span><span style='color: #BB0000;'>0.024</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> -</span><span style='color: #BB0000;'>0.142</span><span>     | 
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  0.565 -</span><span style='color: #BB0000;'>0.066</span><span style='color: #BB0000;text-decoration: underline;'>9</span><span> -</span><span style='color: #BB0000;'>0.634</span><span>     | </div><div class='input'><span class='co'># row-principal biplot with centroids and confidence ellipses</span>
+#&gt; <span style='color: #BCBCBC;'>1</span>  0.521 -<span style='color: #BB0000;'>0.377</span>   0.720     | 
+#&gt; <span style='color: #BCBCBC;'>2</span> -<span style='color: #BB0000;'>0.269</span> -<span style='color: #BB0000;'>0.923</span>  -<span style='color: #BB0000;'>0.244</span> ... | 
+#&gt; <span style='color: #BCBCBC;'>3</span>  0.580 -<span style='color: #BB0000;'>0.024</span><span style='color: #BB0000; text-decoration: underline;'>5</span> -<span style='color: #BB0000;'>0.142</span>     | 
+#&gt; <span style='color: #BCBCBC;'>4</span>  0.565 -<span style='color: #BB0000;'>0.066</span><span style='color: #BB0000; text-decoration: underline;'>9</span> -<span style='color: #BB0000;'>0.634</span>     | </div><div class='input'><span class='co'># row-principal biplot with centroids and confidence ellipses</span>
 <span class='va'>iris_pca</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>color <span class='op'>=</span> <span class='va'>species</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme_bw</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
@@ -519,7 +526,7 @@ transformation.</p>
     <span class='st'>"Row-principal PCA biplot of Anderson iris measurements"</span>,
     <span class='st'>"Overlaid with 95% confidence disks"</span>
   <span class='op'>)</span>
-</div><div class='img'><img src='biplot-stats-2.png' alt='' width='700' height='433' /></div></span></pre>
+</div><div class='img'><img src='biplot-stats-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -69,11 +69,60 @@ get_ord_aes <- function(data) {
 
 # restrict to a matrix factor
 setup_rows_data <- function(data, params) {
-  data[data$.matrix == "rows", -match(".matrix", names(data)), drop = FALSE]
+  
+  data <-
+    data[data$.matrix == "rows", -match(".matrix", names(data)), drop = FALSE]
+  
+  # by default, render elements for all rows
+  if (! is.null(params$subset)) {
+    if (is.numeric(params$subset)) {
+      data <- data[params$subset, , drop = FALSE]
+    } else if (is.character(params$subset)) {
+      if (".name_subset" %in% names(data) &&
+          ! all(is.na(data[[".name_subset"]]))) {
+        # -+- `match()` may produce `NA`s if exact matches are not found -+-
+        data <- data[match(params$subset, data$.name_subset), , drop = FALSE]
+      } else {
+        warning(
+          "Rows have no defined `.name`, so `subset` will be ignored.",
+          immediate. = TRUE
+        )
+      }
+    } else {
+      warning("`subset` of unrecognized type will be ignored.")
+    }
+  }
+  
+  data
 }
 setup_cols_data <- function(data, params) {
-  data[data$.matrix == "cols", -match(".matrix", names(data)), drop = FALSE]
+  
+  data <-
+    data[data$.matrix == "cols", -match(".matrix", names(data)), drop = FALSE]
+  
+  # by default, render elements for all columns
+  if (! is.null(params$subset)) {
+    if (is.numeric(params$subset)) {
+      data <- data[params$subset, , drop = FALSE]
+    } else if (is.character(params$subset)) {
+      if (".name_subset" %in% names(data) &&
+          ! all(is.na(data[[".name_subset"]]))) {
+        # -+- `match()` may produce `NA`s if exact matches are not found -+-
+        data <- data[match(params$subset, data$.name_subset), , drop = FALSE]
+      } else {
+        warning(
+          "Columns have no defined `.name`, so `subset` will be ignored.",
+          immediate. = TRUE
+        )
+      }
+    } else {
+      warning("`subset` of unrecognized type will be ignored.")
+    }
+  }
+  
+  data
 }
+
 # restrict to a matrix factor and to the first two coordinates
 # (for stat layers that only accept 'x' and 'y')
 setup_rows_xy_data <- function(data, params) {

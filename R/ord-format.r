@@ -23,7 +23,10 @@
 
 #' @rdname format
 #' @export
-format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
+format.tbl_ord <- function(
+  x, width = NULL, ..., n = NULL,
+  max_extra_cols = NULL, max_footer_lines = NULL
+) {
   
   # raw components and parameters
   dims <- get_factor(x, .matrix = "dims")
@@ -46,11 +49,6 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
     )
   }
   width <- width %||% tbl_ord_opt("width") %||% getOption("width")
-  #dims_extra <- rep(
-  #  n_extra %||% tbl_ord_opt("max_extra_cols"),
-  #  length.out = 2
-  #)
-  #names(dims_extra) <- c("rows", "cols")
   
   # headers!
   prev_class <- setdiff(class(x), "tbl_ord")[1]
@@ -193,8 +191,14 @@ format.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
 
 #' @rdname format
 #' @export
-print.tbl_ord <- function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
-  fmt <- format(x, ..., n = n, width = width, n_extra = n_extra)
+print.tbl_ord <- function(
+  x, width = NULL, ..., n = NULL,
+  max_extra_cols = NULL, max_footer_lines = NULL
+) {
+  fmt <- format(
+    x, width = width, ..., n = n,
+    max_extra_cols = max_extra_cols, max_footer_lines = max_footer_lines
+  )
   cat(paste(fmt, collapse = "\n"), "\n", sep = "")
   invisible(x)
 }

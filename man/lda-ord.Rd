@@ -58,8 +58,8 @@ lda_ord(x, ...)
   }
 
 \item{data}{
-    Data frame from which variables specified in \code{formula} are
-    preferentially to be taken.
+    An optional data frame, list or environment from which variables
+    specified in \code{formula} are preferentially to be taken.
   }
 
 \item{subset}{
@@ -164,7 +164,7 @@ axes for a biplot representation of the LDA. The slightly modified function
 \item The \emph{standardized discriminant coefficients} are obtained by (re)scaling
 the coefficients by the variable standard deviations. These coefficients
 indicate the contributions of the variables to the discriminant scores after
-controlling for their variances (ttnphns, 2013).
+controlling for their variances (Orlov, 2013).
 \item The variables' \emph{contributions} to the Mahalanobis variance along each
 discriminant axis are obtained by transforming the coefficients by the
 inverse of the sphering matrix \eqn{S}. Because the contribution biplot
@@ -187,7 +187,7 @@ Venables WN & Ripley BD (2003) \emph{Modern Applied Statistics with S}, Fourth
 Edition. Springer Science & Business Media, ISBN: 0387954570, 9780387954578.
 \url{http://www.bagualu.net/wordpress/wp-content/uploads/2015/10/Modern_Applied_Statistics_With_S.pdf}
 
-ttnphns (2013) \emph{Answer to} "Algebra of LDA. Fisher discrimination power of a
+Orlov K (2013) \emph{Answer to} "Algebra of LDA. Fisher discrimination power of a
 variable and Linear Discriminant Analysis". CrossValidated, accessed
 2019-07-26. \url{https://stats.stackexchange.com/a/83114/68743}
 

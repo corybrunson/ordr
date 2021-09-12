@@ -8,7 +8,7 @@
 #' visual aids (tick marks and labels, grid lines) used to recover the
 #' artificial coordinates of the row and column markers The biplot (partial)
 #' theme removes these elements from the current theme. This can be especially
-#' helpful when plotting [axes][geom_axis()] or [isolines][geom_isolines()].
+#' helpful when plotting [axes][geom_axis()] or [isolines][geom_isoline()].
 #'
 #' @export
 theme_biplot <- function() {

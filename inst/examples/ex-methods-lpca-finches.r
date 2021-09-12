@@ -23,7 +23,10 @@ finches_lsvd %>%
   theme_biplot() +
   geom_rows_vector(alpha = .5, color = "darkred") +
   geom_rows_text_radiate(size = 3, color = "darkred") +
-  geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
+  geom_cols_label(size = 3, alpha = .5, color = "royalblue3",
+                  subset = grep("Geospiza", rownames(finches))) +
+  geom_cols_point(alpha = .5, color = "royalblue3",
+                  subset = -grep("Geospiza", rownames(finches))) +
   ggtitle(
     "Logistic SVD of the Galapagos island finches",
     "Islands (finches) scaled to the primary (secondary) axes"
@@ -50,7 +53,10 @@ finches_lpca %>%
   theme_biplot() +
   geom_rows_vector(alpha = .5, color = "darkred") +
   geom_rows_text_radiate(size = 3, color = "darkred") +
-  geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
+  geom_cols_label(size = 3, alpha = .5, color = "royalblue3",
+                  subset = grep("Geospiza", rownames(finches))) +
+  geom_cols_point(alpha = .5, color = "royalblue3",
+                  subset = -grep("Geospiza", rownames(finches))) +
   ggtitle(
     "Logistic PCA of the Galapagos island finches",
     "Islands (finches) scaled to the primary (secondary) axes"
@@ -79,7 +85,10 @@ finches_clpca %>%
   theme_biplot() +
   geom_rows_vector(alpha = .5, color = "darkred") +
   geom_rows_text_radiate(size = 3, color = "darkred") +
-  geom_cols_label(size = 3, alpha = .5, color = "royalblue3") +
+  geom_cols_label(size = 3, alpha = .5, color = "royalblue3",
+                  subset = grep("Geospiza", rownames(finches))) +
+  geom_cols_point(alpha = .5, color = "royalblue3",
+                  subset = -grep("Geospiza", rownames(finches))) +
   ggtitle(
     "Convex logistic PCA of the Galapagos island finches",
     "Islands (finches) scaled to the primary (secondary) axes"

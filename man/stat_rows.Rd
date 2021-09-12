@@ -10,6 +10,7 @@ stat_rows(
   data = data,
   geom = "point",
   position = "identity",
+  subset = NULL,
   ...,
   show.legend = NA,
   inherit.aes = TRUE
@@ -20,6 +21,7 @@ stat_cols(
   data = data,
   geom = "axis",
   position = "identity",
+  subset = NULL,
   ...,
   show.legend = NA,
   inherit.aes = TRUE
@@ -50,6 +52,9 @@ from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
+
+\item{subset}{An integer, logical, or character vector indicating a subset of
+rows or columns for which to render graphical elements.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
