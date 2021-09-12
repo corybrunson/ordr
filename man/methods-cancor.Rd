@@ -50,12 +50,15 @@ ter Braak (1990) recommends two families of biplots for the canonical
 correspondence analysis of data matrices \eqn{X} and \eqn{Y}. For the first,
 using structural correlations, either the interset correlations of \eqn{X}
 (equivalent to principal coordinates) are plotted with the intraset
-correlations of \eqn{Y} (standard coordinates) or vice-versa. Where \code{cc} is
-the output of \code{\link[candisc:cancor]{candisc::cancor()}}, these are obtained from \code{cc$structure}.
-For consistency with the canonical variate scores \code{cc$scores} available as
-supplementary points, \strong{ordr} takes rows and columns from the intraset
-correlations \code{cc$structure$X.xscores} and \code{cc$structure$Y.yscores}, so that
-no intertia conferred.
+correlations of \eqn{Y} (standard coordinates) or vice-versa, so that their
+product recovers the correlation matrix \eqn{XY'}. Where \code{cc} is the output
+of \code{\link[candisc:cancor]{candisc::cancor()}} on centered and scaled data matrices, these are
+obtained from \code{cc$structure}. For consistency with the canonical variate
+scores \code{cc$scores} available as supplementary points, \strong{ordr} takes rows and
+columns from the intraset correlations \code{cc$structure$X.xscores} and
+\code{cc$structure$Y.yscores}, on which no intertia is conferred. ter Braak's
+biplots can then be recovered by \link[=conference]{balancing} the inertia across
+the two factors.
 }
 \examples{
 # data frame of life-cycle savings across countries
@@ -89,8 +92,7 @@ fortify(savings_cancor)
 # row-standard biplot of structure correlations
 savings_cancor \%>\%
   confer_inertia("cols") \%>\%
-  ggbiplot(aes(label = .name, color = .matrix),
-           sec.axes = "cols", scale.factor = 10, .supplement = FALSE) +
+  ggbiplot(aes(label = .name, color = .matrix), .supplement = FALSE) +
   theme_bw() +
   geom_origin() +
   geom_unit_circle(linetype = "dotted") +
@@ -98,13 +100,12 @@ savings_cancor \%>\%
   geom_rows_text_radiate() +
   geom_cols_point() +
   geom_cols_text_repel() +
-  scale_color_brewer(type = "qual") +
-  expand_limits(x = c(-.1, .1))
+  scale_color_brewer(limits = c("rows", "cols"), type = "qual") +
+  expand_limits(x = c(-1, 1), y = c(-1, 1))
 # column-standard biplot of structure correlations
 savings_cancor \%>\%
   confer_inertia("rows") \%>\%
-  ggbiplot(aes(label = .name, color = .matrix),
-           sec.axes = "rows", scale.factor = 1/2, .supplement = FALSE) +
+  ggbiplot(aes(label = .name, color = .matrix), .supplement = FALSE) +
   theme_bw() +
   geom_origin() +
   geom_unit_circle(linetype = "dotted") +
@@ -112,8 +113,8 @@ savings_cancor \%>\%
   geom_cols_text_radiate() +
   geom_rows_point() +
   geom_rows_text_repel() +
-  scale_color_brewer(type = "qual") +
-  expand_limits(x = c(-.05, .05))
+  scale_color_brewer(limits = c("rows", "cols"), type = "qual") +
+  expand_limits(x = c(-1, 1), y = c(-1, 1))
 # symmetric biplot of structure correlations
 savings_cancor \%>\%
   confer_inertia("symmetric") \%>\%
@@ -125,8 +126,8 @@ savings_cancor \%>\%
   geom_cols_text_radiate() +
   geom_rows_vector() +
   geom_rows_text_radiate() +
-  scale_color_brewer(type = "qual") +
-  expand_limits(x = c(-1, 1), y = c(-.75, .75))
+  scale_color_brewer(limits = c("rows", "cols"), type = "qual") +
+  expand_limits(x = c(-1, 1), y = c(-1, 1))
 }
 \references{
 ter Braak CJF (1990) "Interpreting canonical correlation analysis through

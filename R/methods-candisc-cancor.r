@@ -10,12 +10,15 @@
 #' correspondence analysis of data matrices \eqn{X} and \eqn{Y}. For the first,
 #' using structural correlations, either the interset correlations of \eqn{X}
 #' (equivalent to principal coordinates) are plotted with the intraset
-#' correlations of \eqn{Y} (standard coordinates) or vice-versa. Where `cc` is
-#' the output of [candisc::cancor()], these are obtained from `cc$structure`.
-#' For consistency with the canonical variate scores `cc$scores` available as
-#' supplementary points, **ordr** takes rows and columns from the intraset
-#' correlations `cc$structure$X.xscores` and `cc$structure$Y.yscores`, so that
-#' no intertia conferred.
+#' correlations of \eqn{Y} (standard coordinates) or vice-versa, so that their
+#' product recovers the correlation matrix \eqn{XY'}. Where `cc` is the output
+#' of [candisc::cancor()] on centered and scaled data matrices, these are
+#' obtained from `cc$structure`. For consistency with the canonical variate
+#' scores `cc$scores` available as supplementary points, **ordr** takes rows and
+#' columns from the intraset correlations `cc$structure$X.xscores` and
+#' `cc$structure$Y.yscores`, on which no intertia is conferred. ter Braak's
+#' biplots can then be recovered by [balancing][conference] the inertia across
+#' the two factors.
 #' 
 
 #' @template ref-braak1990

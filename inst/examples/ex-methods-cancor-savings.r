@@ -29,8 +29,7 @@ fortify(savings_cancor)
 # row-standard biplot of structure correlations
 savings_cancor %>%
   confer_inertia("cols") %>%
-  ggbiplot(aes(label = .name, color = .matrix),
-           sec.axes = "cols", scale.factor = 10, .supplement = FALSE) +
+  ggbiplot(aes(label = .name, color = .matrix), .supplement = FALSE) +
   theme_bw() +
   geom_origin() +
   geom_unit_circle(linetype = "dotted") +
@@ -38,13 +37,12 @@ savings_cancor %>%
   geom_rows_text_radiate() +
   geom_cols_point() +
   geom_cols_text_repel() +
-  scale_color_brewer(type = "qual") +
-  expand_limits(x = c(-.1, .1))
+  scale_color_brewer(limits = c("rows", "cols"), type = "qual") +
+  expand_limits(x = c(-1, 1), y = c(-1, 1))
 # column-standard biplot of structure correlations
 savings_cancor %>%
   confer_inertia("rows") %>%
-  ggbiplot(aes(label = .name, color = .matrix),
-           sec.axes = "rows", scale.factor = 1/2, .supplement = FALSE) +
+  ggbiplot(aes(label = .name, color = .matrix), .supplement = FALSE) +
   theme_bw() +
   geom_origin() +
   geom_unit_circle(linetype = "dotted") +
@@ -52,8 +50,8 @@ savings_cancor %>%
   geom_cols_text_radiate() +
   geom_rows_point() +
   geom_rows_text_repel() +
-  scale_color_brewer(type = "qual") +
-  expand_limits(x = c(-.05, .05))
+  scale_color_brewer(limits = c("rows", "cols"), type = "qual") +
+  expand_limits(x = c(-1, 1), y = c(-1, 1))
 # symmetric biplot of structure correlations
 savings_cancor %>%
   confer_inertia("symmetric") %>%
@@ -65,5 +63,5 @@ savings_cancor %>%
   geom_cols_text_radiate() +
   geom_rows_vector() +
   geom_rows_text_radiate() +
-  scale_color_brewer(type = "qual") +
-  expand_limits(x = c(-1, 1), y = c(-.75, .75))
+  scale_color_brewer(limits = c("rows", "cols"), type = "qual") +
+  expand_limits(x = c(-1, 1), y = c(-1, 1))
