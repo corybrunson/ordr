@@ -198,7 +198,8 @@ displayed as described in <code><a href='https://rdrr.io/r/grDevices/plotmath.ht
       <td><p>If <code>TRUE</code>, text that overlaps previous text in the
 same layer will not be plotted. <code>check_overlap</code> happens at draw time and in
 the order of the data. Therefore data should be arranged by the label
-column before calling <code>geom_label()</code> or <code>geom_text()</code>.</p></td>
+column before calling <code>geom_text()</code>. Note that this argument is not
+supported by <code>geom_label()</code>.</p></td>
     </tr>
     <tr>
       <th>na.rm</th>
@@ -268,12 +269,8 @@ branch</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other geom layers: 
-<code><a href='geom_axis_label.html'>geom_axis_label</a>()</code>,
-<code><a href='geom_axis_text.html'>geom_axis_text</a>()</code>,
-<code><a href='geom_axis_ticks.html'>geom_axis_ticks</a>()</code>,
 <code><a href='geom_axis.html'>geom_axis</a>()</code>,
-<code><a href='geom_isolines_text.html'>geom_isolines_text</a>()</code>,
-<code><a href='geom_isolines.html'>geom_isolines</a>()</code>,
+<code><a href='geom_isoline.html'>geom_isoline</a>()</code>,
 <code><a href='geom_lineranges.html'>geom_lineranges</a>()</code>,
 <code><a href='geom_origin.html'>geom_origin</a>()</code>,
 <code><a href='geom_unit_circle.html'>geom_unit_circle</a>()</code>,

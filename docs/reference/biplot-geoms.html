@@ -133,187 +133,22 @@ elements for one or the other matrix factor of a tbl_ord. They understand
 the same aesthetics as their corresponding conventional geoms.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>geom_rows_axis_label</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>geom_rows_axis</span><span class='op'>(</span>
   mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
   data <span class='op'>=</span> <span class='cn'>NULL</span>,
   stat <span class='op'>=</span> <span class='st'>"identity"</span>,
   position <span class='op'>=</span> <span class='st'>"identity"</span>,
-  <span class='va'>...</span>,
-  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
-  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span>
-
-<span class='fu'>geom_cols_axis_label</span><span class='op'>(</span>
-  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
-  data <span class='op'>=</span> <span class='cn'>NULL</span>,
-  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
-  position <span class='op'>=</span> <span class='st'>"identity"</span>,
-  <span class='va'>...</span>,
-  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
-  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span>
-
-<span class='fu'>geom_dims_axis_label</span><span class='op'>(</span>
-  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
-  data <span class='op'>=</span> <span class='cn'>NULL</span>,
-  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
-  position <span class='op'>=</span> <span class='st'>"identity"</span>,
-  .matrix <span class='op'>=</span> <span class='st'>"cols"</span>,
-  <span class='va'>...</span>,
-  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
-  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span>
-
-<span class='fu'>geom_rows_isolines</span><span class='op'>(</span>
-  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
-  data <span class='op'>=</span> <span class='cn'>NULL</span>,
-  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
-  position <span class='op'>=</span> <span class='st'>"identity"</span>,
-  subset <span class='op'>=</span> <span class='cn'>NULL</span>,
-  by <span class='op'>=</span> <span class='cn'>NULL</span>,
-  num <span class='op'>=</span> <span class='cn'>NULL</span>,
-  <span class='va'>...</span>,
-  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
-  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span>
-
-<span class='fu'>geom_cols_isolines</span><span class='op'>(</span>
-  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
-  data <span class='op'>=</span> <span class='cn'>NULL</span>,
-  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
-  position <span class='op'>=</span> <span class='st'>"identity"</span>,
-  subset <span class='op'>=</span> <span class='cn'>NULL</span>,
-  by <span class='op'>=</span> <span class='cn'>NULL</span>,
-  num <span class='op'>=</span> <span class='cn'>NULL</span>,
-  <span class='va'>...</span>,
-  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
-  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span>
-
-<span class='fu'>geom_dims_isolines</span><span class='op'>(</span>
-  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
-  data <span class='op'>=</span> <span class='cn'>NULL</span>,
-  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
-  position <span class='op'>=</span> <span class='st'>"identity"</span>,
-  .matrix <span class='op'>=</span> <span class='st'>"cols"</span>,
-  subset <span class='op'>=</span> <span class='cn'>NULL</span>,
-  by <span class='op'>=</span> <span class='cn'>NULL</span>,
-  num <span class='op'>=</span> <span class='cn'>NULL</span>,
-  <span class='va'>...</span>,
-  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
-  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span>
-
-<span class='fu'>geom_rows_axis_text</span><span class='op'>(</span>
-  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
-  data <span class='op'>=</span> <span class='cn'>NULL</span>,
-  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
-  position <span class='op'>=</span> <span class='st'>"identity"</span>,
-  subset <span class='op'>=</span> <span class='cn'>NULL</span>,
-  by <span class='op'>=</span> <span class='cn'>NULL</span>,
-  num <span class='op'>=</span> <span class='cn'>NULL</span>,
-  label_dodge <span class='op'>=</span> <span class='fl'>0.15</span>,
-  <span class='va'>...</span>,
-  parse <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  check_overlap <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
-  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span>
-
-<span class='fu'>geom_cols_axis_text</span><span class='op'>(</span>
-  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
-  data <span class='op'>=</span> <span class='cn'>NULL</span>,
-  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
-  position <span class='op'>=</span> <span class='st'>"identity"</span>,
-  subset <span class='op'>=</span> <span class='cn'>NULL</span>,
-  by <span class='op'>=</span> <span class='cn'>NULL</span>,
-  num <span class='op'>=</span> <span class='cn'>NULL</span>,
-  label_dodge <span class='op'>=</span> <span class='fl'>0.15</span>,
-  <span class='va'>...</span>,
-  parse <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  check_overlap <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
-  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span>
-
-<span class='fu'>geom_dims_axis_text</span><span class='op'>(</span>
-  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
-  data <span class='op'>=</span> <span class='cn'>NULL</span>,
-  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
-  position <span class='op'>=</span> <span class='st'>"identity"</span>,
-  .matrix <span class='op'>=</span> <span class='st'>"cols"</span>,
-  subset <span class='op'>=</span> <span class='cn'>NULL</span>,
-  by <span class='op'>=</span> <span class='cn'>NULL</span>,
-  num <span class='op'>=</span> <span class='cn'>NULL</span>,
-  label_dodge <span class='op'>=</span> <span class='fl'>0.15</span>,
-  <span class='va'>...</span>,
-  parse <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  check_overlap <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
-  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span>
-
-<span class='fu'>geom_rows_axis_ticks</span><span class='op'>(</span>
-  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
-  data <span class='op'>=</span> <span class='cn'>NULL</span>,
-  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
-  position <span class='op'>=</span> <span class='st'>"identity"</span>,
-  subset <span class='op'>=</span> <span class='cn'>NULL</span>,
+  axis_labels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  axis_ticks <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  axis_text <span class='op'>=</span> <span class='cn'>TRUE</span>,
   by <span class='op'>=</span> <span class='cn'>NULL</span>,
   num <span class='op'>=</span> <span class='cn'>NULL</span>,
   tick_length <span class='op'>=</span> <span class='fl'>0.025</span>,
+  text_dodge <span class='op'>=</span> <span class='fl'>0.15</span>,
+  label_dodge <span class='op'>=</span> <span class='fl'>0.2</span>,
   <span class='va'>...</span>,
-  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
-  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span>
-
-<span class='fu'>geom_cols_axis_ticks</span><span class='op'>(</span>
-  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
-  data <span class='op'>=</span> <span class='cn'>NULL</span>,
-  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
-  position <span class='op'>=</span> <span class='st'>"identity"</span>,
-  subset <span class='op'>=</span> <span class='cn'>NULL</span>,
-  by <span class='op'>=</span> <span class='cn'>NULL</span>,
-  num <span class='op'>=</span> <span class='cn'>NULL</span>,
-  tick_length <span class='op'>=</span> <span class='fl'>0.025</span>,
-  <span class='va'>...</span>,
-  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
-  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span>
-
-<span class='fu'>geom_dims_axis_ticks</span><span class='op'>(</span>
-  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
-  data <span class='op'>=</span> <span class='cn'>NULL</span>,
-  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
-  position <span class='op'>=</span> <span class='st'>"identity"</span>,
-  .matrix <span class='op'>=</span> <span class='st'>"cols"</span>,
-  subset <span class='op'>=</span> <span class='cn'>NULL</span>,
-  by <span class='op'>=</span> <span class='cn'>NULL</span>,
-  num <span class='op'>=</span> <span class='cn'>NULL</span>,
-  tick_length <span class='op'>=</span> <span class='fl'>0.025</span>,
-  <span class='va'>...</span>,
-  na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
-  inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span>
-
-<span class='fu'>geom_rows_axis</span><span class='op'>(</span>
-  mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
-  data <span class='op'>=</span> <span class='cn'>NULL</span>,
-  stat <span class='op'>=</span> <span class='st'>"identity"</span>,
-  position <span class='op'>=</span> <span class='st'>"identity"</span>,
-  <span class='va'>...</span>,
+  parse <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  check_overlap <span class='op'>=</span> <span class='cn'>FALSE</span>,
   na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
   show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
   inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
@@ -324,7 +159,17 @@ the same aesthetics as their corresponding conventional geoms.</p>
   data <span class='op'>=</span> <span class='cn'>NULL</span>,
   stat <span class='op'>=</span> <span class='st'>"identity"</span>,
   position <span class='op'>=</span> <span class='st'>"identity"</span>,
+  axis_labels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  axis_ticks <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  axis_text <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  by <span class='op'>=</span> <span class='cn'>NULL</span>,
+  num <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tick_length <span class='op'>=</span> <span class='fl'>0.025</span>,
+  text_dodge <span class='op'>=</span> <span class='fl'>0.15</span>,
+  label_dodge <span class='op'>=</span> <span class='fl'>0.2</span>,
   <span class='va'>...</span>,
+  parse <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  check_overlap <span class='op'>=</span> <span class='cn'>FALSE</span>,
   na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
   show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
   inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
@@ -336,7 +181,17 @@ the same aesthetics as their corresponding conventional geoms.</p>
   stat <span class='op'>=</span> <span class='st'>"identity"</span>,
   position <span class='op'>=</span> <span class='st'>"identity"</span>,
   .matrix <span class='op'>=</span> <span class='st'>"cols"</span>,
+  axis_labels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  axis_ticks <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  axis_text <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  by <span class='op'>=</span> <span class='cn'>NULL</span>,
+  num <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tick_length <span class='op'>=</span> <span class='fl'>0.025</span>,
+  text_dodge <span class='op'>=</span> <span class='fl'>0.15</span>,
+  label_dodge <span class='op'>=</span> <span class='fl'>0.2</span>,
   <span class='va'>...</span>,
+  parse <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  check_overlap <span class='op'>=</span> <span class='cn'>FALSE</span>,
   na.rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
   show.legend <span class='op'>=</span> <span class='cn'>NA</span>,
   inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
@@ -410,12 +265,12 @@ the same aesthetics as their corresponding conventional geoms.</p>
   inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span>
 
-<span class='fu'>geom_rows_isolines_text</span><span class='op'>(</span>
+<span class='fu'>geom_rows_isoline</span><span class='op'>(</span>
   mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
   data <span class='op'>=</span> <span class='cn'>NULL</span>,
   stat <span class='op'>=</span> <span class='st'>"identity"</span>,
   position <span class='op'>=</span> <span class='st'>"identity"</span>,
-  subset <span class='op'>=</span> <span class='cn'>NULL</span>,
+  isoline_text <span class='op'>=</span> <span class='cn'>TRUE</span>,
   by <span class='op'>=</span> <span class='cn'>NULL</span>,
   num <span class='op'>=</span> <span class='cn'>NULL</span>,
   label_dodge <span class='op'>=</span> <span class='fl'>0.1</span>,
@@ -427,12 +282,12 @@ the same aesthetics as their corresponding conventional geoms.</p>
   inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span>
 
-<span class='fu'>geom_cols_isolines_text</span><span class='op'>(</span>
+<span class='fu'>geom_cols_isoline</span><span class='op'>(</span>
   mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
   data <span class='op'>=</span> <span class='cn'>NULL</span>,
   stat <span class='op'>=</span> <span class='st'>"identity"</span>,
   position <span class='op'>=</span> <span class='st'>"identity"</span>,
-  subset <span class='op'>=</span> <span class='cn'>NULL</span>,
+  isoline_text <span class='op'>=</span> <span class='cn'>TRUE</span>,
   by <span class='op'>=</span> <span class='cn'>NULL</span>,
   num <span class='op'>=</span> <span class='cn'>NULL</span>,
   label_dodge <span class='op'>=</span> <span class='fl'>0.1</span>,
@@ -444,13 +299,13 @@ the same aesthetics as their corresponding conventional geoms.</p>
   inherit.aes <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span>
 
-<span class='fu'>geom_dims_isolines_text</span><span class='op'>(</span>
+<span class='fu'>geom_dims_isoline</span><span class='op'>(</span>
   mapping <span class='op'>=</span> <span class='cn'>NULL</span>,
   data <span class='op'>=</span> <span class='cn'>NULL</span>,
   stat <span class='op'>=</span> <span class='st'>"identity"</span>,
   position <span class='op'>=</span> <span class='st'>"identity"</span>,
   .matrix <span class='op'>=</span> <span class='st'>"cols"</span>,
-  subset <span class='op'>=</span> <span class='cn'>NULL</span>,
+  isoline_text <span class='op'>=</span> <span class='cn'>TRUE</span>,
   by <span class='op'>=</span> <span class='cn'>NULL</span>,
   num <span class='op'>=</span> <span class='cn'>NULL</span>,
   label_dodge <span class='op'>=</span> <span class='fl'>0.1</span>,
@@ -833,8 +688,61 @@ layer, as a string.</p></td>
 a call to a position adjustment function.</p></td>
     </tr>
     <tr>
+      <th>axis_labels</th>
+      <td><p>Logical; whether to include labels,
+tick marks, and text value marks along the axes.</p></td>
+    </tr>
+    <tr>
+      <th>axis_ticks</th>
+      <td><p>Logical; whether to include labels,
+tick marks, and text value marks along the axes.</p></td>
+    </tr>
+    <tr>
+      <th>axis_text</th>
+      <td><p>Logical; whether to include labels,
+tick marks, and text value marks along the axes.</p></td>
+    </tr>
+    <tr>
+      <th>by</th>
+      <td><p>Intervals between elements or number of elements; specify only
+one.</p></td>
+    </tr>
+    <tr>
+      <th>num</th>
+      <td><p>Intervals between elements or number of elements; specify only
+one.</p></td>
+    </tr>
+    <tr>
+      <th>tick_length</th>
+      <td><p>Numeric; the length of the tick marks, as a proportion of
+the minimum of the plot width and height.</p></td>
+    </tr>
+    <tr>
+      <th>text_dodge</th>
+      <td><p>Numeric; the orthogonal distance of the text from the axis,
+as a proportion of the minimum of the plot width and height.</p></td>
+    </tr>
+    <tr>
+      <th>label_dodge</th>
+      <td><p>Numeric; the orthogonal distance of the text from the axis
+or isoline, as a proportion of the minimum of the plot width and height.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>Additional arguments passed to <code><a href='https://ggplot2.tidyverse.org/reference/layer.html'>ggplot2::layer()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>parse</th>
+      <td><p>If <code>TRUE</code>, the labels will be parsed into expressions and
+displayed as described in <code><a href='https://rdrr.io/r/grDevices/plotmath.html'>?plotmath</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>check_overlap</th>
+      <td><p>If <code>TRUE</code>, text that overlaps previous text in the
+same layer will not be plotted. <code>check_overlap</code> happens at draw time and in
+the order of the data. Therefore data should be arranged by the label
+column before calling <code>geom_text()</code>. Note that this argument is not
+supported by <code>geom_label()</code>.</p></td>
     </tr>
     <tr>
       <th>na.rm</th>
@@ -862,41 +770,9 @@ or both matrices in a matrix decomposition used for ordination. The
 standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</code> (for both).</p></td>
     </tr>
     <tr>
-      <th>subset</th>
-      <td><p>Indices or logical vector of rows or columns for which to
-render elements.</p></td>
-    </tr>
-    <tr>
-      <th>by</th>
-      <td><p>Intervals between elements or number of elements; specify only
-one.</p></td>
-    </tr>
-    <tr>
-      <th>num</th>
-      <td><p>Intervals between elements or number of elements; specify only
-one.</p></td>
-    </tr>
-    <tr>
-      <th>label_dodge</th>
-      <td><p>Numeric; the orthogonal distance of the text from
-the axis, as a proportion of the minimum of the plot width and height.</p></td>
-    </tr>
-    <tr>
-      <th>parse</th>
-      <td><p>If <code>TRUE</code>, the labels will be parsed into expressions and
-displayed as described in <code><a href='https://rdrr.io/r/grDevices/plotmath.html'>?plotmath</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>check_overlap</th>
-      <td><p>If <code>TRUE</code>, text that overlaps previous text in the
-same layer will not be plotted. <code>check_overlap</code> happens at draw time and in
-the order of the data. Therefore data should be arranged by the label
-column before calling <code>geom_label()</code> or <code>geom_text()</code>.</p></td>
-    </tr>
-    <tr>
-      <th>tick_length</th>
-      <td><p>Numeric; the length of the tick marks, as a proportion of
-the minimum of the plot width and height.</p></td>
+      <th>isoline_text</th>
+      <td><p>Logical; whether to include text value marks along the
+isolines.</p></td>
     </tr>
     <tr>
       <th>nudge_x</th>

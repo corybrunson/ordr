@@ -58,7 +58,7 @@
 #' Biplots of SVD-based ordinations usually plot the rows and columns of \eqn{X}
 #' on these \eqn{r} coordinate axes. For an SVD-based biplot to be truly
 #' geometric, the total variance contained in \eqn{D} must be conferred onto
-#' \eqn{U} or \eqn{V}, or distributed over both (ttnphns, 2015). When \eqn{D} is
+#' \eqn{U} or \eqn{V}, or distributed over both (Orlov, 2015). When \eqn{D} is
 #' conferred onto \eqn{U}, the rows of \eqn{X} are represented by the rows of
 #' \eqn{UD}, and their distances in the biplot approximate their distances in
 #' the original column space of \eqn{X}. Meanwhile, the columns of \eqn{X} are
@@ -74,7 +74,7 @@
 #' @template ref-palmer
 #' @template ref-gabriel1971
 #' @template ref-greenacre2010
-#' @template ref-ttnphns2015
+#' @template ref-orlov2015
 
 #' @docType package
 #' @name ordr

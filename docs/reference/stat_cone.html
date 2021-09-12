@@ -254,7 +254,8 @@ transformation.</p>
     <span class='st'>"U.S. Personal Expenditure data, 1940-1960"</span>,
     <span class='st'>"Row-principal biplot of centered PCA"</span>
   <span class='op'>)</span>
-</div><div class='img'><img src='stat_cone-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># uncentered principal components analysis of U.S. personal expenditure data</span>
+</div><div class='output co'>#&gt; <span class='message'>geom_path: Each group consists of only one observation. Do you need to adjust</span>
+#&gt; <span class='message'>the group aesthetic?</span></div><div class='img'><img src='stat_cone-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># uncentered principal components analysis of U.S. personal expenditure data</span>
 <span class='va'>USPersonalExpenditure</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/prcomp.html'>prcomp</a></span><span class='op'>(</span>center <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='tbl_ord.html'>as_tbl_ord</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -272,7 +273,8 @@ transformation.</p>
     <span class='st'>"U.S. Personal Expenditure data, 1940-1960"</span>,
     <span class='st'>"Symmetric biplot of un-centered PCA"</span>
   <span class='op'>)</span>
-</div><div class='img'><img src='stat_cone-2.png' alt='' width='700' height='433' /></div></pre>
+</div><div class='output co'>#&gt; <span class='message'>geom_path: Each group consists of only one observation. Do you need to adjust</span>
+#&gt; <span class='message'>the group aesthetic?</span></div><div class='img'><img src='stat_cone-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

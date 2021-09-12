@@ -273,20 +273,20 @@ Greenacre's (2010) exposition in Chapter 7.</p>
 #&gt; # 
 #&gt; # Rows (standard): [ 50 x 2 | 1 ]
 #&gt;    LRSV1  LRSV2 |   .name     
-#&gt;                 |   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.680</span><span>  0.930 | </span><span style='color: #BCBCBC;'>1</span><span> Alabama   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.930 -</span><span style='color: #BB0000;'>0.625</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Alaska    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.330</span><span> -</span><span style='color: #BB0000;'>1.31</span><span>  | </span><span style='color: #BCBCBC;'>3</span><span> Arizona   
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.351</span><span>  0.277 | </span><span style='color: #BCBCBC;'>4</span><span> Arkansas  
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.552 -</span><span style='color: #BB0000;'>1.00</span><span>  | </span><span style='color: #BCBCBC;'>5</span><span> California
-#&gt; </span><span style='color: #949494;'># … with 45 more rows</span><span>
+#&gt;                 |   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     
+#&gt; <span style='color: #BCBCBC;'>1</span> -<span style='color: #BB0000;'>0.680</span>  0.930 | <span style='color: #BCBCBC;'>1</span> Alabama   
+#&gt; <span style='color: #BCBCBC;'>2</span>  0.930 -<span style='color: #BB0000;'>0.625</span> | <span style='color: #BCBCBC;'>2</span> Alaska    
+#&gt; <span style='color: #BCBCBC;'>3</span> -<span style='color: #BB0000;'>0.330</span> -<span style='color: #BB0000;'>1.31</span>  | <span style='color: #BCBCBC;'>3</span> Arizona   
+#&gt; <span style='color: #BCBCBC;'>4</span> -<span style='color: #BB0000;'>0.351</span>  0.277 | <span style='color: #BCBCBC;'>4</span> Arkansas  
+#&gt; <span style='color: #BCBCBC;'>5</span>  0.552 -<span style='color: #BB0000;'>1.00</span>  | <span style='color: #BCBCBC;'>5</span> California
+#&gt; <span style='color: #949494;'># … with 45 more rows</span>
 #&gt; # 
 #&gt; # Columns (standard): [ 3 x 2 | 1 ]
 #&gt;    LRSV1  LRSV2 |   .name  
-#&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.283  4.96  | </span><span style='color: #BCBCBC;'>1</span><span> Murder 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.371</span><span> -</span><span style='color: #BB0000;'>0.181</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Assault
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  2.88  -</span><span style='color: #BB0000;'>0.366</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Rape   </div><div class='input'><span class='co'># state abbreviations</span>
+#&gt;                 |   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>  
+#&gt; <span style='color: #BCBCBC;'>1</span>  0.283  4.96  | <span style='color: #BCBCBC;'>1</span> Murder 
+#&gt; <span style='color: #BCBCBC;'>2</span> -<span style='color: #BB0000;'>0.371</span> -<span style='color: #BB0000;'>0.181</span> | <span style='color: #BCBCBC;'>2</span> Assault
+#&gt; <span style='color: #BCBCBC;'>3</span>  2.88  -<span style='color: #BB0000;'>0.366</span> | <span style='color: #BCBCBC;'>3</span> Rape   </div><div class='input'><span class='co'># state abbreviations</span>
 <span class='va'>state_abbr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>state <span class='op'>=</span> <span class='va'>state.name</span>, abbr <span class='op'>=</span> <span class='va'>state.abb</span><span class='op'>)</span>
 <span class='co'># row-principal biplot</span>
 <span class='va'>arrests_lra_ord</span> <span class='op'>%&gt;%</span>
@@ -304,7 +304,7 @@ Greenacre's (2010) exposition in Chapter 7.</p>
   <span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>expand_limits</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>.35</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>guides</span><span class='op'>(</span>color <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='img'><img src='lra-ord-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># compositional log-ratio analysis</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; = "none")` instead.</span></div><div class='img'><img src='lra-ord-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># compositional log-ratio analysis</span>
 <span class='op'>(</span><span class='va'>arrests_lra</span> <span class='op'>&lt;-</span> <span class='fu'>lra</span><span class='op'>(</span><span class='va'>USArrests</span><span class='op'>[</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>]</span>, compositional <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $sv
 #&gt; [1] 0.12786989 0.07009419
@@ -375,20 +375,20 @@ Greenacre's (2010) exposition in Chapter 7.</p>
 #&gt; # 
 #&gt; # Rows (standard): [ 50 x 2 | 1 ]
 #&gt;    LRSV1  LRSV2 |   .name     
-#&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> -</span><span style='color: #BB0000;'>0.860</span><span>  1.03  | </span><span style='color: #BCBCBC;'>1</span><span> Alabama   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  0.626 -</span><span style='color: #BB0000;'>0.591</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Alaska    
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> -</span><span style='color: #BB0000;'>0.597</span><span> -</span><span style='color: #BB0000;'>1.05</span><span>  | </span><span style='color: #BCBCBC;'>3</span><span> Arizona   
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> -</span><span style='color: #BB0000;'>0.567</span><span>  0.392 | </span><span style='color: #BCBCBC;'>4</span><span> Arkansas  
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  0.253 -</span><span style='color: #BB0000;'>0.887</span><span> | </span><span style='color: #BCBCBC;'>5</span><span> California
-#&gt; </span><span style='color: #949494;'># … with 45 more rows</span><span>
+#&gt;                 |   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     
+#&gt; <span style='color: #BCBCBC;'>1</span> -<span style='color: #BB0000;'>0.860</span>  1.03  | <span style='color: #BCBCBC;'>1</span> Alabama   
+#&gt; <span style='color: #BCBCBC;'>2</span>  0.626 -<span style='color: #BB0000;'>0.591</span> | <span style='color: #BCBCBC;'>2</span> Alaska    
+#&gt; <span style='color: #BCBCBC;'>3</span> -<span style='color: #BB0000;'>0.597</span> -<span style='color: #BB0000;'>1.05</span>  | <span style='color: #BCBCBC;'>3</span> Arizona   
+#&gt; <span style='color: #BCBCBC;'>4</span> -<span style='color: #BB0000;'>0.567</span>  0.392 | <span style='color: #BCBCBC;'>4</span> Arkansas  
+#&gt; <span style='color: #BCBCBC;'>5</span>  0.253 -<span style='color: #BB0000;'>0.887</span> | <span style='color: #BCBCBC;'>5</span> California
+#&gt; <span style='color: #949494;'># … with 45 more rows</span>
 #&gt; # 
 #&gt; # Columns (standard): [ 3 x 2 | 1 ]
 #&gt;    LRSV1  LRSV2 |   .name  
-#&gt;                 |   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  0.607  4.94  | </span><span style='color: #BCBCBC;'>1</span><span> Murder 
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> -</span><span style='color: #BB0000;'>0.400</span><span> -</span><span style='color: #BB0000;'>0.153</span><span> | </span><span style='color: #BCBCBC;'>2</span><span> Assault
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  2.71  -</span><span style='color: #BB0000;'>0.535</span><span> | </span><span style='color: #BCBCBC;'>3</span><span> Rape   </div><div class='input'><span class='co'># row-principal biplot</span>
+#&gt;                 |   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>  
+#&gt; <span style='color: #BCBCBC;'>1</span>  0.607  4.94  | <span style='color: #BCBCBC;'>1</span> Murder 
+#&gt; <span style='color: #BCBCBC;'>2</span> -<span style='color: #BB0000;'>0.400</span> -<span style='color: #BB0000;'>0.153</span> | <span style='color: #BCBCBC;'>2</span> Assault
+#&gt; <span style='color: #BCBCBC;'>3</span>  2.71  -<span style='color: #BB0000;'>0.535</span> | <span style='color: #BCBCBC;'>3</span> Rape   </div><div class='input'><span class='co'># row-principal biplot</span>
 <span class='va'>arrests_lra_ord</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='dplyr-verbs.html'>left_join_rows</a></span><span class='op'>(</span><span class='va'>state_abbr</span>, by <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>".name"</span> <span class='op'>=</span> <span class='st'>"state"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='conference.html'>confer_inertia</a></span><span class='op'>(</span><span class='st'>"rows"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -404,7 +404,7 @@ Greenacre's (2010) exposition in Chapter 7.</p>
   <span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>expand_limits</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>.4</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>guides</span><span class='op'>(</span>color <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='img'><img src='lra-ord-2.png' alt='' width='700' height='433' /></div></span></pre>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; = "none")` instead.</span></div><div class='img'><img src='lra-ord-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

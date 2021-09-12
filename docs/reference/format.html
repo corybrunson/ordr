@@ -132,10 +132,24 @@ original ordination classes.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for tbl_ord</span>
-<span class='fu'>format</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, n <span class='op'>=</span> <span class='cn'>NULL</span>, width <span class='op'>=</span> <span class='cn'>NULL</span>, n_extra <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+<span class='fu'>format</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  width <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>,
+  n <span class='op'>=</span> <span class='cn'>NULL</span>,
+  max_extra_cols <span class='op'>=</span> <span class='cn'>NULL</span>,
+  max_footer_lines <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for tbl_ord</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, n <span class='op'>=</span> <span class='cn'>NULL</span>, width <span class='op'>=</span> <span class='cn'>NULL</span>, n_extra <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  width <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>,
+  n <span class='op'>=</span> <span class='cn'>NULL</span>,
+  max_extra_cols <span class='op'>=</span> <span class='cn'>NULL</span>,
+  max_footer_lines <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -145,28 +159,32 @@ original ordination classes.</p>
       <td><p>A <a href='tbl_ord.html'>tbl_ord</a> object.</p></td>
     </tr>
     <tr>
+      <th>width</th>
+      <td><p>Width of text output to generate. This defaults to <code>NULL</code>, which
+means use the <code>width</code> <a href='https://pillar.r-lib.org/reference/pillar_options.html'>option</a>.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>Additional arguments.</p></td>
     </tr>
     <tr>
       <th>n</th>
       <td><p>Number of rows to show. If <code>NULL</code>, the default, will print all rows
-if less than option <code>tibble.print_max</code>. Otherwise, will print
-<code>tibble.print_min</code> rows.</p></td>
+if less than the <code>print_max</code> <a href='https://pillar.r-lib.org/reference/pillar_options.html'>option</a>.
+Otherwise, will print as many rows as specified by the
+<code>print_min</code> <a href='https://pillar.r-lib.org/reference/pillar_options.html'>option</a>.</p></td>
     </tr>
     <tr>
-      <th>width</th>
-      <td><p>Width of text output to generate. This defaults to <code>NULL</code>, which
-means use <code><a href='https://rdrr.io/r/base/options.html'>getOption("tibble.width")</a></code> or (if also <code>NULL</code>)
-<code><a href='https://rdrr.io/r/base/options.html'>getOption("width")</a></code>; the latter displays only the columns that fit on one
-screen. You can also set <code><a href='https://rdrr.io/r/base/options.html'>options(tibble.width = Inf)</a></code> to override this
-default and always print all columns, this may be slow for very wide tibbles.</p></td>
-    </tr>
-    <tr>
-      <th>n_extra</th>
+      <th>max_extra_cols</th>
       <td><p>Number of extra columns to print abbreviated information for,
-if the width is too small for the entire tibble. If <code>NULL</code>, the default,
-will print information about at most <code>tibble.max_extra_cols</code> extra columns.</p></td>
+if the width is too small for the entire tibble. If <code>NULL</code>,
+the <code>max_extra_cols</code> <a href='https://pillar.r-lib.org/reference/pillar_options.html'>option</a> is used.
+The previously defined <code>n_extra</code> argument is soft-deprecated.</p></td>
+    </tr>
+    <tr>
+      <th>max_footer_lines</th>
+      <td><p>Maximum number of footer lines. If <code>NULL</code>,
+the <code>max_footer_lines</code> <a href='https://pillar.r-lib.org/reference/pillar_options.html'>option</a> is used.</p></td>
     </tr>
     </table>
 

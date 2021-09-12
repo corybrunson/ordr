@@ -72,7 +72,7 @@
 
       
 
-      </header><script src="cmds-variables_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
+      </header><script src="cmds-variables_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>multidimensional scaling of variables</h1>
@@ -230,7 +230,7 @@
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">qswur_usa</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">qswur_usa</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 612 x 13
+<pre><code>## # A tibble: 612 × 13
 ##     year institution      size  focus res     age status rk_academic rk_employer
 ##    &lt;int&gt; &lt;chr&gt;            &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;int&gt; &lt;chr&gt;        &lt;int&gt;       &lt;int&gt;
 ##  1  2017 MASSACHUSETTS I… M     CO    VH        5 B                6           4
@@ -257,7 +257,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter_all.html">filter_at</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"rk_"</span><span class="op">)</span><span class="op">)</span>, <span class="op">~</span> <span class="op">!</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">-&gt;</span>
   <span class="va">qswur_usa2020</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">qswur_usa2020</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 38 x 7
+<pre><code>## # A tibble: 38 × 7
 ##    institution     rk_academic rk_employer rk_ratio rk_citations rk_intl_faculty
 ##    &lt;chr&gt;                 &lt;int&gt;       &lt;int&gt;    &lt;int&gt;        &lt;int&gt;           &lt;int&gt;
 ##  1 MASSACHUSETTS …           3           2        8            4               1
@@ -324,7 +324,7 @@
 <code class="sourceCode R"><span class="va">c_eigen</span> <span class="op">%&gt;%</span>
   <span class="fu">fortify</span><span class="op">(</span>.matrix <span class="op">=</span> <span class="st">"rows"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">.name</span>, <span class="op">-</span><span class="va">.matrix</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 7
+<pre><code>## # A tibble: 6 × 7
 ##      EV1     EV2     EV3     EV4     EV5      EV6 metric       
 ##    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;        
 ## 1 -0.834 -0.0907  0.412  -0.0430 -0.0206  0.351   academic     

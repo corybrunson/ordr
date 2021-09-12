@@ -6,16 +6,21 @@
 
 #' @details
 #'
-#' The _inertia_ of a singular value decomposition consists in the squares of
-#' the singular values, and represents the variance, likened to the physical
-#' inertia, in the directions of the orthogonal singular vectors. Read more
-#' about conferring inertia between cases and variables at
-#' <https://stats.stackexchange.com/a/141755/68743>.
+#' The _inertia_ of a singular value decomposition \eqn{X=UDV'} consists in the
+#' squares of the singular values (the diagonal elements of \eqn{D}), and
+#' represents the variance, likened to the physical inertia, in the directions
+#' of the orthogonal singular vectors (the columns of \eqn{U} or of \eqn{V}).
+#' Biplots superimpose the projections of the rows and the columns of \eqn{X}
+#' onto these coordinate vectors, scaled by some proportion of the total
+#' inertia: \eqn{UD^p} and \eqn{VD^q}. A biplot is _balanced_ if \eqn{p+q=1}.
+#' Read Orlov (2013) for more on conferring inertia in PCA.
 #'
 #' _Note: In case the `"inertia"` attribute is a rectangular matrix, one may
 #' only be able to confer it entirely to the cases (`p = 1`) or entirely to the
 #' variables (`p = 0`)._
 #' 
+
+#' @template ref-orlov2013
 
 #' @name conference
 #' @include ord-augmentation.r
