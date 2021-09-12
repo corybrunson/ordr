@@ -56,7 +56,7 @@ Collate:
     'biplot-gg.r'
     'biplot-key.r'
     'biplot-stats.r'
-    'broom-tidy-eigen.r'
+    'broom-tidiers.r'
     'data.r'
     'dplyr-verbs.r'
     'utils.r'

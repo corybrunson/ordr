@@ -28,22 +28,16 @@
 \item{x}{A \link{tbl_ord} object.}
 
 \item{width}{Width of text output to generate. This defaults to \code{NULL}, which
-means use the \code{width} \link[pillar:pillar_options]{option}.}
+means use \code{getOption("tibble.width")} or (if also \code{NULL})
+\code{getOption("width")}; the latter displays only the columns that fit on one
+screen. You can also set \code{options(tibble.width = Inf)} to override this
+default and always print all columns, this may be slow for very wide tibbles.}
 
 \item{...}{Additional arguments.}
 
 \item{n}{Number of rows to show. If \code{NULL}, the default, will print all rows
-if less than the \code{print_max} \link[pillar:pillar_options]{option}.
-Otherwise, will print as many rows as specified by the
-\code{print_min} \link[pillar:pillar_options]{option}.}
-
-\item{max_extra_cols}{Number of extra columns to print abbreviated information for,
-if the width is too small for the entire tibble. If \code{NULL},
-the \code{max_extra_cols} \link[pillar:pillar_options]{option} is used.
-The previously defined \code{n_extra} argument is soft-deprecated.}
-
-\item{max_footer_lines}{Maximum number of footer lines. If \code{NULL},
-the \code{max_footer_lines} \link[pillar:pillar_options]{option} is used.}
+if less than option \code{tibble.print_max}. Otherwise, will print
+\code{tibble.print_min} rows.}
 }
 \description{
 These methods of \code{\link[base:format]{base::format()}} and \code{\link[base:print]{base::print()}} render a
