@@ -246,12 +246,8 @@ aesthetics (required aesthetics are in bold):</p><ul>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other geom layers: 
-<code><a href='geom_axis_label.html'>geom_axis_label</a>()</code>,
-<code><a href='geom_axis_text.html'>geom_axis_text</a>()</code>,
-<code><a href='geom_axis_ticks.html'>geom_axis_ticks</a>()</code>,
 <code><a href='geom_axis.html'>geom_axis</a>()</code>,
-<code><a href='geom_isolines_text.html'>geom_isolines_text</a>()</code>,
-<code><a href='geom_isolines.html'>geom_isolines</a>()</code>,
+<code><a href='geom_isoline.html'>geom_isoline</a>()</code>,
 <code><a href='geom_origin.html'>geom_origin</a>()</code>,
 <code><a href='geom_text_radiate.html'>geom_text_radiate</a>()</code>,
 <code><a href='geom_unit_circle.html'>geom_unit_circle</a>()</code>,
@@ -299,8 +295,7 @@ aesthetics (required aesthetics are in bold):</p><ul>
     <span class='st'>"Row-principal LRA biplot of Freestone glass measurements"</span>,
     <span class='st'>"Ranges 2 sample standard deviations from centroids"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Computation failed in `stat_rows_center()`:</span>
-#&gt; <span class='warning'>The `Hmisc` package is required.</span></div><div class='img'><img src='geom_lineranges-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># row-principal biplot with coordinate-wise confidence intervals</span>
+</div><div class='img'><img src='geom_lineranges-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># row-principal biplot with coordinate-wise confidence intervals</span>
 <span class='va'>glass_lra</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='ggbiplot.html'>ggbiplot</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>color <span class='op'>=</span> <span class='va'>Site</span><span class='op'>)</span>, sec.axes <span class='op'>=</span> <span class='st'>"cols"</span>, scale.factor <span class='op'>=</span> <span class='fl'>.05</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='theme_biplot.html'>theme_biplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
@@ -315,8 +310,7 @@ aesthetics (required aesthetics are in bold):</p><ul>
     <span class='st'>"Row-principal LRA biplot of Freestone glass measurements"</span>,
     <span class='st'>"99% confidence intervals based on nonparametric bootstrap sampling"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Computation failed in `stat_rows_center()`:</span>
-#&gt; <span class='warning'>The `Hmisc` package is required.</span></div><div class='img'><img src='geom_lineranges-2.png' alt='' width='700' height='433' /></div></pre>
+</div><div class='img'><img src='geom_lineranges-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

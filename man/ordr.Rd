@@ -62,7 +62,7 @@ approximation to \eqn{X}.
 Biplots of SVD-based ordinations usually plot the rows and columns of \eqn{X}
 on these \eqn{r} coordinate axes. For an SVD-based biplot to be truly
 geometric, the total variance contained in \eqn{D} must be conferred onto
-\eqn{U} or \eqn{V}, or distributed over both (ttnphns, 2015). When \eqn{D} is
+\eqn{U} or \eqn{V}, or distributed over both (Orlov, 2015). When \eqn{D} is
 conferred onto \eqn{U}, the rows of \eqn{X} are represented by the rows of
 \eqn{UD}, and their distances in the biplot approximate their distances in
 the original column space of \eqn{X}. Meanwhile, the columns of \eqn{X} are
@@ -90,7 +90,7 @@ Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
 978-84-923846.
 \url{https://www.fbbva.es/microsite/multivariate-statistics/biplots.html}
 
-ttnphns (2015) \emph{Answer to} "PCA and Correspondence analysis in their relation
+Orlov K (2015) \emph{Answer to} "PCA and Correspondence analysis in their relation
 to Biplot". CrossValidated, accessed 2019-07-12.
 \url{https://stats.stackexchange.com/a/141755/68743}
 }
