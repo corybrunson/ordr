@@ -28,7 +28,7 @@
 #' * The _standardized discriminant coefficients_ are obtained by (re)scaling
 #' the coefficients by the variable standard deviations. These coefficients
 #' indicate the contributions of the variables to the discriminant scores after
-#' controlling for their variances (ttnphns, 2013).
+#' controlling for their variances (Orlov, 2013).
 
 #' * The variables' _contributions_ to the Mahalanobis variance along each
 #' discriminant axis are obtained by transforming the coefficients by the
@@ -41,7 +41,7 @@
 #' @template ref-gardner2005
 #' @template ref-greenacre2010
 #' @template ref-venables2003
-#' @template ref-ttnphns2013
+#' @template ref-orlov2013
 #' @template ref-greenacre2013
 
 #' @name lda-ord

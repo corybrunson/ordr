@@ -158,14 +158,22 @@ cases and to the variables, respectively.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The <em>inertia</em> of a singular value decomposition consists in the squares of
-the singular values, and represents the variance, likened to the physical
-inertia, in the directions of the orthogonal singular vectors. Read more
-about conferring inertia between cases and variables at
-<a href='https://stats.stackexchange.com/a/141755/68743'>https://stats.stackexchange.com/a/141755/68743</a>.</p>
+    <p>The <em>inertia</em> of a singular value decomposition \(X=UDV'\) consists in the
+squares of the singular values (the diagonal elements of \(D\)), and
+represents the variance, likened to the physical inertia, in the directions
+of the orthogonal singular vectors (the columns of \(U\) or of \(V\)).
+Biplots superimpose the projections of the rows and the columns of \(X\)
+onto these coordinate vectors, scaled by some proportion of the total
+inertia: \(UD^p\) and \(VD^q\). A biplot is <em>balanced</em> if \(p+q=1\).
+Read Orlov (2013) for more on conferring inertia in PCA.</p>
 <p><em>Note: In case the <code>"inertia"</code> attribute is a rectangular matrix, one may
 only be able to confer it entirely to the cases (<code>p = 1</code>) or entirely to the
 variables (<code>p = 0</code>).</em></p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Orlov K (2013) <em>Answer to</em> "Algebra of LDA. Fisher discrimination power of a
+variable and Linear Discriminant Analysis". CrossValidated, accessed
+2019-07-26. <a href='https://stats.stackexchange.com/a/83114/68743'>https://stats.stackexchange.com/a/83114/68743</a></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

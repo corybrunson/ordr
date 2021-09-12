@@ -26,11 +26,7 @@ Imports:
     purrr,
     labeling,
     ggrepel,
-    ca,
-    MASS,
     logisticPCA,
-    vegan,
-    ade4,
     nipals,
     sessioninfo
 License: GPL-3
@@ -39,6 +35,11 @@ LazyData: true
 Suggests:
     testthat,
     gridExtra,
+    ca,
+    MASS,
+    candisc,
+    vegan,
+    ade4,
     igraph,
     igraphdata,
     heplots,
@@ -82,6 +83,7 @@ Collate:
     'methods-base-svd.r'
     'methods-ca-ca.r'
     'methods-ca-mjca.r'
+    'methods-candisc-cancor.r'
     'methods-logisticpca-lpca.r'
     'methods-mass-lda.r'
     'methods-nipals-nipals.r'

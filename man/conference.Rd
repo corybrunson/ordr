@@ -32,13 +32,21 @@ Re-distribute inertia between cases and variables in an
 ordination.
 }
 \details{
-The \emph{inertia} of a singular value decomposition consists in the squares of
-the singular values, and represents the variance, likened to the physical
-inertia, in the directions of the orthogonal singular vectors. Read more
-about conferring inertia between cases and variables at
-\url{https://stats.stackexchange.com/a/141755/68743}.
+The \emph{inertia} of a singular value decomposition \eqn{X=UDV'} consists in the
+squares of the singular values (the diagonal elements of \eqn{D}), and
+represents the variance, likened to the physical inertia, in the directions
+of the orthogonal singular vectors (the columns of \eqn{U} or of \eqn{V}).
+Biplots superimpose the projections of the rows and the columns of \eqn{X}
+onto these coordinate vectors, scaled by some proportion of the total
+inertia: \eqn{UD^p} and \eqn{VD^q}. A biplot is \emph{balanced} if \eqn{p+q=1}.
+Read Orlov (2013) for more on conferring inertia in PCA.
 
 \emph{Note: In case the \code{"inertia"} attribute is a rectangular matrix, one may
 only be able to confer it entirely to the cases (\code{p = 1}) or entirely to the
 variables (\code{p = 0}).}
+}
+\references{
+Orlov K (2013) \emph{Answer to} "Algebra of LDA. Fisher discrimination power of a
+variable and Linear Discriminant Analysis". CrossValidated, accessed
+2019-07-26. \url{https://stats.stackexchange.com/a/83114/68743}
 }
