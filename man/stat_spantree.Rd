@@ -115,27 +115,6 @@ In either case, the stat layer returns a data frame with position aesthetics
 \code{x} and \code{y}.
 }
 
-\examples{
-# classical multidimensional scaling of road distances between European cities
-eurodist \%>\%
-  cmdscale_ord(k = 11) \%>\%
-  as_tbl_ord() \%>\%
-  augment_ord() \%>\%
-  print() -> euro_mds
-# biplot with minimal spanning tree based on full-dimensional distances
-euro_mds \%>\%
-  ggbiplot() +
-  scale_y_reverse() +
-  stat_cols_spantree(
-    ord_aes(euro_mds), check.aes = FALSE,
-    alpha = .5, linetype = "dotted"
-  ) +
-  geom_cols_text(aes(label = .name), size = 3) +
-  ggtitle(
-    "MDS biplot of road distances between European cities",
-    "Dotted segments constitute the minimal spanning tree"
-  )
-}
 \references{
 Jolliffe IT (2002) \emph{Principal Component Analysis}, Second Edition.
 Springer Series in Statistics, ISSN 0172-7397. \doi{10.1007/b98835}

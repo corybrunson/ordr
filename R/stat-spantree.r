@@ -33,7 +33,6 @@
 #' @param method Passed to [stats::dist()].
 #' @template param-stat
 #' @family stat layers
-#' @example inst/examples/ex-stat-spantree-eurodist.r
 #' @export
 stat_spantree <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
