@@ -48,7 +48,7 @@ Suggests:
     knitr,
     rmarkdown,
     corrplot
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
 Collate:
     'aaa-.r'
@@ -87,6 +87,7 @@ Collate:
     'methods-mass-lda.r'
     'methods-nipals-nipals.r'
     'methods-ordr-lra.r'
+    'methods-pma-cca.r'
     'methods-stats-cmds.r'
     'methods-stats-kmeans.r'
     'methods-stats-lm.r'
