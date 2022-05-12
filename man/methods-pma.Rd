@@ -2,6 +2,15 @@
 % Please edit documentation in R/methods-pma-cca.r
 \name{methods-pma}
 \alias{methods-pma}
+\alias{as_tbl_ord.SPC}
+\alias{recover_coord.SPC}
+\alias{recover_rows.SPC}
+\alias{recover_cols.SPC}
+\alias{recover_inertia.SPC}
+\alias{recover_conference.SPC}
+\alias{augmentation_rows.SPC}
+\alias{augmentation_cols.SPC}
+\alias{augmentation_coord.SPC}
 \alias{as_tbl_ord.CCA}
 \alias{recover_coord.CCA}
 \alias{recover_rows.CCA}
@@ -14,6 +23,24 @@
 \title{Functionality for penalized multivariate analysis ('SPC', 'CCA',
 'MultiCCA') objects}
 \usage{
+\method{as_tbl_ord}{SPC}(x)
+
+\method{recover_coord}{SPC}(x)
+
+\method{recover_rows}{SPC}(x)
+
+\method{recover_cols}{SPC}(x)
+
+\method{recover_inertia}{SPC}(x)
+
+\method{recover_conference}{SPC}(x)
+
+\method{augmentation_rows}{SPC}(x)
+
+\method{augmentation_cols}{SPC}(x)
+
+\method{augmentation_coord}{SPC}(x)
+
 \method{as_tbl_ord}{CCA}(x)
 
 \method{recover_coord}{CCA}(x)
@@ -50,6 +77,48 @@ specializations as well as one to sparse multiple CCA.
 are advised against by ter Braak (1990).
 }
 \examples{
+# data frame of Anderson iris species measurements
+class(iris)
+head(iris)
+# compute principal components of scaled measurements
+iris_spca <- PMA::SPC(
+  as.matrix(iris[, -5L]),
+  sumabsv = sqrt(2),
+  K = 2L,
+  cnames = names(iris)[seq(4L)]
+)
+# wrap as a 'tbl_ord' object
+(iris_spca <- as_tbl_ord(iris_spca))
+# summarize ordination
+glance(iris_spca)
+# bind species classification to observation coordinates
+(iris_spca <- mutate_rows(iris_spca, species = iris$Species))
+# recover observation principal coordinates and measurement standard coordinates
+head(get_rows(iris_spca))
+get_cols(iris_spca)
+# augment measurements with names and scaling parameters
+(iris_spca <- augment_ord(iris_spca))
+# summarize principal components
+tidy(iris_spca)
+# scree plot of proportion of variance (inertia)
+tidy(iris_spca) \%>\%
+  ggplot(aes(x = .name, y = .prop_var)) +
+  theme_bw() +
+  scale_y_continuous(labels = scales::percent) +
+  geom_col() +
+  labs(x = "", y = "Proportion of inertia")
+# fortification adds all above columns
+fortify(iris_spca)
+# row-principal biplot
+iris_spca \%>\%
+  augment_ord() \%>\%
+  ggbiplot() +
+  theme_bw() +
+  scale_color_brewer(type = "qual", palette = 2) +
+  # -+- text elements are extremely far removed -+-
+  geom_cols_axis(aes(label = .name), center = iris_spca$meanx) +
+  geom_rows_point(aes(color = species), alpha = .5) +
+  ggtitle("Row-principal sparse PCA biplot of Anderson iris measurements")
 # data frame of life-cycle savings across countries
 class(LifeCycleSavings)
 head(LifeCycleSavings)
