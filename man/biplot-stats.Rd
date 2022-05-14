@@ -267,7 +267,11 @@ or, if \code{type="euclid"}, the radius of the circle to be drawn.}
 \item{segments}{The number of segments to be used in drawing the ellipse.}
 
 \item{subset}{An integer, logical, or character vector indicating a subset of
-rows or columns for which to render graphical elements.}
+rows or columns for which to render graphical elements. NB: Internally, the
+\code{subset} will be taken from the rows of the \link[=fortify.tbl_ord]{fortified}
+'tbl_ord' comprising rows from only one of the matrix factors. It is still
+possible to pass a formula to the \code{data} parameter, but it will act on the
+fortified data \emph{before} it has been restricted to one matrix factor.}
 
 \item{mult}{Numeric value used to scale the coordinates.}
 
