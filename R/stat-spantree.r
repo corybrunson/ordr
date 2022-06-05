@@ -38,7 +38,7 @@
 stat_spantree <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
   method = "euclidean",
-  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
+  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE, check.param = TRUE,
   ...
 ) {
   layer(
@@ -50,6 +50,7 @@ stat_spantree <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     check.aes = check.aes,
+    check.param = check.param,
     params = list(
       method = method,
       na.rm = FALSE,
@@ -63,7 +64,7 @@ stat_spantree <- function(
 stat_rows_spantree <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
   method = "euclidean",
-  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
+  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE, check.param = TRUE,
   ...
 ) {
   layer(
@@ -75,6 +76,7 @@ stat_rows_spantree <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     check.aes = check.aes,
+    check.param = check.param,
     params = list(
       method = method,
       na.rm = FALSE,
@@ -88,7 +90,7 @@ stat_rows_spantree <- function(
 stat_cols_spantree <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
   method = "euclidean",
-  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
+  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE, check.param = TRUE,
   ...
 ) {
   layer(
@@ -100,6 +102,7 @@ stat_cols_spantree <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     check.aes = check.aes,
+    check.param = check.param,
     params = list(
       method = method,
       na.rm = FALSE,

@@ -226,6 +226,7 @@ for (type in c("stat", "geom")) {
     if (type == "geom") "#' @template param-matrix\n" else "",
     "#' @template param-{type}\n",
     if (type == "stat") "#' @template biplot-ord-aes\n" else "",
+    if (type == "stat") "#' @inheritParams stat_rows\n" else "",
     "\n"
   )
   

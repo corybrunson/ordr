@@ -16,6 +16,7 @@
 #' @inheritParams ggplot2::layer
 #' @template param-stat
 #' @template biplot-ord-aes
+#' @inheritParams stat_rows
 #' @inheritParams ggplot2::stat_ellipse
 #' @inheritParams stat_center
 #' @inheritParams stat_star
