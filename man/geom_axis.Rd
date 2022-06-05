@@ -55,10 +55,7 @@ a call to a position adjustment function.}
 \item{axis_labels, axis_ticks, axis_text}{Logical; whether to include labels,
 tick marks, and text value marks along the axes.}
 
-\item{by}{Intervals between elements or number of elements; specify only
-one.}
-
-\item{num}{Intervals between elements or number of elements; specify only
+\item{by, num}{Intervals between elements or number of elements; specify only
 one.}
 
 \item{tick_length}{Numeric; the length of the tick marks, as a proportion of

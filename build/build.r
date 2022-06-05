@@ -1,35 +1,64 @@
 
-#' Build `*_rows_*()` and `*_cols_*()` biplot layers.
+# -+- TASKS REMAINING -+-
+# 1. Include examples, e.g. from `stat_rows_ellipse()`.
+# 2. Write extra lines, e.g. `@importFrom` for `geom_text_repel()`.
+
+## Build `*_rows_*()` and `*_cols_*()` biplot layers.
+
+## 0. Remove previous builds.
+
+built_files <- list.files(here::here("R"), "biplot-(stat|geom)s.r")
+file.remove(here::here("R", built_files))
+
+## 1. Prepare function/documentation generators.
+## Resource: <https://blog.r-hub.io/2020/02/10/code-generation/>
 
 library(stringr)
 devtools::load_all()
+
+format_formal <- function(x) {
+  str_replace(
+    format(enquote(rlang::enquo(x))),
+    "^base::quote\\(\\~(.*)\\)$", "\\1"
+  )
+}
 
 root_args <- c(
   "mapping", "data", "stat", "geom", "position",
   "show.legend", "inherit.aes"
 )
 
-arg_c <- function(x, y, indent = 0L) {
+arg_c <- function(x, y, indent = 0L, end = FALSE) {
   stopifnot(length(x) == length(y))
-  y[seq(length(y) - 1L)] <- str_c(y[seq(length(y) - 1L)], ",")
+  y_seq <- seq(if (end) length(y) - 1L else length(y))
+  y[y_seq] <- str_c(y[y_seq], ",")
   ind <- str_c(c("\n", rep(" ", indent)), collapse = "")
   str_c(x, y, sep = " = ", collapse = ind)
 }
 
-build_biplot_geom <- function(layer, .matrix) {
+build_biplot_layer <- function(layer_name, .matrix, xy = FALSE, file = "") {
   .matrix <- match_factor(.matrix)
   
   # verify uniplot layer and derive biplot layer name
-  layer_name <- rlang::enexpr(layer)
-  if (! str_detect(layer_name, "^geom\\_"))
-    stop("`", layer_name, "` is not a geometric object layer.")
-  ggproto_name <- ggplot2:::camelize(layer_name, first = TRUE)
-  layer_name <- str_replace(layer_name, "geom_", str_c("geom_", .matrix, "_"))
-  #print(layer_name)
+  #layer_name <- rlang::enexpr(layer)
+  layer <- get(layer_name)
+  if (! str_detect(layer_name, "^(stat|geom)\\_")) {
+    stop("`", layer_name, "` is not a recognized layer.")
+  }
+  type <- str_extract(layer_name, "^(stat|geom)")
+  name <- str_remove(layer_name, "^(stat|geom)\\_")
+  
+  # new `ggproto` objects are used for stats but not for geoms
+  biplot_layer_name <- glue::glue("{type}_{.matrix}_{name}")
+  ggproto_name <- switch(
+    type,
+    stat = ggplot2:::camelize(biplot_layer_name, first = TRUE),
+    geom = ggplot2:::camelize(layer_name, first = TRUE)
+  )
   
   # get uniplot formals (and insert any additional biplot formals)
   layer_formals <- formals(layer)
-  layer_formals <- unlist(lapply(layer_formals, format))
+  layer_formals <- unlist(lapply(layer_formals, format_formal))
   layer_args <- names(layer_formals)
   layer_vals <- unname(layer_formals)
   stopifnot(length(layer_args) == length(layer_vals))
@@ -48,21 +77,48 @@ build_biplot_geom <- function(layer, .matrix) {
   
   # define biplot layer root parameters
   root_vals <- root_args
-  root_vals[[match("stat", root_args)]] <-
-    str_c(.matrix, "_stat(stat)")
-  root_vals[[match("geom", root_args)]] <- ggproto_name
+  root_vals[[match("stat", root_args)]] <- switch(
+    type,
+    stat = ggproto_name,
+    geom = glue::glue("{.matrix}_stat(stat)")
+  )
+  root_vals[[match("geom", root_args)]] <- switch(
+    type,
+    stat = "geom",
+    geom = ggproto_name
+  )
   
   # define biplot layer internal parameters
   params <- setdiff(layer_args, c(root_args, "..."))
   
+  # define `ggproto` object
+  if_xy <- if (xy) "_xy" else ""
+  proto_def <- switch(
+    type,
+    stat = glue::glue(
+      "#' @rdname ordr-ggproto\n",
+      "#' @format NULL\n",
+      "#' @usage NULL\n",
+      "#' @export\n",
+      "{ggproto_name} <- ggproto(\n",
+      "  \"{ggproto_name}\", {ggplot2:::camelize(layer_name, first = TRUE)},\n",
+      "  \n",
+      "  setup_data = setup_{.matrix}{if_xy}_data\n",
+      ")\n",
+      "\n\n",
+    ),
+    geom = ""
+  )
+  
   # write function
-  glue::glue(
-    "{layer_name} <- function(\n",
+  layer_def <- glue::glue(
+    "#' @rdname biplot-{type}s\n",
+    "#' @export\n",
+    "{biplot_layer_name} <- function(\n",
     "  ",
-    # -+- remove " = " after "..." -+-
-    str_c(layer_args1, str_c(layer_vals1, ","), sep = " = ", collapse = "\n  "),
+    arg_c(layer_args1, layer_vals1, 2L),
     "\n  ...,\n  ",
-    if (layer2) arg_c(layer_args2, layer_vals2, 2L),
+    if (layer2) arg_c(layer_args2, layer_vals2, 2L, end = TRUE) else "",
     "\n",
     ") {{\n",
     "  layer(\n",
@@ -71,14 +127,143 @@ build_biplot_geom <- function(layer, .matrix) {
     "\n",
     "    params = list(\n",
     "      ",
-    str_c(params, str_c(params, ","), sep = " = ", collapse = "\n      "),
+    arg_c(params, params, 6L),
     "\n",
+    if ("na.rm" %in% params) "" else "      na.rm = FALSE,\n",
     "      ...\n",
     "    )\n",
     "  )\n",
     "}}\n"
   )
   
-  # document function
+  # write to file
+  cat("\n", proto_def, layer_def, "\n", file = file, sep = "", append = TRUE)
+}
+
+## 2. Search code for layers to generalize to rows/cols.
+
+# ggplot2 & other extension layers to adapt to biplot layers
+orig_layers <- c(
+  "ggplot2::stat_ellipse",
+  "ggplot2::geom_point", "ggplot2::geom_path", "ggplot2::geom_polygon",
+  "ggplot2::geom_text", "ggplot2::geom_label",
+  "ggrepel::geom_text_repel", "ggrepel::geom_label_repel"
+)
+# ordr layers to not adapt to biplot layers
+omit_layers <- c(
+  "geom_origin", "geom_unit_circle"
+)
+# layers that require restriction to 2 coordinates (without package accessors)
+xy_layers <- c(
+  "stat_ellipse",
+  "stat_scale",
+  "stat_center", "stat_star"
+)
+
+# all files with stat or geom definitions
+layer_files <- list.files(here::here("R/"), "^(stat|geom)-.*\\.(r|R)")
+# detect all layer definitions
+layer_defs <- unlist(lapply(layer_files, function(f) {
+  rl <- readLines(here::here("R", f))
+  rl <- str_subset(rl, "^(stat|geom)\\_[a-z\\_]+ <- ")
+  rl <- str_subset(rl, "^(stat|geom)\\_(rows|cols|dims)", negate = TRUE)
+  str_extract(rl, "^(stat|geom)\\_[a-z\\_]+")
+}))
+
+# layers to adapt to biplot layers
+adapt_layers <- c(
+  orig_layers,
+  setdiff(layer_defs, omit_layers)
+)
+
+## 3. Run generators on manual and found lists of layers.
+
+# warning
+adapt_warn <- glue::glue(
+  "# --------------------------------------------------\n",
+  "# Generated by 'build/build.r': do not edit by hand.\n",
+  "# --------------------------------------------------\n\n\n"
+)
+
+for (type in c("stat", "geom")) {
   
+  # file path
+  adapt_file <- here::here(glue::glue("R/biplot-{type}s.r"))
+  
+  # title paragraph
+  adapt_title <- glue::glue(
+    "#' @title Convenience {type}s for row and column matrix factors\n",
+    "#' \n\n"
+  )
+  
+  # description paragraph
+  adapt_descr <- switch(
+    type,
+    stat = glue::glue(
+      "#' @description These statistical transformations (stats) adapt\n",
+      "#'   conventional **ggplot2** stats to one or the other matrix factor\n",
+      "#'   of a tbl_ord, in lieu of [stat_rows()] or [stat_cols()]. They\n",
+      "#'   accept the same parameters as their corresponding conventional\n",
+      "#'   stats.\n",
+      "#' \n\n"
+    ),
+    geom = glue::glue(
+      "#' @description These geometric element layers (geoms) pair\n",
+      "#'   conventional **ggplot2** geoms with [stat_rows()] or\n",
+      "#'   [stat_cols()] in order to render elements for one or the other\n",
+      "#'   matrix factor of a tbl_ord. They understand the same aesthetics\n",
+      "#'   as their corresponding conventional geoms.\n",
+      "#' \n\n"
+    )
+  )
+  
+  # standard roxygen2 tags
+  adapt_roxygen <- glue::glue(
+    "#' @name biplot-{type}s\n",
+    "#' @family biplot layers\n",
+    "#' @import ggplot2\n",
+    "#' @inheritParams ggplot2::layer\n",
+    if (type == "geom") "#' @template param-matrix\n" else "",
+    "#' @template param-{type}\n",
+    if (type == "stat") "#' @template biplot-ord-aes\n" else "",
+    "\n"
+  )
+  
+  # parameter inheritances
+  adapt_inherits <- glue::glue(
+    str_c(
+      str_c(
+        "#' @inheritParams ",
+        str_subset(adapt_layers, glue::glue("^(.*::|){type}")),
+        "\n",
+        collapse = ""
+      ),
+      "\n"
+    )
+  )
+  
+  # conclude roxygen2 tags
+  adapt_fin <- glue::glue(
+    "NULL\n\n"
+  )
+  
+  # write header
+  cat(
+    adapt_warn,
+    adapt_title, adapt_descr, adapt_roxygen, adapt_inherits, adapt_fin,
+    file = adapt_file, sep = "", append = FALSE
+  )
+  # -+- STOP HERE UNTIL TOP-LINE ISSUES ARE RESOLVED -+-
+  next
+  # write functions with documentation
+  write_layers <- str_remove(adapt_layers, "^.*::")
+  write_layers <- str_subset(write_layers, glue::glue("^{type}\\_"))
+  for (write_layer in write_layers) for (.matrix in c("rows", "cols")) {
+    build_biplot_layer(
+      write_layer,
+      .matrix,
+      xy = write_layer %in% xy_layers,
+      file = adapt_file
+    )
+  }
 }

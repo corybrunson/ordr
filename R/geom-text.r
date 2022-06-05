@@ -181,7 +181,9 @@ geom_dims_label <- function(
   )
 }
 
-#' @importFrom ggrepel geom_text_repel geom_label_repel
+#' @importFrom ggrepel
+#'   GeomTextRepel GeomLabelRepel
+#'   geom_text_repel geom_label_repel
 #' @export
 ggrepel::geom_text_repel
 #' @export

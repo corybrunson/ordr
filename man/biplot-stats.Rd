@@ -231,23 +231,7 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
-\item{fun.data}{Functions and arguments
-treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
-\code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
-
-\item{fun.center}{Functions and arguments
-treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
-\code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
-
-\item{fun.min}{Functions and arguments
-treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
-\code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
-
-\item{fun.max}{Functions and arguments
-treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
-\code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
-
-\item{fun.args}{Functions and arguments
+\item{fun.data, fun.center, fun.min, fun.max, fun.args}{Functions and arguments
 treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
 \code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
 
@@ -266,43 +250,20 @@ or, if \code{type="euclid"}, the radius of the circle to be drawn.}
 
 \item{segments}{The number of segments to be used in drawing the ellipse.}
 
-\item{subset}{An integer, logical, or character vector indicating a subset of
-rows or columns for which to render graphical elements. NB: Internally, the
-\code{subset} will be taken from the rows of the \link[=fortify.tbl_ord]{fortified}
-'tbl_ord' comprising rows from only one of the matrix factors. It is still
-possible to pass a formula to the \code{data} parameter, but it will act on the
-fortified data \emph{before} it has been restricted to one matrix factor.}
-
 \item{mult}{Numeric value used to scale the coordinates.}
 
 \item{method}{Passed to \code{\link[stats:dist]{stats::dist()}}.}
-
-\item{check.aes}{If \code{TRUE}, the default, will check that
-supplied parameters and aesthetics are understood by the \code{geom} or
-\code{stat}. Use \code{FALSE} to suppress the checks.}
 }
 \description{
-These statistical transformations (stats) adapt conventional
-\strong{ggplot2} stats to one or the other matrix factor of a tbl_ord, in lieu
-of \code{\link[=stat_rows]{stat_rows()}} or \code{\link[=stat_cols]{stat_cols()}}. They accept the same parameters as their
-corresponding conventional stats.
+These statistical transformations (stats) adapt
+conventional \strong{ggplot2} stats to one or the other matrix factor
+of a tbl_ord, in lieu of \code{\link[=stat_rows]{stat_rows()}} or \code{\link[=stat_cols]{stat_cols()}}. They
+accept the same parameters as their corresponding conventional
+stats.
 
 These ordination stats are adapted from
 \code{\link[ggplot2:stat_ellipse]{ggplot2::stat_ellipse()}}.
 }
-\section{Biplot layers}{
-
-\code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
-frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
-variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
-filter the data frame to one of these two.
-
-The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
-stat in order to render plot elements for the corresponding factor matrix.
-\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
-points for rows and arrows for columns.
-}
-
 \section{Ordination aesthetics}{
 
 The convenience function \verb{[ord_aes()]} can be used to incorporate all
@@ -321,6 +282,37 @@ transformation.
 
 In either case, the stat layer returns a data frame with position aesthetics
 \code{x} and \code{y}.
+
+
+The convenience function \verb{[ord_aes()]} can be used to incorporate all
+coordinates of the ordination model into a statistical transformation. It
+maps the coordinates to the custom aesthetics \code{..coord1}, \code{..coord2}, etc.
+
+Some transformations, e.g. \verb{[stat_center()]}, are commutative with projection
+to the 'x' and 'y' coordinates. If they detect aesthetics of the form
+\verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and \code{y}
+while any remaining are ignored.
+
+Other transformations, e.g. \verb{stat_spantree()]}, yield different results in a
+planar biplot when they are computer before or after projection. If such a
+stat layer detects these aesthetics, then the lot of them are used in the
+transformation.
+
+In either case, the stat layer returns a data frame with position aesthetics
+\code{x} and \code{y}.
+}
+
+\section{Biplot layers}{
+
+\code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
+frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
+variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
+filter the data frame to one of these two.
+
+The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.
 }
 
 \examples{
