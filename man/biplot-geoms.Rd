@@ -592,19 +592,10 @@ layer, as a string.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{axis_labels}{Logical; whether to include labels,
+\item{axis_labels, axis_ticks, axis_text}{Logical; whether to include labels,
 tick marks, and text value marks along the axes.}
 
-\item{axis_ticks}{Logical; whether to include labels,
-tick marks, and text value marks along the axes.}
-
-\item{axis_text}{Logical; whether to include labels,
-tick marks, and text value marks along the axes.}
-
-\item{by}{Intervals between elements or number of elements; specify only
-one.}
-
-\item{num}{Intervals between elements or number of elements; specify only
+\item{by, num}{Intervals between elements or number of elements; specify only
 one.}
 
 \item{tick_length}{Numeric; the length of the tick marks, as a proportion of
@@ -647,11 +638,7 @@ standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 \item{isoline_text}{Logical; whether to include text value marks along the
 isolines.}
 
-\item{nudge_x}{Horizontal and vertical adjustment to nudge labels by.
-Useful for offsetting text from points, particularly on discrete scales.
-Cannot be jointly specified with \code{position}.}
-
-\item{nudge_y}{Horizontal and vertical adjustment to nudge labels by.
+\item{nudge_x, nudge_y}{Horizontal and vertical adjustment to nudge labels by.
 Useful for offsetting text from points, particularly on discrete scales.
 Cannot be jointly specified with \code{position}.}
 
