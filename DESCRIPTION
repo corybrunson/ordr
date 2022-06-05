@@ -49,7 +49,7 @@ Suggests:
     knitr,
     rmarkdown,
     corrplot
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Roxygen: list(markdown = TRUE)
 Collate:
     'aaa-.r'
