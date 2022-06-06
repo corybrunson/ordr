@@ -1,5 +1,5 @@
 Package: ordr
-Title: A 'tidyverse' extension for ordinations and biplots
+Title: A 'tidyverse' Extension for Ordinations and Biplots
 Version: 0.0.0.9000
 Authors@R: c(
   person("Jason Cory", "Brunson", email = "cornelioid@gmail.com",
@@ -17,7 +17,6 @@ Imports:
     generics,
     magrittr,
     tibble,
-    broom,
     tidyr,
     rlang,
     stringr,
@@ -28,11 +27,12 @@ Imports:
     ggrepel,
     logisticPCA,
     nipals,
-    sessioninfo
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Suggests:
+    broom,
+    sessioninfo,
     testthat,
     gridExtra,
     ca,

@@ -17,9 +17,8 @@ NULL
 #'
 #' @details
 #'
-#' **Link to the websites
-#' <http://www.iu.qs.com/university-rankings/qs-classifications/> for university
-#' classifications.**
+#' Ranking data were obtained from the public QS website:
+#' <https://www.topuniversities.com/qs-world-university-rankings>
 #'
 #' @format A [tibble][tibble::tibble].
 #' @keywords datasets
