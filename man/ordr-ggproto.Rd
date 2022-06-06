@@ -2,8 +2,8 @@
 % Please edit documentation in R/aaa-.r, R/geom-axis.r, R/geom-intervals.r,
 %   R/geom-isoline.r, R/geom-origin.r, R/geom-text-radiate.r,
 %   R/geom-unit-circle.r, R/geom-vector.r, R/stat-center.r, R/stat-chull.r,
-%   R/stat-cone.r, R/stat-ellipse.r, R/stat-matrix.r, R/stat-scale.r,
-%   R/stat-spantree.r
+%   R/stat-cone.r, R/stat-matrix.r, R/stat-scale.r, R/stat-spantree.r,
+%   R/zzz-biplot-stats.r
 \docType{data}
 \name{ordr-ggproto}
 \alias{ordr-ggproto}
@@ -16,25 +16,25 @@
 \alias{GeomUnitCircle}
 \alias{GeomVector}
 \alias{StatCenter}
-\alias{StatRowsCenter}
-\alias{StatColsCenter}
 \alias{StatStar}
-\alias{StatRowsStar}
-\alias{StatColsStar}
 \alias{StatChull}
-\alias{StatRowsChull}
-\alias{StatColsChull}
 \alias{StatCone}
-\alias{StatRowsCone}
-\alias{StatColsCone}
-\alias{StatRowsEllipse}
-\alias{StatColsEllipse}
 \alias{StatRows}
 \alias{StatCols}
 \alias{StatScale}
 \alias{StatRowsScale}
 \alias{StatColsScale}
 \alias{StatSpantree}
+\alias{StatRowsEllipse}
+\alias{StatColsEllipse}
+\alias{StatRowsCenter}
+\alias{StatColsCenter}
+\alias{StatRowsStar}
+\alias{StatColsStar}
+\alias{StatRowsChull}
+\alias{StatColsChull}
+\alias{StatRowsCone}
+\alias{StatColsCone}
 \alias{StatRowsSpantree}
 \alias{StatColsSpantree}
 \title{ggproto classes created and adapted for ordr}

@@ -3,14 +3,15 @@
 
 ## 0. Remove previous builds.
 
-built_files <- list.files(here::here("R"), "biplot-(stat|geom)s.r")
+built_files <- list.files(here::here("R"), "zzz-biplot-(stat|geom)s.r")
 file.remove(here::here("R", built_files))
+document()
+load_all()
 
 ## 1. Prepare function/documentation generators.
 ## Resource: <https://blog.r-hub.io/2020/02/10/code-generation/>
 
 library(stringr)
-devtools::load_all()
 
 format_formal <- function(x) {
   str_replace(
@@ -26,7 +27,13 @@ root_args <- c(
 
 arg_c <- function(x, y, indent = 0L, end = FALSE) {
   stopifnot(length(x) == length(y))
-  y_seq <- seq(if (end) length(y) - 1L else length(y))
+  y_seq <- seq(if (end && length(y) > 1L) {
+    length(y) - 1L
+  } else if (end && length(y) == 1L) {
+    c()
+  } else {
+    length(y)
+  })
   y[y_seq] <- str_c(y[y_seq], ",")
   ind <- str_c(c("\n", rep(" ", indent)), collapse = "")
   str_c(x, y, sep = " = ", collapse = ind)
@@ -39,7 +46,18 @@ build_biplot_layer <- function(
   
   # verify uniplot layer and derive biplot layer name
   #layer_name <- rlang::enexpr(layer)
-  layer <- get(layer_name)
+  #layer <- get(layer_name)
+  layer_pkg <- if (str_detect(layer_name, "^.*::")) {
+    str_remove(layer_name, "::.*$")
+  } else {
+    NA
+  }
+  layer_name <- str_remove(layer_name, "^.*::")
+  layer <- if (is.na(layer_pkg)) {
+    get(layer_name)
+  } else {
+    utils::getFromNamespace(layer_name, layer_pkg)
+  }
   if (! str_detect(layer_name, "^(stat|geom)\\_")) {
     stop("`", layer_name, "` is not a recognized layer.")
   }
@@ -115,8 +133,10 @@ build_biplot_layer <- function(
     "{biplot_layer_name} <- function(\n",
     "  ",
     arg_c(layer_args1, layer_vals1, 2L),
-    "\n  ...,\n  ",
-    if (layer2) arg_c(layer_args2, layer_vals2, 2L, end = TRUE) else "",
+    "\n  ...",
+    if (! layer2) "" else {
+      str_c(",\n  ", arg_c(layer_args2, layer_vals2, 2L, end = TRUE))
+    },
     "\n",
     ") {{\n",
     "  layer(\n",
@@ -125,8 +145,8 @@ build_biplot_layer <- function(
     "\n",
     "    params = list(\n",
     "      ",
-    arg_c(params, params, 6L),
-    "\n",
+    if (length(params) == 0L) "" else arg_c(params, params, 6L),
+    if (length(params) == 0L) "" else "\n",
     if ("na.rm" %in% params) "" else "      na.rm = FALSE,\n",
     "      ...\n",
     "    )\n",
@@ -213,7 +233,7 @@ adapt_warn <- glue::glue(
 for (type in c("stat", "geom")) {
   
   # file path
-  adapt_file <- here::here(glue::glue("R/biplot-{type}s.r"))
+  adapt_file <- here::here(glue::glue("R/zzz-biplot-{type}s.r"))
   
   # title paragraph
   adapt_title <- glue::glue(
@@ -246,6 +266,7 @@ for (type in c("stat", "geom")) {
   adapt_roxygen <- glue::glue(
     "#' @name biplot-{type}s\n",
     "#' @family biplot layers\n",
+    "#' @include utils.r\n",
     "#' @import ggplot2\n",
     "\n"
   )
@@ -330,22 +351,24 @@ for (type in c("stat", "geom")) {
   )
   
   # -+- STOP HERE UNTIL TOP-LINE ISSUES ARE RESOLVED -+-
-  next
+  #next
   
   # write functions with documentation
-  write_layers <- str_remove(adapt_layers, "^.*::")
-  write_layers <- str_subset(write_layers, glue::glue("^{type}\\_"))
+  #write_layers <- str_remove(adapt_layers, "^.*::")
+  #write_layers <- str_subset(write_layers, glue::glue("^{type}\\_"))
+  write_layers <- str_subset(adapt_layers, glue::glue("^([^:]+::|){type}\\_"))
   for (write_layer in write_layers) for (.matrix in c("rows", "cols")) {
     
     # determine if `ggproto` object is already defined
     done_proto <-
-      ggplot2:::camelize(write_layer, first = TRUE) %in% done_protos
+      ggplot2:::camelize(str_remove(write_layer, "^.*::"), first = TRUE) %in%
+      done_protos
     
     build_biplot_layer(
       write_layer,
       .matrix,
       proto = ! done_proto,
-      xy = write_layer %in% xy_layers,
+      xy = str_remove(write_layer, "^.*::") %in% xy_layers,
       file = adapt_file
     )
   }

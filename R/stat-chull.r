@@ -35,52 +35,6 @@ stat_chull <- function(
   )
 }
 
-#' @rdname biplot-stats
-#' @export
-stat_rows_chull <- function(
-  mapping = NULL, data = NULL, geom = "polygon", position = "identity",
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ...
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatRowsChull,
-    geom = geom, 
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = FALSE,
-      ...
-    )
-  )
-}
-
-#' @rdname biplot-stats
-#' @export
-stat_cols_chull <- function(
-  mapping = NULL, data = NULL, geom = "polygon", position = "identity",
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ...
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatColsChull,
-    geom = geom, 
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = FALSE,
-      ...
-    )
-  )
-}
-
 #' @rdname ordr-ggproto
 #' @format NULL
 #' @usage NULL
@@ -97,24 +51,4 @@ StatChull <- ggproto(
     
     data[chull(data[, ord_cols, drop = FALSE]), , drop = FALSE]
   }
-)
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatRowsChull <- ggproto(
-  "StatRowsChull", StatChull,
-  
-  setup_data = setup_rows_data
-)
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatColsChull <- ggproto(
-  "StatColsChull", StatChull,
-  
-  setup_data = setup_cols_data
 )

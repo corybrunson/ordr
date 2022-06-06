@@ -43,72 +43,6 @@ stat_center <- function(
   )
 }
 
-#' @rdname biplot-stats
-#' @export
-stat_rows_center <- function(
-  mapping = NULL, data = NULL, geom = "point", position = "identity",
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ...,
-  fun.data = NULL,
-  fun.center = NULL,
-  fun.min = NULL,
-  fun.max = NULL,
-  fun.args = list()
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatRowsCenter,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      fun.data = fun.data,
-      fun.center = fun.center,
-      fun.min = fun.min,
-      fun.max = fun.max,
-      fun.args = fun.args,
-      na.rm = FALSE,
-      ...
-    )
-  )
-}
-
-#' @rdname biplot-stats
-#' @export
-stat_cols_center <- function(
-  mapping = NULL, data = NULL, geom = "point", position = "identity",
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ...,
-  fun.data = NULL,
-  fun.center = NULL,
-  fun.min = NULL,
-  fun.max = NULL,
-  fun.args = list()
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatColsCenter,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      fun.data = fun.data,
-      fun.center = fun.center,
-      fun.min = fun.min,
-      fun.max = fun.max,
-      fun.args = fun.args,
-      na.rm = FALSE,
-      ...
-    )
-  )
-}
-
 #' @rdname ordr-ggproto
 #' @format NULL
 #' @usage NULL
@@ -128,26 +62,6 @@ StatCenter <- ggproto(
   }
 )
 
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatRowsCenter <- ggproto(
-  "StatRowsCenter", StatCenter,
-  
-  setup_data = setup_rows_xy_data
-)
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatColsCenter <- ggproto(
-  "StatColsCenter", StatCenter,
-  
-  setup_data = setup_cols_xy_data
-)
-
 #' @rdname stat_center
 #' @export
 stat_star <- function(
@@ -163,64 +77,6 @@ stat_star <- function(
     data = data,
     mapping = mapping,
     stat = StatStar,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      fun.data = fun.data,
-      fun.center = fun.center,
-      fun.args = fun.args,
-      na.rm = FALSE,
-      ...
-    )
-  )
-}
-
-#' @rdname biplot-stats
-#' @export
-stat_rows_star <- function(
-  mapping = NULL, data = NULL, geom = "segment", position = "identity",
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ...,
-  fun.data = NULL,
-  fun.center = NULL,
-  fun.args = list()
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatRowsStar,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      fun.data = fun.data,
-      fun.center = fun.center,
-      fun.args = fun.args,
-      na.rm = FALSE,
-      ...
-    )
-  )
-}
-
-#' @rdname biplot-stats
-#' @export
-stat_cols_star <- function(
-  mapping = NULL, data = NULL, geom = "segment", position = "identity",
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ...,
-  fun.data = NULL,
-  fun.center = NULL,
-  fun.args = list()
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatColsStar,
     geom = geom,
     position = position,
     show.legend = show.legend,
@@ -256,26 +112,6 @@ StatStar <- ggproto(
     
     data
   }
-)
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatRowsStar <- ggproto(
-  "StatRowsStar", StatStar,
-  
-  setup_data = setup_rows_xy_data
-)
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatColsStar <- ggproto(
-  "StatColsStar", StatStar,
-  
-  setup_data = setup_cols_xy_data
 )
 
 make_center_fun <- function(fun.data, fun.center, fun.min, fun.max, fun.args) {
