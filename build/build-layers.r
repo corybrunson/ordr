@@ -51,6 +51,7 @@ arg_c <- function(x, y, indent = 0L, end = FALSE) {
 }
 
 # parameters transformed by default in `layer()` calls
+# -+- should eventually extract these automatically from layers -+-
 param_trans <- c(
   box.padding = format_formal(to_unit(box.padding)),
   point.padding = format_formal(to_unit(point.padding)),
@@ -67,6 +68,7 @@ get_from <- c(
   to_unit = "ggrepel"
 )
 
+# function to generate layer functions, ggproto objects, and their documentation
 build_biplot_layer <- function(
     layer_name, .matrix, proto = TRUE, xy = FALSE, file = ""
 ) {
@@ -92,7 +94,7 @@ build_biplot_layer <- function(
   type <- str_extract(layer_name, "^(stat|geom)")
   name <- str_remove(layer_name, "^(stat|geom)\\_")
   
-  # new `ggproto` objects are used for stats but not for geoms
+  # new ggproto objects are used for stats but not for geoms
   biplot_layer_name <- glue::glue("{type}_{.matrix}_{name}")
   ggproto_name <- switch(
     type,
@@ -101,6 +103,7 @@ build_biplot_layer <- function(
   )
   
   # get uniplot formals (and insert any additional biplot formals)
+  # -+- extract this into a function that can handle `...` -+-
   layer_formals <- formals(layer)
   layer_formals <- unlist(lapply(layer_formals, format_formal))
   layer_args <- names(layer_formals)
@@ -142,7 +145,7 @@ build_biplot_layer <- function(
     param_vals[match(param_match, param_vals)] <-
     unname(param_trans[param_match])
   
-  # define `ggproto` object
+  # define ggproto object
   if_xy <- if (xy) "_xy" else ""
   proto_def <- if (! proto) "" else switch(
     type,
@@ -230,7 +233,7 @@ adapt_layers <- c(
   setdiff(layer_defs, omit_layers)
 )
 
-# custom (done) `ggproto` objects
+# custom (done) ggproto objects
 # -+- should be only `Stat*Scale`; eventually automate? -+-
 done_protos <- unlist(lapply(layer_files, function(f) {
   rl <- readLines(here::here("R", f))
@@ -410,7 +413,7 @@ for (type in c("stat", "geom")) {
   write_layers <- str_subset(adapt_layers, glue::glue("^([^:]+::|){type}\\_"))
   for (write_layer in write_layers) for (.matrix in c("rows", "cols")) {
     
-    # determine if `ggproto` object is already defined
+    # determine if ggproto object is already defined
     done_proto <-
       ggplot2:::camelize(str_remove(write_layer, "^.*::"), first = TRUE) %in%
       done_protos

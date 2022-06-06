@@ -46,8 +46,8 @@ classes for some additional geometric elements commonly used in biplots.
 The factor-specific geoms invoke the statistical transformation layers
 (stats) \code{stat_rows()} and \code{stat_cols()}, which specify the matrix factor.
 Because each ggplot layer consists of only one stat and one geom, this
-necessitates that ggproto classes for new stats must also come in \verb{*_Rows}
-and \verb{*_Cols} flavors.
+necessitates that ggproto classes for new stats must also come in \verb{*Rows}
+and \verb{*Cols} flavors.
 }
 \seealso{
 \code{\link[ggplot2:ggplot2-ggproto]{ggplot2::ggplot2-ggproto}} and \link[ggplot2:ggproto]{ggplot2::ggproto} for explanations

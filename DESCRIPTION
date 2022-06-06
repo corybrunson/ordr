@@ -32,8 +32,8 @@ Encoding: UTF-8
 LazyData: true
 Suggests:
     broom,
-    sessioninfo,
     testthat,
+    sessioninfo,
     gridExtra,
     ca,
     MASS,
