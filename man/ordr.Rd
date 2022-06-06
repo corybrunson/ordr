@@ -77,7 +77,7 @@ the projection of a row's coordinates (point) onto a column's coordinates
 \references{
 Podani J (2000) \emph{Introduction to the Exploration of Multivariate Biological
 Data}. Backhuys Publishers, ISBN 90-5782-067-6.
-\url{http://ramet.elte.hu/~podani/books.html}
+\url{https://web.archive.org/web/20200221000313/http://ramet.elte.hu/~podani/books.html}
 
 Palmer M \emph{Ordination Methods for Ecologists}. Website, accessed 2019-07-12.
 \url{http://ordination.okstate.edu/}
