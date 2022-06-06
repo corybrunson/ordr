@@ -320,7 +320,7 @@ stat_rows_chull <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-            na.rm = FALSE,
+      na.rm = FALSE,
       ...
     )
   )
@@ -356,7 +356,7 @@ stat_cols_chull <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-            na.rm = FALSE,
+      na.rm = FALSE,
       ...
     )
   )

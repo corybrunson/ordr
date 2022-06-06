@@ -8,6 +8,7 @@ library(stringr)
 build_prefix <- "zzz-biplot-"
 
 ## 0. Remove previous builds.
+Sys.sleep(.5)
 
 # remove previous built layer files
 built_files <-
@@ -178,7 +179,7 @@ build_biplot_layer <- function(
     arg_c(root_args, root_vals, 4L),
     "\n",
     "    params = list(\n",
-    "      ",
+    if (length(param_args) == 0L) "" else "      ",
     if (length(param_args) == 0L) "" else arg_c(param_args, param_vals, 6L),
     if (length(param_args) == 0L) "" else "\n",
     if ("na.rm" %in% param_args) "" else "      na.rm = FALSE,\n",
@@ -193,6 +194,7 @@ build_biplot_layer <- function(
 }
 
 ## 2. Search code for layers to generalize to rows/cols.
+Sys.sleep(.5)
 
 # ggplot2 & other extension layers to adapt to biplot layers
 orig_layers <- c(
@@ -238,6 +240,7 @@ done_protos <- unlist(lapply(layer_files, function(f) {
 }))
 
 ## 3. Run generators on manual and found lists of layers.
+Sys.sleep(.5)
 
 # find layer-specific examples
 ex_files <- list.files(here::here("inst/examples/"), "(stat|geom)-.*\\.(r|R)")
@@ -422,3 +425,9 @@ for (type in c("stat", "geom")) {
     )
   }
 }
+
+## 4. Update documentation with generated layers.
+Sys.sleep(.5)
+
+# update documentation
+document()
