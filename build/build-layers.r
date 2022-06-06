@@ -1,19 +1,26 @@
 
 ## Build `*_rows_*()` and `*_cols_*()` biplot layers.
 
+library(devtools)
+library(stringr)
+
+# standard prefix for built layer files
+build_prefix <- "zzz-biplot-"
+
 ## 0. Remove previous builds.
 
-built_files <- list.files(here::here("R"), "zzz-biplot-(stat|geom)s.r")
+# remove previous built layer files
+built_files <-
+  list.files(here::here("R"), str_c(build_prefix, "(stat|geom)s.r"))
 file.remove(here::here("R", built_files))
-library(devtools)
+# re-document package without built files and load remaining objects
 document()
 load_all()
 
 ## 1. Prepare function/documentation generators.
 ## Resource: <https://blog.r-hub.io/2020/02/10/code-generation/>
 
-library(stringr)
-
+# format values passed to arguments so as to be formatted for gluing
 format_formal <- function(x) {
   str_replace(
     format(enquote(rlang::enquo(x))),
@@ -21,11 +28,13 @@ format_formal <- function(x) {
   )
 }
 
+# arguments to include in the root of each `layer()` call (not in `params = `)
 root_args <- c(
   "mapping", "data", "stat", "geom", "position",
   "show.legend", "inherit.aes"
 )
 
+# concatenate arguments and values in roxygen2 markdown format
 arg_c <- function(x, y, indent = 0L, end = FALSE) {
   stopifnot(length(x) == length(y))
   y_seq <- seq(if (end && length(y) > 1L) {
@@ -40,6 +49,7 @@ arg_c <- function(x, y, indent = 0L, end = FALSE) {
   str_c(x, y, sep = " = ", collapse = ind)
 }
 
+# parameters transformed by default in `layer()` calls
 param_trans <- c(
   box.padding = format_formal(to_unit(box.padding)),
   point.padding = format_formal(to_unit(point.padding)),
@@ -47,7 +57,8 @@ param_trans <- c(
   direction = format_formal(match.arg(direction))
 )
 
-# manual imports (not exported from home packages)
+# necessary internal functions not exported from their home packages
+# -+- currently only put in geoms file; need to distinguish -+-
 get_from <- c(
   # `geom_text_radiate()`
   compute_just = "ggplot2",
@@ -256,7 +267,7 @@ adapt_warn <- glue::glue(
 for (type in c("stat", "geom")) {
   
   # file path
-  adapt_file <- here::here(glue::glue("R/zzz-biplot-{type}s.r"))
+  adapt_file <- here::here(glue::glue("R/{build_prefix}{type}s.r"))
   
   # title paragraph
   adapt_title <- glue::glue(
@@ -320,19 +331,6 @@ for (type in c("stat", "geom")) {
     "\n"
   )
   
-  # manual imports/exports
-  gets_from_namespaces <- if (length(get_from) == 0L) "" else glue::glue(
-    "\n\n\n",
-    "#' @importFrom utils getFromNamespace\n",
-    str_c(
-      names(get_from),
-      " <- getFromNamespace(\"",
-      names(get_from),
-      "\", \"", unname(get_from), "\")\n",
-      collapse = ""
-    )
-  )
-  
   # standard parameter inheritances
   adapt_inherits1 <- glue::glue(
     "#' @inheritParams ggplot2::layer\n",
@@ -375,6 +373,24 @@ for (type in c("stat", "geom")) {
     "NULL\n\n"
   )
   
+  # manual imports/exports
+  gets_from_namespaces <- if (type == "stat" || length(get_from) == 0L) {
+    ""
+  } else {
+    glue::glue(
+      "\n\n",
+      "#' @importFrom utils getFromNamespace\n",
+      str_c(
+        names(get_from),
+        " <- getFromNamespace(\"",
+        names(get_from),
+        "\", \"", unname(get_from), "\")\n",
+        collapse = ""
+      ),
+      "\n"
+    )
+  }
+  
   # write header
   cat(
     adapt_warn,
@@ -387,12 +403,7 @@ for (type in c("stat", "geom")) {
     file = adapt_file, sep = "", append = FALSE
   )
   
-  # -+- STOP HERE UNTIL TOP-LINE ISSUES ARE RESOLVED -+-
-  #next
-  
   # write functions with documentation
-  #write_layers <- str_remove(adapt_layers, "^.*::")
-  #write_layers <- str_subset(write_layers, glue::glue("^{type}\\_"))
   write_layers <- str_subset(adapt_layers, glue::glue("^([^:]+::|){type}\\_"))
   for (write_layer in write_layers) for (.matrix in c("rows", "cols")) {
     
@@ -401,6 +412,7 @@ for (type in c("stat", "geom")) {
       ggplot2:::camelize(str_remove(write_layer, "^.*::"), first = TRUE) %in%
       done_protos
     
+    # build layer!!!
     build_biplot_layer(
       write_layer,
       .matrix,

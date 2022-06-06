@@ -28,10 +28,6 @@
 #' @example inst/examples/ex-stat-ellipse-iris.r
 NULL
 
-
-#' @importFrom utils getFromNamespace
-compute_just <- getFromNamespace("compute_just", "ggplot2")
-to_unit <- getFromNamespace("to_unit", "ggrepel")
 #' @rdname ordr-ggproto
 #' @format NULL
 #' @usage NULL

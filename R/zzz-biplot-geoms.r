@@ -41,10 +41,10 @@ ggrepel::geom_text_repel
 #' @export
 ggrepel::geom_label_repel
 
-
 #' @importFrom utils getFromNamespace
 compute_just <- getFromNamespace("compute_just", "ggplot2")
 to_unit <- getFromNamespace("to_unit", "ggrepel")
+
 #' @rdname biplot-geoms
 #' @export
 geom_rows_point <- function(
