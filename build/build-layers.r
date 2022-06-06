@@ -5,6 +5,7 @@
 
 built_files <- list.files(here::here("R"), "zzz-biplot-(stat|geom)s.r")
 file.remove(here::here("R", built_files))
+library(devtools)
 document()
 load_all()
 
@@ -38,6 +39,21 @@ arg_c <- function(x, y, indent = 0L, end = FALSE) {
   ind <- str_c(c("\n", rep(" ", indent)), collapse = "")
   str_c(x, y, sep = " = ", collapse = ind)
 }
+
+param_trans <- c(
+  box.padding = format_formal(to_unit(box.padding)),
+  point.padding = format_formal(to_unit(point.padding)),
+  min.segment.length = format_formal(to_unit(min.segment.length)),
+  direction = format_formal(match.arg(direction))
+)
+
+# manual imports (not exported from home packages)
+get_from <- c(
+  # `geom_text_radiate()`
+  compute_just = "ggplot2",
+  # `geom_text_repel()`
+  to_unit = "ggrepel"
+)
 
 build_biplot_layer <- function(
     layer_name, .matrix, proto = TRUE, xy = FALSE, file = ""
@@ -105,11 +121,18 @@ build_biplot_layer <- function(
   )
   
   # define biplot layer internal parameters
-  params <- setdiff(layer_args, c(root_args, "..."))
+  param_args <- setdiff(layer_args, c(root_args, "..."))
+  # make any prespecified syntactic parameter transformations
+  # -+- need to also specify package or layer to avoid ambiguity -+-
+  param_vals <- param_args
+  param_match <- intersect(param_args, names(param_trans))
+  if (length(param_match) > 0L)
+    param_vals[match(param_match, param_vals)] <-
+    unname(param_trans[param_match])
   
   # define `ggproto` object
   if_xy <- if (xy) "_xy" else ""
-  proto_def <- switch(
+  proto_def <- if (! proto) "" else switch(
     type,
     stat = glue::glue(
       "#' @rdname ordr-ggproto\n",
@@ -145,9 +168,9 @@ build_biplot_layer <- function(
     "\n",
     "    params = list(\n",
     "      ",
-    if (length(params) == 0L) "" else arg_c(params, params, 6L),
-    if (length(params) == 0L) "" else "\n",
-    if ("na.rm" %in% params) "" else "      na.rm = FALSE,\n",
+    if (length(param_args) == 0L) "" else arg_c(param_args, param_vals, 6L),
+    if (length(param_args) == 0L) "" else "\n",
+    if ("na.rm" %in% param_args) "" else "      na.rm = FALSE,\n",
     "      ...\n",
     "    )\n",
     "  )\n",
@@ -297,10 +320,23 @@ for (type in c("stat", "geom")) {
     "\n"
   )
   
+  # manual imports/exports
+  gets_from_namespaces <- if (length(get_from) == 0L) "" else glue::glue(
+    "\n\n\n",
+    "#' @importFrom utils getFromNamespace\n",
+    str_c(
+      names(get_from),
+      " <- getFromNamespace(\"",
+      names(get_from),
+      "\", \"", unname(get_from), "\")\n",
+      collapse = ""
+    )
+  )
+  
   # standard parameter inheritances
   adapt_inherits1 <- glue::glue(
     "#' @inheritParams ggplot2::layer\n",
-    if (type == "geom") "#' @template param-matrix\n" else "",
+    #if (type == "geom") "#' @template param-matrix\n" else "",
     "#' @template param-{type}\n",
     if (type == "stat") "#' @template biplot-ord-aes\n" else "",
     if (type == "stat") "#' @inheritParams stat_rows\n" else "",
@@ -347,6 +383,7 @@ for (type in c("stat", "geom")) {
     adapt_inherits1, adapt_inherits2,
     adapt_examples, adapt_fin,
     adapt_exports,
+    gets_from_namespaces,
     file = adapt_file, sep = "", append = FALSE
   )
   

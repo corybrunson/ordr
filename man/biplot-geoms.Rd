@@ -589,10 +589,6 @@ or isoline, as a proportion of the minimum of the plot width and height.}
 
 \item{isoline_text}{Logical; whether to include text value marks along the
 isolines.}
-
-\item{.matrix}{A character string matching one of several indicators for one
-or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 }
 \description{
 These geometric element layers (geoms) pair

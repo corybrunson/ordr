@@ -20,7 +20,6 @@
 #'   geom_text_repel
 #'   geom_label_repel
 #' @inheritParams ggplot2::layer
-#' @template param-matrix
 #' @template param-geom
 #' @inheritParams ggplot2::geom_point
 #' @inheritParams ggplot2::geom_path
@@ -42,6 +41,10 @@ ggrepel::geom_text_repel
 #' @export
 ggrepel::geom_label_repel
 
+
+#' @importFrom utils getFromNamespace
+compute_just <- getFromNamespace("compute_just", "ggplot2")
+to_unit <- getFromNamespace("to_unit", "ggrepel")
 #' @rdname biplot-geoms
 #' @export
 geom_rows_point <- function(
@@ -411,9 +414,9 @@ geom_rows_text_repel <- function(
     inherit.aes = inherit.aes,
     params = list(
       parse = parse,
-      box.padding = box.padding,
-      point.padding = point.padding,
-      min.segment.length = min.segment.length,
+      box.padding = to_unit(box.padding),
+      point.padding = to_unit(point.padding),
+      min.segment.length = to_unit(min.segment.length),
       arrow = arrow,
       force = force,
       force_pull = force_pull,
@@ -425,7 +428,7 @@ geom_rows_text_repel <- function(
       xlim = xlim,
       ylim = ylim,
       na.rm = na.rm,
-      direction = direction,
+      direction = match.arg(direction),
       seed = seed,
       verbose = verbose,
       ...
@@ -472,9 +475,9 @@ geom_cols_text_repel <- function(
     inherit.aes = inherit.aes,
     params = list(
       parse = parse,
-      box.padding = box.padding,
-      point.padding = point.padding,
-      min.segment.length = min.segment.length,
+      box.padding = to_unit(box.padding),
+      point.padding = to_unit(point.padding),
+      min.segment.length = to_unit(min.segment.length),
       arrow = arrow,
       force = force,
       force_pull = force_pull,
@@ -486,7 +489,7 @@ geom_cols_text_repel <- function(
       xlim = xlim,
       ylim = ylim,
       na.rm = na.rm,
-      direction = direction,
+      direction = match.arg(direction),
       seed = seed,
       verbose = verbose,
       ...
@@ -536,12 +539,12 @@ geom_rows_label_repel <- function(
     inherit.aes = inherit.aes,
     params = list(
       parse = parse,
-      box.padding = box.padding,
+      box.padding = to_unit(box.padding),
       label.padding = label.padding,
-      point.padding = point.padding,
+      point.padding = to_unit(point.padding),
       label.r = label.r,
       label.size = label.size,
-      min.segment.length = min.segment.length,
+      min.segment.length = to_unit(min.segment.length),
       arrow = arrow,
       force = force,
       force_pull = force_pull,
@@ -553,7 +556,7 @@ geom_rows_label_repel <- function(
       xlim = xlim,
       ylim = ylim,
       na.rm = na.rm,
-      direction = direction,
+      direction = match.arg(direction),
       seed = seed,
       verbose = verbose,
       ...
@@ -603,12 +606,12 @@ geom_cols_label_repel <- function(
     inherit.aes = inherit.aes,
     params = list(
       parse = parse,
-      box.padding = box.padding,
+      box.padding = to_unit(box.padding),
       label.padding = label.padding,
-      point.padding = point.padding,
+      point.padding = to_unit(point.padding),
       label.r = label.r,
       label.size = label.size,
-      min.segment.length = min.segment.length,
+      min.segment.length = to_unit(min.segment.length),
       arrow = arrow,
       force = force,
       force_pull = force_pull,
@@ -620,7 +623,7 @@ geom_cols_label_repel <- function(
       xlim = xlim,
       ylim = ylim,
       na.rm = na.rm,
-      direction = direction,
+      direction = match.arg(direction),
       seed = seed,
       verbose = verbose,
       ...

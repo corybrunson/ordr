@@ -107,7 +107,3 @@ GeomTextRadiate <- ggproto(
     )
   }
 )
-
-# not exported from *ggplot2*
-#' @importFrom utils getFromNamespace
-compute_just <- getFromNamespace("compute_just", "ggplot2")
