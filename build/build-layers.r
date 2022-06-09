@@ -1,5 +1,6 @@
-
-## Build `*_rows_*()` and `*_cols_*()` biplot layers.
+## This script builds `*_rows_*()` and `*_cols_*()` biplot layers.
+## To update them, source this script as follows:
+## source(here::here("build/build-layers.r"))
 
 library(devtools)
 library(stringr)
@@ -66,6 +67,17 @@ get_from <- c(
   compute_just = "ggplot2",
   # `geom_text_repel()`
   to_unit = "ggrepel"
+)
+
+# convert `nudge_x/nudge_y` parameters to position parameter
+nudges_to_position <- str_c(
+  "  if (! missing(nudge_x) || ! missing(nudge_y)) {{\n",
+  "    if (! missing(position)) {{\n",
+  "      stop(\"Specify either `position` or `nudge_x`/`nudge_y`\", ",
+  "call. = FALSE)\n",
+  "    }}\n",
+  "    position <- position_nudge(nudge_x, nudge_y)\n",
+  "  }}\n\n"
 )
 
 # function to generate layer functions, ggproto objects, and their documentation
@@ -135,8 +147,11 @@ build_biplot_layer <- function(
     geom = ggproto_name
   )
   
+  # detect `nudge_x` and `nudge_y` parameters
+  nudge_args <- any(c("nudge_x", "nudge_y") %in% layer_args)
+  
   # define biplot layer internal parameters
-  param_args <- setdiff(layer_args, c(root_args, "..."))
+  param_args <- setdiff(layer_args, c(root_args, "...", "nudge_x", "nudge_y"))
   # make any prespecified syntactic parameter transformations
   # -+- need to also specify package or layer to avoid ambiguity -+-
   param_vals <- param_args
@@ -177,6 +192,7 @@ build_biplot_layer <- function(
     },
     "\n",
     ") {{\n",
+    if (nudge_args) nudges_to_position else "",
     "  layer(\n",
     "    ",
     arg_c(root_args, root_vals, 4L),

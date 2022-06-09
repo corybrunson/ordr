@@ -243,6 +243,13 @@ geom_rows_text <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
+  if (! missing(nudge_x) || ! missing(nudge_y)) {
+    if (! missing(position)) {
+      stop("Specify either `position` or `nudge_x`/`nudge_y`", call. = FALSE)
+    }
+    position <- position_nudge(nudge_x, nudge_y)
+  }
+
   layer(
     mapping = mapping,
     data = data,
@@ -253,8 +260,6 @@ geom_rows_text <- function(
     inherit.aes = inherit.aes,
     params = list(
       parse = parse,
-      nudge_x = nudge_x,
-      nudge_y = nudge_y,
       check_overlap = check_overlap,
       na.rm = na.rm,
       ...
@@ -278,6 +283,13 @@ geom_cols_text <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
+  if (! missing(nudge_x) || ! missing(nudge_y)) {
+    if (! missing(position)) {
+      stop("Specify either `position` or `nudge_x`/`nudge_y`", call. = FALSE)
+    }
+    position <- position_nudge(nudge_x, nudge_y)
+  }
+
   layer(
     mapping = mapping,
     data = data,
@@ -288,8 +300,6 @@ geom_cols_text <- function(
     inherit.aes = inherit.aes,
     params = list(
       parse = parse,
-      nudge_x = nudge_x,
-      nudge_y = nudge_y,
       check_overlap = check_overlap,
       na.rm = na.rm,
       ...
@@ -315,6 +325,13 @@ geom_rows_label <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
+  if (! missing(nudge_x) || ! missing(nudge_y)) {
+    if (! missing(position)) {
+      stop("Specify either `position` or `nudge_x`/`nudge_y`", call. = FALSE)
+    }
+    position <- position_nudge(nudge_x, nudge_y)
+  }
+
   layer(
     mapping = mapping,
     data = data,
@@ -325,8 +342,6 @@ geom_rows_label <- function(
     inherit.aes = inherit.aes,
     params = list(
       parse = parse,
-      nudge_x = nudge_x,
-      nudge_y = nudge_y,
       label.padding = label.padding,
       label.r = label.r,
       label.size = label.size,
@@ -354,6 +369,13 @@ geom_cols_label <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
+  if (! missing(nudge_x) || ! missing(nudge_y)) {
+    if (! missing(position)) {
+      stop("Specify either `position` or `nudge_x`/`nudge_y`", call. = FALSE)
+    }
+    position <- position_nudge(nudge_x, nudge_y)
+  }
+
   layer(
     mapping = mapping,
     data = data,
@@ -364,8 +386,6 @@ geom_cols_label <- function(
     inherit.aes = inherit.aes,
     params = list(
       parse = parse,
-      nudge_x = nudge_x,
-      nudge_y = nudge_y,
       label.padding = label.padding,
       label.r = label.r,
       label.size = label.size,
@@ -404,6 +424,13 @@ geom_rows_text_repel <- function(
   verbose = FALSE,
   inherit.aes = TRUE
 ) {
+  if (! missing(nudge_x) || ! missing(nudge_y)) {
+    if (! missing(position)) {
+      stop("Specify either `position` or `nudge_x`/`nudge_y`", call. = FALSE)
+    }
+    position <- position_nudge(nudge_x, nudge_y)
+  }
+
   layer(
     mapping = mapping,
     data = data,
@@ -423,8 +450,6 @@ geom_rows_text_repel <- function(
       max.time = max.time,
       max.iter = max.iter,
       max.overlaps = max.overlaps,
-      nudge_x = nudge_x,
-      nudge_y = nudge_y,
       xlim = xlim,
       ylim = ylim,
       na.rm = na.rm,
@@ -465,6 +490,13 @@ geom_cols_text_repel <- function(
   verbose = FALSE,
   inherit.aes = TRUE
 ) {
+  if (! missing(nudge_x) || ! missing(nudge_y)) {
+    if (! missing(position)) {
+      stop("Specify either `position` or `nudge_x`/`nudge_y`", call. = FALSE)
+    }
+    position <- position_nudge(nudge_x, nudge_y)
+  }
+
   layer(
     mapping = mapping,
     data = data,
@@ -484,8 +516,6 @@ geom_cols_text_repel <- function(
       max.time = max.time,
       max.iter = max.iter,
       max.overlaps = max.overlaps,
-      nudge_x = nudge_x,
-      nudge_y = nudge_y,
       xlim = xlim,
       ylim = ylim,
       na.rm = na.rm,
@@ -529,6 +559,13 @@ geom_rows_label_repel <- function(
   verbose = FALSE,
   inherit.aes = TRUE
 ) {
+  if (! missing(nudge_x) || ! missing(nudge_y)) {
+    if (! missing(position)) {
+      stop("Specify either `position` or `nudge_x`/`nudge_y`", call. = FALSE)
+    }
+    position <- position_nudge(nudge_x, nudge_y)
+  }
+
   layer(
     mapping = mapping,
     data = data,
@@ -551,8 +588,6 @@ geom_rows_label_repel <- function(
       max.time = max.time,
       max.iter = max.iter,
       max.overlaps = max.overlaps,
-      nudge_x = nudge_x,
-      nudge_y = nudge_y,
       xlim = xlim,
       ylim = ylim,
       na.rm = na.rm,
@@ -596,6 +631,13 @@ geom_cols_label_repel <- function(
   verbose = FALSE,
   inherit.aes = TRUE
 ) {
+  if (! missing(nudge_x) || ! missing(nudge_y)) {
+    if (! missing(position)) {
+      stop("Specify either `position` or `nudge_x`/`nudge_y`", call. = FALSE)
+    }
+    position <- position_nudge(nudge_x, nudge_y)
+  }
+
   layer(
     mapping = mapping,
     data = data,
@@ -618,8 +660,6 @@ geom_cols_label_repel <- function(
       max.time = max.time,
       max.iter = max.iter,
       max.overlaps = max.overlaps,
-      nudge_x = nudge_x,
-      nudge_y = nudge_y,
       xlim = xlim,
       ylim = ylim,
       na.rm = na.rm,
