@@ -185,7 +185,7 @@ Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
 
 Venables WN & Ripley BD (2003) \emph{Modern Applied Statistics with S}, Fourth
 Edition. Springer Science & Business Media, ISBN: 0387954570, 9780387954578.
-\url{http://www.bagualu.net/wordpress/wp-content/uploads/2015/10/Modern_Applied_Statistics_With_S.pdf}
+\url{http://barbra-coco.dyndns.org/yuri/R/Venables,\%20WN\%20and\%20Ripley,\%20BD(2002)\%20Modern\%20Applied\%20Statistics\%20with\%20S,\%204th\%20Ed.pdf}
 
 Orlov K (2013) \emph{Answer to} "Algebra of LDA. Fisher discrimination power of a
 variable and Linear Discriminant Analysis". CrossValidated, accessed

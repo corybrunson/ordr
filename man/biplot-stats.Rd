@@ -177,6 +177,7 @@ stat_rows_spantree(
   show.legend = NA,
   inherit.aes = TRUE,
   check.aes = TRUE,
+  check.param = TRUE,
   ...
 )
 
@@ -189,6 +190,7 @@ stat_cols_spantree(
   show.legend = NA,
   inherit.aes = TRUE,
   check.aes = TRUE,
+  check.param = TRUE,
   ...
 )
 }
@@ -231,23 +233,7 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
-\item{fun.data}{Functions and arguments
-treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
-\code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
-
-\item{fun.center}{Functions and arguments
-treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
-\code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
-
-\item{fun.min}{Functions and arguments
-treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
-\code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
-
-\item{fun.max}{Functions and arguments
-treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
-\code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
-
-\item{fun.args}{Functions and arguments
+\item{fun.data, fun.center, fun.min, fun.max, fun.args}{Functions and arguments
 treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
 \code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
 
@@ -267,13 +253,17 @@ or, if \code{type="euclid"}, the radius of the circle to be drawn.}
 \item{segments}{The number of segments to be used in drawing the ellipse.}
 
 \item{subset}{An integer, logical, or character vector indicating a subset of
-rows or columns for which to render graphical elements.}
+rows or columns for which to render graphical elements. NB: Internally, the
+\code{subset} will be taken from the rows of the \link[=fortify.tbl_ord]{fortified}
+'tbl_ord' comprising rows from only one of the matrix factors. It is still
+possible to pass a formula to the \code{data} parameter, but it will act on the
+fortified data \emph{before} it has been restricted to one matrix factor.}
 
 \item{mult}{Numeric value used to scale the coordinates.}
 
 \item{method}{Passed to \code{\link[stats:dist]{stats::dist()}}.}
 
-\item{check.aes}{If \code{TRUE}, the default, will check that
+\item{check.aes, check.param}{If \code{TRUE}, the default, will check that
 supplied parameters and aesthetics are understood by the \code{geom} or
 \code{stat}. Use \code{FALSE} to suppress the checks.}
 }

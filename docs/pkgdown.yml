@@ -1,8 +1,8 @@
-pandoc: 2.14.0.3
-pkgdown: 1.6.1
+pandoc: '2.12'
+pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   cmds-variables: cmds-variables.html
   ordr: ordr.html
-last_built: 2021-09-11T22:02Z
+last_built: 2022-05-07T20:09Z
 
