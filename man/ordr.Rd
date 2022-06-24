@@ -3,6 +3,7 @@
 \docType{package}
 \name{ordr}
 \alias{ordr}
+\alias{ordr-package}
 \title{\strong{ordr} package}
 \description{
 This is a \strong{\link[tidyverse:tidyverse-package]{tidyverse}} extension for
