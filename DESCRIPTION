@@ -25,8 +25,6 @@ Imports:
     purrr,
     labeling,
     ggrepel,
-    logisticPCA,
-    nipals,
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -39,12 +37,9 @@ Suggests:
     MASS,
     candisc,
     vegan,
-    ade4,
-    PMA,
     igraph,
     igraphdata,
     heplots,
-    cooccur,
     proxy,
     knitr,
     rmarkdown,
@@ -72,17 +67,13 @@ Collate:
     'geom-text-radiate.r'
     'geom-unit-circle.r'
     'geom-vector.r'
-    'methods-ade4-nipals.r'
     'methods-base-eigen.r'
     'methods-base-svd.r'
     'methods-ca-ca.r'
     'methods-ca-mjca.r'
     'methods-candisc-cancor.r'
-    'methods-logisticpca-lpca.r'
     'methods-mass-lda.r'
-    'methods-nipals-nipals.r'
     'methods-ordr-lra.r'
-    'methods-pma-cca.r'
     'methods-stats-cmds.r'
     'methods-stats-kmeans.r'
     'methods-stats-lm.r'
