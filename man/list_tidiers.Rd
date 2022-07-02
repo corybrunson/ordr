@@ -6,9 +6,9 @@
 \alias{glance.list}
 \title{Tidying methods for lists, including classical multidimensional scaling}
 \usage{
-tidy.list(x, ...)
+\method{tidy}{list}(x, ...)
 
-glance.list(x, ...)
+\method{glance}{list}(x, ...)
 }
 \arguments{
 \item{x}{A list, potentially representing an object that can be tidied.}

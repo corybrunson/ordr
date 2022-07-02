@@ -28,7 +28,6 @@
 #' @inheritParams ggplot2::geom_label
 #' @inheritParams ggrepel::geom_text_repel
 #' @inheritParams ggrepel::geom_label_repel
-#' @inheritParams geom_addition
 #' @inheritParams geom_axis
 #' @inheritParams geom_lineranges
 #' @inheritParams geom_pointranges

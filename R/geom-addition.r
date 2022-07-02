@@ -63,7 +63,7 @@ geom_addition <- function(
   )
 }
 
-#' @rdname biplot-geoms
+#' @rdname geom_addition
 #' @export
 geom_rows_addition <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -91,7 +91,7 @@ geom_rows_addition <- function(
   )
 }
 
-#' @rdname biplot-geoms
+#' @rdname geom_addition
 #' @export
 geom_cols_addition <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -105,35 +105,6 @@ geom_cols_addition <- function(
     data = data,
     mapping = mapping,
     stat = cols_stat(stat),
-    geom = GeomAddition,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      new_data = new_data,
-      type = type,
-      arrow = arrow,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
-#' @rdname biplot-geoms
-#' @export
-geom_dims_addition <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  .matrix = "cols",
-  new_data = NULL, type = c("centroid", "sequence"),
-  arrow = default_arrow,
-  ...,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = matrix_stat(.matrix, stat),
     geom = GeomAddition,
     position = position,
     show.legend = show.legend,

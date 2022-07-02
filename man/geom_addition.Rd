@@ -2,9 +2,39 @@
 % Please edit documentation in R/geom-addition.r
 \name{geom_addition}
 \alias{geom_addition}
+\alias{geom_rows_addition}
+\alias{geom_cols_addition}
 \title{Render interpolation of new rows from columns (or vice-versa)}
 \usage{
 geom_addition(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  new_data = NULL,
+  type = c("centroid", "sequence"),
+  arrow = default_arrow,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_rows_addition(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  new_data = NULL,
+  type = c("centroid", "sequence"),
+  arrow = default_arrow,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_addition(
   mapping = NULL,
   data = NULL,
   stat = "identity",

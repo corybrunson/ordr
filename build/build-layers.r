@@ -215,7 +215,7 @@ build_biplot_layer <- function(
 ## 2. Search code for layers to generalize to rows/cols.
 Sys.sleep(.5)
 
-# ggplot2 & other extension layers to adapt to biplot layers
+# ggplot2 & other (non-ordr) extension layers to adapt to biplot layers
 orig_layers <- c(
   "ggplot2::stat_ellipse",
   "ggplot2::geom_point", "ggplot2::geom_path", "ggplot2::geom_polygon",
@@ -224,7 +224,8 @@ orig_layers <- c(
 )
 # ordr layers to not adapt to biplot layers
 omit_layers <- c(
-  "geom_origin", "geom_unit_circle"
+  "geom_origin", "geom_unit_circle",
+  "geom_addition"
 )
 
 # layers that require restriction to 2 coordinates (without package accessors)

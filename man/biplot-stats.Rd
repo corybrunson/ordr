@@ -328,7 +328,7 @@ iris_pca \%>\%
 }
 \seealso{
 Other biplot layers: 
-\code{\link{geom_rows_addition}()},
+\code{\link{biplot-geoms}},
 \code{\link{stat_rows}()}
 }
 \concept{biplot layers}
