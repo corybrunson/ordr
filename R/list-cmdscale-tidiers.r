@@ -74,4 +74,4 @@ glance_cmdscale <- function(x, ...) {
   )
 }
 
-as_glance_tibble <- broom:::as_glance_tibble
+as_glance_tibble <- getFromNamespace("as_glance_tibble", "broom")

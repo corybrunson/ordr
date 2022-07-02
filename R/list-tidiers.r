@@ -11,6 +11,7 @@
 #' [glance_cmdscale()] are called.
 #'
 #' @inheritParams broom::list_tidiers
+#' @inheritParams broom::`tidy_svd`
 #' @name list_tidiers
 #' @export
 #' @family list tidiers
@@ -51,12 +52,8 @@ glance.list <- function(x, ...) {
   }
 }
 
-tidy_optim <- broom:::tidy_optim
-
-tidy_xyz <- broom:::tidy_xyz
-
-tidy_irlba <- broom:::tidy_irlba
-
-tidy_svd <- broom:::tidy_svd
-
-glance_optim <- broom:::glance_optim
+tidy_optim <- getFromNamespace("tidy_optim", "broom")
+tidy_xyz <- getFromNamespace("tidy_xyz", "broom")
+tidy_irlba <- getFromNamespace("tidy_irlba", "broom")
+tidy_svd <- getFromNamespace("tidy_svd", "broom")
+glance_optim <- getFromNamespace("glance_optim", "broom")
