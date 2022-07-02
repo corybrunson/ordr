@@ -401,7 +401,8 @@ for (type in c("stat", "geom")) {
   } else {
     glue::glue(
       "\n\n",
-      "#' @importFrom utils getFromNamespace\n",
+      # taken care of by `@include utils.r`
+      #"#' @importFrom utils getFromNamespace\n",
       str_c(
         names(get_from),
         " <- getFromNamespace(\"",

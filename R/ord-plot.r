@@ -76,6 +76,5 @@ biplot.tbl_ord <- function(x, main = deparse(substitute(x)), ...) {
   )
 }
 
-#' @importFrom utils getFromNamespace
 screeplot.default <- getFromNamespace("screeplot.default", "stats")
 biplot.default <- getFromNamespace("biplot.default", "stats")

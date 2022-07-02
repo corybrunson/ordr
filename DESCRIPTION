@@ -13,6 +13,7 @@ Depends:
     R (>= 3.3.0),
     ggplot2
 Imports:
+    broom,
     scales,
     generics,
     magrittr,
@@ -29,7 +30,6 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Suggests:
-    broom,
     testthat,
     sessioninfo,
     gridExtra,
@@ -67,6 +67,8 @@ Collate:
     'geom-text-radiate.r'
     'geom-unit-circle.r'
     'geom-vector.r'
+    'list-cmdscale-tidiers.r'
+    'list-tidiers.r'
     'methods-base-eigen.r'
     'methods-base-svd.r'
     'methods-ca-ca.r'
