@@ -40,13 +40,20 @@ lm(mtcars_perf ~ as.matrix(mtcars_specs_cmds[, 2:3])) %>%
   as_tbl_ord() %>%
   augment_ord() %>%
   print() -> mtcars_cmds_lm
+# multidimensional scaling using `cmdscale_ord()`
+mtcars %>%
+  subset(select = c(cyl, disp, hp, drat, wt, vs, carb)) %>%
+  scale() %>%
+  proxy::dist(method = "cosine") %>%
+  cmdscale_ord() %>%
+  as_tbl_ord() %>%
+  augment_ord() %>%
+  print() -> mtcars_specs_cmds_ord
 # regression biplot
-# (too convoluted; should be able to couple `*_cols_*()` to a `ggplot()` call)
-ggplot(mtcars_specs_cmds, aes(x = PCo1, y = PCo2, label = point)) +
+ggbiplot(mtcars_specs_cmds_ord, aes(label = .name),
+         sec.axes = "rows", scale.factor = 3) +
   theme_minimal() +
-  geom_text(size = 3) +
-  geom_vector(aes(label = .name),
-              data = fortify(mtcars_cmds_lm, .matrix = "cols")) +
-  geom_text_radiate(aes(label = .name),
-                    data = fortify(mtcars_cmds_lm, .matrix = "cols")) +
+  geom_rows_text(size = 3) +
+  geom_cols_vector(data = mtcars_cmds_lm) +
+  geom_cols_text_radiate(data = mtcars_cmds_lm) +
   expand_limits(x = c(-2.25, 1.25), y = c(-2, 1.5))
