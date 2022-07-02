@@ -33,60 +33,6 @@ stat_scale <- function(
   )
 }
 
-#' @rdname biplot-stats
-#' @export
-stat_rows_scale <- function(
-  mapping = NULL, data = NULL, geom = "point", position = "identity",
-  show.legend = NA,
-  inherit.aes = TRUE,
-  subset = NULL,
-  ...,
-  mult = 1
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatRowsScale,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      subset = subset,
-      mult = mult,
-      na.rm = FALSE,
-      ...
-    )
-  )
-}
-
-#' @rdname biplot-stats
-#' @export
-stat_cols_scale <- function(
-  mapping = NULL, data = NULL, geom = "point", position = "identity",
-  show.legend = NA,
-  inherit.aes = TRUE,
-  subset = NULL,
-  ...,
-  mult = 1
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatColsScale,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      subset = subset,
-      mult = mult,
-      na.rm = FALSE,
-      ...
-    )
-  )
-}
-
 #' @rdname ordr-ggproto
 #' @format NULL
 #' @usage NULL

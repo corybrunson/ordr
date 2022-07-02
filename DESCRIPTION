@@ -13,6 +13,7 @@ Depends:
     R (>= 3.3.0),
     ggplot2
 Imports:
+    broom,
     scales,
     generics,
     magrittr,
@@ -25,26 +26,20 @@ Imports:
     purrr,
     labeling,
     ggrepel,
-    logisticPCA,
-    nipals,
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Suggests:
-    broom,
-    sessioninfo,
     testthat,
+    sessioninfo,
     gridExtra,
     ca,
     MASS,
     candisc,
     vegan,
-    ade4,
-    PMA,
     igraph,
     igraphdata,
     heplots,
-    cooccur,
     proxy,
     knitr,
     rmarkdown,
@@ -53,10 +48,8 @@ RoxygenNote: 7.2.0
 Roxygen: list(markdown = TRUE)
 Collate:
     'aaa-.r'
-    'biplot-geoms.r'
     'biplot-gg.r'
     'biplot-key.r'
-    'biplot-stats.r'
     'data.r'
     'dplyr-verbs.r'
     'utils.r'
@@ -73,23 +66,17 @@ Collate:
     'geom-intervals.r'
     'geom-isoline.r'
     'geom-origin.r'
-    'geom-path.r'
-    'geom-point.r'
-    'geom-polygon.r'
     'geom-text-radiate.r'
-    'geom-text.r'
     'geom-unit-circle.r'
-    'methods-ade4-nipals.r'
+    'list-cmdscale-tidiers.r'
+    'list-tidiers.r'
     'methods-base-eigen.r'
     'methods-base-svd.r'
     'methods-ca-ca.r'
     'methods-ca-mjca.r'
     'methods-candisc-cancor.r'
-    'methods-logisticpca-lpca.r'
     'methods-mass-lda.r'
-    'methods-nipals-nipals.r'
     'methods-ordr-lra.r'
-    'methods-pma-cca.r'
     'methods-stats-cmds.r'
     'methods-stats-kmeans.r'
     'methods-stats-lm.r'
@@ -105,9 +92,10 @@ Collate:
     'stat-center.r'
     'stat-chull.r'
     'stat-cone.r'
-    'stat-ellipse.r'
     'stat-matrix.r'
     'stat-scale.r'
     'stat-spantree.r'
     'themes.r'
+    'zzz-biplot-geoms.r'
+    'zzz-biplot-stats.r'
 VignetteBuilder: knitr

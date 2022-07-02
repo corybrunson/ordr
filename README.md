@@ -1,9 +1,14 @@
 
 <!-- edit README.rmd -->
 
-[![Travis](https://travis-ci.org/corybrunson/ordr.svg?branch=main)](https://travis-ci.org/corybrunson/ordr)
-
 # ordr
+
+<!-- badges: start -->
+
+[![Travis](https://travis-ci.org/corybrunson/ordr.svg?branch=main)](https://travis-ci.org/corybrunson/ordr)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+<!-- badges: end -->
 
 **ordr** integrates ordination analysis and biplot visualization into
 [**tidyverse**](https://github.com/tidyverse/tidyverse) workflows.
@@ -79,9 +84,9 @@ integrate ordination models into practice.
 
 ### installation
 
-**ordr** remains under development and is not scheduled for a CRAN
-release. For now, it can be installed from the (default) `main` branch
-using [**remotes**](https://github.com/r-lib/remotes):
+**ordr** remains under development but is approaching a CRAN release.
+For now, it can be installed from the (default) `main` branch using
+[**remotes**](https://github.com/r-lib/remotes):
 
 ``` r
 remotes::install_github("corybrunson/ordr")
@@ -228,6 +233,13 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
 ```
 
 ![](man/figures/README-interpolation%20biplot-1.png)<!-- -->
+
+### more methods
+
+The auxiliary package
+[**ordr.extra**](https://github.com/corybrunson/ordr.extra) provides
+accessor methods for several additional ordination models—and has room
+for several more!
 
 ## acknowledgments
 

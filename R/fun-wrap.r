@@ -1,10 +1,10 @@
 #' @title Wrappers for lossy ordination methods
 #'
-#' @description These `*_ord` functions wrap functions imported from other
-#'   packages with modifications for use with '[tbl_ord]' methods. Some
-#'   parameters are hidden from the user and set to settings required for these
-#'   methods, some matrix outputs are given row or column names to be used by
-#'   them, and new '*_ord' S3 class attributes are added to enable them.
+#' @description These `*_ord` functions wrap core R functions with modifications
+#'   for use with '[tbl_ord]' methods. Some parameters are hidden from the user
+#'   and set to settings required for these methods, some matrix outputs are
+#'   given row or column names to be used by them, and new '*_ord' S3 class
+#'   attributes are added to enable them.
 #'   
 
 #' @details
@@ -16,23 +16,13 @@
 #' | [base::eigen()]                    | Yes         | Yes       | Yes       |
 #' | [base::svd()]                      | Yes         | Yes       | Yes       |
 #' | [stats::cmdscale()]                | Yes         | No        | Yes       |
-#' | [logisticPCA::logisticSVD()]       | No          | Yes       | No        |
-#' | [logisticPCA::logisticPCA()]       | No          | Yes       | No        |
-#' | [logisticPCA::convexLogisticPCA()] | No          | Yes       | No        |
-#' | [nipals::nipals()]                 | No          | No        | Yes       |
 
 #' @name wrap-ord
 #' @include ord-tbl.r
 #' @importFrom stats cmdscale
-#' @importFrom logisticPCA logisticPCA logisticSVD convexLogisticPCA
 #' @inheritParams base::eigen
 #' @inheritParams base::svd
 #' @inheritParams stats::cmdscale
-#' @inheritParams logisticPCA::logisticPCA
-#' @inheritParams logisticPCA::logisticSVD
-#' @inheritParams logisticPCA::convexLogisticPCA
-#' @inheritParams nipals::nipals
-#' @param ... Additional parameters passed to original functions.
 NULL
 
 #' @rdname wrap-ord
@@ -62,88 +52,5 @@ svd_ord <- function(x, nu = min(dim(x)), nv = min(dim(x))) {
 cmdscale_ord <- function(d, k = 2, add = FALSE) {
   res <- stats::cmdscale(d, k = k, eig = TRUE, add = add, x.ret = TRUE)
   class(res) <- "cmds_ord"
-  res
-}
-
-#' @rdname wrap-ord
-#' @export
-logisticSVD_ord <- function(
-  x, k = 2,
-  quiet = TRUE, max_iters = 1000,
-  conv_criteria = 1e-05, random_start = FALSE,
-  ...,
-  partial_decomp = TRUE, main_effects = TRUE
-) {
-  lsvd <- logisticPCA::logisticSVD(
-    x = x, k = k,
-    quiet = quiet, max_iters = max_iters,
-    conv_criteria = conv_criteria, random_start = random_start,
-    ...,
-    partial_decomp = partial_decomp, main_effects = main_effects
-  )
-  rownames(lsvd$A) <- rownames(x)
-  rownames(lsvd$B) <- colnames(x)
-  lsvd
-}
-
-#' @rdname wrap-ord
-#' @export
-logisticPCA_ord <- function(
-  x, k = 2, m = 4,
-  quiet = TRUE, partial_decomp = FALSE,
-  max_iters = 1000, conv_criteria = 1e-05,
-  random_start = FALSE,
-  ...,
-  main_effects = TRUE
-) {
-  lpca <- logisticPCA::logisticPCA(
-    x, k = k,
-    m = m, quiet = quiet, partial_decomp = partial_decomp,
-    max_iters = max_iters, conv_criteria = conv_criteria,
-    random_start = random_start,
-    ...,
-    main_effects = main_effects
-  )
-  rownames(lpca$U) <- colnames(x)
-  #rownames(lpca$PCs) <- rownames(x)
-  lpca
-}
-
-#' @rdname wrap-ord
-#' @export
-convexLogisticPCA_ord <- function(
-  x, k = 2, m = 4,
-  quiet = TRUE, partial_decomp = FALSE,
-  max_iters = 1000, conv_criteria = 1e-06,
-  random_start = FALSE,
-  ...,
-  main_effects = TRUE, ss_factor = 4
-) {
-  lpca <- logisticPCA::convexLogisticPCA(
-    x, k = k,
-    m = m, quiet = quiet, partial_decomp = partial_decomp,
-    max_iters = max_iters, conv_criteria = conv_criteria,
-    random_start = random_start,
-    ...,
-    main_effects = main_effects, ss_factor = 4
-  )
-  rownames(lpca$U) <- colnames(x)
-  #rownames(lpca$PCs) <- rownames(x)
-  lpca
-}
-
-#' @rdname wrap-ord
-#' @export
-nipals_ord <- function(
-  x, ncomp = min(nrow(x), ncol(x)), center = TRUE, scale = TRUE, 
-  maxiter = 500, tol = 1e-06, startcol = 0, fitted = FALSE, 
-  force.na = FALSE, gramschmidt = TRUE, verbose = FALSE
-) {
-  res <- nipals::nipals(
-    x, ncomp = ncomp, center = center, scale = scale,
-    maxiter = maxiter, tol = tol, startcol = startcol, fitted = fitted,
-    force.na = force.na, gramschmidt = gramschmidt, verbose = verbose
-  )
-  class(res) <- "nipals_ord"
   res
 }

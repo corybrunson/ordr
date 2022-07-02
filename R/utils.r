@@ -1,4 +1,6 @@
 
+#' @importFrom utils getFromNamespace
+
 #' @importFrom magrittr %>%
 #' @export
 magrittr::`%>%`

@@ -93,7 +93,7 @@ points for rows and arrows for columns.
 
 \seealso{
 Other biplot layers: 
-\code{\link{biplot-geoms}},
-\code{\link{biplot-stats}}
+\code{\link{biplot-stats}},
+\code{\link{geom_rows_addition}()}
 }
 \concept{biplot layers}
