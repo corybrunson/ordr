@@ -238,8 +238,8 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
 
 The auxiliary package
 [**ordr.extra**](https://github.com/corybrunson/ordr.extra) provides
-accessor methods for several additional ordination models—and room for
-several more!
+accessor methods for several additional ordination models—and has room
+for several more!
 
 ## acknowledgments
 
