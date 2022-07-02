@@ -37,56 +37,6 @@ stat_cone <- function(
   )
 }
 
-#' @rdname biplot-stats
-#' @export
-stat_rows_cone <- function(
-  mapping = NULL, data = NULL, geom = "path", position = "identity",
-  origin = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ...
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatRowsCone,
-    geom = geom, 
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = FALSE,
-      origin = origin,
-      ...
-    )
-  )
-}
-
-#' @rdname biplot-stats
-#' @export
-stat_cols_cone <- function(
-  mapping = NULL, data = NULL, geom = "path", position = "identity",
-  origin = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ...
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatColsCone,
-    geom = geom, 
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = FALSE,
-      origin = origin,
-      ...
-    )
-  )
-}
-
 #' @rdname ordr-ggproto
 #' @format NULL
 #' @usage NULL
@@ -129,26 +79,6 @@ StatCone <- ggproto(
     # return the convex hull
     data[hull, , drop = FALSE]
   }
-)
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatRowsCone <- ggproto(
-  "StatRowsCone", StatCone,
-  
-  setup_data = setup_rows_data
-)
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatColsCone <- ggproto(
-  "StatColsCone", StatCone,
-  
-  setup_data = setup_cols_data
 )
 
 # single unique value, or else NA

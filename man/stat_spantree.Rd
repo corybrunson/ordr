@@ -13,6 +13,7 @@ stat_spantree(
   show.legend = NA,
   inherit.aes = TRUE,
   check.aes = TRUE,
+  check.param = TRUE,
   ...
 )
 }
@@ -55,7 +56,7 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
-\item{check.aes}{If \code{TRUE}, the default, will check that
+\item{check.aes, check.param}{If \code{TRUE}, the default, will check that
 supplied parameters and aesthetics are understood by the \code{geom} or
 \code{stat}. Use \code{FALSE} to suppress the checks.}
 
@@ -118,7 +119,7 @@ In either case, the stat layer returns a data frame with position aesthetics
 \references{
 Jolliffe IT (2002) \emph{Principal Component Analysis}, Second Edition.
 Springer Series in Statistics, ISSN 0172-7397. \doi{10.1007/b98835}
-\url{https://www.springer.com/gp/book/9780387954424}
+\url{https://link.springer.com/book/10.1007/b98835}
 }
 \seealso{
 Other stat layers: 

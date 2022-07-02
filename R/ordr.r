@@ -78,6 +78,7 @@
 
 #' @docType package
 #' @name ordr
+#' @aliases ordr-package
 NULL
 
 if (getRversion() >= "2.15.1") utils::globalVariables(c(

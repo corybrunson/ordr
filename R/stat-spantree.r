@@ -37,7 +37,7 @@
 stat_spantree <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
   method = "euclidean",
-  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
+  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE, check.param = TRUE,
   ...
 ) {
   layer(
@@ -49,56 +49,7 @@ stat_spantree <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     check.aes = check.aes,
-    params = list(
-      method = method,
-      na.rm = FALSE,
-      ...
-    )
-  )
-}
-
-#' @rdname biplot-stats
-#' @export
-stat_rows_spantree <- function(
-  mapping = NULL, data = NULL, geom = "segment", position = "identity",
-  method = "euclidean",
-  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
-  ...
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatRowsSpantree,
-    geom = geom, 
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    check.aes = check.aes,
-    params = list(
-      method = method,
-      na.rm = FALSE,
-      ...
-    )
-  )
-}
-
-#' @rdname biplot-stats
-#' @export
-stat_cols_spantree <- function(
-  mapping = NULL, data = NULL, geom = "segment", position = "identity",
-  method = "euclidean",
-  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE,
-  ...
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatColsSpantree,
-    geom = geom, 
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    check.aes = check.aes,
+    check.param = check.param,
     params = list(
       method = method,
       na.rm = FALSE,
@@ -142,24 +93,4 @@ StatSpantree <- ggproto(
     
     data
   }
-)
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatRowsSpantree <- ggproto(
-  "StatRowsSpantree", StatSpantree,
-  
-  setup_data = setup_rows_data
-)
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatColsSpantree <- ggproto(
-  "StatColsSpantree", StatSpantree,
-  
-  setup_data = setup_cols_data
 )
