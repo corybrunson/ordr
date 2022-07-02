@@ -13,9 +13,12 @@ knitr::opts_chunk$set(
 devtools::load_all()
 ```
 
-[![Travis](https://travis-ci.org/corybrunson/ordr.svg?branch=main)](https://travis-ci.org/corybrunson/ordr)
-
 # ordr
+
+<!-- badges: start -->
+[![Travis](https://travis-ci.org/corybrunson/ordr.svg?branch=main)](https://travis-ci.org/corybrunson/ordr)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+<!-- badges: end -->
 
 **ordr** integrates ordination analysis and biplot visualization into [**tidyverse**](https://github.com/tidyverse/tidyverse) workflows.
 
@@ -56,7 +59,7 @@ Instead, **ordr** provides a streamlined process by which the models output by t
 
 ### installation
 
-**ordr** remains under development and is not scheduled for a CRAN release. For now, it can be installed from the (default) `main` branch using [**remotes**](https://github.com/r-lib/remotes):
+**ordr** remains under development but is approaching a CRAN release. For now, it can be installed from the (default) `main` branch using [**remotes**](https://github.com/r-lib/remotes):
 
 ```{r install, eval=FALSE}
 remotes::install_github("corybrunson/ordr")
@@ -120,6 +123,10 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
 ```
 
 [^text-radiate]: The radiating text geom, like several other features, is adapted from the **ggbiplot** package.
+
+### more methods
+
+The auxiliary package [**ordr.extra**](https://github.com/corybrunson/ordr.extra) provides accessor methods for several additional ordination models---and room for several more!
 
 ## acknowledgments
 
