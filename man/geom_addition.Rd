@@ -121,8 +121,13 @@ points for rows and arrows for columns.
 
 \section{Aesthetics}{
 
-\code{geom_addition()} understands the following aesthetics (required aesthetics
-are in bold):
+\code{geom_addition()} understands the custom \strong{\code{interpolate}} aesthetic, which
+tells the internals which columns of \code{new_data} contain the variables to be
+used for interpolation. Except in rare cases, \code{new_data} should contain the
+same rows or columns as the ordinated data and \code{interpolate} should be set to
+\code{.name} (procured by \code{\link[=augment_ord]{augment_ord()}}).
+\code{geom_addition()} additionally understands the following aesthetics (required
+aesthetics are in bold):
 \itemize{
 \item \code{alpha}
 \item \code{colour}

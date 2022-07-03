@@ -9,8 +9,14 @@
 
 #' @section Aesthetics:
 
-#' `geom_addition()` understands the following aesthetics (required aesthetics
-#' are in bold):
+#' `geom_addition()` understands the custom **`interpolate`** aesthetic, which
+#' tells the internals which columns of `new_data` contain the variables to be
+#' used for interpolation. Except in rare cases, `new_data` should contain the
+#' same rows or columns as the ordinated data and `interpolate` should be set to
+#' `.name` (procured by [augment_ord()]).
+
+#' `geom_addition()` additionally understands the following aesthetics (required
+#' aesthetics are in bold):
 
 #' - `alpha`
 #' - `colour`
@@ -140,12 +146,25 @@ GeomAddition <- ggproto(
       params$new_data <- as.data.frame(params$new_data)
     
     # available dual dimensions
-    dual_names <- intersect(names(params$new_data), data$.name_subset)
+    if (is.null(data$interpolate)) {
+      if (ncol(params$new_data) == nrow(data)) {
+        dual_names <- names(params$new_data)
+      } else {
+        stop("`new_data` needs column per variable, or else named columns.")
+      }
+    } else {
+      dual_names <- data$interpolate
+      lost_names <- setdiff(dual_names, names(params$new_data))
+      if (length(lost_names) > 0L)
+        params$new_data[, lost_names] <- NA_real_
+      params$new_data <- params$new_data[, dual_names]
+    }
     
     # impute missing values
     params$new_data[, dual_names] <- ifelse(
       is.na(unlist(params$new_data[, dual_names, drop = TRUE])),
-      0,
+      if (is.null(data$center)) 0 else
+        rep(data$center, each = nrow(params$new_data)),
       unlist(params$new_data[, dual_names, drop = TRUE])
     )
     
@@ -163,6 +182,7 @@ GeomAddition <- ggproto(
     rule = "evenodd",
     na.rm = FALSE
   ) {
+    
     if (! coord$is_linear()) {
       warning("Vectors are not yet tailored to non-linear coordinates.")
     }
@@ -170,8 +190,8 @@ GeomAddition <- ggproto(
     # reverse ends of `arrow`
     if (! is.null(arrow)) arrow$ends <- c(2L, 1L, 3L)[arrow$ends]
     
-    # available dual dimensions
-    dual_names <- intersect(names(new_data), data$.name_subset)
+    # ???
+    dual_names <- names(new_data)
     n_coef <- length(dual_names)
     
     # data frames of individual arrow elements and convex hulls
