@@ -10,7 +10,12 @@
 #' @name stat_rows
 #' @inheritParams ggplot2::layer
 #' @param subset An integer, logical, or character vector indicating a subset of
-#'   rows or columns for which to render graphical elements.
+#'   rows or columns for which to render graphical elements. NB: Internally, the
+#'   `subset` will be taken from the rows of the [fortified][fortify.tbl_ord()]
+#'   'tbl_ord' comprising rows from only one of the matrix factors. It is still
+#'   possible to pass a formula to the `data` parameter, but it will act on the
+#'   fortified data _before_ it has been restricted to one matrix factor.
+#'
 #' @template param-stat
 #' @family biplot layers
 

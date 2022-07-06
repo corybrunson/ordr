@@ -1,5 +1,5 @@
 Package: ordr
-Title: A 'tidyverse' extension for ordinations and biplots
+Title: A 'tidyverse' Extension for Ordinations and Biplots
 Version: 0.0.0.9000
 Authors@R: c(
   person("Jason Cory", "Brunson", email = "cornelioid@gmail.com",
@@ -13,11 +13,11 @@ Depends:
     R (>= 3.3.0),
     ggplot2
 Imports:
+    broom,
     scales,
     generics,
     magrittr,
     tibble,
-    broom,
     tidyr,
     rlang,
     stringr,
@@ -26,36 +26,30 @@ Imports:
     purrr,
     labeling,
     ggrepel,
-    logisticPCA,
-    nipals,
-    sessioninfo
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Suggests:
     testthat,
+    sessioninfo,
     gridExtra,
     ca,
     MASS,
     candisc,
     vegan,
-    ade4,
     igraph,
     igraphdata,
     heplots,
-    cooccur,
     proxy,
     knitr,
     rmarkdown,
     corrplot
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.0
 Roxygen: list(markdown = TRUE)
 Collate:
     'aaa-.r'
-    'biplot-geoms.r'
     'biplot-gg.r'
     'biplot-key.r'
-    'biplot-stats.r'
     'data.r'
     'dplyr-verbs.r'
     'utils.r'
@@ -70,22 +64,17 @@ Collate:
     'geom-intervals.r'
     'geom-isoline.r'
     'geom-origin.r'
-    'geom-path.r'
-    'geom-point.r'
-    'geom-polygon.r'
     'geom-text-radiate.r'
-    'geom-text.r'
     'geom-unit-circle.r'
     'geom-vector.r'
-    'methods-ade4-nipals.r'
+    'list-cmdscale-tidiers.r'
+    'list-tidiers.r'
     'methods-base-eigen.r'
     'methods-base-svd.r'
     'methods-ca-ca.r'
     'methods-ca-mjca.r'
     'methods-candisc-cancor.r'
-    'methods-logisticpca-lpca.r'
     'methods-mass-lda.r'
-    'methods-nipals-nipals.r'
     'methods-ordr-lra.r'
     'methods-stats-cmds.r'
     'methods-stats-kmeans.r'
@@ -102,9 +91,10 @@ Collate:
     'stat-center.r'
     'stat-chull.r'
     'stat-cone.r'
-    'stat-ellipse.r'
     'stat-matrix.r'
     'stat-scale.r'
     'stat-spantree.r'
     'themes.r'
+    'zzz-biplot-geoms.r'
+    'zzz-biplot-stats.r'
 VignetteBuilder: knitr

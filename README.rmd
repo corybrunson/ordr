@@ -13,9 +13,12 @@ knitr::opts_chunk$set(
 devtools::load_all()
 ```
 
-[![Travis](https://travis-ci.org/corybrunson/ordr.svg?branch=main)](https://travis-ci.org/corybrunson/ordr)
-
 # ordr
+
+<!-- badges: start -->
+[![Travis](https://travis-ci.org/corybrunson/ordr.svg?branch=main)](https://travis-ci.org/corybrunson/ordr)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+<!-- badges: end -->
 
 **ordr** integrates ordination analysis and biplot visualization into [**tidyverse**](https://github.com/tidyverse/tidyverse) workflows.
 
@@ -28,7 +31,7 @@ devtools::load_all()
 ### ordination and biplots
 
 _Ordination_ is a catch-all term for a variety of statistical techniques that introduce an artificial coordinate system for a data set in such a way that a few coordinates capture a large amount of the data structure [^ordination].
-The branch of mathematical statistics called [geometric data analysis](https://www.springer.com/us/book/9781402022357) (GDA) provides the theoretical basis for (most of) these techniques.
+The branch of mathematical statistics called [geometric data analysis](https://link.springer.com/book/10.1007/1-4020-2236-0) (GDA) provides the theoretical basis for (most of) these techniques.
 Ordination overlaps with regression and with dimension reduction, which can be [contrasted to clustering and classification](https://towardsdatascience.com/supervised-vs-unsupervised-learning-14f68e32ea8d) in that they assign continuous rather than discrete values to data elements [^discrete].
 
 [^ordination]: The term _ordination_ is most prevalent among ecologists; to my knowledge, no catch-all term is in common use outside ecology.
@@ -42,7 +45,7 @@ Analysis pipelines that use these techniques may use the artificial coordinates 
 The number of artificial coordinates used in an application, such as regression or visualization, is called the _rank_ of the ordination [^lm-kmeans].
 A common application is the _biplot_, which positions the rows and columns of the original table in a scatterplot in 1, 2, or 3 artificial coordinates, usually those that explain the most variation in the data.
 
-[^lm-kmeans]: Regression and clustering models, like classical [linear regression](http://www.multivariatestatistics.org/chapter2.html) and [_k_-means](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html), can also be understood as matrix decomposition approximations and even visualized in biplots. Their shared coordinates, which are pre-defined rather than artificial, are the predictor coefficients and the cluster assignments, respectively. Methods for `stats::lm()` and `stats::kmeans()`, for example, are implemented for the sake of novelty and instruction, but are not widely used in practice.
+[^lm-kmeans]: Regression and clustering models, like classical [linear regression](https://www.fbbva.es/microsite/multivariate-statistics/) and [_k_-means](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html), can also be understood as matrix decomposition approximations and even visualized in biplots. Their shared coordinates, which are pre-defined rather than artificial, are the predictor coefficients and the cluster assignments, respectively. Methods for `stats::lm()` and `stats::kmeans()`, for example, are implemented for the sake of novelty and instruction, but are not widely used in practice.
 
 ### implementations in R
 
@@ -56,7 +59,7 @@ Instead, **ordr** provides a streamlined process by which the models output by t
 
 ### installation
 
-**ordr** remains under development and is not scheduled for a CRAN release. For now, it can be installed from the (default) `main` branch using [**remotes**](https://github.com/r-lib/remotes):
+**ordr** remains under development but is approaching a CRAN release. For now, it can be installed from the (default) `main` branch using [**remotes**](https://github.com/r-lib/remotes):
 
 ```{r install, eval=FALSE}
 remotes::install_github("corybrunson/ordr")
@@ -140,6 +143,10 @@ ggbiplot(iris_pca, prediction = TRUE, axis.percents = FALSE) +
 aggregate(iris[, 1:4], by = iris[, "Species", drop = FALSE], FUN = mean)
 ```
 
+### more methods
+
+The auxiliary package [**ordr.extra**](https://github.com/corybrunson/ordr.extra) provides accessor methods for several additional ordination models---and has room for several more!
+
 ## acknowledgments
 
 ### contribute
@@ -152,10 +159,10 @@ Conduct](https://github.com/corybrunson/ordr/blob/main/CODE_OF_CONDUCT.md).
 
 ### inspiration
 
-This package was originally inspired by the **ggbiplot** extension developed by [Vincent Q. Vu](https://github.com/vqv/ggbiplot), [Richard J Telford](https://github.com/richardjtelford/ggbiplot), and [Vilmantas Gegzna](https://github.com/GegznaV/ggbiplot), among others. So far as i know, it first brought biplots into the **tidyverse** framework.
-The motivation to unify a variety of ordination methods came from [several books and articles](https://www.barcelonagse.eu/research/publications/all?author=Michael%20Greenacre) by Michael Greenacre, in particular [_Biplots in Practice_](https://www.fbbva.es/microsite/multivariate-statistics/resources.html#biplots).
+This package was originally inspired by the **ggbiplot** extension developed by [Vincent Q. Vu](https://github.com/vqv/ggbiplot), [Richard J Telford](https://github.com/richardjtelford/ggbiplot), and [Vilmantas Gegzna](https://github.com/forked-packages/ggbiplot), among others. So far as i know, it first brought biplots into the **tidyverse** framework.
+The motivation to unify a variety of ordination methods came from several books and articles by [Michael Greenacre](https://www.fbbva.es/microsite/multivariate-statistics/resources.html), in particular [_Biplots in Practice_](https://www.fbbva.es/microsite/multivariate-statistics/resources.html#biplots).
 Thomas Lin Pedersen's [**tidygraph**](https://github.com/thomasp85/tidygraph) prequel to **ggraph** finally induced the shift from the downstream generation of scatterplots to the upstream handling and manipulating of ordination models.
-Additional design elements and features have been informed by the monograph [_Biplots_](https://www.routledge.com/Biplots/Gower-Hand/p/book/9780412716300) and the textbook [_Understanding Biplots_](https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550) by John C. Gower, David J. Hand, Sugnet Gardner Lubbe, and Niel J. Le Roux.
+Additional design elements and features have been informed by the monograph [_Biplots_](https://www.google.com/books/edition/Biplots/lTxiedIxRpgC) and the textbook [_Understanding Biplots_](https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550) by John C. Gower, David J. Hand, Sugnet Gardner Lubbe, and Niel J. Le Roux.
 
 ### notes
 

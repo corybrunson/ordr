@@ -17,8 +17,10 @@ Classifications and rankings of U.S. universities for the years
 2017--2020.
 }
 \details{
-\strong{Link to the websites
-\url{http://www.iu.qs.com/university-rankings/qs-classifications/} for university
-classifications.}
+Ranking data were obtained from the public QS website.
+}
+\references{
+Quacquarelli Symonds (2021) "University Rankings". TopUniversities.com
+\url{https://www.topuniversities.com/university-rankings}.
 }
 \keyword{datasets}

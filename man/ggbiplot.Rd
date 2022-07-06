@@ -170,17 +170,25 @@ mtcars \%>\%
   subset(select = c(cyl, disp, hp, drat, wt, vs, carb)) \%>\%
   scale() \%>\%
   proxy::dist(method = "cosine") \%>\%
-  cmdscale_ord() \%>\%
-  as_tbl_ord() \%>\%
-  augment_ord() \%>\%
+  cmdscale(list. = TRUE) \%>\%
+  tidy() \%>\%
   print() -> mtcars_specs_cmds
 # regress performance measures on principal coordinates
-lm(mtcars_perf ~ get_rows(mtcars_specs_cmds)) \%>\%
+lm(mtcars_perf ~ as.matrix(mtcars_specs_cmds[, 2:3])) \%>\%
   as_tbl_ord() \%>\%
   augment_ord() \%>\%
   print() -> mtcars_cmds_lm
+# multidimensional scaling using `cmdscale_ord()`
+mtcars \%>\%
+  subset(select = c(cyl, disp, hp, drat, wt, vs, carb)) \%>\%
+  scale() \%>\%
+  proxy::dist(method = "cosine") \%>\%
+  cmdscale_ord() \%>\%
+  as_tbl_ord() \%>\%
+  augment_ord() \%>\%
+  print() -> mtcars_specs_cmds_ord
 # regression biplot
-ggbiplot(mtcars_specs_cmds, aes(label = .name),
+ggbiplot(mtcars_specs_cmds_ord, aes(label = .name),
          sec.axes = "rows", scale.factor = 3) +
   theme_minimal() +
   geom_rows_text(size = 3) +
