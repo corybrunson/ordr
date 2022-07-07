@@ -155,12 +155,15 @@ ggbiplot <- function(
       scale.factor <- min(ps_lim[[1]] / ps_lim[[2]])
     }
     
-    if (! is.null(ordination)) ordination <- dplyr::mutate_at(
+    # rescale any shared coordinates present
+    if (! is.null(ordination)) ordination <- dplyr::mutate(
       ordination,
-      dplyr::vars(get_coord(ordination)),
-      list(~ ifelse(ordination$.matrix == sec.axes, . * scale.factor, .))
+      dplyr::across(
+        tidyselect::any_of(get_coord(ordination)),
+        ~ ifelse(ordination$.matrix == sec.axes, . * scale.factor, .)
+      )
     )
-    
+
   }
   
   # conventional `ggplot()` call
@@ -240,10 +243,13 @@ ensure_xy_aes <- function(ordination, mapping) {
 # use `.m` to avoid conflict with '.matrix' column in `ordination`
 scale_ord <- function(ordination, .m, mapping, scale) {
   if (is.character(scale)) scale <- ordination[[scale]]
-  dplyr::mutate_at(
+  ord_vars <- stringr::str_remove(as.character(mapping[c("x", "y")]), "^~")
+  dplyr::mutate(
     ordination,
-    dplyr::vars(stringr::str_remove(as.character(mapping[c("x", "y")]), "^~")),
-    list(~ ifelse(ordination$.matrix == .m, . * scale, .))
+    dplyr::across(
+      tidyselect::all_of(ord_vars),
+      ~ ifelse(ordination$.matrix == .m, . * scale, .)
+    )
   )
 }
 
