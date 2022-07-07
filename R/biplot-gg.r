@@ -82,6 +82,7 @@ ggbiplot <- function(
       axis.percents <- FALSE
     }
   }
+  ord_class <- class(un_tbl_ord(ordination))
   conference <- get_conference(ordination)
   
   # fortify `ordination` if necessary
@@ -90,8 +91,15 @@ ggbiplot <- function(
   # augment `mapping`, if necessary, with default coordinates
   mapping <- ensure_xy_aes(ordination, mapping)
   
-  # rescale standard coordinates for prediction biplot
   if (prediction) {
+    
+    # -+- only linear ordinations for now -+-
+    if (! ord_class %in% c("eigen_ord", "svd_ord", "prcomp", "princomp")) {
+      warning("Prediction biplots are only implemented for linear methods ",
+              "(ED, SVD, PCA).")
+    }
+    
+    # rescale standard coordinates for prediction biplot
     xy_map <- stringr::str_remove(as.character(mapping[c("x", "y")]), "^~")
     if (! all(c("x", "y") %in% names(mapping)) &&
         any(stringr::str_detect(names(mapping), "..coord"))) {
