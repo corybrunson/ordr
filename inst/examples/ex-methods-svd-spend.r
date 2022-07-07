@@ -46,7 +46,7 @@ spend_svd %>%
            prediction = TRUE) +
   geom_rows_label(size = 3) +
   geom_cols_vector() +
-  geom_cols_text_radiate() +
+  geom_cols_text_radiate(stat = "cone") +
   ggtitle(
     "U.S. Personal Expenditure data, 1940-1960",
     "Row-principal biplot of SVD"
