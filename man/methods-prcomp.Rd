@@ -84,7 +84,7 @@ iris_pca \%>\%
   scale_color_brewer(type = "qual", palette = 2) +
   geom_cols_axis(aes(label = .name, center = .center, scale = .scale)) +
   geom_rows_point(aes(color = species), alpha = .5) +
-  ggtitle("Row-principal PCA biplot of Anderson iris measurements")
+  ggtitle("Prediction biplot of Anderson iris measurements")
 }
 \author{
 Emily Paul

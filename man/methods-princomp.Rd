@@ -86,7 +86,7 @@ iris_pca \%>\%
   geom_rows_point(alpha = .5) +
   geom_cols_axis(aes(label = .name, center = .center, scale = .scale),
                  color = "#444444") +
-  ggtitle("Row-principal unscaled PCA biplot of Anderson iris measurements") +
+  ggtitle("Prediction biplot of Anderson iris measurements") +
   expand_limits(y = c(NA, 2))
 }
 \author{

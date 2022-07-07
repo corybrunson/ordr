@@ -33,21 +33,15 @@ spend_svd %>%
   geom_cols_vector() +
   # omit labels in the hull with the origin
   geom_cols_text_radiate(stat = "cone") +
-  ggtitle(
-    "U.S. Personal Expenditure data, 1940-1960",
-    "Row-principal biplot of SVD"
-  )
+  ggtitle("U.S. Personal Expenditure data, 1940-1960",
+          "Row-principal biplot of SVD")
 # row-principal prediction biplot
 spend_svd %>%
   augment_ord() %>%
   confer_inertia(1) %>%
-  ggbiplot(aes(label = .name), clip = "off",
-           sec.axes = "cols", scale.factor = 50,
-           prediction = TRUE) +
+  ggbiplot(aes(label = .name), prediction = TRUE) +
   geom_rows_label(size = 3) +
-  geom_cols_vector() +
-  geom_cols_text_radiate(stat = "cone") +
-  ggtitle(
-    "U.S. Personal Expenditure data, 1940-1960",
-    "Row-principal biplot of SVD"
-  )
+  geom_cols_vector(color = "transparent") +
+  geom_cols_axis() +
+  ggtitle("U.S. Personal Expenditure data, 1940-1960",
+          "Prediction biplot of SVD")
