@@ -68,7 +68,9 @@ biplot.tbl_ord <- function(x, main = deparse(substitute(x)), ...) {
   }
   # if default conference does not support a biplot interpretation, then confer
   # inertia symmetrically
-  if (sum(recover_conference(x)) != 1 && is.null(attr(x, "confer")))
+  if (! is.null(recover_conference(x)) &&
+      sum(recover_conference(x)) != 1 &&
+      is.null(attr(x, "confer")))
     x <- confer_inertia(x, p = .5)
   biplot.default(
     x = get_rows(x), y = get_cols(x),
