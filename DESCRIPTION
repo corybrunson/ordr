@@ -77,6 +77,7 @@ Collate:
     'methods-mass-lda.r'
     'methods-ordr-lra.r'
     'methods-stats-cmds.r'
+    'methods-stats-factanal.r'
     'methods-stats-kmeans.r'
     'methods-stats-lm.r'
     'methods-stats-prcomp.r'

@@ -10,7 +10,7 @@ ordinate(data, cols, model, augment, ...)
 \item{data}{A data frame.}
 
 \item{cols}{<\code{\link[tidyr:tidyr_tidy_select]{tidy-select}}> Columns of \code{data} to
-pass to \code{model}.}
+pass to \code{model}. If missing, all columns are used.}
 
 \item{model}{An ordination function whose output is coercible to class
 '\link{tbl_ord}'. Alternatively, a formula \code{~ fun(., ...)} where \code{fun} is such a
@@ -38,4 +38,6 @@ ordinate(USArrests, cols = c(Murder, Rape, Assault), lra)
 # CA of hair & eye color data
 haireye <- as.data.frame(rowSums(HairEyeColor, dims = 2L))
 ordinate(haireye, cols = everything(), model = ca::ca, augment = everything())
+# FA of Swiss social data
+ordinate(swiss, model = factanal, factors = 2L, scores = "Bartlett")
 }
