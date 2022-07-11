@@ -30,7 +30,7 @@ as_tbl_ord.factanal <- as_tbl_ord_default
 #' @rdname methods-factanal
 #' @export
 recover_rows.factanal <- function(x) {
-  x[["scores"]]
+  unclass(x[["loadings"]])
 }
 
 #' @rdname methods-factanal
@@ -54,19 +54,37 @@ recover_coord.factanal <- function(x) {
 #' @rdname methods-factanal
 #' @export
 recover_conference.factanal <- function(x) {
-  # columns are scaled to unit lengths before loadings are calculated
-  c(1, 0)
+  # loadings are assigned half the diagonal from the eigendecomposition
+  c(.5, .5)
+}
+
+#' @rdname methods-factanal
+#' @export
+supplementation_rows.factanal <- function(x) {
+  x[["scores"]]
 }
 
 #' @rdname methods-factanal
 #' @export
 augmentation_rows.factanal <- function(x) {
-  .name <- rownames(x[["scores"]])
-  if (is.null(.name)) {
-    tibble_pole(nrow(x[["scores"]]))
+  .name <- rownames(x[["loadings"]])
+  res <- if (is.null(.name)) {
+    tibble_pole(nrow(x[["loadings"]]))
   } else {
     tibble(.name = .name)
   }
+  if (is.null(x[["scores"]])) return(res)
+  
+  # factor scores as supplementary points
+  res_sup <- if (is.null(rownames(x[["scores"]]))) {
+    tibble_pole(x[["n.obs"]])
+  } else {
+    tibble(.name = rownames(x[["scores"]]))
+  }
+  # supplement flag
+  res$.supplement <- FALSE
+  res_sup$.supplement <- TRUE
+  as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
 #' @rdname methods-factanal

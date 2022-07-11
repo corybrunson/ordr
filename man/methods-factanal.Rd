@@ -8,6 +8,7 @@
 \alias{recover_inertia.factanal}
 \alias{recover_coord.factanal}
 \alias{recover_conference.factanal}
+\alias{supplementation_rows.factanal}
 \alias{augmentation_rows.factanal}
 \alias{augmentation_cols.factanal}
 \alias{augmentation_coord.factanal}
@@ -24,6 +25,8 @@
 \method{recover_coord}{factanal}(x)
 
 \method{recover_conference}{factanal}(x)
+
+\method{supplementation_rows}{factanal}(x)
 
 \method{augmentation_rows}{factanal}(x)
 
