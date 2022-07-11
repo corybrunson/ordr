@@ -60,6 +60,10 @@ standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 
 \item{...}{Comma-separated unquoted expressions as in, e.g.,
 \code{\link[dplyr:select]{dplyr::select()}}.}
+
+\item{supplementary}{Logical; whether to restrict to primary (\code{FALSE}) or
+\link[=supplementation]{supplementary} (\code{TRUE}) elements. Defaults to \code{NA}, which
+makes no restriction.}
 }
 \description{
 These functions adapt \link[dplyr:dplyr-package]{dplyr} verbs to the factors

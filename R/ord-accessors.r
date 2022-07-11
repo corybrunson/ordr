@@ -77,7 +77,11 @@ recover_cols.data.frame <- function(x) {
 #' @export
 get_rows <- function(x, supplementary = NA) {
   u <- recover_rows(x)
-  if (! isFALSE(supplementary)) u <- rbind(u, supplementation_rows(x))
+  if (isTRUE(supplementary)) {
+    u <- supplementation_rows(x)
+  } else if (is.na(supplementary)) {
+    u <- rbind(u, supplementation_rows(x))
+  }
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     i <- recover_inertia(x)
@@ -93,7 +97,11 @@ get_rows <- function(x, supplementary = NA) {
 #' @export
 get_cols <- function(x, supplementary = NA) {
   v <- recover_cols(x)
-  if (! isFALSE(supplementary)) v <- rbind(v, supplementation_cols(x))
+  if (isTRUE(supplementary)) {
+    v <- supplementation_cols(x)
+  } else if (is.na(supplementary)) {
+    v <- rbind(v, supplementation_cols(x))
+  }
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     i <- recover_inertia(x)

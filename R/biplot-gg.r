@@ -88,7 +88,7 @@ ggbiplot <- function(
   # augment `mapping`, if necessary, with `.supplement`
   if (! is.null(ordination)) {
     if (! ".supplement" %in% names(ordination)) ordination$.supplement <- FALSE
-    mapping <- c(mapping, aes(.supplement = .supplement))
+    mapping <- c(mapping, aes(.supplement = !! ".supplement"))
     class(mapping) <- "uneval"
   }
 

@@ -62,6 +62,10 @@ rows or columns for which to render graphical elements. NB: Internally, the
 possible to pass a formula to the \code{data} parameter, but it will act on the
 fortified data \emph{before} it has been restricted to one matrix factor.}
 
+\item{supplementary}{Logical; whether to restrict to primary (\code{FALSE}) or
+\link[=supplementation]{supplementary} (\code{TRUE}) elements. Defaults to \code{NA}, which
+makes no restriction.}
+
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?

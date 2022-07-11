@@ -15,6 +15,9 @@
 #'   'tbl_ord' comprising rows from only one of the matrix factors. It is still
 #'   possible to pass a formula to the `data` parameter, but it will act on the
 #'   fortified data _before_ it has been restricted to one matrix factor.
+#' @param supplementary Logical; whether to restrict to primary (`FALSE`) or
+#'   [supplementary][supplementation] (`TRUE`) elements. Defaults to `NA`, which
+#'   makes no restriction.
 #'
 #' @template param-stat
 #' @family biplot layers

@@ -75,8 +75,9 @@ setup_rows_data <- function(data, params) {
   data <-
     data[data$.matrix == "rows", -match(".matrix", names(data)), drop = FALSE]
   
-  # if specified, restrict to primary or supplementary elements
-  if (! is.null(params$supplementary) && ! is.na(params$supplementary)) {
+  # if specified and possible, restrict to primary or supplementary elements
+  if (! is.null(params$supplementary) && ! is.na(params$supplementary) &&
+      ".supplement" %in% names(data)) {
     data <- data[data$.supplement == params$supplementary, , drop = FALSE]
     if (! is.null(params$subset)) {
       message("`subset` will be applied after data are restricted to ",
@@ -102,6 +103,17 @@ setup_cols_data <- function(data, params) {
   
   data <-
     data[data$.matrix == "cols", -match(".matrix", names(data)), drop = FALSE]
+  
+  # if specified and possible, restrict to primary or supplementary elements
+  if (! is.null(params$supplementary) && ! is.na(params$supplementary) &&
+      ".supplement" %in% names(data)) {
+    data <- data[data$.supplement == params$supplementary, , drop = FALSE]
+    if (! is.null(params$subset)) {
+      message("`subset` will be applied after data are restricted to ",
+              if (params$supplementary) "supplementary" else "primary",
+              " elements.")
+    }
+  }
   
   # by default, render elements for all columns
   if (! is.null(params$subset)) {

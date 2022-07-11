@@ -18,6 +18,9 @@
 #' @param var A variable specified as in [dplyr::pull()].
 #' @param ... Comma-separated unquoted expressions as in, e.g.,
 #'   [dplyr::select()].
+#' @param supplementary Logical; whether to restrict to primary (`FALSE`) or
+#'   [supplementary][supplementation] (`TRUE`) elements. Defaults to `NA`, which
+#'   makes no restriction.
 #' @template param-matrix
 
 pull_factor <- function(.data, var = -1, .matrix) {
@@ -104,13 +107,15 @@ transmute_cols <- function(.data, ...) {
 
 cbind_factor <- function(.data, ..., .matrix, supplementary = NA) {
   ann_fac <- annotation_factor(.data, .matrix = .matrix)
-  att_fac <- if (is.na(supplementary)) {
+  att_fac <- if (is.na(supplementary) || ! ".supplement" %in% names(.data)) {
     tibble(...)
   } else if (supplementary) {
-    n_p <- nrow(.data[.matrix == .matrix, .supplement == FALSE, , drop = FALSE])
+    n_p <- nrow(.data[.data$.matrix == .matrix & .data$.supplement == FALSE,
+                      , drop = FALSE])
     bind_rows(tibble_pole(nrow = n_p), ...)
   } else if (! supplementary) {
-    n_s <- nrow(.data[.matrix == .matrix, .supplement == TRUE, , drop = FALSE])
+    n_s <- nrow(.data[.data$.matrix == .matrix & .data$.supplement == TRUE,
+                      , drop = FALSE])
     bind_rows(..., tibble_pole(nrow = n_s))
   }
   att <- if (nrow(ann_fac) == 0L) att_fac else bind_cols(ann_fac, att_fac)

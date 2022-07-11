@@ -102,7 +102,7 @@ fortify.tbl_ord <- function(
     u <- as_tibble(get_rows(model))
     u <- dplyr::bind_cols(u, annotation_factor(model, "rows"))
     if (isFALSE(supplementary) && ".supplement" %in% names(u)) {
-      u <- subset(u, ! .supplement)
+      u <- u[! u$.supplement, , drop = FALSE]
       u$.supplement <- NULL
     }
     u$.matrix <- "rows"
@@ -111,7 +111,7 @@ fortify.tbl_ord <- function(
     v <- as_tibble(get_cols(model))
     v <- dplyr::bind_cols(v, annotation_factor(model, "cols"))
     if (isFALSE(supplementary) && ".supplement" %in% names(v)) {
-      v <- subset(v, ! .supplement)
+      v <- v[! v$.supplement, , drop = FALSE]
       v$.supplement <- NULL
     }
     v$.matrix <- "cols"

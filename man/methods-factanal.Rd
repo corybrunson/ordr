@@ -61,9 +61,10 @@ swiss_fa <- factanal(~ ., factors = 2L, data = swiss, scores = "regression")
 # summarize ordination
 glance(swiss_fa)
 # recover loadings
-get_rows(swiss_fa, .supplement = FALSE)
+get_rows(swiss_fa, supplementary = FALSE)
 get_cols(swiss_fa)
-head(get_rows(swiss_fa, .supplement = TRUE), n = 12L)
+# recover scores
+head(get_rows(swiss_fa, supplementary = TRUE))
 # augment column loadings with uniquenesses
 (swiss_fa <- augment_ord(swiss_fa))
 # summarize factors
@@ -84,11 +85,10 @@ swiss_fa \%>\%
 # scores overlaid
 swiss_fa \%>\%
   confer_inertia("rows") \%>\%
-  ggbiplot(aes(label = .name), .supplement = TRUE) +
+  ggbiplot(aes(label = .name), supplementary = TRUE) +
   theme_bw() +
   geom_cols_vector() +
   geom_cols_text_radiate() +
   geom_unit_circle() +
-  geom_rows_point(aes(alpha = .supplement)) +
-  scale_alpha_manual(values = c(0, 1), guide = "none")
+  geom_rows_point()
 }
