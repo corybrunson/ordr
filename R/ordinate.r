@@ -12,7 +12,7 @@
 #' @importFrom tidyselect eval_select
 #' @param data A data frame.
 #' @param cols <[`tidy-select`][tidyr::tidyr_tidy_select]> Columns of `data` to
-#'   pass to `model`.
+#'   pass to `model`. If missing, all columns are used.
 #' @param model An ordination function whose output is coercible to class
 #'   '[tbl_ord]'. Alternatively, a formula `~ fun(., ...)` where `fun` is such a
 #'   function and other arguments are explicit, which will be evaluated with
@@ -39,6 +39,7 @@ ordinate <- function(
   if (is.matrix(data)) data <- as.data.frame(data)
   
   # select ordination columns
+  if (missing(cols)) cols <- names(data)
   cols_pos <- eval_select(enquo(cols), data = data)
   data_ord <- set_names(data[cols_pos], names(cols_pos))
   # select augmentation columns
