@@ -5,16 +5,13 @@
 #'
 #' @details
 #'
-#' Most **ordr** methods will only work if the 'factanal' object includes a
-#' `$scores` matrix, hence if a data matrix is provided.
-#'
-#' **NB:** `factanal()` normalizes the columns of `x` to unit length before it
-#' calculates their loadings, so, for consistency with the behavior of other
-#' methods (e.g. those of [lda_ord()]), inertia is assumed to lie with the rows.
-#' However, the scores (retrieved by `recover_rows()`) are not factors of a
-#' matrix decomposition and are better understood as predictions like those of
-#' `lda_ord()`, so redistributing inertia to the loadings should be done
-#' cautiously.
+#' Factor analysis of a data matrix relies on an an eigendecomposition of its
+#' correlation matrix, whose eigenvectors (up to weighting) comprise the
+#' variable loadings. For this reason, both row and column accessors retrieve
+#' the loadings and inertia is evenly distributed between them. When computed
+#' and returned by [stats::factanal()], the case scores are accessible as
+#' supplementary elements. Redistribution of inertia commutes through both
+#' score calculations.
 #' 
 
 #' @name methods-factanal
