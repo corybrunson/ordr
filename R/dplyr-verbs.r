@@ -12,7 +12,8 @@
 
 #' @name dplyr-verbs
 #' @importFrom tidyselect one_of
-#' @importFrom dplyr pull rename select mutate transmute bind_cols left_join
+#' @importFrom dplyr pull rename select mutate transmute bind_rows bind_cols
+#'   left_join
 #' @param .data An object of class '[tbl_ord]'.
 #' @param var A variable specified as in [dplyr::pull()].
 #' @param ... Comma-separated unquoted expressions as in, e.g.,
@@ -101,20 +102,29 @@ transmute_cols <- function(.data, ...) {
   transmute_factor(.data, ..., .matrix = "cols")
 }
 
-cbind_factor <- function(.data, ..., .matrix) {
+cbind_factor <- function(.data, ..., .matrix, supplementary = NA) {
   ann_fac <- annotation_factor(.data, .matrix = .matrix)
-  att <- if (nrow(ann_fac) == 0L) tibble(...) else bind_cols(ann_fac, ...)
+  att_fac <- if (is.na(supplementary)) {
+    tibble(...)
+  } else if (supplementary) {
+    n_p <- nrow(.data[.matrix == .matrix, .supplement == FALSE, , drop = FALSE])
+    bind_rows(tibble_pole(nrow = n_p), ...)
+  } else if (! supplementary) {
+    n_s <- nrow(.data[.matrix == .matrix, .supplement == TRUE, , drop = FALSE])
+    bind_rows(..., tibble_pole(nrow = n_s))
+  }
+  att <- if (nrow(ann_fac) == 0L) att_fac else bind_cols(ann_fac, att_fac)
   set_annotation_factor(.data, att, .matrix = .matrix)
 }
 #' @rdname dplyr-verbs
 #' @export
-cbind_rows <- function(.data, ...) {
-  cbind_factor(.data, ..., .matrix = "rows")
+cbind_rows <- function(.data, ..., supplementary = NA) {
+  cbind_factor(.data, ..., .matrix = "rows", supplementary = NA)
 }
 #' @rdname dplyr-verbs
 #' @export
-cbind_cols <- function(.data, ...) {
-  cbind_factor(.data, ..., .matrix = "cols")
+cbind_cols <- function(.data, ..., supplementary = NA) {
+  cbind_factor(.data, ..., .matrix = "cols", supplementary = NA)
 }
 
 left_join_factor <- function(.data, ..., .matrix) {

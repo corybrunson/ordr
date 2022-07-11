@@ -11,7 +11,7 @@
 
 \method{glance}{tbl_ord}(x, ...)
 
-\method{fortify}{tbl_ord}(model, data, ..., .matrix = "dims", .supplement = TRUE)
+\method{fortify}{tbl_ord}(model, data, ..., .matrix = "dims", supplementary = NA)
 }
 \arguments{
 \item{x, model}{An object of class '\link{tbl_ord}'.}
@@ -24,8 +24,9 @@
 or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 
-\item{.supplement}{Logical; whether to include
-\link[=supplementation]{supplementary} points.}
+\item{supplementary}{Logical; whether to restrict to primary (\code{FALSE}) or
+\link[=supplementation]{supplementary} (\code{TRUE}) elements. Defaults to \code{NA}, which
+makes no restriction.}
 }
 \description{
 These functions return \link[tibble:tibble]{tibbles} that summarize

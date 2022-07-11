@@ -41,9 +41,9 @@ transmute_rows(.data, ...)
 
 transmute_cols(.data, ...)
 
-cbind_rows(.data, ...)
+cbind_rows(.data, ..., supplementary = NA)
 
-cbind_cols(.data, ...)
+cbind_cols(.data, ..., supplementary = NA)
 
 left_join_rows(.data, ...)
 

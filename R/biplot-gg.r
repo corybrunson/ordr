@@ -85,7 +85,13 @@ ggbiplot <- function(
   
   # augment `mapping`, if necessary, with default coordinates
   mapping <- ensure_xy_aes(ordination, mapping)
-  
+  # augment `mapping`, if necessary, with `.supplement`
+  if (! is.null(ordination)) {
+    if (! ".supplement" %in% names(ordination)) ordination$.supplement <- FALSE
+    mapping <- c(mapping, aes(.supplement = .supplement))
+    class(mapping) <- "uneval"
+  }
+
   # scale 'rows' or 'cols' as indicated by `scale_rows` and `scale_cols`
   if (! is.null(scale_rows) && ! is.null(ordination)) {
     ordination <- scale_ord(ordination, "rows", mapping, scale_rows)

@@ -24,7 +24,9 @@
 #' @param x An object of class '[tbl_ord]'.
 #' @param ... Additional arguments from [base::as.matrix()]; ignored.
 #' @template param-matrix
-#' @param .supplement Logical; whether to include
+#' @param supplementary Logical; whether to restrict to primary (`FALSE`) or
+#'   [supplementary][supplementation] (`TRUE`) elements. Defaults to `NA`, which
+#'   makes no restriction.
 NULL
 
 #' @rdname accessors
@@ -73,9 +75,9 @@ recover_cols.data.frame <- function(x) {
 
 #' @rdname accessors
 #' @export
-get_rows <- function(x, .supplement = TRUE) {
+get_rows <- function(x, supplementary = NA) {
   u <- recover_rows(x)
-  if (.supplement) u <- rbind(u, supplementation_rows(x))
+  if (! isFALSE(supplementary)) u <- rbind(u, supplementation_rows(x))
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     i <- recover_inertia(x)
@@ -89,9 +91,9 @@ get_rows <- function(x, .supplement = TRUE) {
 
 #' @rdname accessors
 #' @export
-get_cols <- function(x, .supplement = TRUE) {
+get_cols <- function(x, supplementary = NA) {
   v <- recover_cols(x)
-  if (.supplement) v <- rbind(v, supplementation_cols(x))
+  if (! isFALSE(supplementary)) v <- rbind(v, supplementation_cols(x))
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     i <- recover_inertia(x)
@@ -105,14 +107,14 @@ get_cols <- function(x, .supplement = TRUE) {
 
 #' @rdname accessors
 #' @export
-get_factor <- function(x, .matrix, .supplement = TRUE) {
+get_factor <- function(x, .matrix, supplementary = NA) {
   switch(
     match_factor(.matrix),
-    rows = get_rows(x, .supplement = .supplement),
-    cols = get_cols(x, .supplement = .supplement),
+    rows = get_rows(x, supplementary = supplementary),
+    cols = get_cols(x, supplementary = supplementary),
     dims = list(
-      rows = get_rows(x, .supplement = .supplement),
-      cols = get_cols(x, .supplement = .supplement)
+      rows = get_rows(x, supplementary = supplementary),
+      cols = get_cols(x, supplementary = supplementary)
     )
   )
 }
@@ -120,12 +122,12 @@ get_factor <- function(x, .matrix, .supplement = TRUE) {
 #' @rdname accessors
 #' @export
 as.matrix.tbl_ord <- function(
-  x, ..., .matrix, .supplement = TRUE
+  x, ..., .matrix, supplementary = NA
 ) {
   .matrix <- match_factor(.matrix)
   if (.matrix == "dims")
     stop("Can only coerce one factor ('rows' or 'cols') to a matrix.")
-  get_factor(x, .matrix = .matrix, .supplement = .supplement)
+  get_factor(x, .matrix = .matrix, supplementary = supplementary)
 }
 
 #' @rdname accessors

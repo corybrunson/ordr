@@ -75,6 +75,16 @@ setup_rows_data <- function(data, params) {
   data <-
     data[data$.matrix == "rows", -match(".matrix", names(data)), drop = FALSE]
   
+  # if specified, restrict to primary or supplementary elements
+  if (! is.null(params$supplementary) && ! is.na(params$supplementary)) {
+    data <- data[data$.supplement == params$supplementary, , drop = FALSE]
+    if (! is.null(params$subset)) {
+      message("`subset` will be applied after data are restricted to ",
+              if (params$supplementary) "supplementary" else "primary",
+              " elements.")
+    }
+  }
+  
   # by default, render elements for all rows
   if (! is.null(params$subset)) {
     if (is.numeric(params$subset)) {

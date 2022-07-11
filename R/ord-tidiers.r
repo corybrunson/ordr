@@ -45,8 +45,9 @@
 #' @param data Passed to generic methods; currently ignored.
 #' @param ... Additional arguments allowed by generics; currently ignored.
 #' @template param-matrix
-#' @param .supplement Logical; whether to include
-#'   [supplementary][supplementation] points.
+#' @param supplementary Logical; whether to restrict to primary (`FALSE`) or
+#'   [supplementary][supplementation] (`TRUE`) elements. Defaults to `NA`, which
+#'   makes no restriction.
 #' @seealso [augmentation] methods that must interface with tidiers.
 NULL
 
@@ -93,14 +94,14 @@ glance.tbl_ord <- function(x, ...) {
 #' @export
 fortify.tbl_ord <- function(
   model, data, ...,
-  .matrix = "dims", .supplement = TRUE
+  .matrix = "dims", supplementary = NA
 ) {
   .matrix <- match_factor(.matrix)
   
   if (.matrix == "dims" || .matrix == "rows") {
     u <- as_tibble(get_rows(model))
     u <- dplyr::bind_cols(u, annotation_factor(model, "rows"))
-    if (! .supplement && ".supplement" %in% names(u)) {
+    if (isFALSE(supplementary) && ".supplement" %in% names(u)) {
       u <- subset(u, ! .supplement)
       u$.supplement <- NULL
     }
@@ -109,7 +110,7 @@ fortify.tbl_ord <- function(
   if (.matrix == "dims" || .matrix == "cols") {
     v <- as_tibble(get_cols(model))
     v <- dplyr::bind_cols(v, annotation_factor(model, "cols"))
-    if (! .supplement && ".supplement" %in% names(v)) {
+    if (isFALSE(supplementary) && ".supplement" %in% names(v)) {
       v <- subset(v, ! .supplement)
       v$.supplement <- NULL
     }

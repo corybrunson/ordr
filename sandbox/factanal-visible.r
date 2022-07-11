@@ -245,7 +245,13 @@ fa$correlation - (fa$loadings %*% t(fa$loadings) + diag(fa$uniquenesses))
 # https://stackoverflow.com/q/25337134/4556798
 
 data(bfi, package = "psych")
-X <- tidyr::drop_na(bfi[seq(100), 16:25])
+bfi %>%
+  dplyr::slice(seq(120L)) %>%
+  dplyr::select(16:25, gender, education, age) %>%
+  dplyr::filter(dplyr::if_all(1:10, ~ ! is.na(.))) ->
+  bfi_sub
+X <- dplyr::select(bfi_sub, -gender, -education, -age)
+Z <- dplyr::select(bfi_sub, gender, education, age)
 
 fa1 <- factanal(X, 2L, scores = "regression", rotation = "none")
 
@@ -308,11 +314,25 @@ head(fa1$scores) %*% diag(1 / apply(fa1$loadings, 2, norm, "2"))
 cmat <- cv
 start <- (1 - 0.5 * 2L/ncol(cv))/diag(solve(cv))
 
+
 fa1 %>%
   as_tbl_ord() %>%
   augment_ord() %>%
   ggbiplot(sec.axes = "rows", scale.factor = 1/3) +
-  geom_rows_point() +
+  geom_rows_point(supplementary = TRUE) +
+  scale_alpha_manual(values = c(0, 1), guide = "none") +
+  geom_cols_vector(arrow = NULL) +
+  geom_cols_text(aes(label = .name))
+
+fa1 %>%
+  as_tbl_ord() %>%
+  augment_ord() %>%
+  confer_inertia("rows") %>%
+  # -+- need syntax to bind to only primary or supplementary points -+-
+  cbind_rows(dplyr::bind_rows(ordr:::tibble_pole(10L), Z)) %>%
+  ggbiplot() +
+  geom_rows_point(aes(shape = factor(gender), color = age)) +
+  scale_alpha_manual(values = c(0, 1), guide = "none") +
   geom_unit_circle() +
   geom_cols_vector(arrow = NULL) +
   geom_cols_text(aes(label = .name))

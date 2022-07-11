@@ -24,7 +24,7 @@
 stat_rows <- function(
   mapping = NULL, data = data,
   geom = "point", position = "identity",
-  subset = NULL,
+  subset = NULL, supplementary = NA,
   ...,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -37,7 +37,7 @@ stat_rows <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset,
+      subset = subset, supplementary = supplementary,
       na.rm = FALSE,
       ...
     )
@@ -49,7 +49,7 @@ stat_rows <- function(
 stat_cols <- function(
   mapping = NULL, data = data,
   geom = "axis", position = "identity",
-  subset = NULL,
+  subset = NULL, supplementary = NA,
   ...,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -62,7 +62,7 @@ stat_cols <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset,
+      subset = subset, supplementary = supplementary,
       na.rm = FALSE,
       ...
     )
@@ -79,7 +79,7 @@ StatRows <- ggproto(
   setup_data = setup_rows_data,
   
   compute_group = function(data, scales,
-                           subset = NULL) {
+                           subset = NULL, supplementary = NA) {
     data
   }
 )
@@ -94,7 +94,7 @@ StatCols <- ggproto(
   setup_data = setup_cols_data,
   
   compute_group = function(data, scales,
-                           subset = NULL) {
+                           subset = NULL, supplementary = NA) {
     data
   }
 )
