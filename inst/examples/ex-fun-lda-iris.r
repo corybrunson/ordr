@@ -6,7 +6,7 @@ iris_lda <- lda_ord(iris[, 1:4], iris[, 5], axes.scale = "unstandardized")
 # linear combinations of centered variables
 print(sweep(iris_lda$means, 2, iris_centroid, "-") %*% get_cols(iris_lda))
 # discriminant centroids
-print(get_rows(iris_lda, supplementary = FALSE))
+print(get_rows(iris_lda, elements = "active"))
 # unstandardized coefficient LDA biplot
 iris_lda %>%
   as_tbl_ord() %>%
@@ -67,7 +67,7 @@ C_W_eig <- eigen(cov(iris[, 1:4] - iris_lda$means[iris[, 5], ]))
 C_W_sqrtinv <-
   C_W_eig$vectors %*% diag(1/sqrt(C_W_eig$values)) %*% t(C_W_eig$vectors)
 # product of matrix factors (scores and loadings)
-print(get_rows(iris_lda, supplementary = FALSE) %*% t(get_cols(iris_lda)))
+print(get_rows(iris_lda, elements = "active") %*% t(get_cols(iris_lda)))
 # "asymmetric" square roots of Mahalanobis distances between variables
 print(sweep(iris_lda$means, 2, iris_centroid, "-") %*% C_W_sqrtinv)
 # contribution LDA biplot

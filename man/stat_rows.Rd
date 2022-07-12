@@ -11,7 +11,7 @@ stat_rows(
   geom = "point",
   position = "identity",
   subset = NULL,
-  supplementary = NA,
+  elements = "all",
   ...,
   show.legend = NA,
   inherit.aes = TRUE
@@ -23,7 +23,7 @@ stat_cols(
   geom = "axis",
   position = "identity",
   subset = NULL,
-  supplementary = NA,
+  elements = "all",
   ...,
   show.legend = NA,
   inherit.aes = TRUE
@@ -62,9 +62,9 @@ rows or columns for which to render graphical elements. NB: Internally, the
 possible to pass a formula to the \code{data} parameter, but it will act on the
 fortified data \emph{before} it has been restricted to one matrix factor.}
 
-\item{supplementary}{Logical; whether to restrict to primary (\code{FALSE}) or
-\link[=supplementation]{supplementary} (\code{TRUE}) elements. Defaults to \code{NA}, which
-makes no restriction.}
+\item{elements}{Character; which elements of each factor for which to render
+graphical elements. One of \code{"all"} (the default), \code{"active"}, or
+\code{"supplementary"}, with partial matching.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 

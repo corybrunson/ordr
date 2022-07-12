@@ -18,9 +18,9 @@
 #' @param var A variable specified as in [dplyr::pull()].
 #' @param ... Comma-separated unquoted expressions as in, e.g.,
 #'   [dplyr::select()].
-#' @param supplementary Logical; whether to restrict to primary (`FALSE`) or
-#'   [supplementary][supplementation] (`TRUE`) elements. Defaults to `NA`, which
-#'   makes no restriction.
+#' @param elements Character; which elements of each factor to which to bind new
+#'   annotation data. One of `"all"` (the default), `"active"`, or
+#'   `"supplementary"`, with partial matching.
 #' @template param-matrix
 
 pull_factor <- function(.data, var = -1, .matrix) {
@@ -105,15 +105,15 @@ transmute_cols <- function(.data, ...) {
   transmute_factor(.data, ..., .matrix = "cols")
 }
 
-cbind_factor <- function(.data, ..., .matrix, supplementary = NA) {
+cbind_factor <- function(.data, ..., .matrix, elements = "all") {
   ann_fac <- annotation_factor(.data, .matrix = .matrix)
-  att_fac <- if (is.na(supplementary) || ! ".supplement" %in% names(.data)) {
+  att_fac <- if (elements == "all" || ! ".supplement" %in% names(.data)) {
     tibble(...)
-  } else if (supplementary) {
+  } else if (elements == "supplementary") {
     n_p <- nrow(.data[.data$.matrix == .matrix & .data$.supplement == FALSE,
                       , drop = FALSE])
     bind_rows(tibble_pole(nrow = n_p), ...)
-  } else if (! supplementary) {
+  } else if (elements == "active") {
     n_s <- nrow(.data[.data$.matrix == .matrix & .data$.supplement == TRUE,
                       , drop = FALSE])
     bind_rows(..., tibble_pole(nrow = n_s))
@@ -123,13 +123,13 @@ cbind_factor <- function(.data, ..., .matrix, supplementary = NA) {
 }
 #' @rdname dplyr-verbs
 #' @export
-cbind_rows <- function(.data, ..., supplementary = NA) {
-  cbind_factor(.data, ..., .matrix = "rows", supplementary = NA)
+cbind_rows <- function(.data, ..., elements = "all") {
+  cbind_factor(.data, ..., .matrix = "rows", elements = "all")
 }
 #' @rdname dplyr-verbs
 #' @export
-cbind_cols <- function(.data, ..., supplementary = NA) {
-  cbind_factor(.data, ..., .matrix = "cols", supplementary = NA)
+cbind_cols <- function(.data, ..., elements = "all") {
+  cbind_factor(.data, ..., .matrix = "cols", elements = "all")
 }
 
 left_join_factor <- function(.data, ..., .matrix) {

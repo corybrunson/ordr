@@ -11,8 +11,8 @@ savings_cancor <- candisc::cancor(
 # summarize ordination
 glance(savings_cancor)
 # recover canonical weights
-get_rows(savings_cancor, supplementary = FALSE)
-get_cols(savings_cancor, supplementary = FALSE)
+get_rows(savings_cancor, elements = "active")
+get_cols(savings_cancor, elements = "active")
 head(get_rows(savings_cancor))
 head(get_cols(savings_cancor))
 # augment canonical weights with row names and centers
@@ -29,7 +29,7 @@ fortify(savings_cancor)
 # row-standard biplot of structure correlations
 savings_cancor %>%
   confer_inertia("cols") %>%
-  ggbiplot(aes(label = .name, color = .matrix), supplementary = FALSE) +
+  ggbiplot(aes(label = .name, color = .matrix), elements = "active") +
   theme_bw() +
   geom_origin() +
   geom_unit_circle(linetype = "dotted") +
@@ -42,7 +42,7 @@ savings_cancor %>%
 # column-standard biplot of structure correlations
 savings_cancor %>%
   confer_inertia("rows") %>%
-  ggbiplot(aes(label = .name, color = .matrix), supplementary = FALSE) +
+  ggbiplot(aes(label = .name, color = .matrix), elements = "active") +
   theme_bw() +
   geom_origin() +
   geom_unit_circle(linetype = "dotted") +
@@ -55,7 +55,7 @@ savings_cancor %>%
 # symmetric biplot of structure correlations
 savings_cancor %>%
   confer_inertia("symmetric") %>%
-  ggbiplot(aes(label = .name, color = .matrix), supplementary = FALSE) +
+  ggbiplot(aes(label = .name, color = .matrix), elements = "active") +
   theme_bw() +
   geom_origin() +
   geom_unit_circle(linetype = "dotted") +

@@ -86,7 +86,7 @@ lda_ord(iris[, 1:4], iris[, 5]) \%>\%
 # summarize ordination
 glance(iris_lda)
 # recover centroid coordinates and measurement discriminant coefficients
-get_rows(iris_lda, supplementary = FALSE)
+get_rows(iris_lda, elements = "active")
 get_cols(iris_lda)
 # augment ordination with centroid and measurement names
 augment_ord(iris_lda)
@@ -99,12 +99,12 @@ ggplot(tidy(iris_lda), aes(x = .name, y = .prop_var)) +
   geom_col() +
   labs(x = "", y = "Proportion of inertia")
 # fortification (without supplement)
-fortify(iris_lda, supplementary = FALSE)
+fortify(iris_lda, elements = "active")
 # unstandardized coefficient LDA biplot (centroids only)
 iris_lda \%>\%
   augment_ord() \%>\%
   mutate_rows(species = .grouping) \%>\%
-  ggbiplot(supplementary = FALSE) +
+  ggbiplot(elements = "active") +
   theme_bw() +
   geom_rows_point(aes(color = .grouping), size = 3) +
   geom_cols_vector(color = "#888888") +

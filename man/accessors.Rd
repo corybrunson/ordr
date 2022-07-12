@@ -39,13 +39,13 @@ recover_factor(x, .matrix)
 
 \method{recover_cols}{data.frame}(x)
 
-get_rows(x, supplementary = NA)
+get_rows(x, elements = "all")
 
-get_cols(x, supplementary = NA)
+get_cols(x, elements = "all")
 
-get_factor(x, .matrix, supplementary = NA)
+get_factor(x, .matrix, elements = "all")
 
-\method{as.matrix}{tbl_ord}(x, ..., .matrix, supplementary = NA)
+\method{as.matrix}{tbl_ord}(x, ..., .matrix, elements = "all")
 
 recover_inertia(x)
 
@@ -74,9 +74,9 @@ dim_factor(x, .matrix)
 or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 
-\item{supplementary}{Logical; whether to restrict to primary (\code{FALSE}) or
-\link[=supplementation]{supplementary} (\code{TRUE}) elements. Defaults to \code{NA}, which
-makes no restriction.}
+\item{elements}{Character; which elements of each factor for which to render
+graphical elements. One of \code{"all"} (the default), \code{"active"}, or
+\code{"supplementary"}, with partial matching.}
 
 \item{...}{Additional arguments from \code{\link[base:matrix]{base::as.matrix()}}; ignored.}
 }

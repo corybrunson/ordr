@@ -15,9 +15,9 @@
 #'   'tbl_ord' comprising rows from only one of the matrix factors. It is still
 #'   possible to pass a formula to the `data` parameter, but it will act on the
 #'   fortified data _before_ it has been restricted to one matrix factor.
-#' @param supplementary Logical; whether to restrict to primary (`FALSE`) or
-#'   [supplementary][supplementation] (`TRUE`) elements. Defaults to `NA`, which
-#'   makes no restriction.
+#' @param elements Character; which elements of each factor for which to render
+#'   graphical elements. One of `"all"` (the default), `"active"`, or
+#'   `"supplementary"`, with partial matching.
 #'
 #' @template param-stat
 #' @family biplot layers
@@ -27,7 +27,7 @@
 stat_rows <- function(
   mapping = NULL, data = data,
   geom = "point", position = "identity",
-  subset = NULL, supplementary = NA,
+  subset = NULL, elements = "all",
   ...,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -40,7 +40,7 @@ stat_rows <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset, supplementary = supplementary,
+      subset = subset, elements = elements,
       na.rm = FALSE,
       ...
     )
@@ -52,7 +52,7 @@ stat_rows <- function(
 stat_cols <- function(
   mapping = NULL, data = data,
   geom = "axis", position = "identity",
-  subset = NULL, supplementary = NA,
+  subset = NULL, elements = "all",
   ...,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -65,7 +65,7 @@ stat_cols <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset, supplementary = supplementary,
+      subset = subset, elements = elements,
       na.rm = FALSE,
       ...
     )
@@ -82,7 +82,7 @@ StatRows <- ggproto(
   setup_data = setup_rows_data,
   
   compute_group = function(data, scales,
-                           subset = NULL, supplementary = NA) {
+                           subset = NULL, elements = "all") {
     data
   }
 )
@@ -97,7 +97,7 @@ StatCols <- ggproto(
   setup_data = setup_cols_data,
   
   compute_group = function(data, scales,
-                           subset = NULL, supplementary = NA) {
+                           subset = NULL, elements = "all") {
     data
   }
 )

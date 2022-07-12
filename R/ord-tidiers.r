@@ -45,9 +45,9 @@
 #' @param data Passed to generic methods; currently ignored.
 #' @param ... Additional arguments allowed by generics; currently ignored.
 #' @template param-matrix
-#' @param supplementary Logical; whether to restrict to primary (`FALSE`) or
-#'   [supplementary][supplementation] (`TRUE`) elements. Defaults to `NA`, which
-#'   makes no restriction.
+#' @param elements Character; which elements of each factor for which to render
+#'   graphical elements. One of `"all"` (the default), `"active"`, or
+#'   `"supplementary"`, with partial matching.
 #' @seealso [augmentation] methods that must interface with tidiers.
 NULL
 
@@ -94,15 +94,20 @@ glance.tbl_ord <- function(x, ...) {
 #' @export
 fortify.tbl_ord <- function(
   model, data, ...,
-  .matrix = "dims", supplementary = NA
+  .matrix = "dims", elements = "all"
 ) {
   .matrix <- match_factor(.matrix)
+  elements <- match.arg(elements, c("all", "active", "supplementary"))
   
   if (.matrix == "dims" || .matrix == "rows") {
     u <- as_tibble(get_rows(model))
     u <- dplyr::bind_cols(u, annotation_factor(model, "rows"))
-    if (isFALSE(supplementary) && ".supplement" %in% names(u)) {
-      u <- u[! u$.supplement, , drop = FALSE]
+    if (elements != "all" && ".supplement" %in% names(u)) {
+      u <- switch(
+        elements,
+        active = u[! u$.supplement, , drop = FALSE],
+        supplementary = u[u$.supplement, , drop = FALSE]
+      )
       u$.supplement <- NULL
     }
     u$.matrix <- "rows"
@@ -110,8 +115,12 @@ fortify.tbl_ord <- function(
   if (.matrix == "dims" || .matrix == "cols") {
     v <- as_tibble(get_cols(model))
     v <- dplyr::bind_cols(v, annotation_factor(model, "cols"))
-    if (isFALSE(supplementary) && ".supplement" %in% names(v)) {
-      v <- v[! v$.supplement, , drop = FALSE]
+    if (elements != "all" && ".supplement" %in% names(v)) {
+      v <- switch(
+        elements,
+        active = v[! v$.supplement, , drop = FALSE],
+        supplementary = v[v$.supplement, , drop = FALSE]
+      )
       v$.supplement <- NULL
     }
     v$.matrix <- "cols"
