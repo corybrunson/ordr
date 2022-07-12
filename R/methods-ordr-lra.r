@@ -16,36 +16,24 @@ NULL
 #' @export
 as_tbl_ord.lra <- as_tbl_ord_default
 
-#' @rdname methods-lra
-#' @export
 recover_rows.lra <- function(x) {
   x[["row.coords"]]
 }
 
-#' @rdname methods-lra
-#' @export
 recover_cols.lra <- function(x) {
   x[["column.coords"]]
 }
 
-#' @rdname methods-lra
-#' @export
 recover_inertia.lra <- function(x) x[["sv"]] ^ 2
 
-#' @rdname methods-lra
-#' @export
 recover_coord.lra <- function(x) {
   colnames(x[["row.coords"]])
 }
 
-#' @rdname methods-lra
-#' @export
 recover_conference.lra <- function(x) {
   c(0, 0)
 }
 
-#' @rdname methods-lra
-#' @export
 augmentation_rows.lra <- function(x) {
   .name <- rownames(x[["row.coords"]])
   if (is.null(.name)) {
@@ -55,8 +43,6 @@ augmentation_rows.lra <- function(x) {
   }
 }
 
-#' @rdname methods-lra
-#' @export
 augmentation_cols.lra <- function(x) {
   .name <- rownames(x[["column.coords"]])
   if (is.null(.name)) {
@@ -66,8 +52,6 @@ augmentation_cols.lra <- function(x) {
   }
 }
 
-#' @rdname methods-lra
-#' @export
 augmentation_coord.lra <- function(x) {
   tibble(.name = factor_coord(recover_coord(x)))
 }

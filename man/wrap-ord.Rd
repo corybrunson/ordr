@@ -54,6 +54,7 @@ The following table summarizes the wrapped functions:\tabular{llll}{
 }
 }
 \examples{
+# glass composition data from one furnace
 glass_banias <- subset(
   glass,
   Context == "L.15;B.166",

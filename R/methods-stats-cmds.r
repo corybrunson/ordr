@@ -26,31 +26,19 @@ recover_dims_cmds <- function(x, .matrix) {
   res
 }
 
-#' @rdname methods-cmds
-#' @export
 recover_rows.cmds_ord <- function(x) recover_dims_cmds(x, "rows")
 
-#' @rdname methods-cmds
-#' @export
 recover_cols.cmds_ord <- function(x) recover_dims_cmds(x, "cols")
 
-#' @rdname methods-cmds
-#' @export
 recover_inertia.cmds_ord <- function(x) x$eig[seq(ncol(x$points))] ^ 2
 
-#' @rdname methods-cmds
-#' @export
 recover_coord.cmds_ord <- function(x) paste0("PCo", 1:ncol(x$points))
 
-#' @rdname methods-cmds
-#' @export
 recover_conference.cmds_ord <- function(x) {
   # `stats::cmdscale()` returns the approximate square root
   c(.5, .5)
 }
 
-#' @rdname methods-cmds
-#' @export
 augmentation_rows.cmds_ord <- function(x) {
   .name <- rownames(x$points)
   res <- if (is.null(.name)) {
@@ -61,8 +49,6 @@ augmentation_rows.cmds_ord <- function(x) {
   res
 }
 
-#' @rdname methods-cmds
-#' @export
 augmentation_cols.cmds_ord <- function(x) {
   .name <- rownames(x$points)
   res <- if (is.null(.name)) {
@@ -73,8 +59,6 @@ augmentation_cols.cmds_ord <- function(x) {
   res
 }
 
-#' @rdname methods-cmds
-#' @export
 augmentation_coord.cmds_ord <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),

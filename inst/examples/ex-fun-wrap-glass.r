@@ -1,3 +1,4 @@
+# glass composition data from one furnace
 glass_banias <- subset(
   glass,
   Context == "L.15;B.166",

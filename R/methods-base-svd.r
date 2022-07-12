@@ -14,31 +14,19 @@ NULL
 #' @export
 as_tbl_ord.svd_ord <- as_tbl_ord_default
 
-#' @rdname methods-svd
-#' @export
 recover_rows.svd_ord <- function(x) x[["u"]]
 
-#' @rdname methods-svd
-#' @export
 recover_cols.svd_ord <- function(x) x[["v"]]
 
-#' @rdname methods-svd
-#' @export
 recover_inertia.svd_ord <- function(x) x[["d"]]^2
 
-#' @rdname methods-svd
-#' @export
 recover_coord.svd_ord <- function(x) colnames(x[["u"]])
 
-#' @rdname methods-svd
-#' @export
 recover_conference.svd_ord <- function(x) {
   # `base::svd()` returns rotation matrices
   c(0, 0)
 }
 
-#' @rdname methods-svd
-#' @export
 augmentation_rows.svd_ord <- function(x) {
   .name <- rownames(x[["u"]])
   if (is.null(.name)) {
@@ -48,8 +36,6 @@ augmentation_rows.svd_ord <- function(x) {
   }
 }
 
-#' @rdname methods-svd
-#' @export
 augmentation_cols.svd_ord <- function(x) {
   .name <- rownames(x[["v"]])
   if (is.null(.name)) {
@@ -59,8 +45,6 @@ augmentation_cols.svd_ord <- function(x) {
   }
 }
 
-#' @rdname methods-svd
-#' @export
 augmentation_coord.svd_ord <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),

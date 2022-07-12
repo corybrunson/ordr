@@ -35,39 +35,27 @@ NULL
 #' @export
 as_tbl_ord.cancor <- as_tbl_ord_default
 
-#' @rdname methods-cancor
-#' @export
 recover_rows.cancor <- function(x) {
   res <- x$structure$X.xscores
   colnames(res) <- recover_coord(x)
   res
 }
 
-#' @rdname methods-cancor
-#' @export
 recover_cols.cancor <- function(x) {
   res <- x$structure$Y.yscores
   colnames(res) <- recover_coord(x)
   res
 }
 
-#' @rdname methods-cancor
-#' @export
 recover_inertia.cancor <- function(x) x$cancor^2
 
-#' @rdname methods-cancor
-#' @export
 recover_coord.cancor <- function(x) paste0("can", seq_along(x$cancor))
 
-#' @rdname methods-cancor
-#' @export
 recover_conference.cancor <- function(x) {
   # `x$structure$*` are structure correlations; rows grab intraset ones
   c(0, 0)
 }
 
-#' @rdname methods-cancor
-#' @export
 augmentation_rows.cancor <- function(x) {
   .name <- x$names$X
   res <- if (is.null(.name)) {
@@ -88,8 +76,6 @@ augmentation_rows.cancor <- function(x) {
   as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
-#' @rdname methods-cancor
-#' @export
 augmentation_cols.cancor <- function(x) {
   .name <- x$names$Y
   res <- if (is.null(.name)) {
@@ -110,8 +96,6 @@ augmentation_cols.cancor <- function(x) {
   as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
-#' @rdname methods-cancor
-#' @export
 augmentation_coord.cancor <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),
@@ -119,10 +103,6 @@ augmentation_coord.cancor <- function(x) {
   )
 }
 
-#' @rdname methods-cancor
-#' @export
 supplementation_rows.cancor <- function(x) x$scores$X
 
-#' @rdname methods-cancor
-#' @export
 supplementation_cols.cancor <- function(x) x$scores$Y

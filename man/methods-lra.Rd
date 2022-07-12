@@ -3,33 +3,9 @@
 \name{methods-lra}
 \alias{methods-lra}
 \alias{as_tbl_ord.lra}
-\alias{recover_rows.lra}
-\alias{recover_cols.lra}
-\alias{recover_inertia.lra}
-\alias{recover_coord.lra}
-\alias{recover_conference.lra}
-\alias{augmentation_rows.lra}
-\alias{augmentation_cols.lra}
-\alias{augmentation_coord.lra}
 \title{Functionality for log-ratio analysis ('lra') objects}
 \usage{
 \method{as_tbl_ord}{lra}(x)
-
-\method{recover_rows}{lra}(x)
-
-\method{recover_cols}{lra}(x)
-
-\method{recover_inertia}{lra}(x)
-
-\method{recover_coord}{lra}(x)
-
-\method{recover_conference}{lra}(x)
-
-\method{augmentation_rows}{lra}(x)
-
-\method{augmentation_cols}{lra}(x)
-
-\method{augmentation_coord}{lra}(x)
 }
 \arguments{
 \item{x}{An ordination object.}

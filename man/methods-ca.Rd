@@ -3,33 +3,9 @@
 \name{methods-ca}
 \alias{methods-ca}
 \alias{as_tbl_ord.ca}
-\alias{recover_rows.ca}
-\alias{recover_cols.ca}
-\alias{recover_inertia.ca}
-\alias{recover_conference.ca}
-\alias{recover_coord.ca}
-\alias{augmentation_rows.ca}
-\alias{augmentation_cols.ca}
-\alias{augmentation_coord.ca}
 \title{Functionality for correspondence analysis ('ca') objects}
 \usage{
 \method{as_tbl_ord}{ca}(x)
-
-\method{recover_rows}{ca}(x)
-
-\method{recover_cols}{ca}(x)
-
-\method{recover_inertia}{ca}(x)
-
-\method{recover_conference}{ca}(x)
-
-\method{recover_coord}{ca}(x)
-
-\method{augmentation_rows}{ca}(x)
-
-\method{augmentation_cols}{ca}(x)
-
-\method{augmentation_coord}{ca}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
