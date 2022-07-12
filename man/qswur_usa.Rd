@@ -4,7 +4,22 @@
 \alias{qswur_usa}
 \title{U.S. university rankings}
 \format{
-A \link[tibble:tibble]{tibble}.
+A \link[tibble:tibble]{tibble} of 13 variables on 612 cases:
+\describe{
+\item{year}{year of rankings}
+\item{institution}{institution of higher learning}
+\item{size}{size category of institution}
+\item{focus}{subject range of institution}
+\item{res}{research intensity of institution}
+\item{age}{age classification of institution}
+\item{status}{status of institution}
+\item{rk_academic}{rank by academic reputation}
+\item{rk_employer}{rank by employer reputation}
+\item{rk_ratio}{rank by faculty--student ratio}
+\item{rk_citations}{rank by citations per faculty}
+\item{rk_intl_faculty}{rank by international faculty ratio}
+\item{rk_intl_students}{rank by international student ratio}
+}
 }
 \source{
 Quacquarelli Symonds (2021).
@@ -18,6 +33,21 @@ Classifications and rankings of U.S. universities for the years
 }
 \details{
 Ranking data were obtained from the public QS website.
+}
+\examples{
+# subset QS data to rank variables
+head(qswur_usa)
+qs_ranks <- subset(
+  qswur_usa,
+  complete.cases(qswur_usa),
+  select = 8:13
+)
+# calculate Kendall correlation matrix
+qs_cor <- cor(qs_ranks, method = "kendall")
+# calculate eigendecomposition
+qs_eigen <- eigen_ord(qs_cor)
+# view correlations as cosines of biplot vectors
+biplot(x = qs_eigen$vectors, y = qs_eigen$vectors, col = c(NA, "black"))
 }
 \references{
 Quacquarelli Symonds (2021) "University Rankings". TopUniversities.com
