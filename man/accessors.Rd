@@ -2,43 +2,18 @@
 % Please edit documentation in R/ord-accessors.r
 \name{accessors}
 \alias{accessors}
-\alias{recover_rows}
-\alias{recover_cols}
-\alias{recover_factor}
-\alias{recover_rows.default}
-\alias{recover_cols.default}
-\alias{recover_rows.data.frame}
-\alias{recover_cols.data.frame}
 \alias{get_rows}
 \alias{get_cols}
 \alias{get_factor}
 \alias{as.matrix.tbl_ord}
-\alias{recover_inertia}
-\alias{recover_inertia.default}
-\alias{recover_coord}
-\alias{recover_coord.default}
-\alias{recover_coord.data.frame}
 \alias{get_coord}
+\alias{get_inertia}
 \alias{dim.tbl_ord}
 \alias{dim_rows}
 \alias{dim_cols}
 \alias{dim_factor}
 \title{Access factors, coordinates, and metadata from ordination objects}
 \usage{
-recover_rows(x)
-
-recover_cols(x)
-
-recover_factor(x, .matrix)
-
-\method{recover_rows}{default}(x)
-
-\method{recover_cols}{default}(x)
-
-\method{recover_rows}{data.frame}(x)
-
-\method{recover_cols}{data.frame}(x)
-
 get_rows(x, elements = "all")
 
 get_cols(x, elements = "all")
@@ -47,17 +22,9 @@ get_factor(x, .matrix, elements = "all")
 
 \method{as.matrix}{tbl_ord}(x, ..., .matrix, elements = "all")
 
-recover_inertia(x)
-
-\method{recover_inertia}{default}(x)
-
-recover_coord(x)
-
-\method{recover_coord}{default}(x)
-
-\method{recover_coord}{data.frame}(x)
-
 get_coord(x)
+
+get_inertia(x)
 
 \method{dim}{tbl_ord}(x)
 
@@ -70,13 +37,13 @@ dim_factor(x, .matrix)
 \arguments{
 \item{x}{An object of class '\link{tbl_ord}'.}
 
-\item{.matrix}{A character string matching one of several indicators for one
-or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
-
 \item{elements}{Character; which elements of each factor for which to render
 graphical elements. One of \code{"all"} (the default), \code{"active"}, or
 \code{"supplementary"}, with partial matching.}
+
+\item{.matrix}{A character string matching one of several indicators for one
+or both matrices in a matrix decomposition used for ordination. The
+standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 
 \item{...}{Additional arguments from \code{\link[base:matrix]{base::as.matrix()}}; ignored.}
 }
@@ -85,16 +52,17 @@ These functions return information about the matrix
 factorization underlying an ordination.
 }
 \details{
-The \verb{recover_*()} functions extract one or both of the row and column matrix
-factors that constitute the original ordination. These are interpreted as the
-case scores (rows) and the variable loadings (columns). The \verb{get_*()}
-functions optionally (and by default) include any supplemental observations
-(see \link{supplementation}). Only the \verb{recover_*()} functions are generics that
-require methods for each ordination class.
+The unexported \verb{recover_*()} functions extract one or both of the row and
+column matrix factors that constitute the original ordination. These are
+interpreted as the case scores (rows) and the variable loadings (columns).
+The \verb{get_*()} functions optionally (and by default) include any supplemental
+observations (see \link{supplementation}). The \verb{recover_*()} functions are
+generics that require methods for each ordination class.
 
 \code{get_coord()} retrieves the names of the coordinates shared by the matrix
-factors on which the original data were ordinated, and \code{dim()} retrieves
-their number, the rank of the ordination. The outer dimensions of the matrix
+factors on which the original data were ordinated, and \code{get_inertia()}
+retrieves a vector of the inertia with these names. \code{dim()} retrieves their
+number, the rank of the ordination. The outer dimensions of the matrix
 decomposition are returned by \code{dim_rows()} and \code{dim_cols()}.
 }
 \examples{
@@ -108,6 +76,8 @@ get_rows(arrests_lra)
 get_cols(arrests_lra)
 # get names of artificial / latent coordinates
 get_coord(arrests_lra)
+# get distribution of inertia
+get_inertia(arrests_lra)
 # get dimensions of underlying matrix factorization (not of original data)
 dim(arrests_lra)
 }

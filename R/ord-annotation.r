@@ -4,21 +4,18 @@
 #'   additional variables, and retrieve these annotations.
 #'   
 
-#' The `annotation_*()` and `set_annotation_*()` functions assign and retrieve
-#' values of the `"*_annotation"` attributes of `x`, which should have the same
-#' number of rows as `get_*(x)`.
+#' The unexported `annotation_*()` and `set_annotation_*()` functions assign and
+#' retrieve values of the `"*_annotation"` attributes of `x`, which must have
+#' the same number of rows as `get_*(x)`.
 #' 
 
 #' @name annotation
 #' @include ord-augmentation.r
-#' @inheritParams accessors
 #' @param annot A [data.frame][base::data.frame] having the same number of rows
 #'   as `get_*(x)`.
 #' @seealso [augmentation] methods that must interface with annotation.
 NULL
 
-#' @rdname annotation
-#' @export
 set_annotation_rows <- function(x, annot) {
   stopifnot(is.data.frame(annot))
   protect_vars <- c(get_coord(x), ".matrix")
@@ -26,8 +23,6 @@ set_annotation_rows <- function(x, annot) {
   x
 }
 
-#' @rdname annotation
-#' @export
 set_annotation_cols <- function(x, annot) {
   stopifnot(is.data.frame(annot))
   protect_vars <- c(get_coord(x), ".matrix")
@@ -43,8 +38,6 @@ set_annotation_factor <- function(x, annot, .matrix) {
   )
 }
 
-#' @rdname annotation
-#' @export
 annotation_rows <- function(x) {
   if (is.null(attr(x, "rows_annotation"))) {
     tibble_pole(nrow(get_rows(x)))
@@ -53,8 +46,6 @@ annotation_rows <- function(x) {
   }
 }
 
-#' @rdname annotation
-#' @export
 annotation_cols <- function(x) {
   if (is.null(attr(x, "cols_annotation"))) {
     tibble_pole(nrow(get_cols(x)))

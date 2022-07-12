@@ -8,5 +8,7 @@ get_rows(arrests_lra)
 get_cols(arrests_lra)
 # get names of artificial / latent coordinates
 get_coord(arrests_lra)
+# get distribution of inertia
+get_inertia(arrests_lra)
 # get dimensions of underlying matrix factorization (not of original data)
 dim(arrests_lra)
