@@ -19,12 +19,15 @@
 #' @inheritParams ggplot2::layer
 #' @template param-geom
 #' @param segments The number of segments to be used in drawing the circle.
+#' @param scale.factor The circle radius; should remain at its default value 1
+#'   or passed the same value as [ggbiplot()]. (This is an imperfect fix that
+#'   may be changed in a future version.)
 #' @family geom layers
 #' @example inst/examples/ex-geom-unit-circle.r
 #' @export
 geom_unit_circle <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  segments = 60,
+  segments = 60, scale.factor = 1,
   ...,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -39,7 +42,7 @@ geom_unit_circle <- function(
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      segments = segments,
+      segments = segments, scale.factor = scale.factor,
       ...
     )
   )
@@ -64,7 +67,7 @@ GeomUnitCircle <- ggproto(
   
   draw_panel = function(
     data, panel_params, coord,
-    segments = 60
+    segments = 60, scale.factor = 1
   ) {
     # check that data has been set up
     if (nrow(data) != 1L) stop("Constant-valued data has more than one row.")
@@ -74,7 +77,11 @@ GeomUnitCircle <- ggproto(
     
     # unit circle as a path
     angles <- (0:segments) * 2 * pi/segments
-    unit_circle <- data.frame(x = cos(angles), y = sin(angles), group = 1)
+    unit_circle <- data.frame(
+      x = cos(angles) * scale.factor,
+      y = sin(angles) * scale.factor,
+      group = 1
+    )
     
     # data frame of segments with aesthetics
     data <- cbind(unit_circle, data, row.names = NULL)
