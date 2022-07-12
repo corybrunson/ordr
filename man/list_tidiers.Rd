@@ -27,6 +27,8 @@ structure is detected, then the in-package tidiers \code{\link[=tidy_cmdscale]{t
 \code{\link[=glance_cmdscale]{glance_cmdscale()}} are called.
 }
 \seealso{
+\code{\link[generics:tidy]{generics::tidy()}} \code{\link[generics:glance]{generics::glance()}}
+
 Other list tidiers: 
 \code{\link{cmdscale_tidiers}}
 }

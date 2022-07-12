@@ -6,6 +6,7 @@
 #' @name methods-eigen
 #' @include ord-tbl.r
 #' @template param-methods
+#' @family methods for eigen-decomposition-based techniques
 #' @example inst/examples/ex-methods-eigen-karate.r
 NULL
 

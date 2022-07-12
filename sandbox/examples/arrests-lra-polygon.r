@@ -31,4 +31,4 @@ arrests_lra %>%
     "Log-ratio analysis of violent crime arrest rates",
     "United States, 1973"
   ) +
-  guides(color = FALSE, size = FALSE)
+  guides(color = "none", size = "none")

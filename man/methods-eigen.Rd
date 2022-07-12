@@ -60,13 +60,9 @@ karate \%>\%
     label = igraph::vertex_attr(karate, "label")
   ) \%>\%
   print() -> karate_eigen
-# summarize ordination
-glance(karate_eigen)
 # recover matrices of row and column coordinates
 get_rows(karate_eigen)[seq(8L), seq(5L)]
 get_cols(karate_eigen)[seq(8L), seq(5L)]
-# summarize eigenvectors
-tidy(karate_eigen)
 # validate eigencentrality calculations against igraph implementation
 tibble::tibble(
   eigen = karate_eigen$vectors[, 1L] / max(karate_eigen$vectors[, 1L]),
@@ -83,7 +79,7 @@ karate_eigen \%>\%
   theme_biplot() +
   geom_rows_vector(aes(color = as.factor(faction))) +
   geom_rows_text_radiate(aes(label = ifelse(grepl("H|A", label), label, NA))) +
-  guides(color = FALSE) +
+  guides(color = "none") +
   labs(x = "algebraic connectivity", y = "eigencentrality") +
   ggtitle(
     "First (centrality) and second (connectivity) eigenvectors",
@@ -99,3 +95,9 @@ karate_eigen \%>\%
   labs(x = "algebraic connectivity", y = "loading onto third eigenvector") +
   ggtitle("Second (connectivity) and third eigencentralities")
 }
+\seealso{
+Other methods for eigen-decomposition-based techniques: 
+\code{\link{methods-cmds}},
+\code{\link{methods-factanal}}
+}
+\concept{methods for eigen-decomposition-based techniques}

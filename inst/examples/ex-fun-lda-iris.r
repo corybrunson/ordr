@@ -32,6 +32,7 @@ iris_lda <- lda_ord(iris[, 1:4], iris[, 5], axes.scale = "standardized")
 # standardized variable contributions to discriminant axes
 iris_lda %>%
   as_tbl_ord() %>%
+  augment_ord() %>%
   fortify(.matrix = "cols") %>%
   dplyr::mutate(variable = .name) %>%
   tidyr::gather(discriminant, coefficient, LD1, LD2) %>%

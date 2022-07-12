@@ -29,6 +29,7 @@
 #'   inertia assigned to the cases, with the remainder `1 - p` assigned to the
 #'   variables. If length 2, the proportions of the inertia assigned to the
 #'   cases and to the variables, respectively.
+#' @example inst/examples/ex-ord-conference.r
 NULL
 
 attribute_conference <- function(x, p) {

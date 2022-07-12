@@ -29,7 +29,10 @@ used in the calculation.
 \item{...}{Additional arguments allowed by generics; currently ignored.}
 }
 \description{
-Tidy \code{cmdscale()} list output
+These tidiers handle the output of \code{cmdscale()}, which under
+certain conditions is effectively an S3 object without a class attribute.
+It allows \strong{ordr} to enhance the \link{list_tidiers} provided by
+\strong{\link[broom:broom]{broom}}.
 }
 \examples{
 # 'dist' object (matrix of road distances) of large American cities

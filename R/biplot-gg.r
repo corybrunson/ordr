@@ -58,8 +58,8 @@
 #'   factors.
 #' @param ... Additional arguments passed to [ggplot2::fortify()]; see
 #'   [fortify.tbl_ord()].
-#' @example inst/examples/ex-biplot-secaxis-iris.r
-#' @example inst/examples/ex-biplot-lm-mtcars.r
+#' @example inst/examples/ex-ggbiplot-secaxis-iris.r
+#' @example inst/examples/ex-ggbiplot-lm-mtcars.r
 #' @seealso [ggplot2::ggplot2()], on which `ggbiplot()` is built.
 
 #' @rdname ggbiplot

@@ -49,6 +49,7 @@
 #'   graphical elements. One of `"all"` (the default), `"active"`, or
 #'   `"supplementary"`, with partial matching.
 #' @seealso [augmentation] methods that must interface with tidiers.
+#' @example inst/examples/ex-ord-tidiers.r
 NULL
 
 #' @importFrom generics tidy
@@ -78,6 +79,7 @@ glance.tbl_ord <- function(x, ...) {
     # number of artificial coordinates
     rank = dim(x),
     # numbers of rows and of columns of original data
+    # -+- these should indicate dimensions of decomposed matrix -+-
     n.row = nrow(get_rows(x)),
     n.col = nrow(get_cols(x)),
     # -+- clarify whether this is original inertia or decomposed inertia -+-

@@ -65,8 +65,6 @@ mtcars_centered \%>\%
   print() -> mtcars_lm
 # wrap as a 'tbl_ord' object
 (mtcars_lm_ord <- as_tbl_ord(mtcars_lm))
-# summarize ordination
-glance(mtcars_lm_ord)
 # augment everything with names, predictors with observation stats
 augment_ord(mtcars_lm_ord)
 # calculate influences as the squares of weighted residuals
@@ -87,3 +85,8 @@ mtcars_lm_ord \%>\%
     "Regressing gas mileage onto weight and number of cylinders"
   )
 }
+\seealso{
+Other methods for idiosyncratic techniques: 
+\code{\link{methods-kmeans}}
+}
+\concept{methods for idiosyncratic techniques}

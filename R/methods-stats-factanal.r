@@ -17,6 +17,7 @@
 #' @name methods-factanal
 #' @include ord-tbl.r
 #' @template param-methods
+#' @family methods for eigen-decomposition-based techniques
 #' @example inst/examples/ex-methods-factanal-swiss.r
 NULL
 
@@ -24,17 +25,15 @@ NULL
 #' @export
 as_tbl_ord.factanal <- as_tbl_ord_default
 
-#' @rdname methods-factanal
-#' @export
-recover_rows.factanal <- function(x) {
-  unclass(x[["loadings"]])
-}
+recover_dims_factanal <- function(x, .matrix) unclass(x[["loadings"]])
 
 #' @rdname methods-factanal
 #' @export
-recover_cols.factanal <- function(x) {
-  unclass(x[["loadings"]])
-}
+recover_rows.factanal <- function(x) recover_dims_factanal(x, "rows")
+
+#' @rdname methods-factanal
+#' @export
+recover_cols.factanal <- function(x) recover_dims_factanal(x, "cols")
 
 #' @rdname methods-factanal
 #' @export

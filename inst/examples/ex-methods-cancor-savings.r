@@ -8,8 +8,6 @@ savings_cancor <- candisc::cancor(
 )
 # wrap as a 'tbl_ord' object
 (savings_cancor <- as_tbl_ord(savings_cancor))
-# summarize ordination
-glance(savings_cancor)
 # recover canonical weights
 get_rows(savings_cancor, elements = "active")
 get_cols(savings_cancor, elements = "active")
@@ -17,15 +15,6 @@ head(get_rows(savings_cancor))
 head(get_cols(savings_cancor))
 # augment canonical weights with row names and centers
 (savings_cancor <- augment_ord(savings_cancor))
-# summarize canonical correlations
-tidy(savings_cancor)
-# scree plot of canonical correlations
-tidy(savings_cancor) %>%
-  ggplot(aes(x = .name, y = .inertia)) +
-  geom_col() +
-  labs(x = "", y = "Inertia (squared canonical correlations)")
-# fortification binds tibbles of canonical weights
-fortify(savings_cancor)
 # row-standard biplot of structure correlations
 savings_cancor %>%
   confer_inertia("cols") %>%

@@ -24,6 +24,7 @@
 #' @param arrow Specification for arrows, as created by [grid::arrow()], or else
 #'   `NULL` for no arrows.
 #' @family geom layers
+#' @example inst/examples/ex-geom-vector-iris.r
 #' @export
 geom_vector <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

@@ -6,6 +6,7 @@
 #' @name methods-svd
 #' @include ord-tbl.r
 #' @template param-methods
+#' @family methods for singular value decomposition-based techniques
 #' @example inst/examples/ex-methods-svd-spend.r
 NULL
 

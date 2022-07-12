@@ -8,6 +8,7 @@
 #' @name methods-cmds
 #' @include ord-tbl.r
 #' @template param-methods
+#' @family methods for eigen-decomposition-based techniques
 #' @example inst/examples/ex-methods-cmds-cities.r
 NULL
 

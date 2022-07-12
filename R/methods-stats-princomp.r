@@ -6,8 +6,9 @@
 #' @name methods-princomp
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/ex-methods-princomp-iris.r
 #' @author Emily Paul
+#' @family methods for singular value decomposition-based techniques
+#' @example inst/examples/ex-methods-princomp-iris.r
 NULL
 
 #' @rdname methods-princomp

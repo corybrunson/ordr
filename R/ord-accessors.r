@@ -27,6 +27,7 @@
 #' @param elements Character; which elements of each factor for which to render
 #'   graphical elements. One of `"all"` (the default), `"active"`, or
 #'   `"supplementary"`, with partial matching.
+#' @example inst/examples/ex-ord-accessors.r
 NULL
 
 #' @rdname accessors
@@ -53,11 +54,11 @@ recover_factor <- function(x, .matrix) {
 
 #' @rdname accessors
 #' @export
-recover_rows.default <- function(x) x$u
+recover_rows.default <- function(x) x$rows
 
 #' @rdname accessors
 #' @export
-recover_cols.default <- function(x) x$v
+recover_cols.default <- function(x) x$cols
 
 # for fortified tbl_ords (also coordinates?)
 

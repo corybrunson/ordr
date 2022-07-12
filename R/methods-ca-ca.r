@@ -6,6 +6,7 @@
 #' @name methods-ca
 #' @include ord-tbl.r
 #' @template param-methods
+#' @family methods for singular value decomposition-based techniques
 #' @example inst/examples/ex-methods-ca-haireye.r
 NULL
 
