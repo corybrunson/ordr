@@ -4,21 +4,15 @@
 \alias{accessors}
 \alias{get_rows}
 \alias{get_cols}
-\alias{get_factor}
 \alias{as.matrix.tbl_ord}
 \alias{get_coord}
 \alias{get_inertia}
 \alias{dim.tbl_ord}
-\alias{dim_rows}
-\alias{dim_cols}
-\alias{dim_factor}
 \title{Access factors, coordinates, and metadata from ordination objects}
 \usage{
 get_rows(x, elements = "all")
 
 get_cols(x, elements = "all")
-
-get_factor(x, .matrix, elements = "all")
 
 \method{as.matrix}{tbl_ord}(x, ..., .matrix, elements = "all")
 
@@ -27,12 +21,6 @@ get_coord(x)
 get_inertia(x)
 
 \method{dim}{tbl_ord}(x)
-
-dim_rows(x)
-
-dim_cols(x)
-
-dim_factor(x, .matrix)
 }
 \arguments{
 \item{x}{An object of class '\link{tbl_ord}'.}
@@ -41,11 +29,11 @@ dim_factor(x, .matrix)
 graphical elements. One of \code{"all"} (the default), \code{"active"}, or
 \code{"supplementary"}, with partial matching.}
 
+\item{...}{Additional arguments from \code{\link[base:matrix]{base::as.matrix()}}; ignored.}
+
 \item{.matrix}{A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
-
-\item{...}{Additional arguments from \code{\link[base:matrix]{base::as.matrix()}}; ignored.}
 }
 \description{
 These functions return information about the matrix
@@ -61,9 +49,11 @@ generics that require methods for each ordination class.
 
 \code{get_coord()} retrieves the names of the coordinates shared by the matrix
 factors on which the original data were ordinated, and \code{get_inertia()}
-retrieves a vector of the inertia with these names. \code{dim()} retrieves their
-number, the rank of the ordination. The outer dimensions of the matrix
-decomposition are returned by \code{dim_rows()} and \code{dim_cols()}.
+retrieves a vector of the inertia with these names. \code{dim()} retrieves the
+dimensions of the row and column factors, which reflect the dimensions of the
+matrix they reconstruct---\strong{not} the original data matrix. (This matters for
+techniques that rely on eigendecomposition, for which the decomposed matrix
+is square.)
 }
 \examples{
 # example ordination: LRA of U.S. arrests data

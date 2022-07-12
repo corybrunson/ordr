@@ -15,9 +15,11 @@
 #'
 #' `get_coord()` retrieves the names of the coordinates shared by the matrix
 #' factors on which the original data were ordinated, and `get_inertia()`
-#' retrieves a vector of the inertia with these names. `dim()` retrieves their
-#' number, the rank of the ordination. The outer dimensions of the matrix
-#' decomposition are returned by `dim_rows()` and `dim_cols()`.
+#' retrieves a vector of the inertia with these names. `dim()` retrieves the
+#' dimensions of the row and column factors, which reflect the dimensions of the
+#' matrix they reconstruct---**not** the original data matrix. (This matters for
+#' techniques that rely on eigendecomposition, for which the decomposed matrix
+#' is square.)
 #' 
 
 #' @name accessors
@@ -103,8 +105,6 @@ get_cols <- function(x, elements = "all") {
   return(v)
 }
 
-#' @rdname accessors
-#' @export
 get_factor <- function(x, .matrix, elements = "all") {
   switch(
     match_factor(.matrix),
@@ -160,23 +160,6 @@ get_inertia <- function(x) {
 
 #' @rdname accessors
 #' @export
-dim.tbl_ord <- function(x) length(recover_coord(x))
-
-#' @rdname accessors
-#' @export
-dim_rows <- function(x) nrow(recover_rows(x))
-
-#' @rdname accessors
-#' @export
-dim_cols <- function(x) nrow(recover_cols(x))
-
-#' @rdname accessors
-#' @export
-dim_factor <- function(x, .matrix) {
-  switch(
-    match_factor(.matrix),
-    rows = dim_rows(x),
-    cols = dim_cols(x),
-    dims = c(rows = dim_rows(x), cols = dim_cols(x))
-  )
+dim.tbl_ord <- function(x) {
+  c(nrow(get_rows(x)), nrow(get_cols(x)))
 }
