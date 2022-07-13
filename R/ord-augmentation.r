@@ -31,8 +31,12 @@
 #' @seealso [tidiers] and [annotation] methods that interface with augmentation.
 NULL
 
+#' @rdname accessors
+#' @export
 augmentation_rows <- function(x) UseMethod("augmentation_rows")
 
+#' @rdname accessors
+#' @export
 augmentation_cols <- function(x) UseMethod("augmentation_cols")
 
 augmentation_factor <- function(x, .matrix) {
@@ -44,6 +48,8 @@ augmentation_factor <- function(x, .matrix) {
   )
 }
 
+#' @rdname accessors
+#' @export
 augmentation_coord <- function(x) UseMethod("augmentation_coord")
 
 #' @rdname augmentation

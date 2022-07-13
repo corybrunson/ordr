@@ -33,8 +33,12 @@
 #' @example inst/examples/ex-ord-accessors.r
 NULL
 
+#' @rdname accessors
+#' @export
 recover_rows <- function(x) UseMethod("recover_rows")
 
+#' @rdname accessors
+#' @export
 recover_cols <- function(x) UseMethod("recover_cols")
 
 recover_factor <- function(x, .matrix) {
@@ -128,10 +132,14 @@ as.matrix.tbl_ord <- function(
   get_factor(x, .matrix = .matrix, elements = elements)
 }
 
+#' @rdname accessors
+#' @export
 recover_inertia <- function(x) UseMethod("recover_inertia")
 
 recover_inertia.default <- function(x) NA_real_
 
+#' @rdname accessors
+#' @export
 recover_coord <- function(x) UseMethod("recover_coord")
 
 recover_coord.default <- function(x) {

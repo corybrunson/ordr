@@ -20,10 +20,14 @@
 #' @include ord-augmentation.r
 NULL
 
+#' @rdname accessors
+#' @export
 supplementation_rows <- function(x) UseMethod("supplementation_rows")
 
 supplementation_rows.default <- function(x) NULL
 
+#' @rdname accessors
+#' @export
 supplementation_cols <- function(x) UseMethod("supplementation_cols")
 
 supplementation_cols.default <- function(x) NULL
