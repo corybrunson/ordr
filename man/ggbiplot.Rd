@@ -33,7 +33,8 @@ Other assignments must be supplied in each layer added to the plot.}
 \item{prediction}{Logical; whether to build a prediction biplot rather than
 an interpolation biplot (the default). \code{TRUE} requires that \code{x} and \code{y} are
 mapped to shared coordinates, that no other shared coordinates are mapped
-to, and inertia is conferred entirely onto one matrix factor.}
+to, and inertia is conferred entirely onto one matrix factor. \strong{NB:} This
+option is only implemented for linear techniques (ED, SVD, & PCA).}
 
 \item{xlim}{Limits for the x and y axes.}
 

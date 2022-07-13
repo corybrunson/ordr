@@ -49,7 +49,8 @@
 #' @param prediction Logical; whether to build a prediction biplot rather than
 #'   an interpolation biplot (the default). `TRUE` requires that `x` and `y` are
 #'   mapped to shared coordinates, that no other shared coordinates are mapped
-#'   to, and inertia is conferred entirely onto one matrix factor.
+#'   to, and inertia is conferred entirely onto one matrix factor. **NB:** This
+#'   option is only implemented for linear techniques (ED, SVD, & PCA).
 #' @inheritParams ggplot2::coord_equal
 #' @param axis.percents Whether to concatenate default axis labels with inertia
 #'   percentages.
@@ -105,32 +106,34 @@ ggbiplot <- function(
     if (! ord_class %in% c("eigen_ord", "svd_ord", "prcomp", "princomp")) {
       warning("Prediction biplots are only implemented for linear methods ",
               "(ED, SVD, PCA).")
-    }
-    
-    # rescale standard coordinates for prediction biplot
-    xy_map <- stringr::str_remove(as.character(mapping[c("x", "y")]), "^~")
-    if (! all(c("x", "y") %in% names(mapping)) &&
-        any(stringr::str_detect(names(mapping), "..coord"))) {
-      warning("For prediction biplots, ",
-              "map only `x` and `y` to shared coordinates.")
-    } else if (! all(xy_map %in% attr(ordination, "coordinates"))) {
-      warning("For prediction biplots, ",
-              "map both `x` and `y` to shared coordinates.")
-    } else if (! all(c(0, 1) %in% conference)) {
-      warning("For prediction biplots, ",
-              "inertia must be balanced and conferred on one factor.")
     } else {
-      # remove coordinates other than those used in the biplot
-      ordination[setdiff(get_coord(ordination), xy_map)] <- NULL
-      # rescale standard coordinates
-      std_fac <- c("rows", "cols")[! as.logical(conference)]
-      std_ss <- apply(
-        ordination[ordination$.matrix == std_fac, xy_map],
-        1L,
-        function(x) sum(x^2)
-      )
-      ordination[ordination$.matrix == std_fac, xy_map] <-
-        ordination[ordination$.matrix == std_fac, xy_map] / std_ss
+      
+      # rescale standard coordinates for prediction biplot
+      xy_map <- stringr::str_remove(as.character(mapping[c("x", "y")]), "^~")
+      if (! all(c("x", "y") %in% names(mapping)) &&
+          any(stringr::str_detect(names(mapping), "..coord"))) {
+        warning("For prediction biplots, ",
+                "map only `x` and `y` to shared coordinates.")
+      } else if (! all(xy_map %in% attr(ordination, "coordinates"))) {
+        warning("For prediction biplots, ",
+                "map both `x` and `y` to shared coordinates.")
+      } else if (! all(c(0, 1) %in% conference)) {
+        warning("For prediction biplots, ",
+                "inertia must be balanced and conferred on one factor.")
+      } else {
+        # remove coordinates other than those used in the biplot
+        ordination[setdiff(get_coord(ordination), xy_map)] <- NULL
+        # rescale standard coordinates
+        std_fac <- c("rows", "cols")[! as.logical(conference)]
+        std_ss <- apply(
+          ordination[ordination$.matrix == std_fac, xy_map],
+          1L,
+          function(x) sum(x^2)
+        )
+        ordination[ordination$.matrix == std_fac, xy_map] <-
+          ordination[ordination$.matrix == std_fac, xy_map] / std_ss
+      }
+      
     }
   }
   

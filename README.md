@@ -235,7 +235,7 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
 ![](man/figures/README-interpolation%20biplot-1.png)<!-- -->
 
 When variables are represented in standard coordinates, as typically in
-PCA, their rules can be rescaled to yield a prediction biplot:
+PCA, their rules can be rescaled to yield a prediction biplot:[^9]
 
 ``` r
 ggbiplot(iris_pca, prediction = TRUE, axis.percents = FALSE) +
@@ -243,21 +243,11 @@ ggbiplot(iris_pca, prediction = TRUE, axis.percents = FALSE) +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_center(
     aes(color = Species, shape = Species),
-    size = 5, alpha = .5
+    size = 5, alpha = .5, fun.data = mean_se
   ) +
-  geom_cols_axis() +
-  geom_cols_axis_ticks(aes(center = .center, scale = .scale)) +
-  geom_cols_axis_text(aes(center = .center, scale = .scale)) +
-  geom_cols_axis_label(aes(label = .name)) +
+  geom_cols_axis(aes(label = .name, center = .center, scale = .scale)) +
   ggtitle("Prediction biplot of Anderson's iris measurements",
           "Project a marker onto an axis to approximate its measurement")
-#> Warning: Ignoring unknown aesthetics: center, scale
-
-#> Warning: Ignoring unknown aesthetics: center, scale
-#> Warning: Ignoring unknown aesthetics: label
-#> No center (limit) function(s) supplied; defaulting to `mean_se()`
-#> No center (limit) function(s) supplied; defaulting to `mean_se()`
-#> No center (limit) function(s) supplied; defaulting to `mean_se()`
 ```
 
 ![](man/figures/README-prediction%20biplot-1.png)<!-- -->
@@ -360,3 +350,7 @@ Roux.
 
 [^8]: The radiating text geom, like several other features, is adapted
     from the **ggbiplot** package.
+
+[^9]: This is an experimental feature only available for linear methods,
+    namely eigendecomposition, singular value decomposition, and
+    principal components analysis.
