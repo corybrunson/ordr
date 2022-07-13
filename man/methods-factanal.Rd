@@ -38,7 +38,7 @@ get_cols(swiss_fa)
 head(get_rows(swiss_fa, elements = "supplementary"))
 # augment column loadings with uniquenesses
 (swiss_fa <- augment_ord(swiss_fa))
-# symmetric biplot 
+# symmetric biplot
 swiss_fa \%>\%
   ggbiplot() +
   theme_bw() +
