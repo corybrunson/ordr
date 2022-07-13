@@ -66,10 +66,10 @@ augmentation_cols.prcomp <- function(x) {
   } else {
     tibble(.name = .name)
   }
-  if (class(x[["center"]]) == "numeric") {
+  if (inherits(x[["center"]], "numeric")) {
     res <- dplyr::bind_cols(res, .center = x[["center"]])
   }
-  if (class(x[["scale"]]) == "numeric") {
+  if (inherits(x[["scale"]], "numeric")) {
     res <- dplyr::bind_cols(res, .scale = x[["scale"]])
   }
   res
