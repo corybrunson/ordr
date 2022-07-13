@@ -17,6 +17,7 @@
 #' @name methods-factanal
 #' @include ord-tbl.r
 #' @template param-methods
+#' @family methods for eigen-decomposition-based techniques
 #' @example inst/examples/ex-methods-factanal-swiss.r
 NULL
 
@@ -24,45 +25,29 @@ NULL
 #' @export
 as_tbl_ord.factanal <- as_tbl_ord_default
 
-#' @rdname methods-factanal
-#' @export
-recover_rows.factanal <- function(x) {
-  unclass(x[["loadings"]])
-}
+recover_dims_factanal <- function(x, .matrix) unclass(x[["loadings"]])
 
-#' @rdname methods-factanal
-#' @export
-recover_cols.factanal <- function(x) {
-  unclass(x[["loadings"]])
-}
+recover_rows.factanal <- function(x) recover_dims_factanal(x, "rows")
 
-#' @rdname methods-factanal
-#' @export
+recover_cols.factanal <- function(x) recover_dims_factanal(x, "cols")
+
 recover_inertia.factanal <- function(x) {
   colSums(x[["loadings"]] ^ 2)
 }
 
-#' @rdname methods-factanal
-#' @export
 recover_coord.factanal <- function(x) {
   colnames(x[["loadings"]])
 }
 
-#' @rdname methods-factanal
-#' @export
 recover_conference.factanal <- function(x) {
   # loadings are assigned half the diagonal from the eigendecomposition
   c(.5, .5)
 }
 
-#' @rdname methods-factanal
-#' @export
 supplementation_rows.factanal <- function(x) {
   x[["scores"]]
 }
 
-#' @rdname methods-factanal
-#' @export
 augmentation_rows.factanal <- function(x) {
   .name <- rownames(x[["loadings"]])
   res <- if (is.null(.name)) {
@@ -84,8 +69,6 @@ augmentation_rows.factanal <- function(x) {
   as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
-#' @rdname methods-factanal
-#' @export
 augmentation_cols.factanal <- function(x) {
   .name <- rownames(x[["loadings"]])
   res <- if (is.null(.name)) {
@@ -97,8 +80,6 @@ augmentation_cols.factanal <- function(x) {
   res
 }
 
-#' @rdname methods-factanal
-#' @export
 augmentation_coord.factanal <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x))

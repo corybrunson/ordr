@@ -15,6 +15,7 @@
 #' @name list_tidiers
 #' @export
 #' @family list tidiers
+#' @seealso [generics::tidy()] [generics::glance()]
 tidy.list <- function(x, ...) {
   optim_elems <- c("par", "value", "counts", "convergence", "message")
   xyz_elems <- c("x", "y", "z")

@@ -1,5 +1,10 @@
 #' @title Tidy `cmdscale()` list output
 #'
+#' @description These tidiers handle the output of `cmdscale()`, which under
+#'   certain conditions is effectively an S3 object without a class attribute.
+#'   It allows **ordr** to enhance the [list_tidiers] provided by
+#'   **[broom][broom::broom-package]**.
+#'
 #' @param x A list with components `points`, `eig`, `x`, `ac`, and `GOF`
 #'   returned by [stats::cmdscale()].
 #' @param matrix Character specifying which list element should be tidied,

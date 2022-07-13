@@ -3,36 +3,9 @@
 \name{methods-factanal}
 \alias{methods-factanal}
 \alias{as_tbl_ord.factanal}
-\alias{recover_rows.factanal}
-\alias{recover_cols.factanal}
-\alias{recover_inertia.factanal}
-\alias{recover_coord.factanal}
-\alias{recover_conference.factanal}
-\alias{supplementation_rows.factanal}
-\alias{augmentation_rows.factanal}
-\alias{augmentation_cols.factanal}
-\alias{augmentation_coord.factanal}
 \title{Functionality for factor analysis ('factanal') objects}
 \usage{
 \method{as_tbl_ord}{factanal}(x)
-
-\method{recover_rows}{factanal}(x)
-
-\method{recover_cols}{factanal}(x)
-
-\method{recover_inertia}{factanal}(x)
-
-\method{recover_coord}{factanal}(x)
-
-\method{recover_conference}{factanal}(x)
-
-\method{supplementation_rows}{factanal}(x)
-
-\method{augmentation_rows}{factanal}(x)
-
-\method{augmentation_cols}{factanal}(x)
-
-\method{augmentation_coord}{factanal}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
@@ -58,21 +31,13 @@ head(swiss)
 swiss_fa <- factanal(~ ., factors = 2L, data = swiss, scores = "regression")
 # wrap as a 'tbl_ord' object
 (swiss_fa <- as_tbl_ord(swiss_fa))
-# summarize ordination
-glance(swiss_fa)
 # recover loadings
-get_rows(swiss_fa, .supplement = FALSE)
+get_rows(swiss_fa, elements = "active")
 get_cols(swiss_fa)
-head(get_rows(swiss_fa, .supplement = TRUE), n = 12L)
+# recover scores
+head(get_rows(swiss_fa, elements = "supplementary"))
 # augment column loadings with uniquenesses
 (swiss_fa <- augment_ord(swiss_fa))
-# summarize factors
-tidy(swiss_fa)
-# scree plot of factor variances
-tidy(swiss_fa) \%>\%
-  ggplot(aes(x = .name, y = .inertia)) +
-  geom_col() +
-  labs(x = "", y = "Variance")
 # symmetric biplot 
 swiss_fa \%>\%
   ggbiplot() +
@@ -84,11 +49,16 @@ swiss_fa \%>\%
 # scores overlaid
 swiss_fa \%>\%
   confer_inertia("rows") \%>\%
-  ggbiplot(aes(label = .name), .supplement = TRUE) +
+  ggbiplot(aes(label = .name), elements = "supplementary") +
   theme_bw() +
   geom_cols_vector() +
   geom_cols_text_radiate() +
   geom_unit_circle() +
-  geom_rows_point(aes(alpha = .supplement)) +
-  scale_alpha_manual(values = c(0, 1), guide = "none")
+  geom_rows_point()
 }
+\seealso{
+Other methods for eigen-decomposition-based techniques: 
+\code{\link{methods-cmds}},
+\code{\link{methods-eigen}}
+}
+\concept{methods for eigen-decomposition-based techniques}

@@ -23,6 +23,7 @@
 #' @inheritParams base::eigen
 #' @inheritParams base::svd
 #' @inheritParams stats::cmdscale
+#' @example inst/examples/ex-fun-wrap-glass.r
 NULL
 
 #' @rdname wrap-ord

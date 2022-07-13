@@ -59,7 +59,7 @@ StatRowsScale <- ggproto(
   setup_data = setup_rows_xy_data,
   
   compute_group = function(data, scales,
-                           subset = NULL, mult = 1) {
+                           subset = NULL, elements = "all", mult = 1) {
     StatScale$compute_group(data, scales, mult = mult)
   }
 )
@@ -74,7 +74,7 @@ StatColsScale <- ggproto(
   setup_data = setup_cols_xy_data,
   
   compute_group = function(data, scales,
-                           subset = NULL, mult = 1) {
+                           subset = NULL, elements = "all", mult = 1) {
     StatScale$compute_group(data, scales, mult = mult)
   }
 )

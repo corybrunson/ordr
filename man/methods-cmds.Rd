@@ -3,33 +3,9 @@
 \name{methods-cmds}
 \alias{methods-cmds}
 \alias{as_tbl_ord.cmds_ord}
-\alias{recover_rows.cmds_ord}
-\alias{recover_cols.cmds_ord}
-\alias{recover_inertia.cmds_ord}
-\alias{recover_coord.cmds_ord}
-\alias{recover_conference.cmds_ord}
-\alias{augmentation_rows.cmds_ord}
-\alias{augmentation_cols.cmds_ord}
-\alias{augmentation_coord.cmds_ord}
 \title{Functionality for classical multidimensional scaling objects}
 \usage{
 \method{as_tbl_ord}{cmds_ord}(x)
-
-\method{recover_rows}{cmds_ord}(x)
-
-\method{recover_cols}{cmds_ord}(x)
-
-\method{recover_inertia}{cmds_ord}(x)
-
-\method{recover_coord}{cmds_ord}(x)
-
-\method{recover_conference}{cmds_ord}(x)
-
-\method{augmentation_rows}{cmds_ord}(x)
-
-\method{augmentation_cols}{cmds_ord}(x)
-
-\method{augmentation_coord}{cmds_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
@@ -49,20 +25,11 @@ UScitiesD \%>\%
   cmdscale_ord(k = 2) \%>\%
   as_tbl_ord() \%>\%
   print() -> usa_mds
-# summarize ordination
-glance(usa_mds)
 # recover (equivalent) matrices of row and column artificial coordinates
 get_rows(usa_mds)
 get_cols(usa_mds)
 # augment ordination with point names
 (usa_mds <- augment_ord(usa_mds))
-# summarize artifical coordinates
-tidy(usa_mds)
-# scree plot of inertia
-ggplot(tidy(usa_mds), aes(x = .name, y = .inertia)) +
-  theme_bw() +
-  geom_col() +
-  labs(x = "", y = "Inertia")
 # reorient biplot to conventional compass
 usa_mds \%>\%
   ggbiplot() +
@@ -71,3 +38,9 @@ usa_mds \%>\%
   geom_cols_text(aes(label = .name), size = 3) +
   ggtitle("MDS biplot of distances between U.S. cities")
 }
+\seealso{
+Other methods for eigen-decomposition-based techniques: 
+\code{\link{methods-eigen}},
+\code{\link{methods-factanal}}
+}
+\concept{methods for eigen-decomposition-based techniques}

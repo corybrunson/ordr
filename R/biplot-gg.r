@@ -62,18 +62,19 @@
 #'   factors.
 #' @param ... Additional arguments passed to [ggplot2::fortify()]; see
 #'   [fortify.tbl_ord()].
-#' @example inst/examples/ex-biplot-secaxis-iris.r
-#' @example inst/examples/ex-biplot-lm-mtcars.r
+#' @example inst/examples/ex-ggbiplot-secaxis-iris.r
+#' @example inst/examples/ex-ggbiplot-lm-mtcars.r
+#' @example inst/examples/ex-ggbiplot-prediction-iris.r
 #' @seealso [ggplot2::ggplot2()], on which `ggbiplot()` is built.
 
 #' @rdname ggbiplot
 #' @export
 ggbiplot <- function(
-  ordination = NULL, mapping = aes(x = 1, y = 2), prediction = FALSE,
-  xlim = NULL, ylim = NULL, expand = TRUE, clip = "on",
-  axis.percents = TRUE, sec.axes = NULL, scale.factor = NULL,
-  scale_rows = NULL, scale_cols = NULL,
-  ...
+    ordination = NULL, mapping = aes(x = 1, y = 2), prediction = FALSE,
+    xlim = NULL, ylim = NULL, expand = TRUE, clip = "on",
+    axis.percents = TRUE, sec.axes = NULL, scale.factor = NULL,
+    scale_rows = NULL, scale_cols = NULL,
+    ...
 ) {
   if (axis.percents) {
     # store inertia
@@ -90,6 +91,13 @@ ggbiplot <- function(
   
   # augment `mapping`, if necessary, with default coordinates
   mapping <- ensure_xy_aes(ordination, mapping)
+  
+  # augment `mapping`, if necessary, with `.supplement`
+  if (! is.null(ordination)) {
+    if (! ".supplement" %in% names(ordination)) ordination$.supplement <- FALSE
+    mapping <- c(mapping, aes(.supplement = !! ".supplement"))
+    class(mapping) <- "uneval"
+  }
   
   if (prediction) {
     
@@ -163,7 +171,7 @@ ggbiplot <- function(
         ~ ifelse(ordination$.matrix == sec.axes, . * scale.factor, .)
       )
     )
-
+    
   }
   
   # conventional `ggplot()` call

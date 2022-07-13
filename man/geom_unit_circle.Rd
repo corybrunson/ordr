@@ -10,6 +10,7 @@ geom_unit_circle(
   stat = "identity",
   position = "identity",
   segments = 60,
+  scale.factor = 1,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -44,6 +45,10 @@ layer, as a string.}
 a call to a position adjustment function.}
 
 \item{segments}{The number of segments to be used in drawing the circle.}
+
+\item{scale.factor}{The circle radius; should remain at its default value 1
+or passed the same value as \code{\link[=ggbiplot]{ggbiplot()}}. (This is an imperfect fix that
+may be changed in a future version.)}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
@@ -100,9 +105,9 @@ heplots::Diabetes[, seq(5L)] \%>\%
 rowSums(get_cols(diabetes_pca)^2)
 # plot column standard coordinates with a unit circle underlaid
 diabetes_pca \%>\%
-  ggbiplot(aes(label = .name)) +
+  ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 3) +
   geom_rows_point(aes(color = group), alpha = .25) +
-  geom_unit_circle(alpha = .5) +
+  geom_unit_circle(alpha = .5, scale.factor = 3) +
   geom_cols_vector() +
   geom_cols_text_radiate()
 }

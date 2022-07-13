@@ -33,7 +33,7 @@ arrests_lra_ord %>%
     "United States, 1973"
   ) +
   expand_limits(x = c(-.35)) +
-  guides(color = FALSE)
+  guides(color = "none")
 # compositional log-ratio analysis
 (arrests_lra <- lra(USArrests[, c(1, 2, 4)], compositional = TRUE))
 (arrests_lra_ord <- augment_ord(as_tbl_ord(arrests_lra)))
@@ -52,4 +52,4 @@ arrests_lra_ord %>%
     "United States, 1973"
   ) +
   expand_limits(x = c(-.4)) +
-  guides(color = FALSE)
+  guides(color = "none")

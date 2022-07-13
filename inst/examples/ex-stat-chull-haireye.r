@@ -6,7 +6,7 @@ HairEyeColor %>%
   augment_ord() %>%
   print() -> hec_ca
 # inertia across artificial coordinates (all singular values < 1)
-recover_inertia(hec_ca)
+get_inertia(hec_ca)
 # in row-principal biplot, row coordinates are weighted averages of columns
 hec_ca %>%
   confer_inertia("rows") %>%

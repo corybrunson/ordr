@@ -13,7 +13,7 @@
 #' facilitate the [print()] method and the [ggbiplot()] function.
 #'
 #' No default method is provided for `as_tbl_ord()`, despite most defined
-#' methods being equivalent (simply appending tbl_ord to the vector of object
+#' methods being equivalent (simply appending 'tbl_ord' to the vector of object
 #' classes). This prevents objects for which other methods are not defined from
 #' being re-classed as tbl_ords.
 #'
@@ -34,6 +34,7 @@
 #' @param x An ordination object.
 #' @param rows,cols Matrices to be used as factors of a tbl_ord.
 #' @param ... Additional elements of a custom tbl_ord.
+#' @example inst/examples/ex-ord-tbl.r
 NULL
 
 #' @rdname tbl_ord
@@ -47,10 +48,10 @@ as_tbl_ord.tbl_ord <- function(x) x
 #' @rdname tbl_ord
 #' @export
 make_tbl_ord <- function(rows = NULL, cols = NULL, ...) {
-  if (!is.matrix(rows) || !is.matrix(cols) || ncol(rows) == ncol(cols)) {
+  if (! is.matrix(rows) || ! is.matrix(cols) || ncol(rows) != ncol(cols)) {
     stop("`rows` and `cols` must be matrices having the same number of columns.")
   }
-  if (!is.null(colnames(rows)) & !is.null(colnames(cols))) {
+  if (! is.null(colnames(rows)) & ! is.null(colnames(cols))) {
     if (any(colnames(rows) != colnames(cols))) {
       stop("`rows` and `cols` must have the same column names.")
     }

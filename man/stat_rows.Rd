@@ -11,6 +11,7 @@ stat_rows(
   geom = "point",
   position = "identity",
   subset = NULL,
+  elements = "all",
   ...,
   show.legend = NA,
   inherit.aes = TRUE
@@ -22,6 +23,7 @@ stat_cols(
   geom = "axis",
   position = "identity",
   subset = NULL,
+  elements = "all",
   ...,
   show.legend = NA,
   inherit.aes = TRUE
@@ -59,6 +61,10 @@ rows or columns for which to render graphical elements. NB: Internally, the
 'tbl_ord' comprising rows from only one of the matrix factors. It is still
 possible to pass a formula to the \code{data} parameter, but it will act on the
 fortified data \emph{before} it has been restricted to one matrix factor.}
+
+\item{elements}{Character; which elements of each factor for which to render
+graphical elements. One of \code{"all"} (the default), \code{"active"}, or
+\code{"supplementary"}, with partial matching.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 

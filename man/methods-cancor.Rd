@@ -3,39 +3,9 @@
 \name{methods-cancor}
 \alias{methods-cancor}
 \alias{as_tbl_ord.cancor}
-\alias{recover_rows.cancor}
-\alias{recover_cols.cancor}
-\alias{recover_inertia.cancor}
-\alias{recover_coord.cancor}
-\alias{recover_conference.cancor}
-\alias{augmentation_rows.cancor}
-\alias{augmentation_cols.cancor}
-\alias{augmentation_coord.cancor}
-\alias{supplementation_rows.cancor}
-\alias{supplementation_cols.cancor}
 \title{Functionality for canonical correlation ('cancor') objects}
 \usage{
 \method{as_tbl_ord}{cancor}(x)
-
-\method{recover_rows}{cancor}(x)
-
-\method{recover_cols}{cancor}(x)
-
-\method{recover_inertia}{cancor}(x)
-
-\method{recover_coord}{cancor}(x)
-
-\method{recover_conference}{cancor}(x)
-
-\method{augmentation_rows}{cancor}(x)
-
-\method{augmentation_cols}{cancor}(x)
-
-\method{augmentation_coord}{cancor}(x)
-
-\method{supplementation_rows}{cancor}(x)
-
-\method{supplementation_cols}{cancor}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
@@ -71,28 +41,17 @@ savings_cancor <- candisc::cancor(
 )
 # wrap as a 'tbl_ord' object
 (savings_cancor <- as_tbl_ord(savings_cancor))
-# summarize ordination
-glance(savings_cancor)
 # recover canonical weights
-get_rows(savings_cancor, .supplement = FALSE)
-get_cols(savings_cancor, .supplement = FALSE)
-head(get_rows(savings_cancor, .supplement = TRUE))
-head(get_cols(savings_cancor, .supplement = TRUE))
+get_rows(savings_cancor, elements = "active")
+get_cols(savings_cancor, elements = "active")
+head(get_rows(savings_cancor))
+head(get_cols(savings_cancor))
 # augment canonical weights with row names and centers
 (savings_cancor <- augment_ord(savings_cancor))
-# summarize canonical correlations
-tidy(savings_cancor)
-# scree plot of canonical correlations
-tidy(savings_cancor) \%>\%
-  ggplot(aes(x = .name, y = .inertia)) +
-  geom_col() +
-  labs(x = "", y = "Inertia (squared canonical correlations)")
-# fortification binds tibbles of canonical weights
-fortify(savings_cancor)
 # row-standard biplot of structure correlations
 savings_cancor \%>\%
   confer_inertia("cols") \%>\%
-  ggbiplot(aes(label = .name, color = .matrix), .supplement = FALSE) +
+  ggbiplot(aes(label = .name, color = .matrix), elements = "active") +
   theme_bw() +
   geom_origin() +
   geom_unit_circle(linetype = "dotted") +
@@ -105,7 +64,7 @@ savings_cancor \%>\%
 # column-standard biplot of structure correlations
 savings_cancor \%>\%
   confer_inertia("rows") \%>\%
-  ggbiplot(aes(label = .name, color = .matrix), .supplement = FALSE) +
+  ggbiplot(aes(label = .name, color = .matrix), elements = "active") +
   theme_bw() +
   geom_origin() +
   geom_unit_circle(linetype = "dotted") +
@@ -118,7 +77,7 @@ savings_cancor \%>\%
 # symmetric biplot of structure correlations
 savings_cancor \%>\%
   confer_inertia("symmetric") \%>\%
-  ggbiplot(aes(label = .name, color = .matrix), .supplement = FALSE) +
+  ggbiplot(aes(label = .name, color = .matrix), elements = "active") +
   theme_bw() +
   geom_origin() +
   geom_unit_circle(linetype = "dotted") +
@@ -134,3 +93,14 @@ ter Braak CJF (1990) "Interpreting canonical correlation analysis through
 biplots of structure correlations and weights". \emph{Psychometrika} 55(3),
 519--531. \doi{10.1007/BF02294765}
 }
+\seealso{
+Other methods for singular value decomposition-based techniques: 
+\code{\link{methods-ca}},
+\code{\link{methods-lda}},
+\code{\link{methods-lra}},
+\code{\link{methods-mjca}},
+\code{\link{methods-prcomp}},
+\code{\link{methods-princomp}},
+\code{\link{methods-svd}}
+}
+\concept{methods for singular value decomposition-based techniques}

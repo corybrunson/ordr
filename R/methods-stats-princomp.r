@@ -6,47 +6,36 @@
 #' @name methods-princomp
 #' @include ord-tbl.r
 #' @template param-methods
-#' @example inst/examples/ex-methods-princomp-iris.r
 #' @author Emily Paul
+#' @family methods for singular value decomposition-based techniques
+#' @example inst/examples/ex-methods-princomp-iris.r
 NULL
 
 #' @rdname methods-princomp
 #' @export
 as_tbl_ord.princomp <- as_tbl_ord_default
 
-#' @rdname methods-princomp
-#' @export
 recover_rows.princomp <- function(x) {
   x[["scores"]]
 }
 
-#' @rdname methods-princomp
-#' @export
 recover_cols.princomp <- function(x) {
   unclass(x[["loadings"]])
 }
 
-#' @rdname methods-princomp
-#' @export
 recover_inertia.princomp <- function(x) {
   (x[["sdev"]] ^ 2) * x[["n.obs"]]
 }
 
-#' @rdname methods-princomp
-#' @export
 recover_coord.princomp <- function(x) {
   colnames(x[["scores"]])
 }
 
-#' @rdname methods-princomp
-#' @export
 recover_conference.princomp <- function(x) {
   # `stats::princomp()` returns the rotated data
   c(1, 0)
 }
 
-#' @rdname methods-princomp
-#' @export
 augmentation_rows.princomp <- function(x) {
   .name <- rownames(x[["scores"]])
   if (is.null(.name)) {
@@ -56,8 +45,6 @@ augmentation_rows.princomp <- function(x) {
   }
 }
 
-#' @rdname methods-princomp
-#' @export
 augmentation_cols.princomp <- function(x) {
   .name <- rownames(x[["loadings"]])
   res <- if (is.null(.name)) {
@@ -71,8 +58,6 @@ augmentation_cols.princomp <- function(x) {
   ))
 }
 
-#' @rdname methods-princomp
-#' @export
 augmentation_coord.princomp <- function(x) {
   tibble(
     .name = factor_coord(recover_coord.princomp(x)),

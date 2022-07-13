@@ -3,34 +3,10 @@
 \name{methods-mjca}
 \alias{methods-mjca}
 \alias{as_tbl_ord.mjca}
-\alias{recover_rows.mjca}
-\alias{recover_cols.mjca}
-\alias{recover_inertia.mjca}
-\alias{recover_conference.mjca}
-\alias{recover_coord.mjca}
-\alias{augmentation_rows.mjca}
-\alias{augmentation_cols.mjca}
-\alias{augmentation_coord.mjca}
 \title{Functionality for multiple and joint correspondence analysis ('mjca')
 objects}
 \usage{
 \method{as_tbl_ord}{mjca}(x)
-
-\method{recover_rows}{mjca}(x)
-
-\method{recover_cols}{mjca}(x)
-
-\method{recover_inertia}{mjca}(x)
-
-\method{recover_conference}{mjca}(x)
-
-\method{recover_coord}{mjca}(x)
-
-\method{augmentation_rows}{mjca}(x)
-
-\method{augmentation_cols}{mjca}(x)
-
-\method{augmentation_coord}{mjca}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
@@ -50,22 +26,9 @@ UCBAdmissions \%>\%
   # augment profiles with names, masses, distances, and inertias
   augment_ord() \%>\%
   print() -> admissions_mca
-# summarize ordination
-glance(admissions_mca)
 # recover row and column profiles
 head(get_rows(admissions_mca))
 get_cols(admissions_mca)
-# summarize artificial coordinates
-tidy(admissions_mca)
-# scree plot of proportion of variance (inertia)
-tidy(admissions_mca) \%>\%
-  ggplot(aes(x = .name, y = .prop_var)) +
-  theme_bw() +
-  scale_y_continuous(labels = scales::percent) +
-  geom_col() +
-  labs(x = "", y = "Proportion of inertia")
-# fortification adds all above columns
-fortify(admissions_mca)
 # column-standard biplot of factor levels
 admissions_mca \%>\%
   ggbiplot() +
@@ -76,7 +39,7 @@ admissions_mca \%>\%
   geom_cols_text_repel(aes(label = .level, color = .factor),
                        show.legend = FALSE) +
   scale_color_brewer(palette = "Dark2") +
-  scale_size_area(guide = FALSE) +
+  scale_size_area(guide = "none") +
   labs(color = "Factor level", shape = "Factor level")
 # column-principal biplot of factor levels
 admissions_mca \%>\%
@@ -89,6 +52,17 @@ admissions_mca \%>\%
   geom_cols_text_repel(aes(label = .level, color = .factor),
                        show.legend = FALSE) +
   scale_color_brewer(palette = "Dark2") +
-  scale_size_area(guide = FALSE) +
+  scale_size_area(guide = "none") +
   labs(color = "Factor level", shape = "Factor level")
 }
+\seealso{
+Other methods for singular value decomposition-based techniques: 
+\code{\link{methods-cancor}},
+\code{\link{methods-ca}},
+\code{\link{methods-lda}},
+\code{\link{methods-lra}},
+\code{\link{methods-prcomp}},
+\code{\link{methods-princomp}},
+\code{\link{methods-svd}}
+}
+\concept{methods for singular value decomposition-based techniques}

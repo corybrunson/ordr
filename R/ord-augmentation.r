@@ -7,11 +7,12 @@
 
 #' @details
 #'
-#' The `augmentation_*()` methods produce [tibble][tibble::tibble]s of values
-#' associated with the rows, columns, and artificial coordinates of an object of
-#' class '[tbl_ord]'. The first field of each tibble is `.name`, which contains
-#' the row, column, or coordinate names. Additional fields contain information
-#' about the rows, columns, or coordinates extracted from the ordination object.
+#' The unexported `augmentation_*()` methods produce [tibble][tibble::tibble]s
+#' of values associated with the rows, columns, and artificial coordinates of an
+#' object of class '[tbl_ord]'. The first field of each tibble is `.name`, which
+#' contains the row, column, or coordinate names. Additional fields contain
+#' information about the rows, columns, or coordinates extracted from the
+#' ordination object.
 #'
 #' The function `augment_ord()` returns the ordination with either or both
 #' matrix factors annotated with the result of `augmentation_*()`. In this way
@@ -30,16 +31,10 @@
 #' @seealso [tidiers] and [annotation] methods that interface with augmentation.
 NULL
 
-#' @rdname augmentation
-#' @export
 augmentation_rows <- function(x) UseMethod("augmentation_rows")
 
-#' @rdname augmentation
-#' @export
 augmentation_cols <- function(x) UseMethod("augmentation_cols")
 
-#' @rdname augmentation
-#' @export
 augmentation_factor <- function(x, .matrix) {
   switch(
     match_factor(.matrix),
@@ -49,8 +44,6 @@ augmentation_factor <- function(x, .matrix) {
   )
 }
 
-#' @rdname augmentation
-#' @export
 augmentation_coord <- function(x) UseMethod("augmentation_coord")
 
 #' @rdname augmentation

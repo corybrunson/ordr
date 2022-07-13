@@ -2,17 +2,11 @@
 % Please edit documentation in R/ord-conference.r
 \name{conference}
 \alias{conference}
-\alias{recover_conference}
-\alias{recover_conference.default}
 \alias{get_conference}
 \alias{revert_conference}
 \alias{confer_inertia}
 \title{Confer inertia to factors of a 'tbl_ord' object}
 \usage{
-recover_conference(x)
-
-\method{recover_conference}{default}(x)
-
 get_conference(x)
 
 revert_conference(x)
@@ -44,6 +38,25 @@ Read Orlov (2013) for more on conferring inertia in PCA.
 \emph{Note: In case the \code{"inertia"} attribute is a rectangular matrix, one may
 only be able to confer it entirely to the cases (\code{p = 1}) or entirely to the
 variables (\code{p = 0}).}
+}
+\examples{
+# illustrative ordination: correspendence analysis of hair & eye data
+haireye_ca <- ordinate(
+  as.data.frame(rowSums(HairEyeColor, dims = 2L)),
+  cols = everything(), model = ca::ca
+)
+print(haireye_ca)
+# check distribution of inertia
+get_conference(haireye_ca)
+# confer inertia to rows, then to columns
+confer_inertia(haireye_ca, "rows")
+confer_inertia(haireye_ca, "columns")
+# confer inertia symmetrically
+(haireye_ca <- confer_inertia(haireye_ca, "symmetric"))
+# check redistributed inertia
+get_conference(haireye_ca)
+# restore default distribution of inertia
+revert_conference(haireye_ca)
 }
 \references{
 Orlov K (2013) \emph{Answer to} "Algebra of LDA. Fisher discrimination power of a

@@ -45,9 +45,11 @@
 #' @param data Passed to generic methods; currently ignored.
 #' @param ... Additional arguments allowed by generics; currently ignored.
 #' @template param-matrix
-#' @param .supplement Logical; whether to include
-#'   [supplementary][supplementation] points.
+#' @param elements Character; which elements of each factor for which to render
+#'   graphical elements. One of `"all"` (the default), `"active"`, or
+#'   `"supplementary"`, with partial matching.
 #' @seealso [augmentation] methods that must interface with tidiers.
+#' @example inst/examples/ex-ord-tidiers.r
 NULL
 
 #' @importFrom generics tidy
@@ -77,6 +79,7 @@ glance.tbl_ord <- function(x, ...) {
     # number of artificial coordinates
     rank = dim(x),
     # numbers of rows and of columns of original data
+    # -+- these should indicate dimensions of decomposed matrix -+-
     n.row = nrow(get_rows(x)),
     n.col = nrow(get_cols(x)),
     # -+- clarify whether this is original inertia or decomposed inertia -+-
@@ -93,15 +96,20 @@ glance.tbl_ord <- function(x, ...) {
 #' @export
 fortify.tbl_ord <- function(
   model, data, ...,
-  .matrix = "dims", .supplement = TRUE
+  .matrix = "dims", elements = "all"
 ) {
   .matrix <- match_factor(.matrix)
+  elements <- match.arg(elements, c("all", "active", "supplementary"))
   
   if (.matrix == "dims" || .matrix == "rows") {
     u <- as_tibble(get_rows(model))
     u <- dplyr::bind_cols(u, annotation_factor(model, "rows"))
-    if (! .supplement && ".supplement" %in% names(u)) {
-      u <- subset(u, ! .supplement)
+    if (elements != "all" && ".supplement" %in% names(u)) {
+      u <- switch(
+        elements,
+        active = u[! u$.supplement, , drop = FALSE],
+        supplementary = u[u$.supplement, , drop = FALSE]
+      )
       u$.supplement <- NULL
     }
     u$.matrix <- "rows"
@@ -109,8 +117,12 @@ fortify.tbl_ord <- function(
   if (.matrix == "dims" || .matrix == "cols") {
     v <- as_tibble(get_cols(model))
     v <- dplyr::bind_cols(v, annotation_factor(model, "cols"))
-    if (! .supplement && ".supplement" %in% names(v)) {
-      v <- subset(v, ! .supplement)
+    if (elements != "all" && ".supplement" %in% names(v)) {
+      v <- switch(
+        elements,
+        active = v[! v$.supplement, , drop = FALSE],
+        supplementary = v[v$.supplement, , drop = FALSE]
+      )
       v$.supplement <- NULL
     }
     v$.matrix <- "cols"

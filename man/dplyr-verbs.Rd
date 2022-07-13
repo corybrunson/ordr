@@ -41,9 +41,9 @@ transmute_rows(.data, ...)
 
 transmute_cols(.data, ...)
 
-cbind_rows(.data, ...)
+cbind_rows(.data, ..., elements = "all")
 
-cbind_cols(.data, ...)
+cbind_cols(.data, ..., elements = "all")
 
 left_join_rows(.data, ...)
 
@@ -60,6 +60,10 @@ standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 
 \item{...}{Comma-separated unquoted expressions as in, e.g.,
 \code{\link[dplyr:select]{dplyr::select()}}.}
+
+\item{elements}{Character; which elements of each factor to which to bind new
+annotation data. One of \code{"all"} (the default), \code{"active"}, or
+\code{"supplementary"}, with partial matching.}
 }
 \description{
 These functions adapt \link[dplyr:dplyr-package]{dplyr} verbs to the factors
