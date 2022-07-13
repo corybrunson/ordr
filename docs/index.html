@@ -218,6 +218,35 @@
 <span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"PCA of Anderson's iris measurements"</span>,</span>
 <span>          <span class="st">"99% confidence ellipses; variables use top &amp; right axes"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-interpolation%20biplot-1.png"><!-- --></p>
+<p>When variables are represented in standard coordinates, as typically in PCA, their rules can be rescaled to yield a prediction biplot:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="va">iris_pca</span>, prediction <span class="op">=</span> <span class="cn">TRUE</span>, axis.percents <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="reference/theme_biplot.html">theme_biplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="reference/biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">Species</span>, shape <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="reference/biplot-stats.html">stat_rows_center</a></span><span class="op">(</span></span>
+<span>    <span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">Species</span>, shape <span class="op">=</span> <span class="va">Species</span><span class="op">)</span>,</span>
+<span>    size <span class="op">=</span> <span class="fl">5</span>, alpha <span class="op">=</span> <span class="fl">.5</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="reference/biplot-geoms.html">geom_cols_axis</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_cols_axis_ticks</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>center <span class="op">=</span> <span class="va">.center</span>, scale <span class="op">=</span> <span class="va">.scale</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_cols_axis_text</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>center <span class="op">=</span> <span class="va">.center</span>, scale <span class="op">=</span> <span class="va">.scale</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_cols_axis_label</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Prediction biplot of Anderson's iris measurements"</span>,</span>
+<span>          <span class="st">"Project a marker onto an axis to approximate its measurement"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Ignoring unknown aesthetics: center, scale</span></span>
+<span></span>
+<span><span class="co">#&gt; Warning: Ignoring unknown aesthetics: center, scale</span></span>
+<span><span class="co">#&gt; Warning: Ignoring unknown aesthetics: label</span></span>
+<span><span class="co">#&gt; No center (limit) function(s) supplied; defaulting to `mean_se()`</span></span>
+<span><span class="co">#&gt; No center (limit) function(s) supplied; defaulting to `mean_se()`</span></span>
+<span><span class="co">#&gt; No center (limit) function(s) supplied; defaulting to `mean_se()`</span></span></code></pre></div>
+<p><img src="reference/figures/README-prediction%20biplot-1.png"><!-- --></p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, by <span class="op">=</span> <span class="va">iris</span><span class="op">[</span>, <span class="st">"Species"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>, FUN <span class="op">=</span> <span class="va">mean</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      Species Sepal.Length Sepal.Width Petal.Length Petal.Width</span></span>
+<span><span class="co">#&gt; 1     setosa        5.006       3.428        1.462       0.246</span></span>
+<span><span class="co">#&gt; 2 versicolor        5.936       2.770        4.260       1.326</span></span>
+<span><span class="co">#&gt; 3  virginica        6.588       2.974        5.552       2.026</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="more-methods">more methods<a class="anchor" aria-label="anchor" href="#more-methods"></a>

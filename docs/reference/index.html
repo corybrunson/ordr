@@ -99,7 +99,7 @@
           <p class="section-desc"></p><p>The ‘tbl_ord’ class wrapper, with methods for accessing components and for querying and manipulating metadata</p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="accessors.html">recover_rows()</a></code> <code><a href="accessors.html">recover_cols()</a></code> <code><a href="accessors.html">get_rows()</a></code> <code><a href="accessors.html">get_cols()</a></code> <code><a href="accessors.html">as.matrix(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="accessors.html">recover_inertia()</a></code> <code><a href="accessors.html">recover_coord()</a></code> <code><a href="accessors.html">get_coord()</a></code> <code><a href="accessors.html">get_inertia()</a></code> <code><a href="accessors.html">dim(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="accessors.html">augmentation_rows()</a></code> <code><a href="accessors.html">augmentation_cols()</a></code> <code><a href="accessors.html">augmentation_coord()</a></code> <code><a href="accessors.html">recover_conference()</a></code> <code><a href="accessors.html">supplementation_rows()</a></code> <code><a href="accessors.html">supplementation_cols()</a></code> </p>
+          <p><code><a href="accessors.html">recover_rows()</a></code> <code><a href="accessors.html">recover_cols()</a></code> <code><a href="accessors.html">get_rows()</a></code> <code><a href="accessors.html">get_cols()</a></code> <code><a href="accessors.html">as.matrix(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="accessors.html">recover_inertia()</a></code> <code><a href="accessors.html">recover_coord()</a></code> <code><a href="accessors.html">get_coord()</a></code> <code><a href="accessors.html">get_inertia()</a></code> <code><a href="accessors.html">dim(<i>&lt;tbl_ord&gt;</i>)</a></code> <code><a href="accessors.html">augmentation_rows()</a></code> <code><a href="accessors.html">augmentation_cols()</a></code> <code><a href="accessors.html">augmentation_coord()</a></code> <code><a href="accessors.html">recover_conference()</a></code> </p>
         </td>
         <td><p>Access factors, coordinates, and metadata from ordination objects</p></td>
       </tr><tr><td>
@@ -115,11 +115,11 @@
         </td>
         <td><p>Annotate factors of 'tbl_ord' objects</p></td>
       </tr><tr><td>
-          <p><code><a href="conference.html">get_conference()</a></code> <code><a href="conference.html">revert_conference()</a></code> <code><a href="conference.html">confer_inertia()</a></code> </p>
+          <p><code><a href="conference.html">recover_conference(<i>&lt;default&gt;</i>)</a></code> <code><a href="conference.html">get_conference()</a></code> <code><a href="conference.html">revert_conference()</a></code> <code><a href="conference.html">confer_inertia()</a></code> </p>
         </td>
         <td><p>Confer inertia to factors of a 'tbl_ord' object</p></td>
       </tr><tr><td>
-          <p><code><a href="supplementation.html">supplementation</a></code> </p>
+          <p><code><a href="supplementation.html">supplementation_rows()</a></code> <code><a href="supplementation.html">supplementation_cols()</a></code> </p>
         </td>
         <td><p>Supplement 'tbl_ord' objects with new data</p></td>
       </tr><tr><td>
@@ -227,56 +227,56 @@
           <p class="section-desc"></p><p>Accessor and augmentation methods for ordination classes from other packages</p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="methods-ca.html">as_tbl_ord(<i>&lt;ca&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-ca.html">as_tbl_ord(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_rows(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_cols(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_inertia(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_conference(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">recover_coord(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">augmentation_rows(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">augmentation_cols(<i>&lt;ca&gt;</i>)</a></code> <code><a href="methods-ca.html">augmentation_coord(<i>&lt;ca&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for correspondence analysis ('ca') objects</p></td>
       </tr><tr><td>
-          <p><code><a href="methods-cancor.html">as_tbl_ord(<i>&lt;cancor&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-cancor.html">as_tbl_ord(<i>&lt;cancor&gt;</i>)</a></code> <code><a href="methods-cancor.html">recover_rows(<i>&lt;cancor&gt;</i>)</a></code> <code><a href="methods-cancor.html">recover_cols(<i>&lt;cancor&gt;</i>)</a></code> <code><a href="methods-cancor.html">recover_inertia(<i>&lt;cancor&gt;</i>)</a></code> <code><a href="methods-cancor.html">recover_coord(<i>&lt;cancor&gt;</i>)</a></code> <code><a href="methods-cancor.html">recover_conference(<i>&lt;cancor&gt;</i>)</a></code> <code><a href="methods-cancor.html">augmentation_rows(<i>&lt;cancor&gt;</i>)</a></code> <code><a href="methods-cancor.html">augmentation_cols(<i>&lt;cancor&gt;</i>)</a></code> <code><a href="methods-cancor.html">augmentation_coord(<i>&lt;cancor&gt;</i>)</a></code> <code><a href="methods-cancor.html">supplementation_rows(<i>&lt;cancor&gt;</i>)</a></code> <code><a href="methods-cancor.html">supplementation_cols(<i>&lt;cancor&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for canonical correlation ('cancor') objects</p></td>
       </tr><tr><td>
-          <p><code><a href="methods-cmds.html">as_tbl_ord(<i>&lt;cmds_ord&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-cmds.html">as_tbl_ord(<i>&lt;cmds_ord&gt;</i>)</a></code> <code><a href="methods-cmds.html">recover_rows(<i>&lt;cmds_ord&gt;</i>)</a></code> <code><a href="methods-cmds.html">recover_cols(<i>&lt;cmds_ord&gt;</i>)</a></code> <code><a href="methods-cmds.html">recover_inertia(<i>&lt;cmds_ord&gt;</i>)</a></code> <code><a href="methods-cmds.html">recover_coord(<i>&lt;cmds_ord&gt;</i>)</a></code> <code><a href="methods-cmds.html">recover_conference(<i>&lt;cmds_ord&gt;</i>)</a></code> <code><a href="methods-cmds.html">augmentation_rows(<i>&lt;cmds_ord&gt;</i>)</a></code> <code><a href="methods-cmds.html">augmentation_cols(<i>&lt;cmds_ord&gt;</i>)</a></code> <code><a href="methods-cmds.html">augmentation_coord(<i>&lt;cmds_ord&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for classical multidimensional scaling objects</p></td>
       </tr><tr><td>
-          <p><code><a href="methods-eigen.html">as_tbl_ord(<i>&lt;eigen_ord&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-eigen.html">as_tbl_ord(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_rows(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_cols(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_inertia(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_coord(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_conference(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">augmentation_rows(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">augmentation_cols(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">augmentation_coord(<i>&lt;eigen_ord&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for eigendecompositions</p></td>
       </tr><tr><td>
-          <p><code><a href="methods-factanal.html">as_tbl_ord(<i>&lt;factanal&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-factanal.html">as_tbl_ord(<i>&lt;factanal&gt;</i>)</a></code> <code><a href="methods-factanal.html">recover_rows(<i>&lt;factanal&gt;</i>)</a></code> <code><a href="methods-factanal.html">recover_cols(<i>&lt;factanal&gt;</i>)</a></code> <code><a href="methods-factanal.html">recover_inertia(<i>&lt;factanal&gt;</i>)</a></code> <code><a href="methods-factanal.html">recover_coord(<i>&lt;factanal&gt;</i>)</a></code> <code><a href="methods-factanal.html">recover_conference(<i>&lt;factanal&gt;</i>)</a></code> <code><a href="methods-factanal.html">supplementation_rows(<i>&lt;factanal&gt;</i>)</a></code> <code><a href="methods-factanal.html">augmentation_rows(<i>&lt;factanal&gt;</i>)</a></code> <code><a href="methods-factanal.html">augmentation_cols(<i>&lt;factanal&gt;</i>)</a></code> <code><a href="methods-factanal.html">augmentation_coord(<i>&lt;factanal&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for factor analysis ('factanal') objects</p></td>
       </tr><tr><td>
-          <p><code><a href="methods-kmeans.html">as_tbl_ord(<i>&lt;kmeans&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-kmeans.html">as_tbl_ord(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">recover_rows(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">recover_cols(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">recover_coord(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">augmentation_rows(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">augmentation_cols(<i>&lt;kmeans&gt;</i>)</a></code> <code><a href="methods-kmeans.html">augmentation_coord(<i>&lt;kmeans&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for k-means clustering ('kmeans') objects</p></td>
       </tr><tr><td>
-          <p><code><a href="methods-lda.html">as_tbl_ord(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">as_tbl_ord(<i>&lt;lda_ord&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-lda.html">as_tbl_ord(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">as_tbl_ord(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_rows(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_rows(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_cols(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_cols(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_inertia(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_inertia(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_coord(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_coord(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_conference(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">recover_conference(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">augmentation_rows(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">augmentation_rows(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">augmentation_cols(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">augmentation_cols(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">augmentation_coord(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">augmentation_coord(<i>&lt;lda_ord&gt;</i>)</a></code> <code><a href="methods-lda.html">supplementation_rows(<i>&lt;lda&gt;</i>)</a></code> <code><a href="methods-lda.html">supplementation_rows(<i>&lt;lda_ord&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for linear discriminant analysis ('lda') objects</p></td>
       </tr><tr><td>
-          <p><code><a href="methods-lm.html">as_tbl_ord(<i>&lt;lm&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-lm.html">as_tbl_ord(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">recover_rows(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">recover_cols(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">recover_coord(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_rows(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_cols(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_coord(<i>&lt;lm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_rows(<i>&lt;glm&gt;</i>)</a></code> <code><a href="methods-lm.html">recover_rows(<i>&lt;mlm&gt;</i>)</a></code> <code><a href="methods-lm.html">recover_cols(<i>&lt;mlm&gt;</i>)</a></code> <code><a href="methods-lm.html">recover_coord(<i>&lt;mlm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_rows(<i>&lt;mlm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_cols(<i>&lt;mlm&gt;</i>)</a></code> <code><a href="methods-lm.html">augmentation_coord(<i>&lt;mlm&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for linear model objects</p></td>
       </tr><tr><td>
-          <p><code><a href="methods-lra.html">as_tbl_ord(<i>&lt;lra&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-lra.html">as_tbl_ord(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_rows(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_cols(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_inertia(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_coord(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">recover_conference(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">augmentation_rows(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">augmentation_cols(<i>&lt;lra&gt;</i>)</a></code> <code><a href="methods-lra.html">augmentation_coord(<i>&lt;lra&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for log-ratio analysis ('lra') objects</p></td>
       </tr><tr><td>
-          <p><code><a href="methods-mjca.html">as_tbl_ord(<i>&lt;mjca&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-mjca.html">as_tbl_ord(<i>&lt;mjca&gt;</i>)</a></code> <code><a href="methods-mjca.html">recover_rows(<i>&lt;mjca&gt;</i>)</a></code> <code><a href="methods-mjca.html">recover_cols(<i>&lt;mjca&gt;</i>)</a></code> <code><a href="methods-mjca.html">recover_inertia(<i>&lt;mjca&gt;</i>)</a></code> <code><a href="methods-mjca.html">recover_conference(<i>&lt;mjca&gt;</i>)</a></code> <code><a href="methods-mjca.html">recover_coord(<i>&lt;mjca&gt;</i>)</a></code> <code><a href="methods-mjca.html">augmentation_rows(<i>&lt;mjca&gt;</i>)</a></code> <code><a href="methods-mjca.html">augmentation_cols(<i>&lt;mjca&gt;</i>)</a></code> <code><a href="methods-mjca.html">augmentation_coord(<i>&lt;mjca&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for multiple and joint correspondence analysis ('mjca')
 objects</p></td>
       </tr><tr><td>
-          <p><code><a href="methods-prcomp.html">as_tbl_ord(<i>&lt;prcomp&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-prcomp.html">as_tbl_ord(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">recover_rows(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">recover_cols(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">recover_inertia(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">recover_coord(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">recover_conference(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">augmentation_rows(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">augmentation_cols(<i>&lt;prcomp&gt;</i>)</a></code> <code><a href="methods-prcomp.html">augmentation_coord(<i>&lt;prcomp&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for principal components analysis ('prcomp') objects</p></td>
       </tr><tr><td>
-          <p><code><a href="methods-princomp.html">as_tbl_ord(<i>&lt;princomp&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-princomp.html">as_tbl_ord(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">recover_rows(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">recover_cols(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">recover_inertia(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">recover_coord(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">recover_conference(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">augmentation_rows(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">augmentation_cols(<i>&lt;princomp&gt;</i>)</a></code> <code><a href="methods-princomp.html">augmentation_coord(<i>&lt;princomp&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for principal components analysis ('princomp') objects</p></td>
       </tr><tr><td>
-          <p><code><a href="methods-svd.html">as_tbl_ord(<i>&lt;svd_ord&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-svd.html">as_tbl_ord(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_rows(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_cols(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_inertia(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_coord(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">recover_conference(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">augmentation_rows(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">augmentation_cols(<i>&lt;svd_ord&gt;</i>)</a></code> <code><a href="methods-svd.html">augmentation_coord(<i>&lt;svd_ord&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for singular value decompositions</p></td>
       </tr></tbody></table></div>

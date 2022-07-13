@@ -58,17 +58,34 @@ ordination object."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aj
 ordination object.</p>
     </div>
 
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">supplementation_rows</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for default</span></span>
+<span><span class="fu">supplementation_rows</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">supplementation_cols</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for default</span></span>
+<span><span class="fu">supplementation_cols</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+    </div>
 
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>x</dt>
+<dd><p>An object of class '<a href="tbl_ord.html">tbl_ord</a>'.</p></dd>
+
+</dl></div>
     <div id="details">
     <h2>Details</h2>
-    <p>The unexported <code>supplementation_*()</code> methods produce matrices of supplemental
-rows or columns of a <a href="tbl_ord.html">tbl_ord</a> object from the object itself. The motivating
-example is linear discriminant analysis, which produces a natural biplot of
-class discriminant centroids and variable axes but is usually supplemented
-with case discriminant scores. The supplementary values are augmented with a
-<code>.supplement</code> column whose value indicates their source and can be
-incorporated into a tidied form. If no supplementary rows of a
-factor are produced, the functions return <code>NULL</code>.</p>
+    <p>The <code>supplementation_*()</code> <a href="https://rdrr.io/r/base/UseMethod.html" class="external-link">S3 methods</a> produce matrices of
+supplemental rows or columns of a <a href="tbl_ord.html">tbl_ord</a> object from the object itself.
+The motivating example is linear discriminant analysis, which produces a
+natural biplot of class discriminant centroids and variable axes but is
+usually supplemented with case discriminant scores. The supplementary values
+are augmented with a <code>.supplement</code> column whose value indicates their source
+and can be incorporated into a tidied form. If no supplementary
+rows of a factor are produced, the functions return <code>NULL</code>.</p>
     </div>
 
   </div>

@@ -78,12 +78,12 @@ standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</
 </dl></div>
     <div id="details">
     <h2>Details</h2>
-    <p>The unexported <code>augmentation_*()</code> methods produce <a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a>s
-of values associated with the rows, columns, and artificial coordinates of an
-object of class '<a href="tbl_ord.html">tbl_ord</a>'. The first field of each tibble is <code>.name</code>, which
-contains the row, column, or coordinate names. Additional fields contain
-information about the rows, columns, or coordinates extracted from the
-ordination object.</p>
+    <p>The <code>augmentation_*()</code> <a href="https://rdrr.io/r/base/UseMethod.html" class="external-link">S3 methods</a> produce
+<a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a>s of values associated with the rows, columns, and
+artificial coordinates of an object of class '<a href="tbl_ord.html">tbl_ord</a>'. The first field of
+each tibble is <code>.name</code>, which contains the row, column, or coordinate names.
+Additional fields contain information about the rows, columns, or coordinates
+extracted from the ordination object.</p>
 <p>The function <code>augment_ord()</code> returns the ordination with either or both
 matrix factors annotated with the result of <code>augmentation_*()</code>. In this way
 <code>augment_ord()</code> works like <code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">generics::augment()</a></code>, as popularized by the

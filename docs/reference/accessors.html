@@ -63,6 +63,18 @@ factorization underlying an ordination.</p>
 <span></span>
 <span><span class="fu">recover_cols</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># S3 method for default</span></span>
+<span><span class="fu">recover_rows</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for default</span></span>
+<span><span class="fu">recover_cols</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for data.frame</span></span>
+<span><span class="fu">recover_rows</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for data.frame</span></span>
+<span><span class="fu">recover_cols</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">get_rows</span><span class="op">(</span><span class="va">x</span>, elements <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">get_cols</span><span class="op">(</span><span class="va">x</span>, elements <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span>
@@ -72,6 +84,15 @@ factorization underlying an ordination.</p>
 <span></span>
 <span><span class="fu">recover_inertia</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># S3 method for default</span></span>
+<span><span class="fu">recover_inertia</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">recover_coord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for default</span></span>
+<span><span class="fu">recover_coord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for data.frame</span></span>
 <span><span class="fu">recover_coord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">get_coord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -87,11 +108,7 @@ factorization underlying an ordination.</p>
 <span></span>
 <span><span class="fu">augmentation_coord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">recover_conference</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">supplementation_rows</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">supplementation_cols</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">recover_conference</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -118,12 +135,12 @@ standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</
 </dl></div>
     <div id="details">
     <h2>Details</h2>
-    <p>The unexported <code>recover_*()</code> functions extract one or both of the row and
-column matrix factors that constitute the original ordination. These are
-interpreted as the case scores (rows) and the variable loadings (columns).
-The <code>get_*()</code> functions optionally (and by default) include any supplemental
-observations (see <a href="supplementation.html">supplementation</a>). The <code>recover_*()</code> functions are
-generics that require methods for each ordination class.</p>
+    <p>The <code>recover_*()</code> <a href="https://rdrr.io/r/base/UseMethod.html" class="external-link">S3 methods</a> extract one or both of the
+row and column matrix factors that constitute the original ordination. These
+are interpreted as the case scores (rows) and the variable loadings
+(columns). The <code>get_*()</code> functions optionally (and by default) include any
+supplemental observations (see <a href="supplementation.html">supplementation</a>). The <code>recover_*()</code>
+functions are generics that require methods for each ordination class.</p>
 <p><code>get_coord()</code> retrieves the names of the coordinates shared by the matrix
 factors on which the original data were ordinated, and <code>get_inertia()</code>
 retrieves a vector of the inertia with these names. <code><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim()</a></code> retrieves the
