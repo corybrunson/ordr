@@ -10,8 +10,11 @@
 #' row and column matrix factors that constitute the original ordination. These
 #' are interpreted as the case scores (rows) and the variable loadings
 #' (columns). The `get_*()` functions optionally (and by default) include any
-#' supplemental observations (see [supplementation]). The `recover_*()`
-#' functions are generics that require methods for each ordination class.
+#' supplemental observations (see [supplementation]).
+#'
+#' The `recover_*()` functions are generics that require methods for each
+#' ordination class. They are not intended to be called directly but are
+#' exported so that users can query `methods("recover_*")`.
 #'
 #' `get_coord()` retrieves the names of the coordinates shared by the matrix
 #' factors on which the original data were ordinated, and `get_inertia()`
@@ -30,6 +33,7 @@
 #' @param elements Character; which elements of each factor for which to render
 #'   graphical elements. One of `"all"` (the default), `"active"`, or
 #'   `"supplementary"`, with partial matching.
+#' @family generic accessors
 #' @example inst/examples/ex-ord-accessors.r
 NULL
 

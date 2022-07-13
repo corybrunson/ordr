@@ -15,6 +15,10 @@
 #' inertia: \eqn{UD^p} and \eqn{VD^q}. A biplot is _balanced_ if \eqn{p+q=1}.
 #' Read Orlov (2013) for more on conferring inertia in PCA.
 #'
+#' `recover_conference()`, like the other accessors, is an [S3
+#' method][base::S3Methods] that is exported for convenience but not intended to
+#' be used directly.
+#'
 #' _Note: In case the `"inertia"` attribute is a rectangular matrix, one may
 #' only be able to confer it entirely to the cases (`p = 1`) or entirely to the
 #' variables (`p = 0`)._
@@ -29,6 +33,7 @@
 #'   inertia assigned to the cases, with the remainder `1 - p` assigned to the
 #'   variables. If length 2, the proportions of the inertia assigned to the
 #'   cases and to the variables, respectively.
+#' @family generic accessors
 #' @example inst/examples/ex-ord-conference.r
 NULL
 
@@ -37,7 +42,7 @@ attribute_conference <- function(x, p) {
   x
 }
 
-#' @rdname accessors
+#' @rdname conference
 #' @export
 recover_conference <- function(x) UseMethod("recover_conference")
 

@@ -28,14 +28,15 @@
 #' @include ord-accessors.r
 #' @inheritParams accessors
 #' @template param-matrix
+#' @family generic accessors
 #' @seealso [tidiers] and [annotation] methods that interface with augmentation.
 NULL
 
-#' @rdname accessors
+#' @rdname augmentation
 #' @export
 augmentation_rows <- function(x) UseMethod("augmentation_rows")
 
-#' @rdname accessors
+#' @rdname augmentation
 #' @export
 augmentation_cols <- function(x) UseMethod("augmentation_cols")
 
@@ -48,7 +49,7 @@ augmentation_factor <- function(x, .matrix) {
   )
 }
 
-#' @rdname accessors
+#' @rdname augmentation
 #' @export
 augmentation_coord <- function(x) UseMethod("augmentation_coord")
 

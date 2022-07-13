@@ -59,8 +59,10 @@ ordination.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for default</span></span>
-<span><span class="fu"><a href="accessors.html">recover_conference</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">recover_conference</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for default</span></span>
+<span><span class="fu">recover_conference</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">get_conference</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
@@ -92,6 +94,8 @@ Biplots superimpose the projections of the rows and the columns of \(X\)
 onto these coordinate vectors, scaled by some proportion of the total
 inertia: \(UD^p\) and \(VD^q\). A biplot is <em>balanced</em> if \(p+q=1\).
 Read Orlov (2013) for more on conferring inertia in PCA.</p>
+<p><code>recover_conference()</code>, like the other accessors, is an <a href="https://rdrr.io/r/base/UseMethod.html" class="external-link">S3 method</a> that is exported for convenience but not intended to
+be used directly.</p>
 <p><em>Note: In case the <code>"inertia"</code> attribute is a rectangular matrix, one may
 only be able to confer it entirely to the cases (<code>p = 1</code>) or entirely to the
 variables (<code>p = 0</code>).</em></p>
@@ -101,6 +105,13 @@ variables (<code>p = 0</code>).</em></p>
     <p>Orlov K (2013) <em>Answer to</em> "Algebra of LDA. Fisher discrimination power of a
 variable and Linear Discriminant Analysis". CrossValidated, accessed
 2019-07-26. <a href="https://stats.stackexchange.com/a/83114/68743" class="external-link">https://stats.stackexchange.com/a/83114/68743</a></p>
+    </div>
+    <div id="see-also">
+    <h2>See also</h2>
+    <div class="dont-index"><p>Other generic accessors: 
+<code><a href="accessors.html">accessors</a></code>,
+<code><a href="augmentation.html">augmentation</a></code>,
+<code><a href="supplementation.html">supplementation</a></code></p></div>
     </div>
 
     <div id="ref-examples">

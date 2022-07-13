@@ -2,9 +2,18 @@
 % Please edit documentation in R/ord-augmentation.r
 \name{augmentation}
 \alias{augmentation}
+\alias{augmentation_rows}
+\alias{augmentation_cols}
+\alias{augmentation_coord}
 \alias{augment_ord}
 \title{Augment factors and coordinates of 'tbl_ord' objects}
 \usage{
+augmentation_rows(x)
+
+augmentation_cols(x)
+
+augmentation_coord(x)
+
 augment_ord(x, .matrix = "dims")
 }
 \arguments{
@@ -38,4 +47,10 @@ information contained in the original object becomes accessible to the user.
 }
 \seealso{
 \link{tidiers} and \link{annotation} methods that interface with augmentation.
+
+Other generic accessors: 
+\code{\link{accessors}},
+\code{\link{conference}},
+\code{\link{supplementation}}
 }
+\concept{generic accessors}

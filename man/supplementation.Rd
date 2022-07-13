@@ -33,3 +33,10 @@ are augmented with a \code{.supplement} column whose value indicates their sourc
 and can be incorporated into a \link[=fortify]{tidied form}. If no supplementary
 rows of a factor are produced, the functions return \code{NULL}.
 }
+\seealso{
+Other generic accessors: 
+\code{\link{accessors}},
+\code{\link{augmentation}},
+\code{\link{conference}}
+}
+\concept{generic accessors}
