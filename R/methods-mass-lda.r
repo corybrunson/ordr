@@ -24,17 +24,25 @@ as_tbl_ord.lda <- as_tbl_ord_default
 #' @export
 as_tbl_ord.lda_ord <- as_tbl_ord.lda
 
+#' @rdname methods-lda
+#' @export
 recover_rows.lda <- function(x) {
   centroid <- colSums(x$prior * x$means)
   scale(x$means, center = centroid, scale = FALSE) %*% x$scaling
 }
 
+#' @rdname methods-lda
+#' @export
 recover_rows.lda_ord <- recover_rows.lda
 
+#' @rdname methods-lda
+#' @export
 recover_cols.lda <- function(x) {
   x$scaling
 }
 
+#' @rdname methods-lda
+#' @export
 recover_cols.lda_ord <- function(x) {
   if (is.null(attr(x, "axes.scale"))) {
     x$scaling
@@ -43,21 +51,35 @@ recover_cols.lda_ord <- function(x) {
   }
 }
 
+#' @rdname methods-lda
+#' @export
 recover_inertia.lda <- function(x) x$svd^2
 
+#' @rdname methods-lda
+#' @export
 recover_inertia.lda_ord <- recover_inertia.lda
 
+#' @rdname methods-lda
+#' @export
 recover_coord.lda <- function(x) colnames(x$scaling)
 
+#' @rdname methods-lda
+#' @export
 recover_coord.lda_ord <- recover_coord.lda
 
+#' @rdname methods-lda
+#' @export
 recover_conference.lda <- function(x) {
   # `MASS::lda()` incorporates inertia into scores
   c(1, 0)
 }
 
+#' @rdname methods-lda
+#' @export
 recover_conference.lda_ord <- recover_conference.lda
 
+#' @rdname methods-lda
+#' @export
 augmentation_rows.lda <- function(x) {
   res <- if (is.null(rownames(x$means))) {
     tibble_pole(nrow(x$means))
@@ -95,6 +117,8 @@ augmentation_rows.lda <- function(x) {
   as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
+#' @rdname methods-lda
+#' @export
 augmentation_rows.lda_ord <- function(x) {
   res <- if (is.null(rownames(x$means))) {
     tibble_pole(nrow(x$means))
@@ -137,6 +161,8 @@ augmentation_rows.lda_ord <- function(x) {
   as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
+#' @rdname methods-lda
+#' @export
 augmentation_cols.lda <- function(x) {
   .name <- rownames(x$scaling)
   if (is.null(.name)) {
@@ -146,8 +172,12 @@ augmentation_cols.lda <- function(x) {
   }
 }
 
+#' @rdname methods-lda
+#' @export
 augmentation_cols.lda_ord <- augmentation_cols.lda
 
+#' @rdname methods-lda
+#' @export
 augmentation_coord.lda <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),
@@ -155,8 +185,12 @@ augmentation_coord.lda <- function(x) {
   )
 }
 
+#' @rdname methods-lda
+#' @export
 augmentation_coord.lda_ord <- augmentation_coord.lda
 
+#' @rdname methods-lda
+#' @export
 supplementation_rows.lda <- function(x) {
   olddata <- if (is.null(attr(x, "x"))) {
     try(recover_olddata_lda(x))
@@ -170,6 +204,8 @@ supplementation_rows.lda <- function(x) {
   scale(olddata, center = centroid, scale = FALSE) %*% x$scaling
 }
 
+#' @rdname methods-lda
+#' @export
 supplementation_rows.lda_ord <- supplementation_rows.lda
 
 recover_olddata_lda <- function(object) {

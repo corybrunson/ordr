@@ -16,6 +16,8 @@ NULL
 #' @export
 as_tbl_ord.lm <- as_tbl_ord_default
 
+#' @rdname methods-lm
+#' @export
 recover_rows.lm <- function(x) {
   res <- model.matrix(x)
   if (is.null(rownames(res)))
@@ -24,6 +26,8 @@ recover_rows.lm <- function(x) {
   res
 }
 
+#' @rdname methods-lm
+#' @export
 recover_cols.lm <- function(x) {
   res <- t(x$coefficients)
   if (is.null(rownames(res))) rownames(res) <-
@@ -32,11 +36,15 @@ recover_cols.lm <- function(x) {
   res
 }
 
+#' @rdname methods-lm
+#' @export
 recover_coord.lm <- function(x) {
   if (is.matrix(x$coefficients))
     colnames(x$coefficients) else names(x$coefficients)
 }
 
+#' @rdname methods-lm
+#' @export
 augmentation_rows.lm <- function(x) {
   res <- tibble(.name = rownames(model.frame(x)))
   infl <- influence(x, do.coef = FALSE)
@@ -54,6 +62,8 @@ augmentation_rows.lm <- function(x) {
   res
 }
 
+#' @rdname methods-lm
+#' @export
 augmentation_cols.lm <- function(x) {
   .name <- if (is.matrix(x$model[, 1]) && ! is.null(colnames(x$model[, 1]))) {
     colnames(x$model[, 1])
@@ -63,6 +73,8 @@ augmentation_cols.lm <- function(x) {
   tibble(.name = .name)
 }
 
+#' @rdname methods-lm
+#' @export
 augmentation_coord.lm <- function(x) {
   summ <- as.data.frame(stats::coef(summary(x)))
   names(summ) <- c(".estimate", ".std.error", ".t.value", ".p.value")
@@ -72,6 +84,8 @@ augmentation_coord.lm <- function(x) {
   ))
 }
 
+#' @rdname methods-lm
+#' @export
 augmentation_rows.glm <- function(x) {
   res <- tibble(.name = rownames(model.frame(x)))
   # diagnostics
@@ -93,6 +107,8 @@ augmentation_rows.glm <- function(x) {
   res
 }
 
+#' @rdname methods-lm
+#' @export
 recover_rows.mlm <- function(x) {
   .intercept_col <- if (rownames(x$coefficients)[1] == "(Intercept)") {
     .ic <- matrix(1L, nrow = nrow(x$model), ncol = 1)
@@ -105,12 +121,16 @@ recover_rows.mlm <- function(x) {
   res
 }
 
+#' @rdname methods-lm
+#' @export
 recover_cols.mlm <- function(x) {
   res <- t(x$coefficients)
   colnames(res) <- recover_coord(x)
   res
 }
 
+#' @rdname methods-lm
+#' @export
 recover_coord.mlm <- function(x) {
   .predictors <- x$model[, -1]
   if (is.matrix(.predictors)) {
@@ -132,12 +152,16 @@ recover_coord.mlm <- function(x) {
   coord
 }
 
+#' @rdname methods-lm
+#' @export
 augmentation_rows.mlm <- function(x) {
   tibble(
     .name = rownames(model.frame(x))
   )
 }
 
+#' @rdname methods-lm
+#' @export
 augmentation_cols.mlm <- function(x) {
   .name <- colnames(x$coefficients)
   if (is.null(.name)) {
@@ -146,6 +170,8 @@ augmentation_cols.mlm <- function(x) {
   tibble(.name = .name)
 }
 
+#' @rdname methods-lm
+#' @export
 augmentation_coord.mlm <- function(x) {
   # model summaries
   summs <- purrr::map_df(

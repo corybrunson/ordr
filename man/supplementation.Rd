@@ -2,18 +2,34 @@
 % Please edit documentation in R/ord-supplementation.r
 \name{supplementation}
 \alias{supplementation}
+\alias{supplementation_rows}
+\alias{supplementation_rows.default}
+\alias{supplementation_cols}
+\alias{supplementation_cols.default}
 \title{Supplement 'tbl_ord' objects with new data}
+\usage{
+supplementation_rows(x)
+
+\method{supplementation_rows}{default}(x)
+
+supplementation_cols(x)
+
+\method{supplementation_cols}{default}(x)
+}
+\arguments{
+\item{x}{An object of class '\link{tbl_ord}'.}
+}
 \description{
 These functions attach supplementary rows or columns to an
 ordination object.
 }
 \details{
-The unexported \verb{supplementation_*()} methods produce matrices of supplemental
-rows or columns of a \link{tbl_ord} object from the object itself. The motivating
-example is linear discriminant analysis, which produces a natural biplot of
-class discriminant centroids and variable axes but is usually supplemented
-with case discriminant scores. The supplementary values are augmented with a
-\code{.supplement} column whose value indicates their source and can be
-incorporated into a \link[=fortify]{tidied form}. If no supplementary rows of a
-factor are produced, the functions return \code{NULL}.
+The \verb{supplementation_*()} \link[base:UseMethod]{S3 methods} produce matrices of
+supplemental rows or columns of a \link{tbl_ord} object from the object itself.
+The motivating example is linear discriminant analysis, which produces a
+natural biplot of class discriminant centroids and variable axes but is
+usually supplemented with case discriminant scores. The supplementary values
+are augmented with a \code{.supplement} column whose value indicates their source
+and can be incorporated into a \link[=fortify]{tidied form}. If no supplementary
+rows of a factor are produced, the functions return \code{NULL}.
 }

@@ -46,13 +46,13 @@ artificial coordinates created by ordinations. The output can be passed to
 reports information about the entire model, here always treated as one of a
 broader class of ordination models.
 \item The \code{\link[ggplot2:fortify]{ggplot2::fortify()}} method
-augments and collapses row and/or column data, depending on \code{.matrix}, into
-a single tibble, in preparation for \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}. Its output
-resembles that of \code{\link[generics:augment]{generics::augment()}}, though rows in the output may
-correspond to rows, columns, or both of the original data. If \code{.matrix} is
-passed \code{"rows"}, \code{"cols"}, or \code{"dims"} (for both), then \code{fortify()} returns
-a tibble whose fields are obtained, in order, via \verb{get_*()},
-\verb{augmentation_*()}, and \verb{annotation_*()}.
+augments and collapses row and/or column data, depending on \code{.matrix} and
+\code{.supplement}, into a single tibble, in preparation for
+\code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}. Its output resembles that of \code{\link[generics:augment]{generics::augment()}},
+though rows in the output may correspond to rows, columns, or both of the
+original data. If \code{.matrix} is passed \code{"rows"}, \code{"cols"}, or \code{"dims"} (for
+both), then \code{fortify()} returns a tibble whose fields are obtained, in
+order, via \verb{get_*()}, \verb{augmentation_*()}, and \verb{annotation_*()}.
 }
 
 The tibble is assigned a \code{"coordinates"} attribute whose value is obtained

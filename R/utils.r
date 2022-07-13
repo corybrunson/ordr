@@ -76,7 +76,7 @@ setup_rows_data <- function(data, params) {
     data[data$.matrix == "rows", -match(".matrix", names(data)), drop = FALSE]
   
   # if specified and possible, restrict to active or supplementary elements
-  if (! is.null(params$elements)) {
+  if (! is.null(params$elements) && ".supplement" %in% names(data)) {
     params$elements <-
       match.arg(params$elements, c("all", "active", "supplementary"))
     data <- switch(
@@ -110,7 +110,7 @@ setup_cols_data <- function(data, params) {
     data[data$.matrix == "cols", -match(".matrix", names(data)), drop = FALSE]
   
   # if specified and possible, restrict to active or supplementary elements
-  if (! is.null(params$elements)) {
+  if (! is.null(params$elements) && ".supplement" %in% names(data)) {
     params$elements <-
       match.arg(params$elements, c("all", "active", "supplementary"))
     data <- switch(

@@ -6,30 +6,35 @@
 
 #' @details
 #'
-#' The unexported `supplementation_*()` methods produce matrices of supplemental
-#' rows or columns of a [tbl_ord] object from the object itself. The motivating
-#' example is linear discriminant analysis, which produces a natural biplot of
-#' class discriminant centroids and variable axes but is usually supplemented
-#' with case discriminant scores. The supplementary values are augmented with a
-#' `.supplement` column whose value indicates their source and can be
-#' incorporated into a [tidied form][fortify]. If no supplementary rows of a
-#' factor are produced, the functions return `NULL`.
+#' The `supplementation_*()` [S3 methods][base::S3Methods] produce matrices of
+#' supplemental rows or columns of a [tbl_ord] object from the object itself.
+#' The motivating example is linear discriminant analysis, which produces a
+#' natural biplot of class discriminant centroids and variable axes but is
+#' usually supplemented with case discriminant scores. The supplementary values
+#' are augmented with a `.supplement` column whose value indicates their source
+#' and can be incorporated into a [tidied form][fortify]. If no supplementary
+#' rows of a factor are produced, the functions return `NULL`.
 #' 
 
 #' @name supplementation
 #' @include ord-augmentation.r
+#' @inheritParams accessors
 NULL
 
-#' @rdname accessors
+#' @rdname supplementation
 #' @export
 supplementation_rows <- function(x) UseMethod("supplementation_rows")
 
+#' @rdname supplementation
+#' @export
 supplementation_rows.default <- function(x) NULL
 
-#' @rdname accessors
+#' @rdname supplementation
 #' @export
 supplementation_cols <- function(x) UseMethod("supplementation_cols")
 
+#' @rdname supplementation
+#' @export
 supplementation_cols.default <- function(x) NULL
 
 supplementation_factor <- function(x, .matrix) {

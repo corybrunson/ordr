@@ -15,6 +15,8 @@ NULL
 #' @export
 as_tbl_ord.mjca <- as_tbl_ord_default
 
+#' @rdname methods-mjca
+#' @export
 recover_rows.mjca <- function(x) {
   res <- x$rowcoord
   rownames(res) <- x$rownames
@@ -22,6 +24,8 @@ recover_rows.mjca <- function(x) {
   res
 }
 
+#' @rdname methods-mjca
+#' @export
 recover_cols.mjca <- function(x) {
   res <- x$colcoord
   rownames(res) <- x$levelnames
@@ -29,15 +33,23 @@ recover_cols.mjca <- function(x) {
   res
 }
 
+#' @rdname methods-mjca
+#' @export
 recover_inertia.mjca <- function(x) x$sv[seq(ncol(x$rowcoord))] ^ 2
 
+#' @rdname methods-mjca
+#' @export
 recover_conference.mjca <- function(x) {
   # `ca::mjca()` methods draw from row and column standard coordinates
   c(0, 0)
 }
 
+#' @rdname methods-mjca
+#' @export
 recover_coord.mjca <- function(x) paste0("Dim", seq(ncol(x$rowcoord)))
 
+#' @rdname methods-mjca
+#' @export
 augmentation_rows.mjca <- function(x) {
   .name <- x$rownames
   res <- if (is.null(.name)) {
@@ -53,6 +65,8 @@ augmentation_rows.mjca <- function(x) {
   )
 }
 
+#' @rdname methods-mjca
+#' @export
 augmentation_cols.mjca <- function(x){
   .name <- x$levelnames
   res <- if (is.null(.name)) {
@@ -69,6 +83,8 @@ augmentation_cols.mjca <- function(x){
   )
 }
 
+#' @rdname methods-mjca
+#' @export
 augmentation_coord.mjca <- function(x){
   tibble(
     .name = factor_coord(recover_coord(x)),

@@ -15,27 +15,39 @@ NULL
 #' @export
 as_tbl_ord.prcomp <- as_tbl_ord_default
 
+#' @rdname methods-prcomp
+#' @export
 recover_rows.prcomp <- function(x) {
   x[["x"]]
 }
 
+#' @rdname methods-prcomp
+#' @export
 recover_cols.prcomp <- function(x) {
   x[["rotation"]]
 }
 
+#' @rdname methods-prcomp
+#' @export
 recover_inertia.prcomp <- function(x) {
   (x[["sdev"]] ^ 2) * (nrow(x[["x"]]) - 1)
 }
 
+#' @rdname methods-prcomp
+#' @export
 recover_coord.prcomp <- function(x) {
   colnames(x[["rotation"]])
 }
 
+#' @rdname methods-prcomp
+#' @export
 recover_conference.prcomp <- function(x) {
   # `stats::prcomp()` returns the rotated data
   c(1, 0)
 }
 
+#' @rdname methods-prcomp
+#' @export
 augmentation_rows.prcomp <- function(x) {
   .name <- rownames(x[["x"]])
   if (is.null(.name)) {
@@ -45,6 +57,8 @@ augmentation_rows.prcomp <- function(x) {
   }
 }
 
+#' @rdname methods-prcomp
+#' @export
 augmentation_cols.prcomp <- function(x) {
   .name <- rownames(x[["rotation"]])
   res <- if (is.null(.name)) {
@@ -61,6 +75,8 @@ augmentation_cols.prcomp <- function(x) {
   res
 }
 
+#' @rdname methods-prcomp
+#' @export
 augmentation_coord.prcomp <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),

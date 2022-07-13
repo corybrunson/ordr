@@ -10,11 +10,13 @@ test_that("`pull_*()` returns a vector", {
 test_that("`cbind_*()` appends a column only of the correct length", {
   expect_equal(
     ncol(fortify(cbind_rows(pca, iris[, 5, drop = FALSE]), .matrix = "rows")),
-    4 + 1 + 1
+    # original + bound + fortified (`.matrix` & `.supplement`)
+    4L + 1L + 2L
   )
   expect_equal(
     ncol(fortify(cbind_rows(pca, species = iris[[5]]), .matrix = "rows")),
-    4 + 1 + 1
+    # original + bound + fortified (`.matrix` & `.supplement`)
+    4L + 1L + 2L
   )
   expect_error(cbind_rows(pca, letter = letters),
                regexp = "length|recycle",

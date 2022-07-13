@@ -2,11 +2,14 @@
 % Please edit documentation in R/ord-conference.r
 \name{conference}
 \alias{conference}
+\alias{recover_conference.default}
 \alias{get_conference}
 \alias{revert_conference}
 \alias{confer_inertia}
 \title{Confer inertia to factors of a 'tbl_ord' object}
 \usage{
+\method{recover_conference}{default}(x)
+
 get_conference(x)
 
 revert_conference(x)

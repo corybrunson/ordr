@@ -6,12 +6,12 @@
 
 #' @details
 #'
-#' The unexported `recover_*()` functions extract one or both of the row and
-#' column matrix factors that constitute the original ordination. These are
-#' interpreted as the case scores (rows) and the variable loadings (columns).
-#' The `get_*()` functions optionally (and by default) include any supplemental
-#' observations (see [supplementation]). The `recover_*()` functions are
-#' generics that require methods for each ordination class.
+#' The `recover_*()` [S3 methods][base::S3Methods] extract one or both of the
+#' row and column matrix factors that constitute the original ordination. These
+#' are interpreted as the case scores (rows) and the variable loadings
+#' (columns). The `get_*()` functions optionally (and by default) include any
+#' supplemental observations (see [supplementation]). The `recover_*()`
+#' functions are generics that require methods for each ordination class.
 #'
 #' `get_coord()` retrieves the names of the coordinates shared by the matrix
 #' factors on which the original data were ordinated, and `get_inertia()`
@@ -53,16 +53,24 @@ recover_factor <- function(x, .matrix) {
 # need `recover_*` functions before and after coercion;
 # `recover_*.tbl_ord` are unnecessary
 
+#' @rdname accessors
+#' @export
 recover_rows.default <- function(x) x$rows
 
+#' @rdname accessors
+#' @export
 recover_cols.default <- function(x) x$cols
 
 # for fortified tbl_ords (also coordinates?)
 
+#' @rdname accessors
+#' @export
 recover_rows.data.frame <- function(x) {
   x[x$.matrix == "rows", -match(".matrix", names(x))]
 }
 
+#' @rdname accessors
+#' @export
 recover_cols.data.frame <- function(x) {
   x[x$.matrix == "cols", -match(".matrix", names(x))]
 }
@@ -136,16 +144,22 @@ as.matrix.tbl_ord <- function(
 #' @export
 recover_inertia <- function(x) UseMethod("recover_inertia")
 
+#' @rdname accessors
+#' @export
 recover_inertia.default <- function(x) NA_real_
 
 #' @rdname accessors
 #' @export
 recover_coord <- function(x) UseMethod("recover_coord")
 
+#' @rdname accessors
+#' @export
 recover_coord.default <- function(x) {
   intersect(colnames(recover_rows(x)), colnames(recover_cols(x)))
 }
 
+#' @rdname accessors
+#' @export
 recover_coord.data.frame <- function(x) {
   if (! is.null(attr(x, "coordinates"))) {
     attr(x, "coordinates")
