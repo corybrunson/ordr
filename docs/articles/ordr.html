@@ -46,7 +46,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -81,437 +81,569 @@
 
     
     
-<p>This vignette introduces the goals and functionality of the <strong>ordr</strong> package. Users should have some familiarity with the class of <em>ordination</em> models powered by singular value decomposition, such as principal components analysis, correspondence analysis, and linear discriminant analysis, and with the <em>biplot</em> statistical graphic used to visualize these models. Users should also be familiar with the <strong>tidyverse</strong> R package collection for data science and parts of the <strong>tidymodels</strong> collection for statistical modeling, most notably <strong>tibble</strong>, <strong>dplyr</strong>, <strong>broom</strong>, and <strong>ggplot2</strong>.</p>
-<p>Briefly, <strong>ordr</strong> incorporates ordination models into a “tidy” workflow. Specifically, for fitted ordination models of a variety of classes, users can</p>
+<p>This vignette introduces the goals and functionality of the
+<strong>ordr</strong> package. Users should have some familiarity with
+the class of <em>ordination</em> models powered by singular value
+decomposition, such as principal components analysis, correspondence
+analysis, and linear discriminant analysis, and with the <em>biplot</em>
+statistical graphic used to visualize these models. Users should also be
+familiar with the <strong>tidyverse</strong> R package collection for
+data science and parts of the <strong>tidymodels</strong> collection for
+statistical modeling, most notably <strong>tibble</strong>,
+<strong>dplyr</strong>, <strong>broom</strong>, and
+<strong>ggplot2</strong>.</p>
+<p>Briefly, <strong>ordr</strong> incorporates ordination models into a
+“tidy” workflow. Specifically, for fitted ordination models of a variety
+of classes, users can</p>
 <ul>
-<li>augment the model with row- or column-level diagnostics and annotations,</li>
+<li>augment the model with row- or column-level diagnostics and
+annotations,</li>
 <li>summarize the model or its components as tidy data frames, and</li>
-<li>produce a biplot of the model using a layered grammar of graphics.</li>
+<li>produce a biplot of the model using a layered grammar of
+graphics.</li>
 </ul>
-<p>As an example, this vignette performs a correspondence analysis (CA) of the <code>HairEyeColor</code> data set installed with R, using the fitting engine and already high-quality printing and plotting methods of the <strong>ca</strong> package, then showcases some more flexible methods in <strong>ordr</strong>. While some techniques specific to CA are not as natural in <strong>ordr</strong>, most can be reproduced through the principled use of general steps.</p>
+<p>As an example, this vignette performs a correspondence analysis (CA)
+of the <code>HairEyeColor</code> data set installed with R, using the
+fitting engine and already high-quality printing and plotting methods of
+the <strong>ca</strong> package, then showcases some more flexible
+methods in <strong>ordr</strong>. While some techniques specific to CA
+are not as natural in <strong>ordr</strong>, most can be reproduced
+through the principled use of general steps.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">HairEyeColor</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.carme-n.org/" class="external-link">ca</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ordr</span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: ggplot2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">HairEyeColor</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.carme-n.org/" class="external-link">ca</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ordr</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Loading required package: ggplot2</span></span>
+<span><span class="co">#&gt; Warning: package 'ggplot2' was built under R version 4.1.2</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="the-hair-and-eye-color-data">the hair and eye color data<a class="anchor" aria-label="anchor" href="#the-hair-and-eye-color-data"></a>
 </h2>
-<p>We begin with an inspection of the data using base R. For more information about the data set, call <code><a href="https://rdrr.io/r/datasets/HairEyeColor.html" class="external-link">help(HairEyeColor)</a></code>.</p>
+<p>We begin with an inspection of the data using base R. For more
+information about the data set, call
+<code><a href="https://rdrr.io/r/datasets/HairEyeColor.html" class="external-link">help(HairEyeColor)</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">HairEyeColor</span><span class="op">)</span>
-<span class="co">#&gt; , , Sex = Male</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;        Eye</span>
-<span class="co">#&gt; Hair    Brown Blue Hazel Green</span>
-<span class="co">#&gt;   Black    32   11    10     3</span>
-<span class="co">#&gt;   Brown    53   50    25    15</span>
-<span class="co">#&gt;   Red      10   10     7     7</span>
-<span class="co">#&gt;   Blond     3   30     5     8</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; , , Sex = Female</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;        Eye</span>
-<span class="co">#&gt; Hair    Brown Blue Hazel Green</span>
-<span class="co">#&gt;   Black    36    9     5     2</span>
-<span class="co">#&gt;   Brown    66   34    29    14</span>
-<span class="co">#&gt;   Red      16    7     7     7</span>
-<span class="co">#&gt;   Blond     4   64     5     8</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">HairEyeColor</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">HairEyeColor</span><span class="op">)</span></span>
+<span><span class="co">#&gt; , , Sex = Male</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;        Eye</span></span>
+<span><span class="co">#&gt; Hair    Brown Blue Hazel Green</span></span>
+<span><span class="co">#&gt;   Black    32   11    10     3</span></span>
+<span><span class="co">#&gt;   Brown    53   50    25    15</span></span>
+<span><span class="co">#&gt;   Red      10   10     7     7</span></span>
+<span><span class="co">#&gt;   Blond     3   30     5     8</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; , , Sex = Female</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;        Eye</span></span>
+<span><span class="co">#&gt; Hair    Brown Blue Hazel Green</span></span>
+<span><span class="co">#&gt;   Black    36    9     5     2</span></span>
+<span><span class="co">#&gt;   Brown    66   34    29    14</span></span>
+<span><span class="co">#&gt;   Red      16    7     7     7</span></span>
+<span><span class="co">#&gt;   Blond     4   64     5     8</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">HairEyeColor</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ordr_files/figure-html/unnamed-chunk-1-1.png" width="576" style="display: block; margin: auto;"></p>
-<p>The data were collected by students in one of Ronald Snee’s statistics courses.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> They consist of the hair color and eye color, each binned into four groups, of 592 subjects. The data are also stratified by sex, forming a 3-way array. The mosaic plot reveals only subtle differences by sex, so we lose little by flattening the array into a <span class="math inline">\(4 \times 4\)</span> matrix. The resulting count table is suitable for correspondence analysis, and we fit this model next.</p>
+<p>The data were collected by students in one of Ronald Snee’s
+statistics courses.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> They consist of the hair color and eye
+color, each binned into four groups, of 592 subjects. The data are also
+stratified by sex, forming a 3-way array. The mosaic plot reveals only
+subtle differences by sex, so we lose little by flattening the array
+into a <span class="math inline">\(4 \times 4\)</span> matrix. The
+resulting count table is suitable for correspondence analysis, and we
+fit this model next.</p>
 </div>
 <div class="section level2">
 <h2 id="correspondence-analysis-using-ca">correspondence analysis using <strong>ca</strong><a class="anchor" aria-label="anchor" href="#correspondence-analysis-using-ca"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">haireye</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">HairEyeColor</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">2L</span><span class="op">)</span>, <span class="va">sum</span><span class="op">)</span>
-<span class="va">haireye_ca</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ca/man/ca.html" class="external-link">ca</a></span><span class="op">(</span><span class="va">haireye</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">haireye_ca</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Principal inertias (eigenvalues):</span>
-<span class="co">#&gt;            1        2        3       </span>
-<span class="co">#&gt; Value      0.208773 0.022227 0.002598</span>
-<span class="co">#&gt; Percentage 89.37%   9.52%    1.11%   </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Rows:</span>
-<span class="co">#&gt;             Black     Brown       Red    Blond</span>
-<span class="co">#&gt; Mass     0.182432  0.483108  0.119932 0.214527</span>
-<span class="co">#&gt; ChiDist  0.551192  0.159461  0.354770 0.838397</span>
-<span class="co">#&gt; Inertia  0.055425  0.012284  0.015095 0.150793</span>
-<span class="co">#&gt; Dim. 1  -1.104277 -0.324463 -0.283473 1.828229</span>
-<span class="co">#&gt; Dim. 2   1.440917 -0.219111 -2.144015 0.466706</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Columns:</span>
-<span class="co">#&gt;             Brown     Blue     Hazel     Green</span>
-<span class="co">#&gt; Mass     0.371622 0.363176  0.157095  0.108108</span>
-<span class="co">#&gt; ChiDist  0.500487 0.553684  0.288654  0.385727</span>
-<span class="co">#&gt; Inertia  0.093086 0.111337  0.013089  0.016085</span>
-<span class="co">#&gt; Dim. 1  -1.077128 1.198061 -0.465286  0.354011</span>
-<span class="co">#&gt; Dim. 2   0.592420 0.556419 -1.122783 -2.274122</span></code></pre></div>
-<p>The variation in the table, in terms of the <span class="math inline">\(\chi^2\)</span> distances between the distributions of hair color among people with the same eye color (or, equivalently, vice-versa), lies largely (<span class="math inline">\(89\%\)</span>) along a single dimension (<code>Dim. 1</code>), with the remaining variation largely (<span class="math inline">\(9.5\%\)</span>) along a single orthogonal dimension (<code>Dim. 2</code>). Dimension 1 most clearly distinguishes between subjects with black hair and brown eyes from those with blond hair and blue eyes. Subjects with brown and red hair, or with hazel and green eyes, lie between these extremes. Dimension 2 distinguishes subjects with black or blond hair, and with brown or blue eyes, from those with brown or red hair, and with hazel or green eyes. Subjects with red hair and green eyes are especially distinguished along Dimension 2. This disrupts the impression from Dimension 1 alone that subjects lie along a spectrum from black hair–brown eyes to blond hair–blue eyes, which may accurately include an intermediate phenotype (brown hair–hazel eyes), and reveals a phenotype (red hair–green eyes) that diverges from this spectrum.</p>
-<p>As an exercise, we can recover the row and column standard coordinates returned by <strong>ca</strong> from direct computations, e.g. following <a href="https://en.wikipedia.org/wiki/Correspondence_analysis" class="external-link">the Wikipedia article on correspondence analysis</a>, starting from the data matrix (count table) <span class="math inline">\(X\)</span> with total count <span class="math inline">\(n = 1^\top X 1\)</span>:</p>
+<code class="sourceCode R"><span><span class="va">haireye</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">HairEyeColor</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">2L</span><span class="op">)</span>, <span class="va">sum</span><span class="op">)</span></span>
+<span><span class="va">haireye_ca</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ca/man/ca.html" class="external-link">ca</a></span><span class="op">(</span><span class="va">haireye</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">haireye_ca</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Principal inertias (eigenvalues):</span></span>
+<span><span class="co">#&gt;            1        2        3       </span></span>
+<span><span class="co">#&gt; Value      0.208773 0.022227 0.002598</span></span>
+<span><span class="co">#&gt; Percentage 89.37%   9.52%    1.11%   </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Rows:</span></span>
+<span><span class="co">#&gt;             Black     Brown       Red    Blond</span></span>
+<span><span class="co">#&gt; Mass     0.182432  0.483108  0.119932 0.214527</span></span>
+<span><span class="co">#&gt; ChiDist  0.551192  0.159461  0.354770 0.838397</span></span>
+<span><span class="co">#&gt; Inertia  0.055425  0.012284  0.015095 0.150793</span></span>
+<span><span class="co">#&gt; Dim. 1  -1.104277 -0.324463 -0.283473 1.828229</span></span>
+<span><span class="co">#&gt; Dim. 2   1.440917 -0.219111 -2.144015 0.466706</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Columns:</span></span>
+<span><span class="co">#&gt;             Brown     Blue     Hazel     Green</span></span>
+<span><span class="co">#&gt; Mass     0.371622 0.363176  0.157095  0.108108</span></span>
+<span><span class="co">#&gt; ChiDist  0.500487 0.553684  0.288654  0.385727</span></span>
+<span><span class="co">#&gt; Inertia  0.093086 0.111337  0.013089  0.016085</span></span>
+<span><span class="co">#&gt; Dim. 1  -1.077128 1.198061 -0.465286  0.354011</span></span>
+<span><span class="co">#&gt; Dim. 2   0.592420 0.556419 -1.122783 -2.274122</span></span></code></pre></div>
+<p>The variation in the table, in terms of the <span class="math inline">\(\chi^2\)</span> distances between the
+distributions of hair color among people with the same eye color (or,
+equivalently, vice-versa), lies largely (<span class="math inline">\(89\%\)</span>) along a single dimension
+(<code>Dim. 1</code>), with the remaining variation largely (<span class="math inline">\(9.5\%\)</span>) along a single orthogonal
+dimension (<code>Dim. 2</code>). Dimension 1 most clearly distinguishes
+between subjects with black hair and brown eyes from those with blond
+hair and blue eyes. Subjects with brown and red hair, or with hazel and
+green eyes, lie between these extremes. Dimension 2 distinguishes
+subjects with black or blond hair, and with brown or blue eyes, from
+those with brown or red hair, and with hazel or green eyes. Subjects
+with red hair and green eyes are especially distinguished along
+Dimension 2. This disrupts the impression from Dimension 1 alone that
+subjects lie along a spectrum from black hair–brown eyes to blond
+hair–blue eyes, which may accurately include an intermediate phenotype
+(brown hair–hazel eyes), and reveals a phenotype (red hair–green eyes)
+that diverges from this spectrum.</p>
+<p>As an exercise, we can recover the row and column standard
+coordinates returned by <strong>ca</strong> from direct computations,
+e.g. following <a href="https://en.wikipedia.org/wiki/Correspondence_analysis" class="external-link">the
+Wikipedia article on correspondence analysis</a>, starting from the data
+matrix (count table) <span class="math inline">\(X\)</span> with total
+count <span class="math inline">\(n = 1^\top X 1\)</span>:</p>
 <ol style="list-style-type: decimal">
-<li>The <em>correspondence matrix</em> (the matrix of relative frequencies) <span class="math inline">\(P = \frac{1}{n} X\)</span>
+<li>The <em>correspondence matrix</em> (the matrix of relative
+frequencies) <span class="math inline">\(P = \frac{1}{n} X\)</span>
 </li>
-<li>The row and column weights <span class="math inline">\(r = \frac{1}{n} X 1\)</span> and <span class="math inline">\(c = \frac{1}{n} 1^\top X\)</span>
+<li>The row and column weights <span class="math inline">\(r =
+\frac{1}{n} X 1\)</span> and <span class="math inline">\(c = \frac{1}{n}
+1^\top X\)</span>
 </li>
-<li>The diagonals of inverse weights <span class="math inline">\(D_r = \operatorname{diag}(r)\)</span> and <span class="math inline">\(D_c = \operatorname{diag}(c)\)</span>
+<li>The diagonals of inverse weights <span class="math inline">\(D_r =
+\operatorname{diag}(r)\)</span> and <span class="math inline">\(D_c =
+\operatorname{diag}(c)\)</span>
 </li>
 <li>The matrix of <em>standardized residuals</em> <span class="math inline">\(S = D_r (P - rc) D_c\)</span>
 </li>
-<li>The singular value decomposition <span class="math inline">\(S = U \Sigma V^\top\)</span>
+<li>The singular value decomposition <span class="math inline">\(S = U
+\Sigma V^\top\)</span>
 </li>
 <li>The row and column standard coordinates <span class="math inline">\(F = D_r U\)</span> and <span class="math inline">\(G = D_c V\)</span>
 </li>
 </ol>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># correspondence matrix (matrix of relative frequencies)</span>
-<span class="op">(</span><span class="va">haireye_p</span> <span class="op">&lt;-</span> <span class="va">haireye</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">haireye</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;        Eye</span>
-<span class="co">#&gt; Hair         Brown       Blue      Hazel       Green</span>
-<span class="co">#&gt;   Black 0.11486486 0.03378378 0.02533784 0.008445946</span>
-<span class="co">#&gt;   Brown 0.20101351 0.14189189 0.09121622 0.048986486</span>
-<span class="co">#&gt;   Red   0.04391892 0.02871622 0.02364865 0.023648649</span>
-<span class="co">#&gt;   Blond 0.01182432 0.15878378 0.01689189 0.027027027</span>
-<span class="co"># row and column weights</span>
-<span class="op">(</span><span class="va">haireye_r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">haireye</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">haireye</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;     Black     Brown       Red     Blond </span>
-<span class="co">#&gt; 0.1824324 0.4831081 0.1199324 0.2145270</span>
-<span class="op">(</span><span class="va">haireye_c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colSums</a></span><span class="op">(</span><span class="va">haireye</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">haireye</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;     Brown      Blue     Hazel     Green </span>
-<span class="co">#&gt; 0.3716216 0.3631757 0.1570946 0.1081081</span>
-<span class="co"># matrix of standardized residuals</span>
-<span class="op">(</span><span class="va">haireye_s</span> <span class="op">&lt;-</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">haireye_r</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span>
-    <span class="op">(</span><span class="va">haireye_p</span> <span class="op">-</span> <span class="va">haireye_r</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">haireye_c</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span>
-    <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">haireye_c</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;              [,1]        [,2]        [,3]        [,4]</span>
-<span class="co">#&gt; [1,]  0.180773066 -0.12615064 -0.01961905 -0.08029590</span>
-<span class="co">#&gt; [2,]  0.050694815 -0.08012300  0.05561963 -0.01418351</span>
-<span class="co">#&gt; [3,] -0.003081574 -0.07110772  0.03502737  0.09381990</span>
-<span class="co">#&gt; [4,] -0.240474512  0.28973637 -0.09156384  0.02518174</span>
-<span class="co"># singular value decomposition</span>
-<span class="va">haireye_svd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/svd.html" class="external-link">svd</a></span><span class="op">(</span><span class="va">haireye_s</span><span class="op">)</span>
-<span class="co"># row and column standard coordinates</span>
-<span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">haireye_r</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">haireye_svd</span><span class="op">$</span><span class="va">u</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
-<span class="co">#&gt;            [,1]       [,2]       [,3]</span>
-<span class="co">#&gt; [1,] -1.1042772  1.4409170 -1.0889497</span>
-<span class="co">#&gt; [2,] -0.3244635 -0.2191109  0.9574152</span>
-<span class="co">#&gt; [3,] -0.2834725 -2.1440145 -1.6312184</span>
-<span class="co">#&gt; [4,]  1.8282287  0.4667063 -0.3180920</span>
-<span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">haireye_c</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">haireye_svd</span><span class="op">$</span><span class="va">v</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
-<span class="co">#&gt;            [,1]       [,2]        [,3]</span>
-<span class="co">#&gt; [1,] -1.0771283  0.5924202 -0.42395984</span>
-<span class="co">#&gt; [2,]  1.1980612  0.5564193  0.09238682</span>
-<span class="co">#&gt; [3,] -0.4652862 -1.1227826  1.97191769</span>
-<span class="co">#&gt; [4,]  0.3540108 -2.2741218 -1.71844295</span></code></pre></div>
-<p>The <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> method prints a scree plot using plain text asterisks and uses permills (thousands) to express several model diagnostics, in particular the relative contribution of each dimension to the inertia of each phenotype (<code>cor</code>) and the absolute contribution vice-versa (<code>ctr</code>).</p>
+<code class="sourceCode R"><span><span class="co"># correspondence matrix (matrix of relative frequencies)</span></span>
+<span><span class="op">(</span><span class="va">haireye_p</span> <span class="op">&lt;-</span> <span class="va">haireye</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">haireye</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;        Eye</span></span>
+<span><span class="co">#&gt; Hair         Brown       Blue      Hazel       Green</span></span>
+<span><span class="co">#&gt;   Black 0.11486486 0.03378378 0.02533784 0.008445946</span></span>
+<span><span class="co">#&gt;   Brown 0.20101351 0.14189189 0.09121622 0.048986486</span></span>
+<span><span class="co">#&gt;   Red   0.04391892 0.02871622 0.02364865 0.023648649</span></span>
+<span><span class="co">#&gt;   Blond 0.01182432 0.15878378 0.01689189 0.027027027</span></span>
+<span><span class="co"># row and column weights</span></span>
+<span><span class="op">(</span><span class="va">haireye_r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">haireye</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">haireye</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;     Black     Brown       Red     Blond </span></span>
+<span><span class="co">#&gt; 0.1824324 0.4831081 0.1199324 0.2145270</span></span>
+<span><span class="op">(</span><span class="va">haireye_c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colSums</a></span><span class="op">(</span><span class="va">haireye</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">haireye</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;     Brown      Blue     Hazel     Green </span></span>
+<span><span class="co">#&gt; 0.3716216 0.3631757 0.1570946 0.1081081</span></span>
+<span><span class="co"># matrix of standardized residuals</span></span>
+<span><span class="op">(</span><span class="va">haireye_s</span> <span class="op">&lt;-</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">haireye_r</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span></span>
+<span>    <span class="op">(</span><span class="va">haireye_p</span> <span class="op">-</span> <span class="va">haireye_r</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">haireye_c</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">haireye_c</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;              [,1]        [,2]        [,3]        [,4]</span></span>
+<span><span class="co">#&gt; [1,]  0.180773066 -0.12615064 -0.01961905 -0.08029590</span></span>
+<span><span class="co">#&gt; [2,]  0.050694815 -0.08012300  0.05561963 -0.01418351</span></span>
+<span><span class="co">#&gt; [3,] -0.003081574 -0.07110772  0.03502737  0.09381990</span></span>
+<span><span class="co">#&gt; [4,] -0.240474512  0.28973637 -0.09156384  0.02518174</span></span>
+<span><span class="co"># singular value decomposition</span></span>
+<span><span class="va">haireye_svd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/svd.html" class="external-link">svd</a></span><span class="op">(</span><span class="va">haireye_s</span><span class="op">)</span></span>
+<span><span class="co"># row and column standard coordinates</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">haireye_r</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">haireye_svd</span><span class="op">$</span><span class="va">u</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="co">#&gt;            [,1]       [,2]       [,3]</span></span>
+<span><span class="co">#&gt; [1,] -1.1042772  1.4409170 -1.0889497</span></span>
+<span><span class="co">#&gt; [2,] -0.3244635 -0.2191109  0.9574152</span></span>
+<span><span class="co">#&gt; [3,] -0.2834725 -2.1440145 -1.6312184</span></span>
+<span><span class="co">#&gt; [4,]  1.8282287  0.4667063 -0.3180920</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">haireye_c</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">haireye_svd</span><span class="op">$</span><span class="va">v</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="co">#&gt;            [,1]       [,2]        [,3]</span></span>
+<span><span class="co">#&gt; [1,] -1.0771283  0.5924202 -0.42395984</span></span>
+<span><span class="co">#&gt; [2,]  1.1980612  0.5564193  0.09238682</span></span>
+<span><span class="co">#&gt; [3,] -0.4652862 -1.1227826  1.97191769</span></span>
+<span><span class="co">#&gt; [4,]  0.3540108 -2.2741218 -1.71844295</span></span></code></pre></div>
+<p>The <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> method prints a scree plot using plain
+text asterisks and uses permills (thousands) to express several model
+diagnostics, in particular the relative contribution of each dimension
+to the inertia of each phenotype (<code>cor</code>) and the absolute
+contribution vice-versa (<code>ctr</code>).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">haireye_ca</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Principal inertias (eigenvalues):</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  dim    value      %   cum%   scree plot               </span>
-<span class="co">#&gt;  1      0.208773  89.4  89.4  **********************   </span>
-<span class="co">#&gt;  2      0.022227   9.5  98.9  **                       </span>
-<span class="co">#&gt;  3      0.002598   1.1 100.0                           </span>
-<span class="co">#&gt;         -------- -----                                 </span>
-<span class="co">#&gt;  Total: 0.233598 100.0                                 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Rows:</span>
-<span class="co">#&gt;     name   mass  qlt  inr    k=1 cor ctr    k=2 cor ctr  </span>
-<span class="co">#&gt; 1 | Blck |  182  990  237 | -505 838 222 |  215 152 379 |</span>
-<span class="co">#&gt; 2 | Brwn |  483  906   53 | -148 864  51 |  -33  42  23 |</span>
-<span class="co">#&gt; 3 |  Red |  120  945   65 | -130 133  10 | -320 812 551 |</span>
-<span class="co">#&gt; 4 | Blnd |  215 1000  646 |  835 993 717 |   70   7  47 |</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Columns:</span>
-<span class="co">#&gt;     name   mass  qlt  inr    k=1 cor ctr    k=2 cor ctr  </span>
-<span class="co">#&gt; 1 | Brwn |  372  998  398 | -492 967 431 |   88  31 130 |</span>
-<span class="co">#&gt; 2 | Blue |  363 1000  477 |  547 977 521 |   83  22 112 |</span>
-<span class="co">#&gt; 3 | Hazl |  157  879   56 | -213 542  34 | -167 336 198 |</span>
-<span class="co">#&gt; 4 | Gren |  108  948   69 |  162 176  14 | -339 773 559 |</span></code></pre></div>
-<p>The display quality column <code>qlt</code> refers to the biplot display in 2 dimensions. (If <code>nd</code> is specified in the <code><a href="https://rdrr.io/pkg/ca/man/ca.html" class="external-link">ca::ca()</a></code> call, then this is taken to be the dimensionality of the biplot.) The biplot itself is rendered using the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> method:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">haireye_ca</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Principal inertias (eigenvalues):</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  dim    value      %   cum%   scree plot               </span></span>
+<span><span class="co">#&gt;  1      0.208773  89.4  89.4  **********************   </span></span>
+<span><span class="co">#&gt;  2      0.022227   9.5  98.9  **                       </span></span>
+<span><span class="co">#&gt;  3      0.002598   1.1 100.0                           </span></span>
+<span><span class="co">#&gt;         -------- -----                                 </span></span>
+<span><span class="co">#&gt;  Total: 0.233598 100.0                                 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Rows:</span></span>
+<span><span class="co">#&gt;     name   mass  qlt  inr    k=1 cor ctr    k=2 cor ctr  </span></span>
+<span><span class="co">#&gt; 1 | Blck |  182  990  237 | -505 838 222 |  215 152 379 |</span></span>
+<span><span class="co">#&gt; 2 | Brwn |  483  906   53 | -148 864  51 |  -33  42  23 |</span></span>
+<span><span class="co">#&gt; 3 |  Red |  120  945   65 | -130 133  10 | -320 812 551 |</span></span>
+<span><span class="co">#&gt; 4 | Blnd |  215 1000  646 |  835 993 717 |   70   7  47 |</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Columns:</span></span>
+<span><span class="co">#&gt;     name   mass  qlt  inr    k=1 cor ctr    k=2 cor ctr  </span></span>
+<span><span class="co">#&gt; 1 | Brwn |  372  998  398 | -492 967 431 |   88  31 130 |</span></span>
+<span><span class="co">#&gt; 2 | Blue |  363 1000  477 |  547 977 521 |   83  22 112 |</span></span>
+<span><span class="co">#&gt; 3 | Hazl |  157  879   56 | -213 542  34 | -167 336 198 |</span></span>
+<span><span class="co">#&gt; 4 | Gren |  108  948   69 |  162 176  14 | -339 773 559 |</span></span></code></pre></div>
+<p>The display quality column <code>qlt</code> refers to the biplot
+display in 2 dimensions. (If <code>nd</code> is specified in the
+<code><a href="https://rdrr.io/pkg/ca/man/ca.html" class="external-link">ca::ca()</a></code> call, then this is taken to be the dimensionality
+of the biplot.) The biplot itself is rendered using the
+<code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> method:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>
-  <span class="va">haireye_ca</span>, map <span class="op">=</span> <span class="st">"symbiplot"</span>, mass <span class="op">=</span> <span class="cn">TRUE</span>,
-  main <span class="op">=</span> <span class="st">"Correspondence analysis of subjects' hair &amp; eye colors"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">haireye_ca</span>, map <span class="op">=</span> <span class="st">"symbiplot"</span>, mass <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Correspondence analysis of subjects' hair &amp; eye colors"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="ordr_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;"></p>
-<p>This <em>symmetric biplot</em>, distinct from the default symmetric map, evenly distributes the inertia between the rows and columns. Distances between points in the same matrix factor do not approximate their <span class="math inline">\(\chi^2\)</span> distances, but inner products between row and column points do approximate their standardized residuals. The row and column profile markers are resized to represent the masses of the groups.</p>
+<p>This <em>symmetric biplot</em>, distinct from the default symmetric
+map, evenly distributes the inertia between the rows and columns.
+Distances between points in the same matrix factor do not approximate
+their <span class="math inline">\(\chi^2\)</span> distances, but inner
+products between row and column points do approximate their standardized
+residuals. The row and column profile markers are resized to represent
+the masses of the groups.</p>
 </div>
 <div class="section level2">
 <h2 id="ordr-methods-for-ca-models">
 <strong>ordr</strong> methods for CA models<a class="anchor" aria-label="anchor" href="#ordr-methods-for-ca-models"></a>
 </h2>
-<p><strong>ordr</strong> provides a new class, ‘tbl_ord’, that wraps ordination objects like those of class ‘prcomp’ without directly modifying them. (The original model can be recovered with <code><a href="../reference/tbl_ord.html">un_tbl_ord()</a></code>.)</p>
+<p><strong>ordr</strong> provides a new class, ‘tbl_ord’, that wraps
+ordination objects like those of class ‘prcomp’ without directly
+modifying them. (The original model can be recovered with
+<code><a href="../reference/tbl_ord.html">un_tbl_ord()</a></code>.)</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="va">haireye_ca_ord</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">haireye_ca</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tbl_ord of class 'ca': (4 x 3) x (4 x 3)'</span>
-<span class="co">#&gt; # 3 coordinates: Dim1, Dim2, Dim3</span>
-<span class="co">#&gt; # </span>
-<span class="co">#&gt; # Rows (standard): [ 4 x 3 | 0 ]</span>
-<span class="co">#&gt;     Dim1   Dim2   Dim3 | </span>
-<span class="co">#&gt;                        | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.10</span>   1.44  -<span style="color: #BB0000;">1.09</span>  | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.324</span> -<span style="color: #BB0000;">0.219</span>  0.957 | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.283</span> -<span style="color: #BB0000;">2.14</span>  -<span style="color: #BB0000;">1.63</span>  | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  1.83   0.467 -<span style="color: #BB0000;">0.318</span> | </span>
-<span class="co">#&gt; # </span>
-<span class="co">#&gt; # Columns (standard): [ 4 x 3 | 0 ]</span>
-<span class="co">#&gt;     Dim1   Dim2    Dim3 | </span>
-<span class="co">#&gt;                         | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.08</span>   0.592 -<span style="color: #BB0000;">0.424</span>  | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  1.20   0.556  0.092<span style="text-decoration: underline;">4</span> | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.465</span> -<span style="color: #BB0000;">1.12</span>   1.97   | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  0.354 -<span style="color: #BB0000;">2.27</span>  -<span style="color: #BB0000;">1.72</span>   |</span></code></pre></div>
-<p>The <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> method for ‘tbl_ord’ is based on that of tibbles. It prints two tibbles, like that for the ‘tbl_graph’ class of <a href="https://tidygraph.data-imaginist.com/" class="external-link"><strong>tidygraph</strong></a>, one for each matrix factor. (In PCA, the case scores and the variable loadings of the original data matrix.)</p>
-<p>The header reminds us of the dimensions of the matrix factors and how the inertia is distributed. In ‘ca’ objects, by default both row and column profiles are in standard coordinates: <span class="math inline">\(D_r F\)</span> and <span class="math inline">\(D_c G\)</span>, but these can be reassigned to any pair of proportions <span class="math inline">\(D_r S {D_c}^\top = (D_r U \Sigma^{p}) (D_c V \Sigma^{q})^\top\)</span>, even if <span class="math inline">\(p + q \neq 1\)</span>. By assigning <code>"symmetric"</code> inertia, we distribute half of the inertia to each matrix factor:</p>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">haireye_ca_ord</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">haireye_ca</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tbl_ord of class 'ca': (4 x 3) x (4 x 3)'</span></span>
+<span><span class="co">#&gt; # 3 coordinates: Dim1, Dim2, Dim3</span></span>
+<span><span class="co">#&gt; # </span></span>
+<span><span class="co">#&gt; # Rows (standard): [ 4 x 3 | 0 ]</span></span>
+<span><span class="co">#&gt;     Dim1   Dim2   Dim3 | </span></span>
+<span><span class="co">#&gt;                        | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.10</span>   1.44  -<span style="color: #BB0000;">1.09</span>  | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.324</span> -<span style="color: #BB0000;">0.219</span>  0.957 | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.283</span> -<span style="color: #BB0000;">2.14</span>  -<span style="color: #BB0000;">1.63</span>  | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  1.83   0.467 -<span style="color: #BB0000;">0.318</span> | </span></span>
+<span><span class="co">#&gt; # </span></span>
+<span><span class="co">#&gt; # Columns (standard): [ 4 x 3 | 0 ]</span></span>
+<span><span class="co">#&gt;     Dim1   Dim2    Dim3 | </span></span>
+<span><span class="co">#&gt;                         | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.08</span>   0.592 -<span style="color: #BB0000;">0.424</span>  | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  1.20   0.556  0.092<span style="text-decoration: underline;">4</span> | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.465</span> -<span style="color: #BB0000;">1.12</span>   1.97   | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  0.354 -<span style="color: #BB0000;">2.27</span>  -<span style="color: #BB0000;">1.72</span>   |</span></span></code></pre></div>
+<p>The <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> method for ‘tbl_ord’ is based on that of
+tibbles. It prints two tibbles, like that for the ‘tbl_graph’ class of
+<a href="https://tidygraph.data-imaginist.com/" class="external-link"><strong>tidygraph</strong></a>,
+one for each matrix factor. (In PCA, the case scores and the variable
+loadings of the original data matrix.)</p>
+<p>The header reminds us of the dimensions of the matrix factors and how
+the inertia is distributed. In ‘ca’ objects, by default both row and
+column profiles are in standard coordinates: <span class="math inline">\(D_r F\)</span> and <span class="math inline">\(D_c
+G\)</span>, but these can be reassigned to any pair of proportions <span class="math inline">\(D_r S {D_c}^\top = (D_r U \Sigma^{p}) (D_c V
+\Sigma^{q})^\top\)</span>, even if <span class="math inline">\(p + q
+\neq 1\)</span>. By assigning <code>"symmetric"</code> inertia, we
+distribute half of the inertia to each matrix factor:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/conference.html">get_conference</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0 0</span>
-<span class="fu"><a href="../reference/conference.html">confer_inertia</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.25</span>, <span class="fl">.75</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tbl_ord of class 'ca': (4 x 3) x (4 x 3)'</span>
-<span class="co">#&gt; # 3 coordinates: Dim1, Dim2, Dim3</span>
-<span class="co">#&gt; # </span>
-<span class="co">#&gt; # Rows (25% inertia): [ 4 x 3 | 0 ]</span>
-<span class="co">#&gt;     Dim1   Dim2   Dim3 | </span>
-<span class="co">#&gt;                        | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.908</span>  0.895 -<span style="color: #BB0000;">0.517</span> | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.267</span> -<span style="color: #BB0000;">0.136</span>  0.455 | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.233</span> -<span style="color: #BB0000;">1.33</span>  -<span style="color: #BB0000;">0.775</span> | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  1.50   0.290 -<span style="color: #BB0000;">0.151</span> | </span>
-<span class="co">#&gt; # </span>
-<span class="co">#&gt; # Columns (75% inertia): [ 4 x 3 | 0 ]</span>
-<span class="co">#&gt;     Dim1   Dim2     Dim3 | </span>
-<span class="co">#&gt;                          | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.599</span>  0.142 -<span style="color: #BB0000;">0.045</span><span style="color: #BB0000; text-decoration: underline;">5</span>  | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  0.666  0.133  0.009<span style="text-decoration: underline;">91</span> | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.259</span> -<span style="color: #BB0000;">0.269</span>  0.212   | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  0.197 -<span style="color: #BB0000;">0.546</span> -<span style="color: #BB0000;">0.184</span>   |</span>
-<span class="fu"><a href="../reference/conference.html">confer_inertia</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Warning in confer_inertia(haireye_ca_ord, c(1, 1)): Inertia is not balanced.</span>
-<span class="co">#&gt; # A tbl_ord of class 'ca': (4 x 3) x (4 x 3)'</span>
-<span class="co">#&gt; # 3 coordinates: Dim1, Dim2, Dim3</span>
-<span class="co">#&gt; # </span>
-<span class="co">#&gt; # Rows (principal): [ 4 x 3 | 0 ]</span>
-<span class="co">#&gt;     Dim1    Dim2    Dim3 | </span>
-<span class="co">#&gt;                          | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.505</span>  0.215  -<span style="color: #BB0000;">0.055</span><span style="color: #BB0000; text-decoration: underline;">5</span> | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.148</span> -<span style="color: #BB0000;">0.032</span><span style="color: #BB0000; text-decoration: underline;">7</span>  0.048<span style="text-decoration: underline;">8</span> | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.130</span> -<span style="color: #BB0000;">0.320</span>  -<span style="color: #BB0000;">0.083</span><span style="color: #BB0000; text-decoration: underline;">2</span> | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  0.835  0.069<span style="text-decoration: underline;">6</span> -<span style="color: #BB0000;">0.016</span><span style="color: #BB0000; text-decoration: underline;">2</span> | </span>
-<span class="co">#&gt; # </span>
-<span class="co">#&gt; # Columns (principal): [ 4 x 3 | 0 ]</span>
-<span class="co">#&gt;     Dim1    Dim2     Dim3 | </span>
-<span class="co">#&gt;                           | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.492</span>  0.088<span style="text-decoration: underline;">3</span> -<span style="color: #BB0000;">0.021</span><span style="color: #BB0000; text-decoration: underline;">6</span>  | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  0.547  0.083<span style="text-decoration: underline;">0</span>  0.004<span style="text-decoration: underline;">71</span> | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.213</span> -<span style="color: #BB0000;">0.167</span>   0.101   | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  0.162 -<span style="color: #BB0000;">0.339</span>  -<span style="color: #BB0000;">0.087</span><span style="color: #BB0000; text-decoration: underline;">6</span>  |</span>
-<span class="op">(</span><span class="va">haireye_ca_ord</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/conference.html">confer_inertia</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span>, <span class="st">"symmetric"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tbl_ord of class 'ca': (4 x 3) x (4 x 3)'</span>
-<span class="co">#&gt; # 3 coordinates: Dim1, Dim2, Dim3</span>
-<span class="co">#&gt; # </span>
-<span class="co">#&gt; # Rows (symmetric): [ 4 x 3 | 0 ]</span>
-<span class="co">#&gt;     Dim1    Dim2    Dim3 | </span>
-<span class="co">#&gt;                          | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.746</span>  0.556  -<span style="color: #BB0000;">0.246</span>  | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.219</span> -<span style="color: #BB0000;">0.084</span><span style="color: #BB0000; text-decoration: underline;">6</span>  0.216  | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.192</span> -<span style="color: #BB0000;">0.828</span>  -<span style="color: #BB0000;">0.368</span>  | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  1.24   0.180  -<span style="color: #BB0000;">0.071</span><span style="color: #BB0000; text-decoration: underline;">8</span> | </span>
-<span class="co">#&gt; # </span>
-<span class="co">#&gt; # Columns (symmetric): [ 4 x 3 | 0 ]</span>
-<span class="co">#&gt;     Dim1   Dim2    Dim3 | </span>
-<span class="co">#&gt;                         | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.728</span>  0.229 -<span style="color: #BB0000;">0.095</span><span style="color: #BB0000; text-decoration: underline;">7</span> | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  0.810  0.215  0.020<span style="text-decoration: underline;">9</span> | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.315</span> -<span style="color: #BB0000;">0.434</span>  0.445  | </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  0.239 -<span style="color: #BB0000;">0.878</span> -<span style="color: #BB0000;">0.388</span>  |</span></code></pre></div>
-<p><code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">broom::glance()</a></code> returns a single-row tibble summary of a model object. It was designed for analysis pipelines involving multiple models (e.g. model selection), to facilitate summaries of multiple models at once. ‘tbl_ord’ objects wrap a potentially huge variety of models, for which only a few summary statistics will usually be useful. This method includes the proportion of inertia/variance in the first two dimensions, which characterize the fidelity of a biplot to the complete data, and the original object class.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/conference.html">get_conference</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0 0</span></span>
+<span><span class="fu"><a href="../reference/conference.html">confer_inertia</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.25</span>, <span class="fl">.75</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tbl_ord of class 'ca': (4 x 3) x (4 x 3)'</span></span>
+<span><span class="co">#&gt; # 3 coordinates: Dim1, Dim2, Dim3</span></span>
+<span><span class="co">#&gt; # </span></span>
+<span><span class="co">#&gt; # Rows (25% inertia): [ 4 x 3 | 0 ]</span></span>
+<span><span class="co">#&gt;     Dim1   Dim2   Dim3 | </span></span>
+<span><span class="co">#&gt;                        | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.908</span>  0.895 -<span style="color: #BB0000;">0.517</span> | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.267</span> -<span style="color: #BB0000;">0.136</span>  0.455 | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.233</span> -<span style="color: #BB0000;">1.33</span>  -<span style="color: #BB0000;">0.775</span> | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  1.50   0.290 -<span style="color: #BB0000;">0.151</span> | </span></span>
+<span><span class="co">#&gt; # </span></span>
+<span><span class="co">#&gt; # Columns (75% inertia): [ 4 x 3 | 0 ]</span></span>
+<span><span class="co">#&gt;     Dim1   Dim2     Dim3 | </span></span>
+<span><span class="co">#&gt;                          | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.599</span>  0.142 -<span style="color: #BB0000;">0.045</span><span style="color: #BB0000; text-decoration: underline;">5</span>  | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  0.666  0.133  0.009<span style="text-decoration: underline;">91</span> | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.259</span> -<span style="color: #BB0000;">0.269</span>  0.212   | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  0.197 -<span style="color: #BB0000;">0.546</span> -<span style="color: #BB0000;">0.184</span>   |</span></span>
+<span><span class="fu"><a href="../reference/conference.html">confer_inertia</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in confer_inertia(haireye_ca_ord, c(1, 1)): Inertia is not balanced.</span></span>
+<span><span class="co">#&gt; # A tbl_ord of class 'ca': (4 x 3) x (4 x 3)'</span></span>
+<span><span class="co">#&gt; # 3 coordinates: Dim1, Dim2, Dim3</span></span>
+<span><span class="co">#&gt; # </span></span>
+<span><span class="co">#&gt; # Rows (principal): [ 4 x 3 | 0 ]</span></span>
+<span><span class="co">#&gt;     Dim1    Dim2    Dim3 | </span></span>
+<span><span class="co">#&gt;                          | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.505</span>  0.215  -<span style="color: #BB0000;">0.055</span><span style="color: #BB0000; text-decoration: underline;">5</span> | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.148</span> -<span style="color: #BB0000;">0.032</span><span style="color: #BB0000; text-decoration: underline;">7</span>  0.048<span style="text-decoration: underline;">8</span> | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.130</span> -<span style="color: #BB0000;">0.320</span>  -<span style="color: #BB0000;">0.083</span><span style="color: #BB0000; text-decoration: underline;">2</span> | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  0.835  0.069<span style="text-decoration: underline;">6</span> -<span style="color: #BB0000;">0.016</span><span style="color: #BB0000; text-decoration: underline;">2</span> | </span></span>
+<span><span class="co">#&gt; # </span></span>
+<span><span class="co">#&gt; # Columns (principal): [ 4 x 3 | 0 ]</span></span>
+<span><span class="co">#&gt;     Dim1    Dim2     Dim3 | </span></span>
+<span><span class="co">#&gt;                           | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.492</span>  0.088<span style="text-decoration: underline;">3</span> -<span style="color: #BB0000;">0.021</span><span style="color: #BB0000; text-decoration: underline;">6</span>  | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  0.547  0.083<span style="text-decoration: underline;">0</span>  0.004<span style="text-decoration: underline;">71</span> | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.213</span> -<span style="color: #BB0000;">0.167</span>   0.101   | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  0.162 -<span style="color: #BB0000;">0.339</span>  -<span style="color: #BB0000;">0.087</span><span style="color: #BB0000; text-decoration: underline;">6</span>  |</span></span>
+<span><span class="op">(</span><span class="va">haireye_ca_ord</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/conference.html">confer_inertia</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span>, <span class="st">"symmetric"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tbl_ord of class 'ca': (4 x 3) x (4 x 3)'</span></span>
+<span><span class="co">#&gt; # 3 coordinates: Dim1, Dim2, Dim3</span></span>
+<span><span class="co">#&gt; # </span></span>
+<span><span class="co">#&gt; # Rows (symmetric): [ 4 x 3 | 0 ]</span></span>
+<span><span class="co">#&gt;     Dim1    Dim2    Dim3 | </span></span>
+<span><span class="co">#&gt;                          | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.746</span>  0.556  -<span style="color: #BB0000;">0.246</span>  | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.219</span> -<span style="color: #BB0000;">0.084</span><span style="color: #BB0000; text-decoration: underline;">6</span>  0.216  | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.192</span> -<span style="color: #BB0000;">0.828</span>  -<span style="color: #BB0000;">0.368</span>  | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  1.24   0.180  -<span style="color: #BB0000;">0.071</span><span style="color: #BB0000; text-decoration: underline;">8</span> | </span></span>
+<span><span class="co">#&gt; # </span></span>
+<span><span class="co">#&gt; # Columns (symmetric): [ 4 x 3 | 0 ]</span></span>
+<span><span class="co">#&gt;     Dim1   Dim2    Dim3 | </span></span>
+<span><span class="co">#&gt;                         | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.728</span>  0.229 -<span style="color: #BB0000;">0.095</span><span style="color: #BB0000; text-decoration: underline;">7</span> | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  0.810  0.215  0.020<span style="text-decoration: underline;">9</span> | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.315</span> -<span style="color: #BB0000;">0.434</span>  0.445  | </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  0.239 -<span style="color: #BB0000;">0.878</span> -<span style="color: #BB0000;">0.388</span>  |</span></span></code></pre></div>
+<p><code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">broom::glance()</a></code> returns a single-row tibble summary of a
+model object. It was designed for analysis pipelines involving multiple
+models (e.g. model selection), to facilitate summaries of multiple
+models at once. ‘tbl_ord’ objects wrap a potentially huge variety of
+models, for which only a few summary statistics will usually be useful.
+This method includes the proportion of inertia/variance in the first two
+dimensions, which characterize the fidelity of a biplot to the complete
+data, and the original object class.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 7</span></span>
-<span class="co">#&gt;    rank n.row n.col inertia prop.var.1 prop.var.2 class</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     3     4     4   0.234      0.894     0.095<span style="text-decoration: underline;">1</span> ca</span></code></pre></div>
-<p>Analogous to <code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">broom::augment()</a></code>, this tbl_ord-specific function preserves the ‘tbl_ord’ class but augments the row and column tibbles with any metadata or diagnostics found in the model object. Vertical bars separate the coordinate matrices from annotations.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 7</span></span></span>
+<span><span class="co">#&gt;    rank n.row n.col inertia prop.var.1 prop.var.2 class</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4     4     4   0.234      0.894     0.095<span style="text-decoration: underline;">1</span> ca   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     4     4     4   0.234      0.894     0.095<span style="text-decoration: underline;">1</span> ca</span></span></code></pre></div>
+<p>Analogous to <code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">broom::augment()</a></code>, this tbl_ord-specific
+function preserves the ‘tbl_ord’ class but augments the row and column
+tibbles with any metadata or diagnostics found in the model object.
+Vertical bars separate the coordinate matrices from annotations.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/augmentation.html">augment_ord</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span><span class="op">)</span>
-<span class="co">#&gt; # A tbl_ord of class 'ca': (4 x 3) x (4 x 3)'</span>
-<span class="co">#&gt; # 3 coordinates: Dim1, Dim2, Dim3</span>
-<span class="co">#&gt; # </span>
-<span class="co">#&gt; # Rows (symmetric): [ 4 x 3 | 4 ]</span>
-<span class="co">#&gt;     Dim1    Dim2    Dim3 |   .name .mass .dist .inertia</span>
-<span class="co">#&gt;                          |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.746</span>  0.556  -<span style="color: #BB0000;">0.246</span>  | <span style="color: #BCBCBC;">1</span> Black 0.182 0.551   0.055<span style="text-decoration: underline;">4</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.219</span> -<span style="color: #BB0000;">0.084</span><span style="color: #BB0000; text-decoration: underline;">6</span>  0.216  | <span style="color: #BCBCBC;">2</span> Brown 0.483 0.159   0.012<span style="text-decoration: underline;">3</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.192</span> -<span style="color: #BB0000;">0.828</span>  -<span style="color: #BB0000;">0.368</span>  | <span style="color: #BCBCBC;">3</span> Red   0.120 0.355   0.015<span style="text-decoration: underline;">1</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  1.24   0.180  -<span style="color: #BB0000;">0.071</span><span style="color: #BB0000; text-decoration: underline;">8</span> | <span style="color: #BCBCBC;">4</span> Blond 0.215 0.838   0.151 </span>
-<span class="co">#&gt; # </span>
-<span class="co">#&gt; # Columns (symmetric): [ 4 x 3 | 4 ]</span>
-<span class="co">#&gt;     Dim1   Dim2    Dim3 |   .name .mass .dist .inertia</span>
-<span class="co">#&gt;                         |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.728</span>  0.229 -<span style="color: #BB0000;">0.095</span><span style="color: #BB0000; text-decoration: underline;">7</span> | <span style="color: #BCBCBC;">1</span> Brown 0.372 0.500   0.093<span style="text-decoration: underline;">1</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  0.810  0.215  0.020<span style="text-decoration: underline;">9</span> | <span style="color: #BCBCBC;">2</span> Blue  0.363 0.554   0.111 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.315</span> -<span style="color: #BB0000;">0.434</span>  0.445  | <span style="color: #BCBCBC;">3</span> Hazel 0.157 0.289   0.013<span style="text-decoration: underline;">1</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  0.239 -<span style="color: #BB0000;">0.878</span> -<span style="color: #BB0000;">0.388</span>  | <span style="color: #BCBCBC;">4</span> Green 0.108 0.386   0.016<span style="text-decoration: underline;">1</span></span></code></pre></div>
-<p>Additional row- and column-level variables can also be augmented and manipulated using a handful of <strong>dplyr</strong>-like verbs, each specific to the matrix factor being affected (<code>rows</code> or <code>cols</code>). Each tibble is split between the shared coordinates on the left and any additional annotation columns on the right.</p>
-<p>The <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">broom::tidy()</a></code> method for tbl_ords returns a tibble with one row per artificial coordinate.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> In CA, these are variably called dimensions or components. The ‘ca’ object contains a <code>$sv</code> vector of singular values, which is included in the result; other coordinate-level attributes vary by model object class.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/augmentation.html">augment_ord</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tbl_ord of class 'ca': (4 x 3) x (4 x 3)'</span></span>
+<span><span class="co">#&gt; # 3 coordinates: Dim1, Dim2, Dim3</span></span>
+<span><span class="co">#&gt; # </span></span>
+<span><span class="co">#&gt; # Rows (symmetric): [ 4 x 3 | 4 ]</span></span>
+<span><span class="co">#&gt;     Dim1    Dim2    Dim3 |   .name .mass .dist .inertia</span></span>
+<span><span class="co">#&gt;                          |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.746</span>  0.556  -<span style="color: #BB0000;">0.246</span>  | <span style="color: #BCBCBC;">1</span> Black 0.182 0.551   0.055<span style="text-decoration: underline;">4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.219</span> -<span style="color: #BB0000;">0.084</span><span style="color: #BB0000; text-decoration: underline;">6</span>  0.216  | <span style="color: #BCBCBC;">2</span> Brown 0.483 0.159   0.012<span style="text-decoration: underline;">3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.192</span> -<span style="color: #BB0000;">0.828</span>  -<span style="color: #BB0000;">0.368</span>  | <span style="color: #BCBCBC;">3</span> Red   0.120 0.355   0.015<span style="text-decoration: underline;">1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  1.24   0.180  -<span style="color: #BB0000;">0.071</span><span style="color: #BB0000; text-decoration: underline;">8</span> | <span style="color: #BCBCBC;">4</span> Blond 0.215 0.838   0.151 </span></span>
+<span><span class="co">#&gt; # </span></span>
+<span><span class="co">#&gt; # Columns (symmetric): [ 4 x 3 | 4 ]</span></span>
+<span><span class="co">#&gt;     Dim1   Dim2    Dim3 |   .name .mass .dist .inertia</span></span>
+<span><span class="co">#&gt;                         |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.728</span>  0.229 -<span style="color: #BB0000;">0.095</span><span style="color: #BB0000; text-decoration: underline;">7</span> | <span style="color: #BCBCBC;">1</span> Brown 0.372 0.500   0.093<span style="text-decoration: underline;">1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  0.810  0.215  0.020<span style="text-decoration: underline;">9</span> | <span style="color: #BCBCBC;">2</span> Blue  0.363 0.554   0.111 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.315</span> -<span style="color: #BB0000;">0.434</span>  0.445  | <span style="color: #BCBCBC;">3</span> Hazel 0.157 0.289   0.013<span style="text-decoration: underline;">1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  0.239 -<span style="color: #BB0000;">0.878</span> -<span style="color: #BB0000;">0.388</span>  | <span style="color: #BCBCBC;">4</span> Green 0.108 0.386   0.016<span style="text-decoration: underline;">1</span></span></span></code></pre></div>
+<p>Additional row- and column-level variables can also be augmented and
+manipulated using a handful of <strong>dplyr</strong>-like verbs, each
+specific to the matrix factor being affected (<code>rows</code> or
+<code>cols</code>). Each tibble is split between the shared coordinates
+on the left and any additional annotation columns on the right.</p>
+<p>The <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">broom::tidy()</a></code> method for tbl_ords returns a tibble
+with one row per artificial coordinate.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> In CA, these are
+variably called dimensions or components. The ‘ca’ object contains a
+<code>$sv</code> vector of singular values, which is included in the
+result; other coordinate-level attributes vary by model object
+class.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 4</span></span>
-<span class="co">#&gt;   .name    .sv .inertia .prop_var</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Dim1  0.457   0.209      0.894 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Dim2  0.149   0.022<span style="text-decoration: underline;">2</span>     0.095<span style="text-decoration: underline;">1</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Dim3  0.051<span style="text-decoration: underline;">0</span>  0.002<span style="text-decoration: underline;">60</span>    0.011<span style="text-decoration: underline;">1</span></span></code></pre></div>
-<p>The <code>.inertia</code> and <code>.prop_var</code> fields are calculated from the singular values or eigenvalues contained in the ordination object and always appear when defined. This means that <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> prepares any ordination object derived from such a decomposition for a scree plot with <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot2::ggplot()</a></code>:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 4</span></span></span>
+<span><span class="co">#&gt;   .name    .sv .inertia .prop_var</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Dim1  0.457   0.209      0.894 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Dim2  0.149   0.022<span style="text-decoration: underline;">2</span>     0.095<span style="text-decoration: underline;">1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Dim3  0.051<span style="text-decoration: underline;">0</span>  0.002<span style="text-decoration: underline;">60</span>    0.011<span style="text-decoration: underline;">1</span></span></span></code></pre></div>
+<p>The <code>.inertia</code> and <code>.prop_var</code> fields are
+calculated from the singular values or eigenvalues contained in the
+ordination object and always appear when defined. This means that
+<code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> prepares any ordination object derived from such a
+decomposition for a scree plot with <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot2::ggplot()</a></code>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.name</span>, y <span class="op">=</span> <span class="va">.inertia</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Component"</span>, y <span class="op">=</span> <span class="st">"Inertia"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Correspondence analysis of subjects' hair &amp; eye colors"</span>,
-          <span class="st">"Decomposition of inertia"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.name</span>, y <span class="op">=</span> <span class="va">.inertia</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Component"</span>, y <span class="op">=</span> <span class="st">"Inertia"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Correspondence analysis of subjects' hair &amp; eye colors"</span>,</span>
+<span>          <span class="st">"Decomposition of inertia"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ordr_files/figure-html/scree%20plot-1.png" width="576" style="display: block; margin: auto;"></p>
-<p>While <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">ggplot2::fortify()</a></code> may rarely be called directly, is plays a special role in <strong>ordr</strong> by converting a ‘tbl_ord’ object to a ‘tbl_df’ object. To do this, the fortifier row-binds the two matrix factor tibbles and adds an additional <code>.matrix</code> column to remember which was which:</p>
+<p>While <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">ggplot2::fortify()</a></code> may rarely be called directly,
+is plays a special role in <strong>ordr</strong> by converting a
+‘tbl_ord’ object to a ‘tbl_df’ object. To do this, the fortifier
+row-binds the two matrix factor tibbles and adds an additional
+<code>.matrix</code> column to remember which was which:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 4</span></span>
-<span class="co">#&gt;     Dim1    Dim2    Dim3 .matrix</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.746</span>  0.556  -<span style="color: #BB0000;">0.246</span>  rows   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.219</span> -<span style="color: #BB0000;">0.084</span><span style="color: #BB0000; text-decoration: underline;">6</span>  0.216  rows   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.192</span> -<span style="color: #BB0000;">0.828</span>  -<span style="color: #BB0000;">0.368</span>  rows   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  1.24   0.180  -<span style="color: #BB0000;">0.071</span><span style="color: #BB0000; text-decoration: underline;">8</span> rows   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.728</span>  0.229  -<span style="color: #BB0000;">0.095</span><span style="color: #BB0000; text-decoration: underline;">7</span> cols   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  0.810  0.215   0.020<span style="text-decoration: underline;">9</span> cols   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> -<span style="color: #BB0000;">0.315</span> -<span style="color: #BB0000;">0.434</span>   0.445  cols   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">8</span>  0.239 -<span style="color: #BB0000;">0.878</span>  -<span style="color: #BB0000;">0.388</span>  cols</span></code></pre></div>
-<p>This fortifier will also preserve any row and column annotations, so it can be composed with <code><a href="../reference/augmentation.html">augment_ord()</a></code> or with the row- and column-specific verbs. <code>NA</code>s are introduced when an annotation is present for one matrix factor but not the other.</p>
-<p>The <code>.matrix</code> column also plays a key role in <code><a href="../reference/ggbiplot.html">ggbiplot()</a></code>: The row- and column-specific ploy layers, which take the form <code>geom_rows_*()</code> or <code>stat_cols_*()</code>, for example, use this column to subset the data internally. This enables the layered grammar of graphics of <strong>ggplot2</strong> to apply separately to the two matrix factors and their annotation. Though note that it can also be applied to the entire fortified data frame using conventional plot layers, as below when the <code>.matrix</code> column is used to distinguish the colors and shapes of the row and column profile markers:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 4</span></span></span>
+<span><span class="co">#&gt;     Dim1    Dim2    Dim3 .matrix</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.746</span>  0.556  -<span style="color: #BB0000;">0.246</span>  rows   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.219</span> -<span style="color: #BB0000;">0.084</span><span style="color: #BB0000; text-decoration: underline;">6</span>  0.216  rows   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.192</span> -<span style="color: #BB0000;">0.828</span>  -<span style="color: #BB0000;">0.368</span>  rows   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  1.24   0.180  -<span style="color: #BB0000;">0.071</span><span style="color: #BB0000; text-decoration: underline;">8</span> rows   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.728</span>  0.229  -<span style="color: #BB0000;">0.095</span><span style="color: #BB0000; text-decoration: underline;">7</span> cols   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  0.810  0.215   0.020<span style="text-decoration: underline;">9</span> cols   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> -<span style="color: #BB0000;">0.315</span> -<span style="color: #BB0000;">0.434</span>   0.445  cols   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>  0.239 -<span style="color: #BB0000;">0.878</span>  -<span style="color: #BB0000;">0.388</span>  cols</span></span></code></pre></div>
+<p>This fortifier will also preserve any row and column annotations, so
+it can be composed with <code><a href="../reference/augmentation.html">augment_ord()</a></code> or with the row- and
+column-specific verbs. <code>NA</code>s are introduced when an
+annotation is present for one matrix factor but not the other.</p>
+<p>The <code>.matrix</code> column also plays a key role in
+<code><a href="../reference/ggbiplot.html">ggbiplot()</a></code>: The row- and column-specific ploy layers, which
+take the form <code>geom_rows_*()</code> or <code>stat_cols_*()</code>,
+for example, use this column to subset the data internally. This enables
+the layered grammar of graphics of <strong>ggplot2</strong> to apply
+separately to the two matrix factors and their annotation. Though note
+that it can also be applied to the entire fortified data frame using
+conventional plot layers, as below when the <code>.matrix</code> column
+is used to distinguish the colors and shapes of the row and column
+profile markers:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">haireye_ca_ord</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span>feature <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">.matrix</span> <span class="op">==</span> <span class="st">"rows"</span>, <span class="st">"Hair"</span>, <span class="st">"Eye"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">feature</span>, shape <span class="op">=</span> <span class="va">feature</span>, label <span class="op">=</span> <span class="va">.name</span><span class="op">)</span>, clip <span class="op">=</span> <span class="st">"off"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/theme_biplot.html">theme_biplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_origin.html">geom_origin</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>size <span class="op">=</span> <span class="va">.mass</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/biplot-geoms.html">geom_cols_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>size <span class="op">=</span> <span class="va">.mass</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/biplot-geoms.html">geom_rows_text</a></span><span class="op">(</span>vjust <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, hjust <span class="op">=</span> <span class="fl">0</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/biplot-geoms.html">geom_cols_text</a></span><span class="op">(</span>vjust <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, hjust <span class="op">=</span> <span class="fl">0</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_color_brewer</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"qual"</span>, palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html" class="external-link">scale_size_area</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Correspondence analysis of subjects' hair &amp; eye colors"</span>,
-          <span class="st">"Symmetric biplot"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">haireye_ca_ord</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span>feature <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">.matrix</span> <span class="op">==</span> <span class="st">"rows"</span>, <span class="st">"Hair"</span>, <span class="st">"Eye"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">feature</span>, shape <span class="op">=</span> <span class="va">feature</span>, label <span class="op">=</span> <span class="va">.name</span><span class="op">)</span>, clip <span class="op">=</span> <span class="st">"off"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/theme_biplot.html">theme_biplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/geom_origin.html">geom_origin</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>size <span class="op">=</span> <span class="va">.mass</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/biplot-geoms.html">geom_cols_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>size <span class="op">=</span> <span class="va">.mass</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/biplot-geoms.html">geom_rows_text</a></span><span class="op">(</span>vjust <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, hjust <span class="op">=</span> <span class="fl">0</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/biplot-geoms.html">geom_cols_text</a></span><span class="op">(</span>vjust <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, hjust <span class="op">=</span> <span class="fl">0</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_color_brewer</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"qual"</span>, palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html" class="external-link">scale_size_area</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Correspondence analysis of subjects' hair &amp; eye colors"</span>,</span>
+<span>          <span class="st">"Symmetric biplot"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ordr_files/figure-html/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>Note a few conveniences:</p>
 <ul>
-<li>The position aesthetics are assumed to be the first and second artifical coordinates, unless otherwise specified. Biplots can also be specified by setting the <code>x</code> and <code>y</code> aesthetics to integers, which are converted to the corresponding artificial coordinates.</li>
-<li>By default, the aspect ratio is set to 1. This is essential for biplots, which rely on distances between markers and angles between vectors to convey information.</li>
-<li>The partial theme <code><a href="../reference/theme_biplot.html">theme_biplot()</a></code> removes several plot elements that are usually not important to biplots, most notably gridlines, while retaining other properties of the current theme.</li>
-<li>The layer <code><a href="../reference/geom_origin.html">geom_origin()</a></code> is one of two shortcuts for plotting elements commonly used in biplots, the other being <code><a href="../reference/geom_unit_circle.html">geom_unit_circle()</a></code>.</li>
+<li>The position aesthetics are assumed to be the first and second
+artifical coordinates, unless otherwise specified. Biplots can also be
+specified by setting the <code>x</code> and <code>y</code> aesthetics to
+integers, which are converted to the corresponding artificial
+coordinates.</li>
+<li>By default, the aspect ratio is set to 1. This is essential for
+biplots, which rely on distances between markers and angles between
+vectors to convey information.</li>
+<li>The partial theme <code><a href="../reference/theme_biplot.html">theme_biplot()</a></code> removes several plot
+elements that are usually not important to biplots, most notably
+gridlines, while retaining other properties of the current theme.</li>
+<li>The layer <code><a href="../reference/geom_origin.html">geom_origin()</a></code> is one of two shortcuts for
+plotting elements commonly used in biplots, the other being
+<code><a href="../reference/geom_unit_circle.html">geom_unit_circle()</a></code>.</li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="session-info">session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html" class="external-link">session_info</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info  🐽  👮🏻  👷🏾   ─────────────────────────────────────────────────</span></span>
-<span class="co">#&gt;  hash: pig nose, police officer: light skin tone, construction worker: medium-dark skin tone</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span>
-<span class="co">#&gt;  version  R version 4.1.1 (2021-08-10)</span>
-<span class="co">#&gt;  os       macOS Big Sur 10.16</span>
-<span class="co">#&gt;  system   x86_64, darwin17.0</span>
-<span class="co">#&gt;  ui       X11</span>
-<span class="co">#&gt;  language en</span>
-<span class="co">#&gt;  collate  en_US.UTF-8</span>
-<span class="co">#&gt;  ctype    en_US.UTF-8</span>
-<span class="co">#&gt;  tz       America/New_York</span>
-<span class="co">#&gt;  date     2022-05-07</span>
-<span class="co">#&gt;  pandoc   2.12 @ /opt/homebrew/anaconda3/bin/ (via rmarkdown)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Packages ───────────────────────────────────────────────────────────────────</span></span>
-<span class="co">#&gt;  <span style="color: #555555; font-style: italic;">package     </span> <span style="color: #555555; font-style: italic;">*</span> <span style="color: #555555; font-style: italic;">version   </span> <span style="color: #555555; font-style: italic;">date (UTC)</span> <span style="color: #555555; font-style: italic;">lib</span> <span style="color: #555555; font-style: italic;">source</span></span>
-<span class="co">#&gt;  assertthat     0.2.1      <span style="color: #555555;">2019-03-21</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  bslib          0.3.1      <span style="color: #555555;">2021-10-06</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  ca           * 0.71.1     <span style="color: #555555;">2020-01-24</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  cachem         1.0.6      <span style="color: #555555;">2021-08-19</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  cli            3.1.0      <span style="color: #555555;">2021-10-27</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  colorspace     2.0-2      <span style="color: #555555;">2021-06-24</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  crayon         1.4.2      <span style="color: #555555;">2021-10-29</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  DBI            1.1.1      <span style="color: #555555;">2021-01-15</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  desc           1.4.0      <span style="color: #555555;">2021-09-28</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  digest         0.6.28     <span style="color: #555555;">2021-09-23</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  dplyr          1.0.7      <span style="color: #555555;">2021-06-18</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  ellipsis       0.3.2      <span style="color: #555555;">2021-04-29</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  evaluate       0.14       <span style="color: #555555;">2019-05-28</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  fansi          0.5.0      <span style="color: #555555;">2021-05-25</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  farver         2.1.0      <span style="color: #555555;">2021-02-28</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  fastmap        1.1.0      <span style="color: #555555;">2021-01-25</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  fs             1.5.0      <span style="color: #555555;">2020-07-31</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  generics       0.1.1      <span style="color: #555555;">2021-10-25</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  ggplot2      * 3.3.5      <span style="color: #555555;">2021-06-25</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  ggrepel        0.9.1      <span style="color: #555555;">2021-01-15</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  glue           1.5.0      <span style="color: #555555;">2021-11-07</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  gtable         0.3.0      <span style="color: #555555;">2019-03-25</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  highr          0.9        <span style="color: #555555;">2021-04-16</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  htmltools      0.5.2      <span style="color: #555555;">2021-08-25</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  jquerylib      0.1.4      <span style="color: #555555;">2021-04-26</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  jsonlite       1.7.2      <span style="color: #555555;">2020-12-09</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  knitr          1.36       <span style="color: #555555;">2021-09-29</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  labeling       0.4.2      <span style="color: #555555;">2020-10-20</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  lifecycle      1.0.1      <span style="color: #555555;">2021-09-24</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  logisticPCA    0.2        <span style="color: #555555;">2016-03-14</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  magrittr       2.0.1      <span style="color: #555555;">2020-11-17</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  memoise        2.0.0      <span style="color: #555555;">2021-01-26</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  munsell        0.5.0      <span style="color: #555555;">2018-06-12</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  ordr         * <span style="color: #BB00BB; font-weight: bold;">0.0.0.9000</span> <span style="color: #555555;">2022-05-07</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span>
-<span class="co">#&gt;  pillar         1.6.4      <span style="color: #555555;">2021-10-18</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  pkgconfig      2.0.3      <span style="color: #555555;">2019-09-22</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  pkgdown        2.0.3      <span style="color: #555555;">2022-04-24</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span>
-<span class="co">#&gt;  purrr          0.3.4      <span style="color: #555555;">2020-04-17</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  R6             2.5.1      <span style="color: #555555;">2021-08-19</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  ragg           1.1.3      <span style="color: #555555;">2021-06-09</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  RColorBrewer   1.1-2      <span style="color: #555555;">2014-12-07</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  Rcpp           1.0.8      <span style="color: #555555;">2022-01-13</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span>
-<span class="co">#&gt;  rlang          1.0.2      <span style="color: #555555;">2022-03-04</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span>
-<span class="co">#&gt;  rmarkdown      2.11       <span style="color: #555555;">2021-09-14</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  rprojroot      2.0.2      <span style="color: #555555;">2020-11-15</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  rstudioapi     0.13       <span style="color: #555555;">2020-11-12</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  sass           0.4.0      <span style="color: #555555;">2021-05-12</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  scales         1.1.1      <span style="color: #555555;">2020-05-11</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  sessioninfo    1.2.1      <span style="color: #555555;">2021-11-02</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  stringi        1.7.5      <span style="color: #555555;">2021-10-04</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  stringr        1.4.0      <span style="color: #555555;">2019-02-10</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  systemfonts    1.0.2      <span style="color: #555555;">2021-05-11</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  textshaping    0.3.6      <span style="color: #555555;">2021-10-13</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  tibble         3.1.6      <span style="color: #555555;">2021-11-07</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  tidyselect     1.1.1      <span style="color: #555555;">2021-04-30</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  utf8           1.2.2      <span style="color: #555555;">2021-07-24</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  vctrs          0.3.8      <span style="color: #555555;">2021-04-29</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  withr          2.5.0      <span style="color: #555555;">2022-03-03</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span>
-<span class="co">#&gt;  xfun           0.28       <span style="color: #555555;">2021-11-04</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt;  yaml           2.2.1      <span style="color: #555555;">2020-02-01</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #555555;"> [1] /private/var/folders/4p/3cy0qmp15x9216qsqhh84kzm0000gn/T/Rtmp8CJNSA/temp_libpath2a3726bda1cc</span></span>
-<span class="co">#&gt; <span style="color: #555555;"> [2] /Library/Frameworks/R.framework/Versions/4.1/Resources/library</span></span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">──────────────────────────────────────────────────────────────────────────────</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html" class="external-link">session_info</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
+<span><span class="co">#&gt;  version  R version 4.1.1 (2021-08-10)</span></span>
+<span><span class="co">#&gt;  os       macOS Big Sur 10.16</span></span>
+<span><span class="co">#&gt;  system   x86_64, darwin17.0</span></span>
+<span><span class="co">#&gt;  ui       X11</span></span>
+<span><span class="co">#&gt;  language en</span></span>
+<span><span class="co">#&gt;  collate  en_US.UTF-8</span></span>
+<span><span class="co">#&gt;  ctype    en_US.UTF-8</span></span>
+<span><span class="co">#&gt;  tz       America/New_York</span></span>
+<span><span class="co">#&gt;  date     2022-07-12</span></span>
+<span><span class="co">#&gt;  pandoc   2.17.1.1 @ /Applications/RStudio.app/Contents/MacOS/quarto/bin/ (via rmarkdown)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Packages ───────────────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">package     </span> <span style="color: #555555; font-style: italic;">*</span> <span style="color: #555555; font-style: italic;">version   </span> <span style="color: #555555; font-style: italic;">date (UTC)</span> <span style="color: #555555; font-style: italic;">lib</span> <span style="color: #555555; font-style: italic;">source</span></span></span>
+<span><span class="co">#&gt;  assertthat     0.2.1      <span style="color: #555555;">2019-03-21</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  bslib          0.3.1      <span style="color: #555555;">2021-10-06</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  ca           * 0.71.1     <span style="color: #555555;">2020-01-24</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  cachem         1.0.6      <span style="color: #555555;">2021-08-19</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  cli            3.3.0      <span style="color: #555555;">2022-04-25</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  colorspace     2.0-3      <span style="color: #555555;">2022-02-21</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  crayon         1.5.1      <span style="color: #555555;">2022-03-26</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  DBI            1.1.3      <span style="color: #555555;">2022-06-18</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  desc           1.4.1      <span style="color: #555555;">2022-03-06</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  digest         0.6.29     <span style="color: #555555;">2021-12-01</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  dplyr          1.0.9      <span style="color: #555555;">2022-04-28</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  ellipsis       0.3.2      <span style="color: #555555;">2021-04-29</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  evaluate       0.15       <span style="color: #555555;">2022-02-18</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  fansi          1.0.3      <span style="color: #555555;">2022-03-24</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  farver         2.1.1      <span style="color: #555555;">2022-07-06</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  fastmap        1.1.0      <span style="color: #555555;">2021-01-25</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  fs             1.5.2      <span style="color: #555555;">2021-12-08</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  generics       0.1.3      <span style="color: #555555;">2022-07-05</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  ggplot2      * 3.3.6      <span style="color: #555555;">2022-05-03</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  ggrepel        0.9.1      <span style="color: #555555;">2021-01-15</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  glue           1.6.2      <span style="color: #555555;">2022-02-24</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  gtable         0.3.0      <span style="color: #555555;">2019-03-25</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  highr          0.9        <span style="color: #555555;">2021-04-16</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  htmltools      0.5.2      <span style="color: #555555;">2021-08-25</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  jquerylib      0.1.4      <span style="color: #555555;">2021-04-26</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  jsonlite       1.8.0      <span style="color: #555555;">2022-02-22</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  knitr          1.39       <span style="color: #555555;">2022-04-26</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  labeling       0.4.2      <span style="color: #555555;">2020-10-20</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  lifecycle      1.0.1      <span style="color: #555555;">2021-09-24</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  magrittr       2.0.3      <span style="color: #555555;">2022-03-30</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  memoise        2.0.1      <span style="color: #555555;">2021-11-26</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  munsell        0.5.0      <span style="color: #555555;">2018-06-12</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  ordr         * <span style="color: #BB00BB; font-weight: bold;">0.0.0.9000</span> <span style="color: #555555;">2022-07-13</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
+<span><span class="co">#&gt;  pillar         1.7.0      <span style="color: #555555;">2022-02-01</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  pkgconfig      2.0.3      <span style="color: #555555;">2019-09-22</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  pkgdown        2.0.5      <span style="color: #555555;">2022-06-23</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  purrr          0.3.4      <span style="color: #555555;">2020-04-17</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  R6             2.5.1      <span style="color: #555555;">2021-08-19</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  ragg           1.2.2      <span style="color: #555555;">2022-02-21</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  RColorBrewer   1.1-3      <span style="color: #555555;">2022-04-03</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  Rcpp           1.0.9      <span style="color: #555555;">2022-07-08</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  rlang          1.0.3      <span style="color: #555555;">2022-06-27</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  rmarkdown      2.14       <span style="color: #555555;">2022-04-25</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  rprojroot      2.0.3      <span style="color: #555555;">2022-04-02</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  rstudioapi     0.13       <span style="color: #555555;">2020-11-12</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  sass           0.4.1      <span style="color: #555555;">2022-03-23</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  scales         1.2.0      <span style="color: #555555;">2022-04-13</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  sessioninfo    1.2.2      <span style="color: #555555;">2021-12-06</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  stringi        1.7.6      <span style="color: #555555;">2021-11-29</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  stringr        1.4.0      <span style="color: #555555;">2019-02-10</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  systemfonts    1.0.4      <span style="color: #555555;">2022-02-11</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  textshaping    0.3.6      <span style="color: #555555;">2021-10-13</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  tibble         3.1.7      <span style="color: #555555;">2022-05-03</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  tidyselect     1.1.2      <span style="color: #555555;">2022-02-21</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  utf8           1.2.2      <span style="color: #555555;">2021-07-24</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.0)</span></span></span>
+<span><span class="co">#&gt;  vctrs          0.4.1      <span style="color: #555555;">2022-04-13</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  withr          2.5.0      <span style="color: #555555;">2022-03-03</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  xfun           0.31       <span style="color: #555555;">2022-05-10</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt;  yaml           2.3.5      <span style="color: #555555;">2022-02-21</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.1.2)</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"> [1] /private/var/folders/4p/3cy0qmp15x9216qsqhh84kzm0000gn/T/RtmpPomBud/temp_libpath5981640abf7a</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"> [2] /Library/Frameworks/R.framework/Versions/4.1/Resources/library</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">──────────────────────────────────────────────────────────────────────────────</span></span></span></code></pre></div>
 </div>
-<div class="footnotes">
+<div class="footnotes footnotes-end-of-document">
 <hr>
 <ol>
 <li id="fn1"><p><a href="https://www.jstor.org/stable/2683520" class="external-link uri">https://www.jstor.org/stable/2683520</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Note that <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">ordr::tidy()</a></code> takes precedence for ‘tbl_ord’ objects because the ‘tbl_ord’ class precedes the underlying model class.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Note that <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">ordr::tidy()</a></code> takes precedence for
+‘tbl_ord’ objects because the ‘tbl_ord’ class precedes the underlying
+model class.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>
@@ -533,7 +665,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer>

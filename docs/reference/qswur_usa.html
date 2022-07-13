@@ -30,7 +30,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -59,24 +59,95 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">qswur_usa</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">qswur_usa</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="format">
     <h2>Format</h2>
-    <p>A <a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a>.</p>
-    </div>
+    <p>A <a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a> of 13 variables on 612 cases:</p><dl><dt>year</dt>
+<dd><p>year of rankings</p></dd>
+
+<dt>institution</dt>
+<dd><p>institution of higher learning</p></dd>
+
+<dt>size</dt>
+<dd><p>size category of institution</p></dd>
+
+<dt>focus</dt>
+<dd><p>subject range of institution</p></dd>
+
+<dt>res</dt>
+<dd><p>research intensity of institution</p></dd>
+
+<dt>age</dt>
+<dd><p>age classification of institution</p></dd>
+
+<dt>status</dt>
+<dd><p>status of institution</p></dd>
+
+<dt>rk_academic</dt>
+<dd><p>rank by academic reputation</p></dd>
+
+<dt>rk_employer</dt>
+<dd><p>rank by employer reputation</p></dd>
+
+<dt>rk_ratio</dt>
+<dd><p>rank by faculty--student ratio</p></dd>
+
+<dt>rk_citations</dt>
+<dd><p>rank by citations per faculty</p></dd>
+
+<dt>rk_intl_faculty</dt>
+<dd><p>rank by international faculty ratio</p></dd>
+
+<dt>rk_intl_students</dt>
+<dd><p>rank by international student ratio</p></dd>
+
+
+</dl></div>
     <div id="source">
     <h2>Source</h2>
     <p>Quacquarelli Symonds (2021).</p>
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p><strong>Link to the websites
-<a href="http://www.iu.qs.com/university-rankings/qs-classifications/" class="external-link">http://www.iu.qs.com/university-rankings/qs-classifications/</a> for university
-classifications.</strong></p>
+    <p>Ranking data were obtained from the public QS website.</p>
+    </div>
+    <div id="references">
+    <h2>References</h2>
+    <p>Quacquarelli Symonds (2021) "University Rankings". TopUniversities.com
+<a href="https://www.topuniversities.com/university-rankings" class="external-link">https://www.topuniversities.com/university-rankings</a>.</p>
     </div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># subset QS data to rank variables</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">qswur_usa</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 13</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    year institution       size  focus res     age status rk_academic rk_employer</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 MASSACHUSETTS IN… M     CO    VH        5 B                6           4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>017 STANFORD UNIVERS… L     FC    VH        5 A                5           5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>017 HARVARD UNIVERSI… L     FC    VH        5 B                1           1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>017 CALIFORNIA INSTI… S     CO    VH        5 B               23          90</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>017 UNIVERSITY OF CH… L     FC    VH        5 B               13          47</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>017 PRINCETON UNIVER… M     CO    VH        5 B               10          32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 4 more variables: rk_ratio &lt;int&gt;, rk_citations &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   rk_intl_faculty &lt;int&gt;, rk_intl_students &lt;int&gt;</span></span>
+<span class="r-in"><span><span class="va">qs_ranks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">qswur_usa</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html" class="external-link">complete.cases</a></span><span class="op">(</span><span class="va">qswur_usa</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  select <span class="op">=</span> <span class="fl">8</span><span class="op">:</span><span class="fl">13</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># calculate Kendall correlation matrix</span></span></span>
+<span class="r-in"><span><span class="va">qs_cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">qs_ranks</span>, method <span class="op">=</span> <span class="st">"kendall"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># calculate eigendecomposition</span></span></span>
+<span class="r-in"><span><span class="va">qs_eigen</span> <span class="op">&lt;-</span> <span class="fu"><a href="wrap-ord.html">eigen_ord</a></span><span class="op">(</span><span class="va">qs_cor</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># view correlations as cosines of biplot vectors</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/biplot.html" class="external-link">biplot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">qs_eigen</span><span class="op">$</span><span class="va">vectors</span>, y <span class="op">=</span> <span class="va">qs_eigen</span><span class="op">$</span><span class="va">vectors</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"black"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="qswur_usa-1.png" alt="" width="700" height="433"></span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -89,7 +160,7 @@ classifications.</strong></p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

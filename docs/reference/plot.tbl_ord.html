@@ -30,7 +30,7 @@ screeplot(), and biplot() generics to 'tbl_ord' objects."><!-- mathjax --><scrip
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -59,77 +59,82 @@ screeplot(), and biplot() generics to 'tbl_ord' objects."><!-- mathjax --><scrip
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for tbl_ord</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/deparse.html" class="external-link">deparse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html" class="external-link">substitute</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for tbl_ord</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/deparse.html" class="external-link">deparse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html" class="external-link">substitute</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A 'tbl_ord' object.</p></dd>
+
+
 <dt>main</dt>
 <dd><p>A main title for the plot, passed to other methods (included to
 enable parsing of object name).</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments passed to other methods.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
     <p>These methods defer to any <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> and <code><a href="https://rdrr.io/r/stats/biplot.html" class="external-link">biplot()</a></code> methods for the original,
 underlying model classes of 'tbl_ord' objects. If none are found: Following
 the examples of <code><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">stats::plot.prcomp()</a></code> and <code><a href="https://rdrr.io/r/stats/princomp.html" class="external-link">stats::plot.princomp()</a></code>,
-<code>plot.tbl_ord()</code> calls on <code><a href="accessors.html">recover_inertia()</a></code> and <code><a href="https://rdrr.io/r/stats/screeplot.html" class="external-link">stats::screeplot()</a></code> to
-produce a scree plot of the decomposition of variance in the singular value
-decomposition. Similarly following <code><a href="https://rdrr.io/r/stats/biplot.princomp.html" class="external-link">stats::biplot.prcomp()</a></code> and
-<code><a href="https://rdrr.io/r/stats/biplot.princomp.html" class="external-link">stats::biplot.princomp()</a></code>, <code>biplot.tbl_ord()</code> produces a biplot of both rows
-and columns, using text labels when available and markers otherwise, with
-rows and columns distinguished by color and no additional annotation (e.g.
-vectors). The biplot confers inertia according to <code><a href="conference.html">get_conference()</a></code> unless
-the proportions do not sum to 1, in which case it produces a symmetric biplot
-(inertia conferred equally to rows and columns).</p>
+<code>plot.tbl_ord()</code> calls on <code><a href="https://rdrr.io/r/stats/screeplot.html" class="external-link">stats::screeplot()</a></code> to produce a scree plot of the
+decomposition of variance in the singular value decomposition. Similarly
+following <code><a href="https://rdrr.io/r/stats/biplot.princomp.html" class="external-link">stats::biplot.prcomp()</a></code> and <code><a href="https://rdrr.io/r/stats/biplot.princomp.html" class="external-link">stats::biplot.princomp()</a></code>,
+<code>biplot.tbl_ord()</code> produces a biplot of both rows and columns, using text
+labels when available and markers otherwise, with rows and columns
+distinguished by color and no additional annotation (e.g. vectors). The
+biplot confers inertia according to <code><a href="conference.html">get_conference()</a></code> unless the proportions
+do not sum to 1, in which case it produces a symmetric biplot (inertia
+conferred equally to rows and columns).</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># note: behavior depends on installed packages with class-specific methods</span></span>
-<span class="r-in"><span class="co"># class 'prcomp'</span></span>
-<span class="r-in"><span class="va">iris_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">prcomp</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5L</span><span class="op">]</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">iris_pca_ord</span> <span class="op">&lt;-</span> <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># note: behavior depends on installed packages with class-specific methods</span></span></span>
+<span class="r-in"><span><span class="co"># class 'prcomp'</span></span></span>
+<span class="r-in"><span><span class="va">iris_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">prcomp</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5L</span><span class="op">]</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">iris_pca_ord</span> <span class="op">&lt;-</span> <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.tbl_ord-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">iris_pca_ord</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">iris_pca_ord</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.tbl_ord-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/screeplot.html" class="external-link">screeplot</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/screeplot.html" class="external-link">screeplot</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.tbl_ord-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/screeplot.html" class="external-link">screeplot</a></span><span class="op">(</span><span class="va">iris_pca_ord</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/screeplot.html" class="external-link">screeplot</a></span><span class="op">(</span><span class="va">iris_pca_ord</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.tbl_ord-4.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/biplot.html" class="external-link">biplot</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/biplot.html" class="external-link">biplot</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.tbl_ord-5.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/biplot.html" class="external-link">biplot</a></span><span class="op">(</span><span class="va">iris_pca_ord</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/biplot.html" class="external-link">biplot</a></span><span class="op">(</span><span class="va">iris_pca_ord</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.tbl_ord-6.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># class 'ca'</span></span>
-<span class="r-in"><span class="va">smoke_ca</span> <span class="op">&lt;-</span> <span class="fu">ca</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ca/man/ca.html" class="external-link">ca</a></span><span class="op">(</span><span class="fu">ca</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ca/man/smoke.html" class="external-link">smoke</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="va">smoke_ca_ord</span> <span class="op">&lt;-</span> <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">smoke_ca</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">smoke_ca</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># class 'ca'</span></span></span>
+<span class="r-in"><span><span class="va">smoke_ca</span> <span class="op">&lt;-</span> <span class="fu">ca</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ca/man/ca.html" class="external-link">ca</a></span><span class="op">(</span><span class="fu">ca</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ca/man/smoke.html" class="external-link">smoke</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">smoke_ca_ord</span> <span class="op">&lt;-</span> <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">smoke_ca</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">smoke_ca</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.tbl_ord-7.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">smoke_ca_ord</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">smoke_ca_ord</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.tbl_ord-8.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co">#screeplot(smoke_ca)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/screeplot.html" class="external-link">screeplot</a></span><span class="op">(</span><span class="va">smoke_ca_ord</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co">#screeplot(smoke_ca)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/screeplot.html" class="external-link">screeplot</a></span><span class="op">(</span><span class="va">smoke_ca_ord</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.tbl_ord-9.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co">#biplot(smoke_ca)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/biplot.html" class="external-link">biplot</a></span><span class="op">(</span><span class="va">smoke_ca_ord</span>, var.axes <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co">#biplot(smoke_ca)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/biplot.html" class="external-link">biplot</a></span><span class="op">(</span><span class="va">smoke_ca_ord</span>, var.axes <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.tbl_ord-10.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># class 'lra'</span></span>
-<span class="r-in"><span class="va">arrests_lra</span> <span class="op">&lt;-</span> <span class="fu"><a href="lra-ord.html">lra</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">USArrests</span>, select <span class="op">=</span> <span class="op">-</span><span class="va">UrbanPop</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">arrests_lra_ord</span> <span class="op">&lt;-</span> <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">arrests_lra</span><span class="op">)</span></span>
-<span class="r-in"><span class="co">#plot(arrests_lra)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">arrests_lra_ord</span><span class="op">)</span></span>
-<span class="r-in"><span class="co">#screeplot(arrests_lra)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/screeplot.html" class="external-link">screeplot</a></span><span class="op">(</span><span class="va">arrests_lra_ord</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># class 'lra'</span></span></span>
+<span class="r-in"><span><span class="va">arrests_lra</span> <span class="op">&lt;-</span> <span class="fu"><a href="lra-ord.html">lra</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">USArrests</span>, select <span class="op">=</span> <span class="op">-</span><span class="va">UrbanPop</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">arrests_lra_ord</span> <span class="op">&lt;-</span> <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">arrests_lra</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">#plot(arrests_lra)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">arrests_lra_ord</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">#screeplot(arrests_lra)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/screeplot.html" class="external-link">screeplot</a></span><span class="op">(</span><span class="va">arrests_lra_ord</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.tbl_ord-11.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co">#biplot(arrests_lra)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/biplot.html" class="external-link">biplot</a></span><span class="op">(</span><span class="va">arrests_lra_ord</span>, var.axes <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co">#biplot(arrests_lra)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/biplot.html" class="external-link">biplot</a></span><span class="op">(</span><span class="va">arrests_lra_ord</span>, var.axes <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.tbl_ord-12.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -145,7 +150,7 @@ the proportions do not sum to 1, in which case it produces a symmetric biplot
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

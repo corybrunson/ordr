@@ -32,7 +32,7 @@ ordination."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -63,31 +63,41 @@ ordination.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for tbl_ord</span>
-<span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for tbl_ord</span>
-<span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for tbl_ord</span>
-<span class="fu">fortify</span><span class="op">(</span><span class="va">model</span>, <span class="va">data</span>, <span class="va">...</span>, .matrix <span class="op">=</span> <span class="st">"dims"</span>, .supplement <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for tbl_ord</span></span>
+<span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for tbl_ord</span></span>
+<span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for tbl_ord</span></span>
+<span><span class="fu">fortify</span><span class="op">(</span><span class="va">model</span>, <span class="va">data</span>, <span class="va">...</span>, .matrix <span class="op">=</span> <span class="st">"dims"</span>, elements <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x, model</dt>
 <dd><p>An object of class '<a href="tbl_ord.html">tbl_ord</a>'.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments allowed by generics; currently ignored.</p></dd>
+
+
 <dt>data</dt>
 <dd><p>Passed to generic methods; currently ignored.</p></dd>
+
+
 <dt>.matrix</dt>
 <dd><p>A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
 standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</code> (for both).</p></dd>
-<dt>.supplement</dt>
-<dd><p>Logical; whether to include
-<a href="supplementation.html">supplementary</a> points.</p></dd>
+
+
+<dt>elements</dt>
+<dd><p>Character; which elements of each factor for which to render
+graphical elements. One of <code>"all"</code> (the default), <code>"active"</code>, or
+<code>"supplementary"</code>, with partial matching.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -117,6 +127,95 @@ particular <code><a href="stat_spantree.html">stat_spantree()</a></code>.</p>
     <div class="dont-index"><p><a href="augmentation.html">augmentation</a> methods that must interface with tidiers.</p></div>
     </div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># illustrative ordination: PCA of iris data</span></span></span>
+<span class="r-in"><span><span class="va">iris_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="ordinate.html">ordinate</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">4L</span><span class="op">)</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">prcomp</a></span><span class="op">(</span><span class="va">.</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale. <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># use `tidy()` to summarize distribution of inertia</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .name .sdev .inertia .prop_var</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> PC1   1.71    435.     0.730  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> PC2   0.956   136.     0.229  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> PC3   0.383    21.9    0.036<span style="text-decoration: underline;">7</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> PC4   0.144     3.09   0.005<span style="text-decoration: underline;">18</span></span>
+<span class="r-in"><span><span class="co"># this facilitates scree plots</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">.name</span>, y <span class="op">=</span> <span class="va">.inertia</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Latent dimension"</span>, y <span class="op">=</span> <span class="st">"Inertia"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="tidiers-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">.name</span>, y <span class="op">=</span> <span class="va">.prop_var</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html" class="external-link">percent</a></span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"Proportion of variance"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="tidiers-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="co"># use `fortify()` to prepare either matrix factor for `ggplot()`</span></span></span>
+<span class="r-in"><span><span class="fu">fortify</span><span class="op">(</span><span class="va">iris_pca</span>, .matrix <span class="op">=</span> <span class="st">"cases"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 150 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      PC1     PC2     PC3      PC4 Species .matrix</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> -<span style="color: #BB0000;">2.26</span> -<span style="color: #BB0000;">0.478</span>   0.127   0.024<span style="text-decoration: underline;">1</span>  setosa  rows   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> -<span style="color: #BB0000;">2.07</span>  0.672   0.234   0.103   setosa  rows   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> -<span style="color: #BB0000;">2.36</span>  0.341  -<span style="color: #BB0000;">0.044</span><span style="color: #BB0000; text-decoration: underline;">1</span>  0.028<span style="text-decoration: underline;">3</span>  setosa  rows   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> -<span style="color: #BB0000;">2.29</span>  0.595  -<span style="color: #BB0000;">0.091</span><span style="color: #BB0000; text-decoration: underline;">0</span> -<span style="color: #BB0000;">0.065</span><span style="color: #BB0000; text-decoration: underline;">7</span>  setosa  rows   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> -<span style="color: #BB0000;">2.38</span> -<span style="color: #BB0000;">0.645</span>  -<span style="color: #BB0000;">0.015</span><span style="color: #BB0000; text-decoration: underline;">7</span> -<span style="color: #BB0000;">0.035</span><span style="color: #BB0000; text-decoration: underline;">8</span>  setosa  rows   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> -<span style="color: #BB0000;">2.07</span> -<span style="color: #BB0000;">1.48</span>   -<span style="color: #BB0000;">0.026</span><span style="color: #BB0000; text-decoration: underline;">9</span>  0.006<span style="text-decoration: underline;">59</span> setosa  rows   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> -<span style="color: #BB0000;">2.44</span> -<span style="color: #BB0000;">0.047</span><span style="color: #BB0000; text-decoration: underline;">5</span> -<span style="color: #BB0000;">0.334</span>  -<span style="color: #BB0000;">0.036</span><span style="color: #BB0000; text-decoration: underline;">7</span>  setosa  rows   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> -<span style="color: #BB0000;">2.23</span> -<span style="color: #BB0000;">0.222</span>   0.088<span style="text-decoration: underline;">4</span> -<span style="color: #BB0000;">0.024</span><span style="color: #BB0000; text-decoration: underline;">5</span>  setosa  rows   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> -<span style="color: #BB0000;">2.33</span>  1.11   -<span style="color: #BB0000;">0.145</span>  -<span style="color: #BB0000;">0.026</span><span style="color: #BB0000; text-decoration: underline;">8</span>  setosa  rows   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> -<span style="color: #BB0000;">2.18</span>  0.467   0.253  -<span style="color: #BB0000;">0.039</span><span style="color: #BB0000; text-decoration: underline;">8</span>  setosa  rows   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 140 more rows</span></span>
+<span class="r-in"><span><span class="fu">fortify</span><span class="op">(</span><span class="va">iris_pca</span>, .matrix <span class="op">=</span> <span class="st">"variables"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      PC1     PC2    PC3    PC4 .name        .center .scale .matrix</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.521 -<span style="color: #BB0000;">0.377</span>   0.720  0.261 Sepal.Length    5.84  0.828 cols   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.269</span> -<span style="color: #BB0000;">0.923</span>  -<span style="color: #BB0000;">0.244</span> -<span style="color: #BB0000;">0.124</span> Sepal.Width     3.06  0.436 cols   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  0.580 -<span style="color: #BB0000;">0.024</span><span style="color: #BB0000; text-decoration: underline;">5</span> -<span style="color: #BB0000;">0.142</span> -<span style="color: #BB0000;">0.801</span> Petal.Length    3.76  1.77  cols   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.565 -<span style="color: #BB0000;">0.066</span><span style="color: #BB0000; text-decoration: underline;">9</span> -<span style="color: #BB0000;">0.634</span>  0.524 Petal.Width     1.20  0.762 cols   </span>
+<span class="r-in"><span><span class="co"># ... or to prepare both for `ggbiplot()`</span></span></span>
+<span class="r-in"><span><span class="fu">fortify</span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 154 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      PC1     PC2     PC3      PC4 Species .matrix .name .center .scale</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> -<span style="color: #BB0000;">2.26</span> -<span style="color: #BB0000;">0.478</span>   0.127   0.024<span style="text-decoration: underline;">1</span>  setosa  rows    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> -<span style="color: #BB0000;">2.07</span>  0.672   0.234   0.103   setosa  rows    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> -<span style="color: #BB0000;">2.36</span>  0.341  -<span style="color: #BB0000;">0.044</span><span style="color: #BB0000; text-decoration: underline;">1</span>  0.028<span style="text-decoration: underline;">3</span>  setosa  rows    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> -<span style="color: #BB0000;">2.29</span>  0.595  -<span style="color: #BB0000;">0.091</span><span style="color: #BB0000; text-decoration: underline;">0</span> -<span style="color: #BB0000;">0.065</span><span style="color: #BB0000; text-decoration: underline;">7</span>  setosa  rows    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> -<span style="color: #BB0000;">2.38</span> -<span style="color: #BB0000;">0.645</span>  -<span style="color: #BB0000;">0.015</span><span style="color: #BB0000; text-decoration: underline;">7</span> -<span style="color: #BB0000;">0.035</span><span style="color: #BB0000; text-decoration: underline;">8</span>  setosa  rows    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> -<span style="color: #BB0000;">2.07</span> -<span style="color: #BB0000;">1.48</span>   -<span style="color: #BB0000;">0.026</span><span style="color: #BB0000; text-decoration: underline;">9</span>  0.006<span style="text-decoration: underline;">59</span> setosa  rows    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> -<span style="color: #BB0000;">2.44</span> -<span style="color: #BB0000;">0.047</span><span style="color: #BB0000; text-decoration: underline;">5</span> -<span style="color: #BB0000;">0.334</span>  -<span style="color: #BB0000;">0.036</span><span style="color: #BB0000; text-decoration: underline;">7</span>  setosa  rows    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> -<span style="color: #BB0000;">2.23</span> -<span style="color: #BB0000;">0.222</span>   0.088<span style="text-decoration: underline;">4</span> -<span style="color: #BB0000;">0.024</span><span style="color: #BB0000; text-decoration: underline;">5</span>  setosa  rows    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> -<span style="color: #BB0000;">2.33</span>  1.11   -<span style="color: #BB0000;">0.145</span>  -<span style="color: #BB0000;">0.026</span><span style="color: #BB0000; text-decoration: underline;">8</span>  setosa  rows    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> -<span style="color: #BB0000;">2.18</span>  0.467   0.253  -<span style="color: #BB0000;">0.039</span><span style="color: #BB0000; text-decoration: underline;">8</span>  setosa  rows    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 144 more rows</span></span>
+<span class="r-in"><span><span class="co"># use `glance()` to summarize the model as an ordination</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    rank n.row n.col inertia prop.var.1 prop.var.2 class </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>   150   150     4     596      0.730      0.229 prcomp</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     4   150     4     596      0.730      0.229 prcomp</span>
+<span class="r-in"><span><span class="co"># this enables comparisons to other models</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="fu"><a href="ordinate.html">ordinate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">4L</span><span class="op">)</span>, <span class="va">prcomp</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="fu"><a href="ordinate.html">ordinate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Species</span> <span class="op">==</span> <span class="st">"versicolor"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">4L</span><span class="op">)</span>, <span class="va">prcomp</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="fu"><a href="ordinate.html">ordinate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Species</span> <span class="op">==</span> <span class="st">"virginica"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">4L</span><span class="op">)</span>, <span class="va">prcomp</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    rank n.row n.col inertia prop.var.1 prop.var.2 class </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>    50    50     4    15.2      0.765      0.119 prcomp</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     4    50     4    15.2      0.765      0.119 prcomp</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>    50    50     4    30.6      0.781      0.116 prcomp</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>     4    50     4    30.6      0.781      0.116 prcomp</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>    50    50     4    43.5      0.783      0.120 prcomp</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>     4    50     4    43.5      0.783      0.120 prcomp</span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -129,7 +228,7 @@ particular <code><a href="stat_spantree.html">stat_spantree()</a></code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

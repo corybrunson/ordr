@@ -30,7 +30,7 @@ objects of class "svd_ord" returned by svd_ord().'><!-- mathjax --><script src="
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -59,57 +59,45 @@ objects of class <code>"svd_ord"</code> returned by <code><a href="wrap-ord.html
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for svd_ord</span>
-<span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for svd_ord</span>
-<span class="fu"><a href="accessors.html">recover_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for svd_ord</span>
-<span class="fu"><a href="accessors.html">recover_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for svd_ord</span>
-<span class="fu"><a href="accessors.html">recover_inertia</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for svd_ord</span>
-<span class="fu"><a href="accessors.html">recover_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for svd_ord</span>
-<span class="fu"><a href="conference.html">recover_conference</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for svd_ord</span>
-<span class="fu"><a href="augmentation.html">augmentation_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for svd_ord</span>
-<span class="fu"><a href="augmentation.html">augmentation_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for svd_ord</span>
-<span class="fu"><a href="augmentation.html">augmentation_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for svd_ord</span></span>
+<span><span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>An ordination object.</p></dd>
+
 </dl></div>
+    <div id="see-also">
+    <h2>See also</h2>
+    <div class="dont-index"><p>Other methods for singular value decomposition-based techniques: 
+<code><a href="methods-cancor.html">methods-cancor</a></code>,
+<code><a href="methods-ca.html">methods-ca</a></code>,
+<code><a href="methods-lda.html">methods-lda</a></code>,
+<code><a href="methods-lra.html">methods-lra</a></code>,
+<code><a href="methods-mjca.html">methods-mjca</a></code>,
+<code><a href="methods-prcomp.html">methods-prcomp</a></code>,
+<code><a href="methods-princomp.html">methods-princomp</a></code></p></div>
+    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># matrix of U.S. personal expenditure data</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">USPersonalExpenditure</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># matrix of U.S. personal expenditure data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">USPersonalExpenditure</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "matrix" "array" </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">USPersonalExpenditure</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">USPersonalExpenditure</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       1940   1945  1950 1955  1960</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Food and Tobacco    22.200 44.500 59.60 73.2 86.80</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Household Operation 10.500 15.500 29.00 36.5 46.20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Medical and Health   3.530  5.760  9.71 14.0 21.10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Personal Care        1.040  1.980  2.45  3.4  5.40</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Private Education    0.341  0.974  1.80  2.6  3.64</span>
-<span class="r-in"><span class="co"># singular value decomposition into row and column coordinates</span></span>
-<span class="r-in"><span class="va">USPersonalExpenditure</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="wrap-ord.html">svd_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">spend_svd</span></span>
+<span class="r-in"><span><span class="co"># singular value decomposition into row and column coordinates</span></span></span>
+<span class="r-in"><span><span class="va">USPersonalExpenditure</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="wrap-ord.html">svd_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">spend_svd</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'svd_ord': (5 x 5) x (5 x 5)'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # 5 coordinates: SV1, SV2, ..., SV5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
@@ -130,29 +118,23 @@ objects of class <code>"svd_ord"</code> returned by <code><a href="wrap-ord.html
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.429</span>  0.211   0.620     | </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.532</span>  0.026<span style="text-decoration: underline;">6</span>  0.302     | </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.645</span> -<span style="color: #BB0000;">0.561</span>  -<span style="color: #BB0000;">0.461</span>     | </span>
-<span class="r-in"><span class="co"># summarize ordination</span></span>
-<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    rank n.row n.col inertia prop.var.1 prop.var.2 class  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     5     5     5  <span style="text-decoration: underline;">24</span>433.      0.997    0.002<span style="text-decoration: underline;">56</span> svd_ord</span>
-<span class="r-in"><span class="co"># recover matrices of row and column coordinates</span></span>
-<span class="r-in"><span class="fu"><a href="accessors.html">get_rows</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># recover matrices of row and column coordinates</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="accessors.html">get_rows</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             SV1         SV2         SV3         SV4         SV5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Food and Tobacco    -0.88086766  0.45563080 -0.12237718  0.02450591 -0.02993361</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Household Operation -0.43580483 -0.67662102  0.58341818 -0.07630369  0.07784028</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Medical and Health  -0.17637018 -0.56230756 -0.73372346  0.04111351 -0.33565360</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Personal Care       -0.04553400 -0.09285599 -0.31360568 -0.49361448  0.80454996</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Private Education   -0.03108899 -0.09885616 -0.08915387  0.86500383  0.48278452</span>
-<span class="r-in"><span class="fu"><a href="accessors.html">get_cols</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="accessors.html">get_cols</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             SV1         SV2        SV3         SV4         SV5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1940 -0.1589586  0.11313761  0.1824780 -0.89728506 -0.35144462</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1945 -0.3016855  0.79223017 -0.5274149  0.02654943  0.04985844</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1950 -0.4293572  0.21081041  0.6202698 -0.01464040  0.62150007</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1955 -0.5323309  0.02659741  0.3024320  0.42107353 -0.66869157</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1960 -0.6449761 -0.56073415 -0.4607988 -0.12906349  0.20146975</span>
-<span class="r-in"><span class="co"># augment with row and column names</span></span>
-<span class="r-in"><span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># augment with row and column names</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'svd_ord': (5 x 5) x (5 x 5)'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # 5 coordinates: SV1, SV2, ..., SV5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
@@ -173,41 +155,9 @@ objects of class <code>"svd_ord"</code> returned by <code><a href="wrap-ord.html
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.429</span>  0.211   0.620     | <span style="color: #BCBCBC;">3</span> 1950 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.532</span>  0.026<span style="text-decoration: underline;">6</span>  0.302     | <span style="color: #BCBCBC;">4</span> 1955 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.645</span> -<span style="color: #BB0000;">0.561</span>  -<span style="color: #BB0000;">0.461</span>     | <span style="color: #BCBCBC;">5</span> 1960 </span>
-<span class="r-in"><span class="co"># summarize artifical coordinates</span></span>
-<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .name   .value    .inertia   .prop_var</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> SV1   156.     <span style="text-decoration: underline;">24</span>364.      0.997      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> SV2     7.91      62.6     0.002<span style="text-decoration: underline;">56</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> SV3     2.53       6.42    0.000<span style="text-decoration: underline;">263</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> SV4     0.368      0.136   0.000<span style="text-decoration: underline;">005</span>55 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> SV5     0.087<span style="text-decoration: underline;">4</span>     0.007<span style="text-decoration: underline;">63</span> 0.000<span style="text-decoration: underline;">000</span>312</span>
-<span class="r-in"><span class="co"># scree plot of inertia</span></span>
-<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">.name</span>, y <span class="op">=</span> <span class="va">.inertia</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">"Inertia"</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="methods-svd-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># initial matrix decomposition confers no inertia to coordinates</span></span>
-<span class="r-in"><span class="fu"><a href="conference.html">get_conference</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># initial matrix decomposition confers no inertia to coordinates</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="conference.html">get_conference</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0 0</span>
-<span class="r-in"><span class="co"># row-principal biplot, allowing radiating text to exceed plotting window</span></span>
-<span class="r-in"><span class="va">spend_svd</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="conference.html">confer_inertia</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.name</span><span class="op">)</span>, clip <span class="op">=</span> <span class="st">"off"</span>,</span>
-<span class="r-in">           sec.axes <span class="op">=</span> <span class="st">"cols"</span>, scale.factor <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="biplot-geoms.html">geom_rows_label</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="biplot-geoms.html">geom_cols_vector</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="co"># omit labels in the hull with the origin</span></span>
-<span class="r-in">  <span class="fu"><a href="biplot-geoms.html">geom_cols_text_radiate</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"cone"</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">ggtitle</span><span class="op">(</span></span>
-<span class="r-in">    <span class="st">"U.S. Personal Expenditure data, 1940-1960"</span>,</span>
-<span class="r-in">    <span class="st">"Row-principal biplot of SVD"</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-plt img"><img src="methods-svd-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
@@ -222,7 +172,7 @@ objects of class <code>"svd_ord"</code> returned by <code><a href="wrap-ord.html
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>
