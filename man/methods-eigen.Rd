@@ -3,9 +3,33 @@
 \name{methods-eigen}
 \alias{methods-eigen}
 \alias{as_tbl_ord.eigen_ord}
+\alias{recover_rows.eigen_ord}
+\alias{recover_cols.eigen_ord}
+\alias{recover_inertia.eigen_ord}
+\alias{recover_coord.eigen_ord}
+\alias{recover_conference.eigen_ord}
+\alias{augmentation_rows.eigen_ord}
+\alias{augmentation_cols.eigen_ord}
+\alias{augmentation_coord.eigen_ord}
 \title{Functionality for eigendecompositions}
 \usage{
 \method{as_tbl_ord}{eigen_ord}(x)
+
+\method{recover_rows}{eigen_ord}(x)
+
+\method{recover_cols}{eigen_ord}(x)
+
+\method{recover_inertia}{eigen_ord}(x)
+
+\method{recover_coord}{eigen_ord}(x)
+
+\method{recover_conference}{eigen_ord}(x)
+
+\method{augmentation_rows}{eigen_ord}(x)
+
+\method{augmentation_cols}{eigen_ord}(x)
+
+\method{augmentation_coord}{eigen_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}

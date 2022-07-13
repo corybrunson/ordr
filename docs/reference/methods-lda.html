@@ -31,7 +31,7 @@ lda_ord().'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -61,83 +61,41 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for lda</span>
-<span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda_ord</span>
-<span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda</span>
-<span class="fu"><a href="accessors.html">recover_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda_ord</span>
-<span class="fu"><a href="accessors.html">recover_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda</span>
-<span class="fu"><a href="accessors.html">recover_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda_ord</span>
-<span class="fu"><a href="accessors.html">recover_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda</span>
-<span class="fu"><a href="accessors.html">recover_inertia</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda_ord</span>
-<span class="fu"><a href="accessors.html">recover_inertia</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda</span>
-<span class="fu"><a href="accessors.html">recover_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda_ord</span>
-<span class="fu"><a href="accessors.html">recover_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda</span>
-<span class="fu"><a href="conference.html">recover_conference</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda_ord</span>
-<span class="fu"><a href="conference.html">recover_conference</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda</span>
-<span class="fu"><a href="augmentation.html">augmentation_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda_ord</span>
-<span class="fu"><a href="augmentation.html">augmentation_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda</span>
-<span class="fu"><a href="augmentation.html">augmentation_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda_ord</span>
-<span class="fu"><a href="augmentation.html">augmentation_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda</span>
-<span class="fu"><a href="augmentation.html">augmentation_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda_ord</span>
-<span class="fu"><a href="augmentation.html">augmentation_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda</span>
-<span class="fu"><a href="supplementation.html">supplementation_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for lda_ord</span>
-<span class="fu"><a href="supplementation.html">supplementation_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for lda</span></span>
+<span><span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for lda_ord</span></span>
+<span><span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>An ordination object.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
     <p>See <a href="lda-ord.html">lda-ord</a> for details.</p>
     </div>
+    <div id="see-also">
+    <h2>See also</h2>
+    <div class="dont-index"><p>Other methods for singular value decomposition-based techniques: 
+<code><a href="methods-cancor.html">methods-cancor</a></code>,
+<code><a href="methods-ca.html">methods-ca</a></code>,
+<code><a href="methods-lra.html">methods-lra</a></code>,
+<code><a href="methods-mjca.html">methods-mjca</a></code>,
+<code><a href="methods-prcomp.html">methods-prcomp</a></code>,
+<code><a href="methods-princomp.html">methods-princomp</a></code>,
+<code><a href="methods-svd.html">methods-svd</a></code></p></div>
+    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># data frame of Anderson iris species measurements</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># data frame of Anderson iris species measurements</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "data.frame"</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1          5.1         3.5          1.4         0.2  setosa</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2          4.9         3.0          1.4         0.2  setosa</span>
@@ -145,10 +103,10 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4          4.6         3.1          1.5         0.2  setosa</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5          5.0         3.6          1.4         0.2  setosa</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6          5.4         3.9          1.7         0.4  setosa</span>
-<span class="r-in"><span class="co"># default (unstandardized discriminant) coefficients</span></span>
-<span class="r-in"><span class="fu"><a href="lda-ord.html">lda_ord</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="va">iris</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">iris_lda</span></span>
+<span class="r-in"><span><span class="co"># default (unstandardized discriminant) coefficients</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="lda-ord.html">lda_ord</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="va">iris</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">iris_lda</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'lda_ord': (153 x 2) x (4 x 2)'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # 2 coordinates: LD1 and LD2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
@@ -169,26 +127,20 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  1.53   2.16   | </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">2.20</span>  -<span style="color: #BB0000;">0.932</span>  | </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">2.81</span>   2.84   | </span>
-<span class="r-in"><span class="co"># summarize ordination</span></span>
-<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">iris_lda</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    rank n.row n.col inertia prop.var.1 prop.var.2 class  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     2   153     4   <span style="text-decoration: underline;">2</span>387.      0.991    0.008<span style="text-decoration: underline;">79</span> lda_ord</span>
-<span class="r-in"><span class="co"># recover centroid coordinates and measurement discriminant coefficients</span></span>
-<span class="r-in"><span class="fu"><a href="accessors.html">get_rows</a></span><span class="op">(</span><span class="va">iris_lda</span>, .supplement <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># recover centroid coordinates and measurement discriminant coefficients</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="accessors.html">get_rows</a></span><span class="op">(</span><span class="va">iris_lda</span>, elements <span class="op">=</span> <span class="st">"active"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  LD1        LD2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> setosa      7.607600  0.2151330</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> versicolor -1.825049 -0.7278996</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> virginica  -5.782550  0.5127666</span>
-<span class="r-in"><span class="fu"><a href="accessors.html">get_cols</a></span><span class="op">(</span><span class="va">iris_lda</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="accessors.html">get_cols</a></span><span class="op">(</span><span class="va">iris_lda</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     LD1         LD2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Length  0.8293776  0.02410215</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Width   1.5344731  2.16452123</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Length -2.2012117 -0.93192121</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Width  -2.8104603  2.83918785</span>
-<span class="r-in"><span class="co"># augment ordination with centroid and measurement names</span></span>
-<span class="r-in"><span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="va">iris_lda</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># augment ordination with centroid and measurement names</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="va">iris_lda</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'lda_ord': (153 x 2) x (4 x 2)'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # 2 coordinates: LD1 and LD2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
@@ -210,76 +162,6 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  1.53   2.16   | <span style="color: #BCBCBC;">2</span> Sepal.Width </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">2.20</span>  -<span style="color: #BB0000;">0.932</span>  | <span style="color: #BCBCBC;">3</span> Petal.Length</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">2.81</span>   2.84   | <span style="color: #BCBCBC;">4</span> Petal.Width </span>
-<span class="r-in"><span class="co"># summarize linear discriminant axes</span></span>
-<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">iris_lda</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .name  .svd .inertia .prop_var</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> LD1   48.6    <span style="text-decoration: underline;">2</span>366.    0.991  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> LD2    4.58     21.0   0.008<span style="text-decoration: underline;">79</span></span>
-<span class="r-in"><span class="co"># scree plot of inertia</span></span>
-<span class="r-in"><span class="fu">ggplot</span><span class="op">(</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">iris_lda</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">.name</span>, y <span class="op">=</span> <span class="va">.prop_var</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">percent</a></span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">"Proportion of inertia"</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="methods-lda-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># fortification (without supplement)</span></span>
-<span class="r-in"><span class="fu">fortify</span><span class="op">(</span><span class="va">iris_lda</span>, .supplement <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 157 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      LD1    LD2 .matrix</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  7.61  0.215 rows   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> -<span style="color: #BB0000;">1.83</span> -<span style="color: #BB0000;">0.728</span> rows   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> -<span style="color: #BB0000;">5.78</span>  0.513 rows   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  8.06  0.300 rows   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  7.13 -<span style="color: #BB0000;">0.787</span> rows   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  7.49 -<span style="color: #BB0000;">0.265</span> rows   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  6.81 -<span style="color: #BB0000;">0.671</span> rows   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  8.13  0.514 rows   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  7.70  1.46  rows   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  7.21  0.356 rows   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 147 more rows</span></span>
-<span class="r-in"><span class="co"># unstandardized coefficient LDA biplot (centroids only)</span></span>
-<span class="r-in"><span class="va">iris_lda</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="dplyr-verbs.html">mutate_rows</a></span><span class="op">(</span>species <span class="op">=</span> <span class="va">.grouping</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span>.supplement <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">.grouping</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="biplot-geoms.html">geom_cols_vector</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"#888888"</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="biplot-geoms.html">geom_cols_text_radiate</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.name</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">scale_color_brewer</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"qual"</span>, palette <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">ggtitle</span><span class="op">(</span></span>
-<span class="r-in">    <span class="st">"Row-standardized biplot of iris LDA"</span>,</span>
-<span class="r-in">    <span class="st">"Unstandardized measurement coefficients and species centroids"</span></span>
-<span class="r-in">  <span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">expand_limits</span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">4.25</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="methods-lda-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># biplot with supplementary points for observations</span></span>
-<span class="r-in"><span class="va">iris_lda</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="dplyr-verbs.html">mutate_rows</a></span><span class="op">(</span></span>
-<span class="r-in">    species <span class="op">=</span> <span class="va">.grouping</span>,</span>
-<span class="r-in">    discriminant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="op">!</span> <span class="va">.supplement</span>, <span class="st">"centroid"</span>, <span class="st">"case"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span></span>
-<span class="r-in">    color <span class="op">=</span> <span class="va">.grouping</span>,</span>
-<span class="r-in">    size <span class="op">=</span> <span class="va">discriminant</span>, alpha <span class="op">=</span> <span class="va">discriminant</span></span>
-<span class="r-in">  <span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="biplot-geoms.html">geom_cols_vector</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"#888888"</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="biplot-geoms.html">geom_cols_text_radiate</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.name</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">scale_color_brewer</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"qual"</span>, palette <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">ggtitle</span><span class="op">(</span></span>
-<span class="r-in">    <span class="st">"Row-standardized biplot of iris LDA"</span>,</span>
-<span class="r-in">    <span class="st">"Unstandardized measurement coefficients, observations, &amp; species centroids"</span></span>
-<span class="r-in">  <span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">expand_limits</span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Using size for a discrete variable is not advised.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Using alpha for a discrete variable is not advised.</span>
-<span class="r-plt img"><img src="methods-lda-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
@@ -294,7 +176,7 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

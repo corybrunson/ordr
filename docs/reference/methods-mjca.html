@@ -32,7 +32,7 @@ objects of class "mjca" from the ca package.'><!-- mathjax --><script src="https
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -62,46 +62,34 @@ objects of class <code>"mjca"</code> from the <strong><a href="https://rdrr.io/p
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for mjca</span>
-<span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for mjca</span>
-<span class="fu"><a href="accessors.html">recover_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for mjca</span>
-<span class="fu"><a href="accessors.html">recover_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for mjca</span>
-<span class="fu"><a href="accessors.html">recover_inertia</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for mjca</span>
-<span class="fu"><a href="conference.html">recover_conference</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for mjca</span>
-<span class="fu"><a href="accessors.html">recover_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for mjca</span>
-<span class="fu"><a href="augmentation.html">augmentation_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for mjca</span>
-<span class="fu"><a href="augmentation.html">augmentation_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for mjca</span>
-<span class="fu"><a href="augmentation.html">augmentation_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for mjca</span></span>
+<span><span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>An ordination object.</p></dd>
+
 </dl></div>
+    <div id="see-also">
+    <h2>See also</h2>
+    <div class="dont-index"><p>Other methods for singular value decomposition-based techniques: 
+<code><a href="methods-cancor.html">methods-cancor</a></code>,
+<code><a href="methods-ca.html">methods-ca</a></code>,
+<code><a href="methods-lda.html">methods-lda</a></code>,
+<code><a href="methods-lra.html">methods-lra</a></code>,
+<code><a href="methods-prcomp.html">methods-prcomp</a></code>,
+<code><a href="methods-princomp.html">methods-princomp</a></code>,
+<code><a href="methods-svd.html">methods-svd</a></code></p></div>
+    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># table of admissions and rejections from UC Berkeley</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">UCBAdmissions</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># table of admissions and rejections from UC Berkeley</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">UCBAdmissions</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "table"</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">UCBAdmissions</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">UCBAdmissions</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Admit Gender Dept Freq</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 Admitted   Male    A  512</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 Rejected   Male    A  313</span>
@@ -109,13 +97,13 @@ objects of class <code>"mjca"</code> from the <strong><a href="https://rdrr.io/p
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4 Rejected Female    A   19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5 Admitted   Male    B  353</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6 Rejected   Male    B  207</span>
-<span class="r-in"><span class="co"># perform multiple correspondence analysis</span></span>
-<span class="r-in"><span class="va">UCBAdmissions</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">ca</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ca/man/mjca.html" class="external-link">mjca</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="co"># augment profiles with names, masses, distances, and inertias</span></span>
-<span class="r-in">  <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">admissions_mca</span></span>
+<span class="r-in"><span><span class="co"># perform multiple correspondence analysis</span></span></span>
+<span class="r-in"><span><span class="va">UCBAdmissions</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">ca</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ca/man/mjca.html" class="external-link">mjca</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="co"># augment profiles with names, masses, distances, and inertias</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">admissions_mca</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'as.is' should be specified by the caller; using TRUE</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'as.is' should be specified by the caller; using TRUE</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'as.is' should be specified by the caller; using TRUE</span>
@@ -147,14 +135,8 @@ objects of class <code>"mjca"</code> from the <strong><a href="https://rdrr.io/p
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> -<span style="color: #BB0000;">1.05</span>  -<span style="color: #BB0000;">2.78</span>   | <span style="color: #BCBCBC;">10</span> Dept… Dept    F      0.052<span style="text-decoration: underline;">6</span> 1.39 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1 more variable:</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   .inertia &lt;dbl&gt;</span></span>
-<span class="r-in"><span class="co"># summarize ordination</span></span>
-<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">admissions_mca</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    rank n.row n.col inertia prop.var.1 prop.var.2 class</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     2  <span style="text-decoration: underline;">4</span>526    10   0.121      0.953     0.047<span style="text-decoration: underline;">2</span> mjca </span>
-<span class="r-in"><span class="co"># recover row and column profiles</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="accessors.html">get_rows</a></span><span class="op">(</span><span class="va">admissions_mca</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># recover row and column profiles</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="accessors.html">get_rows</a></span><span class="op">(</span><span class="va">admissions_mca</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       Dim1     Dim2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 3.329095 2.677869</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 3.329095 2.677869</span>
@@ -162,7 +144,7 @@ objects of class <code>"mjca"</code> from the <strong><a href="https://rdrr.io/p
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4 3.329095 2.677869</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5 3.329095 2.677869</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6 3.329095 2.677869</span>
-<span class="r-in"><span class="fu"><a href="accessors.html">get_cols</a></span><span class="op">(</span><span class="va">admissions_mca</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="accessors.html">get_cols</a></span><span class="op">(</span><span class="va">admissions_mca</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      Dim1        Dim2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Admit:Admitted  1.0755937  0.97498065</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Admit:Rejected -0.6812223 -0.61749947</span>
@@ -174,66 +156,33 @@ objects of class <code>"mjca"</code> from the <strong><a href="https://rdrr.io/p
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dept:D         -0.3230636  0.08856383</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dept:E         -1.1324440  0.90837076</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dept:F         -1.0481066 -2.77962052</span>
-<span class="r-in"><span class="co"># summarize artificial coordinates</span></span>
-<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">admissions_mca</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .name    .sv .inertia .prop_var</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Dim1  0.339   0.115      0.953 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Dim2  0.075<span style="text-decoration: underline;">5</span>  0.005<span style="text-decoration: underline;">69</span>    0.047<span style="text-decoration: underline;">2</span></span>
-<span class="r-in"><span class="co"># scree plot of proportion of variance (inertia)</span></span>
-<span class="r-in"><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">admissions_mca</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">.name</span>, y <span class="op">=</span> <span class="va">.prop_var</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">percent</a></span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">"Proportion of inertia"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># column-standard biplot of factor levels</span></span></span>
+<span class="r-in"><span><span class="va">admissions_mca</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="theme_biplot.html">theme_biplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="geom_origin.html">geom_origin</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="co">#geom_rows_point(stat = "unique") +</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_point</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">.factor</span>, shape <span class="op">=</span> <span class="va">.factor</span>, size <span class="op">=</span> <span class="va">.mass</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_text_repel</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.level</span>, color <span class="op">=</span> <span class="va">.factor</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                       show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">scale_color_brewer</span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">scale_size_area</span><span class="op">(</span>guide <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">labs</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Factor level"</span>, shape <span class="op">=</span> <span class="st">"Factor level"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="methods-mjca-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># fortification adds all above columns</span></span>
-<span class="r-in"><span class="fu">fortify</span><span class="op">(</span><span class="va">admissions_mca</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4,536 × 9</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     Dim1  Dim2 .name    .mass   .dist      .inertia .matrix .factor .level</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  3.33  2.68 1     0.000<span style="text-decoration: underline;">221</span> 0.006<span style="text-decoration: underline;">72</span> 0.000<span style="text-decoration: underline;">000</span>009<span style="text-decoration: underline;">97</span> rows    <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  3.33  2.68 2     0.000<span style="text-decoration: underline;">221</span> 0.006<span style="text-decoration: underline;">72</span> 0.000<span style="text-decoration: underline;">000</span>009<span style="text-decoration: underline;">97</span> rows    <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  3.33  2.68 3     0.000<span style="text-decoration: underline;">221</span> 0.006<span style="text-decoration: underline;">72</span> 0.000<span style="text-decoration: underline;">000</span>009<span style="text-decoration: underline;">97</span> rows    <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  3.33  2.68 4     0.000<span style="text-decoration: underline;">221</span> 0.006<span style="text-decoration: underline;">72</span> 0.000<span style="text-decoration: underline;">000</span>009<span style="text-decoration: underline;">97</span> rows    <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  3.33  2.68 5     0.000<span style="text-decoration: underline;">221</span> 0.006<span style="text-decoration: underline;">72</span> 0.000<span style="text-decoration: underline;">000</span>009<span style="text-decoration: underline;">97</span> rows    <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  3.33  2.68 6     0.000<span style="text-decoration: underline;">221</span> 0.006<span style="text-decoration: underline;">72</span> 0.000<span style="text-decoration: underline;">000</span>009<span style="text-decoration: underline;">97</span> rows    <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  3.33  2.68 7     0.000<span style="text-decoration: underline;">221</span> 0.006<span style="text-decoration: underline;">72</span> 0.000<span style="text-decoration: underline;">000</span>009<span style="text-decoration: underline;">97</span> rows    <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  3.33  2.68 8     0.000<span style="text-decoration: underline;">221</span> 0.006<span style="text-decoration: underline;">72</span> 0.000<span style="text-decoration: underline;">000</span>009<span style="text-decoration: underline;">97</span> rows    <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  3.33  2.68 9     0.000<span style="text-decoration: underline;">221</span> 0.006<span style="text-decoration: underline;">72</span> 0.000<span style="text-decoration: underline;">000</span>009<span style="text-decoration: underline;">97</span> rows    <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  3.33  2.68 10    0.000<span style="text-decoration: underline;">221</span> 0.006<span style="text-decoration: underline;">72</span> 0.000<span style="text-decoration: underline;">000</span>009<span style="text-decoration: underline;">97</span> rows    <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 4,526 more rows</span></span>
-<span class="r-in"><span class="co"># column-standard biplot of factor levels</span></span>
-<span class="r-in"><span class="va">admissions_mca</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="theme_biplot.html">theme_biplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="geom_origin.html">geom_origin</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="co">#geom_rows_point(stat = "unique") +</span></span>
-<span class="r-in">  <span class="fu"><a href="biplot-geoms.html">geom_cols_point</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">.factor</span>, shape <span class="op">=</span> <span class="va">.factor</span>, size <span class="op">=</span> <span class="va">.mass</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="biplot-geoms.html">geom_cols_text_repel</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.level</span>, color <span class="op">=</span> <span class="va">.factor</span><span class="op">)</span>,</span>
-<span class="r-in">                       show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">scale_color_brewer</span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">scale_size_area</span><span class="op">(</span>guide <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">labs</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Factor level"</span>, shape <span class="op">=</span> <span class="st">"Factor level"</span><span class="op">)</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>It is deprecated to specify `guide = FALSE` to remove a guide. Please use `guide = "none"` instead.</span>
+<span class="r-in"><span><span class="co"># column-principal biplot of factor levels</span></span></span>
+<span class="r-in"><span><span class="va">admissions_mca</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="conference.html">confer_inertia</a></span><span class="op">(</span><span class="st">"colprincipal"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="theme_biplot.html">theme_biplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="geom_origin.html">geom_origin</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="co">#geom_rows_point(stat = "unique") +</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_point</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">.factor</span>, shape <span class="op">=</span> <span class="va">.factor</span>, size <span class="op">=</span> <span class="va">.mass</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_text_repel</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.level</span>, color <span class="op">=</span> <span class="va">.factor</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                       show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">scale_color_brewer</span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">scale_size_area</span><span class="op">(</span>guide <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">labs</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Factor level"</span>, shape <span class="op">=</span> <span class="st">"Factor level"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="methods-mjca-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># column-principal biplot of factor levels</span></span>
-<span class="r-in"><span class="va">admissions_mca</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="conference.html">confer_inertia</a></span><span class="op">(</span><span class="st">"colprincipal"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="theme_biplot.html">theme_biplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="geom_origin.html">geom_origin</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="co">#geom_rows_point(stat = "unique") +</span></span>
-<span class="r-in">  <span class="fu"><a href="biplot-geoms.html">geom_cols_point</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">.factor</span>, shape <span class="op">=</span> <span class="va">.factor</span>, size <span class="op">=</span> <span class="va">.mass</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="biplot-geoms.html">geom_cols_text_repel</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.level</span>, color <span class="op">=</span> <span class="va">.factor</span><span class="op">)</span>,</span>
-<span class="r-in">                       show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">scale_color_brewer</span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">scale_size_area</span><span class="op">(</span>guide <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">labs</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Factor level"</span>, shape <span class="op">=</span> <span class="st">"Factor level"</span><span class="op">)</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>It is deprecated to specify `guide = FALSE` to remove a guide. Please use `guide = "none"` instead.</span>
-<span class="r-plt img"><img src="methods-mjca-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
@@ -248,7 +197,7 @@ objects of class <code>"mjca"</code> from the <strong><a href="https://rdrr.io/p
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

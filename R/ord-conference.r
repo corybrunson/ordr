@@ -37,8 +37,12 @@ attribute_conference <- function(x, p) {
   x
 }
 
+#' @rdname accessors
+#' @export
 recover_conference <- function(x) UseMethod("recover_conference")
 
+#' @rdname conference
+#' @export
 recover_conference.default <- function(x) NULL
 
 #' @rdname conference

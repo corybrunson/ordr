@@ -3,9 +3,33 @@
 \name{methods-princomp}
 \alias{methods-princomp}
 \alias{as_tbl_ord.princomp}
+\alias{recover_rows.princomp}
+\alias{recover_cols.princomp}
+\alias{recover_inertia.princomp}
+\alias{recover_coord.princomp}
+\alias{recover_conference.princomp}
+\alias{augmentation_rows.princomp}
+\alias{augmentation_cols.princomp}
+\alias{augmentation_coord.princomp}
 \title{Functionality for principal components analysis ('princomp') objects}
 \usage{
 \method{as_tbl_ord}{princomp}(x)
+
+\method{recover_rows}{princomp}(x)
+
+\method{recover_cols}{princomp}(x)
+
+\method{recover_inertia}{princomp}(x)
+
+\method{recover_coord}{princomp}(x)
+
+\method{recover_conference}{princomp}(x)
+
+\method{augmentation_rows}{princomp}(x)
+
+\method{augmentation_cols}{princomp}(x)
+
+\method{augmentation_coord}{princomp}(x)
 }
 \arguments{
 \item{x}{An ordination object.}

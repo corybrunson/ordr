@@ -25,13 +25,13 @@
 
 #' * The [ggplot2::fortify()] method
 
-#'   augments and collapses row and/or column data, depending on `.matrix`, into
-#'   a single tibble, in preparation for [ggplot2::ggplot()]. Its output
-#'   resembles that of [generics::augment()], though rows in the output may
-#'   correspond to rows, columns, or both of the original data. If `.matrix` is
-#'   passed `"rows"`, `"cols"`, or `"dims"` (for both), then `fortify()` returns
-#'   a tibble whose fields are obtained, in order, via `get_*()`,
-#'   `augmentation_*()`, and `annotation_*()`.
+#'   augments and collapses row and/or column data, depending on `.matrix` and
+#'   `.supplement`, into a single tibble, in preparation for
+#'   [ggplot2::ggplot()]. Its output resembles that of [generics::augment()],
+#'   though rows in the output may correspond to rows, columns, or both of the
+#'   original data. If `.matrix` is passed `"rows"`, `"cols"`, or `"dims"` (for
+#'   both), then `fortify()` returns a tibble whose fields are obtained, in
+#'   order, via `get_*()`, `augmentation_*()`, and `annotation_*()`.
 
 #'
 #' The tibble is assigned a `"coordinates"` attribute whose value is obtained
@@ -110,9 +110,9 @@ fortify.tbl_ord <- function(
         active = u[! u$.supplement, , drop = FALSE],
         supplementary = u[u$.supplement, , drop = FALSE]
       )
-      u$.supplement <- NULL
     }
     u$.matrix <- "rows"
+    if (! ".supplement" %in% names(u)) u$.supplement <- NA
   }
   if (.matrix == "dims" || .matrix == "cols") {
     v <- as_tibble(get_cols(model))
@@ -123,9 +123,9 @@ fortify.tbl_ord <- function(
         active = v[! v$.supplement, , drop = FALSE],
         supplementary = v[v$.supplement, , drop = FALSE]
       )
-      v$.supplement <- NULL
     }
     v$.matrix <- "cols"
+    if (! ".supplement" %in% names(v)) v$.supplement <- NA
   }
   
   tbl <- switch(

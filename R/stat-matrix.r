@@ -21,6 +21,7 @@
 #'
 #' @template param-stat
 #' @family biplot layers
+#' @example inst/examples/ex-stat-matrix-swiss.r
 
 #' @rdname stat_rows
 #' @export

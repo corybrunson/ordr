@@ -61,6 +61,9 @@
     <loc>/reference/classes.html</loc>
   </url>
   <url>
+    <loc>/reference/cmdscale_tidiers.html</loc>
+  </url>
+  <url>
     <loc>/reference/conference.html</loc>
   </url>
   <url>
@@ -229,6 +232,9 @@
     <loc>/reference/lda-ord.html</loc>
   </url>
   <url>
+    <loc>/reference/list_tidiers.html</loc>
+  </url>
+  <url>
     <loc>/reference/lra-ord.html</loc>
   </url>
   <url>
@@ -254,6 +260,9 @@
   </url>
   <url>
     <loc>/reference/methods-eigen.html</loc>
+  </url>
+  <url>
+    <loc>/reference/methods-factanal.html</loc>
   </url>
   <url>
     <loc>/reference/methods-kmeans.html</loc>

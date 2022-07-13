@@ -55,9 +55,9 @@ glass_lra$sv
 biplot(
   x = glass_lra$row.coords \%*\% diag(glass_lra$sv),
   y = glass_lra$column.coords,
-  xlab = "Sample (principal coord.)",
-  ylab = "Component (standard coord.)"
+  xlab = "Sample (principal coord.)", ylab = ""
 )
+mtext("Component (standard coord.)", side = 4L, line = 3L)
 }
 \references{
 Freestone IC, Gorin-Rosen Y, Hughes MJ (2000) "Primary glass from Israel and

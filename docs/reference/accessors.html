@@ -30,7 +30,7 @@ factorization underlying an ordination."><!-- mathjax --><script src="https://cd
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -59,85 +59,212 @@ factorization underlying an ordination.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">recover_rows</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">recover_cols</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">recover_factor</span><span class="op">(</span><span class="va">x</span>, <span class="va">.matrix</span><span class="op">)</span>
-
-<span class="co"># S3 method for default</span>
-<span class="fu">recover_rows</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for default</span>
-<span class="fu">recover_cols</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for data.frame</span>
-<span class="fu">recover_rows</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for data.frame</span>
-<span class="fu">recover_cols</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">get_rows</span><span class="op">(</span><span class="va">x</span>, .supplement <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">get_cols</span><span class="op">(</span><span class="va">x</span>, .supplement <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">get_factor</span><span class="op">(</span><span class="va">x</span>, <span class="va">.matrix</span>, .supplement <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="co"># S3 method for tbl_ord</span>
-<span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, <span class="va">.matrix</span>, .supplement <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">recover_inertia</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for default</span>
-<span class="fu">recover_inertia</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">recover_coord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for default</span>
-<span class="fu">recover_coord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for data.frame</span>
-<span class="fu">recover_coord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">get_coord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for tbl_ord</span>
-<span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">dim_rows</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">dim_cols</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">dim_factor</span><span class="op">(</span><span class="va">x</span>, <span class="va">.matrix</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">recover_rows</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">recover_cols</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">get_rows</span><span class="op">(</span><span class="va">x</span>, elements <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">get_cols</span><span class="op">(</span><span class="va">x</span>, elements <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for tbl_ord</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, <span class="va">.matrix</span>, elements <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">recover_inertia</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">recover_coord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">get_coord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">get_inertia</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for tbl_ord</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">augmentation_rows</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">augmentation_cols</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">augmentation_coord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">recover_conference</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">supplementation_rows</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">supplementation_cols</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>An object of class '<a href="tbl_ord.html">tbl_ord</a>'.</p></dd>
+
+
+<dt>elements</dt>
+<dd><p>Character; which elements of each factor for which to render
+graphical elements. One of <code>"all"</code> (the default), <code>"active"</code>, or
+<code>"supplementary"</code>, with partial matching.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Additional arguments from <code><a href="https://rdrr.io/r/base/matrix.html" class="external-link">base::as.matrix()</a></code>; ignored.</p></dd>
+
+
 <dt>.matrix</dt>
 <dd><p>A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
 standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</code> (for both).</p></dd>
-<dt>.supplement</dt>
-<dd><p>Logical; whether to include</p></dd>
-<dt>...</dt>
-<dd><p>Additional arguments from <code><a href="https://rdrr.io/r/base/matrix.html" class="external-link">base::as.matrix()</a></code>; ignored.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
-    <p>The <code>recover_*()</code> functions extract one or both of the row and column matrix
-factors that constitute the original ordination. These are interpreted as the
-case scores (rows) and the variable loadings (columns). The <code>get_*()</code>
-functions optionally (and by default) include any supplemental observations
-(see <a href="supplementation.html">supplementation</a>). Only the <code>recover_*()</code> functions are generics that
-require methods for each ordination class.</p>
+    <p>The unexported <code>recover_*()</code> functions extract one or both of the row and
+column matrix factors that constitute the original ordination. These are
+interpreted as the case scores (rows) and the variable loadings (columns).
+The <code>get_*()</code> functions optionally (and by default) include any supplemental
+observations (see <a href="supplementation.html">supplementation</a>). The <code>recover_*()</code> functions are
+generics that require methods for each ordination class.</p>
 <p><code>get_coord()</code> retrieves the names of the coordinates shared by the matrix
-factors on which the original data were ordinated, and <code><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim()</a></code> retrieves
-their number, the rank of the ordination. The outer dimensions of the matrix
-decomposition are returned by <code>dim_rows()</code> and <code>dim_cols()</code>.</p>
+factors on which the original data were ordinated, and <code>get_inertia()</code>
+retrieves a vector of the inertia with these names. <code><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim()</a></code> retrieves the
+dimensions of the row and column factors, which reflect the dimensions of the
+matrix they reconstruct---<strong>not</strong> the original data matrix. (This matters for
+techniques that rely on eigendecomposition, for which the decomposed matrix
+is square.)</p>
     </div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># example ordination: LRA of U.S. arrests data</span></span></span>
+<span class="r-in"><span><span class="va">arrests_lra</span> <span class="op">&lt;-</span> <span class="fu"><a href="ordinate.html">ordinate</a></span><span class="op">(</span><span class="va">USArrests</span>, cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Murder</span>, <span class="va">Rape</span>, <span class="va">Assault</span><span class="op">)</span>, <span class="va">lra</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># extract matrix factors</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">arrests_lra</span>, .matrix <span class="op">=</span> <span class="st">"rows"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      LRSV1        LRSV2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Alabama        -0.68001198  0.929601139</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Alaska          0.92998988 -0.624577164</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Arizona        -0.32984955 -1.311581695</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Arkansas       -0.35134428  0.277323143</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> California      0.55165901 -1.004280086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Colorado        1.22910659 -0.638846890</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Connecticut    -0.43610804 -1.027017532</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Delaware       -1.54269183 -1.349322890</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Florida        -0.54682514  0.300298438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Georgia         0.15812112  1.916932033</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hawaii          3.51365819  2.150284964</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Idaho          -0.05250833 -2.109188891</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Illinois       -0.52429773  0.002652531</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Indiana         1.22231804  0.881075829</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Iowa            1.39095549 -0.632985189</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Kansas          0.75715595  0.380674137</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Kentucky        0.68864901  2.024832534</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Louisiana      -0.69015525  1.238509473</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Maine          -0.63716612 -1.499305459</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Maryland       -0.63629812 -0.286175559</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Massachusetts  -0.22762978 -1.124006923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Michigan        0.41414730  0.171745261</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Minnesota       1.45222388 -0.789191960</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mississippi    -1.47068651  1.436924829</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Missouri        0.78566710  0.278289912</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Montana         0.65946921  0.566956397</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Nebraska        0.82281297 -0.284750183</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Nevada          1.14994121  0.060475841</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> New Hampshire   0.88778358 -0.710870888</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> New Jersey      0.01717089  0.205735676</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> New Mexico     -0.12336523 -0.223126918</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> New York       -0.35365080  0.100656157</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> North Carolina -2.35659680  0.189728037</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> North Dakota    0.74912231 -2.900272794</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Ohio            1.11076020  0.766013515</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Oklahoma        0.30637650 -0.053491161</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Oregon          1.13217636 -1.312593507</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Pennsylvania    0.48983869  0.840580871</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rhode Island   -2.42442178 -1.868251942</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> South Carolina -0.96800438  0.752042083</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> South Dakota    0.61067278 -0.091684230</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Tennessee       0.55166149  1.334277800</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Texas           0.22895595  1.088292623</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Utah            1.20949943 -1.771844197</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Vermont         1.78310111 -0.254863377</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Virginia        0.33180838  0.612645656</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Washington      1.07067103 -1.635935144</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> West Virginia  -0.02043499  1.475198849</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Wisconsin       1.43728882  0.033416687</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Wyoming        -0.50955934  0.033243165</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">arrests_lra</span>, .matrix <span class="op">=</span> <span class="st">"cols"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             LRSV1      LRSV2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Murder   0.283086  4.9570302</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rape     2.876702 -0.3660163</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Assault -0.370595 -0.1805698</span>
+<span class="r-in"><span><span class="co"># special named functions</span></span></span>
+<span class="r-in"><span><span class="fu">get_rows</span><span class="op">(</span><span class="va">arrests_lra</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      LRSV1        LRSV2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Alabama        -0.68001198  0.929601139</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Alaska          0.92998988 -0.624577164</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Arizona        -0.32984955 -1.311581695</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Arkansas       -0.35134428  0.277323143</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> California      0.55165901 -1.004280086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Colorado        1.22910659 -0.638846890</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Connecticut    -0.43610804 -1.027017532</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Delaware       -1.54269183 -1.349322890</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Florida        -0.54682514  0.300298438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Georgia         0.15812112  1.916932033</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hawaii          3.51365819  2.150284964</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Idaho          -0.05250833 -2.109188891</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Illinois       -0.52429773  0.002652531</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Indiana         1.22231804  0.881075829</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Iowa            1.39095549 -0.632985189</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Kansas          0.75715595  0.380674137</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Kentucky        0.68864901  2.024832534</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Louisiana      -0.69015525  1.238509473</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Maine          -0.63716612 -1.499305459</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Maryland       -0.63629812 -0.286175559</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Massachusetts  -0.22762978 -1.124006923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Michigan        0.41414730  0.171745261</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Minnesota       1.45222388 -0.789191960</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mississippi    -1.47068651  1.436924829</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Missouri        0.78566710  0.278289912</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Montana         0.65946921  0.566956397</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Nebraska        0.82281297 -0.284750183</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Nevada          1.14994121  0.060475841</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> New Hampshire   0.88778358 -0.710870888</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> New Jersey      0.01717089  0.205735676</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> New Mexico     -0.12336523 -0.223126918</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> New York       -0.35365080  0.100656157</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> North Carolina -2.35659680  0.189728037</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> North Dakota    0.74912231 -2.900272794</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Ohio            1.11076020  0.766013515</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Oklahoma        0.30637650 -0.053491161</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Oregon          1.13217636 -1.312593507</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Pennsylvania    0.48983869  0.840580871</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rhode Island   -2.42442178 -1.868251942</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> South Carolina -0.96800438  0.752042083</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> South Dakota    0.61067278 -0.091684230</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Tennessee       0.55166149  1.334277800</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Texas           0.22895595  1.088292623</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Utah            1.20949943 -1.771844197</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Vermont         1.78310111 -0.254863377</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Virginia        0.33180838  0.612645656</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Washington      1.07067103 -1.635935144</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> West Virginia  -0.02043499  1.475198849</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Wisconsin       1.43728882  0.033416687</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Wyoming        -0.50955934  0.033243165</span>
+<span class="r-in"><span><span class="fu">get_cols</span><span class="op">(</span><span class="va">arrests_lra</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             LRSV1      LRSV2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Murder   0.283086  4.9570302</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rape     2.876702 -0.3660163</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Assault -0.370595 -0.1805698</span>
+<span class="r-in"><span><span class="co"># get names of artificial / latent coordinates</span></span></span>
+<span class="r-in"><span><span class="fu">get_coord</span><span class="op">(</span><span class="va">arrests_lra</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "LRSV1" "LRSV2"</span>
+<span class="r-in"><span><span class="co"># get distribution of inertia</span></span></span>
+<span class="r-in"><span><span class="fu">get_inertia</span><span class="op">(</span><span class="va">arrests_lra</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       LRSV1       LRSV2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.013826903 0.004074913 </span>
+<span class="r-in"><span><span class="co"># get dimensions of underlying matrix factorization (not of original data)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">arrests_lra</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 50  3</span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -150,7 +277,7 @@ decomposition are returned by <code>dim_rows()</code> and <code>dim_cols()</code
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

@@ -46,7 +46,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -81,194 +81,344 @@
 
     
     
-<p>This vignette demonstrates that covariance and correlation data can be compressed and visualized using multidimensional scaling using the same principles and machinery as for distance and similarity data. I argue that these geometric representations have interpretative advantages over other methods and should be more widely used.</p>
+<p>This vignette demonstrates that covariance and correlation data can
+be compressed and visualized using multidimensional scaling using the
+same principles and machinery as for distance and similarity data. I
+argue that these geometric representations have interpretative
+advantages over other methods and should be more widely used.</p>
 <div class="section level2">
 <h2 id="dimension-reduction-of-geometric-data">dimension reduction of geometric data<a class="anchor" aria-label="anchor" href="#dimension-reduction-of-geometric-data"></a>
 </h2>
-<p>Because ordination is grounded in geometric data analysis, it is easiest and most straightforward on naturally geometric data. For example, the glucose and insulin data collected by <a href="https://link.springer.com/article/10.1007/BF00423145" class="external-link">Reaven and Miller (1970)</a> consists of five continuous-valued measurements for each of 145 persons. Because the variables (measurements) have different scales, in order to represent the cases (persons) geometrically we must separately center and scale them. The most basic ordination method, principal components analysis (PCA), computes a singular value decomposition <span class="math inline">\(X = U D V^\top\)</span> of the centered and scaled data matrix <span class="math inline">\(X \in \mathbb{R}^{n\times p}\)</span>:</p>
+<p>Because ordination is grounded in geometric data analysis, it is
+easiest and most straightforward on naturally geometric data. For
+example, the glucose and insulin data collected by <a href="https://link.springer.com/article/10.1007/BF00423145" class="external-link">Reaven and
+Miller (1970)</a> consists of five continuous-valued measurements for
+each of 145 persons. Because the variables (measurements) have different
+scales, in order to represent the cases (persons) geometrically we must
+separately center and scale them. The most basic ordination method,
+principal components analysis (PCA), computes a singular value
+decomposition <span class="math inline">\(X = U D V^\top\)</span> of the
+centered and scaled data matrix <span class="math inline">\(X \in
+\mathbb{R}^{n\times p}\)</span>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="fu">heplots</span><span class="fu">::</span><span class="va"><a href="http://friendly.github.io/heplots/reference/Diabetes.html" class="external-link">Diabetes</a></span><span class="op">[</span>, <span class="op">-</span><span class="fl">6L</span><span class="op">]</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/svd.html" class="external-link">svd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">d</span><span class="op">)</span></code></pre></div>
-<p>The matrix factors <span class="math inline">\(U \in \mathbb{R}^{n\times r}\)</span> and <span class="math inline">\(V \in \mathbb{R}^{p\times r}\)</span> arise from eigendecompositions of <span class="math inline">\(X X^\top\)</span> and of <span class="math inline">\(X^\top X\)</span>, respectively, which have the same set of eigenvalues <span class="math inline">\(\lambda_1,\ldots,\lambda_r\)</span>. The square roots of these eigenvalues make up the diagonal matrix <span class="math inline">\(D \in \mathbb{R}^{r\times r}\)</span>. The conventional PCA biplot uses <em>principal coordinates</em> for the cases, given by the rows of <span class="math inline">\(U D\)</span>, and <em>standardized coordinates</em> for the variables, given by the rows of <span class="math inline">\(V\)</span>.</p>
-<p>The columns of <span class="math inline">\(U = \left[\,u_1\,\cdots\,u_r\,\right]\)</span> and <span class="math inline">\(V = \left[\,v_1\,\cdots\,v_r\,\right]\)</span> comprise the eigenvectors of <span class="math inline">\(X X^\top\)</span> and of <span class="math inline">\(X^\top X\)</span>. They are orthonormal, which means that <span class="math inline">\(U^\top U = I_r = V^\top V\)</span> and that the total variance (called <em>inertia</em>) in each matrix is <span class="math inline">\(\sum_{j=1}^{r}{ {v_j}^2 } = r = \sum_{j=1}^{r}{ {v_j}^2 }\)</span>. Meanwhile, the diagonal <span class="math inline">\(D\)</span> contains all of the inertia of the centered and scaled data matrix <span class="math inline">\(X\)</span>:</p>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="fu">heplots</span><span class="fu">::</span><span class="va"><a href="http://friendly.github.io/heplots/reference/Diabetes.html" class="external-link">Diabetes</a></span><span class="op">[</span>, <span class="op">-</span><span class="fl">6L</span><span class="op">]</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/svd.html" class="external-link">svd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">d</span><span class="op">)</span></span></code></pre></div>
+<p>The matrix factors <span class="math inline">\(U \in
+\mathbb{R}^{n\times r}\)</span> and <span class="math inline">\(V \in
+\mathbb{R}^{p\times r}\)</span> arise from eigendecompositions of <span class="math inline">\(X X^\top\)</span> and of <span class="math inline">\(X^\top X\)</span>, respectively, which have the
+same set of eigenvalues <span class="math inline">\(\lambda_1,\ldots,\lambda_r\)</span>. The square
+roots of these eigenvalues make up the diagonal matrix <span class="math inline">\(D \in \mathbb{R}^{r\times r}\)</span>. The
+conventional PCA biplot uses <em>principal coordinates</em> for the
+cases, given by the rows of <span class="math inline">\(U D\)</span>,
+and <em>standardized coordinates</em> for the variables, given by the
+rows of <span class="math inline">\(V\)</span>.</p>
+<p>The columns of <span class="math inline">\(U =
+\left[\,u_1\,\cdots\,u_r\,\right]\)</span> and <span class="math inline">\(V = \left[\,v_1\,\cdots\,v_r\,\right]\)</span>
+comprise the eigenvectors of <span class="math inline">\(X
+X^\top\)</span> and of <span class="math inline">\(X^\top X\)</span>.
+They are orthonormal, which means that <span class="math inline">\(U^\top U = I_r = V^\top V\)</span> and that the
+total variance (called <em>inertia</em>) in each matrix is <span class="math inline">\(\sum_{j=1}^{r}{ {v_j}^2 } = r = \sum_{j=1}^{r}{
+{v_j}^2 }\)</span>. Meanwhile, the diagonal <span class="math inline">\(D\)</span> contains all of the inertia of the
+centered and scaled data matrix <span class="math inline">\(X\)</span>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># inertia of the (scaled) data</span>
-<span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] 720</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># inertia of the (scaled) data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 720</span></span></code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># inertia of the case and variable factors</span>
-<span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">u</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] 5</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># inertia of the case and variable factors</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">u</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 5</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">v</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] 5</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">v</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 5</span></span></code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># inertia of the diagonal factor</span>
-<span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">d</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] 720</span></code></pre>
-<p>For the (2-dimensional, i.e. planar) biplot, this inertia is <em>conferred</em> on the cases (converting standardized coordinates to principal coordinates) so that the planar distances between the points in the plot representing the cases are approximately equal to their Euclidean distances in <span class="math inline">\(X\)</span>. Because the biplot only accommodates two principal components (it is a projection onto a subset of orthogonal coordinates), the planar distances underestimate the true distances. Here is a scatterplot of the true distances and their biplot approximations:</p>
+<code class="sourceCode R"><span><span class="co"># inertia of the diagonal factor</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">d</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 720</span></span></code></pre>
+<p>For the (2-dimensional, i.e. planar) biplot, this inertia is
+<em>conferred</em> on the cases (converting standardized coordinates to
+principal coordinates) so that the planar distances between the points
+in the plot representing the cases are approximately equal to their
+Euclidean distances in <span class="math inline">\(X\)</span>. Because
+the biplot only accommodates two principal components (it is a
+projection onto a subset of orthogonal coordinates), the planar
+distances underestimate the true distances. Here is a scatterplot of the
+true distances and their biplot approximations:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># distances between cases</span>
-<span class="va">x.dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="co"># distances between cases (principal coordinates)</span>
-<span class="va">s.dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">u</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">d</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-<span class="co"># scatterplot</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>
-  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">x.dist</span><span class="op">)</span>,
-  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">s.dist</span><span class="op">)</span>,
-  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">8</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">8</span><span class="op">)</span>,
-  asp <span class="op">=</span> <span class="fl">1</span>, pch <span class="op">=</span> <span class="fl">19</span>, cex <span class="op">=</span> <span class="fl">.5</span>,
-  xlab <span class="op">=</span> <span class="st">"Case distances in centered and scaled data"</span>,
-  ylab <span class="op">=</span> <span class="st">"Case point distances in planar biplot"</span>
-<span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">8</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># distances between cases</span></span>
+<span><span class="va">x.dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="co"># distances between cases (principal coordinates)</span></span>
+<span><span class="va">s.dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">u</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">d</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># scatterplot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">x.dist</span><span class="op">)</span>,</span>
+<span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">s.dist</span><span class="op">)</span>,</span>
+<span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">8</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">8</span><span class="op">)</span>,</span>
+<span>  asp <span class="op">=</span> <span class="fl">1</span>, pch <span class="op">=</span> <span class="fl">19</span>, cex <span class="op">=</span> <span class="fl">.5</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Case distances in centered and scaled data"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Case point distances in planar biplot"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">8</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmds-variables_files/figure-html/case%20geometry-1.png" width="528" style="display: block; margin: auto;"></p>
-<p>In contrast, the variables are better understood through their correlations, which are approximately preserved by their standardized coordinates. Writing <span class="math inline">\(X = [\,y_1\,\cdots\,y_m\,]\)</span> as an array of column variables, the covariance between <span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> is proportional to their inner product <span class="math display">\[\textstyle \operatorname{cov}(y_i,y_j) = \frac{1}{n} y_i \cdot y_j = \frac{1}{n} \lVert y_i\rVert\lVert y_j\rVert\cos\theta_{ij}\text,\]</span> so that the cosine of the angle <span class="math inline">\(\theta_{ij}\)</span> between them equals their correlation: <span class="math display">\[\cos\theta_{ij} = \frac{\operatorname{cov}(y_i,y_j)}{\sqrt{\operatorname{cov}(y_i,y_i)\operatorname{cov}(y_j,y_j)}/n} = \frac{\operatorname{cov}(y_i,y_j)}{\sigma_i\sigma_j} = r_{ij}\]</span></p>
-<p>Here the cosines between the vectors in the biplot are plotted against the variable correlations <span class="math inline">\(r_{ij}\)</span> in the centered and scaled data. While the vectors are shorter in the biplot for the same reason that distances are shorter, their consines may be larger or smaller depending on their respective coordinates in the remaining coordinates.</p>
+<p>In contrast, the variables are better understood through their
+correlations, which are approximately preserved by their standardized
+coordinates. Writing <span class="math inline">\(X =
+[\,y_1\,\cdots\,y_m\,]\)</span> as an array of column variables, the
+covariance between <span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> is proportional to their inner
+product <span class="math display">\[\textstyle
+\operatorname{cov}(y_i,y_j) = \frac{1}{n} y_i \cdot y_j = \frac{1}{n}
+\lVert y_i\rVert\lVert y_j\rVert\cos\theta_{ij}\text,\]</span> so that
+the cosine of the angle <span class="math inline">\(\theta_{ij}\)</span>
+between them equals their correlation: <span class="math display">\[\cos\theta_{ij} =
+\frac{\operatorname{cov}(y_i,y_j)}{\sqrt{\operatorname{cov}(y_i,y_i)\operatorname{cov}(y_j,y_j)}/n}
+= \frac{\operatorname{cov}(y_i,y_j)}{\sigma_i\sigma_j} =
+r_{ij}\]</span></p>
+<p>Here the cosines between the vectors in the biplot are plotted
+against the variable correlations <span class="math inline">\(r_{ij}\)</span> in the centered and scaled data.
+While the vectors are shorter in the biplot for the same reason that
+distances are shorter, their consines may be larger or smaller depending
+on their respective coordinates in the remaining coordinates.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># correlations between variables</span>
-<span class="va">x.cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="co"># magnitudes of variable vectors</span>
-<span class="va">s.len</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">v</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">d</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, <span class="fl">1</span>, <span class="va">norm</span>, <span class="st">"2"</span><span class="op">)</span>
-<span class="co"># cosines between variables (principal coordinates)</span>
-<span class="va">s.cor</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">v</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">/</span> <span class="va">s.len</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">d</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">v</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">/</span> <span class="va">s.len</span><span class="op">)</span>
-<span class="co"># scatterplot</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>
-  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">x.cor</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">x.cor</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,
-  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">s.cor</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">s.cor</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,
-  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,
-  asp <span class="op">=</span> <span class="fl">1</span>, pch <span class="op">=</span> <span class="fl">19</span>, cex <span class="op">=</span> <span class="fl">.5</span>,
-  xlab <span class="op">=</span> <span class="st">"Variable correlations in centered and scaled data"</span>,
-  ylab <span class="op">=</span> <span class="st">"Variable vector cosines in planar biplot"</span>
-<span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># correlations between variables</span></span>
+<span><span class="va">x.cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="co"># magnitudes of variable vectors</span></span>
+<span><span class="va">s.len</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">v</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">d</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, <span class="fl">1</span>, <span class="va">norm</span>, <span class="st">"2"</span><span class="op">)</span></span>
+<span><span class="co"># cosines between variables (principal coordinates)</span></span>
+<span><span class="va">s.cor</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">v</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">/</span> <span class="va">s.len</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">d</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">v</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">/</span> <span class="va">s.len</span><span class="op">)</span></span>
+<span><span class="co"># scatterplot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">x.cor</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">x.cor</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">s.cor</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">s.cor</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  asp <span class="op">=</span> <span class="fl">1</span>, pch <span class="op">=</span> <span class="fl">19</span>, cex <span class="op">=</span> <span class="fl">.5</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Variable correlations in centered and scaled data"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Variable vector cosines in planar biplot"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmds-variables_files/figure-html/variable%20geometry-1.png" width="528" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="multidimensional-scaling-of-distance-data">multidimensional scaling of distance data<a class="anchor" aria-label="anchor" href="#multidimensional-scaling-of-distance-data"></a>
 </h2>
-<p>The faithful approximation of inter-case distances by principal coordinates is the idea behind <em>classical multidimensional scaling</em> (CMDS), which can be applied to a data set of distances <span class="math inline">\(\delta_{ij},\ 1\leq i\leq j\leq n\)</span> in the absence of coordinates (variables). CMDS produces a set of artificial coordinates for the cases that yield nested best approximations of the inter-case distances in terms of the sum of squared errors. The technique uses the eigendecomposition of a doubly-centered matrix of squared distances, which produces a matrix <span class="math inline">\(U \Lambda^{1/2}\)</span> whose first <span class="math inline">\(r\)</span> coordinates—for any <span class="math inline">\(r\leq n\)</span>—minimize the variance of <span class="math inline">\((U \Lambda^{1/2}) (U \Lambda^{1/2})^\top - \Delta = U \Lambda U^\top - \Delta\)</span>, where <span class="math inline">\(\Delta = (\delta_{ij}) \in \mathbb{R}^{n\times n}\)</span>, to obtain the approximation. The columns of <span class="math inline">\(U \Lambda^{1/2}\)</span> are then called <em>principal coordinates</em>, and the first <span class="math inline">\(r\)</span> most faithfully recover the <span class="math inline">\(\delta_{ij}\)</span> using points in <span class="math inline">\(\mathbb{R}^r\)</span> of any possible <span class="math inline">\(r\)</span>. For example, because the road distances between several U.S. cities arise from a roughly 2-dimensional process, the point distances in a CMDS are very close approximations:</p>
+<p>The faithful approximation of inter-case distances by principal
+coordinates is the idea behind <em>classical multidimensional
+scaling</em> (CMDS), which can be applied to a data set of distances
+<span class="math inline">\(\delta_{ij},\ 1\leq i\leq j\leq n\)</span>
+in the absence of coordinates (variables). CMDS produces a set of
+artificial coordinates for the cases that yield nested best
+approximations of the inter-case distances in terms of the sum of
+squared errors. The technique uses the eigendecomposition of a
+doubly-centered matrix of squared distances, which produces a matrix
+<span class="math inline">\(U \Lambda^{1/2}\)</span> whose first <span class="math inline">\(r\)</span> coordinates—for any <span class="math inline">\(r\leq n\)</span>—minimize the variance of <span class="math inline">\((U \Lambda^{1/2}) (U \Lambda^{1/2})^\top - \Delta
+= U \Lambda U^\top - \Delta\)</span>, where <span class="math inline">\(\Delta = (\delta_{ij}) \in \mathbb{R}^{n\times
+n}\)</span>, to obtain the approximation. The columns of <span class="math inline">\(U \Lambda^{1/2}\)</span> are then called
+<em>principal coordinates</em>, and the first <span class="math inline">\(r\)</span> most faithfully recover the <span class="math inline">\(\delta_{ij}\)</span> using points in <span class="math inline">\(\mathbb{R}^r\)</span> of any possible <span class="math inline">\(r\)</span>. For example, because the road
+distances between several U.S. cities arise from a roughly 2-dimensional
+process, the point distances in a CMDS are very close
+approximations:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span>
-<span class="va">cent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span><span class="op">)</span>
-<span class="va">d.cent</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">.5</span> <span class="op">*</span> <span class="va">cent</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="op">(</span><span class="va">d</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">cent</span>
-<span class="va">d.cmds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/svd.html" class="external-link">svd</a></span><span class="op">(</span><span class="va">d.cent</span><span class="op">)</span>
-<span class="va">d.coord</span> <span class="op">&lt;-</span> <span class="va">d.cmds</span><span class="op">$</span><span class="va">u</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">d.cmds</span><span class="op">$</span><span class="va">d</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-<span class="co"># scatterplot</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>
-  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span>,
-  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">d.coord</span><span class="op">)</span><span class="op">)</span>,
-  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span><span class="op">)</span>,
-  asp <span class="op">=</span> <span class="fl">1</span>, pch <span class="op">=</span> <span class="fl">19</span>, cex <span class="op">=</span> <span class="fl">.5</span>,
-  xlab <span class="op">=</span> <span class="st">"City road distances"</span>,
-  ylab <span class="op">=</span> <span class="st">"Point distances in planar CMDS"</span>
-<span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span></span>
+<span><span class="va">cent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">d.cent</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">.5</span> <span class="op">*</span> <span class="va">cent</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="op">(</span><span class="va">d</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">cent</span></span>
+<span><span class="va">d.cmds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/svd.html" class="external-link">svd</a></span><span class="op">(</span><span class="va">d.cent</span><span class="op">)</span></span>
+<span><span class="va">d.coord</span> <span class="op">&lt;-</span> <span class="va">d.cmds</span><span class="op">$</span><span class="va">u</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">d.cmds</span><span class="op">$</span><span class="va">d</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># scatterplot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span>,</span>
+<span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">d.coord</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  asp <span class="op">=</span> <span class="fl">1</span>, pch <span class="op">=</span> <span class="fl">19</span>, cex <span class="op">=</span> <span class="fl">.5</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"City road distances"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Point distances in planar CMDS"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmds-variables_files/figure-html/multidimensional%20scaling%20of%20cities-1.png" width="528" style="display: block; margin: auto;"></p>
-<p>In practice, the goal of CMDS is usually to produce a scatterplot in which the distances <span class="math inline">\(\sqrt{(x_j-x_i)^2+(y_j-y_i)^2}\)</span> between the points that represent the <span class="math inline">\(n\)</span> cases approximate their original distances <span class="math inline">\(\delta_{ij}\)</span>. In this case, the artificial coordinates approximately recover the geographic arrangement. By chance, this CMDS rotated the conventional cardinal directions by about <span class="math inline">\(\pi\)</span> radians (though at least the map is recognizable from above rather than below the surface of the Earth):</p>
+<p>In practice, the goal of CMDS is usually to produce a scatterplot in
+which the distances <span class="math inline">\(\sqrt{(x_j-x_i)^2+(y_j-y_i)^2}\)</span> between
+the points that represent the <span class="math inline">\(n\)</span>
+cases approximate their original distances <span class="math inline">\(\delta_{ij}\)</span>. In this case, the artificial
+coordinates approximately recover the geographic arrangement. By chance,
+this CMDS rotated the conventional cardinal directions by about <span class="math inline">\(\pi\)</span> radians (though at least the map is
+recognizable from above rather than below the surface of the Earth):</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>
-  <span class="va">d.coord</span>, pch <span class="op">=</span> <span class="cn">NA</span>, asp <span class="op">=</span> <span class="fl">1</span>,
-  xlab <span class="op">=</span> <span class="st">"First principal coordinate"</span>, ylab <span class="op">=</span> <span class="st">"Second principal coordinate"</span>
-<span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/text.html" class="external-link">text</a></span><span class="op">(</span><span class="va">d.coord</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">.9</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">d.coord</span>, pch <span class="op">=</span> <span class="cn">NA</span>, asp <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"First principal coordinate"</span>, ylab <span class="op">=</span> <span class="st">"Second principal coordinate"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html" class="external-link">text</a></span><span class="op">(</span><span class="va">d.coord</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">.9</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmds-variables_files/figure-html/multidimensional%20scaling%20of%20cities%20plot-1.png" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="multidimensional-scaling-of-covariance-data">multidimensional scaling of covariance data<a class="anchor" aria-label="anchor" href="#multidimensional-scaling-of-covariance-data"></a>
 </h2>
-<p>The faithful approximation of inter-variable correlations by the angles between their coordinate vectors provides a dual CMDS procedure. Suppose we have data that consist not of distances between cases but of covariances <span class="math inline">\(\operatorname{cov}(y_i,y_j),\ 1\leq i\leq j\leq p\)</span> between variables. Again the data are coordinate-free, so PCA is inapplicable. But were the data derived from a (not necessarily centered or scaled) case–variable matrix <span class="math inline">\(X\)</span>, then the covariance matrix <span class="math inline">\(C=(\operatorname{cov}(y_i,y_j))\)</span> would have been obtained as <span class="math inline">\(C=\frac{1}{n}X^\top X\)</span>. This, up to scalar, is the matrix whose eigenvectors would be given by <span class="math inline">\(V\)</span> in the SVD <span class="math inline">\(X = U D V^\top\)</span>. Therefore, we can obtain artificial coordinates for these variables that approximate what we know of their geometry—thinking of the variables as unknown vectors whose magnitudes and angles are encoded in <span class="math inline">\(C\)</span>—via an eigendecomposition <span class="math inline">\(C = V \Lambda V^\top\)</span>: Take <span class="math inline">\(Y = V \Lambda^{1/2} \in \mathbb{R}^{p\times r}\)</span>, so that <span class="math inline">\(Y^\top Y \approx C\)</span>.</p>
-<p>While covariances of the unscaled diabetes data are not meaningful, they can be used to validate the technique. Again because the eigendecomposition is intrinsically ordered by variance, the first <span class="math inline">\(r\)</span> eigenvectors provide the most faithful <span class="math inline">\(r\)</span>-dimensional approximation; i’ll take <span class="math inline">\(r=2\)</span> in anticipation of a biplot:</p>
+<p>The faithful approximation of inter-variable correlations by the
+angles between their coordinate vectors provides a dual CMDS procedure.
+Suppose we have data that consist not of distances between cases but of
+covariances <span class="math inline">\(\operatorname{cov}(y_i,y_j),\
+1\leq i\leq j\leq p\)</span> between variables. Again the data are
+coordinate-free, so PCA is inapplicable. But were the data derived from
+a (not necessarily centered or scaled) case–variable matrix <span class="math inline">\(X\)</span>, then the covariance matrix <span class="math inline">\(C=(\operatorname{cov}(y_i,y_j))\)</span> would
+have been obtained as <span class="math inline">\(C=\frac{1}{n}X^\top
+X\)</span>. This, up to scalar, is the matrix whose eigenvectors would
+be given by <span class="math inline">\(V\)</span> in the SVD <span class="math inline">\(X = U D V^\top\)</span>. Therefore, we can obtain
+artificial coordinates for these variables that approximate what we know
+of their geometry—thinking of the variables as unknown vectors whose
+magnitudes and angles are encoded in <span class="math inline">\(C\)</span>—via an eigendecomposition <span class="math inline">\(C = V \Lambda V^\top\)</span>: Take <span class="math inline">\(Y = V \Lambda^{1/2} \in \mathbb{R}^{p\times
+r}\)</span>, so that <span class="math inline">\(Y^\top Y \approx
+C\)</span>.</p>
+<p>While covariances of the unscaled diabetes data are not meaningful,
+they can be used to validate the technique. Again because the
+eigendecomposition is intrinsically ordered by variance, the first <span class="math inline">\(r\)</span> eigenvectors provide the most faithful
+<span class="math inline">\(r\)</span>-dimensional approximation; i’ll
+take <span class="math inline">\(r=2\)</span> in anticipation of a
+biplot:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># covariances and standard deviations</span>
-<span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cov</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co"># eigendecomposition of covariance matrix</span>
-<span class="va">c.eigen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eigen.html" class="external-link">eigen</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>
-<span class="co"># artificial coordinates</span>
-<span class="va">c.coord</span> <span class="op">&lt;-</span> <span class="va">c.eigen</span><span class="op">$</span><span class="va">vectors</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">c.eigen</span><span class="op">$</span><span class="va">values</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-<span class="co"># scatterplot</span>
-<span class="va">c.inner</span> <span class="op">&lt;-</span> <span class="va">c.coord</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">c.coord</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>
-  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">c</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,
-  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">c.inner</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">c.inner</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,
-  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">c</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">c</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,
-  asp <span class="op">=</span> <span class="fl">1</span>, pch <span class="op">=</span> <span class="fl">19</span>, cex <span class="op">=</span> <span class="fl">.5</span>,
-  xlab <span class="op">=</span> <span class="st">"Measurement covariances in unscaled data"</span>,
-  ylab <span class="op">=</span> <span class="st">"Vector inner products in planar CMDS"</span>
-<span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">c</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">c</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># covariances and standard deviations</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cov</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># eigendecomposition of covariance matrix</span></span>
+<span><span class="va">c.eigen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eigen.html" class="external-link">eigen</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span></span>
+<span><span class="co"># artificial coordinates</span></span>
+<span><span class="va">c.coord</span> <span class="op">&lt;-</span> <span class="va">c.eigen</span><span class="op">$</span><span class="va">vectors</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">c.eigen</span><span class="op">$</span><span class="va">values</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># scatterplot</span></span>
+<span><span class="va">c.inner</span> <span class="op">&lt;-</span> <span class="va">c.coord</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">c.coord</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">c</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">c.inner</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">c.inner</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">c</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">c</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  asp <span class="op">=</span> <span class="fl">1</span>, pch <span class="op">=</span> <span class="fl">19</span>, cex <span class="op">=</span> <span class="fl">.5</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Measurement covariances in unscaled data"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Vector inner products in planar CMDS"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">c</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">c</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmds-variables_files/figure-html/multidimensional%20scaling%20of%20diabetes-1.png" width="528" style="display: block; margin: auto;"></p>
-<p>Thus, whereas <em>CMDS of cases</em> approximates distances, <em>CMDS of variables</em> approximates covariances. This equips us with an analogous visualization technique for correlation data: Represent each variable <span class="math inline">\(y_i\)</span> as a unit vector <span class="math inline">\(\hat{y}_i\)</span> in such a way that their angle cosines <span class="math inline">\(\cos\theta_{ij}\)</span> equal their correlations <span class="math inline">\(r_{ij}\)</span>, then project these vectors onto the plane in which their variance is maximized. This is exactly how variables are commonly represented in row-principal PCA biplots, by the equivalence of <span class="math inline">\(V\)</span> in the SVD <span class="math inline">\(X = U D V^\top\)</span> with <span class="math inline">\(E\)</span> in the eigendecomposition <span class="math inline">\(X^\top X = E \Lambda E^\top\)</span>. Here is the result for the five physiological measurements of the adult cohort in the diabetes study:</p>
+<p>Thus, whereas <em>CMDS of cases</em> approximates distances, <em>CMDS
+of variables</em> approximates covariances. This equips us with an
+analogous visualization technique for correlation data: Represent each
+variable <span class="math inline">\(y_i\)</span> as a unit vector <span class="math inline">\(\hat{y}_i\)</span> in such a way that their angle
+cosines <span class="math inline">\(\cos\theta_{ij}\)</span> equal their
+correlations <span class="math inline">\(r_{ij}\)</span>, then project
+these vectors onto the plane in which their variance is maximized. This
+is exactly how variables are commonly represented in row-principal PCA
+biplots, by the equivalence of <span class="math inline">\(V\)</span> in
+the SVD <span class="math inline">\(X = U D V^\top\)</span> with <span class="math inline">\(E\)</span> in the eigendecomposition <span class="math inline">\(X^\top X = E \Lambda E^\top\)</span>. Here is the
+result for the five physiological measurements of the adult cohort in
+the diabetes study:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu">heplots</span><span class="fu">::</span><span class="va"><a href="http://friendly.github.io/heplots/reference/Diabetes.html" class="external-link">Diabetes</a></span><span class="op">[</span>, <span class="op">-</span><span class="fl">6L</span><span class="op">]</span><span class="op">)</span>
-<span class="va">c.eigen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eigen.html" class="external-link">eigen</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>
-<span class="va">c.coord</span> <span class="op">&lt;-</span> <span class="va">c.eigen</span><span class="op">$</span><span class="va">vectors</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">c.eigen</span><span class="op">$</span><span class="va">values</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>
-  <span class="va">c.coord</span>, pch <span class="op">=</span> <span class="cn">NA</span>, asp <span class="op">=</span> <span class="fl">1</span>,
-  xlab <span class="op">=</span> <span class="st">"First principal coordinate"</span>, ylab <span class="op">=</span> <span class="st">"Second principal coordinate"</span>
-<span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/arrows.html" class="external-link">arrows</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="va">c.coord</span><span class="op">[</span>, <span class="fl">1L</span><span class="op">]</span>, <span class="va">c.coord</span><span class="op">[</span>, <span class="fl">2L</span><span class="op">]</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/text.html" class="external-link">text</a></span><span class="op">(</span><span class="va">c.coord</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">.9</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu">heplots</span><span class="fu">::</span><span class="va"><a href="http://friendly.github.io/heplots/reference/Diabetes.html" class="external-link">Diabetes</a></span><span class="op">[</span>, <span class="op">-</span><span class="fl">6L</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">c.eigen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eigen.html" class="external-link">eigen</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span></span>
+<span><span class="va">c.coord</span> <span class="op">&lt;-</span> <span class="va">c.eigen</span><span class="op">$</span><span class="va">vectors</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">c.eigen</span><span class="op">$</span><span class="va">values</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">c.coord</span>, pch <span class="op">=</span> <span class="cn">NA</span>, asp <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"First principal coordinate"</span>, ylab <span class="op">=</span> <span class="st">"Second principal coordinate"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/arrows.html" class="external-link">arrows</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="va">c.coord</span><span class="op">[</span>, <span class="fl">1L</span><span class="op">]</span>, <span class="va">c.coord</span><span class="op">[</span>, <span class="fl">2L</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html" class="external-link">text</a></span><span class="op">(</span><span class="va">c.coord</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">.9</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmds-variables_files/figure-html/multidimensional%20scaling%20of%20diabetes%20plot-1.png" width="672" style="display: block; margin: auto;"></p>
-<p>We can immediately see that the two tests of glucose level (fasting and not) are highly correlated, that they vary independently of relative weight, and that the two measures of insulin response (steady state plasma glucose and the insulin test) are similarly associated with relative weight but differentially associated with glucose level.</p>
-<p>In this setting, we could have obtained this visualization directly from the case–variable data <span class="math inline">\(X\)</span>, as in PCA. The technique becomes uniquely useful when we have correlations without underlying coordinates.</p>
+<p>We can immediately see that the two tests of glucose level (fasting
+and not) are highly correlated, that they vary independently of relative
+weight, and that the two measures of insulin response (steady state
+plasma glucose and the insulin test) are similarly associated with
+relative weight but differentially associated with glucose level.</p>
+<p>In this setting, we could have obtained this visualization directly
+from the case–variable data <span class="math inline">\(X\)</span>, as
+in PCA. The technique becomes uniquely useful when we have correlations
+without underlying coordinates.</p>
 </div>
 <div class="section level2">
 <h2 id="use-case-rankings-of-universities">use case: rankings of universities<a class="anchor" aria-label="anchor" href="#use-case-rankings-of-universities"></a>
 </h2>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ordr</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></code></pre></div>
-<p>A natural use case for CMDS of variables is the analysis of multiple rankings of the same set of objects in terms of their <em>concordance</em>. Rankings’ concordance is often measured using rank correlations such as Kendall’s <span class="math inline">\(\tau\)</span>, which may be <em>general correlation coefficients</em> in <a href="https://en.wikipedia.org/wiki/Rank_correlation#General_correlation_coefficient" class="external-link">the sense proposed by Kendall</a> but are not associated with an underlying geometry. In this setting, there is no original <span class="math inline">\(X\)</span> nor Euclidean coordinates. Nevertheless, we can use CMDS to represent these rankings as unit vectors in Euclidean space whose pairwise cosines approximate their rank correlations!</p>
-<p>A real-world example is provided by the <a href="https://www.topuniversities.com/qs-world-university-rankings/methodology" class="external-link">Quacquarelli Symonds World University Rankings</a>, which include rankings of hundreds of world universities along six dimensions: academic reputation, employer reputation, faculty–student ratio, citations per faculty, international faculty ratio, and international student ratio. QS weight these rankings differently in their overall assessment, but our analysis will compare the rankings to each other across universities, ignoring these weights. The subset <code>qswur_usa</code> installed with <strong>ordr</strong> include U.S.-based universities ranked in the years 2017–2020, <a href="http://www.iu.qs.com/university-rankings/qs-classifications/" class="external-link">their classifications by QS</a>, and their six integer-valued rankings. (Scores used to generate the rankings are included with the QS data files but omitted from <code>qswur_usa</code>.)</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">qswur_usa</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">qswur_usa</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 612 × 13</span></span>
-<span class="co">##     year institution      size  focus res     age status rk_academic rk_employer</span>
-<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>017 MASSACHUSETTS I… M     CO    VH        5 B                6           4</span>
-<span class="co">## <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>017 STANFORD UNIVER… L     FC    VH        5 A                5           5</span>
-<span class="co">## <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>017 HARVARD UNIVERS… L     FC    VH        5 B                1           1</span>
-<span class="co">## <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>017 CALIFORNIA INST… S     CO    VH        5 B               23          90</span>
-<span class="co">## <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>017 UNIVERSITY OF C… L     FC    VH        5 B               13          47</span>
-<span class="co">## <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>017 PRINCETON UNIVE… M     CO    VH        5 B               10          32</span>
-<span class="co">## <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>017 YALE UNIVERSITY  L     FC    VH        5 B                9          12</span>
-<span class="co">## <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>017 CORNELL UNIVERS… L     FC    VH        5 B               21          49</span>
-<span class="co">## <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>017 JOHNS HOPKINS U… L     FC    VH        5 B               41         139</span>
-<span class="co">## <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>017 UNIVERSITY OF P… L     FC    VH        5 B               33          35</span>
-<span class="co">## <span style="color: #949494;"># … with 602 more rows, and 4 more variables: rk_ratio &lt;int&gt;,</span></span>
-<span class="co">## <span style="color: #949494;">#   rk_citations &lt;int&gt;, rk_intl_faculty &lt;int&gt;, rk_intl_students &lt;int&gt;</span></span></code></pre>
-<p>For this example, i’ll focus only on rankings for the year 2020 for which all rankings were available. This leaves me with only 38 universities, so my conclusions must be taken with caution! Since the rankings were subsetted from the full international data set, they are not contiguous (some integers between rankings never appear). To resolve this, i’ll also recalibrate the rankings by matching each vector of ranks to the vector of its sorted unique values:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">qswur_usa</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2020L</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">institution</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"rk_"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html" class="external-link">mutate_at</a></span><span class="op">(</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"rk_"</span><span class="op">)</span><span class="op">)</span>,
-    <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter_all.html" class="external-link">filter_at</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"rk_"</span><span class="op">)</span><span class="op">)</span>, <span class="op">~</span> <span class="op">!</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">-&gt;</span>
-  <span class="va">qswur_usa2020</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">qswur_usa2020</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 38 × 7</span></span>
-<span class="co">##    institution     rk_academic rk_employer rk_ratio rk_citations rk_intl_faculty</span>
-<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;"> 1</span> MASSACHUSETTS …           3           2        8            4               1</span>
-<span class="co">## <span style="color: #BCBCBC;"> 2</span> STANFORD UNIVE…           2           3        5            7               2</span>
-<span class="co">## <span style="color: #BCBCBC;"> 3</span> HARVARD UNIVER…           1           1       17            5               8</span>
-<span class="co">## <span style="color: #BCBCBC;"> 4</span> CALIFORNIA INS…          12          17        1            2               3</span>
-<span class="co">## <span style="color: #BCBCBC;"> 5</span> UNIVERSITY OF …           9          11       19           22              20</span>
-<span class="co">## <span style="color: #BCBCBC;"> 6</span> PRINCETON UNIV…           7           7       35            1              26</span>
-<span class="co">## <span style="color: #BCBCBC;"> 7</span> CORNELL UNIVER…          11          13       40            9               5</span>
-<span class="co">## <span style="color: #BCBCBC;"> 8</span> UNIVERSITY OF …          14          12       11           31              12</span>
-<span class="co">## <span style="color: #BCBCBC;"> 9</span> YALE UNIVERSITY           6           4        2           46              17</span>
-<span class="co">## <span style="color: #BCBCBC;">10</span> COLUMBIA UNIVE…           8           8       10           47              51</span>
-<span class="co">## <span style="color: #949494;"># … with 28 more rows, and 1 more variable: rk_intl_students &lt;int&gt;</span></span></code></pre>
-<p>This subset of universities is now contiguously ranked along the six dimensions described above. The Kendall correlation <span class="math inline">\(\tau_{ij}\)</span> between two rankings measures their concordance. To calculate it, every pair of universities contributes either <span class="math inline">\(+1\)</span> or <span class="math inline">\(-1\)</span> according as the rankings <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> place that pair in the same order, and the sum is scaled down by the number of pairs <span class="math inline">\({n\choose 2}\)</span> so that the result lies between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>. We interpret <span class="math inline">\(\tau_{ij}=1\)</span> as perfect concordance (the rankings are equivalent), <span class="math inline">\(\tau_{ij}=-1\)</span> as perfect discordance (the rankings are reversed), and <span class="math inline">\(\tau_{ij}=0\)</span> as independence (the rankings are independent).</p>
-<p><a href="https://www.topuniversities.com/qs-world-university-rankings/methodology" class="external-link">The six QS rankings</a> are</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ordr</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: package 'ggplot2' was built under R version 4.1.2</span></span></code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: package 'dplyr' was built under R version 4.1.2</span></span></code></pre>
+<p>A natural use case for CMDS of variables is the analysis of multiple
+rankings of the same set of objects in terms of their
+<em>concordance</em>. Rankings’ concordance is often measured using rank
+correlations such as Kendall’s <span class="math inline">\(\tau\)</span>, which may be <em>general
+correlation coefficients</em> in <a href="https://en.wikipedia.org/wiki/Rank_correlation#General_correlation_coefficient" class="external-link">the
+sense proposed by Kendall</a> but are not associated with an underlying
+geometry. In this setting, there is no original <span class="math inline">\(X\)</span> nor Euclidean coordinates.
+Nevertheless, we can use CMDS to represent these rankings as unit
+vectors in Euclidean space whose pairwise cosines approximate their rank
+correlations!</p>
+<p>A real-world example is provided by the <a href="https://www.topuniversities.com/qs-world-university-rankings/methodology" class="external-link">Quacquarelli
+Symonds World University Rankings</a>, which include rankings of
+hundreds of world universities along six dimensions: academic
+reputation, employer reputation, faculty–student ratio, citations per
+faculty, international faculty ratio, and international student ratio.
+QS weight these rankings differently in their overall assessment, but
+our analysis will compare the rankings to each other across
+universities, ignoring these weights. The subset <code>qswur_usa</code>
+installed with <strong>ordr</strong> include U.S.-based universities
+ranked in the years 2017–2020, <a href="http://www.iu.qs.com/university-rankings/qs-classifications/" class="external-link">their
+classifications by QS</a>, and their six integer-valued rankings.
+(Scores used to generate the rankings are included with the QS data
+files but omitted from <code>qswur_usa</code>.)</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">qswur_usa</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">qswur_usa</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 612 × 13</span></span></span>
+<span><span class="co">##     year institution      size  focus res     age status rk_academic rk_employer</span></span>
+<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>017 MASSACHUSETTS I… M     CO    VH        5 B                6           4</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>017 STANFORD UNIVER… L     FC    VH        5 A                5           5</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>017 HARVARD UNIVERS… L     FC    VH        5 B                1           1</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>017 CALIFORNIA INST… S     CO    VH        5 B               23          90</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>017 UNIVERSITY OF C… L     FC    VH        5 B               13          47</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>017 PRINCETON UNIVE… M     CO    VH        5 B               10          32</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>017 YALE UNIVERSITY  L     FC    VH        5 B                9          12</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>017 CORNELL UNIVERS… L     FC    VH        5 B               21          49</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>017 JOHNS HOPKINS U… L     FC    VH        5 B               41         139</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>017 UNIVERSITY OF P… L     FC    VH        5 B               33          35</span></span>
+<span><span class="co">## <span style="color: #949494;"># … with 602 more rows, and 4 more variables: rk_ratio &lt;int&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   rk_citations &lt;int&gt;, rk_intl_faculty &lt;int&gt;, rk_intl_students &lt;int&gt;</span></span></span></code></pre>
+<p>For this example, i’ll focus only on rankings for the year 2020 for
+which all rankings were available. This leaves me with only 38
+universities, so my conclusions must be taken with caution! Since the
+rankings were subsetted from the full international data set, they are
+not contiguous (some integers between rankings never appear). To resolve
+this, i’ll also recalibrate the rankings by matching each vector of
+ranks to the vector of its sorted unique values:</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">qswur_usa</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2020L</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">institution</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"rk_"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html" class="external-link">mutate_at</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"rk_"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter_all.html" class="external-link">filter_at</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"rk_"</span><span class="op">)</span><span class="op">)</span>, <span class="op">~</span> <span class="op">!</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op">-&gt;</span></span>
+<span>  <span class="va">qswur_usa2020</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">qswur_usa2020</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 38 × 7</span></span></span>
+<span><span class="co">##    institution     rk_academic rk_employer rk_ratio rk_citations rk_intl_faculty</span></span>
+<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> MASSACHUSETTS …           3           2        8            4               1</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> STANFORD UNIVE…           2           3        5            7               2</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> HARVARD UNIVER…           1           1       17            5               8</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> CALIFORNIA INS…          12          17        1            2               3</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> UNIVERSITY OF …           9          11       19           22              20</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> PRINCETON UNIV…           7           7       35            1              26</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> CORNELL UNIVER…          11          13       40            9               5</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> UNIVERSITY OF …          14          12       11           31              12</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> YALE UNIVERSITY           6           4        2           46              17</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> COLUMBIA UNIVE…           8           8       10           47              51</span></span>
+<span><span class="co">## <span style="color: #949494;"># … with 28 more rows, and 1 more variable: rk_intl_students &lt;int&gt;</span></span></span></code></pre>
+<p>This subset of universities is now contiguously ranked along the six
+dimensions described above. The Kendall correlation <span class="math inline">\(\tau_{ij}\)</span> between two rankings measures
+their concordance. To calculate it, every pair of universities
+contributes either <span class="math inline">\(+1\)</span> or <span class="math inline">\(-1\)</span> according as the rankings <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> place that pair in the same order, and
+the sum is scaled down by the number of pairs <span class="math inline">\({n\choose 2}\)</span> so that the result lies
+between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>. We interpret <span class="math inline">\(\tau_{ij}=1\)</span> as perfect concordance (the
+rankings are equivalent), <span class="math inline">\(\tau_{ij}=-1\)</span> as perfect discordance (the
+rankings are reversed), and <span class="math inline">\(\tau_{ij}=0\)</span> as independence (the rankings
+are independent).</p>
+<p><a href="https://www.topuniversities.com/qs-world-university-rankings/methodology" class="external-link">The
+six QS rankings</a> are</p>
 <ul>
 <li>academic reputation (<code>rk_academic</code>),</li>
 <li>employer reputation (<code>rk_employer</code>)</li>
@@ -277,73 +427,194 @@
 <li>international faculty ratio (<code>rk_intl_faculty</code>)</li>
 <li>international student ratio (<code>rk_intl_students</code>)</li>
 </ul>
-<p>These not variations on a single theme (measures of the same construct), like different measures of guideline adherence or positive affect. Though they do all seem potentially sensitive to a university’s resources, including finance and prestige. I intuit that the two reputation indexes should be positively correlated, and that the two international personnel ratios should be as well. I also wonder if the faculty–student ratio might be anti-correlated with the number of citations per faculty, separating more research-focused institutions from more teaching-focused ones.</p>
+<p>These not variations on a single theme (measures of the same
+construct), like different measures of guideline adherence or positive
+affect. Though they do all seem potentially sensitive to a university’s
+resources, including finance and prestige. I intuit that the two
+reputation indexes should be positively correlated, and that the two
+international personnel ratios should be as well. I also wonder if the
+faculty–student ratio might be anti-correlated with the number of
+citations per faculty, separating more research-focused institutions
+from more teaching-focused ones.</p>
 <div class="section level3">
 <h3 id="correlation-heatmap">correlation heatmap<a class="anchor" aria-label="anchor" href="#correlation-heatmap"></a>
 </h3>
-<p>Heatmaps are commonly, perhaps most commonly, used to visualize correlation matrices, and they make a useful contrast to the CMDS correlation plot. The <strong>corrplot</strong> package provides versatile and high-quality heatmap correlation plots, and the default style is used below. What can be learned from a glance at this plot? While the rankings by academic and employer reputations are highly concordant, those by international faculty and student ratios are less so. The faculty–student ratio and faculty citation rankings have the weakest concordance of any pair, but they are still positively correlated.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">corr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">qswur_usa2020</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"rk_"</span><span class="op">)</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"kendall"</span><span class="op">)</span>
-<span class="fu">corrplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html" class="external-link">corrplot</a></span><span class="op">(</span><span class="va">corr</span><span class="op">)</span></code></pre></div>
+<p>Heatmaps are commonly, perhaps most commonly, used to visualize
+correlation matrices, and they make a useful contrast to the CMDS
+correlation plot. The <strong>corrplot</strong> package provides
+versatile and high-quality heatmap correlation plots, and the default
+style is used below. What can be learned from a glance at this plot?
+While the rankings by academic and employer reputations are highly
+concordant, those by international faculty and student ratios are less
+so. The faculty–student ratio and faculty citation rankings have the
+weakest concordance of any pair, but they are still positively
+correlated.</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">corr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">qswur_usa2020</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"rk_"</span><span class="op">)</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"kendall"</span><span class="op">)</span></span>
+<span><span class="fu">corrplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html" class="external-link">corrplot</a></span><span class="op">(</span><span class="va">corr</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmds-variables_files/figure-html/Kendall%20rank%20correlations-1.png" width="672" style="display: block; margin: auto;"></p>
-<p>This visualization is useful, but it’s very busy: To compare any pair of rankings, i have to find the cell in the grid corresponding to that pair and refer back to the color scale to assess its meaning. I can’t rely on the nearby cells for context, because they may be stronger or weaker than average and skew my interpretation. For example, the visibly weak associations between the faculty–student ratio and other rankings (the third row/column) happen to be arranged so that the slightly stronger among them, with the two reputational variables, are sandwiched between the <em>even stronger</em> associations between the two reputational rankings and between them and the faculty citations ranking. Meanwhile, this ranking’s weaker associations are sandwiched between more typical, but still comparatively stronger, associations. A different ordering of the variables might “obscure” these pattern and “reveal” others, which forces the analyst to choose between these emphases rather than allowing the viewer to assess them on an even footing.</p>
-<p>The plot is also strictly pairwise: Every correlation between two rankings occupies its own cell—two, in fact, making almost half of the plot duplicative. This means that a subset analysis of, say, three rankings requires focusing on three cells at the corners of a right triangle while ignoring all the surrounding cells. This is not an easy visual task. It would be straightforward to create a new plot for any subset, but then the larger context of the remaining rankings would be lost.</p>
-<p>Finally, the color and size scales themselves are less than desirable in a plot of data that all lie on a single scale (<span class="math inline">\(-1 \leq r \leq 1\)</span>). Contrast this to a histogram, which also visualizes a single data type (count) but uses only one axis to represent count (the other to represent value) and does not require color at all. In general, plots of simple data should use very few scales (aesthetic mappings)—not only to make plots more readable but also to allow for additional scales that highlight additional data properties.</p>
+<p>This visualization is useful, but it’s very busy: To compare any pair
+of rankings, i have to find the cell in the grid corresponding to that
+pair and refer back to the color scale to assess its meaning. I can’t
+rely on the nearby cells for context, because they may be stronger or
+weaker than average and skew my interpretation. For example, the visibly
+weak associations between the faculty–student ratio and other rankings
+(the third row/column) happen to be arranged so that the slightly
+stronger among them, with the two reputational variables, are sandwiched
+between the <em>even stronger</em> associations between the two
+reputational rankings and between them and the faculty citations
+ranking. Meanwhile, this ranking’s weaker associations are sandwiched
+between more typical, but still comparatively stronger, associations. A
+different ordering of the variables might “obscure” these pattern and
+“reveal” others, which forces the analyst to choose between these
+emphases rather than allowing the viewer to assess them on an even
+footing.</p>
+<p>The plot is also strictly pairwise: Every correlation between two
+rankings occupies its own cell—two, in fact, making almost half of the
+plot duplicative. This means that a subset analysis of, say, three
+rankings requires focusing on three cells at the corners of a right
+triangle while ignoring all the surrounding cells. This is not an easy
+visual task. It would be straightforward to create a new plot for any
+subset, but then the larger context of the remaining rankings would be
+lost.</p>
+<p>Finally, the color and size scales themselves are less than desirable
+in a plot of data that all lie on a single scale (<span class="math inline">\(-1 \leq r \leq 1\)</span>). Contrast this to a
+histogram, which also visualizes a single data type (count) but uses
+only one axis to represent count (the other to represent value) and does
+not require color at all. In general, plots of simple data should use
+very few scales (aesthetic mappings)—not only to make plots more
+readable but also to allow for additional scales that highlight
+additional data properties.</p>
 </div>
 <div class="section level3">
 <h3 id="correlation-vector-plot">correlation vector plot<a class="anchor" aria-label="anchor" href="#correlation-vector-plot"></a>
 </h3>
-<p>CMDS of variables offers a natural alternative visualization: what i’ll call the “correlation vector plot”, which is usually only seen as one half of a PCA or other biplot. As with CMDS of cases, the point isn’t to overlay the case scores and variable loadings from a singular value decomposition, but to use the scores or loadings alone to endow the cases or variables with a Euclidean geometry they didn’t originally have. To that end, i’ll plot the variables as vectors with tails at the origin and heads at their principal coordinates <span class="math inline">\(Y = V \Lambda^{1/2}\)</span>, with a unit circle included for reference:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/wrap-ord.html">eigen_ord</a></span><span class="op">(</span><span class="va">corr</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/dplyr-verbs.html">mutate_rows</a></span><span class="op">(</span>metric <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html" class="external-link">str_remove</a></span><span class="op">(</span><span class="va">.name</span>, <span class="st">"rk_"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/conference.html">confer_inertia</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">-&gt;</span>
-  <span class="va">c_eigen</span>
-<span class="va">c_eigen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_unit_circle.html">geom_unit_circle</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/biplot-geoms.html">geom_rows_vector</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/biplot-geoms.html">geom_rows_text_radiate</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">metric</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_reverse</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.4</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Kendall correlations between university rankings"</span>,
-          <span class="st">"CMDS correlation vector plot"</span><span class="op">)</span></code></pre></div>
-<p><img src="cmds-variables_files/figure-html/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;"></p>
-<p>With respect to the pairwise correlations, the biplot is significantly less precise: Though the vectors all have unit length in <span class="math inline">\(\mathbb{R}^r\)</span> (<span class="math inline">\(r\leq p=6\)</span>), their projections onto the first two principal coordinates are much shorter, indicating that much of the geometric configuration requires additional dimensions to represent. Indeed, these coordinates capture only <span class="math inline">\(48.2\%+14.3\%=62.5\%\)</span> of the inertia in the full, six-dimensional eigendecomposition. This means that the angles between the vectors must be interpreted with caution: For example, it looks like the academic and employer reputation rankings are extremely correlated, but the apparent alignment of the vectors could be an artifact of the projection, when in fact they “rise” and “fall” in opposite directions along the remaining principal coordinates. The correlation heatmap, by comparison, leaves no such ambiguity.</p>
-<p>However, the biplot far surpasses the heatmap at parsimony: Each variable is represented by a single vector, and the angle cosines between the variable vectors roughly approximate their correlations. For instance, the rankings based on international student and faculty ratios have correlation around <span class="math inline">\(\cos(\frac{\pi}{4})=\frac{1}{\sqrt{2}}\)</span>, corresponding to either explaining half the “variance” in the other—not technically meaningful in the ranking context but a useful conceptual anchor. Meanwhile, the faculty–student ratio ranking is nearly independent of the faculty citation ranking, contrary to my intuition that these rankings would reflect a <em>reverse</em> association between research- and teaching-oriented institutions. The convenience of recognizing correlations as cosines may be worth the significant risk of error, especially since that error (the residual <span class="math inline">\(37.5\%\)</span> of inertia) can be exactly quantified.</p>
-<p>Moreover, the principal coordinates of the variable vectors indicate their loadings onto the first and second principal moments of inertia—the two dimensions that capture the most variation in the data. For example, the first principal coordinate is most aligned with the two reputational rankings, suggesting that a general prestige ranking is the strongest overall component of the several specific rankings. In contrast, the faculty–student ratio and faculty citation rankings load most strongly onto the second principal coordinate, suggesting that the divide between research- and teaching-focused institutions may yet be important to understanding how universities compare along these different metrics. These observations, provisional though they are, would be difficult to discern from the heatmap. More importantly, unlike the secondary patterns visible in the heatmap, these are not artifacts of the layout but arise directly from the (correlational) data.</p>
-<p>This last point means that observations made from a correlation vector plot can be validated from the CMDS coordinates. In particular, we can examine the variables’ loadings onto the third principal coordinate, and we can check whether the reputational rankings are aligned or misaligned along it.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">c_eigen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span>.matrix <span class="op">=</span> <span class="st">"rows"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">.name</span>, <span class="op">-</span><span class="va">.matrix</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 6 × 7</span></span>
-<span class="co">##      EV1     EV2     EV3     EV4     EV5      EV6 metric       </span>
-<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.834</span> -<span style="color: #BB0000;">0.090</span><span style="color: #BB0000; text-decoration: underline;">7</span>  0.412  -<span style="color: #BB0000;">0.043</span><span style="color: #BB0000; text-decoration: underline;">0</span> -<span style="color: #BB0000;">0.020</span><span style="color: #BB0000; text-decoration: underline;">6</span>  0.351   academic     </span>
-<span class="co">## <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.795</span> -<span style="color: #BB0000;">0.096</span><span style="color: #BB0000; text-decoration: underline;">4</span>  0.477   0.041<span style="text-decoration: underline;">6</span> -<span style="color: #BB0000;">0.181</span>  -<span style="color: #BB0000;">0.311</span>   employer     </span>
-<span class="co">## <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.517</span>  0.771  -<span style="color: #BB0000;">0.048</span><span style="color: #BB0000; text-decoration: underline;">0</span> -<span style="color: #BB0000;">0.331</span>   0.158  -<span style="color: #BB0000;">0.037</span><span style="color: #BB0000; text-decoration: underline;">2</span>  ratio        </span>
-<span class="co">## <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.731</span> -<span style="color: #BB0000;">0.352</span>  -<span style="color: #BB0000;">0.239</span>   0.027<span style="text-decoration: underline;">8</span>  0.528  -<span style="color: #BB0000;">0.068</span><span style="color: #BB0000; text-decoration: underline;">5</span>  citations    </span>
-<span class="co">## <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.631</span> -<span style="color: #BB0000;">0.233</span>  -<span style="color: #BB0000;">0.521</span>  -<span style="color: #BB0000;">0.392</span>  -<span style="color: #BB0000;">0.352</span>   0.007<span style="text-decoration: underline;">83</span> intl_faculty </span>
-<span class="co">## <span style="color: #BCBCBC;">6</span> -<span style="color: #BB0000;">0.603</span>  0.262  -<span style="color: #BB0000;">0.324</span>   0.665  -<span style="color: #BB0000;">0.140</span>   0.031<span style="text-decoration: underline;">2</span>  intl_students</span></code></pre>
-<p>Based on the third principal coordinates, the reputational rankings are aligned, as we knew already from the correlation matrix and heatmap. What’s a bit more interesting is that this component seems to separate these two rankings from those having to do with faculty citation rates and the international compositions of the faculty and student body. Based on the decomposition of inertia, this third principal coordinate is nearly as important as the second! It therefore makes sense to plot the two together, in effect examining the residuals after regressing out the first principal coordinate:</p>
+<p>CMDS of variables offers a natural alternative visualization: what
+i’ll call the “correlation vector plot”, which is usually only seen as
+one half of a PCA or other biplot. As with CMDS of cases, the point
+isn’t to overlay the case scores and variable loadings from a singular
+value decomposition, but to use the scores or loadings alone to endow
+the cases or variables with a Euclidean geometry they didn’t originally
+have. To that end, i’ll plot the variables as vectors with tails at the
+origin and heads at their principal coordinates <span class="math inline">\(Y = V \Lambda^{1/2}\)</span>, with a unit circle
+included for reference:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">c_eigen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2</span>, y <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/geom_unit_circle.html">geom_unit_circle</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/biplot-geoms.html">geom_rows_vector</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="../reference/biplot-geoms.html">geom_rows_text_radiate</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">metric</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Kendall correlations between university rankings"</span>,
-          <span class="st">"CMDS correlation vector plot, second &amp; third principal coordinates"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/wrap-ord.html">eigen_ord</a></span><span class="op">(</span><span class="va">corr</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/dplyr-verbs.html">mutate_rows</a></span><span class="op">(</span>metric <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html" class="external-link">str_remove</a></span><span class="op">(</span><span class="va">.name</span>, <span class="st">"rk_"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/conference.html">confer_inertia</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">-&gt;</span></span>
+<span>  <span class="va">c_eigen</span></span>
+<span><span class="va">c_eigen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/geom_unit_circle.html">geom_unit_circle</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/biplot-geoms.html">geom_rows_vector</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/biplot-geoms.html">geom_rows_text_radiate</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">metric</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_reverse</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.4</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Kendall correlations between university rankings"</span>,</span>
+<span>          <span class="st">"CMDS correlation vector plot"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="cmds-variables_files/figure-html/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;"></p>
+<p>With respect to the pairwise correlations, the biplot is
+significantly less precise: Though the vectors all have unit length in
+<span class="math inline">\(\mathbb{R}^r\)</span> (<span class="math inline">\(r\leq p=6\)</span>), their projections onto the
+first two principal coordinates are much shorter, indicating that much
+of the geometric configuration requires additional dimensions to
+represent. Indeed, these coordinates capture only <span class="math inline">\(48.2\%+14.3\%=62.5\%\)</span> of the inertia in
+the full, six-dimensional eigendecomposition. This means that the angles
+between the vectors must be interpreted with caution: For example, it
+looks like the academic and employer reputation rankings are extremely
+correlated, but the apparent alignment of the vectors could be an
+artifact of the projection, when in fact they “rise” and “fall” in
+opposite directions along the remaining principal coordinates. The
+correlation heatmap, by comparison, leaves no such ambiguity.</p>
+<p>However, the biplot far surpasses the heatmap at parsimony: Each
+variable is represented by a single vector, and the angle cosines
+between the variable vectors roughly approximate their correlations. For
+instance, the rankings based on international student and faculty ratios
+have correlation around <span class="math inline">\(\cos(\frac{\pi}{4})=\frac{1}{\sqrt{2}}\)</span>,
+corresponding to either explaining half the “variance” in the other—not
+technically meaningful in the ranking context but a useful conceptual
+anchor. Meanwhile, the faculty–student ratio ranking is nearly
+independent of the faculty citation ranking, contrary to my intuition
+that these rankings would reflect a <em>reverse</em> association between
+research- and teaching-oriented institutions. The convenience of
+recognizing correlations as cosines may be worth the significant risk of
+error, especially since that error (the residual <span class="math inline">\(37.5\%\)</span> of inertia) can be exactly
+quantified.</p>
+<p>Moreover, the principal coordinates of the variable vectors indicate
+their loadings onto the first and second principal moments of
+inertia—the two dimensions that capture the most variation in the data.
+For example, the first principal coordinate is most aligned with the two
+reputational rankings, suggesting that a general prestige ranking is the
+strongest overall component of the several specific rankings. In
+contrast, the faculty–student ratio and faculty citation rankings load
+most strongly onto the second principal coordinate, suggesting that the
+divide between research- and teaching-focused institutions may yet be
+important to understanding how universities compare along these
+different metrics. These observations, provisional though they are,
+would be difficult to discern from the heatmap. More importantly, unlike
+the secondary patterns visible in the heatmap, these are not artifacts
+of the layout but arise directly from the (correlational) data.</p>
+<p>This last point means that observations made from a correlation
+vector plot can be validated from the CMDS coordinates. In particular,
+we can examine the variables’ loadings onto the third principal
+coordinate, and we can check whether the reputational rankings are
+aligned or misaligned along it.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">c_eigen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span>.matrix <span class="op">=</span> <span class="st">"rows"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">.name</span>, <span class="op">-</span><span class="va">.matrix</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 6 × 7</span></span></span>
+<span><span class="co">##      EV1     EV2     EV3     EV4     EV5      EV6 metric       </span></span>
+<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.834</span> -<span style="color: #BB0000;">0.090</span><span style="color: #BB0000; text-decoration: underline;">7</span>  0.412  -<span style="color: #BB0000;">0.043</span><span style="color: #BB0000; text-decoration: underline;">0</span> -<span style="color: #BB0000;">0.020</span><span style="color: #BB0000; text-decoration: underline;">6</span>  0.351   academic     </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.795</span> -<span style="color: #BB0000;">0.096</span><span style="color: #BB0000; text-decoration: underline;">4</span>  0.477   0.041<span style="text-decoration: underline;">6</span> -<span style="color: #BB0000;">0.181</span>  -<span style="color: #BB0000;">0.311</span>   employer     </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.517</span>  0.771  -<span style="color: #BB0000;">0.048</span><span style="color: #BB0000; text-decoration: underline;">0</span> -<span style="color: #BB0000;">0.331</span>   0.158  -<span style="color: #BB0000;">0.037</span><span style="color: #BB0000; text-decoration: underline;">2</span>  ratio        </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.731</span> -<span style="color: #BB0000;">0.352</span>  -<span style="color: #BB0000;">0.239</span>   0.027<span style="text-decoration: underline;">8</span>  0.528  -<span style="color: #BB0000;">0.068</span><span style="color: #BB0000; text-decoration: underline;">5</span>  citations    </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.631</span> -<span style="color: #BB0000;">0.233</span>  -<span style="color: #BB0000;">0.521</span>  -<span style="color: #BB0000;">0.392</span>  -<span style="color: #BB0000;">0.352</span>   0.007<span style="text-decoration: underline;">83</span> intl_faculty </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">6</span> -<span style="color: #BB0000;">0.603</span>  0.262  -<span style="color: #BB0000;">0.324</span>   0.665  -<span style="color: #BB0000;">0.140</span>   0.031<span style="text-decoration: underline;">2</span>  intl_students</span></span></code></pre>
+<p>Based on the third principal coordinates, the reputational rankings
+are aligned, as we knew already from the correlation matrix and heatmap.
+What’s a bit more interesting is that this component seems to separate
+these two rankings from those having to do with faculty citation rates
+and the international compositions of the faculty and student body.
+Based on the decomposition of inertia, this third principal coordinate
+is nearly as important as the second! It therefore makes sense to plot
+the two together, in effect examining the residuals after regressing out
+the first principal coordinate:</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">c_eigen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2</span>, y <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/geom_unit_circle.html">geom_unit_circle</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/biplot-geoms.html">geom_rows_vector</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/biplot-geoms.html">geom_rows_text_radiate</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">metric</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Kendall correlations between university rankings"</span>,</span>
+<span>          <span class="st">"CMDS correlation vector plot, second &amp; third principal coordinates"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmds-variables_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;"></p>
-<p>The primary antitheses of the reputational rankings, after removing the first principal coordinate, are the two rankings based on international composition. The third principal coordinate aligns closely with this axis. This axis is also largely independent of the axis that distinguishes research- from teaching-oriented institutions, which is closely aligned with the second principal coordinate. From my own limited experience, i’d hazard a guess that this reflects two tiers of international representation among students and faculty, one expressed by the most prestigious institutions that recruit highly qualified applicants from all over the world, and the other expressed by institutions that are not especially prestigious but are located in communities or regions with high percentages of international residents.</p>
-<p>In sum, we have interpreted the three strongest axes along which the QS rankings vary: (1) overall quality, prestige, and reputation; (2) research versus teaching orientation; and (3) international personnel ratios, which come at some cost to reputation. This is of course a preliminary and amateur analysis! But a visualization scheme that encourages hypothesis generation is worth having on hand.</p>
+<p>The primary antitheses of the reputational rankings, after removing
+the first principal coordinate, are the two rankings based on
+international composition. The third principal coordinate aligns closely
+with this axis. This axis is also largely independent of the axis that
+distinguishes research- from teaching-oriented institutions, which is
+closely aligned with the second principal coordinate. From my own
+limited experience, i’d hazard a guess that this reflects two tiers of
+international representation among students and faculty, one expressed
+by the most prestigious institutions that recruit highly qualified
+applicants from all over the world, and the other expressed by
+institutions that are not especially prestigious but are located in
+communities or regions with high percentages of international
+residents.</p>
+<p>In sum, we have interpreted the three strongest axes along which the
+QS rankings vary: (1) overall quality, prestige, and reputation; (2)
+research versus teaching orientation; and (3) international personnel
+ratios, which come at some cost to reputation. This is of course a
+preliminary and amateur analysis! But a visualization scheme that
+encourages hypothesis generation is worth having on hand.</p>
 </div>
 </div>
   </div>
@@ -365,7 +636,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer>

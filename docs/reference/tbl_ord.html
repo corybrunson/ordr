@@ -31,7 +31,7 @@ structure."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -61,30 +61,35 @@ structure.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">as_tbl_ord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for tbl_ord</span>
-<span class="fu">as_tbl_ord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">make_tbl_ord</span><span class="op">(</span>rows <span class="op">=</span> <span class="cn">NULL</span>, cols <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">is_tbl_ord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">is.tbl_ord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">valid_tbl_ord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">un_tbl_ord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">as_tbl_ord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for tbl_ord</span></span>
+<span><span class="fu">as_tbl_ord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">make_tbl_ord</span><span class="op">(</span>rows <span class="op">=</span> <span class="cn">NULL</span>, cols <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">is_tbl_ord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">is.tbl_ord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">valid_tbl_ord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">un_tbl_ord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>An ordination object.</p></dd>
+
+
 <dt>rows, cols</dt>
 <dd><p>Matrices to be used as factors of a tbl_ord.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional elements of a custom tbl_ord.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -93,7 +98,7 @@ available a suite of ordination tools that specialize to each original object
 class. These tools include <code><a href="format.html">format()</a></code> and <code>fortify()</code> methods, which
 facilitate the <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> method and the <code><a href="ggbiplot.html">ggbiplot()</a></code> function.</p>
 <p>No default method is provided for <code>as_tbl_ord()</code>, despite most defined
-methods being equivalent (simply appending tbl_ord to the vector of object
+methods being equivalent (simply appending 'tbl_ord' to the vector of object
 classes). This prevents objects for which other methods are not defined from
 being re-classed as tbl_ords.</p>
 <p>The function <code>make_tbl_ord()</code> creates a tbl_ord structured as a list of two
@@ -106,6 +111,194 @@ columns of <code>recover_rows(x)</code> and <code>recover_cols(x)</code>, using 
 to restore an object that was originally passed to <code>as_tbl_ord</code>.</p>
     </div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># illustrative ordination: FA of Swiss social data</span></span></span>
+<span class="r-in"><span><span class="va">swiss_fa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/factanal.html" class="external-link">factanal</a></span><span class="op">(</span><span class="va">swiss</span>, factors <span class="op">=</span> <span class="fl">3L</span>, scores <span class="op">=</span> <span class="st">"regression"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">swiss_fa</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> factanal(x = swiss, factors = 3L, scores = "regression")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Uniquenesses:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        Fertility      Agriculture      Examination        Education </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            0.005            0.286            0.213            0.114 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         Catholic Infant.Mortality </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            0.083            0.743 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Loadings:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  Factor1 Factor2 Factor3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Fertility        -0.512   0.203   0.832 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Agriculture      -0.774   0.312  -0.129 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Examination       0.751  -0.423  -0.211 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Education         0.901          -0.262 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Catholic         -0.186   0.913   0.220 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Infant.Mortality                  0.500 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                Factor1 Factor2 Factor3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> SS loadings      2.273   1.164   1.120</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Proportion Var   0.379   0.194   0.187</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Cumulative Var   0.379   0.573   0.759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The degrees of freedom for the model is 0 and the fit was 1e-04 </span>
+<span class="r-in"><span><span class="co"># add the 'tbl_ord' wrapper</span></span></span>
+<span class="r-in"><span><span class="va">swiss_fa_ord</span> <span class="op">&lt;-</span> <span class="fu">as_tbl_ord</span><span class="op">(</span><span class="va">swiss_fa</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># inspect wrapped model</span></span></span>
+<span class="r-in"><span><span class="fu">is_tbl_ord</span><span class="op">(</span><span class="va">swiss_fa_ord</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">swiss_fa_ord</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'factanal': (53 x 3) x (6 x 3)'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # 3 coordinates: Factor1, Factor2, Factor3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (symmetric): [ 53 x 3 | 0 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Factor1 Factor2 Factor3 | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  -<span style="color: #BB0000;">0.512</span>  0.203    0.832 | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  -<span style="color: #BB0000;">0.774</span>  0.312   -<span style="color: #BB0000;">0.129</span> | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>   0.751 -<span style="color: #BB0000;">0.423</span>   -<span style="color: #BB0000;">0.211</span> | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>   0.901  0.078<span style="text-decoration: underline;">4</span>  -<span style="color: #BB0000;">0.262</span> | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  -<span style="color: #BB0000;">0.186</span>  0.913    0.220 | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (symmetric): [ 6 x 3 | 0 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Factor1 Factor2 Factor3 | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.512</span>   0.203    0.832 | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.774</span>   0.312   -<span style="color: #BB0000;">0.129</span> | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  0.751  -<span style="color: #BB0000;">0.423</span>   -<span style="color: #BB0000;">0.211</span> | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.901   0.078<span style="text-decoration: underline;">4</span>  -<span style="color: #BB0000;">0.262</span> | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.186</span>   0.913    0.220 | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>  0.028<span style="text-decoration: underline;">9</span>  0.077<span style="text-decoration: underline;">2</span>   0.500 | </span>
+<span class="r-in"><span><span class="fu">valid_tbl_ord</span><span class="op">(</span><span class="va">swiss_fa_ord</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span><span class="co"># unwrap the model</span></span></span>
+<span class="r-in"><span><span class="fu">un_tbl_ord</span><span class="op">(</span><span class="va">swiss_fa_ord</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> factanal(x = swiss, factors = 3L, scores = "regression")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Uniquenesses:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        Fertility      Agriculture      Examination        Education </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            0.005            0.286            0.213            0.114 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         Catholic Infant.Mortality </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            0.083            0.743 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Loadings:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  Factor1 Factor2 Factor3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Fertility        -0.512   0.203   0.832 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Agriculture      -0.774   0.312  -0.129 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Examination       0.751  -0.423  -0.211 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Education         0.901          -0.262 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Catholic         -0.186   0.913   0.220 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Infant.Mortality                  0.500 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                Factor1 Factor2 Factor3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> SS loadings      2.273   1.164   1.120</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Proportion Var   0.379   0.194   0.187</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Cumulative Var   0.379   0.573   0.759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The degrees of freedom for the model is 0 and the fit was 1e-04 </span>
+<span class="r-in"><span><span class="co"># create a 'tbl_ord' directly from row and column factors</span></span></span>
+<span class="r-in"><span><span class="co"># (missing inertia &amp; other attributes)</span></span></span>
+<span class="r-in"><span><span class="va">swiss_fa_ord2</span> <span class="op">&lt;-</span> <span class="fu">make_tbl_ord</span><span class="op">(</span>rows <span class="op">=</span> <span class="va">swiss_fa</span><span class="op">$</span><span class="va">scores</span>, cols <span class="op">=</span> <span class="va">swiss_fa</span><span class="op">$</span><span class="va">loadings</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># inspect wrapped factors</span></span></span>
+<span class="r-in"><span><span class="fu">is_tbl_ord</span><span class="op">(</span><span class="va">swiss_fa_ord2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">swiss_fa_ord2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord: (47 x 3) x (6 x 3)'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # 3 coordinates: Factor1, Factor2, Factor3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows: [ 47 x 3 | 0 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Factor1 Factor2 Factor3 | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>   0.453  -<span style="color: #BB0000;">0.900</span>   1.46  | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  -<span style="color: #BB0000;">0.143</span>   0.886   0.942 | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  -<span style="color: #BB0000;">0.308</span>   0.848   1.75  | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  -<span style="color: #BB0000;">0.125</span>  -<span style="color: #BB0000;">0.463</span>   1.53  | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>   0.341  -<span style="color: #BB0000;">0.846</span>   1.05  | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns: [ 6 x 3 | 0 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Factor1 Factor2 Factor3 | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.512</span>   0.203    0.832 | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.774</span>   0.312   -<span style="color: #BB0000;">0.129</span> | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  0.751  -<span style="color: #BB0000;">0.423</span>   -<span style="color: #BB0000;">0.211</span> | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.901   0.078<span style="text-decoration: underline;">4</span>  -<span style="color: #BB0000;">0.262</span> | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.186</span>   0.913    0.220 | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>  0.028<span style="text-decoration: underline;">9</span>  0.077<span style="text-decoration: underline;">2</span>   0.500 | </span>
+<span class="r-in"><span><span class="fu">valid_tbl_ord</span><span class="op">(</span><span class="va">swiss_fa_ord2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span><span class="co"># unwrap factors</span></span></span>
+<span class="r-in"><span><span class="fu">un_tbl_ord</span><span class="op">(</span><span class="va">swiss_fa_ord2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $rows</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  Factor1    Factor2     Factor3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Courtelary    0.45318326 -0.8996943  1.45754866</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Delemont     -0.14322063  0.8855428  0.94227871</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Franches-Mnt -0.30797336  0.8477030  1.74514043</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Moutier      -0.12534083 -0.4629021  1.52823000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Neuveville    0.34109514 -0.8458178  1.04687165</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Porrentruy   -0.04473114  1.0029812  0.32499084</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Broye        -0.20957031  0.9388742  0.95013743</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Glane        -0.07584684  0.9555256  1.84540889</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Gruyere      -0.17406590  1.0769276  0.80852222</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sarine        0.48706293  0.9876863  1.28186031</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Veveyse      -0.21675238  1.0104124  1.24699185</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Aigle        -0.10911693 -0.6583181 -0.49672411</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Aubonne      -0.68437504 -0.8402563 -0.52979298</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Avenches     -0.03638406 -0.7941117  0.04684235</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Cossonay     -0.63417597 -0.9062500 -0.97644764</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Echallens    -0.85262069 -0.5223686 -0.56695418</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Grandson     -0.07196915 -0.9996237  0.34908713</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Lausanne      1.61585928 -0.2740672 -0.32842180</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> La Vallee     1.11176971 -0.7484136 -0.66355682</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Lavaux       -0.45759227 -0.8101884 -0.57253943</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Morges       -0.16023764 -0.8189392 -0.35143678</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Moudon       -0.76689425 -0.8871886 -0.73359873</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Nyone         0.01148304 -0.4441114 -1.18020392</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Orbe         -0.53346789 -0.8042945 -1.34826105</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Oron         -1.11777160 -1.0181496 -0.21175864</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Payerne      -0.36904017 -0.8817496  0.37541143</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Paysd'enhaut -1.13077900 -0.8986374 -0.29968480</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rolle        -0.42160714 -0.6023891 -1.03877760</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Vevey         0.94345222 -0.3409626 -0.46681372</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Yverdon      -0.32587490 -0.7719262 -0.45767841</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Conthey      -1.31619000  1.3250097 -0.61688868</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Entremont    -0.89250420  1.4492843 -0.97170425</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Herens       -1.23489054  1.2885602 -0.38378811</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Martigwy     -0.65337979  1.3258772 -0.68175988</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Monthey      -0.77161554  1.1439436  0.14336145</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> St Maurice   -0.58929096  1.5132175 -1.21362340</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sierre       -1.07854088  1.0949088  1.16699564</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sion          0.07266005  1.2536309  0.60709606</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Boudry        0.42781724 -0.9511974  0.51240946</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> La Chauxdfnd  0.80305682 -0.8488623  0.28442301</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Le Locle      0.63722154 -0.8395794  0.83668414</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Neuchatel     2.31502030 -0.3320992  0.93658497</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Val de Ruz   -0.19124613 -1.0328917  0.84358034</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ValdeTravers  0.26693510 -0.9979172  0.17191080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> V. De Geneve  3.72546960  1.0799755 -1.35159069</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rive Droite   1.02570325  0.9919321 -2.04348421</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rive Gauche   1.45927665  1.0609142 -1.96687793</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $cols</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Loadings:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  Factor1 Factor2 Factor3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Fertility        -0.512   0.203   0.832 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Agriculture      -0.774   0.312  -0.129 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Examination       0.751  -0.423  -0.211 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Education         0.901          -0.262 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Catholic         -0.186   0.913   0.220 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Infant.Mortality                  0.500 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                Factor1 Factor2 Factor3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> SS loadings      2.273   1.164   1.120</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Proportion Var   0.379   0.194   0.187</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Cumulative Var   0.379   0.573   0.759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -118,7 +311,7 @@ to restore an object that was originally passed to <code>as_tbl_ord</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

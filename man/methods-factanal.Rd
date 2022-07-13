@@ -3,9 +3,36 @@
 \name{methods-factanal}
 \alias{methods-factanal}
 \alias{as_tbl_ord.factanal}
+\alias{recover_rows.factanal}
+\alias{recover_cols.factanal}
+\alias{recover_inertia.factanal}
+\alias{recover_coord.factanal}
+\alias{recover_conference.factanal}
+\alias{supplementation_rows.factanal}
+\alias{augmentation_rows.factanal}
+\alias{augmentation_cols.factanal}
+\alias{augmentation_coord.factanal}
 \title{Functionality for factor analysis ('factanal') objects}
 \usage{
 \method{as_tbl_ord}{factanal}(x)
+
+\method{recover_rows}{factanal}(x)
+
+\method{recover_cols}{factanal}(x)
+
+\method{recover_inertia}{factanal}(x)
+
+\method{recover_coord}{factanal}(x)
+
+\method{recover_conference}{factanal}(x)
+
+\method{supplementation_rows}{factanal}(x)
+
+\method{augmentation_rows}{factanal}(x)
+
+\method{augmentation_cols}{factanal}(x)
+
+\method{augmentation_coord}{factanal}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
@@ -38,7 +65,7 @@ get_cols(swiss_fa)
 head(get_rows(swiss_fa, elements = "supplementary"))
 # augment column loadings with uniquenesses
 (swiss_fa <- augment_ord(swiss_fa))
-# symmetric biplot 
+# symmetric biplot
 swiss_fa \%>\%
   ggbiplot() +
   theme_bw() +

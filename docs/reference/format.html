@@ -31,7 +31,7 @@ original ordination classes."><!-- mathjax --><script src="https://cdnjs.cloudfl
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -61,49 +61,60 @@ original ordination classes.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for tbl_ord</span>
-<span class="fu">format</span><span class="op">(</span>
-  <span class="va">x</span>,
-  width <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>,
-  n <span class="op">=</span> <span class="cn">NULL</span>,
-  max_extra_cols <span class="op">=</span> <span class="cn">NULL</span>,
-  max_footer_lines <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for tbl_ord</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span>
-  <span class="va">x</span>,
-  width <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>,
-  n <span class="op">=</span> <span class="cn">NULL</span>,
-  max_extra_cols <span class="op">=</span> <span class="cn">NULL</span>,
-  max_footer_lines <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for tbl_ord</span></span>
+<span><span class="fu">format</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  width <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  n <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  max_extra_cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  max_footer_lines <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for tbl_ord</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  width <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  n <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  max_extra_cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  max_footer_lines <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A <a href="tbl_ord.html">tbl_ord</a> object.</p></dd>
+
+
 <dt>width</dt>
 <dd><p>Width of text output to generate. This defaults to <code>NULL</code>, which
 means use the <code>width</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments.</p></dd>
+
+
 <dt>n</dt>
 <dd><p>Number of rows to show. If <code>NULL</code>, the default, will print all rows
 if less than the <code>print_max</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a>.
 Otherwise, will print as many rows as specified by the
 <code>print_min</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a>.</p></dd>
+
+
 <dt>max_extra_cols</dt>
 <dd><p>Number of extra columns to print abbreviated information for,
 if the width is too small for the entire tibble. If <code>NULL</code>,
 the <code>max_extra_cols</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a> is used.
 The previously defined <code>n_extra</code> argument is soft-deprecated.</p></dd>
+
+
 <dt>max_footer_lines</dt>
 <dd><p>Maximum number of footer lines. If <code>NULL</code>,
 the <code>max_footer_lines</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a> is used.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -127,7 +138,7 @@ times, thereby significantly reducing performance.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

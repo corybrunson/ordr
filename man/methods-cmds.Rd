@@ -3,9 +3,33 @@
 \name{methods-cmds}
 \alias{methods-cmds}
 \alias{as_tbl_ord.cmds_ord}
+\alias{recover_rows.cmds_ord}
+\alias{recover_cols.cmds_ord}
+\alias{recover_inertia.cmds_ord}
+\alias{recover_coord.cmds_ord}
+\alias{recover_conference.cmds_ord}
+\alias{augmentation_rows.cmds_ord}
+\alias{augmentation_cols.cmds_ord}
+\alias{augmentation_coord.cmds_ord}
 \title{Functionality for classical multidimensional scaling objects}
 \usage{
 \method{as_tbl_ord}{cmds_ord}(x)
+
+\method{recover_rows}{cmds_ord}(x)
+
+\method{recover_cols}{cmds_ord}(x)
+
+\method{recover_inertia}{cmds_ord}(x)
+
+\method{recover_coord}{cmds_ord}(x)
+
+\method{recover_conference}{cmds_ord}(x)
+
+\method{augmentation_rows}{cmds_ord}(x)
+
+\method{augmentation_cols}{cmds_ord}(x)
+
+\method{augmentation_coord}{cmds_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}

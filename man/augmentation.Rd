@@ -20,12 +20,12 @@ variables, and coordinates of an ordination object, and attach it to the
 object.
 }
 \details{
-The unexported \verb{augmentation_*()} methods produce \link[tibble:tibble]{tibble}s
-of values associated with the rows, columns, and artificial coordinates of an
-object of class '\link{tbl_ord}'. The first field of each tibble is \code{.name}, which
-contains the row, column, or coordinate names. Additional fields contain
-information about the rows, columns, or coordinates extracted from the
-ordination object.
+The \verb{augmentation_*()} \link[base:UseMethod]{S3 methods} produce
+\link[tibble:tibble]{tibble}s of values associated with the rows, columns, and
+artificial coordinates of an object of class '\link{tbl_ord}'. The first field of
+each tibble is \code{.name}, which contains the row, column, or coordinate names.
+Additional fields contain information about the rows, columns, or coordinates
+extracted from the ordination object.
 
 The function \code{augment_ord()} returns the ordination with either or both
 matrix factors annotated with the result of \verb{augmentation_*()}. In this way
