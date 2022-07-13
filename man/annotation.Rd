@@ -2,33 +2,18 @@
 % Please edit documentation in R/ord-annotation.r
 \name{annotation}
 \alias{annotation}
-\alias{set_annotation_rows}
-\alias{set_annotation_cols}
-\alias{annotation_rows}
-\alias{annotation_cols}
 \title{Annotate factors of 'tbl_ord' objects}
-\usage{
-set_annotation_rows(x, annot)
-
-set_annotation_cols(x, annot)
-
-annotation_rows(x)
-
-annotation_cols(x)
-}
 \arguments{
-\item{x}{An object of class '\link{tbl_ord}'.}
-
-\item{annot}{A \link[base:data.frame]{data frame} having the same number of rows
+\item{annot}{A \link[base:data.frame]{data.frame} having the same number of rows
 as \code{get_*(x)}.}
 }
 \description{
 These functions annotate the matrix factors of \link{tbl_ord}s with
 additional variables, and retrieve these annotations.
 
-The \verb{annotation_*()} and \verb{set_annotation_*()} functions assign and retrieve
-values of the \code{"*_annotation"} attributes of \code{x}, which should have the same
-number of rows as \code{get_*(x)}.
+The unexported \verb{annotation_*()} and \verb{set_annotation_*()} functions assign and
+retrieve values of the \code{"*_annotation"} attributes of \code{x}, which must have
+the same number of rows as \code{get_*(x)}.
 }
 \seealso{
 \link{augmentation} methods that must interface with annotation.

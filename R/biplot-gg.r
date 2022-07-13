@@ -58,8 +58,8 @@
 #'   factors.
 #' @param ... Additional arguments passed to [ggplot2::fortify()]; see
 #'   [fortify.tbl_ord()].
-#' @example inst/examples/ex-biplot-secaxis-iris.r
-#' @example inst/examples/ex-biplot-lm-mtcars.r
+#' @example inst/examples/ex-ggbiplot-secaxis-iris.r
+#' @example inst/examples/ex-ggbiplot-lm-mtcars.r
 #' @seealso [ggplot2::ggplot2()], on which `ggbiplot()` is built.
 
 #' @rdname ggbiplot
@@ -85,7 +85,13 @@ ggbiplot <- function(
   
   # augment `mapping`, if necessary, with default coordinates
   mapping <- ensure_xy_aes(ordination, mapping)
-  
+  # augment `mapping`, if necessary, with `.supplement`
+  if (! is.null(ordination)) {
+    if (! ".supplement" %in% names(ordination)) ordination$.supplement <- FALSE
+    mapping <- c(mapping, aes(.supplement = !! ".supplement"))
+    class(mapping) <- "uneval"
+  }
+
   # scale 'rows' or 'cols' as indicated by `scale_rows` and `scale_cols`
   if (! is.null(scale_rows) && ! is.null(ordination)) {
     ordination <- scale_ord(ordination, "rows", mapping, scale_rows)
@@ -115,12 +121,15 @@ ggbiplot <- function(
       scale.factor <- min(ps_lim[[1]] / ps_lim[[2]])
     }
     
-    if (! is.null(ordination)) ordination <- dplyr::mutate_at(
+    # rescale any shared coordinates present
+    if (! is.null(ordination)) ordination <- dplyr::mutate(
       ordination,
-      dplyr::vars(get_coord(ordination)),
-      list(~ ifelse(ordination$.matrix == sec.axes, . * scale.factor, .))
+      dplyr::across(
+        tidyselect::any_of(get_coord(ordination)),
+        ~ ifelse(ordination$.matrix == sec.axes, . * scale.factor, .)
+      )
     )
-    
+
   }
   
   # conventional `ggplot()` call
@@ -200,10 +209,13 @@ ensure_xy_aes <- function(ordination, mapping) {
 # use `.m` to avoid conflict with '.matrix' column in `ordination`
 scale_ord <- function(ordination, .m, mapping, scale) {
   if (is.character(scale)) scale <- ordination[[scale]]
-  dplyr::mutate_at(
+  ord_vars <- stringr::str_remove(as.character(mapping[c("x", "y")]), "^~")
+  dplyr::mutate(
     ordination,
-    dplyr::vars(stringr::str_remove(as.character(mapping[c("x", "y")]), "^~")),
-    list(~ ifelse(ordination$.matrix == .m, . * scale, .))
+    dplyr::across(
+      tidyselect::all_of(ord_vars),
+      ~ ifelse(ordination$.matrix == .m, . * scale, .)
+    )
   )
 }
 

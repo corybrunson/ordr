@@ -3,33 +3,9 @@
 \name{methods-prcomp}
 \alias{methods-prcomp}
 \alias{as_tbl_ord.prcomp}
-\alias{recover_rows.prcomp}
-\alias{recover_cols.prcomp}
-\alias{recover_inertia.prcomp}
-\alias{recover_coord.prcomp}
-\alias{recover_conference.prcomp}
-\alias{augmentation_rows.prcomp}
-\alias{augmentation_cols.prcomp}
-\alias{augmentation_coord.prcomp}
 \title{Functionality for principal components analysis ('prcomp') objects}
 \usage{
 \method{as_tbl_ord}{prcomp}(x)
-
-\method{recover_rows}{prcomp}(x)
-
-\method{recover_cols}{prcomp}(x)
-
-\method{recover_inertia}{prcomp}(x)
-
-\method{recover_coord}{prcomp}(x)
-
-\method{recover_conference}{prcomp}(x)
-
-\method{augmentation_rows}{prcomp}(x)
-
-\method{augmentation_cols}{prcomp}(x)
-
-\method{augmentation_coord}{prcomp}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
@@ -47,36 +23,23 @@ iris[, -5] \%>\%
   prcomp(scale = TRUE) \%>\%
   as_tbl_ord() \%>\%
   print() -> iris_pca
-# summarize ordination
-glance(iris_pca)
-# bind species classification to observation coordinates
-(iris_pca <- mutate_rows(iris_pca, species = iris$Species))
 # recover observation principal coordinates and measurement standard coordinates
 head(get_rows(iris_pca))
 get_cols(iris_pca)
 # augment measurements with names and scaling parameters
 (iris_pca <- augment_ord(iris_pca))
-# summarize principal components
-tidy(iris_pca)
-# scree plot of proportion of variance (inertia)
-tidy(iris_pca) \%>\%
-  ggplot(aes(x = .name, y = .prop_var)) +
-  theme_bw() +
-  scale_y_continuous(labels = scales::percent) +
-  geom_col() +
-  labs(x = "", y = "Proportion of inertia")
-# fortification adds all above columns
-fortify(iris_pca)
-# row-principal biplot
-iris_pca \%>\%
-  augment_ord() \%>\%
-  ggbiplot() +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_cols_axis(aes(label = .name, center = .center, scale = .scale)) +
-  geom_rows_point(aes(color = species), alpha = .5) +
-  ggtitle("Row-principal PCA biplot of Anderson iris measurements")
+}
+\seealso{
+Other methods for singular value decomposition-based techniques: 
+\code{\link{methods-cancor}},
+\code{\link{methods-ca}},
+\code{\link{methods-lda}},
+\code{\link{methods-lra}},
+\code{\link{methods-mjca}},
+\code{\link{methods-princomp}},
+\code{\link{methods-svd}}
 }
 \author{
 Emily Paul
 }
+\concept{methods for singular value decomposition-based techniques}

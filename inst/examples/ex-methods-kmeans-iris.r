@@ -20,8 +20,6 @@ iris %>%
   scale_color_brewer(type = "qual", name = "cluster")
 # wrap as a 'tbl_ord' object
 (iris_km_ord <- as_tbl_ord(iris_km))
-# summarize ordination
-glance(iris_km_ord)
 # augment everything with names, observations with cluster assignment
 (iris_km_ord <- augment_ord(iris_km_ord))
 # summarize clusters with standard deviation

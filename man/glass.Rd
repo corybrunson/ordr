@@ -4,19 +4,68 @@
 \alias{glass}
 \title{Glass composition data}
 \format{
-A \link[tibble:tibble]{tibble}.
+A \link[tibble:tibble]{tibble} with 68 cases and 16 variables:
+\describe{
+\item{Site}{site at which sample was found}
+\item{Anal}{analysis identifier}
+\item{Context}{furnace identifier}
+\item{Form}{type of sample}
+\item{SiO2, TiO2, Al2O3, FeO, MnO, MgO, CaO, Na2O, K2O, P2O5, Cl, SO3}{
+normalized weight percent oxide of each component}
+}
 }
 \source{
-Baxter & Freestone (2006).
+Freestone &al (2000), Table 2.
 }
 \usage{
 data(glass)
 }
 \description{
-Sites, artifacts, and amounts of several components of the sand
-from archaeological sites in Israel.
+Sites, types, and compositions of glass samples from
+archaeological sites in Israel.
+}
+\details{
+Chunks of unformed glass from several furnaces found at the primary
+Byzantine-era site of Bet Eli'ezer, along with samples from other sites with
+weaker evidence of glass-making (Apollonia and Dor) and and from an
+Islamic-era site (Banias), were analyzed using X-ray spectrometry to
+determine their major components.
+
+Baxter & Freestone (2006) used these data to illustrate \link[=lra-ord]{log-ratio analysis}.
+}
+\examples{
+# subset glass data to one site and major components
+head(glass)
+glass_main <- subset(
+  glass,
+  Site == "Bet Eli'ezer",
+  select = c("SiO2", "Na2O", "CaO", "Al2O3", "MgO", "K2O")
+)
+# format as a data frame with row names
+glass_main <- as.data.frame(glass_main)
+rownames(glass_main) <- subset(glass, Site == "Bet Eli'ezer")$Anal
+# perform log-ratio analysis
+glass_lra <- lra(glass_main, compositional = TRUE, weighted = FALSE)
+# inspect LRA row and column coordinates
+head(glass_lra$row.coords)
+glass_lra$column.coords
+# inspect singular values of LRA
+glass_lra$sv
+# plot samples and measurements in a biplot
+biplot(
+  x = glass_lra$row.coords \%*\% diag(glass_lra$sv),
+  y = glass_lra$column.coords,
+  xlab = "Sample (principal coord.)",
+  ylab = "Component (standard coord.)"
+)
 }
 \references{
+Freestone IC, Gorin-Rosen Y, Hughes MJ (2000) "Primary glass from Israel and
+the production of glass in Late Antiquity and the early Islamic period". \emph{La
+route du verre: Ateliers primaires et secondaires du second millénaire av.
+J.-C. au Moyen Âge}: 65--83.
+\url{http://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&idt=1158762}
+
 Baxter MJ & Freestone IC (2006) "Log-Ratio Compositional Data Analysis in
 Archaeometry". \emph{Archaeometry}, \strong{48}(3): 511--531.
 \doi{10.1111/j.1475-4754.2006.00270.x}

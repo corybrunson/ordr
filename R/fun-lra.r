@@ -35,7 +35,7 @@
 #' @param x A numeric matrix or rectangular data set.
 #' @param compositional Logical; whether to normalize rows of `x` to sum to 1.
 #' @param weighted Logical; whether to weight rows and columns by their sums.
-#' @example inst/examples/ex-fun-lra-.r
+#' @example inst/examples/ex-fun-lra-arrests.r
 NULL
 
 #' @rdname lra-ord

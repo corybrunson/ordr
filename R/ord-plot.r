@@ -8,15 +8,15 @@
 #' These methods defer to any `plot()` and `biplot()` methods for the original,
 #' underlying model classes of 'tbl_ord' objects. If none are found: Following
 #' the examples of [stats::plot.prcomp()] and [stats::plot.princomp()],
-#' `plot.tbl_ord()` calls on [recover_inertia()] and [stats::screeplot()] to
-#' produce a scree plot of the decomposition of variance in the singular value
-#' decomposition. Similarly following [stats::biplot.prcomp()] and
-#' [stats::biplot.princomp()], `biplot.tbl_ord()` produces a biplot of both rows
-#' and columns, using text labels when available and markers otherwise, with
-#' rows and columns distinguished by color and no additional annotation (e.g.
-#' vectors). The biplot confers inertia according to [get_conference()] unless
-#' the proportions do not sum to 1, in which case it produces a symmetric biplot
-#' (inertia conferred equally to rows and columns).
+#' `plot.tbl_ord()` calls on [stats::screeplot()] to produce a scree plot of the
+#' decomposition of variance in the singular value decomposition. Similarly
+#' following [stats::biplot.prcomp()] and [stats::biplot.princomp()],
+#' `biplot.tbl_ord()` produces a biplot of both rows and columns, using text
+#' labels when available and markers otherwise, with rows and columns
+#' distinguished by color and no additional annotation (e.g. vectors). The
+#' biplot confers inertia according to [get_conference()] unless the proportions
+#' do not sum to 1, in which case it produces a symmetric biplot (inertia
+#' conferred equally to rows and columns).
 #'
 #' @include ord-tbl.r
 #' @importFrom graphics plot
@@ -68,7 +68,9 @@ biplot.tbl_ord <- function(x, main = deparse(substitute(x)), ...) {
   }
   # if default conference does not support a biplot interpretation, then confer
   # inertia symmetrically
-  if (sum(recover_conference(x)) != 1 && is.null(attr(x, "confer")))
+  if (! is.null(recover_conference(x)) &&
+      sum(recover_conference(x)) != 1 &&
+      is.null(attr(x, "confer")))
     x <- confer_inertia(x, p = .5)
   biplot.default(
     x = get_rows(x), y = get_cols(x),
