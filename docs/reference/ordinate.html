@@ -212,6 +212,28 @@ included in <code>cols</code> will be augmented.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.997  -<span style="color: #BB0000;">0.031</span><span style="color: #BB0000; text-decoration: underline;">3</span> | <span style="color: #BCBCBC;">4</span> Education             0.005 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.124</span>   0.961  | <span style="color: #BCBCBC;">5</span> Catholic              0.060<span style="text-decoration: underline;">7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> -<span style="color: #BB0000;">0.094</span><span style="color: #BB0000; text-decoration: underline;">7</span>  0.175  | <span style="color: #BCBCBC;">6</span> Infant.Mortality      0.960 </span>
+<span class="r-in"><span><span class="co"># LDA of iris data</span></span></span>
+<span class="r-in"><span><span class="fu">ordinate</span><span class="op">(</span><span class="va">iris</span>, model <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="lda-ord.html">lda_ord</a></span><span class="op">(</span><span class="va">.</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="va">.</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span>, ret.x <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'lda_ord': (153 x 2) x (4 x 2)'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # 2 coordinates: LD1 and LD2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 153 x 2 | 4 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     LD1    LD2 |   .name   .prior .counts .supplement</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  7.61  0.215 | <span style="color: #BCBCBC;">1</span> setosa   0.333      50 FALSE      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">1.83</span> -<span style="color: #BB0000;">0.728</span> | <span style="color: #BCBCBC;">2</span> versic…  0.333      50 FALSE      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">5.78</span>  0.513 | <span style="color: #BCBCBC;">3</span> virgin…  0.333      50 FALSE      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  8.06  0.300 | <span style="color: #BCBCBC;">4</span> <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span> TRUE       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  7.13 -<span style="color: #BB0000;">0.787</span> | <span style="color: #BCBCBC;">5</span> <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span> TRUE       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 148 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 2 | 1 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      LD1     LD2 |   .name       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.829  0.024<span style="text-decoration: underline;">1</span> | <span style="color: #BCBCBC;">1</span> Sepal.Length</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  1.53   2.16   | <span style="color: #BCBCBC;">2</span> Sepal.Width </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">2.20</span>  -<span style="color: #BB0000;">0.932</span>  | <span style="color: #BCBCBC;">3</span> Petal.Length</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">2.81</span>   2.84   | <span style="color: #BCBCBC;">4</span> Petal.Width </span>
 </code></pre></div>
     </div>
   </div>
