@@ -36,6 +36,7 @@ Suggests:
     ca,
     MASS,
     candisc,
+    mlpack,
     vegan,
     igraph,
     igraphdata,
