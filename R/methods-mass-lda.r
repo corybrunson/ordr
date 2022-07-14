@@ -95,12 +95,13 @@ augmentation_rows.lda <- function(x) {
   olddata <- try(recover_olddata_lda(x), silent = TRUE)
   if (inherits(olddata, "try-error")) {
     warning("Could not locate data used to fit '", deparse(substitute(x)), "'.")
-    return(res)
   }
   grouping <- try(recover_grouping_lda(x), silent = TRUE)
   res_sup <- if (is.null(rownames(olddata))) {
     if (inherits(grouping, "try-error")) {
-      tibble_pole(nrow = x$N)
+      as.data.frame(`colnames<-`(
+        matrix(NA_real_, nrow = x$N, ncol = 2L), get_coord(x)
+      ))
     } else {
       tibble(.grouping = grouping)
     }
@@ -137,14 +138,15 @@ augmentation_rows.lda_ord <- function(x) {
   if (inherits(olddata, "try-error") |
       (! is.matrix(olddata) & ! is.data.frame(olddata))) {
     warning("Could not locate data used to fit '", deparse(substitute(x)), "'.")
-    return(res)
   }
   grouping <- if (is.null(attr(x, "grouping"))) {
     try(recover_grouping_lda(x), silent = TRUE)
   } else attr(x, "grouping")
   res_sup <- if (is.null(rownames(olddata))) {
     if (inherits(grouping, "try-error")) {
-      tibble_pole(nrow = x$N)
+      as.data.frame(`colnames<-`(
+        matrix(NA_real_, nrow = x$N, ncol = 2L), get_coord(x)
+      ))
     } else {
       tibble(.grouping = grouping)
     }
