@@ -83,12 +83,12 @@ recover_cols.data.frame <- function(x) {
 #' @export
 get_rows <- function(x, elements = "all") {
   elements <- match.arg(elements, c("all", "active", "supplementary"))
-  u <- recover_rows(x)
-  if (elements == "supplementary") {
-    u <- supplementation_rows(x)
-  } else if (elements == "all") {
-    u <- rbind(u, supplementation_rows(x))
-  }
+  u <- switch(
+    elements,
+    all = rbind(recover_rows(x), supplementation_rows(x)),
+    active = recover_rows(x),
+    supplementary = supplementation_rows(x)
+  )
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     i <- recover_inertia(x)
@@ -97,19 +97,19 @@ get_rows <- function(x, elements = "all") {
     dimnames(s) <- rep(list(recover_coord(x)), 2L)
     u <- u %*% s
   }
-  return(u)
+  u
 }
 
 #' @rdname accessors
 #' @export
 get_cols <- function(x, elements = "all") {
   elements <- match.arg(elements, c("all", "active", "supplementary"))
-  v <- recover_cols(x)
-  if (elements == "supplementary") {
-    v <- supplementation_cols(x)
-  } else if (elements == "all") {
-    v <- rbind(v, supplementation_cols(x))
-  }
+  v <- switch(
+    elements,
+    all = rbind(recover_cols(x), supplementation_cols(x)),
+    active = recover_cols(x),
+    supplementary = supplementation_cols(x)
+  )
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     i <- recover_inertia(x)
@@ -118,7 +118,7 @@ get_cols <- function(x, elements = "all") {
     dimnames(s) <- rep(list(recover_coord(x)), 2L)
     v <- v %*% s
   }
-  return(v)
+  v
 }
 
 get_factor <- function(x, .matrix, elements = "all") {

@@ -24,7 +24,10 @@
 #' @template param-matrix
 
 pull_factor <- function(.data, var = -1, .matrix) {
-  pull(annotation_factor(.data, .matrix = .matrix), !! enquo(var))
+  crd <- as_tibble(get_factor(.data, .matrix = .matrix))
+  att <- annotation_factor(.data, .matrix = .matrix)
+  tbl <- bind_cols(crd, att)
+  pull(tbl, !! enquo(var))
 }
 #' @rdname dplyr-verbs
 #' @export
@@ -107,15 +110,13 @@ transmute_cols <- function(.data, ...) {
 
 cbind_factor <- function(.data, ..., .matrix, elements = "all") {
   ann_fac <- annotation_factor(.data, .matrix = .matrix)
-  att_fac <- if (elements == "all" || ! ".supplement" %in% names(.data)) {
+  att_fac <- if (elements == "all" || ! ".supplement" %in% names(ann_fac)) {
     tibble(...)
   } else if (elements == "supplementary") {
-    n_p <- nrow(.data[.data$.matrix == .matrix & .data$.supplement == FALSE,
-                      , drop = FALSE])
+    n_p <- nrow(ann_fac[ann_fac$.supplement == FALSE, , drop = FALSE])
     bind_rows(tibble_pole(nrow = n_p), ...)
   } else if (elements == "active") {
-    n_s <- nrow(.data[.data$.matrix == .matrix & .data$.supplement == TRUE,
-                      , drop = FALSE])
+    n_s <- nrow(ann_fac[ann_fac$.supplement == TRUE, , drop = FALSE])
     bind_rows(..., tibble_pole(nrow = n_s))
   }
   att <- if (nrow(ann_fac) == 0L) att_fac else bind_cols(ann_fac, att_fac)
@@ -124,12 +125,12 @@ cbind_factor <- function(.data, ..., .matrix, elements = "all") {
 #' @rdname dplyr-verbs
 #' @export
 cbind_rows <- function(.data, ..., elements = "all") {
-  cbind_factor(.data, ..., .matrix = "rows", elements = "all")
+  cbind_factor(.data, ..., .matrix = "rows", elements = elements)
 }
 #' @rdname dplyr-verbs
 #' @export
 cbind_cols <- function(.data, ..., elements = "all") {
-  cbind_factor(.data, ..., .matrix = "cols", elements = "all")
+  cbind_factor(.data, ..., .matrix = "cols", elements = elements)
 }
 
 left_join_factor <- function(.data, ..., .matrix) {

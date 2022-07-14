@@ -92,12 +92,12 @@ augmentation_rows.lda <- function(x) {
     .counts = x$counts
   )
   # discriminant scores as supplementary points
-  olddata <- try(recover_olddata_lda(x))
+  olddata <- try(recover_olddata_lda(x), silent = TRUE)
   if (inherits(olddata, "try-error")) {
     warning("Could not locate data used to fit '", deparse(substitute(x)), "'.")
     return(res)
   }
-  grouping <- try(recover_grouping_lda(x))
+  grouping <- try(recover_grouping_lda(x), silent = TRUE)
   res_sup <- if (is.null(rownames(olddata))) {
     if (inherits(grouping, "try-error")) {
       tibble_pole(nrow = x$N)
@@ -132,7 +132,7 @@ augmentation_rows.lda_ord <- function(x) {
   )
   # discriminant scores as supplementary points
   olddata <- if (is.null(attr(x, "x"))) {
-    try(recover_olddata_lda(x))
+    try(recover_olddata_lda(x), silent = TRUE)
   } else attr(x, "x")
   if (inherits(olddata, "try-error") |
       (! is.matrix(olddata) & ! is.data.frame(olddata))) {
@@ -140,7 +140,7 @@ augmentation_rows.lda_ord <- function(x) {
     return(res)
   }
   grouping <- if (is.null(attr(x, "grouping"))) {
-    try(recover_grouping_lda(x))
+    try(recover_grouping_lda(x), silent = TRUE)
   } else attr(x, "grouping")
   res_sup <- if (is.null(rownames(olddata))) {
     if (inherits(grouping, "try-error")) {
@@ -193,12 +193,12 @@ augmentation_coord.lda_ord <- augmentation_coord.lda
 #' @export
 supplementation_rows.lda <- function(x) {
   olddata <- if (is.null(attr(x, "x"))) {
-    try(recover_olddata_lda(x))
+    try(recover_olddata_lda(x), silent = TRUE)
   } else attr(x, "x")
   if (inherits(olddata, "try-error") |
       (! is.matrix(olddata) & ! is.data.frame(olddata))) {
     warning("Could not locate data used to fit '", deparse(substitute(x)), "'.")
-    return(NULL)
+    return(`colnames<-`(matrix(NA_real_, nrow = x$N, ncol = 2L), get_coord(x)))
   }
   centroid <- colSums(x$prior * x$means)
   scale(olddata, center = centroid, scale = FALSE) %*% x$scaling

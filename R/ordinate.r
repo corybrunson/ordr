@@ -64,7 +64,15 @@ ordinate <- function(
   # augment ordination with model specs
   ord <- augment_ord(ord)
   # bind augmentation columns to row data
-  if (! is_empty(data_aug)) ord <- cbind_rows(ord, data_aug)
+  if (! is_empty(data_aug)) {
+    ord <- if (nrow(data_aug) == nrow(ord)) {
+      cbind_rows(ord, data_aug)
+    } else if (nrow(data_aug) == nrow(get_rows(ord, elements = "active"))) {
+      cbind_rows(ord, data_aug, elements = "active")
+    } else if (nrow(data_aug) == nrow(get_rows(ord, elements = "supp"))) {
+      cbind_rows(ord, data_aug, elements = "supplementary")
+    }
+  }
   
   ord
 }
