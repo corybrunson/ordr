@@ -7,8 +7,20 @@ Authors@R: c(
   person("Emily", "Paul", email = "erpb.71@gmail.com",
     role = "ctb")
   )
-Description: A unified framework for ordination objects and biplot methods using
-    tidy principles.
+Description: Ordination (Podani) comprises several multivariate exploratory and explanatory
+techniques with theoretial foundations in geometric data analysis (Le Roux).
+The most popular and established of these,
+including principal components analysis, correspondence analysis,
+multidimensional scaling, factor analysis, and discriminant analysis,
+rely on eigen-decompositions or singular value decompositions
+of pre-processed numeric matrix data ().
+These decompositions give rise to a set of
+shared ('artificial' or 'latent') coordinates along which
+the row and column elements can be measured,
+and the overlay of their scatterplots on these shared axes is called a biplot (Gabriel).
+'ordr' provides inspection, extraction, manipulation, and visualization tools
+for several popular ordination classes supported by a set of accessor methods.
+It is inspired by and designed to interface naturally with 'tidyverse' workflows (Wickham).
 Depends:
     R (>= 3.3.0),
     ggplot2
