@@ -1,8 +1,9 @@
-#' @title Functionality for canonical correlation ('cancor') objects
+#' @title Functionality for canonical correlation ('cancor') and discriminant
+#'   ('candisc') objects
 #'
 #' @description These methods extract data from, and attribute new data to,
-#'   objects of class 'cancor' from the **[candisc][candisc::candisc-package]**
-#'   package.
+#'   objects of class 'cancor' and 'candisc' from the
+#'   **[candisc][candisc::candisc-package]** package.
 #'
 #' @details
 #'
@@ -24,18 +25,18 @@
 #' @template ref-braak1990
 #'   
 
-#' @name methods-cancor
+#' @name methods-candisc
 #' @include ord-tbl.r
 #' @template param-methods
 #' @family methods for singular value decomposition-based techniques
-#' @example inst/examples/ex-methods-cancor-savings.r
+#' @example inst/examples/ex-methods-candisc-savings.r
 NULL
 
-#' @rdname methods-cancor
+#' @rdname methods-candisc
 #' @export
 as_tbl_ord.cancor <- as_tbl_ord_default
 
-#' @rdname methods-cancor
+#' @rdname methods-candisc
 #' @export
 recover_rows.cancor <- function(x) {
   res <- x$structure$X.xscores
@@ -43,7 +44,7 @@ recover_rows.cancor <- function(x) {
   res
 }
 
-#' @rdname methods-cancor
+#' @rdname methods-candisc
 #' @export
 recover_cols.cancor <- function(x) {
   res <- x$structure$Y.yscores
@@ -51,22 +52,22 @@ recover_cols.cancor <- function(x) {
   res
 }
 
-#' @rdname methods-cancor
+#' @rdname methods-candisc
 #' @export
 recover_inertia.cancor <- function(x) x$cancor^2
 
-#' @rdname methods-cancor
+#' @rdname methods-candisc
 #' @export
 recover_coord.cancor <- function(x) paste0("can", seq_along(x$cancor))
 
-#' @rdname methods-cancor
+#' @rdname methods-candisc
 #' @export
 recover_conference.cancor <- function(x) {
   # `x$structure$*` are structure correlations; rows grab intraset ones
   c(0, 0)
 }
 
-#' @rdname methods-cancor
+#' @rdname methods-candisc
 #' @export
 augmentation_rows.cancor <- function(x) {
   .name <- x$names$X
@@ -88,7 +89,7 @@ augmentation_rows.cancor <- function(x) {
   as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
-#' @rdname methods-cancor
+#' @rdname methods-candisc
 #' @export
 augmentation_cols.cancor <- function(x) {
   .name <- x$names$Y
@@ -110,7 +111,7 @@ augmentation_cols.cancor <- function(x) {
   as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
-#' @rdname methods-cancor
+#' @rdname methods-candisc
 #' @export
 augmentation_coord.cancor <- function(x) {
   tibble(
@@ -119,10 +120,10 @@ augmentation_coord.cancor <- function(x) {
   )
 }
 
-#' @rdname methods-cancor
+#' @rdname methods-candisc
 #' @export
 supplementation_rows.cancor <- function(x) x$scores$X
 
-#' @rdname methods-cancor
+#' @rdname methods-candisc
 #' @export
 supplementation_cols.cancor <- function(x) x$scores$Y

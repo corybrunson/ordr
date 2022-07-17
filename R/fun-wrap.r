@@ -16,6 +16,7 @@
 #' | [base::eigen()]                    | Yes         | Yes       | Yes       |
 #' | [base::svd()]                      | Yes         | Yes       | Yes       |
 #' | [stats::cmdscale()]                | Yes         | No        | Yes       |
+#' | [stats::cancor()]                  | No          | No        | Yes       |
 
 #' @name wrap-ord
 #' @include ord-tbl.r
@@ -23,6 +24,7 @@
 #' @inheritParams base::eigen
 #' @inheritParams base::svd
 #' @inheritParams stats::cmdscale
+#' @inheritParams stats::cancor
 #' @example inst/examples/ex-fun-wrap-glass.r
 NULL
 
@@ -53,5 +55,13 @@ svd_ord <- function(x, nu = min(dim(x)), nv = min(dim(x))) {
 cmdscale_ord <- function(d, k = 2, add = FALSE) {
   res <- stats::cmdscale(d, k = k, eig = TRUE, add = add, x.ret = TRUE)
   class(res) <- "cmds_ord"
+  res
+}
+
+#' @rdname wrap-ord
+#' @export
+cancor_ord <- function(x, y, xcenter = TRUE, ycenter = TRUE) {
+  res <- stats::cancor(x, y, xcenter = xcenter, ycenter = ycenter)
+  class(res) <- "cancor_ord"
   res
 }

@@ -56,7 +56,7 @@ get_cols(haireye_ca)
 }
 \seealso{
 Other methods for singular value decomposition-based techniques: 
-\code{\link{methods-cancor}},
+\code{\link{methods-candisc}},
 \code{\link{methods-lda}},
 \code{\link{methods-lra}},
 \code{\link{methods-mjca}},

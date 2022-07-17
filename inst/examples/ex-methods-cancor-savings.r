@@ -2,23 +2,21 @@
 class(LifeCycleSavings)
 head(LifeCycleSavings)
 # canonical correlation analysis of age distributions and financial factors
-savings_cancor <- candisc::cancor(
+savings_cancor <- cancor_ord(
   LifeCycleSavings[, c("pop15", "pop75")],
   LifeCycleSavings[, c("sr", "dpi", "ddpi")]
 )
 # wrap as a 'tbl_ord' object
 (savings_cancor <- as_tbl_ord(savings_cancor))
 # recover canonical weights
-get_rows(savings_cancor, elements = "active")
-get_cols(savings_cancor, elements = "active")
-head(get_rows(savings_cancor))
-head(get_cols(savings_cancor))
+get_rows(savings_cancor)
+get_cols(savings_cancor)
 # augment canonical weights with row names and centers
 (savings_cancor <- augment_ord(savings_cancor))
 # row-standard biplot of structure correlations
 savings_cancor %>%
   confer_inertia("cols") %>%
-  ggbiplot(aes(label = .name, color = .matrix), elements = "active") +
+  ggbiplot(aes(label = .name, color = .matrix)) +
   theme_bw() +
   geom_origin() +
   geom_unit_circle(linetype = "dotted") +
@@ -31,7 +29,7 @@ savings_cancor %>%
 # column-standard biplot of structure correlations
 savings_cancor %>%
   confer_inertia("rows") %>%
-  ggbiplot(aes(label = .name, color = .matrix), elements = "active") +
+  ggbiplot(aes(label = .name, color = .matrix)) +
   theme_bw() +
   geom_origin() +
   geom_unit_circle(linetype = "dotted") +

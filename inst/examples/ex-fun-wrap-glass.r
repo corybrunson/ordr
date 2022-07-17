@@ -11,3 +11,12 @@ eigen_ord(glass_cov)
 svd_ord(glass_banias)
 # classical multidimensional scaling of a distance matrix
 cmdscale_ord(dist(glass_banias))
+# canonical correlation analysis with trace components
+glass_banias_minor <- subset(
+  glass,
+  Context == "L.15;B.166",
+  select = c("TiO2", "FeO", "MnO", "P2O5", "Cl", "SO3")
+)
+# impute half of detection threshold
+glass_banias_minor$TiO2[[1L]] <- 0.5
+cancor_ord(glass_banias, glass_banias_minor)
