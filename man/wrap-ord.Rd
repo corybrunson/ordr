@@ -14,7 +14,7 @@ svd_ord(x, nu = min(dim(x)), nv = min(dim(x)))
 
 cmdscale_ord(d, k = 2, add = FALSE)
 
-cancor_ord(x, y, xcenter = TRUE, ycenter = TRUE)
+cancor_ord(x, y, xcenter = TRUE, ycenter = TRUE, scores = FALSE)
 }
 \arguments{
 \item{x}{a numeric or complex matrix whose spectral decomposition is to
@@ -60,13 +60,23 @@ given row or column names to be used by them, and new '*_ord' S3 class
 attributes are added to enable them.
 }
 \details{
-The following table summarizes the wrapped functions:\tabular{llll}{
-   Original function \tab Hide params \tab Add names \tab New class \cr
-   \code{\link[base:eigen]{base::eigen()}} \tab Yes \tab Yes \tab Yes \cr
-   \code{\link[base:svd]{base::svd()}} \tab Yes \tab Yes \tab Yes \cr
-   \code{\link[stats:cmdscale]{stats::cmdscale()}} \tab Yes \tab No \tab Yes \cr
-   \code{\link[stats:cancor]{stats::cancor()}} \tab No \tab No \tab Yes \cr
+The following table summarizes the wrapped functions:\tabular{lllll}{
+   Original function \tab Hide params \tab New params \tab Add names \tab New class \cr
+   \code{\link[base:eigen]{base::eigen()}} \tab Yes \tab No \tab Yes \tab Yes \cr
+   \code{\link[base:svd]{base::svd()}} \tab Yes \tab No \tab Yes \tab Yes \cr
+   \code{\link[stats:cmdscale]{stats::cmdscale()}} \tab Yes \tab No \tab No \tab Yes \cr
+   \code{\link[stats:cancor]{stats::cancor()}} \tab No \tab Yes \tab No \tab Yes \cr
 }
+
+
+By default, \code{\link[=cancor_ord]{cancor_ord()}} returns the same data as \code{\link[stats:cancor]{stats::cancor()}}: the
+canonical correlations (\code{cor}), the canonical coefficients (\verb{$xcoef} and
+\verb{$ycoef}), and the variable means (\verb{$xcenter}, \verb{$ycenter}). If \code{scores = TRUE}, then \code{\link[=cancor_ord]{cancor_ord()}} also returns the scores \verb{$xscores} and \verb{$yscores}
+calculated from the (appropriately centered) data and the coefficients and
+the four sets of structure correlations \verb{$x.xscores}, etc. between these and
+the data. These modifications are inspired by \code{\link[candisc:cancor]{candisc::cancor()}}, though it
+should be noted that the canonical coefficients (hence the scores and the
+structure correlations) are scaled by \eqn{n - 1} compared to these.
 }
 \examples{
 # glass composition data from one furnace
@@ -91,4 +101,7 @@ glass_banias_minor <- subset(
 # impute half of detection threshold
 glass_banias_minor$TiO2[[1L]] <- 0.5
 cancor_ord(glass_banias, glass_banias_minor)
+}
+\seealso{
+\code{\link[candisc:cancor]{candisc::cancor()}}
 }

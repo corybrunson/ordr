@@ -52,7 +52,7 @@ correspondence analysis of data matrices \eqn{X} and \eqn{Y}. For the first,
 using structural correlations, either the interset correlations of \eqn{X}
 (equivalent to principal coordinates) are plotted with the intraset
 correlations of \eqn{Y} (standard coordinates) or vice-versa, so that their
-product recovers the correlation matrix \eqn{XY'}. Where \code{cc} is the output
+product recovers the inner product matrix \eqn{XY'}. Where \code{cc} is the output
 of \code{\link[candisc:cancor]{candisc::cancor()}} on centered and scaled data matrices, these are
 obtained from \code{cc$structure}. For consistency with the canonical variate
 scores \code{cc$scores} available as supplementary points, \strong{ordr} takes rows and

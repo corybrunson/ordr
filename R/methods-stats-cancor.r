@@ -5,6 +5,24 @@
 #'   to identify objects returned by [cancor_ord()], which wraps
 #'   [stats::cancor()].
 #'
+#' @details
+#'
+#' The canonical coefficients (loadings) are obtained directly from the
+#' underlying singular value decomposition and constitute the active elements.
+#' If scores are returned, then they are made available as supplementary
+#' elements.
+#'
+#' A biplot of the canonical coefficients can be interpreted as approximating
+#' the \eqn{X}-\eqn{Y} covariance matrix, inversely weighted by the \eqn{X} and
+#' \eqn{Y} variances. A biplot of the canonical scores of one matrix, available
+#' as supplementary points if returned by [cancor_ord()], and the coefficients
+#' of the other can be interpreted as .... Both biplots can have inertia
+#' conferred to either or both factors. Greenacre (1984) describes both biplots,
+#' though ter Braak (1990) recommends against the former.
+#'
+#' @template ref-greenacre1984
+#' @template ref-braak1990
+#'
 #' @name methods-cancor
 #' @include ord-tbl.r
 #' @template param-methods
@@ -56,7 +74,28 @@ augmentation_rows.cancor_ord <- function(x) {
     tibble(.name = .name)
   }
   res$.center <- unname(x$xcenter)
-  res
+  # case scores and structure correlations as supplementary points
+  res_sup <- NULL
+  if (! is.null(x$xscores)) {
+    res_sup_elt <- if (is.null(rownames(x$xscores))) {
+      tibble_pole(nrow(x$xscores))
+    } else {
+      tibble(.name = rownames(x$xscores))
+    }
+    res_sup <- bind_rows(res_sup, res_sup_elt)
+  }
+  if (! is.null(x$x.xscores)) {
+    res_sup_elt <- if (is.null(rownames(x$x.xscores))) {
+      tibble_pole(nrow(x$x.xscores) + nrow(x$y.xscores))
+    } else {
+      tibble(.name = c(rownames(x$x.xscores), rownames(x$y.xscores)))
+    }
+    res_sup <- bind_rows(res_sup, res_sup_elt)
+  }
+  # supplement flag
+  res$.supplement <- FALSE
+  res_sup$.supplement <- TRUE
+  as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
 #' @rdname methods-cancor
@@ -69,7 +108,28 @@ augmentation_cols.cancor_ord <- function(x) {
     tibble(.name = .name)
   }
   res$.center <- unname(x$ycenter)
-  res
+  # case scores and structure correlations as supplementary points
+  res_sup <- NULL
+  if (! is.null(x$xscores)) {
+    res_sup_elt <- if (is.null(rownames(x$yscores))) {
+      tibble_pole(nrow(x$yscores))
+    } else {
+      tibble(.name = rownames(x$yscores))
+    }
+    res_sup <- bind_rows(res_sup, res_sup_elt)
+  }
+  if (! is.null(x$x.yscores)) {
+    res_sup_elt <- if (is.null(rownames(x$x.yscores))) {
+      tibble_pole(nrow(x$x.yscores) + nrow(x$y.yscores))
+    } else {
+      tibble(.name = c(rownames(x$x.yscores), rownames(x$y.yscores)))
+    }
+    res_sup <- bind_rows(res_sup, res_sup_elt)
+  }
+  # supplement flag
+  res$.supplement <- FALSE
+  res_sup$.supplement <- TRUE
+  as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
 #' @rdname methods-cancor
@@ -79,4 +139,16 @@ augmentation_coord.cancor_ord <- function(x) {
     .name = factor_coord(recover_coord(x)),
     .cor = x$cor
   )
+}
+
+#' @rdname methods-cancor
+#' @export
+supplementation_rows.cancor_ord <- function(x) {
+  rbind(x$xscores, x$x.xscores, x$y.xscores)
+}
+
+#' @rdname methods-cancor
+#' @export
+supplementation_cols.cancor_ord <- function(x) {
+  rbind(x$yscores, x$x.yscores, x$y.yscores)
 }

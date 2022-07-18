@@ -12,7 +12,7 @@
 #' using structural correlations, either the interset correlations of \eqn{X}
 #' (equivalent to principal coordinates) are plotted with the intraset
 #' correlations of \eqn{Y} (standard coordinates) or vice-versa, so that their
-#' product recovers the correlation matrix \eqn{XY'}. Where `cc` is the output
+#' product recovers the inner product matrix \eqn{XY'}. Where `cc` is the output
 #' of [candisc::cancor()] on centered and scaled data matrices, these are
 #' obtained from `cc$structure`. For consistency with the canonical variate
 #' scores `cc$scores` available as supplementary points, **ordr** takes rows and

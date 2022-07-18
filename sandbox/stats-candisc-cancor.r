@@ -1,10 +1,17 @@
+cancor
+candisc:::cancor.default
+
+center <- TRUE
+
 cca1 <- cancor_ord(
   LifeCycleSavings[, c("pop15", "pop75")],
-  LifeCycleSavings[, c("sr", "dpi", "ddpi")]
+  LifeCycleSavings[, c("sr", "dpi", "ddpi")],
+  xcenter = center, ycenter = center
 )
 cca2 <- candisc::cancor(
   LifeCycleSavings[, c("pop15", "pop75")],
-  LifeCycleSavings[, c("sr", "dpi", "ddpi")]
+  LifeCycleSavings[, c("sr", "dpi", "ddpi")],
+  xcenter = center, ycenter = center
 )
 cca2$coef$X / cca1$xcoef
 cca2$coef$Y / cca1$ycoef[, 1:2]
@@ -21,8 +28,14 @@ glass_banias_minor <- subset(
   select = c("TiO2", "FeO", "MnO", "P2O5", "Cl", "SO3")
 )
 nc <- 2L
-cca1 <- cancor_ord(glass_banias[, seq(nc)], glass_banias_minor[, seq(nc)])
-cca2 <- candisc::cancor(glass_banias[, seq(nc)], glass_banias_minor[, seq(nc)])
+cca1 <- cancor_ord(
+  glass_banias[, seq(nc)], glass_banias_minor[, seq(nc)],
+  xcenter = center, ycenter = center
+)
+cca2 <- candisc::cancor(
+  glass_banias[, seq(nc)], glass_banias_minor[, seq(nc)],
+  xcenter = center, ycenter = center
+)
 cca2$coef$X / cca1$xcoef
 cca2$coef$Y / cca1$ycoef
 # scale factor = 2.236068
