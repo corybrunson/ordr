@@ -51,6 +51,9 @@ cancor_ord(x, y, xcenter = TRUE, ycenter = TRUE, scores = FALSE)
     of values to be subtracted from the columns.}
 
 \item{ycenter}{analogous to \code{xcenter}, but for the y values.}
+
+\item{scores}{Logical; whether to return canonical scores and structure
+correlations.}
 }
 \description{
 These \verb{*_ord} functions wrap core R functions with modifications
@@ -75,8 +78,9 @@ canonical correlations (\code{cor}), the canonical coefficients (\verb{$xcoef} a
 calculated from the (appropriately centered) data and the coefficients and
 the four sets of structure correlations \verb{$x.xscores}, etc. between these and
 the data. These modifications are inspired by \code{\link[candisc:cancor]{candisc::cancor()}}, though it
-should be noted that the canonical coefficients (hence the scores and the
-structure correlations) are scaled by \eqn{n - 1} compared to these.
+should be noted that the canonical coefficients (hence the canonical scores)
+are scaled by \eqn{n - 1} compared to these, though the structure
+correlations are the same.
 }
 \examples{
 # glass composition data from one furnace

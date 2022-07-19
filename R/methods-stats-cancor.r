@@ -36,7 +36,7 @@ as_tbl_ord.cancor_ord <- as_tbl_ord_default
 #' @rdname methods-cancor
 #' @export
 recover_rows.cancor_ord <- function(x) {
-  res <- x$xcoef[, seq_along(x$cor)]
+  res <- x$xcoef[, seq_along(x$cor), drop = FALSE]
   colnames(res) <- recover_coord(x)
   res
 }
@@ -44,7 +44,7 @@ recover_rows.cancor_ord <- function(x) {
 #' @rdname methods-cancor
 #' @export
 recover_cols.cancor_ord <- function(x) {
-  res <- x$ycoef[, seq_along(x$cor)]
+  res <- x$ycoef[, seq_along(x$cor), drop = FALSE]
   colnames(res) <- recover_coord(x)
   res
 }
@@ -94,7 +94,7 @@ augmentation_rows.cancor_ord <- function(x) {
   }
   # supplement flag
   res$.supplement <- FALSE
-  res_sup$.supplement <- TRUE
+  if (! is.null(res_sup)) res_sup$.supplement <- TRUE
   as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
@@ -128,7 +128,7 @@ augmentation_cols.cancor_ord <- function(x) {
   }
   # supplement flag
   res$.supplement <- FALSE
-  res_sup$.supplement <- TRUE
+  if (! is.null(res_sup)) res_sup$.supplement <- TRUE
   as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
@@ -144,11 +144,11 @@ augmentation_coord.cancor_ord <- function(x) {
 #' @rdname methods-cancor
 #' @export
 supplementation_rows.cancor_ord <- function(x) {
-  rbind(x$xscores, x$x.xscores, x$y.xscores)
+  rbind(x$xscores, x$x.xscores, x$y.xscores)[, seq_along(x$cor), drop = FALSE]
 }
 
 #' @rdname methods-cancor
 #' @export
 supplementation_cols.cancor_ord <- function(x) {
-  rbind(x$yscores, x$x.yscores, x$y.yscores)
+  rbind(x$yscores, x$x.yscores, x$y.yscores)[, seq_along(x$cor), drop = FALSE]
 }

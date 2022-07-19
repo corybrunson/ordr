@@ -25,8 +25,9 @@
 #' calculated from the (appropriately centered) data and the coefficients and
 #' the four sets of structure correlations `$x.xscores`, etc. between these and
 #' the data. These modifications are inspired by [candisc::cancor()], though it
-#' should be noted that the canonical coefficients (hence the scores and the
-#' structure correlations) are scaled by \eqn{n - 1} compared to these.
+#' should be noted that the canonical coefficients (hence the canonical scores)
+#' are scaled by \eqn{n - 1} compared to these, though the structure
+#' correlations are the same.
 #' 
 
 #' @name wrap-ord
@@ -36,6 +37,8 @@
 #' @inheritParams base::svd
 #' @inheritParams stats::cmdscale
 #' @inheritParams stats::cancor
+#' @param scores Logical; whether to return canonical scores and structure
+#'   correlations.
 #' @seealso [candisc::cancor()]
 #' @example inst/examples/ex-fun-wrap-glass.r
 NULL
@@ -77,10 +80,10 @@ cancor_ord <- function(x, y, xcenter = TRUE, ycenter = TRUE, scores = FALSE) {
   if (scores) {
     res$xscores <- scale(x, center = xcenter, scale = FALSE) %*% res$xcoef
     res$yscores <- scale(y, center = ycenter, scale = FALSE) %*% res$ycoef
-    res$x.xscores = cor(x, res$xscores)
-    res$y.xscores = cor(y, res$xscores)
-    res$x.yscores = cor(x, res$yscores)
-    res$y.yscores = cor(y, res$yscores)
+    res$x.xscores = stats::cor(x, res$xscores)
+    res$y.xscores = stats::cor(y, res$xscores)
+    res$x.yscores = stats::cor(x, res$yscores)
+    res$y.yscores = stats::cor(y, res$yscores)
   }
   class(res) <- "cancor_ord"
   res
