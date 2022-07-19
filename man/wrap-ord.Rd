@@ -96,6 +96,7 @@ eigen_ord(glass_cov)
 svd_ord(glass_banias)
 # classical multidimensional scaling of a distance matrix
 cmdscale_ord(dist(glass_banias))
+
 # canonical correlation analysis with trace components
 glass_banias_minor <- subset(
   glass,
@@ -105,6 +106,11 @@ glass_banias_minor <- subset(
 # impute half of detection threshold
 glass_banias_minor$TiO2[[1L]] <- 0.5
 cancor_ord(glass_banias, glass_banias_minor)
+# interset/intraset correlations as standard/principal coordinates
+glass_cca <-
+  cancor_ord(glass_banias[, 1:3], glass_banias_minor[, 1:3], scores = TRUE)
+glass_cca$x.xscores \%*\% diag(glass_cca$cor)
+glass_cca$x.yscores
 }
 \seealso{
 \code{\link[candisc:cancor]{candisc::cancor()}}

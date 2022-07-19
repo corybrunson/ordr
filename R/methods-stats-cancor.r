@@ -9,16 +9,22 @@
 #'
 #' The canonical coefficients (loadings) are obtained directly from the
 #' underlying singular value decomposition and constitute the active elements.
-#' If scores are returned, then they are made available as supplementary
-#' elements.
+#' If canonical scores are returned, then they and the structure correlations
+#' are made available as supplementary elements. **ordr** takes rows and columns
+#' from the intraset correlations `$x.xscores` and `$y.yscores`, on which no
+#' intertia is conferred; the interset correlations can be obtained by
+#' [conferring inertia][conference] onto these.
 #'
 #' A biplot of the canonical coefficients can be interpreted as approximating
-#' the \eqn{X}-\eqn{Y} covariance matrix, inversely weighted by the \eqn{X} and
-#' \eqn{Y} variances. A biplot of the canonical scores of one matrix, available
-#' as supplementary points if returned by [cancor_ord()], and the coefficients
-#' of the other can be interpreted as .... Both biplots can have inertia
-#' conferred to either or both factors. Greenacre (1984) describes both biplots,
-#' though ter Braak (1990) recommends against the former.
+#' the \eqn{X}-\eqn{Y} inner product matrix, inversely weighted by the \eqn{X}
+#' and \eqn{Y} variances. The canonical scores and structure coefficients are
+#' available as supplementary points if returned by [cancor_ord()]. These can be
+#' used to create biplots of the case scores as linear combinations of loadings
+#' (the coefficients, in standard coordinates, overlaid with the scores) or of
+#' intraset and interset correlations with respect to either data set (the
+#' correlations with inertia conferred entirely onto rows or onto columns).
+#' Greenacre (1984) and ter Braak (1990) describe these families, though ter
+#' Braak recommends against the first.
 #'
 #' @template ref-greenacre1984
 #' @template ref-braak1990

@@ -78,12 +78,18 @@ cmdscale_ord <- function(d, k = 2, add = FALSE) {
 cancor_ord <- function(x, y, xcenter = TRUE, ycenter = TRUE, scores = FALSE) {
   res <- stats::cancor(x, y, xcenter = xcenter, ycenter = ycenter)
   if (scores) {
-    res$xscores <- scale(x, center = xcenter, scale = FALSE) %*% res$xcoef
-    res$yscores <- scale(y, center = ycenter, scale = FALSE) %*% res$ycoef
-    res$x.xscores = stats::cor(x, res$xscores)
-    res$y.xscores = stats::cor(y, res$xscores)
-    res$x.yscores = stats::cor(x, res$yscores)
-    res$y.yscores = stats::cor(y, res$yscores)
+    xrk <- seq(ncol(res$xcoef))
+    yrk <- seq(ncol(res$ycoef))
+    res$xscores <-
+      scale(x, center = xcenter, scale = FALSE)[, xrk, drop = FALSE] %*%
+      res$xcoef
+    res$yscores <-
+      scale(y, center = ycenter, scale = FALSE)[, yrk, drop = FALSE] %*%
+      res$ycoef
+    res$x.xscores <- stats::cor(x, res$xscores)
+    res$y.xscores <- stats::cor(y, res$xscores)
+    res$x.yscores <- stats::cor(x, res$yscores)
+    res$y.yscores <- stats::cor(y, res$yscores)
   }
   class(res) <- "cancor_ord"
   res
