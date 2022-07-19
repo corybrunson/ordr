@@ -109,3 +109,15 @@ ter Braak CJF (1990) "Interpreting canonical correlation analysis through
 biplots of structure correlations and weights". \emph{Psychometrika} 55(3),
 519--531. \doi{10.1007/BF02294765}
 }
+\seealso{
+Other methods for singular value decomposition-based techniques: 
+\code{\link{methods-candisc}},
+\code{\link{methods-ca}},
+\code{\link{methods-lda}},
+\code{\link{methods-lra}},
+\code{\link{methods-mjca}},
+\code{\link{methods-prcomp}},
+\code{\link{methods-princomp}},
+\code{\link{methods-svd}}
+}
+\concept{methods for singular value decomposition-based techniques}

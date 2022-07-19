@@ -91,6 +91,7 @@ augment_ord(iris_lda)
 }
 \seealso{
 Other methods for singular value decomposition-based techniques: 
+\code{\link{methods-cancor}},
 \code{\link{methods-candisc}},
 \code{\link{methods-ca}},
 \code{\link{methods-lra}},
