@@ -35,7 +35,6 @@ Suggests:
     gridExtra,
     ca,
     MASS,
-    candisc,
     vegan,
     igraph,
     igraphdata,
@@ -73,7 +72,6 @@ Collate:
     'methods-base-svd.r'
     'methods-ca-ca.r'
     'methods-ca-mjca.r'
-    'methods-candisc.r'
     'methods-mass-lda.r'
     'methods-ordr-lra.r'
     'methods-stats-cancor.r'
