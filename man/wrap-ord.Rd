@@ -5,6 +5,7 @@
 \alias{eigen_ord}
 \alias{svd_ord}
 \alias{cmdscale_ord}
+\alias{cancor_ord}
 \title{Wrappers for lossy ordination methods}
 \usage{
 eigen_ord(x, symmetric = isSymmetric.matrix(x))
@@ -12,6 +13,8 @@ eigen_ord(x, symmetric = isSymmetric.matrix(x))
 svd_ord(x, nu = min(dim(x)), nv = min(dim(x)))
 
 cmdscale_ord(d, k = 2, add = FALSE)
+
+cancor_ord(x, y, xcenter = TRUE, ycenter = TRUE, scores = FALSE)
 }
 \arguments{
 \item{x}{a numeric or complex matrix whose spectral decomposition is to
@@ -37,6 +40,20 @@ cmdscale_ord(d, k = 2, add = FALSE)
 \item{add}{logical indicating if an additive constant \eqn{c*} should
     be computed, and added to the non-diagonal dissimilarities such that
     the modified dissimilarities are Euclidean.}
+
+\item{y}{numeric matrix (\eqn{n \times p_2}{n * p2}), containing the
+    y coordinates.}
+
+\item{xcenter}{logical or numeric vector of length \eqn{p_1}{p1},
+    describing any centering to be done on the x values before the
+    analysis.  If \code{TRUE} (default), subtract the column means.
+    If \code{FALSE}, do not adjust the columns.  Otherwise, a vector
+    of values to be subtracted from the columns.}
+
+\item{ycenter}{analogous to \code{xcenter}, but for the y values.}
+
+\item{scores}{Logical; whether to return canonical scores and structure
+correlations.}
 }
 \description{
 These \verb{*_ord} functions wrap core R functions with modifications
@@ -46,12 +63,24 @@ given row or column names to be used by them, and new '*_ord' S3 class
 attributes are added to enable them.
 }
 \details{
-The following table summarizes the wrapped functions:\tabular{llll}{
-   Original function \tab Hide params \tab Add names \tab New class \cr
-   \code{\link[base:eigen]{base::eigen()}} \tab Yes \tab Yes \tab Yes \cr
-   \code{\link[base:svd]{base::svd()}} \tab Yes \tab Yes \tab Yes \cr
-   \code{\link[stats:cmdscale]{stats::cmdscale()}} \tab Yes \tab No \tab Yes \cr
+The following table summarizes the wrapped functions:\tabular{lllll}{
+   Original function \tab Hide params \tab New params \tab Add names \tab New class \cr
+   \code{\link[base:eigen]{base::eigen()}} \tab Yes \tab No \tab Yes \tab Yes \cr
+   \code{\link[base:svd]{base::svd()}} \tab Yes \tab No \tab Yes \tab Yes \cr
+   \code{\link[stats:cmdscale]{stats::cmdscale()}} \tab Yes \tab No \tab No \tab Yes \cr
+   \code{\link[stats:cancor]{stats::cancor()}} \tab No \tab Yes \tab No \tab Yes \cr
 }
+
+
+By default, \code{\link[=cancor_ord]{cancor_ord()}} returns the same data as \code{\link[stats:cancor]{stats::cancor()}}: the
+canonical correlations (\code{cor}), the canonical coefficients (\verb{$xcoef} and
+\verb{$ycoef}), and the variable means (\verb{$xcenter}, \verb{$ycenter}). If \code{scores = TRUE}, then \code{\link[=cancor_ord]{cancor_ord()}} also returns the scores \verb{$xscores} and \verb{$yscores}
+calculated from the (appropriately centered) data and the coefficients and
+the four sets of structure correlations \verb{$x.xscores}, etc. between these and
+the data. These modifications are inspired by \code{\link[candisc:cancor]{candisc::cancor()}}, though it
+should be noted that the canonical coefficients (hence the canonical scores)
+are scaled by \eqn{n - 1} compared to these, though the structure
+correlations are the same.
 }
 \examples{
 # glass composition data from one furnace
@@ -67,4 +96,22 @@ eigen_ord(glass_cov)
 svd_ord(glass_banias)
 # classical multidimensional scaling of a distance matrix
 cmdscale_ord(dist(glass_banias))
+
+# canonical correlation analysis with trace components
+glass_banias_minor <- subset(
+  glass,
+  Context == "L.15;B.166",
+  select = c("TiO2", "FeO", "MnO", "P2O5", "Cl", "SO3")
+)
+# impute half of detection threshold
+glass_banias_minor$TiO2[[1L]] <- 0.5
+cancor_ord(glass_banias, glass_banias_minor)
+# interset/intraset correlations as standard/principal coordinates
+glass_cca <-
+  cancor_ord(glass_banias[, 1:3], glass_banias_minor[, 1:3], scores = TRUE)
+glass_cca$x.xscores \%*\% diag(glass_cca$cor)
+glass_cca$x.yscores
+}
+\seealso{
+\code{\link[candisc:cancor]{candisc::cancor()}}
 }
