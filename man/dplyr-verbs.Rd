@@ -61,9 +61,11 @@ standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 \item{...}{Comma-separated unquoted expressions as in, e.g.,
 \code{\link[dplyr:select]{dplyr::select()}}.}
 
-\item{elements}{Character; which elements of each factor to which to bind new
-annotation data. One of \code{"all"} (the default), \code{"active"}, or
-\code{"supplementary"}, with partial matching.}
+\item{elements}{Character vector; which elements of each factor for which to
+render graphical elements. One of \code{"all"} (the default), \code{"active"}, or any
+supplementary element type defined by the specific class methods (e.g.
+\code{"score"} for 'factanal', 'lda_ord', and 'cancord_ord' and \code{"structure"}
+for 'cancor_ord').}
 }
 \description{
 These functions adapt \link[dplyr:dplyr-package]{dplyr} verbs to the factors

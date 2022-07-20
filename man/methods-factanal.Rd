@@ -62,7 +62,7 @@ swiss_fa <- factanal(~ ., factors = 2L, data = swiss, scores = "regression")
 get_rows(swiss_fa, elements = "active")
 get_cols(swiss_fa)
 # recover scores
-head(get_rows(swiss_fa, elements = "supplementary"))
+head(get_rows(swiss_fa, elements = "score"))
 # augment column loadings with uniquenesses
 (swiss_fa <- augment_ord(swiss_fa))
 # symmetric biplot
@@ -76,7 +76,7 @@ swiss_fa \%>\%
 # scores overlaid
 swiss_fa \%>\%
   confer_inertia("rows") \%>\%
-  ggbiplot(aes(label = .name), elements = "supplementary") +
+  ggbiplot(aes(label = .name), elements = "score") +
   theme_bw() +
   geom_cols_vector() +
   geom_cols_text_radiate() +

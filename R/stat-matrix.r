@@ -8,17 +8,15 @@
 #' @template biplot-layers
 
 #' @name stat_rows
+#' @aliases stat_cols
 #' @inheritParams ggplot2::layer
+#' @template param-elements
 #' @param subset An integer, logical, or character vector indicating a subset of
 #'   rows or columns for which to render graphical elements. NB: Internally, the
 #'   `subset` will be taken from the rows of the [fortified][fortify.tbl_ord()]
 #'   'tbl_ord' comprising rows from only one of the matrix factors. It is still
 #'   possible to pass a formula to the `data` parameter, but it will act on the
 #'   fortified data _before_ it has been restricted to one matrix factor.
-#' @param elements Character; which elements of each factor for which to render
-#'   graphical elements. One of `"all"` (the default), `"active"`, or
-#'   `"supplementary"`, with partial matching.
-#'
 #' @template param-stat
 #' @family biplot layers
 #' @example inst/examples/ex-stat-matrix-swiss.r

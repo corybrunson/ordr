@@ -29,7 +29,7 @@ supplemental rows or columns of a \link{tbl_ord} object from the object itself.
 The motivating example is linear discriminant analysis, which produces a
 natural biplot of class discriminant centroids and variable axes but is
 usually supplemented with case discriminant scores. The supplementary values
-are augmented with a \code{.supplement} column whose value indicates their source
+are augmented with an \code{.element} column whose value indicates their source
 and can be incorporated into a \link[=fortify]{tidied form}. If no supplementary
 rows of a factor are produced, the functions return \code{NULL}.
 }

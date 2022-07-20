@@ -76,15 +76,19 @@ setup_rows_data <- function(data, params) {
     data[data$.matrix == "rows", -match(".matrix", names(data)), drop = FALSE]
   
   # if specified and possible, restrict to active or supplementary elements
-  if (! is.null(params$elements) && ".supplement" %in% names(data)) {
-    params$elements <-
-      match.arg(params$elements, c("all", "active", "supplementary"))
-    data <- switch(
-      params$elements,
-      all = data,
-      active = data[! data$.supplement, , drop = FALSE],
-      supplementary = data[data$.supplement, , drop = FALSE]
+  if (! is.null(params$elements) && ".element" %in% names(data)) {
+    # ensure that `elements` is a character singleton
+    stopifnot(
+      is.character(params$elements),
+      length(params$elements) == 1L
     )
+    # subset accordingly
+    data <- if ("all" %in% params$elements) {
+      data
+    } else {
+      data[data$.element == params$elements, , drop = FALSE]
+    }
+    # print note if both `elements` and `subset` are passed
     if (! is.null(params$subset)) {
       message("`subset` will be applied after data are restricted to ",
               params$elements, " elements.")
@@ -110,15 +114,19 @@ setup_cols_data <- function(data, params) {
     data[data$.matrix == "cols", -match(".matrix", names(data)), drop = FALSE]
   
   # if specified and possible, restrict to active or supplementary elements
-  if (! is.null(params$elements) && ".supplement" %in% names(data)) {
-    params$elements <-
-      match.arg(params$elements, c("all", "active", "supplementary"))
-    data <- switch(
-      params$elements,
-      all = data,
-      active = data[! data$.supplement, , drop = FALSE],
-      supplementary = data[data$.supplement, , drop = FALSE]
+  if (! is.null(params$elements) && ".element" %in% names(data)) {
+    # ensure that `elements` is a character singleton
+    stopifnot(
+      is.character(params$elements),
+      length(params$elements) == 1L
     )
+    # subset accordingly
+    data <- if ("all" %in% params$elements) {
+      data
+    } else {
+      data[data$.element == params$elements, , drop = FALSE]
+    }
+    # print note if both `elements` and `subset` are passed
     if (! is.null(params$subset)) {
       message("`subset` will be applied after data are restricted to ",
               params$elements, " elements.")

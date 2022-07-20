@@ -35,4 +35,4 @@ savings_cca %>%
   geom_cols_vector(elements = "active") +
   geom_cols_text_radiate(elements = "active") +
   # -+- need more convenient handling of elements -+-
-  geom_rows_text(elements = "supplementary", subset = seq(50L))
+  geom_rows_text(elements = "score", subset = seq(50L))

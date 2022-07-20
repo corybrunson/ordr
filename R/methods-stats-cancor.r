@@ -89,6 +89,7 @@ augmentation_rows.cancor_ord <- function(x) {
     } else {
       tibble(.name = rownames(x$xscores))
     }
+    res_sup_elt$.element <- "score"
     res_sup <- bind_rows(res_sup, res_sup_elt)
   }
   if (! is.null(x$x.xscores)) {
@@ -97,11 +98,11 @@ augmentation_rows.cancor_ord <- function(x) {
     } else {
       tibble(.name = c(rownames(x$x.xscores), rownames(x$y.xscores)))
     }
+    res_sup_elt$.element <- "structure"
     res_sup <- bind_rows(res_sup, res_sup_elt)
   }
   # supplement flag
-  res$.supplement <- FALSE
-  if (! is.null(res_sup)) res_sup$.supplement <- TRUE
+  res$.element <- "active"
   as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
@@ -123,6 +124,7 @@ augmentation_cols.cancor_ord <- function(x) {
     } else {
       tibble(.name = rownames(x$yscores))
     }
+    res_sup_elt$.element <- "score"
     res_sup <- bind_rows(res_sup, res_sup_elt)
   }
   if (! is.null(x$x.yscores)) {
@@ -131,11 +133,11 @@ augmentation_cols.cancor_ord <- function(x) {
     } else {
       tibble(.name = c(rownames(x$x.yscores), rownames(x$y.yscores)))
     }
+    res_sup_elt$.element <- "structure"
     res_sup <- bind_rows(res_sup, res_sup_elt)
   }
   # supplement flag
-  res$.supplement <- FALSE
-  if (! is.null(res_sup)) res_sup$.supplement <- TRUE
+  res$.element <- "active"
   as_tibble(dplyr::bind_rows(res, res_sup))
 }
 

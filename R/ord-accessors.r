@@ -30,9 +30,7 @@
 #' @param x An object of class '[tbl_ord]'.
 #' @param ... Additional arguments from [base::as.matrix()]; ignored.
 #' @template param-matrix
-#' @param elements Character; which elements of each factor for which to render
-#'   graphical elements. One of `"all"` (the default), `"active"`, or
-#'   `"supplementary"`, with partial matching.
+#' @template param-elements
 #' @family generic accessors
 #' @example inst/examples/ex-ord-accessors.r
 NULL
@@ -82,13 +80,20 @@ recover_cols.data.frame <- function(x) {
 #' @rdname accessors
 #' @export
 get_rows <- function(x, elements = "all") {
-  elements <- match.arg(elements, c("all", "active", "supplementary"))
-  u <- switch(
-    elements,
-    all = rbind(recover_rows(x), supplementation_rows(x)),
-    active = recover_rows(x),
-    supplementary = supplementation_rows(x)
+  # ensure that `elements` is a character singleton
+  stopifnot(
+    is.character(elements),
+    length(elements) == 1L
   )
+  # subset accordingly
+  u <- if (elements == "all") {
+    rbind(recover_rows(x), supplementation_rows(x))
+  } else if (elements == "active") {
+    recover_rows(x)
+  } else {
+    # -+- need to recognize supplementary subtypes -+-
+    supplementation_rows(x)
+  }
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     i <- recover_inertia(x)
@@ -103,13 +108,20 @@ get_rows <- function(x, elements = "all") {
 #' @rdname accessors
 #' @export
 get_cols <- function(x, elements = "all") {
-  elements <- match.arg(elements, c("all", "active", "supplementary"))
-  v <- switch(
-    elements,
-    all = rbind(recover_cols(x), supplementation_cols(x)),
-    active = recover_cols(x),
-    supplementary = supplementation_cols(x)
+  # ensure that `elements` is a character singleton
+  stopifnot(
+    is.character(elements),
+    length(elements) == 1L
   )
+  # subset accordingly
+  v <- if (elements == "all") {
+    rbind(recover_cols(x), supplementation_cols(x))
+  } else if (elements == "active") {
+    recover_cols(x)
+  } else {
+    # -+- need to recognize supplementary subtypes -+-
+    supplementation_cols(x)
+  }
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     i <- recover_inertia(x)

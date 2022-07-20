@@ -62,9 +62,11 @@ rows or columns for which to render graphical elements. NB: Internally, the
 possible to pass a formula to the \code{data} parameter, but it will act on the
 fortified data \emph{before} it has been restricted to one matrix factor.}
 
-\item{elements}{Character; which elements of each factor for which to render
-graphical elements. One of \code{"all"} (the default), \code{"active"}, or
-\code{"supplementary"}, with partial matching.}
+\item{elements}{Character vector; which elements of each factor for which to
+render graphical elements. One of \code{"all"} (the default), \code{"active"}, or any
+supplementary element type defined by the specific class methods (e.g.
+\code{"score"} for 'factanal', 'lda_ord', and 'cancord_ord' and \code{"structure"}
+for 'cancor_ord').}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
@@ -103,12 +105,12 @@ swiss_fa <-
   ordinate(swiss, model = factanal, factors = 2L, scores = "regression")
 # active and supplementary elements
 get_rows(swiss_fa, elements = "active")
-head(get_rows(swiss_fa, elements = "supplementary"))
+head(get_rows(swiss_fa, elements = "score"))
 # biplot using element filters and selection
 # (note that filter precedes selection)
 ggbiplot(swiss_fa) +
-  geom_rows_point(elements = "supp") +
-  geom_rows_text(aes(label = .name), elements = "supp", subset = c(1, 4, 18)) +
+  geom_rows_point(elements = "score") +
+  geom_rows_text(aes(label = .name), elements = "score", subset = c(1, 4, 18)) +
   scale_alpha_manual(values = c(0, 1), guide = "none") +
   geom_cols_vector() +
   geom_cols_text_radiate(aes(label = .name))
