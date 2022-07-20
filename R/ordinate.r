@@ -69,9 +69,9 @@ ordinate <- function(
       cbind_rows(ord, data_aug)
     } else if (nrow(data_aug) == nrow(get_rows(ord, elements = "active"))) {
       cbind_rows(ord, data_aug, elements = "active")
-    } else if (nrow(data_aug) == nrow(get_rows(ord, elements = "supp"))) {
-      cbind_rows(ord, data_aug, elements = "supplementary")
-    }
+    } else if (nrow(data_aug) == nrow(get_rows(ord, elements = "score"))) {
+      cbind_rows(ord, data_aug, elements = "score")
+    } else ord
   }
   
   ord

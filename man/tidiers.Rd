@@ -27,8 +27,8 @@ standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 \item{elements}{Character vector; which elements of each factor for which to
 render graphical elements. One of \code{"all"} (the default), \code{"active"}, or any
 supplementary element type defined by the specific class methods (e.g.
-\code{"score"} for 'factanal', 'lda_ord', and 'cancord_ord' and \code{"structure"}
-for 'cancor_ord').}
+\code{"score"} for 'factanal', 'lda_ord', and 'cancord_ord' and \code{"intraset"} and
+\code{"interset"} for 'cancor_ord').}
 }
 \description{
 These functions return \link[tibble:tibble]{tibbles} that summarize

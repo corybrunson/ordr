@@ -94,11 +94,20 @@ augmentation_rows.cancor_ord <- function(x) {
   }
   if (! is.null(x$x.xscores)) {
     res_sup_elt <- if (is.null(rownames(x$x.xscores))) {
-      tibble_pole(nrow(x$x.xscores) + nrow(x$y.xscores))
+      tibble_pole(nrow(x$x.xscores))
     } else {
-      tibble(.name = c(rownames(x$x.xscores), rownames(x$y.xscores)))
+      tibble(.name = rownames(x$x.xscores))
     }
-    res_sup_elt$.element <- "structure"
+    res_sup_elt$.element <- "intraset"
+    res_sup <- bind_rows(res_sup, res_sup_elt)
+  }
+  if (! is.null(x$y.xscores)) {
+    res_sup_elt <- if (is.null(rownames(x$y.xscores))) {
+      tibble_pole(nrow(x$y.xscores))
+    } else {
+      tibble(.name = rownames(x$y.xscores))
+    }
+    res_sup_elt$.element <- "interset"
     res_sup <- bind_rows(res_sup, res_sup_elt)
   }
   # supplement flag
@@ -127,13 +136,22 @@ augmentation_cols.cancor_ord <- function(x) {
     res_sup_elt$.element <- "score"
     res_sup <- bind_rows(res_sup, res_sup_elt)
   }
+  if (! is.null(x$y.yscores)) {
+    res_sup_elt <- if (is.null(rownames(x$y.yscores))) {
+      tibble_pole(nrow(x$y.yscores))
+    } else {
+      tibble(.name = rownames(x$y.yscores))
+    }
+    res_sup_elt$.element <- "intraset"
+    res_sup <- bind_rows(res_sup, res_sup_elt)
+  }
   if (! is.null(x$x.yscores)) {
     res_sup_elt <- if (is.null(rownames(x$x.yscores))) {
-      tibble_pole(nrow(x$x.yscores) + nrow(x$y.yscores))
+      tibble_pole(nrow(x$x.yscores))
     } else {
-      tibble(.name = c(rownames(x$x.yscores), rownames(x$y.yscores)))
+      tibble(.name = rownames(x$x.yscores))
     }
-    res_sup_elt$.element <- "structure"
+    res_sup_elt$.element <- "interset"
     res_sup <- bind_rows(res_sup, res_sup_elt)
   }
   # supplement flag

@@ -26,7 +26,21 @@ savings_cancor %>%
 # canonical correlation analysis with scores and correlations included
 savings_cca <- cancor_ord(savings_pop, savings_oec, scores = TRUE)
 savings_cca <- augment_ord(as_tbl_ord(savings_cca))
-get_cols(savings_cca)
+head(get_cols(savings_cca))
+head(get_cols(savings_cca, elements = "score"))
+get_cols(savings_cca, elements = "intraset")
+get_cols(savings_cca, elements = "interset")
+# biplot of interset and intraset correlations with the population data
+savings_cca %>%
+  confer_inertia("cols") %>%
+  ggbiplot(aes(label = .name)) +
+  theme_biplot() +
+  geom_unit_circle() +
+  geom_cols_vector(arrow = NULL, elements = "interset") +
+  geom_cols_vector(arrow = NULL, elements = "intraset", linetype = "dashed") +
+  geom_cols_text_repel(elements = "interset") +
+  geom_cols_text_repel(elements = "intraset") +
+  expand_limits(x = c(-1, 1), y = c(-1, 1))
 # biplot with scores as supplemental elements
 savings_cca %>%
   confer_inertia("rows") %>%
