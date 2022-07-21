@@ -90,6 +90,7 @@ Collate:
     'methods-ca-mjca.r'
     'methods-mass-correspondence.r'
     'methods-mass-lda.r'
+    'methods-mass-mca.r'
     'methods-ordr-lra.r'
     'methods-stats-cancor.r'
     'methods-stats-cmds.r'

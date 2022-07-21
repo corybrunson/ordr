@@ -1,7 +1,7 @@
 #' @title Functionality for correspondence analysis ('correspondence') objects
 #'
 #' @description These methods extract data from, and attribute new data to,
-#'   objects of class `"correspondence"` from the **[MASS][MASS::corresp()]**
+#'   objects of class `"correspondence"` from the **[MASS][MASS::corresp]**
 #'   package.
 #'
 #' @name methods-correspondence
@@ -45,7 +45,7 @@ recover_conference.correspondence <- function(x) {
 #' @rdname methods-correspondence
 #' @export
 recover_coord.correspondence <- function(x) {
-  paste0("CanCor", seq(ncol(as.matrix(x$rscore))))
+  paste0("Can", seq(ncol(as.matrix(x$rscore))))
 }
 
 #' @rdname methods-correspondence
