@@ -39,6 +39,9 @@ fs <- X.svd$u[, sec]/rep(p * X.svd$d[sec], rep(n, nf))
 # singular values
 d = X.svd$d[sec]
 
+# varnames
+if (abbrev) unlist(lapply(df, levels)) else colnames(G)
+
 # reconstruct `X` from output
 u <- fs %*% diag(X.svd$d[sec]) * p
 v <- sqrt(p) * diag(sqrt(Dc)) %*% cs
