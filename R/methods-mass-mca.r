@@ -26,17 +26,13 @@ as_tbl_ord.mca <- as_tbl_ord_default
 #' @rdname methods-mca
 #' @export
 recover_rows.mca <- function(x) {
-  res <- x$fs
-  colnames(res) <- recover_coord(x)
-  res
+  `colnames<-`(x$fs, recover_coord(x))
 }
 
 #' @rdname methods-mca
 #' @export
 recover_cols.mca <- function(x) {
-  res <- x$cs
-  colnames(res) <- recover_coord(x)
-  res
+  `colnames<-`(x$cs, recover_coord(x))
 }
 
 #' @rdname methods-mca
@@ -57,9 +53,7 @@ recover_coord.mca <- function(x) paste0("Dim", seq_along(x$d))
 #' @rdname methods-mca
 #' @export
 supplementation_rows.mca <- function(x) {
-  res <- x$rs
-  colnames(res) <- recover_coord(x)
-  res
+  `colnames<-`(x$rs, recover_coord(x))
 }
 
 #' @rdname methods-mca
@@ -107,9 +101,9 @@ augmentation_cols.mca <- function(x){
 
 #' @rdname methods-mca
 #' @export
-augmentation_coord.mca <- function(x){
+augmentation_coord.mca <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),
-    .sv = x$sv[seq(ncol(x$rowcoord))]
+    .sv = x$d
   )
 }

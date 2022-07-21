@@ -28,6 +28,7 @@ X.svd <- svd(X)
 sec <- 1 + (1L:nf)
 # coordinates of rows
 # X V / p = U D V' V / p = U D / p
+# (note: inertia is contained in `X`)
 rs <- X %*% X.svd$v[, sec]/p
 # coordinates of column vertices
 # Winv V = diag(1/sqrt(p*Dc)) V
