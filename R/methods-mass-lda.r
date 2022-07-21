@@ -113,8 +113,8 @@ augmentation_rows.lda <- function(x) {
     }
   }
   if (".grouping" %in% names(res_sup)) res$.grouping <- res$.name
-  res$.supplement <- FALSE
-  res_sup$.supplement <- TRUE
+  res$.element <- "active"
+  res_sup$.element <- "score"
   as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
@@ -158,8 +158,8 @@ augmentation_rows.lda_ord <- function(x) {
     }
   }
   if (".grouping" %in% names(res_sup)) res$.grouping <- res$.name
-  res$.supplement <- FALSE
-  res_sup$.supplement <- TRUE
+  res$.element <- "active"
+  res_sup$.element <- "score"
   as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
@@ -167,11 +167,13 @@ augmentation_rows.lda_ord <- function(x) {
 #' @export
 augmentation_cols.lda <- function(x) {
   .name <- rownames(x$scaling)
-  if (is.null(.name)) {
+  res <- if (is.null(.name)) {
     tibble_pole(nrow(x$scaling))
   } else {
     tibble(.name = .name)
   }
+  res$.element <- "active"
+  res
 }
 
 #' @rdname methods-lda

@@ -9,7 +9,13 @@ test_that("`lra()` varies by parameters", {
 })
 
 fit_lra <- lra(USArrests[, -3])
+
 test_that("`as_tbl_ord()` coerces 'lra' objects", {
   expect_equal(class(fit_lra), "lra")
   expect_true(valid_tbl_ord(as_tbl_ord(fit_lra)))
+})
+
+test_that("'lra' augmentations are consistent with '.element' column", {
+  expect_equal(".element" %in% names(augmentation_rows(fit_lra)),
+               ".element" %in% names(augmentation_cols(fit_lra)))
 })

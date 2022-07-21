@@ -76,15 +76,19 @@ setup_rows_data <- function(data, params) {
     data[data$.matrix == "rows", -match(".matrix", names(data)), drop = FALSE]
   
   # if specified and possible, restrict to active or supplementary elements
-  if (! is.null(params$elements) && ".supplement" %in% names(data)) {
-    params$elements <-
-      match.arg(params$elements, c("all", "active", "supplementary"))
-    data <- switch(
-      params$elements,
-      all = data,
-      active = data[! data$.supplement, , drop = FALSE],
-      supplementary = data[data$.supplement, , drop = FALSE]
+  if (! is.null(params$elements) && ".element" %in% names(data)) {
+    # ensure that `elements` is a character singleton
+    stopifnot(
+      is.character(params$elements),
+      length(params$elements) == 1L
     )
+    # subset accordingly
+    data <- if ("all" %in% params$elements) {
+      data
+    } else {
+      data[data$.element == params$elements, , drop = FALSE]
+    }
+    # print note if both `elements` and `subset` are passed
     if (! is.null(params$subset)) {
       message("`subset` will be applied after data are restricted to ",
               params$elements, " elements.")
@@ -96,7 +100,7 @@ setup_rows_data <- function(data, params) {
     if (is.numeric(params$subset)) {
       data <- data[params$subset, , drop = FALSE]
     } else if (is.character(params$subset)) {
-      warning("`subset` cannot yet accept row names.")
+      warning("`subset` cannot yet accept names.")
     } else {
       warning("`subset` of unrecognized type will be ignored.")
     }
@@ -110,15 +114,19 @@ setup_cols_data <- function(data, params) {
     data[data$.matrix == "cols", -match(".matrix", names(data)), drop = FALSE]
   
   # if specified and possible, restrict to active or supplementary elements
-  if (! is.null(params$elements) && ".supplement" %in% names(data)) {
-    params$elements <-
-      match.arg(params$elements, c("all", "active", "supplementary"))
-    data <- switch(
-      params$elements,
-      all = data,
-      active = data[! data$.supplement, , drop = FALSE],
-      supplementary = data[data$.supplement, , drop = FALSE]
+  if (! is.null(params$elements) && ".element" %in% names(data)) {
+    # ensure that `elements` is a character singleton
+    stopifnot(
+      is.character(params$elements),
+      length(params$elements) == 1L
     )
+    # subset accordingly
+    data <- if ("all" %in% params$elements) {
+      data
+    } else {
+      data[data$.element == params$elements, , drop = FALSE]
+    }
+    # print note if both `elements` and `subset` are passed
     if (! is.null(params$subset)) {
       message("`subset` will be applied after data are restricted to ",
               params$elements, " elements.")
@@ -130,16 +138,7 @@ setup_cols_data <- function(data, params) {
     if (is.numeric(params$subset)) {
       data <- data[params$subset, , drop = FALSE]
     } else if (is.character(params$subset)) {
-      if (".name_subset" %in% names(data) &&
-          ! all(is.na(data[[".name_subset"]]))) {
-        # -+- `match()` may produce `NA`s if exact matches are not found -+-
-        data <- data[match(params$subset, data$.name_subset), , drop = FALSE]
-      } else {
-        warning(
-          "Columns have no defined `.name`, so `subset` will be ignored.",
-          immediate. = TRUE
-        )
-      }
+      warning("`subset` cannot yet accept names.")
     } else {
       warning("`subset` of unrecognized type will be ignored.")
     }

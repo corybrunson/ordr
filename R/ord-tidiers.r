@@ -26,12 +26,12 @@
 #' * The [ggplot2::fortify()] method
 
 #'   augments and collapses row and/or column data, depending on `.matrix` and
-#'   `.supplement`, into a single tibble, in preparation for
-#'   [ggplot2::ggplot()]. Its output resembles that of [generics::augment()],
-#'   though rows in the output may correspond to rows, columns, or both of the
-#'   original data. If `.matrix` is passed `"rows"`, `"cols"`, or `"dims"` (for
-#'   both), then `fortify()` returns a tibble whose fields are obtained, in
-#'   order, via `get_*()`, `augmentation_*()`, and `annotation_*()`.
+#'   `.element`, into a single tibble, in preparation for [ggplot2::ggplot()].
+#'   Its output resembles that of [generics::augment()], though rows in the
+#'   output may correspond to rows, columns, or both of the original data. If
+#'   `.matrix` is passed `"rows"`, `"cols"`, or `"dims"` (for both), then
+#'   `fortify()` returns a tibble whose fields are obtained, in order, via
+#'   `get_*()`, `augmentation_*()`, and `annotation_*()`.
 
 #'
 #' The tibble is assigned a `"coordinates"` attribute whose value is obtained
@@ -45,9 +45,7 @@
 #' @param data Passed to generic methods; currently ignored.
 #' @param ... Additional arguments allowed by generics; currently ignored.
 #' @template param-matrix
-#' @param elements Character; which elements of each factor for which to render
-#'   graphical elements. One of `"all"` (the default), `"active"`, or
-#'   `"supplementary"`, with partial matching.
+#' @template param-elements
 #' @seealso [augmentation] methods that must interface with tidiers.
 #' @example inst/examples/ex-ord-tidiers.r
 NULL
@@ -77,11 +75,11 @@ glance.tbl_ord <- function(x, ...) {
   var.na <- identical(all.var, NA_real_)
   tibble::tibble(
     # number of artificial coordinates
-    rank = dim(x),
+    rank = length(recover_inertia(x)),
     # numbers of rows and of columns of original data
     # -+- these should indicate dimensions of decomposed matrix -+-
-    n.row = nrow(get_rows(x)),
-    n.col = nrow(get_cols(x)),
+    n.row = nrow(x),
+    n.col = ncol(x),
     # -+- clarify whether this is original inertia or decomposed inertia -+-
     inertia = tot.var,
     # proportions of variance/inertia in first and second artificial dimensions
@@ -99,33 +97,35 @@ fortify.tbl_ord <- function(
   .matrix = "dims", elements = "all"
 ) {
   .matrix <- match_factor(.matrix)
-  elements <- match.arg(elements, c("all", "active", "supplementary"))
+  # ensure that `elements` is a character singleton
+  stopifnot(
+    is.character(elements),
+    length(elements) == 1L
+  )
   
   if (.matrix == "dims" || .matrix == "rows") {
     u <- as_tibble(get_rows(model))
     u <- dplyr::bind_cols(u, annotation_factor(model, "rows"))
-    if (elements != "all" && ".supplement" %in% names(u)) {
-      u <- switch(
-        elements,
-        active = u[! u$.supplement, , drop = FALSE],
-        supplementary = u[u$.supplement, , drop = FALSE]
-      )
+    # introduce '.element' columns if missing
+    if (! ".element" %in% names(u)) u$.element <- "active"
+    # subset accordingly
+    if (elements != "all") {
+      u <- u[u$.element == elements, , drop = FALSE]
     }
+    # introduce reference columns if necessary
     u$.matrix <- "rows"
-    if (! ".supplement" %in% names(u)) u$.supplement <- NA
   }
   if (.matrix == "dims" || .matrix == "cols") {
     v <- as_tibble(get_cols(model))
     v <- dplyr::bind_cols(v, annotation_factor(model, "cols"))
-    if (elements != "all" && ".supplement" %in% names(v)) {
-      v <- switch(
-        elements,
-        active = v[! v$.supplement, , drop = FALSE],
-        supplementary = v[v$.supplement, , drop = FALSE]
-      )
+    # introduce '.element' columns if missing
+    if (! ".element" %in% names(v)) v$.element <- "active"
+    # subset accordingly
+    if (elements != "all") {
+      v <- v[v$.element == elements, , drop = FALSE]
     }
+    # introduce reference columns if necessary
     v$.matrix <- "cols"
-    if (! ".supplement" %in% names(v)) v$.supplement <- NA
   }
   
   tbl <- switch(

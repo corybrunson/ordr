@@ -24,9 +24,11 @@
 or both matrices in a matrix decomposition used for ordination. The
 standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
 
-\item{elements}{Character; which elements of each factor for which to render
-graphical elements. One of \code{"all"} (the default), \code{"active"}, or
-\code{"supplementary"}, with partial matching.}
+\item{elements}{Character vector; which elements of each factor for which to
+render graphical elements. One of \code{"all"} (the default), \code{"active"}, or any
+supplementary element type defined by the specific class methods (e.g.
+\code{"score"} for 'factanal', 'lda_ord', and 'cancord_ord' and \code{"intraset"} and
+\code{"interset"} for 'cancor_ord').}
 }
 \description{
 These functions return \link[tibble:tibble]{tibbles} that summarize
@@ -47,12 +49,12 @@ reports information about the entire model, here always treated as one of a
 broader class of ordination models.
 \item The \code{\link[ggplot2:fortify]{ggplot2::fortify()}} method
 augments and collapses row and/or column data, depending on \code{.matrix} and
-\code{.supplement}, into a single tibble, in preparation for
-\code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}. Its output resembles that of \code{\link[generics:augment]{generics::augment()}},
-though rows in the output may correspond to rows, columns, or both of the
-original data. If \code{.matrix} is passed \code{"rows"}, \code{"cols"}, or \code{"dims"} (for
-both), then \code{fortify()} returns a tibble whose fields are obtained, in
-order, via \verb{get_*()}, \verb{augmentation_*()}, and \verb{annotation_*()}.
+\code{.element}, into a single tibble, in preparation for \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
+Its output resembles that of \code{\link[generics:augment]{generics::augment()}}, though rows in the
+output may correspond to rows, columns, or both of the original data. If
+\code{.matrix} is passed \code{"rows"}, \code{"cols"}, or \code{"dims"} (for both), then
+\code{fortify()} returns a tibble whose fields are obtained, in order, via
+\verb{get_*()}, \verb{augmentation_*()}, and \verb{annotation_*()}.
 }
 
 The tibble is assigned a \code{"coordinates"} attribute whose value is obtained

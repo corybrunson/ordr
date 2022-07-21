@@ -189,7 +189,7 @@ iris_lda \%>\%
   augment_ord() \%>\%
   mutate_rows(
     species = .grouping,
-    discriminant = ifelse(! .supplement, "centroid", "case")
+    discriminant = ifelse(.element == "active", "centroid", "case")
   ) \%>\%
   ggbiplot() +
   theme_bw() +
@@ -223,7 +223,7 @@ iris_lda \%>\%
   augment_ord() \%>\%
   mutate_rows(
     species = .grouping,
-    discriminant = ifelse(! .supplement, "centroid", "case")
+    discriminant = ifelse(.element == "active", "centroid", "case")
   ) \%>\%
   ggbiplot() +
   theme_bw() +
@@ -253,7 +253,7 @@ iris_lda \%>\%
   augment_ord() \%>\%
   mutate_rows(
     species = .grouping,
-    discriminant = ifelse(! .supplement, "centroid", "case")
+    discriminant = ifelse(.element == "active", "centroid", "case")
   ) \%>\%
   ggbiplot() +
   theme_bw() +

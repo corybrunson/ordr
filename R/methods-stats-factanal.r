@@ -78,8 +78,8 @@ augmentation_rows.factanal <- function(x) {
     tibble(.name = rownames(x[["scores"]]))
   }
   # supplement flag
-  res$.supplement <- FALSE
-  res_sup$.supplement <- TRUE
+  res$.element <- "active"
+  res_sup$.element <- "score"
   as_tibble(dplyr::bind_rows(res, res_sup))
 }
 
@@ -93,6 +93,7 @@ augmentation_cols.factanal <- function(x) {
     tibble(.name = .name)
   }
   res$.uniqueness <- x$uniquenesses
+  res$.element <- "active"
   res
 }
 

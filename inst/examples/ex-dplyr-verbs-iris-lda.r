@@ -14,6 +14,6 @@ transmute_cols(iris_lda, proj.length = sqrt(LD1^2 + LD2^2))
 iris_medians <-
   stats::aggregate(iris[, 1:4], median, by = iris[, 5, drop = FALSE])
 iris_lda %>%
-  # retain '.supplement' in order to match by `elements`
-  select_rows(.supplement) %>%
+  # retain '.element' in order to match by `elements`
+  select_rows(.element) %>%
   cbind_rows(iris_medians, elements = "active")

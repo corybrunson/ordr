@@ -93,10 +93,11 @@ ggbiplot <- function(
   # augment `mapping`, if necessary, with default coordinates
   mapping <- ensure_xy_aes(ordination, mapping)
   
-  # augment `mapping`, if necessary, with `.supplement`
+  # augment `mapping`, if necessary, with `.element`
   if (! is.null(ordination)) {
-    if (! ".supplement" %in% names(ordination)) ordination$.supplement <- FALSE
-    mapping <- c(mapping, aes(.supplement = !! rlang::sym(".supplement")))
+    if (! ".element" %in% names(ordination))
+      ordination$.element <- NA_character_
+    mapping <- c(mapping, aes(.element = !! rlang::sym(".element")))
     class(mapping) <- "uneval"
   }
   
