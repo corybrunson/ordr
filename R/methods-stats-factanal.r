@@ -93,6 +93,7 @@ augmentation_cols.factanal <- function(x) {
     tibble(.name = .name)
   }
   res$.uniqueness <- x$uniquenesses
+  res$.element <- "active"
   res
 }
 

@@ -106,24 +106,26 @@ fortify.tbl_ord <- function(
   if (.matrix == "dims" || .matrix == "rows") {
     u <- as_tibble(get_rows(model))
     u <- dplyr::bind_cols(u, annotation_factor(model, "rows"))
+    # introduce '.element' columns if missing
+    if (! ".element" %in% names(u)) u$.element <- "active"
     # subset accordingly
     if (elements != "all") {
       u <- u[u$.element == elements, , drop = FALSE]
     }
     # introduce reference columns if necessary
     u$.matrix <- "rows"
-    if (! ".element" %in% names(u)) u$.element <- NA_character_
   }
   if (.matrix == "dims" || .matrix == "cols") {
     v <- as_tibble(get_cols(model))
     v <- dplyr::bind_cols(v, annotation_factor(model, "cols"))
+    # introduce '.element' columns if missing
+    if (! ".element" %in% names(v)) v$.element <- "active"
     # subset accordingly
     if (elements != "all") {
       v <- v[v$.element == elements, , drop = FALSE]
     }
     # introduce reference columns if necessary
     v$.matrix <- "cols"
-    if (! ".element" %in% names(v)) v$.element <- NA_character_
   }
   
   tbl <- switch(
