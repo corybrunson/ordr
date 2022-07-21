@@ -8,7 +8,6 @@ rdata <- data.frame(
 )
 
 test_that("`ordinate()` can handle appropriate models", {
-  expect_error(ordinate(rdata, everything(), ca::ca), regexp = NA)
   expect_error(ordinate(rdata, everything(), lra), regexp = NA)
   expect_error(ordinate(rdata, everything(), prcomp), regexp = NA)
   expect_error(ordinate(rdata, everything(), princomp), regexp = NA)

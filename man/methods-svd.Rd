@@ -58,7 +58,7 @@ get_conference(spend_svd)
 \seealso{
 Other methods for singular value decomposition-based techniques: 
 \code{\link{methods-cancor}},
-\code{\link{methods-ca}},
+\code{\link{methods-correspondence}},
 \code{\link{methods-lda}},
 \code{\link{methods-lra}},
 \code{\link{methods-mjca}},

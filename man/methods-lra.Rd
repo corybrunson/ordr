@@ -69,7 +69,7 @@ get_conference(arrests_lra)
 \seealso{
 Other methods for singular value decomposition-based techniques: 
 \code{\link{methods-cancor}},
-\code{\link{methods-ca}},
+\code{\link{methods-correspondence}},
 \code{\link{methods-lda}},
 \code{\link{methods-mjca}},
 \code{\link{methods-prcomp}},

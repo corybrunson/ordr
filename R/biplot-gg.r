@@ -228,7 +228,11 @@ ensure_xy_aes <- function(ordination, mapping) {
   if (is.null(ordination)) return(aes())
   coords <- get_coord(ordination)
   coord_vars <- syms(coords)
+  
   if (is.null(mapping$y)) {
+    if (length(coords) < 2L) {
+      stop("Ordination has too few coordinates; check `get_coord(<tbl_ord>)`.")
+    }
     mapping <- c(aes(y = !! coord_vars[[2]]), mapping)
   } else {
     if (is.numeric(mapping$y) && length(mapping$y) == 1) {
@@ -238,6 +242,7 @@ ensure_xy_aes <- function(ordination, mapping) {
       )
     }
   }
+  
   if (is.null(mapping$x)) {
     mapping <- c(aes(x = !! coord_vars[[1]]), mapping)
   } else {
@@ -248,6 +253,7 @@ ensure_xy_aes <- function(ordination, mapping) {
       )
     }
   }
+  
   class(mapping) <- "uneval"
   mapping
 }
