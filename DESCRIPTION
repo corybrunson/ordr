@@ -49,7 +49,6 @@ Suggests:
     testthat,
     sessioninfo,
     gridExtra,
-    ca,
     MASS,
     mlpack,
     vegan,
@@ -87,7 +86,6 @@ Collate:
     'list-tidiers.r'
     'methods-base-eigen.r'
     'methods-base-svd.r'
-    'methods-ca-mjca.r'
     'methods-mass-correspondence.r'
     'methods-mass-lda.r'
     'methods-mass-mca.r'
