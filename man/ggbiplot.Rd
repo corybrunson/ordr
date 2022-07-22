@@ -167,10 +167,17 @@ ggbiplot(mtcars_specs_pca, aes(label = .name),
   geom_cols_text_radiate(data = mtcars_pca_lm) +
   expand_limits(x = c(-2.5, 2))
 # multidimensional scaling based on a scaled cosine distance of vehicle specs
+cosine_dist <- function(x) {
+  x <- as.matrix(x)
+  num <- x \%*\% t(x)
+  denom_rt <- as.matrix(rowSums(x^2))
+  denom <- sqrt(denom_rt \%*\% t(denom_rt))
+  as.dist(1 - num / denom)
+}
 mtcars \%>\%
   subset(select = c(cyl, disp, hp, drat, wt, vs, carb)) \%>\%
   scale() \%>\%
-  proxy::dist(method = "cosine") \%>\%
+  cosine_dist() \%>\%
   cmdscale(list. = TRUE) \%>\%
   tidy() \%>\%
   print() -> mtcars_specs_cmds
@@ -183,7 +190,7 @@ lm(mtcars_perf ~ as.matrix(mtcars_specs_cmds[, 2:3])) \%>\%
 mtcars \%>\%
   subset(select = c(cyl, disp, hp, drat, wt, vs, carb)) \%>\%
   scale() \%>\%
-  proxy::dist(method = "cosine") \%>\%
+  cosine_dist() \%>\%
   cmdscale_ord() \%>\%
   as_tbl_ord() \%>\%
   augment_ord() \%>\%

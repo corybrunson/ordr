@@ -19,7 +19,7 @@ Description: Ordination (Podani, 2000)
     <https://www.fbbva.es/microsite/multivariate-statistics/biplots.html>. These
     decompositions give rise to a set of shared ('artificial' or 'latent')
     coordinates along which the row and column elements can be measured, and the
-    overlay of their scatterplots on these shared axes is called a biplot
+    overlay of their scatterplots on these axes is called a biplot
     (Gabriel, 1971) <doi:10.1093/biomet/58.3.453>. 'ordr' provides inspection,
     extraction, manipulation, and visualization tools for several popular
     ordination classes supported by a set of accessor methods. It is inspired by
@@ -55,7 +55,6 @@ Suggests:
     igraph,
     igraphdata,
     heplots,
-    proxy,
     knitr,
     rmarkdown,
     corrplot
