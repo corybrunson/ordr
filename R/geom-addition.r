@@ -205,10 +205,13 @@ GeomAddition <- ggproto(
         row_data[, c("x", "y")] <- row_data[, c("x", "y")] * row_coef
         row_data$x <- cumsum(row_data$x)
         row_data$y <- cumsum(row_data$y)
-        row_data$xend <- dplyr::lag(row_data$x, default = 0)
-        row_data$yend <- dplyr::lag(row_data$y, default = 0)
+        row_data$xend <- c(0, row_data$x[-nrow(row_data)])
+        row_data$yend <- c(0, row_data$y[-nrow(row_data)])
         row_data
       }))
+      # remove zero summands
+      zero_vec <- vec_data$x == vec_data$xend & vec_data$y == vec_data$yend
+      vec_data <- vec_data[! zero_vec, , drop = FALSE]
     } else if (type == "centroid") {
       # keep only columns that are constant throughout the data
       only_data <- dplyr::select_if(data, is_const)[1L, , drop = FALSE]
