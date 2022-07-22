@@ -52,8 +52,6 @@ Suggests:
     MASS,
     mlpack,
     vegan,
-    igraph,
-    igraphdata,
     heplots,
     knitr,
     rmarkdown
