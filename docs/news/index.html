@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
       </span>
     </div>
 
@@ -55,6 +55,24 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="0.0.2" id="ordr-002">ordr 0.0.2<a class="anchor" aria-label="anchor" href="#ordr-002"></a></h2>
+<p>This pre-release makes several substantive changes in preparation for CRAN submission.</p>
+<div class="section level3">
+<h3 id="element-types-0-0-2">element types<a class="anchor" aria-label="anchor" href="#element-types-0-0-2"></a></h3>
+<p>Annotation of active and supplementary elements is standardized: The character augmentation <code>.element</code> replaces the logical <code>.supplement</code>, and class methods either omit it entirely (when all retrieved elements are active) or include it in both row and column augmentation (when either includes supplementary elements). The value of <code>.element</code> is either ‘active’ or a type of supplement, e.g. ‘score’.</p>
+</div>
+<div class="section level3">
+<h3 id="dependencies-0-0-2">dependencies<a class="anchor" aria-label="anchor" href="#dependencies-0-0-2"></a></h3>
+<p>Extraneous dependencies are dropped to reduce overhead. This takes two forms:</p>
+<ol style="list-style-type: decimal"><li>Methods for classes from specialty (lower-priority) packages (<strong>candisc</strong> and <strong>ca</strong>) are moved to <strong>ordr.extra</strong> and replaced with methods for classes from higher-priority packages (<strong>stats</strong> and <strong>MASS</strong>).</li>
+<li>One-off uses of specialty packages for examples and vignettes are replaced.</li>
+</ol></div>
+<div class="section level3">
+<h3 id="documentation-0-0-2">documentation<a class="anchor" aria-label="anchor" href="#documentation-0-0-2"></a></h3>
+<p>The <code>Description</code> field in DESCRIPTION is expanded and documentation throughout is slightly revised, including some new references.</p>
+</div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="0.0.1" id="ordr-001">ordr 0.0.1<a class="anchor" aria-label="anchor" href="#ordr-001"></a></h2>
 <p>This is a pre-release in anticipation of a first CRAN submission. Upgrades between this pre-release and CRAN submission will focus on addressing issues.</p>
 </div>
@@ -72,7 +90,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

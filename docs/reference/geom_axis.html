@@ -18,7 +18,7 @@ of each case or variable."><!-- mathjax --><script src="https://cdnjs.cloudflare
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
       </span>
     </div>
 
@@ -241,31 +241,37 @@ counterparts, if recognized.</p>
 <span class="r-in"><span><span class="co"># bestow 'tbl_ord' class &amp; augment observation, centroid, and variable fields</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">diabetes_lda</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="dplyr-verbs.html">mutate_rows</a></span><span class="op">(</span>discriminant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="op">!</span> <span class="va">.supplement</span>, <span class="st">"centroid"</span>, <span class="st">"case"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="dplyr-verbs.html">mutate_rows</a></span><span class="op">(</span>discriminant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="va">.element</span> <span class="op">==</span> <span class="st">"active"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"centroid"</span>, <span class="st">"case"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">diabetes_lda</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'lda': (148 x 2) x (5 x 2)'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # 2 coordinates: LD1 and LD2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 148 x 2 | 6 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      LD1    LD2 |   .name     .prior .counts .grouping</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.75</span>   0.400 | <span style="color: #BCBCBC;">1</span> Normal     0.524      76 Normal   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  0.340 -<span style="color: #BB0000;">1.38</span>  | <span style="color: #BCBCBC;">2</span> Chemical…  0.248      36 Chemical…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  3.66   0.580 | <span style="color: #BCBCBC;">3</span> Overt_Di…  0.228      33 Overt_Di…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">1.72</span>   0.663 | <span style="color: #BCBCBC;">4</span> 1         <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span> Normal   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">2.85</span>   1.30  | <span style="color: #BCBCBC;">5</span> 2         <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span> Normal   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 143 more rows, and 2 more</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   variables: .supplement &lt;lgl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   discriminant &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      LD1    LD2 |   .name       .prior .counts .grou…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.75</span>   0.400 | <span style="color: #BCBCBC;">1</span> Normal       0.524      76 Normal </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  0.340 -<span style="color: #BB0000;">1.38</span>  | <span style="color: #BCBCBC;">2</span> Chemical_D…  0.248      36 Chemic…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  3.66   0.580 | <span style="color: #BCBCBC;">3</span> Overt_Diab…  0.228      33 Overt_…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">1.72</span>   0.663 | <span style="color: #BCBCBC;">4</span> 1           <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span> Normal </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">2.85</span>   1.30  | <span style="color: #BCBCBC;">5</span> 2           <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span> Normal </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 143 more rows, 2 more</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   variables: .element &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   discriminant &lt;chr&gt;, and</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abbreviated variable name</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​.grouping</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 5 x 2 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         LD1      LD2 |   .name  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  1.36     -<span style="color: #BB0000;">3.78</span>    | <span style="color: #BCBCBC;">1</span> relwt  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.033</span><span style="color: #BB0000; text-decoration: underline;">6</span>    0.036<span style="text-decoration: underline;">6</span>  | <span style="color: #BCBCBC;">2</span> glufast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  0.012<span style="text-decoration: underline;">6</span>   -<span style="color: #BB0000;">0.007</span><span style="color: #BB0000; text-decoration: underline;">09</span> | <span style="color: #BCBCBC;">3</span> glutest</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">102</span> -<span style="color: #BB0000;">0.006</span><span style="color: #BB0000; text-decoration: underline;">17</span> | <span style="color: #BCBCBC;">4</span> instest</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  0.004<span style="text-decoration: underline;">24</span>   0.001<span style="text-decoration: underline;">13</span> | <span style="color: #BCBCBC;">5</span> sspg   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 5 x 2 | 2 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         LD1      LD2 |   .name   .element</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  1.36     -<span style="color: #BB0000;">3.78</span>    | <span style="color: #BCBCBC;">1</span> relwt   active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.033</span><span style="color: #BB0000; text-decoration: underline;">6</span>    0.036<span style="text-decoration: underline;">6</span>  | <span style="color: #BCBCBC;">2</span> glufast active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  0.012<span style="text-decoration: underline;">6</span>   -<span style="color: #BB0000;">0.007</span><span style="color: #BB0000; text-decoration: underline;">09</span> | <span style="color: #BCBCBC;">3</span> glutest active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">102</span> -<span style="color: #BB0000;">0.006</span><span style="color: #BB0000; text-decoration: underline;">17</span> | <span style="color: #BCBCBC;">4</span> instest active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  0.004<span style="text-decoration: underline;">24</span>   0.001<span style="text-decoration: underline;">13</span> | <span style="color: #BCBCBC;">5</span> sspg    active  </span>
 <span class="r-in"><span><span class="co"># row-standard biplot</span></span></span>
 <span class="r-in"><span><span class="va">diabetes_lda</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="conference.html">confer_inertia</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -286,31 +292,37 @@ counterparts, if recognized.</p>
 <span class="r-in"><span><span class="co"># bestow 'tbl_ord' class &amp; augment observation, centroid, and variable fields</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">diabetes_lda</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="dplyr-verbs.html">mutate_rows</a></span><span class="op">(</span>discriminant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="op">!</span> <span class="va">.supplement</span>, <span class="st">"centroid"</span>, <span class="st">"case"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="dplyr-verbs.html">mutate_rows</a></span><span class="op">(</span>discriminant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="va">.element</span> <span class="op">==</span> <span class="st">"active"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"centroid"</span>, <span class="st">"case"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">diabetes_lda</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'lda_ord': (148 x 2) x (5 x 2)'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # 2 coordinates: LD1 and LD2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 148 x 2 | 6 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      LD1    LD2 |   .name     .prior .counts .grouping</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.75</span>   0.400 | <span style="color: #BCBCBC;">1</span> Normal     0.524      76 Normal   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  0.340 -<span style="color: #BB0000;">1.38</span>  | <span style="color: #BCBCBC;">2</span> Chemical…  0.248      36 Chemical…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  3.66   0.580 | <span style="color: #BCBCBC;">3</span> Overt_Di…  0.228      33 Overt_Di…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">1.72</span>   0.663 | <span style="color: #BCBCBC;">4</span> 1         <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span> Normal   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">2.85</span>   1.30  | <span style="color: #BCBCBC;">5</span> 2         <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span> Normal   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 143 more rows, and 2 more</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   variables: .supplement &lt;lgl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   discriminant &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      LD1    LD2 |   .name       .prior .counts .grou…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.75</span>   0.400 | <span style="color: #BCBCBC;">1</span> Normal       0.524      76 Normal </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  0.340 -<span style="color: #BB0000;">1.38</span>  | <span style="color: #BCBCBC;">2</span> Chemical_D…  0.248      36 Chemic…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  3.66   0.580 | <span style="color: #BCBCBC;">3</span> Overt_Diab…  0.228      33 Overt_…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">1.72</span>   0.663 | <span style="color: #BCBCBC;">4</span> 1           <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span> Normal </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">2.85</span>   1.30  | <span style="color: #BCBCBC;">5</span> 2           <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span> Normal </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 143 more rows, 2 more</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   variables: .element &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   discriminant &lt;chr&gt;, and</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abbreviated variable name</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​.grouping</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 5 x 2 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       LD1    LD2 |   .name  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.138  -<span style="color: #BB0000;">0.384</span> | <span style="color: #BCBCBC;">1</span> relwt  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.274</span>   0.539 | <span style="color: #BCBCBC;">2</span> glufast</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  0.861   0.288 | <span style="color: #BCBCBC;">3</span> glutest</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.013</span><span style="color: #BB0000; text-decoration: underline;">4</span> -<span style="color: #BB0000;">0.666</span> | <span style="color: #BCBCBC;">4</span> instest</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  0.388  -<span style="color: #BB0000;">0.145</span> | <span style="color: #BCBCBC;">5</span> sspg   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 5 x 2 | 2 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       LD1    LD2 |   .name   .element</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.138  -<span style="color: #BB0000;">0.384</span> | <span style="color: #BCBCBC;">1</span> relwt   active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.274</span>   0.539 | <span style="color: #BCBCBC;">2</span> glufast active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  0.861   0.288 | <span style="color: #BCBCBC;">3</span> glutest active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.013</span><span style="color: #BB0000; text-decoration: underline;">4</span> -<span style="color: #BB0000;">0.666</span> | <span style="color: #BCBCBC;">4</span> instest active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  0.388  -<span style="color: #BB0000;">0.145</span> | <span style="color: #BCBCBC;">5</span> sspg    active  </span>
 <span class="r-in"><span><span class="co"># symmetric biplot</span></span></span>
 <span class="r-in"><span><span class="va">diabetes_lda</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="conference.html">confer_inertia</a></span><span class="op">(</span><span class="fl">.5</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -339,7 +351,7 @@ counterparts, if recognized.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

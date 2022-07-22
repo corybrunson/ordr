@@ -18,7 +18,7 @@ elements useful to the tbl_ord class and biplot calculations."><!-- mathjax --><
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
       </span>
     </div>
 
@@ -274,7 +274,7 @@ Graphical Statistics</em>, <strong>22</strong>(1): 107--122.
 <span class="r-in"><span>  <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="dplyr-verbs.html">mutate_rows</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    species <span class="op">=</span> <span class="va">.grouping</span>,</span></span>
-<span class="r-in"><span>    discriminant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="op">!</span> <span class="va">.supplement</span>, <span class="st">"centroid"</span>, <span class="st">"case"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    discriminant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">.element</span> <span class="op">==</span> <span class="st">"active"</span>, <span class="st">"centroid"</span>, <span class="st">"case"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
@@ -312,7 +312,7 @@ Graphical Statistics</em>, <strong>22</strong>(1): 107--122.
 <span class="r-in"><span>  <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="dplyr-verbs.html">mutate_rows</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    species <span class="op">=</span> <span class="va">.grouping</span>,</span></span>
-<span class="r-in"><span>    discriminant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="op">!</span> <span class="va">.supplement</span>, <span class="st">"centroid"</span>, <span class="st">"case"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    discriminant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">.element</span> <span class="op">==</span> <span class="st">"active"</span>, <span class="st">"centroid"</span>, <span class="st">"case"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
@@ -353,7 +353,7 @@ Graphical Statistics</em>, <strong>22</strong>(1): 107--122.
 <span class="r-in"><span>  <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="dplyr-verbs.html">mutate_rows</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    species <span class="op">=</span> <span class="va">.grouping</span>,</span></span>
-<span class="r-in"><span>    discriminant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="op">!</span> <span class="va">.supplement</span>, <span class="st">"centroid"</span>, <span class="st">"case"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    discriminant <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">.element</span> <span class="op">==</span> <span class="st">"active"</span>, <span class="st">"centroid"</span>, <span class="st">"case"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
@@ -383,7 +383,7 @@ Graphical Statistics</em>, <strong>22</strong>(1): 107--122.
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -19,7 +19,7 @@ lda_ord().'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
       </span>
     </div>
 
@@ -139,9 +139,9 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
     <h2>See also</h2>
     <div class="dont-index"><p>Other methods for singular value decomposition-based techniques: 
 <code><a href="methods-cancor.html">methods-cancor</a></code>,
-<code><a href="methods-ca.html">methods-ca</a></code>,
+<code><a href="methods-correspondence.html">methods-correspondence</a></code>,
 <code><a href="methods-lra.html">methods-lra</a></code>,
-<code><a href="methods-mjca.html">methods-mjca</a></code>,
+<code><a href="methods-mca.html">methods-mca</a></code>,
 <code><a href="methods-prcomp.html">methods-prcomp</a></code>,
 <code><a href="methods-princomp.html">methods-princomp</a></code>,
 <code><a href="methods-svd.html">methods-svd</a></code></p></div>
@@ -190,6 +190,14 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
 <span class="r-out co"><span class="r-pr">#&gt;</span> setosa      7.607600  0.2151330</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> versicolor -1.825049 -0.7278996</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> virginica  -5.782550  0.5127666</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="accessors.html">get_rows</a></span><span class="op">(</span><span class="va">iris_lda</span>, elements <span class="op">=</span> <span class="st">"score"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           LD1        LD2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 8.061800  0.3004206</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 7.128688 -0.7866604</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 7.489828 -0.2653845</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 6.813201 -0.6706311</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 8.132309  0.5144625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,] 7.701947  1.4617210</span>
 <span class="r-in"><span><span class="fu"><a href="accessors.html">get_cols</a></span><span class="op">(</span><span class="va">iris_lda</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     LD1         LD2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Length  0.8293776  0.02410215</span>
@@ -202,23 +210,26 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
 <span class="r-out co"><span class="r-pr">#&gt;</span> # 2 coordinates: LD1 and LD2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 153 x 2 | 5 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     LD1    LD2 |   .name     .prior .counts .grouping</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  7.61  0.215 | <span style="color: #BCBCBC;">1</span> setosa     0.333      50 setosa   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">1.83</span> -<span style="color: #BB0000;">0.728</span> | <span style="color: #BCBCBC;">2</span> versicol…  0.333      50 versicol…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">5.78</span>  0.513 | <span style="color: #BCBCBC;">3</span> virginica  0.333      50 virginica</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  8.06  0.300 | <span style="color: #BCBCBC;">4</span> <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span> setosa   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  7.13 -<span style="color: #BB0000;">0.787</span> | <span style="color: #BCBCBC;">5</span> <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span> setosa   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 148 more rows, and 1 more</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   variable: .supplement &lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     LD1    LD2 |   .name      .prior .counts .group…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  7.61  0.215 | <span style="color: #BCBCBC;">1</span> setosa      0.333      50 setosa  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">1.83</span> -<span style="color: #BB0000;">0.728</span> | <span style="color: #BCBCBC;">2</span> versicolor  0.333      50 versico…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">5.78</span>  0.513 | <span style="color: #BCBCBC;">3</span> virginica   0.333      50 virgini…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  8.06  0.300 | <span style="color: #BCBCBC;">4</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span> setosa  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  7.13 -<span style="color: #BB0000;">0.787</span> | <span style="color: #BCBCBC;">5</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span> setosa  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 148 more rows, 1 more</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   variable: .element &lt;chr&gt;, and</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abbreviated variable name</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​.grouping</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 2 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      LD1     LD2 |   .name       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.829  0.024<span style="text-decoration: underline;">1</span> | <span style="color: #BCBCBC;">1</span> Sepal.Length</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  1.53   2.16   | <span style="color: #BCBCBC;">2</span> Sepal.Width </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">2.20</span>  -<span style="color: #BB0000;">0.932</span>  | <span style="color: #BCBCBC;">3</span> Petal.Length</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">2.81</span>   2.84   | <span style="color: #BCBCBC;">4</span> Petal.Width </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 2 | 2 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      LD1     LD2 |   .name        .element</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.829  0.024<span style="text-decoration: underline;">1</span> | <span style="color: #BCBCBC;">1</span> Sepal.Length active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  1.53   2.16   | <span style="color: #BCBCBC;">2</span> Sepal.Width  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">2.20</span>  -<span style="color: #BB0000;">0.932</span>  | <span style="color: #BCBCBC;">3</span> Petal.Length active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">2.81</span>   2.84   | <span style="color: #BCBCBC;">4</span> Petal.Width  active  </span>
 </code></pre></div>
     </div>
   </div>
@@ -233,7 +244,7 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

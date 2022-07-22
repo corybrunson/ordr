@@ -21,7 +21,7 @@ attributes are added to enable them."><!-- mathjax --><script src="https://cdnjs
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
       </span>
     </div>
 
@@ -72,7 +72,9 @@ attributes are added to enable them.</p>
 <span></span>
 <span><span class="fu">svd_ord</span><span class="op">(</span><span class="va">x</span>, nu <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, nv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">cmdscale_ord</span><span class="op">(</span><span class="va">d</span>, k <span class="op">=</span> <span class="fl">2</span>, add <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">cmdscale_ord</span><span class="op">(</span><span class="va">d</span>, k <span class="op">=</span> <span class="fl">2</span>, add <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">cancor_ord</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, xcenter <span class="op">=</span> <span class="cn">TRUE</span>, ycenter <span class="op">=</span> <span class="cn">TRUE</span>, scores <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -114,10 +116,45 @@ attributes are added to enable them.</p>
     be computed, and added to the non-diagonal dissimilarities such that
     the modified dissimilarities are Euclidean.</p></dd>
 
+
+<dt>y</dt>
+<dd><p>numeric matrix (\(n \times p_2\)), containing the
+    y coordinates.</p></dd>
+
+
+<dt>xcenter</dt>
+<dd><p>logical or numeric vector of length \(p_1\),
+    describing any centering to be done on the x values before the
+    analysis.  If <code>TRUE</code> (default), subtract the column means.
+    If <code>FALSE</code>, do not adjust the columns.  Otherwise, a vector
+    of values to be subtracted from the columns.</p></dd>
+
+
+<dt>ycenter</dt>
+<dd><p>analogous to <code>xcenter</code>, but for the y values.</p></dd>
+
+
+<dt>scores</dt>
+<dd><p>Logical; whether to return canonical scores and structure
+correlations.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
-    <p>The following table summarizes the wrapped functions:</p><table class="table table"><tr><td>Original function</td><td>Hide params</td><td>Add names</td><td>New class</td></tr><tr><td><code><a href="https://rdrr.io/r/base/eigen.html" class="external-link">base::eigen()</a></code></td><td>Yes</td><td>Yes</td><td>Yes</td></tr><tr><td><code><a href="https://rdrr.io/r/base/svd.html" class="external-link">base::svd()</a></code></td><td>Yes</td><td>Yes</td><td>Yes</td></tr><tr><td><code><a href="https://rdrr.io/r/stats/cmdscale.html" class="external-link">stats::cmdscale()</a></code></td><td>Yes</td><td>No</td><td>Yes</td></tr></table></div>
+    <p>The following table summarizes the wrapped functions:</p><table class="table table"><tr><td>Original function</td><td>Hide params</td><td>New params</td><td>Add names</td><td>New class</td></tr><tr><td><code><a href="https://rdrr.io/r/base/eigen.html" class="external-link">base::eigen()</a></code></td><td>Yes</td><td>No</td><td>Yes</td><td>Yes</td></tr><tr><td><code><a href="https://rdrr.io/r/base/svd.html" class="external-link">base::svd()</a></code></td><td>Yes</td><td>No</td><td>Yes</td><td>Yes</td></tr><tr><td><code><a href="https://rdrr.io/r/stats/cmdscale.html" class="external-link">stats::cmdscale()</a></code></td><td>Yes</td><td>No</td><td>No</td><td>Yes</td></tr><tr><td><code><a href="https://rdrr.io/r/stats/cancor.html" class="external-link">stats::cancor()</a></code></td><td>No</td><td>Yes</td><td>No</td><td>Yes</td></tr></table><p>By default, <code>cancor_ord()</code> returns the same data as <code><a href="https://rdrr.io/r/stats/cancor.html" class="external-link">stats::cancor()</a></code>: the
+canonical correlations (<code>cor</code>), the canonical coefficients (<code>$xcoef</code> and
+<code>$ycoef</code>), and the variable means (<code>$xcenter</code>, <code>$ycenter</code>). If <code>scores = TRUE</code>, then <code>cancor_ord()</code> also returns the scores <code>$xscores</code> and <code>$yscores</code>
+calculated from the (appropriately centered) data and the coefficients and
+the four sets of structure correlations <code>$x.xscores</code>, etc. between these and
+the data. These modifications are inspired by <code>candisc::cancor()</code>, though it
+should be noted that the canonical coefficients (hence the canonical scores)
+are scaled by \(n - 1\) compared to these, though the structure
+correlations are the same.</p>
+    </div>
+    <div id="see-also">
+    <h2>See also</h2>
+    <div class="dont-index"><p><code>candisc::cancor()</code></p></div>
+    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
@@ -210,6 +247,58 @@ attributes are added to enable them.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "cmds_ord"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># canonical correlation analysis with trace components</span></span></span>
+<span class="r-in"><span><span class="va">glass_banias_minor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">glass</span>,</span></span>
+<span class="r-in"><span>  <span class="va">Context</span> <span class="op">==</span> <span class="st">"L.15;B.166"</span>,</span></span>
+<span class="r-in"><span>  select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TiO2"</span>, <span class="st">"FeO"</span>, <span class="st">"MnO"</span>, <span class="st">"P2O5"</span>, <span class="st">"Cl"</span>, <span class="st">"SO3"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># impute half of detection threshold</span></span></span>
+<span class="r-in"><span><span class="va">glass_banias_minor</span><span class="op">$</span><span class="va">TiO2</span><span class="op">[[</span><span class="fl">1L</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0.5</span></span></span>
+<span class="r-in"><span><span class="fu">cancor_ord</span><span class="op">(</span><span class="va">glass_banias</span>, <span class="va">glass_banias_minor</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $cor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 1 1 1 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $xcoef</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]        [,3]       [,4]      [,5]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> SiO2  1.5208338 -11.442468  0.24637620 -3.6336531 -2.879401</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Na2O  0.6162264   4.530578  0.49288317  0.9782368  2.843217</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> CaO   1.9784095 -13.380217 -0.02445709 -5.2899746 -3.775547</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Al2O3 0.9152174  11.763052  1.76949275  4.7132684  4.535237</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> MgO   3.8891975 -32.462610 -0.81337485 -8.8720942 -6.686017</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ycoef</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]       [,4]     [,5]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TiO2   1.726017  -2.948854  1.0731891   1.910721 2.960014</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> FeO    1.644821   1.607463 -0.7174584  -7.612725 0.000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> MnO   -2.274981   3.129723 -3.8589747  -4.606006 0.000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> P2O5   2.274901 -22.265078  2.1204758   5.301190 0.000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Cl   -10.072183  10.842238 -9.3884609 -23.471152 0.000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $xcenter</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      SiO2      Na2O       CaO     Al2O3       MgO       K2O </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70.691667 12.196667  8.383333  1.210000  2.736667  2.045000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ycenter</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      TiO2       FeO       MnO      P2O5        Cl       SO3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.1933333 0.4300000 0.9666667 0.2700000 0.8100000 0.3483333 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "cancor_ord"</span>
+<span class="r-in"><span><span class="co"># interset/intraset correlations as standard/principal coordinates</span></span></span>
+<span class="r-in"><span><span class="va">glass_cca</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">cancor_ord</span><span class="op">(</span><span class="va">glass_banias</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, <span class="va">glass_banias_minor</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, scores <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">glass_cca</span><span class="op">$</span><span class="va">x.xscores</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">glass_cca</span><span class="op">$</span><span class="va">cor</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]        [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> SiO2 -0.9261925 -0.3594308 -0.02748688</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Na2O -0.5467957 -0.5477923 -0.42732349</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> CaO   0.7639885  0.6168220 -0.03273126</span>
+<span class="r-in"><span><span class="va">glass_cca</span><span class="op">$</span><span class="va">x.yscores</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]        [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> SiO2 -0.9261925 -0.3594308 -0.02748688</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Na2O -0.5467957 -0.5477923 -0.42732349</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> CaO   0.7639885  0.6168220 -0.03273126</span>
 </code></pre></div>
     </div>
   </div>
@@ -224,7 +313,7 @@ attributes are added to enable them.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -262,6 +262,9 @@
     <loc>/reference/methods-cmds.html</loc>
   </url>
   <url>
+    <loc>/reference/methods-correspondence.html</loc>
+  </url>
+  <url>
     <loc>/reference/methods-eigen.html</loc>
   </url>
   <url>
@@ -281,6 +284,9 @@
   </url>
   <url>
     <loc>/reference/methods-lra.html</loc>
+  </url>
+  <url>
+    <loc>/reference/methods-mca.html</loc>
   </url>
   <url>
     <loc>/reference/methods-mjca.html</loc>

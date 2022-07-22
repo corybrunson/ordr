@@ -18,7 +18,7 @@ factorization underlying an ordination."><!-- mathjax --><script src="https://cd
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
       </span>
     </div>
 
@@ -113,9 +113,11 @@ factorization underlying an ordination.</p>
 
 
 <dt>elements</dt>
-<dd><p>Character; which elements of each factor for which to render
-graphical elements. One of <code>"all"</code> (the default), <code>"active"</code>, or
-<code>"supplementary"</code>, with partial matching.</p></dd>
+<dd><p>Character vector; which elements of each factor for which to
+render graphical elements. One of <code>"all"</code> (the default), <code>"active"</code>, or any
+supplementary element type defined by the specific class methods (e.g.
+<code>"score"</code> for 'factanal', 'lda_ord', and 'cancord_ord' and <code>"intraset"</code> and
+<code>"interset"</code> for 'cancor_ord').</p></dd>
 
 
 <dt>...</dt>
@@ -298,7 +300,7 @@ is square.)</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -1,3 +1,22 @@
+# ordr 0.0.2
+
+This pre-release makes several substantive changes in preparation for CRAN submission.
+
+## element types
+
+Annotation of active and supplementary elements is standardized: The character augmentation `.element` replaces the logical `.supplement`, and class methods either omit it entirely (when all retrieved elements are active) or include it in both row and column augmentation (when either includes supplementary elements). The value of `.element` is either 'active' or a type of supplement, e.g. 'score'.
+
+## dependencies
+
+Extraneous dependencies are dropped to reduce overhead. This takes two forms:
+
+1. Methods for classes from specialty (lower-priority) packages (**candisc** and **ca**) are moved to **ordr.extra** and replaced with methods for classes from higher-priority packages (**stats** and **MASS**).
+2. One-off uses of specialty packages for examples and vignettes are replaced.
+
+## documentation
+
+The `Description` field in DESCRIPTION is expanded and documentation throughout is slightly revised, including some new references.
+
 # ordr 0.0.1
 
 This is a pre-release in anticipation of a first CRAN submission.

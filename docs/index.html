@@ -12,8 +12,24 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="A tidyverse Extension for Ordinations and Biplots">
-<meta property="og:description" content="A unified framework for ordination objects and biplot methods using
-    tidy principles.">
+<meta property="og:description" content="Ordination (Podani, 2000)
+    &lt;http://www.euronet.nl/users/backhuys/poda.htm&gt; comprises several
+    multivariate exploratory and explanatory techniques with theoretial
+    foundations in geometric data analysis (Le Roux &amp; Rouanet, 2005)
+    &lt;doi:10.1007/1-4020-2236-0&gt;. The most popular and established of these,
+    including principal components analysis, correspondence analysis,
+    multidimensional scaling, factor analysis, and discriminant analysis,
+    rely on eigen-decompositions or singular value decompositions of
+    pre-processed numeric matrix data (Greenacre, 2010)
+    &lt;https://www.fbbva.es/microsite/multivariate-statistics/biplots.html&gt;. These
+    decompositions give rise to a set of shared (artificial or latent)
+    coordinates along which the row and column elements can be measured, and the
+    overlay of their scatterplots on these axes is called a biplot
+    (Gabriel, 1971) &lt;doi:10.1093/biomet/58.3.453&gt;. ordr provides inspection,
+    extraction, manipulation, and visualization tools for several popular
+    ordination classes supported by a set of accessor methods. It is inspired by
+    and designed to interface naturally with tidyverse workflows
+    (Wickham &amp;al, 2019) &lt;doi:10.21105/joss.01686&gt;.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -34,7 +50,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
       </span>
     </div>
 
@@ -333,7 +349,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
