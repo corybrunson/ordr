@@ -1,5 +1,3 @@
-context("classical multi-dimensional scaling, unclassed")
-
 fit_cmds <- cmdscale(eurodist, k = 6L, eig = TRUE, x.ret = TRUE)
 
 test_that("tidiers handle `cmdscale()` output", {
@@ -18,4 +16,5 @@ test_that("tidiers handle `cmdscale()` output", {
   expect_equal(dim(tidy_points), c(21L, 7L))
   expect_equal(dim(tidy_eig), c(6L, 4L))
   expect_equal(dim(tidy_x), c(21L * 20L / 2L, 3L))
+  
 })

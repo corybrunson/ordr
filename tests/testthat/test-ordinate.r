@@ -1,5 +1,3 @@
-context("ordinate function")
-
 set.seed(1)
 rdata <- data.frame(
   a = rnorm(n = 5L, mean = 5),

@@ -1,5 +1,3 @@
-context("dplyr verbs for ordination factors")
-
 # arbitrary ordination object
 pca <- augment_ord(as_tbl_ord(prcomp(iris[, -5])))
 

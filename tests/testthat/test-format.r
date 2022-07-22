@@ -1,5 +1,3 @@
-context("formatting")
-
 ord <- prcomp(iris[, 1:4])
 
 # adapted from tibble tests
