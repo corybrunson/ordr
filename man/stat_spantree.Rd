@@ -9,6 +9,7 @@ stat_spantree(
   data = NULL,
   geom = "segment",
   position = "identity",
+  engine = "vegan",
   method = "euclidean",
   show.legend = NA,
   inherit.aes = TRUE,
@@ -43,7 +44,11 @@ from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
-\item{method}{Passed to \code{\link[stats:dist]{stats::dist()}}.}
+\item{engine}{A single character string specifying the package implementation
+to use; either \code{"vegan"} or \code{"mlpack"}.}
+
+\item{method}{Passed to \code{\link[stats:dist]{stats::dist()}} if \code{engine} is \code{"vegan"}, ignored if
+\code{"mlpack"}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -124,11 +129,12 @@ eurodist \%>\%
   augment_ord() \%>\%
   print() -> euro_mds
 # biplot with minimal spanning tree based on full-dimensional distances
+# (as implemented in {mlpack})
 euro_mds \%>\%
   ggbiplot() +
   scale_y_reverse() +
   stat_cols_spantree(
-    ord_aes(euro_mds), check.aes = FALSE,
+    ord_aes(euro_mds), check.aes = FALSE, engine = "mlpack",
     alpha = .5, linetype = "dotted"
   ) +
   geom_cols_text(aes(label = .name), size = 3) +

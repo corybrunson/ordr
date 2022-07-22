@@ -6,12 +6,15 @@
 
 #' @details
 #'
-#' The unexported `recover_*()` functions extract one or both of the row and
-#' column matrix factors that constitute the original ordination. These are
-#' interpreted as the case scores (rows) and the variable loadings (columns).
-#' The `get_*()` functions optionally (and by default) include any supplemental
-#' observations (see [supplementation]). The `recover_*()` functions are
-#' generics that require methods for each ordination class.
+#' The `recover_*()` [S3 methods][base::S3Methods] extract one or both of the
+#' row and column matrix factors that constitute the original ordination. These
+#' are interpreted as the case scores (rows) and the variable loadings
+#' (columns). The `get_*()` functions optionally (and by default) include any
+#' supplemental observations (see [supplementation]).
+#'
+#' The `recover_*()` functions are generics that require methods for each
+#' ordination class. They are not intended to be called directly but are
+#' exported so that users can query `methods("recover_*")`.
 #'
 #' `get_coord()` retrieves the names of the coordinates shared by the matrix
 #' factors on which the original data were ordinated, and `get_inertia()`
@@ -27,14 +30,17 @@
 #' @param x An object of class '[tbl_ord]'.
 #' @param ... Additional arguments from [base::as.matrix()]; ignored.
 #' @template param-matrix
-#' @param elements Character; which elements of each factor for which to render
-#'   graphical elements. One of `"all"` (the default), `"active"`, or
-#'   `"supplementary"`, with partial matching.
+#' @template param-elements
+#' @family generic accessors
 #' @example inst/examples/ex-ord-accessors.r
 NULL
 
+#' @rdname accessors
+#' @export
 recover_rows <- function(x) UseMethod("recover_rows")
 
+#' @rdname accessors
+#' @export
 recover_cols <- function(x) UseMethod("recover_cols")
 
 recover_factor <- function(x, .matrix) {
@@ -49,16 +55,24 @@ recover_factor <- function(x, .matrix) {
 # need `recover_*` functions before and after coercion;
 # `recover_*.tbl_ord` are unnecessary
 
+#' @rdname accessors
+#' @export
 recover_rows.default <- function(x) x$rows
 
+#' @rdname accessors
+#' @export
 recover_cols.default <- function(x) x$cols
 
 # for fortified tbl_ords (also coordinates?)
 
+#' @rdname accessors
+#' @export
 recover_rows.data.frame <- function(x) {
   x[x$.matrix == "rows", -match(".matrix", names(x))]
 }
 
+#' @rdname accessors
+#' @export
 recover_cols.data.frame <- function(x) {
   x[x$.matrix == "cols", -match(".matrix", names(x))]
 }
@@ -66,12 +80,19 @@ recover_cols.data.frame <- function(x) {
 #' @rdname accessors
 #' @export
 get_rows <- function(x, elements = "all") {
-  elements <- match.arg(elements, c("all", "active", "supplementary"))
-  u <- recover_rows(x)
-  if (elements == "supplementary") {
-    u <- supplementation_rows(x)
-  } else if (elements == "all") {
-    u <- rbind(u, supplementation_rows(x))
+  # ensure that `elements` is a character singleton
+  stopifnot(
+    is.character(elements),
+    length(elements) == 1L
+  )
+  # subset accordingly
+  u <- if (elements == "all") {
+    rbind(recover_rows(x), supplementation_rows(x))
+  } else if (elements == "active") {
+    recover_rows(x)
+  } else {
+    # -+- need to recognize supplementary subtypes -+-
+    supplementation_rows(x)
   }
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
@@ -81,18 +102,25 @@ get_rows <- function(x, elements = "all") {
     dimnames(s) <- rep(list(recover_coord(x)), 2L)
     u <- u %*% s
   }
-  return(u)
+  u
 }
 
 #' @rdname accessors
 #' @export
 get_cols <- function(x, elements = "all") {
-  elements <- match.arg(elements, c("all", "active", "supplementary"))
-  v <- recover_cols(x)
-  if (elements == "supplementary") {
-    v <- supplementation_cols(x)
-  } else if (elements == "all") {
-    v <- rbind(v, supplementation_cols(x))
+  # ensure that `elements` is a character singleton
+  stopifnot(
+    is.character(elements),
+    length(elements) == 1L
+  )
+  # subset accordingly
+  v <- if (elements == "all") {
+    rbind(recover_cols(x), supplementation_cols(x))
+  } else if (elements == "active") {
+    recover_cols(x)
+  } else {
+    # -+- need to recognize supplementary subtypes -+-
+    supplementation_cols(x)
   }
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
@@ -102,7 +130,7 @@ get_cols <- function(x, elements = "all") {
     dimnames(s) <- rep(list(recover_coord(x)), 2L)
     v <- v %*% s
   }
-  return(v)
+  v
 }
 
 get_factor <- function(x, .matrix, elements = "all") {
@@ -128,16 +156,26 @@ as.matrix.tbl_ord <- function(
   get_factor(x, .matrix = .matrix, elements = elements)
 }
 
+#' @rdname accessors
+#' @export
 recover_inertia <- function(x) UseMethod("recover_inertia")
 
+#' @rdname accessors
+#' @export
 recover_inertia.default <- function(x) NA_real_
 
+#' @rdname accessors
+#' @export
 recover_coord <- function(x) UseMethod("recover_coord")
 
+#' @rdname accessors
+#' @export
 recover_coord.default <- function(x) {
   intersect(colnames(recover_rows(x)), colnames(recover_cols(x)))
 }
 
+#' @rdname accessors
+#' @export
 recover_coord.data.frame <- function(x) {
   if (! is.null(attr(x, "coordinates"))) {
     attr(x, "coordinates")

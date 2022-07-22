@@ -3,9 +3,33 @@
 \name{methods-svd}
 \alias{methods-svd}
 \alias{as_tbl_ord.svd_ord}
+\alias{recover_rows.svd_ord}
+\alias{recover_cols.svd_ord}
+\alias{recover_inertia.svd_ord}
+\alias{recover_coord.svd_ord}
+\alias{recover_conference.svd_ord}
+\alias{augmentation_rows.svd_ord}
+\alias{augmentation_cols.svd_ord}
+\alias{augmentation_coord.svd_ord}
 \title{Functionality for singular value decompositions}
 \usage{
 \method{as_tbl_ord}{svd_ord}(x)
+
+\method{recover_rows}{svd_ord}(x)
+
+\method{recover_cols}{svd_ord}(x)
+
+\method{recover_inertia}{svd_ord}(x)
+
+\method{recover_coord}{svd_ord}(x)
+
+\method{recover_conference}{svd_ord}(x)
+
+\method{augmentation_rows}{svd_ord}(x)
+
+\method{augmentation_cols}{svd_ord}(x)
+
+\method{augmentation_coord}{svd_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
@@ -34,10 +58,10 @@ get_conference(spend_svd)
 \seealso{
 Other methods for singular value decomposition-based techniques: 
 \code{\link{methods-cancor}},
-\code{\link{methods-ca}},
+\code{\link{methods-correspondence}},
 \code{\link{methods-lda}},
 \code{\link{methods-lra}},
-\code{\link{methods-mjca}},
+\code{\link{methods-mca}},
 \code{\link{methods-prcomp}},
 \code{\link{methods-princomp}}
 }

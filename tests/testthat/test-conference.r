@@ -1,5 +1,3 @@
-context("conference")
-
 iris_pca <- as_tbl_ord(prcomp(iris[, 1:4]))
 arrests_lra <- as_tbl_ord(lra(USArrests[, c(1,2,4)]))
 

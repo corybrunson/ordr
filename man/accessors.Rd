@@ -2,19 +2,52 @@
 % Please edit documentation in R/ord-accessors.r
 \name{accessors}
 \alias{accessors}
+\alias{recover_rows}
+\alias{recover_cols}
+\alias{recover_rows.default}
+\alias{recover_cols.default}
+\alias{recover_rows.data.frame}
+\alias{recover_cols.data.frame}
 \alias{get_rows}
 \alias{get_cols}
 \alias{as.matrix.tbl_ord}
+\alias{recover_inertia}
+\alias{recover_inertia.default}
+\alias{recover_coord}
+\alias{recover_coord.default}
+\alias{recover_coord.data.frame}
 \alias{get_coord}
 \alias{get_inertia}
 \alias{dim.tbl_ord}
 \title{Access factors, coordinates, and metadata from ordination objects}
 \usage{
+recover_rows(x)
+
+recover_cols(x)
+
+\method{recover_rows}{default}(x)
+
+\method{recover_cols}{default}(x)
+
+\method{recover_rows}{data.frame}(x)
+
+\method{recover_cols}{data.frame}(x)
+
 get_rows(x, elements = "all")
 
 get_cols(x, elements = "all")
 
 \method{as.matrix}{tbl_ord}(x, ..., .matrix, elements = "all")
+
+recover_inertia(x)
+
+\method{recover_inertia}{default}(x)
+
+recover_coord(x)
+
+\method{recover_coord}{default}(x)
+
+\method{recover_coord}{data.frame}(x)
 
 get_coord(x)
 
@@ -25,9 +58,11 @@ get_inertia(x)
 \arguments{
 \item{x}{An object of class '\link{tbl_ord}'.}
 
-\item{elements}{Character; which elements of each factor for which to render
-graphical elements. One of \code{"all"} (the default), \code{"active"}, or
-\code{"supplementary"}, with partial matching.}
+\item{elements}{Character vector; which elements of each factor for which to
+render graphical elements. One of \code{"all"} (the default), \code{"active"}, or any
+supplementary element type defined by the specific class methods (e.g.
+\code{"score"} for 'factanal', 'lda_ord', and 'cancord_ord' and \code{"intraset"} and
+\code{"interset"} for 'cancor_ord').}
 
 \item{...}{Additional arguments from \code{\link[base:matrix]{base::as.matrix()}}; ignored.}
 
@@ -40,12 +75,15 @@ These functions return information about the matrix
 factorization underlying an ordination.
 }
 \details{
-The unexported \verb{recover_*()} functions extract one or both of the row and
-column matrix factors that constitute the original ordination. These are
-interpreted as the case scores (rows) and the variable loadings (columns).
-The \verb{get_*()} functions optionally (and by default) include any supplemental
-observations (see \link{supplementation}). The \verb{recover_*()} functions are
-generics that require methods for each ordination class.
+The \verb{recover_*()} \link[base:UseMethod]{S3 methods} extract one or both of the
+row and column matrix factors that constitute the original ordination. These
+are interpreted as the case scores (rows) and the variable loadings
+(columns). The \verb{get_*()} functions optionally (and by default) include any
+supplemental observations (see \link{supplementation}).
+
+The \verb{recover_*()} functions are generics that require methods for each
+ordination class. They are not intended to be called directly but are
+exported so that users can query \code{methods("recover_*")}.
 
 \code{get_coord()} retrieves the names of the coordinates shared by the matrix
 factors on which the original data were ordinated, and \code{get_inertia()}
@@ -71,3 +109,10 @@ get_inertia(arrests_lra)
 # get dimensions of underlying matrix factorization (not of original data)
 dim(arrests_lra)
 }
+\seealso{
+Other generic accessors: 
+\code{\link{augmentation}},
+\code{\link{conference}},
+\code{\link{supplementation}}
+}
+\concept{generic accessors}

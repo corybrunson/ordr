@@ -1,7 +1,7 @@
 # illustrative ordination: correspendence analysis of hair & eye data
 haireye_ca <- ordinate(
   as.data.frame(rowSums(HairEyeColor, dims = 2L)),
-  cols = everything(), model = ca::ca
+  cols = everything(), model = MASS::corresp
 )
 print(haireye_ca)
 # check distribution of inertia

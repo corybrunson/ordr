@@ -1,5 +1,3 @@
-context("ordinate function")
-
 set.seed(1)
 rdata <- data.frame(
   a = rnorm(n = 5L, mean = 5),
@@ -8,7 +6,6 @@ rdata <- data.frame(
 )
 
 test_that("`ordinate()` can handle appropriate models", {
-  expect_error(ordinate(rdata, everything(), ca::ca), regexp = NA)
   expect_error(ordinate(rdata, everything(), lra), regexp = NA)
   expect_error(ordinate(rdata, everything(), prcomp), regexp = NA)
   expect_error(ordinate(rdata, everything(), princomp), regexp = NA)

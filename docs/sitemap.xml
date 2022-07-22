@@ -31,6 +31,9 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/news/index.html</loc>
+  </url>
+  <url>
     <loc>/reference/accessors.html</loc>
   </url>
   <url>
@@ -59,6 +62,9 @@
   </url>
   <url>
     <loc>/reference/classes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cmdscale_tidiers.html</loc>
   </url>
   <url>
     <loc>/reference/conference.html</loc>
@@ -229,6 +235,9 @@
     <loc>/reference/lda-ord.html</loc>
   </url>
   <url>
+    <loc>/reference/list_tidiers.html</loc>
+  </url>
+  <url>
     <loc>/reference/lra-ord.html</loc>
   </url>
   <url>
@@ -253,7 +262,13 @@
     <loc>/reference/methods-cmds.html</loc>
   </url>
   <url>
+    <loc>/reference/methods-correspondence.html</loc>
+  </url>
+  <url>
     <loc>/reference/methods-eigen.html</loc>
+  </url>
+  <url>
+    <loc>/reference/methods-factanal.html</loc>
   </url>
   <url>
     <loc>/reference/methods-kmeans.html</loc>
@@ -269,6 +284,9 @@
   </url>
   <url>
     <loc>/reference/methods-lra.html</loc>
+  </url>
+  <url>
+    <loc>/reference/methods-mca.html</loc>
   </url>
   <url>
     <loc>/reference/methods-mjca.html</loc>

@@ -234,6 +234,32 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
 
 ![](man/figures/README-interpolation%20biplot-1.png)<!-- -->
 
+When variables are represented in standard coordinates, as typically in
+PCA, their rules can be rescaled to yield a prediction biplot:[^9]
+
+``` r
+ggbiplot(iris_pca, prediction = TRUE, axis.percents = FALSE) +
+  theme_biplot() +
+  geom_rows_point(aes(color = Species, shape = Species)) +
+  stat_rows_center(
+    aes(color = Species, shape = Species),
+    size = 5, alpha = .5, fun.data = mean_se
+  ) +
+  geom_cols_axis(aes(label = .name, center = .center, scale = .scale)) +
+  ggtitle("Prediction biplot of Anderson's iris measurements",
+          "Project a marker onto an axis to approximate its measurement")
+```
+
+![](man/figures/README-prediction%20biplot-1.png)<!-- -->
+
+``` r
+aggregate(iris[, 1:4], by = iris[, "Species", drop = FALSE], FUN = mean)
+#>      Species Sepal.Length Sepal.Width Petal.Length Petal.Width
+#> 1     setosa        5.006       3.428        1.462       0.246
+#> 2 versicolor        5.936       2.770        4.260       1.326
+#> 3  virginica        6.588       2.974        5.552       2.026
+```
+
 ### more methods
 
 The auxiliary package
@@ -324,3 +350,7 @@ Roux.
 
 [^8]: The radiating text geom, like several other features, is adapted
     from the **ggbiplot** package.
+
+[^9]: This is an experimental feature only available for linear methods,
+    namely eigendecomposition, singular value decomposition, and
+    principal components analysis.

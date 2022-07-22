@@ -1,7 +1,7 @@
 # correspondence analysis of combined female and male hair and eye color data
 HairEyeColor %>%
   rowSums(dims = 2L) %>%
-  ca::ca() %>%
+  MASS::corresp(nf = 2L) %>%
   as_tbl_ord() %>%
   augment_ord() %>%
   print() -> hec_ca

@@ -58,3 +58,7 @@ tidy_xyz <- getFromNamespace("tidy_xyz", "broom")
 tidy_irlba <- getFromNamespace("tidy_irlba", "broom")
 tidy_svd <- getFromNamespace("tidy_svd", "broom")
 glance_optim <- getFromNamespace("glance_optim", "broom")
+
+#' @importFrom utils globalVariables
+globalVariables(c("PC", "std.dev", "percent", "column"))
+# -+- This is not ideal but used to pre-empt a CRAN NOTE.

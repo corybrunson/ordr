@@ -18,7 +18,7 @@ ordination."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
       </span>
     </div>
 
@@ -30,7 +30,7 @@ ordination."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -39,6 +39,9 @@ ordination."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs
       <a href="../articles/cmds-variables.html">multidimensional scaling of variables</a>
     </li>
   </ul></li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -59,27 +62,30 @@ ordination.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">recover_conference</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="co"># S3 method for default</span>
-<span class="fu">recover_conference</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">get_conference</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">revert_conference</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">confer_inertia</span><span class="op">(</span><span class="va">x</span>, <span class="va">p</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">recover_conference</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for default</span></span>
+<span><span class="fu">recover_conference</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">get_conference</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">revert_conference</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">confer_inertia</span><span class="op">(</span><span class="va">x</span>, <span class="va">p</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A <a href="tbl_ord.html">tbl_ord</a> object.</p></dd>
+
+
 <dt>p</dt>
 <dd><p>Numeric vector of length 1 or 2. If length 1, the proportion of the
 inertia assigned to the cases, with the remainder <code>1 - p</code> assigned to the
 variables. If length 2, the proportions of the inertia assigned to the
 cases and to the variables, respectively.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -91,6 +97,8 @@ Biplots superimpose the projections of the rows and the columns of \(X\)
 onto these coordinate vectors, scaled by some proportion of the total
 inertia: \(UD^p\) and \(VD^q\). A biplot is <em>balanced</em> if \(p+q=1\).
 Read Orlov (2013) for more on conferring inertia in PCA.</p>
+<p><code>recover_conference()</code>, like the other accessors, is an <a href="https://rdrr.io/r/base/UseMethod.html" class="external-link">S3 method</a> that is exported for convenience but not intended to
+be used directly.</p>
 <p><em>Note: In case the <code>"inertia"</code> attribute is a rectangular matrix, one may
 only be able to confer it entirely to the cases (<code>p = 1</code>) or entirely to the
 variables (<code>p = 0</code>).</em></p>
@@ -101,7 +109,127 @@ variables (<code>p = 0</code>).</em></p>
 variable and Linear Discriminant Analysis". CrossValidated, accessed
 2019-07-26. <a href="https://stats.stackexchange.com/a/83114/68743" class="external-link">https://stats.stackexchange.com/a/83114/68743</a></p>
     </div>
+    <div id="see-also">
+    <h2>See also</h2>
+    <div class="dont-index"><p>Other generic accessors: 
+<code><a href="accessors.html">accessors</a></code>,
+<code><a href="augmentation.html">augmentation</a></code>,
+<code><a href="supplementation.html">supplementation</a></code></p></div>
+    </div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># illustrative ordination: correspendence analysis of hair &amp; eye data</span></span></span>
+<span class="r-in"><span><span class="va">haireye_ca</span> <span class="op">&lt;-</span> <span class="fu"><a href="ordinate.html">ordinate</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">HairEyeColor</span>, dims <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  cols <span class="op">=</span> <span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, model <span class="op">=</span> <span class="fu">MASS</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/MASS/man/corresp.html" class="external-link">corresp</a></span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">haireye_ca</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'correspondence': (4 x 1) x (4 x 1)'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # 1 coordinate: Can1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (standard): [ 4 x 1 | 1 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Can1 |   .name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.10</span>  | <span style="color: #BCBCBC;">1</span> Black</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.324</span> | <span style="color: #BCBCBC;">2</span> Brown</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.283</span> | <span style="color: #BCBCBC;">3</span> Red  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  1.83  | <span style="color: #BCBCBC;">4</span> Blond</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 1 | 1 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Can1 |   .name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.08</span>  | <span style="color: #BCBCBC;">1</span> Brown</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  1.20  | <span style="color: #BCBCBC;">2</span> Blue </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.465</span> | <span style="color: #BCBCBC;">3</span> Hazel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.354 | <span style="color: #BCBCBC;">4</span> Green</span>
+<span class="r-in"><span><span class="co"># check distribution of inertia</span></span></span>
+<span class="r-in"><span><span class="fu">get_conference</span><span class="op">(</span><span class="va">haireye_ca</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0 0</span>
+<span class="r-in"><span><span class="co"># confer inertia to rows, then to columns</span></span></span>
+<span class="r-in"><span><span class="fu">confer_inertia</span><span class="op">(</span><span class="va">haireye_ca</span>, <span class="st">"rows"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'correspondence': (4 x 1) x (4 x 1)'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # 1 coordinate: Can1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 4 x 1 | 1 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Can1 |   .name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.505</span> | <span style="color: #BCBCBC;">1</span> Black</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.148</span> | <span style="color: #BCBCBC;">2</span> Brown</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.130</span> | <span style="color: #BCBCBC;">3</span> Red  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.835 | <span style="color: #BCBCBC;">4</span> Blond</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 1 | 1 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Can1 |   .name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.08</span>  | <span style="color: #BCBCBC;">1</span> Brown</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  1.20  | <span style="color: #BCBCBC;">2</span> Blue </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.465</span> | <span style="color: #BCBCBC;">3</span> Hazel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.354 | <span style="color: #BCBCBC;">4</span> Green</span>
+<span class="r-in"><span><span class="fu">confer_inertia</span><span class="op">(</span><span class="va">haireye_ca</span>, <span class="st">"columns"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'correspondence': (4 x 1) x (4 x 1)'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # 1 coordinate: Can1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (standard): [ 4 x 1 | 1 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Can1 |   .name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.10</span>  | <span style="color: #BCBCBC;">1</span> Black</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.324</span> | <span style="color: #BCBCBC;">2</span> Brown</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.283</span> | <span style="color: #BCBCBC;">3</span> Red  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  1.83  | <span style="color: #BCBCBC;">4</span> Blond</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (principal): [ 4 x 1 | 1 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Can1 |   .name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.492</span> | <span style="color: #BCBCBC;">1</span> Brown</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  0.547 | <span style="color: #BCBCBC;">2</span> Blue </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.213</span> | <span style="color: #BCBCBC;">3</span> Hazel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.162 | <span style="color: #BCBCBC;">4</span> Green</span>
+<span class="r-in"><span><span class="co"># confer inertia symmetrically</span></span></span>
+<span class="r-in"><span><span class="op">(</span><span class="va">haireye_ca</span> <span class="op">&lt;-</span> <span class="fu">confer_inertia</span><span class="op">(</span><span class="va">haireye_ca</span>, <span class="st">"symmetric"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'correspondence': (4 x 1) x (4 x 1)'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # 1 coordinate: Can1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (symmetric): [ 4 x 1 | 1 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Can1 |   .name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.746</span> | <span style="color: #BCBCBC;">1</span> Black</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.219</span> | <span style="color: #BCBCBC;">2</span> Brown</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.192</span> | <span style="color: #BCBCBC;">3</span> Red  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  1.24  | <span style="color: #BCBCBC;">4</span> Blond</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (symmetric): [ 4 x 1 | 1 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Can1 |   .name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.728</span> | <span style="color: #BCBCBC;">1</span> Brown</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  0.810 | <span style="color: #BCBCBC;">2</span> Blue </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.315</span> | <span style="color: #BCBCBC;">3</span> Hazel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.239 | <span style="color: #BCBCBC;">4</span> Green</span>
+<span class="r-in"><span><span class="co"># check redistributed inertia</span></span></span>
+<span class="r-in"><span><span class="fu">get_conference</span><span class="op">(</span><span class="va">haireye_ca</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5 0.5</span>
+<span class="r-in"><span><span class="co"># restore default distribution of inertia</span></span></span>
+<span class="r-in"><span><span class="fu">revert_conference</span><span class="op">(</span><span class="va">haireye_ca</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'correspondence': (4 x 1) x (4 x 1)'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # 1 coordinate: Can1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (standard): [ 4 x 1 | 1 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Can1 |   .name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.10</span>  | <span style="color: #BCBCBC;">1</span> Black</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.324</span> | <span style="color: #BCBCBC;">2</span> Brown</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.283</span> | <span style="color: #BCBCBC;">3</span> Red  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  1.83  | <span style="color: #BCBCBC;">4</span> Blond</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 1 | 1 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Can1 |   .name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.08</span>  | <span style="color: #BCBCBC;">1</span> Brown</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  1.20  | <span style="color: #BCBCBC;">2</span> Blue </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.465</span> | <span style="color: #BCBCBC;">3</span> Hazel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.354 | <span style="color: #BCBCBC;">4</span> Green</span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -114,7 +242,7 @@ variable and Linear Discriminant Analysis". CrossValidated, accessed
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

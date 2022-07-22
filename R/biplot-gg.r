@@ -46,6 +46,11 @@
 #' @param mapping List of default aesthetic mappings to use for the biplot. The
 #'   default assigns the first two coordinates to the aesthetics `x` and `y`.
 #'   Other assignments must be supplied in each layer added to the plot.
+#' @param prediction Logical; whether to build a prediction biplot rather than
+#'   an interpolation biplot (the default). `TRUE` requires that `x` and `y` are
+#'   mapped to shared coordinates, that no other shared coordinates are mapped
+#'   to, and inertia is conferred entirely onto one matrix factor. **NB:** This
+#'   option is only implemented for linear techniques (ED, SVD, & PCA).
 #' @inheritParams ggplot2::coord_equal
 #' @param axis.percents Whether to concatenate default axis labels with inertia
 #'   percentages.
@@ -60,16 +65,17 @@
 #'   [fortify.tbl_ord()].
 #' @example inst/examples/ex-ggbiplot-secaxis-iris.r
 #' @example inst/examples/ex-ggbiplot-lm-mtcars.r
+#' @example inst/examples/ex-ggbiplot-prediction-iris.r
 #' @seealso [ggplot2::ggplot2()], on which `ggbiplot()` is built.
 
 #' @rdname ggbiplot
 #' @export
 ggbiplot <- function(
-  ordination = NULL, mapping = aes(x = 1, y = 2),
-  xlim = NULL, ylim = NULL, expand = TRUE, clip = "on",
-  axis.percents = TRUE, sec.axes = NULL, scale.factor = NULL,
-  scale_rows = NULL, scale_cols = NULL,
-  ...
+    ordination = NULL, mapping = aes(x = 1, y = 2), prediction = FALSE,
+    xlim = NULL, ylim = NULL, expand = TRUE, clip = "on",
+    axis.percents = TRUE, sec.axes = NULL, scale.factor = NULL,
+    scale_rows = NULL, scale_cols = NULL,
+    ...
 ) {
   if (axis.percents) {
     # store inertia
@@ -78,6 +84,7 @@ ggbiplot <- function(
       axis.percents <- FALSE
     }
   }
+  ord_class <- class(un_tbl_ord(ordination))
   conference <- get_conference(ordination)
   
   # fortify `ordination` if necessary
@@ -85,13 +92,52 @@ ggbiplot <- function(
   
   # augment `mapping`, if necessary, with default coordinates
   mapping <- ensure_xy_aes(ordination, mapping)
-  # augment `mapping`, if necessary, with `.supplement`
+  
+  # augment `mapping`, if necessary, with `.element`
   if (! is.null(ordination)) {
-    if (! ".supplement" %in% names(ordination)) ordination$.supplement <- FALSE
-    mapping <- c(mapping, aes(.supplement = !! ".supplement"))
+    if (! ".element" %in% names(ordination))
+      ordination$.element <- NA_character_
+    mapping <- c(mapping, aes(.element = !! rlang::sym(".element")))
     class(mapping) <- "uneval"
   }
-
+  
+  if (prediction) {
+    
+    # -+- only linear ordinations for now -+-
+    if (! ord_class %in% c("eigen_ord", "svd_ord", "prcomp", "princomp")) {
+      warning("Prediction biplots are only implemented for linear methods ",
+              "(ED, SVD, PCA).")
+    } else {
+      
+      # rescale standard coordinates for prediction biplot
+      xy_map <- stringr::str_remove(as.character(mapping[c("x", "y")]), "^~")
+      if (! all(c("x", "y") %in% names(mapping)) &&
+          any(stringr::str_detect(names(mapping), "..coord"))) {
+        warning("For prediction biplots, ",
+                "map only `x` and `y` to shared coordinates.")
+      } else if (! all(xy_map %in% attr(ordination, "coordinates"))) {
+        warning("For prediction biplots, ",
+                "map both `x` and `y` to shared coordinates.")
+      } else if (! all(c(0, 1) %in% conference)) {
+        warning("For prediction biplots, ",
+                "inertia must be balanced and conferred on one factor.")
+      } else {
+        # remove coordinates other than those used in the biplot
+        ordination[setdiff(get_coord(ordination), xy_map)] <- NULL
+        # rescale standard coordinates
+        std_fac <- c("rows", "cols")[! as.logical(conference)]
+        std_ss <- apply(
+          ordination[ordination$.matrix == std_fac, xy_map],
+          1L,
+          function(x) sum(x^2)
+        )
+        ordination[ordination$.matrix == std_fac, xy_map] <-
+          ordination[ordination$.matrix == std_fac, xy_map] / std_ss
+      }
+      
+    }
+  }
+  
   # scale 'rows' or 'cols' as indicated by `scale_rows` and `scale_cols`
   if (! is.null(scale_rows) && ! is.null(ordination)) {
     ordination <- scale_ord(ordination, "rows", mapping, scale_rows)
@@ -129,7 +175,7 @@ ggbiplot <- function(
         ~ ifelse(ordination$.matrix == sec.axes, . * scale.factor, .)
       )
     )
-
+    
   }
   
   # conventional `ggplot()` call
@@ -182,7 +228,11 @@ ensure_xy_aes <- function(ordination, mapping) {
   if (is.null(ordination)) return(aes())
   coords <- get_coord(ordination)
   coord_vars <- syms(coords)
+  
   if (is.null(mapping$y)) {
+    if (length(coords) < 2L) {
+      stop("Ordination has too few coordinates; check `get_coord(<tbl_ord>)`.")
+    }
     mapping <- c(aes(y = !! coord_vars[[2]]), mapping)
   } else {
     if (is.numeric(mapping$y) && length(mapping$y) == 1) {
@@ -192,6 +242,7 @@ ensure_xy_aes <- function(ordination, mapping) {
       )
     }
   }
+  
   if (is.null(mapping$x)) {
     mapping <- c(aes(x = !! coord_vars[[1]]), mapping)
   } else {
@@ -202,6 +253,7 @@ ensure_xy_aes <- function(ordination, mapping) {
       )
     }
   }
+  
   class(mapping) <- "uneval"
   mapping
 }

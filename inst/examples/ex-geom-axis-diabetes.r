@@ -5,7 +5,10 @@ diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes)
 # bestow 'tbl_ord' class & augment observation, centroid, and variable fields
 as_tbl_ord(diabetes_lda) %>%
   augment_ord() %>%
-  mutate_rows(discriminant = ifelse(! .supplement, "centroid", "case")) %>%
+  mutate_rows(discriminant = ifelse(
+    .element == "active",
+    "centroid", "case"
+  )) %>%
   print() -> diabetes_lda
 # row-standard biplot
 diabetes_lda %>%
@@ -25,7 +28,10 @@ diabetes_lda <-
 # bestow 'tbl_ord' class & augment observation, centroid, and variable fields
 as_tbl_ord(diabetes_lda) %>%
   augment_ord() %>%
-  mutate_rows(discriminant = ifelse(! .supplement, "centroid", "case")) %>%
+  mutate_rows(discriminant = ifelse(
+    .element == "active",
+    "centroid", "case"
+  )) %>%
   print() -> diabetes_lda
 # symmetric biplot
 diabetes_lda %>%

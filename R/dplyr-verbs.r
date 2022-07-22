@@ -18,13 +18,14 @@
 #' @param var A variable specified as in [dplyr::pull()].
 #' @param ... Comma-separated unquoted expressions as in, e.g.,
 #'   [dplyr::select()].
-#' @param elements Character; which elements of each factor to which to bind new
-#'   annotation data. One of `"all"` (the default), `"active"`, or
-#'   `"supplementary"`, with partial matching.
+#' @template param-elements
 #' @template param-matrix
 
 pull_factor <- function(.data, var = -1, .matrix) {
-  pull(annotation_factor(.data, .matrix = .matrix), !! enquo(var))
+  crd <- as_tibble(get_factor(.data, .matrix = .matrix))
+  att <- annotation_factor(.data, .matrix = .matrix)
+  tbl <- bind_cols(crd, att)
+  pull(tbl, !! enquo(var))
 }
 #' @rdname dplyr-verbs
 #' @export
@@ -107,16 +108,20 @@ transmute_cols <- function(.data, ...) {
 
 cbind_factor <- function(.data, ..., .matrix, elements = "all") {
   ann_fac <- annotation_factor(.data, .matrix = .matrix)
-  att_fac <- if (elements == "all" || ! ".supplement" %in% names(.data)) {
+  att_fac <- if (elements == "all" || ! ".element" %in% names(ann_fac)) {
     tibble(...)
-  } else if (elements == "supplementary") {
-    n_p <- nrow(.data[.data$.matrix == .matrix & .data$.supplement == FALSE,
-                      , drop = FALSE])
-    bind_rows(tibble_pole(nrow = n_p), ...)
-  } else if (elements == "active") {
-    n_s <- nrow(.data[.data$.matrix == .matrix & .data$.supplement == TRUE,
-                      , drop = FALSE])
-    bind_rows(..., tibble_pole(nrow = n_s))
+  } else {
+    elts_rows <- ann_fac$.element == elements
+    if (! any(elts_rows)) {
+      warning("No ", elements, " elements found.")
+      tibble_pole(nrow = nrow(ann_fac))
+    } else {
+      n_above <- min(which(elts_rows)) - 1L
+      n_below <- min(which(rev(elts_rows))) - 1L
+      tbl_above <- if (n_above > 1L) tibble_pole(nrow = n_above)
+      tbl_below <- if (n_below > 1L) tibble_pole(nrow = n_below)
+      bind_rows(tbl_above, ..., tbl_below)
+    }
   }
   att <- if (nrow(ann_fac) == 0L) att_fac else bind_cols(ann_fac, att_fac)
   set_annotation_factor(.data, att, .matrix = .matrix)
@@ -124,12 +129,12 @@ cbind_factor <- function(.data, ..., .matrix, elements = "all") {
 #' @rdname dplyr-verbs
 #' @export
 cbind_rows <- function(.data, ..., elements = "all") {
-  cbind_factor(.data, ..., .matrix = "rows", elements = "all")
+  cbind_factor(.data, ..., .matrix = "rows", elements = elements)
 }
 #' @rdname dplyr-verbs
 #' @export
 cbind_cols <- function(.data, ..., elements = "all") {
-  cbind_factor(.data, ..., .matrix = "cols", elements = "all")
+  cbind_factor(.data, ..., .matrix = "cols", elements = elements)
 }
 
 left_join_factor <- function(.data, ..., .matrix) {

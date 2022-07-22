@@ -319,7 +319,7 @@ fa1 %>%
   as_tbl_ord() %>%
   augment_ord() %>%
   ggbiplot(sec.axes = "rows", scale.factor = 1/3) +
-  geom_rows_point(supplementary = TRUE) +
+  geom_rows_point(elements = "supp") +
   scale_alpha_manual(values = c(0, 1), guide = "none") +
   geom_cols_vector(arrow = NULL) +
   geom_cols_text(aes(label = .name))

@@ -27,9 +27,11 @@
 #' dimension reduction, feature extraction, and visualization. Well-known
 #' ordination techniques are predominantly unsupervised and include principal
 #' components analysis, multidimensional scaling, and correspondence analyis
-#' (Podani, 2000, Chapter 7; Palmer). A variety of other techniques may also be
-#' viewed, or treated using the same tools, as ordination, including linear
-#' regression, linear discriminant analysis, k-means clustering, and
+#' (Podani, 2000, Chapter 7; Palmer, n.d.). These methods are theoretically
+#' grounded in geometric data analysis (Le Roux & Rouanet, 2004) and powered by
+#' the matrix factorizations described below. A variety of other techniques may
+#' also be viewed, or treated using the same tools, as ordination, including
+#' linear regression, linear discriminant analysis, k-means clustering, and
 #' non-negative matrix factorization.
 #'
 #' _Biplots_ are two-layered scatterplots widely used to visualize unsupervised
@@ -72,6 +74,7 @@
 
 #' @template ref-podani2000
 #' @template ref-palmer
+#' @template ref-roux2004
 #' @template ref-gabriel1971
 #' @template ref-greenacre2010
 #' @template ref-orlov2015

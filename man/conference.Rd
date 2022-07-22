@@ -2,11 +2,17 @@
 % Please edit documentation in R/ord-conference.r
 \name{conference}
 \alias{conference}
+\alias{recover_conference}
+\alias{recover_conference.default}
 \alias{get_conference}
 \alias{revert_conference}
 \alias{confer_inertia}
 \title{Confer inertia to factors of a 'tbl_ord' object}
 \usage{
+recover_conference(x)
+
+\method{recover_conference}{default}(x)
+
 get_conference(x)
 
 revert_conference(x)
@@ -35,6 +41,9 @@ onto these coordinate vectors, scaled by some proportion of the total
 inertia: \eqn{UD^p} and \eqn{VD^q}. A biplot is \emph{balanced} if \eqn{p+q=1}.
 Read Orlov (2013) for more on conferring inertia in PCA.
 
+\code{recover_conference()}, like the other accessors, is an \link[base:UseMethod]{S3 method} that is exported for convenience but not intended to
+be used directly.
+
 \emph{Note: In case the \code{"inertia"} attribute is a rectangular matrix, one may
 only be able to confer it entirely to the cases (\code{p = 1}) or entirely to the
 variables (\code{p = 0}).}
@@ -43,7 +52,7 @@ variables (\code{p = 0}).}
 # illustrative ordination: correspendence analysis of hair & eye data
 haireye_ca <- ordinate(
   as.data.frame(rowSums(HairEyeColor, dims = 2L)),
-  cols = everything(), model = ca::ca
+  cols = everything(), model = MASS::corresp
 )
 print(haireye_ca)
 # check distribution of inertia
@@ -63,3 +72,10 @@ Orlov K (2013) \emph{Answer to} "Algebra of LDA. Fisher discrimination power of 
 variable and Linear Discriminant Analysis". CrossValidated, accessed
 2019-07-26. \url{https://stats.stackexchange.com/a/83114/68743}
 }
+\seealso{
+Other generic accessors: 
+\code{\link{accessors}},
+\code{\link{augmentation}},
+\code{\link{supplementation}}
+}
+\concept{generic accessors}

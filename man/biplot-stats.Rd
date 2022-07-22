@@ -255,7 +255,8 @@ data. Defaults to \code{FALSE}.}
 
 \item{mult}{Numeric value used to scale the coordinates.}
 
-\item{method}{Passed to \code{\link[stats:dist]{stats::dist()}}.}
+\item{method}{Passed to \code{\link[stats:dist]{stats::dist()}} if \code{engine} is \code{"vegan"}, ignored if
+\code{"mlpack"}.}
 
 \item{check.aes, check.param}{If \code{TRUE}, the default, will check that
 supplied parameters and aesthetics are understood by the \code{geom} or

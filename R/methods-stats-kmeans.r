@@ -14,6 +14,8 @@ NULL
 #' @export
 as_tbl_ord.kmeans <- as_tbl_ord_default
 
+#' @rdname methods-kmeans
+#' @export
 recover_rows.kmeans <- function(x) {
   res <- outer(x$cluster, 1:length(x$size), "==")
   mode(res) <- "integer"
@@ -21,14 +23,20 @@ recover_rows.kmeans <- function(x) {
   res
 }
 
+#' @rdname methods-kmeans
+#' @export
 recover_cols.kmeans <- function(x) {
   t(x$centers)
 }
 
+#' @rdname methods-kmeans
+#' @export
 recover_coord.kmeans <- function(x) {
   rownames(x$centers)
 }
 
+#' @rdname methods-kmeans
+#' @export
 augmentation_rows.kmeans <- function(x) {
   .name <- names(x$cluster)
   res <- if (is.null(.name)) {
@@ -40,6 +48,8 @@ augmentation_rows.kmeans <- function(x) {
   res
 }
 
+#' @rdname methods-kmeans
+#' @export
 augmentation_cols.kmeans <- function(x) {
   .name <- colnames(x$centers)
   res <- if (is.null(.name)) {
@@ -50,6 +60,8 @@ augmentation_cols.kmeans <- function(x) {
   res
 }
 
+#' @rdname methods-kmeans
+#' @export
 augmentation_coord.kmeans <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),

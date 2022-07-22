@@ -19,7 +19,7 @@ object."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mat
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
       </span>
     </div>
 
@@ -31,7 +31,7 @@ object."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mat
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -40,6 +40,9 @@ object."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mat
       <a href="../articles/cmds-variables.html">multidimensional scaling of variables</a>
     </li>
   </ul></li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -61,33 +64,35 @@ object.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">augmentation_rows</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">augmentation_cols</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">augmentation_factor</span><span class="op">(</span><span class="va">x</span>, <span class="va">.matrix</span><span class="op">)</span>
-
-<span class="fu">augmentation_coord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">augment_ord</span><span class="op">(</span><span class="va">x</span>, .matrix <span class="op">=</span> <span class="st">"dims"</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">augmentation_rows</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">augmentation_cols</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">augmentation_coord</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">augment_ord</span><span class="op">(</span><span class="va">x</span>, .matrix <span class="op">=</span> <span class="st">"dims"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>An object of class '<a href="tbl_ord.html">tbl_ord</a>'.</p></dd>
+
+
 <dt>.matrix</dt>
 <dd><p>A character string matching one of several indicators for one
 or both matrices in a matrix decomposition used for ordination. The
 standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</code> (for both).</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
-    <p>The <code>augmentation_*()</code> methods produce <a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a>s of values
-associated with the rows, columns, and artificial coordinates of an object of
-class '<a href="tbl_ord.html">tbl_ord</a>'. The first field of each tibble is <code>.name</code>, which contains
-the row, column, or coordinate names. Additional fields contain information
-about the rows, columns, or coordinates extracted from the ordination object.</p>
+    <p>The <code>augmentation_*()</code> <a href="https://rdrr.io/r/base/UseMethod.html" class="external-link">S3 methods</a> produce
+<a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a>s of values associated with the rows, columns, and
+artificial coordinates of an object of class '<a href="tbl_ord.html">tbl_ord</a>'. The first field of
+each tibble is <code>.name</code>, which contains the row, column, or coordinate names.
+Additional fields contain information about the rows, columns, or coordinates
+extracted from the ordination object.</p>
 <p>The function <code>augment_ord()</code> returns the ordination with either or both
 matrix factors annotated with the result of <code>augmentation_*()</code>. In this way
 <code>augment_ord()</code> works like <code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">generics::augment()</a></code>, as popularized by the
@@ -99,7 +104,11 @@ information contained in the original object becomes accessible to the user.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p><a href="tidiers.html">tidiers</a> and <a href="annotation.html">annotation</a> methods that interface with augmentation.</p></div>
+    <div class="dont-index"><p><a href="tidiers.html">tidiers</a> and <a href="annotation.html">annotation</a> methods that interface with augmentation.</p>
+<p>Other generic accessors: 
+<code><a href="accessors.html">accessors</a></code>,
+<code><a href="conference.html">conference</a></code>,
+<code><a href="supplementation.html">supplementation</a></code></p></div>
     </div>
 
   </div>
@@ -114,7 +123,7 @@ information contained in the original object becomes accessible to the user.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

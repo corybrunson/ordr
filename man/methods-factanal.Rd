@@ -3,9 +3,36 @@
 \name{methods-factanal}
 \alias{methods-factanal}
 \alias{as_tbl_ord.factanal}
+\alias{recover_rows.factanal}
+\alias{recover_cols.factanal}
+\alias{recover_inertia.factanal}
+\alias{recover_coord.factanal}
+\alias{recover_conference.factanal}
+\alias{supplementation_rows.factanal}
+\alias{augmentation_rows.factanal}
+\alias{augmentation_cols.factanal}
+\alias{augmentation_coord.factanal}
 \title{Functionality for factor analysis ('factanal') objects}
 \usage{
 \method{as_tbl_ord}{factanal}(x)
+
+\method{recover_rows}{factanal}(x)
+
+\method{recover_cols}{factanal}(x)
+
+\method{recover_inertia}{factanal}(x)
+
+\method{recover_coord}{factanal}(x)
+
+\method{recover_conference}{factanal}(x)
+
+\method{supplementation_rows}{factanal}(x)
+
+\method{augmentation_rows}{factanal}(x)
+
+\method{augmentation_cols}{factanal}(x)
+
+\method{augmentation_coord}{factanal}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
@@ -35,10 +62,10 @@ swiss_fa <- factanal(~ ., factors = 2L, data = swiss, scores = "regression")
 get_rows(swiss_fa, elements = "active")
 get_cols(swiss_fa)
 # recover scores
-head(get_rows(swiss_fa, elements = "supplementary"))
+head(get_rows(swiss_fa, elements = "score"))
 # augment column loadings with uniquenesses
 (swiss_fa <- augment_ord(swiss_fa))
-# symmetric biplot 
+# symmetric biplot
 swiss_fa \%>\%
   ggbiplot() +
   theme_bw() +
@@ -49,7 +76,7 @@ swiss_fa \%>\%
 # scores overlaid
 swiss_fa \%>\%
   confer_inertia("rows") \%>\%
-  ggbiplot(aes(label = .name), elements = "supplementary") +
+  ggbiplot(aes(label = .name), elements = "score") +
   theme_bw() +
   geom_cols_vector() +
   geom_cols_text_radiate() +

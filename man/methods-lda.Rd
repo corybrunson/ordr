@@ -4,11 +4,65 @@
 \alias{methods-lda}
 \alias{as_tbl_ord.lda}
 \alias{as_tbl_ord.lda_ord}
+\alias{recover_rows.lda}
+\alias{recover_rows.lda_ord}
+\alias{recover_cols.lda}
+\alias{recover_cols.lda_ord}
+\alias{recover_inertia.lda}
+\alias{recover_inertia.lda_ord}
+\alias{recover_coord.lda}
+\alias{recover_coord.lda_ord}
+\alias{recover_conference.lda}
+\alias{recover_conference.lda_ord}
+\alias{augmentation_rows.lda}
+\alias{augmentation_rows.lda_ord}
+\alias{augmentation_cols.lda}
+\alias{augmentation_cols.lda_ord}
+\alias{augmentation_coord.lda}
+\alias{augmentation_coord.lda_ord}
+\alias{supplementation_rows.lda}
+\alias{supplementation_rows.lda_ord}
 \title{Functionality for linear discriminant analysis ('lda') objects}
 \usage{
 \method{as_tbl_ord}{lda}(x)
 
 \method{as_tbl_ord}{lda_ord}(x)
+
+\method{recover_rows}{lda}(x)
+
+\method{recover_rows}{lda_ord}(x)
+
+\method{recover_cols}{lda}(x)
+
+\method{recover_cols}{lda_ord}(x)
+
+\method{recover_inertia}{lda}(x)
+
+\method{recover_inertia}{lda_ord}(x)
+
+\method{recover_coord}{lda}(x)
+
+\method{recover_coord}{lda_ord}(x)
+
+\method{recover_conference}{lda}(x)
+
+\method{recover_conference}{lda_ord}(x)
+
+\method{augmentation_rows}{lda}(x)
+
+\method{augmentation_rows}{lda_ord}(x)
+
+\method{augmentation_cols}{lda}(x)
+
+\method{augmentation_cols}{lda_ord}(x)
+
+\method{augmentation_coord}{lda}(x)
+
+\method{augmentation_coord}{lda_ord}(x)
+
+\method{supplementation_rows}{lda}(x)
+
+\method{supplementation_rows}{lda_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
@@ -31,6 +85,7 @@ lda_ord(iris[, 1:4], iris[, 5]) \%>\%
   print() -> iris_lda
 # recover centroid coordinates and measurement discriminant coefficients
 get_rows(iris_lda, elements = "active")
+head(get_rows(iris_lda, elements = "score"))
 get_cols(iris_lda)
 # augment ordination with centroid and measurement names
 augment_ord(iris_lda)
@@ -38,9 +93,9 @@ augment_ord(iris_lda)
 \seealso{
 Other methods for singular value decomposition-based techniques: 
 \code{\link{methods-cancor}},
-\code{\link{methods-ca}},
+\code{\link{methods-correspondence}},
 \code{\link{methods-lra}},
-\code{\link{methods-mjca}},
+\code{\link{methods-mca}},
 \code{\link{methods-prcomp}},
 \code{\link{methods-princomp}},
 \code{\link{methods-svd}}

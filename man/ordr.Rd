@@ -33,9 +33,11 @@ The package consists in several modules:
 dimension reduction, feature extraction, and visualization. Well-known
 ordination techniques are predominantly unsupervised and include principal
 components analysis, multidimensional scaling, and correspondence analyis
-(Podani, 2000, Chapter 7; Palmer). A variety of other techniques may also be
-viewed, or treated using the same tools, as ordination, including linear
-regression, linear discriminant analysis, k-means clustering, and
+(Podani, 2000, Chapter 7; Palmer, n.d.). These methods are theoretically
+grounded in geometric data analysis (Le Roux & Rouanet, 2004) and powered by
+the matrix factorizations described below. A variety of other techniques may
+also be viewed, or treated using the same tools, as ordination, including
+linear regression, linear discriminant analysis, k-means clustering, and
 non-negative matrix factorization.
 
 \emph{Biplots} are two-layered scatterplots widely used to visualize unsupervised
@@ -76,12 +78,18 @@ the projection of a row's coordinates (point) onto a column's coordinates
 }
 
 \references{
-Podani J (2000) \emph{Introduction to the Exploration of Multivariate Biological
-Data}. Backhuys Publishers, ISBN 90-5782-067-6.
+Podani J (2000) "Ordination". \emph{Introduction to the Exploration of
+Multivariate Biological Data} Chapter 7, 215--284. Backhuys Publishers, ISBN
+90-5782-067-6.
 \url{https://web.archive.org/web/20200221000313/http://ramet.elte.hu/~podani/books.html}
 
 Palmer M \emph{Ordination Methods for Ecologists}. Website, accessed 2019-07-12.
 \url{http://ordination.okstate.edu/}
+
+Le Roux B & Rouanet H (2004) \emph{Geometric Data Analysis: From Correspondence
+Analysis to Stsructured Data Analysis}. Springer Dordrecht, ISBN:
+978-1-4020-2236-4. \doi{10.1007/1-4020-2236-0}
+\url{https://link.springer.com/book/10.1007/1-4020-2236-0}
 
 Gabriel KR (1971) "The biplot graphic display of matrices with application to
 principal component analysis". \emph{Biometrika} 58(3), 453--467.

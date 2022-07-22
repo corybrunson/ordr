@@ -8,14 +8,27 @@
 #'   
 
 #' @details
-#' 
+#'
 #' The following table summarizes the wrapped functions:
+#'
+#' | Original function     | Hide params | New params | Add names | New class |
+#' | :-------------------- | :---------- | :--------- | :-------- | :-------- |
+#' | [base::eigen()]       | Yes         | No         | Yes       | Yes       |
+#' | [base::svd()]         | Yes         | No         | Yes       | Yes       |
+#' | [stats::cmdscale()]   | Yes         | No         | No        | Yes       |
+#' | [stats::cancor()]     | No          | Yes        | No        | Yes       |
+#'
+#' By default, [cancor_ord()] returns the same data as [stats::cancor()]: the
+#' canonical correlations (`cor`), the canonical coefficients (`$xcoef` and
+#' `$ycoef`), and the variable means (`$xcenter`, `$ycenter`). If `scores =
+#' TRUE`, then [cancor_ord()] also returns the scores `$xscores` and `$yscores`
+#' calculated from the (appropriately centered) data and the coefficients and
+#' the four sets of structure correlations `$x.xscores`, etc. between these and
+#' the data. These modifications are inspired by [candisc::cancor()], though it
+#' should be noted that the canonical coefficients (hence the canonical scores)
+#' are scaled by \eqn{n - 1} compared to these, though the structure
+#' correlations are the same.
 #' 
-#' | Original function                  | Hide params | Add names | New class |
-#' | :--------------------------------- | :---------- | :-------- | :-------- |
-#' | [base::eigen()]                    | Yes         | Yes       | Yes       |
-#' | [base::svd()]                      | Yes         | Yes       | Yes       |
-#' | [stats::cmdscale()]                | Yes         | No        | Yes       |
 
 #' @name wrap-ord
 #' @include ord-tbl.r
@@ -23,6 +36,10 @@
 #' @inheritParams base::eigen
 #' @inheritParams base::svd
 #' @inheritParams stats::cmdscale
+#' @inheritParams stats::cancor
+#' @param scores Logical; whether to return canonical scores and structure
+#'   correlations.
+#' @seealso [candisc::cancor()]
 #' @example inst/examples/ex-fun-wrap-glass.r
 NULL
 
@@ -53,5 +70,27 @@ svd_ord <- function(x, nu = min(dim(x)), nv = min(dim(x))) {
 cmdscale_ord <- function(d, k = 2, add = FALSE) {
   res <- stats::cmdscale(d, k = k, eig = TRUE, add = add, x.ret = TRUE)
   class(res) <- "cmds_ord"
+  res
+}
+
+#' @rdname wrap-ord
+#' @export
+cancor_ord <- function(x, y, xcenter = TRUE, ycenter = TRUE, scores = FALSE) {
+  res <- stats::cancor(x, y, xcenter = xcenter, ycenter = ycenter)
+  if (scores) {
+    xrk <- seq(ncol(res$xcoef))
+    yrk <- seq(ncol(res$ycoef))
+    res$xscores <-
+      scale(x, center = xcenter, scale = FALSE)[, xrk, drop = FALSE] %*%
+      res$xcoef
+    res$yscores <-
+      scale(y, center = ycenter, scale = FALSE)[, yrk, drop = FALSE] %*%
+      res$ycoef
+    res$x.xscores <- stats::cor(x, res$xscores)
+    res$y.xscores <- stats::cor(y, res$xscores)
+    res$x.yscores <- stats::cor(x, res$yscores)
+    res$y.yscores <- stats::cor(y, res$yscores)
+  }
+  class(res) <- "cancor_ord"
   res
 }
