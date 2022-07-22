@@ -23,13 +23,13 @@ Briefly, **ordr** incorporates ordination models into a "tidy" workflow. Specifi
 
 * augment the model with row- or column-level diagnostics and annotations,
 * summarize the model or its components as tidy data frames, and
-* produce a biplot of the model using a layered grammar of graphics.
+* produce biplots of the model using a layered grammar of graphics.
 
-As an example, this vignette performs a correspondence analysis (CA) of the `HairEyeColor` data set installed with R, using the fitting engine and already high-quality printing and plotting methods of the **ca** package, then showcases some more flexible methods in **ordr**. While some techniques specific to CA are not as natural in **ordr**, most can be reproduced through the principled use of general steps.
+As an example, this vignette performs a correspondence analysis (CA) of the `HairEyeColor` data set installed with R, using the fitting engine `corresp()` provided by the **MASS** package and its base plotting methods, then showcases the more flexible and elegant methods provided by **ordr**. While some techniques specific to CA are not as natural in **ordr**, most can be reproduced through the principled use of general steps.
 
 ```{r setup}
 data(HairEyeColor)
-library(ca)
+library(MASS)
 library(ordr)
 ```
 
@@ -43,24 +43,29 @@ plot(HairEyeColor)
 ```
 
 The data were collected by students in one of Ronald Snee's statistics courses.[^snee] They consist of the hair color and eye color, each binned into four groups, of 592 subjects. The data are also stratified by sex, forming a 3-way array.
-The mosaic plot reveals only subtle differences by sex, so we lose little by flattening the array into a $4 \times 4$ matrix.
+The (default) mosaic plot reveals only subtle differences by sex, so we lose little by flattening the array into a $4 \times 4$ matrix.
 The resulting count table is suitable for correspondence analysis, and we fit this model next.
 
 [^snee]: <https://www.jstor.org/stable/2683520>
 
-## correspondence analysis using **ca**
+## correspondence analysis using **MASS**
+
+The implementation `MASS::corresp()` returns an object of class 'correspondence':
 
 ```{r}
 haireye <- apply(HairEyeColor, c(1L, 2L), sum)
-haireye_ca <- ca(haireye)
+haireye_ca <- corresp(haireye, nf = 3L)
 print(haireye_ca)
+# proportion of variance in each dimension
+haireye_ca$cor^2 / sum(haireye_ca$cor^2)
 ```
 
-The variation in the table, in terms of the $\chi^2$ distances between the distributions of hair color among people with the same eye color (or, equivalently, vice-versa), lies largely ($89\%$) along a single dimension (`Dim. 1`), with the remaining variation largely ($9.5\%$) along a single orthogonal dimension (`Dim. 2`).
-Dimension 1 most clearly distinguishes between subjects with black hair and brown eyes from those with blond hair and blue eyes. Subjects with brown and red hair, or with hazel and green eyes, lie between these extremes.
-Dimension 2 distinguishes subjects with black or blond hair, and with brown or blue eyes, from those with brown or red hair, and with hazel or green eyes. Subjects with red hair and green eyes are especially distinguished along Dimension 2. This disrupts the impression from Dimension 1 alone that subjects lie along a spectrum from black hair--brown eyes to blond hair--blue eyes, which may accurately include an intermediate phenotype (brown hair--hazel eyes), and reveals a phenotype (red hair--green eyes) that diverges from this spectrum.
+The variation in the table, in terms of the $\chi^2$ distances between the distributions of hair color among people with the same eye color (or, equivalently, vice-versa), lies largely ($89\%$) along a single dimension, with the remaining variation largely ($9.5\%$) along a single orthogonal dimension.
+The first dimension best distinguishes between subjects with black hair and brown eyes from those with blond hair and blue eyes. Subjects with brown and red hair, or with hazel and green eyes, lie between these extremes.
 
-As an exercise, we can recover the row and column standard coordinates returned by **ca** from direct computations, e.g. following [the Wikipedia article on correspondence analysis](https://en.wikipedia.org/wiki/Correspondence_analysis), starting from the data matrix (count table) $X$ with total count $n = 1^\top X 1$:
+The second dimension distinguishes subjects with black or blond hair, and with brown or blue eyes, from those with brown or red hair, and with hazel or green eyes. Subjects with red hair and green eyes are especially distinguished along this dimension. This disrupts the impression from the first dimension alone that subjects lie along a spectrum from black hair--brown eyes to blond hair--blue eyes, which may accurately include an intermediate phenotype (brown hair--hazel eyes), and reveals a phenotype (red hair--green eyes) that diverges from this spectrum.
+
+As an exercise, we can recover the row and column standard coordinates returned by `corresp()` from direct computations, e.g. following [the Wikipedia article on correspondence analysis](https://en.wikipedia.org/wiki/Correspondence_analysis), starting from the data matrix (count table) $X$ with total count $n = 1^\top X 1$:
 
 1. The _correspondence matrix_ (the matrix of relative frequencies) $P = \frac{1}{n} X$
 2. The row and column weights $r = \frac{1}{n} X 1$ and $c = \frac{1}{n} 1^\top X$
@@ -87,22 +92,16 @@ diag(1 / sqrt(haireye_r)) %*% haireye_svd$u[, 1:3]
 diag(1 / sqrt(haireye_c)) %*% haireye_svd$v[, 1:3]
 ```
 
-The `summary()` method prints a scree plot using plain text asterisks and uses permills (thousands) to express several model diagnostics, in particular the relative contribution of each dimension to the inertia of each phenotype (`cor`) and the absolute contribution vice-versa (`ctr`).
+We can generate a biplot display via the `biplot()` method for the 'correspondence' class, also provided by **MASS**:
 
 ```{r}
-summary(haireye_ca)
-```
-
-The display quality column `qlt` refers to the biplot display in 2 dimensions. (If `nd` is specified in the `ca::ca()` call, then this is taken to be the dimensionality of the biplot.) The biplot itself is rendered using the `plot()` method:
-
-```{r}
-plot(
-  haireye_ca, map = "symbiplot", mass = TRUE,
+biplot(
+  haireye_ca, type = "symmetric",
   main = "Correspondence analysis of subjects' hair & eye colors"
 )
 ```
 
-This _symmetric biplot_, distinct from the default symmetric map, evenly distributes the inertia between the rows and columns. Distances between points in the same matrix factor do not approximate their $\chi^2$ distances, but inner products between row and column points do approximate their standardized residuals.
+This _symmetric biplot_ evenly distributes the inertia between the rows and columns. Distances between points in the same matrix factor do not approximate their $\chi^2$ distances, but inner products between row and column points approximate their standardized residuals.
 The row and column profile markers are resized to represent the masses of the groups.
 
 ## **ordr** methods for CA models
@@ -113,9 +112,9 @@ The row and column profile markers are resized to represent the masses of the gr
 (haireye_ca_ord <- as_tbl_ord(haireye_ca))
 ```
 
-The `print()` method for 'tbl_ord' is based on that of tibbles. It prints two tibbles, like that for the 'tbl_graph' class of [**tidygraph**](https://tidygraph.data-imaginist.com/), one for each matrix factor. (In PCA, the case scores and the variable loadings of the original data matrix.)
+The `print()` method for 'tbl_ord' is based on that of tibbles. It prints two tibbles, like that for the 'tbl_graph' class of [**tidygraph**](https://tidygraph.data-imaginist.com/), one for each matrix factor.
 
-The header reminds us of the dimensions of the matrix factors and how the inertia is distributed. In 'ca' objects, by default both row and column profiles are in standard coordinates: $D_r F$ and $D_c G$, but these can be reassigned to any pair of proportions $D_r S {D_c}^\top = (D_r U \Sigma^{p}) (D_c V \Sigma^{q})^\top$, even if $p + q \neq 1$. By assigning `"symmetric"` inertia, we distribute half of the inertia to each matrix factor:
+The header reminds us of the dimensions of the matrix factors and how the inertia is distributed. In 'correspondence' objects, by default both row and column profiles are in standard coordinates: $D_r F$ and $D_c G$, but these can be reassigned to any pair of proportions $D_r S {D_c}^\top = (D_r U \Sigma^{p}) (D_c V \Sigma^{q})^\top$, even if $p + q \neq 1$. By assigning `"symmetric"` inertia, we distribute half of the inertia to each matrix factor:
 
 ```{r}
 get_conference(haireye_ca_ord)
@@ -124,7 +123,7 @@ confer_inertia(haireye_ca_ord, c(1, 1))
 (haireye_ca_ord <- confer_inertia(haireye_ca_ord, "symmetric"))
 ```
 
-`broom::glance()` returns a single-row tibble summary of a model object. It was designed for analysis pipelines involving multiple models (e.g. model selection), to facilitate summaries of multiple models at once. 'tbl_ord' objects wrap a potentially huge variety of models, for which only a few summary statistics will usually be useful. This method includes the proportion of inertia/variance in the first two dimensions, which characterize the fidelity of a biplot to the complete data, and the original object class.
+`broom::glance()` returns a single-row tibble summary of a model object. It was designed for analysis pipelines involving multiple models (e.g. model selection), to facilitate summaries of multiple models at once. 'tbl_ord' objects wrap a potentially huge variety of models, for which only a few summary statistics will usually be useful. This method includes the rank of the matrix factorization; the proportion of inertia/variance in the first two dimensions, which characterize the fidelity of a biplot to the complete data; and the original object class.
 
 ```{r}
 glance(haireye_ca_ord)
@@ -139,9 +138,9 @@ augment_ord(haireye_ca_ord)
 Additional row- and column-level variables can also be augmented and manipulated using a handful of **dplyr**-like verbs, each specific to the matrix factor being affected (`rows` or `cols`).
 Each tibble is split between the shared coordinates on the left and any additional annotation columns on the right.
 
-The `broom::tidy()` method for tbl_ords returns a tibble with one row per artificial coordinate.[^tidy] In CA, these are variably called dimensions or components. The 'ca' object contains a `$sv` vector of singular values, which is included in the result; other coordinate-level attributes vary by model object class.
+The `broom::tidy()` method for tbl_ords returns a tibble with one row per artificial coordinate.[^tidy] In CA, these are variably called dimensions or components. The 'correspondence' object contains a `$cor` vector of canonical correlations, which is included in the result; other coordinate-level attributes vary by model object class.
 
-[^tidy]: Note that `ordr::tidy()` takes precedence for 'tbl_ord' objects because the 'tbl_ord' class precedes the underlying model class.
+[^tidy]: Note that `ordr::tidy()` takes precedence for 'tbl_ord' objects over the class of the underlying model because the 'tbl_ord' class precedes this class.
 
 ```{r tidy}
 tidy(haireye_ca_ord)
@@ -165,6 +164,7 @@ fortify(haireye_ca_ord)
 
 This fortifier will also preserve any row and column annotations, so it can be composed with `augment_ord()` or with the row- and column-specific verbs.
 `NA`s are introduced when an annotation is present for one matrix factor but not the other.
+(The `.element` column becomes important when a model produces supplementary as well as active elements.)
 
 The `.matrix` column also plays a key role in `ggbiplot()`: The row- and column-specific ploy layers, which take the form `geom_rows_*()` or `stat_cols_*()`, for example, use this column to subset the data internally.
 This enables the layered grammar of graphics of **ggplot2** to apply separately to the two matrix factors and their annotation. Though note that it can also be applied to the entire fortified data frame using conventional plot layers, as below when the `.matrix` column is used to distinguish the colors and shapes of the row and column profile markers:
@@ -177,8 +177,8 @@ haireye_ca_ord %>%
   ggbiplot(aes(color = feature, shape = feature, label = .name), clip = "off") +
   theme_biplot() +
   geom_origin() +
-  geom_rows_point(aes(size = .mass)) +
-  geom_cols_point(aes(size = .mass)) +
+  geom_rows_point() +
+  geom_cols_point() +
   geom_rows_text(vjust = -1, hjust = 0, size = 3) +
   geom_cols_text(vjust = -1, hjust = 0, size = 3) +
   scale_color_brewer(type = "qual", palette = "Dark2") +
@@ -189,7 +189,7 @@ haireye_ca_ord %>%
 
 Note a few conveniences:
 
-* The position aesthetics are assumed to be the first and second artifical coordinates, unless otherwise specified. Biplots can also be specified by setting the `x` and `y` aesthetics to integers, which are converted to the corresponding artificial coordinates.
+* The position aesthetics are assumed to be the first and second artificial coordinates, unless otherwise specified. Biplots can also be specified by setting the `x` and `y` aesthetics to integers, which are converted to the corresponding artificial coordinates.
 * By default, the aspect ratio is set to 1. This is essential for biplots, which rely on distances between markers and angles between vectors to convey information.
 * The partial theme `theme_biplot()` removes several plot elements that are usually not important to biplots, most notably gridlines, while retaining other properties of the current theme.
 * The layer `geom_origin()` is one of two shortcuts for plotting elements commonly used in biplots, the other being `geom_unit_circle()`.
