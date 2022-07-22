@@ -225,14 +225,14 @@ These not variations on a single theme (measures of the same construct), like di
 ### correlation heatmap
 
 Heatmaps are commonly, perhaps most commonly, used to visualize correlation matrices, and they make a useful contrast to the CMDS correlation plot.
-The **corrplot** package provides versatile and high-quality heatmap correlation plots, and the default style is used below.
+Below i use `heatmap()` to produce a basic correlation heatmap, but the [blog post version](https://corybrunson.github.io/2019/08/16/rank-correlations/) of this vignette uses the **corrplot** package to more elegant effect.
 What can be learned from a glance at this plot?
 While the rankings by academic and employer reputations are highly concordant, those by international faculty and student ratios are less so.
 The faculty--student ratio and faculty citation rankings have the weakest concordance of any pair, but they are still positively correlated.
 
 ```{r Kendall rank correlations, fig.width=7}
 corr <- cor(select(qswur_usa2020, starts_with("rk_")), method = "kendall")
-corrplot::corrplot(corr)
+heatmap(corr, scale = "none")
 ```
 
 This visualization is useful, but it's very busy: To compare any pair of rankings, i have to find the cell in the grid corresponding to that pair and refer back to the color scale to assess its meaning. I can't rely on the nearby cells for context, because they may be stronger or weaker than average and skew my interpretation. For example, the visibly weak associations between the faculty--student ratio and other rankings (the third row/column) happen to be arranged so that the slightly stronger among them, with the two reputational variables, are sandwiched between the _even stronger_ associations between the two reputational rankings and between them and the faculty citations ranking.
