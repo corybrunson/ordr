@@ -94,9 +94,9 @@ diag(1 / sqrt(haireye_c)) %*% haireye_svd$v[, 1:3]
 
 We can generate a biplot display via the `biplot()` method for the 'correspondence' class, also provided by **MASS**:
 
-```{r}
+```{r, fig.height=6}
 biplot(
-  haireye_ca, type = "symmetric",
+  haireye_ca, type = "symmetric", cex = .8,
   main = "Correspondence analysis of subjects' hair & eye colors"
 )
 ```
