@@ -50,7 +50,7 @@ The resulting count table is suitable for correspondence analysis, and we fit th
 
 ## correspondence analysis using **MASS**
 
-The implementation `MASS::corresp()` returns an object of class 'correspondence':
+The implementation `MASS::corresp()` returns an object of class 'correspondence'. In addition to the information included in its `print()` method, we can use the canonical correlations to calculate the proportion of variance along each dimension:
 
 ```{r}
 haireye <- apply(HairEyeColor, c(1L, 2L), sum)
