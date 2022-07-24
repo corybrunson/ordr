@@ -46,11 +46,12 @@
 #' @param mapping List of default aesthetic mappings to use for the biplot. The
 #'   default assigns the first two coordinates to the aesthetics `x` and `y`.
 #'   Other assignments must be supplied in each layer added to the plot.
-#' @param prediction Logical; whether to build a prediction biplot rather than
-#'   an interpolation biplot (the default). `TRUE` requires that `x` and `y` are
-#'   mapped to shared coordinates, that no other shared coordinates are mapped
-#'   to, and inertia is conferred entirely onto one matrix factor. **NB:** This
-#'   option is only implemented for linear techniques (ED, SVD, & PCA).
+#' @param axis.type Character, partially matched; whether to build an
+#'   `"interpolative"` (the default) or a `"predictive"` biplot. The latter
+#'   requires that `x` and `y` are mapped to shared coordinates, that no other
+#'   shared coordinates are mapped to, and inertia is conferred entirely onto
+#'   one matrix factor. **NB:** This option is only implemented for linear
+#'   techniques (ED, SVD, & PCA).
 #' @inheritParams ggplot2::coord_equal
 #' @param axis.percents Whether to concatenate default axis labels with inertia
 #'   percentages.
@@ -71,7 +72,7 @@
 #' @rdname ggbiplot
 #' @export
 ggbiplot <- function(
-    ordination = NULL, mapping = aes(x = 1, y = 2), prediction = FALSE,
+    ordination = NULL, mapping = aes(x = 1, y = 2), axis.type = "interpolative",
     xlim = NULL, ylim = NULL, expand = TRUE, clip = "on",
     axis.percents = TRUE, sec.axes = NULL, scale.factor = NULL,
     scale_rows = NULL, scale_cols = NULL,
@@ -101,7 +102,8 @@ ggbiplot <- function(
     class(mapping) <- "uneval"
   }
   
-  if (prediction) {
+  axis.type <- match.arg(axis.type, c("interpolative", "predictive"))
+  if (axis.type == "predictive") {
     
     # -+- only linear ordinations for now -+-
     if (! ord_class %in% c("eigen_ord", "svd_ord", "prcomp", "princomp")) {
