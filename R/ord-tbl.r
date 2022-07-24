@@ -23,7 +23,7 @@
 #'
 #' `is_tbl_ord()` checks an object `x` for the tbl_ord class; `valid_tbl_ord()`
 #' additionally checks for consistency between `recover_coord(x)` and the
-#' columns of `recover_rows(x)` and `recover_cols(x)`, using the [accessors].
+#' columns of `recover_rows(x)` and `recover_cols(x)`, using the [recoverers].
 #' `un_tbl_ord()` removes attributes associated with the tbl_ord class in order
 #' to restore an object that was originally passed to `as_tbl_ord`.
 #' 

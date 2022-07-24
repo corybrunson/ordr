@@ -34,9 +34,9 @@ and can be incorporated into a \link[=fortify]{tidied form}. If no supplementary
 rows of a factor are produced, the functions return \code{NULL}.
 }
 \seealso{
-Other generic accessors: 
-\code{\link{accessors}},
+Other generic recoverers: 
 \code{\link{augmentation}},
-\code{\link{conference}}
+\code{\link{conference}},
+\code{\link{recoverers}}
 }
-\concept{generic accessors}
+\concept{generic recoverers}

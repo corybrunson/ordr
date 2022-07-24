@@ -227,7 +227,7 @@ omit_layers <- c(
   "geom_origin", "geom_unit_circle"
 )
 
-# layers that require restriction to 2 coordinates (without package accessors)
+# layers that require restriction to 2 coordinates (without package recoverers)
 xy_layers <- c(
   "stat_ellipse",
   "stat_scale",

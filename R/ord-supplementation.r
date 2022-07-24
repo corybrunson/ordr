@@ -18,8 +18,8 @@
 
 #' @name supplementation
 #' @include ord-augmentation.r
-#' @inheritParams accessors
-#' @family generic accessors
+#' @inheritParams recoverers
+#' @family generic recoverers
 NULL
 
 #' @rdname supplementation

@@ -11,7 +11,7 @@
 #' '[tbl_graph][tidygraph::tbl_graph]'.
 #'
 #' **Note:** The `format()` function is tedius but cannot be easily modularized
-#' without invoking [accessors], [annotation], and [augmentation] multiple
+#' without invoking [recoverers], [annotation], and [augmentation] multiple
 #' times, thereby significantly reducing performance.
 #' 
 

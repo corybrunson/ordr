@@ -144,7 +144,7 @@ aggregate(iris[, 1:4], by = iris[, "Species", drop = FALSE], FUN = mean)
 
 ### more methods
 
-The auxiliary package [**ordr.extra**](https://github.com/corybrunson/ordr.extra) provides accessor methods for several additional ordination models---and has room for several more!
+The auxiliary package [**ordr.extra**](https://github.com/corybrunson/ordr.extra) provides recovery methods for several additional ordination models---and has room for several more!
 
 ## acknowledgments
 

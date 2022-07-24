@@ -25,10 +25,10 @@
 #' 
 
 #' @name augmentation
-#' @include ord-accessors.r
-#' @inheritParams accessors
+#' @include ord-recoverers.r
+#' @inheritParams recoverers
 #' @template param-matrix
-#' @family generic accessors
+#' @family generic recoverers
 #' @seealso [tidiers] and [annotation] methods that interface with augmentation.
 NULL
 

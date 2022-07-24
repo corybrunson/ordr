@@ -54,7 +54,7 @@ same column names.
 
 \code{is_tbl_ord()} checks an object \code{x} for the tbl_ord class; \code{valid_tbl_ord()}
 additionally checks for consistency between \code{recover_coord(x)} and the
-columns of \code{recover_rows(x)} and \code{recover_cols(x)}, using the \link{accessors}.
+columns of \code{recover_rows(x)} and \code{recover_cols(x)}, using the \link{recoverers}.
 \code{un_tbl_ord()} removes attributes associated with the tbl_ord class in order
 to restore an object that was originally passed to \code{as_tbl_ord}.
 }
