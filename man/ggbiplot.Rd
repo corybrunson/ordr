@@ -96,7 +96,8 @@ serves no functional purpose currently.
 
 Furthermore, the user may feed single integer values to the \code{x} and \code{y}
 aesthetics, which will be interpreted as the corresponding coordinates in the
-ordination.
+ordination. Currently only 2-dimensional biplots are supported, so both \code{x}
+and \code{y} must take coordinate values.
 
 \code{ord_aes()} is a convenience function that generates a full-rank set of
 coordinate aesthetics \code{..coord1}, \code{..coord2}, etc. mapped to the
