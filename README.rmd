@@ -129,7 +129,7 @@ When variables are represented in standard coordinates, as typically in PCA, the
 [^prediction]: This is an experimental feature only available for linear methods, namely eigendecomposition, singular value decomposition, and principal components analysis.
 
 ```{r prediction biplot}
-ggbiplot(iris_pca, prediction = TRUE, axis.percents = FALSE) +
+ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
   theme_biplot() +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_center(

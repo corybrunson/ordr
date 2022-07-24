@@ -8,7 +8,7 @@
 ggbiplot(
   ordination = NULL,
   mapping = aes(x = 1, y = 2),
-  prediction = FALSE,
+  axis.type = "interpolative",
   xlim = NULL,
   ylim = NULL,
   expand = TRUE,
@@ -30,11 +30,12 @@ ord_aes(ordination, ...)
 default assigns the first two coordinates to the aesthetics \code{x} and \code{y}.
 Other assignments must be supplied in each layer added to the plot.}
 
-\item{prediction}{Logical; whether to build a prediction biplot rather than
-an interpolation biplot (the default). \code{TRUE} requires that \code{x} and \code{y} are
-mapped to shared coordinates, that no other shared coordinates are mapped
-to, and inertia is conferred entirely onto one matrix factor. \strong{NB:} This
-option is only implemented for linear techniques (ED, SVD, & PCA).}
+\item{axis.type}{Character, partially matched; whether to build an
+\code{"interpolative"} (the default) or a \code{"predictive"} biplot. The latter
+requires that \code{x} and \code{y} are mapped to shared coordinates, that no other
+shared coordinates are mapped to, and inertia is conferred entirely onto
+one matrix factor. \strong{NB:} This option is only implemented for linear
+techniques (ED, SVD, & PCA).}
 
 \item{xlim}{Limits for the x and y axes.}
 
@@ -217,7 +218,7 @@ iris_pca \%>\%
 # row-principal prediction biplot
 iris_pca \%>\%
   augment_ord() \%>\%
-  ggbiplot(prediction = TRUE) +
+  ggbiplot(axis.type = "predictive") +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   geom_cols_axis(aes(label = .name, center = .center, scale = .scale)) +
