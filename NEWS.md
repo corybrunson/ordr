@@ -10,6 +10,10 @@ The logical `prediction` parameter is replaced with the character-valued `axis.t
 
 Unit tests are overhauled to remove contexts, omit ad hoc tests, standardize method tests, and cover additional methods.
 
+## documentation
+
+The term 'accessor', used to refer to S3 class methods to recover standardized model components, has been changed to 'recoverer'.
+
 # ordr 0.0.2
 
 This pre-release makes several substantive changes in preparation for CRAN submission.

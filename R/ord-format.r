@@ -7,8 +7,8 @@
 #' @details
 #'
 #' The `format` and `print` methods for class 'tbl_ord' are adapted from those
-#' for class '[tbl_df][tibble::tbl_df]' and for class
-#' '[tbl_graph][tidygraph::tbl_graph]'.
+#' for class '[tbl_df][tibble::tbl_df]' and for class 'tbl_graph' from the
+#' **tidygraph** package.
 #'
 #' **Note:** The `format()` function is tedius but cannot be easily modularized
 #' without invoking [recoverers], [annotation], and [augmentation] multiple

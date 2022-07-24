@@ -1,8 +1,8 @@
 #' @title **ordr** package
 #'
-#' @description This is a **[tidyverse][tidyverse::tidyverse]** extension for
-#'   handling, manipulating, and visualizing ordination models with consistent
-#'   conventions and in a tidy workflow.
+#' @description This is a **[tidyverse][https://www.tidyverse.org/]** extension
+#'   for handling, manipulating, and visualizing ordination models with
+#'   consistent conventions and in a tidy workflow.
 #'   
 
 #' @details

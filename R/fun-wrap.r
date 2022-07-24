@@ -24,10 +24,10 @@
 #' TRUE`, then [cancor_ord()] also returns the scores `$xscores` and `$yscores`
 #' calculated from the (appropriately centered) data and the coefficients and
 #' the four sets of structure correlations `$x.xscores`, etc. between these and
-#' the data. These modifications are inspired by [candisc::cancor()], though it
-#' should be noted that the canonical coefficients (hence the canonical scores)
-#' are scaled by \eqn{n - 1} compared to these, though the structure
-#' correlations are the same.
+#' the data. These modifications are inspired by the `cancor()` function in
+#' **candisc**, though it should be noted that the canonical coefficients (hence
+#' the canonical scores) are scaled by \eqn{n - 1} compared to these, though the
+#' structure correlations are the same.
 #' 
 
 #' @name wrap-ord
@@ -39,7 +39,6 @@
 #' @inheritParams stats::cancor
 #' @param scores Logical; whether to return canonical scores and structure
 #'   correlations.
-#' @seealso [candisc::cancor()]
 #' @example inst/examples/ex-fun-wrap-glass.r
 NULL
 

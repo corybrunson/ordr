@@ -11,7 +11,7 @@
 #' [glance_cmdscale()] are called.
 #'
 #' @inheritParams broom::list_tidiers
-#' @inheritParams broom::`tidy_svd`
+#' @inheritParams broom::svd_tidiers
 #' @name list_tidiers
 #' @export
 #' @family list tidiers

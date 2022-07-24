@@ -29,7 +29,6 @@ Depends:
     R (>= 3.3.0),
     ggplot2
 Imports:
-    broom,
     scales,
     generics,
     magrittr,
@@ -46,6 +45,7 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Suggests:
+    broom,
     testthat,
     sessioninfo,
     gridExtra,
