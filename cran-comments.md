@@ -15,9 +15,9 @@ There was one WARNING, that "package ‘ggplot2’ was built under R version 4.1
 
 There were no ERRORs or WARNINGs.
 
-There were two NOTEs: one flagging this as a new submission 
+There were two NOTEs: one flagging this as a new submission, ...
 
-The check flagged the possible misspelling "biplots", which is (the plural of) a standard term in multivariate statistics.
+The check flagged the possible misspellings 'biplot' (and its plural 'biplots'), 'decompositions', and 'scatterplots', which are standard terms in multivariate statistics.
 
 ### R-hub
 

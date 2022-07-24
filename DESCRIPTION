@@ -9,7 +9,7 @@ Authors@R: c(
   )
 Description: Ordination (Podani, 2000)
     <http://www.euronet.nl/users/backhuys/poda.htm> comprises several
-    multivariate exploratory and explanatory techniques with theoretial
+    multivariate exploratory and explanatory techniques with theoretical
     foundations in geometric data analysis (Le Roux & Rouanet, 2005)
     <doi:10.1007/1-4020-2236-0>. The most popular and established of these,
     including principal components analysis, correspondence analysis,
@@ -55,7 +55,7 @@ Suggests:
     heplots,
     knitr,
     rmarkdown
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 Collate:
     'aaa-.r'
