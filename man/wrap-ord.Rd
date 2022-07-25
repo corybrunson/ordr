@@ -77,10 +77,10 @@ canonical correlations (\code{cor}), the canonical coefficients (\verb{$xcoef} a
 \verb{$ycoef}), and the variable means (\verb{$xcenter}, \verb{$ycenter}). If \code{scores = TRUE}, then \code{\link[=cancor_ord]{cancor_ord()}} also returns the scores \verb{$xscores} and \verb{$yscores}
 calculated from the (appropriately centered) data and the coefficients and
 the four sets of structure correlations \verb{$x.xscores}, etc. between these and
-the data. These modifications are inspired by \code{\link[candisc:cancor]{candisc::cancor()}}, though it
-should be noted that the canonical coefficients (hence the canonical scores)
-are scaled by \eqn{n - 1} compared to these, though the structure
-correlations are the same.
+the data. These modifications are inspired by the \code{cancor()} function in
+\strong{candisc}, though it should be noted that the canonical coefficients (hence
+the canonical scores) are scaled by \eqn{n - 1} compared to these, though the
+structure correlations are the same.
 }
 \examples{
 # glass composition data from one furnace
@@ -111,7 +111,4 @@ glass_cca <-
   cancor_ord(glass_banias[, 1:3], glass_banias_minor[, 1:3], scores = TRUE)
 glass_cca$x.xscores \%*\% diag(glass_cca$cor)
 glass_cca$x.yscores
-}
-\seealso{
-\code{\link[candisc:cancor]{candisc::cancor()}}
 }

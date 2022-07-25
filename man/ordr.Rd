@@ -6,9 +6,9 @@
 \alias{ordr-package}
 \title{\strong{ordr} package}
 \description{
-This is a \strong{\link[tidyverse:tidyverse-package]{tidyverse}} extension for
-handling, manipulating, and visualizing ordination models with consistent
-conventions and in a tidy workflow.
+This is a \strong{\href{https://www.tidyverse.org/}{tidyverse}} extension
+for handling, manipulating, and visualizing ordination models with
+consistent conventions and in a tidy workflow.
 }
 \details{
 This package is designed to integrate ordination analysis and biplot

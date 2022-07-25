@@ -52,8 +52,8 @@ original ordination classes.
 }
 \details{
 The \code{format} and \code{print} methods for class 'tbl_ord' are adapted from those
-for class '\link[tibble:tbl_df-class]{tbl_df}' and for class
-'\link[tidygraph:tbl_graph]{tbl_graph}'.
+for class '\link[tibble:tbl_df-class]{tbl_df}' and for class 'tbl_graph' from the
+\strong{tidygraph} package.
 
 \strong{Note:} The \code{format()} function is tedius but cannot be easily modularized
 without invoking \link{recoverers}, \link{annotation}, and \link{augmentation} multiple
