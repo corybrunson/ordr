@@ -1,10 +1,24 @@
 ## Test environments
 
+* local OS X install, R 4.1.1, "Kick Things" (via `devtools::check()`)
 * local OS X install, R 4.1.3, "One Push-Up" (via `devtools::check()`)
+* R-hub (via `rhub::check_for_cran()`)
 * R-hub (via `rhub::check_for_cran(platforms = "macos-highsierra-release-cran")`)
 * Win-Builder (devel, current, and previous; via `devtools::check_win_*()`)
 
-### R CMD check results
+### R CMD check results (R 4.1.1)
+
+There were no ERRORs or NOTEs. There was one WARNING.
+
+The warning read as follows:
+```
+   Found the following significant warnings:
+     Warning: package ‘ggplot2’ was built under R version 4.1.2
+   See ‘/private/var/folders/4p/3cy0qmp15x9216qsqhh84kzm0000gn/T/RtmpcTiMNE/ordr.Rcheck/00install.out’ for details.
+```
+To my knowledge, this cannot be addressed by amending this package.
+
+### R CMD check results (R 4.1.3)
 
 There were no ERRORs or WARNINGs. There was one NOTE.
 
@@ -38,6 +52,8 @@ Found the following files/directories:
 ```
 As documented, this note is probably due to a MiKTeX bug that can be ignored:
 <https://github.com/r-hub/rhub/issues/503>
+
+### R-hub (High Sierra)
 
 ## Reverse dependencies
 
