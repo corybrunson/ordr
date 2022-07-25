@@ -7,7 +7,7 @@
 #'
 #' Factor analysis of a data matrix relies on an an eigendecomposition of its
 #' correlation matrix, whose eigenvectors (up to weighting) comprise the
-#' variable loadings. For this reason, both row and column accessors retrieve
+#' variable loadings. For this reason, both row and column recoverers retrieve
 #' the loadings and inertia is evenly distributed between them. When computed
 #' and returned by [stats::factanal()], the case scores are accessible as
 #' supplementary elements. Redistribution of inertia commutes through both

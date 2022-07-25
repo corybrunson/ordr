@@ -48,9 +48,9 @@ information contained in the original object becomes accessible to the user.
 \seealso{
 \link{tidiers} and \link{annotation} methods that interface with augmentation.
 
-Other generic accessors: 
-\code{\link{accessors}},
+Other generic recoverers: 
 \code{\link{conference}},
+\code{\link{recoverers}},
 \code{\link{supplementation}}
 }
-\concept{generic accessors}
+\concept{generic recoverers}

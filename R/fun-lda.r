@@ -49,7 +49,7 @@
 #' @importFrom stats .getXlevels delete.response model.matrix model.response var
 #'   .checkMFClasses na.pass
 #' @inheritParams MASS::lda
-#' @inheritParams MASS:::predict.lda
+#' @inheritParams MASS::predict.lda
 #' @param axes.scale Character string indicating how to left-transform the
 #'   `scaling` value when rendering biplots using [ggbiplot()]. Options include
 #'   `"unstandardized"`, `"standardized"`, and `"contribution"`.

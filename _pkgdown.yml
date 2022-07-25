@@ -23,7 +23,7 @@ reference:
     The 'tbl_ord' class wrapper, with methods for accessing components and for
     querying and manipulating metadata
   contents:
-  - '`accessors`'
+  - '`recoverers`'
   - '`augmentation`'
   - '`tidiers`'
   - '`annotation`'
@@ -51,6 +51,6 @@ reference:
   - has_concept("biplot layers")
 - title: "Class methods"
   desc: >
-    Accessor and augmentation methods for ordination classes from other packages
+    Recovery and augmentation methods for ordination model classes
   contents:
   - starts_with("methods-")

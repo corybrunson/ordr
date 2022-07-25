@@ -41,7 +41,7 @@ onto these coordinate vectors, scaled by some proportion of the total
 inertia: \eqn{UD^p} and \eqn{VD^q}. A biplot is \emph{balanced} if \eqn{p+q=1}.
 Read Orlov (2013) for more on conferring inertia in PCA.
 
-\code{recover_conference()}, like the other accessors, is an \link[base:UseMethod]{S3 method} that is exported for convenience but not intended to
+\code{recover_conference()}, like the other recoverers, is an \link[base:UseMethod]{S3 method} that is exported for convenience but not intended to
 be used directly.
 
 \emph{Note: In case the \code{"inertia"} attribute is a rectangular matrix, one may
@@ -73,9 +73,9 @@ variable and Linear Discriminant Analysis". CrossValidated, accessed
 2019-07-26. \url{https://stats.stackexchange.com/a/83114/68743}
 }
 \seealso{
-Other generic accessors: 
-\code{\link{accessors}},
+Other generic recoverers: 
 \code{\link{augmentation}},
+\code{\link{recoverers}},
 \code{\link{supplementation}}
 }
-\concept{generic accessors}
+\concept{generic recoverers}

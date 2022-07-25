@@ -1,3 +1,15 @@
+# next version
+
+In addition to minor changes, the following substantive changes are made from v0.0.2:
+
+## ggbiplot
+
+The logical `prediction` parameter is replaced with the character-valued `axis.type`, based on the `ax.type` parameter used in **UBbipl** (Gower, Lubbe, & le Roux, 2011).
+
+## tests
+
+Unit tests are overhauled to remove contexts, omit ad hoc tests, standardize method tests, and cover additional methods.
+
 # ordr 0.0.2
 
 This pre-release makes several substantive changes in preparation for CRAN submission.

@@ -25,21 +25,21 @@
 #' is square.)
 #' 
 
-#' @name accessors
+#' @name recoverers
 #' @include utils.r
 #' @param x An object of class '[tbl_ord]'.
 #' @param ... Additional arguments from [base::as.matrix()]; ignored.
 #' @template param-matrix
 #' @template param-elements
-#' @family generic accessors
-#' @example inst/examples/ex-ord-accessors.r
+#' @family generic recoverers
+#' @example inst/examples/ex-ord-recoverers.r
 NULL
 
-#' @rdname accessors
+#' @rdname recoverers
 #' @export
 recover_rows <- function(x) UseMethod("recover_rows")
 
-#' @rdname accessors
+#' @rdname recoverers
 #' @export
 recover_cols <- function(x) UseMethod("recover_cols")
 
@@ -55,29 +55,29 @@ recover_factor <- function(x, .matrix) {
 # need `recover_*` functions before and after coercion;
 # `recover_*.tbl_ord` are unnecessary
 
-#' @rdname accessors
+#' @rdname recoverers
 #' @export
 recover_rows.default <- function(x) x$rows
 
-#' @rdname accessors
+#' @rdname recoverers
 #' @export
 recover_cols.default <- function(x) x$cols
 
 # for fortified tbl_ords (also coordinates?)
 
-#' @rdname accessors
+#' @rdname recoverers
 #' @export
 recover_rows.data.frame <- function(x) {
   x[x$.matrix == "rows", -match(".matrix", names(x))]
 }
 
-#' @rdname accessors
+#' @rdname recoverers
 #' @export
 recover_cols.data.frame <- function(x) {
   x[x$.matrix == "cols", -match(".matrix", names(x))]
 }
 
-#' @rdname accessors
+#' @rdname recoverers
 #' @export
 get_rows <- function(x, elements = "all") {
   # ensure that `elements` is a character singleton
@@ -105,7 +105,7 @@ get_rows <- function(x, elements = "all") {
   u
 }
 
-#' @rdname accessors
+#' @rdname recoverers
 #' @export
 get_cols <- function(x, elements = "all") {
   # ensure that `elements` is a character singleton
@@ -145,7 +145,7 @@ get_factor <- function(x, .matrix, elements = "all") {
   )
 }
 
-#' @rdname accessors
+#' @rdname recoverers
 #' @export
 as.matrix.tbl_ord <- function(
   x, ..., .matrix, elements = "all"
@@ -156,25 +156,25 @@ as.matrix.tbl_ord <- function(
   get_factor(x, .matrix = .matrix, elements = elements)
 }
 
-#' @rdname accessors
+#' @rdname recoverers
 #' @export
 recover_inertia <- function(x) UseMethod("recover_inertia")
 
-#' @rdname accessors
+#' @rdname recoverers
 #' @export
 recover_inertia.default <- function(x) NA_real_
 
-#' @rdname accessors
+#' @rdname recoverers
 #' @export
 recover_coord <- function(x) UseMethod("recover_coord")
 
-#' @rdname accessors
+#' @rdname recoverers
 #' @export
 recover_coord.default <- function(x) {
   intersect(colnames(recover_rows(x)), colnames(recover_cols(x)))
 }
 
-#' @rdname accessors
+#' @rdname recoverers
 #' @export
 recover_coord.data.frame <- function(x) {
   if (! is.null(attr(x, "coordinates"))) {
@@ -184,19 +184,19 @@ recover_coord.data.frame <- function(x) {
   }
 }
 
-#' @rdname accessors
+#' @rdname recoverers
 #' @export
 get_coord <- function(x) {
   recover_coord(x)
 }
 
-#' @rdname accessors
+#' @rdname recoverers
 #' @export
 get_inertia <- function(x) {
   `names<-`(recover_inertia(x), recover_coord(x))
 }
 
-#' @rdname accessors
+#' @rdname recoverers
 #' @export
 dim.tbl_ord <- function(x) {
   c(nrow(get_rows(x)), nrow(get_cols(x)))

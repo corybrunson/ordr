@@ -30,7 +30,8 @@
 
 #' Furthermore, the user may feed single integer values to the `x` and `y`
 #' aesthetics, which will be interpreted as the corresponding coordinates in the
-#' ordination.
+#' ordination. Currently only 2-dimensional biplots are supported, so both `x`
+#' and `y` must take coordinate values.
 #'
 #' `ord_aes()` is a convenience function that generates a full-rank set of
 #' coordinate aesthetics `..coord1`, `..coord2`, etc. mapped to the

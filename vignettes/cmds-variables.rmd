@@ -243,7 +243,7 @@ The plot is also strictly pairwise: Every correlation between two rankings occup
 Finally, the color and size scales themselves are less than desirable in a plot of data that all lie on a single scale ($-1 \leq r \leq 1$). Contrast this to a histogram, which also visualizes a single data type (count) but uses only one axis to represent count (the other to represent value) and does not require color at all.
 In general, plots of simple data should use very few scales (aesthetic mappings)---not only to make plots more readable but also to allow for additional scales that highlight additional data properties.
 
-### correlation vector plot
+### correlation monoplot
 
 CMDS of variables offers a natural alternative visualization, which [Gower, Lubbe, and le Roux (2011)](https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550) call a "correlation monoplot" in that it consists of but one of the two layers of a PCA or other biplot. As with CMDS of cases, the point isn't to overlay the case scores and variable loadings from a singular value decomposition, but to use the scores or loadings alone to endow the cases or variables with a Euclidean geometry they didn't originally have. To that end, i'll plot the variables as vectors with tails at the origin and heads at their principal coordinates $Y = V \Lambda^{1/2}$, with a unit circle included for reference:
 
@@ -271,7 +271,7 @@ c_eigen %>%
   scale_x_reverse(expand = expansion(add = .4)) +
   scale_y_continuous(expand = expansion(add = .3)) +
   ggtitle("Kendall correlations between university rankings",
-          "CMDS correlation vector plot")
+          "CMDS correlation monoplot")
 ```
 
 With respect to the pairwise correlations, the biplot is significantly less precise: Though the vectors all have unit length in $\mathbb{R}^r$ ($r\leq p=6$), their projections onto the first two principal coordinates are much shorter, indicating that much of the geometric configuration requires additional dimensions to represent. Indeed, these coordinates capture only $48.2\%+14.3\%=62.5\%$ of the inertia in the full, six-dimensional eigendecomposition. This means that the angles between the vectors must be interpreted with caution: For example, it looks like the academic and employer reputation rankings are extremely correlated, but the apparent alignment of the vectors could be an artifact of the projection, when in fact they "rise" and "fall" in opposite directions along the remaining principal coordinates. The correlation heatmap, by comparison, leaves no such ambiguity.
@@ -280,7 +280,7 @@ However, the biplot far surpasses the heatmap at parsimony: Each variable is rep
 
 Moreover, the principal coordinates of the variable vectors indicate their loadings onto the first and second principal moments of inertia---the two dimensions that capture the most variation in the data. For example, the first principal coordinate is most aligned with the two reputational rankings, suggesting that a general prestige ranking is the strongest overall component of the several specific rankings. In contrast, the faculty--student ratio and faculty citation rankings load most strongly onto the second principal coordinate, suggesting that the divide between research- and teaching-focused institutions may yet be important to understanding how universities compare along these different metrics. These observations, provisional though they are, would be difficult to discern from the heatmap. More importantly, unlike the secondary patterns visible in the heatmap, these are not artifacts of the layout but arise directly from the (correlational) data.
 
-This last point means that observations made from a correlation vector plot can be validated from the CMDS coordinates. In particular, we can examine the variables' loadings onto the third principal coordinate, and we can check whether the reputational rankings are aligned or misaligned along it.
+This last point means that observations made from a correlation monoplot can be validated from the CMDS coordinates. In particular, we can examine the variables' loadings onto the third principal coordinate, and we can check whether the reputational rankings are aligned or misaligned along it.
 
 ```{r}
 c_eigen %>%
@@ -300,7 +300,7 @@ c_eigen %>%
   scale_x_continuous(expand = expansion(add = .5)) +
   scale_y_continuous(expand = expansion(add = .5)) +
   ggtitle("Kendall correlations between university rankings",
-          "CMDS correlation vector plot, second & third principal coordinates")
+          "CMDS correlation monoplot, second & third principal coordinates")
 ```
 
 The primary antitheses of the reputational rankings, after removing the first principal coordinate, are the two rankings based on international composition. The third principal coordinate aligns closely with this axis.

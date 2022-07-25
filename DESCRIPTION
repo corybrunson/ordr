@@ -9,7 +9,7 @@ Authors@R: c(
   )
 Description: Ordination (Podani, 2000)
     <http://www.euronet.nl/users/backhuys/poda.htm> comprises several
-    multivariate exploratory and explanatory techniques with theoretial
+    multivariate exploratory and explanatory techniques with theoretical
     foundations in geometric data analysis (Le Roux & Rouanet, 2005)
     <doi:10.1007/1-4020-2236-0>. The most popular and established of these,
     including principal components analysis, correspondence analysis,
@@ -22,7 +22,7 @@ Description: Ordination (Podani, 2000)
     overlay of their scatterplots on these axes is called a biplot
     (Gabriel, 1971) <doi:10.1093/biomet/58.3.453>. 'ordr' provides inspection,
     extraction, manipulation, and visualization tools for several popular
-    ordination classes supported by a set of accessor methods. It is inspired by
+    ordination classes supported by a set of recovery methods. It is inspired by
     and designed to interface naturally with 'tidyverse' workflows
     (Wickham &al, 2019) <doi:10.21105/joss.01686>.
 Depends:
@@ -55,7 +55,7 @@ Suggests:
     heplots,
     knitr,
     rmarkdown
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 Collate:
     'aaa-.r'
@@ -64,7 +64,7 @@ Collate:
     'data.r'
     'dplyr-verbs.r'
     'utils.r'
-    'ord-accessors.r'
+    'ord-recoverers.r'
     'ord-augmentation.r'
     'ord-conference.r'
     'ord-tbl.r'

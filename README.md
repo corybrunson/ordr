@@ -28,7 +28,7 @@ provides the theoretical basis for (most of) these techniques.
 Ordination overlaps with regression and with dimension reduction, which
 can be [contrasted to clustering and
 classification](https://towardsdatascience.com/supervised-vs-unsupervised-learning-14f68e32ea8d)
-in that they assign continuous rather than discrete values to data
+in that they assign continuous rather than categorical values to data
 elements [^3].
 
 Most ordination techniques decompose a numeric rectangular data set into
@@ -150,6 +150,7 @@ as annotations to the appropriate matrix factors:[^7]
 #> 4 -2.29  0.595 -0.0910     | 4 setosa 
 #> 5 -2.38 -0.645 -0.0157     | 5 setosa 
 #> # … with 145 more rows
+#> # ℹ Use `print(n = ...)` to see more rows
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
 #>      PC1     PC2    PC3 ... |   .name        .center .scale
@@ -183,6 +184,7 @@ iris_meta <- data.frame(
 #> 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid       2
 #> 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid       2
 #> # … with 145 more rows
+#> # ℹ Use `print(n = ...)` to see more rows
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
 #>      PC1     PC2    PC3 ... |   .name        .center .scale
@@ -238,7 +240,7 @@ When variables are represented in standard coordinates, as typically in
 PCA, their rules can be rescaled to yield a prediction biplot:[^9]
 
 ``` r
-ggbiplot(iris_pca, prediction = TRUE, axis.percents = FALSE) +
+ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
   theme_biplot() +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_center(
@@ -264,7 +266,7 @@ aggregate(iris[, 1:4], by = iris[, "Species", drop = FALSE], FUN = mean)
 
 The auxiliary package
 [**ordr.extra**](https://github.com/corybrunson/ordr.extra) provides
-accessor methods for several additional ordination models—and has room
+recovery methods for several additional ordination models—and has room
 for several more!
 
 ## acknowledgments

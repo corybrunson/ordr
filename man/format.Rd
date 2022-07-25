@@ -56,6 +56,6 @@ for class '\link[tibble:tbl_df-class]{tbl_df}' and for class
 '\link[tidygraph:tbl_graph]{tbl_graph}'.
 
 \strong{Note:} The \code{format()} function is tedius but cannot be easily modularized
-without invoking \link{accessors}, \link{annotation}, and \link{augmentation} multiple
+without invoking \link{recoverers}, \link{annotation}, and \link{augmentation} multiple
 times, thereby significantly reducing performance.
 }

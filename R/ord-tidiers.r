@@ -40,7 +40,7 @@
 #' particular [stat_spantree()].
 
 #' @name tidiers
-#' @include ord-accessors.r
+#' @include ord-recoverers.r
 #' @param x,model An object of class '[tbl_ord]'.
 #' @param data Passed to generic methods; currently ignored.
 #' @param ... Additional arguments allowed by generics; currently ignored.
