@@ -10,6 +10,7 @@
 #' structure is detected, then the in-package tidiers [tidy_cmdscale()] and
 #' [glance_cmdscale()] are called.
 #'
+#' @importFrom broom tidy_irlba
 #' @inheritParams broom::list_tidiers
 #' @inheritParams broom::svd_tidiers
 #' @name list_tidiers
@@ -55,7 +56,7 @@ glance.list <- function(x, ...) {
 
 tidy_optim <- getFromNamespace("tidy_optim", "broom")
 tidy_xyz <- getFromNamespace("tidy_xyz", "broom")
-tidy_irlba <- getFromNamespace("tidy_irlba", "broom")
+# tidy_irlba <- getFromNamespace("tidy_irlba", "broom")
 tidy_svd <- getFromNamespace("tidy_svd", "broom")
 glance_optim <- getFromNamespace("glance_optim", "broom")
 

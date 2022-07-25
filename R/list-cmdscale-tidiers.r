@@ -2,8 +2,7 @@
 #'
 #' @description These tidiers handle the output of `cmdscale()`, which under
 #'   certain conditions is effectively an S3 object without a class attribute.
-#'   It allows **ordr** to enhance the [list_tidiers] provided by
-#'   **[broom][broom::broom-package]**.
+#'   It allows **ordr** to enhance the [list_tidiers] provided by **broom**.
 #'
 #' @param x A list with components `points`, `eig`, `x`, `ac`, and `GOF`
 #'   returned by [stats::cmdscale()].

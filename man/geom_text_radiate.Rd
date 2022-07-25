@@ -122,7 +122,7 @@ version 0.6. \url{https://github.com/richardjtelford/ggbiplot} (fork),
 \code{experimental} branch
 
 Vilmantas Gegzna (2018). ggbiplot: A 'ggplot2' based biplot. R package
-version 0.55. \url{https://github.com/GegznaV/ggbiplot} (fork), \code{experimental}
+version 0.55. \url{https://github.com/forked-packages/ggbiplot} (fork), \code{experimental}
 branch
 }
 \seealso{

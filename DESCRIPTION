@@ -29,14 +29,15 @@ Depends:
     R (>= 3.3.0),
     ggplot2
 Imports:
+    rlang,
+    stringr,
+    tidyselect,
     scales,
     generics,
     magrittr,
     tibble,
+    broom,
     tidyr,
-    rlang,
-    stringr,
-    tidyselect,
     dplyr,
     purrr,
     labeling,
@@ -45,7 +46,6 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Suggests:
-    broom,
     testthat,
     sessioninfo,
     gridExtra,

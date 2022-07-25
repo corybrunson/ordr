@@ -31,8 +31,7 @@ used in the calculation.
 \description{
 These tidiers handle the output of \code{cmdscale()}, which under
 certain conditions is effectively an S3 object without a class attribute.
-It allows \strong{ordr} to enhance the \link{list_tidiers} provided by
-\strong{\link[broom:broom]{broom}}.
+It allows \strong{ordr} to enhance the \link{list_tidiers} provided by \strong{broom}.
 }
 \examples{
 # 'dist' object (matrix of road distances) of large American cities

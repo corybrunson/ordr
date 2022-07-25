@@ -8,6 +8,6 @@
 #' `experimental` branch
 #'
 #' Vilmantas Gegzna (2018). ggbiplot: A 'ggplot2' based biplot. R package
-#' version 0.55. <https://github.com/GegznaV/ggbiplot> (fork), `experimental`
+#' version 0.55. <https://github.com/forked-packages/ggbiplot> (fork), `experimental`
 #' branch
 #' 
