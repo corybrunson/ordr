@@ -20,9 +20,10 @@
 
 \item{data}{Passed to generic methods; currently ignored.}
 
-\item{.matrix}{A character string matching one of several indicators for one
-or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
+\item{.matrix}{A character string partially matched (lowercase) to several
+indicators for one or both matrices in a matrix decomposition used for
+ordination. The standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for
+both).}
 
 \item{elements}{Character vector; which elements of each factor for which to
 render graphical elements. One of \code{"all"} (the default), \code{"active"}, or any
@@ -74,13 +75,13 @@ tidy(iris_pca) \%>\%
   scale_y_continuous(labels = scales::percent) +
   labs(x = NULL, y = "Proportion of variance")
 # use `fortify()` to prepare either matrix factor for `ggplot()`
-fortify(iris_pca, .matrix = "variables") \%>\%
+fortify(iris_pca, .matrix = "V") \%>\%
   ggplot(aes(x = .name, y = PC1)) +
   geom_col() +
   coord_flip() +
   labs(x = "Measurement")
 iris_pca \%>\%
-  fortify(.matrix = "cases") \%>\%
+  fortify(.matrix = "U") \%>\%
   ggplot(aes(x = PC1, fill = Species)) +
   geom_histogram() +
   labs(y = NULL)

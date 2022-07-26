@@ -66,9 +66,10 @@ supplementary element type defined by the specific class methods (e.g.
 
 \item{...}{Additional arguments from \code{\link[base:matrix]{base::as.matrix()}}; ignored.}
 
-\item{.matrix}{A character string matching one of several indicators for one
-or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
+\item{.matrix}{A character string partially matched (lowercase) to several
+indicators for one or both matrices in a matrix decomposition used for
+ordination. The standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for
+both).}
 }
 \description{
 These functions return information about the matrix

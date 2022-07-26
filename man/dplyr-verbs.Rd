@@ -54,9 +54,10 @@ left_join_cols(.data, ...)
 
 \item{var}{A variable specified as in \code{\link[dplyr:pull]{dplyr::pull()}}.}
 
-\item{.matrix}{A character string matching one of several indicators for one
-or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
+\item{.matrix}{A character string partially matched (lowercase) to several
+indicators for one or both matrices in a matrix decomposition used for
+ordination. The standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for
+both).}
 
 \item{...}{Comma-separated unquoted expressions as in, e.g.,
 \code{\link[dplyr:select]{dplyr::select()}}.}

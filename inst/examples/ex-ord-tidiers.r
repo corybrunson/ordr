@@ -9,13 +9,13 @@ tidy(iris_pca) %>%
   scale_y_continuous(labels = scales::percent) +
   labs(x = NULL, y = "Proportion of variance")
 # use `fortify()` to prepare either matrix factor for `ggplot()`
-fortify(iris_pca, .matrix = "variables") %>%
+fortify(iris_pca, .matrix = "V") %>%
   ggplot(aes(x = .name, y = PC1)) +
   geom_col() +
   coord_flip() +
   labs(x = "Measurement")
 iris_pca %>%
-  fortify(.matrix = "cases") %>%
+  fortify(.matrix = "U") %>%
   ggplot(aes(x = PC1, fill = Species)) +
   geom_histogram() +
   labs(y = NULL)

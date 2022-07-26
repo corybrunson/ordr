@@ -13,22 +13,20 @@ as_tbl_ord_default <- function(x) {
 tbl_ord_factors <- c(
   rows = "rows", columns = "cols", cols = "cols", dims = "dims",
   f = "rows", g = "cols", fg = "dims",
-  `F` = "rows", G = "cols", FG = "dims",
   u = "rows", v = "cols", uv = "dims",
-  U = "rows", V = "cols", UV = "dims",
   left = "rows", right = "cols",
-  cases = "rows", variables = "cols",
-  subjects = "rows", measures = "cols",
-  scores = "rows", loadings = "cols",
+  # cases = "rows", variables = "cols",
+  # subjects = "rows", measures = "cols",
+  # scores = "rows", loadings = "cols",
   rowprincipal = "rows", colprincipal = "cols", columnprincipal = "cols",
   both = "dims", symmetric = "dims"
 )
 match_factor <- function(x) {
-  x <- match.arg(x, names(tbl_ord_factors))
+  x <- match.arg(tolower(x), names(tbl_ord_factors))
   unname(tbl_ord_factors[x])
 }
 switch_inertia <- function(x) {
-  x <- match.arg(x, names(tbl_ord_factors))
+  x <- match.arg(tolower(x), names(tbl_ord_factors))
   switch(tbl_ord_factors[x], rows = c(1, 0), cols = c(0, 1), dims = c(.5, .5))
 }
 

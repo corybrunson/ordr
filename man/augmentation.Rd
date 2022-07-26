@@ -19,9 +19,10 @@ augment_ord(x, .matrix = "dims")
 \arguments{
 \item{x}{An object of class '\link{tbl_ord}'.}
 
-\item{.matrix}{A character string matching one of several indicators for one
-or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
+\item{.matrix}{A character string partially matched (lowercase) to several
+indicators for one or both matrices in a matrix decomposition used for
+ordination. The standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for
+both).}
 }
 \description{
 These functions return data associated with the cases,
