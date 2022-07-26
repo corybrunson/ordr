@@ -56,7 +56,7 @@ recover_conference.factanal <- function(x) {
 
 #' @rdname methods-factanal
 #' @export
-supplementation_rows.factanal <- function(x) {
+recover_supp_rows.factanal <- function(x) {
   x[["scores"]]
 }
 

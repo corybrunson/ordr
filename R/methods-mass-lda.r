@@ -195,7 +195,7 @@ augmentation_coord.lda_ord <- augmentation_coord.lda
 
 #' @rdname methods-lda
 #' @export
-supplementation_rows.lda <- function(x) {
+recover_supp_rows.lda <- function(x) {
   olddata <- if (is.null(attr(x, "x"))) {
     try(recover_olddata_lda(x), silent = TRUE)
   } else attr(x, "x")
@@ -210,7 +210,7 @@ supplementation_rows.lda <- function(x) {
 
 #' @rdname methods-lda
 #' @export
-supplementation_rows.lda_ord <- supplementation_rows.lda
+recover_supp_rows.lda_ord <- recover_supp_rows.lda
 
 recover_olddata_lda <- function(object) {
   # simplified from `MASS:::predict.lda()`

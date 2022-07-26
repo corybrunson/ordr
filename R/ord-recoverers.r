@@ -87,12 +87,12 @@ get_rows <- function(x, elements = "all") {
   )
   # subset accordingly
   u <- if (elements == "all") {
-    rbind(recover_rows(x), supplementation_rows(x))
+    rbind(recover_rows(x), recover_supp_rows(x))
   } else if (elements == "active") {
     recover_rows(x)
   } else {
     # -+- need to recognize supplementary subtypes -+-
-    supplementation_rows(x)
+    recover_supp_rows(x)
   }
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
@@ -115,12 +115,12 @@ get_cols <- function(x, elements = "all") {
   )
   # subset accordingly
   v <- if (elements == "all") {
-    rbind(recover_cols(x), supplementation_cols(x))
+    rbind(recover_cols(x), recover_supp_cols(x))
   } else if (elements == "active") {
     recover_cols(x)
   } else {
     # -+- need to recognize supplementary subtypes -+-
-    supplementation_cols(x)
+    recover_supp_cols(x)
   }
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)

@@ -2,19 +2,19 @@
 % Please edit documentation in R/ord-supplementation.r
 \name{supplementation}
 \alias{supplementation}
-\alias{supplementation_rows}
-\alias{supplementation_rows.default}
-\alias{supplementation_cols}
-\alias{supplementation_cols.default}
+\alias{recover_supp_rows}
+\alias{recover_supp_rows.default}
+\alias{recover_supp_cols}
+\alias{recover_supp_cols.default}
 \title{Supplement 'tbl_ord' objects with new data}
 \usage{
-supplementation_rows(x)
+recover_supp_rows(x)
 
-\method{supplementation_rows}{default}(x)
+\method{recover_supp_rows}{default}(x)
 
-supplementation_cols(x)
+recover_supp_cols(x)
 
-\method{supplementation_cols}{default}(x)
+\method{recover_supp_cols}{default}(x)
 }
 \arguments{
 \item{x}{An object of class '\link{tbl_ord}'.}
@@ -24,7 +24,7 @@ These functions attach supplementary rows or columns to an
 ordination object.
 }
 \details{
-The \verb{supplementation_*()} \link[base:UseMethod]{S3 methods} produce matrices of
+The \verb{recover_supp_*()} \link[base:UseMethod]{S3 methods} produce matrices of
 supplemental rows or columns of a \link{tbl_ord} object from the object itself.
 The motivating example is linear discriminant analysis, which produces a
 natural biplot of class discriminant centroids and variable axes but is

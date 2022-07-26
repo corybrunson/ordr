@@ -170,12 +170,12 @@ augmentation_coord.cancor_ord <- function(x) {
 
 #' @rdname methods-cancor
 #' @export
-supplementation_rows.cancor_ord <- function(x) {
+recover_supp_rows.cancor_ord <- function(x) {
   rbind(x$xscores, x$x.xscores, x$y.xscores)[, seq_along(x$cor), drop = FALSE]
 }
 
 #' @rdname methods-cancor
 #' @export
-supplementation_cols.cancor_ord <- function(x) {
+recover_supp_cols.cancor_ord <- function(x) {
   rbind(x$yscores, x$x.yscores, x$y.yscores)[, seq_along(x$cor), drop = FALSE]
 }

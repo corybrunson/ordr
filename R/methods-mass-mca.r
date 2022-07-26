@@ -52,7 +52,7 @@ recover_coord.mca <- function(x) paste0("Dim", seq_along(x$d))
 
 #' @rdname methods-mca
 #' @export
-supplementation_rows.mca <- function(x) {
+recover_supp_rows.mca <- function(x) {
   `colnames<-`(x$rs, recover_coord(x))
 }
 

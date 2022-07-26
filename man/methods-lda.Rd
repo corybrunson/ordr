@@ -20,8 +20,8 @@
 \alias{augmentation_cols.lda_ord}
 \alias{augmentation_coord.lda}
 \alias{augmentation_coord.lda_ord}
-\alias{supplementation_rows.lda}
-\alias{supplementation_rows.lda_ord}
+\alias{recover_supp_rows.lda}
+\alias{recover_supp_rows.lda_ord}
 \title{Functionality for linear discriminant analysis ('lda') objects}
 \usage{
 \method{as_tbl_ord}{lda}(x)
@@ -60,9 +60,9 @@
 
 \method{augmentation_coord}{lda_ord}(x)
 
-\method{supplementation_rows}{lda}(x)
+\method{recover_supp_rows}{lda}(x)
 
-\method{supplementation_rows}{lda_ord}(x)
+\method{recover_supp_rows}{lda_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}

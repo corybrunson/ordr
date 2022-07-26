@@ -8,7 +8,7 @@
 \alias{recover_inertia.mca}
 \alias{recover_conference.mca}
 \alias{recover_coord.mca}
-\alias{supplementation_rows.mca}
+\alias{recover_supp_rows.mca}
 \alias{augmentation_rows.mca}
 \alias{augmentation_cols.mca}
 \alias{augmentation_coord.mca}
@@ -26,7 +26,7 @@
 
 \method{recover_coord}{mca}(x)
 
-\method{supplementation_rows}{mca}(x)
+\method{recover_supp_rows}{mca}(x)
 
 \method{augmentation_rows}{mca}(x)
 
