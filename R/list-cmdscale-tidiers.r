@@ -3,8 +3,16 @@
 #' @description These tidiers handle the output of `cmdscale()`, which under
 #'   certain conditions is effectively an S3 object without a class attribute.
 #'   It allows **ordr** to enhance the [list_tidiers] provided by **broom**.
-#'
-#' @param x A list with components `points`, `eig`, `x`, `ac`, and `GOF`
+#' 
+#' @details
+#' 
+#' When [cmdscale()] is instructed to return any of several optional elements,
+#' or when `list. = TRUE`, the output is not the default point coordinate matrix
+#' but a 5-element list with a consistent naming scheme (though some elements
+#' will be `NULL` if their parameters are not set to `TRUE`). These tidiers rely
+#' on this list structure to organize the model output into a tibble.
+#' 
+#' @param x A list with components `points`, `eig`, `x`, `ac`, and `GOF` as
 #'   returned by [stats::cmdscale()].
 #' @param matrix Character specifying which list element should be tidied,
 #'   matched to the following options.
@@ -74,8 +82,7 @@ glance_cmdscale <- function(x, ...) {
     k = ncol(x$points),
     ac = x$ac,
     GOF1 = x$GOF[[1L]],
-    GOF2 = x$GOF[[2L]]
+    GOF2 = x$GOF[[2L]],
+    na_types = "iirrr"
   )
 }
-
-as_glance_tibble <- getFromNamespace("as_glance_tibble", "broom")

@@ -76,6 +76,7 @@ Collate:
     'geom-text-radiate.r'
     'geom-unit-circle.r'
     'geom-vector.r'
+    'list-cancor-tidiers.r'
     'list-cmdscale-tidiers.r'
     'list-tidiers.r'
     'methods-base-eigen.r'

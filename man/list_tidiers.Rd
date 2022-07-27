@@ -4,7 +4,7 @@
 \alias{list_tidiers}
 \alias{tidy.list}
 \alias{glance.list}
-\title{Tidying methods for lists, including classical multidimensional scaling}
+\title{Tidying methods for (additional) lists}
 \usage{
 \method{tidy}{list}(x, ...)
 
@@ -16,20 +16,17 @@
 \item{...}{Additionally, arguments passed to the tidying function.}
 }
 \description{
-When \code{\link[=cmdscale]{cmdscale()}} is instructed to return any of several optional elements,
-or when \code{list. = TRUE}, the output is not the default point coordinate matrix
-but a 5-element list with a consistent naming scheme (though some elements
-will be \code{NULL} if their parameters are not set to \code{TRUE}). Some unclassed
-lists of fixed structure, returned by other functions, are recognized by
-\strong{broom}'s \link[broom:list_tidiers]{list tidiers}. \strong{ordr}'s updated list
-tidiers append an additional check for CMDS list structure. If the CMDS list
-structure is detected, then the in-package tidiers \code{\link[=tidy_cmdscale]{tidy_cmdscale()}} and
-\code{\link[=glance_cmdscale]{glance_cmdscale()}} are called.
+Some unclassed lists of fixed structure, returned by other
+functions, are recognized by \strong{broom}'s \link[broom:list_tidiers]{list tidiers}. \strong{ordr}'s updated list tidiers append
+additional checks for the list structures returned by \code{\link[=cmdscale]{cmdscale()}} and
+\code{\link[=cancor]{cancor()}}. If such structure is detected, then the new in-package tidiers
+are called.
 }
 \seealso{
 \code{\link[generics:tidy]{generics::tidy()}} \code{\link[generics:glance]{generics::glance()}}
 
 Other list tidiers: 
+\code{\link{cancor_tidiers}},
 \code{\link{cmdscale_tidiers}}
 }
 \concept{list tidiers}

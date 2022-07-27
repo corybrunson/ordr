@@ -13,7 +13,7 @@ tidy_cmdscale(x, matrix = "points", ...)
 glance_cmdscale(x, ...)
 }
 \arguments{
-\item{x}{A list with components \code{points}, \code{eig}, \code{x}, \code{ac}, and \code{GOF}
+\item{x}{A list with components \code{points}, \code{eig}, \code{x}, \code{ac}, and \code{GOF} as
 returned by \code{\link[stats:cmdscale]{stats::cmdscale()}}.}
 
 \item{matrix}{Character specifying which list element should be tidied,
@@ -33,6 +33,13 @@ These tidiers handle the output of \code{cmdscale()}, which under
 certain conditions is effectively an S3 object without a class attribute.
 It allows \strong{ordr} to enhance the \link{list_tidiers} provided by \strong{broom}.
 }
+\details{
+When \code{\link[=cmdscale]{cmdscale()}} is instructed to return any of several optional elements,
+or when \code{list. = TRUE}, the output is not the default point coordinate matrix
+but a 5-element list with a consistent naming scheme (though some elements
+will be \code{NULL} if their parameters are not set to \code{TRUE}). These tidiers rely
+on this list structure to organize the model output into a tibble.
+}
 \examples{
 # 'dist' object (matrix of road distances) of large American cities
 class(UScitiesD)
@@ -41,17 +48,14 @@ print(UScitiesD)
 UScitiesD \%>\%
   cmdscale(k = 3L, eig = TRUE, x.ret = TRUE) ->
   usa_mds
+# glance at the model
+glance(usa_mds)
 # return the tidied coordinates
 tidy(usa_mds)
 # return the upper triangle of the doubly-centered distance matrix in tidy form
 tidy(usa_mds, matrix = "x")
 # return the eigenvalues for the principal coordinates, with summary statistics
 tidy(usa_mds, matrix = "eig")
-# scree plot of inertia
-ggplot(tidy(usa_mds, matrix = "e"), aes(x = PCo, y = eig)) +
-  theme_bw() +
-  geom_col() +
-  labs(x = "Principal coordinate", y = "Eigenvalue (inertia)")
 # reorient to conventional compass
 tidy(usa_mds) \%>\%
   ggplot(aes(x = -PCo1, y = -PCo2)) +
@@ -62,6 +66,7 @@ tidy(usa_mds) \%>\%
 \code{\link[generics:tidy]{generics::tidy()}} \code{\link[generics:glance]{generics::glance()}} \code{\link[stats:cmdscale]{stats::cmdscale()}}
 
 Other list tidiers: 
+\code{\link{cancor_tidiers}},
 \code{\link{list_tidiers}}
 }
 \concept{list tidiers}

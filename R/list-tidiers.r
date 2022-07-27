@@ -1,14 +1,11 @@
-#' Tidying methods for lists, including classical multidimensional scaling
+#' @title Tidying methods for (additional) lists
 #'
-#' When [cmdscale()] is instructed to return any of several optional elements,
-#' or when `list. = TRUE`, the output is not the default point coordinate matrix
-#' but a 5-element list with a consistent naming scheme (though some elements
-#' will be `NULL` if their parameters are not set to `TRUE`). Some unclassed
-#' lists of fixed structure, returned by other functions, are recognized by
-#' **broom**'s [list tidiers][broom::list_tidiers]. **ordr**'s updated list
-#' tidiers append an additional check for CMDS list structure. If the CMDS list
-#' structure is detected, then the in-package tidiers [tidy_cmdscale()] and
-#' [glance_cmdscale()] are called.
+#' @description Some unclassed lists of fixed structure, returned by other
+#'   functions, are recognized by **broom**'s [list
+#'   tidiers][broom::list_tidiers]. **ordr**'s updated list tidiers append
+#'   additional checks for the list structures returned by [cmdscale()] and
+#'   [cancor()]. If such structure is detected, then the new in-package tidiers
+#'   are called.
 #'
 #' @importFrom broom tidy_irlba
 #' @inheritParams broom::list_tidiers
@@ -23,6 +20,7 @@ tidy.list <- function(x, ...) {
   svd_elems <- c("d", "u", "v")
   irlba_elems <- c(svd_elems, "iter", "mprod")
   cmdscale_elems <- c("points", "eig", "x", "ac", "GOF")
+  cancor_elems <- c("cor", "xcoef", "ycoef", "xcenter", "ycenter")
   
   if (all(optim_elems %in% names(x))) {
     tidy_optim(x, ...)
@@ -34,6 +32,8 @@ tidy.list <- function(x, ...) {
     tidy_svd(x, ...)
   } else if (all(cmdscale_elems %in% names(x))) {
     tidy_cmdscale(x, ...)
+  } else if (all(cancor_elems %in% names(x))) {
+    tidy_cancor(x, ...)
   } else {
     stop("No tidy method recognized for this list.", call. = FALSE)
   }
@@ -62,4 +62,6 @@ glance_optim <- getFromNamespace("glance_optim", "broom")
 
 #' @importFrom utils globalVariables
 globalVariables(c("PC", "std.dev", "percent", "column"))
-# -+- This is not ideal but used to pre-empt a CRAN NOTE.
+# -+- This is not ideal but used to pre-empt a CRAN NOTE. -+-
+
+as_glance_tibble <- getFromNamespace("as_glance_tibble", "broom")
