@@ -2,6 +2,10 @@
 
 In addition to minor changes, the following substantive changes are made from v0.0.2:
 
+## list tidiers
+
+A new list tidier for `cancor()` output is introduced.
+
 ## ggbiplot
 
 The logical `prediction` parameter is replaced with the character-valued `axis.type`, based on the `ax.type` parameter used in **UBbipl** (Gower, Lubbe, & le Roux, 2011).
