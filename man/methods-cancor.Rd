@@ -8,11 +8,11 @@
 \alias{recover_inertia.cancor_ord}
 \alias{recover_coord.cancor_ord}
 \alias{recover_conference.cancor_ord}
+\alias{recover_supp_rows.cancor_ord}
+\alias{recover_supp_cols.cancor_ord}
 \alias{augmentation_rows.cancor_ord}
 \alias{augmentation_cols.cancor_ord}
 \alias{augmentation_coord.cancor_ord}
-\alias{recover_supp_rows.cancor_ord}
-\alias{recover_supp_cols.cancor_ord}
 \title{Functionality for canonical correlations}
 \usage{
 \method{as_tbl_ord}{cancor_ord}(x)
@@ -27,15 +27,15 @@
 
 \method{recover_conference}{cancor_ord}(x)
 
+\method{recover_supp_rows}{cancor_ord}(x)
+
+\method{recover_supp_cols}{cancor_ord}(x)
+
 \method{augmentation_rows}{cancor_ord}(x)
 
 \method{augmentation_cols}{cancor_ord}(x)
 
 \method{augmentation_coord}{cancor_ord}(x)
-
-\method{recover_supp_rows}{cancor_ord}(x)
-
-\method{recover_supp_cols}{cancor_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
@@ -51,7 +51,7 @@ The canonical coefficients (loadings) are obtained directly from the
 underlying singular value decomposition and constitute the active elements.
 If canonical scores are returned, then they and the structure correlations
 are made available as supplementary elements. \strong{ordr} takes rows and columns
-from the intraset correlations \verb{$x.xscores} and \verb{$y.yscores}, on which no
+from the intraset correlations \verb{$xstructure} and \verb{$ystructure}, on which no
 intertia is conferred; the interset correlations can be obtained by
 \link[=conference]{conferring inertia} onto these.
 
@@ -97,18 +97,18 @@ savings_cca <- cancor_ord(savings_pop, savings_oec, scores = TRUE)
 savings_cca <- augment_ord(as_tbl_ord(savings_cca))
 head(get_cols(savings_cca))
 head(get_cols(savings_cca, elements = "score"))
-get_cols(savings_cca, elements = "intraset")
-get_cols(savings_cca, elements = "interset")
+get_rows(savings_cca, elements = "structure")
+get_cols(savings_cca, elements = "structure")
 # biplot of interset and intraset correlations with the population data
 savings_cca \%>\%
   confer_inertia("cols") \%>\%
   ggbiplot(aes(label = .name)) +
   theme_biplot() +
   geom_unit_circle() +
-  geom_cols_vector(arrow = NULL, elements = "interset") +
-  geom_cols_vector(arrow = NULL, elements = "intraset", linetype = "dashed") +
-  geom_cols_text_repel(elements = "interset") +
-  geom_cols_text_repel(elements = "intraset") +
+  geom_rows_vector(arrow = NULL, elements = "structure") +
+  geom_cols_vector(arrow = NULL, elements = "structure", linetype = "dashed") +
+  geom_rows_text(elements = "structure", hjust = "outward") +
+  geom_cols_text(elements = "structure", hjust = "outward") +
   expand_limits(x = c(-1, 1), y = c(-1, 1))
 # biplot with scores as supplemental elements
 savings_cca \%>\%
@@ -117,7 +117,6 @@ savings_cca \%>\%
   theme_biplot() +
   geom_cols_vector(elements = "active") +
   geom_cols_text_radiate(elements = "active") +
-  # -+- need more convenient handling of elements -+-
   geom_rows_text(elements = "score", subset = seq(50L))
 }
 \references{

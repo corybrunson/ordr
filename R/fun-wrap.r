@@ -23,11 +23,13 @@
 #' `$ycoef`), and the variable means (`$xcenter`, `$ycenter`). If `scores =
 #' TRUE`, then [cancor_ord()] also returns the scores `$xscores` and `$yscores`
 #' calculated from the (appropriately centered) data and the coefficients and
-#' the four sets of structure correlations `$x.xscores`, etc. between these and
-#' the data. These modifications are inspired by the `cancor()` function in
-#' **candisc**, though it should be noted that the canonical coefficients (hence
-#' the canonical scores) are scaled by \eqn{n - 1} compared to these, though the
-#' structure correlations are the same.
+#' the intraset structure correlations `$xstructure` and `$ystructure` between
+#' these and the data. These modifications are inspired by the `cancor()`
+#' function in **candisc**, though two caveats should be noted: First, the
+#' canonical coefficients (hence the canonical scores) are scaled by \eqn{n - 1}
+#' compared to these, though the intraset structure correlations are the same.
+#' Second, the _interset_ structure correlations are not returned, as these may
+#' be obtained by conferring inertia unto the intraset ones.
 #' 
 
 #' @name wrap-ord
@@ -85,10 +87,8 @@ cancor_ord <- function(x, y, xcenter = TRUE, ycenter = TRUE, scores = FALSE) {
     res$yscores <-
       scale(y, center = ycenter, scale = FALSE)[, yrk, drop = FALSE] %*%
       res$ycoef
-    res$x.xscores <- stats::cor(x, res$xscores)
-    res$y.xscores <- stats::cor(y, res$xscores)
-    res$x.yscores <- stats::cor(x, res$yscores)
-    res$y.yscores <- stats::cor(y, res$yscores)
+    res$xstructure <- stats::cor(x, res$xscores)
+    res$ystructure <- stats::cor(y, res$yscores)
   }
   class(res) <- "cancor_ord"
   res

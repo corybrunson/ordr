@@ -28,18 +28,18 @@ savings_cca <- cancor_ord(savings_pop, savings_oec, scores = TRUE)
 savings_cca <- augment_ord(as_tbl_ord(savings_cca))
 head(get_cols(savings_cca))
 head(get_cols(savings_cca, elements = "score"))
-get_cols(savings_cca, elements = "intraset")
-get_cols(savings_cca, elements = "interset")
+get_rows(savings_cca, elements = "structure")
+get_cols(savings_cca, elements = "structure")
 # biplot of interset and intraset correlations with the population data
 savings_cca %>%
   confer_inertia("cols") %>%
   ggbiplot(aes(label = .name)) +
   theme_biplot() +
   geom_unit_circle() +
-  geom_cols_vector(arrow = NULL, elements = "interset") +
-  geom_cols_vector(arrow = NULL, elements = "intraset", linetype = "dashed") +
-  geom_cols_text_repel(elements = "interset") +
-  geom_cols_text_repel(elements = "intraset") +
+  geom_rows_vector(arrow = NULL, elements = "structure") +
+  geom_cols_vector(arrow = NULL, elements = "structure", linetype = "dashed") +
+  geom_rows_text(elements = "structure", hjust = "outward") +
+  geom_cols_text(elements = "structure", hjust = "outward") +
   expand_limits(x = c(-1, 1), y = c(-1, 1))
 # biplot with scores as supplemental elements
 savings_cca %>%
@@ -48,5 +48,4 @@ savings_cca %>%
   theme_biplot() +
   geom_cols_vector(elements = "active") +
   geom_cols_text_radiate(elements = "active") +
-  # -+- need more convenient handling of elements -+-
   geom_rows_text(elements = "score", subset = seq(50L))

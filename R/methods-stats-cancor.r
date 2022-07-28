@@ -11,7 +11,7 @@
 #' underlying singular value decomposition and constitute the active elements.
 #' If canonical scores are returned, then they and the structure correlations
 #' are made available as supplementary elements. **ordr** takes rows and columns
-#' from the intraset correlations `$x.xscores` and `$y.yscores`, on which no
+#' from the intraset correlations `$xstructure` and `$ystructure`, on which no
 #' intertia is conferred; the interset correlations can be obtained by
 #' [conferring inertia][conference] onto these.
 #'
@@ -73,6 +73,18 @@ recover_conference.cancor_ord <- function(x) {
 
 #' @rdname methods-cancor
 #' @export
+recover_supp_rows.cancor_ord <- function(x) {
+  rbind(x$xscores, x$xstructure)[, seq_along(x$cor), drop = FALSE]
+}
+
+#' @rdname methods-cancor
+#' @export
+recover_supp_cols.cancor_ord <- function(x) {
+  rbind(x$yscores, x$ystructure)[, seq_along(x$cor), drop = FALSE]
+}
+
+#' @rdname methods-cancor
+#' @export
 augmentation_rows.cancor_ord <- function(x) {
   .name <- rownames(x$xcoef)
   res <- if (is.null(.name)) {
@@ -92,22 +104,13 @@ augmentation_rows.cancor_ord <- function(x) {
     res_sup_elt$.element <- "score"
     res_sup <- bind_rows(res_sup, res_sup_elt)
   }
-  if (! is.null(x$x.xscores)) {
-    res_sup_elt <- if (is.null(rownames(x$x.xscores))) {
-      tibble_pole(nrow(x$x.xscores))
+  if (! is.null(x$xstructure)) {
+    res_sup_elt <- if (is.null(rownames(x$xstructure))) {
+      tibble_pole(nrow(x$xstructure))
     } else {
-      tibble(.name = rownames(x$x.xscores))
+      tibble(.name = rownames(x$xstructure))
     }
-    res_sup_elt$.element <- "intraset"
-    res_sup <- bind_rows(res_sup, res_sup_elt)
-  }
-  if (! is.null(x$y.xscores)) {
-    res_sup_elt <- if (is.null(rownames(x$y.xscores))) {
-      tibble_pole(nrow(x$y.xscores))
-    } else {
-      tibble(.name = rownames(x$y.xscores))
-    }
-    res_sup_elt$.element <- "interset"
+    res_sup_elt$.element <- "structure"
     res_sup <- bind_rows(res_sup, res_sup_elt)
   }
   # supplement flag
@@ -136,22 +139,13 @@ augmentation_cols.cancor_ord <- function(x) {
     res_sup_elt$.element <- "score"
     res_sup <- bind_rows(res_sup, res_sup_elt)
   }
-  if (! is.null(x$y.yscores)) {
-    res_sup_elt <- if (is.null(rownames(x$y.yscores))) {
-      tibble_pole(nrow(x$y.yscores))
+  if (! is.null(x$ystructure)) {
+    res_sup_elt <- if (is.null(rownames(x$ystructure))) {
+      tibble_pole(nrow(x$ystructure))
     } else {
-      tibble(.name = rownames(x$y.yscores))
+      tibble(.name = rownames(x$ystructure))
     }
-    res_sup_elt$.element <- "intraset"
-    res_sup <- bind_rows(res_sup, res_sup_elt)
-  }
-  if (! is.null(x$x.yscores)) {
-    res_sup_elt <- if (is.null(rownames(x$x.yscores))) {
-      tibble_pole(nrow(x$x.yscores))
-    } else {
-      tibble(.name = rownames(x$x.yscores))
-    }
-    res_sup_elt$.element <- "interset"
+    res_sup_elt$.element <- "structure"
     res_sup <- bind_rows(res_sup, res_sup_elt)
   }
   # supplement flag
@@ -166,16 +160,4 @@ augmentation_coord.cancor_ord <- function(x) {
     .name = factor_coord(recover_coord(x)),
     .cor = x$cor
   )
-}
-
-#' @rdname methods-cancor
-#' @export
-recover_supp_rows.cancor_ord <- function(x) {
-  rbind(x$xscores, x$x.xscores, x$y.xscores)[, seq_along(x$cor), drop = FALSE]
-}
-
-#' @rdname methods-cancor
-#' @export
-recover_supp_cols.cancor_ord <- function(x) {
-  rbind(x$yscores, x$x.yscores, x$y.yscores)[, seq_along(x$cor), drop = FALSE]
 }
