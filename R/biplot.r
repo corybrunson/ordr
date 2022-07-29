@@ -107,7 +107,7 @@ ggbiplot <- function(
   if (axis.type == "predictive") {
     
     # -+- only linear ordinations for now -+-
-    if (! ord_class %in% c("eigen_ord", "svd_ord", "prcomp", "princomp")) {
+    if (! ord_class %in% .linear_classes) {
       warning("Prediction biplots are only implemented for linear methods ",
               "(ED, SVD, PCA).")
     } else {
@@ -290,3 +290,5 @@ ord_aes <- function(ordination, ...) {
   class(aes) <- "uneval"
   aes
 }
+
+.linear_classes <- c("eigen_ord", "svd_ord", "prcomp", "princomp")
