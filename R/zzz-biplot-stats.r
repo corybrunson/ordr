@@ -531,6 +531,7 @@ stat_rows_spantree <- function(
   data = NULL,
   geom = "segment",
   position = "identity",
+  engine = "vegan",
   method = "euclidean",
   show.legend = NA,
   inherit.aes = TRUE,
@@ -547,6 +548,7 @@ stat_rows_spantree <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
+      engine = engine,
       method = method,
       check.aes = check.aes,
       check.param = check.param,
@@ -573,6 +575,7 @@ stat_cols_spantree <- function(
   data = NULL,
   geom = "segment",
   position = "identity",
+  engine = "vegan",
   method = "euclidean",
   show.legend = NA,
   inherit.aes = TRUE,
@@ -589,6 +592,7 @@ stat_cols_spantree <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
+      engine = engine,
       method = method,
       check.aes = check.aes,
       check.param = check.param,

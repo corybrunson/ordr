@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom-unit-circle.r
 \name{geom_unit_circle}
 \alias{geom_unit_circle}
-\title{Render a unit circle}
+\title{Unit circle}
 \usage{
 geom_unit_circle(
   mapping = NULL,

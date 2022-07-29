@@ -1,4 +1,4 @@
-#' @title Render axes through origin
+#' @title Axes through the origin
 #' 
 #' @description `geom_axis()` renders lines through the origin and the position
 #'   of each case or variable.
@@ -48,7 +48,7 @@ geom_axis <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   axis_labels = TRUE, axis_ticks = TRUE, axis_text = TRUE,
   by = NULL, num = NULL,
-  tick_length = .025, text_dodge = .15, label_dodge = .2,
+  tick_length = .025, text_dodge = .03, label_dodge = .03,
   ...,
   parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
@@ -149,7 +149,7 @@ GeomAxis <- ggproto(
     data, panel_params, coord,
     axis_labels = TRUE, axis_ticks = TRUE, axis_text = TRUE,
     by = NULL, num = NULL,
-    tick_length = .025, text_dodge = .15, label_dodge = .2,
+    tick_length = .025, text_dodge = .03, label_dodge = .03,
     parse = FALSE, check_overlap = FALSE,
     na.rm = FALSE
   ) {
@@ -165,6 +165,9 @@ GeomAxis <- ggproto(
     
     # initialize grob list
     grobs <- list()
+    
+    # minimum of the plot width and height
+    plot_whmin <- min(diff(ranges$x), diff(ranges$y))
     
     # axis grobs: combination of line grobs
     if (any(! data$vline)) {
@@ -190,7 +193,7 @@ GeomAxis <- ggproto(
       tick_data$linetype <- tick_data$tick_linetype
       
       # tick mark radius
-      rtick <- min(diff(ranges$x), diff(ranges$y)) * tick_length / 2
+      rtick <- plot_whmin * tick_length / 2
       # tick mark vector
       tick_data <- transform(
         tick_data,
@@ -233,11 +236,10 @@ GeomAxis <- ggproto(
         as.numeric(text_data$angle) +
         atan(text_data$axis_y / text_data$axis_x) / pi * 180
       # dodge axis
-      # -+- within plotting window -+-
       text_data <- transform(
         text_data,
-        x = x_val - axis_y / sqrt(axis_ss) * text_dodge,
-        y = y_val + axis_x / sqrt(axis_ss) * text_dodge
+        x = x_val - axis_y / sqrt(axis_ss) * plot_whmin * text_dodge,
+        y = y_val + axis_x / sqrt(axis_ss) * plot_whmin * text_dodge
       )
       
       # mark text grobs
@@ -275,11 +277,10 @@ GeomAxis <- ggproto(
         (180 / pi) * atan(label_data$y / label_data$x)
       
       # dodge axis
-      # -+- within plotting window -+-
       label_data <- transform(
         label_data,
-        x = x + axis_y / sqrt(axis_ss) * label_dodge,
-        y = y - axis_x / sqrt(axis_ss) * label_dodge
+        x = x + axis_y / sqrt(axis_ss) * plot_whmin * label_dodge,
+        y = y - axis_x / sqrt(axis_ss) * plot_whmin * label_dodge
       )
       
       # axis label grobs
@@ -298,31 +299,3 @@ GeomAxis <- ggproto(
   # update this to include segment and letter in key squares
   draw_key = draw_key_abline
 )
-
-# -+- handle vertical and horizontal axes -+-
-boundary_points <- function(slope, x.range, y.range) {
-  res <- data.frame(slope = slope)
-  # compute label positions
-  res$increasing <- sign(res$slope) == 1L
-  
-  # (eventual) intersections with window borders
-  res$a1 <- y.range[[1L]] / res$slope
-  res$a2 <- y.range[[2L]] / res$slope
-  res$b1 <- x.range[[1L]] * res$slope
-  res$b2 <- x.range[[2L]] * res$slope
-  # (bounded) intersections with window
-  res$x1 <- pmax(x.range[[1L]], pmin(res$a1, res$a2))
-  res$x2 <- pmin(x.range[[2L]], pmax(res$a1, res$a2))
-  res$z1 <- pmax(y.range[[1L]], pmin(res$b1, res$b2))
-  res$z2 <- pmin(y.range[[2L]], pmax(res$b1, res$b2))
-  # account for negative slopes
-  res$y1 <- ifelse(res$increasing, res$z1, res$z2)
-  res$y2 <- ifelse(res$increasing, res$z2, res$z1)
-  # distances from origin
-  res$rsq1 <- res$x1 ^ 2 + res$y1 ^ 2
-  res$rsq2 <- res$x2 ^ 2 + res$y2 ^ 2
-  # farther intersection from origin
-  res$x <- ifelse(res$rsq1 < res$rsq2, res$x2, res$x1)
-  res$y <- ifelse(res$rsq1 < res$rsq2, res$y2, res$y1)
-  res[, c("x", "y")]
-}

@@ -1,4 +1,4 @@
-#' @title Render a crosshairs or circle at the origin
+#' @title Crosshairs or circle at the origin
 #' 
 
 #' @description `geom_origin()` renders a symbol, either a set of crosshairs or

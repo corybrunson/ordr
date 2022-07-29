@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom-isoline.r
 \name{geom_isoline}
 \alias{geom_isoline}
-\title{Render isolines (contour lines) along axes}
+\title{Isolines (contour lines)}
 \usage{
 geom_isoline(
   mapping = NULL,
@@ -12,7 +12,7 @@ geom_isoline(
   isoline_text = TRUE,
   by = NULL,
   num = NULL,
-  label_dodge = 0.1,
+  label_dodge = 0.03,
   ...,
   parse = FALSE,
   check_overlap = FALSE,
@@ -142,7 +142,7 @@ diabetes_lda \%>\%
   geom_cols_vector(subset = c(1, 3, 4)) +
   geom_cols_text_radiate(subset = c(1, 3, 4), size = 3) +
   geom_cols_isoline(subset = c(1, 3, 4), alpha = .25, num = 4L,
-                    text_alpha = .5, text_size = 3, label_dodge = .2) +
+                    label_dodge = -.03, text_alpha = .5, text_size = 3) +
   ggtitle(
     "LDA of Reaven & Miller diabetes groups",
     "Row-standard biplot of standardized LDA"

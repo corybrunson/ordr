@@ -24,7 +24,7 @@ mtcars_lm_ord %>%
   geom_origin(marker = "circle", radius = unit(0.02, "snpc")) +
   geom_rows_point(aes(color = influence)) +
   geom_cols_vector() +
-  geom_cols_isoline(aes(center = center), by = .5, label_dodge = -.15) +
+  geom_cols_isoline(aes(center = center), by = .5, hjust = -.1) +
   ggtitle(
     "Weight isolines with data colored by importance",
     "Regressing gas mileage onto weight and number of cylinders"

@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom-axis.r
 \name{geom_axis}
 \alias{geom_axis}
-\title{Render axes through origin}
+\title{Axes through the origin}
 \usage{
 geom_axis(
   mapping = NULL,
@@ -15,8 +15,8 @@ geom_axis(
   by = NULL,
   num = NULL,
   tick_length = 0.025,
-  text_dodge = 0.15,
-  label_dodge = 0.2,
+  text_dodge = 0.03,
+  label_dodge = 0.03,
   ...,
   parse = FALSE,
   check_overlap = FALSE,

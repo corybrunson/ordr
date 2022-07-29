@@ -1,4 +1,4 @@
-#' @title Render text that radiates outward from the origin
+#' @title Text radiating outward from the origin
 #' 
 
 #' @description `geom_text_radiate()` is adapted from `ggbiplot()` in the

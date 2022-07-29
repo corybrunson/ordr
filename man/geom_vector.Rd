@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom-vector.r
 \name{geom_vector}
 \alias{geom_vector}
-\title{Render vectors from the origin}
+\title{Vectors from the origin}
 \usage{
 geom_vector(
   mapping = NULL,

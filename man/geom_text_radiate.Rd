@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom-text-radiate.r
 \name{geom_text_radiate}
 \alias{geom_text_radiate}
-\title{Render text that radiates outward from the origin}
+\title{Text radiating outward from the origin}
 \usage{
 geom_text_radiate(
   mapping = NULL,

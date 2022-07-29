@@ -3,7 +3,7 @@
 \name{geom_lineranges}
 \alias{geom_lineranges}
 \alias{geom_pointranges}
-\title{Render intervals depicting ranges, usually about center points}
+\title{Intervals depicting ranges, usually about center points}
 \usage{
 geom_lineranges(
   mapping = NULL,

@@ -1,4 +1,4 @@
-#' @title Render a unit circle
+#' @title Unit circle
 #' 
 
 #' @description `geom_unit_circle()` renders the unit circle, centered at the

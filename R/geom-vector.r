@@ -1,4 +1,4 @@
-#' @title Render vectors from the origin
+#' @title Vectors from the origin
 #' 
 
 #' @description `geom_vector()` renders arrows from the origin to points.
@@ -84,11 +84,4 @@ GeomVector <- ggproto(
       na.rm = na.rm
     )
   }
-)
-
-default_arrow <- grid::arrow(
-  angle = 30,
-  length = unit(.02, "native"),
-  ends = "last",
-  type = "open"
 )

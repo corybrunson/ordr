@@ -1,4 +1,4 @@
-#' @title Render isolines (contour lines) along axes
+#' @title Isolines (contour lines)
 #'
 #' @description `geom_isoline()` renders isolines along row or column axes.
 #' @template biplot-layers
@@ -45,7 +45,7 @@ geom_isoline <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   isoline_text = TRUE,
   by = NULL, num = NULL,
-  label_dodge = .1,
+  label_dodge = .03,
   ...,
   parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
@@ -125,7 +125,7 @@ GeomIsoline <- ggproto(
     data, panel_params, coord,
     isoline_text = TRUE,
     by = NULL, num = NULL,
-    label_dodge = .1,
+    label_dodge = .03,
     parse = FALSE, check_overlap = FALSE,
     na.rm = TRUE
   ) {
@@ -136,6 +136,9 @@ GeomIsoline <- ggproto(
     
     # initialize grob list
     grobs <- list()
+    
+    # minimum of the plot width and height
+    plot_whmin <- min(diff(ranges$x), diff(ranges$y))
     
     # line orientation aesthetics
     data$slope <- - data$axis_x / data$axis_y
@@ -165,11 +168,10 @@ GeomIsoline <- ggproto(
         as.numeric(text_data$angle) +
         atan(- text_data$axis_x / text_data$axis_y) / pi * 180
       # dodge axis
-      # -+- within plotting window -+-
       text_data <- transform(
         text_data,
-        x = x_val + axis_x / sqrt(axis_ss) * label_dodge,
-        y = y_val + axis_y / sqrt(axis_ss) * label_dodge
+        x = x_val + axis_x / sqrt(axis_ss) * plot_whmin * label_dodge,
+        y = y_val + axis_y / sqrt(axis_ss) * plot_whmin * label_dodge
       )
       
       # isoline text grobs
@@ -190,60 +192,3 @@ GeomIsoline <- ggproto(
   # update this to include segment and letter in key squares
   draw_key = draw_key_abline
 )
-
-# `data` must have fields 'axis_x' and 'axis_y'
-calibrate_axes <- function(data, ranges, by, num) {
-  
-  if (is.null(by) && is.null(num)) num <- 6L
-  
-  # window boundaries for axis positions
-  data$win_xmin <- ifelse(data$axis_x > 0, ranges$x[[1L]], ranges$x[[2L]])
-  data$win_xmax <- ifelse(data$axis_x > 0, ranges$x[[2L]], ranges$x[[1L]])
-  data$win_ymin <- ifelse(data$axis_y > 0, ranges$y[[1L]], ranges$y[[2L]])
-  data$win_ymax <- ifelse(data$axis_y > 0, ranges$y[[2L]], ranges$y[[1L]])
-  # vector lengths
-  data$axis_ss <- data$axis_x ^ 2 + data$axis_y ^ 2
-  # project window corners onto axis (isoline extrema), in axis units
-  data$axis_min <-
-    (data$win_xmin * data$axis_x + data$win_ymin * data$axis_y) / data$axis_ss
-  data$axis_max <-
-    (data$win_xmax * data$axis_x + data$win_ymax * data$axis_y) / data$axis_ss
-  data$win_xmin <- NULL
-  data$win_xmax <- NULL
-  data$win_ymin <- NULL
-  data$win_ymax <- NULL
-  
-  # label ranges
-  data$label_min <- data$center + data$scale * data$axis_min
-  data$label_max <- data$center + data$scale * data$axis_max
-  data$axis_min <- NULL
-  data$axis_max <- NULL
-  
-  # element units; by default, use Wilkinson's breaks algorithm
-  label_vals <- if (is.null(by)) {
-    lapply(seq(nrow(data)), function(i) {
-      labeling::extended(data$label_min[[i]], data$label_max[[i]], num)
-    })
-  } else {
-    if (length(by) == 1L) by <- rep(by, nrow(data))
-    lapply(seq(nrow(data)), function(i) {
-      by[[i]] * seq(
-        floor(data$label_min[[i]] / by[[i]]),
-        ceiling(data$label_max[[i]] / by[[i]])
-      )
-    })
-  }
-  data <- data[rep(seq(nrow(data)), sapply(label_vals, length)),
-               , drop = FALSE]
-  data$label <- unlist(label_vals)
-  data$label_min <- NULL
-  data$label_max <- NULL
-  
-  # axis positions
-  data$axis_val <- (data$label - data$center) / data$scale
-  data$x_val <- data$axis_val * data$axis_x
-  data$y_val <- data$axis_val * data$axis_y
-  data$axis_val <- NULL
-  
-  data
-}

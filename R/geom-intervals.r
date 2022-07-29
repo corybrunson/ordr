@@ -1,4 +1,4 @@
-#' @title Render intervals depicting ranges, usually about center points
+#' @title Intervals depicting ranges, usually about center points
 #' 
 
 #' @description `geom_lineranges()` renders horizontal and vertical intervals

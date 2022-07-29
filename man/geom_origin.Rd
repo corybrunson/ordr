@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom-origin.r
 \name{geom_origin}
 \alias{geom_origin}
-\title{Render a crosshairs or circle at the origin}
+\title{Crosshairs or circle at the origin}
 \usage{
 geom_origin(
   mapping = NULL,
