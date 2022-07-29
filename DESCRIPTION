@@ -108,5 +108,4 @@ Collate:
     'themes.r'
     'zzz-biplot-geoms.r'
     'zzz-biplot-stats.r'
-    'zzz.r'
 VignetteBuilder: knitr
