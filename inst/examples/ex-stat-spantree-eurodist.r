@@ -4,6 +4,7 @@ eurodist %>%
   as_tbl_ord() %>%
   augment_ord() %>%
   print() -> euro_mds
+
 # biplot with minimal spanning tree based on full-dimensional distances
 # (as implemented in {mlpack})
 euro_mds %>%

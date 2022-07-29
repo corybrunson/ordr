@@ -113,6 +113,7 @@ glass \%>\%
            model = lra, compositional = TRUE) \%>\%
   confer_inertia("rows") \%>\%
   print() -> glass_lra
+
 # row-principal biplot with ordinate-wise standard deviations
 glass_lra \%>\%
   ggbiplot(aes(color = Site), sec.axes = "cols", scale.factor = .05) +
@@ -125,6 +126,7 @@ glass_lra \%>\%
     "Row-principal LRA biplot of Freestone glass measurements",
     "Ranges 2 sample standard deviations from centroids"
   )
+
 # row-principal biplot with coordinate-wise confidence intervals
 glass_lra \%>\%
   ggbiplot(aes(color = Site), sec.axes = "cols", scale.factor = .05) +

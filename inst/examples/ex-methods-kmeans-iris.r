@@ -8,6 +8,7 @@ iris %>%
   scale() %>%
   kmeans(centers = 3) %>%
   print() -> iris_km
+
 # visualize clusters using PCA
 iris %>%
   subset(select = -Species) %>%
@@ -18,14 +19,18 @@ iris %>%
   geom_rows_point(aes(color = factor(as.character(as.integer(cluster)),
                                      levels = as.character(seq(3L))))) +
   scale_color_brewer(type = "qual", name = "cluster")
+
 # wrap as a 'tbl_ord' object
 (iris_km_ord <- as_tbl_ord(iris_km))
+
 # augment everything with names, observations with cluster assignment
 (iris_km_ord <- augment_ord(iris_km_ord))
+
 # summarize clusters with standard deviation
 iris_km_ord %>%
   tidy() %>%
   transform(.sdev = sqrt(.withinss / .size))
+
 # discriminate between clusters 2 and 3
 iris_km_ord %>%
   ggbiplot(aes(x = `2`, y = `3`), color = factor(.cluster)) +

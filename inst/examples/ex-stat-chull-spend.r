@@ -15,6 +15,7 @@ USPersonalExpenditure %>%
     "U.S. Personal Expenditure data, 1940-1960",
     "Row-principal biplot of centered PCA"
   )
+
 # uncentered principal components analysis of U.S. personal expenditure data
 USPersonalExpenditure %>%
   prcomp(center = FALSE) %>%

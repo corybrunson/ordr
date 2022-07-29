@@ -51,9 +51,11 @@ qs_ranks \%>\%
   cor(method = "kendall") \%>\%
   eigen_ord() \%>\%
   print() -> qs_eigen
+
 # recover eigenvectors
 get_rows(qs_eigen)
 identical(get_cols(qs_eigen), get_rows(qs_eigen))
+
 # wrap as a 'tbl_ord' and augment with dimension names
 augment_ord(as_tbl_ord(qs_eigen))
 # decomposition returns pure eigenvectors

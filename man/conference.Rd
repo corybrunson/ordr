@@ -55,6 +55,7 @@ haireye_ca <- ordinate(
   cols = everything(), model = MASS::corresp
 )
 print(haireye_ca)
+
 # check distribution of inertia
 get_conference(haireye_ca)
 # confer inertia to rows, then to columns

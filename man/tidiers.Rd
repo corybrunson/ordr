@@ -66,6 +66,7 @@ particular \code{\link[=stat_spantree]{stat_spantree()}}.
 \examples{
 # illustrative ordination: PCA of iris data
 iris_pca <- ordinate(iris, seq(4L), ~ prcomp(., center = TRUE, scale. = TRUE))
+
 # use `tidy()` to summarize distribution of inertia
 tidy(iris_pca)
 # this facilitates scree plots
@@ -74,6 +75,7 @@ tidy(iris_pca) \%>\%
   geom_col() +
   scale_y_continuous(labels = scales::percent) +
   labs(x = NULL, y = "Proportion of variance")
+
 # use `fortify()` to prepare either matrix factor for `ggplot()`
 fortify(iris_pca, .matrix = "V") \%>\%
   ggplot(aes(x = .name, y = PC1)) +
@@ -87,6 +89,7 @@ iris_pca \%>\%
   labs(y = NULL)
 # ... or to prepare both for `ggbiplot()`
 fortify(iris_pca)
+
 # use `glance()` to summarize the model as an ordination
 glance(iris_pca)
 # this enables comparisons to other models

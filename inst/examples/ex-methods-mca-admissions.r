@@ -11,10 +11,12 @@ ucb_admissions %>%
   # augment profiles with names, masses, distances, and inertias
   augment_ord() %>%
   print() -> admissions_mca
+
 # recover row and column coordinates and row weights
 head(get_rows(admissions_mca, elements = "score"))
 get_cols(admissions_mca)
 head(get_rows(admissions_mca))
+
 # column-standard biplot of factor levels
 admissions_mca %>%
   ggbiplot() +
@@ -27,6 +29,7 @@ admissions_mca %>%
   scale_color_brewer(palette = "Dark2") +
   scale_size_area(guide = "none") +
   labs(color = "Factor level", shape = "Factor level")
+
 # column-principal biplot of factor levels
 admissions_mca %>%
   confer_inertia("colprincipal") %>%

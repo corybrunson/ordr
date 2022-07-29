@@ -27,6 +27,7 @@ ggbiplot(mtcars_specs_pca, aes(label = .name),
   geom_cols_vector(data = mtcars_pca_lm) +
   geom_cols_text_radiate(data = mtcars_pca_lm) +
   expand_limits(x = c(-2.5, 2))
+
 # multidimensional scaling based on a scaled cosine distance of vehicle specs
 cosine_dist <- function(x) {
   x <- as.matrix(x)

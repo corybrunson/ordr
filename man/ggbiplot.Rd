@@ -126,6 +126,7 @@ iris[, -5] \%>\%
   mutate_rows(species = iris$Species) \%>\%
   mutate_cols(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
   print() -> iris_pca
+
 # row-principal biplot with rescaled secondary axis
 iris_pca \%>\%
   ggbiplot(aes(color = species), sec.axes = "cols", scale.factor = 2) +
@@ -168,6 +169,7 @@ ggbiplot(mtcars_specs_pca, aes(label = .name),
   geom_cols_vector(data = mtcars_pca_lm) +
   geom_cols_text_radiate(data = mtcars_pca_lm) +
   expand_limits(x = c(-2.5, 2))
+
 # multidimensional scaling based on a scaled cosine distance of vehicle specs
 cosine_dist <- function(x) {
   x <- as.matrix(x)
@@ -207,6 +209,7 @@ ggbiplot(mtcars_specs_cmds_ord, aes(label = .name),
   expand_limits(x = c(-2.25, 1.25), y = c(-2, 1.5))
 # PCA of iris data
 iris_pca <- ordinate(iris, 1:4, prcomp, scale = TRUE)
+
 # row-principal (interpolation) biplot
 iris_pca \%>\%
   augment_ord() \%>\%
@@ -216,6 +219,7 @@ iris_pca \%>\%
   geom_cols_axis(aes(label = .name, center = .center, scale = .scale)) +
   geom_rows_point(aes(color = Species), alpha = .5) +
   ggtitle("Interpolation biplot of Anderson iris measurements")
+
 # row-principal prediction biplot
 iris_pca \%>\%
   augment_ord() \%>\%

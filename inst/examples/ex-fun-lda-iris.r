@@ -7,6 +7,7 @@ iris_lda <- lda_ord(iris[, 1:4], iris[, 5], axes.scale = "unstandardized")
 print(sweep(iris_lda$means, 2, iris_centroid, "-") %*% get_cols(iris_lda))
 # discriminant centroids
 print(get_rows(iris_lda, elements = "active"))
+
 # unstandardized coefficient LDA biplot
 iris_lda %>%
   as_tbl_ord() %>%
@@ -26,6 +27,7 @@ iris_lda %>%
   scale_color_brewer(type = "qual", palette = 2) +
   ggtitle("Unstandardized coefficient biplot of iris LDA") +
   expand_limits(y = c(-3, 5))
+
 # standardized discriminant coefficients: permit comparisons across the
 # variables
 iris_lda <- lda_ord(iris[, 1:4], iris[, 5], axes.scale = "standardized")
@@ -60,6 +62,7 @@ iris_lda %>%
   scale_color_brewer(type = "qual", palette = 2) +
   ggtitle("Standardized coefficient biplot of iris LDA") +
   expand_limits(y = c(-2, 3))
+
 # variable contributions (de-sphered discriminant coefficients): recover the
 # inner product relationship with the centered class centroids
 iris_lda <- lda_ord(iris[, 1:4], iris[, 5], axes.scale = "contribution")

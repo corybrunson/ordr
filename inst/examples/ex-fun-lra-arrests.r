@@ -3,6 +3,7 @@ head(USArrests)
 # row and column subsets
 state_examples <- c("Hawaii", "Mississippi", "North Dakota")
 arrests <- c(1L, 2L, 4L)
+
 # pairwise log-ratios of violent crime arrests for two states
 arrest_pairs <- combn(arrests, 2L)
 arrest_ratios <-
@@ -13,9 +14,11 @@ colnames(arrest_ratios) <- paste(
 )
 arrest_logratios <- log(arrest_ratios)
 arrest_logratios[state_examples, ]
+
 # non-compositional log-ratio analysis
 (arrests_lra <- lra(USArrests[, c(1, 2, 4)]))
 (arrests_lra_ord <- augment_ord(as_tbl_ord(arrests_lra)))
+
 # state abbreviations
 state_abbr <- data.frame(state = state.name, abbr = state.abb)
 # row-principal biplot
@@ -34,6 +37,7 @@ arrests_lra_ord %>%
   ) +
   expand_limits(x = c(-.35)) +
   guides(color = "none")
+
 # compositional log-ratio analysis
 (arrests_lra <- lra(USArrests[, c(1, 2, 4)], compositional = TRUE))
 (arrests_lra_ord <- augment_ord(as_tbl_ord(arrests_lra)))

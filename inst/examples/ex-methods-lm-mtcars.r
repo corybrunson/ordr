@@ -6,12 +6,14 @@ mtcars_centered %>%
   as.data.frame() %>%
   lm(formula = mpg ~ wt + cyl) %>%
   print() -> mtcars_lm
+
 # wrap as a 'tbl_ord' object
 (mtcars_lm_ord <- as_tbl_ord(mtcars_lm))
 # augment everything with names, predictors with observation stats
 augment_ord(mtcars_lm_ord)
 # calculate influences as the squares of weighted residuals
 mutate_rows(augment_ord(mtcars_lm_ord), influence = .wt.res^2)
+
 # regression biplot with performance isolines
 mtcars_lm_ord %>%
   augment_ord() %>%

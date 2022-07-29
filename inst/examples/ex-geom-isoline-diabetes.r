@@ -2,10 +2,12 @@
 head(heplots::Diabetes)
 # default (standardized) linear discriminant analysis of groups on tests
 diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes)
+
 # bestow 'tbl_ord' class & augment observation, centroid, and variable fields
 as_tbl_ord(diabetes_lda) %>%
   augment_ord() %>%
   print() -> diabetes_lda
+
 # row-standard biplot
 diabetes_lda %>%
   confer_inertia(1) %>%

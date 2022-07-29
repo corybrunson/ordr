@@ -2,6 +2,7 @@
 head(heplots::Diabetes)
 # default (standardized) linear discriminant analysis of groups on tests
 diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes)
+
 # bestow 'tbl_ord' class & augment observation, centroid, and variable fields
 as_tbl_ord(diabetes_lda) %>%
   augment_ord() %>%
@@ -25,6 +26,7 @@ diabetes_lda %>%
 # contribution LDA of groups on tests
 diabetes_lda <-
   lda_ord(group ~ ., heplots::Diabetes, axes.scale = "contribution")
+
 # bestow 'tbl_ord' class & augment observation, centroid, and variable fields
 as_tbl_ord(diabetes_lda) %>%
   augment_ord() %>%

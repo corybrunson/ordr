@@ -106,6 +106,7 @@ swiss_fa <-
 # active and supplementary elements
 get_rows(swiss_fa, elements = "active")
 head(get_rows(swiss_fa, elements = "score"))
+
 # biplot using element filters and selection
 # (note that filter precedes selection)
 ggbiplot(swiss_fa) +

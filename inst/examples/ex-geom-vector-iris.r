@@ -1,5 +1,6 @@
 # compute unscaled row-principal components of scaled measurements
 (iris_pca <- ordinate(iris, cols = 1:4, princomp))
+
 # row-principal biplot with coordinate-wise standard deviations
 iris_pca %>%
   ggbiplot(aes(color = Species)) +

@@ -44,10 +44,12 @@ on this list structure to organize the model output into a tibble.
 # 'dist' object (matrix of road distances) of large American cities
 class(UScitiesD)
 print(UScitiesD)
+
 # use multidimensional scaling to infer artificial planar coordinates
 UScitiesD \%>\%
   cmdscale(k = 3L, eig = TRUE, x.ret = TRUE) ->
   usa_mds
+
 # glance at the model
 glance(usa_mds)
 # return the tidied coordinates
