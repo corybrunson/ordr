@@ -57,8 +57,8 @@ RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 Collate:
     'aaa-.r'
-    'biplot-gg.r'
     'biplot-key.r'
+    'biplot.r'
     'data.r'
     'dplyr-verbs.r'
     'utils.r'
