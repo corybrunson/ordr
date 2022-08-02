@@ -19,7 +19,7 @@ package.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/ma
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -68,28 +68,28 @@ package.</p>
 <span><span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for correspondence</span></span>
-<span><span class="fu"><a href="accessors.html">recover_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for correspondence</span></span>
-<span><span class="fu"><a href="accessors.html">recover_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for correspondence</span></span>
-<span><span class="fu"><a href="accessors.html">recover_inertia</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_inertia</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for correspondence</span></span>
 <span><span class="fu"><a href="conference.html">recover_conference</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for correspondence</span></span>
-<span><span class="fu"><a href="accessors.html">recover_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for correspondence</span></span>
-<span><span class="fu"><a href="augmentation.html">augmentation_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="augmentation.html">recover_aug_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for correspondence</span></span>
-<span><span class="fu"><a href="augmentation.html">augmentation_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="augmentation.html">recover_aug_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for correspondence</span></span>
-<span><span class="fu"><a href="augmentation.html">augmentation_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="augmentation.html">recover_aug_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -124,6 +124,7 @@ package.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4   A   M  F0  AL    5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5   A   M  F0  AL    5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6   A   M  F0  AL   13</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># use correspondence analysis to construct row and column profiles</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">quine_ca</span> <span class="op">&lt;-</span> <span class="fu">MASS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MASS/man/corresp.html" class="external-link">corresp</a></span><span class="op">(</span><span class="op">~</span> <span class="va">Age</span> <span class="op">+</span> <span class="va">Eth</span>, data <span class="op">=</span> <span class="va">quine</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> First canonical correlation(s): 0.05317534 </span>
@@ -152,17 +153,19 @@ package.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          | </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.06</span>  | </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  0.947 | </span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># recover row and column profiles</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="accessors.html">get_rows</a></span><span class="op">(</span><span class="va">quine_ca</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="recoverers.html">get_rows</a></span><span class="op">(</span><span class="va">quine_ca</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          Can1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> F0 -0.3344445</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> F1  1.4246090</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> F2 -1.0320002</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> F3 -0.4612728</span>
-<span class="r-in"><span><span class="fu"><a href="accessors.html">get_cols</a></span><span class="op">(</span><span class="va">quine_ca</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="recoverers.html">get_cols</a></span><span class="op">(</span><span class="va">quine_ca</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         Can1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A -1.0563816</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> N  0.9466276</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># augment profiles with names, masses, distances, and inertias</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">quine_ca</span> <span class="op">&lt;-</span> <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="va">quine_ca</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'correspondence': (4 x 1) x (2 x 1)'</span>

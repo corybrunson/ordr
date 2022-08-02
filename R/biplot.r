@@ -34,12 +34,21 @@
 #' and `y` must take coordinate values.
 #'
 #' `ord_aes()` is a convenience function that generates a full-rank set of
-#' coordinate aesthetics `..coord1`, `..coord2`, etc. mapped to the
-#' shared coordinates of the ordination object, along with any additional
-#' aesthetics that are processed internally by [ggplot2::aes()].
+#' coordinate aesthetics `..coord1`, `..coord2`, etc. mapped to the shared
+#' coordinates of the ordination object, along with any additional aesthetics
+#' that are processed internally by [ggplot2::aes()].
+#'
+#' The `axis.type` parameter controls whether the biplot is interpolative or
+#' predictive, though predictive biplots are still experimental and limited to
+#' linear methods like PCA. Gower & Hand (1996) and Gower, Lubbe, & le Roux
+#' (2011) thoroughly explain the construction and interpretation of predictive
+#' biplots.
 #' 
 
 #' @template biplot-layers
+
+#' @template ref-gower1996
+#' @template ref-gower2011
 
 #' @name ggbiplot
 #' @import ggplot2
@@ -108,21 +117,21 @@ ggbiplot <- function(
     
     # -+- only linear ordinations for now -+-
     if (! ord_class %in% c("eigen_ord", "svd_ord", "prcomp", "princomp")) {
-      warning("Prediction biplots are only implemented for linear methods ",
+      warning("Predictive biplots are only implemented for linear methods ",
               "(ED, SVD, PCA).")
     } else {
       
-      # rescale standard coordinates for prediction biplot
+      # rescale standard coordinates for predictive biplot
       xy_map <- stringr::str_remove(as.character(mapping[c("x", "y")]), "^~")
       if (! all(c("x", "y") %in% names(mapping)) &&
           any(stringr::str_detect(names(mapping), "..coord"))) {
-        warning("For prediction biplots, ",
+        warning("For predictive biplots, ",
                 "map only `x` and `y` to shared coordinates.")
       } else if (! all(xy_map %in% attr(ordination, "coordinates"))) {
-        warning("For prediction biplots, ",
+        warning("For predictive biplots, ",
                 "map both `x` and `y` to shared coordinates.")
       } else if (! all(c(0, 1) %in% conference)) {
-        warning("For prediction biplots, ",
+        warning("For predictive biplots, ",
                 "inertia must be balanced and conferred on one factor.")
       } else {
         # remove coordinates other than those used in the biplot

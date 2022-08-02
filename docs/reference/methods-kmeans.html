@@ -18,7 +18,7 @@ objects of class "kmeans" as returned by stats::kmeans().'><!-- mathjax --><scri
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -66,22 +66,22 @@ objects of class <code>"kmeans"</code> as returned by <code><a href="https://rdr
 <span><span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for kmeans</span></span>
-<span><span class="fu"><a href="accessors.html">recover_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for kmeans</span></span>
-<span><span class="fu"><a href="accessors.html">recover_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for kmeans</span></span>
-<span><span class="fu"><a href="accessors.html">recover_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for kmeans</span></span>
-<span><span class="fu"><a href="augmentation.html">augmentation_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="augmentation.html">recover_aug_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for kmeans</span></span>
-<span><span class="fu"><a href="augmentation.html">augmentation_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="augmentation.html">recover_aug_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for kmeans</span></span>
-<span><span class="fu"><a href="augmentation.html">augmentation_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="augmentation.html">recover_aug_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -150,6 +150,7 @@ objects of class <code>"kmeans"</code> as returned by <code><a href="https://rdr
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6] "betweenss"    "size"         "iter"         "ifault"      </span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># visualize clusters using PCA</span></span></span>
 <span class="r-in"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span>select <span class="op">=</span> <span class="op">-</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -161,6 +162,7 @@ objects of class <code>"kmeans"</code> as returned by <code><a href="https://rdr
 <span class="r-in"><span>                                     levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">3L</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">scale_color_brewer</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"qual"</span>, name <span class="op">=</span> <span class="st">"cluster"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="methods-kmeans-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># wrap as a 'tbl_ord' object</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">iris_km_ord</span> <span class="op">&lt;-</span> <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">iris_km</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'kmeans': (150 x 3) x (4 x 3)'</span>
@@ -183,6 +185,7 @@ objects of class <code>"kmeans"</code> as returned by <code><a href="https://rdr
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  0.850 -<span style="color: #BB0000;">0.880</span>  0.088<span style="text-decoration: underline;">1</span> | </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">1.30</span>   0.347  0.993  | </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">1.25</span>   0.281  1.01   | </span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># augment everything with names, observations with cluster assignment</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">iris_km_ord</span> <span class="op">&lt;-</span> <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="va">iris_km_ord</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'kmeans': (150 x 3) x (4 x 3)'</span>
@@ -206,6 +209,7 @@ objects of class <code>"kmeans"</code> as returned by <code><a href="https://rdr
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  0.850 -<span style="color: #BB0000;">0.880</span>  0.088<span style="text-decoration: underline;">1</span> | <span style="color: #BCBCBC;">2</span> Sepal.Width </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">1.30</span>   0.347  0.993  | <span style="color: #BCBCBC;">3</span> Petal.Length</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">1.25</span>   0.281  1.01   | <span style="color: #BCBCBC;">4</span> Petal.Width </span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># summarize clusters with standard deviation</span></span></span>
 <span class="r-in"><span><span class="va">iris_km_ord</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -214,6 +218,7 @@ objects of class <code>"kmeans"</code> as returned by <code><a href="https://rdr
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1     1    50  47.35062       NA        NA 0.9731456</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2     2    53  44.08754       NA        NA 0.9120529</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3     3    47  47.45019       NA        NA 1.0047779</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># discriminate between clusters 2 and 3</span></span></span>
 <span class="r-in"><span><span class="va">iris_km_ord</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">`2`</span>, y <span class="op">=</span> <span class="va">`3`</span><span class="op">)</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">.cluster</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>

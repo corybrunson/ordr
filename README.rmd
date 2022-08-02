@@ -111,7 +111,7 @@ tidy(iris_pca) %T>% print() %>%
 
 Following **ggplot2**, the `fortify()` method row-binds the factor tibbles with an additional `.matrix` column. This is used by `ggbiplot()` to redirect row- and column-specific plot layers to the appropriate subsets:[^text-radiate]
 
-```{r interpolation biplot}
+```{r interpolative biplot}
 ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_ellipse(aes(color = Species), alpha = .5, level = .99) +
@@ -124,11 +124,11 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
 
 [^text-radiate]: The radiating text geom, like several other features, is adapted from the **ggbiplot** package.
 
-When variables are represented in standard coordinates, as typically in PCA, their rules can be rescaled to yield a prediction biplot:[^prediction]
+When variables are represented in standard coordinates, as typically in PCA, their rules can be rescaled to yield a predictive biplot:[^predictive]
 
-[^prediction]: This is an experimental feature only available for linear methods, namely eigendecomposition, singular value decomposition, and principal components analysis.
+[^predictive]: This is an experimental feature only available for linear methods, namely eigendecomposition, singular value decomposition, and principal components analysis.
 
-```{r prediction biplot}
+```{r predictive biplot}
 ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
   theme_biplot() +
   geom_rows_point(aes(color = Species, shape = Species)) +
@@ -137,7 +137,7 @@ ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
     size = 5, alpha = .5, fun.data = mean_se
   ) +
   geom_cols_axis(aes(label = .name, center = .center, scale = .scale)) +
-  ggtitle("Prediction biplot of Anderson's iris measurements",
+  ggtitle("Predictive biplot of Anderson's iris measurements",
           "Project a marker onto an axis to approximate its measurement")
 aggregate(iris[, 1:4], by = iris[, "Species", drop = FALSE], FUN = mean)
 ```

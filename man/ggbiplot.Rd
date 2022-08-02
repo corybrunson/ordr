@@ -100,9 +100,15 @@ ordination. Currently only 2-dimensional biplots are supported, so both \code{x}
 and \code{y} must take coordinate values.
 
 \code{ord_aes()} is a convenience function that generates a full-rank set of
-coordinate aesthetics \code{..coord1}, \code{..coord2}, etc. mapped to the
-shared coordinates of the ordination object, along with any additional
-aesthetics that are processed internally by \code{\link[ggplot2:aes]{ggplot2::aes()}}.
+coordinate aesthetics \code{..coord1}, \code{..coord2}, etc. mapped to the shared
+coordinates of the ordination object, along with any additional aesthetics
+that are processed internally by \code{\link[ggplot2:aes]{ggplot2::aes()}}.
+
+The \code{axis.type} parameter controls whether the biplot is interpolative or
+predictive, though predictive biplots are still experimental and limited to
+linear methods like PCA. Gower & Hand (1996) and Gower, Lubbe, & le Roux
+(2011) thoroughly explain the construction and interpretation of predictive
+biplots.
 }
 \section{Biplot layers}{
 
@@ -210,7 +216,7 @@ ggbiplot(mtcars_specs_cmds_ord, aes(label = .name),
 # PCA of iris data
 iris_pca <- ordinate(iris, 1:4, prcomp, scale = TRUE)
 
-# row-principal (interpolation) biplot
+# row-principal (interpolative) biplot
 iris_pca \%>\%
   augment_ord() \%>\%
   ggbiplot() +
@@ -218,9 +224,9 @@ iris_pca \%>\%
   scale_color_brewer(type = "qual", palette = 2) +
   geom_cols_axis(aes(label = .name, center = .center, scale = .scale)) +
   geom_rows_point(aes(color = Species), alpha = .5) +
-  ggtitle("Interpolation biplot of Anderson iris measurements")
+  ggtitle("Interpolative biplot of Anderson iris measurements")
 
-# row-principal prediction biplot
+# row-principal predictive biplot
 iris_pca \%>\%
   augment_ord() \%>\%
   ggbiplot(axis.type = "predictive") +
@@ -228,7 +234,13 @@ iris_pca \%>\%
   scale_color_brewer(type = "qual", palette = 2) +
   geom_cols_axis(aes(label = .name, center = .center, scale = .scale)) +
   geom_rows_point(aes(color = Species), alpha = .5) +
-  ggtitle("Prediction biplot of Anderson iris measurements")
+  ggtitle("Predictive biplot of Anderson iris measurements")
+}
+\references{
+Gower JC & Hand DJ (1996) \emph{Biplots}. Chapman & Hall, ISBN: 0-412-71630-5.
+
+Gower JC, Lubbe GS, & le Roux NJ (2011) \emph{Understanding Biplots}. Wiley, ISBN:
+978-0-470-01255-0. \url{https://www.wiley.com/go/biplots}
 }
 \seealso{
 \code{\link[ggplot2:ggplot2-package]{ggplot2::ggplot2()}}, on which \code{ggbiplot()} is built.

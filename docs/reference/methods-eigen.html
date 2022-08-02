@@ -18,7 +18,7 @@ objects of class "eigen_ord" returned by eigen_ord().'><!-- mathjax --><script s
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -66,28 +66,28 @@ objects of class <code>"eigen_ord"</code> returned by <code><a href="wrap-ord.ht
 <span><span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for eigen_ord</span></span>
-<span><span class="fu"><a href="accessors.html">recover_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for eigen_ord</span></span>
-<span><span class="fu"><a href="accessors.html">recover_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for eigen_ord</span></span>
-<span><span class="fu"><a href="accessors.html">recover_inertia</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_inertia</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for eigen_ord</span></span>
-<span><span class="fu"><a href="accessors.html">recover_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for eigen_ord</span></span>
 <span><span class="fu"><a href="conference.html">recover_conference</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for eigen_ord</span></span>
-<span><span class="fu"><a href="augmentation.html">augmentation_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="augmentation.html">recover_aug_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for eigen_ord</span></span>
-<span><span class="fu"><a href="augmentation.html">augmentation_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="augmentation.html">recover_aug_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for eigen_ord</span></span>
-<span><span class="fu"><a href="augmentation.html">augmentation_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="augmentation.html">recover_aug_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -147,8 +147,9 @@ objects of class <code>"eigen_ord"</code> returned by <code><a href="wrap-ord.ht
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "eigen_ord"</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># recover eigenvectors</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="accessors.html">get_rows</a></span><span class="op">(</span><span class="va">qs_eigen</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="recoverers.html">get_rows</a></span><span class="op">(</span><span class="va">qs_eigen</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         EV1         EV2        EV3         EV4         EV5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> rk_academic      -0.4876816 -0.28115567  0.3779721  0.08143094 -0.05527027</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> rk_employer      -0.4726835 -0.28941567  0.4021804  0.18473911 -0.20861096</span>
@@ -163,8 +164,9 @@ objects of class <code>"eigen_ord"</code> returned by <code><a href="wrap-ord.ht
 <span class="r-out co"><span class="r-pr">#&gt;</span> rk_citations     -0.100067282</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> rk_intl_faculty  -0.001847863</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> rk_intl_students  0.059248322</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="fu"><a href="accessors.html">get_cols</a></span><span class="op">(</span><span class="va">qs_eigen</span><span class="op">)</span>, <span class="fu"><a href="accessors.html">get_rows</a></span><span class="op">(</span><span class="va">qs_eigen</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="fu"><a href="recoverers.html">get_cols</a></span><span class="op">(</span><span class="va">qs_eigen</span><span class="op">)</span>, <span class="fu"><a href="recoverers.html">get_rows</a></span><span class="op">(</span><span class="va">qs_eigen</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># wrap as a 'tbl_ord' and augment with dimension names</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">qs_eigen</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'eigen_ord': (6 x 6) x (6 x 6)'</span>

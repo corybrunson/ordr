@@ -19,7 +19,7 @@ structure."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -109,7 +109,7 @@ matrices, <code>u</code> and <code>v</code>, which must have the same number of 
 same column names.</p>
 <p><code>is_tbl_ord()</code> checks an object <code>x</code> for the tbl_ord class; <code>valid_tbl_ord()</code>
 additionally checks for consistency between <code>recover_coord(x)</code> and the
-columns of <code>recover_rows(x)</code> and <code>recover_cols(x)</code>, using the <a href="accessors.html">accessors</a>.
+columns of <code>recover_rows(x)</code> and <code>recover_cols(x)</code>, using the <a href="recoverers.html">recoverers</a>.
 <code>un_tbl_ord()</code> removes attributes associated with the tbl_ord class in order
 to restore an object that was originally passed to <code>as_tbl_ord</code>.</p>
     </div>
@@ -144,6 +144,7 @@ to restore an object that was originally passed to <code>as_tbl_ord</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Cumulative Var   0.379   0.573   0.759</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The degrees of freedom for the model is 0 and the fit was 1e-04 </span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># add the 'tbl_ord' wrapper</span></span></span>
 <span class="r-in"><span><span class="va">swiss_fa_ord</span> <span class="op">&lt;-</span> <span class="fu">as_tbl_ord</span><span class="op">(</span><span class="va">swiss_fa</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># inspect wrapped model</span></span></span>
@@ -201,6 +202,7 @@ to restore an object that was originally passed to <code>as_tbl_ord</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Cumulative Var   0.379   0.573   0.759</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The degrees of freedom for the model is 0 and the fit was 1e-04 </span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create a 'tbl_ord' directly from row and column factors</span></span></span>
 <span class="r-in"><span><span class="co"># (missing inertia &amp; other attributes)</span></span></span>
 <span class="r-in"><span><span class="va">swiss_fa_ord2</span> <span class="op">&lt;-</span> <span class="fu">make_tbl_ord</span><span class="op">(</span>rows <span class="op">=</span> <span class="va">swiss_fa</span><span class="op">$</span><span class="va">scores</span>, cols <span class="op">=</span> <span class="va">swiss_fa</span><span class="op">$</span><span class="va">loadings</span><span class="op">)</span></span></span>

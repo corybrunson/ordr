@@ -18,7 +18,7 @@ archaeological sites in Israel."><!-- mathjax --><script src="https://cdnjs.clou
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -99,10 +99,10 @@ determine their major components.</p>
     </div>
     <div id="references">
     <h2>References</h2>
-    <p>Freestone IC, Gorin-Rosen Y, Hughes MJ (2000) "Primary glass from Israel and
-the production of glass in Late Antiquity and the early Islamic period". <em>La
-route du verre: Ateliers primaires et secondaires du second millénaire av.
-J.-C. au Moyen Âge</em>: 65--83.
+    <p>Freestone IC, Gorin-Rosen Y, &amp; Hughes MJ (2000) "Primary glass from Israel
+and the production of glass in Late Antiquity and the early Islamic period".
+<em>La route du verre: Ateliers primaires et secondaires du second millénaire
+av. J.-C. au Moyen Âge</em>: 65--83.
 <a href="http://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&amp;idt=1158762" class="external-link">http://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&amp;idt=1158762</a></p>
 <p>Baxter MJ &amp; Freestone IC (2006) "Log-Ratio Compositional Data Analysis in
 Archaeometry". <em>Archaeometry</em>, <strong>48</strong>(3): 511--531.
@@ -132,6 +132,7 @@ doi: <a href="https://doi.org/10.1111/j.1475-4754.2006.00270.x" class="external-
 <span class="r-in"><span><span class="co"># format as a data frame with row names</span></span></span>
 <span class="r-in"><span><span class="va">glass_main</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">glass_main</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">glass_main</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">glass</span>, <span class="va">Site</span> <span class="op">==</span> <span class="st">"Bet Eli'ezer"</span><span class="op">)</span><span class="op">$</span><span class="va">Anal</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># perform log-ratio analysis</span></span></span>
 <span class="r-in"><span><span class="va">glass_lra</span> <span class="op">&lt;-</span> <span class="fu"><a href="lra-ord.html">lra</a></span><span class="op">(</span><span class="va">glass_main</span>, compositional <span class="op">=</span> <span class="cn">TRUE</span>, weighted <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># inspect LRA row and column coordinates</span></span></span>
@@ -154,6 +155,7 @@ doi: <a href="https://doi.org/10.1111/j.1475-4754.2006.00270.x" class="external-
 <span class="r-in"><span><span class="co"># inspect singular values of LRA</span></span></span>
 <span class="r-in"><span><span class="va">glass_lra</span><span class="op">$</span><span class="va">sv</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.06502356 0.04802956 0.03826908 0.03063650 0.01432346</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># plot samples and measurements in a biplot</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/biplot.html" class="external-link">biplot</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  x <span class="op">=</span> <span class="va">glass_lra</span><span class="op">$</span><span class="va">row.coords</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">glass_lra</span><span class="op">$</span><span class="va">sv</span><span class="op">)</span>,</span></span>

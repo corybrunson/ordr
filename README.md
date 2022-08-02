@@ -234,10 +234,10 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
           "99% confidence ellipses; variables use top & right axes")
 ```
 
-![](man/figures/README-interpolation%20biplot-1.png)<!-- -->
+![](man/figures/README-interpolative%20biplot-1.png)<!-- -->
 
 When variables are represented in standard coordinates, as typically in
-PCA, their rules can be rescaled to yield a prediction biplot:[^9]
+PCA, their rules can be rescaled to yield a predictive biplot:[^9]
 
 ``` r
 ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
@@ -248,11 +248,11 @@ ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
     size = 5, alpha = .5, fun.data = mean_se
   ) +
   geom_cols_axis(aes(label = .name, center = .center, scale = .scale)) +
-  ggtitle("Prediction biplot of Anderson's iris measurements",
+  ggtitle("Predictive biplot of Anderson's iris measurements",
           "Project a marker onto an axis to approximate its measurement")
 ```
 
-![](man/figures/README-prediction%20biplot-1.png)<!-- -->
+![](man/figures/README-predictive%20biplot-1.png)<!-- -->
 
 ``` r
 aggregate(iris[, 1:4], by = iris[, "Species", drop = FALSE], FUN = mean)

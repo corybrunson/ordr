@@ -20,7 +20,7 @@ additional columns of the data frame (via [cbind_rows()])."><!-- mathjax --><scr
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -145,6 +145,7 @@ included in <code>cols</code> will be augmented.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.269</span> -<span style="color: #BB0000;">0.923</span>  -<span style="color: #BB0000;">0.244</span> ... | <span style="color: #BCBCBC;">2</span> Sepal.Width     3.06  0.436</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  0.580 -<span style="color: #BB0000;">0.024</span><span style="color: #BB0000; text-decoration: underline;">5</span> -<span style="color: #BB0000;">0.142</span>     | <span style="color: #BCBCBC;">3</span> Petal.Length    3.76  1.77 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.565 -<span style="color: #BB0000;">0.066</span><span style="color: #BB0000; text-decoration: underline;">9</span> -<span style="color: #BB0000;">0.634</span>     | <span style="color: #BCBCBC;">4</span> Petal.Width     1.20  0.762</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># LRA of arrest data</span></span></span>
 <span class="r-in"><span><span class="fu">ordinate</span><span class="op">(</span><span class="va">USArrests</span>, cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Murder</span>, <span class="va">Rape</span>, <span class="va">Assault</span><span class="op">)</span>, <span class="va">lra</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'lra': (50 x 2) x (3 x 2)'</span>
@@ -167,9 +168,10 @@ included in <code>cols</code> will be augmented.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.283  4.96  | <span style="color: #BCBCBC;">1</span> Murder </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  2.88  -<span style="color: #BB0000;">0.366</span> | <span style="color: #BCBCBC;">2</span> Rape   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.371</span> -<span style="color: #BB0000;">0.181</span> | <span style="color: #BCBCBC;">3</span> Assault</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># CA of hair &amp; eye color data</span></span></span>
 <span class="r-in"><span><span class="va">haireye</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">HairEyeColor</span>, dims <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">ordinate</span><span class="op">(</span><span class="va">haireye</span>, cols <span class="op">=</span> <span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, model <span class="op">=</span> <span class="fu">MASS</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/MASS/man/corresp.html" class="external-link">corresp</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ordinate</span><span class="op">(</span><span class="va">haireye</span>, <span class="fu">MASS</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/MASS/man/corresp.html" class="external-link">corresp</a></span>, cols <span class="op">=</span> <span class="fu">everything</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'correspondence': (4 x 1) x (4 x 1)'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # 1 coordinate: Can1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
@@ -188,6 +190,7 @@ included in <code>cols</code> will be augmented.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  1.20  | <span style="color: #BCBCBC;">2</span> Blue </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.465</span> | <span style="color: #BCBCBC;">3</span> Hazel</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.354 | <span style="color: #BCBCBC;">4</span> Green</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># FA of Swiss social data</span></span></span>
 <span class="r-in"><span><span class="fu">ordinate</span><span class="op">(</span><span class="va">swiss</span>, model <span class="op">=</span> <span class="va">factanal</span>, factors <span class="op">=</span> <span class="fl">2L</span>, scores <span class="op">=</span> <span class="st">"Bartlett"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'factanal': (53 x 2) x (6 x 2)'</span>
@@ -215,6 +218,7 @@ included in <code>cols</code> will be augmented.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> -<span style="color: #BB0000;">0.094</span><span style="color: #BB0000; text-decoration: underline;">7</span>  0.175  | <span style="color: #BCBCBC;">6</span> Infant.Mortality    0.960  active </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​.uniqueness, ²​.element</span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># LDA of iris data</span></span></span>
 <span class="r-in"><span><span class="fu">ordinate</span><span class="op">(</span><span class="va">iris</span>, model <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="lda-ord.html">lda_ord</a></span><span class="op">(</span><span class="va">.</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="va">.</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span>, ret.x <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'lda_ord': (153 x 2) x (4 x 2)'</span>
@@ -238,6 +242,7 @@ included in <code>cols</code> will be augmented.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  1.53   2.16   | <span style="color: #BCBCBC;">2</span> Sepal.Width  active  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">2.20</span>  -<span style="color: #BB0000;">0.932</span>  | <span style="color: #BCBCBC;">3</span> Petal.Length active  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">2.81</span>   2.84   | <span style="color: #BCBCBC;">4</span> Petal.Width  active  </span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># CCA of savings data</span></span></span>
 <span class="r-in"><span><span class="fu">ordinate</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">LifeCycleSavings</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pop15"</span>, <span class="st">"pop75"</span><span class="op">)</span><span class="op">]</span>,</span></span>
@@ -245,10 +250,10 @@ included in <code>cols</code> will be augmented.</p></dd>
 <span class="r-in"><span>  y <span class="op">=</span> <span class="va">LifeCycleSavings</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sr"</span>, <span class="st">"dpi"</span>, <span class="st">"ddpi"</span><span class="op">)</span><span class="op">]</span>,</span></span>
 <span class="r-in"><span>  model <span class="op">=</span> <span class="va">cancor_ord</span>, scores <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'cancor_ord': (57 x 2) x (58 x 2)'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'cancor_ord': (54 x 2) x (56 x 2)'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # 2 coordinates: CanCor1 and CanCor2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (standard): [ 57 x 2 | 3 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (standard): [ 54 x 2 | 3 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    CanCor1 CanCor2 |   .name     .center .element</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.009</span><span style="color: #BB0000; text-decoration: underline;">11</span> -<span style="color: #BB0000;">0.036</span><span style="color: #BB0000; text-decoration: underline;">2</span> | <span style="color: #BCBCBC;">1</span> pop15       35.1  active  </span>
@@ -256,10 +261,10 @@ included in <code>cols</code> will be augmented.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  0.080<span style="text-decoration: underline;">4</span>   0.057<span style="text-decoration: underline;">7</span> | <span style="color: #BCBCBC;">3</span> Australia   <span style="color: #BB0000;">NA</span>    score   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.210   -<span style="color: #BB0000;">0.125</span>  | <span style="color: #BCBCBC;">4</span> Austria     <span style="color: #BB0000;">NA</span>    score   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  0.207   -<span style="color: #BB0000;">0.147</span>  | <span style="color: #BCBCBC;">5</span> Belgium     <span style="color: #BB0000;">NA</span>    score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 52 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 49 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 58 x 2 | 3 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 56 x 2 | 3 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    CanCor1    CanCor2 |   .name     .center .element</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 0.008<span style="text-decoration: underline;">47</span>   0.033<span style="text-decoration: underline;">4</span>    | <span style="color: #BCBCBC;">1</span> sr           9.67 active  </span>
@@ -267,7 +272,7 @@ included in <code>cols</code> will be augmented.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 0.004<span style="text-decoration: underline;">17</span>  -<span style="color: #BB0000;">0.012</span><span style="color: #BB0000; text-decoration: underline;">3</span>    | <span style="color: #BCBCBC;">3</span> ddpi         3.76 active  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 0.171    -<span style="color: #BB0000;">0.023</span><span style="color: #BB0000; text-decoration: underline;">2</span>    | <span style="color: #BCBCBC;">4</span> Australia   <span style="color: #BB0000;">NA</span>    score   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 0.073<span style="text-decoration: underline;">5</span>    0.047<span style="text-decoration: underline;">5</span>    | <span style="color: #BCBCBC;">5</span> Austria     <span style="color: #BB0000;">NA</span>    score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 53 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 51 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 </code></pre></div>
     </div>

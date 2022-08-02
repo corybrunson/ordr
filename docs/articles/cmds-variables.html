@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -354,7 +354,7 @@ QS weight these rankings differently in their overall assessment, but
 our analysis will compare the rankings to each other across
 universities, ignoring these weights. The subset <code>qswur_usa</code>
 installed with <strong>ordr</strong> include U.S.-based universities
-ranked in the years 2017–2020, <a href="http://www.iu.qs.com/university-rankings/qs-classifications/" class="external-link">their
+ranked in the years 2017–2020, <a href="https://support.qs.com/hc/en-gb/articles/360021876820-QS-Institution-Classifications" class="external-link">their
 classifications by QS</a>, and their six integer-valued rankings.
 (Scores used to generate the rankings are included with the QS data
 files but omitted from <code>qswur_usa</code>.)</p>
@@ -492,17 +492,19 @@ readable but also to allow for additional scales that highlight
 additional data properties.</p>
 </div>
 <div class="section level3">
-<h3 id="correlation-vector-plot">correlation vector plot<a class="anchor" aria-label="anchor" href="#correlation-vector-plot"></a>
+<h3 id="correlation-monoplot">correlation monoplot<a class="anchor" aria-label="anchor" href="#correlation-monoplot"></a>
 </h3>
-<p>CMDS of variables offers a natural alternative visualization: what
-i’ll call the “correlation vector plot”, which is usually only seen as
-one half of a PCA or other biplot. As with CMDS of cases, the point
-isn’t to overlay the case scores and variable loadings from a singular
-value decomposition, but to use the scores or loadings alone to endow
-the cases or variables with a Euclidean geometry they didn’t originally
-have. To that end, i’ll plot the variables as vectors with tails at the
-origin and heads at their principal coordinates <span class="math inline">\(Y = V \Lambda^{1/2}\)</span>, with a unit circle
-included for reference:</p>
+<p>CMDS of variables offers a natural alternative visualization, which
+<a href="https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550" class="external-link">Gower,
+Lubbe, and le Roux (2011)</a> call a “correlation monoplot” in that it
+consists of but one of the two layers of a PCA or other biplot. As with
+CMDS of cases, the point isn’t to overlay the case scores and variable
+loadings from a singular value decomposition, but to use the scores or
+loadings alone to endow the cases or variables with a Euclidean geometry
+they didn’t originally have. To that end, i’ll plot the variables as
+vectors with tails at the origin and heads at their principal
+coordinates <span class="math inline">\(Y = V \Lambda^{1/2}\)</span>,
+with a unit circle included for reference:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/wrap-ord.html">eigen_ord</a></span><span class="op">(</span><span class="va">corr</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -519,7 +521,7 @@ included for reference:</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_reverse</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.4</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Kendall correlations between university rankings"</span>,</span>
-<span>          <span class="st">"CMDS correlation vector plot"</span><span class="op">)</span></span></code></pre></div>
+<span>          <span class="st">"CMDS correlation monoplot"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmds-variables_files/figure-html/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>With respect to the pairwise correlations, the biplot is
 significantly less precise: Though the vectors all have unit length in
@@ -563,10 +565,10 @@ would be difficult to discern from the heatmap. More importantly, unlike
 the secondary patterns visible in the heatmap, these are not artifacts
 of the layout but arise directly from the (correlational) data.</p>
 <p>This last point means that observations made from a correlation
-vector plot can be validated from the CMDS coordinates. In particular,
-we can examine the variables’ loadings onto the third principal
-coordinate, and we can check whether the reputational rankings are
-aligned or misaligned along it.</p>
+monoplot can be validated from the CMDS coordinates. In particular, we
+can examine the variables’ loadings onto the third principal coordinate,
+and we can check whether the reputational rankings are aligned or
+misaligned along it.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">c_eigen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span>.matrix <span class="op">=</span> <span class="st">"rows"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -599,7 +601,7 @@ the first principal coordinate:</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Kendall correlations between university rankings"</span>,</span>
-<span>          <span class="st">"CMDS correlation vector plot, second &amp; third principal coordinates"</span><span class="op">)</span></span></code></pre></div>
+<span>          <span class="st">"CMDS correlation monoplot, second &amp; third principal coordinates"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmds-variables_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>The primary antitheses of the reputational rankings, after removing
 the first principal coordinate, are the two rankings based on

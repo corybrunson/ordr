@@ -1,7 +1,7 @@
 # PCA of iris data
 iris_pca <- ordinate(iris, 1:4, prcomp, scale = TRUE)
 
-# row-principal (interpolation) biplot
+# row-principal (interpolative) biplot
 iris_pca %>%
   augment_ord() %>%
   ggbiplot() +
@@ -9,9 +9,9 @@ iris_pca %>%
   scale_color_brewer(type = "qual", palette = 2) +
   geom_cols_axis(aes(label = .name, center = .center, scale = .scale)) +
   geom_rows_point(aes(color = Species), alpha = .5) +
-  ggtitle("Interpolation biplot of Anderson iris measurements")
+  ggtitle("Interpolative biplot of Anderson iris measurements")
 
-# row-principal prediction biplot
+# row-principal predictive biplot
 iris_pca %>%
   augment_ord() %>%
   ggbiplot(axis.type = "predictive") +
@@ -19,4 +19,4 @@ iris_pca %>%
   scale_color_brewer(type = "qual", palette = 2) +
   geom_cols_axis(aes(label = .name, center = .center, scale = .scale)) +
   geom_rows_point(aes(color = Species), alpha = .5) +
-  ggtitle("Prediction biplot of Anderson iris measurements")
+  ggtitle("Predictive biplot of Anderson iris measurements")

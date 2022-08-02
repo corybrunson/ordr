@@ -12,22 +12,20 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="A tidyverse Extension for Ordinations and Biplots">
-<meta property="og:description" content="Ordination (Podani, 2000)
-    &lt;http://www.euronet.nl/users/backhuys/poda.htm&gt; comprises several
-    multivariate exploratory and explanatory techniques with theoretial
+<meta property="og:description" content="Ordination (Podani, 2000, ISBN:90-5782-067-6) comprises several
+    multivariate exploratory and explanatory techniques with theoretical
     foundations in geometric data analysis (Le Roux &amp; Rouanet, 2005)
     &lt;doi:10.1007/1-4020-2236-0&gt;. The most popular and established of these,
     including principal components analysis, correspondence analysis,
     multidimensional scaling, factor analysis, and discriminant analysis,
     rely on eigen-decompositions or singular value decompositions of
-    pre-processed numeric matrix data (Greenacre, 2010)
-    &lt;https://www.fbbva.es/microsite/multivariate-statistics/biplots.html&gt;. These
-    decompositions give rise to a set of shared (artificial or latent)
+    pre-processed numeric matrix data (Greenacre, 2010, ISBN:978-84-923846).
+    These decompositions give rise to a set of shared (artificial or latent)
     coordinates along which the row and column elements can be measured, and the
     overlay of their scatterplots on these axes is called a biplot
     (Gabriel, 1971) &lt;doi:10.1093/biomet/58.3.453&gt;. ordr provides inspection,
     extraction, manipulation, and visualization tools for several popular
-    ordination classes supported by a set of accessor methods. It is inspired by
+    ordination classes supported by a set of recovery methods. It is inspired by
     and designed to interface naturally with tidyverse workflows
     (Wickham &amp;al, 2019) &lt;doi:10.21105/joss.01686&gt;.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -50,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -106,7 +104,7 @@
 <div class="section level3">
 <h3 id="ordination-and-biplots">ordination and biplots<a class="anchor" aria-label="anchor" href="#ordination-and-biplots"></a>
 </h3>
-<p><em>Ordination</em> is a catch-all term for a variety of statistical techniques that introduce an artificial coordinate system for a data set in such a way that a few coordinates capture a large amount of the data structure <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. The branch of mathematical statistics called <a href="https://link.springer.com/book/10.1007/1-4020-2236-0" class="external-link">geometric data analysis</a> (GDA) provides the theoretical basis for (most of) these techniques. Ordination overlaps with regression and with dimension reduction, which can be <a href="https://towardsdatascience.com/supervised-vs-unsupervised-learning-14f68e32ea8d" class="external-link">contrasted to clustering and classification</a> in that they assign continuous rather than discrete values to data elements <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<p><em>Ordination</em> is a catch-all term for a variety of statistical techniques that introduce an artificial coordinate system for a data set in such a way that a few coordinates capture a large amount of the data structure <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. The branch of mathematical statistics called <a href="https://link.springer.com/book/10.1007/1-4020-2236-0" class="external-link">geometric data analysis</a> (GDA) provides the theoretical basis for (most of) these techniques. Ordination overlaps with regression and with dimension reduction, which can be <a href="https://towardsdatascience.com/supervised-vs-unsupervised-learning-14f68e32ea8d" class="external-link">contrasted to clustering and classification</a> in that they assign continuous rather than categorical values to data elements <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
 <p>Most ordination techniques decompose a numeric rectangular data set into the product of two matrices, often using singular value decomposition (SVD). The coordinates of the shared dimensions of these matrices (over which they are multiplied) are the artificial coordinates. In some cases, such as principal components analysis, the decomposition is exact; in others, such as non-negative matrix factorization, it is approximate. Some techniques, such as correspondence analysis, transform the data before decomposition. Ordination techniques may be supervised, like linear discriminant analysis, or unsupervised, like multidimensional scaling.</p>
 <p>Analysis pipelines that use these techniques may use the artificial coordinates directly, in place of natural coordinates, to arrange and compare data elements or to predict responses. This is possible because both the rows and the columns of the original table can be located, or positioned, along these shared coordinates. The number of artificial coordinates used in an application, such as regression or visualization, is called the <em>rank</em> of the ordination <a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. A common application is the <em>biplot</em>, which positions the rows and columns of the original table in a scatterplot in 1, 2, or 3 artificial coordinates, usually those that explain the most variation in the data.</p>
 </div>
@@ -173,6 +171,7 @@
 <span><span class="co">#&gt; 4 -2.29  0.595 -0.0910     | 4 setosa </span></span>
 <span><span class="co">#&gt; 5 -2.38 -0.645 -0.0157     | 5 setosa </span></span>
 <span><span class="co">#&gt; # … with 145 more rows</span></span>
+<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span>
 <span><span class="co">#&gt; # </span></span>
 <span><span class="co">#&gt; # Columns (standard): [ 4 x 4 | 3 ]</span></span>
 <span><span class="co">#&gt;      PC1     PC2    PC3 ... |   .name        .center .scale</span></span>
@@ -202,6 +201,7 @@
 <span><span class="co">#&gt; 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid       2</span></span>
 <span><span class="co">#&gt; 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid       2</span></span>
 <span><span class="co">#&gt; # … with 145 more rows</span></span>
+<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span>
 <span><span class="co">#&gt; # </span></span>
 <span><span class="co">#&gt; # Columns (standard): [ 4 x 4 | 3 ]</span></span>
 <span><span class="co">#&gt;      PC1     PC2    PC3 ... |   .name        .center .scale</span></span>
@@ -236,10 +236,10 @@
 <span>  <span class="fu">expand_limits</span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3.5</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"PCA of Anderson's iris measurements"</span>,</span>
 <span>          <span class="st">"99% confidence ellipses; variables use top &amp; right axes"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-interpolation%20biplot-1.png"><!-- --></p>
-<p>When variables are represented in standard coordinates, as typically in PCA, their rules can be rescaled to yield a prediction biplot:<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
+<p><img src="reference/figures/README-interpolative%20biplot-1.png"><!-- --></p>
+<p>When variables are represented in standard coordinates, as typically in PCA, their rules can be rescaled to yield a predictive biplot:<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="va">iris_pca</span>, prediction <span class="op">=</span> <span class="cn">TRUE</span>, axis.percents <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="va">iris_pca</span>, axis.type <span class="op">=</span> <span class="st">"predictive"</span>, axis.percents <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/theme_biplot.html">theme_biplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">Species</span>, shape <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/biplot-stats.html">stat_rows_center</a></span><span class="op">(</span></span>
@@ -247,9 +247,9 @@
 <span>    size <span class="op">=</span> <span class="fl">5</span>, alpha <span class="op">=</span> <span class="fl">.5</span>, fun.data <span class="op">=</span> <span class="va">mean_se</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/biplot-geoms.html">geom_cols_axis</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.name</span>, center <span class="op">=</span> <span class="va">.center</span>, scale <span class="op">=</span> <span class="va">.scale</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Prediction biplot of Anderson's iris measurements"</span>,</span>
+<span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Predictive biplot of Anderson's iris measurements"</span>,</span>
 <span>          <span class="st">"Project a marker onto an axis to approximate its measurement"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-prediction%20biplot-1.png"><!-- --></p>
+<p><img src="reference/figures/README-predictive%20biplot-1.png"><!-- --></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, by <span class="op">=</span> <span class="va">iris</span><span class="op">[</span>, <span class="st">"Species"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>, FUN <span class="op">=</span> <span class="va">mean</span><span class="op">)</span></span>
 <span><span class="co">#&gt;      Species Sepal.Length Sepal.Width Petal.Length Petal.Width</span></span>
@@ -260,7 +260,7 @@
 <div class="section level3">
 <h3 id="more-methods">more methods<a class="anchor" aria-label="anchor" href="#more-methods"></a>
 </h3>
-<p>The auxiliary package <a href="https://github.com/corybrunson/ordr.extra" class="external-link"><strong>ordr.extra</strong></a> provides accessor methods for several additional ordination models—and has room for several more!</p>
+<p>The auxiliary package <a href="https://github.com/corybrunson/ordr.extra" class="external-link"><strong>ordr.extra</strong></a> provides recovery methods for several additional ordination models—and has room for several more!</p>
 </div>
 </div>
 <div class="section level2">

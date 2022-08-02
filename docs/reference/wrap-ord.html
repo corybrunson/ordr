@@ -21,7 +21,7 @@ attributes are added to enable them."><!-- mathjax --><script src="https://cdnjs
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -145,15 +145,13 @@ correlations.</p></dd>
 canonical correlations (<code>cor</code>), the canonical coefficients (<code>$xcoef</code> and
 <code>$ycoef</code>), and the variable means (<code>$xcenter</code>, <code>$ycenter</code>). If <code>scores = TRUE</code>, then <code>cancor_ord()</code> also returns the scores <code>$xscores</code> and <code>$yscores</code>
 calculated from the (appropriately centered) data and the coefficients and
-the four sets of structure correlations <code>$x.xscores</code>, etc. between these and
-the data. These modifications are inspired by <code>candisc::cancor()</code>, though it
-should be noted that the canonical coefficients (hence the canonical scores)
-are scaled by \(n - 1\) compared to these, though the structure
-correlations are the same.</p>
-    </div>
-    <div id="see-also">
-    <h2>See also</h2>
-    <div class="dont-index"><p><code>candisc::cancor()</code></p></div>
+the intraset structure correlations <code>$xstructure</code> and <code>$ystructure</code> between
+these and the data. These modifications are inspired by the <code><a href="https://rdrr.io/r/stats/cancor.html" class="external-link">cancor()</a></code>
+function in <strong>candisc</strong>, though two caveats should be noted: First, the
+canonical coefficients (hence the canonical scores) are scaled by \(n - 1\)
+compared to these, though the intraset structure correlations are the same.
+Second, the <em>interset</em> structure correlations are not returned, as these may
+be obtained by conferring inertia unto the intraset ones.</p>
     </div>
 
     <div id="ref-examples">
@@ -286,15 +284,27 @@ correlations are the same.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "cancor_ord"</span>
-<span class="r-in"><span><span class="co"># interset/intraset correlations as standard/principal coordinates</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># calculate canonical scores and structure correlations</span></span></span>
 <span class="r-in"><span><span class="va">glass_cca</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">cancor_ord</span><span class="op">(</span><span class="va">glass_banias</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, <span class="va">glass_banias_minor</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, scores <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">glass_cca</span><span class="op">$</span><span class="va">x.xscores</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">glass_cca</span><span class="op">$</span><span class="va">cor</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># scores</span></span></span>
+<span class="r-in"><span><span class="va">glass_cca</span><span class="op">$</span><span class="va">xscores</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]         [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.08625757 -0.564009626 -0.5086737</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.06325679 -0.009686013 -0.4449230</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.31243762  0.589123478 -0.1458326</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.85114073  0.156299524  0.2733283</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -0.34697599 -0.470284132  0.6433738</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,] -0.21472789  0.298556769  0.1827271</span>
+<span class="r-in"><span><span class="co"># intraset correlations</span></span></span>
+<span class="r-in"><span><span class="va">glass_cca</span><span class="op">$</span><span class="va">xstructure</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]        [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> SiO2 -0.9261925 -0.3594308 -0.02748688</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Na2O -0.5467957 -0.5477923 -0.42732349</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> CaO   0.7639885  0.6168220 -0.03273126</span>
-<span class="r-in"><span><span class="va">glass_cca</span><span class="op">$</span><span class="va">x.yscores</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> SiO2 -0.9261925 -0.3749912 -0.03935800</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Na2O -0.5467957 -0.5715073 -0.61187732</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> CaO   0.7639885  0.6435255 -0.04686735</span>
+<span class="r-in"><span><span class="co"># interset correlations</span></span></span>
+<span class="r-in"><span><span class="va">glass_cca</span><span class="op">$</span><span class="va">xstructure</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">glass_cca</span><span class="op">$</span><span class="va">cor</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]        [,3]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> SiO2 -0.9261925 -0.3594308 -0.02748688</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Na2O -0.5467957 -0.5477923 -0.42732349</span>

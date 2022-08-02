@@ -18,7 +18,7 @@ objects of class "svd_ord" returned by svd_ord().'><!-- mathjax --><script src="
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -66,28 +66,28 @@ objects of class <code>"svd_ord"</code> returned by <code><a href="wrap-ord.html
 <span><span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for svd_ord</span></span>
-<span><span class="fu"><a href="accessors.html">recover_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for svd_ord</span></span>
-<span><span class="fu"><a href="accessors.html">recover_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for svd_ord</span></span>
-<span><span class="fu"><a href="accessors.html">recover_inertia</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_inertia</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for svd_ord</span></span>
-<span><span class="fu"><a href="accessors.html">recover_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for svd_ord</span></span>
 <span><span class="fu"><a href="conference.html">recover_conference</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for svd_ord</span></span>
-<span><span class="fu"><a href="augmentation.html">augmentation_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="augmentation.html">recover_aug_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for svd_ord</span></span>
-<span><span class="fu"><a href="augmentation.html">augmentation_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="augmentation.html">recover_aug_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for svd_ord</span></span>
-<span><span class="fu"><a href="augmentation.html">augmentation_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="augmentation.html">recover_aug_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -145,21 +145,23 @@ objects of class <code>"svd_ord"</code> returned by <code><a href="wrap-ord.html
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.429</span>  0.211   0.620     | </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.532</span>  0.026<span style="text-decoration: underline;">6</span>  0.302     | </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.645</span> -<span style="color: #BB0000;">0.561</span>  -<span style="color: #BB0000;">0.461</span>     | </span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># recover matrices of row and column coordinates</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="accessors.html">get_rows</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="recoverers.html">get_rows</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             SV1         SV2         SV3         SV4         SV5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Food and Tobacco    -0.88086766  0.45563080 -0.12237718  0.02450591 -0.02993361</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Household Operation -0.43580483 -0.67662102  0.58341818 -0.07630369  0.07784028</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Medical and Health  -0.17637018 -0.56230756 -0.73372346  0.04111351 -0.33565360</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Personal Care       -0.04553400 -0.09285599 -0.31360568 -0.49361448  0.80454996</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Private Education   -0.03108899 -0.09885616 -0.08915387  0.86500383  0.48278452</span>
-<span class="r-in"><span><span class="fu"><a href="accessors.html">get_cols</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="recoverers.html">get_cols</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             SV1         SV2        SV3         SV4         SV5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1940 -0.1589586  0.11313761  0.1824780 -0.89728506 -0.35144462</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1945 -0.3016855  0.79223017 -0.5274149  0.02654943  0.04985844</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1950 -0.4293572  0.21081041  0.6202698 -0.01464040  0.62150007</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1955 -0.5323309  0.02659741  0.3024320  0.42107353 -0.66869157</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1960 -0.6449761 -0.56073415 -0.4607988 -0.12906349  0.20146975</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># augment with row and column names</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'svd_ord': (5 x 5) x (5 x 5)'</span>

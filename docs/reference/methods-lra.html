@@ -20,7 +20,7 @@ matrix output by lra().'><!-- mathjax --><script src="https://cdnjs.cloudflare.c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -70,28 +70,28 @@ matrix output by <code><a href="lra-ord.html">lra()</a></code>.</p>
 <span><span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for lra</span></span>
-<span><span class="fu"><a href="accessors.html">recover_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for lra</span></span>
-<span><span class="fu"><a href="accessors.html">recover_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for lra</span></span>
-<span><span class="fu"><a href="accessors.html">recover_inertia</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_inertia</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for lra</span></span>
-<span><span class="fu"><a href="accessors.html">recover_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for lra</span></span>
 <span><span class="fu"><a href="conference.html">recover_conference</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for lra</span></span>
-<span><span class="fu"><a href="augmentation.html">augmentation_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="augmentation.html">recover_aug_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for lra</span></span>
-<span><span class="fu"><a href="augmentation.html">augmentation_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="augmentation.html">recover_aug_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for lra</span></span>
-<span><span class="fu"><a href="augmentation.html">augmentation_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="augmentation.html">recover_aug_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -130,6 +130,7 @@ matrix output by <code><a href="lra-ord.html">lra()</a></code>.</p>
 <span class="r-in"><span>  .name <span class="op">=</span> <span class="va">state.name</span>,</span></span>
 <span class="r-in"><span>  .abb <span class="op">=</span> <span class="va">state.abb</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># compute (non-compositional, unweighted) log-ratio analysis</span></span></span>
 <span class="r-in"><span><span class="va">USArrests</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span>select <span class="op">=</span> <span class="op">-</span><span class="va">UrbanPop</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -155,6 +156,7 @@ matrix output by <code><a href="lra-ord.html">lra()</a></code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.283  4.96  | </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.371</span> -<span style="color: #BB0000;">0.181</span> | </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  2.88  -<span style="color: #BB0000;">0.366</span> | </span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># augment log-ratio profiles with names and join state abbreviations</span></span></span>
 <span class="r-in"><span><span class="va">arrests_lra</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -180,8 +182,9 @@ matrix output by <code><a href="lra-ord.html">lra()</a></code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.283  4.96  | <span style="color: #BCBCBC;">1</span> Murder </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.371</span> -<span style="color: #BB0000;">0.181</span> | <span style="color: #BCBCBC;">2</span> Assault</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  2.88  -<span style="color: #BB0000;">0.366</span> | <span style="color: #BCBCBC;">3</span> Rape   </span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># recover state and arrest profiles</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="accessors.html">get_rows</a></span><span class="op">(</span><span class="va">arrests_lra</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="recoverers.html">get_rows</a></span><span class="op">(</span><span class="va">arrests_lra</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 LRSV1      LRSV2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Alabama    -0.6800120  0.9296011</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Alaska      0.9299899 -0.6245772</span>
@@ -189,7 +192,7 @@ matrix output by <code><a href="lra-ord.html">lra()</a></code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Arkansas   -0.3513443  0.2773231</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> California  0.5516590 -1.0042801</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Colorado    1.2291066 -0.6388469</span>
-<span class="r-in"><span><span class="fu"><a href="accessors.html">get_cols</a></span><span class="op">(</span><span class="va">arrests_lra</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="recoverers.html">get_cols</a></span><span class="op">(</span><span class="va">arrests_lra</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             LRSV1      LRSV2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Murder   0.283086  4.9570302</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Assault -0.370595 -0.1805698</span>

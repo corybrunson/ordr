@@ -20,7 +20,7 @@ stats::cancor().'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -70,34 +70,34 @@ to identify objects returned by <code><a href="wrap-ord.html">cancor_ord()</a></
 <span><span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for cancor_ord</span></span>
-<span><span class="fu"><a href="accessors.html">recover_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for cancor_ord</span></span>
-<span><span class="fu"><a href="accessors.html">recover_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for cancor_ord</span></span>
-<span><span class="fu"><a href="accessors.html">recover_inertia</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_inertia</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for cancor_ord</span></span>
-<span><span class="fu"><a href="accessors.html">recover_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="recoverers.html">recover_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for cancor_ord</span></span>
 <span><span class="fu"><a href="conference.html">recover_conference</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for cancor_ord</span></span>
-<span><span class="fu"><a href="augmentation.html">augmentation_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="supplementation.html">recover_supp_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for cancor_ord</span></span>
-<span><span class="fu"><a href="augmentation.html">augmentation_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="supplementation.html">recover_supp_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for cancor_ord</span></span>
-<span><span class="fu"><a href="augmentation.html">augmentation_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="augmentation.html">recover_aug_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for cancor_ord</span></span>
-<span><span class="fu"><a href="supplementation.html">supplementation_rows</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="augmentation.html">recover_aug_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for cancor_ord</span></span>
-<span><span class="fu"><a href="supplementation.html">supplementation_cols</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="augmentation.html">recover_aug_coord</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -112,7 +112,7 @@ to identify objects returned by <code><a href="wrap-ord.html">cancor_ord()</a></
 underlying singular value decomposition and constitute the active elements.
 If canonical scores are returned, then they and the structure correlations
 are made available as supplementary elements. <strong>ordr</strong> takes rows and columns
-from the intraset correlations <code>$x.xscores</code> and <code>$y.yscores</code>, on which no
+from the intraset correlations <code>$xstructure</code> and <code>$ystructure</code>, on which no
 intertia is conferred; the interset correlations can be obtained by
 <a href="conference.html">conferring inertia</a> onto these.</p>
 <p>A biplot of the canonical coefficients can be interpreted as approximating
@@ -164,6 +164,7 @@ biplots of structure correlations and weights". <em>Psychometrika</em> 55(3),
 <span class="r-in"><span><span class="va">savings_oec</span> <span class="op">&lt;-</span> <span class="va">LifeCycleSavings</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sr"</span>, <span class="st">"dpi"</span>, <span class="st">"ddpi"</span><span class="op">)</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="co"># canonical correlation analysis of age distributions and financial factors</span></span></span>
 <span class="r-in"><span><span class="va">savings_cancor</span> <span class="op">&lt;-</span> <span class="fu"><a href="wrap-ord.html">cancor_ord</a></span><span class="op">(</span><span class="va">savings_pop</span>, <span class="va">savings_oec</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># wrap as a 'tbl_ord' object</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">savings_cancor</span> <span class="op">&lt;-</span> <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">savings_cancor</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'cancor_ord': (2 x 2) x (3 x 2)'</span>
@@ -181,16 +182,18 @@ biplots of structure correlations and weights". <em>Psychometrika</em> 55(3),
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 0.008<span style="text-decoration: underline;">47</span>   0.033<span style="text-decoration: underline;">4</span>    | </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 0.000<span style="text-decoration: underline;">131</span> -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">075</span><span style="color: #BB0000;">9</span> | </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 0.004<span style="text-decoration: underline;">17</span>  -<span style="color: #BB0000;">0.012</span><span style="color: #BB0000; text-decoration: underline;">3</span>    | </span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># recover canonical weights</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="accessors.html">get_rows</a></span><span class="op">(</span><span class="va">savings_cancor</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="recoverers.html">get_rows</a></span><span class="op">(</span><span class="va">savings_cancor</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            CanCor1     CanCor2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> pop15 -0.009110856 -0.03622206</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> pop75  0.048647514 -0.26031158</span>
-<span class="r-in"><span><span class="fu"><a href="accessors.html">get_cols</a></span><span class="op">(</span><span class="va">savings_cancor</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="recoverers.html">get_cols</a></span><span class="op">(</span><span class="va">savings_cancor</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           CanCor1       CanCor2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sr   0.0084710221  3.337936e-02</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> dpi  0.0001307398 -7.588232e-05</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ddpi 0.0041706000 -1.226790e-02</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># augment canonical weights with row names and centers</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">savings_cancor</span> <span class="op">&lt;-</span> <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="va">savings_cancor</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'cancor_ord': (2 x 2) x (3 x 2)'</span>
@@ -208,6 +211,7 @@ biplots of structure correlations and weights". <em>Psychometrika</em> 55(3),
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 0.008<span style="text-decoration: underline;">47</span>   0.033<span style="text-decoration: underline;">4</span>    | <span style="color: #BCBCBC;">1</span> sr       9.67 active  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 0.000<span style="text-decoration: underline;">131</span> -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">075</span><span style="color: #BB0000;">9</span> | <span style="color: #BCBCBC;">2</span> dpi   <span style="text-decoration: underline;">1</span>107.   active  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 0.004<span style="text-decoration: underline;">17</span>  -<span style="color: #BB0000;">0.012</span><span style="color: #BB0000; text-decoration: underline;">3</span>    | <span style="color: #BCBCBC;">3</span> ddpi     3.76 active  </span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># column-standard biplot of canonical coefficients</span></span></span>
 <span class="r-in"><span><span class="va">savings_cancor</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="conference.html">confer_inertia</a></span><span class="op">(</span><span class="st">"rows"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -220,10 +224,11 @@ biplots of structure correlations and weights". <em>Psychometrika</em> 55(3),
 <span class="r-in"><span>  <span class="fu">scale_color_brewer</span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"qual"</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">expand_limits</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">.1</span>, <span class="fl">.1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="methods-cancor-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># canonical correlation analysis with scores and correlations included</span></span></span>
 <span class="r-in"><span><span class="va">savings_cca</span> <span class="op">&lt;-</span> <span class="fu"><a href="wrap-ord.html">cancor_ord</a></span><span class="op">(</span><span class="va">savings_pop</span>, <span class="va">savings_oec</span>, scores <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">savings_cca</span> <span class="op">&lt;-</span> <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">savings_cca</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="accessors.html">get_cols</a></span><span class="op">(</span><span class="va">savings_cca</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="recoverers.html">get_cols</a></span><span class="op">(</span><span class="va">savings_cca</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                CanCor1       CanCor2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sr        0.0084710221  3.337936e-02</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> dpi       0.0001307398 -7.588232e-05</span>
@@ -231,7 +236,7 @@ biplots of structure correlations and weights". <em>Psychometrika</em> 55(3),
 <span class="r-out co"><span class="r-pr">#&gt;</span> Australia 0.1710832312 -2.319485e-02</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Austria   0.0734979335  4.751571e-02</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Belgium   0.1608639281  4.001665e-02</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="accessors.html">get_cols</a></span><span class="op">(</span><span class="va">savings_cca</span>, elements <span class="op">=</span> <span class="st">"score"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="recoverers.html">get_cols</a></span><span class="op">(</span><span class="va">savings_cca</span>, elements <span class="op">=</span> <span class="st">"score"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  [,1]        [,2]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Australia  0.17108323 -0.02319485</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Austria    0.07349793  0.04751571</span>
@@ -239,7 +244,61 @@ biplots of structure correlations and weights". <em>Psychometrika</em> 55(3),
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bolivia   -0.16793935 -0.01784978</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Brazil    -0.01892735  0.12597599</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Canada     0.23228391 -0.15548481</span>
-<span class="r-in"><span><span class="fu"><a href="accessors.html">get_cols</a></span><span class="op">(</span><span class="va">savings_cca</span>, elements <span class="op">=</span> <span class="st">"intraset"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="recoverers.html">get_rows</a></span><span class="op">(</span><span class="va">savings_cca</span>, elements <span class="op">=</span> <span class="st">"structure"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        [,1]         [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Australia       0.080362286  0.057700356</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Austria         0.210217920 -0.124760455</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Belgium         0.206817659 -0.147353276</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bolivia        -0.092264868 -0.084150385</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Brazil         -0.135862036  0.123644726</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Canada          0.057796606 -0.022939696</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chile          -0.088730206  0.079629867</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> China          -0.166969430  0.072566104</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Colombia       -0.165216418 -0.097415107</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Costa Rica     -0.170435473 -0.154462094</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Denmark         0.176845172 -0.039655162</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Ecuador        -0.155885659 -0.119302333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Finland         0.069795922  0.242551458</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> France          0.208472809 -0.263277199</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Germany         0.158742664  0.151532042</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Greece          0.125534708  0.132936978</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Guatamala      -0.169084041 -0.026584891</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Honduras       -0.194762607  0.002903451</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Iceland         0.047939457 -0.166484319</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> India          -0.121520306  0.121679633</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Ireland         0.128086354 -0.351472861</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Italy           0.154042705  0.073862843</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Japan           0.054980076  0.392359096</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Korea          -0.127870350  0.119119726</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Luxembourg      0.190986112  0.107308952</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Malta           0.031839649  0.046276615</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Norway          0.150257208 -0.027393904</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Netherlands     0.141122714  0.126852315</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> New Zealand     0.065255149 -0.138477036</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Nicaragua      -0.143341921 -0.078506548</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Panama         -0.130344329 -0.022294782</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Paraguay       -0.115957618  0.102960459</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Peru           -0.132192367 -0.065939607</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Philippines    -0.158835442 -0.099269419</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Portugal        0.082942570  0.077033191</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> South Africa    0.028063135  0.117469052</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> South Rhodesia -0.008726758  0.316030295</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Spain           0.095030764  0.116017873</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sweden          0.233670507 -0.090503487</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Switzerland     0.175588765  0.046093670</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Turkey         -0.134906511  0.014013696</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Tunisia        -0.153181646 -0.117626373</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> United Kingdom  0.213105839 -0.135964931</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> United States   0.103413900 -0.104736278</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Venezuela      -0.170813415 -0.047071960</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Zambia         -0.176876085  0.083089347</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Jamaica        -0.082330658 -0.071878093</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Uruguay         0.084180403  0.140938007</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Libya          -0.089205403 -0.253474726</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Malaysia       -0.189777503 -0.013574829</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> pop15          -0.982982070 -0.183701522</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> pop75           0.969792868 -0.243929894</span>
+<span class="r-in"><span><span class="fu"><a href="recoverers.html">get_cols</a></span><span class="op">(</span><span class="va">savings_cca</span>, elements <span class="op">=</span> <span class="st">"structure"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        [,1]         [,2]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Australia       0.171083231 -0.023194852</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Austria         0.073497933  0.047515706</span>
@@ -291,80 +350,23 @@ biplots of structure correlations and weights". <em>Psychometrika</em> 55(3),
 <span class="r-out co"><span class="r-pr">#&gt;</span> Uruguay        -0.055961815  0.034464260</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Libya          -0.081137138 -0.110362124</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Malaysia       -0.149477671 -0.116250539</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> pop15          -0.810760281 -0.067101785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> pop75           0.799881871 -0.089101773</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sr              0.491037858  0.855775971</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> dpi             0.954517196 -0.263726650</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ddpi            0.047337701  0.140773707</span>
-<span class="r-in"><span><span class="fu"><a href="accessors.html">get_cols</a></span><span class="op">(</span><span class="va">savings_cca</span>, elements <span class="op">=</span> <span class="st">"interset"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                        [,1]         [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Australia       0.171083231 -0.023194852</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Austria         0.073497933  0.047515706</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Belgium         0.160863928  0.040016653</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Bolivia        -0.167939348 -0.017849776</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Brazil         -0.018927351  0.125975993</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Canada          0.232283907 -0.155484806</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chile          -0.139411775 -0.255757534</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> China          -0.076484519  0.102650369</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Colombia       -0.151091771 -0.085279284</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Costa Rica     -0.077686953  0.096990052</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Denmark         0.243481179  0.131320249</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Ecuador        -0.165124499 -0.121601972</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Finland         0.090745497  0.001878991</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> France          0.173067145  0.005743865</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Germany         0.199609498 -0.002473117</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Greece         -0.011860145  0.020302710</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Guatamala      -0.172745183 -0.132399004</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Honduras       -0.133371832  0.007517853</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Iceland         0.021555892 -0.308262763</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> India          -0.148002154  0.082042157</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Ireland         0.015276247  0.062608327</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Italy           0.075166369  0.135021917</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Japan           0.135063656  0.315449149</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Korea          -0.157194180 -0.146916393</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Luxembourg      0.172163609 -0.052380163</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Malta           0.001285777  0.178757532</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Norway          0.151317894 -0.064297624</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Netherlands     0.141333968  0.070216617</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> New Zealand     0.049912057  0.028959254</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Nicaragua      -0.127549491 -0.004188327</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Panama         -0.115291450 -0.131956928</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Paraguay       -0.192048922 -0.154676750</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Peru           -0.079612027  0.192610337</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Philippines    -0.105817455  0.197786992</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Portugal       -0.029527899  0.088439216</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> South Africa   -0.053665283  0.102841084</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> South Rhodesia -0.088475821  0.207635702</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Spain          -0.023934583  0.088441591</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sweden          0.259747311 -0.251047443</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Switzerland     0.232635276  0.046153127</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Turkey         -0.135546685 -0.087375693</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Tunisia        -0.181107771 -0.131757959</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> United Kingdom  0.069402362 -0.094341425</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> United States   0.355173128 -0.274111611</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Venezuela      -0.055636386  0.046803247</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Zambia         -0.045547784  0.353236545</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Jamaica        -0.084487974 -0.089413410</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Uruguay        -0.055961815  0.034464260</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Libya          -0.081137138 -0.110362124</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Malaysia       -0.149477671 -0.116250539</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> pop15          -0.810760281 -0.067101785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> pop75           0.799881871 -0.089101773</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sr              0.491037858  0.855775971</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dpi             0.954517196 -0.263726650</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ddpi            0.047337701  0.140773707</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># biplot of interset and intraset correlations with the population data</span></span></span>
 <span class="r-in"><span><span class="va">savings_cca</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="conference.html">confer_inertia</a></span><span class="op">(</span><span class="st">"cols"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="theme_biplot.html">theme_biplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="geom_unit_circle.html">geom_unit_circle</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_vector</a></span><span class="op">(</span>arrow <span class="op">=</span> <span class="cn">NULL</span>, elements <span class="op">=</span> <span class="st">"interset"</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_vector</a></span><span class="op">(</span>arrow <span class="op">=</span> <span class="cn">NULL</span>, elements <span class="op">=</span> <span class="st">"intraset"</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_text_repel</a></span><span class="op">(</span>elements <span class="op">=</span> <span class="st">"interset"</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_text_repel</a></span><span class="op">(</span>elements <span class="op">=</span> <span class="st">"intraset"</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_rows_vector</a></span><span class="op">(</span>arrow <span class="op">=</span> <span class="cn">NULL</span>, elements <span class="op">=</span> <span class="st">"structure"</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_vector</a></span><span class="op">(</span>arrow <span class="op">=</span> <span class="cn">NULL</span>, elements <span class="op">=</span> <span class="st">"structure"</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_rows_text</a></span><span class="op">(</span>elements <span class="op">=</span> <span class="st">"structure"</span>, hjust <span class="op">=</span> <span class="st">"outward"</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_text</a></span><span class="op">(</span>elements <span class="op">=</span> <span class="st">"structure"</span>, hjust <span class="op">=</span> <span class="st">"outward"</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">expand_limits</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="methods-cancor-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># biplot with scores as supplemental elements</span></span></span>
 <span class="r-in"><span><span class="va">savings_cca</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="conference.html">confer_inertia</a></span><span class="op">(</span><span class="st">"rows"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -372,7 +374,6 @@ biplots of structure correlations and weights". <em>Psychometrika</em> 55(3),
 <span class="r-in"><span>  <span class="fu"><a href="theme_biplot.html">theme_biplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_vector</a></span><span class="op">(</span>elements <span class="op">=</span> <span class="st">"active"</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_text_radiate</a></span><span class="op">(</span>elements <span class="op">=</span> <span class="st">"active"</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="co"># -+- need more convenient handling of elements -+-</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_rows_text</a></span><span class="op">(</span>elements <span class="op">=</span> <span class="st">"score"</span>, subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">50L</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `subset` will be applied after data are restricted to score elements.</span>
 <span class="r-plt img"><img src="methods-cancor-3.png" alt="" width="700" height="433"></span>

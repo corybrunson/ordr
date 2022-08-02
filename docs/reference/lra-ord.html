@@ -18,7 +18,7 @@ a population of cases."><!-- mathjax --><script src="https://cdnjs.cloudflare.co
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -124,6 +124,7 @@ Greenacre's (2010) exposition in Chapter 7.</p>
 <span class="r-in"><span><span class="co"># row and column subsets</span></span></span>
 <span class="r-in"><span><span class="va">state_examples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Hawaii"</span>, <span class="st">"Mississippi"</span>, <span class="st">"North Dakota"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">arrests</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">2L</span>, <span class="fl">4L</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># pairwise log-ratios of violent crime arrests for two states</span></span></span>
 <span class="r-in"><span><span class="va">arrest_pairs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/combn.html" class="external-link">combn</a></span><span class="op">(</span><span class="va">arrests</span>, <span class="fl">2L</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">arrest_ratios</span> <span class="op">&lt;-</span></span></span>
@@ -138,6 +139,7 @@ Greenacre's (2010) exposition in Chapter 7.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Hawaii            -2.160935 -1.33797578    0.8229588</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mississippi       -2.778009 -0.06025919    2.7177496</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> North Dakota      -4.029806 -2.21101790    1.8187881</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># non-compositional log-ratio analysis</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">arrests_lra</span> <span class="op">&lt;-</span> <span class="fu">lra</span><span class="op">(</span><span class="va">USArrests</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sv</span>
@@ -225,6 +227,7 @@ Greenacre's (2010) exposition in Chapter 7.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.283  4.96  | <span style="color: #BCBCBC;">1</span> Murder </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.371</span> -<span style="color: #BB0000;">0.181</span> | <span style="color: #BCBCBC;">2</span> Assault</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  2.88  -<span style="color: #BB0000;">0.366</span> | <span style="color: #BCBCBC;">3</span> Rape   </span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># state abbreviations</span></span></span>
 <span class="r-in"><span><span class="va">state_abbr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>state <span class="op">=</span> <span class="va">state.name</span>, abbr <span class="op">=</span> <span class="va">state.abb</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># row-principal biplot</span></span></span>
@@ -244,6 +247,7 @@ Greenacre's (2010) exposition in Chapter 7.</p>
 <span class="r-in"><span>  <span class="fu">expand_limits</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">.35</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">guides</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="lra-ord-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># compositional log-ratio analysis</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">arrests_lra</span> <span class="op">&lt;-</span> <span class="fu">lra</span><span class="op">(</span><span class="va">USArrests</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span>, compositional <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sv</span>

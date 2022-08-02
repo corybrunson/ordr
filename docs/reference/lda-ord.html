@@ -18,7 +18,7 @@ elements useful to the tbl_ord class and biplot calculations."><!-- mathjax --><
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -240,7 +240,7 @@ doi: <a href="https://doi.org/10.1007/s00357-005-0006-7" class="external-link">1
 <a href="https://www.fbbva.es/microsite/multivariate-statistics/biplots.html" class="external-link">https://www.fbbva.es/microsite/multivariate-statistics/biplots.html</a></p>
 <p>Venables WN &amp; Ripley BD (2003) <em>Modern Applied Statistics with S</em>, Fourth
 Edition. Springer Science &amp; Business Media, ISBN: 0387954570, 9780387954578.
-<a href="http://barbra-coco.dyndns.org/yuri/R/Venables,%20WN%20and%20Ripley,%20BD(2002)%20Modern%20Applied%20Statistics%20with%20S,%204th%20Ed.pdf" class="external-link">http://barbra-coco.dyndns.org/yuri/R/Venables,%20WN%20and%20Ripley,%20BD(2002)%20Modern%20Applied%20Statistics%20with%20S,%204th%20Ed.pdf</a></p>
+<a href="https://www.mimuw.edu.pl/~pokar/StatystykaMgr/Books/VenablesRipley_ModernAppliedStatisticsS02.pdf" class="external-link">https://www.mimuw.edu.pl/~pokar/StatystykaMgr/Books/VenablesRipley_ModernAppliedStatisticsS02.pdf</a></p>
 <p>Orlov K (2013) <em>Answer to</em> "Algebra of LDA. Fisher discrimination power of a
 variable and Linear Discriminant Analysis". CrossValidated, accessed
 2019-07-26. <a href="https://stats.stackexchange.com/a/83114/68743" class="external-link">https://stats.stackexchange.com/a/83114/68743</a></p>
@@ -257,17 +257,18 @@ Graphical Statistics</em>, <strong>22</strong>(1): 107--122.
 <span class="r-in"><span><span class="co"># combinations of the centered variables</span></span></span>
 <span class="r-in"><span><span class="va">iris_lda</span> <span class="op">&lt;-</span> <span class="fu">lda_ord</span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="va">iris</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span>, axes.scale <span class="op">=</span> <span class="st">"unstandardized"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># linear combinations of centered variables</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sweep.html" class="external-link">sweep</a></span><span class="op">(</span><span class="va">iris_lda</span><span class="op">$</span><span class="va">means</span>, <span class="fl">2</span>, <span class="va">iris_centroid</span>, <span class="st">"-"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="accessors.html">get_cols</a></span><span class="op">(</span><span class="va">iris_lda</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sweep.html" class="external-link">sweep</a></span><span class="op">(</span><span class="va">iris_lda</span><span class="op">$</span><span class="va">means</span>, <span class="fl">2</span>, <span class="va">iris_centroid</span>, <span class="st">"-"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="recoverers.html">get_cols</a></span><span class="op">(</span><span class="va">iris_lda</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  LD1        LD2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> setosa      7.607600  0.2151330</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> versicolor -1.825049 -0.7278996</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> virginica  -5.782550  0.5127666</span>
 <span class="r-in"><span><span class="co"># discriminant centroids</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="accessors.html">get_rows</a></span><span class="op">(</span><span class="va">iris_lda</span>, elements <span class="op">=</span> <span class="st">"active"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="recoverers.html">get_rows</a></span><span class="op">(</span><span class="va">iris_lda</span>, elements <span class="op">=</span> <span class="st">"active"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  LD1        LD2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> setosa      7.607600  0.2151330</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> versicolor -1.825049 -0.7278996</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> virginica  -5.782550  0.5127666</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># unstandardized coefficient LDA biplot</span></span></span>
 <span class="r-in"><span><span class="va">iris_lda</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -290,6 +291,7 @@ Graphical Statistics</em>, <strong>22</strong>(1): 107--122.
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Using size for a discrete variable is not advised.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Using alpha for a discrete variable is not advised.</span>
 <span class="r-plt img"><img src="lda-ord-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># standardized discriminant coefficients: permit comparisons across the</span></span></span>
 <span class="r-in"><span><span class="co"># variables</span></span></span>
 <span class="r-in"><span><span class="va">iris_lda</span> <span class="op">&lt;-</span> <span class="fu">lda_ord</span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="va">iris</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span>, axes.scale <span class="op">=</span> <span class="st">"standardized"</span><span class="op">)</span></span></span>
@@ -328,6 +330,7 @@ Graphical Statistics</em>, <strong>22</strong>(1): 107--122.
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Using size for a discrete variable is not advised.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Using alpha for a discrete variable is not advised.</span>
 <span class="r-plt img"><img src="lda-ord-3.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># variable contributions (de-sphered discriminant coefficients): recover the</span></span></span>
 <span class="r-in"><span><span class="co"># inner product relationship with the centered class centroids</span></span></span>
 <span class="r-in"><span><span class="va">iris_lda</span> <span class="op">&lt;-</span> <span class="fu">lda_ord</span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="va">iris</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span>, axes.scale <span class="op">=</span> <span class="st">"contribution"</span><span class="op">)</span></span></span>
@@ -336,7 +339,7 @@ Graphical Statistics</em>, <strong>22</strong>(1): 107--122.
 <span class="r-in"><span><span class="va">C_W_sqrtinv</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="va">C_W_eig</span><span class="op">$</span><span class="va">vectors</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">C_W_eig</span><span class="op">$</span><span class="va">values</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">C_W_eig</span><span class="op">$</span><span class="va">vectors</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># product of matrix factors (scores and loadings)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="accessors.html">get_rows</a></span><span class="op">(</span><span class="va">iris_lda</span>, elements <span class="op">=</span> <span class="st">"active"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="accessors.html">get_cols</a></span><span class="op">(</span><span class="va">iris_lda</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="recoverers.html">get_rows</a></span><span class="op">(</span><span class="va">iris_lda</span>, elements <span class="op">=</span> <span class="st">"active"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="recoverers.html">get_cols</a></span><span class="op">(</span><span class="va">iris_lda</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  [,1]      [,2]      [,3]       [,4]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> setosa      0.3061785  2.593874 -5.861269 -3.9959956</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> versicolor -0.1774657 -1.154286  1.457859  0.5653316</span>
