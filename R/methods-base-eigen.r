@@ -41,7 +41,7 @@ recover_conference.eigen_ord <- function(x) {
 
 #' @rdname methods-eigen
 #' @export
-augmentation_rows.eigen_ord <- function(x) {
+recover_aug_rows.eigen_ord <- function(x) {
   .name <- rownames(x[["vectors"]])
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x[["vectors"]]))
@@ -53,7 +53,7 @@ augmentation_rows.eigen_ord <- function(x) {
 
 #' @rdname methods-eigen
 #' @export
-augmentation_cols.eigen_ord <- function(x) {
+recover_aug_cols.eigen_ord <- function(x) {
   .name <- rownames(x[["vectors"]])
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x[["vectors"]]))
@@ -65,7 +65,7 @@ augmentation_cols.eigen_ord <- function(x) {
 
 #' @rdname methods-eigen
 #' @export
-augmentation_coord.eigen_ord <- function(x) {
+recover_aug_coord.eigen_ord <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),
     .values = x[["values"]]

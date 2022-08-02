@@ -31,7 +31,7 @@
 #'   output may correspond to rows, columns, or both of the original data. If
 #'   `.matrix` is passed `"rows"`, `"cols"`, or `"dims"` (for both), then
 #'   `fortify()` returns a tibble whose fields are obtained, in order, via
-#'   `get_*()`, `augmentation_*()`, and `annotation_*()`.
+#'   `get_*()`, `recover_aug_*()`, and `annotation_*()`.
 
 #'
 #' The tibble is assigned a `"coordinates"` attribute whose value is obtained
@@ -57,7 +57,7 @@ generics::tidy
 #' @rdname tidiers
 #' @export
 tidy.tbl_ord <- function(x, ...) {
-  res <- augmentation_coord(x)
+  res <- recover_aug_coord(x)
   res$.inertia <- recover_inertia(x)
   res$.prop_var <- res$.inertia / sum(res$.inertia)
   res

@@ -50,7 +50,7 @@ recover_coord.correspondence <- function(x) {
 
 #' @rdname methods-correspondence
 #' @export
-augmentation_rows.correspondence <- function(x) {
+recover_aug_rows.correspondence <- function(x) {
   .name <- rownames(as.matrix(x$rscore))
   if (is.null(.name)) {
     tibble_pole(nrow(as.matrix(x$rscore)))
@@ -61,7 +61,7 @@ augmentation_rows.correspondence <- function(x) {
 
 #' @rdname methods-correspondence
 #' @export
-augmentation_cols.correspondence <- function(x) {
+recover_aug_cols.correspondence <- function(x) {
   .name <- rownames(as.matrix(x$cscore))
   if (is.null(.name)) {
     tibble_pole(nrow(as.matrix(x$cscore)))
@@ -72,7 +72,7 @@ augmentation_cols.correspondence <- function(x) {
 
 #' @rdname methods-correspondence
 #' @export
-augmentation_coord.correspondence <- function(x){
+recover_aug_coord.correspondence <- function(x){
   tibble(
     .name = factor_coord(recover_coord(x)),
     .cor = x$cor

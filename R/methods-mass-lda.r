@@ -80,7 +80,7 @@ recover_conference.lda_ord <- recover_conference.lda
 
 #' @rdname methods-lda
 #' @export
-augmentation_rows.lda <- function(x) {
+recover_aug_rows.lda <- function(x) {
   res <- if (is.null(rownames(x$means))) {
     tibble_pole(nrow(x$means))
   } else {
@@ -120,7 +120,7 @@ augmentation_rows.lda <- function(x) {
 
 #' @rdname methods-lda
 #' @export
-augmentation_rows.lda_ord <- function(x) {
+recover_aug_rows.lda_ord <- function(x) {
   res <- if (is.null(rownames(x$means))) {
     tibble_pole(nrow(x$means))
   } else {
@@ -165,7 +165,7 @@ augmentation_rows.lda_ord <- function(x) {
 
 #' @rdname methods-lda
 #' @export
-augmentation_cols.lda <- function(x) {
+recover_aug_cols.lda <- function(x) {
   .name <- rownames(x$scaling)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$scaling))
@@ -178,11 +178,11 @@ augmentation_cols.lda <- function(x) {
 
 #' @rdname methods-lda
 #' @export
-augmentation_cols.lda_ord <- augmentation_cols.lda
+recover_aug_cols.lda_ord <- recover_aug_cols.lda
 
 #' @rdname methods-lda
 #' @export
-augmentation_coord.lda <- function(x) {
+recover_aug_coord.lda <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),
     .svd = x$svd
@@ -191,7 +191,7 @@ augmentation_coord.lda <- function(x) {
 
 #' @rdname methods-lda
 #' @export
-augmentation_coord.lda_ord <- augmentation_coord.lda
+recover_aug_coord.lda_ord <- recover_aug_coord.lda
 
 #' @rdname methods-lda
 #' @export

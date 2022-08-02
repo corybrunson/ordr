@@ -8,9 +8,9 @@
 \alias{recover_inertia.correspondence}
 \alias{recover_conference.correspondence}
 \alias{recover_coord.correspondence}
-\alias{augmentation_rows.correspondence}
-\alias{augmentation_cols.correspondence}
-\alias{augmentation_coord.correspondence}
+\alias{recover_aug_rows.correspondence}
+\alias{recover_aug_cols.correspondence}
+\alias{recover_aug_coord.correspondence}
 \title{Functionality for correspondence analysis ('correspondence') objects}
 \usage{
 \method{as_tbl_ord}{correspondence}(x)
@@ -25,11 +25,11 @@
 
 \method{recover_coord}{correspondence}(x)
 
-\method{augmentation_rows}{correspondence}(x)
+\method{recover_aug_rows}{correspondence}(x)
 
-\method{augmentation_cols}{correspondence}(x)
+\method{recover_aug_cols}{correspondence}(x)
 
-\method{augmentation_coord}{correspondence}(x)
+\method{recover_aug_coord}{correspondence}(x)
 }
 \arguments{
 \item{x}{An ordination object.}

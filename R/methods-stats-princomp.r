@@ -48,7 +48,7 @@ recover_conference.princomp <- function(x) {
 
 #' @rdname methods-princomp
 #' @export
-augmentation_rows.princomp <- function(x) {
+recover_aug_rows.princomp <- function(x) {
   .name <- rownames(x[["scores"]])
   if (is.null(.name)) {
     tibble_pole(nrow(x[["scores"]]))
@@ -59,7 +59,7 @@ augmentation_rows.princomp <- function(x) {
 
 #' @rdname methods-princomp
 #' @export
-augmentation_cols.princomp <- function(x) {
+recover_aug_cols.princomp <- function(x) {
   .name <- rownames(x[["loadings"]])
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x[["loadings"]]))
@@ -74,7 +74,7 @@ augmentation_cols.princomp <- function(x) {
 
 #' @rdname methods-princomp
 #' @export
-augmentation_coord.princomp <- function(x) {
+recover_aug_coord.princomp <- function(x) {
   tibble(
     .name = factor_coord(recover_coord.princomp(x)),
     .sdev = x[["sdev"]]

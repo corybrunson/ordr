@@ -55,7 +55,7 @@ Its output resembles that of \code{\link[generics:augment]{generics::augment()}}
 output may correspond to rows, columns, or both of the original data. If
 \code{.matrix} is passed \code{"rows"}, \code{"cols"}, or \code{"dims"} (for both), then
 \code{fortify()} returns a tibble whose fields are obtained, in order, via
-\verb{get_*()}, \verb{augmentation_*()}, and \verb{annotation_*()}.
+\verb{get_*()}, \verb{recover_aug_*()}, and \verb{annotation_*()}.
 }
 
 The tibble is assigned a \code{"coordinates"} attribute whose value is obtained

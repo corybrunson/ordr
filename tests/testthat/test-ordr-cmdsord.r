@@ -11,8 +11,8 @@ test_that("'cmds_ord' has specified distribution of inertia", {
 })
 
 test_that("'cmds_ord' augmentations are consistent with '.element' column", {
-  expect_equal(".element" %in% names(augmentation_rows(fit_cmds)),
-               ".element" %in% names(augmentation_cols(fit_cmds)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_cmds)),
+               ".element" %in% names(recover_aug_cols(fit_cmds)))
 })
 
 test_that("`as_tbl_ord()` coerces 'cmds_ord' objects", {

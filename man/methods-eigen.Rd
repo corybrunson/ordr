@@ -8,9 +8,9 @@
 \alias{recover_inertia.eigen_ord}
 \alias{recover_coord.eigen_ord}
 \alias{recover_conference.eigen_ord}
-\alias{augmentation_rows.eigen_ord}
-\alias{augmentation_cols.eigen_ord}
-\alias{augmentation_coord.eigen_ord}
+\alias{recover_aug_rows.eigen_ord}
+\alias{recover_aug_cols.eigen_ord}
+\alias{recover_aug_coord.eigen_ord}
 \title{Functionality for eigendecompositions}
 \usage{
 \method{as_tbl_ord}{eigen_ord}(x)
@@ -25,11 +25,11 @@
 
 \method{recover_conference}{eigen_ord}(x)
 
-\method{augmentation_rows}{eigen_ord}(x)
+\method{recover_aug_rows}{eigen_ord}(x)
 
-\method{augmentation_cols}{eigen_ord}(x)
+\method{recover_aug_cols}{eigen_ord}(x)
 
-\method{augmentation_coord}{eigen_ord}(x)
+\method{recover_aug_coord}{eigen_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}

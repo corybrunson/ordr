@@ -9,9 +9,9 @@
 \alias{recover_conference.mca}
 \alias{recover_coord.mca}
 \alias{recover_supp_rows.mca}
-\alias{augmentation_rows.mca}
-\alias{augmentation_cols.mca}
-\alias{augmentation_coord.mca}
+\alias{recover_aug_rows.mca}
+\alias{recover_aug_cols.mca}
+\alias{recover_aug_coord.mca}
 \title{Functionality for multiple correspondence analysis ('mca') objects}
 \usage{
 \method{as_tbl_ord}{mca}(x)
@@ -28,11 +28,11 @@
 
 \method{recover_supp_rows}{mca}(x)
 
-\method{augmentation_rows}{mca}(x)
+\method{recover_aug_rows}{mca}(x)
 
-\method{augmentation_cols}{mca}(x)
+\method{recover_aug_cols}{mca}(x)
 
-\method{augmentation_coord}{mca}(x)
+\method{recover_aug_coord}{mca}(x)
 }
 \arguments{
 \item{x}{An ordination object.}

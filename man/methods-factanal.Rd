@@ -9,9 +9,9 @@
 \alias{recover_coord.factanal}
 \alias{recover_conference.factanal}
 \alias{recover_supp_rows.factanal}
-\alias{augmentation_rows.factanal}
-\alias{augmentation_cols.factanal}
-\alias{augmentation_coord.factanal}
+\alias{recover_aug_rows.factanal}
+\alias{recover_aug_cols.factanal}
+\alias{recover_aug_coord.factanal}
 \title{Functionality for factor analysis ('factanal') objects}
 \usage{
 \method{as_tbl_ord}{factanal}(x)
@@ -28,11 +28,11 @@
 
 \method{recover_supp_rows}{factanal}(x)
 
-\method{augmentation_rows}{factanal}(x)
+\method{recover_aug_rows}{factanal}(x)
 
-\method{augmentation_cols}{factanal}(x)
+\method{recover_aug_cols}{factanal}(x)
 
-\method{augmentation_coord}{factanal}(x)
+\method{recover_aug_coord}{factanal}(x)
 }
 \arguments{
 \item{x}{An ordination object.}

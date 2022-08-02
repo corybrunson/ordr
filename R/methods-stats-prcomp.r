@@ -48,7 +48,7 @@ recover_conference.prcomp <- function(x) {
 
 #' @rdname methods-prcomp
 #' @export
-augmentation_rows.prcomp <- function(x) {
+recover_aug_rows.prcomp <- function(x) {
   .name <- rownames(x[["x"]])
   if (is.null(.name)) {
     tibble_pole(nrow(x[["x"]]))
@@ -59,7 +59,7 @@ augmentation_rows.prcomp <- function(x) {
 
 #' @rdname methods-prcomp
 #' @export
-augmentation_cols.prcomp <- function(x) {
+recover_aug_cols.prcomp <- function(x) {
   .name <- rownames(x[["rotation"]])
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x[["rotation"]]))
@@ -77,7 +77,7 @@ augmentation_cols.prcomp <- function(x) {
 
 #' @rdname methods-prcomp
 #' @export
-augmentation_coord.prcomp <- function(x) {
+recover_aug_coord.prcomp <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),
     .sdev = x[["sdev"]]

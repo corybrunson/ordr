@@ -39,7 +39,7 @@ recover_conference.svd_ord <- function(x) {
 
 #' @rdname methods-svd
 #' @export
-augmentation_rows.svd_ord <- function(x) {
+recover_aug_rows.svd_ord <- function(x) {
   .name <- rownames(x[["u"]])
   if (is.null(.name)) {
     tibble_pole(nrow(x[["u"]]))
@@ -50,7 +50,7 @@ augmentation_rows.svd_ord <- function(x) {
 
 #' @rdname methods-svd
 #' @export
-augmentation_cols.svd_ord <- function(x) {
+recover_aug_cols.svd_ord <- function(x) {
   .name <- rownames(x[["v"]])
   if (is.null(.name)) {
     tibble_pole(nrow(x[["v"]]))
@@ -61,7 +61,7 @@ augmentation_cols.svd_ord <- function(x) {
 
 #' @rdname methods-svd
 #' @export
-augmentation_coord.svd_ord <- function(x) {
+recover_aug_coord.svd_ord <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),
     .value = x[["d"]][1:ncol(x[["u"]])]

@@ -37,7 +37,7 @@ recover_coord.kmeans <- function(x) {
 
 #' @rdname methods-kmeans
 #' @export
-augmentation_rows.kmeans <- function(x) {
+recover_aug_rows.kmeans <- function(x) {
   .name <- names(x$cluster)
   res <- if (is.null(.name)) {
     tibble_pole(length(x$cluster))
@@ -50,7 +50,7 @@ augmentation_rows.kmeans <- function(x) {
 
 #' @rdname methods-kmeans
 #' @export
-augmentation_cols.kmeans <- function(x) {
+recover_aug_cols.kmeans <- function(x) {
   .name <- colnames(x$centers)
   res <- if (is.null(.name)) {
     tibble_pole(ncol(x$centers))
@@ -62,7 +62,7 @@ augmentation_cols.kmeans <- function(x) {
 
 #' @rdname methods-kmeans
 #' @export
-augmentation_coord.kmeans <- function(x) {
+recover_aug_coord.kmeans <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),
     .size = x$size,

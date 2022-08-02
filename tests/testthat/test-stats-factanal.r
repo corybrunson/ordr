@@ -12,8 +12,8 @@ test_that("'factanal' has specified distribution of inertia", {
 })
 
 test_that("'factanal' augmentations are consistent with '.element' column", {
-  expect_equal(".element" %in% names(augmentation_rows(fit_factanal)),
-               ".element" %in% names(augmentation_cols(fit_factanal)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_factanal)),
+               ".element" %in% names(recover_aug_cols(fit_factanal)))
 })
 
 test_that("`as_tbl_ord()` coerces 'factanal' objects", {

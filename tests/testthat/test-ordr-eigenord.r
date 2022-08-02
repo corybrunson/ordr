@@ -11,8 +11,8 @@ test_that("'eigen_ord' has specified distribution of inertia", {
 })
 
 test_that("'eigen_ord' augmentations are consistent with '.element' column", {
-  expect_equal(".element" %in% names(augmentation_rows(fit_eigen)),
-               ".element" %in% names(augmentation_cols(fit_eigen)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_eigen)),
+               ".element" %in% names(recover_aug_cols(fit_eigen)))
 })
 
 test_that("`as_tbl_ord()` coerces 'eigen_ord' objects", {

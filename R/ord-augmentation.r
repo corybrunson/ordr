@@ -7,7 +7,7 @@
 
 #' @details
 #'
-#' The `augmentation_*()` [S3 methods][base::S3Methods] produce
+#' The `recover_aug_*()` [S3 methods][base::S3Methods] produce
 #' [tibble][tibble::tibble]s of values associated with the rows, columns, and
 #' artificial coordinates of an object of class '[tbl_ord]'. The first field of
 #' each tibble is `.name`, which contains the row, column, or coordinate names.
@@ -15,7 +15,7 @@
 #' extracted from the ordination object.
 #'
 #' The function `augment_ord()` returns the ordination with either or both
-#' matrix factors annotated with the result of `augmentation_*()`. In this way
+#' matrix factors annotated with the result of `recover_aug_*()`. In this way
 #' `augment_ord()` works like [generics::augment()], as popularized by the
 #' **broom** package, by extracting information about the rows and columns, but
 #' it differs in returning an annotated 'tbl_ord' rather than a
@@ -34,24 +34,24 @@ NULL
 
 #' @rdname augmentation
 #' @export
-augmentation_rows <- function(x) UseMethod("augmentation_rows")
+recover_aug_rows <- function(x) UseMethod("recover_aug_rows")
 
 #' @rdname augmentation
 #' @export
-augmentation_cols <- function(x) UseMethod("augmentation_cols")
+recover_aug_cols <- function(x) UseMethod("recover_aug_cols")
 
-augmentation_factor <- function(x, .matrix) {
+recover_aug_factor <- function(x, .matrix) {
   switch(
     match_factor(.matrix),
-    rows = augmentation_rows(x),
-    cols = augmentation_cols(x),
-    dims = list(rows = augmentation_rows(x), cols = augmentation_cols(x))
+    rows = recover_aug_rows(x),
+    cols = recover_aug_cols(x),
+    dims = list(rows = recover_aug_rows(x), cols = recover_aug_cols(x))
   )
 }
 
 #' @rdname augmentation
 #' @export
-augmentation_coord <- function(x) UseMethod("augmentation_coord")
+recover_aug_coord <- function(x) UseMethod("recover_aug_coord")
 
 #' @rdname augmentation
 #' @export
@@ -68,7 +68,7 @@ augment_ord <- function(x, .matrix = "dims") {
 
 augment_annotation <- function(x, .matrix) {
   ann <- annotation_factor(x, .matrix)
-  aug <- augmentation_factor(x, .matrix)
+  aug <- recover_aug_factor(x, .matrix)
   # remove any columns of `ann` that overlap wth those of `aug`
   match_vals <- match(ann, aug)
   match_names <- match(names(ann), names(aug))

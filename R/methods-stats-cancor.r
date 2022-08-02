@@ -85,7 +85,7 @@ recover_supp_cols.cancor_ord <- function(x) {
 
 #' @rdname methods-cancor
 #' @export
-augmentation_rows.cancor_ord <- function(x) {
+recover_aug_rows.cancor_ord <- function(x) {
   .name <- rownames(x$xcoef)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$xcoef))
@@ -120,7 +120,7 @@ augmentation_rows.cancor_ord <- function(x) {
 
 #' @rdname methods-cancor
 #' @export
-augmentation_cols.cancor_ord <- function(x) {
+recover_aug_cols.cancor_ord <- function(x) {
   .name <- rownames(x$ycoef)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$ycoef))
@@ -155,7 +155,7 @@ augmentation_cols.cancor_ord <- function(x) {
 
 #' @rdname methods-cancor
 #' @export
-augmentation_coord.cancor_ord <- function(x) {
+recover_aug_coord.cancor_ord <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),
     .cor = x$cor

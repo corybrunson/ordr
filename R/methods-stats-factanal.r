@@ -62,7 +62,7 @@ recover_supp_rows.factanal <- function(x) {
 
 #' @rdname methods-factanal
 #' @export
-augmentation_rows.factanal <- function(x) {
+recover_aug_rows.factanal <- function(x) {
   .name <- rownames(x[["loadings"]])
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x[["loadings"]]))
@@ -85,7 +85,7 @@ augmentation_rows.factanal <- function(x) {
 
 #' @rdname methods-factanal
 #' @export
-augmentation_cols.factanal <- function(x) {
+recover_aug_cols.factanal <- function(x) {
   .name <- rownames(x[["loadings"]])
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x[["loadings"]]))
@@ -99,7 +99,7 @@ augmentation_cols.factanal <- function(x) {
 
 #' @rdname methods-factanal
 #' @export
-augmentation_coord.factanal <- function(x) {
+recover_aug_coord.factanal <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x))
   )

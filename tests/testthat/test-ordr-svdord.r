@@ -11,8 +11,8 @@ test_that("'svd_ord' has specified distribution of inertia", {
 })
 
 test_that("'svd_ord' augmentations are consistent with '.element' column", {
-  expect_equal(".element" %in% names(augmentation_rows(fit_svd)),
-               ".element" %in% names(augmentation_cols(fit_svd)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_svd)),
+               ".element" %in% names(recover_aug_cols(fit_svd)))
 })
 
 test_that("`as_tbl_ord()` coerces 'svd_ord' objects", {

@@ -14,12 +14,12 @@
 \alias{recover_coord.lda_ord}
 \alias{recover_conference.lda}
 \alias{recover_conference.lda_ord}
-\alias{augmentation_rows.lda}
-\alias{augmentation_rows.lda_ord}
-\alias{augmentation_cols.lda}
-\alias{augmentation_cols.lda_ord}
-\alias{augmentation_coord.lda}
-\alias{augmentation_coord.lda_ord}
+\alias{recover_aug_rows.lda}
+\alias{recover_aug_rows.lda_ord}
+\alias{recover_aug_cols.lda}
+\alias{recover_aug_cols.lda_ord}
+\alias{recover_aug_coord.lda}
+\alias{recover_aug_coord.lda_ord}
 \alias{recover_supp_rows.lda}
 \alias{recover_supp_rows.lda_ord}
 \title{Functionality for linear discriminant analysis ('lda') objects}
@@ -48,17 +48,17 @@
 
 \method{recover_conference}{lda_ord}(x)
 
-\method{augmentation_rows}{lda}(x)
+\method{recover_aug_rows}{lda}(x)
 
-\method{augmentation_rows}{lda_ord}(x)
+\method{recover_aug_rows}{lda_ord}(x)
 
-\method{augmentation_cols}{lda}(x)
+\method{recover_aug_cols}{lda}(x)
 
-\method{augmentation_cols}{lda_ord}(x)
+\method{recover_aug_cols}{lda_ord}(x)
 
-\method{augmentation_coord}{lda}(x)
+\method{recover_aug_coord}{lda}(x)
 
-\method{augmentation_coord}{lda_ord}(x)
+\method{recover_aug_coord}{lda_ord}(x)
 
 \method{recover_supp_rows}{lda}(x)
 

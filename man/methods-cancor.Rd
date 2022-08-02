@@ -10,9 +10,9 @@
 \alias{recover_conference.cancor_ord}
 \alias{recover_supp_rows.cancor_ord}
 \alias{recover_supp_cols.cancor_ord}
-\alias{augmentation_rows.cancor_ord}
-\alias{augmentation_cols.cancor_ord}
-\alias{augmentation_coord.cancor_ord}
+\alias{recover_aug_rows.cancor_ord}
+\alias{recover_aug_cols.cancor_ord}
+\alias{recover_aug_coord.cancor_ord}
 \title{Functionality for canonical correlations}
 \usage{
 \method{as_tbl_ord}{cancor_ord}(x)
@@ -31,11 +31,11 @@
 
 \method{recover_supp_cols}{cancor_ord}(x)
 
-\method{augmentation_rows}{cancor_ord}(x)
+\method{recover_aug_rows}{cancor_ord}(x)
 
-\method{augmentation_cols}{cancor_ord}(x)
+\method{recover_aug_cols}{cancor_ord}(x)
 
-\method{augmentation_coord}{cancor_ord}(x)
+\method{recover_aug_coord}{cancor_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}

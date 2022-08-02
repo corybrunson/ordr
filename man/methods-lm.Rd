@@ -6,16 +6,16 @@
 \alias{recover_rows.lm}
 \alias{recover_cols.lm}
 \alias{recover_coord.lm}
-\alias{augmentation_rows.lm}
-\alias{augmentation_cols.lm}
-\alias{augmentation_coord.lm}
-\alias{augmentation_rows.glm}
+\alias{recover_aug_rows.lm}
+\alias{recover_aug_cols.lm}
+\alias{recover_aug_coord.lm}
+\alias{recover_aug_rows.glm}
 \alias{recover_rows.mlm}
 \alias{recover_cols.mlm}
 \alias{recover_coord.mlm}
-\alias{augmentation_rows.mlm}
-\alias{augmentation_cols.mlm}
-\alias{augmentation_coord.mlm}
+\alias{recover_aug_rows.mlm}
+\alias{recover_aug_cols.mlm}
+\alias{recover_aug_coord.mlm}
 \title{Functionality for linear model objects}
 \usage{
 \method{as_tbl_ord}{lm}(x)
@@ -26,13 +26,13 @@
 
 \method{recover_coord}{lm}(x)
 
-\method{augmentation_rows}{lm}(x)
+\method{recover_aug_rows}{lm}(x)
 
-\method{augmentation_cols}{lm}(x)
+\method{recover_aug_cols}{lm}(x)
 
-\method{augmentation_coord}{lm}(x)
+\method{recover_aug_coord}{lm}(x)
 
-\method{augmentation_rows}{glm}(x)
+\method{recover_aug_rows}{glm}(x)
 
 \method{recover_rows}{mlm}(x)
 
@@ -40,11 +40,11 @@
 
 \method{recover_coord}{mlm}(x)
 
-\method{augmentation_rows}{mlm}(x)
+\method{recover_aug_rows}{mlm}(x)
 
-\method{augmentation_cols}{mlm}(x)
+\method{recover_aug_cols}{mlm}(x)
 
-\method{augmentation_coord}{mlm}(x)
+\method{recover_aug_coord}{mlm}(x)
 }
 \arguments{
 \item{x}{An ordination object.}

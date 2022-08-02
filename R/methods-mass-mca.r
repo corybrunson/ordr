@@ -58,7 +58,7 @@ recover_supp_rows.mca <- function(x) {
 
 #' @rdname methods-mca
 #' @export
-augmentation_rows.mca <- function(x) {
+recover_aug_rows.mca <- function(x) {
   .name <- rownames(x$fs)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$fs))
@@ -82,7 +82,7 @@ augmentation_rows.mca <- function(x) {
 
 #' @rdname methods-mca
 #' @export
-augmentation_cols.mca <- function(x) {
+recover_aug_cols.mca <- function(x) {
   .name <- rownames(x$cs)
   # introduce `.factor` and `.level` according to `abbrev`
   if (is.null(.name)) {
@@ -106,7 +106,7 @@ augmentation_cols.mca <- function(x) {
 
 #' @rdname methods-mca
 #' @export
-augmentation_coord.mca <- function(x) {
+recover_aug_coord.mca <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),
     .sv = x$d

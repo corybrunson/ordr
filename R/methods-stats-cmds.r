@@ -51,7 +51,7 @@ recover_conference.cmds_ord <- function(x) {
 
 #' @rdname methods-cmds
 #' @export
-augmentation_rows.cmds_ord <- function(x) {
+recover_aug_rows.cmds_ord <- function(x) {
   .name <- rownames(x$points)
   res <- if (is.null(.name)) {
     tibble_pole(nrow(x$x))
@@ -63,7 +63,7 @@ augmentation_rows.cmds_ord <- function(x) {
 
 #' @rdname methods-cmds
 #' @export
-augmentation_cols.cmds_ord <- function(x) {
+recover_aug_cols.cmds_ord <- function(x) {
   .name <- rownames(x$points)
   res <- if (is.null(.name)) {
     tibble_pole(ncol(x$x))
@@ -75,7 +75,7 @@ augmentation_cols.cmds_ord <- function(x) {
 
 #' @rdname methods-cmds
 #' @export
-augmentation_coord.cmds_ord <- function(x) {
+recover_aug_coord.cmds_ord <- function(x) {
   tibble(
     .name = factor_coord(recover_coord(x)),
     .eig = x$eig[1:ncol(x$points)]

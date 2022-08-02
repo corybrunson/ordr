@@ -46,7 +46,7 @@ recover_conference.lra <- function(x) {
 
 #' @rdname methods-lra
 #' @export
-augmentation_rows.lra <- function(x) {
+recover_aug_rows.lra <- function(x) {
   .name <- rownames(x[["row.coords"]])
   if (is.null(.name)) {
     tibble_pole(nrow(x[["row.coords"]]))
@@ -57,7 +57,7 @@ augmentation_rows.lra <- function(x) {
 
 #' @rdname methods-lra
 #' @export
-augmentation_cols.lra <- function(x) {
+recover_aug_cols.lra <- function(x) {
   .name <- rownames(x[["column.coords"]])
   if (is.null(.name)) {
     tibble_pole(nrow(x[["column.coords"]]))
@@ -68,6 +68,6 @@ augmentation_cols.lra <- function(x) {
 
 #' @rdname methods-lra
 #' @export
-augmentation_coord.lra <- function(x) {
+recover_aug_coord.lra <- function(x) {
   tibble(.name = factor_coord(recover_coord(x)))
 }

@@ -2,17 +2,17 @@
 % Please edit documentation in R/ord-augmentation.r
 \name{augmentation}
 \alias{augmentation}
-\alias{augmentation_rows}
-\alias{augmentation_cols}
-\alias{augmentation_coord}
+\alias{recover_aug_rows}
+\alias{recover_aug_cols}
+\alias{recover_aug_coord}
 \alias{augment_ord}
 \title{Augment factors and coordinates of 'tbl_ord' objects}
 \usage{
-augmentation_rows(x)
+recover_aug_rows(x)
 
-augmentation_cols(x)
+recover_aug_cols(x)
 
-augmentation_coord(x)
+recover_aug_coord(x)
 
 augment_ord(x, .matrix = "dims")
 }
@@ -30,7 +30,7 @@ variables, and coordinates of an ordination object, and attach it to the
 object.
 }
 \details{
-The \verb{augmentation_*()} \link[base:UseMethod]{S3 methods} produce
+The \verb{recover_aug_*()} \link[base:UseMethod]{S3 methods} produce
 \link[tibble:tibble]{tibble}s of values associated with the rows, columns, and
 artificial coordinates of an object of class '\link{tbl_ord}'. The first field of
 each tibble is \code{.name}, which contains the row, column, or coordinate names.
@@ -38,7 +38,7 @@ Additional fields contain information about the rows, columns, or coordinates
 extracted from the ordination object.
 
 The function \code{augment_ord()} returns the ordination with either or both
-matrix factors annotated with the result of \verb{augmentation_*()}. In this way
+matrix factors annotated with the result of \verb{recover_aug_*()}. In this way
 \code{augment_ord()} works like \code{\link[generics:augment]{generics::augment()}}, as popularized by the
 \strong{broom} package, by extracting information about the rows and columns, but
 it differs in returning an annotated 'tbl_ord' rather than a

@@ -36,7 +36,7 @@ format.tbl_ord <- function(
   dims_ann <- mapply(
     bind_cols,
     annotation_factor(x, .matrix = "dims"),
-    #augmentation_factor(x, .matrix = "dims"),
+    #recover_aug_factor(x, .matrix = "dims"),
     SIMPLIFY = FALSE
   )
   names(dims_ann) <- c("rows", "cols")
