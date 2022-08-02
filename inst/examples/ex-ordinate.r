@@ -7,7 +7,7 @@ ordinate(USArrests, cols = c(Murder, Rape, Assault), lra)
 
 # CA of hair & eye color data
 haireye <- as.data.frame(rowSums(HairEyeColor, dims = 2L))
-ordinate(haireye, cols = everything(), model = MASS::corresp)
+ordinate(haireye, MASS::corresp, cols = everything())
 
 # FA of Swiss social data
 ordinate(swiss, model = factanal, factors = 2L, scores = "Bartlett")
