@@ -17,7 +17,7 @@
 
 #' @name format
 #' @importFrom rlang "%||%"
-#' @param x A [tbl_ord] object.
+#' @param x A [tbl_ord].
 #' @inheritParams tibble::format.tbl
 #' @param ... Additional arguments.
 

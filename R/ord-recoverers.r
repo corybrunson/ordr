@@ -94,6 +94,13 @@ get_rows <- function(x, elements = "all") {
     # -+- need to recognize supplementary subtypes -+-
     recover_supp_rows(x)
   }
+  # ensure correct signs
+  if (! is.null(attr(x, "negate"))) {
+    n <- diag(get_negation(x))
+    dimnames(n) <- rep(list(recover_coord(x)), 2L)
+    u <- u %*% n
+  }
+  # ensure correct distribution of inertia
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     i <- recover_inertia(x)
@@ -122,6 +129,13 @@ get_cols <- function(x, elements = "all") {
     # -+- need to recognize supplementary subtypes -+-
     recover_supp_cols(x)
   }
+  # ensure correct signs
+  if (! is.null(attr(x, "negate"))) {
+    n <- diag(get_negation(x))
+    dimnames(n) <- rep(list(recover_coord(x)), 2L)
+    v <- v %*% n
+  }
+  # ensure correct distribution of inertia
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     i <- recover_inertia(x)

@@ -25,7 +25,7 @@
 )
 }
 \arguments{
-\item{x}{A \link{tbl_ord} object.}
+\item{x}{A \link{tbl_ord}.}
 
 \item{width}{Width of text output to generate. This defaults to \code{NULL}, which
 means use the \code{width} \link[pillar:pillar_options]{option}.}

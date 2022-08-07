@@ -1,6 +1,6 @@
 #' @title Confer inertia to factors of a 'tbl_ord' object
 #'
-#' @description Re-distribute inertia between cases and variables in an
+#' @description Re-distribute inertia between rows and columns in an
 #'   ordination.
 #'   
 
@@ -28,7 +28,7 @@
 
 #' @name conference
 #' @include ord-augmentation.r
-#' @param x A [tbl_ord] object.
+#' @param x A [tbl_ord].
 #' @param p Numeric vector of length 1 or 2. If length 1, the proportion of the
 #'   inertia assigned to the cases, with the remainder `1 - p` assigned to the
 #'   variables. If length 2, the proportions of the inertia assigned to the
