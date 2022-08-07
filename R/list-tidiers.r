@@ -11,6 +11,7 @@
 #' @inheritParams broom::list_tidiers
 #' @inheritParams broom::svd_tidiers
 #' @name list_tidiers
+#' @include ord-tidiers.r
 #' @export
 #' @family list tidiers
 #' @seealso [generics::tidy()] [generics::glance()]

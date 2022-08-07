@@ -33,27 +33,42 @@ This was an intentional check on a machine without this package installed.
 There were no ERRORs or WARNINGs. There was one NOTE.
 
 The note flagged this as a new submission.
-The note also flagged the possible misspellings 'biplot' (and its plural 'biplots'), 'decompositions', and 'scatterplots', which are standard terms in multivariate statistics.
-Finally, the note flagged several URLs:
-* <http://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&idt=1158762>
+The note also flagged the possible misspellings 'al', 'pre', 'biplot' (and its plural 'biplots'), 'eigen', 'decompositions', 'workflows', and 'scatterplots', which are standard technical terms or abbreviations.
+Finally, the note flagged two DOI URLs:
 * <https://doi.org/10.1111/j.1475-4754.2006.00270.x>
 * <https://doi.org/10.2307/2394164>
-* <http://doi.org/10.2307/2683520>
-All of these URLs are correct and have been verified. (The DOI links redirect but are intended to remain DOI links.)
+* <https://doi.org/10.2307/2683520>
+* <https://support.qs.com/hc/en-gb/articles/360021876820-QS-Institution-Classifications>
+All of these are correct and have been verified. (Some redirect but are intended to remain DOI links for permanence.)
 
-### R-hub
+The note was consistent across all three checks, though the specific spellings and URLs varied.
 
-There were no ERRORs or WARNINGs. There was one NOTE.
+### R-hub (default)
 
-The note read as follows:
+Several checks had PREPERRORS, which i'm not qualified to account for.
+
+There were no ERRORs or WARNINGs. There was one NOTE, depending on the check.
+
+One note read as follows:
 ```
+* checking for detritus in the temp directory ... NOTE
 Found the following files/directories:
   'lastMiKTeXException'
 ```
 As documented, this note is probably due to a MiKTeX bug that can be ignored:
 <https://github.com/r-hub/rhub/issues/503>
 
+The other note read as follows:
+```
+* checking HTML version of manual ... NOTE
+Skipping checking HTML validation: no command 'tidy' found
+```
+I'm not sure what to do about this note. I can successfully build the manual locally, and the function `tidy()`, imported from **generics**, is exported.
+
 ### R-hub (High Sierra)
+
+Some checks had no ERRORs, WARNINGs, or NOTEs.
+Some checks returned some of the same NOTEs as the Win-Builder checks.
 
 ## Reverse dependencies
 

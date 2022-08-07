@@ -66,7 +66,7 @@ Freestone IC, Gorin-Rosen Y, & Hughes MJ (2000) "Primary glass from Israel
 and the production of glass in Late Antiquity and the early Islamic period".
 \emph{La route du verre: Ateliers primaires et secondaires du second millénaire
 av. J.-C. au Moyen Âge}: 65--83.
-\url{http://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&idt=1158762}
+\url{https://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&idt=1158762}
 
 Baxter MJ & Freestone IC (2006) "Log-Ratio Compositional Data Analysis in
 Archaeometry". \emph{Archaeometry}, \strong{48}(3): 511--531.
