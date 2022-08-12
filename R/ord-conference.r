@@ -33,7 +33,11 @@
 #'   inertia assigned to the cases, with the remainder `1 - p` assigned to the
 #'   variables. If length 2, the proportions of the inertia assigned to the
 #'   cases and to the variables, respectively.
-#' @return A tbl_ord; the wrapped model is unchanged.
+#' @return `recover_conference()` returns the (statically implemented)
+#'   distribution of inertia between the rows and the columns as stored in the
+#'   model. `confer_inertia()` returns a tbl_ord with a specified distribution
+#'   of inertia but the wrapped model unchanged. `get_conference()` returns the
+#'   distribution currently conferred.
 #' @example inst/examples/ex-ord-conference.r
 #' @family generic recoverers
 NULL
