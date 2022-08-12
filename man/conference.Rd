@@ -28,7 +28,11 @@ variables. If length 2, the proportions of the inertia assigned to the
 cases and to the variables, respectively.}
 }
 \value{
-A tbl_ord; the wrapped model is unchanged.
+\code{recover_conference()} returns the (statically implemented)
+distribution of inertia between the rows and the columns as stored in the
+model. \code{confer_inertia()} returns a tbl_ord with a specified distribution
+of inertia but the wrapped model unchanged. \code{get_conference()} returns the
+distribution currently conferred.
 }
 \description{
 Re-distribute inertia between rows and columns in an
