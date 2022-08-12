@@ -27,6 +27,11 @@ ordination. The standard values are \code{"rows"}, \code{"cols"}, and \code{"dim
 both).}
 }
 \value{
+\code{negate_ord()} and \code{negate_to_first_orthant()} return a tbl_ord with
+certain axes negated but the wrapped model unchanged. \code{get_negation()}
+returns the current negations. \code{revert_negation()} returns the tbl_ord
+without any manual negations.
+
 A tbl_ord; the wrapped model is unchanged.
 }
 \description{

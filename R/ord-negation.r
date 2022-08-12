@@ -21,6 +21,10 @@
 #' @template param-matrix
 #' @param x A [tbl_ord].
 #' @param negation Integer vector of coordinates to negate.
+#' @return `negate_ord()` and `negate_to_first_orthant()` return a tbl_ord with
+#'   certain axes negated but the wrapped model unchanged. `get_negation()`
+#'   returns the current negations. `revert_negation()` returns the tbl_ord
+#'   without any manual negations.
 #' @return A tbl_ord; the wrapped model is unchanged.
 #' @example inst/examples/ex-ord-negation.r
 NULL
