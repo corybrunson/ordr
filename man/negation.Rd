@@ -26,6 +26,9 @@ indicators for one or both matrices in a matrix decomposition used for
 ordination. The standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for
 both).}
 }
+\value{
+A tbl_ord; the wrapped model is unchanged.
+}
 \description{
 Negate the coordinates of a subset of ordination axes in both
 row and column singular vectors.

@@ -21,6 +21,7 @@
 #' @template param-matrix
 #' @param x A [tbl_ord].
 #' @param negation Integer vector of coordinates to negate.
+#' @return A tbl_ord; the wrapped model is unchanged.
 #' @example inst/examples/ex-ord-negation.r
 NULL
 
