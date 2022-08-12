@@ -20,6 +20,9 @@
 #' @param x A [tbl_ord] object.
 #' @inheritParams tibble::format.tbl
 #' @param ... Additional arguments.
+#' @return The `format()` method returns a vector of strings that are more
+#'   elegantly printed by the `print()` method, which itself returns the tbl_ord
+#'   invisibly.
 
 #' @rdname format
 #' @export

@@ -1,4 +1,4 @@
-#' @title Functionality for eigendecompositions
+#' @title Functionality for eigen-decompositions
 #'
 #' @description These methods extract data from, and attribute new data to,
 #'   objects of class `"eigen_ord"` returned by [eigen_ord()].

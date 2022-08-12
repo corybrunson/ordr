@@ -11,7 +11,7 @@
 \alias{recover_aug_rows.eigen_ord}
 \alias{recover_aug_cols.eigen_ord}
 \alias{recover_aug_coord.eigen_ord}
-\title{Functionality for eigendecompositions}
+\title{Functionality for eigen-decompositions}
 \usage{
 \method{as_tbl_ord}{eigen_ord}(x)
 

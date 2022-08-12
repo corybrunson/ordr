@@ -55,6 +55,10 @@ cancor_ord(x, y, xcenter = TRUE, ycenter = TRUE, scores = FALSE)
 \item{scores}{Logical; whether to return canonical scores and structure
 correlations.}
 }
+\value{
+Objects slightly modified from the outputs of the original functions,
+with new '*-ord' classes.
+}
 \description{
 These \verb{*_ord} functions wrap core R functions with modifications
 for use with '\link{tbl_ord}' methods. Some parameters are hidden from the user

@@ -27,6 +27,9 @@ inertia assigned to the cases, with the remainder \code{1 - p} assigned to the
 variables. If length 2, the proportions of the inertia assigned to the
 cases and to the variables, respectively.}
 }
+\value{
+A tbl_ord; the wrapped model is unchanged.
+}
 \description{
 Re-distribute inertia between cases and variables in an
 ordination.

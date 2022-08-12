@@ -58,7 +58,15 @@
 #'   performed. Methods like `predict()` access these objects by name in the
 #'   parent environment, and retaining them as attributes prevents errors that
 #'   arise if these objects are reassigned.
+#' @return An object of class 'lda_ord' equivalent in structure to one of class
+#'   'lda' except for up to three attributes:
+#'   
+#'   * the input data `x`, if `ret.x = TRUE`
+#'   * the class assignments `grouping`, if `ret.grouping = TRUE`
+#'   * if the parameter `axes.scale` is not 'unstandardized', a matrix
+#'     `axes.scale` that encodes the transformation of the row space
 #' @example inst/examples/ex-fun-lda-iris.r
+#' @seealso [MASS::lda()], from which `lda_ord()` is adapted
 NULL
 
 #' @rdname lda-ord

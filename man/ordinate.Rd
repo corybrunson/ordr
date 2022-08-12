@@ -23,6 +23,9 @@ included in \code{cols} will be augmented.}
 
 \item{...}{Additional arguments passed to \code{model}.}
 }
+\value{
+An augmented tbl_ord.
+}
 \description{
 This is a convenience function to fit an ordination model to a
 specified subset of columns of a data frame and augment the tbl_ord object
