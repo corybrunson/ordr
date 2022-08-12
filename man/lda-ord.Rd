@@ -136,6 +136,16 @@ only the first \code{dimen} discriminant components are used (except for
 \code{method="predictive"}), and only those dimensions are returned in \code{x}.
 }
 }
+\value{
+An object of class 'lda_ord' equivalent in structure to one of class
+'lda' except for up to three attributes:
+\itemize{
+\item the input data \code{x}, if \code{ret.x = TRUE}
+\item the class assignments \code{grouping}, if \code{ret.grouping = TRUE}
+\item if the parameter \code{axes.scale} is not 'unstandardized', a matrix
+\code{axes.scale} that encodes the transformation of the row space
+}
+}
 \description{
 This function replicates \code{\link[MASS:lda]{MASS::lda()}} with options to retain
 elements useful to the \link{tbl_ord} class and biplot calculations.
@@ -291,4 +301,7 @@ variable and Linear Discriminant Analysis". CrossValidated, accessed
 Greenacre M (2013) "Contribution Biplots". \emph{Journal of Computational and
 Graphical Statistics}, \strong{22}(1): 107--122.
 \url{https://amstat.tandfonline.com/doi/full/10.1080/10618600.2012.702494}
+}
+\seealso{
+\code{\link[MASS:lda]{MASS::lda()}}, from which \code{lda_ord()} is adapted
 }

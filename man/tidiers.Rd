@@ -31,6 +31,9 @@ supplementary element type defined by the specific class methods (e.g.
 \code{"score"} for 'factanal', 'lda_ord', and 'cancord_ord' and \code{"intraset"} and
 \code{"interset"} for 'cancor_ord').}
 }
+\value{
+A \link[tibble:tibble]{tibble}.
+}
 \description{
 These functions return \link[tibble:tibble]{tibbles} that summarize
 an object of class '\link{tbl_ord}'. \code{tidy()} output contains one row per

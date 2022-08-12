@@ -70,6 +70,9 @@ factors.}
 \item{...}{Additional arguments passed to \code{\link[ggplot2:fortify]{ggplot2::fortify()}}; see
 \code{\link[=fortify.tbl_ord]{fortify.tbl_ord()}}.}
 }
+\value{
+A ggplot object.
+}
 \description{
 Build a biplot visualization from ordination data wrapped as a
 \link{tbl_ord} object.
@@ -243,5 +246,5 @@ Gower JC, Lubbe GS, & le Roux NJ (2011) \emph{Understanding Biplots}. Wiley, ISB
 978-0-470-01255-0. \url{https://www.wiley.com/go/biplots}
 }
 \seealso{
-\code{\link[ggplot2:ggplot2-package]{ggplot2::ggplot2()}}, on which \code{ggbiplot()} is built.
+\code{\link[ggplot2:ggplot2-package]{ggplot2::ggplot2()}}, on which \code{ggbiplot()} is built
 }

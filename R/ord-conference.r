@@ -33,8 +33,9 @@
 #'   inertia assigned to the cases, with the remainder `1 - p` assigned to the
 #'   variables. If length 2, the proportions of the inertia assigned to the
 #'   cases and to the variables, respectively.
-#' @family generic recoverers
+#' @return A tbl_ord; the wrapped model is unchanged.
 #' @example inst/examples/ex-ord-conference.r
+#' @family generic recoverers
 NULL
 
 attribute_conference <- function(x, p) {

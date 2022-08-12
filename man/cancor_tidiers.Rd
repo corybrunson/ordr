@@ -24,6 +24,9 @@ matched to the following options.
 
 \item{...}{Additional arguments allowed by generics; currently ignored.}
 }
+\value{
+A \link[tibble:tibble]{tibble}.
+}
 \description{
 These tidiers handle the output of \code{cancor()}, which is
 effectively an S3 object without a class attribute. It allows \strong{ordr} to

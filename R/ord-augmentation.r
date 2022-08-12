@@ -28,6 +28,9 @@
 #' @include ord-recoverers.r
 #' @inheritParams recoverers
 #' @template param-matrix
+#' @return The `recover_aug_*()` functions return [tibble][tibble::tibble]s
+#'   having the same numbers of rows as `recover_*()`. `augment_ord()` returns
+#'   an augmented tbl_ord with the wrapped model unchanged.
 #' @family generic recoverers
 #' @seealso [tidiers] and [annotation] methods that interface with augmentation.
 NULL

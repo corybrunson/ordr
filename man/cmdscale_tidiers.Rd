@@ -28,6 +28,9 @@ used in the calculation.
 
 \item{...}{Additional arguments allowed by generics; currently ignored.}
 }
+\value{
+A \link[tibble:tibble]{tibble}.
+}
 \description{
 These tidiers handle the output of \code{cmdscale()}, which under
 certain conditions is effectively an S3 object without a class attribute.

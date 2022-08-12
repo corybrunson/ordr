@@ -21,6 +21,7 @@
 #'   augment to the row data of the ordination. If missing, all columns not
 #'   included in `cols` will be augmented.
 #' @param ... Additional arguments passed to `model`.
+#' @return An augmented tbl_ord.
 #' @example inst/examples/ex-ordinate.r
 #' @export
 ordinate <- function(

@@ -46,8 +46,9 @@
 #' @param ... Additional arguments allowed by generics; currently ignored.
 #' @template param-matrix
 #' @template param-elements
-#' @seealso [augmentation] methods that must interface with tidiers.
+#' @return A [tibble][tibble::tibble].
 #' @example inst/examples/ex-ord-tidiers.r
+#' @seealso [augmentation] methods that must interface with tidiers.
 NULL
 
 #' @importFrom generics tidy
