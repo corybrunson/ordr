@@ -34,7 +34,7 @@ There were no ERRORs or WARNINGs. There was one NOTE.
 
 The note flagged this as a new submission.
 The note also flagged the possible misspellings 'al', 'pre', 'biplot' (and its plural 'biplots'), 'eigen', 'decompositions', 'workflows', and 'scatterplots', which are standard technical terms or abbreviations.
-Finally, the note flagged two DOI URLs:
+Finally, the note flagged some DOI and other URLs:
 * <https://doi.org/10.1111/j.1475-4754.2006.00270.x>
 * <https://doi.org/10.2307/2394164>
 * <https://doi.org/10.2307/2683520>
@@ -47,7 +47,9 @@ The note was consistent across all three checks, though the specific spellings a
 
 Several checks had PREPERRORS, which i'm not qualified to account for.
 
-There were no ERRORs or WARNINGs. There was one NOTE, depending on the check.
+There were no ERRORs or WARNINGs. There were one or two NOTEs, depending on the check.
+
+One note flagged the same spellings and URLs as the Win-Builder checks.
 
 One note read as follows:
 ```
@@ -58,7 +60,7 @@ Found the following files/directories:
 As documented, this note is probably due to a MiKTeX bug that can be ignored:
 <https://github.com/r-hub/rhub/issues/503>
 
-The other note read as follows:
+One note read as follows:
 ```
 * checking HTML version of manual ... NOTE
 Skipping checking HTML validation: no command 'tidy' found
