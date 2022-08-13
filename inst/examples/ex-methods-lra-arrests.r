@@ -34,7 +34,8 @@ arrests_lra %>%
   theme_bw() +
   geom_rows_text(aes(label = .abb), size = 3, alpha = .75) +
   geom_cols_polygon(fill = NA, linetype = "dashed") +
-  geom_cols_text(aes(label = .name), fontface = "bold") +
+  geom_cols_text(aes(label = .name, size = .weight), fontface = "bold") +
+  scale_size_area(guide = "none") +
   ggtitle(
     "Non-compositional LRA of violent crime arrest rates",
     "United States, 1973"
@@ -54,7 +55,8 @@ arrests_lra %>%
   theme_bw() +
   geom_rows_text(aes(label = .abb), size = 3, alpha = .75) +
   geom_cols_polygon(fill = NA, linetype = "dashed") +
-  geom_cols_text(aes(label = .name), fontface = "bold") +
+  geom_cols_text(aes(label = .name, size = .weight), fontface = "bold") +
+  scale_size_area(guide = "none") +
   ggtitle(
     "Compositional LRA of violent crime arrest rates",
     "United States, 1973"

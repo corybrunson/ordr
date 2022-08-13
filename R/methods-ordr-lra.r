@@ -48,22 +48,26 @@ recover_conference.lra <- function(x) {
 #' @export
 recover_aug_rows.lra <- function(x) {
   .name <- rownames(x[["row.coords"]])
-  if (is.null(.name)) {
+  res <- if (is.null(.name)) {
     tibble_pole(nrow(x[["row.coords"]]))
   } else {
     tibble(.name = .name)
   }
+  res$.weight <- x$row.weights
+  res
 }
 
 #' @rdname methods-lra
 #' @export
 recover_aug_cols.lra <- function(x) {
   .name <- rownames(x[["column.coords"]])
-  if (is.null(.name)) {
+  res <- if (is.null(.name)) {
     tibble_pole(nrow(x[["column.coords"]]))
   } else {
     tibble(.name = .name)
   }
+  res$.weight <- x$column.weights
+  res
 }
 
 #' @rdname methods-lra
