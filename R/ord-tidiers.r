@@ -19,10 +19,12 @@
 #'   [ggplot2::ggplot()] to generate scree plots.
 #'   The returned columns are
 
-#'   - `.name`: the name of the coordinate
-#'   - `.inertia`: the multidimensional variance
-#'   - `.prop_var`: the proportion of inertia
-#'   - `.quality`: the cumulative proportion of variance
+#'   - `name`: (the name of) the coordinate
+#'   - other columns extracted from the model,
+#'     usually a single additional column of the singular or eigen values
+#'   - `inertia`: the multidimensional variance
+#'   - `prop_var`: the proportion of inertia
+#'   - `quality`: the cumulative proportion of variance
 
 #' * The [generics::glance()] method
 
@@ -72,9 +74,9 @@ generics::tidy
 #' @export
 tidy.tbl_ord <- function(x, ...) {
   res <- recover_aug_coord(x)
-  res$.inertia <- recover_inertia(x)
-  res$.prop_var <- res$.inertia / sum(res$.inertia)
-  res$.quality <- cumsum(res$.prop_var)
+  res$inertia <- recover_inertia(x)
+  res$prop_var <- res$inertia / sum(res$inertia)
+  res$quality <- cumsum(res$prop_var)
   res
 }
 

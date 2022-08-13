@@ -5,7 +5,7 @@ iris_pca <- ordinate(iris, seq(4L), ~ prcomp(., center = TRUE, scale. = TRUE))
 tidy(iris_pca)
 # this facilitates scree plots
 tidy(iris_pca) %>%
-  ggplot(aes(x = .name, y = .prop_var)) +
+  ggplot(aes(x = name, y = prop_var)) +
   geom_col() +
   scale_y_continuous(labels = scales::percent) +
   labs(x = NULL, y = "Proportion of variance")

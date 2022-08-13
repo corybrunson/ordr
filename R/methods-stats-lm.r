@@ -77,9 +77,9 @@ recover_aug_cols.lm <- function(x) {
 #' @export
 recover_aug_coord.lm <- function(x) {
   summ <- as.data.frame(stats::coef(summary(x)))
-  names(summ) <- c(".estimate", ".std.error", ".t.value", ".p.value")
+  names(summ) <- c("estimate", "std.error", "t.value", "p.value")
   as_tibble(data.frame(
-    .name = factor_coord(recover_coord(x)),
+    name = factor_coord(recover_coord(x)),
     summ
   ))
 }

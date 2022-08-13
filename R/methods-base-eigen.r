@@ -67,7 +67,7 @@ recover_aug_cols.eigen_ord <- function(x) {
 #' @export
 recover_aug_coord.eigen_ord <- function(x) {
   tibble(
-    .name = factor_coord(recover_coord(x)),
-    .values = x[["values"]]
+    name = factor_coord(recover_coord(x)),
+    values = x[["values"]]
   )
 }

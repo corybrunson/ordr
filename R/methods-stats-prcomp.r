@@ -79,7 +79,7 @@ recover_aug_cols.prcomp <- function(x) {
 #' @export
 recover_aug_coord.prcomp <- function(x) {
   tibble(
-    .name = factor_coord(recover_coord(x)),
-    .sdev = x[["sdev"]]
+    name = factor_coord(recover_coord(x)),
+    sdev = x[["sdev"]]
   )
 }

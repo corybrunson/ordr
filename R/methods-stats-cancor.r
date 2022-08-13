@@ -157,7 +157,7 @@ recover_aug_cols.cancor_ord <- function(x) {
 #' @export
 recover_aug_coord.cancor_ord <- function(x) {
   tibble(
-    .name = factor_coord(recover_coord(x)),
-    .cor = x$cor
+    name = factor_coord(recover_coord(x)),
+    cor = x$cor
   )
 }

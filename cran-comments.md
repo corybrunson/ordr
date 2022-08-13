@@ -34,7 +34,7 @@ There were no ERRORs or WARNINGs. There was one NOTE.
 
 The note flagged this as a new submission.
 The note also flagged the possible misspellings 'al', 'pre', 'biplot' (and its plural 'biplots'), 'eigen', 'decompositions', 'workflows', and 'scatterplots', which are standard technical terms or abbreviations.
-Finally, the note flagged some DOI and other URLs:
+Finally, the note flagged some possibly invalid DOI-based and other URLs:
 * <https://doi.org/10.1111/j.1475-4754.2006.00270.x>
 * <https://doi.org/10.2307/2394164>
 * <https://doi.org/10.2307/2683520>
@@ -49,7 +49,7 @@ Several checks had PREPERRORS, which i'm not qualified to account for.
 
 There were no ERRORs or WARNINGs. There were one or two NOTEs, depending on the check.
 
-One note flagged the same spellings and URLs as the Win-Builder checks.
+One note flagged the same new submission status, possible misspellings, and possibly invalid URLs as the Win-Builder checks.
 
 One note read as follows:
 ```

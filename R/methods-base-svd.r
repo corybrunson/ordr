@@ -63,7 +63,7 @@ recover_aug_cols.svd_ord <- function(x) {
 #' @export
 recover_aug_coord.svd_ord <- function(x) {
   tibble(
-    .name = factor_coord(recover_coord(x)),
-    .value = x[["d"]][1:ncol(x[["u"]])]
+    name = factor_coord(recover_coord(x)),
+    value = x[["d"]][1:ncol(x[["u"]])]
   )
 }

@@ -184,8 +184,8 @@ recover_aug_cols.lda_ord <- recover_aug_cols.lda
 #' @export
 recover_aug_coord.lda <- function(x) {
   tibble(
-    .name = factor_coord(recover_coord(x)),
-    .svd = x$svd
+    name = factor_coord(recover_coord(x)),
+    svd = x$svd
   )
 }
 

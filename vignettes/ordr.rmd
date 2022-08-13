@@ -149,7 +149,7 @@ tidy(haireye_ca_ord)
 The `.inertia` and `.prop_var` fields are calculated from the singular values or eigenvalues contained in the ordination object and always appear when defined. This means that `tidy()` prepares any ordination object derived from such a decomposition for a scree plot with `ggplot2::ggplot()`:
 
 ```{r scree plot}
-ggplot(tidy(haireye_ca_ord), aes(x = .name, y = .inertia)) +
+ggplot(tidy(haireye_ca_ord), aes(x = name, y = inertia)) +
   geom_col() +
   labs(x = "Component", y = "Inertia") +
   ggtitle("Correspondence analysis of subjects' hair & eye colors",

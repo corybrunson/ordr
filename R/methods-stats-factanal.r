@@ -101,6 +101,6 @@ recover_aug_cols.factanal <- function(x) {
 #' @export
 recover_aug_coord.factanal <- function(x) {
   tibble(
-    .name = factor_coord(recover_coord(x))
+    name = factor_coord(recover_coord(x))
   )
 }

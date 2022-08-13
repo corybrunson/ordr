@@ -108,7 +108,7 @@ recover_aug_cols.mca <- function(x) {
 #' @export
 recover_aug_coord.mca <- function(x) {
   tibble(
-    .name = factor_coord(recover_coord(x)),
-    .sv = x$d
+    name = factor_coord(recover_coord(x)),
+    sv = x$d
   )
 }

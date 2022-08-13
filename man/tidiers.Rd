@@ -50,10 +50,12 @@ artificial coordinates created by ordinations. The output can be passed to
 \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} to generate scree plots.
 The returned columns are
 \itemize{
-\item \code{.name}: the name of the coordinate
-\item \code{.inertia}: the multidimensional variance
-\item \code{.prop_var}: the proportion of inertia
-\item \code{.quality}: the cumulative proportion of variance
+\item \code{name}: (the name of) the coordinate
+\item other columns extracted from the model,
+usually a single additional column of the singular or eigen values
+\item \code{inertia}: the multidimensional variance
+\item \code{prop_var}: the proportion of inertia
+\item \code{quality}: the cumulative proportion of variance
 }
 \item The \code{\link[generics:glance]{generics::glance()}} method
 reports information about the entire model, here always treated as one of a
@@ -89,7 +91,7 @@ iris_pca <- ordinate(iris, seq(4L), ~ prcomp(., center = TRUE, scale. = TRUE))
 tidy(iris_pca)
 # this facilitates scree plots
 tidy(iris_pca) \%>\%
-  ggplot(aes(x = .name, y = .prop_var)) +
+  ggplot(aes(x = name, y = prop_var)) +
   geom_col() +
   scale_y_continuous(labels = scales::percent) +
   labs(x = NULL, y = "Proportion of variance")

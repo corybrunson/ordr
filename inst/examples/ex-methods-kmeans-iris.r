@@ -29,7 +29,7 @@ iris %>%
 # summarize clusters with standard deviation
 iris_km_ord %>%
   tidy() %>%
-  transform(.sdev = sqrt(.withinss / .size))
+  transform(sdev = sqrt(withinss / size))
 
 # discriminate between clusters 2 and 3
 iris_km_ord %>%

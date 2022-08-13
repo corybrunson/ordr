@@ -77,7 +77,7 @@ recover_aug_cols.cmds_ord <- function(x) {
 #' @export
 recover_aug_coord.cmds_ord <- function(x) {
   tibble(
-    .name = factor_coord(recover_coord(x)),
-    .eig = x$eig[1:ncol(x$points)]
+    name = factor_coord(recover_coord(x)),
+    eig = x$eig[1:ncol(x$points)]
   )
 }

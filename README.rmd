@@ -101,7 +101,7 @@ Following the [**broom**](https://github.com/tidymodels/broom) package, the `tid
 
 ```{r model components and scree plot}
 tidy(iris_pca) %T>% print() %>%
-  ggplot(aes(x = .name, y = .prop_var)) +
+  ggplot(aes(x = name, y = prop_var)) +
   geom_col() +
   labs(x = "", y = "Proportion of inertia") +
   ggtitle("PCA of Anderson's iris measurements",

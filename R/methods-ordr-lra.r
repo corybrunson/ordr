@@ -69,5 +69,5 @@ recover_aug_cols.lra <- function(x) {
 #' @rdname methods-lra
 #' @export
 recover_aug_coord.lra <- function(x) {
-  tibble(.name = factor_coord(recover_coord(x)))
+  tibble(name = factor_coord(recover_coord(x)))
 }

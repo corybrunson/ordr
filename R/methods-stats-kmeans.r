@@ -64,8 +64,8 @@ recover_aug_cols.kmeans <- function(x) {
 #' @export
 recover_aug_coord.kmeans <- function(x) {
   tibble(
-    .name = factor_coord(recover_coord(x)),
-    .size = x$size,
-    .withinss = x$withinss
+    name = factor_coord(recover_coord(x)),
+    size = x$size,
+    withinss = x$withinss
   )
 }
