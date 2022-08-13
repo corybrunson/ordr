@@ -38,7 +38,7 @@ object.
 The \verb{recover_aug_*()} \link[base:UseMethod]{S3 methods} produce
 \link[tibble:tibble]{tibble}s of values associated with the rows, columns, and
 artificial coordinates of an object of class '\link{tbl_ord}'. The first field of
-each tibble is \code{.name}, which contains the row, column, or coordinate names.
+each tibble is \code{name}, which contains the row, column, or coordinate names.
 Additional fields contain information about the rows, columns, or coordinates
 extracted from the ordination object.
 

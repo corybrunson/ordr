@@ -46,7 +46,7 @@ recover_coord.lm <- function(x) {
 #' @rdname methods-lm
 #' @export
 recover_aug_rows.lm <- function(x) {
-  res <- tibble(.name = rownames(model.frame(x)))
+  res <- tibble(name = rownames(model.frame(x)))
   infl <- influence(x, do.coef = FALSE)
   # diagnostics
   res$hat <- infl$hat

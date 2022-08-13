@@ -10,7 +10,7 @@
 #' The `recover_aug_*()` [S3 methods][base::S3Methods] produce
 #' [tibble][tibble::tibble]s of values associated with the rows, columns, and
 #' artificial coordinates of an object of class '[tbl_ord]'. The first field of
-#' each tibble is `.name`, which contains the row, column, or coordinate names.
+#' each tibble is `name`, which contains the row, column, or coordinate names.
 #' Additional fields contain information about the rows, columns, or coordinates
 #' extracted from the ordination object.
 #'

@@ -152,12 +152,12 @@ as annotations to the appropriate matrix factors:[^7]
 #> # ℹ Use `print(n = ...)` to see more rows
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
-#>      PC1     PC2    PC3 ... |   .name        .center .scale
-#>                             |   <chr>          <dbl>  <dbl>
-#> 1  0.521 -0.377   0.720     | 1 Sepal.Length    5.84  0.828
-#> 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width     3.06  0.436
-#> 3  0.580 -0.0245 -0.142     | 3 Petal.Length    3.76  1.77 
-#> 4  0.565 -0.0669 -0.634     | 4 Petal.Width     1.20  0.762
+#>      PC1     PC2    PC3 ... |   name         center scale
+#>                             |   <chr>         <dbl> <dbl>
+#> 1  0.521 -0.377   0.720     | 1 Sepal.Length   5.84 0.828
+#> 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width    3.06 0.436
+#> 3  0.580 -0.0245 -0.142     | 3 Petal.Length   3.76 1.77 
+#> 4  0.565 -0.0669 -0.634     | 4 Petal.Width    1.20 0.762
 ```
 
 Additional annotations can be added using several row- and
@@ -186,12 +186,12 @@ iris_meta <- data.frame(
 #> # ℹ Use `print(n = ...)` to see more rows
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
-#>      PC1     PC2    PC3 ... |   .name        .center .scale
-#>                             |   <chr>          <dbl>  <dbl>
-#> 1  0.521 -0.377   0.720     | 1 Sepal.Length    5.84  0.828
-#> 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width     3.06  0.436
-#> 3  0.580 -0.0245 -0.142     | 3 Petal.Length    3.76  1.77 
-#> 4  0.565 -0.0669 -0.634     | 4 Petal.Width     1.20  0.762
+#>      PC1     PC2    PC3 ... |   name         center scale
+#>                             |   <chr>         <dbl> <dbl>
+#> 1  0.521 -0.377   0.720     | 1 Sepal.Length   5.84 0.828
+#> 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width    3.06 0.436
+#> 3  0.580 -0.0245 -0.142     | 3 Petal.Length   3.76 1.77 
+#> 4  0.565 -0.0669 -0.634     | 4 Petal.Width    1.20 0.762
 ```
 
 Following the [**broom**](https://github.com/tidymodels/broom) package,
@@ -201,18 +201,18 @@ plotting:
 
 ``` r
 tidy(iris_pca) %T>% print() %>%
-  ggplot(aes(x = .name, y = .prop_var)) +
+  ggplot(aes(x = name, y = prop_var)) +
   geom_col() +
   labs(x = "", y = "Proportion of inertia") +
   ggtitle("PCA of Anderson's iris measurements",
           "Distribution of inertia")
-#> # A tibble: 4 × 4
-#>   .name .sdev .inertia .prop_var
-#>   <fct> <dbl>    <dbl>     <dbl>
-#> 1 PC1   1.71    435.     0.730  
-#> 2 PC2   0.956   136.     0.229  
-#> 3 PC3   0.383    21.9    0.0367 
-#> 4 PC4   0.144     3.09   0.00518
+#> # A tibble: 4 × 5
+#>   name   sdev inertia prop_var quality
+#>   <fct> <dbl>   <dbl>    <dbl>   <dbl>
+#> 1 PC1   1.71   435.    0.730     0.730
+#> 2 PC2   0.956  136.    0.229     0.958
+#> 3 PC3   0.383   21.9   0.0367    0.995
+#> 4 PC4   0.144    3.09  0.00518   1
 ```
 
 ![](man/figures/README-model%20components%20and%20scree%20plot-1.png)<!-- -->
@@ -227,7 +227,7 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_ellipse(aes(color = Species), alpha = .5, level = .99) +
   geom_cols_vector() +
-  geom_cols_text_radiate(aes(label = .name)) +
+  geom_cols_text_radiate(aes(label = name)) +
   expand_limits(y = c(-3.5, NA)) +
   ggtitle("PCA of Anderson's iris measurements",
           "99% confidence ellipses; variables use top & right axes")
@@ -246,7 +246,7 @@ ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
     aes(color = Species, shape = Species),
     size = 5, alpha = .5, fun.data = mean_se
   ) +
-  geom_cols_axis(aes(label = .name, center = .center, scale = .scale)) +
+  geom_cols_axis(aes(label = name, center = center, scale = scale)) +
   ggtitle("Predictive biplot of Anderson's iris measurements",
           "Project a marker onto an axis to approximate its measurement")
 ```

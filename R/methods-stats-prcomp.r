@@ -61,7 +61,7 @@ recover_aug_rows.prcomp <- function(x) {
 #' @export
 recover_aug_cols.prcomp <- function(x) {
   name <- rownames(x[["rotation"]])
-  res <- if (is.null(.name)) {
+  res <- if (is.null(name)) {
     tibble_pole(nrow(x[["rotation"]]))
   } else {
     tibble(name = name)
