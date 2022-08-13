@@ -71,6 +71,27 @@ indicators for one or both matrices in a matrix decomposition used for
 ordination. The standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for
 both).}
 }
+\value{
+The \verb{recover_*()} functions are generics whose methods return base R
+objects retrieved from the model wrapped in the 'tbl_ord' class:
+\itemize{
+\item \code{rows}: the row matrix as stored in the model
+\item \code{cols}: the column matrix as stored in the model
+\item \code{inertia}: the vector of eigen-values or squared singular values,
+often known by other names depending on the model
+\item \code{coord}: names for the artificial axes, from the model if available
+The \verb{get_*()} functions (which are not generics) return modifications of
+these objects:
+\item \code{rows}: the recovered rows,
+adjusted according to any negation of axes or conference of inertia
+\item \code{cols}: the recovered columns,
+adjusted according to any negation of axes or conference of inertia
+\item \code{inertia}: the recovered inertia, named by the recovered coordinates
+\item \code{coord}: the recovered coordinates (unmodified)
+\code{dim()} returns the dimensions of the decomposed matrix, i.e. the numbers of
+rows of \code{recover_rows()} and of \code{recover_cols()}.
+}
+}
 \description{
 These functions return information about the matrix
 factorization underlying an ordination.

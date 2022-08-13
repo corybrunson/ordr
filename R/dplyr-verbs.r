@@ -1,13 +1,16 @@
 #' @title **dplyr** verbs for tbl_ord factors
 #'
 #' @description These functions adapt [dplyr][dplyr::dplyr] verbs to the factors
-#'   of a [tbl_ord]. The raw verbs are not defined for tbl_ords; instead, each
-#'   verb has two analogues, corresponding to the two matrix factors. They each
-#'   rely on a common workhorse function, which takes the composition of the
+#'   of a [tbl_ord].
+#'
+#' @description The raw verbs are not defined for tbl_ords; instead, each verb
+#'   has two analogues, corresponding to the two matrix factors. They each rely
+#'   on a common workhorse function, which takes the composition of the
 #'   **dplyr** verb with `annotation_*`, applied to the factor, removes any
 #'   variables corresponding to coordinates or already annotated, and only then
 #'   assigns it as the new `"*_annotation"` attribute of `.data` (see
-#'   [annotation]).
+#'   [annotation]). Note that these functions are not generics and so cannot be
+#'   extended to other classes.
 #'   
 
 #' @name dplyr-verbs
@@ -20,6 +23,8 @@
 #'   [dplyr::select()].
 #' @template param-elements
 #' @template param-matrix
+#' @return A tbl_ord; the wrapped model is unchanged.
+#' @example inst/examples/ex-dplyr-verbs-iris-lda.r
 
 pull_factor <- function(.data, var = -1, .matrix) {
   crd <- as_tibble(get_factor(.data, .matrix = .matrix))

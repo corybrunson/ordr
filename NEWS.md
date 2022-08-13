@@ -6,6 +6,10 @@ In addition to minor changes, the following substantive changes are made from v0
 
 A new list tidier for `cancor()` output is introduced.
 
+## negation
+
+Tools to negate a subset of artificial dimensions, adapted from the sandboxed set of alignment tools, are provided.
+
 ## ggbiplot
 
 The logical `prediction` parameter is replaced with the character-valued `axis.type`, based on the `ax.type` parameter used in **UBbipl** (Gower, Lubbe, & le Roux, 2011).

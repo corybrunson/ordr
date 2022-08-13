@@ -25,7 +25,7 @@
 )
 }
 \arguments{
-\item{x}{A \link{tbl_ord} object.}
+\item{x}{A \link{tbl_ord}.}
 
 \item{width}{Width of text output to generate. This defaults to \code{NULL}, which
 means use the \code{width} \link[pillar:pillar_options]{option}.}
@@ -44,6 +44,11 @@ The previously defined \code{n_extra} argument is soft-deprecated.}
 
 \item{max_footer_lines}{Maximum number of footer lines. If \code{NULL},
 the \code{max_footer_lines} \link[pillar:pillar_options]{option} is used.}
+}
+\value{
+The \code{format()} method returns a vector of strings that are more
+elegantly printed by the \code{print()} method, which itself returns the tbl_ord
+invisibly.
 }
 \description{
 These methods of \code{\link[base:format]{base::format()}} and \code{\link[base:print]{base::print()}} render a

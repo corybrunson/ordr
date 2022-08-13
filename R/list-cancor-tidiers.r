@@ -9,6 +9,8 @@
 #' [cancor()] returns a named list of 5 elements. These tidiers rely on this
 #' list structure to organize the model output into a tibble.
 #'
+#' @name cancor_tidiers
+#' @aliases tidy.cancor
 #' @param x A list with components `cor`, `xcoef`, `ycoef`, `xcenter`, and
 #'   `ycenter` as returned by [stats::cancor()].
 #' @param matrix Character specifying which list element should be tidied,
@@ -22,11 +24,8 @@
 #'
 #'   - `"cor"`: returns information about the canonical correlations.
 #' @param ... Additional arguments allowed by generics; currently ignored.
-#'
+#' @return A [tibble][tibble::tibble].
 #' @example inst/examples/ex-list-cancor-tidiers-savings.r
-
-#' @name cancor_tidiers
-#' @aliases tidy.cancor
 #' @family list tidiers
 #' @seealso [generics::tidy()] [stats::cancor()]
 NULL

@@ -68,13 +68,45 @@ supplementary element type defined by the specific class methods (e.g.
 \code{"score"} for 'factanal', 'lda_ord', and 'cancord_ord' and \code{"intraset"} and
 \code{"interset"} for 'cancor_ord').}
 }
+\value{
+A tbl_ord; the wrapped model is unchanged.
+}
 \description{
 These functions adapt \link[dplyr:dplyr-package]{dplyr} verbs to the factors
-of a \link{tbl_ord}. The raw verbs are not defined for tbl_ords; instead, each
-verb has two analogues, corresponding to the two matrix factors. They each
-rely on a common workhorse function, which takes the composition of the
+of a \link{tbl_ord}.
+
+The raw verbs are not defined for tbl_ords; instead, each verb
+has two analogues, corresponding to the two matrix factors. They each rely
+on a common workhorse function, which takes the composition of the
 \strong{dplyr} verb with \verb{annotation_*}, applied to the factor, removes any
 variables corresponding to coordinates or already annotated, and only then
 assigns it as the new \code{"*_annotation"} attribute of \code{.data} (see
-\link{annotation}).
+\link{annotation}). Note that these functions are not generics and so cannot be
+extended to other classes.
+}
+\examples{
+# illustrative ordination: LDA of iris data
+(iris_lda <- ordinate(iris, 1:4, lda_ord, grouping = iris$Species))
+
+# extract a coordinate or annotation
+head(pull_rows(iris_lda, Species))
+pull_cols(iris_lda, LD2)
+
+# rename an annotation
+rename_cols(iris_lda, species = .name)
+
+# select annotations
+select_rows(iris_lda, species = .name, .element)
+
+# create, modify, and delete annotations
+mutate_cols(iris_lda, vec.length = sqrt(LD1^2 + LD2^2))
+transmute_cols(iris_lda, vec.length = sqrt(LD1^2 + LD2^2))
+
+# bind data frames of annotations
+iris_medians <-
+  stats::aggregate(iris[, 1:4], median, by = iris[, 5, drop = FALSE])
+iris_lda \%>\%
+  # retain '.element' in order to match by `elements`
+  select_rows(.element) \%>\%
+  cbind_rows(iris_medians, elements = "active")
 }

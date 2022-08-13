@@ -28,6 +28,7 @@ reference:
   - '`augmentation`'
   - '`tidiers`'
   - '`annotation`'
+  - '`negation`'
   - '`conference`'
   - '`supplementation`'
   - '`tbl_ord`'

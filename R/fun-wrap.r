@@ -42,6 +42,8 @@
 #' @param scores Logical; whether to return canonical scores and structure
 #'   correlations.
 #' @example inst/examples/ex-fun-wrap-glass.r
+#' @return Objects slightly modified from the outputs of the original functions,
+#'   with new '*-ord' classes.
 NULL
 
 #' @rdname wrap-ord

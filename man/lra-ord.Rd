@@ -3,9 +3,28 @@
 \name{lra-ord}
 \alias{lra-ord}
 \alias{lra}
+\alias{print.lra}
+\alias{screeplot.lra}
+\alias{biplot.lra}
+\alias{plot.lra}
 \title{Log-ratio analysis}
 \usage{
 lra(x, compositional = FALSE, weighted = TRUE)
+
+\method{print}{lra}(x, nd = length(x$sv), n = 6L, ...)
+
+\method{screeplot}{lra}(x, main = deparse1(substitute(x)), ...)
+
+\method{biplot}{lra}(
+  x,
+  choices = c(1L, 2L),
+  scale = c(0, 0),
+  main = deparse1(substitute(x)),
+  var.axes = FALSE,
+  ...
+)
+
+\method{plot}{lra}(x, main = deparse1(substitute(x)), ...)
 }
 \arguments{
 \item{x}{A numeric matrix or rectangular data set.}
@@ -13,6 +32,20 @@ lra(x, compositional = FALSE, weighted = TRUE)
 \item{compositional}{Logical; whether to normalize rows of \code{x} to sum to 1.}
 
 \item{weighted}{Logical; whether to weight rows and columns by their sums.}
+
+\item{nd}{Integer; number of shared dimensions to include in print.}
+
+\item{n}{Integer; number of rows of each factor to print.}
+
+\item{main, var.axes, ...}{Parameters passed to other plotting methods (in the
+case of \code{main}, after being \code{\link[=force]{force()}}d.}
+
+\item{choices}{Integer; length-2 vector specifying the components to plot.}
+
+\item{scale}{Numeric; values between 0 and 1 that control how inertia is
+conferred unto the points: Row (\code{i = 1L}) and column (\code{i = 2L}) coordinates
+are scaled by \code{sv ^ scale[[i]]}. If a single value \code{scale} is passed, it is
+assigned to the rows while \code{1 - scale} is assigned to the columns.}
 }
 \value{
 Given an \eqn{n * p} data matrix and setting \eqn{r=min(n,p)},
@@ -23,6 +56,8 @@ Given an \eqn{n * p} data matrix and setting \eqn{r=min(n,p)},
 of row standard coordinates.}
 \item{column.coords}{The \eqn{p * (r-1)} matrix
 of column standard coordinates.}
+\item{row.weights}{The weights used to scale the row coordinates.}
+\item{column.weights}{The weights used to scale the column coordinates.}
 }
 }
 \description{
@@ -61,47 +96,13 @@ arrest_logratios <- log(arrest_ratios)
 arrest_logratios[state_examples, ]
 
 # non-compositional log-ratio analysis
-(arrests_lra <- lra(USArrests[, c(1, 2, 4)]))
-(arrests_lra_ord <- augment_ord(as_tbl_ord(arrests_lra)))
-
-# state abbreviations
-state_abbr <- data.frame(state = state.name, abbr = state.abb)
-# row-principal biplot
-arrests_lra_ord \%>\%
-  left_join_rows(state_abbr, by = c(".name" = "state")) \%>\%
-  confer_inertia("rows") \%>\%
-  ggbiplot(aes(color = .matrix), sec.axes = "cols", scale.factor = 1/20) +
-  scale_color_manual(values = c("tomato4", "turquoise4")) +
-  theme_bw() +
-  geom_rows_text(aes(label = abbr), size = 3, alpha = .75) +
-  geom_cols_polygon(fill = NA, linetype = "dashed") +
-  geom_cols_text(aes(label = .name), fontface = "bold") +
-  ggtitle(
-    "Non-compositional LRA of violent crime arrest rates",
-    "United States, 1973"
-  ) +
-  expand_limits(x = c(-.35)) +
-  guides(color = "none")
+(arrests_lra <- lra(USArrests[, arrests]))
+screeplot(arrests_lra)
+biplot(arrests_lra, scale = c(1, 0))
 
 # compositional log-ratio analysis
-(arrests_lra <- lra(USArrests[, c(1, 2, 4)], compositional = TRUE))
-(arrests_lra_ord <- augment_ord(as_tbl_ord(arrests_lra)))
-# row-principal biplot
-arrests_lra_ord \%>\%
-  left_join_rows(state_abbr, by = c(".name" = "state")) \%>\%
-  confer_inertia("rows") \%>\%
-  ggbiplot(aes(color = .matrix), sec.axes = "cols", scale.factor = 1/20) +
-  scale_color_manual(values = c("tomato4", "turquoise4")) +
-  theme_bw() +
-  geom_rows_text(aes(label = abbr), size = 3, alpha = .75) +
-  geom_cols_polygon(fill = NA, linetype = "dashed") +
-  geom_cols_text(aes(label = .name), fontface = "bold") +
-  ggtitle(
-    "Compositional LRA of violent crime arrest rates",
-    "United States, 1973"
-  ) +
-  expand_limits(x = c(-.4)) +
-  guides(color = "none")
+(arrests_lra <- lra(USArrests[, arrests], compositional = TRUE))
+biplot(arrests_lra, scale = c(1, 0))
 }
 \references{
 Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:

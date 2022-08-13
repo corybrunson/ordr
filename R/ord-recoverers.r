@@ -31,6 +31,35 @@
 #' @param ... Additional arguments from [base::as.matrix()]; ignored.
 #' @template param-matrix
 #' @template param-elements
+
+#' @return The `recover_*()` functions are generics whose methods return base R
+#'   objects retrieved from the model wrapped in the 'tbl_ord' class:
+
+#'   - `rows`: the row matrix as stored in the model
+
+#'   - `cols`: the column matrix as stored in the model
+
+#'   - `inertia`: the vector of eigen-values or squared singular values,
+#'     often known by other names depending on the model
+
+#'   - `coord`: names for the artificial axes, from the model if available
+
+#' The `get_*()` functions (which are not generics) return modifications of
+#' these objects:
+
+#'   - `rows`: the recovered rows,
+#'     adjusted according to any negation of axes or conference of inertia
+
+#'   - `cols`: the recovered columns,
+#'     adjusted according to any negation of axes or conference of inertia
+
+#'   - `inertia`: the recovered inertia, named by the recovered coordinates
+
+#'   - `coord`: the recovered coordinates (unmodified)
+
+#' `dim()` returns the dimensions of the decomposed matrix, i.e. the numbers of
+#' rows of `recover_rows()` and of `recover_cols()`.
+
 #' @family generic recoverers
 #' @example inst/examples/ex-ord-recoverers.r
 NULL
@@ -94,6 +123,13 @@ get_rows <- function(x, elements = "all") {
     # -+- need to recognize supplementary subtypes -+-
     recover_supp_rows(x)
   }
+  # ensure correct signs
+  if (! is.null(attr(x, "negate"))) {
+    n <- diag(get_negation(x))
+    dimnames(n) <- rep(list(recover_coord(x)), 2L)
+    u <- u %*% n
+  }
+  # ensure correct distribution of inertia
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     i <- recover_inertia(x)
@@ -122,6 +158,13 @@ get_cols <- function(x, elements = "all") {
     # -+- need to recognize supplementary subtypes -+-
     recover_supp_cols(x)
   }
+  # ensure correct signs
+  if (! is.null(attr(x, "negate"))) {
+    n <- diag(get_negation(x))
+    dimnames(n) <- rep(list(recover_coord(x)), 2L)
+    v <- v %*% n
+  }
+  # ensure correct distribution of inertia
   if (! is.null(attr(x, "confer"))) {
     p <- get_conference(x) - recover_conference(x)
     i <- recover_inertia(x)
@@ -199,5 +242,5 @@ get_inertia <- function(x) {
 #' @rdname recoverers
 #' @export
 dim.tbl_ord <- function(x) {
-  c(nrow(get_rows(x)), nrow(get_cols(x)))
+  c(nrow(recover_rows(x)), nrow(recover_cols(x)))
 }

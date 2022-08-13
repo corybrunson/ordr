@@ -24,6 +24,11 @@ indicators for one or both matrices in a matrix decomposition used for
 ordination. The standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for
 both).}
 }
+\value{
+The \verb{recover_aug_*()} functions return \link[tibble:tibble]{tibble}s
+having the same numbers of rows as \verb{recover_*()}. \code{augment_ord()} returns
+an augmented tbl_ord with the wrapped model unchanged.
+}
 \description{
 These functions return data associated with the cases,
 variables, and coordinates of an ordination object, and attach it to the

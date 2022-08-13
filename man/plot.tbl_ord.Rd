@@ -50,18 +50,8 @@ haireye_ca <- MASS::corresp(rowSums(HairEyeColor, dims = 2L), nf = 2L)
 haireye_ca_ord <- as_tbl_ord(haireye_ca)
 plot(haireye_ca)
 plot(haireye_ca_ord)
-#screeplot(haireye_ca)
+# no `screeplot()` method for class 'correspondence'
 screeplot(haireye_ca_ord)
 biplot(haireye_ca)
 biplot(haireye_ca_ord)
-
-# class 'lra'
-arrests_lra <- lra(subset(USArrests, select = -UrbanPop))
-arrests_lra_ord <- as_tbl_ord(arrests_lra)
-#plot(arrests_lra)
-plot(arrests_lra_ord)
-#screeplot(arrests_lra)
-screeplot(arrests_lra_ord)
-#biplot(arrests_lra)
-biplot(arrests_lra_ord, var.axes = FALSE)
 }

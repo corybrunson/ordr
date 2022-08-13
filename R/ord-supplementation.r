@@ -19,6 +19,8 @@
 #' @name supplementation
 #' @include ord-augmentation.r
 #' @inheritParams recoverers
+#' @return Matrices having the same numbers of columns as returned by
+#'   [recover_rows()] and [recover_cols()], or else `NULL`.
 #' @family generic recoverers
 NULL
 

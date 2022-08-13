@@ -19,6 +19,10 @@ recover_supp_cols(x)
 \arguments{
 \item{x}{An object of class '\link{tbl_ord}'.}
 }
+\value{
+Matrices having the same numbers of columns as returned by
+\code{\link[=recover_rows]{recover_rows()}} and \code{\link[=recover_cols]{recover_cols()}}, or else \code{NULL}.
+}
 \description{
 These functions attach supplementary rows or columns to an
 ordination object.

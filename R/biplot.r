@@ -74,10 +74,11 @@
 #'   factors.
 #' @param ... Additional arguments passed to [ggplot2::fortify()]; see
 #'   [fortify.tbl_ord()].
+#' @return A ggplot object.
 #' @example inst/examples/ex-ggbiplot-secaxis-iris.r
 #' @example inst/examples/ex-ggbiplot-lm-mtcars.r
 #' @example inst/examples/ex-ggbiplot-prediction-iris.r
-#' @seealso [ggplot2::ggplot2()], on which `ggbiplot()` is built.
+#' @seealso [ggplot2::ggplot2()], on which `ggbiplot()` is built
 
 #' @rdname ggbiplot
 #' @export

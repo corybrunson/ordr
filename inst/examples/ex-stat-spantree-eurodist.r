@@ -8,8 +8,8 @@ eurodist %>%
 # biplot with minimal spanning tree based on full-dimensional distances
 # (as implemented in {mlpack})
 euro_mds %>%
+  negate_ord("PCo2") %>%
   ggbiplot() +
-  scale_y_reverse() +
   stat_cols_spantree(
     ord_aes(euro_mds), check.aes = FALSE, engine = "mlpack",
     alpha = .5, linetype = "dotted"

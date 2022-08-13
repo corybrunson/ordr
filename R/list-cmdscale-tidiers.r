@@ -12,6 +12,8 @@
 #' will be `NULL` if their parameters are not set to `TRUE`). These tidiers rely
 #' on this list structure to organize the model output into a tibble.
 #' 
+#' @name cmdscale_tidiers
+#' @aliases tidy.cmdscale glance.cmdscale
 #' @param x A list with components `points`, `eig`, `x`, `ac`, and `GOF` as
 #'   returned by [stats::cmdscale()].
 #' @param matrix Character specifying which list element should be tidied,
@@ -25,11 +27,8 @@
 #'
 #'   - `"eig"`: returns information about the eigenvalues.
 #' @param ... Additional arguments allowed by generics; currently ignored.
-#'
+#' @return A [tibble][tibble::tibble].
 #' @example inst/examples/ex-list-cmdscale-tidiers-cities.r
-
-#' @name cmdscale_tidiers
-#' @aliases tidy.cmdscale glance.cmdscale
 #' @family list tidiers
 #' @seealso [generics::tidy()] [generics::glance()] [stats::cmdscale()]
 NULL
