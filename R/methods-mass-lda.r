@@ -201,7 +201,8 @@ recover_supp_rows.lda <- function(x) {
   } else attr(x, "x")
   if (inherits(olddata, "try-error") |
       (! is.matrix(olddata) & ! is.data.frame(olddata))) {
-    warning("Could not locate data used to fit '", deparse(substitute(x)), "'.")
+    # -+- if warning is printed, be sure to change it for class 'lda_ord' -+-
+    #warning("Could not locate data passed to `MASS::lda()`.")
     return(`colnames<-`(matrix(NA_real_, nrow = x$N, ncol = 2L), get_coord(x)))
   }
   centroid <- colSums(x$prior * x$means)

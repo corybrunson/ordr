@@ -68,6 +68,42 @@ head(get_rows(arrests_lra))
 get_cols(arrests_lra)
 # initially, inertia is conferred on neither factor
 get_conference(arrests_lra)
+
+# row-principal biplot
+arrests_lra \%>\%
+  confer_inertia("rows") \%>\%
+  ggbiplot(aes(color = .matrix), sec.axes = "cols", scale.factor = 1/20) +
+  scale_color_manual(values = c("tomato4", "turquoise4")) +
+  theme_bw() +
+  geom_rows_text(aes(label = .abb), size = 3, alpha = .75) +
+  geom_cols_polygon(fill = NA, linetype = "dashed") +
+  geom_cols_text(aes(label = .name), fontface = "bold") +
+  ggtitle(
+    "Non-compositional LRA of violent crime arrest rates",
+    "United States, 1973"
+  ) +
+  expand_limits(x = c(-.35)) +
+  guides(color = "none")
+
+# compositional log-ratio analysis
+(arrests_lra <- lra(USArrests[, c(1, 2, 4)], compositional = TRUE))
+(arrests_lra <- augment_ord(as_tbl_ord(arrests_lra)))
+# row-principal biplot
+arrests_lra \%>\%
+  left_join_rows(state, by = ".name") \%>\%
+  confer_inertia("rows") \%>\%
+  ggbiplot(aes(color = .matrix), sec.axes = "cols", scale.factor = 1/20) +
+  scale_color_manual(values = c("tomato4", "turquoise4")) +
+  theme_bw() +
+  geom_rows_text(aes(label = .abb), size = 3, alpha = .75) +
+  geom_cols_polygon(fill = NA, linetype = "dashed") +
+  geom_cols_text(aes(label = .name), fontface = "bold") +
+  ggtitle(
+    "Compositional LRA of violent crime arrest rates",
+    "United States, 1973"
+  ) +
+  expand_limits(x = c(-.4)) +
+  guides(color = "none")
 }
 \seealso{
 Other methods for singular value decomposition-based techniques: 

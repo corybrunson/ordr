@@ -137,8 +137,8 @@ only the first \code{dimen} discriminant components are used (except for
 }
 }
 \value{
-An object of class 'lda_ord' equivalent in structure to one of class
-'lda' except for up to three attributes:
+Output from \code{\link[MASS:lda]{MASS::lda()}} with an additional preceding \link{class}
+'lda_ord' and up to three \link{attributes}:
 \itemize{
 \item the input data \code{x}, if \code{ret.x = TRUE}
 \item the class assignments \code{grouping}, if \code{ret.grouping = TRUE}
