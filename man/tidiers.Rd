@@ -48,9 +48,24 @@ of the \link{augmentation} methods:
 summarizes information about model components, which here are the
 artificial coordinates created by ordinations. The output can be passed to
 \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} to generate scree plots.
+The returned columns are
+\itemize{
+\item \code{.name}: the name of the coordinate
+\item \code{.inertia}: the multidimensional variance
+\item \code{.prop_var}: the proportion of inertia
+\item \code{.quality}: the cumulative proportion of variance
+}
 \item The \code{\link[generics:glance]{generics::glance()}} method
 reports information about the entire model, here always treated as one of a
 broader class of ordination models.
+The returned columns are
+\itemize{
+\item \code{rank}: the rank of the ordination model, i.e. the number of ordinates
+\item \code{n.row},\code{n.col}: the dimensions of the decomposed matrix
+\item \code{inertia}: the total inertia in the ordination
+\item \verb{prop.var.*}: the proportion of variance in the first 2 ordinates
+\item \code{class}: the class of the wrapped model object
+}
 \item The \code{\link[ggplot2:fortify]{ggplot2::fortify()}} method
 augments and collapses row and/or column data, depending on \code{.matrix} and
 \code{.element}, into a single tibble, in preparation for \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
