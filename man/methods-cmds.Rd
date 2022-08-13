@@ -60,9 +60,8 @@ get_cols(usa_mds)
 
 # reorient biplot to conventional compass
 usa_mds \%>\%
+  negate_ord(c(1, 2)) \%>\%
   ggbiplot() +
-  scale_x_reverse() +
-  scale_y_reverse() +
   geom_cols_text(aes(label = .name), size = 3) +
   ggtitle("MDS biplot of distances between U.S. cities")
 }
