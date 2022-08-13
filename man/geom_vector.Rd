@@ -104,7 +104,7 @@ iris_pca \%>\%
   geom_unit_circle() +
   geom_rows_point(alpha = .5) +
   geom_cols_vector(color = "#444444") +
-  geom_cols_text_radiate(aes(label = .name), color = "#444444") +
+  geom_cols_text_radiate(aes(label = name), color = "#444444") +
   ggtitle("Row-principal unscaled PCA biplot of Anderson iris measurements") +
   expand_limits(y = c(NA, 2))
 }

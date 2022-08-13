@@ -14,7 +14,7 @@ euro_mds %>%
     ord_aes(euro_mds), check.aes = FALSE, engine = "mlpack",
     alpha = .5, linetype = "dotted"
   ) +
-  geom_cols_text(aes(label = .name), size = 3) +
+  geom_cols_text(aes(label = name), size = 3) +
   ggtitle(
     "MDS biplot of road distances between European cities",
     "Dotted segments constitute the minimal spanning tree"

@@ -38,24 +38,24 @@ recover_coord.kmeans <- function(x) {
 #' @rdname methods-kmeans
 #' @export
 recover_aug_rows.kmeans <- function(x) {
-  .name <- names(x$cluster)
-  res <- if (is.null(.name)) {
+  name <- names(x$cluster)
+  res <- if (is.null(name)) {
     tibble_pole(length(x$cluster))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
-  res$.cluster <- factor(unname(x$cluster))
+  res$cluster <- factor(unname(x$cluster))
   res
 }
 
 #' @rdname methods-kmeans
 #' @export
 recover_aug_cols.kmeans <- function(x) {
-  .name <- colnames(x$centers)
-  res <- if (is.null(.name)) {
+  name <- colnames(x$centers)
+  res <- if (is.null(name)) {
     tibble_pole(ncol(x$centers))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   res
 }

@@ -12,7 +12,7 @@ tidy(iris_pca) %>%
 
 # use `fortify()` to prepare either matrix factor for `ggplot()`
 fortify(iris_pca, .matrix = "V") %>%
-  ggplot(aes(x = .name, y = PC1)) +
+  ggplot(aes(x = name, y = PC1)) +
   geom_col() +
   coord_flip() +
   labs(x = "Measurement")

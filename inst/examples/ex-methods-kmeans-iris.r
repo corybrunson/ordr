@@ -34,10 +34,8 @@ iris_km_ord %>%
 # discriminate between clusters 2 and 3
 iris_km_ord %>%
   ggbiplot(aes(x = `2`, y = `3`), color = factor(.cluster)) +
-  geom_jitter(stat = "rows", aes(shape = .cluster), width = .2, height = .2) +
-  #geom_cols_vector(aes(color = `1`)) +
-  #geom_cols_text_radiate(aes(label = .name), size = 3) +
-  geom_cols_axis(aes(color = `1`, label = .name),
+  geom_jitter(stat = "rows", aes(shape = cluster), width = .2, height = .2) +
+  geom_cols_axis(aes(color = `1`, label = name),
                  text_size = 2, text_dodge = .1,
                  label_size = 3, label_alpha = .5) +
   scale_x_continuous(expand = expansion(mult = .8)) +

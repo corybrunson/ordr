@@ -259,7 +259,7 @@ text(corr.coord, labels = rownames(corr))
 eigen_ord(corr) %>%
   as_tbl_ord() %>%
   augment_ord() %>%
-  mutate_rows(metric = stringr::str_remove(.name, "rk_")) %>%
+  mutate_rows(metric = stringr::str_remove(name, "rk_")) %>%
   confer_inertia(1) ->
   c_eigen
 c_eigen %>%
@@ -285,7 +285,7 @@ This last point means that observations made from a correlation monoplot can be 
 ```{r}
 c_eigen %>%
   fortify(.matrix = "rows") %>%
-  select(-.name, -.matrix)
+  select(-name, -.matrix)
 ```
 
 Based on the third principal coordinates, the reputational rankings are aligned, as we knew already from the correlation matrix and heatmap. What's a bit more interesting is that this component seems to separate these two rankings from those having to do with faculty citation rates and the international compositions of the faculty and student body. Based on the decomposition of inertia, this third principal coordinate is nearly as important as the second! It therefore makes sense to plot the two together, in effect examining the residuals after regressing out the first principal coordinate:

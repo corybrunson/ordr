@@ -174,7 +174,7 @@ haireye_ca_ord %>%
   augment_ord() %>%
   fortify() %>%
   transform(feature = ifelse(.matrix == "rows", "Hair", "Eye")) %>%
-  ggbiplot(aes(color = feature, shape = feature, label = .name), clip = "off") +
+  ggbiplot(aes(color = feature, shape = feature, label = name), clip = "off") +
   theme_biplot() +
   geom_origin() +
   geom_rows_point() +

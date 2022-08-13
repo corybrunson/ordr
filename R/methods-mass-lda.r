@@ -84,12 +84,12 @@ recover_aug_rows.lda <- function(x) {
   res <- if (is.null(rownames(x$means))) {
     tibble_pole(nrow(x$means))
   } else {
-    tibble(.name = rownames(x$means))
+    tibble(name = rownames(x$means))
   }
   res <- transform(
     res,
-    .prior = x$prior,
-    .counts = x$counts
+    prior = x$prior,
+    counts = x$counts
   )
   # discriminant scores as supplementary points
   olddata <- try(recover_olddata_lda(x), silent = TRUE)
@@ -103,16 +103,16 @@ recover_aug_rows.lda <- function(x) {
         matrix(NA_real_, nrow = x$N, ncol = 2L), get_coord(x)
       ))
     } else {
-      tibble(.grouping = grouping)
+      tibble(grouping = grouping)
     }
   } else {
     if (inherits(grouping, "try-error")) {
-      tibble(.name = rownames(olddata))
+      tibble(name = rownames(olddata))
     } else {
-      tibble(.name = rownames(olddata), .grouping = grouping)
+      tibble(name = rownames(olddata), grouping = grouping)
     }
   }
-  if (".grouping" %in% names(res_sup)) res$.grouping <- res$.name
+  if ("grouping" %in% names(res_sup)) res$grouping <- res$name
   res$.element <- "active"
   res_sup$.element <- "score"
   as_tibble(dplyr::bind_rows(res, res_sup))
@@ -124,12 +124,12 @@ recover_aug_rows.lda_ord <- function(x) {
   res <- if (is.null(rownames(x$means))) {
     tibble_pole(nrow(x$means))
   } else {
-    tibble(.name = rownames(x$means))
+    tibble(name = rownames(x$means))
   }
   res <- transform(
     res,
-    .prior = x$prior,
-    .counts = x$counts
+    prior = x$prior,
+    counts = x$counts
   )
   # discriminant scores as supplementary points
   olddata <- if (is.null(attr(x, "x"))) {
@@ -148,16 +148,16 @@ recover_aug_rows.lda_ord <- function(x) {
         matrix(NA_real_, nrow = x$N, ncol = 2L), get_coord(x)
       ))
     } else {
-      tibble(.grouping = grouping)
+      tibble(grouping = grouping)
     }
   } else {
     if (inherits(grouping, "try-error")) {
-      tibble(.name = rownames(olddata))
+      tibble(name = rownames(olddata))
     } else {
-      tibble(.name = rownames(olddata), .grouping = grouping)
+      tibble(name = rownames(olddata), grouping = grouping)
     }
   }
-  if (".grouping" %in% names(res_sup)) res$.grouping <- res$.name
+  if ("grouping" %in% names(res_sup)) res$grouping <- res$name
   res$.element <- "active"
   res_sup$.element <- "score"
   as_tibble(dplyr::bind_rows(res, res_sup))
@@ -166,11 +166,11 @@ recover_aug_rows.lda_ord <- function(x) {
 #' @rdname methods-lda
 #' @export
 recover_aug_cols.lda <- function(x) {
-  .name <- rownames(x$scaling)
-  res <- if (is.null(.name)) {
+  name <- rownames(x$scaling)
+  res <- if (is.null(name)) {
     tibble_pole(nrow(x$scaling))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   res$.element <- "active"
   res

@@ -115,7 +115,7 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_ellipse(aes(color = Species), alpha = .5, level = .99) +
   geom_cols_vector() +
-  geom_cols_text_radiate(aes(label = .name)) +
+  geom_cols_text_radiate(aes(label = name)) +
   expand_limits(y = c(-3.5, NA)) +
   ggtitle("PCA of Anderson's iris measurements",
           "99% confidence ellipses; variables use top & right axes")
@@ -135,7 +135,7 @@ ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
     aes(color = Species, shape = Species),
     size = 5, alpha = .5, fun.data = mean_se
   ) +
-  geom_cols_axis(aes(label = .name, center = .center, scale = .scale)) +
+  geom_cols_axis(aes(label = name, center = center, scale = scale)) +
   ggtitle("Predictive biplot of Anderson's iris measurements",
           "Project a marker onto an axis to approximate its measurement")
 aggregate(iris[, 1:4], by = iris[, "Species", drop = FALSE], FUN = mean)

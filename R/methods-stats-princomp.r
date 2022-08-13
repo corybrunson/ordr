@@ -49,26 +49,26 @@ recover_conference.princomp <- function(x) {
 #' @rdname methods-princomp
 #' @export
 recover_aug_rows.princomp <- function(x) {
-  .name <- rownames(x[["scores"]])
-  if (is.null(.name)) {
+  name <- rownames(x[["scores"]])
+  if (is.null(name)) {
     tibble_pole(nrow(x[["scores"]]))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
 }
 
 #' @rdname methods-princomp
 #' @export
 recover_aug_cols.princomp <- function(x) {
-  .name <- rownames(x[["loadings"]])
-  res <- if (is.null(.name)) {
+  name <- rownames(x[["loadings"]])
+  res <- if (is.null(name)) {
     tibble_pole(nrow(x[["loadings"]]))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   bind_cols(res, tibble(
-    .center = x[["center"]],
-    .scale = x[["scale"]]
+    center = x[["center"]],
+    scale = x[["scale"]]
   ))
 }
 

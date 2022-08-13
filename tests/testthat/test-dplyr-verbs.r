@@ -2,7 +2,7 @@
 pca <- augment_ord(as_tbl_ord(prcomp(iris[, -5])))
 
 test_that("`pull_*()` returns a vector", {
-  expect_equal(pull_cols(pca, .name), names(iris)[-5])
+  expect_equal(pull_cols(pca, name), names(iris)[-5])
 })
 
 test_that("`cbind_*()` appends a column only of the correct length", {
@@ -26,8 +26,8 @@ pca <- cbind_rows(pca, iris[, 5, drop = FALSE])
 test_that("`rename_*()` applies to both augmented and annotated variables", {
   expect_named(annotation_rows(rename_rows(pca, species = Species)), "species")
   expect_named(
-    annotation_cols(rename_cols(pca, measure = .name)),
-    c("measure", ".center")
+    annotation_cols(rename_cols(pca, measure = name)),
+    c("measure", "center")
   )
 })
 
@@ -50,8 +50,8 @@ test_that("`mutate_*()` recognizes but does not change shared coordinates", {
     "Species"
   )
   expect_named(
-    annotation_cols(mutate_cols(pca, diff = PC1 - .center)),
-    c(".name", ".center", "diff")
+    annotation_cols(mutate_cols(pca, diff = PC1 - center)),
+    c("name", "center", "diff")
   )
 })
 
@@ -60,7 +60,7 @@ test_that("`transmute_*()` recognizes but does not change shared coordinates", {
     annotation_rows(transmute_rows(pca, species = toupper(Species))),
     "species"
   )
-  expect_named(annotation_cols(transmute_cols(pca, diff = PC1 - .center)), "diff")
+  expect_named(annotation_cols(transmute_cols(pca, diff = PC1 - center)), "diff")
 })
 
 means <- aggregate(iris[, -5], iris[, 5, drop = FALSE], mean)

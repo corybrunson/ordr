@@ -51,22 +51,22 @@ recover_coord.correspondence <- function(x) {
 #' @rdname methods-correspondence
 #' @export
 recover_aug_rows.correspondence <- function(x) {
-  .name <- rownames(as.matrix(x$rscore))
-  if (is.null(.name)) {
+  name <- rownames(as.matrix(x$rscore))
+  if (is.null(name)) {
     tibble_pole(nrow(as.matrix(x$rscore)))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
 }
 
 #' @rdname methods-correspondence
 #' @export
 recover_aug_cols.correspondence <- function(x) {
-  .name <- rownames(as.matrix(x$cscore))
-  if (is.null(.name)) {
+  name <- rownames(as.matrix(x$cscore))
+  if (is.null(name)) {
     tibble_pole(nrow(as.matrix(x$cscore)))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
 }
 

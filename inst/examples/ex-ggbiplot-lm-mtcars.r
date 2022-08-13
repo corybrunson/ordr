@@ -20,7 +20,7 @@ lm(mtcars_perf ~ get_rows(mtcars_specs_pca)) %>%
   augment_ord() %>%
   print() -> mtcars_pca_lm
 # regression biplot
-ggbiplot(mtcars_specs_pca, aes(label = .name),
+ggbiplot(mtcars_specs_pca, aes(label = name),
          sec.axes = "rows", scale.factor = .5) +
   theme_minimal() +
   geom_rows_text(size = 3) +
@@ -58,7 +58,7 @@ mtcars %>%
   augment_ord() %>%
   print() -> mtcars_specs_cmds_ord
 # regression biplot
-ggbiplot(mtcars_specs_cmds_ord, aes(label = .name),
+ggbiplot(mtcars_specs_cmds_ord, aes(label = name),
          sec.axes = "rows", scale.factor = 3) +
   theme_minimal() +
   geom_rows_text(size = 3) +

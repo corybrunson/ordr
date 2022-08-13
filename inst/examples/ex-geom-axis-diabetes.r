@@ -16,8 +16,8 @@ diabetes_lda %>%
   confer_inertia(1) %>%
   ggbiplot() +
   theme_bw() + theme_biplot() +
-  geom_rows_point(aes(shape = .grouping, size = discriminant), alpha = .5) +
-  geom_cols_axis(aes(label = .name), color = "#888888", num = 8L,
+  geom_rows_point(aes(shape = grouping, size = discriminant), alpha = .5) +
+  geom_cols_axis(aes(label = name), color = "#888888", num = 8L,
                  text_size = 2.5, label_dodge = .02) +
   ggtitle(
     "LDA of Reaven & Miller diabetes groups",
@@ -40,7 +40,7 @@ diabetes_lda %>%
   confer_inertia(.5) %>%
   ggbiplot() +
   theme_bw() + theme_biplot() +
-  geom_rows_point(aes(shape = .grouping, alpha = discriminant)) +
+  geom_rows_point(aes(shape = grouping, alpha = discriminant)) +
   geom_cols_axis(color = "#888888", num = 8L,
                  text_size = 2.5, text_dodge = .025) +
   ggtitle(

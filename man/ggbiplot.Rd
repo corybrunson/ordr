@@ -171,7 +171,7 @@ lm(mtcars_perf ~ get_rows(mtcars_specs_pca)) \%>\%
   augment_ord() \%>\%
   print() -> mtcars_pca_lm
 # regression biplot
-ggbiplot(mtcars_specs_pca, aes(label = .name),
+ggbiplot(mtcars_specs_pca, aes(label = name),
          sec.axes = "rows", scale.factor = .5) +
   theme_minimal() +
   geom_rows_text(size = 3) +
@@ -209,7 +209,7 @@ mtcars \%>\%
   augment_ord() \%>\%
   print() -> mtcars_specs_cmds_ord
 # regression biplot
-ggbiplot(mtcars_specs_cmds_ord, aes(label = .name),
+ggbiplot(mtcars_specs_cmds_ord, aes(label = name),
          sec.axes = "rows", scale.factor = 3) +
   theme_minimal() +
   geom_rows_text(size = 3) +
@@ -225,7 +225,7 @@ iris_pca \%>\%
   ggbiplot() +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  geom_cols_axis(aes(label = .name, center = .center, scale = .scale)) +
+  geom_cols_axis(aes(label = name, center = center, scale = scale)) +
   geom_rows_point(aes(color = Species), alpha = .5) +
   ggtitle("Interpolative biplot of Anderson iris measurements")
 
@@ -235,7 +235,7 @@ iris_pca \%>\%
   ggbiplot(axis.type = "predictive") +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  geom_cols_axis(aes(label = .name, center = .center, scale = .scale)) +
+  geom_cols_axis(aes(label = name, center = center, scale = scale)) +
   geom_rows_point(aes(color = Species), alpha = .5) +
   ggtitle("Predictive biplot of Anderson iris measurements")
 }

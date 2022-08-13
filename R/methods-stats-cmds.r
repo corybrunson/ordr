@@ -52,11 +52,11 @@ recover_conference.cmds_ord <- function(x) {
 #' @rdname methods-cmds
 #' @export
 recover_aug_rows.cmds_ord <- function(x) {
-  .name <- rownames(x$points)
-  res <- if (is.null(.name)) {
+  name <- rownames(x$points)
+  res <- if (is.null(name)) {
     tibble_pole(nrow(x$x))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   res
 }
@@ -64,11 +64,11 @@ recover_aug_rows.cmds_ord <- function(x) {
 #' @rdname methods-cmds
 #' @export
 recover_aug_cols.cmds_ord <- function(x) {
-  .name <- rownames(x$points)
-  res <- if (is.null(.name)) {
+  name <- rownames(x$points)
+  res <- if (is.null(name)) {
     tibble_pole(ncol(x$x))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   res
 }

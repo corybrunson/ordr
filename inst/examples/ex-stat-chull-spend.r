@@ -4,7 +4,7 @@ USPersonalExpenditure %>%
   as_tbl_ord() %>%
   augment_ord() %>%
   # allow radiating text to exceed plotting window
-  ggbiplot(aes(label = .name), clip = "off",
+  ggbiplot(aes(label = name), clip = "off",
            sec.axes = "cols", scale.factor = 50) +
   geom_rows_label(size = 3) +
   geom_cols_vector() +
@@ -23,7 +23,7 @@ USPersonalExpenditure %>%
   augment_ord() %>%
   confer_inertia(c(.5, .5)) %>%
   # allow radiating text to exceed plotting window
-  ggbiplot(aes(label = .name), clip = "off") +
+  ggbiplot(aes(label = name), clip = "off") +
   geom_rows_label(size = 3) +
   geom_cols_vector() +
   # omit labels in the conical hull with the origin

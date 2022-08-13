@@ -11,7 +11,7 @@ as_tbl_ord(diabetes_lda) %>%
 # row-standard biplot
 diabetes_lda %>%
   confer_inertia(1) %>%
-  ggbiplot(aes(label = .name), elements = "active") +
+  ggbiplot(aes(label = name), elements = "active") +
   theme_bw() + theme_biplot() +
   geom_rows_text() +
   geom_cols_vector(subset = c(1, 3, 4)) +

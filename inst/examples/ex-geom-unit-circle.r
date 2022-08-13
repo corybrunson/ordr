@@ -11,7 +11,7 @@ rowSums(get_cols(diabetes_pca)^2)
 
 # plot column standard coordinates with a unit circle underlaid
 diabetes_pca %>%
-  ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 3) +
+  ggbiplot(aes(label = name), sec.axes = "cols", scale.factor = 3) +
   geom_rows_point(aes(color = group), alpha = .25) +
   geom_unit_circle(alpha = .5, scale.factor = 3) +
   geom_cols_vector() +

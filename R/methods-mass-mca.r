@@ -59,19 +59,19 @@ recover_supp_rows.mca <- function(x) {
 #' @rdname methods-mca
 #' @export
 recover_aug_rows.mca <- function(x) {
-  .name <- rownames(x$fs)
-  res <- if (is.null(.name)) {
+  name <- rownames(x$fs)
+  res <- if (is.null(name)) {
     tibble_pole(nrow(x$fs))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   
   # row coordinates as supplementary points
-  .name <- rownames(x$rs)
-  res_sup <- if (is.null(.name)) {
+  name <- rownames(x$rs)
+  res_sup <- if (is.null(name)) {
     tibble_pole(nrow(x$rs))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   
   # supplement flag
@@ -83,23 +83,23 @@ recover_aug_rows.mca <- function(x) {
 #' @rdname methods-mca
 #' @export
 recover_aug_cols.mca <- function(x) {
-  .name <- rownames(x$cs)
+  name <- rownames(x$cs)
   # introduce `.factor` and `.level` according to `abbrev`
-  if (is.null(.name)) {
+  if (is.null(name)) {
     tibble_pole(nrow(x$cs))
   } else if (is.null(attr(rownames(x$cs), "names"))) {
     # only add `.factor` and `.level` if names are unambiguous
     level_ambig <- any(grepl("\\..*\\.", rownames(x$cs)))
     tibble(
-      .name = .name,
-      .factor = if (! level_ambig) gsub("\\..*$", "", .name),
-      .level = if (! level_ambig) gsub("^.*\\.", "", .name),
+      name = name,
+      factor = if (! level_ambig) gsub("\\..*$", "", name),
+      level = if (! level_ambig) gsub("^.*\\.", "", name),
       .element = "active"
     )
   } else {
     tibble(
-      .name = names(rownames(x$cs)),
-      .level = unname(rownames(x$cs))
+      name = names(rownames(x$cs)),
+      level = unname(rownames(x$cs))
     )
   }
 }

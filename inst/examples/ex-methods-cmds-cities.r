@@ -19,5 +19,5 @@ get_cols(usa_mds)
 usa_mds %>%
   negate_ord(c(1, 2)) %>%
   ggbiplot() +
-  geom_cols_text(aes(label = .name), size = 3) +
+  geom_cols_text(aes(label = name), size = 3) +
   ggtitle("MDS biplot of distances between U.S. cities")

@@ -63,11 +63,11 @@ recover_supp_rows.factanal <- function(x) {
 #' @rdname methods-factanal
 #' @export
 recover_aug_rows.factanal <- function(x) {
-  .name <- rownames(x[["loadings"]])
-  res <- if (is.null(.name)) {
+  name <- rownames(x[["loadings"]])
+  res <- if (is.null(name)) {
     tibble_pole(nrow(x[["loadings"]]))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   if (is.null(x[["scores"]])) return(res)
   
@@ -75,7 +75,7 @@ recover_aug_rows.factanal <- function(x) {
   res_sup <- if (is.null(rownames(x[["scores"]]))) {
     tibble_pole(x[["n.obs"]])
   } else {
-    tibble(.name = rownames(x[["scores"]]))
+    tibble(name = rownames(x[["scores"]]))
   }
   # supplement flag
   res$.element <- "active"
@@ -86,13 +86,13 @@ recover_aug_rows.factanal <- function(x) {
 #' @rdname methods-factanal
 #' @export
 recover_aug_cols.factanal <- function(x) {
-  .name <- rownames(x[["loadings"]])
-  res <- if (is.null(.name)) {
+  name <- rownames(x[["loadings"]])
+  res <- if (is.null(name)) {
     tibble_pole(nrow(x[["loadings"]]))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
-  res$.uniqueness <- x$uniquenesses
+  res$uniqueness <- x$uniquenesses
   res$.element <- "active"
   res
 }

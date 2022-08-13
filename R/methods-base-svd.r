@@ -40,22 +40,22 @@ recover_conference.svd_ord <- function(x) {
 #' @rdname methods-svd
 #' @export
 recover_aug_rows.svd_ord <- function(x) {
-  .name <- rownames(x[["u"]])
-  if (is.null(.name)) {
+  name <- rownames(x[["u"]])
+  if (is.null(name)) {
     tibble_pole(nrow(x[["u"]]))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
 }
 
 #' @rdname methods-svd
 #' @export
 recover_aug_cols.svd_ord <- function(x) {
-  .name <- rownames(x[["v"]])
-  if (is.null(.name)) {
+  name <- rownames(x[["v"]])
+  if (is.null(name)) {
     tibble_pole(nrow(x[["v"]]))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
 }
 

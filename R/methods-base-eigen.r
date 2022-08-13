@@ -42,11 +42,11 @@ recover_conference.eigen_ord <- function(x) {
 #' @rdname methods-eigen
 #' @export
 recover_aug_rows.eigen_ord <- function(x) {
-  .name <- rownames(x[["vectors"]])
-  res <- if (is.null(.name)) {
+  name <- rownames(x[["vectors"]])
+  res <- if (is.null(name)) {
     tibble_pole(nrow(x[["vectors"]]))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   res
 }
@@ -54,11 +54,11 @@ recover_aug_rows.eigen_ord <- function(x) {
 #' @rdname methods-eigen
 #' @export
 recover_aug_cols.eigen_ord <- function(x) {
-  .name <- rownames(x[["vectors"]])
-  res <- if (is.null(.name)) {
+  name <- rownames(x[["vectors"]])
+  res <- if (is.null(name)) {
     tibble_pole(nrow(x[["vectors"]]))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   res
 }
