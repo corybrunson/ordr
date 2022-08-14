@@ -217,17 +217,7 @@ ggbiplot(mtcars_specs_cmds_ord, aes(label = name),
   geom_cols_text_radiate(data = mtcars_cmds_lm) +
   expand_limits(x = c(-2.25, 1.25), y = c(-2, 1.5))
 # PCA of iris data
-iris_pca <- ordinate(iris, 1:4, prcomp, scale = TRUE)
-
-# row-principal (interpolative) biplot
-iris_pca \%>\%
-  augment_ord() \%>\%
-  ggbiplot() +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_cols_axis(aes(label = name, center = center, scale = scale)) +
-  geom_rows_point(aes(color = Species), alpha = .5) +
-  ggtitle("Interpolative biplot of Anderson iris measurements")
+iris_pca <- ordinate(iris, cols = 1:4, prcomp, scale = TRUE)
 
 # row-principal predictive biplot
 iris_pca \%>\%

@@ -1,5 +1,5 @@
 # illustrative ordination: PCA of iris data
-iris_pca <- ordinate(iris, seq(4L), ~ prcomp(., center = TRUE, scale. = TRUE))
+iris_pca <- ordinate(iris, ~ prcomp(., center = TRUE, scale. = TRUE), seq(4L))
 
 # use `tidy()` to summarize distribution of inertia
 tidy(iris_pca)
@@ -28,7 +28,7 @@ fortify(iris_pca)
 glance(iris_pca)
 # this enables comparisons to other models
 rbind(
-  glance(ordinate(subset(iris, Species == "setosa"), seq(4L), prcomp)),
-  glance(ordinate(subset(iris, Species == "versicolor"), seq(4L), prcomp)),
-  glance(ordinate(subset(iris, Species == "virginica"), seq(4L), prcomp))
+  glance(ordinate(subset(iris, Species == "setosa"), prcomp, seq(4L))),
+  glance(ordinate(subset(iris, Species == "versicolor"), prcomp, seq(4L))),
+  glance(ordinate(subset(iris, Species == "virginica"), prcomp, seq(4L)))
 )

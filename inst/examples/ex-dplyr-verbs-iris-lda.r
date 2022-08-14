@@ -1,5 +1,5 @@
 # illustrative ordination: LDA of iris data
-(iris_lda <- ordinate(iris, 1:4, lda_ord, grouping = iris$Species))
+(iris_lda <- ordinate(iris, cols = 1:4, lda_ord, grouping = iris$Species))
 
 # extract a coordinate or annotation
 head(pull_rows(iris_lda, Species))

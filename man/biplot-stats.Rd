@@ -302,19 +302,6 @@ iris[, -5] \%>\%
   mutate_rows(species = iris$Species) \%>\%
   print() -> iris_pca
 
-# row-principal biplot with centroids and confidence ellipses
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_rows_point(alpha = .5) +
-  stat_rows_center(fun.center = "mean", size = 3, shape = "triangle") +
-  stat_rows_ellipse(level = .99) +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris measurements",
-    "Overlaid with centroids and 99\% confidence ellipses"
-  )
-
 # row-principal biplot with centroids and confidence elliptical disks
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +

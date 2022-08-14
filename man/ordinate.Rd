@@ -2,24 +2,41 @@
 % Please edit documentation in R/ordinate.r
 \name{ordinate}
 \alias{ordinate}
-\title{Fit an ordination model to columns of a data frame}
+\alias{ordinate.default}
+\alias{ordinate.array}
+\alias{ordinate.table}
+\alias{ordinate.data.frame}
+\alias{ordinate.dist}
+\title{Fit an ordination model to a data object}
 \usage{
-ordinate(data, cols, model, augment, ...)
+ordinate(x, model, cols, augment, ...)
+
+\method{ordinate}{default}(x, model, ...)
+
+\method{ordinate}{array}(x, model, ...)
+
+\method{ordinate}{table}(x, model, ...)
+
+\method{ordinate}{data.frame}(x, model, cols, augment, ...)
+
+\method{ordinate}{dist}(x, model, ...)
 }
 \arguments{
-\item{data}{A data frame.}
-
-\item{cols}{<\code{\link[tidyr:tidyr_tidy_select]{tidy-select}}> Columns of \code{data} to
-pass to \code{model}. If missing, all columns are used.}
+\item{x}{A data object to be passed to the \code{model}, such as an \link{array},
+\link{table}, \link{data.frame}, or \link[stats:dist]{stats::dist}.}
 
 \item{model}{An ordination function whose output is coercible to class
-'\link{tbl_ord}'. Alternatively, a formula \code{~ fun(., ...)} where \code{fun} is such a
-function and other arguments are explicit, which will be evaluated with
-\code{data} in place of \code{.}.}
+'\link{tbl_ord}', or a symbol or character string (handled by \code{\link[=match.fun]{match.fun()}}).
+Alternatively, a formula \code{~ fun(., ...)} where \code{fun} is such a function and
+other arguments are explicit, which will be evaluated with \code{x} in place of
+\code{.}.}
 
-\item{augment}{<\code{\link[=tidyr_tidy_select]{tidy-select}}> Columns of \code{data} to
-augment to the row data of the ordination. If missing, all columns not
-included in \code{cols} will be augmented.}
+\item{cols}{<\code{\link[tidyr:tidyr_tidy_select]{tidy-select}}> If \code{x} is a data
+frame, columns to pass to \code{model}. If missing, all columns are used.}
+
+\item{augment}{<\code{\link[=tidyr_tidy_select]{tidy-select}}> If \code{x} is a data frame,
+columns to augment to the row data of the ordination. If missing, all
+columns not included in \code{cols} will be augmented.}
 
 \item{...}{Additional arguments passed to \code{model}.}
 }
@@ -32,13 +49,19 @@ specified subset of columns of a data frame and augment the tbl_ord object
 with both its intrinsic diagnostics (via \verb{[augment_ord()]}) and any
 additional columns of the data frame (via \verb{[cbind_rows()]}).
 }
+\details{
+(Write this up.)
+}
 \examples{
-# PCA of iris data
-ordinate(iris, -Species, princomp, augment = c(Sepal.Width, Species))
-ordinate(iris, 1:4, ~ prcomp(., center = TRUE, scale. = TRUE))
-
 # LRA of arrest data
 ordinate(USArrests, cols = c(Murder, Rape, Assault), lra)
+
+# CMDS of inter-city distance data
+ordinate(UScitiesD, cmdscale_ord, k = 3L)
+
+# PCA of iris data
+ordinate(iris, princomp, cols = -Species, augment = c(Sepal.Width, Species))
+ordinate(iris, cols = 1:4, ~ prcomp(., center = TRUE, scale. = TRUE))
 
 # CA of hair & eye color data
 haireye <- as.data.frame(rowSums(HairEyeColor, dims = 2L))
@@ -48,7 +71,7 @@ ordinate(haireye, MASS::corresp, cols = everything())
 ordinate(swiss, model = factanal, factors = 2L, scores = "Bartlett")
 
 # LDA of iris data
-ordinate(iris, model = ~ lda_ord(.[, 1:4], .[, 5], ret.x = TRUE))
+ordinate(iris, ~ lda_ord(.[, 1:4], .[, 5], ret.x = TRUE))
 
 # CCA of savings data
 ordinate(

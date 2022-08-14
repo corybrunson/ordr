@@ -48,7 +48,7 @@ allows the user to negate specified coordinates of an ordination.
 of \code{1}s and \code{-1}s stored as a \code{"negate"} attribute.
 }
 \examples{
-(pca <- ordinate(iris, 1:4, prcomp))
+(pca <- ordinate(iris, cols = 1:4, prcomp))
 ggbiplot(pca) + geom_rows_point() + geom_cols_vector()
 
 # manually negate second coordinate

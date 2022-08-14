@@ -1,4 +1,4 @@
-(pca <- ordinate(iris, 1:4, prcomp))
+(pca <- ordinate(iris, cols = 1:4, prcomp))
 ggbiplot(pca) + geom_rows_point() + geom_cols_vector()
 
 # manually negate second coordinate

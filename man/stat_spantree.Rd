@@ -123,11 +123,7 @@ In either case, the stat layer returns a data frame with position aesthetics
 
 \examples{
 # classical multidimensional scaling of road distances between European cities
-eurodist \%>\%
-  cmdscale_ord(k = 11) \%>\%
-  as_tbl_ord() \%>\%
-  augment_ord() \%>\%
-  print() -> euro_mds
+euro_mds <- ordinate(eurodist, cmdscale_ord, k = 11)
 
 # biplot with minimal spanning tree based on full-dimensional distances
 # (as implemented in {mlpack})
