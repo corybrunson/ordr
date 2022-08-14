@@ -5,8 +5,13 @@ rdata <- data.frame(
   c = runif(n = 5L)
 )
 
-test_that("`ordinate()` can handle appropriate models", {
-  expect_error(ordinate(rdata, lra, everything()), regexp = NA)
-  expect_error(ordinate(rdata, prcomp, everything()), regexp = NA)
-  expect_error(ordinate(rdata, princomp, everything()), regexp = NA)
+test_that("`ordinate()` can handle `lra()` & `princomp()` with a data frame", {
+  expect_error(ordinate(rdata, lra), regexp = NA)
+  expect_error(ordinate(rdata, ~ princomp(.)), regexp = NA)
+})
+
+rdist <- stats::dist(rdata)
+
+test_that("`ordinate()` can handle `cmdscale_ord()` with a 'dist' object", {
+  expect_error(ordinate(rdist, "cmdscale_ord"), regexp = NA)
 })
