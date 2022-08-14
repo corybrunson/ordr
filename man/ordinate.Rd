@@ -9,7 +9,7 @@
 \alias{ordinate.dist}
 \title{Fit an ordination model to a data object}
 \usage{
-ordinate(x, model, cols, augment, ...)
+ordinate(x, model, ...)
 
 \method{ordinate}{default}(x, model, ...)
 
@@ -31,26 +31,31 @@ Alternatively, a formula \code{~ fun(., ...)} where \code{fun} is such a functio
 other arguments are explicit, which will be evaluated with \code{x} in place of
 \code{.}.}
 
+\item{...}{Additional arguments passed to \code{model}.}
+
 \item{cols}{<\code{\link[tidyr:tidyr_tidy_select]{tidy-select}}> If \code{x} is a data
 frame, columns to pass to \code{model}. If missing, all columns are used.}
 
 \item{augment}{<\code{\link[=tidyr_tidy_select]{tidy-select}}> If \code{x} is a data frame,
 columns to augment to the row data of the ordination. If missing, all
 columns not included in \code{cols} will be augmented.}
-
-\item{...}{Additional arguments passed to \code{model}.}
 }
 \value{
 An augmented tbl_ord.
 }
 \description{
 This is a convenience function to fit an ordination model to a
-specified subset of columns of a data frame and augment the tbl_ord object
-with both its intrinsic diagnostics (via \verb{[augment_ord()]}) and any
-additional columns of the data frame (via \verb{[cbind_rows()]}).
+data object, wrap the result as a tbl_ord, and annotate this output with
+metadata from the model and possibly from the data.
 }
 \details{
-(Write this up.)
+The default method fits the specified model to the provided data object,
+wraps the result as a \link{tbl_ord}, and augments this output with any intrinsic
+metadata from the model via \code{\link[=augment_ord]{augment_ord()}}.
+
+The default method is used for most classes, though this may change in
+future. The \link{data.frame} method allows the user to specify what columns to
+include in the model and what columns with which to annotate the output.
 }
 \examples{
 # LRA of arrest data

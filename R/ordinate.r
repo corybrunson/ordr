@@ -1,14 +1,19 @@
 #' @title Fit an ordination model to a data object
 #'
 #' @description This is a convenience function to fit an ordination model to a
-#'   specified subset of columns of a data frame and augment the tbl_ord object
-#'   with both its intrinsic diagnostics (via `[augment_ord()]`) and any
-#'   additional columns of the data frame (via `[cbind_rows()]`).
-#'   
-
+#'   data object, wrap the result as a tbl_ord, and annotate this output with
+#'   metadata from the model and possibly from the data.
+#'
 #' @details
+#'
+#' The default method fits the specified model to the provided data object,
+#' wraps the result as a [tbl_ord], and augments this output with any intrinsic
+#' metadata from the model via [augment_ord()].
+#'
+#' The default method is used for most classes, though this may change in
+#' future. The [data.frame] method allows the user to specify what columns to
+#' include in the model and what columns with which to annotate the output.
 #' 
-#' (Write this up.)
 
 #' @name ordinate
 #' @importFrom rlang expr enexpr enexprs enquo set_names
@@ -30,7 +35,7 @@
 #' @return An augmented tbl_ord.
 #' @example inst/examples/ex-ordinate.r
 #' @export
-ordinate <- function(x, model, cols, augment, ...) {
+ordinate <- function(x, model, ...) {
   UseMethod("ordinate")
 }
 
