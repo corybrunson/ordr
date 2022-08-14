@@ -14,6 +14,10 @@ A new list tidier for `cancor()` output is introduced.
 
 Tools to negate a subset of artificial dimensions, adapted from the sandboxed set of alignment tools, are provided.
 
+## convenience function
+
+The `ordinate()` function is now a generic with methods for four data classes.
+
 ## ggbiplot
 
 The logical `prediction` parameter is replaced with the character-valued `axis.type`, based on the `ax.type` parameter used in **UBbipl** (Gower, Lubbe, & le Roux, 2011).
