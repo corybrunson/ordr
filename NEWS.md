@@ -2,6 +2,10 @@
 
 In addition to minor changes, the following substantive changes are made from v0.0.2:
 
+## augmentation
+
+The column names of `augment_ord()` and `tidy()` outputs are no longer prefixed by periods.
+
 ## list tidiers
 
 A new list tidier for `cancor()` output is introduced.
