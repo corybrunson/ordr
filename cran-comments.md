@@ -1,3 +1,9 @@
+
+## Resubmission
+
+This is a resubmission that addresses several issues with the previous submission flagged by the maintainers.
+It also includes some substantive changes from the previous submission. The same set of checks have been performed and are mostly unchanged from the previous.
+
 ## Test environments
 
 * local OS X install, R 4.1.1, "Kick Things" (via `devtools::check()`)
