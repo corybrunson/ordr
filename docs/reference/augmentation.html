@@ -86,12 +86,20 @@ ordination. The standard values are <code>"rows"</code>, <code>"cols"</code>, an
 both).</p></dd>
 
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
+
+<p>The <code>recover_aug_*()</code> functions return <a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a>s
+having the same numbers of rows as <code>recover_*()</code>. <code>augment_ord()</code> returns
+an augmented tbl_ord with the wrapped model unchanged.</p>
+    </div>
     <div id="details">
     <h2>Details</h2>
     <p>The <code>recover_aug_*()</code> <a href="https://rdrr.io/r/base/UseMethod.html" class="external-link">S3 methods</a> produce
 <a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a>s of values associated with the rows, columns, and
 artificial coordinates of an object of class '<a href="tbl_ord.html">tbl_ord</a>'. The first field of
-each tibble is <code>.name</code>, which contains the row, column, or coordinate names.
+each tibble is <code>name</code>, which contains the row, column, or coordinate names.
 Additional fields contain information about the rows, columns, or coordinates
 extracted from the ordination object.</p>
 <p>The function <code>augment_ord()</code> returns the ordination with either or both

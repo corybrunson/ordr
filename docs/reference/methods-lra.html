@@ -127,8 +127,8 @@ matrix output by <code><a href="lra-ord.html">lra()</a></code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Colorado      7.9     204       78 38.7</span>
 <span class="r-in"><span><span class="co"># get state abbreviation data</span></span></span>
 <span class="r-in"><span><span class="va">state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  .name <span class="op">=</span> <span class="va">state.name</span>,</span></span>
-<span class="r-in"><span>  .abb <span class="op">=</span> <span class="va">state.abb</span></span></span>
+<span class="r-in"><span>  name <span class="op">=</span> <span class="va">state.name</span>,</span></span>
+<span class="r-in"><span>  abb <span class="op">=</span> <span class="va">state.abb</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># compute (non-compositional, unweighted) log-ratio analysis</span></span></span>
@@ -160,28 +160,28 @@ matrix output by <code><a href="lra-ord.html">lra()</a></code>.</p>
 <span class="r-in"><span><span class="co"># augment log-ratio profiles with names and join state abbreviations</span></span></span>
 <span class="r-in"><span><span class="va">arrests_lra</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="dplyr-verbs.html">left_join_rows</a></span><span class="op">(</span><span class="va">state</span>, by <span class="op">=</span> <span class="st">".name"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="dplyr-verbs.html">left_join_rows</a></span><span class="op">(</span><span class="va">state</span>, by <span class="op">=</span> <span class="st">"name"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">arrests_lra</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'lra': (50 x 2) x (3 x 2)'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # 2 coordinates: LRSV1 and LRSV2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (standard): [ 50 x 2 | 2 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    LRSV1  LRSV2 |   .name      .abb </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.680</span>  0.930 | <span style="color: #BCBCBC;">1</span> Alabama    AL   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  0.930 -<span style="color: #BB0000;">0.625</span> | <span style="color: #BCBCBC;">2</span> Alaska     AK   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.330</span> -<span style="color: #BB0000;">1.31</span>  | <span style="color: #BCBCBC;">3</span> Arizona    AZ   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.351</span>  0.277 | <span style="color: #BCBCBC;">4</span> Arkansas   AR   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  0.552 -<span style="color: #BB0000;">1.00</span>  | <span style="color: #BCBCBC;">5</span> California CA   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (standard): [ 50 x 2 | 3 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    LRSV1  LRSV2 |   name       weight abb  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.680</span>  0.930 | <span style="color: #BCBCBC;">1</span> Alabama    0.027<span style="text-decoration: underline;">1</span> AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  0.930 -<span style="color: #BB0000;">0.625</span> | <span style="color: #BCBCBC;">2</span> Alaska     0.031<span style="text-decoration: underline;">8</span> AK   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.330</span> -<span style="color: #BB0000;">1.31</span>  | <span style="color: #BCBCBC;">3</span> Arizona    0.033<span style="text-decoration: underline;">3</span> AZ   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.351</span>  0.277 | <span style="color: #BCBCBC;">4</span> Arkansas   0.021<span style="text-decoration: underline;">9</span> AR   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  0.552 -<span style="color: #BB0000;">1.00</span>  | <span style="color: #BCBCBC;">5</span> California 0.032<span style="text-decoration: underline;">6</span> CA   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 45 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 3 x 2 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    LRSV1  LRSV2 |   .name  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.283  4.96  | <span style="color: #BCBCBC;">1</span> Murder </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.371</span> -<span style="color: #BB0000;">0.181</span> | <span style="color: #BCBCBC;">2</span> Assault</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  2.88  -<span style="color: #BB0000;">0.366</span> | <span style="color: #BCBCBC;">3</span> Rape   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 3 x 2 | 2 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    LRSV1  LRSV2 |   name    weight</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.283  4.96  | <span style="color: #BCBCBC;">1</span> Murder  0.039<span style="text-decoration: underline;">0</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.371</span> -<span style="color: #BB0000;">0.181</span> | <span style="color: #BCBCBC;">2</span> Assault 0.855 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  2.88  -<span style="color: #BB0000;">0.366</span> | <span style="color: #BCBCBC;">3</span> Rape    0.106 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># recover state and arrest profiles</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="recoverers.html">get_rows</a></span><span class="op">(</span><span class="va">arrests_lra</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -200,6 +200,24 @@ matrix output by <code><a href="lra-ord.html">lra()</a></code>.</p>
 <span class="r-in"><span><span class="co"># initially, inertia is conferred on neither factor</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="conference.html">get_conference</a></span><span class="op">(</span><span class="va">arrests_lra</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0 0</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># row-principal biplot</span></span></span>
+<span class="r-in"><span><span class="va">arrests_lra</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="conference.html">confer_inertia</a></span><span class="op">(</span><span class="st">"rows"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">.matrix</span><span class="op">)</span>, sec.axes <span class="op">=</span> <span class="st">"cols"</span>, scale.factor <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">20</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">scale_color_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tomato4"</span>, <span class="st">"turquoise4"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_rows_text</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">abb</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span>, alpha <span class="op">=</span> <span class="fl">.75</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_polygon</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">NA</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_text</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">name</span>, size <span class="op">=</span> <span class="va">weight</span><span class="op">)</span>, fontface <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">scale_size_area</span><span class="op">(</span>guide <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">ggtitle</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"Non-compositional LRA of violent crime arrest rates"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"United States, 1973"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">expand_limits</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">.35</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">guides</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="methods-lra-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>

@@ -12,22 +12,24 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="A tidyverse Extension for Ordinations and Biplots">
-<meta property="og:description" content="Ordination (Podani, 2000, ISBN:90-5782-067-6) comprises several
-    multivariate exploratory and explanatory techniques with theoretical
-    foundations in geometric data analysis (Le Roux &amp; Rouanet, 2005)
-    &lt;doi:10.1007/1-4020-2236-0&gt;. The most popular and established of these,
-    including principal components analysis, correspondence analysis,
+<meta property="og:description" content="Ordination comprises several multivariate exploratory and
+    explanatory techniques with theoretical foundations in geometric data
+    analysis; see Podani (2000, ISBN:90-5782-067-6) for techniques and
+    applications and Le Roux &amp; Rouanet (2005) &lt;doi:10.1007/1-4020-2236-0&gt; for
+    foundations.
+    Greenacre (2010, ISBN:978-84-923846) shows how the most established of
+    these, including principal components analysis, correspondence analysis,
     multidimensional scaling, factor analysis, and discriminant analysis,
     rely on eigen-decompositions or singular value decompositions of
-    pre-processed numeric matrix data (Greenacre, 2010, ISBN:978-84-923846).
-    These decompositions give rise to a set of shared (artificial or latent)
-    coordinates along which the row and column elements can be measured, and the
-    overlay of their scatterplots on these axes is called a biplot
-    (Gabriel, 1971) &lt;doi:10.1093/biomet/58.3.453&gt;. ordr provides inspection,
-    extraction, manipulation, and visualization tools for several popular
-    ordination classes supported by a set of recovery methods. It is inspired by
-    and designed to interface naturally with tidyverse workflows
-    (Wickham &amp;al, 2019) &lt;doi:10.21105/joss.01686&gt;.">
+    pre-processed numeric matrix data.
+    These decompositions give rise to a set of shared coordinates along which
+    the row and column elements can be measured. The overlay of their
+    scatterplots on these axes, introduced by Gabriel (1971)
+    &lt;doi:10.1093/biomet/58.3.453&gt;, is called a biplot.
+    ordr provides inspection, extraction, manipulation, and visualization
+    tools for several popular ordination classes supported by a set of recovery
+    methods. It is inspired by and designed to integrate into tidyverse
+    workflows provided by Wickham &amp;al (2019) &lt;doi:10.21105/joss.01686&gt;.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -174,12 +176,12 @@
 <span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span>
 <span><span class="co">#&gt; # </span></span>
 <span><span class="co">#&gt; # Columns (standard): [ 4 x 4 | 3 ]</span></span>
-<span><span class="co">#&gt;      PC1     PC2    PC3 ... |   .name        .center .scale</span></span>
-<span><span class="co">#&gt;                             |   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1  0.521 -0.377   0.720     | 1 Sepal.Length    5.84  0.828</span></span>
-<span><span class="co">#&gt; 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width     3.06  0.436</span></span>
-<span><span class="co">#&gt; 3  0.580 -0.0245 -0.142     | 3 Petal.Length    3.76  1.77 </span></span>
-<span><span class="co">#&gt; 4  0.565 -0.0669 -0.634     | 4 Petal.Width     1.20  0.762</span></span></code></pre></div>
+<span><span class="co">#&gt;      PC1     PC2    PC3 ... |   name         center scale</span></span>
+<span><span class="co">#&gt;                             |   &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1  0.521 -0.377   0.720     | 1 Sepal.Length   5.84 0.828</span></span>
+<span><span class="co">#&gt; 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width    3.06 0.436</span></span>
+<span><span class="co">#&gt; 3  0.580 -0.0245 -0.142     | 3 Petal.Length   3.76 1.77 </span></span>
+<span><span class="co">#&gt; 4  0.565 -0.0669 -0.634     | 4 Petal.Width    1.20 0.762</span></span></code></pre></div>
 <p>Additional annotations can be added using several row- and column-specific <strong>dplyr</strong>-style verbs:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">iris_meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
@@ -204,27 +206,27 @@
 <span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span>
 <span><span class="co">#&gt; # </span></span>
 <span><span class="co">#&gt; # Columns (standard): [ 4 x 4 | 3 ]</span></span>
-<span><span class="co">#&gt;      PC1     PC2    PC3 ... |   .name        .center .scale</span></span>
-<span><span class="co">#&gt;                             |   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1  0.521 -0.377   0.720     | 1 Sepal.Length    5.84  0.828</span></span>
-<span><span class="co">#&gt; 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width     3.06  0.436</span></span>
-<span><span class="co">#&gt; 3  0.580 -0.0245 -0.142     | 3 Petal.Length    3.76  1.77 </span></span>
-<span><span class="co">#&gt; 4  0.565 -0.0669 -0.634     | 4 Petal.Width     1.20  0.762</span></span></code></pre></div>
+<span><span class="co">#&gt;      PC1     PC2    PC3 ... |   name         center scale</span></span>
+<span><span class="co">#&gt;                             |   &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1  0.521 -0.377   0.720     | 1 Sepal.Length   5.84 0.828</span></span>
+<span><span class="co">#&gt; 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width    3.06 0.436</span></span>
+<span><span class="co">#&gt; 3  0.580 -0.0245 -0.142     | 3 Petal.Length   3.76 1.77 </span></span>
+<span><span class="co">#&gt; 4  0.565 -0.0669 -0.634     | 4 Petal.Width    1.20 0.762</span></span></code></pre></div>
 <p>Following the <a href="https://github.com/tidymodels/broom" class="external-link"><strong>broom</strong></a> package, the <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> method produces a tibble describing the model components, in this case the principal coordinates, which is suitable for scree plotting:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span> <span class="op">%T&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">.name</span>, y <span class="op">=</span> <span class="va">.prop_var</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">name</span>, y <span class="op">=</span> <span class="va">prop_var</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">"Proportion of inertia"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"PCA of Anderson's iris measurements"</span>,</span>
 <span>          <span class="st">"Distribution of inertia"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 4 × 4</span></span>
-<span><span class="co">#&gt;   .name .sdev .inertia .prop_var</span></span>
-<span><span class="co">#&gt;   &lt;fct&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 PC1   1.71    435.     0.730  </span></span>
-<span><span class="co">#&gt; 2 PC2   0.956   136.     0.229  </span></span>
-<span><span class="co">#&gt; 3 PC3   0.383    21.9    0.0367 </span></span>
-<span><span class="co">#&gt; 4 PC4   0.144     3.09   0.00518</span></span></code></pre></div>
+<span><span class="co">#&gt; # A tibble: 4 × 5</span></span>
+<span><span class="co">#&gt;   name   sdev inertia prop_var quality</span></span>
+<span><span class="co">#&gt;   &lt;fct&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 PC1   1.71   435.    0.730     0.730</span></span>
+<span><span class="co">#&gt; 2 PC2   0.956  136.    0.229     0.958</span></span>
+<span><span class="co">#&gt; 3 PC3   0.383   21.9   0.0367    0.995</span></span>
+<span><span class="co">#&gt; 4 PC4   0.144    3.09  0.00518   1</span></span></code></pre></div>
 <p><img src="reference/figures/README-model%20components%20and%20scree%20plot-1.png"><!-- --></p>
 <p>Following <strong>ggplot2</strong>, the <code>fortify()</code> method row-binds the factor tibbles with an additional <code>.matrix</code> column. This is used by <code><a href="reference/ggbiplot.html">ggbiplot()</a></code> to redirect row- and column-specific plot layers to the appropriate subsets:<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -232,7 +234,7 @@
 <span>  <span class="fu"><a href="reference/biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">Species</span>, shape <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/biplot-stats.html">stat_rows_ellipse</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">.5</span>, level <span class="op">=</span> <span class="fl">.99</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/biplot-geoms.html">geom_cols_vector</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/biplot-geoms.html">geom_cols_text_radiate</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="reference/biplot-geoms.html">geom_cols_text_radiate</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">expand_limits</span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3.5</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"PCA of Anderson's iris measurements"</span>,</span>
 <span>          <span class="st">"99% confidence ellipses; variables use top &amp; right axes"</span><span class="op">)</span></span></code></pre></div>
@@ -246,7 +248,7 @@
 <span>    <span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">Species</span>, shape <span class="op">=</span> <span class="va">Species</span><span class="op">)</span>,</span>
 <span>    size <span class="op">=</span> <span class="fl">5</span>, alpha <span class="op">=</span> <span class="fl">.5</span>, fun.data <span class="op">=</span> <span class="va">mean_se</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="reference/biplot-geoms.html">geom_cols_axis</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.name</span>, center <span class="op">=</span> <span class="va">.center</span>, scale <span class="op">=</span> <span class="va">.scale</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="reference/biplot-geoms.html">geom_cols_axis</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">name</span>, center <span class="op">=</span> <span class="va">center</span>, scale <span class="op">=</span> <span class="va">scale</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Predictive biplot of Anderson's iris measurements"</span>,</span>
 <span>          <span class="st">"Project a marker onto an axis to approximate its measurement"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-predictive%20biplot-1.png"><!-- --></p>

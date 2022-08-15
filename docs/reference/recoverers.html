@@ -131,6 +131,27 @@ ordination. The standard values are <code>"rows"</code>, <code>"cols"</code>, an
 both).</p></dd>
 
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
+
+<p>The <code>recover_*()</code> functions are generics whose methods return base R
+objects retrieved from the model wrapped in the 'tbl_ord' class:</p><ul><li><p><code>rows</code>: the row matrix as stored in the model</p></li>
+<li><p><code>cols</code>: the column matrix as stored in the model</p></li>
+<li><p><code>inertia</code>: the vector of eigen-values or squared singular values,
+often known by other names depending on the model</p></li>
+<li><p><code>coord</code>: names for the artificial axes, from the model if available
+The <code>get_*()</code> functions (which are not generics) return modifications of
+these objects:</p></li>
+<li><p><code>rows</code>: the recovered rows,
+adjusted according to any negation of axes or conference of inertia</p></li>
+<li><p><code>cols</code>: the recovered columns,
+adjusted according to any negation of axes or conference of inertia</p></li>
+<li><p><code>inertia</code>: the recovered inertia, named by the recovered coordinates</p></li>
+<li><p><code>coord</code>: the recovered coordinates (unmodified)
+<code><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim()</a></code> returns the dimensions of the decomposed matrix, i.e. the numbers of
+rows of <code>recover_rows()</code> and of <code>recover_cols()</code>.</p></li>
+</ul></div>
     <div id="details">
     <h2>Details</h2>
     <p>The <code>recover_*()</code> <a href="https://rdrr.io/r/base/UseMethod.html" class="external-link">S3 methods</a> extract one or both of the

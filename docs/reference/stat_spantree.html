@@ -212,46 +212,18 @@ Springer Series in Statistics, ISSN 0172-7397. doi: <a href="https://doi.org/10.
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># classical multidimensional scaling of road distances between European cities</span></span></span>
-<span class="r-in"><span><span class="va">eurodist</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="wrap-ord.html">cmdscale_ord</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">11</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">euro_mds</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'cmds_ord': (21 x 11) x (21 x 11)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 11 coordinates: PCo1, PCo2, ..., PCo11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (symmetric): [ 21 x 11 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     PCo1  PCo2   PCo3 ... |   .name    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> <span style="text-decoration: underline;">2</span>290.  <span style="text-decoration: underline;">1</span>799.   53.8     | <span style="color: #BCBCBC;">1</span> Athens   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">825.</span>   547. -<span style="color: #BB0000;">114.</span>  ... | <span style="color: #BCBCBC;">2</span> Barcelona</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>   59.2 -<span style="color: #BB0000;">367.</span>  178.      | <span style="color: #BCBCBC;">3</span> Brussels </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  -<span style="color: #BB0000;">82.8</span> -<span style="color: #BB0000;">430.</span>  300.      | <span style="color: #BCBCBC;">4</span> Calais   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">352.</span>  -<span style="color: #BB0000;">291.</span>  457.      | <span style="color: #BCBCBC;">5</span> Cherbourg</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 16 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (symmetric): [ 21 x 11 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     PCo1  PCo2   PCo3 ... |   .name    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> <span style="text-decoration: underline;">2</span>290.  <span style="text-decoration: underline;">1</span>799.   53.8     | <span style="color: #BCBCBC;">1</span> Athens   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">825.</span>   547. -<span style="color: #BB0000;">114.</span>  ... | <span style="color: #BCBCBC;">2</span> Barcelona</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>   59.2 -<span style="color: #BB0000;">367.</span>  178.      | <span style="color: #BCBCBC;">3</span> Brussels </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  -<span style="color: #BB0000;">82.8</span> -<span style="color: #BB0000;">430.</span>  300.      | <span style="color: #BCBCBC;">4</span> Calais   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">352.</span>  -<span style="color: #BB0000;">291.</span>  457.      | <span style="color: #BCBCBC;">5</span> Cherbourg</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 16 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
+<span class="r-in"><span><span class="va">euro_mds</span> <span class="op">&lt;-</span> <span class="fu"><a href="ordinate.html">ordinate</a></span><span class="op">(</span><span class="va">eurodist</span>, <span class="va">cmdscale_ord</span>, k <span class="op">=</span> <span class="fl">11</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># biplot with minimal spanning tree based on full-dimensional distances</span></span></span>
 <span class="r-in"><span><span class="co"># (as implemented in {mlpack})</span></span></span>
 <span class="r-in"><span><span class="va">euro_mds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="negation.html">negate_ord</a></span><span class="op">(</span><span class="st">"PCo2"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">scale_y_reverse</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="biplot-stats.html">stat_cols_spantree</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="ggbiplot.html">ord_aes</a></span><span class="op">(</span><span class="va">euro_mds</span><span class="op">)</span>, check.aes <span class="op">=</span> <span class="cn">FALSE</span>, engine <span class="op">=</span> <span class="st">"mlpack"</span>,</span></span>
 <span class="r-in"><span>    alpha <span class="op">=</span> <span class="fl">.5</span>, linetype <span class="op">=</span> <span class="st">"dotted"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_text</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.name</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_text</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">name</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">ggtitle</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="st">"MDS biplot of road distances between European cities"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"Dotted segments constitute the minimal spanning tree"</span></span></span>

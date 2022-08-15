@@ -62,7 +62,26 @@ a population of cases.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">lra</span><span class="op">(</span><span class="va">x</span>, compositional <span class="op">=</span> <span class="cn">FALSE</span>, weighted <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">lra</span><span class="op">(</span><span class="va">x</span>, compositional <span class="op">=</span> <span class="cn">FALSE</span>, weighted <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for lra</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, nd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">sv</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">6L</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for lra</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/screeplot.html" class="external-link">screeplot</a></span><span class="op">(</span><span class="va">x</span>, main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/deparse.html" class="external-link">deparse1</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html" class="external-link">substitute</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for lra</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/biplot.html" class="external-link">biplot</a></span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  choices <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">2L</span><span class="op">)</span>,</span>
+<span>  scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>  main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/deparse.html" class="external-link">deparse1</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html" class="external-link">substitute</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  var.axes <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for lra</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/deparse.html" class="external-link">deparse1</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html" class="external-link">substitute</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -78,6 +97,30 @@ a population of cases.</p>
 <dt>weighted</dt>
 <dd><p>Logical; whether to weight rows and columns by their sums.</p></dd>
 
+
+<dt>nd</dt>
+<dd><p>Integer; number of shared dimensions to include in print.</p></dd>
+
+
+<dt>n</dt>
+<dd><p>Integer; number of rows of each factor to print.</p></dd>
+
+
+<dt>main, var.axes, ...</dt>
+<dd><p>Parameters passed to other plotting methods (in the
+case of <code>main</code>, after being <code><a href="https://rdrr.io/r/base/force.html" class="external-link">force()</a></code>d.</p></dd>
+
+
+<dt>choices</dt>
+<dd><p>Integer; length-2 vector specifying the components to plot.</p></dd>
+
+
+<dt>scale</dt>
+<dd><p>Numeric; values between 0 and 1 that control how inertia is
+conferred unto the points: Row (<code>i = 1L</code>) and column (<code>i = 2L</code>) coordinates
+are scaled by <code>sv ^ scale[[i]]</code>. If a single value <code>scale</code> is passed, it is
+assigned to the rows while <code>1 - scale</code> is assigned to the columns.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -89,6 +132,8 @@ a population of cases.</p>
 of row standard coordinates.</p></li>
 <li><p>column.coordsThe \(p * (r-1)\) matrix
 of column standard coordinates.</p></li>
+<li><p>row.weightsThe weights used to scale the row coordinates.</p></li>
+<li><p>column.weightsThe weights used to scale the column coordinates.</p></li>
 </ul></div>
     <div id="details">
     <h2>Details</h2>
@@ -141,217 +186,48 @@ Greenacre's (2010) exposition in Chapter 7.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> North Dakota      -4.029806 -2.21101790    1.8187881</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># non-compositional log-ratio analysis</span></span></span>
-<span class="r-in"><span><span class="op">(</span><span class="va">arrests_lra</span> <span class="op">&lt;-</span> <span class="fu">lra</span><span class="op">(</span><span class="va">USArrests</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sv</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.11758785 0.06383505</span>
+<span class="r-in"><span><span class="op">(</span><span class="va">arrests_lra</span> <span class="op">&lt;-</span> <span class="fu">lra</span><span class="op">(</span><span class="va">USArrests</span><span class="op">[</span>, <span class="va">arrests</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Singular values: 0.11758785 0.06383505 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $row.coords</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      LRSV1        LRSV2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alabama        -0.68001198  0.929601139</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alaska          0.92998988 -0.624577164</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Arizona        -0.32984955 -1.311581695</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Arkansas       -0.35134428  0.277323143</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> California      0.55165901 -1.004280086</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Colorado        1.22910659 -0.638846890</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Connecticut    -0.43610804 -1.027017532</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Delaware       -1.54269183 -1.349322890</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Florida        -0.54682514  0.300298438</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Georgia         0.15812112  1.916932033</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hawaii          3.51365819  2.150284964</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Idaho          -0.05250833 -2.109188891</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Illinois       -0.52429773  0.002652531</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Indiana         1.22231804  0.881075829</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Iowa            1.39095549 -0.632985189</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Kansas          0.75715595  0.380674137</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Kentucky        0.68864901  2.024832534</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Louisiana      -0.69015525  1.238509473</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Maine          -0.63716612 -1.499305459</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Maryland       -0.63629812 -0.286175559</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Massachusetts  -0.22762978 -1.124006923</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Michigan        0.41414730  0.171745261</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Minnesota       1.45222388 -0.789191960</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mississippi    -1.47068651  1.436924829</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Missouri        0.78566710  0.278289912</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Montana         0.65946921  0.566956397</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Nebraska        0.82281297 -0.284750183</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Nevada          1.14994121  0.060475841</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> New Hampshire   0.88778358 -0.710870888</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> New Jersey      0.01717089  0.205735676</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> New Mexico     -0.12336523 -0.223126918</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> New York       -0.35365080  0.100656157</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> North Carolina -2.35659680  0.189728037</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> North Dakota    0.74912231 -2.900272794</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Ohio            1.11076020  0.766013515</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Oklahoma        0.30637650 -0.053491161</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Oregon          1.13217636 -1.312593507</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Pennsylvania    0.48983869  0.840580871</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Rhode Island   -2.42442178 -1.868251942</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> South Carolina -0.96800438  0.752042083</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> South Dakota    0.61067278 -0.091684230</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Tennessee       0.55166149  1.334277800</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Texas           0.22895595  1.088292623</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Utah            1.20949943 -1.771844197</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Vermont         1.78310111 -0.254863377</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Virginia        0.33180838  0.612645656</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Washington      1.07067103 -1.635935144</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> West Virginia  -0.02043499  1.475198849</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Wisconsin       1.43728882  0.033416687</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Wyoming        -0.50955934  0.033243165</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row scores (6 of 50):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 LRSV1      LRSV2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Alabama    -0.6800120  0.9296011</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Alaska      0.9299899 -0.6245772</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Arizona    -0.3298496 -1.3115817</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Arkansas   -0.3513443  0.2773231</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> California  0.5516590 -1.0042801</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Colorado    1.2291066 -0.6388469</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $column.coords</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Column scores:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             LRSV1      LRSV2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Murder   0.283086  4.9570302</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Assault -0.370595 -0.1805698</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Rape     2.876702 -0.3660163</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "lra"</span>
-<span class="r-in"><span><span class="op">(</span><span class="va">arrests_lra_ord</span> <span class="op">&lt;-</span> <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">arrests_lra</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'lra': (50 x 2) x (3 x 2)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 2 coordinates: LRSV1 and LRSV2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (standard): [ 50 x 2 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    LRSV1  LRSV2 |   .name     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.680</span>  0.930 | <span style="color: #BCBCBC;">1</span> Alabama   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  0.930 -<span style="color: #BB0000;">0.625</span> | <span style="color: #BCBCBC;">2</span> Alaska    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.330</span> -<span style="color: #BB0000;">1.31</span>  | <span style="color: #BCBCBC;">3</span> Arizona   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.351</span>  0.277 | <span style="color: #BCBCBC;">4</span> Arkansas  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  0.552 -<span style="color: #BB0000;">1.00</span>  | <span style="color: #BCBCBC;">5</span> California</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 45 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 3 x 2 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    LRSV1  LRSV2 |   .name  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.283  4.96  | <span style="color: #BCBCBC;">1</span> Murder </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.371</span> -<span style="color: #BB0000;">0.181</span> | <span style="color: #BCBCBC;">2</span> Assault</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  2.88  -<span style="color: #BB0000;">0.366</span> | <span style="color: #BCBCBC;">3</span> Rape   </span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># state abbreviations</span></span></span>
-<span class="r-in"><span><span class="va">state_abbr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>state <span class="op">=</span> <span class="va">state.name</span>, abbr <span class="op">=</span> <span class="va">state.abb</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># row-principal biplot</span></span></span>
-<span class="r-in"><span><span class="va">arrests_lra_ord</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="dplyr-verbs.html">left_join_rows</a></span><span class="op">(</span><span class="va">state_abbr</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">".name"</span> <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="conference.html">confer_inertia</a></span><span class="op">(</span><span class="st">"rows"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">.matrix</span><span class="op">)</span>, sec.axes <span class="op">=</span> <span class="st">"cols"</span>, scale.factor <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">20</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">scale_color_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tomato4"</span>, <span class="st">"turquoise4"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_rows_text</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">abbr</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span>, alpha <span class="op">=</span> <span class="fl">.75</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_polygon</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">NA</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_text</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.name</span><span class="op">)</span>, fontface <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">ggtitle</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="st">"Non-compositional LRA of violent crime arrest rates"</span>,</span></span>
-<span class="r-in"><span>    <span class="st">"United States, 1973"</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">expand_limits</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">.35</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">guides</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/screeplot.html" class="external-link">screeplot</a></span><span class="op">(</span><span class="va">arrests_lra</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="lra-ord-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/biplot.html" class="external-link">biplot</a></span><span class="op">(</span><span class="va">arrests_lra</span>, scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="lra-ord-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># compositional log-ratio analysis</span></span></span>
-<span class="r-in"><span><span class="op">(</span><span class="va">arrests_lra</span> <span class="op">&lt;-</span> <span class="fu">lra</span><span class="op">(</span><span class="va">USArrests</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span>, compositional <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sv</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.12786989 0.07009419</span>
+<span class="r-in"><span><span class="op">(</span><span class="va">arrests_lra</span> <span class="op">&lt;-</span> <span class="fu">lra</span><span class="op">(</span><span class="va">USArrests</span><span class="op">[</span>, <span class="va">arrests</span><span class="op">]</span>, compositional <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Singular values: 0.12786989 0.07009419 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $row.coords</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      LRSV1        LRSV2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alabama        -0.85996613  1.026670279</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alaska          0.62563906 -0.590884217</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Arizona        -0.59655036 -1.052470224</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Arkansas       -0.56720016  0.392404589</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> California      0.25317611 -0.886874443</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Colorado        0.91025328 -0.642286195</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Connecticut    -0.68889080 -0.780536684</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Delaware       -1.75358722 -0.930817309</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Florida        -0.75277514  0.438385774</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Georgia        -0.03024834  1.815045714</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hawaii          3.17493739  1.595495515</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Idaho          -0.35725728 -1.812040813</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Illinois       -0.74064171  0.165342452</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Indiana         0.95145506  0.738089068</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Iowa            1.06468106 -0.657771240</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Kansas          0.49245529  0.343712889</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Kentucky        0.47873528  1.844779869</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Louisiana      -0.85994408  1.308343588</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Maine          -0.89531454 -1.183346226</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Maryland       -0.85643832 -0.082404543</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Massachusetts  -0.49325054 -0.895364854</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Michigan        0.15901105  0.198178949</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Minnesota       1.11817124 -0.807422510</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mississippi    -1.59757650  1.588763093</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Missouri        0.51641555  0.247122543</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Montana         0.40520128  0.525342558</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Nebraska        0.53415663 -0.268675329</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Nevada          0.85674151  0.002605144</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> New Hampshire   0.58270940 -0.663780082</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> New Jersey     -0.21824611  0.280059275</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> New Mexico     -0.36562969 -0.091116764</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> New York       -0.57493934  0.232355716</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> North Carolina -2.48097704  0.570671438</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> North Dakota    0.38189445 -2.633086647</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Ohio            0.84153026  0.647997376</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Oklahoma        0.04923980  0.007604921</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Oregon          0.79674601 -1.241327727</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Pennsylvania    0.25212343  0.795493375</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Rhode Island   -2.61016221 -1.288460589</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> South Carolina -1.13999534  0.902535839</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> South Dakota    0.33803988 -0.066176031</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Tennessee       0.32652576  1.235632308</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Texas           0.01126838  1.053855659</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Utah            0.85603173 -1.668089580</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Vermont         1.45026003 -0.364991895</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Virginia        0.09436962  0.608930598</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Washington      0.72798930 -1.526890681</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> West Virginia  -0.21426910  1.437075512</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Wisconsin       1.12973852 -0.058891812</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Wyoming        -0.72563639  0.191212352</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row scores (6 of 50):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 LRSV1      LRSV2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Alabama    -0.8599661  1.0266703</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Alaska      0.6256391 -0.5908842</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Arizona    -0.5965504 -1.0524702</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Arkansas   -0.5672002  0.3924046</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> California  0.2531761 -0.8868744</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Colorado    0.9102533 -0.6422862</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $column.coords</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Column scores:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              LRSV1      LRSV2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Murder   0.6072392  4.9382810</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Assault -0.3999883 -0.1533148</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Rape     2.7051937 -0.5351457</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "lra"</span>
-<span class="r-in"><span><span class="op">(</span><span class="va">arrests_lra_ord</span> <span class="op">&lt;-</span> <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">arrests_lra</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'lra': (50 x 2) x (3 x 2)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 2 coordinates: LRSV1 and LRSV2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (standard): [ 50 x 2 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    LRSV1  LRSV2 |   .name     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.860</span>  1.03  | <span style="color: #BCBCBC;">1</span> Alabama   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  0.626 -<span style="color: #BB0000;">0.591</span> | <span style="color: #BCBCBC;">2</span> Alaska    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.597</span> -<span style="color: #BB0000;">1.05</span>  | <span style="color: #BCBCBC;">3</span> Arizona   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.567</span>  0.392 | <span style="color: #BCBCBC;">4</span> Arkansas  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  0.253 -<span style="color: #BB0000;">0.887</span> | <span style="color: #BCBCBC;">5</span> California</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 45 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 3 x 2 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    LRSV1  LRSV2 |   .name  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.607  4.94  | <span style="color: #BCBCBC;">1</span> Murder </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.400</span> -<span style="color: #BB0000;">0.153</span> | <span style="color: #BCBCBC;">2</span> Assault</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  2.71  -<span style="color: #BB0000;">0.535</span> | <span style="color: #BCBCBC;">3</span> Rape   </span>
-<span class="r-in"><span><span class="co"># row-principal biplot</span></span></span>
-<span class="r-in"><span><span class="va">arrests_lra_ord</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="dplyr-verbs.html">left_join_rows</a></span><span class="op">(</span><span class="va">state_abbr</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">".name"</span> <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="conference.html">confer_inertia</a></span><span class="op">(</span><span class="st">"rows"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">.matrix</span><span class="op">)</span>, sec.axes <span class="op">=</span> <span class="st">"cols"</span>, scale.factor <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">20</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">scale_color_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tomato4"</span>, <span class="st">"turquoise4"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_rows_text</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">abbr</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span>, alpha <span class="op">=</span> <span class="fl">.75</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_polygon</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">NA</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_text</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">.name</span><span class="op">)</span>, fontface <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">ggtitle</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="st">"Compositional LRA of violent crime arrest rates"</span>,</span></span>
-<span class="r-in"><span>    <span class="st">"United States, 1973"</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">expand_limits</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">.4</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">guides</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="lra-ord-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/biplot.html" class="external-link">biplot</a></span><span class="op">(</span><span class="va">arrests_lra</span>, scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="lra-ord-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>

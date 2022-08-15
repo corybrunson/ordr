@@ -213,21 +213,19 @@ objects of class <code>"lda"</code> and <code>"lda_ord"</code> as returned by <c
 <span class="r-out co"><span class="r-pr">#&gt;</span> # 2 coordinates: LD1 and LD2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 153 x 2 | 5 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     LD1    LD2 |   .name      .prior .counts .group…¹</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  7.61  0.215 | <span style="color: #BCBCBC;">1</span> setosa      0.333      50 setosa  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">1.83</span> -<span style="color: #BB0000;">0.728</span> | <span style="color: #BCBCBC;">2</span> versicolor  0.333      50 versico…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">5.78</span>  0.513 | <span style="color: #BCBCBC;">3</span> virginica   0.333      50 virgini…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  8.06  0.300 | <span style="color: #BCBCBC;">4</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span> setosa  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  7.13 -<span style="color: #BB0000;">0.787</span> | <span style="color: #BCBCBC;">5</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span> setosa  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 148 more rows, 1 more</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   variable: .element &lt;chr&gt;, and</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abbreviated variable name</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​.grouping</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     LD1    LD2 |   name        prior counts grouping </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  7.61  0.215 | <span style="color: #BCBCBC;">1</span> setosa      0.333     50 setosa   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">1.83</span> -<span style="color: #BB0000;">0.728</span> | <span style="color: #BCBCBC;">2</span> versicolor  0.333     50 versicol…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">5.78</span>  0.513 | <span style="color: #BCBCBC;">3</span> virginica   0.333     50 virginica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  8.06  0.300 | <span style="color: #BCBCBC;">4</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span> setosa   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  7.13 -<span style="color: #BB0000;">0.787</span> | <span style="color: #BCBCBC;">5</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span> setosa   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 148 more rows, and 1 more</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   variable: .element &lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 2 | 2 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      LD1     LD2 |   .name        .element</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      LD1     LD2 |   name         .element</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.829  0.024<span style="text-decoration: underline;">1</span> | <span style="color: #BCBCBC;">1</span> Sepal.Length active  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  1.53   2.16   | <span style="color: #BCBCBC;">2</span> Sepal.Width  active  </span>
