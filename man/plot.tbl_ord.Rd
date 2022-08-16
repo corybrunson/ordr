@@ -14,6 +14,9 @@ enable parsing of object name).}
 
 \item{...}{Additional arguments passed to other methods.}
 }
+\value{
+Nothing, but a plot is produced on the current graphics device.
+}
 \description{
 Adapt \strong{stats} 'prcomp' and 'princomp' methods for \code{plot()},
 \code{screeplot()}, and \code{biplot()} generics to 'tbl_ord' objects.

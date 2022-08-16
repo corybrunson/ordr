@@ -8,6 +8,7 @@
 #' @inheritParams stat_rows
 #' @param mult Numeric value used to scale the coordinates.
 #' @template param-stat
+#' @template return-layer
 #' @family stat layers
 #' @export
 stat_scale <- function(

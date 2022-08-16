@@ -56,6 +56,9 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{mult}{Numeric value used to scale the coordinates.}
 }
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
+}
 \description{
 Multiply artificial coordinates by a scale factor
 }

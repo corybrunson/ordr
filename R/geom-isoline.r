@@ -38,6 +38,7 @@
 #'   one.
 #' @param label_dodge Numeric; the orthogonal distance of the text from the axis
 #'   or isoline, as a proportion of the minimum of the plot width and height.
+#' @template return-layer
 #' @family geom layers
 #' @example inst/examples/ex-geom-isoline-diabetes.r
 #' @export

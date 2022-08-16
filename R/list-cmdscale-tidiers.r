@@ -27,7 +27,7 @@
 #'
 #'   - `"eig"`: returns information about the eigenvalues.
 #' @param ... Additional arguments allowed by generics; currently ignored.
-#' @return A [tibble][tibble::tibble].
+#' @template return-tidier
 #' @example inst/examples/ex-list-cmdscale-tidiers-cities.r
 #' @family list tidiers
 #' @seealso [generics::tidy()] [generics::glance()] [stats::cmdscale()]

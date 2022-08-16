@@ -32,6 +32,7 @@
 #' @name methods-cancor
 #' @include ord-tbl.r
 #' @template param-methods
+#' @template return-methods
 #' @family methods for singular value decomposition-based techniques
 #' @example inst/examples/ex-methods-cancor-savings.r
 NULL

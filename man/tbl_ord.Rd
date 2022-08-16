@@ -32,6 +32,10 @@ un_tbl_ord(x)
 
 \item{...}{Additional elements of a custom tbl_ord.}
 }
+\value{
+A tbl_ord (\verb{as*()}, \verb{make*()}), an S3-class model object that can be
+wrapped as one (\verb{un*()}), or a logical value (\verb{is*()}, \verb{value*()}).
+}
 \description{
 These functions wrap ordination objects in the class \link{tbl_ord},
 create tbl_ords directly from matrices, and test for the class and basic

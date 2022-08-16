@@ -11,6 +11,7 @@
 #'   stats.
 #' 
 #' @name biplot-stats
+#' @template return-layer
 #' @family biplot layers
 #' @include utils.r
 #' @import ggplot2

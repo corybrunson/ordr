@@ -71,7 +71,7 @@ factors.}
 \code{\link[=fortify.tbl_ord]{fortify.tbl_ord()}}.}
 }
 \value{
-A ggplot object.
+A \link[ggplot2:ggplot]{ggplot} object.
 }
 \description{
 Build a biplot visualization from ordination data wrapped as a

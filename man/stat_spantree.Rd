@@ -67,6 +67,9 @@ supplied parameters and aesthetics are understood by the \code{geom} or
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 }
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
+}
 \description{
 This stat layer identifies the \eqn{n-1} pairs among \eqn{n}
 points that form a minimum spanning tree, then calculates the segments

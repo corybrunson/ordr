@@ -590,6 +590,9 @@ or isoline, as a proportion of the minimum of the plot width and height.}
 \item{isoline_text}{Logical; whether to include text value marks along the
 isolines.}
 }
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
+}
 \description{
 These geometric element layers (geoms) pair
 conventional \strong{ggplot2} geoms with \code{\link[=stat_rows]{stat_rows()}} or

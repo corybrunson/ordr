@@ -11,6 +11,7 @@
 #'   as their corresponding conventional geoms.
 #' 
 #' @name biplot-geoms
+#' @template return-layer
 #' @family biplot layers
 #' @include utils.r
 #' @import ggplot2
