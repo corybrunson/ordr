@@ -112,5 +112,10 @@ Other methods for singular value decomposition-based techniques:
 \code{\link{methods-prcomp}},
 \code{\link{methods-princomp}},
 \code{\link{methods-svd}}
+
+Other models from the \strong{MASS} package: 
+\code{\link{methods-correspondence}},
+\code{\link{methods-mca}}
 }
 \concept{methods for singular value decomposition-based techniques}
+\concept{models from the \strong{MASS} package}

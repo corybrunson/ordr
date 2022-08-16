@@ -75,8 +75,17 @@ Other methods for singular value decomposition-based techniques:
 \code{\link{methods-mca}},
 \code{\link{methods-prcomp}},
 \code{\link{methods-svd}}
+
+Other models from the \strong{stats} package: 
+\code{\link{methods-cancor}},
+\code{\link{methods-cmds}},
+\code{\link{methods-factanal}},
+\code{\link{methods-kmeans}},
+\code{\link{methods-lm}},
+\code{\link{methods-prcomp}}
 }
 \author{
 Emily Paul
 }
 \concept{methods for singular value decomposition-based techniques}
+\concept{models from the \strong{stats} package}

@@ -91,5 +91,14 @@ swiss_fa \%>\%
 Other methods for eigen-decomposition-based techniques: 
 \code{\link{methods-cmds}},
 \code{\link{methods-eigen}}
+
+Other models from the \strong{stats} package: 
+\code{\link{methods-cancor}},
+\code{\link{methods-cmds}},
+\code{\link{methods-kmeans}},
+\code{\link{methods-lm}},
+\code{\link{methods-prcomp}},
+\code{\link{methods-princomp}}
 }
 \concept{methods for eigen-decomposition-based techniques}
+\concept{models from the \strong{stats} package}

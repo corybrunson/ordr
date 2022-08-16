@@ -10,6 +10,7 @@
 #' @template param-methods
 #' @template return-methods
 #' @family methods for idiosyncratic techniques
+#' @family models from the **stats** package
 #' @example inst/examples/ex-methods-lm-mtcars.r
 NULL
 

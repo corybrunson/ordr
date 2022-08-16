@@ -17,6 +17,7 @@
 #' @template param-methods
 #' @template return-methods
 #' @family methods for singular value decomposition-based techniques
+#' @family models from the **MASS** package
 #' @example inst/examples/ex-methods-mca-admissions.r
 NULL
 

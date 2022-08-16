@@ -76,5 +76,9 @@ Other methods for singular value decomposition-based techniques:
 \code{\link{methods-mca}},
 \code{\link{methods-prcomp}},
 \code{\link{methods-princomp}}
+
+Other models from the \strong{base} package: 
+\code{\link{methods-eigen}}
 }
 \concept{methods for singular value decomposition-based techniques}
+\concept{models from the \strong{base} package}

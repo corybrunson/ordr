@@ -79,5 +79,14 @@ usa_mds \%>\%
 Other methods for eigen-decomposition-based techniques: 
 \code{\link{methods-eigen}},
 \code{\link{methods-factanal}}
+
+Other models from the \strong{stats} package: 
+\code{\link{methods-cancor}},
+\code{\link{methods-factanal}},
+\code{\link{methods-kmeans}},
+\code{\link{methods-lm}},
+\code{\link{methods-prcomp}},
+\code{\link{methods-princomp}}
 }
 \concept{methods for eigen-decomposition-based techniques}
+\concept{models from the \strong{stats} package}

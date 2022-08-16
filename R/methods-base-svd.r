@@ -8,6 +8,7 @@
 #' @template param-methods
 #' @template return-methods
 #' @family methods for singular value decomposition-based techniques
+#' @family models from the **base** package
 #' @example inst/examples/ex-methods-svd-spend.r
 NULL
 

@@ -93,5 +93,14 @@ iris_km_ord \%>\%
 \seealso{
 Other methods for idiosyncratic techniques: 
 \code{\link{methods-lm}}
+
+Other models from the \strong{stats} package: 
+\code{\link{methods-cancor}},
+\code{\link{methods-cmds}},
+\code{\link{methods-factanal}},
+\code{\link{methods-lm}},
+\code{\link{methods-prcomp}},
+\code{\link{methods-princomp}}
 }
 \concept{methods for idiosyncratic techniques}
+\concept{models from the \strong{stats} package}

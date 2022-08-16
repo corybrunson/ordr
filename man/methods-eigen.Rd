@@ -75,5 +75,9 @@ get_conference(qs_eigen)
 Other methods for eigen-decomposition-based techniques: 
 \code{\link{methods-cmds}},
 \code{\link{methods-factanal}}
+
+Other models from the \strong{base} package: 
+\code{\link{methods-svd}}
 }
 \concept{methods for eigen-decomposition-based techniques}
+\concept{models from the \strong{base} package}
