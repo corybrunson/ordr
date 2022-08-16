@@ -146,6 +146,12 @@ supplied parameters and aesthetics are understood by the <code>geom</code> or
 <dd><p>Additional arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">ggplot2::layer()</a></code>.</p></dd>
 
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
+
+<p>A ggproto <a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">layer</a>.</p>
+    </div>
     <div id="details">
     <h2>Details</h2>
     <p>A minimum spanning tree (MST) on the point cloud \(X\) is a minimal
@@ -179,14 +185,14 @@ points for rows and arrows for columns.</p>
     <h2>Ordination aesthetics</h2>
     
 
-<p>The convenience function <code>[ord_aes()]</code> can be used to incorporate all
+<p>The convenience function <code><a href="ggbiplot.html">ord_aes()</a></code> can be used to incorporate all
 coordinates of the ordination model into a statistical transformation. It
 maps the coordinates to the custom aesthetics <code>..coord1</code>, <code>..coord2</code>, etc.</p>
-<p>Some transformations, e.g. <code>[stat_center()]</code>, are commutative with projection
+<p>Some transformations, e.g. <code><a href="stat_center.html">stat_center()</a></code>, are commutative with projection
 to the 'x' and 'y' coordinates. If they detect aesthetics of the form
 <code>..coord[0-9]+</code>, then <code>..coord1</code> and <code>..coord2</code> are converted to <code>x</code> and <code>y</code>
 while any remaining are ignored.</p>
-<p>Other transformations, e.g. <code>stat_spantree()]</code>, yield different results in a
+<p>Other transformations, e.g. <code>stat_spantree()</code>, yield different results in a
 planar biplot when they are computer before or after projection. If such a
 stat layer detects these aesthetics, then the lot of them are used in the
 transformation.</p>

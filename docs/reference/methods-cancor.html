@@ -106,6 +106,20 @@ to identify objects returned by <code><a href="wrap-ord.html">cancor_ord()</a></
 <dd><p>An ordination object.</p></dd>
 
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
+
+<p>The recovery generics <code>recover_*()</code> return <a href="recoverers.html">core model components</a>, <a href="conference.html">distribution of inertia</a>,
+<a href="supplementation.html">supplementary elements</a>, and <a href="augmentation.html">intrinsic metadata</a>; but they require methods for each model class to
+tell them what these components are.</p>
+
+
+<p>The generic <code><a href="tbl_ord.html">as_tbl_ord()</a></code> returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap. It
+then provides 'tbl_ord' methods with access to the recoverers and hence to
+the model components.</p>
+    </div>
     <div id="details">
     <h2>Details</h2>
     <p>The canonical coefficients (loadings) are obtained directly from the
