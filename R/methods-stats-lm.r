@@ -8,6 +8,7 @@
 #' @include ord-tbl.r
 #' @importFrom stats model.frame influence cooks.distance predict
 #' @template param-methods
+#' @template return-methods
 #' @family methods for idiosyncratic techniques
 #' @example inst/examples/ex-methods-lm-mtcars.r
 NULL

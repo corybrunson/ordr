@@ -57,6 +57,9 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 }
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
+}
 \description{
 This stat layer restricts a dataset with \code{x} and \code{y} variables
 to the points that lie on its conical hull (other than the origin).

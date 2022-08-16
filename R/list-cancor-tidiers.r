@@ -24,7 +24,7 @@
 #'
 #'   - `"cor"`: returns information about the canonical correlations.
 #' @param ... Additional arguments allowed by generics; currently ignored.
-#' @return A [tibble][tibble::tibble].
+#' @template return-tidier
 #' @example inst/examples/ex-list-cancor-tidiers-savings.r
 #' @family list tidiers
 #' @seealso [generics::tidy()] [stats::cancor()]

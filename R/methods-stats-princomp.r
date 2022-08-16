@@ -4,9 +4,10 @@
 #'   objects of class `"princomp"` as returned by [stats::princomp()].
 #'
 #' @name methods-princomp
+#' @author Emily Paul
 #' @include ord-tbl.r
 #' @template param-methods
-#' @author Emily Paul
+#' @template return-methods
 #' @family methods for singular value decomposition-based techniques
 #' @example inst/examples/ex-methods-princomp-iris.r
 NULL

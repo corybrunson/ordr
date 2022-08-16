@@ -76,6 +76,9 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
 \code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
 }
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
+}
 \description{
 Compute geometric centers and spreads for ordination factors
 }

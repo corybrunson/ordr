@@ -22,6 +22,7 @@
 #' @param scale.factor The circle radius; should remain at its default value 1
 #'   or passed the same value as [ggbiplot()]. (This is an imperfect fix that
 #'   may be changed in a future version.)
+#' @template return-layer
 #' @family geom layers
 #' @example inst/examples/ex-geom-unit-circle.r
 #' @export

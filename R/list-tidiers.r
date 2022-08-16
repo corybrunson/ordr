@@ -7,14 +7,15 @@
 #'   [cancor()]. If such structure is detected, then the new in-package tidiers
 #'   are called.
 #'
+#' @name list_tidiers
+#' @include ord-tidiers.r
 #' @importFrom broom tidy_irlba
 #' @inheritParams broom::list_tidiers
 #' @inheritParams broom::svd_tidiers
-#' @name list_tidiers
-#' @include ord-tidiers.r
-#' @export
+#' @template return-tidier
 #' @family list tidiers
 #' @seealso [generics::tidy()] [generics::glance()]
+#' @export
 tidy.list <- function(x, ...) {
   optim_elems <- c("par", "value", "counts", "convergence", "message")
   xyz_elems <- c("x", "y", "z")

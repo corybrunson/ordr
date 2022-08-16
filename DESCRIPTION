@@ -24,7 +24,7 @@ Description: Ordination comprises several multivariate exploratory and
     'ordr' provides inspection, extraction, manipulation, and visualization
     tools for several popular ordination classes supported by a set of recovery
     methods. It is inspired by and designed to integrate into 'tidyverse'
-    workflows provided by Wickham &al (2019) <doi:10.21105/joss.01686>.
+    workflows provided by Wickham et al (2019) <doi:10.21105/joss.01686>.
 Depends:
     R (>= 3.3.0),
     ggplot2

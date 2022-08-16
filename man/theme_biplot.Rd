@@ -6,6 +6,9 @@
 \usage{
 theme_biplot()
 }
+\value{
+A ggplot \link[ggplot2:theme]{theme}.
+}
 \description{
 Omit coordinate visual aids from biplots.
 }

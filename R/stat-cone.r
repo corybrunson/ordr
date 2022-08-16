@@ -11,6 +11,7 @@
 #' @template param-stat
 #' @param origin Logical; whether to include the origin with the transformed
 #'   data. Defaults to `FALSE`.
+#' @template return-layer
 #' @family stat layers
 #' @example inst/examples/ex-stat-chull-spend.r
 #' @export

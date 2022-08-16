@@ -16,6 +16,7 @@
 #'   or `"circle"`.
 #' @param radius A [grid::unit()] object that sets the radius of the crosshairs
 #'   or of the circle.
+#' @template return-layer
 #' @family geom layers
 #' @export
 geom_origin <- function(

@@ -31,6 +31,7 @@
 
 #' @import ggplot2
 #' @inheritParams ggplot2::geom_text
+#' @template return-layer
 #' @family geom layers
 #' @export
 geom_text_radiate <- function(

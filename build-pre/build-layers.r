@@ -321,6 +321,7 @@ for (type in c("stat", "geom")) {
   # standard roxygen2 tags
   adapt_roxygen <- glue::glue(
     "#' @name biplot-{type}s\n",
+    "#' @template return-layer\n",
     "#' @family biplot layers\n",
     "#' @include utils.r\n",
     "#' @import ggplot2\n",

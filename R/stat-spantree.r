@@ -35,6 +35,7 @@
 #' @param method Passed to [stats::dist()] if `engine` is `"vegan"`, ignored if
 #'   `"mlpack"`.
 #' @template param-stat
+#' @template return-layer
 #' @family stat layers
 #' @example inst/examples/ex-stat-spantree-eurodist.r
 #' @export

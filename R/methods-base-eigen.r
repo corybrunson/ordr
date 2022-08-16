@@ -6,6 +6,7 @@
 #' @name methods-eigen
 #' @include ord-tbl.r
 #' @template param-methods
+#' @template return-methods
 #' @family methods for eigen-decomposition-based techniques
 #' @example inst/examples/ex-methods-eigen-qswur.r
 NULL

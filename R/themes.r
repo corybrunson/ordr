@@ -9,7 +9,8 @@
 #' artificial coordinates of the row and column markers The biplot (partial)
 #' theme removes these elements from the current theme. This can be especially
 #' helpful when plotting [axes][geom_axis()] or [isolines][geom_isoline()].
-#'
+#' 
+#' @return A ggplot [theme][ggplot2::theme].
 #' @export
 theme_biplot <- function() {
   theme(

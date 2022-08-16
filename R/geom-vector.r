@@ -23,6 +23,7 @@
 #' @template param-geom
 #' @param arrow Specification for arrows, as created by [grid::arrow()], or else
 #'   `NULL` for no arrows.
+#' @template return-layer
 #' @family geom layers
 #' @example inst/examples/ex-geom-vector-iris.r
 #' @export

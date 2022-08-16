@@ -6,6 +6,7 @@
 #' @name methods-kmeans
 #' @include ord-tbl.r
 #' @template param-methods
+#' @template return-methods
 #' @family methods for idiosyncratic techniques
 #' @example inst/examples/ex-methods-kmeans-iris.r
 NULL

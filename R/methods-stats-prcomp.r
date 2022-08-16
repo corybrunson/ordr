@@ -4,9 +4,10 @@
 #'   objects of class `"prcomp"` as returned by [stats::prcomp()].
 #'
 #' @name methods-prcomp
+#' @author Emily Paul
 #' @include ord-tbl.r
 #' @template param-methods
-#' @author Emily Paul
+#' @template return-methods
 #' @family methods for singular value decomposition-based techniques
 #' @example inst/examples/ex-methods-prcomp-iris.r
 NULL

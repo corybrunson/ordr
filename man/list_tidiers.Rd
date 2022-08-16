@@ -15,6 +15,9 @@
 
 \item{...}{Additionally, arguments passed to the tidying function.}
 }
+\value{
+A \link[tibble:tibble]{tibble}.
+}
 \description{
 Some unclassed lists of fixed structure, returned by other
 functions, are recognized by \strong{broom}'s \link[broom:list_tidiers]{list tidiers}. \strong{ordr}'s updated list tidiers append

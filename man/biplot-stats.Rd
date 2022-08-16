@@ -267,6 +267,9 @@ to use; either \code{"vegan"} or \code{"mlpack"}.}
 supplied parameters and aesthetics are understood by the \code{geom} or
 \code{stat}. Use \code{FALSE} to suppress the checks.}
 }
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
+}
 \description{
 These statistical transformations (stats) adapt
 conventional \strong{ggplot2} stats to one or the other matrix factor

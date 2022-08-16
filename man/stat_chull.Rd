@@ -53,6 +53,9 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 }
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
+}
 \description{
 As used in a \strong{\link[ggplot2:ggplot2-package]{ggplot2}} vignette, this stat
 layer restricts a dataset with \code{x} and \code{y} variables to the points that lie

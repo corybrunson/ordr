@@ -34,6 +34,16 @@
 \arguments{
 \item{x}{An ordination object.}
 }
+\value{
+The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia}, and
+\link[=supplementation]{supplementary elements} but require methods for each
+model class to tell them what these components are.
+
+The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap. It
+then provides 'tbl_ord' methods with access to the recoverers and hence to
+the model components.
+}
 \description{
 These methods extract data from, and attribute new data to,
 objects of class \code{"lra"}, a class introduced in this package to organize
