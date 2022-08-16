@@ -306,7 +306,9 @@ the monograph
 and the textbook [*Understanding
 Biplots*](https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550)
 by John C. Gower, David J. Hand, Sugnet Gardner Lubbe, and Niel J. Le
-Roux.
+Roux, and by the volume [*Principal Components
+Analysis*](https://link.springer.com/book/10.1007/b98835) by I. T.
+Jolliffe.
 
 ### notes
 
