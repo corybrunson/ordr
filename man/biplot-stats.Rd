@@ -279,16 +279,16 @@ stats.
 }
 \section{Ordination aesthetics}{
 
-The convenience function \verb{[ord_aes()]} can be used to incorporate all
+The convenience function \code{\link[=ord_aes]{ord_aes()}} can be used to incorporate all
 coordinates of the ordination model into a statistical transformation. It
 maps the coordinates to the custom aesthetics \code{..coord1}, \code{..coord2}, etc.
 
-Some transformations, e.g. \verb{[stat_center()]}, are commutative with projection
+Some transformations, e.g. \code{\link[=stat_center]{stat_center()}}, are commutative with projection
 to the 'x' and 'y' coordinates. If they detect aesthetics of the form
 \verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and \code{y}
 while any remaining are ignored.
 
-Other transformations, e.g. \verb{stat_spantree()]}, yield different results in a
+Other transformations, e.g. \code{\link[=stat_spantree]{stat_spantree()}}, yield different results in a
 planar biplot when they are computer before or after projection. If such a
 stat layer detects these aesthetics, then the lot of them are used in the
 transformation.
