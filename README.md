@@ -289,14 +289,17 @@ Conduct](https://github.com/corybrunson/ordr/blob/main/CODE_OF_CONDUCT.md).
 This package was originally inspired by the **ggbiplot** extension
 developed by [Vincent Q. Vu](https://github.com/vqv/ggbiplot), [Richard
 J Telford](https://github.com/richardjtelford/ggbiplot), and [Vilmantas
-Gegzna](https://github.com/forked-packages/ggbiplot), among others. So
-far as i know, it first brought biplots into the **tidyverse**
-framework. The motivation to unify a variety of ordination methods came
-from several books and articles by [Michael
+Gegzna](https://github.com/forked-packages/ggbiplot), among others. It
+probably first brought biplots into the **tidyverse** framework. The
+motivation to unify a variety of ordination methods came from several
+books and articles by [Michael
 Greenacre](https://www.fbbva.es/microsite/multivariate-statistics/resources.html),
 in particular [*Biplots in
 Practice*](https://www.fbbva.es/microsite/multivariate-statistics/resources.html#biplots).
-Thomas Lin Pedersen’s
+Several answers at CrossValidated, in particular by
+[amoeba](https://stats.stackexchange.com/users/28666/amoeba) and
+[ttnphns](https://stats.stackexchange.com/users/3277/ttnphns), provided
+theoretical insights and informed design choices. Thomas Lin Pedersen’s
 [**tidygraph**](https://github.com/thomasp85/tidygraph) prequel to
 **ggraph** finally induced the shift from the downstream generation of
 scatterplots to the upstream handling and manipulating of ordination
@@ -316,8 +319,8 @@ Jolliffe.
     978-84-923846.
     <https://www.fbbva.es/microsite/multivariate-statistics/biplots.html>
 
-[^2]: The term *ordination* is most prevalent among ecologists; to my
-    knowledge, no catch-all term is in common use outside ecology.
+[^2]: The term *ordination* is most prevalent among ecologists; no
+    catch-all term seems to be in common use outside ecology.
 
 [^3]: This is not a hard rule: PCA is often used to compress data before
     clustering, and LDA uses dimension reduction to perform
