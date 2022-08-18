@@ -42,9 +42,6 @@ Imports:
     purrr,
     labeling,
     ggrepel,
-License: GPL-3
-Encoding: UTF-8
-LazyData: true
 Suggests:
     testthat,
     sessioninfo,
@@ -55,6 +52,11 @@ Suggests:
     heplots,
     knitr,
     rmarkdown
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/corybrunson/ordr
+BugReports: https://github.com/corybrunson/ordr/issues
 RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 Collate:
