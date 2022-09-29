@@ -149,7 +149,6 @@ as annotations to the appropriate matrix factors:[^7]
 #> 4 -2.29  0.595 -0.0910     | 4 setosa 
 #> 5 -2.38 -0.645 -0.0157     | 5 setosa 
 #> # … with 145 more rows
-#> # ℹ Use `print(n = ...)` to see more rows
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
 #>      PC1     PC2    PC3 ... |   name         center scale
@@ -183,7 +182,6 @@ iris_meta <- data.frame(
 #> 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid       2
 #> 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid       2
 #> # … with 145 more rows
-#> # ℹ Use `print(n = ...)` to see more rows
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
 #>      PC1     PC2    PC3 ... |   name         center scale
@@ -308,7 +306,7 @@ the monograph
 [*Biplots*](https://www.google.com/books/edition/Biplots/lTxiedIxRpgC)
 and the textbook [*Understanding
 Biplots*](https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550)
-by John C. Gower, David J. Hand, Sugnet Gardner Lubbe, and Niel J. Le
+by John C. Gower, David J. Hand, Sugnet Gardner–Lubbe, and Niel J. Le
 Roux, and by the volume [*Principal Components
 Analysis*](https://link.springer.com/book/10.1007/b98835) by I. T.
 Jolliffe.

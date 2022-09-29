@@ -109,9 +109,9 @@ that are processed internally by \code{\link[ggplot2:aes]{ggplot2::aes()}}.
 
 The \code{axis.type} parameter controls whether the biplot is interpolative or
 predictive, though predictive biplots are still experimental and limited to
-linear methods like PCA. Gower & Hand (1996) and Gower, Lubbe, & le Roux
-(2011) thoroughly explain the construction and interpretation of predictive
-biplots.
+linear methods like PCA. Gower & Hand (1996) and Gower, Gardner--Lubbe, & le
+Roux (2011) thoroughly explain the construction and interpretation of
+predictive biplots.
 }
 \section{Biplot layers}{
 
@@ -232,8 +232,8 @@ iris_pca \%>\%
 \references{
 Gower JC & Hand DJ (1996) \emph{Biplots}. Chapman & Hall, ISBN: 0-412-71630-5.
 
-Gower JC, Lubbe GS, & le Roux NJ (2011) \emph{Understanding Biplots}. Wiley, ISBN:
-978-0-470-01255-0. \url{https://www.wiley.com/go/biplots}
+Gower JC, Gardner--Lubbe S, & le Roux NJ (2011) \emph{Understanding Biplots}.
+Wiley, ISBN: 978-0-470-01255-0. \url{https://www.wiley.com/go/biplots}
 }
 \seealso{
 \code{\link[ggplot2:ggplot2-package]{ggplot2::ggplot2()}}, on which \code{ggbiplot()} is built
