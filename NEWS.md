@@ -20,7 +20,7 @@ The `ordinate()` function is now a generic with methods for four data classes.
 
 ## ggbiplot
 
-The logical `prediction` parameter is replaced with the character-valued `axis.type`, based on the `ax.type` parameter used in **UBbipl** (Gower, Lubbe, & le Roux, 2011).
+The logical `prediction` parameter is replaced with the character-valued `axis.type`, based on the `ax.type` parameter used in **UBbipl** (Gower, Gardner--Lubbe, & le Roux, 2011).
 
 ## tests
 

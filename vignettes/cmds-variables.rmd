@@ -245,7 +245,7 @@ In general, plots of simple data should use very few scales (aesthetic mappings)
 
 ### correlation monoplot
 
-CMDS of variables offers a natural alternative visualization, which [Gower, Lubbe, and le Roux (2011)](https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550) call a "correlation monoplot" in that it consists of but one of the two layers of a PCA or other biplot. As with CMDS of cases, the point isn't to overlay the case scores and variable loadings from a singular value decomposition, but to use the scores or loadings alone to endow the cases or variables with a Euclidean geometry they didn't originally have. To that end, i'll plot the variables as vectors with tails at the origin and heads at their principal coordinates $Y = V \Lambda^{1/2}$, with a unit circle included for reference:
+CMDS of variables offers a natural alternative visualization, which [Gower, Gardner--Lubbe, and le Roux (2011)](https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550) call a "correlation monoplot" in that it consists of but one of the two layers of a PCA or other biplot. As with CMDS of cases, the point isn't to overlay the case scores and variable loadings from a singular value decomposition, but to use the scores or loadings alone to endow the cases or variables with a Euclidean geometry they didn't originally have. To that end, i'll plot the variables as vectors with tails at the origin and heads at their principal coordinates $Y = V \Lambda^{1/2}$, with a unit circle included for reference:
 
 ```{r multidimensional scaling of variables, fig.width=7, eval=FALSE, echo=FALSE}
 corr.eigen <- eigen(corr)
