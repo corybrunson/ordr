@@ -67,6 +67,9 @@ supplied parameters and aesthetics are understood by the \code{geom} or
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 }
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
+}
 \description{
 This stat layer identifies the \eqn{n-1} pairs among \eqn{n}
 points that form a minimum spanning tree, then calculates the segments
@@ -76,9 +79,9 @@ between these poirs in the two dimensions \code{x} and \code{y}.
 A minimum spanning tree (MST) on the point cloud \eqn{X} is a minimal
 connected graph on \eqn{X} with the smallest possible sum of distances (or
 dissimilarities) between linked points. These layers call \code{\link[stats:dist]{stats::dist()}} to
-calculate a distance/dissimilarity object and \code{\link[vegan:spantree]{vegan::spantree()}} to
-calculate the MST. The result is formatted with position aesthetics readable
-by \code{\link[ggplot2:geom_segment]{ggplot2::geom_segment()}}.
+calculate a distance/dissimilarity object and an engine from either \strong{vegan}
+or \emph{mlpack}* to calculate the MST. The result is formatted with position
+aesthetics readable by \code{\link[ggplot2:geom_segment]{ggplot2::geom_segment()}}.
 
 An MST calculated on \code{x} and \code{y} reflects the distances among the points in
 \eqn{X} in the reduced-dimension plane of the biplot. In contrast, one
@@ -103,16 +106,16 @@ points for rows and arrows for columns.
 
 \section{Ordination aesthetics}{
 
-The convenience function \verb{[ord_aes()]} can be used to incorporate all
+The convenience function \code{\link[=ord_aes]{ord_aes()}} can be used to incorporate all
 coordinates of the ordination model into a statistical transformation. It
 maps the coordinates to the custom aesthetics \code{..coord1}, \code{..coord2}, etc.
 
-Some transformations, e.g. \verb{[stat_center()]}, are commutative with projection
+Some transformations, e.g. \code{\link[=stat_center]{stat_center()}}, are commutative with projection
 to the 'x' and 'y' coordinates. If they detect aesthetics of the form
 \verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and \code{y}
 while any remaining are ignored.
 
-Other transformations, e.g. \verb{stat_spantree()]}, yield different results in a
+Other transformations, e.g. \code{\link[=stat_spantree]{stat_spantree()}}, yield different results in a
 planar biplot when they are computer before or after projection. If such a
 stat layer detects these aesthetics, then the lot of them are used in the
 transformation.
@@ -123,21 +126,18 @@ In either case, the stat layer returns a data frame with position aesthetics
 
 \examples{
 # classical multidimensional scaling of road distances between European cities
-eurodist \%>\%
-  cmdscale_ord(k = 11) \%>\%
-  as_tbl_ord() \%>\%
-  augment_ord() \%>\%
-  print() -> euro_mds
+euro_mds <- ordinate(eurodist, cmdscale_ord, k = 11)
+
 # biplot with minimal spanning tree based on full-dimensional distances
 # (as implemented in {mlpack})
 euro_mds \%>\%
+  negate_ord("PCo2") \%>\%
   ggbiplot() +
-  scale_y_reverse() +
   stat_cols_spantree(
     ord_aes(euro_mds), check.aes = FALSE, engine = "mlpack",
     alpha = .5, linetype = "dotted"
   ) +
-  geom_cols_text(aes(label = .name), size = 3) +
+  geom_cols_text(aes(label = name), size = 3) +
   ggtitle(
     "MDS biplot of road distances between European cities",
     "Dotted segments constitute the minimal spanning tree"

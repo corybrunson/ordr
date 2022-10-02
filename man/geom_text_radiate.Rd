@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom-text-radiate.r
 \name{geom_text_radiate}
 \alias{geom_text_radiate}
-\title{Render text that radiates outward from the origin}
+\title{Text radiating outward from the origin}
 \usage{
 geom_text_radiate(
   mapping = NULL,
@@ -73,6 +73,9 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 }
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
+}
 \description{
 \code{geom_text_radiate()} is adapted from \code{ggbiplot()} in the
 off-CRAN extensions of the same name (Vu, 2014; Telford, 2017; Gegzna,
@@ -122,7 +125,7 @@ version 0.6. \url{https://github.com/richardjtelford/ggbiplot} (fork),
 \code{experimental} branch
 
 Vilmantas Gegzna (2018). ggbiplot: A 'ggplot2' based biplot. R package
-version 0.55. \url{https://github.com/GegznaV/ggbiplot} (fork), \code{experimental}
+version 0.55. \url{https://github.com/forked-packages/ggbiplot} (fork), \code{experimental}
 branch
 }
 \seealso{

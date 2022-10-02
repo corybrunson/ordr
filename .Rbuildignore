@@ -17,9 +17,10 @@ README.Rmd
 ^ignore$
 
 # hosting infrastructure
-^cran-comments\.md$
 ^\.github$
 ^\.travis\.yml$
+^cran-comments\.md$
+^CRAN-SUBMISSION$
 
 # custom files and directories
 ^sandbox$

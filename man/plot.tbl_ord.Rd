@@ -14,6 +14,9 @@ enable parsing of object name).}
 
 \item{...}{Additional arguments passed to other methods.}
 }
+\value{
+Nothing, but a plot is produced on the current graphics device.
+}
 \description{
 Adapt \strong{stats} 'prcomp' and 'princomp' methods for \code{plot()},
 \code{screeplot()}, and \code{biplot()} generics to 'tbl_ord' objects.
@@ -34,6 +37,7 @@ conferred equally to rows and columns).
 }
 \examples{
 # note: behavior depends on installed packages with class-specific methods
+
 # class 'prcomp'
 iris_pca <- prcomp(iris[, -5L], scale = TRUE)
 iris_pca_ord <- as_tbl_ord(iris_pca)
@@ -43,22 +47,14 @@ screeplot(iris_pca)
 screeplot(iris_pca_ord)
 biplot(iris_pca)
 biplot(iris_pca_ord)
+
 # class 'correspondence'
 haireye_ca <- MASS::corresp(rowSums(HairEyeColor, dims = 2L), nf = 2L)
 haireye_ca_ord <- as_tbl_ord(haireye_ca)
 plot(haireye_ca)
 plot(haireye_ca_ord)
-#screeplot(haireye_ca)
+# no `screeplot()` method for class 'correspondence'
 screeplot(haireye_ca_ord)
 biplot(haireye_ca)
 biplot(haireye_ca_ord)
-# class 'lra'
-arrests_lra <- lra(subset(USArrests, select = -UrbanPop))
-arrests_lra_ord <- as_tbl_ord(arrests_lra)
-#plot(arrests_lra)
-plot(arrests_lra_ord)
-#screeplot(arrests_lra)
-screeplot(arrests_lra_ord)
-#biplot(arrests_lra)
-biplot(arrests_lra_ord, var.axes = FALSE)
 }

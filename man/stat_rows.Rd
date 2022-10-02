@@ -81,6 +81,9 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 }
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
+}
 \description{
 These stats merely tell \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} which factor of an
 ordination to pull data from for a plot layer. They are invoked internally
@@ -106,14 +109,15 @@ swiss_fa <-
 # active and supplementary elements
 get_rows(swiss_fa, elements = "active")
 head(get_rows(swiss_fa, elements = "score"))
+
 # biplot using element filters and selection
 # (note that filter precedes selection)
 ggbiplot(swiss_fa) +
   geom_rows_point(elements = "score") +
-  geom_rows_text(aes(label = .name), elements = "score", subset = c(1, 4, 18)) +
+  geom_rows_text(aes(label = name), elements = "score", subset = c(1, 4, 18)) +
   scale_alpha_manual(values = c(0, 1), guide = "none") +
   geom_cols_vector() +
-  geom_cols_text_radiate(aes(label = .name))
+  geom_cols_text_radiate(aes(label = name))
 }
 \seealso{
 Other biplot layers: 

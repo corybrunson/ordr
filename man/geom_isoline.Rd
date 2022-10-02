@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom-isoline.r
 \name{geom_isoline}
 \alias{geom_isoline}
-\title{Render isolines (contour lines) along axes}
+\title{Isolines (contour lines)}
 \usage{
 geom_isoline(
   mapping = NULL,
@@ -12,7 +12,7 @@ geom_isoline(
   isoline_text = TRUE,
   by = NULL,
   num = NULL,
-  label_dodge = 0.1,
+  label_dodge = 0.03,
   ...,
   parse = FALSE,
   check_overlap = FALSE,
@@ -81,6 +81,9 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 }
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
+}
 \description{
 \code{geom_isoline()} renders isolines along row or column axes.
 }
@@ -127,20 +130,22 @@ inherit any values passed to their un-prefixed counterparts.
 head(heplots::Diabetes)
 # default (standardized) linear discriminant analysis of groups on tests
 diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes)
+
 # bestow 'tbl_ord' class & augment observation, centroid, and variable fields
 as_tbl_ord(diabetes_lda) \%>\%
   augment_ord() \%>\%
   print() -> diabetes_lda
+
 # row-standard biplot
 diabetes_lda \%>\%
   confer_inertia(1) \%>\%
-  ggbiplot(aes(label = .name), elements = "active") +
+  ggbiplot(aes(label = name), elements = "active") +
   theme_bw() + theme_biplot() +
   geom_rows_text() +
   geom_cols_vector(subset = c(1, 3, 4)) +
   geom_cols_text_radiate(subset = c(1, 3, 4), size = 3) +
   geom_cols_isoline(subset = c(1, 3, 4), alpha = .25, num = 4L,
-                    text_alpha = .5, text_size = 3, label_dodge = .2) +
+                    label_dodge = -.03, text_alpha = .5, text_size = 3) +
   ggtitle(
     "LDA of Reaven & Miller diabetes groups",
     "Row-standard biplot of standardized LDA"

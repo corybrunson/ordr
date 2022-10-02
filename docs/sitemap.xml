@@ -61,6 +61,9 @@
     <loc>/reference/biplot-stats.html</loc>
   </url>
   <url>
+    <loc>/reference/cancor_tidiers.html</loc>
+  </url>
+  <url>
     <loc>/reference/classes.html</loc>
   </url>
   <url>
@@ -307,6 +310,9 @@
     <loc>/reference/methods-svd.html</loc>
   </url>
   <url>
+    <loc>/reference/negation.html</loc>
+  </url>
+  <url>
     <loc>/reference/ordinate.html</loc>
   </url>
   <url>
@@ -326,6 +332,9 @@
   </url>
   <url>
     <loc>/reference/reconstruct.html</loc>
+  </url>
+  <url>
+    <loc>/reference/recoverers.html</loc>
   </url>
   <url>
     <loc>/reference/reexports.html</loc>

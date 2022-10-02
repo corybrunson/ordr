@@ -25,7 +25,7 @@
 )
 }
 \arguments{
-\item{x}{A \link{tbl_ord} object.}
+\item{x}{A \link{tbl_ord}.}
 
 \item{width}{Width of text output to generate. This defaults to \code{NULL}, which
 means use the \code{width} \link[pillar:pillar_options]{option}.}
@@ -45,6 +45,11 @@ The previously defined \code{n_extra} argument is soft-deprecated.}
 \item{max_footer_lines}{Maximum number of footer lines. If \code{NULL},
 the \code{max_footer_lines} \link[pillar:pillar_options]{option} is used.}
 }
+\value{
+The \code{format()} method returns a vector of strings that are more
+elegantly printed by the \code{print()} method, which itself returns the tbl_ord
+invisibly.
+}
 \description{
 These methods of \code{\link[base:format]{base::format()}} and \code{\link[base:print]{base::print()}} render a
 (usually more) tidy readout of a \link{tbl_ord} that is consistent across all
@@ -52,8 +57,8 @@ original ordination classes.
 }
 \details{
 The \code{format} and \code{print} methods for class 'tbl_ord' are adapted from those
-for class '\link[tibble:tbl_df-class]{tbl_df}' and for class
-'\link[tidygraph:tbl_graph]{tbl_graph}'.
+for class '\link[tibble:tbl_df-class]{tbl_df}' and for class 'tbl_graph' from the
+\strong{tidygraph} package.
 
 \strong{Note:} The \code{format()} function is tedius but cannot be easily modularized
 without invoking \link{recoverers}, \link{annotation}, and \link{augmentation} multiple

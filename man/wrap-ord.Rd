@@ -55,6 +55,10 @@ cancor_ord(x, y, xcenter = TRUE, ycenter = TRUE, scores = FALSE)
 \item{scores}{Logical; whether to return canonical scores and structure
 correlations.}
 }
+\value{
+Objects slightly modified from the outputs of the original functions,
+with new '*-ord' classes.
+}
 \description{
 These \verb{*_ord} functions wrap core R functions with modifications
 for use with '\link{tbl_ord}' methods. Some parameters are hidden from the user
@@ -76,11 +80,13 @@ By default, \code{\link[=cancor_ord]{cancor_ord()}} returns the same data as \co
 canonical correlations (\code{cor}), the canonical coefficients (\verb{$xcoef} and
 \verb{$ycoef}), and the variable means (\verb{$xcenter}, \verb{$ycenter}). If \code{scores = TRUE}, then \code{\link[=cancor_ord]{cancor_ord()}} also returns the scores \verb{$xscores} and \verb{$yscores}
 calculated from the (appropriately centered) data and the coefficients and
-the four sets of structure correlations \verb{$x.xscores}, etc. between these and
-the data. These modifications are inspired by \code{\link[candisc:cancor]{candisc::cancor()}}, though it
-should be noted that the canonical coefficients (hence the canonical scores)
-are scaled by \eqn{n - 1} compared to these, though the structure
-correlations are the same.
+the intraset structure correlations \verb{$xstructure} and \verb{$ystructure} between
+these and the data. These modifications are inspired by the \code{cancor()}
+function in \strong{candisc}, though two caveats should be noted: First, the
+canonical coefficients (hence the canonical scores) are scaled by \eqn{n - 1}
+compared to these, though the intraset structure correlations are the same.
+Second, the \emph{interset} structure correlations are not returned, as these may
+be obtained by conferring inertia unto the intraset ones.
 }
 \examples{
 # glass composition data from one furnace
@@ -106,12 +112,14 @@ glass_banias_minor <- subset(
 # impute half of detection threshold
 glass_banias_minor$TiO2[[1L]] <- 0.5
 cancor_ord(glass_banias, glass_banias_minor)
-# interset/intraset correlations as standard/principal coordinates
+
+# calculate canonical scores and structure correlations
 glass_cca <-
   cancor_ord(glass_banias[, 1:3], glass_banias_minor[, 1:3], scores = TRUE)
-glass_cca$x.xscores \%*\% diag(glass_cca$cor)
-glass_cca$x.yscores
-}
-\seealso{
-\code{\link[candisc:cancor]{candisc::cancor()}}
+# scores
+glass_cca$xscores
+# intraset correlations
+glass_cca$xstructure
+# interset correlations
+glass_cca$xstructure \%*\% diag(glass_cca$cor)
 }

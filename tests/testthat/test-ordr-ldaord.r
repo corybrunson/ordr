@@ -24,12 +24,12 @@ test_that("'lda' has specified distribution of inertia", {
 })
 
 test_that("'lda' augmentations are consistent with '.element' column", {
-  expect_equal(".element" %in% names(augmentation_rows(fit_lda_ord1)),
-               ".element" %in% names(augmentation_cols(fit_lda_ord1)))
-  expect_equal(".element" %in% names(augmentation_rows(fit_lda_ord2)),
-               ".element" %in% names(augmentation_cols(fit_lda_ord2)))
-  expect_equal(".element" %in% names(augmentation_rows(fit_lda_ord3)),
-               ".element" %in% names(augmentation_cols(fit_lda_ord3)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_lda_ord1)),
+               ".element" %in% names(recover_aug_cols(fit_lda_ord1)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_lda_ord2)),
+               ".element" %in% names(recover_aug_cols(fit_lda_ord2)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_lda_ord3)),
+               ".element" %in% names(recover_aug_cols(fit_lda_ord3)))
 })
 
 test_that("`as_tbl_ord()` coerces 'lda' objects", {

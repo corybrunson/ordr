@@ -8,9 +8,9 @@
 \alias{recover_inertia.princomp}
 \alias{recover_coord.princomp}
 \alias{recover_conference.princomp}
-\alias{augmentation_rows.princomp}
-\alias{augmentation_cols.princomp}
-\alias{augmentation_coord.princomp}
+\alias{recover_aug_rows.princomp}
+\alias{recover_aug_cols.princomp}
+\alias{recover_aug_coord.princomp}
 \title{Functionality for principal components analysis ('princomp') objects}
 \usage{
 \method{as_tbl_ord}{princomp}(x)
@@ -25,14 +25,24 @@
 
 \method{recover_conference}{princomp}(x)
 
-\method{augmentation_rows}{princomp}(x)
+\method{recover_aug_rows}{princomp}(x)
 
-\method{augmentation_cols}{princomp}(x)
+\method{recover_aug_cols}{princomp}(x)
 
-\method{augmentation_coord}{princomp}(x)
+\method{recover_aug_coord}{princomp}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
+}
+\value{
+The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia},
+\link[=supplementation]{supplementary elements}, and \link[=augmentation]{intrinsic metadata}; but they require methods for each model class to
+tell them what these components are.
+
+The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap. It
+then provides 'tbl_ord' methods with access to the recoverers and hence to
+the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
@@ -42,14 +52,17 @@ objects of class \code{"princomp"} as returned by \code{\link[stats:princomp]{st
 # data frame of Anderson iris species measurements
 class(iris)
 head(iris)
+
 # compute unscaled row-principal components of scaled measurements
 iris[, -5] \%>\%
   princomp() \%>\%
   as_tbl_ord() \%>\%
   print() -> iris_pca
+
 # recover observation principal coordinates and measurement standard coordinates
 head(get_rows(iris_pca))
 get_cols(iris_pca)
+
 # augment measurement coordinates with names and scaling parameters
 (iris_pca <- augment_ord(iris_pca))
 }
@@ -62,8 +75,17 @@ Other methods for singular value decomposition-based techniques:
 \code{\link{methods-mca}},
 \code{\link{methods-prcomp}},
 \code{\link{methods-svd}}
+
+Other models from the \strong{stats} package: 
+\code{\link{methods-cancor}},
+\code{\link{methods-cmds}},
+\code{\link{methods-factanal}},
+\code{\link{methods-kmeans}},
+\code{\link{methods-lm}},
+\code{\link{methods-prcomp}}
 }
 \author{
 Emily Paul
 }
 \concept{methods for singular value decomposition-based techniques}
+\concept{models from the \strong{stats} package}

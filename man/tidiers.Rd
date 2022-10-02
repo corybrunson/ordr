@@ -20,15 +20,19 @@
 
 \item{data}{Passed to generic methods; currently ignored.}
 
-\item{.matrix}{A character string matching one of several indicators for one
-or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
+\item{.matrix}{A character string partially matched (lowercase) to several
+indicators for one or both matrices in a matrix decomposition used for
+ordination. The standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for
+both).}
 
 \item{elements}{Character vector; which elements of each factor for which to
 render graphical elements. One of \code{"all"} (the default), \code{"active"}, or any
 supplementary element type defined by the specific class methods (e.g.
 \code{"score"} for 'factanal', 'lda_ord', and 'cancord_ord' and \code{"intraset"} and
 \code{"interset"} for 'cancor_ord').}
+}
+\value{
+A \link[tibble:tibble]{tibble}.
 }
 \description{
 These functions return \link[tibble:tibble]{tibbles} that summarize
@@ -44,9 +48,26 @@ of the \link{augmentation} methods:
 summarizes information about model components, which here are the
 artificial coordinates created by ordinations. The output can be passed to
 \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} to generate scree plots.
+The returned columns are
+\itemize{
+\item \code{name}: (the name of) the coordinate
+\item other columns extracted from the model,
+usually a single additional column of the singular or eigen values
+\item \code{inertia}: the multidimensional variance
+\item \code{prop_var}: the proportion of inertia
+\item \code{quality}: the cumulative proportion of variance
+}
 \item The \code{\link[generics:glance]{generics::glance()}} method
 reports information about the entire model, here always treated as one of a
 broader class of ordination models.
+The returned columns are
+\itemize{
+\item \code{rank}: the rank of the ordination model, i.e. the number of ordinates
+\item \code{n.row},\code{n.col}: the dimensions of the decomposed matrix
+\item \code{inertia}: the total inertia in the ordination
+\item \verb{prop.var.*}: the proportion of variance in the first 2 ordinates
+\item \code{class}: the class of the wrapped model object
+}
 \item The \code{\link[ggplot2:fortify]{ggplot2::fortify()}} method
 augments and collapses row and/or column data, depending on \code{.matrix} and
 \code{.element}, into a single tibble, in preparation for \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
@@ -54,7 +75,7 @@ Its output resembles that of \code{\link[generics:augment]{generics::augment()}}
 output may correspond to rows, columns, or both of the original data. If
 \code{.matrix} is passed \code{"rows"}, \code{"cols"}, or \code{"dims"} (for both), then
 \code{fortify()} returns a tibble whose fields are obtained, in order, via
-\verb{get_*()}, \verb{augmentation_*()}, and \verb{annotation_*()}.
+\verb{get_*()}, \verb{recover_aug_*()}, and \verb{annotation_*()}.
 }
 
 The tibble is assigned a \code{"coordinates"} attribute whose value is obtained
@@ -64,35 +85,38 @@ particular \code{\link[=stat_spantree]{stat_spantree()}}.
 }
 \examples{
 # illustrative ordination: PCA of iris data
-iris_pca <- ordinate(iris, seq(4L), ~ prcomp(., center = TRUE, scale. = TRUE))
+iris_pca <- ordinate(iris, ~ prcomp(., center = TRUE, scale. = TRUE), seq(4L))
+
 # use `tidy()` to summarize distribution of inertia
 tidy(iris_pca)
 # this facilitates scree plots
 tidy(iris_pca) \%>\%
-  ggplot(aes(x = .name, y = .prop_var)) +
+  ggplot(aes(x = name, y = prop_var)) +
   geom_col() +
   scale_y_continuous(labels = scales::percent) +
   labs(x = NULL, y = "Proportion of variance")
+
 # use `fortify()` to prepare either matrix factor for `ggplot()`
-fortify(iris_pca, .matrix = "variables") \%>\%
-  ggplot(aes(x = .name, y = PC1)) +
+fortify(iris_pca, .matrix = "V") \%>\%
+  ggplot(aes(x = name, y = PC1)) +
   geom_col() +
   coord_flip() +
   labs(x = "Measurement")
 iris_pca \%>\%
-  fortify(.matrix = "cases") \%>\%
+  fortify(.matrix = "U") \%>\%
   ggplot(aes(x = PC1, fill = Species)) +
   geom_histogram() +
   labs(y = NULL)
 # ... or to prepare both for `ggbiplot()`
 fortify(iris_pca)
+
 # use `glance()` to summarize the model as an ordination
 glance(iris_pca)
 # this enables comparisons to other models
 rbind(
-  glance(ordinate(subset(iris, Species == "setosa"), seq(4L), prcomp)),
-  glance(ordinate(subset(iris, Species == "versicolor"), seq(4L), prcomp)),
-  glance(ordinate(subset(iris, Species == "virginica"), seq(4L), prcomp))
+  glance(ordinate(subset(iris, Species == "setosa"), prcomp, seq(4L))),
+  glance(ordinate(subset(iris, Species == "versicolor"), prcomp, seq(4L))),
+  glance(ordinate(subset(iris, Species == "virginica"), prcomp, seq(4L)))
 )
 }
 \seealso{

@@ -21,7 +21,7 @@ test_that("glancing returns a single row", {
   expect_equal(nrow(glance(fa)), 1L)
 })
 
-test_that("tidying includes '.inertia' and '.name' fields", {
-  expect_true(all(c(".inertia", ".name") %in% names(tidy(ed))))
-  expect_true(all(c(".inertia", ".name") %in% names(tidy(fa))))
+test_that("tidying includes 'inertia' and 'name' fields", {
+  expect_true(all(c("inertia", "name") %in% names(tidy(ed))))
+  expect_true(all(c("inertia", "name") %in% names(tidy(fa))))
 })

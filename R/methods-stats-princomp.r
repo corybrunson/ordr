@@ -4,10 +4,12 @@
 #'   objects of class `"princomp"` as returned by [stats::princomp()].
 #'
 #' @name methods-princomp
+#' @author Emily Paul
 #' @include ord-tbl.r
 #' @template param-methods
-#' @author Emily Paul
+#' @template return-methods
 #' @family methods for singular value decomposition-based techniques
+#' @family models from the **stats** package
 #' @example inst/examples/ex-methods-princomp-iris.r
 NULL
 
@@ -48,35 +50,35 @@ recover_conference.princomp <- function(x) {
 
 #' @rdname methods-princomp
 #' @export
-augmentation_rows.princomp <- function(x) {
-  .name <- rownames(x[["scores"]])
-  if (is.null(.name)) {
+recover_aug_rows.princomp <- function(x) {
+  name <- rownames(x[["scores"]])
+  if (is.null(name)) {
     tibble_pole(nrow(x[["scores"]]))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
 }
 
 #' @rdname methods-princomp
 #' @export
-augmentation_cols.princomp <- function(x) {
-  .name <- rownames(x[["loadings"]])
-  res <- if (is.null(.name)) {
+recover_aug_cols.princomp <- function(x) {
+  name <- rownames(x[["loadings"]])
+  res <- if (is.null(name)) {
     tibble_pole(nrow(x[["loadings"]]))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   bind_cols(res, tibble(
-    .center = x[["center"]],
-    .scale = x[["scale"]]
+    center = x[["center"]],
+    scale = x[["scale"]]
   ))
 }
 
 #' @rdname methods-princomp
 #' @export
-augmentation_coord.princomp <- function(x) {
+recover_aug_coord.princomp <- function(x) {
   tibble(
-    .name = factor_coord(recover_coord.princomp(x)),
-    .sdev = x[["sdev"]]
+    name = factor_coord(recover_coord.princomp(x)),
+    sdev = x[["sdev"]]
   )
 }

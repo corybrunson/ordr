@@ -1,50 +1,47 @@
 Package: ordr
 Title: A 'tidyverse' Extension for Ordinations and Biplots
-Version: 0.0.2
+Version: 0.1.0
 Authors@R: c(
   person("Jason Cory", "Brunson", email = "cornelioid@gmail.com",
     role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3126-9494")),
   person("Emily", "Paul", email = "erpb.71@gmail.com",
     role = "ctb")
   )
-Description: Ordination (Podani, 2000)
-    <http://www.euronet.nl/users/backhuys/poda.htm> comprises several
-    multivariate exploratory and explanatory techniques with theoretical
-    foundations in geometric data analysis (Le Roux & Rouanet, 2005)
-    <doi:10.1007/1-4020-2236-0>. The most popular and established of these,
-    including principal components analysis, correspondence analysis,
+Description: Ordination comprises several multivariate exploratory and
+    explanatory techniques with theoretical foundations in geometric data
+    analysis; see Podani (2000, ISBN:90-5782-067-6) for techniques and
+    applications and Le Roux & Rouanet (2005) <doi:10.1007/1-4020-2236-0> for
+    foundations.
+    Greenacre (2010, ISBN:978-84-923846) shows how the most established of
+    these, including principal components analysis, correspondence analysis,
     multidimensional scaling, factor analysis, and discriminant analysis,
     rely on eigen-decompositions or singular value decompositions of
-    pre-processed numeric matrix data (Greenacre, 2010)
-    <https://www.fbbva.es/microsite/multivariate-statistics/biplots.html>. These
-    decompositions give rise to a set of shared ('artificial' or 'latent')
-    coordinates along which the row and column elements can be measured, and the
-    overlay of their scatterplots on these axes is called a biplot
-    (Gabriel, 1971) <doi:10.1093/biomet/58.3.453>. 'ordr' provides inspection,
-    extraction, manipulation, and visualization tools for several popular
-    ordination classes supported by a set of recovery methods. It is inspired by
-    and designed to interface naturally with 'tidyverse' workflows
-    (Wickham &al, 2019) <doi:10.21105/joss.01686>.
+    pre-processed numeric matrix data.
+    These decompositions give rise to a set of shared coordinates along which
+    the row and column elements can be measured. The overlay of their
+    scatterplots on these axes, introduced by Gabriel (1971)
+    <doi:10.1093/biomet/58.3.453>, is called a biplot.
+    'ordr' provides inspection, extraction, manipulation, and visualization
+    tools for several popular ordination classes supported by a set of recovery
+    methods. It is inspired by and designed to integrate into 'tidyverse'
+    workflows provided by Wickham et al (2019) <doi:10.21105/joss.01686>.
 Depends:
     R (>= 3.3.0),
     ggplot2
 Imports:
-    broom,
+    rlang,
+    stringr,
+    tidyselect,
     scales,
     generics,
     magrittr,
     tibble,
+    broom,
     tidyr,
-    rlang,
-    stringr,
-    tidyselect,
     dplyr,
     purrr,
     labeling,
     ggrepel,
-License: GPL-3
-Encoding: UTF-8
-LazyData: true
 Suggests:
     testthat,
     sessioninfo,
@@ -55,12 +52,17 @@ Suggests:
     heplots,
     knitr,
     rmarkdown
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/corybrunson/ordr
+BugReports: https://github.com/corybrunson/ordr/issues
 RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 Collate:
     'aaa-.r'
-    'biplot-gg.r'
     'biplot-key.r'
+    'biplot.r'
     'data.r'
     'dplyr-verbs.r'
     'utils.r'
@@ -79,7 +81,10 @@ Collate:
     'geom-origin.r'
     'geom-text-radiate.r'
     'geom-unit-circle.r'
+    'geom-utils.r'
+    'list-cancor-tidiers.r'
     'list-cmdscale-tidiers.r'
+    'ord-tidiers.r'
     'list-tidiers.r'
     'methods-base-eigen.r'
     'methods-base-svd.r'
@@ -96,9 +101,9 @@ Collate:
     'methods-stats-princomp.r'
     'ord-annotation.r'
     'ord-format.r'
+    'ord-negation.r'
     'ord-plot.r'
     'ord-supplementation.r'
-    'ord-tidiers.r'
     'ordinate.r'
     'ordr.r'
     'stat-center.r'
@@ -110,4 +115,5 @@ Collate:
     'themes.r'
     'zzz-biplot-geoms.r'
     'zzz-biplot-stats.r'
+    'zzz.r'
 VignetteBuilder: knitr

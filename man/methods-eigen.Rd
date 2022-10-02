@@ -8,10 +8,10 @@
 \alias{recover_inertia.eigen_ord}
 \alias{recover_coord.eigen_ord}
 \alias{recover_conference.eigen_ord}
-\alias{augmentation_rows.eigen_ord}
-\alias{augmentation_cols.eigen_ord}
-\alias{augmentation_coord.eigen_ord}
-\title{Functionality for eigendecompositions}
+\alias{recover_aug_rows.eigen_ord}
+\alias{recover_aug_cols.eigen_ord}
+\alias{recover_aug_coord.eigen_ord}
+\title{Functionality for eigen-decompositions}
 \usage{
 \method{as_tbl_ord}{eigen_ord}(x)
 
@@ -25,14 +25,24 @@
 
 \method{recover_conference}{eigen_ord}(x)
 
-\method{augmentation_rows}{eigen_ord}(x)
+\method{recover_aug_rows}{eigen_ord}(x)
 
-\method{augmentation_cols}{eigen_ord}(x)
+\method{recover_aug_cols}{eigen_ord}(x)
 
-\method{augmentation_coord}{eigen_ord}(x)
+\method{recover_aug_coord}{eigen_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
+}
+\value{
+The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia},
+\link[=supplementation]{supplementary elements}, and \link[=augmentation]{intrinsic metadata}; but they require methods for each model class to
+tell them what these components are.
+
+The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap. It
+then provides 'tbl_ord' methods with access to the recoverers and hence to
+the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
@@ -51,9 +61,11 @@ qs_ranks \%>\%
   cor(method = "kendall") \%>\%
   eigen_ord() \%>\%
   print() -> qs_eigen
+
 # recover eigenvectors
 get_rows(qs_eigen)
 identical(get_cols(qs_eigen), get_rows(qs_eigen))
+
 # wrap as a 'tbl_ord' and augment with dimension names
 augment_ord(as_tbl_ord(qs_eigen))
 # decomposition returns pure eigenvectors
@@ -63,5 +75,9 @@ get_conference(qs_eigen)
 Other methods for eigen-decomposition-based techniques: 
 \code{\link{methods-cmds}},
 \code{\link{methods-factanal}}
+
+Other models from the \strong{base} package: 
+\code{\link{methods-svd}}
 }
 \concept{methods for eigen-decomposition-based techniques}
+\concept{models from the \strong{base} package}

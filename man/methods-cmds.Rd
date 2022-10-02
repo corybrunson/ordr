@@ -8,9 +8,9 @@
 \alias{recover_inertia.cmds_ord}
 \alias{recover_coord.cmds_ord}
 \alias{recover_conference.cmds_ord}
-\alias{augmentation_rows.cmds_ord}
-\alias{augmentation_cols.cmds_ord}
-\alias{augmentation_coord.cmds_ord}
+\alias{recover_aug_rows.cmds_ord}
+\alias{recover_aug_cols.cmds_ord}
+\alias{recover_aug_coord.cmds_ord}
 \title{Functionality for classical multidimensional scaling objects}
 \usage{
 \method{as_tbl_ord}{cmds_ord}(x)
@@ -25,14 +25,24 @@
 
 \method{recover_conference}{cmds_ord}(x)
 
-\method{augmentation_rows}{cmds_ord}(x)
+\method{recover_aug_rows}{cmds_ord}(x)
 
-\method{augmentation_cols}{cmds_ord}(x)
+\method{recover_aug_cols}{cmds_ord}(x)
 
-\method{augmentation_coord}{cmds_ord}(x)
+\method{recover_aug_coord}{cmds_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
+}
+\value{
+The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia},
+\link[=supplementation]{supplementary elements}, and \link[=augmentation]{intrinsic metadata}; but they require methods for each model class to
+tell them what these components are.
+
+The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap. It
+then provides 'tbl_ord' methods with access to the recoverers and hence to
+the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
@@ -44,27 +54,39 @@ to identify objects returned by \code{\link[=cmdscale_ord]{cmdscale_ord()}}, whi
 # 'dist' object (matrix of road distances) of large American cities
 class(UScitiesD)
 print(UScitiesD)
+
 # use multidimensional scaling to infer artificial planar coordinates
 UScitiesD \%>\%
   cmdscale_ord(k = 2) \%>\%
   as_tbl_ord() \%>\%
   print() -> usa_mds
+
 # recover (equivalent) matrices of row and column artificial coordinates
 get_rows(usa_mds)
 get_cols(usa_mds)
+
 # augment ordination with point names
 (usa_mds <- augment_ord(usa_mds))
+
 # reorient biplot to conventional compass
 usa_mds \%>\%
+  negate_ord(c(1, 2)) \%>\%
   ggbiplot() +
-  scale_x_reverse() +
-  scale_y_reverse() +
-  geom_cols_text(aes(label = .name), size = 3) +
+  geom_cols_text(aes(label = name), size = 3) +
   ggtitle("MDS biplot of distances between U.S. cities")
 }
 \seealso{
 Other methods for eigen-decomposition-based techniques: 
 \code{\link{methods-eigen}},
 \code{\link{methods-factanal}}
+
+Other models from the \strong{stats} package: 
+\code{\link{methods-cancor}},
+\code{\link{methods-factanal}},
+\code{\link{methods-kmeans}},
+\code{\link{methods-lm}},
+\code{\link{methods-prcomp}},
+\code{\link{methods-princomp}}
 }
 \concept{methods for eigen-decomposition-based techniques}
+\concept{models from the \strong{stats} package}

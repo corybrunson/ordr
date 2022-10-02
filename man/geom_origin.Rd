@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom-origin.r
 \name{geom_origin}
 \alias{geom_origin}
-\title{Render a crosshairs or circle at the origin}
+\title{Crosshairs or circle at the origin}
 \usage{
 geom_origin(
   mapping = NULL,
@@ -64,6 +64,9 @@ display.}
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
+}
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
 \code{geom_origin()} renders a symbol, either a set of crosshairs or

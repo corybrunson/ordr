@@ -15,8 +15,8 @@ test_that("'correspondence' has specified distribution of inertia", {
 test_that(
   "'correspondence' augmentations are consistent with '.element' column",
   {
-    expect_equal(".element" %in% names(augmentation_rows(fit_correspondence)),
-                 ".element" %in% names(augmentation_cols(fit_correspondence)))
+    expect_equal(".element" %in% names(recover_aug_rows(fit_correspondence)),
+                 ".element" %in% names(recover_aug_cols(fit_correspondence)))
   }
 )
 

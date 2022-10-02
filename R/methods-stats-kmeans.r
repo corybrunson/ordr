@@ -6,7 +6,9 @@
 #' @name methods-kmeans
 #' @include ord-tbl.r
 #' @template param-methods
+#' @template return-methods
 #' @family methods for idiosyncratic techniques
+#' @family models from the **stats** package
 #' @example inst/examples/ex-methods-kmeans-iris.r
 NULL
 
@@ -37,35 +39,35 @@ recover_coord.kmeans <- function(x) {
 
 #' @rdname methods-kmeans
 #' @export
-augmentation_rows.kmeans <- function(x) {
-  .name <- names(x$cluster)
-  res <- if (is.null(.name)) {
+recover_aug_rows.kmeans <- function(x) {
+  name <- names(x$cluster)
+  res <- if (is.null(name)) {
     tibble_pole(length(x$cluster))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
-  res$.cluster <- factor(unname(x$cluster))
+  res$cluster <- factor(unname(x$cluster))
   res
 }
 
 #' @rdname methods-kmeans
 #' @export
-augmentation_cols.kmeans <- function(x) {
-  .name <- colnames(x$centers)
-  res <- if (is.null(.name)) {
+recover_aug_cols.kmeans <- function(x) {
+  name <- colnames(x$centers)
+  res <- if (is.null(name)) {
     tibble_pole(ncol(x$centers))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   res
 }
 
 #' @rdname methods-kmeans
 #' @export
-augmentation_coord.kmeans <- function(x) {
+recover_aug_coord.kmeans <- function(x) {
   tibble(
-    .name = factor_coord(recover_coord(x)),
-    .size = x$size,
-    .withinss = x$withinss
+    name = factor_coord(recover_coord(x)),
+    size = x$size,
+    withinss = x$withinss
   )
 }

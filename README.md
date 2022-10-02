@@ -5,7 +5,6 @@
 
 <!-- badges: start -->
 
-[![Travis](https://travis-ci.org/corybrunson/ordr.svg?branch=main)](https://travis-ci.org/corybrunson/ordr)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
@@ -150,15 +149,14 @@ as annotations to the appropriate matrix factors:[^7]
 #> 4 -2.29  0.595 -0.0910     | 4 setosa 
 #> 5 -2.38 -0.645 -0.0157     | 5 setosa 
 #> # … with 145 more rows
-#> # ℹ Use `print(n = ...)` to see more rows
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
-#>      PC1     PC2    PC3 ... |   .name        .center .scale
-#>                             |   <chr>          <dbl>  <dbl>
-#> 1  0.521 -0.377   0.720     | 1 Sepal.Length    5.84  0.828
-#> 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width     3.06  0.436
-#> 3  0.580 -0.0245 -0.142     | 3 Petal.Length    3.76  1.77 
-#> 4  0.565 -0.0669 -0.634     | 4 Petal.Width     1.20  0.762
+#>      PC1     PC2    PC3 ... |   name         center scale
+#>                             |   <chr>         <dbl> <dbl>
+#> 1  0.521 -0.377   0.720     | 1 Sepal.Length   5.84 0.828
+#> 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width    3.06 0.436
+#> 3  0.580 -0.0245 -0.142     | 3 Petal.Length   3.76 1.77 
+#> 4  0.565 -0.0669 -0.634     | 4 Petal.Width    1.20 0.762
 ```
 
 Additional annotations can be added using several row- and
@@ -184,15 +182,14 @@ iris_meta <- data.frame(
 #> 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid       2
 #> 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid       2
 #> # … with 145 more rows
-#> # ℹ Use `print(n = ...)` to see more rows
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
-#>      PC1     PC2    PC3 ... |   .name        .center .scale
-#>                             |   <chr>          <dbl>  <dbl>
-#> 1  0.521 -0.377   0.720     | 1 Sepal.Length    5.84  0.828
-#> 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width     3.06  0.436
-#> 3  0.580 -0.0245 -0.142     | 3 Petal.Length    3.76  1.77 
-#> 4  0.565 -0.0669 -0.634     | 4 Petal.Width     1.20  0.762
+#>      PC1     PC2    PC3 ... |   name         center scale
+#>                             |   <chr>         <dbl> <dbl>
+#> 1  0.521 -0.377   0.720     | 1 Sepal.Length   5.84 0.828
+#> 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width    3.06 0.436
+#> 3  0.580 -0.0245 -0.142     | 3 Petal.Length   3.76 1.77 
+#> 4  0.565 -0.0669 -0.634     | 4 Petal.Width    1.20 0.762
 ```
 
 Following the [**broom**](https://github.com/tidymodels/broom) package,
@@ -202,18 +199,18 @@ plotting:
 
 ``` r
 tidy(iris_pca) %T>% print() %>%
-  ggplot(aes(x = .name, y = .prop_var)) +
+  ggplot(aes(x = name, y = prop_var)) +
   geom_col() +
   labs(x = "", y = "Proportion of inertia") +
   ggtitle("PCA of Anderson's iris measurements",
           "Distribution of inertia")
-#> # A tibble: 4 × 4
-#>   .name .sdev .inertia .prop_var
-#>   <fct> <dbl>    <dbl>     <dbl>
-#> 1 PC1   1.71    435.     0.730  
-#> 2 PC2   0.956   136.     0.229  
-#> 3 PC3   0.383    21.9    0.0367 
-#> 4 PC4   0.144     3.09   0.00518
+#> # A tibble: 4 × 5
+#>   name   sdev inertia prop_var quality
+#>   <fct> <dbl>   <dbl>    <dbl>   <dbl>
+#> 1 PC1   1.71   435.    0.730     0.730
+#> 2 PC2   0.956  136.    0.229     0.958
+#> 3 PC3   0.383   21.9   0.0367    0.995
+#> 4 PC4   0.144    3.09  0.00518   1
 ```
 
 ![](man/figures/README-model%20components%20and%20scree%20plot-1.png)<!-- -->
@@ -228,16 +225,16 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_ellipse(aes(color = Species), alpha = .5, level = .99) +
   geom_cols_vector() +
-  geom_cols_text_radiate(aes(label = .name)) +
+  geom_cols_text_radiate(aes(label = name)) +
   expand_limits(y = c(-3.5, NA)) +
   ggtitle("PCA of Anderson's iris measurements",
           "99% confidence ellipses; variables use top & right axes")
 ```
 
-![](man/figures/README-interpolation%20biplot-1.png)<!-- -->
+![](man/figures/README-interpolative%20biplot-1.png)<!-- -->
 
 When variables are represented in standard coordinates, as typically in
-PCA, their rules can be rescaled to yield a prediction biplot:[^9]
+PCA, their rules can be rescaled to yield a predictive biplot:[^9]
 
 ``` r
 ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
@@ -247,12 +244,12 @@ ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
     aes(color = Species, shape = Species),
     size = 5, alpha = .5, fun.data = mean_se
   ) +
-  geom_cols_axis(aes(label = .name, center = .center, scale = .scale)) +
-  ggtitle("Prediction biplot of Anderson's iris measurements",
+  geom_cols_axis(aes(label = name, center = center, scale = scale)) +
+  ggtitle("Predictive biplot of Anderson's iris measurements",
           "Project a marker onto an axis to approximate its measurement")
 ```
 
-![](man/figures/README-prediction%20biplot-1.png)<!-- -->
+![](man/figures/README-predictive%20biplot-1.png)<!-- -->
 
 ``` r
 aggregate(iris[, 1:4], by = iris[, "Species", drop = FALSE], FUN = mean)
@@ -290,14 +287,17 @@ Conduct](https://github.com/corybrunson/ordr/blob/main/CODE_OF_CONDUCT.md).
 This package was originally inspired by the **ggbiplot** extension
 developed by [Vincent Q. Vu](https://github.com/vqv/ggbiplot), [Richard
 J Telford](https://github.com/richardjtelford/ggbiplot), and [Vilmantas
-Gegzna](https://github.com/forked-packages/ggbiplot), among others. So
-far as i know, it first brought biplots into the **tidyverse**
-framework. The motivation to unify a variety of ordination methods came
-from several books and articles by [Michael
+Gegzna](https://github.com/forked-packages/ggbiplot), among others. It
+probably first brought biplots into the **tidyverse** framework. The
+motivation to unify a variety of ordination methods came from several
+books and articles by [Michael
 Greenacre](https://www.fbbva.es/microsite/multivariate-statistics/resources.html),
 in particular [*Biplots in
 Practice*](https://www.fbbva.es/microsite/multivariate-statistics/resources.html#biplots).
-Thomas Lin Pedersen’s
+Several answers at CrossValidated, in particular by
+[amoeba](https://stats.stackexchange.com/users/28666/amoeba) and
+[ttnphns](https://stats.stackexchange.com/users/3277/ttnphns), provided
+theoretical insights and informed design choices. Thomas Lin Pedersen’s
 [**tidygraph**](https://github.com/thomasp85/tidygraph) prequel to
 **ggraph** finally induced the shift from the downstream generation of
 scatterplots to the upstream handling and manipulating of ordination
@@ -306,8 +306,10 @@ the monograph
 [*Biplots*](https://www.google.com/books/edition/Biplots/lTxiedIxRpgC)
 and the textbook [*Understanding
 Biplots*](https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550)
-by John C. Gower, David J. Hand, Sugnet Gardner Lubbe, and Niel J. Le
-Roux.
+by John C. Gower, David J. Hand, Sugnet Gardner–Lubbe, and Niel J. Le
+Roux, and by the volume [*Principal Components
+Analysis*](https://link.springer.com/book/10.1007/b98835) by I. T.
+Jolliffe.
 
 ### notes
 
@@ -315,8 +317,8 @@ Roux.
     978-84-923846.
     <https://www.fbbva.es/microsite/multivariate-statistics/biplots.html>
 
-[^2]: The term *ordination* is most prevalent among ecologists; to my
-    knowledge, no catch-all term is in common use outside ecology.
+[^2]: The term *ordination* is most prevalent among ecologists; no
+    catch-all term seems to be in common use outside ecology.
 
 [^3]: This is not a hard rule: PCA is often used to compress data before
     clustering, and LDA uses dimension reduction to perform

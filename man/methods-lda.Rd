@@ -14,14 +14,14 @@
 \alias{recover_coord.lda_ord}
 \alias{recover_conference.lda}
 \alias{recover_conference.lda_ord}
-\alias{augmentation_rows.lda}
-\alias{augmentation_rows.lda_ord}
-\alias{augmentation_cols.lda}
-\alias{augmentation_cols.lda_ord}
-\alias{augmentation_coord.lda}
-\alias{augmentation_coord.lda_ord}
-\alias{supplementation_rows.lda}
-\alias{supplementation_rows.lda_ord}
+\alias{recover_aug_rows.lda}
+\alias{recover_aug_rows.lda_ord}
+\alias{recover_aug_cols.lda}
+\alias{recover_aug_cols.lda_ord}
+\alias{recover_aug_coord.lda}
+\alias{recover_aug_coord.lda_ord}
+\alias{recover_supp_rows.lda}
+\alias{recover_supp_rows.lda_ord}
 \title{Functionality for linear discriminant analysis ('lda') objects}
 \usage{
 \method{as_tbl_ord}{lda}(x)
@@ -48,24 +48,34 @@
 
 \method{recover_conference}{lda_ord}(x)
 
-\method{augmentation_rows}{lda}(x)
+\method{recover_aug_rows}{lda}(x)
 
-\method{augmentation_rows}{lda_ord}(x)
+\method{recover_aug_rows}{lda_ord}(x)
 
-\method{augmentation_cols}{lda}(x)
+\method{recover_aug_cols}{lda}(x)
 
-\method{augmentation_cols}{lda_ord}(x)
+\method{recover_aug_cols}{lda_ord}(x)
 
-\method{augmentation_coord}{lda}(x)
+\method{recover_aug_coord}{lda}(x)
 
-\method{augmentation_coord}{lda_ord}(x)
+\method{recover_aug_coord}{lda_ord}(x)
 
-\method{supplementation_rows}{lda}(x)
+\method{recover_supp_rows}{lda}(x)
 
-\method{supplementation_rows}{lda_ord}(x)
+\method{recover_supp_rows}{lda_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
+}
+\value{
+The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia},
+\link[=supplementation]{supplementary elements}, and \link[=augmentation]{intrinsic metadata}; but they require methods for each model class to
+tell them what these components are.
+
+The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap. It
+then provides 'tbl_ord' methods with access to the recoverers and hence to
+the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
@@ -79,14 +89,17 @@ See \link{lda-ord} for details.
 # data frame of Anderson iris species measurements
 class(iris)
 head(iris)
+
 # default (unstandardized discriminant) coefficients
 lda_ord(iris[, 1:4], iris[, 5]) \%>\%
   as_tbl_ord() \%>\%
   print() -> iris_lda
+
 # recover centroid coordinates and measurement discriminant coefficients
 get_rows(iris_lda, elements = "active")
 head(get_rows(iris_lda, elements = "score"))
 get_cols(iris_lda)
+
 # augment ordination with centroid and measurement names
 augment_ord(iris_lda)
 }
@@ -99,5 +112,10 @@ Other methods for singular value decomposition-based techniques:
 \code{\link{methods-prcomp}},
 \code{\link{methods-princomp}},
 \code{\link{methods-svd}}
+
+Other models from the \strong{MASS} package: 
+\code{\link{methods-correspondence}},
+\code{\link{methods-mca}}
 }
 \concept{methods for singular value decomposition-based techniques}
+\concept{models from the \strong{MASS} package}

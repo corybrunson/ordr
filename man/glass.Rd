@@ -44,6 +44,7 @@ glass_main <- subset(
 # format as a data frame with row names
 glass_main <- as.data.frame(glass_main)
 rownames(glass_main) <- subset(glass, Site == "Bet Eli'ezer")$Anal
+
 # perform log-ratio analysis
 glass_lra <- lra(glass_main, compositional = TRUE, weighted = FALSE)
 # inspect LRA row and column coordinates
@@ -51,6 +52,7 @@ head(glass_lra$row.coords)
 glass_lra$column.coords
 # inspect singular values of LRA
 glass_lra$sv
+
 # plot samples and measurements in a biplot
 biplot(
   x = glass_lra$row.coords \%*\% diag(glass_lra$sv),
@@ -60,11 +62,11 @@ biplot(
 mtext("Component (standard coord.)", side = 4L, line = 3L)
 }
 \references{
-Freestone IC, Gorin-Rosen Y, Hughes MJ (2000) "Primary glass from Israel and
-the production of glass in Late Antiquity and the early Islamic period". \emph{La
-route du verre: Ateliers primaires et secondaires du second millénaire av.
-J.-C. au Moyen Âge}: 65--83.
-\url{http://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&idt=1158762}
+Freestone IC, Gorin-Rosen Y, & Hughes MJ (2000) "Primary glass from Israel
+and the production of glass in Late Antiquity and the early Islamic period".
+\emph{La route du verre: Ateliers primaires et secondaires du second millénaire
+av. J.-C. au Moyen Âge}: 65--83.
+\url{https://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&idt=1158762}
 
 Baxter MJ & Freestone IC (2006) "Log-Ratio Compositional Data Analysis in
 Archaeometry". \emph{Archaeometry}, \strong{48}(3): 511--531.

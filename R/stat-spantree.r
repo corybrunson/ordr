@@ -6,13 +6,13 @@
 #'   
 
 #' @details
-#' 
+#'
 #' A minimum spanning tree (MST) on the point cloud \eqn{X} is a minimal
 #' connected graph on \eqn{X} with the smallest possible sum of distances (or
 #' dissimilarities) between linked points. These layers call [stats::dist()] to
-#' calculate a distance/dissimilarity object and [vegan::spantree()] to
-#' calculate the MST. The result is formatted with position aesthetics readable
-#' by [ggplot2::geom_segment()].
+#' calculate a distance/dissimilarity object and an engine from either **vegan**
+#' or *mlpack** to calculate the MST. The result is formatted with position
+#' aesthetics readable by [ggplot2::geom_segment()].
 #'
 #' An MST calculated on `x` and `y` reflects the distances among the points in
 #' \eqn{X} in the reduced-dimension plane of the biplot. In contrast, one
@@ -35,6 +35,7 @@
 #' @param method Passed to [stats::dist()] if `engine` is `"vegan"`, ignored if
 #'   `"mlpack"`.
 #' @template param-stat
+#' @template return-layer
 #' @family stat layers
 #' @example inst/examples/ex-stat-spantree-eurodist.r
 #' @export

@@ -1,4 +1,4 @@
-#' @title Render intervals depicting ranges, usually about center points
+#' @title Intervals depicting ranges, usually about center points
 #' 
 
 #' @description `geom_lineranges()` renders horizontal and vertical intervals
@@ -28,6 +28,7 @@
 #' @import ggplot2
 #' @inheritParams ggplot2::geom_linerange
 #' @template param-geom
+#' @template return-layer
 #' @family geom layers
 #' @example inst/examples/ex-geom-intervals-glass.r
 #' @export

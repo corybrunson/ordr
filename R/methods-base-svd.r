@@ -6,7 +6,9 @@
 #' @name methods-svd
 #' @include ord-tbl.r
 #' @template param-methods
+#' @template return-methods
 #' @family methods for singular value decomposition-based techniques
+#' @family models from the **base** package
 #' @example inst/examples/ex-methods-svd-spend.r
 NULL
 
@@ -39,31 +41,31 @@ recover_conference.svd_ord <- function(x) {
 
 #' @rdname methods-svd
 #' @export
-augmentation_rows.svd_ord <- function(x) {
-  .name <- rownames(x[["u"]])
-  if (is.null(.name)) {
+recover_aug_rows.svd_ord <- function(x) {
+  name <- rownames(x[["u"]])
+  if (is.null(name)) {
     tibble_pole(nrow(x[["u"]]))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
 }
 
 #' @rdname methods-svd
 #' @export
-augmentation_cols.svd_ord <- function(x) {
-  .name <- rownames(x[["v"]])
-  if (is.null(.name)) {
+recover_aug_cols.svd_ord <- function(x) {
+  name <- rownames(x[["v"]])
+  if (is.null(name)) {
     tibble_pole(nrow(x[["v"]]))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
 }
 
 #' @rdname methods-svd
 #' @export
-augmentation_coord.svd_ord <- function(x) {
+recover_aug_coord.svd_ord <- function(x) {
   tibble(
-    .name = factor_coord(recover_coord(x)),
-    .value = x[["d"]][1:ncol(x[["u"]])]
+    name = factor_coord(recover_coord(x)),
+    value = x[["d"]][1:ncol(x[["u"]])]
   )
 }

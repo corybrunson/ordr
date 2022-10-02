@@ -171,6 +171,7 @@ stat_rows_spantree(
   data = NULL,
   geom = "segment",
   position = "identity",
+  engine = "vegan",
   method = "euclidean",
   show.legend = NA,
   inherit.aes = TRUE,
@@ -184,6 +185,7 @@ stat_cols_spantree(
   data = NULL,
   geom = "segment",
   position = "identity",
+  engine = "vegan",
   method = "euclidean",
   show.legend = NA,
   inherit.aes = TRUE,
@@ -255,12 +257,18 @@ data. Defaults to \code{FALSE}.}
 
 \item{mult}{Numeric value used to scale the coordinates.}
 
+\item{engine}{A single character string specifying the package implementation
+to use; either \code{"vegan"} or \code{"mlpack"}.}
+
 \item{method}{Passed to \code{\link[stats:dist]{stats::dist()}} if \code{engine} is \code{"vegan"}, ignored if
 \code{"mlpack"}.}
 
 \item{check.aes, check.param}{If \code{TRUE}, the default, will check that
 supplied parameters and aesthetics are understood by the \code{geom} or
 \code{stat}. Use \code{FALSE} to suppress the checks.}
+}
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
 These statistical transformations (stats) adapt
@@ -271,16 +279,16 @@ stats.
 }
 \section{Ordination aesthetics}{
 
-The convenience function \verb{[ord_aes()]} can be used to incorporate all
+The convenience function \code{\link[=ord_aes]{ord_aes()}} can be used to incorporate all
 coordinates of the ordination model into a statistical transformation. It
 maps the coordinates to the custom aesthetics \code{..coord1}, \code{..coord2}, etc.
 
-Some transformations, e.g. \verb{[stat_center()]}, are commutative with projection
+Some transformations, e.g. \code{\link[=stat_center]{stat_center()}}, are commutative with projection
 to the 'x' and 'y' coordinates. If they detect aesthetics of the form
 \verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and \code{y}
 while any remaining are ignored.
 
-Other transformations, e.g. \verb{stat_spantree()]}, yield different results in a
+Other transformations, e.g. \code{\link[=stat_spantree]{stat_spantree()}}, yield different results in a
 planar biplot when they are computer before or after projection. If such a
 stat layer detects these aesthetics, then the lot of them are used in the
 transformation.
@@ -296,18 +304,7 @@ iris[, -5] \%>\%
   as_tbl_ord() \%>\%
   mutate_rows(species = iris$Species) \%>\%
   print() -> iris_pca
-# row-principal biplot with centroids and confidence ellipses
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_rows_point(alpha = .5) +
-  stat_rows_center(fun.center = "mean", size = 3, shape = "triangle") +
-  stat_rows_ellipse(level = .99) +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris measurements",
-    "Overlaid with centroids and 99\% confidence ellipses"
-  )
+
 # row-principal biplot with centroids and confidence elliptical disks
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +

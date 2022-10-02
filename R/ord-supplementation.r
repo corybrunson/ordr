@@ -6,7 +6,7 @@
 
 #' @details
 #'
-#' The `supplementation_*()` [S3 methods][base::S3Methods] produce matrices of
+#' The `recover_supp_*()` [S3 methods][base::S3Methods] produce matrices of
 #' supplemental rows or columns of a [tbl_ord] object from the object itself.
 #' The motivating example is linear discriminant analysis, which produces a
 #' natural biplot of class discriminant centroids and variable axes but is
@@ -19,30 +19,32 @@
 #' @name supplementation
 #' @include ord-augmentation.r
 #' @inheritParams recoverers
+#' @return Matrices having the same numbers of columns as returned by
+#'   [recover_rows()] and [recover_cols()], or else `NULL`.
 #' @family generic recoverers
 NULL
 
 #' @rdname supplementation
 #' @export
-supplementation_rows <- function(x) UseMethod("supplementation_rows")
+recover_supp_rows <- function(x) UseMethod("recover_supp_rows")
 
 #' @rdname supplementation
 #' @export
-supplementation_rows.default <- function(x) NULL
+recover_supp_rows.default <- function(x) NULL
 
 #' @rdname supplementation
 #' @export
-supplementation_cols <- function(x) UseMethod("supplementation_cols")
+recover_supp_cols <- function(x) UseMethod("recover_supp_cols")
 
 #' @rdname supplementation
 #' @export
-supplementation_cols.default <- function(x) NULL
+recover_supp_cols.default <- function(x) NULL
 
-supplementation_factor <- function(x, .matrix) {
+recover_supp_factor <- function(x, .matrix) {
   switch(
     match_factor(.matrix),
-    rows = supplementation_rows(x),
-    cols = supplementation_cols(x),
-    dims = list(rows = supplementation_rows(x), cols = supplementation_cols(x))
+    rows = recover_supp_rows(x),
+    cols = recover_supp_cols(x),
+    dims = list(rows = recover_supp_rows(x), cols = recover_supp_cols(x))
   )
 }

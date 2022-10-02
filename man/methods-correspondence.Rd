@@ -8,9 +8,9 @@
 \alias{recover_inertia.correspondence}
 \alias{recover_conference.correspondence}
 \alias{recover_coord.correspondence}
-\alias{augmentation_rows.correspondence}
-\alias{augmentation_cols.correspondence}
-\alias{augmentation_coord.correspondence}
+\alias{recover_aug_rows.correspondence}
+\alias{recover_aug_cols.correspondence}
+\alias{recover_aug_coord.correspondence}
 \title{Functionality for correspondence analysis ('correspondence') objects}
 \usage{
 \method{as_tbl_ord}{correspondence}(x)
@@ -25,14 +25,24 @@
 
 \method{recover_coord}{correspondence}(x)
 
-\method{augmentation_rows}{correspondence}(x)
+\method{recover_aug_rows}{correspondence}(x)
 
-\method{augmentation_cols}{correspondence}(x)
+\method{recover_aug_cols}{correspondence}(x)
 
-\method{augmentation_coord}{correspondence}(x)
+\method{recover_aug_coord}{correspondence}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
+}
+\value{
+The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia},
+\link[=supplementation]{supplementary elements}, and \link[=augmentation]{intrinsic metadata}; but they require methods for each model class to
+tell them what these components are.
+
+The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap. It
+then provides 'tbl_ord' methods with access to the recoverers and hence to
+the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
@@ -44,12 +54,15 @@ package.
 data(quine, package = "MASS")
 class(quine)
 head(quine)
+
 # use correspondence analysis to construct row and column profiles
 (quine_ca <- MASS::corresp(~ Age + Eth, data = quine))
 (quine_ca <- as_tbl_ord(quine_ca))
+
 # recover row and column profiles
 get_rows(quine_ca)
 get_cols(quine_ca)
+
 # augment profiles with names, masses, distances, and inertias
 (quine_ca <- augment_ord(quine_ca))
 }
@@ -62,5 +75,10 @@ Other methods for singular value decomposition-based techniques:
 \code{\link{methods-prcomp}},
 \code{\link{methods-princomp}},
 \code{\link{methods-svd}}
+
+Other models from the \strong{MASS} package: 
+\code{\link{methods-lda}},
+\code{\link{methods-mca}}
 }
 \concept{methods for singular value decomposition-based techniques}
+\concept{models from the \strong{MASS} package}

@@ -6,9 +6,9 @@
 \alias{recover_rows.kmeans}
 \alias{recover_cols.kmeans}
 \alias{recover_coord.kmeans}
-\alias{augmentation_rows.kmeans}
-\alias{augmentation_cols.kmeans}
-\alias{augmentation_coord.kmeans}
+\alias{recover_aug_rows.kmeans}
+\alias{recover_aug_cols.kmeans}
+\alias{recover_aug_coord.kmeans}
 \title{Functionality for k-means clustering ('kmeans') objects}
 \usage{
 \method{as_tbl_ord}{kmeans}(x)
@@ -19,14 +19,24 @@
 
 \method{recover_coord}{kmeans}(x)
 
-\method{augmentation_rows}{kmeans}(x)
+\method{recover_aug_rows}{kmeans}(x)
 
-\method{augmentation_cols}{kmeans}(x)
+\method{recover_aug_cols}{kmeans}(x)
 
-\method{augmentation_coord}{kmeans}(x)
+\method{recover_aug_coord}{kmeans}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
+}
+\value{
+The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia},
+\link[=supplementation]{supplementary elements}, and \link[=augmentation]{intrinsic metadata}; but they require methods for each model class to
+tell them what these components are.
+
+The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap. It
+then provides 'tbl_ord' methods with access to the recoverers and hence to
+the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
@@ -43,6 +53,7 @@ iris \%>\%
   scale() \%>\%
   kmeans(centers = 3) \%>\%
   print() -> iris_km
+
 # visualize clusters using PCA
 iris \%>\%
   subset(select = -Species) \%>\%
@@ -53,21 +64,23 @@ iris \%>\%
   geom_rows_point(aes(color = factor(as.character(as.integer(cluster)),
                                      levels = as.character(seq(3L))))) +
   scale_color_brewer(type = "qual", name = "cluster")
+
 # wrap as a 'tbl_ord' object
 (iris_km_ord <- as_tbl_ord(iris_km))
+
 # augment everything with names, observations with cluster assignment
 (iris_km_ord <- augment_ord(iris_km_ord))
+
 # summarize clusters with standard deviation
 iris_km_ord \%>\%
   tidy() \%>\%
-  transform(.sdev = sqrt(.withinss / .size))
+  transform(sdev = sqrt(withinss / size))
+
 # discriminate between clusters 2 and 3
 iris_km_ord \%>\%
   ggbiplot(aes(x = `2`, y = `3`), color = factor(.cluster)) +
-  geom_jitter(stat = "rows", aes(shape = .cluster), width = .2, height = .2) +
-  #geom_cols_vector(aes(color = `1`)) +
-  #geom_cols_text_radiate(aes(label = .name), size = 3) +
-  geom_cols_axis(aes(color = `1`, label = .name),
+  geom_jitter(stat = "rows", aes(shape = cluster), width = .2, height = .2) +
+  geom_cols_axis(aes(color = `1`, label = name),
                  text_size = 2, text_dodge = .1,
                  label_size = 3, label_alpha = .5) +
   scale_x_continuous(expand = expansion(mult = .8)) +
@@ -80,5 +93,14 @@ iris_km_ord \%>\%
 \seealso{
 Other methods for idiosyncratic techniques: 
 \code{\link{methods-lm}}
+
+Other models from the \strong{stats} package: 
+\code{\link{methods-cancor}},
+\code{\link{methods-cmds}},
+\code{\link{methods-factanal}},
+\code{\link{methods-lm}},
+\code{\link{methods-prcomp}},
+\code{\link{methods-princomp}}
 }
 \concept{methods for idiosyncratic techniques}
+\concept{models from the \strong{stats} package}

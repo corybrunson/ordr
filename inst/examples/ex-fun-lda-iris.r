@@ -7,25 +7,27 @@ iris_lda <- lda_ord(iris[, 1:4], iris[, 5], axes.scale = "unstandardized")
 print(sweep(iris_lda$means, 2, iris_centroid, "-") %*% get_cols(iris_lda))
 # discriminant centroids
 print(get_rows(iris_lda, elements = "active"))
+
 # unstandardized coefficient LDA biplot
 iris_lda %>%
   as_tbl_ord() %>%
   augment_ord() %>%
   mutate_rows(
-    species = .grouping,
+    species = grouping,
     discriminant = ifelse(.element == "active", "centroid", "case")
   ) %>%
   ggbiplot() +
   theme_bw() +
   geom_rows_point(aes(
-    color = .grouping,
+    color = grouping,
     size = discriminant, alpha = discriminant
   )) +
   geom_cols_vector(color = "#888888") +
-  geom_cols_text_radiate(aes(label = .name), size = 3) +
+  geom_cols_text_radiate(aes(label = name), size = 3) +
   scale_color_brewer(type = "qual", palette = 2) +
   ggtitle("Unstandardized coefficient biplot of iris LDA") +
   expand_limits(y = c(-3, 5))
+
 # standardized discriminant coefficients: permit comparisons across the
 # variables
 iris_lda <- lda_ord(iris[, 1:4], iris[, 5], axes.scale = "standardized")
@@ -34,7 +36,7 @@ iris_lda %>%
   as_tbl_ord() %>%
   augment_ord() %>%
   fortify(.matrix = "cols") %>%
-  dplyr::mutate(variable = .name) %>%
+  dplyr::mutate(variable = name) %>%
   tidyr::gather(discriminant, coefficient, LD1, LD2) %>%
   ggplot(aes(x = discriminant, y = coefficient, fill = variable)) +
   geom_bar(position = "dodge", stat = "identity") +
@@ -46,20 +48,21 @@ iris_lda %>%
   as_tbl_ord() %>%
   augment_ord() %>%
   mutate_rows(
-    species = .grouping,
+    species = grouping,
     discriminant = ifelse(.element == "active", "centroid", "case")
   ) %>%
   ggbiplot() +
   theme_bw() +
   geom_rows_point(aes(
-    color = .grouping,
+    color = grouping,
     size = discriminant, alpha = discriminant
   )) +
   geom_cols_vector(color = "#888888") +
-  geom_cols_text_radiate(aes(label = .name), size = 3) +
+  geom_cols_text_radiate(aes(label = name), size = 3) +
   scale_color_brewer(type = "qual", palette = 2) +
   ggtitle("Standardized coefficient biplot of iris LDA") +
   expand_limits(y = c(-2, 3))
+
 # variable contributions (de-sphered discriminant coefficients): recover the
 # inner product relationship with the centered class centroids
 iris_lda <- lda_ord(iris[, 1:4], iris[, 5], axes.scale = "contribution")
@@ -76,17 +79,17 @@ iris_lda %>%
   as_tbl_ord() %>%
   augment_ord() %>%
   mutate_rows(
-    species = .grouping,
+    species = grouping,
     discriminant = ifelse(.element == "active", "centroid", "case")
   ) %>%
   ggbiplot() +
   theme_bw() +
   geom_rows_point(aes(
-    color = .grouping,
+    color = grouping,
     size = discriminant, alpha = discriminant
   )) +
   geom_cols_vector(color = "#888888") +
-  geom_cols_text_radiate(aes(label = .name), size = 3) +
+  geom_cols_text_radiate(aes(label = name), size = 3) +
   scale_color_brewer(type = "qual", palette = 2) +
   ggtitle("Contribution biplot of iris LDA") +
   expand_limits(y = c(-2, 3.5))

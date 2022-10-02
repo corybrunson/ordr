@@ -53,6 +53,9 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 }
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
+}
 \description{
 As used in a \strong{\link[ggplot2:ggplot2-package]{ggplot2}} vignette, this stat
 layer restricts a dataset with \code{x} and \code{y} variables to the points that lie
@@ -74,16 +77,16 @@ points for rows and arrows for columns.
 
 \section{Ordination aesthetics}{
 
-The convenience function \verb{[ord_aes()]} can be used to incorporate all
+The convenience function \code{\link[=ord_aes]{ord_aes()}} can be used to incorporate all
 coordinates of the ordination model into a statistical transformation. It
 maps the coordinates to the custom aesthetics \code{..coord1}, \code{..coord2}, etc.
 
-Some transformations, e.g. \verb{[stat_center()]}, are commutative with projection
+Some transformations, e.g. \code{\link[=stat_center]{stat_center()}}, are commutative with projection
 to the 'x' and 'y' coordinates. If they detect aesthetics of the form
 \verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and \code{y}
 while any remaining are ignored.
 
-Other transformations, e.g. \verb{stat_spantree()]}, yield different results in a
+Other transformations, e.g. \code{\link[=stat_spantree]{stat_spantree()}}, yield different results in a
 planar biplot when they are computer before or after projection. If such a
 stat layer detects these aesthetics, then the lot of them are used in the
 transformation.
@@ -102,6 +105,7 @@ HairEyeColor \%>\%
   print() -> hec_ca
 # inertia across artificial coordinates (all singular values < 1)
 get_inertia(hec_ca)
+
 # in row-principal biplot, row coordinates are weighted averages of columns
 hec_ca \%>\%
   confer_inertia("rows") \%>\%

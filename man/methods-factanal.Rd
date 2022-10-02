@@ -8,10 +8,10 @@
 \alias{recover_inertia.factanal}
 \alias{recover_coord.factanal}
 \alias{recover_conference.factanal}
-\alias{supplementation_rows.factanal}
-\alias{augmentation_rows.factanal}
-\alias{augmentation_cols.factanal}
-\alias{augmentation_coord.factanal}
+\alias{recover_supp_rows.factanal}
+\alias{recover_aug_rows.factanal}
+\alias{recover_aug_cols.factanal}
+\alias{recover_aug_coord.factanal}
 \title{Functionality for factor analysis ('factanal') objects}
 \usage{
 \method{as_tbl_ord}{factanal}(x)
@@ -26,16 +26,26 @@
 
 \method{recover_conference}{factanal}(x)
 
-\method{supplementation_rows}{factanal}(x)
+\method{recover_supp_rows}{factanal}(x)
 
-\method{augmentation_rows}{factanal}(x)
+\method{recover_aug_rows}{factanal}(x)
 
-\method{augmentation_cols}{factanal}(x)
+\method{recover_aug_cols}{factanal}(x)
 
-\method{augmentation_coord}{factanal}(x)
+\method{recover_aug_coord}{factanal}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
+}
+\value{
+The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia},
+\link[=supplementation]{supplementary elements}, and \link[=augmentation]{intrinsic metadata}; but they require methods for each model class to
+tell them what these components are.
+
+The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap. It
+then provides 'tbl_ord' methods with access to the recoverers and hence to
+the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
@@ -56,36 +66,39 @@ class(swiss)
 head(swiss)
 # perform factor analysis
 swiss_fa <- factanal(~ ., factors = 2L, data = swiss, scores = "regression")
+
 # wrap as a 'tbl_ord' object
 (swiss_fa <- as_tbl_ord(swiss_fa))
+
 # recover loadings
 get_rows(swiss_fa, elements = "active")
 get_cols(swiss_fa)
 # recover scores
 head(get_rows(swiss_fa, elements = "score"))
+
 # augment column loadings with uniquenesses
 (swiss_fa <- augment_ord(swiss_fa))
+
 # symmetric biplot
 swiss_fa \%>\%
   ggbiplot() +
   theme_bw() +
-  geom_cols_vector(aes(color = .uniqueness)) +
-  geom_cols_text_radiate(aes(label = .name)) +
+  geom_cols_vector(aes(color = uniqueness)) +
+  geom_cols_text_radiate(aes(label = name)) +
   expand_limits(x = c(-2, 2.5), y = c(-1.5, 2))
-# row-standard biplot with loadings in standard coordinates and regression
-# scores overlaid
-swiss_fa \%>\%
-  confer_inertia("rows") \%>\%
-  ggbiplot(aes(label = .name), elements = "score") +
-  theme_bw() +
-  geom_cols_vector() +
-  geom_cols_text_radiate() +
-  geom_unit_circle() +
-  geom_rows_point()
 }
 \seealso{
 Other methods for eigen-decomposition-based techniques: 
 \code{\link{methods-cmds}},
 \code{\link{methods-eigen}}
+
+Other models from the \strong{stats} package: 
+\code{\link{methods-cancor}},
+\code{\link{methods-cmds}},
+\code{\link{methods-kmeans}},
+\code{\link{methods-lm}},
+\code{\link{methods-prcomp}},
+\code{\link{methods-princomp}}
 }
 \concept{methods for eigen-decomposition-based techniques}
+\concept{models from the \strong{stats} package}

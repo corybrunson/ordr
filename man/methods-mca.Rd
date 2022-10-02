@@ -8,10 +8,10 @@
 \alias{recover_inertia.mca}
 \alias{recover_conference.mca}
 \alias{recover_coord.mca}
-\alias{supplementation_rows.mca}
-\alias{augmentation_rows.mca}
-\alias{augmentation_cols.mca}
-\alias{augmentation_coord.mca}
+\alias{recover_supp_rows.mca}
+\alias{recover_aug_rows.mca}
+\alias{recover_aug_cols.mca}
+\alias{recover_aug_coord.mca}
 \title{Functionality for multiple correspondence analysis ('mca') objects}
 \usage{
 \method{as_tbl_ord}{mca}(x)
@@ -26,16 +26,26 @@
 
 \method{recover_coord}{mca}(x)
 
-\method{supplementation_rows}{mca}(x)
+\method{recover_supp_rows}{mca}(x)
 
-\method{augmentation_rows}{mca}(x)
+\method{recover_aug_rows}{mca}(x)
 
-\method{augmentation_cols}{mca}(x)
+\method{recover_aug_cols}{mca}(x)
 
-\method{augmentation_coord}{mca}(x)
+\method{recover_aug_coord}{mca}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
+}
+\value{
+The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia},
+\link[=supplementation]{supplementary elements}, and \link[=augmentation]{intrinsic metadata}; but they require methods for each model class to
+tell them what these components are.
+
+The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap. It
+then provides 'tbl_ord' methods with access to the recoverers and hence to
+the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
@@ -63,31 +73,20 @@ ucb_admissions \%>\%
   # augment profiles with names, masses, distances, and inertias
   augment_ord() \%>\%
   print() -> admissions_mca
+
 # recover row and column coordinates and row weights
 head(get_rows(admissions_mca, elements = "score"))
 get_cols(admissions_mca)
 head(get_rows(admissions_mca))
+
 # column-standard biplot of factor levels
 admissions_mca \%>\%
   ggbiplot() +
   theme_bw() + theme_biplot() +
   geom_origin() +
   #geom_rows_point(stat = "unique") +
-  geom_cols_point(aes(color = .factor, shape = .factor)) +
-  geom_cols_text_repel(aes(label = .level, color = .factor),
-                       show.legend = FALSE) +
-  scale_color_brewer(palette = "Dark2") +
-  scale_size_area(guide = "none") +
-  labs(color = "Factor level", shape = "Factor level")
-# column-principal biplot of factor levels
-admissions_mca \%>\%
-  confer_inertia("colprincipal") \%>\%
-  ggbiplot() +
-  theme_bw() + theme_biplot() +
-  geom_origin() +
-  #geom_rows_point(stat = "unique") +
-  geom_cols_point(aes(color = .factor, shape = .factor)) +
-  geom_cols_text_repel(aes(label = .level, color = .factor),
+  geom_cols_point(aes(color = factor, shape = factor)) +
+  geom_cols_text_repel(aes(label = level, color = factor),
                        show.legend = FALSE) +
   scale_color_brewer(palette = "Dark2") +
   scale_size_area(guide = "none") +
@@ -102,5 +101,10 @@ Other methods for singular value decomposition-based techniques:
 \code{\link{methods-prcomp}},
 \code{\link{methods-princomp}},
 \code{\link{methods-svd}}
+
+Other models from the \strong{MASS} package: 
+\code{\link{methods-correspondence}},
+\code{\link{methods-lda}}
 }
 \concept{methods for singular value decomposition-based techniques}
+\concept{models from the \strong{MASS} package}

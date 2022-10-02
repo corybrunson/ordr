@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom-unit-circle.r
 \name{geom_unit_circle}
 \alias{geom_unit_circle}
-\title{Render a unit circle}
+\title{Unit circle}
 \usage{
 geom_unit_circle(
   mapping = NULL,
@@ -65,6 +65,9 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 }
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
+}
 \description{
 \code{geom_unit_circle()} renders the unit circle, centered at the
 origin with radius 1.
@@ -101,11 +104,13 @@ heplots::Diabetes[, seq(5L)] \%>\%
   cbind_rows(group = heplots::Diabetes$group) \%>\%
   augment_ord() \%>\%
   print() -> diabetes_pca
+
 # note that column standard coordinates are unit vectors
 rowSums(get_cols(diabetes_pca)^2)
+
 # plot column standard coordinates with a unit circle underlaid
 diabetes_pca \%>\%
-  ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 3) +
+  ggbiplot(aes(label = name), sec.axes = "cols", scale.factor = 3) +
   geom_rows_point(aes(color = group), alpha = .25) +
   geom_unit_circle(alpha = .5, scale.factor = 3) +
   geom_cols_vector() +

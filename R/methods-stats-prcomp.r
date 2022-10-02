@@ -4,10 +4,12 @@
 #'   objects of class `"prcomp"` as returned by [stats::prcomp()].
 #'
 #' @name methods-prcomp
+#' @author Emily Paul
 #' @include ord-tbl.r
 #' @template param-methods
-#' @author Emily Paul
+#' @template return-methods
 #' @family methods for singular value decomposition-based techniques
+#' @family models from the **stats** package
 #' @example inst/examples/ex-methods-prcomp-iris.r
 NULL
 
@@ -48,38 +50,38 @@ recover_conference.prcomp <- function(x) {
 
 #' @rdname methods-prcomp
 #' @export
-augmentation_rows.prcomp <- function(x) {
-  .name <- rownames(x[["x"]])
-  if (is.null(.name)) {
+recover_aug_rows.prcomp <- function(x) {
+  name <- rownames(x[["x"]])
+  if (is.null(name)) {
     tibble_pole(nrow(x[["x"]]))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
 }
 
 #' @rdname methods-prcomp
 #' @export
-augmentation_cols.prcomp <- function(x) {
-  .name <- rownames(x[["rotation"]])
-  res <- if (is.null(.name)) {
+recover_aug_cols.prcomp <- function(x) {
+  name <- rownames(x[["rotation"]])
+  res <- if (is.null(name)) {
     tibble_pole(nrow(x[["rotation"]]))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   if (inherits(x[["center"]], "numeric")) {
-    res <- dplyr::bind_cols(res, .center = x[["center"]])
+    res <- dplyr::bind_cols(res, center = x[["center"]])
   }
   if (inherits(x[["scale"]], "numeric")) {
-    res <- dplyr::bind_cols(res, .scale = x[["scale"]])
+    res <- dplyr::bind_cols(res, scale = x[["scale"]])
   }
   res
 }
 
 #' @rdname methods-prcomp
 #' @export
-augmentation_coord.prcomp <- function(x) {
+recover_aug_coord.prcomp <- function(x) {
   tibble(
-    .name = factor_coord(recover_coord(x)),
-    .sdev = x[["sdev"]]
+    name = factor_coord(recover_coord(x)),
+    sdev = x[["sdev"]]
   )
 }

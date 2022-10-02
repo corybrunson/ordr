@@ -7,8 +7,8 @@
 #' @details
 #'
 #' The `format` and `print` methods for class 'tbl_ord' are adapted from those
-#' for class '[tbl_df][tibble::tbl_df]' and for class
-#' '[tbl_graph][tidygraph::tbl_graph]'.
+#' for class '[tbl_df][tibble::tbl_df]' and for class 'tbl_graph' from the
+#' **tidygraph** package.
 #'
 #' **Note:** The `format()` function is tedius but cannot be easily modularized
 #' without invoking [recoverers], [annotation], and [augmentation] multiple
@@ -17,9 +17,12 @@
 
 #' @name format
 #' @importFrom rlang "%||%"
-#' @param x A [tbl_ord] object.
+#' @param x A [tbl_ord].
 #' @inheritParams tibble::format.tbl
 #' @param ... Additional arguments.
+#' @return The `format()` method returns a vector of strings that are more
+#'   elegantly printed by the `print()` method, which itself returns the tbl_ord
+#'   invisibly.
 
 #' @rdname format
 #' @export
@@ -36,7 +39,7 @@ format.tbl_ord <- function(
   dims_ann <- mapply(
     bind_cols,
     annotation_factor(x, .matrix = "dims"),
-    #augmentation_factor(x, .matrix = "dims"),
+    #recover_aug_factor(x, .matrix = "dims"),
     SIMPLIFY = FALSE
   )
   names(dims_ann) <- c("rows", "cols")

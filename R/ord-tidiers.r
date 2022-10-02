@@ -17,11 +17,26 @@
 #'   summarizes information about model components, which here are the
 #'   artificial coordinates created by ordinations. The output can be passed to
 #'   [ggplot2::ggplot()] to generate scree plots.
+#'   The returned columns are
+
+#'   - `name`: (the name of) the coordinate
+#'   - other columns extracted from the model,
+#'     usually a single additional column of the singular or eigen values
+#'   - `inertia`: the multidimensional variance
+#'   - `prop_var`: the proportion of inertia
+#'   - `quality`: the cumulative proportion of variance
 
 #' * The [generics::glance()] method
 
 #'   reports information about the entire model, here always treated as one of a
 #'   broader class of ordination models.
+#'   The returned columns are
+
+#'   - `rank`: the rank of the ordination model, i.e. the number of ordinates
+#'   - `n.row`,`n.col`: the dimensions of the decomposed matrix
+#'   - `inertia`: the total inertia in the ordination
+#'   - `prop.var.*`: the proportion of variance in the first 2 ordinates
+#'   - `class`: the class of the wrapped model object
 
 #' * The [ggplot2::fortify()] method
 
@@ -31,7 +46,7 @@
 #'   output may correspond to rows, columns, or both of the original data. If
 #'   `.matrix` is passed `"rows"`, `"cols"`, or `"dims"` (for both), then
 #'   `fortify()` returns a tibble whose fields are obtained, in order, via
-#'   `get_*()`, `augmentation_*()`, and `annotation_*()`.
+#'   `get_*()`, `recover_aug_*()`, and `annotation_*()`.
 
 #'
 #' The tibble is assigned a `"coordinates"` attribute whose value is obtained
@@ -46,8 +61,9 @@
 #' @param ... Additional arguments allowed by generics; currently ignored.
 #' @template param-matrix
 #' @template param-elements
-#' @seealso [augmentation] methods that must interface with tidiers.
+#' @return A [tibble][tibble::tibble].
 #' @example inst/examples/ex-ord-tidiers.r
+#' @seealso [augmentation] methods that must interface with tidiers.
 NULL
 
 #' @importFrom generics tidy
@@ -57,9 +73,10 @@ generics::tidy
 #' @rdname tidiers
 #' @export
 tidy.tbl_ord <- function(x, ...) {
-  res <- augmentation_coord(x)
-  res$.inertia <- recover_inertia(x)
-  res$.prop_var <- res$.inertia / sum(res$.inertia)
+  res <- recover_aug_coord(x)
+  res$inertia <- recover_inertia(x)
+  res$prop_var <- res$inertia / sum(res$inertia)
+  res$quality <- cumsum(res$prop_var)
   res
 }
 

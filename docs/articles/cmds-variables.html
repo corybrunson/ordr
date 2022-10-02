@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -333,8 +333,11 @@ without underlying coordinates.</p>
 <h2 id="use-case-rankings-of-universities">use case: rankings of universities<a class="anchor" aria-label="anchor" href="#use-case-rankings-of-universities"></a>
 </h2>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ordr</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ordr</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: package 'ggplot2' was built under R version 4.1.2</span></span></code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: package 'dplyr' was built under R version 4.1.2</span></span></code></pre>
 <p>A natural use case for CMDS of variables is the analysis of multiple
 rankings of the same set of objects in terms of their
 <em>concordance</em>. Rankings’ concordance is often measured using rank
@@ -354,11 +357,11 @@ QS weight these rankings differently in their overall assessment, but
 our analysis will compare the rankings to each other across
 universities, ignoring these weights. The subset <code>qswur_usa</code>
 installed with <strong>ordr</strong> include U.S.-based universities
-ranked in the years 2017–2020, <a href="http://www.iu.qs.com/university-rankings/qs-classifications/" class="external-link">their
+ranked in the years 2017–2020, <a href="https://support.qs.com/hc/en-gb/articles/360021876820-QS-Institution-Classifications" class="external-link">their
 classifications by QS</a>, and their six integer-valued rankings.
 (Scores used to generate the rankings are included with the QS data
 files but omitted from <code>qswur_usa</code>.)</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">qswur_usa</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">qswur_usa</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 612 × 13</span></span></span>
@@ -385,7 +388,7 @@ rankings were subsetted from the full international data set, they are
 not contiguous (some integers between rankings never appear). To resolve
 this, i’ll also recalibrate the rankings by matching each vector of
 ranks to the vector of its sorted unique values:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">qswur_usa</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2020L</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">institution</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"rk_"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -454,7 +457,7 @@ highly concordant, those by international faculty and student ratios are
 less so. The faculty–student ratio and faculty citation rankings have
 the weakest concordance of any pair, but they are still positively
 correlated.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">corr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">qswur_usa2020</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"rk_"</span><span class="op">)</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"kendall"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/heatmap.html" class="external-link">heatmap</a></span><span class="op">(</span><span class="va">corr</span>, scale <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmds-variables_files/figure-html/Kendall%20rank%20correlations-1.png" width="672" style="display: block; margin: auto;"></p>
@@ -492,22 +495,24 @@ readable but also to allow for additional scales that highlight
 additional data properties.</p>
 </div>
 <div class="section level3">
-<h3 id="correlation-vector-plot">correlation vector plot<a class="anchor" aria-label="anchor" href="#correlation-vector-plot"></a>
+<h3 id="correlation-monoplot">correlation monoplot<a class="anchor" aria-label="anchor" href="#correlation-monoplot"></a>
 </h3>
-<p>CMDS of variables offers a natural alternative visualization: what
-i’ll call the “correlation vector plot”, which is usually only seen as
-one half of a PCA or other biplot. As with CMDS of cases, the point
-isn’t to overlay the case scores and variable loadings from a singular
-value decomposition, but to use the scores or loadings alone to endow
-the cases or variables with a Euclidean geometry they didn’t originally
-have. To that end, i’ll plot the variables as vectors with tails at the
-origin and heads at their principal coordinates <span class="math inline">\(Y = V \Lambda^{1/2}\)</span>, with a unit circle
-included for reference:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<p>CMDS of variables offers a natural alternative visualization, which
+<a href="https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550" class="external-link">Gower,
+Lubbe, and le Roux (2011)</a> call a “correlation monoplot” in that it
+consists of but one of the two layers of a PCA or other biplot. As with
+CMDS of cases, the point isn’t to overlay the case scores and variable
+loadings from a singular value decomposition, but to use the scores or
+loadings alone to endow the cases or variables with a Euclidean geometry
+they didn’t originally have. To that end, i’ll plot the variables as
+vectors with tails at the origin and heads at their principal
+coordinates <span class="math inline">\(Y = V \Lambda^{1/2}\)</span>,
+with a unit circle included for reference:</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/wrap-ord.html">eigen_ord</a></span><span class="op">(</span><span class="va">corr</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/dplyr-verbs.html">mutate_rows</a></span><span class="op">(</span>metric <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html" class="external-link">str_remove</a></span><span class="op">(</span><span class="va">.name</span>, <span class="st">"rk_"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/dplyr-verbs.html">mutate_rows</a></span><span class="op">(</span>metric <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html" class="external-link">str_remove</a></span><span class="op">(</span><span class="va">name</span>, <span class="st">"rk_"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/conference.html">confer_inertia</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">-&gt;</span></span>
 <span>  <span class="va">c_eigen</span></span>
 <span><span class="va">c_eigen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -519,7 +524,7 @@ included for reference:</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_reverse</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.4</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Kendall correlations between university rankings"</span>,</span>
-<span>          <span class="st">"CMDS correlation vector plot"</span><span class="op">)</span></span></code></pre></div>
+<span>          <span class="st">"CMDS correlation monoplot"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmds-variables_files/figure-html/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>With respect to the pairwise correlations, the biplot is
 significantly less precise: Though the vectors all have unit length in
@@ -563,14 +568,14 @@ would be difficult to discern from the heatmap. More importantly, unlike
 the secondary patterns visible in the heatmap, these are not artifacts
 of the layout but arise directly from the (correlational) data.</p>
 <p>This last point means that observations made from a correlation
-vector plot can be validated from the CMDS coordinates. In particular,
-we can examine the variables’ loadings onto the third principal
-coordinate, and we can check whether the reputational rankings are
-aligned or misaligned along it.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+monoplot can be validated from the CMDS coordinates. In particular, we
+can examine the variables’ loadings onto the third principal coordinate,
+and we can check whether the reputational rankings are aligned or
+misaligned along it.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">c_eigen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span>.matrix <span class="op">=</span> <span class="st">"rows"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">.name</span>, <span class="op">-</span><span class="va">.matrix</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">name</span>, <span class="op">-</span><span class="va">.matrix</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 6 × 8</span></span></span>
 <span><span class="co">##      EV1     EV2     EV3     EV4     EV5      EV6 metric        .element</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span></span>
@@ -589,7 +594,7 @@ Based on the decomposition of inertia, this third principal coordinate
 is nearly as important as the second! It therefore makes sense to plot
 the two together, in effect examining the residuals after regressing out
 the first principal coordinate:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">c_eigen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2</span>, y <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -599,7 +604,7 @@ the first principal coordinate:</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Kendall correlations between university rankings"</span>,</span>
-<span>          <span class="st">"CMDS correlation vector plot, second &amp; third principal coordinates"</span><span class="op">)</span></span></code></pre></div>
+<span>          <span class="st">"CMDS correlation monoplot, second &amp; third principal coordinates"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmds-variables_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>The primary antitheses of the reputational rankings, after removing
 the first principal coordinate, are the two rankings based on

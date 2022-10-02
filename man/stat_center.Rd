@@ -76,6 +76,9 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
 \code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
 }
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
+}
 \description{
 Compute geometric centers and spreads for ordination factors
 }
@@ -94,16 +97,16 @@ points for rows and arrows for columns.
 
 \section{Ordination aesthetics}{
 
-The convenience function \verb{[ord_aes()]} can be used to incorporate all
+The convenience function \code{\link[=ord_aes]{ord_aes()}} can be used to incorporate all
 coordinates of the ordination model into a statistical transformation. It
 maps the coordinates to the custom aesthetics \code{..coord1}, \code{..coord2}, etc.
 
-Some transformations, e.g. \verb{[stat_center()]}, are commutative with projection
+Some transformations, e.g. \code{\link[=stat_center]{stat_center()}}, are commutative with projection
 to the 'x' and 'y' coordinates. If they detect aesthetics of the form
 \verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and \code{y}
 while any remaining are ignored.
 
-Other transformations, e.g. \verb{stat_spantree()]}, yield different results in a
+Other transformations, e.g. \code{\link[=stat_spantree]{stat_spantree()}}, yield different results in a
 planar biplot when they are computer before or after projection. If such a
 stat layer detects these aesthetics, then the lot of them are used in the
 transformation.
@@ -119,17 +122,7 @@ iris[, -5] \%>\%
   as_tbl_ord() \%>\%
   mutate_rows(species = iris$Species) \%>\%
   print() -> iris_pca
-# row-principal biplot with centroids
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_rows_point(alpha = .5) +
-  stat_rows_center(fun.center = "mean", size = 3, shape = "triangle") +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris measurements",
-    "Overlaid with centroids and 99\% confidence ellipses"
-  )
+
 # row-principal biplot with centroid-based stars
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
@@ -137,6 +130,7 @@ iris_pca \%>\%
   scale_color_brewer(type = "qual", palette = 2) +
   stat_rows_star(alpha = .5, fun.center = "mean") +
   geom_rows_point(alpha = .5) +
+  stat_rows_center(fun.center = "mean", size = 4, shape = 1L) +
   ggtitle(
     "Row-principal PCA biplot of Anderson iris measurements",
     "Segments connect each observation to its within-species centroid"

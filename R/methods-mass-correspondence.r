@@ -7,7 +7,9 @@
 #' @name methods-correspondence
 #' @include ord-tbl.r
 #' @template param-methods
+#' @template return-methods
 #' @family methods for singular value decomposition-based techniques
+#' @family models from the **MASS** package
 #' @example inst/examples/ex-methods-corresp-quine.r
 NULL
 
@@ -50,31 +52,31 @@ recover_coord.correspondence <- function(x) {
 
 #' @rdname methods-correspondence
 #' @export
-augmentation_rows.correspondence <- function(x) {
-  .name <- rownames(as.matrix(x$rscore))
-  if (is.null(.name)) {
+recover_aug_rows.correspondence <- function(x) {
+  name <- rownames(as.matrix(x$rscore))
+  if (is.null(name)) {
     tibble_pole(nrow(as.matrix(x$rscore)))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
 }
 
 #' @rdname methods-correspondence
 #' @export
-augmentation_cols.correspondence <- function(x) {
-  .name <- rownames(as.matrix(x$cscore))
-  if (is.null(.name)) {
+recover_aug_cols.correspondence <- function(x) {
+  name <- rownames(as.matrix(x$cscore))
+  if (is.null(name)) {
     tibble_pole(nrow(as.matrix(x$cscore)))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
 }
 
 #' @rdname methods-correspondence
 #' @export
-augmentation_coord.correspondence <- function(x){
+recover_aug_coord.correspondence <- function(x){
   tibble(
-    .name = factor_coord(recover_coord(x)),
-    .cor = x$cor
+    name = factor_coord(recover_coord(x)),
+    cor = x$cor
   )
 }

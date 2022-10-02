@@ -34,6 +34,8 @@
 #' @param x An ordination object.
 #' @param rows,cols Matrices to be used as factors of a tbl_ord.
 #' @param ... Additional elements of a custom tbl_ord.
+#' @return A tbl_ord (`as*()`, `make*()`), an S3-class model object that can be
+#'   wrapped as one (`un*()`), or a logical value (`is*()`, `value*()`).
 #' @example inst/examples/ex-ord-tbl.r
 NULL
 

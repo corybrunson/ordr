@@ -57,6 +57,9 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 }
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
+}
 \description{
 This stat layer restricts a dataset with \code{x} and \code{y} variables
 to the points that lie on its conical hull (other than the origin).
@@ -76,16 +79,16 @@ points for rows and arrows for columns.
 
 \section{Ordination aesthetics}{
 
-The convenience function \verb{[ord_aes()]} can be used to incorporate all
+The convenience function \code{\link[=ord_aes]{ord_aes()}} can be used to incorporate all
 coordinates of the ordination model into a statistical transformation. It
 maps the coordinates to the custom aesthetics \code{..coord1}, \code{..coord2}, etc.
 
-Some transformations, e.g. \verb{[stat_center()]}, are commutative with projection
+Some transformations, e.g. \code{\link[=stat_center]{stat_center()}}, are commutative with projection
 to the 'x' and 'y' coordinates. If they detect aesthetics of the form
 \verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and \code{y}
 while any remaining are ignored.
 
-Other transformations, e.g. \verb{stat_spantree()]}, yield different results in a
+Other transformations, e.g. \code{\link[=stat_spantree]{stat_spantree()}}, yield different results in a
 planar biplot when they are computer before or after projection. If such a
 stat layer detects these aesthetics, then the lot of them are used in the
 transformation.
@@ -101,7 +104,7 @@ USPersonalExpenditure \%>\%
   as_tbl_ord() \%>\%
   augment_ord() \%>\%
   # allow radiating text to exceed plotting window
-  ggbiplot(aes(label = .name), clip = "off",
+  ggbiplot(aes(label = name), clip = "off",
            sec.axes = "cols", scale.factor = 50) +
   geom_rows_label(size = 3) +
   geom_cols_vector() +
@@ -111,24 +114,6 @@ USPersonalExpenditure \%>\%
   ggtitle(
     "U.S. Personal Expenditure data, 1940-1960",
     "Row-principal biplot of centered PCA"
-  )
-# uncentered principal components analysis of U.S. personal expenditure data
-USPersonalExpenditure \%>\%
-  prcomp(center = FALSE) \%>\%
-  as_tbl_ord() \%>\%
-  augment_ord() \%>\%
-  confer_inertia(c(.5, .5)) \%>\%
-  # allow radiating text to exceed plotting window
-  ggbiplot(aes(label = .name), clip = "off") +
-  geom_rows_label(size = 3) +
-  geom_cols_vector() +
-  # omit labels in the conical hull with the origin
-  stat_cols_cone(linetype = "dotted") +
-  geom_cols_text_radiate(stat = "cone") +
-  scale_x_continuous(expand = expansion(add = 1), trans = "reverse") +
-  ggtitle(
-    "U.S. Personal Expenditure data, 1940-1960",
-    "Symmetric biplot of un-centered PCA"
   )
 }
 \seealso{

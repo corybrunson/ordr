@@ -8,9 +8,9 @@
 \alias{recover_inertia.svd_ord}
 \alias{recover_coord.svd_ord}
 \alias{recover_conference.svd_ord}
-\alias{augmentation_rows.svd_ord}
-\alias{augmentation_cols.svd_ord}
-\alias{augmentation_coord.svd_ord}
+\alias{recover_aug_rows.svd_ord}
+\alias{recover_aug_cols.svd_ord}
+\alias{recover_aug_coord.svd_ord}
 \title{Functionality for singular value decompositions}
 \usage{
 \method{as_tbl_ord}{svd_ord}(x)
@@ -25,14 +25,24 @@
 
 \method{recover_conference}{svd_ord}(x)
 
-\method{augmentation_rows}{svd_ord}(x)
+\method{recover_aug_rows}{svd_ord}(x)
 
-\method{augmentation_cols}{svd_ord}(x)
+\method{recover_aug_cols}{svd_ord}(x)
 
-\method{augmentation_coord}{svd_ord}(x)
+\method{recover_aug_coord}{svd_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
+}
+\value{
+The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia},
+\link[=supplementation]{supplementary elements}, and \link[=augmentation]{intrinsic metadata}; but they require methods for each model class to
+tell them what these components are.
+
+The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap. It
+then provides 'tbl_ord' methods with access to the recoverers and hence to
+the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
@@ -47,9 +57,11 @@ USPersonalExpenditure \%>\%
   svd_ord() \%>\%
   as_tbl_ord() \%>\%
   print() -> spend_svd
+
 # recover matrices of row and column coordinates
 get_rows(spend_svd)
 get_cols(spend_svd)
+
 # augment with row and column names
 augment_ord(spend_svd)
 # initial matrix decomposition confers no inertia to coordinates
@@ -64,5 +76,9 @@ Other methods for singular value decomposition-based techniques:
 \code{\link{methods-mca}},
 \code{\link{methods-prcomp}},
 \code{\link{methods-princomp}}
+
+Other models from the \strong{base} package: 
+\code{\link{methods-eigen}}
 }
 \concept{methods for singular value decomposition-based techniques}
+\concept{models from the \strong{base} package}

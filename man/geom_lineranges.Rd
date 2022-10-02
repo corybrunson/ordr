@@ -3,7 +3,7 @@
 \name{geom_lineranges}
 \alias{geom_lineranges}
 \alias{geom_pointranges}
-\title{Render intervals depicting ranges, usually about center points}
+\title{Intervals depicting ranges, usually about center points}
 \usage{
 geom_lineranges(
   mapping = NULL,
@@ -69,6 +69,9 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 }
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
+}
 \description{
 \code{geom_lineranges()} renders horizontal and vertical intervals
 for a specified subject or variable; \code{geom_pointranges()} additionally
@@ -113,32 +116,18 @@ glass \%>\%
            model = lra, compositional = TRUE) \%>\%
   confer_inertia("rows") \%>\%
   print() -> glass_lra
+
 # row-principal biplot with ordinate-wise standard deviations
 glass_lra \%>\%
   ggbiplot(aes(color = Site), sec.axes = "cols", scale.factor = .05) +
   theme_biplot() +
   scale_color_brewer(type = "qual", palette = 6) +
-  geom_cols_text(stat = "chull", aes(label = .name), color = "#444444") +
+  geom_cols_text(stat = "chull", aes(label = name), color = "#444444") +
   geom_rows_lineranges(fun.data = mean_sdl, size = .75) +
   geom_rows_point(alpha = .5) +
   ggtitle(
     "Row-principal LRA biplot of Freestone glass measurements",
     "Ranges 2 sample standard deviations from centroids"
-  )
-# row-principal biplot with coordinate-wise confidence intervals
-glass_lra \%>\%
-  ggbiplot(aes(color = Site), sec.axes = "cols", scale.factor = .05) +
-  theme_biplot() +
-  scale_color_brewer(type = "qual", palette = 6) +
-  geom_cols_text(stat = "chull", aes(label = .name), color = "#444444") +
-  geom_rows_lineranges(
-    fun.data = mean_cl_boot, fun.args = list(conf.int = .99),
-    size = .75
-  ) +
-  geom_rows_point(alpha = .5) +
-  ggtitle(
-    "Row-principal LRA biplot of Freestone glass measurements",
-    "99\% confidence intervals based on nonparametric bootstrap sampling"
   )
 }
 \seealso{

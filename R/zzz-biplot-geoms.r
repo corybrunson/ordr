@@ -11,6 +11,7 @@
 #'   as their corresponding conventional geoms.
 #' 
 #' @name biplot-geoms
+#' @template return-layer
 #' @family biplot layers
 #' @include utils.r
 #' @import ggplot2
@@ -683,8 +684,8 @@ geom_rows_axis <- function(
   by = NULL,
   num = NULL,
   tick_length = 0.025,
-  text_dodge = 0.15,
-  label_dodge = 0.2,
+  text_dodge = 0.03,
+  label_dodge = 0.03,
   ...,
   parse = FALSE,
   check_overlap = FALSE,
@@ -730,8 +731,8 @@ geom_cols_axis <- function(
   by = NULL,
   num = NULL,
   tick_length = 0.025,
-  text_dodge = 0.15,
-  label_dodge = 0.2,
+  text_dodge = 0.03,
+  label_dodge = 0.03,
   ...,
   parse = FALSE,
   check_overlap = FALSE,
@@ -882,7 +883,7 @@ geom_rows_isoline <- function(
   isoline_text = TRUE,
   by = NULL,
   num = NULL,
-  label_dodge = 0.1,
+  label_dodge = 0.03,
   ...,
   parse = FALSE,
   check_overlap = FALSE,
@@ -921,7 +922,7 @@ geom_cols_isoline <- function(
   isoline_text = TRUE,
   by = NULL,
   num = NULL,
-  label_dodge = 0.1,
+  label_dodge = 0.03,
   ...,
   parse = FALSE,
   check_overlap = FALSE,

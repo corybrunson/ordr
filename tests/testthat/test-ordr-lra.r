@@ -19,8 +19,8 @@ test_that("lra has specified distribution of inertia", {
 })
 
 test_that("'lra' augmentations are consistent with '.element' column", {
-  expect_equal(".element" %in% names(augmentation_rows(fit_lra)),
-               ".element" %in% names(augmentation_cols(fit_lra)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_lra)),
+               ".element" %in% names(recover_aug_cols(fit_lra)))
 })
 
 test_that("`as_tbl_ord()` coerces 'lra' objects", {

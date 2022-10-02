@@ -8,7 +8,9 @@
 #' @name methods-cmds
 #' @include ord-tbl.r
 #' @template param-methods
+#' @template return-methods
 #' @family methods for eigen-decomposition-based techniques
+#' @family models from the **stats** package
 #' @example inst/examples/ex-methods-cmds-cities.r
 NULL
 
@@ -51,33 +53,33 @@ recover_conference.cmds_ord <- function(x) {
 
 #' @rdname methods-cmds
 #' @export
-augmentation_rows.cmds_ord <- function(x) {
-  .name <- rownames(x$points)
-  res <- if (is.null(.name)) {
+recover_aug_rows.cmds_ord <- function(x) {
+  name <- rownames(x$points)
+  res <- if (is.null(name)) {
     tibble_pole(nrow(x$x))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   res
 }
 
 #' @rdname methods-cmds
 #' @export
-augmentation_cols.cmds_ord <- function(x) {
-  .name <- rownames(x$points)
-  res <- if (is.null(.name)) {
+recover_aug_cols.cmds_ord <- function(x) {
+  name <- rownames(x$points)
+  res <- if (is.null(name)) {
     tibble_pole(ncol(x$x))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   res
 }
 
 #' @rdname methods-cmds
 #' @export
-augmentation_coord.cmds_ord <- function(x) {
+recover_aug_coord.cmds_ord <- function(x) {
   tibble(
-    .name = factor_coord(recover_coord(x)),
-    .eig = x$eig[1:ncol(x$points)]
+    name = factor_coord(recover_coord(x)),
+    eig = x$eig[1:ncol(x$points)]
   )
 }

@@ -1,4 +1,4 @@
-#' @title Render a crosshairs or circle at the origin
+#' @title Crosshairs or circle at the origin
 #' 
 
 #' @description `geom_origin()` renders a symbol, either a set of crosshairs or
@@ -16,6 +16,7 @@
 #'   or `"circle"`.
 #' @param radius A [grid::unit()] object that sets the radius of the crosshairs
 #'   or of the circle.
+#' @template return-layer
 #' @family geom layers
 #' @export
 geom_origin <- function(

@@ -6,6 +6,7 @@ iris[, -5] %>%
   mutate_rows(species = iris$Species) %>%
   mutate_cols(measure = gsub("\\.", " ", tolower(names(iris)[-5]))) %>%
   print() -> iris_pca
+
 # row-principal biplot with rescaled secondary axis
 iris_pca %>%
   ggbiplot(aes(color = species), sec.axes = "cols", scale.factor = 2) +

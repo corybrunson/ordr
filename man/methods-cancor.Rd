@@ -8,11 +8,11 @@
 \alias{recover_inertia.cancor_ord}
 \alias{recover_coord.cancor_ord}
 \alias{recover_conference.cancor_ord}
-\alias{augmentation_rows.cancor_ord}
-\alias{augmentation_cols.cancor_ord}
-\alias{augmentation_coord.cancor_ord}
-\alias{supplementation_rows.cancor_ord}
-\alias{supplementation_cols.cancor_ord}
+\alias{recover_supp_rows.cancor_ord}
+\alias{recover_supp_cols.cancor_ord}
+\alias{recover_aug_rows.cancor_ord}
+\alias{recover_aug_cols.cancor_ord}
+\alias{recover_aug_coord.cancor_ord}
 \title{Functionality for canonical correlations}
 \usage{
 \method{as_tbl_ord}{cancor_ord}(x)
@@ -27,18 +27,28 @@
 
 \method{recover_conference}{cancor_ord}(x)
 
-\method{augmentation_rows}{cancor_ord}(x)
+\method{recover_supp_rows}{cancor_ord}(x)
 
-\method{augmentation_cols}{cancor_ord}(x)
+\method{recover_supp_cols}{cancor_ord}(x)
 
-\method{augmentation_coord}{cancor_ord}(x)
+\method{recover_aug_rows}{cancor_ord}(x)
 
-\method{supplementation_rows}{cancor_ord}(x)
+\method{recover_aug_cols}{cancor_ord}(x)
 
-\method{supplementation_cols}{cancor_ord}(x)
+\method{recover_aug_coord}{cancor_ord}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
+}
+\value{
+The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia},
+\link[=supplementation]{supplementary elements}, and \link[=augmentation]{intrinsic metadata}; but they require methods for each model class to
+tell them what these components are.
+
+The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap. It
+then provides 'tbl_ord' methods with access to the recoverers and hence to
+the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
@@ -51,7 +61,7 @@ The canonical coefficients (loadings) are obtained directly from the
 underlying singular value decomposition and constitute the active elements.
 If canonical scores are returned, then they and the structure correlations
 are made available as supplementary elements. \strong{ordr} takes rows and columns
-from the intraset correlations \verb{$x.xscores} and \verb{$y.yscores}, on which no
+from the intraset correlations \verb{$xstructure} and \verb{$ystructure}, on which no
 intertia is conferred; the interset correlations can be obtained by
 \link[=conference]{conferring inertia} onto these.
 
@@ -72,52 +82,35 @@ class(LifeCycleSavings)
 head(LifeCycleSavings)
 savings_pop <- LifeCycleSavings[, c("pop15", "pop75")]
 savings_oec <- LifeCycleSavings[, c("sr", "dpi", "ddpi")]
-# canonical correlation analysis of age distributions and financial factors
-savings_cancor <- cancor_ord(savings_pop, savings_oec)
-# wrap as a 'tbl_ord' object
-(savings_cancor <- as_tbl_ord(savings_cancor))
-# recover canonical weights
-get_rows(savings_cancor)
-get_cols(savings_cancor)
-# augment canonical weights with row names and centers
-(savings_cancor <- augment_ord(savings_cancor))
-# column-standard biplot of canonical coefficients
-savings_cancor \%>\%
-  confer_inertia("rows") \%>\%
-  ggbiplot(aes(label = .name, color = .matrix)) +
-  theme_bw() +
-  geom_rows_vector() +
-  geom_rows_text() +
-  geom_cols_point() +
-  geom_cols_text_repel() +
-  scale_color_brewer(limits = c("rows", "cols"), type = "qual") +
-  expand_limits(x = c(-.1, .1))
+
 # canonical correlation analysis with scores and correlations included
 savings_cca <- cancor_ord(savings_pop, savings_oec, scores = TRUE)
 savings_cca <- augment_ord(as_tbl_ord(savings_cca))
 head(get_cols(savings_cca))
 head(get_cols(savings_cca, elements = "score"))
-get_cols(savings_cca, elements = "intraset")
-get_cols(savings_cca, elements = "interset")
+get_rows(savings_cca, elements = "structure")
+get_cols(savings_cca, elements = "structure")
+
 # biplot of interset and intraset correlations with the population data
 savings_cca \%>\%
   confer_inertia("cols") \%>\%
-  ggbiplot(aes(label = .name)) +
-  theme_biplot() +
+  ggbiplot(aes(label = name, color = .matrix)) +
+  theme_bw() + theme_biplot() +
   geom_unit_circle() +
-  geom_cols_vector(arrow = NULL, elements = "interset") +
-  geom_cols_vector(arrow = NULL, elements = "intraset", linetype = "dashed") +
-  geom_cols_text_repel(elements = "interset") +
-  geom_cols_text_repel(elements = "intraset") +
+  geom_rows_vector(arrow = NULL, elements = "structure") +
+  geom_cols_vector(arrow = NULL, elements = "structure", linetype = "dashed") +
+  geom_rows_text(elements = "structure", hjust = "outward") +
+  geom_cols_text(elements = "structure", hjust = "outward") +
+  scale_color_brewer(limits = c("rows", "cols"), type = "qual") +
   expand_limits(x = c(-1, 1), y = c(-1, 1))
+
 # biplot with scores as supplemental elements
 savings_cca \%>\%
   confer_inertia("rows") \%>\%
-  ggbiplot(aes(label = .name), sec.axes = "cols", scale.factor = 5L) +
+  ggbiplot(aes(label = name), sec.axes = "cols", scale.factor = 5L) +
   theme_biplot() +
   geom_cols_vector(elements = "active") +
   geom_cols_text_radiate(elements = "active") +
-  # -+- need more convenient handling of elements -+-
   geom_rows_text(elements = "score", subset = seq(50L))
 }
 \references{
@@ -138,5 +131,14 @@ Other methods for singular value decomposition-based techniques:
 \code{\link{methods-prcomp}},
 \code{\link{methods-princomp}},
 \code{\link{methods-svd}}
+
+Other models from the \strong{stats} package: 
+\code{\link{methods-cmds}},
+\code{\link{methods-factanal}},
+\code{\link{methods-kmeans}},
+\code{\link{methods-lm}},
+\code{\link{methods-prcomp}},
+\code{\link{methods-princomp}}
 }
 \concept{methods for singular value decomposition-based techniques}
+\concept{models from the \strong{stats} package}

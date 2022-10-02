@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom-vector.r
 \name{geom_vector}
 \alias{geom_vector}
-\title{Render vectors from the origin}
+\title{Vectors from the origin}
 \usage{
 geom_vector(
   mapping = NULL,
@@ -61,6 +61,9 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 }
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
+}
 \description{
 \code{geom_vector()} renders arrows from the origin to points.
 }
@@ -95,6 +98,7 @@ are in bold):
 \examples{
 # compute unscaled row-principal components of scaled measurements
 (iris_pca <- ordinate(iris, cols = 1:4, princomp))
+
 # row-principal biplot with coordinate-wise standard deviations
 iris_pca \%>\%
   ggbiplot(aes(color = Species)) +
@@ -103,7 +107,7 @@ iris_pca \%>\%
   geom_unit_circle() +
   geom_rows_point(alpha = .5) +
   geom_cols_vector(color = "#444444") +
-  geom_cols_text_radiate(aes(label = .name), color = "#444444") +
+  geom_cols_text_radiate(aes(label = name), color = "#444444") +
   ggtitle("Row-principal unscaled PCA biplot of Anderson iris measurements") +
   expand_limits(y = c(NA, 2))
 }

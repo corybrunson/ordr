@@ -11,8 +11,8 @@ test_that("'mca' has specified distribution of inertia", {
 })
 
 test_that("'mca' augmentations are consistent with '.element' column", {
-  expect_equal(".element" %in% names(augmentation_rows(fit_mca)),
-               ".element" %in% names(augmentation_cols(fit_mca)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_mca)),
+               ".element" %in% names(recover_aug_cols(fit_mca)))
 })
 
 test_that("`as_tbl_ord()` coerces 'mca' objects", {

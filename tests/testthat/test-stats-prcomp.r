@@ -11,8 +11,8 @@ test_that("'prcomp' has specified distribution of inertia", {
 })
 
 test_that("'prcomp' augmentations are consistent with '.element' column", {
-  expect_equal(".element" %in% names(augmentation_rows(fit_prcomp)),
-               ".element" %in% names(augmentation_cols(fit_prcomp)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_prcomp)),
+               ".element" %in% names(recover_aug_cols(fit_prcomp)))
 })
 
 test_that("`as_tbl_ord()` coerces 'prcomp' objects", {

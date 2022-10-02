@@ -11,6 +11,7 @@
 
 #' @inheritParams ggplot2::layer
 #' @template param-stat
+#' @template return-layer
 #' @family stat layers
 #' @example inst/examples/ex-stat-chull-haireye.r
 #' @export

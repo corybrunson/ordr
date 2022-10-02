@@ -13,8 +13,8 @@ test_that("'kmeans' does not confer inertia", {
 })
 
 test_that("'kmeans' augmentations are consistent with '.element' column", {
-  expect_equal(".element" %in% names(augmentation_rows(fit_kmeans)),
-               ".element" %in% names(augmentation_cols(fit_kmeans)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_kmeans)),
+               ".element" %in% names(recover_aug_cols(fit_kmeans)))
 })
 
 test_that("`as_tbl_ord()` coerces 'kmeans' objects", {

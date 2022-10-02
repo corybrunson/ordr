@@ -1,6 +1,6 @@
 #' @title Confer inertia to factors of a 'tbl_ord' object
 #'
-#' @description Re-distribute inertia between cases and variables in an
+#' @description Re-distribute inertia between rows and columns in an
 #'   ordination.
 #'   
 
@@ -28,13 +28,18 @@
 
 #' @name conference
 #' @include ord-augmentation.r
-#' @param x A [tbl_ord] object.
+#' @param x A [tbl_ord].
 #' @param p Numeric vector of length 1 or 2. If length 1, the proportion of the
 #'   inertia assigned to the cases, with the remainder `1 - p` assigned to the
 #'   variables. If length 2, the proportions of the inertia assigned to the
 #'   cases and to the variables, respectively.
-#' @family generic recoverers
+#' @return `recover_conference()` returns the (statically implemented)
+#'   distribution of inertia between the rows and the columns as stored in the
+#'   model. `confer_inertia()` returns a tbl_ord with a specified distribution
+#'   of inertia but the wrapped model unchanged. `get_conference()` returns the
+#'   distribution currently conferred.
 #' @example inst/examples/ex-ord-conference.r
+#' @family generic recoverers
 NULL
 
 attribute_conference <- function(x, p) {

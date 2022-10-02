@@ -22,14 +22,14 @@ test_that("'lm' does not confer inertia", {
 })
 
 test_that("'lm' augmentations are consistent with '.element' column", {
-  expect_equal(".element" %in% names(augmentation_rows(fit_lm0)),
-               ".element" %in% names(augmentation_cols(fit_lm0)))
-  expect_equal(".element" %in% names(augmentation_rows(fit_lm1)),
-               ".element" %in% names(augmentation_cols(fit_lm1)))
-  expect_equal(".element" %in% names(augmentation_rows(fit_lm2)),
-               ".element" %in% names(augmentation_cols(fit_lm2)))
-  expect_equal(".element" %in% names(augmentation_rows(fit_lm3)),
-               ".element" %in% names(augmentation_cols(fit_lm3)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_lm0)),
+               ".element" %in% names(recover_aug_cols(fit_lm0)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_lm1)),
+               ".element" %in% names(recover_aug_cols(fit_lm1)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_lm2)),
+               ".element" %in% names(recover_aug_cols(fit_lm2)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_lm3)),
+               ".element" %in% names(recover_aug_cols(fit_lm3)))
 })
 
 test_that("`as_tbl_ord()` coerces 'lm' objects", {
@@ -65,14 +65,14 @@ test_that("'mlm' does not confer inertia", {
 })
 
 test_that("'mlm' augmentations are consistent with '.element' column", {
-  expect_equal(".element" %in% names(augmentation_rows(fit_mlm0)),
-               ".element" %in% names(augmentation_cols(fit_mlm0)))
-  expect_equal(".element" %in% names(augmentation_rows(fit_mlm1)),
-               ".element" %in% names(augmentation_cols(fit_mlm1)))
-  expect_equal(".element" %in% names(augmentation_rows(fit_mlm2)),
-               ".element" %in% names(augmentation_cols(fit_mlm2)))
-  expect_equal(".element" %in% names(augmentation_rows(fit_mlm3)),
-               ".element" %in% names(augmentation_cols(fit_mlm3)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_mlm0)),
+               ".element" %in% names(recover_aug_cols(fit_mlm0)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_mlm1)),
+               ".element" %in% names(recover_aug_cols(fit_mlm1)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_mlm2)),
+               ".element" %in% names(recover_aug_cols(fit_mlm2)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_mlm3)),
+               ".element" %in% names(recover_aug_cols(fit_mlm3)))
 })
 
 test_that("`as_tbl_ord()` coerces 'mlm' objects", {
@@ -108,14 +108,14 @@ test_that("'glm' does not confer inertia", {
 })
 
 test_that("'glm' augmentations are consistent with '.element' column", {
-  expect_equal(".element" %in% names(augmentation_rows(fit_glm0)),
-               ".element" %in% names(augmentation_cols(fit_glm0)))
-  expect_equal(".element" %in% names(augmentation_rows(fit_glm1)),
-               ".element" %in% names(augmentation_cols(fit_glm1)))
-  expect_equal(".element" %in% names(augmentation_rows(fit_glm2)),
-               ".element" %in% names(augmentation_cols(fit_glm2)))
-  expect_equal(".element" %in% names(augmentation_rows(fit_glm3)),
-               ".element" %in% names(augmentation_cols(fit_glm3)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_glm0)),
+               ".element" %in% names(recover_aug_cols(fit_glm0)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_glm1)),
+               ".element" %in% names(recover_aug_cols(fit_glm1)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_glm2)),
+               ".element" %in% names(recover_aug_cols(fit_glm2)))
+  expect_equal(".element" %in% names(recover_aug_rows(fit_glm3)),
+               ".element" %in% names(recover_aug_cols(fit_glm3)))
 })
 
 test_that("`as_tbl_ord()` coerces 'glm' objects", {

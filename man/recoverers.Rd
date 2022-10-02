@@ -66,9 +66,31 @@ supplementary element type defined by the specific class methods (e.g.
 
 \item{...}{Additional arguments from \code{\link[base:matrix]{base::as.matrix()}}; ignored.}
 
-\item{.matrix}{A character string matching one of several indicators for one
-or both matrices in a matrix decomposition used for ordination. The
-standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for both).}
+\item{.matrix}{A character string partially matched (lowercase) to several
+indicators for one or both matrices in a matrix decomposition used for
+ordination. The standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for
+both).}
+}
+\value{
+The \verb{recover_*()} functions are generics whose methods return base R
+objects retrieved from the model wrapped in the 'tbl_ord' class:
+\itemize{
+\item \code{rows}: the row matrix as stored in the model
+\item \code{cols}: the column matrix as stored in the model
+\item \code{inertia}: the vector of eigen-values or squared singular values,
+often known by other names depending on the model
+\item \code{coord}: names for the artificial axes, from the model if available
+The \verb{get_*()} functions (which are not generics) return modifications of
+these objects:
+\item \code{rows}: the recovered rows,
+adjusted according to any negation of axes or conference of inertia
+\item \code{cols}: the recovered columns,
+adjusted according to any negation of axes or conference of inertia
+\item \code{inertia}: the recovered inertia, named by the recovered coordinates
+\item \code{coord}: the recovered coordinates (unmodified)
+\code{dim()} returns the dimensions of the decomposed matrix, i.e. the numbers of
+rows of \code{recover_rows()} and of \code{recover_cols()}.
+}
 }
 \description{
 These functions return information about the matrix
@@ -96,18 +118,20 @@ is square.)
 \examples{
 # example ordination: LRA of U.S. arrests data
 arrests_lra <- ordinate(USArrests, cols = c(Murder, Rape, Assault), lra)
+
 # extract matrix factors
 as.matrix(arrests_lra, .matrix = "rows")
 as.matrix(arrests_lra, .matrix = "cols")
 # special named functions
 get_rows(arrests_lra)
 get_cols(arrests_lra)
+# get dimensions of underlying matrix factorization (not of original data)
+dim(arrests_lra)
+
 # get names of artificial / latent coordinates
 get_coord(arrests_lra)
 # get distribution of inertia
 get_inertia(arrests_lra)
-# get dimensions of underlying matrix factorization (not of original data)
-dim(arrests_lra)
 }
 \seealso{
 Other generic recoverers: 

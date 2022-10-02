@@ -17,7 +17,9 @@
 #' @name methods-factanal
 #' @include ord-tbl.r
 #' @template param-methods
+#' @template return-methods
 #' @family methods for eigen-decomposition-based techniques
+#' @family models from the **stats** package
 #' @example inst/examples/ex-methods-factanal-swiss.r
 NULL
 
@@ -56,18 +58,18 @@ recover_conference.factanal <- function(x) {
 
 #' @rdname methods-factanal
 #' @export
-supplementation_rows.factanal <- function(x) {
+recover_supp_rows.factanal <- function(x) {
   x[["scores"]]
 }
 
 #' @rdname methods-factanal
 #' @export
-augmentation_rows.factanal <- function(x) {
-  .name <- rownames(x[["loadings"]])
-  res <- if (is.null(.name)) {
+recover_aug_rows.factanal <- function(x) {
+  name <- rownames(x[["loadings"]])
+  res <- if (is.null(name)) {
     tibble_pole(nrow(x[["loadings"]]))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   if (is.null(x[["scores"]])) return(res)
   
@@ -75,7 +77,7 @@ augmentation_rows.factanal <- function(x) {
   res_sup <- if (is.null(rownames(x[["scores"]]))) {
     tibble_pole(x[["n.obs"]])
   } else {
-    tibble(.name = rownames(x[["scores"]]))
+    tibble(name = rownames(x[["scores"]]))
   }
   # supplement flag
   res$.element <- "active"
@@ -85,22 +87,22 @@ augmentation_rows.factanal <- function(x) {
 
 #' @rdname methods-factanal
 #' @export
-augmentation_cols.factanal <- function(x) {
-  .name <- rownames(x[["loadings"]])
-  res <- if (is.null(.name)) {
+recover_aug_cols.factanal <- function(x) {
+  name <- rownames(x[["loadings"]])
+  res <- if (is.null(name)) {
     tibble_pole(nrow(x[["loadings"]]))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
-  res$.uniqueness <- x$uniquenesses
+  res$uniqueness <- x$uniquenesses
   res$.element <- "active"
   res
 }
 
 #' @rdname methods-factanal
 #' @export
-augmentation_coord.factanal <- function(x) {
+recover_aug_coord.factanal <- function(x) {
   tibble(
-    .name = factor_coord(recover_coord(x))
+    name = factor_coord(recover_coord(x))
   )
 }

@@ -1,4 +1,4 @@
-#' @title Functionality for eigendecompositions
+#' @title Functionality for eigen-decompositions
 #'
 #' @description These methods extract data from, and attribute new data to,
 #'   objects of class `"eigen_ord"` returned by [eigen_ord()].
@@ -6,7 +6,9 @@
 #' @name methods-eigen
 #' @include ord-tbl.r
 #' @template param-methods
+#' @template return-methods
 #' @family methods for eigen-decomposition-based techniques
+#' @family models from the **base** package
 #' @example inst/examples/ex-methods-eigen-qswur.r
 NULL
 
@@ -41,33 +43,33 @@ recover_conference.eigen_ord <- function(x) {
 
 #' @rdname methods-eigen
 #' @export
-augmentation_rows.eigen_ord <- function(x) {
-  .name <- rownames(x[["vectors"]])
-  res <- if (is.null(.name)) {
+recover_aug_rows.eigen_ord <- function(x) {
+  name <- rownames(x[["vectors"]])
+  res <- if (is.null(name)) {
     tibble_pole(nrow(x[["vectors"]]))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   res
 }
 
 #' @rdname methods-eigen
 #' @export
-augmentation_cols.eigen_ord <- function(x) {
-  .name <- rownames(x[["vectors"]])
-  res <- if (is.null(.name)) {
+recover_aug_cols.eigen_ord <- function(x) {
+  name <- rownames(x[["vectors"]])
+  res <- if (is.null(name)) {
     tibble_pole(nrow(x[["vectors"]]))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   res
 }
 
 #' @rdname methods-eigen
 #' @export
-augmentation_coord.eigen_ord <- function(x) {
+recover_aug_coord.eigen_ord <- function(x) {
   tibble(
-    .name = factor_coord(recover_coord(x)),
-    .values = x[["values"]]
+    name = factor_coord(recover_coord(x)),
+    values = x[["values"]]
   )
 }

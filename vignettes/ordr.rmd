@@ -46,7 +46,7 @@ The data were collected by students in one of Ronald Snee's statistics courses.[
 The (default) mosaic plot reveals only subtle differences by sex, so we lose little by flattening the array into a $4 \times 4$ matrix.
 The resulting count table is suitable for correspondence analysis, and we fit this model next.
 
-[^snee]: <https://www.jstor.org/stable/2683520>
+[^snee]: Snee RD (1974) "Graphical Display of Two-way Contingency Tables". _The American Statistician_ **28**(1), 9-12. <https://doi.org/10.2307/2683520>
 
 ## correspondence analysis using **MASS**
 
@@ -149,7 +149,7 @@ tidy(haireye_ca_ord)
 The `.inertia` and `.prop_var` fields are calculated from the singular values or eigenvalues contained in the ordination object and always appear when defined. This means that `tidy()` prepares any ordination object derived from such a decomposition for a scree plot with `ggplot2::ggplot()`:
 
 ```{r scree plot}
-ggplot(tidy(haireye_ca_ord), aes(x = .name, y = .inertia)) +
+ggplot(tidy(haireye_ca_ord), aes(x = name, y = inertia)) +
   geom_col() +
   labs(x = "Component", y = "Inertia") +
   ggtitle("Correspondence analysis of subjects' hair & eye colors",
@@ -174,7 +174,7 @@ haireye_ca_ord %>%
   augment_ord() %>%
   fortify() %>%
   transform(feature = ifelse(.matrix == "rows", "Hair", "Eye")) %>%
-  ggbiplot(aes(color = feature, shape = feature, label = .name), clip = "off") +
+  ggbiplot(aes(color = feature, shape = feature, label = name), clip = "off") +
   theme_biplot() +
   geom_origin() +
   geom_rows_point() +

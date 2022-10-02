@@ -6,16 +6,16 @@
 \alias{recover_rows.lm}
 \alias{recover_cols.lm}
 \alias{recover_coord.lm}
-\alias{augmentation_rows.lm}
-\alias{augmentation_cols.lm}
-\alias{augmentation_coord.lm}
-\alias{augmentation_rows.glm}
+\alias{recover_aug_rows.lm}
+\alias{recover_aug_cols.lm}
+\alias{recover_aug_coord.lm}
+\alias{recover_aug_rows.glm}
 \alias{recover_rows.mlm}
 \alias{recover_cols.mlm}
 \alias{recover_coord.mlm}
-\alias{augmentation_rows.mlm}
-\alias{augmentation_cols.mlm}
-\alias{augmentation_coord.mlm}
+\alias{recover_aug_rows.mlm}
+\alias{recover_aug_cols.mlm}
+\alias{recover_aug_coord.mlm}
 \title{Functionality for linear model objects}
 \usage{
 \method{as_tbl_ord}{lm}(x)
@@ -26,13 +26,13 @@
 
 \method{recover_coord}{lm}(x)
 
-\method{augmentation_rows}{lm}(x)
+\method{recover_aug_rows}{lm}(x)
 
-\method{augmentation_cols}{lm}(x)
+\method{recover_aug_cols}{lm}(x)
 
-\method{augmentation_coord}{lm}(x)
+\method{recover_aug_coord}{lm}(x)
 
-\method{augmentation_rows}{glm}(x)
+\method{recover_aug_rows}{glm}(x)
 
 \method{recover_rows}{mlm}(x)
 
@@ -40,14 +40,24 @@
 
 \method{recover_coord}{mlm}(x)
 
-\method{augmentation_rows}{mlm}(x)
+\method{recover_aug_rows}{mlm}(x)
 
-\method{augmentation_cols}{mlm}(x)
+\method{recover_aug_cols}{mlm}(x)
 
-\method{augmentation_coord}{mlm}(x)
+\method{recover_aug_coord}{mlm}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
+}
+\value{
+The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia},
+\link[=supplementation]{supplementary elements}, and \link[=augmentation]{intrinsic metadata}; but they require methods for each model class to
+tell them what these components are.
+
+The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap. It
+then provides 'tbl_ord' methods with access to the recoverers and hence to
+the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
@@ -63,23 +73,25 @@ mtcars_centered \%>\%
   as.data.frame() \%>\%
   lm(formula = mpg ~ wt + cyl) \%>\%
   print() -> mtcars_lm
+
 # wrap as a 'tbl_ord' object
 (mtcars_lm_ord <- as_tbl_ord(mtcars_lm))
 # augment everything with names, predictors with observation stats
 augment_ord(mtcars_lm_ord)
 # calculate influences as the squares of weighted residuals
-mutate_rows(augment_ord(mtcars_lm_ord), influence = .wt.res^2)
+mutate_rows(augment_ord(mtcars_lm_ord), influence = wt.res^2)
+
 # regression biplot with performance isolines
 mtcars_lm_ord \%>\%
   augment_ord() \%>\%
-  mutate_cols(center = attr(mtcars_centered, "scaled:center")[.name]) \%>\%
-  mutate_rows(influence = .wt.res^2) \%T>\% print() \%>\%
+  mutate_cols(center = attr(mtcars_centered, "scaled:center")[name]) \%>\%
+  mutate_rows(influence = wt.res^2) \%T>\% print() \%>\%
   ggbiplot(aes(x = wt, y = cyl, intercept = `(Intercept)`)) +
   #theme_biplot() +
   geom_origin(marker = "circle", radius = unit(0.02, "snpc")) +
   geom_rows_point(aes(color = influence)) +
   geom_cols_vector() +
-  geom_cols_isoline(aes(center = center), by = .5, label_dodge = -.15) +
+  geom_cols_isoline(aes(center = center), by = .5, hjust = -.1) +
   ggtitle(
     "Weight isolines with data colored by importance",
     "Regressing gas mileage onto weight and number of cylinders"
@@ -88,5 +100,14 @@ mtcars_lm_ord \%>\%
 \seealso{
 Other methods for idiosyncratic techniques: 
 \code{\link{methods-kmeans}}
+
+Other models from the \strong{stats} package: 
+\code{\link{methods-cancor}},
+\code{\link{methods-cmds}},
+\code{\link{methods-factanal}},
+\code{\link{methods-kmeans}},
+\code{\link{methods-prcomp}},
+\code{\link{methods-princomp}}
 }
 \concept{methods for idiosyncratic techniques}
+\concept{models from the \strong{stats} package}

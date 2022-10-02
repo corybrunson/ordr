@@ -18,6 +18,7 @@
 #'   possible to pass a formula to the `data` parameter, but it will act on the
 #'   fortified data _before_ it has been restricted to one matrix factor.
 #' @template param-stat
+#' @template return-layer
 #' @family biplot layers
 #' @example inst/examples/ex-stat-matrix-swiss.r
 

@@ -8,9 +8,9 @@
 \alias{recover_inertia.lra}
 \alias{recover_coord.lra}
 \alias{recover_conference.lra}
-\alias{augmentation_rows.lra}
-\alias{augmentation_cols.lra}
-\alias{augmentation_coord.lra}
+\alias{recover_aug_rows.lra}
+\alias{recover_aug_cols.lra}
+\alias{recover_aug_coord.lra}
 \title{Functionality for log-ratio analysis ('lra') objects}
 \usage{
 \method{as_tbl_ord}{lra}(x)
@@ -25,14 +25,24 @@
 
 \method{recover_conference}{lra}(x)
 
-\method{augmentation_rows}{lra}(x)
+\method{recover_aug_rows}{lra}(x)
 
-\method{augmentation_cols}{lra}(x)
+\method{recover_aug_cols}{lra}(x)
 
-\method{augmentation_coord}{lra}(x)
+\method{recover_aug_coord}{lra}(x)
 }
 \arguments{
 \item{x}{An ordination object.}
+}
+\value{
+The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia},
+\link[=supplementation]{supplementary elements}, and \link[=augmentation]{intrinsic metadata}; but they require methods for each model class to
+tell them what these components are.
+
+The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap. It
+then provides 'tbl_ord' methods with access to the recoverers and hence to
+the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
@@ -46,25 +56,45 @@ class(USArrests)
 head(USArrests)
 # get state abbreviation data
 state <- data.frame(
-  .name = state.name,
-  .abb = state.abb
+  name = state.name,
+  abb = state.abb
 )
+
 # compute (non-compositional, unweighted) log-ratio analysis
 USArrests \%>\%
   subset(select = -UrbanPop) \%>\%
   lra() \%>\%
   as_tbl_ord() \%>\%
   print() -> arrests_lra
+
 # augment log-ratio profiles with names and join state abbreviations
 arrests_lra \%>\%
   augment_ord() \%>\%
-  left_join_rows(state, by = ".name") \%>\%
+  left_join_rows(state, by = "name") \%>\%
   print() -> arrests_lra
+
 # recover state and arrest profiles
 head(get_rows(arrests_lra))
 get_cols(arrests_lra)
 # initially, inertia is conferred on neither factor
 get_conference(arrests_lra)
+
+# row-principal biplot
+arrests_lra \%>\%
+  confer_inertia("rows") \%>\%
+  ggbiplot(aes(color = .matrix), sec.axes = "cols", scale.factor = 1/20) +
+  scale_color_manual(values = c("tomato4", "turquoise4")) +
+  theme_bw() +
+  geom_rows_text(aes(label = abb), size = 3, alpha = .75) +
+  geom_cols_polygon(fill = NA, linetype = "dashed") +
+  geom_cols_text(aes(label = name, size = weight), fontface = "bold") +
+  scale_size_area(guide = "none") +
+  ggtitle(
+    "Non-compositional LRA of violent crime arrest rates",
+    "United States, 1973"
+  ) +
+  expand_limits(x = c(-.35)) +
+  guides(color = "none")
 }
 \seealso{
 Other methods for singular value decomposition-based techniques: 

@@ -299,8 +299,8 @@ geom_rows_axis(
   by = NULL,
   num = NULL,
   tick_length = 0.025,
-  text_dodge = 0.15,
-  label_dodge = 0.2,
+  text_dodge = 0.03,
+  label_dodge = 0.03,
   ...,
   parse = FALSE,
   check_overlap = FALSE,
@@ -320,8 +320,8 @@ geom_cols_axis(
   by = NULL,
   num = NULL,
   tick_length = 0.025,
-  text_dodge = 0.15,
-  label_dodge = 0.2,
+  text_dodge = 0.03,
+  label_dodge = 0.03,
   ...,
   parse = FALSE,
   check_overlap = FALSE,
@@ -382,7 +382,7 @@ geom_rows_isoline(
   isoline_text = TRUE,
   by = NULL,
   num = NULL,
-  label_dodge = 0.1,
+  label_dodge = 0.03,
   ...,
   parse = FALSE,
   check_overlap = FALSE,
@@ -399,7 +399,7 @@ geom_cols_isoline(
   isoline_text = TRUE,
   by = NULL,
   num = NULL,
-  label_dodge = 0.1,
+  label_dodge = 0.03,
   ...,
   parse = FALSE,
   check_overlap = FALSE,
@@ -589,6 +589,9 @@ or isoline, as a proportion of the minimum of the plot width and height.}
 
 \item{isoline_text}{Logical; whether to include text value marks along the
 isolines.}
+}
+\value{
+A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
 These geometric element layers (geoms) pair

@@ -32,6 +32,10 @@ un_tbl_ord(x)
 
 \item{...}{Additional elements of a custom tbl_ord.}
 }
+\value{
+A tbl_ord (\verb{as*()}, \verb{make*()}), an S3-class model object that can be
+wrapped as one (\verb{un*()}), or a logical value (\verb{is*()}, \verb{value*()}).
+}
 \description{
 These functions wrap ordination objects in the class \link{tbl_ord},
 create tbl_ords directly from matrices, and test for the class and basic
@@ -62,6 +66,7 @@ to restore an object that was originally passed to \code{as_tbl_ord}.
 # illustrative ordination: FA of Swiss social data
 swiss_fa <- factanal(swiss, factors = 3L, scores = "regression")
 print(swiss_fa)
+
 # add the 'tbl_ord' wrapper
 swiss_fa_ord <- as_tbl_ord(swiss_fa)
 # inspect wrapped model
@@ -70,6 +75,7 @@ print(swiss_fa_ord)
 valid_tbl_ord(swiss_fa_ord)
 # unwrap the model
 un_tbl_ord(swiss_fa_ord)
+
 # create a 'tbl_ord' directly from row and column factors
 # (missing inertia & other attributes)
 swiss_fa_ord2 <- make_tbl_ord(rows = swiss_fa$scores, cols = swiss_fa$loadings)

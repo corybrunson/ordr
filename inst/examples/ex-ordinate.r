@@ -1,15 +1,23 @@
-# PCA of iris data
-ordinate(iris, -Species, princomp, augment = c(Sepal.Width, Species))
-ordinate(iris, 1:4, ~ prcomp(., center = TRUE, scale. = TRUE))
 # LRA of arrest data
 ordinate(USArrests, cols = c(Murder, Rape, Assault), lra)
+
+# CMDS of inter-city distance data
+ordinate(UScitiesD, cmdscale_ord, k = 3L)
+
+# PCA of iris data
+ordinate(iris, princomp, cols = -Species, augment = c(Sepal.Width, Species))
+ordinate(iris, cols = 1:4, ~ prcomp(., center = TRUE, scale. = TRUE))
+
 # CA of hair & eye color data
 haireye <- as.data.frame(rowSums(HairEyeColor, dims = 2L))
-ordinate(haireye, cols = everything(), model = MASS::corresp)
+ordinate(haireye, MASS::corresp, cols = everything())
+
 # FA of Swiss social data
 ordinate(swiss, model = factanal, factors = 2L, scores = "Bartlett")
+
 # LDA of iris data
-ordinate(iris, model = ~ lda_ord(.[, 1:4], .[, 5], ret.x = TRUE))
+ordinate(iris, ~ lda_ord(.[, 1:4], .[, 5], ret.x = TRUE))
+
 # CCA of savings data
 ordinate(
   LifeCycleSavings[, c("pop15", "pop75")],

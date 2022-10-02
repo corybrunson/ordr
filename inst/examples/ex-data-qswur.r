@@ -7,6 +7,7 @@ qs_ranks <- subset(
 )
 # calculate Kendall correlation matrix
 qs_cor <- cor(qs_ranks, method = "kendall")
+
 # calculate eigendecomposition
 qs_eigen <- eigen_ord(qs_cor)
 # view correlations as cosines of biplot vectors

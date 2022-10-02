@@ -25,6 +25,7 @@
 #' @param main A main title for the plot, passed to other methods (included to
 #'   enable parsing of object name).
 #' @param ... Additional arguments passed to other methods.
+#' @return Nothing, but a plot is produced on the current graphics device.
 #' @example inst/examples/ex-plot.r
 
 #' @method plot tbl_ord

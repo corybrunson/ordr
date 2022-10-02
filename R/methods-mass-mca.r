@@ -15,7 +15,9 @@
 #' @name methods-mca
 #' @include ord-tbl.r
 #' @template param-methods
+#' @template return-methods
 #' @family methods for singular value decomposition-based techniques
+#' @family models from the **MASS** package
 #' @example inst/examples/ex-methods-mca-admissions.r
 NULL
 
@@ -52,26 +54,26 @@ recover_coord.mca <- function(x) paste0("Dim", seq_along(x$d))
 
 #' @rdname methods-mca
 #' @export
-supplementation_rows.mca <- function(x) {
+recover_supp_rows.mca <- function(x) {
   `colnames<-`(x$rs, recover_coord(x))
 }
 
 #' @rdname methods-mca
 #' @export
-augmentation_rows.mca <- function(x) {
-  .name <- rownames(x$fs)
-  res <- if (is.null(.name)) {
+recover_aug_rows.mca <- function(x) {
+  name <- rownames(x$fs)
+  res <- if (is.null(name)) {
     tibble_pole(nrow(x$fs))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   
   # row coordinates as supplementary points
-  .name <- rownames(x$rs)
-  res_sup <- if (is.null(.name)) {
+  name <- rownames(x$rs)
+  res_sup <- if (is.null(name)) {
     tibble_pole(nrow(x$rs))
   } else {
-    tibble(.name = .name)
+    tibble(name = name)
   }
   
   # supplement flag
@@ -82,33 +84,33 @@ augmentation_rows.mca <- function(x) {
 
 #' @rdname methods-mca
 #' @export
-augmentation_cols.mca <- function(x) {
-  .name <- rownames(x$cs)
+recover_aug_cols.mca <- function(x) {
+  name <- rownames(x$cs)
   # introduce `.factor` and `.level` according to `abbrev`
-  if (is.null(.name)) {
+  if (is.null(name)) {
     tibble_pole(nrow(x$cs))
   } else if (is.null(attr(rownames(x$cs), "names"))) {
     # only add `.factor` and `.level` if names are unambiguous
     level_ambig <- any(grepl("\\..*\\.", rownames(x$cs)))
     tibble(
-      .name = .name,
-      .factor = if (! level_ambig) gsub("\\..*$", "", .name),
-      .level = if (! level_ambig) gsub("^.*\\.", "", .name),
+      name = name,
+      factor = if (! level_ambig) gsub("\\..*$", "", name),
+      level = if (! level_ambig) gsub("^.*\\.", "", name),
       .element = "active"
     )
   } else {
     tibble(
-      .name = names(rownames(x$cs)),
-      .level = unname(rownames(x$cs))
+      name = names(rownames(x$cs)),
+      level = unname(rownames(x$cs))
     )
   }
 }
 
 #' @rdname methods-mca
 #' @export
-augmentation_coord.mca <- function(x) {
+recover_aug_coord.mca <- function(x) {
   tibble(
-    .name = factor_coord(recover_coord(x)),
-    .sv = x$d
+    name = factor_coord(recover_coord(x)),
+    sv = x$d
   )
 }

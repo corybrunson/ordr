@@ -9,6 +9,7 @@
 #'   treated as in [ggplot2::stat_summary()], with `fun.center`, `fun.min`, and
 #'   `fun.max` behaving as `fun.y`, `fun.ymin`, and `fun.ymax`.
 #' @template param-stat
+#' @template return-layer
 #' @family stat layers
 #' @example inst/examples/ex-stat-center-iris.r
 #' @export

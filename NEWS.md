@@ -1,14 +1,34 @@
-# next version
+# ordr 0.1.0
 
 In addition to minor changes, the following substantive changes are made from v0.0.2:
 
+## augmentation
+
+The column names of `augment_ord()` and `tidy()` outputs are no longer prefixed by periods.
+
+## list tidiers
+
+A new list tidier for `cancor()` output is introduced.
+
+## negation
+
+Tools to negate a subset of artificial dimensions, adapted from the sandboxed set of alignment tools, are provided.
+
+## convenience function
+
+The `ordinate()` function is now a generic with methods for four data classes.
+
 ## ggbiplot
 
-The logical `prediction` parameter is replaced with the character-valued `axis.type`, based on the `ax.type` parameter used in **UBbipl** (Gower, Lubbe, & le Roux, 2011).
+The logical `prediction` parameter is replaced with the character-valued `axis.type`, based on the `ax.type` parameter used in **UBbipl** (Gower, Gardner--Lubbe, & le Roux, 2011).
 
 ## tests
 
 Unit tests are overhauled to remove contexts, omit ad hoc tests, standardize method tests, and cover additional methods.
+
+## documentation
+
+The term 'accessor', used to refer to S3 class methods to recover standardized model components, has been changed to 'recoverer'.
 
 # ordr 0.0.2
 
