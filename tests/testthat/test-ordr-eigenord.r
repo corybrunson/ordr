@@ -16,6 +16,6 @@ test_that("'eigen_ord' augmentations are consistent with '.element' column", {
 })
 
 test_that("`as_tbl_ord()` coerces 'eigen_ord' objects", {
-  expect_equal(class(fit_eigen), "eigen_ord")
+  expect_true("eigen_ord" %in% class(fit_eigen))
   expect_true(valid_tbl_ord(as_tbl_ord(fit_eigen)))
 })

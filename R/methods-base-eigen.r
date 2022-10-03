@@ -5,6 +5,14 @@
 #'   `only.values` is set to `FALSE` or of class `"eigen_ord"` returned by
 #'   [eigen_ord()].
 #'
+#' @details
+#'
+#' [base::eigen()] usually returns an object of class `"eigen"`, which contains
+#' the numerical eigendecomposition without annotations such as row and column
+#' names. To facilitate downstream analysis, [eigen_ord()] returns a modified
+#' 'eigen' object with row names taken (if available) from the original data and
+#' column names indicating the integer index of each eigenvector.
+#'
 #' @name methods-eigen
 #' @include ord-tbl.r
 #' @template param-methods

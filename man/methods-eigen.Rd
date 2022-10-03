@@ -75,6 +75,13 @@ objects of class \code{"eigen"} returned by \code{\link[base:eigen]{base::eigen(
 \code{only.values} is set to \code{FALSE} or of class \code{"eigen_ord"} returned by
 \code{\link[=eigen_ord]{eigen_ord()}}.
 }
+\details{
+\code{\link[base:eigen]{base::eigen()}} usually returns an object of class \code{"eigen"}, which contains
+the numerical eigendecomposition without annotations such as row and column
+names. To facilitate downstream analysis, \code{\link[=eigen_ord]{eigen_ord()}} returns a modified
+'eigen' object with row names taken (if available) from the original data and
+column names indicating the integer index of each eigenvector.
+}
 \examples{
 # subset QS data to rank variables
 qs_ranks <- subset(
