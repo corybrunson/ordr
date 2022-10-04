@@ -40,11 +40,13 @@ mtcars %>%
   subset(select = c(cyl, disp, hp, drat, wt, vs, carb)) %>%
   scale() %>%
   cosine_dist() %>%
-  cmdscale(list. = TRUE) %>%
-  tidy() %>%
-  print() -> mtcars_specs_cmds
+  cmdscale() %>%
+  as.data.frame() ->
+  mtcars_specs_cmds
+# names must be consistent with `cmdscale_ord()` below
+names(mtcars_specs_cmds) <- c("PCo1", "PCo2")
 # regress performance measures on principal coordinates
-lm(mtcars_perf ~ as.matrix(mtcars_specs_cmds[, 2:3])) %>%
+lm(mtcars_perf ~ as.matrix(mtcars_specs_cmds)) %>%
   as_tbl_ord() %>%
   augment_ord() %>%
   print() -> mtcars_cmds_lm
