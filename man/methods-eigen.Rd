@@ -2,17 +2,42 @@
 % Please edit documentation in R/methods-base-eigen.r
 \name{methods-eigen}
 \alias{methods-eigen}
+\alias{as_tbl_ord.eigen}
+\alias{recover_rows.eigen}
+\alias{recover_cols.eigen}
+\alias{recover_inertia.eigen}
+\alias{recover_coord.eigen}
+\alias{recover_conference.eigen}
+\alias{recover_aug_rows.eigen_ord}
+\alias{recover_aug_cols.eigen_ord}
+\alias{recover_aug_coord.eigen}
 \alias{as_tbl_ord.eigen_ord}
 \alias{recover_rows.eigen_ord}
 \alias{recover_cols.eigen_ord}
 \alias{recover_inertia.eigen_ord}
 \alias{recover_coord.eigen_ord}
 \alias{recover_conference.eigen_ord}
-\alias{recover_aug_rows.eigen_ord}
-\alias{recover_aug_cols.eigen_ord}
 \alias{recover_aug_coord.eigen_ord}
 \title{Functionality for eigen-decompositions}
 \usage{
+\method{as_tbl_ord}{eigen}(x)
+
+\method{recover_rows}{eigen}(x)
+
+\method{recover_cols}{eigen}(x)
+
+\method{recover_inertia}{eigen}(x)
+
+\method{recover_coord}{eigen}(x)
+
+\method{recover_conference}{eigen}(x)
+
+\method{recover_aug_rows}{eigen_ord}(x)
+
+\method{recover_aug_cols}{eigen_ord}(x)
+
+\method{recover_aug_coord}{eigen}(x)
+
 \method{as_tbl_ord}{eigen_ord}(x)
 
 \method{recover_rows}{eigen_ord}(x)
@@ -46,7 +71,16 @@ the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
-objects of class \code{"eigen_ord"} returned by \code{\link[=eigen_ord]{eigen_ord()}}.
+objects of class \code{"eigen"} returned by \code{\link[base:eigen]{base::eigen()}} when the parameter
+\code{only.values} is set to \code{FALSE} or of class \code{"eigen_ord"} returned by
+\code{\link[=eigen_ord]{eigen_ord()}}.
+}
+\details{
+\code{\link[base:eigen]{base::eigen()}} usually returns an object of class \code{"eigen"}, which contains
+the numerical eigendecomposition without annotations such as row and column
+names. To facilitate downstream analysis, \code{\link[=eigen_ord]{eigen_ord()}} returns a modified
+'eigen' object with row names taken (if available) from the original data and
+column names indicating the integer index of each eigenvector.
 }
 \examples{
 # subset QS data to rank variables
@@ -56,18 +90,29 @@ qs_ranks <- subset(
   select = 8:13
 )
 head(qs_ranks)
+
 # eigendecomposition of Kendall correlation matrix
 qs_ranks \%>\%
   cor(method = "kendall") \%>\%
-  eigen_ord() \%>\%
+  eigen() \%>\%
   print() -> qs_eigen
 
 # recover eigenvectors
 get_rows(qs_eigen)
 identical(get_cols(qs_eigen), get_rows(qs_eigen))
 
+# wrap as a 'tbl_ord'
+as_tbl_ord(qs_eigen)
+
+# same eigendecomposition, preserving row names and adding column names
+qs_ranks \%>\%
+  cor(method = "kendall") \%>\%
+  eigen_ord() \%>\%
+  print() -> qs_eigen
+
 # wrap as a 'tbl_ord' and augment with dimension names
 augment_ord(as_tbl_ord(qs_eigen))
+
 # decomposition returns pure eigenvectors
 get_conference(qs_eigen)
 }
