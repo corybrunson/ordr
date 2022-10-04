@@ -10,9 +10,6 @@ reference:
     Introducing and adapting ordination techniques for the **ordr** workflow
   contents:
   - ends_with("-ord")
-  - '`cmdscale_tidiers`'
-  - '`cancor_tidiers`'
-  - '`list_tidiers`'
 - title: "Data sets"
   desc: >
     Additional data sets used to illustrate ordination techniques
