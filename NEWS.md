@@ -4,6 +4,11 @@
 
 Methods are added for the 'eigen' class returned by `eigen()`, and the internal `eigen_ord()` function and its methods are updated accordingly.
 
+## list tidiers
+
+The previous version extended the 'list' method for *broom*'s `tidy()` and `glance()` functions to recognize the output of `cmdscale()` and of `cancor()`.
+These have been spun off to a nascent helper package, *broom.list*, to reduce size and prevent attachment warnings.
+
 # ordr 0.1.0
 
 In addition to minor changes, the following substantive changes are made from v0.0.2:
