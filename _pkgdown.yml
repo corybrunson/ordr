@@ -40,11 +40,11 @@ reference:
   contents:
   - '`ggbiplot`'
   - 'stat_rows'
-  - starts_with("theme_")
   - has_concept("stat layers")
   - '`geom_origin`'
   - '`geom_unit_circle`'
   - has_concept("geom layers")
+  - starts_with("theme_")
   - '`draw-key`'
   - 'ordr-ggproto'
   - has_concept("biplot layers")
