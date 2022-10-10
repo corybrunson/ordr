@@ -57,7 +57,10 @@ GeomUnitCircle <- ggproto(
   "GeomUnitCircle", Geom,
   
   required_aes = c(),
-  default_aes = aes(colour = "black", size = 0.5, linetype = 1, alpha = NA),
+  default_aes = aes(
+    colour = "black", alpha = NA,
+    linewidth = 0.5, linetype = 1
+  ),
   
   setup_data = function(data, params) {
     # keep only columns that are constant throughout the data

@@ -11,7 +11,7 @@ glass_lra %>%
   theme_biplot() +
   scale_color_brewer(type = "qual", palette = 6) +
   geom_cols_text(stat = "chull", aes(label = name), color = "#444444") +
-  geom_rows_lineranges(fun.data = mean_sdl, size = .75) +
+  geom_rows_lineranges(fun.data = mean_sdl, linewidth = .75) +
   geom_rows_point(alpha = .5) +
   ggtitle(
     "Row-principal LRA biplot of Freestone glass measurements",
