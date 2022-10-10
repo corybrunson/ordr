@@ -36,7 +36,6 @@ Imports:
     generics,
     magrittr,
     tibble,
-    broom,
     tidyr,
     dplyr,
     purrr,
