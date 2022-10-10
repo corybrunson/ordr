@@ -1,5 +1,9 @@
 # next release
 
+## `linewidth` aesthetic
+
+An upcoming release of *ggplot2* controls stroke width using the new `linewidth` aesthetic rather than `size`. This *ordr* release adapts to this change internally for `GeomUnitCircle` and by updating row and column layers automatically adapted from *ggplot2*. (#50)
+
 ## class 'eigen'
 
 Methods are added for the 'eigen' class returned by `eigen()`, and the internal `eigen_ord()` function and its methods are updated accordingly.
