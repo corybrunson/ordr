@@ -93,22 +93,22 @@ GeomUnitCircle <- ggproto(
     # data <- coord$transform(data, panel_params)
     
     # return unit circle grob
-    GeomPath$draw_panel(
-      data = data, panel_params = panel_params, coord = coord,
-      na.rm = FALSE
-    )
-    # grob <- grid::polylineGrob(
-    #   data$x, data$y,# id = NULL,
-    #   default.units = "native",
-    #   gp = grid::gpar(
-    #     col = alpha(data$colour, data$alpha),
-    #     fill = alpha(data$colour, data$alpha),
-    #     lwd = data$size * .pt,
-    #     lty = data$linetype
-    #   )
+    # GeomPath$draw_panel(
+    #   data = data, panel_params = panel_params, coord = coord,
+    #   na.rm = FALSE
     # )
-    # grob$name <- grid::grobName(grob, "geom_unit_circle")
-    # grob
+    grob <- grid::polylineGrob(
+      data$x, data$y,# id = NULL,
+      default.units = "native",
+      gp = grid::gpar(
+        col = alpha(data$colour, data$alpha),
+        fill = alpha(data$colour, data$alpha),
+        lwd = data$linewidth * .pt,
+        lty = data$linetype
+      )
+    )
+    grob$name <- grid::grobName(grob, "geom_unit_circle")
+    grob
   },
   
   draw_key = draw_key_blank
