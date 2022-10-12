@@ -90,7 +90,7 @@ GeomUnitCircle <- ggproto(
     # data frame of segments with aesthetics
     data <- cbind(unit_circle, data, row.names = NULL)
     # transform the coordinates into the viewport (iff using `polylineGrob()`)
-    # data <- coord$transform(data, panel_params)
+    data <- coord$transform(data, panel_params)
     
     # return unit circle grob
     # GeomPath$draw_panel(
@@ -103,7 +103,7 @@ GeomUnitCircle <- ggproto(
       gp = grid::gpar(
         col = alpha(data$colour, data$alpha),
         fill = alpha(data$colour, data$alpha),
-        lwd = data$linewidth * .pt,
+        lwd = (data$linewidth %||% data$size) * .pt,
         lty = data$linetype
       )
     )
@@ -111,5 +111,8 @@ GeomUnitCircle <- ggproto(
     grob
   },
   
-  draw_key = draw_key_blank
+  draw_key = draw_key_blank,
+  
+  non_missing_aes = "size",
+  rename_size = TRUE
 )
