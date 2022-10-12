@@ -42,7 +42,7 @@
 stat_spantree <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
   engine = "vegan", method = "euclidean",
-  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE, check.param = TRUE,
+  show.legend = NA, inherit.aes = TRUE,
   ...
 ) {
   layer(
@@ -53,8 +53,7 @@ stat_spantree <- function(
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
-    check.aes = check.aes,
-    check.param = check.param,
+    check.aes = FALSE,
     params = list(
       engine = engine, method = method,
       na.rm = FALSE,
@@ -78,17 +77,17 @@ StatSpantree <- ggproto(
     
     # minimum spanning tree engine
     mst_engines <- c("vegan", "mlpack")
-    all_pkgs <- .packages(all.available = TRUE)
     engine <- match.arg(engine, mst_engines)
+    all_pkgs <- .packages(all.available = TRUE)
     if (! engine %in% all_pkgs) {
-      engine_alt <- mst_engines[which(mst_engines %in% all_pkgs)[[1L]]]
-      if (length(engine_alt) == 1L) {
-        warning("Package {", engine, "} not installed; ",
-                "using {", engine_alt, "} instead.")
-        engine <- engine_alt
-      } else {
+      engine_alt <- mst_engines[mst_engines %in% all_pkgs]
+      if (length(engine_alt) == 0L) {
         stop("No spantree engine installed; requires one of the following:\n",
              "{", paste(mst_engines, collapse = "}, {"), "}")
+      } else {
+        warning("Package {", engine, "} not installed; ",
+                "using {", engine_alt[[1L]], "} instead.")
+        engine <- engine_alt[[1L]]
       }
     }
     

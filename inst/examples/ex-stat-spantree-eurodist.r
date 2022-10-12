@@ -7,7 +7,7 @@ euro_mds %>%
   negate_ord("PCo2") %>%
   ggbiplot() +
   stat_cols_spantree(
-    ord_aes(euro_mds), check.aes = FALSE, engine = "mlpack",
+    ord_aes(euro_mds), engine = "mlpack",
     alpha = .5, linetype = "dotted"
   ) +
   geom_cols_text(aes(label = name), size = 3) +

@@ -175,8 +175,6 @@ stat_rows_spantree(
   method = "euclidean",
   show.legend = NA,
   inherit.aes = TRUE,
-  check.aes = TRUE,
-  check.param = TRUE,
   ...
 )
 
@@ -189,8 +187,6 @@ stat_cols_spantree(
   method = "euclidean",
   show.legend = NA,
   inherit.aes = TRUE,
-  check.aes = TRUE,
-  check.param = TRUE,
   ...
 )
 }
@@ -266,10 +262,6 @@ to use; either \code{"vegan"} or \code{"mlpack"}.}
 
 \item{method}{Passed to \code{\link[stats:dist]{stats::dist()}} if \code{engine} is \code{"vegan"}, ignored if
 \code{"mlpack"}.}
-
-\item{check.aes, check.param}{If \code{TRUE}, the default, will check that
-supplied parameters and aesthetics are understood by the \code{geom} or
-\code{stat}. Use \code{FALSE} to suppress the checks.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.

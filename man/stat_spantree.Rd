@@ -13,8 +13,6 @@ stat_spantree(
   method = "euclidean",
   show.legend = NA,
   inherit.aes = TRUE,
-  check.aes = TRUE,
-  check.param = TRUE,
   ...
 )
 }
@@ -64,10 +62,6 @@ display.}
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
-
-\item{check.aes, check.param}{If \code{TRUE}, the default, will check that
-supplied parameters and aesthetics are understood by the \code{geom} or
-\code{stat}. Use \code{FALSE} to suppress the checks.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 }
@@ -138,7 +132,7 @@ euro_mds \%>\%
   negate_ord("PCo2") \%>\%
   ggbiplot() +
   stat_cols_spantree(
-    ord_aes(euro_mds), check.aes = FALSE, engine = "mlpack",
+    ord_aes(euro_mds), engine = "mlpack",
     alpha = .5, linetype = "dotted"
   ) +
   geom_cols_text(aes(label = name), size = 3) +
