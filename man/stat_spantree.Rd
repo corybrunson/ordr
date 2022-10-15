@@ -9,7 +9,7 @@ stat_spantree(
   data = NULL,
   geom = "segment",
   position = "identity",
-  engine = "vegan",
+  engine = "mlpack",
   method = "euclidean",
   show.legend = NA,
   inherit.aes = TRUE,
@@ -43,10 +43,10 @@ from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 a call to a position adjustment function.}
 
 \item{engine}{A single character string specifying the package implementation
-to use; either \code{"vegan"} or \code{"mlpack"}.}
+to use; \code{"mlpack"}, \code{"vegan"}, or \code{"ade4"}.}
 
-\item{method}{Passed to \code{\link[stats:dist]{stats::dist()}} if \code{engine} is \code{"vegan"}, ignored if
-\code{"mlpack"}.}
+\item{method}{Passed to \code{\link[stats:dist]{stats::dist()}} if \code{engine} is \code{"vegan"} or \code{"ade4"},
+ignored if \code{"mlpack"}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -73,9 +73,9 @@ between these poirs in the two dimensions \code{x} and \code{y}.
 A minimum spanning tree (MST) on the point cloud \eqn{X} is a minimal
 connected graph on \eqn{X} with the smallest possible sum of distances (or
 dissimilarities) between linked points. These layers call \code{\link[stats:dist]{stats::dist()}} to
-calculate a distance/dissimilarity object and an engine from either \strong{vegan}
-or \emph{mlpack}* to calculate the MST. The result is formatted with position
-aesthetics readable by \code{\link[ggplot2:geom_segment]{ggplot2::geom_segment()}}.
+calculate a distance/dissimilarity object and an engine from \strong{mlpack},
+\strong{vegan}, or \strong{ade4} to calculate the MST. The result is formatted with
+position aesthetics readable by \code{\link[ggplot2:geom_segment]{ggplot2::geom_segment()}}.
 
 An MST calculated on \code{x} and \code{y} reflects the distances among the points in
 \eqn{X} in the reduced-dimension plane of the biplot. In contrast, one

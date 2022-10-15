@@ -171,7 +171,7 @@ stat_rows_spantree(
   data = NULL,
   geom = "segment",
   position = "identity",
-  engine = "vegan",
+  engine = "mlpack",
   method = "euclidean",
   show.legend = NA,
   inherit.aes = TRUE,
@@ -183,7 +183,7 @@ stat_cols_spantree(
   data = NULL,
   geom = "segment",
   position = "identity",
-  engine = "vegan",
+  engine = "mlpack",
   method = "euclidean",
   show.legend = NA,
   inherit.aes = TRUE,
@@ -254,10 +254,10 @@ data. Defaults to \code{FALSE}.}
 \item{mult}{Numeric value used to scale the coordinates.}
 
 \item{engine}{A single character string specifying the package implementation
-to use; either \code{"vegan"} or \code{"mlpack"}.}
+to use; \code{"mlpack"}, \code{"vegan"}, or \code{"ade4"}.}
 
-\item{method}{Passed to \code{\link[stats:dist]{stats::dist()}} if \code{engine} is \code{"vegan"}, ignored if
-\code{"mlpack"}.}
+\item{method}{Passed to \code{\link[stats:dist]{stats::dist()}} if \code{engine} is \code{"vegan"} or \code{"ade4"},
+ignored if \code{"mlpack"}.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.
