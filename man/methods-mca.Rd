@@ -102,9 +102,9 @@ Other methods for singular value decomposition-based techniques:
 \code{\link{methods-princomp}},
 \code{\link{methods-svd}}
 
-Other models from the \strong{MASS} package: 
+Other models from the MASS package: 
 \code{\link{methods-correspondence}},
 \code{\link{methods-lda}}
 }
 \concept{methods for singular value decomposition-based techniques}
-\concept{models from the \strong{MASS} package}
+\concept{models from the MASS package}

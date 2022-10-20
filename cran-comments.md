@@ -7,7 +7,7 @@ It also includes some substantive changes from the previous submission. The same
 ## Test environments
 
 * local OS X install, R 4.1.1, "Kick Things" (via `devtools::check()`)
-* local OS X install, R 4.1.3, "One Push-Up" (via `devtools::check()`)
+* local OS X install, R 4.2.1, "Funny-Looking Kid" (via `devtools::check()`)
 * R-hub (via `rhub::check_for_cran()`)
 * R-hub (via `rhub::check_for_cran(platforms = "macos-highsierra-release-cran")`)
 * Win-Builder (devel, current, and previous; via `devtools::check_win_*()`)
@@ -24,15 +24,15 @@ The warning read as follows:
 ```
 To my knowledge, this cannot be addressed by amending this package.
 
-### R CMD check results (R 4.1.3)
+### R CMD check results (R 4.2.1)
 
 There were no ERRORs or WARNINGs. There was one NOTE.
 
 The note read as follows:
 ```
-Package suggested but not available for checking: ‘mlpack’
+Packages suggested but not available for checking: 'mlpack', 'vegan'
 ```
-This was an intentional check on a machine without this package installed.
+This was an intentional check on a machine without these packages installed.
 
 ### Win-Builder
 

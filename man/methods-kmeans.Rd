@@ -94,7 +94,7 @@ iris_km_ord \%>\%
 Other methods for idiosyncratic techniques: 
 \code{\link{methods-lm}}
 
-Other models from the \strong{stats} package: 
+Other models from the stats package: 
 \code{\link{methods-cancor}},
 \code{\link{methods-cmds}},
 \code{\link{methods-factanal}},
@@ -103,4 +103,4 @@ Other models from the \strong{stats} package:
 \code{\link{methods-princomp}}
 }
 \concept{methods for idiosyncratic techniques}
-\concept{models from the \strong{stats} package}
+\concept{models from the stats package}

@@ -121,8 +121,8 @@ Other methods for eigen-decomposition-based techniques:
 \code{\link{methods-cmds}},
 \code{\link{methods-factanal}}
 
-Other models from the \strong{base} package: 
+Other models from the base package: 
 \code{\link{methods-svd}}
 }
 \concept{methods for eigen-decomposition-based techniques}
-\concept{models from the \strong{base} package}
+\concept{models from the base package}

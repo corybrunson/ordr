@@ -18,7 +18,7 @@
 #' @template param-methods
 #' @template return-methods
 #' @family methods for eigen-decomposition-based techniques
-#' @family models from the **base** package
+#' @family models from the base package
 #' @example inst/examples/ex-methods-eigen-qswur.r
 NULL
 

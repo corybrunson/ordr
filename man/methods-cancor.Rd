@@ -132,7 +132,7 @@ Other methods for singular value decomposition-based techniques:
 \code{\link{methods-princomp}},
 \code{\link{methods-svd}}
 
-Other models from the \strong{stats} package: 
+Other models from the stats package: 
 \code{\link{methods-cmds}},
 \code{\link{methods-factanal}},
 \code{\link{methods-kmeans}},
@@ -141,4 +141,4 @@ Other models from the \strong{stats} package:
 \code{\link{methods-princomp}}
 }
 \concept{methods for singular value decomposition-based techniques}
-\concept{models from the \strong{stats} package}
+\concept{models from the stats package}

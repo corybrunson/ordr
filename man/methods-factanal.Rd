@@ -92,7 +92,7 @@ Other methods for eigen-decomposition-based techniques:
 \code{\link{methods-cmds}},
 \code{\link{methods-eigen}}
 
-Other models from the \strong{stats} package: 
+Other models from the stats package: 
 \code{\link{methods-cancor}},
 \code{\link{methods-cmds}},
 \code{\link{methods-kmeans}},
@@ -101,4 +101,4 @@ Other models from the \strong{stats} package:
 \code{\link{methods-princomp}}
 }
 \concept{methods for eigen-decomposition-based techniques}
-\concept{models from the \strong{stats} package}
+\concept{models from the stats package}

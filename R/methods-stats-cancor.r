@@ -34,7 +34,7 @@
 #' @template param-methods
 #' @template return-methods
 #' @family methods for singular value decomposition-based techniques
-#' @family models from the **stats** package
+#' @family models from the stats package
 #' @example inst/examples/ex-methods-cancor-savings.r
 NULL
 

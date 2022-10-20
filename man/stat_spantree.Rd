@@ -119,6 +119,7 @@ In either case, the stat layer returns a data frame with position aesthetics
 }
 
 \examples{
+\dontrun{
 # classical multidimensional scaling of road distances between European cities
 euro_mds <- ordinate(eurodist, cmdscale_ord, k = 11)
 
@@ -136,6 +137,7 @@ euro_mds \%>\%
     "MDS biplot of road distances between European cities",
     "Dotted segments constitute the minimal spanning tree"
   )
+}
 }
 \references{
 Jolliffe IT (2002) \emph{Principal Component Analysis}, Second Edition.

@@ -1,3 +1,4 @@
+\dontrun{
 # classical multidimensional scaling of road distances between European cities
 euro_mds <- ordinate(eurodist, cmdscale_ord, k = 11)
 
@@ -15,3 +16,4 @@ euro_mds %>%
     "MDS biplot of road distances between European cities",
     "Dotted segments constitute the minimal spanning tree"
   )
+}
