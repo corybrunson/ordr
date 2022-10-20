@@ -19,6 +19,7 @@
 #' - **`ymax`**`
 #' - `alpha`
 #' - `colour`
+#' - `linewidth`
 #' - `linetype`
 #' - `size`
 #' - `group`

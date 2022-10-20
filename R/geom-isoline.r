@@ -12,7 +12,7 @@
 #' - **`y`**
 #' - `colour`
 #' - `alpha`
-#' - `size`
+#' - `linewidth`
 #' - `linetype`
 #' - `center`, `scale`
 #' - `angle`
@@ -84,7 +84,7 @@ GeomIsoline <- ggproto(
   default_aes = aes(
     # isoline
     colour = "black", alpha = .8,
-    size = .5, linetype = "dashed",
+    linewidth = .5, linetype = "dashed",
     # mark needs
     center = 0, scale = 1,
     # isoline mark text
@@ -130,6 +130,9 @@ GeomIsoline <- ggproto(
     parse = FALSE, check_overlap = FALSE,
     na.rm = TRUE
   ) {
+    
+    # copy `linewidth` to `size` for earlier **ggplot2** versions
+    data$size <- data$linewidth
     
     # prepare for marks
     ranges <- coord$range(panel_params)
