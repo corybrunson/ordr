@@ -37,9 +37,7 @@ shared coordinates are mapped to, and inertia is conferred entirely onto
 one matrix factor. \strong{NB:} This option is only implemented for linear
 techniques (ED, SVD, & PCA).}
 
-\item{xlim}{Limits for the x and y axes.}
-
-\item{ylim}{Limits for the x and y axes.}
+\item{xlim, ylim}{Limits for the x and y axes.}
 
 \item{expand}{If \code{TRUE}, the default, adds a small expansion factor to
 the limits to ensure that data and axes don't overlap. If \code{FALSE},

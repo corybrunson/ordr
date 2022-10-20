@@ -13,13 +13,13 @@
 #' - **`y`**
 #' - `colour`
 #' - `alpha`
-#' - `size`
+#' - `linewidth`
 #' - `linetype`
 #' - `label`
 #' - `center`, `scale`
 #' - `label_colour`, `label_alpha`, `label_size`, `label_angle`,
 #'   `label_hjust`, `label_vjust`, `label_family`, `label_fontface`
-#' - `tick_colour`, `tick_alpha`, `tick_size`, `tick_linetype`
+#' - `tick_colour`, `tick_alpha`, `tick_linewidth`, `tick_linetype`
 #' - `text_colour`, `text_alpha`, `text_size`, `text_angle`,
 #'   `text_hjust`, `text_vjust`, `text_family`, `text_fontface`
 #' - `group`
@@ -89,7 +89,7 @@ GeomAxis <- ggproto(
   default_aes = aes(
     # axis
     colour = "black", alpha = NA,
-    size = .25, linetype = "solid",
+    linewidth = .25, linetype = "solid",
     # axis label
     label = "",
     label_colour = "black", label_alpha = NA,
@@ -100,7 +100,7 @@ GeomAxis <- ggproto(
     center = 0, scale = 1,
     # tick marks
     tick_colour = "black", tick_alpha = NA,
-    tick_size = .25, tick_linetype = "solid",
+    tick_linewidth = .25, tick_linetype = "solid",
     # tick mark text
     text_colour = "black", text_alpha = NA,
     text_size = 2.6, text_angle = 0,
@@ -158,6 +158,9 @@ GeomAxis <- ggproto(
       warning("Axes are not yet tailored to non-linear coordinates.")
     }
     
+    # copy `linewidth` to `size` for earlier **ggplot2** versions
+    data$size <- data$linewidth
+    
     if (axis_ticks || axis_text) {
       # prepare for marks
       ranges <- coord$range(panel_params)
@@ -190,7 +193,8 @@ GeomAxis <- ggproto(
       # specify aesthetics
       tick_data$colour <- tick_data$tick_colour
       tick_data$alpha <- tick_data$tick_alpha
-      tick_data$size <- tick_data$tick_size
+      tick_data$size <- tick_data$tick_linewidth
+      tick_data$linewidth <- tick_data$tick_linewidth
       tick_data$linetype <- tick_data$tick_linetype
       
       # tick mark radius
