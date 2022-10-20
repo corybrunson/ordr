@@ -1,6 +1,6 @@
-# next release
+# ordr 0.1.1
 
-## `linewidth` aesthetic
+## `linewidth` aesthetic (breaking change)
 
 An upcoming release of *ggplot2* controls stroke width using the new `linewidth` aesthetic rather than `size`. This *ordr* release adapts to this change internally for `GeomUnitCircle` and by updating row and column layers automatically adapted from *ggplot2*. (#50)
 
