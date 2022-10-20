@@ -7,22 +7,14 @@ It also includes some substantive changes from the previous submission. The same
 ## Test environments
 
 * local OS X install, R 4.1.1, "Kick Things" (via `devtools::check()`)
-* local OS X install, R 4.2.1, "Funny-Looking Kid" (via `devtools::check()`)
+* local OS X install, R 4.2.1, "Funny-Looking Kid" (via `devtools::check()`) with **ggplot2** installed at commit a58b48c (v3.3.6.9000 following `linewidth` change)
 * R-hub (via `rhub::check_for_cran()`)
 * R-hub (via `rhub::check_for_cran(platforms = "macos-highsierra-release-cran")`)
 * Win-Builder (devel, current, and previous; via `devtools::check_win_*()`)
 
 ### R CMD check results (R 4.1.1)
 
-There were no ERRORs or NOTEs. There was one WARNING.
-
-The warning read as follows:
-```
-   Found the following significant warnings:
-     Warning: package ‘ggplot2’ was built under R version 4.1.2
-   See ‘/private/var/folders/4p/3cy0qmp15x9216qsqhh84kzm0000gn/T/RtmpcTiMNE/ordr.Rcheck/00install.out’ for details.
-```
-To my knowledge, this cannot be addressed by amending this package.
+There were no ERRORs, WARNINGs, or NOTEs.
 
 ### R CMD check results (R 4.2.1)
 
@@ -51,9 +43,7 @@ The note was consistent across all three checks, though the specific spellings a
 
 ### R-hub (default)
 
-Several checks had PREPERRORS, which i'm not qualified to account for.
-
-There were no ERRORs or WARNINGs. There were one or two NOTEs, depending on the check.
+There were no ERRORs or WARNINGs. There were two NOTEs.
 
 One note flagged the same new submission status, possible misspellings, and possibly invalid URLs as the Win-Builder checks.
 
@@ -66,18 +56,10 @@ Found the following files/directories:
 As documented, this note is probably due to a MiKTeX bug that can be ignored:
 <https://github.com/r-hub/rhub/issues/503>
 
-One note read as follows:
-```
-* checking HTML version of manual ... NOTE
-Skipping checking HTML validation: no command 'tidy' found
-```
-I'm not sure what to do about this note. I can successfully build the manual locally, and the function `tidy()`, imported from **generics**, is exported.
-
 ### R-hub (High Sierra)
 
-Some checks had no ERRORs, WARNINGs, or NOTEs.
-Some checks returned some of the same NOTEs as the Win-Builder checks.
+There were no ERRORs, WARNINGs, or NOTEs.
 
 ## Reverse dependencies
 
-This is a new submission with no reverse dependencies.
+There are no reverse dependencies.
