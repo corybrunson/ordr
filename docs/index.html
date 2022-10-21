@@ -50,7 +50,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
       </span>
     </div>
 
@@ -78,7 +78,14 @@
   <a href="news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/corybrunson/ordr/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -173,7 +180,6 @@
 <span><span class="co">#&gt; 4 -2.29  0.595 -0.0910     | 4 setosa </span></span>
 <span><span class="co">#&gt; 5 -2.38 -0.645 -0.0157     | 5 setosa </span></span>
 <span><span class="co">#&gt; # … with 145 more rows</span></span>
-<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span>
 <span><span class="co">#&gt; # </span></span>
 <span><span class="co">#&gt; # Columns (standard): [ 4 x 4 | 3 ]</span></span>
 <span><span class="co">#&gt;      PC1     PC2    PC3 ... |   name         center scale</span></span>
@@ -203,7 +209,6 @@
 <span><span class="co">#&gt; 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid       2</span></span>
 <span><span class="co">#&gt; 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid       2</span></span>
 <span><span class="co">#&gt; # … with 145 more rows</span></span>
-<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span>
 <span><span class="co">#&gt; # </span></span>
 <span><span class="co">#&gt; # Columns (standard): [ 4 x 4 | 3 ]</span></span>
 <span><span class="co">#&gt;      PC1     PC2    PC3 ... |   name         center scale</span></span>
@@ -276,7 +281,7 @@
 <div class="section level3">
 <h3 id="inspiration">inspiration<a class="anchor" aria-label="anchor" href="#inspiration"></a>
 </h3>
-<p>This package was originally inspired by the <strong>ggbiplot</strong> extension developed by <a href="https://github.com/vqv/ggbiplot" class="external-link">Vincent Q. Vu</a>, <a href="https://github.com/richardjtelford/ggbiplot" class="external-link">Richard J Telford</a>, and <a href="https://github.com/forked-packages/ggbiplot" class="external-link">Vilmantas Gegzna</a>, among others. So far as i know, it first brought biplots into the <strong>tidyverse</strong> framework. The motivation to unify a variety of ordination methods came from several books and articles by <a href="https://www.fbbva.es/microsite/multivariate-statistics/resources.html" class="external-link">Michael Greenacre</a>, in particular <a href="https://www.fbbva.es/microsite/multivariate-statistics/resources.html#biplots" class="external-link"><em>Biplots in Practice</em></a>. Thomas Lin Pedersen’s <a href="https://github.com/thomasp85/tidygraph" class="external-link"><strong>tidygraph</strong></a> prequel to <strong>ggraph</strong> finally induced the shift from the downstream generation of scatterplots to the upstream handling and manipulating of ordination models. Additional design elements and features have been informed by the monograph <a href="https://www.google.com/books/edition/Biplots/lTxiedIxRpgC" class="external-link"><em>Biplots</em></a> and the textbook <a href="https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550" class="external-link"><em>Understanding Biplots</em></a> by John C. Gower, David J. Hand, Sugnet Gardner Lubbe, and Niel J. Le Roux, and by the volume <a href="https://link.springer.com/book/10.1007/b98835" class="external-link"><em>Principal Components Analysis</em></a> by I. T. Jolliffe.</p>
+<p>This package was originally inspired by the <strong>ggbiplot</strong> extension developed by <a href="https://github.com/vqv/ggbiplot" class="external-link">Vincent Q. Vu</a>, <a href="https://github.com/richardjtelford/ggbiplot" class="external-link">Richard J Telford</a>, and <a href="https://github.com/forked-packages/ggbiplot" class="external-link">Vilmantas Gegzna</a>, among others. It probably first brought biplots into the <strong>tidyverse</strong> framework. The motivation to unify a variety of ordination methods came from several books and articles by <a href="https://www.fbbva.es/microsite/multivariate-statistics/resources.html" class="external-link">Michael Greenacre</a>, in particular <a href="https://www.fbbva.es/microsite/multivariate-statistics/resources.html#biplots" class="external-link"><em>Biplots in Practice</em></a>. Several answers at CrossValidated, in particular by <a href="https://stats.stackexchange.com/users/28666/amoeba" class="external-link">amoeba</a> and <a href="https://stats.stackexchange.com/users/3277/ttnphns" class="external-link">ttnphns</a>, provided theoretical insights and informed design choices. Thomas Lin Pedersen’s <a href="https://github.com/thomasp85/tidygraph" class="external-link"><strong>tidygraph</strong></a> prequel to <strong>ggraph</strong> finally induced the shift from the downstream generation of scatterplots to the upstream handling and manipulating of ordination models. Additional design elements and features have been informed by the monograph <a href="https://www.google.com/books/edition/Biplots/lTxiedIxRpgC" class="external-link"><em>Biplots</em></a> and the textbook <a href="https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550" class="external-link"><em>Understanding Biplots</em></a> by John C. Gower, David J. Hand, Sugnet Gardner–Lubbe, and Niel J. Le Roux, and by the volume <a href="https://link.springer.com/book/10.1007/b98835" class="external-link"><em>Principal Components Analysis</em></a> by I. T. Jolliffe.</p>
 </div>
 <div class="section level3">
 <h3 id="notes">notes<a class="anchor" aria-label="anchor" href="#notes"></a>
@@ -288,7 +293,7 @@
 <hr>
 <ol>
 <li id="fn1"><p>Greenacre MJ (2010) <em>Biplots in Practice</em>. Fundacion BBVA, ISBN: 978-84-923846. <a href="https://www.fbbva.es/microsite/multivariate-statistics/biplots.html" class="external-link uri">https://www.fbbva.es/microsite/multivariate-statistics/biplots.html</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>The term <em>ordination</em> is most prevalent among ecologists; to my knowledge, no catch-all term is in common use outside ecology.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>The term <em>ordination</em> is most prevalent among ecologists; no catch-all term seems to be in common use outside ecology.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p>This is not a hard rule: PCA is often used to compress data before clustering, and LDA uses dimension reduction to perform classification tasks.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 <li id="fn4"><p>Regression and clustering models, like classical <a href="https://www.fbbva.es/microsite/multivariate-statistics/" class="external-link">linear regression</a> and <a href="http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html" class="external-link"><em>k</em>-means</a>, can also be understood as matrix decomposition approximations and even visualized in biplots. Their shared coordinates, which are pre-defined rather than artificial, are the predictor coefficients and the cluster assignments, respectively. Methods for <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">stats::lm()</a></code> and <code><a href="https://rdrr.io/r/stats/kmeans.html" class="external-link">stats::kmeans()</a></code>, for example, are implemented for the sake of novelty and instruction, but are not widely used in practice.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 <li id="fn5"><p>Biplot elments must be chosen with care, and it is useful and appropriate that many model-specific biplot methods have limited flexibility. This package adopts the trade-off articulated in <a href="https://www.google.com/books/edition/_/iI1kcgAACAAJ" class="external-link">Wilkinson’s <em>The Grammar of Graphics</em></a> (p. 15): “This system is capable of producing some hideous graphics. There is nothing in its design to prevent its misuse. … This system cannot produce a meaningless graphic, however.”<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
@@ -302,7 +307,16 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="license">
+    <div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=ordr" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/corybrunson/ordr/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/corybrunson/ordr/issues" class="external-link">Report a bug</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></li>

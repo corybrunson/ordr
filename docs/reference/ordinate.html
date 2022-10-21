@@ -19,7 +19,7 @@ metadata from the model and possibly from the data."><!-- mathjax --><script src
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
       </span>
     </div>
 
@@ -43,7 +43,13 @@ metadata from the model and possibly from the data."><!-- mathjax --><script src
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
-      </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
+      </ul><ul class="nav navbar-nav navbar-right"><li>
+  <a href="https://github.com/corybrunson/ordr/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
@@ -53,7 +59,7 @@ metadata from the model and possibly from the data."><!-- mathjax --><script src
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Fit an ordination model to a data object</h1>
-    
+    <small class="dont-index">Source: <a href="https://github.com/corybrunson/ordr/blob/HEAD/R/ordinate.r" class="external-link"><code>R/ordinate.r</code></a></small>
     <div class="hidden name"><code>ordinate.Rd</code></div>
     </div>
 
@@ -144,7 +150,6 @@ include in the model and what columns with which to annotate the output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.351</span>  0.277 | <span style="color: #BCBCBC;">4</span> Arkansas   0.021<span style="text-decoration: underline;">9</span>       50</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  0.552 -<span style="color: #BB0000;">1.00</span>  | <span style="color: #BCBCBC;">5</span> California 0.032<span style="text-decoration: underline;">6</span>       91</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 45 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 3 x 2 | 2 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    LRSV1  LRSV2 |   name    weight</span>
@@ -200,7 +205,6 @@ include in the model and what columns with which to annotate the output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  -<span style="color: #BB0000;">2.75</span> -<span style="color: #BB0000;">0.318</span> -<span style="color: #BB0000;">0.031</span><span style="color: #BB0000; text-decoration: underline;">6</span>     | <span style="color: #BCBCBC;">4</span>         3.1 setosa </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  -<span style="color: #BB0000;">2.73</span>  0.327 -<span style="color: #BB0000;">0.090</span><span style="color: #BB0000; text-decoration: underline;">1</span>     | <span style="color: #BCBCBC;">5</span>         3.6 setosa </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 145 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 4 | 3 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1  Comp.2  Comp.3 ... |   name         center scale</span>
@@ -222,7 +226,6 @@ include in the model and what columns with which to annotate the output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">2.29</span>  0.595 -<span style="color: #BB0000;">0.091</span><span style="color: #BB0000; text-decoration: underline;">0</span>     | <span style="color: #BCBCBC;">4</span> setosa </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">2.38</span> -<span style="color: #BB0000;">0.645</span> -<span style="color: #BB0000;">0.015</span><span style="color: #BB0000; text-decoration: underline;">7</span>     | <span style="color: #BCBCBC;">5</span> setosa </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 145 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 4 | 3 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      PC1     PC2    PC3 ... |   name         center scale</span>
@@ -268,7 +271,6 @@ include in the model and what columns with which to annotate the output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>   0.997 -<span style="color: #BB0000;">0.031</span><span style="color: #BB0000; text-decoration: underline;">3</span> | <span style="color: #BCBCBC;">4</span> Education   active  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  -<span style="color: #BB0000;">0.124</span>  0.961  | <span style="color: #BCBCBC;">5</span> Catholic    active  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 48 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (symmetric): [ 6 x 2 | 3 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Factor1 Factor2 |   name             uniquen…¹ .elem…²</span>
@@ -296,7 +298,6 @@ include in the model and what columns with which to annotate the output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  8.06  0.300 | <span style="color: #BCBCBC;">4</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span> score   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  7.13 -<span style="color: #BB0000;">0.787</span> | <span style="color: #BCBCBC;">5</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span> score   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 148 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 2 | 2 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      LD1     LD2 |   name         .element</span>
@@ -325,7 +326,6 @@ include in the model and what columns with which to annotate the output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.210   -<span style="color: #BB0000;">0.125</span>  | <span style="color: #BCBCBC;">4</span> Austria    <span style="color: #BB0000;">NA</span>    score   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  0.207   -<span style="color: #BB0000;">0.147</span>  | <span style="color: #BCBCBC;">5</span> Belgium    <span style="color: #BB0000;">NA</span>    score   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 49 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 56 x 2 | 3 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    CanCor1    CanCor2 |   name       center .element</span>
@@ -336,7 +336,6 @@ include in the model and what columns with which to annotate the output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 0.171    -<span style="color: #BB0000;">0.023</span><span style="color: #BB0000; text-decoration: underline;">2</span>    | <span style="color: #BCBCBC;">4</span> Australia   <span style="color: #BB0000;">NA</span>    score   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 0.073<span style="text-decoration: underline;">5</span>    0.047<span style="text-decoration: underline;">5</span>    | <span style="color: #BCBCBC;">5</span> Austria     <span style="color: #BB0000;">NA</span>    score   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 51 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 </code></pre></div>
     </div>
   </div>

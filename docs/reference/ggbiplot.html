@@ -18,7 +18,7 @@ tbl_ord object."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
       </span>
     </div>
 
@@ -42,7 +42,13 @@ tbl_ord object."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
-      </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
+      </ul><ul class="nav navbar-nav navbar-right"><li>
+  <a href="https://github.com/corybrunson/ordr/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
@@ -52,7 +58,7 @@ tbl_ord object."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Biplots following the grammar of graphics</h1>
-    
+    <small class="dont-index">Source: <a href="https://github.com/corybrunson/ordr/blob/HEAD/R/biplot.r" class="external-link"><code>R/biplot.r</code></a></small>
     <div class="hidden name"><code>ggbiplot.Rd</code></div>
     </div>
 
@@ -102,11 +108,7 @@ one matrix factor. <strong>NB:</strong> This option is only implemented for line
 techniques (ED, SVD, &amp; PCA).</p></dd>
 
 
-<dt>xlim</dt>
-<dd><p>Limits for the x and y axes.</p></dd>
-
-
-<dt>ylim</dt>
+<dt>xlim, ylim</dt>
 <dd><p>Limits for the x and y axes.</p></dd>
 
 
@@ -186,9 +188,9 @@ coordinates of the ordination object, along with any additional aesthetics
 that are processed internally by <code><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">ggplot2::aes()</a></code>.</p>
 <p>The <code>axis.type</code> parameter controls whether the biplot is interpolative or
 predictive, though predictive biplots are still experimental and limited to
-linear methods like PCA. Gower &amp; Hand (1996) and Gower, Lubbe, &amp; le Roux
-(2011) thoroughly explain the construction and interpretation of predictive
-biplots.</p>
+linear methods like PCA. Gower &amp; Hand (1996) and Gower, Gardner--Lubbe, &amp; le
+Roux (2011) thoroughly explain the construction and interpretation of
+predictive biplots.</p>
     </div>
     <div id="biplot-layers">
     <h2>Biplot layers</h2>
@@ -206,8 +208,8 @@ points for rows and arrows for columns.</p>
     <div id="references">
     <h2>References</h2>
     <p>Gower JC &amp; Hand DJ (1996) <em>Biplots</em>. Chapman &amp; Hall, ISBN: 0-412-71630-5.</p>
-<p>Gower JC, Lubbe GS, &amp; le Roux NJ (2011) <em>Understanding Biplots</em>. Wiley, ISBN:
-978-0-470-01255-0. <a href="https://www.wiley.com/go/biplots" class="external-link">https://www.wiley.com/go/biplots</a></p>
+<p>Gower JC, Gardner--Lubbe S, &amp; le Roux NJ (2011) <em>Understanding Biplots</em>.
+Wiley, ISBN: 978-0-470-01255-0. <a href="https://www.wiley.com/go/biplots" class="external-link">https://www.wiley.com/go/biplots</a></p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -236,7 +238,6 @@ points for rows and arrows for columns.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  -<span style="color: #BB0000;">2.30</span> -<span style="color: #BB0000;">0.597</span> -<span style="color: #BB0000;">0.091</span><span style="color: #BB0000; text-decoration: underline;">3</span>     | <span style="color: #BCBCBC;">4</span> setosa </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  -<span style="color: #BB0000;">2.39</span>  0.647 -<span style="color: #BB0000;">0.015</span><span style="color: #BB0000; text-decoration: underline;">7</span>     | <span style="color: #BCBCBC;">5</span> setosa </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 145 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 4 | 1 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Comp.1 Comp.2 Comp.3 ... |   measure     </span>
@@ -326,7 +327,6 @@ points for rows and arrows for columns.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>             1 -<span style="color: #BB0000;">0.601</span>  1.75      | <span style="color: #BCBCBC;">4</span> Hornet 4 Drive   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>             1  1.61   0.837     | <span style="color: #BCBCBC;">5</span> Hornet Sportabout</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 27 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns: [ 2 x 8 | 1 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   `(Intercept)` Comp.1 Comp.2 ... |   name </span>
@@ -355,26 +355,13 @@ points for rows and arrows for columns.</p>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span>select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">cyl</span>, <span class="va">disp</span>, <span class="va">hp</span>, <span class="va">drat</span>, <span class="va">wt</span>, <span class="va">vs</span>, <span class="va">carb</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">cosine_dist</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/cmdscale.html" class="external-link">cmdscale</a></span><span class="op">(</span>list. <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">mtcars_specs_cmds</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 32 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    point               PCo1   PCo2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Mazda RX4         -<span style="color: #BB0000;">0.238</span> -<span style="color: #BB0000;">0.666</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Mazda RX4 Wag     -<span style="color: #BB0000;">0.190</span> -<span style="color: #BB0000;">0.685</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Datsun 710        -<span style="color: #BB0000;">0.934</span>  0.224</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Hornet 4 Drive    -<span style="color: #BB0000;">0.247</span>  0.984</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Hornet Sportabout  0.834  0.316</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Valiant           -<span style="color: #BB0000;">0.147</span>  0.963</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Duster 360         0.964 -<span style="color: #BB0000;">0.155</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Merc 240D         -<span style="color: #BB0000;">0.874</span>  0.295</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Merc 230          -<span style="color: #BB0000;">0.931</span>  0.113</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Merc 280          -<span style="color: #BB0000;">0.561</span> -<span style="color: #BB0000;">0.307</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 22 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/cmdscale.html" class="external-link">cmdscale</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span></span></span>
+<span class="r-in"><span>  <span class="va">mtcars_specs_cmds</span></span></span>
+<span class="r-in"><span><span class="co"># names must be consistent with `cmdscale_ord()` below</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mtcars_specs_cmds</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"PCo1"</span>, <span class="st">"PCo2"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># regress performance measures on principal coordinates</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mtcars_perf</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">mtcars_specs_cmds</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mtcars_perf</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">mtcars_specs_cmds</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">mtcars_cmds_lm</span></span></span>
@@ -390,7 +377,6 @@ points for rows and arrows for columns.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>             1 -<span style="color: #BB0000;">0.247</span>  0.984 | <span style="color: #BCBCBC;">4</span> Hornet 4 Drive   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>             1  0.834  0.316 | <span style="color: #BCBCBC;">5</span> Hornet Sportabout</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 27 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns: [ 2 x 3 | 1 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   `(Intercept)`  PCo1  PCo2 |   name </span>
@@ -418,7 +404,6 @@ points for rows and arrows for columns.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.247</span>  0.984 | <span style="color: #BCBCBC;">4</span> Hornet 4 Drive   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  0.834  0.316 | <span style="color: #BCBCBC;">5</span> Hornet Sportabout</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 27 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (symmetric): [ 32 x 2 | 1 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     PCo1   PCo2 |   name             </span>
@@ -429,7 +414,6 @@ points for rows and arrows for columns.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.247</span>  0.984 | <span style="color: #BCBCBC;">4</span> Hornet 4 Drive   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  0.834  0.316 | <span style="color: #BCBCBC;">5</span> Hornet Sportabout</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 27 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-in"><span><span class="co"># regression biplot</span></span></span>
 <span class="r-in"><span><span class="fu">ggbiplot</span><span class="op">(</span><span class="va">mtcars_specs_cmds_ord</span>, <span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">name</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>         sec.axes <span class="op">=</span> <span class="st">"rows"</span>, scale.factor <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span></span>
