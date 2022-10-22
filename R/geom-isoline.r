@@ -40,7 +40,7 @@
 #'   or isoline, as a proportion of the minimum of the plot width and height.
 #' @template return-layer
 #' @family geom layers
-#' @example inst/examples/ex-geom-isoline-diabetes.r
+#' @example inst/examples/ex-geom-isoline-glass.r
 #' @export
 geom_isoline <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

@@ -24,7 +24,7 @@
 #'   may be changed in a future version.)
 #' @template return-layer
 #' @family geom layers
-#' @example inst/examples/ex-geom-unit-circle.r
+#' @example inst/examples/ex-geom-unit-circle-glass.r
 #' @export
 geom_unit_circle <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

@@ -47,8 +47,6 @@ Suggests:
     gridExtra,
     MASS,
     mlpack,
-    vegan,
-    heplots,
     knitr,
     rmarkdown
 License: GPL-3
