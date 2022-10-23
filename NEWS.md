@@ -2,7 +2,7 @@
 
 ## `linewidth` aesthetic (breaking change)
 
-An upcoming release of *ggplot2* controls stroke width using the new `linewidth` aesthetic rather than `size`. This *ordr* release adapts to this change internally for `GeomUnitCircle` and by updating row and column layers automatically adapted from *ggplot2*. (#50)
+An upcoming release of **ggplot2** controls stroke width using the new `linewidth` aesthetic rather than `size`. This **ordr** release adapts to this change internally for `GeomUnitCircle` and by updating row and column layers automatically adapted from **ggplot2**. (#50)
 
 ## class 'eigen'
 
@@ -10,8 +10,8 @@ Methods are added for the 'eigen' class returned by `eigen()`, and the internal 
 
 ## list tidiers (breaking change)
 
-The previous version extended the 'list' method for *broom*'s `tidy()` and `glance()` functions to recognize the output of `cmdscale()` and of `cancor()`.
-These have been spun off to a nascent helper package, *broom.list*, to reduce size and prevent attachment warnings.
+The previous version extended the 'list' method for **broom**'s `tidy()` and `glance()` functions to recognize the output of `cmdscale()` and of `cancor()`.
+These have been spun off to a nascent helper package, **broom.list**, to reduce size and prevent attachment warnings.
 
 # ordr 0.1.0
 
