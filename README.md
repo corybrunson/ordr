@@ -7,6 +7,7 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN](http://www.r-pkg.org/badges/version/ordr)](https://cran.r-project.org/package=ordr)
 <!-- badges: end -->
 
 **ordr** integrates ordination analysis and biplot visualization into
