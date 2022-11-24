@@ -59,7 +59,13 @@ Instead, **ordr** provides a streamlined process by which the models output by t
 
 ### installation
 
-**ordr** remains under development but is approaching a CRAN release. For now, it can be installed from the (default) `main` branch using [**remotes**](https://github.com/r-lib/remotes):
+**ordr** is now on CRAN and can be installed using base R:
+
+```{r install release, eval=FALSE}
+install.packages("ordr")
+```
+
+The development version can be installed from the (default) `main` branch using [**remotes**](https://github.com/r-lib/remotes):
 
 ```{r install, eval=FALSE}
 remotes::install_github("corybrunson/ordr")

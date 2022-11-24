@@ -84,9 +84,14 @@ integrate ordination models into practice.
 
 ### installation
 
-**ordr** remains under development but is approaching a CRAN release.
-For now, it can be installed from the (default) `main` branch using
-[**remotes**](https://github.com/r-lib/remotes):
+**ordr** is now on CRAN and can be installed using base R:
+
+``` r
+install.packages("ordr")
+```
+
+The development version can be installed from the (default) `main`
+branch using [**remotes**](https://github.com/r-lib/remotes):
 
 ``` r
 remotes::install_github("corybrunson/ordr")
