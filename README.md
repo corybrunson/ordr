@@ -172,21 +172,20 @@ column-specific **dplyr**-style verbs:
 iris_meta <- data.frame(
   Species = c("setosa", "versicolor", "virginica"),
   Colony = c(1L, 1L, 2L),
-  Cytotype = c("diploid", "hexaploid", "tetraploid"),
-  Ploidy = c(2L, 6L, 4L)
+  Cytotype = c("diploid", "hexaploid", "tetraploid")
 )
 (iris_pca <- left_join_rows(iris_pca, iris_meta, by = "Species"))
 #> # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
 #> # 4 coordinates: PC1, PC2, ..., PC4
 #> # 
-#> # Rows (principal): [ 150 x 4 | 4 ]
-#>     PC1    PC2     PC3 ... |   Species Colony Cytotype Ploidy
-#>                            |   <chr>    <int> <chr>     <int>
-#> 1 -2.26 -0.478  0.127      | 1 setosa       1 diploid       2
-#> 2 -2.07  0.672  0.234  ... | 2 setosa       1 diploid       2
-#> 3 -2.36  0.341 -0.0441     | 3 setosa       1 diploid       2
-#> 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid       2
-#> 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid       2
+#> # Rows (principal): [ 150 x 4 | 3 ]
+#>     PC1    PC2     PC3 ... |   Species Colony Cytotype
+#>                            |   <chr>    <int> <chr>   
+#> 1 -2.26 -0.478  0.127      | 1 setosa       1 diploid 
+#> 2 -2.07  0.672  0.234  ... | 2 setosa       1 diploid 
+#> 3 -2.36  0.341 -0.0441     | 3 setosa       1 diploid 
+#> 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid 
+#> 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid 
 #> # … with 145 more rows
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
@@ -288,7 +287,7 @@ guidelines](https://github.com/corybrunson/ordr/blob/main/CONTRIBUTING.md)
 and respect the [Code of
 Conduct](https://github.com/corybrunson/ordr/blob/main/CODE_OF_CONDUCT.md).
 
-### inspiration
+### inspirations
 
 This package was originally inspired by the **ggbiplot** extension
 developed by [Vincent Q. Vu](https://github.com/vqv/ggbiplot), [Richard
@@ -306,9 +305,9 @@ Several answers at CrossValidated, in particular by
 theoretical insights and informed design choices. Thomas Lin Pedersen’s
 [**tidygraph**](https://github.com/thomasp85/tidygraph) prequel to
 **ggraph** finally induced the shift from the downstream generation of
-scatterplots to the upstream handling and manipulating of ordination
-models. Additional design elements and features have been informed by
-the monograph
+scatterplots to the upstream handling and manipulating of models.
+Additional design elements and features have been informed by the
+monograph
 [*Biplots*](https://www.google.com/books/edition/Biplots/lTxiedIxRpgC)
 and the textbook [*Understanding
 Biplots*](https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550)
@@ -317,7 +316,17 @@ Roux, and by the volume [*Principal Components
 Analysis*](https://link.springer.com/book/10.1007/b98835) by I. T.
 Jolliffe.
 
-### notes
+### exposition
+
+This work was presented at an invited panel on [New Developments in
+Graphing Multivariate
+Data](https://ww2.amstat.org/meetings/jsm/2022/onlineprogram/ActivityDetails.cfm?SessionID=222053)
+at the [Joint Statistical
+Meetings](https://ww2.amstat.org/meetings/jsm/2022/), on 2022 August 8
+in Washington DC. I’m grateful to Joyce Robbins for the invitation and
+for organizing such a fun first experience, to Naomi Robbins for
+chairing the event, and to my co-panelists Ursula Laa and Hengrui Luo
+for sharing and sparking such exciting ideas and conversations.
 
 [^1]: Greenacre MJ (2010) *Biplots in Practice*. Fundacion BBVA, ISBN:
     978-84-923846.
