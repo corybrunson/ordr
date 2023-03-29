@@ -318,8 +318,9 @@ Jolliffe.
 
 ### exposition
 
-This work was presented at an invited panel on [New Developments in
-Graphing Multivariate
+This work was presented ([slideshow
+PDF](https://raw.githubusercontent.com/corybrunson/tidy-factor/main/tidy-factor-x/tidy-factor-x.pdf))
+at an invited panel on [New Developments in Graphing Multivariate
 Data](https://ww2.amstat.org/meetings/jsm/2022/onlineprogram/ActivityDetails.cfm?SessionID=222053)
 at the [Joint Statistical
 Meetings](https://ww2.amstat.org/meetings/jsm/2022/), on 2022 August 8
