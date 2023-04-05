@@ -154,7 +154,7 @@ as annotations to the appropriate matrix factors:[^7]
 #> 3 -2.36  0.341 -0.0441     | 3 setosa 
 #> 4 -2.29  0.595 -0.0910     | 4 setosa 
 #> 5 -2.38 -0.645 -0.0157     | 5 setosa 
-#> # … with 145 more rows
+#> # ℹ 145 more rows
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
 #>      PC1     PC2    PC3 ... |   name         center scale
@@ -186,7 +186,7 @@ iris_meta <- data.frame(
 #> 3 -2.36  0.341 -0.0441     | 3 setosa       1 diploid 
 #> 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid 
 #> 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid 
-#> # … with 145 more rows
+#> # ℹ 145 more rows
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
 #>      PC1     PC2    PC3 ... |   name         center scale
@@ -328,6 +328,12 @@ in Washington DC. I’m grateful to Joyce Robbins for the invitation and
 for organizing such a fun first experience, to Naomi Robbins for
 chairing the event, and to my co-panelists Ursula Laa and Hengrui Luo
 for sharing and sparking such exciting ideas and conversations.
+
+### resources
+
+Development of this package benefitted from the use of equipment and the
+support of colleagues at [UConn Health](https://health.uconn.edu/) and
+at [UF Health](https://ufhealth.org/).
 
 [^1]: Greenacre MJ (2010) *Biplots in Practice*. Fundacion BBVA, ISBN:
     978-84-923846.
