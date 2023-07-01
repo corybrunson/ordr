@@ -124,7 +124,7 @@ glass \%>\%
 
 # row-principal biplot with ordinate-wise standard deviations
 glass_lra \%>\%
-  ggbiplot(aes(color = Site), sec.axes = "cols", scale.factor = .05) +
+  ggbiplot(aes(color = Site), sec.axes = "cols") +
   theme_biplot() +
   scale_color_brewer(type = "qual", palette = 6) +
   geom_cols_text(stat = "chull", aes(label = name), color = "#444444") +

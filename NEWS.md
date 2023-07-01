@@ -1,3 +1,9 @@
+# next version
+
+## axis harmonizers
+
+Multiple harmonizers are now available for scaling secondary axes. That recommended by Gower, Gardner--Lubbe, and Le Roux (2011) is the default, but the user can still specify a numeric scale instead.
+
 # ordr 0.1.1
 
 ## `linewidth` aesthetic (breaking change)
