@@ -52,7 +52,7 @@ Suggests:
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-URL: https://github.com/corybrunson/ordr
+URL: https://github.com/corybrunson/ordr, https://corybrunson.github.io/ordr/
 BugReports: https://github.com/corybrunson/ordr/issues
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
