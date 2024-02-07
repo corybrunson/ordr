@@ -1,5 +1,5 @@
 Package: ordr
-Title: A 'tidyverse' Extension for Ordinations and Biplots
+Title: A Tidyverse Extension for Ordinations and Biplots
 Version: 0.1.1.0001
 Authors@R: c(
   person("Jason Cory", "Brunson", email = "cornelioid@gmail.com",
