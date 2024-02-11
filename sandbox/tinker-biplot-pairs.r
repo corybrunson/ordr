@@ -226,6 +226,27 @@ iris_matrix <- GGally::ggmatrix(
 )
 iris_matrix
 
+# from {gtable}
+
+library(grid)
+a <- rectGrob(gp = gpar(fill = "red"))
+b <- circleGrob()
+c <- linesGrob()
+
+row <- matrix(list(a, b, c), nrow = 1)
+col <- matrix(list(a, b, c), ncol = 1)
+mat <- matrix(list(a, b, c, nullGrob()), nrow = 2)
+
+gt <- 
+  gtable::gtable_matrix("demo", row, unit(c(1, 1, 1), "null"), unit(1, "null"))
+class(gt)
+
+# Can specify z ordering
+z <- matrix(c(3, 1, 2, 4), nrow = 2)
+gt2 <- 
+  gtable::gtable_matrix("demo", mat,
+                        unit(c(1, 1), "null"), unit(c(1, 1), "null"), z = z)
+
 #' 1. `ggmatrix()` makes sense as a workhorse for `ggbipairs()`.
 #' 2. Plot layers need to be revised to work under `CoordCartesian`.
 #' 3. It would be ideal if this could be done using `FacetGrid`.

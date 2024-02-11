@@ -1,10 +1,10 @@
 
 ggbipairs <- function(
-    ordination, coords = NULL,
+    ordination, coords = NULL
 ) {
   
   # all ordination dimensions
-  dims <- recover_coord(data)
+  dims <- recover_coord(ordination)
   # restrict to explicitly specified dimensions, if any
   if (! is.null(coords)) {
     if (is.numeric(coords)) {
@@ -22,7 +22,7 @@ ggbipairs <- function(
     # NOTE: Ensure that '.id' is not already a column name.
     dplyr::mutate(.id = dplyr::row_number()) |> 
     tidyr::pivot_longer(
-      cols = dims,
+      cols = tidyselect::all_of(dims),
       # NOTE: Ensure that '.axis' and '.value' are not already column names.
       names_to = ".axis", values_to = ".value"
     ) |>
@@ -42,5 +42,14 @@ ggbipairs <- function(
   
   # return faceted plot that admits additional layers
   # FIXME: Need to prevent addition of another facet layer.
-  ord_pairs
+  ord_pairs + labs(x = NULL, y = NULL)
 }
+
+ggbipairs(iris_pca, coords = seq(3)) +
+  geom_rows_point(aes(color = Species, shape = Species)) +
+  stat_rows_ellipse(aes(color = Species), alpha = .5, level = .99) +
+  geom_cols_vector() +
+  geom_cols_text_radiate(aes(label = name)) +
+  expand_limits(y = c(-3.5, NA)) +
+  ggtitle("PCA of Anderson's iris measurements",
+          "99% confidence ellipses; variables use top & right axes")
