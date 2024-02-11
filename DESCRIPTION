@@ -73,7 +73,7 @@ Collate:
     'geom-axis.r'
     'geom-intervals.r'
     'geom-isoline.r'
-    'geom-reference.r'
+    'geom-origin.r'
     'geom-text-radiate.r'
     'geom-utils.r'
     'geom-vector.r'
