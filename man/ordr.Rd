@@ -3,7 +3,6 @@
 \docType{package}
 \name{ordr}
 \alias{ordr}
-\alias{_PACKAGE}
 \alias{ordr-package}
 \title{\strong{ordr} package}
 \description{
@@ -117,6 +116,7 @@ to Biplot". CrossValidated, accessed 2019-07-12.
 Useful links:
 \itemize{
   \item \url{https://github.com/corybrunson/ordr}
+  \item \url{https://corybrunson.github.io/ordr/}
   \item Report bugs at \url{https://github.com/corybrunson/ordr/issues}
 }
 

@@ -560,7 +560,9 @@ Defaults to 0.5.}
 \item{max.iter}{Maximum number of iterations to try to resolve overlaps.
 Defaults to 10000.}
 
-\item{max.overlaps}{Exclude text labels that overlap too many things.
+\item{max.overlaps}{Exclude text labels when they overlap too many other
+things. For each text label, we count how many other text labels or other
+data points it overlaps, and exclude the text label if it has too many overlaps.
 Defaults to 10.}
 
 \item{xlim, ylim}{Limits for the x and y axes. Text labels will be constrained
