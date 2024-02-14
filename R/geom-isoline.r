@@ -119,6 +119,9 @@ GeomIsoline <- ggproto(
     data$x <- NULL
     data$y <- NULL
     
+    # remove lengthless vectors
+    data <- subset(data, axis_x ^ 2 + axis_y ^ 2 > 0)
+    
     data
   },
   

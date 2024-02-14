@@ -197,7 +197,6 @@ Other geom layers:
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},
 \code{\link{geom_text_radiate}()},
-\code{\link{geom_unit_circle}()},
 \code{\link{geom_vector}()}
 }
 \concept{geom layers}

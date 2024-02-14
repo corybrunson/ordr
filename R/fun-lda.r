@@ -386,6 +386,7 @@ predict.lda_ord <- function(object, newdata, prior = object$prior, dimen,
   list(class = cl, posterior = posterior, x = x[, 1L:dimen, drop = FALSE])
 }
 
+#' @exportS3Method stats::model.frame
 model.frame.lda_ord <- function(formula, ...)
 {
   oc <- formula$call

@@ -1,3 +1,13 @@
+# next version
+
+## debugged axis geom
+
+The 'axis' and 'isoline' geoms hit trouble when one or more points lay at the origin (`x^2 + y^2 == 0`). These cases have now been removed in `setup_data()`.
+
+## axis harmonizers
+
+Multiple harmonizers are now available for scaling secondary axes. That recommended by Gower, Gardner--Lubbe, and Le Roux (2011) is the default, but the user can still specify a numeric scale instead.
+
 # ordr 0.1.1
 
 ## `linewidth` aesthetic (breaking change)

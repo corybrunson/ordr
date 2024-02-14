@@ -1,6 +1,6 @@
 Package: ordr
-Title: A 'tidyverse' Extension for Ordinations and Biplots
-Version: 0.1.1
+Title: A Tidyverse Extension for Ordinations and Biplots
+Version: 0.1.1.0001
 Authors@R: c(
   person("Jason Cory", "Brunson", email = "cornelioid@gmail.com",
     role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3126-9494")),
@@ -52,9 +52,9 @@ Suggests:
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-URL: https://github.com/corybrunson/ordr
+URL: https://github.com/corybrunson/ordr, https://corybrunson.github.io/ordr/
 BugReports: https://github.com/corybrunson/ordr/issues
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Roxygen: list(markdown = TRUE)
 Collate:
     'aaa-.r'
@@ -75,7 +75,6 @@ Collate:
     'geom-isoline.r'
     'geom-origin.r'
     'geom-text-radiate.r'
-    'geom-unit-circle.r'
     'geom-utils.r'
     'geom-vector.r'
     'methods-base-eigen.r'

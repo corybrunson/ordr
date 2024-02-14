@@ -124,7 +124,7 @@ glass \%>\%
 
 # row-principal biplot with ordinate-wise standard deviations
 glass_lra \%>\%
-  ggbiplot(aes(color = Site), sec.axes = "cols", scale.factor = .05) +
+  ggbiplot(aes(color = Site), sec.axes = "cols") +
   theme_biplot() +
   scale_color_brewer(type = "qual", palette = 6) +
   geom_cols_text(stat = "chull", aes(label = name), color = "#444444") +
@@ -141,7 +141,6 @@ Other geom layers:
 \code{\link{geom_isoline}()},
 \code{\link{geom_origin}()},
 \code{\link{geom_text_radiate}()},
-\code{\link{geom_unit_circle}()},
 \code{\link{geom_vector}()}
 }
 \concept{geom layers}

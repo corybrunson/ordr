@@ -138,6 +138,9 @@ GeomAxis <- ggproto(
     # vector lengths
     data$axis_ss <- data$axis_x ^ 2 + data$axis_y ^ 2
     
+    # remove lengthless vectors
+    data <- subset(data, axis_ss > 0)
+    
     # remove position columns
     # (prevent coordinates from affecting position limits)
     data$x <- NULL
