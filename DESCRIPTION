@@ -62,6 +62,7 @@ Collate:
     'biplot.r'
     'data.r'
     'dplyr-verbs.r'
+    'facet-pairs.r'
     'utils.r'
     'ord-recoverers.r'
     'ord-augmentation.r'

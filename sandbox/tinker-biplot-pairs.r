@@ -473,3 +473,23 @@ iris_pca |>
   )
 
 # could be a template on which to build `FacetPairs`, or maybe `FacetOrd`
+
+# experimental `FacetPairs` adapted from `FacetMatrix`
+iris_pca |> 
+  ggbiplot(sec.axes = "cols", scale.factor = 2,
+           aes(x = .panel_x, y = .panel_y,
+               color = Species, fill = Species, linetype = name)) +
+  # FIXME: legend is screwed up
+  geom_rows_point() +
+  geom_cols_vector() +
+  # preserves scales based on 2 variables at a time
+  ggforce::geom_autodensity() +
+  # geom_density2d() +
+  facet_pairs(
+    dims = vars(tidyselect::starts_with("PC")),
+    # FIXME: `scales = "fixed"` fails to fix scales across rows and columns
+    scales = "fixed", space = "fixed",
+    # must remember order of layers
+    layer.lower = c(1, 2), layer.diag = 3, layer.upper = 1,
+    grid.y.diag = FALSE
+  )
