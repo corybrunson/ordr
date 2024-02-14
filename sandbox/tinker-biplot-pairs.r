@@ -44,8 +44,7 @@ iris_pca |>
   GGally::ggpairs(
     columns = c("PC1", "PC2", "PC3", "PC4"),
     aes(color = Species, shape = Species)
-  ) +
-  theme_biplot()
+  )
 
 # https://ggobi.github.io/ggally/articles/ggpairs.html
 # https://github.com/ggobi/ggally/blob/master/R/ggpairs.R
@@ -270,13 +269,13 @@ iris_pca_long |>
   dplyr::full_join(
     iris_pca_long, by = setdiff(names(iris_pca_long), c(".axis", ".value")),
     relationship = "many-to-many", suffix = c("_x", "_y")
-  ) |> 
+  ) ->
+  iris_pca_pairs
+iris_pca_pairs |> 
   ggbiplot(aes(x = .value_x, y = .value_y)) +
   # NOTE: `coord_fixed()` doesn't support free scales.
   facet_grid(rows = vars(.axis_y), cols = vars(.axis_x)) +
-  theme() ->
-  iris_pca_pairs
-iris_pca_pairs +
+  theme() +
   geom_abline(slope = 1) +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_center(
@@ -284,7 +283,6 @@ iris_pca_pairs +
     size = 5, alpha = .5, fun.data = mean_se
   ) +
   geom_cols_axis(aes(label = name, center = center, scale = scale)) +
-  # ERROR: `layout$panel_params[[data$PANEL[1]]]`
   geom_origin() +
   geom_unit_circle() +
   # theme_biplot() +
@@ -447,3 +445,31 @@ facet_pairs <- function(dims = NULL,
 ggplot(mtcars[seq(6), ], aes(x = mpg, y = hp)) +
   facet_pairs(cols = vars(cyl)) +
   geom_point()
+
+# using {ggforce}
+
+# major problem: cannot adjust `scales` and `space` as in `facet_grid()`;
+# `scales` would allow forcing aspect ratio = 1 while `space` would allow
+# shrinking of windows for later dimensions
+iris_pca |> 
+  ggbiplot(sec.axes = "cols", scale.factor = 2,
+           aes(x = .panel_x, y = .panel_y,
+               color = Species, fill = Species, linetype = name)) +
+  # legend is screwed up
+  geom_rows_point() +
+  geom_cols_vector() +
+  # cannot handle `coord_equal()`
+  coord_cartesian() +
+  # preserves scales based on 2 variables at a time
+  ggforce::geom_autodensity() +
+  # geom_density2d() +
+  ggforce::facet_matrix(
+    vars(tidyselect::starts_with("PC")),
+    # `shrink` doesn't seem to matter
+    shrink = FALSE,
+    # must remember order of layers
+    layer.lower = c(1, 2), layer.diag = 3, layer.upper = 1,
+    grid.y.diag = FALSE
+  )
+
+# could be a template on which to build `FacetPairs`, or maybe `FacetOrd`

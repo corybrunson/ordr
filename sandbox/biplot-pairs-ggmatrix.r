@@ -29,17 +29,19 @@ ggbipairs <- function(
   }
   n_dims <- length(dims)
   
+  # fortified data frames
+  dims_df <- fortify(ordination, .matrix = "both")
+  rows_df <- dplyr::filter(dims_df, .matrix == "rows")
+  cols_df <- dplyr::filter(dims_df, .matrix == "cols")
   
+  # all dimension limits
+  lims <- sapply(dims_df[dims], range, na.rm = TRUE, simplify = TRUE)
   
-  # assemble plot matrix
-  # ord_list <- matrix(data = list(), n_dims, n_dims)
+  # create matrix plots
   ord_list <- list()
   for (i in seq(n_dims)) for (j in seq(n_dims)) {
     
     if (i == j) {
-      
-      # fortified data frame
-      rows_df <- fortify(ordination, .matrix = "rows")
       
       # combine aesthetics
       section_aes <- aes(x = !! as.name(dims[[i]]))
@@ -54,33 +56,48 @@ ggbipairs <- function(
       
       # 1-dimensional biplot
       p <- ggplot(rows_df, section_aes) +
-        geom_histogram()
+        geom_histogram() +
+        scale_x_continuous(limits = lims[, i]) +
+        theme(aspect.ratio = 1)
       
     } else {
       
-      # p <- ggbiplot(iris_pca, aes(x = !! i, y = !! j),
-      #               axis.type = "predictive", axis.percents = FALSE) +
-      #   geom_rows_point(aes(color = Species, shape = Species)) +
-      #   stat_rows_center(
-      #     aes(color = Species, shape = Species),
-      #     size = 5, alpha = .5, fun.data = mean_se
-      #   ) +
-      #   geom_cols_axis(aes(label = name, center = center, scale = scale)) +
-      #   coord_cartesian()
+      # combine aesthetics
+      section_aes <- aes(x = !! as.name(dims[[i]]), y = !! as.name(dims[[j]]))
+      for (k in seq_along(mapping)) section_aes[names(mapping)[k]] <- mapping[k]
+      # remove missing aesthetics
+      match_aes <- match(
+        as.character(sapply(section_aes, rlang::quo_get_expr)),
+        names(dims_df)
+      )
+      for (k in seq_along(match_aes)) 
+        if (is.na(match_aes[k])) section_aes[k] <- NULL
+      
+      p <- ggbiplot(dims_df, section_aes) +
+        geom_rows_point() +
+        stat_rows_center(size = 5, alpha = .5, fun.data = mean_se) +
+        geom_cols_axis() +
+        scale_x_continuous(limits = lims[, i]) +
+        scale_y_continuous(limits = lims[, j])
       
     }
     
-    # ord_list[[i, j]] <- p
     ord_list[[i + (j - 1) * n_dims]] <- p
     
   }
+  
+  # assemble plot matrix
   iris_matrix <- GGally::ggmatrix(
     ord_list,
-    4, 4,
-    paste("PC", 1:4, sep = ""),
-    paste("PC", 1:4, sep = ""),
+    n_dims, n_dims,
+    dims, dims,
     byrow = TRUE
   )
+  
   iris_matrix
   
 }
+
+ggbipairs(
+  iris_pca, aes(color = Species, fill = Species, linetype = name), coords = 1:3
+)
