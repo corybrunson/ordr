@@ -94,7 +94,7 @@ recover_aug_rows.cancor_ord <- function(x) {
   } else {
     tibble(name = name)
   }
-  res$center <- unname(x$xcenter)
+  res$center <- unname(x$xcenter[seq(nrow(x$xcoef))])
   # case scores and structure correlations as supplementary points
   res_sup <- NULL
   if (! is.null(x$xscores)) {
@@ -129,7 +129,7 @@ recover_aug_cols.cancor_ord <- function(x) {
   } else {
     tibble(name = name)
   }
-  res$center <- unname(x$ycenter)
+  res$center <- unname(x$ycenter[seq(nrow(x$ycoef))])
   # case scores and structure correlations as supplementary points
   res_sup <- NULL
   if (! is.null(x$xscores)) {
