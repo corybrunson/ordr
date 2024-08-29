@@ -20,7 +20,8 @@ as_tbl_ord.princomp <- as_tbl_ord_default
 #' @rdname methods-princomp
 #' @export
 recover_rows.princomp <- function(x) {
-  x[["scores"]]
+  matrix(nrow = 0, ncol = ncol(x[["loadings"]]),
+         dimnames = list(NULL, colnames(x[["loadings"]])))
 }
 
 #' @rdname methods-princomp
@@ -46,6 +47,12 @@ recover_coord.princomp <- function(x) {
 recover_conference.princomp <- function(x) {
   # `stats::princomp()` returns the rotated data
   c(1, 0)
+}
+
+#' @rdname methods-princomp
+#' @export
+recover_supp_rows.princomp <- function(x) {
+  x[["scores"]]
 }
 
 #' @rdname methods-princomp
