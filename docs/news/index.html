@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
       </span>
     </div>
 
@@ -41,7 +41,13 @@
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
-      </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
+      </ul><ul class="nav navbar-nav navbar-right"><li>
+  <a href="https://github.com/corybrunson/ordr/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
@@ -51,11 +57,27 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      
+      <small>Source: <a href="https://github.com/corybrunson/ordr/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.1.0" id="ordr-010">ordr 0.1.0<a class="anchor" aria-label="anchor" href="#ordr-010"></a></h2>
+<h2 class="page-header" data-toc-text="0.1.1" id="ordr-011">ordr 0.1.1<small>2022-10-20</small><a class="anchor" aria-label="anchor" href="#ordr-011"></a></h2>
+<div class="section level3">
+<h3 id="linewidth-aesthetic-breaking-change-0-1-1">
+<code>linewidth</code> aesthetic (breaking change)<a class="anchor" aria-label="anchor" href="#linewidth-aesthetic-breaking-change-0-1-1"></a></h3>
+<p>An upcoming release of <em>ggplot2</em> controls stroke width using the new <code>linewidth</code> aesthetic rather than <code>size</code>. This <em>ordr</em> release adapts to this change internally for <code>GeomUnitCircle</code> and by updating row and column layers automatically adapted from <em>ggplot2</em>. (<a href="https://github.com/corybrunson/ordr/issues/50" class="external-link">#50</a>)</p>
+</div>
+<div class="section level3">
+<h3 id="class-eigen-0-1-1">class ‘eigen’<a class="anchor" aria-label="anchor" href="#class-eigen-0-1-1"></a></h3>
+<p>Methods are added for the ‘eigen’ class returned by <code><a href="https://rdrr.io/r/base/eigen.html" class="external-link">eigen()</a></code>, and the internal <code><a href="../reference/wrap-ord.html">eigen_ord()</a></code> function and its methods are updated accordingly.</p>
+</div>
+<div class="section level3">
+<h3 id="list-tidiers-breaking-change-0-1-1">list tidiers (breaking change)<a class="anchor" aria-label="anchor" href="#list-tidiers-breaking-change-0-1-1"></a></h3>
+<p>The previous version extended the ‘list’ method for <em>broom</em>’s <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> and <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> functions to recognize the output of <code><a href="https://rdrr.io/r/stats/cmdscale.html" class="external-link">cmdscale()</a></code> and of <code><a href="https://rdrr.io/r/stats/cancor.html" class="external-link">cancor()</a></code>. These have been spun off to a nascent helper package, <em>broom.list</em>, to reduce size and prevent attachment warnings.</p>
+</div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.1.0" id="ordr-010">ordr 0.1.0<small>2022-08-18</small><a class="anchor" aria-label="anchor" href="#ordr-010"></a></h2>
 <p>In addition to minor changes, the following substantive changes are made from v0.0.2:</p>
 <div class="section level3">
 <h3 id="augmentation-0-1-0">augmentation<a class="anchor" aria-label="anchor" href="#augmentation-0-1-0"></a></h3>
@@ -75,7 +97,7 @@
 </div>
 <div class="section level3">
 <h3 id="ggbiplot-0-1-0">ggbiplot<a class="anchor" aria-label="anchor" href="#ggbiplot-0-1-0"></a></h3>
-<p>The logical <code>prediction</code> parameter is replaced with the character-valued <code>axis.type</code>, based on the <code>ax.type</code> parameter used in <strong>UBbipl</strong> (Gower, Lubbe, &amp; le Roux, 2011).</p>
+<p>The logical <code>prediction</code> parameter is replaced with the character-valued <code>axis.type</code>, based on the <code>ax.type</code> parameter used in <strong>UBbipl</strong> (Gower, Gardner–Lubbe, &amp; le Roux, 2011).</p>
 </div>
 <div class="section level3">
 <h3 id="tests-0-1-0">tests<a class="anchor" aria-label="anchor" href="#tests-0-1-0"></a></h3>

@@ -1,3 +1,28 @@
+# next version
+
+## debugged axis geom
+
+The 'axis' and 'isoline' geoms hit trouble when one or more points lay at the origin (`x^2 + y^2 == 0`). These cases have now been removed in `setup_data()`.
+
+## axis harmonizers
+
+Multiple harmonizers are now available for scaling secondary axes. That recommended by Gower, Gardner--Lubbe, and Le Roux (2011) is the default, but the user can still specify a numeric scale instead.
+
+# ordr 0.1.1
+
+## `linewidth` aesthetic (breaking change)
+
+An upcoming release of **ggplot2** controls stroke width using the new `linewidth` aesthetic rather than `size`. This **ordr** release adapts to this change internally for `GeomUnitCircle` and by updating row and column layers automatically adapted from **ggplot2**. (#50)
+
+## class 'eigen'
+
+Methods are added for the 'eigen' class returned by `eigen()`, and the internal `eigen_ord()` function and its methods are updated accordingly.
+
+## list tidiers (breaking change)
+
+The previous version extended the 'list' method for **broom**'s `tidy()` and `glance()` functions to recognize the output of `cmdscale()` and of `cancor()`.
+These have been spun off to a nascent helper package, **broom.list**, to reduce size and prevent attachment warnings.
+
 # ordr 0.1.0
 
 In addition to minor changes, the following substantive changes are made from v0.0.2:

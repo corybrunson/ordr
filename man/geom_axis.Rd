@@ -26,10 +26,10 @@ geom_axis(
 )
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or
-\code{\link[ggplot2:aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
-default), it is combined with the default mapping at the top level of the
-plot. You must supply \code{mapping} if there is no plot mapping.}
+\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}}. If specified and
+\code{inherit.aes = TRUE} (the default), it is combined with the default mapping
+at the top level of the plot. You must supply \code{mapping} if there is no plot
+mapping.}
 
 \item{data}{The data to be displayed in this layer. There are three
 options:
@@ -46,11 +46,31 @@ the plot data. The return value must be a \code{data.frame}, and
 will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
-\item{stat}{The statistical transformation to use on the data for this
-layer, as a string.}
+\item{stat}{The statistical transformation to use on the data for this layer.
+When using a \verb{geom_*()} function to construct a layer, the \code{stat}
+argument can be used the override the default coupling between geoms and
+stats. The \code{stat} argument accepts the following:
+\itemize{
+\item A \code{Stat} ggproto subclass, for example \code{StatCount}.
+\item A string naming the stat. To give the stat as a string, strip the
+function name of the \code{stat_} prefix. For example, to use \code{stat_count()},
+give the stat as \code{"count"}.
+\item For more information and other ways to specify the stat, see the
+\link[ggplot2:layer_stats]{layer stat} documentation.
+}}
 
-\item{position}{Position adjustment, either as a string, or the result of
-a call to a position adjustment function.}
+\item{position}{A position adjustment to use on the data for this layer. This
+can be used in various ways, including to prevent overplotting and
+improving the display. The \code{position} argument accepts the following:
+\itemize{
+\item The result of calling a position function, such as \code{position_jitter()}.
+This method allows for passing extra arguments to the position.
+\item A string naming the position adjustment. To give the position as a
+string, strip the function name of the \code{position_} prefix. For example,
+to use \code{position_jitter()}, give the position as \code{"jitter"}.
+\item For more information and other ways to specify the position, see the
+\link[ggplot2:layer_positions]{layer position} documentation.
+}}
 
 \item{axis_labels, axis_ticks, axis_text}{Logical; whether to include labels,
 tick marks, and text value marks along the axes.}
@@ -120,13 +140,13 @@ in bold):
 \item \strong{\code{y}}
 \item \code{colour}
 \item \code{alpha}
-\item \code{size}
+\item \code{linewidth}
 \item \code{linetype}
 \item \code{label}
 \item \code{center}, \code{scale}
 \item \code{label_colour}, \code{label_alpha}, \code{label_size}, \code{label_angle},
 \code{label_hjust}, \code{label_vjust}, \code{label_family}, \code{label_fontface}
-\item \code{tick_colour}, \code{tick_alpha}, \code{tick_size}, \code{tick_linetype}
+\item \code{tick_colour}, \code{tick_alpha}, \code{tick_linewidth}, \code{tick_linetype}
 \item \code{text_colour}, \code{text_alpha}, \code{text_size}, \code{text_angle},
 \code{text_hjust}, \code{text_vjust}, \code{text_family}, \code{text_fontface}
 \item \code{group}
@@ -138,53 +158,52 @@ counterparts, if recognized.
 }
 
 \examples{
-# Reaven & Miller overt & chemical diabetes test data and group classification
-head(heplots::Diabetes)
+# Freestone primary glass measurements
+print(glass)
 
-# default (standardized) linear discriminant analysis of groups on tests
-diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes)
+# default (standardized) linear discriminant analysis of sites on measurements
+glass_lda <- MASS::lda(Site ~ SiO2 + Al2O3 + FeO + MgO + CaO, glass)
 # bestow 'tbl_ord' class & augment observation, centroid, and variable fields
-as_tbl_ord(diabetes_lda) \%>\%
+as_tbl_ord(glass_lda) \%>\%
   augment_ord() \%>\%
-  mutate_rows(discriminant = ifelse(
-    .element == "active",
-    "centroid", "case"
-  )) \%>\%
-  print() -> diabetes_lda
+  mutate_rows(discriminant =
+                ifelse(.element == "active", "centroid", "case")) \%>\%
+  print() -> glass_lda
 # row-standard biplot
-diabetes_lda \%>\%
+glass_lda \%>\%
   confer_inertia(1) \%>\%
   ggbiplot() +
   theme_bw() + theme_biplot() +
   geom_rows_point(aes(shape = grouping, size = discriminant), alpha = .5) +
   geom_cols_axis(aes(label = name), color = "#888888", num = 8L,
                  text_size = 2.5, label_dodge = .02) +
+  scale_shape_manual(values = c(2L, 3L, 0L, 5L)) +
   ggtitle(
-    "LDA of Reaven & Miller diabetes groups",
+    "LDA of Freestone glass measurements",
     "Row-standard biplot of standardized LDA"
   )
 
-# contribution LDA of groups on tests
-diabetes_lda <-
-  lda_ord(group ~ ., heplots::Diabetes, axes.scale = "contribution")
+# contribution LDA of sites on measurements
+glass_lda <-
+  lda_ord(Site ~ SiO2 + Al2O3 + FeO + MgO + CaO, glass,
+          axes.scale = "contribution")
 # bestow 'tbl_ord' class & augment observation, centroid, and variable fields
-as_tbl_ord(diabetes_lda) \%>\%
+as_tbl_ord(glass_lda) \%>\%
   augment_ord() \%>\%
-  mutate_rows(discriminant = ifelse(
-    .element == "active",
-    "centroid", "case"
-  )) \%>\%
-  print() -> diabetes_lda
+  mutate_rows(discriminant =
+                ifelse(.element == "active", "centroid", "case")) \%>\%
+  print() -> glass_lda
 # symmetric biplot
-diabetes_lda \%>\%
+glass_lda \%>\%
   confer_inertia(.5) \%>\%
   ggbiplot() +
   theme_bw() + theme_biplot() +
   geom_rows_point(aes(shape = grouping, alpha = discriminant)) +
   geom_cols_axis(color = "#888888", num = 8L,
                  text_size = 2.5, text_dodge = .025) +
+  scale_shape_manual(values = c(16L, 17L, 15L, 18L)) +
   ggtitle(
-    "LDA of Reaven & Miller diabetes groups",
+    "LDA of Freestone glass measurements",
     "Symmetric biplot of contribution LDA"
   )
 }
@@ -195,7 +214,6 @@ Other geom layers:
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},
 \code{\link{geom_text_radiate}()},
-\code{\link{geom_unit_circle}()},
 \code{\link{geom_vector}()}
 }
 \concept{geom layers}

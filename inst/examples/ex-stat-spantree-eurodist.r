@@ -1,3 +1,4 @@
+\dontrun{
 # classical multidimensional scaling of road distances between European cities
 euro_mds <- ordinate(eurodist, cmdscale_ord, k = 11)
 
@@ -7,7 +8,7 @@ euro_mds %>%
   negate_ord("PCo2") %>%
   ggbiplot() +
   stat_cols_spantree(
-    ord_aes(euro_mds), check.aes = FALSE, engine = "mlpack",
+    ord_aes(euro_mds), engine = "mlpack",
     alpha = .5, linetype = "dotted"
   ) +
   geom_cols_text(aes(label = name), size = 3) +
@@ -15,3 +16,4 @@ euro_mds %>%
     "MDS biplot of road distances between European cities",
     "Dotted segments constitute the minimal spanning tree"
   )
+}

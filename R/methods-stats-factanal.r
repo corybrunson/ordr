@@ -19,7 +19,7 @@
 #' @template param-methods
 #' @template return-methods
 #' @family methods for eigen-decomposition-based techniques
-#' @family models from the **stats** package
+#' @family models from the stats package
 #' @example inst/examples/ex-methods-factanal-swiss.r
 NULL
 

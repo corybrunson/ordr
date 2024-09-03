@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
       </span>
     </div>
 
@@ -41,7 +41,13 @@
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
-      </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
+      </ul><ul class="nav navbar-nav navbar-right"><li>
+  <a href="https://github.com/corybrunson/ordr/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
@@ -77,18 +83,6 @@
           <p><code><a href="wrap-ord.html">eigen_ord()</a></code> <code><a href="wrap-ord.html">svd_ord()</a></code> <code><a href="wrap-ord.html">cmdscale_ord()</a></code> <code><a href="wrap-ord.html">cancor_ord()</a></code> </p>
         </td>
         <td><p>Wrappers for lossy ordination methods</p></td>
-      </tr><tr><td>
-          <p><code><a href="cmdscale_tidiers.html">tidy_cmdscale()</a></code> <code><a href="cmdscale_tidiers.html">glance_cmdscale()</a></code> </p>
-        </td>
-        <td><p>Tidy <code><a href="https://rdrr.io/r/stats/cmdscale.html" class="external-link">cmdscale()</a></code> list output</p></td>
-      </tr><tr><td>
-          <p><code><a href="cancor_tidiers.html">tidy_cancor()</a></code> </p>
-        </td>
-        <td><p>Tidy <code><a href="https://rdrr.io/r/stats/cancor.html" class="external-link">cancor()</a></code> list output</p></td>
-      </tr><tr><td>
-          <p><code><a href="list_tidiers.html">tidy(<i>&lt;list&gt;</i>)</a></code> <code><a href="list_tidiers.html">glance(<i>&lt;list&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Tidying methods for (additional) lists</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="data-sets">Data sets <a href="#data-sets" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>Additional data sets used to illustrate ordination techniques</p>
@@ -166,10 +160,6 @@
         </td>
         <td><p>Render plot elements for one matrix of an ordination</p></td>
       </tr><tr><td>
-          <p><code><a href="theme_biplot.html">theme_biplot()</a></code> </p>
-        </td>
-        <td><p>Biplot theme</p></td>
-      </tr><tr><td>
           <p><code><a href="stat_center.html">stat_center()</a></code> <code><a href="stat_center.html">stat_star()</a></code> </p>
         </td>
         <td><p>Compute geometric centers and spreads for ordination factors</p></td>
@@ -218,6 +208,10 @@
         </td>
         <td><p>Vectors from the origin</p></td>
       </tr><tr><td>
+          <p><code><a href="theme_biplot.html">theme_biplot()</a></code> </p>
+        </td>
+        <td><p>Biplot theme</p></td>
+      </tr><tr><td>
           <p><code><a href="draw-key.html">draw_key_line()</a></code> <code><a href="draw-key.html">draw_key_crosslines()</a></code> <code><a href="draw-key.html">draw_key_crosspoint()</a></code> </p>
         </td>
         <td><p>Biplot key drawing functions</p></td>
@@ -250,7 +244,7 @@
         </td>
         <td><p>Functionality for correspondence analysis ('correspondence') objects</p></td>
       </tr><tr><td>
-          <p><code><a href="methods-eigen.html">as_tbl_ord(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_rows(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_cols(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_inertia(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_coord(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_conference(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_aug_rows(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_aug_cols(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_aug_coord(<i>&lt;eigen_ord&gt;</i>)</a></code> </p>
+          <p><code><a href="methods-eigen.html">as_tbl_ord(<i>&lt;eigen&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_rows(<i>&lt;eigen&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_cols(<i>&lt;eigen&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_inertia(<i>&lt;eigen&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_coord(<i>&lt;eigen&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_conference(<i>&lt;eigen&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_aug_rows(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_aug_cols(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_aug_coord(<i>&lt;eigen&gt;</i>)</a></code> <code><a href="methods-eigen.html">as_tbl_ord(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_rows(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_cols(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_inertia(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_coord(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_conference(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_aug_rows(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_aug_cols(<i>&lt;eigen_ord&gt;</i>)</a></code> <code><a href="methods-eigen.html">recover_aug_coord(<i>&lt;eigen_ord&gt;</i>)</a></code> </p>
         </td>
         <td><p>Functionality for eigen-decompositions</p></td>
       </tr><tr><td>

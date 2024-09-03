@@ -76,7 +76,7 @@ Other methods for singular value decomposition-based techniques:
 \code{\link{methods-princomp}},
 \code{\link{methods-svd}}
 
-Other models from the \strong{stats} package: 
+Other models from the stats package: 
 \code{\link{methods-cancor}},
 \code{\link{methods-cmds}},
 \code{\link{methods-factanal}},
@@ -88,4 +88,4 @@ Other models from the \strong{stats} package:
 Emily Paul
 }
 \concept{methods for singular value decomposition-based techniques}
-\concept{models from the \strong{stats} package}
+\concept{models from the stats package}

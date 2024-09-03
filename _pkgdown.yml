@@ -10,9 +10,6 @@ reference:
     Introducing and adapting ordination techniques for the **ordr** workflow
   contents:
   - ends_with("-ord")
-  - '`cmdscale_tidiers`'
-  - '`cancor_tidiers`'
-  - '`list_tidiers`'
 - title: "Data sets"
   desc: >
     Additional data sets used to illustrate ordination techniques
@@ -43,11 +40,11 @@ reference:
   contents:
   - '`ggbiplot`'
   - 'stat_rows'
-  - starts_with("theme_")
   - has_concept("stat layers")
   - '`geom_origin`'
   - '`geom_unit_circle`'
   - has_concept("geom layers")
+  - starts_with("theme_")
   - '`draw-key`'
   - 'ordr-ggproto'
   - has_concept("biplot layers")

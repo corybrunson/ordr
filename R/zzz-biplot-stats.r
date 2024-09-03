@@ -532,12 +532,10 @@ stat_rows_spantree <- function(
   data = NULL,
   geom = "segment",
   position = "identity",
-  engine = "vegan",
+  engine = "mlpack",
   method = "euclidean",
   show.legend = NA,
   inherit.aes = TRUE,
-  check.aes = TRUE,
-  check.param = TRUE,
   ...
 ) {
   layer(
@@ -551,8 +549,6 @@ stat_rows_spantree <- function(
     params = list(
       engine = engine,
       method = method,
-      check.aes = check.aes,
-      check.param = check.param,
       na.rm = FALSE,
       ...
     )
@@ -576,12 +572,10 @@ stat_cols_spantree <- function(
   data = NULL,
   geom = "segment",
   position = "identity",
-  engine = "vegan",
+  engine = "mlpack",
   method = "euclidean",
   show.legend = NA,
   inherit.aes = TRUE,
-  check.aes = TRUE,
-  check.param = TRUE,
   ...
 ) {
   layer(
@@ -595,8 +589,6 @@ stat_cols_spantree <- function(
     params = list(
       engine = engine,
       method = method,
-      check.aes = check.aes,
-      check.param = check.param,
       na.rm = FALSE,
       ...
     )

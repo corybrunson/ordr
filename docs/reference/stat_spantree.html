@@ -19,7 +19,7 @@ between these poirs in the two dimensions x and y."><!-- mathjax --><script src=
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
       </span>
     </div>
 
@@ -43,7 +43,13 @@ between these poirs in the two dimensions x and y."><!-- mathjax --><script src=
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
-      </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
+      </ul><ul class="nav navbar-nav navbar-right"><li>
+  <a href="https://github.com/corybrunson/ordr/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
@@ -53,7 +59,7 @@ between these poirs in the two dimensions x and y."><!-- mathjax --><script src=
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Calculate a minimum spanning tree among cases or variables</h1>
-    
+    <small class="dont-index">Source: <a href="https://github.com/corybrunson/ordr/blob/HEAD/R/stat-spantree.r" class="external-link"><code>R/stat-spantree.r</code></a></small>
     <div class="hidden name"><code>stat_spantree.Rd</code></div>
     </div>
 
@@ -69,12 +75,10 @@ between these poirs in the two dimensions <code>x</code> and <code>y</code>.</p>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  geom <span class="op">=</span> <span class="st">"segment"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  engine <span class="op">=</span> <span class="st">"vegan"</span>,</span>
+<span>  engine <span class="op">=</span> <span class="st">"mlpack"</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"euclidean"</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  check.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  check.param <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -82,10 +86,10 @@ between these poirs in the two dimensions <code>x</code> and <code>y</code>.</p>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>mapping</dt>
-<dd><p>Set of aesthetic mappings created by <code><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes()</a></code> or
-<code><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_()</a></code>. If specified and <code>inherit.aes = TRUE</code> (the
-default), it is combined with the default mapping at the top level of the
-plot. You must supply <code>mapping</code> if there is no plot mapping.</p></dd>
+<dd><p>Set of aesthetic mappings created by <code><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes()</a></code>. If specified and
+<code>inherit.aes = TRUE</code> (the default), it is combined with the default mapping
+at the top level of the plot. You must supply <code>mapping</code> if there is no plot
+mapping.</p></dd>
 
 
 <dt>data</dt>
@@ -103,22 +107,26 @@ from a <code>formula</code> (e.g. <code>~ head(.x, 10)</code>).</p></dd>
 
 
 <dt>geom</dt>
-<dd><p>The geometric object to use display the data</p></dd>
+<dd><p>The geometric object to use to display the data, either as a
+<code>ggproto</code> <code>Geom</code> subclass or as a string naming the geom stripped of the
+<code>geom_</code> prefix (e.g. <code>"point"</code> rather than <code>"geom_point"</code>)</p></dd>
 
 
 <dt>position</dt>
-<dd><p>Position adjustment, either as a string, or the result of
-a call to a position adjustment function.</p></dd>
+<dd><p>Position adjustment, either as a string naming the adjustment
+(e.g. <code>"jitter"</code> to use <code>position_jitter</code>), or the result of a call to a
+position adjustment function. Use the latter if you need to change the
+settings of the adjustment.</p></dd>
 
 
 <dt>engine</dt>
 <dd><p>A single character string specifying the package implementation
-to use; either <code>"vegan"</code> or <code>"mlpack"</code>.</p></dd>
+to use; <code>"mlpack"</code>, <code>"vegan"</code>, or <code>"ade4"</code>.</p></dd>
 
 
 <dt>method</dt>
-<dd><p>Passed to <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">stats::dist()</a></code> if <code>engine</code> is <code>"vegan"</code>, ignored if
-<code>"mlpack"</code>.</p></dd>
+<dd><p>Passed to <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">stats::dist()</a></code> if <code>engine</code> is <code>"vegan"</code> or <code>"ade4"</code>,
+ignored if <code>"mlpack"</code>.</p></dd>
 
 
 <dt>show.legend</dt>
@@ -136,12 +144,6 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.org/reference/borders.html" class="external-link">borders()</a></code>.</p></dd>
 
 
-<dt>check.aes, check.param</dt>
-<dd><p>If <code>TRUE</code>, the default, will check that
-supplied parameters and aesthetics are understood by the <code>geom</code> or
-<code>stat</code>. Use <code>FALSE</code> to suppress the checks.</p></dd>
-
-
 <dt>...</dt>
 <dd><p>Additional arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">ggplot2::layer()</a></code>.</p></dd>
 
@@ -157,9 +159,9 @@ supplied parameters and aesthetics are understood by the <code>geom</code> or
     <p>A minimum spanning tree (MST) on the point cloud \(X\) is a minimal
 connected graph on \(X\) with the smallest possible sum of distances (or
 dissimilarities) between linked points. These layers call <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">stats::dist()</a></code> to
-calculate a distance/dissimilarity object and <code><a href="https://rdrr.io/pkg/vegan/man/spantree.html" class="external-link">vegan::spantree()</a></code> to
-calculate the MST. The result is formatted with position aesthetics readable
-by <code><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html" class="external-link">ggplot2::geom_segment()</a></code>.</p>
+calculate a distance/dissimilarity object and an engine from <strong>mlpack</strong>,
+<strong>vegan</strong>, or <strong>ade4</strong> to calculate the MST. The result is formatted with
+position aesthetics readable by <code><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html" class="external-link">ggplot2::geom_segment()</a></code>.</p>
 <p>An MST calculated on <code>x</code> and <code>y</code> reflects the distances among the points in
 \(X\) in the reduced-dimension plane of the biplot. In contrast, one
 calculated on the full set of coordinates reflects distances in
@@ -217,7 +219,8 @@ Springer Series in Statistics, ISSN 0172-7397. doi: <a href="https://doi.org/10.
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># classical multidimensional scaling of road distances between European cities</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="co"># classical multidimensional scaling of road distances between European cities</span></span></span>
 <span class="r-in"><span><span class="va">euro_mds</span> <span class="op">&lt;-</span> <span class="fu"><a href="ordinate.html">ordinate</a></span><span class="op">(</span><span class="va">eurodist</span>, <span class="va">cmdscale_ord</span>, k <span class="op">=</span> <span class="fl">11</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># biplot with minimal spanning tree based on full-dimensional distances</span></span></span>
@@ -226,7 +229,7 @@ Springer Series in Statistics, ISSN 0172-7397. doi: <a href="https://doi.org/10.
 <span class="r-in"><span>  <span class="fu"><a href="negation.html">negate_ord</a></span><span class="op">(</span><span class="st">"PCo2"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="biplot-stats.html">stat_cols_spantree</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="ggbiplot.html">ord_aes</a></span><span class="op">(</span><span class="va">euro_mds</span><span class="op">)</span>, check.aes <span class="op">=</span> <span class="cn">FALSE</span>, engine <span class="op">=</span> <span class="st">"mlpack"</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="ggbiplot.html">ord_aes</a></span><span class="op">(</span><span class="va">euro_mds</span><span class="op">)</span>, engine <span class="op">=</span> <span class="st">"mlpack"</span>,</span></span>
 <span class="r-in"><span>    alpha <span class="op">=</span> <span class="fl">.5</span>, linetype <span class="op">=</span> <span class="st">"dotted"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_text</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">name</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span></span>
@@ -234,9 +237,10 @@ Springer Series in Statistics, ISSN 0172-7397. doi: <a href="https://doi.org/10.
 <span class="r-in"><span>    <span class="st">"MDS biplot of road distances between European cities"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"Dotted segments constitute the minimal spanning tree"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Ignoring unknown parameters: check.aes, check.param</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Ignoring unknown aesthetics: ..coord1, ..coord2, ..coord3, ..coord4, ..coord5, ..coord6, ..coord7, ..coord8, ..coord9, ..coord10, ..coord11</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Ignoring unknown aesthetics: <span style="color: #00BB00;">..coord1</span>, <span style="color: #00BB00;">..coord2</span>, <span style="color: #00BB00;">..coord3</span>, <span style="color: #00BB00;">..coord4</span>, <span style="color: #00BB00;">..coord5</span>,</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">..coord6</span>, <span style="color: #00BB00;">..coord7</span>, <span style="color: #00BB00;">..coord8</span>, <span style="color: #00BB00;">..coord9</span>, <span style="color: #00BB00;">..coord10</span>, and <span style="color: #00BB00;">..coord11</span></span>
 <span class="r-plt img"><img src="stat_spantree-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>

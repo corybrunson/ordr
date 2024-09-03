@@ -2,9 +2,15 @@
 % Please edit documentation in R/ord-plot.r
 \name{plot.tbl_ord}
 \alias{plot.tbl_ord}
+\alias{screeplot.tbl_ord}
+\alias{biplot.tbl_ord}
 \title{Plot and biplot methods for 'tbl_ord' objects}
 \usage{
 \method{plot}{tbl_ord}(x, main = deparse(substitute(x)), ...)
+
+\method{screeplot}{tbl_ord}(x, main = deparse(substitute(x)), ...)
+
+\method{biplot}{tbl_ord}(x, main = deparse(substitute(x)), ...)
 }
 \arguments{
 \item{x}{A 'tbl_ord' object.}

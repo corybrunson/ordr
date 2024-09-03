@@ -19,7 +19,7 @@ and stats::glm().'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
       </span>
     </div>
 
@@ -43,7 +43,13 @@ and stats::glm().'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
-      </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
+      </ul><ul class="nav navbar-nav navbar-right"><li>
+  <a href="https://github.com/corybrunson/ordr/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
@@ -53,7 +59,7 @@ and stats::glm().'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Functionality for linear model objects</h1>
-    
+    <small class="dont-index">Source: <a href="https://github.com/corybrunson/ordr/blob/HEAD/R/methods-stats-lm.r" class="external-link"><code>R/methods-stats-lm.r</code></a></small>
     <div class="hidden name"><code>methods-lm.Rd</code></div>
     </div>
 
@@ -130,7 +136,14 @@ the model components.</p>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>Other methods for idiosyncratic techniques: 
-<code><a href="methods-kmeans.html">methods-kmeans</a></code></p></div>
+<code><a href="methods-kmeans.html">methods-kmeans</a></code></p>
+<p>Other models from the stats package: 
+<code><a href="methods-cancor.html">methods-cancor</a></code>,
+<code><a href="methods-cmds.html">methods-cmds</a></code>,
+<code><a href="methods-factanal.html">methods-factanal</a></code>,
+<code><a href="methods-kmeans.html">methods-kmeans</a></code>,
+<code><a href="methods-prcomp.html">methods-prcomp</a></code>,
+<code><a href="methods-princomp.html">methods-princomp</a></code></p></div>
     </div>
 
     <div id="ref-examples">
@@ -194,7 +207,6 @@ the model components.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 27 more rows, and 2 more</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   variables: .fit &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   .se.fit &lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns: [ 1 x 3 | 1 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   `(Intercept)`    wt   cyl |   name </span>
@@ -216,7 +228,6 @@ the model components.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 27 more rows, and 3 more</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   variables: .fit &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   .se.fit &lt;dbl&gt;, influence &lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns: [ 1 x 3 | 1 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   `(Intercept)`    wt   cyl |   name </span>
@@ -252,7 +263,6 @@ the model components.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 27 more rows, and 3 more</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   variables: .fit &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   .se.fit &lt;dbl&gt;, influence &lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns: [ 1 x 3 | 2 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   `(Intercept)`    wt   cyl |   name  center</span>

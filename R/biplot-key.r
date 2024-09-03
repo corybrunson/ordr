@@ -25,7 +25,7 @@ draw_key_line <- function(data, params, size) {
     0, 0.5, 1, 0.5,
     gp = grid::gpar(
       col = alpha(data$colour, data$alpha),
-      lwd = data$size * .pt,
+      lwd = (data$linewidth %||% data$size) * .pt,
       lty = data$linetype,
       lineend = "butt"
     )

@@ -22,10 +22,10 @@ geom_isoline(
 )
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or
-\code{\link[ggplot2:aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
-default), it is combined with the default mapping at the top level of the
-plot. You must supply \code{mapping} if there is no plot mapping.}
+\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}}. If specified and
+\code{inherit.aes = TRUE} (the default), it is combined with the default mapping
+at the top level of the plot. You must supply \code{mapping} if there is no plot
+mapping.}
 
 \item{data}{The data to be displayed in this layer. There are three
 options:
@@ -42,11 +42,31 @@ the plot data. The return value must be a \code{data.frame}, and
 will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
-\item{stat}{The statistical transformation to use on the data for this
-layer, as a string.}
+\item{stat}{The statistical transformation to use on the data for this layer.
+When using a \verb{geom_*()} function to construct a layer, the \code{stat}
+argument can be used the override the default coupling between geoms and
+stats. The \code{stat} argument accepts the following:
+\itemize{
+\item A \code{Stat} ggproto subclass, for example \code{StatCount}.
+\item A string naming the stat. To give the stat as a string, strip the
+function name of the \code{stat_} prefix. For example, to use \code{stat_count()},
+give the stat as \code{"count"}.
+\item For more information and other ways to specify the stat, see the
+\link[ggplot2:layer_stats]{layer stat} documentation.
+}}
 
-\item{position}{Position adjustment, either as a string, or the result of
-a call to a position adjustment function.}
+\item{position}{A position adjustment to use on the data for this layer. This
+can be used in various ways, including to prevent overplotting and
+improving the display. The \code{position} argument accepts the following:
+\itemize{
+\item The result of calling a position function, such as \code{position_jitter()}.
+This method allows for passing extra arguments to the position.
+\item A string naming the position adjustment. To give the position as a
+string, strip the function name of the \code{position_} prefix. For example,
+to use \code{position_jitter()}, give the position as \code{"jitter"}.
+\item For more information and other ways to specify the position, see the
+\link[ggplot2:layer_positions]{layer position} documentation.
+}}
 
 \item{isoline_text}{Logical; whether to include text value marks along the
 isolines.}
@@ -109,7 +129,7 @@ are in bold):
 \item \strong{\code{y}}
 \item \code{colour}
 \item \code{alpha}
-\item \code{size}
+\item \code{linewidth}
 \item \code{linetype}
 \item \code{center}, \code{scale}
 \item \code{angle}
@@ -126,18 +146,18 @@ inherit any values passed to their un-prefixed counterparts.
 }
 
 \examples{
-# Reaven & Miller overt & chemical diabetes test data and group classification
-head(heplots::Diabetes)
-# default (standardized) linear discriminant analysis of groups on tests
-diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes)
+# Freestone primary glass measurements
+head(glass)
+# default (standardized) linear discriminant analysis of sites on measurements
+glass_lda <- MASS::lda(Site ~ SiO2 + Al2O3 + FeO + MgO + CaO, glass)
 
-# bestow 'tbl_ord' class & augment observation, centroid, and variable fields
-as_tbl_ord(diabetes_lda) \%>\%
+# bestow 'tbl_ord' class & augment centroid and variable fields
+as_tbl_ord(glass_lda) \%>\%
   augment_ord() \%>\%
-  print() -> diabetes_lda
+  print() -> glass_lda
 
 # row-standard biplot
-diabetes_lda \%>\%
+glass_lda \%>\%
   confer_inertia(1) \%>\%
   ggbiplot(aes(label = name), elements = "active") +
   theme_bw() + theme_biplot() +
@@ -147,9 +167,11 @@ diabetes_lda \%>\%
   geom_cols_isoline(subset = c(1, 3, 4), alpha = .25, num = 4L,
                     label_dodge = -.03, text_alpha = .5, text_size = 3) +
   ggtitle(
-    "LDA of Reaven & Miller diabetes groups",
+    "LDA of Freestone glass measurements",
     "Row-standard biplot of standardized LDA"
-  )
+  ) +
+  scale_x_continuous(expand = expansion(mult = .1)) +
+  scale_y_continuous(expand = expansion(mult = .1))
 }
 \seealso{
 Other geom layers: 
@@ -158,7 +180,6 @@ Other geom layers:
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},
 \code{\link{geom_text_radiate}()},
-\code{\link{geom_unit_circle}()},
 \code{\link{geom_vector}()}
 }
 \concept{geom layers}

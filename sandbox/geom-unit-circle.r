@@ -24,7 +24,7 @@
 #'   may be changed in a future version.)
 #' @template return-layer
 #' @family geom layers
-#' @example inst/examples/ex-geom-unit-circle.r
+#' @example inst/examples/ex-geom-unit-circle-glass.r
 #' @export
 geom_unit_circle <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -57,7 +57,10 @@ GeomUnitCircle <- ggproto(
   "GeomUnitCircle", Geom,
   
   required_aes = c(),
-  default_aes = aes(colour = "black", size = 0.5, linetype = 1, alpha = NA),
+  default_aes = aes(
+    colour = "black", alpha = NA,
+    linewidth = 0.5, linetype = 1
+  ),
   
   setup_data = function(data, params) {
     # keep only columns that are constant throughout the data
@@ -87,26 +90,29 @@ GeomUnitCircle <- ggproto(
     # data frame of segments with aesthetics
     data <- cbind(unit_circle, data, row.names = NULL)
     # transform the coordinates into the viewport (iff using `polylineGrob()`)
-    # data <- coord$transform(data, panel_params)
+    data <- coord$transform(data, panel_params)
     
     # return unit circle grob
-    GeomPath$draw_panel(
-      data = data, panel_params = panel_params, coord = coord,
-      na.rm = FALSE
-    )
-    # grob <- grid::polylineGrob(
-    #   data$x, data$y,# id = NULL,
-    #   default.units = "native",
-    #   gp = grid::gpar(
-    #     col = alpha(data$colour, data$alpha),
-    #     fill = alpha(data$colour, data$alpha),
-    #     lwd = data$size * .pt,
-    #     lty = data$linetype
-    #   )
+    # GeomPath$draw_panel(
+    #   data = data, panel_params = panel_params, coord = coord,
+    #   na.rm = FALSE
     # )
-    # grob$name <- grid::grobName(grob, "geom_unit_circle")
-    # grob
+    grob <- grid::polylineGrob(
+      data$x, data$y,# id = NULL,
+      default.units = "native",
+      gp = grid::gpar(
+        col = alpha(data$colour, data$alpha),
+        fill = alpha(data$colour, data$alpha),
+        lwd = (data$linewidth %||% data$size) * .pt,
+        lty = data$linetype
+      )
+    )
+    grob$name <- grid::grobName(grob, "geom_unit_circle")
+    grob
   },
   
-  draw_key = draw_key_blank
+  draw_key = draw_key_blank,
+  
+  non_missing_aes = "size",
+  rename_size = TRUE
 )

@@ -12,7 +12,7 @@
 #' - **`y`**
 #' - `colour`
 #' - `alpha`
-#' - `size`
+#' - `linewidth`
 #' - `linetype`
 #' - `center`, `scale`
 #' - `angle`
@@ -40,7 +40,7 @@
 #'   or isoline, as a proportion of the minimum of the plot width and height.
 #' @template return-layer
 #' @family geom layers
-#' @example inst/examples/ex-geom-isoline-diabetes.r
+#' @example inst/examples/ex-geom-isoline-glass.r
 #' @export
 geom_isoline <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -84,7 +84,7 @@ GeomIsoline <- ggproto(
   default_aes = aes(
     # isoline
     colour = "black", alpha = .8,
-    size = .5, linetype = "dashed",
+    linewidth = .5, linetype = "dashed",
     # mark needs
     center = 0, scale = 1,
     # isoline mark text
@@ -119,6 +119,9 @@ GeomIsoline <- ggproto(
     data$x <- NULL
     data$y <- NULL
     
+    # remove lengthless vectors
+    data <- subset(data, axis_x ^ 2 + axis_y ^ 2 > 0)
+    
     data
   },
   
@@ -130,6 +133,9 @@ GeomIsoline <- ggproto(
     parse = FALSE, check_overlap = FALSE,
     na.rm = TRUE
   ) {
+    
+    # copy `linewidth` to `size` for earlier **ggplot2** versions
+    data$size <- data$linewidth
     
     # prepare for marks
     ranges <- coord$range(panel_params)

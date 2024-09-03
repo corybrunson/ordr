@@ -18,7 +18,7 @@ row and column singular vectors."><!-- mathjax --><script src="https://cdnjs.clo
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
       </span>
     </div>
 
@@ -42,7 +42,13 @@ row and column singular vectors."><!-- mathjax --><script src="https://cdnjs.clo
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
-      </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
+      </ul><ul class="nav navbar-nav navbar-right"><li>
+  <a href="https://github.com/corybrunson/ordr/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
@@ -52,7 +58,7 @@ row and column singular vectors."><!-- mathjax --><script src="https://cdnjs.clo
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Negation of ordination axes</h1>
-    
+    <small class="dont-index">Source: <a href="https://github.com/corybrunson/ordr/blob/HEAD/R/ord-negation.r" class="external-link"><code>R/ord-negation.r</code></a></small>
     <div class="hidden name"><code>negation.Rd</code></div>
     </div>
 
@@ -127,7 +133,6 @@ of <code>1</code>s and <code>-1</code>s stored as a <code>"negate"</code> attrib
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">2.75</span>  0.318 -<span style="color: #BB0000;">0.031</span><span style="color: #BB0000; text-decoration: underline;">6</span>     | <span style="color: #BCBCBC;">4</span> setosa </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">2.73</span> -<span style="color: #BB0000;">0.327</span> -<span style="color: #BB0000;">0.090</span><span style="color: #BB0000; text-decoration: underline;">1</span>     | <span style="color: #BCBCBC;">5</span> setosa </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 145 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 4 | 2 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       PC1     PC2     PC3 ... |   name         center</span>
@@ -153,7 +158,6 @@ of <code>1</code>s and <code>-1</code>s stored as a <code>"negate"</code> attrib
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">2.75</span> -<span style="color: #BB0000;">0.318</span> -<span style="color: #BB0000;">0.031</span><span style="color: #BB0000; text-decoration: underline;">6</span>     | <span style="color: #BCBCBC;">4</span> setosa </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">2.73</span>  0.327 -<span style="color: #BB0000;">0.090</span><span style="color: #BB0000; text-decoration: underline;">1</span>     | <span style="color: #BCBCBC;">5</span> setosa </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 145 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 4 | 2 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       PC1     PC2     PC3 ... |   name         center</span>
@@ -185,7 +189,6 @@ of <code>1</code>s and <code>-1</code>s stored as a <code>"negate"</code> attrib
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">2.75</span> -<span style="color: #BB0000;">0.318</span>  0.031<span style="text-decoration: underline;">6</span>     | <span style="color: #BCBCBC;">4</span> setosa </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">2.73</span>  0.327  0.090<span style="text-decoration: underline;">1</span>     | <span style="color: #BCBCBC;">5</span> setosa </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 145 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 4 | 2 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       PC1     PC2     PC3 ... |   name         center</span>

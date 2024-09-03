@@ -10,9 +10,9 @@
 #' A minimum spanning tree (MST) on the point cloud \eqn{X} is a minimal
 #' connected graph on \eqn{X} with the smallest possible sum of distances (or
 #' dissimilarities) between linked points. These layers call [stats::dist()] to
-#' calculate a distance/dissimilarity object and an engine from either **vegan**
-#' or *mlpack** to calculate the MST. The result is formatted with position
-#' aesthetics readable by [ggplot2::geom_segment()].
+#' calculate a distance/dissimilarity object and an engine from **mlpack**,
+#' **vegan**, or **ade4** to calculate the MST. The result is formatted with
+#' position aesthetics readable by [ggplot2::geom_segment()].
 #'
 #' An MST calculated on `x` and `y` reflects the distances among the points in
 #' \eqn{X} in the reduced-dimension plane of the biplot. In contrast, one
@@ -31,9 +31,9 @@
 
 #' @inheritParams ggplot2::layer
 #' @param engine A single character string specifying the package implementation
-#'   to use; either `"vegan"` or `"mlpack"`.
-#' @param method Passed to [stats::dist()] if `engine` is `"vegan"`, ignored if
-#'   `"mlpack"`.
+#'   to use; `"mlpack"`, `"vegan"`, or `"ade4"`.
+#' @param method Passed to [stats::dist()] if `engine` is `"vegan"` or `"ade4"`,
+#'   ignored if `"mlpack"`.
 #' @template param-stat
 #' @template return-layer
 #' @family stat layers
@@ -41,8 +41,8 @@
 #' @export
 stat_spantree <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
-  engine = "vegan", method = "euclidean",
-  show.legend = NA, inherit.aes = TRUE, check.aes = TRUE, check.param = TRUE,
+  engine = "mlpack", method = "euclidean",
+  show.legend = NA, inherit.aes = TRUE,
   ...
 ) {
   layer(
@@ -53,8 +53,7 @@ stat_spantree <- function(
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
-    check.aes = check.aes,
-    check.param = check.param,
+    check.aes = FALSE,
     params = list(
       engine = engine, method = method,
       na.rm = FALSE,
@@ -73,37 +72,28 @@ StatSpantree <- ggproto(
   required_aes = c("x", "y"),
   
   compute_group = function(data, scales,
-                           engine = "vegan", method = "euclidean") {
+                           engine = "mlpack", method = "euclidean") {
     data_ord <- data[, get_ord_aes(data), drop = FALSE]
     
     # minimum spanning tree engine
-    mst_engines <- c("vegan", "mlpack")
-    all_pkgs <- .packages(all.available = TRUE)
+    mst_engines <- c("mlpack", "vegan", "ade4")
     engine <- match.arg(engine, mst_engines)
+    all_pkgs <- .packages(all.available = TRUE)
     if (! engine %in% all_pkgs) {
-      engine_alt <- mst_engines[which(mst_engines %in% all_pkgs)[[1L]]]
-      if (length(engine_alt) == 1L) {
-        warning("Package {", engine, "} not installed; ",
-                "using {", engine_alt, "} instead.")
-        engine <- engine_alt
-      } else {
+      engine_alt <- mst_engines[mst_engines %in% all_pkgs]
+      if (length(engine_alt) == 0L) {
         stop("No spantree engine installed; requires one of the following:\n",
              "{", paste(mst_engines, collapse = "}, {"), "}")
+      } else {
+        warning("Package {", engine, "} not installed; ",
+                "using {", engine_alt[[1L]], "} instead.")
+        engine <- engine_alt[[1L]]
       }
     }
     
     # minimum spanning tree calculation
     links <- switch(
       engine,
-      vegan = {
-        # distance/dissimilarity data
-        data_dist <- dist(data_ord, method = method)
-        # minimum spanning tree
-        data_mst <- vegan::spantree(data_dist)
-        # pairs of linked points
-        links <- cbind(2:attr(data_dist, "Size"), data_mst$kid)
-        links[! is.na(links[, 1]) & ! is.na(links[, 2]), , drop = FALSE]
-      },
       mlpack = {
         if (method != "euclidean") {
           warning("{", engine, "} engine uses the euclidean distance; ",
@@ -113,6 +103,25 @@ StatSpantree <- ggproto(
         data_emst <- mlpack::emst(data_ord)
         # re-index pairs
         data_emst$output[, 1:2] + 1L
+      },
+      vegan = {
+        # distance/dissimilarity data
+        data_dist <- dist(data_ord, method = method)
+        # minimum spanning tree
+        data_mst <- vegan::spantree(data_dist)
+        # pairs of linked points
+        links <- cbind(2:attr(data_dist, "Size"), data_mst$kid)
+        links[! is.na(links[, 1]) & ! is.na(links[, 2]), , drop = FALSE]
+      },
+      ade4 = {
+        # distance/dissimilarity data
+        data_dist <- dist(data_ord, method = method)
+        # minimum spanning tree
+        data_mst <- ade4::mstree(data_dist)
+        # pairs of linked points
+        links <- matrix(NA_real_, nrow = nrow(data_mst), ncol = ncol(data_mst))
+        links[] <- data_mst
+        links[! is.na(links[, 1]) & ! is.na(links[, 2]), , drop = FALSE]
       }
     )
     
