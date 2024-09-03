@@ -1,3 +1,16 @@
+# TODO: write generics (or functions of recovered components?) to calculate
+# vector components of these constructions, per issue #4
+
+# calculate predictions
+iris_pca <- prcomp(iris[, -5], scale = TRUE)
+new_data <- iris[c(42, 61, 110), -5, drop = FALSE]
+mat_data <- as.matrix(new_data[, rownames(iris_pca$rotation)])
+std_data <- 
+  sweep(sweep(mat_data, 2, iris_pca$center, "-"), 2, iris_pca$scale, "/")
+pred <- std_data %*% iris_pca$rotation[, seq(2)]
+# calculate components?
+
+
 iris[, -5] %>%
   prcomp(scale = TRUE) %>%
   as_tbl_ord() %>%
