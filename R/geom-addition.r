@@ -21,12 +21,11 @@
 #' - `alpha`
 #' - `colour`
 #' - `linetype`
-#' - `size`
-#' - `fill`
+#' - `linewidth`
 #' - `shape`
 #' - `stroke`
-#' - `point_size`
-#' - `point_fill`
+#' - `size`
+#' - `fill`
 #' - `center`, `scale`
 #' - `group`
 #' 
@@ -135,8 +134,8 @@ GeomAddition <- ggproto(
   required_aes = c(),
   
   default_aes = aes(
-    colour = "black", alpha = NA, size = .5, linetype = 1L, fill = NA,
-    shape = 19L, stroke = .5, point_size = 1.5, point_fill = NA,
+    colour = "black", alpha = .5, linewidth = .5, linetype = 1L,
+    shape = 19L, stroke = .5, size = 1.5, fill = NA,
     center = 0, scale = 1
   ),
   
@@ -179,7 +178,6 @@ GeomAddition <- ggproto(
     data, panel_params, coord,
     new_data = NULL, type = c("centroid", "sequence"),
     arrow = default_arrow, lineend = "round", linejoin = "mitre",
-    rule = "evenodd",
     na.rm = FALSE
   ) {
     
@@ -241,18 +239,15 @@ GeomAddition <- ggproto(
         cent_data,
         xend = 0, yend = 0, x = x * n_coef, y = y * n_coef
       )
-      cent_data$size <- cent_data$point_size
-      cent_data$fill <- cent_data$point_fill
       cent_data$linetype <- NULL
     }
     
     # list of grobs
     grobs <- list()
-    # convex hull of summand vectors
+    # convex hulls of summand vectors
     if (! is.null(hull_data)) {
-      grobs <- c(grobs, list(GeomPolygon$draw_panel(
-        data = hull_data, panel_params = panel_params, coord = coord,
-        rule = rule
+      grobs <- c(grobs, list(GeomPath$draw_panel(
+        data = hull_data, panel_params = panel_params, coord = coord
       )))
     }
     # centroids of summand vectors
