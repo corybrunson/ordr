@@ -73,7 +73,6 @@ Other methods for singular value decomposition-based techniques:
 \code{\link{methods-lda}},
 \code{\link{methods-lra}},
 \code{\link{methods-mca}},
-\code{\link{methods-princomp}},
 \code{\link{methods-svd}}
 
 Other models from the stats package: 

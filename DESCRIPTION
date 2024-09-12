@@ -54,7 +54,7 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/corybrunson/ordr, https://corybrunson.github.io/ordr/
 BugReports: https://github.com/corybrunson/ordr/issues
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)
 Collate:
     'aaa-.r'
