@@ -23,7 +23,7 @@ NULL
 
 #' @rdname methods-princomp
 #' @export
-as_tbl_ord.princomp <- ordr:::as_tbl_ord_default
+as_tbl_ord.princomp <- as_tbl_ord_default
 
 #' @rdname methods-princomp
 #' @export
