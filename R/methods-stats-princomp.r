@@ -28,8 +28,10 @@ as_tbl_ord.princomp <- ordr:::as_tbl_ord_default
 #' @rdname methods-princomp
 #' @export
 recover_rows.princomp <- function(x) {
-  matrix(nrow = 0, ncol = ncol(x[["scores"]]),
-         dimnames = list(NULL, colnames(x[["scores"]])))
+  matrix(
+    nrow = 0, ncol = ncol(x[["scores"]]),
+    dimnames = list(NULL, colnames(x[["scores"]]))
+  )
 }
 
 #' @rdname methods-princomp
