@@ -23,13 +23,13 @@ NULL
 
 #' @rdname methods-princomp
 #' @export
-as_tbl_ord.princomp <- as_tbl_ord_default
+as_tbl_ord.princomp <- ordr:::as_tbl_ord_default
 
 #' @rdname methods-princomp
 #' @export
 recover_rows.princomp <- function(x) {
-  matrix(nrow = 0, ncol = ncol(x[["loadings"]]),
-         dimnames = list(NULL, colnames(x[["loadings"]])))
+  matrix(nrow = 0, ncol = ncol(x[["scores"]]),
+         dimnames = list(NULL, colnames(x[["scores"]])))
 }
 
 #' @rdname methods-princomp
@@ -66,17 +66,12 @@ recover_supp_rows.princomp <- function(x) {
 #' @rdname methods-princomp
 #' @export
 recover_aug_rows.princomp <- function(x) {
-  name <- rownames(x$loadings)
-  res <- if (is.null(name)) {
-    matrix(nrow = nrow(x$loadings), ncol = 0)
-  } else {
-    tibble(name = name)
-  }
+  res <- tibble_pole(nrow = 0L)
   
   # scores as supplementary points
   name <- rownames(x$scores)
   res_sup <- if (is.null(name)) {
-    matrix(nrow = nrow(x$loadings), ncol = 0)
+    tibble_pole(nrow = nrow(x$scores))
   } else {
     tibble(name = name)
   }
@@ -96,10 +91,12 @@ recover_aug_cols.princomp <- function(x) {
   } else {
     tibble(name = name)
   }
-  bind_cols(res, tibble(
+  res <- bind_cols(res, tibble(
     center = x[["center"]],
     scale = x[["scale"]]
   ))
+  res$.element <- "active"
+  res
 }
 
 #' @rdname methods-princomp
