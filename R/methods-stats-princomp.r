@@ -16,14 +16,14 @@
 #' @include ord-tbl.r
 #' @template param-methods
 #' @template return-methods
-#' @family methods for eigendecomposition-based techniques
+#' @family methods for eigen-decomposition-based techniques
 #' @family models from the stats package
 #' @example inst/examples/ex-methods-princomp-iris.r
 NULL
 
 #' @rdname methods-princomp
 #' @export
-as_tbl_ord.princomp <- ordr:::as_tbl_ord_default
+as_tbl_ord.princomp <- as_tbl_ord_default
 
 #' @rdname methods-princomp
 #' @export
