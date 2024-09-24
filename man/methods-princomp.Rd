@@ -77,6 +77,11 @@ get_cols(iris_pca)
 (iris_pca <- augment_ord(iris_pca))
 }
 \seealso{
+Other methods for eigen-decomposition-based techniques: 
+\code{\link{methods-cmds}},
+\code{\link{methods-eigen}},
+\code{\link{methods-factanal}}
+
 Other models from the stats package: 
 \code{\link{methods-cancor}},
 \code{\link{methods-cmds}},
@@ -88,5 +93,5 @@ Other models from the stats package:
 \author{
 Emily Paul, John Gracey
 }
-\concept{methods for eigenvalue decomposition-based techniques}
+\concept{methods for eigen-decomposition-based techniques}
 \concept{models from the stats package}
