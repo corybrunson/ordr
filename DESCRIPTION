@@ -5,7 +5,9 @@ Authors@R: c(
   person("Jason Cory", "Brunson", email = "cornelioid@gmail.com",
     role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3126-9494")),
   person("Emily", "Paul", email = "erpb.71@gmail.com",
-    role = "ctb")
+    role = "ctb"),
+  person("John", "Gracey", email = "jbgracey6@gmail.com",
+    role = "aut")
   )
 Description: Ordination comprises several multivariate exploratory and
     explanatory techniques with theoretical foundations in geometric data
@@ -54,7 +56,7 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/corybrunson/ordr, https://corybrunson.github.io/ordr/
 BugReports: https://github.com/corybrunson/ordr/issues
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)
 Collate:
     'aaa-.r'
