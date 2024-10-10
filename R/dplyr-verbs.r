@@ -119,12 +119,12 @@ cbind_factor <- function(.data, ..., .matrix, elements = "all") {
     elts_rows <- ann_fac$.element == elements
     if (! any(elts_rows)) {
       warning("No ", elements, " elements found.")
-      tibble_pole(nrow = nrow(ann_fac))
+      tibble(.rows = nrow(ann_fac))
     } else {
       n_above <- min(which(elts_rows)) - 1L
       n_below <- min(which(rev(elts_rows))) - 1L
-      tbl_above <- if (n_above > 1L) tibble_pole(nrow = n_above)
-      tbl_below <- if (n_below > 1L) tibble_pole(nrow = n_below)
+      tbl_above <- if (n_above > 1L) tibble(.rows = n_above)
+      tbl_below <- if (n_below > 1L) tibble(.rows = n_below)
       bind_rows(tbl_above, ..., tbl_below)
     }
   }

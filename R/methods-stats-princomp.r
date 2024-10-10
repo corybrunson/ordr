@@ -68,12 +68,12 @@ recover_supp_rows.princomp <- function(x) {
 #' @rdname methods-princomp
 #' @export
 recover_aug_rows.princomp <- function(x) {
-  res <- tibble_pole(nrow = 0L)
+  res <- tibble(.rows = 0L)
   
   # scores as supplementary points
   name <- rownames(x$scores)
   res_sup <- if (is.null(name)) {
-    tibble_pole(nrow = nrow(x$scores))
+    tibble(.rows = nrow(x$scores))
   } else {
     tibble(name = name)
   }
@@ -89,7 +89,7 @@ recover_aug_rows.princomp <- function(x) {
 recover_aug_cols.princomp <- function(x) {
   name <- rownames(x[["loadings"]])
   res <- if (is.null(name)) {
-    tibble_pole(nrow(x[["loadings"]]))
+    tibble(.rows = nrow(x[["loadings"]]))
   } else {
     tibble(name = name)
   }

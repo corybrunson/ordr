@@ -44,7 +44,7 @@ recover_conference.svd_ord <- function(x) {
 recover_aug_rows.svd_ord <- function(x) {
   name <- rownames(x[["u"]])
   if (is.null(name)) {
-    tibble_pole(nrow(x[["u"]]))
+    tibble(.rows = nrow(x[["u"]]))
   } else {
     tibble(name = name)
   }
@@ -55,7 +55,7 @@ recover_aug_rows.svd_ord <- function(x) {
 recover_aug_cols.svd_ord <- function(x) {
   name <- rownames(x[["v"]])
   if (is.null(name)) {
-    tibble_pole(nrow(x[["v"]]))
+    tibble(.rows = nrow(x[["v"]]))
   } else {
     tibble(name = name)
   }
