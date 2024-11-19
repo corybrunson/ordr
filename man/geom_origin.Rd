@@ -2,19 +2,29 @@
 % Please edit documentation in R/geom-origin.r
 \name{geom_origin}
 \alias{geom_origin}
-\title{Crosshairs or circle at the origin}
+\alias{geom_unit_circle}
+\title{Marker or unit circle at the origin}
 \usage{
 geom_origin(
   mapping = NULL,
   data = NULL,
-  stat = "identity",
-  position = "identity",
   marker = "crosshairs",
   radius = unit(0.04, "snpc"),
   ...,
   na.rm = FALSE,
   show.legend = NA,
-  inherit.aes = TRUE
+  inherit.aes = FALSE
+)
+
+geom_unit_circle(
+  mapping = NULL,
+  data = NULL,
+  segments = 60,
+  scale.factor = 1,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = FALSE
 )
 }
 \arguments{
@@ -38,16 +48,6 @@ the plot data. The return value must be a \code{data.frame}, and
 will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
-\item{stat}{The statistical transformation to use on the data for this
-layer, either as a \code{ggproto} \code{Geom} subclass or as a string naming the
-stat stripped of the \code{stat_} prefix (e.g. \code{"count"} rather than
-\code{"stat_count"})}
-
-\item{position}{Position adjustment, either as a string naming the adjustment
-(e.g. \code{"jitter"} to use \code{position_jitter}), or the result of a call to a
-position adjustment function. Use the latter if you need to change the
-settings of the adjustment.}
-
 \item{marker}{The symbol to be drawn at the origin; matched to \code{"crosshairs"}
 or \code{"circle"}.}
 
@@ -68,13 +68,20 @@ display.}
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
+
+\item{segments}{The number of segments to be used in drawing the circle.}
+
+\item{scale.factor}{The circle radius; should remain at its default value 1
+or passed the same value as \code{\link[=ggbiplot]{ggbiplot()}}. (This is an imperfect fix that
+may be changed in a future version.)}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
 \code{geom_origin()} renders a symbol, either a set of crosshairs or
-a circle, at the origin.
+a circle, at the origin. \code{geom_unit_circle()} renders the unit circle,
+centered at the origin with radius 1.
 }
 \section{Biplot layers}{
 
@@ -92,15 +99,42 @@ points for rows and arrows for columns.
 \section{Aesthetics}{
 
 \code{geom_origin()} accepts no aesthetics.
+\code{geom_unit_circle()} understands the following aesthetics (none required):
+\itemize{
+\item \code{alpha}
+\item \code{colour}
+\item \code{linetype}
+\item \code{size}
+}
 }
 
+\examples{
+# principal components analysis of glass composition measurements
+glass[, c(5L, 7L, 8L, 10L, 11L)] \%>\%
+  princomp(cor = TRUE) \%>\%
+  as_tbl_ord() \%>\%
+  cbind_rows(site = glass$Site, form = glass$Form) \%>\%
+  augment_ord() \%>\%
+  print() -> glass_pca
+
+# note that column standard coordinates are unit vectors
+rowSums(get_cols(glass_pca) ^ 2)
+
+# plot column standard coordinates with a unit circle underlaid
+glass_pca \%>\%
+  ggbiplot(aes(label = name), sec.axes = "cols") +
+  theme_biplot() +
+  geom_rows_point(aes(color = site, shape = form), alpha = .5) +
+  geom_unit_circle(alpha = .5, scale.factor = 3) +
+  geom_cols_vector() +
+  geom_cols_text_radiate()
+}
 \seealso{
 Other geom layers: 
 \code{\link{geom_axis}()},
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_text_radiate}()},
-\code{\link{geom_unit_circle}()},
 \code{\link{geom_vector}()}
 }
 \concept{geom layers}
