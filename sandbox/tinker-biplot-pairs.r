@@ -272,9 +272,11 @@ iris_pca_long |>
   ) ->
   iris_pca_pairs
 iris_pca_pairs |> 
+  # dplyr::distinct(.axis_x, .axis_y)
   ggbiplot(aes(x = .value_x, y = .value_y)) +
   # NOTE: `coord_fixed()` doesn't support free scales.
-  facet_grid(rows = vars(.axis_y), cols = vars(.axis_x)) +
+  # facet_grid(rows = vars(.axis_y), cols = vars(.axis_x)) +
+  facet_ord(rows = vars(.axis_y), cols = vars(.axis_x)) +
   theme() +
   geom_abline(slope = 1) +
   geom_rows_point(aes(color = Species, shape = Species)) +
@@ -291,160 +293,6 @@ iris_pca_pairs |>
 # QUESTION: Can this be accomplished inside a new `Facet*`, e.g. that can then
 # be overridden by `+ facet_null()` to retrieve the usual biplot? It would need
 # to use `ord_aes()`, maybe with an additional `num_axes` parameter.
-
-FacetPairs <- ggproto(
-  "FacetPairs", FacetGrid,
-  
-  compute_layout = function(self, data, params) {
-    
-    # list of data frames: [[1]] plot data, [[2]] individual layer data
-    print("FacetPairs$compute_layout(data = ?)")
-    print(data)
-    print("FacetPairs$compute_layout(params = ?)")
-    print(params)
-    
-    # NOTE: `data` is fortified data,
-    # so internally pass coordinates to `params`
-    # (either `x` and `y` or all `..coord[0-9]+`)
-    # and throw an error if these cannot be identified
-    # (since the user should be passing an ordination object)
-    
-    # use `ord_aes()` output if provided, otherwise `x` and `y` pairs
-    dims <- recover_coord(data)
-    # restrict to explicitly specified dimensions, if any
-    if (! is.null(params$dims)) {
-      if (is.numeric(params$dims)) {
-        dims <- dims[intersect(seq_along(dims), params$dims)]
-      } else if (is.character(params$dims)) {
-        dims <- dims[match(params$dims, dims)]
-      } else {
-        warning("`dims` is neither numeric nor character and will be ignored.")
-      }
-    }
-    
-    
-    
-    rows <- params$rows
-    cols <- params$cols
-    ggplot2:::check_facet_vars(names(rows), names(cols),
-                               name = snake_class(self))
-    dups <- intersect(names(rows), names(cols))
-    if (length(dups) > 0) {
-      cli::cli_abort(
-        c(
-          "Faceting variables can only appear in {.arg rows} or {.arg cols}.\n", 
-          i = "Duplicated variables: {.val {dups}}"
-        ),
-        call = call2(snake_class(self))
-      )
-    }
-    base_rows <- combine_vars(data, params$plot_env, rows, drop = params$drop)
-    if (!params$as.table) {
-      rev_order <- function(x) factor(x, levels = rev(ulevels(x)))
-      base_rows[] <- lapply(base_rows, rev_order)
-    }
-    base_cols <- combine_vars(data, params$plot_env, cols, drop = params$drop)
-    base <- ggplot2:::df.grid(base_rows, base_cols)
-    if (nrow(base) == 0) {
-      res <- ggplot2:::data_frame0(PANEL = factor(1L), ROW = 1L, COL = 1L, 
-                                   SCALE_X = 1L, SCALE_Y = 1L)
-      print(res)
-      return(res)
-    }
-    base <- ggplot2:::reshape_add_margins(base, list(names(rows), names(cols)), 
-                                          params$margins)
-    base <- ggplot2:::unique0(base)
-    panel <- ggplot2:::id(base, drop = TRUE)
-    panel <- factor(panel, levels = seq_len(attr(panel, "n")))
-    rows <- if (!length(names(rows))) rep(1L, length(panel)) else
-      ggplot2:::id(base[names(rows)], drop = TRUE)
-    cols <- if (!length(names(cols))) rep(1L, length(panel)) else
-      ggplot2:::id(base[names(cols)], drop = TRUE)
-    panels <- ggplot2:::data_frame0(PANEL = panel, ROW = rows, COL = cols, base)
-    panels <- panels[order(panels$PANEL), , drop = FALSE]
-    rownames(panels) <- NULL
-    panels$SCALE_X <- if (params$free$x) panels$COL else 1L
-    panels$SCALE_Y <- if (params$free$y) panels$ROW else 1L
-    print(panels)
-    panels
-  }
-)
-
-facet_pairs <- function(dims = NULL,
-                        # `facet_grid()`
-                        rows = NULL, cols = NULL, scales = "fixed",
-                        space = "fixed", shrink = TRUE,
-                        labeller = "label_value", as.table = TRUE,
-                        switch = NULL, drop = TRUE, margins = FALSE,
-                        axes = "margins", axis.labels = "all",
-                        facets = rlang:::deprecated()) {
-  # `facets` is deprecated and renamed to `rows`
-  if (lifecycle::is_present(facets)) {
-    deprecate_warn0("2.2.0", "facet_grid(facets)", "facet_grid(rows)")
-    rows <- facets
-  }
-  
-  # Should become a warning in a future release
-  if (is.logical(cols)) {
-    margins <- cols
-    cols <- NULL
-  }
-  
-  scales <- rlang::arg_match0(scales %||%
-                                "fixed", c("fixed", "free_x", "free_y", "free"))
-  free <- list(
-    x = any(scales %in% c("free_x", "free")),
-    y = any(scales %in% c("free_y", "free"))
-  )
-  
-  space <- rlang::arg_match0(space %||%
-                               "fixed", c("fixed", "free_x", "free_y", "free"))
-  space_free <- list(
-    x = any(space %in% c("free_x", "free")),
-    y = any(space %in% c("free_y", "free"))
-  )
-  
-  draw_axes <- rlang::arg_match0(axes, c("margins", "all_x", "all_y", "all"))
-  draw_axes <- list(
-    x = any(draw_axes %in% c("all_x", "all")),
-    y = any(draw_axes %in% c("all_y", "all"))
-  )
-  
-  # Omitting labels is special-cased internally, so even when no internal axes
-  # are to be drawn, register as labelled.
-  axis_labels <- rlang::arg_match0(axis.labels,
-                                   c("margins", "all_x", "all_y", "all"))
-  axis_labels <- list(
-    x = !draw_axes$x || any(axis_labels %in% c("all_x", "all")),
-    y = !draw_axes$y || any(axis_labels %in% c("all_y", "all"))
-  )
-  
-  if (!is.null(switch)) {
-    rlang::arg_match0(switch, c("both", "x", "y"))
-  }
-  
-  facets_list <- ggplot2:::grid_as_facets_list(rows, cols)
-  
-  # Check for deprecated labellers
-  labeller <- ggplot2:::check_labeller(labeller)
-  
-  ggproto(
-    NULL, FacetPairs,
-    shrink = shrink,
-    params = list(
-      dims = dims,
-      # `facet_grid()`
-      rows = facets_list$rows, cols = facets_list$cols, margins = margins,
-      free = free, space_free = space_free, labeller = labeller,
-      as.table = as.table, switch = switch, drop = drop,
-      draw_axes = draw_axes, axis_labels = axis_labels
-    )
-  )
-}
-
-ggplot(mtcars[seq(6), ], aes(x = mpg, y = hp)) +
-  facet_pairs(cols = vars(cyl)) +
-  geom_point()
 
 # using {ggforce}
 
@@ -476,18 +324,38 @@ iris_pca |>
 
 # experimental `FacetPairs` adapted from `FacetMatrix`
 iris_pca |> 
-  ggbiplot(sec.axes = "cols", scale.factor = 2,
-           aes(x = .panel_x, y = .panel_y,
-               color = Species, fill = Species, linetype = name)) +
-  # FIXME: legend is screwed up
+  ggbiplot(
+    # sec.axes = "cols", scale.factor = 2,
+    # TODO: enable `ord_aes()` here;
+    # `facet_pairs()` should not depend on `.panel_*` hence break when removed
+    aes(
+      x = .panel_x, y = .panel_y,
+      color = Species, fill = Species, linetype = name
+    )
+    # NOTE: no need to do this since `dims` can handle any number of dimensions
+    # ord_aes(iris_pca, color = Species, fill = Species, linetype = name)
+  ) +
+  # FIXME: legend screws up when `geom_autodensity()` is used
   geom_rows_point() +
   geom_cols_vector() +
+  # cannot combine `coord_equal()` with `scales = "free"`
+  # coord_cartesian() +
   # preserves scales based on 2 variables at a time
-  ggforce::geom_autodensity() +
+  # ggforce::geom_autodensity() +
   # geom_density2d() +
   facet_pairs(
-    dims = vars(tidyselect::starts_with("PC")),
-    # FIXME: `scales = "fixed"` fails to fix scales across rows and columns
+    # TODO: keep `dims`, but apply to `aes(x = 1, y = 2)` or `ord_aes()`
+    # CURRENT
+    # dims = vars(tidyselect::starts_with("PC")),
+    dims = 1:3,
+    # FIXME: want to have 2 options, both with same resolution across all axes:
+    # 1. fixed-size panels, which leaves empty space for later dimensions
+    #    (below settings fail to enforce constant resolution):
+    # scales = "fixed", space = "fixed"
+    # scales = "free", space = "fixed"
+    # 2. variable-size panels, to minimize empty space:
+    # scales = "free", space = "free"
+    # actual experiment:
     scales = "fixed", space = "fixed",
     # must remember order of layers
     layer.lower = c(1, 2), layer.diag = 3, layer.upper = 1,
