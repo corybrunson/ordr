@@ -8,6 +8,11 @@ The 'axis' and 'isoline' geoms hit trouble when one or more points lay at the or
 
 Multiple harmonizers are now available for scaling secondary axes. That recommended by Gower, Gardner--Lubbe, and Le Roux (2011) is the default, but the user can still specify a numeric scale instead.
 
+## GDA-geared coordinate systems
+
+Two new coordinate systems provide control over the aspect ratio of the plotting window without compromising that of the (artificial) coordinate axes:
+`GeomRect` (alias `GeomSquare`) extends `GeomFixed` with an `aspect_ratio` parameter for the plotting window, while `GeomBiplot` removes the `ratio` parameter and forces the coordinate axes to have aspect ratio 1.
+
 # ordr 0.1.1
 
 ## `linewidth` aesthetic (breaking change)
