@@ -56,7 +56,7 @@ recover_conference.cmds_ord <- function(x) {
 recover_aug_rows.cmds_ord <- function(x) {
   name <- rownames(x$points)
   res <- if (is.null(name)) {
-    tibble_pole(nrow(x$x))
+    tibble(.rows = nrow(x$x))
   } else {
     tibble(name = name)
   }
@@ -68,7 +68,7 @@ recover_aug_rows.cmds_ord <- function(x) {
 recover_aug_cols.cmds_ord <- function(x) {
   name <- rownames(x$points)
   res <- if (is.null(name)) {
-    tibble_pole(ncol(x$x))
+    tibble(.rows = ncol(x$x))
   } else {
     tibble(name = name)
   }
