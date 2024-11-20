@@ -50,7 +50,7 @@ recover_conference.lra <- function(x) {
 recover_aug_rows.lra <- function(x) {
   name <- rownames(x[["row.coords"]])
   res <- if (is.null(name)) {
-    tibble_pole(nrow(x[["row.coords"]]))
+    tibble(.rows = nrow(x[["row.coords"]]))
   } else {
     tibble(name = name)
   }
@@ -63,7 +63,7 @@ recover_aug_rows.lra <- function(x) {
 recover_aug_cols.lra <- function(x) {
   name <- rownames(x[["column.coords"]])
   res <- if (is.null(name)) {
-    tibble_pole(nrow(x[["column.coords"]]))
+    tibble(.rows = nrow(x[["column.coords"]]))
   } else {
     tibble(name = name)
   }

@@ -40,10 +40,6 @@ method_classes <- function(generic.function) {
   )
 }
 
-tibble_pole <- function(nrow) {
-  as_tibble(matrix(nrow = nrow, ncol = 0))
-}
-
 factor_coord <- function(x) {
   if (any(duplicated(x))) stop("Duplicated coordinates detected.")
   factor(x, levels = x)

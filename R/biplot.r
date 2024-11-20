@@ -220,6 +220,8 @@ ggbiplot <- function(
   p$coordinates <- coord_equal(
     xlim = xlim, ylim = ylim, expand = expand, clip = clip
   )
+  # this is the biplot default; prevent message when modified
+  p$coordinates$default <- TRUE
   
   # assign default axis labels
   if (axis.percents) {

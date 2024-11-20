@@ -63,7 +63,7 @@ recover_supp_rows.mca <- function(x) {
 recover_aug_rows.mca <- function(x) {
   name <- rownames(x$fs)
   res <- if (is.null(name)) {
-    tibble_pole(nrow(x$fs))
+    tibble(.rows = nrow(x$fs))
   } else {
     tibble(name = name)
   }
@@ -71,7 +71,7 @@ recover_aug_rows.mca <- function(x) {
   # row coordinates as supplementary points
   name <- rownames(x$rs)
   res_sup <- if (is.null(name)) {
-    tibble_pole(nrow(x$rs))
+    tibble(.rows = nrow(x$rs))
   } else {
     tibble(name = name)
   }
@@ -88,7 +88,7 @@ recover_aug_cols.mca <- function(x) {
   name <- rownames(x$cs)
   # introduce `.factor` and `.level` according to `abbrev`
   if (is.null(name)) {
-    tibble_pole(nrow(x$cs))
+    tibble(.rows = nrow(x$cs))
   } else if (is.null(attr(rownames(x$cs), "names"))) {
     # only add `.factor` and `.level` if names are unambiguous
     level_ambig <- any(grepl("\\..*\\.", rownames(x$cs)))

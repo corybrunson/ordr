@@ -67,7 +67,7 @@ recover_supp_rows.factanal <- function(x) {
 recover_aug_rows.factanal <- function(x) {
   name <- rownames(x[["loadings"]])
   res <- if (is.null(name)) {
-    tibble_pole(nrow(x[["loadings"]]))
+    tibble(.rows = nrow(x[["loadings"]]))
   } else {
     tibble(name = name)
   }
@@ -75,7 +75,7 @@ recover_aug_rows.factanal <- function(x) {
   
   # factor scores as supplementary points
   res_sup <- if (is.null(rownames(x[["scores"]]))) {
-    tibble_pole(x[["n.obs"]])
+    tibble(.rows = x[["n.obs"]])
   } else {
     tibble(name = rownames(x[["scores"]]))
   }
@@ -90,7 +90,7 @@ recover_aug_rows.factanal <- function(x) {
 recover_aug_cols.factanal <- function(x) {
   name <- rownames(x[["loadings"]])
   res <- if (is.null(name)) {
-    tibble_pole(nrow(x[["loadings"]]))
+    tibble(.rows = nrow(x[["loadings"]]))
   } else {
     tibble(name = name)
   }

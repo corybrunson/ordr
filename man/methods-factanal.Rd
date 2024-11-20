@@ -90,7 +90,8 @@ swiss_fa \%>\%
 \seealso{
 Other methods for eigen-decomposition-based techniques: 
 \code{\link{methods-cmds}},
-\code{\link{methods-eigen}}
+\code{\link{methods-eigen}},
+\code{\link{methods-princomp}}
 
 Other models from the stats package: 
 \code{\link{methods-cancor}},
