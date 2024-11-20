@@ -63,9 +63,6 @@
 #'   one matrix factor. **NB:** This option is only implemented for linear
 #'   techniques (ED, SVD, & PCA).
 #' @inheritParams ggplot2::coord_equal
-#' @param scale_ratio Aspect ratio of plot window limits, expressed as `y / x`.
-#'   `NULL` will be ignored, and the value `1` will yield a square plotting
-#'   window.
 #' @param axis.percents Whether to concatenate default axis labels with inertia
 #'   percentages.
 #' @param sec.axes Matrix factor character to specify a secondary set of axes.
@@ -89,7 +86,6 @@
 ggbiplot <- function(
     ordination = NULL, mapping = aes(x = 1, y = 2), axis.type = "interpolative",
     xlim = NULL, ylim = NULL, expand = TRUE, clip = "on",
-    scale_ratio = NULL,
     axis.percents = TRUE, sec.axes = NULL, scale.factor = "inertia",
     scale_rows = NULL, scale_cols = NULL,
     ...

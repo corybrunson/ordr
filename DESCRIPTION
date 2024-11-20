@@ -62,6 +62,7 @@ Collate:
     'aaa-.r'
     'biplot-key.r'
     'biplot.r'
+    'coord-rect.r'
     'data.r'
     'dplyr-verbs.r'
     'utils.r'
