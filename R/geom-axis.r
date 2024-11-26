@@ -50,6 +50,7 @@ geom_axis <- function(
   axis_labels = TRUE, axis_ticks = TRUE, axis_text = TRUE,
   by = NULL, num = NULL,
   tick_length = .025, text_dodge = .03, label_dodge = .03,
+  offset = NULL,
   ...,
   parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
@@ -69,6 +70,7 @@ geom_axis <- function(
       tick_length = tick_length,
       text_dodge = text_dodge,
       label_dodge = label_dodge,
+      offset = offset,
       parse = parse,
       check_overlap = check_overlap,
       na.rm = na.rm,
@@ -154,6 +156,7 @@ GeomAxis <- ggproto(
     axis_labels = TRUE, axis_ticks = TRUE, axis_text = TRUE,
     by = NULL, num = NULL,
     tick_length = .025, text_dodge = .03, label_dodge = .03,
+    offset = NULL,
     parse = FALSE, check_overlap = FALSE,
     na.rm = FALSE
   ) {
@@ -163,6 +166,9 @@ GeomAxis <- ggproto(
     
     # copy `linewidth` to `size` for earlier **ggplot2** versions
     data$size <- data$linewidth
+    
+    if (! is.null(offset) && ! is.numeric(offset))
+      warning("Cannot yet interpret non-numeric `offset` instructions.")
     
     if (axis_ticks || axis_text) {
       # prepare for marks
@@ -179,13 +185,13 @@ GeomAxis <- ggproto(
     # axis grobs: combination of line grobs
     if (any(! data$vline)) {
       grobs <- c(grobs, list(GeomAbline$draw_panel(
-        data = unique(data[! data$vline, , drop = FALSE]),
+        data = offset_axes(unique(data[! data$vline, , drop = FALSE]), offset),
         panel_params = panel_params, coord = coord
       )))
     }
     if (any(data$vline)) {
       grobs <- c(grobs, list(GeomVline$draw_panel(
-        data = unique(data[data$vline, , drop = FALSE]),
+        data = offset_axes(unique(data[data$vline, , drop = FALSE]), offset),
         panel_params = panel_params, coord = coord
       )))
     }
@@ -217,7 +223,8 @@ GeomAxis <- ggproto(
       
       # tick mark grobs
       grobs <- c(grobs, list(GeomSegment$draw_panel(
-        data = tick_data, panel_params = panel_params, coord = coord
+        data = offset_axes(tick_data, offset),
+        panel_params = panel_params, coord = coord
       )))
       
     }
@@ -252,7 +259,8 @@ GeomAxis <- ggproto(
       
       # mark text grobs
       grobs <- c(grobs, list(GeomText$draw_panel(
-        data = text_data, panel_params = panel_params, coord = coord,
+        data = offset_axes(text_data, offset),
+        panel_params = panel_params, coord = coord,
         parse = parse,
         check_overlap = check_overlap,
         na.rm = na.rm
@@ -293,7 +301,7 @@ GeomAxis <- ggproto(
       
       # axis label grobs
       grobs <- c(grobs, list(GeomText$draw_panel(
-        data = label_data,
+        data = offset_axes(label_data, offset),
         panel_params = panel_params, coord = coord
       )))
       
@@ -307,3 +315,32 @@ GeomAxis <- ggproto(
   # update this to include segment and letter in key squares
   draw_key = draw_key_abline
 )
+
+offset_axes <- function(data, offset) {
+  if (is.null(offset)) return(data)
+  
+  # offset vector
+  offset_y <- 1 / sqrt(data$slope^2 + 1) * offset
+  offset_x <- -data$slope * offset_y
+  
+  # offset intercepts
+  data$intercept <- data$intercept + offset / cos(atan(data$slope))
+  data$xintercept <- data$xintercept - offset / sin(atan(data$slope))
+  
+  # positional variables to offset
+  offset_cols <- lapply(
+    c("x", "y"),
+    \(xy) c(
+      paste0("axis_", xy),
+      paste0(xy, c("", "end", "tick"))
+    )
+  ) |> 
+    lapply(intersect, names(data)) |> 
+    stats::setNames(c("x", "y"))
+  
+  # offset positional variables
+  for (col in offset_cols$x) data[[col]] <- data[[col]] + offset_x
+  for (col in offset_cols$y) data[[col]] <- data[[col]] + offset_y
+  
+  data
+}

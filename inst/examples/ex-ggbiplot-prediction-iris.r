@@ -11,23 +11,17 @@ iris_pca %>%
   geom_rows_point(aes(color = Species), alpha = .5) +
   ggtitle("Predictive biplot of Anderson iris measurements")
 
-# with only one calibrated axis
+# with two calibrated axes
 iris_pca %>%
   augment_ord() %>%
   ggbiplot(axis.type = "predictive") +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  geom_cols_vector() +
   geom_cols_axis(
-    # TODO: allow a character vector to be passed to `subset`
-    subset = 2L,
+    subset = c(2, 4),
     aes(label = name, center = center, scale = scale),
-    # TODO: limit the axis to values taken by data elements
-    # (allow parameter to also accept two extremum values)
-    axis_limits = "range",
-    # TODO: offset until a sufficient margin between data points is available
-    # (allow parameter to also accept an orthogonal distance from the origin)
-    offset_margin = 0.3
+    offset = c(3, 2.8)
   ) +
   geom_rows_point(aes(color = Species), alpha = .5) +
+  expand_limits(x = c(-4, NA), y = c(NA, 3.5)) +
   ggtitle("Predictive biplot of Anderson iris measurements")

@@ -17,6 +17,7 @@ geom_axis(
   tick_length = 0.025,
   text_dodge = 0.03,
   label_dodge = 0.03,
+  offset = NULL,
   ...,
   parse = FALSE,
   check_overlap = FALSE,
