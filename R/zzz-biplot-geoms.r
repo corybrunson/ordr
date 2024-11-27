@@ -30,6 +30,7 @@
 #' @inheritParams ggrepel::geom_text_repel
 #' @inheritParams ggrepel::geom_label_repel
 #' @inheritParams geom_axis
+#' @inheritParams geom_rule
 #' @inheritParams geom_lineranges
 #' @inheritParams geom_pointranges
 #' @inheritParams geom_isoline
@@ -752,6 +753,100 @@ geom_cols_axis <- function(
       axis_labels = axis_labels,
       axis_ticks = axis_ticks,
       axis_text = axis_text,
+      by = by,
+      num = num,
+      tick_length = tick_length,
+      text_dodge = text_dodge,
+      label_dodge = label_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_rows_rule <- function(
+    mapping = NULL,
+    data = NULL,
+    stat = "identity",
+    position = "identity",
+    rule_labels = TRUE,
+    rule_ticks = TRUE,
+    rule_text = TRUE,
+    by = NULL,
+    num = NULL,
+    tick_length = 0.025,
+    text_dodge = 0.03,
+    label_dodge = 0.03,
+    ...,
+    parse = FALSE,
+    check_overlap = FALSE,
+    na.rm = FALSE,
+    show.legend = NA,
+    inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = rows_stat(stat),
+    geom = GeomRule,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      rule_labels = rule_labels,
+      rule_ticks = rule_ticks,
+      rule_text = rule_text,
+      by = by,
+      num = num,
+      tick_length = tick_length,
+      text_dodge = text_dodge,
+      label_dodge = label_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_cols_rule <- function(
+    mapping = NULL,
+    data = NULL,
+    stat = "identity",
+    position = "identity",
+    rule_labels = TRUE,
+    rule_ticks = TRUE,
+    rule_text = TRUE,
+    by = NULL,
+    num = NULL,
+    tick_length = 0.025,
+    text_dodge = 0.03,
+    label_dodge = 0.03,
+    ...,
+    parse = FALSE,
+    check_overlap = FALSE,
+    na.rm = FALSE,
+    show.legend = NA,
+    inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = cols_stat(stat),
+    geom = GeomRule,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      rule_labels = rule_labels,
+      rule_ticks = rule_ticks,
+      rule_text = rule_text,
       by = by,
       num = num,
       tick_length = tick_length,

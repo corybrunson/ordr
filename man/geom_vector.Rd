@@ -137,6 +137,7 @@ Other geom layers:
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},
+\code{\link{geom_rule}()},
 \code{\link{geom_text_radiate}()}
 }
 \concept{geom layers}

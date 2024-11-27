@@ -1,16 +1,18 @@
-#' @title Axes through the origin
-#' 
-#' @description `geom_axis()` renders lines through the origin and the position
-#'   of each case or variable.
+#' @title Rulers offset from the origin
+#'
+#' @description `geom_rule()` renders segments offset from axes through the
+#'   origin and the position of each case or variable.
 #' @template biplot-layers
 
 #' @section Aesthetics:
 
-#' `geom_axis()` understands the following aesthetics (required aesthetics are
+#' `geom_rule()` understands the following aesthetics (required aesthetics are
 #' in bold):
 
 #' - **`x`**
 #' - **`y`**
+#' - `x0`
+#' - `y0`
 #' - `colour`
 #' - `alpha`
 #' - `linewidth`
@@ -28,26 +30,25 @@
 #' The prefixed aesthetics `label_*`, `tick_*`, and `text_*` are used by the
 #' text elements and will inherit any values passed to their un-prefixed
 #' counterparts, if recognized.
+#' The position aesthetics `x0` and `y0` encode the offset vector.
 #' 
 
 #' @import ggplot2
-#' @inheritParams ggplot2::layer
-#' @inheritParams ggplot2::geom_text
-#' @inheritParams geom_isoline
+#' @inheritParams geom_axis
 #' @template param-geom
-#' @param axis_labels,axis_ticks,axis_text Logical; whether to include labels,
-#'   tick marks, and text value marks along the axes.
+#' @param rule_labels,rule_ticks,rule_text Logical; whether to include labels,
+#'   tick marks, and text value marks along the rules.
 #' @param tick_length Numeric; the length of the tick marks, as a proportion of
 #'   the minimum of the plot width and height.
-#' @param text_dodge Numeric; the orthogonal distance of the text from the axis,
+#' @param text_dodge Numeric; the orthogonal distance of the text from the rule,
 #'   as a proportion of the minimum of the plot width and height.
 #' @template return-layer
 #' @family geom layers
-#' @example inst/examples/ex-geom-axis-glass.r
+#' @examples
 #' @export
-geom_axis <- function(
+geom_rule <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  axis_labels = TRUE, axis_ticks = TRUE, axis_text = TRUE,
+  rule_labels = TRUE, rule_ticks = TRUE, rule_text = TRUE,
   by = NULL, num = NULL,
   tick_length = .025, text_dodge = .03, label_dodge = .03,
   ...,
@@ -59,12 +60,12 @@ geom_axis <- function(
     data = data,
     mapping = mapping,
     stat = stat,
-    geom = GeomAxis,
+    geom = GeomRule,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      axis_labels = axis_labels, axis_ticks = axis_ticks, axis_text = axis_text,
+      rule_labels = rule_labels, rule_ticks = rule_ticks, rule_text = rule_text,
       by = by, num = num,
       tick_length = tick_length,
       text_dodge = text_dodge,
@@ -81,85 +82,21 @@ geom_axis <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
-GeomAxis <- ggproto(
-  "GeomAxis", Geom,
+GeomRule <- ggproto(
+  "GeomRule", GeomAxis,
   
-  required_aes = c("x", "y"),
-  optional_aes = c("x0", "y0"),
-  
-  default_aes = aes(
-    # axis
-    colour = "black", alpha = NA,
-    linewidth = .25, linetype = "solid",
-    # axis label
-    label = "",
-    label_colour = "black", label_alpha = NA,
-    label_size = 3.88, label_angle = 0,
-    label_hjust = "inward", label_vjust = "inward",
-    label_family = "", label_fontface = 1,
-    # mark needs
-    center = 0, scale = 1,
-    # tick marks
-    tick_colour = "black", tick_alpha = NA,
-    tick_linewidth = .25, tick_linetype = "solid",
-    # tick mark text
-    text_colour = "black", text_alpha = NA,
-    text_size = 2.6, text_angle = 0,
-    text_hjust = 0.5, text_vjust = 0.5,
-    text_family = "", text_fontface = 1
-  ),
-  
-  setup_params = function(data, params) {
-    
-    # allow only `by` or `num`, not both
-    if (! is.null(params$by) && ! is.null(params$num)) {
-      warning("Both `by` and `num` provided; ignoring `num`.")
-      params$num <- NULL
-    }
-    
-    params
-  },
-  
-  setup_data = function(data, params) {
-    
-    # diagonal versus vertical lines
-    data$vline <- data$x == 0 & data$y != 0
-    # diagonal line columns
-    data$intercept <- rep(0, nrow(data))
-    data$slope <- data$y / data$x
-    # vertical line columns
-    data$xintercept <- rep(0, nrow(data))
-    
-    # centers and scales
-    # (center is position on axis at origin)
-    #if (! "center" %in% names(data)) data$center <- 0
-    #if (! "scale" %in% names(data)) data$scale <- 1
-    # axis scales
-    data <- transform(data, axis_x = x, axis_y = y)
-    # vector lengths
-    data$axis_ss <- data$axis_x ^ 2 + data$axis_y ^ 2
-    
-    # remove lengthless vectors
-    data <- subset(data, axis_ss > 0)
-    
-    # remove position columns
-    # (prevent coordinates from affecting position limits)
-    data$x <- NULL
-    data$y <- NULL
-    
-    data
-  },
+  required_aes = c("x", "y", "lower", "upper"),
   
   draw_panel = function(
     data, panel_params, coord,
-    axis_labels = TRUE, axis_ticks = TRUE, axis_text = TRUE,
+    rule_labels = TRUE, rule_ticks = TRUE, rule_text = TRUE,
     by = NULL, num = NULL,
     tick_length = .025, text_dodge = .03, label_dodge = .03,
     parse = FALSE, check_overlap = FALSE,
     na.rm = FALSE
   ) {
     if (! coord$is_linear()) {
-      warning("Axes are not yet tailored to non-linear coordinates.")
+      warning("Rules are not yet tailored to non-linear coordinates.")
     }
     
     # copy `linewidth` to `size` for earlier **ggplot2** versions
@@ -168,10 +105,20 @@ GeomAxis <- ggproto(
     # extract value ranges
     ranges <- coord$range(panel_params)
     
-    if (axis_ticks || axis_text) {
-      # prepare for marks (calculate `x_val` and `y_val`)
-      mark_data <- calibrate_axes(data, ranges, by, num)
-    }
+    # prepare for marks (calculate `x_val` and `y_val`)
+    mark_data <- calibrate_rules(data, by, num)
+    # truncate axes to `GeomSegment` position aesthetics
+    # FIXME: Use `nest()` in `calibrate_rules()` to prevent ambiguity.
+    bound_data <- mark_data |> 
+      dplyr::group_by(dplyr::across(
+        -tidyselect::all_of(c("label", "x_val", "y_val"))
+      )) |> 
+      dplyr::summarize(
+        x = dplyr::first(x_val), xend = dplyr::last(x_val),
+        y = dplyr::first(y_val), yend = dplyr::last(y_val)
+      ) |> 
+      dplyr::ungroup() |> 
+      as.data.frame()
     
     # initialize grob list
     grobs <- list()
@@ -179,21 +126,14 @@ GeomAxis <- ggproto(
     # minimum of the plot width and height
     plot_whmin <- min(diff(ranges$x), diff(ranges$y))
     
-    # axis grobs: combination of line grobs
-    if (any(! data$vline)) {
-      grobs <- c(grobs, list(GeomAbline$draw_panel(
-        data = offset_xy(unique(data[! data$vline, , drop = FALSE])),
-        panel_params = panel_params, coord = coord
-      )))
-    }
-    if (any(data$vline)) {
-      grobs <- c(grobs, list(GeomVline$draw_panel(
-        data = offset_xy(unique(data[data$vline, , drop = FALSE])),
-        panel_params = panel_params, coord = coord
-      )))
-    }
+    # rule grobs: combination of line grobs
+    # FIXME: Why don't rules force plotting window to expand?
+    grobs <- c(grobs, list(GeomSegment$draw_panel(
+      data = offset_xy(unique(bound_data)),
+      panel_params = panel_params, coord = coord
+    )))
     
-    if (axis_ticks) {
+    if (rule_ticks) {
       tick_data <- mark_data
       
       # specify aesthetics
@@ -226,7 +166,7 @@ GeomAxis <- ggproto(
       
     }
     
-    if (axis_text) {
+    if (rule_text) {
       text_data <- mark_data
       
       # specify aesthetics
@@ -265,7 +205,7 @@ GeomAxis <- ggproto(
       
     }
     
-    if (axis_labels) {
+    if (rule_labels) {
       label_data <- data
       
       # specify aesthetics
@@ -278,6 +218,7 @@ GeomAxis <- ggproto(
       label_data$family <- label_data$label_family
       label_data$fontface <- label_data$label_fontface
       
+      # FIXME: Position labels at rule end nearest origin.
       # compute label positions
       label_data <- cbind(label_data, boundary_points(
         label_data$slope,
@@ -289,14 +230,14 @@ GeomAxis <- ggproto(
         as.numeric(label_data$angle) +
         (180 / pi) * atan(label_data$y / label_data$x)
       
-      # dodge axis
+      # dodge rule
       label_data <- transform(
         label_data,
         x = x + axis_y / sqrt(axis_ss) * plot_whmin * label_dodge,
         y = y - axis_x / sqrt(axis_ss) * plot_whmin * label_dodge
       )
       
-      # axis label grobs
+      # rule label grobs
       grobs <- c(grobs, list(GeomText$draw_panel(
         data = offset_xy(label_data),
         panel_params = panel_params, coord = coord
@@ -305,7 +246,7 @@ GeomAxis <- ggproto(
     }
     
     grob <- do.call(grid::grobTree, grobs)
-    grob$name <- grid::grobName(grob, "geom_axis")
+    grob$name <- grid::grobName(grob, "geom_rule")
     grob
   },
   
