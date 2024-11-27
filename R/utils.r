@@ -63,11 +63,8 @@ get_ord_aes <- function(data) {
   ord_cols
 }
 
-# restrict to a matrix factor
-setup_rows_data <- function(data, params) {
-  
-  data <-
-    data[data$.matrix == "rows", -match(".matrix", names(data)), drop = FALSE]
+# restrict to specified elements
+setup_elts_data <- function(data, params) {
   
   # if specified and possible, restrict to active or supplementary elements
   if (! is.null(params$elements) && ".element" %in% names(data)) {
@@ -102,43 +99,20 @@ setup_rows_data <- function(data, params) {
   
   data
 }
+# restrict to a matrix factor
+setup_rows_data <- function(data, params) {
+  
+  data <-
+    data[data$.matrix == "rows", -match(".matrix", names(data)), drop = FALSE]
+  
+  setup_elts_data(data, params)
+}
 setup_cols_data <- function(data, params) {
   
   data <-
     data[data$.matrix == "cols", -match(".matrix", names(data)), drop = FALSE]
   
-  # if specified and possible, restrict to active or supplementary elements
-  if (! is.null(params$elements) && ".element" %in% names(data)) {
-    # ensure that `elements` is a character singleton
-    stopifnot(
-      is.character(params$elements),
-      length(params$elements) == 1L
-    )
-    # subset accordingly
-    data <- if ("all" %in% params$elements) {
-      data
-    } else {
-      data[data$.element == params$elements, , drop = FALSE]
-    }
-    # print note if both `elements` and `subset` are passed
-    if (! is.null(params$subset)) {
-      message("`subset` will be applied after data are restricted to ",
-              params$elements, " elements.")
-    }
-  }
-  
-  # by default, render elements for all columns
-  if (! is.null(params$subset)) {
-    if (is.numeric(params$subset)) {
-      data <- data[params$subset, , drop = FALSE]
-    } else if (is.character(params$subset)) {
-      warning("`subset` cannot yet accept names.")
-    } else {
-      warning("`subset` of unrecognized type will be ignored.")
-    }
-  }
-  
-  data
+  setup_elts_data(data, params)
 }
 
 # restrict to a matrix factor and to the first two coordinates

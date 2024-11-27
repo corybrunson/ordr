@@ -101,6 +101,7 @@ Collate:
     'ord-tidiers.r'
     'ordinate.r'
     'ordr.r'
+    'stat-align-box.r'
     'stat-center.r'
     'stat-chull.r'
     'stat-cone.r'

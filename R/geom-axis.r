@@ -85,6 +85,7 @@ GeomAxis <- ggproto(
   "GeomAxis", Geom,
   
   required_aes = c("x", "y"),
+  optional_aes = c("lower", "upper", "yintercept"),
   
   default_aes = aes(
     # axis
@@ -307,3 +308,35 @@ GeomAxis <- ggproto(
   # update this to include segment and letter in key squares
   draw_key = draw_key_abline
 )
+
+offset_axes <- function(data, yintercept) {
+  if (is.null(yintercept) || yintercept == 0) return(data)
+  
+  # offset intercepts
+  data$intercept <- data$intercept + data$yintercept
+  data$xintercept <- - data$xintercept * data$slope
+  
+  # offset vector
+  # yintercept = offset / cos(h_angle)
+  angle <- atan2(data$y, data$x)
+  offset_mag <- data$yintercept * cos(angle)
+  offset_y <- offset_mag * sin(angle - pi/2)
+  offset_x <- offset_mag * cos(angle - pi/2)
+  
+  # positional variables to offset
+  offset_cols <- lapply(
+    c("x", "y"),
+    \(xy) c(
+      paste0("axis_", xy),
+      paste0(xy, c("", "end", "tick"))
+    )
+  ) |> 
+    lapply(intersect, names(data)) |> 
+    stats::setNames(c("x", "y"))
+  
+  # offset positional variables
+  for (col in offset_cols$x) data[[col]] <- data[[col]] + offset_x
+  for (col in offset_cols$y) data[[col]] <- data[[col]] + offset_y
+  
+  data
+}

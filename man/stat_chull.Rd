@@ -148,6 +148,7 @@ hec_ca \%>\%
 }
 \seealso{
 Other stat layers: 
+\code{\link{stat_align_box}()},
 \code{\link{stat_center}()},
 \code{\link{stat_cone}()},
 \code{\link{stat_scale}()},
