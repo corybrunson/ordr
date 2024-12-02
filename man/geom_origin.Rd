@@ -134,7 +134,6 @@ Other geom layers:
 \code{\link{geom_axis}()},
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},
-\code{\link{geom_rule}()},
 \code{\link{geom_text_radiate}()},
 \code{\link{geom_vector}()}
 }

@@ -7,12 +7,12 @@ default_arrow <- grid::arrow(
 )
 
 # `data` must have fields 'axis_x' and 'axis_y'
-calibrate_rules <- function(data, by, num) {
+calibrate_rules_old <- function(data, by, num) {
   
   if (is.null(by) && is.null(num)) num <- 6L
   
   # FIXME: Experimenting to resolve rule bound discrepancy.
-  # vector lengths
+  # vector inertias
   data$axis_ss <- data$axis_x ^ 2 + data$axis_y ^ 2
   # label ranges
   data$label_min <- data$center + data$scale * data$lower / data$axis_ss
@@ -40,7 +40,7 @@ calibrate_rules <- function(data, by, num) {
   data$label_min <- NULL
   data$label_max <- NULL
   
-  # axis positions in plotting window units
+  # axis positions in window units
   data$axis_val <- (data$label - data$center) / data$scale
   data$x_val <- data$axis_val * data$axis_x
   data$y_val <- data$axis_val * data$axis_y
@@ -53,33 +53,91 @@ calibrate_rules <- function(data, by, num) {
 # `data` must have fields 'axis_x' and 'axis_y'
 calibrate_axes <- function(data, ranges, by, num) {
   
-  # window boundaries for axis positions
-  data$win_xmin <- ifelse(data$axis_x > 0, ranges$x[[1L]], ranges$x[[2L]])
-  data$win_xmax <- ifelse(data$axis_x > 0, ranges$x[[2L]], ranges$x[[1L]])
-  data$win_ymin <- ifelse(data$axis_y > 0, ranges$y[[1L]], ranges$y[[2L]])
-  data$win_ymax <- ifelse(data$axis_y > 0, ranges$y[[2L]], ranges$y[[1L]])
+  # window boundaries for axis positions, relative to axis direction
+  data$win_xtail <- ifelse(data$axis_x > 0, ranges$x[[1L]], ranges$x[[2L]])
+  data$win_xhead <- ifelse(data$axis_x > 0, ranges$x[[2L]], ranges$x[[1L]])
+  data$win_ytail <- ifelse(data$axis_y > 0, ranges$y[[1L]], ranges$y[[2L]])
+  data$win_yhead <- ifelse(data$axis_y > 0, ranges$y[[2L]], ranges$y[[1L]])
   # FIXME: Experimenting to resolve rule bound discrepancy.
-  # # vector lengths
-  # data$axis_ss <- data$axis_x ^ 2 + data$axis_y ^ 2
-  # # project window corners onto axis (isoline extrema), in axis units
-  # data$lower <-
-  #   (data$win_xmin * data$axis_x + data$win_ymin * data$axis_y) / data$axis_ss
-  # data$upper <-
-  #   (data$win_xmax * data$axis_x + data$win_ymax * data$axis_y) / data$axis_ss
-  # project window corners onto axis (isoline extrema), in plotting window units
-  data$lower <- (data$win_xmin * data$axis_x + data$win_ymin * data$axis_y)
-  data$upper <- (data$win_xmax * data$axis_x + data$win_ymax * data$axis_y)
-  data$win_xmin <- NULL
-  data$win_xmax <- NULL
-  data$win_ymin <- NULL
-  data$win_ymax <- NULL
+  # project window corners onto axis (isoline extrema), in axis units
+  data$axis_ss <- data$axis_x ^ 2 + data$axis_y ^ 2
+  data$lower <-
+    (data$win_xtail * data$axis_x + data$win_ytail * data$axis_y) / data$axis_ss
+  data$upper <-
+    (data$win_xhead * data$axis_x + data$win_yhead * data$axis_y) / data$axis_ss
+  # # project window corners onto axis (isoline extrema) in window units
+  # data$lower <- data$win_xtail * data$axis_x + data$win_ytail * data$axis_y
+  # data$upper <- data$win_xhead * data$axis_x + data$win_yhead * data$axis_y
+  data$win_xtail <- NULL
+  data$win_xhead <- NULL
+  data$win_ytail <- NULL
+  data$win_yhead <- NULL
   
-  calibrate_rules(data, by, num)
+  calibrate_rules_old(data, by, num)
+}
+
+limit_values <- function(x, y, x.range, y.range) {
+  
+  # associate window boundaries to axis directions
+  xtail <- ifelse(x > 0, x.range[[1L]], x.range[[2L]])
+  xhead <- ifelse(x > 0, x.range[[2L]], x.range[[1L]])
+  ytail <- ifelse(y > 0, y.range[[1L]], y.range[[2L]])
+  yhead <- ifelse(y > 0, y.range[[2L]], y.range[[1L]])
+  
+  # project window corners onto axes (isoline extrema)
+  mag <- sqrt(x^2 + y^2)
+  lower <- (xtail * x + ytail * y) / mag
+  upper <- (xhead * x + yhead * y) / mag
+  
+  data.frame(lower = lower, upper = upper)
+}
+
+calibrate_rules <- function(data, by, num, loose) {
+  req_names <- 
+    c("axis_x", "axis_y", "axis_ss", "upper", "lower", "center", "scale")
+  req_missing <- which(! req_names %in% names(data))
+  if (any(req_missing)) {
+    stop(
+      "Columns are missing from data: ",
+      paste0(req_names[req_missing], collapse = ", ")
+    )
+  }
+  if (is.null(by) && is.null(num)) num <- 6L
+  
+  # label ranges (axis units)
+  vmin <- with(data, center + scale * lower / sqrt(axis_ss))
+  vmax <- with(data, center + scale * upper / sqrt(axis_ss))
+  
+  # element units; by default, use Wilkinson's breaks algorithm
+  vseq <- if (is.null(by)) {
+    lapply(seq(nrow(data)), function(i) {
+      labeling::extended(vmin[[i]], vmax[[i]], num, only.loose = loose)
+    })
+  } else {
+    if (length(by) == 1L) by <- rep(by, nrow(data))
+    lapply(seq(nrow(data)), function(i) {
+      vran <- if (loose)
+        c(floor(vmin[[i]] / by[[i]]), ceiling(vmax[[i]] / by[[i]]))
+      else
+        c(ceiling(vmin[[i]] / by[[i]]), floor(vmax[[i]] / by[[i]]))
+      by[[i]] * seq(vran[[1]], vran[[2]])
+    })
+  }
+  data <- data[rep(seq(nrow(data)), sapply(vseq, length)), , drop = FALSE]
+  data$label <- unlist(vseq)
+  
+  # axis positions in window units
+  axis_val <- (data$label - data$center) / data$scale
+  data$x_val <- axis_val * data$axis_x
+  data$y_val <- axis_val * data$axis_y
+  
+  data
 }
 
 # -+- handle vertical and horizontal axes -+-
-boundary_points <- function(slope, x.range, y.range) {
+border_points <- function(slope, x.range, y.range) {
   res <- data.frame(slope = slope)
+  
   # compute label positions
   res$increasing <- sign(res$slope) == 1L
   
@@ -102,5 +160,6 @@ boundary_points <- function(slope, x.range, y.range) {
   # farther intersection from origin
   res$x <- ifelse(res$rsq1 < res$rsq2, res$x2, res$x1)
   res$y <- ifelse(res$rsq1 < res$rsq2, res$y2, res$y1)
+  
   res[, c("x", "y")]
 }

@@ -139,9 +139,9 @@ USPersonalExpenditure \%>\%
 }
 \seealso{
 Other stat layers: 
-\code{\link{stat_align_box}()},
 \code{\link{stat_center}()},
 \code{\link{stat_chull}()},
+\code{\link{stat_rule}()},
 \code{\link{stat_scale}()},
 \code{\link{stat_spantree}()}
 }

@@ -136,8 +136,9 @@ points for rows and arrows for columns.
 \code{geom_axis()} understands the following aesthetics (required aesthetics are
 in bold):
 \itemize{
-\item \strong{\code{x}}
-\item \strong{\code{y}}
+\item \strong{\code{angle} \emph{or} \verb{x,y}}
+\item \verb{xend,yend}
+\item \verb{x0,y0}
 \item \code{colour}
 \item \code{alpha}
 \item \code{linewidth}
@@ -212,7 +213,6 @@ Other geom layers:
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},
-\code{\link{geom_rule}()},
 \code{\link{geom_text_radiate}()},
 \code{\link{geom_vector}()}
 }

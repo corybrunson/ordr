@@ -18,8 +18,6 @@
 \alias{geom_cols_label_repel}
 \alias{geom_rows_axis}
 \alias{geom_cols_axis}
-\alias{geom_rows_rule}
-\alias{geom_cols_rule}
 \alias{geom_rows_lineranges}
 \alias{geom_cols_lineranges}
 \alias{geom_rows_pointranges}
@@ -332,48 +330,6 @@ geom_cols_axis(
   inherit.aes = TRUE
 )
 
-geom_rows_rule(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  rule_labels = TRUE,
-  rule_ticks = TRUE,
-  rule_text = TRUE,
-  by = NULL,
-  num = NULL,
-  tick_length = 0.025,
-  text_dodge = 0.03,
-  label_dodge = 0.03,
-  ...,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
-geom_cols_rule(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  rule_labels = TRUE,
-  rule_ticks = TRUE,
-  rule_text = TRUE,
-  by = NULL,
-  num = NULL,
-  tick_length = 0.025,
-  text_dodge = 0.03,
-  label_dodge = 0.03,
-  ...,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
 geom_rows_lineranges(
   mapping = NULL,
   data = NULL,
@@ -653,9 +609,6 @@ as a proportion of the minimum of the plot width and height.}
 \item{label_dodge}{Numeric; the orthogonal distance of the text from the axis
 or isoline, as a proportion of the minimum of the plot width and height.}
 
-\item{rule_labels, rule_ticks, rule_text}{Logical; whether to include labels,
-tick marks, and text value marks along the rules.}
-
 \item{isoline_text}{Logical; whether to include text value marks along the
 isolines.}
 }
@@ -672,6 +625,6 @@ as their corresponding conventional geoms.
 \seealso{
 Other biplot layers: 
 \code{\link{stat_rows}()},
-\code{\link{stat_rows_align_box}()}
+\code{\link{stat_rows_rule}()}
 }
 \concept{biplot layers}

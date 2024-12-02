@@ -167,10 +167,10 @@ Springer Series in Statistics, ISSN 0172-7397. \doi{10.1007/b98835}
 }
 \seealso{
 Other stat layers: 
-\code{\link{stat_align_box}()},
 \code{\link{stat_center}()},
 \code{\link{stat_chull}()},
 \code{\link{stat_cone}()},
+\code{\link{stat_rule}()},
 \code{\link{stat_scale}()}
 }
 \concept{stat layers}

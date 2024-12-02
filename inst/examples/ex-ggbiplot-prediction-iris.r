@@ -23,8 +23,8 @@ iris_pca %>%
     subset = c(2, 4),
     aes(label = name, center = center, scale = scale)
   ) +
-  geom_cols_rule(
-    stat = "align_box", .referent = "rows",
+  stat_cols_rule(
+    .referent = "rows",
     subset = c(2, 4),
     aes(label = name, center = center, scale = scale)
   ) +
