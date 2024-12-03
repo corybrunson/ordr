@@ -5,6 +5,17 @@
 
 #' @template biplot-layers
 
+#' @section Computed variables: These can be used with
+#'   [`ggplot2::after_stat()`][ggplot2::aes_eval] to [control aesthetic
+#'   evaluation](https://ggplot2.tidyverse.org/reference/aes_eval.html).
+#' \describe{
+#'   \item{`x,y`}{cartesian coordinates (if passed polar)}
+#'   \item{`angle/radius`}{polar coordinates (if passed cartesian)}
+#'   \item{`lower,upper`}{distances of rule endpoints from origin}
+#'   \item{`yintercept,xintercept`}{intercepts of offset axis}
+#'   \item{`axis`}{unique axis identifier}
+#' }
+
 #' @rdname ordr-ggproto
 #' @format NULL
 #' @usage NULL
@@ -15,12 +26,33 @@ StatRule <- ggproto(
   required_aes = c("x", "y"),
   
   setup_params = function(data, params) {
+    
     # TODO: Find a better way to handle this; are two parameters necessary?
-    if (! is.null(params$.referent)) {
-      ref <- data[data$.matrix %in% params$.referent, c("x", "y"), drop = FALSE]
-      ref <- ref[chull(ref), , drop = FALSE]
-      params$referent <- ref
+    if (is.null(params$referent)) {
+      # default to both row and column elements
+      if (is.null(params$.referent)) {
+        param$.referent <- c("rows", "cols")
+      } else {
+        # extract elements to referent
+        params$referent <- 
+          data[data$.matrix %in% params$.referent, c("x", "y"), drop = FALSE]
+      }
+    } else {
+      # require coordinate data
+      stopifnot(
+        is.data.frame(params$referent) || is.matrix(params$referent),
+        ncol(params$referent) == 2L,
+        all(apply(params$referent, 2L, is.numeric))
+      )
+      params$referent <- as.data.frame(params$referent)
+      if (! is.null(params$.referent)) {
+        warning("`referent` was provided; `.referent` will be ignored.")
+        params$.referent <- NULL
+      }
     }
+    # collapse to convex hull (specific to this statistical transformation)
+    names(params$referent) <- c("x", "y")
+    params$referent <- params$referent[chull(params$referent), , drop = FALSE]
     
     # if summary functions are `NULL` then use zero constant functions
     params$fun.min <- params$fun.min %||% const0
@@ -30,72 +62,75 @@ StatRule <- ggproto(
     params
   },
   
-  setup_data = setup_cols_data,
+  setup_data = function(data, params) {
+    
+    data <- ensure_cartesian_polar(data, ggproto = "StatRule")
+    
+    setup_cols_data(data, params)
+  },
   
-  # TODO: Should this be `compute_panel()`?
   compute_group = function(
     data, scales,
-    .referent = c("rows", "cols"), referent = NULL,
+    .referent = NULL, referent = NULL,
     fun.min = minpp, fun.max = maxpp,
     fun.offset = minabspp,
     subset = NULL, elements = "all"
   ) {
     
+    # include computed variables even if trivial
     if (is.null(referent)) {
-      data$x0 <- data$y0 <- 0
-      data$xend <- data$yend <- NA_real_
+      data <- transform(
+        data,
+        lower = -Inf, upper = Inf,
+        yintercept = 0, xintercept = 0
+      )
       return(data)
     }
     
-    # compute dimensions of aligned boxes from '.referent' attribute
-    # use `x0` & `y0` for offset and `x`, `y`, `xend`, & `yend` for extent
-    referent <- referent |> 
-      stats::setNames(c("x_", "y_")) |> 
-      dplyr::mutate(
-        radius_ = sqrt(x_^2 + y_^2),
-        radians_ = atan2(y_, x_)
-      )
-    # unambiguous name for original data row number
-    row_name <- ".n"
-    while (row_name %in% names(data)) row_name <- paste0(".", row_name)
+    # prepare elements and referents for projection calculations
+    names(referent) <- c("x_", "y_")
+    referent <- transform(
+      referent,
+      radius_ = sqrt(x_^2 + y_^2),
+      angle_ = atan2(y_, x_)
+    )
+    data <- transform(
+      data,
+      radius = sqrt(x^2 + y^2),
+      angle = atan2(y, x),
+      axis = seq(nrow(data))
+    )
+    group_vars <- c(names(data), "radius", "angle", "axis")
+    data <- merge(data, referent, by = c())
+    
     # compute projections of all referent points to each axis
     data |> 
-      dplyr::mutate(
-        radius = sqrt(x^2 + y^2),
-        radians = atan2(y, x)
-      ) |> 
-      dplyr::mutate(!! row_name := dplyr::row_number()) |> 
-      tidyr::crossing(referent) |> 
-      dplyr::group_by(dplyr::across(
-        tidyselect::all_of(c(names(data), "radius", "radians", row_name))
-      )) |> 
+      dplyr::group_by(dplyr::across(tidyselect::all_of(group_vars))) |> 
       # projections of referent points onto axis and its normal vector
       dplyr::mutate(
-        h = radius_ * cos(radians_ - radians),
-        v = radius_ * sin(radians_ - radians)
+        h = radius_ * cos(angle_ - angle),
+        v = radius_ * sin(angle_ - angle)
       ) |> 
       # compute offsets and endpoints
       dplyr::summarize(
-        h_min = fun.min(h),
-        h_max = fun.max(h),
-        v_off = fun.offset(v)
+        lower = fun.min(h),
+        upper = fun.max(h),
+        offset = fun.offset(v)
       ) |> 
-      dplyr::mutate(
-        xend = h_min * cos(radians),        yend = h_min * sin(radians),
-        x    = h_max * cos(radians),        y    = h_max * sin(radians),
-        x0   = v_off * cos(radians + pi/2), y0   = v_off * sin(radians + pi/2)
-      ) |>
-      # drop unused variables
-      dplyr::select(-c(ends_with("_"))) |>
-      dplyr::select(-c(starts_with("h_"), starts_with("v_"))) ->
+      dplyr::ungroup() ->
       data
-    data$angle <- (180 / pi) * data$radians
-    data$radians <- NULL
+    data$h <- data$v <- NULL
     
-    # TODO: Check that `xend,yend` and `x,y` are collinear with the origin.
-
-    # TODO: Document computed variables:
-    # xend,yend,x,y,x0,y0,radius,angle
+    # additional computed variables
+    data <- transform(
+      data,
+      # yintercept = offset / sin(angle + pi/2),
+      # xintercept = offset / cos(angle + pi/2)
+      xend = offset * cos(angle + pi/2),
+      yend = offset * sin(angle + pi/2)
+    )
+    data$offset <- NULL
+    
     data
   }
 )
@@ -111,7 +146,7 @@ StatRule <- ggproto(
 #' @export
 stat_rule <- function(
     mapping = NULL, data = NULL, geom = "axis", position = "identity",
-    .referent = c("rows", "cols"), referent = NULL,
+    .referent = NULL, referent = NULL,
     fun.min = minpp, fun.max = maxpp,
     fun.offset = minabspp,
     show.legend = NA, 
@@ -154,7 +189,7 @@ stat_rows_rule <- function(
     geom = "axis",
     position = "identity",
     ...,
-    .referent = c("rows", "cols"), referent = NULL,
+    .referent = NULL, referent = NULL,
     fun.min = minpp, fun.max = maxpp,
     fun.offset = minabspp,
     na.rm = FALSE,
@@ -197,7 +232,7 @@ stat_cols_rule <- function(
     geom = "axis",
     position = "identity",
     ...,
-    .referent = c("rows", "cols"), referent = NULL,
+    .referent = NULL, referent = NULL,
     fun.min = minpp, fun.max = maxpp,
     fun.offset = minabspp,
     na.rm = FALSE,

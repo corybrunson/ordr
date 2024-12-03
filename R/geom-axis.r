@@ -9,9 +9,9 @@
 #' `geom_axis()` understands the following aesthetics (required aesthetics are
 #' in bold):
 
-#' - **`angle` _or_ `x,y`**
-#' - `xend,yend`
-#' - `x0,y0`
+#' - **`x` and `y` _or_ `angle` and `radius`**
+#' - `lower`, `upper`
+#' - `yintercept` _or_ `xintercept` _or_ `xend` and `yend`
 #' - `colour`
 #' - `alpha`
 #' - `linewidth`
@@ -19,7 +19,7 @@
 #' - `label`
 #' - `center`, `scale`
 #' - `label_colour`, `label_alpha`, `label_size`, `label_angle`,
-#'   `label_hjust`, `label_vjust`, `label_family`, `label_fontface`
+#'   `label_family`, `label_fontface`
 #' - `tick_colour`, `tick_alpha`, `tick_linewidth`, `tick_linetype`
 #' - `text_colour`, `text_alpha`, `text_size`, `text_angle`,
 #'   `text_hjust`, `text_vjust`, `text_family`, `text_fontface`
@@ -50,6 +50,7 @@ geom_axis <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   axis_labels = TRUE, axis_ticks = TRUE, axis_text = TRUE,
   by = NULL, num = NULL,
+  snap_rule = TRUE,
   tick_length = .025, text_dodge = .03, label_dodge = .03,
   ...,
   parse = FALSE, check_overlap = FALSE,
@@ -67,6 +68,7 @@ geom_axis <- function(
     params = list(
       axis_labels = axis_labels, axis_ticks = axis_ticks, axis_text = axis_text,
       by = by, num = num,
+      snap_rule = snap_rule,
       tick_length = tick_length,
       text_dodge = text_dodge,
       label_dodge = label_dodge,
@@ -87,8 +89,12 @@ geom_axis <- function(
 GeomAxis <- ggproto(
   "GeomAxis", Geom,
   
-  required_aes = c("x", "y"),
-  optional_aes = c("xend", "yend", "x0", "y0"),
+  required_aes = c("x|angle", "y|radius"),
+  non_missing_aes = c("x", "y", "angle", "radius"),
+  optional_aes = c(
+    "lower", "upper",
+    "yintercept", "xintercept", "xend", "yend"
+  ),
   
   default_aes = aes(
     # axis
@@ -98,7 +104,6 @@ GeomAxis <- ggproto(
     label = "",
     label_colour = "black", label_alpha = NA,
     label_size = 3.88, label_angle = 0,
-    label_hjust = "inward", label_vjust = "inward",
     label_family = "", label_fontface = 1,
     # mark needs
     center = 0, scale = 1,
@@ -118,81 +123,54 @@ GeomAxis <- ggproto(
     if (! is.null(params$by) && ! is.null(params$num)) {
       warning("Both `by` and `num` provided; ignoring `num`.")
       params$num <- NULL
-    }
+    } else if (is.null(params$by) && is.null(params$num)) params$num <- 6L
     
     params
   },
   
   setup_data = function(data, params) {
-    # expect that `x,y` and `xend,yend` are collinear with the origin,
-    # i.e. that the offset to `x0,y0` has not been applied;
-    # this setup will offset the endpoints (if any) to inform the window
+    # NB: The resulting position aesthetics will inform the plotting window.
     
-    # TODO: Check that `xend,yend` and `x,y` are collinear with the origin.
-    
-    # ensure that endpoints are not present without vectors
-    if ((! is.null(data$xend) && is.null(data$x)) ||
-        (! is.null(data$yend) && is.null(data$y)))
-      stop("`geom_axis()` cannot accept `xend|yend` without `x|y`.")
     # axes or rules?
-    use_rule <- ! is.null(data$xend) && ! is.null(data$yend)
+    use_rule <- ! is.null(data$lower) && ! is.null(data$upper)
     # offset?
-    use_offset <- ! is.null(data$x0) && ! is.null(data$y0)
+    use_offset <- 
+      ! is.null(data$yintercept) || ! is.null(data$xintercept) ||
+      (! is.null(data$xend)       && ! is.null(data$yend))
+    # # introduce endpoints if missing
+    # if (! use_rule) data$lower <- data$upper <- 0
     
-    # introduce endpoints if missing
-    # NB: This will cause problems with e.g. `angle = 180/pi*atan2(x,y)`.
-    # NB: This eliminates the utility of `if (is.null(data$xend))`.
-    if (! use_rule) data$xend <- data$yend <- 0
+    data <- ensure_cartesian_polar(data)
     
-    # introduce angles & vectors if missing
-    if ((is.null(data$x) || is.null(data$y)) && 
-        (is.null(data$angle) || is.null(data$radius)))
-      stop("`GeomAxis` requires either `angle` and `radius` or `x` and `y`.")
-    if (is.null(data$angle)) 
-      data$angle <- 180 / pi * with(data, atan2(y, x))
-    if (is.null(data$radius)) 
-      data$radius <- sqrt( data$x ^ 2 + data$y ^ 2 )
-    if (is.null(data$x)) 
-      data$x <- data$xend + data$radius * cos(data$angle * pi / 180)
-    if (is.null(data$y)) 
-      data$y <- data$yend + data$radius * sin(data$angle * pi / 180)
-    
-    # axis scales and inertia
-    # data <- transform(data, axis_x = x - xend, axis_y = y - yend)
-    data <- transform(data, axis_x = radius * cos(angle * pi / 180))
-    data <- transform(data, axis_y = radius * sin(angle * pi / 180))
-    data <- transform(data, axis_ss = axis_x^2 + axis_y^2)
     # remove lengthless vectors
-    data <- subset(data, axis_ss > 0)
-
-    # # remove offset if unused
-    # if (! is.null(data$x0) || ! is.null(data$y0)) {
-    #   data$x0 <- data$x0 %||% 0
-    #   data$y0 <- data$y0 %||% 0
-    #   if (all(data$x0 == 0 & data$y0 == 0)) {
-    #     data$x0 <- data$y0 <- NULL
-    #   }
-    # }
-    # # use zero offset if missing
-    # data$x0 <- data$x0 %||% 0
-    # data$y0 <- data$0 %||% 0
+    data <- subset(data, x^2 + y^2 > 0)
+    
+    # compute endpoints
+    if (use_rule) {
+      data <- transform(
+        data,
+        xmin = lower * cos(angle), ymin = lower * sin(angle),
+        xmax = upper * cos(angle), ymax = upper * sin(angle)
+      )
+    }
+    
+    # recover endpoints
+    if (use_offset) {
+      if (is.null(data$xend) || is.null(data$yend))
+        data <- recover_offset_endpoints(data)
+    }
     
     # offset endpoints
-    if (use_offset) {
-      data$x <- data$x + data$x0
-      data$y <- data$y + data$y0
-      data$xend <- data$xend + data$x0
-      data$yend <- data$yend + data$y0
+    if (use_rule && use_offset) {
+      data <- transform(
+        data,
+        xmin = xmin + xend, ymin = ymin + yend,
+        xmax = xmax + xend, ymax = ymax + yend
+      )
     }
     
-    # remove position columns for whole-axis case
-    # (prevent coordinates from affecting position limits)
-    if (! use_rule) {
-      data$xend <- NULL
-      data$yend <- NULL
-      data$x <- NULL
-      data$y <- NULL
-    }
+    # drop position coordinates
+    data$x <- data$y <- NULL
     
     data
   },
@@ -201,66 +179,83 @@ GeomAxis <- ggproto(
     data, panel_params, coord,
     axis_labels = TRUE, axis_ticks = TRUE, axis_text = TRUE,
     by = NULL, num = NULL,
+    snap_rule = TRUE,
     tick_length = .025, text_dodge = .03, label_dodge = .03,
     parse = FALSE, check_overlap = FALSE,
     na.rm = FALSE
   ) {
     
-    # upon `setup_data()`:
-    # axis_x,axis_y = vector (1 axis measure; not a unit vector)
-    # x,y = segment head
-    # xend,yend = segment tail
-    # x0,y0 = offset
-    
     # copy `linewidth` to `size` for earlier **ggplot2** versions
     data$size <- data$linewidth
-    # TODO: Could we obviate the need for `axis_x` & `axis_y` here?
-    # # recover `x` and `y` aesthetics
-    # data <- transform(
-    #   data,
-    #   x = axis_x, y = axis_y
-    # )
     
-    if (! coord$is_linear()) {
+    if (! coord$is_linear())
       warning("Axes are not yet tailored to non-linear coordinates.")
-    }
     
     # extract value ranges
     ranges <- coord$range(panel_params)
     
     # TODO: Obviate this by setting default values for these aesthetics.
     # axes or rules?
-    use_rule <- ! is.null(data$xend) && ! is.null(data$yend)
+    use_rule <- 
+      ! is.null(data$xmin) && ! is.null(data$ymin) &&
+      ! is.null(data$xmax) && ! is.null(data$ymax)
     # offset?
-    use_offset <- ! is.null(data$x0) && ! is.null(data$y0)
+    use_offset <- ! is.null(data$xend) && ! is.null(data$yend)
+    
     # initialize grob list
     grobs <- list()
     
     # minimum of the plot width and height
     plot_whmin <- min(diff(ranges$x), diff(ranges$y))
     
+    data <- ensure_cartesian_polar(data)
+    
+    # text dodge vector
+    data <- transform(
+      data,
+      dodge_angle = if (use_offset) atan2(yend, xend) else (atan(y / x) + pi/2)
+    )
+    
+    # recover intercepts
+    if (use_offset) {
+      if (is.null(data$yintercept) || is.null(data$xintercept))
+        data <- recover_offset_intercepts(data)
+    }
+    
+    # TODO: Write tests that account for all possibilities
+    # compute marks (`x_t` and `y_t`):
+    # if no segments then first bound outside window
+    if (axis_ticks || axis_text) {
+      mark_data <- data
+      
+      # compute rule bounds in axis units
+      if (! use_rule) {
+        # just beyond window borders
+        mark_data <- delimit_rules(mark_data, ranges$x, ranges$y)
+      }
+      # calculate rule values and positions
+      mark_data <- calibrate_rules(mark_data, by, num, loose = ! use_rule)
+      
+      # encode offset using otherwise unused aesthetics
+      mark_data$x0 <- mark_data$xend %||% 0
+      mark_data$y0 <- mark_data$yend %||% 0
+    }
+    
     # axis grobs: if `xend` & `yend` then segment else abline & vline
     axis_data <- unique(data)
     
     if (! use_rule) {
       
+      # NB: This step redefines positional aesthetics for a specific grob.
+      
       # diagonal versus vertical lines
       axis_data <- transform(
         axis_data,
-        vline = axis_x == 0 & axis_y != 0,
-        slope = axis_y / axis_x,
-        intercept = 0,
-        xintercept = 0
+        vline = x == 0 & y != 0,
+        slope = y / x
       )
-      if (use_offset) {
-        axis_data <- transform(
-          axis_data,
-          # diagonal line columns
-          intercept = - x0 * slope + y0,
-          # vertical line columns
-          xintercept =  x0 - y0 / slope
-        )
-      }
+      axis_data$intercept <- axis_data$yintercept %||% 0
+      axis_data$xintercept <- axis_data$xintercept %||% 0
       
       # TODO: Move intercept and slope calculations here?
       if (any(! axis_data$vline)) {
@@ -278,6 +273,37 @@ GeomAxis <- ggproto(
       
     } else {
       
+      # NB: This step redefines positional aesthetics for a specific grob.
+      
+      if (use_rule && snap_rule) {
+        
+        # compute extended value range
+        mark_data |> 
+          dplyr::transmute(axis, label, x = x_t + x0, y = y_t + y0) |> 
+          dplyr::group_by(axis) |> 
+          dplyr::filter(label == min(label) | label == max(label)) |> 
+          dplyr::mutate(ext = ifelse(label == min(label), "min", "max")) |> 
+          dplyr::ungroup() |> 
+          tidyr::pivot_wider(
+            id_cols = axis,
+            names_from = ext, values_from = c(x, y), names_sep = ""
+          ) |> 
+          as.data.frame() -> mark_range
+        
+        # extend segment to value range
+        axis_data[, c("xend", "yend", "x", "y")] <- 
+          mark_range[, c("xmin", "ymin", "xmax", "ymax")]
+        
+      } else {
+        
+        # recognized segment positions
+        axis_data <- transform(
+          axis_data,
+          xend = xmin, yend = ymin, x = xmax, y = ymax
+        )
+        
+      }
+      
       grobs <- c(grobs, list(GeomSegment$draw_panel(
         data = axis_data,
         panel_params = panel_params, coord = coord
@@ -288,95 +314,82 @@ GeomAxis <- ggproto(
     if (axis_labels) {
       label_data <- data
       
-      # specify aesthetics
-      label_data$colour <- label_data$label_colour
-      label_data$alpha <- label_data$label_alpha
-      label_data$size <- label_data$label_size
-      label_data$angle <- label_data$label_angle
-      label_data$hjust <- label_data$label_hjust
-      label_data$vjust <- label_data$label_vjust
-      label_data$family <- label_data$label_family
-      label_data$fontface <- label_data$label_fontface
+      # NB: This step redefines positional aesthetics for a specific grob.
       
       # compute positions: if `xend` & `yend` then mid/endpoint else border
       if (! use_rule) {
         label_data <- cbind(
-          label_data,
+          subset(label_data, select = -c(x, y)),
           border_points(
-            label_data$axis_y / label_data$axis_x,
+            with(label_data, y / x),
             panel_params$x.range, panel_params$y.range
           )
         )
-      } else {
-        # start with heads x,y then opt for any positions closer to the origin
-        repl_end <- with(label_data, xend^2 + yend^2 < x^2 + y^2)
+        # adjust labels inward from borders
         label_data <- transform(
           label_data,
-          x = ifelse(repl_end, xend, x),
-          y = ifelse(repl_end, yend, y)
+          hjust = ifelse(x < 0, 0, 1)
         )
-        label_data <- subset(label_data, select = -c(xend, yend))
+      } else {
+        # replace x,y with heads then opt for any positions closer to the origin
+        repl_min <- with(label_data, xmin^2 + ymin^2 < xmax^2 + ymax^2)
+        label_data <- transform(
+          label_data,
+          x = ifelse(repl_min, xmin, xmax),
+          y = ifelse(repl_min, ymin, ymax)
+        )
+        label_data <- subset(label_data, select = -c(xmin, ymin, xmax, ymax))
         if (use_offset) {
-          repl_0 <- with(label_data, x0^2 + y0^2 < x^2 + y^2)
+          repl_end <- with(label_data, xend^2 + yend^2 < x^2 + y^2)
           label_data <- transform(
             label_data,
-            x = ifelse(repl_0, x0, x),
-            y = ifelse(repl_0, y0, y)
+            x = ifelse(repl_end, xend, x),
+            y = ifelse(repl_end, yend, y)
           )
-          label_data <- subset(label_data, select = -c(x0, y0))
+          label_data <- subset(label_data, select = -c(xend, yend))
+          # adjust labels inward from borders
+          label_data <- transform(
+            label_data,
+            hjust = ifelse(
+              repl_end,
+              .5,
+              ifelse(
+                xend <= x,
+                as.numeric(1 - repl_end)
+                , as.numeric(repl_end)
+              )
+            )
+          )
         }
       }
-      
-      # ensure upright angles of labels (relative to axes)
-      if (is.null(label_data$angle)) label_data$angle <- 0
-      label_data$angle <-
-        as.numeric(label_data$angle) +
-        (180 / pi) * atan(label_data$axis_y / label_data$axis_x)
       
       # dodge axis
       label_data <- transform(
         label_data,
-        x = x + axis_y / sqrt(axis_ss) * plot_whmin * label_dodge,
-        y = y - axis_x / sqrt(axis_ss) * plot_whmin * label_dodge
+        x = x + cos(dodge_angle) * plot_whmin * label_dodge,
+        y = y + sin(dodge_angle) * plot_whmin * label_dodge
       )
+      # update text angle
+      label_data <- transform(
+        label_data,
+        angle = atan(tan(angle)) + label_angle
+      )
+      # put total angle in degrees
+      label_data$angle <- label_data$angle * 180 / pi
+      
+      # specify aesthetics
+      label_data$colour <- label_data$label_colour
+      label_data$alpha <- label_data$label_alpha
+      label_data$size <- label_data$label_size
+      label_data$family <- label_data$label_family
+      label_data$fontface <- label_data$label_fontface
       
       # axis label grobs
       grobs <- c(grobs, list(GeomText$draw_panel(
         data = label_data,
-        # data = offset_xy(label_data),
         panel_params = panel_params, coord = coord
       )))
       
-    }
-    
-    # TODO: Write tests that account for all possibilities:
-    # * no `xend` & `yend`
-    # * `xend == 0` & `yend == 0`
-    # * `xend != 0` & `yend != 0`
-    # compute marks (`x_val` and `y_val`):
-    # if not `xend` & `yend` then first bound outside window
-    if (axis_ticks || axis_text) {
-      mark_data <- data
-      
-      # compute rule bounds in axis units
-      if (use_rule) {
-        # just within specified endpoints
-        if (! use_offset) mark_data$x0 <- mark_data$y0 <- 0
-        mark_data <- transform(
-          mark_data,
-          lower = ((xend - x0) * axis_x + (yend - y0) * axis_y) / sqrt(axis_ss),
-          upper = ((x    - x0) * axis_x + (y    - y0) * axis_y) / sqrt(axis_ss)
-        )
-      } else {
-        # just beyond window borders
-        mark_data <- cbind(
-          mark_data,
-          with(mark_data, limit_values(axis_x, axis_y, ranges$x, ranges$y))
-        )
-      }
-      
-      # calculate rule values and their positions
-      mark_data <- calibrate_rules(mark_data, by, num, loose = ! use_rule)
     }
     
     if (axis_ticks) {
@@ -394,14 +407,17 @@ GeomAxis <- ggproto(
       # tick mark vector
       tick_data <- transform(
         tick_data,
-        xtick = - axis_y / sqrt(axis_ss) * rtick,
-        ytick = axis_x / sqrt(axis_ss) * rtick
+        xtick = - y / radius * rtick,
+        ytick =   x / radius * rtick
       )
+      
+      # NB: This step redefines positional aesthetics for a specific grob.
+      
       # endpoints of tick marks
       tick_data <- transform(
         tick_data,
-        x = x_val - xtick, xend = x_val + xtick,
-        y = y_val - ytick, yend = y_val + ytick
+        xend = x_t - xtick, x = x_t + xtick,
+        yend = y_t - ytick, y = y_t + ytick
       )
       
       # tick mark grobs
@@ -419,7 +435,7 @@ GeomAxis <- ggproto(
       text_data$colour <- text_data$text_colour
       text_data$alpha <- text_data$text_alpha
       text_data$size <- text_data$text_size
-      text_data$angle <- text_data$text_angle
+      # text_data$angle <- text_data$text_angle
       text_data$hjust <- text_data$text_hjust
       text_data$vjust <- text_data$text_vjust
       text_data$family <- text_data$text_family
@@ -427,17 +443,20 @@ GeomAxis <- ggproto(
       
       # omit labels at origin
       text_data <-
-        text_data[text_data$x_val != 0 | text_data$y_val != 0, , drop = FALSE]
-      # calculate angles
-      if (is.null(text_data$angle)) text_data$angle <- 0
-      text_data$angle <-
-        as.numeric(text_data$angle) +
-        atan(text_data$axis_y / text_data$axis_x) / pi * 180
+        text_data[text_data$x_t != 0 | text_data$y_t != 0, , drop = FALSE]
+      
+      # NB: This step redefines positional aesthetics for a specific grob.
+      
       # dodge axis
       text_data <- transform(
         text_data,
-        x = x_val - axis_y / sqrt(axis_ss) * plot_whmin * text_dodge,
-        y = y_val + axis_x / sqrt(axis_ss) * plot_whmin * text_dodge
+        x = x_t - cos(dodge_angle) * plot_whmin * text_dodge,
+        y = y_t - sin(dodge_angle) * plot_whmin * text_dodge
+      )
+      # update text angle and put in degrees
+      text_data <- transform(
+        text_data,
+        angle = (atan(tan(angle)) + text_angle) * 180 / pi
       )
       
       # mark text grobs
@@ -461,26 +480,14 @@ GeomAxis <- ggproto(
 )
 
 offset_xy <- function(data) {
-  if (is.null(data$x0) && is.null(data$y0)) return(data)
-  if (is.null(data$x0)) data$x0 <- 0
-  if (is.null(data$y0)) data$y0 <- 0
-  
-  # offset intercepts
-  # angle <- 180 / pi * atan2(data$axis_y, data$axis_x)
-  if (! is.null(data$intercept))
-    # data$intercept <- data$intercept + data$yintercept
-    data$intercept <- data$intercept - data$x0 * data$slope + data$y0
-  if (! is.null(data$xintercept))
-    # data$xintercept <- - data$xintercept * data$slope
-    data$xintercept <- data$xintercept + data$x0 - data$y0 / data$slope
+  # require that offset is encoded as `x0,y0`
+  if (is.null(data$x0) || is.null(data$y0))
+    stop("This step requires `x0` and `y0`.")
   
   # positional variables to offset
   offset_cols <- lapply(
     c("x", "y"),
-    \(xy) c(
-      paste0("axis_", xy),
-      paste0(xy, c("", "end", "tick"))
-    )
+    \(xy) paste0(xy, c("", "end", "tick"))
   ) |> 
     lapply(intersect, names(data)) |> 
     stats::setNames(c("x", "y"))

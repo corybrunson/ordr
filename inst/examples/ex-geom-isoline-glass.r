@@ -17,7 +17,7 @@ glass_lda %>%
   geom_cols_vector(subset = c(1, 3, 4)) +
   geom_cols_text_radiate(subset = c(1, 3, 4), size = 3) +
   geom_cols_isoline(subset = c(1, 3, 4), alpha = .25, num = 4L,
-                    label_dodge = -.03, text_alpha = .5, text_size = 3) +
+                    text_dodge = -.03, text_alpha = .5, text_size = 3) +
   ggtitle(
     "LDA of Freestone glass measurements",
     "Row-standard biplot of standardized LDA"

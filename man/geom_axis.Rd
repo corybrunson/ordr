@@ -14,6 +14,7 @@ geom_axis(
   axis_text = TRUE,
   by = NULL,
   num = NULL,
+  snap_rule = TRUE,
   tick_length = 0.025,
   text_dodge = 0.03,
   label_dodge = 0.03,
@@ -84,9 +85,6 @@ the minimum of the plot width and height.}
 \item{text_dodge}{Numeric; the orthogonal distance of the text from the axis,
 as a proportion of the minimum of the plot width and height.}
 
-\item{label_dodge}{Numeric; the orthogonal distance of the text from the axis
-or isoline, as a proportion of the minimum of the plot width and height.}
-
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
 \item{parse}{If \code{TRUE}, the labels will be parsed into expressions and
@@ -136,9 +134,9 @@ points for rows and arrows for columns.
 \code{geom_axis()} understands the following aesthetics (required aesthetics are
 in bold):
 \itemize{
-\item \strong{\code{angle} \emph{or} \verb{x,y}}
-\item \verb{xend,yend}
-\item \verb{x0,y0}
+\item \strong{\code{x} and \code{y} \emph{or} \code{angle} and \code{radius}}
+\item \code{lower}, \code{upper}
+\item \code{yintercept} \emph{or} \code{xintercept} \emph{or} \code{xend} and \code{yend}
 \item \code{colour}
 \item \code{alpha}
 \item \code{linewidth}
@@ -146,7 +144,7 @@ in bold):
 \item \code{label}
 \item \code{center}, \code{scale}
 \item \code{label_colour}, \code{label_alpha}, \code{label_size}, \code{label_angle},
-\code{label_hjust}, \code{label_vjust}, \code{label_family}, \code{label_fontface}
+\code{label_family}, \code{label_fontface}
 \item \code{tick_colour}, \code{tick_alpha}, \code{tick_linewidth}, \code{tick_linetype}
 \item \code{text_colour}, \code{text_alpha}, \code{text_size}, \code{text_angle},
 \code{text_hjust}, \code{text_vjust}, \code{text_family}, \code{text_fontface}

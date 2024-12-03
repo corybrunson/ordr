@@ -298,6 +298,7 @@ geom_rows_axis(
   axis_text = TRUE,
   by = NULL,
   num = NULL,
+  snap_rule = TRUE,
   tick_length = 0.025,
   text_dodge = 0.03,
   label_dodge = 0.03,
@@ -319,6 +320,7 @@ geom_cols_axis(
   axis_text = TRUE,
   by = NULL,
   num = NULL,
+  snap_rule = TRUE,
   tick_length = 0.025,
   text_dodge = 0.03,
   label_dodge = 0.03,
@@ -382,7 +384,7 @@ geom_rows_isoline(
   isoline_text = TRUE,
   by = NULL,
   num = NULL,
-  label_dodge = 0.03,
+  text_dodge = 0.03,
   ...,
   parse = FALSE,
   check_overlap = FALSE,
@@ -399,7 +401,7 @@ geom_cols_isoline(
   isoline_text = TRUE,
   by = NULL,
   num = NULL,
-  label_dodge = 0.03,
+  text_dodge = 0.03,
   ...,
   parse = FALSE,
   check_overlap = FALSE,
@@ -605,9 +607,6 @@ the minimum of the plot width and height.}
 
 \item{text_dodge}{Numeric; the orthogonal distance of the text from the axis,
 as a proportion of the minimum of the plot width and height.}
-
-\item{label_dodge}{Numeric; the orthogonal distance of the text from the axis
-or isoline, as a proportion of the minimum of the plot width and height.}
 
 \item{isoline_text}{Logical; whether to include text value marks along the
 isolines.}

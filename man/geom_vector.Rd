@@ -105,8 +105,7 @@ points for rows and arrows for columns.
 \code{geom_vector()} understands the following aesthetics (required aesthetics
 are in bold):
 \itemize{
-\item \strong{\code{x}}
-\item \strong{\code{y}}
+\item \strong{\code{x} and \code{y} \emph{or} \code{angle} and \code{radius}}
 \item \code{alpha}
 \item \code{colour}
 \item \code{linetype}

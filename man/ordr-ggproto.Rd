@@ -69,6 +69,18 @@ stat in order to render plot elements for the corresponding factor matrix.
 points for rows and arrows for columns.
 }
 
+\section{Computed variables}{
+ These can be used with
+\code{\link[ggplot2:aes_eval]{ggplot2::after_stat()}} to \href{https://ggplot2.tidyverse.org/reference/aes_eval.html}{control aesthetic evaluation}.
+\describe{
+\item{\verb{x,y}}{cartesian coordinates (if passed polar)}
+\item{\code{angle/radius}}{polar coordinates (if passed cartesian)}
+\item{\verb{lower,upper}}{distances of rule endpoints from origin}
+\item{\verb{yintercept,xintercept}}{intercepts of offset axis}
+\item{\code{axis}}{unique axis identifier}
+}
+}
+
 \seealso{
 \code{\link[ggplot2:ggplot2-ggproto]{ggplot2::ggplot2-ggproto}} and \link[ggplot2:ggproto]{ggplot2::ggproto} for explanations
 of base ggproto classes in \strong{ggplot2} and how to create new ones.

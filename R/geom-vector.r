@@ -9,8 +9,7 @@
 #' `geom_vector()` understands the following aesthetics (required aesthetics
 #' are in bold):
 
-#' - **`x`**
-#' - **`y`**
+#' - **`x` and `y` _or_ `angle` and `radius`**
 #' - `alpha`
 #' - `colour`
 #' - `linetype`
@@ -57,9 +56,13 @@ geom_vector <- function(
 GeomVector <- ggproto(
   "GeomVector", GeomSegment,
   
-  required_aes = c("x", "y"),
+  required_aes = c("x|angle", "y|radius"),
+  non_missing_aes = c("x", "y", "angle", "radius"),
   
   setup_data = function(data, params) {
+    
+    data <- ensure_cartesian_polar(data)
+    
     # all vectors have tails at the origin
     transform(
       data,
@@ -73,6 +76,7 @@ GeomVector <- ggproto(
     lineend = "round", linejoin = "mitre",
     na.rm = FALSE
   ) {
+    
     if (! coord$is_linear()) {
       warning("Vectors are not yet tailored to non-linear coordinates.")
     }

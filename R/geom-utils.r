@@ -6,130 +6,66 @@ default_arrow <- grid::arrow(
   type = "open"
 )
 
-# `data` must have fields 'axis_x' and 'axis_y'
-calibrate_rules_old <- function(data, by, num) {
+# introduce `x` & `y` if passed only `angle` & `radius` and vice-versa
+# (read `angle` as radians)
+ensure_cartesian_polar <- function(data) {
+  if ((is.null(data$x) || is.null(data$y)) && 
+      (is.null(data$angle) || is.null(data$radius)))
+    stop("This step requires either `x` and `y` or `angle` and `radius`.")
   
-  if (is.null(by) && is.null(num)) num <- 6L
-  
-  # FIXME: Experimenting to resolve rule bound discrepancy.
-  # vector inertias
-  data$axis_ss <- data$axis_x ^ 2 + data$axis_y ^ 2
-  # label ranges
-  data$label_min <- data$center + data$scale * data$lower / data$axis_ss
-  data$label_max <- data$center + data$scale * data$upper / data$axis_ss
-  
-  # element units; by default, use Wilkinson's breaks algorithm
-  label_vals <- if (is.null(by)) {
-    lapply(seq(nrow(data)), function(i) {
-      labeling::extended(
-        data$label_min[[i]], data$label_max[[i]], num,
-        only.loose = TRUE
-      )
-    })
-  } else {
-    if (length(by) == 1L) by <- rep(by, nrow(data))
-    lapply(seq(nrow(data)), function(i) {
-      by[[i]] * seq(
-        floor(data$label_min[[i]] / by[[i]]),
-        ceiling(data$label_max[[i]] / by[[i]])
-      )
-    })
-  }
-  data <- data[rep(seq(nrow(data)), sapply(label_vals, length)), , drop = FALSE]
-  data$label <- unlist(label_vals)
-  data$label_min <- NULL
-  data$label_max <- NULL
-  
-  # axis positions in window units
-  data$axis_val <- (data$label - data$center) / data$scale
-  data$x_val <- data$axis_val * data$axis_x
-  data$y_val <- data$axis_val * data$axis_y
-  data$axis_val <- NULL
+  if (is.null(data$angle)) data$angle <- with(data, atan2(y, x))
+  if (is.null(data$radius)) data$radius <- with(data, sqrt(x^2 + y^2))
+  if (is.null(data$x)) data$x <- with(data, radius * cos(angle))
+  if (is.null(data$y)) data$y <- with(data, radius * sin(angle))
   
   data
-  
 }
 
-# `data` must have fields 'axis_x' and 'axis_y'
-calibrate_axes <- function(data, ranges, by, num) {
+recover_offset_endpoints <- function(data) {
   
-  # window boundaries for axis positions, relative to axis direction
-  data$win_xtail <- ifelse(data$axis_x > 0, ranges$x[[1L]], ranges$x[[2L]])
-  data$win_xhead <- ifelse(data$axis_x > 0, ranges$x[[2L]], ranges$x[[1L]])
-  data$win_ytail <- ifelse(data$axis_y > 0, ranges$y[[1L]], ranges$y[[2L]])
-  data$win_yhead <- ifelse(data$axis_y > 0, ranges$y[[2L]], ranges$y[[1L]])
-  # FIXME: Experimenting to resolve rule bound discrepancy.
-  # project window corners onto axis (isoline extrema), in axis units
-  data$axis_ss <- data$axis_x ^ 2 + data$axis_y ^ 2
-  data$lower <-
-    (data$win_xtail * data$axis_x + data$win_ytail * data$axis_y) / data$axis_ss
-  data$upper <-
-    (data$win_xhead * data$axis_x + data$win_yhead * data$axis_y) / data$axis_ss
-  # # project window corners onto axis (isoline extrema) in window units
-  # data$lower <- data$win_xtail * data$axis_x + data$win_ytail * data$axis_y
-  # data$upper <- data$win_xhead * data$axis_x + data$win_yhead * data$axis_y
-  data$win_xtail <- NULL
-  data$win_xhead <- NULL
-  data$win_ytail <- NULL
-  data$win_yhead <- NULL
-  
-  calibrate_rules_old(data, by, num)
-}
-
-limit_values <- function(x, y, x.range, y.range) {
-  
-  # associate window boundaries to axis directions
-  xtail <- ifelse(x > 0, x.range[[1L]], x.range[[2L]])
-  xhead <- ifelse(x > 0, x.range[[2L]], x.range[[1L]])
-  ytail <- ifelse(y > 0, y.range[[1L]], y.range[[2L]])
-  yhead <- ifelse(y > 0, y.range[[2L]], y.range[[1L]])
-  
-  # project window corners onto axes (isoline extrema)
-  mag <- sqrt(x^2 + y^2)
-  lower <- (xtail * x + ytail * y) / mag
-  upper <- (xhead * x + yhead * y) / mag
-  
-  data.frame(lower = lower, upper = upper)
-}
-
-calibrate_rules <- function(data, by, num, loose) {
-  req_names <- 
-    c("axis_x", "axis_y", "axis_ss", "upper", "lower", "center", "scale")
-  req_missing <- which(! req_names %in% names(data))
-  if (any(req_missing)) {
-    stop(
-      "Columns are missing from data: ",
-      paste0(req_names[req_missing], collapse = ", ")
+  if (is.null(data$yintercept) && ! is.null(data$xintercept)) {
+    offset <- with(data, xintercept * cos(angle + pi/2))
+    data <- transform(data, yintercept = offset / sin(angle + pi/2))
+  } else if (! is.null(data$yintercept) && is.null(data$xintercept)) {
+    offset <- with(data, yintercept * sin(angle + pi/2))
+    data <- transform(data, xintercept = offset / cos(angle + pi/2))
+  } else if (! is.null(data$yintercept) && ! is.null(data$xintercept)) {
+    # use more accurate intercept (closer to origin)
+    offset <- ifelse(
+      with(data, yintercept <= xintercept),
+      yintercept * sin(angle + pi/2),
+      xintercept * cos(angle + pi/2)
     )
   }
-  if (is.null(by) && is.null(num)) num <- 6L
   
-  # label ranges (axis units)
-  vmin <- with(data, center + scale * lower / sqrt(axis_ss))
-  vmax <- with(data, center + scale * upper / sqrt(axis_ss))
-  
-  # element units; by default, use Wilkinson's breaks algorithm
-  vseq <- if (is.null(by)) {
-    lapply(seq(nrow(data)), function(i) {
-      labeling::extended(vmin[[i]], vmax[[i]], num, only.loose = loose)
-    })
-  } else {
-    if (length(by) == 1L) by <- rep(by, nrow(data))
-    lapply(seq(nrow(data)), function(i) {
-      vran <- if (loose)
-        c(floor(vmin[[i]] / by[[i]]), ceiling(vmax[[i]] / by[[i]]))
-      else
-        c(ceiling(vmin[[i]] / by[[i]]), floor(vmax[[i]] / by[[i]]))
-      by[[i]] * seq(vran[[1]], vran[[2]])
-    })
+  if (is.null(data$xend) || is.null(data$yend)) {
+    # offset coordinates expand window to normal in case no rule is computed
+    data <- transform(
+      data,
+      xend = offset * cos(angle + pi/2),
+      yend = offset * sin(angle + pi/2)
+    )
   }
-  data <- data[rep(seq(nrow(data)), sapply(vseq, length)), , drop = FALSE]
-  data$label <- unlist(vseq)
   
-  # axis positions in window units
-  axis_val <- (data$label - data$center) / data$scale
-  data$x_val <- axis_val * data$axis_x
-  data$y_val <- axis_val * data$axis_y
+  data
+}
+
+recover_offset_intercepts <- function(data) {
+  
+  if (is.null(data$yintercept) && ! is.null(data$xintercept)) {
+    offset <- with(data, xintercept * cos(angle + pi/2))
+    data <- transform(data, yintercept = offset / sin(angle + pi/2))
+  } else if (! is.null(data$yintercept) && is.null(data$xintercept)) {
+    offset <- with(data, yintercept * sin(angle + pi/2))
+    data <- transform(data, xintercept = offset / cos(angle + pi/2))
+  } else if (is.null(data$yintercept) && is.null(data$xintercept)) {
+    offset <- with(data, sqrt(xend^2 + yend^2))
+    data <- transform(
+      data,
+      yintercept = offset / sin(angle + pi/2),
+      xintercept = offset / cos(angle + pi/2)
+    )
+  }
   
   data
 }
@@ -162,4 +98,60 @@ border_points <- function(slope, x.range, y.range) {
   res$y <- ifelse(res$rsq1 < res$rsq2, res$y2, res$y1)
   
   res[, c("x", "y")]
+}
+
+delimit_rules <- function(data, x.range, y.range) {
+  
+  # associate window boundaries to axis directions
+  xtail <- ifelse(data$x > 0, x.range[[1L]], x.range[[2L]])
+  xhead <- ifelse(data$x > 0, x.range[[2L]], x.range[[1L]])
+  ytail <- ifelse(data$y > 0, y.range[[1L]], y.range[[2L]])
+  yhead <- ifelse(data$y > 0, y.range[[2L]], y.range[[1L]])
+  
+  # project window corners onto axes (rule/isoline extrema)
+  transform(
+    data,
+    lower = (xtail * x + ytail * y) / radius,
+    upper = (xhead * x + yhead * y) / radius
+  )
+}
+
+calibrate_rules <- function(data, by, num, loose) {
+  # requires columns x, y, radius, angle, upper, lower, center, scale
+  
+  # label ranges (axis units)
+  vmin <- with(data, center + scale * lower / radius)
+  vmax <- with(data, center + scale * upper / radius)
+  
+  # element units; by default, use Wilkinson's breaks algorithm
+  vseq <- if (is.null(by)) {
+    lapply(seq(nrow(data)), function(i) {
+      labeling::extended(vmin[[i]], vmax[[i]], num, only.loose = loose)
+    })
+  } else {
+    if (length(by) == 1L) by <- rep(by, nrow(data))
+    lapply(seq(nrow(data)), function(i) {
+      vran <- if (loose)
+        c(floor(vmin[[i]] / by[[i]]), ceiling(vmax[[i]] / by[[i]]))
+      else
+        c(ceiling(vmin[[i]] / by[[i]]), floor(vmax[[i]] / by[[i]]))
+      by[[i]] * seq(vran[[1L]], vran[[2L]])
+    })
+  }
+  data <- data[rep(seq(nrow(data)), sapply(vseq, length)), , drop = FALSE]
+  data$label <- unlist(vseq)
+  
+  # axis positions in window units
+  # TODO: Remove original `x` & `y`; replace with current `x_val` & `y_val`.
+  # axis_val <- (data$label - data$center) / data$scale * data$radius
+  # data$x_val <- axis_val * data$x
+  # data$y_val <- axis_val * data$y
+  radius_t <- with(data, (label - center) / scale * radius)
+  data <- transform(
+    data,
+    x_t = radius_t * cos(angle),
+    y_t = radius_t * sin(angle)
+  )
+  
+  data
 }
