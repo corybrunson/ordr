@@ -120,10 +120,12 @@ GeomAxis <- ggproto(
   setup_params = function(data, params) {
     
     # allow only `by` or `num`, not both
-    if (! is.null(params$by) && ! is.null(params$num)) {
+    if (! is.null(params[["by"]]) && ! is.null(params[["num"]])) {
       warning("Both `by` and `num` provided; ignoring `num`.")
       params$num <- NULL
-    } else if (is.null(params$by) && is.null(params$num)) params$num <- 6L
+    } else if (is.null(params[["by"]]) && is.null(params[["num"]])) {
+      params$num <- 6L
+    }
     
     params
   },
@@ -131,32 +133,37 @@ GeomAxis <- ggproto(
   setup_data = function(data, params) {
     # NB: The resulting position aesthetics will inform the plotting window.
     
+    data <- ensure_cartesian_polar(data)
+    
     # axes or rules?
-    use_rule <- ! is.null(data$lower) && ! is.null(data$upper)
+    use_rule <- ! is.null(data[["lower"]]) && ! is.null(data[["upper"]])
     # offset?
     use_offset <- 
-      ! is.null(data$yintercept) || ! is.null(data$xintercept) ||
-      (! is.null(data$xend)       && ! is.null(data$yend))
+      ! is.null(data[["yintercept"]]) || ! is.null(data[["xintercept"]]) ||
+      (! is.null(data[["xend"]])       && ! is.null(data[["yend"]]))
     # # introduce endpoints if missing
     # if (! use_rule) data$lower <- data$upper <- 0
     
-    data <- ensure_cartesian_polar(data)
-    
-    # remove lengthless vectors
-    data <- subset(data, x^2 + y^2 > 0)
-    
     # compute endpoints
     if (use_rule) {
-      data <- transform(
-        data,
-        xmin = lower * cos(angle), ymin = lower * sin(angle),
-        xmax = upper * cos(angle), ymax = upper * sin(angle)
-      )
+      if (! is.null(data[["angle"]])) {
+        data <- transform(
+          data,
+          xmin = lower * cos(angle), ymin = lower * sin(angle),
+          xmax = upper * cos(angle), ymax = upper * sin(angle)
+        )
+      } else if (! is.null(data[["x"]]) && ! is.null(data[["y"]])) {
+        data <- transform(
+          data,
+          xmin = lower * cos(angle), ymin = lower * sin(angle),
+          xmax = upper * cos(angle), ymax = upper * sin(angle)
+        )
+      }
     }
     
     # recover endpoints
     if (use_offset) {
-      if (is.null(data$xend) || is.null(data$yend))
+      if (is.null(data[["xend"]]) || is.null(data[["yend"]]))
         data <- recover_offset_endpoints(data)
     }
     
@@ -185,6 +192,14 @@ GeomAxis <- ggproto(
     na.rm = FALSE
   ) {
     
+    data <- ensure_cartesian_polar(data)
+    
+    # remove lengthless vectors
+    data <- subset(data, x^2 + y^2 > 0)
+    
+    # TODO: Compute endpoints and offsets again, in case variables were not
+    # available at `setup_data()` time.
+    
     # copy `linewidth` to `size` for earlier **ggplot2** versions
     data$size <- data$linewidth
     
@@ -197,18 +212,16 @@ GeomAxis <- ggproto(
     # TODO: Obviate this by setting default values for these aesthetics.
     # axes or rules?
     use_rule <- 
-      ! is.null(data$xmin) && ! is.null(data$ymin) &&
-      ! is.null(data$xmax) && ! is.null(data$ymax)
+      ! is.null(data[["xmin"]]) && ! is.null(data[["ymin"]]) &&
+      ! is.null(data[["xmax"]]) && ! is.null(data[["ymax"]])
     # offset?
-    use_offset <- ! is.null(data$xend) && ! is.null(data$yend)
+    use_offset <- ! is.null(data[["xend"]]) && ! is.null(data[["yend"]])
     
     # initialize grob list
     grobs <- list()
     
     # minimum of the plot width and height
     plot_whmin <- min(diff(ranges$x), diff(ranges$y))
-    
-    data <- ensure_cartesian_polar(data)
     
     # text dodge vector
     data <- transform(
@@ -218,7 +231,7 @@ GeomAxis <- ggproto(
     
     # recover intercepts
     if (use_offset) {
-      if (is.null(data$yintercept) || is.null(data$xintercept))
+      if (is.null(data[["yintercept"]]) || is.null(data[["xintercept"]]))
         data <- recover_offset_intercepts(data)
     }
     
@@ -481,7 +494,7 @@ GeomAxis <- ggproto(
 
 offset_xy <- function(data) {
   # require that offset is encoded as `x0,y0`
-  if (is.null(data$x0) || is.null(data$y0))
+  if (is.null(data[["x0"]]) || is.null(data[["y0"]]))
     stop("This step requires `x0` and `y0`.")
   
   # positional variables to offset

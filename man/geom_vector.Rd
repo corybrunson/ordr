@@ -115,20 +115,26 @@ are in bold):
 }
 
 \examples{
-# compute unscaled row-principal components of scaled measurements
-(iris_pca <- ordinate(iris, cols = 1:4, princomp))
-
-# row-principal biplot with coordinate-wise standard deviations
-iris_pca \%>\%
-  ggbiplot(aes(color = Species)) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_unit_circle() +
-  geom_rows_point(alpha = .5) +
-  geom_cols_vector(color = "#444444") +
-  geom_cols_text_radiate(aes(label = name), color = "#444444") +
-  ggtitle("Row-principal unscaled PCA biplot of Anderson iris measurements") +
-  expand_limits(y = c(NA, 2))
+# cartesian coordinates
+us_center <- sapply(state.center, \(x) (min(x) + max(x)) / 2)
+state_center <- cbind(
+  state = state.abb,
+  sweep(as.data.frame(state.center), 2, us_center, "-")
+)
+ggplot(state_center, aes(x, y, label = state)) +
+  coord_equal() +
+  geom_vector() +
+  geom_text_radiate()
+# polar coordinates
+height_corr <- data.frame(
+  measurement = colnames(Harman23.cor$cov),
+  correlation = Harman23.cor$cov[1, ]
+)
+ggplot(height_corr, aes(angle = acos(correlation), label = measurement)) +
+  coord_equal() +
+  geom_vector(radius = 1) +
+  geom_text_radiate(radius = 1) +
+  expand_limits(x = c(NA, 1.5), y = c(NA, 1.5))
 }
 \seealso{
 Other geom layers: 

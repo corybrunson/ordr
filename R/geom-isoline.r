@@ -95,22 +95,19 @@ GeomIsoline <- ggproto(
   setup_params = function(data, params) {
     
     # allow only `by` or `num`, not both
-    if (! is.null(params$by) && ! is.null(params$num)) {
+    if (! is.null(params[["by"]]) && ! is.null(params[["num"]])) {
       warning("Both `by` and `num` provided; ignoring `num`.")
       params$num <- NULL
-    } else if (is.null(params$by) && is.null(params$num)) params$num <- 6L
+    } else if (is.null(params[["by"]]) && is.null(params[["num"]])) {
+      params$num <- 6L
+    }
     
     params
   },
   
   setup_data = function(data, params) {
     
-    # compute new aesthetics
-    
     data <- ensure_cartesian_polar(data)
-    
-    # remove lengthless vectors
-    data <- subset(data, x^2 + y^2 > 0)
     
     # drop position coordinates
     data$x <- data$y <- NULL
@@ -127,13 +124,16 @@ GeomIsoline <- ggproto(
     na.rm = TRUE
   ) {
     
+    data <- ensure_cartesian_polar(data)
+    
+    # remove lengthless vectors
+    data <- subset(data, x^2 + y^2 > 0)
+    
     # copy `linewidth` to `size` for earlier **ggplot2** versions
     data$size <- data$linewidth
     
     # prepare for marks
     ranges <- coord$range(panel_params)
-    
-    data <- ensure_cartesian_polar(data)
     
     # extend isolines to just beyond window borders
     data <- delimit_rules(data, ranges$x, ranges$y)

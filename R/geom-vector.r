@@ -24,7 +24,7 @@
 #'   `NULL` for no arrows.
 #' @template return-layer
 #' @family geom layers
-#' @example inst/examples/ex-geom-vector-iris.r
+#' @example inst/examples/ex-geom-vector.r
 #' @export
 geom_vector <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -61,8 +61,6 @@ GeomVector <- ggproto(
   
   setup_data = function(data, params) {
     
-    data <- ensure_cartesian_polar(data)
-    
     # all vectors have tails at the origin
     transform(
       data,
@@ -76,6 +74,8 @@ GeomVector <- ggproto(
     lineend = "round", linejoin = "mitre",
     na.rm = FALSE
   ) {
+    
+    data <- ensure_cartesian_polar(data)
     
     if (! coord$is_linear()) {
       warning("Vectors are not yet tailored to non-linear coordinates.")

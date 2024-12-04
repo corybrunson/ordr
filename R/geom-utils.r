@@ -9,27 +9,28 @@ default_arrow <- grid::arrow(
 # introduce `x` & `y` if passed only `angle` & `radius` and vice-versa
 # (read `angle` as radians)
 ensure_cartesian_polar <- function(data) {
-  if ((is.null(data$x) || is.null(data$y)) && 
-      (is.null(data$angle) || is.null(data$radius)))
+  if ((is.null(data[["x"]]) || is.null(data[["y"]])) && 
+      (is.null(data[["angle"]]) || is.null(data[["radius"]])))
     stop("This step requires either `x` and `y` or `angle` and `radius`.")
   
-  if (is.null(data$angle)) data$angle <- with(data, atan2(y, x))
-  if (is.null(data$radius)) data$radius <- with(data, sqrt(x^2 + y^2))
-  if (is.null(data$x)) data$x <- with(data, radius * cos(angle))
-  if (is.null(data$y)) data$y <- with(data, radius * sin(angle))
+  if (is.null(data[["angle"]])) data$angle <- with(data, atan2(y, x))
+  if (is.null(data[["radius"]])) data$radius <- with(data, sqrt(x^2 + y^2))
+  if (is.null(data[["x"]])) data$x <- with(data, radius * cos(angle))
+  if (is.null(data[["y"]])) data$y <- with(data, radius * sin(angle))
   
   data
 }
 
 recover_offset_endpoints <- function(data) {
   
-  if (is.null(data$yintercept) && ! is.null(data$xintercept)) {
+  if (is.null(data[["yintercept"]]) && ! is.null(data[["xintercept"]])) {
     offset <- with(data, xintercept * cos(angle + pi/2))
     data <- transform(data, yintercept = offset / sin(angle + pi/2))
-  } else if (! is.null(data$yintercept) && is.null(data$xintercept)) {
+  } else if (! is.null(data[["yintercept"]]) && is.null(data[["xintercept"]])) {
     offset <- with(data, yintercept * sin(angle + pi/2))
     data <- transform(data, xintercept = offset / cos(angle + pi/2))
-  } else if (! is.null(data$yintercept) && ! is.null(data$xintercept)) {
+  } else if (! is.null(data[["yintercept"]]) &&
+             ! is.null(data[["xintercept"]])) {
     # use more accurate intercept (closer to origin)
     offset <- ifelse(
       with(data, yintercept <= xintercept),
@@ -38,7 +39,7 @@ recover_offset_endpoints <- function(data) {
     )
   }
   
-  if (is.null(data$xend) || is.null(data$yend)) {
+  if (is.null(data[["xend"]]) || is.null(data[["yend"]])) {
     # offset coordinates expand window to normal in case no rule is computed
     data <- transform(
       data,
@@ -52,13 +53,13 @@ recover_offset_endpoints <- function(data) {
 
 recover_offset_intercepts <- function(data) {
   
-  if (is.null(data$yintercept) && ! is.null(data$xintercept)) {
+  if (is.null(data[["yintercept"]]) && ! is.null(data[["xintercept"]])) {
     offset <- with(data, xintercept * cos(angle + pi/2))
     data <- transform(data, yintercept = offset / sin(angle + pi/2))
-  } else if (! is.null(data$yintercept) && is.null(data$xintercept)) {
+  } else if (! is.null(data[["yintercept"]]) && is.null(data[["xintercept"]])) {
     offset <- with(data, yintercept * sin(angle + pi/2))
     data <- transform(data, xintercept = offset / cos(angle + pi/2))
-  } else if (is.null(data$yintercept) && is.null(data$xintercept)) {
+  } else if (is.null(data[["yintercept"]]) && is.null(data[["xintercept"]])) {
     offset <- with(data, sqrt(xend^2 + yend^2))
     data <- transform(
       data,
