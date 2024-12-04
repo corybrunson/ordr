@@ -44,7 +44,7 @@
 #'   as a proportion of the minimum of the plot width and height.
 #' @template return-layer
 #' @family geom layers
-#' @example inst/examples/ex-geom-axis-glass.r
+#' @example inst/examples/ex-geom-axis.r
 #' @export
 geom_axis <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",

@@ -211,6 +211,92 @@ stat_cols_center <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
+StatRowsRule <- ggproto(
+  "StatRowsRule", StatRule,
+  
+  setup_data = setup_rows_xy_data
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_rows_rule <- function(
+    mapping = NULL,
+    data = NULL,
+    geom = "axis",
+    position = "identity",
+    ...,
+    .referent = NULL, referent = NULL,
+    fun.min = minpp, fun.max = maxpp,
+    fun.offset = minabspp,
+    na.rm = FALSE,
+    show.legend = NA,
+    inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatRowsRule,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      .referent = .referent, referent = NULL,
+      fun.min = fun.min, fun.max = fun.max,
+      fun.offset = fun.offset,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsRule <- ggproto(
+  "StatColsRule", StatRule,
+  
+  setup_data = setup_cols_xy_data
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_rule <- function(
+    mapping = NULL,
+    data = NULL,
+    geom = "axis",
+    position = "identity",
+    ...,
+    .referent = NULL, referent = NULL,
+    fun.min = minpp, fun.max = maxpp,
+    fun.offset = minabspp,
+    na.rm = FALSE,
+    show.legend = NA,
+    inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatColsRule,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      .referent = .referent, referent = NULL,
+      fun.min = fun.min, fun.max = fun.max,
+      fun.offset = fun.offset,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
 StatRowsStar <- ggproto(
   "StatRowsStar", StatStar,
   

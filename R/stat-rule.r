@@ -1,5 +1,6 @@
 #' @title Construct limited rulers offset from the origin
 #' 
+
 #' @description Determine axis limits and offset vectors from reference data.
 #' 
 
@@ -16,6 +17,42 @@
 #'   \item{`axis`}{unique axis identifier}
 #' }
 
+#' @inheritParams ggplot2::layer
+#' @template param-stat
+#' @param referent The point cloud to rule; a data frame with `x` and `y`
+#'   columns or a subset of `c("rows", "cols")` to indicate row and/or column
+#'   elements from an ordination model.
+#' @template return-layer
+#' @family stat layers
+#' @example inst/examples/ex-stat-rule-glass.r
+#' @export
+stat_rule <- function(
+    mapping = NULL, data = NULL, geom = "axis", position = "identity",
+    .referent = NULL, referent = NULL,
+    fun.min = minpp, fun.max = maxpp,
+    fun.offset = minabspp,
+    show.legend = NA, 
+    inherit.aes = TRUE,
+    ...
+) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = StatRule,
+    geom = geom, 
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      .referent = .referent, referent = NULL,
+      fun.min = fun.min, fun.max = fun.max,
+      fun.offset = fun.offset,
+      na.rm = FALSE,
+      ...
+    )
+  )
+}
+
 #' @rdname ordr-ggproto
 #' @format NULL
 #' @usage NULL
@@ -31,12 +68,11 @@ StatRule <- ggproto(
     if (is.null(params$referent)) {
       # default to both row and column elements
       if (is.null(params$.referent)) {
-        param$.referent <- c("rows", "cols")
-      } else {
-        # extract elements to referent
-        params$referent <- 
-          data[data$.matrix %in% params$.referent, c("x", "y"), drop = FALSE]
+        params$.referent <- c("rows", "cols")
       }
+      # extract elements to referent
+      params$referent <- 
+        data[data$.matrix %in% params$.referent, c("x", "y"), drop = FALSE]
     } else {
       # require coordinate data
       stopifnot(
@@ -135,132 +171,19 @@ StatRule <- ggproto(
   }
 )
 
-#' @inheritParams ggplot2::layer
-#' @template param-stat
-#' @param referent The point cloud to rule; a data frame with `x` and `y`
-#'   columns or a subset of `c("rows", "cols")` to indicate row and/or column
-#'   elements from an ordination model.
-#' @template return-layer
-#' @family stat layers
-#' @examples
-#' @export
-stat_rule <- function(
-    mapping = NULL, data = NULL, geom = "axis", position = "identity",
-    .referent = NULL, referent = NULL,
-    fun.min = minpp, fun.max = maxpp,
-    fun.offset = minabspp,
-    show.legend = NA, 
-    inherit.aes = TRUE,
-    ...
-) {
-  layer(
-    data = data,
-    mapping = mapping,
-    stat = StatRule,
-    geom = geom, 
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      .referent = .referent, referent = NULL,
-      fun.min = fun.min, fun.max = fun.max,
-      fun.offset = fun.offset,
-      na.rm = FALSE,
-      ...
-    )
-  )
-}
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatRowsRule <- ggproto(
-  "StatRowsRule", StatRule,
-  
-  setup_data = setup_rows_xy_data
-)
-
-#' @rdname biplot-stats
-#' @export
-stat_rows_rule <- function(
-    mapping = NULL,
-    data = NULL,
-    geom = "axis",
-    position = "identity",
-    ...,
-    .referent = NULL, referent = NULL,
-    fun.min = minpp, fun.max = maxpp,
-    fun.offset = minabspp,
-    na.rm = FALSE,
-    show.legend = NA,
-    inherit.aes = TRUE
-) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatRowsRule,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      .referent = .referent, referent = NULL,
-      fun.min = fun.min, fun.max = fun.max,
-      fun.offset = fun.offset,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatColsRule <- ggproto(
-  "StatColsRule", StatRule,
-  
-  setup_data = setup_cols_xy_data
-)
-
-#' @rdname biplot-stats
-#' @export
-stat_cols_rule <- function(
-    mapping = NULL,
-    data = NULL,
-    geom = "axis",
-    position = "identity",
-    ...,
-    .referent = NULL, referent = NULL,
-    fun.min = minpp, fun.max = maxpp,
-    fun.offset = minabspp,
-    na.rm = FALSE,
-    show.legend = NA,
-    inherit.aes = TRUE
-) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatColsRule,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      .referent = .referent, referent = NULL,
-      fun.min = fun.min, fun.max = fun.max,
-      fun.offset = fun.offset,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
 # convenience functions for rule limits and axis offset
 const0 <- function(x) 0
+
+#' @rdname stat_rule
+#' @export
 minpp <- function(x, p = .1) min(x) - diff(range(x)) * p
+
+#' @rdname stat_rule
+#' @export
 maxpp <- function(x, p = .1) max(x) + diff(range(x)) * p
+
+#' @rdname stat_rule
+#' @export
 minabspp <- function(x, p = .1) {
   minmaxpp <- c(minpp(x, p), maxpp(x, p))
   minmaxpp[which.min(abs(minmaxpp))]

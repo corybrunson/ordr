@@ -24,8 +24,6 @@
 \alias{StatRows}
 \alias{StatCols}
 \alias{StatRule}
-\alias{StatRowsRule}
-\alias{StatColsRule}
 \alias{StatScale}
 \alias{StatRowsScale}
 \alias{StatColsScale}
@@ -34,6 +32,8 @@
 \alias{StatColsEllipse}
 \alias{StatRowsCenter}
 \alias{StatColsCenter}
+\alias{StatRowsRule}
+\alias{StatColsRule}
 \alias{StatRowsStar}
 \alias{StatColsStar}
 \alias{StatRowsChull}
@@ -53,34 +53,7 @@ The factor-specific geoms invoke the statistical transformation layers
 Because each ggplot layer consists of only one stat and one geom, this
 necessitates that ggproto classes for new stats must also come in \verb{*Rows}
 and \verb{*Cols} flavors.
-
-Determine axis limits and offset vectors from reference data.
 }
-\section{Biplot layers}{
-
-\code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
-frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
-variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
-filter the data frame to one of these two.
-
-The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
-stat in order to render plot elements for the corresponding factor matrix.
-\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
-points for rows and arrows for columns.
-}
-
-\section{Computed variables}{
- These can be used with
-\code{\link[ggplot2:aes_eval]{ggplot2::after_stat()}} to \href{https://ggplot2.tidyverse.org/reference/aes_eval.html}{control aesthetic evaluation}.
-\describe{
-\item{\verb{x,y}}{cartesian coordinates (if passed polar)}
-\item{\code{angle/radius}}{polar coordinates (if passed cartesian)}
-\item{\verb{lower,upper}}{distances of rule endpoints from origin}
-\item{\verb{yintercept,xintercept}}{intercepts of offset axis}
-\item{\code{axis}}{unique axis identifier}
-}
-}
-
 \seealso{
 \code{\link[ggplot2:ggplot2-ggproto]{ggplot2::ggplot2-ggproto}} and \link[ggplot2:ggproto]{ggplot2::ggproto} for explanations
 of base ggproto classes in \strong{ggplot2} and how to create new ones.

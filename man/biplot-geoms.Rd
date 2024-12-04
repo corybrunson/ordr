@@ -623,7 +623,7 @@ as their corresponding conventional geoms.
 }
 \seealso{
 Other biplot layers: 
-\code{\link{stat_rows}()},
-\code{\link{stat_rows_rule}()}
+\code{\link{biplot-stats}},
+\code{\link{stat_rows}()}
 }
 \concept{biplot layers}
