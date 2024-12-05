@@ -116,6 +116,7 @@ geom_rows_text(
   nudge_x = 0,
   nudge_y = 0,
   check_overlap = FALSE,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -131,6 +132,7 @@ geom_cols_text(
   nudge_x = 0,
   nudge_y = 0,
   check_overlap = FALSE,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -148,6 +150,7 @@ geom_rows_label(
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
   label.size = 0.25,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -165,6 +168,7 @@ geom_cols_label(
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
   label.size = 0.25,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -547,6 +551,10 @@ same layer will not be plotted. \code{check_overlap} happens at draw time and in
 the order of the data. Therefore data should be arranged by the label
 column before calling \code{geom_text()}. Note that this argument is not
 supported by \code{geom_label()}.}
+
+\item{size.unit}{How the \code{size} aesthetic is interpreted: as millimetres
+(\code{"mm"}, default), points (\code{"pt"}), centimetres (\code{"cm"}), inches (\code{"in"}),
+or picas (\code{"pc"}).}
 
 \item{label.padding}{Amount of padding around label. Defaults to 0.25 lines.}
 

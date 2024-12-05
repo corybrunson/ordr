@@ -32,14 +32,14 @@
 \alias{StatColsEllipse}
 \alias{StatRowsCenter}
 \alias{StatColsCenter}
-\alias{StatRowsRule}
-\alias{StatColsRule}
 \alias{StatRowsStar}
 \alias{StatColsStar}
 \alias{StatRowsChull}
 \alias{StatColsChull}
 \alias{StatRowsCone}
 \alias{StatColsCone}
+\alias{StatRowsRule}
+\alias{StatColsRule}
 \alias{StatRowsSpantree}
 \alias{StatColsSpantree}
 \title{ggproto classes created and adapted for ordr}

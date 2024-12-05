@@ -239,6 +239,7 @@ geom_rows_text <- function(
   nudge_x = 0,
   nudge_y = 0,
   check_overlap = FALSE,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -261,6 +262,7 @@ geom_rows_text <- function(
     params = list(
       parse = parse,
       check_overlap = check_overlap,
+      size.unit = size.unit,
       na.rm = na.rm,
       ...
     )
@@ -279,6 +281,7 @@ geom_cols_text <- function(
   nudge_x = 0,
   nudge_y = 0,
   check_overlap = FALSE,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -301,6 +304,7 @@ geom_cols_text <- function(
     params = list(
       parse = parse,
       check_overlap = check_overlap,
+      size.unit = size.unit,
       na.rm = na.rm,
       ...
     )
@@ -321,6 +325,7 @@ geom_rows_label <- function(
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
   label.size = 0.25,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -345,6 +350,7 @@ geom_rows_label <- function(
       label.padding = label.padding,
       label.r = label.r,
       label.size = label.size,
+      size.unit = size.unit,
       na.rm = na.rm,
       ...
     )
@@ -365,6 +371,7 @@ geom_cols_label <- function(
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
   label.size = 0.25,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -389,6 +396,7 @@ geom_cols_label <- function(
       label.padding = label.padding,
       label.r = label.r,
       label.size = label.size,
+      size.unit = size.unit,
       na.rm = na.rm,
       ...
     )

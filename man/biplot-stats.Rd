@@ -6,14 +6,14 @@
 \alias{stat_cols_ellipse}
 \alias{stat_rows_center}
 \alias{stat_cols_center}
-\alias{stat_rows_rule}
-\alias{stat_cols_rule}
 \alias{stat_rows_star}
 \alias{stat_cols_star}
 \alias{stat_rows_chull}
 \alias{stat_cols_chull}
 \alias{stat_rows_cone}
 \alias{stat_cols_cone}
+\alias{stat_rows_rule}
+\alias{stat_cols_rule}
 \alias{stat_rows_scale}
 \alias{stat_cols_scale}
 \alias{stat_rows_spantree}
@@ -76,38 +76,6 @@ stat_cols_center(
   fun.min = NULL,
   fun.max = NULL,
   fun.args = list()
-)
-
-stat_rows_rule(
-  mapping = NULL,
-  data = NULL,
-  geom = "axis",
-  position = "identity",
-  ...,
-  .referent = NULL,
-  referent = NULL,
-  fun.min = minpp,
-  fun.max = maxpp,
-  fun.offset = minabspp,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
-stat_cols_rule(
-  mapping = NULL,
-  data = NULL,
-  geom = "axis",
-  position = "identity",
-  ...,
-  .referent = NULL,
-  referent = NULL,
-  fun.min = minpp,
-  fun.max = maxpp,
-  fun.offset = minabspp,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
 )
 
 stat_rows_star(
@@ -173,6 +141,36 @@ stat_cols_cone(
   geom = "path",
   position = "identity",
   origin = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_rows_rule(
+  mapping = NULL,
+  data = NULL,
+  geom = "axis",
+  position = "identity",
+  .referent = NULL,
+  referent = NULL,
+  fun.min = minpp,
+  fun.max = maxpp,
+  fun.offset = minabspp,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_cols_rule(
+  mapping = NULL,
+  data = NULL,
+  geom = "axis",
+  position = "identity",
+  .referent = NULL,
+  referent = NULL,
+  fun.min = minpp,
+  fun.max = maxpp,
+  fun.offset = minabspp,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -303,15 +301,15 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
 \code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
 
+\item{origin}{Logical; whether to include the origin with the transformed
+data. Defaults to \code{FALSE}.}
+
 \item{.referent, referent}{A character vector indicating the matrix factor(s) of an
 ordination model to include in \code{referent}; should be a subset of \code{c("rows", "cols")}.}
 
 \item{fun.offset}{Function used to determine the directions and magnitudes of
 the axis offsets from the projections of \code{referent} onto the normal vectors
 of the axes.}
-
-\item{origin}{Logical; whether to include the origin with the transformed
-data. Defaults to \code{FALSE}.}
 
 \item{mult}{Numeric value used to scale the coordinates.}
 
