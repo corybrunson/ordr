@@ -26,6 +26,7 @@
 #' @inheritParams stat_cone
 #' @inheritParams stat_scale
 #' @inheritParams stat_spantree
+#' @inheritParams stat_rule
 #' @example inst/examples/ex-stat-ellipse-iris.r
 NULL
 

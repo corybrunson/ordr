@@ -25,27 +25,24 @@ recover_offset_endpoints <- function(data) {
   
   if (is.null(data[["yintercept"]]) && ! is.null(data[["xintercept"]])) {
     offset <- with(data, xintercept * cos(angle + pi/2))
-    data <- transform(data, yintercept = offset / sin(angle + pi/2))
+    data$yintercept <- with(data, offset / sin(angle + pi/2))
   } else if (! is.null(data[["yintercept"]]) && is.null(data[["xintercept"]])) {
     offset <- with(data, yintercept * sin(angle + pi/2))
-    data <- transform(data, xintercept = offset / cos(angle + pi/2))
+    data$xintercept <- with(data, offset / cos(angle + pi/2))
   } else if (! is.null(data[["yintercept"]]) &&
              ! is.null(data[["xintercept"]])) {
     # use more accurate intercept (closer to origin)
     offset <- ifelse(
       with(data, yintercept <= xintercept),
-      yintercept * sin(angle + pi/2),
-      xintercept * cos(angle + pi/2)
+      with(data, yintercept * sin(angle + pi/2)),
+           with(data, xintercept * cos(angle + pi/2))
     )
   }
   
   if (is.null(data[["xend"]]) || is.null(data[["yend"]])) {
     # offset coordinates expand window to normal in case no rule is computed
-    data <- transform(
-      data,
-      xend = offset * cos(angle + pi/2),
-      yend = offset * sin(angle + pi/2)
-    )
+    data$xend <- with(data, offset * cos(angle + pi/2))
+    data$yend <- with(data, offset * sin(angle + pi/2))
   }
   
   data
@@ -55,17 +52,14 @@ recover_offset_intercepts <- function(data) {
   
   if (is.null(data[["yintercept"]]) && ! is.null(data[["xintercept"]])) {
     offset <- with(data, xintercept * cos(angle + pi/2))
-    data <- transform(data, yintercept = offset / sin(angle + pi/2))
+    data$yintercept <- with(data, offset / sin(angle + pi/2))
   } else if (! is.null(data[["yintercept"]]) && is.null(data[["xintercept"]])) {
     offset <- with(data, yintercept * sin(angle + pi/2))
-    data <- transform(data, xintercept = offset / cos(angle + pi/2))
+    data$xintercept <- with(data, offset / cos(angle + pi/2))
   } else if (is.null(data[["yintercept"]]) && is.null(data[["xintercept"]])) {
     offset <- with(data, sqrt(xend^2 + yend^2))
-    data <- transform(
-      data,
-      yintercept = offset / sin(angle + pi/2),
-      xintercept = offset / cos(angle + pi/2)
-    )
+    data$yintercept <- with(data, offset / sin(angle + pi/2))
+    data$xintercept <- with(data, offset / cos(angle + pi/2))
   }
   
   data
@@ -110,11 +104,10 @@ delimit_rules <- function(data, x.range, y.range) {
   yhead <- ifelse(data$y > 0, y.range[[2L]], y.range[[1L]])
   
   # project window corners onto axes (rule/isoline extrema)
-  transform(
-    data,
-    lower = (xtail * x + ytail * y) / radius,
-    upper = (xhead * x + yhead * y) / radius
-  )
+  data$lower <- with(data, (xtail * x + ytail * y) / radius)
+  data$upper <- with(data, (xhead * x + yhead * y) / radius)
+  
+  data
 }
 
 calibrate_rules <- function(data, by, num, loose) {
@@ -148,11 +141,9 @@ calibrate_rules <- function(data, by, num, loose) {
   # data$x_val <- axis_val * data$x
   # data$y_val <- axis_val * data$y
   radius_t <- with(data, (label - center) / scale * radius)
-  data <- transform(
-    data,
-    x_t = radius_t * cos(angle),
-    y_t = radius_t * sin(angle)
-  )
+  # NB: Use `with()` rather than `transform()` to avoid triggering NOTEs.
+  data$x_t <- with(data, radius_t * cos(angle))
+  data$y_t <- with(data, radius_t * sin(angle))
   
   data
 }

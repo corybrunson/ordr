@@ -602,11 +602,16 @@ tick marks, and text value marks along the axes.}
 \item{by, num}{Intervals between elements or number of elements; specify only
 one.}
 
+\item{snap_rule}{Logical; whether to snap rule segments to grid values.}
+
 \item{tick_length}{Numeric; the length of the tick marks, as a proportion of
 the minimum of the plot width and height.}
 
-\item{text_dodge}{Numeric; the orthogonal distance of the text from the axis,
-as a proportion of the minimum of the plot width and height.}
+\item{text_dodge}{Numeric; the orthogonal distance of tick mark text from the
+axis, as a proportion of the minimum of the plot width and height.}
+
+\item{label_dodge}{Numeric; the orthogonal distance of the axis label from
+the axis, as a proportion of the minimum of the plot width and height.}
 
 \item{isoline_text}{Logical; whether to include text value marks along the
 isolines.}

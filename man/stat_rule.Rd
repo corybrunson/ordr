@@ -75,9 +75,18 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 \link[ggplot2:layer_positions]{layer position} documentation.
 }}
 
+\item{.referent}{A character vector indicating the matrix factor(s) of an
+ordination model to include in \code{referent}; should be a subset of \code{c("rows", "cols")}.}
+
 \item{referent}{The point cloud to rule; a data frame with \code{x} and \code{y}
-columns or a subset of \code{c("rows", "cols")} to indicate row and/or column
-elements from an ordination model.}
+columns.}
+
+\item{fun.min, fun.max}{Functions used to determine the limits of rules from
+the projections of \code{referent} onto the axes.}
+
+\item{fun.offset}{Function used to determine the directions and magnitudes of
+the axis offsets from the projections of \code{referent} onto the normal vectors
+of the axes.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.

@@ -19,9 +19,16 @@
 
 #' @inheritParams ggplot2::layer
 #' @template param-stat
+#' @param .referent A character vector indicating the matrix factor(s) of an
+#'   ordination model to include in `referent`; should be a subset of `c("rows",
+#'   "cols")`.
 #' @param referent The point cloud to rule; a data frame with `x` and `y`
-#'   columns or a subset of `c("rows", "cols")` to indicate row and/or column
-#'   elements from an ordination model.
+#'   columns.
+#' @param fun.min,fun.max Functions used to determine the limits of rules from
+#'   the projections of `referent` onto the axes.
+#' @param fun.offset Function used to determine the directions and magnitudes of
+#'   the axis offsets from the projections of `referent` onto the normal vectors
+#'   of the axes.
 #' @template return-layer
 #' @family stat layers
 #' @example inst/examples/ex-stat-rule-glass.r

@@ -36,12 +36,15 @@
 #' @inheritParams ggplot2::geom_text
 #' @inheritParams geom_isoline
 #' @template param-geom
+#' @param snap_rule Logical; whether to snap rule segments to grid values.
 #' @param axis_labels,axis_ticks,axis_text Logical; whether to include labels,
 #'   tick marks, and text value marks along the axes.
+#' @param label_dodge Numeric; the orthogonal distance of the axis label from
+#'   the axis, as a proportion of the minimum of the plot width and height.
 #' @param tick_length Numeric; the length of the tick marks, as a proportion of
 #'   the minimum of the plot width and height.
-#' @param text_dodge Numeric; the orthogonal distance of the text from the axis,
-#'   as a proportion of the minimum of the plot width and height.
+#' @param text_dodge Numeric; the orthogonal distance of tick mark text from the
+#'   axis, as a proportion of the minimum of the plot width and height.
 #' @template return-layer
 #' @family geom layers
 #' @example inst/examples/ex-geom-axis.r

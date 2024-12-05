@@ -303,6 +303,13 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
 \code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
 
+\item{.referent, referent}{A character vector indicating the matrix factor(s) of an
+ordination model to include in \code{referent}; should be a subset of \code{c("rows", "cols")}.}
+
+\item{fun.offset}{Function used to determine the directions and magnitudes of
+the axis offsets from the projections of \code{referent} onto the normal vectors
+of the axes.}
+
 \item{origin}{Logical; whether to include the origin with the transformed
 data. Defaults to \code{FALSE}.}
 
