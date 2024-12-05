@@ -6,12 +6,12 @@
 
 #' @template biplot-layers
 
-#' @section Computed variables: These can be used with
-#'   [`ggplot2::after_stat()`][ggplot2::aes_eval] to [control aesthetic
-#'   evaluation](https://ggplot2.tidyverse.org/reference/aes_eval.html).
+#' @section Computed variables: These are calculated during the statistical
+#'   transformation and can be accessed with [delayed
+#'   evaluation][ggplot2::aes_eval].
 #' \describe{
 #'   \item{`x,y`}{cartesian coordinates (if passed polar)}
-#'   \item{`angle/radius`}{polar coordinates (if passed cartesian)}
+#'   \item{`angle,radius`}{polar coordinates (if passed cartesian)}
 #'   \item{`lower,upper`}{distances of rule endpoints from origin}
 #'   \item{`yintercept,xintercept`}{intercepts of offset axis}
 #'   \item{`axis`}{unique axis identifier}
@@ -183,6 +183,8 @@ minpp <- function(x, p = .1) min(x) - diff(range(x)) * p
 maxpp <- function(x, p = .1) max(x) + diff(range(x)) * p
 
 #' @rdname stat_rule
+#' @param x A numeric vector.
+#' @param p A numeric value; the proportion of a range used as a buffer.
 #' @export
 minabspp <- function(x, p = .1) {
   minmaxpp <- c(minpp(x, p), maxpp(x, p))

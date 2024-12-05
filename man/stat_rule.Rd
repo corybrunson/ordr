@@ -91,6 +91,10 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
+
+\item{x}{A numeric vector.}
+
+\item{p}{A numeric value; the proportion of a range used as a buffer.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.
@@ -112,11 +116,11 @@ points for rows and arrows for columns.
 }
 
 \section{Computed variables}{
- These can be used with
-\code{\link[ggplot2:aes_eval]{ggplot2::after_stat()}} to \href{https://ggplot2.tidyverse.org/reference/aes_eval.html}{control aesthetic evaluation}.
+ These are calculated during the statistical
+transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluation}.
 \describe{
 \item{\verb{x,y}}{cartesian coordinates (if passed polar)}
-\item{\code{angle/radius}}{polar coordinates (if passed cartesian)}
+\item{\verb{angle,radius}}{polar coordinates (if passed cartesian)}
 \item{\verb{lower,upper}}{distances of rule endpoints from origin}
 \item{\verb{yintercept,xintercept}}{intercepts of offset axis}
 \item{\code{axis}}{unique axis identifier}

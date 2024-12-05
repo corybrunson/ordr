@@ -136,6 +136,14 @@ In either case, the stat layer returns a data frame with position aesthetics
 \code{x} and \code{y}.
 }
 
+\section{Computed variables}{
+ These are calculated during the statistical
+transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluation}.
+\describe{
+\item{\verb{xmin,ymin,xmax,ymax}}{results of \verb{fun.min,fun.max} applied to \verb{x,y}}
+}
+}
+
 \examples{
 # scaled PCA of Anderson iris measurements
 iris[, -5] \%>\%

@@ -139,6 +139,14 @@ In either case, the stat layer returns a data frame with position aesthetics
 \code{x} and \code{y}.
 }
 
+\section{Computed variables}{
+ These are calculated during the statistical
+transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluation}.
+\describe{
+\item{\verb{xend,yend,x,y}}{endpoints of tree branches (segments)}
+}
+}
+
 \examples{
 \dontrun{
 # classical multidimensional scaling of road distances between European cities
