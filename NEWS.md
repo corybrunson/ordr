@@ -13,6 +13,14 @@ Multiple harmonizers are now available for scaling secondary axes. That recommen
 Two new coordinate systems provide control over the aspect ratio of the plotting window without compromising that of the (artificial) coordinate axes:
 `GeomRect` (alias `GeomSquare`) extends `GeomFixed` with an `aspect_ratio` parameter for the plotting window, while `GeomBiplot` removes the `ratio` parameter and forces the coordinate axes to have aspect ratio 1.
 
+## rule stat
+
+A new 'rule' statistical transformation computes additional position aesthetics that the 'axis' geom uses to limit and offset axes. The stat accepts a reference data set, intended to be derived from the ordination model using a character vector of matrix factors, and a set of functions that compute limits `lower` and `upper` along the axes and `yintercept` and `xintercept` associated with offset axes. The 'axis' geom preprocesses these aesthetics to rule endpoints `xmin,ymin,xmax,ymax` and offset vectors `xend,yend` to force the plotting window to contain the limited axis segments or, if the axes remain lines, the offsets where they are centered.
+
+## angle,radius specifications
+
+Several geometric object layers ('vector', 'isoline', and 'axis') now accept polar as well as cartesian coordinates. Whereas cartesian coordinates influence the plotting window, polar coordinates do not, so this allows for the plot to ignore elements like axes that may not be intended to influence the window dimensions. This is an experimental convenience feature that may be removed in a future version.
+
 # ordr 0.1.1
 
 ## `linewidth` aesthetic (breaking change)
