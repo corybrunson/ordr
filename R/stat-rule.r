@@ -51,7 +51,7 @@ stat_rule <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      .referent = .referent, referent = NULL,
+      .referent = .referent, referent = referent,
       fun.min = fun.min, fun.max = fun.max,
       fun.offset = fun.offset,
       na.rm = FALSE,
@@ -70,9 +70,15 @@ StatRule <- ggproto(
   required_aes = c("x", "y"),
   
   setup_params = function(data, params) {
-    
+
+    # TODO: Reliably check that a data frame was fortified from a 'tbl_ord'.
+    from_tbl_ord <- ".matrix" %in% names(data)
     # TODO: Find a better way to handle this; are two parameters necessary?
-    if (is.null(params$referent)) {
+    if (! from_tbl_ord) {
+      if (! is.null(params$.referent))
+        warning("Only use `.referent` to specify ordination matrix factors.")
+    }
+    if (from_tbl_ord && is.null(params$referent)) {
       # default to both row and column elements
       if (is.null(params$.referent)) {
         params$.referent <- c("rows", "cols")
@@ -80,7 +86,7 @@ StatRule <- ggproto(
       # extract elements to referent
       params$referent <- 
         data[data$.matrix %in% params$.referent, c("x", "y"), drop = FALSE]
-    } else {
+    } else if (! is.null(params$referent)) {
       # require coordinate data
       stopifnot(
         is.data.frame(params$referent) || is.matrix(params$referent),
@@ -92,24 +98,20 @@ StatRule <- ggproto(
         warning("`referent` was provided; `.referent` will be ignored.")
         params$.referent <- NULL
       }
+      names(params$referent) <- c("x", "y")
     }
     # collapse to convex hull (specific to this statistical transformation)
-    names(params$referent) <- c("x", "y")
-    params$referent <- params$referent[chull(params$referent), , drop = FALSE]
-    
-    # if summary functions are `NULL` then use zero constant functions
-    params$fun.min <- params$fun.min %||% const0
-    params$fun.max <- params$fun.max %||% const0
-    params$fun.offset <- params$fun.offset %||% const0
+    if (! is.null(params$referent))
+      params$referent <- params$referent[chull(params$referent), , drop = FALSE]
     
     params
   },
   
   setup_data = function(data, params) {
     
-    data <- ensure_cartesian_polar(data, ggproto = "StatRule")
+    data <- ensure_cartesian_polar(data)
     
-    setup_cols_data(data, params)
+    data
   },
   
   compute_group = function(
@@ -124,9 +126,10 @@ StatRule <- ggproto(
     if (is.null(referent)) {
       data <- transform(
         data,
-        lower = -Inf, upper = Inf,
+        # lower = -Inf, upper = Inf,
         yintercept = 0, xintercept = 0
       )
+      
       return(data)
     }
     
@@ -143,7 +146,7 @@ StatRule <- ggproto(
       angle = atan2(y, x),
       axis = seq(nrow(data))
     )
-    group_vars <- c(names(data), "radius", "angle", "axis")
+    group_vars <- names(data)
     data <- merge(data, referent, by = c())
     
     # compute projections of all referent points to each axis
@@ -156,30 +159,28 @@ StatRule <- ggproto(
       ) |> 
       # compute offsets and endpoints
       dplyr::summarize(
-        lower = fun.min(h),
-        upper = fun.max(h),
-        offset = fun.offset(v)
+        lower = if (is.null(fun.min)) NULL else fun.min(h),
+        upper = if (is.null(fun.max)) NULL else fun.max(h),
+        offset = if (is.null(fun.offset)) NULL else fun.offset(v)
       ) |> 
       dplyr::ungroup() ->
       data
-    data$h <- data$v <- NULL
     
     # additional computed variables
-    data <- transform(
-      data,
-      # yintercept = offset / sin(angle + pi/2),
-      # xintercept = offset / cos(angle + pi/2)
-      xend = offset * cos(angle + pi/2),
-      yend = offset * sin(angle + pi/2)
-    )
-    data$offset <- NULL
+    if (! is.null(data[["offset"]])) {
+      data <- transform(
+        data,
+        # yintercept = offset / sin(angle + pi/2),
+        # xintercept = offset / cos(angle + pi/2)
+        xend = offset * cos(angle + pi/2),
+        yend = offset * sin(angle + pi/2)
+      )
+      data$offset <- NULL
+    }
     
     data
   }
 )
-
-# convenience functions for rule limits and axis offset
-const0 <- function(x) 0
 
 #' @rdname stat_rule
 #' @export

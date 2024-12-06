@@ -299,16 +299,27 @@ GeomAxis <- ggproto(
           dplyr::group_by(axis) |> 
           dplyr::filter(label == min(label) | label == max(label)) |> 
           dplyr::mutate(ext = ifelse(label == min(label), "min", "max")) |> 
+          dplyr::filter(all(c("min", "max") %in% ext)) |>
           dplyr::ungroup() |> 
+          dplyr::distinct() |>
           tidyr::pivot_wider(
             id_cols = axis,
             names_from = ext, values_from = c(x, y), names_sep = ""
-          ) |> 
-          as.data.frame() -> mark_range
+          ) -> 
+          mark_range
         
-        # extend segment to value range
-        axis_data[, c("xend", "yend", "x", "y")] <- 
-          mark_range[, c("xmin", "ymin", "xmax", "ymax")]
+        # extend segment to value range (when available)
+        # axis_data[, c("xend", "yend", "x", "y")] <- 
+        #   mark_range[, c("xmin", "ymin", "xmax", "ymax")]
+        mark_axes <- match(axis_data$axis, mark_range$axis)
+        mark_axes <- mark_axes[! is.na(mark_axes)]
+        if (length(mark_axes) > 0L) {
+          axis_data[mark_axes, c("xend", "yend", "x", "y")] <- 
+            mark_range[, c("xmin", "ymin", "xmax", "ymax")]
+        }
+        if (length(mark_axes) < nrow(axis_data)) {
+          axis_data <- subset(axis_data, axis_data$axis %in% mark_axes)
+        }
         
       } else {
         
@@ -362,7 +373,6 @@ GeomAxis <- ggproto(
             x = ifelse(repl_end, xend, x),
             y = ifelse(repl_end, yend, y)
           )
-          label_data <- subset(label_data, select = -c(xend, yend))
           # adjust labels inward from borders
           label_data <- transform(
             label_data,
@@ -376,6 +386,7 @@ GeomAxis <- ggproto(
               )
             )
           )
+          label_data <- subset(label_data, select = -c(xend, yend))
         }
       }
       
@@ -475,14 +486,16 @@ GeomAxis <- ggproto(
         angle = (atan(tan(angle)) + text_angle) * 180 / pi
       )
       
-      # mark text grobs
-      grobs <- c(grobs, list(GeomText$draw_panel(
-        data = offset_xy(text_data),
-        panel_params = panel_params, coord = coord,
-        parse = parse,
-        check_overlap = check_overlap,
-        na.rm = na.rm
-      )))
+      if (nrow(text_data) > 0L) {
+        # mark text grobs
+        grobs <- c(grobs, list(GeomText$draw_panel(
+          data = offset_xy(text_data),
+          panel_params = panel_params, coord = coord,
+          parse = parse,
+          check_overlap = check_overlap,
+          na.rm = na.rm
+        )))
+      }
       
     }
     

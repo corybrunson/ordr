@@ -136,14 +136,11 @@ calibrate_rules <- function(data, by, num, loose) {
   data$label <- unlist(vseq)
   
   # axis positions in window units
-  # TODO: Remove original `x` & `y`; replace with current `x_val` & `y_val`.
-  # axis_val <- (data$label - data$center) / data$scale * data$radius
-  # data$x_val <- axis_val * data$x
-  # data$y_val <- axis_val * data$y
   radius_t <- with(data, (label - center) / scale * radius)
   # NB: Use `with()` rather than `transform()` to avoid triggering NOTEs.
   data$x_t <- with(data, radius_t * cos(angle))
   data$y_t <- with(data, radius_t * sin(angle))
   
+  data <- unique(data)
   data
 }
