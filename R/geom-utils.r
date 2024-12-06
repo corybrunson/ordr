@@ -57,9 +57,10 @@ recover_offset_intercepts <- function(data) {
     offset <- with(data, yintercept * sin(angle + pi/2))
     data$xintercept <- with(data, offset / cos(angle + pi/2))
   } else if (is.null(data[["yintercept"]]) && is.null(data[["xintercept"]])) {
-    offset <- with(data, sqrt(xend^2 + yend^2))
-    data$yintercept <- with(data, offset / sin(angle + pi/2))
-    data$xintercept <- with(data, offset / cos(angle + pi/2))
+    offset_radius <- with(data, sqrt(xend^2 + yend^2))
+    offset_angle <- with(data, atan2(yend, xend))
+    data$yintercept <- offset_radius / sin(offset_angle)
+    data$xintercept <- offset_radius / cos(offset_angle)
   }
   
   data

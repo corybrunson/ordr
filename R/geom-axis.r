@@ -267,11 +267,16 @@ GeomAxis <- ggproto(
       # diagonal versus vertical lines
       axis_data <- transform(
         axis_data,
-        vline = x == 0 & y != 0,
-        slope = y / x
+        vline = (x == 0 & y != 0) | (angle %% pi == pi/2),
+        slope = tan(angle)
       )
-      axis_data$intercept <- axis_data$yintercept %||% 0
-      axis_data$xintercept <- axis_data$xintercept %||% 0
+      # axis_data$intercept <- axis_data$yintercept %||% 0
+      # axis_data$xintercept <- axis_data$xintercept %||% 0
+      axis_data <- transform(
+        axis_data,
+        intercept = ifelse(vline, Inf, axis_data$yintercept %||% 0),
+        xintercept = ifelse(slope == 0, Inf, axis_data$xintercept %||% 0)
+      )
       
       # TODO: Move intercept and slope calculations here?
       if (any(! axis_data$vline)) {
@@ -469,8 +474,10 @@ GeomAxis <- ggproto(
       text_data$fontface <- text_data$text_fontface
       
       # omit labels at origin
-      text_data <-
-        text_data[text_data$x_t != 0 | text_data$y_t != 0, , drop = FALSE]
+      if (! use_offset) {
+        text_data <-
+          text_data[text_data$x_t != 0 | text_data$y_t != 0, , drop = FALSE]
+      }
       
       # NB: This step redefines positional aesthetics for a specific grob.
       

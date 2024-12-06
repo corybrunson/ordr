@@ -36,8 +36,9 @@
 stat_rule <- function(
     mapping = NULL, data = NULL, geom = "axis", position = "identity",
     .referent = NULL, referent = NULL,
-    fun.min = minpp, fun.max = maxpp,
-    fun.offset = minabspp,
+    fun.min = "minpp", fun.max = "maxpp",
+    fun.offset = "minabspp",
+    fun.args = list(),
     show.legend = NA, 
     inherit.aes = TRUE,
     ...
@@ -54,6 +55,7 @@ stat_rule <- function(
       .referent = .referent, referent = referent,
       fun.min = fun.min, fun.max = fun.max,
       fun.offset = fun.offset,
+      fun.args = fun.args,
       na.rm = FALSE,
       ...
     )
@@ -117,8 +119,9 @@ StatRule <- ggproto(
   compute_group = function(
     data, scales,
     .referent = NULL, referent = NULL,
-    fun.min = minpp, fun.max = maxpp,
-    fun.offset = minabspp,
+    fun.min = "minpp", fun.max = "maxpp",
+    fun.offset = "minabspp",
+    fun.args = list(),
     subset = NULL, elements = "all"
   ) {
     
@@ -149,22 +152,18 @@ StatRule <- ggproto(
     group_vars <- names(data)
     data <- merge(data, referent, by = c())
     
-    # compute projections of all referent points to each axis
-    data |> 
-      dplyr::group_by(dplyr::across(tidyselect::all_of(group_vars))) |> 
-      # projections of referent points onto axis and its normal vector
-      dplyr::mutate(
-        h = radius_ * cos(angle_ - angle),
-        v = radius_ * sin(angle_ - angle)
-      ) |> 
-      # compute offsets and endpoints
-      dplyr::summarize(
-        lower = if (is.null(fun.min)) NULL else fun.min(h),
-        upper = if (is.null(fun.max)) NULL else fun.max(h),
-        offset = if (is.null(fun.offset)) NULL else fun.offset(v)
-      ) |> 
-      dplyr::ungroup() ->
-      data
+    # compute horizontal and vertical projections of referent points onto axes
+    data <- transform(
+      data,
+      h = radius_ * cos(angle_ - angle),
+      v = radius_ * sin(angle_ - angle)
+    )
+    
+    # compute limits and offsets
+    lofun <- make_limits_offset_fun(fun.min, fun.max, fun.offset, fun.args)
+    data <- tidyr::nest(data, df = -tidyselect::all_of(group_vars))
+    data$df <- lapply(data$df, lofun)
+    data <- tidyr::unnest(data, df)
     
     # additional computed variables
     if (! is.null(data[["offset"]])) {
@@ -182,6 +181,8 @@ StatRule <- ggproto(
   }
 )
 
+const0 <- function(x) 0
+
 #' @rdname stat_rule
 #' @export
 minpp <- function(x, p = .1) min(x) - diff(range(x)) * p
@@ -197,4 +198,64 @@ maxpp <- function(x, p = .1) max(x) + diff(range(x)) * p
 minabspp <- function(x, p = .1) {
   minmaxpp <- c(minpp(x, p), maxpp(x, p))
   minmaxpp[which.min(abs(minmaxpp))]
+}
+
+# take `fun.min` & `fun.max` and return a function that summarizes a data frame
+make_limits_offset_fun <- function(fun.min, fun.max, fun.offset, fun.args) {
+  force(fun.min)
+  force(fun.max)
+  force(fun.offset)
+  force(fun.args)
+  
+  call_fun <- function(fun, x) {
+    if (is.null(fun)) return(NA_real_)
+    do.call(fun, c(list(quote(x)), fun.args))
+  }
+  # null function; empty 1-row data frame
+  fun_null <- function(df, ...) {
+    as.data.frame(matrix(NA_real_, nrow = 1L, ncol = 0L))
+  }
+  
+  # limits function
+  if (is.null(fun.min) && is.null(fun.max)) {
+    fun_limits <- fun_null
+  } else {
+    if (! is.null(fun.min) || ! is.null(fun.max)) {
+      # if either range limit is `NULL`, set it to the constant zero function
+      # TODO: If either range limit is `NULL`, make it the reverse of the other?
+      if (is.null(fun.min)) {
+        fun.max <- match.fun(fun.max)
+        # fun.min <- \(x) x[which(-x == fun.max(-x))[1L]]
+        fun.min <- const0
+      } else if (is.null(fun.max)) {
+        fun.min <- match.fun(fun.min)
+        # fun.max <- \(x) x[which(-x == fun.min(-x))[1L]]
+        fun.max <- const0
+      }
+    }
+    # both limits
+    fun_limits <- function(df, ...) {
+      data.frame(
+        lower = call_fun(fun.min, df$h),
+        upper = call_fun(fun.max, df$h)
+      )
+    }
+  }
+  
+  # offset function
+  if (is.null(fun.offset)) {
+    fun_offset <- fun_null
+  } else {
+    fun.offset <- match.fun(fun.offset)
+    fun_offset <- function(df, ...) {
+      data.frame(
+        offset = call_fun(fun.offset, df$v)
+      )
+    }
+  }
+  
+  # combined function
+  function(df, ...) {
+    cbind(fun_limits(df, ...), fun_offset(df, ...))
+  }
 }
