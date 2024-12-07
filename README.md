@@ -330,7 +330,10 @@ Meetings](https://ww2.amstat.org/meetings/jsm/2022/), on 2022 August 8
 in Washington DC. I’m grateful to Joyce Robbins for the invitation and
 for organizing such a fun first experience, to Naomi Robbins for
 chairing the event, and to my co-panelists Ursula Laa and Hengrui Luo
-for sharing and sparking such exciting ideas and conversations.
+for sharing and sparking such exciting ideas and conversations. An
+update was presented to the [ggplot2
+extenders](https://teunbrand.github.io/ggplot-extension-club/), which
+elicited additional valuable feedback.
 
 ### resources
 
