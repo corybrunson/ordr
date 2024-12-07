@@ -4,7 +4,37 @@
 #' @description Determine axis limits and offset vectors from reference data.
 #' 
 
+#' @details
+#'
+#' Biplots with several axes can become cluttered and illegible. When this
+#' happens, Gower, Gardner--Lubbe, & le Roux (2011) recommend to translate the
+#' axes to a new point of intersection away from the origin, adjusting the axis
+#' markers accordingly. Then the axes converge in a region of the plot offset
+#' from most position markers or other elements. An alternative solution,
+#' implemented in the **[bipl5][bipl5]** package, is to translate each axis
+#' orthogonally away from the origin, which preserves the axis markers. This is
+#' the technique implemented here.
+#'
+#' Separately, axes that fill the plotting window are uninformative when they
+#' exceed the range of the plotted position markers projected onto them. They
+#' may even be misinformative, suggesting that linear relationships extrapolate
+#' outside the data range. In these cases, Gower and Harding (1988) recommend
+#' using finite ranges determined by the data projection onto each axis.
+#'
+#' Three functions control these operations: `fun.offset` computes the
+#' orthogonal distance of each axis from the origin, and `fun.min` and `fun.max`
+#' compute the distance along each axis of the endpoints to the (offset) origin.
+#' Both functions depend on what position data is to be offset from or limited
+#' to, which must be either passed manually to the `referent` parameter or
+#' encoded as named matrix factors to the helper parameter `.referent`.
+#' 
+
+#' @template ref-gower2011
+#' @template ref-gower1988
+#'   
+
 #' @template biplot-layers
+#' @template biplot-ord-aes
 
 #' @section Computed variables: These are calculated during the statistical
 #'   transformation and can be accessed with [delayed
@@ -12,23 +42,21 @@
 #' \describe{
 #'   \item{`x,y`}{cartesian coordinates (if passed polar)}
 #'   \item{`angle,radius`}{polar coordinates (if passed cartesian)}
-#'   \item{`lower,upper`}{distances of rule endpoints from origin}
-#'   \item{`yintercept,xintercept`}{intercepts of offset axis}
-#'   \item{`axis`}{unique axis identifier}
+#'   \item{`lower,upper`}{distances to endpoints from origin (before offset)}
+#'   \item{`yintercept,xintercept`}{intercepts (possibly `Inf`) of offset axis}
+#'   \item{`axis`}{unique axis identifier (integer)}
 #' }
 
 #' @inheritParams ggplot2::layer
 #' @template param-stat
-#' @param .referent A character vector indicating the matrix factor(s) of an
-#'   ordination model to include in `referent`; should be a subset of `c("rows",
-#'   "cols")`.
+#' @param .referent A character string indicating the matrix factor(s) of an
+#'   ordination model to include in `referent`, handled the same way as
+#'   `.matrix`.
 #' @param referent The point cloud to rule; a data frame with `x` and `y`
 #'   columns.
-#' @param fun.min,fun.max Functions used to determine the limits of rules from
-#'   the projections of `referent` onto the axes.
-#' @param fun.offset Function used to determine the directions and magnitudes of
-#'   the axis offsets from the projections of `referent` onto the normal vectors
-#'   of the axes.
+#' @param fun.min,fun.max,fun.offset,fun.args Functions and arguments used to
+#'   determine the limits of the rules and the translations of the axes from the
+#'   projections of `referent` onto the axes and onto their normal vectors.
 #' @template return-layer
 #' @family stat layers
 #' @example inst/examples/ex-stat-rule-glass.r
@@ -83,11 +111,16 @@ StatRule <- ggproto(
     if (from_tbl_ord && is.null(params$referent)) {
       # default to both row and column elements
       if (is.null(params$.referent)) {
-        params$.referent <- c("rows", "cols")
+        params$.referent <- "dims"
       }
+      params$.referent <- match_factor(params$.referent)
+      # which elements to extract
+      facs <- if (params$.referent == "dims") 
+        c("rows", "cols") 
+      else 
+        params$.referent
       # extract elements to referent
-      params$referent <- 
-        data[data$.matrix %in% params$.referent, c("x", "y"), drop = FALSE]
+      params$referent <- data[data$.matrix %in% facs, c("x", "y"), drop = FALSE]
     } else if (! is.null(params$referent)) {
       # require coordinate data
       stopifnot(

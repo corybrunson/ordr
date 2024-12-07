@@ -239,7 +239,9 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
 ![](man/figures/README-interpolative%20biplot-1.png)<!-- -->
 
 When variables are represented in standard coordinates, as typically in
-PCA, their rules can be rescaled to yield a predictive biplot:[^9]
+PCA, their rules can be rescaled to yield a predictive biplot.[^9] For
+legibility, `stat_rule()` limits the axes to the data range and offsets
+them from the origin:
 
 ``` r
 ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
@@ -249,7 +251,8 @@ ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
     aes(color = Species, shape = Species),
     size = 5, alpha = .5, fun.data = mean_se
   ) +
-  geom_cols_axis(aes(label = name, center = center, scale = scale)) +
+  # geom_cols_axis(aes(label = name, center = center, scale = scale)) +
+  stat_cols_rule(aes(label = name, center = center, scale = scale)) +
   ggtitle("Predictive biplot of Anderson's iris measurements",
           "Project a marker onto an axis to approximate its measurement")
 ```
@@ -310,7 +313,7 @@ Additional design elements and features have been informed by the
 monograph
 [*Biplots*](https://www.google.com/books/edition/Biplots/lTxiedIxRpgC)
 and the textbook [*Understanding
-Biplots*](https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550)
+Biplots*](https://www.wiley.com/en-us/Understanding+Biplots-p-9781119972907)
 by John C. Gower, David J. Hand, Sugnet Gardner–Lubbe, and Niel J. Le
 Roux, and by the volume [*Principal Components
 Analysis*](https://link.springer.com/book/10.1007/b98835) by I. T.

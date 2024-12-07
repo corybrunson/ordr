@@ -14,9 +14,10 @@ stat_rule(
   position = "identity",
   .referent = NULL,
   referent = NULL,
-  fun.min = minpp,
-  fun.max = maxpp,
-  fun.offset = minabspp,
+  fun.min = "minpp",
+  fun.max = "maxpp",
+  fun.offset = "minabspp",
+  fun.args = list(),
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -75,18 +76,16 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 \link[ggplot2:layer_positions]{layer position} documentation.
 }}
 
-\item{.referent}{A character vector indicating the matrix factor(s) of an
-ordination model to include in \code{referent}; should be a subset of \code{c("rows", "cols")}.}
+\item{.referent}{A character string indicating the matrix factor(s) of an
+ordination model to include in \code{referent}, handled the same way as
+\code{.matrix}.}
 
 \item{referent}{The point cloud to rule; a data frame with \code{x} and \code{y}
 columns.}
 
-\item{fun.min, fun.max}{Functions used to determine the limits of rules from
-the projections of \code{referent} onto the axes.}
-
-\item{fun.offset}{Function used to determine the directions and magnitudes of
-the axis offsets from the projections of \code{referent} onto the normal vectors
-of the axes.}
+\item{fun.min, fun.max, fun.offset, fun.args}{Functions and arguments used to
+determine the limits of the rules and the translations of the axes from the
+projections of \code{referent} onto the axes and onto their normal vectors.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -111,6 +110,29 @@ A ggproto \link[ggplot2:layer]{layer}.
 \description{
 Determine axis limits and offset vectors from reference data.
 }
+\details{
+Biplots with several axes can become cluttered and illegible. When this
+happens, Gower, Gardner--Lubbe, & le Roux (2011) recommend to translate the
+axes to a new point of intersection away from the origin, adjusting the axis
+markers accordingly. Then the axes converge in a region of the plot offset
+from most position markers or other elements. An alternative solution,
+implemented in the \strong{\link{bipl5}} package, is to translate each axis
+orthogonally away from the origin, which preserves the axis markers. This is
+the technique implemented here.
+
+Separately, axes that fill the plotting window are uninformative when they
+exceed the range of the plotted position markers projected onto them. They
+may even be misinformative, suggesting that linear relationships extrapolate
+outside the data range. In these cases, Gower and Harding (1988) recommend
+using finite ranges determined by the data projection onto each axis.
+
+Three functions control these operations: \code{fun.offset} computes the
+orthogonal distance of each axis from the origin, and \code{fun.min} and \code{fun.max}
+compute the distance along each axis of the endpoints to the (offset) origin.
+Both functions depend on what position data is to be offset from or limited
+to, which must be either passed manually to the \code{referent} parameter or
+encoded as named matrix factors to the helper parameter \code{.referent}.
+}
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
@@ -124,15 +146,35 @@ stat in order to render plot elements for the corresponding factor matrix.
 points for rows and arrows for columns.
 }
 
+\section{Ordination aesthetics}{
+
+The convenience function \code{\link[=ord_aes]{ord_aes()}} can be used to incorporate all
+coordinates of the ordination model into a statistical transformation. It
+maps the coordinates to the custom aesthetics \code{..coord1}, \code{..coord2}, etc.
+
+Some transformations, e.g. \code{\link[=stat_center]{stat_center()}}, are commutative with projection
+to the 'x' and 'y' coordinates. If they detect aesthetics of the form
+\verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and \code{y}
+while any remaining are ignored.
+
+Other transformations, e.g. \code{\link[=stat_spantree]{stat_spantree()}}, yield different results in a
+planar biplot when they are computer before or after projection. If such a
+stat layer detects these aesthetics, then the lot of them are used in the
+transformation.
+
+In either case, the stat layer returns a data frame with position aesthetics
+\code{x} and \code{y}.
+}
+
 \section{Computed variables}{
  These are calculated during the statistical
 transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluation}.
 \describe{
 \item{\verb{x,y}}{cartesian coordinates (if passed polar)}
 \item{\verb{angle,radius}}{polar coordinates (if passed cartesian)}
-\item{\verb{lower,upper}}{distances of rule endpoints from origin}
-\item{\verb{yintercept,xintercept}}{intercepts of offset axis}
-\item{\code{axis}}{unique axis identifier}
+\item{\verb{lower,upper}}{distances to endpoints from origin (before offset)}
+\item{\verb{yintercept,xintercept}}{intercepts (possibly \code{Inf}) of offset axis}
+\item{\code{axis}}{unique axis identifier (integer)}
 }
 }
 
@@ -187,6 +229,13 @@ glass_lda \%>\%
     "LDA of Freestone glass measurements",
     "Symmetric biplot of contribution LDA"
   )
+}
+\references{
+Gower JC, Gardner--Lubbe S, & le Roux NJ (2011) \emph{Understanding Biplots}.
+Wiley, ISBN: 978-0-470-01255-0. \url{https://www.wiley.com/go/biplots}
+
+Gower JC & Harding SA (1988) "Nonlinear biplots". \emph{Biometrika} \strong{75}(3):
+445--455. \doi{10.1093/biomet/75.3.445}
 }
 \seealso{
 Other stat layers: 

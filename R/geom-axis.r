@@ -370,6 +370,15 @@ GeomAxis <- ggproto(
           x = ifelse(repl_min, xmin, xmax),
           y = ifelse(repl_min, ymin, ymax)
         )
+        # adjust labels inward from borders
+        label_data <- transform(
+          label_data,
+          hjust = ifelse(
+            xmin < xmax,
+            as.numeric(1 - repl_min),
+            as.numeric(repl_min)
+          )
+        )
         label_data <- subset(label_data, select = -c(xmin, ymin, xmax, ymax))
         if (use_offset) {
           repl_end <- with(label_data, xend^2 + yend^2 < x^2 + y^2)

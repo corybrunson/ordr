@@ -304,12 +304,9 @@ treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with 
 \item{origin}{Logical; whether to include the origin with the transformed
 data. Defaults to \code{FALSE}.}
 
-\item{.referent, referent}{A character vector indicating the matrix factor(s) of an
-ordination model to include in \code{referent}; should be a subset of \code{c("rows", "cols")}.}
-
-\item{fun.offset}{Function used to determine the directions and magnitudes of
-the axis offsets from the projections of \code{referent} onto the normal vectors
-of the axes.}
+\item{.referent, referent}{A character string indicating the matrix factor(s) of an
+ordination model to include in \code{referent}, handled the same way as
+\code{.matrix}.}
 
 \item{mult}{Numeric value used to scale the coordinates.}
 

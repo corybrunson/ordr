@@ -129,7 +129,8 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
 
 [^text-radiate]: The radiating text geom, like several other features, is adapted from the **ggbiplot** package.
 
-When variables are represented in standard coordinates, as typically in PCA, their rules can be rescaled to yield a predictive biplot:[^predictive]
+When variables are represented in standard coordinates, as typically in PCA, their rules can be rescaled to yield a predictive biplot.[^predictive]
+For legibility, `stat_rule()` limits the axes to the data range and offsets them from the origin:
 
 [^predictive]: This is an experimental feature only available for linear methods, namely eigendecomposition, singular value decomposition, and principal components analysis.
 
@@ -141,7 +142,8 @@ ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
     aes(color = Species, shape = Species),
     size = 5, alpha = .5, fun.data = mean_se
   ) +
-  geom_cols_axis(aes(label = name, center = center, scale = scale)) +
+  # geom_cols_axis(aes(label = name, center = center, scale = scale)) +
+  stat_cols_rule(aes(label = name, center = center, scale = scale)) +
   ggtitle("Predictive biplot of Anderson's iris measurements",
           "Project a marker onto an axis to approximate its measurement")
 aggregate(iris[, 1:4], by = iris[, "Species", drop = FALSE], FUN = mean)
@@ -167,7 +169,7 @@ This package was originally inspired by the **ggbiplot** extension developed by 
 The motivation to unify a variety of ordination methods came from several books and articles by [Michael Greenacre](https://www.fbbva.es/microsite/multivariate-statistics/resources.html), in particular [_Biplots in Practice_](https://www.fbbva.es/microsite/multivariate-statistics/resources.html#biplots).
 Several answers at CrossValidated, in particular by [amoeba](https://stats.stackexchange.com/users/28666/amoeba) and [ttnphns](https://stats.stackexchange.com/users/3277/ttnphns), provided theoretical insights and informed design choices.
 Thomas Lin Pedersen's [**tidygraph**](https://github.com/thomasp85/tidygraph) prequel to **ggraph** finally induced the shift from the downstream generation of scatterplots to the upstream handling and manipulating of models.
-Additional design elements and features have been informed by the monograph [_Biplots_](https://www.google.com/books/edition/Biplots/lTxiedIxRpgC) and the textbook [_Understanding Biplots_](https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550) by John C. Gower, David J. Hand, Sugnet Gardner--Lubbe, and Niel J. Le Roux, and by the volume [_Principal Components Analysis_](https://link.springer.com/book/10.1007/b98835) by I. T. Jolliffe.
+Additional design elements and features have been informed by the monograph [_Biplots_](https://www.google.com/books/edition/Biplots/lTxiedIxRpgC) and the textbook [_Understanding Biplots_](https://www.wiley.com/en-us/Understanding+Biplots-p-9781119972907) by John C. Gower, David J. Hand, Sugnet Gardner--Lubbe, and Niel J. Le Roux, and by the volume [_Principal Components Analysis_](https://link.springer.com/book/10.1007/b98835) by I. T. Jolliffe.
 
 ### exposition
 
