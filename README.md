@@ -240,8 +240,8 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
 
 When variables are represented in standard coordinates, as typically in
 PCA, their rules can be rescaled to yield a predictive biplot.[^9] For
-legibility, `stat_rule()` limits the axes to the data range and offsets
-them from the origin:
+legibility, the axes are limited to the data range and offset from the
+origin:
 
 ``` r
 ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
@@ -251,7 +251,6 @@ ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
     aes(color = Species, shape = Species),
     size = 5, alpha = .5, fun.data = mean_se
   ) +
-  # geom_cols_axis(aes(label = name, center = center, scale = scale)) +
   stat_cols_rule(aes(label = name, center = center, scale = scale)) +
   ggtitle("Predictive biplot of Anderson's iris measurements",
           "Project a marker onto an axis to approximate its measurement")
