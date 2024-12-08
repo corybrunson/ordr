@@ -153,9 +153,10 @@ stat_rows_rule(
   position = "identity",
   .referent = NULL,
   referent = NULL,
-  fun.min = minpp,
-  fun.max = maxpp,
-  fun.offset = minabspp,
+  fun.lower = "minpp",
+  fun.upper = "maxpp",
+  fun.offset = "minabspp",
+  fun.args = list(),
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -168,9 +169,10 @@ stat_cols_rule(
   position = "identity",
   .referent = NULL,
   referent = NULL,
-  fun.min = minpp,
-  fun.max = maxpp,
-  fun.offset = minabspp,
+  fun.lower = "minpp",
+  fun.upper = "maxpp",
+  fun.offset = "minabspp",
+  fun.args = list(),
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -297,9 +299,11 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
-\item{fun.data, fun.center, fun.min, fun.max, fun.args}{Functions and arguments
-treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
-\code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
+\item{fun.data, fun.center, fun.min, fun.max}{Functions treated as in
+\code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and \code{fun.max}
+behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
+
+\item{fun.args}{Arguments passed to the \verb{fun.*}.}
 
 \item{origin}{Logical; whether to include the origin with the transformed
 data. Defaults to \code{FALSE}.}
@@ -307,6 +311,10 @@ data. Defaults to \code{FALSE}.}
 \item{.referent, referent}{A character string indicating the matrix factor(s) of an
 ordination model to include in \code{referent}, handled the same way as
 \code{.matrix}.}
+
+\item{fun.lower, fun.upper, fun.offset}{Functions used to determine the limits
+of the rules and the translations of the axes from the projections of
+\code{referent} onto the axes and onto their normal vectors.}
 
 \item{mult}{Numeric value used to scale the coordinates.}
 

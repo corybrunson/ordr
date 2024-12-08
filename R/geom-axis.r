@@ -232,7 +232,8 @@ GeomAxis <- ggproto(
       dodge_angle = if (use_offset) atan2(yend, xend) else (atan(y / x) + pi/2)
     )
     
-    # recover intercepts
+    # recover slope and (if offset) intercepts
+    if (is.null(data[["slope"]])) data$slope <- data$y / data$x
     if (use_offset) {
       if (is.null(data[["yintercept"]]) || is.null(data[["xintercept"]]))
         data <- recover_offset_intercepts(data)
@@ -350,13 +351,18 @@ GeomAxis <- ggproto(
       
       # compute positions: if `xend` & `yend` then mid/endpoint else border
       if (! use_rule) {
-        label_data <- cbind(
-          subset(label_data, select = -c(x, y)),
-          border_points(
-            with(label_data, y / x),
+        print(label_data[, "slope"])
+        if (use_offset) {
+          label_data <- border_points_offset(
+            label_data,
             panel_params$x.range, panel_params$y.range
           )
-        )
+        } else {
+          label_data <- border_points_origin(
+            label_data,
+            panel_params$x.range, panel_params$y.range
+          )
+        }
         # adjust labels inward from borders
         label_data <- transform(
           label_data,

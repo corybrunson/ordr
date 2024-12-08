@@ -67,33 +67,62 @@ recover_offset_intercepts <- function(data) {
 }
 
 # -+- handle vertical and horizontal axes -+-
-border_points <- function(slope, x.range, y.range) {
-  res <- data.frame(slope = slope)
+# TODO: Take offset into account.
+border_points_offset <- function(data, x.range, y.range) {
+  # x, y, angle, radius, yintercept, xintercept, xend, yend, dodge_angle
   
   # compute label positions
-  res$increasing <- sign(res$slope) == 1L
+  increasing <- sign(data$slope) == 1
   
   # (eventual) intersections with window borders
-  res$a1 <- y.range[[1L]] / res$slope
-  res$a2 <- y.range[[2L]] / res$slope
-  res$b1 <- x.range[[1L]] * res$slope
-  res$b2 <- x.range[[2L]] * res$slope
+  a1 <- with(data, xend + (- yend + y.range[[1L]]) / slope)
+  a2 <- with(data, xend + (- yend + y.range[[2L]]) / slope)
+  b1 <- with(data, yend + (- xend + x.range[[1L]]) * slope)
+  b2 <- with(data, yend + (- xend + x.range[[2L]]) * slope)
   # (bounded) intersections with window
-  res$x1 <- pmax(x.range[[1L]], pmin(res$a1, res$a2))
-  res$x2 <- pmin(x.range[[2L]], pmax(res$a1, res$a2))
-  res$z1 <- pmax(y.range[[1L]], pmin(res$b1, res$b2))
-  res$z2 <- pmin(y.range[[2L]], pmax(res$b1, res$b2))
+  x1 <- pmax(x.range[[1L]], pmin(a1, a2))
+  x2 <- pmin(x.range[[2L]], pmax(a1, a2))
+  z1 <- pmax(y.range[[1L]], pmin(b1, b2))
+  z2 <- pmin(y.range[[2L]], pmax(b1, b2))
   # account for negative slopes
-  res$y1 <- ifelse(res$increasing, res$z1, res$z2)
-  res$y2 <- ifelse(res$increasing, res$z2, res$z1)
-  # distances from origin
-  res$rsq1 <- res$x1 ^ 2 + res$y1 ^ 2
-  res$rsq2 <- res$x2 ^ 2 + res$y2 ^ 2
-  # farther intersection from origin
-  res$x <- ifelse(res$rsq1 < res$rsq2, res$x2, res$x1)
-  res$y <- ifelse(res$rsq1 < res$rsq2, res$y2, res$y1)
+  y1 <- ifelse(increasing, z1, z2)
+  y2 <- ifelse(increasing, z2, z1)
   
-  res[, c("x", "y")]
+  # farther intersection from origin
+  farther2 <- x1^2 + y1^2 < x2^2 + y2^2
+  transform(
+    data,
+    x = ifelse(farther2, x2, x1),
+    y = ifelse(farther2, y2, y1)
+  )
+}
+
+border_points_origin <- function(data, x.range, y.range) {
+  
+  # compute label positions
+  increasing <- sign(data$slope) == 1
+  
+  # (eventual) intersections with window borders
+  a1 <- y.range[[1L]] / data$slope
+  a2 <- y.range[[2L]] / data$slope
+  b1 <- x.range[[1L]] * data$slope
+  b2 <- x.range[[2L]] * data$slope
+  # (bounded) intersections with window
+  x1 <- pmax(x.range[[1L]], pmin(a1, a2))
+  x2 <- pmin(x.range[[2L]], pmax(a1, a2))
+  z1 <- pmax(y.range[[1L]], pmin(b1, b2))
+  z2 <- pmin(y.range[[2L]], pmax(b1, b2))
+  # account for negative slopes
+  y1 <- ifelse(increasing, z1, z2)
+  y2 <- ifelse(increasing, z2, z1)
+  
+  # farther intersection from origin
+  farther2 <- x1^2 + y1^2 < x2^2 + y2^2
+  transform(
+    data,
+    x = ifelse(farther2, x2, x1),
+    y = ifelse(farther2, y2, y1)
+  )
 }
 
 delimit_rules <- function(data, x.range, y.range) {

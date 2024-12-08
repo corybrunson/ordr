@@ -14,8 +14,8 @@ stat_rule(
   position = "identity",
   .referent = NULL,
   referent = NULL,
-  fun.min = "minpp",
-  fun.max = "maxpp",
+  fun.lower = "minpp",
+  fun.upper = "maxpp",
   fun.offset = "minabspp",
   fun.args = list(),
   show.legend = NA,
@@ -83,9 +83,11 @@ ordination model to include in \code{referent}, handled the same way as
 \item{referent}{The point cloud to rule; a data frame with \code{x} and \code{y}
 columns.}
 
-\item{fun.min, fun.max, fun.offset, fun.args}{Functions and arguments used to
-determine the limits of the rules and the translations of the axes from the
-projections of \code{referent} onto the axes and onto their normal vectors.}
+\item{fun.lower, fun.upper, fun.offset}{Functions used to determine the limits
+of the rules and the translations of the axes from the projections of
+\code{referent} onto the axes and onto their normal vectors.}
+
+\item{fun.args}{Arguments passed to the \verb{fun.*}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -127,11 +129,12 @@ outside the data range. In these cases, Gower and Harding (1988) recommend
 using finite ranges determined by the data projection onto each axis.
 
 Three functions control these operations: \code{fun.offset} computes the
-orthogonal distance of each axis from the origin, and \code{fun.min} and \code{fun.max}
-compute the distance along each axis of the endpoints to the (offset) origin.
-Both functions depend on what position data is to be offset from or limited
-to, which must be either passed manually to the \code{referent} parameter or
-encoded as named matrix factors to the helper parameter \code{.referent}.
+orthogonal distance of each axis from the origin, and \code{fun.lower} and
+\code{fun.upper} compute the distance along each axis of the endpoints to the
+(offset) origin. Both functions depend on what position data is to be offset
+from or limited to, which must be either passed manually to the \code{referent}
+parameter or encoded as named matrix factors to the helper parameter
+\code{.referent}.
 }
 \section{Biplot layers}{
 

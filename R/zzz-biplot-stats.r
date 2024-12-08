@@ -447,7 +447,7 @@ stat_cols_cone <- function(
 StatRowsRule <- ggproto(
   "StatRowsRule", StatRule,
   
-  setup_data = setup_rows_data
+  setup_data = setup_rows_xy_data
 )
 
 #' @rdname biplot-stats
@@ -459,9 +459,10 @@ stat_rows_rule <- function(
   position = "identity",
   .referent = NULL,
   referent = NULL,
-  fun.min = minpp,
-  fun.max = maxpp,
-  fun.offset = minabspp,
+  fun.lower = "minpp",
+  fun.upper = "maxpp",
+  fun.offset = "minabspp",
+  fun.args = list(),
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -477,9 +478,10 @@ stat_rows_rule <- function(
     params = list(
       .referent = .referent,
       referent = referent,
-      fun.min = fun.min,
-      fun.max = fun.max,
+      fun.lower = fun.lower,
+      fun.upper = fun.upper,
       fun.offset = fun.offset,
+      fun.args = fun.args,
       na.rm = FALSE,
       ...
     )
@@ -493,7 +495,7 @@ stat_rows_rule <- function(
 StatColsRule <- ggproto(
   "StatColsRule", StatRule,
   
-  setup_data = setup_cols_data
+  setup_data = setup_cols_xy_data
 )
 
 #' @rdname biplot-stats
@@ -505,9 +507,10 @@ stat_cols_rule <- function(
   position = "identity",
   .referent = NULL,
   referent = NULL,
-  fun.min = minpp,
-  fun.max = maxpp,
-  fun.offset = minabspp,
+  fun.lower = "minpp",
+  fun.upper = "maxpp",
+  fun.offset = "minabspp",
+  fun.args = list(),
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -523,9 +526,10 @@ stat_cols_rule <- function(
     params = list(
       .referent = .referent,
       referent = referent,
-      fun.min = fun.min,
-      fun.max = fun.max,
+      fun.lower = fun.lower,
+      fun.upper = fun.upper,
       fun.offset = fun.offset,
+      fun.args = fun.args,
       na.rm = FALSE,
       ...
     )

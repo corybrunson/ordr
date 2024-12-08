@@ -93,9 +93,11 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
-\item{fun.data, fun.center, fun.min, fun.max, fun.args}{Functions and arguments
-treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
-\code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
+\item{fun.data, fun.center, fun.min, fun.max}{Functions treated as in
+\code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and \code{fun.max}
+behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
+
+\item{fun.args}{Arguments passed to the \verb{fun.*}.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.

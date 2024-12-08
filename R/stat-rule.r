@@ -22,11 +22,12 @@
 #' using finite ranges determined by the data projection onto each axis.
 #'
 #' Three functions control these operations: `fun.offset` computes the
-#' orthogonal distance of each axis from the origin, and `fun.min` and `fun.max`
-#' compute the distance along each axis of the endpoints to the (offset) origin.
-#' Both functions depend on what position data is to be offset from or limited
-#' to, which must be either passed manually to the `referent` parameter or
-#' encoded as named matrix factors to the helper parameter `.referent`.
+#' orthogonal distance of each axis from the origin, and `fun.lower` and
+#' `fun.upper` compute the distance along each axis of the endpoints to the
+#' (offset) origin. Both functions depend on what position data is to be offset
+#' from or limited to, which must be either passed manually to the `referent`
+#' parameter or encoded as named matrix factors to the helper parameter
+#' `.referent`.
 #' 
 
 #' @template ref-gower2011
@@ -48,15 +49,16 @@
 #' }
 
 #' @inheritParams ggplot2::layer
+#' @inheritParams stat_center
 #' @template param-stat
 #' @param .referent A character string indicating the matrix factor(s) of an
 #'   ordination model to include in `referent`, handled the same way as
 #'   `.matrix`.
 #' @param referent The point cloud to rule; a data frame with `x` and `y`
 #'   columns.
-#' @param fun.min,fun.max,fun.offset,fun.args Functions and arguments used to
-#'   determine the limits of the rules and the translations of the axes from the
-#'   projections of `referent` onto the axes and onto their normal vectors.
+#' @param fun.lower,fun.upper,fun.offset Functions used to determine the limits
+#'   of the rules and the translations of the axes from the projections of
+#'   `referent` onto the axes and onto their normal vectors.
 #' @template return-layer
 #' @family stat layers
 #' @example inst/examples/ex-stat-rule-glass.r
@@ -64,7 +66,7 @@
 stat_rule <- function(
     mapping = NULL, data = NULL, geom = "axis", position = "identity",
     .referent = NULL, referent = NULL,
-    fun.min = "minpp", fun.max = "maxpp",
+    fun.lower = "minpp", fun.upper = "maxpp",
     fun.offset = "minabspp",
     fun.args = list(),
     show.legend = NA, 
@@ -81,7 +83,7 @@ stat_rule <- function(
     inherit.aes = inherit.aes,
     params = list(
       .referent = .referent, referent = referent,
-      fun.min = fun.min, fun.max = fun.max,
+      fun.lower = fun.lower, fun.upper = fun.upper,
       fun.offset = fun.offset,
       fun.args = fun.args,
       na.rm = FALSE,
@@ -152,7 +154,7 @@ StatRule <- ggproto(
   compute_group = function(
     data, scales,
     .referent = NULL, referent = NULL,
-    fun.min = "minpp", fun.max = "maxpp",
+    fun.lower = "minpp", fun.upper = "maxpp",
     fun.offset = "minabspp",
     fun.args = list(),
     subset = NULL, elements = "all"
@@ -193,7 +195,7 @@ StatRule <- ggproto(
     )
     
     # compute limits and offsets
-    lofun <- make_limits_offset_fun(fun.min, fun.max, fun.offset, fun.args)
+    lofun <- make_limits_offset_fun(fun.lower, fun.upper, fun.offset, fun.args)
     data <- tidyr::nest(data, df = -tidyselect::all_of(group_vars))
     data$df <- lapply(data$df, lofun)
     data <- tidyr::unnest(data, df)
@@ -233,10 +235,10 @@ minabspp <- function(x, p = .1) {
   minmaxpp[which.min(abs(minmaxpp))]
 }
 
-# take `fun.min` & `fun.max` and return a function that summarizes a data frame
-make_limits_offset_fun <- function(fun.min, fun.max, fun.offset, fun.args) {
-  force(fun.min)
-  force(fun.max)
+# take `fun.lower,fun.upper` and return a function that summarizes a data frame
+make_limits_offset_fun <- function(fun.lower, fun.upper, fun.offset, fun.args) {
+  force(fun.lower)
+  force(fun.upper)
   force(fun.offset)
   force(fun.args)
   
@@ -250,27 +252,27 @@ make_limits_offset_fun <- function(fun.min, fun.max, fun.offset, fun.args) {
   }
   
   # limits function
-  if (is.null(fun.min) && is.null(fun.max)) {
+  if (is.null(fun.lower) && is.null(fun.upper)) {
     fun_limits <- fun_null
   } else {
-    if (! is.null(fun.min) || ! is.null(fun.max)) {
+    if (! is.null(fun.lower) || ! is.null(fun.upper)) {
       # if either range limit is `NULL`, set it to the constant zero function
       # TODO: If either range limit is `NULL`, make it the reverse of the other?
-      if (is.null(fun.min)) {
-        fun.max <- match.fun(fun.max)
-        # fun.min <- \(x) x[which(-x == fun.max(-x))[1L]]
-        fun.min <- const0
-      } else if (is.null(fun.max)) {
-        fun.min <- match.fun(fun.min)
-        # fun.max <- \(x) x[which(-x == fun.min(-x))[1L]]
-        fun.max <- const0
+      if (is.null(fun.lower)) {
+        fun.upper <- match.fun(fun.upper)
+        # fun.lower <- \(x) x[which(-x == fun.upper(-x))[1L]]
+        fun.lower <- const0
+      } else if (is.null(fun.upper)) {
+        fun.lower <- match.fun(fun.lower)
+        # fun.upper <- \(x) x[which(-x == fun.lower(-x))[1L]]
+        fun.upper <- const0
       }
     }
     # both limits
     fun_limits <- function(df, ...) {
       data.frame(
-        lower = call_fun(fun.min, df$h),
-        upper = call_fun(fun.max, df$h)
+        lower = call_fun(fun.lower, df$h),
+        upper = call_fun(fun.upper, df$h)
       )
     }
   }

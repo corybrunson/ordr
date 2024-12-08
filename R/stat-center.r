@@ -12,9 +12,10 @@
 #' }
 
 #' @inheritParams ggplot2::layer
-#' @param fun.data,fun.center,fun.min,fun.max,fun.args Functions and arguments
-#'   treated as in [ggplot2::stat_summary()], with `fun.center`, `fun.min`, and
-#'   `fun.max` behaving as `fun.y`, `fun.ymin`, and `fun.ymax`.
+#' @param fun.data,fun.center,fun.min,fun.max Functions treated as in
+#'   [ggplot2::stat_summary()], with `fun.center`, `fun.min`, and `fun.max`
+#'   behaving as `fun.y`, `fun.ymin`, and `fun.ymax`.
+#' @param fun.args Arguments passed to the `fun.*`.
 #' @template param-stat
 #' @template return-layer
 #' @family stat layers
