@@ -2,8 +2,8 @@
 % Please edit documentation in R/aaa-.r, R/coord-rect.r, R/geom-axis.r,
 %   R/geom-intervals.r, R/geom-isoline.r, R/geom-origin.r,
 %   R/geom-text-radiate.r, R/geom-vector.r, R/stat-center.r, R/stat-chull.r,
-%   R/stat-cone.r, R/stat-matrix.r, R/stat-scale.r, R/stat-spantree.r,
-%   R/zzz-biplot-stats.r
+%   R/stat-cone.r, R/stat-matrix.r, R/stat-rule.r, R/stat-scale.r,
+%   R/stat-spantree.r, R/zzz-biplot-stats.r
 \docType{data}
 \name{ordr-ggproto}
 \alias{ordr-ggproto}
@@ -23,6 +23,7 @@
 \alias{StatCone}
 \alias{StatRows}
 \alias{StatCols}
+\alias{StatRule}
 \alias{StatScale}
 \alias{StatRowsScale}
 \alias{StatColsScale}
@@ -37,6 +38,8 @@
 \alias{StatColsChull}
 \alias{StatRowsCone}
 \alias{StatColsCone}
+\alias{StatRowsRule}
+\alias{StatColsRule}
 \alias{StatRowsSpantree}
 \alias{StatColsSpantree}
 \title{ggproto classes created and adapted for ordr}

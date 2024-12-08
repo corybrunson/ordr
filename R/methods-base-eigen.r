@@ -19,7 +19,7 @@
 #' @template return-methods
 #' @family methods for eigen-decomposition-based techniques
 #' @family models from the base package
-#' @example inst/examples/ex-methods-eigen-qswur.r
+#' @example inst/examples/ex-methods-eigen.r
 NULL
 
 #' @rdname methods-eigen

@@ -4,10 +4,18 @@
 #' @template biplot-layers
 #' @template biplot-ord-aes
 
+#' @section Computed variables: These are calculated during the statistical
+#'   transformation and can be accessed with [delayed
+#'   evaluation][ggplot2::aes_eval].
+#' \describe{
+#'   \item{`xmin,ymin,xmax,ymax`}{results of `fun.min,fun.max` applied to `x,y`}
+#' }
+
 #' @inheritParams ggplot2::layer
-#' @param fun.data,fun.center,fun.min,fun.max,fun.args Functions and arguments
-#'   treated as in [ggplot2::stat_summary()], with `fun.center`, `fun.min`, and
-#'   `fun.max` behaving as `fun.y`, `fun.ymin`, and `fun.ymax`.
+#' @param fun.data,fun.center,fun.min,fun.max Functions treated as in
+#'   [ggplot2::stat_summary()], with `fun.center`, `fun.min`, and `fun.max`
+#'   behaving as `fun.y`, `fun.ymin`, and `fun.ymax`.
+#' @param fun.args Arguments passed to the `fun.*`.
 #' @template param-stat
 #' @template return-layer
 #' @family stat layers

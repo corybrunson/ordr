@@ -93,9 +93,11 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
-\item{fun.data, fun.center, fun.min, fun.max, fun.args}{Functions and arguments
-treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
-\code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
+\item{fun.data, fun.center, fun.min, fun.max}{Functions treated as in
+\code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and \code{fun.max}
+behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
+
+\item{fun.args}{Arguments passed to the \verb{fun.*}.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.
@@ -136,6 +138,14 @@ In either case, the stat layer returns a data frame with position aesthetics
 \code{x} and \code{y}.
 }
 
+\section{Computed variables}{
+ These are calculated during the statistical
+transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluation}.
+\describe{
+\item{\verb{xmin,ymin,xmax,ymax}}{results of \verb{fun.min,fun.max} applied to \verb{x,y}}
+}
+}
+
 \examples{
 # scaled PCA of Anderson iris measurements
 iris[, -5] \%>\%
@@ -161,6 +171,7 @@ iris_pca \%>\%
 Other stat layers: 
 \code{\link{stat_chull}()},
 \code{\link{stat_cone}()},
+\code{\link{stat_rule}()},
 \code{\link{stat_scale}()},
 \code{\link{stat_spantree}()}
 }

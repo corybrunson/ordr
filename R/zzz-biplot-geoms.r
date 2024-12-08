@@ -239,6 +239,7 @@ geom_rows_text <- function(
   nudge_x = 0,
   nudge_y = 0,
   check_overlap = FALSE,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -261,6 +262,7 @@ geom_rows_text <- function(
     params = list(
       parse = parse,
       check_overlap = check_overlap,
+      size.unit = size.unit,
       na.rm = na.rm,
       ...
     )
@@ -279,6 +281,7 @@ geom_cols_text <- function(
   nudge_x = 0,
   nudge_y = 0,
   check_overlap = FALSE,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -301,6 +304,7 @@ geom_cols_text <- function(
     params = list(
       parse = parse,
       check_overlap = check_overlap,
+      size.unit = size.unit,
       na.rm = na.rm,
       ...
     )
@@ -321,6 +325,7 @@ geom_rows_label <- function(
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
   label.size = 0.25,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -345,6 +350,7 @@ geom_rows_label <- function(
       label.padding = label.padding,
       label.r = label.r,
       label.size = label.size,
+      size.unit = size.unit,
       na.rm = na.rm,
       ...
     )
@@ -365,6 +371,7 @@ geom_cols_label <- function(
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
   label.size = 0.25,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -389,6 +396,7 @@ geom_cols_label <- function(
       label.padding = label.padding,
       label.r = label.r,
       label.size = label.size,
+      size.unit = size.unit,
       na.rm = na.rm,
       ...
     )
@@ -683,6 +691,7 @@ geom_rows_axis <- function(
   axis_text = TRUE,
   by = NULL,
   num = NULL,
+  snap_rule = TRUE,
   tick_length = 0.025,
   text_dodge = 0.03,
   label_dodge = 0.03,
@@ -707,6 +716,7 @@ geom_rows_axis <- function(
       axis_text = axis_text,
       by = by,
       num = num,
+      snap_rule = snap_rule,
       tick_length = tick_length,
       text_dodge = text_dodge,
       label_dodge = label_dodge,
@@ -730,6 +740,7 @@ geom_cols_axis <- function(
   axis_text = TRUE,
   by = NULL,
   num = NULL,
+  snap_rule = TRUE,
   tick_length = 0.025,
   text_dodge = 0.03,
   label_dodge = 0.03,
@@ -754,6 +765,7 @@ geom_cols_axis <- function(
       axis_text = axis_text,
       by = by,
       num = num,
+      snap_rule = snap_rule,
       tick_length = tick_length,
       text_dodge = text_dodge,
       label_dodge = label_dodge,
@@ -883,7 +895,7 @@ geom_rows_isoline <- function(
   isoline_text = TRUE,
   by = NULL,
   num = NULL,
-  label_dodge = 0.03,
+  text_dodge = 0.03,
   ...,
   parse = FALSE,
   check_overlap = FALSE,
@@ -903,7 +915,7 @@ geom_rows_isoline <- function(
       isoline_text = isoline_text,
       by = by,
       num = num,
-      label_dodge = label_dodge,
+      text_dodge = text_dodge,
       parse = parse,
       check_overlap = check_overlap,
       na.rm = na.rm,
@@ -922,7 +934,7 @@ geom_cols_isoline <- function(
   isoline_text = TRUE,
   by = NULL,
   num = NULL,
-  label_dodge = 0.03,
+  text_dodge = 0.03,
   ...,
   parse = FALSE,
   check_overlap = FALSE,
@@ -942,7 +954,7 @@ geom_cols_isoline <- function(
       isoline_text = isoline_text,
       by = by,
       num = num,
-      label_dodge = label_dodge,
+      text_dodge = text_dodge,
       parse = parse,
       check_overlap = check_overlap,
       na.rm = na.rm,

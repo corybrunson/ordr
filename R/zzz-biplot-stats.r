@@ -24,6 +24,7 @@
 #' @inheritParams stat_star
 #' @inheritParams stat_chull
 #' @inheritParams stat_cone
+#' @inheritParams stat_rule
 #' @inheritParams stat_scale
 #' @inheritParams stat_spantree
 #' @example inst/examples/ex-stat-ellipse-iris.r
@@ -433,6 +434,102 @@ stat_cols_cone <- function(
     inherit.aes = inherit.aes,
     params = list(
       origin = origin,
+      na.rm = FALSE,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsRule <- ggproto(
+  "StatRowsRule", StatRule,
+  
+  setup_data = setup_rows_xy_data
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_rows_rule <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "axis",
+  position = "identity",
+  .referent = NULL,
+  referent = NULL,
+  fun.lower = "minpp",
+  fun.upper = "maxpp",
+  fun.offset = "minabspp",
+  fun.args = list(),
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatRowsRule,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      .referent = .referent,
+      referent = referent,
+      fun.lower = fun.lower,
+      fun.upper = fun.upper,
+      fun.offset = fun.offset,
+      fun.args = fun.args,
+      na.rm = FALSE,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsRule <- ggproto(
+  "StatColsRule", StatRule,
+  
+  setup_data = setup_cols_xy_data
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_rule <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "axis",
+  position = "identity",
+  .referent = NULL,
+  referent = NULL,
+  fun.lower = "minpp",
+  fun.upper = "maxpp",
+  fun.offset = "minabspp",
+  fun.args = list(),
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatColsRule,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      .referent = .referent,
+      referent = referent,
+      fun.lower = fun.lower,
+      fun.upper = fun.upper,
+      fun.offset = fun.offset,
+      fun.args = fun.args,
       na.rm = FALSE,
       ...
     )
