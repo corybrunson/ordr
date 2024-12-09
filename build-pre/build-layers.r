@@ -231,7 +231,8 @@ omit_layers <- c(
 xy_layers <- c(
   "stat_ellipse",
   "stat_scale",
-  "stat_center", "stat_star"
+  "stat_center", "stat_star",
+  "stat_rule"
 )
 
 # all files with stat or geom definitions

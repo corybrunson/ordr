@@ -142,8 +142,7 @@ points for rows and arrows for columns.
 \code{geom_text_radiate()} understands the following aesthetics (required
 aesthetics are in bold):
 \itemize{
-\item \strong{\code{x}}
-\item \strong{\code{y}}
+\item \strong{\code{x} and \code{y} \emph{or} \code{angle} and \code{radius}}
 \item \strong{\code{label}}
 \item \code{alpha}
 \item \code{angle}
@@ -176,6 +175,7 @@ Other geom layers:
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},
+\code{\link{geom_rule}()},
 \code{\link{geom_vector}()}
 }
 \concept{geom layers}

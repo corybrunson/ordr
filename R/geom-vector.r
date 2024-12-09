@@ -9,8 +9,7 @@
 #' `geom_vector()` understands the following aesthetics (required aesthetics
 #' are in bold):
 
-#' - **`x`**
-#' - **`y`**
+#' - **`x` and `y` _or_ `angle` and `radius`**
 #' - `alpha`
 #' - `colour`
 #' - `linetype`
@@ -25,7 +24,7 @@
 #'   `NULL` for no arrows.
 #' @template return-layer
 #' @family geom layers
-#' @example inst/examples/ex-geom-vector-iris.r
+#' @example inst/examples/ex-geom-vector.r
 #' @export
 geom_vector <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -57,9 +56,11 @@ geom_vector <- function(
 GeomVector <- ggproto(
   "GeomVector", GeomSegment,
   
-  required_aes = c("x", "y"),
+  required_aes = c("x|angle", "y|radius"),
+  non_missing_aes = c("x", "y", "angle", "radius"),
   
   setup_data = function(data, params) {
+    
     # all vectors have tails at the origin
     transform(
       data,
@@ -73,6 +74,9 @@ GeomVector <- ggproto(
     lineend = "round", linejoin = "mitre",
     na.rm = FALSE
   ) {
+    
+    data <- ensure_cartesian_polar(data)
+    
     if (! coord$is_linear()) {
       warning("Vectors are not yet tailored to non-linear coordinates.")
     }
