@@ -127,7 +127,6 @@ GeomAxis <- ggproto(
   },
   
   setup_data = function(data, params) {
-    # NB: The resulting position aesthetics will inform the plotting window.
     
     data <- ensure_cartesian_polar(data)
     
@@ -140,19 +139,11 @@ GeomAxis <- ggproto(
     
     # compute endpoints
     if (use_limits) {
-      if (! is.null(data[["angle"]])) {
-        data <- transform(
-          data,
-          xmin = lower * cos(angle), ymin = lower * sin(angle),
-          xmax = upper * cos(angle), ymax = upper * sin(angle)
-        )
-      } else if (! is.null(data[["x"]]) && ! is.null(data[["y"]])) {
-        data <- transform(
-          data,
-          xmin = lower * cos(angle), ymin = lower * sin(angle),
-          xmax = upper * cos(angle), ymax = upper * sin(angle)
-        )
-      }
+      data <- transform(
+        data,
+        xmin = lower * cos(angle), ymin = lower * sin(angle),
+        xmax = upper * cos(angle), ymax = upper * sin(angle)
+      )
     }
     
     # recover and offset endpoints
@@ -188,9 +179,6 @@ GeomAxis <- ggproto(
     
     # remove lengthless vectors
     data <- subset(data, x^2 + y^2 > 0)
-    
-    # TODO: Compute endpoints and offsets again, in case variables were not
-    # available at `setup_data()` time.
     
     # copy `linewidth` to `size` for earlier **ggplot2** versions
     data$size <- data$linewidth

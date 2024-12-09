@@ -84,7 +84,6 @@ GeomRule <- ggproto(
   optional_aes = c("yintercept", "xintercept", "xend", "yend"),
   
   setup_data = function(data, params) {
-    # NB: The resulting position aesthetics will inform the plotting window.
     
     data <- ensure_cartesian_polar(data)
     
