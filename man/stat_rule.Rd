@@ -175,9 +175,9 @@ transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluati
 \describe{
 \item{\verb{x,y}}{cartesian coordinates (if passed polar)}
 \item{\verb{angle,radius}}{polar coordinates (if passed cartesian)}
+\item{\code{axis}}{unique axis identifier (integer)}
 \item{\verb{lower,upper}}{distances to endpoints from origin (before offset)}
 \item{\verb{yintercept,xintercept}}{intercepts (possibly \code{Inf}) of offset axis}
-\item{\code{axis}}{unique axis identifier (integer)}
 }
 }
 

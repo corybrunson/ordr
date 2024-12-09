@@ -24,6 +24,8 @@
 \alias{geom_cols_pointranges}
 \alias{geom_rows_isoline}
 \alias{geom_cols_isoline}
+\alias{geom_rows_rule}
+\alias{geom_cols_rule}
 \alias{geom_rows_text_radiate}
 \alias{geom_cols_text_radiate}
 \alias{geom_rows_vector}
@@ -302,7 +304,6 @@ geom_rows_axis(
   axis_text = TRUE,
   by = NULL,
   num = NULL,
-  snap_rule = TRUE,
   tick_length = 0.025,
   text_dodge = 0.03,
   label_dodge = 0.03,
@@ -324,7 +325,6 @@ geom_cols_axis(
   axis_text = TRUE,
   by = NULL,
   num = NULL,
-  snap_rule = TRUE,
   tick_length = 0.025,
   text_dodge = 0.03,
   label_dodge = 0.03,
@@ -406,6 +406,50 @@ geom_cols_isoline(
   by = NULL,
   num = NULL,
   text_dodge = 0.03,
+  ...,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_rows_rule(
+  mapping = NULL,
+  data = NULL,
+  stat = "rule",
+  position = "identity",
+  axis_labels = TRUE,
+  axis_ticks = TRUE,
+  axis_text = TRUE,
+  by = NULL,
+  num = NULL,
+  snap_rule = TRUE,
+  tick_length = 0.025,
+  text_dodge = 0.03,
+  label_dodge = 0.03,
+  ...,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_rule(
+  mapping = NULL,
+  data = NULL,
+  stat = "rule",
+  position = "identity",
+  axis_labels = TRUE,
+  axis_ticks = TRUE,
+  axis_text = TRUE,
+  by = NULL,
+  num = NULL,
+  snap_rule = TRUE,
+  tick_length = 0.025,
+  text_dodge = 0.03,
+  label_dodge = 0.03,
   ...,
   parse = FALSE,
   check_overlap = FALSE,
@@ -610,8 +654,6 @@ tick marks, and text value marks along the axes.}
 \item{by, num}{Intervals between elements or number of elements; specify only
 one.}
 
-\item{snap_rule}{Logical; whether to snap rule segments to grid values.}
-
 \item{tick_length}{Numeric; the length of the tick marks, as a proportion of
 the minimum of the plot width and height.}
 
@@ -623,6 +665,8 @@ the axis, as a proportion of the minimum of the plot width and height.}
 
 \item{isoline_text}{Logical; whether to include text value marks along the
 isolines.}
+
+\item{snap_rule}{Logical; whether to snap rule segments to grid values.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.

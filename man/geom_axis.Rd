@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom-axis.r
 \name{geom_axis}
 \alias{geom_axis}
-\title{Axes through the origin}
+\title{Axes through or offset from the origin}
 \usage{
 geom_axis(
   mapping = NULL,
@@ -14,7 +14,6 @@ geom_axis(
   axis_text = TRUE,
   by = NULL,
   num = NULL,
-  snap_rule = TRUE,
   tick_length = 0.025,
   text_dodge = 0.03,
   label_dodge = 0.03,
@@ -79,8 +78,6 @@ tick marks, and text value marks along the axes.}
 \item{by, num}{Intervals between elements or number of elements; specify only
 one.}
 
-\item{snap_rule}{Logical; whether to snap rule segments to grid values.}
-
 \item{tick_length}{Numeric; the length of the tick marks, as a proportion of
 the minimum of the plot width and height.}
 
@@ -118,8 +115,8 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
-\code{geom_axis()} renders lines through the origin and the position
-of each case or variable.
+\code{geom_axis()} renders lines through or orthogonally translated
+from the origin and the position of each case or variable.
 }
 \section{Biplot layers}{
 
@@ -155,10 +152,6 @@ in bold):
 \code{text_hjust}, \code{text_vjust}, \code{text_family}, \code{text_fontface}
 \item \code{group}
 }
-
-The prefixed aesthetics \verb{label_*}, \verb{tick_*}, and \verb{text_*} are used by the
-text elements and will inherit any values passed to their un-prefixed
-counterparts, if recognized.
 }
 
 \examples{
@@ -181,6 +174,7 @@ Other geom layers:
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},
+\code{\link{geom_rule}()},
 \code{\link{geom_text_radiate}()},
 \code{\link{geom_vector}()}
 }

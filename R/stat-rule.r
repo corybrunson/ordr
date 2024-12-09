@@ -43,9 +43,9 @@
 #' \describe{
 #'   \item{`x,y`}{cartesian coordinates (if passed polar)}
 #'   \item{`angle,radius`}{polar coordinates (if passed cartesian)}
+#'   \item{`axis`}{unique axis identifier (integer)}
 #'   \item{`lower,upper`}{distances to endpoints from origin (before offset)}
 #'   \item{`yintercept,xintercept`}{intercepts (possibly `Inf`) of offset axis}
-#'   \item{`axis`}{unique axis identifier (integer)}
 #' }
 
 #' @inheritParams ggplot2::layer
