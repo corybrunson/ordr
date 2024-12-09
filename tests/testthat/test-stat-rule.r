@@ -22,7 +22,7 @@ axis_plot <-
   coord_equal() +
   stat_rule(
     referent = cloud_data,
-    fun.min = NULL, fun.max = NULL, fun.offset = NULL
+    fun.lower = NULL, fun.upper = NULL, fun.offset = NULL
   )
 axis_layer <- layer_data(axis_plot)
 
@@ -51,7 +51,7 @@ offset_plot <-
   coord_equal() +
   stat_rule(
     referent = cloud_data,
-    fun.min = NULL, fun.max = NULL
+    fun.lower = NULL, fun.upper = NULL
   )
 offset_layer <- layer_data(offset_plot)
 rule_plot <- 

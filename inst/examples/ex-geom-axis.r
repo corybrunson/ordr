@@ -13,7 +13,8 @@ scale(stackloss, scale = FALSE) |>
   scale_size_area() + scale_alpha_binned(breaks = c(-1, 0, 1)) +
   geom_axis(data = coef_data)
 # unlimited axes with window forcing
-scale(stackloss, scale = FALSE) |> 
+stackloss_centered <- scale(stackloss, scale = FALSE)
+stackloss_centered |> 
   ggplot(aes(x = Acid.Conc., y = Air.Flow)) +
   coord_square() + geom_origin() +
   geom_point(aes(size = stack.loss, alpha = sign(stack.loss))) + 

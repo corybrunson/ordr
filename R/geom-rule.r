@@ -94,19 +94,11 @@ GeomRule <- ggproto(
       (! is.null(data[["xend"]]) && ! is.null(data[["yend"]]))
     
     # compute endpoints
-    if (! is.null(data[["angle"]])) {
-      data <- transform(
-        data,
-        xmin = lower * cos(angle), ymin = lower * sin(angle),
-        xmax = upper * cos(angle), ymax = upper * sin(angle)
-      )
-    } else if (! is.null(data[["x"]]) && ! is.null(data[["y"]])) {
-      data <- transform(
-        data,
-        xmin = lower * cos(angle), ymin = lower * sin(angle),
-        xmax = upper * cos(angle), ymax = upper * sin(angle)
-      )
-    }
+    data <- transform(
+      data,
+      xmin = lower * cos(angle), ymin = lower * sin(angle),
+      xmax = upper * cos(angle), ymax = upper * sin(angle)
+    )
     
     # recover and offset endpoints
     if (use_offset) {
@@ -136,11 +128,6 @@ GeomRule <- ggproto(
     na.rm = FALSE
   ) {
     
-    data <- ensure_cartesian_polar(data)
-    
-    # remove lengthless vectors
-    data <- subset(data, x^2 + y^2 > 0)
-    
     # copy `linewidth` to `size` for earlier **ggplot2** versions
     data$size <- data$linewidth
     
@@ -149,6 +136,11 @@ GeomRule <- ggproto(
     
     # extract value ranges
     ranges <- coord$range(panel_params)
+    
+    data <- ensure_cartesian_polar(data)
+    
+    # remove lengthless vectors
+    data <- subset(data, x^2 + y^2 > 0)
     
     # offset?
     use_offset <- ! is.null(data[["xend"]]) && ! is.null(data[["yend"]])
@@ -159,12 +151,6 @@ GeomRule <- ggproto(
     # minimum of the plot width and height
     plot_whmin <- min(diff(ranges$x), diff(ranges$y))
     
-    # text dodge vector
-    data <- transform(
-      data,
-      dodge_angle = if (use_offset) atan2(yend, xend) else (atan(y / x) + pi/2)
-    )
-    
     # recover slope and (if offset) intercepts
     if (is.null(data[["slope"]])) data$slope <- data$y / data$x
     if (use_offset) {
@@ -172,7 +158,17 @@ GeomRule <- ggproto(
         data <- recover_offset_intercepts(data)
     }
     
-    # TODO: Write tests that account for all possibilities
+    # text dodge vector
+    if (axis_labels || axis_text) {
+      data <- transform(
+        data,
+        dodge_angle = if (use_offset) 
+          atan2(yend, xend) 
+        else 
+          (atan(slope) + pi/2)
+      )
+    }
+    
     # compute marks (`x_t` and `y_t`):
     # if no segments then first bound outside window
     if (axis_ticks || axis_text) {
@@ -180,10 +176,6 @@ GeomRule <- ggproto(
       
       # calculate rule values and positions
       mark_data <- calibrate_rules(mark_data, by, num, loose = TRUE)
-      
-      # encode offset using otherwise unused aesthetics
-      mark_data$x0 <- mark_data$xend %||% 0
-      mark_data$y0 <- mark_data$yend %||% 0
     }
     
     # axis grobs: if `xend` & `yend` then segment else abline & vline
@@ -195,7 +187,7 @@ GeomRule <- ggproto(
       
       # compute extended value range
       mark_data |> 
-        dplyr::transmute(axis, label, x = x_t + x0, y = y_t + y0) |> 
+        dplyr::transmute(axis, label, x = x_t + x_0, y = y_t + y_0) |> 
         dplyr::group_by(axis) |> 
         dplyr::filter(label == min(label) | label == max(label)) |> 
         dplyr::mutate(ext = ifelse(label == min(label), "min", "max")) |> 
@@ -237,6 +229,13 @@ GeomRule <- ggproto(
     if (axis_labels) {
       label_data <- data
       
+      # specify independent aesthetics
+      label_data$colour <- label_data$label_colour
+      label_data$alpha <- label_data$label_alpha
+      label_data$size <- label_data$label_size
+      label_data$family <- label_data$label_family
+      label_data$fontface <- label_data$label_fontface
+      
       # NB: This step redefines positional aesthetics for a specific grob.
       
       # compute positions: if `xend` & `yend` then mid/endpoint else border
@@ -274,13 +273,6 @@ GeomRule <- ggproto(
       # put total angle in degrees
       label_data$angle <- label_data$angle * 180 / pi
       
-      # specify aesthetics
-      label_data$colour <- label_data$label_colour
-      label_data$alpha <- label_data$label_alpha
-      label_data$size <- label_data$label_size
-      label_data$family <- label_data$label_family
-      label_data$fontface <- label_data$label_fontface
-      
       # axis label grobs
       grobs <- c(grobs, list(GeomText$draw_panel(
         data = label_data,
@@ -292,7 +284,7 @@ GeomRule <- ggproto(
     if (axis_ticks) {
       tick_data <- mark_data
       
-      # specify aesthetics
+      # specify independent aesthetics
       tick_data$colour <- tick_data$tick_colour
       tick_data$alpha <- tick_data$tick_alpha
       tick_data$size <- tick_data$tick_linewidth
@@ -328,11 +320,10 @@ GeomRule <- ggproto(
     if (axis_text) {
       text_data <- mark_data
       
-      # specify aesthetics
+      # specify independent aesthetics
       text_data$colour <- text_data$text_colour
       text_data$alpha <- text_data$text_alpha
       text_data$size <- text_data$text_size
-      # text_data$angle <- text_data$text_angle
       text_data$hjust <- text_data$text_hjust
       text_data$vjust <- text_data$text_vjust
       text_data$family <- text_data$text_family
@@ -379,23 +370,3 @@ GeomRule <- ggproto(
   # update this to include segment and letter in key squares
   draw_key = draw_key_abline
 )
-
-offset_xy <- function(data) {
-  # require that offset is encoded as `x0,y0`
-  if (is.null(data[["x0"]]) || is.null(data[["y0"]]))
-    stop("This step requires `x0` and `y0`.")
-  
-  # positional variables to offset
-  offset_cols <- lapply(
-    c("x", "y"),
-    \(xy) paste0(xy, c("", "end", "tick"))
-  ) |> 
-    lapply(intersect, names(data)) |> 
-    stats::setNames(c("x", "y"))
-  
-  # offset positional variables
-  for (col in offset_cols$x) data[[col]] <- data[[col]] + data$x0
-  for (col in offset_cols$y) data[[col]] <- data[[col]] + data$y0
-  
-  data
-}

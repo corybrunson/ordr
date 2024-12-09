@@ -1,4 +1,4 @@
-
+# sensible default for biplot arrows
 default_arrow <- grid::arrow(
   angle = 30,
   length = unit(.02, "native"),
@@ -6,8 +6,12 @@ default_arrow <- grid::arrow(
   type = "open"
 )
 
+# The following functions recover certain geometric variables from others.
+# They are called by `GeomAxis` and `GeomRule` for the following reasons:
+# * To allow the user to pass different kinds of data.
+# * To hide position aesthetics during the plotting window calculation.
+
 # introduce `x` & `y` if passed only `angle` & `radius` and vice-versa
-# (read `angle` as radians)
 ensure_cartesian_polar <- function(data) {
   if ((is.null(data[["x"]]) || is.null(data[["y"]])) && 
       (is.null(data[["angle"]]) || is.null(data[["radius"]])))
@@ -22,6 +26,8 @@ ensure_cartesian_polar <- function(data) {
 }
 
 recover_offset_endpoints <- function(data) {
+  # requires angle, yintercept, xintercept
+  # computes xend, yend
   
   if (is.null(data[["yintercept"]]) && ! is.null(data[["xintercept"]])) {
     offset <- with(data, xintercept * cos(angle + pi/2))
@@ -49,6 +55,8 @@ recover_offset_endpoints <- function(data) {
 }
 
 recover_offset_intercepts <- function(data) {
+  # requires angle, xend, yend
+  # computes yintercept, xintercept
   
   if (is.null(data[["yintercept"]]) && ! is.null(data[["xintercept"]])) {
     offset <- with(data, xintercept * cos(angle + pi/2))
@@ -66,10 +74,9 @@ recover_offset_intercepts <- function(data) {
   data
 }
 
-# -+- handle vertical and horizontal axes -+-
-# TODO: Take offset into account.
 border_points_offset <- function(data, x.range, y.range) {
-  # x, y, angle, radius, yintercept, xintercept, xend, yend, dodge_angle
+  # requires slope, xend, yend
+  # computes x, y
   
   # compute label positions
   increasing <- sign(data$slope) == 1
@@ -98,6 +105,8 @@ border_points_offset <- function(data, x.range, y.range) {
 }
 
 border_points_origin <- function(data, x.range, y.range) {
+  # requires slope
+  # computes x, y
   
   # compute label positions
   increasing <- sign(data$slope) == 1
@@ -125,7 +134,10 @@ border_points_origin <- function(data, x.range, y.range) {
   )
 }
 
+# TODO: Sharpen these bounds to a fixed length beyond the window.
 delimit_rules <- function(data, x.range, y.range) {
+  # requires x, y, radius
+  # computes lower, upper
   
   # associate window boundaries to axis directions
   xtail <- ifelse(data$x > 0, x.range[[1L]], x.range[[2L]])
@@ -141,7 +153,14 @@ delimit_rules <- function(data, x.range, y.range) {
 }
 
 calibrate_rules <- function(data, by, num, loose) {
-  # requires columns x, y, radius, angle, upper, lower, center, scale
+  # requires angle, radius, upper, lower, center, scale
+  # accepts xend, yend
+  # computes x_0, label, x_t, y_t
+  # expands data to label, x_t, y_t
+  
+  # encode offset using fake aesthetics
+  data$x_0 <- data$xend %||% 0
+  data$y_0 <- data$yend %||% 0
   
   # label ranges (axis units)
   vmin <- with(data, center + scale * lower / radius)
@@ -172,5 +191,24 @@ calibrate_rules <- function(data, by, num, loose) {
   data$y_t <- with(data, radius_t * sin(angle))
   
   data <- unique(data)
+  data
+}
+
+offset_xy <- function(data) {
+  # requires x_0, y_0 (fake aesthetics)
+  # redefines x, y, xend, yend, xtick, ytick
+  
+  # positional variables to offset
+  offset_cols <- lapply(
+    c("x", "y"),
+    \(xy) paste0(xy, c("", "end", "tick"))
+  ) |> 
+    lapply(intersect, names(data)) |> 
+    stats::setNames(c("x", "y"))
+  
+  # offset positional variables
+  for (col in offset_cols$x) data[[col]] <- data[[col]] + data$x_0
+  for (col in offset_cols$y) data[[col]] <- data[[col]] + data$y_0
+  
   data
 }
