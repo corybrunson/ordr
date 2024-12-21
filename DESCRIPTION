@@ -106,6 +106,7 @@ Collate:
     'stat-chull.r'
     'stat-cone.r'
     'stat-matrix.r'
+    'stat-referent.r'
     'stat-rule.r'
     'stat-scale.r'
     'stat-spantree.r'
