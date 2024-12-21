@@ -107,6 +107,7 @@ Collate:
     'stat-cone.r'
     'stat-matrix.r'
     'stat-referent.r'
+    'stat-projection.r'
     'stat-rule.r'
     'stat-scale.r'
     'stat-spantree.r'

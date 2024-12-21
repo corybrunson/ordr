@@ -2,7 +2,7 @@
 % Please edit documentation in R/stat-referent.r
 \name{stat_referent}
 \alias{stat_referent}
-\alias{ggplot_add.LayerOrd}
+\alias{ggplot_add.LayerRef}
 \title{Transformations with respect to reference data}
 \usage{
 stat_referent(
@@ -16,7 +16,7 @@ stat_referent(
   ...
 )
 
-\method{ggplot_add}{LayerOrd}(object, plot, object_name)
+\method{ggplot_add}{LayerRef}(object, plot, object_name)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}}. If specified and
@@ -90,7 +90,7 @@ projections of vectors \eqn{X} onto vectors \eqn{Y}. The stat layer
 \code{stat_referent()} accepts \eqn{Y} as an argument to the \code{referent} parameter
 and pre-processes them using the existing positional aesthetic mappings to
 \code{x} and \code{y}. (This requires a sleight of hand through a new undocumented
-\code{LayerOrd} class and associated \code{\link[ggplot2:ggplot_add]{ggplot2::ggplot_add()}} method.)
+\code{LayerRef} class and associated \code{\link[ggplot2:ggplot_add]{ggplot2::ggplot_add()}} method.)
 
 The ggproto can be used as a parent to more elaborate statistical
 transformations, or the stat can be paired with geoms that expect the
@@ -109,17 +109,12 @@ lm(mpg ~ hp00 + wt, subcars) |>
   coefficients() |>
   as.list() |> as.data.frame() ->
   grad
-# use the gradient as a reference
+# use the gradient as a reference (to no effect in this basic ggproto)
 ggplot(subcars, aes(x = hp00, y = wt)) +
   coord_equal() +
   geom_point() +
   stat_referent(referent = grad)
-# the reference data does not affect the computation in this ggproto
-StatReferent$compute_group(subcars) |> head(n = 2)
-StatReferent$compute_group(subcars, referent = grad) |> head(n = 2)
-# the mapping and referent parameters together yield new plotting data
-StatReferent$setup_params(
-  subcars,
-  list(mapping = aes(x = hp00, y = wt), referent = grad)
-)
+ggplot(subcars, aes(x = hp00, y = wt)) +
+  coord_equal() +
+  stat_referent(geom = "point", referent = grad)
 }
