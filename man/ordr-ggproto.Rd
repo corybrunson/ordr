@@ -41,6 +41,8 @@
 \alias{StatColsChull}
 \alias{StatRowsCone}
 \alias{StatColsCone}
+\alias{StatRowsProjection}
+\alias{StatColsProjection}
 \alias{StatRowsRule}
 \alias{StatColsRule}
 \alias{StatRowsSpantree}

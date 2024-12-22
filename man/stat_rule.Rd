@@ -5,19 +5,18 @@
 \alias{minpp}
 \alias{maxpp}
 \alias{minabspp}
-\title{Construct limited rulers offset from the origin}
+\title{Construct limited rules offset from the origin}
 \usage{
 stat_rule(
   mapping = NULL,
   data = NULL,
   geom = "axis",
   position = "identity",
-  .referent = NULL,
-  referent = NULL,
   fun.lower = "minpp",
   fun.upper = "maxpp",
   fun.offset = "minabspp",
   fun.args = list(),
+  referent = NULL,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -76,18 +75,13 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 \link[ggplot2:layer_positions]{layer position} documentation.
 }}
 
-\item{.referent}{A character string indicating the matrix factor(s) of an
-ordination model to include in \code{referent}, handled the same way as
-\code{.matrix}.}
-
-\item{referent}{The point cloud to rule; a data frame with \code{x} and \code{y}
-columns.}
-
 \item{fun.lower, fun.upper, fun.offset}{Functions used to determine the limits
 of the rules and the translations of the axes from the projections of
 \code{referent} onto the axes and onto their normal vectors.}
 
 \item{fun.args}{Arguments passed to the \verb{fun.*}.}
+
+\item{referent}{The reference data set; see Details.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -132,9 +126,8 @@ Three functions control these operations: \code{fun.offset} computes the
 orthogonal distance of each axis from the origin, and \code{fun.lower} and
 \code{fun.upper} compute the distance along each axis of the endpoints to the
 (offset) origin. Both functions depend on what position data is to be offset
-from or limited to, which must be either passed manually to the \code{referent}
-parameter or encoded as named matrix factors to the helper parameter
-\code{.referent}.
+from or limited to, which must be passed manually to the \code{referent}
+parameter.
 }
 \section{Biplot layers}{
 

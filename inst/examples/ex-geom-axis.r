@@ -19,9 +19,10 @@ stackloss_centered |>
   coord_square() + geom_origin() +
   geom_point(aes(size = stack.loss, alpha = sign(stack.loss))) + 
   scale_size_area() + scale_alpha_binned(breaks = c(-1, 0, 1)) +
-  geom_axis(
-    stat = "rule", data = coef_data,
-    referent = stackloss_centered[, c("Acid.Conc.", "Air.Flow")],
+  stat_rule(
+    geom = "axis", data = coef_data,
+    referent = stackloss_centered,
     fun.lower = \(x) minpp(x, p = 1), fun.upper = \(x) maxpp(x, p = 1),
     fun.offset = \(x) minabspp(x, p = 1)
   )
+# NB: `geom_axis(stat = "rule")` would fail to pass positional aesthetics.

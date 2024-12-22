@@ -82,7 +82,7 @@ nudges_to_position <- str_c(
 
 # function to generate layer functions, ggproto objects, and their documentation
 build_biplot_layer <- function(
-    layer_name, .matrix, proto = TRUE, xy = FALSE, file = ""
+    layer_name, .matrix, proto = TRUE, ref = FALSE, xy = FALSE, file = ""
 ) {
   .matrix <- match_factor(.matrix)
   
@@ -161,6 +161,7 @@ build_biplot_layer <- function(
     unname(param_trans[param_match])
   
   # define ggproto object
+  # TODO: Incorporate `ensure_cartesian_polar()` if necessary where appropriate.
   if_xy <- if (xy) "_xy" else ""
   proto_def <- if (! proto) "" else switch(
     type,
@@ -172,6 +173,7 @@ build_biplot_layer <- function(
       "{ggproto_name} <- ggproto(\n",
       "  \"{ggproto_name}\", {ggplot2:::camelize(layer_name, first = TRUE)},\n",
       "  \n",
+      if (ref) "  setup_params = setup_referent_params,\n  \n" else "",
       "  setup_data = setup_{.matrix}{if_xy}_data\n",
       ")\n",
       "\n\n",
@@ -193,7 +195,7 @@ build_biplot_layer <- function(
     "\n",
     ") {{\n",
     if (nudge_args) nudges_to_position else "",
-    "  layer(\n",
+    if (ref) "  LayerRef <- layer(\n" else "  layer(\n",
     "    ",
     arg_c(root_args, root_vals, 4L),
     "\n",
@@ -205,6 +207,8 @@ build_biplot_layer <- function(
     "      ...\n",
     "    )\n",
     "  )\n",
+    if (ref) "  class(LayerRef) <- c(\"LayerRef\", class(LayerRef))\n" else "",
+    if (ref) "  LayerRef\n" else "",
     "}}\n"
   )
   
@@ -224,15 +228,21 @@ orig_layers <- c(
 )
 # ordr layers to not adapt to biplot layers
 omit_layers <- c(
-  "geom_origin", "geom_unit_circle"
+  "geom_origin", "geom_unit_circle",
+  "stat_referent"
 )
 
+# layers that use reference data (necessarily 2 coordinates only)
+ref_layers <- c(
+  "stat_projection",
+  "stat_rule"
+)
 # layers that require restriction to 2 coordinates (without package recoverers)
 xy_layers <- c(
   "stat_ellipse",
   "stat_scale",
   "stat_center", "stat_star",
-  "stat_rule"
+  ref_layers
 )
 
 # all files with stat or geom definitions
@@ -442,6 +452,7 @@ for (type in c("stat", "geom")) {
       write_layer,
       .matrix,
       proto = ! done_proto,
+      ref = str_remove(write_layer, "^.*::") %in% ref_layers,
       xy = str_remove(write_layer, "^.*::") %in% xy_layers,
       file = adapt_file
     )

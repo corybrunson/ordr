@@ -9,6 +9,7 @@ stat_projection(
   data = NULL,
   geom = "segment",
   position = "identity",
+  subset = NULL,
   referent = NULL,
   ...,
   show.legend = NA,
@@ -62,6 +63,15 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 \link[ggplot2:layer_positions]{layer position} documentation.
 }}
 
+\item{subset}{An integer, logical, or character vector indicating a subset of
+rows or columns for which to render graphical elements. NB: Internally, the
+\code{subset} will be taken from the rows of the \link[=fortify.tbl_ord]{fortified}
+'tbl_ord' comprising rows from only one of the matrix factors. It is still
+possible to pass a formula to the \code{data} parameter, but it will act on the
+fortified data \emph{before} it has been restricted to one matrix factor.}
+
+\item{referent}{The reference data set; see Details.}
+
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
@@ -83,7 +93,15 @@ Compute projections of vectors from one matrix factor onto those
 of the other.
 }
 \details{
-TODO: Document the projection statistical transformation.
+An ordination model of continuous data can be used to predict values along
+one dimension from those along the other, using the artificial axes as
+intermediaries. The predictions correspond geometrically to projections of
+elements of one matrix factor in principal coordinates onto those of the
+other factor in standard coordinates. In the most familiar setting of PCA
+biplots, variable (column) values are predicted from case (row) locations
+along PC1 and PC2. This transformation obtains the axis projections as
+\verb{xend,yend} and pairs them with original points \verb{x,y} to demarcate segments
+visualizing the projections.
 }
 \section{Biplot layers}{
 
@@ -98,6 +116,21 @@ stat in order to render plot elements for the corresponding factor matrix.
 points for rows and arrows for columns.
 }
 
+\section{Referential stats}{
+
+This statistical transformation is done with respect to reference data passed
+to \code{referent} (ignored if \code{NULL}, the default, possibly resulting in empty
+output). See \code{\link[=stat_referent]{stat_referent()}} for more details. This relies on a sleight of
+hand through a new undocumented \code{LayerRef} class and associated
+\code{\link[ggplot2:ggplot_add]{ggplot2::ggplot_add()}} method. As a result, only layers constructed using
+this \verb{stat_*()} shortcut will pass the necessary positional aesthetics to the
+\verb{$setup_params()} step, making them available to pre-process \code{referent} data.
+
+The biplot shortcuts automatically substitute the complementary matrix factor
+for \code{referent = NULL} and will use an integer vector to select a subset from
+this factor. These uses do not require the mapping passage.
+}
+
 \section{Computed variables}{
  These are calculated during the statistical
 transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluation}.
@@ -106,6 +139,42 @@ transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluati
 }
 }
 
+\examples{
+# simplify the Motor Trends data to two predictors legible at aspect ratio 1
+mtcars |>
+  transform(hp00 = hp/100) |>
+  subset(select = c(mpg, hp00, wt)) ->
+  subcars
+# compute the gradient of `mpg` against these two predictors
+lm(mpg ~ hp00 + wt, subcars) |>
+  coefficients() |>
+  as.list() |> as.data.frame() ->
+  grad
+# project the data onto the gradient axis (with a reversed gradient vector)
+ggplot(subcars, aes(x = hp00, y = wt)) +
+  coord_equal() +
+  geom_point(shape = "circle open") +
+  geom_vector(data = -grad) +
+  stat_projection(referent = grad)
+# basic PCA
+iris_pca <- ordinate(iris, cols = 1:4, model = prcomp)
+# basic biplot
+iris_biplot <- 
+  ggbiplot(iris_pca, aes(color = Species, label = name)) +
+  geom_rows_point() +
+  geom_cols_axis()
+# project all cases onto all axes
+iris_biplot + stat_rows_projection()
+# project all cases onto select axes
+iris_biplot + stat_rows_projection(referent = c(2, 4))
+# project select cases onto all axes
+iris_biplot + stat_rows_projection(subset = c(1, 51, 101))
+# project select cases onto select axes
+iris_biplot + stat_rows_projection(subset = c(1, 51, 101), referent = c(2, 4))
+# project select cases onto manually provided axes
+iris_cols <- as.data.frame(get_cols(iris_pca))
+iris_biplot + stat_rows_projection(subset = c(1, 51, 101), referent = iris_cols)
+}
 \seealso{
 Other stat layers: 
 \code{\link{stat_center}()},

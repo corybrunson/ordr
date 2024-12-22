@@ -12,6 +12,8 @@
 \alias{stat_cols_chull}
 \alias{stat_rows_cone}
 \alias{stat_cols_cone}
+\alias{stat_rows_projection}
+\alias{stat_cols_projection}
 \alias{stat_rows_rule}
 \alias{stat_cols_rule}
 \alias{stat_rows_scale}
@@ -146,17 +148,40 @@ stat_cols_cone(
   ...
 )
 
+stat_rows_projection(
+  mapping = NULL,
+  data = NULL,
+  geom = "segment",
+  position = "identity",
+  subset = NULL,
+  referent = NULL,
+  ...,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+stat_cols_projection(
+  mapping = NULL,
+  data = NULL,
+  geom = "segment",
+  position = "identity",
+  subset = NULL,
+  referent = NULL,
+  ...,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
 stat_rows_rule(
   mapping = NULL,
   data = NULL,
   geom = "axis",
   position = "identity",
-  .referent = NULL,
-  referent = NULL,
   fun.lower = "minpp",
   fun.upper = "maxpp",
   fun.offset = "minabspp",
   fun.args = list(),
+  referent = NULL,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -167,12 +192,11 @@ stat_cols_rule(
   data = NULL,
   geom = "axis",
   position = "identity",
-  .referent = NULL,
-  referent = NULL,
   fun.lower = "minpp",
   fun.upper = "maxpp",
   fun.offset = "minabspp",
   fun.args = list(),
+  referent = NULL,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -308,9 +332,14 @@ behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
 \item{origin}{Logical; whether to include the origin with the transformed
 data. Defaults to \code{FALSE}.}
 
-\item{.referent, referent}{A character string indicating the matrix factor(s) of an
-ordination model to include in \code{referent}, handled the same way as
-\code{.matrix}.}
+\item{subset}{An integer, logical, or character vector indicating a subset of
+rows or columns for which to render graphical elements. NB: Internally, the
+\code{subset} will be taken from the rows of the \link[=fortify.tbl_ord]{fortified}
+'tbl_ord' comprising rows from only one of the matrix factors. It is still
+possible to pass a formula to the \code{data} parameter, but it will act on the
+fortified data \emph{before} it has been restricted to one matrix factor.}
+
+\item{referent}{The reference data set; see Details.}
 
 \item{fun.lower, fun.upper, fun.offset}{Functions used to determine the limits
 of the rules and the translations of the axes from the projections of

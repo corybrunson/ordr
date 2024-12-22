@@ -142,4 +142,31 @@ setup_cols_xy_data <- function(data, params) {
   data
 }
 
+setup_referent_params <- function(self, data, params) {
+  
+  .matrix <- tolower(gsub("^Stat(Rows|Cols).*$", "\\1", class(self)[[1L]]))
+  stopifnot(.matrix %in% c("rows", "cols"))
+  setup_factor_xy_data <- switch(
+    .matrix,
+    rows = setup_cols_xy_data,
+    cols = setup_rows_xy_data
+  )
+  
+  # syntactic sugar to specify the reference data
+  if (is.null(params$referent)) {
+    # default null `referent` to other matrix factor
+    params$referent <- setup_factor_xy_data(data, list())
+  } else if (! is.data.frame(params$referent) && ! is.matrix(params$referent)) {
+    # if `referent` is not a data frame, then treat it as the `subset` param
+    params$referent <- 
+      setup_factor_xy_data(data, list(subset = params$referent))
+  } else {
+    # continue with parent parameter setup
+    params$referent <- as.data.frame(params$referent)
+    params <- ggproto_parent(StatReferent, self)$setup_params(data, params)
+  }
+  
+  params
+}
+
 is_const <- function(x) length(unique(x)) == 1L

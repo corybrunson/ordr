@@ -10,6 +10,7 @@ stat_referent(
   data = NULL,
   geom = "blank",
   position = "identity",
+  subset = NULL,
   referent = NULL,
   show.legend = NA,
   inherit.aes = TRUE,
@@ -65,6 +66,15 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 \link[ggplot2:layer_positions]{layer position} documentation.
 }}
 
+\item{subset}{An integer, logical, or character vector indicating a subset of
+rows or columns for which to render graphical elements. NB: Internally, the
+\code{subset} will be taken from the rows of the \link[=fortify.tbl_ord]{fortified}
+'tbl_ord' comprising rows from only one of the matrix factors. It is still
+possible to pass a formula to the \code{data} parameter, but it will act on the
+fortified data \emph{before} it has been restricted to one matrix factor.}
+
+\item{referent}{The reference data set; see Details.}
+
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
 \code{FALSE} never includes, and \code{TRUE} always includes.
@@ -75,6 +85,14 @@ display.}
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
+
+\item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
+
+\item{object}{An object to add to the plot}
+
+\item{plot}{The ggplot object to add \code{object} to}
+
+\item{object_name}{The name of the object to add}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.
@@ -89,8 +107,7 @@ Often in geometric data analysis a statistical transformation applied to data
 projections of vectors \eqn{X} onto vectors \eqn{Y}. The stat layer
 \code{stat_referent()} accepts \eqn{Y} as an argument to the \code{referent} parameter
 and pre-processes them using the existing positional aesthetic mappings to
-\code{x} and \code{y}. (This requires a sleight of hand through a new undocumented
-\code{LayerRef} class and associated \code{\link[ggplot2:ggplot_add]{ggplot2::ggplot_add()}} method.)
+\code{x} and \code{y}.
 
 The ggproto can be used as a parent to more elaborate statistical
 transformations, or the stat can be paired with geoms that expect the

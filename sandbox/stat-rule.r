@@ -1,4 +1,4 @@
-#' @title Construct limited rules offset from the origin
+#' @title Construct limited rulers offset from the origin
 #' 
 
 #' @description Determine axis limits and offset vectors from reference data.
@@ -25,8 +25,9 @@
 #' orthogonal distance of each axis from the origin, and `fun.lower` and
 #' `fun.upper` compute the distance along each axis of the endpoints to the
 #' (offset) origin. Both functions depend on what position data is to be offset
-#' from or limited to, which must be passed manually to the `referent`
-#' parameter.
+#' from or limited to, which must be either passed manually to the `referent`
+#' parameter or encoded as named matrix factors to the helper parameter
+#' `.referent`.
 #' 
 
 #' @template ref-gower2011
@@ -47,11 +48,14 @@
 #'   \item{`yintercept,xintercept`}{intercepts (possibly `Inf`) of offset axis}
 #' }
 
-#' @include stat-referent.r
 #' @inheritParams ggplot2::layer
-#' @inheritParams stat_referent
 #' @inheritParams stat_center
 #' @template param-stat
+#' @param .referent A character string indicating the matrix factor(s) of an
+#'   ordination model to include in `referent`, handled the same way as
+#'   `.matrix`.
+#' @param referent The point cloud to rule; a data frame with `x` and `y`
+#'   columns.
 #' @param fun.lower,fun.upper,fun.offset Functions used to determine the limits
 #'   of the rules and the translations of the axes from the projections of
 #'   `referent` onto the axes and onto their normal vectors.
@@ -61,15 +65,15 @@
 #' @export
 stat_rule <- function(
     mapping = NULL, data = NULL, geom = "axis", position = "identity",
+    .referent = NULL, referent = NULL,
     fun.lower = "minpp", fun.upper = "maxpp",
     fun.offset = "minabspp",
     fun.args = list(),
-    referent = NULL,
     show.legend = NA, 
     inherit.aes = TRUE,
     ...
 ) {
-  LayerRef <- layer(
+  layer(
     data = data,
     mapping = mapping,
     stat = StatRule,
@@ -78,7 +82,7 @@ stat_rule <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      referent = referent,
+      .referent = .referent, referent = referent,
       fun.lower = fun.lower, fun.upper = fun.upper,
       fun.offset = fun.offset,
       fun.args = fun.args,
@@ -86,8 +90,6 @@ stat_rule <- function(
       ...
     )
   )
-  class(LayerRef) <- c("LayerRef", class(LayerRef))
-  LayerRef
 }
 
 #' @rdname ordr-ggproto
@@ -95,7 +97,52 @@ stat_rule <- function(
 #' @usage NULL
 #' @export
 StatRule <- ggproto(
-  "StatRule", StatReferent,
+  "StatRule", Stat,
+  
+  required_aes = c("x", "y"),
+  
+  setup_params = function(data, params) {
+
+    # TODO: Reliably check that a data frame was fortified from a 'tbl_ord'.
+    from_tbl_ord <- ".matrix" %in% names(data)
+    # TODO: Find a better way to handle this; are two parameters necessary?
+    if (! from_tbl_ord) {
+      if (! is.null(params$.referent))
+        warning("Only use `.referent` to specify ordination matrix factors.")
+    }
+    if (from_tbl_ord && is.null(params$referent)) {
+      # default to both row and column elements
+      if (is.null(params$.referent)) {
+        params$.referent <- "dims"
+      }
+      params$.referent <- match_factor(params$.referent)
+      # which elements to extract
+      facs <- if (params$.referent == "dims") 
+        c("rows", "cols") 
+      else 
+        params$.referent
+      # extract elements to referent
+      params$referent <- data[data$.matrix %in% facs, c("x", "y"), drop = FALSE]
+    } else if (! is.null(params$referent)) {
+      # require coordinate data
+      stopifnot(
+        is.data.frame(params$referent) || is.matrix(params$referent),
+        ncol(params$referent) == 2L,
+        all(apply(params$referent, 2L, is.numeric))
+      )
+      params$referent <- as.data.frame(params$referent)
+      if (! is.null(params$.referent)) {
+        warning("`referent` was provided; `.referent` will be ignored.")
+        params$.referent <- NULL
+      }
+      names(params$referent) <- c("x", "y")
+    }
+    # collapse to convex hull (specific to this statistical transformation)
+    if (! is.null(params$referent))
+      params$referent <- params$referent[chull(params$referent), , drop = FALSE]
+    
+    params
+  },
   
   setup_data = function(data, params) {
     
@@ -106,10 +153,11 @@ StatRule <- ggproto(
   
   compute_group = function(
     data, scales,
+    .referent = NULL, referent = NULL,
     fun.lower = "minpp", fun.upper = "maxpp",
     fun.offset = "minabspp",
     fun.args = list(),
-    subset = NULL, elements = "all", referent = NULL
+    subset = NULL, elements = "all"
   ) {
     
     # include computed variables even if trivial
@@ -124,7 +172,6 @@ StatRule <- ggproto(
     }
     
     # prepare elements and referents for projection calculations
-    referent <- subset(referent, select = c("x", "y"))
     names(referent) <- c("x_", "y_")
     referent <- transform(
       referent,
@@ -168,82 +215,3 @@ StatRule <- ggproto(
     data
   }
 )
-
-const0 <- function(x) 0
-
-#' @rdname stat_rule
-#' @export
-minpp <- function(x, p = .1) min(x) - diff(range(x)) * p
-
-#' @rdname stat_rule
-#' @export
-maxpp <- function(x, p = .1) max(x) + diff(range(x)) * p
-
-#' @rdname stat_rule
-#' @param x A numeric vector.
-#' @param p A numeric value; the proportion of a range used as a buffer.
-#' @export
-minabspp <- function(x, p = .1) {
-  minmaxpp <- c(minpp(x, p), maxpp(x, p))
-  minmaxpp[which.min(abs(minmaxpp))]
-}
-
-# take `fun.lower,fun.upper` and return a function that summarizes a data frame
-make_limits_offset_fun <- function(fun.lower, fun.upper, fun.offset, fun.args) {
-  force(fun.lower)
-  force(fun.upper)
-  force(fun.offset)
-  force(fun.args)
-  
-  call_fun <- function(fun, x) {
-    if (is.null(fun)) return(NA_real_)
-    do.call(fun, c(list(quote(x)), fun.args))
-  }
-  # null function; empty 1-row data frame
-  fun_null <- function(df, ...) {
-    as.data.frame(matrix(NA_real_, nrow = 1L, ncol = 0L))
-  }
-  
-  # limits function
-  if (is.null(fun.lower) && is.null(fun.upper)) {
-    fun_limits <- fun_null
-  } else {
-    if (! is.null(fun.lower) || ! is.null(fun.upper)) {
-      # if either range limit is `NULL`, set it to the constant zero function
-      # TODO: If either range limit is `NULL`, make it the reverse of the other?
-      if (is.null(fun.lower)) {
-        fun.upper <- match.fun(fun.upper)
-        # fun.lower <- \(x) x[which(-x == fun.upper(-x))[1L]]
-        fun.lower <- const0
-      } else if (is.null(fun.upper)) {
-        fun.lower <- match.fun(fun.lower)
-        # fun.upper <- \(x) x[which(-x == fun.lower(-x))[1L]]
-        fun.upper <- const0
-      }
-    }
-    # both limits
-    fun_limits <- function(df, ...) {
-      data.frame(
-        lower = call_fun(fun.lower, df$h),
-        upper = call_fun(fun.upper, df$h)
-      )
-    }
-  }
-  
-  # offset function
-  if (is.null(fun.offset)) {
-    fun_offset <- fun_null
-  } else {
-    fun.offset <- match.fun(fun.offset)
-    fun_offset <- function(df, ...) {
-      data.frame(
-        offset = call_fun(fun.offset, df$v)
-      )
-    }
-  }
-  
-  # combined function
-  function(df, ...) {
-    cbind(fun_limits(df, ...), fun_offset(df, ...))
-  }
-}
