@@ -9,7 +9,7 @@
 #' `geom_axis()` understands the following aesthetics (required aesthetics are
 #' in bold):
 
-#' - **`x` and `y` _or_ `angle` and `radius`**
+#' - **`x`**, **`y`**
 #' - `lower`, `upper`
 #' - `yintercept` _or_ `xintercept` _or_ `xend` and `yend`
 #' - `colour`
@@ -85,7 +85,7 @@ geom_axis <- function(
 GeomAxis <- ggproto(
   "GeomAxis", Geom,
   
-  required_aes = c("x|angle", "y|radius"),
+  required_aes = c("x", "y"),
   non_missing_aes = c("x", "y", "angle", "radius"),
   optional_aes = c(
     "lower", "upper",
@@ -175,6 +175,8 @@ GeomAxis <- ggproto(
     na.rm = FALSE
   ) {
     
+    data <- ensure_cartesian_polar(data)
+    
     # copy `linewidth` to `size` for earlier **ggplot2** versions
     data$size <- data$linewidth
     
@@ -183,8 +185,6 @@ GeomAxis <- ggproto(
     
     # extract value ranges
     ranges <- coord$range(panel_params)
-    
-    data <- ensure_cartesian_polar(data)
     
     # remove lengthless vectors
     data <- subset(data, x^2 + y^2 > 0)

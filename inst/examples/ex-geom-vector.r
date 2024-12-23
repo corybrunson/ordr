@@ -13,8 +13,3 @@ height_corr <- data.frame(
   measurement = colnames(Harman23.cor$cov),
   correlation = Harman23.cor$cov[1, ]
 )
-ggplot(height_corr, aes(angle = acos(correlation), label = measurement)) +
-  coord_equal() +
-  geom_vector(radius = 1) +
-  geom_text_radiate(radius = 1) +
-  expand_limits(x = c(NA, 1.5), y = c(NA, 1.5))

@@ -9,25 +9,13 @@ cartesian_plot <-
   coord_equal() +
   geom_axis()
 cartesian_layer <- layer_data(cartesian_plot)
-polar_data <- data.frame(
-  t = t,
-  r = 1
-)
-polar_plot <- 
-  ggplot(polar_data, aes(angle = t, radius = r)) +
-  coord_equal() +
-  geom_axis()
-polar_layer <- layer_data(polar_plot)
 
-test_that("`geom_axis()` ensures `angle,radius` and hides `x,y`", {
+test_that("`geom_axis()` converts `x,y` to `angle,radius`", {
   expect_in(c("angle", "radius"), names(cartesian_layer))
   expect_true(all(! c("x", "y") %in% names(cartesian_layer)))
   
-  expect_in(c("angle", "radius"), names(polar_layer))
-  expect_true(all(! c("x", "y") %in% names(polar_layer)))
-  
   expect_equivalent(
     cartesian_layer[, c("angle", "radius")],
-    polar_layer[, c("angle", "radius")]
+    data.frame(angle = t, radius = 1)
   )
 })

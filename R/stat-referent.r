@@ -85,9 +85,7 @@ StatReferent <- ggproto(
     if (! is.null(params$referent)) {
       params$mapping |> 
         lapply(rlang::eval_tidy, data = as.data.frame(params$referent)) |> 
-        as.data.frame() |> 
-        # for compatibility with broader flexibility
-        ensure_cartesian_polar() ->
+        as.data.frame() ->
         params$referent
     }
     
@@ -106,8 +104,7 @@ StatReferent <- ggproto(
 ggplot_add.LayerRef <- function(object, plot, object_name) {
   
   # store global position mappings as a parameter
-  pos_params <- intersect(names(plot$mapping), c("x", "y", "angle", "radius"))
-  object$stat_params$mapping <- plot$mapping[pos_params]
+  object$stat_params$mapping <- plot$mapping[c("x", "y")]
   
   NextMethod()
 }

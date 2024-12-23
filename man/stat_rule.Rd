@@ -166,8 +166,6 @@ In either case, the stat layer returns a data frame with position aesthetics
  These are calculated during the statistical
 transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluation}.
 \describe{
-\item{\verb{x,y}}{cartesian coordinates (if passed polar)}
-\item{\verb{angle,radius}}{polar coordinates (if passed cartesian)}
 \item{\code{axis}}{unique axis identifier (integer)}
 \item{\verb{lower,upper}}{distances to endpoints from origin (before offset)}
 \item{\verb{yintercept,xintercept}}{intercepts (possibly \code{Inf}) of offset axis}

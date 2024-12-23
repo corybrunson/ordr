@@ -9,7 +9,7 @@
 #' `geom_rule()` understands the following aesthetics (required aesthetics are
 #' in bold):
 
-#' - **`x` and `y` _or_ `angle` and `radius`**
+#' - **`x`**, **`y`**
 #' - **`lower`, `upper`**
 #' - `yintercept` _or_ `xintercept` _or_ `xend` and `yend`
 #' - `colour`
@@ -80,7 +80,7 @@ geom_rule <- function(
 GeomRule <- ggproto(
   "GeomRule", GeomAxis,
   
-  required_aes = c("x|angle", "y|radius", "lower", "upper"),
+  required_aes = c("x", "y", "lower", "upper"),
   optional_aes = c("yintercept", "xintercept", "xend", "yend"),
   
   setup_data = function(data, params) {

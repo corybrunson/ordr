@@ -105,7 +105,7 @@ points for rows and arrows for columns.
 \code{geom_vector()} understands the following aesthetics (required aesthetics
 are in bold):
 \itemize{
-\item \strong{\code{x} and \code{y} \emph{or} \code{angle} and \code{radius}}
+\item \strong{\code{x}}, \strong{\code{y}}
 \item \code{alpha}
 \item \code{colour}
 \item \code{linetype}
@@ -130,11 +130,6 @@ height_corr <- data.frame(
   measurement = colnames(Harman23.cor$cov),
   correlation = Harman23.cor$cov[1, ]
 )
-ggplot(height_corr, aes(angle = acos(correlation), label = measurement)) +
-  coord_equal() +
-  geom_vector(radius = 1) +
-  geom_text_radiate(radius = 1) +
-  expand_limits(x = c(NA, 1.5), y = c(NA, 1.5))
 }
 \seealso{
 Other geom layers: 

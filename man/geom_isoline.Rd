@@ -125,7 +125,7 @@ points for rows and arrows for columns.
 \code{geom_isoline()} understands the following aesthetics (required aesthetics
 are in bold):
 \itemize{
-\item \strong{\code{x} and \code{y} \emph{or} \code{angle} and \code{radius}}
+\item \strong{\code{x}}, \strong{\code{y}}
 \item \code{colour}
 \item \code{alpha}
 \item \code{linewidth}

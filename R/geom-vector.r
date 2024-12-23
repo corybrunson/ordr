@@ -9,7 +9,7 @@
 #' `geom_vector()` understands the following aesthetics (required aesthetics
 #' are in bold):
 
-#' - **`x` and `y` _or_ `angle` and `radius`**
+#' - **`x`**, **`y`**
 #' - `alpha`
 #' - `colour`
 #' - `linetype`
@@ -56,8 +56,8 @@ geom_vector <- function(
 GeomVector <- ggproto(
   "GeomVector", GeomSegment,
   
-  required_aes = c("x|angle", "y|radius"),
-  non_missing_aes = c("x", "y", "angle", "radius"),
+  required_aes = c("x", "y"),
+  non_missing_aes = c("x", "y"),
   
   setup_data = function(data, params) {
     

@@ -77,24 +77,3 @@ test_that("oblique offset coordinates lie in quadrant 4", {
   rule_oblique <- rule_layer$angle %% (pi/2) != 0
   expect_true(all(rule_layer$xend[rule_oblique] >= 0))
 })
-
-unit_polar <- unit_data |> 
-  transform(angle = atan2(x, y), radius = sqrt(x^2 + y^2)) |> 
-  subset(select = c(angle, radius))
-cloud_polar <- cloud_data |> 
-  transform(angle = atan2(x, y), radius = sqrt(x^2 + y^2)) |> 
-  subset(select = c(angle, radius))
-ggplot(unit_polar, aes(angle = angle, radius = radius)) +
-  coord_equal() +
-  stat_rule(
-    referent = cloud_polar,
-    fun.lower = NULL, fun.upper = NULL, fun.offset = NULL
-  ) ->
-  axis_plot1
-axis_layer1 <- layer_data(axis_plot1)
-
-test_that("`stat_rule()` accepts polar coordinates", {
-  layer_names1 <- setdiff(names(axis_layer1), "group")
-  expect_equal(sort(axis_layer1$angle), sort(axis_layer$angle))
-  expect_equal(sort(axis_layer1$radius), sort(axis_layer$radius))
-})

@@ -8,7 +8,7 @@
 #' `geom_isoline()` understands the following aesthetics (required aesthetics
 #' are in bold):
 
-#' - **`x` and `y` _or_ `angle` and `radius`**
+#' - **`x`**, **`y`**
 #' - `colour`
 #' - `alpha`
 #' - `linewidth`
@@ -77,7 +77,7 @@ geom_isoline <- function(
 GeomIsoline <- ggproto(
   "GeomIsoline", Geom,
   
-  required_aes = c("x|angle", "y|radius"),
+  required_aes = c("x", "y"),
   non_missing_aes = c("x", "y", "angle", "radius"),
   
   default_aes = aes(

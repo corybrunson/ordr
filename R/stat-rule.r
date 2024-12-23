@@ -40,8 +40,6 @@
 #'   transformation and can be accessed with [delayed
 #'   evaluation][ggplot2::aes_eval].
 #' \describe{
-#'   \item{`x,y`}{cartesian coordinates (if passed polar)}
-#'   \item{`angle,radius`}{polar coordinates (if passed cartesian)}
 #'   \item{`axis`}{unique axis identifier (integer)}
 #'   \item{`lower,upper`}{distances to endpoints from origin (before offset)}
 #'   \item{`yintercept,xintercept`}{intercepts (possibly `Inf`) of offset axis}
@@ -97,13 +95,6 @@ stat_rule <- function(
 StatRule <- ggproto(
   "StatRule", StatReferent,
   
-  setup_data = function(data, params) {
-    
-    data <- ensure_cartesian_polar(data)
-    
-    data
-  },
-  
   compute_group = function(
     data, scales,
     fun.lower = "minpp", fun.upper = "maxpp",
@@ -133,7 +124,7 @@ StatRule <- ggproto(
     )
     data <- transform(
       data,
-      radius = sqrt(x^2 + y^2),
+      # radius = sqrt(x^2 + y^2),
       angle = atan2(y, x),
       axis = seq(nrow(data))
     )
@@ -165,6 +156,7 @@ StatRule <- ggproto(
       data$offset <- NULL
     }
     
+    data$angle <- NULL
     data
   }
 )
