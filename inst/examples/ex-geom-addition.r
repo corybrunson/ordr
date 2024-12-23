@@ -4,11 +4,13 @@ iris[, -5] %>%
   print() -> iris_pca
 iris_pca <- mutate_rows(iris_pca, species = iris$Species)
 iris_pca <- augment_ord(iris_pca)
-# sample of one of each species
-new_data <- iris[c(42, 61, 110), , drop = FALSE]
-# artificial missingness
+
+# sample of one of each species, with some missing measurements
+new_data <- iris[c(42, 61, 110), seq(5, 1), drop = FALSE]
 new_data[3L, "Sepal.Width"] <- NA
 new_data[1L, "Petal.Length"] <- NA
+print(new_data)
+
 # centroid interpolation method
 iris_pca %>%
   augment_ord() %>%
@@ -23,6 +25,10 @@ iris_pca %>%
     new_data = new_data, type = "centroid", alpha = .5
   ) +
   geom_rows_text(aes(label = obs, color = species), alpha = .5, size = 3)
+
+# missing an entire variable
+new_data$Petal.Length <- NULL
+
 # sequence interpolation method
 iris_pca %>%
   augment_ord() %>%

@@ -6,6 +6,22 @@ default_arrow <- grid::arrow(
   type = "open"
 )
 
+# single unique value, or else NA
+only <- function(x) {
+  uniq <- unique(x)
+  if (length(uniq) == 1L) {
+    uniq
+  } else {
+    switch(
+      class(x),
+      integer = NA_integer_,
+      numeric = NA_real_,
+      character = NA_character_,
+      factor = factor(NA_character_, levels = levels(x))
+    )
+  }
+}
+
 # The following functions recover certain geometric variables from others.
 # They are called by `GeomAxis` and `GeomRule` for the following reasons:
 # * To allow the user to pass different kinds of data.

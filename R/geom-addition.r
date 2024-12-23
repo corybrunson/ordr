@@ -137,21 +137,18 @@ GeomAddition <- ggproto(
   default_aes = aes(
     colour = "black", alpha = NA, size = .5, linetype = 1L, fill = NA,
     shape = 19L, stroke = .5, point_size = 1.5, point_fill = NA,
-    center = 0, scale = 1
+    center = 0, scale = 1, interpolate = NULL
   ),
   
   setup_params = function(data, params) {
     
+    # coerce only if necessary; preserve tibble class
     if (! is.data.frame(params$new_data))
       params$new_data <- as.data.frame(params$new_data)
     
     # available dual dimensions
     if (is.null(data$interpolate)) {
-      if (ncol(params$new_data) == nrow(data)) {
-        dual_names <- names(params$new_data)
-      } else {
-        stop("`new_data` needs column per variable, or else named columns.")
-      }
+      stop("The `interpolate` aesthetic must match a column of `new_data`.")
     } else {
       dual_names <- data$interpolate
       lost_names <- setdiff(dual_names, names(params$new_data))
@@ -190,7 +187,7 @@ GeomAddition <- ggproto(
     # reverse ends of `arrow`
     if (! is.null(arrow)) arrow$ends <- c(2L, 1L, 3L)[arrow$ends]
     
-    # ???
+    # names restricted to within `$setup_params()`
     dual_names <- names(new_data)
     n_coef <- length(dual_names)
     
@@ -271,20 +268,3 @@ GeomAddition <- ggproto(
     grob
   }
 )
-
-
-# single unique value, or else NA
-only <- function(x) {
-  uniq <- unique(x)
-  if (length(uniq) == 1L) {
-    uniq
-  } else {
-    switch(
-      class(x),
-      integer = NA_integer_,
-      numeric = NA_real_,
-      character = NA_character_,
-      factor = factor(NA_character_, levels = levels(x))
-    )
-  }
-}
