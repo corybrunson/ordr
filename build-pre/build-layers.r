@@ -229,7 +229,6 @@ orig_layers <- c(
 # ordr layers to not adapt to biplot layers
 omit_layers <- c(
   "geom_origin", "geom_unit_circle",
-  "geom_addition",
   "stat_referent"
 )
 

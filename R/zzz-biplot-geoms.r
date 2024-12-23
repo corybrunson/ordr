@@ -29,6 +29,7 @@
 #' @inheritParams ggplot2::geom_label
 #' @inheritParams ggrepel::geom_text_repel
 #' @inheritParams ggrepel::geom_label_repel
+#' @inheritParams geom_addition
 #' @inheritParams geom_axis
 #' @inheritParams geom_lineranges
 #' @inheritParams geom_pointranges
@@ -675,6 +676,72 @@ geom_cols_label_repel <- function(
       direction = match.arg(direction),
       seed = seed,
       verbose = verbose,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_rows_addition <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  new_data = NULL,
+  type = c("centroid", "sequence"),
+  arrow = default_arrow,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = rows_stat(stat),
+    geom = GeomAddition,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      new_data = new_data,
+      type = type,
+      arrow = arrow,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_cols_addition <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  new_data = NULL,
+  type = c("centroid", "sequence"),
+  arrow = default_arrow,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = cols_stat(stat),
+    geom = GeomAddition,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      new_data = new_data,
+      type = type,
+      arrow = arrow,
+      na.rm = na.rm,
       ...
     )
   )

@@ -16,6 +16,8 @@
 \alias{geom_cols_text_repel}
 \alias{geom_rows_label_repel}
 \alias{geom_cols_label_repel}
+\alias{geom_rows_addition}
+\alias{geom_cols_addition}
 \alias{geom_rows_axis}
 \alias{geom_cols_axis}
 \alias{geom_rows_lineranges}
@@ -291,6 +293,34 @@ geom_cols_label_repel(
   direction = c("both", "y", "x"),
   seed = NA,
   verbose = FALSE,
+  inherit.aes = TRUE
+)
+
+geom_rows_addition(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  new_data = NULL,
+  type = c("centroid", "sequence"),
+  arrow = default_arrow,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_addition(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  new_data = NULL,
+  type = c("centroid", "sequence"),
+  arrow = default_arrow,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
   inherit.aes = TRUE
 )
 
@@ -647,6 +677,13 @@ adjacent x-values.}
 \code{NA}, which means that \code{set.seed} will not be called.}
 
 \item{verbose}{If \code{TRUE}, some diagnostics of the repel algorithm are printed}
+
+\item{new_data}{A list (best structured as a \link[base:data.frame]{data.frame})
+of row (\code{geom_cols_addition()}) or column (\code{geom_rows_addition()}) values
+to interpolate.}
+
+\item{type}{Character value matched to \code{"centroid"} or \code{"sequence"}; the type
+of operations used to visualize interpolation.}
 
 \item{axis_labels, axis_ticks, axis_text}{Logical; whether to include labels,
 tick marks, and text value marks along the axes.}
