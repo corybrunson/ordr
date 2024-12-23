@@ -181,6 +181,7 @@ stackloss_centered |>
 }
 \seealso{
 Other geom layers: 
+\code{\link{geom_addition}()},
 \code{\link{geom_axis}()},
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},
