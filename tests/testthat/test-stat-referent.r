@@ -39,6 +39,6 @@ test_that("mapping and referent parameters together yield new plotting data", {
     df1,
     list(mapping = aes(x = hp/100, y = wt), referent = df2)
   )$referent
-  expect_equal(names(df2_setup), c("x", "y"))
+  expect_equal(names(df2_setup), c("x", "y", "angle", "radius"))
   expect_equal(nrow(df2_setup), 4L)
 })
