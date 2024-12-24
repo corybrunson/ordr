@@ -24,6 +24,8 @@
 \alias{geom_cols_pointranges}
 \alias{geom_rows_isoline}
 \alias{geom_cols_isoline}
+\alias{geom_rows_text_radiate}
+\alias{geom_cols_text_radiate}
 \alias{geom_rows_vector}
 \alias{geom_cols_vector}
 \title{Convenience geoms for row and column matrix factors}
@@ -402,6 +404,32 @@ geom_cols_isoline(
   by = NULL,
   num = NULL,
   label_dodge = 0.03,
+  ...,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_rows_text_radiate(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  ...,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_text_radiate(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
   ...,
   parse = FALSE,
   check_overlap = FALSE,
