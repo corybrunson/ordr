@@ -1,7 +1,7 @@
 #' @title Render interpolation of new rows from columns (or vice-versa)
 #' 
 
-#' @description `geom_addition()` renders a tail-to-head sequence of arrows
+#' @description `geom_interpolation()` renders a tail-to-head sequence of arrows
 #'   (`type = "sequence"`) or a scaled centroid arrow (`type = "centroid"`) that
 #'   represents the interpolation of a new row from its column entries to its
 #'   artificial coordinates.
@@ -9,14 +9,14 @@
 
 #' @section Aesthetics:
 
-#' `geom_addition()` understands the custom **`interpolate`** aesthetic, which
-#' tells the internals which columns of `new_data` contain the variables to be
-#' used for interpolation. Except in rare cases, `new_data` should contain the
-#' same rows or columns as the ordinated data and `interpolate` should be set to
-#' `name` (procured by [augment_ord()]).
+#' `geom_interpolation()` requires the custom **`interpolate`** aesthetic, which
+#' tells the internals which columns of the `new_data` parameter contain the
+#' variables to be used for interpolation. Except in rare cases, `new_data`
+#' should contain the same rows or columns as the ordinated data and
+#' `interpolate` should be set to `name` (procured by [augment_ord()]).
 
-#' `geom_addition()` additionally understands the following aesthetics (required
-#' aesthetics are in bold):
+#' `geom_interpolation()` additionally understands the following aesthetics
+#' (required aesthetics are in bold):
 
 #' - `alpha`
 #' - `colour`
@@ -31,20 +31,19 @@
 #' - `group`
 #' 
 
-#' @include geom-vector.r
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @inheritParams geom_vector
 #' @template param-geom
 #' @param new_data A list (best structured as a [data.frame][base::data.frame])
-#'   of row (`geom_cols_addition()`) or column (`geom_rows_addition()`) values
-#'   to interpolate.
+#'   of row (`geom_cols_interpolation()`) or column
+#'   (`geom_rows_interpolation()`) values to interpolate.
 #' @param type Character value matched to `"centroid"` or `"sequence"`; the type
 #'   of operations used to visualize interpolation.
 #' @family geom layers
-#' @example inst/examples/ex-geom-addition.r
+#' @example inst/examples/ex-geom-interpolation.r
 #' @export
-geom_addition <- function(
+geom_interpolation <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
   new_data = NULL, type = c("centroid", "sequence"),
   arrow = default_arrow,
@@ -56,7 +55,7 @@ geom_addition <- function(
     data = data,
     mapping = mapping,
     stat = stat,
-    geom = GeomAddition,
+    geom = GeomInterpolation,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
@@ -74,10 +73,15 @@ geom_addition <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
-GeomAddition <- ggproto(
-  "GeomAddition", GeomVector,
+GeomInterpolation <- ggproto(
+  "GeomInterpolation", GeomSegment,
   
-  required_aes = c(),
+  required_aes = c("interpolate"),
+  optional_aes = c("center", "scale"),
+  non_missing_aes = c(
+    "x", "y", "xend", "yend",
+    "size", "linetype", "linewidth"
+  ),
   
   default_aes = aes(
     colour = "black", alpha = NA, size = .5, linetype = 1L, fill = NA,
@@ -126,7 +130,7 @@ GeomAddition <- ggproto(
   ) {
     
     if (! coord$is_linear()) {
-      warning("Vectors are not yet tailored to non-linear coordinates.")
+      warning("Interpolation is not yet tailored to non-linear coordinates.")
     }
     type <- match.arg(type, c("centroid", "sequence"))
     # reverse ends of `arrow`
@@ -209,7 +213,7 @@ GeomAddition <- ggproto(
     )))
     
     grob <- do.call(grid::grobTree, grobs)
-    grob$name <- grid::grobName(grob, "geom_addition")
+    grob$name <- grid::grobName(grob, "geom_interpolation")
     grob
   }
 )

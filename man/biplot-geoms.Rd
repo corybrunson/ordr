@@ -16,10 +16,10 @@
 \alias{geom_cols_text_repel}
 \alias{geom_rows_label_repel}
 \alias{geom_cols_label_repel}
-\alias{geom_rows_addition}
-\alias{geom_cols_addition}
 \alias{geom_rows_axis}
 \alias{geom_cols_axis}
+\alias{geom_rows_interpolation}
+\alias{geom_cols_interpolation}
 \alias{geom_rows_lineranges}
 \alias{geom_cols_lineranges}
 \alias{geom_rows_pointranges}
@@ -296,34 +296,6 @@ geom_cols_label_repel(
   inherit.aes = TRUE
 )
 
-geom_rows_addition(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  new_data = NULL,
-  type = c("centroid", "sequence"),
-  arrow = default_arrow,
-  ...,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
-geom_cols_addition(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  new_data = NULL,
-  type = c("centroid", "sequence"),
-  arrow = default_arrow,
-  ...,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
 geom_rows_axis(
   mapping = NULL,
   data = NULL,
@@ -361,6 +333,34 @@ geom_cols_axis(
   ...,
   parse = FALSE,
   check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_rows_interpolation(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  new_data = NULL,
+  type = c("centroid", "sequence"),
+  arrow = default_arrow,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_interpolation(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  new_data = NULL,
+  type = c("centroid", "sequence"),
+  arrow = default_arrow,
+  ...,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -678,13 +678,6 @@ adjacent x-values.}
 
 \item{verbose}{If \code{TRUE}, some diagnostics of the repel algorithm are printed}
 
-\item{new_data}{A list (best structured as a \link[base:data.frame]{data.frame})
-of row (\code{geom_cols_addition()}) or column (\code{geom_rows_addition()}) values
-to interpolate.}
-
-\item{type}{Character value matched to \code{"centroid"} or \code{"sequence"}; the type
-of operations used to visualize interpolation.}
-
 \item{axis_labels, axis_ticks, axis_text}{Logical; whether to include labels,
 tick marks, and text value marks along the axes.}
 
@@ -699,6 +692,13 @@ axis, as a proportion of the minimum of the plot width and height.}
 
 \item{label_dodge}{Numeric; the orthogonal distance of the axis label from
 the axis, as a proportion of the minimum of the plot width and height.}
+
+\item{new_data}{A list (best structured as a \link[base:data.frame]{data.frame})
+of row (\code{geom_cols_interpolation()}) or column
+(\code{geom_rows_interpolation()}) values to interpolate.}
+
+\item{type}{Character value matched to \code{"centroid"} or \code{"sequence"}; the type
+of operations used to visualize interpolation.}
 
 \item{isoline_text}{Logical; whether to include text value marks along the
 isolines.}

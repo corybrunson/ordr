@@ -160,8 +160,8 @@ scale(stackloss, scale = FALSE) |>
 }
 \seealso{
 Other geom layers: 
-\code{\link{geom_addition}()},
 \code{\link{geom_axis}()},
+\code{\link{geom_interpolation}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},
 \code{\link{geom_rule}()},

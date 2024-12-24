@@ -20,7 +20,7 @@ iris_pca %>%
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   geom_origin(marker = "cross", alpha = .5) +
-  geom_cols_addition(
+  geom_cols_interpolation(
     aes(center = center, scale = scale, interpolate = name),
     new_data = new_data, type = "centroid", alpha = .5
   ) +
@@ -38,7 +38,7 @@ iris_pca %>%
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   geom_origin(marker = "circle", alpha = .5) +
-  geom_cols_addition(
+  geom_cols_interpolation(
     aes(center = center, scale = scale, interpolate = name,
         linetype = measure),
     new_data = new_data, type = "sequence", alpha = .5
