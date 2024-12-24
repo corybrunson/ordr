@@ -2,7 +2,7 @@
 #' 
 
 #' @description `geom_addition()` renders a tail-to-head sequence of arrows
-#'   (`type = "centroid"`) or a scaled centroid arrow (`type = "centroid"`) that
+#'   (`type = "sequence"`) or a scaled centroid arrow (`type = "centroid"`) that
 #'   represents the interpolation of a new row from its column entries to its
 #'   artificial coordinates.
 #' @template biplot-layers
