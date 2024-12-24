@@ -24,8 +24,6 @@
 \alias{geom_cols_pointranges}
 \alias{geom_rows_isoline}
 \alias{geom_cols_isoline}
-\alias{geom_rows_text_radiate}
-\alias{geom_cols_text_radiate}
 \alias{geom_rows_vector}
 \alias{geom_cols_vector}
 \title{Convenience geoms for row and column matrix factors}
@@ -116,6 +114,7 @@ geom_rows_text(
   nudge_x = 0,
   nudge_y = 0,
   check_overlap = FALSE,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -131,6 +130,7 @@ geom_cols_text(
   nudge_x = 0,
   nudge_y = 0,
   check_overlap = FALSE,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -148,6 +148,7 @@ geom_rows_label(
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
   label.size = 0.25,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -165,6 +166,7 @@ geom_cols_label(
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
   label.size = 0.25,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -408,38 +410,15 @@ geom_cols_isoline(
   inherit.aes = TRUE
 )
 
-geom_rows_text_radiate(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  ...,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
-geom_cols_text_radiate(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  ...,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
 geom_rows_vector(
   mapping = NULL,
   data = NULL,
   stat = "identity",
   position = "identity",
   arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -452,6 +431,9 @@ geom_cols_vector(
   stat = "identity",
   position = "identity",
   arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -546,6 +528,10 @@ the order of the data. Therefore data should be arranged by the label
 column before calling \code{geom_text()}. Note that this argument is not
 supported by \code{geom_label()}.}
 
+\item{size.unit}{How the \code{size} aesthetic is interpreted: as millimetres
+(\code{"mm"}, default), points (\code{"pt"}), centimetres (\code{"cm"}), inches (\code{"in"}),
+or picas (\code{"pc"}).}
+
 \item{label.padding}{Amount of padding around label. Defaults to 0.25 lines.}
 
 \item{label.r}{Radius of rounded corners. Defaults to 0.15 lines.}
@@ -611,6 +597,9 @@ or isoline, as a proportion of the minimum of the plot width and height.}
 
 \item{isoline_text}{Logical; whether to include text value marks along the
 isolines.}
+
+\item{vector_labels}{Logical; whether to include labels radiating outward
+from the vectors.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.

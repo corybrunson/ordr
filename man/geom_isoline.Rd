@@ -162,8 +162,7 @@ glass_lda \%>\%
   ggbiplot(aes(label = name), elements = "active") +
   theme_bw() + theme_biplot() +
   geom_rows_text() +
-  geom_cols_vector(subset = c(1, 3, 4)) +
-  geom_cols_text_radiate(subset = c(1, 3, 4), size = 3) +
+  geom_cols_vector(subset = c(1, 3, 4), size = 3) +
   geom_cols_isoline(subset = c(1, 3, 4), alpha = .25, num = 4L,
                     label_dodge = -.03, text_alpha = .5, text_size = 3) +
   ggtitle(
@@ -178,7 +177,6 @@ Other geom layers:
 \code{\link{geom_axis}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},
-\code{\link{geom_text_radiate}()},
 \code{\link{geom_vector}()}
 }
 \concept{geom layers}

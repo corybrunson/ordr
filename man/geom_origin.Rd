@@ -126,15 +126,13 @@ glass_pca \%>\%
   theme_biplot() +
   geom_rows_point(aes(color = site, shape = form), alpha = .5) +
   geom_unit_circle(alpha = .5, scale.factor = 3) +
-  geom_cols_vector() +
-  geom_cols_text_radiate()
+  geom_cols_vector()
 }
 \seealso{
 Other geom layers: 
 \code{\link{geom_axis}()},
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},
-\code{\link{geom_text_radiate}()},
 \code{\link{geom_vector}()}
 }
 \concept{geom layers}

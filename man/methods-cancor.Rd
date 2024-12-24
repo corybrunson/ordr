@@ -110,7 +110,6 @@ savings_cca \%>\%
   ggbiplot(aes(label = name), sec.axes = "cols", scale.factor = 5L) +
   theme_biplot() +
   geom_cols_vector(elements = "active") +
-  geom_cols_text_radiate(elements = "active") +
   geom_rows_text(elements = "score", subset = seq(50L))
 }
 \references{

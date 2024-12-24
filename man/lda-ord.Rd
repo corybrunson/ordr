@@ -208,8 +208,7 @@ iris_lda \%>\%
     color = grouping,
     size = discriminant, alpha = discriminant
   )) +
-  geom_cols_vector(color = "#888888") +
-  geom_cols_text_radiate(aes(label = name), size = 3) +
+  geom_cols_vector(aes(label = name), color = "#888888", size = 3) +
   scale_color_brewer(type = "qual", palette = 2) +
   ggtitle("Unstandardized coefficient biplot of iris LDA") +
   expand_limits(y = c(-3, 5))
@@ -243,8 +242,7 @@ iris_lda \%>\%
     color = grouping,
     size = discriminant, alpha = discriminant
   )) +
-  geom_cols_vector(color = "#888888") +
-  geom_cols_text_radiate(aes(label = name), size = 3) +
+  geom_cols_vector(aes(label = name), color = "#888888", size = 3) +
   scale_color_brewer(type = "qual", palette = 2) +
   ggtitle("Standardized coefficient biplot of iris LDA") +
   expand_limits(y = c(-2, 3))
@@ -274,8 +272,7 @@ iris_lda \%>\%
     color = grouping,
     size = discriminant, alpha = discriminant
   )) +
-  geom_cols_vector(color = "#888888") +
-  geom_cols_text_radiate(aes(label = name), size = 3) +
+  geom_cols_vector(aes(label = name), color = "#888888", size = 3) +
   scale_color_brewer(type = "qual", palette = 2) +
   ggtitle("Contribution biplot of iris LDA") +
   expand_limits(y = c(-2, 3.5))

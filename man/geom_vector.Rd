@@ -10,6 +10,9 @@ geom_vector(
   stat = "identity",
   position = "identity",
   arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -66,6 +69,13 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 \item{arrow}{Specification for arrows, as created by \code{\link[grid:arrow]{grid::arrow()}}, or else
 \code{NULL} for no arrows.}
 
+\item{lineend}{Line end style (round, butt, square).}
+
+\item{linejoin}{Line join style (round, mitre, bevel).}
+
+\item{vector_labels}{Logical; whether to include labels radiating outward
+from the vectors.}
+
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
 \item{na.rm}{Passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
@@ -85,7 +95,10 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
-\code{geom_vector()} renders arrows from the origin to points.
+\code{geom_vector()} renders arrows from the origin to points,
+optionally with text radiating outward. This layer is adapted from
+\code{ggbiplot()} in the off-CRAN extensions of the same name (Vu, 2014;
+Telford, 2017; Gegzna, 2018).
 }
 \section{Biplot layers}{
 
@@ -110,7 +123,11 @@ are in bold):
 \item \code{alpha}
 \item \code{colour}
 \item \code{linetype}
+\item \code{label}
 \item \code{size}
+\item \code{angle}, \code{hjust}, \code{vjust}
+\item \code{label_colour}, \code{label_alpha}
+\item \code{family}, \code{fontface}, \code{lineheight}
 \item \code{group}
 }
 }
@@ -126,17 +143,27 @@ iris_pca \%>\%
   scale_color_brewer(type = "qual", palette = 2) +
   geom_unit_circle() +
   geom_rows_point(alpha = .5) +
-  geom_cols_vector(color = "#444444") +
-  geom_cols_text_radiate(aes(label = name), color = "#444444") +
+  geom_cols_vector(aes(label = name), color = "#444444") +
   ggtitle("Row-principal unscaled PCA biplot of Anderson iris measurements") +
   expand_limits(y = c(NA, 2))
+}
+\references{
+Vincent Q. Vu (2014). ggbiplot: A 'ggplot2' based biplot. R package version
+0.55. \url{https://github.com/vqv/ggbiplot}, \code{experimental} branch
+
+Richard J Telford (2017). ggbiplot: A 'ggplot2' based biplot. R package
+version 0.6. \url{https://github.com/richardjtelford/ggbiplot} (fork),
+\code{experimental} branch
+
+Vilmantas Gegzna (2018). ggbiplot: A 'ggplot2' based biplot. R package
+version 0.55. \url{https://github.com/forked-packages/ggbiplot} (fork), \code{experimental}
+branch
 }
 \seealso{
 Other geom layers: 
 \code{\link{geom_axis}()},
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},
-\code{\link{geom_origin}()},
-\code{\link{geom_text_radiate}()}
+\code{\link{geom_origin}()}
 }
 \concept{geom layers}

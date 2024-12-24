@@ -33,7 +33,6 @@
 #' @inheritParams geom_lineranges
 #' @inheritParams geom_pointranges
 #' @inheritParams geom_isoline
-#' @inheritParams geom_text_radiate
 #' @inheritParams geom_vector
 NULL
 
@@ -239,6 +238,7 @@ geom_rows_text <- function(
   nudge_x = 0,
   nudge_y = 0,
   check_overlap = FALSE,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -261,6 +261,7 @@ geom_rows_text <- function(
     params = list(
       parse = parse,
       check_overlap = check_overlap,
+      size.unit = size.unit,
       na.rm = na.rm,
       ...
     )
@@ -279,6 +280,7 @@ geom_cols_text <- function(
   nudge_x = 0,
   nudge_y = 0,
   check_overlap = FALSE,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -301,6 +303,7 @@ geom_cols_text <- function(
     params = list(
       parse = parse,
       check_overlap = check_overlap,
+      size.unit = size.unit,
       na.rm = na.rm,
       ...
     )
@@ -321,6 +324,7 @@ geom_rows_label <- function(
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
   label.size = 0.25,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -345,6 +349,7 @@ geom_rows_label <- function(
       label.padding = label.padding,
       label.r = label.r,
       label.size = label.size,
+      size.unit = size.unit,
       na.rm = na.rm,
       ...
     )
@@ -365,6 +370,7 @@ geom_cols_label <- function(
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
   label.size = 0.25,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -389,6 +395,7 @@ geom_cols_label <- function(
       label.padding = label.padding,
       label.r = label.r,
       label.size = label.size,
+      size.unit = size.unit,
       na.rm = na.rm,
       ...
     )
@@ -953,74 +960,15 @@ geom_cols_isoline <- function(
 
 #' @rdname biplot-geoms
 #' @export
-geom_rows_text_radiate <- function(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  ...,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = rows_stat(stat),
-    geom = GeomTextRadiate,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      parse = parse,
-      check_overlap = check_overlap,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
-#' @rdname biplot-geoms
-#' @export
-geom_cols_text_radiate <- function(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  ...,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = cols_stat(stat),
-    geom = GeomTextRadiate,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      parse = parse,
-      check_overlap = check_overlap,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
-#' @rdname biplot-geoms
-#' @export
 geom_rows_vector <- function(
   mapping = NULL,
   data = NULL,
   stat = "identity",
   position = "identity",
   arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -1036,6 +984,9 @@ geom_rows_vector <- function(
     inherit.aes = inherit.aes,
     params = list(
       arrow = arrow,
+      lineend = lineend,
+      linejoin = linejoin,
+      vector_labels = vector_labels,
       na.rm = na.rm,
       ...
     )
@@ -1050,6 +1001,9 @@ geom_cols_vector <- function(
   stat = "identity",
   position = "identity",
   arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -1065,6 +1019,9 @@ geom_cols_vector <- function(
     inherit.aes = inherit.aes,
     params = list(
       arrow = arrow,
+      lineend = lineend,
+      linejoin = linejoin,
+      vector_labels = vector_labels,
       na.rm = na.rm,
       ...
     )

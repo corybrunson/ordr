@@ -63,7 +63,7 @@ param_trans <- c(
 # necessary internal functions not exported from their home packages
 # -+- currently only put in geoms file; need to distinguish -+-
 get_from <- c(
-  # `geom_text_radiate()`
+  # `geom_vector()`
   compute_just = "ggplot2",
   # `geom_text_repel()`
   to_unit = "ggrepel"

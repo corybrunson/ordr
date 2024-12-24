@@ -229,8 +229,7 @@ appropriate subsets:[^8]
 ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_ellipse(aes(color = Species), alpha = .5, level = .99) +
-  geom_cols_vector() +
-  geom_cols_text_radiate(aes(label = name)) +
+  geom_cols_vector(aes(label = name)) +
   expand_limits(y = c(-3.5, NA)) +
   ggtitle("PCA of Anderson's iris measurements",
           "99% confidence ellipses; variables use top & right axes")
