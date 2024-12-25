@@ -8,7 +8,7 @@
 \usage{
 coord_rect(
   ratio = 1,
-  aspect_ratio = ratio,
+  window_ratio = ratio,
   xlim = NULL,
   ylim = NULL,
   expand = TRUE,
@@ -16,7 +16,7 @@ coord_rect(
 )
 
 coord_biplot(
-  aspect_ratio = 1,
+  window_ratio = 1,
   xlim = NULL,
   ylim = NULL,
   expand = TRUE,
@@ -26,7 +26,7 @@ coord_biplot(
 \arguments{
 \item{ratio}{aspect ratio, expressed as \code{y / x}}
 
-\item{aspect_ratio}{aspect ratio of plotting window}
+\item{window_ratio}{aspect ratio of plotting window}
 
 \item{xlim, ylim}{Limits for the x and y axes.}
 
@@ -44,12 +44,12 @@ limits, then those data points may show up in places such as the axes, the
 legend, the plot title, or the plot margins.}
 }
 \description{
-2- (and 3-) dimensional biplots require that coordinates lie on the same
-scale but may additionally benefit from a square plotting window. The
-general-purpose coordinate system \code{CoordRect}, alias \code{CoordSquare}, provides
-control of both coordinate and window aspect ratios, while the convenience
-\code{CoordBiplot} system fixes the coordinate aspect ratio at \code{1} and gives the
-user control only of the plotting window.
+2- (and 3-) dimensional biplots require that coordinates lie on
+the same scale but may additionally benefit from a square plotting window.
+The general-purpose coordinate system \code{CoordRect}, alias \code{CoordSquare},
+provides control of both coordinate and window aspect ratios, while the
+convenience \code{CoordBiplot} system fixes the coordinate aspect ratio at \code{1}
+and gives the user control only of the plotting window.
 }
 \examples{
 # ensures that the resolutions of the axes and the dimensions of the plotting
@@ -57,8 +57,8 @@ user control only of the plotting window.
 
 p <- ggplot(mtcars, aes(mpg, hp/10)) + geom_point()
 p + coord_rect(ratio = 1)
-p + coord_rect(ratio = 1, aspect_ratio = 2)
-p + coord_rect(ratio = 1, aspect_ratio = 1/2)
+p + coord_rect(ratio = 1, window_ratio = 2)
+p + coord_rect(ratio = 1, window_ratio = 1/2)
 p + coord_rect(ratio = 5)
 p + coord_rect(ratio = 1/5)
 p + coord_rect(xlim = c(15, 30))
@@ -67,7 +67,7 @@ p + coord_rect(ylim = c(15, 30))
 # Resize the plot to see that the specified aspect ratio is maintained
 p <- ggplot(mtcars, aes(mpg, hp/10)) + geom_point()
 p + coord_biplot()
-p + coord_biplot(aspect_ratio = 2)
+p + coord_biplot(window_ratio = 2)
 
 # prevent rescaling in response to `theme()` aspect ratio
 p <- ggplot(mtcars, aes(mpg, hp/5)) + geom_point()
@@ -76,5 +76,5 @@ p + coord_biplot() + theme(aspect.ratio = 1)
 
 # NB: `theme(aspect.ratio = )` overrides `Coord*$aspect`:
 p + coord_fixed(ratio = 1) + theme(aspect.ratio = 1)
-p + coord_biplot(aspect_ratio = 2) + theme(aspect.ratio = 1)
+p + coord_biplot(window_ratio = 2) + theme(aspect.ratio = 1)
 }

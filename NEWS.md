@@ -11,7 +11,7 @@ Multiple harmonizers are now available for scaling secondary axes. That recommen
 ## GDA-geared coordinate systems
 
 Two new coordinate systems provide control over the aspect ratio of the plotting window without compromising that of the (artificial) coordinate axes:
-`GeomRect` (alias `GeomSquare`) extends `GeomFixed` with an `aspect_ratio` parameter for the plotting window, while `GeomBiplot` removes the `ratio` parameter and forces the coordinate axes to have aspect ratio 1.
+`GeomRect` (alias `GeomSquare`) extends `GeomFixed` with an `window_ratio` parameter for the plotting window, while `GeomBiplot` removes the `ratio` parameter and forces the coordinate axes to have aspect ratio 1.
 
 ## referential stats
 
