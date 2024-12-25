@@ -103,19 +103,6 @@ along PC1 and PC2. This transformation obtains the axis projections as
 \verb{xend,yend} and pairs them with original points \verb{x,y} to demarcate segments
 visualizing the projections.
 }
-\section{Biplot layers}{
-
-\code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
-frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
-variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
-filter the data frame to one of these two.
-
-The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
-stat in order to render plot elements for the corresponding factor matrix.
-\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
-points for rows and arrows for columns.
-}
-
 \section{Referential stats}{
 
 This statistical transformation is done with respect to reference data passed
@@ -129,6 +116,39 @@ this \verb{stat_*()} shortcut will pass the necessary positional aesthetics to t
 The biplot shortcuts automatically substitute the complementary matrix factor
 for \code{referent = NULL} and will use an integer vector to select a subset from
 this factor. These uses do not require the mapping passage.
+}
+
+\section{Biplot layers}{
+
+\code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
+frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
+variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
+filter the data frame to one of these two.
+
+The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
+stat in order to render plot elements for the corresponding factor matrix.
+\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
+points for rows and arrows for columns.
+}
+
+\section{Ordination aesthetics}{
+
+This statistical transformation is compatible with the convenience function
+\code{\link[=ord_aes]{ord_aes()}}.
+
+Some transformations (e.g. \code{\link[=stat_center]{stat_center()}}) commute with projection to the
+lower (1 or 2)-dimensional biplot space. If they detect aesthetics of the
+form \verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and
+\code{y} while any remaining are ignored.
+
+Other transformations (e.g. \code{\link[=stat_spantree]{stat_spantree()}}) yield different results in a
+lower-dimensional biplot when they are computed before versus after
+projection. If the stat layer detects these aesthetics, then the
+transformation is performed before projection, and the results in the first
+two dimensions are returned as \code{x} and \code{y}.
+
+A small number of transformations (\code{\link[=stat_rule]{stat_rule()}}) are incompatible with
+ordination aesthetics but will accept \code{ord_aes()} without warning.
 }
 
 \section{Computed variables}{
@@ -158,6 +178,7 @@ ggplot(subcars, aes(x = hp00, y = wt)) +
   stat_projection(referent = grad)
 # basic PCA
 iris_pca <- ordinate(iris, cols = 1:4, model = prcomp)
+
 # basic biplot
 iris_biplot <- 
   ggbiplot(iris_pca, aes(color = Species, label = name)) +
@@ -174,6 +195,12 @@ iris_biplot + stat_rows_projection(subset = c(1, 51, 101), referent = c(2, 4))
 # project select cases onto manually provided axes
 iris_cols <- as.data.frame(get_cols(iris_pca))
 iris_biplot + stat_rows_projection(subset = c(1, 51, 101), referent = iris_cols)
+
+# project selected cases onto selected axes in full-dimensional space
+ggbiplot(iris_pca, ord_aes(iris_pca, color = Species, label = name)) +
+  geom_rows_point() +
+  geom_cols_axis() +
+  stat_rows_projection(subset = c(1, 51, 101), referent = c(2, 4))
 }
 \seealso{
 Other stat layers: 

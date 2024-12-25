@@ -718,6 +718,7 @@ as their corresponding conventional geoms.
 \seealso{
 Other biplot layers: 
 \code{\link{biplot-stats}},
+\code{\link{stat_referent}()},
 \code{\link{stat_rows}()}
 }
 \concept{biplot layers}

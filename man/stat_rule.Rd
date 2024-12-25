@@ -129,6 +129,21 @@ orthogonal distance of each axis from the origin, and \code{fun.lower} and
 from or limited to, which must be passed manually to the \code{referent}
 parameter.
 }
+\section{Referential stats}{
+
+This statistical transformation is done with respect to reference data passed
+to \code{referent} (ignored if \code{NULL}, the default, possibly resulting in empty
+output). See \code{\link[=stat_referent]{stat_referent()}} for more details. This relies on a sleight of
+hand through a new undocumented \code{LayerRef} class and associated
+\code{\link[ggplot2:ggplot_add]{ggplot2::ggplot_add()}} method. As a result, only layers constructed using
+this \verb{stat_*()} shortcut will pass the necessary positional aesthetics to the
+\verb{$setup_params()} step, making them available to pre-process \code{referent} data.
+
+The biplot shortcuts automatically substitute the complementary matrix factor
+for \code{referent = NULL} and will use an integer vector to select a subset from
+this factor. These uses do not require the mapping passage.
+}
+
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
@@ -140,26 +155,6 @@ The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the correspon
 stat in order to render plot elements for the corresponding factor matrix.
 \verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.
-}
-
-\section{Ordination aesthetics}{
-
-The convenience function \code{\link[=ord_aes]{ord_aes()}} can be used to incorporate all
-coordinates of the ordination model into a statistical transformation. It
-maps the coordinates to the custom aesthetics \code{..coord1}, \code{..coord2}, etc.
-
-Some transformations, e.g. \code{\link[=stat_center]{stat_center()}}, are commutative with projection
-to the 'x' and 'y' coordinates. If they detect aesthetics of the form
-\verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and \code{y}
-while any remaining are ignored.
-
-Other transformations, e.g. \code{\link[=stat_spantree]{stat_spantree()}}, yield different results in a
-planar biplot when they are computer before or after projection. If such a
-stat layer detects these aesthetics, then the lot of them are used in the
-transformation.
-
-In either case, the stat layer returns a data frame with position aesthetics
-\code{x} and \code{y}.
 }
 
 \section{Computed variables}{

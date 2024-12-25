@@ -26,6 +26,7 @@
 #' @inheritParams ggplot2::ggplot_add
 #' @param referent The reference data set; see Details.
 #' @template return-layer
+#' @family biplot layers
 #' @example inst/examples/ex-stat-referent.r
 #' @export
 stat_referent <- function(

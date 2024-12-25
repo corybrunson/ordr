@@ -33,8 +33,8 @@
 #' @template ref-gower1988
 #'   
 
+#' @template stat-referent
 #' @template biplot-layers
-#' @template biplot-ord-aes
 
 #' @section Computed variables: These are calculated during the statistical
 #'   transformation and can be accessed with [delayed

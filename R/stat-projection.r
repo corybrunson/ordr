@@ -18,8 +18,9 @@
 #' visualizing the projections.
 #' 
 
-#' @template biplot-layers
 #' @template stat-referent
+#' @template biplot-layers
+#' @template biplot-ord-aes
 
 #' @section Computed variables: These are calculated during the statistical
 #'   transformation and can be accessed with [delayed
@@ -72,31 +73,26 @@ StatProjection <- ggproto(
   compute_group = function(data, scales,
                            subset = NULL, referent = NULL, na.rm = FALSE) {
     
-    # arbitrary values of computed aesthetics
-    res <- transform(
-      data,
-      xend = NA_real_,
-      yend = NA_real_
-    )
-    # empty initialized output
-    res <- data[c(), , drop = FALSE]
-    
     # no referent means no projection
-    if (is.null(referent) || ! is.data.frame(referent)) return(res)
+    if (is.null(referent) || ! is.data.frame(referent)) return(data.frame())
+    
+    # extract positions
+    ord_cols <- get_ord_aes(data)
+    data_ord <- data[, ord_cols, drop = FALSE]
+    ref_ord <- referent[, ord_cols, drop = FALSE]
     
     # compute and collect projections of `data` onto `referent` rows
-    inertias <- referent$x^2 + referent$y^2
-    for (i in seq(nrow(referent))) {
-      data$dots <- data$x * referent$x[i] + data$y * referent$y[i]
-      res_i <- transform(
-        data,
-        xend = dots / inertias[i] * referent$x[i],
-        yend = dots / inertias[i] * referent$y[i]
-      )
-      res <- rbind(res, res_i)
-    }
+    # (repeat across referent elements within data elements)
+    inertia <- rep(rowSums(ref_ord^2), times = nrow(data))
+    inner_prod <- as.vector( as.matrix(ref_ord) %*% t(as.matrix(data_ord)) )
+    data <- data[rep(seq(nrow(data)), each = nrow(referent)), , drop = FALSE]
+    data <- transform(
+      data,
+      xend = inner_prod / inertia * ref_ord[[1L]],
+      yend = inner_prod / inertia * ref_ord[[2L]]
+    )
     
     # output segment data
-    res
+    data
   }
 )
