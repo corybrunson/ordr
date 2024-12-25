@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom-axis.r
 \name{geom_axis}
 \alias{geom_axis}
-\title{Axes through the origin}
+\title{Axes through or offset from the origin}
 \usage{
 geom_axis(
   mapping = NULL,
@@ -81,11 +81,11 @@ one.}
 \item{tick_length}{Numeric; the length of the tick marks, as a proportion of
 the minimum of the plot width and height.}
 
-\item{text_dodge}{Numeric; the orthogonal distance of the text from the axis,
-as a proportion of the minimum of the plot width and height.}
+\item{text_dodge}{Numeric; the orthogonal distance of tick mark text from the
+axis, as a proportion of the minimum of the plot width and height.}
 
-\item{label_dodge}{Numeric; the orthogonal distance of the text from the axis
-or isoline, as a proportion of the minimum of the plot width and height.}
+\item{label_dodge}{Numeric; the orthogonal distance of the axis label from
+the axis, as a proportion of the minimum of the plot width and height.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
@@ -115,8 +115,8 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
-\code{geom_axis()} renders lines through the origin and the position
-of each case or variable.
+\code{geom_axis()} renders lines through or orthogonally translated
+from the origin and the position of each case or variable.
 }
 \section{Biplot layers}{
 
@@ -136,8 +136,9 @@ points for rows and arrows for columns.
 \code{geom_axis()} understands the following aesthetics (required aesthetics are
 in bold):
 \itemize{
-\item \strong{\code{x}}
-\item \strong{\code{y}}
+\item \strong{\code{x}}, \strong{\code{y}}
+\item \code{lower}, \code{upper}
+\item \code{yintercept} \emph{or} \code{xintercept} \emph{or} \code{xend} and \code{yend}
 \item \code{colour}
 \item \code{alpha}
 \item \code{linewidth}
@@ -145,73 +146,51 @@ in bold):
 \item \code{label}
 \item \code{center}, \code{scale}
 \item \code{label_colour}, \code{label_alpha}, \code{label_size}, \code{label_angle},
-\code{label_hjust}, \code{label_vjust}, \code{label_family}, \code{label_fontface}
+\code{label_family}, \code{label_fontface}
 \item \code{tick_colour}, \code{tick_alpha}, \code{tick_linewidth}, \code{tick_linetype}
 \item \code{text_colour}, \code{text_alpha}, \code{text_size}, \code{text_angle},
 \code{text_hjust}, \code{text_vjust}, \code{text_family}, \code{text_fontface}
 \item \code{group}
 }
-
-The prefixed aesthetics \verb{label_*}, \verb{tick_*}, and \verb{text_*} are used by the
-text elements and will inherit any values passed to their un-prefixed
-counterparts, if recognized.
 }
 
 \examples{
-# Freestone primary glass measurements
-print(glass)
-
-# default (standardized) linear discriminant analysis of sites on measurements
-glass_lda <- MASS::lda(Site ~ SiO2 + Al2O3 + FeO + MgO + CaO, glass)
-# bestow 'tbl_ord' class & augment observation, centroid, and variable fields
-as_tbl_ord(glass_lda) \%>\%
-  augment_ord() \%>\%
-  mutate_rows(discriminant =
-                ifelse(.element == "active", "centroid", "case")) \%>\%
-  print() -> glass_lda
-# row-standard biplot
-glass_lda \%>\%
-  confer_inertia(1) \%>\%
-  ggbiplot() +
-  theme_bw() + theme_biplot() +
-  geom_rows_point(aes(shape = grouping, size = discriminant), alpha = .5) +
-  geom_cols_axis(aes(label = name), color = "#888888", num = 8L,
-                 text_size = 2.5, label_dodge = .02) +
-  scale_shape_manual(values = c(2L, 3L, 0L, 5L)) +
-  ggtitle(
-    "LDA of Freestone glass measurements",
-    "Row-standard biplot of standardized LDA"
+# stack loss gradient
+stackloss |> 
+  lm(formula = stack.loss ~ Air.Flow + Water.Temp + Acid.Conc.) |> 
+  coef() |> 
+  as.list() |> as.data.frame() |> 
+  subset(select = c(Air.Flow, Water.Temp, Acid.Conc.)) ->
+  coef_data
+# gradient axis with respect to two predictors
+scale(stackloss, scale = FALSE) |> 
+  ggplot(aes(x = Acid.Conc., y = Air.Flow)) +
+  coord_square() + geom_origin() +
+  geom_point(aes(size = stack.loss, alpha = sign(stack.loss))) + 
+  scale_size_area() + scale_alpha_binned(breaks = c(-1, 0, 1)) +
+  geom_axis(data = coef_data)
+# unlimited axes with window forcing
+stackloss_centered <- scale(stackloss, scale = FALSE)
+stackloss_centered |> 
+  ggplot(aes(x = Acid.Conc., y = Air.Flow)) +
+  coord_square() + geom_origin() +
+  geom_point(aes(size = stack.loss, alpha = sign(stack.loss))) + 
+  scale_size_area() + scale_alpha_binned(breaks = c(-1, 0, 1)) +
+  stat_rule(
+    geom = "axis", data = coef_data,
+    referent = stackloss_centered,
+    fun.lower = \(x) minpp(x, p = 1), fun.upper = \(x) maxpp(x, p = 1),
+    fun.offset = \(x) minabspp(x, p = 1)
   )
-
-# contribution LDA of sites on measurements
-glass_lda <-
-  lda_ord(Site ~ SiO2 + Al2O3 + FeO + MgO + CaO, glass,
-          axes.scale = "contribution")
-# bestow 'tbl_ord' class & augment observation, centroid, and variable fields
-as_tbl_ord(glass_lda) \%>\%
-  augment_ord() \%>\%
-  mutate_rows(discriminant =
-                ifelse(.element == "active", "centroid", "case")) \%>\%
-  print() -> glass_lda
-# symmetric biplot
-glass_lda \%>\%
-  confer_inertia(.5) \%>\%
-  ggbiplot() +
-  theme_bw() + theme_biplot() +
-  geom_rows_point(aes(shape = grouping, alpha = discriminant)) +
-  geom_cols_axis(color = "#888888", num = 8L,
-                 text_size = 2.5, text_dodge = .025) +
-  scale_shape_manual(values = c(16L, 17L, 15L, 18L)) +
-  ggtitle(
-    "LDA of Freestone glass measurements",
-    "Symmetric biplot of contribution LDA"
-  )
+# NB: `geom_axis(stat = "rule")` would fail to pass positional aesthetics.
 }
 \seealso{
 Other geom layers: 
+\code{\link{geom_interpolation}()},
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},
+\code{\link{geom_rule}()},
 \code{\link{geom_text_radiate}()},
 \code{\link{geom_vector}()}
 }

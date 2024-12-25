@@ -12,8 +12,7 @@
 #' `geom_text_radiate()` understands the following aesthetics (required
 #' aesthetics are in bold):
 
-#' - **`x`**
-#' - **`y`**
+#' - **`x`**, **`y`**
 #' - **`label`**
 #' - `alpha`
 #' - `angle`
@@ -65,6 +64,9 @@ geom_text_radiate <- function(
 #' @export
 GeomTextRadiate <- ggproto(
   "GeomTextRadiate", GeomText,
+  
+  required_aes = c("x", "y", "label"),
+  non_missing_aes = c("x", "y"),
   
   draw_panel = function(
     data, panel_params, coord,
