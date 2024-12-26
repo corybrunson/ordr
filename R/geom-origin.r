@@ -1,9 +1,9 @@
 #' @title Marker or unit circle at the origin
 #' 
-
 #' @description `geom_origin()` renders a symbol, either a set of crosshairs or
 #'   a circle, at the origin. `geom_unit_circle()` renders the unit circle,
 #'   centered at the origin with radius 1.
+
 #' @template biplot-layers
 
 #' @section Aesthetics:

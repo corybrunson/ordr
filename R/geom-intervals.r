@@ -1,9 +1,9 @@
 #' @title Intervals depicting ranges, usually about center points
 #' 
-
 #' @description `geom_lineranges()` renders horizontal and vertical intervals
 #'   for a specified subject or variable; `geom_pointranges()` additionally
 #'   renders a point at their crosshairs.
+
 #' @template biplot-layers
 
 #' @section Aesthetics:

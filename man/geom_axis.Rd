@@ -118,6 +118,18 @@ A ggproto \link[ggplot2:layer]{layer}.
 \code{geom_axis()} renders lines through or orthogonally translated
 from the origin and the position of each case or variable.
 }
+\details{
+Axes are (usually linear) curves that track the values of variables
+across regions of a plot. Gower, Gardner--Lubbe, & le Roux (2011) recommend
+using axes to represent variables in biplots.
+
+Axes positioned orthogonally at the origin are a ubiquitous feature of
+scatterplots and used both to recover variable values from case markers
+(prediction) and to position new case markers from variables
+(interpolation). When they are not orthogonal, these two uses conflict, so
+interpolative versus predictive axes must be used appropriately; see
+\code{\link[=ggbiplot]{ggbiplot()}}.
+}
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
@@ -183,6 +195,10 @@ stackloss_centered |>
     fun.offset = \(x) minabspp(x, p = 1)
   )
 # NB: `geom_axis(stat = "rule")` would fail to pass positional aesthetics.
+}
+\references{
+Gower JC, Gardner--Lubbe S, & le Roux NJ (2011) \emph{Understanding Biplots}.
+Wiley, ISBN: 978-0-470-01255-0. \url{https://www.wiley.com/go/biplots}
 }
 \seealso{
 Other geom layers: 

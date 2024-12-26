@@ -1,7 +1,15 @@
 #' @title Vectors from the origin
 #' 
-
 #' @description `geom_vector()` renders arrows from the origin to points.
+
+#' @details Vectors are positions relative to some common reference point, in
+#'   this case the origin; they comprise direction and magnitude. Vectors are
+#'   usually represented with arrows rather than markers (points). They are
+#'   commonly used to represent variables in biplots, as by Greenacre (2010).
+#' 
+
+#' @template ref-greenacre2010
+
 #' @template biplot-layers
 
 #' @section Aesthetics:

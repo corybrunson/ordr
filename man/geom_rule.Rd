@@ -121,6 +121,11 @@ A ggproto \link[ggplot2:layer]{layer}.
 \code{geom_rule()} renders segments through or orthogonally
 translated from the origin.
 }
+\details{
+As implemented here, a rule is just an \link[=geom_axis]{axis} that has a
+fixed range, usually the limits of the data. See \code{\link[=stat_rule]{stat_rule()}} for further
+details.
+}
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data

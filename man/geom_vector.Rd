@@ -87,6 +87,12 @@ A ggproto \link[ggplot2:layer]{layer}.
 \description{
 \code{geom_vector()} renders arrows from the origin to points.
 }
+\details{
+Vectors are positions relative to some common reference point, in
+this case the origin; they comprise direction and magnitude. Vectors are
+usually represented with arrows rather than markers (points). They are
+commonly used to represent variables in biplots, as by Greenacre (2010).
+}
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
@@ -130,6 +136,11 @@ height_corr <- data.frame(
   measurement = colnames(Harman23.cor$cov),
   correlation = Harman23.cor$cov[1, ]
 )
+}
+\references{
+Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
+978-84-923846.
+\url{https://www.fbbva.es/microsite/multivariate-statistics/biplots.html}
 }
 \seealso{
 Other geom layers: 

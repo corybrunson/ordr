@@ -2,6 +2,21 @@
 #'
 #' @description `geom_axis()` renders lines through or orthogonally translated
 #'   from the origin and the position of each case or variable.
+
+#' @details Axes are (usually linear) curves that track the values of variables
+#'   across regions of a plot. Gower, Gardner--Lubbe, & le Roux (2011) recommend
+#'   using axes to represent variables in biplots.
+#'
+#'   Axes positioned orthogonally at the origin are a ubiquitous feature of
+#'   scatterplots and used both to recover variable values from case markers
+#'   (prediction) and to position new case markers from variables
+#'   (interpolation). When they are not orthogonal, these two uses conflict, so
+#'   interpolative versus predictive axes must be used appropriately; see
+#'   [ggbiplot()].
+#' 
+
+#' @template ref-gower2011
+
 #' @template biplot-layers
 
 #' @section Aesthetics:
