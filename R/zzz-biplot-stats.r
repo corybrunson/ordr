@@ -24,6 +24,8 @@
 #' @inheritParams stat_star
 #' @inheritParams stat_chull
 #' @inheritParams stat_cone
+#' @inheritParams stat_projection
+#' @inheritParams stat_rule
 #' @inheritParams stat_scale
 #' @inheritParams stat_spantree
 #' @example inst/examples/ex-stat-ellipse-iris.r
@@ -437,6 +439,194 @@ stat_cols_cone <- function(
       ...
     )
   )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsProjection <- ggproto(
+  "StatRowsProjection", StatProjection,
+  
+  setup_params = setup_referent_params,
+  
+  setup_data = setup_rows_xy_data
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_rows_projection <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "segment",
+  position = "identity",
+  subset = NULL,
+  referent = NULL,
+  ...,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  LayerRef <- layer(
+    mapping = mapping,
+    data = data,
+    stat = StatRowsProjection,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      subset = subset,
+      referent = referent,
+      na.rm = FALSE,
+      ...
+    )
+  )
+  class(LayerRef) <- c("LayerRef", class(LayerRef))
+  LayerRef
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsProjection <- ggproto(
+  "StatColsProjection", StatProjection,
+  
+  setup_params = setup_referent_params,
+  
+  setup_data = setup_cols_xy_data
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_projection <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "segment",
+  position = "identity",
+  subset = NULL,
+  referent = NULL,
+  ...,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  LayerRef <- layer(
+    mapping = mapping,
+    data = data,
+    stat = StatColsProjection,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      subset = subset,
+      referent = referent,
+      na.rm = FALSE,
+      ...
+    )
+  )
+  class(LayerRef) <- c("LayerRef", class(LayerRef))
+  LayerRef
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsRule <- ggproto(
+  "StatRowsRule", StatRule,
+  
+  setup_params = setup_referent_params,
+  
+  setup_data = setup_rows_xy_data
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_rows_rule <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "axis",
+  position = "identity",
+  fun.lower = "minpp",
+  fun.upper = "maxpp",
+  fun.offset = "minabspp",
+  fun.args = list(),
+  referent = NULL,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+) {
+  LayerRef <- layer(
+    mapping = mapping,
+    data = data,
+    stat = StatRowsRule,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      fun.lower = fun.lower,
+      fun.upper = fun.upper,
+      fun.offset = fun.offset,
+      fun.args = fun.args,
+      referent = referent,
+      na.rm = FALSE,
+      ...
+    )
+  )
+  class(LayerRef) <- c("LayerRef", class(LayerRef))
+  LayerRef
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsRule <- ggproto(
+  "StatColsRule", StatRule,
+  
+  setup_params = setup_referent_params,
+  
+  setup_data = setup_cols_xy_data
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_rule <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "axis",
+  position = "identity",
+  fun.lower = "minpp",
+  fun.upper = "maxpp",
+  fun.offset = "minabspp",
+  fun.args = list(),
+  referent = NULL,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+) {
+  LayerRef <- layer(
+    mapping = mapping,
+    data = data,
+    stat = StatColsRule,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      fun.lower = fun.lower,
+      fun.upper = fun.upper,
+      fun.offset = fun.offset,
+      fun.args = fun.args,
+      referent = referent,
+      na.rm = FALSE,
+      ...
+    )
+  )
+  class(LayerRef) <- c("LayerRef", class(LayerRef))
+  LayerRef
 }
 
 #' @rdname ordr-ggproto

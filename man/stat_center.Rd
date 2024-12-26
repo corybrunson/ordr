@@ -93,9 +93,11 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
-\item{fun.data, fun.center, fun.min, fun.max, fun.args}{Functions and arguments
-treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
-\code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
+\item{fun.data, fun.center, fun.min, fun.max}{Functions treated as in
+\code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and \code{fun.max}
+behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
+
+\item{fun.args}{Arguments passed to the \verb{fun.*}.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.
@@ -118,22 +120,30 @@ points for rows and arrows for columns.
 
 \section{Ordination aesthetics}{
 
-The convenience function \code{\link[=ord_aes]{ord_aes()}} can be used to incorporate all
-coordinates of the ordination model into a statistical transformation. It
-maps the coordinates to the custom aesthetics \code{..coord1}, \code{..coord2}, etc.
+This statistical transformation is compatible with the convenience function
+\code{\link[=ord_aes]{ord_aes()}}.
 
-Some transformations, e.g. \code{\link[=stat_center]{stat_center()}}, are commutative with projection
-to the 'x' and 'y' coordinates. If they detect aesthetics of the form
-\verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and \code{y}
-while any remaining are ignored.
+Some transformations (e.g. \code{\link[=stat_center]{stat_center()}}) commute with projection to the
+lower (1 or 2)-dimensional biplot space. If they detect aesthetics of the
+form \verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and
+\code{y} while any remaining are ignored.
 
-Other transformations, e.g. \code{\link[=stat_spantree]{stat_spantree()}}, yield different results in a
-planar biplot when they are computer before or after projection. If such a
-stat layer detects these aesthetics, then the lot of them are used in the
-transformation.
+Other transformations (e.g. \code{\link[=stat_spantree]{stat_spantree()}}) yield different results in a
+lower-dimensional biplot when they are computed before versus after
+projection. If the stat layer detects these aesthetics, then the
+transformation is performed before projection, and the results in the first
+two dimensions are returned as \code{x} and \code{y}.
 
-In either case, the stat layer returns a data frame with position aesthetics
-\code{x} and \code{y}.
+A small number of transformations (\code{\link[=stat_rule]{stat_rule()}}) are incompatible with
+ordination aesthetics but will accept \code{ord_aes()} without warning.
+}
+
+\section{Computed variables}{
+ These are calculated during the statistical
+transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluation}.
+\describe{
+\item{\verb{xmin,ymin,xmax,ymax}}{results of \verb{fun.min,fun.max} applied to \verb{x,y}}
+}
 }
 
 \examples{
@@ -161,6 +171,8 @@ iris_pca \%>\%
 Other stat layers: 
 \code{\link{stat_chull}()},
 \code{\link{stat_cone}()},
+\code{\link{stat_projection}()},
+\code{\link{stat_rule}()},
 \code{\link{stat_scale}()},
 \code{\link{stat_spantree}()}
 }

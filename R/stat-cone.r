@@ -81,19 +81,3 @@ StatCone <- ggproto(
     data[hull, , drop = FALSE]
   }
 )
-
-# single unique value, or else NA
-only <- function(x) {
-  uniq <- unique(x)
-  if (length(uniq) == 1L) {
-    uniq
-  } else {
-    switch(
-      class(x),
-      integer = NA_integer_,
-      numeric = NA_real_,
-      character = NA_character_,
-      factor = factor(NA_character_, levels = levels(x))
-    )
-  }
-}

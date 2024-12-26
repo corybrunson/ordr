@@ -118,8 +118,7 @@ points for rows and arrows for columns.
 \code{geom_vector()} understands the following aesthetics (required aesthetics
 are in bold):
 \itemize{
-\item \strong{\code{x}}
-\item \strong{\code{y}}
+\item \strong{\code{x}}, \strong{\code{y}}
 \item \code{alpha}
 \item \code{colour}
 \item \code{linetype}
@@ -133,19 +132,21 @@ are in bold):
 }
 
 \examples{
-# compute unscaled row-principal components of scaled measurements
-(iris_pca <- ordinate(iris, cols = 1:4, princomp))
-
-# row-principal biplot with coordinate-wise standard deviations
-iris_pca \%>\%
-  ggbiplot(aes(color = Species)) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_unit_circle() +
-  geom_rows_point(alpha = .5) +
-  geom_cols_vector(aes(label = name), color = "#444444") +
-  ggtitle("Row-principal unscaled PCA biplot of Anderson iris measurements") +
-  expand_limits(y = c(NA, 2))
+# cartesian coordinates
+us_center <- sapply(state.center, \(x) (min(x) + max(x)) / 2)
+state_center <- cbind(
+  state = state.abb,
+  sweep(as.data.frame(state.center), 2, us_center, "-")
+)
+ggplot(state_center, aes(x, y, label = state)) +
+  coord_equal() +
+  geom_vector() +
+  geom_text_radiate()
+# polar coordinates
+height_corr <- data.frame(
+  measurement = colnames(Harman23.cor$cov),
+  correlation = Harman23.cor$cov[1, ]
+)
 }
 \references{
 Vincent Q. Vu (2014). ggbiplot: A 'ggplot2' based biplot. R package version
@@ -162,9 +163,11 @@ branch
 \seealso{
 Other geom layers: 
 \code{\link{geom_axis}()},
+\code{\link{geom_interpolation}()},
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},
+\code{\link{geom_rule}()},
 \code{\link{geom_text_radiate}()}
 }
 \concept{geom layers}

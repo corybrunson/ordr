@@ -12,8 +12,7 @@
 #' `geom_vector()` understands the following aesthetics (required aesthetics
 #' are in bold):
 
-#' - **`x`**
-#' - **`y`**
+#' - **`x`**, **`y`**
 #' - `alpha`
 #' - `colour`
 #' - `linetype`
@@ -37,7 +36,7 @@
 #'   from the vectors.
 #' @template return-layer
 #' @family geom layers
-#' @example inst/examples/ex-geom-vector-iris.r
+#' @example inst/examples/ex-geom-vector.r
 #' @export
 geom_vector <- function(
   mapping = NULL, data = NULL, stat = "identity", position = "identity",
@@ -80,8 +79,9 @@ GeomVector <- ggproto(
     label_colour = "black", label_alpha = NA,
     family = "", fontface = 1, lineheight = 1.2
   ),
-  
+
   setup_data = function(data, params) {
+    
     # all vectors have tails at the origin
     transform(
       data,

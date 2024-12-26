@@ -12,6 +12,10 @@
 \alias{stat_cols_chull}
 \alias{stat_rows_cone}
 \alias{stat_cols_cone}
+\alias{stat_rows_projection}
+\alias{stat_cols_projection}
+\alias{stat_rows_rule}
+\alias{stat_cols_rule}
 \alias{stat_rows_scale}
 \alias{stat_cols_scale}
 \alias{stat_rows_spantree}
@@ -144,6 +148,60 @@ stat_cols_cone(
   ...
 )
 
+stat_rows_projection(
+  mapping = NULL,
+  data = NULL,
+  geom = "segment",
+  position = "identity",
+  subset = NULL,
+  referent = NULL,
+  ...,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+stat_cols_projection(
+  mapping = NULL,
+  data = NULL,
+  geom = "segment",
+  position = "identity",
+  subset = NULL,
+  referent = NULL,
+  ...,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+stat_rows_rule(
+  mapping = NULL,
+  data = NULL,
+  geom = "axis",
+  position = "identity",
+  fun.lower = "minpp",
+  fun.upper = "maxpp",
+  fun.offset = "minabspp",
+  fun.args = list(),
+  referent = NULL,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_cols_rule(
+  mapping = NULL,
+  data = NULL,
+  geom = "axis",
+  position = "identity",
+  fun.lower = "minpp",
+  fun.upper = "maxpp",
+  fun.offset = "minabspp",
+  fun.args = list(),
+  referent = NULL,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
 stat_rows_scale(
   mapping = NULL,
   data = NULL,
@@ -265,12 +323,27 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
-\item{fun.data, fun.center, fun.min, fun.max, fun.args}{Functions and arguments
-treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
-\code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
+\item{fun.data, fun.center, fun.min, fun.max}{Functions treated as in
+\code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and \code{fun.max}
+behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
+
+\item{fun.args}{Arguments passed to the \verb{fun.*}.}
 
 \item{origin}{Logical; whether to include the origin with the transformed
 data. Defaults to \code{FALSE}.}
+
+\item{subset}{An integer, logical, or character vector indicating a subset of
+rows or columns for which to render graphical elements. NB: Internally, the
+\code{subset} will be taken from the rows of the \link[=fortify.tbl_ord]{fortified}
+'tbl_ord' comprising rows from only one of the matrix factors. It is still
+possible to pass a formula to the \code{data} parameter, but it will act on the
+fortified data \emph{before} it has been restricted to one matrix factor.}
+
+\item{referent}{The reference data set; see Details.}
+
+\item{fun.lower, fun.upper, fun.offset}{Functions used to determine the limits
+of the rules and the translations of the axes from the projections of
+\code{referent} onto the axes and onto their normal vectors.}
 
 \item{mult}{Numeric value used to scale the coordinates.}
 
@@ -292,22 +365,22 @@ stats.
 }
 \section{Ordination aesthetics}{
 
-The convenience function \code{\link[=ord_aes]{ord_aes()}} can be used to incorporate all
-coordinates of the ordination model into a statistical transformation. It
-maps the coordinates to the custom aesthetics \code{..coord1}, \code{..coord2}, etc.
+This statistical transformation is compatible with the convenience function
+\code{\link[=ord_aes]{ord_aes()}}.
 
-Some transformations, e.g. \code{\link[=stat_center]{stat_center()}}, are commutative with projection
-to the 'x' and 'y' coordinates. If they detect aesthetics of the form
-\verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and \code{y}
-while any remaining are ignored.
+Some transformations (e.g. \code{\link[=stat_center]{stat_center()}}) commute with projection to the
+lower (1 or 2)-dimensional biplot space. If they detect aesthetics of the
+form \verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and
+\code{y} while any remaining are ignored.
 
-Other transformations, e.g. \code{\link[=stat_spantree]{stat_spantree()}}, yield different results in a
-planar biplot when they are computer before or after projection. If such a
-stat layer detects these aesthetics, then the lot of them are used in the
-transformation.
+Other transformations (e.g. \code{\link[=stat_spantree]{stat_spantree()}}) yield different results in a
+lower-dimensional biplot when they are computed before versus after
+projection. If the stat layer detects these aesthetics, then the
+transformation is performed before projection, and the results in the first
+two dimensions are returned as \code{x} and \code{y}.
 
-In either case, the stat layer returns a data frame with position aesthetics
-\code{x} and \code{y}.
+A small number of transformations (\code{\link[=stat_rule]{stat_rule()}}) are incompatible with
+ordination aesthetics but will accept \code{ord_aes()} without warning.
 }
 
 \examples{
@@ -340,6 +413,7 @@ iris_pca \%>\%
 \seealso{
 Other biplot layers: 
 \code{\link{biplot-geoms}},
+\code{\link{stat_referent}()},
 \code{\link{stat_rows}()}
 }
 \concept{biplot layers}

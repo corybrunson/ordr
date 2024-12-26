@@ -1,6 +1,6 @@
 Package: ordr
 Title: A Tidyverse Extension for Ordinations and Biplots
-Version: 0.1.1.0001
+Version: 0.1.1.0002
 Authors@R: c(
   person("Jason Cory", "Brunson", email = "cornelioid@gmail.com",
     role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3126-9494")),
@@ -74,9 +74,11 @@ Collate:
     'fun-lra.r'
     'fun-wrap.r'
     'geom-axis.r'
+    'geom-interpolation.r'
     'geom-intervals.r'
     'geom-isoline.r'
     'geom-origin.r'
+    'geom-rule.r'
     'geom-text-radiate.r'
     'geom-utils.r'
     'geom-vector.r'
@@ -105,6 +107,9 @@ Collate:
     'stat-chull.r'
     'stat-cone.r'
     'stat-matrix.r'
+    'stat-referent.r'
+    'stat-projection.r'
+    'stat-rule.r'
     'stat-scale.r'
     'stat-spantree.r'
     'themes.r'
