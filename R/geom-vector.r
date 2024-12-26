@@ -1,10 +1,19 @@
 #' @title Vectors from the origin
 #' 
-
 #' @description `geom_vector()` renders arrows from the origin to points,
-#'   optionally with text radiating outward. This layer is adapted from
+#'   optionally with text radiating outward.
+
+#' @details Vectors are positions relative to some common reference point, in
+#'   this case the origin; they comprise direction and magnitude. Vectors are
+#'   usually represented with arrows rather than markers (points). They are
+#'   commonly used to represent variables in biplots, as by Greenacre (2010).
+#'   This layer, with optional radiating text labels, is adapted from
 #'   `ggbiplot()` in the off-CRAN extensions of the same name (Vu, 2014;
 #'   Telford, 2017; Gegzna, 2018).
+#' 
+
+#' @template ref-greenacre2010
+
 #' @template biplot-layers
 
 #' @section Aesthetics:

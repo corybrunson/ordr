@@ -96,7 +96,14 @@ A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
 \code{geom_vector()} renders arrows from the origin to points,
-optionally with text radiating outward. This layer is adapted from
+optionally with text radiating outward.
+}
+\details{
+Vectors are positions relative to some common reference point, in
+this case the origin; they comprise direction and magnitude. Vectors are
+usually represented with arrows rather than markers (points). They are
+commonly used to represent variables in biplots, as by Greenacre (2010).
+This layer, with optional radiating text labels, is adapted from
 \code{ggbiplot()} in the off-CRAN extensions of the same name (Vu, 2014;
 Telford, 2017; Gegzna, 2018).
 }
@@ -149,6 +156,10 @@ height_corr <- data.frame(
 )
 }
 \references{
+Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
+978-84-923846.
+\url{https://www.fbbva.es/microsite/multivariate-statistics/biplots.html}
+
 Vincent Q. Vu (2014). ggbiplot: A 'ggplot2' based biplot. R package version
 0.55. \url{https://github.com/vqv/ggbiplot}, \code{experimental} branch
 

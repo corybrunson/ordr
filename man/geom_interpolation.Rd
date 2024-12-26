@@ -91,10 +91,22 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 }
 \description{
-\code{geom_interpolation()} renders a tail-to-head sequence of arrows
-(\code{type = "sequence"}) or a scaled centroid arrow (\code{type = "centroid"}) that
-represents the interpolation of a new row from its column entries to its
-artificial coordinates.
+\code{geom_interpolation()} renders a geometric construction that
+interpolates a new data matrix (row or column) element from its entries to
+its artificial coordinates.
+}
+\details{
+Interpolation answers the following question: Given a new data
+element that might have appeared as a row (respectively, column) in the
+singular-value-decomposed data matrix, where should we expect the marker
+for this element to appear in the biplot? The solution is the vector sum of
+the column (row) units weighted by their values in the new row (column).
+Gower, Gardner--Lubbe, & le Roux (2011) provide two visualizations of this
+calculation: a tail-to-head sequence of weighted units (\code{type = "sequence"}), and a centroid of
+the weighted units scaled by the number of units (\code{type = "centroid"}).
+
+Interpretation of the interpolated markers requires that the corresponding
+axes be appropriately scaled; see \code{\link[=ggbiplot]{ggbiplot()}}.
 }
 \section{Biplot layers}{
 
@@ -180,6 +192,10 @@ iris_pca \%>\%
     new_data = new_data, type = "sequence", alpha = .5
   ) +
   geom_rows_text(aes(label = obs, color = species), alpha = .5, size = 3)
+}
+\references{
+Gower JC, Gardner--Lubbe S, & le Roux NJ (2011) \emph{Understanding Biplots}.
+Wiley, ISBN: 978-0-470-01255-0. \url{https://www.wiley.com/go/biplots}
 }
 \seealso{
 Other geom layers: 

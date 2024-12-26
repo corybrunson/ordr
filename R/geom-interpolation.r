@@ -1,10 +1,25 @@
 #' @title Render interpolation of new rows from columns (or vice-versa)
 #' 
 
-#' @description `geom_interpolation()` renders a tail-to-head sequence of arrows
-#'   (`type = "sequence"`) or a scaled centroid arrow (`type = "centroid"`) that
-#'   represents the interpolation of a new row from its column entries to its
-#'   artificial coordinates.
+#' @description `geom_interpolation()` renders a geometric construction that
+#'   interpolates a new data matrix (row or column) element from its entries to
+#'   its artificial coordinates.
+
+#' @details Interpolation answers the following question: Given a new data
+#'   element that might have appeared as a row (respectively, column) in the
+#'   singular-value-decomposed data matrix, where should we expect the marker
+#'   for this element to appear in the biplot? The solution is the vector sum of
+#'   the column (row) units weighted by their values in the new row (column).
+#'   Gower, Gardner--Lubbe, & le Roux (2011) provide two visualizations of this
+#'   calculation: a tail-to-head sequence of weighted units (`type = "sequence"`), and a centroid of
+#'   the weighted units scaled by the number of units (`type = "centroid"`).
+#'   
+#'   Interpretation of the interpolated markers requires that the corresponding
+#'   axes be appropriately scaled; see [ggbiplot()].
+#' 
+
+#' @template ref-gower2011
+
 #' @template biplot-layers
 
 #' @section Aesthetics:

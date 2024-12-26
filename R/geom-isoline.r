@@ -1,6 +1,15 @@
 #' @title Isolines (contour lines)
 #'
 #' @description `geom_isoline()` renders isolines along row or column axes.
+
+#' @details Isolines are topographical features that separate a plot into
+#'   regions in which a gradient of interest falls within a specified range.
+#'   Greenacre (2010) uses them effectively to assist with the projection of
+#'   markers onto axes.
+#' 
+
+#' @template ref-greenacre2010
+
 #' @template biplot-layers
 
 #' @section Aesthetics:

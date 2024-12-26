@@ -1,10 +1,9 @@
 # next version
 
-## combined vector and radiating text geom
+## combined vector and radiating text geom (breaking change)
 
 The 'vector' and 'text_radiate' geoms have been combined.
-The shortcut `geom_text_radiate()` is deprecated.
-BREAKING CHANGE: Code using `geom_vector()` will automatically generate radiating labels.
+The shortcut `geom_text_radiate()` is deprecated, and `geom_vector()` generates radiating labels by default.
 
 ## debugged axis geom
 
@@ -19,6 +18,10 @@ Multiple harmonizers are now available for scaling secondary axes. That recommen
 Two new coordinate systems provide control over the aspect ratio of the plotting window without compromising that of the (artificial) coordinate axes:
 `GeomRect` (alias `GeomSquare`) extends `GeomFixed` with an `window_ratio` parameter for the plotting window, while `GeomBiplot` removes the `ratio` parameter and forces the coordinate axes to have aspect ratio 1.
 
+## addition geom
+
+A new 'interpolation' geometric element layer renders either of two methods of vector addition to interpolate the position---on the existing ordination and its biplot---of a new row or column of the original data matrix.
+
 ## referential stats
 
 A new statistical transformation serves to parent specific "referential stats", meaning those that depend on non-inherited (in this setting, positional) data to transform the inherited data. The reference data are passed to the new `referent` parameter. The new stat is coupled with an additional `LayerRef` class that enables `ggplot_add()` to pass the inherited positional aesthetics to `$setup_params()`. Biplot-specific `stat_*_*()` shortcuts accept additional argument types to `referent` that result in the opposite matrix factor being used as reference data.
@@ -30,10 +33,6 @@ The 'projection' referential stat prepares segment endpoints between `x,y` posit
 ## rule stat
 
 A new 'rule' statistical transformation computes additional position aesthetics that the 'axis' geom uses to limit and offset axes. The stat is referential and expects a set of functions that compute limits `lower` and `upper` along the axes and `yintercept` and `xintercept` associated with offset axes. The 'axis' geom preprocesses these aesthetics to rule endpoints `xmin,ymin,xmax,ymax` and offset vectors `xend,yend` to force the plotting window to contain the limited axis segments or, if the axes remain lines, the offsets where they are centered.
-
-## angle,radius specifications
-
-Several geometric object layers ('vector', 'isoline', and 'axis') now accept polar as well as cartesian coordinates. Whereas cartesian coordinates influence the plotting window, polar coordinates do not, so this allows for the plot to ignore elements like axes that may not be intended to influence the window dimensions. This is an experimental convenience feature that may be removed in a future version.
 
 # ordr 0.1.1
 
