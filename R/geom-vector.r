@@ -5,14 +5,18 @@
 
 #' @details Vectors are positions relative to some common reference point, in
 #'   this case the origin; they comprise direction and magnitude. Vectors are
-#'   usually represented with arrows rather than markers (points). They are
-#'   commonly used to represent variables in biplots, as by Greenacre (2010).
-#'   This layer, with optional radiating text labels, is adapted from
-#'   `ggbiplot()` in the off-CRAN extensions of the same name (Vu, 2014;
-#'   Telford, 2017; Gegzna, 2018).
+#'   usually represented with arrows rather than markers (points).
+#'
+#'   Vectors are commonly used to represent numerical variables in biplots, as
+#'   by Gabriel (1971) and Greenacre (2010). Gardner & le Roux (2002) refer to
+#'   these as Gabriel biplots. This layer, with optional radiating text labels,
+#'   is adapted from `ggbiplot()` in the off-CRAN extensions of the same name
+#'   (Vu, 2014; Telford, 2017; Gegzna, 2018).
 #' 
 
+#' @template ref-gabriel1971
 #' @template ref-greenacre2010
+#' @template ref-gardner2002
 
 #' @template biplot-layers
 

@@ -101,11 +101,13 @@ optionally with text radiating outward.
 \details{
 Vectors are positions relative to some common reference point, in
 this case the origin; they comprise direction and magnitude. Vectors are
-usually represented with arrows rather than markers (points). They are
-commonly used to represent variables in biplots, as by Greenacre (2010).
-This layer, with optional radiating text labels, is adapted from
-\code{ggbiplot()} in the off-CRAN extensions of the same name (Vu, 2014;
-Telford, 2017; Gegzna, 2018).
+usually represented with arrows rather than markers (points).
+
+Vectors are commonly used to represent numerical variables in biplots, as
+by Gabriel (1971) and Greenacre (2010). Gardner & le Roux (2002) refer to
+these as Gabriel biplots. This layer, with optional radiating text labels,
+is adapted from \code{ggbiplot()} in the off-CRAN extensions of the same name
+(Vu, 2014; Telford, 2017; Gegzna, 2018).
 }
 \section{Biplot layers}{
 
@@ -156,9 +158,18 @@ height_corr <- data.frame(
 )
 }
 \references{
+Gabriel KR (1971) "The biplot graphic display of matrices with application to
+principal component analysis". \emph{Biometrika} 58(3), 453--467.
+\doi{10.1093/biomet/58.3.453}
+
 Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
 978-84-923846.
 \url{https://www.fbbva.es/microsite/multivariate-statistics/biplots.html}
+
+Gardner S, le Roux N (2002) "Biplot Methodology for Discriminant Analysis
+Based upon Robust Methods and Principal Curves". \emph{Classification, Clustering,
+and Data Analysis: Recent Advances and Applications}: 169--176.
+\url{https://link.springer.com/chapter/10.1007/978-3-642-56181-8_18}
 
 Vincent Q. Vu (2014). ggbiplot: A 'ggplot2' based biplot. R package version
 0.55. \url{https://github.com/vqv/ggbiplot}, \code{experimental} branch
