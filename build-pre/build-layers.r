@@ -221,6 +221,10 @@ Sys.sleep(.5)
 
 # ggplot2 & other (non-ordr) extension layers to adapt to biplot layers
 orig_layers <- c(
+  # 1-dimensional
+  "ggplot2::geom_rug", "ggplot2::geom_density",
+  "ggplot2::geom_bar", "ggplot2::stat_count", "ggplot2::stat_bin",
+  # 2-dimensional
   "ggplot2::stat_ellipse",
   "ggplot2::geom_point", "ggplot2::geom_path", "ggplot2::geom_polygon",
   "ggplot2::geom_text", "ggplot2::geom_label",

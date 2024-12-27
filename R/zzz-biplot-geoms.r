@@ -22,6 +22,9 @@
 #'   geom_label_repel
 #' @inheritParams ggplot2::layer
 #' @template param-geom
+#' @inheritParams ggplot2::geom_rug
+#' @inheritParams ggplot2::geom_density
+#' @inheritParams ggplot2::geom_bar
 #' @inheritParams ggplot2::geom_point
 #' @inheritParams ggplot2::geom_path
 #' @inheritParams ggplot2::geom_polygon
@@ -46,6 +49,200 @@ ggrepel::geom_label_repel
 
 compute_just <- getFromNamespace("compute_just", "ggplot2")
 to_unit <- getFromNamespace("to_unit", "ggrepel")
+
+#' @rdname biplot-geoms
+#' @export
+geom_rows_rug <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  ...,
+  outside = FALSE,
+  sides = "bl",
+  length = unit(0.03, "npc"),
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = rows_stat(stat),
+    geom = GeomRug,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      outside = outside,
+      sides = sides,
+      length = length,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_cols_rug <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  ...,
+  outside = FALSE,
+  sides = "bl",
+  length = unit(0.03, "npc"),
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = cols_stat(stat),
+    geom = GeomRug,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      outside = outside,
+      sides = sides,
+      length = length,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_rows_density <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "density",
+  position = "identity",
+  ...,
+  na.rm = FALSE,
+  orientation = NA,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  outline.type = "upper"
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = rows_stat(stat),
+    geom = GeomDensity,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = na.rm,
+      orientation = orientation,
+      outline.type = outline.type,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_cols_density <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "density",
+  position = "identity",
+  ...,
+  na.rm = FALSE,
+  orientation = NA,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  outline.type = "upper"
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = cols_stat(stat),
+    geom = GeomDensity,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = na.rm,
+      orientation = orientation,
+      outline.type = outline.type,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_rows_bar <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "count",
+  position = "stack",
+  ...,
+  just = 0.5,
+  width = NULL,
+  na.rm = FALSE,
+  orientation = NA,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = rows_stat(stat),
+    geom = GeomBar,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      just = just,
+      width = width,
+      na.rm = na.rm,
+      orientation = orientation,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_cols_bar <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "count",
+  position = "stack",
+  ...,
+  just = 0.5,
+  width = NULL,
+  na.rm = FALSE,
+  orientation = NA,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = cols_stat(stat),
+    geom = GeomBar,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      just = just,
+      width = width,
+      na.rm = na.rm,
+      orientation = orientation,
+      ...
+    )
+  )
+}
 
 #' @rdname biplot-geoms
 #' @export

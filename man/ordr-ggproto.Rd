@@ -33,6 +33,10 @@
 \alias{StatRowsScale}
 \alias{StatColsScale}
 \alias{StatSpantree}
+\alias{StatRowsCount}
+\alias{StatColsCount}
+\alias{StatRowsBin}
+\alias{StatColsBin}
 \alias{StatRowsEllipse}
 \alias{StatColsEllipse}
 \alias{StatRowsCenter}

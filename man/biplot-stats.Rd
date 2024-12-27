@@ -2,6 +2,10 @@
 % Please edit documentation in R/zzz-biplot-stats.r
 \name{biplot-stats}
 \alias{biplot-stats}
+\alias{stat_rows_count}
+\alias{stat_cols_count}
+\alias{stat_rows_bin}
+\alias{stat_cols_bin}
 \alias{stat_rows_ellipse}
 \alias{stat_cols_ellipse}
 \alias{stat_rows_center}
@@ -22,6 +26,70 @@
 \alias{stat_cols_spantree}
 \title{Convenience stats for row and column matrix factors}
 \usage{
+stat_rows_count(
+  mapping = NULL,
+  data = NULL,
+  geom = "bar",
+  position = "stack",
+  ...,
+  width = NULL,
+  na.rm = FALSE,
+  orientation = NA,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+stat_cols_count(
+  mapping = NULL,
+  data = NULL,
+  geom = "bar",
+  position = "stack",
+  ...,
+  width = NULL,
+  na.rm = FALSE,
+  orientation = NA,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+stat_rows_bin(
+  mapping = NULL,
+  data = NULL,
+  geom = "bar",
+  position = "stack",
+  ...,
+  binwidth = NULL,
+  bins = NULL,
+  center = NULL,
+  boundary = NULL,
+  breaks = NULL,
+  closed = c("right", "left"),
+  pad = FALSE,
+  na.rm = FALSE,
+  orientation = NA,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+stat_cols_bin(
+  mapping = NULL,
+  data = NULL,
+  geom = "bar",
+  position = "stack",
+  ...,
+  binwidth = NULL,
+  bins = NULL,
+  center = NULL,
+  boundary = NULL,
+  breaks = NULL,
+  closed = c("right", "left"),
+  pad = FALSE,
+  na.rm = FALSE,
+  orientation = NA,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
 stat_rows_ellipse(
   mapping = NULL,
   data = NULL,
@@ -297,20 +365,16 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
-\item{type}{The type of ellipse.
-The default \code{"t"} assumes a multivariate t-distribution, and
-\code{"norm"} assumes a multivariate normal distribution.
-\code{"euclid"} draws a circle with the radius equal to \code{level},
-representing the euclidean distance from the center.
-This ellipse probably won't appear circular unless \code{coord_fixed()} is applied.}
-
-\item{level}{The level at which to draw an ellipse,
-or, if \code{type="euclid"}, the radius of the circle to be drawn.}
-
-\item{segments}{The number of segments to be used in drawing the ellipse.}
+\item{width}{Bar width. By default, set to 90\% of the \code{\link[ggplot2:resolution]{resolution()}} of the
+data.}
 
 \item{na.rm}{If \code{FALSE}, the default, missing values are removed with
 a warning. If \code{TRUE}, missing values are silently removed.}
+
+\item{orientation}{The orientation of the layer. The default (\code{NA})
+automatically determines the orientation from the aesthetic mapping. In the
+rare event that this fails it can be given explicitly by setting \code{orientation}
+to either \code{"x"} or \code{"y"}. See the \emph{Orientation} section for more detail.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -322,6 +386,53 @@ display.}
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
+
+\item{binwidth}{The width of the bins. Can be specified as a numeric value
+or as a function that calculates width from unscaled x. Here, "unscaled x"
+refers to the original x values in the data, before application of any
+scale transformation. When specifying a function along with a grouping
+structure, the function will be called once per group.
+The default is to use the number of bins in \code{bins},
+covering the range of the data. You should always override
+this value, exploring multiple widths to find the best to illustrate the
+stories in your data.
+
+The bin width of a date variable is the number of days in each time; the
+bin width of a time variable is the number of seconds.}
+
+\item{bins}{Number of bins. Overridden by \code{binwidth}. Defaults to 30.}
+
+\item{center, boundary}{bin position specifiers. Only one, \code{center} or
+\code{boundary}, may be specified for a single plot. \code{center} specifies the
+center of one of the bins. \code{boundary} specifies the boundary between two
+bins. Note that if either is above or below the range of the data, things
+will be shifted by the appropriate integer multiple of \code{binwidth}.
+For example, to center on integers use \code{binwidth = 1} and \code{center = 0}, even
+if \code{0} is outside the range of the data. Alternatively, this same alignment
+can be specified with \code{binwidth = 1} and \code{boundary = 0.5}, even if \code{0.5} is
+outside the range of the data.}
+
+\item{breaks}{Alternatively, you can supply a numeric vector giving
+the bin boundaries. Overrides \code{binwidth}, \code{bins}, \code{center},
+and \code{boundary}.}
+
+\item{closed}{One of \code{"right"} or \code{"left"} indicating whether right
+or left edges of bins are included in the bin.}
+
+\item{pad}{If \code{TRUE}, adds empty bins at either end of x. This ensures
+frequency polygons touch 0. Defaults to \code{FALSE}.}
+
+\item{type}{The type of ellipse.
+The default \code{"t"} assumes a multivariate t-distribution, and
+\code{"norm"} assumes a multivariate normal distribution.
+\code{"euclid"} draws a circle with the radius equal to \code{level},
+representing the euclidean distance from the center.
+This ellipse probably won't appear circular unless \code{coord_fixed()} is applied.}
+
+\item{level}{The level at which to draw an ellipse,
+or, if \code{type="euclid"}, the radius of the circle to be drawn.}
+
+\item{segments}{The number of segments to be used in drawing the ellipse.}
 
 \item{fun.data, fun.center, fun.min, fun.max}{Functions treated as in
 \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and \code{fun.max}

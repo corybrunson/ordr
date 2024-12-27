@@ -245,27 +245,36 @@ ensure_xy_aes <- function(ordination, mapping) {
   coords <- get_coord(ordination)
   coord_vars <- syms(coords)
   
-  if (is.null(mapping$y)) {
-    if (length(coords) < 2L) {
-      stop("Ordination has too few coordinates; check `get_coord(<tbl_ord>)`.")
-    }
-    mapping <- c(aes(y = !! coord_vars[[2]]), mapping)
-  } else {
-    if (is.numeric(mapping$y) && length(mapping$y) == 1) {
+  # if only one of `x,y` is provided, then generate a (h/v) 1D biplot
+  # if `x,y` are both provided:
+  # * if `ordination` is 1D and `x=1,y=2` then ignore `y`
+  # * otherwise use `x,y`
+  # TODO: Use integers instead to make default more unique.
+  
+  if (length(coords) == 1L && 
+      ! is.null(mapping$x) && identical(mapping$x, 1) && 
+      ! is.null(mapping$y) && identical(mapping$y, 2)) {
+    mapping$y <- NULL
+  }
+  
+  if (! is.null(mapping$x) && is.numeric(mapping$x) && length(mapping$x) == 1) {
+    if (mapping$x > length(coord_vars)) {
+      stop("`x = ", mapping$x, " exceeds the dimension of the ordination.")
+    } else {
       mapping <- c(
-        aes(y = !! coord_vars[[mapping$y]]),
-        mapping[setdiff(names(mapping), "y")]
+        aes(x = !! coord_vars[[mapping$x]]),
+        mapping[setdiff(names(mapping), "x")]
       )
     }
   }
   
-  if (is.null(mapping$x)) {
-    mapping <- c(aes(x = !! coord_vars[[1]]), mapping)
-  } else {
-    if (is.numeric(mapping$x) && length(mapping$x) == 1) {
+  if (! is.null(mapping$y) && is.numeric(mapping$y) && length(mapping$y) == 1) {
+    if (mapping$y > length(coord_vars)) {
+      stop("`y = ", mapping$y, " exceeds the dimension of the ordination.")
+    } else {
       mapping <- c(
-        aes(x = !! coord_vars[[mapping$x]]),
-        mapping[setdiff(names(mapping), "x")]
+        aes(y = !! coord_vars[[mapping$y]]),
+        mapping[setdiff(names(mapping), "y")]
       )
     }
   }

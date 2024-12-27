@@ -19,6 +19,8 @@
 #' @template param-stat
 #' @template biplot-ord-aes
 #' @inheritParams stat_rows
+#' @inheritParams ggplot2::stat_count
+#' @inheritParams ggplot2::stat_bin
 #' @inheritParams ggplot2::stat_ellipse
 #' @inheritParams stat_center
 #' @inheritParams stat_star
@@ -30,6 +32,194 @@
 #' @inheritParams stat_spantree
 #' @example inst/examples/ex-stat-ellipse-iris.r
 NULL
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsCount <- ggproto(
+  "StatRowsCount", StatCount,
+  
+  setup_data = setup_rows_data
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_rows_count <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "bar",
+  position = "stack",
+  ...,
+  width = NULL,
+  na.rm = FALSE,
+  orientation = NA,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatRowsCount,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      width = width,
+      na.rm = na.rm,
+      orientation = orientation,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsCount <- ggproto(
+  "StatColsCount", StatCount,
+  
+  setup_data = setup_cols_data
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_count <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "bar",
+  position = "stack",
+  ...,
+  width = NULL,
+  na.rm = FALSE,
+  orientation = NA,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatColsCount,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      width = width,
+      na.rm = na.rm,
+      orientation = orientation,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsBin <- ggproto(
+  "StatRowsBin", StatBin,
+  
+  setup_data = setup_rows_data
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_rows_bin <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "bar",
+  position = "stack",
+  ...,
+  binwidth = NULL,
+  bins = NULL,
+  center = NULL,
+  boundary = NULL,
+  breaks = NULL,
+  closed = c("right", "left"),
+  pad = FALSE,
+  na.rm = FALSE,
+  orientation = NA,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatRowsBin,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      binwidth = binwidth,
+      bins = bins,
+      center = center,
+      boundary = boundary,
+      breaks = breaks,
+      closed = closed,
+      pad = pad,
+      na.rm = na.rm,
+      orientation = orientation,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsBin <- ggproto(
+  "StatColsBin", StatBin,
+  
+  setup_data = setup_cols_data
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_bin <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "bar",
+  position = "stack",
+  ...,
+  binwidth = NULL,
+  bins = NULL,
+  center = NULL,
+  boundary = NULL,
+  breaks = NULL,
+  closed = c("right", "left"),
+  pad = FALSE,
+  na.rm = FALSE,
+  orientation = NA,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatColsBin,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      binwidth = binwidth,
+      bins = bins,
+      center = center,
+      boundary = boundary,
+      breaks = breaks,
+      closed = closed,
+      pad = pad,
+      na.rm = na.rm,
+      orientation = orientation,
+      ...
+    )
+  )
+}
 
 #' @rdname ordr-ggproto
 #' @format NULL
