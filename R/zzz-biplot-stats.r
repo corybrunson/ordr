@@ -19,6 +19,7 @@
 #' @template param-stat
 #' @template biplot-ord-aes
 #' @inheritParams stat_rows
+#' @inheritParams ggplot2::stat_density
 #' @inheritParams ggplot2::stat_count
 #' @inheritParams ggplot2::stat_bin
 #' @inheritParams ggplot2::stat_ellipse
@@ -32,6 +33,108 @@
 #' @inheritParams stat_spantree
 #' @example inst/examples/ex-stat-ellipse-iris.r
 NULL
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsDensity <- ggproto(
+  "StatRowsDensity", StatDensity,
+  
+  setup_data = setup_rows_data
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_rows_density <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "area",
+  position = "stack",
+  ...,
+  bw = "nrd0",
+  adjust = 1,
+  kernel = "gaussian",
+  n = 512,
+  trim = FALSE,
+  na.rm = FALSE,
+  bounds = c(-Inf, Inf),
+  orientation = NA,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatRowsDensity,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      bw = bw,
+      adjust = adjust,
+      kernel = kernel,
+      n = n,
+      trim = trim,
+      na.rm = na.rm,
+      bounds = bounds,
+      orientation = orientation,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsDensity <- ggproto(
+  "StatColsDensity", StatDensity,
+  
+  setup_data = setup_cols_data
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_density <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "area",
+  position = "stack",
+  ...,
+  bw = "nrd0",
+  adjust = 1,
+  kernel = "gaussian",
+  n = 512,
+  trim = FALSE,
+  na.rm = FALSE,
+  bounds = c(-Inf, Inf),
+  orientation = NA,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatColsDensity,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      bw = bw,
+      adjust = adjust,
+      kernel = kernel,
+      n = n,
+      trim = trim,
+      na.rm = na.rm,
+      bounds = bounds,
+      orientation = orientation,
+      ...
+    )
+  )
+}
 
 #' @rdname ordr-ggproto
 #' @format NULL

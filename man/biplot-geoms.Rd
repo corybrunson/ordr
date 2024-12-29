@@ -2,8 +2,6 @@
 % Please edit documentation in R/zzz-biplot-geoms.r
 \name{biplot-geoms}
 \alias{biplot-geoms}
-\alias{geom_rows_rug}
-\alias{geom_cols_rug}
 \alias{geom_rows_density}
 \alias{geom_cols_density}
 \alias{geom_rows_bar}
@@ -40,34 +38,6 @@
 \alias{geom_cols_vector}
 \title{Convenience geoms for row and column matrix factors}
 \usage{
-geom_rows_rug(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  ...,
-  outside = FALSE,
-  sides = "bl",
-  length = unit(0.03, "npc"),
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
-geom_cols_rug(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  ...,
-  outside = FALSE,
-  sides = "bl",
-  length = unit(0.03, "npc"),
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
 geom_rows_density(
   mapping = NULL,
   data = NULL,
@@ -675,15 +645,12 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
-\item{outside}{logical that controls whether to move the rug tassels outside of the plot area. Default is off (FALSE). You will also need to use \code{coord_cartesian(clip = "off")}. When set to TRUE, also consider changing the sides argument to "tr". See examples.}
-
-\item{sides}{A string that controls which sides of the plot the rugs appear on.
-It can be set to a string containing any of \code{"trbl"}, for top, right,
-bottom, and left.}
-
-\item{length}{A \code{\link[grid:unit]{grid::unit()}} object that sets the length of the rug lines. Use scale expansion to avoid overplotting of data.}
-
 \item{na.rm}{Passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
+
+\item{orientation}{The orientation of the layer. The default (\code{NA})
+automatically determines the orientation from the aesthetic mapping. In the
+rare event that this fails it can be given explicitly by setting \code{orientation}
+to either \code{"x"} or \code{"y"}. See the \emph{Orientation} section for more detail.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -695,11 +662,6 @@ display.}
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
-
-\item{orientation}{The orientation of the layer. The default (\code{NA})
-automatically determines the orientation from the aesthetic mapping. In the
-rare event that this fails it can be given explicitly by setting \code{orientation}
-to either \code{"x"} or \code{"y"}. See the \emph{Orientation} section for more detail.}
 
 \item{outline.type}{Type of the outline of the area; \code{"both"} draws both the
 upper and lower lines, \code{"upper"}/\code{"lower"} draws the respective lines only.

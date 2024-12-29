@@ -22,7 +22,6 @@
 #'   geom_label_repel
 #' @inheritParams ggplot2::layer
 #' @template param-geom
-#' @inheritParams ggplot2::geom_rug
 #' @inheritParams ggplot2::geom_density
 #' @inheritParams ggplot2::geom_bar
 #' @inheritParams ggplot2::geom_point
@@ -49,72 +48,6 @@ ggrepel::geom_label_repel
 
 compute_just <- getFromNamespace("compute_just", "ggplot2")
 to_unit <- getFromNamespace("to_unit", "ggrepel")
-
-#' @rdname biplot-geoms
-#' @export
-geom_rows_rug <- function(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  ...,
-  outside = FALSE,
-  sides = "bl",
-  length = unit(0.03, "npc"),
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = rows_stat(stat),
-    geom = GeomRug,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      outside = outside,
-      sides = sides,
-      length = length,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
-#' @rdname biplot-geoms
-#' @export
-geom_cols_rug <- function(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  ...,
-  outside = FALSE,
-  sides = "bl",
-  length = unit(0.03, "npc"),
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = cols_stat(stat),
-    geom = GeomRug,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      outside = outside,
-      sides = sides,
-      length = length,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
 
 #' @rdname biplot-geoms
 #' @export

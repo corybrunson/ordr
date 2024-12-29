@@ -78,6 +78,7 @@ Collate:
     'geom-intervals.r'
     'geom-isoline.r'
     'geom-origin.r'
+    'geom-pin.r'
     'geom-rule.r'
     'geom-text-radiate.r'
     'geom-utils.r'

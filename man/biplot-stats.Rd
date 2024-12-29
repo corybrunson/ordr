@@ -2,6 +2,8 @@
 % Please edit documentation in R/zzz-biplot-stats.r
 \name{biplot-stats}
 \alias{biplot-stats}
+\alias{stat_rows_density}
+\alias{stat_cols_density}
 \alias{stat_rows_count}
 \alias{stat_cols_count}
 \alias{stat_rows_bin}
@@ -26,6 +28,42 @@
 \alias{stat_cols_spantree}
 \title{Convenience stats for row and column matrix factors}
 \usage{
+stat_rows_density(
+  mapping = NULL,
+  data = NULL,
+  geom = "area",
+  position = "stack",
+  ...,
+  bw = "nrd0",
+  adjust = 1,
+  kernel = "gaussian",
+  n = 512,
+  trim = FALSE,
+  na.rm = FALSE,
+  bounds = c(-Inf, Inf),
+  orientation = NA,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+stat_cols_density(
+  mapping = NULL,
+  data = NULL,
+  geom = "area",
+  position = "stack",
+  ...,
+  bw = "nrd0",
+  adjust = 1,
+  kernel = "gaussian",
+  n = 512,
+  trim = FALSE,
+  na.rm = FALSE,
+  bounds = c(-Inf, Inf),
+  orientation = NA,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
 stat_rows_count(
   mapping = NULL,
   data = NULL,
@@ -365,11 +403,37 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
-\item{width}{Bar width. By default, set to 90\% of the \code{\link[ggplot2:resolution]{resolution()}} of the
-data.}
+\item{bw}{The smoothing bandwidth to be used.
+If numeric, the standard deviation of the smoothing kernel.
+If character, a rule to choose the bandwidth, as listed in
+\code{\link[stats:bandwidth]{stats::bw.nrd()}}. Note that automatic calculation of the bandwidth does
+not take weights into account.}
+
+\item{adjust}{A multiplicate bandwidth adjustment. This makes it possible
+to adjust the bandwidth while still using the a bandwidth estimator.
+For example, \code{adjust = 1/2} means use half of the default bandwidth.}
+
+\item{kernel}{Kernel. See list of available kernels in \code{\link[=density]{density()}}.}
+
+\item{n}{number of equally spaced points at which the density is to be
+estimated, should be a power of two, see \code{\link[=density]{density()}} for
+details}
+
+\item{trim}{If \code{FALSE}, the default, each density is computed on the
+full range of the data. If \code{TRUE}, each density is computed over the
+range of that group: this typically means the estimated x values will
+not line-up, and hence you won't be able to stack density values.
+This parameter only matters if you are displaying multiple densities in
+one plot or if you are manually adjusting the scale limits.}
 
 \item{na.rm}{If \code{FALSE}, the default, missing values are removed with
 a warning. If \code{TRUE}, missing values are silently removed.}
+
+\item{bounds}{Known lower and upper bounds for estimated data. Default
+\code{c(-Inf, Inf)} means that there are no (finite) bounds. If any bound is
+finite, boundary effect of default density estimation will be corrected by
+reflecting tails outside \code{bounds} around their closest edge. Data points
+outside of bounds are removed with a warning.}
 
 \item{orientation}{The orientation of the layer. The default (\code{NA})
 automatically determines the orientation from the aesthetic mapping. In the
@@ -386,6 +450,9 @@ display.}
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
+
+\item{width}{Bar width. By default, set to 90\% of the \code{\link[ggplot2:resolution]{resolution()}} of the
+data.}
 
 \item{binwidth}{The width of the bins. Can be specified as a numeric value
 or as a function that calculates width from unscaled x. Here, "unscaled x"
