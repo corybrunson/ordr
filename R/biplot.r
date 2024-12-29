@@ -245,11 +245,16 @@ ensure_xy_aes <- function(ordination, mapping) {
   coords <- get_coord(ordination)
   coord_vars <- syms(coords)
   
+  # if neither of `x,y` is provided, then set `x=1,y=2`
   # if only one of `x,y` is provided, then generate a (h/v) 1D biplot
   # if `x,y` are both provided:
   # * if `ordination` is 1D and `x=1,y=2` then ignore `y`
   # * otherwise use `x,y`
   # TODO: Use integers instead to make default more unique.
+  
+  if (is.null(mapping$x) && is.null(mapping$y)) {
+    mapping <- c(aes(x = 1, y = 2), mapping)
+  }
   
   if (length(coords) == 1L && 
       ! is.null(mapping$x) && identical(mapping$x, 1) && 
