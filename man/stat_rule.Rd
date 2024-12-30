@@ -10,7 +10,7 @@
 stat_rule(
   mapping = NULL,
   data = NULL,
-  geom = "axis",
+  geom = "rule",
   position = "identity",
   fun.lower = "minpp",
   fun.upper = "maxpp",
@@ -210,7 +210,7 @@ glass_lda \%>\%
   ggbiplot() +
   theme_bw() + theme_biplot() +
   geom_rows_point(aes(shape = grouping, alpha = discriminant)) +
-  stat_cols_rule(aes(label = name), color = "#888888", num = 8L,
+  stat_cols_rule(aes(label = name), geom = "axis", color = "#888888", num = 8L,
                  fun.offset = \(x) minabspp(x, p = .1),
                  text_size = 2.5, text_dodge = .025) +
   scale_shape_manual(values = c(16L, 17L, 15L, 18L)) +

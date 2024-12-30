@@ -546,7 +546,7 @@ StatRowsRule <- ggproto(
 stat_rows_rule <- function(
   mapping = NULL,
   data = NULL,
-  geom = "axis",
+  geom = "rule",
   position = "identity",
   fun.lower = "minpp",
   fun.upper = "maxpp",
@@ -596,7 +596,7 @@ StatColsRule <- ggproto(
 stat_cols_rule <- function(
   mapping = NULL,
   data = NULL,
-  geom = "axis",
+  geom = "rule",
   position = "identity",
   fun.lower = "minpp",
   fun.upper = "maxpp",
