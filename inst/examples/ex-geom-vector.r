@@ -8,8 +8,13 @@ ggplot(state_center, aes(x, y, label = state)) +
   coord_equal() +
   geom_vector() +
   geom_text_radiate()
-# polar coordinates
-height_corr <- data.frame(
-  measurement = colnames(Harman23.cor$cov),
-  correlation = Harman23.cor$cov[1, ]
+# using arrowhead to encode a variable
+state_center$coast <- ifelse(
+  state.region == "North Central",
+  NA,
+  state.region == "West"
 )
+ggplot(state_center, aes(x, y, label = state)) +
+  coord_equal() +
+  geom_vector(aes(head = coast)) +
+  geom_text_radiate()

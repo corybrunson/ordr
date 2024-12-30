@@ -22,6 +22,7 @@
 #' - `colour`
 #' - `linetype`
 #' - `size`
+#' - `head`
 #' - `group`
 #' 
 
@@ -67,13 +68,26 @@ GeomVector <- ggproto(
   required_aes = c("x", "y"),
   non_missing_aes = c("x", "y"),
   
+  default_aes = aes(linewidth = 0.5, linetype = 1, colour = "black", alpha = NA,
+                    head = "closed"),
+  
   setup_data = function(data, params) {
     
     # all vectors have tails at the origin
-    transform(
+    data <- transform(
       data,
       xend = 0, yend = 0
     )
+    
+    # pre-process `head` aesthetic
+    if (is.null(data[["head"]])) return(data)
+    if (is.character(data$head) || is.factor(data$head)) {
+      data$head <- match.arg(data$head, c("open", "closed"), several.ok = TRUE)
+    } else if (is.numeric(data$head) || is.logical(data$head)) {
+      data$head <- c("open", "closed")[as.integer(data$head) + 1L]
+    }
+    
+    data
   },
   
   draw_panel = function(
@@ -91,10 +105,23 @@ GeomVector <- ggproto(
     # reverse ends of `arrow`
     if (! is.null(arrow)) arrow$ends <- c(2L, 1L, 3L)[arrow$ends]
     
-    GeomSegment$draw_panel(
-      data = data, panel_params = panel_params, coord = coord,
-      arrow = arrow, lineend = lineend, linejoin = linejoin,
-      na.rm = na.rm
-    )
+    # initialize grob list
+    grobs <- list()
+    
+    # separate grobs for open and closed arrows
+    for (type in unique(data$head)) {
+      arrow$type <- match(type, c("open", "closed"))
+      if (is.na(type)) arrow <- NULL
+      grobs <- c(grobs, list(GeomSegment$draw_panel(
+        data = subset(data, head == type | (is.na(head) & is.na(type))),
+        panel_params = panel_params, coord = coord,
+        arrow = arrow, lineend = lineend, linejoin = linejoin,
+        na.rm = na.rm
+      )))
+    }
+    
+    grob <- do.call(grid::grobTree, grobs)
+    grob$name <- grid::grobName(grob, "geom_vector")
+    grob
   }
 )
