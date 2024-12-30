@@ -14,3 +14,12 @@ ggplot(iris_rows, aes(x = PC1)) +
     check_overlap = TRUE
   ) +
   scale_x_continuous(sec.axis = ~ . / 10)
+# TODO: Expand plot to include pins. (Transform data in `$setup_data()`?)
+ggplot(iris_rows, aes(x = PC1)) +
+  geom_density(aes(color = species)) +
+  geom_pin(
+    aes(x = PC1 * 10, label = measurement), ymax = -1,
+    data = iris_cols,
+    check_overlap = TRUE
+  ) +
+  scale_x_continuous(sec.axis = ~ . / 10)

@@ -36,6 +36,7 @@
 #' @inheritParams geom_lineranges
 #' @inheritParams geom_pointranges
 #' @inheritParams geom_isoline
+#' @inheritParams geom_pin
 #' @inheritParams geom_rule
 #' @inheritParams geom_text_radiate
 #' @inheritParams geom_vector
@@ -1149,6 +1150,84 @@ geom_cols_isoline <- function(
       by = by,
       num = num,
       text_dodge = text_dodge,
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_rows_pin <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  length = unit(0.2, "npc"),
+  lineend = "round",
+  pin_labels = TRUE,
+  orientation = NA,
+  ...,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = rows_stat(stat),
+    geom = GeomPin,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      length = length,
+      lineend = lineend,
+      pin_labels = pin_labels,
+      orientation = orientation,
+      parse = parse,
+      check_overlap = check_overlap,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_cols_pin <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  length = unit(0.2, "npc"),
+  lineend = "round",
+  pin_labels = TRUE,
+  orientation = NA,
+  ...,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = cols_stat(stat),
+    geom = GeomPin,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      length = length,
+      lineend = lineend,
+      pin_labels = pin_labels,
+      orientation = orientation,
       parse = parse,
       check_overlap = check_overlap,
       na.rm = na.rm,

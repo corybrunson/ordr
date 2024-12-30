@@ -30,6 +30,8 @@
 \alias{geom_cols_pointranges}
 \alias{geom_rows_isoline}
 \alias{geom_cols_isoline}
+\alias{geom_rows_pin}
+\alias{geom_cols_pin}
 \alias{geom_rows_rule}
 \alias{geom_cols_rule}
 \alias{geom_rows_text_radiate}
@@ -502,6 +504,40 @@ geom_cols_isoline(
   inherit.aes = TRUE
 )
 
+geom_rows_pin(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  length = unit(0.2, "npc"),
+  lineend = "round",
+  pin_labels = TRUE,
+  orientation = NA,
+  ...,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_pin(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  length = unit(0.2, "npc"),
+  lineend = "round",
+  pin_labels = TRUE,
+  orientation = NA,
+  ...,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
 geom_rows_rule(
   mapping = NULL,
   data = NULL,
@@ -778,6 +814,11 @@ of operations used to visualize interpolation.}
 
 \item{isoline_text}{Logical; whether to include text value marks along the
 isolines.}
+
+\item{length}{A \code{\link[grid:unit]{grid::unit()}} object that sets the length of the pins. Use
+scale expansion to avoid overplotting of data.}
+
+\item{pin_labels}{Logical; whether to append labels to the pins.}
 
 \item{snap_rule}{Logical; whether to snap rule segments to grid values.}
 }
