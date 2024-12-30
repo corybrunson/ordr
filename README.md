@@ -245,7 +245,7 @@ origin:
 
 ``` r
 ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
-  theme_biplot() +
+  theme_scaffold() +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_center(
     aes(color = Species, shape = Species),
