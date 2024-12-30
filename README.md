@@ -244,7 +244,7 @@ origin:
 
 ``` r
 ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
-  theme_biplot() +
+  theme_scaffold() +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_center(
     aes(color = Species, shape = Species),
@@ -312,7 +312,7 @@ monograph
 [*Biplots*](https://www.google.com/books/edition/Biplots/lTxiedIxRpgC)
 and the textbook [*Understanding
 Biplots*](https://www.wiley.com/en-us/Understanding+Biplots-p-9781119972907)
-by John C. Gower, David J. Hand, Sugnet Gardner–Lubbe, and Niel J. Le
+by John C. Gower, David J. Hand, Sugnet Gardner–Lubbe, and Niël J. Le
 Roux, and by the volume [*Principal Components
 Analysis*](https://link.springer.com/book/10.1007/b98835) by I. T.
 Jolliffe.

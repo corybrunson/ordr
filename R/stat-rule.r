@@ -58,7 +58,7 @@
 #' @example inst/examples/ex-stat-rule-glass.r
 #' @export
 stat_rule <- function(
-    mapping = NULL, data = NULL, geom = "axis", position = "identity",
+    mapping = NULL, data = NULL, geom = "rule", position = "identity",
     fun.lower = "minpp", fun.upper = "maxpp",
     fun.offset = "minabspp",
     fun.args = list(),

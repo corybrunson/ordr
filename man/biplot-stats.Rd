@@ -175,7 +175,7 @@ stat_cols_projection(
 stat_rows_rule(
   mapping = NULL,
   data = NULL,
-  geom = "axis",
+  geom = "rule",
   position = "identity",
   fun.lower = "minpp",
   fun.upper = "maxpp",
@@ -190,7 +190,7 @@ stat_rows_rule(
 stat_cols_rule(
   mapping = NULL,
   data = NULL,
-  geom = "axis",
+  geom = "rule",
   position = "identity",
   fun.lower = "minpp",
   fun.upper = "maxpp",
