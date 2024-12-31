@@ -113,6 +113,7 @@ build_biplot_layer <- function(
     stat = ggplot2:::camelize(biplot_layer_name, first = TRUE),
     geom = ggplot2:::camelize(layer_name, first = TRUE)
   )
+  ggparent_name <- ggplot2:::camelize(layer_name, first = TRUE)
   
   # get uniplot formals (and insert any additional biplot formals)
   # -+- extract this into a function that can handle `...` -+-
@@ -171,10 +172,11 @@ build_biplot_layer <- function(
       "#' @usage NULL\n",
       "#' @export\n",
       "{ggproto_name} <- ggproto(\n",
-      "  \"{ggproto_name}\", {ggplot2:::camelize(layer_name, first = TRUE)},\n",
+      "  \"{ggproto_name}\", {ggparent_name},\n",
       "  \n",
       if (ref) "  setup_params = setup_referent_params,\n  \n" else "",
-      "  setup_data = setup_{.matrix}{if_xy}_data\n",
+      "  setup_data = setup_{.matrix}{if_xy}_data,\n  \n",
+      "  compute_group = ord_formals({ggparent_name}, \"compute_group\")\n",
       ")\n",
       "\n\n",
     ),
@@ -221,8 +223,10 @@ Sys.sleep(.5)
 
 # ggplot2 & other (non-ordr) extension layers to adapt to biplot layers
 orig_layers <- c(
+  "ggplot2::stat_density_2d", "ggplot2::stat_density_2d_filled",
   "ggplot2::stat_ellipse",
   "ggplot2::geom_point", "ggplot2::geom_path", "ggplot2::geom_polygon",
+  "ggplot2::geom_density_2d", "ggplot2::geom_density_2d_filled",
   "ggplot2::geom_text", "ggplot2::geom_label",
   "ggrepel::geom_text_repel", "ggrepel::geom_label_repel"
 )
@@ -239,6 +243,7 @@ ref_layers <- c(
 )
 # layers that require restriction to 2 coordinates (without package recoverers)
 xy_layers <- c(
+  "stat_density_2d", "stat_density_2d_filled",
   "stat_ellipse",
   "stat_scale",
   "stat_center", "stat_star",

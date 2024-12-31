@@ -2,6 +2,10 @@
 % Please edit documentation in R/zzz-biplot-stats.r
 \name{biplot-stats}
 \alias{biplot-stats}
+\alias{stat_rows_density_2d}
+\alias{stat_cols_density_2d}
+\alias{stat_rows_density_2d_filled}
+\alias{stat_cols_density_2d_filled}
 \alias{stat_rows_ellipse}
 \alias{stat_cols_ellipse}
 \alias{stat_rows_center}
@@ -22,6 +26,70 @@
 \alias{stat_cols_spantree}
 \title{Convenience stats for row and column matrix factors}
 \usage{
+stat_rows_density_2d(
+  mapping = NULL,
+  data = NULL,
+  geom = "density_2d",
+  position = "identity",
+  ...,
+  contour = TRUE,
+  contour_var = "density",
+  n = 100,
+  h = NULL,
+  adjust = c(1, 1),
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+stat_cols_density_2d(
+  mapping = NULL,
+  data = NULL,
+  geom = "density_2d",
+  position = "identity",
+  ...,
+  contour = TRUE,
+  contour_var = "density",
+  n = 100,
+  h = NULL,
+  adjust = c(1, 1),
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+stat_rows_density_2d_filled(
+  mapping = NULL,
+  data = NULL,
+  geom = "density_2d_filled",
+  position = "identity",
+  ...,
+  contour = TRUE,
+  contour_var = "density",
+  n = 100,
+  h = NULL,
+  adjust = c(1, 1),
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+stat_cols_density_2d_filled(
+  mapping = NULL,
+  data = NULL,
+  geom = "density_2d_filled",
+  position = "identity",
+  ...,
+  contour = TRUE,
+  contour_var = "density",
+  n = 100,
+  h = NULL,
+  adjust = c(1, 1),
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
 stat_rows_ellipse(
   mapping = NULL,
   data = NULL,
@@ -153,7 +221,6 @@ stat_rows_projection(
   data = NULL,
   geom = "segment",
   position = "identity",
-  subset = NULL,
   referent = NULL,
   ...,
   show.legend = NA,
@@ -165,7 +232,6 @@ stat_cols_projection(
   data = NULL,
   geom = "segment",
   position = "identity",
-  subset = NULL,
   referent = NULL,
   ...,
   show.legend = NA,
@@ -297,17 +363,22 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
-\item{type}{The type of ellipse.
-The default \code{"t"} assumes a multivariate t-distribution, and
-\code{"norm"} assumes a multivariate normal distribution.
-\code{"euclid"} draws a circle with the radius equal to \code{level},
-representing the euclidean distance from the center.
-This ellipse probably won't appear circular unless \code{coord_fixed()} is applied.}
+\item{contour}{If \code{TRUE}, contour the results of the 2d density
+estimation.}
 
-\item{level}{The level at which to draw an ellipse,
-or, if \code{type="euclid"}, the radius of the circle to be drawn.}
+\item{contour_var}{Character string identifying the variable to contour
+by. Can be one of \code{"density"}, \code{"ndensity"}, or \code{"count"}. See the section
+on computed variables for details.}
 
-\item{segments}{The number of segments to be used in drawing the ellipse.}
+\item{n}{Number of grid points in each direction.}
+
+\item{h}{Bandwidth (vector of length two). If \code{NULL}, estimated
+using \code{\link[MASS:bandwidth.nrd]{MASS::bandwidth.nrd()}}.}
+
+\item{adjust}{A multiplicative bandwidth adjustment to be used if 'h' is
+'NULL'. This makes it possible to adjust the bandwidth while still
+using the a bandwidth estimator. For example, \code{adjust = 1/2} means
+use half of the default bandwidth.}
 
 \item{na.rm}{If \code{FALSE}, the default, missing values are removed with
 a warning. If \code{TRUE}, missing values are silently removed.}
@@ -323,6 +394,18 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
+\item{type}{The type of ellipse.
+The default \code{"t"} assumes a multivariate t-distribution, and
+\code{"norm"} assumes a multivariate normal distribution.
+\code{"euclid"} draws a circle with the radius equal to \code{level},
+representing the euclidean distance from the center.
+This ellipse probably won't appear circular unless \code{coord_fixed()} is applied.}
+
+\item{level}{The level at which to draw an ellipse,
+or, if \code{type="euclid"}, the radius of the circle to be drawn.}
+
+\item{segments}{The number of segments to be used in drawing the ellipse.}
+
 \item{fun.data, fun.center, fun.min, fun.max}{Functions treated as in
 \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and \code{fun.max}
 behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
@@ -331,13 +414,6 @@ behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
 
 \item{origin}{Logical; whether to include the origin with the transformed
 data. Defaults to \code{FALSE}.}
-
-\item{subset}{An integer, logical, or character vector indicating a subset of
-rows or columns for which to render graphical elements. NB: Internally, the
-\code{subset} will be taken from the rows of the \link[=fortify.tbl_ord]{fortified}
-'tbl_ord' comprising rows from only one of the matrix factors. It is still
-possible to pass a formula to the \code{data} parameter, but it will act on the
-fortified data \emph{before} it has been restricted to one matrix factor.}
 
 \item{referent}{The reference data set; see Details.}
 

@@ -34,6 +34,17 @@ The 'projection' referential stat prepares segment endpoints between `x,y` posit
 
 A new 'rule' statistical transformation computes additional position aesthetics that the 'axis' geom uses to limit and offset axes. The stat is referential and expects a set of functions that compute limits `lower` and `upper` along the axes and `yintercept` and `xintercept` associated with offset axes. The 'axis' geom preprocesses these aesthetics to rule endpoints `xmin,ymin,xmax,ymax` and offset vectors `xend,yend` to force the plotting window to contain the limited axis segments or, if the axes remain lines, the offsets where they are centered.
 
+## standardized and restrictive elements parameter (breaking change)
+
+The `elements` parameter is now standardized across all statistical transformations (through the code generation process) and accepts more restrictive options:
+The value is argument-matched to `"active"`, `"score"`, or `"structure"`; these options may expand as additional supplementary elements are introduced.
+Moreover, the former default `"all"` is no longer accepted, which forecloses the trick of passing the element type to an aesthetic, e.g. `size = .element == "active"`, as had been used in several examples.
+
+## adapted density stat & geom
+
+Aided by element standardization, the classic `density_2d` statistical transformation and geometric construction are adapted to biplots.
+Currently, source code generation does not respect fixed parameters passed to `layer()` by the `stat_*()` and `geom_*()` shortcuts; as a consequence, `contour = TRUE` must be manually passed to `geom_*_density_2d()`.
+
 ## scaffold theme
 
 The 'biplot' theme has been renamed 'scaffold', with an alias for backward compatibility.

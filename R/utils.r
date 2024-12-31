@@ -63,27 +63,27 @@ get_ord_aes <- function(data) {
   ord_cols
 }
 
+.ord_elements <- c("active", "score", "structure")
+
 # restrict to specified elements
 setup_elts_data <- function(data, params) {
   
-  # if specified and possible, restrict to active or supplementary elements
-  if (! is.null(params$elements) && ".element" %in% names(data)) {
-    # ensure that `elements` is a character singleton
-    stopifnot(
-      is.character(params$elements),
-      length(params$elements) == 1L
+  if (is.null(params$elements))
+    # default to active elements
+    params$elements <- "active"
+  else
+    # match `elements` to a list of recognized options (excluding `"all"`)
+    params$elements <- match.arg(params$elements, .ord_elements)
+  
+  # subset accordingly
+  data <- data[data$.element == params$elements, , drop = FALSE]
+  
+  # print note if both `elements` and `subset` are passed
+  if (! is.null(params$subset)) {
+    message(
+      "`subset` will be applied after data are restricted to ",
+      params$elements, " elements."
     )
-    # subset accordingly
-    data <- if ("all" %in% params$elements) {
-      data
-    } else {
-      data[data$.element == params$elements, , drop = FALSE]
-    }
-    # print note if both `elements` and `subset` are passed
-    if (! is.null(params$subset)) {
-      message("`subset` will be applied after data are restricted to ",
-              params$elements, " elements.")
-    }
   }
   
   # by default, render elements for all rows
@@ -99,6 +99,7 @@ setup_elts_data <- function(data, params) {
   
   data
 }
+
 # restrict to a matrix factor
 setup_rows_data <- function(data, params) {
   
@@ -170,3 +171,9 @@ setup_referent_params <- function(self, data, params) {
 }
 
 is_const <- function(x) length(unique(x)) == 1L
+
+ord_formals <- function(`_class`, method) {
+  fun <- environment(`_class`[[method]])[[method]]
+  formals(fun) <- c(formals(fun), list(subset = NULL, elements = "active"))
+  fun
+}

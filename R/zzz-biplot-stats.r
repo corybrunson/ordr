@@ -19,6 +19,8 @@
 #' @template param-stat
 #' @template biplot-ord-aes
 #' @inheritParams stat_rows
+#' @inheritParams ggplot2::stat_density_2d
+#' @inheritParams ggplot2::stat_density_2d_filled
 #' @inheritParams ggplot2::stat_ellipse
 #' @inheritParams stat_center
 #' @inheritParams stat_star
@@ -35,10 +37,208 @@ NULL
 #' @format NULL
 #' @usage NULL
 #' @export
+StatRowsDensity2d <- ggproto(
+  "StatRowsDensity2d", StatDensity2d,
+  
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = ord_formals(StatDensity2d, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_rows_density_2d <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "density_2d",
+  position = "identity",
+  ...,
+  contour = TRUE,
+  contour_var = "density",
+  n = 100,
+  h = NULL,
+  adjust = c(1, 1),
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatRowsDensity2d,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      contour = contour,
+      contour_var = contour_var,
+      n = n,
+      h = h,
+      adjust = adjust,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsDensity2d <- ggproto(
+  "StatColsDensity2d", StatDensity2d,
+  
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = ord_formals(StatDensity2d, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_density_2d <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "density_2d",
+  position = "identity",
+  ...,
+  contour = TRUE,
+  contour_var = "density",
+  n = 100,
+  h = NULL,
+  adjust = c(1, 1),
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatColsDensity2d,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      contour = contour,
+      contour_var = contour_var,
+      n = n,
+      h = h,
+      adjust = adjust,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsDensity2dFilled <- ggproto(
+  "StatRowsDensity2dFilled", StatDensity2dFilled,
+  
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = ord_formals(StatDensity2dFilled, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_rows_density_2d_filled <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "density_2d_filled",
+  position = "identity",
+  ...,
+  contour = TRUE,
+  contour_var = "density",
+  n = 100,
+  h = NULL,
+  adjust = c(1, 1),
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatRowsDensity2dFilled,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      contour = contour,
+      contour_var = contour_var,
+      n = n,
+      h = h,
+      adjust = adjust,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsDensity2dFilled <- ggproto(
+  "StatColsDensity2dFilled", StatDensity2dFilled,
+  
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = ord_formals(StatDensity2dFilled, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_density_2d_filled <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "density_2d_filled",
+  position = "identity",
+  ...,
+  contour = TRUE,
+  contour_var = "density",
+  n = 100,
+  h = NULL,
+  adjust = c(1, 1),
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatColsDensity2dFilled,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      contour = contour,
+      contour_var = contour_var,
+      n = n,
+      h = h,
+      adjust = adjust,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
 StatRowsEllipse <- ggproto(
   "StatRowsEllipse", StatEllipse,
   
-  setup_data = setup_rows_xy_data
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = ord_formals(StatEllipse, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -81,7 +281,9 @@ stat_rows_ellipse <- function(
 StatColsEllipse <- ggproto(
   "StatColsEllipse", StatEllipse,
   
-  setup_data = setup_cols_xy_data
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = ord_formals(StatEllipse, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -124,7 +326,9 @@ stat_cols_ellipse <- function(
 StatRowsCenter <- ggproto(
   "StatRowsCenter", StatCenter,
   
-  setup_data = setup_rows_xy_data
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = ord_formals(StatCenter, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -170,7 +374,9 @@ stat_rows_center <- function(
 StatColsCenter <- ggproto(
   "StatColsCenter", StatCenter,
   
-  setup_data = setup_cols_xy_data
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = ord_formals(StatCenter, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -216,7 +422,9 @@ stat_cols_center <- function(
 StatRowsStar <- ggproto(
   "StatRowsStar", StatStar,
   
-  setup_data = setup_rows_xy_data
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = ord_formals(StatStar, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -258,7 +466,9 @@ stat_rows_star <- function(
 StatColsStar <- ggproto(
   "StatColsStar", StatStar,
   
-  setup_data = setup_cols_xy_data
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = ord_formals(StatStar, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -300,7 +510,9 @@ stat_cols_star <- function(
 StatRowsChull <- ggproto(
   "StatRowsChull", StatChull,
   
-  setup_data = setup_rows_data
+  setup_data = setup_rows_data,
+  
+  compute_group = ord_formals(StatChull, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -336,7 +548,9 @@ stat_rows_chull <- function(
 StatColsChull <- ggproto(
   "StatColsChull", StatChull,
   
-  setup_data = setup_cols_data
+  setup_data = setup_cols_data,
+  
+  compute_group = ord_formals(StatChull, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -372,7 +586,9 @@ stat_cols_chull <- function(
 StatRowsCone <- ggproto(
   "StatRowsCone", StatCone,
   
-  setup_data = setup_rows_data
+  setup_data = setup_rows_data,
+  
+  compute_group = ord_formals(StatCone, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -410,7 +626,9 @@ stat_rows_cone <- function(
 StatColsCone <- ggproto(
   "StatColsCone", StatCone,
   
-  setup_data = setup_cols_data
+  setup_data = setup_cols_data,
+  
+  compute_group = ord_formals(StatCone, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -450,7 +668,9 @@ StatRowsProjection <- ggproto(
   
   setup_params = setup_referent_params,
   
-  setup_data = setup_rows_xy_data
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = ord_formals(StatProjection, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -460,7 +680,6 @@ stat_rows_projection <- function(
   data = NULL,
   geom = "segment",
   position = "identity",
-  subset = NULL,
   referent = NULL,
   ...,
   show.legend = NA,
@@ -475,7 +694,6 @@ stat_rows_projection <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset,
       referent = referent,
       na.rm = FALSE,
       ...
@@ -494,7 +712,9 @@ StatColsProjection <- ggproto(
   
   setup_params = setup_referent_params,
   
-  setup_data = setup_cols_xy_data
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = ord_formals(StatProjection, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -504,7 +724,6 @@ stat_cols_projection <- function(
   data = NULL,
   geom = "segment",
   position = "identity",
-  subset = NULL,
   referent = NULL,
   ...,
   show.legend = NA,
@@ -519,7 +738,6 @@ stat_cols_projection <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset,
       referent = referent,
       na.rm = FALSE,
       ...
@@ -538,7 +756,9 @@ StatRowsRule <- ggproto(
   
   setup_params = setup_referent_params,
   
-  setup_data = setup_rows_xy_data
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = ord_formals(StatRule, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -588,7 +808,9 @@ StatColsRule <- ggproto(
   
   setup_params = setup_referent_params,
   
-  setup_data = setup_cols_xy_data
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = ord_formals(StatRule, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -636,7 +858,9 @@ stat_cols_rule <- function(
 StatRowsScale <- ggproto(
   "StatRowsScale", StatScale,
   
-  setup_data = setup_rows_xy_data
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = ord_formals(StatScale, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -674,7 +898,9 @@ stat_rows_scale <- function(
 StatColsScale <- ggproto(
   "StatColsScale", StatScale,
   
-  setup_data = setup_cols_xy_data
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = ord_formals(StatScale, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -712,7 +938,9 @@ stat_cols_scale <- function(
 StatRowsSpantree <- ggproto(
   "StatRowsSpantree", StatSpantree,
   
-  setup_data = setup_rows_data
+  setup_data = setup_rows_data,
+  
+  compute_group = ord_formals(StatSpantree, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -752,7 +980,9 @@ stat_rows_spantree <- function(
 StatColsSpantree <- ggproto(
   "StatColsSpantree", StatSpantree,
   
-  setup_data = setup_cols_data
+  setup_data = setup_cols_data,
+  
+  compute_group = ord_formals(StatSpantree, "compute_group")
 )
 
 #' @rdname biplot-stats

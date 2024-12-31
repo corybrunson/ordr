@@ -100,7 +100,7 @@ StatRule <- ggproto(
     fun.lower = "minpp", fun.upper = "maxpp",
     fun.offset = "minabspp",
     fun.args = list(),
-    subset = NULL, elements = "all", referent = NULL
+    referent = NULL
   ) {
     
     # include computed variables even if trivial

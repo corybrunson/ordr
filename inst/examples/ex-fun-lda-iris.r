@@ -12,16 +12,10 @@ print(get_rows(iris_lda, elements = "active"))
 iris_lda %>%
   as_tbl_ord() %>%
   augment_ord() %>%
-  mutate_rows(
-    species = grouping,
-    discriminant = ifelse(.element == "active", "centroid", "case")
-  ) %>%
   ggbiplot() +
   theme_bw() +
-  geom_rows_point(aes(
-    color = grouping,
-    size = discriminant, alpha = discriminant
-  )) +
+  geom_rows_point(aes(color = grouping), elements = "score", alpha = 1/3) +
+  geom_rows_point(aes(color = grouping), size = 3) +
   geom_cols_vector(aes(label = name), color = "#888888", size = 3) +
   scale_color_brewer(type = "qual", palette = 2) +
   ggtitle("Unstandardized coefficient biplot of iris LDA") +
@@ -46,16 +40,10 @@ iris_lda %>%
 iris_lda %>%
   as_tbl_ord() %>%
   augment_ord() %>%
-  mutate_rows(
-    species = grouping,
-    discriminant = ifelse(.element == "active", "centroid", "case")
-  ) %>%
   ggbiplot() +
   theme_bw() +
-  geom_rows_point(aes(
-    color = grouping,
-    size = discriminant, alpha = discriminant
-  )) +
+  geom_rows_point(aes(color = grouping), elements = "score", alpha = 1/3) +
+  geom_rows_point(aes(color = grouping), size = 3) +
   geom_cols_vector(aes(label = name), color = "#888888", size = 3) +
   scale_color_brewer(type = "qual", palette = 2) +
   ggtitle("Standardized coefficient biplot of iris LDA") +
@@ -76,16 +64,10 @@ print(sweep(iris_lda$means, 2, iris_centroid, "-") %*% C_W_sqrtinv)
 iris_lda %>%
   as_tbl_ord() %>%
   augment_ord() %>%
-  mutate_rows(
-    species = grouping,
-    discriminant = ifelse(.element == "active", "centroid", "case")
-  ) %>%
   ggbiplot() +
   theme_bw() +
-  geom_rows_point(aes(
-    color = grouping,
-    size = discriminant, alpha = discriminant
-  )) +
+  geom_rows_point(aes(color = grouping), elements = "score", alpha = 1/3) +
+  geom_rows_point(aes(color = grouping), size = 3) +
   geom_cols_vector(aes(label = name), color = "#888888", size = 3) +
   scale_color_brewer(type = "qual", palette = 2) +
   ggtitle("Contribution biplot of iris LDA") +
