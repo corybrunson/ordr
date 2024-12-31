@@ -206,6 +206,22 @@ the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.or
     <h2>Value</h2>
     <p>A ggproto <a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">layer</a>.</p>
     </div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>Axes are lines that track the values of linear variables across a
+plot. Multivariate scatterplots may include more axes than plotting
+dimensions, in which case the plot may display only a fraction of the total
+variation in the data.</p>
+<p>Gower &amp; Hand (1996) recommend using axes to represent numerical variables
+in biplots. Consequently, Gardner &amp; le Roux (2002) refer to these as Gower
+biplots.</p>
+<p>Axes positioned orthogonally at the origin are a ubiquitous feature of
+scatterplots and used both to recover variable values from case markers
+(prediction) and to position new case markers from variables
+(interpolation). When they are not orthogonal, these two uses conflict, so
+interpolative versus predictive axes must be used appropriately; see
+<code><a href="ggbiplot.html">ggbiplot()</a></code>.</p>
+    </div>
     <div id="biplot-layers">
     <h2>Biplot layers</h2>
 
@@ -240,6 +256,14 @@ in bold):</p><ul><li><p><strong><code>x</code></strong>, <strong><code>y</code><
 <code>text_hjust</code>, <code>text_vjust</code>, <code>text_family</code>, <code>text_fontface</code></p></li>
 <li><p><code>group</code></p></li>
 </ul></div>
+    <div id="references">
+    <h2>References</h2>
+    <p>Gower JC &amp; Hand DJ (1996) <em>Biplots</em>. Chapman &amp; Hall, ISBN: 0-412-71630-5.</p>
+<p>Gardner S, le Roux N (2002) "Biplot Methodology for Discriminant Analysis
+Based upon Robust Methods and Principal Curves". <em>Classification, Clustering,
+and Data Analysis: Recent Advances and Applications</em>: 169–176.
+<a href="https://link.springer.com/chapter/10.1007/978-3-642-56181-8_18" class="external-link">https://link.springer.com/chapter/10.1007/978-3-642-56181-8_18</a></p>
+    </div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>Other geom layers:

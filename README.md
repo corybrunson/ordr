@@ -229,8 +229,7 @@ appropriate subsets:[^8]
 ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_ellipse(aes(color = Species), alpha = .5, level = .99) +
-  geom_cols_vector() +
-  geom_cols_text_radiate(aes(label = name)) +
+  geom_cols_vector(aes(label = name)) +
   expand_limits(y = c(-3.5, NA)) +
   ggtitle("PCA of Anderson's iris measurements",
           "99% confidence ellipses; variables use top & right axes")
@@ -245,7 +244,7 @@ origin:
 
 ``` r
 ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
-  theme_biplot() +
+  theme_scaffold() +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_center(
     aes(color = Species, shape = Species),
@@ -313,7 +312,7 @@ monograph
 [*Biplots*](https://www.google.com/books/edition/Biplots/lTxiedIxRpgC)
 and the textbook [*Understanding
 Biplots*](https://www.wiley.com/en-us/Understanding+Biplots-p-9781119972907)
-by John C. Gower, David J. Hand, Sugnet Gardner–Lubbe, and Niel J. Le
+by John C. Gower, David J. Hand, Sugnet Gardner–Lubbe, and Niël J. Le
 Roux, and by the volume [*Principal Components
 Analysis*](https://link.springer.com/book/10.1007/b98835) by I. T.
 Jolliffe.

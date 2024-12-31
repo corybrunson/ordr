@@ -43,39 +43,8 @@ StatScale <- ggproto(
   
   required_aes = c("x", "y"),
   
-  compute_group = function(data, scales,
-                           mult = 1) {
+  compute_group = function(data, scales, mult = 1) {
     data[, c("x", "y")] <- data[, c("x", "y")] * mult
     data
-  }
-)
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatRowsScale <- ggproto(
-  "StatRowsScale", StatScale,
-  
-  setup_data = setup_rows_xy_data,
-  
-  compute_group = function(data, scales,
-                           subset = NULL, elements = "all", mult = 1) {
-    StatScale$compute_group(data, scales, mult = mult)
-  }
-)
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatColsScale <- ggproto(
-  "StatColsScale", StatScale,
-  
-  setup_data = setup_cols_xy_data,
-  
-  compute_group = function(data, scales,
-                           subset = NULL, elements = "all", mult = 1) {
-    StatScale$compute_group(data, scales, mult = mult)
   }
 )

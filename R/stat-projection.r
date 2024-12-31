@@ -40,7 +40,6 @@
 #' @export
 stat_projection <- function(
     mapping = NULL, data = NULL, geom = "segment", position = "identity",
-    subset = NULL,
     referent = NULL,
     ...,
     show.legend = NA, inherit.aes = TRUE
@@ -71,7 +70,7 @@ StatProjection <- ggproto(
   "StatProjection", StatReferent,
   
   compute_group = function(data, scales,
-                           subset = NULL, referent = NULL, na.rm = FALSE) {
+                           referent = NULL, na.rm = FALSE) {
     
     # no referent means no projection
     if (is.null(referent) || ! is.data.frame(referent)) return(data.frame())

@@ -21,7 +21,7 @@ axis_plot <-
   ggplot(unit_data, aes(x, y)) +
   coord_equal() +
   stat_rule(
-    referent = cloud_data,
+    geom = "axis", referent = cloud_data,
     fun.lower = NULL, fun.upper = NULL, fun.offset = NULL
   )
 axis_layer <- layer_data(axis_plot)
@@ -50,7 +50,7 @@ offset_plot <-
   ggplot(unit_data, aes(x, y)) +
   coord_equal() +
   stat_rule(
-    referent = cloud_data,
+    geom = "axis", referent = cloud_data,
     fun.lower = NULL, fun.upper = NULL
   )
 offset_layer <- layer_data(offset_plot)

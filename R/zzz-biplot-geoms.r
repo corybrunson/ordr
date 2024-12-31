@@ -27,6 +27,8 @@
 #' @inheritParams ggplot2::geom_point
 #' @inheritParams ggplot2::geom_path
 #' @inheritParams ggplot2::geom_polygon
+#' @inheritParams ggplot2::geom_density_2d
+#' @inheritParams ggplot2::geom_density_2d_filled
 #' @inheritParams ggplot2::geom_text
 #' @inheritParams ggplot2::geom_label
 #' @inheritParams ggrepel::geom_text_repel
@@ -354,6 +356,134 @@ geom_cols_polygon <- function(
     inherit.aes = inherit.aes,
     params = list(
       rule = rule,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_rows_density_2d <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "density_2d",
+  position = "identity",
+  ...,
+  contour_var = "density",
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 10,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = rows_stat(stat),
+    geom = GeomDensity2d,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      contour_var = contour_var,
+      lineend = lineend,
+      linejoin = linejoin,
+      linemitre = linemitre,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_cols_density_2d <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "density_2d",
+  position = "identity",
+  ...,
+  contour_var = "density",
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 10,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = cols_stat(stat),
+    geom = GeomDensity2d,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      contour_var = contour_var,
+      lineend = lineend,
+      linejoin = linejoin,
+      linemitre = linemitre,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_rows_density_2d_filled <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "density_2d_filled",
+  position = "identity",
+  ...,
+  contour_var = "density",
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = rows_stat(stat),
+    geom = GeomDensity2dFilled,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      contour_var = contour_var,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_cols_density_2d_filled <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "density_2d_filled",
+  position = "identity",
+  ...,
+  contour_var = "density",
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = cols_stat(stat),
+    geom = GeomDensity2dFilled,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      contour_var = contour_var,
       na.rm = na.rm,
       ...
     )
@@ -1404,6 +1534,9 @@ geom_rows_vector <- function(
   stat = "identity",
   position = "identity",
   arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -1419,6 +1552,9 @@ geom_rows_vector <- function(
     inherit.aes = inherit.aes,
     params = list(
       arrow = arrow,
+      lineend = lineend,
+      linejoin = linejoin,
+      vector_labels = vector_labels,
       na.rm = na.rm,
       ...
     )
@@ -1433,6 +1569,9 @@ geom_cols_vector <- function(
   stat = "identity",
   position = "identity",
   arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -1448,6 +1587,9 @@ geom_cols_vector <- function(
     inherit.aes = inherit.aes,
     params = list(
       arrow = arrow,
+      lineend = lineend,
+      linejoin = linejoin,
+      vector_labels = vector_labels,
       na.rm = na.rm,
       ...
     )

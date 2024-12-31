@@ -11,7 +11,7 @@ stat_rows(
   geom = "point",
   position = "identity",
   subset = NULL,
-  elements = "all",
+  elements = "active",
   ...,
   show.legend = NA,
   inherit.aes = TRUE
@@ -23,7 +23,7 @@ stat_cols(
   geom = "axis",
   position = "identity",
   subset = NULL,
-  elements = "all",
+  elements = "active",
   ...,
   show.legend = NA,
   inherit.aes = TRUE
@@ -135,10 +135,9 @@ head(get_rows(swiss_fa, elements = "score"))
 # (note that filter precedes selection)
 ggbiplot(swiss_fa) +
   geom_rows_point(elements = "score") +
-  geom_rows_text(aes(label = name), elements = "score", subset = c(1, 4, 18)) +
+  geom_rows_label(aes(label = name), elements = "score", subset = c(1, 4, 18)) +
   scale_alpha_manual(values = c(0, 1), guide = "none") +
-  geom_cols_vector() +
-  geom_cols_text_radiate(aes(label = name))
+  geom_cols_vector(aes(label = name))
 }
 \seealso{
 Other biplot layers: 

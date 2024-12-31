@@ -107,6 +107,12 @@ A ggproto \link[ggplot2:layer]{layer}.
 \description{
 \code{geom_isoline()} renders isolines along row or column axes.
 }
+\details{
+Isolines are topographical features that separate a plot into
+regions in which a gradient of interest falls within a specified range.
+Greenacre (2010) uses them effectively to assist with the projection of
+markers onto axes.
+}
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
@@ -157,6 +163,11 @@ scale(stackloss, scale = FALSE) |>
   coord_square() + geom_origin() +
   geom_point(aes(size = stack.loss)) + scale_size_area() +
   geom_isoline(data = coef_data)
+}
+\references{
+Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
+978-84-923846.
+\url{https://www.fbbva.es/microsite/multivariate-statistics/biplots.html}
 }
 \seealso{
 Other geom layers: 

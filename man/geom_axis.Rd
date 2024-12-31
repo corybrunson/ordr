@@ -118,6 +118,23 @@ A ggproto \link[ggplot2:layer]{layer}.
 \code{geom_axis()} renders lines through or orthogonally translated
 from the origin and the position of each case or variable.
 }
+\details{
+Axes are lines that track the values of linear variables across a
+plot. Multivariate scatterplots may include more axes than plotting
+dimensions, in which case the plot may display only a fraction of the total
+variation in the data.
+
+Gower & Hand (1996) recommend using axes to represent numerical variables
+in biplots. Consequently, Gardner & le Roux (2002) refer to these as Gower
+biplots.
+
+Axes positioned orthogonally at the origin are a ubiquitous feature of
+scatterplots and used both to recover variable values from case markers
+(prediction) and to position new case markers from variables
+(interpolation). When they are not orthogonal, these two uses conflict, so
+interpolative versus predictive axes must be used appropriately; see
+\code{\link[=ggbiplot]{ggbiplot()}}.
+}
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
@@ -183,6 +200,14 @@ stackloss_centered |>
     fun.offset = \(x) minabspp(x, p = 1)
   )
 # NB: `geom_axis(stat = "rule")` would fail to pass positional aesthetics.
+}
+\references{
+Gower JC & Hand DJ (1996) \emph{Biplots}. Chapman & Hall, ISBN: 0-412-71630-5.
+
+Gardner S, le Roux N (2002) "Biplot Methodology for Discriminant Analysis
+Based upon Robust Methods and Principal Curves". \emph{Classification, Clustering,
+and Data Analysis: Recent Advances and Applications}: 169--176.
+\url{https://link.springer.com/chapter/10.1007/978-3-642-56181-8_18}
 }
 \seealso{
 Other geom layers: 

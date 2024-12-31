@@ -12,6 +12,10 @@
 \alias{geom_cols_path}
 \alias{geom_rows_polygon}
 \alias{geom_cols_polygon}
+\alias{geom_rows_density_2d}
+\alias{geom_cols_density_2d}
+\alias{geom_rows_density_2d_filled}
+\alias{geom_cols_density_2d_filled}
 \alias{geom_rows_text}
 \alias{geom_cols_text}
 \alias{geom_rows_label}
@@ -165,6 +169,60 @@ geom_cols_polygon(
   position = "identity",
   rule = "evenodd",
   ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_rows_density_2d(
+  mapping = NULL,
+  data = NULL,
+  stat = "density_2d",
+  position = "identity",
+  ...,
+  contour_var = "density",
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 10,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_density_2d(
+  mapping = NULL,
+  data = NULL,
+  stat = "density_2d",
+  position = "identity",
+  ...,
+  contour_var = "density",
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 10,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_rows_density_2d_filled(
+  mapping = NULL,
+  data = NULL,
+  stat = "density_2d_filled",
+  position = "identity",
+  ...,
+  contour_var = "density",
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_density_2d_filled(
+  mapping = NULL,
+  data = NULL,
+  stat = "density_2d_filled",
+  position = "identity",
+  ...,
+  contour_var = "density",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -614,6 +672,9 @@ geom_rows_vector(
   stat = "identity",
   position = "identity",
   arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -626,6 +687,9 @@ geom_cols_vector(
   stat = "identity",
   position = "identity",
   arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -725,6 +789,10 @@ being drawn (using the \code{subgroup} aesthetic) this argument defines how the
 hole coordinates are interpreted. See the examples in \code{\link[grid:grid.path]{grid::pathGrob()}} for
 an explanation.}
 
+\item{contour_var}{Character string identifying the variable to contour
+by. Can be one of \code{"density"}, \code{"ndensity"}, or \code{"count"}. See the section
+on computed variables for details.}
+
 \item{parse}{If \code{TRUE}, the labels will be parsed into expressions and
 displayed as described in \code{?plotmath}.}
 
@@ -821,6 +889,9 @@ scale expansion to avoid overplotting of data.}
 \item{pin_labels}{Logical; whether to append labels to the pins.}
 
 \item{snap_rule}{Logical; whether to snap rule segments to grid values.}
+
+\item{vector_labels}{Logical; whether to include labels radiating outward
+from the vectors.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.

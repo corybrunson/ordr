@@ -2,6 +2,12 @@
 #'
 #' @description `geom_rule()` renders segments through or orthogonally
 #'   translated from the origin.
+
+#' @details As implemented here, a rule is just an [axis][geom_axis] that has a
+#'   fixed range, usually the limits of the data. See [stat_rule()] for further
+#'   details.
+#' 
+
 #' @template biplot-layers
 
 #' @section Aesthetics:

@@ -8,6 +8,10 @@
 \alias{stat_cols_count}
 \alias{stat_rows_bin}
 \alias{stat_cols_bin}
+\alias{stat_rows_density_2d}
+\alias{stat_cols_density_2d}
+\alias{stat_rows_density_2d_filled}
+\alias{stat_cols_density_2d_filled}
 \alias{stat_rows_ellipse}
 \alias{stat_cols_ellipse}
 \alias{stat_rows_center}
@@ -124,6 +128,70 @@ stat_cols_bin(
   pad = FALSE,
   na.rm = FALSE,
   orientation = NA,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+stat_rows_density_2d(
+  mapping = NULL,
+  data = NULL,
+  geom = "density_2d",
+  position = "identity",
+  ...,
+  contour = TRUE,
+  contour_var = "density",
+  n = 100,
+  h = NULL,
+  adjust = c(1, 1),
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+stat_cols_density_2d(
+  mapping = NULL,
+  data = NULL,
+  geom = "density_2d",
+  position = "identity",
+  ...,
+  contour = TRUE,
+  contour_var = "density",
+  n = 100,
+  h = NULL,
+  adjust = c(1, 1),
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+stat_rows_density_2d_filled(
+  mapping = NULL,
+  data = NULL,
+  geom = "density_2d_filled",
+  position = "identity",
+  ...,
+  contour = TRUE,
+  contour_var = "density",
+  n = 100,
+  h = NULL,
+  adjust = c(1, 1),
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+stat_cols_density_2d_filled(
+  mapping = NULL,
+  data = NULL,
+  geom = "density_2d_filled",
+  position = "identity",
+  ...,
+  contour = TRUE,
+  contour_var = "density",
+  n = 100,
+  h = NULL,
+  adjust = c(1, 1),
+  na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 )
@@ -259,7 +327,6 @@ stat_rows_projection(
   data = NULL,
   geom = "segment",
   position = "identity",
-  subset = NULL,
   referent = NULL,
   ...,
   show.legend = NA,
@@ -271,7 +338,6 @@ stat_cols_projection(
   data = NULL,
   geom = "segment",
   position = "identity",
-  subset = NULL,
   referent = NULL,
   ...,
   show.legend = NA,
@@ -281,7 +347,7 @@ stat_cols_projection(
 stat_rows_rule(
   mapping = NULL,
   data = NULL,
-  geom = "axis",
+  geom = "rule",
   position = "identity",
   fun.lower = "minpp",
   fun.upper = "maxpp",
@@ -296,7 +362,7 @@ stat_rows_rule(
 stat_cols_rule(
   mapping = NULL,
   data = NULL,
-  geom = "axis",
+  geom = "rule",
   position = "identity",
   fun.lower = "minpp",
   fun.upper = "maxpp",
@@ -489,6 +555,16 @@ or left edges of bins are included in the bin.}
 \item{pad}{If \code{TRUE}, adds empty bins at either end of x. This ensures
 frequency polygons touch 0. Defaults to \code{FALSE}.}
 
+\item{contour}{If \code{TRUE}, contour the results of the 2d density
+estimation.}
+
+\item{contour_var}{Character string identifying the variable to contour
+by. Can be one of \code{"density"}, \code{"ndensity"}, or \code{"count"}. See the section
+on computed variables for details.}
+
+\item{h}{Bandwidth (vector of length two). If \code{NULL}, estimated
+using \code{\link[MASS:bandwidth.nrd]{MASS::bandwidth.nrd()}}.}
+
 \item{type}{The type of ellipse.
 The default \code{"t"} assumes a multivariate t-distribution, and
 \code{"norm"} assumes a multivariate normal distribution.
@@ -509,13 +585,6 @@ behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
 
 \item{origin}{Logical; whether to include the origin with the transformed
 data. Defaults to \code{FALSE}.}
-
-\item{subset}{An integer, logical, or character vector indicating a subset of
-rows or columns for which to render graphical elements. NB: Internally, the
-\code{subset} will be taken from the rows of the \link[=fortify.tbl_ord]{fortified}
-'tbl_ord' comprising rows from only one of the matrix factors. It is still
-possible to pass a formula to the \code{data} parameter, but it will act on the
-fortified data \emph{before} it has been restricted to one matrix factor.}
 
 \item{referent}{The reference data set; see Details.}
 

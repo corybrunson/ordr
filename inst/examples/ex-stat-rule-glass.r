@@ -6,15 +6,14 @@ glass_lda <- MASS::lda(Site ~ SiO2 + Al2O3 + FeO + MgO + CaO, glass)
 # bestow 'tbl_ord' class & augment observation, centroid, and variable fields
 as_tbl_ord(glass_lda) %>%
   augment_ord() %>%
-  mutate_rows(discriminant =
-                ifelse(.element == "active", "centroid", "case")) %>%
   print() -> glass_lda
 # row-standard biplot
 glass_lda %>%
   confer_inertia(1) %>%
-  ggbiplot() +
+  ggbiplot(aes(shape = grouping)) +
   theme_bw() + theme_biplot() +
-  geom_rows_point(aes(shape = grouping, size = discriminant), alpha = .5) +
+  geom_rows_point(size = 4) +
+  geom_rows_point(elements = "score") +
   stat_cols_rule(aes(label = name), color = "#888888", num = 8L,
                  fun.offset = \(x) minabspp(x, p = .2),
                  text_size = 2.5, label_dodge = .02) +
@@ -31,16 +30,15 @@ glass_lda <-
 # bestow 'tbl_ord' class & augment observation, centroid, and variable fields
 as_tbl_ord(glass_lda) %>%
   augment_ord() %>%
-  mutate_rows(discriminant =
-                ifelse(.element == "active", "centroid", "case")) %>%
   print() -> glass_lda
 # symmetric biplot
 glass_lda %>%
   confer_inertia(.5) %>%
-  ggbiplot() +
+  ggbiplot(aes(shape = grouping)) +
   theme_bw() + theme_biplot() +
-  geom_rows_point(aes(shape = grouping, alpha = discriminant)) +
-  stat_cols_rule(aes(label = name), color = "#888888", num = 8L,
+  geom_rows_point() +
+  stat_rows_density_2d(elements = "score", alpha = .5, color = "#444444") +
+  stat_cols_rule(aes(label = name), geom = "axis", color = "#888888", num = 8L,
                  fun.offset = \(x) minabspp(x, p = .1),
                  text_size = 2.5, text_dodge = .025) +
   scale_shape_manual(values = c(16L, 17L, 15L, 18L)) +
