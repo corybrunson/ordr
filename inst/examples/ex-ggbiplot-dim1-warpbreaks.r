@@ -15,6 +15,14 @@ warp_ca |>
   geom_origin() +
   geom_rows_bar(color = "blue") +
   geom_cols_bar(aes(y = -after_stat(count)), color = "red")
+# TODO: Initialize plot with no vertical axis;
+# check that it is created when a layer expects it, e.g. `stat = "bin"`.
+warp_ca |> 
+  ggbiplot(aes(label = name, color = .matrix)) +
+  geom_hline(yintercept = 0) +
+  geom_vline(xintercept = 0, linetype = "dotted") +
+  geom_rows_pin(ymax = .5) +
+  geom_cols_pin(ymax = -.5)
 
 iris_pca <- ordinate(iris, cols = 1:4, model = ~ prcomp(., scale. = TRUE))
 # TODO: Have secondary axis specification determine ordinate reversal.

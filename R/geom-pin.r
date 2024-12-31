@@ -87,7 +87,7 @@ GeomPin <- ggproto(
     label_colour = "black", label_alpha = NA
   ),
   
-  setup_params = function (data, params) {
+  setup_params = function(data, params) {
     params$flipped_aes <- 
       has_flipped_aes(data, params, range_is_orthogonal = TRUE)
     if (! (params$flipped_aes || 
@@ -95,6 +95,16 @@ GeomPin <- ggproto(
       stop("Either, `x` and `ymax` or `y` and `xmax` must be supplied.")
     }
     params
+  },
+  
+  setup_data = function(data, params) {
+    
+    # prepare position aesthetics for `GeomSegment`, flipping if necessary
+    data <- flip_data(data, params$flipped_aes)
+    data <- with(params, transform(data, xend = x, y = 0, yend = ymax))
+    data <- flip_data(data, params$flipped_aes)
+    
+    data
   },
   
   extra_params = c("na.rm", "orientation"),
@@ -107,11 +117,6 @@ GeomPin <- ggproto(
     parse = FALSE, check_overlap = FALSE,
     na.rm = FALSE
   ) {
-    
-    # prepare position aesthetics for `GeomSegment`, flipping if necessary
-    data <- flip_data(data, flipped_aes)
-    data <- transform(data, xend = x, y = 0, yend = ymax)
-    data <- flip_data(data, flipped_aes)
     
     # initialize grob list
     grobs <- list()
@@ -131,11 +136,11 @@ GeomPin <- ggproto(
       
       # specify positions
       data <- flip_data(data, flipped_aes)
-      label_data <- transform(label_data, y = ymax, hjust = as.integer(y < 0))
+      label_data <- transform(label_data, y = ymax, vjust = "outward")
       data <- flip_data(data, flipped_aes)
       
       # rotate labels from orthogonal orientation
-      label_data <- transform(label_data, angle = 90 + angle + 90 * flipped_aes)
+      label_data <- transform(label_data, angle = angle + 90 * flipped_aes)
       
       # pin label grobs
       grobs <- c(grobs, list(GeomText$draw_panel(
