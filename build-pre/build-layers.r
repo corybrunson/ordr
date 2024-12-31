@@ -113,6 +113,7 @@ build_biplot_layer <- function(
     stat = ggplot2:::camelize(biplot_layer_name, first = TRUE),
     geom = ggplot2:::camelize(layer_name, first = TRUE)
   )
+  ggparent_name <- ggplot2:::camelize(layer_name, first = TRUE)
   
   # get uniplot formals (and insert any additional biplot formals)
   # -+- extract this into a function that can handle `...` -+-
@@ -171,10 +172,11 @@ build_biplot_layer <- function(
       "#' @usage NULL\n",
       "#' @export\n",
       "{ggproto_name} <- ggproto(\n",
-      "  \"{ggproto_name}\", {ggplot2:::camelize(layer_name, first = TRUE)},\n",
+      "  \"{ggproto_name}\", {ggparent_name},\n",
       "  \n",
       if (ref) "  setup_params = setup_referent_params,\n  \n" else "",
-      "  setup_data = setup_{.matrix}{if_xy}_data\n",
+      "  setup_data = setup_{.matrix}{if_xy}_data,\n  \n",
+      "  compute_group = ord_formals({ggparent_name}, \"compute_group\")\n",
       ")\n",
       "\n\n",
     ),

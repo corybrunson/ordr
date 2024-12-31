@@ -30,8 +30,6 @@
 \alias{StatProjection}
 \alias{StatRule}
 \alias{StatScale}
-\alias{StatRowsScale}
-\alias{StatColsScale}
 \alias{StatSpantree}
 \alias{StatRowsEllipse}
 \alias{StatColsEllipse}
@@ -47,6 +45,8 @@
 \alias{StatColsProjection}
 \alias{StatRowsRule}
 \alias{StatColsRule}
+\alias{StatRowsScale}
+\alias{StatColsScale}
 \alias{StatRowsSpantree}
 \alias{StatColsSpantree}
 \title{ggproto classes created and adapted for ordr}

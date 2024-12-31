@@ -11,7 +11,7 @@ stat_rows(
   geom = "point",
   position = "identity",
   subset = NULL,
-  elements = "all",
+  elements = "active",
   ...,
   show.legend = NA,
   inherit.aes = TRUE
@@ -23,7 +23,7 @@ stat_cols(
   geom = "axis",
   position = "identity",
   subset = NULL,
-  elements = "all",
+  elements = "active",
   ...,
   show.legend = NA,
   inherit.aes = TRUE

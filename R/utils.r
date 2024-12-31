@@ -63,7 +63,7 @@ get_ord_aes <- function(data) {
   ord_cols
 }
 
-.ord_elements <- c("active", "score", "structure", "weight")
+.ord_elements <- c("active", "score", "structure")
 
 # restrict to specified elements
 setup_elts_data <- function(data, params) {
@@ -171,3 +171,9 @@ setup_referent_params <- function(self, data, params) {
 }
 
 is_const <- function(x) length(unique(x)) == 1L
+
+ord_formals <- function(`_class`, method) {
+  fun <- environment(`_class`[[method]])[[method]]
+  formals(fun) <- c(formals(fun), list(subset = NULL, elements = "active"))
+  fun
+}
