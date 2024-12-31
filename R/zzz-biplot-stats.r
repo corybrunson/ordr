@@ -38,7 +38,9 @@ NULL
 StatRowsEllipse <- ggproto(
   "StatRowsEllipse", StatEllipse,
   
-  setup_data = setup_rows_xy_data
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = ord_formals(StatEllipse, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -81,7 +83,9 @@ stat_rows_ellipse <- function(
 StatColsEllipse <- ggproto(
   "StatColsEllipse", StatEllipse,
   
-  setup_data = setup_cols_xy_data
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = ord_formals(StatEllipse, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -124,7 +128,9 @@ stat_cols_ellipse <- function(
 StatRowsCenter <- ggproto(
   "StatRowsCenter", StatCenter,
   
-  setup_data = setup_rows_xy_data
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = ord_formals(StatCenter, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -170,7 +176,9 @@ stat_rows_center <- function(
 StatColsCenter <- ggproto(
   "StatColsCenter", StatCenter,
   
-  setup_data = setup_cols_xy_data
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = ord_formals(StatCenter, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -216,7 +224,9 @@ stat_cols_center <- function(
 StatRowsStar <- ggproto(
   "StatRowsStar", StatStar,
   
-  setup_data = setup_rows_xy_data
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = ord_formals(StatStar, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -258,7 +268,9 @@ stat_rows_star <- function(
 StatColsStar <- ggproto(
   "StatColsStar", StatStar,
   
-  setup_data = setup_cols_xy_data
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = ord_formals(StatStar, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -300,7 +312,9 @@ stat_cols_star <- function(
 StatRowsChull <- ggproto(
   "StatRowsChull", StatChull,
   
-  setup_data = setup_rows_data
+  setup_data = setup_rows_data,
+  
+  compute_group = ord_formals(StatChull, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -336,7 +350,9 @@ stat_rows_chull <- function(
 StatColsChull <- ggproto(
   "StatColsChull", StatChull,
   
-  setup_data = setup_cols_data
+  setup_data = setup_cols_data,
+  
+  compute_group = ord_formals(StatChull, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -372,7 +388,9 @@ stat_cols_chull <- function(
 StatRowsCone <- ggproto(
   "StatRowsCone", StatCone,
   
-  setup_data = setup_rows_data
+  setup_data = setup_rows_data,
+  
+  compute_group = ord_formals(StatCone, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -410,7 +428,9 @@ stat_rows_cone <- function(
 StatColsCone <- ggproto(
   "StatColsCone", StatCone,
   
-  setup_data = setup_cols_data
+  setup_data = setup_cols_data,
+  
+  compute_group = ord_formals(StatCone, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -450,7 +470,9 @@ StatRowsProjection <- ggproto(
   
   setup_params = setup_referent_params,
   
-  setup_data = setup_rows_xy_data
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = ord_formals(StatProjection, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -494,7 +516,9 @@ StatColsProjection <- ggproto(
   
   setup_params = setup_referent_params,
   
-  setup_data = setup_cols_xy_data
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = ord_formals(StatProjection, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -538,7 +562,9 @@ StatRowsRule <- ggproto(
   
   setup_params = setup_referent_params,
   
-  setup_data = setup_rows_xy_data
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = ord_formals(StatRule, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -588,7 +614,9 @@ StatColsRule <- ggproto(
   
   setup_params = setup_referent_params,
   
-  setup_data = setup_cols_xy_data
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = ord_formals(StatRule, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -636,7 +664,9 @@ stat_cols_rule <- function(
 StatRowsScale <- ggproto(
   "StatRowsScale", StatScale,
   
-  setup_data = setup_rows_xy_data
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = ord_formals(StatScale, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -674,7 +704,9 @@ stat_rows_scale <- function(
 StatColsScale <- ggproto(
   "StatColsScale", StatScale,
   
-  setup_data = setup_cols_xy_data
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = ord_formals(StatScale, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -712,7 +744,9 @@ stat_cols_scale <- function(
 StatRowsSpantree <- ggproto(
   "StatRowsSpantree", StatSpantree,
   
-  setup_data = setup_rows_data
+  setup_data = setup_rows_data,
+  
+  compute_group = ord_formals(StatSpantree, "compute_group")
 )
 
 #' @rdname biplot-stats
@@ -752,7 +786,9 @@ stat_rows_spantree <- function(
 StatColsSpantree <- ggproto(
   "StatColsSpantree", StatSpantree,
   
-  setup_data = setup_cols_data
+  setup_data = setup_cols_data,
+  
+  compute_group = ord_formals(StatSpantree, "compute_group")
 )
 
 #' @rdname biplot-stats
