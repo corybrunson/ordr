@@ -150,6 +150,60 @@ as their corresponding conventional geoms.</p>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">geom_rows_density_2d</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"density_2d"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  contour_var <span class="op">=</span> <span class="st">"density"</span>,</span>
+<span>  lineend <span class="op">=</span> <span class="st">"butt"</span>,</span>
+<span>  linejoin <span class="op">=</span> <span class="st">"round"</span>,</span>
+<span>  linemitre <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">geom_cols_density_2d</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"density_2d"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  contour_var <span class="op">=</span> <span class="st">"density"</span>,</span>
+<span>  lineend <span class="op">=</span> <span class="st">"butt"</span>,</span>
+<span>  linejoin <span class="op">=</span> <span class="st">"round"</span>,</span>
+<span>  linemitre <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">geom_rows_density_2d_filled</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"density_2d_filled"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  contour_var <span class="op">=</span> <span class="st">"density"</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">geom_cols_density_2d_filled</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"density_2d_filled"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  contour_var <span class="op">=</span> <span class="st">"density"</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">geom_rows_text</span><span class="op">(</span></span>
 <span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -560,6 +614,9 @@ as their corresponding conventional geoms.</p>
 <span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  arrow <span class="op">=</span> <span class="va">default_arrow</span>,</span>
+<span>  lineend <span class="op">=</span> <span class="st">"round"</span>,</span>
+<span>  linejoin <span class="op">=</span> <span class="st">"mitre"</span>,</span>
+<span>  vector_labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
@@ -572,6 +629,9 @@ as their corresponding conventional geoms.</p>
 <span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  arrow <span class="op">=</span> <span class="va">default_arrow</span>,</span>
+<span>  lineend <span class="op">=</span> <span class="st">"round"</span>,</span>
+<span>  linejoin <span class="op">=</span> <span class="st">"mitre"</span>,</span>
+<span>  vector_labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
@@ -674,6 +734,12 @@ the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.or
 being drawn (using the <code>subgroup</code> aesthetic) this argument defines how the
 hole coordinates are interpreted. See the examples in <code><a href="https://rdrr.io/r/grid/grid.path.html" class="external-link">grid::pathGrob()</a></code> for
 an explanation.</p></dd>
+
+
+<dt id="arg-contour-var">contour_var<a class="anchor" aria-label="anchor" href="#arg-contour-var"></a></dt>
+<dd><p>Character string identifying the variable to contour
+by. Can be one of <code>"density"</code>, <code>"ndensity"</code>, or <code>"count"</code>. See the section
+on computed variables for details.</p></dd>
 
 
 <dt id="arg-parse">parse<a class="anchor" aria-label="anchor" href="#arg-parse"></a></dt>
@@ -822,6 +888,11 @@ isolines.</p></dd>
 
 <dt id="arg-snap-rule">snap_rule<a class="anchor" aria-label="anchor" href="#arg-snap-rule"></a></dt>
 <dd><p>Logical; whether to snap rule segments to grid values.</p></dd>
+
+
+<dt id="arg-vector-labels">vector_labels<a class="anchor" aria-label="anchor" href="#arg-vector-labels"></a></dt>
+<dd><p>Logical; whether to include labels radiating outward
+from the vectors.</p></dd>
 
 </dl></div>
     <div id="value">

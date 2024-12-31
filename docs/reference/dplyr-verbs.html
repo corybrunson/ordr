@@ -282,6 +282,7 @@ supplementary element type defined by the specific class methods (e.g.
 <span class="r-in"><span><span class="co"># bind data frames of annotations</span></span></span>
 <span class="r-in"><span><span class="va">iris_medians</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="va">median</span>, by <span class="op">=</span> <span class="va">iris</span><span class="op">[</span>, <span class="fl">5</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># TODO: Requirement of `.elements` for matching is fragile.</span></span></span>
 <span class="r-in"><span><span class="va">iris_lda</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="co"># retain '.element' in order to match by `elements`</span></span></span>
 <span class="r-in"><span>  <span class="fu">select_rows</span><span class="op">(</span><span class="va">.element</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -297,6 +298,33 @@ supplementary element type defined by the specific class methods (e.g.
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">5.78</span>  0.513 | <span style="color: #BCBCBC;">3</span> active   virginica           6.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     | <span style="color: #BCBCBC;">4</span> score    <span style="color: #BB0000;">NA</span>                 <span style="color: #BB0000;">NA</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     | <span style="color: #BCBCBC;">5</span> score    <span style="color: #BB0000;">NA</span>                 <span style="color: #BB0000;">NA</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 148 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Sepal.Width &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Petal.Length &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Petal.Width &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 2 | 2 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      LD1     LD2 |   name         .element</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.829  0.024<span style="text-decoration: underline;">1</span> | <span style="color: #BCBCBC;">1</span> Sepal.Length active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  1.53   2.16   | <span style="color: #BCBCBC;">2</span> Sepal.Width  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">2.20</span>  -<span style="color: #BB0000;">0.932</span>  | <span style="color: #BCBCBC;">3</span> Petal.Length active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">2.81</span>   2.84   | <span style="color: #BCBCBC;">4</span> Petal.Width  active  </span>
+<span class="r-in"><span><span class="va">iris_lda</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">select_rows</span><span class="op">(</span><span class="va">name</span>, <span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">left_join_rows</span><span class="op">(</span><span class="va">iris_medians</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span> <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'lda_ord': (153 x 2) x (4 x 2)'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # 2 coordinates: LD1 and LD2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 153 x 2 | 6 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     LD1    LD2 |   name       Species Sepal.Length</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  7.61  0.215 | <span style="color: #BCBCBC;">1</span> setosa     <span style="color: #BB0000;">NA</span>               5  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">1.83</span> -<span style="color: #BB0000;">0.728</span> | <span style="color: #BCBCBC;">2</span> versicolor <span style="color: #BB0000;">NA</span>               5.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">5.78</span>  0.513 | <span style="color: #BCBCBC;">3</span> virginica  <span style="color: #BB0000;">NA</span>               6.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     | <span style="color: #BCBCBC;">4</span> <span style="color: #BB0000;">NA</span>         setosa          <span style="color: #BB0000;">NA</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     | <span style="color: #BCBCBC;">5</span> <span style="color: #BB0000;">NA</span>         setosa          <span style="color: #BB0000;">NA</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 148 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables:</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Sepal.Width &lt;dbl&gt;,</span></span>

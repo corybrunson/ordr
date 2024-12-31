@@ -69,7 +69,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">stat_rule</span><span class="op">(</span></span>
 <span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  geom <span class="op">=</span> <span class="st">"axis"</span>,</span>
+<span>  geom <span class="op">=</span> <span class="st">"rule"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  fun.lower <span class="op">=</span> <span class="st">"minpp"</span>,</span>
 <span>  fun.upper <span class="op">=</span> <span class="st">"maxpp"</span>,</span>
@@ -291,13 +291,11 @@ Wiley, ISBN: 978-0-470-01255-0. <a href="https://www.wiley.com/go/biplots" class
 <span class="r-in"><span><span class="co"># bestow 'tbl_ord' class &amp; augment observation, centroid, and variable fields</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">glass_lda</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="dplyr-verbs.html">mutate_rows</a></span><span class="op">(</span>discriminant <span class="op">=</span></span></span>
-<span class="r-in"><span>                <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">.element</span> <span class="op">==</span> <span class="st">"active"</span>, <span class="st">"centroid"</span>, <span class="st">"case"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">glass_lda</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'lda': (72 x 3) x (5 x 3)'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # 3 coordinates: LD1, LD2, LD3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 72 x 3 | 6 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 72 x 3 | 5 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     LD1    LD2      LD3 |   name         prior counts grouping</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  1.82  1.21   0.672   | <span style="color: #BCBCBC;">1</span> Apollonia    0.132      9 Apollon…</span>
@@ -306,9 +304,7 @@ Wiley, ISBN: 978-0-470-01255-0. <a href="https://www.wiley.com/go/biplots" class
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  1.31  2.84  -<span style="color: #BB0000;">0.277</span>   | <span style="color: #BCBCBC;">4</span> Dor          0.206     14 Dor     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  2.99 -<span style="color: #BB0000;">2.03</span>   1.22    | <span style="color: #BCBCBC;">5</span> 1           <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span> Bet Eli…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 67 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   .element &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   discriminant &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: .element &lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 5 x 3 | 2 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        LD1     LD2    LD3 |   name  .element</span>
@@ -321,9 +317,10 @@ Wiley, ISBN: 978-0-470-01255-0. <a href="https://www.wiley.com/go/biplots" class
 <span class="r-in"><span><span class="co"># row-standard biplot</span></span></span>
 <span class="r-in"><span><span class="va">glass_lda</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="conference.html">confer_inertia</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="theme_biplot.html">theme_biplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>shape <span class="op">=</span> <span class="va">grouping</span>, size <span class="op">=</span> <span class="va">discriminant</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>shape <span class="op">=</span> <span class="va">grouping</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="theme_scaffold.html">theme_biplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span>elements <span class="op">=</span> <span class="st">"score"</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="biplot-stats.html">stat_cols_rule</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">name</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"#888888"</span>, num <span class="op">=</span> <span class="fl">8L</span>,</span></span>
 <span class="r-in"><span>                 fun.offset <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">minabspp</span><span class="op">(</span><span class="va">x</span>, p <span class="op">=</span> <span class="fl">.2</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                 text_size <span class="op">=</span> <span class="fl">2.5</span>, label_dodge <span class="op">=</span> <span class="fl">.02</span><span class="op">)</span> <span class="op">+</span></span></span>
@@ -332,7 +329,6 @@ Wiley, ISBN: 978-0-470-01255-0. <a href="https://www.wiley.com/go/biplots" class
 <span class="r-in"><span>    <span class="st">"LDA of Freestone glass measurements"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"Row-standard biplot of standardized LDA"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Using <span style="color: #00BB00;">size</span> for a discrete variable is not advised.</span>
 <span class="r-plt img"><img src="stat_rule-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># contribution LDA of sites on measurements</span></span></span>
@@ -342,13 +338,11 @@ Wiley, ISBN: 978-0-470-01255-0. <a href="https://www.wiley.com/go/biplots" class
 <span class="r-in"><span><span class="co"># bestow 'tbl_ord' class &amp; augment observation, centroid, and variable fields</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">glass_lda</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="dplyr-verbs.html">mutate_rows</a></span><span class="op">(</span>discriminant <span class="op">=</span></span></span>
-<span class="r-in"><span>                <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">.element</span> <span class="op">==</span> <span class="st">"active"</span>, <span class="st">"centroid"</span>, <span class="st">"case"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">glass_lda</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'lda_ord': (72 x 3) x (5 x 3)'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # 3 coordinates: LD1, LD2, LD3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 72 x 3 | 6 ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 72 x 3 | 5 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     LD1    LD2      LD3 |   name         prior counts grouping</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  1.82  1.21   0.672   | <span style="color: #BCBCBC;">1</span> Apollonia    0.132      9 Apollon…</span>
@@ -357,9 +351,7 @@ Wiley, ISBN: 978-0-470-01255-0. <a href="https://www.wiley.com/go/biplots" class
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  1.31  2.84  -<span style="color: #BB0000;">0.277</span>   | <span style="color: #BCBCBC;">4</span> Dor          0.206     14 Dor     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  2.99 -<span style="color: #BB0000;">2.03</span>   1.22    | <span style="color: #BCBCBC;">5</span> 1           <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span> Bet Eli…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 67 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables:</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   .element &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   discriminant &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: .element &lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 5 x 3 | 2 ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       LD1    LD2     LD3 |   name  .element</span>
@@ -372,10 +364,11 @@ Wiley, ISBN: 978-0-470-01255-0. <a href="https://www.wiley.com/go/biplots" class
 <span class="r-in"><span><span class="co"># symmetric biplot</span></span></span>
 <span class="r-in"><span><span class="va">glass_lda</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="conference.html">confer_inertia</a></span><span class="op">(</span><span class="fl">.5</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="theme_biplot.html">theme_biplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>shape <span class="op">=</span> <span class="va">grouping</span>, alpha <span class="op">=</span> <span class="va">discriminant</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="biplot-stats.html">stat_cols_rule</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">name</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"#888888"</span>, num <span class="op">=</span> <span class="fl">8L</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>shape <span class="op">=</span> <span class="va">grouping</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="theme_scaffold.html">theme_biplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-stats.html">stat_rows_density_2d</a></span><span class="op">(</span>elements <span class="op">=</span> <span class="st">"score"</span>, alpha <span class="op">=</span> <span class="fl">.5</span>, color <span class="op">=</span> <span class="st">"#444444"</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-stats.html">stat_cols_rule</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">name</span><span class="op">)</span>, geom <span class="op">=</span> <span class="st">"axis"</span>, color <span class="op">=</span> <span class="st">"#888888"</span>, num <span class="op">=</span> <span class="fl">8L</span>,</span></span>
 <span class="r-in"><span>                 fun.offset <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">minabspp</span><span class="op">(</span><span class="va">x</span>, p <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                 text_size <span class="op">=</span> <span class="fl">2.5</span>, text_dodge <span class="op">=</span> <span class="fl">.025</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">scale_shape_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16L</span>, <span class="fl">17L</span>, <span class="fl">15L</span>, <span class="fl">18L</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
@@ -383,7 +376,6 @@ Wiley, ISBN: 978-0-470-01255-0. <a href="https://www.wiley.com/go/biplots" class
 <span class="r-in"><span>    <span class="st">"LDA of Freestone glass measurements"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"Symmetric biplot of contribution LDA"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Using alpha for a discrete variable is not advised.</span>
 <span class="r-plt img"><img src="stat_rule-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
