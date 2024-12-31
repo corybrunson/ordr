@@ -1325,6 +1325,9 @@ geom_rows_vector <- function(
   stat = "identity",
   position = "identity",
   arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -1340,6 +1343,9 @@ geom_rows_vector <- function(
     inherit.aes = inherit.aes,
     params = list(
       arrow = arrow,
+      lineend = lineend,
+      linejoin = linejoin,
+      vector_labels = vector_labels,
       na.rm = na.rm,
       ...
     )
@@ -1354,6 +1360,9 @@ geom_cols_vector <- function(
   stat = "identity",
   position = "identity",
   arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -1369,6 +1378,9 @@ geom_cols_vector <- function(
     inherit.aes = inherit.aes,
     params = list(
       arrow = arrow,
+      lineend = lineend,
+      linejoin = linejoin,
+      vector_labels = vector_labels,
       na.rm = na.rm,
       ...
     )

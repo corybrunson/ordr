@@ -1,5 +1,10 @@
 # next version
 
+## combined vector and radiating text geom (breaking change)
+
+The 'vector' and 'text_radiate' geoms have been combined.
+The shortcut `geom_text_radiate()` is deprecated, and `geom_vector()` generates radiating labels by default.
+
 ## debugged axis geom
 
 The 'axis' and 'isoline' geoms hit trouble when one or more points lay at the origin (`x^2 + y^2 == 0`). These cases have now been removed in `setup_data()`.

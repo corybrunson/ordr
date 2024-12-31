@@ -119,9 +119,14 @@ A ggproto \link[ggplot2:layer]{layer}.
 from the origin and the position of each case or variable.
 }
 \details{
-Axes are (usually linear) curves that track the values of variables
-across regions of a plot. Gower, Gardner--Lubbe, & le Roux (2011) recommend
-using axes to represent variables in biplots.
+Axes are lines that track the values of linear variables across a
+plot. Multivariate scatterplots may include more axes than plotting
+dimensions, in which case the plot may display only a fraction of the total
+variation in the data.
+
+Gower & Hand (1996) recommend using axes to represent numerical variables
+in biplots. Consequently, Gardner & le Roux (2002) refer to these as Gower
+biplots.
 
 Axes positioned orthogonally at the origin are a ubiquitous feature of
 scatterplots and used both to recover variable values from case markers
@@ -197,8 +202,12 @@ stackloss_centered |>
 # NB: `geom_axis(stat = "rule")` would fail to pass positional aesthetics.
 }
 \references{
-Gower JC, Gardner--Lubbe S, & le Roux NJ (2011) \emph{Understanding Biplots}.
-Wiley, ISBN: 978-0-470-01255-0. \url{https://www.wiley.com/go/biplots}
+Gower JC & Hand DJ (1996) \emph{Biplots}. Chapman & Hall, ISBN: 0-412-71630-5.
+
+Gardner S, le Roux N (2002) "Biplot Methodology for Discriminant Analysis
+Based upon Robust Methods and Principal Curves". \emph{Classification, Clustering,
+and Data Analysis: Recent Advances and Applications}: 169--176.
+\url{https://link.springer.com/chapter/10.1007/978-3-642-56181-8_18}
 }
 \seealso{
 Other geom layers: 

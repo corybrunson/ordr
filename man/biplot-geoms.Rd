@@ -578,6 +578,9 @@ geom_rows_vector(
   stat = "identity",
   position = "identity",
   arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -590,6 +593,9 @@ geom_cols_vector(
   stat = "identity",
   position = "identity",
   arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -766,6 +772,9 @@ of operations used to visualize interpolation.}
 isolines.}
 
 \item{snap_rule}{Logical; whether to snap rule segments to grid values.}
+
+\item{vector_labels}{Logical; whether to include labels radiating outward
+from the vectors.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.

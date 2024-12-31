@@ -47,8 +47,7 @@ iris[, -5] \%>\%
   scale_color_brewer(type = "qual", palette = 2) +
   geom_rows_lineranges(fun.data = mean_sdl, linewidth = .75) +
   geom_rows_density_2d(contour = TRUE, alpha = .5) +
-  geom_cols_vector(color = "#444444") +
-  geom_cols_text_radiate(aes(label = name), color = "#444444", size = 3) +
+  geom_cols_vector(aes(label = name), color = "#444444", size = 3) +
   ggtitle(
     "Row-principal PCA biplot of Anderson iris data",
     "Ranges 2 sample standard deviations from centroids"
