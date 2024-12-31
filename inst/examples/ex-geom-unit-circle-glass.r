@@ -13,7 +13,7 @@ rowSums(get_cols(glass_pca) ^ 2)
 glass_pca %>%
   ggbiplot(aes(label = name), sec.axes = "cols") +
   theme_biplot() +
-  geom_rows_point(aes(color = site, shape = form), alpha = .5) +
+  geom_rows_point(aes(color = site, shape = form), elements = "score") +
   geom_unit_circle(alpha = .5, scale.factor = 3) +
   geom_cols_vector() +
   geom_cols_text_radiate()

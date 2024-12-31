@@ -13,12 +13,13 @@ get_rows(savings_cca, elements = "structure")
 get_cols(savings_cca, elements = "structure")
 
 # biplot of interset and intraset correlations with the population data
+# NB: `contour = TRUE` is not automatically set as in `geom_density_2d()`
 savings_cca %>%
   confer_inertia("cols") %>%
   ggbiplot(aes(label = name, color = .matrix)) +
   theme_bw() + theme_scaffold() +
   geom_unit_circle() +
-  geom_rows_point(elements = "score", color = "grey") +
+  geom_rows_density_2d(elements = "score", color = "grey", contour = TRUE) +
   geom_rows_vector(arrow = NULL, elements = "structure") +
   geom_cols_vector(arrow = NULL, elements = "structure", linetype = "dashed") +
   geom_rows_text(elements = "structure", hjust = "outward") +

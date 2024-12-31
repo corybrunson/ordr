@@ -9,7 +9,7 @@ iris[, -5] %>%
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   geom_rows_lineranges(fun.data = mean_sdl, linewidth = .75) +
-  geom_rows_point(alpha = .5) +
+  geom_rows_density_2d(contour = TRUE, alpha = .5) +
   geom_cols_vector(color = "#444444") +
   geom_cols_text_radiate(aes(label = name), color = "#444444", size = 3) +
   ggtitle(

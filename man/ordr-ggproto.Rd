@@ -31,6 +31,10 @@
 \alias{StatRule}
 \alias{StatScale}
 \alias{StatSpantree}
+\alias{StatRowsDensity2d}
+\alias{StatColsDensity2d}
+\alias{StatRowsDensity2dFilled}
+\alias{StatColsDensity2dFilled}
 \alias{StatRowsEllipse}
 \alias{StatColsEllipse}
 \alias{StatRowsCenter}

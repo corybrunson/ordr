@@ -19,6 +19,8 @@
 #' @template param-stat
 #' @template biplot-ord-aes
 #' @inheritParams stat_rows
+#' @inheritParams ggplot2::stat_density_2d
+#' @inheritParams ggplot2::stat_density_2d_filled
 #' @inheritParams ggplot2::stat_ellipse
 #' @inheritParams stat_center
 #' @inheritParams stat_star
@@ -30,6 +32,202 @@
 #' @inheritParams stat_spantree
 #' @example inst/examples/ex-stat-ellipse-iris.r
 NULL
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsDensity2d <- ggproto(
+  "StatRowsDensity2d", StatDensity2d,
+  
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = ord_formals(StatDensity2d, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_rows_density_2d <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "density_2d",
+  position = "identity",
+  ...,
+  contour = TRUE,
+  contour_var = "density",
+  n = 100,
+  h = NULL,
+  adjust = c(1, 1),
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatRowsDensity2d,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      contour = contour,
+      contour_var = contour_var,
+      n = n,
+      h = h,
+      adjust = adjust,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsDensity2d <- ggproto(
+  "StatColsDensity2d", StatDensity2d,
+  
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = ord_formals(StatDensity2d, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_density_2d <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "density_2d",
+  position = "identity",
+  ...,
+  contour = TRUE,
+  contour_var = "density",
+  n = 100,
+  h = NULL,
+  adjust = c(1, 1),
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatColsDensity2d,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      contour = contour,
+      contour_var = contour_var,
+      n = n,
+      h = h,
+      adjust = adjust,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsDensity2dFilled <- ggproto(
+  "StatRowsDensity2dFilled", StatDensity2dFilled,
+  
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = ord_formals(StatDensity2dFilled, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_rows_density_2d_filled <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "density_2d_filled",
+  position = "identity",
+  ...,
+  contour = TRUE,
+  contour_var = "density",
+  n = 100,
+  h = NULL,
+  adjust = c(1, 1),
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatRowsDensity2dFilled,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      contour = contour,
+      contour_var = contour_var,
+      n = n,
+      h = h,
+      adjust = adjust,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsDensity2dFilled <- ggproto(
+  "StatColsDensity2dFilled", StatDensity2dFilled,
+  
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = ord_formals(StatDensity2dFilled, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_density_2d_filled <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "density_2d_filled",
+  position = "identity",
+  ...,
+  contour = TRUE,
+  contour_var = "density",
+  n = 100,
+  h = NULL,
+  adjust = c(1, 1),
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatColsDensity2dFilled,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      contour = contour,
+      contour_var = contour_var,
+      n = n,
+      h = h,
+      adjust = adjust,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
 
 #' @rdname ordr-ggproto
 #' @format NULL
@@ -482,7 +680,6 @@ stat_rows_projection <- function(
   data = NULL,
   geom = "segment",
   position = "identity",
-  subset = NULL,
   referent = NULL,
   ...,
   show.legend = NA,
@@ -497,7 +694,6 @@ stat_rows_projection <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset,
       referent = referent,
       na.rm = FALSE,
       ...
@@ -528,7 +724,6 @@ stat_cols_projection <- function(
   data = NULL,
   geom = "segment",
   position = "identity",
-  subset = NULL,
   referent = NULL,
   ...,
   show.legend = NA,
@@ -543,7 +738,6 @@ stat_cols_projection <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      subset = subset,
       referent = referent,
       na.rm = FALSE,
       ...
