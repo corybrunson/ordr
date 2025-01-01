@@ -222,6 +222,8 @@ stat_rows_projection(
   geom = "segment",
   position = "identity",
   referent = NULL,
+  ref_subset = NULL,
+  ref_elements = "active",
   ...,
   show.legend = NA,
   inherit.aes = TRUE
@@ -233,6 +235,8 @@ stat_cols_projection(
   geom = "segment",
   position = "identity",
   referent = NULL,
+  ref_subset = NULL,
+  ref_elements = "active",
   ...,
   show.legend = NA,
   inherit.aes = TRUE
@@ -250,6 +254,8 @@ stat_rows_rule(
   referent = NULL,
   show.legend = NA,
   inherit.aes = TRUE,
+  ref_subset = NULL,
+  ref_elements = "active",
   ...
 )
 
@@ -265,6 +271,8 @@ stat_cols_rule(
   referent = NULL,
   show.legend = NA,
   inherit.aes = TRUE,
+  ref_subset = NULL,
+  ref_elements = "active",
   ...
 )
 
@@ -416,6 +424,9 @@ behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
 data. Defaults to \code{FALSE}.}
 
 \item{referent}{The reference data set; see Details.}
+
+\item{ref_elements, ref_subset}{Analogues of \code{elements} and \code{subset} applied
+to \code{referent}.}
 
 \item{fun.lower, fun.upper, fun.offset}{Functions used to determine the limits
 of the rules and the translations of the axes from the projections of

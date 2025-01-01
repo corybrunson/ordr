@@ -247,13 +247,7 @@ iris_pca \%>\%
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   geom_origin() +
-  # FIXME: Include this only for testing.
-  geom_cols_axis(
-    subset = c(2, 4),
-    aes(label = name, center = center, scale = scale)
-  ) +
   stat_cols_rule(
-    .referent = "rows",
     subset = c(2, 4),
     aes(label = name, center = center, scale = scale)
   ) +

@@ -178,7 +178,7 @@ stackloss_centered |>
   geom_point(aes(size = stack.loss, alpha = sign(stack.loss))) + 
   scale_size_area() + scale_alpha_binned(breaks = c(-1, 0, 1)) +
   stat_rule(
-    geom = "rule", data = coef_data,
+    data = coef_data,
     referent = stackloss_centered,
     fun.offset = \(x) minabspp(x, p = .5)
   )

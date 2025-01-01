@@ -19,6 +19,7 @@
 #' @template param-stat
 #' @template biplot-ord-aes
 #' @inheritParams stat_rows
+#' @template param-referent
 #' @inheritParams ggplot2::stat_density_2d
 #' @inheritParams ggplot2::stat_density_2d_filled
 #' @inheritParams ggplot2::stat_ellipse
@@ -666,6 +667,8 @@ stat_cols_cone <- function(
 StatRowsProjection <- ggproto(
   "StatRowsProjection", StatProjection,
   
+  extra_params = c(StatProjection$extra_params, "ref_subset", "ref_elements"),
+  
   setup_params = setup_referent_params,
   
   setup_data = setup_rows_xy_data,
@@ -681,6 +684,7 @@ stat_rows_projection <- function(
   geom = "segment",
   position = "identity",
   referent = NULL,
+  ref_subset = NULL, ref_elements = "active",
   ...,
   show.legend = NA,
   inherit.aes = TRUE
@@ -695,6 +699,8 @@ stat_rows_projection <- function(
     inherit.aes = inherit.aes,
     params = list(
       referent = referent,
+      ref_subset = ref_subset,
+      ref_elements = ref_elements,
       na.rm = FALSE,
       ...
     )
@@ -709,6 +715,8 @@ stat_rows_projection <- function(
 #' @export
 StatColsProjection <- ggproto(
   "StatColsProjection", StatProjection,
+  
+  extra_params = c(StatProjection$extra_params, "ref_subset", "ref_elements"),
   
   setup_params = setup_referent_params,
   
@@ -725,6 +733,7 @@ stat_cols_projection <- function(
   geom = "segment",
   position = "identity",
   referent = NULL,
+  ref_subset = NULL, ref_elements = "active",
   ...,
   show.legend = NA,
   inherit.aes = TRUE
@@ -739,6 +748,8 @@ stat_cols_projection <- function(
     inherit.aes = inherit.aes,
     params = list(
       referent = referent,
+      ref_subset = ref_subset,
+      ref_elements = ref_elements,
       na.rm = FALSE,
       ...
     )
@@ -753,6 +764,8 @@ stat_cols_projection <- function(
 #' @export
 StatRowsRule <- ggproto(
   "StatRowsRule", StatRule,
+  
+  extra_params = c(StatRule$extra_params, "ref_subset", "ref_elements"),
   
   setup_params = setup_referent_params,
   
@@ -775,6 +788,7 @@ stat_rows_rule <- function(
   referent = NULL,
   show.legend = NA,
   inherit.aes = TRUE,
+  ref_subset = NULL, ref_elements = "active",
   ...
 ) {
   LayerRef <- layer(
@@ -791,6 +805,8 @@ stat_rows_rule <- function(
       fun.offset = fun.offset,
       fun.args = fun.args,
       referent = referent,
+      ref_subset = ref_subset,
+      ref_elements = ref_elements,
       na.rm = FALSE,
       ...
     )
@@ -805,6 +821,8 @@ stat_rows_rule <- function(
 #' @export
 StatColsRule <- ggproto(
   "StatColsRule", StatRule,
+  
+  extra_params = c(StatRule$extra_params, "ref_subset", "ref_elements"),
   
   setup_params = setup_referent_params,
   
@@ -827,6 +845,7 @@ stat_cols_rule <- function(
   referent = NULL,
   show.legend = NA,
   inherit.aes = TRUE,
+  ref_subset = NULL, ref_elements = "active",
   ...
 ) {
   LayerRef <- layer(
@@ -843,6 +862,8 @@ stat_cols_rule <- function(
       fun.offset = fun.offset,
       fun.args = fun.args,
       referent = referent,
+      ref_subset = ref_subset,
+      ref_elements = ref_elements,
       na.rm = FALSE,
       ...
     )

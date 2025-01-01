@@ -181,7 +181,7 @@ GeomRule <- ggproto(
       mark_data <- data
       
       # calculate rule values and positions
-      mark_data <- calibrate_rules(mark_data, by, num, loose = TRUE)
+      mark_data <- calibrate_rules(mark_data, by, num, loose = FALSE)
     }
     
     # axis grobs: if `xend` & `yend` then segment else abline & vline
