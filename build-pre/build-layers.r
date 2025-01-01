@@ -174,6 +174,10 @@ build_biplot_layer <- function(
       "{ggproto_name} <- ggproto(\n",
       "  \"{ggproto_name}\", {ggparent_name},\n",
       "  \n",
+      if (ref) paste0(
+        "  extra_params = c({ggparent_name}$extra_params, ",
+        "\"ref_subset\", \"ref_elements\"),\n  \n"
+      ) else "",
       if (ref) "  setup_params = setup_referent_params,\n  \n" else "",
       "  setup_data = setup_{.matrix}{if_xy}_data,\n  \n",
       "  compute_group = ord_formals({ggparent_name}, \"compute_group\")\n",
@@ -190,6 +194,7 @@ build_biplot_layer <- function(
     "{biplot_layer_name} <- function(\n",
     "  ",
     arg_c(layer_args1, layer_vals1, 2L),
+    if (ref) "\n  ref_subset = NULL, ref_elements = \"active\"," else "",
     "\n  ...",
     if (! layer2) "" else {
       str_c(",\n  ", arg_c(layer_args2, layer_vals2, 2L, end = TRUE))
@@ -205,6 +210,8 @@ build_biplot_layer <- function(
     if (length(param_args) == 0L) "" else "      ",
     if (length(param_args) == 0L) "" else arg_c(param_args, param_vals, 6L),
     if (length(param_args) == 0L) "" else "\n",
+    if (ref) "      ref_subset = ref_subset,\n" else "",
+    if (ref) "      ref_elements = ref_elements,\n" else "",
     if ("na.rm" %in% param_args) "" else "      na.rm = FALSE,\n",
     "      ...\n",
     "    )\n",
@@ -381,6 +388,7 @@ for (type in c("stat", "geom")) {
     "#' @template param-{type}\n",
     if (type == "stat") "#' @template biplot-ord-aes\n" else "",
     if (type == "stat") "#' @inheritParams stat_rows\n" else "",
+    if (type == "stat") "#' @template param-referent\n" else "",
     "\n"
   )
   

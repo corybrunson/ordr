@@ -270,6 +270,8 @@ stats.</p>
 <span>  geom <span class="op">=</span> <span class="st">"segment"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  referent <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ref_subset <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ref_elements <span class="op">=</span> <span class="st">"active"</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -281,6 +283,8 @@ stats.</p>
 <span>  geom <span class="op">=</span> <span class="st">"segment"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  referent <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ref_subset <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ref_elements <span class="op">=</span> <span class="st">"active"</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -298,6 +302,8 @@ stats.</p>
 <span>  referent <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  ref_subset <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ref_elements <span class="op">=</span> <span class="st">"active"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -313,6 +319,8 @@ stats.</p>
 <span>  referent <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  ref_subset <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ref_elements <span class="op">=</span> <span class="st">"active"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -500,6 +508,11 @@ data. Defaults to <code>FALSE</code>.</p></dd>
 
 <dt id="arg-referent">referent<a class="anchor" aria-label="anchor" href="#arg-referent"></a></dt>
 <dd><p>The reference data set; see Details.</p></dd>
+
+
+<dt id="arg-ref-elements-ref-subset">ref_elements, ref_subset<a class="anchor" aria-label="anchor" href="#arg-ref-elements-ref-subset"></a></dt>
+<dd><p>Analogues of <code>elements</code> and <code>subset</code> applied
+to <code>referent</code>.</p></dd>
 
 
 <dt id="arg-fun-lower-fun-upper-fun-offset">fun.lower, fun.upper, fun.offset<a class="anchor" aria-label="anchor" href="#arg-fun-lower-fun-upper-fun-offset"></a></dt>

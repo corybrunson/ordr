@@ -10,7 +10,7 @@ as_tbl_ord_default <- function(x) {
   x
 }
 
-tbl_ord_factors <- c(
+.ord_factors <- c(
   rows = "rows", columns = "cols", cols = "cols", dims = "dims",
   f = "rows", g = "cols", fg = "dims",
   u = "rows", v = "cols", uv = "dims",
@@ -21,13 +21,16 @@ tbl_ord_factors <- c(
   rowprincipal = "rows", colprincipal = "cols", columnprincipal = "cols",
   both = "dims", symmetric = "dims"
 )
+
+.ord_elements <- c("active", "score", "structure")
+
 match_factor <- function(x) {
-  x <- match.arg(tolower(x), names(tbl_ord_factors))
-  unname(tbl_ord_factors[x])
+  x <- match.arg(tolower(x), names(.ord_factors))
+  unname(.ord_factors[x])
 }
 switch_inertia <- function(x) {
-  x <- match.arg(tolower(x), names(tbl_ord_factors))
-  switch(tbl_ord_factors[x], rows = c(1, 0), cols = c(0, 1), dims = c(.5, .5))
+  x <- match.arg(tolower(x), names(.ord_factors))
+  switch(.ord_factors[x], rows = c(1, 0), cols = c(0, 1), dims = c(.5, .5))
 }
 
 method_classes <- function(generic.function) {
@@ -62,8 +65,6 @@ get_ord_aes <- function(data) {
   if (length(ord_cols) == 0) ord_cols <- match(c("x", "y"), names(data))
   ord_cols
 }
-
-.ord_elements <- c("active", "score", "structure")
 
 # restrict to specified elements
 setup_elts_data <- function(data, params) {
@@ -145,22 +146,19 @@ setup_cols_xy_data <- function(data, params) {
 
 setup_referent_params <- function(self, data, params) {
   
-  .matrix <- tolower(gsub("^Stat(Rows|Cols).*$", "\\1", class(self)[[1L]]))
-  stopifnot(.matrix %in% c("rows", "cols"))
-  setup_factor_xy_data <- switch(
-    .matrix,
-    rows = setup_cols_xy_data,
-    cols = setup_rows_xy_data
-  )
-  
-  # syntactic sugar to specify the reference data
   if (is.null(params$referent)) {
     # default null `referent` to other matrix factor
-    params$referent <- setup_factor_xy_data(data, list())
-  } else if (! is.data.frame(params$referent) && ! is.matrix(params$referent)) {
-    # if `referent` is not a data frame, then treat it as the `subset` param
-    params$referent <- 
-      setup_factor_xy_data(data, list(subset = params$referent))
+    .matrix <- tolower(gsub("^Stat(Rows|Cols).*$", "\\1", class(self)[[1L]]))
+    stopifnot(.matrix %in% c("rows", "cols"))
+    setup_factor_xy_data <- switch(
+      .matrix,
+      rows = setup_cols_xy_data,
+      cols = setup_rows_xy_data
+    )
+    params$referent <- setup_factor_xy_data(
+      data,
+      list(elements = params$ref_elements, subset = params$ref_subset)
+    )
   } else {
     # continue with parent parameter setup
     params$referent <- as.data.frame(params$referent)
