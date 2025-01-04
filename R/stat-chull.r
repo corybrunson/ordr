@@ -53,3 +53,60 @@ StatChull <- ggproto(
     data[chull(data[, ord_cols, drop = FALSE]), , drop = FALSE]
   }
 )
+
+
+
+# proportional convex hulls / alpha bags
+# adapted from `aplpack::plothulls()`
+# https://cran.r-project.org/package=aplpack
+cbag <- function(x, y, prop = c(1), cut = c("above", "below")) {
+  cut <- match.arg(cut, c("above", "below"))
+  n <- length(x)
+  prop <- rev(sort(unique(prop)))
+  
+  # initialize output
+  res <- tibble::tibble()
+  
+  # initial convex hull contains all points
+  cut_prop <- length(x) / n
+  i_hull <- chull(x, y)
+  x_hull <- x[i_hull]; y_hull <- y[i_hull]
+  x <- x[-i_hull]; y <- y[-i_hull]
+  
+  # sequentially obtain proportional hulls
+  dupe <- FALSE
+  for (i in seq_along(prop)) {
+    
+    # peel convex hulls until next one drops below `prop[i]`
+    while (length(x) / n >= prop[i] && length(x) > 0L) {
+      dupe <- FALSE
+      cut_prop <- length(x) / n
+      i_hull <- chull(x, y)
+      x_hull <- x[i_hull]; y_hull <- y[i_hull]
+      x <- x[-i_hull]; y <- y[-i_hull]
+    }
+    # peel last hull to cut below `prop`
+    if (cut_prop > prop[i] && cut == "below") {
+      dupe <- FALSE
+      cut_prop <- length(x) / n
+      i_hull <- chull(x, y)
+      x_hull <- x[i_hull]; y_hull <- y[i_hull]
+      x <- x[-i_hull]; y <- y[-i_hull]
+    }
+    
+    if (! dupe) {
+      # append data
+      res_p <- tibble::tibble(
+        x = x_hull,
+        y = y_hull,
+        hull = i,
+        prop = prop[i],
+        cut = cut_prop
+      )
+      res <- rbind(res, res_p)
+    }
+    dupe <- TRUE
+  }
+  
+  return(res)
+}
