@@ -34,6 +34,10 @@ The 'projection' referential stat prepares segment endpoints between `x,y` posit
 
 A new 'rule' statistical transformation computes additional position aesthetics that the 'axis' geom uses to limit and offset axes. The stat is referential and expects a set of functions that compute limits `lower` and `upper` along the axes and `yintercept` and `xintercept` associated with offset axes. The 'axis' geom preprocesses these aesthetics to rule endpoints `xmin,ymin,xmax,ymax` and offset vectors `xend,yend` to force the plotting window to contain the limited axis segments or, if the axes remain lines, the offsets where they are centered.
 
+## bag stat
+
+A new 'bag' statistical transformation computes nested convex hulls containing specified fractions of data.
+
 ## standardized and restrictive elements parameter (breaking change)
 
 The `elements` parameter is now standardized across all statistical transformations (through the code generation process) and accepts more restrictive options:

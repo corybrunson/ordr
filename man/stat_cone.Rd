@@ -2,7 +2,7 @@
 % Please edit documentation in R/stat-cone.r
 \name{stat_cone}
 \alias{stat_cone}
-\title{Restrict geometric data to boundary points for its conical hull}
+\title{Conical hull}
 \usage{
 stat_cone(
   mapping = NULL,
@@ -82,8 +82,8 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
-This stat layer restricts a dataset with \code{x} and \code{y} variables
-to the points that lie on its conical hull (other than the origin).
+Restrict planar data to the points that lie on its conical hull
+(other than the origin).
 }
 \section{Biplot layers}{
 

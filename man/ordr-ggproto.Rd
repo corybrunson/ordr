@@ -23,6 +23,7 @@
 \alias{StatCenter}
 \alias{StatStar}
 \alias{StatChull}
+\alias{StatBag}
 \alias{StatCone}
 \alias{StatRows}
 \alias{StatCols}
@@ -43,6 +44,8 @@
 \alias{StatColsStar}
 \alias{StatRowsChull}
 \alias{StatColsChull}
+\alias{StatRowsBag}
+\alias{StatColsBag}
 \alias{StatRowsCone}
 \alias{StatColsCone}
 \alias{StatRowsProjection}

@@ -26,6 +26,7 @@
 #' @inheritParams stat_center
 #' @inheritParams stat_star
 #' @inheritParams stat_chull
+#' @inheritParams stat_bag
 #' @inheritParams stat_cone
 #' @inheritParams stat_projection
 #' @inheritParams stat_rule
@@ -574,6 +575,90 @@ stat_cols_chull <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
+      na.rm = FALSE,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsBag <- ggproto(
+  "StatRowsBag", StatBag,
+  
+  setup_data = setup_rows_data,
+  
+  compute_group = ord_formals(StatBag, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_rows_bag <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "polygon",
+  position = "identity",
+  fraction = c(0.5),
+  cut = c("above", "below"),
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatRowsBag,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      fraction = fraction,
+      cut = cut,
+      na.rm = FALSE,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsBag <- ggproto(
+  "StatColsBag", StatBag,
+  
+  setup_data = setup_cols_data,
+  
+  compute_group = ord_formals(StatBag, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_bag <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "polygon",
+  position = "identity",
+  fraction = c(0.5),
+  cut = c("above", "below"),
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatColsBag,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      fraction = fraction,
+      cut = cut,
       na.rm = FALSE,
       ...
     )

@@ -14,6 +14,8 @@
 \alias{stat_cols_star}
 \alias{stat_rows_chull}
 \alias{stat_cols_chull}
+\alias{stat_rows_bag}
+\alias{stat_cols_bag}
 \alias{stat_rows_cone}
 \alias{stat_cols_cone}
 \alias{stat_rows_projection}
@@ -189,6 +191,30 @@ stat_cols_chull(
   data = NULL,
   geom = "polygon",
   position = "identity",
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_rows_bag(
+  mapping = NULL,
+  data = NULL,
+  geom = "polygon",
+  position = "identity",
+  fraction = c(0.5),
+  cut = c("above", "below"),
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_cols_bag(
+  mapping = NULL,
+  data = NULL,
+  geom = "polygon",
+  position = "identity",
+  fraction = c(0.5),
+  cut = c("above", "below"),
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -419,6 +445,13 @@ or, if \code{type="euclid"}, the radius of the circle to be drawn.}
 behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
 
 \item{fun.args}{Arguments passed to the \verb{fun.*}.}
+
+\item{fraction}{A numeric vector of fractions (between \code{0} and \code{1}) of the
+data to contain in each hull.}
+
+\item{cut}{Character; one of \code{"above"} and \code{"below"}, indicating whether each
+hull should contain at least or at most \code{fraction} of the data,
+respectively.}
 
 \item{origin}{Logical; whether to include the origin with the transformed
 data. Defaults to \code{FALSE}.}
