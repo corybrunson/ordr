@@ -1,4 +1,4 @@
-#' @title Convex hulls and alpha bags
+#' @title Convex hulls and hull peelings
 #'
 #' @description Restrict planar data to the boundary points of its convex hull,
 #'   or of nested convex hulls containing specified fractions of points.
@@ -8,8 +8,9 @@
 #'   `stat_chull()` restricts a dataset with `x` and `y` variables to the points
 #'   that lie on its convex hull.
 #'
-#'   Building on this, `stat_bag()` returns an alpha bag: a subset of
-#'   sequentially peeled hulls containing specified fractions of the data.
+#'   Building on this, `stat_peel()` returns hulls from a _convex hull peeling_:
+#'   a subset of sequentially removed hulls containing specified fractions of
+#'   the data.
 #' 
 
 #' @template biplot-layers
@@ -35,7 +36,7 @@
 #' @template return-layer
 #' @family stat layers
 #' @example inst/examples/ex-stat-chull-haireye.r
-#' @example inst/examples/ex-stat-bag-judges.r
+#' @example inst/examples/ex-stat-peel-judges.r
 #' @export
 stat_chull <- function(
   mapping = NULL, data = NULL, geom = "polygon", position = "identity",
@@ -78,7 +79,7 @@ StatChull <- ggproto(
 
 #' @rdname stat_chull
 #' @export
-stat_bag <- function(
+stat_peel <- function(
     mapping = NULL, data = NULL, geom = "polygon", position = "identity",
     fraction = c(.5), cut = c("above", "below"),
     show.legend = NA, 
@@ -88,7 +89,7 @@ stat_bag <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = StatBag,
+    stat = StatPeel,
     geom = geom, 
     position = position,
     show.legend = show.legend,
@@ -106,8 +107,8 @@ stat_bag <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
-StatBag <- ggproto(
-  "StatBag", StatChull,
+StatPeel <- ggproto(
+  "StatPeel", StatChull,
   
   compute_group = function(
     data, scales,
@@ -116,23 +117,23 @@ StatBag <- ggproto(
     
     ord_cols <- get_ord_aes(data)
     
-    bag_data <- compute_bag(
+    peel_data <- peel_hulls(
       data[, ord_cols, drop = FALSE],
       fraction = fraction, cut = cut
     )
     
     # interact existing group with hull
-    bag_data$group <- 
-      interaction(unique(data$group), bag_data$hull, lex.order = TRUE)
+    peel_data$group <- 
+      interaction(unique(data$group), peel_data$hull, lex.order = TRUE)
     
-    bag_data
+    peel_data
   }
 )
 
-# proportional convex hulls / alpha bags
+# convex hull peelings
 # adapted from `aplpack::plothulls()`
 # https://cran.r-project.org/package=aplpack
-compute_bag <- function(data, fraction = c(.5), cut = c("above", "below")) {
+peel_hulls <- function(data, fraction = c(.5), cut = c("above", "below")) {
   
   # behave like `chull()`: assume first two columns are `x` and `y`
   x <- data[[1L]]; y <- data[[2L]]

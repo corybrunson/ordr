@@ -2,8 +2,8 @@
 % Please edit documentation in R/stat-chull.r
 \name{stat_chull}
 \alias{stat_chull}
-\alias{stat_bag}
-\title{Convex hulls and alpha bags}
+\alias{stat_peel}
+\title{Convex hulls and hull peelings}
 \usage{
 stat_chull(
   mapping = NULL,
@@ -15,7 +15,7 @@ stat_chull(
   ...
 )
 
-stat_bag(
+stat_peel(
   mapping = NULL,
   data = NULL,
   geom = "polygon",
@@ -105,8 +105,9 @@ As used in a \strong{\link[ggplot2:ggplot2-package]{ggplot2}} vignette,
 \code{stat_chull()} restricts a dataset with \code{x} and \code{y} variables to the points
 that lie on its convex hull.
 
-Building on this, \code{stat_bag()} returns an alpha bag: a subset of
-sequentially peeled hulls containing specified fractions of the data.
+Building on this, \code{stat_peel()} returns hulls from a \emph{convex hull peeling}:
+a subset of sequentially removed hulls containing specified fractions of
+the data.
 }
 \section{Biplot layers}{
 
@@ -184,14 +185,14 @@ judge_pca <- ordinate(USJudgeRatings, princomp)
 ggbiplot(judge_pca, axis.type = "predictive") +
   geom_cols_axis() +
   geom_rows_point(elements = "score") +
-  stat_rows_bag(
+  stat_rows_peel(
     aes(alpha = after_stat(hull)), color = "black", elements = "score",
     fraction = c(.9, .5, .1)
   )
 ggbiplot(judge_pca, axis.type = "predictive") +
   geom_cols_axis() +
   geom_rows_point(elements = "score") +
-  stat_rows_bag(
+  stat_rows_peel(
     aes(alpha = after_stat(hull)), color = "black", elements = "score",
     fraction = c(.9, .5, .1), cut = "below"
   )
@@ -199,7 +200,7 @@ ggbiplot(judge_pca, axis.type = "predictive") +
 iris_pca <- ordinate(iris, cols = 1:4, model = prcomp)
 ggbiplot(iris_pca) +
   geom_rows_point(aes(color = Species), shape = "circle open") +
-  stat_rows_bag(
+  stat_rows_peel(
     aes(fill = Species, alpha = after_stat(hull)),
     fraction = c(.9, .5, .1)
   )

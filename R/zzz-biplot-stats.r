@@ -26,7 +26,7 @@
 #' @inheritParams stat_center
 #' @inheritParams stat_star
 #' @inheritParams stat_chull
-#' @inheritParams stat_bag
+#' @inheritParams stat_peel
 #' @inheritParams stat_cone
 #' @inheritParams stat_projection
 #' @inheritParams stat_rule
@@ -585,17 +585,17 @@ stat_cols_chull <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
-StatRowsBag <- ggproto(
-  "StatRowsBag", StatBag,
+StatRowsPeel <- ggproto(
+  "StatRowsPeel", StatPeel,
   
   setup_data = setup_rows_data,
   
-  compute_group = ord_formals(StatBag, "compute_group")
+  compute_group = ord_formals(StatPeel, "compute_group")
 )
 
 #' @rdname biplot-stats
 #' @export
-stat_rows_bag <- function(
+stat_rows_peel <- function(
   mapping = NULL,
   data = NULL,
   geom = "polygon",
@@ -609,7 +609,7 @@ stat_rows_bag <- function(
   layer(
     mapping = mapping,
     data = data,
-    stat = StatRowsBag,
+    stat = StatRowsPeel,
     geom = geom,
     position = position,
     show.legend = show.legend,
@@ -627,17 +627,17 @@ stat_rows_bag <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
-StatColsBag <- ggproto(
-  "StatColsBag", StatBag,
+StatColsPeel <- ggproto(
+  "StatColsPeel", StatPeel,
   
   setup_data = setup_cols_data,
   
-  compute_group = ord_formals(StatBag, "compute_group")
+  compute_group = ord_formals(StatPeel, "compute_group")
 )
 
 #' @rdname biplot-stats
 #' @export
-stat_cols_bag <- function(
+stat_cols_peel <- function(
   mapping = NULL,
   data = NULL,
   geom = "polygon",
@@ -651,7 +651,7 @@ stat_cols_bag <- function(
   layer(
     mapping = mapping,
     data = data,
-    stat = StatColsBag,
+    stat = StatColsPeel,
     geom = geom,
     position = position,
     show.legend = show.legend,

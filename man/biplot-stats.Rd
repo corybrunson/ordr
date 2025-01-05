@@ -14,8 +14,8 @@
 \alias{stat_cols_star}
 \alias{stat_rows_chull}
 \alias{stat_cols_chull}
-\alias{stat_rows_bag}
-\alias{stat_cols_bag}
+\alias{stat_rows_peel}
+\alias{stat_cols_peel}
 \alias{stat_rows_cone}
 \alias{stat_cols_cone}
 \alias{stat_rows_projection}
@@ -196,7 +196,7 @@ stat_cols_chull(
   ...
 )
 
-stat_rows_bag(
+stat_rows_peel(
   mapping = NULL,
   data = NULL,
   geom = "polygon",
@@ -208,7 +208,7 @@ stat_rows_bag(
   ...
 )
 
-stat_cols_bag(
+stat_cols_peel(
   mapping = NULL,
   data = NULL,
   geom = "polygon",
