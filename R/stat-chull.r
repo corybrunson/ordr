@@ -13,6 +13,8 @@
 #'   the data.
 #' 
 
+#' @template ref-barnett1976
+
 #' @template biplot-layers
 #' @template biplot-ord-aes
 

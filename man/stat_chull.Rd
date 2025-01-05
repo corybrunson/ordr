@@ -205,6 +205,11 @@ ggbiplot(iris_pca) +
     fraction = c(.9, .5, .1)
   )
 }
+\references{
+Barnett V (1976) "The Ordering of Multivariate Data". \emph{Journal of the Royal
+Statistical Society: Series A (General)}, \strong{139}(3): 318--344.
+\doi{10.2307/2344839}
+}
 \seealso{
 Other stat layers: 
 \code{\link{stat_center}()},
