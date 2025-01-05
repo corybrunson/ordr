@@ -100,7 +100,8 @@ A ggproto \link[ggplot2:layer]{layer}.
 \description{
 Restrict planar data to the boundary points of its convex hull,
 or of nested convex hulls containing specified fractions of points.
-
+}
+\details{
 As used in a \strong{\link[ggplot2:ggplot2-package]{ggplot2}} vignette,
 \code{stat_chull()} restricts a dataset with \code{x} and \code{y} variables to the points
 that lie on its convex hull.
@@ -214,6 +215,7 @@ Statistical Society: Series A (General)}, \strong{139}(3): 318--344.
 Other stat layers: 
 \code{\link{stat_center}()},
 \code{\link{stat_cone}()},
+\code{\link{stat_depth}()},
 \code{\link{stat_projection}()},
 \code{\link{stat_rule}()},
 \code{\link{stat_scale}()},

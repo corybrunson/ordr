@@ -4,7 +4,7 @@
 #'   or of nested convex hulls containing specified fractions of points.
 #'
 
-#' @description As used in a **[ggplot2][ggplot2::ggplot2]** vignette,
+#' @details As used in a **[ggplot2][ggplot2::ggplot2]** vignette,
 #'   `stat_chull()` restricts a dataset with `x` and `y` variables to the points
 #'   that lie on its convex hull.
 #'

@@ -28,6 +28,8 @@
 #' @inheritParams stat_chull
 #' @inheritParams stat_peel
 #' @inheritParams stat_cone
+#' @inheritParams stat_depth
+#' @inheritParams stat_depth_filled
 #' @inheritParams stat_projection
 #' @inheritParams stat_rule
 #' @inheritParams stat_scale
@@ -739,6 +741,190 @@ stat_cols_cone <- function(
     inherit.aes = inherit.aes,
     params = list(
       origin = origin,
+      na.rm = FALSE,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsDepth <- ggproto(
+  "StatRowsDepth", StatDepth,
+  
+  setup_data = setup_rows_data,
+  
+  compute_group = ord_formals(StatDepth, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_rows_depth <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "contour",
+  position = "identity",
+  contour = TRUE,
+  contour_var = "depth",
+  method = "halfspace",
+  n = 100,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatRowsDepth,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      contour = contour,
+      contour_var = contour_var,
+      method = method,
+      n = n,
+      na.rm = FALSE,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsDepth <- ggproto(
+  "StatColsDepth", StatDepth,
+  
+  setup_data = setup_cols_data,
+  
+  compute_group = ord_formals(StatDepth, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_depth <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "contour",
+  position = "identity",
+  contour = TRUE,
+  contour_var = "depth",
+  method = "halfspace",
+  n = 100,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatColsDepth,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      contour = contour,
+      contour_var = contour_var,
+      method = method,
+      n = n,
+      na.rm = FALSE,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsDepthFilled <- ggproto(
+  "StatRowsDepthFilled", StatDepthFilled,
+  
+  setup_data = setup_rows_data,
+  
+  compute_group = ord_formals(StatDepthFilled, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_rows_depth_filled <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "contour_filled",
+  position = "identity",
+  contour = TRUE,
+  contour_var = "depth",
+  method = "halfspace",
+  n = 100,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatRowsDepthFilled,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      contour = contour,
+      contour_var = contour_var,
+      method = method,
+      n = n,
+      na.rm = FALSE,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsDepthFilled <- ggproto(
+  "StatColsDepthFilled", StatDepthFilled,
+  
+  setup_data = setup_cols_data,
+  
+  compute_group = ord_formals(StatDepthFilled, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_depth_filled <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "contour_filled",
+  position = "identity",
+  contour = TRUE,
+  contour_var = "depth",
+  method = "halfspace",
+  n = 100,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatColsDepthFilled,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      contour = contour,
+      contour_var = contour_var,
+      method = method,
+      n = n,
       na.rm = FALSE,
       ...
     )

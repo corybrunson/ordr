@@ -2,9 +2,9 @@
 % Please edit documentation in R/aaa-.r, R/coord-rect.r, R/geom-axis.r,
 %   R/geom-interpolation.r, R/geom-intervals.r, R/geom-isoline.r,
 %   R/geom-origin.r, R/geom-rule.r, R/geom-text-radiate.r, R/geom-vector.r,
-%   R/stat-center.r, R/stat-chull.r, R/stat-cone.r, R/stat-matrix.r,
-%   R/stat-referent.r, R/stat-projection.r, R/stat-rule.r, R/stat-scale.r,
-%   R/stat-spantree.r, R/zzz-biplot-stats.r
+%   R/stat-center.r, R/stat-chull.r, R/stat-cone.r, R/stat-depth.r,
+%   R/stat-matrix.r, R/stat-referent.r, R/stat-projection.r, R/stat-rule.r,
+%   R/stat-scale.r, R/stat-spantree.r, R/zzz-biplot-stats.r
 \docType{data}
 \name{ordr-ggproto}
 \alias{ordr-ggproto}
@@ -25,6 +25,8 @@
 \alias{StatChull}
 \alias{StatPeel}
 \alias{StatCone}
+\alias{StatDepth}
+\alias{StatDepthFilled}
 \alias{StatRows}
 \alias{StatCols}
 \alias{StatReferent}
@@ -48,6 +50,10 @@
 \alias{StatColsPeel}
 \alias{StatRowsCone}
 \alias{StatColsCone}
+\alias{StatRowsDepth}
+\alias{StatColsDepth}
+\alias{StatRowsDepthFilled}
+\alias{StatColsDepthFilled}
 \alias{StatRowsProjection}
 \alias{StatColsProjection}
 \alias{StatRowsRule}

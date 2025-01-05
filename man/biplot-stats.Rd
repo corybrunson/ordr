@@ -18,6 +18,10 @@
 \alias{stat_cols_peel}
 \alias{stat_rows_cone}
 \alias{stat_cols_cone}
+\alias{stat_rows_depth}
+\alias{stat_cols_depth}
+\alias{stat_rows_depth_filled}
+\alias{stat_cols_depth_filled}
 \alias{stat_rows_projection}
 \alias{stat_cols_projection}
 \alias{stat_rows_rule}
@@ -242,6 +246,62 @@ stat_cols_cone(
   ...
 )
 
+stat_rows_depth(
+  mapping = NULL,
+  data = NULL,
+  geom = "contour",
+  position = "identity",
+  contour = TRUE,
+  contour_var = "depth",
+  method = "halfspace",
+  n = 100,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_cols_depth(
+  mapping = NULL,
+  data = NULL,
+  geom = "contour",
+  position = "identity",
+  contour = TRUE,
+  contour_var = "depth",
+  method = "halfspace",
+  n = 100,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_rows_depth_filled(
+  mapping = NULL,
+  data = NULL,
+  geom = "contour_filled",
+  position = "identity",
+  contour = TRUE,
+  contour_var = "depth",
+  method = "halfspace",
+  n = 100,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_cols_depth_filled(
+  mapping = NULL,
+  data = NULL,
+  geom = "contour_filled",
+  position = "identity",
+  contour = TRUE,
+  contour_var = "depth",
+  method = "halfspace",
+  n = 100,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
 stat_rows_projection(
   mapping = NULL,
   data = NULL,
@@ -456,6 +516,9 @@ respectively.}
 \item{origin}{Logical; whether to include the origin with the transformed
 data. Defaults to \code{FALSE}.}
 
+\item{method}{Character; the name of the depth function (passed to
+\code{\link[ddalpha:depth.]{ddalpha::depth.()}}).}
+
 \item{referent}{The reference data set; see Details.}
 
 \item{ref_elements, ref_subset}{Analogues of \code{elements} and \code{subset} applied
@@ -469,9 +532,6 @@ of the rules and the translations of the axes from the projections of
 
 \item{engine}{A single character string specifying the package implementation
 to use; \code{"mlpack"}, \code{"vegan"}, or \code{"ade4"}.}
-
-\item{method}{Passed to \code{\link[stats:dist]{stats::dist()}} if \code{engine} is \code{"vegan"} or \code{"ade4"},
-ignored if \code{"mlpack"}.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.

@@ -49,6 +49,7 @@ Suggests:
     gridExtra,
     MASS,
     mlpack,
+    ddalpha,
     knitr,
     rmarkdown
 License: GPL-3
@@ -106,6 +107,7 @@ Collate:
     'stat-center.r'
     'stat-chull.r'
     'stat-cone.r'
+    'stat-depth.r'
     'stat-matrix.r'
     'stat-referent.r'
     'stat-projection.r'
