@@ -5,5 +5,4 @@ state_center <- cbind(
 )
 ggplot(state_center, aes(x, y, label = state)) +
   coord_equal() +
-  geom_vector() +
-  geom_text_radiate()
+  geom_vector()
