@@ -1,6 +1,5 @@
 #' @title Render interpolation of new rows from columns (or vice-versa)
 #' 
-
 #' @description `geom_interpolation()` renders a geometric construction that
 #'   interpolates a new data matrix (row or column) element from its entries to
 #'   its artificial coordinates.
@@ -11,11 +10,14 @@
 #'   for this element to appear in the biplot? The solution is the vector sum of
 #'   the column (row) units weighted by their values in the new row (column).
 #'   Gower, Gardner--Lubbe, & le Roux (2011) provide two visualizations of this
-#'   calculation: a tail-to-head sequence of weighted units (`type = "sequence"`), and a centroid of
-#'   the weighted units scaled by the number of units (`type = "centroid"`).
-#'   
-#'   Interpretation of the interpolated markers requires that the corresponding
-#'   axes be appropriately scaled; see [ggbiplot()].
+#'   calculation: a tail-to-head sequence of weighted units (`type =
+#'   "sequence"`), and a centroid of the weighted units scaled by the number of
+#'   units (`type = "centroid"`).
+#'
+#'   **WARNING:**
+#'   This layer is appropriate only with axes in standard coordinates (usually
+#'   [`confer_inertia(p = "rows")`][confer_inertia]) and interpolative
+#'   calibration ([`ggbiplot(axis.type = "interpolative")`][ggbiplot]).
 #' 
 
 #' @template ref-gower2011

@@ -85,15 +85,20 @@ Compute projections of vectors from one matrix factor onto those
 of the other.
 }
 \details{
-An ordination model of continuous data can be used to predict values along
-one dimension from those along the other, using the artificial axes as
-intermediaries. The predictions correspond geometrically to projections of
-elements of one matrix factor in principal coordinates onto those of the
+An ordination model of continuous data can be used to predict values
+along one dimension from those along the other, using the artificial axes
+as intermediaries. The predictions correspond geometrically to projections
+of elements of one matrix factor in principal coordinates onto those of the
 other factor in standard coordinates. In the most familiar setting of PCA
 biplots, variable (column) values are predicted from case (row) locations
 along PC1 and PC2. This transformation obtains the axis projections as
 \verb{xend,yend} and pairs them with original points \verb{x,y} to demarcate segments
 visualizing the projections.
+
+\strong{WARNING:}
+This layer is appropriate only with axes in standard coordinates (usually
+\code{\link[=confer_inertia]{confer_inertia(p = "rows")}}) and predictive calibration
+(\code{\link[=ggbiplot]{ggbiplot(axis.type = "predictive")}}).
 }
 \section{Referential stats}{
 
@@ -168,33 +173,38 @@ ggplot(subcars, aes(x = hp00, y = wt)) +
   geom_point(shape = "circle open") +
   geom_vector(data = -grad) +
   stat_projection(referent = grad)
-# basic PCA
+# unscaled PCA
 iris_pca <- ordinate(iris, cols = 1:4, model = prcomp)
 
-# basic biplot
+# biplot canvas
 iris_biplot <- 
-  ggbiplot(iris_pca, aes(color = Species, label = name)) +
+  iris_pca |> 
+  ggbiplot(aes(color = Species, label = name), axis.type = "predictive") +
   geom_rows_point() +
-  geom_cols_axis()
+  geom_cols_axis(aes(center = center))
 
 # project all cases onto all axes
 iris_biplot + stat_rows_projection()
 # project all cases onto select axes
 iris_biplot + stat_rows_projection(ref_subset = c(2, 4))
+
+# print select cases
+top_cases <- c(1, 51, 101)
+iris[top_cases, ]
 # project select cases onto all axes
-iris_biplot + stat_rows_projection(subset = c(1, 51, 101))
+iris_biplot + stat_rows_projection(subset = top_cases)
 # project select cases onto select axes
-iris_biplot + stat_rows_projection(subset = c(1, 51, 101), ref_subset = c(2, 4))
+iris_biplot + stat_rows_projection(subset = top_cases, ref_subset = c(2, 4))
 
 # project select cases onto manually provided axes
 iris_cols <- as.data.frame(get_cols(iris_pca))
-iris_biplot + stat_rows_projection(subset = c(1, 51, 101), referent = iris_cols)
+iris_biplot + stat_rows_projection(subset = top_cases, referent = iris_cols)
 
 # project selected cases onto selected axes in full-dimensional space
 ggbiplot(iris_pca, ord_aes(iris_pca, color = Species, label = name)) +
   geom_rows_point() +
   geom_cols_axis() +
-  stat_rows_projection(subset = c(1, 51, 101), ref_subset = c(2, 4))
+  stat_rows_projection(subset = top_cases, ref_subset = c(2, 4))
 }
 \seealso{
 Other stat layers: 

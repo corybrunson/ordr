@@ -117,9 +117,11 @@ ggbiplot <- function(
   axis.type <- match.arg(axis.type, c("interpolative", "predictive"))
   if (axis.type == "predictive") {
     
-    # -+- only linear ordinations for now -+-
-    linear_classes <- c("eigen", "eigen_ord", "svd_ord", "prcomp", "princomp")
-    if (! ord_class %in% linear_classes) {
+    linear_trans_classes <- 
+      c("eigen", "eigen_ord", "svd_ord", "prcomp", "princomp")
+    # only allow pythagorean metrics and linear pre-procedures
+    # FIXME: Allow pythagorean ordinations with non-linear pre-procedures?
+    if (! ord_class %in% linear_trans_classes) {
       warning("Predictive biplots are only implemented for linear methods ",
               "(ED, SVD, PCA).")
     } else {
