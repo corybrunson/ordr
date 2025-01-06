@@ -20,11 +20,17 @@
 
 #' @section Computed variables: These are calculated during the statistical
 #'   transformation and can be accessed with [delayed
-#'   evaluation][ggplot2::aes_eval].
+#'   evaluation][ggplot2::aes_eval]. `stat_depth()` and `stat_depth_filled()`
+#'   compute different variables depending on whether contouring is turned on or
+#'   off. With contouring off (`contour = FALSE`), both stats behave the same,
+#'   and the following variables are provided:
 #' \describe{
 #'   \item{`depth`}{the depth estimate}
-#'   \item{`ndepth`}{density estimate, scaled to a maximum of 1}
+#'   \item{`ndepth`}{depth estimate, scaled to a maximum of 1}
 #' }
+#'   With contouring on (`contour = TRUE`), either [ggplot2::stat_contour()] or
+#'   [ggplot2::stat_contour_filled()] is run after the depth estimate has been
+#'   obtained, and the computed variables are determined by these stats.
 
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::stat_density_2d
