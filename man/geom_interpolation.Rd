@@ -102,11 +102,13 @@ singular-value-decomposed data matrix, where should we expect the marker
 for this element to appear in the biplot? The solution is the vector sum of
 the column (row) units weighted by their values in the new row (column).
 Gower, Gardner--Lubbe, & le Roux (2011) provide two visualizations of this
-calculation: a tail-to-head sequence of weighted units (\code{type = "sequence"}), and a centroid of
-the weighted units scaled by the number of units (\code{type = "centroid"}).
+calculation: a tail-to-head sequence of weighted units (\code{type = "sequence"}), and a centroid of the weighted units scaled by the number of
+units (\code{type = "centroid"}).
 
-Interpretation of the interpolated markers requires that the corresponding
-axes be appropriately scaled; see \code{\link[=ggbiplot]{ggbiplot()}}.
+\strong{WARNING:}
+This layer is appropriate only with axes in standard coordinates (usually
+\code{\link[=confer_inertia]{confer_inertia(p = "rows")}}) and interpolative
+calibration (\code{\link[=ggbiplot]{ggbiplot(axis.type = "interpolative")}}).
 }
 \section{Biplot layers}{
 
