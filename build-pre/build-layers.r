@@ -233,6 +233,7 @@ orig_layers <- c(
   "ggplot2::stat_density_2d", "ggplot2::stat_density_2d_filled",
   "ggplot2::stat_ellipse",
   "ggplot2::geom_point", "ggplot2::geom_path", "ggplot2::geom_polygon",
+  "ggplot2::geom_contour",
   "ggplot2::geom_density_2d", "ggplot2::geom_density_2d_filled",
   "ggplot2::geom_text", "ggplot2::geom_label",
   "ggrepel::geom_text_repel", "ggrepel::geom_label_repel"

@@ -8,6 +8,8 @@
 \alias{geom_cols_path}
 \alias{geom_rows_polygon}
 \alias{geom_cols_polygon}
+\alias{geom_rows_contour}
+\alias{geom_cols_contour}
 \alias{geom_rows_density_2d}
 \alias{geom_cols_density_2d}
 \alias{geom_rows_density_2d_filled}
@@ -109,6 +111,40 @@ geom_cols_polygon(
   position = "identity",
   rule = "evenodd",
   ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_rows_contour(
+  mapping = NULL,
+  data = NULL,
+  stat = "contour",
+  position = "identity",
+  ...,
+  bins = NULL,
+  binwidth = NULL,
+  breaks = NULL,
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 10,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_contour(
+  mapping = NULL,
+  data = NULL,
+  stat = "contour",
+  position = "identity",
+  ...,
+  bins = NULL,
+  binwidth = NULL,
+  breaks = NULL,
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 10,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -676,6 +712,21 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 being drawn (using the \code{subgroup} aesthetic) this argument defines how the
 hole coordinates are interpreted. See the examples in \code{\link[grid:grid.path]{grid::pathGrob()}} for
 an explanation.}
+
+\item{bins}{Number of contour bins. Overridden by \code{breaks}.}
+
+\item{binwidth}{The width of the contour bins. Overridden by \code{bins}.}
+
+\item{breaks}{One of:
+\itemize{
+\item Numeric vector to set the contour breaks
+\item A function that takes the range of the data and binwidth as input
+and returns breaks as output. A function can be created from a formula
+(e.g. ~ fullseq(.x, .y)).
+}
+
+Overrides \code{binwidth} and \code{bins}. By default, this is a vector of length
+ten with \code{\link[=pretty]{pretty()}} breaks.}
 
 \item{contour_var}{Character string identifying the variable to contour
 by. Can be one of \code{"density"}, \code{"ndensity"}, or \code{"count"}. See the section
