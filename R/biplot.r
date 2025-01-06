@@ -128,6 +128,7 @@ ggbiplot <- function(
       
       # rescale standard coordinates for predictive biplot
       xy_map <- stringr::str_remove(as.character(mapping[c("x", "y")]), "^~")
+      ord_map <- get_coord(ordination)
       if (! all(c("x", "y") %in% names(mapping)) &&
           any(stringr::str_detect(names(mapping), "..coord"))) {
         warning("For predictive biplots, ",
@@ -140,16 +141,17 @@ ggbiplot <- function(
                 "inertia must be balanced and conferred on one factor.")
       } else {
         # remove coordinates other than those used in the biplot
-        ordination[setdiff(get_coord(ordination), xy_map)] <- NULL
+        # ordination[setdiff(get_coord(ordination), xy_map)] <- NULL
         # rescale standard coordinates
         std_fac <- c("rows", "cols")[! as.logical(conference)]
         std_ss <- apply(
-          ordination[ordination$.matrix == std_fac, xy_map],
+          ordination[ordination$.matrix == std_fac, ord_map],
           1L,
           function(x) sum(x^2)
         )
-        ordination[ordination$.matrix == std_fac, xy_map] <-
-          ordination[ordination$.matrix == std_fac, xy_map] / std_ss
+        print(std_ss)
+        ordination[ordination$.matrix == std_fac, ord_map] <-
+          ordination[ordination$.matrix == std_fac, ord_map] / std_ss
       }
       
     }

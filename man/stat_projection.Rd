@@ -183,28 +183,35 @@ iris_biplot <-
   geom_rows_point() +
   geom_cols_axis(aes(center = center))
 
-# project all cases onto all axes
-iris_biplot + stat_rows_projection()
-# project all cases onto select axes
-iris_biplot + stat_rows_projection(ref_subset = c(2, 4))
-
 # print select cases
 top_cases <- c(1, 51, 101)
 iris[top_cases, ]
+# subset variables
+length_vars <- c(1, 3)
+iris[, length_vars] |> 
+  aggregate(by = iris[, "Species", drop = FALSE], FUN = mean)
+
+# project all cases onto all axes
+iris_biplot + stat_rows_projection()
+# project all cases onto select axes
+iris_biplot + stat_rows_projection(ref_subset = length_vars)
+
 # project select cases onto all axes
 iris_biplot + stat_rows_projection(subset = top_cases)
 # project select cases onto select axes
-iris_biplot + stat_rows_projection(subset = top_cases, ref_subset = c(2, 4))
+iris_biplot + stat_rows_projection(subset = top_cases, ref_subset = length_vars)
 
 # project select cases onto manually provided axes
 iris_cols <- as.data.frame(get_cols(iris_pca))
 iris_biplot + stat_rows_projection(subset = top_cases, referent = iris_cols)
 
 # project selected cases onto selected axes in full-dimensional space
-ggbiplot(iris_pca, ord_aes(iris_pca, color = Species, label = name)) +
+iris_pca |> 
+  ggbiplot(ord_aes(iris_pca, color = Species, label = name),
+           axis.type = "predictive") +
   geom_rows_point() +
-  geom_cols_axis() +
-  stat_rows_projection(subset = top_cases, ref_subset = c(2, 4))
+  geom_cols_axis(aes(center = center)) +
+  stat_rows_projection(subset = top_cases, ref_subset = length_vars)
 }
 \seealso{
 Other stat layers: 
