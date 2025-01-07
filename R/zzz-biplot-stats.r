@@ -23,6 +23,7 @@
 #' @inheritParams ggplot2::stat_density_2d
 #' @inheritParams ggplot2::stat_density_2d_filled
 #' @inheritParams ggplot2::stat_ellipse
+#' @inheritParams stat_bag
 #' @inheritParams stat_center
 #' @inheritParams stat_star
 #' @inheritParams stat_chull
@@ -327,6 +328,102 @@ stat_cols_ellipse <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
+StatRowsBag <- ggproto(
+  "StatRowsBag", StatBag,
+  
+  setup_data = setup_rows_data,
+  
+  compute_group = ord_formals(StatBag, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_rows_bag <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "contour",
+  position = "identity",
+  bag_var = "depth",
+  fraction = 0.5,
+  median = TRUE,
+  fence = TRUE,
+  outliers = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatRowsBag,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      bag_var = bag_var,
+      fraction = fraction,
+      median = median,
+      fence = fence,
+      outliers = outliers,
+      na.rm = FALSE,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsBag <- ggproto(
+  "StatColsBag", StatBag,
+  
+  setup_data = setup_cols_data,
+  
+  compute_group = ord_formals(StatBag, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_bag <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "contour",
+  position = "identity",
+  bag_var = "depth",
+  fraction = 0.5,
+  median = TRUE,
+  fence = TRUE,
+  outliers = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = StatColsBag,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      bag_var = bag_var,
+      fraction = fraction,
+      median = median,
+      fence = fence,
+      outliers = outliers,
+      na.rm = FALSE,
+      ...
+    )
+  )
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
 StatRowsCenter <- ggproto(
   "StatRowsCenter", StatCenter,
   
@@ -602,7 +699,7 @@ stat_rows_peel <- function(
   data = NULL,
   geom = "polygon",
   position = "identity",
-  fraction = c(0.5),
+  breaks = c(0.5),
   cut = c("above", "below"),
   show.legend = NA,
   inherit.aes = TRUE,
@@ -617,7 +714,7 @@ stat_rows_peel <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      fraction = fraction,
+      breaks = breaks,
       cut = cut,
       na.rm = FALSE,
       ...
@@ -644,7 +741,7 @@ stat_cols_peel <- function(
   data = NULL,
   geom = "polygon",
   position = "identity",
-  fraction = c(0.5),
+  breaks = c(0.5),
   cut = c("above", "below"),
   show.legend = NA,
   inherit.aes = TRUE,
@@ -659,7 +756,7 @@ stat_cols_peel <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      fraction = fraction,
+      breaks = breaks,
       cut = cut,
       na.rm = FALSE,
       ...
@@ -768,7 +865,7 @@ stat_rows_depth <- function(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  method = "halfspace",
+  notion = "halfspace",
   n = 100,
   show.legend = NA,
   inherit.aes = TRUE,
@@ -785,7 +882,7 @@ stat_rows_depth <- function(
     params = list(
       contour = contour,
       contour_var = contour_var,
-      method = method,
+      notion = notion,
       n = n,
       na.rm = FALSE,
       ...
@@ -814,7 +911,7 @@ stat_cols_depth <- function(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  method = "halfspace",
+  notion = "halfspace",
   n = 100,
   show.legend = NA,
   inherit.aes = TRUE,
@@ -831,7 +928,7 @@ stat_cols_depth <- function(
     params = list(
       contour = contour,
       contour_var = contour_var,
-      method = method,
+      notion = notion,
       n = n,
       na.rm = FALSE,
       ...
@@ -860,7 +957,7 @@ stat_rows_depth_filled <- function(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  method = "halfspace",
+  notion = "halfspace",
   n = 100,
   show.legend = NA,
   inherit.aes = TRUE,
@@ -877,7 +974,7 @@ stat_rows_depth_filled <- function(
     params = list(
       contour = contour,
       contour_var = contour_var,
-      method = method,
+      notion = notion,
       n = n,
       na.rm = FALSE,
       ...
@@ -906,7 +1003,7 @@ stat_cols_depth_filled <- function(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  method = "halfspace",
+  notion = "halfspace",
   n = 100,
   show.legend = NA,
   inherit.aes = TRUE,
@@ -923,7 +1020,7 @@ stat_cols_depth_filled <- function(
     params = list(
       contour = contour,
       contour_var = contour_var,
-      method = method,
+      notion = notion,
       n = n,
       na.rm = FALSE,
       ...

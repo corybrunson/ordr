@@ -211,6 +211,7 @@ and Data Analysis: Recent Advances and Applications}: 169--176.
 }
 \seealso{
 Other geom layers: 
+\code{\link{geom_bag}()},
 \code{\link{geom_interpolation}()},
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},

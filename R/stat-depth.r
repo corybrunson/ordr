@@ -3,10 +3,9 @@
 #' @description Estimate data depth using [ddalpha::depth.()].
 #' 
 
-#' @details Depth estimates are the basis for _bagplots_, which comprise a
-#'   single, often filled, contour overlaid upon the [convex hull][stat_chull()]
-#'   and a scatterplot of outliers (Reusseeuw &al, 1999). Outliers remain to be
-#'   incorporated as in [ggplot2::stat_boxplot()].
+#' @details Depth is an extension of the univariate notion of rank to bivariate
+#'   (and sometimes multivariate) data (Rousseeuw &al, 1999). It comes in
+#'   several flavors and is the basis for [bagplots][stat_bag()].
 #'
 #'   `stat_depth()` is adapted from [ggplot2::stat_density_2d()] and returns
 #'   depth values over a grid in the same format, so it is neatly paired with
@@ -39,7 +38,7 @@
 #'   Can be one of `"depth"` or `"ndepth"`. See the section on computed
 #'   variables for details.
 #' @inheritDotParams ggplot2::geom_contour bins binwidth breaks
-#' @param method Character; the name of the depth function (passed to
+#' @param notion Character; the name of the depth function (passed to
 #'   [ddalpha::depth.()]).
 #' @template param-stat
 #' @template return-layer
@@ -48,7 +47,7 @@
 stat_depth <- function(
     mapping = NULL, data = NULL, geom = "contour", position = "identity",
     contour = TRUE, contour_var = "depth",
-    method = "halfspace",
+    notion = "halfspace",
     n = 100,
     show.legend = NA, 
     inherit.aes = TRUE,
@@ -64,7 +63,7 @@ stat_depth <- function(
     inherit.aes = inherit.aes,
     params = list(
       contour = contour, contour_var = contour_var,
-      method = method,
+      notion = notion,
       n = n,
       na.rm = FALSE,
       ...
@@ -77,7 +76,7 @@ stat_depth <- function(
 stat_depth_filled <- function(
     mapping = NULL, data = NULL, geom = "contour_filled", position = "identity",
     contour = TRUE, contour_var = "depth",
-    method = "halfspace",
+    notion = "halfspace",
     n = 100,
     show.legend = NA, 
     inherit.aes = TRUE,
@@ -93,7 +92,7 @@ stat_depth_filled <- function(
     inherit.aes = inherit.aes,
     params = list(
       contour = contour, contour_var = contour_var,
-      method = method,
+      notion = notion,
       n = n,
       na.rm = FALSE,
       ...
@@ -148,12 +147,12 @@ StatDepth <- ggproto(
   
   compute_group = function(
     data, scales,
-    method = "halfspace",
+    notion = "halfspace",
     n = 100, ...
   ) {
     ord_cols <- get_ord_aes(data)
-    method <- match.arg(
-      method,
+    notion <- match.arg(
+      notion,
       # `eval(formals(ddalpha::depth.)$notion)`
       c("zonoid", "halfspace", "Mahalanobis", "projection", "spatial", 
         "spatialLocal", "simplicial", "simplicialVolume", "ddplot", 
@@ -170,7 +169,7 @@ StatDepth <- ggproto(
     depth <- ddalpha::depth.(
       xy_grid,
       data[, ord_cols[seq(2L)], drop = FALSE],
-      notion = method
+      notion = notion
     )
     
     # prepare final output data frame

@@ -12,7 +12,7 @@ stat_depth(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  method = "halfspace",
+  notion = "halfspace",
   n = 100,
   show.legend = NA,
   inherit.aes = TRUE,
@@ -26,7 +26,7 @@ stat_depth_filled(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  method = "halfspace",
+  notion = "halfspace",
   n = 100,
   show.legend = NA,
   inherit.aes = TRUE,
@@ -86,7 +86,7 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 Can be one of \code{"depth"} or \code{"ndepth"}. See the section on computed
 variables for details.}
 
-\item{method}{Character; the name of the depth function (passed to
+\item{notion}{Character; the name of the depth function (passed to
 \code{\link[ddalpha:depth.]{ddalpha::depth.()}}).}
 
 \item{n}{Number of grid points in each direction.}
@@ -126,10 +126,9 @@ A ggproto \link[ggplot2:layer]{layer}.
 Estimate data depth using \code{\link[ddalpha:depth.]{ddalpha::depth.()}}.
 }
 \details{
-Depth estimates are the basis for \emph{bagplots}, which comprise a
-single, often filled, contour overlaid upon the \link[=stat_chull]{convex hull}
-and a scatterplot of outliers (Reusseeuw &al, 1999). Outliers remain to be
-incorporated as in \code{\link[ggplot2:geom_boxplot]{ggplot2::stat_boxplot()}}.
+Depth is an extension of the univariate notion of rank to bivariate
+(and sometimes multivariate) data (Rousseeuw &al, 1999). It comes in
+several flavors and is the basis for \link[=stat_bag]{bagplots}.
 
 \code{stat_depth()} is adapted from \code{\link[ggplot2:geom_density_2d]{ggplot2::stat_density_2d()}} and returns
 depth values over a grid in the same format, so it is neatly paired with

@@ -33,6 +33,7 @@
 #' @inheritParams ggrepel::geom_text_repel
 #' @inheritParams ggrepel::geom_label_repel
 #' @inheritParams geom_axis
+#' @inheritParams geom_bag
 #' @inheritParams geom_interpolation
 #' @inheritParams geom_lineranges
 #' @inheritParams geom_pointranges
@@ -978,6 +979,72 @@ geom_cols_axis <- function(
       label_dodge = label_dodge,
       parse = parse,
       check_overlap = check_overlap,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_rows_bag <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "bag",
+  position = "identity",
+  median = TRUE,
+  fence = TRUE,
+  outliers = TRUE,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = rows_stat(stat),
+    geom = GeomBag,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      median = median,
+      fence = fence,
+      outliers = outliers,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_cols_bag <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "bag",
+  position = "identity",
+  median = TRUE,
+  fence = TRUE,
+  outliers = TRUE,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  layer(
+    mapping = mapping,
+    data = data,
+    stat = cols_stat(stat),
+    geom = GeomBag,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      median = median,
+      fence = fence,
+      outliers = outliers,
       na.rm = na.rm,
       ...
     )

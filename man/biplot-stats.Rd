@@ -8,6 +8,8 @@
 \alias{stat_cols_density_2d_filled}
 \alias{stat_rows_ellipse}
 \alias{stat_cols_ellipse}
+\alias{stat_rows_bag}
+\alias{stat_cols_bag}
 \alias{stat_rows_center}
 \alias{stat_cols_center}
 \alias{stat_rows_star}
@@ -124,6 +126,36 @@ stat_cols_ellipse(
   inherit.aes = TRUE
 )
 
+stat_rows_bag(
+  mapping = NULL,
+  data = NULL,
+  geom = "contour",
+  position = "identity",
+  bag_var = "depth",
+  fraction = 0.5,
+  median = TRUE,
+  fence = TRUE,
+  outliers = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_cols_bag(
+  mapping = NULL,
+  data = NULL,
+  geom = "contour",
+  position = "identity",
+  bag_var = "depth",
+  fraction = 0.5,
+  median = TRUE,
+  fence = TRUE,
+  outliers = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
 stat_rows_center(
   mapping = NULL,
   data = NULL,
@@ -205,7 +237,7 @@ stat_rows_peel(
   data = NULL,
   geom = "polygon",
   position = "identity",
-  fraction = c(0.5),
+  breaks = c(0.5),
   cut = c("above", "below"),
   show.legend = NA,
   inherit.aes = TRUE,
@@ -217,7 +249,7 @@ stat_cols_peel(
   data = NULL,
   geom = "polygon",
   position = "identity",
-  fraction = c(0.5),
+  breaks = c(0.5),
   cut = c("above", "below"),
   show.legend = NA,
   inherit.aes = TRUE,
@@ -253,7 +285,7 @@ stat_rows_depth(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  method = "halfspace",
+  notion = "halfspace",
   n = 100,
   show.legend = NA,
   inherit.aes = TRUE,
@@ -267,7 +299,7 @@ stat_cols_depth(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  method = "halfspace",
+  notion = "halfspace",
   n = 100,
   show.legend = NA,
   inherit.aes = TRUE,
@@ -281,7 +313,7 @@ stat_rows_depth_filled(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  method = "halfspace",
+  notion = "halfspace",
   n = 100,
   show.legend = NA,
   inherit.aes = TRUE,
@@ -295,7 +327,7 @@ stat_cols_depth_filled(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  method = "halfspace",
+  notion = "halfspace",
   n = 100,
   show.legend = NA,
   inherit.aes = TRUE,
@@ -500,23 +532,31 @@ or, if \code{type="euclid"}, the radius of the circle to be drawn.}
 
 \item{segments}{The number of segments to be used in drawing the ellipse.}
 
+\item{bag_var}{The stat to use to construct the bag; one of \code{"depth"},
+\code{"density"}, and \code{"chull"}.}
+
+\item{fraction}{Fraction of the data to include in the bag.}
+
+\item{median, fence, outliers}{Logical indicators whether to include median,
+fence, and outliers in the composite output.}
+
 \item{fun.data, fun.center, fun.min, fun.max}{Functions treated as in
 \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and \code{fun.max}
 behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
 
 \item{fun.args}{Arguments passed to the \verb{fun.*}.}
 
-\item{fraction}{A numeric vector of fractions (between \code{0} and \code{1}) of the
+\item{breaks}{A numeric vector of fractions (between \code{0} and \code{1}) of the
 data to contain in each hull.}
 
 \item{cut}{Character; one of \code{"above"} and \code{"below"}, indicating whether each
-hull should contain at least or at most \code{fraction} of the data,
+hull should contain at least or at most \code{breaks} of the data,
 respectively.}
 
 \item{origin}{Logical; whether to include the origin with the transformed
 data. Defaults to \code{FALSE}.}
 
-\item{method}{Character; the name of the depth function (passed to
+\item{notion}{Character; the name of the depth function (passed to
 \code{\link[ddalpha:depth.]{ddalpha::depth.()}}).}
 
 \item{referent}{The reference data set; see Details.}
@@ -532,6 +572,9 @@ of the rules and the translations of the axes from the projections of
 
 \item{engine}{A single character string specifying the package implementation
 to use; \code{"mlpack"}, \code{"vegan"}, or \code{"ade4"}.}
+
+\item{method}{Passed to \code{\link[stats:dist]{stats::dist()}} if \code{engine} is \code{"vegan"} or \code{"ade4"},
+ignored if \code{"mlpack"}.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.

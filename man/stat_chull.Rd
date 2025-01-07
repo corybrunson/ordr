@@ -20,7 +20,7 @@ stat_peel(
   data = NULL,
   geom = "polygon",
   position = "identity",
-  fraction = c(0.5),
+  breaks = c(0.5),
   cut = c("above", "below"),
   show.legend = NA,
   inherit.aes = TRUE,
@@ -87,11 +87,11 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
-\item{fraction}{A numeric vector of fractions (between \code{0} and \code{1}) of the
+\item{breaks}{A numeric vector of fractions (between \code{0} and \code{1}) of the
 data to contain in each hull.}
 
 \item{cut}{Character; one of \code{"above"} and \code{"below"}, indicating whether each
-hull should contain at least or at most \code{fraction} of the data,
+hull should contain at least or at most \code{breaks} of the data,
 respectively.}
 }
 \value{
@@ -147,8 +147,8 @@ ordination aesthetics but will accept \code{ord_aes()} without warning.
  These are calculated during the statistical
 transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluation}.
 \describe{
-\item{\code{hull}}{the position of \code{fraction} that defines each hull}
-\item{\code{frac}}{the value of \code{fraction} that defines each hull}
+\item{\code{hull}}{the position of \code{breaks} that defines each hull}
+\item{\code{frac}}{the value of \code{breaks} that defines each hull}
 \item{\code{prop}}{the actual proportion of data within each hull}
 }
 }
@@ -188,14 +188,14 @@ ggbiplot(judge_pca, axis.type = "predictive") +
   geom_rows_point(elements = "score") +
   stat_rows_peel(
     aes(alpha = after_stat(hull)), color = "black", elements = "score",
-    fraction = c(.9, .5, .1)
+    breaks = c(.9, .5, .1)
   )
 ggbiplot(judge_pca, axis.type = "predictive") +
   geom_cols_axis() +
   geom_rows_point(elements = "score") +
   stat_rows_peel(
     aes(alpha = after_stat(hull)), color = "black", elements = "score",
-    fraction = c(.9, .5, .1), cut = "below"
+    breaks = c(.9, .5, .1), cut = "below"
   )
 
 iris_pca <- ordinate(iris, cols = 1:4, model = prcomp)
@@ -203,7 +203,7 @@ ggbiplot(iris_pca) +
   geom_rows_point(aes(color = Species), shape = "circle open") +
   stat_rows_peel(
     aes(fill = Species, alpha = after_stat(hull)),
-    fraction = c(.9, .5, .1)
+    breaks = c(.9, .5, .1)
   )
 }
 \references{
