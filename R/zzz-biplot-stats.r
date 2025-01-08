@@ -23,7 +23,7 @@
 #' @inheritParams ggplot2::stat_density_2d
 #' @inheritParams ggplot2::stat_density_2d_filled
 #' @inheritParams ggplot2::stat_ellipse
-#' @inheritParams stat_bag
+#' @inheritParams stat_bagplot
 #' @inheritParams stat_center
 #' @inheritParams stat_star
 #' @inheritParams stat_chull
@@ -328,17 +328,17 @@ stat_cols_ellipse <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
-StatRowsBag <- ggproto(
-  "StatRowsBag", StatBag,
+StatRowsBagplot <- ggproto(
+  "StatRowsBagplot", StatBagplot,
   
   setup_data = setup_rows_data,
   
-  compute_group = ord_formals(StatBag, "compute_group")
+  compute_group = ord_formals(StatBagplot, "compute_group")
 )
 
 #' @rdname biplot-stats
 #' @export
-stat_rows_bag <- function(
+stat_rows_bagplot <- function(
   mapping = NULL,
   data = NULL,
   geom = "contour",
@@ -355,7 +355,7 @@ stat_rows_bag <- function(
   layer(
     mapping = mapping,
     data = data,
-    stat = StatRowsBag,
+    stat = StatRowsBagplot,
     geom = geom,
     position = position,
     show.legend = show.legend,
@@ -376,17 +376,17 @@ stat_rows_bag <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
-StatColsBag <- ggproto(
-  "StatColsBag", StatBag,
+StatColsBagplot <- ggproto(
+  "StatColsBagplot", StatBagplot,
   
   setup_data = setup_cols_data,
   
-  compute_group = ord_formals(StatBag, "compute_group")
+  compute_group = ord_formals(StatBagplot, "compute_group")
 )
 
 #' @rdname biplot-stats
 #' @export
-stat_cols_bag <- function(
+stat_cols_bagplot <- function(
   mapping = NULL,
   data = NULL,
   geom = "contour",
@@ -403,7 +403,7 @@ stat_cols_bag <- function(
   layer(
     mapping = mapping,
     data = data,
-    stat = StatColsBag,
+    stat = StatColsBagplot,
     geom = geom,
     position = position,
     show.legend = show.legend,

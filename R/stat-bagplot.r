@@ -23,10 +23,10 @@
 #' @inheritDotParams stat_depth notion
 #' @inheritDotParams ggplot2::stat_density_2d h adjust n
 #' @param fraction Fraction of the data to include in the bag.
-#' @example inst/examples/ex-stat-bag-judges.r
-#' @example inst/examples/ex-stat-bag-iris.r
+#' @example inst/examples/ex-stat-bagplot-judges.r
+#' @example inst/examples/ex-stat-bagplot-iris.r
 #' @export
-stat_bag <- function(
+stat_bagplot <- function(
     mapping = NULL, data = NULL, geom = "contour", position = "identity",
     bag_var = "depth", fraction = 0.5,
     median = TRUE, fence = TRUE, outliers = TRUE,
@@ -37,7 +37,7 @@ stat_bag <- function(
   layer(
     data = data,
     mapping = mapping,
-    stat = StatBag,
+    stat = StatBagplot,
     geom = geom, 
     position = position,
     show.legend = show.legend,
@@ -55,8 +55,8 @@ stat_bag <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
-StatBag <- ggproto(
-  "StatBag", StatDepth,
+StatBagplot <- ggproto(
+  "StatBagplot", StatDepth,
   
   extra_params = c("na.rm", "notion", "h", "adjust", "n"),
   
@@ -79,8 +79,8 @@ StatBag <- ggproto(
     # TODO: Call `Stat*` to estimate z across a grid (unless chull).
     # save(data, scales, bag_var, fraction, median, fence, outliers,
     #      notion, h, adjust, n,
-    #      file = "stat-bag-compute-group.rda")
-    # load(file = "stat-bag-compute-group.rda")
+    #      file = "stat-bagplot-compute-group.rda")
+    # load(file = "stat-bagplot-compute-group.rda")
     
     # preserve throughout
     data_PANEL <- unique(data$PANEL)

@@ -33,7 +33,7 @@
 #' @inheritParams ggrepel::geom_text_repel
 #' @inheritParams ggrepel::geom_label_repel
 #' @inheritParams geom_axis
-#' @inheritParams geom_bag
+#' @inheritParams geom_bagplot
 #' @inheritParams geom_interpolation
 #' @inheritParams geom_lineranges
 #' @inheritParams geom_pointranges
@@ -987,7 +987,7 @@ geom_cols_axis <- function(
 
 #' @rdname biplot-geoms
 #' @export
-geom_rows_bag <- function(
+geom_rows_bagplot <- function(
   mapping = NULL,
   data = NULL,
   stat = "bag",
@@ -1004,7 +1004,7 @@ geom_rows_bag <- function(
     mapping = mapping,
     data = data,
     stat = rows_stat(stat),
-    geom = GeomBag,
+    geom = GeomBagplot,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
@@ -1020,7 +1020,7 @@ geom_rows_bag <- function(
 
 #' @rdname biplot-geoms
 #' @export
-geom_cols_bag <- function(
+geom_cols_bagplot <- function(
   mapping = NULL,
   data = NULL,
   stat = "bag",
@@ -1037,7 +1037,7 @@ geom_cols_bag <- function(
     mapping = mapping,
     data = data,
     stat = cols_stat(stat),
-    geom = GeomBag,
+    geom = GeomBagplot,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,

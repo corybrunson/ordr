@@ -8,8 +8,8 @@
 \alias{stat_cols_density_2d_filled}
 \alias{stat_rows_ellipse}
 \alias{stat_cols_ellipse}
-\alias{stat_rows_bag}
-\alias{stat_cols_bag}
+\alias{stat_rows_bagplot}
+\alias{stat_cols_bagplot}
 \alias{stat_rows_center}
 \alias{stat_cols_center}
 \alias{stat_rows_star}
@@ -126,7 +126,7 @@ stat_cols_ellipse(
   inherit.aes = TRUE
 )
 
-stat_rows_bag(
+stat_rows_bagplot(
   mapping = NULL,
   data = NULL,
   geom = "contour",
@@ -141,7 +141,7 @@ stat_rows_bag(
   ...
 )
 
-stat_cols_bag(
+stat_cols_bagplot(
   mapping = NULL,
   data = NULL,
   geom = "contour",

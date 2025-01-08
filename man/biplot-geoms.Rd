@@ -24,8 +24,8 @@
 \alias{geom_cols_label_repel}
 \alias{geom_rows_axis}
 \alias{geom_cols_axis}
-\alias{geom_rows_bag}
-\alias{geom_cols_bag}
+\alias{geom_rows_bagplot}
+\alias{geom_cols_bagplot}
 \alias{geom_rows_interpolation}
 \alias{geom_cols_interpolation}
 \alias{geom_rows_lineranges}
@@ -434,7 +434,7 @@ geom_cols_axis(
   inherit.aes = TRUE
 )
 
-geom_rows_bag(
+geom_rows_bagplot(
   mapping = NULL,
   data = NULL,
   stat = "bag",
@@ -448,7 +448,7 @@ geom_rows_bag(
   inherit.aes = TRUE
 )
 
-geom_cols_bag(
+geom_cols_bagplot(
   mapping = NULL,
   data = NULL,
   stat = "bag",

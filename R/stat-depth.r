@@ -5,7 +5,7 @@
 
 #' @details Depth is an extension of the univariate notion of rank to bivariate
 #'   (and sometimes multivariate) data (Rousseeuw &al, 1999). It comes in
-#'   several flavors and is the basis for [bagplots][stat_bag()].
+#'   several flavors and is the basis for [bagplots][stat_bagplot()].
 #'
 #'   `stat_depth()` is adapted from [ggplot2::stat_density_2d()] and returns
 #'   depth values over a grid in the same format, so it is neatly paired with

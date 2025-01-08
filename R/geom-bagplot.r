@@ -3,15 +3,15 @@
 #' @description Render bagplots from tagged data comprising medians, hulls,
 #'   contours, and outlier specifications.
 
-#' @details `geom_bag()` is designed to pair with [stat_bag()].
+#' @details `geom_bagplot()` is designed to pair with [stat_bagplot()].
 #' 
 
 #' @template biplot-layers
 
 #' @section Aesthetics:
 
-#' `geom_bag()` understands the following aesthetics (required aesthetics are
-#' in bold):
+#' `geom_bagplot()` understands the following aesthetics (required aesthetics
+#' are in bold):
 
 #' - **`x`**, **`y`**
 #' - **`component`**
@@ -32,12 +32,12 @@
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
-#' @inheritParams stat_bag
+#' @inheritParams stat_bagplot
 #' @template return-layer
 #' @family geom layers
-#' @example inst/examples/ex-geom-bag.r
+#' @example inst/examples/ex-geom-bagplot.r
 #' @export
-geom_bag <- function(
+geom_bagplot <- function(
     mapping = NULL, data = NULL, stat = "bag", position = "identity",
     median = TRUE, fence = TRUE, outliers = TRUE,
     ...,
@@ -48,7 +48,7 @@ geom_bag <- function(
     data = data,
     mapping = mapping,
     stat = stat,
-    geom = GeomBag,
+    geom = GeomBagplot,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
@@ -66,8 +66,8 @@ geom_bag <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
-GeomBag <- ggproto(
-  "GeomBag", GeomPolygon,
+GeomBagplot <- ggproto(
+  "GeomBagplot", GeomPolygon,
   
   required_aes = c("x", "y", "component"),
   
@@ -92,8 +92,8 @@ GeomBag <- ggproto(
     na.rm = FALSE
   ) {
     # save(data, panel_params, coord, median, fence, outliers, na.rm,
-    #      file = "geom-bag-draw-panel.rda")
-    # load("geom-bag-draw-panel.rda")
+    #      file = "geom-bagplot-draw-panel.rda")
+    # load("geom-bagplot-draw-panel.rda")
     
     # initialize grob list; append in z-stack order
     grobs <- list()
@@ -181,7 +181,7 @@ GeomBag <- ggproto(
     }
     
     grob <- do.call(grid::grobTree, grobs)
-    grob$name <- grid::grobName(grob, "geom_bag")
+    grob$name <- grid::grobName(grob, "geom_bagplot")
     grob
   },
   

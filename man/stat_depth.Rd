@@ -128,7 +128,7 @@ Estimate data depth using \code{\link[ddalpha:depth.]{ddalpha::depth.()}}.
 \details{
 Depth is an extension of the univariate notion of rank to bivariate
 (and sometimes multivariate) data (Rousseeuw &al, 1999). It comes in
-several flavors and is the basis for \link[=stat_bag]{bagplots}.
+several flavors and is the basis for \link[=stat_bagplot]{bagplots}.
 
 \code{stat_depth()} is adapted from \code{\link[ggplot2:geom_density_2d]{ggplot2::stat_density_2d()}} and returns
 depth values over a grid in the same format, so it is neatly paired with
