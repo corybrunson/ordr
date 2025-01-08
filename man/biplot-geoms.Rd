@@ -437,7 +437,7 @@ geom_cols_axis(
 geom_rows_bagplot(
   mapping = NULL,
   data = NULL,
-  stat = "bag",
+  stat = "bagplot",
   position = "identity",
   median = TRUE,
   fence = TRUE,
@@ -451,7 +451,7 @@ geom_rows_bagplot(
 geom_cols_bagplot(
   mapping = NULL,
   data = NULL,
-  stat = "bag",
+  stat = "bagplot",
   position = "identity",
   median = TRUE,
   fence = TRUE,

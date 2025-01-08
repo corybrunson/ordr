@@ -129,7 +129,7 @@ stat_cols_ellipse(
 stat_rows_bagplot(
   mapping = NULL,
   data = NULL,
-  geom = "bag",
+  geom = "bagplot",
   position = "identity",
   bag_var = "depth",
   fraction = 0.5,
@@ -144,7 +144,7 @@ stat_rows_bagplot(
 stat_cols_bagplot(
   mapping = NULL,
   data = NULL,
-  geom = "bag",
+  geom = "bagplot",
   position = "identity",
   bag_var = "depth",
   fraction = 0.5,

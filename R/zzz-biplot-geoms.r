@@ -990,7 +990,7 @@ geom_cols_axis <- function(
 geom_rows_bagplot <- function(
   mapping = NULL,
   data = NULL,
-  stat = "bag",
+  stat = "bagplot",
   position = "identity",
   median = TRUE,
   fence = TRUE,
@@ -1023,7 +1023,7 @@ geom_rows_bagplot <- function(
 geom_cols_bagplot <- function(
   mapping = NULL,
   data = NULL,
-  stat = "bag",
+  stat = "bagplot",
   position = "identity",
   median = TRUE,
   fence = TRUE,
