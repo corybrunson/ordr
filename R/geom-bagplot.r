@@ -39,7 +39,6 @@
 #' @export
 geom_bagplot <- function(
     mapping = NULL, data = NULL, stat = "bagplot", position = "identity",
-    median = TRUE, fence = TRUE, outliers = TRUE,
     ...,
     na.rm = FALSE,
     show.legend = NA, inherit.aes = TRUE
@@ -54,9 +53,6 @@ geom_bagplot <- function(
     inherit.aes = inherit.aes,
     params = list(
       na.rm = na.rm,
-      median = TRUE,
-      fence = TRUE,
-      outliers = TRUE,
       ...
     )
   )
@@ -83,15 +79,14 @@ GeomBagplot <- ggproto(
     fence_colour = NA, fence_fill = "grey85", fence_alpha = 0.75,
     # outliers
     outlier_shape = 19L, outlier_stroke = 0.5, outlier_size = 1.5,
-    outlier_colour = NA, outlier_fill = NA, outlier_alpha = NA
+    outlier_colour = "grey15", outlier_fill = NA, outlier_alpha = NA
   ),
   
   draw_panel = function(
     data, panel_params, coord,
-    median = TRUE, fence = TRUE, outliers = TRUE,
     na.rm = FALSE
   ) {
-    # save(data, panel_params, coord, median, fence, outliers, na.rm,
+    # save(data, panel_params, coord, na.rm,
     #      file = "geom-bagplot-draw-panel.rda")
     # load("geom-bagplot-draw-panel.rda")
     
@@ -99,27 +94,23 @@ GeomBagplot <- ggproto(
     grobs <- list()
     
     # fence data
-    if (fence) {
-      if (nrow(fence_data <- subset(data, component == "fence")) == 0L) {
-        warning("`data` has no `\"fence\"` component.")
-      } else {
-        
-        # specify independent aesthetics
-        fence_aes <- GeomPolygon$aesthetics()
-        for (aes_name in fence_aes) {
-          fence_name <- paste0("fence_", aes_name)
-          if (! is.null(data[[fence_name]])) {
-            fence_data[[aes_name]] <- fence_data[[fence_name]]
-          }
+    if (nrow(fence_data <- subset(data, component == "fence")) > 0L) {
+      
+      # specify independent aesthetics
+      fence_aes <- GeomPolygon$aesthetics()
+      for (aes_name in fence_aes) {
+        fence_name <- paste0("fence_", aes_name)
+        if (! is.null(data[[fence_name]])) {
+          fence_data[[aes_name]] <- fence_data[[fence_name]]
         }
-        fence_aes <- intersect(fence_aes, names(fence_data))
-        fence_data <- subset(fence_data, select = fence_aes)
-        
-        # fence polygon grob
-        grobs <- c(grobs, list(GeomPolygon$draw_panel(
-          data = fence_data, panel_params = panel_params, coord = coord
-        )))
       }
+      fence_aes <- intersect(fence_aes, names(fence_data))
+      fence_data <- subset(fence_data, select = fence_aes)
+      
+      # fence polygon grob
+      grobs <- c(grobs, list(GeomPolygon$draw_panel(
+        data = fence_data, panel_params = panel_params, coord = coord
+      )))
     }
     
     # bag data
@@ -131,53 +122,45 @@ GeomBagplot <- ggproto(
     )))
     
     # median data
-    if (median) {
-      if (nrow(median_data <- subset(data, component == "median")) == 0L) {
-        warning("`data` has no `\"median\"` component.")
-      } else {
-        
-        # specify independent aesthetics
-        median_aes <- GeomPoint$aesthetics()
-        for (aes_name in median_aes) {
-          median_name <- paste0("median_", aes_name)
-          if (! is.null(data[[median_name]])) {
-            median_data[[aes_name]] <- median_data[[median_name]]
-          }
+    if (nrow(median_data <- subset(data, component == "median")) > 0L) {
+      
+      # specify independent aesthetics
+      median_aes <- GeomPoint$aesthetics()
+      for (aes_name in median_aes) {
+        median_name <- paste0("median_", aes_name)
+        if (! is.null(data[[median_name]])) {
+          median_data[[aes_name]] <- median_data[[median_name]]
         }
-        median_aes <- intersect(median_aes, names(median_data))
-        median_data <- subset(median_data, select = median_aes)
-        
-        # median point grob
-        grobs <- c(grobs, list(GeomPoint$draw_panel(
-          data = median_data, panel_params = panel_params, coord = coord,
-          na.rm = na.rm
-        )))
       }
+      median_aes <- intersect(median_aes, names(median_data))
+      median_data <- subset(median_data, select = median_aes)
+      
+      # median point grob
+      grobs <- c(grobs, list(GeomPoint$draw_panel(
+        data = median_data, panel_params = panel_params, coord = coord,
+        na.rm = na.rm
+      )))
     }
     
-    # outlier data
-    if (outliers) {
-      if (nrow(outliers_data <- subset(data, component == "outliers")) == 0L) {
-        # warning("`data` has no `\"outliers\"` component.")
-      } else {
-        
-        # specify independent aesthetics
-        outliers_aes <- GeomPoint$aesthetics()
-        for (aes_name in outliers_aes) {
-          outliers_name <- paste0("outliers_", aes_name)
-          if (! is.null(data[[outliers_name]])) {
-            outliers_data[[aes_name]] <- outliers_data[[outliers_name]]
-          }
+    # outliers data
+    if (nrow(outliers_data <- subset(data, component == "outliers")) > 0L) {
+      
+      # specify independent aesthetics
+      outliers_aes <- GeomPoint$aesthetics()
+      for (aes_name in outliers_aes) {
+        outliers_name <- paste0("outlier_", aes_name)
+        if (! is.null(data[[outliers_name]])) {
+          outliers_data[[aes_name]] <- outliers_data[[outliers_name]]
         }
-        outliers_aes <- intersect(outliers_aes, names(outliers_data))
-        outliers_data <- subset(outliers_data, select = outliers_aes)
-        
-        # outliers point grob
-        grobs <- c(grobs, list(GeomPoint$draw_panel(
-          data = outliers_data, panel_params = panel_params, coord = coord,
-          na.rm = na.rm
-        )))
       }
+      outliers_aes <- intersect(outliers_aes, names(outliers_data))
+      outliers_data <- subset(outliers_data, select = outliers_aes)
+      
+      # outliers point grob
+      grobs <- c(grobs, list(GeomPoint$draw_panel(
+        data = outliers_data, panel_params = panel_params, coord = coord,
+        na.rm = na.rm
+      )))
     }
     
     grob <- do.call(grid::grobTree, grobs)

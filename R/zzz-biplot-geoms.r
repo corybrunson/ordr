@@ -992,9 +992,6 @@ geom_rows_bagplot <- function(
   data = NULL,
   stat = "bagplot",
   position = "identity",
-  median = TRUE,
-  fence = TRUE,
-  outliers = TRUE,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -1009,9 +1006,6 @@ geom_rows_bagplot <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      median = median,
-      fence = fence,
-      outliers = outliers,
       na.rm = na.rm,
       ...
     )
@@ -1025,9 +1019,6 @@ geom_cols_bagplot <- function(
   data = NULL,
   stat = "bagplot",
   position = "identity",
-  median = TRUE,
-  fence = TRUE,
-  outliers = TRUE,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -1042,9 +1033,6 @@ geom_cols_bagplot <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      median = median,
-      fence = fence,
-      outliers = outliers,
       na.rm = na.rm,
       ...
     )

@@ -131,8 +131,8 @@ stat_rows_bagplot(
   data = NULL,
   geom = "bagplot",
   position = "identity",
-  bag_var = "depth",
   fraction = 0.5,
+  coef = 3,
   median = TRUE,
   fence = TRUE,
   outliers = TRUE,
@@ -146,8 +146,8 @@ stat_cols_bagplot(
   data = NULL,
   geom = "bagplot",
   position = "identity",
-  bag_var = "depth",
   fraction = 0.5,
+  coef = 3,
   median = TRUE,
   fence = TRUE,
   outliers = TRUE,
@@ -531,9 +531,6 @@ This ellipse probably won't appear circular unless \code{coord_fixed()} is appli
 or, if \code{type="euclid"}, the radius of the circle to be drawn.}
 
 \item{segments}{The number of segments to be used in drawing the ellipse.}
-
-\item{bag_var}{The stat to use to construct the bag; one of \code{"depth"},
-\code{"density"}, and \code{"chull"}.}
 
 \item{fraction}{Fraction of the data to include in the bag.}
 

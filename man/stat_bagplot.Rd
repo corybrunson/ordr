@@ -9,8 +9,8 @@ stat_bagplot(
   data = NULL,
   geom = "bagplot",
   position = "identity",
-  bag_var = "depth",
   fraction = 0.5,
+  coef = 3,
   median = TRUE,
   fence = TRUE,
   outliers = TRUE,
@@ -20,26 +20,73 @@ stat_bagplot(
 )
 }
 \arguments{
-\item{bag_var}{The stat to use to construct the bag; one of \code{"depth"},
-\code{"density"}, and \code{"chull"}.}
+\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}}. If specified and
+\code{inherit.aes = TRUE} (the default), it is combined with the default mapping
+at the top level of the plot. You must supply \code{mapping} if there is no plot
+mapping.}
+
+\item{data}{The data to be displayed in this layer. There are three
+options:
+
+If \code{NULL}, the default, the data is inherited from the plot
+data as specified in the call to \code{\link[ggplot2:ggplot]{ggplot()}}.
+
+A \code{data.frame}, or other object, will override the plot
+data. All objects will be fortified to produce a data frame. See
+\code{\link[ggplot2:fortify]{fortify()}} for which variables will be created.
+
+A \code{function} will be called with a single argument,
+the plot data. The return value must be a \code{data.frame}, and
+will be used as the layer data. A \code{function} can be created
+from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
+
+\item{geom}{The geometric object to use to display the data for this layer.
+When using a \verb{stat_*()} function to construct a layer, the \code{geom} argument
+can be used to override the default coupling between stats and geoms. The
+\code{geom} argument accepts the following:
+\itemize{
+\item A \code{Geom} ggproto subclass, for example \code{GeomPoint}.
+\item A string naming the geom. To give the geom as a string, strip the
+function name of the \code{geom_} prefix. For example, to use \code{geom_point()},
+give the geom as \code{"point"}.
+\item For more information and other ways to specify the geom, see the
+\link[ggplot2:layer_geoms]{layer geom} documentation.
+}}
+
+\item{position}{A position adjustment to use on the data for this layer. This
+can be used in various ways, including to prevent overplotting and
+improving the display. The \code{position} argument accepts the following:
+\itemize{
+\item The result of calling a position function, such as \code{position_jitter()}.
+This method allows for passing extra arguments to the position.
+\item A string naming the position adjustment. To give the position as a
+string, strip the function name of the \code{position_} prefix. For example,
+to use \code{position_jitter()}, give the position as \code{"jitter"}.
+\item For more information and other ways to specify the position, see the
+\link[ggplot2:layer_positions]{layer position} documentation.
+}}
 
 \item{fraction}{Fraction of the data to include in the bag.}
 
 \item{median, fence, outliers}{Logical indicators whether to include median,
 fence, and outliers in the composite output.}
 
+\item{show.legend}{logical. Should this layer be included in the legends?
+\code{NA}, the default, includes if any aesthetics are mapped.
+\code{FALSE} never includes, and \code{TRUE} always includes.
+It can also be a named logical vector to finely select the aesthetics to
+display.}
+
+\item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
+rather than combining with them. This is most useful for helper functions
+that define both data and aesthetics and shouldn't inherit behaviour from
+the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
+
 \item{...}{
-  Arguments passed on to \code{\link[=stat_depth]{stat_depth}}, \code{\link[ggplot2:geom_density_2d]{ggplot2::stat_density_2d}}
+  Arguments passed on to \code{\link[=stat_depth]{stat_depth}}
   \describe{
     \item{\code{notion}}{Character; the name of the depth function (passed to
 \code{\link[ddalpha:depth.]{ddalpha::depth.()}}).}
-    \item{\code{n}}{Number of grid points in each direction.}
-    \item{\code{h}}{Bandwidth (vector of length two). If \code{NULL}, estimated
-using \code{\link[MASS:bandwidth.nrd]{MASS::bandwidth.nrd()}}.}
-    \item{\code{adjust}}{A multiplicative bandwidth adjustment to be used if 'h' is
-'NULL'. This makes it possible to adjust the bandwidth while still
-using the a bandwidth estimator. For example, \code{adjust = 1/2} means
-use half of the default bandwidth.}
   }}
 }
 \description{
@@ -49,7 +96,7 @@ bagplots.
 \details{
 A bagplot comprises a single, often filled, contour (the "bag")
 overlaid upon the \link[=stat_chull]{convex hull} (the "fence") and a
-scatterplot of outliers (the "loop"). Reusseeuw &al (1999) also suggest the
+scatterplot of outliers (the "loop"). Rousseeuw &al (1999) also suggest the
 term "bag-and-bolster plot".
 }
 \section{Biplot layers}{
@@ -93,7 +140,9 @@ ggbiplot(judges_pca, sec.axes = "cols") +
 iris_pca <- ordinate(iris, prcomp, cols = seq(4), scale. = TRUE)
 ggbiplot(iris_pca) +
   geom_rows_point(aes(color = Species)) +
-  stat_rows_bagplot(aes(color = Species, fill = Species)) +
+  # FIXME: Outliers are computed incorrectly.
+  stat_rows_bagplot(aes(color = Species, fill = Species),
+                    outlier_size = 3, outlier_shape = 1L) +
   geom_cols_vector(aes(label = name))
 }
 \references{

@@ -439,9 +439,6 @@ geom_rows_bagplot(
   data = NULL,
   stat = "bagplot",
   position = "identity",
-  median = TRUE,
-  fence = TRUE,
-  outliers = TRUE,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -453,9 +450,6 @@ geom_cols_bagplot(
   data = NULL,
   stat = "bagplot",
   position = "identity",
-  median = TRUE,
-  fence = TRUE,
-  outliers = TRUE,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -841,9 +835,6 @@ axis, as a proportion of the minimum of the plot width and height.}
 
 \item{label_dodge}{Numeric; the orthogonal distance of the axis label from
 the axis, as a proportion of the minimum of the plot width and height.}
-
-\item{median, fence, outliers}{Logical indicators whether to include median,
-fence, and outliers in the composite output.}
 
 \item{new_data}{A list (best structured as a \link[base:data.frame]{data.frame})
 of row (\code{geom_cols_interpolation()}) or column

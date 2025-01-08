@@ -9,9 +9,6 @@ geom_bagplot(
   data = NULL,
   stat = "bagplot",
   position = "identity",
-  median = TRUE,
-  fence = TRUE,
-  outliers = TRUE,
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -64,9 +61,6 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 \item For more information and other ways to specify the position, see the
 \link[ggplot2:layer_positions]{layer position} documentation.
 }}
-
-\item{median, fence, outliers}{Logical indicators whether to include median,
-fence, and outliers in the composite output.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
@@ -127,13 +121,11 @@ are in bold):
 
 \examples{
 ggplot(mtcars, aes(x = wt, y = disp)) +
-  geom_bagplot() +
-  geom_point() +
+  geom_bagplot(coef = 1.5) +
   theme_bw()
 
 ggplot(faithful, aes(x = eruptions, y = waiting)) +
-  geom_point() +
-  stat_bagplot() +
+  stat_bagplot(fence = FALSE) +
   theme_bw()
 }
 \seealso{
