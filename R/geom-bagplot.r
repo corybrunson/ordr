@@ -32,7 +32,6 @@
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @template param-geom
-#' @inheritParams stat_bagplot
 #' @template return-layer
 #' @family geom layers
 #' @example inst/examples/ex-geom-bagplot.r
@@ -72,14 +71,14 @@ GeomBagplot <- ggproto(
     linewidth = 0.5, linetype = 1,
     colour = "black", fill = "grey55", alpha = NA,
     # median
-    median_shape = 19L, median_stroke = 0.5, median_size = 5,
-    median_colour = "white", median_fill = NA, median_alpha = NA,
+    shape = 19L, stroke = 0.5, size = 5,
+    median_colour = NULL, median_fill = NULL, median_alpha = NULL,
     # fence
-    fence_linewidth = 0, fence_linetype = 0,
-    fence_colour = NA, fence_fill = "grey85", fence_alpha = 0.75,
+    fence_linewidth = NULL, fence_linetype = NULL,
+    fence_colour = NULL, fence_fill = NULL, fence_alpha = NULL,
     # outliers
-    outlier_shape = 19L, outlier_stroke = 0.5, outlier_size = 1.5,
-    outlier_colour = "grey15", outlier_fill = NA, outlier_alpha = NA
+    outlier_shape = NULL, outlier_stroke = NULL, outlier_size = NULL,
+    outlier_colour = NULL, outlier_fill = NULL, outlier_alpha = NULL
   ),
   
   draw_panel = function(
@@ -96,13 +95,21 @@ GeomBagplot <- ggproto(
     # fence data
     if (nrow(fence_data <- subset(data, component == "fence")) > 0L) {
       
+      # default aesthetics (if not to coordinate with bag)
+      fence_defaults <- list(
+        linewidth = 0.25,
+        linetype = 3,
+        alpha = 0.25
+      )
+      
       # specify independent aesthetics
       fence_aes <- GeomPolygon$aesthetics()
       for (aes_name in fence_aes) {
         fence_name <- paste0("fence_", aes_name)
-        if (! is.null(data[[fence_name]])) {
-          fence_data[[aes_name]] <- fence_data[[fence_name]]
-        }
+        fence_data[[aes_name]] <- 
+          fence_data[[fence_name]] %||% 
+          fence_defaults[[aes_name]] %||% 
+          fence_data[[aes_name]]
       }
       fence_aes <- intersect(fence_aes, names(fence_data))
       fence_data <- subset(fence_data, select = fence_aes)
@@ -124,13 +131,21 @@ GeomBagplot <- ggproto(
     # median data
     if (nrow(median_data <- subset(data, component == "median")) > 0L) {
       
+      # default aesthetics (if not to coordinate with bag)
+      median_defaults <- list(
+        colour = "white",
+        fill = NA,
+        alpha = NA
+      )
+      
       # specify independent aesthetics
       median_aes <- GeomPoint$aesthetics()
       for (aes_name in median_aes) {
         median_name <- paste0("median_", aes_name)
-        if (! is.null(data[[median_name]])) {
-          median_data[[aes_name]] <- median_data[[median_name]]
-        }
+        median_data[[aes_name]] <- 
+          median_data[[median_name]] %||% 
+          median_defaults[[aes_name]] %||% 
+          median_data[[aes_name]]
       }
       median_aes <- intersect(median_aes, names(median_data))
       median_data <- subset(median_data, select = median_aes)
@@ -145,13 +160,22 @@ GeomBagplot <- ggproto(
     # outliers data
     if (nrow(outliers_data <- subset(data, component == "outliers")) > 0L) {
       
+      # default aesthetics (if not to coordinate with bag and median)
+      outliers_defaults <- list(
+        stroke = 0.5,
+        size = 1.5,
+        fill = NA,
+        alpha = NA
+      )
+      
       # specify independent aesthetics
       outliers_aes <- GeomPoint$aesthetics()
       for (aes_name in outliers_aes) {
         outliers_name <- paste0("outlier_", aes_name)
-        if (! is.null(data[[outliers_name]])) {
-          outliers_data[[aes_name]] <- outliers_data[[outliers_name]]
-        }
+        outliers_data[[aes_name]] <- 
+          outliers_data[[outliers_name]] %||% 
+          outliers_defaults[[aes_name]] %||% 
+          outliers_data[[aes_name]]
       }
       outliers_aes <- intersect(outliers_aes, names(outliers_data))
       outliers_data <- subset(outliers_data, select = outliers_aes)

@@ -534,6 +534,8 @@ or, if \code{type="euclid"}, the radius of the circle to be drawn.}
 
 \item{fraction}{Fraction of the data to include in the bag.}
 
+\item{coef}{Scale factor of the fence relative to the bag.}
+
 \item{median, fence, outliers}{Logical indicators whether to include median,
 fence, and outliers in the composite output.}
 

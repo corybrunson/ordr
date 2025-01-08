@@ -21,6 +21,7 @@
 #'   fence, and outliers in the composite output.
 #' @inheritDotParams stat_depth notion
 #' @param fraction Fraction of the data to include in the bag.
+#' @param coef Scale factor of the fence relative to the bag.
 #' @example inst/examples/ex-stat-bagplot-judges.r
 #' @example inst/examples/ex-stat-bagplot-iris.r
 #' @export

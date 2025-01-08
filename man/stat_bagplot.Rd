@@ -68,6 +68,8 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 
 \item{fraction}{Fraction of the data to include in the bag.}
 
+\item{coef}{Scale factor of the fence relative to the bag.}
+
 \item{median, fence, outliers}{Logical indicators whether to include median,
 fence, and outliers in the composite output.}
 
@@ -139,11 +141,16 @@ ggbiplot(judges_pca, sec.axes = "cols") +
   geom_cols_vector(aes(label = name))
 iris_pca <- ordinate(iris, prcomp, cols = seq(4), scale. = TRUE)
 ggbiplot(iris_pca) +
-  geom_rows_point(aes(color = Species)) +
-  # FIXME: Outliers are computed incorrectly.
-  stat_rows_bagplot(aes(color = Species, fill = Species),
-                    outlier_size = 3, outlier_shape = 1L) +
+  stat_rows_bagplot(aes(fill = Species), fence_linewidth = 0.25) +
   geom_cols_vector(aes(label = name))
+
+\dontrun{
+# FIXME: Component-specific aesthetics should be able to vary with variables.
+# FIXME: Try manipulating columns in `$setup_data()`.
+ggbiplot(iris_pca) +
+  stat_rows_bagplot(aes(fill = Species, median_colour = Species)) +
+  geom_cols_vector(aes(label = name))
+}
 }
 \references{
 Rousseeuw PJ, Ruts I, & Tukey JW (1999) "The Bagplot: A Bivariate Boxplot".
