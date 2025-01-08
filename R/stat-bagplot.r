@@ -173,6 +173,7 @@ get_hull <- function(data) data[grDevices::chull(data), , drop = FALSE]
 are_outlying <- function(data, hull) {
   
   # iterate vertical ray crossings over edges (including from last to first row)
+  # include points on the boundary
   winding <- 0L
   n <- nrow(hull)
   for (r in seq(n)) {
@@ -181,24 +182,23 @@ are_outlying <- function(data, hull) {
     y0 <- hull$y[(r - 1L) %% n + 1L]
     x1 <- hull$x[r %% n + 1L]
     y1 <- hull$y[r %% n + 1L]
-    sgn <- (-1) ^ (y1 < y0)
+    m <- (y1 - y0) / (x1 - x0)
     
     winding <- winding + 
-      (
-        # edge crosses vertical line leftward
-        x0 >= data$x & data$x > x1 &
-          # edge crosses at or above point
-          (y1 - data$y) / (data$y - y0) * sgn >=
-          (x1 - data$x) / (data$x - x0) * sgn
-      ) -
-      (
-        # edge crosses vertical line rightward
-        x0 <= data$x & data$x < x1 &
-          # edge crosses at or above point
-          (y1 - data$y) / (data$y - y0) * sgn <=
-          (x1 - data$x) / (data$x - x0) * sgn
-      )
+      if (x0 == x1) {
+        # vertical line will not cross vertical ray
+        0
+      } else {
+        # may assume `x0 != x1` i.e. `! is.na(m)`
+        
+        # intersection of segment and vertical line is above data
+        ( m * (data$x - x0) + y0 > data$y ) *
+          ( # edge crosses vertical line leftward
+            (x0 >= data$x & data$x > x1) -
+              # edge crosses vertical line rightward
+              (x0 < data$x & data$x <= x1) )
+      }
   }
   
-  winding != 0L
+  winding == 0L
 }
