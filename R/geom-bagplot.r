@@ -38,7 +38,7 @@
 #' @example inst/examples/ex-geom-bagplot.r
 #' @export
 geom_bagplot <- function(
-    mapping = NULL, data = NULL, stat = "bag", position = "identity",
+    mapping = NULL, data = NULL, stat = "bagplot", position = "identity",
     median = TRUE, fence = TRUE, outliers = TRUE,
     ...,
     na.rm = FALSE,

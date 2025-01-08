@@ -27,7 +27,7 @@
 #' @example inst/examples/ex-stat-bagplot-iris.r
 #' @export
 stat_bagplot <- function(
-    mapping = NULL, data = NULL, geom = "contour", position = "identity",
+    mapping = NULL, data = NULL, geom = "bagplot", position = "identity",
     bag_var = "depth", fraction = 0.5,
     median = TRUE, fence = TRUE, outliers = TRUE,
     show.legend = NA, 
@@ -184,7 +184,8 @@ StatBagplot <- ggproto(
       data.frame()
     }
     if (nrow(outlier_df) > 0L) {
-      outlier_df <- transform(outlier_df, PANEL = data_PANEL, group = data_group)
+      outlier_df <- 
+        transform(outlier_df, PANEL = data_PANEL, group = data_group)
     }
     
     dplyr::bind_rows(median_df, bag_df, fence_df, outlier_df)
@@ -194,8 +195,8 @@ StatBagplot <- ggproto(
 # return subset of `data` at maximum depth
 get_depths <- function(data, notion) {
   depths <- ddalpha::depth.(
-    subset(data, select = c(x, y)),
-    subset(data, select = c(x, y)),
+    data[, c("x", "y")],
+    data[, c("x", "y")],
     notion = notion
   )
   transform(data, depth = depths)
@@ -205,15 +206,21 @@ get_depths <- function(data, notion) {
 # (don't forget the segment from the last to the first row of `bag`)
 get_outliers <- function(data, bag) {
   
+  # replace `bag` by its convex hull
+  # TODO: Only allow this if density is excluded.
+  bag <- bag[grDevices::chull(bag), , drop = FALSE]
+  # for the last segment
+  bag <- rbind(bag, bag[1L, , drop = FALSE])
+  
   # initialize winding number
   data$winding <- 0L
   
   # iterate vertical ray crossings over edges
-  for (r in seq(nrow(bag))) {
+  for (r in seq(nrow(bag) - 1L)) {
     data$winding <- data$winding + 
       (bag$x[r] >= data$x & data$x > bag$x[r+1L]) -
       (bag$x[r] <= data$x & data$x < bag$x[r+1L])
   }
   
-  subset(data, winding == 0, select = -c(winding))
+  data[data$winding != 0, setdiff(names(data), "winding")]
 }
