@@ -7,7 +7,7 @@
 stat_bag(
   mapping = NULL,
   data = NULL,
-  geom = "contour",
+  geom = "bag",
   position = "identity",
   bag_var = "depth",
   fraction = 0.5,
@@ -85,6 +85,17 @@ A small number of transformations (\code{\link[=stat_rule]{stat_rule()}}) are in
 ordination aesthetics but will accept \code{ord_aes()} without warning.
 }
 
+\examples{
+judges_pca <- ordinate(USJudgeRatings, prcomp)
+ggbiplot(judges_pca, sec.axes = "cols") +
+  geom_rows_bag() +
+  geom_cols_vector(aes(label = name))
+iris_pca <- ordinate(iris, prcomp, cols = seq(4), scale. = TRUE)
+ggbiplot(iris_pca) +
+  geom_rows_point(aes(color = Species)) +
+  stat_rows_bag(aes(color = Species, fill = Species)) +
+  geom_cols_vector(aes(label = name))
+}
 \references{
 Rousseeuw PJ, Ruts I, & Tukey JW (1999) "The Bagplot: A Bivariate Boxplot".
 \emph{The American Statistician}, \strong{53}(4): 382--387.

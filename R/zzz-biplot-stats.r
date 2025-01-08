@@ -341,7 +341,7 @@ StatRowsBag <- ggproto(
 stat_rows_bag <- function(
   mapping = NULL,
   data = NULL,
-  geom = "contour",
+  geom = "bag",
   position = "identity",
   bag_var = "depth",
   fraction = 0.5,
@@ -389,7 +389,7 @@ StatColsBag <- ggproto(
 stat_cols_bag <- function(
   mapping = NULL,
   data = NULL,
-  geom = "contour",
+  geom = "bag",
   position = "identity",
   bag_var = "depth",
   fraction = 0.5,

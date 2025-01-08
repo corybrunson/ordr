@@ -129,7 +129,7 @@ stat_cols_ellipse(
 stat_rows_bag(
   mapping = NULL,
   data = NULL,
-  geom = "contour",
+  geom = "bag",
   position = "identity",
   bag_var = "depth",
   fraction = 0.5,
@@ -144,7 +144,7 @@ stat_rows_bag(
 stat_cols_bag(
   mapping = NULL,
   data = NULL,
-  geom = "contour",
+  geom = "bag",
   position = "identity",
   bag_var = "depth",
   fraction = 0.5,
