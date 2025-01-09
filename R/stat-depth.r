@@ -43,6 +43,7 @@
 #' @template param-stat
 #' @template return-layer
 #' @family stat layers
+#' @example inst/examples/ex-stat-depth.r
 #' @export
 stat_depth <- function(
     mapping = NULL, data = NULL, geom = "contour", position = "identity",
