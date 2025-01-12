@@ -539,11 +539,15 @@ or, if \code{type="euclid"}, the radius of the circle to be drawn.}
 \item{median, fence, outliers}{Logical indicators whether to include median,
 fence, and outliers in the composite output.}
 
-\item{fun.data, fun.center, fun.min, fun.max}{Functions treated as in
-\code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and \code{fun.max}
-behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
+\item{fun.data}{A function that is given the complete data and should
+return a data frame with variables \code{ymin}, \code{y}, and \code{ymax}.}
 
-\item{fun.args}{Arguments passed to the \verb{fun.*}.}
+\item{fun.center}{Alternatively to the \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary_bin()}}
+parameters, supply a summary function that takes a matrix as input and
+returns a named column summary vector. Cannot be used together with
+\code{fun.min} and \code{fun.max}.}
+
+\item{fun.args}{Optional additional arguments passed on to the functions.}
 
 \item{breaks}{A numeric vector of fractions (between \code{0} and \code{1}) of the
 data to contain in each hull.}

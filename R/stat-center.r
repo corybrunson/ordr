@@ -12,10 +12,11 @@
 #' }
 
 #' @inheritParams ggplot2::layer
-#' @param fun.data,fun.center,fun.min,fun.max Functions treated as in
-#'   [ggplot2::stat_summary()], with `fun.center`, `fun.min`, and `fun.max`
-#'   behaving as `fun.y`, `fun.ymin`, and `fun.ymax`.
-#' @param fun.args Arguments passed to the `fun.*`.
+#' @inheritParams ggplot2::stat_summary_bin
+#' @param fun.center Alternatively to the [ggplot2::stat_summary_bin()]
+#'   parameters, supply a summary function that takes a matrix as input and
+#'   returns a named column summary vector. Cannot be used together with
+#'   `fun.min` and `fun.max`.
 #' @template param-stat
 #' @template return-layer
 #' @family stat layers
@@ -27,9 +28,10 @@ stat_center <- function(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
-  fun.center = NULL,
+  fun = NULL,
   fun.min = NULL,
   fun.max = NULL,
+  fun.center = NULL,
   fun.args = list()
 ) {
   layer(
@@ -42,9 +44,10 @@ stat_center <- function(
     inherit.aes = inherit.aes,
     params = list(
       fun.data = fun.data,
-      fun.center = fun.center,
+      fun = fun,
       fun.min = fun.min,
       fun.max = fun.max,
+      fun.center = fun.center,
       fun.args = fun.args,
       na.rm = FALSE,
       ...
@@ -63,11 +66,14 @@ StatCenter <- ggproto(
   
   compute_group = function(data, scales,
                            fun.data = NULL,
-                           fun.center = NULL, fun.min = NULL, fun.max = NULL,
+                           fun = NULL, fun.min = NULL, fun.max = NULL,
+                           fun.center = NULL,
                            fun.args = list(),
                            na.rm = FALSE) {
-    cfun <- make_center_fun(fun.data, fun.center, fun.min, fun.max, fun.args)
-    cfun(data)
+    ord_cols <- get_ord_aes(data)
+    cfun <- 
+      make_center_fun(fun.data, fun, fun.min, fun.max, fun.center, fun.args)
+    cfun(data[, ord_cols, drop = FALSE])
   }
 )
 
@@ -79,6 +85,7 @@ stat_star <- function(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
+  fun = NULL,
   fun.center = NULL,
   fun.args = list()
 ) {
@@ -92,6 +99,7 @@ stat_star <- function(
     inherit.aes = inherit.aes,
     params = list(
       fun.data = fun.data,
+      fun = fun,
       fun.center = fun.center,
       fun.args = fun.args,
       na.rm = FALSE,
@@ -108,11 +116,12 @@ StatStar <- ggproto(
   "StatStar", StatCenter,
   
   compute_group = function(data, scales,
-                           fun.data = NULL,
+                           fun.data = NULL, fun = NULL,
                            fun.center = NULL, fun.args = list(),
                            na.rm = FALSE) {
-    cfun <- make_center_fun(fun.data, fun.center, NULL, NULL, fun.args)
-    cdata <- cfun(data)
+    ord_cols <- get_ord_aes(data)
+    cfun <- make_center_fun(fun.data, fun, NULL, NULL, fun.center, fun.args)
+    cdata <- cfun(data[, ord_cols, drop = FALSE])
     
     data$xend <- data$x
     data$yend <- data$y
@@ -123,11 +132,14 @@ StatStar <- ggproto(
   }
 )
 
-make_center_fun <- function(fun.data, fun.center, fun.min, fun.max, fun.args) {
+make_center_fun <- function(
+    fun.data, fun, fun.min, fun.max, fun.center, fun.args
+) {
   force(fun.data)
-  force(fun.center)
+  force(fun)
   force(fun.min)
   force(fun.max)
+  force(fun.center)
   force(fun.args)
   
   if (! is.null(fun.data)) {
@@ -144,7 +156,8 @@ make_center_fun <- function(fun.data, fun.center, fun.min, fun.max, fun.args) {
       y_data <- do.call(fun.data.y, c(list(quote(df$y)), fun.args))
       cbind(x_data, y_data)
     }
-  } else if (! is.null(fun.center)) {
+    
+  } else if (! is.null(fun)) {
     # separate vector summary functions
     
     call_fun <- function(fun, x) {
@@ -152,14 +165,14 @@ make_center_fun <- function(fun.data, fun.center, fun.min, fun.max, fun.args) {
       do.call(fun, c(list(quote(x)), fun.args))
     }
     
-    fun.center <- match.fun(fun.center)
+    fun <- match.fun(fun)
     if (is.null(fun.min) && is.null(fun.max)) {
       # center function only
       
       function(df, ...) {
         data.frame(
-          x = call_fun(fun.center, df$x),
-          y = call_fun(fun.center, df$y)
+          x = call_fun(fun, df$x),
+          y = call_fun(fun, df$y)
         )
       }
     } else {
@@ -173,18 +186,30 @@ make_center_fun <- function(fun.data, fun.center, fun.min, fun.max, fun.args) {
       }
       fun.min <- match.fun(fun.min)
       fun.max <- match.fun(fun.max)
-      function(df, ...) {
+      function(df) {
         data.frame(
-          x = call_fun(fun.center, df$x),
+          x = call_fun(fun, df$x),
           xmin = call_fun(fun.min, df$x),
           xmax = call_fun(fun.max, df$x),
-          y = call_fun(fun.center, df$y),
+          y = call_fun(fun, df$y),
           ymin = call_fun(fun.min, df$y),
           ymax = call_fun(fun.max, df$y)
         )
       }
     }
+    
+  } else if (! is.null(fun.center)) {
+    # multivariable summary function
+    
+    fun.center <- match.fun(fun.center)
+    
+    function(df) {
+      x <- fun.center(df)
+      as.data.frame(as.list(x))
+    }
+    
   } else {
+    
     message("No center (limit) function(s) supplied; defaulting to `mean_se()`")
     function(df) {
       x_data <- mean_se(df$x)
@@ -193,4 +218,11 @@ make_center_fun <- function(fun.data, fun.center, fun.min, fun.max, fun.args) {
       cbind(x_data, y_data)
     }
   }
+}
+
+depth_median <- function(x, notion = "halfspace", ...) {
+  x <- as.matrix(x)
+  d <- ddalpha::depth.(x, x, notion = notion)
+  i <- which(d == max(d))
+  apply(x[i, , drop = FALSE], 2L, mean, na.rm = FALSE, simplify = TRUE)
 }
