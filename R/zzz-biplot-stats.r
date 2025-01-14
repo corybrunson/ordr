@@ -443,9 +443,11 @@ stat_rows_center <- function(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
+  fun = NULL,
   fun.center = NULL,
   fun.min = NULL,
   fun.max = NULL,
+  fun.ord = NULL,
   fun.args = list()
 ) {
   layer(
@@ -458,9 +460,11 @@ stat_rows_center <- function(
     inherit.aes = inherit.aes,
     params = list(
       fun.data = fun.data,
+      fun = fun,
       fun.center = fun.center,
       fun.min = fun.min,
       fun.max = fun.max,
+      fun.ord = fun.ord,
       fun.args = fun.args,
       na.rm = FALSE,
       ...
@@ -491,9 +495,11 @@ stat_cols_center <- function(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
+  fun = NULL,
   fun.center = NULL,
   fun.min = NULL,
   fun.max = NULL,
+  fun.ord = NULL,
   fun.args = list()
 ) {
   layer(
@@ -506,9 +512,11 @@ stat_cols_center <- function(
     inherit.aes = inherit.aes,
     params = list(
       fun.data = fun.data,
+      fun = fun,
       fun.center = fun.center,
       fun.min = fun.min,
       fun.max = fun.max,
+      fun.ord = fun.ord,
       fun.args = fun.args,
       na.rm = FALSE,
       ...
@@ -539,7 +547,9 @@ stat_rows_star <- function(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
+  fun = NULL,
   fun.center = NULL,
+  fun.ord = NULL,
   fun.args = list()
 ) {
   layer(
@@ -552,7 +562,9 @@ stat_rows_star <- function(
     inherit.aes = inherit.aes,
     params = list(
       fun.data = fun.data,
+      fun = fun,
       fun.center = fun.center,
+      fun.ord = fun.ord,
       fun.args = fun.args,
       na.rm = FALSE,
       ...
@@ -583,7 +595,9 @@ stat_cols_star <- function(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
+  fun = NULL,
   fun.center = NULL,
+  fun.ord = NULL,
   fun.args = list()
 ) {
   layer(
@@ -596,7 +610,9 @@ stat_cols_star <- function(
     inherit.aes = inherit.aes,
     params = list(
       fun.data = fun.data,
+      fun = fun,
       fun.center = fun.center,
+      fun.ord = fun.ord,
       fun.args = fun.args,
       na.rm = FALSE,
       ...

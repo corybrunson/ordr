@@ -13,10 +13,11 @@
 
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::stat_summary_bin
-#' @param fun.center Alternatively to the [ggplot2::stat_summary_bin()]
-#'   parameters, supply a summary function that takes a matrix as input and
-#'   returns a named column summary vector. Cannot be used together with
-#'   `fun.min` and `fun.max`.
+#' @param fun.center Deprecated alias to `fun`.
+#' @param fun.ord Alternatively to the [ggplot2::stat_summary_bin()] parameters,
+#'   supply a summary function that takes a matrix as input and returns a named
+#'   column summary vector. Overridden by `fun.data` and `fun`, cannot be used
+#'   together with `fun.min` and `fun.max`.
 #' @template param-stat
 #' @template return-layer
 #' @family stat layers
@@ -28,10 +29,10 @@ stat_center <- function(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
-  fun = NULL,
+  fun = NULL, fun.center = NULL,
   fun.min = NULL,
   fun.max = NULL,
-  fun.center = NULL,
+  fun.ord = NULL,
   fun.args = list()
 ) {
   layer(
@@ -44,10 +45,10 @@ stat_center <- function(
     inherit.aes = inherit.aes,
     params = list(
       fun.data = fun.data,
-      fun = fun,
+      fun = fun, fun.center = fun.center,
       fun.min = fun.min,
       fun.max = fun.max,
-      fun.center = fun.center,
+      fun.ord = fun.ord,
       fun.args = fun.args,
       na.rm = FALSE,
       ...
@@ -64,15 +65,34 @@ StatCenter <- ggproto(
   
   required_aes = c("x", "y"),
   
+  setup_params = function(data, params) {
+    
+    # deprecate `fun.center`
+    if (! is.null(params$fun.center)) {
+      if (is.null(params$fun)) {
+        warning("`fun.center` is deprecated; use `fun` instead.")
+        params$fun <- params$fun.center
+      } else {
+        warning("`fun` will be used instead of `fun.center`.")
+      }
+      params$fun.center <- NULL
+    }
+    
+    params
+  },
+  
+  extra_params = c("fun.center"),
+  
   compute_group = function(data, scales,
                            fun.data = NULL,
-                           fun = NULL, fun.min = NULL, fun.max = NULL,
-                           fun.center = NULL,
+                           fun = NULL,
+                           fun.min = NULL, fun.max = NULL,
+                           fun.ord = NULL,
                            fun.args = list(),
                            na.rm = FALSE) {
     ord_cols <- get_ord_aes(data)
     cfun <- 
-      make_center_fun(fun.data, fun, fun.min, fun.max, fun.center, fun.args)
+      make_center_fun(fun.data, fun, fun.min, fun.max, fun.ord, fun.args)
     cfun(data[, ord_cols, drop = FALSE])
   }
 )
@@ -85,8 +105,8 @@ stat_star <- function(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
-  fun = NULL,
-  fun.center = NULL,
+  fun = NULL, fun.center = NULL,
+  fun.ord = NULL,
   fun.args = list()
 ) {
   layer(
@@ -99,8 +119,8 @@ stat_star <- function(
     inherit.aes = inherit.aes,
     params = list(
       fun.data = fun.data,
-      fun = fun,
-      fun.center = fun.center,
+      fun = fun, fun.center = fun.center,
+      fun.ord = fun.ord,
       fun.args = fun.args,
       na.rm = FALSE,
       ...
@@ -117,10 +137,10 @@ StatStar <- ggproto(
   
   compute_group = function(data, scales,
                            fun.data = NULL, fun = NULL,
-                           fun.center = NULL, fun.args = list(),
+                           fun.ord = NULL, fun.args = list(),
                            na.rm = FALSE) {
     ord_cols <- get_ord_aes(data)
-    cfun <- make_center_fun(fun.data, fun, NULL, NULL, fun.center, fun.args)
+    cfun <- make_center_fun(fun.data, fun, NULL, NULL, fun.ord, fun.args)
     cdata <- cfun(data[, ord_cols, drop = FALSE])
     
     data$xend <- data$x
@@ -133,13 +153,13 @@ StatStar <- ggproto(
 )
 
 make_center_fun <- function(
-    fun.data, fun, fun.min, fun.max, fun.center, fun.args
+    fun.data, fun, fun.min, fun.max, fun.ord, fun.args
 ) {
   force(fun.data)
   force(fun)
   force(fun.min)
   force(fun.max)
-  force(fun.center)
+  force(fun.ord)
   force(fun.args)
   
   if (! is.null(fun.data)) {
@@ -198,13 +218,13 @@ make_center_fun <- function(
       }
     }
     
-  } else if (! is.null(fun.center)) {
+  } else if (! is.null(fun.ord)) {
     # multivariable summary function
     
-    fun.center <- match.fun(fun.center)
+    fun.ord <- match.fun(fun.ord)
     
     function(df) {
-      x <- fun.center(df)
+      x <- fun.ord(df)
       as.data.frame(as.list(x))
     }
     
