@@ -4,6 +4,12 @@
 #'   contours, and outlier specifications.
 
 #' @details `geom_bagplot()` is designed to pair with [stat_bagplot()].
+#'
+#' **WARNING:**
+#'   The trade-off between precision and runtime is far greater for depth
+#'   estimation than for density estimation. At the resolution of the default
+#'   \eqn{100 \times 100} grid, basic examples may vary widely starting from
+#'   different random seeds.
 #' 
 
 #' @template biplot-layers
@@ -17,7 +23,7 @@
 #' - **`component`**
 #' - `linewidth`, `linetype`,
 #'   `colour`, `fill`, `alpha`
-#' - `median_shape`, `median_stroke`, `median_size`,
+#' - `shape`, `stroke`, `size`,
 #'   `median_colour`, `median_fill`, `median_alpha`
 #' - `fence_linewidth`, `fence_linetype`,
 #'   `fence_colour`, `fence_fill`, `fence_alpha`
@@ -190,8 +196,5 @@ GeomBagplot <- ggproto(
     grob <- do.call(grid::grobTree, grobs)
     grob$name <- grid::grobName(grob, "geom_bagplot")
     grob
-  },
-  
-  # update this to include segment and letter in key squares
-  draw_key = draw_key_abline
+  }
 )
