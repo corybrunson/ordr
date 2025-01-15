@@ -4,10 +4,15 @@
 #'   bagplots.
 #' 
 
-#' @details A bagplot comprises a single, often filled, contour (the "bag")
-#'   overlaid upon the [convex hull][stat_chull()] (the "fence") and a
-#'   scatterplot of outliers (the "loop"). Rousseeuw &al (1999) also suggest the
-#'   term "bag-and-bolster plot".
+#' @details A bagplot comprises a single, often filled, depth contour (the
+#'   "bag") overlaid upon the hull of its union with the data points contained
+#'   in its scaled expansion from the depth median (the "fence") and a
+#'   scatterplot of outliers beyond the fence (the "loop"). Rousseeuw &al (1999)
+#'   suggest the term "bag-and-bolster plot".
+#'
+#'   While the depth median can be obtained using [stat_center()], the data
+#'   depth values used to compute it are also used to demarcate the bag, so it
+#'   is implemented separately in `StatBagplot$compute_group()` for efficiency.
 #' 
 
 #' @template ref-rousseeuw1999
@@ -117,7 +122,7 @@ StatBagplot <- ggproto(
       # begin fence by expanding the convex hull of the bag by `coef`
       bag_df |> 
         subset(select = c("x", "y")) |> 
-        get_hull() |> 
+        filter_hull() |> 
         as.matrix() |> 
         sweep(2L, as.matrix(median_df[, c("x", "y"), drop = FALSE]), "-") |> 
         magrittr::multiply_by(coef) |> 
@@ -125,7 +130,7 @@ StatBagplot <- ggproto(
         as.data.frame() -> fence_hull
       
       # tag inliers & outliers
-      outlying <- are_outlying(data, fence_hull)
+      outlying <- lie_without(data, fence_hull)
       
     }
     
@@ -137,7 +142,7 @@ StatBagplot <- ggproto(
       data |> 
         subset(! outlying, select = c("x", "y")) |> 
         rbind(fence_hull) |> 
-        get_hull() |> 
+        filter_hull() |> 
         transform(component = "fence", PANEL = data_PANEL, group = data_group)
     } else {
       data.frame()
@@ -166,12 +171,12 @@ StatBagplot <- ggproto(
   }
 )
 
-get_hull <- function(data) data[grDevices::chull(data), , drop = FALSE]
+filter_hull <- function(data) data[grDevices::chull(data), , drop = FALSE]
 
 # return subset of `data` that lies outside a convex polygon `hull`
 # (don't forget the segment from the last to the first row)
 # https://math.stackexchange.com/a/3441442
-are_outlying <- function(data, hull) {
+lie_without <- function(data, hull) {
   
   # iterate vertical ray crossings over edges (including from last to first row)
   # include points on the boundary

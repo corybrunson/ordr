@@ -3,12 +3,14 @@
 #' @description Render bagplots from tagged data comprising medians, hulls,
 #'   contours, and outlier specifications.
 
-#' @details `geom_bagplot()` is designed to pair with [stat_bagplot()].
+#' @details `geom_bagplot()` is designed to pair with [stat_bagplot()],
+#'   analogously to the pairing of [ggplot2::geom_boxplot()] with
+#'   [ggplot2::stat_boxplot()].
 #'
-#' **WARNING:**
-#'   The trade-off between precision and runtime is far greater for depth
-#'   estimation than for density estimation. At the resolution of the default
-#'   \eqn{100 \times 100} grid, basic examples may vary widely starting from
+#'   **WARNING:**
+#'   The trade-off between precision and runtime is greater for depth estimation
+#'   than for density estimation. At the resolution of the default \eqn{100
+#'   \times 100} grid, basic examples may vary noticeably when starting from
 #'   different random seeds.
 #' 
 

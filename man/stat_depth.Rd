@@ -169,10 +169,12 @@ ordination aesthetics but will accept \code{ord_aes()} without warning.
 
 \section{Computed variables}{
  These are calculated during the statistical
-transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluation}. \code{stat_depth()} and \code{stat_depth_filled()}
-compute different variables depending on whether contouring is turned on or
-off. With contouring off (\code{contour = FALSE}), both stats behave the same,
-and the following variables are provided:
+transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluation}.
+
+\code{stat_depth()} and \code{stat_depth_filled()} compute different variables
+depending on whether contouring is turned on or off. With contouring off
+(\code{contour = FALSE}), both stats behave the same, and the following
+variables are provided:
 \describe{
 \item{\code{depth}}{the depth estimate}
 \item{\code{ndepth}}{depth estimate, scaled to a maximum of 1}

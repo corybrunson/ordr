@@ -96,10 +96,15 @@ Construct medians, bags, fences, and outlier specifications for
 bagplots.
 }
 \details{
-A bagplot comprises a single, often filled, contour (the "bag")
-overlaid upon the \link[=stat_chull]{convex hull} (the "fence") and a
-scatterplot of outliers (the "loop"). Rousseeuw &al (1999) also suggest the
-term "bag-and-bolster plot".
+A bagplot comprises a single, often filled, depth contour (the
+"bag") overlaid upon the hull of its union with the data points contained
+in its scaled expansion from the depth median (the "fence") and a
+scatterplot of outliers beyond the fence (the "loop"). Rousseeuw &al (1999)
+suggest the term "bag-and-bolster plot".
+
+While the depth median can be obtained using \code{\link[=stat_center]{stat_center()}}, the data
+depth values used to compute it are also used to demarcate the bag, so it
+is implemented separately in \code{StatBagplot$compute_group()} for efficiency.
 }
 \section{Biplot layers}{
 
