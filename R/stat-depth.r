@@ -42,6 +42,8 @@
 #' @inheritDotParams ggplot2::geom_contour bins binwidth breaks
 #' @param notion Character; the name of the depth function (passed to
 #'   [ddalpha::depth.()]).
+#' @param notion_params List of additional parameters passed via `...` to
+#'   [ddalpha::depth.()].
 #' @template param-stat
 #' @template return-layer
 #' @family stat layers
@@ -50,8 +52,8 @@
 stat_depth <- function(
     mapping = NULL, data = NULL, geom = "contour", position = "identity",
     contour = TRUE, contour_var = "depth",
-    notion = "halfspace",
-    n = 100,
+    notion = "zonoid", notion_params = list(),
+    n = 100L,
     show.legend = NA, 
     inherit.aes = TRUE,
     ...
@@ -66,7 +68,7 @@ stat_depth <- function(
     inherit.aes = inherit.aes,
     params = list(
       contour = contour, contour_var = contour_var,
-      notion = notion,
+      notion = notion, notion_params = notion_params,
       n = n,
       na.rm = FALSE,
       ...
@@ -79,8 +81,8 @@ stat_depth <- function(
 stat_depth_filled <- function(
     mapping = NULL, data = NULL, geom = "contour_filled", position = "identity",
     contour = TRUE, contour_var = "depth",
-    notion = "halfspace",
-    n = 100,
+    notion = "zonoid", notion_params = list(),
+    n = 100L,
     show.legend = NA, 
     inherit.aes = TRUE,
     ...
@@ -95,7 +97,7 @@ stat_depth_filled <- function(
     inherit.aes = inherit.aes,
     params = list(
       contour = contour, contour_var = contour_var,
-      notion = notion,
+      notion = notion, notion_params = notion_params,
       n = n,
       na.rm = FALSE,
       ...
@@ -150,16 +152,15 @@ StatDepth <- ggproto(
   
   compute_group = function(
     data, scales,
-    notion = "halfspace",
-    n = 100, ...
+    notion = "zonoid", notion_params = list(),
+    n = 100L, ...
   ) {
     ord_cols <- get_ord_aes(data)
     notion <- match.arg(
       notion,
       # `eval(formals(ddalpha::depth.)$notion)`
       c("zonoid", "halfspace", "Mahalanobis", "projection", "spatial", 
-        "spatialLocal", "simplicial", "simplicialVolume", "ddplot", 
-        "potential")
+        "spatialLocal", "simplicial", "simplicialVolume", "ddplot", "potential")
     )
     
     # calculate depth
@@ -169,11 +170,13 @@ StatDepth <- ggproto(
       x = seq(x_ran[1L], x_ran[2L], length.out = n),
       y = seq(y_ran[1L], y_ran[2L], length.out = n)
     )
-    depth <- ddalpha::depth.(
-      xy_grid,
-      data[, ord_cols[seq(2L)], drop = FALSE],
+    depth_args <- list(
+      x = xy_grid,
+      data = data[, ord_cols[seq(2L)], drop = FALSE],
       notion = notion
     )
+    depth_args <- c(depth_args, notion_params)
+    depth <- do.call(what = ddalpha::depth., args = depth_args)
     
     # prepare final output data frame
     df <- xy_grid

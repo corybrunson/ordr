@@ -12,8 +12,9 @@ stat_depth(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  notion = "halfspace",
-  n = 100,
+  notion = "zonoid",
+  notion_params = list(),
+  n = 100L,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -26,8 +27,9 @@ stat_depth_filled(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  notion = "halfspace",
-  n = 100,
+  notion = "zonoid",
+  notion_params = list(),
+  n = 100L,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -88,6 +90,9 @@ variables for details.}
 
 \item{notion}{Character; the name of the depth function (passed to
 \code{\link[ddalpha:depth.]{ddalpha::depth.()}}).}
+
+\item{notion_params}{List of additional parameters passed via \code{...} to
+\code{\link[ddalpha:depth.]{ddalpha::depth.()}}.}
 
 \item{n}{Number of grid points in each direction.}
 
@@ -202,6 +207,11 @@ b + geom_contour(stat = "depth", contour = TRUE)
 b + geom_contour_filled(stat = "depth_filled", contour = TRUE, alpha = .75)
 # contours colored by group
 b + stat_depth(aes(color = factor(cyl)))
+# custom depth notion
+b + stat_depth(
+  aes(color = factor(cyl)),
+  notion = "halfspace", notion_params = list(exact = TRUE)
+)
 
 # contours faceted by group
 b + stat_depth_filled(alpha = .75) +

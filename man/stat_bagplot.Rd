@@ -149,19 +149,20 @@ transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluati
 
 \examples{
 judges_pca <- ordinate(USJudgeRatings, prcomp)
+# FIXME: Generated shortcuts don't preserve internal processes.
 ggbiplot(judges_pca, sec.axes = "cols") +
   geom_rows_bagplot() +
   geom_cols_vector(aes(label = name))
 iris_pca <- ordinate(iris, prcomp, cols = seq(4), scale. = TRUE)
+# FIXME: Generated shortcuts don't preserve internal processes.
 ggbiplot(iris_pca) +
-  stat_rows_bagplot(aes(fill = Species), fence_linewidth = 0.25) +
+  stat_rows_bagplot(aes(fill = Species), fence.linewidth = 0.25) +
   geom_cols_vector(aes(label = name))
 
 \dontrun{
-# FIXME: Component-specific aesthetics should be able to vary with variables.
-# FIXME: Try manipulating columns in `$setup_data()`.
-ggbiplot(iris_pca) +
-  stat_rows_bagplot(aes(fill = Species, median_colour = Species)) +
+  # FIXME: Generated shortcuts don't preserve internal processes.
+  ggbiplot(iris_pca) +
+  stat_rows_bagplot(aes(fill = Species), median.colour = sync()) +
   geom_cols_vector(aes(label = name))
 }
 }

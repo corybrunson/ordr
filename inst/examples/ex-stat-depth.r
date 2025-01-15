@@ -15,6 +15,11 @@ b + geom_contour(stat = "depth", contour = TRUE)
 b + geom_contour_filled(stat = "depth_filled", contour = TRUE, alpha = .75)
 # contours colored by group
 b + stat_depth(aes(color = factor(cyl)))
+# custom depth notion
+b + stat_depth(
+  aes(color = factor(cyl)),
+  notion = "halfspace", notion_params = list(exact = TRUE)
+)
 
 # contours faceted by group
 b + stat_depth_filled(alpha = .75) +
