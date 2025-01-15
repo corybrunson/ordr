@@ -89,6 +89,8 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
   \describe{
     \item{\code{notion}}{Character; the name of the depth function (passed to
 \code{\link[ddalpha:depth.]{ddalpha::depth.()}}).}
+    \item{\code{notion_params}}{List of additional parameters passed via \code{...} to
+\code{\link[ddalpha:depth.]{ddalpha::depth.()}}.}
   }}
 }
 \description{

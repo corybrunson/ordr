@@ -59,19 +59,38 @@ geom_bagplot <- function(
     # NB: Defaults declared here will be missed by `layer(geom = "bagplot")` and
     # `stat_bagplot()`; they must be coordinated with the internal `*_defaults`
     # lists.
+    # bag_defaults
+    bag.linewidth = sync(), bag.linetype = sync(),
+    bag.colour = "black", bag.color = NULL,
+    bag.fill = sync(), bag.alpha = NA,
+    # median_defaults
+    median.shape = 21L, median.stroke = sync(), median.size = 5,
     median.colour = sync(), median.color = NULL,
     median.fill = "white", median.alpha = NA,
-    fence.linewidth = 0.25, fence.linetype = 3L,
-    fence.colour = NULL, fence.color = NULL,
-    fence.fill = NULL, fence.alpha = 0.25,
-    outlier.shape = NULL, outlier.stroke = 0.5, outlier.size = 1.5,
-    outlier.colour = NULL, outlier.color = NULL,
+    # fence_defaults
+    fence.linewidth = 0.25, fence.linetype = 0L,
+    fence.colour = sync(), fence.color = NULL,
+    fence.fill = sync(), fence.alpha = 0.25,
+    # outlier_defaults
+    outlier.shape = sync(), outlier.stroke = sync(), outlier.size = sync(),
+    outlier.colour = sync(), outlier.color = NULL,
     outlier.fill = NA, outlier.alpha = NA,
     na.rm = FALSE,
     show.legend = NA, inherit.aes = TRUE
 ) {
   
+  bag_gp <- list(
+    linewidth = bag.linewidth,
+    linetype  = bag.linetype,
+    colour    = bag.color %||% bag.colour,
+    fill      = bag.fill,
+    alpha     = bag.alpha
+  )
+  
   median_gp <- list(
+    shape  = median.shape,
+    stroke = median.stroke,
+    size   = median.size,
     colour = median.color %||% median.colour,
     fill   = median.fill,
     alpha  = median.alpha
@@ -103,6 +122,7 @@ geom_bagplot <- function(
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
+      bag_gp = bag_gp,
       median_gp  = median_gp,
       fence_gp   = fence_gp,
       outlier_gp = outlier_gp,
@@ -122,19 +142,19 @@ GeomBagplot <- ggproto(
   required_aes = c("x", "y", "component"),
   
   default_aes = aes(
-    # bag & median
-    linewidth = 0.5, linetype = 1,
-    shape = 21L, stroke = 0.5, size = 5,
+    # taken from `GeomPolygon` and `GeomPoint`; required for point grobs
+    linewidth = 0.5, linetype = 1L,
+    shape = 19L, stroke = 0.5, size = 1.5,
     colour = "black", fill = "grey55", alpha = NA
   ),
   
   draw_panel = function(
     data, panel_params, coord,
-    median_gp = NULL, fence_gp = NULL, outlier_gp = NULL,
+    bag_gp = NULL, median_gp = NULL, fence_gp = NULL, outlier_gp = NULL,
     na.rm = FALSE
   ) {
     # save(data, panel_params, coord,
-    #      median_gp, fence_gp, outlier_gp,
+    #      bag_gp, median_gp, fence_gp, outlier_gp,
     #      na.rm,
     #      file = "geom-bagplot-draw-panel.rda")
     # load("geom-bagplot-draw-panel.rda")
@@ -145,10 +165,10 @@ GeomBagplot <- ggproto(
     # fence data
     if (nrow(fence_data <- subset(data, component == "fence")) > 0L) {
       
-      # default aesthetics (if not to coordinate with bag)
+      # default aesthetics
       fence_defaults <- list(
         linewidth = 0.25,
-        linetype = 3L,
+        linetype = 0L,
         alpha = 0.25
       )
       # specify independent aesthetics
@@ -174,6 +194,25 @@ GeomBagplot <- ggproto(
     # bag data
     bag_data <- subset(data, component == "bag")
     
+    # default aesthetics
+    bag_defaults <- list(
+      colour = "black",
+      alpha = NA
+    )
+    # specify independent aesthetics
+    bag_aes <- GeomPolygon$aesthetics()
+    for (aes_name in bag_aes) {
+      bag_name <- paste0("bag.", aes_name)
+      bag_data[[aes_name]] <- 
+        (if (is.sync(bag_gp[[aes_name]])) 
+          bag_data[[aes_name]]) %||%
+        bag_gp[[aes_name]] %||% 
+        bag_defaults[[aes_name]] %||% 
+        bag_data[[aes_name]]
+    }
+    bag_aes <- intersect(bag_aes, names(bag_data))
+    bag_data <- subset(bag_data, select = bag_aes)
+    
     # bag polygon grob
     grobs <- c(grobs, list(GeomPolygon$draw_panel(
       data = bag_data, panel_params = panel_params, coord = coord
@@ -182,9 +221,10 @@ GeomBagplot <- ggproto(
     # median data
     if (nrow(median_data <- subset(data, component == "median")) > 0L) {
       
-      # default aesthetics (if not to coordinate with bag)
+      # default aesthetics
       median_defaults <- list(
-        colour = sync(),
+        shape = 21L,
+        size = 5,
         fill = "white",
         alpha = NA
       )
@@ -214,8 +254,6 @@ GeomBagplot <- ggproto(
       
       # default aesthetics (if not to coordinate with bag and median)
       outlier_defaults <- list(
-        stroke = 0.5,
-        size = 1.5,
         fill = NA,
         alpha = NA
       )

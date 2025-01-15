@@ -31,7 +31,7 @@
 #' @inheritParams ggplot2::layer
 #' @param median,fence,outliers Logical indicators whether to include median,
 #'   fence, and outliers in the composite output.
-#' @inheritDotParams stat_depth notion
+#' @inheritDotParams stat_depth notion notion_params
 #' @param fraction Fraction of the data to include in the bag.
 #' @param coef Scale factor of the fence relative to the bag.
 #' @example inst/examples/ex-stat-bagplot-judges.r
@@ -69,16 +69,17 @@ stat_bagplot <- function(
 StatBagplot <- ggproto(
   "StatBagplot", StatDepth,
   
-  extra_params = c("na.rm", "notion", "n"),
+  extra_params = c("na.rm", "notion", "notion_params", "n"),
   
   compute_group = function(
     data, scales,
     fraction = 0.5, coef = 3,
     median = TRUE, fence = TRUE, outliers = TRUE,
-    notion = "halfspace", n = 100,
+    notion = "zonoid", notion_params = list(), n = 100L,
     ...
   ) {
-    # save(data, scales, fraction, coef, median, fence, outliers, notion, n,
+    # save(data, scales, fraction, coef, median, fence, outliers,
+    #      notion, notion_params, n,
     #      file = "stat-bagplot-compute-group.rda")
     # load(file = "stat-bagplot-compute-group.rda")
     
@@ -87,11 +88,13 @@ StatBagplot <- ggproto(
     data_group <- unique(data$group)
     
     # compute `depth` column
-    data$depth <- ddalpha::depth.(
-      data[, c("x", "y")],
-      data[, c("x", "y")],
+    depth_args <- list(
+      x = data[, c("x", "y")],
+      data = data[, c("x", "y")],
       notion = notion
     )
+    depth_args <- c(depth_args, notion_params)
+    data$depth <- do.call(what = ddalpha::depth., args = depth_args)
     # locate depth containing `fraction` of `data`
     z.intercept <- quantile(data$depth, probs = 1 - fraction)
     
@@ -109,7 +112,7 @@ StatBagplot <- ggproto(
     # compute `depth` grid
     depth_df <- StatDepth$compute_group(
       data, scales,
-      notion = notion, n = n
+      notion = notion, notion_params = notion_params, n = n
     )
     depth_df$z <- depth_df$depth
     z.range <- range(depth_df$z, na.rm = TRUE, finite = TRUE)

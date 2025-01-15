@@ -4,12 +4,17 @@ p <- mtcars |>
   ggplot(aes(x = wt, y = disp)) +
   theme_bw()
 # basic bagplot
-# FIXME: Fence defaults to dotted rather than invisible `linetype`.
 p + geom_bagplot()
-# group by cylinder count using normally unmapped aesthetics
-set.seed(526822L)
+# group by cylinder count
 p + geom_bagplot(
   fraction = 0.4, coef = 1.2,
-  aes(fill = cyl, linetype = cyl),
-  fence.linetype = sync(), outlier.shape = "asterisk", outlier.colour = sync()
+  aes(fill = cyl, linetype = cyl, color = cyl)
+)
+# using normally unmapped aesthetics
+p + geom_bagplot(
+  fraction = 0.4, coef = 1.2,
+  aes(fill = cyl, linetype = cyl, color = cyl),
+  median.color = "black",
+  fence.linetype = sync(), fence.colour = "black",
+  outlier.shape = "asterisk", outlier.colour = "black"
 )
