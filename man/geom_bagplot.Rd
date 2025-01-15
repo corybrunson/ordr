@@ -86,6 +86,12 @@ contours, and outlier specifications.
 }
 \details{
 \code{geom_bagplot()} is designed to pair with \code{\link[=stat_bagplot]{stat_bagplot()}}.
+
+\strong{WARNING:}
+The trade-off between precision and runtime is far greater for depth
+estimation than for density estimation. At the resolution of the default
+\eqn{100 \times 100} grid, basic examples may vary widely starting from
+different random seeds.
 }
 \section{Biplot layers}{
 
@@ -109,7 +115,7 @@ are in bold):
 \item \strong{\code{component}}
 \item \code{linewidth}, \code{linetype},
 \code{colour}, \code{fill}, \code{alpha}
-\item \code{median_shape}, \code{median_stroke}, \code{median_size},
+\item \code{shape}, \code{stroke}, \code{size},
 \code{median_colour}, \code{median_fill}, \code{median_alpha}
 \item \code{fence_linewidth}, \code{fence_linetype},
 \code{fence_colour}, \code{fence_fill}, \code{fence_alpha}
@@ -120,13 +126,31 @@ are in bold):
 }
 
 \examples{
-ggplot(mtcars, aes(x = wt, y = disp)) +
-  geom_bagplot(coef = 1.5) +
+# Motor Trends base plot with factorized cylinder counts
+p <- mtcars |> 
+  transform(cyl = factor(cyl)) |> 
+  ggplot(aes(x = wt, y = disp)) +
   theme_bw()
-
-ggplot(faithful, aes(x = eruptions, y = waiting)) +
-  stat_bagplot(fence = FALSE) +
-  theme_bw()
+# basic bagplot
+# FIXME: Fence defaults to dotted rather than invisible `linetype`.
+p + geom_bagplot()
+# group by cylinder count
+# FIXME: Component aesthetic data values aren't mapped to color values.
+set.seed(526822L)
+p + geom_bagplot(
+  fraction = 0.4, coef = 1.2,
+  aes(
+    fill = cyl,
+    linetype = cyl,# fence_linetype = cyl,
+    median_colour = cyl, outlier_colour = cyl
+  )
+)
+# fixed custom aesthetics (bag and fence shrunk to expose outliers)
+set.seed(009003L)
+p + geom_bagplot(
+  fraction = 0.4, coef = 1.2,
+  aes(fill = cyl), shape = "plus", outlier_shape = "asterisk"
+)
 }
 \seealso{
 Other geom layers: 

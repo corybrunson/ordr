@@ -79,7 +79,7 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 of the rules and the translations of the axes from the projections of
 \code{referent} onto the axes and onto their normal vectors.}
 
-\item{fun.args}{Arguments passed to the \verb{fun.*}.}
+\item{fun.args}{Optional additional arguments passed on to the functions.}
 
 \item{referent}{The reference data set; see Details.}
 
