@@ -20,6 +20,13 @@
 #' @template biplot-layers
 #' @template biplot-ord-aes
 
+#' @section Computed variables: These are calculated during the statistical
+#'   transformation and can be accessed with [delayed
+#'   evaluation][ggplot2::aes_eval].
+#' \describe{
+#'   \item{`component`}{the component of the composite plot; used internally}
+#' }
+
 #' @include stat-depth.r stat-chull.r
 #' @inheritParams ggplot2::layer
 #' @param median,fence,outliers Logical indicators whether to include median,
@@ -155,19 +162,19 @@ StatBagplot <- ggproto(
     }
     
     # identify the outliers
-    outliers_df <- if (outliers) {
+    outlier_df <- if (outliers) {
       subset(data, outlying, select = c("x", "y"))
     } else {
       data.frame()
     }
     # tag the outliers
-    if (nrow(outliers_df) > 0L) {
-      outliers_df$component <- "outliers"
-      outliers_df$PANEL <- data_PANEL
-      outliers_df$group <- data_group
+    if (nrow(outlier_df) > 0L) {
+      outlier_df$component <- "outliers"
+      outlier_df$PANEL <- data_PANEL
+      outlier_df$group <- data_group
     }
     
-    dplyr::bind_rows(median_df, bag_df, fence_df, outliers_df)
+    dplyr::bind_rows(median_df, bag_df, fence_df, outlier_df)
   }
 )
 

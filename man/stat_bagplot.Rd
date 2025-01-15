@@ -139,6 +139,14 @@ A small number of transformations (\code{\link[=stat_rule]{stat_rule()}}) are in
 ordination aesthetics but will accept \code{ord_aes()} without warning.
 }
 
+\section{Computed variables}{
+ These are calculated during the statistical
+transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluation}.
+\describe{
+\item{\code{component}}{the component of the composite plot; used internally}
+}
+}
+
 \examples{
 judges_pca <- ordinate(USJudgeRatings, prcomp)
 ggbiplot(judges_pca, sec.axes = "cols") +

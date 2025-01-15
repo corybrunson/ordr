@@ -10,6 +10,23 @@ geom_bagplot(
   stat = "bagplot",
   position = "identity",
   ...,
+  median.colour = sync(),
+  median.color = NULL,
+  median.fill = "white",
+  median.alpha = NA,
+  fence.linewidth = 0.25,
+  fence.linetype = 3L,
+  fence.colour = NULL,
+  fence.color = NULL,
+  fence.fill = NULL,
+  fence.alpha = 0.25,
+  outlier.shape = NULL,
+  outlier.stroke = 0.5,
+  outlier.size = 1.5,
+  outlier.colour = NULL,
+  outlier.color = NULL,
+  outlier.fill = NA,
+  outlier.alpha = NA,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -89,6 +106,15 @@ contours, and outlier specifications.
 analogously to the pairing of \code{\link[ggplot2:geom_boxplot]{ggplot2::geom_boxplot()}} with
 \code{\link[ggplot2:geom_boxplot]{ggplot2::stat_boxplot()}}.
 
+Because the optional components are more expensive to compute in this
+setting, they are controlled by parameters passed to the stat. The standard
+aesthetics apply to the bag and (except color) the median, and auxiliary
+aesthetics like \code{median.colour} are available for the remaining
+specifications. These override the internal defaults, which in turn
+override the standard values (as some auxiliaries, e.g. \code{outlier.shape},
+are not provided separate defaults). Pass \code{sync()} to synchronize an
+auxiliary aesthetic with its standard counterpart.
+
 \strong{WARNING:}
 The trade-off between precision and runtime is greater for depth estimation
 than for density estimation. At the resolution of the default \eqn{100
@@ -115,14 +141,14 @@ are in bold):
 \itemize{
 \item \strong{\code{x}}, \strong{\code{y}}
 \item \strong{\code{component}}
-\item \code{linewidth}, \code{linetype},
-\code{colour}, \code{fill}, \code{alpha}
-\item \code{shape}, \code{stroke}, \code{size},
-\code{median_colour}, \code{median_fill}, \code{median_alpha}
-\item \code{fence_linewidth}, \code{fence_linetype},
-\code{fence_colour}, \code{fence_fill}, \code{fence_alpha}
-\item \code{outlier_shape}, \code{outlier_stroke}, \code{outlier_size},
-\code{outlier_colour}, \code{outlier_fill}, \code{outlier_alpha}
+\item \code{linewidth}
+\item \code{linetype}
+\item \code{colour}
+\item \code{fill}
+\item \code{alpha}
+\item \code{shape}
+\item \code{stroke}
+\item \code{size}
 \item \code{group}
 }
 }
@@ -136,16 +162,13 @@ p <- mtcars |>
 # basic bagplot
 # FIXME: Fence defaults to dotted rather than invisible `linetype`.
 p + geom_bagplot()
-# group by cylinder count
+# group by cylinder count using normally unmapped aesthetics
 # FIXME: Component aesthetic data values aren't mapped to color values.
 set.seed(526822L)
 p + geom_bagplot(
   fraction = 0.4, coef = 1.2,
-  aes(
-    fill = cyl,
-    linetype = cyl,# fence_linetype = cyl,
-    median_colour = cyl, outlier_colour = cyl
-  )
+  aes(fill = cyl, linetype = cyl),
+  fence.linetype = sync(), outlier.shape = "asterisk", outlier.colour = sync()
 )
 # fixed custom aesthetics (bag and fence shrunk to expose outliers)
 set.seed(009003L)
