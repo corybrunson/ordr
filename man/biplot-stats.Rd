@@ -165,9 +165,11 @@ stat_rows_center(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
+  fun = NULL,
   fun.center = NULL,
   fun.min = NULL,
   fun.max = NULL,
+  fun.ord = NULL,
   fun.args = list()
 )
 
@@ -180,9 +182,11 @@ stat_cols_center(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
+  fun = NULL,
   fun.center = NULL,
   fun.min = NULL,
   fun.max = NULL,
+  fun.ord = NULL,
   fun.args = list()
 )
 
@@ -195,7 +199,9 @@ stat_rows_star(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
+  fun = NULL,
   fun.center = NULL,
+  fun.ord = NULL,
   fun.args = list()
 )
 
@@ -208,7 +214,9 @@ stat_cols_star(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
+  fun = NULL,
   fun.center = NULL,
+  fun.ord = NULL,
   fun.args = list()
 )
 
@@ -542,10 +550,16 @@ fence, and outliers in the composite output.}
 \item{fun.data}{A function that is given the complete data and should
 return a data frame with variables \code{ymin}, \code{y}, and \code{ymax}.}
 
-\item{fun.center}{Alternatively to the \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary_bin()}}
-parameters, supply a summary function that takes a matrix as input and
-returns a named column summary vector. Cannot be used together with
-\code{fun.min} and \code{fun.max}.}
+\item{fun.center}{Deprecated alias to \code{fun}.}
+
+\item{fun.min, fun, fun.max}{Alternatively, supply three individual
+functions that are each passed a vector of values and should return a
+single number.}
+
+\item{fun.ord}{Alternatively to the \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary_bin()}} parameters,
+supply a summary function that takes a matrix as input and returns a named
+column summary vector. Overridden by \code{fun.data} and \code{fun}, cannot be used
+together with \code{fun.min} and \code{fun.max}.}
 
 \item{fun.args}{Optional additional arguments passed on to the functions.}
 
