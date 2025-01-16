@@ -8,13 +8,10 @@
 #'   [ggplot2::stat_boxplot()].
 #'
 #'   Because the optional components are more expensive to compute in this
-#'   setting, they are controlled by parameters passed to the stat. The standard
-#'   aesthetics apply to the bag and (except color) the median, and auxiliary
-#'   aesthetics like `median.colour` are available for the remaining
-#'   specifications. These override the internal defaults, which in turn
-#'   override the standard values (as some auxiliaries, e.g. `outlier.shape`,
-#'   are not provided separate defaults). Pass `sync()` to synchronize an
-#'   auxiliary aesthetic with its standard counterpart.
+#'   setting, they are controlled by parameters passed to the stat. Auxiliary
+#'   aesthetics like `median.colour` are available that override auxiliary
+#'   defaults, and these in turn override the standard defaults. Pass `sync()`
+#'   to synchronize an auxiliary aesthetic with its standard counterpart.
 #'
 #'   **WARNING:**
 #'   The trade-off between precision and runtime is greater for depth estimation
@@ -41,9 +38,6 @@
 #' - `stroke`
 #' - `size`
 #' - `group`
-#' 
-
-#' @template param-tick
 #' 
 
 #' @import ggplot2
