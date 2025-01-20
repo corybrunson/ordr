@@ -293,8 +293,9 @@ stat_rows_depth(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  notion = "halfspace",
-  n = 100,
+  notion = "zonoid",
+  notion_params = list(),
+  n = 100L,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -307,8 +308,9 @@ stat_cols_depth(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  notion = "halfspace",
-  n = 100,
+  notion = "zonoid",
+  notion_params = list(),
+  n = 100L,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -321,8 +323,9 @@ stat_rows_depth_filled(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  notion = "halfspace",
-  n = 100,
+  notion = "zonoid",
+  notion_params = list(),
+  n = 100L,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -335,8 +338,9 @@ stat_cols_depth_filled(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  notion = "halfspace",
-  n = 100,
+  notion = "zonoid",
+  notion_params = list(),
+  n = 100L,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -575,6 +579,9 @@ data. Defaults to \code{FALSE}.}
 
 \item{notion}{Character; the name of the depth function (passed to
 \code{\link[ddalpha:depth.]{ddalpha::depth.()}}).}
+
+\item{notion_params}{List of additional parameters passed via \code{...} to
+\code{\link[ddalpha:depth.]{ddalpha::depth.()}}.}
 
 \item{referent}{The reference data set; see Details.}
 

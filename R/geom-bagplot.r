@@ -10,8 +10,11 @@
 #'   Because the optional components are more expensive to compute in this
 #'   setting, they are controlled by parameters passed to the stat. Auxiliary
 #'   aesthetics like `median.colour` are available that override auxiliary
-#'   defaults, and these in turn override the standard defaults. Pass `sync()`
-#'   to synchronize an auxiliary aesthetic with its standard counterpart.
+#'   defaults, and these in turn override the standard defaults. Auxiliary
+#'   defaults also take effect when auxiliary aesthetics are passed `NULL`, so
+#'   that `stat_bagplot()` and `geom_bagplot()` have the same default behavior.
+#'   Pass `sync()` (instead of `NULL`, as in [ggplot2::geom_boxplot()]) to
+#'   synchronize an auxiliary aesthetic with its standard counterpart.
 #'
 #'   **WARNING:**
 #'   The trade-off between precision and runtime is greater for depth estimation
@@ -42,6 +45,18 @@
 
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
+#' @param bag.linetype,bag.linewidth,bag.colour,bag.color,bag.fill,bag.alpha
+#'   Default aesthetics for bags. Set to [sync()] to inherit from the data's
+#'   aesthetics or to `NULL` to use the data's aesthetics.
+#' @param median.shape,median.stroke,median.size,median.colour,median.color,median.fill,median.alpha
+#'   Default aesthetics for medians. Set to [sync()] to inherit from the data's
+#'   aesthetics or to `NULL` to use the data's aesthetics.
+#' @param fence.linetype,fence.linewidth,fence.colour,fence.color,fence.fill,fence.alpha
+#'   Default aesthetics for fences. Set to [sync()] to inherit from the data's
+#'   aesthetics or to `NULL` to use the data's aesthetics.
+#' @param outlier.shape,outlier.stroke,outlier.size,outlier.colour,outlier.color,outlier.fill,outlier.alpha
+#'   Default aesthetics for outliers. Set to [sync()] to inherit from the data's
+#'   aesthetics or to `NULL` to use the data's aesthetics.
 #' @template param-geom
 #' @template return-layer
 #' @family geom layers
@@ -142,6 +157,7 @@ GeomBagplot <- ggproto(
     colour = "black", fill = "grey55", alpha = NA
   ),
   
+  # TODO: Use `$draw_group()` instead, if bugs can be resolved.
   draw_panel = function(
     data, panel_params, coord,
     bag_gp = NULL, median_gp = NULL, fence_gp = NULL, outlier_gp = NULL,

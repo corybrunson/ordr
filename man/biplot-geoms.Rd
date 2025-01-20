@@ -440,20 +440,29 @@ geom_rows_bagplot(
   stat = "bagplot",
   position = "identity",
   ...,
-  median.colour = "white",
+  bag.linewidth = sync(),
+  bag.linetype = sync(),
+  bag.colour = "black",
+  bag.color = NULL,
+  bag.fill = sync(),
+  bag.alpha = NA,
+  median.shape = 21L,
+  median.stroke = sync(),
+  median.size = 5,
+  median.colour = sync(),
   median.color = NULL,
-  median.fill = NA,
+  median.fill = "white",
   median.alpha = NA,
   fence.linewidth = 0.25,
-  fence.linetype = 3L,
-  fence.colour = NULL,
+  fence.linetype = 0L,
+  fence.colour = sync(),
   fence.color = NULL,
-  fence.fill = NULL,
+  fence.fill = sync(),
   fence.alpha = 0.25,
-  outlier.shape = NULL,
-  outlier.stroke = 0.5,
-  outlier.size = 1.5,
-  outlier.colour = NULL,
+  outlier.shape = sync(),
+  outlier.stroke = sync(),
+  outlier.size = sync(),
+  outlier.colour = sync(),
   outlier.color = NULL,
   outlier.fill = NA,
   outlier.alpha = NA,
@@ -468,20 +477,29 @@ geom_cols_bagplot(
   stat = "bagplot",
   position = "identity",
   ...,
-  median.colour = "white",
+  bag.linewidth = sync(),
+  bag.linetype = sync(),
+  bag.colour = "black",
+  bag.color = NULL,
+  bag.fill = sync(),
+  bag.alpha = NA,
+  median.shape = 21L,
+  median.stroke = sync(),
+  median.size = 5,
+  median.colour = sync(),
   median.color = NULL,
-  median.fill = NA,
+  median.fill = "white",
   median.alpha = NA,
   fence.linewidth = 0.25,
-  fence.linetype = 3L,
-  fence.colour = NULL,
+  fence.linetype = 0L,
+  fence.colour = sync(),
   fence.color = NULL,
-  fence.fill = NULL,
+  fence.fill = sync(),
   fence.alpha = 0.25,
-  outlier.shape = NULL,
-  outlier.stroke = 0.5,
-  outlier.size = 1.5,
-  outlier.colour = NULL,
+  outlier.shape = sync(),
+  outlier.stroke = sync(),
+  outlier.size = sync(),
+  outlier.colour = sync(),
   outlier.color = NULL,
   outlier.fill = NA,
   outlier.alpha = NA,
@@ -869,6 +887,18 @@ axis, as a proportion of the minimum of the plot width and height.}
 
 \item{label_dodge}{Numeric; the orthogonal distance of the axis label from
 the axis, as a proportion of the minimum of the plot width and height.}
+
+\item{bag.linetype, bag.linewidth, bag.colour, bag.color, bag.fill, bag.alpha}{Default aesthetics for bags. Set to \code{\link[=sync]{sync()}} to inherit from the data's
+aesthetics or to \code{NULL} to use the data's aesthetics.}
+
+\item{median.shape, median.stroke, median.size, median.colour, median.color, median.fill, median.alpha}{Default aesthetics for medians. Set to \code{\link[=sync]{sync()}} to inherit from the data's
+aesthetics or to \code{NULL} to use the data's aesthetics.}
+
+\item{fence.linetype, fence.linewidth, fence.colour, fence.color, fence.fill, fence.alpha}{Default aesthetics for fences. Set to \code{\link[=sync]{sync()}} to inherit from the data's
+aesthetics or to \code{NULL} to use the data's aesthetics.}
+
+\item{outlier.shape, outlier.stroke, outlier.size, outlier.colour, outlier.color, outlier.fill, outlier.alpha}{Default aesthetics for outliers. Set to \code{\link[=sync]{sync()}} to inherit from the data's
+aesthetics or to \code{NULL} to use the data's aesthetics.}
 
 \item{new_data}{A list (best structured as a \link[base:data.frame]{data.frame})
 of row (\code{geom_cols_interpolation()}) or column

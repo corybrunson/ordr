@@ -47,9 +47,6 @@
 #' - `group`
 #' 
 
-#' @template param-tick
-#' 
-
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_text

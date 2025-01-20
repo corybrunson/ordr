@@ -1,6 +1,10 @@
 
 #' @importFrom utils getFromNamespace
 
+#' @importFrom rlang list2
+
+#' @importFrom ggrepel position_nudge_repel
+
 #' @importFrom magrittr %>%
 #' @export
 magrittr::`%>%`

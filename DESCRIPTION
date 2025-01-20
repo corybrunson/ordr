@@ -32,6 +32,7 @@ Depends:
     ggplot2
 Imports:
     rlang,
+    cli,
     stringr,
     tidyselect,
     scales,

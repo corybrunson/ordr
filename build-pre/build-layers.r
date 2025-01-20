@@ -30,11 +30,11 @@ format_formal <- function(x) {
   )
 }
 
-# arguments to include in the root of each `layer()` call (not in `params = `)
-root_args <- c(
-  "mapping", "data", "stat", "geom", "position",
-  "show.legend", "inherit.aes"
-)
+# # arguments to include in the root of each `layer()` call (not in `params = `)
+# root_args <- c(
+#   "mapping", "data", "stat", "geom", "position",
+#   "show.legend", "inherit.aes"
+# )
 
 # concatenate arguments and values in roxygen2 markdown format
 arg_c <- function(x, y, indent = 0L, end = FALSE) {
@@ -69,16 +69,31 @@ get_from <- c(
   to_unit = "ggrepel"
 )
 
-# convert `nudge_x/nudge_y` parameters to position parameter
-nudges_to_position <- str_c(
-  "  if (! missing(nudge_x) || ! missing(nudge_y)) {{\n",
-  "    if (! missing(position)) {{\n",
-  "      stop(\"Specify either `position` or `nudge_x`/`nudge_y`\", ",
-  "call. = FALSE)\n",
-  "    }}\n",
-  "    position <- position_nudge(nudge_x, nudge_y)\n",
-  "  }}\n\n"
-)
+# # convert `nudge_x/nudge_y` parameters to position parameter
+# nudges_to_position <- str_c(
+#   "  if (! missing(nudge_x) || ! missing(nudge_y)) {{\n",
+#   "    if (! missing(position)) {{\n",
+#   "      stop(\"Specify either `position` or `nudge_x`/`nudge_y`\", ",
+#   "call. = FALSE)\n",
+#   "    }}\n",
+#   "    position <- position_nudge(nudge_x, nudge_y)\n",
+#   "  }}\n\n"
+# )
+
+# collect parameters (non-standard aesthetics)
+layer_body <- function(layer) {
+  # all internal code
+  code <- as.list(layer) |> dplyr::last() |> deparse(width.cutoff = 54L)
+  # # everything prior to `layer()`
+  # code <- code[-c(1L, seq(str_which(code, "layer\\("), length(code)))]
+  # everything within braces
+  code <- code[-c(1L, length(code))]
+  # account for escapes
+  code <- str_replace_all(code, "\\{", "\\{\\{")
+  code <- str_replace_all(code, "\\}", "\\}\\}")
+  # return line-formatted string
+  str_c(str_c(code, collapse = "\n"), "    \n    \n")
+}
 
 # function to generate layer functions, ggproto objects, and their documentation
 build_biplot_layer <- function(
@@ -135,31 +150,31 @@ build_biplot_layer <- function(
     layer_vals2 <- layer_vals[seq2]
   }
   
-  # define biplot layer root parameters
-  root_vals <- root_args
-  root_vals[[match("stat", root_args)]] <- switch(
-    type,
-    stat = ggproto_name,
-    geom = glue::glue("{.matrix}_stat(stat)")
-  )
-  root_vals[[match("geom", root_args)]] <- switch(
-    type,
-    stat = "geom",
-    geom = ggproto_name
-  )
+  # # define biplot layer root parameters
+  # root_vals <- root_args
+  # root_vals[[match("stat", root_args)]] <- switch(
+  #   type,
+  #   stat = ggproto_name,
+  #   geom = glue::glue("{.matrix}_stat(stat)")
+  # )
+  # root_vals[[match("geom", root_args)]] <- switch(
+  #   type,
+  #   stat = "geom",
+  #   geom = ggproto_name
+  # )
   
-  # detect `nudge_x` and `nudge_y` parameters
-  nudge_args <- any(c("nudge_x", "nudge_y") %in% layer_args)
+  # # detect `nudge_x` and `nudge_y` parameters
+  # nudge_args <- any(c("nudge_x", "nudge_y") %in% layer_args)
   
-  # define biplot layer internal parameters
-  param_args <- setdiff(layer_args, c(root_args, "...", "nudge_x", "nudge_y"))
-  # make any prespecified syntactic parameter transformations
-  # -+- need to also specify package or layer to avoid ambiguity -+-
-  param_vals <- param_args
-  param_match <- intersect(param_args, names(param_trans))
-  if (length(param_match) > 0L)
-    param_vals[match(param_match, param_vals)] <-
-    unname(param_trans[param_match])
+  # # define biplot layer internal parameters
+  # param_args <- setdiff(layer_args, c(root_args, "...", "nudge_x", "nudge_y"))
+  # # make any prespecified syntactic parameter transformations
+  # # -+- need to also specify package or layer to avoid ambiguity -+-
+  # param_vals <- param_args
+  # param_match <- intersect(param_args, names(param_trans))
+  # if (length(param_match) > 0L)
+  #   param_vals[match(param_match, param_vals)] <-
+  #   unname(param_trans[param_match])
   
   # define ggproto object
   # TODO: Incorporate `ensure_cartesian_polar()` if necessary where appropriate.
@@ -187,6 +202,28 @@ build_biplot_layer <- function(
     geom = ""
   )
   
+  # adjust layer body as necessary (referent params)
+  layer_body_adj <- layer_body(layer)
+  layer_body_adj <- str_replace(
+    layer_body_adj,
+    "stat = [A-Za-z0-9]+,",
+    switch(
+      type,
+      stat = glue::glue("stat = {ggproto_name},"),
+      geom = glue::glue("stat = {.matrix}_stat(stat),")
+    )
+  )
+  if (ref) {
+    layer_body_adj <- str_replace(
+      layer_body_adj,
+      "referent,",
+      str_c(
+        "referent,\n",
+        "            ref_subset = ref_subset, ref_elements = ref_elements,"
+      )
+    )
+  }
+  
   # write function
   layer_def <- glue::glue(
     "#' @rdname biplot-{type}s\n",
@@ -201,23 +238,25 @@ build_biplot_layer <- function(
     },
     "\n",
     ") {{\n",
-    if (nudge_args) nudges_to_position else "",
-    if (ref) "  LayerRef <- layer(\n" else "  layer(\n",
-    "    ",
-    arg_c(root_args, root_vals, 4L),
-    "\n",
-    "    params = list(\n",
-    if (length(param_args) == 0L) "" else "      ",
-    if (length(param_args) == 0L) "" else arg_c(param_args, param_vals, 6L),
-    if (length(param_args) == 0L) "" else "\n",
-    if (ref) "      ref_subset = ref_subset,\n" else "",
-    if (ref) "      ref_elements = ref_elements,\n" else "",
-    if ("na.rm" %in% param_args) "" else "      na.rm = FALSE,\n",
-    "      ...\n",
-    "    )\n",
-    "  )\n",
-    if (ref) "  class(LayerRef) <- c(\"LayerRef\", class(LayerRef))\n" else "",
-    if (ref) "  LayerRef\n" else "",
+    # if (nudge_args) nudges_to_position else "",
+    layer_body_adj,
+    # layer_body(layer),
+    # if (ref) "  LayerRef <- layer(\n" else "  layer(\n",
+    # "    ",
+    # arg_c(root_args, root_vals, 4L),
+    # "\n",
+    # "    params = list(\n",
+    # if (length(param_args) == 0L) "" else "      ",
+    # if (length(param_args) == 0L) "" else arg_c(param_args, param_vals, 6L),
+    # if (length(param_args) == 0L) "" else "\n",
+    # if (ref) "      ref_subset = ref_subset,\n" else "",
+    # if (ref) "      ref_elements = ref_elements,\n" else "",
+    # if ("na.rm" %in% param_args) "" else "      na.rm = FALSE,\n",
+    # "      ...\n",
+    # "    )\n",
+    # "  )\n",
+    # if (ref) "  class(LayerRef) <- c(\"LayerRef\", class(LayerRef))\n" else "",
+    # if (ref) "  LayerRef\n" else "",
     "}}\n"
   )
   

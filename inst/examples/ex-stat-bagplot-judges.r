@@ -1,5 +1,8 @@
-judges_pca <- ordinate(USJudgeRatings, prcomp)
-# FIXME: Generated shortcuts don't preserve internal processes.
+USJudgeRatings |> 
+  ordinate(prcomp) |> 
+  mutate_rows(surname = gsub("(,|\\.).*$", "", name)) ->
+  judges_pca
 ggbiplot(judges_pca, sec.axes = "cols") +
   geom_rows_bagplot() +
-  geom_cols_vector(aes(label = name))
+  geom_rows_text(aes(label = surname), size = 2) +
+  geom_cols_vector(aes(label = name), size = 3, alpha = .5)

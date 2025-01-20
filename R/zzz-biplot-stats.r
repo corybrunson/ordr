@@ -67,24 +67,12 @@ stat_rows_density_2d <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatRowsDensity2d,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      contour = contour,
-      contour_var = contour_var,
-      n = n,
-      h = h,
-      adjust = adjust,
-      na.rm = na.rm,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatRowsDensity2d, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            contour = contour, contour_var = contour_var, 
+            n = n, h = h, adjust = adjust, ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -116,24 +104,12 @@ stat_cols_density_2d <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatColsDensity2d,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      contour = contour,
-      contour_var = contour_var,
-      n = n,
-      h = h,
-      adjust = adjust,
-      na.rm = na.rm,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatColsDensity2d, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            contour = contour, contour_var = contour_var, 
+            n = n, h = h, adjust = adjust, ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -165,24 +141,12 @@ stat_rows_density_2d_filled <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatRowsDensity2dFilled,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      contour = contour,
-      contour_var = contour_var,
-      n = n,
-      h = h,
-      adjust = adjust,
-      na.rm = na.rm,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatRowsDensity2dFilled, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            contour = contour, contour_var = contour_var, 
+            n = n, h = h, adjust = adjust, ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -214,24 +178,12 @@ stat_cols_density_2d_filled <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatColsDensity2dFilled,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      contour = contour,
-      contour_var = contour_var,
-      n = n,
-      h = h,
-      adjust = adjust,
-      na.rm = na.rm,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatColsDensity2dFilled, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            contour = contour, contour_var = contour_var, 
+            n = n, h = h, adjust = adjust, ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -261,22 +213,12 @@ stat_rows_ellipse <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatRowsEllipse,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      type = type,
-      level = level,
-      segments = segments,
-      na.rm = na.rm,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatRowsEllipse, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(type = type, 
+            level = level, segments = segments, na.rm = na.rm, 
+            ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -306,22 +248,12 @@ stat_cols_ellipse <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatColsEllipse,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      type = type,
-      level = level,
-      segments = segments,
-      na.rm = na.rm,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatColsEllipse, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(type = type, 
+            level = level, segments = segments, na.rm = na.rm, 
+            ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -352,24 +284,12 @@ stat_rows_bagplot <- function(
   inherit.aes = TRUE,
   ...
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatRowsBagplot,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      fraction = fraction,
-      coef = coef,
-      median = median,
-      fence = fence,
-      outliers = outliers,
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatRowsBagplot, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(fraction = fraction, 
+            coef = coef, median = median, fence = fence, 
+            outliers = outliers, na.rm = FALSE, ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -400,24 +320,12 @@ stat_cols_bagplot <- function(
   inherit.aes = TRUE,
   ...
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatColsBagplot,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      fraction = fraction,
-      coef = coef,
-      median = median,
-      fence = fence,
-      outliers = outliers,
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatColsBagplot, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(fraction = fraction, 
+            coef = coef, median = median, fence = fence, 
+            outliers = outliers, na.rm = FALSE, ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -450,26 +358,13 @@ stat_rows_center <- function(
   fun.ord = NULL,
   fun.args = list()
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatRowsCenter,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      fun.data = fun.data,
-      fun = fun,
-      fun.center = fun.center,
-      fun.min = fun.min,
-      fun.max = fun.max,
-      fun.ord = fun.ord,
-      fun.args = fun.args,
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatRowsCenter, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(fun.data = fun.data, 
+            fun = fun, fun.center = fun.center, fun.min = fun.min, 
+            fun.max = fun.max, fun.ord = fun.ord, fun.args = fun.args, 
+            na.rm = FALSE, ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -502,26 +397,13 @@ stat_cols_center <- function(
   fun.ord = NULL,
   fun.args = list()
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatColsCenter,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      fun.data = fun.data,
-      fun = fun,
-      fun.center = fun.center,
-      fun.min = fun.min,
-      fun.max = fun.max,
-      fun.ord = fun.ord,
-      fun.args = fun.args,
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatColsCenter, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(fun.data = fun.data, 
+            fun = fun, fun.center = fun.center, fun.min = fun.min, 
+            fun.max = fun.max, fun.ord = fun.ord, fun.args = fun.args, 
+            na.rm = FALSE, ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -552,24 +434,12 @@ stat_rows_star <- function(
   fun.ord = NULL,
   fun.args = list()
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatRowsStar,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      fun.data = fun.data,
-      fun = fun,
-      fun.center = fun.center,
-      fun.ord = fun.ord,
-      fun.args = fun.args,
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatRowsStar, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(fun.data = fun.data, 
+            fun = fun, fun.center = fun.center, fun.ord = fun.ord, 
+            fun.args = fun.args, na.rm = FALSE, ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -600,24 +470,12 @@ stat_cols_star <- function(
   fun.ord = NULL,
   fun.args = list()
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatColsStar,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      fun.data = fun.data,
-      fun = fun,
-      fun.center = fun.center,
-      fun.ord = fun.ord,
-      fun.args = fun.args,
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatColsStar, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(fun.data = fun.data, 
+            fun = fun, fun.center = fun.center, fun.ord = fun.ord, 
+            fun.args = fun.args, na.rm = FALSE, ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -643,19 +501,11 @@ stat_rows_chull <- function(
   inherit.aes = TRUE,
   ...
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatRowsChull,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatRowsChull, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(na.rm = FALSE, 
+            ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -681,19 +531,11 @@ stat_cols_chull <- function(
   inherit.aes = TRUE,
   ...
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatColsChull,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatColsChull, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(na.rm = FALSE, 
+            ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -721,21 +563,11 @@ stat_rows_peel <- function(
   inherit.aes = TRUE,
   ...
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatRowsPeel,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      breaks = breaks,
-      cut = cut,
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatRowsPeel, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(breaks = breaks, 
+            cut = cut, na.rm = FALSE, ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -763,21 +595,11 @@ stat_cols_peel <- function(
   inherit.aes = TRUE,
   ...
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatColsPeel,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      breaks = breaks,
-      cut = cut,
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatColsPeel, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(breaks = breaks, 
+            cut = cut, na.rm = FALSE, ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -804,20 +626,11 @@ stat_rows_cone <- function(
   inherit.aes = TRUE,
   ...
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatRowsCone,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      origin = origin,
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatRowsCone, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(na.rm = FALSE, 
+            origin = origin, ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -844,20 +657,11 @@ stat_cols_cone <- function(
   inherit.aes = TRUE,
   ...
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatColsCone,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      origin = origin,
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatColsCone, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(na.rm = FALSE, 
+            origin = origin, ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -881,29 +685,20 @@ stat_rows_depth <- function(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  notion = "halfspace",
-  n = 100,
+  notion = "zonoid",
+  notion_params = list(),
+  n = 100L,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatRowsDepth,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      contour = contour,
-      contour_var = contour_var,
-      notion = notion,
-      n = n,
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatRowsDepth, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(contour = contour, 
+            contour_var = contour_var, notion = notion, 
+            notion_params = notion_params, n = n, na.rm = FALSE, 
+            ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -927,29 +722,20 @@ stat_cols_depth <- function(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  notion = "halfspace",
-  n = 100,
+  notion = "zonoid",
+  notion_params = list(),
+  n = 100L,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatColsDepth,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      contour = contour,
-      contour_var = contour_var,
-      notion = notion,
-      n = n,
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatColsDepth, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(contour = contour, 
+            contour_var = contour_var, notion = notion, 
+            notion_params = notion_params, n = n, na.rm = FALSE, 
+            ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -973,29 +759,20 @@ stat_rows_depth_filled <- function(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  notion = "halfspace",
-  n = 100,
+  notion = "zonoid",
+  notion_params = list(),
+  n = 100L,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatRowsDepthFilled,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      contour = contour,
-      contour_var = contour_var,
-      notion = notion,
-      n = n,
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatRowsDepthFilled, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(contour = contour, 
+            contour_var = contour_var, notion = notion, 
+            notion_params = notion_params, n = n, na.rm = FALSE, 
+            ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -1019,29 +796,20 @@ stat_cols_depth_filled <- function(
   position = "identity",
   contour = TRUE,
   contour_var = "depth",
-  notion = "halfspace",
-  n = 100,
+  notion = "zonoid",
+  notion_params = list(),
+  n = 100L,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatColsDepthFilled,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      contour = contour,
-      contour_var = contour_var,
-      notion = notion,
-      n = n,
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatColsDepthFilled, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(contour = contour, 
+            contour_var = contour_var, notion = notion, 
+            notion_params = notion_params, n = n, na.rm = FALSE, 
+            ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -1073,24 +841,14 @@ stat_rows_projection <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-  LayerRef <- layer(
-    mapping = mapping,
-    data = data,
-    stat = StatRowsProjection,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      referent = referent,
-      ref_subset = ref_subset,
-      ref_elements = ref_elements,
-      na.rm = FALSE,
-      ...
-    )
-  )
-  class(LayerRef) <- c("LayerRef", class(LayerRef))
-  LayerRef
+    LayerRef <- layer(data = data, mapping = mapping, stat = StatRowsProjection, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(referent = referent,
+            ref_subset = ref_subset, ref_elements = ref_elements, 
+            na.rm = FALSE, ...))
+    class(LayerRef) <- c("LayerRef", class(LayerRef))
+    LayerRef    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -1122,24 +880,14 @@ stat_cols_projection <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-  LayerRef <- layer(
-    mapping = mapping,
-    data = data,
-    stat = StatColsProjection,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      referent = referent,
-      ref_subset = ref_subset,
-      ref_elements = ref_elements,
-      na.rm = FALSE,
-      ...
-    )
-  )
-  class(LayerRef) <- c("LayerRef", class(LayerRef))
-  LayerRef
+    LayerRef <- layer(data = data, mapping = mapping, stat = StatColsProjection, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(referent = referent,
+            ref_subset = ref_subset, ref_elements = ref_elements, 
+            na.rm = FALSE, ...))
+    class(LayerRef) <- c("LayerRef", class(LayerRef))
+    LayerRef    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -1175,28 +923,16 @@ stat_rows_rule <- function(
   ref_subset = NULL, ref_elements = "active",
   ...
 ) {
-  LayerRef <- layer(
-    mapping = mapping,
-    data = data,
-    stat = StatRowsRule,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      fun.lower = fun.lower,
-      fun.upper = fun.upper,
-      fun.offset = fun.offset,
-      fun.args = fun.args,
-      referent = referent,
-      ref_subset = ref_subset,
-      ref_elements = ref_elements,
-      na.rm = FALSE,
-      ...
-    )
-  )
-  class(LayerRef) <- c("LayerRef", class(LayerRef))
-  LayerRef
+    LayerRef <- layer(data = data, mapping = mapping, stat = StatRowsRule, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(referent = referent,
+            ref_subset = ref_subset, ref_elements = ref_elements, 
+            fun.lower = fun.lower, fun.upper = fun.upper, 
+            fun.offset = fun.offset, fun.args = fun.args, 
+            na.rm = FALSE, ...))
+    class(LayerRef) <- c("LayerRef", class(LayerRef))
+    LayerRef    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -1232,28 +968,16 @@ stat_cols_rule <- function(
   ref_subset = NULL, ref_elements = "active",
   ...
 ) {
-  LayerRef <- layer(
-    mapping = mapping,
-    data = data,
-    stat = StatColsRule,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      fun.lower = fun.lower,
-      fun.upper = fun.upper,
-      fun.offset = fun.offset,
-      fun.args = fun.args,
-      referent = referent,
-      ref_subset = ref_subset,
-      ref_elements = ref_elements,
-      na.rm = FALSE,
-      ...
-    )
-  )
-  class(LayerRef) <- c("LayerRef", class(LayerRef))
-  LayerRef
+    LayerRef <- layer(data = data, mapping = mapping, stat = StatColsRule, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(referent = referent,
+            ref_subset = ref_subset, ref_elements = ref_elements, 
+            fun.lower = fun.lower, fun.upper = fun.upper, 
+            fun.offset = fun.offset, fun.args = fun.args, 
+            na.rm = FALSE, ...))
+    class(LayerRef) <- c("LayerRef", class(LayerRef))
+    LayerRef    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -1280,20 +1004,11 @@ stat_rows_scale <- function(
   ...,
   mult = 1
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatRowsScale,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      mult = mult,
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatRowsScale, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(mult = mult, 
+            na.rm = FALSE, ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -1320,20 +1035,11 @@ stat_cols_scale <- function(
   ...,
   mult = 1
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatColsScale,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      mult = mult,
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatColsScale, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(mult = mult, 
+            na.rm = FALSE, ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -1361,21 +1067,11 @@ stat_rows_spantree <- function(
   inherit.aes = TRUE,
   ...
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatRowsSpantree,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      engine = engine,
-      method = method,
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatRowsSpantree, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, check.aes = FALSE, params = list(engine = engine, 
+            method = method, na.rm = FALSE, ...))    
+    
 }
 
 #' @rdname ordr-ggproto
@@ -1403,19 +1099,9 @@ stat_cols_spantree <- function(
   inherit.aes = TRUE,
   ...
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = StatColsSpantree,
-    geom = geom,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      engine = engine,
-      method = method,
-      na.rm = FALSE,
-      ...
-    )
-  )
+    layer(data = data, mapping = mapping, stat = StatColsSpantree, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, check.aes = FALSE, params = list(engine = engine, 
+            method = method, na.rm = FALSE, ...))    
+    
 }

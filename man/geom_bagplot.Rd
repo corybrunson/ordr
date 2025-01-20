@@ -90,6 +90,18 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
+\item{bag.linetype, bag.linewidth, bag.colour, bag.color, bag.fill, bag.alpha}{Default aesthetics for bags. Set to \code{\link[=sync]{sync()}} to inherit from the data's
+aesthetics or to \code{NULL} to use the data's aesthetics.}
+
+\item{median.shape, median.stroke, median.size, median.colour, median.color, median.fill, median.alpha}{Default aesthetics for medians. Set to \code{\link[=sync]{sync()}} to inherit from the data's
+aesthetics or to \code{NULL} to use the data's aesthetics.}
+
+\item{fence.linetype, fence.linewidth, fence.colour, fence.color, fence.fill, fence.alpha}{Default aesthetics for fences. Set to \code{\link[=sync]{sync()}} to inherit from the data's
+aesthetics or to \code{NULL} to use the data's aesthetics.}
+
+\item{outlier.shape, outlier.stroke, outlier.size, outlier.colour, outlier.color, outlier.fill, outlier.alpha}{Default aesthetics for outliers. Set to \code{\link[=sync]{sync()}} to inherit from the data's
+aesthetics or to \code{NULL} to use the data's aesthetics.}
+
 \item{na.rm}{Passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
@@ -118,8 +130,11 @@ analogously to the pairing of \code{\link[ggplot2:geom_boxplot]{ggplot2::geom_bo
 Because the optional components are more expensive to compute in this
 setting, they are controlled by parameters passed to the stat. Auxiliary
 aesthetics like \code{median.colour} are available that override auxiliary
-defaults, and these in turn override the standard defaults. Pass \code{sync()}
-to synchronize an auxiliary aesthetic with its standard counterpart.
+defaults, and these in turn override the standard defaults. Auxiliary
+defaults also take effect when auxiliary aesthetics are passed \code{NULL}, so
+that \code{stat_bagplot()} and \code{geom_bagplot()} have the same default behavior.
+Pass \code{sync()} (instead of \code{NULL}, as in \code{\link[ggplot2:geom_boxplot]{ggplot2::geom_boxplot()}}) to
+synchronize an auxiliary aesthetic with its standard counterpart.
 
 \strong{WARNING:}
 The trade-off between precision and runtime is greater for depth estimation
