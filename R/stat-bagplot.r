@@ -34,6 +34,7 @@
 #' @inheritDotParams stat_depth notion notion_params
 #' @param fraction Fraction of the data to include in the bag.
 #' @param coef Scale factor of the fence relative to the bag.
+#' @family stat layers
 #' @example inst/examples/ex-stat-bagplot-judges.r
 #' @example inst/examples/ex-stat-bagplot-iris.r
 #' @export

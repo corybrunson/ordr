@@ -139,6 +139,7 @@ USPersonalExpenditure \%>\%
 }
 \seealso{
 Other stat layers: 
+\code{\link{stat_bagplot}()},
 \code{\link{stat_center}()},
 \code{\link{stat_chull}()},
 \code{\link{stat_depth}()},

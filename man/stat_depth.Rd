@@ -228,6 +228,7 @@ Rousseeuw PJ, Ruts I, & Tukey JW (1999) "The Bagplot: A Bivariate Boxplot".
 }
 \seealso{
 Other stat layers: 
+\code{\link{stat_bagplot}()},
 \code{\link{stat_center}()},
 \code{\link{stat_chull}()},
 \code{\link{stat_cone}()},

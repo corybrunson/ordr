@@ -213,6 +213,7 @@ Statistical Society: Series A (General)}, \strong{139}(3): 318--344.
 }
 \seealso{
 Other stat layers: 
+\code{\link{stat_bagplot}()},
 \code{\link{stat_center}()},
 \code{\link{stat_cone}()},
 \code{\link{stat_depth}()},

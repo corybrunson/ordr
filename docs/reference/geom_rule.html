@@ -83,6 +83,26 @@ translated from the origin.</p>
 <span>  text_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  label_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  axis.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.angle <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  label.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.linewidth <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  tick.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.size <span class="op">=</span> <span class="fl">2.6</span>,</span>
+<span>  text.angle <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  text.hjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  text.vjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  text.family <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.fontface <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -175,6 +195,26 @@ the axis, as a proportion of the minimum of the plot width and height.</p></dd>
 <dd><p>Additional arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">ggplot2::layer()</a></code>.</p></dd>
 
 
+<dt id="arg-axis-colour-axis-color-axis-alpha">axis.colour, axis.color, axis.alpha<a class="anchor" aria-label="anchor" href="#arg-axis-colour-axis-color-axis-alpha"></a></dt>
+<dd><p>Default aesthetics for axes. Set to
+NULL to inherit from the data's aesthetics.</p></dd>
+
+
+<dt id="arg-label-angle-label-colour-label-color-label-alpha">label.angle, label.colour, label.color, label.alpha<a class="anchor" aria-label="anchor" href="#arg-label-angle-label-colour-label-color-label-alpha"></a></dt>
+<dd><p>Default aesthetics
+for labels. Set to NULL to inherit from the data's aesthetics.</p></dd>
+
+
+<dt id="arg-tick-linewidth-tick-colour-tick-color-tick-alpha">tick.linewidth, tick.colour, tick.color, tick.alpha<a class="anchor" aria-label="anchor" href="#arg-tick-linewidth-tick-colour-tick-color-tick-alpha"></a></dt>
+<dd><p>Default aesthetics
+for tick marks. Set to NULL to inherit from the data's aesthetics.</p></dd>
+
+
+<dt id="arg-text-size-text-angle-text-hjust-text-vjust-text-family-text-fontface-text-colour-text-color-text-alpha">text.size, text.angle, text.hjust, text.vjust, text.family, text.fontface, text.colour, text.color, text.alpha<a class="anchor" aria-label="anchor" href="#arg-text-size-text-angle-text-hjust-text-vjust-text-family-text-fontface-text-colour-text-color-text-alpha"></a></dt>
+<dd><p>Default aesthetics for tick mark labels. Set to NULL to inherit from the
+data's aesthetics.</p></dd>
+
+
 <dt id="arg-parse">parse<a class="anchor" aria-label="anchor" href="#arg-parse"></a></dt>
 <dd><p>If <code>TRUE</code>, the labels will be parsed into expressions and
 displayed as described in <code><a href="https://rdrr.io/r/grDevices/plotmath.html" class="external-link">?plotmath</a></code>.</p></dd>
@@ -238,23 +278,24 @@ points for rows and arrows for columns.</p>
 in bold):</p><ul><li><p><strong><code>x</code></strong>, <strong><code>y</code></strong></p></li>
 <li><p><strong><code>lower</code>, <code>upper</code></strong></p></li>
 <li><p><code>yintercept</code> <em>or</em> <code>xintercept</code> <em>or</em> <code>xend</code> and <code>yend</code></p></li>
+<li><p><code>linetype</code></p></li>
+<li><p><code>linewidth</code></p></li>
+<li><p><code>size</code></p></li>
+<li><p><code>hjust</code></p></li>
+<li><p><code>vjust</code></p></li>
 <li><p><code>colour</code></p></li>
 <li><p><code>alpha</code></p></li>
-<li><p><code>linewidth</code></p></li>
-<li><p><code>linetype</code></p></li>
 <li><p><code>label</code></p></li>
+<li><p><code>family</code></p></li>
+<li><p><code>fontface</code></p></li>
 <li><p><code>center</code>, <code>scale</code></p></li>
-<li><p><code>label_colour</code>, <code>label_alpha</code>, <code>label_size</code>, <code>label_angle</code>,
-<code>label_family</code>, <code>label_fontface</code></p></li>
-<li><p><code>tick_colour</code>, <code>tick_alpha</code>, <code>tick_linewidth</code>, <code>tick_linetype</code></p></li>
-<li><p><code>text_colour</code>, <code>text_alpha</code>, <code>text_size</code>, <code>text_angle</code>,
-<code>text_hjust</code>, <code>text_vjust</code>, <code>text_family</code>, <code>text_fontface</code></p></li>
 <li><p><code>group</code></p></li>
 </ul></div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>Other geom layers:
 <code><a href="geom_axis.html">geom_axis</a>()</code>,
+<code><a href="geom_bagplot.html">geom_bagplot</a>()</code>,
 <code><a href="geom_interpolation.html">geom_interpolation</a>()</code>,
 <code><a href="geom_isoline.html">geom_isoline</a>()</code>,
 <code><a href="geom_lineranges.html">geom_lineranges</a>()</code>,

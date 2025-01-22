@@ -183,10 +183,12 @@ singular-value-decomposed data matrix, where should we expect the marker
 for this element to appear in the biplot? The solution is the vector sum of
 the column (row) units weighted by their values in the new row (column).
 Gower, Gardner–Lubbe, &amp; le Roux (2011) provide two visualizations of this
-calculation: a tail-to-head sequence of weighted units (<code>type = "sequence"</code>), and a centroid of
-the weighted units scaled by the number of units (<code>type = "centroid"</code>).</p>
-<p>Interpretation of the interpolated markers requires that the corresponding
-axes be appropriately scaled; see <code><a href="ggbiplot.html">ggbiplot()</a></code>.</p>
+calculation: a tail-to-head sequence of weighted units (<code>type = "sequence"</code>), and a centroid of the weighted units scaled by the number of
+units (<code>type = "centroid"</code>).</p>
+<p><strong>WARNING:</strong>
+This layer is appropriate only with axes in standard coordinates (usually
+<code><a href="conference.html">confer_inertia(p = "rows")</a></code>) and interpolative
+calibration (<code><a href="ggbiplot.html">ggbiplot(axis.type = "interpolative")</a></code>).</p>
     </div>
     <div id="biplot-layers">
     <h2>Biplot layers</h2>
@@ -232,6 +234,7 @@ Wiley, ISBN: 978-0-470-01255-0. <a href="https://www.wiley.com/go/biplots" class
     <h2>See also</h2>
     <div class="dont-index"><p>Other geom layers:
 <code><a href="geom_axis.html">geom_axis</a>()</code>,
+<code><a href="geom_bagplot.html">geom_bagplot</a>()</code>,
 <code><a href="geom_isoline.html">geom_isoline</a>()</code>,
 <code><a href="geom_lineranges.html">geom_lineranges</a>()</code>,
 <code><a href="geom_origin.html">geom_origin</a>()</code>,

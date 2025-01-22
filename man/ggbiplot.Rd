@@ -248,7 +248,7 @@ iris_pca \%>\%
   scale_color_brewer(type = "qual", palette = 2) +
   geom_origin() +
   stat_cols_rule(
-    subset = c(2, 4),
+    subset = c(2, 4), fontface = "bold", text.fontface = "plain",
     aes(label = name, center = center, scale = scale)
   ) +
   geom_rows_point(aes(color = Species), alpha = .5) +

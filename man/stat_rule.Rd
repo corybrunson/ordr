@@ -230,6 +230,7 @@ Gower JC & Harding SA (1988) "Nonlinear biplots". \emph{Biometrika} \strong{75}(
 }
 \seealso{
 Other stat layers: 
+\code{\link{stat_bagplot}()},
 \code{\link{stat_center}()},
 \code{\link{stat_chull}()},
 \code{\link{stat_cone}()},

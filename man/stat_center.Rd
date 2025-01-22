@@ -196,6 +196,7 @@ iris_pca \%>\%
 }
 \seealso{
 Other stat layers: 
+\code{\link{stat_bagplot}()},
 \code{\link{stat_chull}()},
 \code{\link{stat_cone}()},
 \code{\link{stat_depth}()},
