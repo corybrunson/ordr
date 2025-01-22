@@ -149,7 +149,6 @@ ggbiplot <- function(
           1L,
           function(x) sum(x^2)
         )
-        print(std_ss)
         ordination[ordination$.matrix == std_fac, ord_map] <-
           ordination[ordination$.matrix == std_fac, ord_map] / std_ss
       }

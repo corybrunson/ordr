@@ -38,7 +38,7 @@ ability.cov$cov |>
 ability_cor_eigen |> 
   transform(E3 = ifelse(V3 > 0, "rise", "fall")) |> 
   # FIXME: Component aesthetic data values aren't mapped to color values.
-  ggplot(aes(V1, V2, text_color = E3, tick_color = E3)) +
+  ggplot(aes(V1, V2, color = E3)) +
   coord_square() +
-  geom_axis(aes(label = test)) +
+  geom_axis(aes(label = test), text.color = "black", text.alpha = .5) +
   expand_limits(x = c(-1, 1), y = c(-1, 1))
