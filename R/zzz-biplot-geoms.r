@@ -1039,6 +1039,11 @@ geom_rows_isoline <- function(
   num = NULL,
   text_dodge = 0.03,
   ...,
+  text.size = 3,
+  text.angle = 0,
+  text.colour = NULL,
+  text.color = NULL,
+  text.alpha = NULL,
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
@@ -1049,7 +1054,9 @@ geom_rows_isoline <- function(
         geom = GeomIsoline, position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list(isoline_text = isoline_text, 
             by = by, num = num, text_dodge = text_dodge, 
-            parse = parse, check_overlap = check_overlap, 
+            text.size = text.size, text.angle = text.angle, 
+            text.colour = text.color %||% text.colour, 
+            text.alpha = text.alpha, parse = parse, check_overlap = check_overlap, 
             na.rm = na.rm, ...))    
     
 }
@@ -1066,6 +1073,11 @@ geom_cols_isoline <- function(
   num = NULL,
   text_dodge = 0.03,
   ...,
+  text.size = 3,
+  text.angle = 0,
+  text.colour = NULL,
+  text.color = NULL,
+  text.alpha = NULL,
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
@@ -1076,7 +1088,9 @@ geom_cols_isoline <- function(
         geom = GeomIsoline, position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list(isoline_text = isoline_text, 
             by = by, num = num, text_dodge = text_dodge, 
-            parse = parse, check_overlap = check_overlap, 
+            text.size = text.size, text.angle = text.angle, 
+            text.colour = text.color %||% text.colour, 
+            text.alpha = text.alpha, parse = parse, check_overlap = check_overlap, 
             na.rm = na.rm, ...))    
     
 }
@@ -1265,6 +1279,11 @@ geom_rows_vector <- function(
   linejoin = "mitre",
   vector_labels = TRUE,
   ...,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  parse = FALSE,
+  check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -1273,6 +1292,8 @@ geom_rows_vector <- function(
         geom = GeomVector, position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list(arrow = arrow, 
             lineend = lineend, linejoin = linejoin, vector_labels = vector_labels, 
+            label.colour = label.color %||% label.colour, 
+            parse = parse, check_overlap = check_overlap, 
             na.rm = na.rm, ...))    
     
 }
@@ -1289,6 +1310,11 @@ geom_cols_vector <- function(
   linejoin = "mitre",
   vector_labels = TRUE,
   ...,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  parse = FALSE,
+  check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -1297,6 +1323,8 @@ geom_cols_vector <- function(
         geom = GeomVector, position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list(arrow = arrow, 
             lineend = lineend, linejoin = linejoin, vector_labels = vector_labels, 
+            label.colour = label.color %||% label.colour, 
+            parse = parse, check_overlap = check_overlap, 
             na.rm = na.rm, ...))    
     
 }

@@ -14,6 +14,11 @@ geom_vector(
   linejoin = "mitre",
   vector_labels = TRUE,
   ...,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  parse = FALSE,
+  check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -78,6 +83,9 @@ from the vectors.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
+\item{label.colour, label.color, label.alpha}{Default aesthetics for labels.
+Set to NULL to inherit from the data's aesthetics.}
+
 \item{na.rm}{Passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
@@ -133,9 +141,12 @@ are in bold):
 \item \code{linetype}
 \item \code{label}
 \item \code{size}
-\item \code{angle}, \code{hjust}, \code{vjust}
-\item \code{label_colour}, \code{label_alpha}
-\item \code{family}, \code{fontface}, \code{lineheight}
+\item \code{angle}
+\item \code{hjust}
+\item \code{vjust}
+\item \code{family}
+\item \code{fontface}
+\item \code{lineheight}
 \item \code{group}
 }
 }
