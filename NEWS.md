@@ -37,6 +37,12 @@ The 'axis' and 'isoline' geoms hit trouble when one or more points lay at the or
 The 'center' and 'star' stats now follow the 'summary' stat convention of using `fun`, so `fun.center` is deprecated.
 Additionally, `fun.ord` accepts a function that summarizes the columns of a matrix, which accommodates summaries like the depth median that do not decompose along orthogonal axes.
 
+### revamped handling of secondary aesthetics (breaking change)
+
+Previously, underscore-separated parameters like `label_colour` were used to specify secondary aesthetics, i.e. aesthetics for graphical objects other than those considered "primary" for the layer.
+Their behavior has been debugged by mimicking the use of period-separated parameters like `label.colour` in **ggplot2** v3.5.1, except for the new bagplot geom, for which their behavior is based on that of `geom_boxplot()` in the current development version of {ggplot2}.
+This induces some breaking changes due to the renaming of most, and the removal of some, such parameters.
+
 ## new plot layers
 
 ### addition geom
