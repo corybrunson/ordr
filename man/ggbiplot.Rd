@@ -232,7 +232,6 @@ iris_pca <- ordinate(iris, cols = 1:4, prcomp, scale = TRUE)
 
 # row-principal predictive biplot
 iris_pca \%>\%
-  augment_ord() \%>\%
   ggbiplot(axis.type = "predictive") +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
@@ -242,7 +241,6 @@ iris_pca \%>\%
 
 # with two calibrated axes
 iris_pca \%>\%
-  augment_ord() \%>\%
   ggbiplot(axis.type = "predictive") +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +

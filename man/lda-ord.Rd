@@ -27,8 +27,8 @@ lda_ord(x, ...)
   CV = FALSE,
   nu = 5,
   ...,
-  ret.x = FALSE,
-  ret.grouping = FALSE,
+  ret.x = TRUE,
+  ret.grouping = TRUE,
   axes.scale = "unstandardized"
 )
 
@@ -147,8 +147,8 @@ Output from \code{\link[MASS:lda]{MASS::lda()}} with an additional preceding \li
 }
 }
 \description{
-This function replicates \code{\link[MASS:lda]{MASS::lda()}} with options to retain
-elements useful to the \link{tbl_ord} class and biplot calculations.
+This function replicates \code{\link[MASS:lda]{MASS::lda()}} with options and defaults
+to retain elements useful to the \link{tbl_ord} class and biplot calculations.
 }
 \details{
 Linear discriminant analysis relies on an eigendecomposition of the product
@@ -182,6 +182,10 @@ derives from the eigendecomposition of the Mahalanobis distance matrix, the
 projections of the centroids and cases onto the variable axes approximate
 their variable values after centering and sphering (Greenacre, 2013).
 }
+
+Finally, in contrast to \code{\link[MASS:lda]{MASS::lda()}}, \code{lda_ord()} defaults both \code{ret.x} and
+\code{ret.grouping} to \code{TRUE}, so that these elements can be used to compute and
+annotate case scores as \link[=supplementation]{supplementary} elements.
 }
 \examples{
 # Anderson iris species data centroid

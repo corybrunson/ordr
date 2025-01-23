@@ -68,6 +68,11 @@ A new 'depth' statistical transformation estimates depth across a grid and is pa
 Aided by element standardization, the classic `density_2d` statistical transformation and geometric construction are adapted to biplots.
 Currently, source code generation does not respect fixed parameters passed to `layer()` by the `stat_*()` and `geom_*()` shortcuts; as a consequence, `contour = TRUE` must be manually passed to `geom_*_density_2d()`.
 
+## miscellany
+
+Previously, `lda_ord()` mimicked `MASS::lda()` in defaulting the retrieval parameters `ret.x` and `ret.grouping` to `FALSE`.
+Because they are so important to analysis and especially to biplots, they now default to `TRUE`.
+
 # ordr 0.1.1
 
 ## `linewidth` aesthetic (breaking change)
