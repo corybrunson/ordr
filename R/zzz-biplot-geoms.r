@@ -916,6 +916,7 @@ geom_rows_interpolation <- function(
   type = c("centroid", "sequence"),
   arrow = default_arrow,
   ...,
+  point.fill = NA,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -924,7 +925,8 @@ geom_rows_interpolation <- function(
         geom = GeomInterpolation, position = position, 
         show.legend = show.legend, inherit.aes = inherit.aes, 
         params = list(new_data = new_data, type = type, 
-            arrow = arrow, na.rm = na.rm, ...))    
+            point.fill = point.fill, arrow = arrow, na.rm = na.rm, 
+            ...))    
     
 }
 
@@ -939,6 +941,7 @@ geom_cols_interpolation <- function(
   type = c("centroid", "sequence"),
   arrow = default_arrow,
   ...,
+  point.fill = NA,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -947,7 +950,8 @@ geom_cols_interpolation <- function(
         geom = GeomInterpolation, position = position, 
         show.legend = show.legend, inherit.aes = inherit.aes, 
         params = list(new_data = new_data, type = type, 
-            arrow = arrow, na.rm = na.rm, ...))    
+            point.fill = point.fill, arrow = arrow, na.rm = na.rm, 
+            ...))    
     
 }
 
@@ -1293,7 +1297,7 @@ geom_rows_vector <- function(
         inherit.aes = inherit.aes, params = list(arrow = arrow, 
             lineend = lineend, linejoin = linejoin, vector_labels = vector_labels, 
             label.colour = label.color %||% label.colour, 
-            parse = parse, check_overlap = check_overlap, 
+            label.alpha = label.alpha, parse = parse, check_overlap = check_overlap, 
             na.rm = na.rm, ...))    
     
 }
@@ -1324,7 +1328,7 @@ geom_cols_vector <- function(
         inherit.aes = inherit.aes, params = list(arrow = arrow, 
             lineend = lineend, linejoin = linejoin, vector_labels = vector_labels, 
             label.colour = label.color %||% label.colour, 
-            parse = parse, check_overlap = check_overlap, 
+            label.alpha = label.alpha, parse = parse, check_overlap = check_overlap, 
             na.rm = na.rm, ...))    
     
 }

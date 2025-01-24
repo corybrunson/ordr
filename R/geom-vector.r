@@ -78,6 +78,7 @@ geom_vector <- function(
       arrow = arrow, lineend = lineend, linejoin = linejoin,
       vector_labels = vector_labels,
       label.colour = label.color %||% label.colour,
+      label.alpha = label.alpha,
       parse = parse,
       check_overlap = check_overlap,
       na.rm = na.rm,

@@ -557,6 +557,7 @@ geom_rows_interpolation(
   type = c("centroid", "sequence"),
   arrow = default_arrow,
   ...,
+  point.fill = NA,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -571,6 +572,7 @@ geom_cols_interpolation(
   type = c("centroid", "sequence"),
   arrow = default_arrow,
   ...,
+  point.fill = NA,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -1018,6 +1020,9 @@ of row (\code{geom_cols_interpolation()}) or column
 
 \item{type}{Character value matched to \code{"centroid"} or \code{"sequence"}; the type
 of operations used to visualize interpolation.}
+
+\item{point.fill}{Default aesthetics for markers. Set to NULL to inherit from
+the data's aesthetics.}
 
 \item{isoline_text}{Logical; whether to include text value marks along the
 isolines.}

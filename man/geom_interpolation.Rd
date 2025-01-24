@@ -13,6 +13,7 @@ geom_interpolation(
   type = c("centroid", "sequence"),
   arrow = default_arrow,
   ...,
+  point.fill = NA,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -77,6 +78,9 @@ of operations used to visualize interpolation.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
+\item{point.fill}{Default aesthetics for markers. Set to NULL to inherit from
+the data's aesthetics.}
+
 \item{na.rm}{Passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
@@ -140,8 +144,6 @@ should contain the same rows or columns as the ordinated data and
 \item \code{fill}
 \item \code{shape}
 \item \code{stroke}
-\item \code{point_size}
-\item \code{point_fill}
 \item \code{center}, \code{scale}
 \item \code{group}
 }
