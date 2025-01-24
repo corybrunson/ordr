@@ -86,6 +86,15 @@ from the vectors.}
 \item{label.colour, label.color, label.alpha}{Default aesthetics for labels.
 Set to NULL to inherit from the data's aesthetics.}
 
+\item{parse}{If \code{TRUE}, the labels will be parsed into expressions and
+displayed as described in \code{?plotmath}.}
+
+\item{check_overlap}{If \code{TRUE}, text that overlaps previous text in the
+same layer will not be plotted. \code{check_overlap} happens at draw time and in
+the order of the data. Therefore data should be arranged by the label
+column before calling \code{geom_text()}. Note that this argument is not
+supported by \code{geom_label()}.}
+
 \item{na.rm}{Passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?

@@ -45,6 +45,7 @@
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_segment
+#' @inheritParams ggplot2::geom_text
 #' @template param-geom
 #' @param arrow Specification for arrows, as created by [grid::arrow()], or else
 #'   `NULL` for no arrows.
