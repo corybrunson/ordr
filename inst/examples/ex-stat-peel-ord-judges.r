@@ -1,4 +1,4 @@
-judge_pca <- ordinate(USJudgeRatings, princomp)
+judge_pca <- ordinate(USJudgeRatings, princomp, cols = -c(1, 12))
 ggbiplot(judge_pca, axis.type = "predictive") +
   geom_cols_axis() +
   geom_rows_point(elements = "score") +

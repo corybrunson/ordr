@@ -21,7 +21,7 @@
 #' @template param-stat
 #' @template return-layer
 #' @family stat layers
-#' @example inst/examples/ex-stat-center-iris.r
+#' @example inst/examples/ex-stat-center.r
 #' @export
 stat_center <- function(
   mapping = NULL, data = NULL, geom = "point", position = "identity",

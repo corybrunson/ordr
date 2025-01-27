@@ -37,8 +37,7 @@
 #' @template param-stat
 #' @template return-layer
 #' @family stat layers
-#' @example inst/examples/ex-stat-chull-haireye.r
-#' @example inst/examples/ex-stat-peel-judges.r
+#' @example inst/examples/ex-stat-chull.r
 #' @export
 stat_chull <- function(
   mapping = NULL, data = NULL, geom = "polygon", position = "identity",

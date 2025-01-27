@@ -35,7 +35,12 @@
 #' @inheritParams stat_rule
 #' @inheritParams stat_scale
 #' @inheritParams stat_spantree
-#' @example inst/examples/ex-stat-ellipse-iris.r
+#' @example inst/examples/ex-stat-bagplot-ord-iris.r
+#' @example inst/examples/ex-stat-bagplot-ord-judges.r
+#' @example inst/examples/ex-stat-center-ord-iris.r
+#' @example inst/examples/ex-stat-chull-ord-haireye.r
+#' @example inst/examples/ex-stat-ellipse-ord-iris.r
+#' @example inst/examples/ex-stat-peel-ord-judges.r
 NULL
 
 #' @rdname ordr-ggproto

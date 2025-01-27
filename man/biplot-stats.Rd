@@ -631,6 +631,95 @@ ordination aesthetics but will accept \code{ord_aes()} without warning.
 }
 
 \examples{
+iris_pca <- ordinate(iris, prcomp, cols = seq(4), scale. = TRUE)
+# NB: Non-standard aesthetics are handled as in version > 3.5.1; see:
+# https://github.com/tidyverse/ggplot2/issues/6191
+# This prevents `scale_color_discrete(aesthetics = ...)` from synching them.
+ggbiplot(iris_pca) +
+  stat_rows_bagplot(
+    aes(fill = Species),
+    median_gp = list(color = sync()),
+    fence_gp = list(linewidth = 0.25),
+    outlier_gp = list(shape = "asterisk")
+  ) +
+  scale_color_discrete(name = "Species", aesthetics = c("color", "fill")) +
+  geom_cols_vector(aes(label = name))
+ggbiplot(iris_pca) +
+  stat_rows_bagplot(
+    aes(fill = Species, color = Species),
+    median_gp = list(color = sync()),
+    fence_gp = list(linewidth = 0.25),
+    outlier_gp = list(shape = "asterisk")
+  ) +
+  geom_cols_vector(aes(label = name))
+USJudgeRatings |> 
+  ordinate(prcomp) |> 
+  mutate_rows(surname = gsub("(,|\\\\.).*$", "", name)) ->
+  judges_pca
+ggbiplot(judges_pca, sec.axes = "cols") +
+  geom_rows_bagplot() +
+  geom_rows_text(aes(label = surname), size = 2) +
+  geom_cols_vector(aes(label = name), size = 3, alpha = .5)
+# scaled PCA of Anderson iris measurements
+iris[, -5] \%>\%
+  princomp(cor = TRUE) \%>\%
+  as_tbl_ord() \%>\%
+  mutate_rows(species = iris$Species) \%>\%
+  print() -> iris_pca
+
+# row-principal biplot with centroid-based stars
+iris_pca \%>\%
+  ggbiplot(aes(color = species)) +
+  theme_bw() +
+  scale_color_brewer(type = "qual", palette = 2) +
+  stat_rows_star(alpha = .5, fun = "mean") +
+  geom_rows_point(alpha = .5) +
+  stat_rows_center(fun = "mean", size = 4, shape = 1L) +
+  ggtitle(
+    "Row-principal PCA biplot of Anderson iris measurements",
+    "Segments connect each observation to its within-species centroid"
+  )
+
+# row-principal biplot with depth median-based stars
+iris_pca \%>\%
+  ggbiplot(aes(color = species)) +
+  theme_bw() +
+  scale_color_brewer(type = "qual", palette = 2) +
+  stat_rows_star(alpha = .5, fun.ord = "depth_median") +
+  geom_rows_point(alpha = .5) +
+  stat_rows_center(fun.ord = "depth_median", size = 4, shape = 1L) +
+  ggtitle(
+    "Row-principal PCA biplot of Anderson iris measurements",
+    "Segments connect each observation to its within-species depth median"
+  )
+# correspondence analysis of combined female and male hair and eye color data
+HairEyeColor \%>\%
+  rowSums(dims = 2L) \%>\%
+  MASS::corresp(nf = 2L) \%>\%
+  as_tbl_ord() \%>\%
+  augment_ord() \%>\%
+  print() -> hec_ca
+# inertia across artificial coordinates (all singular values < 1)
+get_inertia(hec_ca)
+
+# in row-principal biplot, row coordinates are weighted averages of columns
+hec_ca \%>\%
+  confer_inertia("rows") \%>\%
+  ggbiplot(aes(color = .matrix, fill = .matrix, shape = .matrix)) +
+  theme_bw() +
+  stat_cols_chull(alpha = .1) +
+  geom_cols_point() +
+  geom_rows_point() +
+  ggtitle("Row-principal CA of hair & eye color")
+# in column-principal biplot, column coordinates are weighted averages of rows
+hec_ca \%>\%
+  confer_inertia("cols") \%>\%
+  ggbiplot(aes(color = .matrix, fill = .matrix, shape = .matrix)) +
+  theme_bw() +
+  stat_rows_chull(alpha = .1) +
+  geom_rows_point() +
+  geom_cols_point() +
+  ggtitle("Column-principal CA of hair & eye color")
 # compute row-principal components of scaled iris measurements
 iris[, -5] \%>\%
   prcomp(scale = TRUE) \%>\%
@@ -655,6 +744,29 @@ iris_pca \%>\%
   ggtitle(
     "Row-principal PCA biplot of Anderson iris measurements",
     "Overlaid with 95\% confidence disks"
+  )
+judge_pca <- ordinate(USJudgeRatings, princomp, cols = -c(1, 12))
+ggbiplot(judge_pca, axis.type = "predictive") +
+  geom_cols_axis() +
+  geom_rows_point(elements = "score") +
+  stat_rows_peel(
+    aes(alpha = after_stat(hull)), color = "black", elements = "score",
+    breaks = c(.9, .5, .1)
+  )
+ggbiplot(judge_pca, axis.type = "predictive") +
+  geom_cols_axis() +
+  geom_rows_point(elements = "score") +
+  stat_rows_peel(
+    aes(alpha = after_stat(hull)), color = "black", elements = "score",
+    breaks = c(.9, .5, .1), cut = "below"
+  )
+
+iris_pca <- ordinate(iris, cols = 1:4, model = prcomp)
+ggbiplot(iris_pca) +
+  geom_rows_point(aes(color = Species), shape = "circle open") +
+  stat_rows_peel(
+    aes(fill = Species, alpha = after_stat(hull)),
+    breaks = c(.9, .5, .1)
   )
 }
 \seealso{

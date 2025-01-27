@@ -324,15 +324,20 @@ done_protos <- unlist(lapply(layer_files, function(f) {
 ## 3. Run generators on manual and found lists of layers.
 Sys.sleep(.5)
 
-# find layer-specific examples
-ex_files <- list.files(here::here("inst/examples/"), "(stat|geom)-.*\\.(r|R)")
-# restrict to examples without home documentation files
-ex_match <- sapply(
-  str_replace_all(str_remove(orig_layers, "^(.*::|)"), "\\_", "-"),
-  str_match,
-  string = ex_files
-)
-ex_incl <- ex_files[apply(! is.na(ex_match), 1L, any)]
+# # find layer-specific examples
+# ex_files <- list.files(here::here("inst/examples/"), "(stat|geom)-.*\\.(r|R)")
+# # restrict to examples without home documentation files
+# ex_match <- sapply(
+#   str_replace_all(str_remove(orig_layers, "^(.*::|)"), "\\_", "-"),
+#   str_match,
+#   string = ex_files
+# )
+# ex_incl <- ex_files[apply(! is.na(ex_match), 1L, any)]
+# find layer-specific biplot examples
+ex_incl <- 
+  list.files(here::here("inst/examples/"), "(stat|geom)-.*-ord.*\\.(r|R)")
+names(ex_incl) <- 
+  str_replace(ex_incl, "^.*(stat|geom)\\-([a-z0-9]*).*$", "\\2 \\1")
 
 # find layers from ggplot2 extensions to import/export
 port_layers <- str_subset(orig_layers, "^ggplot2::", negate = TRUE)
@@ -446,9 +451,7 @@ for (type in c("stat", "geom")) {
   adapt_examples <- if (length(ex_type) == 0L) "" else glue::glue(
     str_c(
       str_c(
-        "#' @example inst/examples/",
-        ex_type,
-        "\n",
+        "#' @example inst/examples/", ex_type, "\n",
         collapse = ""
       ),
       "\n"

@@ -154,56 +154,14 @@ transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluati
 }
 
 \examples{
-# correspondence analysis of combined female and male hair and eye color data
-HairEyeColor \%>\%
-  rowSums(dims = 2L) \%>\%
-  MASS::corresp(nf = 2L) \%>\%
-  as_tbl_ord() \%>\%
-  augment_ord() \%>\%
-  print() -> hec_ca
-# inertia across artificial coordinates (all singular values < 1)
-get_inertia(hec_ca)
+ggplot(USJudgeRatings, aes(x = INTG, y = PREP)) +
+  geom_point() +
+  stat_chull(alpha = .5)
 
-# in row-principal biplot, row coordinates are weighted averages of columns
-hec_ca \%>\%
-  confer_inertia("rows") \%>\%
-  ggbiplot(aes(color = .matrix, fill = .matrix, shape = .matrix)) +
-  theme_bw() +
-  stat_cols_chull(alpha = .1) +
-  geom_cols_point() +
-  geom_rows_point() +
-  ggtitle("Row-principal CA of hair & eye color")
-# in column-principal biplot, column coordinates are weighted averages of rows
-hec_ca \%>\%
-  confer_inertia("cols") \%>\%
-  ggbiplot(aes(color = .matrix, fill = .matrix, shape = .matrix)) +
-  theme_bw() +
-  stat_rows_chull(alpha = .1) +
-  geom_rows_point() +
-  geom_cols_point() +
-  ggtitle("Column-principal CA of hair & eye color")
-judge_pca <- ordinate(USJudgeRatings, princomp)
-ggbiplot(judge_pca, axis.type = "predictive") +
-  geom_cols_axis() +
-  geom_rows_point(elements = "score") +
-  stat_rows_peel(
-    aes(alpha = after_stat(hull)), color = "black", elements = "score",
-    breaks = c(.9, .5, .1)
-  )
-ggbiplot(judge_pca, axis.type = "predictive") +
-  geom_cols_axis() +
-  geom_rows_point(elements = "score") +
-  stat_rows_peel(
-    aes(alpha = after_stat(hull)), color = "black", elements = "score",
-    breaks = c(.9, .5, .1), cut = "below"
-  )
-
-iris_pca <- ordinate(iris, cols = 1:4, model = prcomp)
-ggbiplot(iris_pca) +
-  geom_rows_point(aes(color = Species), shape = "circle open") +
-  stat_rows_peel(
-    aes(fill = Species, alpha = after_stat(hull)),
-    breaks = c(.9, .5, .1)
+ggplot(USJudgeRatings, aes(x = INTG, y = PREP)) +
+  stat_peel(
+    aes(alpha = after_stat(hull)),
+    breaks = seq(.1, .9, .2), color = "black"
   )
 }
 \references{

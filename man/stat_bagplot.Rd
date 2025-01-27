@@ -150,35 +150,17 @@ transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluati
 }
 
 \examples{
-USJudgeRatings |> 
-  ordinate(prcomp) |> 
-  mutate_rows(surname = gsub("(,|\\\\.).*$", "", name)) ->
-  judges_pca
-ggbiplot(judges_pca, sec.axes = "cols") +
-  geom_rows_bagplot() +
-  geom_rows_text(aes(label = surname), size = 2) +
-  geom_cols_vector(aes(label = name), size = 3, alpha = .5)
-iris_pca <- ordinate(iris, prcomp, cols = seq(4), scale. = TRUE)
+# petroleum rock base plot
+p <- ggplot(rock, aes(area, shape, size = peri)) + theme_bw()
+# scatterplot
+p + geom_point()
 # NB: Non-standard aesthetics are handled as in version > 3.5.1; see:
 # https://github.com/tidyverse/ggplot2/issues/6191
-# This prevents `scale_color_discrete(aesthetics = ...)` from synching them.
-ggbiplot(iris_pca) +
-  stat_rows_bagplot(
-    aes(fill = Species),
-    median_gp = list(color = sync()),
-    fence_gp = list(linewidth = 0.25),
-    outlier_gp = list(shape = "asterisk")
-  ) +
-  scale_color_discrete(name = "Species", aesthetics = c("color", "fill")) +
-  geom_cols_vector(aes(label = name))
-ggbiplot(iris_pca) +
-  stat_rows_bagplot(
-    aes(fill = Species, color = Species),
-    median_gp = list(color = sync()),
-    fence_gp = list(linewidth = 0.25),
-    outlier_gp = list(shape = "asterisk")
-  ) +
-  geom_cols_vector(aes(label = name))
+# custom bag fraction, coefficient, and aesthetics
+p + stat_bagplot(fraction = .4, coef = 1.5,
+                 outlier_gp = list(shape = "asterisk"))
+# invisible fence
+p + stat_bagplot(fence = FALSE)
 }
 \references{
 Rousseeuw PJ, Ruts I, & Tukey JW (1999) "The Bagplot: A Bivariate Boxplot".
