@@ -13,6 +13,7 @@ geom_interpolation(
   type = c("centroid", "sequence"),
   arrow = default_arrow,
   ...,
+  point.fill = NA,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -77,6 +78,9 @@ of operations used to visualize interpolation.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
+\item{point.fill}{Default aesthetics for markers. Set to NULL to inherit from
+the data's aesthetics.}
+
 \item{na.rm}{Passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
@@ -140,8 +144,6 @@ should contain the same rows or columns as the ordinated data and
 \item \code{fill}
 \item \code{shape}
 \item \code{stroke}
-\item \code{point_size}
-\item \code{point_fill}
 \item \code{center}, \code{scale}
 \item \code{group}
 }
@@ -171,7 +173,7 @@ iris_pca \%>\%
   scale_color_brewer(type = "qual", palette = 2) +
   geom_origin(marker = "cross", alpha = .5) +
   geom_cols_interpolation(
-    aes(center = center, scale = scale, interpolate = name),
+    aes(center = center, scale = scale, interpolate = name), size = 3,
     new_data = new_data, type = "centroid", alpha = .5
   ) +
   geom_rows_text(aes(label = obs, color = species), alpha = .5, size = 3)
@@ -202,6 +204,7 @@ Wiley, ISBN: 978-0-470-01255-0. \url{https://www.wiley.com/go/biplots}
 \seealso{
 Other geom layers: 
 \code{\link{geom_axis}()},
+\code{\link{geom_bagplot}()},
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},

@@ -32,6 +32,7 @@ Depends:
     ggplot2
 Imports:
     rlang,
+    cli,
     stringr,
     tidyselect,
     scales,
@@ -49,6 +50,7 @@ Suggests:
     gridExtra,
     MASS,
     mlpack,
+    ddalpha,
     knitr,
     rmarkdown
 License: GPL-3
@@ -74,6 +76,7 @@ Collate:
     'fun-lra.r'
     'fun-wrap.r'
     'geom-axis.r'
+    'geom-bagplot.r'
     'geom-interpolation.r'
     'geom-intervals.r'
     'geom-isoline.r'
@@ -103,8 +106,10 @@ Collate:
     'ord-tidiers.r'
     'ordinate.r'
     'ordr.r'
-    'stat-center.r'
     'stat-chull.r'
+    'stat-depth.r'
+    'stat-bagplot.r'
+    'stat-center.r'
     'stat-cone.r'
     'stat-matrix.r'
     'stat-referent.r'

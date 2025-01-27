@@ -79,7 +79,7 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 of the rules and the translations of the axes from the projections of
 \code{referent} onto the axes and onto their normal vectors.}
 
-\item{fun.args}{Arguments passed to the \verb{fun.*}.}
+\item{fun.args}{Optional additional arguments passed on to the functions.}
 
 \item{referent}{The reference data set; see Details.}
 
@@ -112,7 +112,8 @@ happens, Gower, Gardner--Lubbe, & le Roux (2011) recommend to translate the
 axes to a new point of intersection away from the origin, adjusting the axis
 markers accordingly. Then the axes converge in a region of the plot offset
 from most position markers or other elements. An alternative solution,
-implemented in the \strong{\link{bipl5}} package, is to translate each axis
+implemented in the \strong{bipl5} package
+(\url{https://github.com/RuanBuys/bipl5}), is to translate each axis
 orthogonally away from the origin, which preserves the axis markers. This is
 the technique implemented here.
 
@@ -187,7 +188,7 @@ glass_lda \%>\%
   stat_cols_rule(
     aes(label = name), color = "#888888", num = 8L,
     ref_elements = "score", fun.offset = \(x) minabspp(x, p = .1),
-    text_size = 2.5, label_dodge = .02
+    text.size = 2.5, label_dodge = .04
   ) +
   scale_shape_manual(values = c(2L, 3L, 0L, 5L)) +
   ggtitle(
@@ -213,7 +214,7 @@ glass_lda \%>\%
   stat_cols_rule(
     aes(label = name), geom = "axis", color = "#888888", num = 8L,
     ref_elements = "active", fun.offset = \(x) minabspp(x, p = .1),
-    text_size = 2.5, text_dodge = .025
+    label_dodge = 0.04, text.size = 2.5, text_dodge = .025
   ) +
   scale_shape_manual(values = c(16L, 17L, 15L, 18L)) +
   ggtitle(
@@ -230,9 +231,11 @@ Gower JC & Harding SA (1988) "Nonlinear biplots". \emph{Biometrika} \strong{75}(
 }
 \seealso{
 Other stat layers: 
+\code{\link{stat_bagplot}()},
 \code{\link{stat_center}()},
 \code{\link{stat_chull}()},
 \code{\link{stat_cone}()},
+\code{\link{stat_depth}()},
 \code{\link{stat_projection}()},
 \code{\link{stat_scale}()},
 \code{\link{stat_spantree}()}

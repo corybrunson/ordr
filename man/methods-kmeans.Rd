@@ -81,8 +81,8 @@ iris_km_ord \%>\%
   ggbiplot(aes(x = `2`, y = `3`), color = factor(.cluster)) +
   geom_jitter(stat = "rows", aes(shape = cluster), width = .2, height = .2) +
   geom_cols_axis(aes(color = `1`, label = name),
-                 text_size = 2, text_dodge = .1,
-                 label_size = 3, label_alpha = .5) +
+                 text.size = 2, text_dodge = .1,
+                 size = 3, label.alpha = .5) +
   scale_x_continuous(expand = expansion(mult = .8)) +
   scale_y_continuous(expand = expansion(mult = .5)) +
   ggtitle(

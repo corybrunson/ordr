@@ -76,6 +76,11 @@
 <span>  num <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  text_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  text.size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  text.angle <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -154,6 +159,12 @@ or isoline, as a proportion of the minimum of the plot width and height.</p></dd
 <dd><p>Additional arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">ggplot2::layer()</a></code>.</p></dd>
 
 
+<dt id="arg-text-size-text-angle-text-colour-text-color-text-alpha">text.size, text.angle, text.colour, text.color, text.alpha<a class="anchor" aria-label="anchor" href="#arg-text-size-text-angle-text-colour-text-color-text-alpha"></a></dt>
+<dd><p>Default
+aesthetics for tick mark labels. Set to NULL to inherit from the data's
+aesthetics.</p></dd>
+
+
 <dt id="arg-parse">parse<a class="anchor" aria-label="anchor" href="#arg-parse"></a></dt>
 <dd><p>If <code>TRUE</code>, the labels will be parsed into expressions and
 displayed as described in <code><a href="https://rdrr.io/r/grDevices/plotmath.html" class="external-link">?plotmath</a></code>.</p></dd>
@@ -225,11 +236,8 @@ are in bold):</p><ul><li><p><strong><code>x</code></strong>, <strong><code>y</co
 <li><p><code>vjust</code></p></li>
 <li><p><code>family</code></p></li>
 <li><p><code>fontface</code></p></li>
-<li><p><code>text_colour</code>, <code>text_alpha</code>, <code>text_size</code>, <code>text_angle</code>,</p></li>
 <li><p><code>group</code></p></li>
-</ul><p>The prefixed aesthetics <code>text_*</code> are used by the text elements and will
-inherit any values passed to their un-prefixed counterparts.</p>
-    </div>
+</ul></div>
     <div id="references">
     <h2>References</h2>
     <p>Greenacre MJ (2010) <em>Biplots in Practice</em>. Fundacion BBVA, ISBN:
@@ -240,6 +248,7 @@ inherit any values passed to their un-prefixed counterparts.</p>
     <h2>See also</h2>
     <div class="dont-index"><p>Other geom layers:
 <code><a href="geom_axis.html">geom_axis</a>()</code>,
+<code><a href="geom_bagplot.html">geom_bagplot</a>()</code>,
 <code><a href="geom_interpolation.html">geom_interpolation</a>()</code>,
 <code><a href="geom_lineranges.html">geom_lineranges</a>()</code>,
 <code><a href="geom_origin.html">geom_origin</a>()</code>,

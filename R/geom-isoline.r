@@ -27,12 +27,7 @@
 #' - `vjust`
 #' - `family`
 #' - `fontface`
-#' - `text_colour`, `text_alpha`, `text_size`, `text_angle`,
 #' - `group`
-#' 
-
-#' The prefixed aesthetics `text_*` are used by the text elements and will
-#' inherit any values passed to their un-prefixed counterparts.
 #' 
 
 #' @import ggplot2
@@ -45,6 +40,9 @@
 #'   one.
 #' @param text_dodge Numeric; the orthogonal distance of the text from the axis
 #'   or isoline, as a proportion of the minimum of the plot width and height.
+#' @param text.size,text.angle,text.colour,text.color,text.alpha Default
+#'   aesthetics for tick mark labels. Set to NULL to inherit from the data's
+#'   aesthetics.
 #' @template return-layer
 #' @family geom layers
 #' @example inst/examples/ex-geom-isoline.r
@@ -55,6 +53,8 @@ geom_isoline <- function(
   by = NULL, num = NULL,
   text_dodge = .03,
   ...,
+  text.size = 3, text.angle = 0,
+  text.colour = NULL, text.color = NULL, text.alpha = NULL,
   parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -71,6 +71,10 @@ geom_isoline <- function(
       isoline_text = isoline_text,
       by = by, num = num,
       text_dodge = text_dodge,
+      text.size = text.size,
+      text.angle = text.angle,
+      text.colour = text.color %||% text.colour,
+      text.alpha = text.alpha,
       parse = parse,
       check_overlap = check_overlap,
       na.rm = na.rm,
@@ -93,12 +97,10 @@ GeomIsoline <- ggproto(
     # isoline
     colour = "black", alpha = .8,
     linewidth = .5, linetype = "dashed",
-    # mark needs
-    center = 0, scale = 1,
-    # isoline mark text
-    text_colour = "black", text_alpha = .8, text_size = 3, text_angle = 0,
     hjust = "inward", vjust = 1,
-    family = "", fontface = 1
+    family = "", fontface = 1,
+    # mark needs
+    center = 0, scale = 1
   ),
   
   setup_params = function(data, params) {
@@ -129,6 +131,8 @@ GeomIsoline <- ggproto(
     isoline_text = TRUE,
     by = NULL, num = NULL,
     text_dodge = .03,
+    text.size = 3, text.angle = 0,
+    text.colour = NULL, text.color = NULL, text.alpha = NULL,
     parse = FALSE, check_overlap = FALSE,
     na.rm = TRUE
   ) {
@@ -166,6 +170,11 @@ GeomIsoline <- ggproto(
     
     if (isoline_text) {
       text_data <- data
+      # specify independent aesthetics
+      text_data$size <- text.size %||% text_data$size
+      # text_data$angle <- text.angle %||% text_data$angle
+      text_data$colour <- text.colour %||% text_data$colour
+      text_data$alpha <- text.alpha %||% text_data$alpha
       
       # omit labels at origin
       text_data <- subset(text_data, x_t != 0 | y_t != 0)
@@ -181,13 +190,8 @@ GeomIsoline <- ggproto(
       # update text angle and put in degrees
       text_data <- transform(
         text_data,
-        angle = (atan(- 1 / tan(angle)) + text_angle) * 180 / pi
+        angle = (atan(- 1 / tan(angle)) + text.angle) * 180 / pi
       )
-      
-      # specify aesthetics
-      text_data$colour <- text_data$text_colour
-      text_data$alpha <- text_data$text_alpha
-      text_data$size <- text_data$text_size
       
       # isoline text grobs
       grobs <- c(grobs, list(GeomText$draw_panel(

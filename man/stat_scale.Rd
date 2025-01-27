@@ -118,9 +118,11 @@ ordination aesthetics but will accept \code{ord_aes()} without warning.
 
 \seealso{
 Other stat layers: 
+\code{\link{stat_bagplot}()},
 \code{\link{stat_center}()},
 \code{\link{stat_chull}()},
 \code{\link{stat_cone}()},
+\code{\link{stat_depth}()},
 \code{\link{stat_projection}()},
 \code{\link{stat_rule}()},
 \code{\link{stat_spantree}()}

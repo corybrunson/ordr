@@ -8,14 +8,22 @@
 \alias{stat_cols_density_2d_filled}
 \alias{stat_rows_ellipse}
 \alias{stat_cols_ellipse}
+\alias{stat_rows_bagplot}
+\alias{stat_cols_bagplot}
 \alias{stat_rows_center}
 \alias{stat_cols_center}
 \alias{stat_rows_star}
 \alias{stat_cols_star}
 \alias{stat_rows_chull}
 \alias{stat_cols_chull}
+\alias{stat_rows_peel}
+\alias{stat_cols_peel}
 \alias{stat_rows_cone}
 \alias{stat_cols_cone}
+\alias{stat_rows_depth}
+\alias{stat_cols_depth}
+\alias{stat_rows_depth_filled}
+\alias{stat_cols_depth_filled}
 \alias{stat_rows_projection}
 \alias{stat_cols_projection}
 \alias{stat_rows_rule}
@@ -118,6 +126,36 @@ stat_cols_ellipse(
   inherit.aes = TRUE
 )
 
+stat_rows_bagplot(
+  mapping = NULL,
+  data = NULL,
+  geom = "bagplot",
+  position = "identity",
+  fraction = 0.5,
+  coef = 3,
+  median = TRUE,
+  fence = TRUE,
+  outliers = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_cols_bagplot(
+  mapping = NULL,
+  data = NULL,
+  geom = "bagplot",
+  position = "identity",
+  fraction = 0.5,
+  coef = 3,
+  median = TRUE,
+  fence = TRUE,
+  outliers = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
 stat_rows_center(
   mapping = NULL,
   data = NULL,
@@ -127,9 +165,11 @@ stat_rows_center(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
+  fun = NULL,
   fun.center = NULL,
   fun.min = NULL,
   fun.max = NULL,
+  fun.ord = NULL,
   fun.args = list()
 )
 
@@ -142,9 +182,11 @@ stat_cols_center(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
+  fun = NULL,
   fun.center = NULL,
   fun.min = NULL,
   fun.max = NULL,
+  fun.ord = NULL,
   fun.args = list()
 )
 
@@ -157,7 +199,9 @@ stat_rows_star(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
+  fun = NULL,
   fun.center = NULL,
+  fun.ord = NULL,
   fun.args = list()
 )
 
@@ -170,7 +214,9 @@ stat_cols_star(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
+  fun = NULL,
   fun.center = NULL,
+  fun.ord = NULL,
   fun.args = list()
 )
 
@@ -194,6 +240,30 @@ stat_cols_chull(
   ...
 )
 
+stat_rows_peel(
+  mapping = NULL,
+  data = NULL,
+  geom = "polygon",
+  position = "identity",
+  breaks = c(0.5),
+  cut = c("above", "below"),
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_cols_peel(
+  mapping = NULL,
+  data = NULL,
+  geom = "polygon",
+  position = "identity",
+  breaks = c(0.5),
+  cut = c("above", "below"),
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
 stat_rows_cone(
   mapping = NULL,
   data = NULL,
@@ -211,6 +281,66 @@ stat_cols_cone(
   geom = "path",
   position = "identity",
   origin = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_rows_depth(
+  mapping = NULL,
+  data = NULL,
+  geom = "contour",
+  position = "identity",
+  contour = TRUE,
+  contour_var = "depth",
+  notion = "zonoid",
+  notion_params = list(),
+  n = 100L,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_cols_depth(
+  mapping = NULL,
+  data = NULL,
+  geom = "contour",
+  position = "identity",
+  contour = TRUE,
+  contour_var = "depth",
+  notion = "zonoid",
+  notion_params = list(),
+  n = 100L,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_rows_depth_filled(
+  mapping = NULL,
+  data = NULL,
+  geom = "contour_filled",
+  position = "identity",
+  contour = TRUE,
+  contour_var = "depth",
+  notion = "zonoid",
+  notion_params = list(),
+  n = 100L,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_cols_depth_filled(
+  mapping = NULL,
+  data = NULL,
+  geom = "contour_filled",
+  position = "identity",
+  contour = TRUE,
+  contour_var = "depth",
+  notion = "zonoid",
+  notion_params = list(),
+  n = 100L,
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -414,14 +544,44 @@ or, if \code{type="euclid"}, the radius of the circle to be drawn.}
 
 \item{segments}{The number of segments to be used in drawing the ellipse.}
 
-\item{fun.data, fun.center, fun.min, fun.max}{Functions treated as in
-\code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and \code{fun.max}
-behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
+\item{fraction}{Fraction of the data to include in the bag.}
 
-\item{fun.args}{Arguments passed to the \verb{fun.*}.}
+\item{coef}{Scale factor of the fence relative to the bag.}
+
+\item{median, fence, outliers}{Logical indicators whether to include median,
+fence, and outliers in the composite output.}
+
+\item{fun.data}{A function that is given the complete data and should
+return a data frame with variables \code{ymin}, \code{y}, and \code{ymax}.}
+
+\item{fun.center}{Deprecated alias to \code{fun}.}
+
+\item{fun.min, fun, fun.max}{Alternatively, supply three individual
+functions that are each passed a vector of values and should return a
+single number.}
+
+\item{fun.ord}{Alternatively to the \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary_bin()}} parameters,
+supply a summary function that takes a matrix as input and returns a named
+column summary vector. Overridden by \code{fun.data} and \code{fun}, cannot be used
+together with \code{fun.min} and \code{fun.max}.}
+
+\item{fun.args}{Optional additional arguments passed on to the functions.}
+
+\item{breaks}{A numeric vector of fractions (between \code{0} and \code{1}) of the
+data to contain in each hull.}
+
+\item{cut}{Character; one of \code{"above"} and \code{"below"}, indicating whether each
+hull should contain at least or at most \code{breaks} of the data,
+respectively.}
 
 \item{origin}{Logical; whether to include the origin with the transformed
 data. Defaults to \code{FALSE}.}
+
+\item{notion}{Character; the name of the depth function (passed to
+\code{\link[ddalpha:depth.]{ddalpha::depth.()}}).}
+
+\item{notion_params}{List of additional parameters passed via \code{...} to
+\code{\link[ddalpha:depth.]{ddalpha::depth.()}}.}
 
 \item{referent}{The reference data set; see Details.}
 

@@ -14,9 +14,11 @@ stat_center(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
+  fun = NULL,
   fun.center = NULL,
   fun.min = NULL,
   fun.max = NULL,
+  fun.ord = NULL,
   fun.args = list()
 )
 
@@ -29,7 +31,9 @@ stat_star(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
+  fun = NULL,
   fun.center = NULL,
+  fun.ord = NULL,
   fun.args = list()
 )
 }
@@ -93,11 +97,21 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
-\item{fun.data, fun.center, fun.min, fun.max}{Functions treated as in
-\code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and \code{fun.max}
-behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
+\item{fun.data}{A function that is given the complete data and should
+return a data frame with variables \code{ymin}, \code{y}, and \code{ymax}.}
 
-\item{fun.args}{Arguments passed to the \verb{fun.*}.}
+\item{fun.center}{Deprecated alias to \code{fun}.}
+
+\item{fun.min, fun, fun.max}{Alternatively, supply three individual
+functions that are each passed a vector of values and should return a
+single number.}
+
+\item{fun.ord}{Alternatively to the \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary_bin()}} parameters,
+supply a summary function that takes a matrix as input and returns a named
+column summary vector. Overridden by \code{fun.data} and \code{fun}, cannot be used
+together with \code{fun.min} and \code{fun.max}.}
+
+\item{fun.args}{Optional additional arguments passed on to the functions.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.
@@ -159,18 +173,33 @@ iris_pca \%>\%
   ggbiplot(aes(color = species)) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
-  stat_rows_star(alpha = .5, fun.center = "mean") +
+  stat_rows_star(alpha = .5, fun = "mean") +
   geom_rows_point(alpha = .5) +
-  stat_rows_center(fun.center = "mean", size = 4, shape = 1L) +
+  stat_rows_center(fun = "mean", size = 4, shape = 1L) +
   ggtitle(
     "Row-principal PCA biplot of Anderson iris measurements",
     "Segments connect each observation to its within-species centroid"
   )
+
+# row-principal biplot with depth median-based stars
+iris_pca \%>\%
+  ggbiplot(aes(color = species)) +
+  theme_bw() +
+  scale_color_brewer(type = "qual", palette = 2) +
+  stat_rows_star(alpha = .5, fun.ord = "depth_median") +
+  geom_rows_point(alpha = .5) +
+  stat_rows_center(fun.ord = "depth_median", size = 4, shape = 1L) +
+  ggtitle(
+    "Row-principal PCA biplot of Anderson iris measurements",
+    "Segments connect each observation to its within-species depth median"
+  )
 }
 \seealso{
 Other stat layers: 
+\code{\link{stat_bagplot}()},
 \code{\link{stat_chull}()},
 \code{\link{stat_cone}()},
+\code{\link{stat_depth}()},
 \code{\link{stat_projection}()},
 \code{\link{stat_rule}()},
 \code{\link{stat_scale}()},

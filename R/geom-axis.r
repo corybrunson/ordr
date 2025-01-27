@@ -33,21 +33,18 @@
 #' - **`x`**, **`y`**
 #' - `lower`, `upper`
 #' - `yintercept` _or_ `xintercept` _or_ `xend` and `yend`
+#' - `linetype`
+#' - `linewidth`
+#' - `size`
+#' - `hjust`
+#' - `vjust`
 #' - `colour`
 #' - `alpha`
-#' - `linewidth`
-#' - `linetype`
 #' - `label`
+#' - `family`
+#' - `fontface`
 #' - `center`, `scale`
-#' - `label_colour`, `label_alpha`, `label_size`, `label_angle`,
-#'   `label_family`, `label_fontface`
-#' - `tick_colour`, `tick_alpha`, `tick_linewidth`, `tick_linetype`
-#' - `text_colour`, `text_alpha`, `text_size`, `text_angle`,
-#'   `text_hjust`, `text_vjust`, `text_family`, `text_fontface`
 #' - `group`
-#' 
-
-#' @template param-tick
 #' 
 
 #' @import ggplot2
@@ -63,6 +60,15 @@
 #'   the minimum of the plot width and height.
 #' @param text_dodge Numeric; the orthogonal distance of tick mark text from the
 #'   axis, as a proportion of the minimum of the plot width and height.
+#' @param axis.colour,axis.color,axis.alpha Default aesthetics for axes. Set to
+#'   NULL to inherit from the data's aesthetics.
+#' @param label.angle,label.colour,label.color,label.alpha Default aesthetics
+#'   for labels. Set to NULL to inherit from the data's aesthetics.
+#' @param tick.linewidth,tick.colour,tick.color,tick.alpha Default aesthetics
+#'   for tick marks. Set to NULL to inherit from the data's aesthetics.
+#' @param text.size,text.angle,text.hjust,text.vjust,text.family,text.fontface,text.colour,text.color,text.alpha
+#'   Default aesthetics for tick mark labels. Set to NULL to inherit from the
+#'   data's aesthetics.
 #' @template return-layer
 #' @family geom layers
 #' @example inst/examples/ex-geom-axis.r
@@ -73,6 +79,18 @@ geom_axis <- function(
   by = NULL, num = NULL,
   tick_length = .025, text_dodge = .03, label_dodge = .03,
   ...,
+  axis.colour = NULL, axis.color = NULL, axis.alpha = NULL,
+  label.angle = 0,
+  label.colour = NULL, label.color = NULL, label.alpha = NULL,
+  # TODO: Inherit from theme.
+  tick.linewidth = 0.25,
+  tick.colour = NULL, tick.color = NULL, tick.alpha = NULL,
+  # TODO: Inherit from theme.
+  text.size = 2.6,
+  text.angle = 0, text.hjust = 0.5, text.vjust = 0.5,
+  # TODO: Inherit from theme.
+  text.family = NULL, text.fontface = NULL,
+  text.colour = NULL, text.color = NULL, text.alpha = NULL,
   parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -91,6 +109,23 @@ geom_axis <- function(
       tick_length = tick_length,
       text_dodge = text_dodge,
       label_dodge = label_dodge,
+      # NB: This is why Teun switched to `<element>_gp = list(...)`.
+      axis.colour = axis.color %||% axis.colour,
+      axis.alpha = axis.alpha,
+      label.angle = label.angle,
+      label.colour = label.color %||% label.colour,
+      label.alpha = label.alpha,
+      tick.linewidth = tick.linewidth,
+      tick.colour = tick.color %||% tick.colour,
+      tick.alpha = tick.alpha,
+      text.size = text.size,
+      text.angle = text.angle,
+      text.hjust = text.hjust,
+      text.vjust = text.vjust,
+      text.family = text.family,
+      text.fontface = text.fontface,
+      text.colour = text.color %||% text.colour,
+      text.alpha = text.alpha,
       parse = parse,
       check_overlap = check_overlap,
       na.rm = na.rm,
@@ -114,24 +149,13 @@ GeomAxis <- ggproto(
   ),
   
   default_aes = aes(
-    # axis
+    # axis & label
+    linetype = "solid", linewidth = .25, size = 3.88,
+    angle = 0, hjust = 0.5, vjust = 0.5,
     colour = "black", alpha = NA,
-    linewidth = .25, linetype = "solid",
-    # axis label
-    label = "",
-    label_colour = "black", label_alpha = NA,
-    label_size = 3.88, label_angle = 0,
-    label_family = "", label_fontface = 1,
+    label = "", family = "", fontface = 1L,
     # mark needs
-    center = 0, scale = 1,
-    # tick marks
-    tick_colour = "black", tick_alpha = NA,
-    tick_linewidth = .25, tick_linetype = "solid",
-    # tick mark text
-    text_colour = "black", text_alpha = NA,
-    text_size = 2.6, text_angle = 0,
-    text_hjust = 0.5, text_vjust = 0.5,
-    text_family = "", text_fontface = 1
+    center = 0, scale = 1
   ),
   
   setup_params = function(data, params) {
@@ -192,14 +216,37 @@ GeomAxis <- ggproto(
     axis_labels = TRUE, axis_ticks = TRUE, axis_text = TRUE,
     by = NULL, num = NULL,
     tick_length = .025, text_dodge = .03, label_dodge = .03,
+    axis.colour = NULL, axis.alpha = NULL,
+    label.angle = 0,
+    label.colour = NULL, label.alpha = NULL,
+    tick.linewidth = 0.25,
+    tick.colour = NULL, tick.alpha = NULL,
+    text.size = 2.6,
+    text.angle = 0, text.hjust = 0.5, text.vjust = 0.5,
+    text.family = NULL, text.fontface = NULL,
+    text.colour = NULL, text.alpha = NULL,
     parse = FALSE, check_overlap = FALSE,
     na.rm = FALSE
   ) {
+    # save(data, panel_params, coord,
+    #      axis_labels, axis_ticks, axis_text,
+    #      by, num,
+    #      tick_length, text_dodge, label_dodge,
+    #      axis.colour, axis.alpha,
+    #      label.angle,
+    #      label.colour, label.alpha,
+    #      tick.linewidth,
+    #      tick.colour, tick.alpha,
+    #      text.size,
+    #      text.angle, text.hjust, text.vjust,
+    #      text.family, text.fontface,
+    #      text.colour, text.alpha,
+    #      parse, check_overlap,
+    #      na.rm,
+    #      file = "geom-axis-draw-panel.rda")
+    # load(file = "geom-axis-draw-panel.rda")
     
     data <- ensure_cartesian_polar(data)
-    
-    # copy `linewidth` to `size` for earlier **ggplot2** versions
-    data$size <- data$linewidth
     
     if (! coord$is_linear())
       warning("Axes are not yet tailored to non-linear coordinates.")
@@ -251,6 +298,9 @@ GeomAxis <- ggproto(
     
     # axis grobs: if `xend` & `yend` then segment else abline & vline
     axis_data <- unique(data)
+    # specify independent aesthetics
+    axis_data$colour <- axis.colour %||% axis_data$colour
+    axis_data$alpha <- axis.alpha %||% axis_data$alpha
     
     # NB: This step redefines positional aesthetics for a specific grob.
     
@@ -281,13 +331,9 @@ GeomAxis <- ggproto(
     
     if (axis_labels) {
       label_data <- data
-      
       # specify independent aesthetics
-      label_data$colour <- label_data$label_colour
-      label_data$alpha <- label_data$label_alpha
-      label_data$size <- label_data$label_size
-      label_data$family <- label_data$label_family
-      label_data$fontface <- label_data$label_fontface
+      label_data$colour <- label.colour %||% label_data$colour
+      label_data$alpha <- label.alpha %||% label_data$alpha
       
       # NB: This step redefines positional aesthetics for a specific grob.
       
@@ -318,7 +364,7 @@ GeomAxis <- ggproto(
       # update text angle
       label_data <- transform(
         label_data,
-        angle = atan(tan(angle)) + label_angle
+        angle = atan(tan(angle)) + label.angle
       )
       # put total angle in degrees
       label_data$angle <- label_data$angle * 180 / pi
@@ -333,13 +379,10 @@ GeomAxis <- ggproto(
     
     if (axis_ticks) {
       tick_data <- mark_data
-      
       # specify independent aesthetics
-      tick_data$colour <- tick_data$tick_colour
-      tick_data$alpha <- tick_data$tick_alpha
-      tick_data$size <- tick_data$tick_linewidth
-      tick_data$linewidth <- tick_data$tick_linewidth
-      tick_data$linetype <- tick_data$tick_linetype
+      tick_data$linewidth <- tick.linewidth %||% tick_data$linewidth
+      tick_data$colour <- tick.colour %||% tick_data$colour
+      tick_data$alpha <- tick.alpha %||% tick_data$alpha
       
       # tick mark radius
       rtick <- plot_whmin * tick_length / 2
@@ -369,15 +412,15 @@ GeomAxis <- ggproto(
     
     if (axis_text) {
       text_data <- mark_data
-      
       # specify independent aesthetics
-      text_data$colour <- text_data$text_colour
-      text_data$alpha <- text_data$text_alpha
-      text_data$size <- text_data$text_size
-      text_data$hjust <- text_data$text_hjust
-      text_data$vjust <- text_data$text_vjust
-      text_data$family <- text_data$text_family
-      text_data$fontface <- text_data$text_fontface
+      text_data$size <- text.size %||% text_data$size
+      # text_data$angle <- text.angle
+      text_data$hjust <- text.hjust
+      text_data$vjust <- text.vjust
+      text_data$family <- text.family %||% text_data$family
+      text_data$fontface <- text.fontface %||% text_data$fontface
+      text_data$colour <- text.colour %||% text_data$colour
+      text_data$alpha <- text.alpha %||% text_data$alpha
       
       # omit labels at origin
       if (! use_offset) {
@@ -396,7 +439,7 @@ GeomAxis <- ggproto(
       # update text angle and put in degrees
       text_data <- transform(
         text_data,
-        angle = (atan(tan(angle)) + text_angle) * 180 / pi
+        angle = (atan(tan(angle)) + text.angle) * 180 / pi
       )
       
       if (nrow(text_data) > 0L) {

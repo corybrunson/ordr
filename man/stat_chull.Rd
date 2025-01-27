@@ -2,13 +2,26 @@
 % Please edit documentation in R/stat-chull.r
 \name{stat_chull}
 \alias{stat_chull}
-\title{Restrict geometric data to boundary points for its convex hull}
+\alias{stat_peel}
+\title{Convex hulls and hull peelings}
 \usage{
 stat_chull(
   mapping = NULL,
   data = NULL,
   geom = "polygon",
   position = "identity",
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_peel(
+  mapping = NULL,
+  data = NULL,
+  geom = "polygon",
+  position = "identity",
+  breaks = c(0.5),
+  cut = c("above", "below"),
   show.legend = NA,
   inherit.aes = TRUE,
   ...
@@ -73,15 +86,29 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
+
+\item{breaks}{A numeric vector of fractions (between \code{0} and \code{1}) of the
+data to contain in each hull.}
+
+\item{cut}{Character; one of \code{"above"} and \code{"below"}, indicating whether each
+hull should contain at least or at most \code{breaks} of the data,
+respectively.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
-As used in a \strong{\link[ggplot2:ggplot2-package]{ggplot2}} vignette, this stat
-layer restricts a dataset with \code{x} and \code{y} variables to the points that lie
-on its convex hull. The biplot extension restricts each matrix factor to
-its own hull.
+Restrict planar data to the boundary points of its convex hull,
+or of nested convex hulls containing specified fractions of points.
+}
+\details{
+As used in a \strong{\link[ggplot2:ggplot2-package]{ggplot2}} vignette,
+\code{stat_chull()} restricts a dataset with \code{x} and \code{y} variables to the points
+that lie on its convex hull.
+
+Building on this, \code{stat_peel()} returns hulls from a \emph{convex hull peeling}:
+a subset of sequentially removed hulls containing specified fractions of
+the data.
 }
 \section{Biplot layers}{
 
@@ -116,6 +143,16 @@ A small number of transformations (\code{\link[=stat_rule]{stat_rule()}}) are in
 ordination aesthetics but will accept \code{ord_aes()} without warning.
 }
 
+\section{Computed variables}{
+ These are calculated during the statistical
+transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluation}.
+\describe{
+\item{\code{hull}}{the position of \code{breaks} that defines each hull}
+\item{\code{frac}}{the value of \code{breaks} that defines each hull}
+\item{\code{prop}}{the actual proportion of data within each hull}
+}
+}
+
 \examples{
 # correspondence analysis of combined female and male hair and eye color data
 HairEyeColor \%>\%
@@ -145,11 +182,41 @@ hec_ca \%>\%
   geom_rows_point() +
   geom_cols_point() +
   ggtitle("Column-principal CA of hair & eye color")
+judge_pca <- ordinate(USJudgeRatings, princomp)
+ggbiplot(judge_pca, axis.type = "predictive") +
+  geom_cols_axis() +
+  geom_rows_point(elements = "score") +
+  stat_rows_peel(
+    aes(alpha = after_stat(hull)), color = "black", elements = "score",
+    breaks = c(.9, .5, .1)
+  )
+ggbiplot(judge_pca, axis.type = "predictive") +
+  geom_cols_axis() +
+  geom_rows_point(elements = "score") +
+  stat_rows_peel(
+    aes(alpha = after_stat(hull)), color = "black", elements = "score",
+    breaks = c(.9, .5, .1), cut = "below"
+  )
+
+iris_pca <- ordinate(iris, cols = 1:4, model = prcomp)
+ggbiplot(iris_pca) +
+  geom_rows_point(aes(color = Species), shape = "circle open") +
+  stat_rows_peel(
+    aes(fill = Species, alpha = after_stat(hull)),
+    breaks = c(.9, .5, .1)
+  )
+}
+\references{
+Barnett V (1976) "The Ordering of Multivariate Data". \emph{Journal of the Royal
+Statistical Society: Series A (General)}, \strong{139}(3): 318--344.
+\doi{10.2307/2344839}
 }
 \seealso{
 Other stat layers: 
+\code{\link{stat_bagplot}()},
 \code{\link{stat_center}()},
 \code{\link{stat_cone}()},
+\code{\link{stat_depth}()},
 \code{\link{stat_projection}()},
 \code{\link{stat_rule}()},
 \code{\link{stat_scale}()},

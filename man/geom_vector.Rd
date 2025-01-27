@@ -14,6 +14,11 @@ geom_vector(
   linejoin = "mitre",
   vector_labels = TRUE,
   ...,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  parse = FALSE,
+  check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -78,6 +83,18 @@ from the vectors.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
+\item{label.colour, label.color, label.alpha}{Default aesthetics for labels.
+Set to NULL to inherit from the data's aesthetics.}
+
+\item{parse}{If \code{TRUE}, the labels will be parsed into expressions and
+displayed as described in \code{?plotmath}.}
+
+\item{check_overlap}{If \code{TRUE}, text that overlaps previous text in the
+same layer will not be plotted. \code{check_overlap} happens at draw time and in
+the order of the data. Therefore data should be arranged by the label
+column before calling \code{geom_text()}. Note that this argument is not
+supported by \code{geom_label()}.}
+
 \item{na.rm}{Passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
@@ -133,9 +150,12 @@ are in bold):
 \item \code{linetype}
 \item \code{label}
 \item \code{size}
-\item \code{angle}, \code{hjust}, \code{vjust}
-\item \code{label_colour}, \code{label_alpha}
-\item \code{family}, \code{fontface}, \code{lineheight}
+\item \code{angle}
+\item \code{hjust}
+\item \code{vjust}
+\item \code{family}
+\item \code{fontface}
+\item \code{lineheight}
 \item \code{group}
 }
 }
@@ -148,8 +168,7 @@ state_center <- cbind(
 )
 ggplot(state_center, aes(x, y, label = state)) +
   coord_equal() +
-  geom_vector() +
-  geom_text_radiate()
+  geom_vector()
 }
 \references{
 Gabriel KR (1971) "The biplot graphic display of matrices with application to
@@ -179,6 +198,7 @@ branch
 \seealso{
 Other geom layers: 
 \code{\link{geom_axis}()},
+\code{\link{geom_bagplot}()},
 \code{\link{geom_interpolation}()},
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},
