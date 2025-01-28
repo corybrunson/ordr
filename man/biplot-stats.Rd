@@ -720,6 +720,23 @@ hec_ca \%>\%
   geom_rows_point() +
   geom_cols_point() +
   ggtitle("Column-principal CA of hair & eye color")
+# centered principal components analysis of U.S. personal expenditure data
+USPersonalExpenditure \%>\%
+  prcomp() \%>\%
+  as_tbl_ord() \%>\%
+  augment_ord() \%>\%
+  # allow radiating text to exceed plotting window
+  ggbiplot(aes(label = name), clip = "off",
+           sec.axes = "cols", scale.factor = 50) +
+  geom_rows_label(size = 3) +
+  # omit labels in the conical hull without the origin
+  geom_cols_vector(vector_labels = FALSE) +
+  stat_cols_cone(linetype = "dotted") +
+  geom_cols_vector(stat = "cone", vector_labels = TRUE, color = "transparent") +
+  ggtitle(
+    "U.S. Personal Expenditure data, 1940-1960",
+    "Row-principal biplot of centered PCA"
+  )
 # compute row-principal components of scaled iris measurements
 iris[, -5] \%>\%
   prcomp(scale = TRUE) \%>\%
@@ -767,6 +784,97 @@ ggbiplot(iris_pca) +
   stat_rows_peel(
     aes(fill = Species, alpha = after_stat(hull)),
     breaks = c(.9, .5, .1)
+  )
+# unscaled PCA
+iris_pca <- ordinate(iris, cols = 1:4, model = prcomp)
+
+# biplot canvas
+iris_biplot <- 
+  iris_pca |> 
+  ggbiplot(aes(color = Species, label = name), axis.type = "predictive") +
+  geom_rows_point() +
+  geom_cols_axis(aes(center = center))
+
+# print select cases
+top_cases <- c(1, 51, 101)
+iris[top_cases, ]
+# subset variables
+length_vars <- c(1, 3)
+iris[, length_vars] |> 
+  aggregate(by = iris[, "Species", drop = FALSE], FUN = mean)
+
+# project all cases onto all axes
+iris_biplot + stat_rows_projection()
+# project all cases onto select axes
+iris_biplot + stat_rows_projection(ref_subset = length_vars)
+
+# project select cases onto all axes
+iris_biplot + stat_rows_projection(subset = top_cases)
+# project select cases onto select axes
+iris_biplot + stat_rows_projection(subset = top_cases, ref_subset = length_vars)
+
+# project select cases onto manually provided axes
+iris_cols <- as.data.frame(get_cols(iris_pca))
+iris_biplot + stat_rows_projection(subset = top_cases, referent = iris_cols)
+
+# project selected cases onto selected axes in full-dimensional space
+iris_pca |> 
+  ggbiplot(ord_aes(iris_pca, color = Species, label = name),
+           axis.type = "predictive") +
+  geom_rows_point() +
+  geom_cols_axis(aes(center = center)) +
+  stat_rows_projection(subset = top_cases, ref_subset = length_vars)
+# Freestone primary glass measurements
+print(glass)
+
+# default (standardized) linear discriminant analysis of sites on measurements
+glass_lda <- MASS::lda(Site ~ SiO2 + Al2O3 + FeO + MgO + CaO, glass)
+# bestow 'tbl_ord' class & augment observation, centroid, and variable fields
+as_tbl_ord(glass_lda) \%>\%
+  augment_ord() \%>\%
+  print() -> glass_lda
+# row-standard biplot
+glass_lda \%>\%
+  confer_inertia(1) \%>\%
+  ggbiplot(aes(shape = grouping)) +
+  theme_bw() + theme_biplot() +
+  geom_rows_point(size = 4) +
+  geom_rows_point(elements = "score") +
+  stat_cols_rule(
+    aes(label = name), color = "#888888", num = 8L,
+    ref_elements = "score", fun.offset = \(x) minabspp(x, p = .1),
+    text.size = 2.5, label_dodge = .04
+  ) +
+  scale_shape_manual(values = c(2L, 3L, 0L, 5L)) +
+  ggtitle(
+    "LDA of Freestone glass measurements",
+    "Row-standard biplot of standardized LDA"
+  )
+
+# contribution LDA of sites on measurements
+glass_lda <-
+  lda_ord(Site ~ SiO2 + Al2O3 + FeO + MgO + CaO, glass,
+          axes.scale = "contribution")
+# bestow 'tbl_ord' class & augment observation, centroid, and variable fields
+as_tbl_ord(glass_lda) \%>\%
+  augment_ord() \%>\%
+  print() -> glass_lda
+# symmetric biplot
+glass_lda \%>\%
+  confer_inertia(.5) \%>\%
+  ggbiplot(aes(shape = grouping)) +
+  theme_bw() + theme_biplot() +
+  geom_rows_point() +
+  stat_rows_density_2d(elements = "score", alpha = .5, color = "#444444") +
+  stat_cols_rule(
+    aes(label = name), geom = "axis", color = "#888888", num = 8L,
+    ref_elements = "active", fun.offset = \(x) minabspp(x, p = .1),
+    label_dodge = 0.04, text.size = 2.5, text_dodge = .025
+  ) +
+  scale_shape_manual(values = c(16L, 17L, 15L, 18L)) +
+  ggtitle(
+    "LDA of Freestone glass measurements",
+    "Symmetric biplot of contribution LDA"
   )
 }
 \seealso{

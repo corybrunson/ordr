@@ -38,7 +38,6 @@
 #' @template return-layer
 #' @family stat layers
 #' @example inst/examples/ex-stat-projection.r
-#' @example inst/examples/ex-stat-projection-iris.r
 #' @export
 stat_projection <- function(
     mapping = NULL, data = NULL, geom = "segment", position = "identity",

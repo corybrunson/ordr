@@ -13,7 +13,7 @@
 #'   data. Defaults to `FALSE`.
 #' @template return-layer
 #' @family stat layers
-#' @example inst/examples/ex-stat-cone-spend.r
+#' @example inst/examples/ex-stat-cone.r
 #' @export
 stat_cone <- function(
   mapping = NULL, data = NULL, geom = "path", position = "identity",

@@ -39,8 +39,11 @@
 #' @example inst/examples/ex-stat-bagplot-ord-judges.r
 #' @example inst/examples/ex-stat-center-ord-iris.r
 #' @example inst/examples/ex-stat-chull-ord-haireye.r
+#' @example inst/examples/ex-stat-cone-ord-spend.r
 #' @example inst/examples/ex-stat-ellipse-ord-iris.r
 #' @example inst/examples/ex-stat-peel-ord-judges.r
+#' @example inst/examples/ex-stat-projection-ord-iris.r
+#' @example inst/examples/ex-stat-rule-ord-glass.r
 NULL
 
 #' @rdname ordr-ggproto

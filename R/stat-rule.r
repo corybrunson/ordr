@@ -56,7 +56,7 @@
 #'   `referent` onto the axes and onto their normal vectors.
 #' @template return-layer
 #' @family stat layers
-#' @example inst/examples/ex-stat-rule-glass.r
+#' @example inst/examples/ex-stat-rule.r
 #' @export
 stat_rule <- function(
     mapping = NULL, data = NULL, geom = "rule", position = "identity",
