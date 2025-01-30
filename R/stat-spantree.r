@@ -44,7 +44,7 @@
 #' @template param-stat
 #' @template return-layer
 #' @family stat layers
-#' @example inst/examples/ex-stat-spantree-eurodist.r
+#' @example inst/examples/ex-stat-spantree.r
 #' @export
 stat_spantree <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",

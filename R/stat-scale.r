@@ -10,6 +10,7 @@
 #' @template param-stat
 #' @template return-layer
 #' @family stat layers
+#' @example inst/examples/ex-stat-scale.r
 #' @export
 stat_scale <- function(
   mapping = NULL, data = NULL, geom = "point", position = "identity",
