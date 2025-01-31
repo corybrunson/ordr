@@ -176,8 +176,10 @@ points for rows and arrows for columns.
 \code{geom_rule()} understands the following aesthetics (required aesthetics are
 in bold):
 \itemize{
-\item \strong{\code{x}}, \strong{\code{y}}
-\item \strong{\code{lower}, \code{upper}}
+\item \strong{\code{x}}
+\item \strong{\code{y}}
+\item \strong{\code{lower}}
+\item \strong{\code{upper}}
 \item \code{yintercept} \emph{or} \code{xintercept} \emph{or} \code{xend} and \code{yend}
 \item \code{linetype}
 \item \code{linewidth}

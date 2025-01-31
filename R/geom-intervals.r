@@ -31,7 +31,7 @@
 #' @template param-geom
 #' @template return-layer
 #' @family geom layers
-#' @example inst/examples/ex-geom-intervals-glass.r
+#' @example inst/examples/ex-geom-intervals.r
 #' @export
 geom_lineranges <- function(
   mapping = NULL, data = NULL, stat = "center", position = "identity",

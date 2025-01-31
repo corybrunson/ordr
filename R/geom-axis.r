@@ -30,8 +30,10 @@
 #' `geom_axis()` understands the following aesthetics (required aesthetics are
 #' in bold):
 
-#' - **`x`**, **`y`**
-#' - `lower`, `upper`
+#' - **`x`**
+#' - **`y`**
+#' - `lower`
+#' - `upper`
 #' - `yintercept` _or_ `xintercept` _or_ `xend` and `yend`
 #' - `linetype`
 #' - `linewidth`

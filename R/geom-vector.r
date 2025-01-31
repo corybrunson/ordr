@@ -25,7 +25,8 @@
 #' `geom_vector()` understands the following aesthetics (required aesthetics
 #' are in bold):
 
-#' - **`x`**, **`y`**
+#' - **`x`**
+#' - **`y`**
 #' - `alpha`
 #' - `colour`
 #' - `linetype`

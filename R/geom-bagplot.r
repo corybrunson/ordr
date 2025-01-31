@@ -30,7 +30,8 @@
 #' `geom_bagplot()` understands the following aesthetics (required aesthetics
 #' are in bold):
 
-#' - **`x`**, **`y`**
+#' - **`x`**
+#' - **`y`**
 #' - **`component`**
 #' - `linewidth`
 #' - `linetype`

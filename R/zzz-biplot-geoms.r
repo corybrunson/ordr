@@ -41,6 +41,8 @@
 #' @inheritParams geom_rule
 #' @inheritParams geom_text_radiate
 #' @inheritParams geom_vector
+#' @example inst/examples/ex-geom-intervals-ord-glass.r
+#' @example inst/examples/ex-geom-unit-circle-ord-glass.r
 NULL
 
 #' @export

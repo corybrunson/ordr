@@ -44,6 +44,7 @@
 #' @example inst/examples/ex-stat-peel-ord-judges.r
 #' @example inst/examples/ex-stat-projection-ord-iris.r
 #' @example inst/examples/ex-stat-rule-ord-glass.r
+#' @example inst/examples/ex-stat-spantree-ord-eurodist.r
 NULL
 
 #' @rdname ordr-ggproto

@@ -12,7 +12,8 @@
 #' `geom_text_radiate()` understands the following aesthetics (required
 #' aesthetics are in bold):
 
-#' - **`x`**, **`y`**
+#' - **`x`**
+#' - **`y`**
 #' - **`label`**
 #' - `alpha`
 #' - `angle`

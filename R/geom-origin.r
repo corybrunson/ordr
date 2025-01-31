@@ -31,7 +31,8 @@
 #'   may be changed in a future version.)
 #' @template return-layer
 #' @family geom layers
-#' @example inst/examples/ex-geom-unit-circle-glass.r
+#' @example inst/examples/ex-geom-origin.r
+#' @example inst/examples/ex-geom-unit-circle.r
 #' @export
 geom_origin <- function(
   mapping = NULL, data = NULL,# stat = "identity", position = "identity",

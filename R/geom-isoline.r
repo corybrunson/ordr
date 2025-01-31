@@ -17,7 +17,8 @@
 #' `geom_isoline()` understands the following aesthetics (required aesthetics
 #' are in bold):
 
-#' - **`x`**, **`y`**
+#' - **`x`**
+#' - **`y`**
 #' - `colour`
 #' - `alpha`
 #' - `linewidth`

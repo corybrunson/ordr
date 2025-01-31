@@ -160,7 +160,8 @@ points for rows and arrows for columns.
 \code{geom_bagplot()} understands the following aesthetics (required aesthetics
 are in bold):
 \itemize{
-\item \strong{\code{x}}, \strong{\code{y}}
+\item \strong{\code{x}}
+\item \strong{\code{y}}
 \item \strong{\code{component}}
 \item \code{linewidth}
 \item \code{linetype}
