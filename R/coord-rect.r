@@ -1,3 +1,33 @@
+#' @title Cartesian coordinates and plotting window with fixed aspect ratios
+#'
+#' @description Geometric data analysis often requires that coordinates lie on
+#'   the same scale. The coordinate system `CoordRect`, alias `CoordSquare`,
+#'   provides control of both coordinate and window aspect ratios.
+#'
+#' @inheritParams ggplot2::coord_fixed
+#' @param window_ratio aspect ratio of plotting window
+#' @example inst/examples/ex-coord-rect.r
+#' @export
+coord_rect <- function(
+    ratio = 1, window_ratio = ratio,
+    xlim = NULL, ylim = NULL, expand = TRUE, clip = "on"
+) {
+  ggplot2:::check_coord_limits(xlim)
+  ggplot2:::check_coord_limits(ylim)
+  ggproto(
+    NULL, CoordRect,
+    limits = list(x = xlim, y = ylim),
+    ratio = ratio, window_ratio = window_ratio,
+    expand = expand,
+    clip = clip
+  )
+}
+
+#' @rdname coord_rect
+#' @usage NULL
+#' @export
+coord_square <- coord_rect
+
 #' @rdname ordr-ggproto
 #' @format NULL
 #' @usage NULL
@@ -26,7 +56,7 @@ CoordRect <- ggproto(
     aesthetic_y <- scale_y$aesthetics[1]
     
     # synchronize limits and ranges according to `window_ratio` after adjusting
-    # for `ratio` (if it is provided; it isn't in `CoordBiplot`)
+    # for `ratio` (if it is provided; it isn't in `CoordScaffold`)
     adj_ratio <- self$window_ratio / (self$ratio %||% 1)
     limits <- reconcile_rectangle(limits_x, limits_y, adj_ratio)
     continuous_range <- reconcile_rectangle(
@@ -52,95 +82,6 @@ CoordRect <- ggproto(
     c(view_scales_x, view_scales_y)
   }
 )
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-CoordBiplot <- ggproto(
-  "CoordBiplot", CoordRect,
-  
-  # require coordinate aspect ratio to be 1
-  aspect = function(self, ranges) {
-    diff(ranges$y.range) / diff(ranges$x.range)
-  }
-)
-
-#' @title Cartesian coordinates and plotting window with fixed aspect ratios
-#'
-#' @description 2- (and 3-) dimensional biplots require that coordinates lie on
-#'   the same scale but may additionally benefit from a square plotting window.
-#'   The general-purpose coordinate system `CoordRect`, alias `CoordSquare`,
-#'   provides control of both coordinate and window aspect ratios, while the
-#'   convenience `CoordBiplot` system fixes the coordinate aspect ratio at `1`
-#'   and gives the user control only of the plotting window.
-#'
-#' @inheritParams ggplot2::coord_fixed
-#' @param window_ratio aspect ratio of plotting window
-#' @examples
-#' # ensures that the resolutions of the axes and the dimensions of the plotting
-#' # window respect the specified aspect ratios
-#'
-#' p <- ggplot(mtcars, aes(mpg, hp/10)) + geom_point()
-#' p + coord_rect(ratio = 1)
-#' p + coord_rect(ratio = 1, window_ratio = 2)
-#' p + coord_rect(ratio = 1, window_ratio = 1/2)
-#' p + coord_rect(ratio = 5)
-#' p + coord_rect(ratio = 1/5)
-#' p + coord_rect(xlim = c(15, 30))
-#' p + coord_rect(ylim = c(15, 30))
-#'
-#' # Resize the plot to see that the specified aspect ratio is maintained
-#' @export
-coord_rect <- function(
-    ratio = 1, window_ratio = ratio,
-    xlim = NULL, ylim = NULL, expand = TRUE, clip = "on"
-) {
-  ggplot2:::check_coord_limits(xlim)
-  ggplot2:::check_coord_limits(ylim)
-  ggproto(
-    NULL, CoordRect,
-    limits = list(x = xlim, y = ylim),
-    ratio = ratio, window_ratio = window_ratio,
-    expand = expand,
-    clip = clip
-  )
-}
-
-#' @rdname coord_rect
-#' @usage NULL
-#' @export
-coord_square <- coord_rect
-
-#' @rdname coord_rect
-#' @examples
-#' p <- ggplot(mtcars, aes(mpg, hp/10)) + geom_point()
-#' p + coord_biplot()
-#' p + coord_biplot(window_ratio = 2)
-#' 
-#' # prevent rescaling in response to `theme()` aspect ratio
-#' p <- ggplot(mtcars, aes(mpg, hp/5)) + geom_point()
-#' p + coord_equal() + theme(aspect.ratio = 1)
-#' p + coord_biplot() + theme(aspect.ratio = 1)
-#' 
-#' # NB: `theme(aspect.ratio = )` overrides `Coord*$aspect`:
-#' p + coord_fixed(ratio = 1) + theme(aspect.ratio = 1)
-#' p + coord_biplot(window_ratio = 2) + theme(aspect.ratio = 1)
-#' @export
-coord_biplot <- function(
-    window_ratio = 1,
-    xlim = NULL, ylim = NULL, expand = TRUE, clip = "on"
-) {
-  ggplot2:::check_coord_limits(xlim)
-  ggplot2:::check_coord_limits(ylim)
-  ggproto(
-    NULL, CoordBiplot,
-    limits = list(x = xlim, y = ylim),
-    window_ratio = window_ratio,
-    expand = expand,
-    clip = clip
-  )
-}
 
 reconcile_rectangle <- function(xlim, ylim, ratio) {
   sides <- c(diff(xlim), diff(ylim))
