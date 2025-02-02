@@ -5,14 +5,21 @@
 #' 
 
 #' @details A bagplot comprises a single, often filled, depth contour (the
-#'   "bag") overlaid upon the hull of its union with the data points contained
+#'   "bag") overlaid with the hull of its union with the data points contained
 #'   in its scaled expansion from the depth median (the "fence") and a
 #'   scatterplot of outliers beyond the fence (the "loop"). Rousseeuw &al (1999)
-#'   suggest the term "bag-and-bolster plot".
+#'   suggest the term "bag-and-bolster plot" evocative of the "box-and-whisker
+#'   plot".
 #'
 #'   While the depth median can be obtained using [stat_center()], the data
 #'   depth values used to compute it are also used to demarcate the bag, so it
 #'   is implemented separately in `StatBagplot$compute_group()` for efficiency.
+#'
+#'   `stat_bagplot()` is designed to pair with [geom_bagplot()], analogously to
+#'   the pairing of [ggplot2::stat_boxplot()] with [ggplot2::geom_boxplot()]. In
+#'   particular, `GeomBagplot` is the only `ggproto` that recognizes the
+#'   computed variable `component`, used by `StatBagplot` to separate data for
+#'   the four bagplot elements.
 #' 
 
 #' @template ref-rousseeuw1999
