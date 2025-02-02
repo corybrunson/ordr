@@ -32,8 +32,8 @@ recover_dims_factanal <- function(x, .matrix) unclass(x[["loadings"]])
 #' @rdname methods-factanal
 #' @export
 recover_rows.factanal <- function(x) {
-  matrix(nrow = 0, ncol = ncol(x[["scores"]]),
-         dimnames = list(NULL, colnames(x[["scores"]])))
+  matrix(nrow = 0L, ncol = ncol(x[["loadings"]]),
+         dimnames = list(NULL, colnames(x[["loadings"]])))
 }
 
 #' @rdname methods-factanal
@@ -56,7 +56,7 @@ recover_coord.factanal <- function(x) {
 #' @export
 recover_conference.factanal <- function(x) {
   # loadings are assigned half the diagonal from the eigendecomposition
-  c(.5, .5)
+  c(1,1)
 }
 
 #' @rdname methods-factanal
