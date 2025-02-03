@@ -16,8 +16,9 @@
 #' @param fun.center Deprecated alias to `fun`.
 #' @param fun.ord Alternatively to the [ggplot2::stat_summary_bin()] parameters,
 #'   supply a summary function that takes a matrix as input and returns a named
-#'   column summary vector. Overridden by `fun.data` and `fun`, cannot be used
-#'   together with `fun.min` and `fun.max`.
+#'   column summary vector. Names must include be those of the input columns and
+#'   may also include their `*min` and `*max` counterparts. Overridden by
+#'   `fun.data` and `fun`, cannot be used together with `fun.min` and `fun.max`.
 #' @template param-stat
 #' @template return-layer
 #' @family stat layers
