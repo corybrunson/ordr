@@ -1,7 +1,6 @@
 #' @title Conical hull
 #'
-#' @description Restrict planar data to the points that lie on its conical hull
-#'   (other than the origin).
+#' @description Restrict planar data to the points that lie on its conical hull.
 #' 
 
 #' @template biplot-layers

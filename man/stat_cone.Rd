@@ -82,8 +82,7 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
-Restrict planar data to the points that lie on its conical hull
-(other than the origin).
+Restrict planar data to the points that lie on its conical hull.
 }
 \section{Biplot layers}{
 
@@ -119,22 +118,16 @@ ordination aesthetics but will accept \code{ord_aes()} without warning.
 }
 
 \examples{
-state_center <- as.data.frame(state.center)
-# US hull from the perspective of florida
-fl.center <- state_center[state.abb == "FL", ]
-as.data.frame(state.center) |> 
-  transform(x = x - fl.center$x, y = y - fl.center$y, abbr = state.abb) |> 
-  subset(abbr != "HI" & abbr != "AK") |> 
-  ggplot(aes(x, y, label = abbr)) +
-  stat_cone(data = \(d) subset(d, abbr != "FL")) +
-  geom_text()
-# US hull from the perspective of Hawai'i
-hi.center <- state_center[state.abb == "HI", ]
-as.data.frame(state.center) |> 
-  transform(x = x - hi.center$x, y = y - hi.center$y, abbr = state.abb) |> 
-  ggplot(aes(x, y, label = abbr)) +
-  geom_path(stat = "cone", data = \(d) subset(d, abbr != "HI")) +
-  geom_text()
+mtcars$name <- rownames(mtcars)
+ggplot(mtcars, aes(wt, mpg, label = name)) +
+  theme_scaffold() +
+  geom_text(size = 3) +
+  stat_cone()
+ggplot(mtcars, aes(hp, mpg, label = name)) +
+  theme_scaffold() +
+  geom_origin() +
+  geom_text(size = 3) +
+  stat_cone(origin = TRUE, linetype = "dotted")
 }
 \seealso{
 Other stat layers: 

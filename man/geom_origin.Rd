@@ -101,10 +101,10 @@ points for rows and arrows for columns.
 \code{geom_origin()} accepts no aesthetics.
 \code{geom_unit_circle()} understands the following aesthetics (none required):
 \itemize{
-\item \code{alpha}
-\item \code{colour}
 \item \code{linetype}
-\item \code{size}
+\item \code{linewidth}
+\item \code{colour}
+\item \code{alpha}
 }
 }
 

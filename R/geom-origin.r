@@ -12,10 +12,10 @@
 
 #' `geom_unit_circle()` understands the following aesthetics (none required):
 
-#' - `alpha`
-#' - `colour`
 #' - `linetype`
-#' - `size`
+#' - `linewidth`
+#' - `colour`
+#' - `alpha`
 #' 
 
 #' @import ggplot2
@@ -67,8 +67,8 @@ GeomOrigin <- ggproto(
   
   required_aes = c(),
   default_aes = aes(
-    colour = "black", alpha = NA,
-    linewidth = 0.5, linetype = 1
+    linetype = 1, linewidth = 0.5,
+    colour = "black", alpha = NA
   ),
   
   setup_data = function(data, params) {
