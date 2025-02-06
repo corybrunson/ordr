@@ -25,6 +25,5 @@ b + stat_depth(
 b + stat_depth_filled(alpha = .75) +
   facet_wrap(facets = vars(factor(cyl)))
 # scaled to the unit interval
-# FIXME: Some polygons are missing.
 b + stat_depth_filled(contour_var = "ndepth", alpha = .75) +
   facet_wrap(facets = vars(factor(cyl)))
