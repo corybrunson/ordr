@@ -562,9 +562,8 @@ single number.}
 
 \item{fun.ord}{Alternatively to the \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary_bin()}} parameters,
 supply a summary function that takes a matrix as input and returns a named
-column summary vector. Names must include be those of the input columns and
-may also include their \verb{*min} and \verb{*max} counterparts. Overridden by
-\code{fun.data} and \code{fun}, cannot be used together with \code{fun.min} and \code{fun.max}.}
+column summary vector. Overridden by \code{fun.data} and \code{fun}, cannot be used
+together with \code{fun.min} and \code{fun.max}.}
 
 \item{fun.args}{Optional additional arguments passed on to the functions.}
 
