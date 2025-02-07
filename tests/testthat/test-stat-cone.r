@@ -11,9 +11,9 @@ test_that("`stat_cone()` faithfully computes the cone", {
   expect_setequal(l$label, cone_corners)
 })
 
-test_that("`stat_cone(origin = TRUE)` includes exactly one origin point", {
+test_that("`stat_cone(origin = TRUE)` includes exactly two origin points", {
   l <- layer_data(p + stat_cone(origin = TRUE, geom = "text"))
   expect_setequal(l$label, c(cone_corners, NA))
-  expect_equal(length(cone_corners), nrow(l) - 1L)
-  expect_setequal(l[is.na(l$label), c("x", "y")], 0)
+  expect_equal(length(cone_corners), nrow(l) - 2L)
+  expect_setequal(unlist(l[is.na(l$label), c("x", "y")]), 0)
 })

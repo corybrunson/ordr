@@ -66,8 +66,13 @@ StatCone <- ggproto(
     
     # cycle the rows of the hull until the origin is first
     hull <- c(hull[seq(orig, length(hull))], hull[seq(0L, orig - 1L)[-1L]])
-    # if origin is to be omitted, return the convex hull from the data
-    if (! origin) return(data[hull[-1L], , drop = FALSE])
+    if (origin) {
+      # if origin is to be included, append it again to the bottom
+      hull <- c(hull, hull[1L])
+    } else {
+      # if origin is to be omitted, return the convex hull from the data
+      return(data[hull[-1L], , drop = FALSE])
+    }
     
     # reduce additional columns: unique or bust
     data_only <- as.data.frame(lapply(subset(data, select = -ord_cols), only))
