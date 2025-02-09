@@ -4,6 +4,13 @@
 #'   for a specified subject or variable; `geom_pointranges()` additionally
 #'   renders a point at their crosshairs.
 
+#' @details The `geom_*ranges()` layers are shortcuts for equivalently-specified
+#'   pairs of horizontal and vertical
+#'   [`ggplot2::geom_*range()`][ggplot2::geom_linerange] layers. Rather than
+#'   [ggplot2::stat_identity()], they default to [stat_center()], so that in
+#'   practice the summary values do not need to be manually passed.
+#' 
+
 #' @template biplot-layers
 
 #' @section Aesthetics:

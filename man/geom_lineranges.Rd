@@ -97,6 +97,13 @@ A ggproto \link[ggplot2:layer]{layer}.
 for a specified subject or variable; \code{geom_pointranges()} additionally
 renders a point at their crosshairs.
 }
+\details{
+The \code{geom_*ranges()} layers are shortcuts for equivalently-specified
+pairs of horizontal and vertical
+\code{\link[ggplot2:geom_linerange]{ggplot2::geom_*range()}} layers. Rather than
+\code{\link[ggplot2:stat_identity]{ggplot2::stat_identity()}}, they default to \code{\link[=stat_center]{stat_center()}}, so that in
+practice the summary values do not need to be manually passed.
+}
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
@@ -138,6 +145,19 @@ ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
 ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
   geom_point(alpha = .25) +
   geom_pointranges(fun.data = mean_sdl, shape = "circle open")
+
+mpg |> 
+  aggregate(
+    x = cbind(displ, hwy) ~ 0,
+    FUN = \(z) c(min = min(z), med = median(z), max = max(z))
+  ) |> 
+  do.call(what = data.frame) |> 
+  ggplot(aes(displ.med, hwy.med)) +
+  geom_pointranges(
+    stat = "identity",
+    aes(xmin = displ.min, xmax = displ.max, ymin = hwy.min, ymax = hwy.max)
+  ) +
+  geom_point(data = mpg, aes(displ, hwy), alpha = .5)
 }
 \seealso{
 Other geom layers: 
