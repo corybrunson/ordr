@@ -81,7 +81,7 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
-Multiply artificial coordinates by a scale factor
+This layer is \strong{deprecated}.
 }
 \section{Biplot layers}{
 
@@ -116,12 +116,6 @@ A small number of transformations (\code{\link[=stat_rule]{stat_rule()}}) are in
 ordination aesthetics but will accept \code{ord_aes()} without warning.
 }
 
-\examples{
-d <- data.frame(x = c(1, 0), y = c(0, 1))
-ggplot(d, aes(x, y)) +
-  geom_point(size = 3) +
-  geom_vector(stat = "scale", mult = 2)
-}
 \seealso{
 Other stat layers: 
 \code{\link{stat_bagplot}()},

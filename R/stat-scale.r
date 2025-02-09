@@ -1,5 +1,8 @@
 #' @title Multiply artificial coordinates by a scale factor
-#'
+#' 
+#' @description
+#' This layer is **deprecated**.
+#' 
 
 #' @template biplot-layers
 #' @template biplot-ord-aes
@@ -10,7 +13,6 @@
 #' @template param-stat
 #' @template return-layer
 #' @family stat layers
-#' @example inst/examples/ex-stat-scale.r
 #' @export
 stat_scale <- function(
   mapping = NULL, data = NULL, geom = "point", position = "identity",
@@ -45,6 +47,7 @@ StatScale <- ggproto(
   required_aes = c("x", "y"),
   
   compute_group = function(data, scales, mult = 1) {
+    warning("`StatScale` is deprecated and will be removed next release.")
     data[, c("x", "y")] <- data[, c("x", "y")] * mult
     data
   }

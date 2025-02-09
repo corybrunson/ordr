@@ -1,5 +1,16 @@
 # next version
 
+## infrastructure and standards
+
+### wrapper defaults
+
+Previously, `lda_ord()` mimicked `MASS::lda()` in defaulting the retrieval parameters `ret.x` and `ret.grouping` to `FALSE`.
+Because they are so important to analysis and especially to biplots, they now default to `TRUE`.
+
+### unit tests
+
+Unit tests have been written for all ggproto shortcuts.
+
 ## upgrades to the biplot chassis
 
 ### axis harmonizers
@@ -21,7 +32,7 @@ The `elements` parameter is now standardized across all statistical transformati
 The value is argument-matched to `"active"`, `"score"`, or `"structure"`; these options may expand as additional supplementary elements are introduced.
 Moreover, the former default `"all"` is no longer accepted, which forecloses the trick of passing the element type to an aesthetic, e.g. `size = .element == "active"`, as had been used in several examples.
 
-## upgrades to existing plot layers
+## up( or down)grades to existing plot layers
 
 ### combined vector and radiating text geom (breaking change)
 
@@ -42,6 +53,10 @@ Additionally, `fun.ord` accepts a function that summarizes the columns of a matr
 Previously, underscore-separated parameters like `label_colour` were used to specify secondary aesthetics, i.e. aesthetics for graphical objects other than those considered "primary" for the layer.
 Their behavior has been debugged by mimicking the use of period-separated parameters like `label.colour` in **ggplot2** v3.5.1, except for the new bagplot geom, for which their behavior is based on that of `geom_boxplot()` in the current development version of {ggplot2}.
 This induces some breaking changes due to the renaming of most, and the removal of some, such parameters.
+
+### deprecation of scale stat
+
+The simple and experimental `StatScale` has been deprecated.
 
 ## new plot layers
 
@@ -73,11 +88,6 @@ A new 'depth' statistical transformation estimates depth across a grid and is pa
 
 Aided by element standardization, the classic `density_2d` statistical transformation and geometric construction are adapted to biplots.
 Currently, source code generation does not respect fixed parameters passed to `layer()` by the `stat_*()` and `geom_*()` shortcuts; as a consequence, `contour = TRUE` must be manually passed to `geom_*_density_2d()`.
-
-## miscellany
-
-Previously, `lda_ord()` mimicked `MASS::lda()` in defaulting the retrieval parameters `ret.x` and `ret.grouping` to `FALSE`.
-Because they are so important to analysis and especially to biplots, they now default to `TRUE`.
 
 # ordr 0.1.1
 
