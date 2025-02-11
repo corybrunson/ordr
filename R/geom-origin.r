@@ -107,7 +107,7 @@ GeomOrigin <- ggproto(
       col = alpha(data$colour, data$alpha),
       fill = NA,
       lty = data$linetype,
-      lwd = (data$linewidth %||% data$size) * .pt
+      lwd = data$linewidth * .pt
     )
     if (marker == "crosshairs") {
       # list of grobs
@@ -143,10 +143,7 @@ GeomOrigin <- ggproto(
     grob
   },
   
-  draw_key = draw_key_blank,
-  
-  non_missing_aes = "size",
-  rename_size = TRUE
+  draw_key = draw_key_blank
 )
 
 #' @rdname geom_origin
@@ -216,7 +213,7 @@ GeomUnitCircle <- ggproto(
       gp = grid::gpar(
         col = alpha(data$colour, data$alpha),
         fill = alpha(data$colour, data$alpha),
-        lwd = (data$linewidth %||% data$size) * .pt,
+        lwd = data$linewidth * .pt,
         lty = data$linetype
       )
     )
