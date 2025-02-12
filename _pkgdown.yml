@@ -38,8 +38,10 @@ reference:
     Functions to generate and annotate biplots from 'tbl_ord' objects, following
     the layered grammar of graphics
   contents:
+  - starts_with("coord_")
   - '`ggbiplot`'
   - 'stat_rows'
+  - 'stat_referent'
   - has_concept("stat layers")
   - '`geom_origin`'
   - '`geom_unit_circle`'

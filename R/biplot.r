@@ -117,15 +117,18 @@ ggbiplot <- function(
   axis.type <- match.arg(axis.type, c("interpolative", "predictive"))
   if (axis.type == "predictive") {
     
-    # -+- only linear ordinations for now -+-
-    linear_classes <- c("eigen", "eigen_ord", "svd_ord", "prcomp", "princomp")
-    if (! ord_class %in% linear_classes) {
+    linear_trans_classes <- 
+      c("eigen", "eigen_ord", "svd_ord", "prcomp", "princomp")
+    # only allow pythagorean metrics and linear pre-procedures
+    # FIXME: Allow pythagorean ordinations with non-linear pre-procedures?
+    if (! any(ord_class %in% linear_trans_classes)) {
       warning("Predictive biplots are only implemented for linear methods ",
               "(ED, SVD, PCA).")
     } else {
       
       # rescale standard coordinates for predictive biplot
       xy_map <- stringr::str_remove(as.character(mapping[c("x", "y")]), "^~")
+      ord_map <- get_coord(ordination)
       if (! all(c("x", "y") %in% names(mapping)) &&
           any(stringr::str_detect(names(mapping), "..coord"))) {
         warning("For predictive biplots, ",
@@ -138,16 +141,16 @@ ggbiplot <- function(
                 "inertia must be balanced and conferred on one factor.")
       } else {
         # remove coordinates other than those used in the biplot
-        ordination[setdiff(get_coord(ordination), xy_map)] <- NULL
+        # ordination[setdiff(get_coord(ordination), xy_map)] <- NULL
         # rescale standard coordinates
         std_fac <- c("rows", "cols")[! as.logical(conference)]
         std_ss <- apply(
-          ordination[ordination$.matrix == std_fac, xy_map],
+          ordination[ordination$.matrix == std_fac, ord_map],
           1L,
           function(x) sum(x^2)
         )
-        ordination[ordination$.matrix == std_fac, xy_map] <-
-          ordination[ordination$.matrix == std_fac, xy_map] / std_ss
+        ordination[ordination$.matrix == std_fac, ord_map] <-
+          ordination[ordination$.matrix == std_fac, ord_map] / std_ss
       }
       
     }
@@ -216,6 +219,8 @@ ggbiplot <- function(
   p$coordinates <- coord_equal(
     xlim = xlim, ylim = ylim, expand = expand, clip = clip
   )
+  # this is the biplot default; prevent message when modified
+  p$coordinates$default <- TRUE
   
   # assign default axis labels
   if (axis.percents) {

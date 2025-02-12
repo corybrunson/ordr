@@ -1,387 +1,139 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/articles/cmds-variables.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/ordination-in-the-tidyverse.html</loc>
-  </url>
-  <url>
-    <loc>/articles/ordr.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/accessors.html</loc>
-  </url>
-  <url>
-    <loc>/reference/alignment.html</loc>
-  </url>
-  <url>
-    <loc>/reference/annotation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/augmentation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/benthos.html</loc>
-  </url>
-  <url>
-    <loc>/reference/bioenv.html</loc>
-  </url>
-  <url>
-    <loc>/reference/biplot-geoms.html</loc>
-  </url>
-  <url>
-    <loc>/reference/biplot-matrix.html</loc>
-  </url>
-  <url>
-    <loc>/reference/biplot-stats.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cancor_tidiers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/classes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cmdscale_tidiers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/conference.html</loc>
-  </url>
-  <url>
-    <loc>/reference/countries.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dplyr-verbs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/draw-key.html</loc>
-  </url>
-  <url>
-    <loc>/reference/eigen-svd-ord.html</loc>
-  </url>
-  <url>
-    <loc>/reference/eigen-svd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/finches.html</loc>
-  </url>
-  <url>
-    <loc>/reference/format.html</loc>
-  </url>
-  <url>
-    <loc>/reference/formatting.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fortify.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom-biplot-axis-ticks.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom-biplot-axis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom-biplot-intervals.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom-biplot-isolines.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom-biplot-path.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom-biplot-point.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom-biplot-polygon.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom-biplot-text-radiate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom-biplot-text.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom-biplot-ticks.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom-biplot-vector.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom-unit-circle.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom_axis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom_axis_label.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom_axis_text.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom_axis_ticks.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom_crosshairs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom_isoline.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom_isolines.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom_isolines_text.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom_lineranges.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom_origin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom_text_radiate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom_unit_circle.html</loc>
-  </url>
-  <url>
-    <loc>/reference/geom_vector.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggbiplot-axis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggbiplot-center.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggbiplot-chull.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggbiplot-draw-key.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggbiplot-ellipse.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggbiplot-intervals.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggbiplot-isolines.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggbiplot-matrix.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggbiplot-path.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggbiplot-point.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggbiplot-polygon.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggbiplot-spantree.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggbiplot-text-radiate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggbiplot-text.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggbiplot-unit-circle.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggbiplot-vector.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggbiplot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/glass.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/issp_women.html</loc>
-  </url>
-  <url>
-    <loc>/reference/lda-ord.html</loc>
-  </url>
-  <url>
-    <loc>/reference/list_tidiers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/lra-ord.html</loc>
-  </url>
-  <url>
-    <loc>/reference/lra.html</loc>
-  </url>
-  <url>
-    <loc>/reference/masks.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-ade4.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-ca.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-cancor.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-candisc.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-cmds.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-correspondence.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-eigen.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-factanal.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-kmeans.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-lda.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-lm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-lpca.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-lra.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-mca.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-mjca.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-nipals.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-pma.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-prcomp.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-princomp.html</loc>
-  </url>
-  <url>
-    <loc>/reference/methods-svd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/negation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ordinate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ordr-ggproto.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ordr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot.tbl_ord.html</loc>
-  </url>
-  <url>
-    <loc>/reference/qswur_usa.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ratios.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reconstruct.html</loc>
-  </url>
-  <url>
-    <loc>/reference/recoverers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stat-biplot-center.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stat-biplot-chull.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stat-biplot-ellipse.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stat-biplot-spantree.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stat_center.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stat_chull.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stat_cone.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stat_rows.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stat_scale.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stat_spantree.html</loc>
-  </url>
-  <url>
-    <loc>/reference/supplementation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tbl_ord.html</loc>
-  </url>
-  <url>
-    <loc>/reference/theme_biplot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tidiers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/wrap-ord.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>/CONTRIBUTING.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/articles/cmds-variables.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/ordination-in-the-tidyverse.html</loc></url>
+<url><loc>/articles/ordr.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/accessors.html</loc></url>
+<url><loc>/reference/alignment.html</loc></url>
+<url><loc>/reference/annotation.html</loc></url>
+<url><loc>/reference/augmentation.html</loc></url>
+<url><loc>/reference/benthos.html</loc></url>
+<url><loc>/reference/bioenv.html</loc></url>
+<url><loc>/reference/biplot-geoms.html</loc></url>
+<url><loc>/reference/biplot-matrix.html</loc></url>
+<url><loc>/reference/biplot-stats.html</loc></url>
+<url><loc>/reference/cancor_tidiers.html</loc></url>
+<url><loc>/reference/classes.html</loc></url>
+<url><loc>/reference/cmdscale_tidiers.html</loc></url>
+<url><loc>/reference/conference.html</loc></url>
+<url><loc>/reference/coord_rect.html</loc></url>
+<url><loc>/reference/countries.html</loc></url>
+<url><loc>/reference/dplyr-verbs.html</loc></url>
+<url><loc>/reference/draw-key.html</loc></url>
+<url><loc>/reference/eigen-svd-ord.html</loc></url>
+<url><loc>/reference/eigen-svd.html</loc></url>
+<url><loc>/reference/finches.html</loc></url>
+<url><loc>/reference/format.html</loc></url>
+<url><loc>/reference/formatting.html</loc></url>
+<url><loc>/reference/fortify.html</loc></url>
+<url><loc>/reference/geom-biplot-axis-ticks.html</loc></url>
+<url><loc>/reference/geom-biplot-axis.html</loc></url>
+<url><loc>/reference/geom-biplot-intervals.html</loc></url>
+<url><loc>/reference/geom-biplot-isolines.html</loc></url>
+<url><loc>/reference/geom-biplot-path.html</loc></url>
+<url><loc>/reference/geom-biplot-point.html</loc></url>
+<url><loc>/reference/geom-biplot-polygon.html</loc></url>
+<url><loc>/reference/geom-biplot-text-radiate.html</loc></url>
+<url><loc>/reference/geom-biplot-text.html</loc></url>
+<url><loc>/reference/geom-biplot-ticks.html</loc></url>
+<url><loc>/reference/geom-biplot-vector.html</loc></url>
+<url><loc>/reference/geom-unit-circle.html</loc></url>
+<url><loc>/reference/geom_axis.html</loc></url>
+<url><loc>/reference/geom_axis_label.html</loc></url>
+<url><loc>/reference/geom_axis_text.html</loc></url>
+<url><loc>/reference/geom_axis_ticks.html</loc></url>
+<url><loc>/reference/geom_bagplot.html</loc></url>
+<url><loc>/reference/geom_crosshairs.html</loc></url>
+<url><loc>/reference/geom_interpolation.html</loc></url>
+<url><loc>/reference/geom_isoline.html</loc></url>
+<url><loc>/reference/geom_isolines.html</loc></url>
+<url><loc>/reference/geom_isolines_text.html</loc></url>
+<url><loc>/reference/geom_lineranges.html</loc></url>
+<url><loc>/reference/geom_origin.html</loc></url>
+<url><loc>/reference/geom_rule.html</loc></url>
+<url><loc>/reference/geom_text_radiate.html</loc></url>
+<url><loc>/reference/geom_vector.html</loc></url>
+<url><loc>/reference/ggbiplot-axis.html</loc></url>
+<url><loc>/reference/ggbiplot-center.html</loc></url>
+<url><loc>/reference/ggbiplot-chull.html</loc></url>
+<url><loc>/reference/ggbiplot-draw-key.html</loc></url>
+<url><loc>/reference/ggbiplot-ellipse.html</loc></url>
+<url><loc>/reference/ggbiplot-intervals.html</loc></url>
+<url><loc>/reference/ggbiplot-isolines.html</loc></url>
+<url><loc>/reference/ggbiplot-matrix.html</loc></url>
+<url><loc>/reference/ggbiplot-path.html</loc></url>
+<url><loc>/reference/ggbiplot-point.html</loc></url>
+<url><loc>/reference/ggbiplot-polygon.html</loc></url>
+<url><loc>/reference/ggbiplot-spantree.html</loc></url>
+<url><loc>/reference/ggbiplot-text-radiate.html</loc></url>
+<url><loc>/reference/ggbiplot-text.html</loc></url>
+<url><loc>/reference/ggbiplot-unit-circle.html</loc></url>
+<url><loc>/reference/ggbiplot-vector.html</loc></url>
+<url><loc>/reference/ggbiplot.html</loc></url>
+<url><loc>/reference/glass.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/issp_women.html</loc></url>
+<url><loc>/reference/lda-ord.html</loc></url>
+<url><loc>/reference/list_tidiers.html</loc></url>
+<url><loc>/reference/lra-ord.html</loc></url>
+<url><loc>/reference/masks.html</loc></url>
+<url><loc>/reference/methods-ade4.html</loc></url>
+<url><loc>/reference/methods-ca.html</loc></url>
+<url><loc>/reference/methods-cancor.html</loc></url>
+<url><loc>/reference/methods-candisc.html</loc></url>
+<url><loc>/reference/methods-cmds.html</loc></url>
+<url><loc>/reference/methods-correspondence.html</loc></url>
+<url><loc>/reference/methods-eigen.html</loc></url>
+<url><loc>/reference/methods-factanal.html</loc></url>
+<url><loc>/reference/methods-kmeans.html</loc></url>
+<url><loc>/reference/methods-lda.html</loc></url>
+<url><loc>/reference/methods-lm.html</loc></url>
+<url><loc>/reference/methods-lpca.html</loc></url>
+<url><loc>/reference/methods-lra.html</loc></url>
+<url><loc>/reference/methods-mca.html</loc></url>
+<url><loc>/reference/methods-mjca.html</loc></url>
+<url><loc>/reference/methods-nipals.html</loc></url>
+<url><loc>/reference/methods-pma.html</loc></url>
+<url><loc>/reference/methods-prcomp.html</loc></url>
+<url><loc>/reference/methods-princomp.html</loc></url>
+<url><loc>/reference/methods-svd.html</loc></url>
+<url><loc>/reference/negation.html</loc></url>
+<url><loc>/reference/ordinate.html</loc></url>
+<url><loc>/reference/ordr-ggproto.html</loc></url>
+<url><loc>/reference/ordr.html</loc></url>
+<url><loc>/reference/plot.tbl_ord.html</loc></url>
+<url><loc>/reference/qswur_usa.html</loc></url>
+<url><loc>/reference/ratios.html</loc></url>
+<url><loc>/reference/reconstruct.html</loc></url>
+<url><loc>/reference/recoverers.html</loc></url>
+<url><loc>/reference/reexports.html</loc></url>
+<url><loc>/reference/stat-biplot-center.html</loc></url>
+<url><loc>/reference/stat-biplot-chull.html</loc></url>
+<url><loc>/reference/stat-biplot-ellipse.html</loc></url>
+<url><loc>/reference/stat-biplot-spantree.html</loc></url>
+<url><loc>/reference/stat_bagplot.html</loc></url>
+<url><loc>/reference/stat_center.html</loc></url>
+<url><loc>/reference/stat_chull.html</loc></url>
+<url><loc>/reference/stat_cone.html</loc></url>
+<url><loc>/reference/stat_depth.html</loc></url>
+<url><loc>/reference/stat_projection.html</loc></url>
+<url><loc>/reference/stat_referent.html</loc></url>
+<url><loc>/reference/stat_rows.html</loc></url>
+<url><loc>/reference/stat_rule.html</loc></url>
+<url><loc>/reference/stat_scale.html</loc></url>
+<url><loc>/reference/stat_spantree.html</loc></url>
+<url><loc>/reference/supplementation.html</loc></url>
+<url><loc>/reference/sync.html</loc></url>
+<url><loc>/reference/tbl_ord.html</loc></url>
+<url><loc>/reference/theme_scaffold.html</loc></url>
+<url><loc>/reference/tidiers.html</loc></url>
+<url><loc>/reference/wrap-ord.html</loc></url>
 </urlset>
+

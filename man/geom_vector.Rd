@@ -10,7 +10,15 @@ geom_vector(
   stat = "identity",
   position = "identity",
   arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
   ...,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  parse = FALSE,
+  check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -37,20 +45,55 @@ the plot data. The return value must be a \code{data.frame}, and
 will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
-\item{stat}{The statistical transformation to use on the data for this
-layer, either as a \code{ggproto} \code{Geom} subclass or as a string naming the
-stat stripped of the \code{stat_} prefix (e.g. \code{"count"} rather than
-\code{"stat_count"})}
+\item{stat}{The statistical transformation to use on the data for this layer.
+When using a \verb{geom_*()} function to construct a layer, the \code{stat}
+argument can be used the override the default coupling between geoms and
+stats. The \code{stat} argument accepts the following:
+\itemize{
+\item A \code{Stat} ggproto subclass, for example \code{StatCount}.
+\item A string naming the stat. To give the stat as a string, strip the
+function name of the \code{stat_} prefix. For example, to use \code{stat_count()},
+give the stat as \code{"count"}.
+\item For more information and other ways to specify the stat, see the
+\link[ggplot2:layer_stats]{layer stat} documentation.
+}}
 
-\item{position}{Position adjustment, either as a string naming the adjustment
-(e.g. \code{"jitter"} to use \code{position_jitter}), or the result of a call to a
-position adjustment function. Use the latter if you need to change the
-settings of the adjustment.}
+\item{position}{A position adjustment to use on the data for this layer. This
+can be used in various ways, including to prevent overplotting and
+improving the display. The \code{position} argument accepts the following:
+\itemize{
+\item The result of calling a position function, such as \code{position_jitter()}.
+This method allows for passing extra arguments to the position.
+\item A string naming the position adjustment. To give the position as a
+string, strip the function name of the \code{position_} prefix. For example,
+to use \code{position_jitter()}, give the position as \code{"jitter"}.
+\item For more information and other ways to specify the position, see the
+\link[ggplot2:layer_positions]{layer position} documentation.
+}}
 
 \item{arrow}{Specification for arrows, as created by \code{\link[grid:arrow]{grid::arrow()}}, or else
 \code{NULL} for no arrows.}
 
+\item{lineend}{Line end style (round, butt, square).}
+
+\item{linejoin}{Line join style (round, mitre, bevel).}
+
+\item{vector_labels}{Logical; whether to include labels radiating outward
+from the vectors.}
+
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
+
+\item{label.colour, label.color, label.alpha}{Default aesthetics for labels.
+Set to NULL to inherit from the data's aesthetics.}
+
+\item{parse}{If \code{TRUE}, the labels will be parsed into expressions and
+displayed as described in \code{?plotmath}.}
+
+\item{check_overlap}{If \code{TRUE}, text that overlaps previous text in the
+same layer will not be plotted. \code{check_overlap} happens at draw time and in
+the order of the data. Therefore data should be arranged by the label
+column before calling \code{geom_text()}. Note that this argument is not
+supported by \code{geom_label()}.}
 
 \item{na.rm}{Passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
@@ -69,7 +112,19 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
-\code{geom_vector()} renders arrows from the origin to points.
+\code{geom_vector()} renders arrows from the origin to points,
+optionally with text radiating outward.
+}
+\details{
+Vectors are positions relative to some common reference point, in
+this case the origin; they comprise direction and magnitude. Vectors are
+usually represented with arrows rather than markers (points).
+
+Vectors are commonly used to represent numerical variables in biplots, as
+by Gabriel (1971) and Greenacre (2010). Gardner & le Roux (2002) refer to
+these as Gabriel biplots. This layer, with optional radiating text labels,
+is adapted from \code{ggbiplot()} in the off-CRAN extensions of the same name
+(Vu, 2014; Telford, 2017; Gegzna, 2018).
 }
 \section{Biplot layers}{
 
@@ -94,33 +149,62 @@ are in bold):
 \item \code{alpha}
 \item \code{colour}
 \item \code{linetype}
+\item \code{label}
 \item \code{size}
+\item \code{angle}
+\item \code{hjust}
+\item \code{vjust}
+\item \code{family}
+\item \code{fontface}
+\item \code{lineheight}
 \item \code{group}
 }
 }
 
 \examples{
-# compute unscaled row-principal components of scaled measurements
-(iris_pca <- ordinate(iris, cols = 1:4, princomp))
+us_center <- sapply(state.center, \(x) (min(x) + max(x)) / 2)
+state_center <- cbind(
+  state = state.abb,
+  sweep(as.data.frame(state.center), 2, us_center, "-")
+)
+ggplot(state_center, aes(x, y, label = state)) +
+  coord_equal() +
+  geom_vector()
+}
+\references{
+Gabriel KR (1971) "The biplot graphic display of matrices with application to
+principal component analysis". \emph{Biometrika} 58(3), 453--467.
+\doi{10.1093/biomet/58.3.453}
 
-# row-principal biplot with coordinate-wise standard deviations
-iris_pca \%>\%
-  ggbiplot(aes(color = Species)) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  geom_unit_circle() +
-  geom_rows_point(alpha = .5) +
-  geom_cols_vector(color = "#444444") +
-  geom_cols_text_radiate(aes(label = name), color = "#444444") +
-  ggtitle("Row-principal unscaled PCA biplot of Anderson iris measurements") +
-  expand_limits(y = c(NA, 2))
+Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
+978-84-923846.
+\url{https://www.fbbva.es/microsite/multivariate-statistics/biplots.html}
+
+Gardner S, le Roux N (2002) "Biplot Methodology for Discriminant Analysis
+Based upon Robust Methods and Principal Curves". \emph{Classification, Clustering,
+and Data Analysis: Recent Advances and Applications}: 169--176.
+\url{https://link.springer.com/chapter/10.1007/978-3-642-56181-8_18}
+
+Vincent Q. Vu (2014). ggbiplot: A 'ggplot2' based biplot. R package version
+0.55. \url{https://github.com/vqv/ggbiplot}, \code{experimental} branch
+
+Richard J Telford (2017). ggbiplot: A 'ggplot2' based biplot. R package
+version 0.6. \url{https://github.com/richardjtelford/ggbiplot} (fork),
+\code{experimental} branch
+
+Vilmantas Gegzna (2018). ggbiplot: A 'ggplot2' based biplot. R package
+version 0.55. \url{https://github.com/forked-packages/ggbiplot} (fork), \code{experimental}
+branch
 }
 \seealso{
 Other geom layers: 
 \code{\link{geom_axis}()},
+\code{\link{geom_bagplot}()},
+\code{\link{geom_interpolation}()},
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},
+\code{\link{geom_rule}()},
 \code{\link{geom_text_radiate}()}
 }
 \concept{geom layers}

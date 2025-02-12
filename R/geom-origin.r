@@ -1,9 +1,9 @@
 #' @title Marker or unit circle at the origin
 #' 
-
 #' @description `geom_origin()` renders a symbol, either a set of crosshairs or
 #'   a circle, at the origin. `geom_unit_circle()` renders the unit circle,
 #'   centered at the origin with radius 1.
+
 #' @template biplot-layers
 
 #' @section Aesthetics:
@@ -12,10 +12,10 @@
 
 #' `geom_unit_circle()` understands the following aesthetics (none required):
 
-#' - `alpha`
-#' - `colour`
 #' - `linetype`
-#' - `size`
+#' - `linewidth`
+#' - `colour`
+#' - `alpha`
 #' 
 
 #' @import ggplot2
@@ -31,7 +31,8 @@
 #'   may be changed in a future version.)
 #' @template return-layer
 #' @family geom layers
-#' @example inst/examples/ex-geom-unit-circle-glass.r
+#' @example inst/examples/ex-geom-origin.r
+#' @example inst/examples/ex-geom-unit-circle.r
 #' @export
 geom_origin <- function(
   mapping = NULL, data = NULL,# stat = "identity", position = "identity",
@@ -66,8 +67,8 @@ GeomOrigin <- ggproto(
   
   required_aes = c(),
   default_aes = aes(
-    colour = "black", alpha = NA,
-    linewidth = 0.5, linetype = 1
+    linetype = 1, linewidth = 0.5,
+    colour = "black", alpha = NA
   ),
   
   setup_data = function(data, params) {
@@ -106,7 +107,7 @@ GeomOrigin <- ggproto(
       col = alpha(data$colour, data$alpha),
       fill = NA,
       lty = data$linetype,
-      lwd = (data$linewidth %||% data$size) * .pt
+      lwd = data$linewidth * .pt
     )
     if (marker == "crosshairs") {
       # list of grobs
@@ -142,10 +143,7 @@ GeomOrigin <- ggproto(
     grob
   },
   
-  draw_key = draw_key_blank,
-  
-  non_missing_aes = "size",
-  rename_size = TRUE
+  draw_key = draw_key_blank
 )
 
 #' @rdname geom_origin
@@ -215,7 +213,7 @@ GeomUnitCircle <- ggproto(
       gp = grid::gpar(
         col = alpha(data$colour, data$alpha),
         fill = alpha(data$colour, data$alpha),
-        lwd = (data$linewidth %||% data$size) * .pt,
+        lwd = data$linewidth * .pt,
         lty = data$linetype
       )
     )

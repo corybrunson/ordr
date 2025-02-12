@@ -25,7 +25,6 @@ ggbiplot(mtcars_specs_pca, aes(label = name),
   theme_minimal() +
   geom_rows_text(size = 3) +
   geom_cols_vector(data = mtcars_pca_lm) +
-  geom_cols_text_radiate(data = mtcars_pca_lm) +
   expand_limits(x = c(-2.5, 2))
 
 # multidimensional scaling based on a scaled cosine distance of vehicle specs
@@ -65,5 +64,4 @@ ggbiplot(mtcars_specs_cmds_ord, aes(label = name),
   theme_minimal() +
   geom_rows_text(size = 3) +
   geom_cols_vector(data = mtcars_cmds_lm) +
-  geom_cols_text_radiate(data = mtcars_cmds_lm) +
   expand_limits(x = c(-2.25, 1.25), y = c(-2, 1.5))

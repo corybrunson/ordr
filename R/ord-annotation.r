@@ -40,7 +40,7 @@ set_annotation_factor <- function(x, annot, .matrix) {
 
 annotation_rows <- function(x) {
   if (is.null(attr(x, "rows_annotation"))) {
-    tibble_pole(nrow(get_rows(x)))
+    tibble(.rows = nrow(get_rows(x)))
   } else {
     attr(x, "rows_annotation")
   }
@@ -48,7 +48,7 @@ annotation_rows <- function(x) {
 
 annotation_cols <- function(x) {
   if (is.null(attr(x, "cols_annotation"))) {
-    tibble_pole(nrow(get_cols(x)))
+    tibble(.rows = nrow(get_cols(x)))
   } else {
     attr(x, "cols_annotation")
   }

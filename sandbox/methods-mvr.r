@@ -61,7 +61,7 @@ augment_u.mvr <- function(x) {
   u <- recover_u(x)
   .name <- rownames(u)
   res <- if (is.null(.name)) {
-    tibble_pole(nrow(u))
+    tibble(.rows = nrow(u))
   } else {
     tibble(.name = .name)
   }
@@ -74,7 +74,7 @@ augment_v.mvr <- function(x) {
   v <- recover_v(x)
   .name <- rownames(v)
   res <- if (is.null(.name)) {
-    tibble_pole(nrow(v))
+    tibble(.rows = nrow(v))
   } else {
     tibble(.name = .name)
   }

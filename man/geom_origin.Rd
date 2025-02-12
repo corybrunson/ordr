@@ -101,39 +101,52 @@ points for rows and arrows for columns.
 \code{geom_origin()} accepts no aesthetics.
 \code{geom_unit_circle()} understands the following aesthetics (none required):
 \itemize{
-\item \code{alpha}
-\item \code{colour}
 \item \code{linetype}
-\item \code{size}
+\item \code{linewidth}
+\item \code{colour}
+\item \code{alpha}
 }
 }
 
 \examples{
-# principal components analysis of glass composition measurements
-glass[, c(5L, 7L, 8L, 10L, 11L)] \%>\%
-  princomp(cor = TRUE) \%>\%
-  as_tbl_ord() \%>\%
-  cbind_rows(site = glass$Site, form = glass$Form) \%>\%
-  augment_ord() \%>\%
-  print() -> glass_pca
+ggplot(seals, aes(delta_long, delta_lat)) +
+  theme_void() +
+  geom_origin() +
+  geom_point(alpha = .25)
+# center each group separately
+iris |> 
+  split(~ Species) |> 
+  lapply(subset, select = -c(Species)) |> 
+  lapply(scale, center = TRUE, scale = FALSE) |> 
+  lapply(as.data.frame) |> 
+  unsplit(iris$Species) |> 
+  transform(Species = iris$Species) ->
+  iris_ctr
+ggplot(iris_ctr, aes(Petal.Width, Petal.Length)) +
+  coord_equal() +
+  facet_wrap(vars(Species)) +
+  geom_unit_circle() +
+  geom_point()
+# scale group mean differences uniformly
+iris_ctr |> 
+  subset(select = -c(Species)) |> 
+  scale(center = FALSE, scale = TRUE) |> 
+  transform(Species = iris$Species) |> 
+  ggplot(aes(Petal.Width, Petal.Length)) +
+  coord_equal() +
+  facet_wrap(vars(Species)) +
+  geom_unit_circle() +
+  geom_point()
 
-# note that column standard coordinates are unit vectors
-rowSums(get_cols(glass_pca) ^ 2)
-
-# plot column standard coordinates with a unit circle underlaid
-glass_pca \%>\%
-  ggbiplot(aes(label = name), sec.axes = "cols") +
-  theme_biplot() +
-  geom_rows_point(aes(color = site, shape = form), alpha = .5) +
-  geom_unit_circle(alpha = .5, scale.factor = 3) +
-  geom_cols_vector() +
-  geom_cols_text_radiate()
 }
 \seealso{
 Other geom layers: 
 \code{\link{geom_axis}()},
+\code{\link{geom_bagplot}()},
+\code{\link{geom_interpolation}()},
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},
+\code{\link{geom_rule}()},
 \code{\link{geom_text_radiate}()},
 \code{\link{geom_vector}()}
 }

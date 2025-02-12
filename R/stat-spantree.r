@@ -29,6 +29,13 @@
 #' @template biplot-layers
 #' @template biplot-ord-aes
 
+#' @section Computed variables: These are calculated during the statistical
+#'   transformation and can be accessed with [delayed
+#'   evaluation][ggplot2::aes_eval].
+#' \describe{
+#'   \item{`xend,yend,x,y`}{endpoints of tree branches (segments)}
+#' }
+
 #' @inheritParams ggplot2::layer
 #' @param engine A single character string specifying the package implementation
 #'   to use; `"mlpack"`, `"vegan"`, or `"ade4"`.
@@ -37,7 +44,7 @@
 #' @template param-stat
 #' @template return-layer
 #' @family stat layers
-#' @example inst/examples/ex-stat-spantree-eurodist.r
+#' @example inst/examples/ex-stat-spantree.r
 #' @export
 stat_spantree <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",

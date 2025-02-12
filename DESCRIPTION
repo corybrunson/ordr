@@ -1,6 +1,6 @@
 Package: ordr
 Title: A Tidyverse Extension for Ordinations and Biplots
-Version: 0.1.1.0001
+Version: 0.1.1.0002
 Authors@R: c(
   person("Jason Cory", "Brunson", email = "cornelioid@gmail.com",
     role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3126-9494")),
@@ -32,6 +32,7 @@ Depends:
     ggplot2
 Imports:
     rlang,
+    cli,
     stringr,
     tidyselect,
     scales,
@@ -49,6 +50,7 @@ Suggests:
     gridExtra,
     MASS,
     mlpack,
+    ddalpha,
     knitr,
     rmarkdown
 License: GPL-3
@@ -62,6 +64,8 @@ Collate:
     'aaa-.r'
     'biplot-key.r'
     'biplot.r'
+    'coord-rect.r'
+    'coord-scaffold.r'
     'data.r'
     'dplyr-verbs.r'
     'utils.r'
@@ -73,9 +77,12 @@ Collate:
     'fun-lra.r'
     'fun-wrap.r'
     'geom-axis.r'
+    'geom-bagplot.r'
+    'geom-interpolation.r'
     'geom-intervals.r'
     'geom-isoline.r'
     'geom-origin.r'
+    'geom-rule.r'
     'geom-text-radiate.r'
     'geom-utils.r'
     'geom-vector.r'
@@ -100,13 +107,18 @@ Collate:
     'ord-tidiers.r'
     'ordinate.r'
     'ordr.r'
-    'stat-center.r'
     'stat-chull.r'
+    'stat-depth.r'
+    'stat-bagplot.r'
+    'stat-center.r'
     'stat-cone.r'
     'stat-matrix.r'
+    'stat-referent.r'
+    'stat-projection.r'
+    'stat-rule.r'
     'stat-scale.r'
     'stat-spantree.r'
-    'themes.r'
+    'theme-scaffold.r'
     'zzz-biplot-geoms.r'
     'zzz-biplot-stats.r'
     'zzz.r'

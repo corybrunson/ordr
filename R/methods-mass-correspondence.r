@@ -55,7 +55,7 @@ recover_coord.correspondence <- function(x) {
 recover_aug_rows.correspondence <- function(x) {
   name <- rownames(as.matrix(x$rscore))
   if (is.null(name)) {
-    tibble_pole(nrow(as.matrix(x$rscore)))
+    tibble(.rows = nrow(as.matrix(x$rscore)))
   } else {
     tibble(name = name)
   }
@@ -66,7 +66,7 @@ recover_aug_rows.correspondence <- function(x) {
 recover_aug_cols.correspondence <- function(x) {
   name <- rownames(as.matrix(x$cscore))
   if (is.null(name)) {
-    tibble_pole(nrow(as.matrix(x$cscore)))
+    tibble(.rows = nrow(as.matrix(x$cscore)))
   } else {
     tibble(name = name)
   }
