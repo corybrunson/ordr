@@ -366,7 +366,7 @@ GeomAxis <- ggproto(
       # update text angle
       label_data <- transform(
         label_data,
-        angle = atan(tan(angle)) + label.angle
+        angle = atan(tan(angle)) + label.angle * pi / 180
       )
       # put total angle in degrees
       label_data$angle <- label_data$angle * 180 / pi
@@ -441,7 +441,7 @@ GeomAxis <- ggproto(
       # update text angle and put in degrees
       text_data <- transform(
         text_data,
-        angle = (atan(tan(angle)) + text.angle) * 180 / pi
+        angle = atan(tan(angle)) * 180 / pi + text.angle
       )
       
       if (nrow(text_data) > 0L) {

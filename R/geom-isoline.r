@@ -191,7 +191,7 @@ GeomIsoline <- ggproto(
       # update text angle and put in degrees
       text_data <- transform(
         text_data,
-        angle = (atan(- 1 / tan(angle)) + text.angle) * 180 / pi
+        angle = atan(- 1 / tan(angle)) * 180 / pi + text.angle
       )
       
       # isoline text grobs

@@ -389,7 +389,7 @@ GeomRule <- ggproto(
       # update text angle and put in degrees
       text_data <- transform(
         text_data,
-        angle = (atan(tan(angle)) + text.angle) * 180 / pi
+        angle = atan(tan(angle)) * 180 / pi + text.angle
       )
       
       if (nrow(text_data) > 0L) {
