@@ -24,4 +24,3 @@ ggplot(judge_mds, aes(x = PCo1, y = PCo2)) +
     data = judge_lm, referent = judge_mds,
     aes(center = Intercept, label = variable)
   )
-# NB: `geom_rule(stat = "rule")` would fail to pass positional aesthetics.

@@ -4,8 +4,12 @@
 #'   translated from the origin.
 
 #' @details As implemented here, a rule is just an [axis][geom_axis] that has a
-#'   fixed range, usually the limits of the data. See [stat_rule()] for further
-#'   details.
+#'   fixed range, usually the limits of the data. `geom_rule()` defaults to
+#'   [`stat = "identity"`][ggplot2::stat_identity()] to avoid the problem of
+#'   failing to pass referent data to the referential [stat_rule()]. Therefore,
+#'   the user must provide the `lower` and `upper` aesthetics, which are used as
+#'   euclidean lengths in the plotting window. Meanwhile, `stat_rule()` defaults
+#'   to `geom = "rule"`; see [stat_rule()] for details on this pairing.
 #' 
 
 #' @template biplot-layers
@@ -45,7 +49,7 @@
 #' @example inst/examples/ex-geom-rule.r
 #' @export
 geom_rule <- function(
-  mapping = NULL, data = NULL, stat = "rule", position = "identity",
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
   axis_labels = TRUE, axis_ticks = TRUE, axis_text = TRUE,
   by = NULL, num = NULL,
   snap_rule = TRUE,
@@ -179,6 +183,9 @@ GeomRule <- ggproto(
     
     data <- ensure_cartesian_polar(data)
     
+    # introduce `axis` if missing
+    if (is.null(data$axis)) data$axis <- 1L
+    
     # remove lengthless vectors
     data <- subset(data, x^2 + y^2 > 0)
     
@@ -226,7 +233,7 @@ GeomRule <- ggproto(
     
     # NB: This step redefines positional aesthetics for a specific grob.
     
-    if (snap_rule) {
+    if ((axis_ticks || axis_text) && snap_rule) {
       
       # compute extended value range
       mark_data |> 
@@ -307,7 +314,7 @@ GeomRule <- ggproto(
       # update text angle
       label_data <- transform(
         label_data,
-        angle = atan(tan(angle)) + label.angle
+        angle = atan(tan(angle)) + label.angle * pi / 180
       )
       # put total angle in degrees
       label_data$angle <- label_data$angle * 180 / pi

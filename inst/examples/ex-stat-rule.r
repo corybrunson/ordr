@@ -18,4 +18,3 @@ stackloss_centered |>
     referent = stackloss_centered,
     fun.offset = \(x) minabspp(x, p = .5)
   )
-# NB: `geom_rule(stat = "rule")` would fail to pass positional aesthetics.

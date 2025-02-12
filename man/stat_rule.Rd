@@ -189,7 +189,6 @@ stackloss_centered |>
     referent = stackloss_centered,
     fun.offset = \(x) minabspp(x, p = .5)
   )
-# NB: `geom_rule(stat = "rule")` would fail to pass positional aesthetics.
 }
 \references{
 Gower JC, Gardner--Lubbe S, & le Roux NJ (2011) \emph{Understanding Biplots}.

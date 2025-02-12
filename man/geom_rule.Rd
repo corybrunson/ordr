@@ -7,7 +7,7 @@
 geom_rule(
   mapping = NULL,
   data = NULL,
-  stat = "rule",
+  stat = "identity",
   position = "identity",
   axis_labels = TRUE,
   axis_ticks = TRUE,
@@ -155,8 +155,12 @@ translated from the origin.
 }
 \details{
 As implemented here, a rule is just an \link[=geom_axis]{axis} that has a
-fixed range, usually the limits of the data. See \code{\link[=stat_rule]{stat_rule()}} for further
-details.
+fixed range, usually the limits of the data. \code{geom_rule()} defaults to
+\code{\link[ggplot2:stat_identity]{stat = "identity"}} to avoid the problem of
+failing to pass referent data to the referential \code{\link[=stat_rule]{stat_rule()}}. Therefore,
+the user must provide the \code{lower} and \code{upper} aesthetics, which are used as
+euclidean lengths in the plotting window. Meanwhile, \code{stat_rule()} defaults
+to \code{geom = "rule"}; see \code{\link[=stat_rule]{stat_rule()}} for details on this pairing.
 }
 \section{Biplot layers}{
 
@@ -223,7 +227,6 @@ ggplot(judge_mds, aes(x = PCo1, y = PCo2)) +
     data = judge_lm, referent = judge_mds,
     aes(center = Intercept, label = variable)
   )
-# NB: `geom_rule(stat = "rule")` would fail to pass positional aesthetics.
 }
 \seealso{
 Other geom layers: 
