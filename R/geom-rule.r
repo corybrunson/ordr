@@ -175,8 +175,13 @@ GeomRule <- ggproto(
     na.rm = FALSE
   ) {
     
-    if (! coord$is_linear())
-      warning("Axes are not yet tailored to non-linear coordinates.")
+    if (! coord$is_linear()) {
+      rlang::warn(
+        "Rulers are not yet tailored to non-linear coordinates.",
+        .frequency = "regularly",
+        .frequency_id = "GeomRule$draw_panel-is_linear"
+      )
+    }
     
     # extract value ranges
     ranges <- coord$range(panel_params)

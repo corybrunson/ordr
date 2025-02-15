@@ -152,6 +152,11 @@ GeomInterpolation <- ggproto(
     
     if (! coord$is_linear()) {
       warning("Interpolation is not yet tailored to non-linear coordinates.")
+      rlang::warn(
+        "Interpolation is not yet tailored to non-linear coordinates.",
+        .frequency = "regularly",
+        .frequency_id = "GeomInterpolation$draw_panel-is_linear"
+      )
     }
     type <- match.arg(type, c("centroid", "sequence"))
     # reverse ends of `arrow`

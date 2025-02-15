@@ -70,7 +70,11 @@ StatCenter <- ggproto(
     # deprecate `fun.center`
     if (! is.null(params$fun.center)) {
       if (is.null(params$fun)) {
-        warning("`fun.center` is deprecated; use `fun` instead.")
+        rlang::warn(
+          "`fun.center` is deprecated; use `fun` instead.",
+          .frequency = "regularly",
+          .frequency_id = "StatCenter$setup_params-fun"
+        )
         params$fun <- params$fun.center
       } else {
         warning("`fun` will be used instead of `fun.center`.")
@@ -230,7 +234,10 @@ make_center_fun <- function(
     
   } else {
     
-    message("No center (limit) function(s) supplied; defaulting to `mean_se()`")
+    rlang::inform(
+      "No center function supplied; defaulting to `mean_se()`",
+      .frequency = "once", .frequency_id = "make_center_fun-fun"
+    )
     function(df) {
       x_data <- mean_se(df$x)
       names(x_data) <- c("x", "xmin", "xmax")
