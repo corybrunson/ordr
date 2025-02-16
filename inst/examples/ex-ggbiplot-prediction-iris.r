@@ -3,7 +3,6 @@ iris_pca <- ordinate(iris, cols = 1:4, prcomp, scale = TRUE)
 
 # row-principal predictive biplot
 iris_pca %>%
-  augment_ord() %>%
   ggbiplot(axis.type = "predictive") +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
@@ -13,19 +12,12 @@ iris_pca %>%
 
 # with two calibrated axes
 iris_pca %>%
-  augment_ord() %>%
   ggbiplot(axis.type = "predictive") +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   geom_origin() +
-  # FIXME: Include this only for testing.
-  geom_cols_axis(
-    subset = c(2, 4),
-    aes(label = name, center = center, scale = scale)
-  ) +
   stat_cols_rule(
-    .referent = "rows",
-    subset = c(2, 4),
+    subset = c(2, 4), fontface = "bold", text.fontface = "plain",
     aes(label = name, center = center, scale = scale)
   ) +
   geom_rows_point(aes(color = Species), alpha = .5) +

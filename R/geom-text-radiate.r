@@ -4,7 +4,7 @@
 #' @description `geom_text_radiate()` is adapted from `ggbiplot()` in the
 #'   off-CRAN extensions of the same name (Vu, 2014; Telford, 2017; Gegzna,
 #'   2018). It renders text at specified positions and angles that radiate out
-#'   from the origin.
+#'   from the origin. This layer and its associated ggproto are **deprecated**.
 #' @template biplot-layers
 
 #' @section Aesthetics:
@@ -12,7 +12,8 @@
 #' `geom_text_radiate()` understands the following aesthetics (required
 #' aesthetics are in bold):
 
-#' - **`x`**, **`y`**
+#' - **`x`**
+#' - **`y`**
 #' - **`label`**
 #' - `alpha`
 #' - `angle`
@@ -34,12 +35,12 @@
 #' @family geom layers
 #' @export
 geom_text_radiate <- function(
-  mapping = NULL, data = NULL, stat = "identity", position = "identity",
-  ...,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA, inherit.aes = TRUE
+    mapping = NULL, data = NULL, stat = "identity", position = "identity",
+    ...,
+    parse = FALSE,
+    check_overlap = FALSE,
+    na.rm = FALSE,
+    show.legend = NA, inherit.aes = TRUE
 ) {
   layer(
     data = data,
@@ -74,6 +75,10 @@ GeomTextRadiate <- ggproto(
     na.rm = FALSE,
     check_overlap = FALSE
   ) {
+    rlang::warn(
+      "`GeomTextRadiate` is deprecated; use `GeomVector` instead.",
+      .frequency = "regularly", .frequency_id = "GeomTextRadiate$draw_panel"
+    )
     
     if (is.character(data$hjust)) {
       data$hjust <- compute_just(data$hjust, data$x)

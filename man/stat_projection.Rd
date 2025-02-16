@@ -9,7 +9,6 @@ stat_projection(
   data = NULL,
   geom = "segment",
   position = "identity",
-  subset = NULL,
   referent = NULL,
   ...,
   show.legend = NA,
@@ -63,13 +62,6 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 \link[ggplot2:layer_positions]{layer position} documentation.
 }}
 
-\item{subset}{An integer, logical, or character vector indicating a subset of
-rows or columns for which to render graphical elements. NB: Internally, the
-\code{subset} will be taken from the rows of the \link[=fortify.tbl_ord]{fortified}
-'tbl_ord' comprising rows from only one of the matrix factors. It is still
-possible to pass a formula to the \code{data} parameter, but it will act on the
-fortified data \emph{before} it has been restricted to one matrix factor.}
-
 \item{referent}{The reference data set; see Details.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
@@ -93,15 +85,20 @@ Compute projections of vectors from one matrix factor onto those
 of the other.
 }
 \details{
-An ordination model of continuous data can be used to predict values along
-one dimension from those along the other, using the artificial axes as
-intermediaries. The predictions correspond geometrically to projections of
-elements of one matrix factor in principal coordinates onto those of the
+An ordination model of continuous data can be used to predict values
+along one dimension from those along the other, using the artificial axes
+as intermediaries. The predictions correspond geometrically to projections
+of elements of one matrix factor in principal coordinates onto those of the
 other factor in standard coordinates. In the most familiar setting of PCA
 biplots, variable (column) values are predicted from case (row) locations
 along PC1 and PC2. This transformation obtains the axis projections as
 \verb{xend,yend} and pairs them with original points \verb{x,y} to demarcate segments
 visualizing the projections.
+
+\strong{WARNING:}
+This layer is appropriate only with axes in standard coordinates (usually
+\code{\link[=confer_inertia]{confer_inertia(p = "rows")}}) and predictive calibration
+(\code{\link[=ggbiplot]{ggbiplot(axis.type = "predictive")}}).
 }
 \section{Referential stats}{
 
@@ -176,37 +173,14 @@ ggplot(subcars, aes(x = hp00, y = wt)) +
   geom_point(shape = "circle open") +
   geom_vector(data = -grad) +
   stat_projection(referent = grad)
-# basic PCA
-iris_pca <- ordinate(iris, cols = 1:4, model = prcomp)
-
-# basic biplot
-iris_biplot <- 
-  ggbiplot(iris_pca, aes(color = Species, label = name)) +
-  geom_rows_point() +
-  geom_cols_axis()
-# project all cases onto all axes
-iris_biplot + stat_rows_projection()
-# project all cases onto select axes
-iris_biplot + stat_rows_projection(referent = c(2, 4))
-# project select cases onto all axes
-iris_biplot + stat_rows_projection(subset = c(1, 51, 101))
-# project select cases onto select axes
-iris_biplot + stat_rows_projection(subset = c(1, 51, 101), referent = c(2, 4))
-# project select cases onto manually provided axes
-iris_cols <- as.data.frame(get_cols(iris_pca))
-iris_biplot + stat_rows_projection(subset = c(1, 51, 101), referent = iris_cols)
-
-# project selected cases onto selected axes in full-dimensional space
-ggbiplot(iris_pca, ord_aes(iris_pca, color = Species, label = name)) +
-  geom_rows_point() +
-  geom_cols_axis() +
-  stat_rows_projection(subset = c(1, 51, 101), referent = c(2, 4))
 }
 \seealso{
 Other stat layers: 
+\code{\link{stat_bagplot}()},
 \code{\link{stat_center}()},
 \code{\link{stat_chull}()},
 \code{\link{stat_cone}()},
+\code{\link{stat_depth}()},
 \code{\link{stat_rule}()},
 \code{\link{stat_scale}()},
 \code{\link{stat_spantree}()}

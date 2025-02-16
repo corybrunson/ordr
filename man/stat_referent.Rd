@@ -10,7 +10,6 @@ stat_referent(
   data = NULL,
   geom = "blank",
   position = "identity",
-  subset = NULL,
   referent = NULL,
   show.legend = NA,
   inherit.aes = TRUE,
@@ -65,13 +64,6 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 \item For more information and other ways to specify the position, see the
 \link[ggplot2:layer_positions]{layer position} documentation.
 }}
-
-\item{subset}{An integer, logical, or character vector indicating a subset of
-rows or columns for which to render graphical elements. NB: Internally, the
-\code{subset} will be taken from the rows of the \link[=fortify.tbl_ord]{fortified}
-'tbl_ord' comprising rows from only one of the matrix factors. It is still
-possible to pass a formula to the \code{data} parameter, but it will act on the
-fortified data \emph{before} it has been restricted to one matrix factor.}
 
 \item{referent}{The reference data set; see Details.}
 

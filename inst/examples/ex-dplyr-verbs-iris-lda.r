@@ -18,7 +18,11 @@ transmute_cols(iris_lda, vec.length = sqrt(LD1^2 + LD2^2))
 # bind data frames of annotations
 iris_medians <-
   stats::aggregate(iris[, 1:4], median, by = iris[, 5, drop = FALSE])
+# TODO: Requirement of `.elements` for matching is fragile.
 iris_lda %>%
   # retain '.element' in order to match by `elements`
   select_rows(.element) %>%
   cbind_rows(iris_medians, elements = "active")
+iris_lda %>%
+  select_rows(name, Species) %>%
+  left_join_rows(iris_medians, by = c("name" = "Species"))

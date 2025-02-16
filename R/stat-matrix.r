@@ -27,7 +27,7 @@
 stat_rows <- function(
   mapping = NULL, data = data,
   geom = "point", position = "identity",
-  subset = NULL, elements = "all",
+  subset = NULL, elements = "active",
   ...,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -52,7 +52,7 @@ stat_rows <- function(
 stat_cols <- function(
   mapping = NULL, data = data,
   geom = "axis", position = "identity",
-  subset = NULL, elements = "all",
+  subset = NULL, elements = "active",
   ...,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -82,7 +82,7 @@ StatRows <- ggproto(
   setup_data = setup_rows_data,
   
   compute_group = function(data, scales,
-                           subset = NULL, elements = "all") {
+                           subset = NULL, elements = "active") {
     data
   }
 )
@@ -97,7 +97,7 @@ StatCols <- ggproto(
   setup_data = setup_cols_data,
   
   compute_group = function(data, scales,
-                           subset = NULL, elements = "all") {
+                           subset = NULL, elements = "active") {
     data
   }
 )

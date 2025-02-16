@@ -40,5 +40,5 @@ arrests_lra %>%
     "Violent crime arrest rates",
     "Non-compositional LRA"
   ) +
-  coord_biplot() +
+  coord_scaffold() +
   guides(color = "none")

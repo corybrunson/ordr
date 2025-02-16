@@ -1,6 +1,6 @@
-fit_lda_ord1 <- lda_ord(iris[, 1:4], iris[, 5])
+fit_lda_ord1 <- lda_ord(iris[, 1:4], iris[, 5], ret.x = FALSE)
 fit_lda_ord2 <- lda_ord(Species ~ ., iris)
-fit_lda_ord3 <- lda_ord(iris[, 1:4], iris[, 5], ret.x = TRUE)
+fit_lda_ord3 <- lda_ord(iris[, 1:4], iris[, 5])
 
 test_that("'lda' accessors have consistent dimensions", {
   expect_equal(ncol(get_rows(fit_lda_ord1)), ncol(get_cols(fit_lda_ord1)))

@@ -1,3 +1,20 @@
+
+#' A synchronization flag.
+#'
+#' The inert function `sync()` operates analogously to [ggplot2::waiver()] to
+#' indicate that an auxiliary aesthetic should be synchronized to a standard
+#' aesthetic (when it is mapped from data). `is.sync()` reports whether an
+#' object is of this class.
+#'
+#' @export
+#' @keywords internal
+sync <- function() structure(list(), class = "sync")
+
+#' @param x An object to test
+#' @export
+#' @rdname sync
+is.sync <- function(x) inherits(x, "sync")
+
 # sensible default for biplot arrows
 default_arrow <- grid::arrow(
   angle = 30,

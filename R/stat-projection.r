@@ -1,21 +1,23 @@
 #' @title Project rows onto columns or vice-versa
 #'
-
 #' @description Compute projections of vectors from one matrix factor onto those
 #'   of the other.
 #' 
 
-#' @details
+#' @details An ordination model of continuous data can be used to predict values
+#'   along one dimension from those along the other, using the artificial axes
+#'   as intermediaries. The predictions correspond geometrically to projections
+#'   of elements of one matrix factor in principal coordinates onto those of the
+#'   other factor in standard coordinates. In the most familiar setting of PCA
+#'   biplots, variable (column) values are predicted from case (row) locations
+#'   along PC1 and PC2. This transformation obtains the axis projections as
+#'   `xend,yend` and pairs them with original points `x,y` to demarcate segments
+#'   visualizing the projections.
 #'
-#' An ordination model of continuous data can be used to predict values along
-#' one dimension from those along the other, using the artificial axes as
-#' intermediaries. The predictions correspond geometrically to projections of
-#' elements of one matrix factor in principal coordinates onto those of the
-#' other factor in standard coordinates. In the most familiar setting of PCA
-#' biplots, variable (column) values are predicted from case (row) locations
-#' along PC1 and PC2. This transformation obtains the axis projections as
-#' `xend,yend` and pairs them with original points `x,y` to demarcate segments
-#' visualizing the projections.
+#'   **WARNING:**
+#'   This layer is appropriate only with axes in standard coordinates (usually
+#'   [`confer_inertia(p = "rows")`][confer_inertia]) and predictive calibration
+#'   ([`ggbiplot(axis.type = "predictive")`][ggbiplot]).
 #' 
 
 #' @template stat-referent
@@ -36,11 +38,9 @@
 #' @template return-layer
 #' @family stat layers
 #' @example inst/examples/ex-stat-projection.r
-#' @example inst/examples/ex-stat-projection-iris.r
 #' @export
 stat_projection <- function(
     mapping = NULL, data = NULL, geom = "segment", position = "identity",
-    subset = NULL,
     referent = NULL,
     ...,
     show.legend = NA, inherit.aes = TRUE
@@ -71,7 +71,7 @@ StatProjection <- ggproto(
   "StatProjection", StatReferent,
   
   compute_group = function(data, scales,
-                           subset = NULL, referent = NULL, na.rm = FALSE) {
+                           referent = NULL, na.rm = FALSE) {
     
     # no referent means no projection
     if (is.null(referent) || ! is.data.frame(referent)) return(data.frame())

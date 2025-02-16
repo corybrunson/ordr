@@ -13,8 +13,7 @@ iris_pca %>%
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   geom_rows_point() +
-  geom_cols_vector(color = "#444444") +
-  geom_cols_text_radiate(aes(label = measure), color = "#444444") +
+  geom_cols_vector(aes(label = measure), color = "#444444") +
   ggtitle(
     "Row-principal PCA biplot of Anderson iris measurements",
     "Variable loadings scaled to secondary axes"
@@ -27,8 +26,7 @@ iris_pca %>%
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   geom_rows_point() +
-  geom_cols_vector(color = "#444444") +
-  geom_cols_text_radiate(aes(label = measure), color = "#444444") +
+  geom_cols_vector(aes(label = measure), color = "#444444") +
   ggtitle(
     "Row-principal PCA biplot of Anderson iris measurements",
     "Variable loadings scaled to secondary axes"

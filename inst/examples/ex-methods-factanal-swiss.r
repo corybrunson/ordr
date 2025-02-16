@@ -20,6 +20,5 @@ head(get_rows(swiss_fa, elements = "score"))
 swiss_fa %>%
   ggbiplot() +
   theme_bw() +
-  geom_cols_vector(aes(color = uniqueness)) +
-  geom_cols_text_radiate(aes(label = name)) +
+  geom_cols_vector(aes(color = uniqueness, label = name)) +
   expand_limits(x = c(-2, 2.5), y = c(-1.5, 2))

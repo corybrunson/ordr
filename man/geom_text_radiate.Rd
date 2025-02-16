@@ -122,7 +122,7 @@ A ggproto \link[ggplot2:layer]{layer}.
 \code{geom_text_radiate()} is adapted from \code{ggbiplot()} in the
 off-CRAN extensions of the same name (Vu, 2014; Telford, 2017; Gegzna,
 2018). It renders text at specified positions and angles that radiate out
-from the origin.
+from the origin. This layer and its associated ggproto are \strong{deprecated}.
 }
 \section{Biplot layers}{
 
@@ -142,7 +142,8 @@ points for rows and arrows for columns.
 \code{geom_text_radiate()} understands the following aesthetics (required
 aesthetics are in bold):
 \itemize{
-\item \strong{\code{x}}, \strong{\code{y}}
+\item \strong{\code{x}}
+\item \strong{\code{y}}
 \item \strong{\code{label}}
 \item \code{alpha}
 \item \code{angle}
@@ -172,6 +173,7 @@ branch
 \seealso{
 Other geom layers: 
 \code{\link{geom_axis}()},
+\code{\link{geom_bagplot}()},
 \code{\link{geom_interpolation}()},
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},

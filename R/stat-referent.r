@@ -32,7 +32,6 @@
 stat_referent <- function(
     mapping = NULL, data = NULL,
     geom = "blank", position = "identity",
-    subset = NULL,
     referent = NULL,
     show.legend = NA,
     inherit.aes = TRUE,
@@ -96,7 +95,8 @@ StatReferent <- ggproto(
     params
   },
   
-  compute_group = function(data, scales, subset = NULL, referent = NULL) data
+  compute_group = function(data, scales,
+                           referent = NULL) data
 )
 
 # QUESTION: Why are the arguments apparently out of order?

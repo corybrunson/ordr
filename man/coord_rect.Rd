@@ -3,20 +3,11 @@
 \name{coord_rect}
 \alias{coord_rect}
 \alias{coord_square}
-\alias{coord_biplot}
 \title{Cartesian coordinates and plotting window with fixed aspect ratios}
 \usage{
 coord_rect(
   ratio = 1,
   window_ratio = ratio,
-  xlim = NULL,
-  ylim = NULL,
-  expand = TRUE,
-  clip = "on"
-)
-
-coord_biplot(
-  window_ratio = 1,
   xlim = NULL,
   ylim = NULL,
   expand = TRUE,
@@ -44,17 +35,13 @@ limits, then those data points may show up in places such as the axes, the
 legend, the plot title, or the plot margins.}
 }
 \description{
-2- (and 3-) dimensional biplots require that coordinates lie on
-the same scale but may additionally benefit from a square plotting window.
-The general-purpose coordinate system \code{CoordRect}, alias \code{CoordSquare},
-provides control of both coordinate and window aspect ratios, while the
-convenience \code{CoordBiplot} system fixes the coordinate aspect ratio at \code{1}
-and gives the user control only of the plotting window.
+Geometric data analysis often requires that coordinates lie on
+the same scale. The coordinate system \code{CoordRect}, alias \code{CoordSquare},
+provides control of both coordinate and window aspect ratios.
 }
 \examples{
 # ensures that the resolutions of the axes and the dimensions of the plotting
 # window respect the specified aspect ratios
-
 p <- ggplot(mtcars, aes(mpg, hp/10)) + geom_point()
 p + coord_rect(ratio = 1)
 p + coord_rect(ratio = 1, window_ratio = 2)
@@ -63,18 +50,4 @@ p + coord_rect(ratio = 5)
 p + coord_rect(ratio = 1/5)
 p + coord_rect(xlim = c(15, 30))
 p + coord_rect(ylim = c(15, 30))
-
-# Resize the plot to see that the specified aspect ratio is maintained
-p <- ggplot(mtcars, aes(mpg, hp/10)) + geom_point()
-p + coord_biplot()
-p + coord_biplot(window_ratio = 2)
-
-# prevent rescaling in response to `theme()` aspect ratio
-p <- ggplot(mtcars, aes(mpg, hp/5)) + geom_point()
-p + coord_equal() + theme(aspect.ratio = 1)
-p + coord_biplot() + theme(aspect.ratio = 1)
-
-# NB: `theme(aspect.ratio = )` overrides `Coord*$aspect`:
-p + coord_fixed(ratio = 1) + theme(aspect.ratio = 1)
-p + coord_biplot(window_ratio = 2) + theme(aspect.ratio = 1)
 }

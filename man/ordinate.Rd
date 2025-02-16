@@ -76,7 +76,7 @@ ordinate(haireye, MASS::corresp, cols = everything())
 ordinate(swiss, model = factanal, factors = 2L, scores = "Bartlett")
 
 # LDA of iris data
-ordinate(iris, ~ lda_ord(.[, 1:4], .[, 5], ret.x = TRUE))
+ordinate(iris, ~ lda_ord(.[, 1:4], .[, 5]))
 
 # CCA of savings data
 ordinate(

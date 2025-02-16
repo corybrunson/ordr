@@ -10,7 +10,15 @@ geom_vector(
   stat = "identity",
   position = "identity",
   arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
   ...,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  parse = FALSE,
+  check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -66,7 +74,26 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 \item{arrow}{Specification for arrows, as created by \code{\link[grid:arrow]{grid::arrow()}}, or else
 \code{NULL} for no arrows.}
 
+\item{lineend}{Line end style (round, butt, square).}
+
+\item{linejoin}{Line join style (round, mitre, bevel).}
+
+\item{vector_labels}{Logical; whether to include labels radiating outward
+from the vectors.}
+
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
+
+\item{label.colour, label.color, label.alpha}{Default aesthetics for labels.
+Set to NULL to inherit from the data's aesthetics.}
+
+\item{parse}{If \code{TRUE}, the labels will be parsed into expressions and
+displayed as described in \code{?plotmath}.}
+
+\item{check_overlap}{If \code{TRUE}, text that overlaps previous text in the
+same layer will not be plotted. \code{check_overlap} happens at draw time and in
+the order of the data. Therefore data should be arranged by the label
+column before calling \code{geom_text()}. Note that this argument is not
+supported by \code{geom_label()}.}
 
 \item{na.rm}{Passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
@@ -85,13 +112,19 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
-\code{geom_vector()} renders arrows from the origin to points.
+\code{geom_vector()} renders arrows from the origin to points,
+optionally with text radiating outward.
 }
 \details{
 Vectors are positions relative to some common reference point, in
 this case the origin; they comprise direction and magnitude. Vectors are
-usually represented with arrows rather than markers (points). They are
-commonly used to represent variables in biplots, as by Greenacre (2010).
+usually represented with arrows rather than markers (points).
+
+Vectors are commonly used to represent numerical variables in biplots, as
+by Gabriel (1971) and Greenacre (2010). Gardner & le Roux (2002) refer to
+these as Gabriel biplots. This layer, with optional radiating text labels,
+is adapted from \code{ggbiplot()} in the off-CRAN extensions of the same name
+(Vu, 2014; Telford, 2017; Gegzna, 2018).
 }
 \section{Biplot layers}{
 
@@ -111,12 +144,20 @@ points for rows and arrows for columns.
 \code{geom_vector()} understands the following aesthetics (required aesthetics
 are in bold):
 \itemize{
-\item \strong{\code{x}}, \strong{\code{y}}
+\item \strong{\code{x}}
+\item \strong{\code{y}}
 \item \code{alpha}
 \item \code{colour}
 \item \code{linetype}
+\item \code{label}
 \item \code{size}
 \item \code{head}
+\item \code{angle}
+\item \code{hjust}
+\item \code{vjust}
+\item \code{family}
+\item \code{fontface}
+\item \code{lineheight}
 \item \code{group}
 }
 }
@@ -142,15 +183,63 @@ ggplot(state_center, aes(x, y, label = state)) +
   coord_equal() +
   geom_vector(aes(head = coast)) +
   geom_text_radiate()
+
+# multidimensional scaling of covariances
+ability.cov$cov |> 
+  cov2cor() |>
+  eigen() |> getElement("vectors") |> 
+  as.data.frame() |> 
+  transform(test = rownames(ability.cov$cov)) ->
+  ability_cor_eigen
+ability_cor_eigen |> 
+  ggplot(aes(-V1, V2, label = test)) +
+  coord_square() + theme_void() +
+  geom_vector(check_overlap = TRUE) +
+  scale_y_continuous(expand = expansion(mult = .2)) +
+  ggtitle("Ability and intelligence test covariances")
+# multidimensional scaling of correlations
+ability.cov$cov |> 
+  eigen() |> getElement("vectors") |> 
+  as.data.frame() |> 
+  transform(test = rownames(ability.cov$cov)) ->
+  ability_cor_eigen
+ability_cor_eigen |> 
+  ggplot(aes(-V1, -V2, label = test)) +
+  coord_square() + theme_void() +
+  geom_vector(check_overlap = TRUE) +
+  geom_unit_circle() +
+  expand_limits(x = c(-1, 1), y = c(-1, 1)) +
+  ggtitle("Ability and intelligence test covariances")
 }
 \references{
+Gabriel KR (1971) "The biplot graphic display of matrices with application to
+principal component analysis". \emph{Biometrika} 58(3), 453--467.
+\doi{10.1093/biomet/58.3.453}
+
 Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
 978-84-923846.
 \url{https://www.fbbva.es/microsite/multivariate-statistics/biplots.html}
+
+Gardner S, le Roux N (2002) "Biplot Methodology for Discriminant Analysis
+Based upon Robust Methods and Principal Curves". \emph{Classification, Clustering,
+and Data Analysis: Recent Advances and Applications}: 169--176.
+\url{https://link.springer.com/chapter/10.1007/978-3-642-56181-8_18}
+
+Vincent Q. Vu (2014). ggbiplot: A 'ggplot2' based biplot. R package version
+0.55. \url{https://github.com/vqv/ggbiplot}, \code{experimental} branch
+
+Richard J Telford (2017). ggbiplot: A 'ggplot2' based biplot. R package
+version 0.6. \url{https://github.com/richardjtelford/ggbiplot} (fork),
+\code{experimental} branch
+
+Vilmantas Gegzna (2018). ggbiplot: A 'ggplot2' based biplot. R package
+version 0.55. \url{https://github.com/forked-packages/ggbiplot} (fork), \code{experimental}
+branch
 }
 \seealso{
 Other geom layers: 
 \code{\link{geom_axis}()},
+\code{\link{geom_bagplot}()},
 \code{\link{geom_interpolation}()},
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},

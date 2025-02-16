@@ -1,6 +1,10 @@
 
 #' @importFrom utils getFromNamespace
 
+#' @importFrom rlang list2
+
+#' @importFrom ggrepel position_nudge_repel
+
 #' @importFrom magrittr %>%
 #' @export
 magrittr::`%>%`
@@ -10,7 +14,7 @@ as_tbl_ord_default <- function(x) {
   x
 }
 
-tbl_ord_factors <- c(
+.ord_factors <- c(
   rows = "rows", columns = "cols", cols = "cols", dims = "dims",
   f = "rows", g = "cols", fg = "dims",
   u = "rows", v = "cols", uv = "dims",
@@ -21,13 +25,16 @@ tbl_ord_factors <- c(
   rowprincipal = "rows", colprincipal = "cols", columnprincipal = "cols",
   both = "dims", symmetric = "dims"
 )
+
+.ord_elements <- c("active", "score", "structure")
+
 match_factor <- function(x) {
-  x <- match.arg(tolower(x), names(tbl_ord_factors))
-  unname(tbl_ord_factors[x])
+  x <- match.arg(tolower(x), names(.ord_factors))
+  unname(.ord_factors[x])
 }
 switch_inertia <- function(x) {
-  x <- match.arg(tolower(x), names(tbl_ord_factors))
-  switch(tbl_ord_factors[x], rows = c(1, 0), cols = c(0, 1), dims = c(.5, .5))
+  x <- match.arg(tolower(x), names(.ord_factors))
+  switch(.ord_factors[x], rows = c(1, 0), cols = c(0, 1), dims = c(.5, .5))
 }
 
 method_classes <- function(generic.function) {
@@ -66,24 +73,25 @@ get_ord_aes <- function(data) {
 # restrict to specified elements
 setup_elts_data <- function(data, params) {
   
-  # if specified and possible, restrict to active or supplementary elements
-  if (! is.null(params$elements) && ".element" %in% names(data)) {
-    # ensure that `elements` is a character singleton
-    stopifnot(
-      is.character(params$elements),
-      length(params$elements) == 1L
+  if (is.null(params$elements))
+    # default to active elements
+    params$elements <- "active"
+  else
+    # match `elements` to a list of recognized options (excluding `"all"`)
+    params$elements <- match.arg(params$elements, .ord_elements)
+  
+  # subset accordingly
+  data <- data[data$.element == params$elements, , drop = FALSE]
+  
+  # print note if both `elements` and `subset` are passed
+  if (! is.null(params$subset)) {
+    rlang::inform(
+      paste0(
+        "`subset` will be applied after data are restricted to ",
+        params$elements, " elements."
+      ),
+      .frequency = "once", .frequency_id = "setup_elts_data-subset"
     )
-    # subset accordingly
-    data <- if ("all" %in% params$elements) {
-      data
-    } else {
-      data[data$.element == params$elements, , drop = FALSE]
-    }
-    # print note if both `elements` and `subset` are passed
-    if (! is.null(params$subset)) {
-      message("`subset` will be applied after data are restricted to ",
-              params$elements, " elements.")
-    }
   }
   
   # by default, render elements for all rows
@@ -99,6 +107,7 @@ setup_elts_data <- function(data, params) {
   
   data
 }
+
 # restrict to a matrix factor
 setup_rows_data <- function(data, params) {
   
@@ -144,22 +153,19 @@ setup_cols_xy_data <- function(data, params) {
 
 setup_referent_params <- function(self, data, params) {
   
-  .matrix <- tolower(gsub("^Stat(Rows|Cols).*$", "\\1", class(self)[[1L]]))
-  stopifnot(.matrix %in% c("rows", "cols"))
-  setup_factor_xy_data <- switch(
-    .matrix,
-    rows = setup_cols_xy_data,
-    cols = setup_rows_xy_data
-  )
-  
-  # syntactic sugar to specify the reference data
   if (is.null(params$referent)) {
     # default null `referent` to other matrix factor
-    params$referent <- setup_factor_xy_data(data, list())
-  } else if (! is.data.frame(params$referent) && ! is.matrix(params$referent)) {
-    # if `referent` is not a data frame, then treat it as the `subset` param
-    params$referent <- 
-      setup_factor_xy_data(data, list(subset = params$referent))
+    .matrix <- tolower(gsub("^Stat(Rows|Cols).*$", "\\1", class(self)[[1L]]))
+    stopifnot(.matrix %in% c("rows", "cols"))
+    setup_factor_xy_data <- switch(
+      .matrix,
+      rows = setup_cols_xy_data,
+      cols = setup_rows_xy_data
+    )
+    params$referent <- setup_factor_xy_data(
+      data,
+      list(elements = params$ref_elements, subset = params$ref_subset)
+    )
   } else {
     # continue with parent parameter setup
     params$referent <- as.data.frame(params$referent)
@@ -170,3 +176,9 @@ setup_referent_params <- function(self, data, params) {
 }
 
 is_const <- function(x) length(unique(x)) == 1L
+
+ord_formals <- function(`_class`, method) {
+  fun <- environment(`_class`[[method]])[[method]]
+  formals(fun) <- c(formals(fun), list(subset = NULL, elements = "active"))
+  fun
+}
