@@ -49,6 +49,7 @@
 <url><loc>/reference/geom_axis_label.html</loc></url>
 <url><loc>/reference/geom_axis_text.html</loc></url>
 <url><loc>/reference/geom_axis_ticks.html</loc></url>
+<url><loc>/reference/geom_bagplot.html</loc></url>
 <url><loc>/reference/geom_crosshairs.html</loc></url>
 <url><loc>/reference/geom_interpolation.html</loc></url>
 <url><loc>/reference/geom_isoline.html</loc></url>
@@ -117,9 +118,11 @@
 <url><loc>/reference/stat-biplot-chull.html</loc></url>
 <url><loc>/reference/stat-biplot-ellipse.html</loc></url>
 <url><loc>/reference/stat-biplot-spantree.html</loc></url>
+<url><loc>/reference/stat_bagplot.html</loc></url>
 <url><loc>/reference/stat_center.html</loc></url>
 <url><loc>/reference/stat_chull.html</loc></url>
 <url><loc>/reference/stat_cone.html</loc></url>
+<url><loc>/reference/stat_depth.html</loc></url>
 <url><loc>/reference/stat_projection.html</loc></url>
 <url><loc>/reference/stat_referent.html</loc></url>
 <url><loc>/reference/stat_rows.html</loc></url>
@@ -127,6 +130,7 @@
 <url><loc>/reference/stat_scale.html</loc></url>
 <url><loc>/reference/stat_spantree.html</loc></url>
 <url><loc>/reference/supplementation.html</loc></url>
+<url><loc>/reference/sync.html</loc></url>
 <url><loc>/reference/tbl_ord.html</loc></url>
 <url><loc>/reference/theme_scaffold.html</loc></url>
 <url><loc>/reference/tidiers.html</loc></url>

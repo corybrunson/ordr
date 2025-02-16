@@ -44,7 +44,7 @@
 #' @template param-stat
 #' @template return-layer
 #' @family stat layers
-#' @example inst/examples/ex-stat-spantree-eurodist.r
+#' @example inst/examples/ex-stat-spantree.r
 #' @export
 stat_spantree <- function(
   mapping = NULL, data = NULL, geom = "segment", position = "identity",
@@ -92,8 +92,12 @@ StatSpantree <- ggproto(
         stop("No spantree engine installed; requires one of the following:\n",
              "{", paste(mst_engines, collapse = "}, {"), "}")
       } else {
-        warning("Package {", engine, "} not installed; ",
-                "using {", engine_alt[[1L]], "} instead.")
+        rlang::warn(
+          paste("Package {", engine, "} not installed; ",
+                "using {", engine_alt[[1L]], "} instead."),
+          .frequency = "regularly",
+          .frequency_id = "StatSpantree$compute_group-engine"
+        )
         engine <- engine_alt[[1L]]
       }
     }
@@ -103,8 +107,12 @@ StatSpantree <- ggproto(
       engine,
       mlpack = {
         if (method != "euclidean") {
-          warning("{", engine, "} engine uses the euclidean distance; ",
-                  "`method` will be ignored.")
+          rlang::warn(
+            paste("{", engine, "} engine uses the euclidean distance; ",
+                  "`method` will be ignored."),
+            .frequency = "regularly",
+            .frequency_id = "StatSpantree$compute_group-links"
+          )
         }
         # minimum spanning tree (euclidean distance)
         data_emst <- mlpack::emst(data_ord)

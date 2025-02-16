@@ -1,8 +1,7 @@
-#' @title Restrict geometric data to boundary points for its conical hull
+#' @title Conical hull
 #'
-#' @description This stat layer restricts a dataset with `x` and `y` variables
-#'   to the points that lie on its conical hull (other than the origin).
-#'   
+#' @description Restrict planar data to the points that lie on its conical hull.
+#' 
 
 #' @template biplot-layers
 #' @template biplot-ord-aes
@@ -13,7 +12,7 @@
 #'   data. Defaults to `FALSE`.
 #' @template return-layer
 #' @family stat layers
-#' @example inst/examples/ex-stat-chull-spend.r
+#' @example inst/examples/ex-stat-cone.r
 #' @export
 stat_cone <- function(
   mapping = NULL, data = NULL, geom = "path", position = "identity",
@@ -67,8 +66,13 @@ StatCone <- ggproto(
     
     # cycle the rows of the hull until the origin is first
     hull <- c(hull[seq(orig, length(hull))], hull[seq(0L, orig - 1L)[-1L]])
-    # if origin is to be omitted, return the convex hull from the data
-    if (! origin) return(data[hull[-1L], , drop = FALSE])
+    if (origin) {
+      # if origin is to be included, append it again to the bottom
+      hull <- c(hull, hull[1L])
+    } else {
+      # if origin is to be omitted, return the convex hull from the data
+      return(data[hull[-1L], , drop = FALSE])
+    }
     
     # reduce additional columns: unique or bust
     data_only <- as.data.frame(lapply(subset(data, select = -ord_cols), only))

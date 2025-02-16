@@ -2,7 +2,7 @@
 % Please edit documentation in R/stat-cone.r
 \name{stat_cone}
 \alias{stat_cone}
-\title{Restrict geometric data to boundary points for its conical hull}
+\title{Conical hull}
 \usage{
 stat_cone(
   mapping = NULL,
@@ -82,8 +82,7 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
-This stat layer restricts a dataset with \code{x} and \code{y} variables
-to the points that lie on its conical hull (other than the origin).
+Restrict planar data to the points that lie on its conical hull.
 }
 \section{Biplot layers}{
 
@@ -119,28 +118,23 @@ ordination aesthetics but will accept \code{ord_aes()} without warning.
 }
 
 \examples{
-# centered principal components analysis of U.S. personal expenditure data
-USPersonalExpenditure \%>\%
-  prcomp() \%>\%
-  as_tbl_ord() \%>\%
-  augment_ord() \%>\%
-  # allow radiating text to exceed plotting window
-  ggbiplot(aes(label = name), clip = "off",
-           sec.axes = "cols", scale.factor = 50) +
-  geom_rows_label(size = 3) +
-  # omit labels in the conical hull without the origin
-  geom_cols_vector(vector_labels = FALSE) +
-  stat_cols_cone(linetype = "dotted") +
-  geom_cols_vector(stat = "cone", vector_labels = TRUE, color = "transparent") +
-  ggtitle(
-    "U.S. Personal Expenditure data, 1940-1960",
-    "Row-principal biplot of centered PCA"
-  )
+mtcars$name <- rownames(mtcars)
+ggplot(mtcars, aes(wt, mpg, label = name)) +
+  theme_scaffold() +
+  geom_text(size = 3) +
+  stat_cone()
+ggplot(mtcars, aes(hp, mpg, label = name)) +
+  theme_scaffold() +
+  geom_origin() +
+  geom_text(size = 3) +
+  stat_cone(origin = TRUE, linetype = "dotted")
 }
 \seealso{
 Other stat layers: 
+\code{\link{stat_bagplot}()},
 \code{\link{stat_center}()},
 \code{\link{stat_chull}()},
+\code{\link{stat_depth}()},
 \code{\link{stat_projection}()},
 \code{\link{stat_rule}()},
 \code{\link{stat_scale}()},

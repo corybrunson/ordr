@@ -150,6 +150,40 @@ as their corresponding conventional geoms.</p>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">geom_rows_contour</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"contour"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  bins <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  binwidth <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  breaks <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lineend <span class="op">=</span> <span class="st">"butt"</span>,</span>
+<span>  linejoin <span class="op">=</span> <span class="st">"round"</span>,</span>
+<span>  linemitre <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">geom_cols_contour</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"contour"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  bins <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  binwidth <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  breaks <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lineend <span class="op">=</span> <span class="st">"butt"</span>,</span>
+<span>  linejoin <span class="op">=</span> <span class="st">"round"</span>,</span>
+<span>  linemitre <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">geom_rows_density_2d</span><span class="op">(</span></span>
 <span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -404,6 +438,26 @@ as their corresponding conventional geoms.</p>
 <span>  text_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  label_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  axis.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.angle <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  label.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.linewidth <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  tick.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.size <span class="op">=</span> <span class="fl">2.6</span>,</span>
+<span>  text.angle <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  text.hjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  text.vjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  text.family <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.fontface <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -425,8 +479,102 @@ as their corresponding conventional geoms.</p>
 <span>  text_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  label_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  axis.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.angle <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  label.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.linewidth <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  tick.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.size <span class="op">=</span> <span class="fl">2.6</span>,</span>
+<span>  text.angle <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  text.hjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  text.vjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  text.family <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.fontface <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">geom_rows_bagplot</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"bagplot"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  bag.linewidth <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  bag.linetype <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  bag.colour <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  bag.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  bag.fill <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  bag.alpha <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  median.shape <span class="op">=</span> <span class="fl">21L</span>,</span>
+<span>  median.stroke <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  median.size <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  median.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  median.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  median.fill <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>  median.alpha <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  fence.linewidth <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  fence.linetype <span class="op">=</span> <span class="fl">0L</span>,</span>
+<span>  fence.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  fence.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fence.fill <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  fence.alpha <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  outlier.shape <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  outlier.stroke <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  outlier.size <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  outlier.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  outlier.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  outlier.fill <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  outlier.alpha <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">geom_cols_bagplot</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"bagplot"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  bag.linewidth <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  bag.linetype <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  bag.colour <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  bag.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  bag.fill <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  bag.alpha <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  median.shape <span class="op">=</span> <span class="fl">21L</span>,</span>
+<span>  median.stroke <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  median.size <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  median.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  median.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  median.fill <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>  median.alpha <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  fence.linewidth <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  fence.linetype <span class="op">=</span> <span class="fl">0L</span>,</span>
+<span>  fence.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  fence.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fence.fill <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  fence.alpha <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  outlier.shape <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  outlier.stroke <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  outlier.size <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  outlier.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  outlier.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  outlier.fill <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  outlier.alpha <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -514,6 +662,11 @@ as their corresponding conventional geoms.</p>
 <span>  num <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  text_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  text.size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  text.angle <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -531,6 +684,11 @@ as their corresponding conventional geoms.</p>
 <span>  num <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  text_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  text.size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  text.angle <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -553,6 +711,26 @@ as their corresponding conventional geoms.</p>
 <span>  text_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  label_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  axis.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.angle <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  label.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.linewidth <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  tick.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.size <span class="op">=</span> <span class="fl">2.6</span>,</span>
+<span>  text.angle <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  text.hjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  text.vjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  text.family <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.fontface <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -575,6 +753,26 @@ as their corresponding conventional geoms.</p>
 <span>  text_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  label_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  axis.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.angle <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  label.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.linewidth <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  tick.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.size <span class="op">=</span> <span class="fl">2.6</span>,</span>
+<span>  text.angle <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  text.hjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  text.vjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  text.family <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.fontface <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -618,6 +816,11 @@ as their corresponding conventional geoms.</p>
 <span>  linejoin <span class="op">=</span> <span class="st">"mitre"</span>,</span>
 <span>  vector_labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  label.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -633,6 +836,11 @@ as their corresponding conventional geoms.</p>
 <span>  linejoin <span class="op">=</span> <span class="st">"mitre"</span>,</span>
 <span>  vector_labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  label.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -734,6 +942,23 @@ the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.or
 being drawn (using the <code>subgroup</code> aesthetic) this argument defines how the
 hole coordinates are interpreted. See the examples in <code><a href="https://rdrr.io/r/grid/grid.path.html" class="external-link">grid::pathGrob()</a></code> for
 an explanation.</p></dd>
+
+
+<dt id="arg-bins">bins<a class="anchor" aria-label="anchor" href="#arg-bins"></a></dt>
+<dd><p>Number of contour bins. Overridden by <code>breaks</code>.</p></dd>
+
+
+<dt id="arg-binwidth">binwidth<a class="anchor" aria-label="anchor" href="#arg-binwidth"></a></dt>
+<dd><p>The width of the contour bins. Overridden by <code>bins</code>.</p></dd>
+
+
+<dt id="arg-breaks">breaks<a class="anchor" aria-label="anchor" href="#arg-breaks"></a></dt>
+<dd><p>One of:</p><ul><li><p>Numeric vector to set the contour breaks</p></li>
+<li><p>A function that takes the range of the data and binwidth as input
+and returns breaks as output. A function can be created from a formula
+(e.g. ~ fullseq(.x, .y)).</p></li>
+</ul><p>Overrides <code>binwidth</code> and <code>bins</code>. By default, this is a vector of length
+ten with <code><a href="https://rdrr.io/r/base/pretty.html" class="external-link">pretty()</a></code> breaks.</p></dd>
 
 
 <dt id="arg-contour-var">contour_var<a class="anchor" aria-label="anchor" href="#arg-contour-var"></a></dt>
@@ -868,6 +1093,46 @@ axis, as a proportion of the minimum of the plot width and height.</p></dd>
 <dt id="arg-label-dodge">label_dodge<a class="anchor" aria-label="anchor" href="#arg-label-dodge"></a></dt>
 <dd><p>Numeric; the orthogonal distance of the axis label from
 the axis, as a proportion of the minimum of the plot width and height.</p></dd>
+
+
+<dt id="arg-axis-colour-axis-color-axis-alpha">axis.colour, axis.color, axis.alpha<a class="anchor" aria-label="anchor" href="#arg-axis-colour-axis-color-axis-alpha"></a></dt>
+<dd><p>Default aesthetics for axes. Set to
+NULL to inherit from the data's aesthetics.</p></dd>
+
+
+<dt id="arg-label-angle-label-colour-label-color-label-alpha">label.angle, label.colour, label.color, label.alpha<a class="anchor" aria-label="anchor" href="#arg-label-angle-label-colour-label-color-label-alpha"></a></dt>
+<dd><p>Default aesthetics
+for labels. Set to NULL to inherit from the data's aesthetics.</p></dd>
+
+
+<dt id="arg-tick-linewidth-tick-colour-tick-color-tick-alpha">tick.linewidth, tick.colour, tick.color, tick.alpha<a class="anchor" aria-label="anchor" href="#arg-tick-linewidth-tick-colour-tick-color-tick-alpha"></a></dt>
+<dd><p>Default aesthetics
+for tick marks. Set to NULL to inherit from the data's aesthetics.</p></dd>
+
+
+<dt id="arg-text-size-text-angle-text-hjust-text-vjust-text-family-text-fontface-text-colour-text-color-text-alpha">text.size, text.angle, text.hjust, text.vjust, text.family, text.fontface, text.colour, text.color, text.alpha<a class="anchor" aria-label="anchor" href="#arg-text-size-text-angle-text-hjust-text-vjust-text-family-text-fontface-text-colour-text-color-text-alpha"></a></dt>
+<dd><p>Default aesthetics for tick mark labels. Set to NULL to inherit from the
+data's aesthetics.</p></dd>
+
+
+<dt id="arg-bag-linetype-bag-linewidth-bag-colour-bag-color-bag-fill-bag-alpha">bag.linetype, bag.linewidth, bag.colour, bag.color, bag.fill, bag.alpha<a class="anchor" aria-label="anchor" href="#arg-bag-linetype-bag-linewidth-bag-colour-bag-color-bag-fill-bag-alpha"></a></dt>
+<dd><p>Default aesthetics for bags. Set to <code><a href="sync.html">sync()</a></code> to inherit from the data's
+aesthetics or to <code>NULL</code> to use the data's aesthetics.</p></dd>
+
+
+<dt id="arg-median-shape-median-stroke-median-size-median-colour-median-color-median-fill-median-alpha">median.shape, median.stroke, median.size, median.colour, median.color, median.fill, median.alpha<a class="anchor" aria-label="anchor" href="#arg-median-shape-median-stroke-median-size-median-colour-median-color-median-fill-median-alpha"></a></dt>
+<dd><p>Default aesthetics for medians. Set to <code><a href="sync.html">sync()</a></code> to inherit from the data's
+aesthetics or to <code>NULL</code> to use the data's aesthetics.</p></dd>
+
+
+<dt id="arg-fence-linetype-fence-linewidth-fence-colour-fence-color-fence-fill-fence-alpha">fence.linetype, fence.linewidth, fence.colour, fence.color, fence.fill, fence.alpha<a class="anchor" aria-label="anchor" href="#arg-fence-linetype-fence-linewidth-fence-colour-fence-color-fence-fill-fence-alpha"></a></dt>
+<dd><p>Default aesthetics for fences. Set to <code><a href="sync.html">sync()</a></code> to inherit from the data's
+aesthetics or to <code>NULL</code> to use the data's aesthetics.</p></dd>
+
+
+<dt id="arg-outlier-shape-outlier-stroke-outlier-size-outlier-colour-outlier-color-outlier-fill-outlier-alpha">outlier.shape, outlier.stroke, outlier.size, outlier.colour, outlier.color, outlier.fill, outlier.alpha<a class="anchor" aria-label="anchor" href="#arg-outlier-shape-outlier-stroke-outlier-size-outlier-colour-outlier-color-outlier-fill-outlier-alpha"></a></dt>
+<dd><p>Default aesthetics for outliers. Set to <code><a href="sync.html">sync()</a></code> to inherit from the data's
+aesthetics or to <code>NULL</code> to use the data's aesthetics.</p></dd>
 
 
 <dt id="arg-new-data">new_data<a class="anchor" aria-label="anchor" href="#arg-new-data"></a></dt>

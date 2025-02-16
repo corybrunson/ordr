@@ -26,3 +26,18 @@ stackloss_centered |>
     fun.offset = \(x) minabspp(x, p = 1)
   )
 # NB: `geom_axis(stat = "rule")` would fail to pass positional aesthetics.
+
+# eigen-decomposition of covariance matrix
+ability.cov$cov |> 
+  cov2cor() |> 
+  eigen() |> getElement("vectors") |> 
+  as.data.frame() |> 
+  transform(test = rownames(ability.cov$cov)) ->
+  ability_cor_eigen
+# test axes in best-approximation space
+ability_cor_eigen |> 
+  transform(E3 = ifelse(V3 > 0, "rise", "fall")) |> 
+  ggplot(aes(V1, V2, color = E3)) +
+  coord_square() +
+  geom_axis(aes(label = test), text.color = "black", text.alpha = .5) +
+  expand_limits(x = c(-1, 1), y = c(-1, 1))

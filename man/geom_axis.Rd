@@ -18,6 +18,26 @@ geom_axis(
   text_dodge = 0.03,
   label_dodge = 0.03,
   ...,
+  axis.colour = NULL,
+  axis.color = NULL,
+  axis.alpha = NULL,
+  label.angle = 0,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  tick.linewidth = 0.25,
+  tick.colour = NULL,
+  tick.color = NULL,
+  tick.alpha = NULL,
+  text.size = 2.6,
+  text.angle = 0,
+  text.hjust = 0.5,
+  text.vjust = 0.5,
+  text.family = NULL,
+  text.fontface = NULL,
+  text.colour = NULL,
+  text.color = NULL,
+  text.alpha = NULL,
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
@@ -89,6 +109,18 @@ the axis, as a proportion of the minimum of the plot width and height.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
+\item{axis.colour, axis.color, axis.alpha}{Default aesthetics for axes. Set to
+NULL to inherit from the data's aesthetics.}
+
+\item{label.angle, label.colour, label.color, label.alpha}{Default aesthetics
+for labels. Set to NULL to inherit from the data's aesthetics.}
+
+\item{tick.linewidth, tick.colour, tick.color, tick.alpha}{Default aesthetics
+for tick marks. Set to NULL to inherit from the data's aesthetics.}
+
+\item{text.size, text.angle, text.hjust, text.vjust, text.family, text.fontface, text.colour, text.color, text.alpha}{Default aesthetics for tick mark labels. Set to NULL to inherit from the
+data's aesthetics.}
+
 \item{parse}{If \code{TRUE}, the labels will be parsed into expressions and
 displayed as described in \code{?plotmath}.}
 
@@ -153,20 +185,22 @@ points for rows and arrows for columns.
 \code{geom_axis()} understands the following aesthetics (required aesthetics are
 in bold):
 \itemize{
-\item \strong{\code{x}}, \strong{\code{y}}
-\item \code{lower}, \code{upper}
+\item \strong{\code{x}}
+\item \strong{\code{y}}
+\item \code{lower}
+\item \code{upper}
 \item \code{yintercept} \emph{or} \code{xintercept} \emph{or} \code{xend} and \code{yend}
+\item \code{linetype}
+\item \code{linewidth}
+\item \code{size}
+\item \code{hjust}
+\item \code{vjust}
 \item \code{colour}
 \item \code{alpha}
-\item \code{linewidth}
-\item \code{linetype}
 \item \code{label}
+\item \code{family}
+\item \code{fontface}
 \item \code{center}, \code{scale}
-\item \code{label_colour}, \code{label_alpha}, \code{label_size}, \code{label_angle},
-\code{label_family}, \code{label_fontface}
-\item \code{tick_colour}, \code{tick_alpha}, \code{tick_linewidth}, \code{tick_linetype}
-\item \code{text_colour}, \code{text_alpha}, \code{text_size}, \code{text_angle},
-\code{text_hjust}, \code{text_vjust}, \code{text_family}, \code{text_fontface}
 \item \code{group}
 }
 }
@@ -200,6 +234,21 @@ stackloss_centered |>
     fun.offset = \(x) minabspp(x, p = 1)
   )
 # NB: `geom_axis(stat = "rule")` would fail to pass positional aesthetics.
+
+# eigen-decomposition of covariance matrix
+ability.cov$cov |> 
+  cov2cor() |> 
+  eigen() |> getElement("vectors") |> 
+  as.data.frame() |> 
+  transform(test = rownames(ability.cov$cov)) ->
+  ability_cor_eigen
+# test axes in best-approximation space
+ability_cor_eigen |> 
+  transform(E3 = ifelse(V3 > 0, "rise", "fall")) |> 
+  ggplot(aes(V1, V2, color = E3)) +
+  coord_square() +
+  geom_axis(aes(label = test), text.color = "black", text.alpha = .5) +
+  expand_limits(x = c(-1, 1), y = c(-1, 1))
 }
 \references{
 Gower JC & Hand DJ (1996) \emph{Biplots}. Chapman & Hall, ISBN: 0-412-71630-5.
@@ -211,6 +260,7 @@ and Data Analysis: Recent Advances and Applications}: 169--176.
 }
 \seealso{
 Other geom layers: 
+\code{\link{geom_bagplot}()},
 \code{\link{geom_interpolation}()},
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},

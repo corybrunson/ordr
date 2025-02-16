@@ -25,15 +25,19 @@
 #' `geom_vector()` understands the following aesthetics (required aesthetics
 #' are in bold):
 
-#' - **`x`**, **`y`**
+#' - **`x`**
+#' - **`y`**
 #' - `alpha`
 #' - `colour`
 #' - `linetype`
 #' - `label`
 #' - `size`
-#' - `angle`, `hjust`, `vjust`
-#' - `label_colour`, `label_alpha`
-#' - `family`, `fontface`, `lineheight`
+#' - `angle`
+#' - `hjust`
+#' - `vjust`
+#' - `family`
+#' - `fontface`
+#' - `lineheight`
 #' - `group`
 #' 
 
@@ -42,11 +46,14 @@
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_segment
+#' @inheritParams ggplot2::geom_text
 #' @template param-geom
 #' @param arrow Specification for arrows, as created by [grid::arrow()], or else
 #'   `NULL` for no arrows.
 #' @param vector_labels Logical; whether to include labels radiating outward
 #'   from the vectors.
+#' @param label.colour,label.color,label.alpha Default aesthetics for labels.
+#'   Set to NULL to inherit from the data's aesthetics.
 #' @template return-layer
 #' @family geom layers
 #' @example inst/examples/ex-geom-vector.r
@@ -56,6 +63,8 @@ geom_vector <- function(
   arrow = default_arrow, lineend = "round", linejoin = "mitre",
   vector_labels = TRUE,
   ...,
+  label.colour = NULL, label.color = NULL, label.alpha = NULL,
+  parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -70,6 +79,10 @@ geom_vector <- function(
     params = list(
       arrow = arrow, lineend = lineend, linejoin = linejoin,
       vector_labels = vector_labels,
+      label.colour = label.color %||% label.colour,
+      label.alpha = label.alpha,
+      parse = parse,
+      check_overlap = check_overlap,
       na.rm = na.rm,
       ...
     )
@@ -89,7 +102,6 @@ GeomVector <- ggproto(
   default_aes = aes(
     colour = "black", linewidth = 0.5, linetype = 1, alpha = NA,
     label = "", size = 3.88, angle = 0, hjust = .5, vjust = .5,
-    label_colour = "black", label_alpha = NA,
     family = "", fontface = 1, lineheight = 1.2
   ),
 
@@ -106,12 +118,17 @@ GeomVector <- ggproto(
     data, panel_params, coord,
     vector_labels = TRUE,
     arrow = default_arrow, lineend = "round", linejoin = "mitre",
+    label.colour = NULL, label.alpha = NULL,
     parse = FALSE, check_overlap = FALSE,
     na.rm = FALSE
   ) {
     
     if (! coord$is_linear()) {
-      warning("Vectors are not yet tailored to non-linear coordinates.")
+      rlang::warn(
+        "Vectors are not yet tailored to non-linear coordinates.",
+        .frequency = "regularly",
+        .frequency_id = "GeomVector$draw_panel-is_linear"
+      )
     }
     
     # initialize grob list
@@ -128,11 +145,9 @@ GeomVector <- ggproto(
     
     if (vector_labels) {
       label_data <- data
-      
-      # specify aesthetics (if necessary)
-      label_data$colour <- label_data$label_colour
-      label_data$alpha <- label_data$label_alpha
-      label_data$label_colour <- label_data$label_alpha <- NULL
+      # specify independent aesthetics
+      label_data$colour <- label.colour %||% label_data$colour
+      label_data$alpha <- label.alpha %||% label_data$alpha
       
       if (is.character(label_data$hjust)) {
         label_data$hjust <- compute_just(label_data$hjust, label_data$x)

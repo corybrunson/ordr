@@ -11,7 +11,8 @@
 #' axes to a new point of intersection away from the origin, adjusting the axis
 #' markers accordingly. Then the axes converge in a region of the plot offset
 #' from most position markers or other elements. An alternative solution,
-#' implemented in the **[bipl5][bipl5]** package, is to translate each axis
+#' implemented in the **bipl5** package
+#' (\url{https://github.com/RuanBuys/bipl5}), is to translate each axis
 #' orthogonally away from the origin, which preserves the axis markers. This is
 #' the technique implemented here.
 #'
@@ -55,7 +56,7 @@
 #'   `referent` onto the axes and onto their normal vectors.
 #' @template return-layer
 #' @family stat layers
-#' @example inst/examples/ex-stat-rule-glass.r
+#' @example inst/examples/ex-stat-rule.r
 #' @export
 stat_rule <- function(
     mapping = NULL, data = NULL, geom = "rule", position = "identity",

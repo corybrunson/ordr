@@ -21,7 +21,7 @@ iris_pca %>%
   scale_color_brewer(type = "qual", palette = 2) +
   geom_origin(marker = "cross", alpha = .5) +
   geom_cols_interpolation(
-    aes(center = center, scale = scale, interpolate = name),
+    aes(center = center, scale = scale, interpolate = name), size = 3,
     new_data = new_data, type = "centroid", alpha = .5
   ) +
   geom_rows_text(aes(label = obs, color = species), alpha = .5, size = 3)

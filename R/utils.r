@@ -1,6 +1,10 @@
 
 #' @importFrom utils getFromNamespace
 
+#' @importFrom rlang list2
+
+#' @importFrom ggrepel position_nudge_repel
+
 #' @importFrom magrittr %>%
 #' @export
 magrittr::`%>%`
@@ -81,9 +85,12 @@ setup_elts_data <- function(data, params) {
   
   # print note if both `elements` and `subset` are passed
   if (! is.null(params$subset)) {
-    message(
-      "`subset` will be applied after data are restricted to ",
-      params$elements, " elements."
+    rlang::inform(
+      paste0(
+        "`subset` will be applied after data are restricted to ",
+        params$elements, " elements."
+      ),
+      .frequency = "once", .frequency_id = "setup_elts_data-subset"
     )
   }
   

@@ -7,7 +7,7 @@
 geom_rule(
   mapping = NULL,
   data = NULL,
-  stat = "rule",
+  stat = "identity",
   position = "identity",
   axis_labels = TRUE,
   axis_ticks = TRUE,
@@ -19,6 +19,26 @@ geom_rule(
   text_dodge = 0.03,
   label_dodge = 0.03,
   ...,
+  axis.colour = NULL,
+  axis.color = NULL,
+  axis.alpha = NULL,
+  label.angle = 0,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  tick.linewidth = 0.25,
+  tick.colour = NULL,
+  tick.color = NULL,
+  tick.alpha = NULL,
+  text.size = 2.6,
+  text.angle = 0,
+  text.hjust = 0.5,
+  text.vjust = 0.5,
+  text.family = NULL,
+  text.fontface = NULL,
+  text.colour = NULL,
+  text.color = NULL,
+  text.alpha = NULL,
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
@@ -92,6 +112,18 @@ the axis, as a proportion of the minimum of the plot width and height.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
+\item{axis.colour, axis.color, axis.alpha}{Default aesthetics for axes. Set to
+NULL to inherit from the data's aesthetics.}
+
+\item{label.angle, label.colour, label.color, label.alpha}{Default aesthetics
+for labels. Set to NULL to inherit from the data's aesthetics.}
+
+\item{tick.linewidth, tick.colour, tick.color, tick.alpha}{Default aesthetics
+for tick marks. Set to NULL to inherit from the data's aesthetics.}
+
+\item{text.size, text.angle, text.hjust, text.vjust, text.family, text.fontface, text.colour, text.color, text.alpha}{Default aesthetics for tick mark labels. Set to NULL to inherit from the
+data's aesthetics.}
+
 \item{parse}{If \code{TRUE}, the labels will be parsed into expressions and
 displayed as described in \code{?plotmath}.}
 
@@ -123,8 +155,12 @@ translated from the origin.
 }
 \details{
 As implemented here, a rule is just an \link[=geom_axis]{axis} that has a
-fixed range, usually the limits of the data. See \code{\link[=stat_rule]{stat_rule()}} for further
-details.
+fixed range, usually the limits of the data. \code{geom_rule()} defaults to
+\code{\link[ggplot2:stat_identity]{stat = "identity"}} to avoid the problem of
+failing to pass referent data to the referential \code{\link[=stat_rule]{stat_rule()}}. Therefore,
+the user must provide the \code{lower} and \code{upper} aesthetics, which are used as
+euclidean lengths in the plotting window. Meanwhile, \code{stat_rule()} defaults
+to \code{geom = "rule"}; see \code{\link[=stat_rule]{stat_rule()}} for details on this pairing.
 }
 \section{Biplot layers}{
 
@@ -144,49 +180,58 @@ points for rows and arrows for columns.
 \code{geom_rule()} understands the following aesthetics (required aesthetics are
 in bold):
 \itemize{
-\item \strong{\code{x}}, \strong{\code{y}}
-\item \strong{\code{lower}, \code{upper}}
+\item \strong{\code{x}}
+\item \strong{\code{y}}
+\item \strong{\code{lower}}
+\item \strong{\code{upper}}
 \item \code{yintercept} \emph{or} \code{xintercept} \emph{or} \code{xend} and \code{yend}
+\item \code{linetype}
+\item \code{linewidth}
+\item \code{size}
+\item \code{hjust}
+\item \code{vjust}
 \item \code{colour}
 \item \code{alpha}
-\item \code{linewidth}
-\item \code{linetype}
 \item \code{label}
+\item \code{family}
+\item \code{fontface}
 \item \code{center}, \code{scale}
-\item \code{label_colour}, \code{label_alpha}, \code{label_size}, \code{label_angle},
-\code{label_family}, \code{label_fontface}
-\item \code{tick_colour}, \code{tick_alpha}, \code{tick_linewidth}, \code{tick_linetype}
-\item \code{text_colour}, \code{text_alpha}, \code{text_size}, \code{text_angle},
-\code{text_hjust}, \code{text_vjust}, \code{text_family}, \code{text_fontface}
 \item \code{group}
 }
 }
 
 \examples{
-# stack loss gradient
-stackloss |> 
-  lm(formula = stack.loss ~ Air.Flow + Water.Temp + Acid.Conc.) |> 
-  coef() |> 
-  as.list() |> as.data.frame() |> 
-  subset(select = c(Air.Flow, Water.Temp, Acid.Conc.)) ->
-  coef_data
-# gradient rule with respect to two predictors
-stackloss_centered <- scale(stackloss, scale = FALSE)
-stackloss_centered |> 
-  ggplot(aes(x = Acid.Conc., y = Air.Flow)) +
-  coord_square() + geom_origin() +
-  geom_point(aes(size = stack.loss, alpha = sign(stack.loss))) + 
-  scale_size_area() + scale_alpha_binned(breaks = c(-1, 0, 1)) +
+USJudgeRatings |> 
+  subset(select = -c(1, 12)) |> 
+  dist(method = "maximum") |> 
+  cmdscale() |> 
+  as.data.frame() |> 
+  setNames(c("PCo1", "PCo2")) |> 
+  transform(name = rownames(USJudgeRatings)) ->
+  judge_mds
+USJudgeRatings |> 
+  subset(select = c(CONT, RTEN)) |> 
+  setNames(c("contacts", "recommendation")) ->
+  judge_meta
+lm(as.matrix(judge_meta) ~ as.matrix(judge_mds[, seq(2)])) |> 
+  getElement("coefficients") |> 
+  unname() |> t() |> as.data.frame() |> 
+  setNames(c("Intercept", "PCo1", "PCo2")) |> 
+  transform(variable = names(judge_meta)) ->
+  judge_lm
+ggplot(judge_mds, aes(x = PCo1, y = PCo2)) +
+  coord_equal() +
+  theme_void() +
+  geom_text(aes(label = name), size = 3) +
   stat_rule(
-    data = coef_data,
-    referent = stackloss_centered,
-    fun.offset = \(x) minabspp(x, p = .5)
+    data = judge_lm, referent = judge_mds,
+    aes(center = Intercept, label = variable)
   )
-# NB: `geom_rule(stat = "rule")` would fail to pass positional aesthetics.
 }
 \seealso{
 Other geom layers: 
 \code{\link{geom_axis}()},
+\code{\link{geom_bagplot}()},
 \code{\link{geom_interpolation}()},
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},

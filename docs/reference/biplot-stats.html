@@ -166,6 +166,36 @@ stats.</p>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">stat_rows_bagplot</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  geom <span class="op">=</span> <span class="st">"bagplot"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  fraction <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  coef <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  median <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  fence <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  outliers <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">stat_cols_bagplot</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  geom <span class="op">=</span> <span class="st">"bagplot"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  fraction <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  coef <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  median <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  fence <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  outliers <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">stat_rows_center</span><span class="op">(</span></span>
 <span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -175,9 +205,11 @@ stats.</p>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  fun.data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fun <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fun.center <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fun.min <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fun.max <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fun.ord <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fun.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -190,9 +222,11 @@ stats.</p>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  fun.data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fun <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fun.center <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fun.min <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fun.max <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fun.ord <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fun.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -205,7 +239,9 @@ stats.</p>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  fun.data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fun <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fun.center <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fun.ord <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fun.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -218,7 +254,9 @@ stats.</p>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  fun.data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fun <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fun.center <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fun.ord <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fun.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -242,6 +280,30 @@ stats.</p>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">stat_rows_peel</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  geom <span class="op">=</span> <span class="st">"polygon"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>  cut <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"above"</span>, <span class="st">"below"</span><span class="op">)</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">stat_cols_peel</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  geom <span class="op">=</span> <span class="st">"polygon"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>  cut <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"above"</span>, <span class="st">"below"</span><span class="op">)</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">stat_rows_cone</span><span class="op">(</span></span>
 <span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -259,6 +321,66 @@ stats.</p>
 <span>  geom <span class="op">=</span> <span class="st">"path"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  origin <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">stat_rows_depth</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  geom <span class="op">=</span> <span class="st">"contour"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  contour <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  contour_var <span class="op">=</span> <span class="st">"depth"</span>,</span>
+<span>  notion <span class="op">=</span> <span class="st">"zonoid"</span>,</span>
+<span>  notion_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  n <span class="op">=</span> <span class="fl">100L</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">stat_cols_depth</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  geom <span class="op">=</span> <span class="st">"contour"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  contour <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  contour_var <span class="op">=</span> <span class="st">"depth"</span>,</span>
+<span>  notion <span class="op">=</span> <span class="st">"zonoid"</span>,</span>
+<span>  notion_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  n <span class="op">=</span> <span class="fl">100L</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">stat_rows_depth_filled</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  geom <span class="op">=</span> <span class="st">"contour_filled"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  contour <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  contour_var <span class="op">=</span> <span class="st">"depth"</span>,</span>
+<span>  notion <span class="op">=</span> <span class="st">"zonoid"</span>,</span>
+<span>  notion_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  n <span class="op">=</span> <span class="fl">100L</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">stat_cols_depth_filled</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  geom <span class="op">=</span> <span class="st">"contour_filled"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  contour <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  contour_var <span class="op">=</span> <span class="st">"depth"</span>,</span>
+<span>  notion <span class="op">=</span> <span class="st">"zonoid"</span>,</span>
+<span>  notion_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  n <span class="op">=</span> <span class="fl">100L</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -491,19 +613,69 @@ or, if <code>type="euclid"</code>, the radius of the circle to be drawn.</p></dd
 <dd><p>The number of segments to be used in drawing the ellipse.</p></dd>
 
 
-<dt id="arg-fun-data-fun-center-fun-min-fun-max">fun.data, fun.center, fun.min, fun.max<a class="anchor" aria-label="anchor" href="#arg-fun-data-fun-center-fun-min-fun-max"></a></dt>
-<dd><p>Functions treated as in
-<code><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html" class="external-link">ggplot2::stat_summary()</a></code>, with <code>fun.center</code>, <code>fun.min</code>, and <code>fun.max</code>
-behaving as <code>fun.y</code>, <code>fun.ymin</code>, and <code>fun.ymax</code>.</p></dd>
+<dt id="arg-fraction">fraction<a class="anchor" aria-label="anchor" href="#arg-fraction"></a></dt>
+<dd><p>Fraction of the data to include in the bag.</p></dd>
+
+
+<dt id="arg-coef">coef<a class="anchor" aria-label="anchor" href="#arg-coef"></a></dt>
+<dd><p>Scale factor of the fence relative to the bag.</p></dd>
+
+
+<dt id="arg-median-fence-outliers">median, fence, outliers<a class="anchor" aria-label="anchor" href="#arg-median-fence-outliers"></a></dt>
+<dd><p>Logical indicators whether to include median,
+fence, and outliers in the composite output.</p></dd>
+
+
+<dt id="arg-fun-data">fun.data<a class="anchor" aria-label="anchor" href="#arg-fun-data"></a></dt>
+<dd><p>A function that is given the complete data and should
+return a data frame with variables <code>ymin</code>, <code>y</code>, and <code>ymax</code>.</p></dd>
+
+
+<dt id="arg-fun-center">fun.center<a class="anchor" aria-label="anchor" href="#arg-fun-center"></a></dt>
+<dd><p>Deprecated alias to <code>fun</code>.</p></dd>
+
+
+<dt id="arg-fun-min-fun-fun-max">fun.min, fun, fun.max<a class="anchor" aria-label="anchor" href="#arg-fun-min-fun-fun-max"></a></dt>
+<dd><p>Alternatively, supply three individual
+functions that are each passed a vector of values and should return a
+single number.</p></dd>
+
+
+<dt id="arg-fun-ord">fun.ord<a class="anchor" aria-label="anchor" href="#arg-fun-ord"></a></dt>
+<dd><p>Alternatively to the <code><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html" class="external-link">ggplot2::stat_summary_bin()</a></code> parameters,
+supply a summary function that takes a matrix as input and returns a named
+column summary vector. Overridden by <code>fun.data</code> and <code>fun</code>, cannot be used
+together with <code>fun.min</code> and <code>fun.max</code>.</p></dd>
 
 
 <dt id="arg-fun-args">fun.args<a class="anchor" aria-label="anchor" href="#arg-fun-args"></a></dt>
-<dd><p>Arguments passed to the <code>fun.*</code>.</p></dd>
+<dd><p>Optional additional arguments passed on to the functions.</p></dd>
+
+
+<dt id="arg-breaks">breaks<a class="anchor" aria-label="anchor" href="#arg-breaks"></a></dt>
+<dd><p>A numeric vector of fractions (between <code>0</code> and <code>1</code>) of the
+data to contain in each hull.</p></dd>
+
+
+<dt id="arg-cut">cut<a class="anchor" aria-label="anchor" href="#arg-cut"></a></dt>
+<dd><p>Character; one of <code>"above"</code> and <code>"below"</code>, indicating whether each
+hull should contain at least or at most <code>breaks</code> of the data,
+respectively.</p></dd>
 
 
 <dt id="arg-origin">origin<a class="anchor" aria-label="anchor" href="#arg-origin"></a></dt>
 <dd><p>Logical; whether to include the origin with the transformed
 data. Defaults to <code>FALSE</code>.</p></dd>
+
+
+<dt id="arg-notion">notion<a class="anchor" aria-label="anchor" href="#arg-notion"></a></dt>
+<dd><p>Character; the name of the depth function (passed to
+<code><a href="https://rdrr.io/pkg/ddalpha/man/depth..html" class="external-link">ddalpha::depth.()</a></code>).</p></dd>
+
+
+<dt id="arg-notion-params">notion_params<a class="anchor" aria-label="anchor" href="#arg-notion-params"></a></dt>
+<dd><p>List of additional parameters passed via <code>...</code> to
+<code><a href="https://rdrr.io/pkg/ddalpha/man/depth..html" class="external-link">ddalpha::depth.()</a></code>.</p></dd>
 
 
 <dt id="arg-referent">referent<a class="anchor" aria-label="anchor" href="#arg-referent"></a></dt>

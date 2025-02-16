@@ -148,25 +148,14 @@ transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluati
 }
 
 \examples{
-\dontrun{
-# classical multidimensional scaling of road distances between European cities
-euro_mds <- ordinate(eurodist, cmdscale_ord, k = 11)
-
-# biplot with minimal spanning tree based on full-dimensional distances
-# (as implemented in {mlpack})
-euro_mds \%>\%
-  negate_ord("PCo2") \%>\%
-  ggbiplot() +
-  stat_cols_spantree(
-    ord_aes(euro_mds), engine = "mlpack",
-    alpha = .5, linetype = "dotted"
-  ) +
-  geom_cols_text(aes(label = name), size = 3) +
-  ggtitle(
-    "MDS biplot of road distances between European cities",
-    "Dotted segments constitute the minimal spanning tree"
-  )
-}
+UScitiesD |> 
+  cmdscale() |> 
+  as.data.frame() |> 
+  tibble::rownames_to_column(var = "city") ->
+  us_mds
+ggplot(us_mds, aes(-V1, -V2, label = city)) +
+  stat_spantree() +
+  geom_label()
 }
 \references{
 Jolliffe IT (2002) \emph{Principal Component Analysis}, Second Edition.
@@ -175,9 +164,11 @@ Springer Series in Statistics, ISSN 0172-7397. \doi{10.1007/b98835}
 }
 \seealso{
 Other stat layers: 
+\code{\link{stat_bagplot}()},
 \code{\link{stat_center}()},
 \code{\link{stat_chull}()},
 \code{\link{stat_cone}()},
+\code{\link{stat_depth}()},
 \code{\link{stat_projection}()},
 \code{\link{stat_rule}()},
 \code{\link{stat_scale}()}

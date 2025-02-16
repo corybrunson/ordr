@@ -17,7 +17,7 @@ glass_lda %>%
   stat_cols_rule(
     aes(label = name), color = "#888888", num = 8L,
     ref_elements = "score", fun.offset = \(x) minabspp(x, p = .1),
-    text_size = 2.5, label_dodge = .02
+    text.size = 2.5, label_dodge = .04
   ) +
   scale_shape_manual(values = c(2L, 3L, 0L, 5L)) +
   ggtitle(
@@ -43,7 +43,7 @@ glass_lda %>%
   stat_cols_rule(
     aes(label = name), geom = "axis", color = "#888888", num = 8L,
     ref_elements = "active", fun.offset = \(x) minabspp(x, p = .1),
-    text_size = 2.5, text_dodge = .025
+    label_dodge = 0.04, text.size = 2.5, text_dodge = .025
   ) +
   scale_shape_manual(values = c(16L, 17L, 15L, 18L)) +
   ggtitle(

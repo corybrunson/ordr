@@ -14,6 +14,11 @@ geom_isoline(
   num = NULL,
   text_dodge = 0.03,
   ...,
+  text.size = 3,
+  text.angle = 0,
+  text.colour = NULL,
+  text.color = NULL,
+  text.alpha = NULL,
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
@@ -79,6 +84,10 @@ or isoline, as a proportion of the minimum of the plot width and height.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
+\item{text.size, text.angle, text.colour, text.color, text.alpha}{Default
+aesthetics for tick mark labels. Set to NULL to inherit from the data's
+aesthetics.}
+
 \item{parse}{If \code{TRUE}, the labels will be parsed into expressions and
 displayed as described in \code{?plotmath}.}
 
@@ -131,7 +140,8 @@ points for rows and arrows for columns.
 \code{geom_isoline()} understands the following aesthetics (required aesthetics
 are in bold):
 \itemize{
-\item \strong{\code{x}}, \strong{\code{y}}
+\item \strong{\code{x}}
+\item \strong{\code{y}}
 \item \code{colour}
 \item \code{alpha}
 \item \code{linewidth}
@@ -141,12 +151,8 @@ are in bold):
 \item \code{vjust}
 \item \code{family}
 \item \code{fontface}
-\item \code{text_colour}, \code{text_alpha}, \code{text_size}, \code{text_angle},
 \item \code{group}
 }
-
-The prefixed aesthetics \verb{text_*} are used by the text elements and will
-inherit any values passed to their un-prefixed counterparts.
 }
 
 \examples{
@@ -172,6 +178,7 @@ Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
 \seealso{
 Other geom layers: 
 \code{\link{geom_axis}()},
+\code{\link{geom_bagplot}()},
 \code{\link{geom_interpolation}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},

@@ -12,7 +12,8 @@
 #' `geom_text_radiate()` understands the following aesthetics (required
 #' aesthetics are in bold):
 
-#' - **`x`**, **`y`**
+#' - **`x`**
+#' - **`y`**
 #' - **`label`**
 #' - `alpha`
 #' - `angle`
@@ -74,7 +75,10 @@ GeomTextRadiate <- ggproto(
     na.rm = FALSE,
     check_overlap = FALSE
   ) {
-    warning("`GeomTextRadiate` is deprecated; use `GeomVector` instead.")
+    rlang::warn(
+      "`GeomTextRadiate` is deprecated; use `GeomVector` instead.",
+      .frequency = "regularly", .frequency_id = "GeomTextRadiate$draw_panel"
+    )
     
     if (is.character(data$hjust)) {
       data$hjust <- compute_just(data$hjust, data$x)

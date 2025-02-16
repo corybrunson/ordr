@@ -160,15 +160,19 @@ the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.or
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>An ordination model of continuous data can be used to predict values along
-one dimension from those along the other, using the artificial axes as
-intermediaries. The predictions correspond geometrically to projections of
-elements of one matrix factor in principal coordinates onto those of the
+    <p>An ordination model of continuous data can be used to predict values
+along one dimension from those along the other, using the artificial axes
+as intermediaries. The predictions correspond geometrically to projections
+of elements of one matrix factor in principal coordinates onto those of the
 other factor in standard coordinates. In the most familiar setting of PCA
 biplots, variable (column) values are predicted from case (row) locations
 along PC1 and PC2. This transformation obtains the axis projections as
 <code>xend,yend</code> and pairs them with original points <code>x,y</code> to demarcate segments
 visualizing the projections.</p>
+<p><strong>WARNING:</strong>
+This layer is appropriate only with axes in standard coordinates (usually
+<code><a href="conference.html">confer_inertia(p = "rows")</a></code>) and predictive calibration
+(<code><a href="ggbiplot.html">ggbiplot(axis.type = "predictive")</a></code>).</p>
     </div>
     <div id="referential-stats">
     <h2>Referential stats</h2>
@@ -227,9 +231,11 @@ transformation and can be accessed with <a href="https://ggplot2.tidyverse.org/r
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>Other stat layers:
+<code><a href="stat_bagplot.html">stat_bagplot</a>()</code>,
 <code><a href="stat_center.html">stat_center</a>()</code>,
 <code><a href="stat_chull.html">stat_chull</a>()</code>,
 <code><a href="stat_cone.html">stat_cone</a>()</code>,
+<code><a href="stat_depth.html">stat_depth</a>()</code>,
 <code><a href="stat_rule.html">stat_rule</a>()</code>,
 <code><a href="stat_scale.html">stat_scale</a>()</code>,
 <code><a href="stat_spantree.html">stat_spantree</a>()</code></p></div>
@@ -254,43 +260,63 @@ transformation and can be accessed with <a href="https://ggplot2.tidyverse.org/r
 <span class="r-in"><span>  <span class="fu"><a href="geom_vector.html">geom_vector</a></span><span class="op">(</span>data <span class="op">=</span> <span class="op">-</span><span class="va">grad</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">stat_projection</span><span class="op">(</span>referent <span class="op">=</span> <span class="va">grad</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="stat_projection-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="co"># basic PCA</span></span></span>
+<span class="r-in"><span><span class="co"># unscaled PCA</span></span></span>
 <span class="r-in"><span><span class="va">iris_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="ordinate.html">ordinate</a></span><span class="op">(</span><span class="va">iris</span>, cols <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, model <span class="op">=</span> <span class="va">prcomp</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># basic biplot</span></span></span>
+<span class="r-in"><span><span class="co"># biplot canvas</span></span></span>
 <span class="r-in"><span><span class="va">iris_biplot</span> <span class="op">&lt;-</span> </span></span>
-<span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="va">iris_pca</span>, <span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">Species</span>, label <span class="op">=</span> <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="va">iris_pca</span> <span class="op">|&gt;</span> </span></span>
+<span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">Species</span>, label <span class="op">=</span> <span class="va">name</span><span class="op">)</span>, axis.type <span class="op">=</span> <span class="st">"predictive"</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_axis</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_axis</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>center <span class="op">=</span> <span class="va">center</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># print select cases</span></span></span>
+<span class="r-in"><span><span class="va">top_cases</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">51</span>, <span class="fl">101</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">iris</span><span class="op">[</span><span class="va">top_cases</span>, <span class="op">]</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1            5.1         3.5          1.4         0.2     setosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51           7.0         3.2          4.7         1.4 versicolor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 101          6.3         3.3          6.0         2.5  virginica</span>
+<span class="r-in"><span><span class="co"># subset variables</span></span></span>
+<span class="r-in"><span><span class="va">length_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">iris</span><span class="op">[</span>, <span class="va">length_vars</span><span class="op">]</span> <span class="op">|&gt;</span> </span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html" class="external-link">aggregate</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">iris</span><span class="op">[</span>, <span class="st">"Species"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>, FUN <span class="op">=</span> <span class="va">mean</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Species Sepal.Length Petal.Length</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     setosa        5.006        1.462</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 versicolor        5.936        4.260</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  virginica        6.588        5.552</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># project all cases onto all axes</span></span></span>
 <span class="r-in"><span><span class="va">iris_biplot</span> <span class="op">+</span> <span class="fu"><a href="biplot-stats.html">stat_rows_projection</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="stat_projection-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># project all cases onto select axes</span></span></span>
-<span class="r-in"><span><span class="va">iris_biplot</span> <span class="op">+</span> <span class="fu"><a href="biplot-stats.html">stat_rows_projection</a></span><span class="op">(</span>ref_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">iris_biplot</span> <span class="op">+</span> <span class="fu"><a href="biplot-stats.html">stat_rows_projection</a></span><span class="op">(</span>ref_subset <span class="op">=</span> <span class="va">length_vars</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `subset` will be applied after data are restricted to active elements.</span>
 <span class="r-plt img"><img src="stat_projection-3.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># project select cases onto all axes</span></span></span>
-<span class="r-in"><span><span class="va">iris_biplot</span> <span class="op">+</span> <span class="fu"><a href="biplot-stats.html">stat_rows_projection</a></span><span class="op">(</span>subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">51</span>, <span class="fl">101</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">iris_biplot</span> <span class="op">+</span> <span class="fu"><a href="biplot-stats.html">stat_rows_projection</a></span><span class="op">(</span>subset <span class="op">=</span> <span class="va">top_cases</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `subset` will be applied after data are restricted to active elements.</span>
 <span class="r-plt img"><img src="stat_projection-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># project select cases onto select axes</span></span></span>
-<span class="r-in"><span><span class="va">iris_biplot</span> <span class="op">+</span> <span class="fu"><a href="biplot-stats.html">stat_rows_projection</a></span><span class="op">(</span>subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">51</span>, <span class="fl">101</span><span class="op">)</span>, ref_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">iris_biplot</span> <span class="op">+</span> <span class="fu"><a href="biplot-stats.html">stat_rows_projection</a></span><span class="op">(</span>subset <span class="op">=</span> <span class="va">top_cases</span>, ref_subset <span class="op">=</span> <span class="va">length_vars</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `subset` will be applied after data are restricted to active elements.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `subset` will be applied after data are restricted to active elements.</span>
 <span class="r-plt img"><img src="stat_projection-5.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># project select cases onto manually provided axes</span></span></span>
 <span class="r-in"><span><span class="va">iris_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="recoverers.html">get_cols</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">iris_biplot</span> <span class="op">+</span> <span class="fu"><a href="biplot-stats.html">stat_rows_projection</a></span><span class="op">(</span>subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">51</span>, <span class="fl">101</span><span class="op">)</span>, referent <span class="op">=</span> <span class="va">iris_cols</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">iris_biplot</span> <span class="op">+</span> <span class="fu"><a href="biplot-stats.html">stat_rows_projection</a></span><span class="op">(</span>subset <span class="op">=</span> <span class="va">top_cases</span>, referent <span class="op">=</span> <span class="va">iris_cols</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `subset` will be applied after data are restricted to active elements.</span>
 <span class="r-plt img"><img src="stat_projection-6.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># project selected cases onto selected axes in full-dimensional space</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="va">iris_pca</span>, <span class="fu"><a href="ggbiplot.html">ord_aes</a></span><span class="op">(</span><span class="va">iris_pca</span>, color <span class="op">=</span> <span class="va">Species</span>, label <span class="op">=</span> <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span><span class="va">iris_pca</span> <span class="op">|&gt;</span> </span></span>
+<span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu"><a href="ggbiplot.html">ord_aes</a></span><span class="op">(</span><span class="va">iris_pca</span>, color <span class="op">=</span> <span class="va">Species</span>, label <span class="op">=</span> <span class="va">name</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>           axis.type <span class="op">=</span> <span class="st">"predictive"</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_rows_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_axis</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="biplot-stats.html">stat_rows_projection</a></span><span class="op">(</span>subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">51</span>, <span class="fl">101</span><span class="op">)</span>, ref_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-geoms.html">geom_cols_axis</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>center <span class="op">=</span> <span class="va">center</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="biplot-stats.html">stat_rows_projection</a></span><span class="op">(</span>subset <span class="op">=</span> <span class="va">top_cases</span>, ref_subset <span class="op">=</span> <span class="va">length_vars</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `subset` will be applied after data are restricted to active elements.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> `subset` will be applied after data are restricted to active elements.</span>
 <span class="r-plt img"><img src="stat_projection-7.png" alt="" width="700" height="433"></span>

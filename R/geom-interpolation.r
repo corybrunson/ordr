@@ -1,6 +1,5 @@
 #' @title Render interpolation of new rows from columns (or vice-versa)
 #' 
-
 #' @description `geom_interpolation()` renders a geometric construction that
 #'   interpolates a new data matrix (row or column) element from its entries to
 #'   its artificial coordinates.
@@ -11,11 +10,14 @@
 #'   for this element to appear in the biplot? The solution is the vector sum of
 #'   the column (row) units weighted by their values in the new row (column).
 #'   Gower, Gardner--Lubbe, & le Roux (2011) provide two visualizations of this
-#'   calculation: a tail-to-head sequence of weighted units (`type = "sequence"`), and a centroid of
-#'   the weighted units scaled by the number of units (`type = "centroid"`).
-#'   
-#'   Interpretation of the interpolated markers requires that the corresponding
-#'   axes be appropriately scaled; see [ggbiplot()].
+#'   calculation: a tail-to-head sequence of weighted units (`type =
+#'   "sequence"`), and a centroid of the weighted units scaled by the number of
+#'   units (`type = "centroid"`).
+#'
+#'   **WARNING:**
+#'   This layer is appropriate only with axes in standard coordinates (usually
+#'   [`confer_inertia(p = "rows")`][confer_inertia]) and interpolative
+#'   calibration ([`ggbiplot(axis.type = "interpolative")`][ggbiplot]).
 #' 
 
 #' @template ref-gower2011
@@ -40,8 +42,6 @@
 #' - `fill`
 #' - `shape`
 #' - `stroke`
-#' - `point_size`
-#' - `point_fill`
 #' - `center`, `scale`
 #' - `group`
 #' 
@@ -55,6 +55,8 @@
 #'   (`geom_rows_interpolation()`) values to interpolate.
 #' @param type Character value matched to `"centroid"` or `"sequence"`; the type
 #'   of operations used to visualize interpolation.
+#' @param point.fill Default aesthetics for markers. Set to NULL to inherit from
+#'   the data's aesthetics.
 #' @family geom layers
 #' @example inst/examples/ex-geom-interpolation.r
 #' @export
@@ -63,6 +65,7 @@ geom_interpolation <- function(
   new_data = NULL, type = c("centroid", "sequence"),
   arrow = default_arrow,
   ...,
+  point.fill = NA,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
 ) {
@@ -77,6 +80,7 @@ geom_interpolation <- function(
     params = list(
       new_data = new_data,
       type = type,
+      point.fill = point.fill,
       arrow = arrow,
       na.rm = na.rm,
       ...
@@ -99,8 +103,9 @@ GeomInterpolation <- ggproto(
   ),
   
   default_aes = aes(
-    colour = "black", alpha = NA, size = .5, linetype = 1L, fill = NA,
-    shape = 19L, stroke = .5, point_size = 1.5, point_fill = NA,
+    linewidth = 0.5, linetype = 1L, size = 1.5,
+    colour = "black", fill = NA, alpha = NA,
+    shape = 19L, stroke = .5,
     center = 0, scale = 1, interpolate = NULL
   ),
   
@@ -141,11 +146,17 @@ GeomInterpolation <- ggproto(
     new_data = NULL, type = c("centroid", "sequence"),
     arrow = default_arrow, lineend = "round", linejoin = "mitre",
     rule = "evenodd",
+    point.fill = NA,
     na.rm = FALSE
   ) {
     
     if (! coord$is_linear()) {
       warning("Interpolation is not yet tailored to non-linear coordinates.")
+      rlang::warn(
+        "Interpolation is not yet tailored to non-linear coordinates.",
+        .frequency = "regularly",
+        .frequency_id = "GeomInterpolation$draw_panel-is_linear"
+      )
     }
     type <- match.arg(type, c("centroid", "sequence"))
     # reverse ends of `arrow`
@@ -199,8 +210,8 @@ GeomInterpolation <- ggproto(
         cent_data,
         xend = 0, yend = 0, x = x * n_coef, y = y * n_coef
       )
-      cent_data$size <- cent_data$point_size
-      cent_data$fill <- cent_data$point_fill
+      # specify independent aesthetics
+      cent_data$fill <- point.fill %||% cent_data$fill
       cent_data$linetype <- NULL
     }
     
@@ -230,5 +241,7 @@ GeomInterpolation <- ggproto(
     grob <- do.call(grid::grobTree, grobs)
     grob$name <- grid::grobName(grob, "geom_interpolation")
     grob
-  }
+  },
+  
+  rename_size = FALSE
 )

@@ -279,15 +279,15 @@ Graphical Statistics</em>, <strong>22</strong>(1): 107–122.
 <span class="r-in"><span><span class="co"># linear combinations of centered variables</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sweep.html" class="external-link">sweep</a></span><span class="op">(</span><span class="va">iris_lda</span><span class="op">$</span><span class="va">means</span>, <span class="fl">2</span>, <span class="va">iris_centroid</span>, <span class="st">"-"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="recoverers.html">get_cols</a></span><span class="op">(</span><span class="va">iris_lda</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  LD1        LD2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> setosa      7.607600  0.2151330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> versicolor -1.825049 -0.7278996</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> virginica  -5.782550  0.5127666</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> setosa      7.607600 -0.2151330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> versicolor -1.825049  0.7278996</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> virginica  -5.782550 -0.5127666</span>
 <span class="r-in"><span><span class="co"># discriminant centroids</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="recoverers.html">get_rows</a></span><span class="op">(</span><span class="va">iris_lda</span>, elements <span class="op">=</span> <span class="st">"active"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  LD1        LD2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> setosa      7.607600  0.2151330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> versicolor -1.825049 -0.7278996</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> virginica  -5.782550  0.5127666</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> setosa      7.607600 -0.2151330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> versicolor -1.825049  0.7278996</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> virginica  -5.782550 -0.5127666</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># unstandardized coefficient LDA biplot</span></span></span>
 <span class="r-in"><span><span class="va">iris_lda</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>

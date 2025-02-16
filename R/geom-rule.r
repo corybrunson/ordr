@@ -4,8 +4,12 @@
 #'   translated from the origin.
 
 #' @details As implemented here, a rule is just an [axis][geom_axis] that has a
-#'   fixed range, usually the limits of the data. See [stat_rule()] for further
-#'   details.
+#'   fixed range, usually the limits of the data. `geom_rule()` defaults to
+#'   [`stat = "identity"`][ggplot2::stat_identity()] to avoid the problem of
+#'   failing to pass referent data to the referential [stat_rule()]. Therefore,
+#'   the user must provide the `lower` and `upper` aesthetics, which are used as
+#'   euclidean lengths in the plotting window. Meanwhile, `stat_rule()` defaults
+#'   to `geom = "rule"`; see [stat_rule()] for details on this pairing.
 #' 
 
 #' @template biplot-layers
@@ -15,24 +19,23 @@
 #' `geom_rule()` understands the following aesthetics (required aesthetics are
 #' in bold):
 
-#' - **`x`**, **`y`**
-#' - **`lower`, `upper`**
+#' - **`x`**
+#' - **`y`**
+#' - **`lower`**
+#' - **`upper`**
 #' - `yintercept` _or_ `xintercept` _or_ `xend` and `yend`
+#' - `linetype`
+#' - `linewidth`
+#' - `size`
+#' - `hjust`
+#' - `vjust`
 #' - `colour`
 #' - `alpha`
-#' - `linewidth`
-#' - `linetype`
 #' - `label`
+#' - `family`
+#' - `fontface`
 #' - `center`, `scale`
-#' - `label_colour`, `label_alpha`, `label_size`, `label_angle`,
-#'   `label_family`, `label_fontface`
-#' - `tick_colour`, `tick_alpha`, `tick_linewidth`, `tick_linetype`
-#' - `text_colour`, `text_alpha`, `text_size`, `text_angle`,
-#'   `text_hjust`, `text_vjust`, `text_family`, `text_fontface`
 #' - `group`
-#' 
-
-#' @template param-tick
 #' 
 
 #' @import ggplot2
@@ -46,12 +49,24 @@
 #' @example inst/examples/ex-geom-rule.r
 #' @export
 geom_rule <- function(
-  mapping = NULL, data = NULL, stat = "rule", position = "identity",
+  mapping = NULL, data = NULL, stat = "identity", position = "identity",
   axis_labels = TRUE, axis_ticks = TRUE, axis_text = TRUE,
   by = NULL, num = NULL,
   snap_rule = TRUE,
   tick_length = .025, text_dodge = .03, label_dodge = .03,
   ...,
+  axis.colour = NULL, axis.color = NULL, axis.alpha = NULL,
+  label.angle = 0,
+  label.colour = NULL, label.color = NULL, label.alpha = NULL,
+  # TODO: Inherit from theme.
+  tick.linewidth = 0.25,
+  tick.colour = NULL, tick.color = NULL, tick.alpha = NULL,
+  # TODO: Inherit from theme.
+  text.size = 2.6,
+  text.angle = 0, text.hjust = 0.5, text.vjust = 0.5,
+  # TODO: Inherit from theme.
+  text.family = NULL, text.fontface = NULL,
+  text.colour = NULL, text.color = NULL, text.alpha = NULL,
   parse = FALSE, check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA, inherit.aes = TRUE
@@ -71,6 +86,23 @@ geom_rule <- function(
       tick_length = tick_length,
       text_dodge = text_dodge,
       label_dodge = label_dodge,
+      # NB: This is why Teun switched to `<element>_gp = list(...)`.
+      axis.colour = axis.color %||% axis.colour,
+      axis.alpha = axis.alpha,
+      label.angle = label.angle,
+      label.colour = label.color %||% label.colour,
+      label.alpha = label.alpha,
+      tick.linewidth = tick.linewidth,
+      tick.colour = tick.color %||% tick.colour,
+      tick.alpha = tick.alpha,
+      text.size = text.size,
+      text.angle = text.angle,
+      text.hjust = text.hjust,
+      text.vjust = text.vjust,
+      text.family = text.family,
+      text.fontface = text.fontface,
+      text.colour = text.color %||% text.colour,
+      text.alpha = text.alpha,
       parse = parse,
       check_overlap = check_overlap,
       na.rm = na.rm,
@@ -130,20 +162,34 @@ GeomRule <- ggproto(
     by = NULL, num = NULL,
     snap_rule = TRUE,
     tick_length = .025, text_dodge = .03, label_dodge = .03,
+    axis.colour = NULL, axis.alpha = NULL,
+    label.angle = 0,
+    label.colour = NULL, label.alpha = NULL,
+    tick.linewidth = 0.25,
+    tick.colour = NULL, tick.alpha = NULL,
+    text.size = 2.6,
+    text.angle = 0, text.hjust = 0.5, text.vjust = 0.5,
+    text.family = NULL, text.fontface = NULL,
+    text.colour = NULL, text.alpha = NULL,
     parse = FALSE, check_overlap = FALSE,
     na.rm = FALSE
   ) {
     
-    # copy `linewidth` to `size` for earlier **ggplot2** versions
-    data$size <- data$linewidth
-    
-    if (! coord$is_linear())
-      warning("Axes are not yet tailored to non-linear coordinates.")
+    if (! coord$is_linear()) {
+      rlang::warn(
+        "Rulers are not yet tailored to non-linear coordinates.",
+        .frequency = "regularly",
+        .frequency_id = "GeomRule$draw_panel-is_linear"
+      )
+    }
     
     # extract value ranges
     ranges <- coord$range(panel_params)
     
     data <- ensure_cartesian_polar(data)
+    
+    # introduce `axis` if missing
+    if (is.null(data$axis)) data$axis <- 1L
     
     # remove lengthless vectors
     data <- subset(data, x^2 + y^2 > 0)
@@ -186,10 +232,13 @@ GeomRule <- ggproto(
     
     # axis grobs: if `xend` & `yend` then segment else abline & vline
     axis_data <- unique(data)
+    # specify independent aesthetics
+    axis_data$colour <- axis.colour %||% axis_data$colour
+    axis_data$alpha <- axis.alpha %||% axis_data$alpha
     
     # NB: This step redefines positional aesthetics for a specific grob.
     
-    if (snap_rule) {
+    if ((axis_ticks || axis_text) && snap_rule) {
       
       # compute extended value range
       mark_data |> 
@@ -234,13 +283,9 @@ GeomRule <- ggproto(
     
     if (axis_labels) {
       label_data <- data
-      
       # specify independent aesthetics
-      label_data$colour <- label_data$label_colour
-      label_data$alpha <- label_data$label_alpha
-      label_data$size <- label_data$label_size
-      label_data$family <- label_data$label_family
-      label_data$fontface <- label_data$label_fontface
+      label_data$colour <- label.colour %||% label_data$colour
+      label_data$alpha <- label.alpha %||% label_data$alpha
       
       # NB: This step redefines positional aesthetics for a specific grob.
       
@@ -274,7 +319,7 @@ GeomRule <- ggproto(
       # update text angle
       label_data <- transform(
         label_data,
-        angle = atan(tan(angle)) + label_angle
+        angle = atan(tan(angle)) + label.angle * pi / 180
       )
       # put total angle in degrees
       label_data$angle <- label_data$angle * 180 / pi
@@ -289,13 +334,10 @@ GeomRule <- ggproto(
     
     if (axis_ticks) {
       tick_data <- mark_data
-      
       # specify independent aesthetics
-      tick_data$colour <- tick_data$tick_colour
-      tick_data$alpha <- tick_data$tick_alpha
-      tick_data$size <- tick_data$tick_linewidth
-      tick_data$linewidth <- tick_data$tick_linewidth
-      tick_data$linetype <- tick_data$tick_linetype
+      tick_data$linewidth <- tick.linewidth %||% tick_data$linewidth
+      tick_data$colour <- tick.colour %||% tick_data$colour
+      tick_data$alpha <- tick.alpha %||% tick_data$alpha
       
       # tick mark radius
       rtick <- plot_whmin * tick_length / 2
@@ -325,15 +367,15 @@ GeomRule <- ggproto(
     
     if (axis_text) {
       text_data <- mark_data
-      
       # specify independent aesthetics
-      text_data$colour <- text_data$text_colour
-      text_data$alpha <- text_data$text_alpha
-      text_data$size <- text_data$text_size
-      text_data$hjust <- text_data$text_hjust
-      text_data$vjust <- text_data$text_vjust
-      text_data$family <- text_data$text_family
-      text_data$fontface <- text_data$text_fontface
+      text_data$size <- text.size %||% text_data$size
+      # text_data$angle <- text.angle
+      text_data$hjust <- text.hjust
+      text_data$vjust <- text.vjust
+      text_data$family <- text.family %||% text_data$family
+      text_data$fontface <- text.fontface %||% text_data$fontface
+      text_data$colour <- text.colour %||% text_data$colour
+      text_data$alpha <- text.alpha %||% text_data$alpha
       
       # omit labels at origin
       if (! use_offset) {
@@ -352,7 +394,7 @@ GeomRule <- ggproto(
       # update text angle and put in degrees
       text_data <- transform(
         text_data,
-        angle = (atan(tan(angle)) + text_angle) * 180 / pi
+        angle = atan(tan(angle)) * 180 / pi + text.angle
       )
       
       if (nrow(text_data) > 0L) {
