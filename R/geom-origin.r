@@ -64,6 +64,8 @@ GeomOrigin <- ggproto(
     data, panel_params, coord,
     marker = "crosshairs", radius = unit(0.04, "snpc")
   ) {
+    deprecate_for_gggda("GeomOrigin")
+    
     marker <- match.arg(marker, c("crosshairs", "circle"))
     if (! inherits(radius, "unit")) {
       abort("`radius` must be a 'unit' object.")

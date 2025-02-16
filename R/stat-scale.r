@@ -45,6 +45,8 @@ StatScale <- ggproto(
   
   compute_group = function(data, scales,
                            mult = 1) {
+    deprecate_for_gggda("StatScale")
+    
     data[, c("x", "y")] <- data[, c("x", "y")] * mult
     data
   }
