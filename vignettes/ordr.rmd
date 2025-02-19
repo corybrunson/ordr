@@ -1,8 +1,8 @@
 ---
-title: "Ordination in the tidyverse"
+title: "Ordination in the Tidyverse"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Ordination in the tidyverse}
+  %\VignetteIndexEntry{Ordination in the Tidyverse}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 This vignette introduces the goals and functionality of the **ordr** package.
 Users should have some familiarity with the class of _ordination_ models powered by singular value decomposition, such as principal components analysis, correspondence analysis, and linear discriminant analysis, and with the _biplot_ statistical graphic used to visualize these models.
-Users should also be familiar with the **tidyverse** R package collection for data science and parts of the **tidymodels** collection for statistical modeling, most notably **tibble**, **dplyr**, **broom**, and **ggplot2**.
+Users should also be familiar with the Tidyverse R package collection for data science and parts of the Tidymodels collection for statistical modeling, most notably **tibble**, **dplyr**, **broom**, and **ggplot2**.
 
 Briefly, **ordr** incorporates ordination models into a "tidy" workflow. Specifically, for fitted ordination models of a variety of classes, users can
 
