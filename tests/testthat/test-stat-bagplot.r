@@ -1,3 +1,5 @@
+skip_if_not_installed("ddalpha")
+
 test_that("`stat_bagplot()` doesn't throw errors when elements are missing", {
   d0 <- data.frame(x = numeric(0), y = numeric(0))
   expect_no_error(p0 <- ggplot(d0, aes(x, y)) + stat_bagplot())
