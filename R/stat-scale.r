@@ -47,7 +47,10 @@ StatScale <- ggproto(
   required_aes = c("x", "y"),
   
   compute_group = function(data, scales, mult = 1) {
-    warning("`StatScale` is deprecated and will be removed next release.")
+    rlang::warn(
+      "`StatScale` is deprecated and will be removed next release.",
+      .frequency = "regularly", .frequency_id = "StatScale$compute_group"
+    )
     data[, c("x", "y")] <- data[, c("x", "y")] * mult
     data
   }

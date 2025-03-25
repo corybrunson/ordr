@@ -37,7 +37,6 @@ ability.cov$cov |>
 # test axes in best-approximation space
 ability_cor_eigen |> 
   transform(E3 = ifelse(V3 > 0, "rise", "fall")) |> 
-  # FIXME: Component aesthetic data values aren't mapped to color values.
   ggplot(aes(V1, V2, color = E3)) +
   coord_square() +
   geom_axis(aes(label = test), text.color = "black", text.alpha = .5) +

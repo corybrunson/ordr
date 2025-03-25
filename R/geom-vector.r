@@ -124,7 +124,11 @@ GeomVector <- ggproto(
   ) {
     
     if (! coord$is_linear()) {
-      warning("Vectors are not yet tailored to non-linear coordinates.")
+      rlang::warn(
+        "Vectors are not yet tailored to non-linear coordinates.",
+        .frequency = "regularly",
+        .frequency_id = "GeomVector$draw_panel-is_linear"
+      )
     }
     
     # initialize grob list

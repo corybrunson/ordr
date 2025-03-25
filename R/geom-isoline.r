@@ -108,7 +108,10 @@ GeomIsoline <- ggproto(
     
     # allow only `by` or `num`, not both
     if (! is.null(params[["by"]]) && ! is.null(params[["num"]])) {
-      warning("Both `by` and `num` provided; ignoring `num`.")
+      rlang::warn(
+        "Both `by` and `num` provided; ignoring `num`.",
+        .frequency = "once", .frequency_id = "GeomIsoline$setup_params-by-num"
+      )
       params$num <- NULL
     } else if (is.null(params[["by"]]) && is.null(params[["num"]])) {
       params$num <- 6L
