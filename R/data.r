@@ -23,11 +23,11 @@
 #' @format A [tibble][tibble::tibble] with 68 cases and 16 variables:
 
 #' \describe{
-#'   \item{Site}{site at which sample was found}
-#'   \item{Anal}{analysis identifier}
-#'   \item{Context}{furnace identifier}
-#'   \item{Form}{type of sample}
-#'   \item{SiO2, TiO2, Al2O3, FeO, MnO, MgO, CaO, Na2O, K2O, P2O5, Cl, SO3}{
+#'   \item{`Site`}{site at which sample was found}
+#'   \item{`Anal`}{analysis identifier}
+#'   \item{`Context`}{furnace identifier}
+#'   \item{`Form`}{type of sample}
+#'   \item{`SiO2, TiO2, Al2O3, FeO, MnO, MgO, CaO, Na2O, K2O, P2O5, Cl, SO3`}{
 #'         normalized weight percent oxide of each component}
 #' }
 
@@ -51,19 +51,19 @@ NULL
 #' @format A [tibble][tibble::tibble] of 13 variables on 612 cases:
 
 #' \describe{
-#'   \item{year}{year of rankings}
-#'   \item{institution}{institution of higher learning}
-#'   \item{size}{size category of institution}
-#'   \item{focus}{subject range of institution}
-#'   \item{res}{research intensity of institution}
-#'   \item{age}{age classification of institution}
-#'   \item{status}{status of institution}
-#'   \item{rk_academic}{rank by academic reputation}
-#'   \item{rk_employer}{rank by employer reputation}
-#'   \item{rk_ratio}{rank by faculty--student ratio}
-#'   \item{rk_citations}{rank by citations per faculty}
-#'   \item{rk_intl_faculty}{rank by international faculty ratio}
-#'   \item{rk_intl_students}{rank by international student ratio}
+#'   \item{`year`}{year of rankings}
+#'   \item{`institution`}{institution of higher learning}
+#'   \item{`size`}{size category of institution}
+#'   \item{`focus`}{subject range of institution}
+#'   \item{`res`}{research intensity of institution}
+#'   \item{`age`}{age classification of institution}
+#'   \item{`status`}{status of institution}
+#'   \item{`rk_academic`}{rank by academic reputation}
+#'   \item{`rk_employer`}{rank by employer reputation}
+#'   \item{`rk_ratio`}{rank by faculty--student ratio}
+#'   \item{`rk_citations`}{rank by citations per faculty}
+#'   \item{`rk_intl_faculty`}{rank by international faculty ratio}
+#'   \item{`rk_intl_students`}{rank by international student ratio}
 #' }
 
 #' @example inst/examples/ex-data-qswur.r

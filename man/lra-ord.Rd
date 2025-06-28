@@ -50,14 +50,14 @@ assigned to the rows while \code{1 - scale} is assigned to the columns.}
 \value{
 Given an \eqn{n * p} data matrix and setting \eqn{r=min(n,p)},
 \code{lra()} returns a list of class \code{"lra"} containing three elements:
-\itemize{
-\item{sv}{The \eqn{r-1} singular values}
-\item{row.coords}{The \eqn{n * (r-1)} matrix
+\describe{
+\item{\code{sv}}{The \eqn{r-1} singular values}
+\item{\code{row.coords}}{The \eqn{n * (r-1)} matrix
 of row standard coordinates.}
-\item{column.coords}{The \eqn{p * (r-1)} matrix
+\item{\code{column.coords}}{The \eqn{p * (r-1)} matrix
 of column standard coordinates.}
-\item{row.weights}{The weights used to scale the row coordinates.}
-\item{column.weights}{The weights used to scale the column coordinates.}
+\item{\code{row.weights}}{The weights used to scale the row coordinates.}
+\item{\code{column.weights}}{The weights used to scale the column coordinates.}
 }
 }
 \description{
