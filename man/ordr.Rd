@@ -103,3 +103,20 @@ Orlov K (2015) \emph{Answer to} "PCA and Correspondence analysis in their relati
 to Biplot". CrossValidated, accessed 2019-07-12.
 \url{https://stats.stackexchange.com/a/141755/68743}
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/corybrunson/ordr}
+  \item Report bugs at \url{https://github.com/corybrunson/ordr/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Jason Cory Brunson \email{cornelioid@gmail.com} (\href{https://orcid.org/0000-0003-3126-9494}{ORCID})
+
+Other contributors:
+\itemize{
+  \item Emily Paul \email{erpb.71@gmail.com} [contributor]
+}
+
+}

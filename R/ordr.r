@@ -79,10 +79,9 @@
 #' @template ref-greenacre2010
 #' @template ref-orlov2015
 
-#' @docType package
 #' @name ordr
 #' @aliases ordr-package
-NULL
+"_PACKAGE"
 
 if (getRversion() >= "2.15.1") utils::globalVariables(c(
   "."

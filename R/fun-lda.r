@@ -386,6 +386,8 @@ predict.lda_ord <- function(object, newdata, prior = object$prior, dimen,
   list(class = cl, posterior = posterior, x = x[, 1L:dimen, drop = FALSE])
 }
 
+#' @rdname lda-ord
+#' @export
 model.frame.lda_ord <- function(formula, ...)
 {
   oc <- formula$call
