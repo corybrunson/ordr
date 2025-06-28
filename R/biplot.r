@@ -62,7 +62,7 @@
 #'   shared coordinates are mapped to, and inertia is conferred entirely onto
 #'   one matrix factor. **NB:** This option is only implemented for linear
 #'   techniques (ED, SVD, & PCA).
-#' @inheritParams ggplot2::coord_equal
+#' @inheritParams ggplot2::coord_cartesian
 #' @param axis.percents Whether to concatenate default axis labels with inertia
 #'   percentages.
 #' @param sec.axes Matrix factor character to specify a secondary set of axes.
@@ -109,8 +109,7 @@ ggbiplot <- function(
   if (! is.null(ordination)) {
     if (! ".element" %in% names(ordination))
       ordination$.element <- NA_character_
-    mapping <- c(mapping, aes(.element = !! rlang::sym(".element")))
-    class(mapping) <- "uneval"
+    mapping$.element <- {{ rlang::sym(".element") }}
   }
   
   axis.type <- match.arg(axis.type, c("interpolative", "predictive"))
@@ -200,9 +199,7 @@ ggbiplot <- function(
   )
   # `.matrix` aesthetic indicating whether to plot cases or variables
   if (! is.null(ordination)) {
-    .matrix_aes <- list(.matrix = rlang::quo(!! rlang::sym(".matrix")))
-    class(.matrix_aes) <- "uneval"
-    p$mapping <- c(p$mapping, .matrix_aes)
+    p$mapping$.matrix = {{ rlang::sym(".matrix") }}
   }
   
   # if `sec.axes` is specified, then add secondary axes
@@ -247,28 +244,21 @@ ensure_xy_aes <- function(ordination, mapping) {
     if (length(coords) < 2L) {
       stop("Ordination has too few coordinates; check `get_coord(<tbl_ord>)`.")
     }
-    mapping <- c(aes(y = !! coord_vars[[2]]), mapping)
+    mapping$y <- {{ coord_vars[[2L]] }}
   } else {
     if (is.numeric(mapping$y) && length(mapping$y) == 1) {
-      mapping <- c(
-        aes(y = !! coord_vars[[mapping$y]]),
-        mapping[setdiff(names(mapping), "y")]
-      )
+      mapping$y <- {{ coord_vars[[mapping$y]] }}
     }
   }
   
   if (is.null(mapping$x)) {
-    mapping <- c(aes(x = !! coord_vars[[1]]), mapping)
+    mapping$x <- {{ coord_vars[[1L]] }}
   } else {
     if (is.numeric(mapping$x) && length(mapping$x) == 1) {
-      mapping <- c(
-        aes(x = !! coord_vars[[mapping$x]]),
-        mapping[setdiff(names(mapping), "x")]
-      )
+      mapping$x <- {{ coord_vars[[mapping$x]] }}
     }
   }
   
-  class(mapping) <- "uneval"
   mapping
 }
 
@@ -288,16 +278,10 @@ scale_ord <- function(ordination, .m, mapping, scale) {
 #' @rdname ggbiplot
 #' @export
 ord_aes <- function(ordination, ...) {
-  # process all coordinate aesthetics
-  ord_aes <- lapply(
-    get_coord(ordination),
-    function(nm) rlang::quo(!! rlang::sym(nm))
-  )
-  names(ord_aes) <- paste0("..coord", seq_along(ord_aes))
-  # process other aesthetics
-  other_aes <- aes(...)
-  # concatenate aesthetics
-  aes <- c(ord_aes, other_aes)
-  class(aes) <- "uneval"
-  aes
+  coords <- get_coord(ordination)
+  mapping <- aes(...)
+  for (i in seq_along(coords)) {
+    mapping[[paste0("..coord", i)]] <- {{ rlang::sym(coords[[i]]) }}
+  }
+  mapping
 }
