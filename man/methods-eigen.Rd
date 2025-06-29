@@ -83,43 +83,30 @@ names. To facilitate downstream analysis, \code{\link[=eigen_ord]{eigen_ord()}} 
 column names indicating the integer index of each eigenvector.
 }
 \examples{
-# subset QS data to rank variables
-qs_ranks <- subset(
-  qswur_usa,
-  complete.cases(qswur_usa),
-  select = 8:13
-)
-head(qs_ranks)
-
-# eigendecomposition of Kendall correlation matrix
-qs_ranks \%>\%
-  cor(method = "kendall") \%>\%
-  eigen() \%>\%
-  print() -> qs_eigen
+# eigendecompose covariance matrix of ability tests
+gi_eigen <- eigen(ability.cov$cov)
 
 # recover eigenvectors
-get_rows(qs_eigen)
-identical(get_cols(qs_eigen), get_rows(qs_eigen))
+get_rows(gi_eigen)
+identical(get_cols(gi_eigen), get_rows(gi_eigen))
 
 # wrap as a 'tbl_ord'
-as_tbl_ord(qs_eigen)
+as_tbl_ord(gi_eigen)
 
-# same eigendecomposition, preserving row names and adding column names
-qs_ranks \%>\%
-  cor(method = "kendall") \%>\%
-  eigen_ord() \%>\%
-  print() -> qs_eigen
+# same eigendecomposition, preserving names
+gi_eigen <- eigen_ord(ability.cov$cov)
 
 # wrap as a 'tbl_ord' and augment with dimension names
-augment_ord(as_tbl_ord(qs_eigen))
+augment_ord(as_tbl_ord(gi_eigen))
 
 # decomposition returns pure eigenvectors
-get_conference(qs_eigen)
+get_conference(gi_eigen)
 }
 \seealso{
 Other methods for eigen-decomposition-based techniques: 
 \code{\link{methods-cmds}},
-\code{\link{methods-factanal}}
+\code{\link{methods-factanal}},
+\code{\link{methods-princomp}}
 
 Other models from the base package: 
 \code{\link{methods-svd}}

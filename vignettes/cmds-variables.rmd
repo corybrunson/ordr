@@ -17,12 +17,15 @@ knitr::opts_chunk$set(
 This vignette demonstrates that covariance and correlation data can be compressed and visualized using multidimensional scaling using the same principles and machinery as for distance and similarity data.
 I argue that these geometric representations have interpretative advantages over other methods and should be more widely used.
 
+
 ## dimension reduction of geometric data
 
-Because ordination is grounded in geometric data analysis, it is easiest and most straightforward on naturally geometric data. For example, the glucose and insulin data collected by [Reaven and Miller (1970)](https://link.springer.com/article/10.1007/BF00423145) consists of five continuous-valued measurements for each of 145 persons. Because the variables (measurements) have different scales, in order to represent the cases (persons) geometrically we must separately center and scale them. The most basic ordination method, principal components analysis (PCA), computes a singular value decomposition $X = U D V^\top$ of the centered and scaled data matrix $X \in \mathbb{R}^{n\times p}$:
+Because ordination is grounded in geometric data analysis, it is easiest and most straightforward on naturally geometric data. For example, the mineral compositional measurements analyzed by [Freestone, Gorin--Rosen, and Hughes (2000)](https://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&idt=1158762) consists of five primary (and several secondary) concentrations for each of 68 artifacts. While all the variables lie on the same (percentage) scale, they vary at different absolute rates; in order to represent the cases (artifacts) geometrically we might separately center and scale them. The most basic ordination method, principal components analysis (PCA), computes a singular value decomposition $X = U D V^\top$ of the centered and scaled data matrix $X \in \mathbb{R}^{n\times p}$:
 
-```{r diabetes pca}
-x <- scale(heplots::Diabetes[, -6L], center = TRUE, scale = TRUE)
+```{r glass pca}
+data(glass, package = "ordr")
+x <- scale(glass[, c("SiO2", "Al2O3", "FeO", "MgO", "CaO")],
+           center = TRUE, scale = TRUE)
 s <- svd(x)
 r <- length(s$d)
 ```
@@ -54,12 +57,12 @@ s.dist <- dist(s$u[, 1:2] %*% diag(s$d[1:2]))
 plot(
   x = as.vector(x.dist),
   y = as.vector(s.dist),
-  xlim = c(0, 8), ylim = c(0, 8),
+  xlim = c(0, 10), ylim = c(0, 10),
   asp = 1, pch = 19, cex = .5,
   xlab = "Case distances in centered and scaled data",
   ylab = "Case point distances in planar biplot"
 )
-lines(x = c(0, 8), y = c(0, 8))
+lines(x = c(0, 10), y = c(0, 10))
 ```
 
 In contrast, the variables are better understood through their correlations, which are approximately preserved by their standardized coordinates.
@@ -86,7 +89,6 @@ plot(
 )
 lines(x = c(-1, 1), y = c(-1, 1))
 ```
-
 
 
 ## multidimensional scaling of distance data
@@ -125,15 +127,14 @@ text(d.coord, labels = rownames(d), cex = .9)
 ```
 
 
-
 ## multidimensional scaling of covariance data
 
 The faithful approximation of inter-variable correlations by the angles between their coordinate vectors provides a dual CMDS procedure. Suppose we have data that consist not of distances between cases but of covariances $\operatorname{cov}(y_i,y_j),\ 1\leq i\leq j\leq p$ between variables. Again the data are coordinate-free, so PCA is inapplicable. But were the data derived from a (not necessarily centered or scaled) case--variable matrix $X$, then the covariance matrix $C=(\operatorname{cov}(y_i,y_j))$ would have been obtained as $C=\frac{1}{n}X^\top X$. This, up to scalar, is the matrix whose eigenvectors would be given by $V$ in the SVD $X = U D V^\top$. Therefore, we can obtain artificial coordinates for these variables that approximate what we know of their geometry---thinking of the variables as unknown vectors whose magnitudes and angles are encoded in $C$---via an eigendecomposition $C = V \Lambda V^\top$: Take $Y = V \Lambda^{1/2} \in \mathbb{R}^{p\times r}$, so that $Y^\top Y \approx C$.
 
-While covariances of the unscaled diabetes data are not meaningful, they can be used to validate the technique.
+While covariances of the unscaled glass measurements are not meaningful, they can be used to validate the technique.
 Again because the eigendecomposition is intrinsically ordered by variance, the first $r$ eigenvectors provide the most faithful $r$-dimensional approximation; i'll take $r=2$ in anticipation of a biplot:
 
-```{r multidimensional scaling of diabetes, fig.width=5.5}
+```{r multidimensional scaling of glass, fig.width=5.5}
 # covariances and standard deviations
 c <- cov(x)
 s <- diag(sqrt(diag(c)))
@@ -157,10 +158,10 @@ lines(x = range(c[lower.tri(c)]), y = range(c[lower.tri(c)]))
 Thus, whereas _CMDS of cases_ approximates distances, _CMDS of variables_ approximates covariances.
 This equips us with an analogous visualization technique for correlation data: Represent each variable $y_i$ as a unit vector $\hat{y}_i$ in such a way that their angle cosines $\cos\theta_{ij}$ equal their correlations $r_{ij}$, then project these vectors onto the plane in which their variance is maximized.
 This is exactly how variables are commonly represented in row-principal PCA biplots, by the equivalence of $V$ in the SVD $X = U D V^\top$ with $E$ in the eigendecomposition $X^\top X = E \Lambda E^\top$.
-Here is the result for the five physiological measurements of the adult cohort in the diabetes study:
+Here is the result for the five compositional measurements on the glass artifacts:
 
-```{r multidimensional scaling of diabetes plot, fig.width=7}
-c <- cor(heplots::Diabetes[, -6L])
+```{r multidimensional scaling of glass plot, fig.width=7}
+c <- cor(glass[, c("SiO2", "Al2O3", "FeO", "MgO", "CaO")])
 c.eigen <- eigen(c)
 c.coord <- c.eigen$vectors[, 1:2] %*% diag(sqrt(c.eigen$values[1:2]))
 plot(
@@ -171,10 +172,11 @@ arrows(0, 0, c.coord[, 1L], c.coord[, 2L])
 text(c.coord, labels = rownames(c), cex = .9)
 ```
 
-We can immediately see that the two tests of glucose level (fasting and not) are highly correlated, that they vary independently of relative weight, and that the two measures of insulin response (steady state plasma glucose and the insulin test) are similarly associated with relative weight but differentially associated with glucose level.
+We can immediately see that the concentrations of silica and ferrous oxide are highly correlated, that they are anticorrelated with that of quicklime, and that all of these vary independently (in the statistical sense) of those of aluminium oxide and magnesia, which are anticorrelated with each other.
 
 In this setting, we could have obtained this visualization directly from the case--variable data $X$, as in PCA.
 The technique becomes uniquely useful when we have correlations without underlying coordinates.
+
 
 ## use case: rankings of universities
 
@@ -189,7 +191,7 @@ A real-world example is provided by the [Quacquarelli Symonds World University R
 The subset `qswur_usa` installed with **ordr** include U.S.-based universities ranked in the years 2017--2020, [their classifications by QS](https://support.qs.com/hc/en-gb/articles/360021876820-QS-Institution-Classifications), and their six integer-valued rankings. (Scores used to generate the rankings are included with the QS data files but omitted from `qswur_usa`.)
 
 ```{r QS top university rankings}
-data(qswur_usa)
+data(qswur_usa, package = "ordr")
 print(qswur_usa)
 ```
 
@@ -266,8 +268,7 @@ c_eigen %>%
   ggbiplot() +
   theme_minimal() +
   geom_unit_circle() +
-  geom_rows_vector() +
-  geom_rows_text_radiate(aes(label = metric)) +
+  geom_rows_vector(aes(label = metric)) +
   scale_x_reverse(expand = expansion(add = .4)) +
   scale_y_continuous(expand = expansion(add = .3)) +
   ggtitle("Kendall correlations between university rankings",
@@ -295,8 +296,7 @@ c_eigen %>%
   ggbiplot(aes(x = 2, y = 3)) +
   theme_minimal() +
   geom_unit_circle() +
-  geom_rows_vector() +
-  geom_rows_text_radiate(aes(label = metric)) +
+  geom_rows_vector(aes(label = metric)) +
   scale_x_continuous(expand = expansion(add = .5)) +
   scale_y_continuous(expand = expansion(add = .5)) +
   ggtitle("Kendall correlations between university rankings",

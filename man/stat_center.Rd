@@ -14,9 +14,11 @@ stat_center(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
+  fun = NULL,
   fun.center = NULL,
   fun.min = NULL,
   fun.max = NULL,
+  fun.ord = NULL,
   fun.args = list()
 )
 
@@ -29,7 +31,9 @@ stat_star(
   inherit.aes = TRUE,
   ...,
   fun.data = NULL,
+  fun = NULL,
   fun.center = NULL,
+  fun.ord = NULL,
   fun.args = list()
 )
 }
@@ -54,14 +58,31 @@ the plot data. The return value must be a \code{data.frame}, and
 will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
-\item{geom}{The geometric object to use to display the data, either as a
-\code{ggproto} \code{Geom} subclass or as a string naming the geom stripped of the
-\code{geom_} prefix (e.g. \code{"point"} rather than \code{"geom_point"})}
+\item{geom}{The geometric object to use to display the data for this layer.
+When using a \verb{stat_*()} function to construct a layer, the \code{geom} argument
+can be used to override the default coupling between stats and geoms. The
+\code{geom} argument accepts the following:
+\itemize{
+\item A \code{Geom} ggproto subclass, for example \code{GeomPoint}.
+\item A string naming the geom. To give the geom as a string, strip the
+function name of the \code{geom_} prefix. For example, to use \code{geom_point()},
+give the geom as \code{"point"}.
+\item For more information and other ways to specify the geom, see the
+\link[ggplot2:layer_geoms]{layer geom} documentation.
+}}
 
-\item{position}{Position adjustment, either as a string naming the adjustment
-(e.g. \code{"jitter"} to use \code{position_jitter}), or the result of a call to a
-position adjustment function. Use the latter if you need to change the
-settings of the adjustment.}
+\item{position}{A position adjustment to use on the data for this layer. This
+can be used in various ways, including to prevent overplotting and
+improving the display. The \code{position} argument accepts the following:
+\itemize{
+\item The result of calling a position function, such as \code{position_jitter()}.
+This method allows for passing extra arguments to the position.
+\item A string naming the position adjustment. To give the position as a
+string, strip the function name of the \code{position_} prefix. For example,
+to use \code{position_jitter()}, give the position as \code{"jitter"}.
+\item For more information and other ways to specify the position, see the
+\link[ggplot2:layer_positions]{layer position} documentation.
+}}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -76,9 +97,21 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
-\item{fun.data, fun.center, fun.min, fun.max, fun.args}{Functions and arguments
-treated as in \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary()}}, with \code{fun.center}, \code{fun.min}, and
-\code{fun.max} behaving as \code{fun.y}, \code{fun.ymin}, and \code{fun.ymax}.}
+\item{fun.data}{A function that is given the complete data and should
+return a data frame with variables \code{ymin}, \code{y}, and \code{ymax}.}
+
+\item{fun.center}{Deprecated alias to \code{fun}.}
+
+\item{fun.min, fun, fun.max}{Alternatively, supply three individual
+functions that are each passed a vector of values and should return a
+single number.}
+
+\item{fun.ord}{Alternatively to the \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary_bin()}} parameters,
+supply a summary function that takes a matrix as input and returns a named
+column summary vector. Overridden by \code{fun.data} and \code{fun}, cannot be used
+together with \code{fun.min} and \code{fun.max}.}
+
+\item{fun.args}{Optional additional arguments passed on to the functions.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.
@@ -101,49 +134,49 @@ points for rows and arrows for columns.
 
 \section{Ordination aesthetics}{
 
-The convenience function \code{\link[=ord_aes]{ord_aes()}} can be used to incorporate all
-coordinates of the ordination model into a statistical transformation. It
-maps the coordinates to the custom aesthetics \code{..coord1}, \code{..coord2}, etc.
+This statistical transformation is compatible with the convenience function
+\code{\link[=ord_aes]{ord_aes()}}.
 
-Some transformations, e.g. \code{\link[=stat_center]{stat_center()}}, are commutative with projection
-to the 'x' and 'y' coordinates. If they detect aesthetics of the form
-\verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and \code{y}
-while any remaining are ignored.
+Some transformations (e.g. \code{\link[=stat_center]{stat_center()}}) commute with projection to the
+lower (1 or 2)-dimensional biplot space. If they detect aesthetics of the
+form \verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and
+\code{y} while any remaining are ignored.
 
-Other transformations, e.g. \code{\link[=stat_spantree]{stat_spantree()}}, yield different results in a
-planar biplot when they are computer before or after projection. If such a
-stat layer detects these aesthetics, then the lot of them are used in the
-transformation.
+Other transformations (e.g. \code{\link[=stat_spantree]{stat_spantree()}}) yield different results in a
+lower-dimensional biplot when they are computed before versus after
+projection. If the stat layer detects these aesthetics, then the
+transformation is performed before projection, and the results in the first
+two dimensions are returned as \code{x} and \code{y}.
 
-In either case, the stat layer returns a data frame with position aesthetics
-\code{x} and \code{y}.
+A small number of transformations (\code{\link[=stat_rule]{stat_rule()}}) are incompatible with
+ordination aesthetics but will accept \code{ord_aes()} without warning.
+}
+
+\section{Computed variables}{
+ These are calculated during the statistical
+transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluation}.
+\describe{
+\item{\verb{xmin,ymin,xmax,ymax}}{results of \verb{fun.min,fun.max} applied to \verb{x,y}}
+}
 }
 
 \examples{
-# scaled PCA of Anderson iris measurements
-iris[, -5] \%>\%
-  princomp(cor = TRUE) \%>\%
-  as_tbl_ord() \%>\%
-  mutate_rows(species = iris$Species) \%>\%
-  print() -> iris_pca
+ggplot(mpg, aes(x = displ, y = cty, shape = drv)) +
+  geom_point() +
+  stat_center(fun = "median", size = 5, alpha = .5)
 
-# row-principal biplot with centroid-based stars
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  stat_rows_star(alpha = .5, fun.center = "mean") +
-  geom_rows_point(alpha = .5) +
-  stat_rows_center(fun.center = "mean", size = 4, shape = 1L) +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris measurements",
-    "Segments connect each observation to its within-species centroid"
-  )
+ggplot(mpg, aes(x = displ, y = cty, shape = drv, linetype = drv)) +
+  stat_center(size = 3) +
+  stat_star()
 }
 \seealso{
 Other stat layers: 
+\code{\link{stat_bagplot}()},
 \code{\link{stat_chull}()},
 \code{\link{stat_cone}()},
+\code{\link{stat_depth}()},
+\code{\link{stat_projection}()},
+\code{\link{stat_rule}()},
 \code{\link{stat_scale}()},
 \code{\link{stat_spantree}()}
 }

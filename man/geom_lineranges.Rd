@@ -48,15 +48,31 @@ the plot data. The return value must be a \code{data.frame}, and
 will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
-\item{stat}{The statistical transformation to use on the data for this
-layer, either as a \code{ggproto} \code{Geom} subclass or as a string naming the
-stat stripped of the \code{stat_} prefix (e.g. \code{"count"} rather than
-\code{"stat_count"})}
+\item{stat}{The statistical transformation to use on the data for this layer.
+When using a \verb{geom_*()} function to construct a layer, the \code{stat}
+argument can be used the override the default coupling between geoms and
+stats. The \code{stat} argument accepts the following:
+\itemize{
+\item A \code{Stat} ggproto subclass, for example \code{StatCount}.
+\item A string naming the stat. To give the stat as a string, strip the
+function name of the \code{stat_} prefix. For example, to use \code{stat_count()},
+give the stat as \code{"count"}.
+\item For more information and other ways to specify the stat, see the
+\link[ggplot2:layer_stats]{layer stat} documentation.
+}}
 
-\item{position}{Position adjustment, either as a string naming the adjustment
-(e.g. \code{"jitter"} to use \code{position_jitter}), or the result of a call to a
-position adjustment function. Use the latter if you need to change the
-settings of the adjustment.}
+\item{position}{A position adjustment to use on the data for this layer. This
+can be used in various ways, including to prevent overplotting and
+improving the display. The \code{position} argument accepts the following:
+\itemize{
+\item The result of calling a position function, such as \code{position_jitter()}.
+This method allows for passing extra arguments to the position.
+\item A string naming the position adjustment. To give the position as a
+string, strip the function name of the \code{position_} prefix. For example,
+to use \code{position_jitter()}, give the position as \code{"jitter"}.
+\item For more information and other ways to specify the position, see the
+\link[ggplot2:layer_positions]{layer position} documentation.
+}}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
@@ -80,6 +96,13 @@ A ggproto \link[ggplot2:layer]{layer}.
 \code{geom_lineranges()} renders horizontal and vertical intervals
 for a specified subject or variable; \code{geom_pointranges()} additionally
 renders a point at their crosshairs.
+}
+\details{
+The \code{geom_*ranges()} layers are shortcuts for equivalently-specified
+pairs of horizontal and vertical
+\code{\link[ggplot2:geom_linerange]{ggplot2::geom_*range()}} layers. Rather than
+\code{\link[ggplot2:stat_identity]{ggplot2::stat_identity()}}, they default to \code{\link[=stat_center]{stat_center()}}, so that in
+practice the summary values do not need to be manually passed.
 }
 \section{Biplot layers}{
 
@@ -115,33 +138,36 @@ aesthetics (required aesthetics are in bold):
 }
 
 \examples{
-# compute log-ratio analysis of Freestone primary class composition measurements
-glass \%>\%
-  ordinate(cols = c(SiO2, Al2O3, CaO, FeO, MgO),
-           model = lra, compositional = TRUE) \%>\%
-  confer_inertia("rows") \%>\%
-  print() -> glass_lra
+ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
+  geom_point(alpha = .25) +
+  geom_lineranges()
 
-# row-principal biplot with ordinate-wise standard deviations
-glass_lra \%>\%
-  ggbiplot(aes(color = Site), sec.axes = "cols", scale.factor = .05) +
-  theme_biplot() +
-  scale_color_brewer(type = "qual", palette = 6) +
-  geom_cols_text(stat = "chull", aes(label = name), color = "#444444") +
-  geom_rows_lineranges(fun.data = mean_sdl, linewidth = .75) +
-  geom_rows_point(alpha = .5) +
-  ggtitle(
-    "Row-principal LRA biplot of Freestone glass measurements",
-    "Ranges 2 sample standard deviations from centroids"
-  )
+ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
+  geom_point(alpha = .25) +
+  geom_pointranges(fun.data = mean_sdl, shape = "circle open")
+
+mpg |> 
+  aggregate(
+    x = cbind(displ, hwy) ~ 0,
+    FUN = \(z) c(min = min(z), med = median(z), max = max(z))
+  ) |> 
+  do.call(what = data.frame) |> 
+  ggplot(aes(displ.med, hwy.med)) +
+  geom_pointranges(
+    stat = "identity",
+    aes(xmin = displ.min, xmax = displ.max, ymin = hwy.min, ymax = hwy.max)
+  ) +
+  geom_point(data = mpg, aes(displ, hwy), alpha = .5)
 }
 \seealso{
 Other geom layers: 
 \code{\link{geom_axis}()},
+\code{\link{geom_bagplot}()},
+\code{\link{geom_interpolation}()},
 \code{\link{geom_isoline}()},
 \code{\link{geom_origin}()},
+\code{\link{geom_rule}()},
 \code{\link{geom_text_radiate}()},
-\code{\link{geom_unit_circle}()},
 \code{\link{geom_vector}()}
 }
 \concept{geom layers}

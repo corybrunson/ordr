@@ -17,6 +17,7 @@ devtools::load_all()
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN](http://www.r-pkg.org/badges/version/ordr)](https://cran.r-project.org/package=ordr)
 <!-- badges: end -->
 
 **ordr** integrates ordination analysis and biplot visualization into [**tidyverse**](https://github.com/tidyverse/tidyverse) workflows.
@@ -58,7 +59,13 @@ Instead, **ordr** provides a streamlined process by which the models output by t
 
 ### installation
 
-**ordr** remains under development but is approaching a CRAN release. For now, it can be installed from the (default) `main` branch using [**remotes**](https://github.com/r-lib/remotes):
+**ordr** is now on CRAN and can be installed using base R:
+
+```{r install release, eval=FALSE}
+install.packages("ordr")
+```
+
+The development version can be installed from the (default) `main` branch using [**remotes**](https://github.com/r-lib/remotes):
 
 ```{r install, eval=FALSE}
 remotes::install_github("corybrunson/ordr")
@@ -91,8 +98,7 @@ Additional annotations can be added using several row- and column-specific **dpl
 iris_meta <- data.frame(
   Species = c("setosa", "versicolor", "virginica"),
   Colony = c(1L, 1L, 2L),
-  Cytotype = c("diploid", "hexaploid", "tetraploid"),
-  Ploidy = c(2L, 6L, 4L)
+  Cytotype = c("diploid", "hexaploid", "tetraploid")
 )
 (iris_pca <- left_join_rows(iris_pca, iris_meta, by = "Species"))
 ```
@@ -114,8 +120,7 @@ Following **ggplot2**, the `fortify()` method row-binds the factor tibbles with 
 ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_ellipse(aes(color = Species), alpha = .5, level = .99) +
-  geom_cols_vector() +
-  geom_cols_text_radiate(aes(label = name)) +
+  geom_cols_vector(aes(label = name)) +
   expand_limits(y = c(-3.5, NA)) +
   ggtitle("PCA of Anderson's iris measurements",
           "99% confidence ellipses; variables use top & right axes")
@@ -123,19 +128,20 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
 
 [^text-radiate]: The radiating text geom, like several other features, is adapted from the **ggbiplot** package.
 
-When variables are represented in standard coordinates, as typically in PCA, their rules can be rescaled to yield a predictive biplot:[^predictive]
+When variables are represented in standard coordinates, as typically in PCA, their rules can be rescaled to yield a predictive biplot.[^predictive]
+For legibility, the axes are limited to the data range and offset from the origin:
 
 [^predictive]: This is an experimental feature only available for linear methods, namely eigendecomposition, singular value decomposition, and principal components analysis.
 
 ```{r predictive biplot}
 ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
-  theme_biplot() +
+  theme_scaffold() +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_center(
     aes(color = Species, shape = Species),
     size = 5, alpha = .5, fun.data = mean_se
   ) +
-  geom_cols_axis(aes(label = name, center = center, scale = scale)) +
+  stat_cols_rule(aes(label = name, center = center, scale = scale)) +
   ggtitle("Predictive biplot of Anderson's iris measurements",
           "Project a marker onto an axis to approximate its measurement")
 aggregate(iris[, 1:4], by = iris[, "Species", drop = FALSE], FUN = mean)
@@ -155,13 +161,22 @@ Please try to follow the
 [contributing guidelines](https://github.com/corybrunson/ordr/blob/main/CONTRIBUTING.md) and respect the [Code of
 Conduct](https://github.com/corybrunson/ordr/blob/main/CODE_OF_CONDUCT.md).
 
-### inspiration
+### inspirations
 
 This package was originally inspired by the **ggbiplot** extension developed by [Vincent Q. Vu](https://github.com/vqv/ggbiplot), [Richard J Telford](https://github.com/richardjtelford/ggbiplot), and [Vilmantas Gegzna](https://github.com/forked-packages/ggbiplot), among others. It probably first brought biplots into the **tidyverse** framework.
 The motivation to unify a variety of ordination methods came from several books and articles by [Michael Greenacre](https://www.fbbva.es/microsite/multivariate-statistics/resources.html), in particular [_Biplots in Practice_](https://www.fbbva.es/microsite/multivariate-statistics/resources.html#biplots).
 Several answers at CrossValidated, in particular by [amoeba](https://stats.stackexchange.com/users/28666/amoeba) and [ttnphns](https://stats.stackexchange.com/users/3277/ttnphns), provided theoretical insights and informed design choices.
-Thomas Lin Pedersen's [**tidygraph**](https://github.com/thomasp85/tidygraph) prequel to **ggraph** finally induced the shift from the downstream generation of scatterplots to the upstream handling and manipulating of ordination models.
-Additional design elements and features have been informed by the monograph [_Biplots_](https://www.google.com/books/edition/Biplots/lTxiedIxRpgC) and the textbook [_Understanding Biplots_](https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550) by John C. Gower, David J. Hand, Sugnet Gardner--Lubbe, and Niel J. Le Roux, and by the volume [_Principal Components Analysis_](https://link.springer.com/book/10.1007/b98835) by I. T. Jolliffe.
+Thomas Lin Pedersen's [**tidygraph**](https://github.com/thomasp85/tidygraph) prequel to **ggraph** finally induced the shift from the downstream generation of scatterplots to the upstream handling and manipulating of models.
+Additional design elements and features have been informed by the monograph [_Biplots_](https://www.google.com/books/edition/Biplots/lTxiedIxRpgC) and the textbook [_Understanding Biplots_](https://www.wiley.com/en-us/Understanding+Biplots-p-9781119972907) by John C. Gower, David J. Hand, Sugnet Gardner--Lubbe, and Niël J. Le Roux, and by the volume [_Principal Components Analysis_](https://link.springer.com/book/10.1007/b98835) by I. T. Jolliffe.
 
-### notes
+### exposition
 
+This work was presented ([slideshow PDF](https://raw.githubusercontent.com/corybrunson/tidy-factor/main/tidy-factor-x/tidy-factor-x.pdf)) at an invited panel on [New Developments in Graphing Multivariate Data](https://ww2.amstat.org/meetings/jsm/2022/onlineprogram/ActivityDetails.cfm?SessionID=222053) at the [Joint Statistical Meetings](https://ww2.amstat.org/meetings/jsm/2022/), on 2022 August 8 in Washington DC.
+I'm grateful to Joyce Robbins for the invitation and for organizing such a fun first experience, to Naomi Robbins for chairing the event, and to my co-panelists Ursula Laa and Hengrui Luo for sharing and sparking such exciting ideas and conversations.
+An update was presented to the [ggplot2 extenders](https://teunbrand.github.io/ggplot-extension-club/), which elicited additional valuable feedback.
+
+### resources
+
+Development of this package benefitted from the use of equipment and the
+support of colleagues at [UConn Health](https://health.uconn.edu/) and
+at [UF Health](https://ufhealth.org/).

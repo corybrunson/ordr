@@ -8,6 +8,12 @@
 \alias{geom_cols_path}
 \alias{geom_rows_polygon}
 \alias{geom_cols_polygon}
+\alias{geom_rows_contour}
+\alias{geom_cols_contour}
+\alias{geom_rows_density_2d}
+\alias{geom_cols_density_2d}
+\alias{geom_rows_density_2d_filled}
+\alias{geom_cols_density_2d_filled}
 \alias{geom_rows_text}
 \alias{geom_cols_text}
 \alias{geom_rows_label}
@@ -18,12 +24,18 @@
 \alias{geom_cols_label_repel}
 \alias{geom_rows_axis}
 \alias{geom_cols_axis}
+\alias{geom_rows_bagplot}
+\alias{geom_cols_bagplot}
+\alias{geom_rows_interpolation}
+\alias{geom_cols_interpolation}
 \alias{geom_rows_lineranges}
 \alias{geom_cols_lineranges}
 \alias{geom_rows_pointranges}
 \alias{geom_cols_pointranges}
 \alias{geom_rows_isoline}
 \alias{geom_cols_isoline}
+\alias{geom_rows_rule}
+\alias{geom_cols_rule}
 \alias{geom_rows_text_radiate}
 \alias{geom_cols_text_radiate}
 \alias{geom_rows_vector}
@@ -106,6 +118,94 @@ geom_cols_polygon(
   inherit.aes = TRUE
 )
 
+geom_rows_contour(
+  mapping = NULL,
+  data = NULL,
+  stat = "contour",
+  position = "identity",
+  ...,
+  bins = NULL,
+  binwidth = NULL,
+  breaks = NULL,
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 10,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_contour(
+  mapping = NULL,
+  data = NULL,
+  stat = "contour",
+  position = "identity",
+  ...,
+  bins = NULL,
+  binwidth = NULL,
+  breaks = NULL,
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 10,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_rows_density_2d(
+  mapping = NULL,
+  data = NULL,
+  stat = "density_2d",
+  position = "identity",
+  ...,
+  contour_var = "density",
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 10,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_density_2d(
+  mapping = NULL,
+  data = NULL,
+  stat = "density_2d",
+  position = "identity",
+  ...,
+  contour_var = "density",
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 10,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_rows_density_2d_filled(
+  mapping = NULL,
+  data = NULL,
+  stat = "density_2d_filled",
+  position = "identity",
+  ...,
+  contour_var = "density",
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_density_2d_filled(
+  mapping = NULL,
+  data = NULL,
+  stat = "density_2d_filled",
+  position = "identity",
+  ...,
+  contour_var = "density",
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
 geom_rows_text(
   mapping = NULL,
   data = NULL,
@@ -116,6 +216,7 @@ geom_rows_text(
   nudge_x = 0,
   nudge_y = 0,
   check_overlap = FALSE,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -131,6 +232,7 @@ geom_cols_text(
   nudge_x = 0,
   nudge_y = 0,
   check_overlap = FALSE,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -148,6 +250,7 @@ geom_rows_label(
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
   label.size = 0.25,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -165,6 +268,7 @@ geom_cols_label(
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
   label.size = 0.25,
+  size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -302,6 +406,26 @@ geom_rows_axis(
   text_dodge = 0.03,
   label_dodge = 0.03,
   ...,
+  axis.colour = NULL,
+  axis.color = NULL,
+  axis.alpha = NULL,
+  label.angle = 0,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  tick.linewidth = 0.25,
+  tick.colour = NULL,
+  tick.color = NULL,
+  tick.alpha = NULL,
+  text.size = 2.6,
+  text.angle = 0,
+  text.hjust = 0.5,
+  text.vjust = 0.5,
+  text.family = NULL,
+  text.fontface = NULL,
+  text.colour = NULL,
+  text.color = NULL,
+  text.alpha = NULL,
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
@@ -323,8 +447,132 @@ geom_cols_axis(
   text_dodge = 0.03,
   label_dodge = 0.03,
   ...,
+  axis.colour = NULL,
+  axis.color = NULL,
+  axis.alpha = NULL,
+  label.angle = 0,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  tick.linewidth = 0.25,
+  tick.colour = NULL,
+  tick.color = NULL,
+  tick.alpha = NULL,
+  text.size = 2.6,
+  text.angle = 0,
+  text.hjust = 0.5,
+  text.vjust = 0.5,
+  text.family = NULL,
+  text.fontface = NULL,
+  text.colour = NULL,
+  text.color = NULL,
+  text.alpha = NULL,
   parse = FALSE,
   check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_rows_bagplot(
+  mapping = NULL,
+  data = NULL,
+  stat = "bagplot",
+  position = "identity",
+  ...,
+  bag.linewidth = sync(),
+  bag.linetype = sync(),
+  bag.colour = "black",
+  bag.color = NULL,
+  bag.fill = sync(),
+  bag.alpha = NA,
+  median.shape = 21L,
+  median.stroke = sync(),
+  median.size = 5,
+  median.colour = sync(),
+  median.color = NULL,
+  median.fill = "white",
+  median.alpha = NA,
+  fence.linewidth = 0.25,
+  fence.linetype = 0L,
+  fence.colour = sync(),
+  fence.color = NULL,
+  fence.fill = sync(),
+  fence.alpha = 0.25,
+  outlier.shape = sync(),
+  outlier.stroke = sync(),
+  outlier.size = sync(),
+  outlier.colour = sync(),
+  outlier.color = NULL,
+  outlier.fill = NA,
+  outlier.alpha = NA,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_bagplot(
+  mapping = NULL,
+  data = NULL,
+  stat = "bagplot",
+  position = "identity",
+  ...,
+  bag.linewidth = sync(),
+  bag.linetype = sync(),
+  bag.colour = "black",
+  bag.color = NULL,
+  bag.fill = sync(),
+  bag.alpha = NA,
+  median.shape = 21L,
+  median.stroke = sync(),
+  median.size = 5,
+  median.colour = sync(),
+  median.color = NULL,
+  median.fill = "white",
+  median.alpha = NA,
+  fence.linewidth = 0.25,
+  fence.linetype = 0L,
+  fence.colour = sync(),
+  fence.color = NULL,
+  fence.fill = sync(),
+  fence.alpha = 0.25,
+  outlier.shape = sync(),
+  outlier.stroke = sync(),
+  outlier.size = sync(),
+  outlier.colour = sync(),
+  outlier.color = NULL,
+  outlier.fill = NA,
+  outlier.alpha = NA,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_rows_interpolation(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  new_data = NULL,
+  type = c("centroid", "sequence"),
+  arrow = default_arrow,
+  ...,
+  point.fill = NA,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_interpolation(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  new_data = NULL,
+  type = c("centroid", "sequence"),
+  arrow = default_arrow,
+  ...,
+  point.fill = NA,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -382,8 +630,13 @@ geom_rows_isoline(
   isoline_text = TRUE,
   by = NULL,
   num = NULL,
-  label_dodge = 0.03,
+  text_dodge = 0.03,
   ...,
+  text.size = 3,
+  text.angle = 0,
+  text.colour = NULL,
+  text.color = NULL,
+  text.alpha = NULL,
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
@@ -399,8 +652,97 @@ geom_cols_isoline(
   isoline_text = TRUE,
   by = NULL,
   num = NULL,
+  text_dodge = 0.03,
+  ...,
+  text.size = 3,
+  text.angle = 0,
+  text.colour = NULL,
+  text.color = NULL,
+  text.alpha = NULL,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_rows_rule(
+  mapping = NULL,
+  data = NULL,
+  stat = "rule",
+  position = "identity",
+  axis_labels = TRUE,
+  axis_ticks = TRUE,
+  axis_text = TRUE,
+  by = NULL,
+  num = NULL,
+  snap_rule = TRUE,
+  tick_length = 0.025,
+  text_dodge = 0.03,
   label_dodge = 0.03,
   ...,
+  axis.colour = NULL,
+  axis.color = NULL,
+  axis.alpha = NULL,
+  label.angle = 0,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  tick.linewidth = 0.25,
+  tick.colour = NULL,
+  tick.color = NULL,
+  tick.alpha = NULL,
+  text.size = 2.6,
+  text.angle = 0,
+  text.hjust = 0.5,
+  text.vjust = 0.5,
+  text.family = NULL,
+  text.fontface = NULL,
+  text.colour = NULL,
+  text.color = NULL,
+  text.alpha = NULL,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_rule(
+  mapping = NULL,
+  data = NULL,
+  stat = "rule",
+  position = "identity",
+  axis_labels = TRUE,
+  axis_ticks = TRUE,
+  axis_text = TRUE,
+  by = NULL,
+  num = NULL,
+  snap_rule = TRUE,
+  tick_length = 0.025,
+  text_dodge = 0.03,
+  label_dodge = 0.03,
+  ...,
+  axis.colour = NULL,
+  axis.color = NULL,
+  axis.alpha = NULL,
+  label.angle = 0,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  tick.linewidth = 0.25,
+  tick.colour = NULL,
+  tick.color = NULL,
+  tick.alpha = NULL,
+  text.size = 2.6,
+  text.angle = 0,
+  text.hjust = 0.5,
+  text.vjust = 0.5,
+  text.family = NULL,
+  text.fontface = NULL,
+  text.colour = NULL,
+  text.color = NULL,
+  text.alpha = NULL,
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
@@ -440,7 +782,15 @@ geom_rows_vector(
   stat = "identity",
   position = "identity",
   arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
   ...,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  parse = FALSE,
+  check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -452,7 +802,15 @@ geom_cols_vector(
   stat = "identity",
   position = "identity",
   arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
   ...,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  parse = FALSE,
+  check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -479,15 +837,31 @@ the plot data. The return value must be a \code{data.frame}, and
 will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
-\item{stat}{The statistical transformation to use on the data for this
-layer, either as a \code{ggproto} \code{Geom} subclass or as a string naming the
-stat stripped of the \code{stat_} prefix (e.g. \code{"count"} rather than
-\code{"stat_count"})}
+\item{stat}{The statistical transformation to use on the data for this layer.
+When using a \verb{geom_*()} function to construct a layer, the \code{stat}
+argument can be used the override the default coupling between geoms and
+stats. The \code{stat} argument accepts the following:
+\itemize{
+\item A \code{Stat} ggproto subclass, for example \code{StatCount}.
+\item A string naming the stat. To give the stat as a string, strip the
+function name of the \code{stat_} prefix. For example, to use \code{stat_count()},
+give the stat as \code{"count"}.
+\item For more information and other ways to specify the stat, see the
+\link[ggplot2:layer_stats]{layer stat} documentation.
+}}
 
-\item{position}{Position adjustment, either as a string naming the adjustment
-(e.g. \code{"jitter"} to use \code{position_jitter}), or the result of a call to a
-position adjustment function. Use the latter if you need to change the
-settings of the adjustment.}
+\item{position}{A position adjustment to use on the data for this layer. This
+can be used in various ways, including to prevent overplotting and
+improving the display. The \code{position} argument accepts the following:
+\itemize{
+\item The result of calling a position function, such as \code{position_jitter()}.
+This method allows for passing extra arguments to the position.
+\item A string naming the position adjustment. To give the position as a
+string, strip the function name of the \code{position_} prefix. For example,
+to use \code{position_jitter()}, give the position as \code{"jitter"}.
+\item For more information and other ways to specify the position, see the
+\link[ggplot2:layer_positions]{layer position} documentation.
+}}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
@@ -517,6 +891,25 @@ being drawn (using the \code{subgroup} aesthetic) this argument defines how the
 hole coordinates are interpreted. See the examples in \code{\link[grid:grid.path]{grid::pathGrob()}} for
 an explanation.}
 
+\item{bins}{Number of contour bins. Overridden by \code{breaks}.}
+
+\item{binwidth}{The width of the contour bins. Overridden by \code{bins}.}
+
+\item{breaks}{One of:
+\itemize{
+\item Numeric vector to set the contour breaks
+\item A function that takes the range of the data and binwidth as input
+and returns breaks as output. A function can be created from a formula
+(e.g. ~ fullseq(.x, .y)).
+}
+
+Overrides \code{binwidth} and \code{bins}. By default, this is a vector of length
+ten with \code{\link[=pretty]{pretty()}} breaks.}
+
+\item{contour_var}{Character string identifying the variable to contour
+by. Can be one of \code{"density"}, \code{"ndensity"}, or \code{"count"}. See the section
+on computed variables for details.}
+
 \item{parse}{If \code{TRUE}, the labels will be parsed into expressions and
 displayed as described in \code{?plotmath}.}
 
@@ -529,6 +922,10 @@ same layer will not be plotted. \code{check_overlap} happens at draw time and in
 the order of the data. Therefore data should be arranged by the label
 column before calling \code{geom_text()}. Note that this argument is not
 supported by \code{geom_label()}.}
+
+\item{size.unit}{How the \code{size} aesthetic is interpreted: as millimetres
+(\code{"mm"}, default), points (\code{"pt"}), centimetres (\code{"cm"}), inches (\code{"in"}),
+or picas (\code{"pc"}).}
 
 \item{label.padding}{Amount of padding around label. Defaults to 0.25 lines.}
 
@@ -560,7 +957,9 @@ Defaults to 0.5.}
 \item{max.iter}{Maximum number of iterations to try to resolve overlaps.
 Defaults to 10000.}
 
-\item{max.overlaps}{Exclude text labels that overlap too many things.
+\item{max.overlaps}{Exclude text labels when they overlap too many other
+things. For each text label, we count how many other text labels or other
+data points it overlaps, and exclude the text label if it has too many overlaps.
 Defaults to 10.}
 
 \item{xlim, ylim}{Limits for the x and y axes. Text labels will be constrained
@@ -585,14 +984,53 @@ one.}
 \item{tick_length}{Numeric; the length of the tick marks, as a proportion of
 the minimum of the plot width and height.}
 
-\item{text_dodge}{Numeric; the orthogonal distance of the text from the axis,
-as a proportion of the minimum of the plot width and height.}
+\item{text_dodge}{Numeric; the orthogonal distance of tick mark text from the
+axis, as a proportion of the minimum of the plot width and height.}
 
-\item{label_dodge}{Numeric; the orthogonal distance of the text from the axis
-or isoline, as a proportion of the minimum of the plot width and height.}
+\item{label_dodge}{Numeric; the orthogonal distance of the axis label from
+the axis, as a proportion of the minimum of the plot width and height.}
+
+\item{axis.colour, axis.color, axis.alpha}{Default aesthetics for axes. Set to
+NULL to inherit from the data's aesthetics.}
+
+\item{label.angle, label.colour, label.color, label.alpha}{Default aesthetics
+for labels. Set to NULL to inherit from the data's aesthetics.}
+
+\item{tick.linewidth, tick.colour, tick.color, tick.alpha}{Default aesthetics
+for tick marks. Set to NULL to inherit from the data's aesthetics.}
+
+\item{text.size, text.angle, text.hjust, text.vjust, text.family, text.fontface, text.colour, text.color, text.alpha}{Default aesthetics for tick mark labels. Set to NULL to inherit from the
+data's aesthetics.}
+
+\item{bag.linetype, bag.linewidth, bag.colour, bag.color, bag.fill, bag.alpha}{Default aesthetics for bags. Set to \code{\link[=sync]{sync()}} to inherit from the data's
+aesthetics or to \code{NULL} to use the data's aesthetics.}
+
+\item{median.shape, median.stroke, median.size, median.colour, median.color, median.fill, median.alpha}{Default aesthetics for medians. Set to \code{\link[=sync]{sync()}} to inherit from the data's
+aesthetics or to \code{NULL} to use the data's aesthetics.}
+
+\item{fence.linetype, fence.linewidth, fence.colour, fence.color, fence.fill, fence.alpha}{Default aesthetics for fences. Set to \code{\link[=sync]{sync()}} to inherit from the data's
+aesthetics or to \code{NULL} to use the data's aesthetics.}
+
+\item{outlier.shape, outlier.stroke, outlier.size, outlier.colour, outlier.color, outlier.fill, outlier.alpha}{Default aesthetics for outliers. Set to \code{\link[=sync]{sync()}} to inherit from the data's
+aesthetics or to \code{NULL} to use the data's aesthetics.}
+
+\item{new_data}{A list (best structured as a \link[base:data.frame]{data.frame})
+of row (\code{geom_cols_interpolation()}) or column
+(\code{geom_rows_interpolation()}) values to interpolate.}
+
+\item{type}{Character value matched to \code{"centroid"} or \code{"sequence"}; the type
+of operations used to visualize interpolation.}
+
+\item{point.fill}{Default aesthetics for markers. Set to NULL to inherit from
+the data's aesthetics.}
 
 \item{isoline_text}{Logical; whether to include text value marks along the
 isolines.}
+
+\item{snap_rule}{Logical; whether to snap rule segments to grid values.}
+
+\item{vector_labels}{Logical; whether to include labels radiating outward
+from the vectors.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.
@@ -604,9 +1042,49 @@ conventional \strong{ggplot2} geoms with \code{\link[=stat_rows]{stat_rows()}} o
 matrix factor of a tbl_ord. They understand the same aesthetics
 as their corresponding conventional geoms.
 }
+\examples{
+# compute log-ratio analysis of Freestone primary class composition measurements
+glass \%>\%
+  ordinate(cols = c(SiO2, Al2O3, CaO, FeO, MgO),
+           model = lra, compositional = TRUE) \%>\%
+  confer_inertia("rows") \%>\%
+  print() -> glass_lra
+
+# row-principal biplot with ordinate-wise standard deviations
+glass_lra \%>\%
+  ggbiplot(aes(color = Site), sec.axes = "cols") +
+  theme_biplot() +
+  scale_color_brewer(type = "qual", palette = 6) +
+  geom_cols_text(stat = "chull", aes(label = name), color = "#444444") +
+  geom_rows_lineranges(fun.data = mean_sdl, linewidth = .75) +
+  geom_rows_point(alpha = .5) +
+  ggtitle(
+    "Row-principal LRA biplot of Freestone glass measurements",
+    "Ranges 2 sample standard deviations from centroids"
+  )
+# principal components analysis of glass composition measurements
+glass[, c(5L, 7L, 8L, 10L, 11L)] \%>\%
+  princomp(cor = TRUE) \%>\%
+  as_tbl_ord() \%>\%
+  cbind_rows(site = glass$Site, form = glass$Form) \%>\%
+  augment_ord() \%>\%
+  print() -> glass_pca
+
+# note that column standard coordinates are unit vectors
+rowSums(get_cols(glass_pca) ^ 2)
+
+# plot column standard coordinates with a unit circle underlaid
+glass_pca \%>\%
+  ggbiplot(aes(label = name), sec.axes = "cols") +
+  theme_biplot() +
+  geom_rows_point(aes(color = site, shape = form), elements = "score") +
+  geom_unit_circle(alpha = .5, scale.factor = 3) +
+  geom_cols_vector()
+}
 \seealso{
 Other biplot layers: 
 \code{\link{biplot-stats}},
+\code{\link{stat_referent}()},
 \code{\link{stat_rows}()}
 }
 \concept{biplot layers}

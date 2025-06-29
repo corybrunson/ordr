@@ -92,11 +92,13 @@ get_rows(savings_cca, elements = "structure")
 get_cols(savings_cca, elements = "structure")
 
 # biplot of interset and intraset correlations with the population data
+# NB: `contour = TRUE` is not automatically set as in `geom_density_2d()`
 savings_cca \%>\%
   confer_inertia("cols") \%>\%
   ggbiplot(aes(label = name, color = .matrix)) +
-  theme_bw() + theme_biplot() +
+  theme_bw() + theme_scaffold() +
   geom_unit_circle() +
+  geom_rows_density_2d(elements = "score", color = "grey", contour = TRUE) +
   geom_rows_vector(arrow = NULL, elements = "structure") +
   geom_cols_vector(arrow = NULL, elements = "structure", linetype = "dashed") +
   geom_rows_text(elements = "structure", hjust = "outward") +
@@ -104,14 +106,13 @@ savings_cca \%>\%
   scale_color_brewer(limits = c("rows", "cols"), type = "qual") +
   expand_limits(x = c(-1, 1), y = c(-1, 1))
 
-# biplot with scores as supplemental elements
+# situate country scores along financial variables
 savings_cca \%>\%
   confer_inertia("rows") \%>\%
-  ggbiplot(aes(label = name), sec.axes = "cols", scale.factor = 5L) +
-  theme_biplot() +
-  geom_cols_vector(elements = "active") +
-  geom_cols_text_radiate(elements = "active") +
-  geom_rows_text(elements = "score", subset = seq(50L))
+  ggbiplot(aes(label = name)) +
+  theme_scaffold() +
+  geom_cols_axis(elements = "active") +
+  geom_rows_text(elements = "score")
 }
 \references{
 Greenacre MJ (1984) \emph{Theory and applications of correspondence analysis}.
@@ -129,7 +130,6 @@ Other methods for singular value decomposition-based techniques:
 \code{\link{methods-lra}},
 \code{\link{methods-mca}},
 \code{\link{methods-prcomp}},
-\code{\link{methods-princomp}},
 \code{\link{methods-svd}}
 
 Other models from the stats package: 

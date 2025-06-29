@@ -15,7 +15,7 @@ ggbiplot(
   clip = "on",
   axis.percents = TRUE,
   sec.axes = NULL,
-  scale.factor = NULL,
+  scale.factor = "inertia",
   scale_rows = NULL,
   scale_cols = NULL,
   ...
@@ -57,8 +57,9 @@ percentages.}
 
 \item{sec.axes}{Matrix factor character to specify a secondary set of axes.}
 
-\item{scale.factor}{Numeric value used to scale the secondary axes against
-the primary axes; ignored if \code{sec.axes} is not specified.}
+\item{scale.factor}{Either a numeric value, used to scale the secondary axes
+against the primary axes, or the name of a harmonizing function (currently
+\code{"range"} or \code{"inertia"}); ignored if \code{sec.axes} is not specified.}
 
 \item{scale_rows, scale_cols}{Either the character name of a numeric variable
 in \code{get_*(ordination)} or a numeric vector of length
@@ -134,14 +135,26 @@ iris[, -5] \%>\%
   mutate_cols(measure = gsub("\\\\.", " ", tolower(names(iris)[-5]))) \%>\%
   print() -> iris_pca
 
-# row-principal biplot with rescaled secondary axis
+# row-principal biplot with range-harmonized secondary axis
+iris_pca \%>\%
+  ggbiplot(aes(color = species), sec.axes = "cols", scale.factor = "range") +
+  theme_bw() +
+  scale_color_brewer(type = "qual", palette = 2) +
+  geom_rows_point() +
+  geom_cols_vector(aes(label = measure), color = "#444444") +
+  ggtitle(
+    "Row-principal PCA biplot of Anderson iris measurements",
+    "Variable loadings scaled to secondary axes"
+  ) +
+  expand_limits(y = c(-1, 3.5))
+
+# row-principal biplot with manually rescaled secondary axis
 iris_pca \%>\%
   ggbiplot(aes(color = species), sec.axes = "cols", scale.factor = 2) +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   geom_rows_point() +
-  geom_cols_vector(color = "#444444") +
-  geom_cols_text_radiate(aes(label = measure), color = "#444444") +
+  geom_cols_vector(aes(label = measure), color = "#444444") +
   ggtitle(
     "Row-principal PCA biplot of Anderson iris measurements",
     "Variable loadings scaled to secondary axes"
@@ -174,7 +187,6 @@ ggbiplot(mtcars_specs_pca, aes(label = name),
   theme_minimal() +
   geom_rows_text(size = 3) +
   geom_cols_vector(data = mtcars_pca_lm) +
-  geom_cols_text_radiate(data = mtcars_pca_lm) +
   expand_limits(x = c(-2.5, 2))
 
 # multidimensional scaling based on a scaled cosine distance of vehicle specs
@@ -214,19 +226,31 @@ ggbiplot(mtcars_specs_cmds_ord, aes(label = name),
   theme_minimal() +
   geom_rows_text(size = 3) +
   geom_cols_vector(data = mtcars_cmds_lm) +
-  geom_cols_text_radiate(data = mtcars_cmds_lm) +
   expand_limits(x = c(-2.25, 1.25), y = c(-2, 1.5))
 # PCA of iris data
 iris_pca <- ordinate(iris, cols = 1:4, prcomp, scale = TRUE)
 
 # row-principal predictive biplot
 iris_pca \%>\%
-  augment_ord() \%>\%
   ggbiplot(axis.type = "predictive") +
   theme_bw() +
   scale_color_brewer(type = "qual", palette = 2) +
   geom_cols_axis(aes(label = name, center = center, scale = scale)) +
   geom_rows_point(aes(color = Species), alpha = .5) +
+  ggtitle("Predictive biplot of Anderson iris measurements")
+
+# with two calibrated axes
+iris_pca \%>\%
+  ggbiplot(axis.type = "predictive") +
+  theme_bw() +
+  scale_color_brewer(type = "qual", palette = 2) +
+  geom_origin() +
+  stat_cols_rule(
+    subset = c(2, 4), fontface = "bold", text.fontface = "plain",
+    aes(label = name, center = center, scale = scale)
+  ) +
+  geom_rows_point(aes(color = Species), alpha = .5) +
+  expand_limits(x = c(-5, 5), y = c(-5, 5)) +
   ggtitle("Predictive biplot of Anderson iris measurements")
 }
 \references{

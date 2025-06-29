@@ -7,6 +7,7 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN](http://www.r-pkg.org/badges/version/ordr)](https://cran.r-project.org/package=ordr)
 <!-- badges: end -->
 
 **ordr** integrates ordination analysis and biplot visualization into
@@ -83,9 +84,14 @@ integrate ordination models into practice.
 
 ### installation
 
-**ordr** remains under development but is approaching a CRAN release.
-For now, it can be installed from the (default) `main` branch using
-[**remotes**](https://github.com/r-lib/remotes):
+**ordr** is now on CRAN and can be installed using base R:
+
+``` r
+install.packages("ordr")
+```
+
+The development version can be installed from the (default) `main`
+branch using [**remotes**](https://github.com/r-lib/remotes):
 
 ``` r
 remotes::install_github("corybrunson/ordr")
@@ -148,7 +154,7 @@ as annotations to the appropriate matrix factors:[^7]
 #> 3 -2.36  0.341 -0.0441     | 3 setosa 
 #> 4 -2.29  0.595 -0.0910     | 4 setosa 
 #> 5 -2.38 -0.645 -0.0157     | 5 setosa 
-#> # … with 145 more rows
+#> # ℹ 145 more rows
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
 #>      PC1     PC2    PC3 ... |   name         center scale
@@ -166,22 +172,21 @@ column-specific **dplyr**-style verbs:
 iris_meta <- data.frame(
   Species = c("setosa", "versicolor", "virginica"),
   Colony = c(1L, 1L, 2L),
-  Cytotype = c("diploid", "hexaploid", "tetraploid"),
-  Ploidy = c(2L, 6L, 4L)
+  Cytotype = c("diploid", "hexaploid", "tetraploid")
 )
 (iris_pca <- left_join_rows(iris_pca, iris_meta, by = "Species"))
 #> # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
 #> # 4 coordinates: PC1, PC2, ..., PC4
 #> # 
-#> # Rows (principal): [ 150 x 4 | 4 ]
-#>     PC1    PC2     PC3 ... |   Species Colony Cytotype Ploidy
-#>                            |   <chr>    <int> <chr>     <int>
-#> 1 -2.26 -0.478  0.127      | 1 setosa       1 diploid       2
-#> 2 -2.07  0.672  0.234  ... | 2 setosa       1 diploid       2
-#> 3 -2.36  0.341 -0.0441     | 3 setosa       1 diploid       2
-#> 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid       2
-#> 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid       2
-#> # … with 145 more rows
+#> # Rows (principal): [ 150 x 4 | 3 ]
+#>     PC1    PC2     PC3 ... |   Species Colony Cytotype
+#>                            |   <chr>    <int> <chr>   
+#> 1 -2.26 -0.478  0.127      | 1 setosa       1 diploid 
+#> 2 -2.07  0.672  0.234  ... | 2 setosa       1 diploid 
+#> 3 -2.36  0.341 -0.0441     | 3 setosa       1 diploid 
+#> 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid 
+#> 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid 
+#> # ℹ 145 more rows
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
 #>      PC1     PC2    PC3 ... |   name         center scale
@@ -224,8 +229,7 @@ appropriate subsets:[^8]
 ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_ellipse(aes(color = Species), alpha = .5, level = .99) +
-  geom_cols_vector() +
-  geom_cols_text_radiate(aes(label = name)) +
+  geom_cols_vector(aes(label = name)) +
   expand_limits(y = c(-3.5, NA)) +
   ggtitle("PCA of Anderson's iris measurements",
           "99% confidence ellipses; variables use top & right axes")
@@ -234,17 +238,19 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
 ![](man/figures/README-interpolative%20biplot-1.png)<!-- -->
 
 When variables are represented in standard coordinates, as typically in
-PCA, their rules can be rescaled to yield a predictive biplot:[^9]
+PCA, their rules can be rescaled to yield a predictive biplot.[^9] For
+legibility, the axes are limited to the data range and offset from the
+origin:
 
 ``` r
 ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
-  theme_biplot() +
+  theme_scaffold() +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_center(
     aes(color = Species, shape = Species),
     size = 5, alpha = .5, fun.data = mean_se
   ) +
-  geom_cols_axis(aes(label = name, center = center, scale = scale)) +
+  stat_cols_rule(aes(label = name, center = center, scale = scale)) +
   ggtitle("Predictive biplot of Anderson's iris measurements",
           "Project a marker onto an axis to approximate its measurement")
 ```
@@ -282,7 +288,7 @@ guidelines](https://github.com/corybrunson/ordr/blob/main/CONTRIBUTING.md)
 and respect the [Code of
 Conduct](https://github.com/corybrunson/ordr/blob/main/CODE_OF_CONDUCT.md).
 
-### inspiration
+### inspirations
 
 This package was originally inspired by the **ggbiplot** extension
 developed by [Vincent Q. Vu](https://github.com/vqv/ggbiplot), [Richard
@@ -300,18 +306,38 @@ Several answers at CrossValidated, in particular by
 theoretical insights and informed design choices. Thomas Lin Pedersen’s
 [**tidygraph**](https://github.com/thomasp85/tidygraph) prequel to
 **ggraph** finally induced the shift from the downstream generation of
-scatterplots to the upstream handling and manipulating of ordination
-models. Additional design elements and features have been informed by
-the monograph
+scatterplots to the upstream handling and manipulating of models.
+Additional design elements and features have been informed by the
+monograph
 [*Biplots*](https://www.google.com/books/edition/Biplots/lTxiedIxRpgC)
 and the textbook [*Understanding
-Biplots*](https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550)
-by John C. Gower, David J. Hand, Sugnet Gardner–Lubbe, and Niel J. Le
+Biplots*](https://www.wiley.com/en-us/Understanding+Biplots-p-9781119972907)
+by John C. Gower, David J. Hand, Sugnet Gardner–Lubbe, and Niël J. Le
 Roux, and by the volume [*Principal Components
 Analysis*](https://link.springer.com/book/10.1007/b98835) by I. T.
 Jolliffe.
 
-### notes
+### exposition
+
+This work was presented ([slideshow
+PDF](https://raw.githubusercontent.com/corybrunson/tidy-factor/main/tidy-factor-x/tidy-factor-x.pdf))
+at an invited panel on [New Developments in Graphing Multivariate
+Data](https://ww2.amstat.org/meetings/jsm/2022/onlineprogram/ActivityDetails.cfm?SessionID=222053)
+at the [Joint Statistical
+Meetings](https://ww2.amstat.org/meetings/jsm/2022/), on 2022 August 8
+in Washington DC. I’m grateful to Joyce Robbins for the invitation and
+for organizing such a fun first experience, to Naomi Robbins for
+chairing the event, and to my co-panelists Ursula Laa and Hengrui Luo
+for sharing and sparking such exciting ideas and conversations. An
+update was presented to the [ggplot2
+extenders](https://teunbrand.github.io/ggplot-extension-club/), which
+elicited additional valuable feedback.
+
+### resources
+
+Development of this package benefitted from the use of equipment and the
+support of colleagues at [UConn Health](https://health.uconn.edu/) and
+at [UF Health](https://ufhealth.org/).
 
 [^1]: Greenacre MJ (2010) *Biplots in Practice*. Fundacion BBVA, ISBN:
     978-84-923846.

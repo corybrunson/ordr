@@ -1,18 +1,25 @@
-# principal components analysis of overt & chemical diabetes test values
-heplots::Diabetes[, seq(5L)] %>%
-  princomp(cor = TRUE) %>%
-  as_tbl_ord() %>%
-  cbind_rows(group = heplots::Diabetes$group) %>%
-  augment_ord() %>%
-  print() -> diabetes_pca
+# center each group separately
+iris |> 
+  split(~ Species) |> 
+  lapply(subset, select = -c(Species)) |> 
+  lapply(scale, center = TRUE, scale = FALSE) |> 
+  lapply(as.data.frame) |> 
+  unsplit(iris$Species) |> 
+  transform(Species = iris$Species) ->
+  iris_ctr
+ggplot(iris_ctr, aes(Petal.Width, Petal.Length)) +
+  coord_equal() +
+  facet_wrap(vars(Species)) +
+  geom_unit_circle() +
+  geom_point()
+# scale group mean differences uniformly
+iris_ctr |> 
+  subset(select = -c(Species)) |> 
+  scale(center = FALSE, scale = TRUE) |> 
+  transform(Species = iris$Species) |> 
+  ggplot(aes(Petal.Width, Petal.Length)) +
+  coord_equal() +
+  facet_wrap(vars(Species)) +
+  geom_unit_circle() +
+  geom_point()
 
-# note that column standard coordinates are unit vectors
-rowSums(get_cols(diabetes_pca)^2)
-
-# plot column standard coordinates with a unit circle underlaid
-diabetes_pca %>%
-  ggbiplot(aes(label = name), sec.axes = "cols", scale.factor = 3) +
-  geom_rows_point(aes(color = group), alpha = .25) +
-  geom_unit_circle(alpha = .5, scale.factor = 3) +
-  geom_cols_vector() +
-  geom_cols_text_radiate()

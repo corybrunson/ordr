@@ -12,8 +12,13 @@ geom_isoline(
   isoline_text = TRUE,
   by = NULL,
   num = NULL,
-  label_dodge = 0.03,
+  text_dodge = 0.03,
   ...,
+  text.size = 3,
+  text.angle = 0,
+  text.colour = NULL,
+  text.color = NULL,
+  text.alpha = NULL,
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
@@ -42,15 +47,31 @@ the plot data. The return value must be a \code{data.frame}, and
 will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
-\item{stat}{The statistical transformation to use on the data for this
-layer, either as a \code{ggproto} \code{Geom} subclass or as a string naming the
-stat stripped of the \code{stat_} prefix (e.g. \code{"count"} rather than
-\code{"stat_count"})}
+\item{stat}{The statistical transformation to use on the data for this layer.
+When using a \verb{geom_*()} function to construct a layer, the \code{stat}
+argument can be used the override the default coupling between geoms and
+stats. The \code{stat} argument accepts the following:
+\itemize{
+\item A \code{Stat} ggproto subclass, for example \code{StatCount}.
+\item A string naming the stat. To give the stat as a string, strip the
+function name of the \code{stat_} prefix. For example, to use \code{stat_count()},
+give the stat as \code{"count"}.
+\item For more information and other ways to specify the stat, see the
+\link[ggplot2:layer_stats]{layer stat} documentation.
+}}
 
-\item{position}{Position adjustment, either as a string naming the adjustment
-(e.g. \code{"jitter"} to use \code{position_jitter}), or the result of a call to a
-position adjustment function. Use the latter if you need to change the
-settings of the adjustment.}
+\item{position}{A position adjustment to use on the data for this layer. This
+can be used in various ways, including to prevent overplotting and
+improving the display. The \code{position} argument accepts the following:
+\itemize{
+\item The result of calling a position function, such as \code{position_jitter()}.
+This method allows for passing extra arguments to the position.
+\item A string naming the position adjustment. To give the position as a
+string, strip the function name of the \code{position_} prefix. For example,
+to use \code{position_jitter()}, give the position as \code{"jitter"}.
+\item For more information and other ways to specify the position, see the
+\link[ggplot2:layer_positions]{layer position} documentation.
+}}
 
 \item{isoline_text}{Logical; whether to include text value marks along the
 isolines.}
@@ -58,10 +79,14 @@ isolines.}
 \item{by, num}{Intervals between elements or number of elements; specify only
 one.}
 
-\item{label_dodge}{Numeric; the orthogonal distance of the text from the axis
+\item{text_dodge}{Numeric; the orthogonal distance of the text from the axis
 or isoline, as a proportion of the minimum of the plot width and height.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
+
+\item{text.size, text.angle, text.colour, text.color, text.alpha}{Default
+aesthetics for tick mark labels. Set to NULL to inherit from the data's
+aesthetics.}
 
 \item{parse}{If \code{TRUE}, the labels will be parsed into expressions and
 displayed as described in \code{?plotmath}.}
@@ -91,6 +116,12 @@ A ggproto \link[ggplot2:layer]{layer}.
 \description{
 \code{geom_isoline()} renders isolines along row or column axes.
 }
+\details{
+Isolines are topographical features that separate a plot into
+regions in which a gradient of interest falls within a specified range.
+Greenacre (2010) uses them effectively to assist with the projection of
+markers onto axes.
+}
 \section{Biplot layers}{
 
 \code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
@@ -116,52 +147,43 @@ are in bold):
 \item \code{linewidth}
 \item \code{linetype}
 \item \code{center}, \code{scale}
-\item \code{angle}
 \item \code{hjust}
 \item \code{vjust}
 \item \code{family}
 \item \code{fontface}
-\item \code{text_colour}, \code{text_alpha}, \code{text_size},
 \item \code{group}
 }
-
-The prefixed aesthetics \verb{text_*} are used by the text elements and will
-inherit any values passed to their un-prefixed counterparts.
 }
 
 \examples{
-# Reaven & Miller overt & chemical diabetes test data and group classification
-head(heplots::Diabetes)
-# default (standardized) linear discriminant analysis of groups on tests
-diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes)
-
-# bestow 'tbl_ord' class & augment observation, centroid, and variable fields
-as_tbl_ord(diabetes_lda) \%>\%
-  augment_ord() \%>\%
-  print() -> diabetes_lda
-
-# row-standard biplot
-diabetes_lda \%>\%
-  confer_inertia(1) \%>\%
-  ggbiplot(aes(label = name), elements = "active") +
-  theme_bw() + theme_biplot() +
-  geom_rows_text() +
-  geom_cols_vector(subset = c(1, 3, 4)) +
-  geom_cols_text_radiate(subset = c(1, 3, 4), size = 3) +
-  geom_cols_isoline(subset = c(1, 3, 4), alpha = .25, num = 4L,
-                    label_dodge = -.03, text_alpha = .5, text_size = 3) +
-  ggtitle(
-    "LDA of Reaven & Miller diabetes groups",
-    "Row-standard biplot of standardized LDA"
-  )
+# stack loss gradient
+stackloss |> 
+  lm(formula = stack.loss ~ Air.Flow + Water.Temp + Acid.Conc.) |> 
+  coef() |> 
+  as.list() |> as.data.frame() |> 
+  subset(select = c(Air.Flow, Water.Temp, Acid.Conc.)) ->
+  coef_data
+# isolines along strongest predictors
+scale(stackloss, scale = FALSE) |> 
+  ggplot(aes(x = Water.Temp, y = Air.Flow)) +
+  coord_square() + geom_origin() +
+  geom_point(aes(size = stack.loss)) + scale_size_area() +
+  geom_isoline(data = coef_data)
+}
+\references{
+Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
+978-84-923846.
+\url{https://www.fbbva.es/microsite/multivariate-statistics/biplots.html}
 }
 \seealso{
 Other geom layers: 
 \code{\link{geom_axis}()},
+\code{\link{geom_bagplot}()},
+\code{\link{geom_interpolation}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},
+\code{\link{geom_rule}()},
 \code{\link{geom_text_radiate}()},
-\code{\link{geom_unit_circle}()},
 \code{\link{geom_vector}()}
 }
 \concept{geom layers}

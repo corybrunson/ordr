@@ -66,8 +66,9 @@
 #' @param axis.percents Whether to concatenate default axis labels with inertia
 #'   percentages.
 #' @param sec.axes Matrix factor character to specify a secondary set of axes.
-#' @param scale.factor Numeric value used to scale the secondary axes against
-#'   the primary axes; ignored if `sec.axes` is not specified.
+#' @param scale.factor Either a numeric value, used to scale the secondary axes
+#'   against the primary axes, or the name of a harmonizing function (currently
+#'   `"range"` or `"inertia"`); ignored if `sec.axes` is not specified.
 #' @param scale_rows,scale_cols Either the character name of a numeric variable
 #'   in `get_*(ordination)` or a numeric vector of length
 #'   `nrow(get_*(ordination))`, used to scale the coordinates of the matrix
@@ -85,7 +86,7 @@
 ggbiplot <- function(
     ordination = NULL, mapping = aes(x = 1, y = 2), axis.type = "interpolative",
     xlim = NULL, ylim = NULL, expand = TRUE, clip = "on",
-    axis.percents = TRUE, sec.axes = NULL, scale.factor = NULL,
+    axis.percents = TRUE, sec.axes = NULL, scale.factor = "inertia",
     scale_rows = NULL, scale_cols = NULL,
     ...
 ) {
@@ -116,15 +117,18 @@ ggbiplot <- function(
   axis.type <- match.arg(axis.type, c("interpolative", "predictive"))
   if (axis.type == "predictive") {
     
-    # -+- only linear ordinations for now -+-
-    linear_classes <- c("eigen", "eigen_ord", "svd_ord", "prcomp", "princomp")
-    if (! ord_class %in% linear_classes) {
+    linear_trans_classes <- 
+      c("eigen", "eigen_ord", "svd_ord", "prcomp", "princomp")
+    # only allow pythagorean metrics and linear pre-procedures
+    # FIXME: Allow pythagorean ordinations with non-linear pre-procedures?
+    if (! any(ord_class %in% linear_trans_classes)) {
       warning("Predictive biplots are only implemented for linear methods ",
               "(ED, SVD, PCA).")
     } else {
       
       # rescale standard coordinates for predictive biplot
       xy_map <- stringr::str_remove(as.character(mapping[c("x", "y")]), "^~")
+      ord_map <- get_coord(ordination)
       if (! all(c("x", "y") %in% names(mapping)) &&
           any(stringr::str_detect(names(mapping), "..coord"))) {
         warning("For predictive biplots, ",
@@ -137,16 +141,16 @@ ggbiplot <- function(
                 "inertia must be balanced and conferred on one factor.")
       } else {
         # remove coordinates other than those used in the biplot
-        ordination[setdiff(get_coord(ordination), xy_map)] <- NULL
+        # ordination[setdiff(get_coord(ordination), xy_map)] <- NULL
         # rescale standard coordinates
         std_fac <- c("rows", "cols")[! as.logical(conference)]
         std_ss <- apply(
-          ordination[ordination$.matrix == std_fac, xy_map],
+          ordination[ordination$.matrix == std_fac, ord_map],
           1L,
           function(x) sum(x^2)
         )
-        ordination[ordination$.matrix == std_fac, xy_map] <-
-          ordination[ordination$.matrix == std_fac, xy_map] / std_ss
+        ordination[ordination$.matrix == std_fac, ord_map] <-
+          ordination[ordination$.matrix == std_fac, ord_map] / std_ss
       }
       
     }
@@ -170,15 +174,14 @@ ggbiplot <- function(
     }
     pri.axes <- setdiff(c("rows", "cols"), sec.axes)
     
-    if (is.null(scale.factor) && ! is.null(ordination)) {
-      ps_lim <- lapply(c(pri.axes, sec.axes), function(.m) {
-        apply(
-          # recover coordinates stored as attribute during `fortify()`
-          ordination[ordination$.matrix == .m, get_coord(ordination)],
-          2, function(x) c(min(x), max(x))
-        )
-      })
-      scale.factor <- min(ps_lim[[1]] / ps_lim[[2]])
+    # apply specified harmonization function
+    if (is.character(scale.factor)) {
+      scale.factor <- match.arg(scale.factor, c("range", "inertia"))
+      scale.factor <- switch(
+        scale.factor,
+        range = harmonize_range(ordination, sec.axes),
+        inertia = harmonize_inertia(ordination, sec.axes)
+      )
     }
     
     # rescale any shared coordinates present
@@ -216,6 +219,8 @@ ggbiplot <- function(
   p$coordinates <- coord_equal(
     xlim = xlim, ylim = ylim, expand = expand, clip = clip
   )
+  # this is the biplot default; prevent message when modified
+  p$coordinates$default <- TRUE
   
   # assign default axis labels
   if (axis.percents) {
@@ -283,6 +288,32 @@ scale_ord <- function(ordination, .m, mapping, scale) {
       ~ ifelse(ordination$.matrix == .m, . * scale, .)
     )
   )
+}
+
+# functions to harmonize row and column axes
+harmonize_range <- function(ordination, sec.axes) {
+  pri.axes <- setdiff(c("rows", "cols"), sec.axes)
+  ps_lim <- lapply(c(pri.axes, sec.axes), function(.m) {
+    apply(
+      # recover coordinates stored as attribute during `fortify()`
+      ordination[ordination$.matrix == .m, get_coord(ordination)[seq(2L)]],
+      2L, range
+    )
+  })
+  ps_sf <- ps_lim[[1L]] / ps_lim[[2L]]
+  min(ps_sf[ps_sf > 0])
+}
+harmonize_inertia <- function(ordination, sec.axes) {
+  pri.axes <- setdiff(c("rows", "cols"), sec.axes)
+  u_mat <- as.matrix(ordination[ordination$.matrix == pri.axes,
+                                get_coord(ordination)[seq(2L)]])
+  v_mat <- as.matrix(ordination[ordination$.matrix == sec.axes,
+                                get_coord(ordination)[seq(2L)]])
+  u_nobs <- nrow(u_mat); v_nobs <- nrow(v_mat)
+  lambda_sq <-
+    (v_nobs * sum(diag(u_mat %*% t(u_mat)))) /
+    (u_nobs * sum(diag(v_mat %*% t(v_mat))))
+  sqrt(lambda_sq)
 }
 
 #' @rdname ggbiplot

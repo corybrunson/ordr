@@ -42,7 +42,7 @@ recover_coord.kmeans <- function(x) {
 recover_aug_rows.kmeans <- function(x) {
   name <- names(x$cluster)
   res <- if (is.null(name)) {
-    tibble_pole(length(x$cluster))
+    tibble(.rows = length(x$cluster))
   } else {
     tibble(name = name)
   }
@@ -55,7 +55,7 @@ recover_aug_rows.kmeans <- function(x) {
 recover_aug_cols.kmeans <- function(x) {
   name <- colnames(x$centers)
   res <- if (is.null(name)) {
-    tibble_pole(ncol(x$centers))
+    tibble(.rows = ncol(x$centers))
   } else {
     tibble(name = name)
   }

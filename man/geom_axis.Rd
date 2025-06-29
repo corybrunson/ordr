@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom-axis.r
 \name{geom_axis}
 \alias{geom_axis}
-\title{Axes through the origin}
+\title{Axes through or offset from the origin}
 \usage{
 geom_axis(
   mapping = NULL,
@@ -18,6 +18,26 @@ geom_axis(
   text_dodge = 0.03,
   label_dodge = 0.03,
   ...,
+  axis.colour = NULL,
+  axis.color = NULL,
+  axis.alpha = NULL,
+  label.angle = 0,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  tick.linewidth = 0.25,
+  tick.colour = NULL,
+  tick.color = NULL,
+  tick.alpha = NULL,
+  text.size = 2.6,
+  text.angle = 0,
+  text.hjust = 0.5,
+  text.vjust = 0.5,
+  text.family = NULL,
+  text.fontface = NULL,
+  text.colour = NULL,
+  text.color = NULL,
+  text.alpha = NULL,
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
@@ -46,15 +66,31 @@ the plot data. The return value must be a \code{data.frame}, and
 will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
-\item{stat}{The statistical transformation to use on the data for this
-layer, either as a \code{ggproto} \code{Geom} subclass or as a string naming the
-stat stripped of the \code{stat_} prefix (e.g. \code{"count"} rather than
-\code{"stat_count"})}
+\item{stat}{The statistical transformation to use on the data for this layer.
+When using a \verb{geom_*()} function to construct a layer, the \code{stat}
+argument can be used the override the default coupling between geoms and
+stats. The \code{stat} argument accepts the following:
+\itemize{
+\item A \code{Stat} ggproto subclass, for example \code{StatCount}.
+\item A string naming the stat. To give the stat as a string, strip the
+function name of the \code{stat_} prefix. For example, to use \code{stat_count()},
+give the stat as \code{"count"}.
+\item For more information and other ways to specify the stat, see the
+\link[ggplot2:layer_stats]{layer stat} documentation.
+}}
 
-\item{position}{Position adjustment, either as a string naming the adjustment
-(e.g. \code{"jitter"} to use \code{position_jitter}), or the result of a call to a
-position adjustment function. Use the latter if you need to change the
-settings of the adjustment.}
+\item{position}{A position adjustment to use on the data for this layer. This
+can be used in various ways, including to prevent overplotting and
+improving the display. The \code{position} argument accepts the following:
+\itemize{
+\item The result of calling a position function, such as \code{position_jitter()}.
+This method allows for passing extra arguments to the position.
+\item A string naming the position adjustment. To give the position as a
+string, strip the function name of the \code{position_} prefix. For example,
+to use \code{position_jitter()}, give the position as \code{"jitter"}.
+\item For more information and other ways to specify the position, see the
+\link[ggplot2:layer_positions]{layer position} documentation.
+}}
 
 \item{axis_labels, axis_ticks, axis_text}{Logical; whether to include labels,
 tick marks, and text value marks along the axes.}
@@ -65,13 +101,25 @@ one.}
 \item{tick_length}{Numeric; the length of the tick marks, as a proportion of
 the minimum of the plot width and height.}
 
-\item{text_dodge}{Numeric; the orthogonal distance of the text from the axis,
-as a proportion of the minimum of the plot width and height.}
+\item{text_dodge}{Numeric; the orthogonal distance of tick mark text from the
+axis, as a proportion of the minimum of the plot width and height.}
 
-\item{label_dodge}{Numeric; the orthogonal distance of the text from the axis
-or isoline, as a proportion of the minimum of the plot width and height.}
+\item{label_dodge}{Numeric; the orthogonal distance of the axis label from
+the axis, as a proportion of the minimum of the plot width and height.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
+
+\item{axis.colour, axis.color, axis.alpha}{Default aesthetics for axes. Set to
+NULL to inherit from the data's aesthetics.}
+
+\item{label.angle, label.colour, label.color, label.alpha}{Default aesthetics
+for labels. Set to NULL to inherit from the data's aesthetics.}
+
+\item{tick.linewidth, tick.colour, tick.color, tick.alpha}{Default aesthetics
+for tick marks. Set to NULL to inherit from the data's aesthetics.}
+
+\item{text.size, text.angle, text.hjust, text.vjust, text.family, text.fontface, text.colour, text.color, text.alpha}{Default aesthetics for tick mark labels. Set to NULL to inherit from the
+data's aesthetics.}
 
 \item{parse}{If \code{TRUE}, the labels will be parsed into expressions and
 displayed as described in \code{?plotmath}.}
@@ -99,8 +147,25 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
-\code{geom_axis()} renders lines through the origin and the position
-of each case or variable.
+\code{geom_axis()} renders lines through or orthogonally translated
+from the origin and the position of each case or variable.
+}
+\details{
+Axes are lines that track the values of linear variables across a
+plot. Multivariate scatterplots may include more axes than plotting
+dimensions, in which case the plot may display only a fraction of the total
+variation in the data.
+
+Gower & Hand (1996) recommend using axes to represent numerical variables
+in biplots. Consequently, Gardner & le Roux (2002) refer to these as Gower
+biplots.
+
+Axes positioned orthogonally at the origin are a ubiquitous feature of
+scatterplots and used both to recover variable values from case markers
+(prediction) and to position new case markers from variables
+(interpolation). When they are not orthogonal, these two uses conflict, so
+interpolative versus predictive axes must be used appropriately; see
+\code{\link[=ggbiplot]{ggbiplot()}}.
 }
 \section{Biplot layers}{
 
@@ -122,83 +187,86 @@ in bold):
 \itemize{
 \item \strong{\code{x}}
 \item \strong{\code{y}}
+\item \code{lower}
+\item \code{upper}
+\item \code{yintercept} \emph{or} \code{xintercept} \emph{or} \code{xend} and \code{yend}
+\item \code{linetype}
+\item \code{linewidth}
+\item \code{size}
+\item \code{hjust}
+\item \code{vjust}
 \item \code{colour}
 \item \code{alpha}
-\item \code{linewidth}
-\item \code{linetype}
 \item \code{label}
+\item \code{family}
+\item \code{fontface}
 \item \code{center}, \code{scale}
-\item \code{label_colour}, \code{label_alpha}, \code{label_size}, \code{label_angle},
-\code{label_hjust}, \code{label_vjust}, \code{label_family}, \code{label_fontface}
-\item \code{tick_colour}, \code{tick_alpha}, \code{tick_linewidth}, \code{tick_linetype}
-\item \code{text_colour}, \code{text_alpha}, \code{text_size}, \code{text_angle},
-\code{text_hjust}, \code{text_vjust}, \code{text_family}, \code{text_fontface}
 \item \code{group}
 }
-
-The prefixed aesthetics \verb{label_*}, \verb{tick_*}, and \verb{text_*} are used by the
-text elements and will inherit any values passed to their un-prefixed
-counterparts, if recognized.
 }
 
 \examples{
-# Reaven & Miller overt & chemical diabetes test data and group classification
-head(heplots::Diabetes)
-
-# default (standardized) linear discriminant analysis of groups on tests
-diabetes_lda <- MASS::lda(group ~ ., heplots::Diabetes)
-# bestow 'tbl_ord' class & augment observation, centroid, and variable fields
-as_tbl_ord(diabetes_lda) \%>\%
-  augment_ord() \%>\%
-  mutate_rows(discriminant = ifelse(
-    .element == "active",
-    "centroid", "case"
-  )) \%>\%
-  print() -> diabetes_lda
-# row-standard biplot
-diabetes_lda \%>\%
-  confer_inertia(1) \%>\%
-  ggbiplot() +
-  theme_bw() + theme_biplot() +
-  geom_rows_point(aes(shape = grouping, size = discriminant), alpha = .5) +
-  geom_cols_axis(aes(label = name), color = "#888888", num = 8L,
-                 text_size = 2.5, label_dodge = .02) +
-  ggtitle(
-    "LDA of Reaven & Miller diabetes groups",
-    "Row-standard biplot of standardized LDA"
+# stack loss gradient
+stackloss |> 
+  lm(formula = stack.loss ~ Air.Flow + Water.Temp + Acid.Conc.) |> 
+  coef() |> 
+  as.list() |> as.data.frame() |> 
+  subset(select = c(Air.Flow, Water.Temp, Acid.Conc.)) ->
+  coef_data
+# gradient axis with respect to two predictors
+scale(stackloss, scale = FALSE) |> 
+  ggplot(aes(x = Acid.Conc., y = Air.Flow)) +
+  coord_square() + geom_origin() +
+  geom_point(aes(size = stack.loss, alpha = sign(stack.loss))) + 
+  scale_size_area() + scale_alpha_binned(breaks = c(-1, 0, 1)) +
+  geom_axis(data = coef_data)
+# unlimited axes with window forcing
+stackloss_centered <- scale(stackloss, scale = FALSE)
+stackloss_centered |> 
+  ggplot(aes(x = Acid.Conc., y = Air.Flow)) +
+  coord_square() + geom_origin() +
+  geom_point(aes(size = stack.loss, alpha = sign(stack.loss))) + 
+  scale_size_area() + scale_alpha_binned(breaks = c(-1, 0, 1)) +
+  stat_rule(
+    geom = "axis", data = coef_data,
+    referent = stackloss_centered,
+    fun.lower = \(x) minpp(x, p = 1), fun.upper = \(x) maxpp(x, p = 1),
+    fun.offset = \(x) minabspp(x, p = 1)
   )
+# NB: `geom_axis(stat = "rule")` would fail to pass positional aesthetics.
 
-# contribution LDA of groups on tests
-diabetes_lda <-
-  lda_ord(group ~ ., heplots::Diabetes, axes.scale = "contribution")
-# bestow 'tbl_ord' class & augment observation, centroid, and variable fields
-as_tbl_ord(diabetes_lda) \%>\%
-  augment_ord() \%>\%
-  mutate_rows(discriminant = ifelse(
-    .element == "active",
-    "centroid", "case"
-  )) \%>\%
-  print() -> diabetes_lda
-# symmetric biplot
-diabetes_lda \%>\%
-  confer_inertia(.5) \%>\%
-  ggbiplot() +
-  theme_bw() + theme_biplot() +
-  geom_rows_point(aes(shape = grouping, alpha = discriminant)) +
-  geom_cols_axis(color = "#888888", num = 8L,
-                 text_size = 2.5, text_dodge = .025) +
-  ggtitle(
-    "LDA of Reaven & Miller diabetes groups",
-    "Symmetric biplot of contribution LDA"
-  )
+# eigen-decomposition of covariance matrix
+ability.cov$cov |> 
+  cov2cor() |> 
+  eigen() |> getElement("vectors") |> 
+  as.data.frame() |> 
+  transform(test = rownames(ability.cov$cov)) ->
+  ability_cor_eigen
+# test axes in best-approximation space
+ability_cor_eigen |> 
+  transform(E3 = ifelse(V3 > 0, "rise", "fall")) |> 
+  ggplot(aes(V1, V2, color = E3)) +
+  coord_square() +
+  geom_axis(aes(label = test), text.color = "black", text.alpha = .5) +
+  expand_limits(x = c(-1, 1), y = c(-1, 1))
+}
+\references{
+Gower JC & Hand DJ (1996) \emph{Biplots}. Chapman & Hall, ISBN: 0-412-71630-5.
+
+Gardner S, le Roux N (2002) "Biplot Methodology for Discriminant Analysis
+Based upon Robust Methods and Principal Curves". \emph{Classification, Clustering,
+and Data Analysis: Recent Advances and Applications}: 169--176.
+\url{https://link.springer.com/chapter/10.1007/978-3-642-56181-8_18}
 }
 \seealso{
 Other geom layers: 
+\code{\link{geom_bagplot}()},
+\code{\link{geom_interpolation}()},
 \code{\link{geom_isoline}()},
 \code{\link{geom_lineranges}()},
 \code{\link{geom_origin}()},
+\code{\link{geom_rule}()},
 \code{\link{geom_text_radiate}()},
-\code{\link{geom_unit_circle}()},
 \code{\link{geom_vector}()}
 }
 \concept{geom layers}

@@ -84,7 +84,7 @@ recover_conference.lda_ord <- recover_conference.lda
 #' @export
 recover_aug_rows.lda <- function(x) {
   res <- if (is.null(rownames(x$means))) {
-    tibble_pole(nrow(x$means))
+    tibble(.rows = nrow(x$means))
   } else {
     tibble(name = rownames(x$means))
   }
@@ -124,7 +124,7 @@ recover_aug_rows.lda <- function(x) {
 #' @export
 recover_aug_rows.lda_ord <- function(x) {
   res <- if (is.null(rownames(x$means))) {
-    tibble_pole(nrow(x$means))
+    tibble(.rows = nrow(x$means))
   } else {
     tibble(name = rownames(x$means))
   }
@@ -170,7 +170,7 @@ recover_aug_rows.lda_ord <- function(x) {
 recover_aug_cols.lda <- function(x) {
   name <- rownames(x$scaling)
   res <- if (is.null(name)) {
-    tibble_pole(nrow(x$scaling))
+    tibble(.rows = nrow(x$scaling))
   } else {
     tibble(name = name)
   }

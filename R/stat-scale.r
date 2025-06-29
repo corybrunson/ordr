@@ -1,5 +1,8 @@
 #' @title Multiply artificial coordinates by a scale factor
-#'
+#' 
+#' @description
+#' This layer is **deprecated**.
+#' 
 
 #' @template biplot-layers
 #' @template biplot-ord-aes
@@ -49,35 +52,5 @@ StatScale <- ggproto(
     
     data[, c("x", "y")] <- data[, c("x", "y")] * mult
     data
-  }
-)
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatRowsScale <- ggproto(
-  "StatRowsScale", StatScale,
-  
-  setup_data = setup_rows_xy_data,
-  
-  compute_group = function(data, scales,
-                           subset = NULL, elements = "all", mult = 1) {
-    StatScale$compute_group(data, scales, mult = mult)
-  }
-)
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatColsScale <- ggproto(
-  "StatColsScale", StatScale,
-  
-  setup_data = setup_cols_xy_data,
-  
-  compute_group = function(data, scales,
-                           subset = NULL, elements = "all", mult = 1) {
-    StatScale$compute_group(data, scales, mult = mult)
   }
 )

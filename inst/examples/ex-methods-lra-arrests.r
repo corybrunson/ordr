@@ -31,14 +31,14 @@ arrests_lra %>%
   confer_inertia("rows") %>%
   ggbiplot(aes(color = .matrix), sec.axes = "cols", scale.factor = 1/20) +
   scale_color_manual(values = c("tomato4", "turquoise4")) +
-  theme_bw() +
+  theme_bw() + theme_biplot() +
   geom_rows_text(aes(label = abb), size = 3, alpha = .75) +
   geom_cols_polygon(fill = NA, linetype = "dashed") +
   geom_cols_text(aes(label = name, size = weight), fontface = "bold") +
   scale_size_area(guide = "none") +
   ggtitle(
-    "Non-compositional LRA of violent crime arrest rates",
-    "United States, 1973"
+    "Violent crime arrest rates",
+    "Non-compositional LRA"
   ) +
-  expand_limits(x = c(-.35)) +
+  coord_scaffold() +
   guides(color = "none")

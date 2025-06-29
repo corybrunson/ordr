@@ -19,7 +19,7 @@
 #' @template return-methods
 #' @family methods for eigen-decomposition-based techniques
 #' @family models from the base package
-#' @example inst/examples/ex-methods-eigen-qswur.r
+#' @example inst/examples/ex-methods-eigen.r
 NULL
 
 #' @rdname methods-eigen
@@ -57,11 +57,11 @@ recover_conference.eigen <- function(x) {
 
 #' @rdname methods-eigen
 #' @export
-recover_aug_rows.eigen_ord <- function(x) tibble_pole(nrow(x[["vectors"]]))
+recover_aug_rows.eigen_ord <- function(x) tibble(.rows = nrow(x[["vectors"]]))
 
 #' @rdname methods-eigen
 #' @export
-recover_aug_cols.eigen_ord <- function(x) tibble_pole(nrow(x[["vectors"]]))
+recover_aug_cols.eigen_ord <- function(x) tibble(.rows = nrow(x[["vectors"]]))
 
 #' @rdname methods-eigen
 #' @export
@@ -101,7 +101,7 @@ recover_conference.eigen_ord <- recover_conference.eigen
 recover_aug_rows.eigen_ord <- function(x) {
   name <- rownames(x[["vectors"]])
   res <- if (is.null(name)) {
-    tibble_pole(nrow(x[["vectors"]]))
+    tibble(.rows = nrow(x[["vectors"]]))
   } else {
     tibble(name = name)
   }
@@ -113,7 +113,7 @@ recover_aug_rows.eigen_ord <- function(x) {
 recover_aug_cols.eigen_ord <- function(x) {
   name <- rownames(x[["vectors"]])
   res <- if (is.null(name)) {
-    tibble_pole(nrow(x[["vectors"]]))
+    tibble(.rows = nrow(x[["vectors"]]))
   } else {
     tibble(name = name)
   }

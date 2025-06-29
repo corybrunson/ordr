@@ -1,7 +1,7 @@
 #' @title Augmented implementation of linear discriminant analysis
 #'
-#' @description This function replicates [MASS::lda()] with options to retain
-#'   elements useful to the [tbl_ord] class and biplot calculations.
+#' @description This function replicates [MASS::lda()] with options and defaults
+#'   to retain elements useful to the [tbl_ord] class and biplot calculations.
 #'
 #' @details
 #'
@@ -36,6 +36,11 @@
 #' derives from the eigendecomposition of the Mahalanobis distance matrix, the
 #' projections of the centroids and cases onto the variable axes approximate
 #' their variable values after centering and sphering (Greenacre, 2013).
+#' 
+
+#' Finally, in contrast to [MASS::lda()], `lda_ord()` defaults both `ret.x` and
+#' `ret.grouping` to `TRUE`, so that these elements can be used to compute and
+#' annotate case scores as [supplementary][supplementation] elements.
 #' 
 
 #' @template ref-gardner2005
@@ -138,7 +143,7 @@ lda_ord.matrix <- function(x, grouping, ..., subset, na.action)
 lda_ord.default <- function(x, grouping, prior = proportions, tol = 1.0e-4,
                             method = c("moment", "mle", "mve", "t"),
                             CV = FALSE, nu = 5, ...,
-                            ret.x = FALSE, ret.grouping = FALSE,
+                            ret.x = TRUE, ret.grouping = TRUE,
                             axes.scale = "unstandardized")
 {
   if(is.null(dim(x))) stop("'x' is not a matrix")
@@ -305,7 +310,8 @@ lda_ord.default <- function(x, grouping, prior = proportions, tol = 1.0e-4,
 #' @rdname lda-ord
 #' @export
 predict.lda_ord <- function(object, newdata, prior = object$prior, dimen,
-                            method = c("plug-in", "predictive", "debiased"), ...)
+                            method = c("plug-in", "predictive", "debiased"),
+                            ...)
 {
   if(!inherits(object, "lda")) stop("object not of class \"lda\"")
   if(!is.null(Terms <- object$terms)) { # formula fit
@@ -328,7 +334,8 @@ predict.lda_ord <- function(object, newdata, prior = object$prior, dimen,
         newdata <-
           eval.parent(parse(text = paste(deparse(object$call$x,
                                                  backtick = TRUE),
-                                         "[", deparse(sub, backtick = TRUE),",]")))
+                                         "[", deparse(sub, backtick = TRUE),
+                                         ",]")))
       else newdata <- eval.parent(object$call$x)
       if(!is.null(nas <- object$call$na.action))
         newdata <- eval(call(nas, newdata))
@@ -353,12 +360,14 @@ predict.lda_ord <- function(object, newdata, prior = object$prior, dimen,
   x <- scale(x, center = means, scale = FALSE) %*% scaling
   dm <- scale(object$means, center = means, scale = FALSE) %*% scaling
   method <- match.arg(method)
-  dimen <- if(missing(dimen)) length(object$svd) else min(dimen, length(object$svd))
+  dimen <- 
+    if(missing(dimen)) length(object$svd) else min(dimen, length(object$svd))
   N <- object$N
   if(method == "plug-in") {
     dm <- dm[, 1L:dimen, drop = FALSE]
     dist <- matrix(0.5 * rowSums(dm^2) - log(prior), nrow(x),
-                   length(prior), byrow = TRUE) - x[, 1L:dimen, drop=FALSE] %*% t(dm)
+                   length(prior), byrow = TRUE) -
+      x[, 1L:dimen, drop=FALSE] %*% t(dm)
     dist <- exp( -(dist - apply(dist, 1L, min, na.rm=TRUE)))
   } else if (method == "debiased") {
     dm <- dm[, 1L:dimen, drop=FALSE]
@@ -386,6 +395,7 @@ predict.lda_ord <- function(object, newdata, prior = object$prior, dimen,
   list(class = cl, posterior = posterior, x = x[, 1L:dimen, drop = FALSE])
 }
 
+#' @exportS3Method stats::model.frame
 model.frame.lda_ord <- function(formula, ...)
 {
   oc <- formula$call

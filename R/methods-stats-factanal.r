@@ -31,7 +31,10 @@ recover_dims_factanal <- function(x, .matrix) unclass(x[["loadings"]])
 
 #' @rdname methods-factanal
 #' @export
-recover_rows.factanal <- function(x) recover_dims_factanal(x, "rows")
+recover_rows.factanal <- function(x) {
+  matrix(nrow = 0L, ncol = ncol(x[["loadings"]]),
+         dimnames = list(NULL, colnames(x[["loadings"]])))
+}
 
 #' @rdname methods-factanal
 #' @export
@@ -53,7 +56,7 @@ recover_coord.factanal <- function(x) {
 #' @export
 recover_conference.factanal <- function(x) {
   # loadings are assigned half the diagonal from the eigendecomposition
-  c(.5, .5)
+  c(1,1)
 }
 
 #' @rdname methods-factanal
@@ -65,20 +68,16 @@ recover_supp_rows.factanal <- function(x) {
 #' @rdname methods-factanal
 #' @export
 recover_aug_rows.factanal <- function(x) {
-  name <- rownames(x[["loadings"]])
-  res <- if (is.null(name)) {
-    tibble_pole(nrow(x[["loadings"]]))
+  res <- tibble(.rows = 0L)
+  
+  # scores as supplementary points
+  name <- rownames(x[["scores"]])
+  res_sup <- if (is.null(name)) {
+    tibble(.rows = nrow(x[["scores"]]))
   } else {
     tibble(name = name)
   }
-  if (is.null(x[["scores"]])) return(res)
   
-  # factor scores as supplementary points
-  res_sup <- if (is.null(rownames(x[["scores"]]))) {
-    tibble_pole(x[["n.obs"]])
-  } else {
-    tibble(name = rownames(x[["scores"]]))
-  }
   # supplement flag
   res$.element <- "active"
   res_sup$.element <- "score"
@@ -90,7 +89,7 @@ recover_aug_rows.factanal <- function(x) {
 recover_aug_cols.factanal <- function(x) {
   name <- rownames(x[["loadings"]])
   res <- if (is.null(name)) {
-    tibble_pole(nrow(x[["loadings"]]))
+    tibble(.rows = nrow(x[["loadings"]]))
   } else {
     tibble(name = name)
   }

@@ -77,6 +77,15 @@ the projection of a row's coordinates (point) onto a column's coordinates
 (vector) approximates the corresponding entry of \eqn{X}.
 }
 
+\section{Acknowledgments}{
+
+
+Many users have identified problems and suggested improvements.
+
+Development benefitted from the use of equipment and the support of
+colleagues at \href{https://health.uconn.edu/}{UConn Health} and at \href{https://ufhealth.org/}{UF Health}.
+}
+
 \references{
 Podani J (2000) "Ordination". \emph{Introduction to the Exploration of
 Multivariate Biological Data} Chapter 7, 215--284. Backhuys Publishers, ISBN
@@ -103,3 +112,27 @@ Orlov K (2015) \emph{Answer to} "PCA and Correspondence analysis in their relati
 to Biplot". CrossValidated, accessed 2019-07-12.
 \url{https://stats.stackexchange.com/a/141755/68743}
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/corybrunson/ordr}
+  \item \url{https://corybrunson.github.io/ordr/}
+  \item Report bugs at \url{https://github.com/corybrunson/ordr/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Jason Cory Brunson \email{cornelioid@gmail.com} (\href{https://orcid.org/0000-0003-3126-9494}{ORCID})
+
+Authors:
+\itemize{
+  \item John Gracey \email{jbgracey6@gmail.com}
+}
+
+Other contributors:
+\itemize{
+  \item Emily Paul \email{erpb.71@gmail.com} [contributor]
+}
+
+}
+\keyword{internal}
