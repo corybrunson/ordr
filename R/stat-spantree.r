@@ -73,6 +73,8 @@ StatSpantree <- ggproto(
   
   compute_group = function(data, scales,
                            engine = "mlpack", method = "euclidean") {
+    deprecate_for_gggda("StatSpantree")
+    
     data_ord <- data[, get_ord_aes(data), drop = FALSE]
     
     # minimum spanning tree engine
