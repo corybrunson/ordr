@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.2</span>
       </span>
     </div>
 
@@ -96,7 +96,7 @@
 <div class="section level3">
 <h3 id="ordination-and-biplots">ordination and biplots<a class="anchor" aria-label="anchor" href="#ordination-and-biplots"></a>
 </h3>
-<p><em>Ordination</em> is a catch-all term for a variety of statistical techniques that introduce an artificial coordinate system for a data set in such a way that a few coordinates capture a large amount of the data structure <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. The branch of mathematical statistics called <a href="https://link.springer.com/book/10.1007/1-4020-2236-0" class="external-link">geometric data analysis</a> (GDA) provides the theoretical basis for (most of) these techniques. Ordination overlaps with regression and with dimension reduction, which can be <a href="https://towardsdatascience.com/supervised-vs-unsupervised-learning-14f68e32ea8d" class="external-link">contrasted to clustering and classification</a> in that they assign continuous rather than categorical values to data elements <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<p><em>Ordination</em> is a catch-all term for a variety of statistical techniques that introduce an artificial coordinate system for a data set in such a way that a few coordinates capture a large amount of the data structure <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. The branch of mathematical statistics called <a href="https://link.springer.com/book/10.1007/1-4020-2236-0" class="external-link">geometric data analysis</a> (GDA) provides the theoretical basis for (most of) these techniques. Ordination overlaps with regression and with dimension reduction, which can be <a href="https://towardsdatascience.com/from-supervised-to-unsupervised-learning-a-paradigm-shift-in-computer-vision-ae19ada1064d/" class="external-link">contrasted to clustering and classification</a> in that they assign continuous rather than categorical values to data elements <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
 <p>Most ordination techniques decompose a numeric rectangular data set into the product of two matrices, often using singular value decomposition (SVD). The coordinates of the shared dimensions of these matrices (over which they are multiplied) are the artificial coordinates. In some cases, such as principal components analysis, the decomposition is exact; in others, such as non-negative matrix factorization, it is approximate. Some techniques, such as correspondence analysis, transform the data before decomposition. Ordination techniques may be supervised, like linear discriminant analysis, or unsupervised, like multidimensional scaling.</p>
 <p>Analysis pipelines that use these techniques may use the artificial coordinates directly, in place of natural coordinates, to arrange and compare data elements or to predict responses. This is possible because both the rows and the columns of the original table can be located, or positioned, along these shared coordinates. The number of artificial coordinates used in an application, such as regression or visualization, is called the <em>rank</em> of the ordination <a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. A common application is the <em>biplot</em>, which positions the rows and columns of the original table in a scatterplot in 1, 2, or 3 artificial coordinates, usually those that explain the most variation in the data.</p>
 </div>
@@ -162,7 +162,7 @@
 <span><span class="co">#&gt; 3 -2.36  0.341 -0.0441     | 3 setosa </span></span>
 <span><span class="co">#&gt; 4 -2.29  0.595 -0.0910     | 4 setosa </span></span>
 <span><span class="co">#&gt; 5 -2.38 -0.645 -0.0157     | 5 setosa </span></span>
-<span><span class="co">#&gt; # … with 145 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 145 more rows</span></span>
 <span><span class="co">#&gt; # </span></span>
 <span><span class="co">#&gt; # Columns (standard): [ 4 x 4 | 3 ]</span></span>
 <span><span class="co">#&gt;      PC1     PC2    PC3 ... |   name         center scale</span></span>
@@ -191,7 +191,7 @@
 <span><span class="co">#&gt; 3 -2.36  0.341 -0.0441     | 3 setosa       1 diploid       2</span></span>
 <span><span class="co">#&gt; 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid       2</span></span>
 <span><span class="co">#&gt; 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid       2</span></span>
-<span><span class="co">#&gt; # … with 145 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 145 more rows</span></span>
 <span><span class="co">#&gt; # </span></span>
 <span><span class="co">#&gt; # Columns (standard): [ 4 x 4 | 3 ]</span></span>
 <span><span class="co">#&gt;      PC1     PC2    PC3 ... |   name         center scale</span></span>
@@ -225,7 +225,12 @@
 <span>  <span class="fu"><a href="reference/biplot-geoms.html">geom_cols_text_radiate</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">expand_limits</span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3.5</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"PCA of Anderson's iris measurements"</span>,</span>
-<span>          <span class="st">"99% confidence ellipses; variables use top &amp; right axes"</span><span class="op">)</span></span></code></pre></div>
+<span>          <span class="st">"99% confidence ellipses; variables use top &amp; right axes"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; The ggproto `GeomVector` will soon be migrated from {ordr}. </span></span>
+<span><span class="co">#&gt; No action is required at this time, but install {gggda} for future use.</span></span>
+<span><span class="co">#&gt; The ggproto `GeomTextRadiate` will soon be migrated from {ordr}. </span></span>
+<span><span class="co">#&gt; No action is required at this time, but install {gggda} for future use.</span></span>
+<span><span class="co">#&gt; This message is displayed once per session.</span></span></code></pre></div>
 <p><img src="reference/figures/README-interpolative%20biplot-1.png"><!-- --></p>
 <p>When variables are represented in standard coordinates, as typically in PCA, their rules can be rescaled to yield a predictive biplot:<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -238,7 +243,12 @@
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/biplot-geoms.html">geom_cols_axis</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">name</span>, center <span class="op">=</span> <span class="va">center</span>, scale <span class="op">=</span> <span class="va">scale</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Predictive biplot of Anderson's iris measurements"</span>,</span>
-<span>          <span class="st">"Project a marker onto an axis to approximate its measurement"</span><span class="op">)</span></span></code></pre></div>
+<span>          <span class="st">"Project a marker onto an axis to approximate its measurement"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; The ggproto `StatCenter` will soon be migrated from {ordr}. </span></span>
+<span><span class="co">#&gt; No action is required at this time, but install {gggda} for future use.</span></span>
+<span><span class="co">#&gt; The ggproto `GeomAxis` will soon be migrated from {ordr}. </span></span>
+<span><span class="co">#&gt; No action is required at this time, but install {gggda} for future use.</span></span>
+<span><span class="co">#&gt; This message is displayed once per session.</span></span></code></pre></div>
 <p><img src="reference/figures/README-predictive%20biplot-1.png"><!-- --></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, by <span class="op">=</span> <span class="va">iris</span><span class="op">[</span>, <span class="st">"Species"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>, FUN <span class="op">=</span> <span class="va">mean</span><span class="op">)</span></span>
@@ -264,7 +274,7 @@
 <div class="section level3">
 <h3 id="inspiration">inspiration<a class="anchor" aria-label="anchor" href="#inspiration"></a>
 </h3>
-<p>This package was originally inspired by the <strong>ggbiplot</strong> extension developed by <a href="https://github.com/vqv/ggbiplot" class="external-link">Vincent Q. Vu</a>, <a href="https://github.com/richardjtelford/ggbiplot" class="external-link">Richard J Telford</a>, and <a href="https://github.com/forked-packages/ggbiplot" class="external-link">Vilmantas Gegzna</a>, among others. It probably first brought biplots into the <strong>tidyverse</strong> framework. The motivation to unify a variety of ordination methods came from several books and articles by <a href="https://www.fbbva.es/microsite/multivariate-statistics/resources.html" class="external-link">Michael Greenacre</a>, in particular <a href="https://www.fbbva.es/microsite/multivariate-statistics/resources.html#biplots" class="external-link"><em>Biplots in Practice</em></a>. Several answers at CrossValidated, in particular by <a href="https://stats.stackexchange.com/users/28666/amoeba" class="external-link">amoeba</a> and <a href="https://stats.stackexchange.com/users/3277/ttnphns" class="external-link">ttnphns</a>, provided theoretical insights and informed design choices. Thomas Lin Pedersen’s <a href="https://github.com/thomasp85/tidygraph" class="external-link"><strong>tidygraph</strong></a> prequel to <strong>ggraph</strong> finally induced the shift from the downstream generation of scatterplots to the upstream handling and manipulating of ordination models. Additional design elements and features have been informed by the monograph <a href="https://www.google.com/books/edition/Biplots/lTxiedIxRpgC" class="external-link"><em>Biplots</em></a> and the textbook <a href="https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550" class="external-link"><em>Understanding Biplots</em></a> by John C. Gower, David J. Hand, Sugnet Gardner–Lubbe, and Niel J. Le Roux, and by the volume <a href="https://link.springer.com/book/10.1007/b98835" class="external-link"><em>Principal Components Analysis</em></a> by I. T. Jolliffe.</p>
+<p>This package was originally inspired by the <strong>ggbiplot</strong> extension developed by <a href="https://github.com/vqv/ggbiplot" class="external-link">Vincent Q. Vu</a>, <a href="https://github.com/richardjtelford/ggbiplot" class="external-link">Richard J Telford</a>, and <a href="https://github.com/forked-packages/ggbiplot" class="external-link">Vilmantas Gegzna</a>, among others. It probably first brought biplots into the <strong>tidyverse</strong> framework. The motivation to unify a variety of ordination methods came from several books and articles by <a href="https://www.fbbva.es/microsite/multivariate-statistics/resources.html" class="external-link">Michael Greenacre</a>, in particular <a href="https://www.fbbva.es/microsite/multivariate-statistics/resources.html#biplots" class="external-link"><em>Biplots in Practice</em></a>. Several answers at CrossValidated, in particular by <a href="https://stats.stackexchange.com/users/28666/amoeba" class="external-link">amoeba</a> and <a href="https://stats.stackexchange.com/users/3277/ttnphns" class="external-link">ttnphns</a>, provided theoretical insights and informed design choices. Thomas Lin Pedersen’s <a href="https://github.com/thomasp85/tidygraph" class="external-link"><strong>tidygraph</strong></a> prequel to <strong>ggraph</strong> finally induced the shift from the downstream generation of scatterplots to the upstream handling and manipulating of ordination models. Additional design elements and features have been informed by the monograph <a href="https://www.google.com/books/edition/Biplots/lTxiedIxRpgC" class="external-link"><em>Biplots</em></a> and the textbook <a href="https://www.wiley.com/en-us/Understanding+Biplots-p-9781119972907" class="external-link"><em>Understanding Biplots</em></a> by John C. Gower, David J. Hand, Sugnet Gardner–Lubbe, and Niel J. Le Roux, and by the volume <a href="https://link.springer.com/book/10.1007/b98835" class="external-link"><em>Principal Components Analysis</em></a> by I. T. Jolliffe.</p>
 </div>
 <div class="section level3">
 <h3 id="notes">notes<a class="anchor" aria-label="anchor" href="#notes"></a>
@@ -333,6 +343,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://cran.r-project.org/package=ordr" class="external-link"><img src="http://www.r-pkg.org/badges/version/ordr" alt="CRAN"></a></li>
 </ul>
 </div>
 

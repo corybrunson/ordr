@@ -17,6 +17,7 @@ devtools::load_all()
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN](http://www.r-pkg.org/badges/version/ordr)](https://cran.r-project.org/package=ordr)
 <!-- badges: end -->
 
 **ordr** integrates ordination analysis and biplot visualization into [**tidyverse**](https://github.com/tidyverse/tidyverse) workflows.
@@ -31,7 +32,7 @@ devtools::load_all()
 
 _Ordination_ is a catch-all term for a variety of statistical techniques that introduce an artificial coordinate system for a data set in such a way that a few coordinates capture a large amount of the data structure [^ordination].
 The branch of mathematical statistics called [geometric data analysis](https://link.springer.com/book/10.1007/1-4020-2236-0) (GDA) provides the theoretical basis for (most of) these techniques.
-Ordination overlaps with regression and with dimension reduction, which can be [contrasted to clustering and classification](https://towardsdatascience.com/supervised-vs-unsupervised-learning-14f68e32ea8d) in that they assign continuous rather than categorical values to data elements [^continuous-categorical].
+Ordination overlaps with regression and with dimension reduction, which can be [contrasted to clustering and classification](https://towardsdatascience.com/from-supervised-to-unsupervised-learning-a-paradigm-shift-in-computer-vision-ae19ada1064d/) in that they assign continuous rather than categorical values to data elements [^continuous-categorical].
 
 [^ordination]: The term _ordination_ is most prevalent among ecologists; no catch-all term seems to be in common use outside ecology.
 [^continuous-categorical]: This is not a hard rule: PCA is often used to compress data before clustering, and LDA uses dimension reduction to perform classification tasks.
@@ -161,7 +162,7 @@ This package was originally inspired by the **ggbiplot** extension developed by 
 The motivation to unify a variety of ordination methods came from several books and articles by [Michael Greenacre](https://www.fbbva.es/microsite/multivariate-statistics/resources.html), in particular [_Biplots in Practice_](https://www.fbbva.es/microsite/multivariate-statistics/resources.html#biplots).
 Several answers at CrossValidated, in particular by [amoeba](https://stats.stackexchange.com/users/28666/amoeba) and [ttnphns](https://stats.stackexchange.com/users/3277/ttnphns), provided theoretical insights and informed design choices.
 Thomas Lin Pedersen's [**tidygraph**](https://github.com/thomasp85/tidygraph) prequel to **ggraph** finally induced the shift from the downstream generation of scatterplots to the upstream handling and manipulating of ordination models.
-Additional design elements and features have been informed by the monograph [_Biplots_](https://www.google.com/books/edition/Biplots/lTxiedIxRpgC) and the textbook [_Understanding Biplots_](https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550) by John C. Gower, David J. Hand, Sugnet Gardner--Lubbe, and Niel J. Le Roux, and by the volume [_Principal Components Analysis_](https://link.springer.com/book/10.1007/b98835) by I. T. Jolliffe.
+Additional design elements and features have been informed by the monograph [_Biplots_](https://www.google.com/books/edition/Biplots/lTxiedIxRpgC) and the textbook [_Understanding Biplots_](https://www.wiley.com/en-us/Understanding+Biplots-p-9781119972907) by John C. Gower, David J. Hand, Sugnet Gardner--Lubbe, and Niel J. Le Roux, and by the volume [_Principal Components Analysis_](https://link.springer.com/book/10.1007/b98835) by I. T. Jolliffe.
 
 ### notes
 

@@ -7,6 +7,7 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN](http://www.r-pkg.org/badges/version/ordr)](https://cran.r-project.org/package=ordr)
 <!-- badges: end -->
 
 **ordr** integrates ordination analysis and biplot visualization into
@@ -26,7 +27,7 @@ analysis](https://link.springer.com/book/10.1007/1-4020-2236-0) (GDA)
 provides the theoretical basis for (most of) these techniques.
 Ordination overlaps with regression and with dimension reduction, which
 can be [contrasted to clustering and
-classification](https://towardsdatascience.com/supervised-vs-unsupervised-learning-14f68e32ea8d)
+classification](https://towardsdatascience.com/from-supervised-to-unsupervised-learning-a-paradigm-shift-in-computer-vision-ae19ada1064d/)
 in that they assign continuous rather than categorical values to data
 elements [^3].
 
@@ -148,7 +149,7 @@ as annotations to the appropriate matrix factors:[^7]
 #> 3 -2.36  0.341 -0.0441     | 3 setosa 
 #> 4 -2.29  0.595 -0.0910     | 4 setosa 
 #> 5 -2.38 -0.645 -0.0157     | 5 setosa 
-#> # … with 145 more rows
+#> # ℹ 145 more rows
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
 #>      PC1     PC2    PC3 ... |   name         center scale
@@ -181,7 +182,7 @@ iris_meta <- data.frame(
 #> 3 -2.36  0.341 -0.0441     | 3 setosa       1 diploid       2
 #> 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid       2
 #> 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid       2
-#> # … with 145 more rows
+#> # ℹ 145 more rows
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
 #>      PC1     PC2    PC3 ... |   name         center scale
@@ -229,6 +230,11 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
   expand_limits(y = c(-3.5, NA)) +
   ggtitle("PCA of Anderson's iris measurements",
           "99% confidence ellipses; variables use top & right axes")
+#> The ggproto `GeomVector` will soon be migrated from {ordr}. 
+#> No action is required at this time, but install {gggda} for future use.
+#> The ggproto `GeomTextRadiate` will soon be migrated from {ordr}. 
+#> No action is required at this time, but install {gggda} for future use.
+#> This message is displayed once per session.
 ```
 
 ![](man/figures/README-interpolative%20biplot-1.png)<!-- -->
@@ -247,6 +253,11 @@ ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
   geom_cols_axis(aes(label = name, center = center, scale = scale)) +
   ggtitle("Predictive biplot of Anderson's iris measurements",
           "Project a marker onto an axis to approximate its measurement")
+#> The ggproto `StatCenter` will soon be migrated from {ordr}. 
+#> No action is required at this time, but install {gggda} for future use.
+#> The ggproto `GeomAxis` will soon be migrated from {ordr}. 
+#> No action is required at this time, but install {gggda} for future use.
+#> This message is displayed once per session.
 ```
 
 ![](man/figures/README-predictive%20biplot-1.png)<!-- -->
@@ -305,7 +316,7 @@ models. Additional design elements and features have been informed by
 the monograph
 [*Biplots*](https://www.google.com/books/edition/Biplots/lTxiedIxRpgC)
 and the textbook [*Understanding
-Biplots*](https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550)
+Biplots*](https://www.wiley.com/en-us/Understanding+Biplots-p-9781119972907)
 by John C. Gower, David J. Hand, Sugnet Gardner–Lubbe, and Niel J. Le
 Roux, and by the volume [*Principal Components
 Analysis*](https://link.springer.com/book/10.1007/b98835) by I. T.
