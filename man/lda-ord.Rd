@@ -303,7 +303,7 @@ variable and Linear Discriminant Analysis". CrossValidated, accessed
 
 Greenacre M (2013) "Contribution Biplots". \emph{Journal of Computational and
 Graphical Statistics}, \strong{22}(1): 107--122.
-\url{https://doi.org/10.1080/10618600.2012.702494}
+\url{https://www.tandfonline.com/doi/full/10.1080/10618600.2012.702494}
 }
 \seealso{
 \code{\link[MASS:lda]{MASS::lda()}}, from which \code{lda_ord()} is adapted

@@ -211,7 +211,7 @@ print(qswur_usa2020)
 
 This subset of universities is now contiguously ranked along the six dimensions described above. The Kendall correlation $\tau_{ij}$ between two rankings measures their concordance. To calculate it, every pair of universities contributes either $+1$ or $-1$ according as the rankings $i$ and $j$ place that pair in the same order, and the sum is scaled down by the number of pairs ${n\choose 2}$ so that the result lies between $-1$ and $1$. We interpret $\tau_{ij}=1$ as perfect concordance (the rankings are equivalent), $\tau_{ij}=-1$ as perfect discordance (the rankings are reversed), and $\tau_{ij}=0$ as independence (the rankings are independent).
 
-[The six QS rankings](https://www.topuniversities.com/qs-world-university-rankings/methodology) are
+[The six QS rankings](https://www.topuniversities.com/world-university-rankings/methodology) are
 
 * academic reputation (`rk_academic`), 
 * employer reputation (`rk_employer`)

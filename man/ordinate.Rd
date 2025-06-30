@@ -36,9 +36,9 @@ other arguments are explicit, which will be evaluated with \code{x} in place of
 \item{cols}{<\code{\link[tidyr:tidyr_tidy_select]{tidy-select}}> If \code{x} is a data
 frame, columns to pass to \code{model}. If missing, all columns are used.}
 
-\item{augment}{<\code{\link[=tidyr_tidy_select]{tidy-select}}> If \code{x} is a data frame,
-columns to augment to the row data of the ordination. If missing, all
-columns not included in \code{cols} will be augmented.}
+\item{augment}{<\code{\link[tidyr:tidyr_tidy_select]{tidy-select}}> If \code{x} is a data
+frame, columns to augment to the row data of the ordination. If missing,
+all columns not included in \code{cols} will be augmented.}
 }
 \value{
 An augmented tbl_ord.

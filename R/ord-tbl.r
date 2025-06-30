@@ -9,7 +9,7 @@
 #'
 #' The tbl_ord class wraps around a range of ordination classes, making
 #' available a suite of ordination tools that specialize to each original object
-#' class. These tools include [format()] and [fortify()] methods, which
+#' class. These tools include [format()] and [ggplot2::fortify()] methods, which
 #' facilitate the [print()] method and the [ggbiplot()] function.
 #'
 #' No default method is provided for `as_tbl_ord()`, despite most defined
