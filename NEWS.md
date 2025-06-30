@@ -1,3 +1,9 @@
+# next version
+
+This patch prepares for an upcoming *ggplot2* release that overhauls aesthetic mappings. No changes to user experience are anticipated.
+
+The patch also soft-deprecates, with a once-per-session message, several 'ggproto's and associated plot layers that are being migrated to {gggda}.
+
 # ordr 0.1.1
 
 ## `linewidth` aesthetic (breaking change)
