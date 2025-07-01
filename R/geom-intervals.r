@@ -89,7 +89,6 @@ GeomPointranges <- ggproto(
   draw_key = draw_key_crosspoint,
   
   draw_panel = function(data, panel_params, coord, flatten = 4) {
-    deprecate_for_gggda("GeomPointranges")
     
     pt_data <- data
     pt_data$size = pt_data$size * flatten
@@ -115,8 +114,7 @@ GeomLineranges <- ggproto(
   draw_key = draw_key_crosslines,
   
   draw_panel = function(data, panel_params, coord) {
-    deprecate_for_gggda("GeomLineranges")
-    
+
     x_data <- transform(data, x = xmin, xend = xmax, yend = y)
     y_data <- transform(data, xend = x, y = ymin, yend = ymax)
     data <- rbind(x_data, y_data)

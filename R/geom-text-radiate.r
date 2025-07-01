@@ -72,7 +72,6 @@ GeomTextRadiate <- ggproto(
     na.rm = FALSE,
     check_overlap = FALSE
   ) {
-    deprecate_for_gggda("GeomTextRadiate")
     
     if (is.character(data$hjust)) {
       data$hjust <- compute_just(data$hjust, data$x)

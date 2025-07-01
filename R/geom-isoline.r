@@ -130,7 +130,6 @@ GeomIsoline <- ggproto(
     parse = FALSE, check_overlap = FALSE,
     na.rm = TRUE
   ) {
-    deprecate_for_gggda("GeomIsoline")
     
     # copy `linewidth` to `size` for earlier **ggplot2** versions
     data$size <- data$linewidth

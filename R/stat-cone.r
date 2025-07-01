@@ -51,7 +51,6 @@ StatCone <- ggproto(
     data, scales,
     origin = FALSE
   ) {
-    deprecate_for_gggda("StatCone")
     
     ord_cols <- get_ord_aes(data)
     

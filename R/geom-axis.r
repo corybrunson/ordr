@@ -154,7 +154,6 @@ GeomAxis <- ggproto(
     parse = FALSE, check_overlap = FALSE,
     na.rm = FALSE
   ) {
-    deprecate_for_gggda("GeomAxis")
     
     if (! coord$is_linear()) {
       warning("Axes are not yet tailored to non-linear coordinates.")

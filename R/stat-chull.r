@@ -48,7 +48,6 @@ StatChull <- ggproto(
   compute_group = function(
     data, scales
   ) {
-    deprecate_for_gggda("StatChull")
     
     ord_cols <- get_ord_aes(data)
     

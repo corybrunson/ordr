@@ -73,7 +73,6 @@ GeomVector <- ggproto(
     lineend = "round", linejoin = "mitre",
     na.rm = FALSE
   ) {
-    deprecate_for_gggda("GeomVector")
     
     if (! coord$is_linear()) {
       warning("Vectors are not yet tailored to non-linear coordinates.")

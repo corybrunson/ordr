@@ -1,15 +1,4 @@
 
-deprecate_for_gggda <- function(ggproto) {
-  stopifnot(inherits(get(ggproto), "ggproto"))
-  rlang::inform(
-    paste0(
-      "The ggproto `", ggproto, "` will soon be migrated from {ordr}. \n",
-      "No action is required at this time, but install {gggda} for future use."
-    ),
-    .frequency = "once", .frequency_id = ggproto
-  )
-}
-
 #' @importFrom utils getFromNamespace
 
 #' @importFrom magrittr %>%
