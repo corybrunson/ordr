@@ -1,8 +1,6 @@
 ## Resubmission
 
-This patch prepares for an upcoming major version increment that addresses
-(1) an upcoming {ggplot2} upgrade and
-(2) the upcoming spinoff and dependency {gggda}.
+This patch addresses an upcoming {ggplot2} upgrade.
 
 ## R CMD checks
 
