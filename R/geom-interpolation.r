@@ -48,7 +48,7 @@
 
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
-#' @inheritParams geom_vector
+#' @inheritParams gggda::geom_vector
 #' @template param-geom
 #' @param new_data A list (best structured as a [data.frame][base::data.frame])
 #'   of row (`geom_cols_interpolation()`) or column

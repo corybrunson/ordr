@@ -31,9 +31,9 @@
 #'   \item{`xend,yend`}{projections onto (specified) vectors}
 #' }
 
-#' @include stat-referent.r
+#' @importFrom gggda StatReferent
 #' @inheritParams ggplot2::layer
-#' @inheritParams stat_referent
+#' @inheritParams gggda::stat_referent
 #' @template param-stat
 #' @template return-layer
 #' @family stat layers

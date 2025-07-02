@@ -19,5 +19,5 @@ ggbiplot(iris_pca) +
   geom_rows_point(aes(color = Species), shape = "circle open") +
   stat_rows_peel(
     aes(fill = Species, alpha = after_stat(hull)),
-    breaks = c(.9, .5, .1)
+    num = 3
   )

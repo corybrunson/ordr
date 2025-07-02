@@ -8,8 +8,6 @@
 \alias{stat_cols_density_2d_filled}
 \alias{stat_rows_ellipse}
 \alias{stat_cols_ellipse}
-\alias{stat_rows_bagplot}
-\alias{stat_cols_bagplot}
 \alias{stat_rows_center}
 \alias{stat_cols_center}
 \alias{stat_rows_star}
@@ -24,14 +22,16 @@
 \alias{stat_cols_depth}
 \alias{stat_rows_depth_filled}
 \alias{stat_cols_depth_filled}
-\alias{stat_rows_projection}
-\alias{stat_cols_projection}
-\alias{stat_rows_rule}
-\alias{stat_cols_rule}
 \alias{stat_rows_scale}
 \alias{stat_cols_scale}
 \alias{stat_rows_spantree}
 \alias{stat_cols_spantree}
+\alias{stat_rows_bagplot}
+\alias{stat_cols_bagplot}
+\alias{stat_rows_rule}
+\alias{stat_cols_rule}
+\alias{stat_rows_projection}
+\alias{stat_cols_projection}
 \title{Convenience stats for row and column matrix factors}
 \usage{
 stat_rows_density_2d(
@@ -126,36 +126,6 @@ stat_cols_ellipse(
   inherit.aes = TRUE
 )
 
-stat_rows_bagplot(
-  mapping = NULL,
-  data = NULL,
-  geom = "bagplot",
-  position = "identity",
-  fraction = 0.5,
-  coef = 3,
-  median = TRUE,
-  fence = TRUE,
-  outliers = TRUE,
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ...
-)
-
-stat_cols_bagplot(
-  mapping = NULL,
-  data = NULL,
-  geom = "bagplot",
-  position = "identity",
-  fraction = 0.5,
-  coef = 3,
-  median = TRUE,
-  fence = TRUE,
-  outliers = TRUE,
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ...
-)
-
 stat_rows_center(
   mapping = NULL,
   data = NULL,
@@ -245,6 +215,8 @@ stat_rows_peel(
   data = NULL,
   geom = "polygon",
   position = "identity",
+  num = NULL,
+  by = 1L,
   breaks = c(0.5),
   cut = c("above", "below"),
   show.legend = NA,
@@ -257,6 +229,8 @@ stat_cols_peel(
   data = NULL,
   geom = "polygon",
   position = "identity",
+  num = NULL,
+  by = 1L,
   breaks = c(0.5),
   cut = c("above", "below"),
   show.legend = NA,
@@ -346,66 +320,6 @@ stat_cols_depth_filled(
   ...
 )
 
-stat_rows_projection(
-  mapping = NULL,
-  data = NULL,
-  geom = "segment",
-  position = "identity",
-  referent = NULL,
-  ref_subset = NULL,
-  ref_elements = "active",
-  ...,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
-stat_cols_projection(
-  mapping = NULL,
-  data = NULL,
-  geom = "segment",
-  position = "identity",
-  referent = NULL,
-  ref_subset = NULL,
-  ref_elements = "active",
-  ...,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
-stat_rows_rule(
-  mapping = NULL,
-  data = NULL,
-  geom = "rule",
-  position = "identity",
-  fun.lower = "minpp",
-  fun.upper = "maxpp",
-  fun.offset = "minabspp",
-  fun.args = list(),
-  referent = NULL,
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ref_subset = NULL,
-  ref_elements = "active",
-  ...
-)
-
-stat_cols_rule(
-  mapping = NULL,
-  data = NULL,
-  geom = "rule",
-  position = "identity",
-  fun.lower = "minpp",
-  fun.upper = "maxpp",
-  fun.offset = "minabspp",
-  fun.args = list(),
-  referent = NULL,
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ref_subset = NULL,
-  ref_elements = "active",
-  ...
-)
-
 stat_rows_scale(
   mapping = NULL,
   data = NULL,
@@ -450,6 +364,96 @@ stat_cols_spantree(
   show.legend = NA,
   inherit.aes = TRUE,
   ...
+)
+
+stat_rows_bagplot(
+  mapping = NULL,
+  data = NULL,
+  geom = "bagplot",
+  position = "identity",
+  fraction = 0.5,
+  coef = 3,
+  median = TRUE,
+  fence = TRUE,
+  outliers = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_cols_bagplot(
+  mapping = NULL,
+  data = NULL,
+  geom = "bagplot",
+  position = "identity",
+  fraction = 0.5,
+  coef = 3,
+  median = TRUE,
+  fence = TRUE,
+  outliers = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_rows_rule(
+  mapping = NULL,
+  data = NULL,
+  geom = "rule",
+  position = "identity",
+  fun.lower = "minpp",
+  fun.upper = "maxpp",
+  fun.offset = "minabspp",
+  fun.args = list(),
+  referent = NULL,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ref_subset = NULL,
+  ref_elements = "active",
+  ...
+)
+
+stat_cols_rule(
+  mapping = NULL,
+  data = NULL,
+  geom = "rule",
+  position = "identity",
+  fun.lower = "minpp",
+  fun.upper = "maxpp",
+  fun.offset = "minabspp",
+  fun.args = list(),
+  referent = NULL,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ref_subset = NULL,
+  ref_elements = "active",
+  ...
+)
+
+stat_rows_projection(
+  mapping = NULL,
+  data = NULL,
+  geom = "segment",
+  position = "identity",
+  referent = NULL,
+  ref_subset = NULL,
+  ref_elements = "active",
+  ...,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+stat_cols_projection(
+  mapping = NULL,
+  data = NULL,
+  geom = "segment",
+  position = "identity",
+  referent = NULL,
+  ref_subset = NULL,
+  ref_elements = "active",
+  ...,
+  show.legend = NA,
+  inherit.aes = TRUE
 )
 }
 \arguments{
@@ -544,13 +548,6 @@ or, if \code{type="euclid"}, the radius of the circle to be drawn.}
 
 \item{segments}{The number of segments to be used in drawing the ellipse.}
 
-\item{fraction}{Fraction of the data to include in the bag.}
-
-\item{coef}{Scale factor of the fence relative to the bag.}
-
-\item{median, fence, outliers}{Logical indicators whether to include median,
-fence, and outliers in the composite output.}
-
 \item{fun.data}{A function that is given the complete data and should
 return a data frame with variables \code{ymin}, \code{y}, and \code{ymax}.}
 
@@ -567,12 +564,17 @@ together with \code{fun.min} and \code{fun.max}.}
 
 \item{fun.args}{Optional additional arguments passed on to the functions.}
 
-\item{breaks}{A numeric vector of fractions (between \code{0} and \code{1}) of the
-data to contain in each hull.}
+\item{num}{A positive integer; the number of hulls to peel. Pass \code{Inf} for
+all hulls.}
+
+\item{by}{A positive integer; with what frequency to include consecutive
+hulls, pairs with \code{num}.}
+
+\item{breaks}{A numeric vector of fractions (between \code{0} and \code{1}) of the data
+to contain in each hull; overridden by \code{num}.}
 
 \item{cut}{Character; one of \code{"above"} and \code{"below"}, indicating whether each
-hull should contain at least or at most \code{breaks} of the data,
-respectively.}
+hull should contain at least or at most \code{breaks} of the data, respectively.}
 
 \item{origin}{Logical; whether to include the origin with the transformed
 data. Defaults to \code{FALSE}.}
@@ -583,15 +585,6 @@ data. Defaults to \code{FALSE}.}
 \item{notion_params}{List of additional parameters passed via \code{...} to
 \code{\link[ddalpha:depth.]{ddalpha::depth.()}}.}
 
-\item{referent}{The reference data set; see Details.}
-
-\item{ref_elements, ref_subset}{Analogues of \code{elements} and \code{subset} applied
-to \code{referent}.}
-
-\item{fun.lower, fun.upper, fun.offset}{Functions used to determine the limits
-of the rules and the translations of the axes from the projections of
-\code{referent} onto the axes and onto their normal vectors.}
-
 \item{mult}{Numeric value used to scale the coordinates.}
 
 \item{engine}{A single character string specifying the package implementation
@@ -599,6 +592,22 @@ to use; \code{"mlpack"}, \code{"vegan"}, or \code{"ade4"}.}
 
 \item{method}{Passed to \code{\link[stats:dist]{stats::dist()}} if \code{engine} is \code{"vegan"} or \code{"ade4"},
 ignored if \code{"mlpack"}.}
+
+\item{fraction}{Fraction of the data to include in the bag.}
+
+\item{coef}{Scale factor of the fence relative to the bag.}
+
+\item{median, fence, outliers}{Logical indicators whether to include median,
+fence, and outliers in the composite output.}
+
+\item{fun.lower, fun.upper, fun.offset}{Functions used to determine the limits
+of the rules and the translations of the axes from the projections of
+\code{referent} onto the axes and onto their normal vectors.}
+
+\item{referent}{The reference data set; see Details.}
+
+\item{ref_elements, ref_subset}{Analogues of \code{elements} and \code{subset} applied
+to \code{referent}.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.
@@ -783,7 +792,7 @@ ggbiplot(iris_pca) +
   geom_rows_point(aes(color = Species), shape = "circle open") +
   stat_rows_peel(
     aes(fill = Species, alpha = after_stat(hull)),
-    breaks = c(.9, .5, .1)
+    num = 3
   )
 # unscaled PCA
 iris_pca <- ordinate(iris, cols = 1:4, model = prcomp)
@@ -902,7 +911,6 @@ euro_plot +
 \seealso{
 Other biplot layers: 
 \code{\link{biplot-geoms}},
-\code{\link{stat_referent}()},
 \code{\link{stat_rows}()}
 }
 \concept{biplot layers}

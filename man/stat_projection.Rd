@@ -174,15 +174,4 @@ ggplot(subcars, aes(x = hp00, y = wt)) +
   geom_vector(data = -grad) +
   stat_projection(referent = grad)
 }
-\seealso{
-Other stat layers: 
-\code{\link{stat_bagplot}()},
-\code{\link{stat_center}()},
-\code{\link{stat_chull}()},
-\code{\link{stat_cone}()},
-\code{\link{stat_depth}()},
-\code{\link{stat_rule}()},
-\code{\link{stat_scale}()},
-\code{\link{stat_spantree}()}
-}
 \concept{stat layers}

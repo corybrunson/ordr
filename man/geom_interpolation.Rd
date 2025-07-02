@@ -203,13 +203,6 @@ Wiley, ISBN: 978-0-470-01255-0. \url{https://www.wiley.com/go/biplots}
 }
 \seealso{
 Other geom layers: 
-\code{\link{geom_axis}()},
-\code{\link{geom_bagplot}()},
-\code{\link{geom_isoline}()},
-\code{\link{geom_lineranges}()},
-\code{\link{geom_origin}()},
-\code{\link{geom_rule}()},
-\code{\link{geom_text_radiate}()},
-\code{\link{geom_vector}()}
+\code{\link{geom_origin}()}
 }
 \concept{geom layers}

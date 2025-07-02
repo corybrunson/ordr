@@ -66,7 +66,9 @@ get_from <- c(
   # `geom_vector()`
   compute_just = "ggplot2",
   # `geom_text_repel()`
-  to_unit = "ggrepel"
+  position_nudge_repel = "ggrepel", to_unit = "ggrepel",
+  # `stat_rule()`
+  minpp = "gggda", maxpp = "gggda", minabspp = "gggda"
 )
 
 # # convert `nudge_x/nudge_y` parameters to position parameter
@@ -269,18 +271,33 @@ Sys.sleep(.5)
 
 # ggplot2 & other (non-ordr) extension layers to adapt to biplot layers
 orig_layers <- c(
+  # ggplot2
   "ggplot2::stat_density_2d", "ggplot2::stat_density_2d_filled",
   "ggplot2::stat_ellipse",
   "ggplot2::geom_point", "ggplot2::geom_path", "ggplot2::geom_polygon",
   "ggplot2::geom_contour",
   "ggplot2::geom_density_2d", "ggplot2::geom_density_2d_filled",
   "ggplot2::geom_text", "ggplot2::geom_label",
-  "ggrepel::geom_text_repel", "ggrepel::geom_label_repel"
+  # ggrepel
+  "ggrepel::geom_text_repel", "ggrepel::geom_label_repel",
+  # gggda
+  "gggda::geom_axis",
+  "gggda::geom_pointranges", "gggda::geom_lineranges",
+  "gggda::geom_isoline",
+  "gggda::geom_text_radiate",
+  "gggda::geom_vector",
+  "gggda::stat_center", "gggda::stat_star",
+  "gggda::stat_chull", "gggda::stat_peel",
+  "gggda::stat_cone",
+  "gggda::stat_depth", "gggda::stat_depth_filled",
+  "gggda::stat_scale",
+  "gggda::stat_spantree",
+  "gggda::stat_bagplot", "gggda::geom_bagplot",
+  "gggda::stat_rule", "gggda::geom_rule"
 )
 # ordr layers to not adapt to biplot layers
 omit_layers <- c(
-  "geom_origin", "geom_unit_circle",
-  "stat_referent"
+  "geom_origin", "geom_unit_circle"
 )
 
 # layers that use reference data (necessarily 2 coordinates only)
@@ -291,11 +308,21 @@ ref_layers <- c(
 # layers that require restriction to 2 coordinates (without package recoverers)
 xy_layers <- c(
   "stat_density_2d", "stat_density_2d_filled",
+  # "stat_chull", "stat_peel",
+  # "stat_depth", "stat_depth_filled", "stat_bagplot",
   "stat_ellipse",
   "stat_scale",
   "stat_center", "stat_star",
   ref_layers
 )
+# remind which layers do not require restriction (maybe all do?)
+orig_layers |> 
+  str_remove("^.+::") |> 
+  str_subset("stat_") |> 
+  setdiff(xy_layers) |> 
+  str_c(collapse = "`, `") |> 
+  (function(s) str_c("Non-`xy` stat layers: `", s, "`"))() |> 
+  message()
 
 # all files with stat or geom definitions
 layer_files <- list.files(here::here("R/"), "^(stat|geom)-.*\\.(r|R)")
@@ -391,7 +418,7 @@ for (type in c("stat", "geom")) {
     "#' @name biplot-{type}s\n",
     "#' @template return-layer\n",
     "#' @family biplot layers\n",
-    "#' @include utils.r\n",
+    "#' @include layer-utils.r\n",
     "#' @import ggplot2\n",
     "\n"
   )
@@ -406,7 +433,7 @@ for (type in c("stat", "geom")) {
         "#'   ",
         c(
           port_protos[wh_port][wh_pkg],
-          str_remove(port_layers[wh_port], "^[^:]+::")
+          str_remove(port_layers[wh_port][wh_pkg], "^[^:]+::")
         ),
         "\n",
         collapse = ""
@@ -414,7 +441,7 @@ for (type in c("stat", "geom")) {
       "\n"
     )
   })
-  adapt_imports <- glue::glue(import_str)
+  adapt_imports <- glue::glue(str_c(import_str, collapse = ""))
   # derived exports
   adapt_exports <- if (length(wh_port) == 0L) "" else glue::glue(
     "\n\n",
