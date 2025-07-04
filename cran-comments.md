@@ -1,65 +1,52 @@
-
 ## Resubmission
 
-This is a resubmission that addresses issues with two previous submissions flagged by the maintainers.
-It also includes some substantive changes from the previous submission. The same set of checks have been performed and are mostly unchanged from the previous.
+This patch addresses an upcoming {ggplot2} upgrade.
 
-## Test environments
+## R CMD checks
 
-* local OS X install, R 4.1.1, "Kick Things" (via `devtools::check()`)
-* local OS X install, R 4.2.1, "Funny-Looking Kid" (via `devtools::check()`) with **ggplot2** installed at commit a58b48c (v3.3.6.9000 following `linewidth` change)
-* R-hub (via `rhub::check_for_cran()`)
-* R-hub (via `rhub::check_for_cran(platforms = "macos-highsierra-release-cran")`)
-* Win-Builder (devel, current, and previous; via `devtools::check_win_*()`)
+Local checks were performed both with the current CRAN version 3.5.2 of {ggplot2} and with the current development version (2025 Jun 30).
 
-### R CMD check results (R 4.1.1)
+### Test environments
 
-There were no ERRORs, WARNINGs, or NOTEs.
+* local OS X install, R 4.4.2
+  * `devtools::check()`
+  * `devtools::check(env_vars = c('_R_CHECK_DEPENDS_ONLY_' = "true"))`
+  * `devtools::check(manual = TRUE, remote = TRUE)`
+* Win-Builder
+  * `devtools::check_win_oldrelease()`
+  * `devtools::check_win_release()`
+  * `devtools::check_win_devel()`
 
-### R CMD check results (R 4.2.1)
+### local results
 
-There were no ERRORs or WARNINGs. There was one NOTE.
+There were no ERRORs or WARNINGs.
+Two NOTEs were consistently produced:
 
-The note read as follows:
 ```
-Packages suggested but not available for checking: 'mlpack', 'vegan'
+❯ checking package dependencies ... NOTE
+  Package suggested but not available for checking: ‘mlpack’
+
+❯ checking for future file timestamps ... NOTE
+  unable to verify current time
 ```
-This was an intentional check on a machine without these packages installed.
 
-### Win-Builder
+The first was an intentional check on a machine without these packages installed.
+The second is presumably due to internet speeds.
 
-There were no ERRORs or WARNINGs. There was one NOTE.
+### Win-Builder results
 
-The note flagged this as a new submission.
-The note also flagged the possible misspellings 'al', 'pre', 'biplot' (and its plural 'biplots'), 'eigen', 'decompositions', 'workflows', and 'scatterplots', which are standard technical terms or abbreviations.
-Finally, the note flagged some possibly invalid DOI-based and other URLs:
-* <https://doi.org/10.1111/j.1475-4754.2006.00270.x>
-* <https://doi.org/10.2307/2394164>
-* <https://doi.org/10.2307/2683520>
-* <https://support.qs.com/hc/en-gb/articles/360021876820-QS-Institution-Classifications>
-All of these are correct and have been verified. (Some redirect but are intended to remain DOI links for permanence.)
+There were no ERRORs or WARNINGs. All NOTEs not seen above are addressed below.
 
-The note was consistent across all three checks, though the specific spellings and URLs varied.
+The following URLs work for me:
 
-### R-hub (default)
-
-There were no ERRORs or WARNINGs. There were two NOTEs.
-
-One note flagged the same new submission status, possible misspellings, and possibly invalid URLs as the Win-Builder checks.
-
-One note read as follows:
 ```
-* checking for detritus in the temp directory ... NOTE
-Found the following files/directories:
-  'lastMiKTeXException'
+Found the following (possibly) invalid URLs:
+  URL: https://stackoverflow.com/help/minimal-reproducible-example
+    From: README.md
+    Status: 404
+    Message: Not Found
+  URL: https://support.qs.com/hc/en-gb/articles/360021876820-QS-Institution-Classifications
+    From: inst/doc/cmds-variables.html
+    Status: 403
+    Message: Forbidden
 ```
-As documented, this note is probably due to a MiKTeX bug that can be ignored:
-<https://github.com/r-hub/rhub/issues/503>
-
-### R-hub (High Sierra)
-
-There were no ERRORs, WARNINGs, or NOTEs.
-
-## Reverse dependencies
-
-There are no reverse dependencies.

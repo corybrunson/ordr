@@ -89,6 +89,10 @@ A new 'depth' statistical transformation estimates depth across a grid and is pa
 Aided by element standardization, the classic `density_2d` statistical transformation and geometric construction are adapted to biplots.
 Currently, source code generation does not respect fixed parameters passed to `layer()` by the `stat_*()` and `geom_*()` shortcuts; as a consequence, `contour = TRUE` must be manually passed to `geom_*_density_2d()`.
 
+# ordr 0.1.2
+
+This patch prepares for an upcoming *ggplot2* release that overhauls aesthetic mappings (#82). No changes to user experience are anticipated.
+
 # ordr 0.1.1
 
 ## `linewidth` aesthetic (breaking change)

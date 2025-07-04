@@ -79,7 +79,6 @@
 #' @template ref-greenacre2010
 #' @template ref-orlov2015
 
-#' @docType package
 #' @name ordr
 #' @aliases ordr-package
 #' @keywords internal

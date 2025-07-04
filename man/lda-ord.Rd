@@ -8,6 +8,7 @@
 \alias{lda_ord.matrix}
 \alias{lda_ord.default}
 \alias{predict.lda_ord}
+\alias{model.frame.lda_ord}
 \title{Augmented implementation of linear discriminant analysis}
 \usage{
 lda_ord(x, ...)
@@ -40,6 +41,8 @@ lda_ord(x, ...)
   method = c("plug-in", "predictive", "debiased"),
   ...
 )
+
+\method{model.frame}{lda_ord}(formula, ...)
 }
 \arguments{
 \item{x}{
@@ -283,7 +286,7 @@ variable and Linear Discriminant Analysis". CrossValidated, accessed
 
 Greenacre M (2013) "Contribution Biplots". \emph{Journal of Computational and
 Graphical Statistics}, \strong{22}(1): 107--122.
-\url{https://amstat.tandfonline.com/doi/full/10.1080/10618600.2012.702494}
+\url{https://www.tandfonline.com/doi/full/10.1080/10618600.2012.702494}
 }
 \seealso{
 \code{\link[MASS:lda]{MASS::lda()}}, from which \code{lda_ord()} is adapted

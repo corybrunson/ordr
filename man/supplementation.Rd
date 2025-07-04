@@ -34,8 +34,8 @@ The motivating example is linear discriminant analysis, which produces a
 natural biplot of class discriminant centroids and variable axes but is
 usually supplemented with case discriminant scores. The supplementary values
 are augmented with an \code{.element} column whose value indicates their source
-and can be incorporated into a \link[=fortify]{tidied form}. If no supplementary
-rows of a factor are produced, the functions return \code{NULL}.
+and can be incorporated into a \link[ggplot2:fortify]{tidied form}. If no
+supplementary rows of a factor are produced, the functions return \code{NULL}.
 }
 \seealso{
 Other generic recoverers: 

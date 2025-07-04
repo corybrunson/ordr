@@ -28,9 +28,9 @@
 #'   `.`.
 #' @param cols <[`tidy-select`][tidyr::tidyr_tidy_select]> If `x` is a data
 #'   frame, columns to pass to `model`. If missing, all columns are used.
-#' @param augment <[`tidy-select`][tidyr_tidy_select]> If `x` is a data frame,
-#'   columns to augment to the row data of the ordination. If missing, all
-#'   columns not included in `cols` will be augmented.
+#' @param augment <[`tidy-select`][tidyr::tidyr_tidy_select]> If `x` is a data
+#'   frame, columns to augment to the row data of the ordination. If missing,
+#'   all columns not included in `cols` will be augmented.
 #' @param ... Additional arguments passed to `model`.
 #' @return An augmented tbl_ord.
 #' @example inst/examples/ex-ordinate.r

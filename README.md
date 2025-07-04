@@ -27,7 +27,7 @@ analysis](https://link.springer.com/book/10.1007/1-4020-2236-0) (GDA)
 provides the theoretical basis for (most of) these techniques.
 Ordination overlaps with regression and with dimension reduction, which
 can be [contrasted to clustering and
-classification](https://towardsdatascience.com/supervised-vs-unsupervised-learning-14f68e32ea8d)
+classification](https://towardsdatascience.com/from-supervised-to-unsupervised-learning-a-paradigm-shift-in-computer-vision-ae19ada1064d/)
 in that they assign continuous rather than categorical values to data
 elements [^3].
 
@@ -150,11 +150,12 @@ as annotations to the appropriate matrix factors:[^7]
 #>     PC1    PC2     PC3 ... |   Species
 #>                            |   <fct>  
 #> 1 -2.26 -0.478  0.127      | 1 setosa 
-#> 2 -2.07  0.672  0.234  ... | 2 setosa 
-#> 3 -2.36  0.341 -0.0441     | 3 setosa 
+#> 2 -2.07  0.672  0.234      | 2 setosa 
+#> 3 -2.36  0.341 -0.0441 ... | 3 setosa 
 #> 4 -2.29  0.595 -0.0910     | 4 setosa 
 #> 5 -2.38 -0.645 -0.0157     | 5 setosa 
-#> # ℹ 145 more rows
+#> # ℹ 145 more rows     | # ℹ 145 more rows
+#> 
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
 #>      PC1     PC2    PC3 ... |   name         center scale
@@ -182,11 +183,12 @@ iris_meta <- data.frame(
 #>     PC1    PC2     PC3 ... |   Species Colony Cytotype
 #>                            |   <chr>    <int> <chr>   
 #> 1 -2.26 -0.478  0.127      | 1 setosa       1 diploid 
-#> 2 -2.07  0.672  0.234  ... | 2 setosa       1 diploid 
-#> 3 -2.36  0.341 -0.0441     | 3 setosa       1 diploid 
+#> 2 -2.07  0.672  0.234      | 2 setosa       1 diploid 
+#> 3 -2.36  0.341 -0.0441 ... | 3 setosa       1 diploid 
 #> 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid 
 #> 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid 
-#> # ℹ 145 more rows
+#> # ℹ 145 more rows     | # ℹ 145 more rows
+#> 
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
 #>      PC1     PC2    PC3 ... |   name         center scale

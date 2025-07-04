@@ -32,7 +32,7 @@ devtools::load_all()
 
 _Ordination_ is a catch-all term for a variety of statistical techniques that introduce an artificial coordinate system for a data set in such a way that a few coordinates capture a large amount of the data structure [^ordination].
 The branch of mathematical statistics called [geometric data analysis](https://link.springer.com/book/10.1007/1-4020-2236-0) (GDA) provides the theoretical basis for (most of) these techniques.
-Ordination overlaps with regression and with dimension reduction, which can be [contrasted to clustering and classification](https://towardsdatascience.com/supervised-vs-unsupervised-learning-14f68e32ea8d) in that they assign continuous rather than categorical values to data elements [^continuous-categorical].
+Ordination overlaps with regression and with dimension reduction, which can be [contrasted to clustering and classification](https://towardsdatascience.com/from-supervised-to-unsupervised-learning-a-paradigm-shift-in-computer-vision-ae19ada1064d/) in that they assign continuous rather than categorical values to data elements [^continuous-categorical].
 
 [^ordination]: The term _ordination_ is most prevalent among ecologists; no catch-all term seems to be in common use outside ecology.
 [^continuous-categorical]: This is not a hard rule: PCA is often used to compress data before clustering, and LDA uses dimension reduction to perform classification tasks.

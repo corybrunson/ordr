@@ -1,5 +1,5 @@
 Package: ordr
-Title: A Tidyverse Extension for Ordinations and Biplots
+Title: A 'Tidyverse' Extension for Ordinations and Biplots
 Version: 0.1.2.0003
 Authors@R: c(
   person("Jason Cory", "Brunson", email = "cornelioid@gmail.com",
@@ -33,6 +33,7 @@ Depends:
 Imports:
     rlang,
     cli,
+    MASS,
     stringr,
     tidyselect,
     scales,
@@ -49,7 +50,6 @@ Suggests:
     testthat,
     sessioninfo,
     gridExtra,
-    MASS,
     mlpack,
     ddalpha,
     knitr,

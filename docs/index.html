@@ -68,7 +68,7 @@
 <div class="section level3">
 <h3 id="ordination-and-biplots">ordination and biplots<a class="anchor" aria-label="anchor" href="#ordination-and-biplots"></a>
 </h3>
-<p><em>Ordination</em> is a catch-all term for a variety of statistical techniques that introduce an artificial coordinate system for a data set in such a way that a few coordinates capture a large amount of the data structure <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;The term &lt;em&gt;ordination&lt;/em&gt; is most prevalent among ecologists; no catch-all term seems to be in common use outside ecology.&lt;/p&gt;"><sup>2</sup></a>. The branch of mathematical statistics called <a href="https://link.springer.com/book/10.1007/1-4020-2236-0" class="external-link">geometric data analysis</a> (GDA) provides the theoretical basis for (most of) these techniques. Ordination overlaps with regression and with dimension reduction, which can be <a href="https://towardsdatascience.com/supervised-vs-unsupervised-learning-14f68e32ea8d" class="external-link">contrasted to clustering and classification</a> in that they assign continuous rather than categorical values to data elements <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;This is not a hard rule: PCA is often used to compress data before clustering, and LDA uses dimension reduction to perform classification tasks.&lt;/p&gt;"><sup>3</sup></a>.</p>
+<p><em>Ordination</em> is a catch-all term for a variety of statistical techniques that introduce an artificial coordinate system for a data set in such a way that a few coordinates capture a large amount of the data structure <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;The term &lt;em&gt;ordination&lt;/em&gt; is most prevalent among ecologists; no catch-all term seems to be in common use outside ecology.&lt;/p&gt;"><sup>2</sup></a>. The branch of mathematical statistics called <a href="https://link.springer.com/book/10.1007/1-4020-2236-0" class="external-link">geometric data analysis</a> (GDA) provides the theoretical basis for (most of) these techniques. Ordination overlaps with regression and with dimension reduction, which can be <a href="https://towardsdatascience.com/from-supervised-to-unsupervised-learning-a-paradigm-shift-in-computer-vision-ae19ada1064d/" class="external-link">contrasted to clustering and classification</a> in that they assign continuous rather than categorical values to data elements <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;This is not a hard rule: PCA is often used to compress data before clustering, and LDA uses dimension reduction to perform classification tasks.&lt;/p&gt;"><sup>3</sup></a>.</p>
 <p>Most ordination techniques decompose a numeric rectangular data set into the product of two matrices, often using singular value decomposition (SVD). The coordinates of the shared dimensions of these matrices (over which they are multiplied) are the artificial coordinates. In some cases, such as principal components analysis, the decomposition is exact; in others, such as non-negative matrix factorization, it is approximate. Some techniques, such as correspondence analysis, transform the data before decomposition. Ordination techniques may be supervised, like linear discriminant analysis, or unsupervised, like multidimensional scaling.</p>
 <p>Analysis pipelines that use these techniques may use the artificial coordinates directly, in place of natural coordinates, to arrange and compare data elements or to predict responses. This is possible because both the rows and the columns of the original table can be located, or positioned, along these shared coordinates. The number of artificial coordinates used in an application, such as regression or visualization, is called the <em>rank</em> of the ordination <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Regression and clustering models, like classical &lt;a href="https://www.fbbva.es/microsite/multivariate-statistics/" class="external-link"&gt;linear regression&lt;/a&gt; and &lt;a href="http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html" class="external-link"&gt;&lt;em&gt;k&lt;/em&gt;-means&lt;/a&gt;, can also be understood as matrix decomposition approximations and even visualized in biplots. Their shared coordinates, which are pre-defined rather than artificial, are the predictor coefficients and the cluster assignments, respectively. Methods for &lt;code&gt;&lt;a href="https://rdrr.io/r/stats/lm.html" class="external-link"&gt;stats::lm()&lt;/a&gt;&lt;/code&gt; and &lt;code&gt;&lt;a href="https://rdrr.io/r/stats/kmeans.html" class="external-link"&gt;stats::kmeans()&lt;/a&gt;&lt;/code&gt;, for example, are implemented for the sake of novelty and instruction, but are not widely used in practice.&lt;/p&gt;'><sup>4</sup></a>. A common application is the <em>biplot</em>, which positions the rows and columns of the original table in a scatterplot in 1, 2, or 3 artificial coordinates, usually those that explain the most variation in the data.</p>
 </div>
@@ -133,11 +133,12 @@
 <span><span class="co">#&gt;     PC1    PC2     PC3 ... |   Species</span></span>
 <span><span class="co">#&gt;                            |   &lt;fct&gt;  </span></span>
 <span><span class="co">#&gt; 1 -2.26 -0.478  0.127      | 1 setosa </span></span>
-<span><span class="co">#&gt; 2 -2.07  0.672  0.234  ... | 2 setosa </span></span>
-<span><span class="co">#&gt; 3 -2.36  0.341 -0.0441     | 3 setosa </span></span>
+<span><span class="co">#&gt; 2 -2.07  0.672  0.234      | 2 setosa </span></span>
+<span><span class="co">#&gt; 3 -2.36  0.341 -0.0441 ... | 3 setosa </span></span>
 <span><span class="co">#&gt; 4 -2.29  0.595 -0.0910     | 4 setosa </span></span>
 <span><span class="co">#&gt; 5 -2.38 -0.645 -0.0157     | 5 setosa </span></span>
-<span><span class="co">#&gt; # ℹ 145 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 145 more rows     | # ℹ 145 more rows</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; # </span></span>
 <span><span class="co">#&gt; # Columns (standard): [ 4 x 4 | 3 ]</span></span>
 <span><span class="co">#&gt;      PC1     PC2    PC3 ... |   name         center scale</span></span>
@@ -161,11 +162,12 @@
 <span><span class="co">#&gt;     PC1    PC2     PC3 ... |   Species Colony Cytotype</span></span>
 <span><span class="co">#&gt;                            |   &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   </span></span>
 <span><span class="co">#&gt; 1 -2.26 -0.478  0.127      | 1 setosa       1 diploid </span></span>
-<span><span class="co">#&gt; 2 -2.07  0.672  0.234  ... | 2 setosa       1 diploid </span></span>
-<span><span class="co">#&gt; 3 -2.36  0.341 -0.0441     | 3 setosa       1 diploid </span></span>
+<span><span class="co">#&gt; 2 -2.07  0.672  0.234      | 2 setosa       1 diploid </span></span>
+<span><span class="co">#&gt; 3 -2.36  0.341 -0.0441 ... | 3 setosa       1 diploid </span></span>
 <span><span class="co">#&gt; 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid </span></span>
 <span><span class="co">#&gt; 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid </span></span>
-<span><span class="co">#&gt; # ℹ 145 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 145 more rows     | # ℹ 145 more rows</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; # </span></span>
 <span><span class="co">#&gt; # Columns (standard): [ 4 x 4 | 3 ]</span></span>
 <span><span class="co">#&gt;      PC1     PC2    PC3 ... |   name         center scale</span></span>
