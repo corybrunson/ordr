@@ -332,8 +332,8 @@ for organizing such a fun first experience, to Naomi Robbins for
 chairing the event, and to my co-panelists Ursula Laa and Hengrui Luo
 for sharing and sparking such exciting ideas and conversations. An
 update was presented to the [ggplot2
-extenders](https://teunbrand.github.io/ggplot-extension-club/), which
-elicited additional valuable feedback.
+extenders](https://ggplot2-extenders.github.io/ggplot-extension-club/),
+which elicited additional valuable feedback.
 
 ### resources
 
