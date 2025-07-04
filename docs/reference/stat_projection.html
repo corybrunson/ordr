@@ -9,7 +9,7 @@ of the other."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">ordr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1.0002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.0003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -159,7 +159,7 @@ This layer is appropriate only with axes in standard coordinates (usually
 
 <p>This statistical transformation is done with respect to reference data passed
 to <code>referent</code> (ignored if <code>NULL</code>, the default, possibly resulting in empty
-output). See <code><a href="stat_referent.html">stat_referent()</a></code> for more details. This relies on a sleight of
+output). See <code>stat_referent()</code> for more details. This relies on a sleight of
 hand through a new undocumented <code>LayerRef</code> class and associated
 <code><a href="https://ggplot2.tidyverse.org/reference/ggplot_add.html" class="external-link">ggplot2::ggplot_add()</a></code> method. As a result, only layers constructed using
 this <code>stat_*()</code> shortcut will pass the necessary positional aesthetics to the
@@ -187,16 +187,16 @@ points for rows and arrows for columns.</p>
 
 <p>This statistical transformation is compatible with the convenience function
 <code><a href="ggbiplot.html">ord_aes()</a></code>.</p>
-<p>Some transformations (e.g. <code><a href="stat_center.html">stat_center()</a></code>) commute with projection to the
+<p>Some transformations (e.g. <code><a href="https://corybrunson.github.io/gggda/reference/stat_center.html" class="external-link">stat_center()</a></code>) commute with projection to the
 lower (1 or 2)-dimensional biplot space. If they detect aesthetics of the
 form <code>..coord[0-9]+</code>, then <code>..coord1</code> and <code>..coord2</code> are converted to <code>x</code> and
 <code>y</code> while any remaining are ignored.</p>
-<p>Other transformations (e.g. <code><a href="stat_spantree.html">stat_spantree()</a></code>) yield different results in a
+<p>Other transformations (e.g. <code><a href="https://corybrunson.github.io/gggda/reference/stat_spantree.html" class="external-link">stat_spantree()</a></code>) yield different results in a
 lower-dimensional biplot when they are computed before versus after
 projection. If the stat layer detects these aesthetics, then the
 transformation is performed before projection, and the results in the first
 two dimensions are returned as <code>x</code> and <code>y</code>.</p>
-<p>A small number of transformations (<code><a href="stat_rule.html">stat_rule()</a></code>) are incompatible with
+<p>A small number of transformations (<code><a href="https://corybrunson.github.io/gggda/reference/stat_rule.html" class="external-link">stat_rule()</a></code>) are incompatible with
 ordination aesthetics but will accept <code><a href="ggbiplot.html">ord_aes()</a></code> without warning.</p>
     </div>
     <div class="section level2">
@@ -207,18 +207,6 @@ transformation and can be accessed with <a href="https://ggplot2.tidyverse.org/r
 
 
 </dl></div>
-    <div class="section level2">
-    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other stat layers:
-<code><a href="stat_bagplot.html">stat_bagplot</a>()</code>,
-<code><a href="stat_center.html">stat_center</a>()</code>,
-<code><a href="stat_chull.html">stat_chull</a>()</code>,
-<code><a href="stat_cone.html">stat_cone</a>()</code>,
-<code><a href="stat_depth.html">stat_depth</a>()</code>,
-<code><a href="stat_rule.html">stat_rule</a>()</code>,
-<code><a href="stat_scale.html">stat_scale</a>()</code>,
-<code><a href="stat_spantree.html">stat_spantree</a>()</code></p></div>
-    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -236,7 +224,7 @@ transformation and can be accessed with <a href="https://ggplot2.tidyverse.org/r
 <span class="r-in"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">subcars</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">hp00</span>, y <span class="op">=</span> <span class="va">wt</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">coord_equal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">geom_point</span><span class="op">(</span>shape <span class="op">=</span> <span class="st">"circle open"</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="geom_vector.html">geom_vector</a></span><span class="op">(</span>data <span class="op">=</span> <span class="op">-</span><span class="va">grad</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://corybrunson.github.io/gggda/reference/geom_vector.html" class="external-link">geom_vector</a></span><span class="op">(</span>data <span class="op">=</span> <span class="op">-</span><span class="va">grad</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">stat_projection</span><span class="op">(</span>referent <span class="op">=</span> <span class="va">grad</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="stat_projection-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
@@ -250,7 +238,7 @@ transformation and can be accessed with <a href="https://ggplot2.tidyverse.org/r
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

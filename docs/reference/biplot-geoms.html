@@ -15,7 +15,7 @@ as their corresponding conventional geoms."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">ordr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1.0002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.0003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -488,6 +488,160 @@ as their corresponding conventional geoms.</p>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">geom_rows_pointranges</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"center"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">geom_cols_pointranges</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"center"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">geom_rows_lineranges</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"center"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">geom_cols_lineranges</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"center"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">geom_rows_isoline</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  isoline_text <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  by <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  num <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  text.size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  text.angle <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">geom_cols_isoline</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  isoline_text <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  by <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  num <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  text.size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  text.angle <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">geom_rows_text_radiate</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">geom_cols_text_radiate</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">geom_rows_vector</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  arrow <span class="op">=</span> <span class="va">default_arrow</span>,</span>
+<span>  lineend <span class="op">=</span> <span class="st">"round"</span>,</span>
+<span>  linejoin <span class="op">=</span> <span class="st">"mitre"</span>,</span>
+<span>  vector_labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  label.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">geom_cols_vector</span><span class="op">(</span></span>
+<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  arrow <span class="op">=</span> <span class="va">default_arrow</span>,</span>
+<span>  lineend <span class="op">=</span> <span class="st">"round"</span>,</span>
+<span>  linejoin <span class="op">=</span> <span class="st">"mitre"</span>,</span>
+<span>  vector_labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  label.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">geom_rows_bagplot</span><span class="op">(</span></span>
 <span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -562,128 +716,10 @@ as their corresponding conventional geoms.</p>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">geom_rows_interpolation</span><span class="op">(</span></span>
-<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  new_data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"centroid"</span>, <span class="st">"sequence"</span><span class="op">)</span>,</span>
-<span>  arrow <span class="op">=</span> <span class="va">default_arrow</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  point.fill <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">geom_cols_interpolation</span><span class="op">(</span></span>
-<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  new_data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"centroid"</span>, <span class="st">"sequence"</span><span class="op">)</span>,</span>
-<span>  arrow <span class="op">=</span> <span class="va">default_arrow</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  point.fill <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">geom_rows_lineranges</span><span class="op">(</span></span>
-<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  stat <span class="op">=</span> <span class="st">"center"</span>,</span>
-<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">geom_cols_lineranges</span><span class="op">(</span></span>
-<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  stat <span class="op">=</span> <span class="st">"center"</span>,</span>
-<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">geom_rows_pointranges</span><span class="op">(</span></span>
-<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  stat <span class="op">=</span> <span class="st">"center"</span>,</span>
-<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">geom_cols_pointranges</span><span class="op">(</span></span>
-<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  stat <span class="op">=</span> <span class="st">"center"</span>,</span>
-<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">geom_rows_isoline</span><span class="op">(</span></span>
-<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  isoline_text <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  by <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  num <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  text.size <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>  text.angle <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">geom_cols_isoline</span><span class="op">(</span></span>
-<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  isoline_text <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  by <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  num <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  text.size <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>  text.angle <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span>
-<span></span>
 <span><span class="fu">geom_rows_rule</span><span class="op">(</span></span>
 <span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  stat <span class="op">=</span> <span class="st">"rule"</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  axis_labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  axis_ticks <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -725,7 +761,7 @@ as their corresponding conventional geoms.</p>
 <span><span class="fu">geom_cols_rule</span><span class="op">(</span></span>
 <span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  stat <span class="op">=</span> <span class="st">"rule"</span>,</span>
+<span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  axis_labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  axis_ticks <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -764,67 +800,31 @@ as their corresponding conventional geoms.</p>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">geom_rows_text_radiate</span><span class="op">(</span></span>
+<span><span class="fu">geom_rows_interpolation</span><span class="op">(</span></span>
 <span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">geom_cols_text_radiate</span><span class="op">(</span></span>
-<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">geom_rows_vector</span><span class="op">(</span></span>
-<span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  new_data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"centroid"</span>, <span class="st">"sequence"</span><span class="op">)</span>,</span>
 <span>  arrow <span class="op">=</span> <span class="va">default_arrow</span>,</span>
-<span>  lineend <span class="op">=</span> <span class="st">"round"</span>,</span>
-<span>  linejoin <span class="op">=</span> <span class="st">"mitre"</span>,</span>
-<span>  vector_labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  label.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  label.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  label.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  point.fill <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">geom_cols_vector</span><span class="op">(</span></span>
+<span><span class="fu">geom_cols_interpolation</span><span class="op">(</span></span>
 <span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  new_data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"centroid"</span>, <span class="st">"sequence"</span><span class="op">)</span>,</span>
 <span>  arrow <span class="op">=</span> <span class="va">default_arrow</span>,</span>
-<span>  lineend <span class="op">=</span> <span class="st">"round"</span>,</span>
-<span>  linejoin <span class="op">=</span> <span class="st">"mitre"</span>,</span>
-<span>  vector_labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  label.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  label.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  label.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  point.fill <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -1099,24 +1099,38 @@ for tick marks. Set to NULL to inherit from the data's aesthetics.</p></dd>
 data's aesthetics.</p></dd>
 
 
+<dt id="arg-isoline-text">isoline_text<a class="anchor" aria-label="anchor" href="#arg-isoline-text"></a></dt>
+<dd><p>Logical; whether to include text value marks along the
+isolines.</p></dd>
+
+
+<dt id="arg-vector-labels">vector_labels<a class="anchor" aria-label="anchor" href="#arg-vector-labels"></a></dt>
+<dd><p>Logical; whether to include labels radiating outward
+from the vectors.</p></dd>
+
+
 <dt id="arg-bag-linetype-bag-linewidth-bag-colour-bag-color-bag-fill-bag-alpha">bag.linetype, bag.linewidth, bag.colour, bag.color, bag.fill, bag.alpha<a class="anchor" aria-label="anchor" href="#arg-bag-linetype-bag-linewidth-bag-colour-bag-color-bag-fill-bag-alpha"></a></dt>
-<dd><p>Default aesthetics for bags. Set to <code><a href="sync.html">sync()</a></code> to inherit from the data's
+<dd><p>Default aesthetics for bags. Set to <code><a href="https://corybrunson.github.io/gggda/reference/sync.html" class="external-link">sync()</a></code> to inherit from the data's
 aesthetics or to <code>NULL</code> to use the data's aesthetics.</p></dd>
 
 
 <dt id="arg-median-shape-median-stroke-median-size-median-colour-median-color-median-fill-median-alpha">median.shape, median.stroke, median.size, median.colour, median.color, median.fill, median.alpha<a class="anchor" aria-label="anchor" href="#arg-median-shape-median-stroke-median-size-median-colour-median-color-median-fill-median-alpha"></a></dt>
-<dd><p>Default aesthetics for medians. Set to <code><a href="sync.html">sync()</a></code> to inherit from the data's
+<dd><p>Default aesthetics for medians. Set to <code><a href="https://corybrunson.github.io/gggda/reference/sync.html" class="external-link">sync()</a></code> to inherit from the data's
 aesthetics or to <code>NULL</code> to use the data's aesthetics.</p></dd>
 
 
 <dt id="arg-fence-linetype-fence-linewidth-fence-colour-fence-color-fence-fill-fence-alpha">fence.linetype, fence.linewidth, fence.colour, fence.color, fence.fill, fence.alpha<a class="anchor" aria-label="anchor" href="#arg-fence-linetype-fence-linewidth-fence-colour-fence-color-fence-fill-fence-alpha"></a></dt>
-<dd><p>Default aesthetics for fences. Set to <code><a href="sync.html">sync()</a></code> to inherit from the data's
+<dd><p>Default aesthetics for fences. Set to <code><a href="https://corybrunson.github.io/gggda/reference/sync.html" class="external-link">sync()</a></code> to inherit from the data's
 aesthetics or to <code>NULL</code> to use the data's aesthetics.</p></dd>
 
 
 <dt id="arg-outlier-shape-outlier-stroke-outlier-size-outlier-colour-outlier-color-outlier-fill-outlier-alpha">outlier.shape, outlier.stroke, outlier.size, outlier.colour, outlier.color, outlier.fill, outlier.alpha<a class="anchor" aria-label="anchor" href="#arg-outlier-shape-outlier-stroke-outlier-size-outlier-colour-outlier-color-outlier-fill-outlier-alpha"></a></dt>
-<dd><p>Default aesthetics for outliers. Set to <code><a href="sync.html">sync()</a></code> to inherit from the data's
+<dd><p>Default aesthetics for outliers. Set to <code><a href="https://corybrunson.github.io/gggda/reference/sync.html" class="external-link">sync()</a></code> to inherit from the data's
 aesthetics or to <code>NULL</code> to use the data's aesthetics.</p></dd>
+
+
+<dt id="arg-snap-rule">snap_rule<a class="anchor" aria-label="anchor" href="#arg-snap-rule"></a></dt>
+<dd><p>Logical; whether to snap rule segments to grid values.</p></dd>
 
 
 <dt id="arg-new-data">new_data<a class="anchor" aria-label="anchor" href="#arg-new-data"></a></dt>
@@ -1134,20 +1148,6 @@ of operations used to visualize interpolation.</p></dd>
 <dd><p>Default aesthetics for markers. Set to NULL to inherit from
 the data's aesthetics.</p></dd>
 
-
-<dt id="arg-isoline-text">isoline_text<a class="anchor" aria-label="anchor" href="#arg-isoline-text"></a></dt>
-<dd><p>Logical; whether to include text value marks along the
-isolines.</p></dd>
-
-
-<dt id="arg-snap-rule">snap_rule<a class="anchor" aria-label="anchor" href="#arg-snap-rule"></a></dt>
-<dd><p>Logical; whether to snap rule segments to grid values.</p></dd>
-
-
-<dt id="arg-vector-labels">vector_labels<a class="anchor" aria-label="anchor" href="#arg-vector-labels"></a></dt>
-<dd><p>Logical; whether to include labels radiating outward
-from the vectors.</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -1157,7 +1157,6 @@ from the vectors.</p></dd>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other biplot layers:
 <code><a href="biplot-stats.html">biplot-stats</a></code>,
-<code><a href="stat_referent.html">stat_referent</a>()</code>,
 <code><a href="stat_rows.html">stat_rows</a>()</code></p></div>
     </div>
 
@@ -1262,7 +1261,7 @@ from the vectors.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>
