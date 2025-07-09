@@ -110,6 +110,7 @@ setup_cols_data <- function(data, params) {
 # restrict to a matrix factor and to the first two coordinates
 # (for stat layers that only accept 'x' and 'y')
 setup_rows_xy_data <- function(data, params) {
+  
   data <- setup_rows_data(data, params)
   
   ord_cols <- get_ord_aes(data)

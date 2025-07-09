@@ -1043,13 +1043,13 @@ matrix factor of a tbl_ord. They understand the same aesthetics
 as their corresponding conventional geoms.
 }
 \examples{
+
 # compute log-ratio analysis of Freestone primary class composition measurements
 glass \%>\%
   ordinate(cols = c(SiO2, Al2O3, CaO, FeO, MgO),
            model = lra, compositional = TRUE) \%>\%
   confer_inertia("rows") \%>\%
   print() -> glass_lra
-
 # row-principal biplot with ordinate-wise standard deviations
 glass_lra \%>\%
   ggbiplot(aes(color = Site), sec.axes = "cols") +
@@ -1062,6 +1062,7 @@ glass_lra \%>\%
     "Row-principal LRA biplot of Freestone glass measurements",
     "Ranges 2 sample standard deviations from centroids"
   )
+
 # principal components analysis of glass composition measurements
 glass[, c(5L, 7L, 8L, 10L, 11L)] \%>\%
   princomp(cor = TRUE) \%>\%
@@ -1069,10 +1070,8 @@ glass[, c(5L, 7L, 8L, 10L, 11L)] \%>\%
   cbind_rows(site = glass$Site, form = glass$Form) \%>\%
   augment_ord() \%>\%
   print() -> glass_pca
-
 # note that column standard coordinates are unit vectors
 rowSums(get_cols(glass_pca) ^ 2)
-
 # plot column standard coordinates with a unit circle underlaid
 glass_pca \%>\%
   ggbiplot(aes(label = name), sec.axes = "cols") +

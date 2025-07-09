@@ -59,7 +59,6 @@
 #' @inheritParams gggda::stat_rule
 #' @inheritParams stat_projection
 #' @example inst/examples/ex-stat-bagplot-ord-iris.r
-#' @example inst/examples/ex-stat-bagplot-ord-judges.r
 #' @example inst/examples/ex-stat-center-ord-iris.r
 #' @example inst/examples/ex-stat-chull-ord-haireye.r
 #' @example inst/examples/ex-stat-cone-ord-spend.r

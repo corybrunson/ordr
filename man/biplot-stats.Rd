@@ -640,6 +640,7 @@ ordination aesthetics but will accept \code{ord_aes()} without warning.
 }
 
 \examples{
+
 iris_pca <- ordinate(iris, prcomp, cols = seq(4), scale. = TRUE)
 # NB: Non-standard aesthetics are handled as in version > 3.5.1; see:
 # https://github.com/tidyverse/ggplot2/issues/6191
@@ -661,34 +662,13 @@ ggbiplot(iris_pca) +
     outlier_gp = list(shape = "asterisk")
   ) +
   geom_cols_vector(aes(label = name))
-USJudgeRatings |> 
-  ordinate(prcomp) |> 
-  mutate_rows(surname = gsub("(,|\\\\.).*$", "", name)) ->
-  judges_pca
-ggbiplot(judges_pca, sec.axes = "cols") +
-  geom_rows_bagplot() +
-  geom_rows_text(aes(label = surname), size = 2) +
-  geom_cols_vector(aes(label = name), size = 3, alpha = .5)
+
 # scaled PCA of Anderson iris measurements
 iris[, -5] \%>\%
   princomp(cor = TRUE) \%>\%
   as_tbl_ord() \%>\%
   mutate_rows(species = iris$Species) \%>\%
   print() -> iris_pca
-
-# row-principal biplot with centroid-based stars
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  stat_rows_star(alpha = .5, fun = "mean") +
-  geom_rows_point(alpha = .5) +
-  stat_rows_center(fun = "mean", size = 4, shape = 1L) +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris measurements",
-    "Segments connect each observation to its within-species centroid"
-  )
-
 # row-principal biplot with depth median-based stars
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
@@ -701,6 +681,7 @@ iris_pca \%>\%
     "Row-principal PCA biplot of Anderson iris measurements",
     "Segments connect each observation to its within-species depth median"
   )
+
 # correspondence analysis of combined female and male hair and eye color data
 HairEyeColor \%>\%
   rowSums(dims = 2L) \%>\%
@@ -710,8 +691,8 @@ HairEyeColor \%>\%
   print() -> hec_ca
 # inertia across artificial coordinates (all singular values < 1)
 get_inertia(hec_ca)
-
 # in row-principal biplot, row coordinates are weighted averages of columns
+# (and vice-versa)
 hec_ca \%>\%
   confer_inertia("rows") \%>\%
   ggbiplot(aes(color = .matrix, fill = .matrix, shape = .matrix)) +
@@ -720,15 +701,7 @@ hec_ca \%>\%
   geom_cols_point() +
   geom_rows_point() +
   ggtitle("Row-principal CA of hair & eye color")
-# in column-principal biplot, column coordinates are weighted averages of rows
-hec_ca \%>\%
-  confer_inertia("cols") \%>\%
-  ggbiplot(aes(color = .matrix, fill = .matrix, shape = .matrix)) +
-  theme_bw() +
-  stat_rows_chull(alpha = .1) +
-  geom_rows_point() +
-  geom_cols_point() +
-  ggtitle("Column-principal CA of hair & eye color")
+
 # centered principal components analysis of U.S. personal expenditure data
 USPersonalExpenditure \%>\%
   prcomp() \%>\%
@@ -752,7 +725,6 @@ iris[, -5] \%>\%
   as_tbl_ord() \%>\%
   mutate_rows(species = iris$Species) \%>\%
   print() -> iris_pca
-
 # row-principal biplot with centroids and confidence elliptical disks
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
@@ -771,14 +743,9 @@ iris_pca \%>\%
     "Row-principal PCA biplot of Anderson iris measurements",
     "Overlaid with 95\% confidence disks"
   )
+
+# hull peeling with breaks below
 judge_pca <- ordinate(USJudgeRatings, princomp, cols = -c(1, 12))
-ggbiplot(judge_pca, axis.type = "predictive") +
-  geom_cols_axis() +
-  geom_rows_point(elements = "score") +
-  stat_rows_peel(
-    aes(alpha = after_stat(hull)), color = "black", elements = "score",
-    breaks = c(.9, .5, .1)
-  )
 ggbiplot(judge_pca, axis.type = "predictive") +
   geom_cols_axis() +
   geom_rows_point(elements = "score") +
@@ -787,6 +754,7 @@ ggbiplot(judge_pca, axis.type = "predictive") +
     breaks = c(.9, .5, .1), cut = "below"
   )
 
+# hull peeling by groups
 iris_pca <- ordinate(iris, cols = 1:4, model = prcomp)
 ggbiplot(iris_pca) +
   geom_rows_point(aes(color = Species), shape = "circle open") +
@@ -794,22 +762,21 @@ ggbiplot(iris_pca) +
     aes(fill = Species, alpha = after_stat(hull)),
     num = 3
   )
+
 # unscaled PCA
 iris_pca <- ordinate(iris, cols = 1:4, model = prcomp)
-
 # biplot canvas
 iris_biplot <- 
-  iris_pca |> 
+  iris_pca \%>\%
   ggbiplot(aes(color = Species, label = name), axis.type = "predictive") +
   geom_rows_point() +
   geom_cols_axis(aes(center = center))
-
 # print select cases
 top_cases <- c(1, 51, 101)
 iris[top_cases, ]
 # subset variables
 length_vars <- c(1, 3)
-iris[, length_vars] |> 
+iris[, length_vars] \%>\%
   aggregate(by = iris[, "Species", drop = FALSE], FUN = mean)
 
 # project all cases onto all axes
@@ -827,16 +794,14 @@ iris_cols <- as.data.frame(get_cols(iris_pca))
 iris_biplot + stat_rows_projection(subset = top_cases, referent = iris_cols)
 
 # project selected cases onto selected axes in full-dimensional space
-iris_pca |> 
+iris_pca \%>\%
   ggbiplot(ord_aes(iris_pca, color = Species, label = name),
            axis.type = "predictive") +
   geom_rows_point() +
   geom_cols_axis(aes(center = center)) +
   stat_rows_projection(subset = top_cases, ref_subset = length_vars)
-# Freestone primary glass measurements
-print(glass)
 
-# default (standardized) linear discriminant analysis of sites on measurements
+# default (standardized) linear discriminant analysis
 glass_lda <- MASS::lda(Site ~ SiO2 + Al2O3 + FeO + MgO + CaO, glass)
 # bestow 'tbl_ord' class & augment observation, centroid, and variable fields
 as_tbl_ord(glass_lda) \%>\%
@@ -851,7 +816,7 @@ glass_lda \%>\%
   geom_rows_point(elements = "score") +
   stat_cols_rule(
     aes(label = name), color = "#888888", num = 8L,
-    ref_elements = "score", fun.offset = \(x) minabspp(x, p = .1),
+    ref_elements = "score", fun.offset = function(x) minabspp(x, p = .1),
     text.size = 2.5, label_dodge = .04
   ) +
   scale_shape_manual(values = c(2L, 3L, 0L, 5L)) +
@@ -859,7 +824,6 @@ glass_lda \%>\%
     "LDA of Freestone glass measurements",
     "Row-standard biplot of standardized LDA"
   )
-
 # contribution LDA of sites on measurements
 glass_lda <-
   lda_ord(Site ~ SiO2 + Al2O3 + FeO + MgO + CaO, glass,
@@ -877,7 +841,7 @@ glass_lda \%>\%
   stat_rows_density_2d(elements = "score", alpha = .5, color = "#444444") +
   stat_cols_rule(
     aes(label = name), geom = "axis", color = "#888888", num = 8L,
-    ref_elements = "active", fun.offset = \(x) minabspp(x, p = .1),
+    ref_elements = "active", fun.offset = function(x) minabspp(x, p = .1),
     label_dodge = 0.04, text.size = 2.5, text_dodge = .025
   ) +
   scale_shape_manual(values = c(16L, 17L, 15L, 18L)) +
@@ -885,6 +849,7 @@ glass_lda \%>\%
     "LDA of Freestone glass measurements",
     "Symmetric biplot of contribution LDA"
   )
+
 \dontrun{
 # classical multidimensional scaling of road distances between European cities
 euro_mds <- ordinate(eurodist, cmdscale_ord, k = 11)

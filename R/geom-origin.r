@@ -77,7 +77,9 @@ GeomOrigin <- ggproto(
     data <- tidyr::nest(data, aesthetics = -PANEL)
     data$aesthetics <- lapply(
       data$aesthetics,
-      \(d) dplyr::select(d, tidyselect::where(is_const))[1L, , drop = FALSE]
+      function(d) {
+        dplyr::select(d, tidyselect::where(is_const))[1L, , drop = FALSE]
+      }
     )
     data <- tidyr::unnest(data, aesthetics)
     

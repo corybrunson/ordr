@@ -1,7 +1,7 @@
 # toy example with all positive values of EV1
-cbind(c(1, 1, 1), c(1, 2, 3), c(1, 4, 9)) |> 
-  eigen_ord() |> 
-  as_tbl_ord() |> 
+cbind(c(1, 1, 1), c(1, 2, 3), c(1, 4, 9)) %>%
+  eigen_ord() %>%
+  as_tbl_ord() %>%
   negate_to_first_orthant("rows") ->
   ord
 
