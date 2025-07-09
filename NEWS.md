@@ -9,7 +9,7 @@ Because they are so important to analysis and especially to biplots, they now de
 
 ### unit tests
 
-Unit tests have been written for all ggproto shortcuts.
+Unit tests have been written for all ggproto shortcuts, though many of these were subsequently migrated to **gggda**.
 
 ## upgrades to the biplot chassis
 
@@ -19,8 +19,8 @@ Multiple harmonizers are now available for scaling secondary axes. That recommen
 
 ### GDA-geared coordinate systems
 
-Two new coordinate systems provide control over the aspect ratio of the plotting window without compromising that of the (artificial) coordinate axes:
-`GeomRect` (alias `GeomSquare`) extends `GeomFixed` with an `window_ratio` parameter for the plotting window, while `GeomBiplot` removes the `ratio` parameter and forces the coordinate axes to have aspect ratio 1.
+A new 'scaffold' coordinate system fixes the aspect ratio to 1 (required for biplots) and provides user control over the ratio of plotting window dimensions (which defaults to 1, recommended for biplots).
+It builds on the 'rect' coordinate system originally developed in **ordr** but migrated to **gggda**.
 
 ### scaffold theme
 
@@ -33,6 +33,9 @@ The value is argument-matched to `"active"`, `"score"`, or `"structure"`; these 
 Moreover, the former default `"all"` is no longer accepted, which forecloses the trick of passing the element type to an aesthetic, e.g. `size = .element == "active"`, as had been used in several examples.
 
 ## up( or down)grades to existing plot layers
+
+Most statistical transformations and geometric constructions have been migrated to **gggda**.
+The changes below were made prior to this migration and have the same effects since **gggda** is now an imported dependency.
 
 ### combined vector and radiating text geom (breaking change)
 
@@ -51,14 +54,10 @@ Additionally, `fun.ord` accepts a function that summarizes the columns of a matr
 ### revamped handling of secondary aesthetics (breaking change)
 
 Previously, underscore-separated parameters like `label_colour` were used to specify secondary aesthetics, i.e. aesthetics for graphical objects other than those considered "primary" for the layer.
-Their behavior has been debugged by mimicking the use of period-separated parameters like `label.colour` in **ggplot2** v3.5.1, except for the new bagplot geom, for which their behavior is based on that of `geom_boxplot()` in the current development version of {ggplot2}.
+Their behavior has been debugged by mimicking the use of period-separated parameters like `label.colour` in **ggplot2** v3.5.1, except for the new bagplot geom, for which their behavior is based on that of `geom_boxplot()` in the current development version of **ggplot2**.
 This induces some breaking changes due to the renaming of most, and the removal of some, such parameters.
 
-### deprecation of scale stat
-
-The simple and experimental `StatScale` has been deprecated.
-
-## new plot layers
+## new plot layers (retained in **ordr**)
 
 ### addition geom
 
@@ -71,6 +70,8 @@ A new statistical transformation serves to parent specific "referential stats", 
 ### projection stat
 
 The 'projection' referential stat prepares segment endpoints between `x,y` positions and their projections on axes defined by the reference data. It is a natural graphical element for predictive biplots of ordination models of continuous data.
+
+## new plot layers (migrated to **gggda**)
 
 ### rule stat
 
