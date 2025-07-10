@@ -5,7 +5,7 @@ It also outsources most of the straightforward {ggplot2} extensionality to {gggd
 
 ## R CMD checks
 
-Local checks were performed both with the current CRAN version 3.5.2 of {ggplot2} and with the current development version (2025 Jul 10).
+Local checks were performed both with the current CRAN version 3.5.2 of {ggplot2} and with the current development version (2025 Jul 10) using `document = FALSE`.
 
 ### Test environments
 
@@ -42,12 +42,16 @@ The following URLs work for me:
 
 ```
 Found the following (possibly) invalid URLs:
-  URL: https://stackoverflow.com/help/minimal-reproducible-example
+  URL: https://scholar.sun.ac.za/items/279f7958-0b54-43f1-8c75-da652f65db3f
+    From: man/theme_scaffold.Rd
+    Status: 403
+    Message: Forbidden
+  URL: https://ww2.amstat.org/meetings/jsm/2022/
     From: README.md
-    Status: 404
-    Message: Not Found
-  URL: https://support.qs.com/hc/en-gb/articles/360021876820-QS-Institution-Classifications
-    From: inst/doc/cmds-variables.html
+    Status: 403
+    Message: Forbidden
+  URL: https://ww2.amstat.org/meetings/jsm/2022/onlineprogram/ActivityDetails.cfm?SessionID=222053
+    From: README.md
     Status: 403
     Message: Forbidden
 ```
