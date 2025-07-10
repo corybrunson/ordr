@@ -96,7 +96,7 @@ When using a <code>stat_*()</code> function to construct a layer, the <code>geom
 can be used to override the default coupling between stats and geoms. The
 <code>geom</code> argument accepts the following:</p><ul><li><p>A <code>Geom</code> ggproto subclass, for example <code>GeomPoint</code>.</p></li>
 <li><p>A string naming the geom. To give the geom as a string, strip the
-function name of the <code>geom_</code> prefix. For example, to use <code>geom_point()</code>,
+function name of the <code>geom_</code> prefix. For example, to use <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point()</a></code>,
 give the geom as <code>"point"</code>.</p></li>
 <li><p>For more information and other ways to specify the geom, see the
 <a href="https://ggplot2.tidyverse.org/reference/layer_geoms.html" class="external-link">layer geom</a> documentation.</p></li>
@@ -106,11 +106,11 @@ give the geom as <code>"point"</code>.</p></li>
 <dt id="arg-position">position<a class="anchor" aria-label="anchor" href="#arg-position"></a></dt>
 <dd><p>A position adjustment to use on the data for this layer. This
 can be used in various ways, including to prevent overplotting and
-improving the display. The <code>position</code> argument accepts the following:</p><ul><li><p>The result of calling a position function, such as <code>position_jitter()</code>.
+improving the display. The <code>position</code> argument accepts the following:</p><ul><li><p>The result of calling a position function, such as <code><a href="https://ggplot2.tidyverse.org/reference/position_jitter.html" class="external-link">position_jitter()</a></code>.
 This method allows for passing extra arguments to the position.</p></li>
 <li><p>A string naming the position adjustment. To give the position as a
 string, strip the function name of the <code>position_</code> prefix. For example,
-to use <code>position_jitter()</code>, give the position as <code>"jitter"</code>.</p></li>
+to use <code><a href="https://ggplot2.tidyverse.org/reference/position_jitter.html" class="external-link">position_jitter()</a></code>, give the position as <code>"jitter"</code>.</p></li>
 <li><p>For more information and other ways to specify the position, see the
 <a href="https://ggplot2.tidyverse.org/reference/layer_positions.html" class="external-link">layer position</a> documentation.</p></li>
 </ul></dd>
@@ -227,9 +227,9 @@ transformation and can be accessed with <a href="https://ggplot2.tidyverse.org/r
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span></span></span>
 <span class="r-in"><span>  <span class="va">grad</span></span></span>
 <span class="r-in"><span><span class="co"># project the data onto the gradient axis (with a reversed gradient vector)</span></span></span>
-<span class="r-in"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">subcars</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">hp00</span>, y <span class="op">=</span> <span class="va">wt</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">coord_equal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">geom_point</span><span class="op">(</span>shape <span class="op">=</span> <span class="st">"circle open"</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">subcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">hp00</span>, y <span class="op">=</span> <span class="va">wt</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html" class="external-link">coord_equal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="st">"circle open"</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://corybrunson.github.io/gggda/reference/geom_vector.html" class="external-link">geom_vector</a></span><span class="op">(</span>data <span class="op">=</span> <span class="op">-</span><span class="va">grad</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">stat_projection</span><span class="op">(</span>referent <span class="op">=</span> <span class="va">grad</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="stat_projection-1.png" alt="" width="700" height="433"></span>

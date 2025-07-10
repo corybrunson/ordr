@@ -142,6 +142,8 @@ class, and append both model diagnostics and other original data columns
 as annotations to the appropriate matrix factors:[^7]
 
 ``` r
+library(ordr)
+#> Loading required package: ggplot2
 (iris_pca <- ordinate(iris, cols = 1:4, model = ~ prcomp(., scale. = TRUE)))
 #> # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
 #> # 4 coordinates: PC1, PC2, ..., PC4
@@ -374,7 +376,8 @@ at [UF Health](https://ufhealth.org/).
 
 [^6]: Anderson E (1936) “The Species Problem in Iris”. *Annals of the
     Missouri Botanical Garden* **23**(3),
-    457-469+471-483+485-501+503-509. <https://doi.org/10.2307/2394164>
+    457-469+471-483+485-501+503-509.
+    <https://www.jstor.org/stable/2394164>
 
 [^7]: The data must be in the form of a data frame that can be
     understood by the modeling function. Step-by-step methods also exist
