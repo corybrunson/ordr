@@ -17,6 +17,10 @@
 \alias{geom_vector}
 \alias{geom_bagplot}
 \alias{geom_rule}
+\alias{position_nudge_repel}
+\alias{minpp}
+\alias{maxpp}
+\alias{minabspp}
 \alias{stat_center}
 \alias{stat_star}
 \alias{stat_chull}
@@ -37,9 +41,9 @@ below to see their documentation.
 \describe{
   \item{generics}{\code{\link[generics]{glance}}, \code{\link[generics]{tidy}}}
 
-  \item{gggda}{\code{\link[gggda]{geom_axis}}, \code{\link[gggda]{geom_bagplot}}, \code{\link[gggda]{geom_isoline}}, \code{\link[gggda]{geom_lineranges}}, \code{\link[gggda:geom_lineranges]{geom_pointranges}}, \code{\link[gggda]{geom_rule}}, \code{\link[gggda]{geom_text_radiate}}, \code{\link[gggda]{geom_vector}}, \code{\link[gggda]{stat_bagplot}}, \code{\link[gggda]{stat_center}}, \code{\link[gggda]{stat_chull}}, \code{\link[gggda]{stat_cone}}, \code{\link[gggda]{stat_depth}}, \code{\link[gggda:stat_depth]{stat_depth_filled}}, \code{\link[gggda:stat_chull]{stat_peel}}, \code{\link[gggda]{stat_rule}}, \code{\link[gggda]{stat_scale}}, \code{\link[gggda]{stat_spantree}}, \code{\link[gggda:stat_center]{stat_star}}}
+  \item{gggda}{\code{\link[gggda]{geom_axis}}, \code{\link[gggda]{geom_bagplot}}, \code{\link[gggda]{geom_isoline}}, \code{\link[gggda]{geom_lineranges}}, \code{\link[gggda:geom_lineranges]{geom_pointranges}}, \code{\link[gggda]{geom_rule}}, \code{\link[gggda]{geom_text_radiate}}, \code{\link[gggda]{geom_vector}}, \code{\link[gggda:stat_rule]{maxpp}}, \code{\link[gggda:stat_rule]{minabspp}}, \code{\link[gggda:stat_rule]{minpp}}, \code{\link[gggda]{stat_bagplot}}, \code{\link[gggda]{stat_center}}, \code{\link[gggda]{stat_chull}}, \code{\link[gggda]{stat_cone}}, \code{\link[gggda]{stat_depth}}, \code{\link[gggda:stat_depth]{stat_depth_filled}}, \code{\link[gggda:stat_chull]{stat_peel}}, \code{\link[gggda]{stat_rule}}, \code{\link[gggda]{stat_scale}}, \code{\link[gggda]{stat_spantree}}, \code{\link[gggda:stat_center]{stat_star}}}
 
-  \item{ggrepel}{\code{\link[ggrepel:geom_text_repel]{geom_label_repel}}, \code{\link[ggrepel]{geom_text_repel}}}
+  \item{ggrepel}{\code{\link[ggrepel:geom_text_repel]{geom_label_repel}}, \code{\link[ggrepel]{geom_text_repel}}, \code{\link[ggrepel]{position_nudge_repel}}}
 
   \item{magrittr}{\code{\link[magrittr:pipe]{\%>\%}}}
 }}

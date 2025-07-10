@@ -20,6 +20,7 @@
 #'   GeomLabelRepel
 #'   geom_text_repel
 #'   geom_label_repel
+#'   position_nudge_repel
 
 #' @importFrom gggda
 #'   GeomAxis
@@ -38,6 +39,9 @@
 #'   geom_vector
 #'   geom_bagplot
 #'   geom_rule
+#'   minpp
+#'   maxpp
+#'   minabspp
 #' @inheritParams ggplot2::layer
 #' @template param-geom
 #' @inheritParams ggplot2::geom_point
@@ -84,18 +88,17 @@ gggda::geom_bagplot
 #' @export
 gggda::geom_rule
 
+compute_just <- getFromNamespace("compute_just", "ggplot2")
 to_unit <- getFromNamespace("to_unit", "ggrepel")
 
 #' @export
-compute_just <- getFromNamespace("compute_just", "ggplot2")
+ggrepel::position_nudge_repel
 #' @export
-position_nudge_repel <- getFromNamespace("position_nudge_repel", "ggrepel")
+gggda::minpp
 #' @export
-minpp <- getFromNamespace("minpp", "gggda")
+gggda::maxpp
 #' @export
-maxpp <- getFromNamespace("maxpp", "gggda")
-#' @export
-minabspp <- getFromNamespace("minabspp", "gggda")
+gggda::minabspp
 
 #' @rdname biplot-geoms
 #' @export

@@ -38,6 +38,9 @@
 #'   stat_spantree
 #'   stat_bagplot
 #'   stat_rule
+#'   minpp
+#'   maxpp
+#'   minabspp
 #' @inheritParams ggplot2::layer
 #' @template param-stat
 #' @template biplot-ord-aes

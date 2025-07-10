@@ -63,12 +63,12 @@ param_trans <- c(
 # necessary internal functions not exported from their home packages
 # FIXME: currently only put in geoms file; need to distinguish
 import_from <- c(
+  # `geom_vector()`
+  compute_just = "ggplot2",
   # `geom_text_repel()`
   to_unit = "ggrepel"
 )
 export_from <- c(
-  # `geom_vector()`
-  compute_just = "ggplot2",
   # `geom_text_repel()`
   position_nudge_repel = "ggrepel",
   # `stat_rule()`
@@ -437,7 +437,8 @@ for (type in c("stat", "geom")) {
         "#'   ",
         c(
           port_protos[wh_port][wh_pkg],
-          str_remove(port_layers[wh_port][wh_pkg], "^[^:]+::")
+          str_remove(port_layers[wh_port][wh_pkg], "^[^:]+::"),
+          names(export_from)[export_from == pkg]
         ),
         "\n",
         collapse = ""
@@ -519,10 +520,7 @@ for (type in c("stat", "geom")) {
       "\n\n",
       str_c(
         "#' @export\n",
-        names(export_from),
-        " <- getFromNamespace(\"",
-        names(export_from),
-        "\", \"", unname(export_from), "\")\n",
+        unname(export_from), "::", names(export_from), "\n",
         collapse = ""
       ),
       "\n"
