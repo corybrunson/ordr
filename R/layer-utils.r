@@ -50,7 +50,7 @@ cols_stat <- function(stat) matrix_stat("cols", stat)
 get_ord_aes <- function(data) {
   ord_cols <- grep("^\\.\\.coord[0-9]+$", names(data))
   if (length(ord_cols) == 0) ord_cols <- match(c("x", "y"), names(data))
-  ord_cols
+  names(data)[ord_cols]
 }
 
 # restrict to specified elements
@@ -110,14 +110,15 @@ setup_cols_data <- function(data, params) {
 # restrict to a matrix factor and to the first two coordinates
 # (for stat layers that only accept 'x' and 'y')
 setup_rows_xy_data <- function(data, params) {
-  
   data <- setup_rows_data(data, params)
   
   ord_cols <- get_ord_aes(data)
   # if necessary, restore 'x' and 'y' from first and second coordinates
-  if (any(is.na(match(c("x", "y"), names(data)[ord_cols])))) {
-    xy_cols <- match(c("..coord1", "..coord2"), names(data)[ord_cols])
-    names(data)[xy_cols] <- c("x", "y")
+  if (any(is.na(match(c("x", "y"), ord_cols)))) {
+    xy_cols <- match(c("..coord1", "..coord2"), names(data))
+    # names(data)[xy_cols] <- c("x", "y")
+    data$x <- data[[xy_cols[[1L]]]]
+    data$y <- data[[xy_cols[[2L]]]]
   }
   
   data
@@ -127,9 +128,11 @@ setup_cols_xy_data <- function(data, params) {
   
   ord_cols <- get_ord_aes(data)
   # if necessary, restore 'x' and 'y' from first and second coordinates
-  if (any(is.na(match(c("x", "y"), names(data)[ord_cols])))) {
-    xy_cols <- match(c("..coord1", "..coord2"), names(data)[ord_cols])
-    names(data)[xy_cols] <- c("x", "y")
+  if (any(is.na(match(c("x", "y"), ord_cols)))) {
+    xy_cols <- match(c("..coord1", "..coord2"), names(data))
+    # names(data)[xy_cols] <- c("x", "y")
+    data$x <- data[[xy_cols[[1L]]]]
+    data$y <- data[[xy_cols[[2L]]]]
   }
   
   data
