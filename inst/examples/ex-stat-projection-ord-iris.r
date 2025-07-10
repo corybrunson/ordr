@@ -26,7 +26,7 @@ iris_biplot + stat_rows_projection(subset = top_cases)
 iris_biplot + stat_rows_projection(subset = top_cases, ref_subset = length_vars)
 
 # project select cases onto manually provided axes
-iris_cols <- as.data.frame(get_cols(iris_pca))
+iris_cols <- as.data.frame(get_cols(iris_pca))[c(1, 2), ]
 iris_biplot + stat_rows_projection(subset = top_cases, referent = iris_cols)
 
 # project selected cases onto selected axes in full-dimensional space
