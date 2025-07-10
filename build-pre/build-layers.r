@@ -61,12 +61,16 @@ param_trans <- c(
 )
 
 # necessary internal functions not exported from their home packages
-# -+- currently only put in geoms file; need to distinguish -+-
-get_from <- c(
+# FIXME: currently only put in geoms file; need to distinguish
+import_from <- c(
+  # `geom_text_repel()`
+  to_unit = "ggrepel"
+)
+export_from <- c(
   # `geom_vector()`
   compute_just = "ggplot2",
   # `geom_text_repel()`
-  position_nudge_repel = "ggrepel", to_unit = "ggrepel",
+  position_nudge_repel = "ggrepel",
   # `stat_rule()`
   minpp = "gggda", maxpp = "gggda", minabspp = "gggda"
 )
@@ -491,7 +495,7 @@ for (type in c("stat", "geom")) {
   )
   
   # manual imports/exports
-  gets_from_namespaces <- if (type == "stat" || length(get_from) == 0L) {
+  imports_from_namespaces <- if (type == "stat" || length(import_from) == 0L) {
     ""
   } else {
     glue::glue(
@@ -499,10 +503,26 @@ for (type in c("stat", "geom")) {
       # taken care of by `@include utils.r`
       #"#' @importFrom utils getFromNamespace\n",
       str_c(
-        names(get_from),
+        names(import_from),
         " <- getFromNamespace(\"",
-        names(get_from),
-        "\", \"", unname(get_from), "\")\n",
+        names(import_from),
+        "\", \"", unname(import_from), "\")\n",
+        collapse = ""
+      ),
+      "\n"
+    )
+  }
+  exports_from_namespaces <- if (type == "stat" || length(export_from) == 0L) {
+    ""
+  } else {
+    glue::glue(
+      "\n\n",
+      str_c(
+        "#' @export\n",
+        names(export_from),
+        " <- getFromNamespace(\"",
+        names(export_from),
+        "\", \"", unname(export_from), "\")\n",
         collapse = ""
       ),
       "\n"
@@ -517,7 +537,8 @@ for (type in c("stat", "geom")) {
     adapt_inherits1, adapt_inherits2,
     adapt_examples, adapt_fin,
     adapt_exports,
-    gets_from_namespaces,
+    imports_from_namespaces,
+    exports_from_namespaces,
     file = adapt_file, sep = "", append = FALSE
   )
   

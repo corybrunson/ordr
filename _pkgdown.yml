@@ -1,5 +1,6 @@
 template:
   bootstrap: 5
+  math-rendering: mathjax
 
 reference:
 - title: "'ordr' package"

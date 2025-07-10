@@ -84,11 +84,17 @@ gggda::geom_bagplot
 #' @export
 gggda::geom_rule
 
-compute_just <- getFromNamespace("compute_just", "ggplot2")
-position_nudge_repel <- getFromNamespace("position_nudge_repel", "ggrepel")
 to_unit <- getFromNamespace("to_unit", "ggrepel")
+
+#' @export
+compute_just <- getFromNamespace("compute_just", "ggplot2")
+#' @export
+position_nudge_repel <- getFromNamespace("position_nudge_repel", "ggrepel")
+#' @export
 minpp <- getFromNamespace("minpp", "gggda")
+#' @export
 maxpp <- getFromNamespace("maxpp", "gggda")
+#' @export
 minabspp <- getFromNamespace("minabspp", "gggda")
 
 #' @rdname biplot-geoms
