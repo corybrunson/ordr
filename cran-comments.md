@@ -1,11 +1,11 @@
 ## Resubmission: minor version 0.2.0
 
 This minor version introduces a variety of fixes and upgrades, which incur some breaking changes.
-It also migrates out most of the straightforward {ggplot2} extensionality to {gggda}, now that the latter is published on CRAN.
+It also outsources most of the straightforward {ggplot2} extensionality to {gggda}, now that the latter is published on CRAN.
 
 ## R CMD checks
 
-Local checks were performed both with the current CRAN version 3.5.2 of {ggplot2} and with the current development version (2025 Jul 09).
+Local checks were performed both with the current CRAN version 3.5.2 of {ggplot2} and with the current development version (2025 Jul 10).
 
 ### Test environments
 
