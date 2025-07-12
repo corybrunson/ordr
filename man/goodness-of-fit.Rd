@@ -8,14 +8,17 @@
 \alias{ord_predictivity}
 \title{Measures of goodness of fit of ordination models}
 \usage{
-ord_quality(x)
+ord_quality(x, rank = NULL)
 
-ord_adequacy(x, .matrix)
+ord_adequacy(x, .matrix, rank = NULL)
 
-ord_predictivity(x, .matrix)
+ord_predictivity(x, .matrix, rank = NULL)
 }
 \arguments{
 \item{x}{A 'tbl_ord' object.}
+
+\item{rank}{The maximum rank for which to compute statistics; the default,
+\code{NULL} computes statistics up to the rank of the model.}
 
 \item{.matrix}{A character string partially matched (lowercase) to several
 indicators for one or both matrices in a matrix decomposition used for
@@ -69,10 +72,10 @@ glass_lra <- lra(glass_apollonia, weighted = FALSE)
 # quality (cumulative proportion of inertia included)
 ord_quality(glass_lra)
 # adequacy (fidelity of projections to standard coordinates)
-ord_adequacy(glass_lra, "rows")
-ord_adequacy(glass_lra, "cols")
+ord_adequacy(glass_lra, "rows", rank = 3)
+ord_adequacy(glass_lra, "cols", rank = 3)
 # adequacy (fidelity of projections to principal coordinates)
-ord_predictivity(glass_lra, "dims")
+ord_predictivity(glass_lra, "dims", rank = 2)
 
 # principal components analysis of setosa iris data
 iris_pca <- princomp(iris3[, , "Setosa"])

@@ -38,6 +38,8 @@
 #' @include ord-tbl.r
 #' @param x A 'tbl_ord' object.
 #' @template param-matrix
+#' @param rank The maximum rank for which to compute statistics; the default,
+#'   `NULL` computes statistics up to the rank of the model.
 #' @returns A vector, matrix, or list of matrices of numeric goodness-of-fit
 #'   statistics. If no items are found, a matrix will have zero rows.
 #' @example inst/examples/ex-gof.r
@@ -45,52 +47,71 @@ NULL
 
 #' @rdname goodness-of-fit
 #' @export
-ord_quality <- function(x) {
+ord_quality <- function(x, rank = NULL) {
+  # check rank
   l <- recover_inertia(x)
-  q <- cumsum(l) / sum(l)
-  names(q) <- recover_coord(x)
+  if (is.null(rank)) rank <- length(l) else check_rank(rank, length(l))
+  # compute quality
+  q <- cumsum(l[seq(rank)]) / sum(l)
+  names(q) <- recover_coord(x)[seq(rank)]
   q
 }
 
-# TODO: Add arguments (`j` and `r`? `items` and `rank`?) to specify (subsets of)
-# row/column indices and biplot dimensions and ensure that minimal computations
-# are performed.
+# TODO: Add argument (`j`? `items`?) to specify subsets of row/column indices;
+# ensure that minimal computations are performed.
 
 #' @rdname goodness-of-fit
 #' @export
-ord_adequacy <- function(x, .matrix) {
+ord_adequacy <- function(x, .matrix, rank = NULL) {
   .matrix <- match_factor(.matrix)
-  # double up
+  # check rank
+  l <- recover_inertia(x)
+  if (is.null(rank)) rank <- length(l) else check_rank(rank, length(l))
+  # double back
   if (.matrix == "dims")
-    return(lapply(c("rows", "cols"), ord_adequacy, x = x))
+    return(lapply(c("rows", "cols"), ord_adequacy, x = x, rank = rank))
   # recover components
   p <- recover_conference(x)[match(.matrix, c("rows", "cols"))]
-  f <- recover_factor(x, .matrix)
-  l <- recover_inertia(x)
+  f <- recover_factor(x, .matrix)[, seq(rank), drop = FALSE]
   # empty case
   if (nrow(f) == 0L) return(f)
   # remove (any) inertia
-  f <- t( t(f) / (l^p) )
+  f <- t( t(f) / (l[seq(rank)] ^ p) )
   # array diagonal elements by rank
-  t( apply( f^2, 1L, cumsum ) )
+  if (rank == 1L) f^2 else t( apply( f^2, 1L, cumsum ) )
 }
 
 #' @rdname goodness-of-fit
 #' @export
-ord_predictivity <- function(x, .matrix) {
+ord_predictivity <- function(x, .matrix, rank = NULL) {
   .matrix <- match_factor(.matrix)
-  # double up
+  # check rank
+  l <- recover_inertia(x)
+  if (is.null(rank)) rank <- length(l) else check_rank(rank, length(l))
+  # double back
   if (.matrix == "dims")
-    return(lapply(c("rows", "cols"), ord_predictivity, x = x))
+    return(lapply(c("rows", "cols"), ord_predictivity, x = x, rank = rank))
   # recover components
   p <- recover_conference(x)[match(.matrix, c("rows", "cols"))]
-  f <- recover_factor(x, .matrix)
-  l <- recover_inertia(x)
+  f <- recover_factor(x, .matrix)[, seq(rank), drop = FALSE]
+  ft <- recover_factor(x, .matrix)[, length(l), drop = TRUE]
   # empty case
   if (nrow(f) == 0L) return(f)
   # remove (any) inertia
-  f <- t( t(f) / (l^p) )
+  f <- t( t(f) / (l[seq(rank)] ^ p) )
+  ft <- ft / (l[length(l)] ^ p)
   # array diagonal elements by rank
-  flf_ <- t( apply( t(f^2) * sqrt(l), 2L, cumsum ) )
-  flf_ / flf_[, length(l)]
+  flf_ <- if (rank == 1L) {
+    (f^2) * sqrt(l[1L])
+  } else {
+    t( apply( t(f^2) * sqrt(l[seq(rank)]), 2L, cumsum ) )
+  }
+  flf_ / ft
+}
+
+check_rank <- function(rank, max_rank) {
+  if (! is.numeric(rank) || rank <= 0)
+    stop("`rank` must be a positive number.", call. = FALSE)
+  if (rank > max_rank)
+    stop("`rank` exceeds the rank of the model.", call. = FALSE)
 }
