@@ -1,3 +1,9 @@
+# next version
+
+## goodness-of-fit measures
+
+Functions are provided to calculate three goodness-of-fit statistics.
+
 # ordr 0.2.0
 
 ## infrastructure and standards
