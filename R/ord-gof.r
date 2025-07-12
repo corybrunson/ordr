@@ -39,7 +39,7 @@
 #' @param x A 'tbl_ord' object.
 #' @template param-matrix
 #' @returns A vector, matrix, or list of matrices of numeric goodness-of-fit
-#'   statistics.
+#'   statistics. If no items are found, a matrix will have zero rows.
 #' @example inst/examples/ex-gof.r
 NULL
 
@@ -67,6 +67,8 @@ ord_adequacy <- function(x, .matrix) {
   p <- recover_conference(x)[match(.matrix, c("rows", "cols"))]
   f <- recover_factor(x, .matrix)
   l <- recover_inertia(x)
+  # empty case
+  if (nrow(f) == 0L) return(f)
   # remove (any) inertia
   f <- t( t(f) / (l^p) )
   # array diagonal elements by rank
@@ -84,6 +86,8 @@ ord_predictivity <- function(x, .matrix) {
   p <- recover_conference(x)[match(.matrix, c("rows", "cols"))]
   f <- recover_factor(x, .matrix)
   l <- recover_inertia(x)
+  # empty case
+  if (nrow(f) == 0L) return(f)
   # remove (any) inertia
   f <- t( t(f) / (l^p) )
   # array diagonal elements by rank

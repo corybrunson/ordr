@@ -24,7 +24,7 @@ both).}
 }
 \value{
 A vector, matrix, or list of matrices of numeric goodness-of-fit
-statistics.
+statistics. If no items are found, a matrix will have zero rows.
 }
 \description{
 Compute the quality, adequacy, and predictivity of a 'tbl_ord'
@@ -80,12 +80,10 @@ iris_pca <- princomp(iris3[, , "Setosa"])
 # quality (cumulative proportion of inertia included)
 ord_quality(iris_pca)
 # adequacy (fidelity of projections to standard coordinates)
-# FIXME: Adequacy returns an unnamed matrix on empty elements.
-ord_adequacy(iris_pca, "f")
-ord_adequacy(iris_pca, "g")
+ord_adequacy(iris_pca, "both")
 # adequacy (fidelity of projections to principal coordinates)
-# FIXME: Predictability throws error on empty elements.
-ord_predictivity(iris_pca, "both")
+ord_predictivity(iris_pca, "f")
+ord_predictivity(iris_pca, "g")
 }
 \references{
 Gower JC, Gardner--Lubbe S, & le Roux NJ (2011) \emph{Understanding Biplots}.

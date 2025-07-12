@@ -20,9 +20,7 @@ iris_pca <- princomp(iris3[, , "Setosa"])
 # quality (cumulative proportion of inertia included)
 ord_quality(iris_pca)
 # adequacy (fidelity of projections to standard coordinates)
-# FIXME: Adequacy returns an unnamed matrix on empty elements.
-ord_adequacy(iris_pca, "f")
-ord_adequacy(iris_pca, "g")
+ord_adequacy(iris_pca, "both")
 # adequacy (fidelity of projections to principal coordinates)
-# FIXME: Predictability throws error on empty elements.
-ord_predictivity(iris_pca, "both")
+ord_predictivity(iris_pca, "f")
+ord_predictivity(iris_pca, "g")
