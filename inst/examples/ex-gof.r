@@ -12,10 +12,7 @@ ord_quality(glass_lra)
 ord_adequacy(glass_lra, "rows")
 ord_adequacy(glass_lra, "cols")
 # adequacy (fidelity of projections to principal coordinates)
-ord_predictivity(glass_lra, "rows")
-ord_predictivity(glass_lra, "cols")
-
-# FIXME: Predictability throws error on empty elements.
+ord_predictivity(glass_lra, "dims")
 
 # principal components analysis of setosa iris data
 iris_pca <- princomp(iris3[, , "Setosa"])
@@ -23,8 +20,9 @@ iris_pca <- princomp(iris3[, , "Setosa"])
 # quality (cumulative proportion of inertia included)
 ord_quality(iris_pca)
 # adequacy (fidelity of projections to standard coordinates)
-ord_adequacy(iris_pca, "rows")
-ord_adequacy(iris_pca, "cols")
+# FIXME: Adequacy returns an unnamed matrix on empty elements.
+ord_adequacy(iris_pca, "f")
+ord_adequacy(iris_pca, "g")
 # adequacy (fidelity of projections to principal coordinates)
-ord_predictivity(iris_pca, "rows")
-ord_predictivity(iris_pca, "cols")
+# FIXME: Predictability throws error on empty elements.
+ord_predictivity(iris_pca, "both")
