@@ -71,12 +71,12 @@ ord_adequacy <- function(x, .matrix, rank = NULL) {
   if (.matrix == "dims")
     return(lapply(c("rows", "cols"), ord_adequacy, x = x, rank = rank))
   # recover components
-  p <- recover_conference(x)[match(.matrix, c("rows", "cols"))]
   f <- recover_factor(x, .matrix)[, seq(rank), drop = FALSE]
   # empty case
   if (nrow(f) == 0L) return(f)
   # remove (any) inertia
-  f <- t( t(f) / (l[seq(rank)] ^ p) )
+  p <- recover_conference(x)[match(.matrix, c("rows", "cols"))]
+  f <- t( t(f) / (sqrt(l[seq(rank)]) ^ p) )
   # array diagonal elements by rank
   if (rank == 1L) f^2 else t( apply( f^2, 1L, cumsum ) )
 }
@@ -91,22 +91,19 @@ ord_predictivity <- function(x, .matrix, rank = NULL) {
   # double back
   if (.matrix == "dims")
     return(lapply(c("rows", "cols"), ord_predictivity, x = x, rank = rank))
-  # recover components
-  p <- recover_conference(x)[match(.matrix, c("rows", "cols"))]
-  f <- recover_factor(x, .matrix)[, seq(rank), drop = FALSE]
-  ft <- recover_factor(x, .matrix)[, length(l), drop = TRUE]
+  # recover component
+  f <- recover_factor(x, .matrix)
   # empty case
-  if (nrow(f) == 0L) return(f)
-  # remove (any) inertia
-  f <- t( t(f) / (l[seq(rank)] ^ p) )
-  ft <- ft / (l[length(l)] ^ p)
-  # array diagonal elements by rank
-  flf_ <- if (rank == 1L) {
-    (f^2) * sqrt(l[1L])
-  } else {
-    t( apply( t(f^2) * sqrt(l[seq(rank)]), 2L, cumsum ) )
-  }
-  flf_ / ft
+  if (nrow(f) == 0L) return(f[, seq(rank), drop = FALSE])
+  # square and weight by full inertia with (any) existing inertia removed
+  p <- recover_conference(x)[match(.matrix, c("rows", "cols"))]
+  flf <- t( t(f^2) * (l ^ (1 - p)) )
+  # numerator: cumulative sums up to `rank`
+  num <- t( apply( flf[, seq(rank), drop = FALSE], 1L, cumsum ) )
+  # denominator: total sums
+  denom <- apply( flf, 1L, sum )
+  # quotient
+  num / denom
 }
 
 check_rank <- function(rank, max_rank) {
