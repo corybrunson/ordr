@@ -27,18 +27,20 @@ NULL
 #' @export
 as_tbl_ord.factanal <- as_tbl_ord_default
 
-recover_dims_factanal <- function(x, .matrix) unclass(x[["loadings"]])
-
 #' @rdname methods-factanal
 #' @export
 recover_rows.factanal <- function(x) {
-  matrix(nrow = 0L, ncol = ncol(x[["loadings"]]),
-         dimnames = list(NULL, colnames(x[["loadings"]])))
+  matrix(
+    nrow = 0L, ncol = ncol(x[["loadings"]]),
+    dimnames = list(NULL, colnames(x[["loadings"]]))
+  )
 }
 
 #' @rdname methods-factanal
 #' @export
-recover_cols.factanal <- function(x) recover_dims_factanal(x, "cols")
+recover_cols.factanal <- function(x) {
+  unclass(x[["loadings"]])
+}
 
 #' @rdname methods-factanal
 #' @export
@@ -55,8 +57,8 @@ recover_coord.factanal <- function(x) {
 #' @rdname methods-factanal
 #' @export
 recover_conference.factanal <- function(x) {
-  # loadings are assigned half the diagonal from the eigendecomposition
-  c(1,1)
+  # scores %*% loadings ~ original data & loadings have full inertia; see #60
+  c(0, 1)
 }
 
 #' @rdname methods-factanal
