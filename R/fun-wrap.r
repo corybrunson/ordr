@@ -17,7 +17,10 @@
 #' | [base::svd()]         | Yes         | No         | Yes       | Yes       |
 #' | [stats::cmdscale()]   | Yes         | No         | No        | Yes       |
 #' | [stats::cancor()]     | No          | Yes        | No        | Yes       |
-#'
+#' 
+#' **NB:** `eigen_ord()` is deprecated in favor of `eigen()`, which for some
+#' time has returned an S3 class (with recovery methods in **ordr**).
+#' 
 #' By default, [cancor_ord()] returns the same data as [stats::cancor()]: the
 #' canonical correlations (`cor`), the canonical coefficients (`$xcoef` and
 #' `$ycoef`), and the variable means (`$xcenter`, `$ycenter`). If `scores =
@@ -49,6 +52,10 @@ NULL
 #' @rdname wrap-ord
 #' @export
 eigen_ord <- function(x, symmetric = isSymmetric.matrix(x)) {
+  rlang::warn(
+    "`eigen_ord()` is deprecated in favor of `base::eigen()`.",
+    .frequency = "once", .frequency_id = "eigen_ord"
+  )
   res <- eigen(x = x, symmetric = symmetric, only.values = FALSE)
   rownames(res$vectors) <- rownames(x)
   colnames(res$vectors) <- paste0("EV", seq_along(res$values))

@@ -76,6 +76,9 @@ The following table summarizes the wrapped functions:\tabular{lllll}{
 }
 
 
+\strong{NB:} \code{eigen_ord()} is deprecated in favor of \code{eigen()}, which for some
+time has returned an S3 class (with recovery methods in \strong{ordr}).
+
 By default, \code{\link[=cancor_ord]{cancor_ord()}} returns the same data as \code{\link[stats:cancor]{stats::cancor()}}: the
 canonical correlations (\code{cor}), the canonical coefficients (\verb{$xcoef} and
 \verb{$ycoef}), and the variable means (\verb{$xcenter}, \verb{$ycenter}). If \code{scores = TRUE}, then \code{\link[=cancor_ord]{cancor_ord()}} also returns the scores \verb{$xscores} and \verb{$yscores}
