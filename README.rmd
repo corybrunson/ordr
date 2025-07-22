@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 [![CRAN](http://www.r-pkg.org/badges/version/ordr)](https://cran.r-project.org/package=ordr)
 <!-- badges: end -->
 
-**ordr** integrates ordination analysis and biplot visualization into [**tidyverse**](https://github.com/tidyverse/tidyverse) workflows.
+**ordr** integrates ordination analysis and biplot visualization into [Tidyverse](https://github.com/tidyverse/tidyverse) workflows.
 
 ## motivation
 
@@ -44,13 +44,13 @@ Analysis pipelines that use these techniques may use the artificial coordinates 
 The number of artificial coordinates used in an application, such as regression or visualization, is called the _rank_ of the ordination [^lm-kmeans].
 A common application is the _biplot_, which positions the rows and columns of the original table in a scatterplot in 1, 2, or 3 artificial coordinates, usually those that explain the most variation in the data.
 
-[^lm-kmeans]: Regression and clustering models, like classical [linear regression](https://www.fbbva.es/microsite/multivariate-statistics/) and [_k_-means](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html), can also be understood as matrix decomposition approximations and even visualized in biplots. Their shared coordinates, which are pre-defined rather than artificial, are the predictor coefficients and the cluster assignments, respectively. Methods for `stats::lm()` and `stats::kmeans()`, for example, are implemented for the sake of novelty and instruction, but are not widely used in practice.
+[^lm-kmeans]: Some regression and clustering models, like classical [linear regression](https://www.fbbva.es/microsite/multivariate-statistics/) and [_k_-means clustering](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html), can also be understood as matrix decomposition approximations and even visualized in biplots. Their shared coordinates, which are pre-defined rather than artificial, are the predictor coefficients and the cluster assignments, respectively. Methods for `stats::lm()` and `stats::kmeans()` are implemented for the sake of novelty and instruction but are not widely used in practice.
 
 ### implementations in R
 
 An extensive range of ordination techniques are implemented in R, from classical multidimensional scaling (`stats::cmdscale()`) and principal components analysis (`stats::prcomp()` and `stats::princomp()`) in the **stats** package distributed with base R, across widely-used implementations of linear discriminant analysis (`MASS::lda()`) and correspondence analysis (`ca::ca()`) in general-use statistical packages, to highly specialized packages that implement cutting-edge techniques or adapt conventional techniques to challenging settings. These implementations come with their own conventions, tailored to the research communities that produced them, and it would be impractical (and probably unhelpful) to try to consolidate them.
 
-Instead, **ordr** provides a streamlined process by which the models output by these methods&mdash;in particular, the matrix factors into which the original data are approximately decomposed and the artificial coordinates they share&mdash;can be inspected, annotated, tabulated, summarized, and visualized. On this last point, most biplot implementations in R provide limited customizability. **ordr** adopts the grammar of graphics paradigm from [**ggplot2**](https://github.com/tidyverse/ggplot2) to modularize and standardize biplot elements [^virtue]. Overall, the package is designed to follow the broader syntactic conventions of the **tidyverse**, so that users familiar with a this workflow can more easily and quickly integrate ordination models into practice.
+Instead, **ordr** provides a streamlined process by which the models output by these methods&mdash;in particular, the matrix factors into which the original data are approximately decomposed and the artificial coordinates they share&mdash;can be inspected, annotated, tabulated, summarized, and visualized. On this last point, most biplot implementations in R provide limited customizability. **ordr** adopts the grammar of graphics paradigm from [**ggplot2**](https://github.com/tidyverse/ggplot2) to modularize and standardize biplot elements [^virtue]. Overall, the package is designed to follow the broader syntactic conventions of the Tidyverse, so that users familiar with a this workflow can more easily and quickly integrate ordination models into practice.
 
 [^virtue]: Biplot elments must be chosen with care, and it is useful and appropriate that many model-specific biplot methods have limited flexibility. This package adopts the trade-off articulated in [Wilkinson's _The Grammar of Graphics_](https://www.google.com/books/edition/_/iI1kcgAACAAJ) (p. 15): "This system is capable of producing some hideous graphics. There is nothing in its design to prevent its misuse. ... This system cannot produce a meaningless graphic, however."
 
@@ -92,7 +92,7 @@ library(ordr)
 (iris_pca <- ordinate(iris, cols = 1:4, model = ~ prcomp(., scale. = TRUE)))
 ```
 
-Additional annotations can be added using several row- and column-specific **dplyr**-style verbs:
+Additional annotations can be added using several row- and column-specific [**dplyr**](https://github.com/tidyverse/dplyr)-style verbs:
 
 ```{r bind}
 iris_meta <- data.frame(
@@ -126,7 +126,7 @@ ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
           "99% confidence ellipses; variables use top & right axes")
 ```
 
-[^text-radiate]: The radiating text geom, like several other features, is adapted from the **ggbiplot** package.
+[^text-radiate]: The vector and radiating text geoms were adapted from the **ggbiplot** package and now reside in [**gggda**](https://github.com/corybrunson/gggda).
 
 When variables are represented in standard coordinates, as typically in PCA, their rules can be rescaled to yield a predictive biplot.[^predictive]
 For legibility, the axes are limited to the data range and offset from the origin:
@@ -163,7 +163,7 @@ Conduct](https://github.com/corybrunson/ordr/blob/main/CODE_OF_CONDUCT.md).
 
 ### inspirations
 
-This package was originally inspired by the **ggbiplot** extension developed by [Vincent Q. Vu](https://github.com/vqv/ggbiplot), [Richard J Telford](https://github.com/richardjtelford/ggbiplot), and [Vilmantas Gegzna](https://github.com/forked-packages/ggbiplot), among others. It probably first brought biplots into the **tidyverse** framework.
+This package was originally inspired by the **ggbiplot** extension developed by [Vincent Q. Vu](https://github.com/vqv/ggbiplot), [Richard J Telford](https://github.com/richardjtelford/ggbiplot), and [Vilmantas Gegzna](https://github.com/forked-packages/ggbiplot), among others. It probably first brought biplots into the Tidyverse framework.
 The motivation to unify a variety of ordination methods came from several books and articles by [Michael Greenacre](https://www.fbbva.es/microsite/multivariate-statistics/resources.html), in particular [_Biplots in Practice_](https://www.fbbva.es/microsite/multivariate-statistics/resources.html#biplots).
 Several answers at CrossValidated, in particular by [amoeba](https://stats.stackexchange.com/users/28666/amoeba) and [ttnphns](https://stats.stackexchange.com/users/3277/ttnphns), provided theoretical insights and informed design choices.
 Thomas Lin Pedersen's [**tidygraph**](https://github.com/thomasp85/tidygraph) prequel to **ggraph** finally induced the shift from the downstream generation of scatterplots to the upstream handling and manipulating of models.

@@ -115,7 +115,29 @@ ordinate.data.frame <- function(x, model, cols, augment, ...) {
 
 #' @rdname ordinate
 #' @export
-ordinate.dist <- ordinate.default
+ordinate.dist <- function(x, model, ...) {
+  
+  # preserve any labels
+  x_labs <- attr(x, "Labels")
+  # consistency with `stats:::as.matrix.dist()`?
+  # x_labs <- attr(x, "Labels") %||% seq_len(attr(x, "Size"))
+  
+  # run the default procedure
+  ord <- ordinate.default(x, model, ...)
+  
+  # augment labels to factors of compatible dimension
+  ord_dim <- dim(ord)
+  if (! is_empty(x_labs)) {
+    if (ord_dim[1L] == length(x_labs)) {
+      ord <- cbind_rows(ord, data.frame(Labels = x_labs))
+    }
+    if (ord_dim[2L] == length(x_labs)) {
+      ord <- cbind_cols(ord, data.frame(Labels = x_labs))
+    }
+  }
+  
+  ord
+}
 
 # pre-process the model argument
 # adapted from `purrr::as_mapper()`

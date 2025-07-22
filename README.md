@@ -11,7 +11,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 
 **ordr** integrates ordination analysis and biplot visualization into
-[**tidyverse**](https://github.com/tidyverse/tidyverse) workflows.
+[Tidyverse](https://github.com/tidyverse/tidyverse) workflows.
 
 ## motivation
 
@@ -76,9 +76,9 @@ implementations in R provide limited customizability. **ordr** adopts
 the grammar of graphics paradigm from
 [**ggplot2**](https://github.com/tidyverse/ggplot2) to modularize and
 standardize biplot elements [^5]. Overall, the package is designed to
-follow the broader syntactic conventions of the **tidyverse**, so that
-users familiar with a this workflow can more easily and quickly
-integrate ordination models into practice.
+follow the broader syntactic conventions of the Tidyverse, so that users
+familiar with a this workflow can more easily and quickly integrate
+ordination models into practice.
 
 ## usage
 
@@ -169,7 +169,8 @@ library(ordr)
 ```
 
 Additional annotations can be added using several row- and
-column-specific **dplyr**-style verbs:
+column-specific [**dplyr**](https://github.com/tidyverse/dplyr)-style
+verbs:
 
 ``` r
 iris_meta <- data.frame(
@@ -298,7 +299,7 @@ This package was originally inspired by the **ggbiplot** extension
 developed by [Vincent Q. Vu](https://github.com/vqv/ggbiplot), [Richard
 J Telford](https://github.com/richardjtelford/ggbiplot), and [Vilmantas
 Gegzna](https://github.com/forked-packages/ggbiplot), among others. It
-probably first brought biplots into the **tidyverse** framework. The
+probably first brought biplots into the Tidyverse framework. The
 motivation to unify a variety of ordination methods came from several
 books and articles by [Michael
 Greenacre](https://www.fbbva.es/microsite/multivariate-statistics/resources.html),
@@ -354,16 +355,16 @@ at [UF Health](https://ufhealth.org/).
     clustering, and LDA uses dimension reduction to perform
     classification tasks.
 
-[^4]: Regression and clustering models, like classical [linear
+[^4]: Some regression and clustering models, like classical [linear
     regression](https://www.fbbva.es/microsite/multivariate-statistics/)
-    and
-    [*k*-means](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html),
+    and [*k*-means
+    clustering](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html),
     can also be understood as matrix decomposition approximations and
     even visualized in biplots. Their shared coordinates, which are
     pre-defined rather than artificial, are the predictor coefficients
     and the cluster assignments, respectively. Methods for `stats::lm()`
-    and `stats::kmeans()`, for example, are implemented for the sake of
-    novelty and instruction, but are not widely used in practice.
+    and `stats::kmeans()` are implemented for the sake of novelty and
+    instruction but are not widely used in practice.
 
 [^5]: Biplot elments must be chosen with care, and it is useful and
     appropriate that many model-specific biplot methods have limited
@@ -383,8 +384,9 @@ at [UF Health](https://ufhealth.org/).
     understood by the modeling function. Step-by-step methods also exist
     to build and annotate a ‘tbl_ord’ from a fitted ordination model.
 
-[^8]: The radiating text geom, like several other features, is adapted
-    from the **ggbiplot** package.
+[^8]: The vector and radiating text geoms were adapted from the
+    **ggbiplot** package and now reside in
+    [**gggda**](https://github.com/corybrunson/gggda).
 
 [^9]: This is an experimental feature only available for linear methods,
     namely eigendecomposition, singular value decomposition, and
