@@ -95,6 +95,7 @@ Collate:
     'methods-stats-princomp.r'
     'ord-annotation.r'
     'ord-format.r'
+    'ord-gof.r'
     'ord-negation.r'
     'ord-plot.r'
     'ord-supplementation.r'
