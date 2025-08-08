@@ -74,7 +74,7 @@ ord_quality(glass_lra)
 # adequacy (fidelity of projections to standard coordinates)
 ord_adequacy(glass_lra, "rows", rank = 3)
 ord_adequacy(glass_lra, "cols", rank = 3)
-# adequacy (fidelity of projections to principal coordinates)
+# predictivity (fidelity of projections to principal coordinates)
 ord_predictivity(glass_lra, "dims", rank = 2)
 
 # principal components analysis of setosa iris data
@@ -84,7 +84,7 @@ iris_pca <- princomp(iris3[, , "Setosa"])
 ord_quality(iris_pca)
 # adequacy (fidelity of projections to standard coordinates)
 ord_adequacy(iris_pca, "both")
-# adequacy (fidelity of projections to principal coordinates)
+# predictivity (fidelity of projections to principal coordinates)
 ord_predictivity(iris_pca, "f")
 ord_predictivity(iris_pca, "g")
 }

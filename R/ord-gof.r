@@ -99,7 +99,8 @@ ord_predictivity <- function(x, .matrix, rank = NULL) {
   p <- recover_conference(x)[match(.matrix, c("rows", "cols"))]
   flf <- t( t(f^2) * (l ^ (1 - p)) )
   # numerator: cumulative sums up to `rank`
-  num <- t( apply( flf[, seq(rank), drop = FALSE], 1L, cumsum ) )
+  num <- if (rank == 1L) flf[, seq(rank), drop = FALSE] else
+    t( apply( flf[, seq(rank), drop = FALSE], 1L, cumsum ) )
   # denominator: total sums
   denom <- apply( flf, 1L, sum )
   # quotient

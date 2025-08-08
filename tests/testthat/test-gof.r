@@ -25,10 +25,10 @@ test_that("`ord_adequacy()` correctly subsets by rank", {
   expect_equal(cities_adeq[,  1L, drop = FALSE], cities_adeq_1)
 })
 
-# test_that("`ord_adequacy()` accommodates missing items", {
-#   cities_v_adeq <- ord_adequacy(cities_ord, .matrix = "cols")
-#   expect_equal(nrow(cities_v_adeq), 0L)
-# })
+test_that("`ord_adequacy()` accommodates item absence", {
+  cities_v_adeq <- ord_adequacy(cities_ord, .matrix = "cols")
+  expect_equal(nrow(cities_v_adeq), 0L)
+})
 
 test_that("`ord_predictivity()` agrees with matrix calculation", {
   cities_predictiv <- ord_predictivity(cities_ord, .matrix = "rows")
@@ -51,7 +51,7 @@ test_that("`ord_predictivity()` correctly subsets by rank", {
   expect_equal(cities_predictiv[,  1L, drop = FALSE], cities_predictiv_1)
 })
 
-# test_that("`ord_predictivity()` accommodates missing items", {
-#   cities_v_predictiv <- ord_predictivity(cities_ord, .matrix = "cols")
-#   expect_equal(nrow(cities_v_predictiv), 0L)
-# })
+test_that("`ord_predictivity()` accommodates item absence", {
+  cities_v_predictiv <- ord_predictivity(cities_ord, .matrix = "cols")
+  expect_equal(nrow(cities_v_predictiv), 0L)
+})
