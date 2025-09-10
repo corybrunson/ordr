@@ -11,7 +11,7 @@
   both = "dims", symmetric = "dims"
 )
 
-.ord_elements <- c("active", "score", "structure")
+.ord_elements <- c("active", "score", "structure", "pinv_weight")
 
 match_factor <- function(x) {
   x <- match.arg(tolower(x), names(.ord_factors))
