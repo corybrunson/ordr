@@ -6,6 +6,8 @@
 .Rhistory
 .RData
 
+# package development & documentation
+revdep
 inst/doc
 
 ignore

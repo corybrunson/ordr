@@ -6,6 +6,7 @@
 #'   the convenience `CoordScaffold` system also fixes the coordinate aspect
 #'   ratio at `1` and gives the user control only of the plotting window.
 #'
+#' @importFrom gggda CoordRect
 #' @inheritParams ggplot2::coord_fixed
 #' @param window_ratio aspect ratio of plotting window
 #' @example inst/examples/ex-coord-scaffold.r
@@ -14,8 +15,8 @@ coord_scaffold <- function(
     window_ratio = 1,
     xlim = NULL, ylim = NULL, expand = TRUE, clip = "on"
 ) {
-  ggplot2:::check_coord_limits(xlim)
-  ggplot2:::check_coord_limits(ylim)
+  check_coord_limits(xlim)
+  check_coord_limits(ylim)
   ggproto(
     NULL, CoordScaffold,
     limits = list(x = xlim, y = ylim),
@@ -37,3 +38,5 @@ CoordScaffold <- ggproto(
     diff(ranges$y.range) / diff(ranges$x.range)
   }
 )
+
+check_coord_limits <- getFromNamespace("check_coord_limits", "ggplot2")

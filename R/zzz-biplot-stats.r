@@ -13,8 +13,34 @@
 #' @name biplot-stats
 #' @template return-layer
 #' @family biplot layers
-#' @include utils.r
+#' @include layer-utils.r
 #' @import ggplot2
+#' @importFrom gggda
+#'   StatCenter
+#'   StatStar
+#'   StatChull
+#'   StatPeel
+#'   StatCone
+#'   StatDepth
+#'   StatDepthFilled
+#'   StatScale
+#'   StatSpantree
+#'   StatBagplot
+#'   StatRule
+#'   stat_center
+#'   stat_star
+#'   stat_chull
+#'   stat_peel
+#'   stat_cone
+#'   stat_depth
+#'   stat_depth_filled
+#'   stat_scale
+#'   stat_spantree
+#'   stat_bagplot
+#'   stat_rule
+#'   minpp
+#'   maxpp
+#'   minabspp
 #' @inheritParams ggplot2::layer
 #' @template param-stat
 #' @template biplot-ord-aes
@@ -23,20 +49,19 @@
 #' @inheritParams ggplot2::stat_density_2d
 #' @inheritParams ggplot2::stat_density_2d_filled
 #' @inheritParams ggplot2::stat_ellipse
-#' @inheritParams stat_bagplot
-#' @inheritParams stat_center
-#' @inheritParams stat_star
-#' @inheritParams stat_chull
-#' @inheritParams stat_peel
-#' @inheritParams stat_cone
-#' @inheritParams stat_depth
-#' @inheritParams stat_depth_filled
+#' @inheritParams gggda::stat_center
+#' @inheritParams gggda::stat_star
+#' @inheritParams gggda::stat_chull
+#' @inheritParams gggda::stat_peel
+#' @inheritParams gggda::stat_cone
+#' @inheritParams gggda::stat_depth
+#' @inheritParams gggda::stat_depth_filled
+#' @inheritParams gggda::stat_scale
+#' @inheritParams gggda::stat_spantree
+#' @inheritParams gggda::stat_bagplot
+#' @inheritParams gggda::stat_rule
 #' @inheritParams stat_projection
-#' @inheritParams stat_rule
-#' @inheritParams stat_scale
-#' @inheritParams stat_spantree
 #' @example inst/examples/ex-stat-bagplot-ord-iris.r
-#' @example inst/examples/ex-stat-bagplot-ord-judges.r
 #' @example inst/examples/ex-stat-center-ord-iris.r
 #' @example inst/examples/ex-stat-chull-ord-haireye.r
 #' @example inst/examples/ex-stat-cone-ord-spend.r
@@ -46,6 +71,29 @@
 #' @example inst/examples/ex-stat-rule-ord-glass.r
 #' @example inst/examples/ex-stat-spantree-ord-eurodist.r
 NULL
+
+#' @export
+gggda::stat_center
+#' @export
+gggda::stat_star
+#' @export
+gggda::stat_chull
+#' @export
+gggda::stat_peel
+#' @export
+gggda::stat_cone
+#' @export
+gggda::stat_depth
+#' @export
+gggda::stat_depth_filled
+#' @export
+gggda::stat_scale
+#' @export
+gggda::stat_spantree
+#' @export
+gggda::stat_bagplot
+#' @export
+gggda::stat_rule
 
 #' @rdname ordr-ggproto
 #' @format NULL
@@ -262,78 +310,6 @@ stat_cols_ellipse <- function(
         inherit.aes = inherit.aes, params = list2(type = type, 
             level = level, segments = segments, na.rm = na.rm, 
             ...))    
-    
-}
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatRowsBagplot <- ggproto(
-  "StatRowsBagplot", StatBagplot,
-  
-  setup_data = setup_rows_data,
-  
-  compute_group = ord_formals(StatBagplot, "compute_group")
-)
-
-#' @rdname biplot-stats
-#' @export
-stat_rows_bagplot <- function(
-  mapping = NULL,
-  data = NULL,
-  geom = "bagplot",
-  position = "identity",
-  fraction = 0.5,
-  coef = 3,
-  median = TRUE,
-  fence = TRUE,
-  outliers = TRUE,
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ...
-) {
-    layer(data = data, mapping = mapping, stat = StatRowsBagplot, 
-        geom = geom, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(fraction = fraction, 
-            coef = coef, median = median, fence = fence, 
-            outliers = outliers, na.rm = FALSE, ...))    
-    
-}
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatColsBagplot <- ggproto(
-  "StatColsBagplot", StatBagplot,
-  
-  setup_data = setup_cols_data,
-  
-  compute_group = ord_formals(StatBagplot, "compute_group")
-)
-
-#' @rdname biplot-stats
-#' @export
-stat_cols_bagplot <- function(
-  mapping = NULL,
-  data = NULL,
-  geom = "bagplot",
-  position = "identity",
-  fraction = 0.5,
-  coef = 3,
-  median = TRUE,
-  fence = TRUE,
-  outliers = TRUE,
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ...
-) {
-    layer(data = data, mapping = mapping, stat = StatColsBagplot, 
-        geom = geom, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(fraction = fraction, 
-            coef = coef, median = median, fence = fence, 
-            outliers = outliers, na.rm = FALSE, ...))    
     
 }
 
@@ -566,6 +542,8 @@ stat_rows_peel <- function(
   data = NULL,
   geom = "polygon",
   position = "identity",
+  num = NULL,
+  by = 1L,
   breaks = c(0.5),
   cut = c("above", "below"),
   show.legend = NA,
@@ -574,8 +552,9 @@ stat_rows_peel <- function(
 ) {
     layer(data = data, mapping = mapping, stat = StatRowsPeel, 
         geom = geom, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(breaks = breaks, 
-            cut = cut, na.rm = FALSE, ...))    
+        inherit.aes = inherit.aes, params = list(num = num, 
+            by = by, breaks = breaks, cut = cut, na.rm = FALSE, 
+            ...))    
     
 }
 
@@ -598,6 +577,8 @@ stat_cols_peel <- function(
   data = NULL,
   geom = "polygon",
   position = "identity",
+  num = NULL,
+  by = 1L,
   breaks = c(0.5),
   cut = c("above", "below"),
   show.legend = NA,
@@ -606,8 +587,9 @@ stat_cols_peel <- function(
 ) {
     layer(data = data, mapping = mapping, stat = StatColsPeel, 
         geom = geom, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(breaks = breaks, 
-            cut = cut, na.rm = FALSE, ...))    
+        inherit.aes = inherit.aes, params = list(num = num, 
+            by = by, breaks = breaks, cut = cut, na.rm = FALSE, 
+            ...))    
     
 }
 
@@ -825,174 +807,6 @@ stat_cols_depth_filled <- function(
 #' @format NULL
 #' @usage NULL
 #' @export
-StatRowsProjection <- ggproto(
-  "StatRowsProjection", StatProjection,
-  
-  extra_params = c(StatProjection$extra_params, "ref_subset", "ref_elements"),
-  
-  setup_params = setup_referent_params,
-  
-  setup_data = setup_rows_xy_data,
-  
-  compute_group = ord_formals(StatProjection, "compute_group")
-)
-
-#' @rdname biplot-stats
-#' @export
-stat_rows_projection <- function(
-  mapping = NULL,
-  data = NULL,
-  geom = "segment",
-  position = "identity",
-  referent = NULL,
-  ref_subset = NULL, ref_elements = "active",
-  ...,
-  show.legend = NA,
-  inherit.aes = TRUE
-) {
-    LayerRef <- layer(data = data, mapping = mapping, stat = StatRowsProjection, 
-        geom = geom, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(referent = referent,
-            ref_subset = ref_subset, ref_elements = ref_elements, 
-            na.rm = FALSE, ...))
-    class(LayerRef) <- c("LayerRef", class(LayerRef))
-    LayerRef    
-    
-}
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatColsProjection <- ggproto(
-  "StatColsProjection", StatProjection,
-  
-  extra_params = c(StatProjection$extra_params, "ref_subset", "ref_elements"),
-  
-  setup_params = setup_referent_params,
-  
-  setup_data = setup_cols_xy_data,
-  
-  compute_group = ord_formals(StatProjection, "compute_group")
-)
-
-#' @rdname biplot-stats
-#' @export
-stat_cols_projection <- function(
-  mapping = NULL,
-  data = NULL,
-  geom = "segment",
-  position = "identity",
-  referent = NULL,
-  ref_subset = NULL, ref_elements = "active",
-  ...,
-  show.legend = NA,
-  inherit.aes = TRUE
-) {
-    LayerRef <- layer(data = data, mapping = mapping, stat = StatColsProjection, 
-        geom = geom, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(referent = referent,
-            ref_subset = ref_subset, ref_elements = ref_elements, 
-            na.rm = FALSE, ...))
-    class(LayerRef) <- c("LayerRef", class(LayerRef))
-    LayerRef    
-    
-}
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatRowsRule <- ggproto(
-  "StatRowsRule", StatRule,
-  
-  extra_params = c(StatRule$extra_params, "ref_subset", "ref_elements"),
-  
-  setup_params = setup_referent_params,
-  
-  setup_data = setup_rows_xy_data,
-  
-  compute_group = ord_formals(StatRule, "compute_group")
-)
-
-#' @rdname biplot-stats
-#' @export
-stat_rows_rule <- function(
-  mapping = NULL,
-  data = NULL,
-  geom = "rule",
-  position = "identity",
-  fun.lower = "minpp",
-  fun.upper = "maxpp",
-  fun.offset = "minabspp",
-  fun.args = list(),
-  referent = NULL,
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ref_subset = NULL, ref_elements = "active",
-  ...
-) {
-    LayerRef <- layer(data = data, mapping = mapping, stat = StatRowsRule, 
-        geom = geom, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(referent = referent,
-            ref_subset = ref_subset, ref_elements = ref_elements, 
-            fun.lower = fun.lower, fun.upper = fun.upper, 
-            fun.offset = fun.offset, fun.args = fun.args, 
-            na.rm = FALSE, ...))
-    class(LayerRef) <- c("LayerRef", class(LayerRef))
-    LayerRef    
-    
-}
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
-StatColsRule <- ggproto(
-  "StatColsRule", StatRule,
-  
-  extra_params = c(StatRule$extra_params, "ref_subset", "ref_elements"),
-  
-  setup_params = setup_referent_params,
-  
-  setup_data = setup_cols_xy_data,
-  
-  compute_group = ord_formals(StatRule, "compute_group")
-)
-
-#' @rdname biplot-stats
-#' @export
-stat_cols_rule <- function(
-  mapping = NULL,
-  data = NULL,
-  geom = "rule",
-  position = "identity",
-  fun.lower = "minpp",
-  fun.upper = "maxpp",
-  fun.offset = "minabspp",
-  fun.args = list(),
-  referent = NULL,
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ref_subset = NULL, ref_elements = "active",
-  ...
-) {
-    LayerRef <- layer(data = data, mapping = mapping, stat = StatColsRule, 
-        geom = geom, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(referent = referent,
-            ref_subset = ref_subset, ref_elements = ref_elements, 
-            fun.lower = fun.lower, fun.upper = fun.upper, 
-            fun.offset = fun.offset, fun.args = fun.args, 
-            na.rm = FALSE, ...))
-    class(LayerRef) <- c("LayerRef", class(LayerRef))
-    LayerRef    
-    
-}
-
-#' @rdname ordr-ggproto
-#' @format NULL
-#' @usage NULL
-#' @export
 StatRowsScale <- ggproto(
   "StatRowsScale", StatScale,
   
@@ -1112,5 +926,245 @@ stat_cols_spantree <- function(
         geom = geom, position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, check.aes = FALSE, params = list(engine = engine, 
             method = method, na.rm = FALSE, ...))    
+    
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsBagplot <- ggproto(
+  "StatRowsBagplot", StatBagplot,
+  
+  setup_data = setup_rows_data,
+  
+  compute_group = ord_formals(StatBagplot, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_rows_bagplot <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "bagplot",
+  position = "identity",
+  fraction = 0.5,
+  coef = 3,
+  median = TRUE,
+  fence = TRUE,
+  outliers = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+) {
+    layer(data = data, mapping = mapping, stat = StatRowsBagplot, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(fraction = fraction, 
+            coef = coef, median = median, fence = fence, 
+            outliers = outliers, na.rm = FALSE, ...))    
+    
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsBagplot <- ggproto(
+  "StatColsBagplot", StatBagplot,
+  
+  setup_data = setup_cols_data,
+  
+  compute_group = ord_formals(StatBagplot, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_bagplot <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "bagplot",
+  position = "identity",
+  fraction = 0.5,
+  coef = 3,
+  median = TRUE,
+  fence = TRUE,
+  outliers = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+) {
+    layer(data = data, mapping = mapping, stat = StatColsBagplot, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(fraction = fraction, 
+            coef = coef, median = median, fence = fence, 
+            outliers = outliers, na.rm = FALSE, ...))    
+    
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsRule <- ggproto(
+  "StatRowsRule", StatRule,
+  
+  extra_params = c(StatRule$extra_params, "ref_subset", "ref_elements"),
+  
+  setup_params = setup_referent_params,
+  
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = ord_formals(StatRule, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_rows_rule <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "rule",
+  position = "identity",
+  fun.lower = "minpp",
+  fun.upper = "maxpp",
+  fun.offset = "minabspp",
+  fun.args = list(),
+  referent = NULL,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ref_subset = NULL, ref_elements = "active",
+  ...
+) {
+    LayerRef <- layer(data = data, mapping = mapping, stat = StatRowsRule, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(referent = referent,
+            ref_subset = ref_subset, ref_elements = ref_elements, 
+            fun.lower = fun.lower, fun.upper = fun.upper, 
+            fun.offset = fun.offset, fun.args = fun.args, 
+            na.rm = FALSE, ...))
+    class(LayerRef) <- c("LayerRef", class(LayerRef))
+    LayerRef    
+    
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsRule <- ggproto(
+  "StatColsRule", StatRule,
+  
+  extra_params = c(StatRule$extra_params, "ref_subset", "ref_elements"),
+  
+  setup_params = setup_referent_params,
+  
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = ord_formals(StatRule, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_rule <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "rule",
+  position = "identity",
+  fun.lower = "minpp",
+  fun.upper = "maxpp",
+  fun.offset = "minabspp",
+  fun.args = list(),
+  referent = NULL,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ref_subset = NULL, ref_elements = "active",
+  ...
+) {
+    LayerRef <- layer(data = data, mapping = mapping, stat = StatColsRule, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(referent = referent,
+            ref_subset = ref_subset, ref_elements = ref_elements, 
+            fun.lower = fun.lower, fun.upper = fun.upper, 
+            fun.offset = fun.offset, fun.args = fun.args, 
+            na.rm = FALSE, ...))
+    class(LayerRef) <- c("LayerRef", class(LayerRef))
+    LayerRef    
+    
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatRowsProjection <- ggproto(
+  "StatRowsProjection", StatProjection,
+  
+  extra_params = c(StatProjection$extra_params, "ref_subset", "ref_elements"),
+  
+  setup_params = setup_referent_params,
+  
+  setup_data = setup_rows_xy_data,
+  
+  compute_group = ord_formals(StatProjection, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_rows_projection <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "segment",
+  position = "identity",
+  referent = NULL,
+  ref_subset = NULL, ref_elements = "active",
+  ...,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+    LayerRef <- layer(data = data, mapping = mapping, stat = StatRowsProjection, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(referent = referent,
+            ref_subset = ref_subset, ref_elements = ref_elements, 
+            na.rm = FALSE, ...))
+    class(LayerRef) <- c("LayerRef", class(LayerRef))
+    LayerRef    
+    
+}
+
+#' @rdname ordr-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+StatColsProjection <- ggproto(
+  "StatColsProjection", StatProjection,
+  
+  extra_params = c(StatProjection$extra_params, "ref_subset", "ref_elements"),
+  
+  setup_params = setup_referent_params,
+  
+  setup_data = setup_cols_xy_data,
+  
+  compute_group = ord_formals(StatProjection, "compute_group")
+)
+
+#' @rdname biplot-stats
+#' @export
+stat_cols_projection <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "segment",
+  position = "identity",
+  referent = NULL,
+  ref_subset = NULL, ref_elements = "active",
+  ...,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+    LayerRef <- layer(data = data, mapping = mapping, stat = StatColsProjection, 
+        geom = geom, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(referent = referent,
+            ref_subset = ref_subset, ref_elements = ref_elements, 
+            na.rm = FALSE, ...))
+    class(LayerRef) <- c("LayerRef", class(LayerRef))
+    LayerRef    
     
 }

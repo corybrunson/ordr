@@ -48,7 +48,7 @@
 
 #' @import ggplot2
 #' @inheritParams ggplot2::layer
-#' @inheritParams geom_vector
+#' @inheritParams gggda::geom_vector
 #' @template param-geom
 #' @param new_data A list (best structured as a [data.frame][base::data.frame])
 #'   of row (`geom_cols_interpolation()`) or column
@@ -152,6 +152,11 @@ GeomInterpolation <- ggproto(
     
     if (! coord$is_linear()) {
       warning("Interpolation is not yet tailored to non-linear coordinates.")
+      rlang::warn(
+        "Interpolation is not yet tailored to non-linear coordinates.",
+        .frequency = "regularly",
+        .frequency_id = "GeomInterpolation$draw_panel-is_linear"
+      )
     }
     type <- match.arg(type, c("centroid", "sequence"))
     # reverse ends of `arrow`

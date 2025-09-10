@@ -29,5 +29,6 @@ an alias included for convenience and backward compatibility.
 \references{
 Gardner S (2001) \emph{Extensions of biplot methodology to discriminant analysis
 with applications of non-parametric principal components}. PhD thesis,
-Stellenbosch University. \url{http://hdl.handle.net/10019.1/52264}
+Stellenbosch University.
+\url{https://scholar.sun.ac.za/items/279f7958-0b54-43f1-8c75-da652f65db3f}
 }

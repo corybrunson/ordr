@@ -1,65 +1,57 @@
+## Resubmission: minor version 0.2.0
 
-## Resubmission
+This minor version introduces a variety of fixes and upgrades, which incur some breaking changes.
+It also outsources most of the straightforward {ggplot2} extensionality to {gggda}, now that the latter is published on CRAN.
 
-This is a resubmission that addresses issues with two previous submissions flagged by the maintainers.
-It also includes some substantive changes from the previous submission. The same set of checks have been performed and are mostly unchanged from the previous.
+## R CMD checks
 
-## Test environments
+Local checks were performed both with the current CRAN version 3.5.2 of {ggplot2} and with the current development version (2025 Jul 10) using `document = FALSE`.
 
-* local OS X install, R 4.1.1, "Kick Things" (via `devtools::check()`)
-* local OS X install, R 4.2.1, "Funny-Looking Kid" (via `devtools::check()`) with **ggplot2** installed at commit a58b48c (v3.3.6.9000 following `linewidth` change)
-* R-hub (via `rhub::check_for_cran()`)
-* R-hub (via `rhub::check_for_cran(platforms = "macos-highsierra-release-cran")`)
-* Win-Builder (devel, current, and previous; via `devtools::check_win_*()`)
+### Test environments
 
-### R CMD check results (R 4.1.1)
+* local OS X install, R 4.4.2
+  * `devtools::check()`
+  * `devtools::check(env_vars = c('_R_CHECK_DEPENDS_ONLY_' = "true"))`
+  * `devtools::check(manual = TRUE, remote = TRUE)`
+* Win-Builder
+  * `devtools::check_win_oldrelease()`
+  * `devtools::check_win_release()`
+  * `devtools::check_win_devel()`
 
-There were no ERRORs, WARNINGs, or NOTEs.
+### local results
 
-### R CMD check results (R 4.2.1)
+There were no ERRORs or WARNINGs.
+Two NOTEs were consistently produced:
 
-There were no ERRORs or WARNINGs. There was one NOTE.
-
-The note read as follows:
 ```
-Packages suggested but not available for checking: 'mlpack', 'vegan'
+❯ checking package dependencies ... NOTE
+  Package suggested but not available for checking: ‘mlpack’
+
+❯ checking for future file timestamps ... NOTE
+  unable to verify current time
 ```
-This was an intentional check on a machine without these packages installed.
 
-### Win-Builder
+The first was an intentional check on a machine without these packages installed.
+The second is presumably due to internet speeds.
 
-There were no ERRORs or WARNINGs. There was one NOTE.
+### Win-Builder results
 
-The note flagged this as a new submission.
-The note also flagged the possible misspellings 'al', 'pre', 'biplot' (and its plural 'biplots'), 'eigen', 'decompositions', 'workflows', and 'scatterplots', which are standard technical terms or abbreviations.
-Finally, the note flagged some possibly invalid DOI-based and other URLs:
-* <https://doi.org/10.1111/j.1475-4754.2006.00270.x>
-* <https://doi.org/10.2307/2394164>
-* <https://doi.org/10.2307/2683520>
-* <https://support.qs.com/hc/en-gb/articles/360021876820-QS-Institution-Classifications>
-All of these are correct and have been verified. (Some redirect but are intended to remain DOI links for permanence.)
+There were no ERRORs or WARNINGs. All NOTEs not seen above are addressed below.
 
-The note was consistent across all three checks, though the specific spellings and URLs varied.
+The following URLs work for me:
 
-### R-hub (default)
-
-There were no ERRORs or WARNINGs. There were two NOTEs.
-
-One note flagged the same new submission status, possible misspellings, and possibly invalid URLs as the Win-Builder checks.
-
-One note read as follows:
 ```
-* checking for detritus in the temp directory ... NOTE
-Found the following files/directories:
-  'lastMiKTeXException'
+Found the following (possibly) invalid URLs:
+  URL: https://scholar.sun.ac.za/items/279f7958-0b54-43f1-8c75-da652f65db3f
+    From: man/theme_scaffold.Rd
+    Status: 403
+    Message: Forbidden
+  URL: https://ww2.amstat.org/meetings/jsm/2022/
+    From: README.md
+    Status: 403
+    Message: Forbidden
+  URL: https://ww2.amstat.org/meetings/jsm/2022/onlineprogram/ActivityDetails.cfm?SessionID=222053
+    From: README.md
+    Status: 403
+    Message: Forbidden
 ```
-As documented, this note is probably due to a MiKTeX bug that can be ignored:
-<https://github.com/r-hub/rhub/issues/503>
-
-### R-hub (High Sierra)
-
-There were no ERRORs, WARNINGs, or NOTEs.
-
-## Reverse dependencies
-
-There are no reverse dependencies.

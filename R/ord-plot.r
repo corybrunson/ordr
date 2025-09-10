@@ -81,9 +81,10 @@ biplot.tbl_ord <- function(x, main = deparse(substitute(x)), ...) {
   )
 }
 
-
+#' @method screeplot tbl_ord
 #' @export
 screeplot.default <- getFromNamespace("screeplot.default", "stats")
 
+#' @method biplot tbl_ord
 #' @export
 biplot.default <- getFromNamespace("biplot.default", "stats")

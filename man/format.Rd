@@ -32,10 +32,9 @@ means use the \code{width} \link[pillar:pillar_options]{option}.}
 
 \item{...}{Additional arguments.}
 
-\item{n}{Number of rows to show. If \code{NULL}, the default, will print all rows
-if less than the \code{print_max} \link[pillar:pillar_options]{option}.
-Otherwise, will print as many rows as specified by the
-\code{print_min} \link[pillar:pillar_options]{option}.}
+\item{n}{Number(s) of rows to show from each matrix factor, handled as by
+\code{\link[tibble:formatting]{tibble::format.tbl()}}. If length 1, will apply to both matrix factors.
+To pass \code{NULL} to only one factor, be sure to pass as a list, e.g. \code{n = list(6, NULL)}.}
 
 \item{max_extra_cols}{Number of extra columns to print abbreviated information for,
 if the width is too small for the entire tibble. If \code{NULL},
@@ -63,4 +62,17 @@ for class '\link[tibble:tbl_df-class]{tbl_df}' and for class 'tbl_graph' from th
 \strong{Note:} The \code{format()} function is tedius but cannot be easily modularized
 without invoking \link{recoverers}, \link{annotation}, and \link{augmentation} multiple
 times, thereby significantly reducing performance.
+}
+\examples{
+iris_pca <- ordinate(iris[1:4], prcomp)
+
+# single value applies to both factors
+print(iris_pca, n = 10)
+
+# double values apply to factors in order
+print(iris_pca, n = c(6, 2))
+
+# use `list()` to pass `NULL` (for default) to only one factor
+print(iris_pca, n = list(2, NULL))
+print(iris_pca, n = list(NULL, 2))
 }

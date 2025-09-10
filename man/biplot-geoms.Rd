@@ -24,22 +24,22 @@
 \alias{geom_cols_label_repel}
 \alias{geom_rows_axis}
 \alias{geom_cols_axis}
-\alias{geom_rows_bagplot}
-\alias{geom_cols_bagplot}
-\alias{geom_rows_interpolation}
-\alias{geom_cols_interpolation}
-\alias{geom_rows_lineranges}
-\alias{geom_cols_lineranges}
 \alias{geom_rows_pointranges}
 \alias{geom_cols_pointranges}
+\alias{geom_rows_lineranges}
+\alias{geom_cols_lineranges}
 \alias{geom_rows_isoline}
 \alias{geom_cols_isoline}
-\alias{geom_rows_rule}
-\alias{geom_cols_rule}
 \alias{geom_rows_text_radiate}
 \alias{geom_cols_text_radiate}
 \alias{geom_rows_vector}
 \alias{geom_cols_vector}
+\alias{geom_rows_bagplot}
+\alias{geom_cols_bagplot}
+\alias{geom_rows_rule}
+\alias{geom_cols_rule}
+\alias{geom_rows_interpolation}
+\alias{geom_cols_interpolation}
 \title{Convenience geoms for row and column matrix factors}
 \usage{
 geom_rows_point(
@@ -474,6 +474,160 @@ geom_cols_axis(
   inherit.aes = TRUE
 )
 
+geom_rows_pointranges(
+  mapping = NULL,
+  data = NULL,
+  stat = "center",
+  position = "identity",
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_pointranges(
+  mapping = NULL,
+  data = NULL,
+  stat = "center",
+  position = "identity",
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_rows_lineranges(
+  mapping = NULL,
+  data = NULL,
+  stat = "center",
+  position = "identity",
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_lineranges(
+  mapping = NULL,
+  data = NULL,
+  stat = "center",
+  position = "identity",
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_rows_isoline(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  isoline_text = TRUE,
+  by = NULL,
+  num = NULL,
+  text_dodge = 0.03,
+  ...,
+  text.size = 3,
+  text.angle = 0,
+  text.colour = NULL,
+  text.color = NULL,
+  text.alpha = NULL,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_isoline(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  isoline_text = TRUE,
+  by = NULL,
+  num = NULL,
+  text_dodge = 0.03,
+  ...,
+  text.size = 3,
+  text.angle = 0,
+  text.colour = NULL,
+  text.color = NULL,
+  text.alpha = NULL,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_rows_text_radiate(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  ...,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_text_radiate(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  ...,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_rows_vector(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
+  ...,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+geom_cols_vector(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
+  ...,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
 geom_rows_bagplot(
   mapping = NULL,
   data = NULL,
@@ -548,128 +702,10 @@ geom_cols_bagplot(
   inherit.aes = TRUE
 )
 
-geom_rows_interpolation(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  new_data = NULL,
-  type = c("centroid", "sequence"),
-  arrow = default_arrow,
-  ...,
-  point.fill = NA,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
-geom_cols_interpolation(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  new_data = NULL,
-  type = c("centroid", "sequence"),
-  arrow = default_arrow,
-  ...,
-  point.fill = NA,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
-geom_rows_lineranges(
-  mapping = NULL,
-  data = NULL,
-  stat = "center",
-  position = "identity",
-  ...,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
-geom_cols_lineranges(
-  mapping = NULL,
-  data = NULL,
-  stat = "center",
-  position = "identity",
-  ...,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
-geom_rows_pointranges(
-  mapping = NULL,
-  data = NULL,
-  stat = "center",
-  position = "identity",
-  ...,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
-geom_cols_pointranges(
-  mapping = NULL,
-  data = NULL,
-  stat = "center",
-  position = "identity",
-  ...,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
-geom_rows_isoline(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  isoline_text = TRUE,
-  by = NULL,
-  num = NULL,
-  text_dodge = 0.03,
-  ...,
-  text.size = 3,
-  text.angle = 0,
-  text.colour = NULL,
-  text.color = NULL,
-  text.alpha = NULL,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
-geom_cols_isoline(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  isoline_text = TRUE,
-  by = NULL,
-  num = NULL,
-  text_dodge = 0.03,
-  ...,
-  text.size = 3,
-  text.angle = 0,
-  text.colour = NULL,
-  text.color = NULL,
-  text.alpha = NULL,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
 geom_rows_rule(
   mapping = NULL,
   data = NULL,
-  stat = "rule",
+  stat = "identity",
   position = "identity",
   axis_labels = TRUE,
   axis_ticks = TRUE,
@@ -711,7 +747,7 @@ geom_rows_rule(
 geom_cols_rule(
   mapping = NULL,
   data = NULL,
-  stat = "rule",
+  stat = "identity",
   position = "identity",
   axis_labels = TRUE,
   axis_ticks = TRUE,
@@ -750,67 +786,31 @@ geom_cols_rule(
   inherit.aes = TRUE
 )
 
-geom_rows_text_radiate(
+geom_rows_interpolation(
   mapping = NULL,
   data = NULL,
   stat = "identity",
   position = "identity",
-  ...,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
-geom_cols_text_radiate(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  ...,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
-geom_rows_vector(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
+  new_data = NULL,
+  type = c("centroid", "sequence"),
   arrow = default_arrow,
-  lineend = "round",
-  linejoin = "mitre",
-  vector_labels = TRUE,
   ...,
-  label.colour = NULL,
-  label.color = NULL,
-  label.alpha = NULL,
-  parse = FALSE,
-  check_overlap = FALSE,
+  point.fill = NA,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 )
 
-geom_cols_vector(
+geom_cols_interpolation(
   mapping = NULL,
   data = NULL,
   stat = "identity",
   position = "identity",
+  new_data = NULL,
+  type = c("centroid", "sequence"),
   arrow = default_arrow,
-  lineend = "round",
-  linejoin = "mitre",
-  vector_labels = TRUE,
   ...,
-  label.colour = NULL,
-  label.color = NULL,
-  label.alpha = NULL,
-  parse = FALSE,
-  check_overlap = FALSE,
+  point.fill = NA,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -1002,17 +1002,25 @@ for tick marks. Set to NULL to inherit from the data's aesthetics.}
 \item{text.size, text.angle, text.hjust, text.vjust, text.family, text.fontface, text.colour, text.color, text.alpha}{Default aesthetics for tick mark labels. Set to NULL to inherit from the
 data's aesthetics.}
 
-\item{bag.linetype, bag.linewidth, bag.colour, bag.color, bag.fill, bag.alpha}{Default aesthetics for bags. Set to \code{\link[=sync]{sync()}} to inherit from the data's
+\item{isoline_text}{Logical; whether to include text value marks along the
+isolines.}
+
+\item{vector_labels}{Logical; whether to include labels radiating outward
+from the vectors.}
+
+\item{bag.linetype, bag.linewidth, bag.colour, bag.color, bag.fill, bag.alpha}{Default aesthetics for bags. Set to \code{\link[gggda:sync]{sync()}} to inherit from the data's
 aesthetics or to \code{NULL} to use the data's aesthetics.}
 
-\item{median.shape, median.stroke, median.size, median.colour, median.color, median.fill, median.alpha}{Default aesthetics for medians. Set to \code{\link[=sync]{sync()}} to inherit from the data's
+\item{median.shape, median.stroke, median.size, median.colour, median.color, median.fill, median.alpha}{Default aesthetics for medians. Set to \code{\link[gggda:sync]{sync()}} to inherit from the data's
 aesthetics or to \code{NULL} to use the data's aesthetics.}
 
-\item{fence.linetype, fence.linewidth, fence.colour, fence.color, fence.fill, fence.alpha}{Default aesthetics for fences. Set to \code{\link[=sync]{sync()}} to inherit from the data's
+\item{fence.linetype, fence.linewidth, fence.colour, fence.color, fence.fill, fence.alpha}{Default aesthetics for fences. Set to \code{\link[gggda:sync]{sync()}} to inherit from the data's
 aesthetics or to \code{NULL} to use the data's aesthetics.}
 
-\item{outlier.shape, outlier.stroke, outlier.size, outlier.colour, outlier.color, outlier.fill, outlier.alpha}{Default aesthetics for outliers. Set to \code{\link[=sync]{sync()}} to inherit from the data's
+\item{outlier.shape, outlier.stroke, outlier.size, outlier.colour, outlier.color, outlier.fill, outlier.alpha}{Default aesthetics for outliers. Set to \code{\link[gggda:sync]{sync()}} to inherit from the data's
 aesthetics or to \code{NULL} to use the data's aesthetics.}
+
+\item{snap_rule}{Logical; whether to snap rule segments to grid values.}
 
 \item{new_data}{A list (best structured as a \link[base:data.frame]{data.frame})
 of row (\code{geom_cols_interpolation()}) or column
@@ -1023,14 +1031,6 @@ of operations used to visualize interpolation.}
 
 \item{point.fill}{Default aesthetics for markers. Set to NULL to inherit from
 the data's aesthetics.}
-
-\item{isoline_text}{Logical; whether to include text value marks along the
-isolines.}
-
-\item{snap_rule}{Logical; whether to snap rule segments to grid values.}
-
-\item{vector_labels}{Logical; whether to include labels radiating outward
-from the vectors.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.
@@ -1043,13 +1043,13 @@ matrix factor of a tbl_ord. They understand the same aesthetics
 as their corresponding conventional geoms.
 }
 \examples{
+
 # compute log-ratio analysis of Freestone primary class composition measurements
 glass \%>\%
   ordinate(cols = c(SiO2, Al2O3, CaO, FeO, MgO),
            model = lra, compositional = TRUE) \%>\%
   confer_inertia("rows") \%>\%
   print() -> glass_lra
-
 # row-principal biplot with ordinate-wise standard deviations
 glass_lra \%>\%
   ggbiplot(aes(color = Site), sec.axes = "cols") +
@@ -1062,6 +1062,7 @@ glass_lra \%>\%
     "Row-principal LRA biplot of Freestone glass measurements",
     "Ranges 2 sample standard deviations from centroids"
   )
+
 # principal components analysis of glass composition measurements
 glass[, c(5L, 7L, 8L, 10L, 11L)] \%>\%
   princomp(cor = TRUE) \%>\%
@@ -1069,10 +1070,8 @@ glass[, c(5L, 7L, 8L, 10L, 11L)] \%>\%
   cbind_rows(site = glass$Site, form = glass$Form) \%>\%
   augment_ord() \%>\%
   print() -> glass_pca
-
 # note that column standard coordinates are unit vectors
 rowSums(get_cols(glass_pca) ^ 2)
-
 # plot column standard coordinates with a unit circle underlaid
 glass_pca \%>\%
   ggbiplot(aes(label = name), sec.axes = "cols") +
@@ -1084,7 +1083,6 @@ glass_pca \%>\%
 \seealso{
 Other biplot layers: 
 \code{\link{biplot-stats}},
-\code{\link{stat_referent}()},
 \code{\link{stat_rows}()}
 }
 \concept{biplot layers}

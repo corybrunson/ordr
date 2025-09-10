@@ -396,6 +396,8 @@ predict.lda_ord <- function(object, newdata, prior = object$prior, dimen,
 }
 
 #' @exportS3Method stats::model.frame
+#' @rdname lda-ord
+#' @export
 model.frame.lda_ord <- function(formula, ...)
 {
   oc <- formula$call

@@ -7,11 +7,11 @@ iris_pca |>
   print() -> data
 params <- list(
   angle = pi/3,
-  # fun.data = \(d) dplyr::summarize(d, list(min, max))
+  # fun.data = function(d) dplyr::summarize(d, list(min, max))
   fun.min = min,
   fun.max = max,
-  # fun.min = \(x) quantile(x, .1),
-  # fun.max = \(x) quantile(x, .9),
+  # fun.min = function(x) quantile(x, .1),
+  # fun.max = function(x) quantile(x, .9),
   .referent = "rows",
   elements = "active"
 )

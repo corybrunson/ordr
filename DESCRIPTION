@@ -1,6 +1,6 @@
 Package: ordr
-Title: A Tidyverse Extension for Ordinations and Biplots
-Version: 0.1.1.0002
+Title: A 'Tidyverse' Extension for Ordinations and Biplots
+Version: 0.2.0.0001
 Authors@R: c(
   person("Jason Cory", "Brunson", email = "cornelioid@gmail.com",
     role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3126-9494")),
@@ -25,7 +25,7 @@ Description: Ordination comprises several multivariate exploratory and
     <doi:10.1093/biomet/58.3.453>, is called a biplot.
     'ordr' provides inspection, extraction, manipulation, and visualization
     tools for several popular ordination classes supported by a set of recovery
-    methods. It is inspired by and designed to integrate into 'tidyverse'
+    methods. It is inspired by and designed to integrate into 'Tidyverse'
     workflows provided by Wickham et al (2019) <doi:10.21105/joss.01686>.
 Depends:
     R (>= 3.3.0),
@@ -33,6 +33,7 @@ Depends:
 Imports:
     rlang,
     cli,
+    MASS,
     stringr,
     tidyselect,
     scales,
@@ -44,11 +45,11 @@ Imports:
     purrr,
     labeling,
     ggrepel,
+    gggda
 Suggests:
     testthat,
     sessioninfo,
     gridExtra,
-    MASS,
     mlpack,
     ddalpha,
     knitr,
@@ -64,7 +65,6 @@ Collate:
     'aaa-.r'
     'biplot-key.r'
     'biplot.r'
-    'coord-rect.r'
     'coord-scaffold.r'
     'data.r'
     'dplyr-verbs.r'
@@ -76,16 +76,10 @@ Collate:
     'fun-lda.r'
     'fun-lra.r'
     'fun-wrap.r'
-    'geom-axis.r'
-    'geom-bagplot.r'
     'geom-interpolation.r'
-    'geom-intervals.r'
-    'geom-isoline.r'
     'geom-origin.r'
-    'geom-rule.r'
-    'geom-text-radiate.r'
     'geom-utils.r'
-    'geom-vector.r'
+    'layer-utils.r'
     'methods-base-eigen.r'
     'methods-base-svd.r'
     'methods-mass-correspondence.r'
@@ -101,23 +95,16 @@ Collate:
     'methods-stats-princomp.r'
     'ord-annotation.r'
     'ord-format.r'
+    'ord-gof.r'
     'ord-negation.r'
     'ord-plot.r'
     'ord-supplementation.r'
     'ord-tidiers.r'
     'ordinate.r'
     'ordr.r'
-    'stat-chull.r'
-    'stat-depth.r'
-    'stat-bagplot.r'
-    'stat-center.r'
-    'stat-cone.r'
     'stat-matrix.r'
-    'stat-referent.r'
     'stat-projection.r'
-    'stat-rule.r'
-    'stat-scale.r'
-    'stat-spantree.r'
+    'stat-utils.r'
     'theme-scaffold.r'
     'zzz-biplot-geoms.r'
     'zzz-biplot-stats.r'

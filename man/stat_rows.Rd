@@ -142,7 +142,6 @@ ggbiplot(swiss_fa) +
 \seealso{
 Other biplot layers: 
 \code{\link{biplot-geoms}},
-\code{\link{biplot-stats}},
-\code{\link{stat_referent}()}
+\code{\link{biplot-stats}}
 }
 \concept{biplot layers}

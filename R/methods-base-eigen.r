@@ -57,11 +57,11 @@ recover_conference.eigen <- function(x) {
 
 #' @rdname methods-eigen
 #' @export
-recover_aug_rows.eigen_ord <- function(x) tibble(.rows = nrow(x[["vectors"]]))
+recover_aug_rows.eigen <- function(x) tibble(.rows = nrow(x[["vectors"]]))
 
 #' @rdname methods-eigen
 #' @export
-recover_aug_cols.eigen_ord <- function(x) tibble(.rows = nrow(x[["vectors"]]))
+recover_aug_cols.eigen <- function(x) tibble(.rows = nrow(x[["vectors"]]))
 
 #' @rdname methods-eigen
 #' @export

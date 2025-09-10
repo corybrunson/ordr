@@ -73,6 +73,7 @@ GeomUnitCircle <- ggproto(
     data, panel_params, coord,
     segments = 60, scale.factor = 1
   ) {
+    
     # check that data has been set up
     if (nrow(data) != 1L) stop("Constant-valued data has more than one row.")
     # remove any coordinates

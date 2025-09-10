@@ -46,7 +46,7 @@ The data were collected by students in one of Ronald Snee's statistics courses.[
 The (default) mosaic plot reveals only subtle differences by sex, so we lose little by flattening the array into a $4 \times 4$ matrix.
 The resulting count table is suitable for correspondence analysis, and we fit this model next.
 
-[^snee]: Snee RD (1974) "Graphical Display of Two-way Contingency Tables". _The American Statistician_ **28**(1), 9-12. <https://doi.org/10.2307/2683520>
+[^snee]: Snee RD (1974) "Graphical Display of Two-way Contingency Tables". _The American Statistician_ **28**(1), 9-12. <https://www.tandfonline.com/doi/abs/10.1080/00031305.1974.10479053>
 
 ## correspondence analysis using **MASS**
 

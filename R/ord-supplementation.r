@@ -12,8 +12,8 @@
 #' natural biplot of class discriminant centroids and variable axes but is
 #' usually supplemented with case discriminant scores. The supplementary values
 #' are augmented with an `.element` column whose value indicates their source
-#' and can be incorporated into a [tidied form][fortify]. If no supplementary
-#' rows of a factor are produced, the functions return `NULL`.
+#' and can be incorporated into a [tidied form][ggplot2::fortify]. If no
+#' supplementary rows of a factor are produced, the functions return `NULL`.
 #' 
 
 #' @name supplementation

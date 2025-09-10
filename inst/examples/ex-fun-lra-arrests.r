@@ -18,8 +18,8 @@ arrest_logratios[state_examples, ]
 # non-compositional log-ratio analysis
 (arrests_lra <- lra(USArrests[, arrests]))
 screeplot(arrests_lra)
-biplot(arrests_lra, scale = c(1, 0))
+biplot(arrests_lra, scale = c(1, 0), cex = c(2/3, 1))
 
 # compositional log-ratio analysis
 (arrests_lra <- lra(USArrests[, arrests], compositional = TRUE))
-biplot(arrests_lra, scale = c(1, 0))
+biplot(arrests_lra, scale = c(1, 0), cex = c(2/3, 1))

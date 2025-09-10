@@ -6,11 +6,11 @@
 \format{
 A \link[tibble:tibble]{tibble} with 68 cases and 16 variables:
 \describe{
-\item{Site}{site at which sample was found}
-\item{Anal}{analysis identifier}
-\item{Context}{furnace identifier}
-\item{Form}{type of sample}
-\item{SiO2, TiO2, Al2O3, FeO, MnO, MgO, CaO, Na2O, K2O, P2O5, Cl, SO3}{
+\item{\code{Site}}{site at which sample was found}
+\item{\code{Anal}}{analysis identifier}
+\item{\code{Context}}{furnace identifier}
+\item{\code{Form}}{type of sample}
+\item{\verb{SiO2, TiO2, Al2O3, FeO, MnO, MgO, CaO, Na2O, K2O, P2O5, Cl, SO3}}{
 normalized weight percent oxide of each component}
 }
 }

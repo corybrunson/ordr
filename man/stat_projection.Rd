@@ -104,8 +104,8 @@ This layer is appropriate only with axes in standard coordinates (usually
 
 This statistical transformation is done with respect to reference data passed
 to \code{referent} (ignored if \code{NULL}, the default, possibly resulting in empty
-output). See \code{\link[=stat_referent]{stat_referent()}} for more details. This relies on a sleight of
-hand through a new undocumented \code{LayerRef} class and associated
+output). See \code{\link[gggda:stat_referent]{gggda::stat_referent()}} for more details. This relies on a
+sleight of hand through a new undocumented \code{LayerRef} class and associated
 \code{\link[ggplot2:ggplot_add]{ggplot2::ggplot_add()}} method. As a result, only layers constructed using
 this \verb{stat_*()} shortcut will pass the necessary positional aesthetics to the
 \verb{$setup_params()} step, making them available to pre-process \code{referent} data.
@@ -158,14 +158,14 @@ transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluati
 
 \examples{
 # simplify the Motor Trends data to two predictors legible at aspect ratio 1
-mtcars |>
-  transform(hp00 = hp/100) |>
+mtcars \%>\%
+  transform(hp00 = hp/100) \%>\%
   subset(select = c(mpg, hp00, wt)) ->
   subcars
 # compute the gradient of `mpg` against these two predictors
-lm(mpg ~ hp00 + wt, subcars) |>
-  coefficients() |>
-  as.list() |> as.data.frame() ->
+lm(mpg ~ hp00 + wt, subcars) \%>\%
+  coefficients() \%>\%
+  as.list() \%>\% as.data.frame() ->
   grad
 # project the data onto the gradient axis (with a reversed gradient vector)
 ggplot(subcars, aes(x = hp00, y = wt)) +
@@ -173,16 +173,5 @@ ggplot(subcars, aes(x = hp00, y = wt)) +
   geom_point(shape = "circle open") +
   geom_vector(data = -grad) +
   stat_projection(referent = grad)
-}
-\seealso{
-Other stat layers: 
-\code{\link{stat_bagplot}()},
-\code{\link{stat_center}()},
-\code{\link{stat_chull}()},
-\code{\link{stat_cone}()},
-\code{\link{stat_depth}()},
-\code{\link{stat_rule}()},
-\code{\link{stat_scale}()},
-\code{\link{stat_spantree}()}
 }
 \concept{stat layers}

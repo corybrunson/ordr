@@ -11,7 +11,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 
 **ordr** integrates ordination analysis and biplot visualization into
-[**tidyverse**](https://github.com/tidyverse/tidyverse) workflows.
+[Tidyverse](https://github.com/tidyverse/tidyverse) workflows.
 
 ## motivation
 
@@ -27,7 +27,7 @@ analysis](https://link.springer.com/book/10.1007/1-4020-2236-0) (GDA)
 provides the theoretical basis for (most of) these techniques.
 Ordination overlaps with regression and with dimension reduction, which
 can be [contrasted to clustering and
-classification](https://towardsdatascience.com/supervised-vs-unsupervised-learning-14f68e32ea8d)
+classification](https://towardsdatascience.com/from-supervised-to-unsupervised-learning-a-paradigm-shift-in-computer-vision-ae19ada1064d/)
 in that they assign continuous rather than categorical values to data
 elements [^3].
 
@@ -76,9 +76,9 @@ implementations in R provide limited customizability. **ordr** adopts
 the grammar of graphics paradigm from
 [**ggplot2**](https://github.com/tidyverse/ggplot2) to modularize and
 standardize biplot elements [^5]. Overall, the package is designed to
-follow the broader syntactic conventions of the **tidyverse**, so that
-users familiar with a this workflow can more easily and quickly
-integrate ordination models into practice.
+follow the broader syntactic conventions of the Tidyverse, so that users
+familiar with a this workflow can more easily and quickly integrate
+ordination models into practice.
 
 ## usage
 
@@ -142,6 +142,8 @@ class, and append both model diagnostics and other original data columns
 as annotations to the appropriate matrix factors:[^7]
 
 ``` r
+library(ordr)
+#> Loading required package: ggplot2
 (iris_pca <- ordinate(iris, cols = 1:4, model = ~ prcomp(., scale. = TRUE)))
 #> # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
 #> # 4 coordinates: PC1, PC2, ..., PC4
@@ -150,11 +152,12 @@ as annotations to the appropriate matrix factors:[^7]
 #>     PC1    PC2     PC3 ... |   Species
 #>                            |   <fct>  
 #> 1 -2.26 -0.478  0.127      | 1 setosa 
-#> 2 -2.07  0.672  0.234  ... | 2 setosa 
-#> 3 -2.36  0.341 -0.0441     | 3 setosa 
+#> 2 -2.07  0.672  0.234      | 2 setosa 
+#> 3 -2.36  0.341 -0.0441 ... | 3 setosa 
 #> 4 -2.29  0.595 -0.0910     | 4 setosa 
 #> 5 -2.38 -0.645 -0.0157     | 5 setosa 
-#> # ℹ 145 more rows
+#> # ℹ 145 more rows     | # ℹ 145 more rows
+#> 
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
 #>      PC1     PC2    PC3 ... |   name         center scale
@@ -166,7 +169,8 @@ as annotations to the appropriate matrix factors:[^7]
 ```
 
 Additional annotations can be added using several row- and
-column-specific **dplyr**-style verbs:
+column-specific [**dplyr**](https://github.com/tidyverse/dplyr)-style
+verbs:
 
 ``` r
 iris_meta <- data.frame(
@@ -182,11 +186,12 @@ iris_meta <- data.frame(
 #>     PC1    PC2     PC3 ... |   Species Colony Cytotype
 #>                            |   <chr>    <int> <chr>   
 #> 1 -2.26 -0.478  0.127      | 1 setosa       1 diploid 
-#> 2 -2.07  0.672  0.234  ... | 2 setosa       1 diploid 
-#> 3 -2.36  0.341 -0.0441     | 3 setosa       1 diploid 
+#> 2 -2.07  0.672  0.234      | 2 setosa       1 diploid 
+#> 3 -2.36  0.341 -0.0441 ... | 3 setosa       1 diploid 
 #> 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid 
 #> 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid 
-#> # ℹ 145 more rows
+#> # ℹ 145 more rows     | # ℹ 145 more rows
+#> 
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
 #>      PC1     PC2    PC3 ... |   name         center scale
@@ -294,7 +299,7 @@ This package was originally inspired by the **ggbiplot** extension
 developed by [Vincent Q. Vu](https://github.com/vqv/ggbiplot), [Richard
 J Telford](https://github.com/richardjtelford/ggbiplot), and [Vilmantas
 Gegzna](https://github.com/forked-packages/ggbiplot), among others. It
-probably first brought biplots into the **tidyverse** framework. The
+probably first brought biplots into the Tidyverse framework. The
 motivation to unify a variety of ordination methods came from several
 books and articles by [Michael
 Greenacre](https://www.fbbva.es/microsite/multivariate-statistics/resources.html),
@@ -330,8 +335,8 @@ for organizing such a fun first experience, to Naomi Robbins for
 chairing the event, and to my co-panelists Ursula Laa and Hengrui Luo
 for sharing and sparking such exciting ideas and conversations. An
 update was presented to the [ggplot2
-extenders](https://teunbrand.github.io/ggplot-extension-club/), which
-elicited additional valuable feedback.
+extenders](https://ggplot2-extenders.github.io/ggplot-extension-club/),
+which elicited additional valuable feedback.
 
 ### resources
 
@@ -350,16 +355,16 @@ at [UF Health](https://ufhealth.org/).
     clustering, and LDA uses dimension reduction to perform
     classification tasks.
 
-[^4]: Regression and clustering models, like classical [linear
+[^4]: Some regression and clustering models, like classical [linear
     regression](https://www.fbbva.es/microsite/multivariate-statistics/)
-    and
-    [*k*-means](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html),
+    and [*k*-means
+    clustering](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.html),
     can also be understood as matrix decomposition approximations and
     even visualized in biplots. Their shared coordinates, which are
     pre-defined rather than artificial, are the predictor coefficients
     and the cluster assignments, respectively. Methods for `stats::lm()`
-    and `stats::kmeans()`, for example, are implemented for the sake of
-    novelty and instruction, but are not widely used in practice.
+    and `stats::kmeans()` are implemented for the sake of novelty and
+    instruction but are not widely used in practice.
 
 [^5]: Biplot elments must be chosen with care, and it is useful and
     appropriate that many model-specific biplot methods have limited
@@ -372,14 +377,16 @@ at [UF Health](https://ufhealth.org/).
 
 [^6]: Anderson E (1936) “The Species Problem in Iris”. *Annals of the
     Missouri Botanical Garden* **23**(3),
-    457-469+471-483+485-501+503-509. <https://doi.org/10.2307/2394164>
+    457-469+471-483+485-501+503-509.
+    <https://www.jstor.org/stable/2394164>
 
 [^7]: The data must be in the form of a data frame that can be
     understood by the modeling function. Step-by-step methods also exist
     to build and annotate a ‘tbl_ord’ from a fitted ordination model.
 
-[^8]: The radiating text geom, like several other features, is adapted
-    from the **ggbiplot** package.
+[^8]: The vector and radiating text geoms were adapted from the
+    **ggbiplot** package and now reside in
+    [**gggda**](https://github.com/corybrunson/gggda).
 
 [^9]: This is an experimental feature only available for linear methods,
     namely eigendecomposition, singular value decomposition, and

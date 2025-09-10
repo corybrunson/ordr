@@ -93,7 +93,7 @@ Multivariate Biological Data} Chapter 7, 215--284. Backhuys Publishers, ISBN
 \url{https://web.archive.org/web/20200221000313/http://ramet.elte.hu/~podani/books.html}
 
 Palmer M \emph{Ordination Methods for Ecologists}. Website, accessed 2019-07-12.
-\url{http://ordination.okstate.edu/}
+\url{https://ordination.okstate.edu/}
 
 Le Roux B & Rouanet H (2004) \emph{Geometric Data Analysis: From Correspondence
 Analysis to Stsructured Data Analysis}. Springer Dordrecht, ISBN:

@@ -8,6 +8,7 @@
 \alias{lda_ord.matrix}
 \alias{lda_ord.default}
 \alias{predict.lda_ord}
+\alias{model.frame.lda_ord}
 \title{Augmented implementation of linear discriminant analysis}
 \usage{
 lda_ord(x, ...)
@@ -40,6 +41,8 @@ lda_ord(x, ...)
   method = c("plug-in", "predictive", "debiased"),
   ...
 )
+
+\method{model.frame}{lda_ord}(formula, ...)
 }
 \arguments{
 \item{x}{
@@ -204,12 +207,12 @@ iris_lda \%>\%
   augment_ord() \%>\%
   ggbiplot() +
   theme_bw() +
+  coord_scaffold() +
   geom_rows_point(aes(color = grouping), elements = "score", alpha = 1/3) +
   geom_rows_point(aes(color = grouping), size = 3) +
   geom_cols_vector(aes(label = name), color = "#888888", size = 3) +
   scale_color_brewer(type = "qual", palette = 2) +
-  ggtitle("Unstandardized coefficient biplot of iris LDA") +
-  expand_limits(y = c(-3, 5))
+  ggtitle("Unstandardized coefficient biplot of iris LDA")
 
 # standardized discriminant coefficients: permit comparisons across the
 # variables
@@ -232,12 +235,12 @@ iris_lda \%>\%
   augment_ord() \%>\%
   ggbiplot() +
   theme_bw() +
+  coord_scaffold() +
   geom_rows_point(aes(color = grouping), elements = "score", alpha = 1/3) +
   geom_rows_point(aes(color = grouping), size = 3) +
   geom_cols_vector(aes(label = name), color = "#888888", size = 3) +
   scale_color_brewer(type = "qual", palette = 2) +
-  ggtitle("Standardized coefficient biplot of iris LDA") +
-  expand_limits(y = c(-2, 3))
+  ggtitle("Standardized coefficient biplot of iris LDA")
 
 # variable contributions (de-sphered discriminant coefficients): recover the
 # inner product relationship with the centered class centroids
@@ -256,12 +259,12 @@ iris_lda \%>\%
   augment_ord() \%>\%
   ggbiplot() +
   theme_bw() +
+  coord_scaffold() +
   geom_rows_point(aes(color = grouping), elements = "score", alpha = 1/3) +
   geom_rows_point(aes(color = grouping), size = 3) +
   geom_cols_vector(aes(label = name), color = "#888888", size = 3) +
   scale_color_brewer(type = "qual", palette = 2) +
-  ggtitle("Contribution biplot of iris LDA") +
-  expand_limits(y = c(-2, 3.5))
+  ggtitle("Contribution biplot of iris LDA")
 }
 \references{
 Gardner S & le Roux NJ (2005) "Extensions of Biplot Methodology to
@@ -283,7 +286,7 @@ variable and Linear Discriminant Analysis". CrossValidated, accessed
 
 Greenacre M (2013) "Contribution Biplots". \emph{Journal of Computational and
 Graphical Statistics}, \strong{22}(1): 107--122.
-\url{https://amstat.tandfonline.com/doi/full/10.1080/10618600.2012.702494}
+\url{https://www.tandfonline.com/doi/abs/10.1080/10618600.2012.702494}
 }
 \seealso{
 \code{\link[MASS:lda]{MASS::lda()}}, from which \code{lda_ord()} is adapted
