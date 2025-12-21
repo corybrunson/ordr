@@ -115,7 +115,7 @@ format.tbl_ord <- function(
   names(dims_headers) <- c("rows", "cols")
   
   # format rows and columns separately
-  # (should format together, then split, in order to sync coordinates)
+  # TODO: Format together, then split, in order to sync coordinates.
   fmt_coord_rows <- format(
     as_tibble(dims$rows)[, seq(min(rk, 3)), drop = FALSE],
     n = n[[1L]], width = width / 2
@@ -157,7 +157,7 @@ format.tbl_ord <- function(
     fmt_try
   })
   names(fmt_ann) <- c("rows", "cols")
-  # -+- allow additional rows/variables statement to fill horizontal space -+-
+  # FIXME: Allow additional rows/variables statement to fill horizontal space.
   
   # separate coordinates from annotations
   seps <- if (rk > 3) c("    ", " ...") else c("", "")
@@ -218,8 +218,6 @@ print.tbl_ord <- function(
   cat(paste(fmt, collapse = "\n"), "\n", sep = "")
   invisible(x)
 }
-
-#`%||%` <- rlang::`%||%`
 
 # this trick is borrowed from *tibble*
 op.tbl_ord <- list(
