@@ -272,10 +272,12 @@ aggregate(iris[, 1:4], by = iris[, "Species", drop = FALSE], FUN = mean)
 
 ### more methods
 
-The auxiliary package
+To keep **ordr** from growing out of control, recovery methods only for
+S3 classes produced by high-priority packages are included.[^10] The
+auxiliary package
 [**ordr.extra**](https://github.com/corybrunson/ordr.extra) provides
-recovery methods for several additional ordination models—and has room
-for several more!
+methods for several additional ordination models—and has room for
+several more!
 
 ## acknowledgments
 
@@ -391,3 +393,5 @@ at [UF Health](https://ufhealth.org/).
 [^9]: This is an experimental feature only available for linear methods,
     namely eigendecomposition, singular value decomposition, and
     principal components analysis.
+
+[^10]: `installed.packages(priority = "high")`
