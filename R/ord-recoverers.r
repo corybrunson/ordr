@@ -120,7 +120,7 @@ get_rows <- function(x, elements = "all") {
   } else if (elements == "active") {
     recover_rows(x)
   } else {
-    # -+- need to recognize supplementary subtypes -+-
+    # TODO: Need to recognize supplementary subtypes.
     recover_supp_rows(x)
   }
   # ensure correct signs
@@ -155,7 +155,7 @@ get_cols <- function(x, elements = "all") {
   } else if (elements == "active") {
     recover_cols(x)
   } else {
-    # -+- need to recognize supplementary subtypes -+-
+    # TODO: Need to recognize supplementary subtypes.
     recover_supp_cols(x)
   }
   # ensure correct signs

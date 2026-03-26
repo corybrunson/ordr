@@ -52,7 +52,7 @@ arg_c <- function(x, y, indent = 0L, end = FALSE) {
 }
 
 # parameters transformed by default in `layer()` calls
-# -+- should eventually extract these automatically from layers -+-
+# TODO: Should eventually extract these automatically from layers.
 param_trans <- c(
   box.padding = format_formal(to_unit(box.padding)),
   point.padding = format_formal(to_unit(point.padding)),
@@ -137,7 +137,7 @@ build_biplot_layer <- function(
   ggparent_name <- ggplot2:::camelize(layer_name, first = TRUE)
   
   # get uniplot formals (and insert any additional biplot formals)
-  # -+- extract this into a function that can handle `...` -+-
+  # TODO: Extract this into a function that can handle `...`.
   layer_formals <- formals(layer)
   layer_formals <- unlist(lapply(layer_formals, format_formal))
   layer_args <- names(layer_formals)
@@ -175,7 +175,7 @@ build_biplot_layer <- function(
   # # define biplot layer internal parameters
   # param_args <- setdiff(layer_args, c(root_args, "...", "nudge_x", "nudge_y"))
   # # make any prespecified syntactic parameter transformations
-  # # -+- need to also specify package or layer to avoid ambiguity -+-
+  # # TODO: Need to also specify package or layer to avoid ambiguity.
   # param_vals <- param_args
   # param_match <- intersect(param_args, names(param_trans))
   # if (length(param_match) > 0L)
@@ -344,7 +344,7 @@ adapt_layers <- c(
 )
 
 # custom (done) ggproto objects
-# -+- should be only `Stat*Scale`; eventually automate? -+-
+# TODO: This should be only `Stat*Scale`; eventually automate?
 done_protos <- unlist(lapply(layer_files, function(f) {
   rl <- readLines(here::here("R", f))
   rl <- str_subset(rl, "^(Stat|Geom)[A-Za-z0-9]+ <- ")

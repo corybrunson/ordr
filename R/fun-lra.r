@@ -53,7 +53,7 @@ NULL
 #' @export
 lra <- function(x, compositional = FALSE, weighted = TRUE) {
   x <- as.matrix(x)
-  # -+- save `.$row.sums` to output -+-
+  # TODO: Save `.$row.sums` to output.
   if (compositional) {
     x <- sweep(x, 1, rowSums(x), "/")
   }

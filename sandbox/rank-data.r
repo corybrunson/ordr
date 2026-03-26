@@ -1,7 +1,7 @@
 library(tidyverse)
 library(ordr)
 
-# -+- Put `data/raw/times.csv` in `data` folder. -+-
+# TODO: Put `data/raw/times.csv` in `data` folder.
 # https://github.com/akshi8/university_rankings
 
 # inspect country frequencies

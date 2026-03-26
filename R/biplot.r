@@ -207,7 +207,7 @@ ggbiplot <- function(
   
   # if `sec.axes` is specified, then add secondary axes
   if (! is.null(sec.axes)) {
-    # -+-THIS APPROACH IS VULNERABLE TO DOWNSTREAM `x` AND `y` SCALES-+-
+    # FIXME: This approach is vulnerable to downstream `x` and `y` scales.
     p <- p + scale_x_continuous(sec.axis = sec_axis(~ . / scale.factor))
     p <- p + scale_y_continuous(sec.axis = sec_axis(~ . / scale.factor))
   }
