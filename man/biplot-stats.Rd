@@ -14,8 +14,6 @@
 \alias{stat_cols_density_2d_filled}
 \alias{stat_rows_ellipse}
 \alias{stat_cols_ellipse}
-\alias{stat_rows_bagplot}
-\alias{stat_cols_bagplot}
 \alias{stat_rows_center}
 \alias{stat_cols_center}
 \alias{stat_rows_star}
@@ -30,14 +28,16 @@
 \alias{stat_cols_depth}
 \alias{stat_rows_depth_filled}
 \alias{stat_cols_depth_filled}
-\alias{stat_rows_projection}
-\alias{stat_cols_projection}
-\alias{stat_rows_rule}
-\alias{stat_cols_rule}
 \alias{stat_rows_scale}
 \alias{stat_cols_scale}
 \alias{stat_rows_spantree}
 \alias{stat_cols_spantree}
+\alias{stat_rows_bagplot}
+\alias{stat_cols_bagplot}
+\alias{stat_rows_rule}
+\alias{stat_cols_rule}
+\alias{stat_rows_projection}
+\alias{stat_cols_projection}
 \title{Convenience stats for row and column matrix factors}
 \usage{
 stat_rows_density(
@@ -46,14 +46,14 @@ stat_rows_density(
   geom = "area",
   position = "stack",
   ...,
+  orientation = NA,
   bw = "nrd0",
   adjust = 1,
   kernel = "gaussian",
   n = 512,
   trim = FALSE,
-  na.rm = FALSE,
   bounds = c(-Inf, Inf),
-  orientation = NA,
+  na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 )
@@ -64,14 +64,14 @@ stat_cols_density(
   geom = "area",
   position = "stack",
   ...,
+  orientation = NA,
   bw = "nrd0",
   adjust = 1,
   kernel = "gaussian",
   n = 512,
   trim = FALSE,
-  na.rm = FALSE,
   bounds = c(-Inf, Inf),
-  orientation = NA,
+  na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 )
@@ -82,9 +82,8 @@ stat_rows_count(
   geom = "bar",
   position = "stack",
   ...,
-  width = NULL,
-  na.rm = FALSE,
   orientation = NA,
+  na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 )
@@ -95,9 +94,8 @@ stat_cols_count(
   geom = "bar",
   position = "stack",
   ...,
-  width = NULL,
-  na.rm = FALSE,
   orientation = NA,
+  na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 )
@@ -108,15 +106,16 @@ stat_rows_bin(
   geom = "bar",
   position = "stack",
   ...,
+  orientation = NA,
   binwidth = NULL,
   bins = NULL,
   center = NULL,
   boundary = NULL,
-  breaks = NULL,
   closed = c("right", "left"),
   pad = FALSE,
+  breaks = NULL,
+  drop = "none",
   na.rm = FALSE,
-  orientation = NA,
   show.legend = NA,
   inherit.aes = TRUE
 )
@@ -127,15 +126,16 @@ stat_cols_bin(
   geom = "bar",
   position = "stack",
   ...,
+  orientation = NA,
   binwidth = NULL,
   bins = NULL,
   center = NULL,
   boundary = NULL,
-  breaks = NULL,
   closed = c("right", "left"),
   pad = FALSE,
+  breaks = NULL,
+  drop = "none",
   na.rm = FALSE,
-  orientation = NA,
   show.legend = NA,
   inherit.aes = TRUE
 )
@@ -148,9 +148,9 @@ stat_rows_density_2d(
   ...,
   contour = TRUE,
   contour_var = "density",
-  n = 100,
   h = NULL,
   adjust = c(1, 1),
+  n = 100,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -164,9 +164,9 @@ stat_cols_density_2d(
   ...,
   contour = TRUE,
   contour_var = "density",
-  n = 100,
   h = NULL,
   adjust = c(1, 1),
+  n = 100,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -180,9 +180,9 @@ stat_rows_density_2d_filled(
   ...,
   contour = TRUE,
   contour_var = "density",
-  n = 100,
   h = NULL,
   adjust = c(1, 1),
+  n = 100,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -196,9 +196,9 @@ stat_cols_density_2d_filled(
   ...,
   contour = TRUE,
   contour_var = "density",
-  n = 100,
   h = NULL,
   adjust = c(1, 1),
+  n = 100,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -230,36 +230,6 @@ stat_cols_ellipse(
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
-)
-
-stat_rows_bagplot(
-  mapping = NULL,
-  data = NULL,
-  geom = "bagplot",
-  position = "identity",
-  fraction = 0.5,
-  coef = 3,
-  median = TRUE,
-  fence = TRUE,
-  outliers = TRUE,
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ...
-)
-
-stat_cols_bagplot(
-  mapping = NULL,
-  data = NULL,
-  geom = "bagplot",
-  position = "identity",
-  fraction = 0.5,
-  coef = 3,
-  median = TRUE,
-  fence = TRUE,
-  outliers = TRUE,
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ...
 )
 
 stat_rows_center(
@@ -351,6 +321,8 @@ stat_rows_peel(
   data = NULL,
   geom = "polygon",
   position = "identity",
+  num = NULL,
+  by = 1L,
   breaks = c(0.5),
   cut = c("above", "below"),
   show.legend = NA,
@@ -363,6 +335,8 @@ stat_cols_peel(
   data = NULL,
   geom = "polygon",
   position = "identity",
+  num = NULL,
+  by = 1L,
   breaks = c(0.5),
   cut = c("above", "below"),
   show.legend = NA,
@@ -452,66 +426,6 @@ stat_cols_depth_filled(
   ...
 )
 
-stat_rows_projection(
-  mapping = NULL,
-  data = NULL,
-  geom = "segment",
-  position = "identity",
-  referent = NULL,
-  ref_subset = NULL,
-  ref_elements = "active",
-  ...,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
-stat_cols_projection(
-  mapping = NULL,
-  data = NULL,
-  geom = "segment",
-  position = "identity",
-  referent = NULL,
-  ref_subset = NULL,
-  ref_elements = "active",
-  ...,
-  show.legend = NA,
-  inherit.aes = TRUE
-)
-
-stat_rows_rule(
-  mapping = NULL,
-  data = NULL,
-  geom = "rule",
-  position = "identity",
-  fun.lower = "minpp",
-  fun.upper = "maxpp",
-  fun.offset = "minabspp",
-  fun.args = list(),
-  referent = NULL,
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ref_subset = NULL,
-  ref_elements = "active",
-  ...
-)
-
-stat_cols_rule(
-  mapping = NULL,
-  data = NULL,
-  geom = "rule",
-  position = "identity",
-  fun.lower = "minpp",
-  fun.upper = "maxpp",
-  fun.offset = "minabspp",
-  fun.args = list(),
-  referent = NULL,
-  show.legend = NA,
-  inherit.aes = TRUE,
-  ref_subset = NULL,
-  ref_elements = "active",
-  ...
-)
-
 stat_rows_scale(
   mapping = NULL,
   data = NULL,
@@ -556,6 +470,96 @@ stat_cols_spantree(
   show.legend = NA,
   inherit.aes = TRUE,
   ...
+)
+
+stat_rows_bagplot(
+  mapping = NULL,
+  data = NULL,
+  geom = "bagplot",
+  position = "identity",
+  fraction = 0.5,
+  coef = 3,
+  median = TRUE,
+  fence = TRUE,
+  outliers = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_cols_bagplot(
+  mapping = NULL,
+  data = NULL,
+  geom = "bagplot",
+  position = "identity",
+  fraction = 0.5,
+  coef = 3,
+  median = TRUE,
+  fence = TRUE,
+  outliers = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ...
+)
+
+stat_rows_rule(
+  mapping = NULL,
+  data = NULL,
+  geom = "rule",
+  position = "identity",
+  fun.lower = "minpp",
+  fun.upper = "maxpp",
+  fun.offset = "minabspp",
+  fun.args = list(),
+  referent = NULL,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ref_subset = NULL,
+  ref_elements = "active",
+  ...
+)
+
+stat_cols_rule(
+  mapping = NULL,
+  data = NULL,
+  geom = "rule",
+  position = "identity",
+  fun.lower = "minpp",
+  fun.upper = "maxpp",
+  fun.offset = "minabspp",
+  fun.args = list(),
+  referent = NULL,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  ref_subset = NULL,
+  ref_elements = "active",
+  ...
+)
+
+stat_rows_projection(
+  mapping = NULL,
+  data = NULL,
+  geom = "segment",
+  position = "identity",
+  referent = NULL,
+  ref_subset = NULL,
+  ref_elements = "active",
+  ...,
+  show.legend = NA,
+  inherit.aes = TRUE
+)
+
+stat_cols_projection(
+  mapping = NULL,
+  data = NULL,
+  geom = "segment",
+  position = "identity",
+  referent = NULL,
+  ref_subset = NULL,
+  ref_elements = "active",
+  ...,
+  show.legend = NA,
+  inherit.aes = TRUE
 )
 }
 \arguments{
@@ -607,6 +611,11 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
+\item{orientation}{The orientation of the layer. The default (\code{NA})
+automatically determines the orientation from the aesthetic mapping. In the
+rare event that this fails it can be given explicitly by setting \code{orientation}
+to either \code{"x"} or \code{"y"}. See the \emph{Orientation} section for more detail.}
+
 \item{bw}{The smoothing bandwidth to be used.
 If numeric, the standard deviation of the smoothing kernel.
 If character, a rule to choose the bandwidth, as listed in
@@ -630,39 +639,32 @@ not line-up, and hence you won't be able to stack density values.
 This parameter only matters if you are displaying multiple densities in
 one plot or if you are manually adjusting the scale limits.}
 
-\item{na.rm}{If \code{FALSE}, the default, missing values are removed with
-a warning. If \code{TRUE}, missing values are silently removed.}
-
 \item{bounds}{Known lower and upper bounds for estimated data. Default
 \code{c(-Inf, Inf)} means that there are no (finite) bounds. If any bound is
 finite, boundary effect of default density estimation will be corrected by
 reflecting tails outside \code{bounds} around their closest edge. Data points
 outside of bounds are removed with a warning.}
 
-\item{orientation}{The orientation of the layer. The default (\code{NA})
-automatically determines the orientation from the aesthetic mapping. In the
-rare event that this fails it can be given explicitly by setting \code{orientation}
-to either \code{"x"} or \code{"y"}. See the \emph{Orientation} section for more detail.}
+\item{na.rm}{If \code{FALSE}, the default, missing values are removed with
+a warning. If \code{TRUE}, missing values are silently removed.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
 \code{FALSE} never includes, and \code{TRUE} always includes.
 It can also be a named logical vector to finely select the aesthetics to
-display.}
+display. To include legend keys for all levels, even
+when no data exists, use \code{TRUE}.  If \code{NA}, all levels are shown in legend,
+but unobserved levels are omitted.}
 
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
-
-\item{width}{Bar width. By default, set to 90\% of the \code{\link[ggplot2:resolution]{resolution()}} of the
-data.}
+the default plot specification, e.g. \code{\link[ggplot2:annotation_borders]{annotation_borders()}}.}
 
 \item{binwidth}{The width of the bins. Can be specified as a numeric value
-or as a function that calculates width from unscaled x. Here, "unscaled x"
-refers to the original x values in the data, before application of any
-scale transformation. When specifying a function along with a grouping
-structure, the function will be called once per group.
+or as a function that takes x after scale transformation as input and
+returns a single numeric value. When specifying a function along with a
+grouping structure, the function will be called once per group.
 The default is to use the number of bins in \code{bins},
 covering the range of the data. You should always override
 this value, exploring multiple widths to find the best to illustrate the
@@ -683,15 +685,21 @@ if \code{0} is outside the range of the data. Alternatively, this same alignment
 can be specified with \code{binwidth = 1} and \code{boundary = 0.5}, even if \code{0.5} is
 outside the range of the data.}
 
-\item{breaks}{Alternatively, you can supply a numeric vector giving
-the bin boundaries. Overrides \code{binwidth}, \code{bins}, \code{center},
-and \code{boundary}.}
-
 \item{closed}{One of \code{"right"} or \code{"left"} indicating whether right
 or left edges of bins are included in the bin.}
 
 \item{pad}{If \code{TRUE}, adds empty bins at either end of x. This ensures
 frequency polygons touch 0. Defaults to \code{FALSE}.}
+
+\item{breaks}{Alternatively, you can supply a numeric vector giving
+the bin boundaries. Overrides \code{binwidth}, \code{bins}, \code{center},
+and \code{boundary}. Can also be a function that takes group-wise values as input and returns bin boundaries.}
+
+\item{drop}{Treatment of zero count bins. If \code{"none"} (default), such
+bins are kept as-is. If \code{"all"}, all zero count bins are filtered out.
+If \code{"extremes"} only zero count bins at the flanks are filtered out, but
+not in the middle. \code{TRUE} is shorthand for \code{"all"} and \code{FALSE} is shorthand
+for \code{"none"}.}
 
 \item{contour}{If \code{TRUE}, contour the results of the 2d density
 estimation.}
@@ -715,13 +723,6 @@ or, if \code{type="euclid"}, the radius of the circle to be drawn.}
 
 \item{segments}{The number of segments to be used in drawing the ellipse.}
 
-\item{fraction}{Fraction of the data to include in the bag.}
-
-\item{coef}{Scale factor of the fence relative to the bag.}
-
-\item{median, fence, outliers}{Logical indicators whether to include median,
-fence, and outliers in the composite output.}
-
 \item{fun.data}{A function that is given the complete data and should
 return a data frame with variables \code{ymin}, \code{y}, and \code{ymax}.}
 
@@ -738,9 +739,14 @@ together with \code{fun.min} and \code{fun.max}.}
 
 \item{fun.args}{Optional additional arguments passed on to the functions.}
 
+\item{num}{A positive integer; the number of hulls to peel. Pass \code{Inf} for
+all hulls.}
+
+\item{by}{A positive integer; with what frequency to include consecutive
+hulls, pairs with \code{num}.}
+
 \item{cut}{Character; one of \code{"above"} and \code{"below"}, indicating whether each
-hull should contain at least or at most \code{breaks} of the data,
-respectively.}
+hull should contain at least or at most \code{breaks} of the data, respectively.}
 
 \item{origin}{Logical; whether to include the origin with the transformed
 data. Defaults to \code{FALSE}.}
@@ -751,15 +757,6 @@ data. Defaults to \code{FALSE}.}
 \item{notion_params}{List of additional parameters passed via \code{...} to
 \code{\link[ddalpha:depth.]{ddalpha::depth.()}}.}
 
-\item{referent}{The reference data set; see Details.}
-
-\item{ref_elements, ref_subset}{Analogues of \code{elements} and \code{subset} applied
-to \code{referent}.}
-
-\item{fun.lower, fun.upper, fun.offset}{Functions used to determine the limits
-of the rules and the translations of the axes from the projections of
-\code{referent} onto the axes and onto their normal vectors.}
-
 \item{mult}{Numeric value used to scale the coordinates.}
 
 \item{engine}{A single character string specifying the package implementation
@@ -767,6 +764,22 @@ to use; \code{"mlpack"}, \code{"vegan"}, or \code{"ade4"}.}
 
 \item{method}{Passed to \code{\link[stats:dist]{stats::dist()}} if \code{engine} is \code{"vegan"} or \code{"ade4"},
 ignored if \code{"mlpack"}.}
+
+\item{fraction}{Fraction of the data to include in the bag.}
+
+\item{coef}{Scale factor of the fence relative to the bag.}
+
+\item{median, fence, outliers}{Logical indicators whether to include median,
+fence, and outliers in the composite output.}
+
+\item{fun.lower, fun.upper, fun.offset}{Functions used to determine the limits
+of the rules and the translations of the axes from the projections of
+\code{referent} onto the axes and onto their normal vectors.}
+
+\item{referent}{The reference data set; see Details.}
+
+\item{ref_elements, ref_subset}{Analogues of \code{elements} and \code{subset} applied
+to \code{referent}.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.
@@ -799,6 +812,7 @@ ordination aesthetics but will accept \code{ord_aes()} without warning.
 }
 
 \examples{
+
 iris_pca <- ordinate(iris, prcomp, cols = seq(4), scale. = TRUE)
 # NB: Non-standard aesthetics are handled as in version > 3.5.1; see:
 # https://github.com/tidyverse/ggplot2/issues/6191
@@ -820,34 +834,13 @@ ggbiplot(iris_pca) +
     outlier_gp = list(shape = "asterisk")
   ) +
   geom_cols_vector(aes(label = name))
-USJudgeRatings |> 
-  ordinate(prcomp) |> 
-  mutate_rows(surname = gsub("(,|\\\\.).*$", "", name)) ->
-  judges_pca
-ggbiplot(judges_pca, sec.axes = "cols") +
-  geom_rows_bagplot() +
-  geom_rows_text(aes(label = surname), size = 2) +
-  geom_cols_vector(aes(label = name), size = 3, alpha = .5)
+
 # scaled PCA of Anderson iris measurements
 iris[, -5] \%>\%
   princomp(cor = TRUE) \%>\%
   as_tbl_ord() \%>\%
   mutate_rows(species = iris$Species) \%>\%
   print() -> iris_pca
-
-# row-principal biplot with centroid-based stars
-iris_pca \%>\%
-  ggbiplot(aes(color = species)) +
-  theme_bw() +
-  scale_color_brewer(type = "qual", palette = 2) +
-  stat_rows_star(alpha = .5, fun = "mean") +
-  geom_rows_point(alpha = .5) +
-  stat_rows_center(fun = "mean", size = 4, shape = 1L) +
-  ggtitle(
-    "Row-principal PCA biplot of Anderson iris measurements",
-    "Segments connect each observation to its within-species centroid"
-  )
-
 # row-principal biplot with depth median-based stars
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
@@ -860,6 +853,7 @@ iris_pca \%>\%
     "Row-principal PCA biplot of Anderson iris measurements",
     "Segments connect each observation to its within-species depth median"
   )
+
 # correspondence analysis of combined female and male hair and eye color data
 HairEyeColor \%>\%
   rowSums(dims = 2L) \%>\%
@@ -869,8 +863,8 @@ HairEyeColor \%>\%
   print() -> hec_ca
 # inertia across artificial coordinates (all singular values < 1)
 get_inertia(hec_ca)
-
 # in row-principal biplot, row coordinates are weighted averages of columns
+# (and vice-versa)
 hec_ca \%>\%
   confer_inertia("rows") \%>\%
   ggbiplot(aes(color = .matrix, fill = .matrix, shape = .matrix)) +
@@ -879,15 +873,7 @@ hec_ca \%>\%
   geom_cols_point() +
   geom_rows_point() +
   ggtitle("Row-principal CA of hair & eye color")
-# in column-principal biplot, column coordinates are weighted averages of rows
-hec_ca \%>\%
-  confer_inertia("cols") \%>\%
-  ggbiplot(aes(color = .matrix, fill = .matrix, shape = .matrix)) +
-  theme_bw() +
-  stat_rows_chull(alpha = .1) +
-  geom_rows_point() +
-  geom_cols_point() +
-  ggtitle("Column-principal CA of hair & eye color")
+
 # centered principal components analysis of U.S. personal expenditure data
 USPersonalExpenditure \%>\%
   prcomp() \%>\%
@@ -911,7 +897,6 @@ iris[, -5] \%>\%
   as_tbl_ord() \%>\%
   mutate_rows(species = iris$Species) \%>\%
   print() -> iris_pca
-
 # row-principal biplot with centroids and confidence elliptical disks
 iris_pca \%>\%
   ggbiplot(aes(color = species)) +
@@ -930,14 +915,9 @@ iris_pca \%>\%
     "Row-principal PCA biplot of Anderson iris measurements",
     "Overlaid with 95\% confidence disks"
   )
+
+# hull peeling with breaks below
 judge_pca <- ordinate(USJudgeRatings, princomp, cols = -c(1, 12))
-ggbiplot(judge_pca, axis.type = "predictive") +
-  geom_cols_axis() +
-  geom_rows_point(elements = "score") +
-  stat_rows_peel(
-    aes(alpha = after_stat(hull)), color = "black", elements = "score",
-    breaks = c(.9, .5, .1)
-  )
 ggbiplot(judge_pca, axis.type = "predictive") +
   geom_cols_axis() +
   geom_rows_point(elements = "score") +
@@ -946,29 +926,29 @@ ggbiplot(judge_pca, axis.type = "predictive") +
     breaks = c(.9, .5, .1), cut = "below"
   )
 
+# hull peeling by groups
 iris_pca <- ordinate(iris, cols = 1:4, model = prcomp)
 ggbiplot(iris_pca) +
   geom_rows_point(aes(color = Species), shape = "circle open") +
   stat_rows_peel(
     aes(fill = Species, alpha = after_stat(hull)),
-    breaks = c(.9, .5, .1)
+    num = 3
   )
+
 # unscaled PCA
 iris_pca <- ordinate(iris, cols = 1:4, model = prcomp)
-
 # biplot canvas
 iris_biplot <- 
-  iris_pca |> 
+  iris_pca \%>\%
   ggbiplot(aes(color = Species, label = name), axis.type = "predictive") +
   geom_rows_point() +
   geom_cols_axis(aes(center = center))
-
 # print select cases
 top_cases <- c(1, 51, 101)
 iris[top_cases, ]
 # subset variables
 length_vars <- c(1, 3)
-iris[, length_vars] |> 
+iris[, length_vars] \%>\%
   aggregate(by = iris[, "Species", drop = FALSE], FUN = mean)
 
 # project all cases onto all axes
@@ -982,20 +962,18 @@ iris_biplot + stat_rows_projection(subset = top_cases)
 iris_biplot + stat_rows_projection(subset = top_cases, ref_subset = length_vars)
 
 # project select cases onto manually provided axes
-iris_cols <- as.data.frame(get_cols(iris_pca))
+iris_cols <- as.data.frame(get_cols(iris_pca))[c(1, 2), ]
 iris_biplot + stat_rows_projection(subset = top_cases, referent = iris_cols)
 
 # project selected cases onto selected axes in full-dimensional space
-iris_pca |> 
+iris_pca \%>\%
   ggbiplot(ord_aes(iris_pca, color = Species, label = name),
            axis.type = "predictive") +
   geom_rows_point() +
   geom_cols_axis(aes(center = center)) +
   stat_rows_projection(subset = top_cases, ref_subset = length_vars)
-# Freestone primary glass measurements
-print(glass)
 
-# default (standardized) linear discriminant analysis of sites on measurements
+# default (standardized) linear discriminant analysis
 glass_lda <- MASS::lda(Site ~ SiO2 + Al2O3 + FeO + MgO + CaO, glass)
 # bestow 'tbl_ord' class & augment observation, centroid, and variable fields
 as_tbl_ord(glass_lda) \%>\%
@@ -1010,7 +988,7 @@ glass_lda \%>\%
   geom_rows_point(elements = "score") +
   stat_cols_rule(
     aes(label = name), color = "#888888", num = 8L,
-    ref_elements = "score", fun.offset = \(x) minabspp(x, p = .1),
+    ref_elements = "score", fun.offset = function(x) minabspp(x, p = .1),
     text.size = 2.5, label_dodge = .04
   ) +
   scale_shape_manual(values = c(2L, 3L, 0L, 5L)) +
@@ -1018,7 +996,6 @@ glass_lda \%>\%
     "LDA of Freestone glass measurements",
     "Row-standard biplot of standardized LDA"
   )
-
 # contribution LDA of sites on measurements
 glass_lda <-
   lda_ord(Site ~ SiO2 + Al2O3 + FeO + MgO + CaO, glass,
@@ -1036,7 +1013,7 @@ glass_lda \%>\%
   stat_rows_density_2d(elements = "score", alpha = .5, color = "#444444") +
   stat_cols_rule(
     aes(label = name), geom = "axis", color = "#888888", num = 8L,
-    ref_elements = "active", fun.offset = \(x) minabspp(x, p = .1),
+    ref_elements = "active", fun.offset = function(x) minabspp(x, p = .1),
     label_dodge = 0.04, text.size = 2.5, text_dodge = .025
   ) +
   scale_shape_manual(values = c(16L, 17L, 15L, 18L)) +
@@ -1044,6 +1021,7 @@ glass_lda \%>\%
     "LDA of Freestone glass measurements",
     "Symmetric biplot of contribution LDA"
   )
+
 \dontrun{
 # classical multidimensional scaling of road distances between European cities
 euro_mds <- ordinate(eurodist, cmdscale_ord, k = 11)
@@ -1070,7 +1048,6 @@ euro_plot +
 \seealso{
 Other biplot layers: 
 \code{\link{biplot-geoms}},
-\code{\link{stat_referent}()},
 \code{\link{stat_rows}()}
 }
 \concept{biplot layers}

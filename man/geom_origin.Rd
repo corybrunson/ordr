@@ -62,12 +62,14 @@ or of the circle.}
 \code{NA}, the default, includes if any aesthetics are mapped.
 \code{FALSE} never includes, and \code{TRUE} always includes.
 It can also be a named logical vector to finely select the aesthetics to
-display.}
+display. To include legend keys for all levels, even
+when no data exists, use \code{TRUE}.  If \code{NA}, all levels are shown in legend,
+but unobserved levels are omitted.}
 
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
+the default plot specification, e.g. \code{\link[ggplot2:annotation_borders]{annotation_borders()}}.}
 
 \item{segments}{The number of segments to be used in drawing the circle.}
 
@@ -114,12 +116,12 @@ ggplot(seals, aes(delta_long, delta_lat)) +
   geom_origin() +
   geom_point(alpha = .25)
 # center each group separately
-iris |> 
-  split(~ Species) |> 
-  lapply(subset, select = -c(Species)) |> 
-  lapply(scale, center = TRUE, scale = FALSE) |> 
-  lapply(as.data.frame) |> 
-  unsplit(iris$Species) |> 
+iris \%>\%
+  split(~ Species) \%>\%
+  lapply(subset, select = -c(Species)) \%>\%
+  lapply(scale, center = TRUE, scale = FALSE) \%>\%
+  lapply(as.data.frame) \%>\%
+  unsplit(iris$Species) \%>\%
   transform(Species = iris$Species) ->
   iris_ctr
 ggplot(iris_ctr, aes(Petal.Width, Petal.Length)) +
@@ -128,10 +130,10 @@ ggplot(iris_ctr, aes(Petal.Width, Petal.Length)) +
   geom_unit_circle() +
   geom_point()
 # scale group mean differences uniformly
-iris_ctr |> 
-  subset(select = -c(Species)) |> 
-  scale(center = FALSE, scale = TRUE) |> 
-  transform(Species = iris$Species) |> 
+iris_ctr \%>\%
+  subset(select = -c(Species)) \%>\%
+  scale(center = FALSE, scale = TRUE) \%>\%
+  transform(Species = iris$Species) \%>\%
   ggplot(aes(Petal.Width, Petal.Length)) +
   coord_equal() +
   facet_wrap(vars(Species)) +
@@ -141,14 +143,7 @@ iris_ctr |>
 }
 \seealso{
 Other geom layers: 
-\code{\link{geom_axis}()},
-\code{\link{geom_bagplot}()},
 \code{\link{geom_interpolation}()},
-\code{\link{geom_isoline}()},
-\code{\link{geom_lineranges}()},
-\code{\link{geom_pin}()},
-\code{\link{geom_rule}()},
-\code{\link{geom_text_radiate}()},
-\code{\link{geom_vector}()}
+\code{\link{geom_pin}()}
 }
 \concept{geom layers}

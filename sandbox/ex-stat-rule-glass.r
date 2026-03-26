@@ -16,7 +16,7 @@ glass_lda %>%
   theme_bw() + theme_biplot() +
   geom_rows_point(aes(shape = grouping, size = discriminant), alpha = .5) +
   stat_cols_rule(aes(label = name), color = "#888888", num = 8L,
-                 fun.offset = \(x) minabspp(x, p = .2),
+                 fun.offset = function(x) minabspp(x, p = .2),
                  text_size = 2.5, label_dodge = .02) +
   scale_shape_manual(values = c(2L, 3L, 0L, 5L)) +
   ggtitle(
@@ -41,7 +41,7 @@ glass_lda %>%
   theme_bw() + theme_biplot() +
   geom_rows_point(aes(shape = grouping, alpha = discriminant)) +
   stat_cols_rule(aes(label = name), color = "#888888", num = 8L,
-                 fun.offset = \(x) minabspp(x, p = .1),
+                 fun.offset = function(x) minabspp(x, p = .1),
                  text_size = 2.5, text_dodge = .025) +
   scale_shape_manual(values = c(16L, 17L, 15L, 18L)) +
   ggtitle(

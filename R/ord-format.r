@@ -18,11 +18,16 @@
 #' @name format
 #' @importFrom rlang "%||%"
 #' @param x A [tbl_ord].
+#' @param n Number(s) of rows to show from each matrix factor, handled as by
+#'   [tibble::format.tbl()]. If length 1, will apply to both matrix factors.
+#'   To pass `NULL` to only one factor, be sure to pass as a list, e.g. `n =
+#'   list(6, NULL)`.
 #' @inheritParams tibble::format.tbl
 #' @param ... Additional arguments.
 #' @return The `format()` method returns a vector of strings that are more
 #'   elegantly printed by the `print()` method, which itself returns the tbl_ord
 #'   invisibly.
+#' @example inst/examples/ex-ord-format.r
 
 #' @rdname format
 #' @export
@@ -44,13 +49,21 @@ format.tbl_ord <- function(
   )
   names(dims_ann) <- c("rows", "cols")
   n_ann <- sapply(dims_ann, ncol)
-  if (is.null(n)) {
-    n <- ifelse(
+  
+  # pre-process parameters
+  if (is.null(n)) n <- list(NULL)
+  if (length(n) == 1L) n <- rep(n, 2L)
+  n <- n[seq(2L)]
+  n <- ifelse(
+    vapply(n, is.null, FALSE),
+    ifelse(
       n_dims > tbl_ord_opt("print_max"),
       tbl_ord_opt("print_min"),
       n_dims
-    )
-  }
+    ),
+    n
+  )
+  n <- unlist(n)
   width <- width %||% tbl_ord_opt("width") %||% getOption("width")
   
   # headers!
@@ -102,14 +115,14 @@ format.tbl_ord <- function(
   names(dims_headers) <- c("rows", "cols")
   
   # format rows and columns separately
-  # (should format together, then split, in order to sync coordinates)
+  # TODO: Format together, then split, in order to sync coordinates.
   fmt_coord_rows <- format(
-    as_tibble(dims$rows)[seq(n[1]), seq(min(rk, 3)), drop = FALSE],
-    n = n[1], width = width / 2
+    as_tibble(dims$rows)[, seq(min(rk, 3)), drop = FALSE],
+    n = n[[1L]], width = width / 2
   )
   fmt_coord_cols <- format(
-    as_tibble(dims$cols)[seq(n[2]), seq(min(rk, 3)), drop = FALSE],
-    n = n[2], width = width / 2
+    as_tibble(dims$cols)[, seq(min(rk, 3)), drop = FALSE],
+    n = n[[2L]], width = width / 2
   )
   fmt_coord <- list(
     rows = unname(c(
@@ -134,17 +147,17 @@ format.tbl_ord <- function(
     wid_try <- (width - 7) / 2
     #wid_try <- width - 7
     fmt_try <- try(
-      c("", format(dims_ann[[i]], n = n[i], width = wid_try)[-1]),
+      c("", format(dims_ann[[i]], n = n[[i]], width = wid_try)[-1]),
       silent = TRUE
     )
     while (class(fmt_try) == "try-error") {
       wid_try <- wid_try - 1
-      fmt_try <- c("", format(dims_ann[[i]], n = n[i], width = wid_try)[-1])
+      fmt_try <- c("", format(dims_ann[[i]], n = n[[i]], width = wid_try)[-1])
     }
     fmt_try
   })
   names(fmt_ann) <- c("rows", "cols")
-  # -+- allow additional rows/variables statement to fill horizontal space -+-
+  # FIXME: Allow additional rows/variables statement to fill horizontal space.
   
   # separate coordinates from annotations
   seps <- if (rk > 3) c("    ", " ...") else c("", "")
@@ -205,8 +218,6 @@ print.tbl_ord <- function(
   cat(paste(fmt, collapse = "\n"), "\n", sep = "")
   invisible(x)
 }
-
-#`%||%` <- rlang::`%||%`
 
 # this trick is borrowed from *tibble*
 op.tbl_ord <- list(

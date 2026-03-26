@@ -1,3 +1,4 @@
+
 iris_pca <- ordinate(iris, prcomp, cols = seq(4), scale. = TRUE)
 # NB: Non-standard aesthetics are handled as in version > 3.5.1; see:
 # https://github.com/tidyverse/ggplot2/issues/6191

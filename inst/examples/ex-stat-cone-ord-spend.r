@@ -1,3 +1,4 @@
+
 # centered principal components analysis of U.S. personal expenditure data
 USPersonalExpenditure %>%
   prcomp() %>%

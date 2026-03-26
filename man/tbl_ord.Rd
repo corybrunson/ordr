@@ -44,7 +44,7 @@ structure.
 \details{
 The tbl_ord class wraps around a range of ordination classes, making
 available a suite of ordination tools that specialize to each original object
-class. These tools include \code{\link[=format]{format()}} and \code{\link[=fortify]{fortify()}} methods, which
+class. These tools include \code{\link[=format]{format()}} and \code{\link[ggplot2:fortify]{ggplot2::fortify()}} methods, which
 facilitate the \code{\link[=print]{print()}} method and the \code{\link[=ggbiplot]{ggbiplot()}} function.
 
 No default method is provided for \code{as_tbl_ord()}, despite most defined

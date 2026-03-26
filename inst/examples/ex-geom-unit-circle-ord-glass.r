@@ -1,3 +1,4 @@
+
 # principal components analysis of glass composition measurements
 glass[, c(5L, 7L, 8L, 10L, 11L)] %>%
   princomp(cor = TRUE) %>%
@@ -5,10 +6,8 @@ glass[, c(5L, 7L, 8L, 10L, 11L)] %>%
   cbind_rows(site = glass$Site, form = glass$Form) %>%
   augment_ord() %>%
   print() -> glass_pca
-
 # note that column standard coordinates are unit vectors
 rowSums(get_cols(glass_pca) ^ 2)
-
 # plot column standard coordinates with a unit circle underlaid
 glass_pca %>%
   ggbiplot(aes(label = name), sec.axes = "cols") +

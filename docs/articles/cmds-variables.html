@@ -4,105 +4,116 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>multidimensional scaling of variables • ordr</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="multidimensional scaling of variables">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<!-- mathjax math --><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script><script>
+  window.MathJax = {
+    chtml: {
+      fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
+    }
+  };
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="multidimensional scaling of variables">
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">ordr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1.0002</span>
-      </span>
-    </div>
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../articles/ordr.html">Get started</a>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Articles
+    <a class="navbar-brand me-2" href="../index.html">ordr</a>
 
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/cmds-variables.html">multidimensional scaling of variables</a>
-    </li>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="../articles/ordr.html">Get started</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="active nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/cmds-variables.html">multidimensional scaling of variables</a></li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/corybrunson/ordr/" class="external-link">
-    <span class="fab fa-github fa-lg"></span>
-
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/corybrunson/ordr/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
+</nav><div class="container template-article">
 
 
 
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>multidimensional scaling of variables</h1>
+
+<div class="row">
+  <main id="main" class="col-md-9"><div class="page-header">
+
+      <h1>multidimensional scaling of variables</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/corybrunson/ordr/blob/HEAD/vignettes/cmds-variables.rmd" class="external-link"><code>vignettes/cmds-variables.rmd</code></a></small>
-      <div class="hidden name"><code>cmds-variables.rmd</code></div>
-
+      <div class="d-none name"><code>cmds-variables.rmd</code></div>
     </div>
 
     
     
-<p>This vignette demonstrates that covariance and correlation data can be compressed and visualized using multidimensional scaling using the same principles and machinery as for distance and similarity data. I argue that these geometric representations have interpretative advantages over other methods and should be more widely used.</p>
+<p>This vignette demonstrates that covariance and correlation data can
+be compressed and visualized using multidimensional scaling using the
+same principles and machinery as for distance and similarity data. I
+argue that these geometric representations have interpretative
+advantages over other methods and should be more widely used.</p>
 <div class="section level2">
 <h2 id="dimension-reduction-of-geometric-data">dimension reduction of geometric data<a class="anchor" aria-label="anchor" href="#dimension-reduction-of-geometric-data"></a>
 </h2>
-<p>Because ordination is grounded in geometric data analysis, it is easiest and most straightforward on naturally geometric data. For example, the mineral compositional measurements analyzed by <a href="https://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&amp;idt=1158762" class="external-link">Freestone, Gorin–Rosen, and Hughes (2000)</a> consists of five primary (and several secondary) concentrations for each of 68 artifacts. While all the variables lie on the same (percentage) scale, they vary at different absolute rates; in order to represent the cases (artifacts) geometrically we might separately center and scale them. The most basic ordination method, principal components analysis (PCA), computes a singular value decomposition <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>=</mo><mi>U</mi><mi>D</mi><msup><mi>V</mi><mi>⊤</mi></msup></mrow><annotation encoding="application/x-tex">X = U D V^\top</annotation></semantics></math> of the centered and scaled data matrix <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>∈</mo><msup><mstyle mathvariant="double-struck"><mi>ℝ</mi></mstyle><mrow><mi>n</mi><mo>×</mo><mi>p</mi></mrow></msup></mrow><annotation encoding="application/x-tex">X \in \mathbb{R}^{n\times p}</annotation></semantics></math>:</p>
+<p>Because ordination is grounded in geometric data analysis, it is
+easiest and most straightforward on naturally geometric data. For
+example, the mineral compositional measurements analyzed by <a href="https://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&amp;idt=1158762" class="external-link">Freestone,
+Gorin–Rosen, and Hughes (2000)</a> consists of five primary (and several
+secondary) concentrations for each of 68 artifacts. While all the
+variables lie on the same (percentage) scale, they vary at different
+absolute rates; in order to represent the cases (artifacts)
+geometrically we might separately center and scale them. The most basic
+ordination method, principal components analysis (PCA), computes a
+singular value decomposition <span class="math inline">\(X = U D
+V^\top\)</span> of the centered and scaled data matrix <span class="math inline">\(X \in \mathbb{R}^{n\times p}\)</span>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">glass</span>, package <span class="op">=</span> <span class="st">"ordr"</span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="va">glass</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SiO2"</span>, <span class="st">"Al2O3"</span>, <span class="st">"FeO"</span>, <span class="st">"MgO"</span>, <span class="st">"CaO"</span><span class="op">)</span><span class="op">]</span>,</span>
 <span>           center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/svd.html" class="external-link">svd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">d</span><span class="op">)</span></span></code></pre></div>
-<p>The matrix factors <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi><mo>∈</mo><msup><mstyle mathvariant="double-struck"><mi>ℝ</mi></mstyle><mrow><mi>n</mi><mo>×</mo><mi>r</mi></mrow></msup></mrow><annotation encoding="application/x-tex">U \in \mathbb{R}^{n\times r}</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>∈</mo><msup><mstyle mathvariant="double-struck"><mi>ℝ</mi></mstyle><mrow><mi>p</mi><mo>×</mo><mi>r</mi></mrow></msup></mrow><annotation encoding="application/x-tex">V \in \mathbb{R}^{p\times r}</annotation></semantics></math> arise from eigendecompositions of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><msup><mi>X</mi><mi>⊤</mi></msup></mrow><annotation encoding="application/x-tex">X X^\top</annotation></semantics></math> and of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>X</mi><mi>⊤</mi></msup><mi>X</mi></mrow><annotation encoding="application/x-tex">X^\top X</annotation></semantics></math>, respectively, which have the same set of eigenvalues <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>λ</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>λ</mi><mi>r</mi></msub></mrow><annotation encoding="application/x-tex">\lambda_1,\ldots,\lambda_r</annotation></semantics></math>. The square roots of these eigenvalues make up the diagonal matrix <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mo>∈</mo><msup><mstyle mathvariant="double-struck"><mi>ℝ</mi></mstyle><mrow><mi>r</mi><mo>×</mo><mi>r</mi></mrow></msup></mrow><annotation encoding="application/x-tex">D \in \mathbb{R}^{r\times r}</annotation></semantics></math>. The conventional PCA biplot uses <em>principal coordinates</em> for the cases, given by the rows of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">U D</annotation></semantics></math>, and <em>standardized coordinates</em> for the variables, given by the rows of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>.</p>
-<p>The columns of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mspace width="0.167em"></mspace><msub><mi>u</mi><mn>1</mn></msub><mspace width="0.167em"></mspace><mi>⋯</mi><mspace width="0.167em"></mspace><msub><mi>u</mi><mi>r</mi></msub><mspace width="0.167em"></mspace><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">U = \left[\,u_1\,\cdots\,u_r\,\right]</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mspace width="0.167em"></mspace><msub><mi>v</mi><mn>1</mn></msub><mspace width="0.167em"></mspace><mi>⋯</mi><mspace width="0.167em"></mspace><msub><mi>v</mi><mi>r</mi></msub><mspace width="0.167em"></mspace><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">V = \left[\,v_1\,\cdots\,v_r\,\right]</annotation></semantics></math> comprise the eigenvectors of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><msup><mi>X</mi><mi>⊤</mi></msup></mrow><annotation encoding="application/x-tex">X X^\top</annotation></semantics></math> and of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>X</mi><mi>⊤</mi></msup><mi>X</mi></mrow><annotation encoding="application/x-tex">X^\top X</annotation></semantics></math>. They are orthonormal, which means that <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>U</mi><mi>⊤</mi></msup><mi>U</mi><mo>=</mo><msub><mi>I</mi><mi>r</mi></msub><mo>=</mo><msup><mi>V</mi><mi>⊤</mi></msup><mi>V</mi></mrow><annotation encoding="application/x-tex">U^\top U = I_r = V^\top V</annotation></semantics></math> and that the total variance (called <em>inertia</em>) in each matrix is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>r</mi></msubsup><msup><msub><mi>v</mi><mi>j</mi></msub><mn>2</mn></msup><mo>=</mo><mi>r</mi><mo>=</mo><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>r</mi></msubsup><msup><msub><mi>v</mi><mi>j</mi></msub><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\sum_{j=1}^{r}{ {v_j}^2 } = r = \sum_{j=1}^{r}{ {v_j}^2 }</annotation></semantics></math>. Meanwhile, the diagonal <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math> contains all of the inertia of the centered and scaled data matrix <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>:</p>
+<p>The matrix factors <span class="math inline">\(U \in
+\mathbb{R}^{n\times r}\)</span> and <span class="math inline">\(V \in
+\mathbb{R}^{p\times r}\)</span> arise from eigendecompositions of <span class="math inline">\(X X^\top\)</span> and of <span class="math inline">\(X^\top X\)</span>, respectively, which have the
+same set of eigenvalues <span class="math inline">\(\lambda_1,\ldots,\lambda_r\)</span>. The square
+roots of these eigenvalues make up the diagonal matrix <span class="math inline">\(D \in \mathbb{R}^{r\times r}\)</span>. The
+conventional PCA biplot uses <em>principal coordinates</em> for the
+cases, given by the rows of <span class="math inline">\(U D\)</span>,
+and <em>standardized coordinates</em> for the variables, given by the
+rows of <span class="math inline">\(V\)</span>.</p>
+<p>The columns of <span class="math inline">\(U =
+\left[\,u_1\,\cdots\,u_r\,\right]\)</span> and <span class="math inline">\(V = \left[\,v_1\,\cdots\,v_r\,\right]\)</span>
+comprise the eigenvectors of <span class="math inline">\(X
+X^\top\)</span> and of <span class="math inline">\(X^\top X\)</span>.
+They are orthonormal, which means that <span class="math inline">\(U^\top U = I_r = V^\top V\)</span> and that the
+total variance (called <em>inertia</em>) in each matrix is <span class="math inline">\(\sum_{j=1}^{r}{ {v_j}^2 } = r = \sum_{j=1}^{r}{
+{v_j}^2 }\)</span>. Meanwhile, the diagonal <span class="math inline">\(D\)</span> contains all of the inertia of the
+centered and scaled data matrix <span class="math inline">\(X\)</span>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># inertia of the (scaled) data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
@@ -118,7 +129,15 @@
 <code class="sourceCode R"><span><span class="co"># inertia of the diagonal factor</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">s</span><span class="op">$</span><span class="va">d</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 335</span></span></code></pre>
-<p>For the (2-dimensional, i.e. planar) biplot, this inertia is <em>conferred</em> on the cases (converting standardized coordinates to principal coordinates) so that the planar distances between the points in the plot representing the cases are approximately equal to their Euclidean distances in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>. Because the biplot only accommodates two principal components (it is a projection onto a subset of orthogonal coordinates), the planar distances underestimate the true distances. Here is a scatterplot of the true distances and their biplot approximations:</p>
+<p>For the (2-dimensional, i.e. planar) biplot, this inertia is
+<em>conferred</em> on the cases (converting standardized coordinates to
+principal coordinates) so that the planar distances between the points
+in the plot representing the cases are approximately equal to their
+Euclidean distances in <span class="math inline">\(X\)</span>. Because
+the biplot only accommodates two principal components (it is a
+projection onto a subset of orthogonal coordinates), the planar
+distances underestimate the true distances. Here is a scatterplot of the
+true distances and their biplot approximations:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># distances between cases</span></span>
 <span><span class="va">x.dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -135,8 +154,24 @@
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmds-variables_files/figure-html/case%20geometry-1.png" width="528" style="display: block; margin: auto;"></p>
-<p>In contrast, the variables are better understood through their correlations, which are approximately preserved by their standardized coordinates. Writing <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>=</mo><mo stretchy="false" form="prefix">[</mo><mspace width="0.167em"></mspace><msub><mi>y</mi><mn>1</mn></msub><mspace width="0.167em"></mspace><mi>⋯</mi><mspace width="0.167em"></mspace><msub><mi>y</mi><mi>m</mi></msub><mspace width="0.167em"></mspace><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">X = [\,y_1\,\cdots\,y_m\,]</annotation></semantics></math> as an array of column variables, the covariance between <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>y</mi><mi>i</mi></msub><annotation encoding="application/x-tex">y_i</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>y</mi><mi>j</mi></msub><annotation encoding="application/x-tex">y_j</annotation></semantics></math> is proportional to their inner product <span class="math display">$$\textstyle \operatorname{cov}(y_i,y_j) = \frac{1}{n} y_i \cdot y_j = \frac{1}{n} \lVert y_i\rVert\lVert y_j\rVert\cos\theta_{ij}\text,$$</span> so that the cosine of the angle <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>θ</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">\theta_{ij}</annotation></semantics></math> between them equals their correlation: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>cos</mo><msub><mi>θ</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mfrac><mrow><mo>cov</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>,</mo><msub><mi>y</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msqrt><mrow><mo>cov</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>,</mo><msub><mi>y</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>cov</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>y</mi><mi>j</mi></msub><mo>,</mo><msub><mi>y</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow></msqrt><mi>/</mi><mi>n</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mo>cov</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>,</mo><msub><mi>y</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>σ</mi><mi>i</mi></msub><msub><mi>σ</mi><mi>j</mi></msub></mrow></mfrac><mo>=</mo><msub><mi>r</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\cos\theta_{ij} = \frac{\operatorname{cov}(y_i,y_j)}{\sqrt{\operatorname{cov}(y_i,y_i)\operatorname{cov}(y_j,y_j)}/n} = \frac{\operatorname{cov}(y_i,y_j)}{\sigma_i\sigma_j} = r_{ij}</annotation></semantics></math></p>
-<p>Here the cosines between the vectors in the biplot are plotted against the variable correlations <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">r_{ij}</annotation></semantics></math> in the centered and scaled data. While the vectors are shorter in the biplot for the same reason that distances are shorter, their consines may be larger or smaller depending on their respective coordinates in the remaining coordinates.</p>
+<p>In contrast, the variables are better understood through their
+correlations, which are approximately preserved by their standardized
+coordinates. Writing <span class="math inline">\(X =
+[\,y_1\,\cdots\,y_m\,]\)</span> as an array of column variables, the
+covariance between <span class="math inline">\(y_i\)</span> and <span class="math inline">\(y_j\)</span> is proportional to their inner
+product <span class="math display">\[\textstyle
+\operatorname{cov}(y_i,y_j) = \frac{1}{n} y_i \cdot y_j = \frac{1}{n}
+\lVert y_i\rVert\lVert y_j\rVert\cos\theta_{ij}\text,\]</span> so that
+the cosine of the angle <span class="math inline">\(\theta_{ij}\)</span>
+between them equals their correlation: <span class="math display">\[\cos\theta_{ij} =
+\frac{\operatorname{cov}(y_i,y_j)}{\sqrt{\operatorname{cov}(y_i,y_i)\operatorname{cov}(y_j,y_j)}/n}
+= \frac{\operatorname{cov}(y_i,y_j)}{\sigma_i\sigma_j} =
+r_{ij}\]</span></p>
+<p>Here the cosines between the vectors in the biplot are plotted
+against the variable correlations <span class="math inline">\(r_{ij}\)</span> in the centered and scaled data.
+While the vectors are shorter in the biplot for the same reason that
+distances are shorter, their consines may be larger or smaller depending
+on their respective coordinates in the remaining coordinates.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># correlations between variables</span></span>
 <span><span class="va">x.cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -159,7 +194,22 @@
 <div class="section level2">
 <h2 id="multidimensional-scaling-of-distance-data">multidimensional scaling of distance data<a class="anchor" aria-label="anchor" href="#multidimensional-scaling-of-distance-data"></a>
 </h2>
-<p>The faithful approximation of inter-case distances by principal coordinates is the idea behind <em>classical multidimensional scaling</em> (CMDS), which can be applied to a data set of distances <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>δ</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>,</mo><mspace width="0.222em"></mspace><mn>1</mn><mo>≤</mo><mi>i</mi><mo>≤</mo><mi>j</mi><mo>≤</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\delta_{ij},\ 1\leq i\leq j\leq n</annotation></semantics></math> in the absence of coordinates (variables). CMDS produces a set of artificial coordinates for the cases that yield nested best approximations of the inter-case distances in terms of the sum of squared errors. The technique uses the eigendecomposition of a doubly-centered matrix of squared distances, which produces a matrix <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi><msup><mi>Λ</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">U \Lambda^{1/2}</annotation></semantics></math> whose first <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math> coordinates—for any <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>≤</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">r\leq n</annotation></semantics></math>—minimize the variance of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>U</mi><msup><mi>Λ</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msup><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>U</mi><msup><mi>Λ</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msup><msup><mo stretchy="false" form="postfix">)</mo><mi>⊤</mi></msup><mo>−</mo><mi>Δ</mi><mo>=</mo><mi>U</mi><mi>Λ</mi><msup><mi>U</mi><mi>⊤</mi></msup><mo>−</mo><mi>Δ</mi></mrow><annotation encoding="application/x-tex">(U \Lambda^{1/2}) (U \Lambda^{1/2})^\top - \Delta = U \Lambda U^\top - \Delta</annotation></semantics></math>, where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>δ</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo><mo>∈</mo><msup><mstyle mathvariant="double-struck"><mi>ℝ</mi></mstyle><mrow><mi>n</mi><mo>×</mo><mi>n</mi></mrow></msup></mrow><annotation encoding="application/x-tex">\Delta = (\delta_{ij}) \in \mathbb{R}^{n\times n}</annotation></semantics></math>, to obtain the approximation. The columns of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi><msup><mi>Λ</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">U \Lambda^{1/2}</annotation></semantics></math> are then called <em>principal coordinates</em>, and the first <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math> most faithfully recover the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>δ</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">\delta_{ij}</annotation></semantics></math> using points in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mstyle mathvariant="double-struck"><mi>ℝ</mi></mstyle><mi>r</mi></msup><annotation encoding="application/x-tex">\mathbb{R}^r</annotation></semantics></math> of any possible <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>. For example, because the road distances between several U.S. cities arise from a roughly 2-dimensional process, the point distances in a CMDS are very close approximations:</p>
+<p>The faithful approximation of inter-case distances by principal
+coordinates is the idea behind <em>classical multidimensional
+scaling</em> (CMDS), which can be applied to a data set of distances
+<span class="math inline">\(\delta_{ij},\ 1\leq i\leq j\leq n\)</span>
+in the absence of coordinates (variables). CMDS produces a set of
+artificial coordinates for the cases that yield nested best
+approximations of the inter-case distances in terms of the sum of
+squared errors. The technique uses the eigendecomposition of a
+doubly-centered matrix of squared distances, which produces a matrix
+<span class="math inline">\(U \Lambda^{1/2}\)</span> whose first <span class="math inline">\(r\)</span> coordinates—for any <span class="math inline">\(r\leq n\)</span>—minimize the variance of <span class="math inline">\((U \Lambda^{1/2}) (U \Lambda^{1/2})^\top - \Delta
+= U \Lambda U^\top - \Delta\)</span>, where <span class="math inline">\(\Delta = (\delta_{ij}) \in \mathbb{R}^{n\times
+n}\)</span>, to obtain the approximation. The columns of <span class="math inline">\(U \Lambda^{1/2}\)</span> are then called
+<em>principal coordinates</em>, and the first <span class="math inline">\(r\)</span> most faithfully recover the <span class="math inline">\(\delta_{ij}\)</span> using points in <span class="math inline">\(\mathbb{R}^r\)</span> of any possible <span class="math inline">\(r\)</span>. For example, because the road
+distances between several U.S. cities arise from a roughly 2-dimensional
+process, the point distances in a CMDS are very close
+approximations:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span></span>
 <span><span class="va">cent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span><span class="op">)</span></span>
@@ -177,7 +227,13 @@
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmds-variables_files/figure-html/multidimensional%20scaling%20of%20cities-1.png" width="528" style="display: block; margin: auto;"></p>
-<p>In practice, the goal of CMDS is usually to produce a scatterplot in which the distances <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msqrt><mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>j</mi></msub><mo>−</mo><msub><mi>x</mi><mi>i</mi></msub><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup><mo>+</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>y</mi><mi>j</mi></msub><mo>−</mo><msub><mi>y</mi><mi>i</mi></msub><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup></mrow></msqrt><annotation encoding="application/x-tex">\sqrt{(x_j-x_i)^2+(y_j-y_i)^2}</annotation></semantics></math> between the points that represent the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> cases approximate their original distances <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>δ</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">\delta_{ij}</annotation></semantics></math>. In this case, the artificial coordinates approximately recover the geographic arrangement. By chance, this CMDS rotated the conventional cardinal directions by about <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>π</mi><annotation encoding="application/x-tex">\pi</annotation></semantics></math> radians (though at least the map is recognizable from above rather than below the surface of the Earth):</p>
+<p>In practice, the goal of CMDS is usually to produce a scatterplot in
+which the distances <span class="math inline">\(\sqrt{(x_j-x_i)^2+(y_j-y_i)^2}\)</span> between
+the points that represent the <span class="math inline">\(n\)</span>
+cases approximate their original distances <span class="math inline">\(\delta_{ij}\)</span>. In this case, the artificial
+coordinates approximately recover the geographic arrangement. By chance,
+this CMDS rotated the conventional cardinal directions by about <span class="math inline">\(\pi\)</span> radians (though at least the map is
+recognizable from above rather than below the surface of the Earth):</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">d.coord</span>, pch <span class="op">=</span> <span class="cn">NA</span>, asp <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -189,8 +245,28 @@
 <div class="section level2">
 <h2 id="multidimensional-scaling-of-covariance-data">multidimensional scaling of covariance data<a class="anchor" aria-label="anchor" href="#multidimensional-scaling-of-covariance-data"></a>
 </h2>
-<p>The faithful approximation of inter-variable correlations by the angles between their coordinate vectors provides a dual CMDS procedure. Suppose we have data that consist not of distances between cases but of covariances <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>cov</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>,</mo><msub><mi>y</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="0.222em"></mspace><mn>1</mn><mo>≤</mo><mi>i</mi><mo>≤</mo><mi>j</mi><mo>≤</mo><mi>p</mi></mrow><annotation encoding="application/x-tex">\operatorname{cov}(y_i,y_j),\ 1\leq i\leq j\leq p</annotation></semantics></math> between variables. Again the data are coordinate-free, so PCA is inapplicable. But were the data derived from a (not necessarily centered or scaled) case–variable matrix <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>, then the covariance matrix <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mo>cov</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>,</mo><msub><mi>y</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">C=(\operatorname{cov}(y_i,y_j))</annotation></semantics></math> would have been obtained as <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><msup><mi>X</mi><mi>⊤</mi></msup><mi>X</mi></mrow><annotation encoding="application/x-tex">C=\frac{1}{n}X^\top X</annotation></semantics></math>. This, up to scalar, is the matrix whose eigenvectors would be given by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math> in the SVD <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>=</mo><mi>U</mi><mi>D</mi><msup><mi>V</mi><mi>⊤</mi></msup></mrow><annotation encoding="application/x-tex">X = U D V^\top</annotation></semantics></math>. Therefore, we can obtain artificial coordinates for these variables that approximate what we know of their geometry—thinking of the variables as unknown vectors whose magnitudes and angles are encoded in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>—via an eigendecomposition <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>=</mo><mi>V</mi><mi>Λ</mi><msup><mi>V</mi><mi>⊤</mi></msup></mrow><annotation encoding="application/x-tex">C = V \Lambda V^\top</annotation></semantics></math>: Take <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mi>V</mi><msup><mi>Λ</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msup><mo>∈</mo><msup><mstyle mathvariant="double-struck"><mi>ℝ</mi></mstyle><mrow><mi>p</mi><mo>×</mo><mi>r</mi></mrow></msup></mrow><annotation encoding="application/x-tex">Y = V \Lambda^{1/2} \in \mathbb{R}^{p\times r}</annotation></semantics></math>, so that <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>Y</mi><mi>⊤</mi></msup><mi>Y</mi><mo>≈</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">Y^\top Y \approx C</annotation></semantics></math>.</p>
-<p>While covariances of the unscaled glass measurements are not meaningful, they can be used to validate the technique. Again because the eigendecomposition is intrinsically ordered by variance, the first <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math> eigenvectors provide the most faithful <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>-dimensional approximation; i’ll take <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">r=2</annotation></semantics></math> in anticipation of a biplot:</p>
+<p>The faithful approximation of inter-variable correlations by the
+angles between their coordinate vectors provides a dual CMDS procedure.
+Suppose we have data that consist not of distances between cases but of
+covariances <span class="math inline">\(\operatorname{cov}(y_i,y_j),\
+1\leq i\leq j\leq p\)</span> between variables. Again the data are
+coordinate-free, so PCA is inapplicable. But were the data derived from
+a (not necessarily centered or scaled) case–variable matrix <span class="math inline">\(X\)</span>, then the covariance matrix <span class="math inline">\(C=(\operatorname{cov}(y_i,y_j))\)</span> would
+have been obtained as <span class="math inline">\(C=\frac{1}{n}X^\top
+X\)</span>. This, up to scalar, is the matrix whose eigenvectors would
+be given by <span class="math inline">\(V\)</span> in the SVD <span class="math inline">\(X = U D V^\top\)</span>. Therefore, we can obtain
+artificial coordinates for these variables that approximate what we know
+of their geometry—thinking of the variables as unknown vectors whose
+magnitudes and angles are encoded in <span class="math inline">\(C\)</span>—via an eigendecomposition <span class="math inline">\(C = V \Lambda V^\top\)</span>: Take <span class="math inline">\(Y = V \Lambda^{1/2} \in \mathbb{R}^{p\times
+r}\)</span>, so that <span class="math inline">\(Y^\top Y \approx
+C\)</span>.</p>
+<p>While covariances of the unscaled glass measurements are not
+meaningful, they can be used to validate the technique. Again because
+the eigendecomposition is intrinsically ordered by variance, the first
+<span class="math inline">\(r\)</span> eigenvectors provide the most
+faithful <span class="math inline">\(r\)</span>-dimensional
+approximation; i’ll take <span class="math inline">\(r=2\)</span> in
+anticipation of a biplot:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># covariances and standard deviations</span></span>
 <span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cov</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -211,7 +287,18 @@
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">c</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">c</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmds-variables_files/figure-html/multidimensional%20scaling%20of%20glass-1.png" width="528" style="display: block; margin: auto;"></p>
-<p>Thus, whereas <em>CMDS of cases</em> approximates distances, <em>CMDS of variables</em> approximates covariances. This equips us with an analogous visualization technique for correlation data: Represent each variable <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>y</mi><mi>i</mi></msub><annotation encoding="application/x-tex">y_i</annotation></semantics></math> as a unit vector <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mover><mi>y</mi><mo accent="true">̂</mo></mover><mi>i</mi></msub><annotation encoding="application/x-tex">\hat{y}_i</annotation></semantics></math> in such a way that their angle cosines <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>cos</mo><msub><mi>θ</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\cos\theta_{ij}</annotation></semantics></math> equal their correlations <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">r_{ij}</annotation></semantics></math>, then project these vectors onto the plane in which their variance is maximized. This is exactly how variables are commonly represented in row-principal PCA biplots, by the equivalence of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math> in the SVD <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>=</mo><mi>U</mi><mi>D</mi><msup><mi>V</mi><mi>⊤</mi></msup></mrow><annotation encoding="application/x-tex">X = U D V^\top</annotation></semantics></math> with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math> in the eigendecomposition <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>X</mi><mi>⊤</mi></msup><mi>X</mi><mo>=</mo><mi>E</mi><mi>Λ</mi><msup><mi>E</mi><mi>⊤</mi></msup></mrow><annotation encoding="application/x-tex">X^\top X = E \Lambda E^\top</annotation></semantics></math>. Here is the result for the five compositional measurements on the glass artifacts:</p>
+<p>Thus, whereas <em>CMDS of cases</em> approximates distances, <em>CMDS
+of variables</em> approximates covariances. This equips us with an
+analogous visualization technique for correlation data: Represent each
+variable <span class="math inline">\(y_i\)</span> as a unit vector <span class="math inline">\(\hat{y}_i\)</span> in such a way that their angle
+cosines <span class="math inline">\(\cos\theta_{ij}\)</span> equal their
+correlations <span class="math inline">\(r_{ij}\)</span>, then project
+these vectors onto the plane in which their variance is maximized. This
+is exactly how variables are commonly represented in row-principal PCA
+biplots, by the equivalence of <span class="math inline">\(V\)</span> in
+the SVD <span class="math inline">\(X = U D V^\top\)</span> with <span class="math inline">\(E\)</span> in the eigendecomposition <span class="math inline">\(X^\top X = E \Lambda E^\top\)</span>. Here is the
+result for the five compositional measurements on the glass
+artifacts:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">glass</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SiO2"</span>, <span class="st">"Al2O3"</span>, <span class="st">"FeO"</span>, <span class="st">"MgO"</span>, <span class="st">"CaO"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">c.eigen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eigen.html" class="external-link">eigen</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span></span>
@@ -223,8 +310,15 @@
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/arrows.html" class="external-link">arrows</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="va">c.coord</span><span class="op">[</span>, <span class="fl">1L</span><span class="op">]</span>, <span class="va">c.coord</span><span class="op">[</span>, <span class="fl">2L</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html" class="external-link">text</a></span><span class="op">(</span><span class="va">c.coord</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">.9</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmds-variables_files/figure-html/multidimensional%20scaling%20of%20glass%20plot-1.png" width="672" style="display: block; margin: auto;"></p>
-<p>We can immediately see that the concentrations of silica and ferrous oxide are highly correlated, that they are anticorrelated with that of quicklime, and that all of these vary independently (in the statistical sense) of those of aluminium oxide and magnesia, which are anticorrelated with each other.</p>
-<p>In this setting, we could have obtained this visualization directly from the case–variable data <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>, as in PCA. The technique becomes uniquely useful when we have correlations without underlying coordinates.</p>
+<p>We can immediately see that the concentrations of silica and ferrous
+oxide are highly correlated, that they are anticorrelated with that of
+quicklime, and that all of these vary independently (in the statistical
+sense) of those of aluminium oxide and magnesia, which are
+anticorrelated with each other.</p>
+<p>In this setting, we could have obtained this visualization directly
+from the case–variable data <span class="math inline">\(X\)</span>, as
+in PCA. The technique becomes uniquely useful when we have correlations
+without underlying coordinates.</p>
 </div>
 <div class="section level2">
 <h2 id="use-case-rankings-of-universities">use case: rankings of universities<a class="anchor" aria-label="anchor" href="#use-case-rankings-of-universities"></a>
@@ -232,8 +326,29 @@
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/corybrunson/ordr" class="external-link">ordr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
-<p>A natural use case for CMDS of variables is the analysis of multiple rankings of the same set of objects in terms of their <em>concordance</em>. Rankings’ concordance is often measured using rank correlations such as Kendall’s <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>τ</mi><annotation encoding="application/x-tex">\tau</annotation></semantics></math>, which may be <em>general correlation coefficients</em> in <a href="https://en.wikipedia.org/wiki/Rank_correlation#General_correlation_coefficient" class="external-link">the sense proposed by Kendall</a> but are not associated with an underlying geometry. In this setting, there is no original <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math> nor Euclidean coordinates. Nevertheless, we can use CMDS to represent these rankings as unit vectors in Euclidean space whose pairwise cosines approximate their rank correlations!</p>
-<p>A real-world example is provided by the <a href="https://www.topuniversities.com/qs-world-university-rankings/methodology" class="external-link">Quacquarelli Symonds World University Rankings</a>, which include rankings of hundreds of world universities along six dimensions: academic reputation, employer reputation, faculty–student ratio, citations per faculty, international faculty ratio, and international student ratio. QS weight these rankings differently in their overall assessment, but our analysis will compare the rankings to each other across universities, ignoring these weights. The subset <code>qswur_usa</code> installed with <strong>ordr</strong> include U.S.-based universities ranked in the years 2017–2020, <a href="https://support.qs.com/hc/en-gb/articles/360021876820-QS-Institution-Classifications" class="external-link">their classifications by QS</a>, and their six integer-valued rankings. (Scores used to generate the rankings are included with the QS data files but omitted from <code>qswur_usa</code>.)</p>
+<p>A natural use case for CMDS of variables is the analysis of multiple
+rankings of the same set of objects in terms of their
+<em>concordance</em>. Rankings’ concordance is often measured using rank
+correlations such as Kendall’s <span class="math inline">\(\tau\)</span>, which may be <em>general
+correlation coefficients</em> in <a href="https://en.wikipedia.org/wiki/Rank_correlation#General_correlation_coefficient" class="external-link">the
+sense proposed by Kendall</a> but are not associated with an underlying
+geometry. In this setting, there is no original <span class="math inline">\(X\)</span> nor Euclidean coordinates.
+Nevertheless, we can use CMDS to represent these rankings as unit
+vectors in Euclidean space whose pairwise cosines approximate their rank
+correlations!</p>
+<p>A real-world example is provided by the <a href="https://www.topuniversities.com/world-university-rankings/methodology" class="external-link">Quacquarelli
+Symonds World University Rankings</a>, which include rankings of
+hundreds of world universities along six dimensions: academic
+reputation, employer reputation, faculty–student ratio, citations per
+faculty, international faculty ratio, and international student ratio.
+QS weight these rankings differently in their overall assessment, but
+our analysis will compare the rankings to each other across
+universities, ignoring these weights. The subset <code>qswur_usa</code>
+installed with <strong>ordr</strong> include U.S.-based universities
+ranked in the years 2017–2020, <a href="https://support.qs.com/hc/en-gb/articles/360021876820-QS-Institution-Classifications" class="external-link">their
+classifications by QS</a>, and their six integer-valued rankings.
+(Scores used to generate the rankings are included with the QS data
+files but omitted from <code>qswur_usa</code>.)</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">qswur_usa</span>, package <span class="op">=</span> <span class="st">"ordr"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">qswur_usa</span><span class="op">)</span></span></code></pre></div>
@@ -253,7 +368,13 @@
 <span><span class="co">## <span style="color: #949494;"># ℹ 602 more rows</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 4 more variables: rk_ratio &lt;int&gt;, rk_citations &lt;int&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   rk_intl_faculty &lt;int&gt;, rk_intl_students &lt;int&gt;</span></span></span></code></pre>
-<p>For this example, i’ll focus only on rankings for the year 2020 for which all rankings were available. This leaves me with only 38 universities, so my conclusions must be taken with caution! Since the rankings were subsetted from the full international data set, they are not contiguous (some integers between rankings never appear). To resolve this, i’ll also recalibrate the rankings by matching each vector of ranks to the vector of its sorted unique values:</p>
+<p>For this example, i’ll focus only on rankings for the year 2020 for
+which all rankings were available. This leaves me with only 38
+universities, so my conclusions must be taken with caution! Since the
+rankings were subsetted from the full international data set, they are
+not contiguous (some integers between rankings never appear). To resolve
+this, i’ll also recalibrate the rankings by matching each vector of
+ranks to the vector of its sorted unique values:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">qswur_usa</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2020L</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -280,8 +401,17 @@
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> COLUMBIA UNIVE…           8           8       10           47              51</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 28 more rows</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 1 more variable: rk_intl_students &lt;int&gt;</span></span></span></code></pre>
-<p>This subset of universities is now contiguously ranked along the six dimensions described above. The Kendall correlation <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>τ</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">\tau_{ij}</annotation></semantics></math> between two rankings measures their concordance. To calculate it, every pair of universities contributes either <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">+1</annotation></semantics></math> or <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math> according as the rankings <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math> place that pair in the same order, and the sum is scaled down by the number of pairs <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mfrac linethickness="0"><mi>n</mi><mn>2</mn></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">{n\choose 2}</annotation></semantics></math> so that the result lies between <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>. We interpret <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\tau_{ij}=1</annotation></semantics></math> as perfect concordance (the rankings are equivalent), <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\tau_{ij}=-1</annotation></semantics></math> as perfect discordance (the rankings are reversed), and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\tau_{ij}=0</annotation></semantics></math> as independence (the rankings are independent).</p>
-<p><a href="https://www.topuniversities.com/qs-world-university-rankings/methodology" class="external-link">The six QS rankings</a> are</p>
+<p>This subset of universities is now contiguously ranked along the six
+dimensions described above. The Kendall correlation <span class="math inline">\(\tau_{ij}\)</span> between two rankings measures
+their concordance. To calculate it, every pair of universities
+contributes either <span class="math inline">\(+1\)</span> or <span class="math inline">\(-1\)</span> according as the rankings <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> place that pair in the same order, and
+the sum is scaled down by the number of pairs <span class="math inline">\({n\choose 2}\)</span> so that the result lies
+between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>. We interpret <span class="math inline">\(\tau_{ij}=1\)</span> as perfect concordance (the
+rankings are equivalent), <span class="math inline">\(\tau_{ij}=-1\)</span> as perfect discordance (the
+rankings are reversed), and <span class="math inline">\(\tau_{ij}=0\)</span> as independence (the rankings
+are independent).</p>
+<p><a href="https://www.topuniversities.com/world-university-rankings/methodology" class="external-link">The
+six QS rankings</a> are</p>
 <ul>
 <li>academic reputation (<code>rk_academic</code>),</li>
 <li>employer reputation (<code>rk_employer</code>)</li>
@@ -290,23 +420,80 @@
 <li>international faculty ratio (<code>rk_intl_faculty</code>)</li>
 <li>international student ratio (<code>rk_intl_students</code>)</li>
 </ul>
-<p>These not variations on a single theme (measures of the same construct), like different measures of guideline adherence or positive affect. Though they do all seem potentially sensitive to a university’s resources, including finance and prestige. I intuit that the two reputation indexes should be positively correlated, and that the two international personnel ratios should be as well. I also wonder if the faculty–student ratio might be anti-correlated with the number of citations per faculty, separating more research-focused institutions from more teaching-focused ones.</p>
+<p>These not variations on a single theme (measures of the same
+construct), like different measures of guideline adherence or positive
+affect. Though they do all seem potentially sensitive to a university’s
+resources, including finance and prestige. I intuit that the two
+reputation indexes should be positively correlated, and that the two
+international personnel ratios should be as well. I also wonder if the
+faculty–student ratio might be anti-correlated with the number of
+citations per faculty, separating more research-focused institutions
+from more teaching-focused ones.</p>
 <div class="section level3">
 <h3 id="correlation-heatmap">correlation heatmap<a class="anchor" aria-label="anchor" href="#correlation-heatmap"></a>
 </h3>
-<p>Heatmaps are commonly, perhaps most commonly, used to visualize correlation matrices, and they make a useful contrast to the CMDS correlation plot. Below i use <code><a href="https://rdrr.io/r/stats/heatmap.html" class="external-link">heatmap()</a></code> to produce a basic correlation heatmap, but the <a href="https://corybrunson.github.io/2019/08/16/rank-correlations/" class="external-link">blog post version</a> of this vignette uses the <strong>corrplot</strong> package to more elegant effect. What can be learned from a glance at this plot? While the rankings by academic and employer reputations are highly concordant, those by international faculty and student ratios are less so. The faculty–student ratio and faculty citation rankings have the weakest concordance of any pair, but they are still positively correlated.</p>
+<p>Heatmaps are commonly, perhaps most commonly, used to visualize
+correlation matrices, and they make a useful contrast to the CMDS
+correlation plot. Below i use <code><a href="https://rdrr.io/r/stats/heatmap.html" class="external-link">heatmap()</a></code> to produce a basic
+correlation heatmap, but the <a href="https://corybrunson.github.io/2019/08/16/rank-correlations/" class="external-link">blog
+post version</a> of this vignette uses the <strong>corrplot</strong>
+package to more elegant effect. What can be learned from a glance at
+this plot? While the rankings by academic and employer reputations are
+highly concordant, those by international faculty and student ratios are
+less so. The faculty–student ratio and faculty citation rankings have
+the weakest concordance of any pair, but they are still positively
+correlated.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">corr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">qswur_usa2020</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"rk_"</span><span class="op">)</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"kendall"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/heatmap.html" class="external-link">heatmap</a></span><span class="op">(</span><span class="va">corr</span>, scale <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="cmds-variables_files/figure-html/Kendall%20rank%20correlations-1.png" width="672" style="display: block; margin: auto;"></p>
-<p>This visualization is useful, but it’s very busy: To compare any pair of rankings, i have to find the cell in the grid corresponding to that pair and refer back to the color scale to assess its meaning. I can’t rely on the nearby cells for context, because they may be stronger or weaker than average and skew my interpretation. For example, the visibly weak associations between the faculty–student ratio and other rankings (the third row/column) happen to be arranged so that the slightly stronger among them, with the two reputational variables, are sandwiched between the <em>even stronger</em> associations between the two reputational rankings and between them and the faculty citations ranking. Meanwhile, this ranking’s weaker associations are sandwiched between more typical, but still comparatively stronger, associations. A different ordering of the variables might “obscure” these pattern and “reveal” others, which forces the analyst to choose between these emphases rather than allowing the viewer to assess them on an even footing.</p>
-<p>The plot is also strictly pairwise: Every correlation between two rankings occupies its own cell—two, in fact, making almost half of the plot duplicative. This means that a subset analysis of, say, three rankings requires focusing on three cells at the corners of a right triangle while ignoring all the surrounding cells. This is not an easy visual task. It would be straightforward to create a new plot for any subset, but then the larger context of the remaining rankings would be lost.</p>
-<p>Finally, the color and size scales themselves are less than desirable in a plot of data that all lie on a single scale (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>1</mn><mo>≤</mo><mi>r</mi><mo>≤</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">-1 \leq r \leq 1</annotation></semantics></math>). Contrast this to a histogram, which also visualizes a single data type (count) but uses only one axis to represent count (the other to represent value) and does not require color at all. In general, plots of simple data should use very few scales (aesthetic mappings)—not only to make plots more readable but also to allow for additional scales that highlight additional data properties.</p>
+<p>This visualization is useful, but it’s very busy: To compare any pair
+of rankings, i have to find the cell in the grid corresponding to that
+pair and refer back to the color scale to assess its meaning. I can’t
+rely on the nearby cells for context, because they may be stronger or
+weaker than average and skew my interpretation. For example, the visibly
+weak associations between the faculty–student ratio and other rankings
+(the third row/column) happen to be arranged so that the slightly
+stronger among them, with the two reputational variables, are sandwiched
+between the <em>even stronger</em> associations between the two
+reputational rankings and between them and the faculty citations
+ranking. Meanwhile, this ranking’s weaker associations are sandwiched
+between more typical, but still comparatively stronger, associations. A
+different ordering of the variables might “obscure” these pattern and
+“reveal” others, which forces the analyst to choose between these
+emphases rather than allowing the viewer to assess them on an even
+footing.</p>
+<p>The plot is also strictly pairwise: Every correlation between two
+rankings occupies its own cell—two, in fact, making almost half of the
+plot duplicative. This means that a subset analysis of, say, three
+rankings requires focusing on three cells at the corners of a right
+triangle while ignoring all the surrounding cells. This is not an easy
+visual task. It would be straightforward to create a new plot for any
+subset, but then the larger context of the remaining rankings would be
+lost.</p>
+<p>Finally, the color and size scales themselves are less than desirable
+in a plot of data that all lie on a single scale (<span class="math inline">\(-1 \leq r \leq 1\)</span>). Contrast this to a
+histogram, which also visualizes a single data type (count) but uses
+only one axis to represent count (the other to represent value) and does
+not require color at all. In general, plots of simple data should use
+very few scales (aesthetic mappings)—not only to make plots more
+readable but also to allow for additional scales that highlight
+additional data properties.</p>
 </div>
 <div class="section level3">
 <h3 id="correlation-monoplot">correlation monoplot<a class="anchor" aria-label="anchor" href="#correlation-monoplot"></a>
 </h3>
-<p>CMDS of variables offers a natural alternative visualization, which <a href="https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550" class="external-link">Gower, Gardner–Lubbe, and le Roux (2011)</a> call a “correlation monoplot” in that it consists of but one of the two layers of a PCA or other biplot. As with CMDS of cases, the point isn’t to overlay the case scores and variable loadings from a singular value decomposition, but to use the scores or loadings alone to endow the cases or variables with a Euclidean geometry they didn’t originally have. To that end, i’ll plot the variables as vectors with tails at the origin and heads at their principal coordinates <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mi>V</mi><msup><mi>Λ</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">Y = V \Lambda^{1/2}</annotation></semantics></math>, with a unit circle included for reference:</p>
+<p>CMDS of variables offers a natural alternative visualization, which
+<a href="https://www.wiley.com/en-us/Understanding+Biplots-p-9781119972907" class="external-link">Gower,
+Gardner–Lubbe, and le Roux (2011)</a> call a “correlation monoplot” in
+that it consists of but one of the two layers of a PCA or other biplot.
+As with CMDS of cases, the point isn’t to overlay the case scores and
+variable loadings from a singular value decomposition, but to use the
+scores or loadings alone to endow the cases or variables with a
+Euclidean geometry they didn’t originally have. To that end, i’ll plot
+the variables as vectors with tails at the origin and heads at their
+principal coordinates <span class="math inline">\(Y = V
+\Lambda^{1/2}\)</span>, with a unit circle included for reference:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/wrap-ord.html">eigen_ord</a></span><span class="op">(</span><span class="va">corr</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -323,14 +510,54 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Kendall correlations between university rankings"</span>,</span>
 <span>          <span class="st">"CMDS correlation monoplot"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: Unknown or uninitialised column: `linewidth`.</span></span></code></pre>
-<pre><code><span><span class="co">## Warning: Unknown or uninitialised column: `size`.</span></span></code></pre>
 <p><img src="cmds-variables_files/figure-html/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;"></p>
-<p>With respect to the pairwise correlations, the biplot is significantly less precise: Though the vectors all have unit length in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mstyle mathvariant="double-struck"><mi>ℝ</mi></mstyle><mi>r</mi></msup><annotation encoding="application/x-tex">\mathbb{R}^r</annotation></semantics></math> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>≤</mo><mi>p</mi><mo>=</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">r\leq p=6</annotation></semantics></math>), their projections onto the first two principal coordinates are much shorter, indicating that much of the geometric configuration requires additional dimensions to represent. Indeed, these coordinates capture only <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>48.2</mn><mi>%</mi><mo>+</mo><mn>14.3</mn><mi>%</mi><mo>=</mo><mn>62.5</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">48.2\%+14.3\%=62.5\%</annotation></semantics></math> of the inertia in the full, six-dimensional eigendecomposition. This means that the angles between the vectors must be interpreted with caution: For example, it looks like the academic and employer reputation rankings are extremely correlated, but the apparent alignment of the vectors could be an artifact of the projection, when in fact they “rise” and “fall” in opposite directions along the remaining principal coordinates. The correlation heatmap, by comparison, leaves no such ambiguity.</p>
-<p>However, the biplot far surpasses the heatmap at parsimony: Each variable is represented by a single vector, and the angle cosines between the variable vectors roughly approximate their correlations. For instance, the rankings based on international student and faculty ratios have correlation around <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>cos</mo><mo stretchy="false" form="prefix">(</mo><mfrac><mi>π</mi><mn>4</mn></mfrac><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><msqrt><mn>2</mn></msqrt></mfrac></mrow><annotation encoding="application/x-tex">\cos(\frac{\pi}{4})=\frac{1}{\sqrt{2}}</annotation></semantics></math>, corresponding to either explaining half the “variance” in the other—not technically meaningful in the ranking context but a useful conceptual anchor. Meanwhile, the faculty–student ratio ranking is nearly independent of the faculty citation ranking, contrary to my intuition that these rankings would reflect a <em>reverse</em> association between research- and teaching-oriented institutions. The convenience of recognizing correlations as cosines may be worth the significant risk of error, especially since that error (the residual <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>37.5</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">37.5\%</annotation></semantics></math> of inertia) can be exactly quantified.</p>
-<p>Moreover, the principal coordinates of the variable vectors indicate their loadings onto the first and second principal moments of inertia—the two dimensions that capture the most variation in the data. For example, the first principal coordinate is most aligned with the two reputational rankings, suggesting that a general prestige ranking is the strongest overall component of the several specific rankings. In contrast, the faculty–student ratio and faculty citation rankings load most strongly onto the second principal coordinate, suggesting that the divide between research- and teaching-focused institutions may yet be important to understanding how universities compare along these different metrics. These observations, provisional though they are, would be difficult to discern from the heatmap. More importantly, unlike the secondary patterns visible in the heatmap, these are not artifacts of the layout but arise directly from the (correlational) data.</p>
-<p>This last point means that observations made from a correlation monoplot can be validated from the CMDS coordinates. In particular, we can examine the variables’ loadings onto the third principal coordinate, and we can check whether the reputational rankings are aligned or misaligned along it.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<p>With respect to the pairwise correlations, the biplot is
+significantly less precise: Though the vectors all have unit length in
+<span class="math inline">\(\mathbb{R}^r\)</span> (<span class="math inline">\(r\leq p=6\)</span>), their projections onto the
+first two principal coordinates are much shorter, indicating that much
+of the geometric configuration requires additional dimensions to
+represent. Indeed, these coordinates capture only <span class="math inline">\(48.2\%+14.3\%=62.5\%\)</span> of the inertia in
+the full, six-dimensional eigendecomposition. This means that the angles
+between the vectors must be interpreted with caution: For example, it
+looks like the academic and employer reputation rankings are extremely
+correlated, but the apparent alignment of the vectors could be an
+artifact of the projection, when in fact they “rise” and “fall” in
+opposite directions along the remaining principal coordinates. The
+correlation heatmap, by comparison, leaves no such ambiguity.</p>
+<p>However, the biplot far surpasses the heatmap at parsimony: Each
+variable is represented by a single vector, and the angle cosines
+between the variable vectors roughly approximate their correlations. For
+instance, the rankings based on international student and faculty ratios
+have correlation around <span class="math inline">\(\cos(\frac{\pi}{4})=\frac{1}{\sqrt{2}}\)</span>,
+corresponding to either explaining half the “variance” in the other—not
+technically meaningful in the ranking context but a useful conceptual
+anchor. Meanwhile, the faculty–student ratio ranking is nearly
+independent of the faculty citation ranking, contrary to my intuition
+that these rankings would reflect a <em>reverse</em> association between
+research- and teaching-oriented institutions. The convenience of
+recognizing correlations as cosines may be worth the significant risk of
+error, especially since that error (the residual <span class="math inline">\(37.5\%\)</span> of inertia) can be exactly
+quantified.</p>
+<p>Moreover, the principal coordinates of the variable vectors indicate
+their loadings onto the first and second principal moments of
+inertia—the two dimensions that capture the most variation in the data.
+For example, the first principal coordinate is most aligned with the two
+reputational rankings, suggesting that a general prestige ranking is the
+strongest overall component of the several specific rankings. In
+contrast, the faculty–student ratio and faculty citation rankings load
+most strongly onto the second principal coordinate, suggesting that the
+divide between research- and teaching-focused institutions may yet be
+important to understanding how universities compare along these
+different metrics. These observations, provisional though they are,
+would be difficult to discern from the heatmap. More importantly, unlike
+the secondary patterns visible in the heatmap, these are not artifacts
+of the layout but arise directly from the (correlational) data.</p>
+<p>This last point means that observations made from a correlation
+monoplot can be validated from the CMDS coordinates. In particular, we
+can examine the variables’ loadings onto the third principal coordinate,
+and we can check whether the reputational rankings are aligned or
+misaligned along it.</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">c_eigen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span>.matrix <span class="op">=</span> <span class="st">"rows"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">name</span>, <span class="op">-</span><span class="va">.matrix</span><span class="op">)</span></span></code></pre></div>
@@ -343,8 +570,16 @@
 <span><span class="co">## <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.731</span> -<span style="color: #BB0000;">0.352</span>  -<span style="color: #BB0000;">0.239</span>  -<span style="color: #BB0000;">0.027</span><span style="color: #BB0000; text-decoration: underline;">8</span>  0.528  -<span style="color: #BB0000;">0.068</span><span style="color: #BB0000; text-decoration: underline;">5</span>  citations     active  </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.631</span> -<span style="color: #BB0000;">0.233</span>  -<span style="color: #BB0000;">0.521</span>   0.392  -<span style="color: #BB0000;">0.352</span>   0.007<span style="text-decoration: underline;">83</span> intl_faculty  active  </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">6</span> -<span style="color: #BB0000;">0.603</span>  0.262  -<span style="color: #BB0000;">0.324</span>  -<span style="color: #BB0000;">0.665</span>  -<span style="color: #BB0000;">0.140</span>   0.031<span style="text-decoration: underline;">2</span>  intl_students active</span></span></code></pre>
-<p>Based on the third principal coordinates, the reputational rankings are aligned, as we knew already from the correlation matrix and heatmap. What’s a bit more interesting is that this component seems to separate these two rankings from those having to do with faculty citation rates and the international compositions of the faculty and student body. Based on the decomposition of inertia, this third principal coordinate is nearly as important as the second! It therefore makes sense to plot the two together, in effect examining the residuals after regressing out the first principal coordinate:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<p>Based on the third principal coordinates, the reputational rankings
+are aligned, as we knew already from the correlation matrix and heatmap.
+What’s a bit more interesting is that this component seems to separate
+these two rankings from those having to do with faculty citation rates
+and the international compositions of the faculty and student body.
+Based on the decomposition of inertia, this third principal coordinate
+is nearly as important as the second! It therefore makes sense to plot
+the two together, in effect examining the residuals after regressing out
+the first principal coordinate:</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">c_eigen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2</span>, y <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -354,36 +589,44 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Kendall correlations between university rankings"</span>,</span>
 <span>          <span class="st">"CMDS correlation monoplot, second &amp; third principal coordinates"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: Unknown or uninitialised column: `linewidth`.</span></span></code></pre>
-<pre><code><span><span class="co">## Warning: Unknown or uninitialised column: `size`.</span></span></code></pre>
 <p><img src="cmds-variables_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;"></p>
-<p>The primary antitheses of the reputational rankings, after removing the first principal coordinate, are the two rankings based on international composition. The third principal coordinate aligns closely with this axis. This axis is also largely independent of the axis that distinguishes research- from teaching-oriented institutions, which is closely aligned with the second principal coordinate. From my own limited experience, i’d hazard a guess that this reflects two tiers of international representation among students and faculty, one expressed by the most prestigious institutions that recruit highly qualified applicants from all over the world, and the other expressed by institutions that are not especially prestigious but are located in communities or regions with high percentages of international residents.</p>
-<p>In sum, we have interpreted the three strongest axes along which the QS rankings vary: (1) overall quality, prestige, and reputation; (2) research versus teaching orientation; and (3) international personnel ratios, which come at some cost to reputation. This is of course a preliminary and amateur analysis! But a visualization scheme that encourages hypothesis generation is worth having on hand.</p>
+<p>The primary antitheses of the reputational rankings, after removing
+the first principal coordinate, are the two rankings based on
+international composition. The third principal coordinate aligns closely
+with this axis. This axis is also largely independent of the axis that
+distinguishes research- from teaching-oriented institutions, which is
+closely aligned with the second principal coordinate. From my own
+limited experience, i’d hazard a guess that this reflects two tiers of
+international representation among students and faculty, one expressed
+by the most prestigious institutions that recruit highly qualified
+applicants from all over the world, and the other expressed by
+institutions that are not especially prestigious but are located in
+communities or regions with high percentages of international
+residents.</p>
+<p>In sum, we have interpreted the three strongest axes along which the
+QS rankings vary: (1) overall quality, prestige, and reputation; (2)
+research versus teaching orientation; and (3) international personnel
+ratios, which come at some cost to reputation. This is of course a
+preliminary and amateur analysis! But a visualization scheme that
+encourages hypothesis generation is worth having on hand.</p>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-      </div>
-
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p></p>
-<p>Developed by Jason Cory Brunson, John Gracey.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p>Developed by Jason Cory Brunson, John Gracey.</p>
 </div>
 
-<div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+<div class="pkgdown-footer-right">
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
-
 
 
 

@@ -8,8 +8,8 @@
 \alias{recover_inertia.eigen}
 \alias{recover_coord.eigen}
 \alias{recover_conference.eigen}
-\alias{recover_aug_rows.eigen_ord}
-\alias{recover_aug_cols.eigen_ord}
+\alias{recover_aug_rows.eigen}
+\alias{recover_aug_cols.eigen}
 \alias{recover_aug_coord.eigen}
 \alias{as_tbl_ord.eigen_ord}
 \alias{recover_rows.eigen_ord}
@@ -17,6 +17,8 @@
 \alias{recover_inertia.eigen_ord}
 \alias{recover_coord.eigen_ord}
 \alias{recover_conference.eigen_ord}
+\alias{recover_aug_rows.eigen_ord}
+\alias{recover_aug_cols.eigen_ord}
 \alias{recover_aug_coord.eigen_ord}
 \title{Functionality for eigen-decompositions}
 \usage{
@@ -32,9 +34,9 @@
 
 \method{recover_conference}{eigen}(x)
 
-\method{recover_aug_rows}{eigen_ord}(x)
+\method{recover_aug_rows}{eigen}(x)
 
-\method{recover_aug_cols}{eigen_ord}(x)
+\method{recover_aug_cols}{eigen}(x)
 
 \method{recover_aug_coord}{eigen}(x)
 

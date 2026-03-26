@@ -49,9 +49,7 @@ ggbiplot <- function(
     ...
   )
   # .matrix aesthetic indicating whether to plot cases or variables
-  .matrix_aes <- list(.matrix = rlang::quo(!! rlang::sym(".matrix")))
-  class(.matrix_aes) <- "uneval"
-  p$mapping <- c(p$mapping, .matrix_aes)
+  p$mapping$.matrix = {{ rlang::sym(".matrix") }}
   
   # if `sec.axes` is specified, then add secondary axes
   if (! is.null(sec.axes)) {

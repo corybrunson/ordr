@@ -29,7 +29,7 @@ as_tbl_ord.princomp <- as_tbl_ord_default
 #' @export
 recover_rows.princomp <- function(x) {
   matrix(
-    nrow = 0, ncol = ncol(x[["scores"]]),
+    nrow = 0L, ncol = ncol(x[["scores"]]),
     dimnames = list(NULL, colnames(x[["scores"]]))
   )
 }

@@ -4,7 +4,6 @@ iris[, -5] %>%
   as_tbl_ord() %>%
   mutate_rows(species = iris$Species) %>%
   print() -> iris_pca
-
 # row-principal biplot with centroids and confidence elliptical disks
 iris_pca %>%
   ggbiplot(aes(color = species)) +

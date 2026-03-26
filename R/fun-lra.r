@@ -36,14 +36,14 @@
 
 #' @return Given an \eqn{n * p} data matrix and setting \eqn{r=min(n,p)},
 #'   `lra()` returns a list of class `"lra"` containing three elements:
-#' \itemize{
-#'   \item{sv}{The \eqn{r-1} singular values}
-#'   \item{row.coords}{The \eqn{n * (r-1)} matrix
-#'                     of row standard coordinates.}
-#'   \item{column.coords}{The \eqn{p * (r-1)} matrix
-#'                        of column standard coordinates.}
-#'   \item{row.weights}{The weights used to scale the row coordinates.}
-#'   \item{column.weights}{The weights used to scale the column coordinates.}
+#' \describe{
+#'   \item{`sv`}{The \eqn{r-1} singular values}
+#'   \item{`row.coords`}{The \eqn{n * (r-1)} matrix
+#'                       of row standard coordinates.}
+#'   \item{`column.coords`}{The \eqn{p * (r-1)} matrix
+#'                          of column standard coordinates.}
+#'   \item{`row.weights`}{The weights used to scale the row coordinates.}
+#'   \item{`column.weights`}{The weights used to scale the column coordinates.}
 #' }
 
 #' @example inst/examples/ex-fun-lra-arrests.r

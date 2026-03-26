@@ -18,23 +18,22 @@ NULL
 #' @export
 as_tbl_ord.cmds_ord <- as_tbl_ord_default
 
-recover_dims_cmds <- function(x, .matrix) {
-  .matrix <- match_factor(.matrix)
-  res <- x$points
-  dimnames(res) <- list(
-    dimnames(x$x)[[switch(.matrix, rows = 1L, cols = 2L)]],
-    recover_coord(x)
-  )
+#' @rdname methods-cmds
+#' @export
+recover_rows.cmds_ord <- function(x) {
+  res <- x[["points"]]
+  colnames(res) <- recover_coord(x)
   res
 }
 
 #' @rdname methods-cmds
 #' @export
-recover_rows.cmds_ord <- function(x) recover_dims_cmds(x, "rows")
-
-#' @rdname methods-cmds
-#' @export
-recover_cols.cmds_ord <- function(x) recover_dims_cmds(x, "cols")
+recover_cols.cmds_ord <- function(x) {
+  matrix(
+    nrow = 0L, ncol = ncol(x[["points"]]),
+    dimnames = list(NULL, recover_coord(x))
+  )
+}
 
 #' @rdname methods-cmds
 #' @export
@@ -42,13 +41,14 @@ recover_inertia.cmds_ord <- function(x) x$eig[seq(ncol(x$points))] ^ 2
 
 #' @rdname methods-cmds
 #' @export
-recover_coord.cmds_ord <- function(x) paste0("PCo", 1:ncol(x$points))
+recover_coord.cmds_ord <- function(x) paste0("PCo", seq(ncol(x$points)))
 
 #' @rdname methods-cmds
 #' @export
 recover_conference.cmds_ord <- function(x) {
   # `stats::cmdscale()` returns the approximate square root
-  c(.5, .5)
+  # `points = evec * sqrt(ev)`, so row elements have full inertia
+  c(1, 0)
 }
 
 #' @rdname methods-cmds
@@ -60,18 +60,15 @@ recover_aug_rows.cmds_ord <- function(x) {
   } else {
     tibble(name = name)
   }
+  res$.element <- "active"
   res
 }
 
 #' @rdname methods-cmds
 #' @export
 recover_aug_cols.cmds_ord <- function(x) {
-  name <- rownames(x$points)
-  res <- if (is.null(name)) {
-    tibble(.rows = ncol(x$x))
-  } else {
-    tibble(name = name)
-  }
+  res <- tibble(.rows = 0L)
+  res$.element <- "active"
   res
 }
 
@@ -80,6 +77,6 @@ recover_aug_cols.cmds_ord <- function(x) {
 recover_aug_coord.cmds_ord <- function(x) {
   tibble(
     name = factor_coord(recover_coord(x)),
-    eig = x$eig[1:ncol(x$points)]
+    eig = x$eig[seq(ncol(x$points))]
   )
 }

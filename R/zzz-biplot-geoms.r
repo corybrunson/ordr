@@ -13,13 +13,35 @@
 #' @name biplot-geoms
 #' @template return-layer
 #' @family biplot layers
-#' @include utils.r
+#' @include layer-utils.r
 #' @import ggplot2
 #' @importFrom ggrepel
 #'   GeomTextRepel
 #'   GeomLabelRepel
 #'   geom_text_repel
 #'   geom_label_repel
+#'   position_nudge_repel
+
+#' @importFrom gggda
+#'   GeomAxis
+#'   GeomPointranges
+#'   GeomLineranges
+#'   GeomIsoline
+#'   GeomTextRadiate
+#'   GeomVector
+#'   GeomBagplot
+#'   GeomRule
+#'   geom_axis
+#'   geom_pointranges
+#'   geom_lineranges
+#'   geom_isoline
+#'   geom_text_radiate
+#'   geom_vector
+#'   geom_bagplot
+#'   geom_rule
+#'   minpp
+#'   maxpp
+#'   minabspp
 #' @inheritParams ggplot2::layer
 #' @template param-geom
 #' @inheritParams ggplot2::geom_density
@@ -34,16 +56,16 @@
 #' @inheritParams ggplot2::geom_label
 #' @inheritParams ggrepel::geom_text_repel
 #' @inheritParams ggrepel::geom_label_repel
-#' @inheritParams geom_axis
-#' @inheritParams geom_bagplot
+#' @inheritParams gggda::geom_axis
+#' @inheritParams gggda::geom_pointranges
+#' @inheritParams gggda::geom_lineranges
+#' @inheritParams gggda::geom_isoline
+#' @inheritParams gggda::geom_text_radiate
+#' @inheritParams gggda::geom_vector
+#' @inheritParams gggda::geom_bagplot
+#' @inheritParams gggda::geom_rule
 #' @inheritParams geom_interpolation
-#' @inheritParams geom_lineranges
-#' @inheritParams geom_pointranges
-#' @inheritParams geom_isoline
 #' @inheritParams geom_pin
-#' @inheritParams geom_rule
-#' @inheritParams geom_text_radiate
-#' @inheritParams geom_vector
 #' @example inst/examples/ex-geom-intervals-ord-glass.r
 #' @example inst/examples/ex-geom-unit-circle-ord-glass.r
 NULL
@@ -52,9 +74,34 @@ NULL
 ggrepel::geom_text_repel
 #' @export
 ggrepel::geom_label_repel
+#' @export
+gggda::geom_axis
+#' @export
+gggda::geom_pointranges
+#' @export
+gggda::geom_lineranges
+#' @export
+gggda::geom_isoline
+#' @export
+gggda::geom_text_radiate
+#' @export
+gggda::geom_vector
+#' @export
+gggda::geom_bagplot
+#' @export
+gggda::geom_rule
 
 compute_just <- getFromNamespace("compute_just", "ggplot2")
 to_unit <- getFromNamespace("to_unit", "ggrepel")
+
+#' @export
+ggrepel::position_nudge_repel
+#' @export
+gggda::minpp
+#' @export
+gggda::maxpp
+#' @export
+gggda::minabspp
 
 #' @rdname biplot-geoms
 #' @export
@@ -64,27 +111,23 @@ geom_rows_density <- function(
   stat = "density",
   position = "identity",
   ...,
+  outline.type = "upper",
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 10,
   na.rm = FALSE,
-  orientation = NA,
   show.legend = NA,
-  inherit.aes = TRUE,
-  outline.type = "upper"
+  inherit.aes = TRUE
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = rows_stat(stat),
-    geom = GeomDensity,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = na.rm,
-      orientation = orientation,
-      outline.type = outline.type,
-      ...
-    )
-  )
+    outline.type <- arg_match0(outline.type, c("both", 
+        "upper", "lower", "full"))
+    layer(mapping = mapping, data = data, geom = "density", 
+        stat = rows_stat(stat), position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            outline.type = outline.type, lineend = lineend, 
+            linejoin = linejoin, linemitre = linemitre, 
+            ...))    
+    
 }
 
 #' @rdname biplot-geoms
@@ -95,27 +138,23 @@ geom_cols_density <- function(
   stat = "density",
   position = "identity",
   ...,
+  outline.type = "upper",
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 10,
   na.rm = FALSE,
-  orientation = NA,
   show.legend = NA,
-  inherit.aes = TRUE,
-  outline.type = "upper"
+  inherit.aes = TRUE
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = cols_stat(stat),
-    geom = GeomDensity,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      na.rm = na.rm,
-      orientation = orientation,
-      outline.type = outline.type,
-      ...
-    )
-  )
+    outline.type <- arg_match0(outline.type, c("both", 
+        "upper", "lower", "full"))
+    layer(mapping = mapping, data = data, geom = "density", 
+        stat = cols_stat(stat), position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            outline.type = outline.type, lineend = lineend, 
+            linejoin = linejoin, linemitre = linemitre, 
+            ...))    
+    
 }
 
 #' @rdname biplot-geoms
@@ -127,28 +166,18 @@ geom_rows_bar <- function(
   position = "stack",
   ...,
   just = 0.5,
-  width = NULL,
+  lineend = "butt",
+  linejoin = "mitre",
   na.rm = FALSE,
-  orientation = NA,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = rows_stat(stat),
-    geom = GeomBar,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      just = just,
-      width = width,
-      na.rm = na.rm,
-      orientation = orientation,
-      ...
-    )
-  )
+    layer(mapping = mapping, data = data, geom = "bar", 
+        stat = rows_stat(stat), position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            just = just, lineend = lineend, linejoin = linejoin, 
+            ...))    
+    
 }
 
 #' @rdname biplot-geoms
@@ -160,28 +189,18 @@ geom_cols_bar <- function(
   position = "stack",
   ...,
   just = 0.5,
-  width = NULL,
+  lineend = "butt",
+  linejoin = "mitre",
   na.rm = FALSE,
-  orientation = NA,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = cols_stat(stat),
-    geom = GeomBar,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      just = just,
-      width = width,
-      na.rm = na.rm,
-      orientation = orientation,
-      ...
-    )
-  )
+    layer(mapping = mapping, data = data, geom = "bar", 
+        stat = cols_stat(stat), position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            just = just, lineend = lineend, linejoin = linejoin, 
+            ...))    
+    
 }
 
 #' @rdname biplot-geoms
@@ -196,8 +215,8 @@ geom_rows_point <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
-        geom = GeomPoint, position = position, show.legend = show.legend, 
+    layer(mapping = mapping, data = data, geom = "point", 
+        stat = rows_stat(stat), position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
             ...))    
     
@@ -215,8 +234,8 @@ geom_cols_point <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
-        geom = GeomPoint, position = position, show.legend = show.legend, 
+    layer(mapping = mapping, data = data, geom = "point", 
+        stat = cols_stat(stat), position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
             ...))    
     
@@ -230,19 +249,21 @@ geom_rows_path <- function(
   stat = "identity",
   position = "identity",
   ...,
+  arrow = NULL,
+  arrow.fill = NULL,
   lineend = "butt",
   linejoin = "round",
   linemitre = 10,
-  arrow = NULL,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
-        geom = GeomPath, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list2(lineend = lineend, 
+    layer(mapping = mapping, data = data, geom = "path", 
+        stat = rows_stat(stat), position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            arrow = arrow, arrow.fill = arrow.fill, lineend = lineend, 
             linejoin = linejoin, linemitre = linemitre, 
-            arrow = arrow, na.rm = na.rm, ...))    
+            ...))    
     
 }
 
@@ -254,19 +275,21 @@ geom_cols_path <- function(
   stat = "identity",
   position = "identity",
   ...,
+  arrow = NULL,
+  arrow.fill = NULL,
   lineend = "butt",
   linejoin = "round",
   linemitre = 10,
-  arrow = NULL,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
-        geom = GeomPath, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list2(lineend = lineend, 
+    layer(mapping = mapping, data = data, geom = "path", 
+        stat = cols_stat(stat), position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            arrow = arrow, arrow.fill = arrow.fill, lineend = lineend, 
             linejoin = linejoin, linemitre = linemitre, 
-            arrow = arrow, na.rm = na.rm, ...))    
+            ...))    
     
 }
 
@@ -277,16 +300,20 @@ geom_rows_polygon <- function(
   data = NULL,
   stat = "identity",
   position = "identity",
-  rule = "evenodd",
   ...,
+  rule = "evenodd",
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 10,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
-        geom = GeomPolygon, position = position, show.legend = show.legend, 
+    layer(mapping = mapping, data = data, geom = "polygon", 
+        stat = rows_stat(stat), position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
-            rule = rule, ...))    
+            rule = rule, lineend = lineend, linejoin = linejoin, 
+            linemitre = linemitre, ...))    
     
 }
 
@@ -297,16 +324,20 @@ geom_cols_polygon <- function(
   data = NULL,
   stat = "identity",
   position = "identity",
-  rule = "evenodd",
   ...,
+  rule = "evenodd",
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 10,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
-        geom = GeomPolygon, position = position, show.legend = show.legend, 
+    layer(mapping = mapping, data = data, geom = "polygon", 
+        stat = cols_stat(stat), position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
-            rule = rule, ...))    
+            rule = rule, lineend = lineend, linejoin = linejoin, 
+            linemitre = linemitre, ...))    
     
 }
 
@@ -321,6 +352,8 @@ geom_rows_contour <- function(
   bins = NULL,
   binwidth = NULL,
   breaks = NULL,
+  arrow = NULL,
+  arrow.fill = NULL,
   lineend = "butt",
   linejoin = "round",
   linemitre = 10,
@@ -328,12 +361,13 @@ geom_rows_contour <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
-        geom = GeomContour, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list2(bins = bins, 
-            binwidth = binwidth, breaks = breaks, lineend = lineend, 
+    layer(mapping = mapping, data = data, geom = "contour", 
+        stat = rows_stat(stat), position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            bins = bins, binwidth = binwidth, breaks = breaks, 
+            arrow = arrow, arrow.fill = arrow.fill, lineend = lineend, 
             linejoin = linejoin, linemitre = linemitre, 
-            na.rm = na.rm, ...))    
+            ...))    
     
 }
 
@@ -348,6 +382,8 @@ geom_cols_contour <- function(
   bins = NULL,
   binwidth = NULL,
   breaks = NULL,
+  arrow = NULL,
+  arrow.fill = NULL,
   lineend = "butt",
   linejoin = "round",
   linemitre = 10,
@@ -355,12 +391,13 @@ geom_cols_contour <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
-        geom = GeomContour, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list2(bins = bins, 
-            binwidth = binwidth, breaks = breaks, lineend = lineend, 
+    layer(mapping = mapping, data = data, geom = "contour", 
+        stat = cols_stat(stat), position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            bins = bins, binwidth = binwidth, breaks = breaks, 
+            arrow = arrow, arrow.fill = arrow.fill, lineend = lineend, 
             linejoin = linejoin, linemitre = linemitre, 
-            na.rm = na.rm, ...))    
+            ...))    
     
 }
 
@@ -462,29 +499,20 @@ geom_rows_text <- function(
   mapping = NULL,
   data = NULL,
   stat = "identity",
-  position = "identity",
+  position = "nudge",
   ...,
   parse = FALSE,
-  nudge_x = 0,
-  nudge_y = 0,
   check_overlap = FALSE,
   size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    if (!missing(nudge_x) || !missing(nudge_y)) {
-        if (!missing(position)) {
-            cli::cli_abort(c("Both {.arg position} and {.arg nudge_x}/{.arg nudge_y} are supplied.", 
-                i = "Only use one approach to alter the position."))
-        }
-        position <- position_nudge(nudge_x, nudge_y)
-    }
-    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
-        geom = GeomText, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list2(parse = parse, 
-            check_overlap = check_overlap, size.unit = size.unit, 
-            na.rm = na.rm, ...))    
+    layer(mapping = mapping, data = data, geom = "text", 
+        stat = rows_stat(stat), position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            parse = parse, check_overlap = check_overlap, 
+            size.unit = size.unit, ...))    
     
 }
 
@@ -494,29 +522,20 @@ geom_cols_text <- function(
   mapping = NULL,
   data = NULL,
   stat = "identity",
-  position = "identity",
+  position = "nudge",
   ...,
   parse = FALSE,
-  nudge_x = 0,
-  nudge_y = 0,
   check_overlap = FALSE,
   size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    if (!missing(nudge_x) || !missing(nudge_y)) {
-        if (!missing(position)) {
-            cli::cli_abort(c("Both {.arg position} and {.arg nudge_x}/{.arg nudge_y} are supplied.", 
-                i = "Only use one approach to alter the position."))
-        }
-        position <- position_nudge(nudge_x, nudge_y)
-    }
-    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
-        geom = GeomText, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list2(parse = parse, 
-            check_overlap = check_overlap, size.unit = size.unit, 
-            na.rm = na.rm, ...))    
+    layer(mapping = mapping, data = data, geom = "text", 
+        stat = cols_stat(stat), position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            parse = parse, check_overlap = check_overlap, 
+            size.unit = size.unit, ...))    
     
 }
 
@@ -526,32 +545,35 @@ geom_rows_label <- function(
   mapping = NULL,
   data = NULL,
   stat = "identity",
-  position = "identity",
+  position = "nudge",
   ...,
   parse = FALSE,
-  nudge_x = 0,
-  nudge_y = 0,
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
-  label.size = 0.25,
+  label.size = deprecated(),
+  border.colour = NULL,
+  border.color = NULL,
+  text.colour = NULL,
+  text.color = NULL,
   size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    if (!missing(nudge_x) || !missing(nudge_y)) {
-        if (!missing(position)) {
-            cli::cli_abort(c("Both {.arg position} and {.arg nudge_x}/{.arg nudge_y} are supplied.", 
-                i = "Choose one approach to alter the position."))
-        }
-        position <- position_nudge(nudge_x, nudge_y)
+    extra_args <- list2(...)
+    if (lifecycle::is_present(label.size)) {
+        deprecate_soft0("3.5.0", "geom_label(label.size)", 
+            "geom_label(linewidth)")
+        extra_args$linewidth <- extra_args$linewidth %||% 
+            label.size
     }
     layer(data = data, mapping = mapping, stat = rows_stat(stat), 
         geom = GeomLabel, position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list2(parse = parse, 
             label.padding = label.padding, label.r = label.r, 
-            label.size = label.size, size.unit = size.unit, 
-            na.rm = na.rm, ...))    
+            size.unit = size.unit, border.colour = border.color %||% 
+                border.colour, text.colour = text.color %||% 
+                text.colour, na.rm = na.rm, !!!extra_args))    
     
 }
 
@@ -561,32 +583,35 @@ geom_cols_label <- function(
   mapping = NULL,
   data = NULL,
   stat = "identity",
-  position = "identity",
+  position = "nudge",
   ...,
   parse = FALSE,
-  nudge_x = 0,
-  nudge_y = 0,
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
-  label.size = 0.25,
+  label.size = deprecated(),
+  border.colour = NULL,
+  border.color = NULL,
+  text.colour = NULL,
+  text.color = NULL,
   size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    if (!missing(nudge_x) || !missing(nudge_y)) {
-        if (!missing(position)) {
-            cli::cli_abort(c("Both {.arg position} and {.arg nudge_x}/{.arg nudge_y} are supplied.", 
-                i = "Choose one approach to alter the position."))
-        }
-        position <- position_nudge(nudge_x, nudge_y)
+    extra_args <- list2(...)
+    if (lifecycle::is_present(label.size)) {
+        deprecate_soft0("3.5.0", "geom_label(label.size)", 
+            "geom_label(linewidth)")
+        extra_args$linewidth <- extra_args$linewidth %||% 
+            label.size
     }
     layer(data = data, mapping = mapping, stat = cols_stat(stat), 
         geom = GeomLabel, position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list2(parse = parse, 
             label.padding = label.padding, label.r = label.r, 
-            label.size = label.size, size.unit = size.unit, 
-            na.rm = na.rm, ...))    
+            size.unit = size.unit, border.colour = border.color %||% 
+                border.colour, text.colour = text.color %||% 
+                text.colour, na.rm = na.rm, !!!extra_args))    
     
 }
 
@@ -616,7 +641,7 @@ geom_rows_text_repel <- function(
   show.legend = NA,
   direction = c("both", "y", "x"),
   seed = NA,
-  verbose = FALSE,
+  verbose = getOption("verbose", default = FALSE),
   inherit.aes = TRUE
 ) {
     if (!missing(nudge_x) || !missing(nudge_y)) {
@@ -625,6 +650,9 @@ geom_rows_text_repel <- function(
                 call. = FALSE)
         }
         position <- position_nudge_repel(nudge_x, nudge_y)
+    }
+    if (verbose && any(abs(data$angle%%90) > 5)) {
+        message("ggrepel: Repulsion works correctly only for rotation angles multiple of 90 degrees")
     }
     layer(data = data, mapping = mapping, stat = rows_stat(stat), 
         geom = GeomTextRepel, position = position, show.legend = show.legend, 
@@ -665,7 +693,7 @@ geom_cols_text_repel <- function(
   show.legend = NA,
   direction = c("both", "y", "x"),
   seed = NA,
-  verbose = FALSE,
+  verbose = getOption("verbose", default = FALSE),
   inherit.aes = TRUE
 ) {
     if (!missing(nudge_x) || !missing(nudge_y)) {
@@ -674,6 +702,9 @@ geom_cols_text_repel <- function(
                 call. = FALSE)
         }
         position <- position_nudge_repel(nudge_x, nudge_y)
+    }
+    if (verbose && any(abs(data$angle%%90) > 5)) {
+        message("ggrepel: Repulsion works correctly only for rotation angles multiple of 90 degrees")
     }
     layer(data = data, mapping = mapping, stat = cols_stat(stat), 
         geom = GeomTextRepel, position = position, show.legend = show.legend, 
@@ -717,7 +748,7 @@ geom_rows_label_repel <- function(
   show.legend = NA,
   direction = c("both", "y", "x"),
   seed = NA,
-  verbose = FALSE,
+  verbose = getOption("verbose", default = FALSE),
   inherit.aes = TRUE
 ) {
     if (!missing(nudge_x) || !missing(nudge_y)) {
@@ -726,6 +757,9 @@ geom_rows_label_repel <- function(
                 call. = FALSE)
         }
         position <- position_nudge_repel(nudge_x, nudge_y)
+    }
+    if (verbose && any(abs(data$angle%%90) > 5)) {
+        message("ggrepel: Repulsion works correctly only for rotation angles multiple of 90 degrees")
     }
     layer(data = data, mapping = mapping, stat = rows_stat(stat), 
         geom = GeomLabelRepel, position = position, show.legend = show.legend, 
@@ -771,7 +805,7 @@ geom_cols_label_repel <- function(
   show.legend = NA,
   direction = c("both", "y", "x"),
   seed = NA,
-  verbose = FALSE,
+  verbose = getOption("verbose", default = FALSE),
   inherit.aes = TRUE
 ) {
     if (!missing(nudge_x) || !missing(nudge_y)) {
@@ -780,6 +814,9 @@ geom_cols_label_repel <- function(
                 call. = FALSE)
         }
         position <- position_nudge_repel(nudge_x, nudge_y)
+    }
+    if (verbose && any(abs(data$angle%%90) > 5)) {
+        message("ggrepel: Repulsion works correctly only for rotation angles multiple of 90 degrees")
     }
     layer(data = data, mapping = mapping, stat = cols_stat(stat), 
         geom = GeomLabelRepel, position = position, show.legend = show.legend, 
@@ -924,6 +961,256 @@ geom_cols_axis <- function(
 
 #' @rdname biplot-geoms
 #' @export
+geom_rows_pointranges <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "center",
+  position = "identity",
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
+        geom = GeomPointranges, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(na.rm = na.rm, 
+            ...))    
+    
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_cols_pointranges <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "center",
+  position = "identity",
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
+        geom = GeomPointranges, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(na.rm = na.rm, 
+            ...))    
+    
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_rows_lineranges <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "center",
+  position = "identity",
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
+        geom = GeomLineranges, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(na.rm = na.rm, 
+            ...))    
+    
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_cols_lineranges <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "center",
+  position = "identity",
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
+        geom = GeomLineranges, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(na.rm = na.rm, 
+            ...))    
+    
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_rows_isoline <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  isoline_text = TRUE,
+  by = NULL,
+  num = NULL,
+  text_dodge = 0.03,
+  ...,
+  text.size = 3,
+  text.angle = 0,
+  text.colour = NULL,
+  text.color = NULL,
+  text.alpha = NULL,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
+        geom = GeomIsoline, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(isoline_text = isoline_text, 
+            by = by, num = num, text_dodge = text_dodge, 
+            text.size = text.size, text.angle = text.angle, 
+            text.colour = text.color %||% text.colour, 
+            text.alpha = text.alpha, parse = parse, check_overlap = check_overlap, 
+            na.rm = na.rm, ...))    
+    
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_cols_isoline <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  isoline_text = TRUE,
+  by = NULL,
+  num = NULL,
+  text_dodge = 0.03,
+  ...,
+  text.size = 3,
+  text.angle = 0,
+  text.colour = NULL,
+  text.color = NULL,
+  text.alpha = NULL,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
+        geom = GeomIsoline, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(isoline_text = isoline_text, 
+            by = by, num = num, text_dodge = text_dodge, 
+            text.size = text.size, text.angle = text.angle, 
+            text.colour = text.color %||% text.colour, 
+            text.alpha = text.alpha, parse = parse, check_overlap = check_overlap, 
+            na.rm = na.rm, ...))    
+    
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_rows_text_radiate <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  ...,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
+        geom = GeomTextRadiate, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(parse = parse, 
+            check_overlap = check_overlap, na.rm = na.rm, 
+            ...))    
+    
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_cols_text_radiate <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  ...,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
+        geom = GeomTextRadiate, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(parse = parse, 
+            check_overlap = check_overlap, na.rm = na.rm, 
+            ...))    
+    
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_rows_vector <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
+  ...,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
+        geom = GeomVector, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(arrow = arrow, 
+            lineend = lineend, linejoin = linejoin, vector_labels = vector_labels, 
+            label.colour = label.color %||% label.colour, 
+            label.alpha = label.alpha, parse = parse, check_overlap = check_overlap, 
+            na.rm = na.rm, ...))    
+    
+}
+
+#' @rdname biplot-geoms
+#' @export
+geom_cols_vector <- function(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  arrow = default_arrow,
+  lineend = "round",
+  linejoin = "mitre",
+  vector_labels = TRUE,
+  ...,
+  label.colour = NULL,
+  label.color = NULL,
+  label.alpha = NULL,
+  parse = FALSE,
+  check_overlap = FALSE,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
+        geom = GeomVector, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(arrow = arrow, 
+            lineend = lineend, linejoin = linejoin, vector_labels = vector_labels, 
+            label.colour = label.color %||% label.colour, 
+            label.alpha = label.alpha, parse = parse, check_overlap = check_overlap, 
+            na.rm = na.rm, ...))    
+    
+}
+
+#' @rdname biplot-geoms
+#' @export
 geom_rows_bagplot <- function(
   mapping = NULL,
   data = NULL,
@@ -1040,282 +1327,10 @@ geom_cols_bagplot <- function(
 
 #' @rdname biplot-geoms
 #' @export
-geom_rows_interpolation <- function(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  new_data = NULL,
-  type = c("centroid", "sequence"),
-  arrow = default_arrow,
-  ...,
-  point.fill = NA,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-) {
-    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
-        geom = GeomInterpolation, position = position, 
-        show.legend = show.legend, inherit.aes = inherit.aes, 
-        params = list(new_data = new_data, type = type, 
-            point.fill = point.fill, arrow = arrow, na.rm = na.rm, 
-            ...))    
-    
-}
-
-#' @rdname biplot-geoms
-#' @export
-geom_cols_interpolation <- function(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  new_data = NULL,
-  type = c("centroid", "sequence"),
-  arrow = default_arrow,
-  ...,
-  point.fill = NA,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-) {
-    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
-        geom = GeomInterpolation, position = position, 
-        show.legend = show.legend, inherit.aes = inherit.aes, 
-        params = list(new_data = new_data, type = type, 
-            point.fill = point.fill, arrow = arrow, na.rm = na.rm, 
-            ...))    
-    
-}
-
-#' @rdname biplot-geoms
-#' @export
-geom_rows_lineranges <- function(
-  mapping = NULL,
-  data = NULL,
-  stat = "center",
-  position = "identity",
-  ...,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-) {
-    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
-        geom = GeomLineranges, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(na.rm = na.rm, 
-            ...))    
-    
-}
-
-#' @rdname biplot-geoms
-#' @export
-geom_cols_lineranges <- function(
-  mapping = NULL,
-  data = NULL,
-  stat = "center",
-  position = "identity",
-  ...,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-) {
-    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
-        geom = GeomLineranges, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(na.rm = na.rm, 
-            ...))    
-    
-}
-
-#' @rdname biplot-geoms
-#' @export
-geom_rows_pointranges <- function(
-  mapping = NULL,
-  data = NULL,
-  stat = "center",
-  position = "identity",
-  ...,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-) {
-    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
-        geom = GeomPointranges, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(na.rm = na.rm, 
-            ...))    
-    
-}
-
-#' @rdname biplot-geoms
-#' @export
-geom_cols_pointranges <- function(
-  mapping = NULL,
-  data = NULL,
-  stat = "center",
-  position = "identity",
-  ...,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-) {
-    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
-        geom = GeomPointranges, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(na.rm = na.rm, 
-            ...))    
-    
-}
-
-#' @rdname biplot-geoms
-#' @export
-geom_rows_isoline <- function(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  isoline_text = TRUE,
-  by = NULL,
-  num = NULL,
-  text_dodge = 0.03,
-  ...,
-  text.size = 3,
-  text.angle = 0,
-  text.colour = NULL,
-  text.color = NULL,
-  text.alpha = NULL,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-) {
-    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
-        geom = GeomIsoline, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(isoline_text = isoline_text, 
-            by = by, num = num, text_dodge = text_dodge, 
-            text.size = text.size, text.angle = text.angle, 
-            text.colour = text.color %||% text.colour, 
-            text.alpha = text.alpha, parse = parse, check_overlap = check_overlap, 
-            na.rm = na.rm, ...))    
-    
-}
-
-#' @rdname biplot-geoms
-#' @export
-geom_cols_isoline <- function(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  isoline_text = TRUE,
-  by = NULL,
-  num = NULL,
-  text_dodge = 0.03,
-  ...,
-  text.size = 3,
-  text.angle = 0,
-  text.colour = NULL,
-  text.color = NULL,
-  text.alpha = NULL,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-) {
-    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
-        geom = GeomIsoline, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(isoline_text = isoline_text, 
-            by = by, num = num, text_dodge = text_dodge, 
-            text.size = text.size, text.angle = text.angle, 
-            text.colour = text.color %||% text.colour, 
-            text.alpha = text.alpha, parse = parse, check_overlap = check_overlap, 
-            na.rm = na.rm, ...))    
-    
-}
-
-#' @rdname biplot-geoms
-#' @export
-geom_rows_pin <- function(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  length = unit(0.2, "npc"),
-  lineend = "round",
-  pin_labels = TRUE,
-  orientation = NA,
-  ...,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = rows_stat(stat),
-    geom = GeomPin,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      length = length,
-      lineend = lineend,
-      pin_labels = pin_labels,
-      orientation = orientation,
-      parse = parse,
-      check_overlap = check_overlap,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
-#' @rdname biplot-geoms
-#' @export
-geom_cols_pin <- function(
-  mapping = NULL,
-  data = NULL,
-  stat = "identity",
-  position = "identity",
-  length = unit(0.2, "npc"),
-  lineend = "round",
-  pin_labels = TRUE,
-  orientation = NA,
-  ...,
-  parse = FALSE,
-  check_overlap = FALSE,
-  na.rm = FALSE,
-  show.legend = NA,
-  inherit.aes = TRUE
-) {
-  layer(
-    mapping = mapping,
-    data = data,
-    stat = cols_stat(stat),
-    geom = GeomPin,
-    position = position,
-    show.legend = show.legend,
-    inherit.aes = inherit.aes,
-    params = list(
-      length = length,
-      lineend = lineend,
-      pin_labels = pin_labels,
-      orientation = orientation,
-      parse = parse,
-      check_overlap = check_overlap,
-      na.rm = na.rm,
-      ...
-    )
-  )
-}
-
-#' @rdname biplot-geoms
-#' @export
 geom_rows_rule <- function(
   mapping = NULL,
   data = NULL,
-  stat = "rule",
+  stat = "identity",
   position = "identity",
   axis_labels = TRUE,
   axis_ticks = TRUE,
@@ -1379,7 +1394,7 @@ geom_rows_rule <- function(
 geom_cols_rule <- function(
   mapping = NULL,
   data = NULL,
-  stat = "rule",
+  stat = "identity",
   position = "identity",
   axis_labels = TRUE,
   axis_ticks = TRUE,
@@ -1440,63 +1455,66 @@ geom_cols_rule <- function(
 
 #' @rdname biplot-geoms
 #' @export
-geom_rows_text_radiate <- function(
+geom_rows_interpolation <- function(
   mapping = NULL,
   data = NULL,
   stat = "identity",
   position = "identity",
+  new_data = NULL,
+  type = c("centroid", "sequence"),
+  arrow = default_arrow,
   ...,
-  parse = FALSE,
-  check_overlap = FALSE,
+  point.fill = NA,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
     layer(data = data, mapping = mapping, stat = rows_stat(stat), 
-        geom = GeomTextRadiate, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(parse = parse, 
-            check_overlap = check_overlap, na.rm = na.rm, 
+        geom = GeomInterpolation, position = position, 
+        show.legend = show.legend, inherit.aes = inherit.aes, 
+        params = list(new_data = new_data, type = type, 
+            point.fill = point.fill, arrow = arrow, na.rm = na.rm, 
             ...))    
     
 }
 
 #' @rdname biplot-geoms
 #' @export
-geom_cols_text_radiate <- function(
+geom_cols_interpolation <- function(
   mapping = NULL,
   data = NULL,
   stat = "identity",
   position = "identity",
+  new_data = NULL,
+  type = c("centroid", "sequence"),
+  arrow = default_arrow,
   ...,
-  parse = FALSE,
-  check_overlap = FALSE,
+  point.fill = NA,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
     layer(data = data, mapping = mapping, stat = cols_stat(stat), 
-        geom = GeomTextRadiate, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(parse = parse, 
-            check_overlap = check_overlap, na.rm = na.rm, 
+        geom = GeomInterpolation, position = position, 
+        show.legend = show.legend, inherit.aes = inherit.aes, 
+        params = list(new_data = new_data, type = type, 
+            point.fill = point.fill, arrow = arrow, na.rm = na.rm, 
             ...))    
     
 }
 
 #' @rdname biplot-geoms
 #' @export
-geom_rows_vector <- function(
+geom_rows_pin <- function(
   mapping = NULL,
   data = NULL,
   stat = "identity",
   position = "identity",
-  arrow = default_arrow,
+  length = unit(0.2, "npc"),
   lineend = "round",
-  linejoin = "mitre",
-  vector_labels = TRUE,
+  pin_labels = TRUE,
+  orientation = NA,
   ...,
-  label.colour = NULL,
-  label.color = NULL,
-  label.alpha = NULL,
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
@@ -1504,30 +1522,26 @@ geom_rows_vector <- function(
   inherit.aes = TRUE
 ) {
     layer(data = data, mapping = mapping, stat = rows_stat(stat), 
-        geom = GeomVector, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(arrow = arrow, 
-            lineend = lineend, linejoin = linejoin, vector_labels = vector_labels, 
-            label.colour = label.color %||% label.colour, 
-            label.alpha = label.alpha, parse = parse, check_overlap = check_overlap, 
+        geom = GeomPin, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(length = length, 
+            lineend = lineend, pin_labels = pin_labels, 
+            orientation = orientation, parse = parse, check_overlap = check_overlap, 
             na.rm = na.rm, ...))    
     
 }
 
 #' @rdname biplot-geoms
 #' @export
-geom_cols_vector <- function(
+geom_cols_pin <- function(
   mapping = NULL,
   data = NULL,
   stat = "identity",
   position = "identity",
-  arrow = default_arrow,
+  length = unit(0.2, "npc"),
   lineend = "round",
-  linejoin = "mitre",
-  vector_labels = TRUE,
+  pin_labels = TRUE,
+  orientation = NA,
   ...,
-  label.colour = NULL,
-  label.color = NULL,
-  label.alpha = NULL,
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
@@ -1535,11 +1549,10 @@ geom_cols_vector <- function(
   inherit.aes = TRUE
 ) {
     layer(data = data, mapping = mapping, stat = cols_stat(stat), 
-        geom = GeomVector, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(arrow = arrow, 
-            lineend = lineend, linejoin = linejoin, vector_labels = vector_labels, 
-            label.colour = label.color %||% label.colour, 
-            label.alpha = label.alpha, parse = parse, check_overlap = check_overlap, 
+        geom = GeomPin, position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(length = length, 
+            lineend = lineend, pin_labels = pin_labels, 
+            orientation = orientation, parse = parse, check_overlap = check_overlap, 
             na.rm = na.rm, ...))    
     
 }
