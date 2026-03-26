@@ -156,7 +156,7 @@ setup_referent_params <- function(self, data, params) {
   } else {
     # continue with parent parameter setup
     params$referent <- as.data.frame(params$referent)
-    params <- ggproto_parent(gggda::StatReferent, self)$setup_params(data, params)
+    params <- ggproto_parent(StatReferent, self)$setup_params(data, params)
   }
   
   params

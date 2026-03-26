@@ -68,7 +68,7 @@ stat_projection <- function(
 #' @usage NULL
 #' @export
 StatProjection <- ggproto(
-  "StatProjection", gggda::StatReferent,
+  "StatProjection", StatReferent,
   
   compute_group = function(data, scales,
                            referent = NULL, na.rm = FALSE) {

@@ -31,7 +31,7 @@ coord_scaffold <- function(
 #' @usage NULL
 #' @export
 CoordScaffold <- ggproto(
-  "CoordScaffold", gggda::CoordRect,
+  "CoordScaffold", CoordRect,
   
   # require coordinate aspect ratio to be 1
   aspect = function(self, ranges) {
