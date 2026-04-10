@@ -169,16 +169,48 @@ layer_cols <- function(
 # experiments
 
 # ordination
-iris_pca <- ordinate(iris, cols = 1:4, prcomp, scale = TRUE)
+( iris_pca <- ordinate(iris, cols = 1:4, prcomp, scale = TRUE) )
+
+# TODO: Group these by plot rather than by syntax?
+
+# current `stat_(rows|cols)_*()`
 # FIXME
-# current `stat_(rows|cols)()`
+
+# trivial stat
+ggbiplot(iris_pca) +
+  stat_cols(geom = "vector", aes(label = name)) +
+  stat_rows(geom = GeomPoint, aes(color = Species), alpha = .5)
+# non-referential stat
 ggbiplot(iris_pca, axis.type = "predictive") +
   stat_cols(geom = "axis", aes(label = name, center = center, scale = scale)) +
-  stat_rows(geom = GeomPoint, aes(color = Species), alpha = .5)
-# current `(stat|geom)_(rows|cols)()`
+  stat_rows_bagplot(aes(color = Species, fill = Species))
+# referential stat
+ggbiplot(iris_pca, axis.type = "predictive") +
+  stat_cols_rule(aes(label = name, center = center, scale = scale)) +
+  stat_rows_bagplot(aes(color = Species, fill = Species))
+# subsets & elements
+
+
+# current `geom_(rows|cols)_*()`
+
+# trivial stat
+ggbiplot(iris_pca) +
+  geom_cols_vector(aes(label = name)) +
+  geom_rows_point(aes(color = Species), alpha = .5)
+# non-referential stat
 ggbiplot(iris_pca, axis.type = "predictive") +
   geom_cols_axis(aes(label = name, center = center, scale = scale)) +
   geom_rows_point(aes(color = Species), alpha = .5)
+# referential stat
+ggbiplot(iris_pca, axis.type = "predictive") +
+  geom_cols_rule(
+    stat = "rule",
+    aes(label = name, center = center, scale = scale)
+  ) +
+  geom_rows_bagplot(aes(color = Species, fill = Species))
+# subsets & elements
+
+
 # experimental `stat_*()` with `data = (rows|cols)_data()`
 ggbiplot(iris_pca, axis.type = "predictive") +
   stat_identity(
@@ -219,3 +251,19 @@ ggbiplot(iris_pca, axis.type = "predictive") +
     geom = "point", stat = StatIdentity, position = "identity",
     mapping = aes(color = Species), params = list(alpha = .5)
   )
+
+# Gina's idea
+make_elts_stat_ggproto(StatCenter, "rows") |> 
+  make_constructor(geom = "point") ->
+  stat_rows_center2
+StatCenter |> 
+  make_constructor(geom = "point", data = rows_data()) ->
+  stat_rows_center3
+ggbiplot(iris_pca, axis.type = "predictive") +
+  stat_rows_center2(aes(color = Species), size = 5) +
+  geom_rows_point(aes(color = Species), alpha = .5)
+# options for layers not pre-built:
+# 1. `data = (rows|cols)_data()`
+# 2. stat = `(rows|cols)_stat(<stat>)`
+# 3. `make_constructor()` with one of the above
+
