@@ -27,19 +27,6 @@ cols_data <- function(subset = NULL, elements = "active") {
 # * `geom_*(stat = <rows|cols>_stat(Stat*, subset = , elements = )`
 # * `geom_*(stat = <rows|cols>_stat("*", subset = , elements = )`
 
-# TODO: Return a ggproto rather than a character string?
-# TODO: Redefine `ordr::rows_stat()` and `ordr::cols_stat()` to match these.
-rows_stat <- function(stat, subset = NULL, elements = "active") {
-  if (inherits(stat, "ggproto")) 
-    stat <- gsub("^stat\\_", "", ggplot2:::snake_class(stat))
-  matrix_stat("rows", stat)
-}
-cols_stat <- function(stat, subset = NULL, elements = "active") {
-  if (inherits(stat, "ggproto")) 
-    stat <- gsub("^stat\\_", "", ggplot2:::snake_class(stat))
-  matrix_stat("cols", stat)
-}
-
 # ggproto adapters
 
 make_elts_stat_ggproto <- function(x, .matrix) {
@@ -188,7 +175,7 @@ ggbiplot(iris_pca, axis.type = "predictive") +
   stat_cols_rule(aes(label = name, center = center, scale = scale)) +
   stat_rows_bagplot(aes(color = Species, fill = Species))
 # subsets & elements
-ordinate(iris, princomp, cols = 1:4) |> 
+ordinate(iris, princomp, cols = 1:4, cor = TRUE) |> 
   ggbiplot(axis.type = "predictive") +
   # FIXME
   stat_cols_rule(
