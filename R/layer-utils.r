@@ -13,6 +13,8 @@
 
 .ord_elements <- c("active", "score", "structure", "pinv_weight")
 
+snake_class <- getFromNamespace("snake_class", "ggplot2")
+
 match_factor <- function(x) {
   x <- match.arg(tolower(x), names(.ord_factors))
   unname(.ord_factors[x])
@@ -39,6 +41,12 @@ factor_coord <- function(x) {
 
 matrix_stat <- function(.matrix, stat) {
   .matrix <- match_factor(.matrix)
+  stopifnot(is.character(stat) || inherits(stat, c("Stat", "ggproto")))
+  if (! is.character(stat)) {
+    if (identical(stat, Stat))
+      stop("`Stat`, rather than a child class, was passed to `matrix_stat()`.")
+    stat <- gsub("^stat\\_", "", snake_class(stat))
+  }
   if (stat == "identity") return(.matrix)
   stringr::str_c(.matrix, stat, sep = "_")
 }

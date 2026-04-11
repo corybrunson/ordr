@@ -7,7 +7,7 @@
 \usage{
 stat_rows(
   mapping = NULL,
-  data = data,
+  data = NULL,
   geom = "point",
   position = "identity",
   subset = NULL,
@@ -19,7 +19,7 @@ stat_rows(
 
 stat_cols(
   mapping = NULL,
-  data = data,
+  data = NULL,
   geom = "axis",
   position = "identity",
   subset = NULL,
