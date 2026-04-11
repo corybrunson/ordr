@@ -177,10 +177,9 @@ ggbiplot(iris_pca, axis.type = "predictive") +
 # subsets & elements
 ordinate(iris, princomp, cols = 1:4, cor = TRUE) |> 
   ggbiplot(axis.type = "predictive") +
-  # FIXME
   stat_cols_rule(
     aes(label = name, center = center, scale = scale),
-    subset = 1:2
+    ref_elements = "score", subset = 1:2
   ) +
   geom_rows_bagplot(aes(color = Species, fill = Species), elements = "score")
 
@@ -202,13 +201,13 @@ ggbiplot(iris_pca, axis.type = "predictive") +
   ) +
   geom_rows_bagplot(aes(color = Species, fill = Species))
 # subsets & elements
-ordinate(iris, princomp, cols = 1:4) |> 
+ordinate(iris, princomp, cols = 1:4, cor = TRUE) |> 
   ggbiplot(axis.type = "predictive") +
   # FIXME
   geom_cols_rule(
     stat = "rule",
     aes(label = name, center = center, scale = scale),
-    subset = 1:2
+    ref_elements = "score", subset = 1:2
   ) +
   geom_rows_bagplot(aes(color = Species, fill = Species), elements = "score")
 
@@ -242,7 +241,7 @@ ordinate(iris, princomp, cols = 1:4) |>
   ggbiplot(axis.type = "predictive") +
   stat_rule(
     data = cols_data(subset = 1:2),
-    # FIXME
+    # FIXME: Maybe {gggda} needs to allow passing a function to `referent`.
     referent = rows_data(),
     aes(label = name, center = center, scale = scale)
   ) +
