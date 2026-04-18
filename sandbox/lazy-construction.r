@@ -11,6 +11,7 @@
 rows_data <- function(subset = NULL, elements = "active") {
   function(data) {
     res <- setup_rows_data(data, list(subset = subset, elements = elements))
+    print(head(res))
     res$.matrix <- "rows"
     res
   }
@@ -18,10 +19,150 @@ rows_data <- function(subset = NULL, elements = "active") {
 cols_data <- function(subset = NULL, elements = "active") {
   function(data) {
     res <- setup_cols_data(data, list(subset = subset, elements = elements))
+    print(head(res))
     res$.matrix <- "cols"
     res
   }
 }
+
+# experiments
+
+# ordination
+( iris_pca <- ordinate(iris, cols = 1:4, prcomp, scale = TRUE) )
+
+# TODO: Group these by plot rather than by syntax?
+
+# current `stat_(rows|cols)_*()`
+
+# trivial stat
+ggbiplot(iris_pca) +
+  stat_cols(geom = "vector", aes(label = name)) +
+  stat_rows(geom = GeomPoint, aes(color = Species), alpha = .5)
+# non-referential stat
+ggbiplot(iris_pca, axis.type = "predictive") +
+  stat_cols(geom = "axis", aes(label = name, center = center, scale = scale)) +
+  stat_rows_spantree(aes(color = Species))
+# referential stat
+ggbiplot(iris_pca, axis.type = "predictive") +
+  stat_cols_rule(aes(label = name, center = center, scale = scale)) +
+  stat_rows_bagplot(aes(color = Species, fill = Species))
+# subsets & elements
+ordinate(iris, princomp, cols = 1:4, cor = TRUE) |> 
+  ggbiplot(axis.type = "predictive") +
+  stat_cols_rule(
+    aes(label = name, center = center, scale = scale),
+    ref_elements = "score", subset = 1:2
+  ) +
+  geom_rows_bagplot(aes(color = Species, fill = Species), elements = "score")
+
+# current `geom_(rows|cols)_*()`
+
+# trivial stat
+ggbiplot(iris_pca) +
+  geom_cols_vector(aes(label = name)) +
+  geom_rows_point(aes(color = Species), alpha = .5)
+# non-referential stat
+ggbiplot(iris_pca, axis.type = "predictive") +
+  geom_cols_axis(aes(label = name, center = center, scale = scale)) +
+  geom_rows_point(aes(color = Species), alpha = .5)
+# referential stat
+ggbiplot(iris_pca, axis.type = "predictive") +
+  geom_cols_rule(
+    stat = "rule",
+    aes(label = name, center = center, scale = scale)
+  ) +
+  geom_rows_bagplot(aes(color = Species, fill = Species))
+# subsets & elements
+ordinate(iris, princomp, cols = 1:4, cor = TRUE) |> 
+  ggbiplot(axis.type = "predictive") +
+  geom_cols_rule(
+    stat = "rule",
+    aes(label = name, center = center, scale = scale),
+    ref_elements = "score", subset = 1:2
+  ) +
+  geom_rows_bagplot(aes(color = Species, fill = Species), elements = "score")
+
+# experimental `stat_*()` with `data = (rows|cols)_data()`
+
+# trivial stat
+ggbiplot(iris_pca) +
+  stat_identity(geom = GeomVector, data = cols_data(), aes(label = name)) +
+  stat_identity(
+    geom = "point", data = rows_data(), aes(color = Species),
+    alpha = .5
+  )
+# non-referential stat
+ggbiplot(iris_pca, axis.type = "predictive") +
+  stat_identity(
+    geom = GeomAxis, data = cols_data(),
+    aes(label = name, center = center, scale = scale)
+  ) +
+  stat_spantree(data = rows_data(), aes(color = Species))
+# referential stat
+# NOTE: Requires `referent` branch of {gggda}.
+ggbiplot(iris_pca, axis.type = "predictive") +
+  stat_rule(
+    data = cols_data(),
+    referent = rows_data(),
+    aes(label = name, center = center, scale = scale)
+  ) +
+  stat_bagplot(data = rows_data(), aes(color = Species, fill = Species))
+# subsets & elements
+ordinate(iris, princomp, cols = 1:4, cor = TRUE) |> 
+  ggbiplot(axis.type = "predictive") +
+  stat_rule(
+    data = cols_data(subset = 1:2),
+    referent = rows_data(elements = "score"),
+    aes(label = name, center = center, scale = scale)
+  ) +
+  stat_bagplot(
+    data = rows_data(elements = "score"),
+    aes(color = Species, fill = Species)
+  )
+
+# experimental `geom_*()` with `(rows|cols)_stat()`
+
+# trivial stat
+ggbiplot(iris_pca) +
+  geom_cols_vector(aes(label = name)) +
+  geom_rows_point(aes(color = Species), alpha = .5)
+ggbiplot(iris_pca) +
+  geom_vector(stat = cols_stat("identity"), aes(label = name)) +
+  geom_point(stat = rows_stat(StatIdentity), aes(color = Species), alpha = .5)
+
+ggbiplot(iris_pca, axis.type = "predictive") +
+  geom_axis(
+    stat = cols_stat("identity"),
+    aes(label = name, center = center, scale = scale)
+  ) +
+  geom_point(
+    stat = rows_stat(StatIdentity),
+    aes(color = Species), alpha = .5
+  )
+
+# current `layer()`
+
+ggbiplot(iris_pca, axis.type = "predictive") +
+  layer(
+    geom = GeomAxis, stat = cols_stat("identity"), position = "identity",
+    mapping = aes(label = name, center = center, scale = scale)
+  ) +
+  layer(
+    geom = "point", stat = rows_stat(StatIdentity), position = PositionIdentity,
+    mapping = aes(color = Species), params = list(alpha = .5)
+  )
+
+# experimental `layer_(rows|cols)()`
+
+ggbiplot(iris_pca, axis.type = "predictive") +
+  layer_cols(
+    geom = GeomAxis, stat = "identity", position = "identity",
+    mapping = aes(label = name, center = center, scale = scale)
+  ) +
+  layer_rows(
+    geom = "point", stat = StatIdentity, position = "identity",
+    mapping = aes(color = Species), params = list(alpha = .5)
+  )
 
 # for
 # * `geom_*(stat = <rows|cols>_stat(Stat*, subset = , elements = )`
@@ -152,149 +293,6 @@ layer_cols <- function(
   if (is_ref_layer) class(LayerResult) <- c("LayerRef", class(LayerResult))
   LayerResult
 }
-
-# experiments
-
-# ordination
-( iris_pca <- ordinate(iris, cols = 1:4, prcomp, scale = TRUE) )
-
-# TODO: Group these by plot rather than by syntax?
-
-# current `stat_(rows|cols)_*()`
-
-# trivial stat
-ggbiplot(iris_pca) +
-  stat_cols(geom = "vector", aes(label = name)) +
-  stat_rows(geom = GeomPoint, aes(color = Species), alpha = .5)
-# non-referential stat
-ggbiplot(iris_pca, axis.type = "predictive") +
-  stat_cols(geom = "axis", aes(label = name, center = center, scale = scale)) +
-  stat_rows_spantree(aes(color = Species))
-# referential stat
-ggbiplot(iris_pca, axis.type = "predictive") +
-  stat_cols_rule(aes(label = name, center = center, scale = scale)) +
-  stat_rows_bagplot(aes(color = Species, fill = Species))
-# subsets & elements
-ordinate(iris, princomp, cols = 1:4, cor = TRUE) |> 
-  ggbiplot(axis.type = "predictive") +
-  stat_cols_rule(
-    aes(label = name, center = center, scale = scale),
-    ref_elements = "score", subset = 1:2
-  ) +
-  geom_rows_bagplot(aes(color = Species, fill = Species), elements = "score")
-
-# current `geom_(rows|cols)_*()`
-
-# trivial stat
-ggbiplot(iris_pca) +
-  geom_cols_vector(aes(label = name)) +
-  geom_rows_point(aes(color = Species), alpha = .5)
-# non-referential stat
-ggbiplot(iris_pca, axis.type = "predictive") +
-  geom_cols_axis(aes(label = name, center = center, scale = scale)) +
-  geom_rows_point(aes(color = Species), alpha = .5)
-# referential stat
-ggbiplot(iris_pca, axis.type = "predictive") +
-  geom_cols_rule(
-    stat = "rule",
-    aes(label = name, center = center, scale = scale)
-  ) +
-  geom_rows_bagplot(aes(color = Species, fill = Species))
-# subsets & elements
-ordinate(iris, princomp, cols = 1:4, cor = TRUE) |> 
-  ggbiplot(axis.type = "predictive") +
-  # FIXME
-  geom_cols_rule(
-    stat = "rule",
-    aes(label = name, center = center, scale = scale),
-    ref_elements = "score", subset = 1:2
-  ) +
-  geom_rows_bagplot(aes(color = Species, fill = Species), elements = "score")
-
-# experimental `stat_*()` with `data = (rows|cols)_data()`
-
-# trivial stat
-ggbiplot(iris_pca) +
-  stat_identity(geom = GeomVector, data = cols_data(), aes(label = name)) +
-  stat_identity(
-    geom = "point", data = rows_data(), aes(color = Species),
-    alpha = .5
-  )
-# non-referential stat
-ggbiplot(iris_pca, axis.type = "predictive") +
-  stat_identity(
-    geom = GeomAxis, data = cols_data(),
-    aes(label = name, center = center, scale = scale)
-  ) +
-  stat_spantree(data = rows_data(), aes(color = Species))
-# referential stat
-ggbiplot(iris_pca, axis.type = "predictive") +
-  stat_rule(
-    data = cols_data(),
-    # FIXME
-    referent = rows_data(),
-    aes(label = name, center = center, scale = scale)
-  ) +
-  stat_bagplot(data = rows_data(), aes(color = Species, fill = Species))
-# subsets & elements
-ordinate(iris, princomp, cols = 1:4) |> 
-  ggbiplot(axis.type = "predictive") +
-  stat_rule(
-    data = cols_data(subset = 1:2),
-    # FIXME: Maybe {gggda} needs to allow passing a function to `referent`.
-    referent = rows_data(),
-    aes(label = name, center = center, scale = scale)
-  ) +
-  stat_bagplot(
-    data = rows_data(elements = "score"),
-    aes(color = Species, fill = Species)
-  )
-
-# experimental `geom_*()` with `(rows|cols)_stat()`
-
-# trivial stat
-ggbiplot(iris_pca) +
-  geom_cols_vector(aes(label = name)) +
-  geom_rows_point(aes(color = Species), alpha = .5)
-ggbiplot(iris_pca) +
-  geom_vector(stat = cols_stat("identity"), aes(label = name)) +
-  # FIXME
-  geom_point(stat = rows_stat(StatIdentity), aes(color = Species), alpha = .5)
-
-ggbiplot(iris_pca, axis.type = "predictive") +
-  geom_axis(
-    stat = cols_stat("identity"),
-    aes(label = name, center = center, scale = scale)
-  ) +
-  geom_point(
-    stat = rows_stat(StatIdentity),
-    aes(color = Species), alpha = .5
-  )
-
-# current `layer()`
-
-ggbiplot(iris_pca, axis.type = "predictive") +
-  layer(
-    geom = GeomAxis, stat = cols_stat("identity"), position = "identity",
-    mapping = aes(label = name, center = center, scale = scale)
-  ) +
-  layer(
-    geom = "point", stat = rows_stat(StatIdentity), position = PositionIdentity,
-    mapping = aes(color = Species), params = list(alpha = .5)
-  )
-
-# experimental `layer_(rows|cols)()`
-
-ggbiplot(iris_pca, axis.type = "predictive") +
-  layer_cols(
-    geom = GeomAxis, stat = "identity", position = "identity",
-    mapping = aes(label = name, center = center, scale = scale)
-  ) +
-  layer_rows(
-    geom = "point", stat = StatIdentity, position = "identity",
-    mapping = aes(color = Species), params = list(alpha = .5)
-  )
-
 
 # Gina's idea
 make_elts_stat_ggproto(StatCenter, "rows") |> 
