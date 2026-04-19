@@ -84,10 +84,10 @@ possible to pass a formula to the \code{data} parameter, but it will act on the
 fortified data \emph{before} it has been restricted to one matrix factor.}
 
 \item{elements}{Character vector; which elements of each factor for which to
-render graphical elements. One of \code{"all"} (the default), \code{"active"}, or any
+render graphical elements. One of \code{"active"} (the default) or any
 supplementary element type defined by the specific class methods (e.g.
 \code{"score"} for 'factanal', 'lda_ord', and 'cancord_ord' and \code{"intraset"} and
-\code{"interset"} for 'cancor_ord').}
+\code{"interset"} for 'cancor_ord'), via \link[base:match.arg]{partial matching}.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
@@ -95,12 +95,14 @@ supplementary element type defined by the specific class methods (e.g.
 \code{NA}, the default, includes if any aesthetics are mapped.
 \code{FALSE} never includes, and \code{TRUE} always includes.
 It can also be a named logical vector to finely select the aesthetics to
-display.}
+display. To include legend keys for all levels, even
+when no data exists, use \code{TRUE}.  If \code{NA}, all levels are shown in legend,
+but unobserved levels are omitted.}
 
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
+the default plot specification, e.g. \code{\link[ggplot2:annotation_borders]{annotation_borders()}}.}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.
@@ -131,7 +133,12 @@ swiss_fa <-
 get_rows(swiss_fa, elements = "active")
 head(get_rows(swiss_fa, elements = "score"))
 
-# biplot using element filters and selection
+# biplot using matrix stats and element filter
+ggbiplot(swiss_fa) +
+  stat_rows(elements = "score") +
+  stat_cols(geom = "vector", aes(label = name))
+
+# biplot using element filter and item selection
 # (note that filter precedes selection)
 ggbiplot(swiss_fa) +
   geom_rows_point(elements = "score") +

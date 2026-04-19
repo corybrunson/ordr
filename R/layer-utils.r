@@ -39,6 +39,7 @@ factor_coord <- function(x) {
   factor(x, levels = x)
 }
 
+# TODO: Return a ggproto rather than a character string?
 matrix_stat <- function(.matrix, stat) {
   .matrix <- match_factor(.matrix)
   stopifnot(is.character(stat) || inherits(stat, c("Stat", "ggproto")))
