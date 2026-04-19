@@ -9,6 +9,16 @@ While the `"eigen"` methods are unchanged, the function `eigen_ord()` has been d
 
 Functions are provided to calculate three goodness-of-fit statistics.
 
+## syntactic sugar and extensibility for biplot constructors
+
+Alternative syntaces for biplot layer constructors are now available:
+
+* `stat_rows(geom = Geom*)` and `stat_cols(geom = Geom*)` can now be used; a bug (#87) had prevented this.
+* `geom_*(stat = rows_stat("*"))`, `geom_*(stat = cols_stat(Stat*))`, etc. are now documented with examples.
+* New ordination subsetters `rows_data(subset, elements)` and `cols_data(subset, elements)` can be passed to `data` in otherwise standard layer constructors.
+
+Beyond convenience, the second and third of these allow to use `Stat`s for which biplot-specific constructors `stat_rows_*()` and `stat_cols_*()` are not provided.
+
 # ordr 0.2.0
 
 ## infrastructure and standards
