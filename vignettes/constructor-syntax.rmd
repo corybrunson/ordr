@@ -1,0 +1,122 @@
+---
+title: "constructing biplot layers"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{constructing biplot layers}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr options, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.height = 6, fig.align = "center"
+)
+```
+
+**ordr** originally provided custom constructors like `stat_rows_ellipse()` and `geom_cols_vector()` as the default and intended tools for adding layers to a biplot [^pre-build].
+Version 0.3.0 introduces and/or documents several helper functions that instead modify either the fortified `data.frame` or the stat `ggproto`, which otherwise are used as in any `ggplot()` call.
+This vignette illustrates the alternative syntaces these functions enable, which may be recommended in the next version.
+
+[^pre-build]: The source code for these is generated before the package is built by accessing and adapting the corresponding constructors from **ggplot2** and **ggrepel** as well as several original to **ordr** (most now moved to **gggda**).
+
+```{r setup}
+library(ordr)
+```
+
+
+## canonical correlation analysis example
+
+The `gilgais` data set contains measurements from regularly-spaced soil samples in New South Wales.
+Hydrogen ion exponent pH (`pH`), electrical conductivity in mS/cm (`e`), and chloride content in ppm (`c`) were recorded at depths of 0--10 cm (`00`), 30--40 cm (`30`), and 80--90 cm (`80`) in soil--water extracts, yielding 9 values from each sample.
+No additional metadata are provided.
+
+```{r data}
+data(gilgais, package = "MASS")
+head(gilgais)
+```
+
+While important interplay is expected among these properties, none are causally determined by the others.
+Ordination, rather than regression, is then a suitable approach to understanding the relationships between them.
+We perform a canonical correlation analysis (CCA) of pH levels versus conductivity:
+
+```{r cancor_ord}
+gilgais_ph <- subset(gilgais, select = pH00:pH80)
+gilgais_ec <- subset(gilgais, select = e00:e80)
+# use `cancor_ord()` because `cancor()` returns a classless list.
+gilgais_cca <- 
+  ordinate(x = gilgais_ph, y = gilgais_ec, cancor_ord, scores = TRUE)
+```
+
+This technique obtains a sequence of canonical axes from each variable set that are maximally correlated.
+In addition to the canonical coefficients of the manifest variables, the call above computes _canonical scores_ (coordinates in the canonical space) for the `r nrow(gilgais)` samples and the _structure correlations_ (between the manifest variables and the canonical axes).
+These are stored in the `tbl_ord` object as supplementary elements:
+
+```{r print}
+print(gilgais_cca, n = 7)
+```
+
+A scree plot visualizes the quality of the fit.
+We use the squares of the canonical correlations, which can be interpreted as inertia and decomposed like variance, rather than the correlations themselves:
+
+```{r scree}
+tidy(gilgais_cca) %>%
+  print() %>%
+  ggplot(aes(x = name, y = inertia)) +
+  geom_col() +
+  labs(x = NULL)
+```
+
+A negligible share of inertia remains to be accounted for by the third canonical axis, so a 2-dimensional biplot will include nearly all the geometry of the variables.
+
+
+## biplots
+
+We begin with two biplots used in CCA, rendered using the row and column data separately in **ggplot2**.
+The remaining sections will reproduce these biplots using different sets of tools provided by **ordr**.
+
+```{r factor-data}
+coef_ph <-
+  subset(fortify(gilgais_cca), .matrix == "rows" & .element == "active")
+score_ph <-
+  subset(fortify(gilgais_cca), .matrix == "rows" & .element == "score")
+struct_ph <-
+  subset(fortify(gilgais_cca), .matrix == "rows" & .element == "structure")
+coef_ec <-
+  subset(fortify(gilgais_cca), .matrix == "cols" & .element == "active")
+score_ec <-
+  subset(fortify(gilgais_cca), .matrix == "cols" & .element == "score")
+struct_ec <-
+  subset(fortify(gilgais_cca), .matrix == "cols" & .element == "structure")
+```
+
+In the appendix of _Theory and applications of correspondence analysis_, Michael Greenacre proposes a biplot of canonical scores (carrying the inertia) overlaid upon standardized canonical coefficients.
+In this biplot, the projections of a sample marker onto a variable arrow _from the same matrix factor_ approximates the measurement of the variable at the corresponding sample.
+The alignment of the two point clouds reflects the quality of the CCA.
+
+```{r Greenacre-biplot}
+ggplot() +
+  coord_equal() +
+  geom_point(data = score_ph, aes(x = CanCor1, y = CanCor2),
+             size = 1, alpha = .25, shape = "circle open") +
+  geom_point(data = score_ec, aes(x = CanCor1, y = CanCor2),
+             size = 1, alpha = .25, shape = "cross") +
+  geom_vector(data = coef_ph, aes(x = CanCor1, y = CanCor2),
+              linewidth = .75) +
+  geom_text(data = coef_ph,
+            aes(x = CanCor1, y = CanCor2, label = name),
+            hjust = "outward", vjust = "outward") +
+  geom_vector(data = coef_ec, aes(x = 100 * CanCor1, y = 100 * CanCor2),
+              linewidth = .75, linetype = "dotted") +
+  geom_text(data = coef_ec,
+            aes(x = 100 * CanCor1, y = 100 * CanCor2, label = name),
+            hjust = "outward", vjust = "outward") +
+  scale_x_continuous(sec.axis = ~ . * 100) +
+  scale_y_continuous(sec.axis = ~ . * 100)
+```
+
+
+## custom constructors
+
+

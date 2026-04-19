@@ -331,7 +331,7 @@ StatCenter |>
   make_constructor(geom = "point", data = rows_data()) ->
   stat_rows_center3
 ggbiplot(iris_pca, axis.type = "predictive") +
-  stat_rows_center2(aes(color = Species), size = 5) +
+  stat_rows_center3(aes(color = Species), size = 5) +
   geom_rows_point(aes(color = Species), alpha = .5)
 # options for layers not pre-built:
 # 1. `data = (rows|cols)_data()`
