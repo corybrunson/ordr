@@ -3,6 +3,8 @@
 \name{stat_rows}
 \alias{stat_rows}
 \alias{stat_cols}
+\alias{rows_data}
+\alias{cols_data}
 \title{Render plot elements for one matrix of an ordination}
 \usage{
 stat_rows(
@@ -28,6 +30,10 @@ stat_cols(
   show.legend = NA,
   inherit.aes = TRUE
 )
+
+rows_data(subset = NULL, elements = "active")
+
+cols_data(subset = NULL, elements = "active")
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}}. If specified and
@@ -111,6 +117,11 @@ A ggproto \link[ggplot2:layer]{layer}.
 These stats merely tell \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} which factor of an
 ordination to pull data from for a plot layer. They are invoked internally
 by the various \code{\link[=biplot-geoms]{geom_*_*()}} layers.
+
+The helper functions \code{rows_data()} and \code{cols_data()} return ordination
+subsetting functions that apply \code{subset} and \code{elements} to the designated
+matrix factor. They are designed to be used in standard \verb{stat_*()}
+constructor calls to apply the transformation to one matrix factor.
 }
 \section{Biplot layers}{
 
@@ -143,8 +154,16 @@ ggbiplot(swiss_fa) +
 ggbiplot(swiss_fa) +
   geom_rows_point(elements = "score") +
   geom_rows_label(aes(label = name), elements = "score", subset = c(1, 4, 18)) +
-  scale_alpha_manual(values = c(0, 1), guide = "none") +
   geom_cols_vector(aes(label = name))
+
+# same biplot using ordination subsetters
+ggbiplot(swiss_fa) +
+  stat_identity(data = rows_data(elements = "score")) +
+  geom_label(
+    data = rows_data(elements = "score", subset = c(1, 4, 18)),
+    aes(label = name)
+  ) +
+  geom_vector(data = cols_data(), aes(label = name))
 }
 \seealso{
 Other biplot layers: 

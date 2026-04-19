@@ -15,5 +15,13 @@ ggbiplot(swiss_fa) +
 ggbiplot(swiss_fa) +
   geom_rows_point(elements = "score") +
   geom_rows_label(aes(label = name), elements = "score", subset = c(1, 4, 18)) +
-  scale_alpha_manual(values = c(0, 1), guide = "none") +
   geom_cols_vector(aes(label = name))
+
+# same biplot using ordination subsetters
+ggbiplot(swiss_fa) +
+  stat_identity(data = rows_data(elements = "score")) +
+  geom_label(
+    data = rows_data(elements = "score", subset = c(1, 4, 18)),
+    aes(label = name)
+  ) +
+  geom_vector(data = cols_data(), aes(label = name))
