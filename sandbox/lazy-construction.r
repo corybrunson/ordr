@@ -1,15 +1,12 @@
 
-# helper functions for alternative layer syntaces
-
-# TODO: These might be introduced before the transition to lazy ggproto/shortcut
-# construction.
-
 # experiments
 
 # ordination
 ( iris_pca <- ordinate(iris, cols = 1:4, prcomp, scale = TRUE) )
 
 # TODO: Group these by plot rather than by syntax?
+
+# TODO: Assemble representative errors to ensure meaningful error messages.
 
 # current `stat_(rows|cols)_*()`
 
@@ -100,15 +97,13 @@ ordinate(iris, princomp, cols = 1:4, cor = TRUE) |>
   )
 
 # experimental `geom_*()` with `(rows|cols)_stat()`
+# TODO: Set default `matrix_stat(stat = StatIdentity)`.
 
 # trivial stat
 ggbiplot(iris_pca) +
-  geom_cols_vector(aes(label = name)) +
-  geom_rows_point(aes(color = Species), alpha = .5)
-ggbiplot(iris_pca) +
   geom_vector(stat = cols_stat("identity"), aes(label = name)) +
   geom_point(stat = rows_stat(StatIdentity), aes(color = Species), alpha = .5)
-
+# non-referential stat
 ggbiplot(iris_pca, axis.type = "predictive") +
   geom_axis(
     stat = cols_stat("identity"),
@@ -118,34 +113,77 @@ ggbiplot(iris_pca, axis.type = "predictive") +
     stat = rows_stat(StatIdentity),
     aes(color = Species), alpha = .5
   )
-
-# current `layer()`
-
+# referential stat
 ggbiplot(iris_pca, axis.type = "predictive") +
+  geom_rule(
+    stat = cols_stat("rule"),
+    aes(label = name, center = center, scale = scale)
+  ) +
+  geom_bagplot(
+    stat = rows_stat(StatBagplot),
+    aes(color = Species, fill = Species)
+  )
+# subsets & elements
+ordinate(iris, princomp, cols = 1:4, cor = TRUE) |> 
+  ggbiplot(axis.type = "predictive") +
+  geom_rule(
+    stat = cols_stat(StatRule),
+    aes(label = name, center = center, scale = scale),
+    ref_elements = "score", subset = 1:2
+  ) +
+  geom_bagplot(
+    stat = rows_stat("bagplot"),
+    aes(color = Species, fill = Species),
+    elements = "score"
+  )
+
+# current `layer()` with `(rows|cols)_stat()`
+
+# trivial stat
+ggbiplot(iris_pca) +
   layer(
-    geom = GeomAxis, stat = cols_stat("identity"), position = "identity",
+    stat = cols_stat("identity"), geom = "vector", position = "identity",
     mapping = aes(label = name, center = center, scale = scale)
   ) +
   layer(
-    geom = "point", stat = rows_stat(StatIdentity), position = PositionIdentity,
+    stat = rows_stat(StatIdentity), geom = GeomPoint, position = "identity",
     mapping = aes(color = Species), params = list(alpha = .5)
   )
-
-# experimental `layer_(rows|cols)()`
-
+# non-referential stat
 ggbiplot(iris_pca, axis.type = "predictive") +
-  layer_cols(
-    geom = GeomAxis, stat = "identity", position = "identity",
+  layer(
+    stat = cols_stat("identity"), geom = "axis", position = "identity",
     mapping = aes(label = name, center = center, scale = scale)
   ) +
-  layer_rows(
-    geom = "point", stat = StatIdentity, position = "identity",
-    mapping = aes(color = Species), params = list(alpha = .5)
+  layer(
+    stat = StatSpantree, geom = "segment", position = PositionIdentity,
+    mapping = aes(color = Species)
+  )
+# referential stat
+ggbiplot(iris_pca, axis.type = "predictive") +
+  layer(
+    stat = cols_stat("rule"), geom = GeomRule, position = PositionIdentity,
+    mapping = aes(label = name, center = center, scale = scale)
+  ) +
+  layer(
+    stat = rows_stat(StatBagplot), geom = "bagplot", position = "identity",
+    mapping = aes(color = Species, fill = Species)
+  )
+# subsets & elements
+ordinate(iris, princomp, cols = 1:4, cor = TRUE) |> 
+  ggbiplot(axis.type = "predictive") +
+  layer(
+    stat = cols_stat(StatRule), geom = GeomRule, position = PositionIdentity,
+    mapping = aes(label = name, center = center, scale = scale),
+    params = list(ref_elements = "score", subset = 1:2)
+  ) +
+  layer(
+    stat = rows_stat("bagplot"), geom = "bagplot", position = "identity",
+    mapping = aes(color = Species, fill = Species),
+    params = list(elements = "score")
   )
 
-# for
-# * `geom_*(stat = <rows|cols>_stat(Stat*, subset = , elements = )`
-# * `geom_*(stat = <rows|cols>_stat("*", subset = , elements = )`
+# TODO: Decide whether to implement below; maybe only above for next release.
 
 # ggproto adapters
 
@@ -273,6 +311,18 @@ layer_cols <- function(
   LayerResult
 }
 
+# experimental `layer_(rows|cols)()`
+
+ggbiplot(iris_pca, axis.type = "predictive") +
+  layer_cols(
+    geom = GeomAxis, stat = "identity", position = "identity",
+    mapping = aes(label = name, center = center, scale = scale)
+  ) +
+  layer_rows(
+    geom = "point", stat = StatIdentity, position = "identity",
+    mapping = aes(color = Species), params = list(alpha = .5)
+  )
+
 # Gina's idea
 make_elts_stat_ggproto(StatCenter, "rows") |> 
   make_constructor(geom = "point") ->
@@ -287,4 +337,3 @@ ggbiplot(iris_pca, axis.type = "predictive") +
 # 1. `data = (rows|cols)_data()`
 # 2. stat = `(rows|cols)_stat(<stat>)`
 # 3. `make_constructor()` with one of the above
-
