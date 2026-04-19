@@ -45,7 +45,7 @@ Imports:
     purrr,
     labeling,
     ggrepel,
-    gggda
+    gggda (> 0.1.1)
 Suggests:
     testthat,
     sessioninfo,
