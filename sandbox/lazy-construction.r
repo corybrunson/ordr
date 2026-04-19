@@ -4,27 +4,6 @@
 # TODO: These might be introduced before the transition to lazy ggproto/shortcut
 # construction.
 
-# for
-# * `stat_*(data = rows_data(subset = , elements = ), ...)`
-# * `stat_*(data = cols_data(subset = , elements = ), ...)`
-# TODO: Obviate re-assignment of `.matrix`.
-rows_data <- function(subset = NULL, elements = "active") {
-  function(data) {
-    res <- setup_rows_data(data, list(subset = subset, elements = elements))
-    print(head(res))
-    res$.matrix <- "rows"
-    res
-  }
-}
-cols_data <- function(subset = NULL, elements = "active") {
-  function(data) {
-    res <- setup_cols_data(data, list(subset = subset, elements = elements))
-    print(head(res))
-    res$.matrix <- "cols"
-    res
-  }
-}
-
 # experiments
 
 # ordination
@@ -99,7 +78,7 @@ ggbiplot(iris_pca, axis.type = "predictive") +
   ) +
   stat_spantree(data = rows_data(), aes(color = Species))
 # referential stat
-# NOTE: Requires `referent` branch of {gggda}.
+# NOTE: Requires development version of {gggda} @932e5f8.
 ggbiplot(iris_pca, axis.type = "predictive") +
   stat_rule(
     data = cols_data(),

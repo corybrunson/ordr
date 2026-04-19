@@ -61,6 +61,7 @@ get_ord_aes <- function(data) {
   names(data)[ord_cols]
 }
 
+
 # restrict to specified elements
 setup_elts_data <- function(data, params) {
   

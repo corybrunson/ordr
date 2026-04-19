@@ -3,7 +3,12 @@
 #' @description These stats merely tell [ggplot2::ggplot()] which factor of an
 #'   ordination to pull data from for a plot layer. They are invoked internally
 #'   by the various [`geom_*_*()`][biplot-geoms] layers.
-#'   
+#'
+#'   The helper functions `rows_data()` and `cols_data()` return ordination
+#'   subsetting functions that apply `subset` and `elements` to the designated
+#'   matrix factor. They are designed to be used in standard `stat_*()`
+#'   constructor calls to apply the transformation to one matrix factor.
+#' 
 
 #' @template biplot-layers
 
@@ -101,3 +106,23 @@ StatCols <- ggproto(
     data
   }
 )
+
+#' @rdname stat_rows
+#' @export
+rows_data <- function(subset = NULL, elements = "active") {
+  function(data) {
+    res <- setup_rows_data(data, list(subset = subset, elements = elements))
+    res$.matrix <- "rows"
+    res
+  }
+}
+
+#' @rdname stat_rows
+#' @export
+cols_data <- function(subset = NULL, elements = "active") {
+  function(data) {
+    res <- setup_cols_data(data, list(subset = subset, elements = elements))
+    res$.matrix <- "cols"
+    res
+  }
+}
