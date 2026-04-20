@@ -19,6 +19,11 @@ Alternative syntaces for biplot layer constructors are now available:
 
 Beyond convenience, the second and third of these allow to use `Stat`s for which biplot-specific constructors `stat_rows_*()` and `stat_cols_*()` are not provided.
 
+## bug fixes
+
+`get_rows()` and `get_cols()` previously conflated all supplementary elements.
+They now return only those elements specified.
+
 # ordr 0.2.0
 
 ## infrastructure and standards
