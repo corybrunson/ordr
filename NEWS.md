@@ -9,6 +9,11 @@ While the `"eigen"` methods are unchanged, the function `eigen_ord()` has been d
 
 Functions are provided to calculate three goodness-of-fit statistics.
 
+## bug fixes
+
+`get_rows()` and `get_cols()` previously conflated all supplementary elements.
+They now return only those elements specified.
+
 # ordr 0.2.0
 
 ## infrastructure and standards
