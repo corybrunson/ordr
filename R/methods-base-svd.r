@@ -43,22 +43,26 @@ recover_conference.svd_ord <- function(x) {
 #' @export
 recover_aug_rows.svd_ord <- function(x) {
   name <- rownames(x[["u"]])
-  if (is.null(name)) {
+  res <- if (is.null(name)) {
     tibble(.rows = nrow(x[["u"]]))
   } else {
     tibble(name = name)
   }
+  res$.element <- "active"
+  res
 }
 
 #' @rdname methods-svd
 #' @export
 recover_aug_cols.svd_ord <- function(x) {
   name <- rownames(x[["v"]])
-  if (is.null(name)) {
+  res <- if (is.null(name)) {
     tibble(.rows = nrow(x[["v"]]))
   } else {
     tibble(name = name)
   }
+  res$.element <- "active"
+  res
 }
 
 #' @rdname methods-svd

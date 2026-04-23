@@ -20,7 +20,7 @@
 #' @include ord-augmentation.r
 #' @inheritParams recoverers
 #' @return Matrices having the same numbers of columns as returned by
-#'   [recover_rows()] and [recover_cols()], or else `NULL`.
+#'   [recover_rows()] and [recover_cols()].
 #' @family generic recoverers
 NULL
 
@@ -30,7 +30,9 @@ recover_supp_rows <- function(x) UseMethod("recover_supp_rows")
 
 #' @rdname supplementation
 #' @export
-recover_supp_rows.default <- function(x) NULL
+recover_supp_rows.default <- function(x) {
+  matrix(nrow = 0L, ncol = ncol(recover_rows(x)))
+}
 
 #' @rdname supplementation
 #' @export
@@ -38,7 +40,9 @@ recover_supp_cols <- function(x) UseMethod("recover_supp_cols")
 
 #' @rdname supplementation
 #' @export
-recover_supp_cols.default <- function(x) NULL
+recover_supp_cols.default <- function(x) {
+  matrix(nrow = 0L, ncol = ncol(recover_cols(x)))
+}
 
 recover_supp_factor <- function(x, .matrix) {
   switch(

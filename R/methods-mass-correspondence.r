@@ -54,22 +54,26 @@ recover_coord.correspondence <- function(x) {
 #' @export
 recover_aug_rows.correspondence <- function(x) {
   name <- rownames(as.matrix(x$rscore))
-  if (is.null(name)) {
+  res <- if (is.null(name)) {
     tibble(.rows = nrow(as.matrix(x$rscore)))
   } else {
     tibble(name = name)
   }
+  res$.element <- "active"
+  res
 }
 
 #' @rdname methods-correspondence
 #' @export
 recover_aug_cols.correspondence <- function(x) {
   name <- rownames(as.matrix(x$cscore))
-  if (is.null(name)) {
+  res <- if (is.null(name)) {
     tibble(.rows = nrow(as.matrix(x$cscore)))
   } else {
     tibble(name = name)
   }
+  res$.element <- "active"
+  res
 }
 
 #' @rdname methods-correspondence

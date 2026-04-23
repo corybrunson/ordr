@@ -124,6 +124,8 @@ get_rows <- function(x, elements = "all") {
     elts <- elts[elts != "active"] == elements
     recover_supp_rows(x)[elts, , drop = FALSE]
   }
+  # ensure artificial coordinate names
+  colnames(u) <- recover_coord(x)
   # ensure correct signs
   if (! is.null(attr(x, "negate"))) {
     n <- diag(get_negation(x))
@@ -160,6 +162,8 @@ get_cols <- function(x, elements = "all") {
     elts <- elts[elts != "active"] == elements
     recover_supp_cols(x)[elts, , drop = FALSE]
   }
+  # ensure artificial coordinate names
+  colnames(v) <- recover_coord(x)
   # ensure correct signs
   if (! is.null(attr(x, "negate"))) {
     n <- diag(get_negation(x))

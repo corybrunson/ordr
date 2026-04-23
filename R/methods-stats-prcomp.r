@@ -52,11 +52,13 @@ recover_conference.prcomp <- function(x) {
 #' @export
 recover_aug_rows.prcomp <- function(x) {
   name <- rownames(x[["x"]])
-  if (is.null(name)) {
+  res <- if (is.null(name)) {
     tibble(.rows = nrow(x[["x"]]))
   } else {
     tibble(name = name)
   }
+  res$.element <- "active"
+  res
 }
 
 #' @rdname methods-prcomp
@@ -74,6 +76,7 @@ recover_aug_cols.prcomp <- function(x) {
   if (inherits(x[["scale"]], "numeric")) {
     res <- dplyr::bind_cols(res, scale = x[["scale"]])
   }
+  res$.element <- "active"
   res
 }
 

@@ -57,11 +57,19 @@ recover_conference.eigen <- function(x) {
 
 #' @rdname methods-eigen
 #' @export
-recover_aug_rows.eigen <- function(x) tibble(.rows = nrow(x[["vectors"]]))
+recover_aug_rows.eigen <- function(x) {
+  res <- tibble(.rows = nrow(x[["vectors"]]))
+  res$.element <- "active"
+  res
+}
 
 #' @rdname methods-eigen
 #' @export
-recover_aug_cols.eigen <- function(x) tibble(.rows = nrow(x[["vectors"]]))
+recover_aug_cols.eigen <- function(x) {
+  res <- tibble(.rows = nrow(x[["vectors"]]))
+  res$.element <- "active"
+  res
+}
 
 #' @rdname methods-eigen
 #' @export
@@ -105,6 +113,7 @@ recover_aug_rows.eigen_ord <- function(x) {
   } else {
     tibble(name = name)
   }
+  res$.element <- "active"
   res
 }
 
@@ -117,6 +126,7 @@ recover_aug_cols.eigen_ord <- function(x) {
   } else {
     tibble(name = name)
   }
+  res$.element <- "active"
   res
 }
 
