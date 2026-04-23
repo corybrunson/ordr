@@ -77,24 +77,18 @@ We begin with two biplots used in CCA, rendered using the row and column data se
 The remaining sections will reproduce these biplots using different sets of tools provided by **ordr**.
 
 ```{r factor-data}
-coef_ph <- as.data.frame(get_rows(gilgais_cca, elements = "active"))
-score_ph <- as.data.frame(get_rows(gilgais_cca, elements = "score"))
-struct_ph <- as.data.frame(get_rows(gilgais_cca, elements = "structure"))
-coef_ec <- as.data.frame(get_cols(gilgais_cca, elements = "active"))
-score_ec <- as.data.frame(get_cols(gilgais_cca, elements = "score"))
-struct_ec <- as.data.frame(get_cols(gilgais_cca, elements = "structure"))
-# coef_ph <-
-#   subset(fortify(gilgais_cca), .matrix == "rows" & .element == "active")
-# score_ph <-
-#   subset(fortify(gilgais_cca), .matrix == "rows" & .element == "score")
-# struct_ph <-
-#   subset(fortify(gilgais_cca), .matrix == "rows" & .element == "structure")
-# coef_ec <-
-#   subset(fortify(gilgais_cca), .matrix == "cols" & .element == "active")
-# score_ec <-
-#   subset(fortify(gilgais_cca), .matrix == "cols" & .element == "score")
-# struct_ec <-
-#   subset(fortify(gilgais_cca), .matrix == "cols" & .element == "structure")
+coef_ph <-
+  subset(fortify(gilgais_cca), .matrix == "rows" & .element == "active")
+score_ph <-
+  subset(fortify(gilgais_cca), .matrix == "rows" & .element == "score")
+struct_ph <-
+  subset(fortify(gilgais_cca), .matrix == "rows" & .element == "structure")
+coef_ec <-
+  subset(fortify(gilgais_cca), .matrix == "cols" & .element == "active")
+score_ec <-
+  subset(fortify(gilgais_cca), .matrix == "cols" & .element == "score")
+struct_ec <-
+  subset(fortify(gilgais_cca), .matrix == "cols" & .element == "structure")
 # extract and confer inertia
 gilgais_inertia <- get_inertia(gilgais_cca)
 confer_var <- function(x) {
