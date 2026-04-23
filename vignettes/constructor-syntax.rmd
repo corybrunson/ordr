@@ -77,14 +77,39 @@ We begin with two biplots used in CCA, rendered using the row and column data se
 The remaining sections will reproduce these biplots using different sets of tools provided by **ordr**.
 
 ```{r factor-data}
-stop("Resolve issue #89 first.")
 coef_ph <- as.data.frame(get_rows(gilgais_cca, elements = "active"))
 score_ph <- as.data.frame(get_rows(gilgais_cca, elements = "score"))
 struct_ph <- as.data.frame(get_rows(gilgais_cca, elements = "structure"))
 coef_ec <- as.data.frame(get_cols(gilgais_cca, elements = "active"))
 score_ec <- as.data.frame(get_cols(gilgais_cca, elements = "score"))
 struct_ec <- as.data.frame(get_cols(gilgais_cca, elements = "structure"))
+# coef_ph <-
+#   subset(fortify(gilgais_cca), .matrix == "rows" & .element == "active")
+# score_ph <-
+#   subset(fortify(gilgais_cca), .matrix == "rows" & .element == "score")
+# struct_ph <-
+#   subset(fortify(gilgais_cca), .matrix == "rows" & .element == "structure")
+# coef_ec <-
+#   subset(fortify(gilgais_cca), .matrix == "cols" & .element == "active")
+# score_ec <-
+#   subset(fortify(gilgais_cca), .matrix == "cols" & .element == "score")
+# struct_ec <-
+#   subset(fortify(gilgais_cca), .matrix == "cols" & .element == "structure")
+# extract and confer inertia
 gilgais_inertia <- get_inertia(gilgais_cca)
+confer_var <- function(x) {
+  x %>%
+    subset(select = CanCor1:CanCor3) %>%
+    sweep(2L, sqrt(gilgais_inertia), "*") %>%
+    as.data.frame() %>%
+    cbind(subset(x, select = -c(CanCor1:CanCor3)))
+}
+coef_ph_inertia <- confer_var(coef_ph)
+score_ph_inertia <- confer_var(score_ph)
+struct_ph_inertia <- confer_var(struct_ph)
+coef_ec_inertia <- confer_var(coef_ec)
+score_ec_inertia <- confer_var(score_ec)
+struct_ec_inertia <- confer_var(struct_ec)
 ```
 
 In the appendix of _Theory and applications of correspondence analysis_ (1984), Michael Greenacre proposed a biplot of canonical scores (carrying the inertia) overlaid upon standardized canonical coefficients.
@@ -92,26 +117,25 @@ In this biplot, the projections of a sample marker onto a variable arrow _from t
 Both matrix factors are handled the same way; no inertia is conferred.
 The alignment of the two point clouds reflects the quality of the CCA.
 
-```{r Greenacre-biplot}
-ggplot() +
+```{r Greenacre-biplot, fig.height=5}
+ggplot(mapping = aes(CanCor1, CanCor2)) +
   coord_equal() +
   theme_classic() +
-  geom_point(data = score_ph, aes(CanCor1, CanCor2),
-             size = 1, alpha = .25, shape = "circle open") +
-  geom_point(data = score_ec, aes(CanCor1, CanCor2),
-             size = 1, alpha = .25, shape = "cross") +
-  stat_ellipse(data = score_ph, aes(CanCor1, CanCor2)) +
-  stat_ellipse(data = score_ec, aes(CanCor1, CanCor2),
-               linetype = "dotted") +
-  geom_vector(data = coef_ph, aes(CanCor1, CanCor2),
-              linewidth = .75) +
-  geom_vector(data = coef_ec, aes(100 * CanCor1, 100 * CanCor2),
-              linewidth = .75, linetype = "dotted") +
-  geom_text(data = coef_ph,
-            aes(CanCor1, CanCor2, label = name),
-            hjust = "outward", vjust = "outward") +
-  geom_text(data = coef_ec, aes(100 * CanCor1, 100 * CanCor2, label = name),
-            hjust = "outward", vjust = "outward") +
+  geom_text(data = score_ph_inertia, aes(label = paste0("pH", name)),
+            size = 2, alpha = 1/3) +
+  geom_text(data = score_ec_inertia, aes(label = paste0("e", name)),
+            size = 2, alpha = 1/3) +
+  # stat_ellipse(data = score_ph_inertia) +
+  # stat_ellipse(data = score_ec_inertia, linetype = "dotted") +
+  geom_axis(data = coef_ph_inertia, aes(center = center, label = name)) +
+  geom_axis(data = coef_ec_inertia, aes(center = center, label = name),
+            linetype = "dotted") +
+  stat_projection(data = score_ph_inertia[353, , drop = FALSE],
+                  referent = coef_ph_inertia[c(1, 3), , drop = FALSE],
+                  color = "darkgrey") +
+  stat_projection(data = score_ec_inertia[353, , drop = FALSE],
+                  referent = coef_ec_inertia[c(1, 3), , drop = FALSE],
+                  color = "darkgrey", linetype = "dotted") +
   scale_x_continuous(sec.axis = ~ . / 100) +
   scale_y_continuous(sec.axis = ~ . / 100)
 ```
@@ -121,27 +145,21 @@ These then represent _intraset correlations_ for the pH measurements and _inters
 The sample correlation between a pH measurement and a conductivity measurement is then approximated by the inner product of the corresponding variable arrows.
 
 ```{r ter-Braak-biplot}
-# confer inertia onto left variable set (pH)
-struct_ec %>%
-  subset(select = CanCor1:CanCor3) %>%
-  sweep(2L, sqrt(gilgais_inertia), "*") %>%
-  as.data.frame() %>%
-  cbind(subset(struct_ec, select = -c(CanCor1:CanCor3))) ->
-  struct_ec_inertia
-ggplot() +
+ggplot(mapping = aes(CanCor1, CanCor2)) +
   coord_equal() +
   theme_classic() +
   # FIXME: The unit circle doesn't appear in the plot.
   geom_unit_circle() +
   scale_x_continuous(limits = c(-1, 1)) +
   scale_y_continuous(limits = c(-1, 1)) +
-  geom_vector(data = struct_ph, aes(CanCor1, CanCor2), arrow = NULL) +
-  geom_vector(data = struct_ec_inertia, aes(CanCor1, CanCor2),
-              linetype = "dotted") +
-  geom_text(data = struct_ph, aes(CanCor1, CanCor2, label = name),
-            hjust = "outward", vjust = "outward") +
-  geom_text(data = struct_ec_inertia, aes(CanCor1, CanCor2, label = name),
-            hjust = "outward", vjust = "outward")
+  geom_vector(data = struct_ph, arrow = NULL) +
+  geom_vector(data = struct_ec_inertia, arrow = NULL, linetype = "dashed") +
+  geom_point(data = struct_ph) +
+  geom_point(data = struct_ec_inertia, shape = "circle open") +
+  geom_label(data = struct_ph, aes(label = name),
+             hjust = "outward", vjust = "outward") +
+  geom_label(data = struct_ec_inertia, aes(label = name),
+             hjust = "outward", vjust = "outward")
 ```
 
 These plots serve different ends and we won't interpret them here. The remaining sections will reproduce these plots using `ggbiplot()` and 4 mutually exclusive syntactic conventions provided by **ordr**.
@@ -151,26 +169,35 @@ These plots serve different ends and we won't interpret them here. The remaining
 
 The first convention was the first to be developed and is perhaps the easiest to use.
 
-```{r Greenacre-biplot-constructors}
-ggbiplot(gilgais_cca, sec.axes = "cols", scale.factor = 100) +
+```{r Greenacre-biplot-constructors, fig.height=5}
+gilgais_cca %>%
+  confer_inertia(c(1, 1)) %>%
+  ggbiplot(sec.axes = "cols", scale.factor = 100) +
   theme_classic() +
-  geom_rows_point(
-    elements = "score",
-    size = 1, alpha = .25, shape = "circle open"
+  geom_rows_text(
+    aes(label = paste0("pH", name)),
+    elements = "score", size = 2, alpha = 1/3
   ) +
-  geom_cols_point(
-    aes(CanCor1 / 100, CanCor2 / 100), elements = "score",
-    size = 1, alpha = .25, shape = "cross"
+  geom_cols_text(
+    aes(CanCor1 / 100, CanCor2 / 100, label = paste0("e", name)),
+    elements = "score", size = 2, alpha = 1/3
   ) +
-  stat_rows_ellipse(elements = "score") +
-  stat_cols_ellipse(
-    aes(CanCor1 / 100, CanCor2 / 100), elements = "score",
-    linetype = "dotted"
+  # stat_rows_ellipse(elements = "score") +
+  # stat_cols_ellipse(
+  #   aes(CanCor1 / 100, CanCor2 / 100), elements = "score",
+  #   linetype = "dotted"
+  # ) +
+  geom_rows_axis(aes(center = center, label = name)) +
+  geom_cols_axis(aes(center = center, label = name), linetype = "dotted") +
+  stat_rows_projection(
+    elements = "score", subset = 353, ref_subset = c(1, 3), 
+    color = "darkgrey"
   ) +
-  geom_rows_vector(linewidth = .75) +
-  geom_cols_vector(linewidth = .75, linetype = "dotted") +
-  geom_rows_text(aes(label = name), hjust = "outward", vjust = "outward") +
-  geom_cols_text(aes(label = name), hjust = "outward", vjust = "outward")
+  stat_cols_projection(
+    aes(CanCor1 / 100, CanCor2 / 100),
+    elements = "score", subset = 353, ref_subset = c(1, 3),
+    color = "darkgrey", linetype = "dotted"
+  )
 ```
 
 The row and column constructors extract the associated data from the `tbl_ord` ordination  object but otherwise behave like standard constructors, except for the additional arguments `elements` and `subset`.
@@ -185,12 +212,14 @@ gilgais_cca %>%
   scale_x_continuous(limits = c(-1, 1)) +
   scale_y_continuous(limits = c(-1, 1)) +
   geom_rows_vector(elements = "structure", arrow = NULL) +
-  geom_cols_vector(elements = "structure", linetype = "dotted") +
-  geom_rows_text(
+  geom_cols_vector(elements = "structure", arrow = NULL, linetype = "dashed") +
+  geom_rows_point(elements = "structure") +
+  geom_cols_point(elements = "structure", shape = "circle open") +
+  geom_rows_label(
     elements = "structure", aes(label = name),
     hjust = "outward", vjust = "outward"
   ) +
-  geom_cols_text(
+  geom_cols_label(
     elements = "structure", aes(label = name),
     hjust = "outward", vjust = "outward"
   )
