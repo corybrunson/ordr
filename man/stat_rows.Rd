@@ -5,6 +5,8 @@
 \alias{stat_cols}
 \alias{rows_data}
 \alias{cols_data}
+\alias{rows_stat}
+\alias{cols_stat}
 \title{Render plot elements for one matrix of an ordination}
 \usage{
 stat_rows(
@@ -34,6 +36,10 @@ stat_cols(
 rows_data(subset = NULL, elements = "active")
 
 cols_data(subset = NULL, elements = "active")
+
+rows_stat(stat = StatIdentity)
+
+cols_stat(stat = StatIdentity)
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}}. If specified and
@@ -109,6 +115,19 @@ but unobserved levels are omitted.}
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:annotation_borders]{annotation_borders()}}.}
+
+\item{stat}{The statistical transformation to use on the data for this layer.
+When using a \verb{geom_*()} function to construct a layer, the \code{stat}
+argument can be used to override the default coupling between geoms and
+stats. The \code{stat} argument accepts the following:
+\itemize{
+\item A \code{Stat} ggproto subclass, for example \code{StatCount}.
+\item A string naming the stat. To give the stat as a string, strip the
+function name of the \code{stat_} prefix. For example, to use \code{stat_count()},
+give the stat as \code{"count"}.
+\item For more information and other ways to specify the stat, see the
+\link[ggplot2:layer_stats]{layer stat} documentation.
+}}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.
@@ -117,6 +136,13 @@ A ggproto \link[ggplot2:layer]{layer}.
 These stats merely tell \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} which factor of an
 ordination to pull data from for a plot layer. They are invoked internally
 by the various \code{\link[=biplot-geoms]{geom_*_*()}} layers.
+
+The helper functions \code{rows_stat()} and \code{cols_stat()} convert statistical
+transformation ggprotos, e.g. \code{StatIdentity}, or their character string
+desingations, e.g. \code{"identity"}, to character string designations for
+corresponding factor-specific ggprotos. Note that these ggprotos may not
+exist, in which case the error would only appear when the plot is
+assembled.
 
 The helper functions \code{rows_data()} and \code{cols_data()} return ordination
 subsetting functions that apply \code{subset} and \code{elements} to the designated

@@ -24,6 +24,7 @@ This vignette illustrates the alternative syntaces these functions enable, which
 ```{r setup}
 library(tidyr)
 library(ordr)
+theme_set(theme_classic())
 ```
 
 
@@ -131,6 +132,34 @@ score_ec_inertia <- confer_var(score_ec)
 struct_ec_inertia <- confer_var(struct_ec)
 ```
 
+### ter Braak CCA biplot
+
+In "Interpreting canonical correlation analysis through biplots of structure correlations and weights" (1990), ter Braak proposed a biplot of the structure coefficients (for both sets of manifest variables) with respect to one set of canonical axes---in our case, say, pH.
+These then represent _intraset correlations_ for the pH measurements and _interset correlations_ for the conductivity measurements; as a result, the biplot fits within a unit sphere.
+The sample correlation between a pH measurement and a conductivity measurement is then approximated as the inner product of the corresponding variable arrows.
+
+```{r ter-Braak-biplot}
+ggplot(mapping = aes(CanCor1, CanCor2)) +
+  coord_equal() +
+  # FIXME: The unit circle doesn't appear in the plot.
+  geom_unit_circle() +
+  scale_x_continuous(limits = c(-1, 1)) +
+  scale_y_continuous(limits = c(-1, 1)) +
+  geom_vector(data = struct_ph, arrow = NULL) +
+  geom_vector(data = struct_ec_inertia, arrow = NULL, linetype = "dashed") +
+  geom_point(data = struct_ph) +
+  geom_point(data = struct_ec_inertia, shape = "circle open") +
+  geom_label(data = struct_ph, aes(label = name),
+             hjust = "outward", vjust = "outward") +
+  geom_label(data = struct_ec_inertia, aes(label = name),
+             hjust = "outward", vjust = "outward")
+```
+
+The biplot indicates that pH and conductivity are highly correlated closer to the surface but highly anticorrelated at lower depths---the latter with more confidence than the former, as the vectors lie more nearly within the plane of the first two canonical axes.
+There is also a general positive correlation among conductivity measurements at different depths, in contrast to the largely uncorrelated depth-specific pH measurements.
+
+### Greenacre CCA biplot
+
 In the appendix of _Theory and applications of correspondence analysis_ (1984), Michael Greenacre proposed a biplot of canonical scores (carrying the inertia) overlaid upon standardized canonical coefficients.
 The axes are recalibrated to undo the centering operation, so that the projection of a sample marker onto a variable arrow _from the opposing matrix factor_ approximates the measurement of the variable at the corresponding sample.
 **TODO: This needs to be shown algebraically.**
@@ -140,7 +169,6 @@ The alignment of the two point clouds reflects the quality of the CCA.
 ```{r Greenacre-biplot, fig.height=4}
 ggplot(mapping = aes(CanCor1, CanCor2)) +
   coord_equal() +
-  theme_classic() +
   geom_text(data = score_ph_inertia, aes(label = paste0("pH", name)),
             size = 2, alpha = 1/3) +
   geom_text(data = score_ec_inertia, aes(label = paste0("e", name)),
@@ -162,31 +190,6 @@ ggplot(mapping = aes(CanCor1, CanCor2)) +
 Projections are shown from sample `r i` onto the axes for the extremal depths.
 The predictions are not far from the mark, though we must exp-transform the `el` values to get their original units.
 
-In "Interpreting canonical correlation analysis through biplots of structure correlations and weights" (1990), ter Braak proposed a biplot of the structure coefficients (for both sets of manifest variables) with respect to one set of canonical axes---in our case, say, pH.
-These then represent _intraset correlations_ for the pH measurements and _interset correlations_ for the conductivity measurements; as a result, the biplot fits within a unit sphere.
-The sample correlation between a pH measurement and a conductivity measurement is then approximated by the inner product of the corresponding variable arrows.
-
-```{r ter-Braak-biplot}
-ggplot(mapping = aes(CanCor1, CanCor2)) +
-  coord_equal() +
-  theme_classic() +
-  # FIXME: The unit circle doesn't appear in the plot.
-  geom_unit_circle() +
-  scale_x_continuous(limits = c(-1, 1)) +
-  scale_y_continuous(limits = c(-1, 1)) +
-  geom_vector(data = struct_ph, arrow = NULL) +
-  geom_vector(data = struct_ec_inertia, arrow = NULL, linetype = "dashed") +
-  geom_point(data = struct_ph) +
-  geom_point(data = struct_ec_inertia, shape = "circle open") +
-  geom_label(data = struct_ph, aes(label = name),
-             hjust = "outward", vjust = "outward") +
-  geom_label(data = struct_ec_inertia, aes(label = name),
-             hjust = "outward", vjust = "outward")
-```
-
-The biplot indicates that pH and conductivity are highly correlated closer to the surface but highly anticorrelated at lower depths---the latter with more confidence than the former, as the vectors lie more nearly within the plane of the first two canonical axes.
-There is also a general positive correlation in conductivity at different depths, in contrast to the largely uncorrelated depth-specific pH measurements.
-
 These plots serve different ends and we won't interpret them further here. The remaining sections will reproduce these plots using `ggbiplot()` and 4 mutually exclusive syntactic conventions provided by **ordr**.
 
 
@@ -194,40 +197,10 @@ These plots serve different ends and we won't interpret them further here. The r
 
 The first convention was the first to be developed and is perhaps the easiest to use.
 
-```{r Greenacre-biplot-constructors, fig.height=4}
-gilgais_cca %>%
-  confer_inertia(c(1, 1)) %>%
-  ggbiplot(sec.axes = "cols", scale.factor = 100) +
-  theme_classic() +
-  geom_rows_text(
-    aes(label = paste0("pH", name)),
-    elements = "score", size = 2, alpha = 1/3
-  ) +
-  geom_cols_text(
-    aes(CanCor1 / 100, CanCor2 / 100, label = paste0("e", name)),
-    elements = "score", size = 2, alpha = 1/3
-  ) +
-  geom_rows_axis(aes(center = center, label = name)) +
-  geom_cols_axis(aes(center = center, label = name), linetype = "dotted") +
-  stat_rows_projection(
-    elements = "score", subset = i, ref_subset = c(1, 3), 
-    color = "darkgrey"
-  ) +
-  stat_cols_projection(
-    aes(CanCor1 / 100, CanCor2 / 100),
-    elements = "score", subset = i, ref_subset = c(1, 3),
-    color = "darkgrey", linetype = "dotted"
-  )
-```
-
-The row and column constructors extract the associated data from the `tbl_ord` ordination  object but otherwise behave like standard constructors, except for the additional arguments `elements` and `subset`.
-Note that secondary axes automatically apply to all elements from the appropriate matrix factor, even when this behavior is not desired, as with the scores in this plot.
-
 ```{r ter-Braak-biplot-constructors}
 gilgais_cca %>%
   confer_inertia(c(0, 1)) %>%
   ggbiplot() +
-  theme_classic() +
   geom_unit_circle() +
   scale_x_continuous(limits = c(-1, 1)) +
   scale_y_continuous(limits = c(-1, 1)) +
@@ -245,5 +218,179 @@ gilgais_cca %>%
   )
 ```
 
+The row and column constructors extract the associated data from the `tbl_ord` ordination object but otherwise behave like standard constructors, except for the additional arguments `elements` and `subset`.
+Note that the inertia conferred onto the rows and columns applies to all row and column elements, respectively, so does not have to be bookkept as by the passage to `data` arguments above.
+
+```{r Greenacre-biplot-constructors, fig.height=4}
+gilgais_cca %>%
+  confer_inertia(c(1, 1)) %>%
+  ggbiplot(sec.axes = "cols", scale.factor = 100) +
+  geom_rows_text(
+    aes(label = paste0("pH", name)),
+    elements = "score", size = 2, alpha = 1/3
+  ) +
+  geom_cols_text(
+    aes(CanCor1 / 100, CanCor2 / 100, label = paste0("e", name)),
+    elements = "score", size = 2, alpha = 1/3
+  ) +
+  geom_rows_axis(aes(center = center, label = name)) +
+  geom_cols_axis(aes(center = center, label = name), linetype = "dotted") +
+  stat_rows_projection(
+    elements = "score", subset = i, ref_subset = c(1, 3),
+    color = "darkgrey"
+  ) +
+  stat_cols_projection(
+    aes(CanCor1 / 100, CanCor2 / 100),
+    elements = "score", subset = i, ref_subset = c(1, 3),
+    color = "darkgrey", linetype = "dotted"
+  )
+```
+
+Note that secondary axes automatically apply to all elements from the appropriate matrix factor, even when this behavior is not desired, as with the scores in this plot.
+Above, in contrast, the constructors in need of specific positional aesthetics were those we wished to respect the secondary axes.
+
 This convention also relies on the greatest amount of package infrastructure.
 Not only are new constructors and ggprotos, for example `geom_rows_vector()` and `GeomRowsVector`, written and exported to the user; the source code for them is generated by a pre-build script that can be sensitive to differences in style between extensions and even between versions of **ggplot2**.
+Because not all conceivable constructors are pre-built, users are limited in what plot elements they can declare this way.
+
+## stat specializers
+
+Since the beginning, **ordr**'s custom constructors have been supported by the `rows_stat()` and `cols_stat()` helpers, which convert conventional stat ggprotos or their names to the names for their factor-specific counterparts.
+For example, `rows_stat(StatEllipse)` and `rows_stat("ellipse")` both return `"rows_ellipse"`.
+While these helpers were originally unexported and required input, they are now exported and default to their corresponding identity stats, `GeomRowsIdentity` and `GeomColsIdentity`.
+
+```{r ter-Braak-biplot-specializers}
+gilgais_cca %>%
+  confer_inertia(c(0, 1)) %>%
+  ggbiplot() +
+  geom_unit_circle() +
+  scale_x_continuous(limits = c(-1, 1)) +
+  scale_y_continuous(limits = c(-1, 1)) +
+  geom_vector(stat = rows_stat(), elements = "structure", arrow = NULL) +
+  geom_vector(stat = cols_stat(), elements = "structure",
+              arrow = NULL, linetype = "dashed") +
+  geom_point(stat = rows_stat(), elements = "structure") +
+  geom_point(stat = cols_stat(), elements = "structure", shape = "circle open") +
+  geom_label(
+    stat = rows_stat(), elements = "structure", aes(label = name),
+    hjust = "outward", vjust = "outward"
+  ) +
+  geom_label(
+    stat = cols_stat(), elements = "structure", aes(label = name),
+    hjust = "outward", vjust = "outward"
+  )
+```
+
+The syntax is cumbersome but natural when the underlying stat is the identity.
+While less efficient than using the custom constructors, the lines above may be easier to understand for someone familiar with **ggplot2** but just learning **ordr**.
+
+```{r Greenacre-biplot-specializers, fig.height=4}
+gilgais_cca %>%
+  confer_inertia(c(1, 1)) %>%
+  ggbiplot(sec.axes = "cols", scale.factor = 100) +
+  geom_text(
+    aes(label = paste0("pH", name)),
+    stat = rows_stat(), elements = "score", size = 2, alpha = 1/3
+  ) +
+  geom_text(
+    aes(CanCor1 / 100, CanCor2 / 100, label = paste0("e", name)),
+    stat = cols_stat(), elements = "score", size = 2, alpha = 1/3
+  ) +
+  geom_axis(stat = rows_stat(), aes(center = center, label = name)) +
+  geom_axis(stat = cols_stat(), aes(center = center, label = name),
+            linetype = "dotted") +
+  geom_segment(
+    stat = rows_stat("projection"),
+    elements = "score", subset = i, ref_subset = c(1, 3),
+    color = "darkgrey"
+  ) +
+  geom_segment(
+    aes(CanCor1 / 100, CanCor2 / 100),
+    stat = cols_stat("projection"),
+    elements = "score", subset = i, ref_subset = c(1, 3),
+    color = "darkgrey", linetype = "dotted"
+  )
+```
+
+A more significant deficiency of these helpers is that they only apply to stats, which means that each layer must be declared using a geom constructor (or else a `layer()` call).
+Even i had to check the source code for `stat_projection()` to remind myself that it couples by default with the segment geom, in order to declare the projection layers above.
+
+While these helpers allow for a syntax that may be more intuitive for new users, they do not provide any additional functionality, and may inhibit the use of valuable layers by users not habituated into developer habits like inspecting source code.
+
+## fortified data subsetters
+
+The use of `fortify()` by `ggplot()` is often perfunctory.
+It converts certain model objects to data frames but leaves data frames as they are, so has no effect on the vast majority of `ggplot()` calls.
+In contrast, `ggbiplot()` is designed to rely almost always on the `tbl_ord` method of `fortify()`.
+This method row-binds the matrix factors of a wrapped ordination model to obtain a data frame, the source factor (`"rows"` or `"cols"`) marked by a new `.matrix` column:
+
+```{r fortify}
+gilgais_df <- fortify(gilgais_cca)
+head(gilgais_df)
+tail(gilgais_df)
+```
+
+The custom constructors above use this `.matrix` column to subset the fortified data before applying statistical transformation and geometric construction.
+An alternative option is to do this manually via the standard `data` argument:
+Instead of a data frame, `data` can also receive a function, which is then applied to the data frame inherited by the layer.
+The subsetting helpers `rows_data()` and `cols_data()` are little function factories; they each return a function that subsets an incoming data frame to its `"rows"` or `"cols"` rows.
+We pass these factory calls rather than functions so that we can include `subset` and `elements` arguments to be applied to `data`.
+
+```{r ter-Braak-biplot-subsetters}
+gilgais_cca %>%
+  confer_inertia(c(0, 1)) %>%
+  ggbiplot() +
+  geom_unit_circle() +
+  scale_x_continuous(limits = c(-1, 1)) +
+  scale_y_continuous(limits = c(-1, 1)) +
+  geom_vector(data = rows_data(elements = "structure"), arrow = NULL) +
+  geom_vector(data = cols_data(elements = "structure"),
+              arrow = NULL, linetype = "dashed") +
+  geom_point(data = rows_data(elements = "structure")) +
+  geom_point(data = cols_data(elements = "structure"), shape = "circle open") +
+  geom_label(
+    data = rows_data(elements = "structure"), aes(label = name),
+    hjust = "outward", vjust = "outward"
+  ) +
+  geom_label(
+    data = cols_data(elements = "structure"), aes(label = name),
+    hjust = "outward", vjust = "outward"
+  )
+```
+
+This syntax doesn't meaningfully shorten lines of code.
+It also demands that the `data` argument be named in the call, except on rare occasions that aesthetic mappings are passed first.
+
+```{r Greenacre-biplot-subsetters, fig.height=4}
+gilgais_cca %>%
+  confer_inertia(c(1, 1)) %>%
+  ggbiplot(sec.axes = "cols", scale.factor = 100) +
+  geom_text(
+    aes(label = paste0("pH", name)),
+    data = rows_data(elements = "score"), size = 2, alpha = 1/3
+  ) +
+  geom_text(
+    aes(CanCor1 / 100, CanCor2 / 100, label = paste0("e", name)),
+    data = cols_data(elements = "score"), size = 2, alpha = 1/3
+  ) +
+  geom_axis(data = rows_data(), aes(center = center, label = name)) +
+  geom_axis(data = cols_data(), aes(center = center, label = name),
+            linetype = "dotted") +
+  stat_projection(
+    data = rows_data(elements = "score", subset = i),
+    referent = cols_data(subset = c(1, 3)),
+    color = "darkgrey"
+  ) +
+  stat_projection(
+    aes(CanCor1 / 100, CanCor2 / 100),
+    data = cols_data(elements = "score", subset = i),
+    referent = rows_data(subset = c(1, 3)),
+    color = "darkgrey", linetype = "dotted"
+  )
+```
+
+This option also introduces some risky flexibility:
+Whereas `stat_rows_projection()` automatically takes the opposing `"cols"` matrix factor as the referent data (and vice-versa), here the user must specify `referent = cols_data()` in order to obtain a correct biplot.
+
+Despite their problems, these subsetters allow users to add _any_ sufficiently well-behaved statistical transformation ggproto to a biplot layer.
+This opens enormous potential to **ordr** biplots that could not practically be implemented or maintained through custom constructors.

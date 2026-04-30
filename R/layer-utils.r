@@ -51,8 +51,6 @@ matrix_stat <- function(.matrix, stat) {
   if (stat == "identity") return(.matrix)
   stringr::str_c(.matrix, stat, sep = "_")
 }
-rows_stat <- function(stat) matrix_stat("rows", stat)
-cols_stat <- function(stat) matrix_stat("cols", stat)
 
 # get ordination coordinate mapping from a data frame in a stat layer:
 # `ord_aes()` if specified, otherwise 'x' and 'y'

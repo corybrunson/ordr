@@ -58,44 +58,6 @@ ordinate(iris, princomp, cols = 1:4, cor = TRUE) |>
   ) +
   geom_rows_bagplot(aes(color = Species, fill = Species), elements = "score")
 
-# experimental `stat_*()` with `data = (rows|cols)_data()`
-
-# trivial stat
-ggbiplot(iris_pca) +
-  stat_identity(geom = GeomVector, data = cols_data(), aes(label = name)) +
-  stat_identity(
-    geom = "point", data = rows_data(), aes(color = Species),
-    alpha = .5
-  )
-# non-referential stat
-ggbiplot(iris_pca, axis.type = "predictive") +
-  stat_identity(
-    geom = GeomAxis, data = cols_data(),
-    aes(label = name, center = center, scale = scale)
-  ) +
-  stat_spantree(data = rows_data(), aes(color = Species))
-# referential stat
-# NOTE: Requires development version of {gggda} @932e5f8.
-ggbiplot(iris_pca, axis.type = "predictive") +
-  stat_rule(
-    data = cols_data(),
-    referent = rows_data(),
-    aes(label = name, center = center, scale = scale)
-  ) +
-  stat_bagplot(data = rows_data(), aes(color = Species, fill = Species))
-# subsets & elements
-ordinate(iris, princomp, cols = 1:4, cor = TRUE) |> 
-  ggbiplot(axis.type = "predictive") +
-  stat_rule(
-    data = cols_data(subset = 1:2),
-    referent = rows_data(elements = "score"),
-    aes(label = name, center = center, scale = scale)
-  ) +
-  stat_bagplot(
-    data = rows_data(elements = "score"),
-    aes(color = Species, fill = Species)
-  )
-
 # experimental `geom_*()` with `(rows|cols)_stat()`
 # TODO: Set default `matrix_stat(stat = StatIdentity)`.
 
@@ -135,6 +97,44 @@ ordinate(iris, princomp, cols = 1:4, cor = TRUE) |>
     stat = rows_stat("bagplot"),
     aes(color = Species, fill = Species),
     elements = "score"
+  )
+
+# experimental `stat_*()` with `data = (rows|cols)_data()`
+
+# trivial stat
+ggbiplot(iris_pca) +
+  stat_identity(geom = GeomVector, data = cols_data(), aes(label = name)) +
+  stat_identity(
+    geom = "point", data = rows_data(), aes(color = Species),
+    alpha = .5
+  )
+# non-referential stat
+ggbiplot(iris_pca, axis.type = "predictive") +
+  stat_identity(
+    geom = GeomAxis, data = cols_data(),
+    aes(label = name, center = center, scale = scale)
+  ) +
+  stat_spantree(data = rows_data(), aes(color = Species))
+# referential stat
+# NOTE: Requires development version of {gggda} @932e5f8.
+ggbiplot(iris_pca, axis.type = "predictive") +
+  stat_rule(
+    data = cols_data(),
+    referent = rows_data(),
+    aes(label = name, center = center, scale = scale)
+  ) +
+  stat_bagplot(data = rows_data(), aes(color = Species, fill = Species))
+# subsets & elements
+ordinate(iris, princomp, cols = 1:4, cor = TRUE) |> 
+  ggbiplot(axis.type = "predictive") +
+  stat_rule(
+    data = cols_data(subset = 1:2),
+    referent = rows_data(elements = "score"),
+    aes(label = name, center = center, scale = scale)
+  ) +
+  stat_bagplot(
+    data = rows_data(elements = "score"),
+    aes(color = Species, fill = Species)
   )
 
 # current `layer()` with `(rows|cols)_stat()`

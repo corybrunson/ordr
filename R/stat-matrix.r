@@ -4,6 +4,13 @@
 #'   ordination to pull data from for a plot layer. They are invoked internally
 #'   by the various [`geom_*_*()`][biplot-geoms] layers.
 #'
+#'   The helper functions `rows_stat()` and `cols_stat()` convert statistical
+#'   transformation ggprotos, e.g. `StatIdentity`, or their character string
+#'   desingations, e.g. `"identity"`, to character string designations for
+#'   corresponding factor-specific ggprotos. Note that these ggprotos may not
+#'   exist, in which case the error would only appear when the plot is
+#'   assembled.
+#'
 #'   The helper functions `rows_data()` and `cols_data()` return ordination
 #'   subsetting functions that apply `subset` and `elements` to the designated
 #'   matrix factor. They are designed to be used in standard `stat_*()`
@@ -126,3 +133,11 @@ cols_data <- function(subset = NULL, elements = "active") {
     res
   }
 }
+
+#' @rdname stat_rows
+#' @export
+rows_stat <- function(stat = StatIdentity) matrix_stat("rows", stat = stat)
+
+#' @rdname stat_rows
+#' @export
+cols_stat <- function(stat = StatIdentity) matrix_stat("cols", stat = stat)
