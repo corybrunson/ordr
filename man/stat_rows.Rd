@@ -3,10 +3,12 @@
 \name{stat_rows}
 \alias{stat_rows}
 \alias{stat_cols}
-\alias{rows_data}
-\alias{cols_data}
 \alias{rows_stat}
 \alias{cols_stat}
+\alias{make_rows_stat}
+\alias{make_cols_stat}
+\alias{rows_data}
+\alias{cols_data}
 \title{Render plot elements for one matrix of an ordination}
 \usage{
 stat_rows(
@@ -33,13 +35,17 @@ stat_cols(
   inherit.aes = TRUE
 )
 
-rows_data(subset = NULL, elements = "active")
-
-cols_data(subset = NULL, elements = "active")
-
 rows_stat(stat = StatIdentity)
 
 cols_stat(stat = StatIdentity)
+
+make_rows_stat(x = "identity")
+
+make_cols_stat(x = "identity")
+
+rows_data(subset = NULL, elements = "active")
+
+cols_data(subset = NULL, elements = "active")
 }
 \arguments{
 \item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}}. If specified and
@@ -143,6 +149,11 @@ desingations, e.g. \code{"identity"}, to character string designations for
 corresponding factor-specific ggprotos. Note that these ggprotos may not
 exist, in which case the error would only appear when the plot is
 assembled.
+
+The more ambitious functions \code{make_rows_stat()} and \code{make_cols_stat()} are
+ggproto constructors: Given a matrix factor and an existing stat (or its
+name), they will retrieve the corresponding ggproto if it exists or
+construct it in a standardized way if it doesn't.
 
 The helper functions \code{rows_data()} and \code{cols_data()} return ordination
 subsetting functions that apply \code{subset} and \code{elements} to the designated

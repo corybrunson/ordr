@@ -288,6 +288,57 @@ Even i had to check the source code for `stat_projection()`, to remind myself th
 These helpers could also be used to declare additional plot layers using `layer()` directly. This is, i think, an underappreciated option, but one that does not require a separate demonstration here.
 While these helpers allow for a syntax that may be more intuitive for new users, they do not provide any additional functionality, and may inhibit the use of valuable layers by users not habituated into developer habits like inspecting source code (or, i guess, reading the manual).
 
+## ggproto generators
+
+The ggproto constructors `make_rows_stat()` and `make_cols_stat()` go a significant step further:
+In case no row- or column-specific ggproto is found, they can be used to create one.
+The constructors follow a standard sequence of steps to incorporate ordination aesthetics and, if necessary, referential parameters into a new child ggproto, which also filters the input data by `.matrix`.
+They can be used in the interactive environment à la `StatRowsConnect <- make_rows_stat(StatConnect)`, but here we use them to generate the necessary ggprotos "on the fly" rather than rely on their having been written and exported in **ordr**.
+
+```{r ter-Braak-biplot-generators}
+gilgais_cca %>%
+  confer_inertia(c(0, 1)) %>%
+  ggbiplot() +
+  geom_unit_circle() +
+  scale_x_continuous(limits = c(-1, 1)) +
+  scale_y_continuous(limits = c(-1, 1)) +
+  geom_vector(stat = make_rows_stat(), elements = "structure",
+              arrow = arrow(length = unit(.03, "native"), type = "closed")) +
+  geom_vector(stat = make_cols_stat(), elements = "structure",
+              arrow = arrow(length = unit(.03, "native")), linetype = "dashed") +
+  geom_text(
+    stat = make_rows_stat(), elements = "structure", aes(label = name),
+    hjust = "outward", vjust = "outward"
+  ) +
+  geom_text(
+    stat = make_cols_stat(), elements = "structure", aes(label = name),
+    hjust = "outward", vjust = "outward"
+  )
+```
+
+When not needed, these constructors should be avoided; they take up more space than the specializers while doing unnecessary extra work.
+
+```{r Greenacre-biplot-generators, fig.height=4}
+gilgais_cca %>%
+  confer_inertia(c(1, 1)) %>%
+  ggbiplot(sec.axes = "cols", scale.factor = 100) +
+  geom_text(
+    aes(label = name),
+    stat = make_rows_stat(), elements = "score", size = 2, alpha = 1/3
+  ) +
+  geom_axis(stat = make_cols_stat(), aes(center = center, label = name)) +
+  geom_segment(
+    stat = make_rows_stat("projection"),
+    elements = "score", subset = i, ref_subset = c(1, 3),
+    linetype = "dotted"
+  )
+```
+
+While not necessary, the constructor demonstrates its compatibiilty with reference layers like that of projection: The `$setup_params` method is redefined to accommodate reference parameters.
+
+In principle, any statistical transformation ggproto should be adaptable in this way, provided it includes numeric `x` and `y` coordinates as output.
+By also enabling users to assign ggproto source code to suitable names like `StatRowsConnect`, these constructors may provide value even beyond convenient biplot layering.
+
 ## fortified data subsetters
 
 The use of `fortify()` by `ggplot()` is often perfunctory.
@@ -353,3 +404,4 @@ Whereas `stat_rows_projection()` automatically takes the opposing `"cols"` matri
 
 Despite their problems, these subsetters allow users to add _any_ sufficiently well-behaved statistical transformation ggproto to a biplot layer.
 This opens enormous potential to **ordr** biplots that could not practically be implemented or maintained through custom constructors.
+The trade-off is that the user must assume responsibility for some biplot-specific behavior.

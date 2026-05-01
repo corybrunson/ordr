@@ -11,6 +11,11 @@
 #'   exist, in which case the error would only appear when the plot is
 #'   assembled.
 #'
+#'   The more ambitious functions `make_rows_stat()` and `make_cols_stat()` are
+#'   ggproto constructors: Given a matrix factor and an existing stat (or its
+#'   name), they will retrieve the corresponding ggproto if it exists or
+#'   construct it in a standardized way if it doesn't.
+#'
 #'   The helper functions `rows_data()` and `cols_data()` return ordination
 #'   subsetting functions that apply `subset` and `elements` to the designated
 #'   matrix factor. They are designed to be used in standard `stat_*()`
@@ -116,6 +121,22 @@ StatCols <- ggproto(
 
 #' @rdname stat_rows
 #' @export
+rows_stat <- function(stat = StatIdentity) matrix_stat("rows", stat = stat)
+
+#' @rdname stat_rows
+#' @export
+cols_stat <- function(stat = StatIdentity) matrix_stat("cols", stat = stat)
+
+#' @rdname stat_rows
+#' @export
+make_rows_stat <- function(x = "identity") make_factor_stat_ggproto(x, "rows")
+
+#' @rdname stat_rows
+#' @export
+make_cols_stat <- function(x = "identity") make_factor_stat_ggproto(x, "cols")
+
+#' @rdname stat_rows
+#' @export
 rows_data <- function(subset = NULL, elements = "active") {
   function(data) {
     res <- setup_rows_data(data, list(subset = subset, elements = elements))
@@ -133,11 +154,3 @@ cols_data <- function(subset = NULL, elements = "active") {
     res
   }
 }
-
-#' @rdname stat_rows
-#' @export
-rows_stat <- function(stat = StatIdentity) matrix_stat("rows", stat = stat)
-
-#' @rdname stat_rows
-#' @export
-cols_stat <- function(stat = StatIdentity) matrix_stat("cols", stat = stat)

@@ -183,32 +183,10 @@ ordinate(iris, princomp, cols = 1:4, cor = TRUE) |>
     params = list(elements = "score")
   )
 
-# TODO: Decide whether to implement below; maybe only above for next release.
-
 # ggproto adapters
 
-make_elts_stat_ggproto <- function(x, .matrix) {
-  .matrix <- match_factor(.matrix)
-  .Matrix <- switch(.matrix, rows = "Rows", cols = "Cols")
-  if (is.character(x)) x <- ggplot2:::validate_subclass(x, "Stat")
-  stat_constructor <- ggplot2:::snake_class(x)
-  setup_data_fn <-
-    switch(.matrix, rows = setup_rows_xy_data, cols = setup_cols_xy_data)
-  StatEltsTransform <- ggproto(
-    gsub("^Stat", paste0("Stat", .Matrix), class(x)[[1L]]), x,
-    setup_data = setup_data_fn,
-    compute_group = ord_formals(x, "compute_group")
-  )
-  if (inherits(get(stat_constructor)(), "LayerRef")) {
-    StatEltsTransform$extra_params <-
-      c(x$extra_params, "ref_subset", "ref_elements")
-    StatEltsTransform$setup_params <- setup_referent_params
-  }
-  StatEltsTransform
-}
-
 # illustration of basic `make_constructor()`
-make_constructor(make_elts_stat_ggproto(StatChull, "rows"), geom = "polygon")
+make_constructor(make_factor_stat_ggproto(StatChull, "rows"), geom = "polygon")
 
 # needs to accept any stat & convert it within `layer()`
 make_rows_constructor <- function(x, ...) {
@@ -250,7 +228,7 @@ layer_rows <- function(
     layer_class = ggplot2:::Layer
 ) {
   # create something like `StatRowsTransform`
-  StatProto <- make_elts_stat_ggproto(stat, "rows")
+  StatProto <- make_factor_stat_ggproto(stat, "rows")
   # determine whether to use `LayerRef`
   is_ref_layer <- "ref_subset" %in% StatProto$extra_params
   # create layer
@@ -288,7 +266,7 @@ layer_cols <- function(
     layer_class = ggplot2:::Layer
 ) {
   # create something like `StatColsTransform`
-  StatProto <- make_elts_stat_ggproto(stat, "cols")
+  StatProto <- make_factor_stat_ggproto(stat, "cols")
   # determine whether to use `LayerRef`
   is_ref_layer <- "ref_subset" %in% StatProto$extra_params
   # create layer
@@ -324,7 +302,7 @@ ggbiplot(iris_pca, axis.type = "predictive") +
   )
 
 # Gina's idea
-make_elts_stat_ggproto(StatCenter, "rows") |> 
+make_factor_stat_ggproto(StatCenter, "rows") |> 
   make_constructor(geom = "point") ->
   stat_rows_center2
 StatCenter |> 

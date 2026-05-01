@@ -13,6 +13,7 @@
 
 .ord_elements <- c("active", "score", "structure", "pinv_weight")
 
+validate_subclass <- getFromNamespace("validate_subclass", "ggplot2")
 snake_class <- getFromNamespace("snake_class", "ggplot2")
 
 match_factor <- function(x) {
@@ -174,4 +175,28 @@ ord_formals <- function(`_class`, method) {
   fun <- environment(`_class`[[method]])[[method]]
   formals(fun) <- c(formals(fun), list(subset = NULL, elements = "active"))
   fun
+}
+
+make_factor_stat_ggproto <- function(x, .matrix) {
+  .matrix <- match_factor(.matrix)
+  x <- validate_subclass(x, "Stat")
+  name <- snake_class(x)
+  setup_data_fn <-
+    switch(.matrix, rows = setup_rows_xy_data, cols = setup_cols_xy_data)
+  StatFactorTransform <- ggproto(
+    gsub(
+      "^Stat",
+      paste0("Stat", switch(.matrix, rows = "Rows", cols = "Cols")),
+      class(x)[[1L]]
+    ),
+    x,
+    setup_data = setup_data_fn,
+    compute_group = ord_formals(x, "compute_group")
+  )
+  if (inherits(get(name)(), "LayerRef")) {
+    StatFactorTransform$extra_params <-
+      c(x$extra_params, "ref_subset", "ref_elements")
+    StatFactorTransform$setup_params <- setup_referent_params
+  }
+  StatFactorTransform
 }
