@@ -169,20 +169,13 @@ The alignment of the two point clouds reflects the quality of the CCA.
 ```{r Greenacre-biplot, fig.height=4}
 ggplot(mapping = aes(CanCor1, CanCor2)) +
   coord_equal() +
-  geom_text(data = score_ph_inertia, aes(label = paste0("pH", name)),
+  geom_text(data = score_ph_inertia, aes(label = name),
             size = 2, alpha = 1/3) +
-  geom_text(data = score_ec_inertia, aes(label = paste0("e", name)),
-            size = 2, alpha = 1/3) +
-  geom_axis(data = coef_ph_inertia, aes(center = center, label = name)) +
   geom_axis(data = coef_ec_inertia,
-            aes(CanCor1 * 100, CanCor2 * 100, center = center, label = name),
-            linetype = "dotted") +
+            aes(CanCor1 * 100, CanCor2 * 100, center = center, label = name)) +
   stat_projection(data = score_ph_inertia[i, , drop = FALSE],
                   referent = coef_ec_inertia[c(1, 3), , drop = FALSE],
-                  color = "darkgrey") +
-  stat_projection(data = score_ec_inertia[i, , drop = FALSE],
-                  referent = coef_ph_inertia[c(1, 3), , drop = FALSE],
-                  color = "darkgrey", linetype = "dotted") +
+                  linetype = "dotted") +
   scale_x_continuous(sec.axis = ~ . / 100) +
   scale_y_continuous(sec.axis = ~ . / 100)
 ```
@@ -225,24 +218,11 @@ Note that the inertia conferred onto the rows and columns applies to all row and
 gilgais_cca %>%
   confer_inertia(c(1, 1)) %>%
   ggbiplot(sec.axes = "cols", scale.factor = 100) +
-  geom_rows_text(
-    aes(label = paste0("pH", name)),
-    elements = "score", size = 2, alpha = 1/3
-  ) +
-  geom_cols_text(
-    aes(CanCor1 / 100, CanCor2 / 100, label = paste0("e", name)),
-    elements = "score", size = 2, alpha = 1/3
-  ) +
-  geom_rows_axis(aes(center = center, label = name)) +
-  geom_cols_axis(aes(center = center, label = name), linetype = "dotted") +
+  geom_rows_text(aes(label = name), elements = "score", size = 2, alpha = 1/3) +
+  geom_cols_axis(aes(center = center, label = name)) +
   stat_rows_projection(
     elements = "score", subset = i, ref_subset = c(1, 3),
-    color = "darkgrey"
-  ) +
-  stat_cols_projection(
-    aes(CanCor1 / 100, CanCor2 / 100),
-    elements = "score", subset = i, ref_subset = c(1, 3),
-    color = "darkgrey", linetype = "dotted"
+    linetype = "dotted"
   )
 ```
 
@@ -289,33 +269,24 @@ gilgais_cca %>%
   confer_inertia(c(1, 1)) %>%
   ggbiplot(sec.axes = "cols", scale.factor = 100) +
   geom_text(
-    aes(label = paste0("pH", name)),
+    aes(label = name),
     stat = rows_stat(), elements = "score", size = 2, alpha = 1/3
   ) +
-  geom_text(
-    aes(CanCor1 / 100, CanCor2 / 100, label = paste0("e", name)),
-    stat = cols_stat(), elements = "score", size = 2, alpha = 1/3
-  ) +
-  geom_axis(stat = rows_stat(), aes(center = center, label = name)) +
-  geom_axis(stat = cols_stat(), aes(center = center, label = name),
-            linetype = "dotted") +
+  geom_axis(stat = cols_stat(), aes(center = center, label = name)) +
   geom_segment(
     stat = rows_stat("projection"),
     elements = "score", subset = i, ref_subset = c(1, 3),
-    color = "darkgrey"
-  ) +
-  geom_segment(
-    aes(CanCor1 / 100, CanCor2 / 100),
-    stat = cols_stat("projection"),
-    elements = "score", subset = i, ref_subset = c(1, 3),
-    color = "darkgrey", linetype = "dotted"
+    linetype = "dotted"
   )
 ```
 
 A more significant deficiency of these helpers is that they only apply to stats, which means that each layer must be declared using a geom constructor (or else a `layer()` call).
-Even i had to check the source code for `stat_projection()` to remind myself that it couples by default with the segment geom, in order to declare the projection layers above.
+Even i had to check the source code for `stat_projection()`, to remind myself that it couples by default with the segment geom, in order to declare the projection layers above.[^convenience-constructors]
 
-While these helpers allow for a syntax that may be more intuitive for new users, they do not provide any additional functionality, and may inhibit the use of valuable layers by users not habituated into developer habits like inspecting source code.
+[^convenience-constructors]: Many "in-grammar" **ggplot2** extensions provide convenience constructors like `geom_projection()`, modified from existing constructors like `geom_segment()` only to default to a different stat. These can be especially helpful to the likely majority of **ggplot2** users who don't fully understand the underlying grammar. However, they also implicitly conflate stats and geoms (as equivalent to "layers" rather than as components of them) and foreclose the use of novel stat--geom pairings. (It's also remarkably rare, in my experience, to see convenience `stat_*()` constructors for new geoms.) For these reasons, i avoid this practice.
+
+These helpers could also be used to declare additional plot layers using `layer()` directly. This is, i think, an underappreciated option, but one that does not require a separate demonstration here.
+While these helpers allow for a syntax that may be more intuitive for new users, they do not provide any additional functionality, and may inhibit the use of valuable layers by users not habituated into developer habits like inspecting source code (or, i guess, reading the manual).
 
 ## fortified data subsetters
 
@@ -366,26 +337,14 @@ gilgais_cca %>%
   confer_inertia(c(1, 1)) %>%
   ggbiplot(sec.axes = "cols", scale.factor = 100) +
   geom_text(
-    aes(label = paste0("pH", name)),
+    aes(label = name),
     data = rows_data(elements = "score"), size = 2, alpha = 1/3
   ) +
-  geom_text(
-    aes(CanCor1 / 100, CanCor2 / 100, label = paste0("e", name)),
-    data = cols_data(elements = "score"), size = 2, alpha = 1/3
-  ) +
-  geom_axis(data = rows_data(), aes(center = center, label = name)) +
-  geom_axis(data = cols_data(), aes(center = center, label = name),
-            linetype = "dotted") +
+  geom_axis(data = cols_data(), aes(center = center, label = name)) +
   stat_projection(
     data = rows_data(elements = "score", subset = i),
     referent = cols_data(subset = c(1, 3)),
-    color = "darkgrey"
-  ) +
-  stat_projection(
-    aes(CanCor1 / 100, CanCor2 / 100),
-    data = cols_data(elements = "score", subset = i),
-    referent = rows_data(subset = c(1, 3)),
-    color = "darkgrey", linetype = "dotted"
+    linetype = "dotted"
   )
 ```
 
