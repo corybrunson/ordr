@@ -99,7 +99,7 @@ A negligible share of inertia remains to be accounted for by the third canonical
 
 ## biplots
 
-We begin with two biplots used in CCA, rendered using the row and column data separately in **ggplot2**.
+We begin with two biplots used in CCA, rendered in **ggplot2** using the row and column data prepared in the code chunk below.
 The remaining sections will reproduce these biplots using different sets of tools provided by **ordr**.
 
 ```{r factor-data}
@@ -132,27 +132,33 @@ score_ec_inertia <- confer_var(score_ec)
 struct_ec_inertia <- confer_var(struct_ec)
 ```
 
+For convenience, we also pre-define two distinct arrow styles:
+
+```{r arrows}
+arrow_closed <- arrow(length = unit(.03, "native"), type = "closed")
+arrow_opened <- arrow(length = unit(.03, "native"), type = "open")
+```
+
 ### ter Braak CCA biplot
 
 In "Interpreting canonical correlation analysis through biplots of structure correlations and weights" (1990), ter Braak proposed a biplot of the structure coefficients (for both sets of manifest variables) with respect to one set of canonical axes---in our case, say, pH.
 These then represent _intraset correlations_ for the pH measurements and _interset correlations_ for the conductivity measurements; as a result, the biplot fits within a unit sphere.
 The sample correlation between a pH measurement and a conductivity measurement is then approximated as the inner product of the corresponding variable arrows.
 
-```{r ter-Braak-biplot}
+```{r ter-Braak-biplot, fig.width=5.5, fig.height=5}
 ggplot(mapping = aes(CanCor1, CanCor2)) +
   coord_equal() +
   # FIXME: The unit circle doesn't appear in the plot.
   geom_unit_circle() +
   scale_x_continuous(limits = c(-1, 1)) +
   scale_y_continuous(limits = c(-1, 1)) +
-  geom_vector(data = struct_ph, arrow = NULL) +
-  geom_vector(data = struct_ec_inertia, arrow = NULL, linetype = "dashed") +
-  geom_point(data = struct_ph) +
-  geom_point(data = struct_ec_inertia, shape = "circle open") +
-  geom_label(data = struct_ph, aes(label = name),
-             hjust = "outward", vjust = "outward") +
-  geom_label(data = struct_ec_inertia, aes(label = name),
-             hjust = "outward", vjust = "outward")
+  geom_vector(data = struct_ph, arrow = arrow_closed) +
+  geom_vector(data = struct_ec_inertia, arrow = arrow_opened,
+              linetype = "dashed") +
+  geom_text(data = struct_ph, aes(label = name),
+            hjust = "outward", vjust = "outward") +
+  geom_text(data = struct_ec_inertia, aes(label = name),
+            hjust = "outward", vjust = "outward")
 ```
 
 The biplot indicates that pH and conductivity are highly correlated closer to the surface but highly anticorrelated at lower depths---the latter with more confidence than the former, as the vectors lie more nearly within the plane of the first two canonical axes.
@@ -190,22 +196,21 @@ These plots serve different ends and we won't interpret them further here. The r
 
 The first convention was the first to be developed and is perhaps the easiest to use.
 
-```{r ter-Braak-biplot-constructors}
+```{r ter-Braak-biplot-constructors, fig.width=5.5, fig.height=5}
 gilgais_cca %>%
   confer_inertia(c(0, 1)) %>%
   ggbiplot() +
   geom_unit_circle() +
   scale_x_continuous(limits = c(-1, 1)) +
   scale_y_continuous(limits = c(-1, 1)) +
-  geom_rows_vector(elements = "structure", arrow = NULL) +
-  geom_cols_vector(elements = "structure", arrow = NULL, linetype = "dashed") +
-  geom_rows_point(elements = "structure") +
-  geom_cols_point(elements = "structure", shape = "circle open") +
-  geom_rows_label(
+  geom_rows_vector(elements = "structure", arrow = arrow_closed) +
+  geom_cols_vector(elements = "structure", arrow = arrow_opened,
+                   linetype = "dashed") +
+  geom_rows_text(
     elements = "structure", aes(label = name),
     hjust = "outward", vjust = "outward"
   ) +
-  geom_cols_label(
+  geom_cols_text(
     elements = "structure", aes(label = name),
     hjust = "outward", vjust = "outward"
   )
@@ -239,23 +244,22 @@ Since the beginning, **ordr**'s custom constructors have been supported by the `
 For example, `rows_stat(StatEllipse)` and `rows_stat("ellipse")` both return `"rows_ellipse"`.
 While these helpers were originally unexported and required input, they are now exported and default to their corresponding identity stats, `GeomRowsIdentity` and `GeomColsIdentity`.
 
-```{r ter-Braak-biplot-specializers}
+```{r ter-Braak-biplot-specializers, fig.width=5.5, fig.height=5}
 gilgais_cca %>%
   confer_inertia(c(0, 1)) %>%
   ggbiplot() +
   geom_unit_circle() +
   scale_x_continuous(limits = c(-1, 1)) +
   scale_y_continuous(limits = c(-1, 1)) +
-  geom_vector(stat = rows_stat(), elements = "structure", arrow = NULL) +
+  geom_vector(stat = rows_stat(), elements = "structure",
+              arrow = arrow_closed) +
   geom_vector(stat = cols_stat(), elements = "structure",
-              arrow = NULL, linetype = "dashed") +
-  geom_point(stat = rows_stat(), elements = "structure") +
-  geom_point(stat = cols_stat(), elements = "structure", shape = "circle open") +
-  geom_label(
+              arrow = arrow_opened, linetype = "dashed") +
+  geom_text(
     stat = rows_stat(), elements = "structure", aes(label = name),
     hjust = "outward", vjust = "outward"
   ) +
-  geom_label(
+  geom_text(
     stat = cols_stat(), elements = "structure", aes(label = name),
     hjust = "outward", vjust = "outward"
   )
@@ -295,7 +299,7 @@ In case no row- or column-specific ggproto is found, they can be used to create 
 The constructors follow a standard sequence of steps to incorporate ordination aesthetics and, if necessary, referential parameters into a new child ggproto, which also filters the input data by `.matrix`.
 They can be used in the interactive environment à la `StatRowsConnect <- make_rows_stat(StatConnect)`, but here we use them to generate the necessary ggprotos "on the fly" rather than rely on their having been written and exported in **ordr**.
 
-```{r ter-Braak-biplot-generators}
+```{r ter-Braak-biplot-generators, fig.width=5.5, fig.height=5}
 gilgais_cca %>%
   confer_inertia(c(0, 1)) %>%
   ggbiplot() +
@@ -303,9 +307,9 @@ gilgais_cca %>%
   scale_x_continuous(limits = c(-1, 1)) +
   scale_y_continuous(limits = c(-1, 1)) +
   geom_vector(stat = make_rows_stat(), elements = "structure",
-              arrow = arrow(length = unit(.03, "native"), type = "closed")) +
+              arrow = arrow_closed) +
   geom_vector(stat = make_cols_stat(), elements = "structure",
-              arrow = arrow(length = unit(.03, "native")), linetype = "dashed") +
+              arrow = arrow_opened, linetype = "dashed") +
   geom_text(
     stat = make_rows_stat(), elements = "structure", aes(label = name),
     hjust = "outward", vjust = "outward"
@@ -358,23 +362,22 @@ Instead of a data frame, `data` can also receive a function, which is then appli
 The subsetting helpers `rows_data()` and `cols_data()` are little function factories; they each return a function that subsets an incoming data frame to its `"rows"` or `"cols"` rows.
 We pass these factory calls rather than functions so that we can include `subset` and `elements` arguments to be applied to `data`.
 
-```{r ter-Braak-biplot-subsetters}
+```{r ter-Braak-biplot-subsetters, fig.width=5.5, fig.height=5}
 gilgais_cca %>%
   confer_inertia(c(0, 1)) %>%
   ggbiplot() +
   geom_unit_circle() +
   scale_x_continuous(limits = c(-1, 1)) +
   scale_y_continuous(limits = c(-1, 1)) +
-  geom_vector(data = rows_data(elements = "structure"), arrow = NULL) +
+  geom_vector(data = rows_data(elements = "structure"),
+              arrow = arrow_closed) +
   geom_vector(data = cols_data(elements = "structure"),
-              arrow = NULL, linetype = "dashed") +
-  geom_point(data = rows_data(elements = "structure")) +
-  geom_point(data = cols_data(elements = "structure"), shape = "circle open") +
-  geom_label(
+              arrow = arrow_opened, linetype = "dashed") +
+  geom_text(
     data = rows_data(elements = "structure"), aes(label = name),
     hjust = "outward", vjust = "outward"
   ) +
-  geom_label(
+  geom_text(
     data = cols_data(elements = "structure"), aes(label = name),
     hjust = "outward", vjust = "outward"
   )
