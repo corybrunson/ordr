@@ -111,10 +111,10 @@ points for rows and arrows for columns.
 }
 
 \examples{
-ggplot(seals, aes(delta_long, delta_lat)) +
+ggplot() +
   theme_void() +
   geom_origin() +
-  geom_point(alpha = .25)
+  geom_point(data = seals, aes(delta_long, delta_lat), alpha = .25)
 # center each group separately
 iris \%>\%
   split(~ Species) \%>\%

@@ -24,6 +24,9 @@ Beyond convenience, the second and third of these allow to use `Stat`s for which
 `get_rows()` and `get_cols()` previously conflated all supplementary elements.
 They now return only those elements specified.
 
+`geom_origin()` and `geom_unit_circle()` now work even when there is no `data`
+to inherit.
+
 # ordr 0.2.0
 
 ## infrastructure and standards
