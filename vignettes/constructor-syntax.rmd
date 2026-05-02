@@ -151,7 +151,6 @@ The sample correlation between a pH measurement and a conductivity measurement i
 ```{r ter-Braak-biplot, fig.width=5.5, fig.height=5}
 ggplot(mapping = aes(CanCor1, CanCor2)) +
   coord_equal() +
-  # FIXME: The unit circle doesn't appear without valid `data`.
   geom_unit_circle() +
   scale_x_continuous(limits = c(-1, 1)) +
   scale_y_continuous(limits = c(-1, 1)) +
