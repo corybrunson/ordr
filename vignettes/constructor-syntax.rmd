@@ -103,19 +103,22 @@ We begin with two biplots used in CCA, rendered in **ggplot2** using the row and
 The remaining sections will reproduce these biplots using different sets of tools provided by **ordr**.
 
 ```{r factor-data}
+# variable loadings onto canonical axes
 coef_ph <-
   subset(fortify(gilgais_cca), .matrix == "rows" & .element == "active")
-score_ph <-
-  subset(fortify(gilgais_cca), .matrix == "rows" & .element == "score")
-struct_ph <-
-  subset(fortify(gilgais_cca), .matrix == "rows" & .element == "structure")
 coef_ec <-
   subset(fortify(gilgais_cca), .matrix == "cols" & .element == "active")
+# case scores onto canonical axes
+score_ph <-
+  subset(fortify(gilgais_cca), .matrix == "rows" & .element == "score")
 score_ec <-
   subset(fortify(gilgais_cca), .matrix == "cols" & .element == "score")
+# structure coefficients (correlations of variables with canonical axes)
+struct_ph <-
+  subset(fortify(gilgais_cca), .matrix == "rows" & .element == "structure")
 struct_ec <-
   subset(fortify(gilgais_cca), .matrix == "cols" & .element == "structure")
-# extract and confer inertia
+# extract inertia and confer onto all elements
 gilgais_inertia <- get_inertia(gilgais_cca)
 confer_var <- function(x) {
   x %>%
@@ -148,7 +151,7 @@ The sample correlation between a pH measurement and a conductivity measurement i
 ```{r ter-Braak-biplot, fig.width=5.5, fig.height=5}
 ggplot(mapping = aes(CanCor1, CanCor2)) +
   coord_equal() +
-  # FIXME: The unit circle doesn't appear in the plot.
+  # FIXME: The unit circle doesn't appear without valid `data`.
   geom_unit_circle() +
   scale_x_continuous(limits = c(-1, 1)) +
   scale_y_continuous(limits = c(-1, 1)) +
@@ -341,6 +344,7 @@ gilgais_cca %>%
 While not necessary, the constructor demonstrates its compatibiilty with reference layers like that of projection: The `$setup_params` method is redefined to accommodate reference parameters.
 
 In principle, any statistical transformation ggproto should be adaptable in this way, provided it includes numeric `x` and `y` coordinates as output.
+This opens enormous potential to **ordr** biplots that could not practically be implemented or maintained through custom constructors.
 By also enabling users to assign ggproto source code to suitable names like `StatRowsConnect`, these constructors may provide value even beyond convenient biplot layering.
 
 ## fortified data subsetters
@@ -405,6 +409,7 @@ gilgais_cca %>%
 This option also introduces some risky flexibility:
 Whereas `stat_rows_projection()` automatically takes the opposing `"cols"` matrix factor as the referent data (and vice-versa), here the user must specify `referent = cols_data()` in order to obtain a correct biplot.
 
-Despite their problems, these subsetters allow users to add _any_ sufficiently well-behaved statistical transformation ggproto to a biplot layer.
-This opens enormous potential to **ordr** biplots that could not practically be implemented or maintained through custom constructors.
+Despite their problems, these subsetters allow users to add any sufficiently well-behaved statistical transformation ggproto to a biplot layer.
+Like the specialized ggproto constructors, this eliminates the practical barriers to biplots using stats and geoms from other extensions or even those custom-built by users.
+It also eliminates the burden of creating those specialized ggprotos at definition time.
 The trade-off is that the user must assume responsibility for some biplot-specific behavior.
