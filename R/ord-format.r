@@ -29,6 +29,9 @@
 #'   invisibly.
 #' @example inst/examples/ex-ord-format.r
 
+.times <- " \u00d7 "
+.prime <- "\u00b4"
+
 #' @rdname format
 #' @export
 format.tbl_ord <- function(
@@ -73,7 +76,8 @@ format.tbl_ord <- function(
     if (!is.null(prev_class) && prev_class != "list") {
       paste0(" of class '", prev_class, "'")
     },
-    ": (", n_dims[1], " x ", rk, ") x (", n_dims[2], " x ", rk, ")'"
+    ": (", n_dims[1], .times, rk, ")",
+    .times, "(", n_dims[2], .times, rk, ")", .prime
   )
   coord_header <- paste0(
     "# ", rk,
@@ -110,7 +114,7 @@ format.tbl_ord <- function(
   dims_headers <- paste0(
     "# ", c("Rows", "Columns"),
     dims_inertia,
-    ": [ ", n_dims, " x ", rk, " | ", n_ann, " ]"
+    ": [ ", n_dims, .times, rk, " | ", n_ann, " ]"
   )
   names(dims_headers) <- c("rows", "cols")
   
