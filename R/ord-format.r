@@ -81,8 +81,8 @@ format.tbl_ord <- function(
     ": ",
     print_reps(coord)
   )
-  supp_header <- if (! is.null(attr(x, "rows_supplement")) |
-                     ! is.null(attr(x, "rows_supplement"))) {
+  supp_header <- if (! is.null(attr(x, "rows_supplement")) ||
+                     ! is.null(attr(x, "cols_supplement"))) {
     paste0(
       "# ",
       if (! is.null(attr(x, "rows_supplement"))) {
