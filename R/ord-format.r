@@ -154,7 +154,7 @@ format.tbl_ord <- function(
       c("", format(dims_ann[[i]], n = n[[i]], width = wid_try)[-1]),
       silent = TRUE
     )
-    while (class(fmt_try) == "try-error") {
+    while (inherits(fmt_try, "try-error")) {
       wid_try <- wid_try - 1
       fmt_try <- c("", format(dims_ann[[i]], n = n[[i]], width = wid_try)[-1])
     }
