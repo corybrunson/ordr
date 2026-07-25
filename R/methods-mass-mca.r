@@ -87,7 +87,7 @@ recover_aug_rows.mca <- function(x) {
 recover_aug_cols.mca <- function(x) {
   name <- rownames(x$cs)
   # introduce `.factor` and `.level` according to `abbrev`
-  if (is.null(name)) {
+  res <- if (is.null(name)) {
     tibble(.rows = nrow(x$cs))
   } else if (is.null(attr(rownames(x$cs), "names"))) {
     # only add `.factor` and `.level` if names are unambiguous
@@ -95,8 +95,7 @@ recover_aug_cols.mca <- function(x) {
     tibble(
       name = name,
       factor = if (! level_ambig) gsub("\\..*$", "", name),
-      level = if (! level_ambig) gsub("^.*\\.", "", name),
-      .element = "active"
+      level = if (! level_ambig) gsub("^.*\\.", "", name)
     )
   } else {
     tibble(
@@ -104,6 +103,8 @@ recover_aug_cols.mca <- function(x) {
       level = unname(rownames(x$cs))
     )
   }
+  res$.element <- "active"
+  res
 }
 
 #' @rdname methods-mca

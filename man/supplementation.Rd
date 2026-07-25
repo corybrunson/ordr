@@ -21,7 +21,7 @@ recover_supp_cols(x)
 }
 \value{
 Matrices having the same numbers of columns as returned by
-\code{\link[=recover_rows]{recover_rows()}} and \code{\link[=recover_cols]{recover_cols()}}, or else \code{NULL}.
+\code{\link[=recover_rows]{recover_rows()}} and \code{\link[=recover_cols]{recover_cols()}}.
 }
 \description{
 These functions attach supplementary rows or columns to an

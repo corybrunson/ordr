@@ -328,7 +328,7 @@ fa1 %>%
   as_tbl_ord() %>%
   augment_ord() %>%
   confer_inertia("rows") %>%
-  # -+- need syntax to bind to only primary or supplementary points -+-
+  # TODO: Need syntax to bind to only primary or supplementary points.
   cbind_rows(dplyr::bind_rows(tibble(.rows = 10L), Z)) %>%
   ggbiplot() +
   geom_rows_point(aes(shape = factor(gender), color = age)) +

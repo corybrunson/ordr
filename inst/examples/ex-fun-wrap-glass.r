@@ -18,7 +18,7 @@ glass_banias_minor <- subset(
   Context == "L.15;B.166",
   select = c("TiO2", "FeO", "MnO", "P2O5", "Cl", "SO3")
 )
-# impute half of detection threshold
+# impute value just below smallest recorded value
 glass_banias_minor$TiO2[[1L]] <- 0.5
 cancor_ord(glass_banias, glass_banias_minor)
 

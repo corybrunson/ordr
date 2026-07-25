@@ -25,7 +25,7 @@
 #' @rdname stat_rows
 #' @export
 stat_rows <- function(
-  mapping = NULL, data = data,
+  mapping = NULL, data = NULL,
   geom = "point", position = "identity",
   subset = NULL, elements = "active",
   ...,
@@ -50,7 +50,7 @@ stat_rows <- function(
 #' @rdname stat_rows
 #' @export
 stat_cols <- function(
-  mapping = NULL, data = data,
+  mapping = NULL, data = NULL,
   geom = "axis", position = "identity",
   subset = NULL, elements = "active",
   ...,

@@ -120,9 +120,12 @@ get_rows <- function(x, elements = "all") {
   } else if (elements == "active") {
     recover_rows(x)
   } else {
-    # -+- need to recognize supplementary subtypes -+-
-    recover_supp_rows(x)
+    elts <- recover_aug_rows(x)$.element
+    elts <- elts[elts != "active"] == elements
+    recover_supp_rows(x)[elts, , drop = FALSE]
   }
+  # ensure artificial coordinate names
+  colnames(u) <- recover_coord(x)
   # ensure correct signs
   if (! is.null(attr(x, "negate"))) {
     n <- diag(get_negation(x))
@@ -155,9 +158,12 @@ get_cols <- function(x, elements = "all") {
   } else if (elements == "active") {
     recover_cols(x)
   } else {
-    # -+- need to recognize supplementary subtypes -+-
-    recover_supp_cols(x)
+    elts <- recover_aug_cols(x)$.element
+    elts <- elts[elts != "active"] == elements
+    recover_supp_cols(x)[elts, , drop = FALSE]
   }
+  # ensure artificial coordinate names
+  colnames(v) <- recover_coord(x)
   # ensure correct signs
   if (! is.null(attr(x, "negate"))) {
     n <- diag(get_negation(x))

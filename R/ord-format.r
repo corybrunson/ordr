@@ -29,6 +29,10 @@
 #'   invisibly.
 #' @example inst/examples/ex-ord-format.r
 
+.by <- " \u00d7 "
+.times <- " \u00b7 "
+.prime <- "\u00b4"
+
 #' @rdname format
 #' @export
 format.tbl_ord <- function(
@@ -73,7 +77,7 @@ format.tbl_ord <- function(
     if (!is.null(prev_class) && prev_class != "list") {
       paste0(" of class '", prev_class, "'")
     },
-    ": (", n_dims[1], " x ", rk, ") x (", n_dims[2], " x ", rk, ")'"
+    ": (", n_dims[1], .by, rk, ")", .times, "(", n_dims[2], .by, rk, ")", .prime
   )
   coord_header <- paste0(
     "# ", rk,
@@ -81,8 +85,8 @@ format.tbl_ord <- function(
     ": ",
     print_reps(coord)
   )
-  supp_header <- if (! is.null(attr(x, "rows_supplement")) |
-                     ! is.null(attr(x, "rows_supplement"))) {
+  supp_header <- if (! is.null(attr(x, "rows_supplement")) ||
+                     ! is.null(attr(x, "cols_supplement"))) {
     paste0(
       "# ",
       if (! is.null(attr(x, "rows_supplement"))) {
@@ -110,12 +114,12 @@ format.tbl_ord <- function(
   dims_headers <- paste0(
     "# ", c("Rows", "Columns"),
     dims_inertia,
-    ": [ ", n_dims, " x ", rk, " | ", n_ann, " ]"
+    ": [ ", n_dims, .by, rk, " | ", n_ann, " ]"
   )
   names(dims_headers) <- c("rows", "cols")
   
   # format rows and columns separately
-  # (should format together, then split, in order to sync coordinates)
+  # TODO: Format together, then split, in order to sync coordinates.
   fmt_coord_rows <- format(
     as_tibble(dims$rows)[, seq(min(rk, 3)), drop = FALSE],
     n = n[[1L]], width = width / 2
@@ -150,14 +154,14 @@ format.tbl_ord <- function(
       c("", format(dims_ann[[i]], n = n[[i]], width = wid_try)[-1]),
       silent = TRUE
     )
-    while (class(fmt_try) == "try-error") {
+    while (inherits(fmt_try, "try-error")) {
       wid_try <- wid_try - 1
       fmt_try <- c("", format(dims_ann[[i]], n = n[[i]], width = wid_try)[-1])
     }
     fmt_try
   })
   names(fmt_ann) <- c("rows", "cols")
-  # -+- allow additional rows/variables statement to fill horizontal space -+-
+  # FIXME: Allow additional rows/variables statement to fill horizontal space.
   
   # separate coordinates from annotations
   seps <- if (rk > 3) c("    ", " ...") else c("", "")
@@ -218,8 +222,6 @@ print.tbl_ord <- function(
   cat(paste(fmt, collapse = "\n"), "\n", sep = "")
   invisible(x)
 }
-
-#`%||%` <- rlang::`%||%`
 
 # this trick is borrowed from *tibble*
 op.tbl_ord <- list(

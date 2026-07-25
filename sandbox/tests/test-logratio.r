@@ -54,5 +54,5 @@ ggbiplot(b, aes(label = .name), sec.axes = "u", scale.factor = 10) +
   geom_u_text(color = "darkgreen", size = 3) +
   geom_v_polygon(fill = NA, linetype = "dashed", color = "brown4") +
   geom_v_text(color = "brown4", fontface = "bold")
-# -+-SECONDARY AXES ARE ADDED INTERNALLY USING `scale_*_continuous()`;
-# THEY WILL BE REPLACED BY DOWNSTREAM `x` AND `y` SCALES-+-
+# WARNING: Secondary axes are added internally using `scale_*_continuous()`;
+# they will be replaced by downstream `x` and `y` scales.

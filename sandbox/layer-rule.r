@@ -198,7 +198,7 @@ StatAngleBox <- ggproto(
 #' @rdname stat_rows
 #' @export
 stat_ord <- function(
-    mapping = NULL, data = data,
+    mapping = NULL, data = NULL,
     geom = "blank", position = "identity",
     subset = NULL, elements = "all",
     ...,
@@ -238,7 +238,7 @@ StatOrd <- ggproto(
 #' @rdname stat_rows
 #' @export
 stat_ord_angle_box <- function(
-    mapping = NULL, data = data,
+    mapping = NULL, data = NULL,
     geom = "blank", position = "identity",
     subset = NULL, elements = "all",
     ...,

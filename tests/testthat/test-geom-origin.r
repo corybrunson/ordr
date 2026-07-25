@@ -24,3 +24,13 @@ test_that("origin and unit circle do not affect plotting window", {
   expect_true(-1 > max(y2))
   
 })
+
+test_that("origin and unit circle render without data to inherit", {
+  p1 <- ggplot() + geom_origin()
+  b1 <- ggplot_build(p1)
+  expect_equal(nrow(b1@data[[1]]), 1L)
+  
+  p2 <- ggplot() + geom_unit_circle()
+  b2 <- ggplot_build(p2)
+  expect_equal(nrow(b2@data[[1]]), 1L)
+})

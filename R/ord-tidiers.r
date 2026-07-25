@@ -94,10 +94,10 @@ glance.tbl_ord <- function(x, ...) {
     # number of artificial coordinates
     rank = length(recover_inertia(x)),
     # numbers of rows and of columns of original data
-    # -+- these should indicate dimensions of decomposed matrix -+-
+    # TODO: These should indicate dimensions of decomposed matrix.
     n.row = nrow(x),
     n.col = ncol(x),
-    # -+- clarify whether this is original inertia or decomposed inertia -+-
+    # TODO: Clarify whether this is original inertia or decomposed inertia.
     inertia = tot.var,
     # proportions of variance/inertia in first and second artificial dimensions
     prop.var.1 = if (var.na) NA else all.var[[1L]] / tot.var,

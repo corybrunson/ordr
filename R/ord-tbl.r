@@ -79,7 +79,7 @@ valid_tbl_ord <- function(x) {
       ! is_tibble(attr(x, "rows_annotation"))) return(FALSE)
   if (! is.null(attr(x, "cols_annotation")) &&
       ! is_tibble(attr(x, "cols_annotation"))) return(FALSE)
-  # -+- update this check for eigendecomposition-based and 3-factor ordinations
+  # TODO: Update this check for EVD-based and 3-factor ordinations.
   if (! is.null(attr(x, "confer")) &&
       (! is.numeric(attr(x, "confer")) ||
        length(attr(x, "confer")) != 2)) return(FALSE)

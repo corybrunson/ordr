@@ -55,6 +55,7 @@ recover_aug_rows.lra <- function(x) {
     tibble(name = name)
   }
   res$weight <- x$row.weights
+  res$.element <- "active"
   res
 }
 
@@ -68,6 +69,7 @@ recover_aug_cols.lra <- function(x) {
     tibble(name = name)
   }
   res$weight <- x$column.weights
+  res$.element <- "active"
   res
 }
 

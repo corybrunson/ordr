@@ -41,6 +41,11 @@ geom_origin <- function(
   na.rm = FALSE,
   show.legend = NA, inherit.aes = FALSE
 ) {
+  if (! is.null(data)) {
+    cli::cli_warn("{.fn geom_origin}: Ignoring {.arg data}.")
+  }
+  data <- data.frame(x = 0, y = 0)
+  
   layer(
     data = data,
     mapping = mapping,
@@ -158,6 +163,11 @@ geom_unit_circle <- function(
     na.rm = FALSE,
     show.legend = NA, inherit.aes = FALSE
 ) {
+  if (! is.null(data)) {
+    cli::cli_warn("{.fn geom_unit_circle}: Ignoring {.arg data}.")
+  }
+  data <- data.frame(x = 0, y = 0)
+  
   layer(
     data = data,
     mapping = mapping,

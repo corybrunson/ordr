@@ -59,10 +59,10 @@ get_inertia(x)
 \item{x}{An object of class '\link{tbl_ord}'.}
 
 \item{elements}{Character vector; which elements of each factor for which to
-render graphical elements. One of \code{"all"} (the default), \code{"active"}, or any
+render graphical elements. One of \code{"active"} (the default) or any
 supplementary element type defined by the specific class methods (e.g.
 \code{"score"} for 'factanal', 'lda_ord', and 'cancord_ord' and \code{"intraset"} and
-\code{"interset"} for 'cancor_ord').}
+\code{"interset"} for 'cancor_ord'), via \link[base:match.arg]{partial matching}.}
 
 \item{...}{Additional arguments from \code{\link[base:matrix]{base::as.matrix()}}; ignored.}
 

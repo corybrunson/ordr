@@ -107,12 +107,15 @@ savings_cca \%>\%
   expand_limits(x = c(-1, 1), y = c(-1, 1))
 
 # situate country scores along financial variables
+# (inner product interpretation requires that scores be in population units)
 savings_cca \%>\%
-  confer_inertia("rows") \%>\%
-  ggbiplot(aes(label = name)) +
+  confer_inertia("cols") \%>\%
+  ggbiplot(aes(label = name, center = center)) +
   theme_scaffold() +
   geom_cols_axis(elements = "active") +
-  geom_rows_text(elements = "score")
+  geom_rows_text(elements = "score") +
+  stat_rows_projection(elements = "score", subset = 49)
+# the model predicts much higher disposable income in Libya than was measured
 }
 \references{
 Greenacre MJ (1984) \emph{Theory and applications of correspondence analysis}.

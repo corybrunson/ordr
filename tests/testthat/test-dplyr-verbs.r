@@ -24,10 +24,13 @@ test_that("`cbind_*()` appends a column only of the correct length", {
 pca <- cbind_rows(pca, iris[, 5, drop = FALSE])
 
 test_that("`rename_*()` applies to both augmented and annotated variables", {
-  expect_named(annotation_rows(rename_rows(pca, species = Species)), "species")
-  expect_named(
-    annotation_cols(rename_cols(pca, measure = name)),
-    c("measure", "center")
+  expect_setequal(
+    names(annotation_rows(rename_rows(pca, species = Species))),
+    c(".element", "species")
+  )
+  expect_setequal(
+    names(annotation_cols(rename_cols(pca, measure = name))),
+    c(".element", "measure", "center")
   )
 })
 
@@ -45,13 +48,13 @@ test_that("`select_*()` does not recognize shared coordinates", {
 })
 
 test_that("`mutate_*()` recognizes but does not change shared coordinates", {
-  expect_named(
-    annotation_rows(mutate_rows(pca, Species = toupper(Species))),
-    "Species"
+  expect_setequal(
+    names(annotation_rows(mutate_rows(pca, Species = toupper(Species)))),
+    c(".element", "Species")
   )
-  expect_named(
-    annotation_cols(mutate_cols(pca, diff = PC1 - center)),
-    c("name", "center", "diff")
+  expect_setequal(
+    names(annotation_cols(mutate_cols(pca, diff = PC1 - center))),
+    c(".element", "name", "center", "diff")
   )
 })
 
@@ -66,8 +69,8 @@ test_that("`transmute_*()` recognizes but does not change shared coordinates", {
 means <- aggregate(iris[, -5], iris[, 5, drop = FALSE], mean)
 
 test_that("`left_join_*()` joins new columns", {
-  expect_named(
-    annotation_rows(left_join_rows(pca, means, by = "Species")),
-    c("Species", names(iris)[-5])
+  expect_setequal(
+    names(annotation_rows(left_join_rows(pca, means, by = "Species"))),
+    c(".element", "Species", names(iris)[-5])
   )
 })
