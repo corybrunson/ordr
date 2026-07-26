@@ -25,3 +25,13 @@ test_that("lists with `NULL` are accepted", {
   ord_fmt <- format(ord, n = list(2, NULL))
   expect_equal(length(grep("[0-9]+\\.[0-9]+", ord_fmt)), 2L + 3L)
 })
+
+test_that("print returns invisibly", {
+  expect_output(ret <- withVisible(print(ord_pca)))
+  expect_false(ret$visible)
+  expect_identical(ret$value, ord_pca)
+})
+
+test_that("print snapshot", {
+  expect_snapshot(strip_style(format(ord_pca)))
+})
