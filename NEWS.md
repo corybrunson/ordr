@@ -1,5 +1,14 @@
 # next version
 
+## `format()` overhaul
+
+The `format()` method for `tbl_ord` objects has been rewritten to produce readouts more faithful to the style of those for `tbl_df`.
+This involved a ground-up revision starting with several constructions (headers, footers, coord tibble, annotation tibble) that were then assembled into the final output.
+The pipeline relies on several new internal helpers (`ord_header`, `ord_footer`, `ord_width_alloc`, `ord_n_show`, `ord_format_coord`, `ord_format_ann`, `ord_split_coord`, `ord_combine`, `ord_assemble`) that are subject to several new unit tests.
+
+The more modular construction also strips internal `tibble:::format.tbl_df()` output of ANSI styling, which is then reintroduced after assembly.
+Headers, footers, row numbers, pipe separators, and (single-character) ellipses are now assigned `pillar::style_subtle()`, while variable types are also italicized via `cli::style_italic()`.
+
 ## handling of eigenvalue-based classes
 
 The `"cmds_ord"` and `"factanal"` recovery methods have been updated to reflect the use of eigenvalue decomposition rather than singular value decomposition under their respective hoods: Only one set of elements are considered "active" (see #60).
