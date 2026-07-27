@@ -4,22 +4,22 @@
 #'   (usually more) tidy readout of a [tbl_ord] that is consistent across all
 #'   original ordination classes.
 #'
-#' @importFrom utils head
-#' @importFrom crayon has_color
-#'
 #' @details
 #'
 #' The `format` and `print` methods for class 'tbl_ord' are adapted from those
 #' for class '[tbl_df][tibble::tbl_df]' and for class 'tbl_graph' from the
 #' **tidygraph** package.
 #'
-#' **Note:** The `format()` function is tedius but cannot be easily modularized
+#' **Note:** The `format()` function is tedious but cannot be easily modularized
 #' without invoking [recoverers], [annotation], and [augmentation] multiple
 #' times, thereby significantly reducing performance.
 #' 
 
 #' @name format
 #' @importFrom rlang "%||%"
+#' @importFrom utils head
+#' @importFrom crayon has_color
+#' @importFrom pillar style_subtle
 #' @param x A [tbl_ord].
 #' @param n Number(s) of rows to show from each matrix factor, handled as by
 #'   [tibble::format.tbl()]. If length 1, will apply to both matrix factors.
@@ -32,26 +32,20 @@
 #'   invisibly.
 #' @example inst/examples/ex-ord-format.r
 
-.by <- " \u00d7 "
-.times <- " \u00b7 "
+.by <- "\u00d7"
+.by.sep <- " \u00d7 "
+.times <- "\u00b7"
+.times.sep <- " \u00b7 "
 .prime <- "\u00b4"
-.by_narrow <- "\u00d7"
-.times_narrow <- "\u00b7"
 
-# New helpers ---------------------------------------------------------------
+# helper functions
 
 strip_ansi <- function(x) {
   gsub("\033\\[[0-9;]*[a-zA-Z]", "", x)
 }
 
-# Apply grey styling (matches tibble's "subtle" convention)
-style_grey <- function(x) {
-  pillar::style_subtle(x)
-}
-
-# Apply italic + grey styling (for variable types)
 style_type <- function(x) {
-  if (crayon::has_color()) cli::style_italic(pillar::style_subtle(x)) else x
+  if (crayon::has_color()) cli::style_italic(style_subtle(x)) else x
 }
 
 resolve_n <- function(n, n_dims) {
@@ -95,11 +89,11 @@ get_ord_layout <- function(x, width = NULL, n = NULL,
   supp_rows <- attr(x, "rows_supplement")
   supp_cols <- attr(x, "cols_supplement")
   n_supp <- c(
-    rows = if (!is.null(supp_rows)) nrow(supp_rows) else 0L,
-    cols = if (!is.null(supp_cols)) nrow(supp_cols) else 0L
+    rows = if (! is.null(supp_rows)) nrow(supp_rows) else 0L,
+    cols = if (! is.null(supp_cols)) nrow(supp_cols) else 0L
   )
   prev_class <- setdiff(class(x), "tbl_ord")[1]
-  if (!is.null(prev_class) && prev_class == "list") prev_class <- NULL
+  if (! is.null(prev_class) && prev_class == "list") prev_class <- NULL
   list(
     x = x, width = width, dims = dims, n_dims = n_dims,
     coord = coord, rk = rk,
@@ -160,7 +154,7 @@ ord_header_factors <- function(layout) {
     cname <- conf_name(layout$conference[i])
     cpct <- conf_pct(layout$conference[i])
     # tier 1: name + percentage in parentheses
-    label_np <- if (!is.null(cname) && !is.null(cpct)) {
+    label_np <- if (! is.null(cname) && ! is.null(cpct)) {
       paste0(" (", cname, ", ", cpct, ")")
     }
     line_np <- paste0(
@@ -168,29 +162,29 @@ ord_header_factors <- function(layout) {
       layout$n_dims[i], " \u00d7 ", layout$rk,
       " | ", layout$n_ann[i], " ]"
     )
-    if (!is.null(label_np) && nchar(line_np) <= layout$width) {
+    if (! is.null(label_np) && nchar(line_np) <= layout$width) {
       lines <- c(lines, line_np)
       next
     }
     # tier 2: name only in parentheses
-    label_n <- if (!is.null(cname)) paste0(" (", cname, ")")
+    label_n <- if (! is.null(cname)) paste0(" (", cname, ")")
     line_n <- paste0(
       "# ", factor_names[i], label_n, ": [ ",
       layout$n_dims[i], " \u00d7 ", layout$rk,
       " | ", layout$n_ann[i], " ]"
     )
-    if (!is.null(label_n) && nchar(line_n) <= layout$width) {
+    if (! is.null(label_n) && nchar(line_n) <= layout$width) {
       lines <- c(lines, line_n)
       next
     }
     # tier 3: percentage only in parentheses
-    label_p <- if (!is.null(cpct)) paste0(" (", cpct, ")")
+    label_p <- if (! is.null(cpct)) paste0(" (", cpct, ")")
     line_p <- paste0(
       "# ", factor_names[i], label_p, ": [ ",
       layout$n_dims[i], " \u00d7 ", layout$rk,
       " | ", layout$n_ann[i], " ]"
     )
-    if (!is.null(label_p) && nchar(line_p) <= layout$width) {
+    if (! is.null(label_p) && nchar(line_p) <= layout$width) {
       lines <- c(lines, line_p)
       next
     }
@@ -217,26 +211,26 @@ ord_header <- function(layout) {
   # tier 1: full with class in quotes
   header1 <- paste0(
     "# A tbl_ord",
-    if (!is.null(layout$prev_class)) {
+    if (! is.null(layout$prev_class)) {
       paste0(" of class '", layout$prev_class, "'")
     },
-    ": (", layout$n_dims[1], .by, layout$rk, ")", .times,
-    "(", layout$n_dims[2], .by, layout$rk, ")", .prime
+    ": (", layout$n_dims[1], .by.sep, layout$rk, ")", .times.sep,
+    "(", layout$n_dims[2], .by.sep, layout$rk, ")", .prime
   )
   if (nchar(header1) <= layout$width) {
     lines <- c(lines, header1)
   } else {
     # tier 2: abbreviated class in angle brackets
-    abbr_class <- if (!is.null(layout$prev_class)) {
+    abbr_class <- if (! is.null(layout$prev_class)) {
       substr(layout$prev_class, 1, max(3, nchar(layout$prev_class) %/% 2))
     }
     header2 <- paste0(
       "# A tbl_ord",
-      if (!is.null(abbr_class)) {
+      if (! is.null(abbr_class)) {
         paste0(" <", abbr_class, ">")
       },
-      ": (", layout$n_dims[1], .by, layout$rk, ")", .times,
-      "(", layout$n_dims[2], .by, layout$rk, ")", .prime
+      ": (", layout$n_dims[1], .by.sep, layout$rk, ")", .times.sep,
+      "(", layout$n_dims[2], .by.sep, layout$rk, ")", .prime
     )
     if (nchar(header2) <= layout$width) {
       lines <- c(lines, header2)
@@ -244,12 +238,12 @@ ord_header <- function(layout) {
       # tier 3: reduced spacing
       header3 <- paste0(
         "# A tbl_ord",
-        if (!is.null(abbr_class)) {
+        if (! is.null(abbr_class)) {
           paste0(" <", abbr_class, ">")
         },
-        ": (", layout$n_dims[1], .by_narrow, layout$rk, ")",
-        .times_narrow,
-        "(", layout$n_dims[2], .by_narrow, layout$rk, ")", .prime
+        ": (", layout$n_dims[1], .by, layout$rk, ")",
+        .times,
+        "(", layout$n_dims[2], .by, layout$rk, ")", .prime
       )
       if (nchar(header3) <= layout$width) {
         lines <- c(lines, header3)
@@ -257,21 +251,21 @@ ord_header <- function(layout) {
         # tier 4: no class, minimal spacing
         minimal <- paste0(
           "# A tbl_ord: (",
-          layout$n_dims[1], .by_narrow, layout$rk, ")",
-          .times_narrow,
-          "(", layout$n_dims[2], .by_narrow, layout$rk, ")", .prime
+          layout$n_dims[1], .by, layout$rk, ")",
+          .times,
+          "(", layout$n_dims[2], .by, layout$rk, ")", .prime
         )
         lines <- c(lines, minimal)
       }
     }
   }
   coord_line <- ord_header_coords(layout)
-  if (!is.null(coord_line)) lines <- c(lines, coord_line)
+  if (! is.null(coord_line)) lines <- c(lines, coord_line)
   supp_line <- ord_header_supp(layout)
-  if (!is.null(supp_line)) lines <- c(lines, supp_line)
+  if (! is.null(supp_line)) lines <- c(lines, supp_line)
   factor_lines <- ord_header_factors(layout)
   lines <- c(lines, factor_lines)
-  lines <- style_grey(lines)
+  lines <- style_subtle(lines)
   lines
 }
 
@@ -296,17 +290,21 @@ ord_footer <- function(layout) {
       n_real <- if (n_total == 1L && names(ann) == ".rows") 0L else n_total
       if (n_real > layout$max_extra_cols) {
         n_extra <- n_real - layout$max_extra_cols
-        # List the names and types of un-printed variables
+        # list names and types of un-printed variables
         hidden_idx <- seq(layout$max_extra_cols + 1L, n_total)
         hidden_names <- names(ann)[hidden_idx]
         hidden_types <- vapply(ann[hidden_idx], function(x) {
           paste0("<", class(x)[1L], ">")
         }, character(1))
         var_str <- paste(
-          mapply(function(nm, tp) paste0(nm, " ", tp), hidden_names, hidden_types),
+          mapply(
+            function(nm, tp) paste0(nm, " ", tp),
+            hidden_names,
+            hidden_types
+          ),
           collapse = ", "
         )
-        # Wrap at ~60 chars for readability
+        # wrap at ~60 chars for readability
         if (nchar(var_str) > 60L) {
           var_str <- paste0(
             substr(var_str, 1L, 57L), "..."
@@ -329,7 +327,7 @@ ord_footer <- function(layout) {
   if (length(lines) > layout$max_footer_lines) {
     lines <- lines[seq_len(layout$max_footer_lines)]
   }
-  lines <- style_grey(lines)
+  lines <- style_subtle(lines)
   lines
 }
 
@@ -380,16 +378,17 @@ ord_format_ann <- function(layout, coord_alloc) {
     n_rows <- layout$n_show[[if (nm == "rows") 1L else 2L]]
     ann_sub <- head(ann_sub, n_rows)
     fmt <- strip_ansi(format(ann_sub, width = coord_alloc$ann_avail))
-    # Keep col names (line 2) and types (line 3) as header; strip title, row numbers, truncation info
-    # At very narrow widths, tibble wraps title/info lines and there's no room for data
-    if (length(fmt) > 3L && !grepl("^#", fmt[2L])) {
+    # keep col names (line 2) and types (line 3) as header
+    # strip title, row numbers, truncation info
+    # at very narrow widths, tibble wraps title/info lines w/ no room for data
+    if (length(fmt) > 3L && ! grepl("^#", fmt[2L])) {
       header <- sub("^\\s+", "", fmt[2:3])
       data_lines <- fmt[seq(4L, length(fmt))]
-      # Remove tibble truncation/info lines
-      data_lines <- data_lines[!grepl("^#", data_lines)]
-      # Remove leading row numbers (digits + whitespace)
+      # remove tibble truncation/info lines
+      data_lines <- data_lines[! grepl("^#", data_lines)]
+      # remove leading row numbers (digits + whitespace)
       data_lines <- sub("^\\s*[0-9]+\\s+", "", data_lines)
-      # Style types line (italic + grey)
+      # style types
       header[2L] <- style_type(header[2L])
       lines <- c(header, data_lines)
     } else {
@@ -409,58 +408,83 @@ ord_format_coord <- function(layout, coord_alloc) {
   cols_to_show <- seq_len(min(rk, coord_alloc$max_coord_cols))
   coord_rows <- as_tibble(layout$dims$rows)[, cols_to_show, drop = FALSE]
   coord_cols <- as_tibble(layout$dims$cols)[, cols_to_show, drop = FALSE]
-  # Format each factor separately to get independent row numbers
-  fmt_rows <- strip_ansi(format(head(coord_rows, layout$n_show[1L]), width = coord_alloc$coord_avail))
-  fmt_cols <- strip_ansi(format(head(coord_cols, layout$n_show[2L]), width = coord_alloc$coord_avail))
-  # Process rows: check if format has usable column headers
-  if (!grepl("^#", fmt_rows[2L])) {
+  # Ffrmat each factor separately to get independent row numbers
+  fmt_rows <- strip_ansi(
+    format(head(coord_rows, layout$n_show[1L]), width = coord_alloc$coord_avail)
+  )
+  fmt_cols <- strip_ansi(
+    format(head(coord_cols, layout$n_show[2L]), width = coord_alloc$coord_avail)
+  )
+  # process rows: check if format has usable column headers
+  if (! grepl("^#", fmt_rows[2L])) {
     header_rows <- fmt_rows[2:3]
     rows_data <- fmt_rows[-(1:3)]
     rows_data <- sub("^\\s*[0-9]+", "", rows_data)
     rows_data <- paste0(seq_along(rows_data), rows_data)
   } else {
-    # At very narrow widths, tibble wraps title/info lines
+    # at very narrow widths, tibble wraps title/info lines
     col_names <- names(coord_rows)
-    types <- vapply(coord_rows, function(x) paste0("<", class(x)[1L], ">"), character(1))
-    header_rows <- c(paste0(" ", paste(col_names, collapse = " ")), paste0(" ", paste(types, collapse = " ")))
+    types <- vapply(
+      coord_rows,
+      function(x) paste0("<", class(x)[1L], ">"),
+      character(1)
+    )
+    header_rows <- c(
+      paste0(" ", paste(col_names, collapse = " ")),
+      paste0(" ", paste(types, collapse = " "))
+    )
     rows_data <- character()
   }
-  # Process cols: check if format has usable column headers
-  if (!grepl("^#", fmt_cols[2L])) {
+  # process cols: check if format has usable column headers
+  if (! grepl("^#", fmt_cols[2L])) {
     header_cols <- fmt_cols[2:3]
     cols_data <- fmt_cols[-(1:3)]
     cols_data <- sub("^\\s*[0-9]+", "", cols_data)
     cols_data <- paste0(seq_along(cols_data), cols_data)
   } else {
-    # At very narrow widths, tibble wraps title/info lines
+    # at very narrow widths, tibble wraps title/info lines
     col_names <- names(coord_cols)
-    types <- vapply(coord_cols, function(x) paste0("<", class(x)[1L], ">"), character(1))
-    header_cols <- c(paste0(" ", paste(col_names, collapse = " ")), paste0(" ", paste(types, collapse = " ")))
+    types <- vapply(
+      coord_cols,
+      function(x) paste0("<", class(x)[1L], ">"),
+      character(1)
+    )
+    header_cols <- c(
+      paste0(" ", paste(col_names, collapse = " ")),
+      paste0(" ", paste(types, collapse = " "))
+    )
     cols_data <- character()
   }
-  # Use the wider header (names + types) to align the | separator
-  if (nchar(trimws(header_cols[1L], "right")) >= nchar(trimws(header_rows[1L], "right"))) {
+  # use the wider header (names + types) to align the | separator
+  if (nchar(trimws(header_cols[1L], "right")) >=
+      nchar(trimws(header_rows[1L], "right"))) {
     header <- header_cols
   } else {
     header <- header_rows
   }
-  # Pad all coord lines to the same width for aligned | separator
+  # pad all coord lines to the same width for aligned | separator
   coord_lines <- trimws(c(header, rows_data, cols_data), "right")
   max_width <- max(nchar(coord_lines))
   coord_lines <- paste0(coord_lines, vapply(
-    max_width - nchar(coord_lines), function(n) paste(rep(" ", n), collapse = ""), character(1)
+    max_width - nchar(coord_lines),
+    function(n) paste(rep(" ", n), collapse = ""),
+    character(1)
   ))
-  # Style types line (italic + grey)
+  # style types line
   coord_lines[2L] <- style_type(coord_lines[2L])
-  # Style row numbers in data lines (lines 3+) as grey
+  # style row numbers in data lines (lines 3+) as grey
   if (length(coord_lines) > 2L) {
     data_idx <- seq(3L, length(coord_lines))
     for (i in data_idx) {
       m <- regexpr("^[0-9]+", coord_lines[i])
       if (m != -1L) {
         num_str <- regmatches(coord_lines[i], m)
-        rest <- substr(coord_lines[i], attr(m, "match.length") + 1L, nchar(coord_lines[i]))
-        coord_lines[i] <- paste0(style_grey(num_str), rest)
+        rest <- substr(
+          coord_lines[i],
+          attr(m, "match.length") + 1L,
+          nchar(coord_lines[i])
+        )
+        coord_lines[i] <- paste0(style_subtle(num_str), rest)
       }
     }
   }
@@ -480,7 +504,10 @@ ord_split_coord <- function(fmt_coord, layout) {
   data_start <- 3L
   n_row_data <- layout$n_show[1L]
   rows_data <- lines[seq(data_start, length.out = n_row_data)]
-  cols_data <- lines[seq(data_start + n_row_data, length.out = length(lines) - data_start - n_row_data + 1L)]
+  cols_data <- lines[seq(
+    data_start + n_row_data,
+    length.out = length(lines) - data_start - n_row_data + 1L
+  )]
   list(
     rows = c(header, rows_data),
     cols = c(header, cols_data),
@@ -490,7 +517,7 @@ ord_split_coord <- function(fmt_coord, layout) {
 
 ord_combine <- function(split, fmt_ann, layout, coord_alloc) {
   result <- list()
-  styled_sep <- style_grey(" | ")
+  styled_sep <- style_subtle(" | ")
   for (nm in c("rows", "cols")) {
     coord_lines <- split[[nm]]
     ann <- fmt_ann[[nm]]
@@ -505,10 +532,10 @@ ord_combine <- function(split, fmt_ann, layout, coord_alloc) {
     }
     sep <- rep(styled_sep, max_len)
     if (split$has_more_cols) {
-      styled_ellipsis <- style_grey(" \u2026")
+      styled_ellipsis <- style_subtle(" \u2026")
       sep[1L] <- paste0(styled_ellipsis, styled_sep)
       sep[-1L] <- paste0("  ", sep[-1L])
-      # Add ellipsis to median data line at the same position
+      # add ellipsis to median data line at the same position
       n_data <- length(coord_lines) - 2L
       if (n_data > 0L) {
         median_idx <- 2L + floor((n_data + 1L) / 2L)
@@ -524,7 +551,7 @@ ord_combine <- function(split, fmt_ann, layout, coord_alloc) {
 ord_assemble <- function(header, body, footer) {
   rows_lines <- body$rows
   cols_lines <- body$cols
-  # Split header at "# Columns" line to relocate it
+  # split header at "# Columns" line to relocate it
   cols_idx <- grep("^# Columns", header)
   if (length(cols_idx) > 0L) {
     hdr_rows <- header[seq_len(cols_idx[1L] - 1L)]
@@ -549,7 +576,7 @@ ord_assemble <- function(header, body, footer) {
   )
 }
 
-# Existing methods ----------------------------------------------------------
+# methods
 
 #' @rdname format
 #' @export
@@ -586,7 +613,7 @@ print.tbl_ord <- function(
   invisible(x)
 }
 
-# this trick is borrowed from *tibble*
+# borrow trick from {tibble}
 op.tbl_ord <- list(
   tbl_ord.print_max = 10L,
   tbl_ord.print_min = 5L,
@@ -597,13 +624,13 @@ op.tbl_ord <- list(
 tbl_ord_opt <- function(x) {
   x_tbl_ord <- paste0("tbl_ord.", x)
   res <- getOption(x_tbl_ord)
-  if (!is.null(res)) {
+  if (! is.null(res)) {
     return(res)
   }
   
   x_tibble <- paste0("tibble.", x)
   res <- getOption(x_tibble)
-  if (!is.null(res)) {
+  if (! is.null(res)) {
     return(as.integer(res / 2))
   }
   
