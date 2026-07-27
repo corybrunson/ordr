@@ -265,7 +265,6 @@ ord_header <- function(layout) {
   if (! is.null(supp_line)) lines <- c(lines, supp_line)
   factor_lines <- ord_header_factors(layout)
   lines <- c(lines, factor_lines)
-  lines <- style_subtle(lines)
   lines
 }
 
@@ -566,6 +565,10 @@ ord_assemble <- function(header, body, footer) {
     cols_header <- NULL
     hdr_after <- character()
   }
+  # style header lines after splitting (ord_header no longer applies styling)
+  hdr_rows <- style_subtle(hdr_rows)
+  if (! is.null(cols_header)) cols_header <- style_subtle(cols_header)
+  if (length(hdr_after) > 0L) hdr_after <- style_subtle(hdr_after)
   c(
     hdr_rows,
     rows_lines,
@@ -596,7 +599,8 @@ format.tbl_ord <- function(
   fmt_ann <- ord_format_ann(layout, alloc)
   split <- ord_split_coord(fmt_coord, layout)
   body <- ord_combine(split, fmt_ann, layout, alloc)
-  ord_assemble(header, body, footer)
+  out <- ord_assemble(header, body, footer)
+  out
 }
 
 #' @rdname format
