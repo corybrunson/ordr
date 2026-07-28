@@ -42,7 +42,8 @@ test_that("format narrow width no side-printing", {
   out <- format(ord_pca, width = 20, n = 5L)
   # At very narrow widths, annotation lines should be empty; info lines
   # starting with "#" must never appear next to coord data
-  expect_false(any(grepl("^#.*\\|", out)))
+  # Combined data uses " | " with spaces; compressed brackets use "|" without
+  expect_false(any(grepl("^#.* \\| ", out)))
 })
 
 test_that("format pipe alignment across all lines", {

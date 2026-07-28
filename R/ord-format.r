@@ -198,7 +198,17 @@ ord_header_factors <- function(layout) {
       lines <- c(lines, line_noconf)
       next
     }
-    # tier 5: compact, no brackets
+    # tier 5: compressed brackets, no conference
+    line_compact <- paste0(
+      "# ", factor_names[i], ": [",
+      layout$n_dims[i], "\u00d7", layout$rk,
+      "|", layout$n_ann[i], "]"
+    )
+    if (nchar(line_compact) <= layout$width) {
+      lines <- c(lines, line_compact)
+      next
+    }
+    # tier 6: compact, no brackets
     compact <- paste0("# ", factor_names[i], ": ",
                       layout$n_dims[i], " \u00d7 ", layout$rk)
     if (nchar(compact) <= layout$width) lines <- c(lines, compact)

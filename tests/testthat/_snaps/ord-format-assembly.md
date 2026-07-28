@@ -22,7 +22,7 @@
       ord_header(layout)
     Output
       [1] "# A tbl_ord: (150×4)·(4×4)´" "# 4 coordinates"            
-      [3] "# Rows: 150 × 4"             "# Columns: 4 × 4"           
+      [3] "# Rows: [150×4|1]"           "# Columns: [4×4|3]"         
 
 # ord_header snapshot lda
 
