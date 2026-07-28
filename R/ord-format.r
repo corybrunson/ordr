@@ -132,7 +132,7 @@ ord_header_supp <- function(layout) {
                              if (cols_n != 1) "s"))
   }
   line <- paste0("# \u2139 ", paste(parts, collapse = " "))
-  line_width <- nchar(gsub("\033\\[[0-9;]*[a-zA-Z]", "", line))
+  line_width <- nchar(strip_ansi(line))
   if (line_width <= layout$width) line else NULL
 }
 
@@ -513,7 +513,6 @@ ord_format_coord <- function(layout, coord_alloc) {
 ord_split_coord <- function(fmt_coord, layout) {
   lines <- fmt_coord$lines
   # lines structure: names (1), types (2), row data (3+), col data
-  header <- lines[1:2]
   n_row_data <- fmt_coord$n_row_actual
   n_col_data <- fmt_coord$n_col_actual
   # guard against malformed coord lines
@@ -532,7 +531,7 @@ ord_split_coord <- function(fmt_coord, layout) {
   name_ends <- as.integer(name_tokens) +
     attr(name_tokens, "match.length") - 1L
   cell_widths <- diff(c(0L, name_ends))
-  n_coord_cols <- fmt_coord$n_cols_shown
+  n_coord_cols <- length(name_ends)
   
   # Build an inertia sub-header for one factor; return NULL on failure
   inertia_sub <- function(conf_p) {
