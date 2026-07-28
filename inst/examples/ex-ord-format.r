@@ -20,3 +20,17 @@ print(iris_lda)
 
 # too many annotations to print within console width
 print(iris_lda, width = 40)
+
+haireye_ca <- ordinate(
+  as.data.frame(rowSums(HairEyeColor, dims = 2L)),
+  cols = everything(), model = MASS::corresp, nf = 3
+)
+
+# default conference: standard coordinates for both factors
+print(haireye_ca)
+
+# column-principal coordinates, very narrow width
+print(confer_inertia(haireye_ca, "cols"), width = 18)
+
+# symmetric coordinates
+print(confer_inertia(haireye_ca, "symmetric"), max_extra_cols = 1)

@@ -110,10 +110,12 @@ test_that("ord_split_coord splits correctly and preserves headers", {
   expect_equal(length(sc$rows), 7L)
   # 4 col data lines + 2 header lines = 6
   expect_equal(length(sc$cols), 6L)
-  # Both halves share the same header lines
-  expect_equal(sc$rows[1:2], sc$cols[1:2])
+  # Names line is shared; sub-headers are factor-specific
+  expect_equal(sc$rows[1], sc$cols[1])
+  expect_match(sc$rows[2], "\\[")
+  expect_match(sc$cols[2], "\\[")
 
-  # small object: all rows fit
+  # small object: no conference, so both fall back to types line
   layout_small <- get_ord_layout(ord_small, width = 80)
   alloc_small <- ord_width_alloc(layout_small)
   fc_small <- ord_format_coord(layout_small, alloc_small)

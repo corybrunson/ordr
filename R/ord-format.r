@@ -514,9 +514,51 @@ ord_split_coord <- function(fmt_coord, layout) {
   cols_data <- if (n_col_data > 0L) {
     lines[seq(3L + n_row_data, length.out = n_col_data)]
   }
+  # Compute cell widths from column name right edges in the names line
+  names_line <- lines[1L]
+  types_line <- lines[2L]
+  name_tokens <- gregexpr("[^[:space:]]+", names_line)[[1]]
+  name_ends <- as.integer(name_tokens) +
+    attr(name_tokens, "match.length") - 1L
+  cell_widths <- diff(c(0L, name_ends))
+  n_coord_cols <- fmt_coord$n_cols_shown
+  
+  # Build an inertia sub-header for one factor; return NULL on failure
+  inertia_sub <- function(conf_p) {
+    inertia <- recover_inertia(layout$x)
+    if (is.null(inertia) || anyNA(inertia) || is.null(conf_p))
+      return(NULL)
+    vals <- inertia^conf_p
+    vals <- head(vals, n_coord_cols)
+    if (length(vals) == 0L) return(NULL)
+    cells <- character(length(vals))
+    for (i in seq_along(vals)) {
+      w <- cell_widths[i]
+      base <- paste0("[", format(vals[i], digits = 4), "]")
+      for (d in 4:1) {
+        inner <- format(vals[i], digits = d)
+        base <- paste0("[", inner, "]")
+        if (nchar(base) <= w) break
+      }
+      if (nchar(base) > w) return(NULL)
+      cells[i] <- paste0(strrep(" ", w - nchar(base)), base)
+    }
+    paste0(cells, collapse = "")
+  }
+  
+  conf <- layout$conference
+  row_sub <- if (! is.null(conf) && n_row_data > 0L) {
+    s <- inertia_sub(conf[1L])
+    if (! is.null(s)) style_type(s) else NULL
+  } else NULL
+  col_sub <- if (! is.null(conf) && n_col_data > 0L) {
+    s <- inertia_sub(conf[2L])
+    if (! is.null(s)) style_type(s) else NULL
+  } else NULL
+  
   list(
-    rows = c(header, rows_data),
-    cols = c(header, cols_data),
+    rows = c(names_line, row_sub %||% types_line, rows_data),
+    cols = c(names_line, col_sub %||% types_line, cols_data),
     has_more_cols = fmt_coord$has_more_cols
   )
 }
