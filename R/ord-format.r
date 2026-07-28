@@ -520,7 +520,9 @@ ord_split_coord <- function(fmt_coord, layout) {
     n_col_data <- min(n_col_data, length(lines) - 2L - n_row_data)
   }
   rows_data <- if (n_row_data > 0L) lines[seq(3L, length.out = n_row_data)]
-  cols_data <- if (n_col_data > 0L) lines[seq(3L + n_row_data, length.out = n_col_data)]
+  cols_data <- if (n_col_data > 0L) {
+    lines[seq(3L + n_row_data, length.out = n_col_data)]
+  }
   list(
     rows = c(header, rows_data),
     cols = c(header, cols_data),
