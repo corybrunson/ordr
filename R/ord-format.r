@@ -402,80 +402,82 @@ ord_format_ann <- function(layout, coord_alloc) {
   result
 }
 
+split_align_tbl <- function(x, n, fmt = NULL, ...) {
+  stopifnot(is.integer(n), length(n) == 2L, all(n >= 0L))
+  if (is.null(fmt)) fmt <- format(x, n = Inf, ...)
+  m <- max(n)
+  non_comment <- fmt[!grepl("^#", fmt)]
+  data_lines <- non_comment[-(1:2)]
+  stopifnot(length(data_lines) == n[1L] + n[2L])
+  ipf <- sub("^(\\s*[0-9]+).*", "\\1", data_lines[seq_len(m)])
+  data1 <- data_lines[seq_len(n[1L])]
+  data2 <- data_lines[n[1L] + seq_len(n[2L])]
+  replace_prefix <- function(line, new_val) {
+    old_pref <- sub("^(\\s*[0-9]+).*", "\\1", line)
+    w <- nchar(old_pref)
+    new_padded <- format(as.integer(new_val), width = w, justify = "right")
+    sub("^\\s*[0-9]+", new_padded, line)
+  }
+  data1 <- mapply(replace_prefix, data1, sub("^\\s*", "", ipf[seq_len(n[1L])]))
+  data2 <- mapply(replace_prefix, data2, sub("^\\s*", "", ipf[seq_len(n[2L])]))
+  list(data1 = data1, data2 = data2)
+}
+
 ord_format_coord <- function(layout, coord_alloc) {
   rk <- layout$rk
   cols_to_show <- seq_len(min(rk, coord_alloc$max_coord_cols))
   coord_rows <- as_tibble(layout$dims$rows)[, cols_to_show, drop = FALSE]
   coord_cols <- as_tibble(layout$dims$cols)[, cols_to_show, drop = FALSE]
-  # Ffrmat each factor separately to get independent row numbers
-  fmt_rows <- strip_ansi(
-    format(head(coord_rows, layout$n_show[1L]), width = coord_alloc$coord_avail)
+  # build combined tibble and split into two groups with
+  # restarted row numbers (1..n₁, 1..n₂)
+  n_actual <- c(
+    min(layout$n_show[1L], nrow(coord_rows)),
+    min(layout$n_show[2L], nrow(coord_cols))
   )
-  fmt_cols <- strip_ansi(
-    format(head(coord_cols, layout$n_show[2L]), width = coord_alloc$coord_avail)
+  coord_combined <- rbind(
+    head(coord_rows, n_actual[1L]),
+    head(coord_cols, n_actual[2L])
   )
-  # process rows: check if format has usable column headers
-  if (! grepl("^#", fmt_rows[2L])) {
-    header_rows <- fmt_rows[2:3]
-    rows_data <- fmt_rows[-(1:3)]
-    rows_data <- sub("^\\s*[0-9]+", "", rows_data)
-    rows_data <- paste0(seq_along(rows_data), rows_data)
-  } else {
-    # at very narrow widths, tibble wraps title/info lines
-    col_names <- names(coord_rows)
-    types <- vapply(
-      coord_rows,
-      function(x) paste0("<", class(x)[1L], ">"),
-      character(1)
+  fmt_combined <- strip_ansi(
+    format(coord_combined, width = coord_alloc$coord_avail)
+  )
+  non_comment <- fmt_combined[!grepl("^#", fmt_combined)]
+  header <- non_comment[1:2]
+  if (length(non_comment) >= 3L) {
+    split <- split_align_tbl(
+      coord_combined, n_actual, fmt = fmt_combined
     )
-    header_rows <- c(
-      paste0(" ", paste(col_names, collapse = " ")),
-      paste0(" ", paste(types, collapse = " "))
-    )
-    rows_data <- character()
-  }
-  # process cols: check if format has usable column headers
-  if (! grepl("^#", fmt_cols[2L])) {
-    header_cols <- fmt_cols[2:3]
-    cols_data <- fmt_cols[-(1:3)]
-    cols_data <- sub("^\\s*[0-9]+", "", cols_data)
-    cols_data <- paste0(seq_along(cols_data), cols_data)
+    coord_lines <- c(header, split$data1, split$data2)
   } else {
-    # at very narrow widths, tibble wraps title/info lines
+    # very narrow width: tibble wraps everything into # lines
     col_names <- names(coord_cols)
     types <- vapply(
       coord_cols,
       function(x) paste0("<", class(x)[1L], ">"),
       character(1)
     )
-    header_cols <- c(
+    coord_lines <- c(
       paste0(" ", paste(col_names, collapse = " ")),
       paste0(" ", paste(types, collapse = " "))
     )
-    cols_data <- character()
-  }
-  # use the wider header (names + types) to align the | separator
-  if (nchar(trimws(header_cols[1L], "right")) >=
-      nchar(trimws(header_rows[1L], "right"))) {
-    header <- header_cols
-  } else {
-    header <- header_rows
   }
   # pad all coord lines to the same width for aligned | separator
-  coord_lines <- trimws(c(header, rows_data, cols_data), "right")
-  max_width <- max(nchar(coord_lines))
-  coord_lines <- paste0(coord_lines, vapply(
-    max_width - nchar(coord_lines),
-    function(n) paste(rep(" ", n), collapse = ""),
-    character(1)
-  ))
+  coord_lines <- trimws(coord_lines, "right")
+  if (length(coord_lines) > 2L) {
+    max_width <- max(nchar(coord_lines))
+    coord_lines <- paste0(coord_lines, vapply(
+      max_width - nchar(coord_lines),
+      function(n) paste(rep(" ", n), collapse = ""),
+      character(1)
+    ))
+  }
   # style types line
   coord_lines[2L] <- style_type(coord_lines[2L])
   # style row numbers in data lines (lines 3+) as grey
   if (length(coord_lines) > 2L) {
     data_idx <- seq(3L, length(coord_lines))
     for (i in data_idx) {
-      m <- regexpr("^[0-9]+", coord_lines[i])
+      m <- regexpr("^\\s*[0-9]+", coord_lines[i])
       if (m != -1L) {
         num_str <- regmatches(coord_lines[i], m)
         rest <- substr(
@@ -491,8 +493,8 @@ ord_format_coord <- function(layout, coord_alloc) {
     lines = coord_lines,
     n_cols_shown = length(cols_to_show),
     has_more_cols = rk > coord_alloc$max_coord_cols,
-    n_rows = layout$n_show[1L],
-    n_cols = layout$n_show[2L]
+    n_row_actual = n_actual[1L],
+    n_col_actual = n_actual[2L]
   )
 }
 
@@ -500,13 +502,15 @@ ord_split_coord <- function(fmt_coord, layout) {
   lines <- fmt_coord$lines
   # lines structure: names (1), types (2), row data (3+), col data
   header <- lines[1:2]
-  data_start <- 3L
-  n_row_data <- layout$n_show[1L]
-  rows_data <- lines[seq(data_start, length.out = n_row_data)]
-  cols_data <- lines[seq(
-    data_start + n_row_data,
-    length.out = length(lines) - data_start - n_row_data + 1L
-  )]
+  n_row_data <- fmt_coord$n_row_actual
+  n_col_data <- fmt_coord$n_col_actual
+  # guard against malformed coord lines
+  if (length(lines) - 2L < n_row_data + n_col_data) {
+    n_row_data <- min(n_row_data, length(lines) - 2L)
+    n_col_data <- min(n_col_data, length(lines) - 2L - n_row_data)
+  }
+  rows_data <- if (n_row_data > 0L) lines[seq(3L, length.out = n_row_data)]
+  cols_data <- if (n_col_data > 0L) lines[seq(3L + n_row_data, length.out = n_col_data)]
   list(
     rows = c(header, rows_data),
     cols = c(header, cols_data),

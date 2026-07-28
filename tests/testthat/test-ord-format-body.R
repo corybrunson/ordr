@@ -83,6 +83,63 @@ test_that("coord snapshot narrow", {
   expect_snapshot(ord_format_coord(layout, alloc)$lines)
 })
 
+test_that("coord decimal alignment with 2-digit row numbers", {
+  layout <- get_ord_layout(ord_pca, width = 80, n = 10L)
+  alloc <- ord_width_alloc(layout)
+  fc <- ord_format_coord(layout, alloc)
+  lines <- strip_style(fc$lines)
+  # data lines are after the 2-line header
+  data_lines <- lines[-seq_len(2L)]
+  n_row <- min(layout$n_show[1L], layout$n_dims[1L])
+  row_data <- data_lines[seq_len(n_row)]
+  # extract the position of every "." in each data line
+  dot_positions <- lapply(row_data, function(line) {
+    m <- gregexpr("\\.", line)[[1]]
+    if (m[1L] == -1L) integer(0) else as.integer(m)
+  })
+  # each data line must have the same number of decimal points
+  n_dots <- vapply(dot_positions, length, integer(1))
+  expect_equal(n_dots, rep(n_dots[1L], length(n_dots)))
+  # and those decimal points must appear at the same column positions
+  for (i in seq_along(dot_positions)[-1L]) {
+    expect_equal(dot_positions[[i]], dot_positions[[1L]],
+      label = paste0("decimal positions in row ", i, " match row 1")
+    )
+  }
+  expect_snapshot(lines)
+})
+
+test_that("coord decimal alignment between row and col factors", {
+  layout <- get_ord_layout(ord_pca, width = 80, n = 10L)
+  alloc <- ord_width_alloc(layout)
+  fc <- ord_format_coord(layout, alloc)
+  lines <- strip_style(fc$lines)
+  n_row <- layout$n_show[1L]
+  n_col <- min(layout$n_show[2L], layout$n_dims[2L])
+  row_data <- lines[seq_len(n_row) + 2L]
+  col_data <- lines[seq_len(n_col) + 2L + n_row]
+  all_data <- c(row_data, col_data)
+  header <- lines[1L]
+  n_coords <- length(gregexpr("PC[0-9]+", header)[[1]])
+  # each data line must have exactly one decimal per coordinate
+  for (i in seq_along(all_data)) {
+    dots <- gregexpr("[.]", all_data[i])[[1]]
+    dots <- dots[dots != -1L]
+    expect_equal(length(dots), n_coords,
+      label = paste0("line ", i, " has a decimal for each coordinate"))
+  }
+  # all decimal positions must be identical across every line
+  ref_dots <- gregexpr("[.]", all_data[1L])[[1]]
+  for (i in seq_along(all_data)[-1L]) {
+    expect_equal(
+      gregexpr("[.]", all_data[i])[[1]],
+      ref_dots,
+      label = paste0("line ", i, " decimal positions match line 1")
+    )
+  }
+  expect_snapshot(lines)
+})
+
 # ord_split_coord -------------------------------------------------------------
 
 test_that("ord_split_coord basic", {
