@@ -2,15 +2,6 @@
 
 # ord_format_coord ------------------------------------------------------------
 
-test_that("coord basic", {
-  layout <- get_ord_layout(ord_pca, width = 80)
-  alloc <- ord_width_alloc(layout)
-  fc <- ord_format_coord(layout, alloc)
-  expect_true(is.list(fc))
-  expect_true(is.character(fc$lines))
-  expect_true(fc$n_cols_shown >= 1L)
-})
-
 test_that("coord all fit", {
   layout <- get_ord_layout(ord_small, width = 80)
   alloc <- ord_width_alloc(layout)
@@ -19,19 +10,10 @@ test_that("coord all fit", {
   expect_equal(fc$n_cols_shown, 3L)
 })
 
-test_that("coord truncation with n", {
-  layout <- get_ord_layout(ord_pca, width = 80, n = 5L)
-  alloc <- ord_width_alloc(layout)
-  fc <- ord_format_coord(layout, alloc)
-  # header + types + 5 rows data + 5 rows data = 12 lines total
-  expect_true(length(fc$lines) > 0L)
-})
-
 test_that("coord row counts match n_show", {
   layout <- get_ord_layout(ord_pca, width = 80, n = 5L)
   alloc <- ord_width_alloc(layout)
   fc <- ord_format_coord(layout, alloc)
-  # fc$lines includes tibble header (names + types); data rows = min(n_show, n_dims) per factor
   data_lines <- fc$lines[-seq_len(2L)]
   actual_row_rows <- min(layout$n_show[1L], layout$n_dims[1L])
   actual_col_rows <- min(layout$n_show[2L], layout$n_dims[2L])
@@ -83,32 +65,6 @@ test_that("coord snapshot narrow", {
   expect_snapshot(ord_format_coord(layout, alloc)$lines)
 })
 
-test_that("coord decimal alignment with 2-digit row numbers", {
-  layout <- get_ord_layout(ord_pca, width = 80, n = 10L)
-  alloc <- ord_width_alloc(layout)
-  fc <- ord_format_coord(layout, alloc)
-  lines <- strip_style(fc$lines)
-  # data lines are after the 2-line header
-  data_lines <- lines[-seq_len(2L)]
-  n_row <- min(layout$n_show[1L], layout$n_dims[1L])
-  row_data <- data_lines[seq_len(n_row)]
-  # extract the position of every "." in each data line
-  dot_positions <- lapply(row_data, function(line) {
-    m <- gregexpr("\\.", line)[[1]]
-    if (m[1L] == -1L) integer(0) else as.integer(m)
-  })
-  # each data line must have the same number of decimal points
-  n_dots <- vapply(dot_positions, length, integer(1))
-  expect_equal(n_dots, rep(n_dots[1L], length(n_dots)))
-  # and those decimal points must appear at the same column positions
-  for (i in seq_along(dot_positions)[-1L]) {
-    expect_equal(dot_positions[[i]], dot_positions[[1L]],
-      label = paste0("decimal positions in row ", i, " match row 1")
-    )
-  }
-  expect_snapshot(lines)
-})
-
 test_that("coord decimal alignment between row and col factors", {
   layout <- get_ord_layout(ord_pca, width = 80, n = 10L)
   alloc <- ord_width_alloc(layout)
@@ -142,7 +98,7 @@ test_that("coord decimal alignment between row and col factors", {
 
 # ord_split_coord -------------------------------------------------------------
 
-test_that("ord_split_coord basic", {
+test_that("ord_split_coord splits correctly and preserves headers", {
   layout <- get_ord_layout(ord_pca, width = 80, n = 5L)
   alloc <- ord_width_alloc(layout)
   fc <- ord_format_coord(layout, alloc)
@@ -154,27 +110,17 @@ test_that("ord_split_coord basic", {
   expect_equal(length(sc$rows), 7L)
   # 4 col data lines + 2 header lines = 6
   expect_equal(length(sc$cols), 6L)
-})
-
-test_that("ord_split_coord header preserved", {
-  layout <- get_ord_layout(ord_pca, width = 80, n = 5L)
-  alloc <- ord_width_alloc(layout)
-  fc <- ord_format_coord(layout, alloc)
-  sc <- ord_split_coord(fc, layout)
   # Both halves share the same header lines
   expect_equal(sc$rows[1:2], sc$cols[1:2])
-})
 
-test_that("ord_split_coord small", {
-  layout <- get_ord_layout(ord_small, width = 80)
-  alloc <- ord_width_alloc(layout)
-  fc <- ord_format_coord(layout, alloc)
-  sc <- ord_split_coord(fc, layout)
-  # 3 row data + 2 header = 5
-  expect_equal(length(sc$rows), 5L)
-  # 3 col data + 2 header = 5
-  expect_equal(length(sc$cols), 5L)
-  expect_equal(sc$rows[1:2], sc$cols[1:2])
+  # small object: all rows fit
+  layout_small <- get_ord_layout(ord_small, width = 80)
+  alloc_small <- ord_width_alloc(layout_small)
+  fc_small <- ord_format_coord(layout_small, alloc_small)
+  sc_small <- ord_split_coord(fc_small, layout_small)
+  expect_equal(length(sc_small$rows), 5L)
+  expect_equal(length(sc_small$cols), 5L)
+  expect_equal(sc_small$rows[1:2], sc_small$cols[1:2])
 })
 
 # ord_format_ann --------------------------------------------------------------

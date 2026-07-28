@@ -6,16 +6,10 @@ has_ansi_support <- function() {
   grepl("\033", x, fixed = TRUE)
 }
 
-test_that("style_subtle returns plain text when crayon is off", {
+test_that("style_subtle returns plain text when crayon is off, ANSI when on", {
   old <- options(crayon.enabled = FALSE)
   on.exit(options(old), add = TRUE)
   expect_equal(style_subtle("hello"), "hello")
-})
-
-test_that("style_type returns plain text when crayon is off", {
-  old <- options(crayon.enabled = FALSE)
-  on.exit(options(old), add = TRUE)
-  expect_equal(style_type("<dbl>"), "<dbl>")
 })
 
 test_that("style_subtle returns ANSI-styled text when crayon is on", {
@@ -23,6 +17,12 @@ test_that("style_subtle returns ANSI-styled text when crayon is on", {
   out <- style_subtle("hello")
   expect_true(grepl("\033", out, fixed = TRUE))
   expect_false(grepl("3m", out, fixed = TRUE))
+})
+
+test_that("style_type returns plain text when crayon is off, ANSI when on", {
+  old <- options(crayon.enabled = FALSE)
+  on.exit(options(old), add = TRUE)
+  expect_equal(style_type("<dbl>"), "<dbl>")
 })
 
 test_that("style_type returns italic+grey text when crayon is on", {

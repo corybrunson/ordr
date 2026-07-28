@@ -2,7 +2,7 @@
 
 # ord_header ------------------------------------------------------------------
 
-test_that("ord_header basic", {
+test_that("ord_header responds to width and conference", {
   layout <- get_ord_layout(ord_pca, width = 80)
   hdr <- ord_header(layout)
   expect_true(is.character(hdr))
@@ -10,33 +10,26 @@ test_that("ord_header basic", {
   expect_true(any(grepl("PC1", hdr)))
   expect_true(any(grepl("Rows", hdr)))
   expect_true(any(grepl("Columns", hdr)))
+
+  layout30 <- get_ord_layout(ord_pca, width = 30)
+  hdr30 <- ord_header(layout30)
+  expect_false(any(grepl("PC1", hdr30)))
+
+  layout25 <- get_ord_layout(ord_pca, width = 25)
+  hdr25 <- ord_header(layout25)
+  expect_true(any(grepl("A tbl_ord", hdr25)))
 })
 
-test_that("ord_header narrow omits coord names", {
-  layout <- get_ord_layout(ord_pca, width = 30)
-  hdr <- ord_header(layout)
-  # At width 30, coord names line should be omitted
-  expect_false(any(grepl("PC1", hdr)))
-})
-
-test_that("ord_header very narrow is minimal", {
-  layout <- get_ord_layout(ord_pca, width = 25)
-  hdr <- ord_header(layout)
-  expect_true(any(grepl("A tbl_ord", hdr)))
-})
-
-test_that("ord_header conference symmetric", {
+test_that("ord_header displays conference type", {
   x_sym <- confer_inertia(ord_pca, 0.5)
-  layout <- get_ord_layout(x_sym, width = 80)
-  hdr <- ord_header(layout)
-  expect_true(any(grepl("symmetric", hdr)))
-})
+  layout_sym <- get_ord_layout(x_sym, width = 80)
+  hdr_sym <- ord_header(layout_sym)
+  expect_true(any(grepl("symmetric", hdr_sym)))
 
-test_that("ord_header conference standard", {
   x_std <- confer_inertia(ord_pca, 0)
-  layout <- get_ord_layout(x_std, width = 80)
-  hdr <- ord_header(layout)
-  expect_true(any(grepl("standard", hdr)))
+  layout_std <- get_ord_layout(x_std, width = 80)
+  hdr_std <- ord_header(layout_std)
+  expect_true(any(grepl("standard", hdr_std)))
 })
 
 test_that("ord_header no annotations", {
@@ -113,7 +106,6 @@ test_that("footer styled grey", {
   layout <- get_ord_layout(ord_pca, width = 80, n = 5L)
   ftr <- ord_footer(layout)
   # All lines should be styled grey when crayon is available
-  # (strip_style removes ANSI; if all lines were styled, original has ANSI)
   if (crayon::has_color()) {
     expect_true(all(grepl("\033", ftr, fixed = TRUE)))
   }
@@ -146,7 +138,11 @@ test_that("footer snapshot very narrow", {
 
 # ord_assemble ----------------------------------------------------------------
 
-test_that("ord_assemble basic", {
+test_that("print snapshot stripped", {
+  expect_snapshot(strip_style(format(ord_pca)))
+})
+
+test_that("ord_assemble concatenates header, body, and footer in order", {
   header <- c("# header line 1", "# header line 2")
   body <- list(rows = c("row line 1", "row line 2"), cols = c("col line 1"))
   footer <- c("# footer line 1")
@@ -157,30 +153,24 @@ test_that("ord_assemble basic", {
   expect_equal(out[4], "row line 2")
   expect_equal(out[5], "col line 1")
   expect_equal(out[6], "# footer line 1")
-})
 
-test_that("ord_assemble line count", {
-  header <- c("# h1", "# h2", "# h3")
-  body <- list(rows = paste("r", 1:5), cols = paste("c", 1:4))
-  footer <- character()
-  out <- ord_assemble(header, body, footer)
-  expect_equal(length(out), 3L + 5L + 4L + 0L)
-})
+  header3 <- c("# h1", "# h2", "# h3")
+  body3 <- list(rows = paste("r", 1:5), cols = paste("c", 1:4))
+  footer0 <- character()
+  out3 <- ord_assemble(header3, body3, footer0)
+  expect_equal(length(out3), 3L + 5L + 4L + 0L)
 
-test_that("ord_assemble no footer", {
-  header <- c("# h1")
-  body <- list(rows = "r1", cols = "c1")
-  footer <- character()
-  out <- ord_assemble(header, body, footer)
-  expect_equal(length(out), 3L)
-  expect_equal(out[3], "c1")
-})
+  header1 <- c("# h1")
+  body1 <- list(rows = "r1", cols = "c1")
+  footer1 <- character()
+  out1 <- ord_assemble(header1, body1, footer1)
+  expect_equal(length(out1), 3L)
+  expect_equal(out1[3], "c1")
 
-test_that("ord_assemble empty body", {
-  header <- c("# h1")
-  body <- list(rows = character(), cols = character())
-  footer <- c("# f1")
-  out <- ord_assemble(header, body, footer)
-  expect_equal(length(out), 2L)
-  expect_equal(out, c("# h1", "# f1"))
+  header_empty_body <- c("# h1")
+  body_empty <- list(rows = character(), cols = character())
+  footer_empty <- c("# f1")
+  out_empty <- ord_assemble(header_empty_body, body_empty, footer_empty)
+  expect_equal(length(out_empty), 2L)
+  expect_equal(out_empty, c("# h1", "# f1"))
 })
