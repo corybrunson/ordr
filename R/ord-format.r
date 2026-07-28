@@ -149,69 +149,60 @@ ord_header_factors <- function(layout) {
     paste0(round(100 * p, 0), "%")
   }
   factor_names <- c("Rows", "Columns")
-  lines <- character()
-  for (i in seq_along(factor_names)) {
+  # Build a line for component i at the given tier.
+  # Returns NULL when the needed label is unavailable (tiers 1-3).
+  factor_line <- function(i, tier) {
     cname <- conf_name(layout$conference[i])
     cpct <- conf_pct(layout$conference[i])
-    # tier 1: name + percentage in parentheses
-    label_np <- if (! is.null(cname) && ! is.null(cpct)) {
-      paste0(" (", cname, ", ", cpct, ")")
+    if (tier == 1L) {
+      if (is.null(cname) || is.null(cpct)) return(NULL)
+      label <- paste0(" (", cname, ", ", cpct, ")")
+      paste0("# ", factor_names[i], label, ": [ ",
+             layout$n_dims[i], " \u00d7 ", layout$rk,
+             " | ", layout$n_ann[i], " ]")
+    } else if (tier == 2L) {
+      if (is.null(cname)) return(NULL)
+      label <- paste0(" (", cname, ")")
+      paste0("# ", factor_names[i], label, ": [ ",
+             layout$n_dims[i], " \u00d7 ", layout$rk,
+             " | ", layout$n_ann[i], " ]")
+    } else if (tier == 3L) {
+      if (is.null(cpct)) return(NULL)
+      label <- paste0(" (", cpct, ")")
+      paste0("# ", factor_names[i], label, ": [ ",
+             layout$n_dims[i], " \u00d7 ", layout$rk,
+             " | ", layout$n_ann[i], " ]")
+    } else if (tier == 4L) {
+      paste0("# ", factor_names[i], ": [ ",
+             layout$n_dims[i], " \u00d7 ", layout$rk,
+             " | ", layout$n_ann[i], " ]")
+    } else if (tier == 5L) {
+      paste0("# ", factor_names[i], ": [",
+             layout$n_dims[i], "\u00d7", layout$rk,
+             "|", layout$n_ann[i], "]")
+    } else {
+      paste0("# ", factor_names[i], ": ",
+             layout$n_dims[i], " \u00d7 ", layout$rk)
     }
-    line_np <- paste0(
-      "# ", factor_names[i], label_np, ": [ ",
-      layout$n_dims[i], " \u00d7 ", layout$rk,
-      " | ", layout$n_ann[i], " ]"
-    )
-    if (! is.null(label_np) && nchar(line_np) <= layout$width) {
-      lines <- c(lines, line_np)
-      next
+  }
+  # Try tiers from richest (1) to poorest (6); adopt the first
+  # tier at which both components' lines are available and fit.
+  lines <- character()
+  for (tier in 1:6) {
+    ok <- TRUE
+    tier_lines <- character()
+    for (i in seq_along(factor_names)) {
+      line <- factor_line(i, tier)
+      if (is.null(line) || nchar(line) > layout$width) {
+        ok <- FALSE
+        break
+      }
+      tier_lines <- c(tier_lines, line)
     }
-    # tier 2: name only in parentheses
-    label_n <- if (! is.null(cname)) paste0(" (", cname, ")")
-    line_n <- paste0(
-      "# ", factor_names[i], label_n, ": [ ",
-      layout$n_dims[i], " \u00d7 ", layout$rk,
-      " | ", layout$n_ann[i], " ]"
-    )
-    if (! is.null(label_n) && nchar(line_n) <= layout$width) {
-      lines <- c(lines, line_n)
-      next
+    if (ok) {
+      lines <- tier_lines
+      break
     }
-    # tier 3: percentage only in parentheses
-    label_p <- if (! is.null(cpct)) paste0(" (", cpct, ")")
-    line_p <- paste0(
-      "# ", factor_names[i], label_p, ": [ ",
-      layout$n_dims[i], " \u00d7 ", layout$rk,
-      " | ", layout$n_ann[i], " ]"
-    )
-    if (! is.null(label_p) && nchar(line_p) <= layout$width) {
-      lines <- c(lines, line_p)
-      next
-    }
-    # tier 4: full brackets, no conference
-    line_noconf <- paste0(
-      "# ", factor_names[i], ": [ ",
-      layout$n_dims[i], " \u00d7 ", layout$rk,
-      " | ", layout$n_ann[i], " ]"
-    )
-    if (nchar(line_noconf) <= layout$width) {
-      lines <- c(lines, line_noconf)
-      next
-    }
-    # tier 5: compressed brackets, no conference
-    line_compact <- paste0(
-      "# ", factor_names[i], ": [",
-      layout$n_dims[i], "\u00d7", layout$rk,
-      "|", layout$n_ann[i], "]"
-    )
-    if (nchar(line_compact) <= layout$width) {
-      lines <- c(lines, line_compact)
-      next
-    }
-    # tier 6: compact, no brackets
-    compact <- paste0("# ", factor_names[i], ": ",
-                      layout$n_dims[i], " \u00d7 ", layout$rk)
-    if (nchar(compact) <= layout$width) lines <- c(lines, compact)
   }
   lines
 }
