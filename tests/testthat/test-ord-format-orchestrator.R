@@ -15,7 +15,7 @@ test_that("format wide width snapshot", {
 test_that("format explicit n", {
   out <- format(ord_pca, n = 5L)
   # Should have exactly 5 data rows per factor in the output
-  expect_true(any(grepl("145 more", out)))
+  expect_true(any(grepl("\u22ee", out)))
 })
 
 test_that("format list n with NULL", {
@@ -23,7 +23,7 @@ test_that("format list n with NULL", {
   expect_true(is.character(out))
   expect_true(length(out) > 0L)
   # Should have 3 row data entries
-  expect_true(any(grepl("147 more", out)))
+  expect_true(any(grepl("\u22ee", out)))
 })
 
 test_that("format conference symmetric", {

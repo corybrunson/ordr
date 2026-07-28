@@ -37,40 +37,37 @@
 # footer snapshot
 
     Code
-      strip_style(ord_footer(layout))
+      strip_style(c(ord_footer(layout)$rows_var, ord_footer(layout)$cols_var))
     Output
-      [1] "# ℹ 145 more rows"                            
-      [2] "# ℹ Use `print(n = ...)` to see more elements"
+      character(0)
 
 # footer snapshot all rows
 
     Code
-      strip_style(ord_footer(layout))
+      strip_style(c(ord_footer(layout)$rows_var, ord_footer(layout)$cols_var))
     Output
       character(0)
 
 # footer snapshot with max_extra_cols
 
     Code
-      strip_style(ord_footer(layout))
+      strip_style(c(ord_footer(layout)$rows_var, ord_footer(layout)$cols_var))
     Output
       [1] "# ℹ 2 more variables:\n#   center <numeric>, .element <character>"
 
 # footer snapshot narrow
 
     Code
-      strip_style(ord_footer(layout))
+      strip_style(c(ord_footer(layout)$rows_var, ord_footer(layout)$cols_var))
     Output
-      [1] "# ℹ 145 more rows"                            
-      [2] "# ℹ Use `print(n = ...)` to see more elements"
+      character(0)
 
 # footer snapshot very narrow
 
     Code
-      strip_style(ord_footer(layout))
+      strip_style(c(ord_footer(layout)$rows_var, ord_footer(layout)$cols_var))
     Output
-      [1] "# ℹ 145 more rows"                            
-      [2] "# ℹ Use `print(n = ...)` to see more elements"
+      character(0)
 
 # print snapshot stripped
 
@@ -95,6 +92,4 @@
       [16] "2 -0.0845 -0.730  -0.598  -0.320   | Sepal.~   3.06 active  "
       [17] "3  0.857   0.173  -0.0762 -0.480   | Petal.~   3.76 active  "
       [18] "4  0.358   0.0755 -0.546   0.754   | Petal.~   1.20 active  "
-      [19] "# ℹ 145 more rows"                                           
-      [20] "# ℹ Use `print(n = ...)` to see more elements"               
 

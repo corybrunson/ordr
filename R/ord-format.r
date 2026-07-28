@@ -270,7 +270,13 @@ ord_header <- function(layout) {
 }
 
 ord_footer <- function(layout) {
-  lines <- character()
+  # Build three footer components:
+  #   rows_var — "more variables" for rows annotations
+  #   cols_var — "more variables" for cols annotations
+  #   common   — row/col count footers + hint
+  rows_var <- character()
+  cols_var <- character()
+  # common <- character()
   rows_shown <- layout$n_show
   idx <- 1L
   for (nm in c("rows", "cols")) {
@@ -279,7 +285,7 @@ ord_footer <- function(layout) {
       label <- if (nm == "rows") "row" else "column"
       line <- paste0("# \u2139 ", big_mark(more), " more ", label,
                      if (more != 1L) "s")
-      lines <- c(lines, line)
+      # common <- c(common, line)
     }
     idx <- idx + 1L
   }
@@ -314,21 +320,26 @@ ord_footer <- function(layout) {
           "# \u2139 ", big_mark(n_extra), " more variable",
           if (n_extra != 1L) "s", ":\n#   ", var_str
         )
-        lines <- c(lines, line)
+        if (nm == "rows") {
+          rows_var <- c(rows_var, line)
+        } else {
+          cols_var <- c(cols_var, line)
+        }
       }
     }
   }
-  has_more_rows <- any(
-    (layout$n_dims - rows_shown) > 0L
+  # if (any((layout$n_dims - rows_shown) > 0L)) {
+  #   common <- c(common, "# \u2139 Use `print(n = ...)` to see more elements")
+  # }
+  # # Apply max_footer_lines limit to common only
+  # if (length(common) > layout$max_footer_lines) {
+  #   common <- common[seq_len(layout$max_footer_lines)]
+  # }
+  list(
+    rows_var = style_subtle(rows_var),
+    cols_var = style_subtle(cols_var)
+    # common = style_subtle(common)
   )
-  if (has_more_rows) {
-    lines <- c(lines, "# \u2139 Use `print(n = ...)` to see more elements")
-  }
-  if (length(lines) > layout$max_footer_lines) {
-    lines <- lines[seq_len(layout$max_footer_lines)]
-  }
-  lines <- style_subtle(lines)
-  lines
 }
 
 ord_width_alloc <- function(layout) {
@@ -643,10 +654,12 @@ ord_assemble <- function(header, body, footer) {
   c(
     hdr_rows,
     rows_lines,
+    footer$rows_var,
     cols_header,
     cols_lines,
-    hdr_after,
-    footer
+    footer$cols_var,
+    hdr_after
+    # footer$common %||% character()
   )
 }
 
