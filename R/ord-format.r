@@ -556,6 +556,28 @@ ord_combine <- function(split, fmt_ann, layout, coord_alloc) {
       }
     }
     combined <- paste0(coord_lines, sep, ann_lines)
+    # Add ellipsis row if not all rows/cols are shown for this factor
+    idx <- if (nm == "rows") 1L else 2L
+    if (layout$n_dims[[nm]] > layout$n_show[[idx]]) {
+      coord_width <- max(nchar(strip_ansi(coord_lines)))
+      ann_width <- if (length(ann_lines) > 0L) {
+        max(nchar(strip_ansi(ann_lines)))
+      } else 0L
+      ellipsis_line <- paste0(
+        strrep(" ", floor((coord_width - 1L) / 2L)),
+        style_subtle("\u22ee"),
+        strrep(" ", ceiling((coord_width - 1L) / 2L)),
+        "   ",
+        if (ann_width > 0L) {
+          paste0(
+            strrep(" ", floor((ann_width - 1L) / 2L)),
+            style_subtle("\u22ee"),
+            strrep(" ", ceiling((ann_width - 1L) / 2L))
+          )
+        }
+      )
+      combined <- c(combined, ellipsis_line)
+    }
     result[[nm]] <- combined
   }
   result

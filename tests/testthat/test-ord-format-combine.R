@@ -39,9 +39,9 @@ test_that("ord_combine padding", {
   sc <- ord_split_coord(fc, layout)
   ann <- ord_format_ann(layout, alloc)
   combined <- ord_combine(sc, ann, layout, alloc)
-  # rows: 7 coord lines (2 header + 5 data), 5 ann lines -> padded to 7
-  expect_equal(length(combined$rows), 7L)
-  # cols: 6 coord lines (2 header + 4 data), 4 ann lines -> padded to 6
+  # rows: 7 coord lines (2 header + 5 data) + 5 ann lines + 1 ellipsis row
+  expect_equal(length(combined$rows), 8L)
+  # cols: 6 coord lines (2 header + 4 data) + 4 ann lines, all shown
   expect_equal(length(combined$cols), 6L)
 })
 

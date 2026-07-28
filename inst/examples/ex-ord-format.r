@@ -11,7 +11,7 @@ print(iris_pca, n = list(2, NULL))
 print(iris_pca, n = list(NULL, 2))
 
 # too narrow width for all coordinates
-print(iris_pca, width = 30)
+print(iris_pca, width = 22)
 
 iris_lda <- ordinate(iris[1:4], lda_ord, grouping = iris$Species)
 

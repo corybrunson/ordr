@@ -11,6 +11,7 @@
       [5] "3 -2.89    0.145  -0.0179  0.0200  | active  "
       [6] "4 -2.75    0.318  -0.0316 -0.0756  | active  "
       [7] "5 -2.73   -0.327  -0.0901 -0.0613  | active  "
+      [8] "                ⋮                       ⋮    "
       
       $cols
       [1] "      PC1     PC2     PC3      PC4 | name    center .element"
@@ -29,7 +30,7 @@
       $rows
       [1] "      PC1 … | .element" "    <dbl>   | <chr>   " "1 -2.68     | active  "
       [4] "2 -2.71     | active  " "3 -2.89   … | active  " "4 -2.75     | active  "
-      [7] "5 -2.73     | active  "
+      [7] "5 -2.73     | active  " "    ⋮          ⋮    "  
       
       $cols
       [1] "      PC1 … | name     " "    <dbl>   | <chr>    "
@@ -50,6 +51,7 @@
       [5] "3 -2.89    0.145  -0.0179  0.0200  | active  "
       [6] "4 -2.75    0.318  -0.0316 -0.0756  | active  "
       [7] "5 -2.73   -0.327  -0.0901 -0.0613  | active  "
+      [8] "                ⋮                       ⋮    "
       
       $cols
       [1] "      PC1     PC2     PC3      PC4 | name         center .element"
