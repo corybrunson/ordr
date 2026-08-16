@@ -68,6 +68,7 @@ Collate:
     'coord-scaffold.r'
     'data.r'
     'dplyr-verbs.r'
+    'facet-ord.r'
     'utils.r'
     'ord-recoverers.r'
     'ord-augmentation.r'
