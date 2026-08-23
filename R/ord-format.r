@@ -251,7 +251,7 @@ ord_header <- function(layout) {
       } else {
         # tier 4: no class, minimal spacing
         minimal <- paste0(
-          "# A tbl_ord: (",
+          "# tbl_ord: (",
           layout$n_dims[1], .by, layout$rk, ")",
           .times,
           "(", layout$n_dims[2], .by, layout$rk, ")", .prime

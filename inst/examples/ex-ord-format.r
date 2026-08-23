@@ -1,6 +1,7 @@
 iris_pca <- ordinate(iris[1:4], prcomp)
 
 # single value applies to both factors
+print(iris_pca, n = 2)
 print(iris_pca, n = 10)
 
 # double values apply to factors in order
