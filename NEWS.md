@@ -6,8 +6,12 @@ The `format()` method for `tbl_ord` objects has been rewritten to produce readou
 This involved a ground-up revision starting with several constructions (headers, footers, coord tibble, annotation tibble) that were then assembled into the final output.
 The pipeline relies on several new internal helpers (`ord_header`, `ord_footer`, `ord_width_alloc`, `ord_n_show`, `ord_format_coord`, `ord_format_ann`, `ord_split_coord`, `ord_combine`, `ord_assemble`) that are subject to several new unit tests.
 
-The more modular construction also strips internal `tibble:::format.tbl_df()` output of ANSI styling, which is then reintroduced after assembly.
-Headers, footers, row numbers, pipe separators, and (single-character) ellipses are now assigned `pillar::style_subtle()`, while variable types are also italicized via `cli::style_italic()`.
+The more modular construction strips ANSI styling from `tibble:::format.tbl_df()` output and reintroduces it after assembly.
+Headers, footers, row numbers, separators, and ellipses are assigned `pillar::style_subtle()`.
+
+Coordinate sub-headers display the shares of explained inertia rather than (redundant) variable types.
+The number of annotation columns printed beside each matrix factor is determined from the available width.
+Footers are constrained by the `max_extra_cols` and `max_footer_lines` arguments.
 
 ## handling of eigenvalue-based classes
 
