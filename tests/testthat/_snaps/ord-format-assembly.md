@@ -1,4 +1,4 @@
-# ord_header snapshot full
+# headers (full)
 
     Code
       ord_header(layout)
@@ -8,7 +8,7 @@
       [3] "# Rows (principal, 100%): [ 150 × 4 | 1 ]"          
       [4] "# Columns (standard, 0%): [ 4 × 4 | 3 ]"            
 
-# ord_header snapshot narrow
+# headers (narrow)
 
     Code
       ord_header(layout)
@@ -16,15 +16,15 @@
       [1] "# A tbl_ord <prc>: (150×4)·(4×4)´"   "# 4 coordinates: PC1, PC2, ..., PC4"
       [3] "# Rows (principal): [ 150 × 4 | 1 ]" "# Columns (standard): [ 4 × 4 | 3 ]"
 
-# ord_header snapshot very narrow
+# headers (very narrow)
 
     Code
       ord_header(layout)
     Output
-      [1] "# A tbl_ord: (150×4)·(4×4)´" "# 4 coordinates"            
-      [3] "# Rows: [150×4|1]"           "# Columns: [4×4|3]"         
+      [1] "# tbl_ord: (150×4)·(4×4)´" "# 4 coordinates"          
+      [3] "# Rows: [150×4|1]"         "# Columns: [4×4|3]"       
 
-# ord_header snapshot lda
+# headers (lda)
 
     Code
       ord_header(layout)
@@ -37,39 +37,39 @@
 # footer snapshot
 
     Code
-      strip_style(c(ord_footer(layout)$rows_var, ord_footer(layout)$cols_var))
+      strip_style(c(ftr$rows_var, ftr$cols_var))
     Output
       character(0)
 
 # footer snapshot all rows
 
     Code
-      strip_style(c(ord_footer(layout)$rows_var, ord_footer(layout)$cols_var))
+      strip_style(c(ftr$rows_var, ftr$cols_var))
     Output
       character(0)
 
 # footer snapshot with max_extra_cols
 
     Code
-      strip_style(c(ord_footer(layout)$rows_var, ord_footer(layout)$cols_var))
+      strip_style(c(ftr$rows_var, ftr$cols_var))
     Output
-      [1] "# ℹ 2 more variables:\n#   center <numeric>, .element <character>"
+      [1] "# i 2 more\n#   variables:\n#   center <dbl>,\n#   ..."
 
 # footer snapshot narrow
 
     Code
-      strip_style(c(ord_footer(layout)$rows_var, ord_footer(layout)$cols_var))
+      strip_style(c(ftr$rows_var, ftr$cols_var))
     Output
-      character(0)
+      [1] "# i 2 more\n#   variables:\n#   center <dbl>,\n#   .element <chr>"
 
 # footer snapshot very narrow
 
     Code
-      strip_style(c(ord_footer(layout)$rows_var, ord_footer(layout)$cols_var))
+      strip_style(c(ftr$rows_var, ftr$cols_var))
     Output
       character(0)
 
-# print snapshot stripped
+# print snapshot (stripped)
 
     Code
       strip_style(format(ord_pca))

@@ -22,6 +22,12 @@ print(iris_lda)
 # too many annotations to print within console width
 print(iris_lda, width = 40)
 
+# annotations too wide to print are summarized in footers
+print(iris_pca, width = 30)
+
+# cap the number of lines of each factor's footer note
+print(iris_pca, width = 30, max_footer_lines = 2)
+
 haireye_ca <- ordinate(
   as.data.frame(rowSums(HairEyeColor, dims = 2L)),
   cols = everything(), model = MASS::corresp, nf = 3

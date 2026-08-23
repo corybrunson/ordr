@@ -6,13 +6,15 @@
 #'
 #' @details
 #'
-#' The `format` and `print` methods for class 'tbl_ord' are adapted from those
-#' for class '[tbl_df][tibble::tbl_df]' and for class 'tbl_graph' from the
+#' The [base::format()] and [base::print()] methods for class 'tbl_ord' are
+#' adapted from those for class '[tbl_df][tibble::tbl_df]' and for class
+#' 'tbl_graph' from the
 #' **tidygraph** package.
 #'
-#' **Note:** The `format()` function is tedious but cannot be easily modularized
-#' without invoking [recoverers], [annotation], and [augmentation] multiple
-#' times, thereby significantly reducing performance.
+#' **NB:** The `format.tbl_ord()` method is tedious but cannot be easily
+#' modularized without invoking [recoverers], [annotation], and [augmentation]
+#' multiple times, thereby significantly reducing performance. It calls upon
+#' **pillar** for `tbl_df` formatting then revises the results per `tbl_ord`.
 #' 
 
 #' @name format
@@ -22,10 +24,12 @@
 #' @importFrom pillar style_subtle
 #' @param x A [tbl_ord].
 #' @param n Number(s) of rows to show from each matrix factor, handled as by
-#'   [tibble::format.tbl()]. If length 1, will apply to both matrix factors.
-#'   To pass `NULL` to only one factor, be sure to pass as a list, e.g. `n =
+#'   [tibble::format.tbl()]. If length 1, will apply to both matrix factors. To
+#'   pass `NULL` to only one factor, be sure to pass as a list, e.g. `n =
 #'   list(6, NULL)`.
 #' @inheritParams tibble::format.tbl
+#' @param max_extra_cols,max_footer_lines As in [tibble::format.tbl], applied to
+#'   each matrix factor separately.
 #' @param ... Additional arguments.
 #' @return The `format()` method returns a vector of strings that are more
 #'   elegantly printed by the `print()` method, which itself returns the tbl_ord

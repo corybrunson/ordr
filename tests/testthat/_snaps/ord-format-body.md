@@ -1,4 +1,4 @@
-# coord snapshot default
+# coordinate snapshot (default)
 
     Code
       ord_format_coord(layout, alloc)$lines
@@ -10,7 +10,7 @@
        [9] "2 -0.0845 -0.730  -0.598  -0.320  " "3  0.857   0.173  -0.0762 -0.480  "
       [11] "4  0.358   0.0755 -0.546   0.754  "
 
-# coord snapshot narrow
+# coordinate snapshot (narrow)
 
     Code
       ord_format_coord(layout, alloc)$lines
@@ -18,7 +18,7 @@
        [1] "      PC1" "    <dbl>" "1 -2.68  " "2 -2.71  " "3 -2.89  " "4 -2.75  "
        [7] "5 -2.73  " "1  0.361 " "2 -0.0845" "3  0.857 " "4  0.358 "
 
-# coord decimal alignment between row and col factors
+# coordinate decimal points align between factors
 
     Code
       lines
