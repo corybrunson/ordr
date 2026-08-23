@@ -149,8 +149,8 @@ ord_header_factors <- function(layout) {
     paste0(round(100 * p, 0), "%")
   }
   factor_names <- c("Rows", "Columns")
-  # Build a line for component i at the given tier.
-  # Returns NULL when the needed label is unavailable (tiers 1-3).
+  # build line for each component at the given tier;
+  # return `NULL` when tier hides required label
   factor_line <- function(i, tier) {
     cname <- conf_name(layout$conference[i])
     cpct <- conf_pct(layout$conference[i])
@@ -185,8 +185,7 @@ ord_header_factors <- function(layout) {
              layout$n_dims[i], " \u00d7 ", layout$rk)
     }
   }
-  # Try tiers from richest (1) to poorest (6); adopt the first
-  # tier at which both components' lines are available and fit.
+  # try tiers in sequence; stop when both factors' lines are available and fit
   lines <- character()
   for (tier in 1:6) {
     ok <- TRUE
@@ -249,7 +248,7 @@ ord_header <- function(layout) {
       if (nchar(header3) <= layout$width) {
         lines <- c(lines, header3)
       } else {
-        # tier 4: no class, minimal spacing
+        # tier 4: no article, no class, minimal spacing
         minimal <- paste0(
           "# tbl_ord: (",
           layout$n_dims[1], .by, layout$rk, ")",
@@ -269,11 +268,11 @@ ord_header <- function(layout) {
   lines
 }
 
-ord_footer <- function(layout) {
-  # Build three footer components:
-  #   rows_var — "more variables" for rows annotations
-  #   cols_var — "more variables" for cols annotations
-  #   common   — row/col count footers + hint
+ord_footer <- function(layout, fmt_ann) {
+  # build three footer components:
+  # * rows_var — "more variables" for rows annotations
+  # * cols_var — "more variables" for cols annotations
+  # * common   — row/col count footers + hint (unused for now)
   rows_var <- character()
   cols_var <- character()
   # common <- character()
@@ -292,34 +291,10 @@ ord_footer <- function(layout) {
   if (is.finite(layout$max_extra_cols)) {
     for (nm in c("rows", "cols")) {
       ann <- layout$dims_ann[[nm]]
-      n_total <- ncol(ann)
-      n_real <- if (n_total == 1L && names(ann) == ".rows") 0L else n_total
-      if (n_real > layout$max_extra_cols) {
-        n_extra <- n_real - layout$max_extra_cols
-        # list names and types of un-printed variables
-        hidden_idx <- seq(layout$max_extra_cols + 1L, n_total)
-        hidden_names <- names(ann)[hidden_idx]
-        hidden_types <- vapply(ann[hidden_idx], function(x) {
-          paste0("<", class(x)[1L], ">")
-        }, character(1))
-        var_str <- paste(
-          mapply(
-            function(nm, tp) paste0(nm, " ", tp),
-            hidden_names,
-            hidden_types
-          ),
-          collapse = ", "
-        )
-        # wrap at ~60 chars for readability
-        if (nchar(var_str) > 60L) {
-          var_str <- paste0(
-            substr(var_str, 1L, 57L), "..."
-          )
-        }
-        line <- paste0(
-          "# \u2139 ", big_mark(n_extra), " more variable",
-          if (n_extra != 1L) "s", ":\n#   ", var_str
-        )
+      n_total <- fmt_ann[[nm]]$n_total
+      if (n_total == 1L && names(ann) == ".rows") next
+      line <- fmt_ann[[nm]]$note
+      if (length(line) > 0L) {
         if (nm == "rows") {
           rows_var <- c(rows_var, line)
         } else {
@@ -328,13 +303,6 @@ ord_footer <- function(layout) {
       }
     }
   }
-  # if (any((layout$n_dims - rows_shown) > 0L)) {
-  #   common <- c(common, "# \u2139 Use `print(n = ...)` to see more elements")
-  # }
-  # # Apply max_footer_lines limit to common only
-  # if (length(common) > layout$max_footer_lines) {
-  #   common <- common[seq_len(layout$max_footer_lines)]
-  # }
   list(
     rows_var = style_subtle(rows_var),
     cols_var = style_subtle(cols_var)
@@ -381,14 +349,32 @@ ord_format_ann <- function(layout, coord_alloc) {
     ann <- layout$dims_ann[[nm]]
     n_total <- ncol(ann)
     if (n_total == 0L) {
-      result[[nm]] <- list(lines = character(), n_cols = 0L, n_total = 0L)
+      result[[nm]] <- list(
+        lines = character(), n_cols = 0L, n_total = 0L,
+        note = character()
+      )
       next
     }
-    n_show_ann <- min(n_total, layout$max_extra_cols)
-    ann_sub <- ann[, seq_len(n_show_ann), drop = FALSE]
     n_rows <- layout$n_show[[if (nm == "rows") 1L else 2L]]
-    ann_sub <- head(ann_sub, n_rows)
-    fmt <- strip_ansi(format(ann_sub, width = coord_alloc$ann_avail))
+    ann_sub <- head(ann, n_rows)
+    fmt <- strip_ansi(format(
+      ann_sub,
+      width = coord_alloc$ann_avail,
+      max_extra_cols = layout$max_extra_cols
+    ))
+    n_hidden <- 0L
+    note <- character()
+    info_idx <- grep("^#[^0-9]*([0-9][0-9,]*) more(?! rows)", fmt, perl = TRUE)
+    for (i in info_idx) {
+      ctx <- paste(fmt[i:min(i + 2L, length(fmt))], collapse = " ")
+      if (! grepl("variables?:", ctx)) next
+      n_str <- sub("^#[^0-9]*([0-9,]+) more.*", "\\1", fmt[i])
+      n_hidden <- as.integer(gsub(",", "", n_str))
+      j <- i
+      while (j < length(fmt) && grepl("^#", fmt[j + 1L])) j <- j + 1L
+      note <- paste(fmt[i:j], collapse = "\n")
+      break
+    }
     # keep col names (line 2) and types (line 3) as header
     # strip title, row numbers, truncation info
     # at very narrow widths, tibble wraps title/info lines w/ no room for data
@@ -404,11 +390,15 @@ ord_format_ann <- function(layout, coord_alloc) {
       lines <- c(header, data_lines)
     } else {
       lines <- character()
+      # nothing usable printed;
+      # if pillar reported no hidden columns, treat all columns as un-printed
+      if (n_hidden == 0L) n_hidden <- n_total
     }
     result[[nm]] <- list(
       lines = lines,
-      n_cols = n_show_ann,
-      n_total = n_total
+      n_cols = n_total - n_hidden,
+      n_total = n_total,
+      note = note
     )
   }
   result
@@ -440,8 +430,7 @@ ord_format_coord <- function(layout, coord_alloc) {
   cols_to_show <- seq_len(min(rk, coord_alloc$max_coord_cols))
   coord_rows <- as_tibble(layout$dims$rows)[, cols_to_show, drop = FALSE]
   coord_cols <- as_tibble(layout$dims$cols)[, cols_to_show, drop = FALSE]
-  # build combined tibble and split into two groups with
-  # restarted row numbers (1..n₁, 1..n₂)
+  # build combined tibble then split into factors with restarted row numbers
   n_actual <- c(
     min(layout$n_show[1L], nrow(coord_rows)),
     min(layout$n_show[2L], nrow(coord_cols))
@@ -461,7 +450,7 @@ ord_format_coord <- function(layout, coord_alloc) {
     )
     coord_lines <- c(header, split$data1, split$data2)
   } else {
-    # very narrow width: tibble wraps everything into # lines
+    # very narrow width: tibble wraps everything into commented lines
     col_names <- names(coord_cols)
     types <- vapply(
       coord_cols,
@@ -473,7 +462,7 @@ ord_format_coord <- function(layout, coord_alloc) {
       paste0(" ", paste(types, collapse = " "))
     )
   }
-  # pad all coord lines to the same width for aligned | separator
+  # pad all coord lines to the same width to align separator
   coord_lines <- trimws(coord_lines, "right")
   if (length(coord_lines) > 2L) {
     max_width <- max(nchar(coord_lines))
@@ -601,7 +590,7 @@ ord_combine <- function(split, fmt_ann, layout, coord_alloc) {
       }
     }
     combined <- paste0(coord_lines, sep, ann_lines)
-    # Add ellipsis row if not all rows/cols are shown for this factor
+    # add ellipsis row if not all rows are shown for this factor
     idx <- if (nm == "rows") 1L else 2L
     if (layout$n_dims[[nm]] > layout$n_show[[idx]]) {
       coord_width <- max(nchar(strip_ansi(coord_lines)))
@@ -646,7 +635,7 @@ ord_assemble <- function(header, body, footer) {
     cols_header <- NULL
     hdr_after <- character()
   }
-  # style header lines after splitting (ord_header no longer applies styling)
+  # style header lines after splitting (`ord_header` no longer applies styling)
   hdr_rows <- style_subtle(hdr_rows)
   if (! is.null(cols_header)) cols_header <- style_subtle(cols_header)
   if (length(hdr_after) > 0L) hdr_after <- style_subtle(hdr_after)
@@ -675,11 +664,11 @@ format.tbl_ord <- function(
     max_extra_cols = max_extra_cols, max_footer_lines = max_footer_lines
   )
   header <- ord_header(layout)
-  footer <- ord_footer(layout)
   alloc <- ord_width_alloc(layout)
   layout <- ord_n_show(layout, alloc)
-  fmt_coord <- ord_format_coord(layout, alloc)
   fmt_ann <- ord_format_ann(layout, alloc)
+  footer <- ord_footer(layout, fmt_ann)
+  fmt_coord <- ord_format_coord(layout, alloc)
   split <- ord_split_coord(fmt_coord, layout)
   body <- ord_combine(split, fmt_ann, layout, alloc)
   out <- ord_assemble(header, body, footer)
