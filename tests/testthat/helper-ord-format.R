@@ -14,7 +14,22 @@ ord_small <- as_tbl_ord(
   )
 )
 
-# Helper: strip ANSI escape sequences for portable snapshots
+# strip ANSI escape sequences for portable snapshots
 strip_style <- function(x) {
   gsub("\033\\[[0-9;]*m", "", x)
+}
+
+# build footer from get_ord_layout args
+footer_of <- function(...) {
+  layout <- get_ord_layout(...)
+  alloc <- ord_width_alloc(layout)
+  fmt_ann <- ord_format_ann(layout, alloc)
+  ord_footer(layout, fmt_ann)
+}
+
+# rejoin pillar's wrapped note lines and normalize ellipsis glyphs
+# (pillar renders ASCII variants in non-unicode environments)
+unwrap_note <- function(x) {
+  x <- gsub("\n#\\s*", " ", x)
+  gsub("\u2026", "...", x, fixed = TRUE)
 }

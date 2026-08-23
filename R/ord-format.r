@@ -268,6 +268,29 @@ ord_header <- function(layout) {
   lines
 }
 
+# cap footer components at `budget` rendered lines;
+# append an ellipsis to the last kept line if any were dropped
+cap_note_lines <- function(x, budget) {
+  if (! length(x) || ! is.finite(budget)) return(x)
+  lines <- strsplit(x, "\n", fixed = TRUE)
+  lens <- vapply(lines, length, integer(1L))
+  total <- sum(lens)
+  if (total <= budget) return(x)
+  cum <- cumsum(lens)
+  full <- x[cum <= budget]
+  remaining <- budget - sum(lens[cum <= budget])
+  if (remaining > 0L) {
+    idx <- which(cum > budget)[1L]
+    full <- c(full, paste0(
+      paste(lines[[idx]][seq_len(remaining)], collapse = "\n"), " \u2026"
+    ))
+  } else {
+    # nothing kept of next line; mark truncation on last fully kept line
+    full[length(full)] <- paste0(full[length(full)], " \u2026")
+  }
+  full
+}
+
 ord_footer <- function(layout, fmt_ann) {
   # build three footer components:
   # * rows_var — "more variables" for rows annotations
@@ -303,10 +326,12 @@ ord_footer <- function(layout, fmt_ann) {
       }
     }
   }
+  # cap each component's rendered lines at max_footer_lines (per factor)
+  mfl <- layout$max_footer_lines %||% Inf
   list(
-    rows_var = style_subtle(rows_var),
-    cols_var = style_subtle(cols_var)
-    # common = style_subtle(common)
+    rows_var = style_subtle(cap_note_lines(rows_var, mfl)),
+    cols_var = style_subtle(cap_note_lines(cols_var, mfl))
+    # common = style_subtle(common) # should also be capped if used
   )
 }
 
