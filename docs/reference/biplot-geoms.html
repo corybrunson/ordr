@@ -5,7 +5,7 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Convenience geoms for row and column matrix factors — biplot-geoms"><meta name="description" content="These geometric element layers (geoms) pair
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Convenience geoms for row and column matrix factors — biplot-geoms"><meta name="description" content="These geometric element layers (geoms) pair
 conventional ggplot2 geoms with stat_rows() or
 stat_cols() in order to render elements for one or the other
 matrix factor of a tbl_ord. They understand the same aesthetics
@@ -21,7 +21,7 @@ as their corresponding conventional geoms."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">ordr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.0002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -865,7 +865,7 @@ from a <code>formula</code> (e.g. <code>~ head(.x, 10)</code>).</p></dd>
 <dt id="arg-stat">stat<a class="anchor" aria-label="anchor" href="#arg-stat"></a></dt>
 <dd><p>The statistical transformation to use on the data for this layer.
 When using a <code>geom_*()</code> function to construct a layer, the <code>stat</code>
-argument can be used the override the default coupling between geoms and
+argument can be used to override the default coupling between geoms and
 stats. The <code>stat</code> argument accepts the following:</p><ul><li><p>A <code>Stat</code> ggproto subclass, for example <code>StatCount</code>.</p></li>
 <li><p>A string naming the stat. To give the stat as a string, strip the
 function name of the <code>stat_</code> prefix. For example, to use <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">stat_count()</a></code>,
@@ -901,14 +901,16 @@ to use <code><a href="https://ggplot2.tidyverse.org/reference/position_jitter.ht
 <code>NA</code>, the default, includes if any aesthetics are mapped.
 <code>FALSE</code> never includes, and <code>TRUE</code> always includes.
 It can also be a named logical vector to finely select the aesthetics to
-display.</p></dd>
+display. To include legend keys for all levels, even
+when no data exists, use <code>TRUE</code>.  If <code>NA</code>, all levels are shown in legend,
+but unobserved levels are omitted.</p></dd>
 
 
 <dt id="arg-inherit-aes">inherit.aes<a class="anchor" aria-label="anchor" href="#arg-inherit-aes"></a></dt>
 <dd><p>If <code>FALSE</code>, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.org/reference/borders.html" class="external-link">borders()</a></code>.</p></dd>
+the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.org/reference/annotation_borders.html" class="external-link">annotation_borders()</a></code>.</p></dd>
 
 
 <dt id="arg-lineend">lineend<a class="anchor" aria-label="anchor" href="#arg-lineend"></a></dt>
@@ -963,9 +965,9 @@ displayed as described in <code><a href="https://rdrr.io/r/grDevices/plotmath.ht
 
 
 <dt id="arg-nudge-x-nudge-y">nudge_x, nudge_y<a class="anchor" aria-label="anchor" href="#arg-nudge-x-nudge-y"></a></dt>
-<dd><p>Horizontal and vertical adjustment to nudge labels by.
-Useful for offsetting text from points, particularly on discrete scales.
-Cannot be jointly specified with <code>position</code>.</p></dd>
+<dd><p>Horizontal and vertical adjustments to nudge the
+starting position of each text label. The units for <code>nudge_x</code> and
+<code>nudge_y</code> are the same as for the data units on the x-axis and y-axis.</p></dd>
 
 
 <dt id="arg-check-overlap">check_overlap<a class="anchor" aria-label="anchor" href="#arg-check-overlap"></a></dt>
@@ -991,7 +993,8 @@ or picas (<code>"pc"</code>).</p></dd>
 
 
 <dt id="arg-label-size">label.size<a class="anchor" aria-label="anchor" href="#arg-label-size"></a></dt>
-<dd><p>Size of label border, in mm.</p></dd>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Replaced by the
+<code>linewidth</code> aesthetic. Size of label border, in mm.</p></dd>
 
 
 <dt id="arg-box-padding">box.padding<a class="anchor" aria-label="anchor" href="#arg-box-padding"></a></dt>
@@ -1100,9 +1103,10 @@ for labels. Set to NULL to inherit from the data's aesthetics.</p></dd>
 for tick marks. Set to NULL to inherit from the data's aesthetics.</p></dd>
 
 
-<dt id="arg-text-size-text-angle-text-hjust-text-vjust-text-family-text-fontface-text-colour-text-color-text-alpha">text.size, text.angle, text.hjust, text.vjust, text.family, text.fontface, text.colour, text.color, text.alpha<a class="anchor" aria-label="anchor" href="#arg-text-size-text-angle-text-hjust-text-vjust-text-family-text-fontface-text-colour-text-color-text-alpha"></a></dt>
-<dd><p>Default aesthetics for tick mark labels. Set to NULL to inherit from the
-data's aesthetics.</p></dd>
+<dt id="arg-text-colour-text-color">text.colour, text.color<a class="anchor" aria-label="anchor" href="#arg-text-colour-text-color"></a></dt>
+<dd><p>Colour of the text. When <code>NULL</code> (default), the
+<code>colour</code> aesthetic determines the colour of the text. <code>text.color</code> is an
+alias for <code>text.colour</code>.</p></dd>
 
 
 <dt id="arg-isoline-text">isoline_text<a class="anchor" aria-label="anchor" href="#arg-isoline-text"></a></dt>
@@ -1163,7 +1167,7 @@ the data's aesthetics.</p></dd>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other biplot layers:
 <code><a href="biplot-stats.html">biplot-stats</a></code>,
-<code><a href="stat_rows.html">stat_rows</a>()</code></p></div>
+<code><a href="stat_rows.html">stat_rows()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -1175,31 +1179,32 @@ the data's aesthetics.</p></dd>
 <span class="r-in"><span>           model <span class="op">=</span> <span class="va">lra</span>, compositional <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="conference.html">confer_inertia</a></span><span class="op">(</span><span class="st">"rows"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">glass_lra</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'lra': (68 x 4) x (5 x 4)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 4 coordinates: LRSV1, LRSV2, ..., LRSV4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 68 x 4 | 12 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    LRSV1  LRSV2     LRSV3 ... |   weight Site    Anal  Context Form </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               |    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 0.092<span style="text-decoration: underline;">5</span> 0.092<span style="text-decoration: underline;">9</span>  0.015<span style="text-decoration: underline;">6</span>       | <span style="color: #BCBCBC;">1</span> 0.014<span style="text-decoration: underline;">7</span> Bet El… 1     L14.B1… Chunk</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 0.090<span style="text-decoration: underline;">5</span> 0.059<span style="text-decoration: underline;">1</span> -<span style="color: #BB0000;">0.043</span><span style="color: #BB0000; text-decoration: underline;">9</span>       | <span style="color: #BCBCBC;">2</span> 0.014<span style="text-decoration: underline;">7</span> Bet El… 2     L14.B1… Chunk</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 0.084<span style="text-decoration: underline;">4</span> 0.033<span style="text-decoration: underline;">3</span> -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">492</span> ... | <span style="color: #BCBCBC;">3</span> 0.014<span style="text-decoration: underline;">7</span> Bet El… 3     L14.B1… Chunk</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 0.064<span style="text-decoration: underline;">7</span> 0.021<span style="text-decoration: underline;">1</span>  0.026<span style="text-decoration: underline;">7</span>       | <span style="color: #BCBCBC;">4</span> 0.014<span style="text-decoration: underline;">7</span> Bet El… 4     L14.B1… Chunk</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 0.063<span style="text-decoration: underline;">5</span> 0.025<span style="text-decoration: underline;">7</span>  0.023<span style="text-decoration: underline;">9</span>       | <span style="color: #BCBCBC;">5</span> 0.014<span style="text-decoration: underline;">7</span> Bet El… 5     L14.B1… Chunk</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 63 more rows</span>     | <span style="color: #949494;"># ℹ 63 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: TiO2 &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   MnO &lt;dbl&gt;, Na2O &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   K2O &lt;dbl&gt;, P2O5 &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Cl &lt;dbl&gt;, SO3 &lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 5 x 4 | 2 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      LRSV1  LRSV2  LRSV3 ... |   name   weight</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                              |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.005</span><span style="color: #BB0000; text-decoration: underline;">48</span>  0.338  0.237     | <span style="color: #BCBCBC;">1</span> SiO2  0.852  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  4.15    -<span style="color: #BB0000;">0.714</span> -<span style="color: #BB0000;">2.50</span>  ... | <span style="color: #BCBCBC;">2</span> Al2O3 0.031<span style="text-decoration: underline;">3</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.517</span>   -<span style="color: #BB0000;">2.95</span>  -<span style="color: #BB0000;">0.126</span>     | <span style="color: #BCBCBC;">3</span> CaO   0.097<span style="text-decoration: underline;">6</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.553    2.23  -<span style="color: #BB0000;">9.57</span>      | <span style="color: #BCBCBC;">4</span> FeO   0.005<span style="text-decoration: underline;">24</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">5.61</span>     0.790 -<span style="color: #BB0000;">4.47</span>      | <span style="color: #BCBCBC;">5</span> MgO   0.013<span style="text-decoration: underline;">8</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tbl_ord of class 'lra': (68 × 4) · (5 × 4)´</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># 4 coordinates: LRSV1, LRSV2, ..., LRSV4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (principal, 100%): [ 68 × 4 | 13 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       LRSV1   LRSV2     LRSV3    LRSV4<span style="color: #949494;"> | </span>weight .element Site   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">  [0.01334][0.0034][0.000489][0.00013]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span>  0.0925   0.0929  0.0156    0.00710<span style="color: #949494;"> | </span>0.0147 active   Bet El…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span>  0.0905   0.0591 -0.0439   -0.00835<span style="color: #949494;"> | </span>0.0147 active   Bet El…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span>  0.0844   0.0333 -0.000492 -0.00713<span style="color: #949494;"> | </span>0.0147 active   Bet El…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span>  0.0647   0.0211  0.0267    0.00624<span style="color: #949494;"> | </span>0.0147 active   Bet El…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span>  0.0635   0.0257  0.0239    0.0159 <span style="color: #949494;"> | </span>0.0147 active   Bet El…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   <span style="color: #949494;">⋮</span>                                 <span style="color: #949494;">⋮</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 10 more variables:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Anal &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Context &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Form &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   TiO2 &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   MnO &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Na2O &lt;dbl&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 5 × 4 | 3 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       LRSV1   LRSV2     LRSV3    LRSV4<span style="color: #949494;"> | </span>name   weight .element</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">        [1]     [1]       [1]      [1]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span> -0.00548  0.338   0.237    -0.0538 <span style="color: #949494;"> | </span>SiO2  0.852   active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span>  4.15    -0.714  -2.50      2.65   <span style="color: #949494;"> | </span>Al2O3 0.0313  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span> -0.517   -2.95   -0.126    -0.484  <span style="color: #949494;"> | </span>CaO   0.0976  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span>  0.553    2.23   -9.57     -9.65   <span style="color: #949494;"> | </span>FeO   0.00524 active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span> -5.61     0.790  -4.47      4.40   <span style="color: #949494;"> | </span>MgO   0.0138  active  </span>
 <span class="r-in"><span><span class="co"># row-principal biplot with ordinate-wise standard deviations</span></span></span>
 <span class="r-in"><span><span class="va">glass_lra</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">Site</span><span class="op">)</span>, sec.axes <span class="op">=</span> <span class="st">"cols"</span><span class="op">)</span> <span class="op">+</span></span></span>
@@ -1221,28 +1226,27 @@ the data's aesthetics.</p></dd>
 <span class="r-in"><span>  <span class="fu"><a href="dplyr-verbs.html">cbind_rows</a></span><span class="op">(</span>site <span class="op">=</span> <span class="va">glass</span><span class="op">$</span><span class="va">Site</span>, form <span class="op">=</span> <span class="va">glass</span><span class="op">$</span><span class="va">Form</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">glass_pca</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'princomp': (68 x 5) x (5 x 5)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 5 coordinates: Comp.1, Comp.2, ..., Comp.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 68 x 5 | 3 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Comp.1  Comp.2 Comp.3 ... |   .element site         form </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>   2.01 0.585    0.940     | <span style="color: #BCBCBC;">1</span> score    Bet Eli'ezer Chunk</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>   2.55 0.513   -<span style="color: #BB0000;">1.71</span>      | <span style="color: #BCBCBC;">2</span> score    Bet Eli'ezer Chunk</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>   1.64 0.097<span style="text-decoration: underline;">7</span>   0.131 ... | <span style="color: #BCBCBC;">3</span> score    Bet Eli'ezer Chunk</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>   1.07 0.007<span style="text-decoration: underline;">34</span>  1.20      | <span style="color: #BCBCBC;">4</span> score    Bet Eli'ezer Chunk</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>   1.07 0.005<span style="text-decoration: underline;">73</span>  1.31      | <span style="color: #BCBCBC;">5</span> score    Bet Eli'ezer Chunk</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 63 more rows</span>     | <span style="color: #949494;"># ℹ 63 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 5 x 5 | 4 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Comp.1 Comp.2  Comp.3 ... |   name  center scale .element</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.476  0.383  0.388      | <span style="color: #BCBCBC;">1</span> SiO2  71.7   3.16  active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  0.488 -<span style="color: #BB0000;">0.492</span> -<span style="color: #BB0000;">0.057</span><span style="color: #BB0000; text-decoration: underline;">4</span> ... | <span style="color: #BCBCBC;">2</span> Al2O3  2.64  0.956 active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  0.383  0.234 -<span style="color: #BB0000;">0.873</span>      | <span style="color: #BCBCBC;">3</span> FeO    0.442 0.159 active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.425</span>  0.580 -<span style="color: #BB0000;">0.153</span>      | <span style="color: #BCBCBC;">4</span> MgO    1.15  0.913 active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.456</span> -<span style="color: #BB0000;">0.469</span> -<span style="color: #BB0000;">0.247</span>      | <span style="color: #BCBCBC;">5</span> CaO    8.18  1.36  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tbl_ord of class 'princomp': (68 × 5) · (5 × 5)´</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># 5 coordinates: Comp.1, Comp.2, ..., Comp.5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (principal, 100%): [ 68 × 5 | 3 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1   Comp.2  Comp.3  Comp.4  Comp.5<span style="color: #949494;"> | </span>.element site     form </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">  [180.9]  [98.44] [47.19] [11.78] [1.733]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span>  2.01   0.585    0.940  -0.276  -0.107 <span style="color: #949494;"> | </span>score    Bet Eli… Chunk</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span>  2.55   0.513   -1.71   -0.193  -0.0602<span style="color: #949494;"> | </span>score    Bet Eli… Chunk</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span>  1.64   0.0977   0.131   0.218   0.0182<span style="color: #949494;"> | </span>score    Bet Eli… Chunk</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span>  1.07   0.00734  1.20    0.524   0.0958<span style="color: #949494;"> | </span>score    Bet Eli… Chunk</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span>  1.07   0.00573  1.31    0.443  -0.0258<span style="color: #949494;"> | </span>score    Bet Eli… Chunk</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     <span style="color: #949494;">⋮</span>                                   <span style="color: #949494;">⋮</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 5 × 5 | 4 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1   Comp.2  Comp.3  Comp.4  Comp.5<span style="color: #949494;"> | </span>name  center scale</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">      [1]      [1]     [1]     [1]     [1]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span>  0.476  0.383    0.388   0.676   0.137 <span style="color: #949494;"> | </span>SiO2  71.7   3.16 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span>  0.488 -0.492   -0.0574  0.112  -0.710 <span style="color: #949494;"> | </span>Al2O3  2.64  0.956</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span>  0.383  0.234   -0.873   0.0620  0.182 <span style="color: #949494;"> | </span>FeO    0.442 0.159</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span> -0.425  0.580   -0.153   0.191  -0.651 <span style="color: #949494;"> | </span>MgO    1.15  0.913</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span> -0.456 -0.469   -0.247   0.700   0.143 <span style="color: #949494;"> | </span>CaO    8.18  1.36 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   .element &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="co"># note that column standard coordinates are unit vectors</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="fu"><a href="recoverers.html">get_cols</a></span><span class="op">(</span><span class="va">glass_pca</span><span class="op">)</span> <span class="op">^</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  SiO2 Al2O3   FeO   MgO   CaO </span>
@@ -1266,7 +1270,7 @@ the data's aesthetics.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

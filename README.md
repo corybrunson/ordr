@@ -145,27 +145,26 @@ as annotations to the appropriate matrix factors:[^7]
 library(ordr)
 #> Loading required package: ggplot2
 (iris_pca <- ordinate(iris, cols = 1:4, model = ~ prcomp(., scale. = TRUE)))
-#> # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
+#> # A tbl_ord of class 'prcomp': (150 × 4) · (4 × 4)´
 #> # 4 coordinates: PC1, PC2, ..., PC4
-#> # 
-#> # Rows (principal): [ 150 x 4 | 1 ]
-#>     PC1    PC2     PC3 ... |   Species
-#>                            |   <fct>  
-#> 1 -2.26 -0.478  0.127      | 1 setosa 
-#> 2 -2.07  0.672  0.234      | 2 setosa 
-#> 3 -2.36  0.341 -0.0441 ... | 3 setosa 
-#> 4 -2.29  0.595 -0.0910     | 4 setosa 
-#> 5 -2.38 -0.645 -0.0157     | 5 setosa 
-#> # ℹ 145 more rows     | # ℹ 145 more rows
-#> 
-#> # 
-#> # Columns (standard): [ 4 x 4 | 3 ]
-#>      PC1     PC2    PC3 ... |   name         center scale
-#>                             |   <chr>         <dbl> <dbl>
-#> 1  0.521 -0.377   0.720     | 1 Sepal.Length   5.84 0.828
-#> 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width    3.06 0.436
-#> 3  0.580 -0.0245 -0.142     | 3 Petal.Length   3.76 1.77 
-#> 4  0.565 -0.0669 -0.634     | 4 Petal.Width    1.20 0.762
+#> # Rows (principal, 100%): [ 150 × 4 | 2 ]
+#>      PC1     PC2     PC3     PC4 | .element Species
+#>  [434.9] [136.2] [21.87] [3.087] | <chr>    <fct>  
+#> 1 -2.26  -0.478   0.127   0.0241 | active   setosa 
+#> 2 -2.07   0.672   0.234   0.103  | active   setosa 
+#> 3 -2.36   0.341  -0.0441  0.0283 | active   setosa 
+#> 4 -2.29   0.595  -0.0910 -0.0657 | active   setosa 
+#> 5 -2.38  -0.645  -0.0157 -0.0358 | active   setosa 
+#>                ⋮                          ⋮        
+#> # Columns (standard, 0%): [ 4 × 4 | 4 ]
+#>      PC1     PC2     PC3     PC4 | name       center scale
+#>      [1]     [1]     [1]     [1] | <chr>       <dbl> <dbl>
+#> 1  0.521 -0.377   0.720   0.261  | Sepal.Len…   5.84 0.828
+#> 2 -0.269 -0.923  -0.244  -0.124  | Sepal.Wid…   3.06 0.436
+#> 3  0.580 -0.0245 -0.142  -0.801  | Petal.Len…   3.76 1.77 
+#> 4  0.565 -0.0669 -0.634   0.524  | Petal.Wid…   1.20 0.762
+#> # ℹ 1 more variable:
+#> #   .element <chr>
 ```
 
 Additional annotations can be added using several row- and
@@ -179,27 +178,28 @@ iris_meta <- data.frame(
   Cytotype = c("diploid", "hexaploid", "tetraploid")
 )
 (iris_pca <- left_join_rows(iris_pca, iris_meta, by = "Species"))
-#> # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
+#> # A tbl_ord of class 'prcomp': (150 × 4) · (4 × 4)´
 #> # 4 coordinates: PC1, PC2, ..., PC4
-#> # 
-#> # Rows (principal): [ 150 x 4 | 3 ]
-#>     PC1    PC2     PC3 ... |   Species Colony Cytotype
-#>                            |   <chr>    <int> <chr>   
-#> 1 -2.26 -0.478  0.127      | 1 setosa       1 diploid 
-#> 2 -2.07  0.672  0.234      | 2 setosa       1 diploid 
-#> 3 -2.36  0.341 -0.0441 ... | 3 setosa       1 diploid 
-#> 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid 
-#> 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid 
-#> # ℹ 145 more rows     | # ℹ 145 more rows
-#> 
-#> # 
-#> # Columns (standard): [ 4 x 4 | 3 ]
-#>      PC1     PC2    PC3 ... |   name         center scale
-#>                             |   <chr>         <dbl> <dbl>
-#> 1  0.521 -0.377   0.720     | 1 Sepal.Length   5.84 0.828
-#> 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width    3.06 0.436
-#> 3  0.580 -0.0245 -0.142     | 3 Petal.Length   3.76 1.77 
-#> 4  0.565 -0.0669 -0.634     | 4 Petal.Width    1.20 0.762
+#> # Rows (principal, 100%): [ 150 × 4 | 4 ]
+#>      PC1     PC2     PC3     PC4 | .element Species Colony
+#>  [434.9] [136.2] [21.87] [3.087] | <chr>    <chr>    <int>
+#> 1 -2.26  -0.478   0.127   0.0241 | active   setosa       1
+#> 2 -2.07   0.672   0.234   0.103  | active   setosa       1
+#> 3 -2.36   0.341  -0.0441  0.0283 | active   setosa       1
+#> 4 -2.29   0.595  -0.0910 -0.0657 | active   setosa       1
+#> 5 -2.38  -0.645  -0.0157 -0.0358 | active   setosa       1
+#>                ⋮                              ⋮           
+#> # ℹ 1 more variable:
+#> #   Cytotype <chr>
+#> # Columns (standard, 0%): [ 4 × 4 | 4 ]
+#>      PC1     PC2     PC3     PC4 | name       center scale
+#>      [1]     [1]     [1]     [1] | <chr>       <dbl> <dbl>
+#> 1  0.521 -0.377   0.720   0.261  | Sepal.Len…   5.84 0.828
+#> 2 -0.269 -0.923  -0.244  -0.124  | Sepal.Wid…   3.06 0.436
+#> 3  0.580 -0.0245 -0.142  -0.801  | Petal.Len…   3.76 1.77 
+#> 4  0.565 -0.0669 -0.634   0.524  | Petal.Wid…   1.20 0.762
+#> # ℹ 1 more variable:
+#> #   .element <chr>
 ```
 
 Following the [**broom**](https://github.com/tidymodels/broom) package,

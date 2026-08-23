@@ -5,7 +5,7 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Render interpolation of new rows from columns (or vice-versa) — geom_interpolation"><meta name="description" content="geom_interpolation() renders a geometric construction that
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Render interpolation of new rows from columns (or vice-versa) — geom_interpolation"><meta name="description" content="geom_interpolation() renders a geometric construction that
 interpolates a new data matrix (row or column) element from its entries to
 its artificial coordinates."><meta property="og:description" content="geom_interpolation() renders a geometric construction that
 interpolates a new data matrix (row or column) element from its entries to
@@ -17,7 +17,7 @@ its artificial coordinates."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">ordr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.0002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,7 +100,7 @@ from a <code>formula</code> (e.g. <code>~ head(.x, 10)</code>).</p></dd>
 <dt id="arg-stat">stat<a class="anchor" aria-label="anchor" href="#arg-stat"></a></dt>
 <dd><p>The statistical transformation to use on the data for this layer.
 When using a <code>geom_*()</code> function to construct a layer, the <code>stat</code>
-argument can be used the override the default coupling between geoms and
+argument can be used to override the default coupling between geoms and
 stats. The <code>stat</code> argument accepts the following:</p><ul><li><p>A <code>Stat</code> ggproto subclass, for example <code>StatCount</code>.</p></li>
 <li><p>A string naming the stat. To give the stat as a string, strip the
 function name of the <code>stat_</code> prefix. For example, to use <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">stat_count()</a></code>,
@@ -157,14 +157,16 @@ the data's aesthetics.</p></dd>
 <code>NA</code>, the default, includes if any aesthetics are mapped.
 <code>FALSE</code> never includes, and <code>TRUE</code> always includes.
 It can also be a named logical vector to finely select the aesthetics to
-display.</p></dd>
+display. To include legend keys for all levels, even
+when no data exists, use <code>TRUE</code>.  If <code>NA</code>, all levels are shown in legend,
+but unobserved levels are omitted.</p></dd>
 
 
 <dt id="arg-inherit-aes">inherit.aes<a class="anchor" aria-label="anchor" href="#arg-inherit-aes"></a></dt>
 <dd><p>If <code>FALSE</code>, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.org/reference/borders.html" class="external-link">borders()</a></code>.</p></dd>
+the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.org/reference/annotation_borders.html" class="external-link">annotation_borders()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -223,7 +225,7 @@ Wiley, ISBN: 978-0-470-01255-0. <a href="https://www.wiley.com/go/biplots" class
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other geom layers:
-<code><a href="geom_origin.html">geom_origin</a>()</code></p></div>
+<code><a href="geom_origin.html">geom_origin()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -232,27 +234,24 @@ Wiley, ISBN: 978-0-470-01255-0. <a href="https://www.wiley.com/go/biplots" class
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">prcomp</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">iris_pca</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 4 coordinates: PC1, PC2, ..., PC4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 150 x 4 | 0 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     PC1    PC2     PC3 ... | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">2.26</span> -<span style="color: #BB0000;">0.478</span>  0.127      | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">2.07</span>  0.672  0.234      | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">2.36</span>  0.341 -<span style="color: #BB0000;">0.044</span><span style="color: #BB0000; text-decoration: underline;">1</span> ... | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">2.29</span>  0.595 -<span style="color: #BB0000;">0.091</span><span style="color: #BB0000; text-decoration: underline;">0</span>     | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">2.38</span> -<span style="color: #BB0000;">0.645</span> -<span style="color: #BB0000;">0.015</span><span style="color: #BB0000; text-decoration: underline;">7</span>     | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 145 more rows</span>     | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 4 | 0 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      PC1     PC2    PC3 ... | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.521 -<span style="color: #BB0000;">0.377</span>   0.720     | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.269</span> -<span style="color: #BB0000;">0.923</span>  -<span style="color: #BB0000;">0.244</span> ... | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  0.580 -<span style="color: #BB0000;">0.024</span><span style="color: #BB0000; text-decoration: underline;">5</span> -<span style="color: #BB0000;">0.142</span>     | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.565 -<span style="color: #BB0000;">0.066</span><span style="color: #BB0000; text-decoration: underline;">9</span> -<span style="color: #BB0000;">0.634</span>     | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tbl_ord of class 'prcomp': (150 × 4) · (4 × 4)´</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># 4 coordinates: PC1, PC2, ..., PC4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (principal, 100%): [ 150 × 4 | 0 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      PC1     PC2     PC3     PC4<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;"> [434.9] [136.2] [21.87] [3.087]</span><span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span> -2.26  -0.478   0.127   0.0241<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span> -2.07   0.672   0.234   0.103 <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span> -2.36   0.341  -0.0441  0.0283<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span> -2.29   0.595  -0.0910 -0.0657<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5</span> -2.38  -0.645  -0.0157 -0.0358<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                <span style="color: #949494;">⋮</span>                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 4 × 4 | 0 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      PC1     PC2     PC3     PC4<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">     [1]     [1]     [1]     [1]</span><span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span>  0.521 -0.377   0.720   0.261 <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span> -0.269 -0.923  -0.244  -0.124 <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span>  0.580 -0.0245 -0.142  -0.801 <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span>  0.565 -0.0669 -0.634   0.524 <span style="color: #949494;"> | </span></span>
 <span class="r-in"><span><span class="va">iris_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="dplyr-verbs.html">mutate_rows</a></span><span class="op">(</span><span class="va">iris_pca</span>, species <span class="op">=</span> <span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">iris_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -312,7 +311,7 @@ Wiley, ISBN: 978-0-470-01255-0. <a href="https://www.wiley.com/go/biplots" class
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

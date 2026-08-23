@@ -13,8 +13,8 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Ordination in the tidyverse">
 </head>
@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ordr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.0002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,7 +132,7 @@ information about the data set, call
 <span><span class="co">#&gt;   Red      16    7     7     7</span></span>
 <span><span class="co">#&gt;   Blond     4   64     5     8</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">HairEyeColor</span><span class="op">)</span></span></code></pre></div>
-<p><img src="ordr_files/figure-html/unnamed-chunk-1-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="ordr_files/figure-html/unnamed-chunk-1-1.png" class="r-plt" alt="" width="576" style="display: block; margin: auto;"></p>
 <p>The data were collected by students in one of Ronald Snee’s
 statistics courses.<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Snee RD (1974) “Graphical Display of Two-way Contingency
 Tables”. &lt;em&gt;The American Statistician&lt;/em&gt; &lt;strong&gt;28&lt;/strong&gt;(1),
@@ -265,7 +265,7 @@ for the ‘correspondence’ class, also provided by
 <span>  <span class="va">haireye_ca</span>, type <span class="op">=</span> <span class="st">"symmetric"</span>, cex <span class="op">=</span> <span class="fl">.8</span>,</span>
 <span>  main <span class="op">=</span> <span class="st">"Correspondence analysis of subjects' hair &amp; eye colors"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="ordr_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="ordr_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="" width="576" style="display: block; margin: auto;"></p>
 <p>This <em>symmetric biplot</em> evenly distributes the inertia between
 the rows and columns. Distances between points in the same matrix factor
 do not approximate their <span class="math inline">\(\chi^2\)</span>
@@ -283,24 +283,22 @@ modifying them. (The original model can be recovered with
 <code><a href="../reference/tbl_ord.html">un_tbl_ord()</a></code>.)</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">haireye_ca_ord</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="va">haireye_ca</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tbl_ord of class 'correspondence': (4 x 3) x (4 x 3)'</span></span>
-<span><span class="co">#&gt; # 3 coordinates: Can1, Can2, Can3</span></span>
-<span><span class="co">#&gt; # </span></span>
-<span><span class="co">#&gt; # Rows (standard): [ 4 x 3 | 0 ]</span></span>
-<span><span class="co">#&gt;     Can1   Can2   Can3 | </span></span>
-<span><span class="co">#&gt;                        | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.10</span>   1.44  -<span style="color: #BB0000;">1.09</span>  | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.324</span> -<span style="color: #BB0000;">0.219</span>  0.957 | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.283</span> -<span style="color: #BB0000;">2.14</span>  -<span style="color: #BB0000;">1.63</span>  | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  1.83   0.467 -<span style="color: #BB0000;">0.318</span> | </span></span>
-<span><span class="co">#&gt; # </span></span>
-<span><span class="co">#&gt; # Columns (standard): [ 4 x 3 | 0 ]</span></span>
-<span><span class="co">#&gt;     Can1   Can2    Can3 | </span></span>
-<span><span class="co">#&gt;                         | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.08</span>   0.592 -<span style="color: #BB0000;">0.424</span>  | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  1.20   0.556  0.092<span style="text-decoration: underline;">4</span> | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.465</span> -<span style="color: #BB0000;">1.12</span>   1.97   | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  0.354 -<span style="color: #BB0000;">2.27</span>  -<span style="color: #BB0000;">1.72</span>   |</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tbl_ord of class 'correspondence': (4 × 3) · (4 × 3)´</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># 3 coordinates: Can1, Can2, Can3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Rows (standard, 0%): [ 4 × 3 | 0 ]</span></span></span>
+<span><span class="co">#&gt;     Can1   Can2    Can3<span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494; font-style: italic;">     [1]    [1]     [1]</span><span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">1</span> -1.10   1.44  -1.09  <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">2</span> -0.324 -0.219  0.957 <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">3</span> -0.283 -2.14  -1.63  <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">4</span>  1.83   0.467 -0.318 <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Columns (standard, 0%): [ 4 × 3 | 0 ]</span></span></span>
+<span><span class="co">#&gt;     Can1   Can2    Can3<span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494; font-style: italic;">     [1]    [1]     [1]</span><span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">1</span> -1.08   0.592 -0.424 <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">2</span>  1.20   0.556  0.0924<span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">3</span> -0.465 -1.12   1.97  <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">4</span>  0.354 -2.27  -1.72  <span style="color: #949494;"> | </span></span></span></code></pre></div>
 <p>The <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> method for ‘tbl_ord’ is based on that of
 tibbles. It prints two tibbles, like that for the ‘tbl_graph’ class of
 <a href="https://tidygraph.data-imaginist.com/" class="external-link"><strong>tidygraph</strong></a>,
@@ -316,63 +314,57 @@ distribute half of the inertia to each matrix factor:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/conference.html">get_conference</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0 0</span></span>
 <span><span class="fu"><a href="../reference/conference.html">confer_inertia</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.25</span>, <span class="fl">.75</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tbl_ord of class 'correspondence': (4 x 3) x (4 x 3)'</span></span>
-<span><span class="co">#&gt; # 3 coordinates: Can1, Can2, Can3</span></span>
-<span><span class="co">#&gt; # </span></span>
-<span><span class="co">#&gt; # Rows (25% inertia): [ 4 x 3 | 0 ]</span></span>
-<span><span class="co">#&gt;     Can1   Can2   Can3 | </span></span>
-<span><span class="co">#&gt;                        | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.908</span>  0.895 -<span style="color: #BB0000;">0.517</span> | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.267</span> -<span style="color: #BB0000;">0.136</span>  0.455 | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.233</span> -<span style="color: #BB0000;">1.33</span>  -<span style="color: #BB0000;">0.775</span> | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  1.50   0.290 -<span style="color: #BB0000;">0.151</span> | </span></span>
-<span><span class="co">#&gt; # </span></span>
-<span><span class="co">#&gt; # Columns (75% inertia): [ 4 x 3 | 0 ]</span></span>
-<span><span class="co">#&gt;     Can1   Can2     Can3 | </span></span>
-<span><span class="co">#&gt;                          | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.599</span>  0.142 -<span style="color: #BB0000;">0.045</span><span style="color: #BB0000; text-decoration: underline;">5</span>  | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  0.666  0.133  0.009<span style="text-decoration: underline;">91</span> | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.259</span> -<span style="color: #BB0000;">0.269</span>  0.212   | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  0.197 -<span style="color: #BB0000;">0.546</span> -<span style="color: #BB0000;">0.184</span>   |</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tbl_ord of class 'correspondence': (4 × 3) · (4 × 3)´</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># 3 coordinates: Can1, Can2, Can3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Rows (25% inertia, 25%): [ 4 × 3 | 0 ]</span></span></span>
+<span><span class="co">#&gt;     Can1   Can2     Can3<span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494; font-style: italic;"> [0.676][0.386] [0.2258]</span><span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">1</span> -0.908  0.895 -0.517  <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">2</span> -0.267 -0.136  0.455  <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">3</span> -0.233 -1.33  -0.775  <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">4</span>  1.50   0.290 -0.151  <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Columns (75% inertia, 75%): [ 4 × 3 | 0 ]</span></span></span>
+<span><span class="co">#&gt;     Can1   Can2     Can3<span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494; font-style: italic;">[0.3089][0.058][0.01151]</span><span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">1</span> -0.599  0.142 -0.0455 <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">2</span>  0.666  0.133  0.00991<span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">3</span> -0.259 -0.269  0.212  <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">4</span>  0.197 -0.546 -0.184  <span style="color: #949494;"> | </span></span></span>
 <span><span class="fu"><a href="../reference/conference.html">confer_inertia</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in confer_inertia(haireye_ca_ord, c(1, 1)): Inertia is not balanced.</span></span>
-<span><span class="co">#&gt; # A tbl_ord of class 'correspondence': (4 x 3) x (4 x 3)'</span></span>
-<span><span class="co">#&gt; # 3 coordinates: Can1, Can2, Can3</span></span>
-<span><span class="co">#&gt; # </span></span>
-<span><span class="co">#&gt; # Rows (principal): [ 4 x 3 | 0 ]</span></span>
-<span><span class="co">#&gt;     Can1    Can2    Can3 | </span></span>
-<span><span class="co">#&gt;                          | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.505</span>  0.215  -<span style="color: #BB0000;">0.055</span><span style="color: #BB0000; text-decoration: underline;">5</span> | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.148</span> -<span style="color: #BB0000;">0.032</span><span style="color: #BB0000; text-decoration: underline;">7</span>  0.048<span style="text-decoration: underline;">8</span> | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.130</span> -<span style="color: #BB0000;">0.320</span>  -<span style="color: #BB0000;">0.083</span><span style="color: #BB0000; text-decoration: underline;">2</span> | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  0.835  0.069<span style="text-decoration: underline;">6</span> -<span style="color: #BB0000;">0.016</span><span style="color: #BB0000; text-decoration: underline;">2</span> | </span></span>
-<span><span class="co">#&gt; # </span></span>
-<span><span class="co">#&gt; # Columns (principal): [ 4 x 3 | 0 ]</span></span>
-<span><span class="co">#&gt;     Can1    Can2     Can3 | </span></span>
-<span><span class="co">#&gt;                           | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.492</span>  0.088<span style="text-decoration: underline;">3</span> -<span style="color: #BB0000;">0.021</span><span style="color: #BB0000; text-decoration: underline;">6</span>  | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  0.547  0.083<span style="text-decoration: underline;">0</span>  0.004<span style="text-decoration: underline;">71</span> | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.213</span> -<span style="color: #BB0000;">0.167</span>   0.101   | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  0.162 -<span style="color: #BB0000;">0.339</span>  -<span style="color: #BB0000;">0.087</span><span style="color: #BB0000; text-decoration: underline;">6</span>  |</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tbl_ord of class 'correspondence': (4 × 3) · (4 × 3)´</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># 3 coordinates: Can1, Can2, Can3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Rows (principal, 100%): [ 4 × 3 | 0 ]</span></span></span>
+<span><span class="co">#&gt;     Can1    Can2     Can3<span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494; font-style: italic;">[0.2088][0.0222] [0.0026]</span><span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">1</span> -0.505  0.215  -0.0555 <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">2</span> -0.148 -0.0327  0.0488 <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">3</span> -0.130 -0.320  -0.0832 <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">4</span>  0.835  0.0696 -0.0162 <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Columns (principal, 100%): [ 4 × 3 | 0 ]</span></span></span>
+<span><span class="co">#&gt;     Can1    Can2     Can3<span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494; font-style: italic;">[0.2088][0.0222] [0.0026]</span><span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">1</span> -0.492  0.0883 -0.0216 <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">2</span>  0.547  0.0830  0.00471<span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">3</span> -0.213 -0.167   0.101  <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">4</span>  0.162 -0.339  -0.0876 <span style="color: #949494;"> | </span></span></span>
 <span><span class="op">(</span><span class="va">haireye_ca_ord</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/conference.html">confer_inertia</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span>, <span class="st">"symmetric"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tbl_ord of class 'correspondence': (4 x 3) x (4 x 3)'</span></span>
-<span><span class="co">#&gt; # 3 coordinates: Can1, Can2, Can3</span></span>
-<span><span class="co">#&gt; # </span></span>
-<span><span class="co">#&gt; # Rows (symmetric): [ 4 x 3 | 0 ]</span></span>
-<span><span class="co">#&gt;     Can1    Can2    Can3 | </span></span>
-<span><span class="co">#&gt;                          | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.746</span>  0.556  -<span style="color: #BB0000;">0.246</span>  | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.219</span> -<span style="color: #BB0000;">0.084</span><span style="color: #BB0000; text-decoration: underline;">6</span>  0.216  | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.192</span> -<span style="color: #BB0000;">0.828</span>  -<span style="color: #BB0000;">0.368</span>  | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  1.24   0.180  -<span style="color: #BB0000;">0.071</span><span style="color: #BB0000; text-decoration: underline;">8</span> | </span></span>
-<span><span class="co">#&gt; # </span></span>
-<span><span class="co">#&gt; # Columns (symmetric): [ 4 x 3 | 0 ]</span></span>
-<span><span class="co">#&gt;     Can1   Can2    Can3 | </span></span>
-<span><span class="co">#&gt;                         | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.728</span>  0.229 -<span style="color: #BB0000;">0.095</span><span style="color: #BB0000; text-decoration: underline;">7</span> | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  0.810  0.215  0.020<span style="text-decoration: underline;">9</span> | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.315</span> -<span style="color: #BB0000;">0.434</span>  0.445  | </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  0.239 -<span style="color: #BB0000;">0.878</span> -<span style="color: #BB0000;">0.388</span>  |</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tbl_ord of class 'correspondence': (4 × 3) · (4 × 3)´</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># 3 coordinates: Can1, Can2, Can3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Rows (symmetric, 50%): [ 4 × 3 | 0 ]</span></span></span>
+<span><span class="co">#&gt;     Can1    Can2    Can3<span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494; font-style: italic;">[0.4569][0.1491] [0.051]</span><span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">1</span> -0.746  0.556  -0.246 <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">2</span> -0.219 -0.0846  0.216 <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">3</span> -0.192 -0.828  -0.368 <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">4</span>  1.24   0.180  -0.0718<span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Columns (symmetric, 50%): [ 4 × 3 | 0 ]</span></span></span>
+<span><span class="co">#&gt;     Can1    Can2    Can3<span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494; font-style: italic;">[0.4569][0.1491] [0.051]</span><span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">1</span> -0.728  0.229  -0.0957<span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">2</span>  0.810  0.215   0.0209<span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">3</span> -0.315 -0.434   0.445 <span style="color: #949494;"> | </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">4</span>  0.239 -0.878  -0.388 <span style="color: #949494;"> | </span></span></span></code></pre></div>
 <p><code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">broom::glance()</a></code> returns a single-row tibble summary of a
 model object. It was designed for analysis pipelines involving multiple
 models (e.g. model selection), to facilitate summaries of multiple
@@ -394,24 +386,22 @@ tibbles with any metadata or diagnostics found in the model object.
 Vertical bars separate the coordinate matrices from annotations.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/augmentation.html">augment_ord</a></span><span class="op">(</span><span class="va">haireye_ca_ord</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tbl_ord of class 'correspondence': (4 x 3) x (4 x 3)'</span></span>
-<span><span class="co">#&gt; # 3 coordinates: Can1, Can2, Can3</span></span>
-<span><span class="co">#&gt; # </span></span>
-<span><span class="co">#&gt; # Rows (symmetric): [ 4 x 3 | 1 ]</span></span>
-<span><span class="co">#&gt;     Can1    Can2    Can3 |   name </span></span>
-<span><span class="co">#&gt;                          |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.746</span>  0.556  -<span style="color: #BB0000;">0.246</span>  | <span style="color: #BCBCBC;">1</span> Black</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.219</span> -<span style="color: #BB0000;">0.084</span><span style="color: #BB0000; text-decoration: underline;">6</span>  0.216  | <span style="color: #BCBCBC;">2</span> Brown</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.192</span> -<span style="color: #BB0000;">0.828</span>  -<span style="color: #BB0000;">0.368</span>  | <span style="color: #BCBCBC;">3</span> Red  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  1.24   0.180  -<span style="color: #BB0000;">0.071</span><span style="color: #BB0000; text-decoration: underline;">8</span> | <span style="color: #BCBCBC;">4</span> Blond</span></span>
-<span><span class="co">#&gt; # </span></span>
-<span><span class="co">#&gt; # Columns (symmetric): [ 4 x 3 | 1 ]</span></span>
-<span><span class="co">#&gt;     Can1   Can2    Can3 |   name </span></span>
-<span><span class="co">#&gt;                         |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.728</span>  0.229 -<span style="color: #BB0000;">0.095</span><span style="color: #BB0000; text-decoration: underline;">7</span> | <span style="color: #BCBCBC;">1</span> Brown</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  0.810  0.215  0.020<span style="text-decoration: underline;">9</span> | <span style="color: #BCBCBC;">2</span> Blue </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.315</span> -<span style="color: #BB0000;">0.434</span>  0.445  | <span style="color: #BCBCBC;">3</span> Hazel</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  0.239 -<span style="color: #BB0000;">0.878</span> -<span style="color: #BB0000;">0.388</span>  | <span style="color: #BCBCBC;">4</span> Green</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tbl_ord of class 'correspondence': (4 × 3) · (4 × 3)´</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># 3 coordinates: Can1, Can2, Can3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Rows (symmetric, 50%): [ 4 × 3 | 2 ]</span></span></span>
+<span><span class="co">#&gt;     Can1    Can2    Can3<span style="color: #949494;"> | </span>name  .element</span></span>
+<span><span class="co">#&gt; <span style="color: #949494; font-style: italic;">[0.4569][0.1491] [0.051]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt; &lt;chr&gt;   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">1</span> -0.746  0.556  -0.246 <span style="color: #949494;"> | </span>Black active  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">2</span> -0.219 -0.0846  0.216 <span style="color: #949494;"> | </span>Brown active  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">3</span> -0.192 -0.828  -0.368 <span style="color: #949494;"> | </span>Red   active  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">4</span>  1.24   0.180  -0.0718<span style="color: #949494;"> | </span>Blond active  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Columns (symmetric, 50%): [ 4 × 3 | 2 ]</span></span></span>
+<span><span class="co">#&gt;     Can1    Can2    Can3<span style="color: #949494;"> | </span>name  .element</span></span>
+<span><span class="co">#&gt; <span style="color: #949494; font-style: italic;">[0.4569][0.1491] [0.051]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt; &lt;chr&gt;   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">1</span> -0.728  0.229  -0.0957<span style="color: #949494;"> | </span>Brown active  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">2</span>  0.810  0.215   0.0209<span style="color: #949494;"> | </span>Blue  active  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">3</span> -0.315 -0.434   0.445 <span style="color: #949494;"> | </span>Hazel active  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">4</span>  0.239 -0.878  -0.388 <span style="color: #949494;"> | </span>Green active</span></span></code></pre></div>
 <p>Additional row- and column-level variables can also be augmented and
 manipulated using a handful of <strong>dplyr</strong>-like verbs, each
 specific to the matrix factor being affected (<code>rows</code> or
@@ -444,7 +434,7 @@ decomposition for a scree plot with <code><a href="https://ggplot2.tidyverse.org
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Component"</span>, y <span class="op">=</span> <span class="st">"Inertia"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Correspondence analysis of subjects' hair &amp; eye colors"</span>,</span>
 <span>          <span class="st">"Decomposition of inertia"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="ordr_files/figure-html/scree%20plot-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="ordr_files/figure-html/scree%20plot-1.png" class="r-plt" alt="" width="576" style="display: block; margin: auto;"></p>
 <p>While <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">ggplot2::fortify()</a></code> may rarely be called directly,
 is plays a special role in <strong>ordr</strong> by converting a
 ‘tbl_ord’ object to a ‘tbl_df’ object. To do this, the fortifier
@@ -495,7 +485,7 @@ profile markers:</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html" class="external-link">scale_size_area</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Correspondence analysis of subjects' hair &amp; eye colors"</span>,</span>
 <span>          <span class="st">"Symmetric biplot"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="ordr_files/figure-html/unnamed-chunk-9-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="ordr_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="" width="576" style="display: block; margin: auto;"></p>
 <p>Note a few conveniences:</p>
 <ul>
 <li>The position aesthetics are assumed to be the first and second
@@ -521,74 +511,75 @@ plotting elements commonly used in biplots, the other being
 <code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://sessioninfo.r-lib.org/reference/session_info.html" class="external-link">session_info</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
-<span><span class="co">#&gt;  version  R version 4.4.2 (2024-10-31)</span></span>
-<span><span class="co">#&gt;  os       macOS Sonoma 14.4.1</span></span>
+<span><span class="co">#&gt;  version  R version 4.5.3 (2026-03-11)</span></span>
+<span><span class="co">#&gt;  os       macOS Tahoe 26.5.2</span></span>
 <span><span class="co">#&gt;  system   aarch64, darwin20</span></span>
 <span><span class="co">#&gt;  ui       X11</span></span>
 <span><span class="co">#&gt;  language en</span></span>
 <span><span class="co">#&gt;  collate  en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  ctype    en_US.UTF-8</span></span>
-<span><span class="co">#&gt;  tz       America/Los_Angeles</span></span>
-<span><span class="co">#&gt;  date     2025-07-11</span></span>
-<span><span class="co">#&gt;  pandoc   2.19 @ /opt/homebrew/bin/ (via rmarkdown)</span></span>
-<span><span class="co">#&gt;  quarto   NA</span></span>
+<span><span class="co">#&gt;  tz       America/New_York</span></span>
+<span><span class="co">#&gt;  date     2026-08-23</span></span>
+<span><span class="co">#&gt;  pandoc   3.10 @ /opt/homebrew/bin/ (via rmarkdown)</span></span>
+<span><span class="co">#&gt;  quarto   1.9.38 @ /usr/local/bin/quarto</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Packages ───────────────────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">package     </span> <span style="color: #555555; font-style: italic;">*</span> <span style="color: #555555; font-style: italic;">version</span> <span style="color: #555555; font-style: italic;">date (UTC)</span> <span style="color: #555555; font-style: italic;">lib</span> <span style="color: #555555; font-style: italic;">source</span></span></span>
-<span><span class="co">#&gt;  bslib          0.9.0   <span style="color: #555555;">2025-01-30</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  cachem         1.1.0   <span style="color: #555555;">2024-05-16</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  cli            3.6.5   <span style="color: #555555;">2025-04-23</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  desc           1.4.3   <span style="color: #555555;">2023-12-10</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  digest         0.6.37  <span style="color: #555555;">2024-08-19</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  dplyr          1.1.4   <span style="color: #555555;">2023-11-17</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.0)</span></span></span>
-<span><span class="co">#&gt;  evaluate       1.0.4   <span style="color: #555555;">2025-06-18</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  farver         2.1.2   <span style="color: #555555;">2024-05-13</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  fastmap        1.2.0   <span style="color: #555555;">2024-05-15</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  fs             1.6.6   <span style="color: #555555;">2025-04-12</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  generics       0.1.4   <span style="color: #555555;">2025-05-09</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  gggda          0.1.1   <span style="color: #555555;">2025-07-09</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">Github (corybrunson/gggda@91e7e82)</span></span></span>
-<span><span class="co">#&gt;  ggplot2      * 3.5.2   <span style="color: #555555;">2025-04-09</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  ggrepel        0.9.6   <span style="color: #555555;">2024-09-07</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  glue           1.8.0   <span style="color: #555555;">2024-09-30</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  gtable         0.3.6   <span style="color: #555555;">2024-10-25</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  htmltools      0.5.8.1 <span style="color: #555555;">2024-04-04</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  htmlwidgets    1.6.4   <span style="color: #555555;">2023-12-06</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.0)</span></span></span>
-<span><span class="co">#&gt;  jquerylib      0.1.4   <span style="color: #555555;">2021-04-26</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.0)</span></span></span>
-<span><span class="co">#&gt;  jsonlite       2.0.0   <span style="color: #555555;">2025-03-27</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  knitr          1.50    <span style="color: #555555;">2025-03-16</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  labeling       0.4.3   <span style="color: #555555;">2023-08-29</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  lifecycle      1.0.4   <span style="color: #555555;">2023-11-07</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  magrittr       2.0.3   <span style="color: #555555;">2022-03-30</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  MASS         * 7.3-65  <span style="color: #555555;">2025-02-28</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  ordr         * 0.2.0   <span style="color: #555555;">2025-07-12</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
-<span><span class="co">#&gt;  pillar         1.11.0  <span style="color: #555555;">2025-07-04</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  pkgconfig      2.0.3   <span style="color: #555555;">2019-09-22</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  pkgdown        2.1.3   <span style="color: #555555;">2025-05-25</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  purrr          1.0.4   <span style="color: #555555;">2025-02-05</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  R6             2.6.1   <span style="color: #555555;">2025-02-15</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  ragg           1.4.0   <span style="color: #555555;">2025-04-10</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  RColorBrewer   1.1-3   <span style="color: #555555;">2022-04-03</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  Rcpp           1.1.0   <span style="color: #555555;">2025-07-02</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  rlang          1.1.6   <span style="color: #555555;">2025-04-11</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  rmarkdown      2.29    <span style="color: #555555;">2024-11-04</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  sass           0.4.10  <span style="color: #555555;">2025-04-11</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  scales         1.4.0   <span style="color: #555555;">2025-04-24</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  sessioninfo    1.2.3   <span style="color: #555555;">2025-02-05</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  stringi        1.8.7   <span style="color: #555555;">2025-03-27</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  stringr        1.5.1   <span style="color: #555555;">2023-11-14</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.0)</span></span></span>
-<span><span class="co">#&gt;  systemfonts    1.2.3   <span style="color: #555555;">2025-04-30</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  textshaping    1.0.1   <span style="color: #555555;">2025-05-01</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  tibble         3.3.0   <span style="color: #555555;">2025-06-08</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  tidyr          1.3.1   <span style="color: #555555;">2024-01-24</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  tidyselect     1.2.1   <span style="color: #555555;">2024-03-11</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.0)</span></span></span>
-<span><span class="co">#&gt;  utf8           1.2.6   <span style="color: #555555;">2025-06-08</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  vctrs          0.6.5   <span style="color: #555555;">2023-12-01</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.0)</span></span></span>
-<span><span class="co">#&gt;  withr          3.0.2   <span style="color: #555555;">2024-10-28</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  xfun           0.52    <span style="color: #555555;">2025-04-02</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
-<span><span class="co">#&gt;  yaml           2.3.10  <span style="color: #555555;">2024-07-26</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
+<span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">package     </span> <span style="color: #555555; font-style: italic;">*</span> <span style="color: #555555; font-style: italic;">version   </span> <span style="color: #555555; font-style: italic;">date (UTC)</span> <span style="color: #555555; font-style: italic;">lib</span> <span style="color: #555555; font-style: italic;">source</span></span></span>
+<span><span class="co">#&gt;  bslib          0.11.0     <span style="color: #555555;">2026-05-16</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  cachem         1.1.0      <span style="color: #555555;">2024-05-16</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  cli            3.6.6      <span style="color: #555555;">2026-04-09</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  crayon         1.5.3      <span style="color: #555555;">2024-06-20</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  desc           1.4.3      <span style="color: #555555;">2023-12-10</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  digest         0.6.39     <span style="color: #555555;">2025-11-19</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  dplyr          1.2.1      <span style="color: #555555;">2026-04-03</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  evaluate       1.0.5      <span style="color: #555555;">2025-08-27</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  farver         2.1.2      <span style="color: #555555;">2024-05-13</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  fastmap        1.2.0      <span style="color: #555555;">2024-05-15</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  fs             2.1.0      <span style="color: #555555;">2026-04-18</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  generics       0.1.4      <span style="color: #555555;">2025-05-09</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  gggda          0.2.0      <span style="color: #555555;">2026-07-18</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  ggplot2      * 4.0.3      <span style="color: #555555;">2026-04-22</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  ggrepel        0.9.8      <span style="color: #555555;">2026-03-17</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  glue           1.8.1      <span style="color: #555555;">2026-04-17</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  gtable         0.3.6      <span style="color: #555555;">2024-10-25</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  htmltools      0.5.9      <span style="color: #555555;">2025-12-04</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  htmlwidgets    1.6.4      <span style="color: #555555;">2023-12-06</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  jquerylib      0.1.4      <span style="color: #555555;">2021-04-26</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  jsonlite       2.0.0      <span style="color: #555555;">2025-03-27</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  knitr          1.51       <span style="color: #555555;">2025-12-20</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  labeling       0.4.3      <span style="color: #555555;">2023-08-29</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  lifecycle      1.0.5      <span style="color: #555555;">2026-01-08</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  magrittr       2.0.5      <span style="color: #555555;">2026-04-04</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  MASS         * 7.3-66     <span style="color: #555555;">2026-07-15</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  ordr         * 0.2.0.0002 <span style="color: #555555;">2026-08-23</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
+<span><span class="co">#&gt;  otel           0.2.0      <span style="color: #555555;">2025-08-29</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  pillar         1.11.1     <span style="color: #555555;">2025-09-17</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  pkgconfig      2.0.3      <span style="color: #555555;">2019-09-22</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  pkgdown        2.2.1      <span style="color: #555555;">2026-07-07</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  purrr          1.2.2      <span style="color: #555555;">2026-04-10</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  R6             2.6.1      <span style="color: #555555;">2025-02-15</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  ragg           1.5.2      <span style="color: #555555;">2026-03-23</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  RColorBrewer   1.1-3      <span style="color: #555555;">2022-04-03</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  Rcpp           1.1.2      <span style="color: #555555;">2026-07-05</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  rlang          1.3.0      <span style="color: #555555;">2026-07-05</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  rmarkdown      2.31       <span style="color: #555555;">2026-03-26</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  S7             0.2.2      <span style="color: #555555;">2026-04-22</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  sass           0.4.10     <span style="color: #555555;">2025-04-11</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  scales         1.4.0      <span style="color: #555555;">2025-04-24</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  sessioninfo    1.2.4      <span style="color: #555555;">2026-06-04</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  systemfonts    1.3.2      <span style="color: #555555;">2026-03-05</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  textshaping    1.0.5      <span style="color: #555555;">2026-03-06</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  tibble         3.3.1      <span style="color: #555555;">2026-01-11</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  tidyr          1.3.2      <span style="color: #555555;">2025-12-19</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  tidyselect     1.2.1      <span style="color: #555555;">2024-03-11</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  utf8           1.2.6      <span style="color: #555555;">2025-06-08</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  vctrs          0.7.3      <span style="color: #555555;">2026-04-11</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  withr          3.0.3      <span style="color: #555555;">2026-06-19</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  xfun           0.60       <span style="color: #555555;">2026-07-09</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  yaml           2.3.12     <span style="color: #555555;">2025-12-10</span> <span style="color: #555555;">[2]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"> [1] /private/var/folders/4p/3cy0qmp15x9216qsqhh84kzm0000gn/T/Rtmpeg6yc1/temp_libpath10aec49825958</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;"> [2] /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"> [1] /private/var/folders/4p/3cy0qmp15x9216qsqhh84kzm0000gn/T/RtmpbfPjTk/temp_libpathd58052565ce7</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;"> [2] /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #BBBBBB; background-color: #BB0000;">*</span> ── Packages attached to the search path.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">──────────────────────────────────────────────────────────────────────────────</span></span></span></code></pre></div>
@@ -605,7 +596,7 @@ plotting elements commonly used in biplots, the other being
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

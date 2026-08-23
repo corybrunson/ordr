@@ -1,0 +1,801 @@
+# ordr
+
+**ordr** integrates ordination analysis and biplot visualization into
+[Tidyverse](https://github.com/tidyverse/tidyverse) workflows.
+
+## motivation
+
+> Wherever there is an SVD, there is a biplot.[^1]
+
+### ordination and biplots
+
+*Ordination* is a catch-all term for a variety of statistical techniques
+that introduce an artificial coordinate system for a data set in such a
+way that a few coordinates capture a large amount of the data structure
+[^2]. The branch of mathematical statistics called [geometric data
+analysis](https://link.springer.com/book/10.1007/1-4020-2236-0) (GDA)
+provides the theoretical basis for (most of) these techniques.
+Ordination overlaps with regression and with dimension reduction, which
+can be [contrasted to clustering and
+classification](https://towardsdatascience.com/from-supervised-to-unsupervised-learning-a-paradigm-shift-in-computer-vision-ae19ada1064d/)
+in that they assign continuous rather than categorical values to data
+elements [^3].
+
+Most ordination techniques decompose a numeric rectangular data set into
+the product of two matrices, often using singular value decomposition
+(SVD). The coordinates of the shared dimensions of these matrices (over
+which they are multiplied) are the artificial coordinates. In some
+cases, such as principal components analysis, the decomposition is
+exact; in others, such as non-negative matrix factorization, it is
+approximate. Some techniques, such as correspondence analysis, transform
+the data before decomposition. Ordination techniques may be supervised,
+like linear discriminant analysis, or unsupervised, like
+multidimensional scaling.
+
+Analysis pipelines that use these techniques may use the artificial
+coordinates directly, in place of natural coordinates, to arrange and
+compare data elements or to predict responses. This is possible because
+both the rows and the columns of the original table can be located, or
+positioned, along these shared coordinates. The number of artificial
+coordinates used in an application, such as regression or visualization,
+is called the *rank* of the ordination [^4]. A common application is the
+*biplot*, which positions the rows and columns of the original table in
+a scatterplot in 1, 2, or 3 artificial coordinates, usually those that
+explain the most variation in the data.
+
+### implementations in R
+
+An extensive range of ordination techniques are implemented in R, from
+classical multidimensional scaling
+([`stats::cmdscale()`](https://rdrr.io/r/stats/cmdscale.html)) and
+principal components analysis
+([`stats::prcomp()`](https://rdrr.io/r/stats/prcomp.html) and
+[`stats::princomp()`](https://rdrr.io/r/stats/princomp.html)) in the
+**stats** package distributed with base R, across widely-used
+implementations of linear discriminant analysis
+([`MASS::lda()`](https://rdrr.io/pkg/MASS/man/lda.html)) and
+correspondence analysis (`ca::ca()`) in general-use statistical
+packages, to highly specialized packages that implement cutting-edge
+techniques or adapt conventional techniques to challenging settings.
+These implementations come with their own conventions, tailored to the
+research communities that produced them, and it would be impractical
+(and probably unhelpful) to try to consolidate them.
+
+Instead, **ordr** provides a streamlined process by which the models
+output by these methods—in particular, the matrix factors into which the
+original data are approximately decomposed and the artificial
+coordinates they share—can be inspected, annotated, tabulated,
+summarized, and visualized. On this last point, most biplot
+implementations in R provide limited customizability. **ordr** adopts
+the grammar of graphics paradigm from
+[**ggplot2**](https://github.com/tidyverse/ggplot2) to modularize and
+standardize biplot elements [^5]. Overall, the package is designed to
+follow the broader syntactic conventions of the Tidyverse, so that users
+familiar with a this workflow can more easily and quickly integrate
+ordination models into practice.
+
+## usage
+
+### installation
+
+**ordr** is now on CRAN and can be installed using base R:
+
+``` r
+
+install.packages("ordr")
+```
+
+The development version can be installed from the (default) `main`
+branch using [**remotes**](https://github.com/r-lib/remotes):
+
+``` r
+
+remotes::install_github("corybrunson/ordr")
+```
+
+### example
+
+> Morphologically, *Iris versicolor* is much closer to *Iris virginica*
+> than to *Iris setosa*, though in every character by which it differs
+> from *Iris virginica* it departs in the direction of *Iris
+> setosa*.[^6]
+
+A very common illustration of ordination in R applies principal
+components analysis (PCA) to Anderson’s iris measurements. These data
+consist of lengths and widths of the petals and surrounding sepals from
+50 each of three species of iris:
+
+``` r
+
+head(iris)
+#>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#> 1          5.1         3.5          1.4         0.2  setosa
+#> 2          4.9         3.0          1.4         0.2  setosa
+#> 3          4.7         3.2          1.3         0.2  setosa
+#> 4          4.6         3.1          1.5         0.2  setosa
+#> 5          5.0         3.6          1.4         0.2  setosa
+#> 6          5.4         3.9          1.7         0.4  setosa
+summary(iris)
+#>   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
+#>  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+#>  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+#>  Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+#>  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+#>  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+#>  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
+#>        Species  
+#>  setosa    :50  
+#>  versicolor:50  
+#>  virginica :50  
+#>                 
+#>                 
+#> 
+```
+
+**ordr** provides a convenience function to send a subset of columns to
+an ordination function, wrap the resulting model in the
+[**tibble**](https://github.com/tidyverse/tibble)-derived ‘tbl_ord’
+class, and append both model diagnostics and other original data columns
+as annotations to the appropriate matrix factors:[^7]
+
+``` r
+
+library(ordr)
+#> Loading required package: ggplot2
+(iris_pca <- ordinate(iris, cols = 1:4, model = ~ prcomp(., scale. = TRUE)))
+#> # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
+#> # 4 coordinates: PC1, PC2, ..., PC4
+#> # 
+#> # Rows (principal): [ 150 x 4 | 1 ]
+#>     PC1    PC2     PC3 ... |   Species
+#>                            |   <fct>  
+#> 1 -2.26 -0.478  0.127      | 1 setosa 
+#> 2 -2.07  0.672  0.234      | 2 setosa 
+#> 3 -2.36  0.341 -0.0441 ... | 3 setosa 
+#> 4 -2.29  0.595 -0.0910     | 4 setosa 
+#> 5 -2.38 -0.645 -0.0157     | 5 setosa 
+#> # ℹ 145 more rows     | # ℹ 145 more rows
+#> 
+#> # 
+#> # Columns (standard): [ 4 x 4 | 3 ]
+#>      PC1     PC2    PC3 ... |   name         center scale
+#>                             |   <chr>         <dbl> <dbl>
+#> 1  0.521 -0.377   0.720     | 1 Sepal.Length   5.84 0.828
+#> 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width    3.06 0.436
+#> 3  0.580 -0.0245 -0.142     | 3 Petal.Length   3.76 1.77 
+#> 4  0.565 -0.0669 -0.634     | 4 Petal.Width    1.20 0.762
+```
+
+Additional annotations can be added using several row- and
+column-specific [**dplyr**](https://github.com/tidyverse/dplyr)-style
+verbs:
+
+``` r
+
+iris_meta <- data.frame(
+  Species = c("setosa", "versicolor", "virginica"),
+  Colony = c(1L, 1L, 2L),
+  Cytotype = c("diploid", "hexaploid", "tetraploid")
+)
+(iris_pca <- left_join_rows(iris_pca, iris_meta, by = "Species"))
+#> # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'
+#> # 4 coordinates: PC1, PC2, ..., PC4
+#> # 
+#> # Rows (principal): [ 150 x 4 | 3 ]
+#>     PC1    PC2     PC3 ... |   Species Colony Cytotype
+#>                            |   <chr>    <int> <chr>   
+#> 1 -2.26 -0.478  0.127      | 1 setosa       1 diploid 
+#> 2 -2.07  0.672  0.234      | 2 setosa       1 diploid 
+#> 3 -2.36  0.341 -0.0441 ... | 3 setosa       1 diploid 
+#> 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid 
+#> 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid 
+#> # ℹ 145 more rows     | # ℹ 145 more rows
+#> 
+#> # 
+#> # Columns (standard): [ 4 x 4 | 3 ]
+#>      PC1     PC2    PC3 ... |   name         center scale
+#>                             |   <chr>         <dbl> <dbl>
+#> 1  0.521 -0.377   0.720     | 1 Sepal.Length   5.84 0.828
+#> 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width    3.06 0.436
+#> 3  0.580 -0.0245 -0.142     | 3 Petal.Length   3.76 1.77 
+#> 4  0.565 -0.0669 -0.634     | 4 Petal.Width    1.20 0.762
+```
+
+Following the [**broom**](https://github.com/tidymodels/broom) package,
+the [`tidy()`](https://generics.r-lib.org/reference/tidy.html) method
+produces a tibble describing the model components, in this case the
+principal coordinates, which is suitable for scree plotting:
+
+``` r
+
+tidy(iris_pca) %T>% print() %>%
+  ggplot(aes(x = name, y = prop_var)) +
+  geom_col() +
+  labs(x = "", y = "Proportion of inertia") +
+  ggtitle("PCA of Anderson's iris measurements",
+          "Distribution of inertia")
+#> # A tibble: 4 × 5
+#>   name   sdev inertia prop_var quality
+#>   <fct> <dbl>   <dbl>    <dbl>   <dbl>
+#> 1 PC1   1.71   435.    0.730     0.730
+#> 2 PC2   0.956  136.    0.229     0.958
+#> 3 PC3   0.383   21.9   0.0367    0.995
+#> 4 PC4   0.144    3.09  0.00518   1
+```
+
+![](reference/figures/README-model%20components%20and%20scree%20plot-1.png)
+
+Following **ggplot2**, the
+[`fortify()`](https://ggplot2.tidyverse.org/reference/fortify.html)
+method row-binds the factor tibbles with an additional `.matrix` column.
+This is used by [`ggbiplot()`](reference/ggbiplot.md) to redirect row-
+and column-specific plot layers to the appropriate subsets:[^8]
+
+``` r
+
+ggbiplot(iris_pca, sec.axes = "cols", scale.factor = 2) +
+  geom_rows_point(aes(color = Species, shape = Species)) +
+  stat_rows_ellipse(aes(color = Species), alpha = .5, level = .99) +
+  geom_cols_vector(aes(label = name)) +
+  expand_limits(y = c(-3.5, NA)) +
+  ggtitle("PCA of Anderson's iris measurements",
+          "99% confidence ellipses; variables use top & right axes")
+```
+
+![](reference/figures/README-interpolative%20biplot-1.png)
+
+When variables are represented in standard coordinates, as typically in
+PCA, their rules can be rescaled to yield a predictive biplot.[^9] For
+legibility, the axes are limited to the data range and offset from the
+origin:
+
+``` r
+
+ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
+  theme_scaffold() +
+  geom_rows_point(aes(color = Species, shape = Species)) +
+  stat_rows_center(
+    aes(color = Species, shape = Species),
+    size = 5, alpha = .5, fun.data = mean_se
+  ) +
+  stat_cols_rule(aes(label = name, center = center, scale = scale)) +
+  ggtitle("Predictive biplot of Anderson's iris measurements",
+          "Project a marker onto an axis to approximate its measurement")
+```
+
+![](reference/figures/README-predictive%20biplot-1.png)
+
+``` r
+
+aggregate(iris[, 1:4], by = iris[, "Species", drop = FALSE], FUN = mean)
+#>      Species Sepal.Length Sepal.Width Petal.Length Petal.Width
+#> 1     setosa        5.006       3.428        1.462       0.246
+#> 2 versicolor        5.936       2.770        4.260       1.326
+#> 3  virginica        6.588       2.974        5.552       2.026
+```
+
+### more methods
+
+To keep **ordr** from growing out of control, recovery methods only for
+S3 classes produced by high-priority packages are included.[^10] The
+auxiliary package
+[**ordr.extra**](https://github.com/corybrunson/ordr.extra) provides
+methods for several additional ordination models—and has room for
+several more!
+
+## acknowledgments
+
+### contribute
+
+Any feedback on the package is very welcome! If you encounter confusion
+or errors, do create an issue, with a [minimal reproducible
+example](https://stackoverflow.com/help/minimal-reproducible-example) if
+feasible. If you have requests, suggestions, or your own implementations
+for new features, feel free to create an issue or submit a pull request.
+Methods for additional ordination classes (see the `methods-*.r` scripts
+in the `R` folder) are especially welcome, as are new plot layers.
+Please try to follow the [contributing
+guidelines](https://github.com/corybrunson/ordr/blob/main/CONTRIBUTING.md)
+and respect the [Code of
+Conduct](https://github.com/corybrunson/ordr/blob/main/CODE_OF_CONDUCT.md).
+
+### inspirations
+
+This package was originally inspired by the **ggbiplot** extension
+developed by [Vincent Q. Vu](https://github.com/vqv/ggbiplot), [Richard
+J Telford](https://github.com/richardjtelford/ggbiplot), and [Vilmantas
+Gegzna](https://github.com/forked-packages/ggbiplot), among others. It
+probably first brought biplots into the Tidyverse framework. The
+motivation to unify a variety of ordination methods came from several
+books and articles by [Michael
+Greenacre](https://www.fbbva.es/microsite/multivariate-statistics/resources.html),
+in particular [*Biplots in
+Practice*](https://www.fbbva.es/microsite/multivariate-statistics/resources.html#biplots).
+Several answers at CrossValidated, in particular by
+[amoeba](https://stats.stackexchange.com/users/28666/amoeba) and
+[ttnphns](https://stats.stackexchange.com/users/3277/ttnphns), provided
+theoretical insights and informed design choices. Thomas Lin Pedersen’s
+[**tidygraph**](https://github.com/thomasp85/tidygraph) prequel to
+**ggraph** finally induced the shift from the downstream generation of
+scatterplots to the upstream handling and manipulating of models.
+Additional design elements and features have been informed by the
+monograph
+[*Biplots*](https://www.google.com/books/edition/Biplots/lTxiedIxRpgC)
+and the textbook [*Understanding
+Biplots*](https://www.wiley.com/en-us/Understanding+Biplots-p-9781119972907)
+by John C. Gower, David J. Hand, Sugnet Gardner–Lubbe, and Niël J. Le
+Roux, and by the volume [*Principal Components
+Analysis*](https://link.springer.com/book/10.1007/b98835) by I. T.
+Jolliffe.
+
+### exposition
+
+This work was presented ([slideshow
+PDF](https://raw.githubusercontent.com/corybrunson/tidy-factor/main/tidy-factor-x/tidy-factor-x.pdf))
+at an invited panel on [New Developments in Graphing Multivariate
+Data](https://ww2.amstat.org/meetings/jsm/2022/onlineprogram/ActivityDetails.cfm?SessionID=222053)
+at the [Joint Statistical
+Meetings](https://ww2.amstat.org/meetings/jsm/2022/), on 2022 August 8
+in Washington DC. I’m grateful to Joyce Robbins for the invitation and
+for organizing such a fun first experience, to Naomi Robbins for
+chairing the event, and to my co-panelists Ursula Laa and Hengrui Luo
+for sharing and sparking such exciting ideas and conversations. An
+update was presented to the [ggplot2
+extenders](https://ggplot2-extenders.github.io/ggplot-extension-club/),
+which elicited additional valuable feedback.
+
+### resources
+
+Development of this package benefitted from the use of equipment and the
+support of colleagues at [UConn Health](https://health.uconn.edu/) and
+at [UF Health](https://ufhealth.org/).
+
+[^1]: Greenacre MJ (2010) *Biplots in Practice*. Fundacion BBVA, ISBN:
+    978-84-923846.
+    <https://www.fbbva.es/microsite/multivariate-statistics/biplots.html>
+
+[^2]: The term *ordination* is most prevalent among ecologists; no
+    catch-all term seems to be in common use outside ecology.
+
+[^3]: This is not a hard rule: PCA is often used to compress data before
+    clustering, and LDA uses dimension reduction to perform
+    classification tasks.
+
+[^4]: Some regression and clustering models, like classical [linear
+    regression](https://www.fbbva.es/microsite/multivariate-statistics/)
+    and [*k*-means
+    clustering](http://joelcadwell.blogspot.com/2015/08/matrix-factorization-comes-in-many.md),
+    can also be understood as matrix decomposition approximations and
+    even visualized in biplots. Their shared coordinates, which are
+    pre-defined rather than artificial, are the predictor coefficients
+    and the cluster assignments, respectively. Methods for
+    [`stats::lm()`](https://rdrr.io/r/stats/lm.html) and
+    [`stats::kmeans()`](https://rdrr.io/r/stats/kmeans.html) are
+    implemented for the sake of novelty and instruction but are not
+    widely used in practice.
+
+[^5]: Biplot elments must be chosen with care, and it is useful and
+    appropriate that many model-specific biplot methods have limited
+    flexibility. This package adopts the trade-off articulated in
+    [Wilkinson’s *The Grammar of
+    Graphics*](https://www.google.com/books/edition/_/iI1kcgAACAAJ)
+    (p. 15): “This system is capable of producing some hideous graphics.
+    There is nothing in its design to prevent its misuse. … This system
+    cannot produce a meaningless graphic, however.”
+
+[^6]: Anderson E (1936) “The Species Problem in Iris”. *Annals of the
+    Missouri Botanical Garden* **23**(3),
+    457-469+471-483+485-501+503-509.
+    <https://www.jstor.org/stable/2394164>
+
+[^7]: The data must be in the form of a data frame that can be
+    understood by the modeling function. Step-by-step methods also exist
+    to build and annotate a ‘tbl_ord’ from a fitted ordination model.
+
+[^8]: The vector and radiating text geoms were adapted from the
+    **ggbiplot** package and now reside in
+    [**gggda**](https://github.com/corybrunson/gggda).
+
+[^9]: This is an experimental feature only available for linear methods,
+    namely eigendecomposition, singular value decomposition, and
+    principal components analysis.
+
+[^10]: `installed.packages(priority = "high")`
+
+# Package index
+
+## ‘ordr’ package
+
+A unified framework for ordination objects and biplot methods using tidy
+principles
+
+- [`ordr`](ordr.md) [`ordr-package`](ordr.md) :
+
+  **ordr** package
+
+## Functions, classes, and methods
+
+Introducing and adapting ordination techniques for the **ordr** workflow
+
+- [`lda_ord()`](lda-ord.md) [`predict(`*`<lda_ord>`*`)`](lda-ord.md)
+  [`model.frame(`*`<lda_ord>`*`)`](lda-ord.md) : Augmented
+  implementation of linear discriminant analysis
+- [`lra()`](lra-ord.md) [`print(`*`<lra>`*`)`](lra-ord.md)
+  [`screeplot(`*`<lra>`*`)`](lra-ord.md)
+  [`biplot(`*`<lra>`*`)`](lra-ord.md) [`plot(`*`<lra>`*`)`](lra-ord.md)
+  : Log-ratio analysis
+- [`eigen_ord()`](wrap-ord.md) [`svd_ord()`](wrap-ord.md)
+  [`cmdscale_ord()`](wrap-ord.md) [`cancor_ord()`](wrap-ord.md) :
+  Wrappers for lossy ordination methods
+
+## Data sets
+
+Additional data sets used to illustrate ordination techniques
+
+- [`glass`](glass.md) : Glass composition data
+- [`qswur_usa`](qswur_usa.md) : U.S. university rankings
+
+## Tidy ordination
+
+The ‘tbl_ord’ class wrapper, with methods for accessing components and
+for querying and manipulating metadata
+
+- [`recover_rows()`](recoverers.md) [`recover_cols()`](recoverers.md)
+  [`get_rows()`](recoverers.md) [`get_cols()`](recoverers.md)
+  [`as.matrix(`*`<tbl_ord>`*`)`](recoverers.md)
+  [`recover_inertia()`](recoverers.md)
+  [`recover_coord()`](recoverers.md) [`get_coord()`](recoverers.md)
+  [`get_inertia()`](recoverers.md)
+  [`dim(`*`<tbl_ord>`*`)`](recoverers.md) : Access factors, coordinates,
+  and metadata from ordination objects
+
+- [`recover_aug_rows()`](augmentation.md)
+  [`recover_aug_cols()`](augmentation.md)
+  [`recover_aug_coord()`](augmentation.md)
+  [`augment_ord()`](augmentation.md) : Augment factors and coordinates
+  of 'tbl_ord' objects
+
+- [`tidy(`*`<tbl_ord>`*`)`](tidiers.md)
+  [`glance(`*`<tbl_ord>`*`)`](tidiers.md)
+  [`fortify(`*`<tbl_ord>`*`)`](tidiers.md) : Tidiers for 'tbl_ord'
+  objects
+
+- [`annotation`](annotation.md) : Annotate factors of 'tbl_ord' objects
+
+- [`get_negation()`](negation.md) [`revert_negation()`](negation.md)
+  [`negate_ord()`](negation.md)
+  [`negate_to_first_orthant()`](negation.md) : Negation of ordination
+  axes
+
+- [`recover_conference()`](conference.md)
+  [`get_conference()`](conference.md)
+  [`revert_conference()`](conference.md)
+  [`confer_inertia()`](conference.md) : Confer inertia to factors of a
+  'tbl_ord' object
+
+- [`recover_supp_rows()`](supplementation.md)
+  [`recover_supp_cols()`](supplementation.md) : Supplement 'tbl_ord'
+  objects with new data
+
+- [`as_tbl_ord()`](tbl_ord.md) [`make_tbl_ord()`](tbl_ord.md)
+  [`is_tbl_ord()`](tbl_ord.md) [`is.tbl_ord()`](tbl_ord.md)
+  [`valid_tbl_ord()`](tbl_ord.md) [`un_tbl_ord()`](tbl_ord.md) : A
+  unified ordination object class
+
+- [`format(`*`<tbl_ord>`*`)`](format.md)
+  [`print(`*`<tbl_ord>`*`)`](format.md) : Format a tbl_ord for printing
+
+- [`ord_quality()`](goodness-of-fit.md)
+  [`ord_adequacy()`](goodness-of-fit.md)
+  [`ord_predictivity()`](goodness-of-fit.md) : Measures of goodness of
+  fit of ordination models
+
+- [`plot(`*`<tbl_ord>`*`)`](plot.tbl_ord.md)
+  [`screeplot(`*`<tbl_ord>`*`)`](plot.tbl_ord.md)
+  [`biplot(`*`<tbl_ord>`*`)`](plot.tbl_ord.md) : Plot and biplot methods
+  for 'tbl_ord' objects
+
+- [`pull_factor()`](dplyr-verbs.md) [`pull_rows()`](dplyr-verbs.md)
+  [`pull_cols()`](dplyr-verbs.md) [`rename_rows()`](dplyr-verbs.md)
+  [`rename_cols()`](dplyr-verbs.md) [`select_rows()`](dplyr-verbs.md)
+  [`select_cols()`](dplyr-verbs.md) [`mutate_rows()`](dplyr-verbs.md)
+  [`mutate_cols()`](dplyr-verbs.md) [`transmute_rows()`](dplyr-verbs.md)
+  [`transmute_cols()`](dplyr-verbs.md) [`cbind_rows()`](dplyr-verbs.md)
+  [`cbind_cols()`](dplyr-verbs.md) [`left_join_rows()`](dplyr-verbs.md)
+  [`left_join_cols()`](dplyr-verbs.md) :
+
+  **dplyr** verbs for tbl_ord factors
+
+- [`ordinate()`](ordinate.md) : Fit an ordination model to a data object
+
+## Layered grammar for biplots
+
+Functions to generate and annotate biplots from ‘tbl_ord’ objects,
+following the layered grammar of graphics
+
+- [`ggbiplot()`](ggbiplot.md) [`ord_aes()`](ggbiplot.md) : Biplots
+  following the grammar of graphics
+- [`coord_scaffold()`](coord_scaffold.md) : Convenience coordinate
+  system for scaffolding axes
+- [`stat_rows()`](stat_rows.md) [`stat_cols()`](stat_rows.md) : Render
+  plot elements for one matrix of an ordination
+- [`stat_projection()`](stat_projection.md) : Project rows onto columns
+  or vice-versa
+- [`geom_origin()`](geom_origin.md)
+  [`geom_unit_circle()`](geom_origin.md) : Marker or unit circle at the
+  origin
+- [`geom_interpolation()`](geom_interpolation.md) : Render interpolation
+  of new rows from columns (or vice-versa)
+- [`theme_scaffold()`](theme_scaffold.md)
+  [`theme_biplot()`](theme_scaffold.md) : Scaffolding theme
+- [`draw_key_line()`](draw-key.md)
+  [`draw_key_crosslines()`](draw-key.md)
+  [`draw_key_crosspoint()`](draw-key.md) : Biplot key drawing functions
+- [`ordr-ggproto`](ordr-ggproto.md) [`CoordScaffold`](ordr-ggproto.md)
+  [`GeomInterpolation`](ordr-ggproto.md) [`GeomOrigin`](ordr-ggproto.md)
+  [`GeomUnitCircle`](ordr-ggproto.md) [`StatRows`](ordr-ggproto.md)
+  [`StatCols`](ordr-ggproto.md) [`StatProjection`](ordr-ggproto.md)
+  [`StatRowsDensity2d`](ordr-ggproto.md)
+  [`StatColsDensity2d`](ordr-ggproto.md)
+  [`StatRowsDensity2dFilled`](ordr-ggproto.md)
+  [`StatColsDensity2dFilled`](ordr-ggproto.md)
+  [`StatRowsEllipse`](ordr-ggproto.md)
+  [`StatColsEllipse`](ordr-ggproto.md)
+  [`StatRowsCenter`](ordr-ggproto.md)
+  [`StatColsCenter`](ordr-ggproto.md) [`StatRowsStar`](ordr-ggproto.md)
+  [`StatColsStar`](ordr-ggproto.md) [`StatRowsChull`](ordr-ggproto.md)
+  [`StatColsChull`](ordr-ggproto.md) [`StatRowsPeel`](ordr-ggproto.md)
+  [`StatColsPeel`](ordr-ggproto.md) [`StatRowsCone`](ordr-ggproto.md)
+  [`StatColsCone`](ordr-ggproto.md) [`StatRowsDepth`](ordr-ggproto.md)
+  [`StatColsDepth`](ordr-ggproto.md)
+  [`StatRowsDepthFilled`](ordr-ggproto.md)
+  [`StatColsDepthFilled`](ordr-ggproto.md)
+  [`StatRowsScale`](ordr-ggproto.md) [`StatColsScale`](ordr-ggproto.md)
+  [`StatRowsSpantree`](ordr-ggproto.md)
+  [`StatColsSpantree`](ordr-ggproto.md)
+  [`StatRowsBagplot`](ordr-ggproto.md)
+  [`StatColsBagplot`](ordr-ggproto.md) [`StatRowsRule`](ordr-ggproto.md)
+  [`StatColsRule`](ordr-ggproto.md)
+  [`StatRowsProjection`](ordr-ggproto.md)
+  [`StatColsProjection`](ordr-ggproto.md) : ggproto classes created and
+  adapted for ordr
+- [`geom_rows_point()`](biplot-geoms.md)
+  [`geom_cols_point()`](biplot-geoms.md)
+  [`geom_rows_path()`](biplot-geoms.md)
+  [`geom_cols_path()`](biplot-geoms.md)
+  [`geom_rows_polygon()`](biplot-geoms.md)
+  [`geom_cols_polygon()`](biplot-geoms.md)
+  [`geom_rows_contour()`](biplot-geoms.md)
+  [`geom_cols_contour()`](biplot-geoms.md)
+  [`geom_rows_density_2d()`](biplot-geoms.md)
+  [`geom_cols_density_2d()`](biplot-geoms.md)
+  [`geom_rows_density_2d_filled()`](biplot-geoms.md)
+  [`geom_cols_density_2d_filled()`](biplot-geoms.md)
+  [`geom_rows_text()`](biplot-geoms.md)
+  [`geom_cols_text()`](biplot-geoms.md)
+  [`geom_rows_label()`](biplot-geoms.md)
+  [`geom_cols_label()`](biplot-geoms.md)
+  [`geom_rows_text_repel()`](biplot-geoms.md)
+  [`geom_cols_text_repel()`](biplot-geoms.md)
+  [`geom_rows_label_repel()`](biplot-geoms.md)
+  [`geom_cols_label_repel()`](biplot-geoms.md)
+  [`geom_rows_axis()`](biplot-geoms.md)
+  [`geom_cols_axis()`](biplot-geoms.md)
+  [`geom_rows_pointranges()`](biplot-geoms.md)
+  [`geom_cols_pointranges()`](biplot-geoms.md)
+  [`geom_rows_lineranges()`](biplot-geoms.md)
+  [`geom_cols_lineranges()`](biplot-geoms.md)
+  [`geom_rows_isoline()`](biplot-geoms.md)
+  [`geom_cols_isoline()`](biplot-geoms.md)
+  [`geom_rows_text_radiate()`](biplot-geoms.md)
+  [`geom_cols_text_radiate()`](biplot-geoms.md)
+  [`geom_rows_vector()`](biplot-geoms.md)
+  [`geom_cols_vector()`](biplot-geoms.md)
+  [`geom_rows_bagplot()`](biplot-geoms.md)
+  [`geom_cols_bagplot()`](biplot-geoms.md)
+  [`geom_rows_rule()`](biplot-geoms.md)
+  [`geom_cols_rule()`](biplot-geoms.md)
+  [`geom_rows_interpolation()`](biplot-geoms.md)
+  [`geom_cols_interpolation()`](biplot-geoms.md) : Convenience geoms for
+  row and column matrix factors
+- [`stat_rows_density_2d()`](biplot-stats.md)
+  [`stat_cols_density_2d()`](biplot-stats.md)
+  [`stat_rows_density_2d_filled()`](biplot-stats.md)
+  [`stat_cols_density_2d_filled()`](biplot-stats.md)
+  [`stat_rows_ellipse()`](biplot-stats.md)
+  [`stat_cols_ellipse()`](biplot-stats.md)
+  [`stat_rows_center()`](biplot-stats.md)
+  [`stat_cols_center()`](biplot-stats.md)
+  [`stat_rows_star()`](biplot-stats.md)
+  [`stat_cols_star()`](biplot-stats.md)
+  [`stat_rows_chull()`](biplot-stats.md)
+  [`stat_cols_chull()`](biplot-stats.md)
+  [`stat_rows_peel()`](biplot-stats.md)
+  [`stat_cols_peel()`](biplot-stats.md)
+  [`stat_rows_cone()`](biplot-stats.md)
+  [`stat_cols_cone()`](biplot-stats.md)
+  [`stat_rows_depth()`](biplot-stats.md)
+  [`stat_cols_depth()`](biplot-stats.md)
+  [`stat_rows_depth_filled()`](biplot-stats.md)
+  [`stat_cols_depth_filled()`](biplot-stats.md)
+  [`stat_rows_scale()`](biplot-stats.md)
+  [`stat_cols_scale()`](biplot-stats.md)
+  [`stat_rows_spantree()`](biplot-stats.md)
+  [`stat_cols_spantree()`](biplot-stats.md)
+  [`stat_rows_bagplot()`](biplot-stats.md)
+  [`stat_cols_bagplot()`](biplot-stats.md)
+  [`stat_rows_rule()`](biplot-stats.md)
+  [`stat_cols_rule()`](biplot-stats.md)
+  [`stat_rows_projection()`](biplot-stats.md)
+  [`stat_cols_projection()`](biplot-stats.md) : Convenience stats for
+  row and column matrix factors
+
+## Class methods
+
+Recovery and augmentation methods for ordination model classes
+
+- [`as_tbl_ord(`*`<cancor_ord>`*`)`](methods-cancor.md)
+  [`recover_rows(`*`<cancor_ord>`*`)`](methods-cancor.md)
+  [`recover_cols(`*`<cancor_ord>`*`)`](methods-cancor.md)
+  [`recover_inertia(`*`<cancor_ord>`*`)`](methods-cancor.md)
+  [`recover_coord(`*`<cancor_ord>`*`)`](methods-cancor.md)
+  [`recover_conference(`*`<cancor_ord>`*`)`](methods-cancor.md)
+  [`recover_supp_rows(`*`<cancor_ord>`*`)`](methods-cancor.md)
+  [`recover_supp_cols(`*`<cancor_ord>`*`)`](methods-cancor.md)
+  [`recover_aug_rows(`*`<cancor_ord>`*`)`](methods-cancor.md)
+  [`recover_aug_cols(`*`<cancor_ord>`*`)`](methods-cancor.md)
+  [`recover_aug_coord(`*`<cancor_ord>`*`)`](methods-cancor.md) :
+  Functionality for canonical correlations
+- [`as_tbl_ord(`*`<cmds_ord>`*`)`](methods-cmds.md)
+  [`recover_rows(`*`<cmds_ord>`*`)`](methods-cmds.md)
+  [`recover_cols(`*`<cmds_ord>`*`)`](methods-cmds.md)
+  [`recover_inertia(`*`<cmds_ord>`*`)`](methods-cmds.md)
+  [`recover_coord(`*`<cmds_ord>`*`)`](methods-cmds.md)
+  [`recover_conference(`*`<cmds_ord>`*`)`](methods-cmds.md)
+  [`recover_aug_rows(`*`<cmds_ord>`*`)`](methods-cmds.md)
+  [`recover_aug_cols(`*`<cmds_ord>`*`)`](methods-cmds.md)
+  [`recover_aug_coord(`*`<cmds_ord>`*`)`](methods-cmds.md) :
+  Functionality for classical multidimensional scaling objects
+- [`as_tbl_ord(`*`<correspondence>`*`)`](methods-correspondence.md)
+  [`recover_rows(`*`<correspondence>`*`)`](methods-correspondence.md)
+  [`recover_cols(`*`<correspondence>`*`)`](methods-correspondence.md)
+  [`recover_inertia(`*`<correspondence>`*`)`](methods-correspondence.md)
+  [`recover_conference(`*`<correspondence>`*`)`](methods-correspondence.md)
+  [`recover_coord(`*`<correspondence>`*`)`](methods-correspondence.md)
+  [`recover_aug_rows(`*`<correspondence>`*`)`](methods-correspondence.md)
+  [`recover_aug_cols(`*`<correspondence>`*`)`](methods-correspondence.md)
+  [`recover_aug_coord(`*`<correspondence>`*`)`](methods-correspondence.md)
+  : Functionality for correspondence analysis ('correspondence') objects
+- [`as_tbl_ord(`*`<eigen>`*`)`](methods-eigen.md)
+  [`recover_rows(`*`<eigen>`*`)`](methods-eigen.md)
+  [`recover_cols(`*`<eigen>`*`)`](methods-eigen.md)
+  [`recover_inertia(`*`<eigen>`*`)`](methods-eigen.md)
+  [`recover_coord(`*`<eigen>`*`)`](methods-eigen.md)
+  [`recover_conference(`*`<eigen>`*`)`](methods-eigen.md)
+  [`recover_aug_rows(`*`<eigen>`*`)`](methods-eigen.md)
+  [`recover_aug_cols(`*`<eigen>`*`)`](methods-eigen.md)
+  [`recover_aug_coord(`*`<eigen>`*`)`](methods-eigen.md)
+  [`as_tbl_ord(`*`<eigen_ord>`*`)`](methods-eigen.md)
+  [`recover_rows(`*`<eigen_ord>`*`)`](methods-eigen.md)
+  [`recover_cols(`*`<eigen_ord>`*`)`](methods-eigen.md)
+  [`recover_inertia(`*`<eigen_ord>`*`)`](methods-eigen.md)
+  [`recover_coord(`*`<eigen_ord>`*`)`](methods-eigen.md)
+  [`recover_conference(`*`<eigen_ord>`*`)`](methods-eigen.md)
+  [`recover_aug_rows(`*`<eigen_ord>`*`)`](methods-eigen.md)
+  [`recover_aug_cols(`*`<eigen_ord>`*`)`](methods-eigen.md)
+  [`recover_aug_coord(`*`<eigen_ord>`*`)`](methods-eigen.md) :
+  Functionality for eigen-decompositions
+- [`as_tbl_ord(`*`<factanal>`*`)`](methods-factanal.md)
+  [`recover_rows(`*`<factanal>`*`)`](methods-factanal.md)
+  [`recover_cols(`*`<factanal>`*`)`](methods-factanal.md)
+  [`recover_inertia(`*`<factanal>`*`)`](methods-factanal.md)
+  [`recover_coord(`*`<factanal>`*`)`](methods-factanal.md)
+  [`recover_conference(`*`<factanal>`*`)`](methods-factanal.md)
+  [`recover_supp_rows(`*`<factanal>`*`)`](methods-factanal.md)
+  [`recover_aug_rows(`*`<factanal>`*`)`](methods-factanal.md)
+  [`recover_aug_cols(`*`<factanal>`*`)`](methods-factanal.md)
+  [`recover_aug_coord(`*`<factanal>`*`)`](methods-factanal.md) :
+  Functionality for factor analysis ('factanal') objects
+- [`as_tbl_ord(`*`<kmeans>`*`)`](methods-kmeans.md)
+  [`recover_rows(`*`<kmeans>`*`)`](methods-kmeans.md)
+  [`recover_cols(`*`<kmeans>`*`)`](methods-kmeans.md)
+  [`recover_coord(`*`<kmeans>`*`)`](methods-kmeans.md)
+  [`recover_aug_rows(`*`<kmeans>`*`)`](methods-kmeans.md)
+  [`recover_aug_cols(`*`<kmeans>`*`)`](methods-kmeans.md)
+  [`recover_aug_coord(`*`<kmeans>`*`)`](methods-kmeans.md) :
+  Functionality for k-means clustering ('kmeans') objects
+- [`as_tbl_ord(`*`<lda>`*`)`](methods-lda.md)
+  [`as_tbl_ord(`*`<lda_ord>`*`)`](methods-lda.md)
+  [`recover_rows(`*`<lda>`*`)`](methods-lda.md)
+  [`recover_rows(`*`<lda_ord>`*`)`](methods-lda.md)
+  [`recover_cols(`*`<lda>`*`)`](methods-lda.md)
+  [`recover_cols(`*`<lda_ord>`*`)`](methods-lda.md)
+  [`recover_inertia(`*`<lda>`*`)`](methods-lda.md)
+  [`recover_inertia(`*`<lda_ord>`*`)`](methods-lda.md)
+  [`recover_coord(`*`<lda>`*`)`](methods-lda.md)
+  [`recover_coord(`*`<lda_ord>`*`)`](methods-lda.md)
+  [`recover_conference(`*`<lda>`*`)`](methods-lda.md)
+  [`recover_conference(`*`<lda_ord>`*`)`](methods-lda.md)
+  [`recover_aug_rows(`*`<lda>`*`)`](methods-lda.md)
+  [`recover_aug_rows(`*`<lda_ord>`*`)`](methods-lda.md)
+  [`recover_aug_cols(`*`<lda>`*`)`](methods-lda.md)
+  [`recover_aug_cols(`*`<lda_ord>`*`)`](methods-lda.md)
+  [`recover_aug_coord(`*`<lda>`*`)`](methods-lda.md)
+  [`recover_aug_coord(`*`<lda_ord>`*`)`](methods-lda.md)
+  [`recover_supp_rows(`*`<lda>`*`)`](methods-lda.md)
+  [`recover_supp_rows(`*`<lda_ord>`*`)`](methods-lda.md) : Functionality
+  for linear discriminant analysis ('lda') objects
+- [`as_tbl_ord(`*`<lm>`*`)`](methods-lm.md)
+  [`recover_rows(`*`<lm>`*`)`](methods-lm.md)
+  [`recover_cols(`*`<lm>`*`)`](methods-lm.md)
+  [`recover_coord(`*`<lm>`*`)`](methods-lm.md)
+  [`recover_aug_rows(`*`<lm>`*`)`](methods-lm.md)
+  [`recover_aug_cols(`*`<lm>`*`)`](methods-lm.md)
+  [`recover_aug_coord(`*`<lm>`*`)`](methods-lm.md)
+  [`recover_aug_rows(`*`<glm>`*`)`](methods-lm.md)
+  [`recover_rows(`*`<mlm>`*`)`](methods-lm.md)
+  [`recover_cols(`*`<mlm>`*`)`](methods-lm.md)
+  [`recover_coord(`*`<mlm>`*`)`](methods-lm.md)
+  [`recover_aug_rows(`*`<mlm>`*`)`](methods-lm.md)
+  [`recover_aug_cols(`*`<mlm>`*`)`](methods-lm.md)
+  [`recover_aug_coord(`*`<mlm>`*`)`](methods-lm.md) : Functionality for
+  linear model objects
+- [`as_tbl_ord(`*`<lra>`*`)`](methods-lra.md)
+  [`recover_rows(`*`<lra>`*`)`](methods-lra.md)
+  [`recover_cols(`*`<lra>`*`)`](methods-lra.md)
+  [`recover_inertia(`*`<lra>`*`)`](methods-lra.md)
+  [`recover_coord(`*`<lra>`*`)`](methods-lra.md)
+  [`recover_conference(`*`<lra>`*`)`](methods-lra.md)
+  [`recover_aug_rows(`*`<lra>`*`)`](methods-lra.md)
+  [`recover_aug_cols(`*`<lra>`*`)`](methods-lra.md)
+  [`recover_aug_coord(`*`<lra>`*`)`](methods-lra.md) : Functionality for
+  log-ratio analysis ('lra') objects
+- [`as_tbl_ord(`*`<mca>`*`)`](methods-mca.md)
+  [`recover_rows(`*`<mca>`*`)`](methods-mca.md)
+  [`recover_cols(`*`<mca>`*`)`](methods-mca.md)
+  [`recover_inertia(`*`<mca>`*`)`](methods-mca.md)
+  [`recover_conference(`*`<mca>`*`)`](methods-mca.md)
+  [`recover_coord(`*`<mca>`*`)`](methods-mca.md)
+  [`recover_supp_rows(`*`<mca>`*`)`](methods-mca.md)
+  [`recover_aug_rows(`*`<mca>`*`)`](methods-mca.md)
+  [`recover_aug_cols(`*`<mca>`*`)`](methods-mca.md)
+  [`recover_aug_coord(`*`<mca>`*`)`](methods-mca.md) : Functionality for
+  multiple correspondence analysis ('mca') objects
+- [`as_tbl_ord(`*`<prcomp>`*`)`](methods-prcomp.md)
+  [`recover_rows(`*`<prcomp>`*`)`](methods-prcomp.md)
+  [`recover_cols(`*`<prcomp>`*`)`](methods-prcomp.md)
+  [`recover_inertia(`*`<prcomp>`*`)`](methods-prcomp.md)
+  [`recover_coord(`*`<prcomp>`*`)`](methods-prcomp.md)
+  [`recover_conference(`*`<prcomp>`*`)`](methods-prcomp.md)
+  [`recover_aug_rows(`*`<prcomp>`*`)`](methods-prcomp.md)
+  [`recover_aug_cols(`*`<prcomp>`*`)`](methods-prcomp.md)
+  [`recover_aug_coord(`*`<prcomp>`*`)`](methods-prcomp.md) :
+  Functionality for principal components analysis ('prcomp') objects
+- [`as_tbl_ord(`*`<princomp>`*`)`](methods-princomp.md)
+  [`recover_rows(`*`<princomp>`*`)`](methods-princomp.md)
+  [`recover_cols(`*`<princomp>`*`)`](methods-princomp.md)
+  [`recover_inertia(`*`<princomp>`*`)`](methods-princomp.md)
+  [`recover_coord(`*`<princomp>`*`)`](methods-princomp.md)
+  [`recover_conference(`*`<princomp>`*`)`](methods-princomp.md)
+  [`recover_supp_rows(`*`<princomp>`*`)`](methods-princomp.md)
+  [`recover_aug_rows(`*`<princomp>`*`)`](methods-princomp.md)
+  [`recover_aug_cols(`*`<princomp>`*`)`](methods-princomp.md)
+  [`recover_aug_coord(`*`<princomp>`*`)`](methods-princomp.md) :
+  Functionality for principal components analysis ('princomp') objects
+- [`as_tbl_ord(`*`<svd_ord>`*`)`](methods-svd.md)
+  [`recover_rows(`*`<svd_ord>`*`)`](methods-svd.md)
+  [`recover_cols(`*`<svd_ord>`*`)`](methods-svd.md)
+  [`recover_inertia(`*`<svd_ord>`*`)`](methods-svd.md)
+  [`recover_coord(`*`<svd_ord>`*`)`](methods-svd.md)
+  [`recover_conference(`*`<svd_ord>`*`)`](methods-svd.md)
+  [`recover_aug_rows(`*`<svd_ord>`*`)`](methods-svd.md)
+  [`recover_aug_cols(`*`<svd_ord>`*`)`](methods-svd.md)
+  [`recover_aug_coord(`*`<svd_ord>`*`)`](methods-svd.md) : Functionality
+  for singular value decompositions
+
+# Articles
+
+### All vignettes
+
+- [multidimensional scaling of variables](cmds-variables.md):
+- [Ordination in the tidyverse](ordr.md):
