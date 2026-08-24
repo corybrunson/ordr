@@ -13,8 +13,8 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="multidimensional scaling of variables">
 </head>
@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ordr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.0002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -153,7 +153,7 @@ true distances and their biplot approximations:</p>
 <span>  ylab <span class="op">=</span> <span class="st">"Case point distances in planar biplot"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="cmds-variables_files/figure-html/case%20geometry-1.png" width="528" style="display: block; margin: auto;"></p>
+<p><img src="cmds-variables_files/figure-html/case%20geometry-1.png" class="r-plt" alt="" width="528" style="display: block; margin: auto;"></p>
 <p>In contrast, the variables are better understood through their
 correlations, which are approximately preserved by their standardized
 coordinates. Writing <span class="math inline">\(X =
@@ -189,7 +189,7 @@ on their respective coordinates in the remaining coordinates.</p>
 <span>  ylab <span class="op">=</span> <span class="st">"Variable vector cosines in planar biplot"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="cmds-variables_files/figure-html/variable%20geometry-1.png" width="528" style="display: block; margin: auto;"></p>
+<p><img src="cmds-variables_files/figure-html/variable%20geometry-1.png" class="r-plt" alt="" width="528" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="multidimensional-scaling-of-distance-data">multidimensional scaling of distance data<a class="anchor" aria-label="anchor" href="#multidimensional-scaling-of-distance-data"></a>
@@ -226,7 +226,7 @@ approximations:</p>
 <span>  ylab <span class="op">=</span> <span class="st">"Point distances in planar CMDS"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="cmds-variables_files/figure-html/multidimensional%20scaling%20of%20cities-1.png" width="528" style="display: block; margin: auto;"></p>
+<p><img src="cmds-variables_files/figure-html/multidimensional%20scaling%20of%20cities-1.png" class="r-plt" alt="" width="528" style="display: block; margin: auto;"></p>
 <p>In practice, the goal of CMDS is usually to produce a scatterplot in
 which the distances <span class="math inline">\(\sqrt{(x_j-x_i)^2+(y_j-y_i)^2}\)</span> between
 the points that represent the <span class="math inline">\(n\)</span>
@@ -240,7 +240,7 @@ recognizable from above rather than below the surface of the Earth):</p>
 <span>  xlab <span class="op">=</span> <span class="st">"First principal coordinate"</span>, ylab <span class="op">=</span> <span class="st">"Second principal coordinate"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html" class="external-link">text</a></span><span class="op">(</span><span class="va">d.coord</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">.9</span><span class="op">)</span></span></code></pre></div>
-<p><img src="cmds-variables_files/figure-html/multidimensional%20scaling%20of%20cities%20plot-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="cmds-variables_files/figure-html/multidimensional%20scaling%20of%20cities%20plot-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="multidimensional-scaling-of-covariance-data">multidimensional scaling of covariance data<a class="anchor" aria-label="anchor" href="#multidimensional-scaling-of-covariance-data"></a>
@@ -286,7 +286,7 @@ anticipation of a biplot:</p>
 <span>  ylab <span class="op">=</span> <span class="st">"Vector inner products in planar CMDS"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">c</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">c</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="cmds-variables_files/figure-html/multidimensional%20scaling%20of%20glass-1.png" width="528" style="display: block; margin: auto;"></p>
+<p><img src="cmds-variables_files/figure-html/multidimensional%20scaling%20of%20glass-1.png" class="r-plt" alt="" width="528" style="display: block; margin: auto;"></p>
 <p>Thus, whereas <em>CMDS of cases</em> approximates distances, <em>CMDS
 of variables</em> approximates covariances. This equips us with an
 analogous visualization technique for correlation data: Represent each
@@ -309,7 +309,7 @@ artifacts:</p>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/arrows.html" class="external-link">arrows</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="va">c.coord</span><span class="op">[</span>, <span class="fl">1L</span><span class="op">]</span>, <span class="va">c.coord</span><span class="op">[</span>, <span class="fl">2L</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html" class="external-link">text</a></span><span class="op">(</span><span class="va">c.coord</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">.9</span><span class="op">)</span></span></code></pre></div>
-<p><img src="cmds-variables_files/figure-html/multidimensional%20scaling%20of%20glass%20plot-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="cmds-variables_files/figure-html/multidimensional%20scaling%20of%20glass%20plot-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <p>We can immediately see that the concentrations of silica and ferrous
 oxide are highly correlated, that they are anticorrelated with that of
 quicklime, and that all of these vary independently (in the statistical
@@ -446,7 +446,7 @@ correlated.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">corr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">qswur_usa2020</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"rk_"</span><span class="op">)</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"kendall"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/heatmap.html" class="external-link">heatmap</a></span><span class="op">(</span><span class="va">corr</span>, scale <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="cmds-variables_files/figure-html/Kendall%20rank%20correlations-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="cmds-variables_files/figure-html/Kendall%20rank%20correlations-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <p>This visualization is useful, but it’s very busy: To compare any pair
 of rankings, i have to find the cell in the grid corresponding to that
 pair and refer back to the color scale to assess its meaning. I can’t
@@ -500,8 +500,11 @@ principal coordinates <span class="math inline">\(Y = V
 <span>  <span class="fu"><a href="../reference/augmentation.html">augment_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/dplyr-verbs.html">mutate_rows</a></span><span class="op">(</span>metric <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html" class="external-link">str_remove</a></span><span class="op">(</span><span class="va">name</span>, <span class="st">"rk_"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/conference.html">confer_inertia</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">-&gt;</span></span>
-<span>  <span class="va">c_eigen</span></span>
-<span><span class="va">c_eigen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">c_eigen</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: `eigen_ord()` is deprecated in favor of `base::eigen()`.</span></span>
+<span><span class="co">## <span style="color: #555555;">This warning is displayed once per session.</span></span></span></code></pre>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">c_eigen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/geom_origin.html">geom_unit_circle</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -510,7 +513,7 @@ principal coordinates <span class="math inline">\(Y = V
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Kendall correlations between university rankings"</span>,</span>
 <span>          <span class="st">"CMDS correlation monoplot"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="cmds-variables_files/figure-html/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="cmds-variables_files/figure-html/unnamed-chunk-1-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <p>With respect to the pairwise correlations, the biplot is
 significantly less precise: Though the vectors all have unit length in
 <span class="math inline">\(\mathbb{R}^r\)</span> (<span class="math inline">\(r\leq p=6\)</span>), their projections onto the
@@ -557,19 +560,19 @@ monoplot can be validated from the CMDS coordinates. In particular, we
 can examine the variables’ loadings onto the third principal coordinate,
 and we can check whether the reputational rankings are aligned or
 misaligned along it.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">c_eigen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span>.matrix <span class="op">=</span> <span class="st">"rows"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">name</span>, <span class="op">-</span><span class="va">.matrix</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 6 × 8</span></span></span>
-<span><span class="co">##      EV1     EV2     EV3     EV4     EV5      EV6 metric        .element</span></span>
-<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.834</span> -<span style="color: #BB0000;">0.090</span><span style="color: #BB0000; text-decoration: underline;">7</span>  0.412   0.043<span style="text-decoration: underline;">0</span> -<span style="color: #BB0000;">0.020</span><span style="color: #BB0000; text-decoration: underline;">6</span>  0.351   academic      active  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.795</span> -<span style="color: #BB0000;">0.096</span><span style="color: #BB0000; text-decoration: underline;">4</span>  0.477  -<span style="color: #BB0000;">0.041</span><span style="color: #BB0000; text-decoration: underline;">6</span> -<span style="color: #BB0000;">0.181</span>  -<span style="color: #BB0000;">0.311</span>   employer      active  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.517</span>  0.771  -<span style="color: #BB0000;">0.048</span><span style="color: #BB0000; text-decoration: underline;">0</span>  0.331   0.158  -<span style="color: #BB0000;">0.037</span><span style="color: #BB0000; text-decoration: underline;">2</span>  ratio         active  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.731</span> -<span style="color: #BB0000;">0.352</span>  -<span style="color: #BB0000;">0.239</span>  -<span style="color: #BB0000;">0.027</span><span style="color: #BB0000; text-decoration: underline;">8</span>  0.528  -<span style="color: #BB0000;">0.068</span><span style="color: #BB0000; text-decoration: underline;">5</span>  citations     active  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.631</span> -<span style="color: #BB0000;">0.233</span>  -<span style="color: #BB0000;">0.521</span>   0.392  -<span style="color: #BB0000;">0.352</span>   0.007<span style="text-decoration: underline;">83</span> intl_faculty  active  </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">6</span> -<span style="color: #BB0000;">0.603</span>  0.262  -<span style="color: #BB0000;">0.324</span>  -<span style="color: #BB0000;">0.665</span>  -<span style="color: #BB0000;">0.140</span>   0.031<span style="text-decoration: underline;">2</span>  intl_students active</span></span></code></pre>
+<span><span class="co">##      EV1     EV2     EV3     EV4     EV5      EV6 .element metric       </span></span>
+<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.834</span> -<span style="color: #BB0000;">0.090</span><span style="color: #BB0000; text-decoration: underline;">7</span>  0.412   0.043<span style="text-decoration: underline;">0</span> -<span style="color: #BB0000;">0.020</span><span style="color: #BB0000; text-decoration: underline;">6</span>  0.351   active   academic     </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.795</span> -<span style="color: #BB0000;">0.096</span><span style="color: #BB0000; text-decoration: underline;">4</span>  0.477  -<span style="color: #BB0000;">0.041</span><span style="color: #BB0000; text-decoration: underline;">6</span> -<span style="color: #BB0000;">0.181</span>  -<span style="color: #BB0000;">0.311</span>   active   employer     </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.517</span>  0.771  -<span style="color: #BB0000;">0.048</span><span style="color: #BB0000; text-decoration: underline;">0</span>  0.331   0.158  -<span style="color: #BB0000;">0.037</span><span style="color: #BB0000; text-decoration: underline;">2</span>  active   ratio        </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.731</span> -<span style="color: #BB0000;">0.352</span>  -<span style="color: #BB0000;">0.239</span>  -<span style="color: #BB0000;">0.027</span><span style="color: #BB0000; text-decoration: underline;">8</span>  0.528  -<span style="color: #BB0000;">0.068</span><span style="color: #BB0000; text-decoration: underline;">5</span>  active   citations    </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.631</span> -<span style="color: #BB0000;">0.233</span>  -<span style="color: #BB0000;">0.521</span>   0.392  -<span style="color: #BB0000;">0.352</span>   0.007<span style="text-decoration: underline;">83</span> active   intl_faculty </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">6</span> -<span style="color: #BB0000;">0.603</span>  0.262  -<span style="color: #BB0000;">0.324</span>  -<span style="color: #BB0000;">0.665</span>  -<span style="color: #BB0000;">0.140</span>   0.031<span style="text-decoration: underline;">2</span>  active   intl_students</span></span></code></pre>
 <p>Based on the third principal coordinates, the reputational rankings
 are aligned, as we knew already from the correlation matrix and heatmap.
 What’s a bit more interesting is that this component seems to separate
@@ -579,7 +582,7 @@ Based on the decomposition of inertia, this third principal coordinate
 is nearly as important as the second! It therefore makes sense to plot
 the two together, in effect examining the residuals after regressing out
 the first principal coordinate:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">c_eigen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/ggbiplot.html">ggbiplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2</span>, y <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -589,7 +592,7 @@ the first principal coordinate:</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html" class="external-link">expansion</a></span><span class="op">(</span>add <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Kendall correlations between university rankings"</span>,</span>
 <span>          <span class="st">"CMDS correlation monoplot, second &amp; third principal coordinates"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="cmds-variables_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="cmds-variables_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="" width="672" style="display: block; margin: auto;"></p>
 <p>The primary antitheses of the reputational rankings, after removing
 the first principal coordinate, are the two rankings based on
 international composition. The third principal coordinate aligns closely
@@ -622,7 +625,7 @@ encourages hypothesis generation is worth having on hand.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

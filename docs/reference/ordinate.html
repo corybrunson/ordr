@@ -5,7 +5,7 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Fit an ordination model to a data object — ordinate"><meta name="description" content="This is a convenience function to fit an ordination model to a
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Fit an ordination model to a data object — ordinate"><meta name="description" content="This is a convenience function to fit an ordination model to a
 data object, wrap the result as a tbl_ord, and annotate this output with
 metadata from the model and possibly from the data."><meta property="og:description" content="This is a convenience function to fit an ordination model to a
 data object, wrap the result as a tbl_ord, and annotate this output with
@@ -17,7 +17,7 @@ metadata from the model and possibly from the data."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">ordr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.0002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -124,177 +124,154 @@ include in the model and what columns with which to annotate the output.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># LRA of arrest data</span></span></span>
 <span class="r-in"><span><span class="fu">ordinate</span><span class="op">(</span><span class="va">USArrests</span>, cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Murder</span>, <span class="va">Rape</span>, <span class="va">Assault</span><span class="op">)</span>, <span class="va">lra</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'lra': (50 x 2) x (3 x 2)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 2 coordinates: LRSV1 and LRSV2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (standard): [ 50 x 2 | 3 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    LRSV1  LRSV2 |   name       weight UrbanPop</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.680</span>  0.930 | <span style="color: #BCBCBC;">1</span> Alabama    0.027<span style="text-decoration: underline;">1</span>       58</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  0.930 -<span style="color: #BB0000;">0.625</span> | <span style="color: #BCBCBC;">2</span> Alaska     0.031<span style="text-decoration: underline;">8</span>       48</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.330</span> -<span style="color: #BB0000;">1.31</span>  | <span style="color: #BCBCBC;">3</span> Arizona    0.033<span style="text-decoration: underline;">3</span>       80</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.351</span>  0.277 | <span style="color: #BCBCBC;">4</span> Arkansas   0.021<span style="text-decoration: underline;">9</span>       50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  0.552 -<span style="color: #BB0000;">1.00</span>  | <span style="color: #BCBCBC;">5</span> California 0.032<span style="text-decoration: underline;">6</span>       91</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 45 more rows</span> | <span style="color: #949494;"># ℹ 45 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 3 x 2 | 2 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    LRSV1  LRSV2 |   name    weight</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.283  4.96  | <span style="color: #BCBCBC;">1</span> Murder  0.039<span style="text-decoration: underline;">0</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  2.88  -<span style="color: #BB0000;">0.366</span> | <span style="color: #BCBCBC;">2</span> Rape    0.106 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.371</span> -<span style="color: #BB0000;">0.181</span> | <span style="color: #BCBCBC;">3</span> Assault 0.855 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tbl_ord of class 'lra': (50 × 2) · (3 × 2)´</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># 2 coordinates: LRSV1 and LRSV2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (standard, 0%): [ 50 × 2 | 4 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    LRSV1  LRSV2<span style="color: #949494;"> | </span>name       weight .element UrbanPop</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">     [1]    [1]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;       &lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span> -0.680  0.930<span style="color: #949494;"> | </span>Alabama    0.0271 active         58</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span>  0.930 -0.625<span style="color: #949494;"> | </span>Alaska     0.0318 active         48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span> -0.330 -1.31 <span style="color: #949494;"> | </span>Arizona    0.0333 active         80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span> -0.351  0.277<span style="color: #949494;"> | </span>Arkansas   0.0219 active         50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5</span>  0.552 -1.00 <span style="color: #949494;"> | </span>California 0.0326 active         91</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494;">⋮</span>                           <span style="color: #949494;">⋮</span>                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 3 × 2 | 3 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    LRSV1  LRSV2<span style="color: #949494;"> | </span>name    weight .element</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">     [1]    [1]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span>  0.283  4.96 <span style="color: #949494;"> | </span>Murder  0.0390 active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span>  2.88  -0.366<span style="color: #949494;"> | </span>Rape    0.106  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span> -0.371 -0.181<span style="color: #949494;"> | </span>Assault 0.855  active  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># CMDS of inter-city distance data</span></span></span>
 <span class="r-in"><span><span class="fu">ordinate</span><span class="op">(</span><span class="va">UScitiesD</span>, <span class="va">cmdscale_ord</span>, k <span class="op">=</span> <span class="fl">3L</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'cmds_ord': (10 x 3) x (10 x 3)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 3 coordinates: PCo1, PCo2, PCo3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (symmetric): [ 10 x 3 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      PCo1   PCo2   PCo3 |    name         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         |    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  -<span style="color: #BB0000;">719.</span>  143.   35.1  | <span style="color: #BCBCBC;"> 1</span> Atlanta      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  -<span style="color: #BB0000;">382.</span> -<span style="color: #BB0000;">341.</span>   29.6  | <span style="color: #BCBCBC;"> 2</span> Chicago      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>   482.  -<span style="color: #BB0000;">25.3</span>  53.4  | <span style="color: #BCBCBC;"> 3</span> Denver       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  -<span style="color: #BB0000;">161.</span>  573.    1.45 | <span style="color: #BCBCBC;"> 4</span> Houston      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">1</span>204.  390.  -<span style="color: #BB0000;">18.6</span>  | <span style="color: #BCBCBC;"> 5</span> LosAngeles   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> -<span style="color: #BB0000; text-decoration: underline;">1</span><span style="color: #BB0000;">134.</span>  582.  -<span style="color: #BB0000;">32.3</span>  | <span style="color: #BCBCBC;"> 6</span> Miami        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> -<span style="color: #BB0000; text-decoration: underline;">1</span><span style="color: #BB0000;">072.</span> -<span style="color: #BB0000;">519.</span>  -<span style="color: #BB0000;">34.3</span>  | <span style="color: #BCBCBC;"> 7</span> NewYork      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">1</span>421.  113.   -<span style="color: #BB0000;">7.75</span> | <span style="color: #BCBCBC;"> 8</span> SanFrancisco </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">1</span>342. -<span style="color: #BB0000;">580.</span>  -<span style="color: #BB0000;">23.7</span>  | <span style="color: #BCBCBC;"> 9</span> Seattle      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  -<span style="color: #BB0000;">980.</span> -<span style="color: #BB0000;">335.</span>   -<span style="color: #BB0000;">2.90</span> | <span style="color: #BCBCBC;">10</span> Washington.DC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (symmetric): [ 10 x 3 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      PCo1   PCo2   PCo3 |    name         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         |    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  -<span style="color: #BB0000;">719.</span>  143.   35.1  | <span style="color: #BCBCBC;"> 1</span> Atlanta      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  -<span style="color: #BB0000;">382.</span> -<span style="color: #BB0000;">341.</span>   29.6  | <span style="color: #BCBCBC;"> 2</span> Chicago      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>   482.  -<span style="color: #BB0000;">25.3</span>  53.4  | <span style="color: #BCBCBC;"> 3</span> Denver       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  -<span style="color: #BB0000;">161.</span>  573.    1.45 | <span style="color: #BCBCBC;"> 4</span> Houston      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">1</span>204.  390.  -<span style="color: #BB0000;">18.6</span>  | <span style="color: #BCBCBC;"> 5</span> LosAngeles   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> -<span style="color: #BB0000; text-decoration: underline;">1</span><span style="color: #BB0000;">134.</span>  582.  -<span style="color: #BB0000;">32.3</span>  | <span style="color: #BCBCBC;"> 6</span> Miami        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> -<span style="color: #BB0000; text-decoration: underline;">1</span><span style="color: #BB0000;">072.</span> -<span style="color: #BB0000;">519.</span>  -<span style="color: #BB0000;">34.3</span>  | <span style="color: #BCBCBC;"> 7</span> NewYork      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">1</span>421.  113.   -<span style="color: #BB0000;">7.75</span> | <span style="color: #BCBCBC;"> 8</span> SanFrancisco </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">1</span>342. -<span style="color: #BB0000;">580.</span>  -<span style="color: #BB0000;">23.7</span>  | <span style="color: #BCBCBC;"> 9</span> Seattle      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  -<span style="color: #BB0000;">980.</span> -<span style="color: #BB0000;">335.</span>   -<span style="color: #BB0000;">2.90</span> | <span style="color: #BCBCBC;">10</span> Washington.DC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tbl_ord of class 'cmds_ord': (10 × 3) · (0 × 3)´</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># 3 coordinates: PCo1, PCo2, PCo3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (principal, 100%): [ 10 × 3 | 3 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      PCo1   PCo2   PCo3<span style="color: #949494;"> | </span>name          .element Labels       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">[9.2e+13][3e+12][7e+07]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;        </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span>  -719.  143.   35.1 <span style="color: #949494;"> | </span>Atlanta       active   Atlanta      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span>  -382. -341.   29.6 <span style="color: #949494;"> | </span>Chicago       active   Chicago      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span>   482.  -25.3  53.4 <span style="color: #949494;"> | </span>Denver        active   Denver       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span>  -161.  573.    1.45<span style="color: #949494;"> | </span>Houston       active   Houston      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span>  1204.  390.  -18.6 <span style="color: #949494;"> | </span>LosAngeles    active   LosAngeles   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 6</span> -1134.  582.  -32.3 <span style="color: #949494;"> | </span>Miami         active   Miami        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 7</span> -1072. -519.  -34.3 <span style="color: #949494;"> | </span>NewYork       active   NewYork      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 8</span>  1421.  113.   -7.75<span style="color: #949494;"> | </span>SanFrancisco  active   SanFrancisco </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 9</span>  1342. -580.  -23.7 <span style="color: #949494;"> | </span>Seattle       active   Seattle      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">10</span>  -980. -335.   -2.90<span style="color: #949494;"> | </span>Washington.DC active   Washington.DC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 0 × 3 | 1 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      PCo1   PCo2   PCo3<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span><span style="color: #949494;"> | </span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># PCA of iris data</span></span></span>
 <span class="r-in"><span><span class="fu">ordinate</span><span class="op">(</span><span class="va">iris</span>, <span class="va">princomp</span>, cols <span class="op">=</span> <span class="op">-</span><span class="va">Species</span>, augment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Sepal.Width</span>, <span class="va">Species</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'princomp': (150 x 4) x (4 x 4)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 4 coordinates: Comp.1, Comp.2, ..., Comp.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 150 x 4 | 3 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Comp.1 Comp.2  Comp.3 ... |   .element Sepal.Width Species</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  -<span style="color: #BB0000;">2.68</span>  0.319  0.027<span style="text-decoration: underline;">9</span>     | <span style="color: #BCBCBC;">1</span> score            3.5 setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  -<span style="color: #BB0000;">2.71</span> -<span style="color: #BB0000;">0.177</span>  0.210      | <span style="color: #BCBCBC;">2</span> score            3   setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  -<span style="color: #BB0000;">2.89</span> -<span style="color: #BB0000;">0.145</span> -<span style="color: #BB0000;">0.017</span><span style="color: #BB0000; text-decoration: underline;">9</span> ... | <span style="color: #BCBCBC;">3</span> score            3.2 setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  -<span style="color: #BB0000;">2.75</span> -<span style="color: #BB0000;">0.318</span> -<span style="color: #BB0000;">0.031</span><span style="color: #BB0000; text-decoration: underline;">6</span>     | <span style="color: #BCBCBC;">4</span> score            3.1 setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  -<span style="color: #BB0000;">2.73</span>  0.327 -<span style="color: #BB0000;">0.090</span><span style="color: #BB0000; text-decoration: underline;">1</span>     | <span style="color: #BCBCBC;">5</span> score            3.6 setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 145 more rows</span>     | <span style="color: #949494;"># ℹ 145 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 4 | 4 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1  Comp.2  Comp.3 ... |   name         center scale .element</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.361   0.657   0.582      | <span style="color: #BCBCBC;">1</span> Sepal.Length   5.84     1 active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.084</span><span style="color: #BB0000; text-decoration: underline;">5</span>  0.730  -<span style="color: #BB0000;">0.598</span>  ... | <span style="color: #BCBCBC;">2</span> Sepal.Width    3.06     1 active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  0.857  -<span style="color: #BB0000;">0.173</span>  -<span style="color: #BB0000;">0.076</span><span style="color: #BB0000; text-decoration: underline;">2</span>     | <span style="color: #BCBCBC;">3</span> Petal.Length   3.76     1 active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.358  -<span style="color: #BB0000;">0.075</span><span style="color: #BB0000; text-decoration: underline;">5</span> -<span style="color: #BB0000;">0.546</span>      | <span style="color: #BCBCBC;">4</span> Petal.Width    1.20     1 active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tbl_ord of class 'princomp': (150 × 4) · (4 × 4)´</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># 4 coordinates: Comp.1, Comp.2, ..., Comp.4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (principal, 100%): [ 150 × 4 | 3 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1  Comp.2  Comp.3   Comp.4<span style="color: #949494;"> | </span>.element Sepal.Width</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">    [630] [36.16] [11.65]  [3.551]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;          &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span> -2.68    0.319   0.0279  0.00226<span style="color: #949494;"> | </span>score            3.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span> -2.71   -0.177   0.210   0.0990 <span style="color: #949494;"> | </span>score            3  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span> -2.89   -0.145  -0.0179  0.0200 <span style="color: #949494;"> | </span>score            3.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span> -2.75   -0.318  -0.0316 -0.0756 <span style="color: #949494;"> | </span>score            3.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5</span> -2.73    0.327  -0.0901 -0.0613 <span style="color: #949494;"> | </span>score            3.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 <span style="color: #949494;">⋮</span>                             <span style="color: #949494;">⋮</span>          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Species &lt;fct&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 4 × 4 | 4 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1  Comp.2  Comp.3   Comp.4<span style="color: #949494;"> | </span>name       center scale</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">      [1]     [1]     [1]      [1]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span>  0.361   0.657   0.582   0.315  <span style="color: #949494;"> | </span>Sepal.Len…   5.84     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span> -0.0845  0.730  -0.598  -0.320  <span style="color: #949494;"> | </span>Sepal.Wid…   3.06     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span>  0.857  -0.173  -0.0762 -0.480  <span style="color: #949494;"> | </span>Petal.Len…   3.76     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span>  0.358  -0.0755 -0.546   0.754  <span style="color: #949494;"> | </span>Petal.Wid…   1.20     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   .element &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="fu">ordinate</span><span class="op">(</span><span class="va">iris</span>, cols <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">prcomp</a></span><span class="op">(</span><span class="va">.</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale. <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 4 coordinates: PC1, PC2, ..., PC4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 150 x 4 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     PC1    PC2     PC3 ... |   Species</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            |   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">2.26</span> -<span style="color: #BB0000;">0.478</span>  0.127      | <span style="color: #BCBCBC;">1</span> setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">2.07</span>  0.672  0.234      | <span style="color: #BCBCBC;">2</span> setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">2.36</span>  0.341 -<span style="color: #BB0000;">0.044</span><span style="color: #BB0000; text-decoration: underline;">1</span> ... | <span style="color: #BCBCBC;">3</span> setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">2.29</span>  0.595 -<span style="color: #BB0000;">0.091</span><span style="color: #BB0000; text-decoration: underline;">0</span>     | <span style="color: #BCBCBC;">4</span> setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">2.38</span> -<span style="color: #BB0000;">0.645</span> -<span style="color: #BB0000;">0.015</span><span style="color: #BB0000; text-decoration: underline;">7</span>     | <span style="color: #BCBCBC;">5</span> setosa </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 145 more rows</span>     | <span style="color: #949494;"># ℹ 145 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 4 | 3 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      PC1     PC2    PC3 ... |   name         center scale</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.521 -<span style="color: #BB0000;">0.377</span>   0.720     | <span style="color: #BCBCBC;">1</span> Sepal.Length   5.84 0.828</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.269</span> -<span style="color: #BB0000;">0.923</span>  -<span style="color: #BB0000;">0.244</span> ... | <span style="color: #BCBCBC;">2</span> Sepal.Width    3.06 0.436</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  0.580 -<span style="color: #BB0000;">0.024</span><span style="color: #BB0000; text-decoration: underline;">5</span> -<span style="color: #BB0000;">0.142</span>     | <span style="color: #BCBCBC;">3</span> Petal.Length   3.76 1.77 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.565 -<span style="color: #BB0000;">0.066</span><span style="color: #BB0000; text-decoration: underline;">9</span> -<span style="color: #BB0000;">0.634</span>     | <span style="color: #BCBCBC;">4</span> Petal.Width    1.20 0.762</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tbl_ord of class 'prcomp': (150 × 4) · (4 × 4)´</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># 4 coordinates: PC1, PC2, ..., PC4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (principal, 100%): [ 150 × 4 | 2 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      PC1     PC2     PC3     PC4<span style="color: #949494;"> | </span>.element Species</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;"> [434.9] [136.2] [21.87] [3.087]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;    &lt;fct&gt;  </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span> -2.26  -0.478   0.127   0.0241<span style="color: #949494;"> | </span>active   setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span> -2.07   0.672   0.234   0.103 <span style="color: #949494;"> | </span>active   setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span> -2.36   0.341  -0.0441  0.0283<span style="color: #949494;"> | </span>active   setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span> -2.29   0.595  -0.0910 -0.0657<span style="color: #949494;"> | </span>active   setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5</span> -2.38  -0.645  -0.0157 -0.0358<span style="color: #949494;"> | </span>active   setosa </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                <span style="color: #949494;">⋮</span>                          <span style="color: #949494;">⋮</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 4 × 4 | 4 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      PC1     PC2     PC3     PC4<span style="color: #949494;"> | </span>name       center scale</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">     [1]     [1]     [1]     [1]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span>  0.521 -0.377   0.720   0.261 <span style="color: #949494;"> | </span>Sepal.Len…   5.84 0.828</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span> -0.269 -0.923  -0.244  -0.124 <span style="color: #949494;"> | </span>Sepal.Wid…   3.06 0.436</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span>  0.580 -0.0245 -0.142  -0.801 <span style="color: #949494;"> | </span>Petal.Len…   3.76 1.77 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span>  0.565 -0.0669 -0.634   0.524 <span style="color: #949494;"> | </span>Petal.Wid…   1.20 0.762</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   .element &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># CA of hair &amp; eye color data</span></span></span>
 <span class="r-in"><span><span class="va">haireye</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">HairEyeColor</span>, dims <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">ordinate</span><span class="op">(</span><span class="va">haireye</span>, <span class="fu">MASS</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/MASS/man/corresp.html" class="external-link">corresp</a></span>, cols <span class="op">=</span> <span class="fu">everything</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'correspondence': (4 x 1) x (4 x 1)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 1 coordinate: Can1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (standard): [ 4 x 1 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     Can1 |   name </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.10</span>  | <span style="color: #BCBCBC;">1</span> Black</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.324</span> | <span style="color: #BCBCBC;">2</span> Brown</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.283</span> | <span style="color: #BCBCBC;">3</span> Red  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  1.83  | <span style="color: #BCBCBC;">4</span> Blond</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 1 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     Can1 |   name </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">1.08</span>  | <span style="color: #BCBCBC;">1</span> Brown</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  1.20  | <span style="color: #BCBCBC;">2</span> Blue </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.465</span> | <span style="color: #BCBCBC;">3</span> Hazel</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.354 | <span style="color: #BCBCBC;">4</span> Green</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tbl_ord of class 'correspondence': (4 × 1) · (4 × 1)´</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># 1 coordinate: Can1</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (standard, 0%): [ 4 × 1 | 2 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Can1<span style="color: #949494;"> | </span>name  .element</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">     [1]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt; &lt;chr&gt;   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span> -1.10 <span style="color: #949494;"> | </span>Black active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span> -0.324<span style="color: #949494;"> | </span>Brown active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span> -0.283<span style="color: #949494;"> | </span>Red   active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span>  1.83 <span style="color: #949494;"> | </span>Blond active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 4 × 1 | 2 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Can1<span style="color: #949494;"> | </span>name  .element</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">     [1]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt; &lt;chr&gt;   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span> -1.08 <span style="color: #949494;"> | </span>Brown active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span>  1.20 <span style="color: #949494;"> | </span>Blue  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span> -0.465<span style="color: #949494;"> | </span>Hazel active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span>  0.354<span style="color: #949494;"> | </span>Green active  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># FA of Swiss social data</span></span></span>
 <span class="r-in"><span><span class="fu">ordinate</span><span class="op">(</span><span class="va">swiss</span>, model <span class="op">=</span> <span class="va">factanal</span>, factors <span class="op">=</span> <span class="fl">2L</span>, scores <span class="op">=</span> <span class="st">"Bartlett"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'factanal': (47 x 2) x (6 x 2)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 2 coordinates: Factor1 and Factor2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 47 x 2 | 2 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Factor1 Factor2 |   .element name        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.077<span style="text-decoration: underline;">5</span>  -<span style="color: #BB0000;">0.673</span> | <span style="color: #BCBCBC;">1</span> score    Courtelary  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.177</span>    1.14  | <span style="color: #BCBCBC;">2</span> score    Delemont    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.587</span>    1.27  | <span style="color: #BCBCBC;">3</span> score    Franches-Mnt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.427</span>   -<span style="color: #BB0000;">0.169</span> | <span style="color: #BCBCBC;">4</span> score    Moutier     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  0.382   -<span style="color: #BB0000;">0.708</span> | <span style="color: #BCBCBC;">5</span> score    Neuveville  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 42 more rows</span> | <span style="color: #949494;"># ℹ 42 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (principal): [ 6 x 2 | 3 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Factor1 Factor2 |   name           uniqueness .element</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.652</span>   0.393  | <span style="color: #BCBCBC;">1</span> Fertility          0.420  active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.631</span>   0.333  | <span style="color: #BCBCBC;">2</span> Agriculture        0.492  active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  0.685  -<span style="color: #BB0000;">0.510</span>  | <span style="color: #BCBCBC;">3</span> Examination        0.270  active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.997  -<span style="color: #BB0000;">0.031</span><span style="color: #BB0000; text-decoration: underline;">3</span> | <span style="color: #BCBCBC;">4</span> Education          0.005  active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.124</span>   0.961  | <span style="color: #BCBCBC;">5</span> Catholic           0.060<span style="text-decoration: underline;">7</span> active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> -<span style="color: #BB0000;">0.094</span><span style="color: #BB0000; text-decoration: underline;">7</span>  0.175  | <span style="color: #BCBCBC;">6</span> Infant.Mortal…     0.960  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tbl_ord of class 'factanal': (47 × 2) · (6 × 2)´</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># 2 coordinates: Factor1 and Factor2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (standard, 0%): [ 47 × 2 | 2 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Factor1 Factor2<span style="color: #949494;"> | </span>.element name        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">       [1]     [1]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;    &lt;chr&gt;       </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span>  0.0775 -0.673 <span style="color: #949494;"> | </span>score    Courtelary  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span> -0.177   1.14  <span style="color: #949494;"> | </span>score    Delemont    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span> -0.587   1.27  <span style="color: #949494;"> | </span>score    Franches-Mnt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span> -0.427  -0.169 <span style="color: #949494;"> | </span>score    Moutier     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span>  0.382  -0.708 <span style="color: #949494;"> | </span>score    Neuveville  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         <span style="color: #949494;">⋮</span>                      <span style="color: #949494;">⋮</span>          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (principal, 100%): [ 6 × 2 | 3 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Factor1 Factor2<span style="color: #949494;"> | </span>name             uniqueness .element</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">   [2.311] [1.481]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span> -0.652   0.393 <span style="color: #949494;"> | </span>Fertility            0.420  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span> -0.631   0.333 <span style="color: #949494;"> | </span>Agriculture          0.492  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span>  0.685  -0.510 <span style="color: #949494;"> | </span>Examination          0.270  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span>  0.997  -0.0313<span style="color: #949494;"> | </span>Education            0.005  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span> -0.124   0.961 <span style="color: #949494;"> | </span>Catholic             0.0607 active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 6</span> -0.0947  0.175 <span style="color: #949494;"> | </span>Infant.Mortality     0.960  active  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># LDA of iris data</span></span></span>
 <span class="r-in"><span><span class="fu">ordinate</span><span class="op">(</span><span class="va">iris</span>, <span class="op">~</span> <span class="fu"><a href="lda-ord.html">lda_ord</a></span><span class="op">(</span><span class="va">.</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="va">.</span><span class="op">[</span>, <span class="fl">5</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'lda_ord': (153 x 2) x (4 x 2)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 2 coordinates: LD1 and LD2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 153 x 2 | 5 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     LD1    LD2 |   name        prior counts grouping </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  7.61 -<span style="color: #BB0000;">0.215</span> | <span style="color: #BCBCBC;">1</span> setosa      0.333     50 setosa   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">1.83</span>  0.728 | <span style="color: #BCBCBC;">2</span> versicolor  0.333     50 versicol…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">5.78</span> -<span style="color: #BB0000;">0.513</span> | <span style="color: #BCBCBC;">3</span> virginica   0.333     50 virginica</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  8.06 -<span style="color: #BB0000;">0.300</span> | <span style="color: #BCBCBC;">4</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span> setosa   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  7.13  0.787 | <span style="color: #BCBCBC;">5</span> <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span> setosa   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 148 more rows</span> | <span style="color: #949494;"># ℹ 148 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: .element &lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 2 | 2 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      LD1     LD2 |   name         .element</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.829 -<span style="color: #BB0000;">0.024</span><span style="color: #BB0000; text-decoration: underline;">1</span> | <span style="color: #BCBCBC;">1</span> Sepal.Length active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  1.53  -<span style="color: #BB0000;">2.16</span>   | <span style="color: #BCBCBC;">2</span> Sepal.Width  active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">2.20</span>   0.932  | <span style="color: #BCBCBC;">3</span> Petal.Length active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">2.81</span>  -<span style="color: #BB0000;">2.84</span>   | <span style="color: #BCBCBC;">4</span> Petal.Width  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tbl_ord of class 'lda_ord': (153 × 2) · (4 × 2)´</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># 2 coordinates: LD1 and LD2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (principal, 100%): [ 153 × 2 | 5 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      LD1     LD2<span style="color: #949494;"> | </span>name        prior counts grouping   .element</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">  [2366] [20.98]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;       &lt;dbl&gt;  &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span>  7.61  -0.215 <span style="color: #949494;"> | </span>setosa      0.333     50 setosa     active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span> -1.83   0.728 <span style="color: #949494;"> | </span>versicolor  0.333     50 versicolor active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span> -5.78  -0.513 <span style="color: #949494;"> | </span>virginica   0.333     50 virginica  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span>  8.06  -0.300 <span style="color: #949494;"> | </span>NA         NA         NA setosa     score   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5</span>  7.13   0.787 <span style="color: #949494;"> | </span>NA         NA         NA setosa     score   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494;">⋮</span>                                <span style="color: #949494;">⋮</span>                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 4 × 2 | 2 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      LD1     LD2<span style="color: #949494;"> | </span>name         .element</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">     [1]     [1]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;        &lt;chr&gt;   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span>  0.829 -0.0241<span style="color: #949494;"> | </span>Sepal.Length active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span>  1.53  -2.16  <span style="color: #949494;"> | </span>Sepal.Width  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span> -2.20   0.932 <span style="color: #949494;"> | </span>Petal.Length active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span> -2.81  -2.84  <span style="color: #949494;"> | </span>Petal.Width  active  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># CCA of savings data</span></span></span>
 <span class="r-in"><span><span class="fu">ordinate</span><span class="op">(</span></span></span>
@@ -303,30 +280,26 @@ include in the model and what columns with which to annotate the output.</p>
 <span class="r-in"><span>  y <span class="op">=</span> <span class="va">LifeCycleSavings</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sr"</span>, <span class="st">"dpi"</span>, <span class="st">"ddpi"</span><span class="op">)</span><span class="op">]</span>,</span></span>
 <span class="r-in"><span>  model <span class="op">=</span> <span class="va">cancor_ord</span>, scores <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'cancor_ord': (54 x 2) x (56 x 2)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 2 coordinates: CanCor1 and CanCor2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (standard): [ 54 x 2 | 3 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    CanCor1 CanCor2 |   name      center .element</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.009</span><span style="color: #BB0000; text-decoration: underline;">11</span> -<span style="color: #BB0000;">0.036</span><span style="color: #BB0000; text-decoration: underline;">2</span> | <span style="color: #BCBCBC;">1</span> pop15      35.1  active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  0.048<span style="text-decoration: underline;">6</span>  -<span style="color: #BB0000;">0.260</span>  | <span style="color: #BCBCBC;">2</span> pop75       2.29 active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  0.080<span style="text-decoration: underline;">4</span>   0.057<span style="text-decoration: underline;">7</span> | <span style="color: #BCBCBC;">3</span> Australia  <span style="color: #BB0000;">NA</span>    score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.210   -<span style="color: #BB0000;">0.125</span>  | <span style="color: #BCBCBC;">4</span> Austria    <span style="color: #BB0000;">NA</span>    score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  0.207   -<span style="color: #BB0000;">0.147</span>  | <span style="color: #BCBCBC;">5</span> Belgium    <span style="color: #BB0000;">NA</span>    score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 49 more rows</span> | <span style="color: #949494;"># ℹ 49 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 56 x 2 | 3 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    CanCor1    CanCor2 |   name       center .element</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                       |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 0.008<span style="text-decoration: underline;">47</span>   0.033<span style="text-decoration: underline;">4</span>    | <span style="color: #BCBCBC;">1</span> sr           9.67 active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 0.000<span style="text-decoration: underline;">131</span> -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">075</span><span style="color: #BB0000;">9</span> | <span style="color: #BCBCBC;">2</span> dpi       <span style="text-decoration: underline;">1</span>107.   active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 0.004<span style="text-decoration: underline;">17</span>  -<span style="color: #BB0000;">0.012</span><span style="color: #BB0000; text-decoration: underline;">3</span>    | <span style="color: #BCBCBC;">3</span> ddpi         3.76 active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 0.171    -<span style="color: #BB0000;">0.023</span><span style="color: #BB0000; text-decoration: underline;">2</span>    | <span style="color: #BCBCBC;">4</span> Australia   <span style="color: #BB0000;">NA</span>    score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 0.073<span style="text-decoration: underline;">5</span>    0.047<span style="text-decoration: underline;">5</span>    | <span style="color: #BCBCBC;">5</span> Austria     <span style="color: #BB0000;">NA</span>    score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 51 more rows</span> | <span style="color: #949494;"># ℹ 51 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tbl_ord of class 'cancor_ord': (54 × 2) · (56 × 2)´</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># 2 coordinates: CanCor1 and CanCor2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (standard, 0%): [ 54 × 2 | 3 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      CanCor1    CanCor2<span style="color: #949494;"> | </span>name      center .element</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">         [1]        [1]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span> -0.00911  -0.0362   <span style="color: #949494;"> | </span>pop15      35.1  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span>  0.0486   -0.260    <span style="color: #949494;"> | </span>pop75       2.29 active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span>  0.0804    0.0577   <span style="color: #949494;"> | </span>Australia  NA    score   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span>  0.210    -0.125    <span style="color: #949494;"> | </span>Austria    NA    score   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span>  0.207    -0.147    <span style="color: #949494;"> | </span>Belgium    NA    score   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            <span style="color: #949494;">⋮</span>                          <span style="color: #949494;">⋮</span>            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 56 × 2 | 3 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      CanCor1    CanCor2<span style="color: #949494;"> | </span>name       center .element</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">         [1]        [1]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span>  0.00847   0.0334   <span style="color: #949494;"> | </span>sr           9.67 active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span>  0.000131 -0.0000759<span style="color: #949494;"> | </span>dpi       1107.   active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span>  0.00417  -0.0123   <span style="color: #949494;"> | </span>ddpi         3.76 active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span>  0.171    -0.0232   <span style="color: #949494;"> | </span>Australia   NA    score   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span>  0.0735    0.0475   <span style="color: #949494;"> | </span>Austria     NA    score   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            <span style="color: #949494;">⋮</span>                          <span style="color: #949494;">⋮</span>             </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -338,7 +311,7 @@ include in the model and what columns with which to annotate the output.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

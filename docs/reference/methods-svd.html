@@ -5,7 +5,7 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Functionality for singular value decompositions — methods-svd"><meta name="description" content='These methods extract data from, and attribute new data to,
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Functionality for singular value decompositions — methods-svd"><meta name="description" content='These methods extract data from, and attribute new data to,
 objects of class "svd_ord" returned by svd_ord().'><meta property="og:description" content='These methods extract data from, and attribute new data to,
 objects of class "svd_ord" returned by svd_ord().'></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -15,7 +15,7 @@ objects of class "svd_ord" returned by svd_ord().'></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">ordr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.0002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -129,26 +129,24 @@ the model components.</p>
 <span class="r-in"><span>  <span class="fu"><a href="wrap-ord.html">svd_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">spend_svd</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'svd_ord': (5 x 5) x (5 x 5)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 5 coordinates: SV1, SV2, ..., SV5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (standard): [ 5 x 5 | 0 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       SV1     SV2     SV3 ... | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.881</span>   0.456  -<span style="color: #BB0000;">0.122</span>      | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.436</span>  -<span style="color: #BB0000;">0.677</span>   0.583  ... | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.176</span>  -<span style="color: #BB0000;">0.562</span>  -<span style="color: #BB0000;">0.734</span>      | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.045</span><span style="color: #BB0000; text-decoration: underline;">5</span> -<span style="color: #BB0000;">0.092</span><span style="color: #BB0000; text-decoration: underline;">9</span> -<span style="color: #BB0000;">0.314</span>      | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.031</span><span style="color: #BB0000; text-decoration: underline;">1</span> -<span style="color: #BB0000;">0.098</span><span style="color: #BB0000; text-decoration: underline;">9</span> -<span style="color: #BB0000;">0.089</span><span style="color: #BB0000; text-decoration: underline;">2</span>     | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 5 x 5 | 0 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      SV1     SV2    SV3 ... | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.159</span>  0.113   0.182     | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.302</span>  0.792  -<span style="color: #BB0000;">0.527</span> ... | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.429</span>  0.211   0.620     | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.532</span>  0.026<span style="text-decoration: underline;">6</span>  0.302     | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.645</span> -<span style="color: #BB0000;">0.561</span>  -<span style="color: #BB0000;">0.461</span>     | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tbl_ord of class 'svd_ord': (5 × 5) · (5 × 5)´</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># 5 coordinates: SV1, SV2, ..., SV5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (standard, 0%): [ 5 × 5 | 0 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        SV1     SV2     SV3     SV4     SV5<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">       [1]     [1]     [1]     [1]     [1]</span><span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span> -0.881   0.456  -0.122   0.0245 -0.0299<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span> -0.436  -0.677   0.583  -0.0763  0.0778<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span> -0.176  -0.562  -0.734   0.0411 -0.336 <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span> -0.0455 -0.0929 -0.314  -0.494   0.805 <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span> -0.0311 -0.0989 -0.0892  0.865   0.483 <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 5 × 5 | 0 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        SV1     SV2     SV3     SV4     SV5<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">       [1]     [1]     [1]     [1]     [1]</span><span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span> -0.159   0.113   0.182  -0.897  -0.351 <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span> -0.302   0.792  -0.527   0.0265  0.0499<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span> -0.429   0.211   0.620  -0.0146  0.622 <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span> -0.532   0.0266  0.302   0.421  -0.669 <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span> -0.645  -0.561  -0.461  -0.129   0.201 <span style="color: #949494;"> | </span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># recover matrices of row and column coordinates</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="recoverers.html">get_rows</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span></span></span>
@@ -168,26 +166,24 @@ the model components.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># augment with row and column names</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'svd_ord': (5 x 5) x (5 x 5)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 5 coordinates: SV1, SV2, ..., SV5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (standard): [ 5 x 5 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       SV1     SV2     SV3 ... |   name               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.881</span>   0.456  -<span style="color: #BB0000;">0.122</span>      | <span style="color: #BCBCBC;">1</span> Food and Tobacco   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.436</span>  -<span style="color: #BB0000;">0.677</span>   0.583  ... | <span style="color: #BCBCBC;">2</span> Household Operation</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.176</span>  -<span style="color: #BB0000;">0.562</span>  -<span style="color: #BB0000;">0.734</span>      | <span style="color: #BCBCBC;">3</span> Medical and Health </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.045</span><span style="color: #BB0000; text-decoration: underline;">5</span> -<span style="color: #BB0000;">0.092</span><span style="color: #BB0000; text-decoration: underline;">9</span> -<span style="color: #BB0000;">0.314</span>      | <span style="color: #BCBCBC;">4</span> Personal Care      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.031</span><span style="color: #BB0000; text-decoration: underline;">1</span> -<span style="color: #BB0000;">0.098</span><span style="color: #BB0000; text-decoration: underline;">9</span> -<span style="color: #BB0000;">0.089</span><span style="color: #BB0000; text-decoration: underline;">2</span>     | <span style="color: #BCBCBC;">5</span> Private Education  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 5 x 5 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      SV1     SV2    SV3 ... |   name </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> -<span style="color: #BB0000;">0.159</span>  0.113   0.182     | <span style="color: #BCBCBC;">1</span> 1940 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.302</span>  0.792  -<span style="color: #BB0000;">0.527</span> ... | <span style="color: #BCBCBC;">2</span> 1945 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> -<span style="color: #BB0000;">0.429</span>  0.211   0.620     | <span style="color: #BCBCBC;">3</span> 1950 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> -<span style="color: #BB0000;">0.532</span>  0.026<span style="text-decoration: underline;">6</span>  0.302     | <span style="color: #BCBCBC;">4</span> 1955 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> -<span style="color: #BB0000;">0.645</span> -<span style="color: #BB0000;">0.561</span>  -<span style="color: #BB0000;">0.461</span>     | <span style="color: #BCBCBC;">5</span> 1960 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tbl_ord of class 'svd_ord': (5 × 5) · (5 × 5)´</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># 5 coordinates: SV1, SV2, ..., SV5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (standard, 0%): [ 5 × 5 | 2 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        SV1     SV2     SV3     SV4     SV5<span style="color: #949494;"> | </span>name           .element</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">       [1]     [1]     [1]     [1]     [1]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;          &lt;chr&gt;   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span> -0.881   0.456  -0.122   0.0245 -0.0299<span style="color: #949494;"> | </span>Food and Toba… active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span> -0.436  -0.677   0.583  -0.0763  0.0778<span style="color: #949494;"> | </span>Household Ope… active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span> -0.176  -0.562  -0.734   0.0411 -0.336 <span style="color: #949494;"> | </span>Medical and H… active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span> -0.0455 -0.0929 -0.314  -0.494   0.805 <span style="color: #949494;"> | </span>Personal Care  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span> -0.0311 -0.0989 -0.0892  0.865   0.483 <span style="color: #949494;"> | </span>Private Educa… active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 5 × 5 | 2 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        SV1     SV2     SV3     SV4     SV5<span style="color: #949494;"> | </span>name  .element</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">       [1]     [1]     [1]     [1]     [1]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt; &lt;chr&gt;   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span> -0.159   0.113   0.182  -0.897  -0.351 <span style="color: #949494;"> | </span>1940  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span> -0.302   0.792  -0.527   0.0265  0.0499<span style="color: #949494;"> | </span>1945  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span> -0.429   0.211   0.620  -0.0146  0.622 <span style="color: #949494;"> | </span>1950  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span> -0.532   0.0266  0.302   0.421  -0.669 <span style="color: #949494;"> | </span>1955  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span> -0.645  -0.561  -0.461  -0.129   0.201 <span style="color: #949494;"> | </span>1960  active  </span>
 <span class="r-in"><span><span class="co"># initial matrix decomposition confers no inertia to coordinates</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="conference.html">get_conference</a></span><span class="op">(</span><span class="va">spend_svd</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0 0</span>
@@ -202,7 +198,7 @@ the model components.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>
