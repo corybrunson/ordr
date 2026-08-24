@@ -13,8 +13,8 @@
     }
   };
 </script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="A Tidyverse Extension for Ordinations and Biplots">
 <meta name="description" content="Ordination comprises several multivariate exploratory and explanatory techniques with theoretical foundations in geometric data analysis; see Podani (2000, ISBN:90-5782-067-6) for techniques and applications and Le Roux &amp; Rouanet (2005) &lt;doi:10.1007/1-4020-2236-0&gt; for foundations. Greenacre (2010, ISBN:978-84-923846) shows how the most established of these, including principal components analysis, correspondence analysis, multidimensional scaling, factor analysis, and discriminant analysis, rely on eigen-decompositions or singular value decompositions of pre-processed numeric matrix data. These decompositions give rise to a set of shared coordinates along which the row and column elements can be measured. The overlay of their scatterplots on these axes, introduced by Gabriel (1971) &lt;doi:10.1093/biomet/58.3.453&gt;, is called a biplot. ordr provides inspection, extraction, manipulation, and visualization tools for several popular ordination classes supported by a set of recovery methods. It is inspired by and designed to integrate into Tidyverse workflows provided by Wickham et al (2019) &lt;doi:10.21105/joss.01686&gt;.">
@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ordr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.0002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,7 +81,7 @@
 <div class="section level3">
 <h3 id="implementations-in-r">implementations in R<a class="anchor" aria-label="anchor" href="#implementations-in-r"></a>
 </h3>
-<p>An extensive range of ordination techniques are implemented in R, from classical multidimensional scaling (<code><a href="https://rdrr.io/r/stats/cmdscale.html" class="external-link">stats::cmdscale()</a></code>) and principal components analysis (<code><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">stats::prcomp()</a></code> and <code><a href="https://rdrr.io/r/stats/princomp.html" class="external-link">stats::princomp()</a></code>) in the <strong>stats</strong> package distributed with base R, across widely-used implementations of linear discriminant analysis (<code><a href="https://rdrr.io/pkg/MASS/man/lda.html" class="external-link">MASS::lda()</a></code>) and correspondence analysis (<code><a href="https://rdrr.io/pkg/ca/man/ca.html" class="external-link">ca::ca()</a></code>) in general-use statistical packages, to highly specialized packages that implement cutting-edge techniques or adapt conventional techniques to challenging settings. These implementations come with their own conventions, tailored to the research communities that produced them, and it would be impractical (and probably unhelpful) to try to consolidate them.</p>
+<p>An extensive range of ordination techniques are implemented in R, from classical multidimensional scaling (<code><a href="https://rdrr.io/r/stats/cmdscale.html" class="external-link">stats::cmdscale()</a></code>) and principal components analysis (<code><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">stats::prcomp()</a></code> and <code><a href="https://rdrr.io/r/stats/princomp.html" class="external-link">stats::princomp()</a></code>) in the <strong>stats</strong> package distributed with base R, across widely-used implementations of linear discriminant analysis (<code><a href="https://rdrr.io/pkg/MASS/man/lda.html" class="external-link">MASS::lda()</a></code>) and correspondence analysis (<code>ca::ca()</code>) in general-use statistical packages, to highly specialized packages that implement cutting-edge techniques or adapt conventional techniques to challenging settings. These implementations come with their own conventions, tailored to the research communities that produced them, and it would be impractical (and probably unhelpful) to try to consolidate them.</p>
 <p>Instead, <strong>ordr</strong> provides a streamlined process by which the models output by these methods—in particular, the matrix factors into which the original data are approximately decomposed and the artificial coordinates they share—can be inspected, annotated, tabulated, summarized, and visualized. On this last point, most biplot implementations in R provide limited customizability. <strong>ordr</strong> adopts the grammar of graphics paradigm from <a href="https://github.com/tidyverse/ggplot2" class="external-link"><strong>ggplot2</strong></a> to modularize and standardize biplot elements <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Biplot elments must be chosen with care, and it is useful and appropriate that many model-specific biplot methods have limited flexibility. This package adopts the trade-off articulated in &lt;a href="https://www.google.com/books/edition/_/iI1kcgAACAAJ" class="external-link"&gt;Wilkinson’s &lt;em&gt;The Grammar of Graphics&lt;/em&gt;&lt;/a&gt; (p. 15): “This system is capable of producing some hideous graphics. There is nothing in its design to prevent its misuse. … This system cannot produce a meaningless graphic, however.”&lt;/p&gt;'><sup>5</sup></a>. Overall, the package is designed to follow the broader syntactic conventions of the Tidyverse, so that users familiar with a this workflow can more easily and quickly integrate ordination models into practice.</p>
 </div>
 </div>
@@ -134,27 +134,26 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/corybrunson/ordr" class="external-link">ordr</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: ggplot2</span></span>
 <span><span class="op">(</span><span class="va">iris_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ordinate.html">ordinate</a></span><span class="op">(</span><span class="va">iris</span>, cols <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, model <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">prcomp</a></span><span class="op">(</span><span class="va">.</span>, scale. <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'</span></span>
+<span><span class="co">#&gt; # A tbl_ord of class 'prcomp': (150 × 4) · (4 × 4)´</span></span>
 <span><span class="co">#&gt; # 4 coordinates: PC1, PC2, ..., PC4</span></span>
-<span><span class="co">#&gt; # </span></span>
-<span><span class="co">#&gt; # Rows (principal): [ 150 x 4 | 1 ]</span></span>
-<span><span class="co">#&gt;     PC1    PC2     PC3 ... |   Species</span></span>
-<span><span class="co">#&gt;                            |   &lt;fct&gt;  </span></span>
-<span><span class="co">#&gt; 1 -2.26 -0.478  0.127      | 1 setosa </span></span>
-<span><span class="co">#&gt; 2 -2.07  0.672  0.234      | 2 setosa </span></span>
-<span><span class="co">#&gt; 3 -2.36  0.341 -0.0441 ... | 3 setosa </span></span>
-<span><span class="co">#&gt; 4 -2.29  0.595 -0.0910     | 4 setosa </span></span>
-<span><span class="co">#&gt; 5 -2.38 -0.645 -0.0157     | 5 setosa </span></span>
-<span><span class="co">#&gt; # ℹ 145 more rows     | # ℹ 145 more rows</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; # </span></span>
-<span><span class="co">#&gt; # Columns (standard): [ 4 x 4 | 3 ]</span></span>
-<span><span class="co">#&gt;      PC1     PC2    PC3 ... |   name         center scale</span></span>
-<span><span class="co">#&gt;                             |   &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1  0.521 -0.377   0.720     | 1 Sepal.Length   5.84 0.828</span></span>
-<span><span class="co">#&gt; 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width    3.06 0.436</span></span>
-<span><span class="co">#&gt; 3  0.580 -0.0245 -0.142     | 3 Petal.Length   3.76 1.77 </span></span>
-<span><span class="co">#&gt; 4  0.565 -0.0669 -0.634     | 4 Petal.Width    1.20 0.762</span></span></code></pre></div>
+<span><span class="co">#&gt; # Rows (principal, 100%): [ 150 × 4 | 2 ]</span></span>
+<span><span class="co">#&gt;      PC1     PC2     PC3     PC4 | .element Species</span></span>
+<span><span class="co">#&gt;  [434.9] [136.2] [21.87] [3.087] | &lt;chr&gt;    &lt;fct&gt;  </span></span>
+<span><span class="co">#&gt; 1 -2.26  -0.478   0.127   0.0241 | active   setosa </span></span>
+<span><span class="co">#&gt; 2 -2.07   0.672   0.234   0.103  | active   setosa </span></span>
+<span><span class="co">#&gt; 3 -2.36   0.341  -0.0441  0.0283 | active   setosa </span></span>
+<span><span class="co">#&gt; 4 -2.29   0.595  -0.0910 -0.0657 | active   setosa </span></span>
+<span><span class="co">#&gt; 5 -2.38  -0.645  -0.0157 -0.0358 | active   setosa </span></span>
+<span><span class="co">#&gt;                ⋮                          ⋮        </span></span>
+<span><span class="co">#&gt; # Columns (standard, 0%): [ 4 × 4 | 4 ]</span></span>
+<span><span class="co">#&gt;      PC1     PC2     PC3     PC4 | name       center scale</span></span>
+<span><span class="co">#&gt;      [1]     [1]     [1]     [1] | &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1  0.521 -0.377   0.720   0.261  | Sepal.Len…   5.84 0.828</span></span>
+<span><span class="co">#&gt; 2 -0.269 -0.923  -0.244  -0.124  | Sepal.Wid…   3.06 0.436</span></span>
+<span><span class="co">#&gt; 3  0.580 -0.0245 -0.142  -0.801  | Petal.Len…   3.76 1.77 </span></span>
+<span><span class="co">#&gt; 4  0.565 -0.0669 -0.634   0.524  | Petal.Wid…   1.20 0.762</span></span>
+<span><span class="co">#&gt; # ℹ 1 more variable:</span></span>
+<span><span class="co">#&gt; #   .element &lt;chr&gt;</span></span></code></pre></div>
 <p>Additional annotations can be added using several row- and column-specific <a href="https://github.com/tidyverse/dplyr" class="external-link"><strong>dplyr</strong></a>-style verbs:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">iris_meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
@@ -163,27 +162,28 @@
 <span>  Cytotype <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"diploid"</span>, <span class="st">"hexaploid"</span>, <span class="st">"tetraploid"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="op">(</span><span class="va">iris_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/dplyr-verbs.html">left_join_rows</a></span><span class="op">(</span><span class="va">iris_pca</span>, <span class="va">iris_meta</span>, by <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tbl_ord of class 'prcomp': (150 x 4) x (4 x 4)'</span></span>
+<span><span class="co">#&gt; # A tbl_ord of class 'prcomp': (150 × 4) · (4 × 4)´</span></span>
 <span><span class="co">#&gt; # 4 coordinates: PC1, PC2, ..., PC4</span></span>
-<span><span class="co">#&gt; # </span></span>
-<span><span class="co">#&gt; # Rows (principal): [ 150 x 4 | 3 ]</span></span>
-<span><span class="co">#&gt;     PC1    PC2     PC3 ... |   Species Colony Cytotype</span></span>
-<span><span class="co">#&gt;                            |   &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   </span></span>
-<span><span class="co">#&gt; 1 -2.26 -0.478  0.127      | 1 setosa       1 diploid </span></span>
-<span><span class="co">#&gt; 2 -2.07  0.672  0.234      | 2 setosa       1 diploid </span></span>
-<span><span class="co">#&gt; 3 -2.36  0.341 -0.0441 ... | 3 setosa       1 diploid </span></span>
-<span><span class="co">#&gt; 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid </span></span>
-<span><span class="co">#&gt; 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid </span></span>
-<span><span class="co">#&gt; # ℹ 145 more rows     | # ℹ 145 more rows</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; # </span></span>
-<span><span class="co">#&gt; # Columns (standard): [ 4 x 4 | 3 ]</span></span>
-<span><span class="co">#&gt;      PC1     PC2    PC3 ... |   name         center scale</span></span>
-<span><span class="co">#&gt;                             |   &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1  0.521 -0.377   0.720     | 1 Sepal.Length   5.84 0.828</span></span>
-<span><span class="co">#&gt; 2 -0.269 -0.923  -0.244 ... | 2 Sepal.Width    3.06 0.436</span></span>
-<span><span class="co">#&gt; 3  0.580 -0.0245 -0.142     | 3 Petal.Length   3.76 1.77 </span></span>
-<span><span class="co">#&gt; 4  0.565 -0.0669 -0.634     | 4 Petal.Width    1.20 0.762</span></span></code></pre></div>
+<span><span class="co">#&gt; # Rows (principal, 100%): [ 150 × 4 | 4 ]</span></span>
+<span><span class="co">#&gt;      PC1     PC2     PC3     PC4 | .element Species Colony</span></span>
+<span><span class="co">#&gt;  [434.9] [136.2] [21.87] [3.087] | &lt;chr&gt;    &lt;chr&gt;    &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 -2.26  -0.478   0.127   0.0241 | active   setosa       1</span></span>
+<span><span class="co">#&gt; 2 -2.07   0.672   0.234   0.103  | active   setosa       1</span></span>
+<span><span class="co">#&gt; 3 -2.36   0.341  -0.0441  0.0283 | active   setosa       1</span></span>
+<span><span class="co">#&gt; 4 -2.29   0.595  -0.0910 -0.0657 | active   setosa       1</span></span>
+<span><span class="co">#&gt; 5 -2.38  -0.645  -0.0157 -0.0358 | active   setosa       1</span></span>
+<span><span class="co">#&gt;                ⋮                              ⋮           </span></span>
+<span><span class="co">#&gt; # ℹ 1 more variable:</span></span>
+<span><span class="co">#&gt; #   Cytotype &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; # Columns (standard, 0%): [ 4 × 4 | 4 ]</span></span>
+<span><span class="co">#&gt;      PC1     PC2     PC3     PC4 | name       center scale</span></span>
+<span><span class="co">#&gt;      [1]     [1]     [1]     [1] | &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1  0.521 -0.377   0.720   0.261  | Sepal.Len…   5.84 0.828</span></span>
+<span><span class="co">#&gt; 2 -0.269 -0.923  -0.244  -0.124  | Sepal.Wid…   3.06 0.436</span></span>
+<span><span class="co">#&gt; 3  0.580 -0.0245 -0.142  -0.801  | Petal.Len…   3.76 1.77 </span></span>
+<span><span class="co">#&gt; 4  0.565 -0.0669 -0.634   0.524  | Petal.Wid…   1.20 0.762</span></span>
+<span><span class="co">#&gt; # ℹ 1 more variable:</span></span>
+<span><span class="co">#&gt; #   .element &lt;chr&gt;</span></span></code></pre></div>
 <p>Following the <a href="https://github.com/tidymodels/broom" class="external-link"><strong>broom</strong></a> package, the <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> method produces a tibble describing the model components, in this case the principal coordinates, which is suitable for scree plotting:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span> <span class="op">%T&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -233,7 +233,7 @@
 <div class="section level3">
 <h3 id="more-methods">more methods<a class="anchor" aria-label="anchor" href="#more-methods"></a>
 </h3>
-<p>The auxiliary package <a href="https://github.com/corybrunson/ordr.extra" class="external-link"><strong>ordr.extra</strong></a> provides recovery methods for several additional ordination models—and has room for several more!</p>
+<p>To keep <strong>ordr</strong> from growing out of control, recovery methods only for S3 classes produced by high-priority packages are included.<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;&lt;code&gt;installed.packages(priority = "high")&lt;/code&gt;&lt;/p&gt;'><sup>10</sup></a> The auxiliary package <a href="https://github.com/corybrunson/ordr.extra" class="external-link"><strong>ordr.extra</strong></a> provides methods for several additional ordination models—and has room for several more!</p>
 </div>
 </div>
 <div class="section level2">
@@ -320,7 +320,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

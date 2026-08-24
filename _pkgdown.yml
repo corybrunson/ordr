@@ -34,6 +34,7 @@ reference:
   - '`supplementation`'
   - '`tbl_ord`'
   - 'format.tbl_ord'
+  - 'goodness-of-fit'
   - 'plot.tbl_ord'
   - '`dplyr-verbs`'
   - 'ordinate'

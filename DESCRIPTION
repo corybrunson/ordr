@@ -1,6 +1,6 @@
 Package: ordr
 Title: A 'Tidyverse' Extension for Ordinations and Biplots
-Version: 0.2.0.0001
+Version: 0.2.0.0002
 Authors@R: c(
   person("Jason Cory", "Brunson", email = "cornelioid@gmail.com",
     role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3126-9494")),
@@ -33,6 +33,8 @@ Depends:
 Imports:
     rlang,
     cli,
+    crayon,
+    pillar,
     MASS,
     stringr,
     tidyselect,
@@ -60,7 +62,7 @@ LazyData: true
 URL: https://github.com/corybrunson/ordr, https://corybrunson.github.io/ordr/
 BugReports: https://github.com/corybrunson/ordr/issues
 RoxygenNote: 7.3.3
-Roxygen: list(markdown = TRUE)
+Config/testthat/edition: 3
 Collate:
     'aaa-.r'
     'biplot-key.r'

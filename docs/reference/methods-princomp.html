@@ -5,7 +5,7 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Functionality for principal components analysis ('princomp') objects — methods-princomp"><meta name="description" content='These methods extract data from, and attribute new data to,
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Functionality for principal components analysis ('princomp') objects — methods-princomp"><meta name="description" content='These methods extract data from, and attribute new data to,
 objects of class "princomp" as returned by stats::princomp().'><meta property="og:description" content='These methods extract data from, and attribute new data to,
 objects of class "princomp" as returned by stats::princomp().'></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -15,7 +15,7 @@ objects of class "princomp" as returned by stats::princomp().'></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">ordr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.0002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -148,27 +148,24 @@ relies on an eigenvalue decomposition (EVD) of the covariance matrix
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/stats/princomp.html" class="external-link">princomp</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">iris_pca</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'princomp': (150 x 4) x (4 x 4)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 4 coordinates: Comp.1, Comp.2, ..., Comp.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 150 x 4 | 0 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Comp.1 Comp.2  Comp.3 ... | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  -<span style="color: #BB0000;">2.68</span>  0.319  0.027<span style="text-decoration: underline;">9</span>     | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  -<span style="color: #BB0000;">2.71</span> -<span style="color: #BB0000;">0.177</span>  0.210      | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  -<span style="color: #BB0000;">2.89</span> -<span style="color: #BB0000;">0.145</span> -<span style="color: #BB0000;">0.017</span><span style="color: #BB0000; text-decoration: underline;">9</span> ... | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  -<span style="color: #BB0000;">2.75</span> -<span style="color: #BB0000;">0.318</span> -<span style="color: #BB0000;">0.031</span><span style="color: #BB0000; text-decoration: underline;">6</span>     | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  -<span style="color: #BB0000;">2.73</span>  0.327 -<span style="color: #BB0000;">0.090</span><span style="color: #BB0000; text-decoration: underline;">1</span>     | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 145 more rows</span>     | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 4 | 0 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1  Comp.2  Comp.3 ... | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.361   0.657   0.582      | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.084</span><span style="color: #BB0000; text-decoration: underline;">5</span>  0.730  -<span style="color: #BB0000;">0.598</span>  ... | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  0.857  -<span style="color: #BB0000;">0.173</span>  -<span style="color: #BB0000;">0.076</span><span style="color: #BB0000; text-decoration: underline;">2</span>     | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.358  -<span style="color: #BB0000;">0.075</span><span style="color: #BB0000; text-decoration: underline;">5</span> -<span style="color: #BB0000;">0.546</span>      | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tbl_ord of class 'princomp': (150 × 4) · (4 × 4)´</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># 4 coordinates: Comp.1, Comp.2, ..., Comp.4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (principal, 100%): [ 150 × 4 | 0 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1  Comp.2  Comp.3   Comp.4<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">    [630] [36.16] [11.65]  [3.551]</span><span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span> -2.68    0.319   0.0279  0.00226<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span> -2.71   -0.177   0.210   0.0990 <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span> -2.89   -0.145  -0.0179  0.0200 <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span> -2.75   -0.318  -0.0316 -0.0756 <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5</span> -2.73    0.327  -0.0901 -0.0613 <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 <span style="color: #949494;">⋮</span>                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 4 × 4 | 0 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1  Comp.2  Comp.3   Comp.4<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">      [1]     [1]     [1]      [1]</span><span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span>  0.361   0.657   0.582   0.315  <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span> -0.0845  0.730  -0.598  -0.320  <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span>  0.857  -0.173  -0.0762 -0.480  <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span>  0.358  -0.0755 -0.546   0.754  <span style="color: #949494;"> | </span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># recover observation principal coordinates and measurement standard coordinates</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="recoverers.html">get_rows</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -188,27 +185,26 @@ relies on an eigenvalue decomposition (EVD) of the covariance matrix
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># augment measurement coordinates with names and scaling parameters</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">iris_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="va">iris_pca</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'princomp': (150 x 4) x (4 x 4)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 4 coordinates: Comp.1, Comp.2, ..., Comp.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (principal): [ 150 x 4 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Comp.1 Comp.2  Comp.3 ... |   .element</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  -<span style="color: #BB0000;">2.68</span>  0.319  0.027<span style="text-decoration: underline;">9</span>     | <span style="color: #BCBCBC;">1</span> score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  -<span style="color: #BB0000;">2.71</span> -<span style="color: #BB0000;">0.177</span>  0.210      | <span style="color: #BCBCBC;">2</span> score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  -<span style="color: #BB0000;">2.89</span> -<span style="color: #BB0000;">0.145</span> -<span style="color: #BB0000;">0.017</span><span style="color: #BB0000; text-decoration: underline;">9</span> ... | <span style="color: #BCBCBC;">3</span> score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  -<span style="color: #BB0000;">2.75</span> -<span style="color: #BB0000;">0.318</span> -<span style="color: #BB0000;">0.031</span><span style="color: #BB0000; text-decoration: underline;">6</span>     | <span style="color: #BCBCBC;">4</span> score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  -<span style="color: #BB0000;">2.73</span>  0.327 -<span style="color: #BB0000;">0.090</span><span style="color: #BB0000; text-decoration: underline;">1</span>     | <span style="color: #BCBCBC;">5</span> score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 145 more rows</span>     | <span style="color: #949494;"># ℹ 145 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (standard): [ 4 x 4 | 4 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1  Comp.2  Comp.3 ... |   name         center scale .element</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               |   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  0.361   0.657   0.582      | <span style="color: #BCBCBC;">1</span> Sepal.Length   5.84     1 active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> -<span style="color: #BB0000;">0.084</span><span style="color: #BB0000; text-decoration: underline;">5</span>  0.730  -<span style="color: #BB0000;">0.598</span>  ... | <span style="color: #BCBCBC;">2</span> Sepal.Width    3.06     1 active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  0.857  -<span style="color: #BB0000;">0.173</span>  -<span style="color: #BB0000;">0.076</span><span style="color: #BB0000; text-decoration: underline;">2</span>     | <span style="color: #BCBCBC;">3</span> Petal.Length   3.76     1 active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  0.358  -<span style="color: #BB0000;">0.075</span><span style="color: #BB0000; text-decoration: underline;">5</span> -<span style="color: #BB0000;">0.546</span>      | <span style="color: #BCBCBC;">4</span> Petal.Width    1.20     1 active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tbl_ord of class 'princomp': (150 × 4) · (4 × 4)´</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># 4 coordinates: Comp.1, Comp.2, ..., Comp.4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (principal, 100%): [ 150 × 4 | 1 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1  Comp.2  Comp.3   Comp.4<span style="color: #949494;"> | </span>.element</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">    [630] [36.16] [11.65]  [3.551]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span> -2.68    0.319   0.0279  0.00226<span style="color: #949494;"> | </span>score   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span> -2.71   -0.177   0.210   0.0990 <span style="color: #949494;"> | </span>score   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span> -2.89   -0.145  -0.0179  0.0200 <span style="color: #949494;"> | </span>score   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span> -2.75   -0.318  -0.0316 -0.0756 <span style="color: #949494;"> | </span>score   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5</span> -2.73    0.327  -0.0901 -0.0613 <span style="color: #949494;"> | </span>score   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 <span style="color: #949494;">⋮</span>                       <span style="color: #949494;">⋮</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 4 × 4 | 4 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1  Comp.2  Comp.3   Comp.4<span style="color: #949494;"> | </span>name       center scale</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">      [1]     [1]     [1]      [1]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span>  0.361   0.657   0.582   0.315  <span style="color: #949494;"> | </span>Sepal.Len…   5.84     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span> -0.0845  0.730  -0.598  -0.320  <span style="color: #949494;"> | </span>Sepal.Wid…   3.06     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span>  0.857  -0.173  -0.0762 -0.480  <span style="color: #949494;"> | </span>Petal.Len…   3.76     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span>  0.358  -0.0755 -0.546   0.754  <span style="color: #949494;"> | </span>Petal.Wid…   1.20     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   .element &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -220,7 +216,7 @@ relies on an eigenvalue decomposition (EVD) of the covariance matrix
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

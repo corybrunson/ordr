@@ -5,7 +5,7 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Functionality for classical multidimensional scaling objects — methods-cmds"><meta name="description" content='These methods extract data from, and attribute new data to,
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Functionality for classical multidimensional scaling objects — methods-cmds"><meta name="description" content='These methods extract data from, and attribute new data to,
 objects of class "cmds_ord". This is a class introduced in this package
 to identify objects returned by cmdscale_ord(), which wraps
 stats::cmdscale().'><meta property="og:description" content='These methods extract data from, and attribute new data to,
@@ -19,7 +19,7 @@ stats::cmdscale().'></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">ordr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.0002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -152,95 +152,61 @@ the model components.</p>
 <span class="r-in"><span>  <span class="fu"><a href="wrap-ord.html">cmdscale_ord</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="tbl_ord.html">as_tbl_ord</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">usa_mds</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'cmds_ord': (10 x 2) x (10 x 2)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 2 coordinates: PCo1 and PCo2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (symmetric): [ 10 x 2 | 0 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      PCo1   PCo2 | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  -<span style="color: #BB0000;">719.</span>  143.  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  -<span style="color: #BB0000;">382.</span> -<span style="color: #BB0000;">341.</span>  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>   482.  -<span style="color: #BB0000;">25.3</span> | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  -<span style="color: #BB0000;">161.</span>  573.  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">1</span>204.  390.  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> -<span style="color: #BB0000; text-decoration: underline;">1</span><span style="color: #BB0000;">134.</span>  582.  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> -<span style="color: #BB0000; text-decoration: underline;">1</span><span style="color: #BB0000;">072.</span> -<span style="color: #BB0000;">519.</span>  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">1</span>421.  113.  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">1</span>342. -<span style="color: #BB0000;">580.</span>  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  -<span style="color: #BB0000;">980.</span> -<span style="color: #BB0000;">335.</span>  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (symmetric): [ 10 x 2 | 0 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      PCo1   PCo2 | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  -<span style="color: #BB0000;">719.</span>  143.  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  -<span style="color: #BB0000;">382.</span> -<span style="color: #BB0000;">341.</span>  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>   482.  -<span style="color: #BB0000;">25.3</span> | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  -<span style="color: #BB0000;">161.</span>  573.  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">1</span>204.  390.  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> -<span style="color: #BB0000; text-decoration: underline;">1</span><span style="color: #BB0000;">134.</span>  582.  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> -<span style="color: #BB0000; text-decoration: underline;">1</span><span style="color: #BB0000;">072.</span> -<span style="color: #BB0000;">519.</span>  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">1</span>421.  113.  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">1</span>342. -<span style="color: #BB0000;">580.</span>  | </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  -<span style="color: #BB0000;">980.</span> -<span style="color: #BB0000;">335.</span>  | </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tbl_ord of class 'cmds_ord': (10 × 2) · (0 × 2)´</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># 2 coordinates: PCo1 and PCo2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (principal, 100%): [ 10 × 2 | 0 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      PCo1   PCo2<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">[9.2e+13][3e+12]</span><span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span>  -719.  143. <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span>  -382. -341. <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span>   482.  -25.3<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span>  -161.  573. <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span>  1204.  390. <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 6</span> -1134.  582. <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 7</span> -1072. -519. <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 8</span>  1421.  113. <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 9</span>  1342. -580. <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">10</span>  -980. -335. <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 0 × 2 | 0 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      PCo1   PCo2<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">    &lt;dbl&gt;  &lt;dbl&gt;</span><span style="color: #949494;"> | </span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># recover (equivalent) matrices of row and column artificial coordinates</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="recoverers.html">get_rows</a></span><span class="op">(</span><span class="va">usa_mds</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             PCo1       PCo2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]  -718.7594  142.99427</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]  -382.0558 -340.83962</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]   481.6023  -25.28504</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]  -161.4663  572.76991</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]  1203.7380  390.10029</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] -1133.5271  581.90731</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] -1072.2357 -519.02423</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]  1420.6033  112.58920</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]  1341.7225 -579.73928</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]  -979.6220 -335.47281</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     PCo1       PCo2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Atlanta        -718.7594  142.99427</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chicago        -382.0558 -340.83962</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Denver          481.6023  -25.28504</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Houston        -161.4663  572.76991</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> LosAngeles     1203.7380  390.10029</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Miami         -1133.5271  581.90731</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NewYork       -1072.2357 -519.02423</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> SanFrancisco   1420.6033  112.58920</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Seattle        1341.7225 -579.73928</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Washington.DC  -979.6220 -335.47281</span>
 <span class="r-in"><span><span class="fu"><a href="recoverers.html">get_cols</a></span><span class="op">(</span><span class="va">usa_mds</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             PCo1       PCo2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]  -718.7594  142.99427</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]  -382.0558 -340.83962</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]   481.6023  -25.28504</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]  -161.4663  572.76991</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]  1203.7380  390.10029</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] -1133.5271  581.90731</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] -1072.2357 -519.02423</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]  1420.6033  112.58920</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]  1341.7225 -579.73928</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]  -979.6220 -335.47281</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      PCo1 PCo2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># augment ordination with point names</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">usa_mds</span> <span class="op">&lt;-</span> <span class="fu"><a href="augmentation.html">augment_ord</a></span><span class="op">(</span><span class="va">usa_mds</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # A tbl_ord of class 'cmds_ord': (10 x 2) x (10 x 2)'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # 2 coordinates: PCo1 and PCo2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Rows (symmetric): [ 10 x 2 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      PCo1   PCo2 |    name         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  |    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  -<span style="color: #BB0000;">719.</span>  143.  | <span style="color: #BCBCBC;"> 1</span> Atlanta      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  -<span style="color: #BB0000;">382.</span> -<span style="color: #BB0000;">341.</span>  | <span style="color: #BCBCBC;"> 2</span> Chicago      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>   482.  -<span style="color: #BB0000;">25.3</span> | <span style="color: #BCBCBC;"> 3</span> Denver       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  -<span style="color: #BB0000;">161.</span>  573.  | <span style="color: #BCBCBC;"> 4</span> Houston      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">1</span>204.  390.  | <span style="color: #BCBCBC;"> 5</span> LosAngeles   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> -<span style="color: #BB0000; text-decoration: underline;">1</span><span style="color: #BB0000;">134.</span>  582.  | <span style="color: #BCBCBC;"> 6</span> Miami        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> -<span style="color: #BB0000; text-decoration: underline;">1</span><span style="color: #BB0000;">072.</span> -<span style="color: #BB0000;">519.</span>  | <span style="color: #BCBCBC;"> 7</span> NewYork      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">1</span>421.  113.  | <span style="color: #BCBCBC;"> 8</span> SanFrancisco </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">1</span>342. -<span style="color: #BB0000;">580.</span>  | <span style="color: #BCBCBC;"> 9</span> Seattle      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  -<span style="color: #BB0000;">980.</span> -<span style="color: #BB0000;">335.</span>  | <span style="color: #BCBCBC;">10</span> Washington.DC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # Columns (symmetric): [ 10 x 2 | 1 ]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      PCo1   PCo2 |    name         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  |    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  -<span style="color: #BB0000;">719.</span>  143.  | <span style="color: #BCBCBC;"> 1</span> Atlanta      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  -<span style="color: #BB0000;">382.</span> -<span style="color: #BB0000;">341.</span>  | <span style="color: #BCBCBC;"> 2</span> Chicago      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>   482.  -<span style="color: #BB0000;">25.3</span> | <span style="color: #BCBCBC;"> 3</span> Denver       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  -<span style="color: #BB0000;">161.</span>  573.  | <span style="color: #BCBCBC;"> 4</span> Houston      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">1</span>204.  390.  | <span style="color: #BCBCBC;"> 5</span> LosAngeles   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> -<span style="color: #BB0000; text-decoration: underline;">1</span><span style="color: #BB0000;">134.</span>  582.  | <span style="color: #BCBCBC;"> 6</span> Miami        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> -<span style="color: #BB0000; text-decoration: underline;">1</span><span style="color: #BB0000;">072.</span> -<span style="color: #BB0000;">519.</span>  | <span style="color: #BCBCBC;"> 7</span> NewYork      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">1</span>421.  113.  | <span style="color: #BCBCBC;"> 8</span> SanFrancisco </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">1</span>342. -<span style="color: #BB0000;">580.</span>  | <span style="color: #BCBCBC;"> 9</span> Seattle      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  -<span style="color: #BB0000;">980.</span> -<span style="color: #BB0000;">335.</span>  | <span style="color: #BCBCBC;">10</span> Washington.DC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tbl_ord of class 'cmds_ord': (10 × 2) · (0 × 2)´</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># 2 coordinates: PCo1 and PCo2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (principal, 100%): [ 10 × 2 | 2 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      PCo1   PCo2<span style="color: #949494;"> | </span>name          .element</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">[9.2e+13][3e+12]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;         &lt;chr&gt;   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span>  -719.  143. <span style="color: #949494;"> | </span>Atlanta       active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span>  -382. -341. <span style="color: #949494;"> | </span>Chicago       active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span>   482.  -25.3<span style="color: #949494;"> | </span>Denver        active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span>  -161.  573. <span style="color: #949494;"> | </span>Houston       active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span>  1204.  390. <span style="color: #949494;"> | </span>LosAngeles    active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 6</span> -1134.  582. <span style="color: #949494;"> | </span>Miami         active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 7</span> -1072. -519. <span style="color: #949494;"> | </span>NewYork       active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 8</span>  1421.  113. <span style="color: #949494;"> | </span>SanFrancisco  active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 9</span>  1342. -580. <span style="color: #949494;"> | </span>Seattle       active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">10</span>  -980. -335. <span style="color: #949494;"> | </span>Washington.DC active  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 0 × 2 | 1 ]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      PCo1   PCo2<span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">    &lt;dbl&gt;  &lt;dbl&gt;</span><span style="color: #949494;"> | </span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># reorient biplot to conventional compass</span></span></span>
 <span class="r-in"><span><span class="va">usa_mds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -260,7 +226,7 @@ the model components.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

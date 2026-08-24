@@ -36,13 +36,9 @@ means use the \code{width} \link[pillar:pillar_options]{option}.}
 \code{\link[tibble:formatting]{tibble::format.tbl()}}. If length 1, will apply to both matrix factors.
 To pass \code{NULL} to only one factor, be sure to pass as a list, e.g. \code{n = list(6, NULL)}.}
 
-\item{max_extra_cols}{Number of extra columns to print abbreviated information for,
-if the width is too small for the entire tibble. If \code{NULL},
-the \code{max_extra_cols} \link[pillar:pillar_options]{option} is used.
-The previously defined \code{n_extra} argument is soft-deprecated.}
-
-\item{max_footer_lines}{Maximum number of footer lines. If \code{NULL},
-the \code{max_footer_lines} \link[pillar:pillar_options]{option} is used.}
+\item{max_extra_cols, max_footer_lines}{As in
+\code{\link[tibble:formatting]{tibble::format.tbl}}, applied to each matrix
+factor separately.}
 }
 \value{
 The \code{format()} method returns a vector of strings that are more
@@ -55,18 +51,22 @@ These methods of \code{\link[base:format]{base::format()}} and \code{\link[base:
 original ordination classes.
 }
 \details{
-The \code{format} and \code{print} methods for class 'tbl_ord' are adapted from those
-for class '\link[tibble:tbl_df-class]{tbl_df}' and for class 'tbl_graph' from the
+The \code{\link[base:format]{base::format()}} and \code{\link[base:print]{base::print()}} methods for
+class 'tbl_ord' are adapted from those for class '\link[tibble:tbl_df-class]{tbl_df}'
+and for class 'tbl_graph' from the
 \strong{tidygraph} package.
 
-\strong{Note:} The \code{format()} function is tedius but cannot be easily modularized
-without invoking \link{recoverers}, \link{annotation}, and \link{augmentation} multiple
-times, thereby significantly reducing performance.
+\strong{NB:} The \code{format.tbl_ord()} method is tedious but cannot be easily
+modularized without invoking \link{recoverers}, \link{annotation}, and \link{augmentation}
+multiple times, thereby significantly reducing performance. It calls upon
+\strong{pillar} for \code{tbl_df} formatting then revises the results per
+\code{tbl_ord}.
 }
 \examples{
 iris_pca <- ordinate(iris[1:4], prcomp)
 
 # single value applies to both factors
+print(iris_pca, n = 2)
 print(iris_pca, n = 10)
 
 # double values apply to factors in order
@@ -76,8 +76,34 @@ print(iris_pca, n = c(6, 2))
 print(iris_pca, n = list(2, NULL))
 print(iris_pca, n = list(NULL, 2))
 
+# too narrow width for all coordinates
+print(iris_pca, width = 22)
+
 iris_lda <- ordinate(iris[1:4], lda_ord, grouping = iris$Species)
 
 # supplementary elements appear below active elements
 print(iris_lda)
+
+# too many annotations to print within console width
+print(iris_lda, width = 40)
+
+# annotations too wide to print are summarized in footers
+print(iris_pca, width = 30)
+
+# cap the number of lines of each factor's footer note
+print(iris_pca, width = 30, max_footer_lines = 2)
+
+haireye_ca <- ordinate(
+  as.data.frame(rowSums(HairEyeColor, dims = 2L)),
+  cols = everything(), model = MASS::corresp, nf = 3
+)
+
+# default conference: standard coordinates for both factors
+print(haireye_ca)
+
+# column-principal coordinates, very narrow width
+print(confer_inertia(haireye_ca, "cols"), width = 18)
+
+# symmetric coordinates
+print(confer_inertia(haireye_ca, "symmetric"), max_extra_cols = 1)
 }
