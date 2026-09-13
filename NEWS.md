@@ -1,5 +1,10 @@
 # next version
 
+## handling of eigenvalue-based classes
+
+The `"cmds_ord"` and `"factanal"` recovery methods have been updated to reflect the use of eigenvalue decomposition rather than singular value decomposition under their respective hoods: Only one set of elements are considered "active" (see #60).
+While the `"eigen"` methods are unchanged, the function `eigen_ord()` has been deprecated in favor of `eigen()`, which (under default parameter settings) returns an object of the `"eigen"` S3 class. (This was not the case when `eigen_ord()` was introduced.) While `eigen()` still discards the `"Labels"` attribute, `ordinate.dist()` has been enhanced to retrieve it when passing a `"dist"` object to a model, which should compensate in most settings. (While making these changes, duplicative definitions of `recover_aug_rows.eigen_ord()` and `recover_aug_cols.eigen_ord()` were corrected to `"eigen"` methods.)
+
 ## `format()` overhaul
 
 The `format()` method for `tbl_ord` objects has been rewritten to produce readouts more faithful to the style of those for `tbl_df`.
@@ -13,10 +18,9 @@ Coordinate sub-headers display the shares of explained inertia rather than (redu
 The number of annotation columns printed beside each matrix factor is determined from the available width.
 Footers are constrained by the `max_extra_cols` and `max_footer_lines` arguments.
 
-## handling of eigenvalue-based classes
+## supplementary element types
 
-The `"cmds_ord"` and `"factanal"` recovery methods have been updated to reflect the use of eigenvalue decomposition rather than singular value decomposition under their respective hoods: Only one set of elements are considered "active" (see #60).
-While the `"eigen"` methods are unchanged, the function `eigen_ord()` has been deprecated in favor of `eigen()`, which (under default parameter settings) returns an object of the `"eigen"` S3 class. (This was not the case when `eigen_ord()` was introduced.) While `eigen()` still discards the `"Labels"` attribute, `ordinate.dist()` has been enhanced to retrieve it when passing a `"dist"` object to a model, which should compensate in most settings. (While making these changes, duplicative definitions of `recover_aug_rows.eigen_ord()` and `recover_aug_cols.eigen_ord()` were corrected to `"eigen"` methods.)
+The `elements` parameter now accepts `"pinv_weight"` alongside `"active"`, `"score"`, and `"structure"`, referring to elements of the pseudoinverse of the row and column weight matrices.
 
 ## goodness-of-fit measures
 
@@ -27,8 +31,11 @@ Functions are provided to calculate three goodness-of-fit statistics.
 `get_rows()` and `get_cols()` previously conflated all supplementary elements.
 They now return only those elements specified.
 
-`geom_origin()` and `geom_unit_circle()` now work even when there is no `data`
-to inherit.
+`stat_rows()` and `stat_cols()` now default to `NULL` instead of `data` so inherit `data` from the plot consistent with **ggplot2** (see #87).
+
+The `stat` argument to `stat_rows()` and `stat_cols()` (and hence the `geom_*()` shortcuts) now accepts ggprotos as well as character strings.
+
+`geom_origin()` and `geom_unit_circle()` now work even when there is no `data` to inherit.
 
 # ordr 0.2.0
 
