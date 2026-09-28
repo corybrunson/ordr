@@ -14,27 +14,31 @@
 #'   mapped in the original call are used only to set the coordinate system.
 #'
 #'   The `scales` and `space` parameters control the scales and sizes of the
-#'   panels, as in [facet_grid()]. With `scales = "free"`, the x and y scales
-#'   of each panel are determined by its own coordinates, while with
-#'   `scales = "fixed"`, all panels share the same x and y scales. With
-#'   `space = "free"`, each panel is sized so that the units of its x and y
-#'   coordinates are rendered at the same physical length, preserving the
-#'   geometry of the ordination; with `space = "fixed"`, all panels are the
-#'   same size.
+#'   panels, as in [facet_grid()]. With `scales = "free"`, the x and y scales of
+#'   each panel are determined by its own coordinates, while with `scales =
+#'   "fixed"`, all panels share the same x and y scales. With `space = "free"`,
+#'   each panel is sized so that the units of its x and y coordinates are
+#'   rendered at the same physical length; with `space = "fixed"`, all panels
+#'   are the same size.
+#'   
+#'   Setting `scales = "fixed"` obtains the same plot regardless of `space`.
+#'   Pairing `scales = "free"` with `space = "fixed"` warps aspect ratios away
+#'   from 1 and is discouraged though not warned against.
 #'
 #' @param num_coord The number of ordination coordinates to include. A positive
 #'   integer; by default, all recovered coordinates are included.
 #' @param scales A character scalar indicating whether all panels share the same
 #'   x and y coordinate scales (`"fixed"`) or whether the x and y scales are
-#'   free to differ between panels (`"free"`). The default is `"fixed"`. Unlike
-#'   [facet_grid()], no x- or y-specific values are available.
+#'   free to differ between panels (`"free"`). By default, `NULL`, which takes
+#'   the value of `space`. Unlike [facet_grid()], no x- or y-specific values
+#'   are available.
 #' @param space A character scalar indicating whether all panels are the same
 #'   size (`"fixed"`) or whether each panel is sized proportionally to the
 #'   ranges of its coordinate scales (`"free"`). The default is `"fixed"`.
 #'   Unlike [facet_grid()], no x- or y-specific values are available.
 #' @example inst/examples/ex-facet-ord-iris.r
 #' @export
-facet_ord <- function(num_coord = NULL, scales = "fixed", space = "fixed") {
+facet_ord <- function(num_coord = NULL, scales = NULL, space = "fixed") {
   if (! is.null(num_coord)) {
     stopifnot(
       is.numeric(num_coord),
@@ -44,8 +48,13 @@ facet_ord <- function(num_coord = NULL, scales = "fixed", space = "fixed") {
     )
     num_coord <- as.integer(num_coord)
   }
-  scales <- match.arg(scales, c("free", "fixed"))
   space <- match.arg(space, c("free", "fixed"))
+  # `scales` defaults to the value of `space`
+  if (is.null(scales)) {
+    scales <- space
+  } else {
+    scales <- match.arg(scales, c("free", "fixed"))
+  }
 
   ggproto(
     NULL, FacetOrd,

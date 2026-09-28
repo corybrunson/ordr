@@ -4,7 +4,7 @@
 \alias{facet_ord}
 \title{Facet a biplot into all pairs of ordination coordinates}
 \usage{
-facet_ord(num_coord = NULL, scales = "fixed", space = "fixed")
+facet_ord(num_coord = NULL, scales = NULL, space = "fixed")
 }
 \arguments{
 \item{num_coord}{The number of ordination coordinates to include. A positive
@@ -12,7 +12,8 @@ integer; by default, all recovered coordinates are included.}
 
 \item{scales}{A character scalar indicating whether all panels share the same
 x and y coordinate scales (\code{"fixed"}) or whether the x and y scales are
-free to differ between panels (\code{"free"}). The default is \code{"fixed"}. Unlike
+free to differ between panels (\code{"free"}). By default, \code{NULL}, which takes
+the value of \code{space}. Unlike
 \code{\link[=facet_grid]{facet_grid()}}, no x- or y-specific values are available.}
 
 \item{space}{A character scalar indicating whether all panels are the same
@@ -36,13 +37,16 @@ mappings with internal panel-specific columns, so that the coordinates
 mapped in the original call are used only to set the coordinate system.
 
 The \code{scales} and \code{space} parameters control the scales and sizes of the
-panels, as in \code{\link[=facet_grid]{facet_grid()}}. With \code{scales = "free"}, the x and y scales
-of each panel are determined by its own coordinates, while with
-\code{scales = "fixed"}, all panels share the same x and y scales. With
-\code{space = "free"}, each panel is sized so that the units of its x and y
-coordinates are rendered at the same physical length, preserving the
-geometry of the ordination; with \code{space = "fixed"}, all panels are the
-same size.
+panels, as in \code{\link[=facet_grid]{facet_grid()}}. With \code{scales = "free"}, the x and y scales of
+each panel are determined by its own coordinates, while with \code{scales =
+"fixed"}, all panels share the same x and y scales. With \code{space = "free"},
+each panel is sized so that the units of its x and y coordinates are
+rendered at the same physical length; with \code{space = "fixed"}, all panels
+are the same size.
+
+Setting \code{scales = "fixed"} obtains the same plot regardless of \code{space}.
+Pairing \code{scales = "free"} with \code{space = "fixed"} warps aspect ratios away
+from 1 and is discouraged though not warned against.
 }
 \examples{
 # scaled PCA of Anderson iris measurements
@@ -55,7 +59,6 @@ iris[, -5] \%>\%
   print() -> iris_pca
 
 # facet the first three principal components
-# all four combinations of scales and space, from fixed to free
 iris_pca \%>\%
   ggbiplot() +
   facet_ord(num_coord = 3) +
@@ -63,10 +66,21 @@ iris_pca \%>\%
   geom_cols_vector(aes(label = name), color = "#444444") +
   ggtitle(
     "Biplot of Anderson iris measurements",
-    "Faceted pairs with fixed scales and fixed space"
+    "Faceted pairs with fixed scales and space"
   )
 
-# free scales: each panel's scales are determined by its coordinates
+# free space (by default frees the scales)
+iris_pca \%>\%
+  ggbiplot() +
+  facet_ord(num_coord = 3, space = "free") +
+  geom_rows_point(aes(color = species)) +
+  geom_cols_vector(aes(label = name), color = "#444444") +
+  ggtitle(
+    "Biplot of Anderson iris measurements",
+    "Faceted pairs with free scales and space"
+  )
+
+# free scales, fixed space: panel scales determined by coordinates (discouraged)
 iris_pca \%>\%
   ggbiplot() +
   facet_ord(num_coord = 3, scales = "free") +
@@ -75,27 +89,5 @@ iris_pca \%>\%
   ggtitle(
     "Biplot of Anderson iris measurements",
     "Faceted pairs with free scales and fixed space"
-  )
-
-# free space: each panel is sized proportionally to its scales
-iris_pca \%>\%
-  ggbiplot() +
-  facet_ord(num_coord = 3, space = "free") +
-  geom_rows_point(aes(color = species)) +
-  geom_cols_vector(aes(label = name), color = "#444444") +
-  ggtitle(
-    "Biplot of Anderson iris measurements",
-    "Faceted pairs with fixed scales and free space"
-  )
-
-# free scales and free space
-iris_pca \%>\%
-  ggbiplot() +
-  facet_ord(num_coord = 3, scales = "free", space = "free") +
-  geom_rows_point(aes(color = species)) +
-  geom_cols_vector(aes(label = name), color = "#444444") +
-  ggtitle(
-    "Biplot of Anderson iris measurements",
-    "Faceted pairs with free scales and free space"
   )
 }

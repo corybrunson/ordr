@@ -38,6 +38,24 @@ test_that("`facet_ord()` supports free scales", {
   expect_identical(as.integer(layout$SCALE_Y), rep(seq_len(k), each = k))
 })
 
+test_that("`facet_ord()` defaults `scales` to the value of `space`", {
+  k <- length(attr(fortify(pca, .matrix = "both"), "coordinates"))
+  # the default `space = "fixed"` implies fixed scales
+  expect_false(facet_ord()$params$free$x)
+  expect_true(facet_ord(scales = "free")$params$free$x)
+  # `space = "free"` implies free scales
+  expect_true(facet_ord(space = "free")$params$free$x)
+  expect_true(facet_ord(space = "free")$params$free$y)
+  # an explicit `scales` still takes precedence
+  expect_false(facet_ord(scales = "fixed", space = "free")$params$free$x)
+  expect_true(facet_ord(scales = "free", space = "fixed")$params$free$x)
+  # the implied scales are used when the plot is built
+  layout <- ggplot_build(ggbiplot(pca) + facet_ord(space = "free"))$
+    layout$layout
+  expect_identical(as.integer(layout$SCALE_X), rep(seq_len(k), times = k))
+  expect_identical(as.integer(layout$SCALE_Y), rep(seq_len(k), each = k))
+})
+
 test_that("`facet_ord()` restricts to the first coordinates", {
   p <- ggbiplot(pca) + facet_ord(num_coord = 2)
   layout <- ggplot_build(p)$layout$layout
