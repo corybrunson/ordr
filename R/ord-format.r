@@ -77,6 +77,10 @@ get_ord_layout <- function(x, width = NULL, n = NULL,
   width <- width %||% tbl_ord_opt("width") %||% getOption("width")
   dims <- get_factor(x, .matrix = "dims")
   n_dims <- vapply(dims, nrow, 0L)
+  n_active <- c(
+    rows = nrow(recover_rows(x)),
+    cols = nrow(recover_cols(x))
+  )
   coord <- get_coord(x)
   rk <- length(coord)
   dims_ann <- mapply(
@@ -106,6 +110,7 @@ get_ord_layout <- function(x, width = NULL, n = NULL,
     max_extra_cols = max_extra_cols,
     max_footer_lines = max_footer_lines,
     conference = conference,
+    n_active = n_active,
     n_supp = n_supp, prev_class = prev_class
   )
 }
@@ -416,6 +421,16 @@ ord_format_ann <- function(layout, coord_alloc) {
       data_lines <- sub("^\\s*[0-9]+\\s+", "", data_lines)
       # style types
       header[2L] <- style_type(header[2L])
+      # subtlize supplementary element entries
+      n_shown <- min(n_rows, layout$n_dims[[nm]])
+      n_supp_here <- max(0L, n_shown - layout$n_active[[nm]])
+      if (n_supp_here > 0L && length(data_lines) > 0L) {
+        ix <- seq.int(
+          length(data_lines) - min(n_supp_here, length(data_lines)) + 1L,
+          length(data_lines)
+        )
+        data_lines[ix] <- style_subtle(data_lines[ix])
+      }
       lines <- c(header, data_lines)
     } else {
       lines <- character()
@@ -503,8 +518,9 @@ ord_format_coord <- function(layout, coord_alloc) {
   }
   # style types line
   coord_lines[2L] <- style_type(coord_lines[2L])
-  # style row numbers in data lines (lines 3+) as grey
+  # subtlize row numbers in data lines (lines 3+) and supplementary entries
   if (length(coord_lines) > 2L) {
+    n_act <- layout$n_active
     data_idx <- seq(3L, length(coord_lines))
     for (i in data_idx) {
       m <- regexpr("^\\s*[0-9]+", coord_lines[i])
@@ -515,7 +531,15 @@ ord_format_coord <- function(layout, coord_alloc) {
           attr(m, "match.length") + 1L,
           nchar(coord_lines[i])
         )
-        coord_lines[i] <- paste0(style_subtle(num_str), rest)
+        if (i <= 2L + n_actual[1L]) {
+          is_supp <- i - 2L > n_act[["rows"]]
+        } else {
+          is_supp <- i - 2L - n_actual[1L] > n_act[["cols"]]
+        }
+        coord_lines[i] <- paste0(
+          style_subtle(num_str),
+          if (is_supp) style_subtle(rest) else rest
+        )
       }
     }
   }
