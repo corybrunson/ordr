@@ -38,19 +38,23 @@ test_that("`facet_ord()` supports free scales", {
   expect_identical(as.integer(layout$SCALE_Y), rep(seq_len(k), each = k))
 })
 
-test_that("`facet_ord()` defaults `scales` to the value of `space`", {
+test_that("`facet_ord()` couples `scales` and `space`", {
   k <- length(attr(fortify(pca, .matrix = "both"), "coordinates"))
-  # the default `space = "fixed"` implies fixed scales
+  # neither set: both default to "fixed"
   expect_false(facet_ord()$params$free$x)
+  expect_false(facet_ord()$params$space_free$x)
+  # either one set: the other takes its value
   expect_true(facet_ord(scales = "free")$params$free$x)
-  # `space = "free"` implies free scales
+  expect_true(facet_ord(scales = "free")$params$space_free$x)
   expect_true(facet_ord(space = "free")$params$free$x)
-  expect_true(facet_ord(space = "free")$params$free$y)
-  # an explicit `scales` still takes precedence
+  expect_true(facet_ord(space = "free")$params$space_free$x)
+  # both set: both values are retained
   expect_false(facet_ord(scales = "fixed", space = "free")$params$free$x)
+  expect_true(facet_ord(scales = "fixed", space = "free")$params$space_free$x)
   expect_true(facet_ord(scales = "free", space = "fixed")$params$free$x)
-  # the implied scales are used when the plot is built
-  layout <- ggplot_build(ggbiplot(pca) + facet_ord(space = "free"))$
+  expect_false(facet_ord(scales = "free", space = "fixed")$params$space_free$x)
+  # the coupled scales are used when the plot is built
+  layout <- ggplot_build(ggbiplot(pca) + facet_ord(scales = "free"))$
     layout$layout
   expect_identical(as.integer(layout$SCALE_X), rep(seq_len(k), times = k))
   expect_identical(as.integer(layout$SCALE_Y), rep(seq_len(k), each = k))

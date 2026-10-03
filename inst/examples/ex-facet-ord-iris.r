@@ -32,7 +32,7 @@ iris_pca %>%
 # free scales, fixed space: panel scales determined by coordinates (discouraged)
 iris_pca %>%
   ggbiplot() +
-  facet_ord(num_coord = 3, scales = "free") +
+  facet_ord(num_coord = 3, scales = "free", space = "fixed") +
   geom_rows_point(aes(color = species)) +
   geom_cols_vector(aes(label = name), color = "#444444") +
   ggtitle(

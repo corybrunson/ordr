@@ -21,24 +21,25 @@
 #'   rendered at the same physical length; with `space = "fixed"`, all panels
 #'   are the same size.
 #'   
-#'   Setting `scales = "fixed"` obtains the same plot regardless of `space`.
-#'   Pairing `scales = "free"` with `space = "fixed"` warps aspect ratios away
-#'   from 1 and is discouraged though not warned against.
+#'   Setting either parameter to a value also sets the other to the same value,
+#'   unless both are set; if neither is set, both default to `"fixed"`. Setting
+#'   `scales = "fixed"` obtains the same plot regardless of `space`. Pairing
+#'   `scales = "free"` with `space = "fixed"` warps aspect ratios away from 1
+#'   and is discouraged though not warned against.
 #'
 #' @param num_coord The number of ordination coordinates to include. A positive
 #'   integer; by default, all recovered coordinates are included.
 #' @param scales A character scalar indicating whether all panels share the same
 #'   x and y coordinate scales (`"fixed"`) or whether the x and y scales are
-#'   free to differ between panels (`"free"`). By default, `NULL`, which takes
-#'   the value of `space`. Unlike [facet_grid()], no x- or y-specific values
-#'   are available.
+#'   free to differ between panels (`"free"`). By default, `NULL`. Unlike
+#'   [facet_grid()], no x- or y-specific values are available.
 #' @param space A character scalar indicating whether all panels are the same
 #'   size (`"fixed"`) or whether each panel is sized proportionally to the
-#'   ranges of its coordinate scales (`"free"`). The default is `"fixed"`.
-#'   Unlike [facet_grid()], no x- or y-specific values are available.
+#'   ranges of its coordinate scales (`"free"`). By default, `NULL`. Unlike
+#'   [facet_grid()], no x- or y-specific values are available.
 #' @example inst/examples/ex-facet-ord-iris.r
 #' @export
-facet_ord <- function(num_coord = NULL, scales = NULL, space = "fixed") {
+facet_ord <- function(num_coord = NULL, scales = NULL, space = NULL) {
   if (! is.null(num_coord)) {
     stopifnot(
       is.numeric(num_coord),
@@ -48,12 +49,16 @@ facet_ord <- function(num_coord = NULL, scales = NULL, space = "fixed") {
     )
     num_coord <- as.integer(num_coord)
   }
-  space <- match.arg(space, c("free", "fixed"))
-  # `scales` defaults to the value of `space`
-  if (is.null(scales)) {
-    scales <- space
+  if (is.null(scales) && is.null(space)) {
+    # neither is set, so both default to "fixed"
+    scales <- space <- "fixed"
+  } else if (is.null(scales) || is.null(space)) {
+    # one is set, so the other takes its value
+    given <- if (is.null(scales)) space else scales
+    scales <- space <- match.arg(given, c("free", "fixed"))
   } else {
     scales <- match.arg(scales, c("free", "fixed"))
+    space <- match.arg(space, c("free", "fixed"))
   }
 
   ggproto(

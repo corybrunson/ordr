@@ -4,7 +4,7 @@
 \alias{facet_ord}
 \title{Facet a biplot into all pairs of ordination coordinates}
 \usage{
-facet_ord(num_coord = NULL, scales = NULL, space = "fixed")
+facet_ord(num_coord = NULL, scales = NULL, space = NULL)
 }
 \arguments{
 \item{num_coord}{The number of ordination coordinates to include. A positive
@@ -12,14 +12,13 @@ integer; by default, all recovered coordinates are included.}
 
 \item{scales}{A character scalar indicating whether all panels share the same
 x and y coordinate scales (\code{"fixed"}) or whether the x and y scales are
-free to differ between panels (\code{"free"}). By default, \code{NULL}, which takes
-the value of \code{space}. Unlike
+free to differ between panels (\code{"free"}). By default, \code{NULL}. Unlike
 \code{\link[=facet_grid]{facet_grid()}}, no x- or y-specific values are available.}
 
 \item{space}{A character scalar indicating whether all panels are the same
 size (\code{"fixed"}) or whether each panel is sized proportionally to the
-ranges of its coordinate scales (\code{"free"}). The default is \code{"fixed"}.
-Unlike \code{\link[=facet_grid]{facet_grid()}}, no x- or y-specific values are available.}
+ranges of its coordinate scales (\code{"free"}). By default, \code{NULL}. Unlike
+\code{\link[=facet_grid]{facet_grid()}}, no x- or y-specific values are available.}
 }
 \description{
 This layer faceting function draws a biplot of every ordered
@@ -44,9 +43,11 @@ each panel is sized so that the units of its x and y coordinates are
 rendered at the same physical length; with \code{space = "fixed"}, all panels
 are the same size.
 
-Setting \code{scales = "fixed"} obtains the same plot regardless of \code{space}.
-Pairing \code{scales = "free"} with \code{space = "fixed"} warps aspect ratios away
-from 1 and is discouraged though not warned against.
+Setting either parameter to a value also sets the other to the same value,
+unless both are set; if neither is set, both default to \code{"fixed"}. Setting
+\code{scales = "fixed"} obtains the same plot regardless of \code{space}. Pairing
+\code{scales = "free"} with \code{space = "fixed"} warps aspect ratios away from 1
+and is discouraged though not warned against.
 }
 \examples{
 # scaled PCA of Anderson iris measurements
@@ -83,7 +84,7 @@ iris_pca \%>\%
 # free scales, fixed space: panel scales determined by coordinates (discouraged)
 iris_pca \%>\%
   ggbiplot() +
-  facet_ord(num_coord = 3, scales = "free") +
+  facet_ord(num_coord = 3, scales = "free", space = "fixed") +
   geom_rows_point(aes(color = species)) +
   geom_cols_vector(aes(label = name), color = "#444444") +
   ggtitle(
