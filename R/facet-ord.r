@@ -38,6 +38,7 @@
 #'   ranges of its coordinate scales (`"free"`). By default, `NULL`. Unlike
 #'   [facet_grid()], no x- or y-specific values are available.
 #' @example inst/examples/ex-facet-ord-iris.r
+#' @example inst/examples/ex-facet-ord-haireye.r
 #' @export
 facet_ord <- function(num_coord = NULL, scales = NULL, space = NULL) {
   if (! is.null(num_coord)) {

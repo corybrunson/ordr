@@ -14,7 +14,7 @@ iris_pca %>%
   geom_rows_point(aes(color = species)) +
   geom_cols_vector(aes(label = name), color = "#444444") +
   ggtitle(
-    "Biplot of Anderson iris measurements",
+    "PCA biplot of Anderson iris measurements",
     "Faceted pairs with fixed scales and space"
   )
 
@@ -25,7 +25,7 @@ iris_pca %>%
   geom_rows_point(aes(color = species)) +
   geom_cols_vector(aes(label = name), color = "#444444") +
   ggtitle(
-    "Biplot of Anderson iris measurements",
+    "PCA biplot of Anderson iris measurements",
     "Faceted pairs with free scales and space"
   )
 
@@ -36,6 +36,6 @@ iris_pca %>%
   geom_rows_point(aes(color = species)) +
   geom_cols_vector(aes(label = name), color = "#444444") +
   ggtitle(
-    "Biplot of Anderson iris measurements",
+    "PCA biplot of Anderson iris measurements",
     "Faceted pairs with free scales and fixed space"
   )
