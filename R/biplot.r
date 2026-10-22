@@ -143,13 +143,19 @@ ggbiplot <- function(
         # ordination[setdiff(get_coord(ordination), xy_map)] <- NULL
         # rescale standard coordinates
         std_fac <- c("rows", "cols")[! as.logical(conference)]
-        std_ss <- apply(
-          ordination[ordination$.matrix == std_fac, ord_map],
-          1L,
-          function(x) sum(x^2)
+        # # FIXME
+        # std_ss <- apply(
+        #   ordination[ordination$.matrix == std_fac, ord_map],
+        #   1L,
+        #   function(x) sum(x^2)
+        # )
+        # ordination[ordination$.matrix == std_fac, ord_map] <-
+        #   ordination[ordination$.matrix == std_fac, ord_map] / std_ss
+        std_mat <- as.matrix(
+          ordination[ordination$.matrix == std_fac, xy_map, drop = FALSE]
         )
-        ordination[ordination$.matrix == std_fac, ord_map] <-
-          ordination[ordination$.matrix == std_fac, ord_map] / std_ss
+        std_ss <- rowSums(std_mat^2)
+        ordination[ordination$.matrix == std_fac, xy_map] <- std_mat / std_ss
       }
       
     }
