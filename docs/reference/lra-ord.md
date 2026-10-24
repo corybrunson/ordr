@@ -36,7 +36,7 @@ plot(x, main = deparse1(substitute(x)), ...)
 
 - compositional:
 
-  Logical; whether to normalize rows of `x` to sum to 1.
+  Logical; whether to normalize rows of \`x\` to sum to 1.
 
 - weighted:
 
@@ -52,8 +52,8 @@ plot(x, main = deparse1(substitute(x)), ...)
 
 - main, var.axes, ...:
 
-  Parameters passed to other plotting methods (in the case of `main`,
-  after being [`force()`](https://rdrr.io/r/base/force.html)d.
+  Parameters passed to other plotting methods (in the case of \`main\`,
+  after being \[force()\]d.
 
 - choices:
 
@@ -62,32 +62,33 @@ plot(x, main = deparse1(substitute(x)), ...)
 - scale:
 
   Numeric; values between 0 and 1 that control how inertia is conferred
-  unto the points: Row (`i = 1L`) and column (`i = 2L`) coordinates are
-  scaled by `sv ^ scale[[i]]`. If a single value `scale` is passed, it
-  is assigned to the rows while `1 - scale` is assigned to the columns.
+  unto the points: Row (\`i = 1L\`) and column (\`i = 2L\`) coordinates
+  are scaled by \`sv ^ scale\[\[i\]\]\`. If a single value \`scale\` is
+  passed, it is assigned to the rows while \`1 - scale\` is assigned to
+  the columns.
 
 ## Value
 
-Given an \\n \* p\\ data matrix and setting \\r=min(n,p)\\, `lra()`
-returns a list of class `"lra"` containing three elements:
+Given an \\n \* p\\ data matrix and setting \\r=min(n,p)\\, \`lra()\`
+returns a list of class \`"lra"\` containing three elements:
 
-- `sv`:
+- \`sv\`:
 
   The \\r-1\\ singular values
 
-- `row.coords`:
+- \`row.coords\`:
 
   The \\n \* (r-1)\\ matrix of row standard coordinates.
 
-- `column.coords`:
+- \`column.coords\`:
 
   The \\p \* (r-1)\\ matrix of column standard coordinates.
 
-- `row.weights`:
+- \`row.weights\`:
 
   The weights used to scale the row coordinates.
 
-- `column.weights`:
+- \`column.weights\`:
 
   The weights used to scale the column coordinates.
 
@@ -98,7 +99,7 @@ log-transformed data, usually weighted by row and column totals. The
 technique is suitable for positive-valued variables on a common scale
 (e.g. percentages). The distances between variables' coordinates (in the
 full-dimensional space) are their pairwise log-ratios. The distances
-between cases' coordinates are called their *log-ratio distances*, and
+between cases' coordinates are called their \_log-ratio distances\_, and
 the total variance is the weighted sum of their squares.
 
 LRA is not implemented in standard R distributions but is a useful
@@ -107,9 +108,9 @@ following Greenacre's (2010) exposition in Chapter 7.
 
 ## References
 
-Greenacre MJ (2010) *Biplots in Practice*. Fundacion BBVA, ISBN:
+Greenacre MJ (2010) \_Biplots in Practice\_. Fundacion BBVA, ISBN:
 978-84-923846.
-<https://www.fbbva.es/microsite/multivariate-statistics/biplots.html>
+\<https://www.fbbva.es/microsite/multivariate-statistics/biplots.html\>
 
 ## Examples
 

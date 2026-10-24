@@ -6,10 +6,10 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Fit an ordination model to a data object — ordinate"><meta name="description" content="This is a convenience function to fit an ordination model to a
-data object, wrap the result as a tbl_ord, and annotate this output with
-metadata from the model and possibly from the data."><meta property="og:description" content="This is a convenience function to fit an ordination model to a
-data object, wrap the result as a tbl_ord, and annotate this output with
-metadata from the model and possibly from the data."></head><body>
+  data object, wrap the result as a tbl_ord, and annotate this output with
+  metadata from the model and possibly from the data."><meta property="og:description" content="This is a convenience function to fit an ordination model to a
+  data object, wrap the result as a tbl_ord, and annotate this output with
+  metadata from the model and possibly from the data."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -50,8 +50,8 @@ metadata from the model and possibly from the data."></head><body>
 
     <div class="ref-description section level2">
     <p>This is a convenience function to fit an ordination model to a
-data object, wrap the result as a tbl_ord, and annotate this output with
-metadata from the model and possibly from the data.</p>
+  data object, wrap the result as a tbl_ord, and annotate this output with
+  metadata from the model and possibly from the data.</p>
     </div>
 
     <div class="section level2">
@@ -79,31 +79,31 @@ metadata from the model and possibly from the data.</p>
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>A data object to be passed to the <code>model</code>, such as an <a href="https://rdrr.io/r/base/array.html" class="external-link">array</a>,
-<a href="https://rdrr.io/r/base/table.html" class="external-link">table</a>, <a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a>, or <a href="https://rdrr.io/r/stats/dist.html" class="external-link">stats::dist</a>.</p></dd>
+<dd><p>A data object to be passed to the `model`, such as an [array],
+[table], [data.frame], or [stats::dist].</p></dd>
 
 
 <dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
 <dd><p>An ordination function whose output is coercible to class
-'<a href="tbl_ord.html">tbl_ord</a>', or a symbol or character string (handled by <code><a href="https://rdrr.io/r/base/match.fun.html" class="external-link">match.fun()</a></code>).
-Alternatively, a formula <code>~ fun(., ...)</code> where <code>fun</code> is such a function and
-other arguments are explicit, which will be evaluated with <code>x</code> in place of
-<code>.</code>.</p></dd>
+'[tbl_ord]', or a symbol or character string (handled by [match.fun()]).
+Alternatively, a formula `~ fun(., ...)` where `fun` is such a function and
+other arguments are explicit, which will be evaluated with `x` in place of
+`.`.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed to <code>model</code>.</p></dd>
+<dd><p>Additional arguments passed to `model`.</p></dd>
 
 
 <dt id="arg-cols">cols<a class="anchor" aria-label="anchor" href="#arg-cols"></a></dt>
-<dd><p>&lt;<code><a href="https://tidyr.tidyverse.org/reference/tidyr_tidy_select.html" class="external-link">tidy-select</a></code>&gt; If <code>x</code> is a data
-frame, columns to pass to <code>model</code>. If missing, all columns are used.</p></dd>
+<dd><p>&lt;[`tidy-select`][tidyr::tidyr_tidy_select]&gt; If `x` is a data
+frame, columns to pass to `model`. If missing, all columns are used.</p></dd>
 
 
 <dt id="arg-augment">augment<a class="anchor" aria-label="anchor" href="#arg-augment"></a></dt>
-<dd><p>&lt;<code><a href="https://tidyr.tidyverse.org/reference/tidyr_tidy_select.html" class="external-link">tidy-select</a></code>&gt; If <code>x</code> is a data
+<dd><p>&lt;[`tidy-select`][tidyr::tidyr_tidy_select]&gt; If `x` is a data
 frame, columns to augment to the row data of the ordination. If missing,
-all columns not included in <code>cols</code> will be augmented.</p></dd>
+all columns not included in `cols` will be augmented.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -113,10 +113,10 @@ all columns not included in <code>cols</code> will be augmented.</p></dd>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The default method fits the specified model to the provided data object,
-wraps the result as a <a href="tbl_ord.html">tbl_ord</a>, and augments this output with any intrinsic
-metadata from the model via <code><a href="augmentation.html">augment_ord()</a></code>.</p>
+wraps the result as a [tbl_ord], and augments this output with any intrinsic
+metadata from the model via [augment_ord()].</p>
 <p>The default method is used for most classes, though this may change in
-future. The <a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a> method allows the user to specify what columns to
+future. The [data.frame] method allows the user to specify what columns to
 include in the model and what columns with which to annotate the output.</p>
     </div>
 
@@ -170,11 +170,11 @@ include in the model and what columns with which to annotate the output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (principal, 100%): [ 150 × 4 | 3 ]</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1  Comp.2  Comp.3   Comp.4<span style="color: #949494;"> | </span>.element Sepal.Width</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">    [630] [36.16] [11.65]  [3.551]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;          &lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span> -2.68    0.319   0.0279  0.00226<span style="color: #949494;"> | </span>score            3.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span> -2.71   -0.177   0.210   0.0990 <span style="color: #949494;"> | </span>score            3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span> -2.89   -0.145  -0.0179  0.0200 <span style="color: #949494;"> | </span>score            3.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span> -2.75   -0.318  -0.0316 -0.0756 <span style="color: #949494;"> | </span>score            3.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5</span> -2.73    0.327  -0.0901 -0.0613 <span style="color: #949494;"> | </span>score            3.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1 -2.68    0.319   0.0279  0.00226 | score            3.5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2 -2.71   -0.177   0.210   0.0990  | score            3  </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3 -2.89   -0.145  -0.0179  0.0200  | score            3.2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4 -2.75   -0.318  -0.0316 -0.0756  | score            3.1</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5 -2.73    0.327  -0.0901 -0.0613  | score            3.6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 <span style="color: #949494;">⋮</span>                             <span style="color: #949494;">⋮</span>          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable:</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Species &lt;fct&gt;</span></span>
@@ -236,11 +236,11 @@ include in the model and what columns with which to annotate the output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (standard, 0%): [ 47 × 2 | 2 ]</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Factor1 Factor2<span style="color: #949494;"> | </span>.element name        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">       [1]     [1]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;    &lt;chr&gt;       </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span>  0.0775 -0.673 <span style="color: #949494;"> | </span>score    Courtelary  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span> -0.177   1.14  <span style="color: #949494;"> | </span>score    Delemont    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span> -0.587   1.27  <span style="color: #949494;"> | </span>score    Franches-Mnt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span> -0.427  -0.169 <span style="color: #949494;"> | </span>score    Moutier     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span>  0.382  -0.708 <span style="color: #949494;"> | </span>score    Neuveville  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1  0.0775 -0.673  | score    Courtelary  </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2 -0.177   1.14   | score    Delemont    </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3 -0.587   1.27   | score    Franches-Mnt</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4 -0.427  -0.169  | score    Moutier     </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5  0.382  -0.708  | score    Neuveville  </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         <span style="color: #949494;">⋮</span>                      <span style="color: #949494;">⋮</span>          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (principal, 100%): [ 6 × 2 | 3 ]</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Factor1 Factor2<span style="color: #949494;"> | </span>name             uniqueness .element</span>
@@ -262,8 +262,8 @@ include in the model and what columns with which to annotate the output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span>  7.61  -0.215 <span style="color: #949494;"> | </span>setosa      0.333     50 setosa     active  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span> -1.83   0.728 <span style="color: #949494;"> | </span>versicolor  0.333     50 versicolor active  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span> -5.78  -0.513 <span style="color: #949494;"> | </span>virginica   0.333     50 virginica  active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span>  8.06  -0.300 <span style="color: #949494;"> | </span>NA         NA         NA setosa     score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5</span>  7.13   0.787 <span style="color: #949494;"> | </span>NA         NA         NA setosa     score   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4  8.06  -0.300  | NA         NA         NA setosa     score   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5  7.13   0.787  | NA         NA         NA setosa     score   </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494;">⋮</span>                                <span style="color: #949494;">⋮</span>                      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 4 × 2 | 2 ]</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      LD1     LD2<span style="color: #949494;"> | </span>name         .element</span>
@@ -287,9 +287,9 @@ include in the model and what columns with which to annotate the output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">         [1]        [1]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;   </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span> -0.00911  -0.0362   <span style="color: #949494;"> | </span>pop15      35.1  active  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span>  0.0486   -0.260    <span style="color: #949494;"> | </span>pop75       2.29 active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span>  0.0804    0.0577   <span style="color: #949494;"> | </span>Australia  NA    score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span>  0.210    -0.125    <span style="color: #949494;"> | </span>Austria    NA    score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span>  0.207    -0.147    <span style="color: #949494;"> | </span>Belgium    NA    score   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3  0.0804    0.0577    | Australia  NA    score   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4  0.210    -0.125     | Austria    NA    score   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5  0.207    -0.147     | Belgium    NA    score   </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            <span style="color: #949494;">⋮</span>                          <span style="color: #949494;">⋮</span>            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 56 × 2 | 3 ]</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      CanCor1    CanCor2<span style="color: #949494;"> | </span>name       center .element</span>
@@ -297,8 +297,8 @@ include in the model and what columns with which to annotate the output.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span>  0.00847   0.0334   <span style="color: #949494;"> | </span>sr           9.67 active  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span>  0.000131 -0.0000759<span style="color: #949494;"> | </span>dpi       1107.   active  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span>  0.00417  -0.0123   <span style="color: #949494;"> | </span>ddpi         3.76 active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span>  0.171    -0.0232   <span style="color: #949494;"> | </span>Australia   NA    score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span>  0.0735    0.0475   <span style="color: #949494;"> | </span>Austria     NA    score   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4  0.171    -0.0232    | Australia   NA    score   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5  0.0735    0.0475    | Austria     NA    score   </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            <span style="color: #949494;">⋮</span>                          <span style="color: #949494;">⋮</span>             </span>
 </code></pre></div>
     </div>

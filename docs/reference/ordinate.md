@@ -29,37 +29,31 @@ ordinate(x, model, ...)
 
 - x:
 
-  A data object to be passed to the `model`, such as an
-  [array](https://rdrr.io/r/base/array.html),
-  [table](https://rdrr.io/r/base/table.html),
-  [data.frame](https://rdrr.io/r/base/data.frame.html), or
-  [stats::dist](https://rdrr.io/r/stats/dist.html).
+  A data object to be passed to the \`model\`, such as an \[array\],
+  \[table\], \[data.frame\], or \[stats::dist\].
 
 - model:
 
   An ordination function whose output is coercible to class
-  '[tbl_ord](tbl_ord.md)', or a symbol or character string (handled by
-  [`match.fun()`](https://rdrr.io/r/base/match.fun.html)).
-  Alternatively, a formula `~ fun(., ...)` where `fun` is such a
-  function and other arguments are explicit, which will be evaluated
-  with `x` in place of `.`.
+  '\[tbl_ord\]', or a symbol or character string (handled by
+  \[match.fun()\]). Alternatively, a formula \`~ fun(., ...)\` where
+  \`fun\` is such a function and other arguments are explicit, which
+  will be evaluated with \`x\` in place of \`.\`.
 
 - ...:
 
-  Additional arguments passed to `model`.
+  Additional arguments passed to \`model\`.
 
 - cols:
 
-  \<[`tidy-select`](https://tidyr.tidyverse.org/reference/tidyr_tidy_select.html)\>
-  If `x` is a data frame, columns to pass to `model`. If missing, all
-  columns are used.
+  \<\[\`tidy-select\`\]\[tidyr::tidyr_tidy_select\]\> If \`x\` is a data
+  frame, columns to pass to \`model\`. If missing, all columns are used.
 
 - augment:
 
-  \<[`tidy-select`](https://tidyr.tidyverse.org/reference/tidyr_tidy_select.html)\>
-  If `x` is a data frame, columns to augment to the row data of the
-  ordination. If missing, all columns not included in `cols` will be
-  augmented.
+  \<\[\`tidy-select\`\]\[tidyr::tidyr_tidy_select\]\> If \`x\` is a data
+  frame, columns to augment to the row data of the ordination. If
+  missing, all columns not included in \`cols\` will be augmented.
 
 ## Value
 
@@ -68,14 +62,13 @@ An augmented tbl_ord.
 ## Details
 
 The default method fits the specified model to the provided data object,
-wraps the result as a [tbl_ord](tbl_ord.md), and augments this output
-with any intrinsic metadata from the model via
-[`augment_ord()`](augmentation.md).
+wraps the result as a \[tbl_ord\], and augments this output with any
+intrinsic metadata from the model via \[augment_ord()\].
 
 The default method is used for most classes, though this may change in
-future. The [data.frame](https://rdrr.io/r/base/data.frame.html) method
-allows the user to specify what columns to include in the model and what
-columns with which to annotate the output.
+future. The \[data.frame\] method allows the user to specify what
+columns to include in the model and what columns with which to annotate
+the output.
 
 ## Examples
 

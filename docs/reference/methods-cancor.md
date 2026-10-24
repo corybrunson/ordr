@@ -1,9 +1,9 @@
 # Functionality for canonical correlations
 
 These methods extract data from, and attribute new data to, objects of
-class `"cancor_ord"`. This is a class introduced in this package to
-identify objects returned by [`cancor_ord()`](wrap-ord.md), which wraps
-[`stats::cancor()`](https://rdrr.io/r/stats/cancor.html).
+class \`"cancor_ord"\`. This is a class introduced in this package to
+identify objects returned by \[cancor_ord()\], which wraps
+\[stats::cancor()\].
 
 ## Usage
 
@@ -50,49 +50,49 @@ recover_aug_coord(x)
 
 ## Value
 
-The recovery generics `recover_*()` return [core model
-components](recoverers.md), [distribution of inertia](conference.md),
-[supplementary elements](supplementation.md), and [intrinsic
-metadata](augmentation.md); but they require methods for each model
+The recovery generics \`recover\_\*()\` return \[core model
+components\]\[recoverers\], \[distribution of inertia\]\[conference\],
+\[supplementary elements\]\[supplementation\], and \[intrinsic
+metadata\]\[augmentation\]; but they require methods for each model
 class to tell them what these components are.
 
-The generic [`as_tbl_ord()`](tbl_ord.md) returns its input wrapped in
-the 'tbl_ord' class. Its methods determine what model classes it is
-allowed to wrap. It then provides 'tbl_ord' methods with access to the
-recoverers and hence to the model components.
+The generic \[as_tbl_ord()\] returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap.
+It then provides 'tbl_ord' methods with access to the recoverers and
+hence to the model components.
 
 ## Details
 
 The canonical coefficients (loadings) are obtained directly from the
 underlying singular value decomposition and constitute the active
 elements. If canonical scores are returned, then they and the structure
-correlations are made available as supplementary elements. **ordr**
-takes rows and columns from the intraset correlations `$xstructure` and
-`$ystructure`, on which no intertia is conferred; the interset
-correlations can be obtained by [conferring inertia](conference.md) onto
-these.
+correlations are made available as supplementary elements. \*\*ordr\*\*
+takes rows and columns from the intraset correlations \`\$xstructure\`
+and \`\$ystructure\`, on which no intertia is conferred; the interset
+correlations can be obtained by \[conferring inertia\]\[conference\]
+onto these.
 
 A biplot of the canonical coefficients can be interpreted as
 approximating the \\X\\-\\Y\\ inner product matrix, inversely weighted
 by the \\X\\ and \\Y\\ variances. The canonical scores and structure
 coefficients are available as supplementary points if returned by
-[`cancor_ord()`](wrap-ord.md). These can be used to create biplots of
-the case scores as linear combinations of loadings (the coefficients, in
-standard coordinates, overlaid with the scores) or of intraset and
-interset correlations with respect to either data set (the correlations
-with inertia conferred entirely onto rows or onto columns). Greenacre
-(1984) and ter Braak (1990) describe these families, though ter Braak
+\[cancor_ord()\]. These can be used to create biplots of the case scores
+as linear combinations of loadings (the coefficients, in standard
+coordinates, overlaid with the scores) or of intraset and interset
+correlations with respect to either data set (the correlations with
+inertia conferred entirely onto rows or onto columns). Greenacre (1984)
+and ter Braak (1990) describe these families, though ter Braak
 recommends against the first.
 
 ## References
 
-Greenacre MJ (1984) *Theory and applications of correspondence
-analysis*. London: Academic Press, ISBN 0-12-299050-1.
-<http://www.carme-n.org/?sec=books5>
+Greenacre MJ (1984) \_Theory and applications of correspondence
+analysis\_. London: Academic Press, ISBN 0-12-299050-1.
+\<http://www.carme-n.org/?sec=books5\>
 
 ter Braak CJF (1990) "Interpreting canonical correlation analysis
-through biplots of structure correlations and weights". *Psychometrika*
-55(3), 519–531.
+through biplots of structure correlations and weights".
+\_Psychometrika\_ 55(3), 519–531.
 [doi:10.1007/BF02294765](https://doi.org/10.1007/BF02294765)
 
 ## See also
@@ -170,7 +170,8 @@ savings_cca %>%
   scale_color_brewer(limits = c("rows", "cols"), type = "qual") +
   expand_limits(x = c(-1, 1), y = c(-1, 1))
 #> Warning: Duplicated aesthetics after name standardisation: contour
-#> Warning: The following aesthetics were dropped during statistical transformation: label.
+#> Warning: The following aesthetics were dropped during statistical transformation: label
+#> and axis.ss.
 #> ℹ This can happen when ggplot fails to infer the correct grouping structure in
 #>   the data.
 #> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
@@ -186,10 +187,6 @@ savings_cca %>%
   geom_cols_axis(elements = "active") +
   geom_rows_text(elements = "score") +
   stat_rows_projection(elements = "score", subset = 49)
-#> Warning: Ignoring unknown parameters: `axis.colour`, `axis.alpha`, `label.angle`,
-#> `label.colour`, `label.alpha`, `tick.linewidth`, `tick.colour`, `tick.alpha`,
-#> `text.size`, `text.angle`, `text.hjust`, `text.vjust`, `text.family`,
-#> `text.fontface`, `text.colour`, and `text.alpha`
 
 # the model predicts much higher disposable income in Libya than was measured
 ```

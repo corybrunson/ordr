@@ -6,8 +6,8 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Access factors, coordinates, and metadata from ordination objects — recoverers"><meta name="description" content="These functions return information about the matrix
-factorization underlying an ordination."><meta property="og:description" content="These functions return information about the matrix
-factorization underlying an ordination."></head><body>
+  factorization underlying an ordination."><meta property="og:description" content="These functions return information about the matrix
+  factorization underlying an ordination."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -48,7 +48,7 @@ factorization underlying an ordination."></head><body>
 
     <div class="ref-description section level2">
     <p>These functions return information about the matrix
-factorization underlying an ordination.</p>
+  factorization underlying an ordination.</p>
     </div>
 
     <div class="section level2">
@@ -102,62 +102,63 @@ factorization underlying an ordination.</p>
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>An object of class '<a href="tbl_ord.html">tbl_ord</a>'.</p></dd>
+<dd><p>An object of class '[tbl_ord]'.</p></dd>
 
 
 <dt id="arg-elements">elements<a class="anchor" aria-label="anchor" href="#arg-elements"></a></dt>
 <dd><p>Character vector; which elements of each factor for which to
-render graphical elements. One of <code>"active"</code> (the default) or any
+render graphical elements. One of `"active"` (the default) or any
 supplementary element type defined by the specific class methods (e.g.
-<code>"score"</code> for 'factanal', 'lda_ord', and 'cancord_ord' and <code>"intraset"</code> and
-<code>"interset"</code> for 'cancor_ord'), via <a href="https://rdrr.io/r/base/match.arg.html" class="external-link">partial matching</a>.</p></dd>
+`"score"` for 'factanal', 'lda_ord', and 'cancord_ord' and `"intraset"` and
+`"interset"` for 'cancor_ord'), via [partial matching][base::match.arg()].</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments from <code><a href="https://rdrr.io/r/base/matrix.html" class="external-link">base::as.matrix()</a></code>; ignored.</p></dd>
+<dd><p>Additional arguments from [base::as.matrix()]; ignored.</p></dd>
 
 
 <dt id="arg--matrix">.matrix<a class="anchor" aria-label="anchor" href="#arg--matrix"></a></dt>
 <dd><p>A character string partially matched (lowercase) to several
 indicators for one or both matrices in a matrix decomposition used for
-ordination. The standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</code> (for
+ordination. The standard values are `"rows"`, `"cols"`, and `"dims"` (for
 both).</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The <code>recover_*()</code> functions are generics whose methods return base R
-objects retrieved from the model wrapped in the 'tbl_ord' class:</p><ul><li><p><code>rows</code>: the row matrix as stored in the model</p></li>
-<li><p><code>cols</code>: the column matrix as stored in the model</p></li>
-<li><p><code>inertia</code>: the vector of eigen-values or squared singular values,
-often known by other names depending on the model</p></li>
-<li><p><code>coord</code>: names for the artificial axes, from the model if available
-The <code>get_*()</code> functions (which are not generics) return modifications of
-these objects:</p></li>
-<li><p><code>rows</code>: the recovered rows,
-adjusted according to any negation of axes or conference of inertia</p></li>
-<li><p><code>cols</code>: the recovered columns,
-adjusted according to any negation of axes or conference of inertia</p></li>
-<li><p><code>inertia</code>: the recovered inertia, named by the recovered coordinates</p></li>
-<li><p><code>coord</code>: the recovered coordinates (unmodified)
-<code><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim()</a></code> returns the dimensions of the decomposed matrix, i.e. the numbers of
-rows of <code>recover_rows()</code> and of <code>recover_cols()</code>.</p></li>
-</ul></div>
+    <p>The `recover_*()` functions are generics whose methods return base R
+  objects retrieved from the model wrapped in the 'tbl_ord' class:
+  - `rows`: the row matrix as stored in the model
+  - `cols`: the column matrix as stored in the model
+  - `inertia`: the vector of eigen-values or squared singular values,
+    often known by other names depending on the model
+  - `coord`: names for the artificial axes, from the model if available
+The `get_*()` functions (which are not generics) return modifications of
+these objects:
+  - `rows`: the recovered rows,
+    adjusted according to any negation of axes or conference of inertia
+  - `cols`: the recovered columns,
+    adjusted according to any negation of axes or conference of inertia
+  - `inertia`: the recovered inertia, named by the recovered coordinates
+  - `coord`: the recovered coordinates (unmodified)
+`dim()` returns the dimensions of the decomposed matrix, i.e. the numbers of
+rows of `recover_rows()` and of `recover_cols()`.</p>
+    </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The <code>recover_*()</code> <a href="https://rdrr.io/r/base/UseMethod.html" class="external-link">S3 methods</a> extract one or both of the
+    <p>The `recover_*()` [S3 methods][base::S3Methods] extract one or both of the
 row and column matrix factors that constitute the original ordination. These
 are interpreted as the case scores (rows) and the variable loadings
-(columns). The <code>get_*()</code> functions optionally (and by default) include any
-supplemental observations (see <a href="supplementation.html">supplementation</a>).</p>
-<p>The <code>recover_*()</code> functions are generics that require methods for each
+(columns). The `get_*()` functions optionally (and by default) include any
+supplemental observations (see [supplementation]).</p>
+<p>The `recover_*()` functions are generics that require methods for each
 ordination class. They are not intended to be called directly but are
-exported so that users can query <code>methods("recover_*")</code>.</p>
-<p><code>get_coord()</code> retrieves the names of the coordinates shared by the matrix
-factors on which the original data were ordinated, and <code>get_inertia()</code>
-retrieves a vector of the inertia with these names. <code><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim()</a></code> retrieves the
+exported so that users can query `methods("recover_*")`.</p>
+<p>`get_coord()` retrieves the names of the coordinates shared by the matrix
+factors on which the original data were ordinated, and `get_inertia()`
+retrieves a vector of the inertia with these names. `dim()` retrieves the
 dimensions of the row and column factors, which reflect the dimensions of the
-matrix they reconstruct—<strong>not</strong> the original data matrix. (This matters for
+matrix they reconstruct—**not** the original data matrix. (This matters for
 techniques that rely on eigendecomposition, for which the decomposed matrix
 is square.)</p>
     </div>

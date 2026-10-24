@@ -1,6 +1,6 @@
 # Render interpolation of new rows from columns (or vice-versa)
 
-`geom_interpolation()` renders a geometric construction that
+\`geom_interpolation()\` renders a geometric construction that
 interpolates a new data matrix (row or column) element from its entries
 to its artificial coordinates.
 
@@ -93,16 +93,14 @@ geom_interpolation(
 
 - new_data:
 
-  A list (best structured as a
-  [data.frame](https://rdrr.io/r/base/data.frame.html)) of row
-  ([`geom_cols_interpolation()`](biplot-geoms.md)) or column
-  ([`geom_rows_interpolation()`](biplot-geoms.md)) values to
-  interpolate.
+  A list (best structured as a \[data.frame\]\[base::data.frame\]) of
+  row (\`geom_cols_interpolation()\`) or column
+  (\`geom_rows_interpolation()\`) values to interpolate.
 
 - type:
 
-  Character value matched to `"centroid"` or `"sequence"`; the type of
-  operations used to visualize interpolation.
+  Character value matched to \`"centroid"\` or \`"sequence"\`; the type
+  of operations used to visualize interpolation.
 
 - arrow:
 
@@ -112,8 +110,7 @@ geom_interpolation(
 
 - ...:
 
-  Additional arguments passed to
-  [`ggplot2::layer()`](https://ggplot2.tidyverse.org/reference/layer.html).
+  Additional arguments passed to \[ggplot2::layer()\].
 
 - point.fill:
 
@@ -122,8 +119,7 @@ geom_interpolation(
 
 - na.rm:
 
-  Passed to
-  [`ggplot2::layer()`](https://ggplot2.tidyverse.org/reference/layer.html).
+  Passed to \[ggplot2::layer()\].
 
 - show.legend:
 
@@ -151,61 +147,44 @@ for this element to appear in the biplot? The solution is the vector sum
 of the column (row) units weighted by their values in the new row
 (column). Gower, Gardner–Lubbe, & le Roux (2011) provide two
 visualizations of this calculation: a tail-to-head sequence of weighted
-units (`type = "sequence"`), and a centroid of the weighted units scaled
-by the number of units (`type = "centroid"`).
+units (\`type = "sequence"\`), and a centroid of the weighted units
+scaled by the number of units (\`type = "centroid"\`).
 
-**WARNING:** This layer is appropriate only with axes in standard
-coordinates (usually [`confer_inertia(p = "rows")`](conference.md)) and
-interpolative calibration
-([`ggbiplot(axis.type = "interpolative")`](ggbiplot.md)).
+\*\*WARNING:\*\* This layer is appropriate only with axes in standard
+coordinates (usually \[\`confer_inertia(p =
+"rows")\`\]\[confer_inertia\]) and interpolative calibration, the
+default \`axis.type\` of \[\`geom_axis()\`\]\[geom_axis\].
 
 ## Biplot layers
 
-[`ggbiplot()`](ggbiplot.md) uses
-[`ggplot2::fortify()`](https://ggplot2.tidyverse.org/reference/fortify.html)
-internally to produce a single data frame with a `.matrix` column
-distinguishing the subjects (`"rows"`) and variables (`"cols"`). The
-stat layers [`stat_rows()`](stat_rows.md) and
-[`stat_cols()`](stat_rows.md) simply filter the data frame to one of
-these two.
+\[ggbiplot()\] uses \[ggplot2::fortify()\] internally to produce a
+single data frame with a \`.matrix\` column distinguishing the subjects
+(\`"rows"\`) and variables (\`"cols"\`). The stat layers \`stat_rows()\`
+and \`stat_cols()\` simply filter the data frame to one of these two.
 
-The geom layers `geom_rows_*()` and `geom_cols_*()` call the
+The geom layers \`geom_rows\_\*()\` and \`geom_cols\_\*()\` call the
 corresponding stat in order to render plot elements for the
-corresponding factor matrix. `geom_dims_*()` selects a default matrix
-based on common practice, e.g. points for rows and arrows for columns.
+corresponding factor matrix. \`geom_dims\_\*()\` selects a default
+matrix based on common practice, e.g. points for rows and arrows for
+columns.
 
 ## Aesthetics
 
-`geom_interpolation()` requires the custom **`interpolate`** aesthetic,
-which tells the internals which columns of the `new_data` parameter
-contain the variables to be used for interpolation. Except in rare
-cases, `new_data` should contain the same rows or columns as the
-ordinated data and `interpolate` should be set to `name` (procured by
-[`augment_ord()`](augmentation.md)). `geom_interpolation()` additionally
-understands the following aesthetics (required aesthetics are in bold):
-
-- `alpha`
-
-- `colour`
-
-- `linetype`
-
-- `size`
-
-- `fill`
-
-- `shape`
-
-- `stroke`
-
-- `center`, `scale`
-
-- `group`
+\`geom_interpolation()\` requires the custom \*\*\`interpolate\`\*\*
+aesthetic, which tells the internals which columns of the \`new_data\`
+parameter contain the variables to be used for interpolation. Except in
+rare cases, \`new_data\` should contain the same rows or columns as the
+ordinated data and \`interpolate\` should be set to \`name\` (procured
+by \[augment_ord()\]). \`geom_interpolation()\` additionally understands
+the following aesthetics (required aesthetics are in bold): -
+\`alpha\` - \`colour\` - \`linetype\` - \`size\` - \`fill\` -
+\`shape\` - \`stroke\` - \`center\`, \`scale\` - \`group\`
 
 ## References
 
-Gower JC, Gardner–Lubbe S, & le Roux NJ (2011) *Understanding Biplots*.
-Wiley, ISBN: 978-0-470-01255-0. <https://www.wiley.com/go/biplots>
+Gower JC, Gardner–Lubbe S, & le Roux NJ (2011) \_Understanding
+Biplots\_. Wiley, ISBN: 978-0-470-01255-0.
+\<https://www.wiley.com/go/biplots\>
 
 ## See also
 

@@ -1,10 +1,10 @@
 # Convenience geoms for row and column matrix factors
 
-These geometric element layers (geoms) pair conventional **ggplot2**
-geoms with [`stat_rows()`](stat_rows.md) or
-[`stat_cols()`](stat_rows.md) in order to render elements for one or the
-other matrix factor of a tbl_ord. They understand the same aesthetics as
-their corresponding conventional geoms.
+These geometric element layers (geoms) pair conventional \*\*ggplot2\*\*
+geoms with \[stat_rows()\] or \[stat_cols()\] in order to render
+elements for one or the other matrix factor of a tbl_ord. They
+understand the same aesthetics as their corresponding conventional
+geoms.
 
 ## Usage
 
@@ -37,10 +37,11 @@ geom_rows_path(
   stat = "identity",
   position = "identity",
   ...,
+  arrow = NULL,
+  arrow.fill = NULL,
   lineend = "butt",
   linejoin = "round",
   linemitre = 10,
-  arrow = NULL,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -52,10 +53,11 @@ geom_cols_path(
   stat = "identity",
   position = "identity",
   ...,
+  arrow = NULL,
+  arrow.fill = NULL,
   lineend = "butt",
   linejoin = "round",
   linemitre = 10,
-  arrow = NULL,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -66,8 +68,11 @@ geom_rows_polygon(
   data = NULL,
   stat = "identity",
   position = "identity",
-  rule = "evenodd",
   ...,
+  rule = "evenodd",
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 10,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -78,8 +83,11 @@ geom_cols_polygon(
   data = NULL,
   stat = "identity",
   position = "identity",
-  rule = "evenodd",
   ...,
+  rule = "evenodd",
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 10,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -94,6 +102,8 @@ geom_rows_contour(
   bins = NULL,
   binwidth = NULL,
   breaks = NULL,
+  arrow = NULL,
+  arrow.fill = NULL,
   lineend = "butt",
   linejoin = "round",
   linemitre = 10,
@@ -111,6 +121,8 @@ geom_cols_contour(
   bins = NULL,
   binwidth = NULL,
   breaks = NULL,
+  arrow = NULL,
+  arrow.fill = NULL,
   lineend = "butt",
   linejoin = "round",
   linemitre = 10,
@@ -177,11 +189,9 @@ geom_rows_text(
   mapping = NULL,
   data = NULL,
   stat = "identity",
-  position = "identity",
+  position = "nudge",
   ...,
   parse = FALSE,
-  nudge_x = 0,
-  nudge_y = 0,
   check_overlap = FALSE,
   size.unit = "mm",
   na.rm = FALSE,
@@ -193,11 +203,9 @@ geom_cols_text(
   mapping = NULL,
   data = NULL,
   stat = "identity",
-  position = "identity",
+  position = "nudge",
   ...,
   parse = FALSE,
-  nudge_x = 0,
-  nudge_y = 0,
   check_overlap = FALSE,
   size.unit = "mm",
   na.rm = FALSE,
@@ -209,14 +217,16 @@ geom_rows_label(
   mapping = NULL,
   data = NULL,
   stat = "identity",
-  position = "identity",
+  position = "nudge",
   ...,
   parse = FALSE,
-  nudge_x = 0,
-  nudge_y = 0,
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
-  label.size = 0.25,
+  label.size = deprecated(),
+  border.colour = NULL,
+  border.color = NULL,
+  text.colour = NULL,
+  text.color = NULL,
   size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
@@ -227,14 +237,16 @@ geom_cols_label(
   mapping = NULL,
   data = NULL,
   stat = "identity",
-  position = "identity",
+  position = "nudge",
   ...,
   parse = FALSE,
-  nudge_x = 0,
-  nudge_y = 0,
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
-  label.size = 0.25,
+  label.size = deprecated(),
+  border.colour = NULL,
+  border.color = NULL,
+  text.colour = NULL,
+  text.color = NULL,
   size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
@@ -265,7 +277,7 @@ geom_rows_text_repel(
   show.legend = NA,
   direction = c("both", "y", "x"),
   seed = NA,
-  verbose = FALSE,
+  verbose = getOption("verbose", default = FALSE),
   inherit.aes = TRUE
 )
 
@@ -293,7 +305,7 @@ geom_cols_text_repel(
   show.legend = NA,
   direction = c("both", "y", "x"),
   seed = NA,
-  verbose = FALSE,
+  verbose = getOption("verbose", default = FALSE),
   inherit.aes = TRUE
 )
 
@@ -324,7 +336,7 @@ geom_rows_label_repel(
   show.legend = NA,
   direction = c("both", "y", "x"),
   seed = NA,
-  verbose = FALSE,
+  verbose = getOption("verbose", default = FALSE),
   inherit.aes = TRUE
 )
 
@@ -355,7 +367,7 @@ geom_cols_label_repel(
   show.legend = NA,
   direction = c("both", "y", "x"),
   seed = NA,
-  verbose = FALSE,
+  verbose = getOption("verbose", default = FALSE),
   inherit.aes = TRUE
 )
 
@@ -369,30 +381,40 @@ geom_rows_axis(
   axis_text = TRUE,
   by = NULL,
   num = NULL,
+  axis.type = c("interpolative", "predictive"),
   tick_length = 0.025,
   text_dodge = 0.03,
   label_dodge = 0.03,
+  label_placement = c("positive", "negative", "peripheral"),
   ...,
-  axis.colour = NULL,
+  axis.linewidth = sync(),
+  axis.linetype = sync(),
+  axis.colour = sync(),
   axis.color = NULL,
-  axis.alpha = NULL,
+  axis.alpha = sync(),
+  label.size = sync(),
   label.angle = 0,
-  label.colour = NULL,
+  label.hjust = sync(),
+  label.vjust = sync(),
+  label.family = sync(),
+  label.fontface = sync(),
+  label.colour = sync(),
   label.color = NULL,
-  label.alpha = NULL,
+  label.alpha = sync(),
   tick.linewidth = 0.25,
-  tick.colour = NULL,
+  tick.linetype = "solid",
+  tick.colour = sync(),
   tick.color = NULL,
-  tick.alpha = NULL,
+  tick.alpha = sync(),
   text.size = 2.6,
   text.angle = 0,
-  text.hjust = 0.5,
-  text.vjust = 0.5,
-  text.family = NULL,
-  text.fontface = NULL,
-  text.colour = NULL,
+  text.hjust = sync(),
+  text.vjust = sync(),
+  text.family = sync(),
+  text.fontface = sync(),
+  text.colour = sync(),
   text.color = NULL,
-  text.alpha = NULL,
+  text.alpha = sync(),
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
@@ -410,30 +432,40 @@ geom_cols_axis(
   axis_text = TRUE,
   by = NULL,
   num = NULL,
+  axis.type = c("interpolative", "predictive"),
   tick_length = 0.025,
   text_dodge = 0.03,
   label_dodge = 0.03,
+  label_placement = c("positive", "negative", "peripheral"),
   ...,
-  axis.colour = NULL,
+  axis.linewidth = sync(),
+  axis.linetype = sync(),
+  axis.colour = sync(),
   axis.color = NULL,
-  axis.alpha = NULL,
+  axis.alpha = sync(),
+  label.size = sync(),
   label.angle = 0,
-  label.colour = NULL,
+  label.hjust = sync(),
+  label.vjust = sync(),
+  label.family = sync(),
+  label.fontface = sync(),
+  label.colour = sync(),
   label.color = NULL,
-  label.alpha = NULL,
+  label.alpha = sync(),
   tick.linewidth = 0.25,
-  tick.colour = NULL,
+  tick.linetype = "solid",
+  tick.colour = sync(),
   tick.color = NULL,
-  tick.alpha = NULL,
+  tick.alpha = sync(),
   text.size = 2.6,
   text.angle = 0,
-  text.hjust = 0.5,
-  text.vjust = 0.5,
-  text.family = NULL,
-  text.fontface = NULL,
-  text.colour = NULL,
+  text.hjust = sync(),
+  text.vjust = sync(),
+  text.family = sync(),
+  text.fontface = sync(),
+  text.colour = sync(),
   text.color = NULL,
-  text.alpha = NULL,
+  text.alpha = sync(),
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
@@ -493,13 +525,17 @@ geom_rows_isoline(
   isoline_text = TRUE,
   by = NULL,
   num = NULL,
-  text_dodge = 0.03,
+  text_dodge = 0.06,
   ...,
-  text.size = 3,
+  text.size = 3.18,
   text.angle = 0,
-  text.colour = NULL,
+  text.hjust = sync(),
+  text.vjust = sync(),
+  text.family = sync(),
+  text.fontface = sync(),
+  text.colour = sync(),
   text.color = NULL,
-  text.alpha = NULL,
+  text.alpha = sync(),
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
@@ -515,13 +551,17 @@ geom_cols_isoline(
   isoline_text = TRUE,
   by = NULL,
   num = NULL,
-  text_dodge = 0.03,
+  text_dodge = 0.06,
   ...,
-  text.size = 3,
+  text.size = 3.18,
   text.angle = 0,
-  text.colour = NULL,
+  text.hjust = sync(),
+  text.vjust = sync(),
+  text.family = sync(),
+  text.fontface = sync(),
+  text.colour = sync(),
   text.color = NULL,
-  text.alpha = NULL,
+  text.alpha = sync(),
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
@@ -600,6 +640,8 @@ geom_rows_bagplot(
   data = NULL,
   stat = "bagplot",
   position = "identity",
+  outlier_points = !outlier_labels,
+  outlier_labels = FALSE,
   ...,
   bag.linewidth = sync(),
   bag.linetype = sync(),
@@ -627,6 +669,10 @@ geom_rows_bagplot(
   outlier.color = NULL,
   outlier.fill = NA,
   outlier.alpha = NA,
+  text.size = 3.88,
+  text.colour = sync(),
+  text.color = sync(),
+  text.alpha = sync(),
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -637,6 +683,8 @@ geom_cols_bagplot(
   data = NULL,
   stat = "bagplot",
   position = "identity",
+  outlier_points = !outlier_labels,
+  outlier_labels = FALSE,
   ...,
   bag.linewidth = sync(),
   bag.linetype = sync(),
@@ -664,6 +712,10 @@ geom_cols_bagplot(
   outlier.color = NULL,
   outlier.fill = NA,
   outlier.alpha = NA,
+  text.size = 3.88,
+  text.colour = sync(),
+  text.color = sync(),
+  text.alpha = sync(),
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -679,31 +731,40 @@ geom_rows_rule(
   axis_text = TRUE,
   by = NULL,
   num = NULL,
+  axis.type = c("interpolative", "predictive"),
   snap_rule = TRUE,
   tick_length = 0.025,
   text_dodge = 0.03,
   label_dodge = 0.03,
   ...,
-  axis.colour = NULL,
+  axis.linewidth = sync(),
+  axis.linetype = sync(),
+  axis.colour = sync(),
   axis.color = NULL,
-  axis.alpha = NULL,
+  axis.alpha = sync(),
+  label.size = sync(),
   label.angle = 0,
-  label.colour = NULL,
+  label.hjust = sync(),
+  label.vjust = sync(),
+  label.family = sync(),
+  label.fontface = sync(),
+  label.colour = sync(),
   label.color = NULL,
-  label.alpha = NULL,
+  label.alpha = sync(),
   tick.linewidth = 0.25,
-  tick.colour = NULL,
+  tick.linetype = "solid",
+  tick.colour = sync(),
   tick.color = NULL,
-  tick.alpha = NULL,
+  tick.alpha = sync(),
   text.size = 2.6,
   text.angle = 0,
-  text.hjust = 0.5,
-  text.vjust = 0.5,
-  text.family = NULL,
-  text.fontface = NULL,
-  text.colour = NULL,
+  text.hjust = sync(),
+  text.vjust = sync(),
+  text.family = sync(),
+  text.fontface = sync(),
+  text.colour = sync(),
   text.color = NULL,
-  text.alpha = NULL,
+  text.alpha = sync(),
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
@@ -721,31 +782,40 @@ geom_cols_rule(
   axis_text = TRUE,
   by = NULL,
   num = NULL,
+  axis.type = c("interpolative", "predictive"),
   snap_rule = TRUE,
   tick_length = 0.025,
   text_dodge = 0.03,
   label_dodge = 0.03,
   ...,
-  axis.colour = NULL,
+  axis.linewidth = sync(),
+  axis.linetype = sync(),
+  axis.colour = sync(),
   axis.color = NULL,
-  axis.alpha = NULL,
+  axis.alpha = sync(),
+  label.size = sync(),
   label.angle = 0,
-  label.colour = NULL,
+  label.hjust = sync(),
+  label.vjust = sync(),
+  label.family = sync(),
+  label.fontface = sync(),
+  label.colour = sync(),
   label.color = NULL,
-  label.alpha = NULL,
+  label.alpha = sync(),
   tick.linewidth = 0.25,
-  tick.colour = NULL,
+  tick.linetype = "solid",
+  tick.colour = sync(),
   tick.color = NULL,
-  tick.alpha = NULL,
+  tick.alpha = sync(),
   text.size = 2.6,
   text.angle = 0,
-  text.hjust = 0.5,
-  text.vjust = 0.5,
-  text.family = NULL,
-  text.fontface = NULL,
-  text.colour = NULL,
+  text.hjust = sync(),
+  text.vjust = sync(),
+  text.family = sync(),
+  text.fontface = sync(),
+  text.colour = sync(),
   text.color = NULL,
-  text.alpha = NULL,
+  text.alpha = sync(),
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
@@ -854,13 +924,11 @@ geom_cols_interpolation(
 
 - ...:
 
-  Additional arguments passed to
-  [`ggplot2::layer()`](https://ggplot2.tidyverse.org/reference/layer.html).
+  Additional arguments passed to \[ggplot2::layer()\].
 
 - na.rm:
 
-  Passed to
-  [`ggplot2::layer()`](https://ggplot2.tidyverse.org/reference/layer.html).
+  Passed to \[ggplot2::layer()\].
 
 - show.legend:
 
@@ -879,6 +947,16 @@ geom_cols_interpolation(
   plot specification, e.g.
   [`annotation_borders()`](https://ggplot2.tidyverse.org/reference/annotation_borders.html).
 
+- arrow:
+
+  Arrow specification, as created by
+  [`grid::arrow()`](https://rdrr.io/r/grid/arrow.html).
+
+- arrow.fill:
+
+  fill colour to use for the arrow head (if closed). `NULL` means use
+  `colour` aesthetic.
+
 - lineend:
 
   Line end style (round, butt, square).
@@ -890,11 +968,6 @@ geom_cols_interpolation(
 - linemitre:
 
   Line mitre limit (number greater than 1).
-
-- arrow:
-
-  Arrow specification, as created by
-  [`grid::arrow()`](https://rdrr.io/r/grid/arrow.html).
 
 - rule:
 
@@ -937,12 +1010,6 @@ geom_cols_interpolation(
   If `TRUE`, the labels will be parsed into expressions and displayed as
   described in [`?plotmath`](https://rdrr.io/r/grDevices/plotmath.html).
 
-- nudge_x, nudge_y:
-
-  Horizontal and vertical adjustments to nudge the starting position of
-  each text label. The units for `nudge_x` and `nudge_y` are the same as
-  for the data units on the x-axis and y-axis.
-
 - check_overlap:
 
   If `TRUE`, text that overlaps previous text in the same layer will not
@@ -971,6 +1038,18 @@ geom_cols_interpolation(
 
   **\[deprecated\]** Replaced by the `linewidth` aesthetic. Size of
   label border, in mm.
+
+- border.colour, border.color:
+
+  Colour of label border. When `NULL` (default), the `colour` aesthetic
+  determines the colour of the label border. `border.color` is an alias
+  for `border.colour`.
+
+- text.colour, text.color:
+
+  Colour of the text. When `NULL` (default), the `colour` aesthetic
+  determines the colour of the text. `text.color` is an alias for
+  `text.colour`.
 
 - box.padding:
 
@@ -1014,6 +1093,12 @@ geom_cols_interpolation(
   text label, we count how many other text labels or other data points
   it overlaps, and exclude the text label if it has too many overlaps.
   Defaults to 10.
+
+- nudge_x, nudge_y:
+
+  Horizontal and vertical adjustments to nudge the starting position of
+  each text label. The units for `nudge_x` and `nudge_y` are the same as
+  for the data units on the x-axis and y-axis.
 
 - xlim, ylim:
 
@@ -1061,26 +1146,27 @@ geom_cols_interpolation(
   Numeric; the orthogonal distance of the axis label from the axis, as a
   proportion of the minimum of the plot width and height.
 
-- axis.colour, axis.color, axis.alpha:
+- label_placement:
+
+  Character; how to place the labels along the axes. Matched to
+  `"positive"` (the default; at the increasing end of the axis),
+  `"negative"` (at the decreasing end), `"peripheral"` (at the end
+  farther from the origin).
+
+- axis.linewidth, axis.linetype, axis.colour, axis.color, axis.alpha:
 
   Default aesthetics for axes. Set to NULL to inherit from the data's
   aesthetics.
 
-- label.angle, label.colour, label.color, label.alpha:
+- label.colour, label.color, label.alpha:
 
   Default aesthetics for labels. Set to NULL to inherit from the data's
   aesthetics.
 
-- tick.linewidth, tick.colour, tick.color, tick.alpha:
+- tick.linewidth, tick.linetype, tick.colour, tick.color, tick.alpha:
 
   Default aesthetics for tick marks. Set to NULL to inherit from the
   data's aesthetics.
-
-- text.colour, text.color:
-
-  Colour of the text. When `NULL` (default), the `colour` aesthetic
-  determines the colour of the text. `text.color` is an alias for
-  `text.colour`.
 
 - isoline_text:
 
@@ -1089,6 +1175,15 @@ geom_cols_interpolation(
 - vector_labels:
 
   Logical; whether to include labels radiating outward from the vectors.
+
+- outlier_points:
+
+  Logical; whether to plot outlier markers. Defaults to
+  `! outlier_labels`.
+
+- outlier_labels:
+
+  Logical; whether to plot outlier labels. Defaults to `FALSE`.
 
 - bag.linetype, bag.linewidth, bag.colour, bag.color, bag.fill,
   bag.alpha:
@@ -1128,15 +1223,14 @@ geom_cols_interpolation(
 
 - new_data:
 
-  A list (best structured as a
-  [data.frame](https://rdrr.io/r/base/data.frame.html)) of row
-  (`geom_cols_interpolation()`) or column (`geom_rows_interpolation()`)
-  values to interpolate.
+  A list (best structured as a \[data.frame\]\[base::data.frame\]) of
+  row (\`geom_cols_interpolation()\`) or column
+  (\`geom_rows_interpolation()\`) values to interpolate.
 
 - type:
 
-  Character value matched to `"centroid"` or `"sequence"`; the type of
-  operations used to visualize interpolation.
+  Character value matched to \`"centroid"\` or \`"sequence"\`; the type
+  of operations used to visualize interpolation.
 
 - point.fill:
 
@@ -1145,7 +1239,7 @@ geom_cols_interpolation(
 
 ## Value
 
-A ggproto [layer](https://ggplot2.tidyverse.org/reference/layer.html).
+A ggproto \[layer\]\[ggplot2::layer\].
 
 ## See also
 
@@ -1200,6 +1294,12 @@ glass_lra %>%
     "Row-principal LRA biplot of Freestone glass measurements",
     "Ranges 2 sample standard deviations from centroids"
   )
+#> Warning: The following aesthetics were dropped during statistical transformation:
+#> axis.ss.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
 
 
 # principal components analysis of glass composition measurements

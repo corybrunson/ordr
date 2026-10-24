@@ -5,9 +5,9 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Augmented implementation of linear discriminant analysis — lda-ord"><meta name="description" content="This function replicates MASS::lda() with options and defaults
-to retain elements useful to the tbl_ord class and biplot calculations."><meta property="og:description" content="This function replicates MASS::lda() with options and defaults
-to retain elements useful to the tbl_ord class and biplot calculations."></head><body>
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Augmented implementation of linear discriminant analysis — lda-ord"><meta name="description" content="This function replicates [MASS::lda()] with options and defaults
+  to retain elements useful to the [tbl_ord] class and biplot calculations."><meta property="og:description" content="This function replicates [MASS::lda()] with options and defaults
+  to retain elements useful to the [tbl_ord] class and biplot calculations."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -47,8 +47,8 @@ to retain elements useful to the tbl_ord class and biplot calculations."></head>
     </div>
 
     <div class="ref-description section level2">
-    <p>This function replicates <code><a href="https://rdrr.io/pkg/MASS/man/lda.html" class="external-link">MASS::lda()</a></code> with options and defaults
-to retain elements useful to the <a href="tbl_ord.html">tbl_ord</a> class and biplot calculations.</p>
+    <p>This function replicates [MASS::lda()] with options and defaults
+  to retain elements useful to the [tbl_ord] class and biplot calculations.</p>
     </div>
 
     <div class="section level2">
@@ -165,16 +165,16 @@ to retain elements useful to the <a href="tbl_ord.html">tbl_ord</a> class and bi
 
 <dt id="arg-ret-x-ret-grouping">ret.x, ret.grouping<a class="anchor" aria-label="anchor" href="#arg-ret-x-ret-grouping"></a></dt>
 <dd><p>Logical; whether to retain as attributes the data
-matrix (<code>x</code>) and the class assignments (<code>grouping</code>) on which LDA is
-performed. Methods like <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> access these objects by name in the
+matrix (`x`) and the class assignments (`grouping`) on which LDA is
+performed. Methods like `predict()` access these objects by name in the
 parent environment, and retaining them as attributes prevents errors that
 arise if these objects are reassigned.</p></dd>
 
 
 <dt id="arg-axes-scale">axes.scale<a class="anchor" aria-label="anchor" href="#arg-axes-scale"></a></dt>
 <dd><p>Character string indicating how to left-transform the
-<code>scaling</code> value when rendering biplots using <code><a href="ggbiplot.html">ggbiplot()</a></code>. Options include
-<code>"unstandardized"</code>, <code>"standardized"</code>, and <code>"contribution"</code>.</p></dd>
+`scaling` value when rendering biplots using [ggbiplot()]. Options include
+`"unstandardized"`, `"standardized"`, and `"contribution"`.</p></dd>
 
 
 <dt id="arg-object">object<a class="anchor" aria-label="anchor" href="#arg-object"></a></dt>
@@ -197,67 +197,69 @@ only the first <code>dimen</code> discriminant components are used (except for
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Output from <code><a href="https://rdrr.io/pkg/MASS/man/lda.html" class="external-link">MASS::lda()</a></code> with an additional preceding <a href="https://rdrr.io/r/base/class.html" class="external-link">class</a>
-'lda_ord' and up to three <a href="https://rdrr.io/r/base/attributes.html" class="external-link">attributes</a>:</p><ul><li><p>the input data <code>x</code>, if <code>ret.x = TRUE</code></p></li>
-<li><p>the class assignments <code>grouping</code>, if <code>ret.grouping = TRUE</code></p></li>
-<li><p>if the parameter <code>axes.scale</code> is not 'unstandardized', a matrix
-<code>axes.scale</code> that encodes the transformation of the row space</p></li>
-</ul></div>
+    <p>Output from [MASS::lda()] with an additional preceding [class]
+  'lda_ord' and up to three [attributes]:</p>
+<p>* the input data `x`, if `ret.x = TRUE`
+  * the class assignments `grouping`, if `ret.grouping = TRUE`
+  * if the parameter `axes.scale` is not 'unstandardized', a matrix
+    `axes.scale` that encodes the transformation of the row space</p>
+    </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Linear discriminant analysis relies on an eigendecomposition of the product
 \(W^{-1}B\) of the inverse of the within-class covariance matrix \(W\) by
 the between-class covariance matrix \(B\). This eigendecomposition can be
 motivated as the right (\(V\)) half of the singular value decomposition of
-the matrix of <em>Mahalanobis distances</em> between the cases after "sphering"
+the matrix of _Mahalanobis distances_ between the cases after "sphering"
 (linearly transforming them so that the within-class covariance is the
 identity matrix). LDA are not traditionally represented as biplots, with some
 exceptions (Gardner &amp; le Roux, 2005; Greenacre, 2010, p. 109–117).</p>
-<p>LDA is implemented as <code><a href="https://rdrr.io/pkg/MASS/man/lda.html" class="external-link">MASS::lda()</a></code> in the <strong>MASS</strong> package, in which the
+<p>LDA is implemented as [MASS::lda()] in the **MASS** package, in which the
 variables are transformed by a sphering matrix \(S\) (Venables &amp; Ripley,
-2003, p. 331–333). The returned element <code>scaling</code> contains the
-unstandardized <em>discriminant coefficients</em>, which define the discriminant
+2003, p. 331–333). The returned element `scaling` contains the
+unstandardized _discriminant coefficients_, which define the discriminant
 scores of the cases and their centroids as linear combinations of the
 original variables.</p>
 <p>The discriminant coefficients constitute one of several possible choices of
 axes for a biplot representation of the LDA. The slightly modified function
-<code>lda_ord()</code> provides additional options:</p><ul><li><p>The <em>standardized discriminant coefficients</em> are obtained by (re)scaling
+[lda_ord()] provides additional options:</p>
+<p>* The _standardized discriminant coefficients_ are obtained by (re)scaling
 the coefficients by the variable standard deviations. These coefficients
 indicate the contributions of the variables to the discriminant scores after
-controlling for their variances (Orlov, 2013).</p></li>
-<li><p>The variables' <em>contributions</em> to the Mahalanobis variance along each
+controlling for their variances (Orlov, 2013).
+* The variables' _contributions_ to the Mahalanobis variance along each
 discriminant axis are obtained by transforming the coefficients by the
 inverse of the sphering matrix \(S\). Because the contribution biplot
 derives from the eigendecomposition of the Mahalanobis distance matrix, the
 projections of the centroids and cases onto the variable axes approximate
-their variable values after centering and sphering (Greenacre, 2013).</p></li>
-</ul><p>Finally, in contrast to <code><a href="https://rdrr.io/pkg/MASS/man/lda.html" class="external-link">MASS::lda()</a></code>, <code>lda_ord()</code> defaults both <code>ret.x</code> and
-<code>ret.grouping</code> to <code>TRUE</code>, so that these elements can be used to compute and
-annotate case scores as <a href="supplementation.html">supplementary</a> elements.</p>
+their variable values after centering and sphering (Greenacre, 2013).</p>
+<p>Finally, in contrast to [MASS::lda()], `lda_ord()` defaults both `ret.x` and
+`ret.grouping` to `TRUE`, so that these elements can be used to compute and
+annotate case scores as [supplementary][supplementation] elements.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Gardner S &amp; le Roux NJ (2005) "Extensions of Biplot Methodology to
-Discriminant Analysis". <em>Journal of Classification</em> <strong>22</strong>(1): 59–86.
+Discriminant Analysis". _Journal of Classification_ **22**(1): 59–86.
 <a href="https://doi.org/10.1007/s00357-005-0006-7" class="external-link">doi:10.1007/s00357-005-0006-7</a>
 
-<a href="https://link.springer.com/article/10.1007/s00357-005-0006-7" class="external-link">https://link.springer.com/article/10.1007/s00357-005-0006-7</a></p>
-<p>Greenacre MJ (2010) <em>Biplots in Practice</em>. Fundacion BBVA, ISBN:
+&lt;https://link.springer.com/article/10.1007/s00357-005-0006-7&gt;</p>
+<p>Greenacre MJ (2010) _Biplots in Practice_. Fundacion BBVA, ISBN:
 978-84-923846.
-<a href="https://www.fbbva.es/microsite/multivariate-statistics/biplots.html" class="external-link">https://www.fbbva.es/microsite/multivariate-statistics/biplots.html</a></p>
-<p>Venables WN &amp; Ripley BD (2003) <em>Modern Applied Statistics with S</em>, Fourth
+&lt;https://www.fbbva.es/microsite/multivariate-statistics/biplots.html&gt;</p>
+<p>Venables WN &amp; Ripley BD (2003) _Modern Applied Statistics with S_, Fourth
 Edition. Springer Science &amp; Business Media, ISBN: 0387954570, 9780387954578.
-<a href="https://www.mimuw.edu.pl/~pokar/StatystykaMgr/Books/VenablesRipley_ModernAppliedStatisticsS02.pdf" class="external-link">https://www.mimuw.edu.pl/~pokar/StatystykaMgr/Books/VenablesRipley_ModernAppliedStatisticsS02.pdf</a></p>
-<p>Orlov K (2013) <em>Answer to</em> "Algebra of LDA. Fisher discrimination power of a
+&lt;https://www.mimuw.edu.pl/~pokar/StatystykaMgr/Books/VenablesRipley_ModernAppliedStatisticsS02.pdf&gt;</p>
+<p>Orlov K (2013) _Answer to_ "Algebra of LDA. Fisher discrimination power of a
 variable and Linear Discriminant Analysis". CrossValidated, accessed
-2019-07-26. <a href="https://stats.stackexchange.com/a/83114/68743" class="external-link">https://stats.stackexchange.com/a/83114/68743</a></p>
-<p>Greenacre M (2013) "Contribution Biplots". <em>Journal of Computational and
-Graphical Statistics</em>, <strong>22</strong>(1): 107–122.
-<a href="https://www.tandfonline.com/doi/abs/10.1080/10618600.2012.702494" class="external-link">https://www.tandfonline.com/doi/abs/10.1080/10618600.2012.702494</a></p>
+2019-07-26. &lt;https://stats.stackexchange.com/a/83114/68743&gt;</p>
+<p>Greenacre M (2013) "Contribution Biplots". _Journal of Computational and
+Graphical Statistics_, **22**(1): 107–122.
+&lt;https://www.tandfonline.com/doi/abs/10.1080/10618600.2012.702494&gt;</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://rdrr.io/pkg/MASS/man/lda.html" class="external-link">MASS::lda()</a></code>, from which <code>lda_ord()</code> is adapted</p></div>
+    <div class="dont-index"><p>[MASS::lda()], from which `lda_ord()` is adapted</p></div>
     </div>
 
     <div class="section level2">

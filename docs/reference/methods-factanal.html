@@ -6,8 +6,8 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Functionality for factor analysis ('factanal') objects — methods-factanal"><meta name="description" content='These methods extract data from, and attribute new data to,
-objects of class "factanal" as returned by stats::factanal().'><meta property="og:description" content='These methods extract data from, and attribute new data to,
-objects of class "factanal" as returned by stats::factanal().'></head><body>
+  objects of class `"factanal"` as returned by [stats::factanal()].'><meta property="og:description" content='These methods extract data from, and attribute new data to,
+  objects of class `"factanal"` as returned by [stats::factanal()].'></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -48,7 +48,7 @@ objects of class "factanal" as returned by stats::factanal().'></head><body>
 
     <div class="ref-description section level2">
     <p>These methods extract data from, and attribute new data to,
-objects of class <code>"factanal"</code> as returned by <code><a href="https://rdrr.io/r/stats/factanal.html" class="external-link">stats::factanal()</a></code>.</p>
+  objects of class `"factanal"` as returned by [stats::factanal()].</p>
     </div>
 
     <div class="section level2">
@@ -94,13 +94,15 @@ objects of class <code>"factanal"</code> as returned by <code><a href="https://r
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The recovery generics <code>recover_*()</code> return <a href="recoverers.html">core model components</a>, <a href="conference.html">distribution of inertia</a>,
-<a href="supplementation.html">supplementary elements</a>, and <a href="augmentation.html">intrinsic metadata</a>; but they require methods for each model class to
-tell them what these components are.</p>
-<p>The generic <code><a href="tbl_ord.html">as_tbl_ord()</a></code> returns its input wrapped in the 'tbl_ord'
-class. Its methods determine what model classes it is allowed to wrap. It
-then provides 'tbl_ord' methods with access to the recoverers and hence to
-the model components.</p>
+    <p>The recovery generics `recover_*()` return [core model
+  components][recoverers], [distribution of inertia][conference],
+  [supplementary elements][supplementation], and [intrinsic
+  metadata][augmentation]; but they require methods for each model class to
+  tell them what these components are.</p>
+<p>The generic [as_tbl_ord()] returns its input wrapped in the 'tbl_ord'
+  class. Its methods determine what model classes it is allowed to wrap. It
+  then provides 'tbl_ord' methods with access to the recoverers and hence to
+  the model components.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -108,7 +110,7 @@ the model components.</p>
 correlation matrix, whose eigenvectors (up to weighting) comprise the
 variable loadings. For this reason, both row and column recoverers retrieve
 the loadings and inertia is evenly distributed between them. When computed
-and returned by <code><a href="https://rdrr.io/r/stats/factanal.html" class="external-link">stats::factanal()</a></code>, the case scores are accessible as
+and returned by [stats::factanal()], the case scores are accessible as
 supplementary elements. Redistribution of inertia commutes through both
 score calculations.</p>
     </div>
@@ -157,11 +159,11 @@ score calculations.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (standard, 0%): [ 47 × 2 | 0 ]</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Factor1 Factor2<span style="color: #949494;"> | </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">       [1]     [1]</span><span style="color: #949494;"> | </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span>  0.0791 -0.634 <span style="color: #949494;"> | </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span> -0.179   1.08  <span style="color: #949494;"> | </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span> -0.588   1.20  <span style="color: #949494;"> | </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span> -0.424  -0.158 <span style="color: #949494;"> | </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span>  0.382  -0.668 <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1  0.0791 -0.634  | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2 -0.179   1.08   | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3 -0.588   1.20   | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4 -0.424  -0.158  | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5  0.382  -0.668  | </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         <span style="color: #949494;">⋮</span>            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (principal, 100%): [ 6 × 2 | 0 ]</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Factor1 Factor2<span style="color: #949494;"> | </span></span>
@@ -201,11 +203,11 @@ score calculations.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (standard, 0%): [ 47 × 2 | 2 ]</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Factor1 Factor2<span style="color: #949494;"> | </span>.element name        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">       [1]     [1]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;    &lt;chr&gt;       </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span>  0.0791 -0.634 <span style="color: #949494;"> | </span>score    Courtelary  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span> -0.179   1.08  <span style="color: #949494;"> | </span>score    Delemont    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span> -0.588   1.20  <span style="color: #949494;"> | </span>score    Franches-Mnt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span> -0.424  -0.158 <span style="color: #949494;"> | </span>score    Moutier     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span>  0.382  -0.668 <span style="color: #949494;"> | </span>score    Neuveville  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1  0.0791 -0.634  | score    Courtelary  </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2 -0.179   1.08   | score    Delemont    </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3 -0.588   1.20   | score    Franches-Mnt</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4 -0.424  -0.158  | score    Moutier     </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5  0.382  -0.668  | score    Neuveville  </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         <span style="color: #949494;">⋮</span>                      <span style="color: #949494;">⋮</span>          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (principal, 100%): [ 6 × 2 | 3 ]</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Factor1 Factor2<span style="color: #949494;"> | </span>name             uniqueness .element</span>

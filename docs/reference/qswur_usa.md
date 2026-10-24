@@ -11,58 +11,57 @@ data(qswur_usa)
 
 ## Format
 
-A [tibble](https://tibble.tidyverse.org/reference/tibble.html) of 13
-variables on 612 cases:
+A \[tibble\]\[tibble::tibble\] of 13 variables on 612 cases:
 
-- `year`:
+- \`year\`:
 
   year of rankings
 
-- `institution`:
+- \`institution\`:
 
   institution of higher learning
 
-- `size`:
+- \`size\`:
 
   size category of institution
 
-- `focus`:
+- \`focus\`:
 
   subject range of institution
 
-- `res`:
+- \`res\`:
 
   research intensity of institution
 
-- `age`:
+- \`age\`:
 
   age classification of institution
 
-- `status`:
+- \`status\`:
 
   status of institution
 
-- `rk_academic`:
+- \`rk_academic\`:
 
   rank by academic reputation
 
-- `rk_employer`:
+- \`rk_employer\`:
 
   rank by employer reputation
 
-- `rk_ratio`:
+- \`rk_ratio\`:
 
   rank by faculty–student ratio
 
-- `rk_citations`:
+- \`rk_citations\`:
 
   rank by citations per faculty
 
-- `rk_intl_faculty`:
+- \`rk_intl_faculty\`:
 
   rank by international faculty ratio
 
-- `rk_intl_students`:
+- \`rk_intl_students\`:
 
   rank by international student ratio
 

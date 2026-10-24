@@ -19,49 +19,43 @@ augment_ord(x, .matrix = "dims")
 
 - x:
 
-  An object of class '[tbl_ord](tbl_ord.md)'.
+  An object of class '\[tbl_ord\]'.
 
 - .matrix:
 
   A character string partially matched (lowercase) to several indicators
   for one or both matrices in a matrix decomposition used for
-  ordination. The standard values are `"rows"`, `"cols"`, and `"dims"`
-  (for both).
+  ordination. The standard values are \`"rows"\`, \`"cols"\`, and
+  \`"dims"\` (for both).
 
 ## Value
 
-The `recover_aug_*()` functions return
-[tibble](https://tibble.tidyverse.org/reference/tibble.html)s having the
-same numbers of rows as `recover_*()`. `augment_ord()` returns an
-augmented tbl_ord with the wrapped model unchanged.
+The \`recover_aug\_\*()\` functions return \[tibble\]\[tibble::tibble\]s
+having the same numbers of rows as \`recover\_\*()\`. \`augment_ord()\`
+returns an augmented tbl_ord with the wrapped model unchanged.
 
 ## Details
 
-The `recover_aug_*()` [S3
-methods](https://rdrr.io/r/base/UseMethod.html) produce
-[tibble](https://tibble.tidyverse.org/reference/tibble.html)s of values
-associated with the rows, columns, and artificial coordinates of an
-object of class '[tbl_ord](tbl_ord.md)'. The first field of each tibble
-is `name`, which contains the row, column, or coordinate names.
-Additional fields contain information about the rows, columns, or
-coordinates extracted from the ordination object.
+The \`recover_aug\_\*()\` \[S3 methods\]\[base::S3Methods\] produce
+\[tibble\]\[tibble::tibble\]s of values associated with the rows,
+columns, and artificial coordinates of an object of class '\[tbl_ord\]'.
+The first field of each tibble is \`name\`, which contains the row,
+column, or coordinate names. Additional fields contain information about
+the rows, columns, or coordinates extracted from the ordination object.
 
-The function `augment_ord()` returns the ordination with either or both
-matrix factors annotated with the result of `recover_aug_*()`. In this
-way `augment_ord()` works like
-[`generics::augment()`](https://generics.r-lib.org/reference/augment.html),
-as popularized by the **broom** package, by extracting information about
-the rows and columns, but it differs in returning an annotated 'tbl_ord'
-rather than a
-['tbl_df'](https://tibble.tidyverse.org/reference/tbl_df-class.html)
-object. The advantage of implementing separate methods for the rows,
-columns, and artificial coordinates is that more information contained
-in the original object becomes accessible to the user.
+The function \`augment_ord()\` returns the ordination with either or
+both matrix factors annotated with the result of \`recover_aug\_\*()\`.
+In this way \`augment_ord()\` works like \[generics::augment()\], as
+popularized by the \*\*broom\*\* package, by extracting information
+about the rows and columns, but it differs in returning an annotated
+'tbl_ord' rather than a \['tbl_df'\]\[tibble::tbl_df\] object. The
+advantage of implementing separate methods for the rows, columns, and
+artificial coordinates is that more information contained in the
+original object becomes accessible to the user.
 
 ## See also
 
-[tidiers](tidiers.md) and [annotation](annotation.md) methods that
-interface with augmentation.
+\[tidiers\] and \[annotation\] methods that interface with augmentation.
 
 Other generic recoverers: [`conference`](conference.md),
 [`recoverers`](recoverers.md), [`supplementation`](supplementation.md)
