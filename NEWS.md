@@ -31,6 +31,12 @@ The `elements` parameter now accepts `"pinv_weight"` alongside `"active"`, `"sco
 
 Functions are provided to calculate three goodness-of-fit statistics.
 
+## facet for pairwise biplots
+
+The new `facet_ord()` constructor calls `FacetOrd`, a subclass of `FacetGrid`, to create a grid of biplots for each ordered pair of coordinates.
+It replaces `x`/`y` mappings with panel-specific coordinates and accepts a `coords` argument to subset the grid by count, index, or name.
+The `scales` and `space` parameters are coupled by default, and panels maintain a fixed unit aspect ratio.
+
 ## bug fixes
 
 Duplicative definitions of `recover_aug_rows.eigen_ord()` and `recover_aug_cols.eigen_ord()` are corrected to `"eigen"` methods.
