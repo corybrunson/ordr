@@ -50,19 +50,21 @@
 \item{x}{An ordination object.}
 }
 \value{
-The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia},
-\link[=supplementation]{supplementary elements}, and \link[=augmentation]{intrinsic metadata}; but they require methods for each model class to
-tell them what these components are.
+The recovery generics `recover_*()` return [core model
+  components][recoverers], [distribution of inertia][conference],
+  [supplementary elements][supplementation], and [intrinsic
+  metadata][augmentation]; but they require methods for each model class to
+  tell them what these components are.
 
-The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
-class. Its methods determine what model classes it is allowed to wrap. It
-then provides 'tbl_ord' methods with access to the recoverers and hence to
-the model components.
+  The generic [as_tbl_ord()] returns its input wrapped in the 'tbl_ord'
+  class. Its methods determine what model classes it is allowed to wrap. It
+  then provides 'tbl_ord' methods with access to the recoverers and hence to
+  the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
-objects of class \code{"lm"}, \code{"glm"}, and \code{"mlm"} as returned by \code{\link[stats:lm]{stats::lm()}}
-and \code{\link[stats:glm]{stats::glm()}}.
+  objects of class `"lm"`, `"glm"`, and `"mlm"` as returned by [stats::lm()]
+  and [stats::glm()].
 }
 \examples{
 # Motor Trend design and performance data
@@ -98,10 +100,10 @@ mtcars_lm_ord \%>\%
   )
 }
 \seealso{
-Other methods for idiosyncratic techniques: 
+Other methods for idiosyncratic techniques:
 \code{\link{methods-kmeans}}
 
-Other models from the stats package: 
+Other models from the stats package:
 \code{\link{methods-cancor}},
 \code{\link{methods-cmds}},
 \code{\link{methods-factanal}},

@@ -1,8 +1,8 @@
 # Biplot key drawing functions
 
 These key drawing functions supplement those built into
-**[ggplot2](https://ggplot2.tidyverse.org/reference/ggplot2-package.html)**
-for producing legends suitable to biplots.
+\*\*\[ggplot2\]\[ggplot2::ggplot2\]\*\* for producing legends suitable
+to biplots.
 
 ## Usage
 
@@ -35,16 +35,14 @@ A grid grob.
 
 ## Details
 
-`draw_key_line()` is a horizontal counterpart to
-[`ggplot2::draw_key_vline()`](https://ggplot2.tidyverse.org/reference/draw_key.html).
-`draw_key_crosslines()` superimposes these two keys, and
-`draw_key_crosspoint()` additionally superimposes an oversized
-[`ggplot2::draw_key_point()`](https://ggplot2.tidyverse.org/reference/draw_key.html).
+\`draw_key_line()\` is a horizontal counterpart to
+\[ggplot2::draw_key_vline()\]. \`draw_key_crosslines()\` superimposes
+these two keys, and \`draw_key_crosspoint()\` additionally superimposes
+an oversized \[ggplot2::draw_key_point()\].
 
 ## See also
 
-[ggplot2::draw_key](https://ggplot2.tidyverse.org/reference/draw_key.html)
-for key glyphs installed with **ggplot2**.
+\[ggplot2::draw_key\] for key glyphs installed with \*\*ggplot2\*\*.
 
 ## Examples
 
@@ -67,4 +65,16 @@ iris[, -5] %>%
     "Ranges 2 sample standard deviations from centroids"
   )
 #> Warning: Duplicated aesthetics after name standardisation: contour
+#> Warning: The following aesthetics were dropped during statistical transformation:
+#> axis.ss.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
+#> Warning: The following aesthetics were dropped during statistical transformation:
+#> axis.ss.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
 ```

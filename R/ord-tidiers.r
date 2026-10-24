@@ -4,13 +4,13 @@
 #'   an object of class '[tbl_ord]'. `tidy()` output contains one row per
 #'   artificial coordinate and `glance()` output contains one row for the whole
 #'   ordination.
-#'   
+#'
 
 #' @details
-#' 
+#'
 #' Three generics popularized by the **ggplot2** and **broom** packages make use
 #' of the [augmentation] methods:
-#' 
+#'
 
 #' * The [generics::tidy()] method
 
@@ -119,7 +119,15 @@ fortify.tbl_ord <- function(
     is.character(elements),
     length(elements) == 1L
   )
-  
+
+  conf <- get_conference(model)
+  conf_rows <- NA_real_
+  conf_cols <- NA_real_
+  if (is.numeric(conf) && length(conf) == 2L) {
+    conf_rows <- conf[[1L]]
+    conf_cols <- conf[[2L]]
+  }
+
   if (.matrix == "dims" || .matrix == "rows") {
     u <- as_tibble(get_rows(model))
     u <- dplyr::bind_cols(u, annotation_factor(model, "rows"))
@@ -131,6 +139,7 @@ fortify.tbl_ord <- function(
     }
     # introduce reference columns if necessary
     u$.matrix <- "rows"
+    u$.conference <- conf_rows
   }
   if (.matrix == "dims" || .matrix == "cols") {
     v <- as_tibble(get_cols(model))
@@ -143,15 +152,16 @@ fortify.tbl_ord <- function(
     }
     # introduce reference columns if necessary
     v$.matrix <- "cols"
+    v$.conference <- conf_cols
   }
-  
+
   tbl <- switch(
     .matrix,
     rows = u,
     cols = v,
     dims = as_tibble(as.data.frame(dplyr::bind_rows(u, v)))
   )
-  
+
   attr(tbl, "coordinates") <- get_coord(model)
   tbl
 }

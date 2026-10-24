@@ -62,19 +62,27 @@ get_ord_aes <- function(data) {
   names(data)[ord_cols]
 }
 
+# compute the squared norm of each axis across its mapped model coordinates
+setup_axis_ss <- function(data) {
+  ord_cols <- get_ord_aes(data)
+  if (length(ord_cols) < 2L) return(data)
+  data$axis.ss <- rowSums(data[, ord_cols, drop = FALSE]^2)
+  data
+}
+
 # restrict to specified elements
 setup_elts_data <- function(data, params) {
-  
+
   if (is.null(params$elements))
     # default to active elements
     params$elements <- "active"
   else
     # match `elements` to a list of recognized options (excluding `"all"`)
     params$elements <- match.arg(params$elements, .ord_elements)
-  
+
   # subset accordingly
   data <- data[data$.element == params$elements, , drop = FALSE]
-  
+
   # print note if both `elements` and `subset` are passed
   if (! is.null(params$subset)) {
     rlang::inform(
@@ -85,7 +93,7 @@ setup_elts_data <- function(data, params) {
       .frequency = "once", .frequency_id = "setup_elts_data-subset"
     )
   }
-  
+
   # by default, render elements for all rows
   if (! is.null(params$subset)) {
     if (is.numeric(params$subset)) {
@@ -96,31 +104,55 @@ setup_elts_data <- function(data, params) {
       warning("`subset` of unrecognized type will be ignored.")
     }
   }
-  
+
   data
 }
 
 # restrict to a matrix factor
 setup_rows_data <- function(data, params) {
-  
+
+  conf_rows <- NA_real_
+  conf_cols <- NA_real_
+  if (".conference" %in% names(data)) {
+    cr <- unique(data$.conference[data$.matrix == "rows"])
+    cc <- unique(data$.conference[data$.matrix == "cols"])
+    if (length(cr) == 1L) conf_rows <- cr[[1L]]
+    if (length(cc) == 1L) conf_cols <- cc[[1L]]
+  }
+
+  warn_predictive_conference(conf_rows, conf_cols, "rows", params)
+
   data <-
-    data[data$.matrix == "rows", -match(".matrix", names(data)), drop = FALSE]
-  
-  setup_elts_data(data, params)
+    data[data$.matrix == "rows", setdiff(names(data), ".matrix"), drop = FALSE]
+
+  data <- setup_elts_data(data, params)
+  setup_axis_ss(data)
 }
 setup_cols_data <- function(data, params) {
-  
+
+  conf_rows <- NA_real_
+  conf_cols <- NA_real_
+  if (".conference" %in% names(data)) {
+    cr <- unique(data$.conference[data$.matrix == "rows"])
+    cc <- unique(data$.conference[data$.matrix == "cols"])
+    if (length(cr) == 1L) conf_rows <- cr[[1L]]
+    if (length(cc) == 1L) conf_cols <- cc[[1L]]
+  }
+
+  warn_predictive_conference(conf_rows, conf_cols, "cols", params)
+
   data <-
-    data[data$.matrix == "cols", -match(".matrix", names(data)), drop = FALSE]
-  
-  setup_elts_data(data, params)
+    data[data$.matrix == "cols", setdiff(names(data), ".matrix"), drop = FALSE]
+
+  data <- setup_elts_data(data, params)
+  setup_axis_ss(data)
 }
 
 # restrict to a matrix factor and to the first two coordinates
 # (for stat layers that only accept 'x' and 'y')
 setup_rows_xy_data <- function(data, params) {
   data <- setup_rows_data(data, params)
-  
+
   ord_cols <- get_ord_aes(data)
   # if necessary, restore 'x' and 'y' from first and second coordinates
   if (any(is.na(match(c("x", "y"), ord_cols)))) {
@@ -129,12 +161,12 @@ setup_rows_xy_data <- function(data, params) {
     data$x <- data[[xy_cols[[1L]]]]
     data$y <- data[[xy_cols[[2L]]]]
   }
-  
+
   data
 }
 setup_cols_xy_data <- function(data, params) {
   data <- setup_cols_data(data, params)
-  
+
   ord_cols <- get_ord_aes(data)
   # if necessary, restore 'x' and 'y' from first and second coordinates
   if (any(is.na(match(c("x", "y"), ord_cols)))) {
@@ -143,12 +175,60 @@ setup_cols_xy_data <- function(data, params) {
     data$x <- data[[xy_cols[[1L]]]]
     data$y <- data[[xy_cols[[2L]]]]
   }
-  
+
   data
 }
 
+warn_predictive_conference <- function(
+    conf_rows, conf_cols, axis_factor, params
+) {
+  if (is.null(params) || ! isTRUE(params$axis.type == "predictive")) {
+    return(invisible(NULL))
+  }
+
+  conf_axis <- if (identical(axis_factor, "rows")) conf_rows else conf_cols
+
+  axis_is_standard <- is.numeric(conf_axis) && length(conf_axis) == 1L &&
+    ! is.na(conf_axis) && abs(conf_axis - 0) < 1e-12
+
+  pair_balanced <- FALSE
+  if (is.numeric(conf_rows) && is.numeric(conf_cols) &&
+      length(conf_rows) == 1L && length(conf_cols) == 1L &&
+      ! is.na(conf_rows) && ! is.na(conf_cols)) {
+    pair_balanced <- (abs(conf_rows - 0) < 1e-12 && abs(conf_cols - 1) < 1e-12)
+  }
+
+  causes <- character()
+  if (! axis_is_standard) {
+    causes <- c(causes, paste0(axis_factor, " are non-standard"))
+  }
+  if (! pair_balanced) {
+    causes <- c(causes, "inertia is not balanced")
+  }
+
+  if (length(causes) == 0L) return(invisible(NULL))
+
+  msg <- paste0(
+    "Predictive axes assume standard coordinates and balanced inertia; ",
+    paste(causes, collapse = " and ")
+  )
+
+  if (requireNamespace("rlang", quietly = TRUE)) {
+    rlang::warn(
+      msg,
+      .frequency = "once",
+      .frequency_id = paste0("ordr-predictive-conference-", axis_factor,
+                             "-", paste(gsub("[^A-Za-z0-9]+", "-", causes), collapse = "-"))
+    )
+  } else {
+    warning(msg, call. = FALSE)
+  }
+
+  invisible(NULL)
+}
+
 setup_referent_params <- function(self, data, params) {
-  
+
   if (is.null(params$referent)) {
     # default null `referent` to other matrix factor
     .matrix <- tolower(gsub("^Stat(Rows|Cols).*$", "\\1", class(self)[[1L]]))
@@ -167,7 +247,7 @@ setup_referent_params <- function(self, data, params) {
     params$referent <- as.data.frame(params$referent)
     params <- ggproto_parent(StatReferent, self)$setup_params(data, params)
   }
-  
+
   params
 }
 

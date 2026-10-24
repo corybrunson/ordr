@@ -1,12 +1,9 @@
 # Tidiers for 'tbl_ord' objects
 
-These functions return
-[tibbles](https://tibble.tidyverse.org/reference/tibble.html) that
-summarize an object of class '[tbl_ord](tbl_ord.md)'.
-[`tidy()`](https://generics.r-lib.org/reference/tidy.html) output
-contains one row per artificial coordinate and
-[`glance()`](https://generics.r-lib.org/reference/glance.html) output
-contains one row for the whole ordination.
+These functions return \[tibbles\]\[tibble::tibble\] that summarize an
+object of class '\[tbl_ord\]'. \`tidy()\` output contains one row per
+artificial coordinate and \`glance()\` output contains one row for the
+whole ordination.
 
 ## Usage
 
@@ -25,7 +22,7 @@ fortify(model, data, ..., .matrix = "dims", elements = "all")
 
 - x, model:
 
-  An object of class '[tbl_ord](tbl_ord.md)'.
+  An object of class '\[tbl_ord\]'.
 
 - ...:
 
@@ -39,87 +36,59 @@ fortify(model, data, ..., .matrix = "dims", elements = "all")
 
   A character string partially matched (lowercase) to several indicators
   for one or both matrices in a matrix decomposition used for
-  ordination. The standard values are `"rows"`, `"cols"`, and `"dims"`
-  (for both).
+  ordination. The standard values are \`"rows"\`, \`"cols"\`, and
+  \`"dims"\` (for both).
 
 - elements:
 
   Character vector; which elements of each factor for which to render
-  graphical elements. One of `"active"` (the default) or any
+  graphical elements. One of \`"active"\` (the default) or any
   supplementary element type defined by the specific class methods (e.g.
-  `"score"` for 'factanal', 'lda_ord', and 'cancord_ord' and
-  `"intraset"` and `"interset"` for 'cancor_ord'), via [partial
-  matching](https://rdrr.io/r/base/match.arg.html).
+  \`"score"\` for 'factanal', 'lda_ord', and 'cancord_ord' and
+  \`"intraset"\` and \`"interset"\` for 'cancor_ord'), via \[partial
+  matching\]\[base::match.arg()\].
 
 ## Value
 
-A [tibble](https://tibble.tidyverse.org/reference/tibble.html).
+A \[tibble\]\[tibble::tibble\].
 
 ## Details
 
-Three generics popularized by the **ggplot2** and **broom** packages
-make use of the [augmentation](augmentation.md) methods:
+Three generics popularized by the \*\*ggplot2\*\* and \*\*broom\*\*
+packages make use of the \[augmentation\] methods:
 
-- The
-  [`generics::tidy()`](https://generics.r-lib.org/reference/tidy.html)
-  method summarizes information about model components, which here are
-  the artificial coordinates created by ordinations. The output can be
-  passed to
-  [`ggplot2::ggplot()`](https://ggplot2.tidyverse.org/reference/ggplot.html)
-  to generate scree plots. The returned columns are
+\* The \[generics::tidy()\] method summarizes information about model
+components, which here are the artificial coordinates created by
+ordinations. The output can be passed to \[ggplot2::ggplot()\] to
+generate scree plots. The returned columns are - \`name\`: (the name of)
+the coordinate - other columns extracted from the model, usually a
+single additional column of the singular or eigen values - \`inertia\`:
+the multidimensional variance - \`prop_var\`: the proportion of
+inertia - \`quality\`: the cumulative proportion of variance \* The
+\[generics::glance()\] method reports information about the entire
+model, here always treated as one of a broader class of ordination
+models. The returned columns are - \`rank\`: the rank of the ordination
+model, i.e. the number of ordinates - \`n.row\`,\`n.col\`: the
+dimensions of the decomposed matrix - \`inertia\`: the total inertia in
+the ordination - \`prop.var.\*\`: the proportion of variance in the
+first 2 ordinates - \`class\`: the class of the wrapped model object \*
+The \[ggplot2::fortify()\] method augments and collapses row and/or
+column data, depending on \`.matrix\` and \`.element\`, into a single
+tibble, in preparation for \[ggplot2::ggplot()\]. Its output resembles
+that of \[generics::augment()\], though rows in the output may
+correspond to rows, columns, or both of the original data. If
+\`.matrix\` is passed \`"rows"\`, \`"cols"\`, or \`"dims"\` (for both),
+then \`fortify()\` returns a tibble whose fields are obtained, in order,
+via \`get\_\*()\`, \`recover_aug\_\*()\`, and \`annotation\_\*()\`.
 
-  - `name`: (the name of) the coordinate
-
-  - other columns extracted from the model, usually a single additional
-    column of the singular or eigen values
-
-  - `inertia`: the multidimensional variance
-
-  - `prop_var`: the proportion of inertia
-
-  - `quality`: the cumulative proportion of variance
-
-- The
-  [`generics::glance()`](https://generics.r-lib.org/reference/glance.html)
-  method reports information about the entire model, here always treated
-  as one of a broader class of ordination models. The returned columns
-  are
-
-  - `rank`: the rank of the ordination model, i.e. the number of
-    ordinates
-
-  - `n.row`,`n.col`: the dimensions of the decomposed matrix
-
-  - `inertia`: the total inertia in the ordination
-
-  - `prop.var.*`: the proportion of variance in the first 2 ordinates
-
-  - `class`: the class of the wrapped model object
-
-- The
-  [`ggplot2::fortify()`](https://ggplot2.tidyverse.org/reference/fortify.html)
-  method augments and collapses row and/or column data, depending on
-  `.matrix` and `.element`, into a single tibble, in preparation for
-  [`ggplot2::ggplot()`](https://ggplot2.tidyverse.org/reference/ggplot.html).
-  Its output resembles that of
-  [`generics::augment()`](https://generics.r-lib.org/reference/augment.html),
-  though rows in the output may correspond to rows, columns, or both of
-  the original data. If `.matrix` is passed `"rows"`, `"cols"`, or
-  `"dims"` (for both), then
-  [`fortify()`](https://ggplot2.tidyverse.org/reference/fortify.html)
-  returns a tibble whose fields are obtained, in order, via `get_*()`,
-  `recover_aug_*()`, and `annotation_*()`.
-
-The tibble is assigned a `"coordinates"` attribute whose value is
-obtained via [`get_coord()`](recoverers.md). This facilitates some
-downstream functionality that relies on more than those coordinates used
-as position aesthetics in a biplot, in particular
-[`stat_spantree()`](https://corybrunson.github.io/gggda/reference/stat_spantree.html).
+The tibble is assigned a \`"coordinates"\` attribute whose value is
+obtained via \[get_coord()\]. This facilitates some downstream
+functionality that relies on more than those coordinates used as
+position aesthetics in a biplot, in particular \[stat_spantree()\].
 
 ## See also
 
-[augmentation](augmentation.md) methods that must interface with
-tidiers.
+\[augmentation\] methods that must interface with tidiers.
 
 ## Examples
 
@@ -160,20 +129,21 @@ iris_pca %>%
 
 # ... or to prepare both for `ggbiplot()`
 fortify(iris_pca)
-#> # A tibble: 154 × 10
-#>      PC1     PC2     PC3      PC4 .element Species .matrix name  center scale
-#>    <dbl>   <dbl>   <dbl>    <dbl> <chr>    <fct>   <chr>   <chr>  <dbl> <dbl>
-#>  1 -2.26 -0.478   0.127   0.0241  active   setosa  rows    NA        NA    NA
-#>  2 -2.07  0.672   0.234   0.103   active   setosa  rows    NA        NA    NA
-#>  3 -2.36  0.341  -0.0441  0.0283  active   setosa  rows    NA        NA    NA
-#>  4 -2.29  0.595  -0.0910 -0.0657  active   setosa  rows    NA        NA    NA
-#>  5 -2.38 -0.645  -0.0157 -0.0358  active   setosa  rows    NA        NA    NA
-#>  6 -2.07 -1.48   -0.0269  0.00659 active   setosa  rows    NA        NA    NA
-#>  7 -2.44 -0.0475 -0.334  -0.0367  active   setosa  rows    NA        NA    NA
-#>  8 -2.23 -0.222   0.0884 -0.0245  active   setosa  rows    NA        NA    NA
-#>  9 -2.33  1.11   -0.145  -0.0268  active   setosa  rows    NA        NA    NA
-#> 10 -2.18  0.467   0.253  -0.0398  active   setosa  rows    NA        NA    NA
+#> # A tibble: 154 × 11
+#>      PC1     PC2     PC3      PC4 .element Species .matrix .conference name 
+#>    <dbl>   <dbl>   <dbl>    <dbl> <chr>    <fct>   <chr>         <dbl> <chr>
+#>  1 -2.26 -0.478   0.127   0.0241  active   setosa  rows              1 NA   
+#>  2 -2.07  0.672   0.234   0.103   active   setosa  rows              1 NA   
+#>  3 -2.36  0.341  -0.0441  0.0283  active   setosa  rows              1 NA   
+#>  4 -2.29  0.595  -0.0910 -0.0657  active   setosa  rows              1 NA   
+#>  5 -2.38 -0.645  -0.0157 -0.0358  active   setosa  rows              1 NA   
+#>  6 -2.07 -1.48   -0.0269  0.00659 active   setosa  rows              1 NA   
+#>  7 -2.44 -0.0475 -0.334  -0.0367  active   setosa  rows              1 NA   
+#>  8 -2.23 -0.222   0.0884 -0.0245  active   setosa  rows              1 NA   
+#>  9 -2.33  1.11   -0.145  -0.0268  active   setosa  rows              1 NA   
+#> 10 -2.18  0.467   0.253  -0.0398  active   setosa  rows              1 NA   
 #> # ℹ 144 more rows
+#> # ℹ 2 more variables: center <dbl>, scale <dbl>
 
 # use `glance()` to summarize the model as an ordination
 glance(iris_pca)

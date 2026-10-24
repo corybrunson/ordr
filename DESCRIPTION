@@ -47,7 +47,7 @@ Imports:
     purrr,
     labeling,
     ggrepel,
-    gggda
+    gggda (>= 0.2.0-1)
 Suggests:
     testthat,
     sessioninfo,
@@ -61,7 +61,6 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/corybrunson/ordr, https://corybrunson.github.io/ordr/
 BugReports: https://github.com/corybrunson/ordr/issues
-RoxygenNote: 7.3.3
 Config/testthat/edition: 3
 Collate:
     'aaa-.r'
@@ -113,3 +112,4 @@ Collate:
     'zzz-biplot-stats.r'
     'zzz.r'
 VignetteBuilder: knitr
+Config/roxygen2/version: 8.1.0

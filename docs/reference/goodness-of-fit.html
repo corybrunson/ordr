@@ -6,8 +6,8 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Measures of goodness of fit of ordination models — goodness-of-fit"><meta name="description" content="Compute the quality, adequacy, and predictivity of a 'tbl_ord'
-object from the retrieved matrix factors."><meta property="og:description" content="Compute the quality, adequacy, and predictivity of a 'tbl_ord'
-object from the retrieved matrix factors."></head><body>
+  object from the retrieved matrix factors."><meta property="og:description" content="Compute the quality, adequacy, and predictivity of a 'tbl_ord'
+  object from the retrieved matrix factors."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -48,7 +48,7 @@ object from the retrieved matrix factors."></head><body>
 
     <div class="ref-description section level2">
     <p>Compute the quality, adequacy, and predictivity of a 'tbl_ord'
-object from the retrieved matrix factors.</p>
+  object from the retrieved matrix factors.</p>
     </div>
 
     <div class="section level2">
@@ -70,50 +70,50 @@ object from the retrieved matrix factors.</p>
 
 <dt id="arg-rank">rank<a class="anchor" aria-label="anchor" href="#arg-rank"></a></dt>
 <dd><p>The maximum rank for which to compute statistics; the default,
-<code>NULL</code> computes statistics up to the rank of the model.</p></dd>
+`NULL` computes statistics up to the rank of the model.</p></dd>
 
 
 <dt id="arg--matrix">.matrix<a class="anchor" aria-label="anchor" href="#arg--matrix"></a></dt>
 <dd><p>A character string partially matched (lowercase) to several
 indicators for one or both matrices in a matrix decomposition used for
-ordination. The standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</code> (for
+ordination. The standard values are `"rows"`, `"cols"`, and `"dims"` (for
 both).</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A vector, matrix, or list of matrices of numeric goodness-of-fit
-statistics. If no items are found, a matrix will have zero rows.</p>
+  statistics. If no items are found, a matrix will have zero rows.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Gower, Gardner–Lubbe, &amp; le Roux (2011) detail several measures of fit for
-biplots, most prominently</p><ul><li><p>the <em>quality</em> of the \(r\)-dimensional biplot,
-measured as the proportion of variance in the plot,
-calculated as the quotient of the traces of
-\(\Lambda_r = {D_r}^2\) and of \(\Lambda = D^2\).</p></li>
-<li><p>the <em>adequacy</em> of the representation of the \(j\)-th row
-(respectively, column) in the \(r\)-dimensional biplot,
-calculated as the \(j\)-th diagonal element of
-\(U_r\ {U_r}^\top\) (respectively, \(V_r\ {V_r}^\top\)),
-understood as the fidelity of the projections
-of the standard coordinates.</p></li>
-<li><p>the <em>predictivity</em> of the \(j\)-th row
-(respectively, column) in the \(r\)-dimensional biplot,
-measured as the quotient of the \(j\)-th diagonal elements of
-\(U_r\ \Lambda_r\ {U_r}^\top\) and of \(U\ \Lambda\ U^\top\)
-(respectively, of \(V_r\ \Lambda_r\ {V_r}^\top\)
-and of \(V\ \Lambda\ V^\top\)),
-understood as the fidelity of the projections
-of the principal coordinates.</p></li>
+biplots, most prominently</p><ul><li><p>the _quality_ of the \(r\)-dimensional biplot,
+        measured as the proportion of variance in the plot,
+        calculated as the quotient of the traces of
+        \(\Lambda_r = {D_r}^2\) and of \(\Lambda = D^2\).</p></li>
+<li><p>the _adequacy_ of the representation of the \(j\)-th row
+        (respectively, column) in the \(r\)-dimensional biplot,
+        calculated as the \(j\)-th diagonal element of
+        \(U_r\ {U_r}^\top\) (respectively, \(V_r\ {V_r}^\top\)),
+        understood as the fidelity of the projections
+        of the standard coordinates.</p></li>
+<li><p>the _predictivity_ of the \(j\)-th row
+        (respectively, column) in the \(r\)-dimensional biplot,
+        measured as the quotient of the \(j\)-th diagonal elements of
+        \(U_r\ \Lambda_r\ {U_r}^\top\) and of \(U\ \Lambda\ U^\top\)
+        (respectively, of \(V_r\ \Lambda_r\ {V_r}^\top\)
+        and of \(V\ \Lambda\ V^\top\)),
+        understood as the fidelity of the projections
+        of the principal coordinates.</p></li>
 </ul><p>These can be calculated directly from any SVD or EVD and interpreted for any
 technique based on them. In some cases they may also be calculated for
 supplementary elements.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>Gower JC, Gardner–Lubbe S, &amp; le Roux NJ (2011) <em>Understanding Biplots</em>.
-Wiley, ISBN: 978-0-470-01255-0. <a href="https://www.wiley.com/go/biplots" class="external-link">https://www.wiley.com/go/biplots</a></p>
+    <p>Gower JC, Gardner–Lubbe S, &amp; le Roux NJ (2011) _Understanding Biplots_.
+Wiley, ISBN: 978-0-470-01255-0. &lt;https://www.wiley.com/go/biplots&gt;</p>
     </div>
 
     <div class="section level2">

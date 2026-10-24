@@ -6,14 +6,14 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Convenience geoms for row and column matrix factors — biplot-geoms"><meta name="description" content="These geometric element layers (geoms) pair
-conventional ggplot2 geoms with stat_rows() or
-stat_cols() in order to render elements for one or the other
-matrix factor of a tbl_ord. They understand the same aesthetics
-as their corresponding conventional geoms."><meta property="og:description" content="These geometric element layers (geoms) pair
-conventional ggplot2 geoms with stat_rows() or
-stat_cols() in order to render elements for one or the other
-matrix factor of a tbl_ord. They understand the same aesthetics
-as their corresponding conventional geoms."></head><body>
+  conventional **ggplot2** geoms with [stat_rows()] or
+  [stat_cols()] in order to render elements for one or the other
+  matrix factor of a tbl_ord. They understand the same aesthetics
+  as their corresponding conventional geoms."><meta property="og:description" content="These geometric element layers (geoms) pair
+  conventional **ggplot2** geoms with [stat_rows()] or
+  [stat_cols()] in order to render elements for one or the other
+  matrix factor of a tbl_ord. They understand the same aesthetics
+  as their corresponding conventional geoms."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -54,10 +54,10 @@ as their corresponding conventional geoms."></head><body>
 
     <div class="ref-description section level2">
     <p>These geometric element layers (geoms) pair
-conventional <strong>ggplot2</strong> geoms with <code><a href="stat_rows.html">stat_rows()</a></code> or
-<code><a href="stat_rows.html">stat_cols()</a></code> in order to render elements for one or the other
-matrix factor of a tbl_ord. They understand the same aesthetics
-as their corresponding conventional geoms.</p>
+  conventional **ggplot2** geoms with [stat_rows()] or
+  [stat_cols()] in order to render elements for one or the other
+  matrix factor of a tbl_ord. They understand the same aesthetics
+  as their corresponding conventional geoms.</p>
     </div>
 
     <div class="section level2">
@@ -90,10 +90,11 @@ as their corresponding conventional geoms.</p>
 <span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  arrow <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  arrow.fill <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  lineend <span class="op">=</span> <span class="st">"butt"</span>,</span>
 <span>  linejoin <span class="op">=</span> <span class="st">"round"</span>,</span>
 <span>  linemitre <span class="op">=</span> <span class="fl">10</span>,</span>
-<span>  arrow <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -105,10 +106,11 @@ as their corresponding conventional geoms.</p>
 <span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  arrow <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  arrow.fill <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  lineend <span class="op">=</span> <span class="st">"butt"</span>,</span>
 <span>  linejoin <span class="op">=</span> <span class="st">"round"</span>,</span>
 <span>  linemitre <span class="op">=</span> <span class="fl">10</span>,</span>
-<span>  arrow <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -119,8 +121,11 @@ as their corresponding conventional geoms.</p>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  rule <span class="op">=</span> <span class="st">"evenodd"</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  rule <span class="op">=</span> <span class="st">"evenodd"</span>,</span>
+<span>  lineend <span class="op">=</span> <span class="st">"butt"</span>,</span>
+<span>  linejoin <span class="op">=</span> <span class="st">"round"</span>,</span>
+<span>  linemitre <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -131,8 +136,11 @@ as their corresponding conventional geoms.</p>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  rule <span class="op">=</span> <span class="st">"evenodd"</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  rule <span class="op">=</span> <span class="st">"evenodd"</span>,</span>
+<span>  lineend <span class="op">=</span> <span class="st">"butt"</span>,</span>
+<span>  linejoin <span class="op">=</span> <span class="st">"round"</span>,</span>
+<span>  linemitre <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -147,6 +155,8 @@ as their corresponding conventional geoms.</p>
 <span>  bins <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  binwidth <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  breaks <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  arrow <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  arrow.fill <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  lineend <span class="op">=</span> <span class="st">"butt"</span>,</span>
 <span>  linejoin <span class="op">=</span> <span class="st">"round"</span>,</span>
 <span>  linemitre <span class="op">=</span> <span class="fl">10</span>,</span>
@@ -164,6 +174,8 @@ as their corresponding conventional geoms.</p>
 <span>  bins <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  binwidth <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  breaks <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  arrow <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  arrow.fill <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  lineend <span class="op">=</span> <span class="st">"butt"</span>,</span>
 <span>  linejoin <span class="op">=</span> <span class="st">"round"</span>,</span>
 <span>  linemitre <span class="op">=</span> <span class="fl">10</span>,</span>
@@ -230,11 +242,9 @@ as their corresponding conventional geoms.</p>
 <span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"nudge"</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  nudge_x <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  nudge_y <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  size.unit <span class="op">=</span> <span class="st">"mm"</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -246,11 +256,9 @@ as their corresponding conventional geoms.</p>
 <span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"nudge"</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  nudge_x <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  nudge_y <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  size.unit <span class="op">=</span> <span class="st">"mm"</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -262,14 +270,16 @@ as their corresponding conventional geoms.</p>
 <span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"nudge"</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  nudge_x <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  nudge_y <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  label.padding <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="st">"lines"</span><span class="op">)</span>,</span>
 <span>  label.r <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="st">"lines"</span><span class="op">)</span>,</span>
-<span>  label.size <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  label.size <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  border.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  border.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  size.unit <span class="op">=</span> <span class="st">"mm"</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
@@ -280,14 +290,16 @@ as their corresponding conventional geoms.</p>
 <span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
-<span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  position <span class="op">=</span> <span class="st">"nudge"</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  nudge_x <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  nudge_y <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  label.padding <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="st">"lines"</span><span class="op">)</span>,</span>
 <span>  label.r <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="st">"lines"</span><span class="op">)</span>,</span>
-<span>  label.size <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  label.size <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  border.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  border.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  size.unit <span class="op">=</span> <span class="st">"mm"</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
@@ -318,7 +330,7 @@ as their corresponding conventional geoms.</p>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  direction <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"both"</span>, <span class="st">"y"</span>, <span class="st">"x"</span><span class="op">)</span>,</span>
 <span>  seed <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"verbose"</span>, default <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -346,7 +358,7 @@ as their corresponding conventional geoms.</p>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  direction <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"both"</span>, <span class="st">"y"</span>, <span class="st">"x"</span><span class="op">)</span>,</span>
 <span>  seed <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"verbose"</span>, default <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -377,7 +389,7 @@ as their corresponding conventional geoms.</p>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  direction <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"both"</span>, <span class="st">"y"</span>, <span class="st">"x"</span><span class="op">)</span>,</span>
 <span>  seed <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"verbose"</span>, default <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -408,7 +420,7 @@ as their corresponding conventional geoms.</p>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  direction <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"both"</span>, <span class="st">"y"</span>, <span class="st">"x"</span><span class="op">)</span>,</span>
 <span>  seed <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"verbose"</span>, default <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -422,30 +434,40 @@ as their corresponding conventional geoms.</p>
 <span>  axis_text <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  by <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  num <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"interpolative"</span>, <span class="st">"predictive"</span><span class="op">)</span>,</span>
 <span>  tick_length <span class="op">=</span> <span class="fl">0.025</span>,</span>
 <span>  text_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  label_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
+<span>  label_placement <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"positive"</span>, <span class="st">"negative"</span>, <span class="st">"peripheral"</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  axis.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.linewidth <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  axis.linetype <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  axis.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  axis.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  axis.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.size <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  label.angle <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  label.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.hjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.vjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.family <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.fontface <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  label.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  label.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  tick.linewidth <span class="op">=</span> <span class="fl">0.25</span>,</span>
-<span>  tick.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.linetype <span class="op">=</span> <span class="st">"solid"</span>,</span>
+<span>  tick.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  tick.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tick.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  text.size <span class="op">=</span> <span class="fl">2.6</span>,</span>
 <span>  text.angle <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  text.hjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  text.vjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  text.family <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text.fontface <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.hjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.vjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.family <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.fontface <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -463,30 +485,40 @@ as their corresponding conventional geoms.</p>
 <span>  axis_text <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  by <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  num <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"interpolative"</span>, <span class="st">"predictive"</span><span class="op">)</span>,</span>
 <span>  tick_length <span class="op">=</span> <span class="fl">0.025</span>,</span>
 <span>  text_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  label_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
+<span>  label_placement <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"positive"</span>, <span class="st">"negative"</span>, <span class="st">"peripheral"</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  axis.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.linewidth <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  axis.linetype <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  axis.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  axis.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  axis.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.size <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  label.angle <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  label.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.hjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.vjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.family <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.fontface <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  label.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  label.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  tick.linewidth <span class="op">=</span> <span class="fl">0.25</span>,</span>
-<span>  tick.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.linetype <span class="op">=</span> <span class="st">"solid"</span>,</span>
+<span>  tick.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  tick.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tick.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  text.size <span class="op">=</span> <span class="fl">2.6</span>,</span>
 <span>  text.angle <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  text.hjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  text.vjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  text.family <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text.fontface <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.hjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.vjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.family <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.fontface <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -546,13 +578,17 @@ as their corresponding conventional geoms.</p>
 <span>  isoline_text <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  by <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  num <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
+<span>  text_dodge <span class="op">=</span> <span class="fl">0.06</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  text.size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  text.size <span class="op">=</span> <span class="fl">3.18</span>,</span>
 <span>  text.angle <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.hjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.vjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.family <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.fontface <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -568,13 +604,17 @@ as their corresponding conventional geoms.</p>
 <span>  isoline_text <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  by <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  num <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
+<span>  text_dodge <span class="op">=</span> <span class="fl">0.06</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  text.size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  text.size <span class="op">=</span> <span class="fl">3.18</span>,</span>
 <span>  text.angle <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.hjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.vjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.family <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.fontface <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -653,6 +693,8 @@ as their corresponding conventional geoms.</p>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  stat <span class="op">=</span> <span class="st">"bagplot"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  outlier_points <span class="op">=</span> <span class="op">!</span><span class="va">outlier_labels</span>,</span>
+<span>  outlier_labels <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  bag.linewidth <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  bag.linetype <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -680,6 +722,10 @@ as their corresponding conventional geoms.</p>
 <span>  outlier.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  outlier.fill <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  outlier.alpha <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  text.size <span class="op">=</span> <span class="fl">3.88</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.color <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -690,6 +736,8 @@ as their corresponding conventional geoms.</p>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  stat <span class="op">=</span> <span class="st">"bagplot"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>  outlier_points <span class="op">=</span> <span class="op">!</span><span class="va">outlier_labels</span>,</span>
+<span>  outlier_labels <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  bag.linewidth <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  bag.linetype <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -717,6 +765,10 @@ as their corresponding conventional geoms.</p>
 <span>  outlier.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  outlier.fill <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  outlier.alpha <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  text.size <span class="op">=</span> <span class="fl">3.88</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.color <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -732,31 +784,40 @@ as their corresponding conventional geoms.</p>
 <span>  axis_text <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  by <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  num <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"interpolative"</span>, <span class="st">"predictive"</span><span class="op">)</span>,</span>
 <span>  snap_rule <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  tick_length <span class="op">=</span> <span class="fl">0.025</span>,</span>
 <span>  text_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  label_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  axis.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.linewidth <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  axis.linetype <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  axis.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  axis.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  axis.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.size <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  label.angle <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  label.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.hjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.vjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.family <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.fontface <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  label.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  label.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  tick.linewidth <span class="op">=</span> <span class="fl">0.25</span>,</span>
-<span>  tick.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.linetype <span class="op">=</span> <span class="st">"solid"</span>,</span>
+<span>  tick.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  tick.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tick.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  text.size <span class="op">=</span> <span class="fl">2.6</span>,</span>
 <span>  text.angle <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  text.hjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  text.vjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  text.family <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text.fontface <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.hjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.vjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.family <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.fontface <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -774,31 +835,40 @@ as their corresponding conventional geoms.</p>
 <span>  axis_text <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  by <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  num <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"interpolative"</span>, <span class="st">"predictive"</span><span class="op">)</span>,</span>
 <span>  snap_rule <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  tick_length <span class="op">=</span> <span class="fl">0.025</span>,</span>
 <span>  text_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  label_dodge <span class="op">=</span> <span class="fl">0.03</span>,</span>
 <span>  <span class="va">...</span>,</span>
-<span>  axis.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.linewidth <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  axis.linetype <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  axis.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  axis.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  axis.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axis.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.size <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  label.angle <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  label.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.hjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.vjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.family <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.fontface <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  label.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  label.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  label.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  tick.linewidth <span class="op">=</span> <span class="fl">0.25</span>,</span>
-<span>  tick.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.linetype <span class="op">=</span> <span class="st">"solid"</span>,</span>
+<span>  tick.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  tick.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tick.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tick.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  text.size <span class="op">=</span> <span class="fl">2.6</span>,</span>
 <span>  text.angle <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  text.hjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  text.vjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  text.family <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text.fontface <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text.colour <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.hjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.vjust <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.family <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.fontface <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  text.colour <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  text.color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  text.alpha <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text.alpha <span class="op">=</span> <span class="fu"><a href="sync.html">sync</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  check_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -889,11 +959,11 @@ to use <code><a href="https://ggplot2.tidyverse.org/reference/position_jitter.ht
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">ggplot2::layer()</a></code>.</p></dd>
+<dd><p>Additional arguments passed to [ggplot2::layer()].</p></dd>
 
 
 <dt id="arg-na-rm">na.rm<a class="anchor" aria-label="anchor" href="#arg-na-rm"></a></dt>
-<dd><p>Passed to <code><a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">ggplot2::layer()</a></code>.</p></dd>
+<dd><p>Passed to [ggplot2::layer()].</p></dd>
 
 
 <dt id="arg-show-legend">show.legend<a class="anchor" aria-label="anchor" href="#arg-show-legend"></a></dt>
@@ -913,6 +983,15 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.org/reference/annotation_borders.html" class="external-link">annotation_borders()</a></code>.</p></dd>
 
 
+<dt id="arg-arrow">arrow<a class="anchor" aria-label="anchor" href="#arg-arrow"></a></dt>
+<dd><p>Arrow specification, as created by <code><a href="https://rdrr.io/r/grid/arrow.html" class="external-link">grid::arrow()</a></code>.</p></dd>
+
+
+<dt id="arg-arrow-fill">arrow.fill<a class="anchor" aria-label="anchor" href="#arg-arrow-fill"></a></dt>
+<dd><p>fill colour to use for the arrow head (if closed). <code>NULL</code>
+means use <code>colour</code> aesthetic.</p></dd>
+
+
 <dt id="arg-lineend">lineend<a class="anchor" aria-label="anchor" href="#arg-lineend"></a></dt>
 <dd><p>Line end style (round, butt, square).</p></dd>
 
@@ -923,10 +1002,6 @@ the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.or
 
 <dt id="arg-linemitre">linemitre<a class="anchor" aria-label="anchor" href="#arg-linemitre"></a></dt>
 <dd><p>Line mitre limit (number greater than 1).</p></dd>
-
-
-<dt id="arg-arrow">arrow<a class="anchor" aria-label="anchor" href="#arg-arrow"></a></dt>
-<dd><p>Arrow specification, as created by <code><a href="https://rdrr.io/r/grid/arrow.html" class="external-link">grid::arrow()</a></code>.</p></dd>
 
 
 <dt id="arg-rule">rule<a class="anchor" aria-label="anchor" href="#arg-rule"></a></dt>
@@ -964,12 +1039,6 @@ on computed variables for details.</p></dd>
 displayed as described in <code><a href="https://rdrr.io/r/grDevices/plotmath.html" class="external-link">?plotmath</a></code>.</p></dd>
 
 
-<dt id="arg-nudge-x-nudge-y">nudge_x, nudge_y<a class="anchor" aria-label="anchor" href="#arg-nudge-x-nudge-y"></a></dt>
-<dd><p>Horizontal and vertical adjustments to nudge the
-starting position of each text label. The units for <code>nudge_x</code> and
-<code>nudge_y</code> are the same as for the data units on the x-axis and y-axis.</p></dd>
-
-
 <dt id="arg-check-overlap">check_overlap<a class="anchor" aria-label="anchor" href="#arg-check-overlap"></a></dt>
 <dd><p>If <code>TRUE</code>, text that overlaps previous text in the
 same layer will not be plotted. <code>check_overlap</code> happens at draw time and in
@@ -995,6 +1064,18 @@ or picas (<code>"pc"</code>).</p></dd>
 <dt id="arg-label-size">label.size<a class="anchor" aria-label="anchor" href="#arg-label-size"></a></dt>
 <dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Replaced by the
 <code>linewidth</code> aesthetic. Size of label border, in mm.</p></dd>
+
+
+<dt id="arg-border-colour-border-color">border.colour, border.color<a class="anchor" aria-label="anchor" href="#arg-border-colour-border-color"></a></dt>
+<dd><p>Colour of label border. When <code>NULL</code>
+(default), the <code>colour</code> aesthetic determines the colour of the label border.
+<code>border.color</code> is an alias for <code>border.colour</code>.</p></dd>
+
+
+<dt id="arg-text-colour-text-color">text.colour, text.color<a class="anchor" aria-label="anchor" href="#arg-text-colour-text-color"></a></dt>
+<dd><p>Colour of the text. When <code>NULL</code> (default), the
+<code>colour</code> aesthetic determines the colour of the text. <code>text.color</code> is an
+alias for <code>text.colour</code>.</p></dd>
 
 
 <dt id="arg-box-padding">box.padding<a class="anchor" aria-label="anchor" href="#arg-box-padding"></a></dt>
@@ -1040,6 +1121,12 @@ Defaults to 10000.</p></dd>
 things. For each text label, we count how many other text labels or other
 data points it overlaps, and exclude the text label if it has too many overlaps.
 Defaults to 10.</p></dd>
+
+
+<dt id="arg-nudge-x-nudge-y">nudge_x, nudge_y<a class="anchor" aria-label="anchor" href="#arg-nudge-x-nudge-y"></a></dt>
+<dd><p>Horizontal and vertical adjustments to nudge the
+starting position of each text label. The units for <code>nudge_x</code> and
+<code>nudge_y</code> are the same as for the data units on the x-axis and y-axis.</p></dd>
 
 
 <dt id="arg-xlim-ylim">xlim, ylim<a class="anchor" aria-label="anchor" href="#arg-xlim-ylim"></a></dt>
@@ -1088,25 +1175,27 @@ axis, as a proportion of the minimum of the plot width and height.</p></dd>
 the axis, as a proportion of the minimum of the plot width and height.</p></dd>
 
 
-<dt id="arg-axis-colour-axis-color-axis-alpha">axis.colour, axis.color, axis.alpha<a class="anchor" aria-label="anchor" href="#arg-axis-colour-axis-color-axis-alpha"></a></dt>
-<dd><p>Default aesthetics for axes. Set to
-NULL to inherit from the data's aesthetics.</p></dd>
+<dt id="arg-label-placement">label_placement<a class="anchor" aria-label="anchor" href="#arg-label-placement"></a></dt>
+<dd><p>Character; how to place the labels along the axes.
+Matched to <code>"positive"</code> (the default; at the increasing end of the axis),
+<code>"negative"</code> (at the decreasing end), <code>"peripheral"</code> (at the end farther
+from the origin).</p></dd>
 
 
-<dt id="arg-label-angle-label-colour-label-color-label-alpha">label.angle, label.colour, label.color, label.alpha<a class="anchor" aria-label="anchor" href="#arg-label-angle-label-colour-label-color-label-alpha"></a></dt>
-<dd><p>Default aesthetics
-for labels. Set to NULL to inherit from the data's aesthetics.</p></dd>
+<dt id="arg-axis-linewidth-axis-linetype-axis-colour-axis-color-axis-alpha">axis.linewidth, axis.linetype, axis.colour, axis.color, axis.alpha<a class="anchor" aria-label="anchor" href="#arg-axis-linewidth-axis-linetype-axis-colour-axis-color-axis-alpha"></a></dt>
+<dd><p>Default
+aesthetics for axes. Set to NULL to inherit from the data's aesthetics.</p></dd>
 
 
-<dt id="arg-tick-linewidth-tick-colour-tick-color-tick-alpha">tick.linewidth, tick.colour, tick.color, tick.alpha<a class="anchor" aria-label="anchor" href="#arg-tick-linewidth-tick-colour-tick-color-tick-alpha"></a></dt>
-<dd><p>Default aesthetics
-for tick marks. Set to NULL to inherit from the data's aesthetics.</p></dd>
+<dt id="arg-label-colour-label-color-label-alpha">label.colour, label.color, label.alpha<a class="anchor" aria-label="anchor" href="#arg-label-colour-label-color-label-alpha"></a></dt>
+<dd><p>Default aesthetics for labels.
+Set to NULL to inherit from the data's aesthetics.</p></dd>
 
 
-<dt id="arg-text-colour-text-color">text.colour, text.color<a class="anchor" aria-label="anchor" href="#arg-text-colour-text-color"></a></dt>
-<dd><p>Colour of the text. When <code>NULL</code> (default), the
-<code>colour</code> aesthetic determines the colour of the text. <code>text.color</code> is an
-alias for <code>text.colour</code>.</p></dd>
+<dt id="arg-tick-linewidth-tick-linetype-tick-colour-tick-color-tick-alpha">tick.linewidth, tick.linetype, tick.colour, tick.color, tick.alpha<a class="anchor" aria-label="anchor" href="#arg-tick-linewidth-tick-linetype-tick-colour-tick-color-tick-alpha"></a></dt>
+<dd><p>Default
+aesthetics for tick marks. Set to NULL to inherit from the data's
+aesthetics.</p></dd>
 
 
 <dt id="arg-isoline-text">isoline_text<a class="anchor" aria-label="anchor" href="#arg-isoline-text"></a></dt>
@@ -1117,6 +1206,16 @@ isolines.</p></dd>
 <dt id="arg-vector-labels">vector_labels<a class="anchor" aria-label="anchor" href="#arg-vector-labels"></a></dt>
 <dd><p>Logical; whether to include labels radiating outward
 from the vectors.</p></dd>
+
+
+<dt id="arg-outlier-points">outlier_points<a class="anchor" aria-label="anchor" href="#arg-outlier-points"></a></dt>
+<dd><p>Logical; whether to plot outlier markers. Defaults to
+<code>! outlier_labels</code>.</p></dd>
+
+
+<dt id="arg-outlier-labels">outlier_labels<a class="anchor" aria-label="anchor" href="#arg-outlier-labels"></a></dt>
+<dd><p>Logical; whether to plot outlier labels. Defaults to
+<code>FALSE</code>.</p></dd>
 
 
 <dt id="arg-bag-linetype-bag-linewidth-bag-colour-bag-color-bag-fill-bag-alpha">bag.linetype, bag.linewidth, bag.colour, bag.color, bag.fill, bag.alpha<a class="anchor" aria-label="anchor" href="#arg-bag-linetype-bag-linewidth-bag-colour-bag-color-bag-fill-bag-alpha"></a></dt>
@@ -1144,13 +1243,13 @@ aesthetics or to <code>NULL</code> to use the data's aesthetics.</p></dd>
 
 
 <dt id="arg-new-data">new_data<a class="anchor" aria-label="anchor" href="#arg-new-data"></a></dt>
-<dd><p>A list (best structured as a <a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a>)
-of row (<code>geom_cols_interpolation()</code>) or column
-(<code>geom_rows_interpolation()</code>) values to interpolate.</p></dd>
+<dd><p>A list (best structured as a [data.frame][base::data.frame])
+of row (`geom_cols_interpolation()`) or column
+(`geom_rows_interpolation()`) values to interpolate.</p></dd>
 
 
 <dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
-<dd><p>Character value matched to <code>"centroid"</code> or <code>"sequence"</code>; the type
+<dd><p>Character value matched to `"centroid"` or `"sequence"`; the type
 of operations used to visualize interpolation.</p></dd>
 
 
@@ -1161,7 +1260,7 @@ the data's aesthetics.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A ggproto <a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">layer</a>.</p>
+    <p>A ggproto [layer][ggplot2::layer].</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -1217,6 +1316,12 @@ the data's aesthetics.</p></dd>
 <span class="r-in"><span>    <span class="st">"Row-principal LRA biplot of Freestone glass measurements"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"Ranges 2 sample standard deviations from centroids"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The following aesthetics were dropped during statistical transformation:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">axis.ss</span>.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> This can happen when ggplot fails to infer the correct grouping structure in</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   the data.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Did you forget to specify a `group` aesthetic or to convert a numerical</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   variable into a factor?</span>
 <span class="r-plt img"><img src="biplot-geoms-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># principal components analysis of glass composition measurements</span></span></span>
@@ -1231,11 +1336,11 @@ the data's aesthetics.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (principal, 100%): [ 68 × 5 | 3 ]</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1   Comp.2  Comp.3  Comp.4  Comp.5<span style="color: #949494;"> | </span>.element site     form </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">  [180.9]  [98.44] [47.19] [11.78] [1.733]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1</span>  2.01   0.585    0.940  -0.276  -0.107 <span style="color: #949494;"> | </span>score    Bet Eli… Chunk</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2</span>  2.55   0.513   -1.71   -0.193  -0.0602<span style="color: #949494;"> | </span>score    Bet Eli… Chunk</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3</span>  1.64   0.0977   0.131   0.218   0.0182<span style="color: #949494;"> | </span>score    Bet Eli… Chunk</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4</span>  1.07   0.00734  1.20    0.524   0.0958<span style="color: #949494;"> | </span>score    Bet Eli… Chunk</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5</span>  1.07   0.00573  1.31    0.443  -0.0258<span style="color: #949494;"> | </span>score    Bet Eli… Chunk</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 1  2.01   0.585    0.940  -0.276  -0.107  | score    Bet Eli… Chunk</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 2  2.55   0.513   -1.71   -0.193  -0.0602 | score    Bet Eli… Chunk</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 3  1.64   0.0977   0.131   0.218   0.0182 | score    Bet Eli… Chunk</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 4  1.07   0.00734  1.20    0.524   0.0958 | score    Bet Eli… Chunk</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"> 5  1.07   0.00573  1.31    0.443  -0.0258 | score    Bet Eli… Chunk</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     <span style="color: #949494;">⋮</span>                                   <span style="color: #949494;">⋮</span>           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 5 × 5 | 4 ]</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1   Comp.2  Comp.3  Comp.4  Comp.5<span style="color: #949494;"> | </span>name  center scale</span>

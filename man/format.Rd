@@ -2,10 +2,13 @@
 % Please edit documentation in R/ord-format.r
 \name{format}
 \alias{format}
+\alias{.by}
 \alias{format.tbl_ord}
 \alias{print.tbl_ord}
 \title{Format a tbl_ord for printing}
 \usage{
+.by
+
 \method{format}{tbl_ord}(
   x,
   width = NULL,
@@ -25,7 +28,7 @@
 )
 }
 \arguments{
-\item{x}{A \link{tbl_ord}.}
+\item{x}{A [tbl_ord].}
 
 \item{width}{Width of text output to generate. This defaults to \code{NULL}, which
 means use the \code{width} \link[pillar:pillar_options]{option}.}
@@ -33,34 +36,33 @@ means use the \code{width} \link[pillar:pillar_options]{option}.}
 \item{...}{Additional arguments.}
 
 \item{n}{Number(s) of rows to show from each matrix factor, handled as by
-\code{\link[tibble:formatting]{tibble::format.tbl()}}. If length 1, will apply to both matrix factors.
-To pass \code{NULL} to only one factor, be sure to pass as a list, e.g. \code{n = list(6, NULL)}.}
+[tibble::format.tbl()]. If length 1, will apply to both matrix factors. To
+pass `NULL` to only one factor, be sure to pass as a list, e.g. `n =
+list(6, NULL)`.}
 
-\item{max_extra_cols, max_footer_lines}{As in
-\code{\link[tibble:formatting]{tibble::format.tbl}}, applied to each matrix
-factor separately.}
+\item{max_extra_cols, max_footer_lines}{As in [tibble::format.tbl], applied to
+each matrix factor separately.}
 }
 \value{
-The \code{format()} method returns a vector of strings that are more
-elegantly printed by the \code{print()} method, which itself returns the tbl_ord
-invisibly.
+The `format()` method returns a vector of strings that are more
+  elegantly printed by the `print()` method, which itself returns the tbl_ord
+  invisibly.
 }
 \description{
-These methods of \code{\link[base:format]{base::format()}} and \code{\link[base:print]{base::print()}} render a
-(usually more) tidy readout of a \link{tbl_ord} that is consistent across all
-original ordination classes.
+These methods of [base::format()] and [base::print()] render a
+  (usually more) tidy readout of a [tbl_ord] that is consistent across all
+  original ordination classes.
 }
 \details{
-The \code{\link[base:format]{base::format()}} and \code{\link[base:print]{base::print()}} methods for
-class 'tbl_ord' are adapted from those for class '\link[tibble:tbl_df-class]{tbl_df}'
-and for class 'tbl_graph' from the
-\strong{tidygraph} package.
+The [base::format()] and [base::print()] methods for class 'tbl_ord' are
+adapted from those for class '[tbl_df][tibble::tbl_df]' and for class
+'tbl_graph' from the
+**tidygraph** package.
 
-\strong{NB:} The \code{format.tbl_ord()} method is tedious but cannot be easily
-modularized without invoking \link{recoverers}, \link{annotation}, and \link{augmentation}
+**NB:** The `format.tbl_ord()` method is tedious but cannot be easily
+modularized without invoking [recoverers], [annotation], and [augmentation]
 multiple times, thereby significantly reducing performance. It calls upon
-\strong{pillar} for \code{tbl_df} formatting then revises the results per
-\code{tbl_ord}.
+**pillar** for `tbl_df` formatting then revises the results per `tbl_ord`.
 }
 \examples{
 iris_pca <- ordinate(iris[1:4], prcomp)

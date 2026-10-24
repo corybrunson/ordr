@@ -9,12 +9,12 @@ test_that("`cbind_*()` appends a column only of the correct length", {
   expect_equal(
     ncol(fortify(cbind_rows(pca, iris[, 5, drop = FALSE]), .matrix = "rows")),
     # original + bound + fortified (`.matrix` & `.supplement`)
-    4L + 1L + 2L
+    4L + 1L + 3L
   )
   expect_equal(
     ncol(fortify(cbind_rows(pca, species = iris[[5]]), .matrix = "rows")),
     # original + bound + fortified (`.matrix` & `.supplement`)
-    4L + 1L + 2L
+    4L + 1L + 3L
   )
   expect_error(cbind_rows(pca, letter = letters),
                regexp = "length|recycle",

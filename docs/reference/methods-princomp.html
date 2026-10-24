@@ -6,8 +6,8 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Functionality for principal components analysis ('princomp') objects — methods-princomp"><meta name="description" content='These methods extract data from, and attribute new data to,
-objects of class "princomp" as returned by stats::princomp().'><meta property="og:description" content='These methods extract data from, and attribute new data to,
-objects of class "princomp" as returned by stats::princomp().'></head><body>
+  objects of class `"princomp"` as returned by [stats::princomp()].'><meta property="og:description" content='These methods extract data from, and attribute new data to,
+  objects of class `"princomp"` as returned by [stats::princomp()].'></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -48,7 +48,7 @@ objects of class "princomp" as returned by stats::princomp().'></head><body>
 
     <div class="ref-description section level2">
     <p>These methods extract data from, and attribute new data to,
-objects of class <code>"princomp"</code> as returned by <code><a href="https://rdrr.io/r/stats/princomp.html" class="external-link">stats::princomp()</a></code>.</p>
+  objects of class `"princomp"` as returned by [stats::princomp()].</p>
     </div>
 
     <div class="section level2">
@@ -94,20 +94,22 @@ objects of class <code>"princomp"</code> as returned by <code><a href="https://r
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The recovery generics <code>recover_*()</code> return <a href="recoverers.html">core model components</a>, <a href="conference.html">distribution of inertia</a>,
-<a href="supplementation.html">supplementary elements</a>, and <a href="augmentation.html">intrinsic metadata</a>; but they require methods for each model class to
-tell them what these components are.</p>
-<p>The generic <code><a href="tbl_ord.html">as_tbl_ord()</a></code> returns its input wrapped in the 'tbl_ord'
-class. Its methods determine what model classes it is allowed to wrap. It
-then provides 'tbl_ord' methods with access to the recoverers and hence to
-the model components.</p>
+    <p>The recovery generics `recover_*()` return [core model
+  components][recoverers], [distribution of inertia][conference],
+  [supplementary elements][supplementation], and [intrinsic
+  metadata][augmentation]; but they require methods for each model class to
+  tell them what these components are.</p>
+<p>The generic [as_tbl_ord()] returns its input wrapped in the 'tbl_ord'
+  class. Its methods determine what model classes it is allowed to wrap. It
+  then provides 'tbl_ord' methods with access to the recoverers and hence to
+  the model components.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Principal components analysis (PCA), as performed by <code><a href="https://rdrr.io/r/stats/princomp.html" class="external-link">stats::princomp()</a></code>,
+    <p>Principal components analysis (PCA), as performed by [stats::princomp()],
 relies on an eigenvalue decomposition (EVD) of the covariance matrix
-\(X^TX\) of a data set \(X\). <code><a href="https://rdrr.io/r/stats/princomp.html" class="external-link">stats::princomp()</a></code> returns the EVD factor
-\(V\) as the loadings <code>$loadings</code>. The scores <code>$scores</code> are obtained as
+\(X^TX\) of a data set \(X\). [stats::princomp()] returns the EVD factor
+\(V\) as the loadings `$loadings`. The scores `$scores` are obtained as
 \(XV\) and are accessible as supplementary elements.</p>
     </div>
     <div class="section level2">
@@ -153,11 +155,11 @@ relies on an eigenvalue decomposition (EVD) of the covariance matrix
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (principal, 100%): [ 150 × 4 | 0 ]</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1  Comp.2  Comp.3   Comp.4<span style="color: #949494;"> | </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">    [630] [36.16] [11.65]  [3.551]</span><span style="color: #949494;"> | </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span> -2.68    0.319   0.0279  0.00226<span style="color: #949494;"> | </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span> -2.71   -0.177   0.210   0.0990 <span style="color: #949494;"> | </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span> -2.89   -0.145  -0.0179  0.0200 <span style="color: #949494;"> | </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span> -2.75   -0.318  -0.0316 -0.0756 <span style="color: #949494;"> | </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5</span> -2.73    0.327  -0.0901 -0.0613 <span style="color: #949494;"> | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1 -2.68    0.319   0.0279  0.00226 | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2 -2.71   -0.177   0.210   0.0990  | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3 -2.89   -0.145  -0.0179  0.0200  | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4 -2.75   -0.318  -0.0316 -0.0756  | </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5 -2.73    0.327  -0.0901 -0.0613  | </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 <span style="color: #949494;">⋮</span>                    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 4 × 4 | 0 ]</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1  Comp.2  Comp.3   Comp.4<span style="color: #949494;"> | </span></span>
@@ -190,11 +192,11 @@ relies on an eigenvalue decomposition (EVD) of the covariance matrix
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rows (principal, 100%): [ 150 × 4 | 1 ]</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1  Comp.2  Comp.3   Comp.4<span style="color: #949494;"> | </span>.element</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494; font-style: italic;">    [630] [36.16] [11.65]  [3.551]</span><span style="color: #949494;"> | </span><span style="color: #949494; font-style: italic;">&lt;chr&gt;   </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span> -2.68    0.319   0.0279  0.00226<span style="color: #949494;"> | </span>score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span> -2.71   -0.177   0.210   0.0990 <span style="color: #949494;"> | </span>score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span> -2.89   -0.145  -0.0179  0.0200 <span style="color: #949494;"> | </span>score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span> -2.75   -0.318  -0.0316 -0.0756 <span style="color: #949494;"> | </span>score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5</span> -2.73    0.327  -0.0901 -0.0613 <span style="color: #949494;"> | </span>score   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1 -2.68    0.319   0.0279  0.00226 | score   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2 -2.71   -0.177   0.210   0.0990  | score   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3 -2.89   -0.145  -0.0179  0.0200  | score   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4 -2.75   -0.318  -0.0316 -0.0756  | score   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5 -2.73    0.327  -0.0901 -0.0613  | score   </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 <span style="color: #949494;">⋮</span>                       <span style="color: #949494;">⋮</span>    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 4 × 4 | 4 ]</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Comp.1  Comp.2  Comp.3   Comp.4<span style="color: #949494;"> | </span>name       center scale</span>

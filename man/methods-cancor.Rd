@@ -41,34 +41,36 @@
 \item{x}{An ordination object.}
 }
 \value{
-The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia},
-\link[=supplementation]{supplementary elements}, and \link[=augmentation]{intrinsic metadata}; but they require methods for each model class to
-tell them what these components are.
+The recovery generics `recover_*()` return [core model
+  components][recoverers], [distribution of inertia][conference],
+  [supplementary elements][supplementation], and [intrinsic
+  metadata][augmentation]; but they require methods for each model class to
+  tell them what these components are.
 
-The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
-class. Its methods determine what model classes it is allowed to wrap. It
-then provides 'tbl_ord' methods with access to the recoverers and hence to
-the model components.
+  The generic [as_tbl_ord()] returns its input wrapped in the 'tbl_ord'
+  class. Its methods determine what model classes it is allowed to wrap. It
+  then provides 'tbl_ord' methods with access to the recoverers and hence to
+  the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
-objects of class \code{"cancor_ord"}. This is a class introduced in this package
-to identify objects returned by \code{\link[=cancor_ord]{cancor_ord()}}, which wraps
-\code{\link[stats:cancor]{stats::cancor()}}.
+  objects of class `"cancor_ord"`. This is a class introduced in this package
+  to identify objects returned by [cancor_ord()], which wraps
+  [stats::cancor()].
 }
 \details{
 The canonical coefficients (loadings) are obtained directly from the
 underlying singular value decomposition and constitute the active elements.
 If canonical scores are returned, then they and the structure correlations
-are made available as supplementary elements. \strong{ordr} takes rows and columns
-from the intraset correlations \verb{$xstructure} and \verb{$ystructure}, on which no
+are made available as supplementary elements. **ordr** takes rows and columns
+from the intraset correlations `$xstructure` and `$ystructure`, on which no
 intertia is conferred; the interset correlations can be obtained by
-\link[=conference]{conferring inertia} onto these.
+[conferring inertia][conference] onto these.
 
 A biplot of the canonical coefficients can be interpreted as approximating
 the \eqn{X}-\eqn{Y} inner product matrix, inversely weighted by the \eqn{X}
 and \eqn{Y} variances. The canonical scores and structure coefficients are
-available as supplementary points if returned by \code{\link[=cancor_ord]{cancor_ord()}}. These can be
+available as supplementary points if returned by [cancor_ord()]. These can be
 used to create biplots of the case scores as linear combinations of loadings
 (the coefficients, in standard coordinates, overlaid with the scores) or of
 intraset and interset correlations with respect to either data set (the
@@ -118,16 +120,16 @@ savings_cca \%>\%
 # the model predicts much higher disposable income in Libya than was measured
 }
 \references{
-Greenacre MJ (1984) \emph{Theory and applications of correspondence analysis}.
+Greenacre MJ (1984) _Theory and applications of correspondence analysis_.
 London: Academic Press, ISBN 0-12-299050-1.
-\url{http://www.carme-n.org/?sec=books5}
+<http://www.carme-n.org/?sec=books5>
 
 ter Braak CJF (1990) "Interpreting canonical correlation analysis through
-biplots of structure correlations and weights". \emph{Psychometrika} 55(3),
+biplots of structure correlations and weights". _Psychometrika_ 55(3),
 519--531. \doi{10.1007/BF02294765}
 }
 \seealso{
-Other methods for singular value decomposition-based techniques: 
+Other methods for singular value decomposition-based techniques:
 \code{\link{methods-correspondence}},
 \code{\link{methods-lda}},
 \code{\link{methods-lra}},
@@ -135,7 +137,7 @@ Other methods for singular value decomposition-based techniques:
 \code{\link{methods-prcomp}},
 \code{\link{methods-svd}}
 
-Other models from the stats package: 
+Other models from the stats package:
 \code{\link{methods-cmds}},
 \code{\link{methods-factanal}},
 \code{\link{methods-kmeans}},

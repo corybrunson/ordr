@@ -1,10 +1,10 @@
 # Wrappers for lossy ordination methods
 
-These `*_ord` functions wrap core R functions with modifications for use
-with '[tbl_ord](tbl_ord.md)' methods. Some parameters are hidden from
-the user and set to settings required for these methods, some matrix
-outputs are given row or column names to be used by them, and new
-'\*\_ord' S3 class attributes are added to enable them.
+These \`\*\_ord\` functions wrap core R functions with modifications for
+use with '\[tbl_ord\]' methods. Some parameters are hidden from the user
+and set to settings required for these methods, some matrix outputs are
+given row or column names to be used by them, and new '\*\_ord' S3 class
+attributes are added to enable them.
 
 ## Usage
 
@@ -87,33 +87,30 @@ with new '\*-ord' classes.
 
 The following table summarizes the wrapped functions:
 
-|  |  |  |  |  |
-|----|----|----|----|----|
-| Original function | Hide params | New params | Add names | New class |
-| [`base::eigen()`](https://rdrr.io/r/base/eigen.html) | Yes | No | Yes | Yes |
-| [`base::svd()`](https://rdrr.io/r/base/svd.html) | Yes | No | Yes | Yes |
-| [`stats::cmdscale()`](https://rdrr.io/r/stats/cmdscale.html) | Yes | No | No | Yes |
-| [`stats::cancor()`](https://rdrr.io/r/stats/cancor.html) | No | Yes | No | Yes |
+\| Original function \| Hide params \| New params \| Add names \| New
+class \| \| :——————– \| :———- \| :——— \| :——– \| :——– \| \|
+\[base::eigen()\] \| Yes \| No \| Yes \| Yes \| \| \[base::svd()\] \|
+Yes \| No \| Yes \| Yes \| \| \[stats::cmdscale()\] \| Yes \| No \| No
+\| Yes \| \| \[stats::cancor()\] \| No \| Yes \| No \| Yes \|
 
-**NB:** `eigen_ord()` is deprecated in favor of
-[`eigen()`](https://rdrr.io/r/base/eigen.html), which for some time has
-returned an S3 class (with recovery methods in **ordr**).
+\*\*NB:\*\* \`eigen_ord()\` is deprecated in favor of \`eigen()\`, which
+for some time has returned an S3 class (with recovery methods in
+\*\*ordr\*\*).
 
-By default, `cancor_ord()` returns the same data as
-[`stats::cancor()`](https://rdrr.io/r/stats/cancor.html): the canonical
-correlations (`cor`), the canonical coefficients (`$xcoef` and
-`$ycoef`), and the variable means (`$xcenter`, `$ycenter`). If
-`scores = TRUE`, then `cancor_ord()` also returns the scores `$xscores`
-and `$yscores` calculated from the (appropriately centered) data and the
-coefficients and the intraset structure correlations `$xstructure` and
-`$ystructure` between these and the data. These modifications are
-inspired by the [`cancor()`](https://rdrr.io/r/stats/cancor.html)
-function in **candisc**, though two caveats should be noted: First, the
-canonical coefficients (hence the canonical scores) are scaled by \\n -
-1\\ compared to these, though the intraset structure correlations are
-the same. Second, the *interset* structure correlations are not
-returned, as these may be obtained by conferring inertia unto the
-intraset ones.
+By default, \[cancor_ord()\] returns the same data as
+\[stats::cancor()\]: the canonical correlations (\`cor\`), the canonical
+coefficients (\`\$xcoef\` and \`\$ycoef\`), and the variable means
+(\`\$xcenter\`, \`\$ycenter\`). If \`scores = TRUE\`, then
+\[cancor_ord()\] also returns the scores \`\$xscores\` and \`\$yscores\`
+calculated from the (appropriately centered) data and the coefficients
+and the intraset structure correlations \`\$xstructure\` and
+\`\$ystructure\` between these and the data. These modifications are
+inspired by the \`cancor()\` function in \*\*candisc\*\*, though two
+caveats should be noted: First, the canonical coefficients (hence the
+canonical scores) are scaled by \\n - 1\\ compared to these, though the
+intraset structure correlations are the same. Second, the \_interset\_
+structure correlations are not returned, as these may be obtained by
+conferring inertia unto the intraset ones.
 
 ## Examples
 

@@ -1,8 +1,7 @@
 # Functionality for principal components analysis ('princomp') objects
 
 These methods extract data from, and attribute new data to, objects of
-class `"princomp"` as returned by
-[`stats::princomp()`](https://rdrr.io/r/stats/princomp.html).
+class \`"princomp"\` as returned by \[stats::princomp()\].
 
 ## Usage
 
@@ -46,26 +45,25 @@ recover_aug_coord(x)
 
 ## Value
 
-The recovery generics `recover_*()` return [core model
-components](recoverers.md), [distribution of inertia](conference.md),
-[supplementary elements](supplementation.md), and [intrinsic
-metadata](augmentation.md); but they require methods for each model
+The recovery generics \`recover\_\*()\` return \[core model
+components\]\[recoverers\], \[distribution of inertia\]\[conference\],
+\[supplementary elements\]\[supplementation\], and \[intrinsic
+metadata\]\[augmentation\]; but they require methods for each model
 class to tell them what these components are.
 
-The generic [`as_tbl_ord()`](tbl_ord.md) returns its input wrapped in
-the 'tbl_ord' class. Its methods determine what model classes it is
-allowed to wrap. It then provides 'tbl_ord' methods with access to the
-recoverers and hence to the model components.
+The generic \[as_tbl_ord()\] returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap.
+It then provides 'tbl_ord' methods with access to the recoverers and
+hence to the model components.
 
 ## Details
 
 Principal components analysis (PCA), as performed by
-[`stats::princomp()`](https://rdrr.io/r/stats/princomp.html), relies on
-an eigenvalue decomposition (EVD) of the covariance matrix \\X^TX\\ of a
-data set \\X\\.
-[`stats::princomp()`](https://rdrr.io/r/stats/princomp.html) returns the
-EVD factor \\V\\ as the loadings `$loadings`. The scores `$scores` are
-obtained as \\XV\\ and are accessible as supplementary elements.
+\[stats::princomp()\], relies on an eigenvalue decomposition (EVD) of
+the covariance matrix \\X^TX\\ of a data set \\X\\.
+\[stats::princomp()\] returns the EVD factor \\V\\ as the loadings
+\`\$loadings\`. The scores \`\$scores\` are obtained as \\XV\\ and are
+accessible as supplementary elements.
 
 ## See also
 

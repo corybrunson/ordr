@@ -78,18 +78,18 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 
 \item{subset}{An integer, logical, or character vector indicating a subset of
 rows or columns for which to render graphical elements. NB: Internally, the
-\code{subset} will be taken from the rows of the \link[=fortify.tbl_ord]{fortified}
+`subset` will be taken from the rows of the [fortified][fortify.tbl_ord()]
 'tbl_ord' comprising rows from only one of the matrix factors. It is still
-possible to pass a formula to the \code{data} parameter, but it will act on the
-fortified data \emph{before} it has been restricted to one matrix factor.}
+possible to pass a formula to the `data` parameter, but it will act on the
+fortified data _before_ it has been restricted to one matrix factor.}
 
 \item{elements}{Character vector; which elements of each factor for which to
-render graphical elements. One of \code{"active"} (the default) or any
+render graphical elements. One of `"active"` (the default) or any
 supplementary element type defined by the specific class methods (e.g.
-\code{"score"} for 'factanal', 'lda_ord', and 'cancord_ord' and \code{"intraset"} and
-\code{"interset"} for 'cancor_ord'), via \link[base:match.arg]{partial matching}.}
+`"score"` for 'factanal', 'lda_ord', and 'cancord_ord' and `"intraset"` and
+`"interset"` for 'cancor_ord'), via [partial matching][base::match.arg()].}
 
-\item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
+\item{...}{Additional arguments passed to [ggplot2::layer()].}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -105,23 +105,23 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:annotation_borders]{annotation_borders()}}.}
 }
 \value{
-A ggproto \link[ggplot2:layer]{layer}.
+A ggproto [layer][ggplot2::layer].
 }
 \description{
-These stats merely tell \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} which factor of an
-ordination to pull data from for a plot layer. They are invoked internally
-by the various \code{\link[=biplot-geoms]{geom_*_*()}} layers.
+These stats merely tell [ggplot2::ggplot()] which factor of an
+  ordination to pull data from for a plot layer. They are invoked internally
+  by the various [`geom_*_*()`][biplot-geoms] layers.
 }
 \section{Biplot layers}{
 
-\code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
-frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
-variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
+[ggbiplot()] uses [ggplot2::fortify()] internally to produce a single data
+frame with a `.matrix` column distinguishing the subjects (`"rows"`) and
+variables (`"cols"`). The stat layers `stat_rows()` and `stat_cols()` simply
 filter the data frame to one of these two.
 
-The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
+The geom layers `geom_rows_*()` and `geom_cols_*()` call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
+`geom_dims_*()` selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.
 }
 
@@ -147,7 +147,7 @@ ggbiplot(swiss_fa) +
   geom_cols_vector(aes(label = name))
 }
 \seealso{
-Other biplot layers: 
+Other biplot layers:
 \code{\link{biplot-geoms}},
 \code{\link{biplot-stats}}
 }

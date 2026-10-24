@@ -4,14 +4,14 @@
 \alias{glass}
 \title{Glass composition data}
 \format{
-A \link[tibble:tibble]{tibble} with 68 cases and 16 variables:
+A [tibble][tibble::tibble] with 68 cases and 16 variables:
 \describe{
-\item{\code{Site}}{site at which sample was found}
-\item{\code{Anal}}{analysis identifier}
-\item{\code{Context}}{furnace identifier}
-\item{\code{Form}}{type of sample}
-\item{\verb{SiO2, TiO2, Al2O3, FeO, MnO, MgO, CaO, Na2O, K2O, P2O5, Cl, SO3}}{
-normalized weight percent oxide of each component}
+  \item{`Site`}{site at which sample was found}
+  \item{`Anal`}{analysis identifier}
+  \item{`Context`}{furnace identifier}
+  \item{`Form`}{type of sample}
+  \item{`SiO2, TiO2, Al2O3, FeO, MnO, MgO, CaO, Na2O, K2O, P2O5, Cl, SO3`}{
+        normalized weight percent oxide of each component}
 }
 }
 \source{
@@ -22,7 +22,7 @@ data(glass)
 }
 \description{
 Sites, types, and compositions of glass samples from
-archaeological sites in Israel.
+  archaeological sites in Israel.
 }
 \details{
 Chunks of unformed glass from several furnaces found at the primary
@@ -31,7 +31,8 @@ weaker evidence of glass-making (Apollonia and Dor) and and from an
 Islamic-era site (Banias), were analyzed using X-ray spectrometry to
 determine their major components.
 
-Baxter & Freestone (2006) used these data to illustrate \link[=lra-ord]{log-ratio analysis}.
+Baxter & Freestone (2006) used these data to illustrate [log-ratio
+analysis][lra-ord].
 }
 \examples{
 # subset glass data to one site and major components
@@ -64,12 +65,12 @@ mtext("Component (standard coord.)", side = 4L, line = 3L)
 \references{
 Freestone IC, Gorin-Rosen Y, & Hughes MJ (2000) "Primary glass from Israel
 and the production of glass in Late Antiquity and the early Islamic period".
-\emph{La route du verre: Ateliers primaires et secondaires du second millénaire
-av. J.-C. au Moyen Âge}: 65--83.
-\url{https://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&idt=1158762}
+_La route du verre: Ateliers primaires et secondaires du second millénaire
+av. J.-C. au Moyen Âge_: 65--83.
+<https://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&idt=1158762>
 
 Baxter MJ & Freestone IC (2006) "Log-Ratio Compositional Data Analysis in
-Archaeometry". \emph{Archaeometry}, \strong{48}(3): 511--531.
+Archaeometry". _Archaeometry_, **48**(3): 511--531.
 \doi{10.1111/j.1475-4754.2006.00270.x}
 }
 \keyword{datasets}

@@ -1,8 +1,7 @@
 # Functionality for multiple correspondence analysis ('mca') objects
 
 These methods extract data from, and attribute new data to, objects of
-class `"mca"` from the **[MASS](https://rdrr.io/pkg/MASS/man/mca.html)**
-package.
+class \`"mca"\` from the \*\*\[MASS\]\[MASS::mca\]\*\* package.
 
 ## Usage
 
@@ -46,26 +45,26 @@ recover_aug_coord(x)
 
 ## Value
 
-The recovery generics `recover_*()` return [core model
-components](recoverers.md), [distribution of inertia](conference.md),
-[supplementary elements](supplementation.md), and [intrinsic
-metadata](augmentation.md); but they require methods for each model
+The recovery generics \`recover\_\*()\` return \[core model
+components\]\[recoverers\], \[distribution of inertia\]\[conference\],
+\[supplementary elements\]\[supplementation\], and \[intrinsic
+metadata\]\[augmentation\]; but they require methods for each model
 class to tell them what these components are.
 
-The generic [`as_tbl_ord()`](tbl_ord.md) returns its input wrapped in
-the 'tbl_ord' class. Its methods determine what model classes it is
-allowed to wrap. It then provides 'tbl_ord' methods with access to the
-recoverers and hence to the model components.
+The generic \[as_tbl_ord()\] returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap.
+It then provides 'tbl_ord' methods with access to the recoverers and
+hence to the model components.
 
 ## Details
 
 Multiple correspondence analysis (MCA) relies on a singular value
 decomposition of the indicator matrix \\X\\ of a table of several
-categorical variables, scaled by its column totals.
-[`MASS::mca()`](https://rdrr.io/pkg/MASS/man/mca.html) returns the SVD
-factors \\UD\\ and \\V\\ as the row weights `$fs`, on which the inertia
-is conferred, and the column coordinates `$cs`. The row coordinates
-`$rs` are obtained as \\XV\\ and accessible as supplementary elements.
+categorical variables, scaled by its column totals. \[MASS::mca()\]
+returns the SVD factors \\UD\\ and \\V\\ as the row weights \`\$fs\`, on
+which the inertia is conferred, and the column coordinates \`\$cs\`. The
+row coordinates \`\$rs\` are obtained as \\XV\\ and accessible as
+supplementary elements.
 
 ## See also
 

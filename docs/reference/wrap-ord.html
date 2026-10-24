@@ -5,15 +5,15 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Wrappers for lossy ordination methods — wrap-ord"><meta name="description" content="These *_ord functions wrap core R functions with modifications
-for use with 'tbl_ord' methods. Some parameters are hidden from the user
-and set to settings required for these methods, some matrix outputs are
-given row or column names to be used by them, and new '*_ord' S3 class
-attributes are added to enable them."><meta property="og:description" content="These *_ord functions wrap core R functions with modifications
-for use with 'tbl_ord' methods. Some parameters are hidden from the user
-and set to settings required for these methods, some matrix outputs are
-given row or column names to be used by them, and new '*_ord' S3 class
-attributes are added to enable them."></head><body>
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Wrappers for lossy ordination methods — wrap-ord"><meta name="description" content="These `*_ord` functions wrap core R functions with modifications
+  for use with '[tbl_ord]' methods. Some parameters are hidden from the user
+  and set to settings required for these methods, some matrix outputs are
+  given row or column names to be used by them, and new '*_ord' S3 class
+  attributes are added to enable them."><meta property="og:description" content="These `*_ord` functions wrap core R functions with modifications
+  for use with '[tbl_ord]' methods. Some parameters are hidden from the user
+  and set to settings required for these methods, some matrix outputs are
+  given row or column names to be used by them, and new '*_ord' S3 class
+  attributes are added to enable them."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -53,11 +53,11 @@ attributes are added to enable them."></head><body>
     </div>
 
     <div class="ref-description section level2">
-    <p>These <code>*_ord</code> functions wrap core R functions with modifications
-for use with '<a href="tbl_ord.html">tbl_ord</a>' methods. Some parameters are hidden from the user
-and set to settings required for these methods, some matrix outputs are
-given row or column names to be used by them, and new '*_ord' S3 class
-attributes are added to enable them.</p>
+    <p>These `*_ord` functions wrap core R functions with modifications
+  for use with '[tbl_ord]' methods. Some parameters are hidden from the user
+  and set to settings required for these methods, some matrix outputs are
+  given row or column names to be used by them, and new '*_ord' S3 class
+  attributes are added to enable them.</p>
     </div>
 
     <div class="section level2">
@@ -138,22 +138,30 @@ correlations.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>Objects slightly modified from the outputs of the original functions,
-with new '*-ord' classes.</p>
+  with new '*-ord' classes.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The following table summarizes the wrapped functions:</p><table class="table table"><tr><td>Original function</td><td>Hide params</td><td>New params</td><td>Add names</td><td>New class</td></tr><tr><td><code><a href="https://rdrr.io/r/base/eigen.html" class="external-link">base::eigen()</a></code></td><td>Yes</td><td>No</td><td>Yes</td><td>Yes</td></tr><tr><td><code><a href="https://rdrr.io/r/base/svd.html" class="external-link">base::svd()</a></code></td><td>Yes</td><td>No</td><td>Yes</td><td>Yes</td></tr><tr><td><code><a href="https://rdrr.io/r/stats/cmdscale.html" class="external-link">stats::cmdscale()</a></code></td><td>Yes</td><td>No</td><td>No</td><td>Yes</td></tr><tr><td><code><a href="https://rdrr.io/r/stats/cancor.html" class="external-link">stats::cancor()</a></code></td><td>No</td><td>Yes</td><td>No</td><td>Yes</td></tr></table><p><strong>NB:</strong> <code>eigen_ord()</code> is deprecated in favor of <code><a href="https://rdrr.io/r/base/eigen.html" class="external-link">eigen()</a></code>, which for some
-time has returned an S3 class (with recovery methods in <strong>ordr</strong>).</p>
-<p>By default, <code>cancor_ord()</code> returns the same data as <code><a href="https://rdrr.io/r/stats/cancor.html" class="external-link">stats::cancor()</a></code>: the
-canonical correlations (<code>cor</code>), the canonical coefficients (<code>$xcoef</code> and
-<code>$ycoef</code>), and the variable means (<code>$xcenter</code>, <code>$ycenter</code>). If <code>scores = TRUE</code>, then <code>cancor_ord()</code> also returns the scores <code>$xscores</code> and <code>$yscores</code>
+    <p>The following table summarizes the wrapped functions:</p>
+<p>| Original function     | Hide params | New params | Add names | New class |
+| :——————– | :———- | :——— | :——– | :——– |
+| [base::eigen()]       | Yes         | No         | Yes       | Yes       |
+| [base::svd()]         | Yes         | No         | Yes       | Yes       |
+| [stats::cmdscale()]   | Yes         | No         | No        | Yes       |
+| [stats::cancor()]     | No          | Yes        | No        | Yes       |</p>
+<p>**NB:** `eigen_ord()` is deprecated in favor of `eigen()`, which for some
+time has returned an S3 class (with recovery methods in **ordr**).</p>
+<p>By default, [cancor_ord()] returns the same data as [stats::cancor()]: the
+canonical correlations (`cor`), the canonical coefficients (`$xcoef` and
+`$ycoef`), and the variable means (`$xcenter`, `$ycenter`). If `scores =
+TRUE`, then [cancor_ord()] also returns the scores `$xscores` and `$yscores`
 calculated from the (appropriately centered) data and the coefficients and
-the intraset structure correlations <code>$xstructure</code> and <code>$ystructure</code> between
-these and the data. These modifications are inspired by the <code><a href="https://rdrr.io/r/stats/cancor.html" class="external-link">cancor()</a></code>
-function in <strong>candisc</strong>, though two caveats should be noted: First, the
+the intraset structure correlations `$xstructure` and `$ystructure` between
+these and the data. These modifications are inspired by the `cancor()`
+function in **candisc**, though two caveats should be noted: First, the
 canonical coefficients (hence the canonical scores) are scaled by \(n - 1\)
 compared to these, though the intraset structure correlations are the same.
-Second, the <em>interset</em> structure correlations are not returned, as these may
+Second, the _interset_ structure correlations are not returned, as these may
 be obtained by conferring inertia unto the intraset ones.</p>
     </div>
 

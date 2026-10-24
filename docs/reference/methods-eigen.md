@@ -1,10 +1,9 @@
 # Functionality for eigen-decompositions
 
 These methods extract data from, and attribute new data to, objects of
-class `"eigen"` returned by
-[`base::eigen()`](https://rdrr.io/r/base/eigen.html) when the parameter
-`only.values` is set to `FALSE` or of class `"eigen_ord"` returned by
-[`eigen_ord()`](wrap-ord.md).
+class \`"eigen"\` returned by \[base::eigen()\] when the parameter
+\`only.values\` is set to \`FALSE\` or of class \`"eigen_ord"\` returned
+by \[eigen_ord()\].
 
 ## Usage
 
@@ -72,26 +71,25 @@ recover_aug_coord(x)
 
 ## Value
 
-The recovery generics `recover_*()` return [core model
-components](recoverers.md), [distribution of inertia](conference.md),
-[supplementary elements](supplementation.md), and [intrinsic
-metadata](augmentation.md); but they require methods for each model
+The recovery generics \`recover\_\*()\` return \[core model
+components\]\[recoverers\], \[distribution of inertia\]\[conference\],
+\[supplementary elements\]\[supplementation\], and \[intrinsic
+metadata\]\[augmentation\]; but they require methods for each model
 class to tell them what these components are.
 
-The generic [`as_tbl_ord()`](tbl_ord.md) returns its input wrapped in
-the 'tbl_ord' class. Its methods determine what model classes it is
-allowed to wrap. It then provides 'tbl_ord' methods with access to the
-recoverers and hence to the model components.
+The generic \[as_tbl_ord()\] returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap.
+It then provides 'tbl_ord' methods with access to the recoverers and
+hence to the model components.
 
 ## Details
 
-[`base::eigen()`](https://rdrr.io/r/base/eigen.html) usually returns an
-object of class `"eigen"`, which contains the numerical
-eigendecomposition without annotations such as row and column names. To
-facilitate downstream analysis, [`eigen_ord()`](wrap-ord.md) returns a
-modified 'eigen' object with row names taken (if available) from the
-original data and column names indicating the integer index of each
-eigenvector.
+\[base::eigen()\] usually returns an object of class \`"eigen"\`, which
+contains the numerical eigendecomposition without annotations such as
+row and column names. To facilitate downstream analysis, \[eigen_ord()\]
+returns a modified 'eigen' object with row names taken (if available)
+from the original data and column names indicating the integer index of
+each eigenvector.
 
 ## See also
 

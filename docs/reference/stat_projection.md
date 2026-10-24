@@ -93,8 +93,7 @@ stat_projection(
 
 - ...:
 
-  Additional arguments passed to
-  [`ggplot2::layer()`](https://ggplot2.tidyverse.org/reference/layer.html).
+  Additional arguments passed to \[ggplot2::layer()\].
 
 - show.legend:
 
@@ -115,7 +114,7 @@ stat_projection(
 
 ## Value
 
-A ggproto [layer](https://ggplot2.tidyverse.org/reference/layer.html).
+A ggproto \[layer\]\[ggplot2::layer\].
 
 ## Details
 
@@ -126,78 +125,74 @@ projections of elements of one matrix factor in principal coordinates
 onto those of the other factor in standard coordinates. In the most
 familiar setting of PCA biplots, variable (column) values are predicted
 from case (row) locations along PC1 and PC2. This transformation obtains
-the axis projections as `xend,yend` and pairs them with original points
-`x,y` to demarcate segments visualizing the projections.
+the axis projections as \`xend,yend\` and pairs them with original
+points \`x,y\` to demarcate segments visualizing the projections.
 
-**WARNING:** This layer is appropriate only with axes in standard
-coordinates (usually [`confer_inertia(p = "rows")`](conference.md)) and
-predictive calibration
-([`ggbiplot(axis.type = "predictive")`](ggbiplot.md)).
+\*\*WARNING:\*\* This layer is appropriate only with axes in standard
+coordinates (usually \[\`confer_inertia(p =
+"rows")\`\]\[confer_inertia\]) and predictive calibration, e.g.
+\[\`geom_cols_axis(axis.type = "predictive")\`\]\[geom_axis\].
+
+Use the same mapped coordinates for the projection layer and the axes.
+When \`ord_aes()\` maps more than two coordinates, projections and axes
+are computed from all mapped model coordinates; when only \`x\` and
+\`y\` are mapped, both use the plot-plane coordinates.
 
 ## Referential stats
 
 This statistical transformation is done with respect to reference data
-passed to `referent` (ignored if `NULL`, the default, possibly resulting
-in empty output). See
-[`gggda::stat_referent()`](https://corybrunson.github.io/gggda/reference/stat_referent.html)
-for more details. This relies on a sleight of hand through a new
-undocumented `LayerRef` class and associated
-[`ggplot2::ggplot_add()`](https://ggplot2.tidyverse.org/reference/update_ggplot.html)
-method. As a result, only layers constructed using this `stat_*()`
-shortcut will pass the necessary positional aesthetics to the
-`$setup_params()` step, making them available to pre-process `referent`
-data.
+passed to \`referent\` (ignored if \`NULL\`, the default, possibly
+resulting in empty output). See \[gggda::stat_referent()\] for more
+details. This relies on a sleight of hand through a new undocumented
+\`LayerRef\` class and associated \[ggplot2::ggplot_add()\] method. As a
+result, only layers constructed using this \`stat\_\*()\` shortcut will
+pass the necessary positional aesthetics to the \`\$setup_params()\`
+step, making them available to pre-process \`referent\` data.
 
 The biplot shortcuts automatically substitute the complementary matrix
-factor for `referent = NULL` and will use an integer vector to select a
-subset from this factor. These uses do not require the mapping passage.
+factor for \`referent = NULL\` and will use an integer vector to select
+a subset from this factor. These uses do not require the mapping
+passage.
 
 ## Biplot layers
 
-[`ggbiplot()`](ggbiplot.md) uses
-[`ggplot2::fortify()`](https://ggplot2.tidyverse.org/reference/fortify.html)
-internally to produce a single data frame with a `.matrix` column
-distinguishing the subjects (`"rows"`) and variables (`"cols"`). The
-stat layers [`stat_rows()`](stat_rows.md) and
-[`stat_cols()`](stat_rows.md) simply filter the data frame to one of
-these two.
+\[ggbiplot()\] uses \[ggplot2::fortify()\] internally to produce a
+single data frame with a \`.matrix\` column distinguishing the subjects
+(\`"rows"\`) and variables (\`"cols"\`). The stat layers \`stat_rows()\`
+and \`stat_cols()\` simply filter the data frame to one of these two.
 
-The geom layers `geom_rows_*()` and `geom_cols_*()` call the
+The geom layers \`geom_rows\_\*()\` and \`geom_cols\_\*()\` call the
 corresponding stat in order to render plot elements for the
-corresponding factor matrix. `geom_dims_*()` selects a default matrix
-based on common practice, e.g. points for rows and arrows for columns.
+corresponding factor matrix. \`geom_dims\_\*()\` selects a default
+matrix based on common practice, e.g. points for rows and arrows for
+columns.
 
 ## Ordination aesthetics
 
 This statistical transformation is compatible with the convenience
-function [`ord_aes()`](ggbiplot.md).
+function \[ord_aes()\].
 
-Some transformations (e.g.
-[`stat_center()`](https://corybrunson.github.io/gggda/reference/stat_center.html))
-commute with projection to the lower (1 or 2)-dimensional biplot space.
-If they detect aesthetics of the form `..coord[0-9]+`, then `..coord1`
-and `..coord2` are converted to `x` and `y` while any remaining are
-ignored.
+Some transformations (e.g. \[stat_center()\]) commute with projection to
+the lower (1 or 2)-dimensional biplot space. If they detect aesthetics
+of the form \`..coord\[0-9\]+\`, then \`..coord1\` and \`..coord2\` are
+converted to \`x\` and \`y\` while any remaining are ignored.
 
-Other transformations (e.g.
-[`stat_spantree()`](https://corybrunson.github.io/gggda/reference/stat_spantree.html))
-yield different results in a lower-dimensional biplot when they are
-computed before versus after projection. If the stat layer detects these
-aesthetics, then the transformation is performed before projection, and
-the results in the first two dimensions are returned as `x` and `y`.
+Other transformations (e.g. \[stat_spantree()\]) yield different results
+in a lower-dimensional biplot when they are computed before versus after
+projection. If the stat layer detects these aesthetics, then the
+transformation is performed before projection, and the results in the
+first two dimensions are returned as \`x\` and \`y\`.
 
-A small number of transformations
-([`stat_rule()`](https://corybrunson.github.io/gggda/reference/stat_rule.html))
-are incompatible with ordination aesthetics but will accept
-[`ord_aes()`](ggbiplot.md) without warning.
+A small number of transformations (\[stat_rule()\]) are incompatible
+with ordination aesthetics but will accept \`ord_aes()\` without
+warning.
 
 ## Computed variables
 
 These are calculated during the statistical transformation and can be
-accessed with [delayed
-evaluation](https://ggplot2.tidyverse.org/reference/aes_eval.html).
+accessed with \[delayed evaluation\]\[ggplot2::aes_eval\].
 
-- `xend,yend`:
+- \`xend,yend\`:
 
   projections onto (specified) vectors
 

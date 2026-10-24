@@ -4,9 +4,9 @@ iris_pca <- ordinate(iris, cols = 1:4, model = prcomp)
 # biplot canvas
 iris_biplot <- 
   iris_pca %>%
-  ggbiplot(aes(color = Species, label = name), axis.type = "predictive") +
+  ggbiplot(aes(color = Species, label = name)) +
   geom_rows_point() +
-  geom_cols_axis(aes(center = center))
+  geom_cols_axis(aes(center = center), axis.type = "predictive")
 # print select cases
 top_cases <- c(1, 51, 101)
 iris[top_cases, ]
@@ -31,8 +31,7 @@ iris_biplot + stat_rows_projection(subset = top_cases, referent = iris_cols)
 
 # project selected cases onto selected axes in full-dimensional space
 iris_pca %>%
-  ggbiplot(ord_aes(iris_pca, color = Species, label = name),
-           axis.type = "predictive") +
+  ggbiplot(ord_aes(iris_pca, color = Species, label = name)) +
   geom_rows_point() +
-  geom_cols_axis(aes(center = center)) +
+  geom_cols_axis(aes(center = center), axis.type = "predictive") +
   stat_rows_projection(subset = top_cases, ref_subset = length_vars)

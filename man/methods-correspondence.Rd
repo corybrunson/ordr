@@ -35,19 +35,21 @@
 \item{x}{An ordination object.}
 }
 \value{
-The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia},
-\link[=supplementation]{supplementary elements}, and \link[=augmentation]{intrinsic metadata}; but they require methods for each model class to
-tell them what these components are.
+The recovery generics `recover_*()` return [core model
+  components][recoverers], [distribution of inertia][conference],
+  [supplementary elements][supplementation], and [intrinsic
+  metadata][augmentation]; but they require methods for each model class to
+  tell them what these components are.
 
-The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
-class. Its methods determine what model classes it is allowed to wrap. It
-then provides 'tbl_ord' methods with access to the recoverers and hence to
-the model components.
+  The generic [as_tbl_ord()] returns its input wrapped in the 'tbl_ord'
+  class. Its methods determine what model classes it is allowed to wrap. It
+  then provides 'tbl_ord' methods with access to the recoverers and hence to
+  the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
-objects of class \code{"correspondence"} from the \strong{\link[MASS:corresp]{MASS}}
-package.
+  objects of class `"correspondence"` from the **[MASS][MASS::corresp]**
+  package.
 }
 \examples{
 # table of hair and eye color data collapsed by sex
@@ -67,7 +69,7 @@ get_cols(quine_ca)
 (quine_ca <- augment_ord(quine_ca))
 }
 \seealso{
-Other methods for singular value decomposition-based techniques: 
+Other methods for singular value decomposition-based techniques:
 \code{\link{methods-cancor}},
 \code{\link{methods-lda}},
 \code{\link{methods-lra}},
@@ -75,7 +77,7 @@ Other methods for singular value decomposition-based techniques:
 \code{\link{methods-prcomp}},
 \code{\link{methods-svd}}
 
-Other models from the MASS package: 
+Other models from the MASS package:
 \code{\link{methods-lda}},
 \code{\link{methods-mca}}
 }

@@ -1,10 +1,8 @@
 # Render plot elements for one matrix of an ordination
 
-These stats merely tell
-[`ggplot2::ggplot()`](https://ggplot2.tidyverse.org/reference/ggplot.html)
-which factor of an ordination to pull data from for a plot layer. They
-are invoked internally by the various [`geom_*_*()`](biplot-geoms.md)
-layers.
+These stats merely tell \[ggplot2::ggplot()\] which factor of an
+ordination to pull data from for a plot layer. They are invoked
+internally by the various \[\`geom\_\*\_\*()\`\]\[biplot-geoms\] layers.
 
 ## Usage
 
@@ -106,25 +104,24 @@ stat_cols(
 
   An integer, logical, or character vector indicating a subset of rows
   or columns for which to render graphical elements. NB: Internally, the
-  `subset` will be taken from the rows of the [fortified](tidiers.md)
-  'tbl_ord' comprising rows from only one of the matrix factors. It is
-  still possible to pass a formula to the `data` parameter, but it will
-  act on the fortified data *before* it has been restricted to one
-  matrix factor.
+  \`subset\` will be taken from the rows of the
+  \[fortified\]\[fortify.tbl_ord()\] 'tbl_ord' comprising rows from only
+  one of the matrix factors. It is still possible to pass a formula to
+  the \`data\` parameter, but it will act on the fortified data
+  \_before\_ it has been restricted to one matrix factor.
 
 - elements:
 
   Character vector; which elements of each factor for which to render
-  graphical elements. One of `"active"` (the default) or any
+  graphical elements. One of \`"active"\` (the default) or any
   supplementary element type defined by the specific class methods (e.g.
-  `"score"` for 'factanal', 'lda_ord', and 'cancord_ord' and
-  `"intraset"` and `"interset"` for 'cancor_ord'), via [partial
-  matching](https://rdrr.io/r/base/match.arg.html).
+  \`"score"\` for 'factanal', 'lda_ord', and 'cancord_ord' and
+  \`"intraset"\` and \`"interset"\` for 'cancor_ord'), via \[partial
+  matching\]\[base::match.arg()\].
 
 - ...:
 
-  Additional arguments passed to
-  [`ggplot2::layer()`](https://ggplot2.tidyverse.org/reference/layer.html).
+  Additional arguments passed to \[ggplot2::layer()\].
 
 - show.legend:
 
@@ -145,21 +142,20 @@ stat_cols(
 
 ## Value
 
-A ggproto [layer](https://ggplot2.tidyverse.org/reference/layer.html).
+A ggproto \[layer\]\[ggplot2::layer\].
 
 ## Biplot layers
 
-[`ggbiplot()`](ggbiplot.md) uses
-[`ggplot2::fortify()`](https://ggplot2.tidyverse.org/reference/fortify.html)
-internally to produce a single data frame with a `.matrix` column
-distinguishing the subjects (`"rows"`) and variables (`"cols"`). The
-stat layers `stat_rows()` and `stat_cols()` simply filter the data frame
-to one of these two.
+\[ggbiplot()\] uses \[ggplot2::fortify()\] internally to produce a
+single data frame with a \`.matrix\` column distinguishing the subjects
+(\`"rows"\`) and variables (\`"cols"\`). The stat layers \`stat_rows()\`
+and \`stat_cols()\` simply filter the data frame to one of these two.
 
-The geom layers `geom_rows_*()` and `geom_cols_*()` call the
+The geom layers \`geom_rows\_\*()\` and \`geom_cols\_\*()\` call the
 corresponding stat in order to render plot elements for the
-corresponding factor matrix. `geom_dims_*()` selects a default matrix
-based on common practice, e.g. points for rows and arrows for columns.
+corresponding factor matrix. \`geom_dims\_\*()\` selects a default
+matrix based on common practice, e.g. points for rows and arrows for
+columns.
 
 ## See also
 
@@ -197,5 +193,5 @@ ggbiplot(swiss_fa) +
   geom_rows_label(aes(label = name), elements = "score", subset = c(1, 4, 18)) +
   scale_alpha_manual(values = c(0, 1), guide = "none") +
   geom_cols_vector(aes(label = name))
-#> Warning: Ignoring unknown parameters: `label.size`
+#> Error in deprecated(): could not find function "deprecated"
 ```

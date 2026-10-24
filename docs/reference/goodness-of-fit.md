@@ -21,15 +21,15 @@ ord_predictivity(x, .matrix, rank = NULL)
 
 - rank:
 
-  The maximum rank for which to compute statistics; the default, `NULL`
-  computes statistics up to the rank of the model.
+  The maximum rank for which to compute statistics; the default,
+  \`NULL\` computes statistics up to the rank of the model.
 
 - .matrix:
 
   A character string partially matched (lowercase) to several indicators
   for one or both matrices in a matrix decomposition used for
-  ordination. The standard values are `"rows"`, `"cols"`, and `"dims"`
-  (for both).
+  ordination. The standard values are \`"rows"\`, \`"cols"\`, and
+  \`"dims"\` (for both).
 
 ## Value
 
@@ -41,17 +41,17 @@ statistics. If no items are found, a matrix will have zero rows.
 Gower, Gardner–Lubbe, & le Roux (2011) detail several measures of fit
 for biplots, most prominently
 
-- the *quality* of the \\r\\-dimensional biplot, measured as the
+- the \_quality\_ of the \\r\\-dimensional biplot, measured as the
   proportion of variance in the plot, calculated as the quotient of the
   traces of \\\Lambda_r = {D_r}^2\\ and of \\\Lambda = D^2\\.
 
-- the *adequacy* of the representation of the \\j\\-th row
+- the \_adequacy\_ of the representation of the \\j\\-th row
   (respectively, column) in the \\r\\-dimensional biplot, calculated as
   the \\j\\-th diagonal element of \\U_r\\ {U_r}^\top\\ (respectively,
   \\V_r\\ {V_r}^\top\\), understood as the fidelity of the projections
   of the standard coordinates.
 
-- the *predictivity* of the \\j\\-th row (respectively, column) in the
+- the \_predictivity\_ of the \\j\\-th row (respectively, column) in the
   \\r\\-dimensional biplot, measured as the quotient of the \\j\\-th
   diagonal elements of \\U_r\\ \Lambda_r\\ {U_r}^\top\\ and of \\U\\
   \Lambda\\ U^\top\\ (respectively, of \\V_r\\ \Lambda_r\\ {V_r}^\top\\
@@ -64,8 +64,9 @@ for supplementary elements.
 
 ## References
 
-Gower JC, Gardner–Lubbe S, & le Roux NJ (2011) *Understanding Biplots*.
-Wiley, ISBN: 978-0-470-01255-0. <https://www.wiley.com/go/biplots>
+Gower JC, Gardner–Lubbe S, & le Roux NJ (2011) \_Understanding
+Biplots\_. Wiley, ISBN: 978-0-470-01255-0.
+\<https://www.wiley.com/go/biplots\>
 
 ## Examples
 

@@ -2,7 +2,6 @@
 % Please edit documentation in R/aaa-.r, R/coord-scaffold.r, R/facet-ord.r,
 %   R/geom-interpolation.r, R/geom-origin.r, R/stat-matrix.r,
 %   R/stat-projection.r, R/zzz-biplot-stats.r
-\docType{data}
 \name{ordr-ggproto}
 \alias{ordr-ggproto}
 \alias{CoordScaffold}
@@ -46,17 +45,16 @@
 \title{ggproto classes created and adapted for ordr}
 \description{
 In addition to geometric element layers (geoms) based on
-base-\strong{ggplot2} layers like \code{geom_point()} but specified to matrix factors
-as \code{geom_row_point()}, \strong{ordr} introduces \link[ggplot2:ggproto]{ggproto}
-classes for some additional geometric elements commonly used in biplots.
-The factor-specific geoms invoke the statistical transformation layers
-(stats) \code{stat_rows()} and \code{stat_cols()}, which specify the matrix factor.
-Because each ggplot layer consists of only one stat and one geom, this
-necessitates that ggproto classes for new stats must also come in \verb{*Rows}
-and \verb{*Cols} flavors.
+  base-**ggplot2** layers like `geom_point()` but specified to matrix factors
+  as `geom_row_point()`, **ordr** introduces [ggproto][ggplot2::ggproto]
+  classes for some additional geometric elements commonly used in biplots.
+  The factor-specific geoms invoke the statistical transformation layers
+  (stats) `stat_rows()` and `stat_cols()`, which specify the matrix factor.
+  Because each ggplot layer consists of only one stat and one geom, this
+  necessitates that ggproto classes for new stats must also come in `*Rows`
+  and `*Cols` flavors.
 }
 \seealso{
-\code{\link[ggplot2:ggplot2-ggproto]{ggplot2::ggplot2-ggproto}} and \link[ggplot2:ggproto]{ggplot2::ggproto} for explanations
-of base ggproto classes in \strong{ggplot2} and how to create new ones.
+[`ggplot2::ggplot2-ggproto`] and [ggplot2::ggproto] for explanations
+  of base ggproto classes in **ggplot2** and how to create new ones.
 }
-\keyword{datasets}
