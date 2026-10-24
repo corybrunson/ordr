@@ -1,4 +1,4 @@
-# get_ord_layout snapshot
+# `get_ord_layout()` snapshot
 
     Code
       info

@@ -1,8 +1,7 @@
 # Functionality for factor analysis ('factanal') objects
 
 These methods extract data from, and attribute new data to, objects of
-class `"factanal"` as returned by
-[`stats::factanal()`](https://rdrr.io/r/stats/factanal.html).
+class \`"factanal"\` as returned by \[stats::factanal()\].
 
 ## Usage
 
@@ -46,16 +45,16 @@ recover_aug_coord(x)
 
 ## Value
 
-The recovery generics `recover_*()` return [core model
-components](recoverers.md), [distribution of inertia](conference.md),
-[supplementary elements](supplementation.md), and [intrinsic
-metadata](augmentation.md); but they require methods for each model
+The recovery generics \`recover\_\*()\` return \[core model
+components\]\[recoverers\], \[distribution of inertia\]\[conference\],
+\[supplementary elements\]\[supplementation\], and \[intrinsic
+metadata\]\[augmentation\]; but they require methods for each model
 class to tell them what these components are.
 
-The generic [`as_tbl_ord()`](tbl_ord.md) returns its input wrapped in
-the 'tbl_ord' class. Its methods determine what model classes it is
-allowed to wrap. It then provides 'tbl_ord' methods with access to the
-recoverers and hence to the model components.
+The generic \[as_tbl_ord()\] returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap.
+It then provides 'tbl_ord' methods with access to the recoverers and
+hence to the model components.
 
 ## Details
 
@@ -63,10 +62,9 @@ Factor analysis of a data matrix relies on an an eigendecomposition of
 its correlation matrix, whose eigenvectors (up to weighting) comprise
 the variable loadings. For this reason, both row and column recoverers
 retrieve the loadings and inertia is evenly distributed between them.
-When computed and returned by
-[`stats::factanal()`](https://rdrr.io/r/stats/factanal.html), the case
-scores are accessible as supplementary elements. Redistribution of
-inertia commutes through both score calculations.
+When computed and returned by \[stats::factanal()\], the case scores are
+accessible as supplementary elements. Redistribution of inertia commutes
+through both score calculations.
 
 ## See also
 

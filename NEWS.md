@@ -1,9 +1,14 @@
 # next version
 
+## predictive axis calibration (breaking change)
+
+Predictive axes are now calibrated by `geom(_*)_axis()` and `stat/geom(_*)_rule()` via the new `axis.type` argument, which displaces the homonymous argument of `ggbiplot()`.
+When full model coordinates are mapped with `ord_aes()`, these layers scale axis units by their reciprocal squared norms.
+
 ## handling of eigenvalue-based classes
 
 The `"cmds_ord"` and `"factanal"` recovery methods have been updated to reflect the use of eigenvalue decomposition rather than singular value decomposition under their respective hoods: Only one set of elements are considered "active" (see #60).
-While the `"eigen"` methods are unchanged, the function `eigen_ord()` has been deprecated in favor of `eigen()`, which (under default parameter settings) returns an object of the `"eigen"` S3 class. (This was not the case when `eigen_ord()` was introduced.) While `eigen()` still discards the `"Labels"` attribute, `ordinate.dist()` has been enhanced to retrieve it when passing a `"dist"` object to a model, which should compensate in most settings. (While making these changes, duplicative definitions of `recover_aug_rows.eigen_ord()` and `recover_aug_cols.eigen_ord()` were corrected to `"eigen"` methods.)
+While the `"eigen"` methods are unchanged, the function `eigen_ord()` has been deprecated in favor of `eigen()`, which (under default parameter settings) returns an object of the `"eigen"` S3 class. (This was not the case when `eigen_ord()` was introduced.) While `eigen()` still discards the `"Labels"` attribute, `ordinate.dist()` has been enhanced to retrieve it when passing a `"dist"` object to a model, which should compensate in most settings.
 
 ## `format()` overhaul
 
@@ -12,7 +17,7 @@ This involved a ground-up revision starting with several constructions (headers,
 The pipeline relies on several new internal helpers (`ord_header`, `ord_footer`, `ord_width_alloc`, `ord_n_show`, `ord_format_coord`, `ord_format_ann`, `ord_split_coord`, `ord_combine`, `ord_assemble`) that are subject to several new unit tests.
 
 The more modular construction strips ANSI styling from `tibble:::format.tbl_df()` output and reintroduces it after assembly.
-Headers, footers, row numbers, separators, and ellipses are assigned `pillar::style_subtle()`.
+Headers, footers, row numbers, separators, ellipses, and supplementary elements are assigned `pillar::style_subtle()`.
 
 Coordinate sub-headers display the shares of explained inertia rather than (redundant) variable types.
 The number of annotation columns printed beside each matrix factor is determined from the available width.
@@ -37,6 +42,8 @@ Alternative syntaces for biplot layer constructors are now available:
 Beyond convenience, the second and third of these allow to use `Stat`s for which biplot-specific constructors `stat_rows_*()` and `stat_cols_*()` are not provided.
 
 ## bug fixes
+
+Duplicative definitions of `recover_aug_rows.eigen_ord()` and `recover_aug_cols.eigen_ord()` are corrected to `"eigen"` methods.
 
 `get_rows()` and `get_cols()` previously conflated all supplementary elements.
 They now return only those elements specified.

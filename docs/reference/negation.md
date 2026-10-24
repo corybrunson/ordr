@@ -19,7 +19,7 @@ negate_to_first_orthant(x, .matrix)
 
 - x:
 
-  A [tbl_ord](tbl_ord.md).
+  A \[tbl_ord\].
 
 - negation:
 
@@ -29,14 +29,14 @@ negate_to_first_orthant(x, .matrix)
 
   A character string partially matched (lowercase) to several indicators
   for one or both matrices in a matrix decomposition used for
-  ordination. The standard values are `"rows"`, `"cols"`, and `"dims"`
-  (for both).
+  ordination. The standard values are \`"rows"\`, \`"cols"\`, and
+  \`"dims"\` (for both).
 
 ## Value
 
-`negate_ord()` and `negate_to_first_orthant()` return a tbl_ord with
-certain axes negated but the wrapped model unchanged. `get_negation()`
-returns the current negations. `revert_negation()` returns the tbl_ord
+\`negate_ord()\` and \`negate_to_first_orthant()\` return a tbl_ord with
+certain axes negated but the wrapped model unchanged. \`get_negation()\`
+returns the current negations. \`revert_negation()\` returns the tbl_ord
 without any manual negations.
 
 A tbl_ord; the wrapped model is unchanged.
@@ -46,11 +46,11 @@ A tbl_ord; the wrapped model is unchanged.
 For purposes of comparison and visualization, it can be useful to negate
 the (already artificial) coordinates of an ordination, either by fixed
 criteria or to better align with another basis (matrix) of coordinates.
-`negate_ord()` allows the user to negate specified coordinates of an
+\`negate_ord()\` allows the user to negate specified coordinates of an
 ordination.
 
-`get_negation()` accesses the negations of an ordination, an integer
-vector of `1`s and `-1`s stored as a `"negate"` attribute.
+\`get_negation()\` accesses the negations of an ordination, an integer
+vector of \`1\`s and \`-1\`s stored as a \`"negate"\` attribute.
 
 ## Examples
 

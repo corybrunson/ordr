@@ -578,15 +578,15 @@ c_eigen %>%
   select(-name, -.matrix)
 ```
 
-    ## # A tibble: 6 × 8
-    ##      EV1     EV2     EV3     EV4     EV5      EV6 .element metric       
-    ##    <dbl>   <dbl>   <dbl>   <dbl>   <dbl>    <dbl> <chr>    <chr>        
-    ## 1 -0.834 -0.0907  0.412   0.0430 -0.0206  0.351   active   academic     
-    ## 2 -0.795 -0.0964  0.477  -0.0416 -0.181  -0.311   active   employer     
-    ## 3 -0.517  0.771  -0.0480  0.331   0.158  -0.0372  active   ratio        
-    ## 4 -0.731 -0.352  -0.239  -0.0278  0.528  -0.0685  active   citations    
-    ## 5 -0.631 -0.233  -0.521   0.392  -0.352   0.00783 active   intl_faculty 
-    ## 6 -0.603  0.262  -0.324  -0.665  -0.140   0.0312  active   intl_students
+    ## # A tibble: 6 × 9
+    ##      EV1     EV2     EV3     EV4     EV5      EV6 .element metric    .conference
+    ##    <dbl>   <dbl>   <dbl>   <dbl>   <dbl>    <dbl> <chr>    <chr>           <dbl>
+    ## 1 -0.834 -0.0907  0.412   0.0430 -0.0206  0.351   active   academic            1
+    ## 2 -0.795 -0.0964  0.477  -0.0416 -0.181  -0.311   active   employer            1
+    ## 3 -0.517  0.771  -0.0480  0.331   0.158  -0.0372  active   ratio               1
+    ## 4 -0.731 -0.352  -0.239  -0.0278  0.528  -0.0685  active   citations           1
+    ## 5 -0.631 -0.233  -0.521   0.392  -0.352   0.00783 active   intl_fac…           1
+    ## 6 -0.603  0.262  -0.324  -0.665  -0.140   0.0312  active   intl_stu…           1
 
 Based on the third principal coordinates, the reputational rankings are
 aligned, as we knew already from the correlation matrix and heatmap.

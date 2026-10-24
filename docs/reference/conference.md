@@ -21,48 +21,48 @@ confer_inertia(x, p)
 
 - x:
 
-  A [tbl_ord](tbl_ord.md).
+  A \[tbl_ord\].
 
 - p:
 
   Numeric vector of length 1 or 2. If length 1, the proportion of the
-  inertia assigned to the cases, with the remainder `1 - p` assigned to
-  the variables. If length 2, the proportions of the inertia assigned to
-  the cases and to the variables, respectively.
+  inertia assigned to the cases, with the remainder \`1 - p\` assigned
+  to the variables. If length 2, the proportions of the inertia assigned
+  to the cases and to the variables, respectively.
 
 ## Value
 
-`recover_conference()` returns the (statically implemented) distribution
-of inertia between the rows and the columns as stored in the model.
-`confer_inertia()` returns a tbl_ord with a specified distribution of
-inertia but the wrapped model unchanged. `get_conference()` returns the
-distribution currently conferred.
+\`recover_conference()\` returns the (statically implemented)
+distribution of inertia between the rows and the columns as stored in
+the model. \`confer_inertia()\` returns a tbl_ord with a specified
+distribution of inertia but the wrapped model unchanged.
+\`get_conference()\` returns the distribution currently conferred.
 
 ## Details
 
-The *inertia* of a singular value decomposition \\X=UDV'\\ consists in
+The \_inertia\_ of a singular value decomposition \\X=UDV'\\ consists in
 the squares of the singular values (the diagonal elements of \\D\\), and
 represents the variance, likened to the physical inertia, in the
 directions of the orthogonal singular vectors (the columns of \\U\\ or
 of \\V\\). Biplots superimpose the projections of the rows and the
 columns of \\X\\ onto these coordinate vectors, scaled by some
 proportion of the total inertia: \\UD^p\\ and \\VD^q\\. A biplot is
-*balanced* if \\p+q=1\\. Read Orlov (2013) for more on conferring
+\_balanced\_ if \\p+q=1\\. Read Orlov (2013) for more on conferring
 inertia in PCA.
 
-`recover_conference()`, like the other recoverers, is an [S3
-method](https://rdrr.io/r/base/UseMethod.html) that is exported for
-convenience but not intended to be used directly.
+\`recover_conference()\`, like the other recoverers, is an \[S3
+method\]\[base::S3Methods\] that is exported for convenience but not
+intended to be used directly.
 
-*Note: In case the `"inertia"` attribute is a rectangular matrix, one
-may only be able to confer it entirely to the cases (`p = 1`) or
-entirely to the variables (`p = 0`).*
+\_Note: In case the \`"inertia"\` attribute is a rectangular matrix, one
+may only be able to confer it entirely to the cases (\`p = 1\`) or
+entirely to the variables (\`p = 0\`).\_
 
 ## References
 
-Orlov K (2013) *Answer to* "Algebra of LDA. Fisher discrimination power
-of a variable and Linear Discriminant Analysis". CrossValidated,
-accessed 2019-07-26. <https://stats.stackexchange.com/a/83114/68743>
+Orlov K (2013) \_Answer to\_ "Algebra of LDA. Fisher discrimination
+power of a variable and Linear Discriminant Analysis". CrossValidated,
+accessed 2019-07-26. \<https://stats.stackexchange.com/a/83114/68743\>
 
 ## See also
 

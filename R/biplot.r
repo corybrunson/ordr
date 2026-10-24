@@ -38,11 +38,13 @@
 #' coordinates of the ordination object, along with any additional aesthetics
 #' that are processed internally by [ggplot2::aes()].
 #'
-#' The `axis.type` parameter controls whether the biplot is interpolative or
-#' predictive, though predictive biplots are still experimental and limited to
-#' linear methods like PCA. Gower & Hand (1996) and Gower, Gardner--Lubbe, & le
-#' Roux (2011) thoroughly explain the construction and interpretation of
-#' predictive biplots.
+#' Predictive axes are scaled inversely by the squared norm. By default, this is
+#' computed from `x` and `y` (or from the full model space if obtained by
+#' [ordr::ord_aes()]). If the data contain an `axis.ss` column, it is used
+#' instead. Gower & Hand (1996) and Gower, Gardner--Lubbe, & le Roux (2011)
+#' thoroughly explain the construction and interpretation of predictive biplots.
+#' (Predictive calibration was previously handled by `ggbiplot(axis.type)` but
+#' has been transferred to [`gggda::geom_axis(axis.type)`][gggda::geom_axis].)
 #' 
 
 #' @template biplot-layers
@@ -56,12 +58,6 @@
 #' @param mapping List of default aesthetic mappings to use for the biplot. The
 #'   default assigns the first two coordinates to the aesthetics `x` and `y`.
 #'   Other assignments must be supplied in each layer added to the plot.
-#' @param axis.type Character, partially matched; whether to build an
-#'   `"interpolative"` (the default) or a `"predictive"` biplot. The latter
-#'   requires that `x` and `y` are mapped to shared coordinates, that no other
-#'   shared coordinates are mapped to, and inertia is conferred entirely onto
-#'   one matrix factor. **NB:** This option is only implemented for linear
-#'   techniques (ED, SVD, & PCA).
 #' @inheritParams ggplot2::coord_cartesian
 #' @param axis.percents Whether to concatenate default axis labels with inertia
 #'   percentages.
@@ -84,12 +80,22 @@
 #' @rdname ggbiplot
 #' @export
 ggbiplot <- function(
-    ordination = NULL, mapping = aes(x = 1, y = 2), axis.type = "interpolative",
+    ordination = NULL, mapping = aes(x = 1, y = 2),
     xlim = NULL, ylim = NULL, expand = TRUE, clip = "on",
     axis.percents = TRUE, sec.axes = NULL, scale.factor = "inertia",
     scale_rows = NULL, scale_cols = NULL,
     ...
 ) {
+  dots <- match.call(expand.dots = FALSE)[["..."]]
+  if ("axis.type" %in% names(dots)) {
+    stop(
+      "`axis.type` is no longer an argument to `ggbiplot()`; ",
+      "specify it on an axis or rule layer, e.g. ",
+      "`geom_cols_axis(axis.type = \"predictive\")`.",
+      call. = FALSE
+    )
+  }
+
   if (axis.percents) {
     # store inertia
     inertia <- recover_inertia(ordination)
@@ -97,8 +103,6 @@ ggbiplot <- function(
       axis.percents <- FALSE
     }
   }
-  ord_class <- class(un_tbl_ord(ordination))
-  conference <- get_conference(ordination)
   
   # fortify `ordination` if necessary
   if (! is.null(ordination)) ordination <- fortify(ordination, ...)
@@ -111,48 +115,6 @@ ggbiplot <- function(
     if (! ".element" %in% names(ordination))
       ordination$.element <- NA_character_
     mapping$.element <- {{ rlang::sym(".element") }}
-  }
-  
-  axis.type <- match.arg(axis.type, c("interpolative", "predictive"))
-  if (axis.type == "predictive") {
-    
-    linear_trans_classes <- 
-      c("eigen", "eigen_ord", "svd_ord", "prcomp", "princomp")
-    # only allow pythagorean metrics and linear pre-procedures
-    # FIXME: Allow pythagorean ordinations with non-linear pre-procedures?
-    if (! any(ord_class %in% linear_trans_classes)) {
-      warning("Predictive biplots are only implemented for linear methods ",
-              "(ED, SVD, PCA).")
-    } else {
-      
-      # rescale standard coordinates for predictive biplot
-      xy_map <- stringr::str_remove(as.character(mapping[c("x", "y")]), "^~")
-      ord_map <- get_coord(ordination)
-      if (! all(c("x", "y") %in% names(mapping)) &&
-          any(stringr::str_detect(names(mapping), "..coord"))) {
-        warning("For predictive biplots, ",
-                "map only `x` and `y` to shared coordinates.")
-      } else if (! all(xy_map %in% attr(ordination, "coordinates"))) {
-        warning("For predictive biplots, ",
-                "map both `x` and `y` to shared coordinates.")
-      } else if (! all(c(0, 1) %in% conference)) {
-        warning("For predictive biplots, ",
-                "inertia must be balanced and conferred on one factor.")
-      } else {
-        # remove coordinates other than those used in the biplot
-        # ordination[setdiff(get_coord(ordination), xy_map)] <- NULL
-        # rescale standard coordinates
-        std_fac <- c("rows", "cols")[! as.logical(conference)]
-        std_ss <- apply(
-          ordination[ordination$.matrix == std_fac, ord_map],
-          1L,
-          function(x) sum(x^2)
-        )
-        ordination[ordination$.matrix == std_fac, ord_map] <-
-          ordination[ordination$.matrix == std_fac, ord_map] / std_ss
-      }
-      
-    }
   }
   
   # scale 'rows' or 'cols' as indicated by `scale_rows` and `scale_cols`

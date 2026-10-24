@@ -1,9 +1,9 @@
 # Convenience stats for row and column matrix factors
 
-These statistical transformations (stats) adapt conventional **ggplot2**
-stats to one or the other matrix factor of a tbl_ord, in lieu of
-[`stat_rows()`](stat_rows.md) or [`stat_cols()`](stat_rows.md). They
-accept the same parameters as their corresponding conventional stats.
+These statistical transformations (stats) adapt conventional
+\*\*ggplot2\*\* stats to one or the other matrix factor of a tbl_ord, in
+lieu of \[stat_rows()\] or \[stat_cols()\]. They accept the same
+parameters as their corresponding conventional stats.
 
 ## Usage
 
@@ -16,9 +16,9 @@ stat_rows_density_2d(
   ...,
   contour = TRUE,
   contour_var = "density",
-  n = 100,
   h = NULL,
   adjust = c(1, 1),
+  n = 100,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -32,9 +32,9 @@ stat_cols_density_2d(
   ...,
   contour = TRUE,
   contour_var = "density",
-  n = 100,
   h = NULL,
   adjust = c(1, 1),
+  n = 100,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -48,9 +48,9 @@ stat_rows_density_2d_filled(
   ...,
   contour = TRUE,
   contour_var = "density",
-  n = 100,
   h = NULL,
   adjust = c(1, 1),
+  n = 100,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -64,9 +64,9 @@ stat_cols_density_2d_filled(
   ...,
   contour = TRUE,
   contour_var = "density",
-  n = 100,
   h = NULL,
   adjust = c(1, 1),
+  n = 100,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -379,6 +379,7 @@ stat_rows_rule(
   fun.upper = "maxpp",
   fun.offset = "minabspp",
   fun.args = list(),
+  axis.type = c("interpolative", "predictive"),
   referent = NULL,
   show.legend = NA,
   inherit.aes = TRUE,
@@ -396,6 +397,7 @@ stat_cols_rule(
   fun.upper = "maxpp",
   fun.offset = "minabspp",
   fun.args = list(),
+  axis.type = c("interpolative", "predictive"),
   referent = NULL,
   show.legend = NA,
   inherit.aes = TRUE,
@@ -501,8 +503,7 @@ stat_cols_projection(
 
 - ...:
 
-  Additional arguments passed to
-  [`ggplot2::layer()`](https://ggplot2.tidyverse.org/reference/layer.html).
+  Additional arguments passed to \[ggplot2::layer()\].
 
 - contour:
 
@@ -513,10 +514,6 @@ stat_cols_projection(
   Character string identifying the variable to contour by. Can be one of
   `"density"`, `"ndensity"`, or `"count"`. See the section on computed
   variables for details.
-
-- n:
-
-  Number of grid points in each direction.
 
 - h:
 
@@ -529,6 +526,10 @@ stat_cols_projection(
   This makes it possible to adjust the bandwidth while still using the a
   bandwidth estimator. For example, `adjust = 1/2` means use half of the
   default bandwidth.
+
+- n:
+
+  Number of grid points in each direction.
 
 - na.rm:
 
@@ -673,35 +674,31 @@ stat_cols_projection(
 
 - ref_elements, ref_subset:
 
-  Analogues of `elements` and `subset` applied to `referent`.
+  Analogues of \`elements\` and \`subset\` applied to \`referent\`.
 
 ## Value
 
-A ggproto [layer](https://ggplot2.tidyverse.org/reference/layer.html).
+A ggproto \[layer\]\[ggplot2::layer\].
 
 ## Ordination aesthetics
 
 This statistical transformation is compatible with the convenience
-function [`ord_aes()`](ggbiplot.md).
+function \[ord_aes()\].
 
-Some transformations (e.g.
-[`stat_center()`](https://corybrunson.github.io/gggda/reference/stat_center.html))
-commute with projection to the lower (1 or 2)-dimensional biplot space.
-If they detect aesthetics of the form `..coord[0-9]+`, then `..coord1`
-and `..coord2` are converted to `x` and `y` while any remaining are
-ignored.
+Some transformations (e.g. \[stat_center()\]) commute with projection to
+the lower (1 or 2)-dimensional biplot space. If they detect aesthetics
+of the form \`..coord\[0-9\]+\`, then \`..coord1\` and \`..coord2\` are
+converted to \`x\` and \`y\` while any remaining are ignored.
 
-Other transformations (e.g.
-[`stat_spantree()`](https://corybrunson.github.io/gggda/reference/stat_spantree.html))
-yield different results in a lower-dimensional biplot when they are
-computed before versus after projection. If the stat layer detects these
-aesthetics, then the transformation is performed before projection, and
-the results in the first two dimensions are returned as `x` and `y`.
+Other transformations (e.g. \[stat_spantree()\]) yield different results
+in a lower-dimensional biplot when they are computed before versus after
+projection. If the stat layer detects these aesthetics, then the
+transformation is performed before projection, and the results in the
+first two dimensions are returned as \`x\` and \`y\`.
 
-A small number of transformations
-([`stat_rule()`](https://corybrunson.github.io/gggda/reference/stat_rule.html))
-are incompatible with ordination aesthetics but will accept
-[`ord_aes()`](ggbiplot.md) without warning.
+A small number of transformations (\[stat_rule()\]) are incompatible
+with ordination aesthetics but will accept \`ord_aes()\` without
+warning.
 
 ## See also
 
@@ -725,6 +722,12 @@ ggbiplot(iris_pca) +
   ) +
   scale_color_discrete(name = "Species", aesthetics = c("color", "fill")) +
   geom_cols_vector(aes(label = name))
+#> Warning: The following aesthetics were dropped during statistical transformation:
+#> axis.ss.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
 
 ggbiplot(iris_pca) +
   stat_rows_bagplot(
@@ -734,6 +737,12 @@ ggbiplot(iris_pca) +
     outlier_gp = list(shape = "asterisk")
   ) +
   geom_cols_vector(aes(label = name))
+#> Warning: The following aesthetics were dropped during statistical transformation:
+#> axis.ss.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
 
 
 # scaled PCA of Anderson iris measurements
@@ -772,6 +781,12 @@ iris_pca %>%
     "Row-principal PCA biplot of Anderson iris measurements",
     "Segments connect each observation to its within-species depth median"
   )
+#> Warning: The following aesthetics were dropped during statistical transformation:
+#> axis.ss.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
 
 
 # correspondence analysis of combined female and male hair and eye color data
@@ -830,8 +845,7 @@ USPersonalExpenditure %>%
     "U.S. Personal Expenditure data, 1940-1960",
     "Row-principal biplot of centered PCA"
   )
-#> Warning: Ignoring unknown parameters: `label.size`
-
+#> Error in deprecated(): could not find function "deprecated"
 # compute row-principal components of scaled iris measurements
 iris[, -5] %>%
   prcomp(scale = TRUE) %>%
@@ -874,21 +888,29 @@ iris_pca %>%
     "Row-principal PCA biplot of Anderson iris measurements",
     "Overlaid with 95% confidence disks"
   )
+#> Warning: The following aesthetics were dropped during statistical transformation:
+#> axis.ss.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
 
 
 # hull peeling with breaks below
 judge_pca <- ordinate(USJudgeRatings, princomp, cols = -c(1, 12))
-ggbiplot(judge_pca, axis.type = "predictive") +
-  geom_cols_axis() +
+ggbiplot(judge_pca) +
+  geom_cols_axis(axis.type = "predictive") +
   geom_rows_point(elements = "score") +
   stat_rows_peel(
     aes(alpha = after_stat(hull)), color = "black", elements = "score",
     breaks = c(.9, .5, .1), cut = "below"
   )
-#> Warning: Ignoring unknown parameters: `axis.colour`, `axis.alpha`, `label.angle`,
-#> `label.colour`, `label.alpha`, `tick.linewidth`, `tick.colour`, `tick.alpha`,
-#> `text.size`, `text.angle`, `text.hjust`, `text.vjust`, `text.family`,
-#> `text.fontface`, `text.colour`, and `text.alpha`
+#> Warning: The following aesthetics were dropped during statistical transformation:
+#> axis.ss.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
 #> Warning: Using alpha for a discrete variable is not advised.
 
 
@@ -900,6 +922,12 @@ ggbiplot(iris_pca) +
     aes(fill = Species, alpha = after_stat(hull)),
     num = 3
   )
+#> Warning: The following aesthetics were dropped during statistical transformation:
+#> axis.ss.
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
 #> Warning: Using alpha for a discrete variable is not advised.
 
 
@@ -908,13 +936,9 @@ iris_pca <- ordinate(iris, cols = 1:4, model = prcomp)
 # biplot canvas
 iris_biplot <- 
   iris_pca %>%
-  ggbiplot(aes(color = Species, label = name), axis.type = "predictive") +
+  ggbiplot(aes(color = Species, label = name)) +
   geom_rows_point() +
-  geom_cols_axis(aes(center = center))
-#> Warning: Ignoring unknown parameters: `axis.colour`, `axis.alpha`, `label.angle`,
-#> `label.colour`, `label.alpha`, `tick.linewidth`, `tick.colour`, `tick.alpha`,
-#> `text.size`, `text.angle`, `text.hjust`, `text.vjust`, `text.family`,
-#> `text.fontface`, `text.colour`, and `text.alpha`
+  geom_cols_axis(aes(center = center), axis.type = "predictive")
 # print select cases
 top_cases <- c(1, 51, 101)
 iris[top_cases, ]
@@ -954,15 +978,10 @@ iris_biplot + stat_rows_projection(subset = top_cases, referent = iris_cols)
 
 # project selected cases onto selected axes in full-dimensional space
 iris_pca %>%
-  ggbiplot(ord_aes(iris_pca, color = Species, label = name),
-           axis.type = "predictive") +
+  ggbiplot(ord_aes(iris_pca, color = Species, label = name)) +
   geom_rows_point() +
-  geom_cols_axis(aes(center = center)) +
+  geom_cols_axis(aes(center = center), axis.type = "predictive") +
   stat_rows_projection(subset = top_cases, ref_subset = length_vars)
-#> Warning: Ignoring unknown parameters: `axis.colour`, `axis.alpha`, `label.angle`,
-#> `label.colour`, `label.alpha`, `tick.linewidth`, `tick.colour`, `tick.alpha`,
-#> `text.size`, `text.angle`, `text.hjust`, `text.vjust`, `text.family`,
-#> `text.fontface`, `text.colour`, and `text.alpha`
 
 
 # default (standardized) linear discriminant analysis
@@ -1053,7 +1072,12 @@ glass_lda %>%
     "LDA of Freestone glass measurements",
     "Symmetric biplot of contribution LDA"
   )
+#> Warning: Ignoring unknown parameters: `elements`
 #> Warning: Ignoring unknown parameters: `text.size`
+#> Warning: Computation failed in `stat_density2d()`.
+#> Caused by error in `precompute_2d_bw()`:
+#> ! The bandwidth argument `h` must contain numbers larger than 0.
+#> ℹ Please set the `h` argument to stricly positive numbers manually.
 
 
 if (FALSE) { # \dontrun{

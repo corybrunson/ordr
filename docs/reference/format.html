@@ -5,11 +5,11 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Format a tbl_ord for printing — format"><meta name="description" content="These methods of base::format() and base::print() render a
-(usually more) tidy readout of a tbl_ord that is consistent across all
-original ordination classes."><meta property="og:description" content="These methods of base::format() and base::print() render a
-(usually more) tidy readout of a tbl_ord that is consistent across all
-original ordination classes."></head><body>
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Format a tbl_ord for printing — format"><meta name="description" content="These methods of [base::format()] and [base::print()] render a
+  (usually more) tidy readout of a [tbl_ord] that is consistent across all
+  original ordination classes."><meta property="og:description" content="These methods of [base::format()] and [base::print()] render a
+  (usually more) tidy readout of a [tbl_ord] that is consistent across all
+  original ordination classes."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -49,14 +49,16 @@ original ordination classes."></head><body>
     </div>
 
     <div class="ref-description section level2">
-    <p>These methods of <code><a href="https://rdrr.io/r/base/format.html" class="external-link">base::format()</a></code> and <code><a href="https://rdrr.io/r/base/print.html" class="external-link">base::print()</a></code> render a
-(usually more) tidy readout of a <a href="tbl_ord.html">tbl_ord</a> that is consistent across all
-original ordination classes.</p>
+    <p>These methods of [base::format()] and [base::print()] render a
+  (usually more) tidy readout of a [tbl_ord] that is consistent across all
+  original ordination classes.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'tbl_ord'</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="va">.by</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'tbl_ord'</span></span>
 <span><span class="fu">format</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  width <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -82,7 +84,7 @@ original ordination classes.</p>
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>A <a href="tbl_ord.html">tbl_ord</a>.</p></dd>
+<dd><p>A [tbl_ord].</p></dd>
 
 
 <dt id="arg-width">width<a class="anchor" aria-label="anchor" href="#arg-width"></a></dt>
@@ -96,33 +98,32 @@ means use the <code>width</code> <a href="https://pillar.r-lib.org/reference/pil
 
 <dt id="arg-n">n<a class="anchor" aria-label="anchor" href="#arg-n"></a></dt>
 <dd><p>Number(s) of rows to show from each matrix factor, handled as by
-<code><a href="https://tibble.tidyverse.org/reference/formatting.html" class="external-link">tibble::format.tbl()</a></code>. If length 1, will apply to both matrix factors.
-To pass <code>NULL</code> to only one factor, be sure to pass as a list, e.g. <code>n = list(6, NULL)</code>.</p></dd>
+[tibble::format.tbl()]. If length 1, will apply to both matrix factors. To
+pass `NULL` to only one factor, be sure to pass as a list, e.g. `n =
+list(6, NULL)`.</p></dd>
 
 
 <dt id="arg-max-extra-cols-max-footer-lines">max_extra_cols, max_footer_lines<a class="anchor" aria-label="anchor" href="#arg-max-extra-cols-max-footer-lines"></a></dt>
-<dd><p>As in
-<code><a href="https://tibble.tidyverse.org/reference/formatting.html" class="external-link">tibble::format.tbl</a></code>, applied to each matrix
-factor separately.</p></dd>
+<dd><p>As in [tibble::format.tbl], applied to
+each matrix factor separately.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The <code>format()</code> method returns a vector of strings that are more
-elegantly printed by the <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> method, which itself returns the tbl_ord
-invisibly.</p>
+    <p>The `format()` method returns a vector of strings that are more
+  elegantly printed by the `print()` method, which itself returns the tbl_ord
+  invisibly.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The <code><a href="https://rdrr.io/r/base/format.html" class="external-link">base::format()</a></code> and <code><a href="https://rdrr.io/r/base/print.html" class="external-link">base::print()</a></code> methods for
-class 'tbl_ord' are adapted from those for class '<a href="https://tibble.tidyverse.org/reference/tbl_df-class.html" class="external-link">tbl_df</a>'
-and for class 'tbl_graph' from the
-<strong>tidygraph</strong> package.</p>
-<p><strong>NB:</strong> The <code>format.tbl_ord()</code> method is tedious but cannot be easily
-modularized without invoking <a href="recoverers.html">recoverers</a>, <a href="annotation.html">annotation</a>, and <a href="augmentation.html">augmentation</a>
+    <p>The [base::format()] and [base::print()] methods for class 'tbl_ord' are
+adapted from those for class '[tbl_df][tibble::tbl_df]' and for class
+'tbl_graph' from the
+**tidygraph** package.</p>
+<p>**NB:** The `format.tbl_ord()` method is tedious but cannot be easily
+modularized without invoking [recoverers], [annotation], and [augmentation]
 multiple times, thereby significantly reducing performance. It calls upon
-<strong>pillar</strong> for <code>tbl_df</code> formatting then revises the results per
-<code>tbl_ord</code>.</p>
+**pillar** for `tbl_df` formatting then revises the results per `tbl_ord`.</p>
     </div>
 
     <div class="section level2">
@@ -260,8 +261,8 @@ multiple times, thereby significantly reducing performance. It calls upon
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span>  7.61  -0.215 <span style="color: #949494;"> | </span>setosa      0.333     50 setosa     active  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span> -1.83   0.728 <span style="color: #949494;"> | </span>versicolor  0.333     50 versicolor active  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span> -5.78  -0.513 <span style="color: #949494;"> | </span>virginica   0.333     50 virginica  active  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span>  8.06  -0.300 <span style="color: #949494;"> | </span>NA         NA         NA setosa     score   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5</span>  7.13   0.787 <span style="color: #949494;"> | </span>NA         NA         NA setosa     score   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4  8.06  -0.300  | NA         NA         NA setosa     score   </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5  7.13   0.787  | NA         NA         NA setosa     score   </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494;">⋮</span>                                <span style="color: #949494;">⋮</span>                      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Columns (standard, 0%): [ 4 × 2 | 2 ]</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      LD1     LD2<span style="color: #949494;"> | </span>name         .element</span>
@@ -281,8 +282,8 @@ multiple times, thereby significantly reducing performance. It calls upon
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">1</span>  7.61  -0.215 <span style="color: #949494;"> | </span>setosa    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">2</span> -1.83   0.728 <span style="color: #949494;"> | </span>versicolor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">3</span> -5.78  -0.513 <span style="color: #949494;"> | </span>virginica </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4</span>  8.06  -0.300 <span style="color: #949494;"> | </span>NA        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5</span>  7.13   0.787 <span style="color: #949494;"> | </span>NA        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">4  8.06  -0.300  | NA        </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">5  7.13   0.787  | NA        </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494;">⋮</span>               <span style="color: #949494;">⋮</span>     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   variables:</span></span>

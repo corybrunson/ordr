@@ -112,14 +112,14 @@ lda_ord(x, ...)
   }
 
 \item{ret.x, ret.grouping}{Logical; whether to retain as attributes the data
-matrix (\code{x}) and the class assignments (\code{grouping}) on which LDA is
-performed. Methods like \code{predict()} access these objects by name in the
+matrix (`x`) and the class assignments (`grouping`) on which LDA is
+performed. Methods like `predict()` access these objects by name in the
 parent environment, and retaining them as attributes prevents errors that
 arise if these objects are reassigned.}
 
 \item{axes.scale}{Character string indicating how to left-transform the
-\code{scaling} value when rendering biplots using \code{\link[=ggbiplot]{ggbiplot()}}. Options include
-\code{"unstandardized"}, \code{"standardized"}, and \code{"contribution"}.}
+`scaling` value when rendering biplots using [ggbiplot()]. Options include
+`"unstandardized"`, `"standardized"`, and `"contribution"`.}
 
 \item{object}{
 object  of class \code{"lda"}
@@ -140,55 +140,53 @@ only the first \code{dimen} discriminant components are used (except for
 }
 }
 \value{
-Output from \code{\link[MASS:lda]{MASS::lda()}} with an additional preceding \link{class}
-'lda_ord' and up to three \link{attributes}:
-\itemize{
-\item the input data \code{x}, if \code{ret.x = TRUE}
-\item the class assignments \code{grouping}, if \code{ret.grouping = TRUE}
-\item if the parameter \code{axes.scale} is not 'unstandardized', a matrix
-\code{axes.scale} that encodes the transformation of the row space
-}
+Output from [MASS::lda()] with an additional preceding [class]
+  'lda_ord' and up to three [attributes]:
+  
+  * the input data `x`, if `ret.x = TRUE`
+  * the class assignments `grouping`, if `ret.grouping = TRUE`
+  * if the parameter `axes.scale` is not 'unstandardized', a matrix
+    `axes.scale` that encodes the transformation of the row space
 }
 \description{
-This function replicates \code{\link[MASS:lda]{MASS::lda()}} with options and defaults
-to retain elements useful to the \link{tbl_ord} class and biplot calculations.
+This function replicates [MASS::lda()] with options and defaults
+  to retain elements useful to the [tbl_ord] class and biplot calculations.
 }
 \details{
 Linear discriminant analysis relies on an eigendecomposition of the product
 \eqn{W^{-1}B} of the inverse of the within-class covariance matrix \eqn{W} by
 the between-class covariance matrix \eqn{B}. This eigendecomposition can be
 motivated as the right (\eqn{V}) half of the singular value decomposition of
-the matrix of \emph{Mahalanobis distances} between the cases after "sphering"
+the matrix of _Mahalanobis distances_ between the cases after "sphering"
 (linearly transforming them so that the within-class covariance is the
 identity matrix). LDA are not traditionally represented as biplots, with some
 exceptions (Gardner & le Roux, 2005; Greenacre, 2010, p. 109--117).
 
-LDA is implemented as \code{\link[MASS:lda]{MASS::lda()}} in the \strong{MASS} package, in which the
+LDA is implemented as [MASS::lda()] in the **MASS** package, in which the
 variables are transformed by a sphering matrix \eqn{S} (Venables & Ripley,
-2003, p. 331--333). The returned element \code{scaling} contains the
-unstandardized \emph{discriminant coefficients}, which define the discriminant
+2003, p. 331--333). The returned element `scaling` contains the
+unstandardized _discriminant coefficients_, which define the discriminant
 scores of the cases and their centroids as linear combinations of the
 original variables.
 
 The discriminant coefficients constitute one of several possible choices of
 axes for a biplot representation of the LDA. The slightly modified function
-\code{\link[=lda_ord]{lda_ord()}} provides additional options:
-\itemize{
-\item The \emph{standardized discriminant coefficients} are obtained by (re)scaling
+[lda_ord()] provides additional options:
+
+* The _standardized discriminant coefficients_ are obtained by (re)scaling
 the coefficients by the variable standard deviations. These coefficients
 indicate the contributions of the variables to the discriminant scores after
 controlling for their variances (Orlov, 2013).
-\item The variables' \emph{contributions} to the Mahalanobis variance along each
+* The variables' _contributions_ to the Mahalanobis variance along each
 discriminant axis are obtained by transforming the coefficients by the
 inverse of the sphering matrix \eqn{S}. Because the contribution biplot
 derives from the eigendecomposition of the Mahalanobis distance matrix, the
 projections of the centroids and cases onto the variable axes approximate
 their variable values after centering and sphering (Greenacre, 2013).
-}
 
-Finally, in contrast to \code{\link[MASS:lda]{MASS::lda()}}, \code{lda_ord()} defaults both \code{ret.x} and
-\code{ret.grouping} to \code{TRUE}, so that these elements can be used to compute and
-annotate case scores as \link[=supplementation]{supplementary} elements.
+Finally, in contrast to [MASS::lda()], `lda_ord()` defaults both `ret.x` and
+`ret.grouping` to `TRUE`, so that these elements can be used to compute and
+annotate case scores as [supplementary][supplementation] elements.
 }
 \examples{
 # Anderson iris species data centroid
@@ -268,26 +266,26 @@ iris_lda \%>\%
 }
 \references{
 Gardner S & le Roux NJ (2005) "Extensions of Biplot Methodology to
-Discriminant Analysis". \emph{Journal of Classification} \strong{22}(1): 59--86.
+Discriminant Analysis". _Journal of Classification_ **22**(1): 59--86.
 \doi{10.1007/s00357-005-0006-7}
-\url{https://link.springer.com/article/10.1007/s00357-005-0006-7}
+<https://link.springer.com/article/10.1007/s00357-005-0006-7>
 
-Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
+Greenacre MJ (2010) _Biplots in Practice_. Fundacion BBVA, ISBN:
 978-84-923846.
-\url{https://www.fbbva.es/microsite/multivariate-statistics/biplots.html}
+<https://www.fbbva.es/microsite/multivariate-statistics/biplots.html>
 
-Venables WN & Ripley BD (2003) \emph{Modern Applied Statistics with S}, Fourth
+Venables WN & Ripley BD (2003) _Modern Applied Statistics with S_, Fourth
 Edition. Springer Science & Business Media, ISBN: 0387954570, 9780387954578.
-\url{https://www.mimuw.edu.pl/~pokar/StatystykaMgr/Books/VenablesRipley_ModernAppliedStatisticsS02.pdf}
+<https://www.mimuw.edu.pl/~pokar/StatystykaMgr/Books/VenablesRipley_ModernAppliedStatisticsS02.pdf>
 
-Orlov K (2013) \emph{Answer to} "Algebra of LDA. Fisher discrimination power of a
+Orlov K (2013) _Answer to_ "Algebra of LDA. Fisher discrimination power of a
 variable and Linear Discriminant Analysis". CrossValidated, accessed
-2019-07-26. \url{https://stats.stackexchange.com/a/83114/68743}
+2019-07-26. <https://stats.stackexchange.com/a/83114/68743>
 
-Greenacre M (2013) "Contribution Biplots". \emph{Journal of Computational and
-Graphical Statistics}, \strong{22}(1): 107--122.
-\url{https://www.tandfonline.com/doi/abs/10.1080/10618600.2012.702494}
+Greenacre M (2013) "Contribution Biplots". _Journal of Computational and
+Graphical Statistics_, **22**(1): 107--122.
+<https://www.tandfonline.com/doi/abs/10.1080/10618600.2012.702494>
 }
 \seealso{
-\code{\link[MASS:lda]{MASS::lda()}}, from which \code{lda_ord()} is adapted
+[MASS::lda()], from which `lda_ord()` is adapted
 }

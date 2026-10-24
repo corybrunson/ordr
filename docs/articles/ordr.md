@@ -411,17 +411,17 @@ fortifier row-binds the two matrix factor tibbles and adds an additional
 ``` r
 
 fortify(haireye_ca_ord)
-#> # A tibble: 8 × 5
-#>     Can1    Can2    Can3 .element .matrix
-#>    <dbl>   <dbl>   <dbl> <chr>    <chr>  
-#> 1 -0.746  0.556  -0.246  active   rows   
-#> 2 -0.219 -0.0846  0.216  active   rows   
-#> 3 -0.192 -0.828  -0.368  active   rows   
-#> 4  1.24   0.180  -0.0718 active   rows   
-#> 5 -0.728  0.229  -0.0957 active   cols   
-#> 6  0.810  0.215   0.0209 active   cols   
-#> 7 -0.315 -0.434   0.445  active   cols   
-#> 8  0.239 -0.878  -0.388  active   cols
+#> # A tibble: 8 × 6
+#>     Can1    Can2    Can3 .element .matrix .conference
+#>    <dbl>   <dbl>   <dbl> <chr>    <chr>         <dbl>
+#> 1 -0.746  0.556  -0.246  active   rows            0.5
+#> 2 -0.219 -0.0846  0.216  active   rows            0.5
+#> 3 -0.192 -0.828  -0.368  active   rows            0.5
+#> 4  1.24   0.180  -0.0718 active   rows            0.5
+#> 5 -0.728  0.229  -0.0957 active   cols            0.5
+#> 6  0.810  0.215   0.0209 active   cols            0.5
+#> 7 -0.315 -0.434   0.445  active   cols            0.5
+#> 8  0.239 -0.878  -0.388  active   cols            0.5
 ```
 
 This fortifier will also preserve any row and column annotations, so it
@@ -494,13 +494,13 @@ sessioninfo::session_info()
 #>  collate  en_US.UTF-8
 #>  ctype    en_US.UTF-8
 #>  tz       America/New_York
-#>  date     2026-08-23
+#>  date     2026-10-24
 #>  pandoc   3.10 @ /opt/homebrew/bin/ (via rmarkdown)
 #>  quarto   1.9.38 @ /usr/local/bin/quarto
 #> 
 #> ─ Packages ───────────────────────────────────────────────────────────────────
 #>  package      * version    date (UTC) lib source
-#>  bslib          0.11.0     2026-05-16 [2] CRAN (R 4.5.2)
+#>  bslib          0.12.0     2026-08-04 [2] CRAN (R 4.5.2)
 #>  cachem         1.1.0      2024-05-16 [2] CRAN (R 4.5.0)
 #>  cli            3.6.6      2026-04-09 [2] CRAN (R 4.5.2)
 #>  crayon         1.5.3      2024-06-20 [2] CRAN (R 4.5.0)
@@ -512,7 +512,7 @@ sessioninfo::session_info()
 #>  fastmap        1.2.0      2024-05-15 [2] CRAN (R 4.5.0)
 #>  fs             2.1.0      2026-04-18 [2] CRAN (R 4.5.2)
 #>  generics       0.1.4      2025-05-09 [2] CRAN (R 4.5.0)
-#>  gggda          0.2.0      2026-07-18 [2] CRAN (R 4.5.2)
+#>  gggda          0.2.0-1    2026-10-22 [2] local
 #>  ggplot2      * 4.0.3      2026-04-22 [2] CRAN (R 4.5.2)
 #>  ggrepel        0.9.8      2026-03-17 [2] CRAN (R 4.5.2)
 #>  glue           1.8.1      2026-04-17 [2] CRAN (R 4.5.2)
@@ -521,12 +521,12 @@ sessioninfo::session_info()
 #>  htmlwidgets    1.6.4      2023-12-06 [2] CRAN (R 4.5.0)
 #>  jquerylib      0.1.4      2021-04-26 [2] CRAN (R 4.5.0)
 #>  jsonlite       2.0.0      2025-03-27 [2] CRAN (R 4.5.0)
-#>  knitr          1.51       2025-12-20 [2] CRAN (R 4.5.2)
+#>  knitr          1.52       2026-09-06 [2] CRAN (R 4.5.2)
 #>  labeling       0.4.3      2023-08-29 [2] CRAN (R 4.5.0)
 #>  lifecycle      1.0.5      2026-01-08 [2] CRAN (R 4.5.2)
 #>  magrittr       2.0.5      2026-04-04 [2] CRAN (R 4.5.2)
 #>  MASS         * 7.3-66     2026-07-15 [2] CRAN (R 4.5.2)
-#>  ordr         * 0.2.0.0002 2026-08-23 [1] local
+#>  ordr         * 0.2.0.0002 2026-10-24 [1] local
 #>  otel           0.2.0      2025-08-29 [2] CRAN (R 4.5.0)
 #>  pillar         1.11.1     2025-09-17 [2] CRAN (R 4.5.0)
 #>  pkgconfig      2.0.3      2019-09-22 [2] CRAN (R 4.5.0)
@@ -537,7 +537,7 @@ sessioninfo::session_info()
 #>  RColorBrewer   1.1-3      2022-04-03 [2] CRAN (R 4.5.0)
 #>  Rcpp           1.1.2      2026-07-05 [2] CRAN (R 4.5.2)
 #>  rlang          1.3.0      2026-07-05 [2] CRAN (R 4.5.2)
-#>  rmarkdown      2.31       2026-03-26 [2] CRAN (R 4.5.2)
+#>  rmarkdown      2.32       2026-09-01 [2] CRAN (R 4.5.2)
 #>  S7             0.2.2      2026-04-22 [2] CRAN (R 4.5.2)
 #>  sass           0.4.10     2025-04-11 [2] CRAN (R 4.5.0)
 #>  scales         1.4.0      2025-04-24 [2] CRAN (R 4.5.0)
@@ -553,7 +553,7 @@ sessioninfo::session_info()
 #>  xfun           0.60       2026-07-09 [2] CRAN (R 4.5.2)
 #>  yaml           2.3.12     2025-12-10 [2] CRAN (R 4.5.2)
 #> 
-#>  [1] /private/var/folders/4p/3cy0qmp15x9216qsqhh84kzm0000gn/T/RtmpbfPjTk/temp_libpathd58052565ce7
+#>  [1] /private/var/folders/4p/3cy0qmp15x9216qsqhh84kzm0000gn/T/RtmpnepjTW/temp_libpath162b9929cbfb
 #>  [2] /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library
 #>  * ── Packages attached to the search path.
 #> 

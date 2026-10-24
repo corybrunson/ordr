@@ -112,8 +112,8 @@ geom_rows_point <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
-        geom = GeomPoint, position = position, show.legend = show.legend, 
+    layer(mapping = mapping, data = data, geom = "point", 
+        stat = rows_stat(stat), position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
             ...))    
     
@@ -131,8 +131,8 @@ geom_cols_point <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
-        geom = GeomPoint, position = position, show.legend = show.legend, 
+    layer(mapping = mapping, data = data, geom = "point", 
+        stat = cols_stat(stat), position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
             ...))    
     
@@ -146,19 +146,21 @@ geom_rows_path <- function(
   stat = "identity",
   position = "identity",
   ...,
+  arrow = NULL,
+  arrow.fill = NULL,
   lineend = "butt",
   linejoin = "round",
   linemitre = 10,
-  arrow = NULL,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
-        geom = GeomPath, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list2(lineend = lineend, 
+    layer(mapping = mapping, data = data, geom = "path", 
+        stat = rows_stat(stat), position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            arrow = arrow, arrow.fill = arrow.fill, lineend = lineend, 
             linejoin = linejoin, linemitre = linemitre, 
-            arrow = arrow, na.rm = na.rm, ...))    
+            ...))    
     
 }
 
@@ -170,19 +172,21 @@ geom_cols_path <- function(
   stat = "identity",
   position = "identity",
   ...,
+  arrow = NULL,
+  arrow.fill = NULL,
   lineend = "butt",
   linejoin = "round",
   linemitre = 10,
-  arrow = NULL,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
-        geom = GeomPath, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list2(lineend = lineend, 
+    layer(mapping = mapping, data = data, geom = "path", 
+        stat = cols_stat(stat), position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            arrow = arrow, arrow.fill = arrow.fill, lineend = lineend, 
             linejoin = linejoin, linemitre = linemitre, 
-            arrow = arrow, na.rm = na.rm, ...))    
+            ...))    
     
 }
 
@@ -193,16 +197,20 @@ geom_rows_polygon <- function(
   data = NULL,
   stat = "identity",
   position = "identity",
-  rule = "evenodd",
   ...,
+  rule = "evenodd",
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 10,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
-        geom = GeomPolygon, position = position, show.legend = show.legend, 
+    layer(mapping = mapping, data = data, geom = "polygon", 
+        stat = rows_stat(stat), position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
-            rule = rule, ...))    
+            rule = rule, lineend = lineend, linejoin = linejoin, 
+            linemitre = linemitre, ...))    
     
 }
 
@@ -213,16 +221,20 @@ geom_cols_polygon <- function(
   data = NULL,
   stat = "identity",
   position = "identity",
-  rule = "evenodd",
   ...,
+  rule = "evenodd",
+  lineend = "butt",
+  linejoin = "round",
+  linemitre = 10,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
-        geom = GeomPolygon, position = position, show.legend = show.legend, 
+    layer(mapping = mapping, data = data, geom = "polygon", 
+        stat = cols_stat(stat), position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
-            rule = rule, ...))    
+            rule = rule, lineend = lineend, linejoin = linejoin, 
+            linemitre = linemitre, ...))    
     
 }
 
@@ -237,6 +249,8 @@ geom_rows_contour <- function(
   bins = NULL,
   binwidth = NULL,
   breaks = NULL,
+  arrow = NULL,
+  arrow.fill = NULL,
   lineend = "butt",
   linejoin = "round",
   linemitre = 10,
@@ -244,12 +258,13 @@ geom_rows_contour <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
-        geom = GeomContour, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list2(bins = bins, 
-            binwidth = binwidth, breaks = breaks, lineend = lineend, 
+    layer(mapping = mapping, data = data, geom = "contour", 
+        stat = rows_stat(stat), position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            bins = bins, binwidth = binwidth, breaks = breaks, 
+            arrow = arrow, arrow.fill = arrow.fill, lineend = lineend, 
             linejoin = linejoin, linemitre = linemitre, 
-            na.rm = na.rm, ...))    
+            ...))    
     
 }
 
@@ -264,6 +279,8 @@ geom_cols_contour <- function(
   bins = NULL,
   binwidth = NULL,
   breaks = NULL,
+  arrow = NULL,
+  arrow.fill = NULL,
   lineend = "butt",
   linejoin = "round",
   linemitre = 10,
@@ -271,12 +288,13 @@ geom_cols_contour <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
-        geom = GeomContour, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list2(bins = bins, 
-            binwidth = binwidth, breaks = breaks, lineend = lineend, 
+    layer(mapping = mapping, data = data, geom = "contour", 
+        stat = cols_stat(stat), position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            bins = bins, binwidth = binwidth, breaks = breaks, 
+            arrow = arrow, arrow.fill = arrow.fill, lineend = lineend, 
             linejoin = linejoin, linemitre = linemitre, 
-            na.rm = na.rm, ...))    
+            ...))    
     
 }
 
@@ -378,29 +396,20 @@ geom_rows_text <- function(
   mapping = NULL,
   data = NULL,
   stat = "identity",
-  position = "identity",
+  position = "nudge",
   ...,
   parse = FALSE,
-  nudge_x = 0,
-  nudge_y = 0,
   check_overlap = FALSE,
   size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    if (!missing(nudge_x) || !missing(nudge_y)) {
-        if (!missing(position)) {
-            cli::cli_abort(c("Both {.arg position} and {.arg nudge_x}/{.arg nudge_y} are supplied.", 
-                i = "Only use one approach to alter the position."))
-        }
-        position <- position_nudge(nudge_x, nudge_y)
-    }
-    layer(data = data, mapping = mapping, stat = rows_stat(stat), 
-        geom = GeomText, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list2(parse = parse, 
-            check_overlap = check_overlap, size.unit = size.unit, 
-            na.rm = na.rm, ...))    
+    layer(mapping = mapping, data = data, geom = "text", 
+        stat = rows_stat(stat), position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            parse = parse, check_overlap = check_overlap, 
+            size.unit = size.unit, ...))    
     
 }
 
@@ -410,29 +419,20 @@ geom_cols_text <- function(
   mapping = NULL,
   data = NULL,
   stat = "identity",
-  position = "identity",
+  position = "nudge",
   ...,
   parse = FALSE,
-  nudge_x = 0,
-  nudge_y = 0,
   check_overlap = FALSE,
   size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    if (!missing(nudge_x) || !missing(nudge_y)) {
-        if (!missing(position)) {
-            cli::cli_abort(c("Both {.arg position} and {.arg nudge_x}/{.arg nudge_y} are supplied.", 
-                i = "Only use one approach to alter the position."))
-        }
-        position <- position_nudge(nudge_x, nudge_y)
-    }
-    layer(data = data, mapping = mapping, stat = cols_stat(stat), 
-        geom = GeomText, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list2(parse = parse, 
-            check_overlap = check_overlap, size.unit = size.unit, 
-            na.rm = na.rm, ...))    
+    layer(mapping = mapping, data = data, geom = "text", 
+        stat = cols_stat(stat), position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            parse = parse, check_overlap = check_overlap, 
+            size.unit = size.unit, ...))    
     
 }
 
@@ -442,32 +442,35 @@ geom_rows_label <- function(
   mapping = NULL,
   data = NULL,
   stat = "identity",
-  position = "identity",
+  position = "nudge",
   ...,
   parse = FALSE,
-  nudge_x = 0,
-  nudge_y = 0,
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
-  label.size = 0.25,
+  label.size = deprecated(),
+  border.colour = NULL,
+  border.color = NULL,
+  text.colour = NULL,
+  text.color = NULL,
   size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    if (!missing(nudge_x) || !missing(nudge_y)) {
-        if (!missing(position)) {
-            cli::cli_abort(c("Both {.arg position} and {.arg nudge_x}/{.arg nudge_y} are supplied.", 
-                i = "Choose one approach to alter the position."))
-        }
-        position <- position_nudge(nudge_x, nudge_y)
+    extra_args <- list2(...)
+    if (lifecycle::is_present(label.size)) {
+        deprecate_soft0("3.5.0", "geom_label(label.size)", 
+            "geom_label(linewidth)")
+        extra_args$linewidth <- extra_args$linewidth %||% 
+            label.size
     }
     layer(data = data, mapping = mapping, stat = rows_stat(stat), 
         geom = GeomLabel, position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list2(parse = parse, 
             label.padding = label.padding, label.r = label.r, 
-            label.size = label.size, size.unit = size.unit, 
-            na.rm = na.rm, ...))    
+            size.unit = size.unit, border.colour = border.color %||% 
+                border.colour, text.colour = text.color %||% 
+                text.colour, na.rm = na.rm, !!!extra_args))    
     
 }
 
@@ -477,32 +480,35 @@ geom_cols_label <- function(
   mapping = NULL,
   data = NULL,
   stat = "identity",
-  position = "identity",
+  position = "nudge",
   ...,
   parse = FALSE,
-  nudge_x = 0,
-  nudge_y = 0,
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
-  label.size = 0.25,
+  label.size = deprecated(),
+  border.colour = NULL,
+  border.color = NULL,
+  text.colour = NULL,
+  text.color = NULL,
   size.unit = "mm",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    if (!missing(nudge_x) || !missing(nudge_y)) {
-        if (!missing(position)) {
-            cli::cli_abort(c("Both {.arg position} and {.arg nudge_x}/{.arg nudge_y} are supplied.", 
-                i = "Choose one approach to alter the position."))
-        }
-        position <- position_nudge(nudge_x, nudge_y)
+    extra_args <- list2(...)
+    if (lifecycle::is_present(label.size)) {
+        deprecate_soft0("3.5.0", "geom_label(label.size)", 
+            "geom_label(linewidth)")
+        extra_args$linewidth <- extra_args$linewidth %||% 
+            label.size
     }
     layer(data = data, mapping = mapping, stat = cols_stat(stat), 
         geom = GeomLabel, position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list2(parse = parse, 
             label.padding = label.padding, label.r = label.r, 
-            label.size = label.size, size.unit = size.unit, 
-            na.rm = na.rm, ...))    
+            size.unit = size.unit, border.colour = border.color %||% 
+                border.colour, text.colour = text.color %||% 
+                text.colour, na.rm = na.rm, !!!extra_args))    
     
 }
 
@@ -532,7 +538,7 @@ geom_rows_text_repel <- function(
   show.legend = NA,
   direction = c("both", "y", "x"),
   seed = NA,
-  verbose = FALSE,
+  verbose = getOption("verbose", default = FALSE),
   inherit.aes = TRUE
 ) {
     if (!missing(nudge_x) || !missing(nudge_y)) {
@@ -541,6 +547,9 @@ geom_rows_text_repel <- function(
                 call. = FALSE)
         }
         position <- position_nudge_repel(nudge_x, nudge_y)
+    }
+    if (verbose && any(abs(data$angle%%90) > 5)) {
+        message("ggrepel: Repulsion works correctly only for rotation angles multiple of 90 degrees")
     }
     layer(data = data, mapping = mapping, stat = rows_stat(stat), 
         geom = GeomTextRepel, position = position, show.legend = show.legend, 
@@ -581,7 +590,7 @@ geom_cols_text_repel <- function(
   show.legend = NA,
   direction = c("both", "y", "x"),
   seed = NA,
-  verbose = FALSE,
+  verbose = getOption("verbose", default = FALSE),
   inherit.aes = TRUE
 ) {
     if (!missing(nudge_x) || !missing(nudge_y)) {
@@ -590,6 +599,9 @@ geom_cols_text_repel <- function(
                 call. = FALSE)
         }
         position <- position_nudge_repel(nudge_x, nudge_y)
+    }
+    if (verbose && any(abs(data$angle%%90) > 5)) {
+        message("ggrepel: Repulsion works correctly only for rotation angles multiple of 90 degrees")
     }
     layer(data = data, mapping = mapping, stat = cols_stat(stat), 
         geom = GeomTextRepel, position = position, show.legend = show.legend, 
@@ -633,7 +645,7 @@ geom_rows_label_repel <- function(
   show.legend = NA,
   direction = c("both", "y", "x"),
   seed = NA,
-  verbose = FALSE,
+  verbose = getOption("verbose", default = FALSE),
   inherit.aes = TRUE
 ) {
     if (!missing(nudge_x) || !missing(nudge_y)) {
@@ -642,6 +654,9 @@ geom_rows_label_repel <- function(
                 call. = FALSE)
         }
         position <- position_nudge_repel(nudge_x, nudge_y)
+    }
+    if (verbose && any(abs(data$angle%%90) > 5)) {
+        message("ggrepel: Repulsion works correctly only for rotation angles multiple of 90 degrees")
     }
     layer(data = data, mapping = mapping, stat = rows_stat(stat), 
         geom = GeomLabelRepel, position = position, show.legend = show.legend, 
@@ -687,7 +702,7 @@ geom_cols_label_repel <- function(
   show.legend = NA,
   direction = c("both", "y", "x"),
   seed = NA,
-  verbose = FALSE,
+  verbose = getOption("verbose", default = FALSE),
   inherit.aes = TRUE
 ) {
     if (!missing(nudge_x) || !missing(nudge_y)) {
@@ -696,6 +711,9 @@ geom_cols_label_repel <- function(
                 call. = FALSE)
         }
         position <- position_nudge_repel(nudge_x, nudge_y)
+    }
+    if (verbose && any(abs(data$angle%%90) > 5)) {
+        message("ggrepel: Repulsion works correctly only for rotation angles multiple of 90 degrees")
     }
     layer(data = data, mapping = mapping, stat = cols_stat(stat), 
         geom = GeomLabelRepel, position = position, show.legend = show.legend, 
@@ -724,54 +742,68 @@ geom_rows_axis <- function(
   axis_text = TRUE,
   by = NULL,
   num = NULL,
+  axis.type = c("interpolative", "predictive"),
   tick_length = 0.025,
   text_dodge = 0.03,
   label_dodge = 0.03,
+  label_placement = c("positive", "negative", "peripheral"),
   ...,
-  axis.colour = NULL,
+  axis.linewidth = sync(),
+  axis.linetype = sync(),
+  axis.colour = sync(),
   axis.color = NULL,
-  axis.alpha = NULL,
+  axis.alpha = sync(),
+  label.size = sync(),
   label.angle = 0,
-  label.colour = NULL,
+  label.hjust = sync(),
+  label.vjust = sync(),
+  label.family = sync(),
+  label.fontface = sync(),
+  label.colour = sync(),
   label.color = NULL,
-  label.alpha = NULL,
+  label.alpha = sync(),
   tick.linewidth = 0.25,
-  tick.colour = NULL,
+  tick.linetype = "solid",
+  tick.colour = sync(),
   tick.color = NULL,
-  tick.alpha = NULL,
+  tick.alpha = sync(),
   text.size = 2.6,
   text.angle = 0,
-  text.hjust = 0.5,
-  text.vjust = 0.5,
-  text.family = NULL,
-  text.fontface = NULL,
-  text.colour = NULL,
+  text.hjust = sync(),
+  text.vjust = sync(),
+  text.family = sync(),
+  text.fontface = sync(),
+  text.colour = sync(),
   text.color = NULL,
-  text.alpha = NULL,
+  text.alpha = sync(),
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
+    axis_gp <- list(linewidth = axis.linewidth, linetype = axis.linetype, 
+        colour = axis.color %||% axis.colour, alpha = axis.alpha)
+    label_gp <- list(size = label.size, angle = label.angle, 
+        hjust = label.hjust, vjust = label.vjust, family = label.family, 
+        fontface = label.fontface, colour = label.color %||% 
+            label.colour, alpha = label.alpha)
+    tick_gp <- list(linewidth = tick.linewidth, colour = tick.color %||% 
+        tick.colour, alpha = tick.alpha)
+    text_gp <- list(size = text.size, angle = text.angle, 
+        hjust = text.hjust, vjust = text.vjust, family = text.family, 
+        fontface = text.fontface, colour = text.color %||% 
+            text.colour, alpha = text.alpha)
     layer(data = data, mapping = mapping, stat = rows_stat(stat), 
         geom = GeomAxis, position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list(axis_labels = axis_labels, 
             axis_ticks = axis_ticks, axis_text = axis_text, 
-            by = by, num = num, tick_length = tick_length, 
-            text_dodge = text_dodge, label_dodge = label_dodge, 
-            axis.colour = axis.color %||% axis.colour, 
-            axis.alpha = axis.alpha, label.angle = label.angle, 
-            label.colour = label.color %||% label.colour, 
-            label.alpha = label.alpha, tick.linewidth = tick.linewidth, 
-            tick.colour = tick.color %||% tick.colour, 
-            tick.alpha = tick.alpha, text.size = text.size, 
-            text.angle = text.angle, text.hjust = text.hjust, 
-            text.vjust = text.vjust, text.family = text.family, 
-            text.fontface = text.fontface, text.colour = text.color %||% 
-                text.colour, text.alpha = text.alpha, parse = parse, 
-            check_overlap = check_overlap, na.rm = na.rm, 
-            ...))    
+            by = by, num = num, axis.type = axis.type, 
+            tick_length = tick_length, text_dodge = text_dodge, 
+            label_dodge = label_dodge, label_placement = label_placement, 
+            axis_gp = axis_gp, label_gp = label_gp, tick_gp = tick_gp, 
+            text_gp = text_gp, parse = parse, check_overlap = check_overlap, 
+            na.rm = na.rm, ...))    
     
 }
 
@@ -787,54 +819,68 @@ geom_cols_axis <- function(
   axis_text = TRUE,
   by = NULL,
   num = NULL,
+  axis.type = c("interpolative", "predictive"),
   tick_length = 0.025,
   text_dodge = 0.03,
   label_dodge = 0.03,
+  label_placement = c("positive", "negative", "peripheral"),
   ...,
-  axis.colour = NULL,
+  axis.linewidth = sync(),
+  axis.linetype = sync(),
+  axis.colour = sync(),
   axis.color = NULL,
-  axis.alpha = NULL,
+  axis.alpha = sync(),
+  label.size = sync(),
   label.angle = 0,
-  label.colour = NULL,
+  label.hjust = sync(),
+  label.vjust = sync(),
+  label.family = sync(),
+  label.fontface = sync(),
+  label.colour = sync(),
   label.color = NULL,
-  label.alpha = NULL,
+  label.alpha = sync(),
   tick.linewidth = 0.25,
-  tick.colour = NULL,
+  tick.linetype = "solid",
+  tick.colour = sync(),
   tick.color = NULL,
-  tick.alpha = NULL,
+  tick.alpha = sync(),
   text.size = 2.6,
   text.angle = 0,
-  text.hjust = 0.5,
-  text.vjust = 0.5,
-  text.family = NULL,
-  text.fontface = NULL,
-  text.colour = NULL,
+  text.hjust = sync(),
+  text.vjust = sync(),
+  text.family = sync(),
+  text.fontface = sync(),
+  text.colour = sync(),
   text.color = NULL,
-  text.alpha = NULL,
+  text.alpha = sync(),
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
+    axis_gp <- list(linewidth = axis.linewidth, linetype = axis.linetype, 
+        colour = axis.color %||% axis.colour, alpha = axis.alpha)
+    label_gp <- list(size = label.size, angle = label.angle, 
+        hjust = label.hjust, vjust = label.vjust, family = label.family, 
+        fontface = label.fontface, colour = label.color %||% 
+            label.colour, alpha = label.alpha)
+    tick_gp <- list(linewidth = tick.linewidth, colour = tick.color %||% 
+        tick.colour, alpha = tick.alpha)
+    text_gp <- list(size = text.size, angle = text.angle, 
+        hjust = text.hjust, vjust = text.vjust, family = text.family, 
+        fontface = text.fontface, colour = text.color %||% 
+            text.colour, alpha = text.alpha)
     layer(data = data, mapping = mapping, stat = cols_stat(stat), 
         geom = GeomAxis, position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list(axis_labels = axis_labels, 
             axis_ticks = axis_ticks, axis_text = axis_text, 
-            by = by, num = num, tick_length = tick_length, 
-            text_dodge = text_dodge, label_dodge = label_dodge, 
-            axis.colour = axis.color %||% axis.colour, 
-            axis.alpha = axis.alpha, label.angle = label.angle, 
-            label.colour = label.color %||% label.colour, 
-            label.alpha = label.alpha, tick.linewidth = tick.linewidth, 
-            tick.colour = tick.color %||% tick.colour, 
-            tick.alpha = tick.alpha, text.size = text.size, 
-            text.angle = text.angle, text.hjust = text.hjust, 
-            text.vjust = text.vjust, text.family = text.family, 
-            text.fontface = text.fontface, text.colour = text.color %||% 
-                text.colour, text.alpha = text.alpha, parse = parse, 
-            check_overlap = check_overlap, na.rm = na.rm, 
-            ...))    
+            by = by, num = num, axis.type = axis.type, 
+            tick_length = tick_length, text_dodge = text_dodge, 
+            label_dodge = label_dodge, label_placement = label_placement, 
+            axis_gp = axis_gp, label_gp = label_gp, tick_gp = tick_gp, 
+            text_gp = text_gp, parse = parse, check_overlap = check_overlap, 
+            na.rm = na.rm, ...))    
     
 }
 
@@ -924,26 +970,32 @@ geom_rows_isoline <- function(
   isoline_text = TRUE,
   by = NULL,
   num = NULL,
-  text_dodge = 0.03,
+  text_dodge = 0.06,
   ...,
-  text.size = 3,
+  text.size = 3.18,
   text.angle = 0,
-  text.colour = NULL,
+  text.hjust = sync(),
+  text.vjust = sync(),
+  text.family = sync(),
+  text.fontface = sync(),
+  text.colour = sync(),
   text.color = NULL,
-  text.alpha = NULL,
+  text.alpha = sync(),
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
+    text_gp <- list(size = text.size, angle = text.angle, 
+        hjust = text.hjust, vjust = text.vjust, family = text.family, 
+        fontface = text.fontface, colour = text.color %||% 
+            text.colour, alpha = text.alpha)
     layer(data = data, mapping = mapping, stat = rows_stat(stat), 
         geom = GeomIsoline, position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list(isoline_text = isoline_text, 
             by = by, num = num, text_dodge = text_dodge, 
-            text.size = text.size, text.angle = text.angle, 
-            text.colour = text.color %||% text.colour, 
-            text.alpha = text.alpha, parse = parse, check_overlap = check_overlap, 
+            text_gp = text_gp, parse = parse, check_overlap = check_overlap, 
             na.rm = na.rm, ...))    
     
 }
@@ -958,26 +1010,32 @@ geom_cols_isoline <- function(
   isoline_text = TRUE,
   by = NULL,
   num = NULL,
-  text_dodge = 0.03,
+  text_dodge = 0.06,
   ...,
-  text.size = 3,
+  text.size = 3.18,
   text.angle = 0,
-  text.colour = NULL,
+  text.hjust = sync(),
+  text.vjust = sync(),
+  text.family = sync(),
+  text.fontface = sync(),
+  text.colour = sync(),
   text.color = NULL,
-  text.alpha = NULL,
+  text.alpha = sync(),
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
+    text_gp <- list(size = text.size, angle = text.angle, 
+        hjust = text.hjust, vjust = text.vjust, family = text.family, 
+        fontface = text.fontface, colour = text.color %||% 
+            text.colour, alpha = text.alpha)
     layer(data = data, mapping = mapping, stat = cols_stat(stat), 
         geom = GeomIsoline, position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list(isoline_text = isoline_text, 
             by = by, num = num, text_dodge = text_dodge, 
-            text.size = text.size, text.angle = text.angle, 
-            text.colour = text.color %||% text.colour, 
-            text.alpha = text.alpha, parse = parse, check_overlap = check_overlap, 
+            text_gp = text_gp, parse = parse, check_overlap = check_overlap, 
             na.rm = na.rm, ...))    
     
 }
@@ -1095,6 +1153,8 @@ geom_rows_bagplot <- function(
   data = NULL,
   stat = "bagplot",
   position = "identity",
+  outlier_points = !outlier_labels,
+  outlier_labels = FALSE,
   ...,
   bag.linewidth = sync(),
   bag.linetype = sync(),
@@ -1122,6 +1182,10 @@ geom_rows_bagplot <- function(
   outlier.color = NULL,
   outlier.fill = NA,
   outlier.alpha = NA,
+  text.size = 3.88,
+  text.colour = sync(),
+  text.color = sync(),
+  text.alpha = sync(),
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -1138,11 +1202,15 @@ geom_rows_bagplot <- function(
     outlier_gp <- list(shape = outlier.shape, stroke = outlier.stroke, 
         size = outlier.size, colour = outlier.color %||% 
             outlier.colour, fill = outlier.fill, alpha = outlier.alpha)
+    label_gp <- list(size = text.size, colour = text.color %||% 
+        text.colour, alpha = text.alpha)
     layer(data = data, mapping = mapping, stat = rows_stat(stat), 
         geom = GeomBagplot, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(bag_gp = bag_gp, 
+        inherit.aes = inherit.aes, params = list(outlier_points = outlier_points, 
+            outlier_labels = outlier_labels, bag_gp = bag_gp, 
             median_gp = median_gp, fence_gp = fence_gp, 
-            outlier_gp = outlier_gp, na.rm = na.rm, ...))    
+            outlier_gp = outlier_gp, label_gp = label_gp, 
+            na.rm = na.rm, ...))    
     
 }
 
@@ -1153,6 +1221,8 @@ geom_cols_bagplot <- function(
   data = NULL,
   stat = "bagplot",
   position = "identity",
+  outlier_points = !outlier_labels,
+  outlier_labels = FALSE,
   ...,
   bag.linewidth = sync(),
   bag.linetype = sync(),
@@ -1180,6 +1250,10 @@ geom_cols_bagplot <- function(
   outlier.color = NULL,
   outlier.fill = NA,
   outlier.alpha = NA,
+  text.size = 3.88,
+  text.colour = sync(),
+  text.color = sync(),
+  text.alpha = sync(),
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -1196,11 +1270,15 @@ geom_cols_bagplot <- function(
     outlier_gp <- list(shape = outlier.shape, stroke = outlier.stroke, 
         size = outlier.size, colour = outlier.color %||% 
             outlier.colour, fill = outlier.fill, alpha = outlier.alpha)
+    label_gp <- list(size = text.size, colour = text.color %||% 
+        text.colour, alpha = text.alpha)
     layer(data = data, mapping = mapping, stat = cols_stat(stat), 
         geom = GeomBagplot, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list(bag_gp = bag_gp, 
+        inherit.aes = inherit.aes, params = list(outlier_points = outlier_points, 
+            outlier_labels = outlier_labels, bag_gp = bag_gp, 
             median_gp = median_gp, fence_gp = fence_gp, 
-            outlier_gp = outlier_gp, na.rm = na.rm, ...))    
+            outlier_gp = outlier_gp, label_gp = label_gp, 
+            na.rm = na.rm, ...))    
     
 }
 
@@ -1216,55 +1294,68 @@ geom_rows_rule <- function(
   axis_text = TRUE,
   by = NULL,
   num = NULL,
+  axis.type = c("interpolative", "predictive"),
   snap_rule = TRUE,
   tick_length = 0.025,
   text_dodge = 0.03,
   label_dodge = 0.03,
   ...,
-  axis.colour = NULL,
+  axis.linewidth = sync(),
+  axis.linetype = sync(),
+  axis.colour = sync(),
   axis.color = NULL,
-  axis.alpha = NULL,
+  axis.alpha = sync(),
+  label.size = sync(),
   label.angle = 0,
-  label.colour = NULL,
+  label.hjust = sync(),
+  label.vjust = sync(),
+  label.family = sync(),
+  label.fontface = sync(),
+  label.colour = sync(),
   label.color = NULL,
-  label.alpha = NULL,
+  label.alpha = sync(),
   tick.linewidth = 0.25,
-  tick.colour = NULL,
+  tick.linetype = "solid",
+  tick.colour = sync(),
   tick.color = NULL,
-  tick.alpha = NULL,
+  tick.alpha = sync(),
   text.size = 2.6,
   text.angle = 0,
-  text.hjust = 0.5,
-  text.vjust = 0.5,
-  text.family = NULL,
-  text.fontface = NULL,
-  text.colour = NULL,
+  text.hjust = sync(),
+  text.vjust = sync(),
+  text.family = sync(),
+  text.fontface = sync(),
+  text.colour = sync(),
   text.color = NULL,
-  text.alpha = NULL,
+  text.alpha = sync(),
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
+    axis_gp <- list(linewidth = axis.linewidth, linetype = axis.linetype, 
+        colour = axis.color %||% axis.colour, alpha = axis.alpha)
+    label_gp <- list(size = label.size, angle = label.angle, 
+        hjust = label.hjust, vjust = label.vjust, family = label.family, 
+        fontface = label.fontface, colour = label.color %||% 
+            label.colour, alpha = label.alpha)
+    tick_gp <- list(linewidth = tick.linewidth, colour = tick.color %||% 
+        tick.colour, alpha = tick.alpha)
+    text_gp <- list(size = text.size, angle = text.angle, 
+        hjust = text.hjust, vjust = text.vjust, family = text.family, 
+        fontface = text.fontface, colour = text.color %||% 
+            text.colour, alpha = text.alpha)
     layer(data = data, mapping = mapping, stat = rows_stat(stat), 
         geom = GeomRule, position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list(axis_labels = axis_labels, 
             axis_ticks = axis_ticks, axis_text = axis_text, 
-            by = by, num = num, snap_rule = snap_rule, 
-            tick_length = tick_length, text_dodge = text_dodge, 
-            label_dodge = label_dodge, axis.colour = axis.color %||% 
-                axis.colour, axis.alpha = axis.alpha, label.angle = label.angle, 
-            label.colour = label.color %||% label.colour, 
-            label.alpha = label.alpha, tick.linewidth = tick.linewidth, 
-            tick.colour = tick.color %||% tick.colour, 
-            tick.alpha = tick.alpha, text.size = text.size, 
-            text.angle = text.angle, text.hjust = text.hjust, 
-            text.vjust = text.vjust, text.family = text.family, 
-            text.fontface = text.fontface, text.colour = text.color %||% 
-                text.colour, text.alpha = text.alpha, parse = parse, 
-            check_overlap = check_overlap, na.rm = na.rm, 
-            ...))    
+            by = by, num = num, axis.type = axis.type, 
+            snap_rule = snap_rule, tick_length = tick_length, 
+            text_dodge = text_dodge, label_dodge = label_dodge, 
+            axis_gp = axis_gp, label_gp = label_gp, tick_gp = tick_gp, 
+            text_gp = text_gp, parse = parse, check_overlap = check_overlap, 
+            na.rm = na.rm, ...))    
     
 }
 
@@ -1280,55 +1371,68 @@ geom_cols_rule <- function(
   axis_text = TRUE,
   by = NULL,
   num = NULL,
+  axis.type = c("interpolative", "predictive"),
   snap_rule = TRUE,
   tick_length = 0.025,
   text_dodge = 0.03,
   label_dodge = 0.03,
   ...,
-  axis.colour = NULL,
+  axis.linewidth = sync(),
+  axis.linetype = sync(),
+  axis.colour = sync(),
   axis.color = NULL,
-  axis.alpha = NULL,
+  axis.alpha = sync(),
+  label.size = sync(),
   label.angle = 0,
-  label.colour = NULL,
+  label.hjust = sync(),
+  label.vjust = sync(),
+  label.family = sync(),
+  label.fontface = sync(),
+  label.colour = sync(),
   label.color = NULL,
-  label.alpha = NULL,
+  label.alpha = sync(),
   tick.linewidth = 0.25,
-  tick.colour = NULL,
+  tick.linetype = "solid",
+  tick.colour = sync(),
   tick.color = NULL,
-  tick.alpha = NULL,
+  tick.alpha = sync(),
   text.size = 2.6,
   text.angle = 0,
-  text.hjust = 0.5,
-  text.vjust = 0.5,
-  text.family = NULL,
-  text.fontface = NULL,
-  text.colour = NULL,
+  text.hjust = sync(),
+  text.vjust = sync(),
+  text.family = sync(),
+  text.fontface = sync(),
+  text.colour = sync(),
   text.color = NULL,
-  text.alpha = NULL,
+  text.alpha = sync(),
   parse = FALSE,
   check_overlap = FALSE,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
+    axis_gp <- list(linewidth = axis.linewidth, linetype = axis.linetype, 
+        colour = axis.color %||% axis.colour, alpha = axis.alpha)
+    label_gp <- list(size = label.size, angle = label.angle, 
+        hjust = label.hjust, vjust = label.vjust, family = label.family, 
+        fontface = label.fontface, colour = label.color %||% 
+            label.colour, alpha = label.alpha)
+    tick_gp <- list(linewidth = tick.linewidth, colour = tick.color %||% 
+        tick.colour, alpha = tick.alpha)
+    text_gp <- list(size = text.size, angle = text.angle, 
+        hjust = text.hjust, vjust = text.vjust, family = text.family, 
+        fontface = text.fontface, colour = text.color %||% 
+            text.colour, alpha = text.alpha)
     layer(data = data, mapping = mapping, stat = cols_stat(stat), 
         geom = GeomRule, position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list(axis_labels = axis_labels, 
             axis_ticks = axis_ticks, axis_text = axis_text, 
-            by = by, num = num, snap_rule = snap_rule, 
-            tick_length = tick_length, text_dodge = text_dodge, 
-            label_dodge = label_dodge, axis.colour = axis.color %||% 
-                axis.colour, axis.alpha = axis.alpha, label.angle = label.angle, 
-            label.colour = label.color %||% label.colour, 
-            label.alpha = label.alpha, tick.linewidth = tick.linewidth, 
-            tick.colour = tick.color %||% tick.colour, 
-            tick.alpha = tick.alpha, text.size = text.size, 
-            text.angle = text.angle, text.hjust = text.hjust, 
-            text.vjust = text.vjust, text.family = text.family, 
-            text.fontface = text.fontface, text.colour = text.color %||% 
-                text.colour, text.alpha = text.alpha, parse = parse, 
-            check_overlap = check_overlap, na.rm = na.rm, 
-            ...))    
+            by = by, num = num, axis.type = axis.type, 
+            snap_rule = snap_rule, tick_length = tick_length, 
+            text_dodge = text_dodge, label_dodge = label_dodge, 
+            axis_gp = axis_gp, label_gp = label_gp, tick_gp = tick_gp, 
+            text_gp = text_gp, parse = parse, check_overlap = check_overlap, 
+            na.rm = na.rm, ...))    
     
 }
 

@@ -6,8 +6,8 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Functionality for multiple correspondence analysis ('mca') objects — methods-mca"><meta name="description" content='These methods extract data from, and attribute new data to,
-objects of class "mca" from the MASS package.'><meta property="og:description" content='These methods extract data from, and attribute new data to,
-objects of class "mca" from the MASS package.'></head><body>
+  objects of class `"mca"` from the **[MASS][MASS::mca]** package.'><meta property="og:description" content='These methods extract data from, and attribute new data to,
+  objects of class `"mca"` from the **[MASS][MASS::mca]** package.'></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -48,7 +48,7 @@ objects of class "mca" from the MASS package.'></head><body>
 
     <div class="ref-description section level2">
     <p>These methods extract data from, and attribute new data to,
-objects of class <code>"mca"</code> from the <strong><a href="https://rdrr.io/pkg/MASS/man/mca.html" class="external-link">MASS</a></strong> package.</p>
+  objects of class `"mca"` from the **[MASS][MASS::mca]** package.</p>
     </div>
 
     <div class="section level2">
@@ -94,22 +94,24 @@ objects of class <code>"mca"</code> from the <strong><a href="https://rdrr.io/pk
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The recovery generics <code>recover_*()</code> return <a href="recoverers.html">core model components</a>, <a href="conference.html">distribution of inertia</a>,
-<a href="supplementation.html">supplementary elements</a>, and <a href="augmentation.html">intrinsic metadata</a>; but they require methods for each model class to
-tell them what these components are.</p>
-<p>The generic <code><a href="tbl_ord.html">as_tbl_ord()</a></code> returns its input wrapped in the 'tbl_ord'
-class. Its methods determine what model classes it is allowed to wrap. It
-then provides 'tbl_ord' methods with access to the recoverers and hence to
-the model components.</p>
+    <p>The recovery generics `recover_*()` return [core model
+  components][recoverers], [distribution of inertia][conference],
+  [supplementary elements][supplementation], and [intrinsic
+  metadata][augmentation]; but they require methods for each model class to
+  tell them what these components are.</p>
+<p>The generic [as_tbl_ord()] returns its input wrapped in the 'tbl_ord'
+  class. Its methods determine what model classes it is allowed to wrap. It
+  then provides 'tbl_ord' methods with access to the recoverers and hence to
+  the model components.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Multiple correspondence analysis (MCA) relies on a singular value
 decomposition of the indicator matrix \(X\) of a table of several
-categorical variables, scaled by its column totals. <code><a href="https://rdrr.io/pkg/MASS/man/mca.html" class="external-link">MASS::mca()</a></code> returns the
-SVD factors \(UD\) and \(V\) as the row weights <code>$fs</code>, on which the
-inertia is conferred, and the column coordinates <code>$cs</code>. The row coordinates
-<code>$rs</code> are obtained as \(XV\) and accessible as supplementary elements.</p>
+categorical variables, scaled by its column totals. [MASS::mca()] returns the
+SVD factors \(UD\) and \(V\) as the row weights `$fs`, on which the
+inertia is conferred, and the column coordinates `$cs`. The row coordinates
+`$rs` are obtained as \(XV\) and accessible as supplementary elements.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

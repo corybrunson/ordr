@@ -117,18 +117,18 @@ stat_rows_density_2d <- function(
   ...,
   contour = TRUE,
   contour_var = "density",
-  n = 100,
   h = NULL,
   adjust = c(1, 1),
+  n = 100,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = StatRowsDensity2d, 
-        geom = geom, position = position, show.legend = show.legend, 
+    layer(mapping = mapping, data = data, geom = geom, 
+        stat = "density2d", position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
             contour = contour, contour_var = contour_var, 
-            n = n, h = h, adjust = adjust, ...))    
+            h = h, adjust = adjust, n = n, ...))    
     
 }
 
@@ -154,18 +154,18 @@ stat_cols_density_2d <- function(
   ...,
   contour = TRUE,
   contour_var = "density",
-  n = 100,
   h = NULL,
   adjust = c(1, 1),
+  n = 100,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = StatColsDensity2d, 
-        geom = geom, position = position, show.legend = show.legend, 
+    layer(mapping = mapping, data = data, geom = geom, 
+        stat = "density2d", position = position, show.legend = show.legend, 
         inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
             contour = contour, contour_var = contour_var, 
-            n = n, h = h, adjust = adjust, ...))    
+            h = h, adjust = adjust, n = n, ...))    
     
 }
 
@@ -191,18 +191,19 @@ stat_rows_density_2d_filled <- function(
   ...,
   contour = TRUE,
   contour_var = "density",
-  n = 100,
   h = NULL,
   adjust = c(1, 1),
+  n = 100,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = StatRowsDensity2dFilled, 
-        geom = geom, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
-            contour = contour, contour_var = contour_var, 
-            n = n, h = h, adjust = adjust, ...))    
+    layer(mapping = mapping, data = data, geom = geom, 
+        stat = "density2d_filled", position = position, 
+        show.legend = show.legend, inherit.aes = inherit.aes, 
+        params = list2(na.rm = na.rm, contour = contour, 
+            contour_var = contour_var, h = h, adjust = adjust, 
+            n = n, ...))    
     
 }
 
@@ -228,18 +229,19 @@ stat_cols_density_2d_filled <- function(
   ...,
   contour = TRUE,
   contour_var = "density",
-  n = 100,
   h = NULL,
   adjust = c(1, 1),
+  n = 100,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = StatColsDensity2dFilled, 
-        geom = geom, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
-            contour = contour, contour_var = contour_var, 
-            n = n, h = h, adjust = adjust, ...))    
+    layer(mapping = mapping, data = data, geom = geom, 
+        stat = "density2d_filled", position = position, 
+        show.legend = show.legend, inherit.aes = inherit.aes, 
+        params = list2(na.rm = na.rm, contour = contour, 
+            contour_var = contour_var, h = h, adjust = adjust, 
+            n = n, ...))    
     
 }
 
@@ -270,10 +272,10 @@ stat_rows_ellipse <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = StatRowsEllipse, 
-        geom = geom, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list2(type = type, 
-            level = level, segments = segments, na.rm = na.rm, 
+    layer(mapping = mapping, data = data, geom = geom, 
+        stat = "ellipse", position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            type = type, level = level, segments = segments, 
             ...))    
     
 }
@@ -305,10 +307,10 @@ stat_cols_ellipse <- function(
   show.legend = NA,
   inherit.aes = TRUE
 ) {
-    layer(data = data, mapping = mapping, stat = StatColsEllipse, 
-        geom = geom, position = position, show.legend = show.legend, 
-        inherit.aes = inherit.aes, params = list2(type = type, 
-            level = level, segments = segments, na.rm = na.rm, 
+    layer(mapping = mapping, data = data, geom = geom, 
+        stat = "ellipse", position = position, show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list2(na.rm = na.rm, 
+            type = type, level = level, segments = segments, 
             ...))    
     
 }
@@ -1028,6 +1030,7 @@ stat_rows_rule <- function(
   fun.upper = "maxpp",
   fun.offset = "minabspp",
   fun.args = list(),
+  axis.type = c("interpolative", "predictive"),
   referent = NULL,
   show.legend = NA,
   inherit.aes = TRUE,
@@ -1040,7 +1043,7 @@ stat_rows_rule <- function(
             ref_subset = ref_subset, ref_elements = ref_elements, 
             fun.lower = fun.lower, fun.upper = fun.upper, 
             fun.offset = fun.offset, fun.args = fun.args, 
-            na.rm = FALSE, ...))
+            axis.type = axis.type, na.rm = FALSE, ...))
     class(LayerRef) <- c("LayerRef", class(LayerRef))
     LayerRef    
     
@@ -1073,6 +1076,7 @@ stat_cols_rule <- function(
   fun.upper = "maxpp",
   fun.offset = "minabspp",
   fun.args = list(),
+  axis.type = c("interpolative", "predictive"),
   referent = NULL,
   show.legend = NA,
   inherit.aes = TRUE,
@@ -1085,7 +1089,7 @@ stat_cols_rule <- function(
             ref_subset = ref_subset, ref_elements = ref_elements, 
             fun.lower = fun.lower, fun.upper = fun.upper, 
             fun.offset = fun.offset, fun.args = fun.args, 
-            na.rm = FALSE, ...))
+            axis.type = axis.type, na.rm = FALSE, ...))
     class(LayerRef) <- c("LayerRef", class(LayerRef))
     LayerRef    
     

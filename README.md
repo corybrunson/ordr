@@ -248,14 +248,17 @@ legibility, the axes are limited to the data range and offset from the
 origin:
 
 ``` r
-ggbiplot(iris_pca, axis.type = "predictive", axis.percents = FALSE) +
+ggbiplot(iris_pca, axis.percents = FALSE) +
   theme_scaffold() +
   geom_rows_point(aes(color = Species, shape = Species)) +
   stat_rows_center(
     aes(color = Species, shape = Species),
     size = 5, alpha = .5, fun.data = mean_se
   ) +
-  stat_cols_rule(aes(label = name, center = center, scale = scale)) +
+  stat_cols_rule(
+    axis.type = "predictive",
+    aes(label = name, center = center, scale = scale)
+  ) +
   ggtitle("Predictive biplot of Anderson's iris measurements",
           "Project a marker onto an axis to approximate its measurement")
 ```

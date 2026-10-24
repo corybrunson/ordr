@@ -17,10 +17,10 @@ coord_scaffold(
 }
 \description{
 2- (and 3-) dimensional biplots require that coordinates lie on
-the same scale but may additionally benefit from a square plotting window.
-While \code{CoordRect} provides control of coordinate and window aspect ratios,
-the convenience \code{CoordScaffold} system also fixes the coordinate aspect
-ratio at \code{1} and gives the user control only of the plotting window.
+  the same scale but may additionally benefit from a square plotting window.
+  While `CoordRect` provides control of coordinate and window aspect ratios,
+  the convenience `CoordScaffold` system also fixes the coordinate aspect
+  ratio at `1` and gives the user control only of the plotting window.
 }
 \examples{
 # resize the plot to see that the specified aspect ratio is maintained

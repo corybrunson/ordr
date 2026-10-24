@@ -1,8 +1,8 @@
-# Layout setup: resolve_n, get_ord_layout, ord_width_alloc, ord_n_show
+# layout setup
 
-# resolve_n -------------------------------------------------------------------
+# `resolve_n()` ----------------------------------------------------------------
 
-test_that("resolve_n handles scalar, vector, list, Inf, and NULL inputs", {
+test_that("`resolve_n()` handles scalar, vector, list, Inf, and NULL inputs", {
   expect_equal(resolve_n(2, c(150L, 4L)), c(2L, 2L))
   expect_equal(resolve_n(c(5L, 10L), c(150L, 4L)), c(5L, 10L))
   expect_equal(resolve_n(list(NULL, 3L), c(150L, 4L)), c(5L, 3L))
@@ -11,9 +11,9 @@ test_that("resolve_n handles scalar, vector, list, Inf, and NULL inputs", {
   expect_equal(resolve_n(NULL, c(150L, 4L)), c(5L, 4L))
 })
 
-# get_ord_layout --------------------------------------------------------------
+# `get_ord_layout()` -----------------------------------------------------------
 
-test_that("get_ord_layout extracts basic info and respects arguments", {
+test_that("`get_ord_layout()` extracts basic info and respects arguments", {
   layout <- get_ord_layout(ord_pca)
   expect_equal(layout$width, getOption("width"))
   expect_equal(layout$rk, 4L)
@@ -30,7 +30,7 @@ test_that("get_ord_layout extracts basic info and respects arguments", {
   expect_equal(layout3$max_footer_lines, 3L)
 })
 
-test_that("get_ord_layout snapshot", {
+test_that("`get_ord_layout()` snapshot", {
   layout <- get_ord_layout(ord_pca, width = 80)
   info <- c(
     width = layout$width,
@@ -47,9 +47,16 @@ test_that("get_ord_layout snapshot", {
   expect_snapshot(info)
 })
 
-# ord_width_alloc -------------------------------------------------------------
+test_that("`get_ord_layout()` records active element counts", {
+  lay <- get_ord_layout(ord_pca, width = 80)
+  expect_equal(lay$n_active, c(rows = 150L, cols = 4L))
+  lay_lda <- get_ord_layout(ord_lda, width = 80)
+  expect_equal(lay_lda$n_active, c(rows = 3L, cols = 4L))
+})
 
-test_that("ord_width_alloc handles wide, narrow, and no-annotation layouts", {
+# `ord_width_alloc()` ----------------------------------------------------------
+
+test_that("`ord_width_alloc()` handles wide, narrow, and unannotated layouts", {
   layout <- get_ord_layout(ord_pca, width = 80)
   alloc <- ord_width_alloc(layout)
   expect_equal(alloc$coord_avail, 48L)
@@ -81,9 +88,9 @@ test_that("alloc many coords", {
   expect_true(alloc$max_coord_cols > 3L)
 })
 
-# ord_n_show ------------------------------------------------------------------
+# `ord_n_show()` ---------------------------------------------------------------
 
-test_that("ord_n_show preserves n from layout", {
+test_that("`ord_n_show()` preserves n from layout", {
   layout <- get_ord_layout(ord_pca, width = 80)
   alloc <- ord_width_alloc(layout)
   layout <- ord_n_show(layout, alloc)
