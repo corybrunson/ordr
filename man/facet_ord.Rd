@@ -2,52 +2,54 @@
 % Please edit documentation in R/facet-ord.r
 \name{facet_ord}
 \alias{facet_ord}
-\title{Facet a biplot into all pairs of ordination coordinates}
+\title{Arrange biplots of all pairs of ordination coordinates}
 \usage{
-facet_ord(num_coord = NULL, scales = NULL, space = NULL)
+facet_ord(coords = NULL, scales = NULL, space = NULL)
 }
 \arguments{
-\item{num_coord}{The number of ordination coordinates to include. A positive
-integer; by default, all recovered coordinates are included.}
+\item{coords}{Coordinates to include. Can be:
+\itemize{
+  \item \code{NULL} (default): all coordinates
+  \item A single integer: number of first coordinates to include (if exceeds
+    dimension, a warning is issued and all are used)
+  \item A character scalar: a single coordinate name
+  \item A numeric vector: specific coordinate indices (1-based); error if any
+    index exceeds the dimension
+  \item A character vector: specific coordinate names; error if any name is
+    not found exactly
+}}
 
 \item{scales}{A character scalar indicating whether all panels share the same
-x and y coordinate scales (\code{"fixed"}) or whether the x and y scales are
-free to differ between panels (\code{"free"}). By default, \code{NULL}. Unlike
-\code{\link[=facet_grid]{facet_grid()}}, no x- or y-specific values are available.}
+x and y coordinate scales (`"fixed"`) or whether the x and y scales are
+free to differ between panels (`"free"`). By default, `NULL`. Unlike
+[facet_grid()], no x- or y-specific values are available.}
 
 \item{space}{A character scalar indicating whether all panels are the same
-size (\code{"fixed"}) or whether each panel is sized proportionally to the
-ranges of its coordinate scales (\code{"free"}). By default, \code{NULL}. Unlike
-\code{\link[=facet_grid]{facet_grid()}}, no x- or y-specific values are available.}
+size (`"fixed"`) or whether each panel is sized proportionally to the
+ranges of its coordinate scales (`"free"`). By default, `NULL`. Unlike
+[facet_grid()], no x- or y-specific values are available.}
+}
+\value{
+A `FacetOrd` ggproto object to be added to a [ggbiplot()].
 }
 \description{
-This layer faceting function draws a biplot of every ordered
-pair of ordination coordinates, with one panel for each pair. The panels
-are drawn on a grid, with a coordinate name labeling each column and row of
-the grid. As in \code{\link[=facet_grid]{facet_grid()}}, the \code{scales} and \code{space} parameters control
-whether the coordinate scales and the sizes of the panels are the same
-across all panels or free to vary between panels.
+Facet biplots using all ordered pairs of scaffolding coordinates
+  in an ordination object.
 }
 \details{
-\code{facet_ord()} is intended to be added to a plot produced by
-\code{\link[=ggbiplot]{ggbiplot()}}, which stores the recovered ordination coordinates in the
-fortified data of each layer. Adding \code{facet_ord()} replaces the \code{x} and \code{y}
-mappings with internal panel-specific columns, so that the coordinates
-mapped in the original call are used only to set the coordinate system.
+`facet_ord()` is intended to be added to a plot produced by
+  [ggbiplot()], which stores the recovered ordination coordinates in the
+  fortified data of each layer. Adding `facet_ord()` replaces the `x` and `y`
+  mappings with internal panel-specific columns, so that the coordinates
+  mapped in the original call are used only to set the coordinate system.
 
-The \code{scales} and \code{space} parameters control the scales and sizes of the
-panels, as in \code{\link[=facet_grid]{facet_grid()}}. With \code{scales = "free"}, the x and y scales of
-each panel are determined by its own coordinates, while with \code{scales =
-"fixed"}, all panels share the same x and y scales. With \code{space = "free"},
-each panel is sized so that the units of its x and y coordinates are
-rendered at the same physical length; with \code{space = "fixed"}, all panels
-are the same size.
-
-Setting either parameter to a value also sets the other to the same value,
-unless both are set; if neither is set, both default to \code{"fixed"}. Setting
-\code{scales = "fixed"} obtains the same plot regardless of \code{space}. Pairing
-\code{scales = "free"} with \code{space = "fixed"} warps aspect ratios away from 1
-and is discouraged though not warned against.
+  As in [ggplot2::facet_grid()], the `scales` and `space` parameters control
+  the scales and sizes of the panels. Setting either parameter to a value
+  also sets the other to the same value, unless both are set; if neither is
+  set, both default to `"fixed"`. Setting `scales = "fixed"` obtains the same
+  plot regardless of `space`. Pairing `scales = "free"` with `space =
+  "fixed"` warps aspect ratios away from 1 and is discouraged though not
+  warned against.
 }
 \examples{
 # scaled PCA of Anderson iris measurements
@@ -59,36 +61,78 @@ iris[, -5] \%>\%
   mutate_rows(species = iris$Species) \%>\%
   print() -> iris_pca
 
-# facet the first three principal components
+# facet the first three principal components (by default fixed space and scales)
 iris_pca \%>\%
   ggbiplot() +
-  facet_ord(num_coord = 3) +
+  facet_ord(coords = 3) +
   geom_rows_point(aes(color = species)) +
   geom_cols_vector(aes(label = name), color = "#444444") +
   ggtitle(
-    "Biplot of Anderson iris measurements",
+    "PCA biplot of Anderson iris measurements",
     "Faceted pairs with fixed scales and space"
   )
 
 # free space (by default frees the scales)
 iris_pca \%>\%
   ggbiplot() +
-  facet_ord(num_coord = 3, space = "free") +
+  facet_ord(coords = 3, space = "free") +
   geom_rows_point(aes(color = species)) +
   geom_cols_vector(aes(label = name), color = "#444444") +
   ggtitle(
-    "Biplot of Anderson iris measurements",
+    "PCA biplot of Anderson iris measurements",
     "Faceted pairs with free scales and space"
   )
 
 # free scales, fixed space: panel scales determined by coordinates (discouraged)
 iris_pca \%>\%
   ggbiplot() +
-  facet_ord(num_coord = 3, scales = "free", space = "fixed") +
+  facet_ord(coords = 3, scales = "free", space = "fixed") +
   geom_rows_point(aes(color = species)) +
   geom_cols_vector(aes(label = name), color = "#444444") +
   ggtitle(
-    "Biplot of Anderson iris measurements",
+    "PCA biplot of Anderson iris measurements",
     "Faceted pairs with free scales and fixed space"
   )
+# correspondence analysis of combined hair and eye color data
+haireye <- as.data.frame(rowSums(HairEyeColor, dims = 2L))
+haireye \%>\%
+  ordinate(MASS::corresp, cols = everything(), nf = 3L) \%>\%
+  confer_inertia("symmetric") \%>\%
+  print() -> hec_ca
+
+# facet the first three correspondence coordinates
+hec_ca \%>\%
+  ggbiplot() +
+  facet_ord(coords = 3) +
+  geom_rows_text(aes(label = name), color = "#D55E00", size = 3) +
+  geom_cols_text(aes(label = name), color = "#0072B2", size = 3) +
+  ggtitle(
+    "CA biplot of Snee hair & eye colors",
+    "Faceted pairs with fixed scales and space"
+  )
+
+# facet specific correspondence coordinates by index
+hec_ca \%>\%
+  ggbiplot() +
+  facet_ord(coords = c(1, 3)) +
+  geom_rows_text(aes(label = name), color = "#D55E00", size = 3) +
+  geom_cols_text(aes(label = name), color = "#0072B2", size = 3) +
+  ggtitle(
+    "CA biplot of Snee hair & eye colors",
+    "Faceted pairs with specific coordinates by index"
+  )
+
+# facet specific correspondence coordinates by name
+hec_ca \%>\%
+  ggbiplot() +
+  facet_ord(coords = c("Can1", "Can3")) +
+  geom_rows_text(aes(label = name), color = "#D55E00", size = 3) +
+  geom_cols_text(aes(label = name), color = "#0072B2", size = 3) +
+  ggtitle(
+    "CA biplot of Snee hair & eye colors",
+    "Faceted pairs with specific coordinates by name"
+  )
+}
+\seealso{
+[ggbiplot()], [ggplot2::facet_grid()]
 }

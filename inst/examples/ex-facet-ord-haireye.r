@@ -8,7 +8,7 @@ haireye %>%
 # facet the first three correspondence coordinates
 hec_ca %>%
   ggbiplot() +
-  facet_ord(num_coord = 3) +
+  facet_ord(coords = 3) +
   geom_rows_text(aes(label = name), color = "#D55E00", size = 3) +
   geom_cols_text(aes(label = name), color = "#0072B2", size = 3) +
   ggtitle(
@@ -16,24 +16,24 @@ hec_ca %>%
     "Faceted pairs with fixed scales and space"
   )
 
-# free space (by default frees the scales)
+# facet specific correspondence coordinates by index
 hec_ca %>%
   ggbiplot() +
-  facet_ord(num_coord = 3, space = "free") +
+  facet_ord(coords = c(1, 3)) +
   geom_rows_text(aes(label = name), color = "#D55E00", size = 3) +
   geom_cols_text(aes(label = name), color = "#0072B2", size = 3) +
   ggtitle(
     "CA biplot of Snee hair & eye colors",
-    "Faceted pairs with free scales and space"
+    "Faceted pairs with specific coordinates by index"
   )
 
-# free scales, fixed space: panel scales determined by coordinates (discouraged)
+# facet specific correspondence coordinates by name
 hec_ca %>%
   ggbiplot() +
-  facet_ord(num_coord = 3, scales = "free", space = "fixed") +
+  facet_ord(coords = c("Can1", "Can3")) +
   geom_rows_text(aes(label = name), color = "#D55E00", size = 3) +
   geom_cols_text(aes(label = name), color = "#0072B2", size = 3) +
   ggtitle(
     "CA biplot of Snee hair & eye colors",
-    "Faceted pairs with free scales and fixed space"
+    "Faceted pairs with specific coordinates by name"
   )

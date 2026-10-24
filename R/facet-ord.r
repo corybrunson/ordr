@@ -1,11 +1,7 @@
-#' @title Facet a biplot into all pairs of ordination coordinates
+#' @title Arrange biplots of all pairs of ordination coordinates
 #'
-#' @description This layer faceting function draws a biplot of every ordered
-#'   pair of ordination coordinates, with one panel for each pair. The panels
-#'   are drawn on a grid, with a coordinate name labeling each column and row of
-#'   the grid. As in [facet_grid()], the `scales` and `space` parameters control
-#'   whether the coordinate scales and the sizes of the panels are the same
-#'   across all panels or free to vary between panels.
+#' @description Facet biplots using all ordered pairs of scaffolding coordinates
+#'   in an ordination object.
 #'
 #' @details `facet_ord()` is intended to be added to a plot produced by
 #'   [ggbiplot()], which stores the recovered ordination coordinates in the
@@ -13,22 +9,25 @@
 #'   mappings with internal panel-specific columns, so that the coordinates
 #'   mapped in the original call are used only to set the coordinate system.
 #'
-#'   The `scales` and `space` parameters control the scales and sizes of the
-#'   panels, as in [facet_grid()]. With `scales = "free"`, the x and y scales of
-#'   each panel are determined by its own coordinates, while with `scales =
-#'   "fixed"`, all panels share the same x and y scales. With `space = "free"`,
-#'   each panel is sized so that the units of its x and y coordinates are
-#'   rendered at the same physical length; with `space = "fixed"`, all panels
-#'   are the same size.
-#'   
-#'   Setting either parameter to a value also sets the other to the same value,
-#'   unless both are set; if neither is set, both default to `"fixed"`. Setting
-#'   `scales = "fixed"` obtains the same plot regardless of `space`. Pairing
-#'   `scales = "free"` with `space = "fixed"` warps aspect ratios away from 1
-#'   and is discouraged though not warned against.
+#'   As in [ggplot2::facet_grid()], the `scales` and `space` parameters control
+#'   the scales and sizes of the panels. Setting either parameter to a value
+#'   also sets the other to the same value, unless both are set; if neither is
+#'   set, both default to `"fixed"`. Setting `scales = "fixed"` obtains the same
+#'   plot regardless of `space`. Pairing `scales = "free"` with `space =
+#'   "fixed"` warps aspect ratios away from 1 and is discouraged though not
+#'   warned against.
 #'
-#' @param num_coord The number of ordination coordinates to include. A positive
-#'   integer; by default, all recovered coordinates are included.
+#' @param coords Coordinates to include. Can be:
+#'   \itemize{
+#'     \item \code{NULL} (default): all coordinates
+#'     \item A single integer: number of first coordinates to include (if exceeds
+#'       dimension, a warning is issued and all are used)
+#'     \item A character scalar: a single coordinate name
+#'     \item A numeric vector: specific coordinate indices (1-based); error if any
+#'       index exceeds the dimension
+#'     \item A character vector: specific coordinate names; error if any name is
+#'       not found exactly
+#'   }
 #' @param scales A character scalar indicating whether all panels share the same
 #'   x and y coordinate scales (`"fixed"`) or whether the x and y scales are
 #'   free to differ between panels (`"free"`). By default, `NULL`. Unlike
@@ -37,24 +36,18 @@
 #'   size (`"fixed"`) or whether each panel is sized proportionally to the
 #'   ranges of its coordinate scales (`"free"`). By default, `NULL`. Unlike
 #'   [facet_grid()], no x- or y-specific values are available.
+#' @return A `FacetOrd` ggproto object to be added to a [ggbiplot()].
+#' @seealso [ggbiplot()], [ggplot2::facet_grid()]
 #' @example inst/examples/ex-facet-ord-iris.r
 #' @example inst/examples/ex-facet-ord-haireye.r
 #' @export
-facet_ord <- function(num_coord = NULL, scales = NULL, space = NULL) {
-  if (! is.null(num_coord)) {
-    stopifnot(
-      is.numeric(num_coord),
-      length(num_coord) == 1L,
-      num_coord == round(num_coord),
-      num_coord >= 1L
-    )
-    num_coord <- as.integer(num_coord)
+facet_ord <- function(coords = NULL, scales = NULL, space = NULL) {
+  if (!is.null(coords)) {
+    validate_coords(coords, call = rlang::call2("facet_ord"))
   }
   if (is.null(scales) && is.null(space)) {
-    # neither is set, so both default to "fixed"
     scales <- space <- "fixed"
   } else if (is.null(scales) || is.null(space)) {
-    # one is set, so the other takes its value
     given <- if (is.null(scales)) space else scales
     scales <- space <- match.arg(given, c("free", "fixed"))
   } else {
@@ -66,10 +59,9 @@ facet_ord <- function(num_coord = NULL, scales = NULL, space = NULL) {
     NULL, FacetOrd,
     shrink = TRUE,
     params = list(
-      num_coord = num_coord,
+      coords = coords,
       scales = scales,
       space = space,
-      # `facet_grid()` parameters
       margins = FALSE,
       free = list(x = scales == "free", y = scales == "free"),
       space_free = list(x = space == "free", y = space == "free"),
@@ -126,9 +118,35 @@ FacetOrd <- ggproto(
       )
     }
 
-    # restrict to the first `num_coord` coordinates
-    if (! is.null(params$num_coord)) {
-      coords <- coords[seq_len(min(params$num_coord, length(coords)))]
+    if (! is.null(params$coords)) {
+      if (length(params$coords) == 1L && is.numeric(params$coords)) {
+        n <- params$coords
+        if (n > length(coords)) {
+          cli::cli_warn(c(
+            "`coords = {n}` exceeds available dimensions ({length(coords)}).",
+            i = "Using all {length(coords)} coordinates."
+          ))
+          n <- length(coords)
+        }
+        coords <- coords[seq_len(n)]
+      } else if (is.numeric(params$coords)) {
+        if (any(params$coords > length(coords))) {
+          cli::cli_abort(c(
+            "Coordinate indices exceed available dimensions.",
+            x = "Maximum index is {length(coords)}, got {max(params$coords)}."
+          ))
+        }
+        coords <- coords[params$coords]
+      } else if (is.character(params$coords)) {
+        missing <- setdiff(params$coords, coords)
+        if (length(missing) > 0) {
+          cli::cli_abort(c(
+            "Coordinate name(s) not found: {.val {missing}}.",
+            i = "Available: {.val {coords}}."
+          ))
+        }
+        coords <- params$coords
+      }
     }
     params$coords <- coords
 
@@ -182,9 +200,11 @@ FacetOrd <- ggproto(
     data
   },
 
-  draw_panels = function(self, panels, layout, x_scales = NULL,
-                         y_scales = NULL, ranges, coord, data = NULL,
-                         theme, params) {
+  draw_panels = function(
+    self, panels, layout, x_scales = NULL,
+    y_scales = NULL, ranges, coord, data = NULL,
+    theme, params
+  ) {
     # a fixed-ratio coordinate system cannot be combined with free scales or
     # space freely, so the default checks are bypassed; the panels are always
     # sized so that equal coordinate differences have equal physical length
@@ -206,8 +226,8 @@ FacetOrd <- ggproto(
     attr(row_vars, "type") <- "rows"
     attr(row_vars, "facet") <- "grid"
     list(
-      cols = data_frame0(!!!labeller(col_vars)),
-      rows = data_frame0(!!!labeller(row_vars))
+      cols = data_frame0(!!! labeller(col_vars)),
+      rows = data_frame0(!!! labeller(row_vars))
     )
   }
 )
@@ -229,3 +249,29 @@ ggplot_add.FacetOrd <- function(object, plot, object_name) {
 data_frame0 <- getFromNamespace("data_frame0", "ggplot2")
 empty <- getFromNamespace("empty", "ggplot2")
 unique0 <- getFromNamespace("unique0", "ggplot2")
+
+validate_coords <- function(coords, call = rlang::caller_env()) {
+  if (is.list(coords)) {
+    cli::cli_abort("`coords` must be a vector, not a list.", call = call)
+  }
+  if (length(coords) == 1L) {
+    if (is.numeric(coords)) {
+      stopifnot(
+        coords == round(coords),
+        coords >= 1L
+      )
+    } else if (!is.character(coords)) {
+      cli::cli_abort("`coords` must be numeric or character.", call = call)
+    }
+  } else {
+    if (is.numeric(coords)) {
+      stopifnot(
+        all(coords == round(coords)),
+        all(coords >= 1L)
+      )
+    } else if (!is.character(coords)) {
+      cli::cli_abort("`coords` must be numeric or character.", call = call)
+    }
+  }
+  invisible(NULL)
+}
