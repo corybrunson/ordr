@@ -17,7 +17,7 @@
 #'   **WARNING:**
 #'   This layer is appropriate only with axes in standard coordinates (usually
 #'   [`confer_inertia(p = "rows")`][confer_inertia]) and interpolative
-#'   calibration ([`ggbiplot(axis.type = "interpolative")`][ggbiplot]).
+#'   calibration, the default `axis.type` of [`geom_axis()`][geom_axis].
 #' 
 
 #' @template ref-gower2011

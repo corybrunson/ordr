@@ -4,32 +4,30 @@
 \name{ordr}
 \alias{ordr}
 \alias{ordr-package}
-\title{\strong{ordr} package}
+\title{**ordr** package}
 \description{
-This is a \strong{\href{https://www.tidyverse.org/}{tidyverse}} extension
-for handling, manipulating, and visualizing ordination models with
-consistent conventions and in a tidy workflow.
+This is a **[tidyverse](https://www.tidyverse.org/)** extension
+  for handling, manipulating, and visualizing ordination models with
+  consistent conventions and in a tidy workflow.
 }
 \details{
 This package is designed to integrate ordination analysis and biplot
-visualization into a \strong{tidyverse} workflow. It is inspired in particular by
-the extensions \strong{ggbiplot} and \strong{tidygraph}.
+visualization into a **tidyverse** workflow. It is inspired in particular by
+the extensions **ggbiplot** and **tidygraph**.
 
 The package consists in several modules:
-\itemize{
-\item the '\link{tbl_ord}' class, a wrapper for various ordination object classes
-\item extracting \link{augmentation} for the factors of an ordination
-\item using \link{dplyr-verbs} to add \link{annotation} to the factors
-\item adjusting the \link{conference} of inertia between the factors
-\item methods of the above generics for several widely-used object classes
-\item convenient \link[=format]{formatting} of ordination objects
-\item \code{\link[=ggbiplot]{ggbiplot()}}, a \strong{ggplot2} extension for rendering biplots
-\item additional \link[=biplot-stats]{stats} and \link[=biplot-geoms]{geoms} for biplots
-}
+- the '[tbl_ord]' class, a wrapper for various ordination object classes
+- extracting [augmentation] for the factors of an ordination
+- using [dplyr-verbs] to add [annotation] to the factors
+- adjusting the [conference] of inertia between the factors
+- methods of the above generics for several widely-used object classes
+- convenient [formatting][format] of ordination objects
+- [ggbiplot()], a **ggplot2** extension for rendering biplots
+- additional [stats][biplot-stats] and [geoms][biplot-geoms] for biplots
 }
 \section{Ordinations and biplots}{
 
-\emph{Ordination} encompasses a variety of techniques for data compression,
+_Ordination_ encompasses a variety of techniques for data compression,
 dimension reduction, feature extraction, and visualization. Well-known
 ordination techniques are predominantly unsupervised and include principal
 components analysis, multidimensional scaling, and correspondence analyis
@@ -40,7 +38,7 @@ also be viewed, or treated using the same tools, as ordination, including
 linear regression, linear discriminant analysis, k-means clustering, and
 non-negative matrix factorization.
 
-\emph{Biplots} are two-layered scatterplots widely used to visualize unsupervised
+_Biplots_ are two-layered scatterplots widely used to visualize unsupervised
 SVD-based ordinations. Gabriel (1971) introduced biplots to represent the
 scores and loadings of PCA on a single set of axes. They have also been used
 to visualize generalized linear regression and linear discriminant analysis
@@ -83,34 +81,35 @@ the projection of a row's coordinates (point) onto a column's coordinates
 Many users have identified problems and suggested improvements.
 
 Development benefitted from the use of equipment and the support of
-colleagues at \href{https://health.uconn.edu/}{UConn Health} and at \href{https://ufhealth.org/}{UF Health}.
+colleagues at [UConn Health](https://health.uconn.edu/) and at [UF
+Health](https://ufhealth.org/).
 }
 
 \references{
-Podani J (2000) "Ordination". \emph{Introduction to the Exploration of
-Multivariate Biological Data} Chapter 7, 215--284. Backhuys Publishers, ISBN
+Podani J (2000) "Ordination". _Introduction to the Exploration of
+Multivariate Biological Data_ Chapter 7, 215--284. Backhuys Publishers, ISBN
 90-5782-067-6.
-\url{https://web.archive.org/web/20200221000313/http://ramet.elte.hu/~podani/books.html}
+<https://web.archive.org/web/20200221000313/http://ramet.elte.hu/~podani/books.html>
 
-Palmer M \emph{Ordination Methods for Ecologists}. Website, accessed 2019-07-12.
-\url{https://ordination.okstate.edu/}
+Palmer M _Ordination Methods for Ecologists_. Website, accessed 2019-07-12.
+<https://ordination.okstate.edu/>
 
-Le Roux B & Rouanet H (2004) \emph{Geometric Data Analysis: From Correspondence
-Analysis to Stsructured Data Analysis}. Springer Dordrecht, ISBN:
+Le Roux B & Rouanet H (2004) _Geometric Data Analysis: From Correspondence
+Analysis to Stsructured Data Analysis_. Springer Dordrecht, ISBN:
 978-1-4020-2236-4. \doi{10.1007/1-4020-2236-0}
-\url{https://link.springer.com/book/10.1007/1-4020-2236-0}
+<https://link.springer.com/book/10.1007/1-4020-2236-0>
 
 Gabriel KR (1971) "The biplot graphic display of matrices with application to
-principal component analysis". \emph{Biometrika} 58(3), 453--467.
+principal component analysis". _Biometrika_ 58(3), 453--467.
 \doi{10.1093/biomet/58.3.453}
 
-Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
+Greenacre MJ (2010) _Biplots in Practice_. Fundacion BBVA, ISBN:
 978-84-923846.
-\url{https://www.fbbva.es/microsite/multivariate-statistics/biplots.html}
+<https://www.fbbva.es/microsite/multivariate-statistics/biplots.html>
 
-Orlov K (2015) \emph{Answer to} "PCA and Correspondence analysis in their relation
+Orlov K (2015) _Answer to_ "PCA and Correspondence analysis in their relation
 to Biplot". CrossValidated, accessed 2019-07-12.
-\url{https://stats.stackexchange.com/a/141755/68743}
+<https://stats.stackexchange.com/a/141755/68743>
 }
 \seealso{
 Useful links:
@@ -126,6 +125,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Jason Cory Brunson \email{cornelioid@gmail.com} (\href{https://orcid.org/0000-0003-3126-9494}{ORCID})
   \item John Gracey \email{jbgracey6@gmail.com}
 }
 

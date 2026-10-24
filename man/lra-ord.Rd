@@ -29,7 +29,7 @@ lra(x, compositional = FALSE, weighted = TRUE)
 \arguments{
 \item{x}{A numeric matrix or rectangular data set.}
 
-\item{compositional}{Logical; whether to normalize rows of \code{x} to sum to 1.}
+\item{compositional}{Logical; whether to normalize rows of `x` to sum to 1.}
 
 \item{weighted}{Logical; whether to weight rows and columns by their sums.}
 
@@ -38,31 +38,31 @@ lra(x, compositional = FALSE, weighted = TRUE)
 \item{n}{Integer; number of rows of each factor to print.}
 
 \item{main, var.axes, ...}{Parameters passed to other plotting methods (in the
-case of \code{main}, after being \code{\link[=force]{force()}}d.}
+case of `main`, after being [force()]d.}
 
 \item{choices}{Integer; length-2 vector specifying the components to plot.}
 
 \item{scale}{Numeric; values between 0 and 1 that control how inertia is
-conferred unto the points: Row (\code{i = 1L}) and column (\code{i = 2L}) coordinates
-are scaled by \code{sv ^ scale[[i]]}. If a single value \code{scale} is passed, it is
-assigned to the rows while \code{1 - scale} is assigned to the columns.}
+conferred unto the points: Row (`i = 1L`) and column (`i = 2L`) coordinates
+are scaled by `sv ^ scale[[i]]`. If a single value `scale` is passed, it is
+assigned to the rows while `1 - scale` is assigned to the columns.}
 }
 \value{
 Given an \eqn{n * p} data matrix and setting \eqn{r=min(n,p)},
-\code{lra()} returns a list of class \code{"lra"} containing three elements:
+  `lra()` returns a list of class `"lra"` containing three elements:
 \describe{
-\item{\code{sv}}{The \eqn{r-1} singular values}
-\item{\code{row.coords}}{The \eqn{n * (r-1)} matrix
-of row standard coordinates.}
-\item{\code{column.coords}}{The \eqn{p * (r-1)} matrix
-of column standard coordinates.}
-\item{\code{row.weights}}{The weights used to scale the row coordinates.}
-\item{\code{column.weights}}{The weights used to scale the column coordinates.}
+  \item{`sv`}{The \eqn{r-1} singular values}
+  \item{`row.coords`}{The \eqn{n * (r-1)} matrix
+                      of row standard coordinates.}
+  \item{`column.coords`}{The \eqn{p * (r-1)} matrix
+                         of column standard coordinates.}
+  \item{`row.weights`}{The weights used to scale the row coordinates.}
+  \item{`column.weights`}{The weights used to scale the column coordinates.}
 }
 }
 \description{
 Represent log-ratios between variables based on their values on
-a population of cases.
+  a population of cases.
 }
 \details{
 Log-ratio analysis (LRA) is based on a double-centering of log-transformed
@@ -70,7 +70,7 @@ data, usually weighted by row and column totals. The technique is suitable
 for positive-valued variables on a common scale (e.g. percentages). The
 distances between variables' coordinates (in the full-dimensional space) are
 their pairwise log-ratios. The distances between cases' coordinates are
-called their \emph{log-ratio distances}, and the total variance is the weighted
+called their _log-ratio distances_, and the total variance is the weighted
 sum of their squares.
 
 LRA is not implemented in standard R distributions but is a useful member of
@@ -105,7 +105,7 @@ biplot(arrests_lra, scale = c(1, 0), cex = c(2/3, 1))
 biplot(arrests_lra, scale = c(1, 0), cex = c(2/3, 1))
 }
 \references{
-Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
+Greenacre MJ (2010) _Biplots in Practice_. Fundacion BBVA, ISBN:
 978-84-923846.
-\url{https://www.fbbva.es/microsite/multivariate-statistics/biplots.html}
+<https://www.fbbva.es/microsite/multivariate-statistics/biplots.html>
 }

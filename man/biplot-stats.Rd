@@ -42,9 +42,9 @@ stat_rows_density_2d(
   ...,
   contour = TRUE,
   contour_var = "density",
-  n = 100,
   h = NULL,
   adjust = c(1, 1),
+  n = 100,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -58,9 +58,9 @@ stat_cols_density_2d(
   ...,
   contour = TRUE,
   contour_var = "density",
-  n = 100,
   h = NULL,
   adjust = c(1, 1),
+  n = 100,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -74,9 +74,9 @@ stat_rows_density_2d_filled(
   ...,
   contour = TRUE,
   contour_var = "density",
-  n = 100,
   h = NULL,
   adjust = c(1, 1),
+  n = 100,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -90,9 +90,9 @@ stat_cols_density_2d_filled(
   ...,
   contour = TRUE,
   contour_var = "density",
-  n = 100,
   h = NULL,
   adjust = c(1, 1),
+  n = 100,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -405,6 +405,7 @@ stat_rows_rule(
   fun.upper = "maxpp",
   fun.offset = "minabspp",
   fun.args = list(),
+  axis.type = c("interpolative", "predictive"),
   referent = NULL,
   show.legend = NA,
   inherit.aes = TRUE,
@@ -422,6 +423,7 @@ stat_cols_rule(
   fun.upper = "maxpp",
   fun.offset = "minabspp",
   fun.args = list(),
+  axis.type = c("interpolative", "predictive"),
   referent = NULL,
   show.legend = NA,
   inherit.aes = TRUE,
@@ -503,7 +505,7 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 \link[ggplot2:layer_positions]{layer position} documentation.
 }}
 
-\item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
+\item{...}{Additional arguments passed to [ggplot2::layer()].}
 
 \item{contour}{If \code{TRUE}, contour the results of the 2d density
 estimation.}
@@ -512,8 +514,6 @@ estimation.}
 by. Can be one of \code{"density"}, \code{"ndensity"}, or \code{"count"}. See the section
 on computed variables for details.}
 
-\item{n}{Number of grid points in each direction.}
-
 \item{h}{Bandwidth (vector of length two). If \code{NULL}, estimated
 using \code{\link[MASS:bandwidth.nrd]{MASS::bandwidth.nrd()}}.}
 
@@ -521,6 +521,8 @@ using \code{\link[MASS:bandwidth.nrd]{MASS::bandwidth.nrd()}}.}
 'NULL'. This makes it possible to adjust the bandwidth while still
 using the a bandwidth estimator. For example, \code{adjust = 1/2} means
 use half of the default bandwidth.}
+
+\item{n}{Number of grid points in each direction.}
 
 \item{na.rm}{If \code{FALSE}, the default, missing values are removed with
 a warning. If \code{TRUE}, missing values are silently removed.}
@@ -559,7 +561,7 @@ return a data frame with variables \code{ymin}, \code{y}, and \code{ymax}.}
 functions that are each passed a vector of values and should return a
 single number.}
 
-\item{fun.ord}{Alternatively to the \code{\link[ggplot2:stat_summary]{ggplot2::stat_summary_bin()}} parameters,
+\item{fun.ord}{Alternatively to the \code{\link[ggplot2:stat_summary_bin]{ggplot2::stat_summary_bin()}} parameters,
 supply a summary function that takes a matrix as input and returns a named
 column summary vector. Overridden by \code{fun.data} and \code{fun}, cannot be used
 together with \code{fun.min} and \code{fun.max}.}
@@ -609,37 +611,37 @@ of the rules and the translations of the axes from the projections of
 \item{referent}{The reference data set, admitting the same 3 options as
 \code{data}; see Details.}
 
-\item{ref_elements, ref_subset}{Analogues of \code{elements} and \code{subset} applied
-to \code{referent}.}
+\item{ref_elements, ref_subset}{Analogues of `elements` and `subset` applied
+to `referent`.}
 }
 \value{
-A ggproto \link[ggplot2:layer]{layer}.
+A ggproto [layer][ggplot2::layer].
 }
 \description{
 These statistical transformations (stats) adapt
-conventional \strong{ggplot2} stats to one or the other matrix factor
-of a tbl_ord, in lieu of \code{\link[=stat_rows]{stat_rows()}} or \code{\link[=stat_cols]{stat_cols()}}. They
-accept the same parameters as their corresponding conventional
-stats.
+  conventional **ggplot2** stats to one or the other matrix factor
+  of a tbl_ord, in lieu of [stat_rows()] or [stat_cols()]. They
+  accept the same parameters as their corresponding conventional
+  stats.
 }
 \section{Ordination aesthetics}{
 
 This statistical transformation is compatible with the convenience function
-\code{\link[=ord_aes]{ord_aes()}}.
+[ord_aes()].
 
-Some transformations (e.g. \code{\link[=stat_center]{stat_center()}}) commute with projection to the
+Some transformations (e.g. [stat_center()]) commute with projection to the
 lower (1 or 2)-dimensional biplot space. If they detect aesthetics of the
-form \verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and
-\code{y} while any remaining are ignored.
+form `..coord[0-9]+`, then `..coord1` and `..coord2` are converted to `x` and
+`y` while any remaining are ignored.
 
-Other transformations (e.g. \code{\link[=stat_spantree]{stat_spantree()}}) yield different results in a
+Other transformations (e.g. [stat_spantree()]) yield different results in a
 lower-dimensional biplot when they are computed before versus after
 projection. If the stat layer detects these aesthetics, then the
 transformation is performed before projection, and the results in the first
-two dimensions are returned as \code{x} and \code{y}.
+two dimensions are returned as `x` and `y`.
 
-A small number of transformations (\code{\link[=stat_rule]{stat_rule()}}) are incompatible with
-ordination aesthetics but will accept \code{ord_aes()} without warning.
+A small number of transformations ([stat_rule()]) are incompatible with
+ordination aesthetics but will accept `ord_aes()` without warning.
 }
 
 \examples{
@@ -749,8 +751,8 @@ iris_pca \%>\%
 
 # hull peeling with breaks below
 judge_pca <- ordinate(USJudgeRatings, princomp, cols = -c(1, 12))
-ggbiplot(judge_pca, axis.type = "predictive") +
-  geom_cols_axis() +
+ggbiplot(judge_pca) +
+  geom_cols_axis(axis.type = "predictive") +
   geom_rows_point(elements = "score") +
   stat_rows_peel(
     aes(alpha = after_stat(hull)), color = "black", elements = "score",
@@ -771,9 +773,9 @@ iris_pca <- ordinate(iris, cols = 1:4, model = prcomp)
 # biplot canvas
 iris_biplot <- 
   iris_pca \%>\%
-  ggbiplot(aes(color = Species, label = name), axis.type = "predictive") +
+  ggbiplot(aes(color = Species, label = name)) +
   geom_rows_point() +
-  geom_cols_axis(aes(center = center))
+  geom_cols_axis(aes(center = center), axis.type = "predictive")
 # print select cases
 top_cases <- c(1, 51, 101)
 iris[top_cases, ]
@@ -798,10 +800,9 @@ iris_biplot + stat_rows_projection(subset = top_cases, referent = iris_cols)
 
 # project selected cases onto selected axes in full-dimensional space
 iris_pca \%>\%
-  ggbiplot(ord_aes(iris_pca, color = Species, label = name),
-           axis.type = "predictive") +
+  ggbiplot(ord_aes(iris_pca, color = Species, label = name)) +
   geom_rows_point() +
-  geom_cols_axis(aes(center = center)) +
+  geom_cols_axis(aes(center = center), axis.type = "predictive") +
   stat_rows_projection(subset = top_cases, ref_subset = length_vars)
 
 # default (standardized) linear discriminant analysis
@@ -877,8 +878,8 @@ euro_plot +
 }
 }
 \seealso{
-Other biplot layers: 
+Other biplot layers:
 \code{\link{biplot-geoms}},
-\code{\link{stat_rows}()}
+\code{\link[=stat_rows]{stat_rows()}}
 }
 \concept{biplot layers}

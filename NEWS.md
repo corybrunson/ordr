@@ -1,5 +1,10 @@
 # next version
 
+## predictive axis calibration (breaking change)
+
+Predictive axes are now calibrated by `geom(_*)_axis()` and `stat/geom(_*)_rule()` via the new `axis.type` argument, which displaces the homonymous argument of `ggbiplot()`.
+When full model coordinates are mapped with `ord_aes()`, these layers scale axis units by their reciprocal squared norms.
+
 ## handling of eigenvalue-based classes
 
 The `"cmds_ord"` and `"factanal"` recovery methods have been updated to reflect the use of eigenvalue decomposition rather than singular value decomposition under their respective hoods: Only one set of elements are considered "active" (see #60).

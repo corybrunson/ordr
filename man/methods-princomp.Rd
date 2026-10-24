@@ -38,24 +38,26 @@
 \item{x}{An ordination object.}
 }
 \value{
-The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia},
-\link[=supplementation]{supplementary elements}, and \link[=augmentation]{intrinsic metadata}; but they require methods for each model class to
-tell them what these components are.
+The recovery generics `recover_*()` return [core model
+  components][recoverers], [distribution of inertia][conference],
+  [supplementary elements][supplementation], and [intrinsic
+  metadata][augmentation]; but they require methods for each model class to
+  tell them what these components are.
 
-The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
-class. Its methods determine what model classes it is allowed to wrap. It
-then provides 'tbl_ord' methods with access to the recoverers and hence to
-the model components.
+  The generic [as_tbl_ord()] returns its input wrapped in the 'tbl_ord'
+  class. Its methods determine what model classes it is allowed to wrap. It
+  then provides 'tbl_ord' methods with access to the recoverers and hence to
+  the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
-objects of class \code{"princomp"} as returned by \code{\link[stats:princomp]{stats::princomp()}}.
+  objects of class `"princomp"` as returned by [stats::princomp()].
 }
 \details{
-Principal components analysis (PCA), as performed by \code{\link[stats:princomp]{stats::princomp()}},
-relies on an eigenvalue decomposition (EVD) of the covariance matrix
-\eqn{X^TX} of a data set \eqn{X}. \code{\link[stats:princomp]{stats::princomp()}} returns the EVD factor
-\eqn{V} as the loadings \verb{$loadings}. The scores \verb{$scores} are obtained as
+Principal components analysis (PCA), as performed by [stats::princomp()],
+relies on an eigenvalue decomposition (EVD) of the covariance matrix 
+\eqn{X^TX} of a data set \eqn{X}. [stats::princomp()] returns the EVD factor
+\eqn{V} as the loadings `$loadings`. The scores `$scores` are obtained as
 \eqn{XV} and are accessible as supplementary elements.
 }
 \examples{
@@ -77,12 +79,12 @@ get_cols(iris_pca)
 (iris_pca <- augment_ord(iris_pca))
 }
 \seealso{
-Other methods for eigen-decomposition-based techniques: 
+Other methods for eigen-decomposition-based techniques:
 \code{\link{methods-cmds}},
 \code{\link{methods-eigen}},
 \code{\link{methods-factanal}}
 
-Other models from the stats package: 
+Other models from the stats package:
 \code{\link{methods-cancor}},
 \code{\link{methods-cmds}},
 \code{\link{methods-factanal}},

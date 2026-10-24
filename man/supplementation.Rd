@@ -17,28 +17,28 @@ recover_supp_cols(x)
 \method{recover_supp_cols}{default}(x)
 }
 \arguments{
-\item{x}{An object of class '\link{tbl_ord}'.}
+\item{x}{An object of class '[tbl_ord]'.}
 }
 \value{
 Matrices having the same numbers of columns as returned by
-\code{\link[=recover_rows]{recover_rows()}} and \code{\link[=recover_cols]{recover_cols()}}.
+  [recover_rows()] and [recover_cols()].
 }
 \description{
 These functions attach supplementary rows or columns to an
-ordination object.
+  ordination object.
 }
 \details{
-The \verb{recover_supp_*()} \link[base:UseMethod]{S3 methods} produce matrices of
-supplemental rows or columns of a \link{tbl_ord} object from the object itself.
+The `recover_supp_*()` [S3 methods][base::S3Methods] produce matrices of
+supplemental rows or columns of a [tbl_ord] object from the object itself.
 The motivating example is linear discriminant analysis, which produces a
 natural biplot of class discriminant centroids and variable axes but is
 usually supplemented with case discriminant scores. The supplementary values
-are augmented with an \code{.element} column whose value indicates their source
-and can be incorporated into a \link[ggplot2:fortify]{tidied form}. If no
-supplementary rows of a factor are produced, the functions return \code{NULL}.
+are augmented with an `.element` column whose value indicates their source
+and can be incorporated into a [tidied form][ggplot2::fortify]. If no
+supplementary rows of a factor are produced, the functions return `NULL`.
 }
 \seealso{
-Other generic recoverers: 
+Other generic recoverers:
 \code{\link{augmentation}},
 \code{\link{conference}},
 \code{\link{recoverers}}

@@ -16,8 +16,13 @@
 #'
 #'   **WARNING:**
 #'   This layer is appropriate only with axes in standard coordinates (usually
-#'   [`confer_inertia(p = "rows")`][confer_inertia]) and predictive calibration
-#'   ([`ggbiplot(axis.type = "predictive")`][ggbiplot]).
+#'   [`confer_inertia(p = "rows")`][confer_inertia]) and predictive calibration,
+#'   e.g. [`geom_cols_axis(axis.type = "predictive")`][geom_axis].
+#'
+#'   Use the same mapped coordinates for the projection layer and the axes. When
+#'   `ord_aes()` maps more than two coordinates, projections and axes are
+#'   computed from all mapped model coordinates; when only `x` and `y` are
+#'   mapped, both use the plot-plane coordinates.
 #' 
 
 #' @template stat-referent
