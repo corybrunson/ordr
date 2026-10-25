@@ -2,10 +2,9 @@
 
 2- (and 3-) dimensional biplots require that coordinates lie on the same
 scale but may additionally benefit from a square plotting window. While
-\`CoordRect\` provides control of coordinate and window aspect ratios,
-the convenience \`CoordScaffold\` system also fixes the coordinate
-aspect ratio at \`1\` and gives the user control only of the plotting
-window.
+`CoordRect` provides control of coordinate and window aspect ratios, the
+convenience `CoordScaffold` system also fixes the coordinate aspect
+ratio at `1` and gives the user control only of the plotting window.
 
 ## Usage
 

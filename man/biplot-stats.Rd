@@ -505,7 +505,7 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 \link[ggplot2:layer_positions]{layer position} documentation.
 }}
 
-\item{...}{Additional arguments passed to [ggplot2::layer()].}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
 \item{contour}{If \code{TRUE}, contour the results of the 2d density
 estimation.}
@@ -611,37 +611,37 @@ of the rules and the translations of the axes from the projections of
 \item{referent}{The reference data set, admitting the same 3 options as
 \code{data}; see Details.}
 
-\item{ref_elements, ref_subset}{Analogues of `elements` and `subset` applied
-to `referent`.}
+\item{ref_elements, ref_subset}{Analogues of \code{elements} and \code{subset} applied
+to \code{referent}.}
 }
 \value{
-A ggproto [layer][ggplot2::layer].
+A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
 These statistical transformations (stats) adapt
-  conventional **ggplot2** stats to one or the other matrix factor
-  of a tbl_ord, in lieu of [stat_rows()] or [stat_cols()]. They
-  accept the same parameters as their corresponding conventional
-  stats.
+conventional \strong{ggplot2} stats to one or the other matrix factor
+of a tbl_ord, in lieu of \code{\link[=stat_rows]{stat_rows()}} or \code{\link[=stat_cols]{stat_cols()}}. They
+accept the same parameters as their corresponding conventional
+stats.
 }
 \section{Ordination aesthetics}{
 
 This statistical transformation is compatible with the convenience function
-[ord_aes()].
+\code{\link[=ord_aes]{ord_aes()}}.
 
-Some transformations (e.g. [stat_center()]) commute with projection to the
+Some transformations (e.g. \code{\link[=stat_center]{stat_center()}}) commute with projection to the
 lower (1 or 2)-dimensional biplot space. If they detect aesthetics of the
-form `..coord[0-9]+`, then `..coord1` and `..coord2` are converted to `x` and
-`y` while any remaining are ignored.
+form \verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and
+\code{y} while any remaining are ignored.
 
-Other transformations (e.g. [stat_spantree()]) yield different results in a
+Other transformations (e.g. \code{\link[=stat_spantree]{stat_spantree()}}) yield different results in a
 lower-dimensional biplot when they are computed before versus after
 projection. If the stat layer detects these aesthetics, then the
 transformation is performed before projection, and the results in the first
-two dimensions are returned as `x` and `y`.
+two dimensions are returned as \code{x} and \code{y}.
 
-A small number of transformations ([stat_rule()]) are incompatible with
-ordination aesthetics but will accept `ord_aes()` without warning.
+A small number of transformations (\code{\link[=stat_rule]{stat_rule()}}) are incompatible with
+ordination aesthetics but will accept \code{ord_aes()} without warning.
 }
 
 \examples{

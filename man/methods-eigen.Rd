@@ -62,27 +62,25 @@
 \item{x}{An ordination object.}
 }
 \value{
-The recovery generics `recover_*()` return [core model
-  components][recoverers], [distribution of inertia][conference],
-  [supplementary elements][supplementation], and [intrinsic
-  metadata][augmentation]; but they require methods for each model class to
-  tell them what these components are.
+The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia},
+\link[=supplementation]{supplementary elements}, and \link[=augmentation]{intrinsic metadata}; but they require methods for each model class to
+tell them what these components are.
 
-  The generic [as_tbl_ord()] returns its input wrapped in the 'tbl_ord'
-  class. Its methods determine what model classes it is allowed to wrap. It
-  then provides 'tbl_ord' methods with access to the recoverers and hence to
-  the model components.
+The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap. It
+then provides 'tbl_ord' methods with access to the recoverers and hence to
+the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
-  objects of class `"eigen"` returned by [base::eigen()] when the parameter
-  `only.values` is set to `FALSE` or of class `"eigen_ord"` returned by
-  [eigen_ord()].
+objects of class \code{"eigen"} returned by \code{\link[base:eigen]{base::eigen()}} when the parameter
+\code{only.values} is set to \code{FALSE} or of class \code{"eigen_ord"} returned by
+\code{\link[=eigen_ord]{eigen_ord()}}.
 }
 \details{
-[base::eigen()] usually returns an object of class `"eigen"`, which contains
+\code{\link[base:eigen]{base::eigen()}} usually returns an object of class \code{"eigen"}, which contains
 the numerical eigendecomposition without annotations such as row and column
-names. To facilitate downstream analysis, [eigen_ord()] returns a modified
+names. To facilitate downstream analysis, \code{\link[=eigen_ord]{eigen_ord()}} returns a modified
 'eigen' object with row names taken (if available) from the original data and
 column names indicating the integer index of each eigenvector.
 }

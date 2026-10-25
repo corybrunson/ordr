@@ -1,7 +1,10 @@
 # Plot and biplot methods for 'tbl_ord' objects
 
-Adapt \*\*stats\*\* 'prcomp' and 'princomp' methods for \`plot()\`,
-\`screeplot()\`, and \`biplot()\` generics to 'tbl_ord' objects.
+Adapt **stats** 'prcomp' and 'princomp' methods for
+[`plot()`](https://rdrr.io/r/graphics/plot.default.html),
+[`screeplot()`](https://rdrr.io/r/stats/screeplot.html), and
+[`biplot()`](https://rdrr.io/r/stats/biplot.html) generics to 'tbl_ord'
+objects.
 
 ## Usage
 
@@ -37,19 +40,26 @@ Nothing, but a plot is produced on the current graphics device.
 
 ## Details
 
-These methods defer to any \`plot()\` and \`biplot()\` methods for the
+These methods defer to any
+[`plot()`](https://rdrr.io/r/graphics/plot.default.html) and
+[`biplot()`](https://rdrr.io/r/stats/biplot.html) methods for the
 original, underlying model classes of 'tbl_ord' objects. If none are
-found: Following the examples of \[stats::plot.prcomp()\] and
-\[stats::plot.princomp()\], \`plot.tbl_ord()\` calls on
-\[stats::screeplot()\] to produce a scree plot of the decomposition of
-variance in the singular value decomposition. Similarly following
-\[stats::biplot.prcomp()\] and \[stats::biplot.princomp()\],
-\`biplot.tbl_ord()\` produces a biplot of both rows and columns, using
+found: Following the examples of
+[`stats::plot.prcomp()`](https://rdrr.io/r/stats/prcomp.html) and
+[`stats::plot.princomp()`](https://rdrr.io/r/stats/princomp.html),
+`plot.tbl_ord()` calls on
+[`stats::screeplot()`](https://rdrr.io/r/stats/screeplot.html) to
+produce a scree plot of the decomposition of variance in the singular
+value decomposition. Similarly following
+[`stats::biplot.prcomp()`](https://rdrr.io/r/stats/biplot.princomp.html)
+and
+[`stats::biplot.princomp()`](https://rdrr.io/r/stats/biplot.princomp.html),
+`biplot.tbl_ord()` produces a biplot of both rows and columns, using
 text labels when available and markers otherwise, with rows and columns
 distinguished by color and no additional annotation (e.g. vectors). The
-biplot confers inertia according to \[get_conference()\] unless the
-proportions do not sum to 1, in which case it produces a symmetric
-biplot (inertia conferred equally to rows and columns).
+biplot confers inertia according to [`get_conference()`](conference.md)
+unless the proportions do not sum to 1, in which case it produces a
+symmetric biplot (inertia conferred equally to rows and columns).
 
 ## Examples
 

@@ -7,49 +7,45 @@
 facet_ord(coords = NULL, scales = NULL, space = NULL)
 }
 \arguments{
-\item{coords}{Coordinates to include. Can be:
+\item{coords}{Coordinates to include, in one of several formats:
 \itemize{
-  \item \code{NULL} (default): all coordinates
-  \item A single integer: number of first coordinates to include (if exceeds
-    dimension, a warning is issued and all are used)
-  \item A character scalar: a single coordinate name
-  \item A numeric vector: specific coordinate indices (1-based); error if any
-    index exceeds the dimension
-  \item A character vector: specific coordinate names; error if any name is
-    not found exactly
+\item \code{NULL} (default): all coordinates
+\item Integer scalar: number of first coordinates
+\item Integer vector: subset of coordinates
+\item Character scalar: single coordinate name
+\item Character vector: subset of coordinate names
 }}
 
 \item{scales}{A character scalar indicating whether all panels share the same
-x and y coordinate scales (`"fixed"`) or whether the x and y scales are
-free to differ between panels (`"free"`). By default, `NULL`. Unlike
-[facet_grid()], no x- or y-specific values are available.}
+x and y coordinate scales (\code{"fixed"}) or whether the x and y scales are
+free to differ between panels (\code{"free"}). By default, \code{NULL}. Unlike
+\code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}, no x- or y-specific values are available.}
 
 \item{space}{A character scalar indicating whether all panels are the same
-size (`"fixed"`) or whether each panel is sized proportionally to the
-ranges of its coordinate scales (`"free"`). By default, `NULL`. Unlike
-[facet_grid()], no x- or y-specific values are available.}
+size (\code{"fixed"}) or whether each panel is sized proportionally to the
+ranges of its coordinate scales (\code{"free"}). By default, \code{NULL}. Unlike
+\code{\link[ggplot2:facet_grid]{facet_grid()}}, no x- or y-specific values are available.}
 }
 \value{
-A `FacetOrd` ggproto object to be added to a [ggbiplot()].
+A \code{FacetOrd} ggproto object to be added to a \code{\link[=ggbiplot]{ggbiplot()}}.
 }
 \description{
 Facet biplots using all ordered pairs of scaffolding coordinates
-  in an ordination object.
+in an ordination object.
 }
 \details{
-`facet_ord()` is intended to be added to a plot produced by
-  [ggbiplot()], which stores the recovered ordination coordinates in the
-  fortified data of each layer. Adding `facet_ord()` replaces the `x` and `y`
-  mappings with internal panel-specific columns, so that the coordinates
-  mapped in the original call are used only to set the coordinate system.
+\code{facet_ord()} is intended to be added to a plot produced by
+\code{\link[=ggbiplot]{ggbiplot()}}, which stores the recovered ordination coordinates in the
+fortified data of each layer. Adding \code{facet_ord()} replaces the \code{x} and \code{y}
+mappings with internal panel-specific columns, so that the coordinates
+mapped in the original call are used only to set the coordinate system.
 
-  As in [ggplot2::facet_grid()], the `scales` and `space` parameters control
-  the scales and sizes of the panels. Setting either parameter to a value
-  also sets the other to the same value, unless both are set; if neither is
-  set, both default to `"fixed"`. Setting `scales = "fixed"` obtains the same
-  plot regardless of `space`. Pairing `scales = "free"` with `space =
-  "fixed"` warps aspect ratios away from 1 and is discouraged though not
-  warned against.
+As in \code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}, the \code{scales} and \code{space} parameters control
+the scales and sizes of the panels. Setting either parameter to a value
+also sets the other to the same value, unless both are set; if neither is
+set, both default to \code{"fixed"}. Setting \code{scales = "fixed"} obtains the same
+plot regardless of \code{space}. Pairing \code{scales = "free"} with \code{space = "fixed"} warps aspect ratios away from 1 and is discouraged though not
+warned against.
 }
 \examples{
 # scaled PCA of Anderson iris measurements
@@ -134,5 +130,5 @@ hec_ca \%>\%
   )
 }
 \seealso{
-[ggbiplot()], [ggplot2::facet_grid()]
+\code{\link[=ggbiplot]{ggbiplot()}}, \code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}
 }

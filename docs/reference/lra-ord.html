@@ -6,8 +6,8 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Log-ratio analysis — lra-ord"><meta name="description" content="Represent log-ratios between variables based on their values on
-  a population of cases."><meta property="og:description" content="Represent log-ratios between variables based on their values on
-  a population of cases."></head><body>
+a population of cases."><meta property="og:description" content="Represent log-ratios between variables based on their values on
+a population of cases."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -48,7 +48,7 @@
 
     <div class="ref-description section level2">
     <p>Represent log-ratios between variables based on their values on
-  a population of cases.</p>
+a population of cases.</p>
     </div>
 
     <div class="section level2">
@@ -84,7 +84,7 @@
 
 
 <dt id="arg-compositional">compositional<a class="anchor" aria-label="anchor" href="#arg-compositional"></a></dt>
-<dd><p>Logical; whether to normalize rows of `x` to sum to 1.</p></dd>
+<dd><p>Logical; whether to normalize rows of <code>x</code> to sum to 1.</p></dd>
 
 
 <dt id="arg-weighted">weighted<a class="anchor" aria-label="anchor" href="#arg-weighted"></a></dt>
@@ -101,7 +101,7 @@
 
 <dt id="arg-main-var-axes-">main, var.axes, ...<a class="anchor" aria-label="anchor" href="#arg-main-var-axes-"></a></dt>
 <dd><p>Parameters passed to other plotting methods (in the
-case of `main`, after being [force()]d.</p></dd>
+case of <code>main</code>, after being <code><a href="https://rdrr.io/r/base/force.html" class="external-link">force()</a></code>d.</p></dd>
 
 
 <dt id="arg-choices">choices<a class="anchor" aria-label="anchor" href="#arg-choices"></a></dt>
@@ -110,29 +110,29 @@ case of `main`, after being [force()]d.</p></dd>
 
 <dt id="arg-scale">scale<a class="anchor" aria-label="anchor" href="#arg-scale"></a></dt>
 <dd><p>Numeric; values between 0 and 1 that control how inertia is
-conferred unto the points: Row (`i = 1L`) and column (`i = 2L`) coordinates
-are scaled by `sv ^ scale[[i]]`. If a single value `scale` is passed, it is
-assigned to the rows while `1 - scale` is assigned to the columns.</p></dd>
+conferred unto the points: Row (<code>i = 1L</code>) and column (<code>i = 2L</code>) coordinates
+are scaled by <code>sv ^ scale[[i]]</code>. If a single value <code>scale</code> is passed, it is
+assigned to the rows while <code>1 - scale</code> is assigned to the columns.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>Given an \(n * p\) data matrix and setting \(r=min(n,p)\),
-  `lra()` returns a list of class `"lra"` containing three elements:</p><dl><dt>`sv`</dt>
+<code>lra()</code> returns a list of class <code>"lra"</code> containing three elements:</p><dl><dt><code>sv</code></dt>
 <dd><p>The \(r-1\) singular values</p></dd>
 
-  <dt>`row.coords`</dt>
+<dt><code>row.coords</code></dt>
 <dd><p>The \(n * (r-1)\) matrix
-                      of row standard coordinates.</p></dd>
+of row standard coordinates.</p></dd>
 
-  <dt>`column.coords`</dt>
+<dt><code>column.coords</code></dt>
 <dd><p>The \(p * (r-1)\) matrix
-                         of column standard coordinates.</p></dd>
+of column standard coordinates.</p></dd>
 
-  <dt>`row.weights`</dt>
+<dt><code>row.weights</code></dt>
 <dd><p>The weights used to scale the row coordinates.</p></dd>
 
-  <dt>`column.weights`</dt>
+<dt><code>column.weights</code></dt>
 <dd><p>The weights used to scale the column coordinates.</p></dd>
 
 
@@ -144,7 +144,7 @@ data, usually weighted by row and column totals. The technique is suitable
 for positive-valued variables on a common scale (e.g. percentages). The
 distances between variables' coordinates (in the full-dimensional space) are
 their pairwise log-ratios. The distances between cases' coordinates are
-called their _log-ratio distances_, and the total variance is the weighted
+called their <em>log-ratio distances</em>, and the total variance is the weighted
 sum of their squares.</p>
 <p>LRA is not implemented in standard R distributions but is a useful member of
 the ordination toolkit. This is a minimal implementation following
@@ -152,9 +152,9 @@ Greenacre's (2010) exposition in Chapter 7.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>Greenacre MJ (2010) _Biplots in Practice_. Fundacion BBVA, ISBN:
+    <p>Greenacre MJ (2010) <em>Biplots in Practice</em>. Fundacion BBVA, ISBN:
 978-84-923846.
-&lt;https://www.fbbva.es/microsite/multivariate-statistics/biplots.html&gt;</p>
+<a href="https://www.fbbva.es/microsite/multivariate-statistics/biplots.html" class="external-link">https://www.fbbva.es/microsite/multivariate-statistics/biplots.html</a></p>
     </div>
 
     <div class="section level2">

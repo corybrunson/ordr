@@ -1,10 +1,10 @@
 # Convenience geoms for row and column matrix factors
 
-These geometric element layers (geoms) pair conventional \*\*ggplot2\*\*
-geoms with \[stat_rows()\] or \[stat_cols()\] in order to render
-elements for one or the other matrix factor of a tbl_ord. They
-understand the same aesthetics as their corresponding conventional
-geoms.
+These geometric element layers (geoms) pair conventional **ggplot2**
+geoms with [`stat_rows()`](stat_rows.md) or
+[`stat_cols()`](stat_rows.md) in order to render elements for one or the
+other matrix factor of a tbl_ord. They understand the same aesthetics as
+their corresponding conventional geoms.
 
 ## Usage
 
@@ -924,11 +924,13 @@ geom_cols_interpolation(
 
 - ...:
 
-  Additional arguments passed to \[ggplot2::layer()\].
+  Additional arguments passed to
+  [`ggplot2::layer()`](https://ggplot2.tidyverse.org/reference/layer.html).
 
 - na.rm:
 
-  Passed to \[ggplot2::layer()\].
+  Passed to
+  [`ggplot2::layer()`](https://ggplot2.tidyverse.org/reference/layer.html).
 
 - show.legend:
 
@@ -1223,14 +1225,15 @@ geom_cols_interpolation(
 
 - new_data:
 
-  A list (best structured as a \[data.frame\]\[base::data.frame\]) of
-  row (\`geom_cols_interpolation()\`) or column
-  (\`geom_rows_interpolation()\`) values to interpolate.
+  A list (best structured as a
+  [data.frame](https://rdrr.io/r/base/data.frame.html)) of row
+  (`geom_cols_interpolation()`) or column (`geom_rows_interpolation()`)
+  values to interpolate.
 
 - type:
 
-  Character value matched to \`"centroid"\` or \`"sequence"\`; the type
-  of operations used to visualize interpolation.
+  Character value matched to `"centroid"` or `"sequence"`; the type of
+  operations used to visualize interpolation.
 
 - point.fill:
 
@@ -1239,7 +1242,7 @@ geom_cols_interpolation(
 
 ## Value
 
-A ggproto \[layer\]\[ggplot2::layer\].
+A ggproto [layer](https://ggplot2.tidyverse.org/reference/layer.html).
 
 ## See also
 

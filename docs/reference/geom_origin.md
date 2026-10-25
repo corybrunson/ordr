@@ -1,7 +1,7 @@
 # Marker or unit circle at the origin
 
-\`geom_origin()\` renders a symbol, either a set of crosshairs or a
-circle, at the origin. \`geom_unit_circle()\` renders the unit circle,
+`geom_origin()` renders a symbol, either a set of crosshairs or a
+circle, at the origin. `geom_unit_circle()` renders the unit circle,
 centered at the origin with radius 1.
 
 ## Usage
@@ -60,21 +60,23 @@ geom_unit_circle(
 
 - marker:
 
-  The symbol to be drawn at the origin; matched to \`"crosshairs"\` or
-  \`"circle"\`.
+  The symbol to be drawn at the origin; matched to `"crosshairs"` or
+  `"circle"`.
 
 - radius:
 
-  A \[grid::unit()\] object that sets the radius of the crosshairs or of
-  the circle.
+  A [`grid::unit()`](https://rdrr.io/r/grid/unit.html) object that sets
+  the radius of the crosshairs or of the circle.
 
 - ...:
 
-  Additional arguments passed to \[ggplot2::layer()\].
+  Additional arguments passed to
+  [`ggplot2::layer()`](https://ggplot2.tidyverse.org/reference/layer.html).
 
 - na.rm:
 
-  Passed to \[ggplot2::layer()\].
+  Passed to
+  [`ggplot2::layer()`](https://ggplot2.tidyverse.org/reference/layer.html).
 
 - show.legend:
 
@@ -100,31 +102,40 @@ geom_unit_circle(
 - scale.factor:
 
   The circle radius; should remain at its default value 1 or passed the
-  same value as \[ggbiplot()\]. (This is an imperfect fix that may be
-  changed in a future version.)
+  same value as [`ggbiplot()`](ggbiplot.md). (This is an imperfect fix
+  that may be changed in a future version.)
 
 ## Value
 
-A ggproto \[layer\]\[ggplot2::layer\].
+A ggproto [layer](https://ggplot2.tidyverse.org/reference/layer.html).
 
 ## Biplot layers
 
-\[ggbiplot()\] uses \[ggplot2::fortify()\] internally to produce a
-single data frame with a \`.matrix\` column distinguishing the subjects
-(\`"rows"\`) and variables (\`"cols"\`). The stat layers \`stat_rows()\`
-and \`stat_cols()\` simply filter the data frame to one of these two.
+[`ggbiplot()`](ggbiplot.md) uses
+[`ggplot2::fortify()`](https://ggplot2.tidyverse.org/reference/fortify.html)
+internally to produce a single data frame with a `.matrix` column
+distinguishing the subjects (`"rows"`) and variables (`"cols"`). The
+stat layers [`stat_rows()`](stat_rows.md) and
+[`stat_cols()`](stat_rows.md) simply filter the data frame to one of
+these two.
 
-The geom layers \`geom_rows\_\*()\` and \`geom_cols\_\*()\` call the
+The geom layers `geom_rows_*()` and `geom_cols_*()` call the
 corresponding stat in order to render plot elements for the
-corresponding factor matrix. \`geom_dims\_\*()\` selects a default
-matrix based on common practice, e.g. points for rows and arrows for
-columns.
+corresponding factor matrix. `geom_dims_*()` selects a default matrix
+based on common practice, e.g. points for rows and arrows for columns.
 
 ## Aesthetics
 
-\`geom_origin()\` accepts no aesthetics. \`geom_unit_circle()\`
-understands the following aesthetics (none required): - \`linetype\` -
-\`linewidth\` - \`colour\` - \`alpha\`
+`geom_origin()` accepts no aesthetics. `geom_unit_circle()` understands
+the following aesthetics (none required):
+
+- `linetype`
+
+- `linewidth`
+
+- `colour`
+
+- `alpha`
 
 ## See also
 

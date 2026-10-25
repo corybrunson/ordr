@@ -5,9 +5,9 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Plot and biplot methods for 'tbl_ord' objects — plot.tbl_ord"><meta name="description" content="Adapt **stats** 'prcomp' and 'princomp' methods for `plot()`,
-  `screeplot()`, and `biplot()` generics to 'tbl_ord' objects."><meta property="og:description" content="Adapt **stats** 'prcomp' and 'princomp' methods for `plot()`,
-  `screeplot()`, and `biplot()` generics to 'tbl_ord' objects."></head><body>
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Plot and biplot methods for 'tbl_ord' objects — plot.tbl_ord"><meta name="description" content="Adapt stats 'prcomp' and 'princomp' methods for plot(),
+screeplot(), and biplot() generics to 'tbl_ord' objects."><meta property="og:description" content="Adapt stats 'prcomp' and 'princomp' methods for plot(),
+screeplot(), and biplot() generics to 'tbl_ord' objects."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -47,8 +47,8 @@
     </div>
 
     <div class="ref-description section level2">
-    <p>Adapt **stats** 'prcomp' and 'princomp' methods for `plot()`,
-  `screeplot()`, and `biplot()` generics to 'tbl_ord' objects.</p>
+    <p>Adapt <strong>stats</strong> 'prcomp' and 'princomp' methods for <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>,
+<code><a href="https://rdrr.io/r/stats/screeplot.html" class="external-link">screeplot()</a></code>, and <code><a href="https://rdrr.io/r/stats/biplot.html" class="external-link">biplot()</a></code> generics to 'tbl_ord' objects.</p>
     </div>
 
     <div class="section level2">
@@ -86,16 +86,16 @@ enable parsing of object name).</p></dd>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>These methods defer to any `plot()` and `biplot()` methods for the original,
+    <p>These methods defer to any <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> and <code><a href="https://rdrr.io/r/stats/biplot.html" class="external-link">biplot()</a></code> methods for the original,
 underlying model classes of 'tbl_ord' objects. If none are found: Following
-the examples of [stats::plot.prcomp()] and [stats::plot.princomp()],
-`plot.tbl_ord()` calls on [stats::screeplot()] to produce a scree plot of the
+the examples of <code><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">stats::plot.prcomp()</a></code> and <code><a href="https://rdrr.io/r/stats/princomp.html" class="external-link">stats::plot.princomp()</a></code>,
+<code>plot.tbl_ord()</code> calls on <code><a href="https://rdrr.io/r/stats/screeplot.html" class="external-link">stats::screeplot()</a></code> to produce a scree plot of the
 decomposition of variance in the singular value decomposition. Similarly
-following [stats::biplot.prcomp()] and [stats::biplot.princomp()],
-`biplot.tbl_ord()` produces a biplot of both rows and columns, using text
+following <code><a href="https://rdrr.io/r/stats/biplot.princomp.html" class="external-link">stats::biplot.prcomp()</a></code> and <code><a href="https://rdrr.io/r/stats/biplot.princomp.html" class="external-link">stats::biplot.princomp()</a></code>,
+<code>biplot.tbl_ord()</code> produces a biplot of both rows and columns, using text
 labels when available and markers otherwise, with rows and columns
 distinguished by color and no additional annotation (e.g. vectors). The
-biplot confers inertia according to [get_conference()] unless the proportions
+biplot confers inertia according to <code><a href="conference.html">get_conference()</a></code> unless the proportions
 do not sum to 1, in which case it produces a symmetric biplot (inertia
 conferred equally to rows and columns).</p>
     </div>

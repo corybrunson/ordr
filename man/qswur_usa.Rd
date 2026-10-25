@@ -4,21 +4,21 @@
 \alias{qswur_usa}
 \title{U.S. university rankings}
 \format{
-A [tibble][tibble::tibble] of 13 variables on 612 cases:
+A \link[tibble:tibble]{tibble} of 13 variables on 612 cases:
 \describe{
-  \item{`year`}{year of rankings}
-  \item{`institution`}{institution of higher learning}
-  \item{`size`}{size category of institution}
-  \item{`focus`}{subject range of institution}
-  \item{`res`}{research intensity of institution}
-  \item{`age`}{age classification of institution}
-  \item{`status`}{status of institution}
-  \item{`rk_academic`}{rank by academic reputation}
-  \item{`rk_employer`}{rank by employer reputation}
-  \item{`rk_ratio`}{rank by faculty--student ratio}
-  \item{`rk_citations`}{rank by citations per faculty}
-  \item{`rk_intl_faculty`}{rank by international faculty ratio}
-  \item{`rk_intl_students`}{rank by international student ratio}
+\item{\code{year}}{year of rankings}
+\item{\code{institution}}{institution of higher learning}
+\item{\code{size}}{size category of institution}
+\item{\code{focus}}{subject range of institution}
+\item{\code{res}}{research intensity of institution}
+\item{\code{age}}{age classification of institution}
+\item{\code{status}}{status of institution}
+\item{\code{rk_academic}}{rank by academic reputation}
+\item{\code{rk_employer}}{rank by employer reputation}
+\item{\code{rk_ratio}}{rank by faculty--student ratio}
+\item{\code{rk_citations}}{rank by citations per faculty}
+\item{\code{rk_intl_faculty}}{rank by international faculty ratio}
+\item{\code{rk_intl_students}}{rank by international student ratio}
 }
 }
 \source{
@@ -29,7 +29,7 @@ data(qswur_usa)
 }
 \description{
 Classifications and rankings of U.S. universities for the years
-  2017--2020.
+2017--2020.
 }
 \details{
 Ranking data were obtained from the public QS website.

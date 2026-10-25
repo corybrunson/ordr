@@ -1,16 +1,17 @@
-# \*\*dplyr\*\* verbs for tbl_ord factors
+# **dplyr** verbs for tbl_ord factors
 
-These functions adapt \[dplyr\]\[dplyr::dplyr\] verbs to the factors of
-a \[tbl_ord\].
+These functions adapt
+[dplyr](https://dplyr.tidyverse.org/reference/dplyr-package.html) verbs
+to the factors of a [tbl_ord](tbl_ord.md).
 
 The raw verbs are not defined for tbl_ords; instead, each verb has two
 analogues, corresponding to the two matrix factors. They each rely on a
-common workhorse function, which takes the composition of the
-\*\*dplyr\*\* verb with \`annotation\_\*\`, applied to the factor,
-removes any variables corresponding to coordinates or already annotated,
-and only then assigns it as the new \`"\*\_annotation"\` attribute of
-\`.data\` (see \[annotation\]). Note that these functions are not
-generics and so cannot be extended to other classes.
+common workhorse function, which takes the composition of the **dplyr**
+verb with `annotation_*`, applied to the factor, removes any variables
+corresponding to coordinates or already annotated, and only then assigns
+it as the new `"*_annotation"` attribute of `.data` (see
+[annotation](annotation.md)). Note that these functions are not generics
+and so cannot be extended to other classes.
 
 ## Usage
 
@@ -50,31 +51,33 @@ left_join_cols(.data, ...)
 
 - .data:
 
-  An object of class '\[tbl_ord\]'.
+  An object of class '[tbl_ord](tbl_ord.md)'.
 
 - var:
 
-  A variable specified as in \[dplyr::pull()\].
+  A variable specified as in
+  [`dplyr::pull()`](https://dplyr.tidyverse.org/reference/pull.html).
 
 - .matrix:
 
   A character string partially matched (lowercase) to several indicators
   for one or both matrices in a matrix decomposition used for
-  ordination. The standard values are \`"rows"\`, \`"cols"\`, and
-  \`"dims"\` (for both).
+  ordination. The standard values are `"rows"`, `"cols"`, and `"dims"`
+  (for both).
 
 - ...:
 
-  Comma-separated unquoted expressions as in, e.g., \[dplyr::select()\].
+  Comma-separated unquoted expressions as in, e.g.,
+  [`dplyr::select()`](https://dplyr.tidyverse.org/reference/select.html).
 
 - elements:
 
   Character vector; which elements of each factor for which to render
-  graphical elements. One of \`"active"\` (the default) or any
+  graphical elements. One of `"active"` (the default) or any
   supplementary element type defined by the specific class methods (e.g.
-  \`"score"\` for 'factanal', 'lda_ord', and 'cancord_ord' and
-  \`"intraset"\` and \`"interset"\` for 'cancor_ord'), via \[partial
-  matching\]\[base::match.arg()\].
+  `"score"` for 'factanal', 'lda_ord', and 'cancord_ord' and
+  `"intraset"` and `"interset"` for 'cancor_ord'), via [partial
+  matching](https://rdrr.io/r/base/match.arg.html).
 
 ## Value
 

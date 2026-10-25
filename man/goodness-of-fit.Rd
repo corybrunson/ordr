@@ -18,43 +18,43 @@ ord_predictivity(x, .matrix, rank = NULL)
 \item{x}{A 'tbl_ord' object.}
 
 \item{rank}{The maximum rank for which to compute statistics; the default,
-`NULL` computes statistics up to the rank of the model.}
+\code{NULL} computes statistics up to the rank of the model.}
 
 \item{.matrix}{A character string partially matched (lowercase) to several
 indicators for one or both matrices in a matrix decomposition used for
-ordination. The standard values are `"rows"`, `"cols"`, and `"dims"` (for
+ordination. The standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for
 both).}
 }
 \value{
 A vector, matrix, or list of matrices of numeric goodness-of-fit
-  statistics. If no items are found, a matrix will have zero rows.
+statistics. If no items are found, a matrix will have zero rows.
 }
 \description{
 Compute the quality, adequacy, and predictivity of a 'tbl_ord'
-  object from the retrieved matrix factors.
+object from the retrieved matrix factors.
 }
 \details{
 Gower, Gardner--Lubbe, & le Roux (2011) detail several measures of fit for
 biplots, most prominently
 \itemize{
-  \item the _quality_ of the \eqn{r}-dimensional biplot,
-        measured as the proportion of variance in the plot,
-        calculated as the quotient of the traces of
-        \eqn{\Lambda_r = {D_r}^2} and of \eqn{\Lambda = D^2}.
-  \item the _adequacy_ of the representation of the \eqn{j}-th row
-        (respectively, column) in the \eqn{r}-dimensional biplot,
-        calculated as the \eqn{j}-th diagonal element of
-        \eqn{U_r\ {U_r}^\top} (respectively, \eqn{V_r\ {V_r}^\top}),
-        understood as the fidelity of the projections
-        of the standard coordinates.
-  \item the _predictivity_ of the \eqn{j}-th row
-        (respectively, column) in the \eqn{r}-dimensional biplot,
-        measured as the quotient of the \eqn{j}-th diagonal elements of
-        \eqn{U_r\ \Lambda_r\ {U_r}^\top} and of \eqn{U\ \Lambda\ U^\top}
-        (respectively, of \eqn{V_r\ \Lambda_r\ {V_r}^\top}
-        and of \eqn{V\ \Lambda\ V^\top}),
-        understood as the fidelity of the projections
-        of the principal coordinates.
+\item the \emph{quality} of the \eqn{r}-dimensional biplot,
+measured as the proportion of variance in the plot,
+calculated as the quotient of the traces of
+\eqn{\Lambda_r = {D_r}^2} and of \eqn{\Lambda = D^2}.
+\item the \emph{adequacy} of the representation of the \eqn{j}-th row
+(respectively, column) in the \eqn{r}-dimensional biplot,
+calculated as the \eqn{j}-th diagonal element of
+\eqn{U_r\ {U_r}^\top} (respectively, \eqn{V_r\ {V_r}^\top}),
+understood as the fidelity of the projections
+of the standard coordinates.
+\item the \emph{predictivity} of the \eqn{j}-th row
+(respectively, column) in the \eqn{r}-dimensional biplot,
+measured as the quotient of the \eqn{j}-th diagonal elements of
+\eqn{U_r\ \Lambda_r\ {U_r}^\top} and of \eqn{U\ \Lambda\ U^\top}
+(respectively, of \eqn{V_r\ \Lambda_r\ {V_r}^\top}
+and of \eqn{V\ \Lambda\ V^\top}),
+understood as the fidelity of the projections
+of the principal coordinates.
 }
 These can be calculated directly from any SVD or EVD and interpreted for any
 technique based on them. In some cases they may also be calculated for
@@ -89,6 +89,6 @@ ord_predictivity(iris_pca, "f")
 ord_predictivity(iris_pca, "g")
 }
 \references{
-Gower JC, Gardner--Lubbe S, & le Roux NJ (2011) _Understanding Biplots_.
-Wiley, ISBN: 978-0-470-01255-0. <https://www.wiley.com/go/biplots>
+Gower JC, Gardner--Lubbe S, & le Roux NJ (2011) \emph{Understanding Biplots}.
+Wiley, ISBN: 978-0-470-01255-0. \url{https://www.wiley.com/go/biplots}
 }

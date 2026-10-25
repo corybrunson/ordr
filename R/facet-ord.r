@@ -17,21 +17,16 @@
 #'   "fixed"` warps aspect ratios away from 1 and is discouraged though not
 #'   warned against.
 #'
-#' @param coords Coordinates to include. Can be:
-#'   \itemize{
-#'     \item \code{NULL} (default): all coordinates
-#'     \item A single integer: number of first coordinates to include (if exceeds
-#'       dimension, a warning is issued and all are used)
-#'     \item A character scalar: a single coordinate name
-#'     \item A numeric vector: specific coordinate indices (1-based); error if any
-#'       index exceeds the dimension
-#'     \item A character vector: specific coordinate names; error if any name is
-#'       not found exactly
-#'   }
+#' @param coords Coordinates to include, in one of several formats:
+#'   - `NULL` (default): all coordinates
+#'   - Integer scalar: number of first coordinates
+#'   - Integer vector: subset of coordinates
+#'   - Character scalar: single coordinate name
+#'   - Character vector: subset of coordinate names
 #' @param scales A character scalar indicating whether all panels share the same
 #'   x and y coordinate scales (`"fixed"`) or whether the x and y scales are
 #'   free to differ between panels (`"free"`). By default, `NULL`. Unlike
-#'   [facet_grid()], no x- or y-specific values are available.
+#'   [ggplot2::facet_grid()], no x- or y-specific values are available.
 #' @param space A character scalar indicating whether all panels are the same
 #'   size (`"fixed"`) or whether each panel is sized proportionally to the
 #'   ranges of its coordinate scales (`"free"`). By default, `NULL`. Unlike

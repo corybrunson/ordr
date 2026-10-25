@@ -1,9 +1,9 @@
 # Convenience stats for row and column matrix factors
 
-These statistical transformations (stats) adapt conventional
-\*\*ggplot2\*\* stats to one or the other matrix factor of a tbl_ord, in
-lieu of \[stat_rows()\] or \[stat_cols()\]. They accept the same
-parameters as their corresponding conventional stats.
+These statistical transformations (stats) adapt conventional **ggplot2**
+stats to one or the other matrix factor of a tbl_ord, in lieu of
+[`stat_rows()`](stat_rows.md) or [`stat_cols()`](stat_rows.md). They
+accept the same parameters as their corresponding conventional stats.
 
 ## Usage
 
@@ -503,7 +503,8 @@ stat_cols_projection(
 
 - ...:
 
-  Additional arguments passed to \[ggplot2::layer()\].
+  Additional arguments passed to
+  [`ggplot2::layer()`](https://ggplot2.tidyverse.org/reference/layer.html).
 
 - contour:
 
@@ -674,31 +675,35 @@ stat_cols_projection(
 
 - ref_elements, ref_subset:
 
-  Analogues of \`elements\` and \`subset\` applied to \`referent\`.
+  Analogues of `elements` and `subset` applied to `referent`.
 
 ## Value
 
-A ggproto \[layer\]\[ggplot2::layer\].
+A ggproto [layer](https://ggplot2.tidyverse.org/reference/layer.html).
 
 ## Ordination aesthetics
 
 This statistical transformation is compatible with the convenience
-function \[ord_aes()\].
+function [`ord_aes()`](ggbiplot.md).
 
-Some transformations (e.g. \[stat_center()\]) commute with projection to
-the lower (1 or 2)-dimensional biplot space. If they detect aesthetics
-of the form \`..coord\[0-9\]+\`, then \`..coord1\` and \`..coord2\` are
-converted to \`x\` and \`y\` while any remaining are ignored.
+Some transformations (e.g.
+[`stat_center()`](https://corybrunson.github.io/gggda/reference/stat_center.html))
+commute with projection to the lower (1 or 2)-dimensional biplot space.
+If they detect aesthetics of the form `..coord[0-9]+`, then `..coord1`
+and `..coord2` are converted to `x` and `y` while any remaining are
+ignored.
 
-Other transformations (e.g. \[stat_spantree()\]) yield different results
-in a lower-dimensional biplot when they are computed before versus after
-projection. If the stat layer detects these aesthetics, then the
-transformation is performed before projection, and the results in the
-first two dimensions are returned as \`x\` and \`y\`.
+Other transformations (e.g.
+[`stat_spantree()`](https://corybrunson.github.io/gggda/reference/stat_spantree.html))
+yield different results in a lower-dimensional biplot when they are
+computed before versus after projection. If the stat layer detects these
+aesthetics, then the transformation is performed before projection, and
+the results in the first two dimensions are returned as `x` and `y`.
 
-A small number of transformations (\[stat_rule()\]) are incompatible
-with ordination aesthetics but will accept \`ord_aes()\` without
-warning.
+A small number of transformations
+([`stat_rule()`](https://corybrunson.github.io/gggda/reference/stat_rule.html))
+are incompatible with ordination aesthetics but will accept
+[`ord_aes()`](ggbiplot.md) without warning.
 
 ## See also
 

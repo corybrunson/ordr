@@ -14,7 +14,7 @@
 \method{fortify}{tbl_ord}(model, data, ..., .matrix = "dims", elements = "all")
 }
 \arguments{
-\item{x, model}{An object of class '[tbl_ord]'.}
+\item{x, model}{An object of class '\link{tbl_ord}'.}
 
 \item{...}{Additional arguments allowed by generics; currently ignored.}
 
@@ -22,61 +22,66 @@
 
 \item{.matrix}{A character string partially matched (lowercase) to several
 indicators for one or both matrices in a matrix decomposition used for
-ordination. The standard values are `"rows"`, `"cols"`, and `"dims"` (for
+ordination. The standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for
 both).}
 
 \item{elements}{Character vector; which elements of each factor for which to
-render graphical elements. One of `"active"` (the default) or any
+render graphical elements. One of \code{"active"} (the default) or any
 supplementary element type defined by the specific class methods (e.g.
-`"score"` for 'factanal', 'lda_ord', and 'cancord_ord' and `"intraset"` and
-`"interset"` for 'cancor_ord'), via [partial matching][base::match.arg()].}
+\code{"score"} for 'factanal', 'lda_ord', and 'cancord_ord' and \code{"intraset"} and
+\code{"interset"} for 'cancor_ord'), via \link[base:match.arg]{partial matching}.}
 }
 \value{
-A [tibble][tibble::tibble].
+A \link[tibble:tibble]{tibble}.
 }
 \description{
-These functions return [tibbles][tibble::tibble] that summarize
-  an object of class '[tbl_ord]'. `tidy()` output contains one row per
-  artificial coordinate and `glance()` output contains one row for the whole
-  ordination.
+These functions return \link[tibble:tibble]{tibbles} that summarize
+an object of class '\link{tbl_ord}'. \code{tidy()} output contains one row per
+artificial coordinate and \code{glance()} output contains one row for the whole
+ordination.
 }
 \details{
-Three generics popularized by the **ggplot2** and **broom** packages make use
-of the [augmentation] methods:
+Three generics popularized by the \strong{ggplot2} and \strong{broom} packages make use
+of the \link{augmentation} methods:
+\itemize{
+\item The \code{\link[generics:tidy]{generics::tidy()}} method
+summarizes information about model components, which here are the
+artificial coordinates created by ordinations. The output can be passed to
+\code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} to generate scree plots.
+The returned columns are
+\itemize{
+\item \code{name}: (the name of) the coordinate
+\item other columns extracted from the model,
+usually a single additional column of the singular or eigen values
+\item \code{inertia}: the multidimensional variance
+\item \code{prop_var}: the proportion of inertia
+\item \code{quality}: the cumulative proportion of variance
+}
+\item The \code{\link[generics:glance]{generics::glance()}} method
+reports information about the entire model, here always treated as one of a
+broader class of ordination models.
+The returned columns are
+\itemize{
+\item \code{rank}: the rank of the ordination model, i.e. the number of ordinates
+\item \code{n.row},\code{n.col}: the dimensions of the decomposed matrix
+\item \code{inertia}: the total inertia in the ordination
+\item \verb{prop.var.*}: the proportion of variance in the first 2 ordinates
+\item \code{class}: the class of the wrapped model object
+}
+\item The \code{\link[ggplot2:fortify]{ggplot2::fortify()}} method
+augments and collapses row and/or column data, depending on \code{.matrix} and
+\code{.element}, into a single tibble, in preparation for \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
+Its output resembles that of \code{\link[generics:augment]{generics::augment()}}, though rows in the
+output may correspond to rows, columns, or both of the original data. If
+\code{.matrix} is passed \code{"rows"}, \code{"cols"}, or \code{"dims"} (for both), then
+\code{fortify()} returns a tibble whose fields are obtained, in order, via
+\verb{get_*()}, \verb{recover_aug_*()}, and \verb{annotation_*()}.
+}
 
-* The [generics::tidy()] method
-  summarizes information about model components, which here are the
-  artificial coordinates created by ordinations. The output can be passed to
-  [ggplot2::ggplot()] to generate scree plots.
-  The returned columns are
-  - `name`: (the name of) the coordinate
-  - other columns extracted from the model,
-    usually a single additional column of the singular or eigen values
-  - `inertia`: the multidimensional variance
-  - `prop_var`: the proportion of inertia
-  - `quality`: the cumulative proportion of variance
-* The [generics::glance()] method
-  reports information about the entire model, here always treated as one of a
-  broader class of ordination models.
-  The returned columns are
-  - `rank`: the rank of the ordination model, i.e. the number of ordinates
-  - `n.row`,`n.col`: the dimensions of the decomposed matrix
-  - `inertia`: the total inertia in the ordination
-  - `prop.var.*`: the proportion of variance in the first 2 ordinates
-  - `class`: the class of the wrapped model object
-* The [ggplot2::fortify()] method
-  augments and collapses row and/or column data, depending on `.matrix` and
-  `.element`, into a single tibble, in preparation for [ggplot2::ggplot()].
-  Its output resembles that of [generics::augment()], though rows in the
-  output may correspond to rows, columns, or both of the original data. If
-  `.matrix` is passed `"rows"`, `"cols"`, or `"dims"` (for both), then
-  `fortify()` returns a tibble whose fields are obtained, in order, via
-  `get_*()`, `recover_aug_*()`, and `annotation_*()`.
-
-The tibble is assigned a `"coordinates"` attribute whose value is obtained
-via [get_coord()]. This facilitates some downstream functionality that relies
+The tibble is assigned a \code{"coordinates"} attribute whose value is obtained
+via \code{\link[=get_coord]{get_coord()}}. This facilitates some downstream functionality that relies
 on more than those coordinates used as position aesthetics in a biplot, in
-particular [stat_spantree()].
+particular \code{\link[=stat_spantree]{stat_spantree()}}.
 }
 \examples{
 # illustrative ordination: PCA of iris data
@@ -115,5 +120,5 @@ rbind(
 )
 }
 \seealso{
-[augmentation] methods that must interface with tidiers.
+\link{augmentation} methods that must interface with tidiers.
 }

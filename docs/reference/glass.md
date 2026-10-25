@@ -11,25 +11,26 @@ data(glass)
 
 ## Format
 
-A \[tibble\]\[tibble::tibble\] with 68 cases and 16 variables:
+A [tibble](https://tibble.tidyverse.org/reference/tibble.html) with 68
+cases and 16 variables:
 
-- \`Site\`:
+- `Site`:
 
   site at which sample was found
 
-- \`Anal\`:
+- `Anal`:
 
   analysis identifier
 
-- \`Context\`:
+- `Context`:
 
   furnace identifier
 
-- \`Form\`:
+- `Form`:
 
   type of sample
 
-- \`SiO2, TiO2, Al2O3, FeO, MnO, MgO, CaO, Na2O, K2O, P2O5, Cl, SO3\`:
+- `SiO2, TiO2, Al2O3, FeO, MnO, MgO, CaO, Na2O, K2O, P2O5, Cl, SO3`:
 
   normalized weight percent oxide of each component
 
@@ -45,19 +46,19 @@ with weaker evidence of glass-making (Apollonia and Dor) and and from an
 Islamic-era site (Banias), were analyzed using X-ray spectrometry to
 determine their major components.
 
-Baxter & Freestone (2006) used these data to illustrate \[log-ratio
-analysis\]\[lra-ord\].
+Baxter & Freestone (2006) used these data to illustrate [log-ratio
+analysis](lra-ord.md).
 
 ## References
 
 Freestone IC, Gorin-Rosen Y, & Hughes MJ (2000) "Primary glass from
 Israel and the production of glass in Late Antiquity and the early
-Islamic period". \_La route du verre: Ateliers primaires et secondaires
-du second millénaire av. J.-C. au Moyen Âge\_: 65–83.
-\<https://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&idt=1158762\>
+Islamic period". *La route du verre: Ateliers primaires et secondaires
+du second millénaire av. J.-C. au Moyen Âge*: 65–83.
+<https://pascal-francis.inist.fr/vibad/index.php?action=getRecordDetail&idt=1158762>
 
 Baxter MJ & Freestone IC (2006) "Log-Ratio Compositional Data Analysis
-in Archaeometry". \_Archaeometry\_, \*\*48\*\*(3): 511–531.
+in Archaeometry". *Archaeometry*, **48**(3): 511–531.
 [doi:10.1111/j.1475-4754.2006.00270.x](https://doi.org/10.1111/j.1475-4754.2006.00270.x)
 
 ## Examples

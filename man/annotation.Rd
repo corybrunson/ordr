@@ -4,17 +4,17 @@
 \alias{annotation}
 \title{Annotate factors of 'tbl_ord' objects}
 \arguments{
-\item{annot}{A [data.frame][base::data.frame] having the same number of rows
-as `get_*(x)`.}
+\item{annot}{A \link[base:data.frame]{data.frame} having the same number of rows
+as \code{get_*(x)}.}
 }
 \description{
-These functions annotate the matrix factors of [tbl_ord]s with
-  additional variables, and retrieve these annotations.
-  
-The unexported `annotation_*()` and `set_annotation_*()` functions assign and
-retrieve values of the `"*_annotation"` attributes of `x`, which must have
-the same number of rows as `get_*(x)`.
+These functions annotate the matrix factors of \link{tbl_ord}s with
+additional variables, and retrieve these annotations.
+
+The unexported \verb{annotation_*()} and \verb{set_annotation_*()} functions assign and
+retrieve values of the \code{"*_annotation"} attributes of \code{x}, which must have
+the same number of rows as \code{get_*(x)}.
 }
 \seealso{
-[augmentation] methods that must interface with annotation.
+\link{augmentation} methods that must interface with annotation.
 }

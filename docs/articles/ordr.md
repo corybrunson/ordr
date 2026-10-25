@@ -494,7 +494,7 @@ sessioninfo::session_info()
 #>  collate  en_US.UTF-8
 #>  ctype    en_US.UTF-8
 #>  tz       America/New_York
-#>  date     2026-10-24
+#>  date     2026-10-25
 #>  pandoc   3.10 @ /opt/homebrew/bin/ (via rmarkdown)
 #>  quarto   1.9.38 @ /usr/local/bin/quarto
 #> 
@@ -526,7 +526,7 @@ sessioninfo::session_info()
 #>  lifecycle      1.0.5      2026-01-08 [2] CRAN (R 4.5.2)
 #>  magrittr       2.0.5      2026-04-04 [2] CRAN (R 4.5.2)
 #>  MASS         * 7.3-66     2026-07-15 [2] CRAN (R 4.5.2)
-#>  ordr         * 0.2.0.0002 2026-10-24 [1] local
+#>  ordr         * 0.2.0.0002 2026-10-25 [1] local
 #>  otel           0.2.0      2025-08-29 [2] CRAN (R 4.5.0)
 #>  pillar         1.11.1     2025-09-17 [2] CRAN (R 4.5.0)
 #>  pkgconfig      2.0.3      2019-09-22 [2] CRAN (R 4.5.0)
@@ -553,7 +553,7 @@ sessioninfo::session_info()
 #>  xfun           0.60       2026-07-09 [2] CRAN (R 4.5.2)
 #>  yaml           2.3.12     2025-12-10 [2] CRAN (R 4.5.2)
 #> 
-#>  [1] /private/var/folders/4p/3cy0qmp15x9216qsqhh84kzm0000gn/T/RtmpnepjTW/temp_libpath162b9929cbfb
+#>  [1] /private/var/folders/4p/3cy0qmp15x9216qsqhh84kzm0000gn/T/RtmpOJtqlx/temp_libpathb07d422cc0cd
 #>  [2] /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library
 #>  * ── Packages attached to the search path.
 #> 

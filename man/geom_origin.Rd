@@ -48,15 +48,15 @@ the plot data. The return value must be a \code{data.frame}, and
 will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
-\item{marker}{The symbol to be drawn at the origin; matched to `"crosshairs"`
-or `"circle"`.}
+\item{marker}{The symbol to be drawn at the origin; matched to \code{"crosshairs"}
+or \code{"circle"}.}
 
-\item{radius}{A [grid::unit()] object that sets the radius of the crosshairs
+\item{radius}{A \code{\link[grid:unit]{grid::unit()}} object that sets the radius of the crosshairs
 or of the circle.}
 
-\item{...}{Additional arguments passed to [ggplot2::layer()].}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
-\item{na.rm}{Passed to [ggplot2::layer()].}
+\item{na.rm}{Passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -74,38 +74,40 @@ the default plot specification, e.g. \code{\link[ggplot2:annotation_borders]{ann
 \item{segments}{The number of segments to be used in drawing the circle.}
 
 \item{scale.factor}{The circle radius; should remain at its default value 1
-or passed the same value as [ggbiplot()]. (This is an imperfect fix that
+or passed the same value as \code{\link[=ggbiplot]{ggbiplot()}}. (This is an imperfect fix that
 may be changed in a future version.)}
 }
 \value{
-A ggproto [layer][ggplot2::layer].
+A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
-`geom_origin()` renders a symbol, either a set of crosshairs or
-  a circle, at the origin. `geom_unit_circle()` renders the unit circle,
-  centered at the origin with radius 1.
+\code{geom_origin()} renders a symbol, either a set of crosshairs or
+a circle, at the origin. \code{geom_unit_circle()} renders the unit circle,
+centered at the origin with radius 1.
 }
 \section{Biplot layers}{
 
-[ggbiplot()] uses [ggplot2::fortify()] internally to produce a single data
-frame with a `.matrix` column distinguishing the subjects (`"rows"`) and
-variables (`"cols"`). The stat layers `stat_rows()` and `stat_cols()` simply
+\code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
+frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
+variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
 filter the data frame to one of these two.
 
-The geom layers `geom_rows_*()` and `geom_cols_*()` call the corresponding
+The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-`geom_dims_*()` selects a default matrix based on common practice, e.g.
+\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.
 }
 
 \section{Aesthetics}{
 
-`geom_origin()` accepts no aesthetics.
-`geom_unit_circle()` understands the following aesthetics (none required):
-- `linetype`
-- `linewidth`
-- `colour`
-- `alpha`
+\code{geom_origin()} accepts no aesthetics.
+\code{geom_unit_circle()} understands the following aesthetics (none required):
+\itemize{
+\item \code{linetype}
+\item \code{linewidth}
+\item \code{colour}
+\item \code{alpha}
+}
 }
 
 \examples{

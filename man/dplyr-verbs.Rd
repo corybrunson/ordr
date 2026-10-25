@@ -17,7 +17,7 @@
 \alias{cbind_cols}
 \alias{left_join_rows}
 \alias{left_join_cols}
-\title{**dplyr** verbs for tbl_ord factors}
+\title{\strong{dplyr} verbs for tbl_ord factors}
 \usage{
 pull_factor(.data, var = -1, .matrix)
 
@@ -50,39 +50,39 @@ left_join_rows(.data, ...)
 left_join_cols(.data, ...)
 }
 \arguments{
-\item{.data}{An object of class '[tbl_ord]'.}
+\item{.data}{An object of class '\link{tbl_ord}'.}
 
-\item{var}{A variable specified as in [dplyr::pull()].}
+\item{var}{A variable specified as in \code{\link[dplyr:pull]{dplyr::pull()}}.}
 
 \item{.matrix}{A character string partially matched (lowercase) to several
 indicators for one or both matrices in a matrix decomposition used for
-ordination. The standard values are `"rows"`, `"cols"`, and `"dims"` (for
+ordination. The standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for
 both).}
 
 \item{...}{Comma-separated unquoted expressions as in, e.g.,
-[dplyr::select()].}
+\code{\link[dplyr:select]{dplyr::select()}}.}
 
 \item{elements}{Character vector; which elements of each factor for which to
-render graphical elements. One of `"active"` (the default) or any
+render graphical elements. One of \code{"active"} (the default) or any
 supplementary element type defined by the specific class methods (e.g.
-`"score"` for 'factanal', 'lda_ord', and 'cancord_ord' and `"intraset"` and
-`"interset"` for 'cancor_ord'), via [partial matching][base::match.arg()].}
+\code{"score"} for 'factanal', 'lda_ord', and 'cancord_ord' and \code{"intraset"} and
+\code{"interset"} for 'cancor_ord'), via \link[base:match.arg]{partial matching}.}
 }
 \value{
 A tbl_ord; the wrapped model is unchanged.
 }
 \description{
-These functions adapt [dplyr][dplyr::dplyr] verbs to the factors
-  of a [tbl_ord].
+These functions adapt \link[dplyr:dplyr]{dplyr} verbs to the factors
+of a \link{tbl_ord}.
 
 The raw verbs are not defined for tbl_ords; instead, each verb
-  has two analogues, corresponding to the two matrix factors. They each rely
-  on a common workhorse function, which takes the composition of the
-  **dplyr** verb with `annotation_*`, applied to the factor, removes any
-  variables corresponding to coordinates or already annotated, and only then
-  assigns it as the new `"*_annotation"` attribute of `.data` (see
-  [annotation]). Note that these functions are not generics and so cannot be
-  extended to other classes.
+has two analogues, corresponding to the two matrix factors. They each rely
+on a common workhorse function, which takes the composition of the
+\strong{dplyr} verb with \verb{annotation_*}, applied to the factor, removes any
+variables corresponding to coordinates or already annotated, and only then
+assigns it as the new \code{"*_annotation"} attribute of \code{.data} (see
+\link{annotation}). Note that these functions are not generics and so cannot be
+extended to other classes.
 }
 \examples{
 # illustrative ordination: LDA of iris data

@@ -933,9 +933,9 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 \link[ggplot2:layer_positions]{layer position} documentation.
 }}
 
-\item{...}{Additional arguments passed to [ggplot2::layer()].}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
-\item{na.rm}{Passed to [ggplot2::layer()].}
+\item{na.rm}{Passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -1115,25 +1115,25 @@ aesthetics or to \code{NULL} to use the data's aesthetics.}
 
 \item{snap_rule}{Logical; whether to snap rule segments to grid values.}
 
-\item{new_data}{A list (best structured as a [data.frame][base::data.frame])
-of row (`geom_cols_interpolation()`) or column
-(`geom_rows_interpolation()`) values to interpolate.}
+\item{new_data}{A list (best structured as a \link[base:data.frame]{data.frame})
+of row (\code{geom_cols_interpolation()}) or column
+(\code{geom_rows_interpolation()}) values to interpolate.}
 
-\item{type}{Character value matched to `"centroid"` or `"sequence"`; the type
+\item{type}{Character value matched to \code{"centroid"} or \code{"sequence"}; the type
 of operations used to visualize interpolation.}
 
 \item{point.fill}{Default aesthetics for markers. Set to NULL to inherit from
 the data's aesthetics.}
 }
 \value{
-A ggproto [layer][ggplot2::layer].
+A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
 These geometric element layers (geoms) pair
-  conventional **ggplot2** geoms with [stat_rows()] or
-  [stat_cols()] in order to render elements for one or the other
-  matrix factor of a tbl_ord. They understand the same aesthetics
-  as their corresponding conventional geoms.
+conventional \strong{ggplot2} geoms with \code{\link[=stat_rows]{stat_rows()}} or
+\code{\link[=stat_cols]{stat_cols()}} in order to render elements for one or the other
+matrix factor of a tbl_ord. They understand the same aesthetics
+as their corresponding conventional geoms.
 }
 \examples{
 

@@ -6,14 +6,14 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Convenience stats for row and column matrix factors — biplot-stats"><meta name="description" content="These statistical transformations (stats) adapt
-  conventional **ggplot2** stats to one or the other matrix factor
-  of a tbl_ord, in lieu of [stat_rows()] or [stat_cols()]. They
-  accept the same parameters as their corresponding conventional
-  stats."><meta property="og:description" content="These statistical transformations (stats) adapt
-  conventional **ggplot2** stats to one or the other matrix factor
-  of a tbl_ord, in lieu of [stat_rows()] or [stat_cols()]. They
-  accept the same parameters as their corresponding conventional
-  stats."></head><body>
+conventional ggplot2 stats to one or the other matrix factor
+of a tbl_ord, in lieu of stat_rows() or stat_cols(). They
+accept the same parameters as their corresponding conventional
+stats."><meta property="og:description" content="These statistical transformations (stats) adapt
+conventional ggplot2 stats to one or the other matrix factor
+of a tbl_ord, in lieu of stat_rows() or stat_cols(). They
+accept the same parameters as their corresponding conventional
+stats."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -54,10 +54,10 @@
 
     <div class="ref-description section level2">
     <p>These statistical transformations (stats) adapt
-  conventional **ggplot2** stats to one or the other matrix factor
-  of a tbl_ord, in lieu of [stat_rows()] or [stat_cols()]. They
-  accept the same parameters as their corresponding conventional
-  stats.</p>
+conventional <strong>ggplot2</strong> stats to one or the other matrix factor
+of a tbl_ord, in lieu of <code><a href="stat_rows.html">stat_rows()</a></code> or <code><a href="stat_rows.html">stat_cols()</a></code>. They
+accept the same parameters as their corresponding conventional
+stats.</p>
     </div>
 
     <div class="section level2">
@@ -539,7 +539,7 @@ to use <code><a href="https://ggplot2.tidyverse.org/reference/position_jitter.ht
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed to [ggplot2::layer()].</p></dd>
+<dd><p>Additional arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">ggplot2::layer()</a></code>.</p></dd>
 
 
 <dt id="arg-contour">contour<a class="anchor" aria-label="anchor" href="#arg-contour"></a></dt>
@@ -709,31 +709,31 @@ of the rules and the translations of the axes from the projections of
 
 
 <dt id="arg-ref-elements-ref-subset">ref_elements, ref_subset<a class="anchor" aria-label="anchor" href="#arg-ref-elements-ref-subset"></a></dt>
-<dd><p>Analogues of `elements` and `subset` applied
-to `referent`.</p></dd>
+<dd><p>Analogues of <code>elements</code> and <code>subset</code> applied
+to <code>referent</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A ggproto [layer][ggplot2::layer].</p>
+    <p>A ggproto <a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">layer</a>.</p>
     </div>
     <div class="section level2">
     <h2 id="ordination-aesthetics">Ordination aesthetics<a class="anchor" aria-label="anchor" href="#ordination-aesthetics"></a></h2>
 
 
 <p>This statistical transformation is compatible with the convenience function
-[ord_aes()].</p>
-<p>Some transformations (e.g. [stat_center()]) commute with projection to the
+<code><a href="ggbiplot.html">ord_aes()</a></code>.</p>
+<p>Some transformations (e.g. <code><a href="https://corybrunson.github.io/gggda/reference/stat_center.html" class="external-link">stat_center()</a></code>) commute with projection to the
 lower (1 or 2)-dimensional biplot space. If they detect aesthetics of the
-form `..coord[0-9]+`, then `..coord1` and `..coord2` are converted to `x` and
-`y` while any remaining are ignored.</p>
-<p>Other transformations (e.g. [stat_spantree()]) yield different results in a
+form <code>..coord[0-9]+</code>, then <code>..coord1</code> and <code>..coord2</code> are converted to <code>x</code> and
+<code>y</code> while any remaining are ignored.</p>
+<p>Other transformations (e.g. <code><a href="https://corybrunson.github.io/gggda/reference/stat_spantree.html" class="external-link">stat_spantree()</a></code>) yield different results in a
 lower-dimensional biplot when they are computed before versus after
 projection. If the stat layer detects these aesthetics, then the
 transformation is performed before projection, and the results in the first
-two dimensions are returned as `x` and `y`.</p>
-<p>A small number of transformations ([stat_rule()]) are incompatible with
-ordination aesthetics but will accept `ord_aes()` without warning.</p>
+two dimensions are returned as <code>x</code> and <code>y</code>.</p>
+<p>A small number of transformations (<code><a href="https://corybrunson.github.io/gggda/reference/stat_rule.html" class="external-link">stat_rule()</a></code>) are incompatible with
+ordination aesthetics but will accept <code><a href="ggbiplot.html">ord_aes()</a></code> without warning.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

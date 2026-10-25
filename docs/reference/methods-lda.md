@@ -1,8 +1,9 @@
 # Functionality for linear discriminant analysis ('lda') objects
 
 These methods extract data from, and attribute new data to, objects of
-class \`"lda"\` and \`"lda_ord"\` as returned by \[MASS::lda()\] and
-\[lda_ord()\].
+class `"lda"` and `"lda_ord"` as returned by
+[`MASS::lda()`](https://rdrr.io/pkg/MASS/man/lda.html) and
+[`lda_ord()`](lda-ord.md).
 
 ## Usage
 
@@ -76,20 +77,20 @@ recover_supp_rows(x)
 
 ## Value
 
-The recovery generics \`recover\_\*()\` return \[core model
-components\]\[recoverers\], \[distribution of inertia\]\[conference\],
-\[supplementary elements\]\[supplementation\], and \[intrinsic
-metadata\]\[augmentation\]; but they require methods for each model
+The recovery generics `recover_*()` return [core model
+components](recoverers.md), [distribution of inertia](conference.md),
+[supplementary elements](supplementation.md), and [intrinsic
+metadata](augmentation.md); but they require methods for each model
 class to tell them what these components are.
 
-The generic \[as_tbl_ord()\] returns its input wrapped in the 'tbl_ord'
-class. Its methods determine what model classes it is allowed to wrap.
-It then provides 'tbl_ord' methods with access to the recoverers and
-hence to the model components.
+The generic [`as_tbl_ord()`](tbl_ord.md) returns its input wrapped in
+the 'tbl_ord' class. Its methods determine what model classes it is
+allowed to wrap. It then provides 'tbl_ord' methods with access to the
+recoverers and hence to the model components.
 
 ## Details
 
-See \[lda-ord\] for details.
+See [lda-ord](lda-ord.md) for details.
 
 ## See also
 

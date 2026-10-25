@@ -6,8 +6,8 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Project rows onto columns or vice-versa — stat_projection"><meta name="description" content="Compute projections of vectors from one matrix factor onto those
-  of the other."><meta property="og:description" content="Compute projections of vectors from one matrix factor onto those
-  of the other."></head><body>
+of the other."><meta property="og:description" content="Compute projections of vectors from one matrix factor onto those
+of the other."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -48,7 +48,7 @@
 
     <div class="ref-description section level2">
     <p>Compute projections of vectors from one matrix factor onto those
-  of the other.</p>
+of the other.</p>
     </div>
 
     <div class="section level2">
@@ -122,7 +122,7 @@ to use <code><a href="https://ggplot2.tidyverse.org/reference/position_jitter.ht
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed to [ggplot2::layer()].</p></dd>
+<dd><p>Additional arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">ggplot2::layer()</a></code>.</p></dd>
 
 
 <dt id="arg-show-legend">show.legend<a class="anchor" aria-label="anchor" href="#arg-show-legend"></a></dt>
@@ -144,54 +144,54 @@ the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.or
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A ggproto [layer][ggplot2::layer].</p>
+    <p>A ggproto <a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">layer</a>.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>An ordination model of continuous data can be used to predict values
-  along one dimension from those along the other, using the artificial axes
-  as intermediaries. The predictions correspond geometrically to projections
-  of elements of one matrix factor in principal coordinates onto those of the
-  other factor in standard coordinates. In the most familiar setting of PCA
-  biplots, variable (column) values are predicted from case (row) locations
-  along PC1 and PC2. This transformation obtains the axis projections as
-  `xend,yend` and pairs them with original points `x,y` to demarcate segments
-  visualizing the projections.</p>
-<p>**WARNING:**
-  This layer is appropriate only with axes in standard coordinates (usually
-  [`confer_inertia(p = "rows")`][confer_inertia]) and predictive calibration,
-  e.g. [`geom_cols_axis(axis.type = "predictive")`][geom_axis].</p>
+along one dimension from those along the other, using the artificial axes
+as intermediaries. The predictions correspond geometrically to projections
+of elements of one matrix factor in principal coordinates onto those of the
+other factor in standard coordinates. In the most familiar setting of PCA
+biplots, variable (column) values are predicted from case (row) locations
+along PC1 and PC2. This transformation obtains the axis projections as
+<code>xend,yend</code> and pairs them with original points <code>x,y</code> to demarcate segments
+visualizing the projections.</p>
+<p><strong>WARNING:</strong>
+This layer is appropriate only with axes in standard coordinates (usually
+<code><a href="conference.html">confer_inertia(p = "rows")</a></code>) and predictive calibration,
+e.g. <code><a href="https://corybrunson.github.io/gggda/reference/geom_axis.html" class="external-link">geom_cols_axis(axis.type = "predictive")</a></code>.</p>
 <p>Use the same mapped coordinates for the projection layer and the axes. When
-  `ord_aes()` maps more than two coordinates, projections and axes are
-  computed from all mapped model coordinates; when only `x` and `y` are
-  mapped, both use the plot-plane coordinates.</p>
+<code><a href="ggbiplot.html">ord_aes()</a></code> maps more than two coordinates, projections and axes are
+computed from all mapped model coordinates; when only <code>x</code> and <code>y</code> are
+mapped, both use the plot-plane coordinates.</p>
     </div>
     <div class="section level2">
     <h2 id="referential-stats">Referential stats<a class="anchor" aria-label="anchor" href="#referential-stats"></a></h2>
 
 
 <p>This statistical transformation is done with respect to reference data passed
-to `referent` (ignored if `NULL`, the default, possibly resulting in empty
-output). See [gggda::stat_referent()] for more details. This relies on a
-sleight of hand through a new undocumented `LayerRef` class and associated
-[ggplot2::ggplot_add()] method. As a result, only layers constructed using
-this `stat_*()` shortcut will pass the necessary positional aesthetics to the
-`$setup_params()` step, making them available to pre-process `referent` data.</p>
+to <code>referent</code> (ignored if <code>NULL</code>, the default, possibly resulting in empty
+output). See <code><a href="https://corybrunson.github.io/gggda/reference/stat_referent.html" class="external-link">gggda::stat_referent()</a></code> for more details. This relies on a
+sleight of hand through a new undocumented <code>LayerRef</code> class and associated
+<code><a href="https://ggplot2.tidyverse.org/reference/update_ggplot.html" class="external-link">ggplot2::ggplot_add()</a></code> method. As a result, only layers constructed using
+this <code>stat_*()</code> shortcut will pass the necessary positional aesthetics to the
+<code>$setup_params()</code> step, making them available to pre-process <code>referent</code> data.</p>
 <p>The biplot shortcuts automatically substitute the complementary matrix factor
-for `referent = NULL` and will use an integer vector to select a subset from
+for <code>referent = NULL</code> and will use an integer vector to select a subset from
 this factor. These uses do not require the mapping passage.</p>
     </div>
     <div class="section level2">
     <h2 id="biplot-layers">Biplot layers<a class="anchor" aria-label="anchor" href="#biplot-layers"></a></h2>
 
 
-<p>[ggbiplot()] uses [ggplot2::fortify()] internally to produce a single data
-frame with a `.matrix` column distinguishing the subjects (`"rows"`) and
-variables (`"cols"`). The stat layers `stat_rows()` and `stat_cols()` simply
+<p><code><a href="ggbiplot.html">ggbiplot()</a></code> uses <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">ggplot2::fortify()</a></code> internally to produce a single data
+frame with a <code>.matrix</code> column distinguishing the subjects (<code>"rows"</code>) and
+variables (<code>"cols"</code>). The stat layers <code><a href="stat_rows.html">stat_rows()</a></code> and <code><a href="stat_rows.html">stat_cols()</a></code> simply
 filter the data frame to one of these two.</p>
-<p>The geom layers `geom_rows_*()` and `geom_cols_*()` call the corresponding
+<p>The geom layers <code>geom_rows_*()</code> and <code>geom_cols_*()</code> call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-`geom_dims_*()` selects a default matrix based on common practice, e.g.
+<code>geom_dims_*()</code> selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.</p>
     </div>
     <div class="section level2">
@@ -199,24 +199,23 @@ points for rows and arrows for columns.</p>
 
 
 <p>This statistical transformation is compatible with the convenience function
-[ord_aes()].</p>
-<p>Some transformations (e.g. [stat_center()]) commute with projection to the
+<code><a href="ggbiplot.html">ord_aes()</a></code>.</p>
+<p>Some transformations (e.g. <code><a href="https://corybrunson.github.io/gggda/reference/stat_center.html" class="external-link">stat_center()</a></code>) commute with projection to the
 lower (1 or 2)-dimensional biplot space. If they detect aesthetics of the
-form `..coord[0-9]+`, then `..coord1` and `..coord2` are converted to `x` and
-`y` while any remaining are ignored.</p>
-<p>Other transformations (e.g. [stat_spantree()]) yield different results in a
+form <code>..coord[0-9]+</code>, then <code>..coord1</code> and <code>..coord2</code> are converted to <code>x</code> and
+<code>y</code> while any remaining are ignored.</p>
+<p>Other transformations (e.g. <code><a href="https://corybrunson.github.io/gggda/reference/stat_spantree.html" class="external-link">stat_spantree()</a></code>) yield different results in a
 lower-dimensional biplot when they are computed before versus after
 projection. If the stat layer detects these aesthetics, then the
 transformation is performed before projection, and the results in the first
-two dimensions are returned as `x` and `y`.</p>
-<p>A small number of transformations ([stat_rule()]) are incompatible with
-ordination aesthetics but will accept `ord_aes()` without warning.</p>
+two dimensions are returned as <code>x</code> and <code>y</code>.</p>
+<p>A small number of transformations (<code><a href="https://corybrunson.github.io/gggda/reference/stat_rule.html" class="external-link">stat_rule()</a></code>) are incompatible with
+ordination aesthetics but will accept <code><a href="ggbiplot.html">ord_aes()</a></code> without warning.</p>
     </div>
     <div class="section level2">
     <h2 id="computed-variables">Computed variables<a class="anchor" aria-label="anchor" href="#computed-variables"></a></h2>
     <p>These are calculated during the statistical
-  transformation and can be accessed with [delayed
-  evaluation][ggplot2::aes_eval].</p><dl><dt>`xend,yend`</dt>
+transformation and can be accessed with <a href="https://ggplot2.tidyverse.org/reference/aes_eval.html" class="external-link">delayed evaluation</a>.</p><dl><dt><code>xend,yend</code></dt>
 <dd><p>projections onto (specified) vectors</p></dd>
 
 

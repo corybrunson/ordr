@@ -5,11 +5,11 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Render interpolation of new rows from columns (or vice-versa) — geom_interpolation"><meta name="description" content="`geom_interpolation()` renders a geometric construction that
-  interpolates a new data matrix (row or column) element from its entries to
-  its artificial coordinates."><meta property="og:description" content="`geom_interpolation()` renders a geometric construction that
-  interpolates a new data matrix (row or column) element from its entries to
-  its artificial coordinates."></head><body>
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Render interpolation of new rows from columns (or vice-versa) — geom_interpolation"><meta name="description" content="geom_interpolation() renders a geometric construction that
+interpolates a new data matrix (row or column) element from its entries to
+its artificial coordinates."><meta property="og:description" content="geom_interpolation() renders a geometric construction that
+interpolates a new data matrix (row or column) element from its entries to
+its artificial coordinates."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -49,9 +49,9 @@
     </div>
 
     <div class="ref-description section level2">
-    <p>`geom_interpolation()` renders a geometric construction that
-  interpolates a new data matrix (row or column) element from its entries to
-  its artificial coordinates.</p>
+    <p><code>geom_interpolation()</code> renders a geometric construction that
+interpolates a new data matrix (row or column) element from its entries to
+its artificial coordinates.</p>
     </div>
 
     <div class="section level2">
@@ -124,13 +124,13 @@ to use <code><a href="https://ggplot2.tidyverse.org/reference/position_jitter.ht
 
 
 <dt id="arg-new-data">new_data<a class="anchor" aria-label="anchor" href="#arg-new-data"></a></dt>
-<dd><p>A list (best structured as a [data.frame][base::data.frame])
-of row (`geom_cols_interpolation()`) or column
-(`geom_rows_interpolation()`) values to interpolate.</p></dd>
+<dd><p>A list (best structured as a <a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a>)
+of row (<code><a href="biplot-geoms.html">geom_cols_interpolation()</a></code>) or column
+(<code><a href="biplot-geoms.html">geom_rows_interpolation()</a></code>) values to interpolate.</p></dd>
 
 
 <dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
-<dd><p>Character value matched to `"centroid"` or `"sequence"`; the type
+<dd><p>Character value matched to <code>"centroid"</code> or <code>"sequence"</code>; the type
 of operations used to visualize interpolation.</p></dd>
 
 
@@ -140,7 +140,7 @@ of operations used to visualize interpolation.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed to [ggplot2::layer()].</p></dd>
+<dd><p>Additional arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">ggplot2::layer()</a></code>.</p></dd>
 
 
 <dt id="arg-point-fill">point.fill<a class="anchor" aria-label="anchor" href="#arg-point-fill"></a></dt>
@@ -149,7 +149,7 @@ the data's aesthetics.</p></dd>
 
 
 <dt id="arg-na-rm">na.rm<a class="anchor" aria-label="anchor" href="#arg-na-rm"></a></dt>
-<dd><p>Passed to [ggplot2::layer()].</p></dd>
+<dd><p>Passed to <code><a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">ggplot2::layer()</a></code>.</p></dd>
 
 
 <dt id="arg-show-legend">show.legend<a class="anchor" aria-label="anchor" href="#arg-show-legend"></a></dt>
@@ -172,57 +172,55 @@ the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.or
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Interpolation answers the following question: Given a new data
-  element that might have appeared as a row (respectively, column) in the
-  singular-value-decomposed data matrix, where should we expect the marker
-  for this element to appear in the biplot? The solution is the vector sum of
-  the column (row) units weighted by their values in the new row (column).
-  Gower, Gardner–Lubbe, &amp; le Roux (2011) provide two visualizations of this
-  calculation: a tail-to-head sequence of weighted units (`type =
-  "sequence"`), and a centroid of the weighted units scaled by the number of
-  units (`type = "centroid"`).</p>
-<p>**WARNING:**
-  This layer is appropriate only with axes in standard coordinates (usually
-  [`confer_inertia(p = "rows")`][confer_inertia]) and interpolative
-  calibration, the default `axis.type` of [`geom_axis()`][geom_axis].</p>
+element that might have appeared as a row (respectively, column) in the
+singular-value-decomposed data matrix, where should we expect the marker
+for this element to appear in the biplot? The solution is the vector sum of
+the column (row) units weighted by their values in the new row (column).
+Gower, Gardner–Lubbe, &amp; le Roux (2011) provide two visualizations of this
+calculation: a tail-to-head sequence of weighted units (<code>type = "sequence"</code>), and a centroid of the weighted units scaled by the number of
+units (<code>type = "centroid"</code>).</p>
+<p><strong>WARNING:</strong>
+This layer is appropriate only with axes in standard coordinates (usually
+<code><a href="conference.html">confer_inertia(p = "rows")</a></code>) and interpolative
+calibration, the default <code>axis.type</code> of <code><a href="https://corybrunson.github.io/gggda/reference/geom_axis.html" class="external-link">geom_axis()</a></code>.</p>
     </div>
     <div class="section level2">
     <h2 id="biplot-layers">Biplot layers<a class="anchor" aria-label="anchor" href="#biplot-layers"></a></h2>
 
 
-<p>[ggbiplot()] uses [ggplot2::fortify()] internally to produce a single data
-frame with a `.matrix` column distinguishing the subjects (`"rows"`) and
-variables (`"cols"`). The stat layers `stat_rows()` and `stat_cols()` simply
+<p><code><a href="ggbiplot.html">ggbiplot()</a></code> uses <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">ggplot2::fortify()</a></code> internally to produce a single data
+frame with a <code>.matrix</code> column distinguishing the subjects (<code>"rows"</code>) and
+variables (<code>"cols"</code>). The stat layers <code><a href="stat_rows.html">stat_rows()</a></code> and <code><a href="stat_rows.html">stat_cols()</a></code> simply
 filter the data frame to one of these two.</p>
-<p>The geom layers `geom_rows_*()` and `geom_cols_*()` call the corresponding
+<p>The geom layers <code>geom_rows_*()</code> and <code>geom_cols_*()</code> call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-`geom_dims_*()` selects a default matrix based on common practice, e.g.
+<code>geom_dims_*()</code> selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.</p>
     </div>
     <div class="section level2">
     <h2 id="aesthetics">Aesthetics<a class="anchor" aria-label="anchor" href="#aesthetics"></a></h2>
 
 
-<p>`geom_interpolation()` requires the custom **`interpolate`** aesthetic, which
-tells the internals which columns of the `new_data` parameter contain the
-variables to be used for interpolation. Except in rare cases, `new_data`
+<p><code>geom_interpolation()</code> requires the custom <strong><code>interpolate</code></strong> aesthetic, which
+tells the internals which columns of the <code>new_data</code> parameter contain the
+variables to be used for interpolation. Except in rare cases, <code>new_data</code>
 should contain the same rows or columns as the ordinated data and
-`interpolate` should be set to `name` (procured by [augment_ord()]).
-`geom_interpolation()` additionally understands the following aesthetics
-(required aesthetics are in bold):
-- `alpha`
-- `colour`
-- `linetype`
-- `size`
-- `fill`
-- `shape`
-- `stroke`
-- `center`, `scale`
-- `group`</p>
-    </div>
+<code>interpolate</code> should be set to <code>name</code> (procured by <code><a href="augmentation.html">augment_ord()</a></code>).
+<code>geom_interpolation()</code> additionally understands the following aesthetics
+(required aesthetics are in bold):</p><ul><li><p><code>alpha</code></p></li>
+<li><p><code>colour</code></p></li>
+<li><p><code>linetype</code></p></li>
+<li><p><code>size</code></p></li>
+<li><p><code>fill</code></p></li>
+<li><p><code>shape</code></p></li>
+<li><p><code>stroke</code></p></li>
+<li><p><code>center</code>, <code>scale</code></p></li>
+<li><p><code>group</code></p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>Gower JC, Gardner–Lubbe S, &amp; le Roux NJ (2011) _Understanding Biplots_.
-Wiley, ISBN: 978-0-470-01255-0. &lt;https://www.wiley.com/go/biplots&gt;</p>
+    <p>Gower JC, Gardner–Lubbe S, &amp; le Roux NJ (2011) <em>Understanding Biplots</em>.
+Wiley, ISBN: 978-0-470-01255-0. <a href="https://www.wiley.com/go/biplots" class="external-link">https://www.wiley.com/go/biplots</a></p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

@@ -6,8 +6,8 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Negation of ordination axes — negation"><meta name="description" content="Negate the coordinates of a subset of ordination axes in both
-  row and column singular vectors."><meta property="og:description" content="Negate the coordinates of a subset of ordination axes in both
-  row and column singular vectors."></head><body>
+row and column singular vectors."><meta property="og:description" content="Negate the coordinates of a subset of ordination axes in both
+row and column singular vectors."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -48,7 +48,7 @@
 
     <div class="ref-description section level2">
     <p>Negate the coordinates of a subset of ordination axes in both
-  row and column singular vectors.</p>
+row and column singular vectors.</p>
     </div>
 
     <div class="section level2">
@@ -67,7 +67,7 @@
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>A [tbl_ord].</p></dd>
+<dd><p>A <a href="tbl_ord.html">tbl_ord</a>.</p></dd>
 
 
 <dt id="arg-negation">negation<a class="anchor" aria-label="anchor" href="#arg-negation"></a></dt>
@@ -77,26 +77,26 @@
 <dt id="arg--matrix">.matrix<a class="anchor" aria-label="anchor" href="#arg--matrix"></a></dt>
 <dd><p>A character string partially matched (lowercase) to several
 indicators for one or both matrices in a matrix decomposition used for
-ordination. The standard values are `"rows"`, `"cols"`, and `"dims"` (for
+ordination. The standard values are <code>"rows"</code>, <code>"cols"</code>, and <code>"dims"</code> (for
 both).</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>`negate_ord()` and `negate_to_first_orthant()` return a tbl_ord with
-  certain axes negated but the wrapped model unchanged. `get_negation()`
-  returns the current negations. `revert_negation()` returns the tbl_ord
-  without any manual negations.</p>
+    <p><code>negate_ord()</code> and <code>negate_to_first_orthant()</code> return a tbl_ord with
+certain axes negated but the wrapped model unchanged. <code>get_negation()</code>
+returns the current negations. <code>revert_negation()</code> returns the tbl_ord
+without any manual negations.</p>
 <p>A tbl_ord; the wrapped model is unchanged.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>For purposes of comparison and visualization, it can be useful to negate the
 (already artificial) coordinates of an ordination, either by fixed criteria
-or to better align with another basis (matrix) of coordinates. `negate_ord()`
+or to better align with another basis (matrix) of coordinates. <code>negate_ord()</code>
 allows the user to negate specified coordinates of an ordination.</p>
-<p>`get_negation()` accesses the negations of an ordination, an integer vector
-of `1`s and `-1`s stored as a `"negate"` attribute.</p>
+<p><code>get_negation()</code> accesses the negations of an ordination, an integer vector
+of <code>1</code>s and <code>-1</code>s stored as a <code>"negate"</code> attribute.</p>
     </div>
 
     <div class="section level2">

@@ -1,7 +1,7 @@
 # Biplots following the grammar of graphics
 
 Build a biplot visualization from ordination data wrapped as a
-\[tbl_ord\] object.
+[tbl_ord](tbl_ord.md) object.
 
 ## Usage
 
@@ -28,13 +28,13 @@ ord_aes(ordination, ...)
 
 - ordination:
 
-  A \[tbl_ord\].
+  A [tbl_ord](tbl_ord.md).
 
 - mapping:
 
   List of default aesthetic mappings to use for the biplot. The default
-  assigns the first two coordinates to the aesthetics \`x\` and \`y\`.
-  Other assignments must be supplied in each layer added to the plot.
+  assigns the first two coordinates to the aesthetics `x` and `y`. Other
+  assignments must be supplied in each layer added to the plot.
 
 - xlim, ylim:
 
@@ -73,89 +73,99 @@ ord_aes(ordination, ...)
 
   Either a numeric value, used to scale the secondary axes against the
   primary axes, or the name of a harmonizing function (currently
-  \`"range"\` or \`"inertia"\`); ignored if \`sec.axes\` is not
-  specified.
+  `"range"` or `"inertia"`); ignored if `sec.axes` is not specified.
 
 - scale_rows, scale_cols:
 
-  Either the character name of a numeric variable in
-  \`get\_\*(ordination)\` or a numeric vector of length
-  \`nrow(get\_\*(ordination))\`, used to scale the coordinates of the
-  matrix factors.
+  Either the character name of a numeric variable in `get_*(ordination)`
+  or a numeric vector of length `nrow(get_*(ordination))`, used to scale
+  the coordinates of the matrix factors.
 
 - ...:
 
-  Additional arguments passed to \[ggplot2::fortify()\]; see
-  \[fortify.tbl_ord()\].
+  Additional arguments passed to
+  [`ggplot2::fortify()`](https://ggplot2.tidyverse.org/reference/fortify.html);
+  see [`fortify.tbl_ord()`](tidiers.md).
 
 ## Value
 
-A \[ggplot\]\[ggplot2::ggplot\] object.
+A [ggplot](https://ggplot2.tidyverse.org/reference/ggplot.html) object.
 
 ## Details
 
-\`ggbiplot()\` produces a \[ggplot\]\[ggplot2::ggplot\] object from a
-\[tbl_ord\] object \`ordination\`. The baseline object is the default
-unadorned \`"ggplot"\`-class object \`p\` with the following differences
-from what \[ggplot2::ggplot()\] returns:
+`ggbiplot()` produces a
+[ggplot](https://ggplot2.tidyverse.org/reference/ggplot.html) object
+from a [tbl_ord](tbl_ord.md) object `ordination`. The baseline object is
+the default unadorned `"ggplot"`-class object `p` with the following
+differences from what
+[`ggplot2::ggplot()`](https://ggplot2.tidyverse.org/reference/ggplot.html)
+returns:
 
-\- \`p\$mapping\` is augmented with \`.matrix = .matrix\`, which expects
-either \`.matrix = "rows"\` or \`.matrix = "cols"\` from the biplot. -
-\`p\$coordinates\` is defaulted to \[ggplot2::coord_equal()\] in order
-to faithfully render the geometry of an ordination. The optional
-parameters \`xlim\`, \`ylim\`, \`expand\`, and \`clip\` are passed to
-\`coord_equal()\` and default to its \*\*ggplot2\*\* defaults. - When
-\`x\` or \`y\` are mapped to coordinates of \`ordination\`, and if
-\`axis.percents\` is \`TRUE\`, \`p\$labels\$x\` or \`p\$labels\$y\` are
-defaulted to the coordinate names concatenated with the percentages of
-\[inertia\]\[conference\] captured by the coordinates. - \`p\` is
-assigned the class \`"ggbiplot"\` in addition to \`"ggplot"\`. This
-serves no functional purpose currently.
+- `p$mapping` is augmented with `.matrix = .matrix`, which expects
+  either `.matrix = "rows"` or `.matrix = "cols"` from the biplot.
 
-Furthermore, the user may feed single integer values to the \`x\` and
-\`y\` aesthetics, which will be interpreted as the corresponding
-coordinates in the ordination. Currently only 2-dimensional biplots are
-supported, so both \`x\` and \`y\` must take coordinate values.
+- `p$coordinates` is defaulted to
+  [`ggplot2::coord_equal()`](https://ggplot2.tidyverse.org/reference/coord_fixed.html)
+  in order to faithfully render the geometry of an ordination. The
+  optional parameters `xlim`, `ylim`, `expand`, and `clip` are passed to
+  [`coord_equal()`](https://ggplot2.tidyverse.org/reference/coord_fixed.html)
+  and default to its **ggplot2** defaults.
 
-\`ord_aes()\` is a convenience function that generates a full-rank set
-of coordinate aesthetics \`..coord1\`, \`..coord2\`, etc. mapped to the
-shared coordinates of the ordination object, along with any additional
-aesthetics that are processed internally by \[ggplot2::aes()\].
+- When `x` or `y` are mapped to coordinates of `ordination`, and if
+  `axis.percents` is `TRUE`, `p$labels$x` or `p$labels$y` are defaulted
+  to the coordinate names concatenated with the percentages of
+  [inertia](conference.md) captured by the coordinates.
+
+- `p` is assigned the class `"ggbiplot"` in addition to `"ggplot"`. This
+  serves no functional purpose currently.
+
+Furthermore, the user may feed single integer values to the `x` and `y`
+aesthetics, which will be interpreted as the corresponding coordinates
+in the ordination. Currently only 2-dimensional biplots are supported,
+so both `x` and `y` must take coordinate values.
+
+`ord_aes()` is a convenience function that generates a full-rank set of
+coordinate aesthetics `..coord1`, `..coord2`, etc. mapped to the shared
+coordinates of the ordination object, along with any additional
+aesthetics that are processed internally by
+[`ggplot2::aes()`](https://ggplot2.tidyverse.org/reference/aes.html).
 
 Predictive axes are scaled inversely by the squared norm. By default,
-this is computed from \`x\` and \`y\` (or from the full model space if
-obtained by \[ordr::ord_aes()\]). If the data contain an \`axis.ss\`
-column, it is used instead. Gower & Hand (1996) and Gower,
-Gardner–Lubbe, & le Roux (2011) thoroughly explain the construction and
-interpretation of predictive biplots. (Predictive calibration was
-previously handled by \`ggbiplot(axis.type)\` but has been transferred
-to \[\`gggda::geom_axis(axis.type)\`\]\[gggda::geom_axis\].)
+this is computed from `x` and `y` (or from the full model space if
+obtained by `ord_aes()`). If the data contain an `axis.ss` column, it is
+used instead. Gower & Hand (1996) and Gower, Gardner–Lubbe, & le Roux
+(2011) thoroughly explain the construction and interpretation of
+predictive biplots. (Predictive calibration was previously handled by
+`ggbiplot(axis.type)` but has been transferred to
+[`gggda::geom_axis(axis.type)`](https://corybrunson.github.io/gggda/reference/geom_axis.html).)
 
 ## Biplot layers
 
-\[ggbiplot()\] uses \[ggplot2::fortify()\] internally to produce a
-single data frame with a \`.matrix\` column distinguishing the subjects
-(\`"rows"\`) and variables (\`"cols"\`). The stat layers \`stat_rows()\`
-and \`stat_cols()\` simply filter the data frame to one of these two.
+`ggbiplot()` uses
+[`ggplot2::fortify()`](https://ggplot2.tidyverse.org/reference/fortify.html)
+internally to produce a single data frame with a `.matrix` column
+distinguishing the subjects (`"rows"`) and variables (`"cols"`). The
+stat layers [`stat_rows()`](stat_rows.md) and
+[`stat_cols()`](stat_rows.md) simply filter the data frame to one of
+these two.
 
-The geom layers \`geom_rows\_\*()\` and \`geom_cols\_\*()\` call the
+The geom layers `geom_rows_*()` and `geom_cols_*()` call the
 corresponding stat in order to render plot elements for the
-corresponding factor matrix. \`geom_dims\_\*()\` selects a default
-matrix based on common practice, e.g. points for rows and arrows for
-columns.
+corresponding factor matrix. `geom_dims_*()` selects a default matrix
+based on common practice, e.g. points for rows and arrows for columns.
 
 ## References
 
-Gower JC & Hand DJ (1996) \_Biplots\_. Chapman & Hall, ISBN:
+Gower JC & Hand DJ (1996) *Biplots*. Chapman & Hall, ISBN:
 0-412-71630-5.
 
-Gower JC, Gardner–Lubbe S, & le Roux NJ (2011) \_Understanding
-Biplots\_. Wiley, ISBN: 978-0-470-01255-0.
-\<https://www.wiley.com/go/biplots\>
+Gower JC, Gardner–Lubbe S, & le Roux NJ (2011) *Understanding Biplots*.
+Wiley, ISBN: 978-0-470-01255-0. <https://www.wiley.com/go/biplots>
 
 ## See also
 
-\[ggplot2::ggplot2()\], on which \`ggbiplot()\` is built
+[`ggplot2::ggplot2()`](https://ggplot2.tidyverse.org/reference/ggplot2-package.html),
+on which `ggbiplot()` is built
 
 ## Examples
 

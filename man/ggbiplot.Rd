@@ -23,10 +23,10 @@ ggbiplot(
 ord_aes(ordination, ...)
 }
 \arguments{
-\item{ordination}{A [tbl_ord].}
+\item{ordination}{A \link{tbl_ord}.}
 
 \item{mapping}{List of default aesthetic mappings to use for the biplot. The
-default assigns the first two coordinates to the aesthetics `x` and `y`.
+default assigns the first two coordinates to the aesthetics \code{x} and \code{y}.
 Other assignments must be supplied in each layer added to the plot.}
 
 \item{xlim, ylim}{Limits for the x and y axes.}
@@ -55,70 +55,71 @@ percentages.}
 
 \item{scale.factor}{Either a numeric value, used to scale the secondary axes
 against the primary axes, or the name of a harmonizing function (currently
-`"range"` or `"inertia"`); ignored if `sec.axes` is not specified.}
+\code{"range"} or \code{"inertia"}); ignored if \code{sec.axes} is not specified.}
 
 \item{scale_rows, scale_cols}{Either the character name of a numeric variable
-in `get_*(ordination)` or a numeric vector of length
-`nrow(get_*(ordination))`, used to scale the coordinates of the matrix
+in \code{get_*(ordination)} or a numeric vector of length
+\code{nrow(get_*(ordination))}, used to scale the coordinates of the matrix
 factors.}
 
-\item{...}{Additional arguments passed to [ggplot2::fortify()]; see
-[fortify.tbl_ord()].}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:fortify]{ggplot2::fortify()}}; see
+\code{\link[=fortify.tbl_ord]{fortify.tbl_ord()}}.}
 }
 \value{
-A [ggplot][ggplot2::ggplot] object.
+A \link[ggplot2:ggplot]{ggplot} object.
 }
 \description{
 Build a biplot visualization from ordination data wrapped as a
-[tbl_ord] object.
+\link{tbl_ord} object.
 }
 \details{
-`ggbiplot()` produces a [ggplot][ggplot2::ggplot] object from a [tbl_ord]
-object `ordination`. The baseline object is the default unadorned
-`"ggplot"`-class object `p` with the following differences from what
-[ggplot2::ggplot()] returns:
-
-- `p$mapping` is augmented with `.matrix = .matrix`, which expects either
-`.matrix = "rows"` or `.matrix = "cols"` from the biplot.
-- `p$coordinates` is defaulted to [ggplot2::coord_equal()] in order to
+\code{ggbiplot()} produces a \link[ggplot2:ggplot]{ggplot} object from a \link{tbl_ord}
+object \code{ordination}. The baseline object is the default unadorned
+\code{"ggplot"}-class object \code{p} with the following differences from what
+\code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} returns:
+\itemize{
+\item \code{p$mapping} is augmented with \code{.matrix = .matrix}, which expects either
+\code{.matrix = "rows"} or \code{.matrix = "cols"} from the biplot.
+\item \code{p$coordinates} is defaulted to \code{\link[ggplot2:coord_equal]{ggplot2::coord_equal()}} in order to
 faithfully render the geometry of an ordination. The optional parameters
-`xlim`, `ylim`, `expand`, and `clip` are passed to `coord_equal()` and
-default to its **ggplot2** defaults.
-- When `x` or `y` are mapped to coordinates of `ordination`, and if
-`axis.percents` is `TRUE`, `p$labels$x` or `p$labels$y` are defaulted to the
-coordinate names concatenated with the percentages of [inertia][conference]
+\code{xlim}, \code{ylim}, \code{expand}, and \code{clip} are passed to \code{coord_equal()} and
+default to its \strong{ggplot2} defaults.
+\item When \code{x} or \code{y} are mapped to coordinates of \code{ordination}, and if
+\code{axis.percents} is \code{TRUE}, \code{p$labels$x} or \code{p$labels$y} are defaulted to the
+coordinate names concatenated with the percentages of \link[=conference]{inertia}
 captured by the coordinates.
-- `p` is assigned the class `"ggbiplot"` in addition to `"ggplot"`. This
+\item \code{p} is assigned the class \code{"ggbiplot"} in addition to \code{"ggplot"}. This
 serves no functional purpose currently.
+}
 
-Furthermore, the user may feed single integer values to the `x` and `y`
+Furthermore, the user may feed single integer values to the \code{x} and \code{y}
 aesthetics, which will be interpreted as the corresponding coordinates in the
-ordination. Currently only 2-dimensional biplots are supported, so both `x`
-and `y` must take coordinate values.
+ordination. Currently only 2-dimensional biplots are supported, so both \code{x}
+and \code{y} must take coordinate values.
 
-`ord_aes()` is a convenience function that generates a full-rank set of
-coordinate aesthetics `..coord1`, `..coord2`, etc. mapped to the shared
+\code{ord_aes()} is a convenience function that generates a full-rank set of
+coordinate aesthetics \code{..coord1}, \code{..coord2}, etc. mapped to the shared
 coordinates of the ordination object, along with any additional aesthetics
-that are processed internally by [ggplot2::aes()].
+that are processed internally by \code{\link[ggplot2:aes]{ggplot2::aes()}}.
 
 Predictive axes are scaled inversely by the squared norm. By default, this is
-computed from `x` and `y` (or from the full model space if obtained by
-[ordr::ord_aes()]). If the data contain an `axis.ss` column, it is used
+computed from \code{x} and \code{y} (or from the full model space if obtained by
+\code{\link[=ord_aes]{ord_aes()}}). If the data contain an \code{axis.ss} column, it is used
 instead. Gower & Hand (1996) and Gower, Gardner--Lubbe, & le Roux (2011)
 thoroughly explain the construction and interpretation of predictive biplots.
-(Predictive calibration was previously handled by `ggbiplot(axis.type)` but
-has been transferred to [`gggda::geom_axis(axis.type)`][gggda::geom_axis].)
+(Predictive calibration was previously handled by \code{ggbiplot(axis.type)} but
+has been transferred to \code{\link[gggda:geom_axis]{gggda::geom_axis(axis.type)}}.)
 }
 \section{Biplot layers}{
 
-[ggbiplot()] uses [ggplot2::fortify()] internally to produce a single data
-frame with a `.matrix` column distinguishing the subjects (`"rows"`) and
-variables (`"cols"`). The stat layers `stat_rows()` and `stat_cols()` simply
+\code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
+frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
+variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
 filter the data frame to one of these two.
 
-The geom layers `geom_rows_*()` and `geom_cols_*()` call the corresponding
+The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-`geom_dims_*()` selects a default matrix based on common practice, e.g.
+\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.
 }
 
@@ -255,11 +256,11 @@ iris_pca \%>\%
   ggtitle("Predictive biplot of Anderson iris measurements")
 }
 \references{
-Gower JC & Hand DJ (1996) _Biplots_. Chapman & Hall, ISBN: 0-412-71630-5.
+Gower JC & Hand DJ (1996) \emph{Biplots}. Chapman & Hall, ISBN: 0-412-71630-5.
 
-Gower JC, Gardner--Lubbe S, & le Roux NJ (2011) _Understanding Biplots_.
-Wiley, ISBN: 978-0-470-01255-0. <https://www.wiley.com/go/biplots>
+Gower JC, Gardner--Lubbe S, & le Roux NJ (2011) \emph{Understanding Biplots}.
+Wiley, ISBN: 978-0-470-01255-0. \url{https://www.wiley.com/go/biplots}
 }
 \seealso{
-[ggplot2::ggplot2()], on which `ggbiplot()` is built
+\code{\link[ggplot2:ggplot2]{ggplot2::ggplot2()}}, on which \code{ggbiplot()} is built
 }
