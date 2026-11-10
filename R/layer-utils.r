@@ -64,6 +64,9 @@ get_ord_aes <- function(data) {
 # compute the squared norm of each axis across its mapped model coordinates
 setup_axis_ss <- function(data) {
   ord_cols <- get_ord_aes(data)
+  # `get_ord_aes()` looks for 'x','y' or '..coord[0-9]+';
+  # fallback to 'coordinates' attribute.
+  if (all(is.na(ord_cols))) ord_cols <- recover_coord(data)
   if (length(ord_cols) < 2L) return(data)
   data$axis.ss <- rowSums(data[, ord_cols, drop = FALSE]^2)
   data
