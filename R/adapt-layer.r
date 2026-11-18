@@ -51,8 +51,8 @@
 #' geom_rows_label
 #' geom_cols_label
 #' 
+#' @examplesIf rlang::is_installed("hexbin")
 #' # use these layers in a biplot
-#' # TODO: Condition this example on {hexbin} being installed.
 #' ordinate(swiss, model = factanal, factors = 2L, scores = "regression") |> 
 #'   ggbiplot() +
 #'   coord_equal() +

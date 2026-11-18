@@ -78,8 +78,8 @@ adapt_layer_to_biplot(ggplot2::geom_label, method = "parse")
 geom_rows_label
 geom_cols_label
 
+\dontshow{if (rlang::is_installed("hexbin")) withAutoprint(\{ # examplesIf}
 # use these layers in a biplot
-# TODO: Condition this example on {hexbin} being installed.
 ordinate(swiss, model = factanal, factors = 2L, scores = "regression") |> 
   ggbiplot() +
   coord_equal() +
@@ -89,6 +89,7 @@ ordinate(swiss, model = factanal, factors = 2L, scores = "regression") |>
     arrow = arrow(length = unit(.2, "cm"), ends = "first", type = "closed")
   ) +
   geom_cols_label(aes(label = name), vjust = "outward", size = 3, alpha = .8)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \link{biplot-stats} and \link{biplot-geoms}
