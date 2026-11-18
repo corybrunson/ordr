@@ -22,39 +22,39 @@ ordinate(x, model, ...)
 \method{ordinate}{dist}(x, model, ...)
 }
 \arguments{
-\item{x}{A data object to be passed to the `model`, such as an [array],
-[table], [data.frame], or [stats::dist].}
+\item{x}{A data object to be passed to the \code{model}, such as an \link{array},
+\link{table}, \link{data.frame}, or \link[stats:dist]{stats::dist}.}
 
 \item{model}{An ordination function whose output is coercible to class
-'[tbl_ord]', or a symbol or character string (handled by [match.fun()]).
-Alternatively, a formula `~ fun(., ...)` where `fun` is such a function and
-other arguments are explicit, which will be evaluated with `x` in place of
-`.`.}
+'\link{tbl_ord}', or a symbol or character string (handled by \code{\link[=match.fun]{match.fun()}}).
+Alternatively, a formula \code{~ fun(., ...)} where \code{fun} is such a function and
+other arguments are explicit, which will be evaluated with \code{x} in place of
+\code{.}.}
 
-\item{...}{Additional arguments passed to `model`.}
+\item{...}{Additional arguments passed to \code{model}.}
 
-\item{cols}{<[`tidy-select`][tidyr::tidyr_tidy_select]> If `x` is a data
-frame, columns to pass to `model`. If missing, all columns are used.}
+\item{cols}{<\code{\link[tidyr:tidyr_tidy_select]{tidy-select}}> If \code{x} is a data
+frame, columns to pass to \code{model}. If missing, all columns are used.}
 
-\item{augment}{<[`tidy-select`][tidyr::tidyr_tidy_select]> If `x` is a data
+\item{augment}{<\code{\link[tidyr:tidyr_tidy_select]{tidy-select}}> If \code{x} is a data
 frame, columns to augment to the row data of the ordination. If missing,
-all columns not included in `cols` will be augmented.}
+all columns not included in \code{cols} will be augmented.}
 }
 \value{
 An augmented tbl_ord.
 }
 \description{
 This is a convenience function to fit an ordination model to a
-  data object, wrap the result as a tbl_ord, and annotate this output with
-  metadata from the model and possibly from the data.
+data object, wrap the result as a tbl_ord, and annotate this output with
+metadata from the model and possibly from the data.
 }
 \details{
 The default method fits the specified model to the provided data object,
-wraps the result as a [tbl_ord], and augments this output with any intrinsic
-metadata from the model via [augment_ord()].
+wraps the result as a \link{tbl_ord}, and augments this output with any intrinsic
+metadata from the model via \code{\link[=augment_ord]{augment_ord()}}.
 
 The default method is used for most classes, though this may change in
-future. The [data.frame] method allows the user to specify what columns to
+future. The \link{data.frame} method allows the user to specify what columns to
 include in the model and what columns with which to annotate the output.
 }
 \examples{

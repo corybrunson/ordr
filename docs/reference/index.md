@@ -5,7 +5,9 @@
 A unified framework for ordination objects and biplot methods using tidy
 principles
 
-- [`ordr`](ordr.md) [`ordr-package`](ordr.md) : \*\*ordr\*\* package
+- [`ordr`](ordr.md) [`ordr-package`](ordr.md) :
+
+  **ordr** package
 
 ## Functions, classes, and methods
 
@@ -42,42 +44,53 @@ for querying and manipulating metadata
   [`get_inertia()`](recoverers.md)
   [`dim(`*`<tbl_ord>`*`)`](recoverers.md) : Access factors, coordinates,
   and metadata from ordination objects
+
 - [`recover_aug_rows()`](augmentation.md)
   [`recover_aug_cols()`](augmentation.md)
   [`recover_aug_coord()`](augmentation.md)
   [`augment_ord()`](augmentation.md) : Augment factors and coordinates
   of 'tbl_ord' objects
+
 - [`tidy(`*`<tbl_ord>`*`)`](tidiers.md)
   [`glance(`*`<tbl_ord>`*`)`](tidiers.md)
   [`fortify(`*`<tbl_ord>`*`)`](tidiers.md) : Tidiers for 'tbl_ord'
   objects
+
 - [`annotation`](annotation.md) : Annotate factors of 'tbl_ord' objects
+
 - [`get_negation()`](negation.md) [`revert_negation()`](negation.md)
   [`negate_ord()`](negation.md)
   [`negate_to_first_orthant()`](negation.md) : Negation of ordination
   axes
+
 - [`recover_conference()`](conference.md)
   [`get_conference()`](conference.md)
   [`revert_conference()`](conference.md)
   [`confer_inertia()`](conference.md) : Confer inertia to factors of a
   'tbl_ord' object
+
 - [`recover_supp_rows()`](supplementation.md)
   [`recover_supp_cols()`](supplementation.md) : Supplement 'tbl_ord'
   objects with new data
+
 - [`as_tbl_ord()`](tbl_ord.md) [`make_tbl_ord()`](tbl_ord.md)
   [`is_tbl_ord()`](tbl_ord.md) [`is.tbl_ord()`](tbl_ord.md)
   [`valid_tbl_ord()`](tbl_ord.md) [`un_tbl_ord()`](tbl_ord.md) : A
   unified ordination object class
+
 - [`.by`](format.md) [`format(`*`<tbl_ord>`*`)`](format.md)
   [`print(`*`<tbl_ord>`*`)`](format.md) : Format a tbl_ord for printing
+
 - [`ord_quality()`](goodness-of-fit.md)
   [`ord_adequacy()`](goodness-of-fit.md)
   [`ord_predictivity()`](goodness-of-fit.md) : Measures of goodness of
   fit of ordination models
+
 - [`plot(`*`<tbl_ord>`*`)`](plot.tbl_ord.md)
   [`screeplot(`*`<tbl_ord>`*`)`](plot.tbl_ord.md)
   [`biplot(`*`<tbl_ord>`*`)`](plot.tbl_ord.md) : Plot and biplot methods
   for 'tbl_ord' objects
+
 - [`pull_factor()`](dplyr-verbs.md) [`pull_rows()`](dplyr-verbs.md)
   [`pull_cols()`](dplyr-verbs.md) [`rename_rows()`](dplyr-verbs.md)
   [`rename_cols()`](dplyr-verbs.md) [`select_rows()`](dplyr-verbs.md)
@@ -85,8 +98,10 @@ for querying and manipulating metadata
   [`mutate_cols()`](dplyr-verbs.md) [`transmute_rows()`](dplyr-verbs.md)
   [`transmute_cols()`](dplyr-verbs.md) [`cbind_rows()`](dplyr-verbs.md)
   [`cbind_cols()`](dplyr-verbs.md) [`left_join_rows()`](dplyr-verbs.md)
-  [`left_join_cols()`](dplyr-verbs.md) : \*\*dplyr\*\* verbs for tbl_ord
-  factors
+  [`left_join_cols()`](dplyr-verbs.md) :
+
+  **dplyr** verbs for tbl_ord factors
+
 - [`ordinate()`](ordinate.md) : Fit an ordination model to a data object
 
 ## Layered grammar for biplots
@@ -107,15 +122,18 @@ following the layered grammar of graphics
   origin
 - [`geom_interpolation()`](geom_interpolation.md) : Render interpolation
   of new rows from columns (or vice-versa)
+- [`facet_ord()`](facet_ord.md) : Arrange biplots of all pairs of
+  ordination coordinates
 - [`theme_scaffold()`](theme_scaffold.md)
   [`theme_biplot()`](theme_scaffold.md) : Scaffolding theme
 - [`draw_key_line()`](draw-key.md)
   [`draw_key_crosslines()`](draw-key.md)
   [`draw_key_crosspoint()`](draw-key.md) : Biplot key drawing functions
 - [`ordr-ggproto`](ordr-ggproto.md) [`CoordScaffold`](ordr-ggproto.md)
-  [`GeomInterpolation`](ordr-ggproto.md) [`GeomOrigin`](ordr-ggproto.md)
-  [`GeomUnitCircle`](ordr-ggproto.md) [`StatRows`](ordr-ggproto.md)
-  [`StatCols`](ordr-ggproto.md) [`StatProjection`](ordr-ggproto.md)
+  [`FacetOrd`](ordr-ggproto.md) [`GeomInterpolation`](ordr-ggproto.md)
+  [`GeomOrigin`](ordr-ggproto.md) [`GeomUnitCircle`](ordr-ggproto.md)
+  [`StatRows`](ordr-ggproto.md) [`StatCols`](ordr-ggproto.md)
+  [`StatProjection`](ordr-ggproto.md)
   [`StatRowsDensity2d`](ordr-ggproto.md)
   [`StatColsDensity2d`](ordr-ggproto.md)
   [`StatRowsDensity2dFilled`](ordr-ggproto.md)

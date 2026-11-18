@@ -57,39 +57,38 @@ correlations.}
 }
 \value{
 Objects slightly modified from the outputs of the original functions,
-  with new '*-ord' classes.
+with new '*-ord' classes.
 }
 \description{
-These `*_ord` functions wrap core R functions with modifications
-  for use with '[tbl_ord]' methods. Some parameters are hidden from the user
-  and set to settings required for these methods, some matrix outputs are
-  given row or column names to be used by them, and new '*_ord' S3 class
-  attributes are added to enable them.
+These \verb{*_ord} functions wrap core R functions with modifications
+for use with '\link{tbl_ord}' methods. Some parameters are hidden from the user
+and set to settings required for these methods, some matrix outputs are
+given row or column names to be used by them, and new '*_ord' S3 class
+attributes are added to enable them.
 }
 \details{
-The following table summarizes the wrapped functions:
+The following table summarizes the wrapped functions:\tabular{lllll}{
+   Original function \tab Hide params \tab New params \tab Add names \tab New class \cr
+   \code{\link[base:eigen]{base::eigen()}} \tab Yes \tab No \tab Yes \tab Yes \cr
+   \code{\link[base:svd]{base::svd()}} \tab Yes \tab No \tab Yes \tab Yes \cr
+   \code{\link[stats:cmdscale]{stats::cmdscale()}} \tab Yes \tab No \tab No \tab Yes \cr
+   \code{\link[stats:cancor]{stats::cancor()}} \tab No \tab Yes \tab No \tab Yes \cr
+}
 
-| Original function     | Hide params | New params | Add names | New class |
-| :-------------------- | :---------- | :--------- | :-------- | :-------- |
-| [base::eigen()]       | Yes         | No         | Yes       | Yes       |
-| [base::svd()]         | Yes         | No         | Yes       | Yes       |
-| [stats::cmdscale()]   | Yes         | No         | No        | Yes       |
-| [stats::cancor()]     | No          | Yes        | No        | Yes       |
 
-**NB:** `eigen_ord()` is deprecated in favor of `eigen()`, which for some
-time has returned an S3 class (with recovery methods in **ordr**).
+\strong{NB:} \code{eigen_ord()} is deprecated in favor of \code{eigen()}, which for some
+time has returned an S3 class (with recovery methods in \strong{ordr}).
 
-By default, [cancor_ord()] returns the same data as [stats::cancor()]: the
-canonical correlations (`cor`), the canonical coefficients (`$xcoef` and
-`$ycoef`), and the variable means (`$xcenter`, `$ycenter`). If `scores =
-TRUE`, then [cancor_ord()] also returns the scores `$xscores` and `$yscores`
+By default, \code{\link[=cancor_ord]{cancor_ord()}} returns the same data as \code{\link[stats:cancor]{stats::cancor()}}: the
+canonical correlations (\code{cor}), the canonical coefficients (\verb{$xcoef} and
+\verb{$ycoef}), and the variable means (\verb{$xcenter}, \verb{$ycenter}). If \code{scores = TRUE}, then \code{\link[=cancor_ord]{cancor_ord()}} also returns the scores \verb{$xscores} and \verb{$yscores}
 calculated from the (appropriately centered) data and the coefficients and
-the intraset structure correlations `$xstructure` and `$ystructure` between
-these and the data. These modifications are inspired by the `cancor()`
-function in **candisc**, though two caveats should be noted: First, the
+the intraset structure correlations \verb{$xstructure} and \verb{$ystructure} between
+these and the data. These modifications are inspired by the \code{cancor()}
+function in \strong{candisc}, though two caveats should be noted: First, the
 canonical coefficients (hence the canonical scores) are scaled by \eqn{n - 1}
 compared to these, though the intraset structure correlations are the same.
-Second, the _interset_ structure correlations are not returned, as these may
+Second, the \emph{interset} structure correlations are not returned, as these may
 be obtained by conferring inertia unto the intraset ones.
 }
 \examples{

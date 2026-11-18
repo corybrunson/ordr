@@ -6,22 +6,22 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="ggproto classes created and adapted for ordr — ordr-ggproto"><meta name="description" content="In addition to geometric element layers (geoms) based on
-  base-**ggplot2** layers like `geom_point()` but specified to matrix factors
-  as `geom_row_point()`, **ordr** introduces [ggproto][ggplot2::ggproto]
-  classes for some additional geometric elements commonly used in biplots.
-  The factor-specific geoms invoke the statistical transformation layers
-  (stats) `stat_rows()` and `stat_cols()`, which specify the matrix factor.
-  Because each ggplot layer consists of only one stat and one geom, this
-  necessitates that ggproto classes for new stats must also come in `*Rows`
-  and `*Cols` flavors."><meta property="og:description" content="In addition to geometric element layers (geoms) based on
-  base-**ggplot2** layers like `geom_point()` but specified to matrix factors
-  as `geom_row_point()`, **ordr** introduces [ggproto][ggplot2::ggproto]
-  classes for some additional geometric elements commonly used in biplots.
-  The factor-specific geoms invoke the statistical transformation layers
-  (stats) `stat_rows()` and `stat_cols()`, which specify the matrix factor.
-  Because each ggplot layer consists of only one stat and one geom, this
-  necessitates that ggproto classes for new stats must also come in `*Rows`
-  and `*Cols` flavors."></head><body>
+base-ggplot2 layers like geom_point() but specified to matrix factors
+as geom_row_point(), ordr introduces ggproto
+classes for some additional geometric elements commonly used in biplots.
+The factor-specific geoms invoke the statistical transformation layers
+(stats) stat_rows() and stat_cols(), which specify the matrix factor.
+Because each ggplot layer consists of only one stat and one geom, this
+necessitates that ggproto classes for new stats must also come in *Rows
+and *Cols flavors."><meta property="og:description" content="In addition to geometric element layers (geoms) based on
+base-ggplot2 layers like geom_point() but specified to matrix factors
+as geom_row_point(), ordr introduces ggproto
+classes for some additional geometric elements commonly used in biplots.
+The factor-specific geoms invoke the statistical transformation layers
+(stats) stat_rows() and stat_cols(), which specify the matrix factor.
+Because each ggplot layer consists of only one stat and one geom, this
+necessitates that ggproto classes for new stats must also come in *Rows
+and *Cols flavors."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -56,27 +56,27 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>ggproto classes created and adapted for ordr</h1>
-      <small class="dont-index">Source: <a href="https://github.com/corybrunson/ordr/blob/HEAD/R/aaa-.r" class="external-link"><code>R/aaa-.r</code></a>, <a href="https://github.com/corybrunson/ordr/blob/HEAD/R/coord-scaffold.r" class="external-link"><code>R/coord-scaffold.r</code></a>, <a href="https://github.com/corybrunson/ordr/blob/HEAD/R/geom-interpolation.r" class="external-link"><code>R/geom-interpolation.r</code></a>, and 4 more</small>
+      <small class="dont-index">Source: <a href="https://github.com/corybrunson/ordr/blob/HEAD/R/aaa-.r" class="external-link"><code>R/aaa-.r</code></a>, <a href="https://github.com/corybrunson/ordr/blob/HEAD/R/coord-scaffold.r" class="external-link"><code>R/coord-scaffold.r</code></a>, <a href="https://github.com/corybrunson/ordr/blob/HEAD/R/facet-ord.r" class="external-link"><code>R/facet-ord.r</code></a>, and 5 more</small>
       <div class="d-none name"><code>ordr-ggproto.Rd</code></div>
     </div>
 
     <div class="ref-description section level2">
     <p>In addition to geometric element layers (geoms) based on
-  base-**ggplot2** layers like `geom_point()` but specified to matrix factors
-  as `geom_row_point()`, **ordr** introduces [ggproto][ggplot2::ggproto]
-  classes for some additional geometric elements commonly used in biplots.
-  The factor-specific geoms invoke the statistical transformation layers
-  (stats) `stat_rows()` and `stat_cols()`, which specify the matrix factor.
-  Because each ggplot layer consists of only one stat and one geom, this
-  necessitates that ggproto classes for new stats must also come in `*Rows`
-  and `*Cols` flavors.</p>
+base-<strong>ggplot2</strong> layers like <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point()</a></code> but specified to matrix factors
+as <code>geom_row_point()</code>, <strong>ordr</strong> introduces <a href="https://ggplot2.tidyverse.org/reference/ggproto.html" class="external-link">ggproto</a>
+classes for some additional geometric elements commonly used in biplots.
+The factor-specific geoms invoke the statistical transformation layers
+(stats) <code><a href="stat_rows.html">stat_rows()</a></code> and <code><a href="stat_rows.html">stat_cols()</a></code>, which specify the matrix factor.
+Because each ggplot layer consists of only one stat and one geom, this
+necessitates that ggproto classes for new stats must also come in <code>*Rows</code>
+and <code>*Cols</code> flavors.</p>
     </div>
 
 
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>[`ggplot2::ggplot2-ggproto`] and [ggplot2::ggproto] for explanations
-  of base ggproto classes in **ggplot2** and how to create new ones.</p></div>
+    <div class="dont-index"><p><code><a href="https://ggplot2.tidyverse.org/reference/ggplot2-ggproto.html" class="external-link">ggplot2::ggplot2-ggproto</a></code> and <a href="https://ggplot2.tidyverse.org/reference/ggproto.html" class="external-link">ggplot2::ggproto</a> for explanations
+of base ggproto classes in <strong>ggplot2</strong> and how to create new ones.</p></div>
     </div>
 
   </main></div>

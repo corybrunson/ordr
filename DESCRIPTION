@@ -46,6 +46,7 @@ Imports:
     dplyr,
     purrr,
     labeling,
+    lifecycle,
     ggrepel,
     gggda (>= 0.2.0-1)
 Suggests:
@@ -69,6 +70,7 @@ Collate:
     'coord-scaffold.r'
     'data.r'
     'dplyr-verbs.r'
+    'facet-ord.r'
     'utils.r'
     'ord-recoverers.r'
     'ord-augmentation.r'
@@ -112,3 +114,4 @@ Collate:
     'zzz.r'
 VignetteBuilder: knitr
 Config/roxygen2/version: 8.1.0
+Roxygen: list(markdown = TRUE)

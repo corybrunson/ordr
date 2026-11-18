@@ -50,6 +50,7 @@ reference:
   - '`geom_origin`'
   - '`geom_unit_circle`'
   - has_concept("geom layers")
+  - starts_with("facet_")
   - starts_with("theme_")
   - '`draw-key`'
   - 'ordr-ggproto'

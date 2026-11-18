@@ -65,7 +65,7 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 \item{referent}{The reference data set, admitting the same 3 options as
 \code{data}; see Details.}
 
-\item{...}{Additional arguments passed to [ggplot2::layer()].}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -81,87 +81,86 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:annotation_borders]{annotation_borders()}}.}
 }
 \value{
-A ggproto [layer][ggplot2::layer].
+A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
 Compute projections of vectors from one matrix factor onto those
-  of the other.
+of the other.
 }
 \details{
 An ordination model of continuous data can be used to predict values
-  along one dimension from those along the other, using the artificial axes
-  as intermediaries. The predictions correspond geometrically to projections
-  of elements of one matrix factor in principal coordinates onto those of the
-  other factor in standard coordinates. In the most familiar setting of PCA
-  biplots, variable (column) values are predicted from case (row) locations
-  along PC1 and PC2. This transformation obtains the axis projections as
-  `xend,yend` and pairs them with original points `x,y` to demarcate segments
-  visualizing the projections.
+along one dimension from those along the other, using the artificial axes
+as intermediaries. The predictions correspond geometrically to projections
+of elements of one matrix factor in principal coordinates onto those of the
+other factor in standard coordinates. In the most familiar setting of PCA
+biplots, variable (column) values are predicted from case (row) locations
+along PC1 and PC2. This transformation obtains the axis projections as
+\verb{xend,yend} and pairs them with original points \verb{x,y} to demarcate segments
+visualizing the projections.
 
-  **WARNING:**
-  This layer is appropriate only with axes in standard coordinates (usually
-  [`confer_inertia(p = "rows")`][confer_inertia]) and predictive calibration,
-  e.g. [`geom_cols_axis(axis.type = "predictive")`][geom_axis].
+\strong{WARNING:}
+This layer is appropriate only with axes in standard coordinates (usually
+\code{\link[=confer_inertia]{confer_inertia(p = "rows")}}) and predictive calibration,
+e.g. \code{\link[=geom_axis]{geom_cols_axis(axis.type = "predictive")}}.
 
-  Use the same mapped coordinates for the projection layer and the axes. When
-  `ord_aes()` maps more than two coordinates, projections and axes are
-  computed from all mapped model coordinates; when only `x` and `y` are
-  mapped, both use the plot-plane coordinates.
+Use the same mapped coordinates for the projection layer and the axes. When
+\code{ord_aes()} maps more than two coordinates, projections and axes are
+computed from all mapped model coordinates; when only \code{x} and \code{y} are
+mapped, both use the plot-plane coordinates.
 }
 \section{Referential stats}{
 
 This statistical transformation is done with respect to reference data passed
-to `referent` (ignored if `NULL`, the default, possibly resulting in empty
-output). See [gggda::stat_referent()] for more details. This relies on a
-sleight of hand through a new undocumented `LayerRef` class and associated
-[ggplot2::ggplot_add()] method. As a result, only layers constructed using
-this `stat_*()` shortcut will pass the necessary positional aesthetics to the
-`$setup_params()` step, making them available to pre-process `referent` data.
+to \code{referent} (ignored if \code{NULL}, the default, possibly resulting in empty
+output). See \code{\link[gggda:stat_referent]{gggda::stat_referent()}} for more details. This relies on a
+sleight of hand through a new undocumented \code{LayerRef} class and associated
+\code{\link[ggplot2:ggplot_add]{ggplot2::ggplot_add()}} method. As a result, only layers constructed using
+this \verb{stat_*()} shortcut will pass the necessary positional aesthetics to the
+\verb{$setup_params()} step, making them available to pre-process \code{referent} data.
 
 The biplot shortcuts automatically substitute the complementary matrix factor
-for `referent = NULL` and will use an integer vector to select a subset from
+for \code{referent = NULL} and will use an integer vector to select a subset from
 this factor. These uses do not require the mapping passage.
 }
 
 \section{Biplot layers}{
 
-[ggbiplot()] uses [ggplot2::fortify()] internally to produce a single data
-frame with a `.matrix` column distinguishing the subjects (`"rows"`) and
-variables (`"cols"`). The stat layers `stat_rows()` and `stat_cols()` simply
+\code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
+frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
+variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
 filter the data frame to one of these two.
 
-The geom layers `geom_rows_*()` and `geom_cols_*()` call the corresponding
+The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-`geom_dims_*()` selects a default matrix based on common practice, e.g.
+\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.
 }
 
 \section{Ordination aesthetics}{
 
 This statistical transformation is compatible with the convenience function
-[ord_aes()].
+\code{\link[=ord_aes]{ord_aes()}}.
 
-Some transformations (e.g. [stat_center()]) commute with projection to the
+Some transformations (e.g. \code{\link[=stat_center]{stat_center()}}) commute with projection to the
 lower (1 or 2)-dimensional biplot space. If they detect aesthetics of the
-form `..coord[0-9]+`, then `..coord1` and `..coord2` are converted to `x` and
-`y` while any remaining are ignored.
+form \verb{..coord[0-9]+}, then \code{..coord1} and \code{..coord2} are converted to \code{x} and
+\code{y} while any remaining are ignored.
 
-Other transformations (e.g. [stat_spantree()]) yield different results in a
+Other transformations (e.g. \code{\link[=stat_spantree]{stat_spantree()}}) yield different results in a
 lower-dimensional biplot when they are computed before versus after
 projection. If the stat layer detects these aesthetics, then the
 transformation is performed before projection, and the results in the first
-two dimensions are returned as `x` and `y`.
+two dimensions are returned as \code{x} and \code{y}.
 
-A small number of transformations ([stat_rule()]) are incompatible with
-ordination aesthetics but will accept `ord_aes()` without warning.
+A small number of transformations (\code{\link[=stat_rule]{stat_rule()}}) are incompatible with
+ordination aesthetics but will accept \code{ord_aes()} without warning.
 }
 
 \section{Computed variables}{
  These are calculated during the statistical
-  transformation and can be accessed with [delayed
-  evaluation][ggplot2::aes_eval].
+transformation and can be accessed with \link[ggplot2:aes_eval]{delayed evaluation}.
 \describe{
-  \item{`xend,yend`}{projections onto (specified) vectors}
+\item{\verb{xend,yend}}{projections onto (specified) vectors}
 }
 }
 

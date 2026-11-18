@@ -6,8 +6,8 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Biplots following the grammar of graphics — ggbiplot"><meta name="description" content="Build a biplot visualization from ordination data wrapped as a
-[tbl_ord] object."><meta property="og:description" content="Build a biplot visualization from ordination data wrapped as a
-[tbl_ord] object."></head><body>
+tbl_ord object."><meta property="og:description" content="Build a biplot visualization from ordination data wrapped as a
+tbl_ord object."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -48,7 +48,7 @@
 
     <div class="ref-description section level2">
     <p>Build a biplot visualization from ordination data wrapped as a
-[tbl_ord] object.</p>
+<a href="tbl_ord.html">tbl_ord</a> object.</p>
     </div>
 
     <div class="section level2">
@@ -76,12 +76,12 @@
 
 
 <dl><dt id="arg-ordination">ordination<a class="anchor" aria-label="anchor" href="#arg-ordination"></a></dt>
-<dd><p>A [tbl_ord].</p></dd>
+<dd><p>A <a href="tbl_ord.html">tbl_ord</a>.</p></dd>
 
 
 <dt id="arg-mapping">mapping<a class="anchor" aria-label="anchor" href="#arg-mapping"></a></dt>
 <dd><p>List of default aesthetic mappings to use for the biplot. The
-default assigns the first two coordinates to the aesthetics `x` and `y`.
+default assigns the first two coordinates to the aesthetics <code>x</code> and <code>y</code>.
 Other assignments must be supplied in each layer added to the plot.</p></dd>
 
 
@@ -122,81 +122,80 @@ percentages.</p></dd>
 <dt id="arg-scale-factor">scale.factor<a class="anchor" aria-label="anchor" href="#arg-scale-factor"></a></dt>
 <dd><p>Either a numeric value, used to scale the secondary axes
 against the primary axes, or the name of a harmonizing function (currently
-`"range"` or `"inertia"`); ignored if `sec.axes` is not specified.</p></dd>
+<code>"range"</code> or <code>"inertia"</code>); ignored if <code>sec.axes</code> is not specified.</p></dd>
 
 
 <dt id="arg-scale-rows-scale-cols">scale_rows, scale_cols<a class="anchor" aria-label="anchor" href="#arg-scale-rows-scale-cols"></a></dt>
 <dd><p>Either the character name of a numeric variable
-in `get_*(ordination)` or a numeric vector of length
-`nrow(get_*(ordination))`, used to scale the coordinates of the matrix
+in <code>get_*(ordination)</code> or a numeric vector of length
+<code>nrow(get_*(ordination))</code>, used to scale the coordinates of the matrix
 factors.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed to [ggplot2::fortify()]; see
-[fortify.tbl_ord()].</p></dd>
+<dd><p>Additional arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">ggplot2::fortify()</a></code>; see
+<code><a href="tidiers.html">fortify.tbl_ord()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A [ggplot][ggplot2::ggplot] object.</p>
+    <p>A <a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a> object.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>`ggbiplot()` produces a [ggplot][ggplot2::ggplot] object from a [tbl_ord]
-object `ordination`. The baseline object is the default unadorned
-`"ggplot"`-class object `p` with the following differences from what
-[ggplot2::ggplot()] returns:</p>
-<p>- `p$mapping` is augmented with `.matrix = .matrix`, which expects either
-`.matrix = "rows"` or `.matrix = "cols"` from the biplot.
-- `p$coordinates` is defaulted to [ggplot2::coord_equal()] in order to
+    <p><code>ggbiplot()</code> produces a <a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a> object from a <a href="tbl_ord.html">tbl_ord</a>
+object <code>ordination</code>. The baseline object is the default unadorned
+<code>"ggplot"</code>-class object <code>p</code> with the following differences from what
+<code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot2::ggplot()</a></code> returns:</p><ul><li><p><code>p$mapping</code> is augmented with <code>.matrix = .matrix</code>, which expects either
+<code>.matrix = "rows"</code> or <code>.matrix = "cols"</code> from the biplot.</p></li>
+<li><p><code>p$coordinates</code> is defaulted to <code><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html" class="external-link">ggplot2::coord_equal()</a></code> in order to
 faithfully render the geometry of an ordination. The optional parameters
-`xlim`, `ylim`, `expand`, and `clip` are passed to `coord_equal()` and
-default to its **ggplot2** defaults.
-- When `x` or `y` are mapped to coordinates of `ordination`, and if
-`axis.percents` is `TRUE`, `p$labels$x` or `p$labels$y` are defaulted to the
-coordinate names concatenated with the percentages of [inertia][conference]
-captured by the coordinates.
-- `p` is assigned the class `"ggbiplot"` in addition to `"ggplot"`. This
-serves no functional purpose currently.</p>
-<p>Furthermore, the user may feed single integer values to the `x` and `y`
+<code>xlim</code>, <code>ylim</code>, <code>expand</code>, and <code>clip</code> are passed to <code><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html" class="external-link">coord_equal()</a></code> and
+default to its <strong>ggplot2</strong> defaults.</p></li>
+<li><p>When <code>x</code> or <code>y</code> are mapped to coordinates of <code>ordination</code>, and if
+<code>axis.percents</code> is <code>TRUE</code>, <code>p$labels$x</code> or <code>p$labels$y</code> are defaulted to the
+coordinate names concatenated with the percentages of <a href="conference.html">inertia</a>
+captured by the coordinates.</p></li>
+<li><p><code>p</code> is assigned the class <code>"ggbiplot"</code> in addition to <code>"ggplot"</code>. This
+serves no functional purpose currently.</p></li>
+</ul><p>Furthermore, the user may feed single integer values to the <code>x</code> and <code>y</code>
 aesthetics, which will be interpreted as the corresponding coordinates in the
-ordination. Currently only 2-dimensional biplots are supported, so both `x`
-and `y` must take coordinate values.</p>
-<p>`ord_aes()` is a convenience function that generates a full-rank set of
-coordinate aesthetics `..coord1`, `..coord2`, etc. mapped to the shared
+ordination. Currently only 2-dimensional biplots are supported, so both <code>x</code>
+and <code>y</code> must take coordinate values.</p>
+<p><code>ord_aes()</code> is a convenience function that generates a full-rank set of
+coordinate aesthetics <code>..coord1</code>, <code>..coord2</code>, etc. mapped to the shared
 coordinates of the ordination object, along with any additional aesthetics
-that are processed internally by [ggplot2::aes()].</p>
+that are processed internally by <code><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">ggplot2::aes()</a></code>.</p>
 <p>Predictive axes are scaled inversely by the squared norm. By default, this is
-computed from `x` and `y` (or from the full model space if obtained by
-[ordr::ord_aes()]). If the data contain an `axis.ss` column, it is used
+computed from <code>x</code> and <code>y</code> (or from the full model space if obtained by
+<code>ord_aes()</code>). If the data contain an <code>axis.ss</code> column, it is used
 instead. Gower &amp; Hand (1996) and Gower, Gardner–Lubbe, &amp; le Roux (2011)
 thoroughly explain the construction and interpretation of predictive biplots.
-(Predictive calibration was previously handled by `ggbiplot(axis.type)` but
-has been transferred to [`gggda::geom_axis(axis.type)`][gggda::geom_axis].)</p>
+(Predictive calibration was previously handled by <code>ggbiplot(axis.type)</code> but
+has been transferred to <code><a href="https://corybrunson.github.io/gggda/reference/geom_axis.html" class="external-link">gggda::geom_axis(axis.type)</a></code>.)</p>
     </div>
     <div class="section level2">
     <h2 id="biplot-layers">Biplot layers<a class="anchor" aria-label="anchor" href="#biplot-layers"></a></h2>
 
 
-<p>[ggbiplot()] uses [ggplot2::fortify()] internally to produce a single data
-frame with a `.matrix` column distinguishing the subjects (`"rows"`) and
-variables (`"cols"`). The stat layers `stat_rows()` and `stat_cols()` simply
+<p><code>ggbiplot()</code> uses <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">ggplot2::fortify()</a></code> internally to produce a single data
+frame with a <code>.matrix</code> column distinguishing the subjects (<code>"rows"</code>) and
+variables (<code>"cols"</code>). The stat layers <code><a href="stat_rows.html">stat_rows()</a></code> and <code><a href="stat_rows.html">stat_cols()</a></code> simply
 filter the data frame to one of these two.</p>
-<p>The geom layers `geom_rows_*()` and `geom_cols_*()` call the corresponding
+<p>The geom layers <code>geom_rows_*()</code> and <code>geom_cols_*()</code> call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-`geom_dims_*()` selects a default matrix based on common practice, e.g.
+<code>geom_dims_*()</code> selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>Gower JC &amp; Hand DJ (1996) _Biplots_. Chapman &amp; Hall, ISBN: 0-412-71630-5.</p>
-<p>Gower JC, Gardner–Lubbe S, &amp; le Roux NJ (2011) _Understanding Biplots_.
-Wiley, ISBN: 978-0-470-01255-0. &lt;https://www.wiley.com/go/biplots&gt;</p>
+    <p>Gower JC &amp; Hand DJ (1996) <em>Biplots</em>. Chapman &amp; Hall, ISBN: 0-412-71630-5.</p>
+<p>Gower JC, Gardner–Lubbe S, &amp; le Roux NJ (2011) <em>Understanding Biplots</em>.
+Wiley, ISBN: 978-0-470-01255-0. <a href="https://www.wiley.com/go/biplots" class="external-link">https://www.wiley.com/go/biplots</a></p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>[ggplot2::ggplot2()], on which `ggbiplot()` is built</p></div>
+    <div class="dont-index"><p><code><a href="https://ggplot2.tidyverse.org/reference/ggplot2-package.html" class="external-link">ggplot2::ggplot2()</a></code>, on which <code>ggbiplot()</code> is built</p></div>
     </div>
 
     <div class="section level2">

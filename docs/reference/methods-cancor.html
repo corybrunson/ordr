@@ -6,12 +6,12 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Functionality for canonical correlations — methods-cancor"><meta name="description" content='These methods extract data from, and attribute new data to,
-  objects of class `"cancor_ord"`. This is a class introduced in this package
-  to identify objects returned by [cancor_ord()], which wraps
-  [stats::cancor()].'><meta property="og:description" content='These methods extract data from, and attribute new data to,
-  objects of class `"cancor_ord"`. This is a class introduced in this package
-  to identify objects returned by [cancor_ord()], which wraps
-  [stats::cancor()].'></head><body>
+objects of class "cancor_ord". This is a class introduced in this package
+to identify objects returned by cancor_ord(), which wraps
+stats::cancor().'><meta property="og:description" content='These methods extract data from, and attribute new data to,
+objects of class "cancor_ord". This is a class introduced in this package
+to identify objects returned by cancor_ord(), which wraps
+stats::cancor().'></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -52,9 +52,9 @@
 
     <div class="ref-description section level2">
     <p>These methods extract data from, and attribute new data to,
-  objects of class `"cancor_ord"`. This is a class introduced in this package
-  to identify objects returned by [cancor_ord()], which wraps
-  [stats::cancor()].</p>
+objects of class <code>"cancor_ord"</code>. This is a class introduced in this package
+to identify objects returned by <code><a href="wrap-ord.html">cancor_ord()</a></code>, which wraps
+<code><a href="https://rdrr.io/r/stats/cancor.html" class="external-link">stats::cancor()</a></code>.</p>
     </div>
 
     <div class="section level2">
@@ -103,29 +103,27 @@
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The recovery generics `recover_*()` return [core model
-  components][recoverers], [distribution of inertia][conference],
-  [supplementary elements][supplementation], and [intrinsic
-  metadata][augmentation]; but they require methods for each model class to
-  tell them what these components are.</p>
-<p>The generic [as_tbl_ord()] returns its input wrapped in the 'tbl_ord'
-  class. Its methods determine what model classes it is allowed to wrap. It
-  then provides 'tbl_ord' methods with access to the recoverers and hence to
-  the model components.</p>
+    <p>The recovery generics <code>recover_*()</code> return <a href="recoverers.html">core model components</a>, <a href="conference.html">distribution of inertia</a>,
+<a href="supplementation.html">supplementary elements</a>, and <a href="augmentation.html">intrinsic metadata</a>; but they require methods for each model class to
+tell them what these components are.</p>
+<p>The generic <code><a href="tbl_ord.html">as_tbl_ord()</a></code> returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap. It
+then provides 'tbl_ord' methods with access to the recoverers and hence to
+the model components.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The canonical coefficients (loadings) are obtained directly from the
 underlying singular value decomposition and constitute the active elements.
 If canonical scores are returned, then they and the structure correlations
-are made available as supplementary elements. **ordr** takes rows and columns
-from the intraset correlations `$xstructure` and `$ystructure`, on which no
+are made available as supplementary elements. <strong>ordr</strong> takes rows and columns
+from the intraset correlations <code>$xstructure</code> and <code>$ystructure</code>, on which no
 intertia is conferred; the interset correlations can be obtained by
-[conferring inertia][conference] onto these.</p>
+<a href="conference.html">conferring inertia</a> onto these.</p>
 <p>A biplot of the canonical coefficients can be interpreted as approximating
 the \(X\)-\(Y\) inner product matrix, inversely weighted by the \(X\)
 and \(Y\) variances. The canonical scores and structure coefficients are
-available as supplementary points if returned by [cancor_ord()]. These can be
+available as supplementary points if returned by <code><a href="wrap-ord.html">cancor_ord()</a></code>. These can be
 used to create biplots of the case scores as linear combinations of loadings
 (the coefficients, in standard coordinates, overlaid with the scores) or of
 intraset and interset correlations with respect to either data set (the
@@ -135,11 +133,11 @@ Braak recommends against the first.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>Greenacre MJ (1984) _Theory and applications of correspondence analysis_.
+    <p>Greenacre MJ (1984) <em>Theory and applications of correspondence analysis</em>.
 London: Academic Press, ISBN 0-12-299050-1.
-&lt;http://www.carme-n.org/?sec=books5&gt;</p>
+<a href="http://www.carme-n.org/?sec=books5" class="external-link">http://www.carme-n.org/?sec=books5</a></p>
 <p>ter Braak CJF (1990) "Interpreting canonical correlation analysis through
-biplots of structure correlations and weights". _Psychometrika_ 55(3),
+biplots of structure correlations and weights". <em>Psychometrika</em> 55(3),
 519–531. <a href="https://doi.org/10.1007/BF02294765" class="external-link">doi:10.1007/BF02294765</a></p>
     </div>
     <div class="section level2">

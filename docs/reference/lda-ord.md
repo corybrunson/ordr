@@ -1,7 +1,9 @@
 # Augmented implementation of linear discriminant analysis
 
-This function replicates \[MASS::lda()\] with options and defaults to
-retain elements useful to the \[tbl_ord\] class and biplot calculations.
+This function replicates
+[`MASS::lda()`](https://rdrr.io/pkg/MASS/man/lda.html) with options and
+defaults to retain elements useful to the [tbl_ord](tbl_ord.md) class
+and biplot calculations.
 
 ## Usage
 
@@ -116,17 +118,17 @@ model.frame(formula, ...)
 
 - ret.x, ret.grouping:
 
-  Logical; whether to retain as attributes the data matrix (\`x\`) and
-  the class assignments (\`grouping\`) on which LDA is performed.
-  Methods like \`predict()\` access these objects by name in the parent
-  environment, and retaining them as attributes prevents errors that
-  arise if these objects are reassigned.
+  Logical; whether to retain as attributes the data matrix (`x`) and the
+  class assignments (`grouping`) on which LDA is performed. Methods like
+  [`predict()`](https://rdrr.io/r/stats/predict.html) access these
+  objects by name in the parent environment, and retaining them as
+  attributes prevents errors that arise if these objects are reassigned.
 
 - axes.scale:
 
-  Character string indicating how to left-transform the \`scaling\`
-  value when rendering biplots using \[ggbiplot()\]. Options include
-  \`"unstandardized"\`, \`"standardized"\`, and \`"contribution"\`.
+  Character string indicating how to left-transform the `scaling` value
+  when rendering biplots using [`ggbiplot()`](ggbiplot.md). Options
+  include `"unstandardized"`, `"standardized"`, and `"contribution"`.
 
 - object:
 
@@ -149,13 +151,17 @@ model.frame(formula, ...)
 
 ## Value
 
-Output from \[MASS::lda()\] with an additional preceding \[class\]
-'lda_ord' and up to three \[attributes\]:
+Output from [`MASS::lda()`](https://rdrr.io/pkg/MASS/man/lda.html) with
+an additional preceding [class](https://rdrr.io/r/base/class.html)
+'lda_ord' and up to three
+[attributes](https://rdrr.io/r/base/attributes.html):
 
-\* the input data \`x\`, if \`ret.x = TRUE\` \* the class assignments
-\`grouping\`, if \`ret.grouping = TRUE\` \* if the parameter
-\`axes.scale\` is not 'unstandardized', a matrix \`axes.scale\` that
-encodes the transformation of the row space
+- the input data `x`, if `ret.x = TRUE`
+
+- the class assignments `grouping`, if `ret.grouping = TRUE`
+
+- if the parameter `axes.scale` is not 'unstandardized', a matrix
+  `axes.scale` that encodes the transformation of the row space
 
 ## Details
 
@@ -163,68 +169,72 @@ Linear discriminant analysis relies on an eigendecomposition of the
 product \\W^{-1}B\\ of the inverse of the within-class covariance matrix
 \\W\\ by the between-class covariance matrix \\B\\. This
 eigendecomposition can be motivated as the right (\\V\\) half of the
-singular value decomposition of the matrix of \_Mahalanobis distances\_
+singular value decomposition of the matrix of *Mahalanobis distances*
 between the cases after "sphering" (linearly transforming them so that
 the within-class covariance is the identity matrix). LDA are not
 traditionally represented as biplots, with some exceptions (Gardner & le
 Roux, 2005; Greenacre, 2010, p. 109–117).
 
-LDA is implemented as \[MASS::lda()\] in the \*\*MASS\*\* package, in
-which the variables are transformed by a sphering matrix \\S\\ (Venables
-& Ripley, 2003, p. 331–333). The returned element \`scaling\` contains
-the unstandardized \_discriminant coefficients\_, which define the
-discriminant scores of the cases and their centroids as linear
-combinations of the original variables.
+LDA is implemented as
+[`MASS::lda()`](https://rdrr.io/pkg/MASS/man/lda.html) in the **MASS**
+package, in which the variables are transformed by a sphering matrix
+\\S\\ (Venables & Ripley, 2003, p. 331–333). The returned element
+`scaling` contains the unstandardized *discriminant coefficients*, which
+define the discriminant scores of the cases and their centroids as
+linear combinations of the original variables.
 
 The discriminant coefficients constitute one of several possible choices
 of axes for a biplot representation of the LDA. The slightly modified
-function \[lda_ord()\] provides additional options:
+function `lda_ord()` provides additional options:
 
-\* The \_standardized discriminant coefficients\_ are obtained by
-(re)scaling the coefficients by the variable standard deviations. These
-coefficients indicate the contributions of the variables to the
-discriminant scores after controlling for their variances (Orlov, 2013).
-\* The variables' \_contributions\_ to the Mahalanobis variance along
-each discriminant axis are obtained by transforming the coefficients by
-the inverse of the sphering matrix \\S\\. Because the contribution
-biplot derives from the eigendecomposition of the Mahalanobis distance
-matrix, the projections of the centroids and cases onto the variable
-axes approximate their variable values after centering and sphering
-(Greenacre, 2013).
+- The *standardized discriminant coefficients* are obtained by
+  (re)scaling the coefficients by the variable standard deviations.
+  These coefficients indicate the contributions of the variables to the
+  discriminant scores after controlling for their variances (Orlov,
+  2013).
 
-Finally, in contrast to \[MASS::lda()\], \`lda_ord()\` defaults both
-\`ret.x\` and \`ret.grouping\` to \`TRUE\`, so that these elements can
-be used to compute and annotate case scores as
-\[supplementary\]\[supplementation\] elements.
+- The variables' *contributions* to the Mahalanobis variance along each
+  discriminant axis are obtained by transforming the coefficients by the
+  inverse of the sphering matrix \\S\\. Because the contribution biplot
+  derives from the eigendecomposition of the Mahalanobis distance
+  matrix, the projections of the centroids and cases onto the variable
+  axes approximate their variable values after centering and sphering
+  (Greenacre, 2013).
+
+Finally, in contrast to
+[`MASS::lda()`](https://rdrr.io/pkg/MASS/man/lda.html), `lda_ord()`
+defaults both `ret.x` and `ret.grouping` to `TRUE`, so that these
+elements can be used to compute and annotate case scores as
+[supplementary](supplementation.md) elements.
 
 ## References
 
 Gardner S & le Roux NJ (2005) "Extensions of Biplot Methodology to
-Discriminant Analysis". \_Journal of Classification\_ \*\*22\*\*(1):
-59–86.
+Discriminant Analysis". *Journal of Classification* **22**(1): 59–86.
 [doi:10.1007/s00357-005-0006-7](https://doi.org/10.1007/s00357-005-0006-7)
-\<https://link.springer.com/article/10.1007/s00357-005-0006-7\>
+<https://link.springer.com/article/10.1007/s00357-005-0006-7>
 
-Greenacre MJ (2010) \_Biplots in Practice\_. Fundacion BBVA, ISBN:
+Greenacre MJ (2010) *Biplots in Practice*. Fundacion BBVA, ISBN:
 978-84-923846.
-\<https://www.fbbva.es/microsite/multivariate-statistics/biplots.html\>
+<https://www.fbbva.es/microsite/multivariate-statistics/biplots.html>
 
-Venables WN & Ripley BD (2003) \_Modern Applied Statistics with S\_,
+Venables WN & Ripley BD (2003) *Modern Applied Statistics with S*,
 Fourth Edition. Springer Science & Business Media, ISBN: 0387954570,
 9780387954578.
-\<https://www.mimuw.edu.pl/~pokar/StatystykaMgr/Books/VenablesRipley_ModernAppliedStatisticsS02.pdf\>
+<https://www.mimuw.edu.pl/~pokar/StatystykaMgr/Books/VenablesRipley_ModernAppliedStatisticsS02.pdf>
 
-Orlov K (2013) \_Answer to\_ "Algebra of LDA. Fisher discrimination
-power of a variable and Linear Discriminant Analysis". CrossValidated,
-accessed 2019-07-26. \<https://stats.stackexchange.com/a/83114/68743\>
+Orlov K (2013) *Answer to* "Algebra of LDA. Fisher discrimination power
+of a variable and Linear Discriminant Analysis". CrossValidated,
+accessed 2019-07-26. <https://stats.stackexchange.com/a/83114/68743>
 
-Greenacre M (2013) "Contribution Biplots". \_Journal of Computational
-and Graphical Statistics\_, \*\*22\*\*(1): 107–122.
-\<https://www.tandfonline.com/doi/abs/10.1080/10618600.2012.702494\>
+Greenacre M (2013) "Contribution Biplots". *Journal of Computational and
+Graphical Statistics*, **22**(1): 107–122.
+<https://www.tandfonline.com/doi/abs/10.1080/10618600.2012.702494>
 
 ## See also
 
-\[MASS::lda()\], from which \`lda_ord()\` is adapted
+[`MASS::lda()`](https://rdrr.io/pkg/MASS/man/lda.html), from which
+`lda_ord()` is adapted
 
 ## Examples
 

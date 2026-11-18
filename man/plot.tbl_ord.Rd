@@ -24,20 +24,20 @@ enable parsing of object name).}
 Nothing, but a plot is produced on the current graphics device.
 }
 \description{
-Adapt **stats** 'prcomp' and 'princomp' methods for `plot()`,
-  `screeplot()`, and `biplot()` generics to 'tbl_ord' objects.
+Adapt \strong{stats} 'prcomp' and 'princomp' methods for \code{plot()},
+\code{screeplot()}, and \code{biplot()} generics to 'tbl_ord' objects.
 }
 \details{
-These methods defer to any `plot()` and `biplot()` methods for the original,
+These methods defer to any \code{plot()} and \code{biplot()} methods for the original,
 underlying model classes of 'tbl_ord' objects. If none are found: Following
-the examples of [stats::plot.prcomp()] and [stats::plot.princomp()],
-`plot.tbl_ord()` calls on [stats::screeplot()] to produce a scree plot of the
+the examples of \code{\link[stats:plot.prcomp]{stats::plot.prcomp()}} and \code{\link[stats:plot.princomp]{stats::plot.princomp()}},
+\code{plot.tbl_ord()} calls on \code{\link[stats:screeplot]{stats::screeplot()}} to produce a scree plot of the
 decomposition of variance in the singular value decomposition. Similarly
-following [stats::biplot.prcomp()] and [stats::biplot.princomp()],
-`biplot.tbl_ord()` produces a biplot of both rows and columns, using text
+following \code{\link[stats:biplot.prcomp]{stats::biplot.prcomp()}} and \code{\link[stats:biplot.princomp]{stats::biplot.princomp()}},
+\code{biplot.tbl_ord()} produces a biplot of both rows and columns, using text
 labels when available and markers otherwise, with rows and columns
 distinguished by color and no additional annotation (e.g. vectors). The
-biplot confers inertia according to [get_conference()] unless the proportions
+biplot confers inertia according to \code{\link[=get_conference]{get_conference()}} unless the proportions
 do not sum to 1, in which case it produces a symmetric biplot (inertia
 conferred equally to rows and columns).
 }

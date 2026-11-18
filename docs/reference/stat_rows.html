@@ -5,11 +5,11 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Render plot elements for one matrix of an ordination — stat_rows"><meta name="description" content="These stats merely tell [ggplot2::ggplot()] which factor of an
-  ordination to pull data from for a plot layer. They are invoked internally
-  by the various [`geom_*_*()`][biplot-geoms] layers."><meta property="og:description" content="These stats merely tell [ggplot2::ggplot()] which factor of an
-  ordination to pull data from for a plot layer. They are invoked internally
-  by the various [`geom_*_*()`][biplot-geoms] layers."></head><body>
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Render plot elements for one matrix of an ordination — stat_rows"><meta name="description" content="These stats merely tell ggplot2::ggplot() which factor of an
+ordination to pull data from for a plot layer. They are invoked internally
+by the various geom_*_*() layers."><meta property="og:description" content="These stats merely tell ggplot2::ggplot() which factor of an
+ordination to pull data from for a plot layer. They are invoked internally
+by the various geom_*_*() layers."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -49,9 +49,9 @@
     </div>
 
     <div class="ref-description section level2">
-    <p>These stats merely tell [ggplot2::ggplot()] which factor of an
-  ordination to pull data from for a plot layer. They are invoked internally
-  by the various [`geom_*_*()`][biplot-geoms] layers.</p>
+    <p>These stats merely tell <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot2::ggplot()</a></code> which factor of an
+ordination to pull data from for a plot layer. They are invoked internally
+by the various <code><a href="biplot-geoms.html">geom_*_*()</a></code> layers.</p>
     </div>
 
     <div class="section level2">
@@ -135,22 +135,22 @@ to use <code><a href="https://ggplot2.tidyverse.org/reference/position_jitter.ht
 <dt id="arg-subset">subset<a class="anchor" aria-label="anchor" href="#arg-subset"></a></dt>
 <dd><p>An integer, logical, or character vector indicating a subset of
 rows or columns for which to render graphical elements. NB: Internally, the
-`subset` will be taken from the rows of the [fortified][fortify.tbl_ord()]
+<code>subset</code> will be taken from the rows of the <a href="tidiers.html">fortified</a>
 'tbl_ord' comprising rows from only one of the matrix factors. It is still
-possible to pass a formula to the `data` parameter, but it will act on the
-fortified data _before_ it has been restricted to one matrix factor.</p></dd>
+possible to pass a formula to the <code>data</code> parameter, but it will act on the
+fortified data <em>before</em> it has been restricted to one matrix factor.</p></dd>
 
 
 <dt id="arg-elements">elements<a class="anchor" aria-label="anchor" href="#arg-elements"></a></dt>
 <dd><p>Character vector; which elements of each factor for which to
-render graphical elements. One of `"active"` (the default) or any
+render graphical elements. One of <code>"active"</code> (the default) or any
 supplementary element type defined by the specific class methods (e.g.
-`"score"` for 'factanal', 'lda_ord', and 'cancord_ord' and `"intraset"` and
-`"interset"` for 'cancor_ord'), via [partial matching][base::match.arg()].</p></dd>
+<code>"score"</code> for 'factanal', 'lda_ord', and 'cancord_ord' and <code>"intraset"</code> and
+<code>"interset"</code> for 'cancor_ord'), via <a href="https://rdrr.io/r/base/match.arg.html" class="external-link">partial matching</a>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed to [ggplot2::layer()].</p></dd>
+<dd><p>Additional arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">ggplot2::layer()</a></code>.</p></dd>
 
 
 <dt id="arg-show-legend">show.legend<a class="anchor" aria-label="anchor" href="#arg-show-legend"></a></dt>
@@ -172,19 +172,19 @@ the default plot specification, e.g. <code><a href="https://ggplot2.tidyverse.or
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A ggproto [layer][ggplot2::layer].</p>
+    <p>A ggproto <a href="https://ggplot2.tidyverse.org/reference/layer.html" class="external-link">layer</a>.</p>
     </div>
     <div class="section level2">
     <h2 id="biplot-layers">Biplot layers<a class="anchor" aria-label="anchor" href="#biplot-layers"></a></h2>
 
 
-<p>[ggbiplot()] uses [ggplot2::fortify()] internally to produce a single data
-frame with a `.matrix` column distinguishing the subjects (`"rows"`) and
-variables (`"cols"`). The stat layers `stat_rows()` and `stat_cols()` simply
+<p><code><a href="ggbiplot.html">ggbiplot()</a></code> uses <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">ggplot2::fortify()</a></code> internally to produce a single data
+frame with a <code>.matrix</code> column distinguishing the subjects (<code>"rows"</code>) and
+variables (<code>"cols"</code>). The stat layers <code>stat_rows()</code> and <code>stat_cols()</code> simply
 filter the data frame to one of these two.</p>
-<p>The geom layers `geom_rows_*()` and `geom_cols_*()` call the corresponding
+<p>The geom layers <code>geom_rows_*()</code> and <code>geom_cols_*()</code> call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-`geom_dims_*()` selects a default matrix based on common practice, e.g.
+<code>geom_dims_*()</code> selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.</p>
     </div>
     <div class="section level2">

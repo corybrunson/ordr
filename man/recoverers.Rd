@@ -56,60 +56,62 @@ get_inertia(x)
 \method{dim}{tbl_ord}(x)
 }
 \arguments{
-\item{x}{An object of class '[tbl_ord]'.}
+\item{x}{An object of class '\link{tbl_ord}'.}
 
 \item{elements}{Character vector; which elements of each factor for which to
-render graphical elements. One of `"active"` (the default) or any
+render graphical elements. One of \code{"active"} (the default) or any
 supplementary element type defined by the specific class methods (e.g.
-`"score"` for 'factanal', 'lda_ord', and 'cancord_ord' and `"intraset"` and
-`"interset"` for 'cancor_ord'), via [partial matching][base::match.arg()].}
+\code{"score"} for 'factanal', 'lda_ord', and 'cancord_ord' and \code{"intraset"} and
+\code{"interset"} for 'cancor_ord'), via \link[base:match.arg]{partial matching}.}
 
-\item{...}{Additional arguments from [base::as.matrix()]; ignored.}
+\item{...}{Additional arguments from \code{\link[base:as.matrix]{base::as.matrix()}}; ignored.}
 
 \item{.matrix}{A character string partially matched (lowercase) to several
 indicators for one or both matrices in a matrix decomposition used for
-ordination. The standard values are `"rows"`, `"cols"`, and `"dims"` (for
+ordination. The standard values are \code{"rows"}, \code{"cols"}, and \code{"dims"} (for
 both).}
 }
 \value{
-The `recover_*()` functions are generics whose methods return base R
-  objects retrieved from the model wrapped in the 'tbl_ord' class:
-  - `rows`: the row matrix as stored in the model
-  - `cols`: the column matrix as stored in the model
-  - `inertia`: the vector of eigen-values or squared singular values,
-    often known by other names depending on the model
-  - `coord`: names for the artificial axes, from the model if available
-The `get_*()` functions (which are not generics) return modifications of
+The \verb{recover_*()} functions are generics whose methods return base R
+objects retrieved from the model wrapped in the 'tbl_ord' class:
+\itemize{
+\item \code{rows}: the row matrix as stored in the model
+\item \code{cols}: the column matrix as stored in the model
+\item \code{inertia}: the vector of eigen-values or squared singular values,
+often known by other names depending on the model
+\item \code{coord}: names for the artificial axes, from the model if available
+The \verb{get_*()} functions (which are not generics) return modifications of
 these objects:
-  - `rows`: the recovered rows,
-    adjusted according to any negation of axes or conference of inertia
-  - `cols`: the recovered columns,
-    adjusted according to any negation of axes or conference of inertia
-  - `inertia`: the recovered inertia, named by the recovered coordinates
-  - `coord`: the recovered coordinates (unmodified)
-`dim()` returns the dimensions of the decomposed matrix, i.e. the numbers of
-rows of `recover_rows()` and of `recover_cols()`.
+\item \code{rows}: the recovered rows,
+adjusted according to any negation of axes or conference of inertia
+\item \code{cols}: the recovered columns,
+adjusted according to any negation of axes or conference of inertia
+\item \code{inertia}: the recovered inertia, named by the recovered coordinates
+\item \code{coord}: the recovered coordinates (unmodified)
+\code{dim()} returns the dimensions of the decomposed matrix, i.e. the numbers of
+rows of \code{recover_rows()} and of \code{recover_cols()}.
+}
 }
 \description{
 These functions return information about the matrix
-  factorization underlying an ordination.
+factorization underlying an ordination.
 }
 \details{
-The `recover_*()` [S3 methods][base::S3Methods] extract one or both of the
+The \verb{recover_*()} \link[base:S3Methods]{S3 methods} extract one or both of the
 row and column matrix factors that constitute the original ordination. These
 are interpreted as the case scores (rows) and the variable loadings
-(columns). The `get_*()` functions optionally (and by default) include any
-supplemental observations (see [supplementation]).
+(columns). The \verb{get_*()} functions optionally (and by default) include any
+supplemental observations (see \link{supplementation}).
 
-The `recover_*()` functions are generics that require methods for each
+The \verb{recover_*()} functions are generics that require methods for each
 ordination class. They are not intended to be called directly but are
-exported so that users can query `methods("recover_*")`.
+exported so that users can query \code{methods("recover_*")}.
 
-`get_coord()` retrieves the names of the coordinates shared by the matrix
-factors on which the original data were ordinated, and `get_inertia()`
-retrieves a vector of the inertia with these names. `dim()` retrieves the
+\code{get_coord()} retrieves the names of the coordinates shared by the matrix
+factors on which the original data were ordinated, and \code{get_inertia()}
+retrieves a vector of the inertia with these names. \code{dim()} retrieves the
 dimensions of the row and column factors, which reflect the dimensions of the
-matrix they reconstruct---**not** the original data matrix. (This matters for
+matrix they reconstruct---\strong{not} the original data matrix. (This matters for
 techniques that rely on eigendecomposition, for which the decomposed matrix
 is square.)
 }

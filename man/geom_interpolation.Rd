@@ -66,22 +66,22 @@ to use \code{position_jitter()}, give the position as \code{"jitter"}.
 \link[ggplot2:layer_positions]{layer position} documentation.
 }}
 
-\item{new_data}{A list (best structured as a [data.frame][base::data.frame])
-of row (`geom_cols_interpolation()`) or column
-(`geom_rows_interpolation()`) values to interpolate.}
+\item{new_data}{A list (best structured as a \link[base:data.frame]{data.frame})
+of row (\code{geom_cols_interpolation()}) or column
+(\code{geom_rows_interpolation()}) values to interpolate.}
 
-\item{type}{Character value matched to `"centroid"` or `"sequence"`; the type
+\item{type}{Character value matched to \code{"centroid"} or \code{"sequence"}; the type
 of operations used to visualize interpolation.}
 
 \item{arrow}{Specification for arrows, as created by \code{\link[grid:arrow]{grid::arrow()}}, or else
 \code{NULL} for no arrows.}
 
-\item{...}{Additional arguments passed to [ggplot2::layer()].}
+\item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
 \item{point.fill}{Default aesthetics for markers. Set to NULL to inherit from
 the data's aesthetics.}
 
-\item{na.rm}{Passed to [ggplot2::layer()].}
+\item{na.rm}{Passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -97,57 +97,58 @@ that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:annotation_borders]{annotation_borders()}}.}
 }
 \description{
-`geom_interpolation()` renders a geometric construction that
-  interpolates a new data matrix (row or column) element from its entries to
-  its artificial coordinates.
+\code{geom_interpolation()} renders a geometric construction that
+interpolates a new data matrix (row or column) element from its entries to
+its artificial coordinates.
 }
 \details{
 Interpolation answers the following question: Given a new data
-  element that might have appeared as a row (respectively, column) in the
-  singular-value-decomposed data matrix, where should we expect the marker
-  for this element to appear in the biplot? The solution is the vector sum of
-  the column (row) units weighted by their values in the new row (column).
-  Gower, Gardner--Lubbe, & le Roux (2011) provide two visualizations of this
-  calculation: a tail-to-head sequence of weighted units (`type =
-  "sequence"`), and a centroid of the weighted units scaled by the number of
-  units (`type = "centroid"`).
+element that might have appeared as a row (respectively, column) in the
+singular-value-decomposed data matrix, where should we expect the marker
+for this element to appear in the biplot? The solution is the vector sum of
+the column (row) units weighted by their values in the new row (column).
+Gower, Gardner--Lubbe, & le Roux (2011) provide two visualizations of this
+calculation: a tail-to-head sequence of weighted units (\code{type = "sequence"}), and a centroid of the weighted units scaled by the number of
+units (\code{type = "centroid"}).
 
-  **WARNING:**
-  This layer is appropriate only with axes in standard coordinates (usually
-  [`confer_inertia(p = "rows")`][confer_inertia]) and interpolative
-  calibration, the default `axis.type` of [`geom_axis()`][geom_axis].
+\strong{WARNING:}
+This layer is appropriate only with axes in standard coordinates (usually
+\code{\link[=confer_inertia]{confer_inertia(p = "rows")}}) and interpolative
+calibration, the default \code{axis.type} of \code{\link[=geom_axis]{geom_axis()}}.
 }
 \section{Biplot layers}{
 
-[ggbiplot()] uses [ggplot2::fortify()] internally to produce a single data
-frame with a `.matrix` column distinguishing the subjects (`"rows"`) and
-variables (`"cols"`). The stat layers `stat_rows()` and `stat_cols()` simply
+\code{\link[=ggbiplot]{ggbiplot()}} uses \code{\link[ggplot2:fortify]{ggplot2::fortify()}} internally to produce a single data
+frame with a \code{.matrix} column distinguishing the subjects (\code{"rows"}) and
+variables (\code{"cols"}). The stat layers \code{stat_rows()} and \code{stat_cols()} simply
 filter the data frame to one of these two.
 
-The geom layers `geom_rows_*()` and `geom_cols_*()` call the corresponding
+The geom layers \verb{geom_rows_*()} and \verb{geom_cols_*()} call the corresponding
 stat in order to render plot elements for the corresponding factor matrix.
-`geom_dims_*()` selects a default matrix based on common practice, e.g.
+\verb{geom_dims_*()} selects a default matrix based on common practice, e.g.
 points for rows and arrows for columns.
 }
 
 \section{Aesthetics}{
 
-`geom_interpolation()` requires the custom **`interpolate`** aesthetic, which
-tells the internals which columns of the `new_data` parameter contain the
-variables to be used for interpolation. Except in rare cases, `new_data`
+\code{geom_interpolation()} requires the custom \strong{\code{interpolate}} aesthetic, which
+tells the internals which columns of the \code{new_data} parameter contain the
+variables to be used for interpolation. Except in rare cases, \code{new_data}
 should contain the same rows or columns as the ordinated data and
-`interpolate` should be set to `name` (procured by [augment_ord()]).
-`geom_interpolation()` additionally understands the following aesthetics
+\code{interpolate} should be set to \code{name} (procured by \code{\link[=augment_ord]{augment_ord()}}).
+\code{geom_interpolation()} additionally understands the following aesthetics
 (required aesthetics are in bold):
-- `alpha`
-- `colour`
-- `linetype`
-- `size`
-- `fill`
-- `shape`
-- `stroke`
-- `center`, `scale`
-- `group`
+\itemize{
+\item \code{alpha}
+\item \code{colour}
+\item \code{linetype}
+\item \code{size}
+\item \code{fill}
+\item \code{shape}
+\item \code{stroke}
+\item \code{center}, \code{scale}
+\item \code{group}
+}
 }
 
 \examples{
@@ -199,8 +200,8 @@ iris_pca \%>\%
   geom_rows_text(aes(label = obs, color = species), alpha = .5, size = 3)
 }
 \references{
-Gower JC, Gardner--Lubbe S, & le Roux NJ (2011) _Understanding Biplots_.
-Wiley, ISBN: 978-0-470-01255-0. <https://www.wiley.com/go/biplots>
+Gower JC, Gardner--Lubbe S, & le Roux NJ (2011) \emph{Understanding Biplots}.
+Wiley, ISBN: 978-0-470-01255-0. \url{https://www.wiley.com/go/biplots}
 }
 \seealso{
 Other geom layers:

@@ -35,21 +35,19 @@
 \item{x}{An ordination object.}
 }
 \value{
-The recovery generics `recover_*()` return [core model
-  components][recoverers], [distribution of inertia][conference],
-  [supplementary elements][supplementation], and [intrinsic
-  metadata][augmentation]; but they require methods for each model class to
-  tell them what these components are.
+The recovery generics \verb{recover_*()} return \link[=recoverers]{core model components}, \link[=conference]{distribution of inertia},
+\link[=supplementation]{supplementary elements}, and \link[=augmentation]{intrinsic metadata}; but they require methods for each model class to
+tell them what these components are.
 
-  The generic [as_tbl_ord()] returns its input wrapped in the 'tbl_ord'
-  class. Its methods determine what model classes it is allowed to wrap. It
-  then provides 'tbl_ord' methods with access to the recoverers and hence to
-  the model components.
+The generic \code{\link[=as_tbl_ord]{as_tbl_ord()}} returns its input wrapped in the 'tbl_ord'
+class. Its methods determine what model classes it is allowed to wrap. It
+then provides 'tbl_ord' methods with access to the recoverers and hence to
+the model components.
 }
 \description{
 These methods extract data from, and attribute new data to,
-  objects of class `"correspondence"` from the **[MASS][MASS::corresp]**
-  package.
+objects of class \code{"correspondence"} from the \strong{\link[MASS:corresp]{MASS}}
+package.
 }
 \examples{
 # table of hair and eye color data collapsed by sex

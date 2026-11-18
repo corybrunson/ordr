@@ -33,34 +33,34 @@ un_tbl_ord(x)
 \item{...}{Additional elements of a custom tbl_ord.}
 }
 \value{
-A tbl_ord (`as*()`, `make*()`), an S3-class model object that can be
-  wrapped as one (`un*()`), or a logical value (`is*()`, `value*()`).
+A tbl_ord (\verb{as*()}, \verb{make*()}), an S3-class model object that can be
+wrapped as one (\verb{un*()}), or a logical value (\verb{is*()}, \verb{value*()}).
 }
 \description{
-These functions wrap ordination objects in the class [tbl_ord],
-  create tbl_ords directly from matrices, and test for the class and basic
-  structure.
+These functions wrap ordination objects in the class \link{tbl_ord},
+create tbl_ords directly from matrices, and test for the class and basic
+structure.
 }
 \details{
 The tbl_ord class wraps around a range of ordination classes, making
 available a suite of ordination tools that specialize to each original object
-class. These tools include [format()] and [ggplot2::fortify()] methods, which
-facilitate the [print()] method and the [ggbiplot()] function.
+class. These tools include \code{\link[=format]{format()}} and \code{\link[ggplot2:fortify]{ggplot2::fortify()}} methods, which
+facilitate the \code{\link[=print]{print()}} method and the \code{\link[=ggbiplot]{ggbiplot()}} function.
 
-No default method is provided for `as_tbl_ord()`, despite most defined
+No default method is provided for \code{as_tbl_ord()}, despite most defined
 methods being equivalent (simply appending 'tbl_ord' to the vector of object
 classes). This prevents objects for which other methods are not defined from
 being re-classed as tbl_ords.
 
-The function `make_tbl_ord()` creates a tbl_ord structured as a list of two
-matrices, `u` and `v`, which must have the same number of columns and the
+The function \code{make_tbl_ord()} creates a tbl_ord structured as a list of two
+matrices, \code{u} and \code{v}, which must have the same number of columns and the
 same column names.
 
-`is_tbl_ord()` checks an object `x` for the tbl_ord class; `valid_tbl_ord()`
-additionally checks for consistency between `recover_coord(x)` and the
-columns of `recover_rows(x)` and `recover_cols(x)`, using the [recoverers].
-`un_tbl_ord()` removes attributes associated with the tbl_ord class in order
-to restore an object that was originally passed to `as_tbl_ord`.
+\code{is_tbl_ord()} checks an object \code{x} for the tbl_ord class; \code{valid_tbl_ord()}
+additionally checks for consistency between \code{recover_coord(x)} and the
+columns of \code{recover_rows(x)} and \code{recover_cols(x)}, using the \link{recoverers}.
+\code{un_tbl_ord()} removes attributes associated with the tbl_ord class in order
+to restore an object that was originally passed to \code{as_tbl_ord}.
 }
 \examples{
 # illustrative ordination: FA of Swiss social data
