@@ -66,11 +66,11 @@ BugReports: https://github.com/corybrunson/ordr/issues
 Config/testthat/edition: 3
 Collate:
     'aaa-.r'
+    'adapt-layer.r'
     'biplot-key.r'
     'biplot.r'
     'coord-scaffold.r'
     'data.r'
-    'define-biplot-layers.r'
     'dplyr-verbs.r'
     'facet-ord.r'
     'utils.r'
