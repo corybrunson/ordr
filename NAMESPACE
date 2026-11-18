@@ -223,6 +223,7 @@ export(StatRowsRule)
 export(StatRowsScale)
 export(StatRowsSpantree)
 export(StatRowsStar)
+export(adapt_layer_to_biplot)
 export(as_tbl_ord)
 export(augment_ord)
 export(cancor_ord)
@@ -457,6 +458,7 @@ importFrom(ggrepel,
   position_nudge_repel
 )
 importFrom(graphics,plot)
+importFrom(lifecycle,deprecated)
 importFrom(magrittr,"%>%")
 importFrom(pillar,style_subtle)
 importFrom(rlang,
