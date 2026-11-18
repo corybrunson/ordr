@@ -447,7 +447,7 @@ geom_rows_label <- function(
   parse = FALSE,
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
-  label.size = deprecated(),
+  label.size = lifecycle::deprecated(),
   border.colour = NULL,
   border.color = NULL,
   text.colour = NULL,
@@ -459,7 +459,7 @@ geom_rows_label <- function(
 ) {
     extra_args <- list2(...)
     if (lifecycle::is_present(label.size)) {
-        deprecate_soft0("3.5.0", "geom_label(label.size)", 
+        lifecycle::deprecate_soft("3.5.0", "geom_label(label.size)", 
             "geom_label(linewidth)")
         extra_args$linewidth <- extra_args$linewidth %||% 
             label.size
@@ -485,7 +485,7 @@ geom_cols_label <- function(
   parse = FALSE,
   label.padding = unit(0.25, "lines"),
   label.r = unit(0.15, "lines"),
-  label.size = deprecated(),
+  label.size = lifecycle::deprecated(),
   border.colour = NULL,
   border.color = NULL,
   text.colour = NULL,
@@ -497,7 +497,7 @@ geom_cols_label <- function(
 ) {
     extra_args <- list2(...)
     if (lifecycle::is_present(label.size)) {
-        deprecate_soft0("3.5.0", "geom_label(label.size)", 
+        lifecycle::deprecate_soft("3.5.0", "geom_label(label.size)", 
             "geom_label(linewidth)")
         extra_args$linewidth <- extra_args$linewidth %||% 
             label.size

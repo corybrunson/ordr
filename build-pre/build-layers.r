@@ -97,6 +97,12 @@ layer_body <- function(layer) {
   # account for escapes
   code <- str_replace_all(code, "\\{", "\\{\\{")
   code <- str_replace_all(code, "\\}", "\\}\\}")
+  code <- str_replace_all(
+    code, "\\bdeprecated\\(\\)", "lifecycle::deprecated()"
+  )
+  code <- str_replace_all(
+    code, "\\bdeprecate_soft0\\(", "lifecycle::deprecate_soft("
+  )
   # return line-formatted string
   str_c(str_c(code, collapse = "\n"), "    \n    \n")
 }
@@ -140,6 +146,9 @@ build_biplot_layer <- function(
   # TODO: Extract this into a function that can handle `...`.
   layer_formals <- formals(layer)
   layer_formals <- unlist(lapply(layer_formals, format_formal))
+  layer_formals <- str_replace_all(
+    layer_formals, "\\bdeprecated\\(\\)", "lifecycle::deprecated()"
+  )
   layer_args <- names(layer_formals)
   layer_vals <- unname(layer_formals)
   stopifnot(length(layer_args) == length(layer_vals))

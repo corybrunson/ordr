@@ -228,7 +228,7 @@ FacetOrd <- ggproto(
 )
 
 #' @export
-ggplot_add.FacetOrd <- function(object, plot, object_name) {
+ggplot_add.FacetOrd <- function(object, plot, ...) {
   # manage the x and y coordinates via the facet
   plot$mapping$x <- rlang::sym(".panel_x")
   plot$mapping$y <- rlang::sym(".panel_y")

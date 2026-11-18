@@ -47,6 +47,7 @@ Imports:
     dplyr,
     purrr,
     labeling,
+    lifecycle,
     ggrepel,
     gggda (>= 0.2.0-1)
 Suggests:
