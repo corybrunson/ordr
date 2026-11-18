@@ -51,6 +51,7 @@ Imports:
     ggrepel,
     gggda (>= 0.2.0-1)
 Suggests:
+    vdiffr,
     testthat,
     sessioninfo,
     gridExtra,
