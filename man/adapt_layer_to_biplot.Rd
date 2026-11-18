@@ -47,11 +47,8 @@ constructor functions in \code{env} as side effects.
 }
 \description{
 \code{adapt_layer_to_biplot()} creates row and column versions of a
-ggplot2 layer (stat or geom) in the current environment. With
-\code{method = "synth"}, it synthesizes constructors from layer formals; with
-\code{method = "parse"}, it adapts the constructor's own \code{layer()} call,
-preserving argument transformations such as \code{match.arg()} and unit
-conversions.
+ggplot2 layer (stat or geom) in the current environment. With \code{method = "synth"}, it synthesizes constructors from layer formals; with \code{method = "parse"}, it adapts the constructor's own \code{layer()} call, preserving
+argument transformations such as \code{match.arg()} and unit conversions.
 }
 \details{
 \code{method = "parse"} requires the original constructor to contain
@@ -59,6 +56,11 @@ exactly one \code{layer()} call with named arguments. It rewrites that call's
 \code{stat} argument and, for referential stats, its \code{params} argument. Use it
 for constructors whose bodies contain transformations that cannot be
 reconstructed by \code{method = "synth"}.
+
+This function is planned to supersede the convenience ggprotos and
+constructors currently defined in source code generated before the R build.
+For now, it can be used to harmonize code with conveniences for additional
+layers.
 }
 \examples{
 # row and column versions of `geom_curve()`
@@ -77,7 +79,6 @@ stat_cols_binhex
 adapt_layer_to_biplot(ggplot2::geom_label, method = "parse")
 geom_rows_label
 geom_cols_label
-
 \dontshow{if (rlang::is_installed("hexbin")) withAutoprint(\{ # examplesIf}
 # use these layers in a biplot
 ordinate(swiss, model = factanal, factors = 2L, scores = "regression") |> 
