@@ -7,7 +7,7 @@
 #'   ratio at `1` and gives the user control only of the plotting window.
 #'
 #' @importFrom gggda CoordRect
-#' @inheritParams ggplot2::coord_fixed
+#' @inheritParams ggplot2::coord_cartesian
 #' @param window_ratio aspect ratio of plotting window
 #' @example inst/examples/ex-coord-scaffold.r
 #' @export
